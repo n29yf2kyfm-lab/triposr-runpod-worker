@@ -45,3 +45,4 @@ Or base64:
 ## Deployment
 
 Endpoint ID: `mj7aiqksmbnkw1` on RunPod (AMPERE_48 GPU)
+# Trigger rebuild - secrets now configured
