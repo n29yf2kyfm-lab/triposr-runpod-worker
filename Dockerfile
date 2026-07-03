@@ -24,7 +24,7 @@ ENV FORCE_CUDA="1"
 RUN pip install --no-cache-dir git+https://github.com/tatsy/torchmcubes.git
 
 # Install runpod + extra deps
-RUN pip install --no-cache-dir runpod requests Pillow trimesh huggingface_hub
+RUN pip install --no-cache-dir runpod requests Pillow trimesh huggingface_hub onnxruntime pooch scipy
 
 # Copy handler
 COPY handler.py /app/handler.py
