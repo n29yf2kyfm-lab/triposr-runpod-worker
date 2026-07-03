@@ -40,7 +40,7 @@ def fetch_image(image_url):
     }
     response = requests.get(image_url, headers=headers, timeout=30)
     response.raise_for_status()
-    img = Image.open(BytesIO(response.content)).convert("RGBA")
+    img = Image.open(BytesIO(response.content)).convert("RGB")
     return img
 
 def handler(job):
@@ -58,9 +58,9 @@ def handler(job):
         # Load image
         if image_b64:
             img_data = base64.b64decode(image_b64)
-            img = Image.open(BytesIO(img_data)).convert("RGBA")
+            img = Image.open(BytesIO(img_data)).convert("RGB")
         else:
-            img = fetch_image(image_url)
+            img = fetch_image(image_url)  # already RGB
 
         # Resize — FIX: cast to int to avoid PIL float division error
         img = img.resize((512, 512), Image.Resampling.LANCZOS)
