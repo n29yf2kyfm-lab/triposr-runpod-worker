@@ -21,7 +21,7 @@ RUN pip uninstall -y torchmcubes && \
     pip install --no-cache-dir git+https://github.com/tatsy/torchmcubes.git
 
 # Install runpod + extra deps
-RUN pip install --no-cache-dir runpod requests Pillow trimesh
+RUN pip install --no-cache-dir runpod requests Pillow trimesh huggingface_hub
 
 # Copy handler
 COPY handler.py /app/handler.py
@@ -29,13 +29,10 @@ COPY handler.py /app/handler.py
 WORKDIR /app
 
 # Pre-download model weights at build time
-RUN python3 -c "
-from huggingface_hub import hf_hub_download
-import os
-os.makedirs('/app/model', exist_ok=True)
-hf_hub_download('stabilityai/TripoSR', 'model.ckpt', local_dir='/app/model')
-hf_hub_download('stabilityai/TripoSR', 'config.yaml', local_dir='/app/model')
-print('Model downloaded')
-"
+# NOTE: multi-line python -c breaks Dockerfile parser if it starts with 'from'
+# Use a script file instead
+RUN python3 -c "import os; os.makedirs('/app/model', exist_ok=True)"
+RUN python3 -c "from huggingface_hub import hf_hub_download; hf_hub_download('stabilityai/TripoSR', 'model.ckpt', local_dir='/app/model'); print('model.ckpt downloaded')"
+RUN python3 -c "from huggingface_hub import hf_hub_download; hf_hub_download('stabilityai/TripoSR', 'config.yaml', local_dir='/app/model'); print('config.yaml downloaded')"
 
 CMD ["python3", "-u", "/app/handler.py"]
