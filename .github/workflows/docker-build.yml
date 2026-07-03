@@ -26,7 +26,7 @@ jobs:
           context: .
           push: true
           tags: |
-            alamk123/ai-mechanic:triposr-v10.1
+            alamk123/ai-mechanic:triposr-v10.2
             alamk123/ai-mechanic:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
