@@ -65,6 +65,17 @@ RUN mkdir -p /tmp/extensions && \
     git clone https://github.com/autonomousvision/mip-splatting.git /tmp/extensions/mip-splatting && \
     pip install --no-cache-dir --no-build-isolation /tmp/extensions/mip-splatting/submodules/diff-gaussian-rasterization/
 RUN pip install --no-cache-dir kaolin -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.4.0_cu121.html
+
+# nvdiffrast's package name/version live in pyproject.toml's [project] table
+# (setup.py itself declares only ext_modules, no name). --no-build-isolation
+# skips installing pyproject.toml's [build-system] requires (setuptools>=64),
+# so it fell back to the container's stock (too old) setuptools, which can't
+# read [project] metadata -- the build silently produced a package literally
+# named "UNKNOWN" with no actual nvdiffrast/ module inside it. Confirmed via
+# a live worker crash: "ModuleNotFoundError: No module named 'nvdiffrast'"
+# despite the build log showing "Successfully installed UNKNOWN-0.0.0".
+# Upgrading setuptools first (as nvdiffrast's own README instructs) fixes it.
+RUN pip install --no-cache-dir --upgrade "setuptools>=64" wheel ninja
 RUN mkdir -p /tmp/extensions && \
     git clone https://github.com/NVlabs/nvdiffrast.git /tmp/extensions/nvdiffrast && \
     pip install --no-cache-dir --no-build-isolation /tmp/extensions/nvdiffrast
