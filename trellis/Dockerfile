@@ -39,11 +39,27 @@ RUN pip install --no-cache-dir pillow imageio imageio-ffmpeg tqdm easydict openc
 # forward-compatible with newer architectures via JIT.
 ENV TORCH_CUDA_ARCH_LIST="8.6+PTX"
 
-# Installs xformers, spconv, nvdiffrast, diffoctreerast, mip-splatting (gaussian
-# rasterizer) and kaolin per TRELLIS's own setup script. This step compiles CUDA
-# extensions and is the most likely place a version mismatch will surface.
-RUN chmod +x setup.sh && \
-    . ./setup.sh --basic --xformers --spconv --diffoctreerast --mipgaussian --kaolin --nvdiffrast
+# setup.sh's own CLI is broken in this container: `getopt` fails to parse its
+# long options here, so `. ./setup.sh --basic --xformers ...` silently prints
+# --help and returns in under a second, never running ANY of the install logic
+# it was told to (confirmed in a CI log: the whole RUN step took 0.4s and its
+# only output was the usage text). That's the actual root cause behind every
+# "missing module" crash we chased one at a time (easydict, rembg, kaolin...) --
+# it was never a case of individual packages failing, the entire block was a
+# no-op. Replicating each install explicitly, matching torch==2.4.0 + cu121
+# exactly as setup.sh's own version tables specify, bypassing its CLI entirely.
+RUN pip install --no-cache-dir xformers==0.0.27.post2 --index-url https://download.pytorch.org/whl/cu121
+RUN pip install --no-cache-dir spconv-cu120
+RUN mkdir -p /tmp/extensions && \
+    git clone --recurse-submodules https://github.com/JeffreyXiang/diffoctreerast.git /tmp/extensions/diffoctreerast && \
+    pip install --no-cache-dir /tmp/extensions/diffoctreerast
+RUN mkdir -p /tmp/extensions && \
+    git clone https://github.com/autonomousvision/mip-splatting.git /tmp/extensions/mip-splatting && \
+    pip install --no-cache-dir /tmp/extensions/mip-splatting/submodules/diff-gaussian-rasterization/
+RUN pip install --no-cache-dir kaolin -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.4.0_cu121.html
+RUN mkdir -p /tmp/extensions && \
+    git clone https://github.com/NVlabs/nvdiffrast.git /tmp/extensions/nvdiffrast && \
+    pip install --no-cache-dir /tmp/extensions/nvdiffrast
 
 RUN pip install --no-cache-dir runpod requests pillow
 
