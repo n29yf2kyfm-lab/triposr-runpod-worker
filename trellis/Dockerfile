@@ -20,13 +20,17 @@ WORKDIR /app/TRELLIS
 RUN pip install --upgrade pip && \
     pip install torch==2.4.0 torchvision==0.19.0 --index-url https://download.pytorch.org/whl/cu121
 
-# setup.sh's --basic flag does not cover all of TRELLIS's own base Python deps
-# (confirmed via a live crash: ImportError on easydict inside
-# trellis/pipelines/samplers/flow_euler.py, at container startup, before the
-# handler ever ran). Install the package's declared requirements explicitly,
-# plus easydict as a named safety net in case requirements.txt drifts.
-RUN if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi && \
-    pip install --no-cache-dir easydict omegaconf
+# setup.sh --basic runs one big `pip install a b c ... z` line (no requirements.txt
+# exists in this repo). setup.sh has no `set -e`, so when that command fails
+# outright on one package, the whole install is silently skipped and the Docker
+# build still reports success -- confirmed by two sequential crashes (easydict,
+# then rembg) that are BOTH in that exact line. Installing it explicitly here,
+# split into smaller chunks so one bad wheel doesn't take out the whole batch.
+RUN pip install --no-cache-dir pillow imageio imageio-ffmpeg tqdm easydict opencv-python-headless scipy ninja && \
+    pip install --no-cache-dir rembg onnxruntime && \
+    pip install --no-cache-dir trimesh open3d xatlas pyvista pymeshfix igraph transformers && \
+    pip install --no-cache-dir "git+https://github.com/EasternJournalist/utils3d.git@9a4eb15e4021b67b12c460c7057d642626897ec8" && \
+    pip install --no-cache-dir omegaconf
 
 # This build runs on a GPU-less CI runner, so nvcc can't auto-detect the target
 # architecture — without this, extensions silently compile for the wrong (or no)
