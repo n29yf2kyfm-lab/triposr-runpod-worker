@@ -43,8 +43,13 @@ jobs:
         with:
           context: trellis
           push: true
+          # A SHA-based tag alongside :trellis-latest so RunPod is forced to
+          # pull fresh content instead of reusing a cached image for a tag
+          # name it's already seen -- observed stale-worker behavior even
+          # after full endpoint drains pointed at this.
           tags: |
             alamk123/ai-mechanic:trellis-v1
             alamk123/ai-mechanic:trellis-latest
+            alamk123/ai-mechanic:trellis-${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
