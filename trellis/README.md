@@ -35,6 +35,7 @@ Image-to-3D (URL or base64, same as the TripoSR worker):
 {
   "status": "success",
   "glb_b64": "<base64 encoded GLB file>",
+  "glb_path": "/runpod-volume/outputs/<job_id>.glb",
   "mode": "text",
   "message": "GLB generated successfully"
 }
@@ -49,6 +50,14 @@ Image-to-3D (URL or base64, same as the TripoSR worker):
 - `SPCONV_ALGO=native` is set deliberately — TRELLIS's default `auto` mode benchmarks
   multiple kernel algorithms on first run, which is slow and non-deterministic for a
   serverless cold start.
+- **Every generated GLB is persisted** to `/runpod-volume/outputs/<job_id>.glb` on the
+  network volume, in addition to being returned as base64 — past generations aren't lost
+  when the worker scales down. Nothing currently prunes this directory; it will grow
+  unbounded on the 200GB volume until something (a cron job, manual cleanup) is added.
+- Sampler steps are set to 25 (vs TRELLIS's default 12) for both the sparse-structure and
+  structured-latent stages, and GLB baking uses `texture_size=2048` / `simplify=0.9` (less
+  aggressive than the default 0.95) — trades generation time for sharper geometry and
+  texture detail. Expect generation time to roughly double vs. TRELLIS defaults.
 - CI (`.github/workflows/trellis-docker-build.yml`) builds and pushes on any push to
   `trellis/**` on `main`, tagged `alamk123/ai-mechanic:trellis-v1` and `:trellis-latest`.
 

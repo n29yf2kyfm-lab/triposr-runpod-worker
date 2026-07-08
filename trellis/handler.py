@@ -3,7 +3,6 @@ import torch
 import requests
 import base64
 import os
-import tempfile
 from io import BytesIO
 from PIL import Image
 import sys
@@ -17,6 +16,13 @@ from trellis.utils import postprocessing_utils
 
 TEXT_MODEL = "microsoft/TRELLIS-text-xlarge"
 IMAGE_MODEL = "microsoft/TRELLIS-image-large"
+
+# Higher step counts than TRELLIS's defaults (12) trade generation time for
+# sharper geometry and texture detail.
+SPARSE_STRUCTURE_SAMPLER_PARAMS = {"steps": 25, "cfg_strength": 7.5}
+SLAT_SAMPLER_PARAMS = {"steps": 25, "cfg_strength": 3.5}
+
+OUTPUT_DIR = "/runpod-volume/outputs"
 
 _text_pipeline = None
 _image_pipeline = None
@@ -51,6 +57,7 @@ def fetch_image(image_url):
 
 def handler(job):
     job_input = job.get("input", {})
+    job_id = job.get("id", "unknown")
 
     prompt = job_input.get("prompt", "")
     image_url = job_input.get("image_url", "")
@@ -63,7 +70,12 @@ def handler(job):
     try:
         if prompt:
             pipeline = get_text_pipeline()
-            outputs = pipeline.run(prompt, seed=seed)
+            outputs = pipeline.run(
+                prompt,
+                seed=seed,
+                sparse_structure_sampler_params=SPARSE_STRUCTURE_SAMPLER_PARAMS,
+                slat_sampler_params=SLAT_SAMPLER_PARAMS,
+            )
             mode = "text"
         else:
             if image_b64:
@@ -72,25 +84,34 @@ def handler(job):
             else:
                 img = fetch_image(image_url)
             pipeline = get_image_pipeline()
-            outputs = pipeline.run(img, seed=seed)
+            outputs = pipeline.run(
+                img,
+                seed=seed,
+                sparse_structure_sampler_params=SPARSE_STRUCTURE_SAMPLER_PARAMS,
+                slat_sampler_params=SLAT_SAMPLER_PARAMS,
+            )
             mode = "image"
 
+        # simplify=0.9 (vs TRELLIS's 0.95 default) keeps more mesh detail;
+        # texture_size=2048 bakes higher-resolution textures onto it.
         glb = postprocessing_utils.to_glb(
             outputs["gaussian"][0],
             outputs["mesh"][0],
-            simplify=0.95,
-            texture_size=1024,
+            simplify=0.9,
+            texture_size=2048,
         )
 
-        with tempfile.TemporaryDirectory() as tmpdir:
-            glb_path = os.path.join(tmpdir, "output.glb")
-            glb.export(glb_path)
-            with open(glb_path, "rb") as f:
-                glb_b64 = base64.b64encode(f.read()).decode("utf-8")
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
+        persisted_path = os.path.join(OUTPUT_DIR, f"{job_id}.glb")
+        glb.export(persisted_path)
+
+        with open(persisted_path, "rb") as f:
+            glb_b64 = base64.b64encode(f.read()).decode("utf-8")
 
         return {
             "status": "success",
             "glb_b64": glb_b64,
+            "glb_path": persisted_path,
             "mode": mode,
             "message": "GLB generated successfully",
         }
