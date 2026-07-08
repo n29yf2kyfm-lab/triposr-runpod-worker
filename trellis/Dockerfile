@@ -50,16 +50,24 @@ ENV TORCH_CUDA_ARCH_LIST="8.6+PTX"
 # exactly as setup.sh's own version tables specify, bypassing its CLI entirely.
 RUN pip install --no-cache-dir xformers==0.0.27.post2 --index-url https://download.pytorch.org/whl/cu121
 RUN pip install --no-cache-dir spconv-cu120
+
+# These three build native CUDA extensions from a local source checkout via
+# torch.utils.cpp_extension, which imports torch directly in setup.py. Pip's
+# default build isolation creates a fresh venv for that step that can't see
+# the already-installed torch, so the build fails with "No module named
+# torch" (verified in a CI run: xformers/spconv installed fine, diffoctreerast
+# was the first to hit this). --no-build-isolation makes it use the real
+# environment, which already has torch==2.4.0+cu121.
 RUN mkdir -p /tmp/extensions && \
     git clone --recurse-submodules https://github.com/JeffreyXiang/diffoctreerast.git /tmp/extensions/diffoctreerast && \
-    pip install --no-cache-dir /tmp/extensions/diffoctreerast
+    pip install --no-cache-dir --no-build-isolation /tmp/extensions/diffoctreerast
 RUN mkdir -p /tmp/extensions && \
     git clone https://github.com/autonomousvision/mip-splatting.git /tmp/extensions/mip-splatting && \
-    pip install --no-cache-dir /tmp/extensions/mip-splatting/submodules/diff-gaussian-rasterization/
+    pip install --no-cache-dir --no-build-isolation /tmp/extensions/mip-splatting/submodules/diff-gaussian-rasterization/
 RUN pip install --no-cache-dir kaolin -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.4.0_cu121.html
 RUN mkdir -p /tmp/extensions && \
     git clone https://github.com/NVlabs/nvdiffrast.git /tmp/extensions/nvdiffrast && \
-    pip install --no-cache-dir /tmp/extensions/nvdiffrast
+    pip install --no-cache-dir --no-build-isolation /tmp/extensions/nvdiffrast
 
 RUN pip install --no-cache-dir runpod requests pillow
 
