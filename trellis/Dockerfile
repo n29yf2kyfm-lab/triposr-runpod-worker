@@ -20,6 +20,13 @@ WORKDIR /app/TRELLIS
 RUN pip install --upgrade pip && \
     pip install torch==2.4.0 torchvision==0.19.0 --index-url https://download.pytorch.org/whl/cu121
 
+# This build runs on a GPU-less CI runner, so nvcc can't auto-detect the target
+# architecture — without this, extensions silently compile for the wrong (or no)
+# SM and the container crashes on first real GPU use instead of failing the build.
+# 8.6 covers RunPod's AMPERE_24 pool (RTX 3090 / A5000 / A6000); +PTX keeps it
+# forward-compatible with newer architectures via JIT.
+ENV TORCH_CUDA_ARCH_LIST="8.6+PTX"
+
 # Installs xformers, spconv, nvdiffrast, diffoctreerast, mip-splatting (gaussian
 # rasterizer) and kaolin per TRELLIS's own setup script. This step compiles CUDA
 # extensions and is the most likely place a version mismatch will surface.
