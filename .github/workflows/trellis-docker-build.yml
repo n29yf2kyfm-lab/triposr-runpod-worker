@@ -5,6 +5,8 @@ on:
     branches: [ main ]
     paths:
       - 'trellis/**'
+      - '.github/workflows/trellis-docker-build.yml'
+  workflow_dispatch: {}
 
 jobs:
   build:
