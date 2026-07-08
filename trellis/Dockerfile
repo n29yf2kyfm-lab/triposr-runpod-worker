@@ -20,6 +20,14 @@ WORKDIR /app/TRELLIS
 RUN pip install --upgrade pip && \
     pip install torch==2.4.0 torchvision==0.19.0 --index-url https://download.pytorch.org/whl/cu121
 
+# setup.sh's --basic flag does not cover all of TRELLIS's own base Python deps
+# (confirmed via a live crash: ImportError on easydict inside
+# trellis/pipelines/samplers/flow_euler.py, at container startup, before the
+# handler ever ran). Install the package's declared requirements explicitly,
+# plus easydict as a named safety net in case requirements.txt drifts.
+RUN if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi && \
+    pip install --no-cache-dir easydict omegaconf
+
 # This build runs on a GPU-less CI runner, so nvcc can't auto-detect the target
 # architecture — without this, extensions silently compile for the wrong (or no)
 # SM and the container crashes on first real GPU use instead of failing the build.
