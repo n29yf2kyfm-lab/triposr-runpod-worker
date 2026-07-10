@@ -3,6 +3,7 @@ import torch
 import requests
 import base64
 import os
+import numpy as np
 from io import BytesIO
 from PIL import Image
 import sys
@@ -35,15 +36,40 @@ def get_image_pipeline():
     return _image_pipeline
 
 
+def _load_image(data_or_bytes):
+    """Load an image PRESERVING its alpha channel.
+
+    TRELLIS.2's preprocess_image() skips background removal when it receives an
+    RGBA image with a real (non-uniform) alpha mask, and only falls back to the
+    gated, non-commercial briaai/RMBG-2.0 model for plain RGB inputs. Our
+    callers already send a background-removed cutout, so we keep the alpha and
+    signal "skip preprocessing" — the worker then never needs RMBG at all.
+    """
+    img = Image.open(BytesIO(data_or_bytes))
+    if img.mode in ("RGBA", "LA", "P"):
+        img = img.convert("RGBA")
+    else:
+        img = img.convert("RGB")
+    return img
+
+
+def _has_cutout_alpha(img):
+    """True if the image carries a usable transparency mask (a real cutout)."""
+    if img.mode != "RGBA":
+        return False
+    alpha = np.asarray(img)[:, :, 3]
+    return bool(alpha.min() < 250)  # some pixels transparent -> it's a cutout
+
+
 def fetch_image(image_url):
-    """Fetch image from URL with browser-like headers."""
+    """Fetch image from URL with browser-like headers, keeping any alpha."""
     headers = {
         "User-Agent": "Mozilla/5.0 (compatible; TRELLIS-Worker/1.0)",
         "Accept": "image/webp,image/apng,image/*,*/*;q=0.8",
     }
     response = requests.get(image_url, headers=headers, timeout=30)
     response.raise_for_status()
-    return Image.open(BytesIO(response.content)).convert("RGB")
+    return _load_image(response.content)
 
 
 def handler(job):
@@ -69,17 +95,25 @@ def handler(job):
 
     try:
         if image_b64:
-            img = Image.open(BytesIO(base64.b64decode(image_b64))).convert("RGB")
+            img = _load_image(base64.b64decode(image_b64))
         else:
             img = fetch_image(image_url)
+
+        # If the caller sent a real cutout (RGBA with transparency), skip
+        # TRELLIS.2's internal background removal so the worker never loads the
+        # gated, non-commercial briaai/RMBG-2.0 model. Plain RGB still falls
+        # back to its built-in preprocessing.
+        skip_preprocess = _has_cutout_alpha(img)
 
         pipeline = get_image_pipeline()
         # TRELLIS.2 run() takes the PIL image (seed for reproducible rolls) and
         # returns a list of O-Voxel meshes; take the first.
         try:
-            mesh = pipeline.run(img, seed=seed)[0]
+            mesh = pipeline.run(
+                img, seed=seed, preprocess_image=not skip_preprocess
+            )[0]
         except TypeError:
-            # Some builds don't accept a seed kwarg on run().
+            # Older/newer builds may not accept every kwarg on run().
             torch.manual_seed(seed)
             mesh = pipeline.run(img)[0]
 
