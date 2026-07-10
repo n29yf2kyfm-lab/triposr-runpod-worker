@@ -51,6 +51,15 @@ def _patch_rembg_to_free_model():
 
     def _init(self, *args, **kwargs):  # ignore the config's gated model_name
         _orig_init(self, "ZhengPeng7/BiRefNet")
+        # ZhengPeng7/BiRefNet loads in half precision, but preprocess_image feeds
+        # it a float32 image tensor -> "Input type (float) and bias type
+        # (c10::Half) should be the same". Force the seg model to float32 so the
+        # dtypes match (24GB has ample headroom for an fp32 BiRefNet).
+        try:
+            if getattr(self, "model", None) is not None:
+                self.model = self.model.float()
+        except Exception:
+            pass
 
     cls.__init__ = _init
     cls._free_patched = True
