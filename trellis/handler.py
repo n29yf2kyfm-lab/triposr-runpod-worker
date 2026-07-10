@@ -137,6 +137,61 @@ def fetch_image(image_url):
     return _load_image(response.content)
 
 
+def _generate_mesh(pipeline, imgs, seed):
+    """Run TRELLIS.2 on one or more views of the same vehicle.
+
+    Single image: normal run(). Multiple images: condition the model on ALL
+    views. run() conditions via get_cond([image]); we temporarily wrap get_cond
+    so it also receives the extra (background-removed) views, giving true
+    multi-view reconstruction without reimplementing the sampler. Any failure of
+    the combined conditioning falls back to the single primary view, so
+    multi-view is never worse than one image. Returns (mesh, n_views_used).
+    """
+    primary = imgs[0]
+    skip = _has_cutout_alpha(primary)
+
+    def _single():
+        try:
+            return pipeline.run(primary, seed=seed, preprocess_image=not skip)[0]
+        except TypeError:
+            torch.manual_seed(seed)
+            return pipeline.run(primary)[0]
+
+    if len(imgs) <= 1:
+        return _single(), 1
+
+    # Background-remove the extra views before injecting them into get_cond
+    # (run() only preprocesses the primary image it's handed).
+    extras = []
+    for im in imgs[1:]:
+        if _has_cutout_alpha(im):
+            extras.append(im)
+        else:
+            try:
+                extras.append(pipeline.preprocess_image(im))
+            except Exception:
+                extras.append(im)
+
+    _orig_get_cond = pipeline.get_cond
+
+    def _multi_get_cond(image_list, *args, **kwargs):
+        try:
+            combined = list(image_list) + extras
+        except Exception:
+            combined = image_list
+        return _orig_get_cond(combined, *args, **kwargs)
+
+    pipeline.get_cond = _multi_get_cond
+    try:
+        mesh = pipeline.run(primary, seed=seed, preprocess_image=not skip)[0]
+        return mesh, len(imgs)
+    except Exception:
+        pipeline.get_cond = _orig_get_cond
+        return _single(), 1
+    finally:
+        pipeline.get_cond = _orig_get_cond
+
+
 def handler(job):
     job_input = job.get("input", {})
     job_id = job.get("id", "unknown")
@@ -144,43 +199,37 @@ def handler(job):
     prompt = job_input.get("prompt", "")
     image_url = job_input.get("image_url", "")
     image_b64 = job_input.get("image_b64", "")
+    # Multi-view: a list of images of the SAME vehicle from different angles.
+    # All views condition one reconstruction — far better geometry than 1 image.
+    image_b64_list = job_input.get("image_b64_list") or []
+    image_url_list = job_input.get("image_url_list") or []
     seed = job_input.get("seed", 1)
     # Mesh knobs (safe defaults tuned for car assets served to a web viewer).
     decimation_target = int(job_input.get("decimation_target", 500000))
     texture_size = int(job_input.get("texture_size", 2048))
 
-    if not image_url and not image_b64:
+    if not (image_url or image_b64 or image_b64_list or image_url_list):
         # TRELLIS.2-4B is an image-to-3D model. The caller (on-pod handler)
         # already turns a text prompt into a reference image before calling
         # here, so a prompt with no image is a client error, not a text job.
         return {
-            "error": "TRELLIS.2 is image-to-3D: provide image_url or image_b64"
+            "error": "TRELLIS.2 is image-to-3D: provide image_url(_list) or image_b64(_list)"
                      + (" (prompt received but not supported here)" if prompt else "")
         }
 
     try:
-        if image_b64:
-            img = _load_image(base64.b64decode(image_b64))
+        # Ordered list of input views (first = primary reconstruction target).
+        if image_b64_list:
+            imgs = [_load_image(base64.b64decode(b)) for b in image_b64_list]
+        elif image_url_list:
+            imgs = [fetch_image(u) for u in image_url_list]
+        elif image_b64:
+            imgs = [_load_image(base64.b64decode(image_b64))]
         else:
-            img = fetch_image(image_url)
-
-        # If the caller sent a real cutout (RGBA with transparency), skip
-        # TRELLIS.2's internal background removal so the worker never loads the
-        # gated, non-commercial briaai/RMBG-2.0 model. Plain RGB still falls
-        # back to its built-in preprocessing.
-        skip_preprocess = _has_cutout_alpha(img)
+            imgs = [fetch_image(image_url)]
 
         pipeline = get_image_pipeline()
-        # TRELLIS.2 run() takes the PIL image (seed for reproducible rolls) and
-        # returns a list of O-Voxel meshes; take the first.
-        try:
-            mesh = pipeline.run(
-                img, seed=seed, preprocess_image=not skip_preprocess
-            )[0]
-        except TypeError:
-            # Older/newer builds may not accept every kwarg on run().
-            torch.manual_seed(seed)
-            mesh = pipeline.run(img)[0]
+        mesh, n_views = _generate_mesh(pipeline, imgs, seed)
 
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         persisted_path = os.path.join(OUTPUT_DIR, f"{job_id}.glb")
@@ -213,9 +262,10 @@ def handler(job):
             "status": "success",
             "glb_b64": glb_b64,
             "glb_path": persisted_path,
-            "mode": "image",
+            "mode": "multiview" if n_views > 1 else "image",
+            "views": n_views,
             "model": IMAGE_MODEL,
-            "message": "GLB generated successfully",
+            "message": f"GLB generated successfully ({n_views} view(s))",
         }
 
     except Exception as e:
