@@ -28,9 +28,38 @@ OUTPUT_DIR = "/runpod-volume/outputs"
 _image_pipeline = None
 
 
+def _patch_rembg_to_free_model():
+    """Force the background-removal model to the ungated, MIT-licensed original.
+
+    TRELLIS.2-4B's pipeline config builds its background-removal model EAGERLY in
+    from_pretrained() (not lazily in preprocess_image), pinned to the gated,
+    NON-COMMERCIAL briaai/RMBG-2.0. That 403s without a BRIA licence, and even
+    with one its licence forbids a paid app. The BiRefNet wrapper's own default is
+    ZhengPeng7/BiRefNet — the ungated, MIT-licensed model RMBG-2.0 is fine-tuned
+    from, and TRELLIS.2's upstream-tested default. We repin __init__ to it so the
+    pipeline builds with no gated download and on-worker preprocessing stays
+    commercially usable for plain-RGB inputs.
+    """
+    try:
+        import trellis2.pipelines.rembg as rembg_pkg
+    except Exception:
+        return
+    cls = getattr(rembg_pkg, "BiRefNet", None)
+    if cls is None or getattr(cls, "_free_patched", False):
+        return
+    _orig_init = cls.__init__
+
+    def _init(self, *args, **kwargs):  # ignore the config's gated model_name
+        _orig_init(self, "ZhengPeng7/BiRefNet")
+
+    cls.__init__ = _init
+    cls._free_patched = True
+
+
 def get_image_pipeline():
     global _image_pipeline
     if _image_pipeline is None:
+        _patch_rembg_to_free_model()
         _image_pipeline = Trellis2ImageTo3DPipeline.from_pretrained(IMAGE_MODEL)
         _image_pipeline.cuda()
     return _image_pipeline
@@ -39,11 +68,11 @@ def get_image_pipeline():
 def _load_image(data_or_bytes):
     """Load an image PRESERVING its alpha channel.
 
-    TRELLIS.2's preprocess_image() skips background removal when it receives an
-    RGBA image with a real (non-uniform) alpha mask, and only falls back to the
-    gated, non-commercial briaai/RMBG-2.0 model for plain RGB inputs. Our
-    callers already send a background-removed cutout, so we keep the alpha and
-    signal "skip preprocessing" — the worker then never needs RMBG at all.
+    The background-removal model is repinned to the free, MIT-licensed
+    ZhengPeng7/BiRefNet (see _patch_rembg_to_free_model), so preprocessing works
+    for plain RGB inputs too. On top of that, when the caller already sends a
+    background-removed cutout (RGBA with a real alpha mask) we keep the alpha and
+    signal "skip preprocessing", avoiding a redundant second segmentation pass.
     """
     img = Image.open(BytesIO(data_or_bytes))
     if img.mode in ("RGBA", "LA", "P"):
