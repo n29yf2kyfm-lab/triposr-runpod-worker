@@ -30,8 +30,11 @@ RUN pip install --upgrade pip && \
 ENV TORCH_CUDA_ARCH_LIST="8.6+PTX"
 # Native extensions import torch inside their setup.py; pip's default build
 # isolation hides the already-installed torch, so every extension below uses
-# --no-build-isolation and we upgrade the build backend first.
-RUN pip install --no-cache-dir --upgrade "setuptools>=64" wheel ninja
+# --no-build-isolation and we upgrade the build backend first. psutil + packaging
+# are build-time imports for several of these setup.py files (flash-attn reads
+# psutil to pick MAX_JOBS) — without build isolation they must be present in the
+# real env or metadata generation fails ("No module named 'psutil'").
+RUN pip install --no-cache-dir --upgrade "setuptools>=64" wheel ninja psutil packaging cmake
 
 # --- setup.sh --basic, replicated explicitly ------------------------------
 # setup.sh parses its long flags with getopt, which fails silently in a
@@ -44,7 +47,11 @@ RUN pip install --no-cache-dir imageio imageio-ffmpeg tqdm easydict \
     pip install --no-cache-dir git+https://github.com/EasternJournalist/utils3d.git@9a4eb15e4021b67b12c460c7057d642626897ec8
 
 # --- Extensions (CUDA), each --no-build-isolation -------------------------
-# Flash-Attention (prebuilt wheel for the CUDA build).
+# Flash-Attention compiles CUDA kernels from source here. MAX_JOBS is capped
+# so the parallel nvcc jobs don't exhaust the ~16GB CI runner's RAM (unbounded
+# MAX_JOBS OOM-kills the build); this trades a longer compile for reliability,
+# and the gha layer cache means later builds reuse it.
+ENV MAX_JOBS=2
 RUN pip install --no-cache-dir flash-attn==2.7.3 --no-build-isolation
 
 # nvdiffrast v0.4.0
