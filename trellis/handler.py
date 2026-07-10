@@ -56,10 +56,46 @@ def _patch_rembg_to_free_model():
     cls._free_patched = True
 
 
+def _patch_dinov3_extract_features():
+    """Make the DINOv3 image encoder robust to the installed transformers version.
+
+    TRELLIS.2 hand-walks the encoder: it reads self.model.embeddings /
+    .rope_embeddings / .layer and runs each block manually. Current transformers
+    kept embeddings/rope_embeddings on DINOv3ViTModel but moved the transformer
+    blocks into an inner encoder, so self.model.layer no longer exists and the run
+    dies with "'DINOv3ViTModel' object has no attribute 'layer'".
+
+    Replace extract_features with the model's canonical forward
+    (output_hidden_states=True). The last hidden state is the pre-final-norm
+    output — exactly what TRELLIS's manual loop produced — so the weightless
+    layer_norm they apply on top is unchanged. Version-proof, same maths.
+    """
+    try:
+        import torch.nn.functional as F
+        from trellis2.modules import image_feature_extractor as ife
+    except Exception:
+        return
+
+    def extract_features(self, image):
+        image = image.to(next(self.model.parameters()).dtype)
+        outputs = self.model(pixel_values=image, output_hidden_states=True)
+        hidden_states = outputs.hidden_states[-1]
+        return F.layer_norm(hidden_states, hidden_states.shape[-1:])
+
+    for name in dir(ife):
+        cls = getattr(ife, name)
+        if (isinstance(cls, type) and "dino" in name.lower()
+                and hasattr(cls, "extract_features")
+                and not getattr(cls, "_fwd_patched", False)):
+            cls.extract_features = extract_features
+            cls._fwd_patched = True
+
+
 def get_image_pipeline():
     global _image_pipeline
     if _image_pipeline is None:
         _patch_rembg_to_free_model()
+        _patch_dinov3_extract_features()
         _image_pipeline = Trellis2ImageTo3DPipeline.from_pretrained(IMAGE_MODEL)
         _image_pipeline.cuda()
     return _image_pipeline
