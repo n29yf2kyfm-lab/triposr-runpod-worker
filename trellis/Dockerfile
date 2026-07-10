@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.1.0-devel-ubuntu22.04
+FROM nvidia/cuda:12.4.1-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
@@ -13,80 +13,68 @@ RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
     ln -sf /usr/bin/pip3 /usr/bin/pip
 
 WORKDIR /app
-RUN git clone --recurse-submodules https://github.com/microsoft/TRELLIS.git
+# --recursive: o-voxel and other pieces live as submodules inside the repo, and
+# setup.sh copies o-voxel/ out of the checkout, so it must be present.
+RUN git clone -b main --recurse-submodules https://github.com/microsoft/TRELLIS.2.git
 
-WORKDIR /app/TRELLIS
+WORKDIR /app/TRELLIS.2
 
+# TRELLIS.2 targets PyTorch 2.6.0 on CUDA 12.4 (per its setup.sh version table).
 RUN pip install --upgrade pip && \
-    pip install torch==2.4.0 torchvision==0.19.0 --index-url https://download.pytorch.org/whl/cu121
+    pip install --no-cache-dir torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu124
 
-# setup.sh --basic runs one big `pip install a b c ... z` line (no requirements.txt
-# exists in this repo). setup.sh has no `set -e`, so when that command fails
-# outright on one package, the whole install is silently skipped and the Docker
-# build still reports success -- confirmed by two sequential crashes (easydict,
-# then rembg) that are BOTH in that exact line. Installing it explicitly here,
-# split into smaller chunks so one bad wheel doesn't take out the whole batch.
-RUN pip install --no-cache-dir pillow imageio imageio-ffmpeg tqdm easydict opencv-python-headless scipy ninja && \
-    pip install --no-cache-dir rembg onnxruntime && \
-    pip install --no-cache-dir trimesh open3d xatlas pyvista pymeshfix igraph transformers && \
-    pip install --no-cache-dir "git+https://github.com/EasternJournalist/utils3d.git@9a4eb15e4021b67b12c460c7057d642626897ec8" && \
-    pip install --no-cache-dir omegaconf
-
-# This build runs on a GPU-less CI runner, so nvcc can't auto-detect the target
-# architecture — without this, extensions silently compile for the wrong (or no)
-# SM and the container crashes on first real GPU use instead of failing the build.
-# 8.6 covers RunPod's AMPERE_24 pool (RTX 3090 / A5000 / A6000); +PTX keeps it
-# forward-compatible with newer architectures via JIT.
+# GPU-less CI build: nvcc can't auto-detect the target SM, so extensions would
+# compile for the wrong arch and crash on first GPU use. 8.6 covers RunPod's
+# AMPERE_24 pool (RTX 3090 / A5000 / A6000, all >=24GB as TRELLIS.2 requires);
+# +PTX keeps it JIT-forward-compatible with newer GPUs (Ada/Hopper).
 ENV TORCH_CUDA_ARCH_LIST="8.6+PTX"
-
-# setup.sh's own CLI is broken in this container: `getopt` fails to parse its
-# long options here, so `. ./setup.sh --basic --xformers ...` silently prints
-# --help and returns in under a second, never running ANY of the install logic
-# it was told to (confirmed in a CI log: the whole RUN step took 0.4s and its
-# only output was the usage text). That's the actual root cause behind every
-# "missing module" crash we chased one at a time (easydict, rembg, kaolin...) --
-# it was never a case of individual packages failing, the entire block was a
-# no-op. Replicating each install explicitly, matching torch==2.4.0 + cu121
-# exactly as setup.sh's own version tables specify, bypassing its CLI entirely.
-RUN pip install --no-cache-dir xformers==0.0.27.post2 --index-url https://download.pytorch.org/whl/cu121
-RUN pip install --no-cache-dir spconv-cu120
-
-# These three build native CUDA extensions from a local source checkout via
-# torch.utils.cpp_extension, which imports torch directly in setup.py. Pip's
-# default build isolation creates a fresh venv for that step that can't see
-# the already-installed torch, so the build fails with "No module named
-# torch" (verified in a CI run: xformers/spconv installed fine, diffoctreerast
-# was the first to hit this). --no-build-isolation makes it use the real
-# environment, which already has torch==2.4.0+cu121.
-RUN mkdir -p /tmp/extensions && \
-    git clone --recurse-submodules https://github.com/JeffreyXiang/diffoctreerast.git /tmp/extensions/diffoctreerast && \
-    pip install --no-cache-dir --no-build-isolation /tmp/extensions/diffoctreerast
-RUN mkdir -p /tmp/extensions && \
-    git clone https://github.com/autonomousvision/mip-splatting.git /tmp/extensions/mip-splatting && \
-    pip install --no-cache-dir --no-build-isolation /tmp/extensions/mip-splatting/submodules/diff-gaussian-rasterization/
-RUN pip install --no-cache-dir kaolin -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.4.0_cu121.html
-
-# nvdiffrast's package name/version live in pyproject.toml's [project] table
-# (setup.py itself declares only ext_modules, no name). --no-build-isolation
-# skips installing pyproject.toml's [build-system] requires (setuptools>=64),
-# so it fell back to the container's stock (too old) setuptools, which can't
-# read [project] metadata -- the build silently produced a package literally
-# named "UNKNOWN" with no actual nvdiffrast/ module inside it. Confirmed via
-# a live worker crash: "ModuleNotFoundError: No module named 'nvdiffrast'"
-# despite the build log showing "Successfully installed UNKNOWN-0.0.0".
-# Upgrading setuptools first (as nvdiffrast's own README instructs) fixes it.
+# Native extensions import torch inside their setup.py; pip's default build
+# isolation hides the already-installed torch, so every extension below uses
+# --no-build-isolation and we upgrade the build backend first.
 RUN pip install --no-cache-dir --upgrade "setuptools>=64" wheel ninja
-RUN mkdir -p /tmp/extensions && \
-    git clone https://github.com/NVlabs/nvdiffrast.git /tmp/extensions/nvdiffrast && \
-    pip install --no-cache-dir --no-build-isolation /tmp/extensions/nvdiffrast
 
+# --- setup.sh --basic, replicated explicitly ------------------------------
+# setup.sh parses its long flags with getopt, which fails silently in a
+# non-interactive container (proven on the v1 image: the whole `. ./setup.sh`
+# step ran in <1s and only printed --help, installing nothing). So we run the
+# exact commands from setup.sh directly instead of invoking its CLI.
+RUN pip install --no-cache-dir imageio imageio-ffmpeg tqdm easydict \
+        opencv-python-headless ninja trimesh transformers \
+        tensorboard pandas lpips zstandard kornia timm && \
+    pip install --no-cache-dir git+https://github.com/EasternJournalist/utils3d.git@9a4eb15e4021b67b12c460c7057d642626897ec8
+
+# --- Extensions (CUDA), each --no-build-isolation -------------------------
+# Flash-Attention (prebuilt wheel for the CUDA build).
+RUN pip install --no-cache-dir flash-attn==2.7.3 --no-build-isolation
+
+# nvdiffrast v0.4.0
+RUN git clone -b v0.4.0 https://github.com/NVlabs/nvdiffrast.git /tmp/extensions/nvdiffrast && \
+    pip install --no-cache-dir /tmp/extensions/nvdiffrast --no-build-isolation
+
+# nvdiffrec (JeffreyXiang renderutils fork)
+RUN git clone -b renderutils https://github.com/JeffreyXiang/nvdiffrec.git /tmp/extensions/nvdiffrec && \
+    pip install --no-cache-dir /tmp/extensions/nvdiffrec --no-build-isolation
+
+# CuMesh
+RUN git clone --recursive https://github.com/JeffreyXiang/CuMesh.git /tmp/extensions/CuMesh && \
+    pip install --no-cache-dir /tmp/extensions/CuMesh --no-build-isolation
+
+# FlexGEMM
+RUN git clone --recursive https://github.com/JeffreyXiang/FlexGEMM.git /tmp/extensions/FlexGEMM && \
+    pip install --no-cache-dir /tmp/extensions/FlexGEMM --no-build-isolation
+
+# O-Voxel (the field-free sparse-voxel post-processor; ships in-repo).
+RUN pip install --no-cache-dir /app/TRELLIS.2/o-voxel --no-build-isolation
+
+# --- Runtime deps ---------------------------------------------------------
 RUN pip install --no-cache-dir runpod requests pillow
 
 ENV SPCONV_ALGO=native
-ENV ATTN_BACKEND=xformers
-# Model weights and HF cache are expected to live on the mounted RunPod network
-# volume (kyh32l0npu / "hunyuan3d-models", 200GB, EU-SE-1) instead of the image,
-# so cold starts don't redownload multi-GB checkpoints every time.
+ENV ATTN_BACKEND=flash-attn
+ENV OPENCV_IO_ENABLE_OPENEXR=1
+ENV PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+# Model weights + HF cache live on the mounted RunPod network volume so cold
+# starts don't redownload the multi-GB TRELLIS.2-4B checkpoint each time.
 ENV HF_HOME=/runpod-volume/hf_cache
 ENV TRANSFORMERS_CACHE=/runpod-volume/hf_cache
 ENV TORCH_HOME=/runpod-volume/torch_cache
