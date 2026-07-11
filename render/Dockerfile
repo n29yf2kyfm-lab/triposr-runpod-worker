@@ -16,8 +16,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get update && apt-get install -y --no-install-recommends \
         python3.11 python3.11-dev python3.11-venv \
         fonts-dejavu-core \
+        libgomp1 \
         libx11-6 libxi6 libxxf86vm1 libxfixes3 libxrender1 libxkbcommon0 \
-        libgl1 libglu1-mesa libsm6 libxext6 libxml2 \
+        libxrandr2 libxinerama1 libxcursor1 \
+        libgl1 libglu1-mesa libegl1 libsm6 libxext6 libxml2 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN ln -sf /usr/bin/python3.11 /usr/bin/python && \
