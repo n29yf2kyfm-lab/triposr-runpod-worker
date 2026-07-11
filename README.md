@@ -1,48 +1,37 @@
-# TripoSR RunPod Serverless Worker
+# TRELLIS.2 RunPod Serverless Worker
 
-RunPod serverless worker for [TripoSR](https://github.com/VAST-AI-Research/TripoSR) — fast 3D model generation from a single image.
+Image-to-3D generation for Expert Car Check Pro, powered by
+[microsoft/TRELLIS.2-4B](https://github.com/microsoft/TRELLIS.2) (MIT licence).
 
-## Fixes in this version (v10.1)
+The worker lives in [`trellis/`](trellis/) — see its
+[README](trellis/README.md) for the build, API, and deployment details.
 
-- **Bug 1 fixed**: `unsupported operand type(s) for /: 'Image' and 'float'` — PIL resize now casts to `int`
-- **Bug 2 fixed**: `AttributeError: 'torchmcubes_module' has no attribute 'mcubes_cuda'` — torchmcubes rebuilt from source with CUDA support
-- **Bug 3 fixed**: Bulletproof VRAM detection
+## Pipeline (one engine, one endpoint)
+
+- **Generation:** a single-image TRELLIS.2-4B worker (`trellis/handler.py`),
+  built by CI (`.github/workflows/trellis-docker-build.yml`) and served by one
+  RunPod serverless endpoint (`trellis2-v2`, scale-to-zero, execution timeout).
+- **Rendering:** premium GLB → hero render (HDRI studio + tinted glass + DVLA
+  paint + AgX) runs on the render pod, not here.
 
 ## Input
 
 ```json
-{
-  "input": {
-    "image_url": "https://example.com/car.jpg"
-  }
-}
+{ "input": { "image_b64": "<base64 image>", "seed": 1,
+             "decimation_target": 120000, "texture_size": 1024 } }
 ```
 
-Or base64:
-
-```json
-{
-  "input": {
-    "image_b64": "<base64 encoded image>"
-  }
-}
-```
+`image_url` is also accepted. Plain photos are background-removed on-worker with
+the free, MIT-licensed ZhengPeng7/BiRefNet; a pre-cut RGBA image skips that step.
 
 ## Output
 
 ```json
-{
-  "status": "success",
-  "glb_b64": "<base64 encoded GLB file>",
-  "message": "GLB generated successfully"
-}
+{ "status": "success", "glb_b64": "<base64 GLB>", "mode": "image",
+  "model": "microsoft/TRELLIS.2-4B" }
 ```
 
-## Docker Image
+## History
 
-`mehabualam/triposr-worker:v10.1`
-
-## Deployment
-
-Endpoint ID: `mj7aiqksmbnkw1` on RunPod (AMPERE_48 GPU)
-# Trigger rebuild - secrets now configured
+This repo began as a TripoSR worker and briefly hosted TripoSR/Hunyuan3D
+experiments; those have been removed. It is now solely the TRELLIS.2 worker.
