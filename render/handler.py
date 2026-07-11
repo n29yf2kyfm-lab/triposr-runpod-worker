@@ -350,8 +350,36 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     return device
 
 
+def _diag():
+    """Import bpy, enumerate Cycles devices, and report — no rendering."""
+    info = {"stage": "start"}
+    try:
+        bpy = _load_bpy()
+        info["bpy"] = bpy.app.version_string
+        info["stage"] = "bpy_imported"
+        dev = _enable_gpu(bpy)
+        info["device"] = dev
+        info["stage"] = "gpu_enabled"
+        try:
+            prefs = bpy.context.preferences.addons["cycles"].preferences
+            info["compute_device_type"] = prefs.compute_device_type
+            info["devices"] = [
+                {"name": d.name, "type": d.type, "use": bool(d.use)}
+                for d in prefs.devices
+            ]
+        except Exception as e:
+            info["devices_error"] = str(e)
+    except Exception as e:
+        import traceback
+        info["error"] = str(e)
+        info["traceback"] = traceback.format_exc()
+    return {"status": "diag", **info}
+
+
 def handler(job):
     ji = job.get("input", {})
+    if ji.get("diag"):
+        return _diag()
     try:
         bpy = _load_bpy()
         glb = _fetch_glb(ji)
