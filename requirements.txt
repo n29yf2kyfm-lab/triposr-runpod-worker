@@ -1,7 +1,0 @@
-runpod
-torch>=2.0.0
-torchvision
-Pillow
-requests
-trimesh
-huggingface_hub
