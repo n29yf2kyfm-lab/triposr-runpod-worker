@@ -113,13 +113,10 @@ create table if not exists variants (
   render_set_id uuid references render_sets(id)
 );
 
--- ── VRM resolver (store a HASH of the reg, never the raw plate at rest) ────
-create table if not exists vrm_index (
-  vrm_hash   bytea primary key,           -- sha256(upper(vrm) || pepper)
-  variant_id uuid references variants(id),
-  confidence real default 1.0,
-  decoded_at timestamptz default now()
-);
+-- NOTE: we deliberately do NOT index or store the vehicle registration (VRM).
+-- The reg is personal data and is only ever a transient input: the app decodes
+-- it to make/model/trim/colour/fuel and the catalogue is keyed on those vehicle
+-- attributes. Nothing here is keyed on the plate.
 
 -- ── indexes for millisecond lookup ────────────────────────────────────────
 create index if not exists idx_models_mfr        on models(manufacturer_id);

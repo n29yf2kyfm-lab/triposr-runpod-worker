@@ -1,13 +1,17 @@
 // ExpertCarCheck — resolve-vehicle Edge Function (Phase 1)
-// Input : a decoded vehicle spec (make/model/year/…) OR a hashed VRM.
+// Input : a decoded vehicle spec — make / model / year / trim / colour / fuel.
 // Output: the best-matching 3D asset + render-set manifest for the viewer.
+//
+// The registration is NOT an input here and is never stored or indexed. The app
+// decodes the reg to these vehicle attributes; the catalogue is keyed on the
+// attributes only.
 //
 // Hard rule: this function never triggers AI generation on the request path.
 // If no exact asset exists it returns the nearest match instantly and enqueues
 // an offline build job, so the exact model is cached for the next visitor.
 //
 // Deploy: supabase functions deploy resolve-vehicle
-// Secrets: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, VRM_PEPPER
+// Secrets: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -54,7 +58,7 @@ Deno.serve(async (req) => {
   try { d = await req.json(); } catch { /* empty body */ }
 
   if (!d.make && !d.model) {
-    return json({ error: "Provide at least make + model (decoded from the VRM)." }, 400);
+    return json({ error: "Provide at least make + model (the app decodes these from the reg)." }, 400);
   }
 
   // Pull candidate rows for the make (small set — the resolver view is flat).
