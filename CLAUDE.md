@@ -49,6 +49,21 @@ don't fabricate an RCA when nothing is broken.
 - **Never** hardcode Supabase/RunPod/Docker secrets in the repo (push
   protection blocks them); use env vars.
 
+## Accuracy rule — do NOT fabricate vehicle metadata (learned 2026-07-12)
+
+The user caught me inventing generation codes (NQ5, W177, L663…), model years,
+and trims for sourced GLBs that had none of that in their source. This is
+hallucination and is unacceptable in a product built on data accuracy.
+
+- **Catalogue stores only verifiable facts:** make, model, the exact source
+  title (verbatim), the colour actually rendered, licence, and asset URLs.
+- **Never assert year / generation / trim / fuel that I cannot verify.** If the
+  source title states it, quote it as "per source"; otherwise leave it out.
+- **Authoritative spec comes from the app's DVLA/DVSA decode at lookup time** —
+  not from my guesses. The catalogue's only job is to match make+model → asset.
+- The GLBs are sourced third-party CC-BY models (licence, not ownership); the
+  "own GLB" route is photos → TRELLIS. Don't conflate the two.
+
 ## Investigation log
 
 ### 2026-07-12 — "Why is the 12-car render batch so slow?" (confidence ~85%)
