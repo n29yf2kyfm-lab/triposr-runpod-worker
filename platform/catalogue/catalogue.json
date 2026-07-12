@@ -9,7 +9,8 @@
   "tier": "B",
   "frame_count": 48,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/porsche/911/pearl/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/porsche/911.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/porsche/911_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "audi",
@@ -21,7 +22,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/audi/a1/silver/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/audi/a1.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/audi/a1_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "audi",
@@ -33,7 +35,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/audi/a3/silver/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/audi/a3.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/audi/a3_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mini",
@@ -45,7 +48,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mini/hatch/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/mini/hatch.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/mini/hatch_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "volkswagen",
@@ -57,7 +61,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/golf/white/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/vw/golf.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/vw/golf_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "nissan",
@@ -69,7 +74,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/nissan/qashqai/blue/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/nissan/qashqai.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/nissan/qashqai_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "renault",
@@ -81,7 +87,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/renault/clio/blue/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/renault/clio.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/renault/clio_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "renault",
@@ -93,7 +100,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/renault/captur/silver/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/renault/captur.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/renault/captur_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "citroen",
@@ -105,7 +113,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/citroen/c3/white/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/citroen/c3.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/citroen/c3_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mercedes-benz",
@@ -117,7 +126,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/a-class/black/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/mercedes-benz/a-class.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/mercedes-benz/a-class_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "volkswagen",
@@ -129,7 +139,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/tiguan/blue/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/volkswagen/tiguan.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/volkswagen/tiguan_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "nissan",
@@ -141,7 +152,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/nissan/juke/grey/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/nissan/juke.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/nissan/juke_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "land-rover",
@@ -153,7 +165,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/land-rover/defender/silver/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/land-rover/defender.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/land-rover/defender_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "tesla",
@@ -165,7 +178,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/tesla/model-3/white/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/tesla/model-3.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/tesla/model-3_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mini",
@@ -177,7 +191,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mini/countryman/white/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/mini/countryman.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/mini/countryman_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mercedes-benz",
@@ -189,7 +204,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/sprinter/white/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/mercedes-benz/sprinter.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/mercedes-benz/sprinter_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "volkswagen",
@@ -201,7 +217,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/transporter/silver/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/volkswagen/transporter.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/volkswagen/transporter_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "kia",
@@ -213,7 +230,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/kia/sportage/white/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/hyundai/tucson.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/hyundai/tucson_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "nissan",
@@ -225,7 +243,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/nissan/x-trail/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/x-trail.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/x-trail_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "toyota",
@@ -237,7 +256,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/toyota/corolla/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/corolla.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/corolla_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "hyundai",
@@ -249,7 +269,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/hyundai/i10/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/i10.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/i10_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "hyundai",
@@ -261,7 +282,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/hyundai/i30/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/i30.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/i30_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "hyundai",
@@ -273,7 +295,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/hyundai/ioniq/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/ioniq.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/ioniq_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "kia",
@@ -285,7 +308,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/kia/ceed/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/ceed.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/ceed_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "kia",
@@ -297,7 +321,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/kia/sorento/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/sorento.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/sorento_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "volkswagen",
@@ -309,7 +334,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/up/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/up.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/up_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "volkswagen",
@@ -321,7 +347,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/passat/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/passat.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/passat_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "bmw",
@@ -333,7 +360,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/2-series/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/2-series.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/2-series_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mercedes-benz",
@@ -345,7 +373,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/gla/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/gla.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/gla_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mercedes-benz",
@@ -357,7 +386,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/glc/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/glc.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/glc_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mercedes-benz",
@@ -369,7 +399,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/e-class/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "peugeot",
@@ -381,7 +412,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/peugeot/2008/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/2008.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/2008_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "peugeot",
@@ -393,7 +425,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/peugeot/308/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/308.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/308_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "renault",
@@ -405,7 +438,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/renault/megane/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/megane.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/megane_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "renault",
@@ -417,7 +451,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/renault/zoe/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/zoe.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/zoe_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "citroen",
@@ -429,7 +464,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/citroen/c4/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/citroen/c4.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/citroen/c4_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "seat",
@@ -441,7 +477,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/seat/leon/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/seat/leon.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/seat/leon_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "skoda",
@@ -453,7 +490,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/skoda/kamiq/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/kamiq.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/kamiq_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "skoda",
@@ -465,7 +503,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/skoda/karoq/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/karoq.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/karoq_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "honda",
@@ -477,7 +516,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/honda/civic/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/civic.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/civic_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "honda",
@@ -489,7 +529,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/honda/cr-v/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/cr-v.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/cr-v_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "dacia",
@@ -501,7 +542,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/dacia/sandero/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/dacia/sandero.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/dacia/sandero_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "land-rover",
@@ -513,7 +555,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/land-rover/discovery-sport/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/discovery-sport.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/discovery-sport_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "ford",
@@ -525,7 +568,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/ford/transit/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/transit.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/transit_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "ford",
@@ -537,7 +581,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/ford/transit-custom/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/transit-custom.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/transit-custom_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mercedes-benz",
@@ -549,7 +594,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/vito/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/vito.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/vito_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "ford",
@@ -561,7 +607,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/ford/fiesta/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/ford/fiesta.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/ford/fiesta_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "ford",
@@ -573,7 +620,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/ford/focus/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/ford/focus.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/ford/focus_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "vauxhall",
@@ -585,7 +633,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/vauxhall/mokka/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/vauxhall/mokka.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/vauxhall/mokka_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "hyundai",
@@ -597,7 +646,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/hyundai/tucson/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/hyundai/tucson.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/hyundai/tucson_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "hyundai",
@@ -609,7 +659,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/hyundai/i20/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/hyundai/i20.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/hyundai/i20_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "hyundai",
@@ -621,7 +672,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/hyundai/kona/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/hyundai/kona.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/hyundai/kona_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "kia",
@@ -633,7 +685,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/kia/picanto/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/kia/picanto.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/kia/picanto_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "kia",
@@ -645,7 +698,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/kia/niro/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/kia/niro.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/kia/niro_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "peugeot",
@@ -657,7 +711,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/peugeot/208/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/peugeot/208.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/peugeot/208_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "volkswagen",
@@ -669,7 +724,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/polo/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/volkswagen/polo.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/volkswagen/polo_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "bmw",
@@ -681,7 +737,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/x1/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/bmw/x1.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/bmw/x1_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mercedes-benz",
@@ -693,7 +750,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/c-class/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/mercedes-benz/c-class.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/mercedes-benz/c-class_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "skoda",
@@ -705,7 +763,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/skoda/octavia/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/skoda/octavia.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/skoda/octavia_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "ford",
@@ -717,7 +776,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/ford/puma/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/puma.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/puma_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "volkswagen",
@@ -729,7 +789,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/id4/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/id4.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/id4_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "bmw",
@@ -741,7 +802,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/3-series/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/3-series.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/3-series_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mercedes-benz",
@@ -753,7 +815,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/gle/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/gle.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/gle_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "renault",
@@ -765,7 +828,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/renault/kadjar/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/kadjar.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/kadjar_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "renault",
@@ -777,7 +841,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/renault/arkana/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/arkana.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/arkana_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "citroen",
@@ -789,7 +854,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/citroen/c5-aircross/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/citroen/c5-aircross.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/citroen/c5-aircross_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "skoda",
@@ -801,7 +867,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/skoda/scala/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/scala.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/scala_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mazda",
@@ -813,7 +880,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mazda/cx-30/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mazda/cx-30.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mazda/cx-30_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mazda",
@@ -825,7 +893,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mazda/mx-5/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mazda/mx-5.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mazda/mx-5_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mini",
@@ -837,7 +906,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mini/clubman/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mini/clubman.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mini/clubman_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "land-rover",
@@ -849,7 +919,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/land-rover/discovery/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/discovery.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/discovery_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "vauxhall",
@@ -861,7 +932,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/vauxhall/astra/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/vauxhall/astra.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/vauxhall/astra_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "bmw",
@@ -873,7 +945,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/i3/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/i3.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/i3_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "volkswagen",
@@ -885,7 +958,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/caddy/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/caddy.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/caddy_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "volkswagen",
@@ -897,7 +971,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/touareg/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touareg.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touareg_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mercedes-benz",
@@ -909,7 +984,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/glb/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/glb.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/glb_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mercedes-benz",
@@ -921,7 +997,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/s-class/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/s-class.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/s-class_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mercedes-benz",
@@ -933,7 +1010,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/cla/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/cla.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/cla_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "nissan",
@@ -945,7 +1023,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/nissan/note/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/note.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/note_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "peugeot",
@@ -957,7 +1036,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/peugeot/508/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/508.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/508_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "citroen",
@@ -969,7 +1049,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/citroen/c1/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/citroen/c1.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/citroen/c1_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mazda",
@@ -981,7 +1062,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mazda/6/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mazda/6.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mazda/6_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "jaguar",
@@ -993,7 +1075,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/jaguar/xe/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/xe.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/xe_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mitsubishi",
@@ -1005,7 +1088,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mitsubishi/outlander/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mitsubishi/outlander.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mitsubishi/outlander_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "mitsubishi",
@@ -1017,7 +1101,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mitsubishi/asx/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mitsubishi/asx.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mitsubishi/asx_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "subaru",
@@ -1029,7 +1114,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/subaru/forester/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/forester.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/forester_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "subaru",
@@ -1041,7 +1127,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/subaru/outback/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/outback.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/outback_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "alfa-romeo",
@@ -1053,7 +1140,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/alfa-romeo/giulia/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "alfa-romeo",
@@ -1065,7 +1153,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/alfa-romeo/stelvio/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/stelvio.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/stelvio_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "lexus",
@@ -1077,7 +1166,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/lexus/is/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lexus/is.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lexus/is_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "peugeot",
@@ -1089,7 +1179,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/peugeot/expert/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/expert.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/expert_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "hyundai",
@@ -1101,7 +1192,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/hyundai/santa-fe/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/santa-fe.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/santa-fe_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "ford",
@@ -1113,7 +1205,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/ford/mustang/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/mustang.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/mustang_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "ford",
@@ -1125,6 +1218,449 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/ford/ecosport/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ecosport.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ecosport_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "toyota",
+  "model": "supra",
+  "source_title": "GR Supra 2020",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/toyota/supra/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/supra_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "bmw",
+  "model": "x6",
+  "source_title": "2020 BMW X6",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/x6/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/x6_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "bmw",
+  "model": "ix3",
+  "source_title": "2021 BMW iX3",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/ix3/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/ix3_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "audi",
+  "model": "a7",
+  "source_title": "Audi A7 2019",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/audi/a7/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/audi/a7_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "audi",
+  "model": "a8",
+  "source_title": "Audi A8 Custom 2018",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/audi/a8/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/audi/a8_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "audi",
+  "model": "q8",
+  "source_title": "Audi Q8 2019 Low",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/audi/q8/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/audi/q8_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "mercedes-benz",
+  "model": "g-class",
+  "source_title": "1997 M G-CLASS W463 (V12 GAS) (UK)",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/g-class/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/g-class_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "mercedes-benz",
+  "model": "gls",
+  "source_title": "Mersedes- Benz Maybach GLS 600",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/gls/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/gls_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "mercedes-benz",
+  "model": "cls",
+  "source_title": "2013 Mercedes-Benz CLS 63 AMG Tuned (W218)",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/cls/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/cls_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "mercedes-benz",
+  "model": "amg-gt",
+  "source_title": "Mercedes-Benz AMG-GT 2015",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/amg-gt/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/amg-gt_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "volkswagen",
+  "model": "touran",
+  "source_title": "Volkswagen Touran 2010",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/touran/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "volkswagen",
+  "model": "beetle",
+  "source_title": "2006 Volkswagen New Beetle",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/beetle/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/beetle_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "volkswagen",
+  "model": "scirocco",
+  "source_title": "Volkswagen Scirocco 2008-2017",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/scirocco/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/scirocco_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "volkswagen",
+  "model": "crafter",
+  "source_title": "2017 Volkswagen Crafter",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/crafter/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/crafter_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "vauxhall",
+  "model": "insignia",
+  "source_title": "Vauxhall Insignia VXR 2008-2017",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/vauxhall/insignia/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/vauxhall/insignia_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "vauxhall",
+  "model": "zafira",
+  "source_title": "3D Scanned Vauxhall Zafira C (2011) [Free]",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/vauxhall/zafira/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/vauxhall/zafira_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "nissan",
+  "model": "gtr",
+  "source_title": "Nissan Aimgain GT R35 Type2",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/nissan/gtr/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/gtr_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "nissan",
+  "model": "370z",
+  "source_title": "2018 Nissan 370Z Nismo",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/nissan/370z/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "nissan",
+  "model": "nv200",
+  "source_title": "2011 Nissan NV200 SV",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/nissan/nv200/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nv200_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "hyundai",
+  "model": "i40",
+  "source_title": "Hyundai i40 Sedan/Combi 2011-2019",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/hyundai/i40/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/i40_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "peugeot",
+  "model": "rcz",
+  "source_title": "Peugeot RCZ 2009-2015",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/peugeot/rcz/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/rcz_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "renault",
+  "model": "koleos",
+  "source_title": "2008 Renault Koleos",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/renault/koleos/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/koleos_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "renault",
+  "model": "talisman",
+  "source_title": "Renault Talisman Sedan 2015-2024",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/renault/talisman/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/talisman_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "mazda",
+  "model": "mx-30",
+  "source_title": "2021 Mazda MX-30",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mazda/mx-30/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mazda/mx-30_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "honda",
+  "model": "accord",
+  "source_title": "2019 Honda Accord",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/honda/accord/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/accord_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "honda",
+  "model": "insight",
+  "source_title": "Honda Insight 2010",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/honda/insight/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/insight_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "suzuki",
+  "model": "jimny",
+  "source_title": "JIMNY 2019",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/suzuki/jimny/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/suzuki/jimny_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "dacia",
+  "model": "logan",
+  "source_title": "Dacia Logan Tuned MK1 2004-2018",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/dacia/logan/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/dacia/logan_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "jaguar",
+  "model": "f-type",
+  "source_title": "2018 Jaguar F-Type SVR",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/jaguar/f-type/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/f-type_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "land-rover",
+  "model": "range-rover-sport",
+  "source_title": "Range Rover Sport 2018",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/land-rover/range-rover-sport/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/range-rover-sport_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "subaru",
+  "model": "impreza",
+  "source_title": "Subaru Impreza WRC STI 2011 | www.vecarz.com",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/subaru/impreza/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/impreza_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "subaru",
+  "model": "brz",
+  "source_title": "SUBARU BRZ IMPROVED",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/subaru/brz/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/brz_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "porsche",
+  "model": "cayman",
+  "source_title": "Porsche 718 Cayman GT4 2020 | www.vecarz.com",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/porsche/cayman/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/cayman_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "porsche",
+  "model": "panamera",
+  "source_title": "Porsche Panamera Turbo (PNMI)",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/porsche/panamera/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/panamera_uc.glb",
+  "undercarriage": true
  }
 ]
