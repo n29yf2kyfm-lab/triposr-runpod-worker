@@ -58,5 +58,35 @@
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mini/hatch/native/manifest.json",
   "demo_plate": "MN19 CPR"
+ },
+ {
+  "make": "volkswagen",
+  "model": "golf",
+  "generation": "Mk8",
+  "year": 2022,
+  "trim": "GTE",
+  "fuel": "hybrid",
+  "body_style": "hatchback",
+  "colour": "Pure White",
+  "colour_hex": "#e9ebee",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/golf/white/manifest.json",
+  "demo_plate": "BW72 SWV"
+ },
+ {
+  "make": "nissan",
+  "model": "qashqai",
+  "generation": "J12",
+  "year": 2022,
+  "trim": "N-Connecta",
+  "fuel": "hybrid",
+  "body_style": "suv",
+  "colour": "Magnetic Blue",
+  "colour_hex": "#1f4e8c",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/nissan/qashqai/blue/manifest.json",
+  "demo_plate": "NQ72 SHQ"
  }
 ]
