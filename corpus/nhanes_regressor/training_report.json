@@ -1,0 +1,19 @@
+{
+  "n_records": 2169,
+  "features": [
+    "RIAGENDR",
+    "RIDAGEYR",
+    "BMXWT",
+    "BMXHT",
+    "BMXWAIST",
+    "BMXHIP",
+    "BMXARMC",
+    "BMXLEG"
+  ],
+  "cv_mae": {
+    "total_pct_fat": 2.615,
+    "trunk_pct_fat": 2.854,
+    "arm_pct_fat": 3.534,
+    "leg_pct_fat": 3.527
+  }
+}

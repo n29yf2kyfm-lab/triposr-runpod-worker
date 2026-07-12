@@ -1,0 +1,14 @@
+# Re-downloadable public CDC data (run_corpus.py / build_corpus.py fetch it)
+*.XPT
+*.xpt
+
+# Python env / caches
+.venv/
+__pycache__/
+*.pyc
+
+# RunPod test output
+phase0/phase0_result.json
+
+# Scratch
+candidates/
