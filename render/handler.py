@@ -128,7 +128,7 @@ def _fetch_glb(job_input):
 
 
 def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
-            samples, resx, resy):
+            samples, resx, resy, bright=False):
     import mathutils
     import bmesh
     import re
@@ -159,35 +159,65 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
                 n = o.material_slots[mi].material.name
                 area[n] = area.get(n, 0.0) + p.area
     name_re = re.compile(
-        r"(car[\s_-]?paint|bodypaint|lack|karosserie|paint)", re.I)
+        r"(car[\s_-]?paint|bodypaint|lack|karosserie|paint|body|coat|exterior)", re.I)
     named = [n for n in area if name_re.search(n)]
-    body = max(named, key=lambda n: area[n]) if named else None
-    if body:
-        m = bpy.data.materials.get(body)
+    for bn in named:                       # recolour ALL body-paint materials
+        m = bpy.data.materials.get(bn)
+        if not m or not m.use_nodes:
+            continue
         b = m.node_tree.nodes.get("Principled BSDF")
-        if b:
-            if colour and colour.lower() in _RGB:
-                for lnk in list(b.inputs["Base Color"].links):
-                    m.node_tree.links.remove(lnk)
-                b.inputs["Base Color"].default_value = (*_RGB[colour.lower()], 1)
-                b.inputs["Metallic"].default_value = 0.6
-            b.inputs["Roughness"].default_value = 0.11
-            if "Coat Weight" in b.inputs:
-                b.inputs["Coat Weight"].default_value = 1.0
-                b.inputs["Coat Roughness"].default_value = 0.03
+        if not b:
+            continue
+        if colour and colour.lower() in _RGB:
+            for lnk in list(b.inputs["Base Color"].links):
+                m.node_tree.links.remove(lnk)
+            b.inputs["Base Color"].default_value = (*_RGB[colour.lower()], 1)
+            b.inputs["Metallic"].default_value = 0.6
+        b.inputs["Roughness"].default_value = 0.11
+        if "Coat Weight" in b.inputs:
+            b.inputs["Coat Weight"].default_value = 1.0
+            b.inputs["Coat Roughness"].default_value = 0.03
 
-    # bounds
-    lo = [1e9] * 3
-    hi = [-1e9] * 3
+    # normalize scale: GLBs arrive at wildly different scales (some cars are
+    # ~0.05 units); scale the scene so the car is ~4.5 units so camera/DOF/light
+    # math all operate in a sane range.
+    rlo = [1e9] * 3
+    rhi = [-1e9] * 3
     for o in meshes():
         for cnr in o.bound_box:
             wv = o.matrix_world @ mathutils.Vector(cnr)
             for i in range(3):
-                lo[i] = min(lo[i], wv[i])
-                hi[i] = max(hi[i], wv[i])
+                rlo[i] = min(rlo[i], wv[i])
+                rhi[i] = max(rhi[i], wv[i])
+    rsize = max(rhi[i] - rlo[i] for i in range(3))
+    if rsize > 1e-6 and not (2.0 < rsize < 8.0):
+        f = 4.5 / rsize
+        for o in list(bpy.context.scene.objects):
+            if o.parent is None:
+                o.scale = [s * f for s in o.scale]
+                o.location = [l * f for l in o.location]
+        bpy.context.view_layer.update()
+
+    # robust bounds via vertex percentiles (stray verts can't blow up framing)
+    axs = [[], [], []]
+    zmin_true = 1e9
+    for o in meshes():
+        mw = o.matrix_world
+        for v in o.data.vertices:
+            w = mw @ v.co
+            axs[0].append(w[0]); axs[1].append(w[1]); axs[2].append(w[2])
+            if w[2] < zmin_true:
+                zmin_true = w[2]
+    for a in axs:
+        a.sort()
+
+    def _pct(a, p):
+        return a[min(len(a) - 1, max(0, int(p * (len(a) - 1))))]
+    lo = [_pct(axs[i], 0.01) for i in range(3)]
+    hi = [_pct(axs[i], 0.99) for i in range(3)]
     c = [(lo[i] + hi[i]) / 2 for i in range(3)]
     size = max(hi[i] - lo[i] for i in range(3))
-    zmin = lo[2]
+    zmin = zmin_true
     height = hi[2] - lo[2]
 
     # camera
@@ -237,10 +267,19 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     wn.links.new(grad.outputs["Color"], ramp.inputs["Fac"])
     bg_dark = wn.nodes.new("ShaderNodeBackground")
     wn.links.new(ramp.outputs["Color"], bg_dark.inputs["Color"])
-    wn.links.new(lp.outputs["Is Camera Ray"], mix.inputs["Fac"])
-    wn.links.new(bg_light.outputs["Background"], mix.inputs[1])
-    wn.links.new(bg_dark.outputs["Background"], mix.inputs[2])
-    wn.links.new(mix.outputs["Shader"], outw.inputs["Surface"])
+    _dark = {"black", "navy", "grey", "gray", "gunmetal", "maroon",
+             "purple", "bronze"}
+    use_bright = bright or (colour and colour.lower() in _dark)
+    if use_bright:
+        # dark paint needs a bright environment to reflect, or it vanishes on a
+        # dark backdrop. Show the HDRI studio everywhere.
+        bg_light.inputs["Strength"].default_value = 1.5
+        wn.links.new(bg_light.outputs["Background"], outw.inputs["Surface"])
+    else:
+        wn.links.new(lp.outputs["Is Camera Ray"], mix.inputs["Fac"])
+        wn.links.new(bg_light.outputs["Background"], mix.inputs[1])
+        wn.links.new(bg_dark.outputs["Background"], mix.inputs[2])
+        wn.links.new(mix.outputs["Shader"], outw.inputs["Surface"])
 
     S = size
     S2 = size * size
@@ -395,6 +434,7 @@ def handler(job):
             samples=int(ji.get("samples", 160)),
             resx=int(ji.get("width", 1600)),
             resy=int(ji.get("height", 900)),
+            bright=bool(ji.get("bright", False)),
         )
         dt = round(time.time() - t0, 1)
         with open(out, "rb") as f:
