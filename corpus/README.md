@@ -1,55 +1,44 @@
 # Corpus — real 3D human `.glb`
 
-A genuine, license-free 3D human model in binary glTF format, generated with no
-GPU, no accounts, and no gated checkpoints. This is the avatar the Corpus app
-needs — an actual mesh you can open in any 3D viewer, not a 2D placeholder.
+A real, properly-modeled 3D human in binary glTF format, ready to open in any
+glTF viewer or drop into the Corpus avatar.
 
 ## Files
 
 | File | What it is |
 |---|---|
-| `human.glb` | The model. A three-layer scene: **skin**, **muscle**, **skeleton**. ~15.6k verts / 31k faces, ~550 KB. Skin layer is watertight. |
-| `make_human_glb.py` | The generator. Builds the body from anatomically placed volumes → marching cubes → smooth watertight surface → GLB. |
-| `viewer.html` | A three.js viewer with skin/muscle/skeleton toggles. |
-| `human_preview.png` | Front / side / skeleton silhouette render. |
+| `human.glb` | The model — a realistic rigged human (T-pose), 16,340 verts / 28,106 faces, textured, ~3.2 MB, ~1.66 m tall. Valid binary glTF (`glTF` magic verified). |
+| `viewer.html` | three.js viewer — orbit / zoom, auto-frames the model. |
+| `human_preview.png` | Front / side silhouette render. |
+| `ATTRIBUTION.md` | Source and license of `human.glb` — read this before redistributing. |
+| `make_human_glb.py` | Optional: a from-scratch procedural generator (skin/muscle/skeleton layers, fully license-free) if you'd rather build a mesh than ship a downloaded one. |
 
-## How it's built (honest description)
+## Source & license (important)
 
-`human.glb` is **procedurally generated**, not a photogrammetry scan. The body is
-described as a set of capsules (limbs, torso) and ellipsoids (head, shoulder and
-hip masses) sharing one skeleton of joint centres. Those are sampled onto a
-signed-distance field, fused with a smooth-minimum, and turned into a watertight
-surface with marching cubes (`skimage.measure.marching_cubes`), then Taubin-smoothed.
-The muscle layer is the same body description shrunk inward; the skeleton is
-cylinders + joint spheres on the same joint centres, so all three layers align.
+`human.glb` is the **"Michelle"** character from the three.js example assets,
+originally from Adobe Mixamo. It is free to *use* in projects; redistributing the
+raw file has caveats — see **`ATTRIBUTION.md`**. If you need a model with a clean
+redistribution license, either:
 
-It's a clean, neutral standing adult (~1.75 m). It is not a scan of a specific
-person — that requires the photo→3D pipeline in `phase0/` (SAM 3D Body on RunPod),
-which needs a GPU and your own accounts.
-
-## Generate / regenerate
-
-```bash
-pip install numpy scipy scikit-image trimesh
-python make_human_glb.py                      # -> human.glb (skin+muscle+skeleton)
-python make_human_glb.py --res 200            # smoother (slower)
-python make_human_glb.py --layers skin        # skin only
-python make_human_glb.py --out avatar.glb
-```
+- run `python make_human_glb.py` (produces a fully license-free procedural human
+  with skin/muscle/skeleton layers), or
+- swap in a **Ready Player Me** avatar (`https://models.readyplayer.me/<id>.glb`)
+  or the CC-BY **CesiumMan** model.
 
 ## View it
 
-- **Drag-and-drop the fastest way:** open `human.glb` at <https://gltf-viewer.donmccurdy.com/>.
-- **Local viewer with layer toggles:**
+- **Fastest:** drag `human.glb` onto <https://gltf-viewer.donmccurdy.com/>.
+- **Local viewer:**
   ```bash
   python -m http.server 8080     # from this folder
   # open http://localhost:8080/viewer.html
   ```
-  (`viewer.html` pulls three.js from a CDN, so serve it over http rather than
+  (`viewer.html` pulls three.js from a CDN, so serve over http rather than
   opening the file directly.)
 
-## Validity
+## Note on anatomy layers
 
-`human.glb` starts with the `glTF` binary magic, loads back cleanly in trimesh as
-a 3-geometry scene, and the skin layer reports `is_watertight = True`. Verified in
-this repo before commit.
+This realistic model is a single skin mesh — it has **no** separate
+skin/fat/muscle/skeleton layers. Those layers exist only in the procedural
+`make_human_glb.py` output, or in a real photo→3D anatomy pipeline
+(the `phase0/` SAM 3D Body route, which needs a GPU + your own accounts).

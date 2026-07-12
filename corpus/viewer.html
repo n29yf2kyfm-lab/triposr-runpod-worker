@@ -5,35 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Corpus — 3D Human (human.glb)</title>
 <style>
-  :root{
-    --bg:#0A0F11; --panel:#11181B; --line:#222F33; --ink:#F5F2EB;
-    --dim:#8E9C9E; --teal:#4FB3A5;
-    --skin:#E2B27E; --muscle:#C94A4A; --bone:#F5EFEB;
-  }
+  :root{ --bg:#0A0F11; --panel:#11181B; --line:#222F33; --ink:#F5F2EB; --dim:#8E9C9E; --teal:#4FB3A5; }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overflow:hidden}
   #app{position:fixed;inset:0}
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;
-    justify-content:space-between;padding:14px 20px;
-    background:linear-gradient(180deg,rgba(10,15,17,.85),transparent);pointer-events:none
-  }
-  .brand{font-size:1.2rem;font-weight:600}
-  .brand span{color:var(--teal)}
+  header{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;background:linear-gradient(180deg,rgba(10,15,17,.85),transparent);pointer-events:none}
+  .brand{font-size:1.2rem;font-weight:600}.brand span{color:var(--teal)}
   .tag{font:600 .7rem/1 ui-monospace,monospace;color:var(--dim);border:1px solid var(--line);
-    padding:5px 10px;border-radius:100px;background:var(--panel);pointer-events:auto}
-  .tabs{
-    position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:10;
-    display:flex;gap:4px;background:rgba(17,24,27,.9);border:1px solid var(--line);
-    padding:5px;border-radius:100px;backdrop-filter:blur(8px)
-  }
-  .tab{border:none;background:transparent;color:var(--dim);font:600 .78rem/1 ui-monospace,monospace;
-    padding:11px 18px;border-radius:100px;cursor:pointer;transition:.2s}
-  .tab.on[data-l="skin"]{background:var(--skin);color:#201306}
-  .tab.on[data-l="muscle"]{background:var(--muscle);color:#fff}
-  .tab.on[data-l="skeleton"]{background:var(--bone);color:#161A1B}
-  .hint{position:fixed;bottom:78px;left:50%;transform:translateX(-50%);color:var(--dim);
+    padding:5px 10px;border-radius:100px;background:var(--panel)}
+  .hint{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:var(--dim);
     font:.72rem/1 ui-monospace,monospace;z-index:10}
   #err{position:fixed;inset:0;display:none;place-items:center;padding:24px;text-align:center;
     color:var(--dim);font:.9rem/1.6 ui-monospace,monospace;z-index:20;background:var(--bg)}
@@ -43,19 +25,13 @@
 <div id="app"></div>
 <header>
   <div class="brand">Corpus<span>.</span> <span style="color:var(--dim);font-weight:400;font-size:.9rem">3D human</span></div>
-  <div class="tag">human.glb · real mesh</div>
+  <div class="tag">human.glb · real model</div>
 </header>
-<div class="hint">drag to orbit · scroll to zoom · toggle layers below</div>
-<div class="tabs" id="tabs">
-  <button class="tab on" data-l="skin">Skin</button>
-  <button class="tab" data-l="muscle">Muscle</button>
-  <button class="tab on" data-l="skeleton">Skeleton</button>
-</div>
+<div class="hint">drag to orbit · scroll to zoom</div>
 <div id="err">
   Could not load three.js from the CDN in this environment.<br>
-  Serve this folder over http (e.g. <b>python -m http.server</b>) and open it,<br>
-  or open <b>human.glb</b> directly at
-  <b>https://gltf-viewer.donmccurdy.com/</b>.
+  Serve this folder over http (<b>python -m http.server</b>) and open it,<br>
+  or drop <b>human.glb</b> into <b>https://gltf-viewer.donmccurdy.com/</b>.
 </div>
 
 <script type="importmap">
@@ -74,43 +50,32 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x0A0F11);
 
 const camera = new THREE.PerspectiveCamera(38, innerWidth/innerHeight, 0.01, 100);
-camera.position.set(1.6, 1.1, 2.6);
-
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
 app.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
-controls.target.set(0, 0.9, 0);
 
-scene.add(new THREE.HemisphereLight(0xbfe8e0, 0x14201f, 0.9));
-const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(2,3,2); scene.add(key);
-const rim = new THREE.DirectionalLight(0x4FB3A5, 0.7); rim.position.set(-2,1,-2); scene.add(rim);
-const grid = new THREE.GridHelper(6, 24, 0x233, 0x1a2528); grid.position.y = 0; scene.add(grid);
+scene.add(new THREE.HemisphereLight(0xbfe8e0, 0x14201f, 1.0));
+const key = new THREE.DirectionalLight(0xffffff, 1.8); key.position.set(2,3,2); scene.add(key);
+const rim = new THREE.DirectionalLight(0x4FB3A5, 0.6); rim.position.set(-2,1,-2); scene.add(rim);
 
-const layers = {};
 new GLTFLoader().load('human.glb', (gltf) => {
-  gltf.scene.traverse(o => {
-    if (o.isMesh) { layers[o.name] = o; o.material.transparent = true; }
-  });
-  scene.add(gltf.scene);
-  applyLayers();
+  const model = gltf.scene;
+  scene.add(model);
+  // frame the model automatically
+  const box = new THREE.Box3().setFromObject(model);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  scene.add(new THREE.GridHelper(Math.max(size.x,size.z)*4, 20, 0x233, 0x1a2528).translateY(box.min.y));
+  const h = Math.max(size.y, 0.1);
+  controls.target.copy(center);
+  camera.position.set(center.x + h*0.7, center.y + h*0.15, center.z + h*1.6);
+  controls.update();
 }, undefined, () => { document.getElementById('err').style.display='grid'; });
-
-const state = { skin:true, muscle:false, skeleton:true };
-function applyLayers(){
-  for (const [name, mesh] of Object.entries(layers)){
-    mesh.visible = !!state[name];
-    if (name === 'skin') mesh.material.opacity = state.skeleton ? 0.5 : 0.95;
-  }
-}
-document.getElementById('tabs').addEventListener('click', (e) => {
-  const b = e.target.closest('.tab'); if(!b) return;
-  const l = b.dataset.l; state[l] = !state[l];
-  b.classList.toggle('on', state[l]); applyLayers();
-});
 
 addEventListener('resize', () => {
   camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
