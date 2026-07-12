@@ -1,0 +1,232 @@
+<title>Expert Car Check — 3D Showroom (MVP)</title>
+<style>
+  :root{
+    --bg:#0a0c0f;--bg2:#0d1014;--panel:#12161b;--panel2:#171c22;--line:#232a32;
+    --ink:#eef2f5;--ink2:#aab3bd;--mut:#7d8792;--accent:#54e0a6;--accent-ink:#04160e;
+    --blue:#4c9bff;--pass:#54e0a6;--warn:#f2c14e;--fail:#f2685f;
+    --stage-top:#1a2028;--stage-bot:#050607;--shadow:0 18px 50px -20px rgba(0,0,0,.7);
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  :root[data-theme="light"]{
+    --bg:#eef1f4;--bg2:#e6eaee;--panel:#fff;--panel2:#f5f7f9;--line:#dde3e9;
+    --ink:#0d1116;--ink2:#3b444d;--mut:#67717b;--accent:#0fae76;--accent-ink:#fff;
+    --blue:#1f6fe0;--pass:#0fae76;--warn:#b7871a;--fail:#d1483f;
+    --stage-top:#c9d2da;--stage-bot:#8b97a2;--shadow:0 18px 50px -24px rgba(20,30,40,.32);
+  }
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]){
+    --bg:#eef1f4;--bg2:#e6eaee;--panel:#fff;--panel2:#f5f7f9;--line:#dde3e9;
+    --ink:#0d1116;--ink2:#3b444d;--mut:#67717b;--accent:#0fae76;--accent-ink:#fff;
+    --blue:#1f6fe0;--pass:#0fae76;--warn:#b7871a;--fail:#d1483f;
+    --stage-top:#c9d2da;--stage-bot:#8b97a2;--shadow:0 18px 50px -24px rgba(20,30,40,.32);
+  }}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(120% 90% at 50% 0%,var(--bg2),var(--bg));
+    color:var(--ink);font-family:var(--sans);line-height:1.5;min-height:100vh}
+  .wrap{max-width:1180px;margin:0 auto;padding:24px 20px 46px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:11px}
+  .mark{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;
+    background:linear-gradient(150deg,var(--accent),#0b7);color:var(--accent-ink);font-weight:800;font-size:17px}
+  .brand b{font-weight:750;font-size:15.5px}
+  .brand span{display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+
+  /* reg lookup */
+  .lookup{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .reg-in{display:flex;align-items:stretch;border-radius:8px;overflow:hidden;border:1px solid #0004;box-shadow:0 2px 0 rgba(0,0,0,.3)}
+  .reg-in .eu{background:#0a3aa8;color:#f5c518;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:800}
+  .reg-in input{border:0;background:#f7d117;color:#101216;font-weight:800;font-size:19px;
+    letter-spacing:.04em;padding:8px 12px;width:150px;font-family:var(--sans);text-transform:uppercase;outline:none}
+  .reg-in input::placeholder{color:#6a5f13}
+  .go{border:0;border-radius:9px;padding:0 16px;background:var(--accent);color:var(--accent-ink);
+    font-weight:730;font-size:14px;cursor:pointer;font-family:var(--sans)}
+  .go:hover{filter:brightness(1.05)}
+  .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:2px}
+  .qc{font-size:11.5px;border:1px solid var(--line);background:var(--panel);color:var(--ink2);
+    border-radius:999px;padding:5px 11px;cursor:pointer}
+  .qc:hover{border-color:var(--accent);color:var(--ink)}
+
+  .grid{display:grid;grid-template-columns:1.55fr .95fr;gap:18px;margin-top:16px}
+  @media (max-width:860px){.grid{grid-template-columns:1fr}}
+  .stage-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+  .stage{position:relative;aspect-ratio:1280/800;background:linear-gradient(180deg,var(--stage-top),var(--stage-bot));
+    cursor:grab;touch-action:pan-y;user-select:none;overflow:hidden}
+  .stage.grabbing{cursor:grabbing}
+  .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;pointer-events:none}
+  .stage img.on{opacity:1}
+  .vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 80% at 50% 42%,transparent 55%,rgba(0,0,0,.4))}
+  .hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:8px;align-items:center;
+    font-size:11.5px;color:var(--ink2);background:color-mix(in srgb,var(--panel) 78%,transparent);
+    border:1px solid var(--line);padding:7px 13px;border-radius:999px;transition:opacity .4s;pointer-events:none}
+  .hint svg{width:15px;height:15px;stroke:var(--accent)}
+  .stage.touched .hint{opacity:0}
+  .stage-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;
+    border-top:1px solid var(--line);background:var(--panel2)}
+  .colour-dot{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2)}
+  .cd{width:18px;height:18px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+  .angle{font-size:12px;color:var(--ink2);font-variant-numeric:tabular-nums}
+  .angle b{color:var(--ink)}
+
+  .side{display:flex;flex-direction:column;gap:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:17px 18px 19px;box-shadow:var(--shadow)}
+  .eyebrow{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);margin:0 0 9px}
+  .model{font-size:22px;font-weight:770;letter-spacing:-.01em;margin:0;text-wrap:balance}
+  .trim{color:var(--ink2);font-size:13px;margin:3px 0 14px}
+  .plate{display:inline-flex;border-radius:7px;overflow:hidden;border:1px solid #0004;box-shadow:0 2px 0 rgba(0,0,0,.3)}
+  .plate .eu{background:#0a3aa8;color:#f5c518;display:flex;align-items:center;padding:0 7px;font-size:9px;font-weight:700}
+  .plate .reg{background:#f7d117;color:#101216;font-weight:800;font-size:24px;letter-spacing:.03em;padding:5px 13px}
+  .specs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);
+    border-radius:12px;overflow:hidden;margin-top:14px}
+  .spec{background:var(--panel);padding:11px 12px}
+  .spec .k{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+  .spec .v{font-size:14.5px;font-weight:640;margin-top:2px;font-variant-numeric:tabular-nums}
+  .checks{display:flex;flex-direction:column;gap:8px}
+  .check{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;background:var(--panel2);border:1px solid var(--line)}
+  .badge{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;flex:0 0 auto}
+  .badge svg{width:13px;height:13px}
+  .b-pass{background:color-mix(in srgb,var(--pass) 16%,transparent);color:var(--pass)}
+  .b-warn{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+  .b-fail{background:color-mix(in srgb,var(--fail) 18%,transparent);color:var(--fail)}
+  .check .t{font-size:13px;font-weight:600;flex:1}
+  .check .val{font-size:12px;font-weight:650}
+  .val.pass{color:var(--pass)}.val.warn{color:var(--warn)}.val.fail{color:var(--fail)}
+  .cta{margin-top:2px;width:100%;border:0;border-radius:12px;padding:13px;cursor:pointer;background:var(--accent);
+    color:var(--accent-ink);font-weight:730;font-size:13.5px;font-family:var(--sans)}
+  .cta:hover{filter:brightness(1.05)}
+  .resolved{font-size:11.5px;color:var(--mut);margin-top:9px;display:flex;align-items:center;gap:7px}
+  .resolved .d{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .foot{text-align:center;color:var(--mut);font-size:11px;margin-top:22px}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><div class="mark">E</div>
+      <div><b>Expert Car Check</b><span>3D Showroom · MVP</span></div></div>
+    <div class="lookup">
+      <div class="reg-in"><div class="eu">GB</div>
+        <input id="reg" placeholder="ENTER REG" maxlength="8" autocomplete="off"></div>
+      <button class="go" id="go">Look up</button>
+    </div>
+  </div>
+  <div class="chips" id="chips"></div>
+
+  <div class="grid">
+    <div class="stage-card">
+      <div class="stage" id="stage" role="img" aria-label="Interactive 360° vehicle view. Drag to rotate.">
+        <div class="vignette"></div>
+        <div class="hint" id="hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M3 12h18M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>
+          Drag to rotate
+        </div>
+      </div>
+      <div class="stage-foot">
+        <div class="colour-dot"><span class="cd" id="cdot"></span><span id="cname">—</span></div>
+        <div class="angle">Heading <b id="deg">0°</b></div>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="card">
+        <p class="eyebrow">Vehicle identity</p>
+        <h1 class="model" id="mModel">—</h1>
+        <p class="trim" id="mTrim">—</p>
+        <div class="plate"><div class="eu">UK</div><div class="reg" id="mPlate">—</div></div>
+        <div class="specs" id="specs"></div>
+        <div class="resolved" id="resolved"></div>
+      </div>
+      <div class="card">
+        <p class="eyebrow">Vehicle check</p>
+        <div class="checks" id="checks"></div>
+      </div>
+      <button class="cta">View full history report — £4.99</button>
+    </div>
+  </div>
+  <p class="foot">MVP · cars spin from GPU-rendered turntables of real 3D models, served from the ExpertCarCheck library · vehicle data illustrative</p>
+</div>
+
+<script>
+  const CARS = window.__CARS__ || {};   // { PLATE: {make,model,trim,year,fuel,colour,colourHex,frames:[dataURI...],specs,checks} }
+  const stage = document.getElementById('stage');
+  const degEl = document.getElementById('deg');
+  let imgs = [], cur = 0, N = 0, idle = null, raf = null, dragging = false, lastX = 0, vel = 0;
+
+  const ICON = {
+    pass:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+    warn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>',
+    fail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>'
+  };
+
+  function setFrame(i){
+    if(!N) return;
+    i = ((Math.round(i) % N) + N) % N;
+    if(imgs[cur]) imgs[cur].classList.remove('on');
+    if(imgs[i]) imgs[i].classList.add('on');
+    cur = i; degEl.textContent = Math.round(i*(360/N)) + '°';
+  }
+  function stopIdle(){ if(idle){clearInterval(idle); idle=null;} }
+  function startIdle(){
+    if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+    stopIdle(); let acc = cur;
+    idle = setInterval(()=>{ acc += 0.18; setFrame(acc); }, 45);
+  }
+
+  function loadCar(plate){
+    const c = CARS[plate];
+    if(!c) return;
+    stopIdle(); cancelAnimationFrame(raf);
+    // clear old frames
+    stage.querySelectorAll('img').forEach(n=>n.remove());
+    imgs = []; cur = 0; N = c.frames.length;
+    c.frames.forEach((src)=>{
+      const im = new Image(); im.src = src;
+      stage.insertBefore(im, stage.querySelector('.vignette'));
+      imgs.push(im);
+    });
+    setFrame(0); startIdle();
+    // identity
+    document.getElementById('mModel').textContent = c.make.toUpperCase()+' '+c.model.toUpperCase();
+    document.getElementById('mTrim').textContent = c.trim + ' · ' + c.year + ' · ' + c.fuel;
+    document.getElementById('mPlate').textContent = plate;
+    document.getElementById('cdot').style.background = c.colourHex;
+    document.getElementById('cname').textContent = c.colour;
+    document.getElementById('specs').innerHTML = c.specs.map(s=>
+      `<div class="spec"><div class="k">${s[0]}</div><div class="v">${s[1]}</div></div>`).join('');
+    document.getElementById('checks').innerHTML = c.checks.map(k=>
+      `<div class="check"><div class="badge b-${k[2]}">${ICON[k[2]]}</div><div class="t">${k[0]}</div><div class="val ${k[2]}">${k[1]}</div></div>`).join('');
+    document.getElementById('resolved').innerHTML =
+      `<span class="d"></span>Resolved ${plate} → ${c.make} ${c.model} · loaded from library in &lt;1s`;
+  }
+
+  // interaction
+  const SENS = () => stage.clientWidth / (N||36);
+  stage.addEventListener('mousedown', e=>{ e.preventDefault(); dragging=true; lastX=e.clientX; vel=0; stopIdle(); stage.classList.add('grabbing','touched'); cancelAnimationFrame(raf); });
+  window.addEventListener('mousemove', e=>{ if(!dragging)return; const dx=e.clientX-lastX; lastX=e.clientX; const df=dx/SENS(); setFrame(cur-df); vel=-df; });
+  window.addEventListener('mouseup', ()=>{ if(!dragging)return; dragging=false; stage.classList.remove('grabbing'); let v=vel; const step=()=>{ if(Math.abs(v)<0.06){startIdle();return;} setFrame(cur+v); v*=0.92; raf=requestAnimationFrame(step); }; if(Math.abs(v)>0.15) raf=requestAnimationFrame(step); else startIdle(); });
+  stage.addEventListener('touchstart', e=>{ dragging=true; lastX=e.touches[0].clientX; stopIdle(); stage.classList.add('touched'); }, {passive:true});
+  stage.addEventListener('touchmove', e=>{ if(!dragging)return; const dx=e.touches[0].clientX-lastX; lastX=e.touches[0].clientX; setFrame(cur-dx/SENS()); }, {passive:true});
+  stage.addEventListener('touchend', ()=>{ dragging=false; startIdle(); });
+  stage.addEventListener('mouseenter', stopIdle);
+  stage.addEventListener('mouseleave', ()=>{ if(!dragging) startIdle(); });
+
+  // lookup
+  function resolve(){
+    const v = document.getElementById('reg').value.toUpperCase().replace(/\s+/g,' ').trim();
+    if(CARS[v]) loadCar(v);
+    else {
+      // nearest: just load first car, flag as demo miss
+      document.getElementById('resolved').innerHTML = `<span class="d" style="background:var(--warn)"></span>No exact match for ${v||'—'} in the MVP set — try a demo plate below`;
+    }
+  }
+  document.getElementById('go').addEventListener('click', resolve);
+  document.getElementById('reg').addEventListener('keydown', e=>{ if(e.key==='Enter') resolve(); });
+
+  // quick-pick chips + initial car
+  const plates = Object.keys(CARS);
+  document.getElementById('chips').innerHTML = plates.map(p=>
+    `<button class="qc" data-p="${p}">${p} · ${CARS[p].make} ${CARS[p].model}</button>`).join('');
+  document.querySelectorAll('.qc').forEach(b=> b.addEventListener('click', ()=>{
+    document.getElementById('reg').value = b.dataset.p; loadCar(b.dataset.p);
+  }));
+  if(plates.length){ document.getElementById('reg').value = plates[0]; loadCar(plates[0]); }
+</script>
