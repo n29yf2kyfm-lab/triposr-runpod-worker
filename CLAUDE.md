@@ -48,3 +48,25 @@ don't fabricate an RCA when nothing is broken.
   body-paint material — audit every new car's render before it ships.
 - **Never** hardcode Supabase/RunPod/Docker secrets in the repo (push
   protection blocks them); use env vars.
+
+## Investigation log
+
+### 2026-07-12 — "Why is the 12-car render batch so slow?" (confidence ~85%)
+- **Problem:** a 12-car turntable batch (432 frames) took ~30+ min and felt stuck.
+- **5-Whys → root cause:** the batch is hundreds of tiny serverless jobs through a
+  quota-limited, throttled RunPod endpoint, processed **sequentially per car**.
+  - Effective GPUs were ~4, not the 8 requested (`running:4, throttled:1`).
+  - RunPod caps this account at **10 serverless workers across ALL endpoints**
+    (patch to 10 → 400 "quota of 10"); persistent `throttled:1` from GPU-type capacity.
+  - `workersMin:0` scale-to-zero → cold starts (~30–60s) between cars.
+  - Script waits on each car's slowest frame, and commits the catalogue **all at
+    once at the end** (fragile: one hung car blocks all 12 from going live).
+- **Evidence it was NOT a hang:** Python proc idle-waiting (low CPU), 10/12 manifests
+  committed steadily.
+- **Fixes:** (1) commit catalogue **incrementally per car**, not all-at-end;
+  (2) submit all frames in **one parallel pool** so workers stay saturated (no
+  per-car gaps); (3) for big runs use a **dedicated pod** — its GPUs sit outside
+  the 10-worker serverless quota and never cold-start. This validates the user's
+  repeated "put it on a pod" instinct: the pod is the real lever for batch speed.
+- **KPIs to watch:** endpoint `throttled` count, `inQueue` depth, wall-time/frame,
+  cold-start gaps between cars.
