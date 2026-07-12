@@ -11,7 +11,8 @@
   "colour_hex": "#e9ebee",
   "tier": "B",
   "frame_count": 48,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/porsche/911/pearl/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/porsche/911/pearl/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/porsche/911.glb"
  },
  {
   "make": "audi",
@@ -25,7 +26,8 @@
   "colour_hex": "#c7cace",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/audi/a1/silver/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/audi/a1/silver/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/audi/a1.glb"
  },
  {
   "make": "audi",
@@ -39,7 +41,8 @@
   "colour_hex": "#d7d9db",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/audi/a3/silver/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/audi/a3/silver/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/audi/a3.glb"
  },
  {
   "make": "mini",
@@ -53,7 +56,8 @@
   "colour_hex": "#1f6fe0",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mini/hatch/native/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mini/hatch/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/mini/hatch.glb"
  },
  {
   "make": "volkswagen",
@@ -67,7 +71,8 @@
   "colour_hex": "#e9ebee",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/golf/white/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/golf/white/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/vw/golf.glb"
  },
  {
   "make": "nissan",
@@ -81,7 +86,8 @@
   "colour_hex": "#1f4e8c",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/nissan/qashqai/blue/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/nissan/qashqai/blue/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/nissan/qashqai.glb"
  },
  {
   "make": "renault",
@@ -95,7 +101,8 @@
   "colour_hex": "#2a4fb0",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/renault/clio/blue/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/renault/clio/blue/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/renault/clio.glb"
  },
  {
   "make": "renault",
@@ -109,7 +116,8 @@
   "colour_hex": "#c7cace",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/renault/captur/silver/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/renault/captur/silver/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/renault/captur.glb"
  },
  {
   "make": "citroen",
@@ -123,7 +131,8 @@
   "colour_hex": "#e9ebee",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/citroen/c3/white/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/citroen/c3/white/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/citroen/c3.glb"
  },
  {
   "make": "mercedes-benz",
@@ -137,7 +146,8 @@
   "colour_hex": "#0b0d10",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/a-class/black/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/a-class/black/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/mercedes-benz/a-class.glb"
  },
  {
   "make": "volkswagen",
@@ -151,7 +161,8 @@
   "colour_hex": "#2a4fb0",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/tiguan/blue/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/tiguan/blue/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/volkswagen/tiguan.glb"
  },
  {
   "make": "nissan",
@@ -165,7 +176,8 @@
   "colour_hex": "#6b7280",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/nissan/juke/grey/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/nissan/juke/grey/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/nissan/juke.glb"
  },
  {
   "make": "land-rover",
@@ -179,7 +191,8 @@
   "colour_hex": "#c7cace",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/land-rover/defender/silver/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/land-rover/defender/silver/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/land-rover/defender.glb"
  },
  {
   "make": "tesla",
@@ -193,7 +206,8 @@
   "colour_hex": "#e9ebee",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/tesla/model-3/white/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/tesla/model-3/white/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/tesla/model-3.glb"
  },
  {
   "make": "mini",
@@ -207,7 +221,8 @@
   "colour_hex": "#e9ebee",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mini/countryman/white/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mini/countryman/white/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/mini/countryman.glb"
  },
  {
   "make": "mercedes-benz",
@@ -221,7 +236,8 @@
   "colour_hex": "#e9ebee",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/sprinter/white/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/sprinter/white/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/mercedes-benz/sprinter.glb"
  },
  {
   "make": "volkswagen",
@@ -235,7 +251,8 @@
   "colour_hex": "#c7cace",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/transporter/silver/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/transporter/silver/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/volkswagen/transporter.glb"
  },
  {
   "make": "kia",
@@ -249,6 +266,7 @@
   "colour_hex": "#e9ebee",
   "tier": "B",
   "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/kia/sportage/white/manifest.json"
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/kia/sportage/white/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/hyundai/tucson.glb"
  }
 ]
