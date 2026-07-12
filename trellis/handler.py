@@ -25,6 +25,38 @@ IMAGE_MODEL = "microsoft/TRELLIS.2-4B"
 
 OUTPUT_DIR = "/runpod-volume/outputs"
 
+# Optional Supabase Storage upload. When SUPABASE_URL + SUPABASE_KEY are set,
+# the generated GLB is uploaded and a public URL is returned, so large meshes
+# never hit RunPod's inline output-size cap (which silently drops the payload).
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
+SUPABASE_BUCKET = os.environ.get("SUPABASE_BUCKET", "car-meshes")
+# Only inline the base64 GLB when it is comfortably under RunPod's response cap.
+INLINE_B64_MAX_BYTES = int(os.environ.get("INLINE_B64_MAX_BYTES", 1_300_000))
+
+
+def upload_to_supabase(local_path, object_path):
+    """Upload a file to Supabase Storage; return the public URL (or None)."""
+    if not (SUPABASE_URL and SUPABASE_KEY):
+        return None
+    with open(local_path, "rb") as f:
+        data = f.read()
+    url = f"{SUPABASE_URL}/storage/v1/object/{SUPABASE_BUCKET}/{object_path}"
+    resp = requests.post(
+        url,
+        data=data,
+        headers={
+            "apikey": SUPABASE_KEY,
+            "Authorization": f"Bearer {SUPABASE_KEY}",
+            "Content-Type": "model/gltf-binary",
+            "x-upsert": "true",
+        },
+        timeout=120,
+    )
+    resp.raise_for_status()
+    return (f"{SUPABASE_URL}/storage/v1/object/public/"
+            f"{SUPABASE_BUCKET}/{object_path}")
+
 _image_pipeline = None
 
 
@@ -208,17 +240,41 @@ def handler(job):
         )
         glb.export(persisted_path, extension_webp=False)
 
-        with open(persisted_path, "rb") as f:
-            glb_b64 = base64.b64encode(f.read()).decode("utf-8")
+        glb_bytes = os.path.getsize(persisted_path)
 
-        return {
+        # Prefer a Supabase URL (no size cap); fall back to inline base64 only
+        # when the GLB is small enough to survive RunPod's response-size limit.
+        glb_url = None
+        upload_error = None
+        try:
+            glb_url = upload_to_supabase(persisted_path, f"trellis/{job_id}.glb")
+        except Exception as up_err:
+            upload_error = str(up_err)
+
+        glb_b64 = None
+        if glb_url is None and glb_bytes <= INLINE_B64_MAX_BYTES:
+            with open(persisted_path, "rb") as f:
+                glb_b64 = base64.b64encode(f.read()).decode("utf-8")
+
+        result = {
             "status": "success",
+            "glb_url": glb_url,
             "glb_b64": glb_b64,
             "glb_path": persisted_path,
+            "glb_bytes": glb_bytes,
             "mode": "image",
             "model": IMAGE_MODEL,
             "message": "GLB generated successfully",
         }
+        if upload_error:
+            result["upload_error"] = upload_error
+        if glb_url is None and glb_b64 is None:
+            result["warning"] = (
+                f"GLB is {glb_bytes} bytes: too large to inline and no Supabase "
+                "upload configured. Set SUPABASE_URL/SUPABASE_KEY or lower "
+                "texture_size/decimation_target."
+            )
+        return result
 
     except Exception as e:
         import traceback
