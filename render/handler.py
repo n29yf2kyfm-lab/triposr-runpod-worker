@@ -128,7 +128,7 @@ def _fetch_glb(job_input):
 
 
 def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
-            samples, resx, resy, bright=False):
+            samples, resx, resy, bright=False, studio=False):
     import mathutils
     import bmesh
     import re
@@ -269,8 +269,19 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     wn.links.new(ramp.outputs["Color"], bg_dark.inputs["Color"])
     _dark = {"black", "navy", "grey", "gray", "gunmetal", "maroon",
              "purple", "bronze"}
-    use_bright = bright or (colour and colour.lower() in _dark)
-    if use_bright:
+    # studio mode wins: keep the clean dark backdrop for the camera while a
+    # bright HDRI still lights + reflects on the car, so even black reads
+    # premium on a clean studio ground (no visible room).
+    use_bright = (bright or (colour and colour.lower() in _dark)) and not studio
+    if studio:
+        # boost reflection/lighting so dark paint still pops against the clean
+        # backdrop, but the camera only ever sees the dark graded ground.
+        bg_light.inputs["Strength"].default_value = 1.5
+        wn.links.new(lp.outputs["Is Camera Ray"], mix.inputs["Fac"])
+        wn.links.new(bg_light.outputs["Background"], mix.inputs[1])
+        wn.links.new(bg_dark.outputs["Background"], mix.inputs[2])
+        wn.links.new(mix.outputs["Shader"], outw.inputs["Surface"])
+    elif use_bright:
         # dark paint needs a bright environment to reflect, or it vanishes on a
         # dark backdrop. Show the HDRI studio everywhere.
         bg_light.inputs["Strength"].default_value = 1.5
@@ -435,6 +446,7 @@ def handler(job):
             resx=int(ji.get("width", 1600)),
             resy=int(ji.get("height", 900)),
             bright=bool(ji.get("bright", False)),
+            studio=bool(ji.get("studio", False)),
         )
         dt = round(time.time() - t0, 1)
         with open(out, "rb") as f:
