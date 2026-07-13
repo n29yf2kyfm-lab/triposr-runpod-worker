@@ -64,6 +64,31 @@ hallucination and is unacceptable in a product built on data accuracy.
 - The GLBs are sourced third-party CC-BY models (licence, not ownership); the
   "own GLB" route is photos → TRELLIS. Don't conflate the two.
 
+## OEM paint colour resolution (saved 2026-07-13, user-specified workflow)
+
+Database: `platform/paint/oem_paint_db.csv` — user-provided, ~270 rows, columns
+`MANUFACTURER,OEM_PAINT_NAME,DVLA_COLOUR,COLOUR_FAMILY,FINISH` covering ~35
+brands. This is the source of truth for OEM paint naming in the app and the
+render pipeline.
+
+**The 8-step resolution workflow (follow exactly):**
+1. Search the registration through DVLA (the app's existing decode — never
+   touch that wiring; the reg itself is never keyed, indexed or stored).
+2. Save the broad colour returned as `dvla_colour`.
+3. Identify manufacturer, model, year, VIN, trim from the decode.
+4. Search the OEM paint database for paints valid for that vehicle
+   (filter by MANUFACTURER).
+5. Filter those candidates by the DVLA broad colour (DVLA_COLOUR column).
+6. Image colour analysis may only be used to RANK the remaining candidates —
+   never to decide.
+7. **Never claim an exact OEM paint code/name from an image alone.**
+8. Display as "Possible OEM colour: <name>" (unconfirmed) until confirmed by
+   VIN, paint label, or manufacturer record.
+
+Render-side use: COLOUR_FAMILY maps to the render palette (e.g. family
+"Gunmetal Grey" → `gunmetal` palette entry); the OEM name is display metadata
+only, per rules 7–8.
+
 ## Investigation log
 
 ### 2026-07-12 — "Why is the 12-car render batch so slow?" (confidence ~85%)
