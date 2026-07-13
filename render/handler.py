@@ -44,6 +44,76 @@ _RGB = {
 
 _gpu_device = None  # cached across warm invocations
 
+import re as _re
+# Role classifiers for body detection. Names come from wildly inconsistent
+# third-party GLBs (multilingual), so we combine name hints with material
+# properties (blend mode / transmission / emission) inside Blender.
+_GLASS = _re.compile(r"(glass|window|windscreen|windshield|screen|vidro|glas|scheibe|fenster)", _re.I)
+_LIGHT = _re.compile(r"(light|lamp|head[\s_-]?l|tail[\s_-]?l|indicator|reflector|\bled\b|drl|blinker|\blens\b|faro|phare)", _re.I)
+_TYRE = _re.compile(r"(tyre|tire|rubber|reifen|pneu|gomma|llanta)", _re.I)
+_WHEEL = _re.compile(r"(wheel|\brim\b|alloy|\bhub\b|jante|felge|cerchi|caliper|\bbrake)", _re.I)
+_TRIM = _re.compile(r"(chrome|trim|grill|grille|badge|logo|emblem|number[\s_-]?plate|licen|mirror|molding|moulding|\bseal\b|wiper|antenna|handle)", _re.I)
+_INNER = _re.compile(r"(interior|seat|dash|leather|fabric|carpet|steering|cabin|\binner\b|interno|innen|cockpit|door[\s_-]?card|belt|pedal)", _re.I)
+_DARKP = _re.compile(r"(lower[\s_-]?clad|cladding|under[\s_-]?body|arch[\s_-]?liner|wheel[\s_-]?arch|sill[\s_-]?trim|mud[\s_-]?flap)", _re.I)
+_PAINT = _re.compile(r"(car[\s_-]?paint|body[\s_-]?paint|\bbody\b|\bpaint\b|pintura|\black\b|lackier|karosser|carrosser|carrocer|verniz|vernice|\bcoat\b|exterior|\bshell\b|chassis|metal[\s_-]?car|bodywork|paintwork|lacca)", _re.I)
+
+
+def _classify_materials(bpy):
+    """Per-material metadata as Blender sees it: summed face area + role flags."""
+    meta = {}
+    for o in [x for x in bpy.context.scene.objects if x.type == "MESH"]:
+        for p in o.data.polygons:
+            mi = p.material_index
+            if mi >= len(o.material_slots):
+                continue
+            mm = o.material_slots[mi].material
+            if not mm:
+                continue
+            n = mm.name
+            d = meta.get(n)
+            if d is None:
+                glass = getattr(mm, "blend_method", "OPAQUE") != "OPAQUE"
+                emiss = False
+                b = mm.node_tree.nodes.get("Principled BSDF") if (mm.use_nodes and mm.node_tree) else None
+                if b:
+                    try:
+                        tw = b.inputs.get("Transmission Weight") or b.inputs.get("Transmission")
+                        if tw and tw.default_value > 0.15:
+                            glass = True
+                        al = b.inputs.get("Alpha")
+                        if al and al.default_value < 0.9:
+                            glass = True
+                        es = b.inputs.get("Emission Strength")
+                        ec = b.inputs.get("Emission Color") or b.inputs.get("Emission")
+                        if es and ec and es.default_value > 0.01 and max(ec.default_value[:3]) > 0.05:
+                            emiss = True
+                    except Exception:
+                        pass
+                glass = glass or bool(_GLASS.search(n))
+                light = emiss or bool(_LIGHT.search(n))
+                excl = bool(glass or light or _TYRE.search(n) or _WHEEL.search(n)
+                            or _TRIM.search(n) or _INNER.search(n) or _DARKP.search(n))
+                meta[n] = {"area": 0.0, "glass": glass, "light": light,
+                           "excl": excl, "paint": bool(_PAINT.search(n)), "mat": mm}
+                d = meta[n]
+            d["area"] += p.area
+    return meta
+
+
+def _choose_body(meta):
+    """Body-paint material names: paint-named candidates plus the largest opaque
+    non-excluded material(s), so multi-panel bodies and generic-named ('Material_134',
+    'Misc') bodies both get repainted while glass/lights/wheels/interior are spared."""
+    cands = {n: d for n, d in meta.items() if not d["excl"]}
+    chosen = set(n for n, d in cands.items() if d["paint"])
+    if cands:
+        big = max(d["area"] for d in cands.values())
+        thresh = big * 0.55
+        for n, d in cands.items():
+            if d["area"] >= thresh:
+                chosen.add(n)
+    return chosen
+
 
 def _load_bpy():
     import bpy  # imported lazily so import errors surface in the handler
@@ -150,20 +220,16 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     except Exception:
         pass
 
-    # premium clearcoat (+ optional recolour) on the body-paint material only
-    area = {}
-    for o in meshes():
-        for p in o.data.polygons:
-            mi = p.material_index
-            if mi < len(o.material_slots) and o.material_slots[mi].material:
-                n = o.material_slots[mi].material.name
-                area[n] = area.get(n, 0.0) + p.area
-    name_re = re.compile(
-        r"(car[\s_-]?paint|bodypaint|lack|karosserie|paint|body|coat|exterior)", re.I)
-    named = [n for n in area if name_re.search(n)]
-    for bn in named:                       # recolour ALL body-paint materials
-        m = bpy.data.materials.get(bn)
-        if not m or not m.use_nodes:
+    # premium clearcoat (+ optional recolour) on the DETECTED body materials.
+    # Detection is by role flags + area in Blender (not just material name), so
+    # generic-named / non-English bodies still repaint and glass/lights/wheels
+    # are spared. Any baked texture or vertex-colour feeding Base Color is
+    # unlinked so the DVLA colour always wins (fixes camo-wrap models).
+    meta = _classify_materials(bpy)
+    chosen = _choose_body(meta)
+    for bn in chosen:
+        m = meta[bn]["mat"]
+        if not m or not m.use_nodes or not m.node_tree:
             continue
         b = m.node_tree.nodes.get("Principled BSDF")
         if not b:
@@ -430,6 +496,29 @@ def handler(job):
     ji = job.get("input", {})
     if ji.get("diag"):
         return _diag()
+    if ji.get("mat_audit"):
+        # Fast, render-free: import the GLB and report which materials the body
+        # detector picks, so we can measure recolour coverage across the library.
+        try:
+            bpy = _load_bpy()
+            glb = _fetch_glb(ji)
+            bpy.ops.wm.read_factory_settings(use_empty=True)
+            bpy.ops.import_scene.gltf(filepath=glb)
+            meta = _classify_materials(bpy)
+            chosen = _choose_body(meta)
+            tot = sum(d["area"] for d in meta.values()) or 1.0
+            table = sorted(
+                [{"name": n, "pct": round(100 * d["area"] / tot, 1),
+                  "glass": d["glass"], "light": d["light"], "excl": d["excl"],
+                  "paint": d["paint"], "body": n in chosen}
+                 for n, d in meta.items()], key=lambda r: -r["pct"])[:20]
+            return {"status": "success", "n_materials": len(meta),
+                    "chosen_body": sorted(chosen),
+                    "body_pct": round(sum(100 * meta[n]["area"] / tot for n in chosen), 1),
+                    "materials": table}
+        except Exception as e:
+            import traceback
+            return {"error": str(e), "traceback": traceback.format_exc()}
     try:
         bpy = _load_bpy()
         glb = _fetch_glb(ji)
