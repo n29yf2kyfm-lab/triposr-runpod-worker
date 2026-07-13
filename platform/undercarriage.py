@@ -51,7 +51,21 @@ def build(glb_in, glb_out, audit_flip=False):
     S=Ln/4.5                          # scale unit: 1.0 for a ~4.5m car
     gy=b[0][1]
     cx=ctr[0]; cz=ctr[2]
-    y0=gy+H*0.075                     # underbody plane
+    y0=gy+H*0.075                     # underbody plane (fallback)
+    # measure the body's REAL underbody line: lowest vertices in the central
+    # strip between the axles (excludes wheels/bumpers). The pan must sit at or
+    # above this or it shows as a slab under the sills on low cars (Golf GTE).
+    try:
+        _v=scene.dump(concatenate=True).vertices
+        la_=2 if size[2]>=size[0] else 0; wa_=0 if la_==2 else 2
+        _c=(np.abs(_v[:,wa_]-ctr[wa_])<Wd*0.28)
+        _fl=(_v[:,la_]-b[0][la_])/Ln
+        _c&= (_fl>0.30)&(_fl<0.70)
+        if _c.sum()>200:
+            ub=float(np.percentile(_v[_c][:,1],0.5))
+            y0=min(max(y0, ub+S*0.008), gy+H*0.17)
+    except Exception:
+        pass
     yd=lambda f: y0 - S*f             # hang below the pan by f (scale-relative)
     pan_parts=[]; gear_parts=[]
     def box(sx,sy,sz,x,y,z,dark=True):
@@ -86,8 +100,8 @@ def build(glb_in, glb_out, audit_flip=False):
         x,z=at(f_len,off_w)
         if length_axis==2: box(wid,h,Ln*len_frac, x,y,z,dark)
         else: box(Ln*len_frac,h,wid, x,y,z,dark)
-    # ---- floor pan (dark tray, slightly narrower so gear peeks out) ----
-    lbox(0.68, S*0.035, Wd*0.60, 0.5, y0, 0, True)
+    # ---- floor pan (dark tray; slim + raised so it never shows side-on) ----
+    lbox(0.62, S*0.028, Wd*0.44, 0.5, y0+S*0.02, 0, True)
     # ---- engine (front third) + gearbox — kept LOW (scale-relative, centred
     # on the floor line) so nothing pokes above a low van bonnet or shows
     # through glass when viewed from above ----
@@ -101,11 +115,9 @@ def build(glb_in, glb_out, audit_flip=False):
     # ---- front subframe / anti-roll bar ----
     fx,fz=at(0.14); tube(S*0.04,Wd*0.70, fx,yd(0.03),fz,wx,False)
     # ---- fuel tank (rear-mid, dark) ----
-    lbox(0.14, H*0.10, Wd*0.40, 0.62, y0-S*0.01, 0, True)
+    lbox(0.14, H*0.08, Wd*0.38, 0.62, y0+S*0.005, 0, True)
     # (exhaust line removed by request — pan + running gear only)
-    # ---- sills / heat shields ----
-    for side in (-1,1):
-        lbox(0.58, H*0.09, S*0.03, 0.5, y0+H*0.03, side*Wd*0.44, True)
+    # (sill heat-shields removed — they read as a slab on low-stance cars)
     # ---- UK number plates: white front / yellow rear, blue GB band ----
     pw=S*0.52; ph=S*0.115; pt=S*0.015           # 520x111mm plate on a 4.5m car
     py=gy+H*0.30
@@ -129,10 +141,10 @@ def build(glb_in, glb_out, audit_flip=False):
     pan=trimesh.util.concatenate(pan_parts)
     pan.visual=trimesh.visual.TextureVisuals(material=trimesh.visual.material.PBRMaterial(
         name="undercarriage_metal",baseColorFactor=[0.07,0.07,0.08,1.0],
-        metallicFactor=0.5,roughnessFactor=0.65))
+        metallicFactor=0.15,roughnessFactor=0.85))
     gear=trimesh.util.concatenate(gear_parts)
     gear.visual=trimesh.visual.TextureVisuals(material=trimesh.visual.material.PBRMaterial(
-        name="undercarriage_steel",baseColorFactor=[0.32,0.33,0.35,1.0],
+        name="undercarriage_steel",baseColorFactor=[0.20,0.21,0.23,1.0],
         metallicFactor=0.85,roughnessFactor=0.35))
     scene.add_geometry(pan, node_name="undercarriage")
     scene.add_geometry(gear, node_name="undercarriage_gear")

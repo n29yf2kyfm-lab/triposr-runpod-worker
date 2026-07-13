@@ -54,13 +54,12 @@
  {
   "make": "volkswagen",
   "model": "golf",
-  "source_title": "VW Golf Mk8 \u2014 GTI model, accents recoloured to GTE blue",
+  "source_title": "Volkswagen Golf GTI 2021",
   "colour_rendered": "Pure White",
   "colour_hex": "#e9ebee",
   "licence": "CC-BY (attribution required)",
   "tier": "B",
-  "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/golf/white/manifest.json",
+  "frame_count": 0,
   "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/vw/golf_uc.glb",
   "undercarriage": true
  },
