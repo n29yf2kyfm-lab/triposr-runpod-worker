@@ -84,8 +84,15 @@ _TYRE = _re.compile(r"(tyre|tire|rubber|reifen|pneu|gomma|llanta)", _re.I)
 _WHEEL = _re.compile(r"(wheel|\brim\b|alloy|\bhub\b|jante|felge|cerchi|caliper|\bbrake)", _re.I)
 _TRIM = _re.compile(r"(chrome|trim|grill|grille|badge|logo|emblem|number[\s_-]?plate|licen|mirror|molding|moulding|\bseal\b|wiper|antenna|handle)", _re.I)
 _INNER = _re.compile(r"(interior|seat|dash|leather|fabric|carpet|steering|cabin|\binner\b|interno|innen|cockpit|door[\s_-]?card|belt|pedal)", _re.I)
-_DARKP = _re.compile(r"(lower[\s_-]?clad|cladding|under[\s_-]?body|arch[\s_-]?liner|wheel[\s_-]?arch|sill[\s_-]?trim|mud[\s_-]?flap)", _re.I)
-_PAINT = _re.compile(r"(car[\s_-]?paint|body[\s_-]?paint|\bbody\b|\bpaint\b|pintura|\black\b|lackier|karosser|carrosser|carrocer|verniz|vernice|\bcoat\b|exterior|\bshell\b|chassis|metal[\s_-]?car|bodywork|paintwork|lacca)", _re.I)
+_DARKP = _re.compile(r"(lower[\s_-]?clad|cladding|\bunder\b|under[\s_-]?body|undercarriag|arch[\s_-]?liner|wheel[\s_-]?arch|sill[\s_-]?trim|mud[\s_-]?flap)", _re.I)
+_PAINT = _re.compile(r"(car[\s_-]?paint|body[\s_-]?paint|\bbody\w*|\bpaint\w*|pintura|\black\b|lackier|karosser|carrosser|carrocer|verniz|vernice|\bcoat\b|exterior|\bshell\b|chassis|metal[\s_-]?car|paintwork|lacca)", _re.I)
+
+
+def _norm_name(n):
+    """Material names use underscores/digits as separators ('Paint_Color',
+    'bodyh', 'body1'), which break \\b word boundaries — normalise before any
+    role-regex match."""
+    return _re.sub(r"[_\-.]+", " ", (n or "").lower())
 
 
 def _classify_materials(bpy):
@@ -100,12 +107,13 @@ def _classify_materials(bpy):
             if not mm:
                 continue
             n = mm.name
+            nn = _norm_name(n)
             d = meta.get(n)
             if d is None:
                 # Glass/light by name first, then only STRONG material signals
                 # (blend_method is unreliable across Blender versions, so it's
                 # not used). Default is opaque body-eligible.
-                glass = bool(_GLASS.search(n))
+                glass = bool(_GLASS.search(nn))
                 emiss = False
                 alpha = tw = None
                 b = mm.node_tree.nodes.get("Principled BSDF") if (mm.use_nodes and mm.node_tree) else None
@@ -133,11 +141,11 @@ def _classify_materials(bpy):
                             emiss = True
                     except Exception:
                         pass
-                light = emiss or bool(_LIGHT.search(n))
-                excl = bool(glass or light or _TYRE.search(n) or _WHEEL.search(n)
-                            or _TRIM.search(n) or _INNER.search(n) or _DARKP.search(n))
+                light = emiss or bool(_LIGHT.search(nn))
+                excl = bool(glass or light or _TYRE.search(nn) or _WHEEL.search(nn)
+                            or _TRIM.search(nn) or _INNER.search(nn) or _DARKP.search(nn))
                 meta[n] = {"area": 0.0, "glass": glass, "light": light,
-                           "excl": excl, "paint": bool(_PAINT.search(n)), "mat": mm,
+                           "excl": excl, "paint": bool(_PAINT.search(nn)), "mat": mm,
                            "dbg": {"alpha": alpha, "tw": tw, "emiss": emiss}}
                 d = meta[n]
             d["area"] += p.area
@@ -149,13 +157,23 @@ def _choose_body(meta):
     non-excluded material(s), so multi-panel bodies and generic-named ('Material_134',
     'Misc') bodies both get repainted while glass/lights/wheels/interior are spared."""
     cands = {n: d for n, d in meta.items() if not d["excl"]}
-    chosen = set(n for n, d in cands.items() if d["paint"])
-    if cands:
-        big = max(d["area"] for d in cands.values())
-        thresh = big * 0.55
-        for n, d in cands.items():
-            if d["area"] >= thresh:
-                chosen.add(n)
+    if not cands:
+        return set()
+    big = max(d["area"] for d in cands.values())
+    paint = set(n for n, d in cands.items() if d["paint"])
+    # explicitly paint-named materials are authoritative: on models that ALSO
+    # have a big generic-named material (trim atlas, underbody tray) the area
+    # rule would flood colour onto the wrong parts (Golf 'Paint_Color' 17% vs
+    # 'Index_0_1' 71%; A1 'bodyh'+'body1' vs 'under' 34%). Only fall back to
+    # area when the paint-named materials are implausibly small (mirror-cap
+    # sized) or absent.
+    if paint and sum(cands[n]["area"] for n in paint) >= big * 0.15:
+        return paint
+    chosen = set(paint)
+    thresh = big * 0.55
+    for n, d in cands.items():
+        if d["area"] >= thresh:
+            chosen.add(n)
     return chosen
 
 
