@@ -55,18 +55,22 @@ bpy.context.view_layer.objects.active = all_meshes()[0]
 bpy.ops.object.join()
 body = bpy.context.view_layer.objects.active; body.name = "Body"
 
-# ---- 6 symmetry + cleanup -------------------------------------------------
+# ---- 6 cleanup (+ OPTIONAL symmetry) --------------------------------------
+# NOTE: TRELLIS.2 output is usually ALREADY symmetric — bisect-mirroring it
+# caves in the far side. So symmetry is OPT-IN (--symmetry); default is a light
+# clean that preserves the generated geometry. Only mirror when one half is
+# genuinely bad.
 bpy.context.view_layer.objects.active = body; body.select_set(True)
 bpy.ops.object.mode_set(mode="EDIT"); bpy.ops.mesh.select_all(action="SELECT")
 bpy.ops.mesh.remove_doubles(threshold=0.0004)
 bpy.ops.mesh.normals_make_consistent(inside=False)
 bpy.ops.object.mode_set(mode="OBJECT")
-# choose width axis = smallest extent; mirror the +half onto -half (keep cleaner side)
-ext = body.dimensions
-wax = min(range(3), key=lambda i: ext[i])
-mir = body.modifiers.new("Mirror", "MIRROR"); mir.use_axis = [i == wax for i in range(3)]
-mir.use_bisect_axis = [i == wax for i in range(3)]; mir.use_clip = True
-cs = body.modifiers.new("Corrective", "CORRECTIVE_SMOOTH"); cs.factor = 0.4; cs.iterations = 8
+if "--symmetry" in argv:
+    ext = body.dimensions
+    wax = min(range(3), key=lambda i: ext[i])
+    mir = body.modifiers.new("Mirror", "MIRROR"); mir.use_axis = [i == wax for i in range(3)]
+    mir.use_bisect_axis = [i == wax for i in range(3)]; mir.use_clip = True
+cs = body.modifiers.new("Corrective", "CORRECTIVE_SMOOTH"); cs.factor = 0.3; cs.iterations = 6
 wn = body.modifiers.new("WeightedNormal", "WEIGHTED_NORMAL"); wn.keep_sharp = True; wn.weight = 60
 for p in body.data.polygons: p.use_smooth = True
 
