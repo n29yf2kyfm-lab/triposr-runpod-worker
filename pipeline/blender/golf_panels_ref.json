@@ -1,0 +1,8 @@
+[
+  {"part":"door_front_left",  "bbox":[0.55,1.00, 0.28,0.62, 0.42,0.66], "hinge_axis":"z","open_deg":62},
+  {"part":"door_rear_left",   "bbox":[0.55,1.00, 0.28,0.60, 0.20,0.44], "hinge_axis":"z","open_deg":60},
+  {"part":"door_front_right", "bbox":[0.00,0.45, 0.28,0.62, 0.42,0.66], "hinge_axis":"z","open_deg":-62},
+  {"part":"door_rear_right",  "bbox":[0.00,0.45, 0.28,0.60, 0.20,0.44], "hinge_axis":"z","open_deg":-60},
+  {"part":"bonnet",           "bbox":[0.15,0.85, 0.55,0.80, 0.72,1.00], "hinge_axis":"x","open_deg":-55},
+  {"part":"boot",             "bbox":[0.15,0.85, 0.40,0.85, 0.00,0.16], "hinge_axis":"x","open_deg":-48}
+]
