@@ -1,66 +1,109 @@
 """Generate a generic procedural undercarriage (floor pan, engine/gearbox,
 driveshaft, exhaust+muffler, fuel tank, subframes, axles) fitted to a car GLB's
-bounding box, and merge it in. glTF is Y-up; length = larger of X/Z footprint."""
+bounding box, and merge it in. glTF is Y-up; length = larger of X/Z footprint.
+
+v2: ALL dimensions scale-relative (works on mm- or m-scale models), and the
+running gear (exhaust line, muffler, tailpipe, driveshaft, axles) hangs
+VISIBLY below the floor pan so orbiting under the car shows real mechanicals,
+not a flat tray. Two-tone materials: dark pan + lighter steel components."""
 import sys,numpy as np,trimesh
 def build(glb_in, glb_out, audit_flip=False):
     scene=trimesh.load(glb_in)
     if not hasattr(scene,"geometry") or not scene.geometry:
         print("no geometry");return False
-    b=scene.bounds  # [[minx,miny,minz],[maxx,maxy,maxz]]
+    b=scene.bounds
     size=b[1]-b[0]; ctr=(b[0]+b[1])/2
-    # Y up
     W,H,L = size[0],size[1],size[2]
-    # ensure length is Z; if X>Z, swap axes роль by using max
     length_axis = 2 if size[2]>=size[0] else 0
-    width_axis = 0 if length_axis==2 else 2
-    Ln=size[length_axis]; Wd=size[width_axis]
-    gy=b[0][1]                      # ground (min Y)
+    Ln=size[length_axis]; Wd=size[0] if length_axis==2 else size[2]
+    S=Ln/4.5                          # scale unit: 1.0 for a ~4.5m car
+    gy=b[0][1]
     cx=ctr[0]; cz=ctr[2]
-    y0=gy+H*0.06                    # underbody plane a bit above ground
-    parts=[]
-    def add(mesh, colour=(40,42,46)):
-        parts.append(mesh)
-    def box(sx,sy,sz,x,y,z,colour=(40,42,46)):
-        m=trimesh.creation.box(extents=[sx,sy,sz]); m.apply_translation([x,y,z]); add(m,colour)
-    def tube(r,h,x,y,z,axis="z",colour=(70,72,78)):
-        m=trimesh.creation.cylinder(radius=r,height=h,sections=16)
-        if axis=="z": pass
-        elif axis=="x": m.apply_transform(trimesh.transformations.rotation_matrix(np.pi/2,[0,1,0]))
-        m.apply_translation([x,y,z]); add(m,colour)
-    # coordinate helpers along length(Z) and width(X)
-    def L_(f): return cz + (f-0.5)*Ln     # f in 0..1 along length
-    def X_(f): return cx + (f-0.5)*Wd     # f in 0..1 along width
-    # floor pan (dark tray) — kept tight within the footprint
-    box(Wd*0.66,0.03,Ln*0.70, cx,y0,cz,(28,29,32))
-    # engine/gearbox block (front third)
-    box(Wd*0.34,H*0.14,Ln*0.16, cx,y0+H*0.05,L_(0.22),(52,54,60))
-    box(Wd*0.22,H*0.10,Ln*0.10, cx,y0+H*0.02,L_(0.34),(46,48,54))  # gearbox
-    # driveshaft down centreline
-    tube(0.028,Ln*0.5, cx,y0+0.01,cz,"z",(90,92,98))
-    # rear axle / diff
-    tube(0.05,Wd*0.7, cx,y0+0.02,L_(0.80),"x",(70,72,78))
-    box(Wd*0.14,H*0.09,Ln*0.07, cx,y0+0.02,L_(0.80),(52,54,60))
-    # front subframe + control arms
-    tube(0.04,Wd*0.7, cx,y0,L_(0.15),"x",(60,62,68))
-    box(Wd*0.5,0.04,Ln*0.06, cx,y0,L_(0.15),(48,50,56))
-    # fuel tank (rear-mid, offset)
-    box(Wd*0.42,H*0.09,Ln*0.14, cx,y0+0.02,L_(0.62),(34,35,40))
-    # exhaust: pipe from engine to rear + muffler + tailpipe (offset to one side)
-    exo=X_(0.33)
-    tube(0.03,Ln*0.60, exo,y0-0.01,cz+Ln*0.02,"z",(120,122,128))
-    tube(0.075,Ln*0.14, exo,y0-0.01,L_(0.84),"z",(110,112,120))   # muffler
-    tube(0.028,Ln*0.08, exo,y0+0.0,L_(0.97),"z",(140,142,150))    # tailpipe
-    # heat shields / sills
-    box(0.03,H*0.10,Ln*0.6, X_(0.06),y0+H*0.04,cz,(30,31,35))
-    box(0.03,H*0.10,Ln*0.6, X_(0.94),y0+H*0.04,cz,(30,31,35))
-    under=trimesh.util.concatenate(parts)
-    # single dark metal PBR material named so the render recolour never touches it
-    mat=trimesh.visual.material.PBRMaterial(name="undercarriage_metal",
-        baseColorFactor=[0.06,0.06,0.07,1.0], metallicFactor=0.55, roughnessFactor=0.6)
-    under.visual=trimesh.visual.TextureVisuals(material=mat)
-    scene.add_geometry(under, node_name="undercarriage")
+    y0=gy+H*0.075                     # underbody plane
+    yd=lambda f: y0 - S*f             # hang below the pan by f (scale-relative)
+    pan_parts=[]; gear_parts=[]
+    def box(sx,sy,sz,x,y,z,dark=True):
+        m=trimesh.creation.box(extents=[sx,sy,sz]); m.apply_translation([x,y,z])
+        (pan_parts if dark else gear_parts).append(m)
+    def tube(r,h,x,y,z,axis="z",dark=False):
+        m=trimesh.creation.cylinder(radius=r,height=h,sections=18)
+        if axis=="x": m.apply_transform(trimesh.transformations.rotation_matrix(np.pi/2,[0,1,0]))
+        m.apply_translation([x,y,z]); (pan_parts if dark else gear_parts).append(m)
+    ax = "z" if length_axis==2 else "x"   # axis along the car length
+    wx = "x" if length_axis==2 else "z"   # axis across the car
+    # ---- orientation: which end is the FRONT? The roof mass (top ~22% of
+    # height) sits rear-of-centre on virtually all cars (bonnet is low), so the
+    # front is the end AWAY from the roof centroid. Mirror fractions if needed.
+    flip_len=False
+    try:
+        whole=scene.dump(concatenate=True)
+        v=whole.vertices
+        top=v[v[:,1] > (gy+H*0.78)]
+        if len(top)>50:
+            f_roof=(np.mean(top[:,length_axis]) - b[0][length_axis])/Ln
+            flip_len = f_roof < 0.5   # roof nearer f=0 → front is at f=1
+    except Exception:
+        pass
+    def at(f_len, off_w=0.0):
+        # (x,z) at fraction f_len along the length (0=front), off_w across width
+        if flip_len: f_len = 1.0-f_len
+        if length_axis==2: return cx+off_w, cz+(f_len-0.5)*Ln
+        else: return cx+(f_len-0.5)*Ln, cz+off_w
+    def lbox(len_frac, h, wid, f_len, y, off_w=0.0, dark=True):
+        # box aligned with the car: len_frac of length, wid across width
+        x,z=at(f_len,off_w)
+        if length_axis==2: box(wid,h,Ln*len_frac, x,y,z,dark)
+        else: box(Ln*len_frac,h,wid, x,y,z,dark)
+    # ---- floor pan (dark tray, slightly narrower so gear peeks out) ----
+    lbox(0.68, S*0.035, Wd*0.60, 0.5, y0, 0, True)
+    # ---- engine (front third) + gearbox hanging slightly low ----
+    lbox(0.15, H*0.16, Wd*0.36, 0.20, y0+H*0.04, 0, True)
+    lbox(0.11, H*0.11, Wd*0.20, 0.33, yd(0.01), 0, True)
+    # ---- driveshaft: chunky steel tube visibly below the pan ----
+    dx,dz=at(0.55); tube(S*0.045,Ln*0.45, dx,yd(0.055),dz,ax,False)
+    # ---- rear axle + diff ----
+    rx,rz=at(0.79); tube(S*0.055,Wd*0.72, rx,yd(0.05),rz,wx,False)
+    lbox(0.08, H*0.10, Wd*0.15, 0.79, yd(0.03), 0, True)
+    # ---- front subframe / anti-roll bar ----
+    fx,fz=at(0.14); tube(S*0.04,Wd*0.70, fx,yd(0.03),fz,wx,False)
+    # ---- fuel tank (rear-mid, dark) ----
+    lbox(0.14, H*0.10, Wd*0.40, 0.62, y0-S*0.01, 0, True)
+    # (exhaust line removed by request — pan + running gear only)
+    # ---- sills / heat shields ----
+    for side in (-1,1):
+        lbox(0.58, H*0.09, S*0.03, 0.5, y0+H*0.03, side*Wd*0.44, True)
+    # ---- UK number plates: white front / yellow rear, blue GB band ----
+    pw=S*0.52; ph=S*0.115; pt=S*0.015           # 520x111mm plate on a 4.5m car
+    py=gy+H*0.30
+    def plate(f_len,colour,name):
+        x,z=at(f_len)
+        ext=[pw,ph,pt] if length_axis==2 else [pt,ph,pw]
+        m=trimesh.creation.box(extents=ext); m.apply_translation([x,py,z])
+        m.visual=trimesh.visual.TextureVisuals(material=trimesh.visual.material.PBRMaterial(
+            name=name,baseColorFactor=colour,metallicFactor=0.0,roughnessFactor=0.35))
+        scene.add_geometry(m,node_name=name)
+        # blue GB band on the left edge, slightly proud to avoid z-fighting
+        bx,bz=at(f_len,-(pw/2-pw*0.055))
+        bext=[pw*0.11,ph*0.98,pt*1.08] if length_axis==2 else [pt*1.08,ph*0.98,pw*0.11]
+        bm=trimesh.creation.box(extents=bext); bm.apply_translation([bx,py,bz])
+        bm.visual=trimesh.visual.TextureVisuals(material=trimesh.visual.material.PBRMaterial(
+            name=name+"_gb",baseColorFactor=[0.02,0.14,0.55,1.0],metallicFactor=0.0,roughnessFactor=0.4))
+        scene.add_geometry(bm,node_name=name+"_gb")
+    plate(0.001,[0.90,0.91,0.93,1.0],"number_plate_front")
+    plate(0.999,[0.95,0.76,0.06,1.0],"number_plate_rear")
+    # ---- materials: dark pan, lighter steel gear so detail reads ----
+    pan=trimesh.util.concatenate(pan_parts)
+    pan.visual=trimesh.visual.TextureVisuals(material=trimesh.visual.material.PBRMaterial(
+        name="undercarriage_metal",baseColorFactor=[0.07,0.07,0.08,1.0],
+        metallicFactor=0.5,roughnessFactor=0.65))
+    gear=trimesh.util.concatenate(gear_parts)
+    gear.visual=trimesh.visual.TextureVisuals(material=trimesh.visual.material.PBRMaterial(
+        name="undercarriage_steel",baseColorFactor=[0.32,0.33,0.35,1.0],
+        metallicFactor=0.85,roughnessFactor=0.35))
+    scene.add_geometry(pan, node_name="undercarriage")
+    scene.add_geometry(gear, node_name="undercarriage_gear")
     if audit_flip:
-        scene.apply_transform(trimesh.transformations.rotation_matrix(np.pi,[0,0,1]))  # flip to show underside up
+        scene.apply_transform(trimesh.transformations.rotation_matrix(np.pi,[0,0,1]))
     scene.export(glb_out)
     return True
 if __name__=="__main__":
