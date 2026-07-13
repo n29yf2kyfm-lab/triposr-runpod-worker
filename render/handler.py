@@ -40,6 +40,12 @@ _RGB = {
     "gold": (0.60, 0.45, 0.08), "beige": (0.62, 0.56, 0.42),
     "purple": (0.20, 0.04, 0.30), "maroon": (0.28, 0.03, 0.05),
     "pink": (0.75, 0.20, 0.42), "turquoise": (0.05, 0.42, 0.42),
+    # premium/nuanced metallic shades
+    "gunmetal": (0.14, 0.16, 0.18), "gunmetal grey": (0.14, 0.16, 0.18),
+    "gunmetal-grey": (0.14, 0.16, 0.18), "gunmetal gray": (0.14, 0.16, 0.18),
+    "dark silver": (0.34, 0.36, 0.39), "dark-silver": (0.34, 0.36, 0.39),
+    "light silver": (0.70, 0.72, 0.76), "light-silver": (0.70, 0.72, 0.76),
+    "dark green": (0.02, 0.13, 0.07), "dark-green": (0.02, 0.13, 0.07),
 }
 
 _gpu_device = None  # cached across warm invocations
