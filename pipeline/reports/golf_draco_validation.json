@@ -1,0 +1,290 @@
+{
+ "uri": "golf.draco.glb",
+ "mimeType": "model/gltf-binary",
+ "validatorVersion": "2.0.0-dev.3.10",
+ "validatedAt": "2026-07-13T19:57:34.852Z",
+ "issues": {
+  "numErrors": 0,
+  "numWarnings": 2,
+  "numInfos": 19,
+  "numHints": 0,
+  "messages": [
+   {
+    "code": "UNSUPPORTED_EXTENSION",
+    "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+    "severity": 2,
+    "pointer": "/extensionsUsed/1"
+   },
+   {
+    "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+    "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+    "severity": 1,
+    "pointer": "/meshes/13/primitives/0/material"
+   },
+   {
+    "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+    "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+    "severity": 1,
+    "pointer": "/meshes/14/primitives/0/material"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/9"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/10"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/11"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/12"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/13"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/14"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/15"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/16"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/17"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/18"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/19"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/20"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/21"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/22"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/23"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/24"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/25"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/bufferViews/26"
+   }
+  ],
+  "truncated": false
+ },
+ "info": {
+  "version": "2.0",
+  "generator": "glTF-Transform v4.4.1",
+  "extensionsUsed": [
+   "EXT_texture_webp",
+   "KHR_draco_mesh_compression"
+  ],
+  "extensionsRequired": [
+   "EXT_texture_webp",
+   "KHR_draco_mesh_compression"
+  ],
+  "resources": [
+   {
+    "pointer": "/buffers/0",
+    "mimeType": "application/gltf-buffer",
+    "storage": "glb",
+    "byteLength": 999212
+   },
+   {
+    "pointer": "/images/0",
+    "mimeType": "image/webp",
+    "storage": "buffer-view",
+    "image": {
+     "width": 1024,
+     "height": 1024,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/1",
+    "mimeType": "image/webp",
+    "storage": "buffer-view",
+    "image": {
+     "width": 1024,
+     "height": 1024,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/2",
+    "mimeType": "image/webp",
+    "storage": "buffer-view",
+    "image": {
+     "width": 1024,
+     "height": 1024,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/3",
+    "mimeType": "image/webp",
+    "storage": "buffer-view",
+    "image": {
+     "width": 1024,
+     "height": 1024,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/4",
+    "mimeType": "image/webp",
+    "storage": "buffer-view",
+    "image": {
+     "width": 1024,
+     "height": 1024,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/5",
+    "mimeType": "image/webp",
+    "storage": "buffer-view",
+    "image": {
+     "width": 1024,
+     "height": 1024,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/6",
+    "mimeType": "image/webp",
+    "storage": "buffer-view",
+    "image": {
+     "width": 1024,
+     "height": 1024,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/7",
+    "mimeType": "image/webp",
+    "storage": "buffer-view",
+    "image": {
+     "width": 1024,
+     "height": 1024,
+     "format": "rgba",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/8",
+    "mimeType": "image/webp",
+    "storage": "buffer-view",
+    "image": {
+     "width": 1024,
+     "height": 512,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   }
+  ],
+  "animationCount": 0,
+  "materialCount": 10,
+  "hasMorphTargets": false,
+  "hasSkins": false,
+  "hasTextures": true,
+  "hasDefaultScene": true,
+  "drawCallCount": 18,
+  "totalVertexCount": 187106,
+  "totalTriangleCount": 242966,
+  "maxUVs": 1,
+  "maxInfluences": 0,
+  "maxAttributes": 3
+ }
+}

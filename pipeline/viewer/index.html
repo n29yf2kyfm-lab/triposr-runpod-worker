@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ExpertCarCheck — Three.js car viewer (dev)</title>
+<style>
+  :root{color-scheme:dark}
+  html,body{margin:0;height:100%;background:#0c1017;font-family:system-ui,sans-serif;color:#e8eef5}
+  #stage{position:fixed;inset:0}
+  .bar{position:fixed;left:50%;top:14px;transform:translateX(-50%);display:flex;gap:8px;flex-wrap:wrap;justify-content:center;z-index:5}
+  button,input[type=color]{background:#141b24;border:1px solid #26303c;color:#e8eef5;border-radius:10px;padding:9px 13px;font:13px system-ui;cursor:pointer}
+  button:active{transform:translateY(1px)}
+  #load{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);font:12px ui-monospace,monospace;color:#93a1b2;z-index:5}
+  #bar2{position:fixed;left:14px;bottom:14px;display:flex;gap:8px;z-index:5}
+</style>
+</head>
+<body>
+  <div id="stage"></div>
+  <div class="bar">
+    <button data-part="door">Doors</button>
+    <button data-part="bonnet">Bonnet</button>
+    <button data-part="boot">Boot</button>
+    <input type="color" id="paint" value="#3a4049" title="Paint colour">
+  </div>
+  <div id="bar2">
+    <button data-view="front">3/4 Front</button>
+    <button data-view="side">Side</button>
+    <button data-view="rear">Rear</button>
+  </div>
+  <div id="load">loading…</div>
+
+  <!-- Pinned Three.js via import map. For production, bundle locally instead of a CDN. -->
+  <script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }}
+  </script>
+  <script type="module">
+    import { CarViewer } from './car-viewer.js';
+    const params = new URLSearchParams(location.search);
+    const src = params.get('src') || '../build/golf.draco.glb';
+    const load = document.getElementById('load');
+    const viewer = new CarViewer(document.getElementById('stage'), {
+      src,
+      onProgress: (p) => { load.textContent = 'loading… ' + Math.round(p * 100) + '%'; },
+      onReady: () => { load.textContent = 'drag to orbit · scroll to zoom'; setTimeout(() => load.style.opacity = .0, 2500); },
+      onError: (e) => { load.textContent = 'viewer error: ' + e.message; },
+    });
+    document.querySelectorAll('[data-part]').forEach((b) =>
+      b.onclick = () => { if (!viewer.toggle(b.dataset.part)) b.textContent = b.dataset.part + ' (no rig)'; });
+    document.getElementById('paint').oninput = (e) => viewer.setPaint(e.target.value);
+    const views = { front:[3.6,1.5,4.6], side:[6,1.2,0.2], rear:[-3.4,1.6,-4.4] };
+    document.querySelectorAll('[data-view]').forEach((b) =>
+      b.onclick = () => { const v = views[b.dataset.view]; if (viewer.camera) { viewer.camera.position.set(...v); viewer.controls.update(); } });
+  </script>
+</body>
+</html>

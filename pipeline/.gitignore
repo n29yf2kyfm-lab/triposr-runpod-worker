@@ -1,0 +1,7 @@
+# keep the pipeline scripts + reports in git; keep heavy/regenerable binaries out
+masters/*.glb
+masters/*.gltf
+build/
+node_modules/
+package-lock.json
+*.tmp.glb

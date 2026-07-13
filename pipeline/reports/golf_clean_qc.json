@@ -1,0 +1,338 @@
+{
+ "status": "ok",
+ "source": "golf_clean.glb",
+ "blender": "4.0.2",
+ "objects": 18,
+ "totals": {
+  "verts": 186747,
+  "faces": 242966,
+  "tris": 242966,
+  "loose_verts": 0,
+  "nonmanifold": 118126,
+  "flipped": 37544,
+  "ngons": 0,
+  "degenerate": 0,
+  "doubles_est": 50558
+ },
+ "hierarchy": {
+  "door": [
+   "door_card_dark_golf_gte_v6.glb",
+   "door_card_dark_golf_v5_base.glb_1"
+  ]
+ },
+ "blockers": [
+  "37544 inward-facing faces (>2%) \u2014 recalculate normals"
+ ],
+ "warnings": [
+  "118126 non-manifold edges (expected on open-panel car models; block only if watertight parts required)",
+  "~50558 duplicate vertices \u2014 merge by distance"
+ ],
+ "per_object": [
+  {
+   "name": "cabin_light_golf_v5_base.glb",
+   "part": null,
+   "verts": 618,
+   "faces": 875,
+   "tris": 875,
+   "loose_verts": 0,
+   "nonmanifold_edges": 327,
+   "flipped_faces": 347,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 94,
+   "watertight": false,
+   "materials": [
+    "interior_light"
+   ]
+  },
+  {
+   "name": "cabin_light_Object_2",
+   "part": null,
+   "verts": 432,
+   "faces": 355,
+   "tris": 355,
+   "loose_verts": 0,
+   "nonmanifold_edges": 385,
+   "flipped_faces": 146,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 86,
+   "watertight": false,
+   "materials": [
+    "interior_light"
+   ]
+  },
+  {
+   "name": "door_card_dark_golf_gte_v6.glb",
+   "part": "door",
+   "verts": 166,
+   "faces": 126,
+   "tris": 126,
+   "loose_verts": 0,
+   "nonmanifold_edges": 154,
+   "flipped_faces": 24,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 24,
+   "watertight": false,
+   "materials": [
+    "interior_card_dark"
+   ]
+  },
+  {
+   "name": "door_card_dark_golf_v5_base.glb_1",
+   "part": "door",
+   "verts": 20,
+   "faces": 16,
+   "tris": 16,
+   "loose_verts": 0,
+   "nonmanifold_edges": 20,
+   "flipped_faces": 0,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 0,
+   "watertight": false,
+   "materials": [
+    "interior_card_dark"
+   ]
+  },
+  {
+   "name": "front_glass_tint_Object_4",
+   "part": null,
+   "verts": 4445,
+   "faces": 6157,
+   "tris": 6157,
+   "loose_verts": 0,
+   "nonmanifold_edges": 2519,
+   "flipped_faces": 1170,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 1044,
+   "watertight": false,
+   "materials": [
+    "front_glass_tint"
+   ]
+  },
+  {
+   "name": "interior_light_Object_2",
+   "part": null,
+   "verts": 619,
+   "faces": 972,
+   "tris": 972,
+   "loose_verts": 0,
+   "nonmanifold_edges": 256,
+   "flipped_faces": 262,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 24,
+   "watertight": false,
+   "materials": [
+    "interior_light"
+   ]
+  },
+  {
+   "name": "interior_rear_dark_golf_gte_v6.glb",
+   "part": null,
+   "verts": 201,
+   "faces": 222,
+   "tris": 222,
+   "loose_verts": 0,
+   "nonmanifold_edges": 136,
+   "flipped_faces": 0,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 27,
+   "watertight": false,
+   "materials": [
+    "interior_dark"
+   ]
+  },
+  {
+   "name": "interior_rear_dark_golf_v5_base.glb_1",
+   "part": null,
+   "verts": 223,
+   "faces": 340,
+   "tris": 340,
+   "loose_verts": 0,
+   "nonmanifold_edges": 96,
+   "flipped_faces": 32,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 14,
+   "watertight": false,
+   "materials": [
+    "interior_dark"
+   ]
+  },
+  {
+   "name": "privacy_glass_Object_4",
+   "part": null,
+   "verts": 5810,
+   "faces": 7302,
+   "tris": 7302,
+   "loose_verts": 0,
+   "nonmanifold_edges": 3880,
+   "flipped_faces": 981,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 1557,
+   "watertight": false,
+   "materials": [
+    "privacy_glass"
+   ]
+  },
+  {
+   "name": "roof_glass_Object_4",
+   "part": null,
+   "verts": 1219,
+   "faces": 1592,
+   "tris": 1592,
+   "loose_verts": 0,
+   "nonmanifold_edges": 764,
+   "flipped_faces": 164,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 176,
+   "watertight": false,
+   "materials": [
+    "roof_glass"
+   ]
+  },
+  {
+   "name": "Object_5",
+   "part": null,
+   "verts": 62094,
+   "faces": 77415,
+   "tris": 77415,
+   "loose_verts": 0,
+   "nonmanifold_edges": 43035,
+   "flipped_faces": 9899,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 18387,
+   "watertight": false,
+   "materials": [
+    "Index_0_1"
+   ]
+  },
+  {
+   "name": "Object_6",
+   "part": null,
+   "verts": 58400,
+   "faces": 71664,
+   "tris": 71664,
+   "loose_verts": 0,
+   "nonmanifold_edges": 40272,
+   "flipped_faces": 15581,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 19039,
+   "watertight": false,
+   "materials": [
+    "Index_0_1"
+   ]
+  },
+  {
+   "name": "Object_7",
+   "part": null,
+   "verts": 27946,
+   "faces": 32588,
+   "tris": 32588,
+   "loose_verts": 0,
+   "nonmanifold_edges": 20746,
+   "flipped_faces": 4749,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 9121,
+   "watertight": false,
+   "materials": [
+    "Index_0_1"
+   ]
+  },
+  {
+   "name": "Object_9",
+   "part": null,
+   "verts": 6298,
+   "faces": 10108,
+   "tris": 10108,
+   "loose_verts": 0,
+   "nonmanifold_edges": 2366,
+   "flipped_faces": 2524,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 650,
+   "watertight": false,
+   "materials": [
+    "Index_0_2"
+   ]
+  },
+  {
+   "name": "Object_11",
+   "part": null,
+   "verts": 152,
+   "faces": 164,
+   "tris": 164,
+   "loose_verts": 0,
+   "nonmanifold_edges": 120,
+   "flipped_faces": 0,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 34,
+   "watertight": false,
+   "materials": [
+    "Index_0_3"
+   ]
+  },
+  {
+   "name": "Object_13",
+   "part": null,
+   "verts": 17099,
+   "faces": 31787,
+   "tris": 31787,
+   "loose_verts": 0,
+   "nonmanifold_edges": 2385,
+   "flipped_faces": 1238,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 5,
+   "watertight": false,
+   "materials": [
+    "Paint_Color"
+   ]
+  },
+  {
+   "name": "Object_14",
+   "part": null,
+   "verts": 150,
+   "faces": 232,
+   "tris": 232,
+   "loose_verts": 0,
+   "nonmanifold_edges": 66,
+   "flipped_faces": 30,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 22,
+   "watertight": false,
+   "materials": [
+    "metal_white"
+   ]
+  },
+  {
+   "name": "steering_rhd_Object_2",
+   "part": null,
+   "verts": 855,
+   "faces": 1051,
+   "tris": 1051,
+   "loose_verts": 0,
+   "nonmanifold_edges": 599,
+   "flipped_faces": 397,
+   "ngons": 0,
+   "degenerate_faces": 0,
+   "dup_verts_est": 254,
+   "watertight": false,
+   "materials": [
+    "Index_0_1"
+   ]
+  }
+ ]
+}
