@@ -7,10 +7,42 @@ running gear (exhaust line, muffler, tailpipe, driveshaft, axles) hangs
 VISIBLY below the floor pan so orbiting under the car shows real mechanicals,
 not a flat tray. Two-tone materials: dark pan + lighter steel components."""
 import sys,numpy as np,trimesh
+
+def normalise_pose(scene):
+    """Fix models stored in the wrong rest pose: standing on the nose (length
+    along Y) or upside-down (roof toward the ground). Cars must lie flat,
+    wheels down, grounded at min-Y."""
+    R=trimesh.transformations.rotation_matrix
+    b=scene.bounds; size=b[1]-b[0]
+    # 1) standing up: Y is the longest dimension -> lay flat about X
+    if size[1]>=size[0] and size[1]>=size[2]:
+        scene.apply_transform(R(-np.pi/2,[1,0,0]))
+        b=scene.bounds; size=b[1]-b[0]
+    # 2) upside-down: cars are wider near the ground (wheels/sills) than the
+    # roof. Compare footprint width in the bottom vs top height-quartile.
+    try:
+        whole=scene.dump(concatenate=True); v=whole.vertices
+        la=2 if size[2]>=size[0] else 0
+        wa=0 if la==2 else 2
+        y0,y1=b[0][1],b[1][1];H=y1-y0
+        bot=v[v[:,1]<y0+H*0.25]; top=v[v[:,1]>y1-H*0.25]
+        if len(bot)>100 and len(top)>100:
+            # a car is LONGEST near the ground (bumper to bumper) and short at
+            # the roof; if the top band is longer, the model is upside-down
+            lb=bot[:,la].max()-bot[:,la].min()
+            lt=top[:,la].max()-top[:,la].min()
+            if lt>lb*1.15:
+                axis=[0,0,1] if la==2 else [1,0,0]   # 180° about the length axis
+                scene.apply_transform(R(np.pi,axis))
+    except Exception:
+        pass
+    return scene
+
 def build(glb_in, glb_out, audit_flip=False):
     scene=trimesh.load(glb_in)
     if not hasattr(scene,"geometry") or not scene.geometry:
         print("no geometry");return False
+    scene=normalise_pose(scene)
     b=scene.bounds
     size=b[1]-b[0]; ctr=(b[0]+b[1])/2
     W,H,L = size[0],size[1],size[2]
@@ -56,9 +88,11 @@ def build(glb_in, glb_out, audit_flip=False):
         else: box(Ln*len_frac,h,wid, x,y,z,dark)
     # ---- floor pan (dark tray, slightly narrower so gear peeks out) ----
     lbox(0.68, S*0.035, Wd*0.60, 0.5, y0, 0, True)
-    # ---- engine (front third) + gearbox hanging slightly low ----
-    lbox(0.15, H*0.16, Wd*0.36, 0.20, y0+H*0.04, 0, True)
-    lbox(0.11, H*0.11, Wd*0.20, 0.33, yd(0.01), 0, True)
+    # ---- engine (front third) + gearbox — kept LOW (scale-relative, centred
+    # on the floor line) so nothing pokes above a low van bonnet or shows
+    # through glass when viewed from above ----
+    lbox(0.15, S*0.11, Wd*0.36, 0.20, y0-S*0.01, 0, True)
+    lbox(0.11, S*0.09, Wd*0.20, 0.33, yd(0.02), 0, True)
     # ---- driveshaft: chunky steel tube visibly below the pan ----
     dx,dz=at(0.55); tube(S*0.045,Ln*0.45, dx,yd(0.055),dz,ax,False)
     # ---- rear axle + diff ----
