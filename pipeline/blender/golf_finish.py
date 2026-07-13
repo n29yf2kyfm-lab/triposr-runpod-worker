@@ -69,9 +69,15 @@ for m in bpy.data.materials:
     elif n in ("privacy_glass", "roof_glass"):
         setp(m, base=(0.012, 0.013, 0.016, 1), metal=0.0, rough=0.6)
     elif n == "front_glass_tint":
-        setp(m, base=(0.05, 0.055, 0.07, 1), metal=0.0, rough=0.12, alpha=0.62, blend=True)
+        # more opaque so the interior stops glaring white through the windscreen
+        setp(m, base=(0.035, 0.04, 0.05, 1), metal=0.0, rough=0.14, alpha=0.48, blend=True)
     elif n in ("interior_light",):
-        setp(m, base=(0.36, 0.35, 0.34, 1), metal=0.0, rough=0.88)
+        setp(m, base=(0.30, 0.29, 0.28, 1), metal=0.0, rough=0.9)
+    elif n == "interior_card_dark":
+        # LEFTOVER from old trimesh work — it reads as a wide dark slot in the
+        # door gap. Recolour it to the body paint so the doors read solid; the
+        # real thin panel seam in the mesh still shows.
+        setp(m, base=(0.055, 0.062, 0.075, 1), metal=0.85, rough=0.30, coat=1.0)
 
 bpy.ops.object.select_all(action="SELECT")
 bpy.ops.export_scene.gltf(filepath=OUT, export_format="GLB", use_selection=False,
