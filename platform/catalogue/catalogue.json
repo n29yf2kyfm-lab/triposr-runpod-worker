@@ -2128,7 +2128,8 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/m2/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/047b07b3-72ed-4042-a328-f8c649617279-u1.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/047b07b3-72ed-4042-a328-f8c649617279-u1_uc.glb",
+  "undercarriage": true
  },
  {
   "make": "bmw",
@@ -2140,6 +2141,33 @@
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/8-series/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/d06653a6-e7f5-4669-8131-b7c11d158efd-u1.glb"
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/d06653a6-e7f5-4669-8131-b7c11d158efd-u1_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "bmw",
+  "model": "x4",
+  "source_title": "TRELLIS.2 from owner photo (X4_2025_20d_MHT_M_Sport_Diesel_Hybrid)",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/x4/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/51a2161d-4e32-46e4-a77f-02532b82196e-u1_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "bmw",
+  "model": "xm",
+  "source_title": "TRELLIS.2 from owner photo (XM_2024_Label_Petrol_Hybrid)",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/xm/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/266667ea-f340-4aa8-8f91-fc27d307834b-u2_uc.glb",
+  "undercarriage": true
  }
 ]
