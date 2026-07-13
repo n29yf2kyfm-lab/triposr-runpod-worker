@@ -1,0 +1,87 @@
+{
+ "uri": "testcar_rigged.glb",
+ "mimeType": "model/gltf-binary",
+ "validatorVersion": "2.0.0-dev.3.10",
+ "validatedAt": "2026-07-13T20:06:08.215Z",
+ "issues": {
+  "numErrors": 0,
+  "numWarnings": 0,
+  "numInfos": 8,
+  "numHints": 0,
+  "messages": [
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/0/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/1/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/1/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/2/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/2/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/3/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/3/primitives/0/attributes/TEXCOORD_0"
+   }
+  ],
+  "truncated": false
+ },
+ "info": {
+  "version": "2.0",
+  "generator": "Khronos glTF Blender I/O v4.0.44",
+  "resources": [
+   {
+    "pointer": "/buffers/0",
+    "mimeType": "application/gltf-buffer",
+    "storage": "glb",
+    "byteLength": 6292
+   }
+  ],
+  "animationCount": 3,
+  "materialCount": 0,
+  "hasMorphTargets": false,
+  "hasSkins": false,
+  "hasTextures": false,
+  "hasDefaultScene": true,
+  "drawCallCount": 4,
+  "totalVertexCount": 96,
+  "totalTriangleCount": 48,
+  "maxUVs": 1,
+  "maxInfluences": 0,
+  "maxAttributes": 4
+ }
+}

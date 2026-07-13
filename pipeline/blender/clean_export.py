@@ -66,7 +66,7 @@ bpy.ops.export_scene.gltf(
     export_apply=False,               # keep pivots/hierarchy intact for animation
     export_yup=True,
     export_normals=True,
-    export_tangents=False,
+    export_tangents=True,             # clears MESH_PRIMITIVE_GENERATED_TANGENT_SPACE warnings
     export_materials="EXPORT",
     export_animations=True,
     export_extras=True,               # keep custom object names/props

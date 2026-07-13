@@ -16,7 +16,8 @@
     "@gltf-transform/extensions": "^4.4.1",
     "gltf-validator": "^2.0.0-dev.3.10",
     "gltfpack": "^0.22.0",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "three": "^0.160.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.0",

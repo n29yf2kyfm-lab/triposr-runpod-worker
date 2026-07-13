@@ -2,42 +2,18 @@
  "uri": "golf_clean.glb",
  "mimeType": "model/gltf-binary",
  "validatorVersion": "2.0.0-dev.3.10",
- "validatedAt": "2026-07-13T19:56:20.152Z",
+ "validatedAt": "2026-07-13T20:05:02.280Z",
  "issues": {
   "numErrors": 0,
-  "numWarnings": 6,
-  "numInfos": 1,
+  "numWarnings": 0,
+  "numInfos": 3,
   "numHints": 0,
   "messages": [
    {
-    "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
-    "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
-    "severity": 1,
-    "pointer": "/meshes/10/primitives/0/material"
-   },
-   {
-    "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
-    "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
-    "severity": 1,
-    "pointer": "/meshes/11/primitives/0/material"
-   },
-   {
-    "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
-    "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
-    "severity": 1,
-    "pointer": "/meshes/12/primitives/0/material"
-   },
-   {
-    "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
-    "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
-    "severity": 1,
-    "pointer": "/meshes/13/primitives/0/material"
-   },
-   {
-    "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
-    "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
-    "severity": 1,
-    "pointer": "/meshes/14/primitives/0/material"
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/15/primitives/0/attributes/TANGENT"
    },
    {
     "code": "UNUSED_OBJECT",
@@ -46,10 +22,10 @@
     "pointer": "/meshes/15/primitives/0/attributes/TEXCOORD_0"
    },
    {
-    "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
-    "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
-    "severity": 1,
-    "pointer": "/meshes/17/primitives/0/material"
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/16/primitives/0/attributes/TANGENT"
    }
   ],
   "truncated": false
@@ -62,7 +38,7 @@
     "pointer": "/buffers/0",
     "mimeType": "application/gltf-buffer",
     "storage": "glb",
-    "byteLength": 8920868
+    "byteLength": 11737396
    },
    {
     "pointer": "/images/0",
@@ -196,10 +172,10 @@
   "hasTextures": true,
   "hasDefaultScene": true,
   "drawCallCount": 18,
-  "totalVertexCount": 186747,
+  "totalVertexCount": 187760,
   "totalTriangleCount": 242966,
   "maxUVs": 1,
   "maxInfluences": 0,
-  "maxAttributes": 3
+  "maxAttributes": 4
  }
 }

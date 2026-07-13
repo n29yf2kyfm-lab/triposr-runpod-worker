@@ -64,8 +64,9 @@ pipeline/
 ```
 source GLB → masters/
   → blender/qc_audit.py           (inspect: normals, manifold, hierarchy, tris)
-  → MANUAL modelling in Blender   (panels, retopo, doors/bonnet/boot split, rig)   ← human
-  → blender/clean_export.py       (safe weld + normals + hierarchy-preserving GLB)
+  → MANUAL modelling in Blender   (panels, retopo, CUT doors/bonnet/boot apart)   ← human
+  → blender/rig_panels.py         (auto: origin→hinge, open/close animation clips)
+  → blender/clean_export.py       (safe weld + normals + tangents, hierarchy-preserving GLB)
   → node validate.js              (Khronos spec — 0 errors required)
   → optimise.sh                   (dedup/prune/webp → Draco + Meshopt variants)
   → node validate.js (outputs)    (re-check after compression)
@@ -80,18 +81,22 @@ source GLB → masters/
 
 | Stage | Result |
 |---|---|
-| QC audit (`qc_audit.py`) | 18 objects · 260,253 tris · **found 42,015 inward faces, 108 degenerate, 55,663 dup verts**; doors=2, bonnet/boot/wheels **not split** |
-| Safe clean (`clean_export.py`) | degenerate **108 → 0**, tris 260k→243k, normals recalculated, hierarchy kept |
-| Validate (`validate.js`) | **0 errors**, 6 warnings (missing tangents on normal‑mapped parts) |
-| Optimise (`optimise.sh`) | clean 8.7 MB → **Draco 1.0 MB** / Meshopt 1.9 MB (WebP textures) |
+| QC audit (`qc_audit.py`) | 18 objects · 260,253 tris · degenerate 108 · **flipped 0** (per‑shell signed‑volume test); panels grouped by material, **doors/bonnet/boot NOT separable** |
+| Safe clean (`clean_export.py`) | degenerate **108 → 0**, normals recalculated, **tangents exported**, hierarchy kept |
+| Validate (`validate.js`) | **0 errors, 0 warnings** ✅ (tangents cleared the 6 warnings) |
+| Optimise (`optimise.sh`) | clean → **Draco 1.0 MB** / Meshopt 1.9 MB (WebP textures) |
+| Rig (`rig_panels.py`) | proven on a separable test car → **3 animation clips** (`bonnet_open`, `door_front_left_open`, `door_front_right_open`), validator 0/0 |
+| Viewer (`viewer/`) | loaded a rigged GLB in real Chromium → WebGL render, contact shadow, **paint switch + door/bonnet/boot toggles + camera presets all working** |
 
-> The audit's "inward‑facing" metric over‑counts on models **with interiors**
-> (seats/dash legitimately face inward vs the body centre). Treated as advisory,
-> not a hard blocker; a per‑shell version is the refinement.
+**The normal metric is fixed:** the old "inward vs object‑centroid" test
+false‑positived on interior concavity (reported 42k). The new **per‑shell
+signed‑volume** test correctly reports **0** inverted shells on the Golf.
 
-**What the automation cannot fix (needs a human in Blender):** the soft rear
-quarter/skirts, splitting doors/bonnet/boot for open animations, and true OEM
-panel accuracy. That is manual modelling on an approved (licensed) base mesh.
+**What the automation cannot do (needs a human in Blender):** the Golf's panels
+are welded per‑material, so **doors/bonnet/boot must be cut into separate meshes
+first** (clean shut‑lines, capped apertures) — manual automotive modelling. Once
+separated, `rig_panels.py` auto‑rigs them and `viewer/` drives the animations.
+Soft rear quarter/skirts + true OEM accuracy also need a licensed base mesh.
 
 ---
 

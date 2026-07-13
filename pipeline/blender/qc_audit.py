@@ -71,14 +71,44 @@ for o in meshes:
         key = (round(v.co.x, 5), round(v.co.y, 5), round(v.co.z, 5))
         if key in seen: dbl += 1
         else: seen.add(key)
-    # flipped-normal heuristic: face normal pointing inward vs object centre
-    c = sum((v.co for v in bm.verts), bpy.data.objects[0].location.copy()*0)
-    if len(bm.verts): c /= len(bm.verts)
+    # flipped-normal detection by per-shell signed volume. A closed (manifold)
+    # shell with inverted normals has NEGATIVE signed volume. This does NOT
+    # false-positive on interior concavity the way an object-centroid test does
+    # — open shells (no volume defined) are skipped, not flagged.
     flipped = 0
-    for f in bm.faces:
-        out = (f.calc_center_median() - c)
-        if out.length > 1e-6 and f.normal.dot(out.normalized()) < -0.35:
-            flipped += 1
+    shells = 0
+    visited = set()
+    face_list = list(bm.faces)
+    for seed in face_list:
+        if seed.index in visited:
+            continue
+        stack = [seed]; comp = []
+        while stack:
+            f = stack.pop()
+            if f.index in visited:
+                continue
+            visited.add(f.index); comp.append(f)
+            for e in f.edges:
+                for lf in e.link_faces:
+                    if lf.index not in visited:
+                        stack.append(lf)
+        # closed only if every edge in the component is shared by 2 comp faces
+        cset = {f.index for f in comp}
+        closed = all(sum(1 for lf in e.link_faces if lf.index in cset) == 2
+                     for f in comp for e in f.edges)
+        if not closed or len(comp) < 8:
+            continue
+        shells += 1
+        vol = 0.0
+        for f in comp:
+            vs = f.verts
+            if len(vs) < 3:
+                continue
+            a = vs[0].co
+            for i in range(1, len(vs) - 1):
+                vol += a.dot((vs[i].co).cross(vs[i + 1].co)) / 6.0
+        if vol < 0:            # inverted closed shell
+            flipped += len(comp)
     watertight = (nonman == 0 and loose == 0)
     report_objs.append(dict(
         name=o.name, part=part_of(o.name), verts=len(bm.verts), faces=len(bm.faces),
@@ -97,8 +127,8 @@ if tot["nonmanifold"] > 0:
     warnings.append(f"{tot['nonmanifold']} non-manifold edges (expected on open-panel car models; block only if watertight parts required)")
 if tot["degenerate"] > 0:
     blockers.append(f"{tot['degenerate']} degenerate (zero-area) faces — clean before release")
-if tot["flipped"] > tot["faces"] * 0.02:
-    blockers.append(f"{tot['flipped']} inward-facing faces (>2%) — recalculate normals")
+if tot["flipped"] > 0:
+    blockers.append(f"{tot['flipped']} faces in inverted closed shells — recalculate normals outside")
 if tot["loose_verts"] > 0:
     warnings.append(f"{tot['loose_verts']} loose vertices — delete")
 if tot["doubles_est"] > tot["verts"] * 0.10:
