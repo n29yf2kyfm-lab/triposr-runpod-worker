@@ -72,29 +72,43 @@ def _classify_materials(bpy):
             n = mm.name
             d = meta.get(n)
             if d is None:
-                glass = getattr(mm, "blend_method", "OPAQUE") != "OPAQUE"
+                # Glass/light by name first, then only STRONG material signals
+                # (blend_method is unreliable across Blender versions, so it's
+                # not used). Default is opaque body-eligible.
+                glass = bool(_GLASS.search(n))
                 emiss = False
+                alpha = tw = None
                 b = mm.node_tree.nodes.get("Principled BSDF") if (mm.use_nodes and mm.node_tree) else None
                 if b:
                     try:
-                        tw = b.inputs.get("Transmission Weight") or b.inputs.get("Transmission")
-                        if tw and tw.default_value > 0.15:
-                            glass = True
-                        al = b.inputs.get("Alpha")
-                        if al and al.default_value < 0.9:
-                            glass = True
+                        t = b.inputs.get("Transmission Weight") or b.inputs.get("Transmission")
+                        if t is not None:
+                            tw = float(t.default_value)
+                            if tw > 0.5:
+                                glass = True
+                    except Exception:
+                        pass
+                    try:
+                        a = b.inputs.get("Alpha")
+                        if a is not None:
+                            alpha = float(a.default_value)
+                            if alpha < 0.55:
+                                glass = True
+                    except Exception:
+                        pass
+                    try:
                         es = b.inputs.get("Emission Strength")
                         ec = b.inputs.get("Emission Color") or b.inputs.get("Emission")
-                        if es and ec and es.default_value > 0.01 and max(ec.default_value[:3]) > 0.05:
+                        if es and ec and float(es.default_value) > 0.01 and max(ec.default_value[:3]) > 0.05:
                             emiss = True
                     except Exception:
                         pass
-                glass = glass or bool(_GLASS.search(n))
                 light = emiss or bool(_LIGHT.search(n))
                 excl = bool(glass or light or _TYRE.search(n) or _WHEEL.search(n)
                             or _TRIM.search(n) or _INNER.search(n) or _DARKP.search(n))
                 meta[n] = {"area": 0.0, "glass": glass, "light": light,
-                           "excl": excl, "paint": bool(_PAINT.search(n)), "mat": mm}
+                           "excl": excl, "paint": bool(_PAINT.search(n)), "mat": mm,
+                           "dbg": {"alpha": alpha, "tw": tw, "emiss": emiss}}
                 d = meta[n]
             d["area"] += p.area
     return meta
@@ -510,7 +524,7 @@ def handler(job):
             table = sorted(
                 [{"name": n, "pct": round(100 * d["area"] / tot, 1),
                   "glass": d["glass"], "light": d["light"], "excl": d["excl"],
-                  "paint": d["paint"], "body": n in chosen}
+                  "paint": d["paint"], "body": n in chosen, "dbg": d.get("dbg")}
                  for n, d in meta.items()], key=lambda r: -r["pct"])[:20]
             return {"status": "success", "n_materials": len(meta),
                     "chosen_body": sorted(chosen),
