@@ -46,7 +46,31 @@ _RGB = {
     "dark silver": (0.34, 0.36, 0.39), "dark-silver": (0.34, 0.36, 0.39),
     "light silver": (0.70, 0.72, 0.76), "light-silver": (0.70, 0.72, 0.76),
     "dark green": (0.02, 0.13, 0.07), "dark-green": (0.02, 0.13, 0.07),
+    # COLOUR_FAMILY values from platform/paint/oem_paint_db.csv — every family
+    # in the OEM paint database must resolve to a paint here (hyphen/space
+    # variants handled by _paint_rgb normalisation)
+    "pearl white": (0.85, 0.85, 0.87), "cream white": (0.80, 0.77, 0.68),
+    "dark blue": (0.02, 0.06, 0.24), "racing blue": (0.02, 0.16, 0.55),
+    "light blue": (0.35, 0.55, 0.75), "bright blue": (0.05, 0.25, 0.75),
+    "petrol blue": (0.02, 0.15, 0.20), "turquoise blue": (0.05, 0.42, 0.42),
+    "blue black": (0.02, 0.03, 0.08),
+    "dark grey": (0.16, 0.17, 0.19), "light grey": (0.55, 0.56, 0.58),
+    "cement grey": (0.45, 0.46, 0.45), "graphite grey": (0.11, 0.12, 0.13),
+    "dark gunmetal": (0.09, 0.10, 0.12),
+    "dark red": (0.30, 0.02, 0.03), "bright red": (0.60, 0.03, 0.03),
+    "burgundy": (0.24, 0.03, 0.07),
+    "bright green": (0.10, 0.55, 0.15), "emerald green": (0.02, 0.30, 0.16),
+    "olive green": (0.18, 0.20, 0.08), "khaki green": (0.25, 0.26, 0.14),
+    "sand": (0.60, 0.52, 0.38), "taupe": (0.35, 0.30, 0.26),
 }
+
+
+def _paint_rgb(colour):
+    """Palette lookup tolerant of slug form: 'Racing-Blue' == 'racing blue'."""
+    if not colour:
+        return None
+    k = str(colour).strip().lower()
+    return _RGB.get(k) or _RGB.get(k.replace("-", " "))
 
 _gpu_device = None  # cached across warm invocations
 
@@ -254,10 +278,11 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
         b = m.node_tree.nodes.get("Principled BSDF")
         if not b:
             continue
-        if colour and colour.lower() in _RGB:
+        _rgb = _paint_rgb(colour)
+        if _rgb is not None:
             for lnk in list(b.inputs["Base Color"].links):
                 m.node_tree.links.remove(lnk)
-            b.inputs["Base Color"].default_value = (*_RGB[colour.lower()], 1)
+            b.inputs["Base Color"].default_value = (*_rgb, 1)
             b.inputs["Metallic"].default_value = 0.6
         b.inputs["Roughness"].default_value = 0.11
         if "Coat Weight" in b.inputs:
@@ -358,7 +383,9 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     # studio mode wins: keep the clean dark backdrop for the camera while a
     # bright HDRI still lights + reflects on the car, so even black reads
     # premium on a clean studio ground (no visible room).
-    use_bright = (bright or (colour and colour.lower() in _dark)) and not studio
+    _ckey = (colour or "").lower().replace("-", " ")
+    _is_dark = any(w in _dark for w in _ckey.split()) or _ckey.startswith("dark")
+    use_bright = (bright or (colour and _is_dark)) and not studio
     if studio:
         # boost reflection/lighting so dark paint still pops against the clean
         # backdrop, but the camera only ever sees the dark graded ground.
