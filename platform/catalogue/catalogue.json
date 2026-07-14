@@ -339,15 +339,15 @@
  {
   "make": "volkswagen",
   "model": "passat",
-  "source_title": "low-poly Volkswagen Passat B8",
+  "source_title": "TRELLIS.2 from owner photo (Passat_2022_SEL_Petrol)",
   "colour_rendered": "Native (as-modelled)",
-  "colour_hex": "#8a8f98",
-  "licence": "CC-BY (attribution required)",
+  "colour_hex": "#9aa0a6",
+  "licence": "generated (TRELLIS.2 MIT, owner-supplied photo)",
   "tier": "B",
-  "frame_count": 36,
-  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/passat/native/manifest.json",
-  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/passat_uc.glb",
-  "undercarriage": true
+  "frame_count": 0,
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/3364b6b6-11e6-4240-b2ac-a1a4fe226947-u1_uc.glb",
+  "undercarriage": true,
+  "replaced": "was: low-poly Volkswagen Passat B8 (rendered blank)"
  },
  {
   "make": "bmw",
@@ -2299,6 +2299,18 @@
   "tier": "B",
   "frame_count": 0,
   "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/e1b1c17c-9e98-4e5d-bfb3-aeaa8916dfd5-u1_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "volkswagen",
+  "model": "id5",
+  "source_title": "TRELLIS.2 from owner photo (ID.5_2023_Pro_77kWh_Electric)",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#1d2e38",
+  "licence": "generated (TRELLIS.2 MIT, owner-supplied photo)",
+  "tier": "B",
+  "frame_count": 0,
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/7d353e58-64b0-409f-a51c-f2734fafd058-u1_uc.glb",
   "undercarriage": true
  }
 ]
