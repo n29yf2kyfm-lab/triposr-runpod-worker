@@ -28,6 +28,14 @@ for o in bpy.context.scene.objects:
         continue
     pi = next(i for i, m in enumerate(o.data.materials)
               if m and m.name in ("Paint_Color", "Car_Paint"))
+    seam = bpy.data.materials.new("seam_dark")
+    seam.use_nodes = True
+    sb = seam.node_tree.nodes["Principled BSDF"]
+    sb.inputs["Base Color"].default_value = (0.015, 0.016, 0.018, 1)
+    sb.inputs["Metallic"].default_value = 0.0
+    sb.inputs["Roughness"].default_value = 0.95
+    o.data.materials.append(seam)
+    si = len(o.data.materials) - 1
     bm = bmesh.new(); bm.from_mesh(o.data)
     bm.verts.ensure_lookup_table()
 
@@ -149,7 +157,7 @@ for o in bpy.context.scene.objects:
             continue
         try:
             f = bm.faces.new(quad)
-            f.material_index = pi
+            f.material_index = si
             f.smooth = True
             made += 1
         except ValueError:
