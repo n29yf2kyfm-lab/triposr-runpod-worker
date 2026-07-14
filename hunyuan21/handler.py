@@ -74,13 +74,16 @@ def handler(job):
         img = Image.open(BytesIO(requests.get(inp["image_url"], timeout=120).content))
     else:
         return {"error": "need image_b64 or image_url"}
-    # rembg must see the original RGB photo — converting to RGBA first would
-    # skip it and the background becomes geometry (learned on first smoke test)
-    if img.mode != "RGBA":
-        if inp.get("remove_bg", True):
-            img = rembg(img.convert("RGB"))
-        else:
-            img = img.convert("RGBA")
+    # Always re-run background removal on the flattened photo (unless the
+    # caller opts out): incoming alpha cannot be trusted — a soft matte leaves
+    # a ghost of the scene after the white composite and the model builds it
+    # as a billboard wall (measured: 61% of pixels at partial alpha on smoke
+    # test 2). Tencent's remover paints the background white (bgcolor
+    # 255,255,255,0), which is what the shape pipeline expects.
+    if inp.get("remove_bg", True):
+        img = rembg(img.convert("RGB"))
+    else:
+        img = img.convert("RGBA")
 
     seed = int(inp.get("seed", 0))
     torch.manual_seed(seed)
