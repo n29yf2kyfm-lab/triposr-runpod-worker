@@ -50,21 +50,70 @@ for o in bpy.context.scene.objects:
                         stack.append(n)
         cur += 1
 
+    # --- de-ripple: smooth every boundary polyline along itself so bent
+    # door-edge lips (source-mesh damage) straighten out. Displacement is
+    # capped so clean edges and arch lips barely move.
+    badj0 = {v.index: [e.other_vert(v).index for e in v.link_edges
+                       if len(e.link_faces) == 1] for v in bverts}
+    orig = {v.index: v.co.copy() for v in bverts}
+    for _ in range(20):
+        newpos = {}
+        for v in bverts:
+            ns = badj0.get(v.index, [])
+            if len(ns) != 2:
+                continue
+            mid = (bm.verts[ns[0]].co + bm.verts[ns[1]].co) / 2
+            newpos[v.index] = v.co + (mid - v.co) * 0.4
+        for vi, p in newpos.items():
+            bm.verts[vi].co = p
+    CAP = 0.008
+    moved = 0
+    for v in bverts:
+        d = v.co - orig[v.index]
+        if d.length > CAP:
+            v.co = orig[v.index] + d.normalized() * CAP
+        if d.length > 0.0015:
+            moved += 1
+            # carry half the correction into the 1-ring so the lip follows
+            for e in v.link_edges:
+                n = e.other_vert(v)
+                if n.index not in badj0:      # interior neighbour only
+                    n.co += (v.co - orig[v.index]) * 0.28
+    print(f"DERIPPLED {moved} boundary verts (cap {CAP*1000:.0f}mm)")
+
     kd = KDTree(len(bverts))
     for i, v in enumerate(bverts):
         kd.insert(v.co, i)
     kd.balance()
 
-    # partner for each boundary vert: nearest vert on another loop, gap
-    # opening in-plane, faces same way
+    # boundary adjacency + BFS hop distance (capped) so a single loop that
+    # wraps both sides of a shut-line can still pair across the gap
+    badj = {v.index: [e.other_vert(v).index for e in v.link_edges
+                      if len(e.link_faces) == 1] for v in bverts}
+    HOPS = 30
+    def hop_far(a, b):
+        seen = {a}; frontier = [a]
+        for _ in range(HOPS):
+            nxt = []
+            for x in frontier:
+                for n in badj.get(x, []):
+                    if n == b:
+                        return False
+                    if n not in seen:
+                        seen.add(n); nxt.append(n)
+            frontier = nxt
+        return True
+
+    # partner for each boundary vert: nearest vert across the gap — another
+    # loop, or the same loop if topologically distant along the boundary
     partner = {}
     for v in bverts:
         best = None
         for co, i, d in kd.find_range(v.co, MAXG):
             u = bverts[i]
-            if loop_id[u.index] == loop_id[v.index]:
+            if loop_id[u.index] == loop_id[v.index] and not hop_far(v.index, u.index):
                 continue
-            if v.normal.dot(u.normal) < 0.55:
+            if v.normal.dot(u.normal) < 0.45:
                 continue
             dirv = u.co - v.co
             if dirv.length < 1e-9:
