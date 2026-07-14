@@ -48,6 +48,10 @@ don't fabricate an RCA when nothing is broken.
   body-paint material — audit every new car's render before it ships.
 - **Never** hardcode Supabase/RunPod/Docker secrets in the repo (push
   protection blocks them); use env vars.
+- **HANDS OFF the car-damage pods** (owner instruction 2026-07-14): the
+  `car-damage-*` pods (e.g. `car-damage-merge-transfer2`, currently RUNNING on
+  purpose) belong to a separate workstream. Never stop, restart or modify
+  them, and don't flag their cost.
 
 ## Accuracy rule — do NOT fabricate vehicle metadata (learned 2026-07-12)
 
