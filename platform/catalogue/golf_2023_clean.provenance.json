@@ -1,0 +1,68 @@
+{
+ "asset": "vw/golf_2023_clean_uc.glb",
+ "contentHash": "sha256:5e7cc2c1dfcf14d9e49537921c2476182e623f2dc7e49e2b0e589e2b6e3b2f50",
+ "provenance": "generated-from-reference",
+ "engine": "TRELLIS.2-4B",
+ "winningReference": "File:Volkswagen Golf VIII GTE 1X7A6487.jpg (CC BY-SA 4.0)",
+ "references": [
+  {
+   "title": "File:Volkswagen Golf VIII GTE 1X7A6487.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Volkswagen_Golf_VIII_GTE_1X7A6487.jpg/1920px-Volkswagen_Golf_VIII_GTE_1X7A6487.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Volkswagen_Golf_VIII_GTE_1X7A6487.jpg",
+   "licence": "CC BY-SA 4.0",
+   "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Alexander-93\" tit",
+   "local": "golf23_refs/img/Volkswagen_Golf_VIII_GTE_1X7A6487.jpg"
+  },
+  {
+   "title": "File:Volkswagen Golf VIII GTI (2023) (52712386782).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Volkswagen_Golf_VIII_GTI_%282023%29_%2852712386782%29.jpg/1920px-Volkswagen_Golf_VIII_GTI_%282023%29_%2852712386782%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Volkswagen_Golf_VIII_GTI_(2023)_(52712386782).jpg",
+   "licence": "CC BY 2.0",
+   "artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.fl",
+   "local": "golf23_refs/img/Volkswagen_Golf_VIII_GTI_(2023)_(52712386782).jpg"
+  },
+  {
+   "title": "File:2023 Volkswagen Golf GTI interior.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/20/2023_Volkswagen_Golf_GTI_interior.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:2023_Volkswagen_Golf_GTI_interior.jpg",
+   "licence": "CC BY-SA 4.0",
+   "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Deathpallie325&amp;actio",
+   "local": "golf23_refs/img/2023_Volkswagen_Golf_GTI_interior.jpg"
+  },
+  {
+   "title": "File:VW Golf GTI IR1.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/VW_Golf_GTI_IR1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:VW_Golf_GTI_IR1.jpg",
+   "licence": "CC BY-SA 4.0",
+   "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Sokrates_399\" title=\"User:Sokrates 39",
+   "local": "golf23_refs/img/VW_Golf_GTI_IR1.jpg"
+  },
+  {
+   "title": "File:Volkswagen GOLF R Black Edition (7BA-CDDNFF) interior.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Volkswagen_GOLF_R_Black_Edition_%287BA-CDDNFF%29_interior.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Volkswagen_GOLF_R_Black_Edition_(7BA-CDDNFF)_interior.jpg",
+   "licence": "CC0",
+   "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Tokumeigakarinoaoshima\" title=\"User:T",
+   "local": "golf23_refs/img/Volkswagen_GOLF_R_Black_Edition_(7BA-CDDNFF)_interior.jpg"
+  },
+  {
+   "title": "File:Volkswagen Golf VIII R 1X7A7089.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Volkswagen_Golf_VIII_R_1X7A7089.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Volkswagen_Golf_VIII_R_1X7A7089.jpg",
+   "licence": "CC BY-SA 4.0",
+   "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Alexander-93\" title=\"User:Alexander-9",
+   "local": "golf23_refs/img/Volkswagen_Golf_VIII_R_1X7A7089.jpg"
+  },
+  {
+   "title": "File:Volkswagen Golf VIII phase 2 (int\u00e9rieur).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Volkswagen_Golf_VIII_phase_2_%28int%C3%A9rieur%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Volkswagen_Golf_VIII_phase_2_(int%C3%A9rieur).jpg",
+   "licence": "CC BY-SA 4.0",
+   "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Y.Leclercq\" title=\"User:Y.Leclercq\">Y",
+   "local": "golf23_refs/img/Volkswagen_Golf_VIII_phase_2_(int\u00e9rieur).jpg"
+  }
+ ],
+ "finish": "dolphin-grey hue remap + GB plates + 1024/webp/draco",
+ "interiorAttempt": "rejected (score 0.55, fragment blob) \u2014 interiorMode stays none",
+ "createdAt": "2026-07-14"
+}
