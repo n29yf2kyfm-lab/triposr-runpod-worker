@@ -110,3 +110,25 @@ only, per rules 7–8.
   repeated "put it on a pod" instinct: the pod is the real lever for batch speed.
 - **KPIs to watch:** endpoint `throttled` count, `inQueue` depth, wall-time/frame,
   cold-start gaps between cars.
+
+### 2026-07-14 — workersMax keeps zeroing itself (confidence ~85%)
+- **Symptom:** serverless endpoints (TRELLIS + render) externally reset to
+  workersMax=0 ~10x in one day; jobs queue forever.
+- **Root cause (evidence):** BOTH endpoints zero simultaneously each time —
+  signature of RunPod's low-balance guard, not a bug. Balance unreadable via
+  this API key (403). **Action: user checks runpod.io billing / tops up.**
+- **Workaround:** babysitter loop re-PATCHes {"workersMax":N} until batch done
+  (scratchpad/babysit_workers.py).
+
+### 2026-07-14 — lessons that cost real time
+- **Draco GLBs render BLANK in the local model-viewer harness** unless
+  dracoDecoderLocation points at the local decoder (mv_local/draco/). A blank
+  render or trimesh score of a _uc.glb proves nothing about the model.
+  (Falsely called the old Passat "broken" because of this.)
+- **Golf gap fixes — method history:** vertex-weld TEARS mesh; vertex-pull
+  DENTS panels (user-visible); the shipped method is bridge_gaps.py: recessed
+  floor quads between gap edges + capped boundary de-ripple + non-manifold
+  solidify. Verify renders on BOTH sides at the user's viewing angle.
+- **Golf hero:** user chose to KEEP the sourced+fixed model (v25/gm24) over
+  the seamless-but-soft TRELLIS rebuild (staged at vw/golf_scratch_uc.glb).
+  Licensed Mk8 with interior remains the real premium fix.
