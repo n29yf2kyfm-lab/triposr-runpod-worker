@@ -7,13 +7,17 @@ FROM nvidia/cuda:12.4.1-devel-ubuntu22.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 
+# python 3.11 (not 3.10): every bpy wheel on PyPI is cp311/cp313-only, and
+# hy3dpaint needs bpy for its OBJ->GLB export (convert_obj_to_glb).
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git wget curl build-essential ninja-build cmake \
-    python3.10 python3.10-dev python3-pip \
+    python3.11 python3.11-dev python3.11-venv python3.11-distutils \
     libgl1 libglib2.0-0 libsm6 libxext6 libxrender1 ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
-RUN ln -sf /usr/bin/python3.10 /usr/bin/python && ln -sf /usr/bin/pip3 /usr/bin/pip
+RUN ln -sf /usr/bin/python3.11 /usr/bin/python && \
+    curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11 && \
+    ln -sf /usr/local/bin/pip3.11 /usr/bin/pip
 
 WORKDIR /app
 RUN git clone --depth 1 https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1.git
@@ -26,7 +30,9 @@ RUN pip install --upgrade pip && \
 # time and is training-only; gradio/fastapi/uvicorn/pythreejs are demo-web).
 # basicsr/realesrgan import torch in setup.py -> install build deps first and
 # disable PEP-517 build isolation so they can see the installed torch.
-RUN sed -i '/extra-index-url/d; /deepspeed/d; /gradio/d; /fastapi/d; /uvicorn/d; /pythreejs/d' requirements.txt && \
+# bpy==4.0 was never published to PyPI; 4.2.x is the LTS line for py3.11 and
+# the repo's mesh_utils already branches on >=4.2 APIs (shade_auto_smooth).
+RUN sed -i '/extra-index-url/d; /deepspeed/d; /gradio/d; /fastapi/d; /uvicorn/d; /pythreejs/d; s/^bpy==.*/bpy==4.2.22/' requirements.txt && \
     pip install --no-cache-dir ninja==1.11.1.1 pybind11==2.13.4 wheel setuptools && \
     pip install --no-cache-dir --no-build-isolation -r requirements.txt && \
     pip install --no-cache-dir runpod requests
