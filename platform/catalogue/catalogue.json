@@ -2288,5 +2288,17 @@
   "frame_count": 0,
   "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/b16b9762-05f6-4c9c-b498-3c92b512340f-u2_uc.glb",
   "undercarriage": true
+ },
+ {
+  "make": "volkswagen",
+  "model": "taigo",
+  "source_title": "TRELLIS.2 from owner photo (Taigo_2023_R-Line_Petrol)",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#e8eaec",
+  "licence": "generated (TRELLIS.2 MIT, owner-supplied photo)",
+  "tier": "B",
+  "frame_count": 0,
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/e1b1c17c-9e98-4e5d-bfb3-aeaa8916dfd5-u1_uc.glb",
+  "undercarriage": true
  }
 ]
