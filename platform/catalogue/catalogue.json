@@ -2056,14 +2056,15 @@
   "make": "bmw",
   "model": "5-series",
   "source_title": "BMW 5-Series Sedan (G30) LCI",
-  "colour_rendered": "Native (as-modelled)",
-  "colour_hex": "#8a8f98",
+  "colour_rendered": "Black (recoloured from blue)",
+  "colour_hex": "#0a0c10",
   "licence": "CC-BY (attribution required)",
   "tier": "B",
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/5-series/native/manifest.json",
   "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/5-series_uc.glb",
-  "undercarriage": true
+  "undercarriage": true,
+  "notes": "showroom platform removed 2026-07-14"
  },
  {
   "make": "bmw",
