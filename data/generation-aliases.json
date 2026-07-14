@@ -1,0 +1,60 @@
+{
+  "volkswagen/golf": {
+    "mk5": { "yearStart": 2003, "yearEnd": 2008, "aliases": ["golf 5", "5th generation", "1k"] },
+    "mk6": { "yearStart": 2008, "yearEnd": 2012, "aliases": ["golf 6", "6th generation", "5k"] },
+    "mk7": { "yearStart": 2012, "yearEnd": 2017, "aliases": ["golf 7", "7th generation", "5g"] },
+    "mk7.5": { "yearStart": 2017, "yearEnd": 2020, "aliases": ["golf 7.5", "mk7 facelift"] },
+    "mk8": { "yearStart": 2020, "yearEnd": 2024, "aliases": ["golf 8", "8th generation", "cd1"] },
+    "mk8.5": { "yearStart": 2024, "yearEnd": null, "aliases": ["golf 8.5", "mk8 facelift"] }
+  },
+  "audi/a3": {
+    "8p": { "yearStart": 2003, "yearEnd": 2012, "aliases": ["a3 8p"] },
+    "8v": { "yearStart": 2012, "yearEnd": 2020, "aliases": ["a3 8v"] },
+    "8y": { "yearStart": 2020, "yearEnd": null, "aliases": ["a3 8y"] }
+  },
+  "mercedes-benz/c-class": {
+    "w204": { "yearStart": 2007, "yearEnd": 2014, "aliases": ["c class w204"] },
+    "w205": { "yearStart": 2014, "yearEnd": 2021, "aliases": ["c class w205"] },
+    "w206": { "yearStart": 2021, "yearEnd": null, "aliases": ["c class w206"] }
+  },
+  "mercedes-benz/a-class": {
+    "w176": { "yearStart": 2012, "yearEnd": 2018, "aliases": [] },
+    "w177": { "yearStart": 2018, "yearEnd": null, "aliases": [] }
+  },
+  "bmw/3-series": {
+    "e90": { "yearStart": 2005, "yearEnd": 2012, "aliases": [] },
+    "f30": { "yearStart": 2012, "yearEnd": 2019, "aliases": [] },
+    "g20": { "yearStart": 2019, "yearEnd": null, "aliases": [] }
+  },
+  "bmw/5-series": {
+    "f10": { "yearStart": 2010, "yearEnd": 2017, "aliases": [] },
+    "g30": { "yearStart": 2017, "yearEnd": 2023, "aliases": ["g30 lci"] },
+    "g60": { "yearStart": 2023, "yearEnd": null, "aliases": [] }
+  },
+  "bmw/1-series": {
+    "f20": { "yearStart": 2011, "yearEnd": 2019, "aliases": [] },
+    "f40": { "yearStart": 2019, "yearEnd": null, "aliases": [] }
+  },
+  "ford/fiesta": {
+    "mk7": { "yearStart": 2008, "yearEnd": 2017, "aliases": [] },
+    "mk8": { "yearStart": 2017, "yearEnd": 2023, "aliases": [] }
+  },
+  "ford/focus": {
+    "mk3": { "yearStart": 2011, "yearEnd": 2018, "aliases": [] },
+    "mk4": { "yearStart": 2018, "yearEnd": null, "aliases": [] }
+  },
+  "nissan/qashqai": {
+    "j11": { "yearStart": 2013, "yearEnd": 2021, "aliases": [] },
+    "j12": { "yearStart": 2021, "yearEnd": null, "aliases": [] }
+  },
+  "nissan/x-trail": {
+    "t32": { "yearStart": 2013, "yearEnd": 2021, "aliases": ["mk3"] },
+    "t33": { "yearStart": 2021, "yearEnd": null, "aliases": [] }
+  },
+  "vauxhall/astra": {
+    "g": { "yearStart": 1998, "yearEnd": 2004, "aliases": ["bertone"] },
+    "j": { "yearStart": 2009, "yearEnd": 2015, "aliases": [] },
+    "k": { "yearStart": 2015, "yearEnd": 2021, "aliases": [] },
+    "l": { "yearStart": 2021, "yearEnd": null, "aliases": [] }
+  }
+}

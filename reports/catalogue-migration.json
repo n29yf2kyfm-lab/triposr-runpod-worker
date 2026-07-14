@@ -1,0 +1,76 @@
+{
+ "migratedAt": "2026-07-14T12:18:12.912692Z",
+ "total": 180,
+ "approved": 166,
+ "quarantined": [
+  [
+   "mini",
+   "countryman",
+   "stub asset: 113 KB"
+  ],
+  [
+   "hyundai",
+   "ioniq",
+   "over mobile weight limit (15278 KB) — optimise then re-approve"
+  ],
+  [
+   "kia",
+   "ceed",
+   "stub asset: 147 KB"
+  ],
+  [
+   "peugeot",
+   "2008",
+   "over mobile weight limit (5861 KB) — optimise then re-approve"
+  ],
+  [
+   "land-rover",
+   "discovery-sport",
+   "source title says 'Crushed' — damaged-car scan"
+  ],
+  [
+   "hyundai",
+   "i20",
+   "over mobile weight limit (9518 KB) — optimise then re-approve"
+  ],
+  [
+   "skoda",
+   "octavia",
+   "stub asset: 61 KB"
+  ],
+  [
+   "mercedes-benz",
+   "glb",
+   "source title '2027 Lite' — concept/unverifiable year"
+  ],
+  [
+   "honda",
+   "accord",
+   "over mobile weight limit (5737 KB) — optimise then re-approve"
+  ],
+  [
+   "suzuki",
+   "jimny",
+   "stub asset: 44 KB"
+  ],
+  [
+   "dacia",
+   "logan",
+   "stub asset: 86 KB"
+  ],
+  [
+   "peugeot",
+   "407",
+   "over mobile weight limit (7833 KB) — optimise then re-approve"
+  ],
+  [
+   "kia",
+   "stinger",
+   "over mobile weight limit (8567 KB) — optimise then re-approve"
+  ]
+ ],
+ "needsReview": 1,
+ "generationParsed": 22,
+ "yearParsed": 127,
+ "mojibakeRepaired": 0
+}

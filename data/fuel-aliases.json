@@ -1,0 +1,9 @@
+{
+  "petrol": "petrol", "gasoline": "petrol", "gas": "petrol",
+  "diesel": "diesel", "heavy oil": "diesel",
+  "hybrid electric": "hybrid", "hybrid electric (clean)": "hybrid", "hybrid": "hybrid",
+  "petrol/electric hybrid": "hybrid", "petrol hybrid": "hybrid", "diesel hybrid": "hybrid",
+  "petrol plug-in": "phev", "plug-in hybrid": "phev", "phev": "phev",
+  "electric": "electric", "electricity": "electric", "ev": "electric", "bev": "electric",
+  "electric diesel": "hybrid", "gas bi-fuel": "petrol", "lpg": "petrol"
+}

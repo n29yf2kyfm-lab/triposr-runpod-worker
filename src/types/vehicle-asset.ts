@@ -1,0 +1,80 @@
+import type { ColourFamily } from "./vehicle";
+
+export type AccuracyGrade =
+  | "exact" | "generation-correct" | "representative" | "approximate" | "unavailable";
+export type QualityGrade = "A" | "B" | "C" | "rejected";
+export type QcStatus = "passed" | "warning" | "failed" | "pending";
+export type PublicationStatus = "approved" | "quarantined" | "needs-review" | "retired";
+export type InteriorMode = "none" | "panorama" | "gaussian-splat" | "mesh";
+export type Provenance = "sourced" | "generated-from-reference" | "licensed" | "hand-built";
+export type BodyStyle =
+  | "hatchback" | "saloon" | "estate" | "suv" | "coupe" | "convertible"
+  | "mpv" | "pickup" | "van" | "roadster";
+
+/** Schema v2 catalogue entry. Mirrors schemas/vehicle-asset.schema.json. */
+export type VehicleAsset = {
+  schemaVersion: 2;
+  assetId: string;
+  make: string;
+  model: string;
+  modelFamily: string;
+  modelAliases?: string[];
+  generation?: string | null;
+  generationAliases?: string[];
+  generationConfirmed?: boolean;
+  yearStart?: number | null;
+  yearEnd?: number | null;
+  bodyStyle?: BodyStyle | null;
+  compatibleFuelTypes?: string[];
+  compatibleTrimFamilies?: string[];
+  exactDerivative?: string | null;
+  exactTrim?: boolean;
+  provenance: Provenance;
+  sourceTitle: string;
+  sourceUrl?: string | null;
+  sourceCreator?: string | null;
+  sourceReferenceId?: string | null;
+  sourceRetrievedAt?: string | null;
+  sourceEvidenceUrl?: string | null;
+  licence?: string | null;
+  generatedFromReference?: boolean;
+  referenceImageCount?: number;
+  accuracyGrade: AccuracyGrade;
+  qualityGrade: QualityGrade;
+  technicalStatus: QcStatus;
+  visualStatus: QcStatus;
+  publicationStatus: PublicationStatus;
+  quarantineReason?: string | null;
+  hasInterior: boolean;
+  interiorMode: InteriorMode;
+  hasSeparateDoors?: boolean;
+  hasSeparateBonnet?: boolean;
+  hasSeparateBoot?: boolean;
+  supportsOpenableParts: boolean;
+  paintMaterialNames?: string[];
+  glassMaterialNames?: string[];
+  defaultColourFamily: ColourFamily;
+  renderColourLabel?: string | null;
+  oemPaintVerified?: boolean;
+  oemPaintCode?: string | null;
+  oemPaintName?: string | null;
+  colourVariants?: Record<string, string>;
+  desktopGlbUrl: string;
+  mobileGlbUrl?: string | null;
+  fallbackGlbUrl?: string | null;
+  posterUrl?: string | null;
+  turntableUrl?: string | null;
+  interiorUrl?: string | null;
+  fileSizeBytes?: number | null;
+  mobileFileSizeBytes?: number | null;
+  triangleCount?: number | null;
+  vertexCount?: number | null;
+  textureMemoryBytes?: number | null;
+  maxTextureResolution?: number | null;
+  contentHash?: string | null;
+  pipelineVersion?: string | null;
+  publishedAt?: string | null;
+  replacedAssetId?: string | null;
+  needsHumanReview?: string[];
+  notes?: string[];
+};

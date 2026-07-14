@@ -1,0 +1,14 @@
+{
+  "hatch": "hatchback", "hatchback": "hatchback", "5 door hatchback": "hatchback",
+  "3 door hatchback": "hatchback", "sportback": "hatchback",
+  "saloon": "saloon", "sedan": "saloon", "gran coupe": "saloon", "4 door saloon": "saloon",
+  "estate": "estate", "touring": "estate", "tourer": "estate", "avant": "estate",
+  "sw": "estate", "shooting brake": "estate", "combi": "estate", "touring sports": "estate",
+  "suv": "suv", "4x4": "suv", "crossover": "suv", "off-road": "suv", "off road": "suv",
+  "coupe": "coupe", "coupé": "coupe", "2 door coupe": "coupe",
+  "convertible": "convertible", "cabriolet": "convertible", "cabrio": "convertible",
+  "roadster": "roadster", "spider": "roadster", "spyder": "roadster",
+  "mpv": "mpv", "people carrier": "mpv", "minivan": "mpv",
+  "pickup": "pickup", "pick-up": "pickup", "double cab": "pickup", "crew cab": "pickup",
+  "van": "van", "panel van": "van", "lcv": "van", "kombi": "van"
+}

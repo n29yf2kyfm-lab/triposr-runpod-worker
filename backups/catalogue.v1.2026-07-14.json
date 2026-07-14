@@ -181,6 +181,19 @@
   "undercarriage": true
  },
  {
+  "make": "mini",
+  "model": "countryman",
+  "source_title": "2017 Mini Countryman",
+  "colour_rendered": "White",
+  "colour_hex": "#e9ebee",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mini/countryman/white/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/mini/countryman_uc.glb",
+  "undercarriage": true
+ },
+ {
   "make": "mercedes-benz",
   "model": "sprinter",
   "source_title": "2019 Mercedes-Benz Sprinter",
@@ -286,6 +299,19 @@
  },
  {
   "make": "kia",
+  "model": "ceed",
+  "source_title": "KIA CEED TECH 2019",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/kia/ceed/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/ceed_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "kia",
   "model": "sorento",
   "source_title": "2022 Kia Sorento PHEV Executive Line",
   "colour_rendered": "Native (as-modelled)",
@@ -321,7 +347,7 @@
   "frame_count": 0,
   "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/3364b6b6-11e6-4240-b2ac-a1a4fe226947-u1_uc.glb",
   "undercarriage": true,
-  "replaced": "was: low-poly Volkswagen Passat B8 — replaced as a quality upgrade (faceted low-poly vs TRELLIS 2022 estate). Earlier 'rendered blank' claim was a test-harness draco fault, not the model. Old asset retained at library/volkswagen/passat_uc.glb"
+  "replaced": "was: low-poly Volkswagen Passat B8 \u2014 replaced as a quality upgrade (faceted low-poly vs TRELLIS 2022 estate). Earlier 'rendered blank' claim was a test-harness draco fault, not the model. Old asset retained at library/volkswagen/passat_uc.glb"
  },
  {
   "make": "bmw",
@@ -516,6 +542,19 @@
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/dacia/sandero/native/manifest.json",
   "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/dacia/sandero_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "land-rover",
+  "model": "discovery-sport",
+  "source_title": "Landrover Discovery Sport (2018) Crushed",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/land-rover/discovery-sport/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/discovery-sport_uc.glb",
   "undercarriage": true
  },
  {
@@ -714,6 +753,19 @@
   "undercarriage": true
  },
  {
+  "make": "skoda",
+  "model": "octavia",
+  "source_title": "low-poly \u0160koda Octavia RS 2020",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/skoda/octavia/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch2/skoda/octavia_uc.glb",
+  "undercarriage": true
+ },
+ {
   "make": "ford",
   "model": "puma",
   "source_title": "Ford Puma 2025",
@@ -797,7 +849,7 @@
  {
   "make": "citroen",
   "model": "c5-aircross",
-  "source_title": "3D Scanned Citroën C5 Aircross (2017) [Free]",
+  "source_title": "3D Scanned Citro\u00ebn C5 Aircross (2017) [Free]",
   "colour_rendered": "Native (as-modelled)",
   "colour_hex": "#8a8f98",
   "licence": "CC-BY (attribution required)",
@@ -922,6 +974,19 @@
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/touareg/native/manifest.json",
   "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touareg_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "mercedes-benz",
+  "model": "glb",
+  "source_title": "Mercedes-Benz GLB 2027 Lite",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/glb/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/glb_uc.glb",
   "undercarriage": true
  },
  {
@@ -1497,6 +1562,32 @@
   "undercarriage": true
  },
  {
+  "make": "suzuki",
+  "model": "jimny",
+  "source_title": "JIMNY 2019",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/suzuki/jimny/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/suzuki/jimny_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "dacia",
+  "model": "logan",
+  "source_title": "Dacia Logan Tuned MK1 2004-2018",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#8a8f98",
+  "licence": "CC-BY (attribution required)",
+  "tier": "B",
+  "frame_count": 36,
+  "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/dacia/logan/native/manifest.json",
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/dacia/logan_uc.glb",
+  "undercarriage": true
+ },
+ {
   "make": "jaguar",
   "model": "f-type",
   "source_title": "2018 Jaguar F-Type SVR",
@@ -1655,7 +1746,7 @@
  {
   "make": "mclaren",
   "model": "720s",
-  "source_title": "2017 McLaren 720s LB★WORKS",
+  "source_title": "2017 McLaren 720s LB\u2605WORKS",
   "colour_rendered": "Native (as-modelled)",
   "colour_hex": "#8a8f98",
   "licence": "CC-BY (attribution required)",

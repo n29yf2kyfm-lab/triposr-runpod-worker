@@ -1,0 +1,52 @@
+{
+  "volkswagen": {
+    "golf gti": "golf", "golf gte": "golf", "golf r": "golf", "golf r-line": "golf",
+    "golf plus": "golf-plus", "golf sv": "golf-sv",
+    "id 3": "id3", "id.3": "id3", "id 4": "id4", "id.4": "id4",
+    "id 5": "id5", "id.5": "id5", "id 7": "id7", "id.7": "id7",
+    "id buzz": "id-buzz", "id.buzz": "id-buzz",
+    "tiguan allspace": "tiguan", "t roc": "t-roc", "t cross": "t-cross",
+    "transporter t6": "transporter", "up!": "up"
+  },
+  "bmw": {
+    "1 series": "1-series", "2 series": "2-series", "3 series": "3-series",
+    "4 series": "4-series", "5 series": "5-series", "7 series": "7-series",
+    "8 series": "8-series", "2 series gran coupe": "2-series",
+    "4 series gran coupe": "4-series", "8 series gran coupe": "8-series",
+    "116d": "1-series", "118i": "1-series", "120d": "1-series", "125d": "1-series",
+    "318d": "3-series", "320d": "3-series", "320i": "3-series", "330e": "3-series", "335d": "3-series",
+    "520d": "5-series", "520i": "5-series", "530e": "5-series", "540i": "5-series",
+    "m135i": "1-series", "m340i": "3-series", "m550i": "5-series",
+    "x5 m": "x5", "x3 m": "x3", "x4 m": "x4", "x6 m": "x6", "z4 m": "z4"
+  },
+  "mercedes-benz": {
+    "a class": "a-class", "b class": "b-class", "c class": "c-class",
+    "e class": "e-class", "s class": "s-class", "g class": "g-class",
+    "cla class": "cla", "gla class": "gla", "glb class": "glb",
+    "glc class": "glc", "gle class": "gle", "gls class": "gls",
+    "a180": "a-class", "a200": "a-class", "a250": "a-class", "a45": "a-class",
+    "c200": "c-class", "c220": "c-class", "c300": "c-class", "c63": "c-class",
+    "e220": "e-class", "e300": "e-class", "e63": "e-class"
+  },
+  "land-rover": {
+    "range rover sport": "range-rover-sport", "range rover evoque": "evoque",
+    "range rover velar": "velar", "range rover": "range-rover",
+    "discovery sport": "discovery-sport", "defender 90": "defender",
+    "defender 110": "defender", "defender 130": "defender"
+  },
+  "ford": {
+    "focus st": "focus", "focus rs": "focus", "fiesta st": "fiesta",
+    "transit custom": "transit-custom", "transit connect": "transit",
+    "mustang mach-e": "mustang-mach-e", "mustang mach e": "mustang-mach-e",
+    "puma st": "puma"
+  },
+  "toyota": { "corolla touring sports": "corolla", "gr supra": "supra", "gr yaris": "yaris" },
+  "mazda": { "mazda6": "6", "mazda 6": "6", "mazda3": "3", "mazda 3": "3", "mazda2": "2", "mx5": "mx-5", "mx 5": "mx-5", "cx30": "cx-30", "cx 30": "cx-30", "mx30": "mx-30" },
+  "peugeot": { "e-208": "208", "e-2008": "2008", "e-308": "308" },
+  "honda": { "civic type r": "civic-type-r", "cr v": "cr-v", "crv": "cr-v" },
+  "nissan": { "gt-r": "gtr", "gt r": "gtr", "x trail": "x-trail", "xtrail": "x-trail" },
+  "audi": { "a3 sportback": "a3", "a3 saloon": "a3", "s3": "a3", "rs3": "a3", "s4": "a4", "rs4": "a4", "sq5": "q5", "rsq3": "q3", "e-tron": "e-tron" },
+  "kia": { "pro ceed": "ceed", "proceed": "ceed", "xceed": "xceed", "e-niro": "niro", "ev6 gt": "ev6" },
+  "hyundai": { "ioniq 5": "ioniq", "ioniq5": "ioniq", "i10 nios": "i10", "grand i10": "i10" },
+  "vauxhall": { "corsa-e": "corsa", "mokka-e": "mokka", "astra gtc": "astra", "insignia vxr": "insignia" }
+}
