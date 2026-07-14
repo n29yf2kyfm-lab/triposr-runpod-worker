@@ -1,0 +1,19 @@
+{
+ "verifiedAt": "2026-07-14T20:08:27.348210Z",
+ "checked": 1,
+ "failed": 0,
+ "results": [
+  {
+   "assetId": "volkswagen-golf-x-2020-2022-v1",
+   "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/vw/golf_uc.glb",
+   "checks": {
+    "fetch": "ok",
+    "length": "ok",
+    "magic": "ok",
+    "hash": "ok",
+    "validator": "ok"
+   },
+   "status": "passed"
+  }
+ ]
+}
