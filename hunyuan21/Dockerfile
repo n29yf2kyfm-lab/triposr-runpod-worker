@@ -22,9 +22,13 @@ WORKDIR /app/Hunyuan3D-2.1
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu124
 
-# requirements pin tencent/aliyun mirrors first — strip them for CI network
-RUN sed -i '/extra-index-url/d' requirements.txt && \
-    pip install --no-cache-dir -r requirements.txt && \
+# strip cn mirrors + training/demo-only deps (deepspeed needs torch at build
+# time and is training-only; gradio/fastapi/uvicorn/pythreejs are demo-web).
+# basicsr/realesrgan import torch in setup.py -> install build deps first and
+# disable PEP-517 build isolation so they can see the installed torch.
+RUN sed -i '/extra-index-url/d; /deepspeed/d; /gradio/d; /fastapi/d; /uvicorn/d; /pythreejs/d' requirements.txt && \
+    pip install --no-cache-dir ninja==1.11.1.1 pybind11==2.13.4 wheel setuptools && \
+    pip install --no-cache-dir --no-build-isolation -r requirements.txt && \
     pip install --no-cache-dir runpod requests
 
 # custom CUDA extensions; GPU-less CI build -> pin arch for RunPod pools:
