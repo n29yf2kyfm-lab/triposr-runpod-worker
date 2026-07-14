@@ -1,5 +1,5 @@
 {
- "auditedAt": "2026-07-14T12:18:13.139851Z",
+ "auditedAt": "2026-07-14T12:26:33.391506Z",
  "entries": 180,
  "errors": [],
  "warnings": [
@@ -43,8 +43,6 @@
   "[116] renault/talisman: technical QC pending",
   "[117] mazda/mx-30: missing contentHash (pending hash backfill)",
   "[117] mazda/mx-30: technical QC pending",
-  "[118] honda/accord: missing contentHash (pending hash backfill)",
-  "[118] honda/accord: technical QC pending",
   "[119] honda/insight: missing contentHash (pending hash backfill)",
   "[119] honda/insight: technical QC pending",
   "[11] nissan/juke: missing contentHash (pending hash backfill)",
@@ -89,8 +87,6 @@
   "[137] honda/civic-type-r: technical QC pending",
   "[138] peugeot/207: missing contentHash (pending hash backfill)",
   "[138] peugeot/207: technical QC pending",
-  "[139] peugeot/407: missing contentHash (pending hash backfill)",
-  "[139] peugeot/407: technical QC pending",
   "[13] tesla/model-3: missing contentHash (pending hash backfill)",
   "[13] tesla/model-3: technical QC pending",
   "[140] renault/laguna: missing contentHash (pending hash backfill)",
@@ -103,8 +99,6 @@
   "[143] mitsubishi/lancer: technical QC pending",
   "[144] suzuki/sx4: missing contentHash (pending hash backfill)",
   "[144] suzuki/sx4: technical QC pending",
-  "[145] kia/stinger: missing contentHash (pending hash backfill)",
-  "[145] kia/stinger: technical QC pending",
   "[146] hyundai/ix35: missing contentHash (pending hash backfill)",
   "[146] hyundai/ix35: technical QC pending",
   "[147] hyundai/veloster: missing contentHash (pending hash backfill)",
@@ -191,8 +185,6 @@
   "[20] hyundai/i10: technical QC pending",
   "[21] hyundai/i30: missing contentHash (pending hash backfill)",
   "[21] hyundai/i30: technical QC pending",
-  "[22] hyundai/ioniq: missing contentHash (pending hash backfill)",
-  "[22] hyundai/ioniq: technical QC pending",
   "[23] kia/ceed: missing contentHash (pending hash backfill)",
   "[23] kia/ceed: technical QC pending",
   "[24] kia/sorento: missing contentHash (pending hash backfill)",
@@ -202,8 +194,16 @@
   "[26] volkswagen/passat: missing contentHash (pending hash backfill)",
   "[26] volkswagen/passat: technical QC pending",
   "[27] bmw/2-series: missing contentHash (pending hash backfill)",
-  "[27] bmw/2-series: technical QC pending"
+  "[27] bmw/2-series: technical QC pending",
+  "[28] mercedes-benz/gla: missing contentHash (pending hash backfill)",
+  "[28] mercedes-benz/gla: technical QC pending",
+  "[29] mercedes-benz/glc: missing contentHash (pending hash backfill)",
+  "[29] mercedes-benz/glc: technical QC pending",
+  "[2] audi/a3: missing contentHash (pending hash backfill)",
+  "[2] audi/a3: technical QC pending",
+  "[30] mercedes-benz/e-class: missing contentHash (pending hash backfill)",
+  "[30] mercedes-benz/e-class: technical QC pending"
  ],
  "errorCount": 0,
- "warningCount": 360
+ "warningCount": 348
 }
