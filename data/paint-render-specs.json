@@ -1,0 +1,13 @@
+{
+  "_comment": "Render parameters for the automotive refinery paint shader. These are DISPLAY specs keyed by OEM paint name; they do not make an entry oemPaintVerified (that needs VIN/paint-label/manufacturer confirmation).",
+  "volkswagen": {
+    "dolphin grey metallic": { "code": "LA7C", "hex": "#5E6468", "flakeScale": 4500.0, "baseRoughness": 0.18, "clearcoatWeight": 1.0 },
+    "lapiz blue metallic":   { "code": "LD5K", "hex": "#162D6F", "flakeScale": 5000.0, "baseRoughness": 0.15, "clearcoatWeight": 1.0 },
+    "deep black pearl":      { "code": "LC9X", "hex": "#0B0C0E", "flakeScale": 3500.0, "baseRoughness": 0.12, "clearcoatWeight": 1.0 },
+    "pure white":            { "code": "LC9A", "hex": "#F3F4F6", "flakeScale": 0.0,    "baseRoughness": 0.20, "clearcoatWeight": 1.0 }
+  },
+  "bmw": {
+    "carbon black metallic":  { "code": "416", "hex": "#0D1117", "flakeScale": 4000.0, "baseRoughness": 0.14, "clearcoatWeight": 1.0 },
+    "portimao blue metallic": { "code": "C31", "hex": "#102A71", "flakeScale": 5500.0, "baseRoughness": 0.16, "clearcoatWeight": 1.0 }
+  }
+}
