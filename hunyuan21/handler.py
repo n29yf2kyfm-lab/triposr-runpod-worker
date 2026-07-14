@@ -84,6 +84,16 @@ def handler(job):
         img = rembg(img.convert("RGB"))
     else:
         img = img.convert("RGBA")
+    # u2net mattes can leave most of the background at partial alpha; the
+    # pipeline's white composite then keeps a scene ghost that the model
+    # reconstructs as a billboard wall (observed twice on the Golf photo).
+    # Binarise alpha and force white under transparent pixels.
+    import numpy as np
+    a = np.array(img)
+    hard = (a[..., 3] >= 128)
+    a[..., 3] = np.where(hard, 255, 0).astype(a.dtype)
+    a[~hard, :3] = 255
+    img = Image.fromarray(a)
 
     seed = int(inp.get("seed", 0))
     torch.manual_seed(seed)

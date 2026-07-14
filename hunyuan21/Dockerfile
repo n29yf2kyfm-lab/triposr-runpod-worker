@@ -35,7 +35,8 @@ RUN pip install --upgrade pip && \
 RUN sed -i '/extra-index-url/d; /deepspeed/d; /gradio/d; /fastapi/d; /uvicorn/d; /pythreejs/d; s/^bpy==.*/bpy==4.2.22/' requirements.txt && \
     pip install --no-cache-dir ninja==1.11.1.1 pybind11==2.13.4 wheel setuptools && \
     pip install --no-cache-dir --no-build-isolation -r requirements.txt && \
-    pip install --no-cache-dir runpod requests
+    pip install --no-cache-dir runpod requests && \
+    pip install --no-cache-dir "setuptools<81"  # keep pkg_resources: hy3dpaint imports it, removed in setuptools 81+
 
 # custom CUDA extensions; GPU-less CI build -> pin arch for RunPod pools:
 # 8.6 (A5000/A6000) + 8.9 (L40S/4090) + PTX forward-compat
