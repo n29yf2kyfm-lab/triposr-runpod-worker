@@ -347,7 +347,7 @@
   "frame_count": 0,
   "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/3364b6b6-11e6-4240-b2ac-a1a4fe226947-u1_uc.glb",
   "undercarriage": true,
-  "replaced": "was: low-poly Volkswagen Passat B8 (rendered blank)"
+  "replaced": "was: low-poly Volkswagen Passat B8 \u2014 replaced as a quality upgrade (faceted low-poly vs TRELLIS 2022 estate). Earlier 'rendered blank' claim was a test-harness draco fault, not the model. Old asset retained at library/volkswagen/passat_uc.glb"
  },
  {
   "make": "bmw",
@@ -802,7 +802,10 @@
   "frame_count": 36,
   "manifest_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/3-series/native/manifest.json",
   "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/3-series_uc.glb",
-  "undercarriage": true
+  "undercarriage": true,
+  "colour_variants": {
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/3-series_blue_uc.glb"
+  }
  },
  {
   "make": "mercedes-benz",
@@ -2312,6 +2315,18 @@
   "tier": "B",
   "frame_count": 0,
   "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/7d353e58-64b0-409f-a51c-f2734fafd058-u1_uc.glb",
+  "undercarriage": true
+ },
+ {
+  "make": "volkswagen",
+  "model": "id7",
+  "source_title": "TRELLIS.2 from owner photo (ID.7_2026_Pro_77kWh_Tourer_Electric)",
+  "colour_rendered": "Native (as-modelled)",
+  "colour_hex": "#e9ebee",
+  "licence": "generated (TRELLIS.2 MIT, owner-supplied photo)",
+  "tier": "B",
+  "frame_count": 0,
+  "glb_url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/trellis/28a1d439-5082-4b4f-83e6-71b81d738138-u1_uc.glb",
   "undercarriage": true
  }
 ]
