@@ -50,6 +50,7 @@ for o in scene.objects:
         front_y = (co.reshape(-1, 3) @ M[:3, :3].T + M[:3, 3])[:, 1].mean()
         break
 fd = 1.0 if (front_y if front_y is not None else ctr[1] + 1) > ctr[1] else -1.0
+if "--fd" in argv: fd = float(argv[argv.index("--fd") + 1])
 
 pw = 0.52 / 1.79 * Wd            # UK plate 520mm on a 1.79m car
 ph = pw * 111 / 520
@@ -87,15 +88,15 @@ def add_plate(name, img, zc, y_face, facing, rake, flip):
 fzc = gz + H * 0.29
 yf_bot = extreme_y(fzc - ph / 2, fzc, fd > 0)
 yf_top = extreme_y(fzc, fzc + ph / 2, fd > 0)
-f_rake = math.atan2(fd * (yf_top - yf_bot), ph)
+f_rake = max(-0.21, min(0.21, math.atan2(fd * (yf_top - yf_bot), ph)))
 yf = (yf_bot + yf_top) / 2 + fd * Ln * 0.002
 add_plate("plate_front", f"{TEX}/uk_plate_front.png", fzc, yf, fd, f_rake, FLIPF)
 
 # REAR (yellow): Golf tailgate plate ~50% height
-rzc = gz + H * 0.50
+rzc = gz + H * (float(argv[argv.index("--rearh")+1]) if "--rearh" in argv else 0.50)
 yr_bot = extreme_y(rzc - ph / 2, rzc, fd < 0)
 yr_top = extreme_y(rzc, rzc + ph / 2, fd < 0)
-r_rake = math.atan2(-fd * (yr_top - yr_bot), ph)
+r_rake = max(-0.21, min(0.21, math.atan2(-fd * (yr_top - yr_bot), ph)))
 yr = (yr_bot + yr_top) / 2 - fd * Ln * 0.002
 add_plate("plate_rear", f"{TEX}/uk_plate_rear.png", rzc, yr, -fd, r_rake, FLIPR)
 
