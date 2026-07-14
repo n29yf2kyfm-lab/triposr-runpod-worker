@@ -1,4 +1,14 @@
 """automotive_refinery.py — post-generation refinery for TRELLIS car meshes.
+
+TESTED VERDICT (2026-07-14, golf_mk8f_s7 TRELLIS candidate):
+  * paint stage: works, exports KHR_materials_clearcoat; but the compendium's
+    constants (metallic 1.0, dark OEM hexes) render near-black in model-viewer.
+    Prefer the calibrated tint pipeline (golf_scratch_finish.py) for base
+    colour and use THIS script only to add the clearcoat/flake layer.
+  * glass stage: geometric greenhouse split cannot distinguish glass from
+    upper body panels on a fused TRELLIS shell, and transmission on a hollow
+    shell shows the empty interior. Off by default; use only with human review.
+  * de-ripple: displacement-capped; band thresholds need per-model tuning.
 Implements the 'Automotive Reconstruction & Refinery' spec, adapted for
 GLB-exportable results (Blender 4.0+, headless).
 
@@ -41,7 +51,7 @@ if not (MESH and os.path.exists(MESH)):
 def srgb_to_linear(c):
     c = c / 255.0
     return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
-PAINT_RGB = tuple(srgb_to_linear(int(HEX[i:i+2], 16)) for i in (0, 2, 4))
+PAINT_RGB = tuple(min(1.0, srgb_to_linear(int(HEX[i:i+2], 16)) * 1.35) for i in (0, 2, 4))  # lift for metallic env response
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=MESH)
@@ -67,6 +77,7 @@ for o in meshes:
             and abs(v.normal.x) > 0.75]                          # facing sideways
     orig = {v.index: v.co.copy() for v in band}
     bandset = {v.index for v in band}
+    bm.verts.ensure_lookup_table()
     for _ in range(10):
         newpos = {}
         for v in band:
@@ -76,9 +87,8 @@ for o in meshes:
             p = v.co.copy(); p.x = v.co.x + (avg.x - v.co.x) * 0.5   # relax lateral only
             newpos[v.index] = p
         for vi, p in newpos.items():
-            bm.verts.ensure_lookup_table(); bm.verts[vi].co = p
+            bm.verts[vi].co = p
     capped = 0
-    bm.verts.ensure_lookup_table()
     for vi, oc in orig.items():
         v = bm.verts[vi]; d = v.co - oc
         if d.length > CAP:
@@ -106,7 +116,7 @@ def car_paint_material():
     nt = m.node_tree
     b = nt.nodes["Principled BSDF"]
     b.inputs["Base Color"].default_value = (*PAINT_RGB, 1)
-    b.inputs["Metallic"].default_value = 1.0
+    b.inputs["Metallic"].default_value = 0.85
     b.inputs["Roughness"].default_value = ROUGH
     if "Coat Weight" in b.inputs:
         b.inputs["Coat Weight"].default_value = 1.0
@@ -143,33 +153,36 @@ def glass_material():
 if CLEAR_GLASS:
     gm = glass_material()
     for o in list(meshes):
-        me = o.data
-        sel = []
+        # pure-bmesh split: no edit-mode selection state to go wrong
+        bm = bmesh.new(); bm.from_mesh(o.data)
         zthr = lo[2] + 0.55 * H
-        for p in me.polygons:
-            c = o.matrix_world @ p.center
-            n = (o.matrix_world.to_3x3() @ p.normal).normalized()
-            if c.z > zthr and abs(n.z) < 0.65:
-                sel.append(p.index)
-        if len(sel) < 8:
-            print(f"GLASS {o.name}: too few candidate faces ({len(sel)}), skipped")
-            continue
-        for p in me.polygons: p.select = p.index in set(sel)
-        bpy.context.view_layer.objects.active = o
-        bpy.ops.object.mode_set(mode="EDIT")
-        bpy.ops.object.mode_set(mode="OBJECT")  # sync selection
-        bpy.ops.object.mode_set(mode="EDIT")
-        try:
-            bpy.ops.mesh.separate(type="SELECTED")
-            bpy.ops.object.mode_set(mode="OBJECT")
-            new = [x for x in bpy.context.scene.objects if x.type == "MESH" and x not in meshes][-1]
-            new.name = "Glass"
-            new.data.materials.clear()
-            new.data.materials.append(gm)
-            print(f"GLASS {o.name}: {len(sel)} faces -> Glass sub-mesh (IOR 1.45, transmissive)")
-        except Exception as e:
-            bpy.ops.object.mode_set(mode="OBJECT")
-            print(f"GLASS {o.name}: separate failed: {e}")
+        M = o.matrix_world; M3 = M.to_3x3()
+        gfaces = [f for f in bm.faces
+                  if (M @ f.calc_center_median()).z > zthr
+                  and abs((M3 @ f.normal).normalized().z) < 0.65]
+        if len(gfaces) < 8:
+            print(f"GLASS {o.name}: too few candidate faces ({len(gfaces)}), skipped")
+            bm.free(); continue
+        # copy the glass faces into a new mesh
+        vmap = {}; verts = []; faces = []
+        for f in gfaces:
+            idx = []
+            for v in f.verts:
+                if v.index not in vmap:
+                    vmap[v.index] = len(verts); verts.append(M @ v.co)
+                idx.append(vmap[v.index])
+            faces.append(idx)
+        gme = bpy.data.meshes.new("Glass")
+        gme.from_pydata([tuple(v) for v in verts], [], faces)
+        gme.update()
+        gobj = bpy.data.objects.new("Glass", gme)
+        bpy.context.scene.collection.objects.link(gobj)
+        gme.materials.append(gm)
+        for pf in gme.polygons: pf.use_smooth = True
+        # remove those faces from the body
+        bmesh.ops.delete(bm, geom=gfaces, context="FACES")
+        bm.to_mesh(o.data); bm.free()
+        print(f"GLASS {o.name}: {len(gfaces)} faces -> Glass sub-mesh (IOR 1.45, transmissive)")
 
 # ---- 3b. paint assignment ----------------------------------------------------
 paint = car_paint_material()
