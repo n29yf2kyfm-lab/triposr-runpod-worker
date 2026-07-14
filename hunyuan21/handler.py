@@ -74,9 +74,13 @@ def handler(job):
         img = Image.open(BytesIO(requests.get(inp["image_url"], timeout=120).content))
     else:
         return {"error": "need image_b64 or image_url"}
-    img = img.convert("RGBA") if img.mode != "RGBA" else img
-    if inp.get("remove_bg", True) and img.mode == "RGB":
-        img = rembg(img)
+    # rembg must see the original RGB photo — converting to RGBA first would
+    # skip it and the background becomes geometry (learned on first smoke test)
+    if img.mode != "RGBA":
+        if inp.get("remove_bg", True):
+            img = rembg(img.convert("RGB"))
+        else:
+            img = img.convert("RGBA")
 
     seed = int(inp.get("seed", 0))
     torch.manual_seed(seed)
@@ -85,6 +89,7 @@ def handler(job):
     raw = f"{OUT}/{uid}.glb"
     mesh.export(raw)
     out_path = raw
+    tex_err = None
 
     if inp.get("texture", True):
         try:
@@ -93,12 +98,13 @@ def handler(job):
             out_path = get_paint()(mesh_path=raw, image_path=src_png,
                                    output_mesh_path=f"{OUT}/{uid}_tex.glb")
         except Exception as e:
+            tex_err = f"{type(e).__name__}: {e}"
             print("texture stage failed, returning shape-only:", e, flush=True)
             out_path = raw
 
     url = upload(out_path, f"hunyuan21/{os.path.basename(out_path)}")
     return {"glb_url": url, "seconds": round(time.time() - t0, 1),
-            "textured": out_path != raw, "seed": seed}
+            "textured": out_path != raw, "seed": seed, "texture_error": tex_err}
 
 
 runpod.serverless.start({"handler": handler})
