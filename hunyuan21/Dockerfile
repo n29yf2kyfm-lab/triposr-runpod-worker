@@ -41,8 +41,18 @@ RUN sed -i '/extra-index-url/d; /deepspeed/d; /gradio/d; /fastapi/d; /uvicorn/d;
 # custom CUDA extensions; GPU-less CI build -> pin arch for RunPod pools:
 # 8.6 (A5000/A6000) + 8.9 (L40S/4090) + PTX forward-compat
 ENV TORCH_CUDA_ARCH_LIST="8.6;8.9+PTX"
+# NOT compile_mesh_painter.sh: it shells out to `python3-config`, which this
+# image doesn't have (only python3.11-config). The backticks then expand to
+# nothing, the module is written without its .so suffix, c++ still exits 0,
+# and the import fails silently at runtime (NameError: meshVerticeInpaint).
+# Compile explicitly and prove the module imports before the image ships.
 RUN cd hy3dpaint/custom_rasterizer && pip install --no-build-isolation -e . && cd ../.. && \
-    cd hy3dpaint/DifferentiableRenderer && bash compile_mesh_painter.sh && cd ../..
+    cd hy3dpaint/DifferentiableRenderer && \
+    c++ -O3 -Wall -shared -std=c++11 -fPIC $(python3.11 -m pybind11 --includes) \
+        mesh_inpaint_processor.cpp \
+        -o mesh_inpaint_processor$(python3.11-config --extension-suffix) && \
+    python3.11 -c "from mesh_inpaint_processor import meshVerticeInpaint; print('mesh_inpaint_processor OK')" && \
+    cd ../..
 
 RUN mkdir -p hy3dpaint/ckpt && \
     wget -q https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth -P hy3dpaint/ckpt
