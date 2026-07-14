@@ -327,19 +327,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2832436,
-  "mobileFileSizeBytes": 2832436,
+  "fileSizeBytes": 2917924,
+  "mobileFileSizeBytes": 2917924,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "sha256:5e7cc2c1dfcf14d9e49537921c2476182e623f2dc7e49e2b0e589e2b6e3b2f50",
+  "contentHash": "sha256:151bdde22d5973cfc560165d047113532a43db52d450cfbd76e6ca7023bbd558",
   "pipelineVersion": "migration-2026-07-14",
   "publishedAt": null,
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-14: replaced sourced Mk7.5-style mesh with Mk8 TRELLIS build; previous asset at vw/golf_sourced_v26_uc.glb"
+   "2026-07-14: replaced sourced Mk7.5-style mesh with Mk8 TRELLIS build; previous asset at vw/golf_sourced_v26_uc.glb",
+   "2026-07-14: premium material pass (clearcoat, weighted normals)"
   ]
  },
  {
