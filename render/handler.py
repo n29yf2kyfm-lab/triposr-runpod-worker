@@ -233,6 +233,23 @@ def _choose_body(meta):
 
 def _load_bpy():
     import bpy  # imported lazily so import errors surface in the handler
+    # The entire serving catalogue is draco-compressed. bpy wheels >=4.4 bundle
+    # libextern_draco.so inside the glTF addon, but the addon's default lookup
+    # expects a full Blender install layout and misses it — point the official
+    # env override at the bundled lib so draco GLBs import.
+    if not os.environ.get("BLENDER_EXTERN_DRACO_LIBRARY_PATH"):
+        import glob as _glob
+        try:
+            scripts = bpy.utils.system_resource("SCRIPTS")
+        except Exception:
+            # scripts/modules/bpy/__init__.py -> up 2 = the scripts dir
+            scripts = os.path.dirname(os.path.dirname(
+                os.path.dirname(bpy.__file__)))
+        hits = _glob.glob(os.path.join(scripts, "**", "libextern_draco*.so"),
+                          recursive=True)
+        if hits:
+            os.environ["BLENDER_EXTERN_DRACO_LIBRARY_PATH"] = hits[0]
+            print("draco decoder:", hits[0])
     return bpy
 
 
@@ -386,8 +403,15 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
                 mix.inputs[7].default_value = \
                     (*[min(1.0, cc * 1.25) for cc in _rgb], 1.0)
                 m.node_tree.links.new(mix.outputs[2], b.inputs["Base Color"])
-            b.inputs["Metallic"].default_value = fin["metal"]
-        b.inputs["Roughness"].default_value = fin["rough"]
+            if mode == "flat":
+                b.inputs["Metallic"].default_value = fin["metal"]
+        # tint mode = colour + clearcoat ONLY. The tinted body keeps its own
+        # metallic/roughness: forcing finish metallic onto a baked texture
+        # turns the car liquid-silver wherever the bright HDRI reflects
+        # (measured on the Alam Golf — rear half lost its colour entirely).
+        # This matches the shipped offline tint recipe exactly.
+        if mode != "tint":
+            b.inputs["Roughness"].default_value = fin["rough"]
         if "Coat Weight" in b.inputs:
             b.inputs["Coat Weight"].default_value = fin["coat"]
             b.inputs["Coat Roughness"].default_value = fin["coat_r"]
@@ -528,10 +552,14 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     area_light("fill", 1.2 * S, -0.8 * S, 0.5 * S, 16 * S2, 1.1 * S, (0.95, 0.97, 1.0))
     area_light("wheelkick", -0.3 * S, -1.15 * S, 0.10 * S, 10 * S2, 0.45 * S, (0.92, 0.95, 1.0))
 
-    # glossy dark floor
+    # glossy dark floor. Sized as a STAGE (2.5x car) not an infinite plane:
+    # a huge sharp floor mirror-reflects the bright HDRI room at grazing
+    # angles and smears it across the frame edges; a stage keeps the premium
+    # under-car reflection while grazing rays fall off into the dark backdrop.
+    # Slightly rougher so the room reads as a soft sheen, not a mirror image.
     fm = bpy.data.meshes.new("floor")
     bm = bmesh.new()
-    s2 = size * 5
+    s2 = size * 2.5
     for dx, dy in [(-s2, -s2), (s2, -s2), (s2, s2), (-s2, s2)]:
         bm.verts.new((c[0] + dx, c[1] + dy, zmin))
     bm.faces.new(bm.verts)
@@ -543,7 +571,7 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     fmat.use_nodes = True
     fb = fmat.node_tree.nodes.get("Principled BSDF")
     fb.inputs["Base Color"].default_value = (0.010, 0.010, 0.013, 1)
-    fb.inputs["Roughness"].default_value = 0.06
+    fb.inputs["Roughness"].default_value = 0.12
     fm.materials.append(fmat)
 
     # optional plate. plate_end "hi"/"lo" pins the end on the length axis so

@@ -25,11 +25,26 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN ln -sf /usr/bin/python3.11 /usr/bin/python && \
     curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11
 
-# bpy 4.2.0 == Blender 4.2 LTS (Principled v2 Coat inputs + AgX view transform,
-# which the render pipeline relies on). runpod = serverless SDK.
+# bpy 4.5.11 == Blender 4.5 LTS (Principled v2 Coat inputs + AgX view
+# transform, which the render pipeline relies on). 4.5 is the FIRST LTS whose
+# wheel bundles libextern_draco.so (draco starts at 4.4.0) — the serving
+# catalogue is draco-compressed, so this is a hard requirement.
+# runpod = serverless SDK.
 RUN pip install --no-cache-dir \
-        bpy==4.2.0 \
+        bpy==4.5.11 \
         runpod requests pillow numpy
+
+# build-time verification (institutional rule: builds must import-check what
+# they claim to ship): bpy imports headless AND the draco decoder is bundled.
+RUN python - <<'PYCHECK'
+import glob, os
+import bpy
+scripts = bpy.utils.system_resource("SCRIPTS")
+hits = glob.glob(os.path.join(scripts, "**", "libextern_draco*.so"),
+                 recursive=True)
+assert hits, "bpy wheel has NO libextern_draco — draco catalogue would fail"
+print("bpy", bpy.app.version_string, "draco lib:", hits[0])
+PYCHECK
 
 WORKDIR /app
 COPY assets/hdri.hdr /app/assets/hdri.hdr
