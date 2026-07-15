@@ -73,8 +73,10 @@ def audit(path, ref_lw=None, min_interior_verts=1500, wheel_std=0.22, paint_std=
     d = hi - lo
     H, L = d[1], d[2]                    # glTF y-up
     lowband = allv[allv[:, 1] < lo[1] + 0.50 * H]
+    if len(lowband) == 0:            # degenerate height (flat/rotated model):
+        lowband = allv               # don't crash the auditor, use all verts
     W = float(np.percentile(lowband[:, 0], 99.5) - np.percentile(lowband[:, 0], 0.5))
-    lw = L / W
+    lw = L / W if W > 1e-9 else 0.0
     gates["_lw"] = float(lw)
     if ref_lw is None:
         gates["G1_proportions"] = True   # advisory only: no verified dims
