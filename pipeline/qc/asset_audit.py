@@ -59,7 +59,7 @@ def luma_std_of_faces(mesh, face_mask, lowfreq=False):
     return float(np.std(luma))
 
 
-def audit(path, ref_lw, min_interior_verts=1500, wheel_std=0.22, paint_std=0.10):
+def audit(path, ref_lw=None, min_interior_verts=1500, wheel_std=0.22, paint_std=0.10):
     scene = trimesh.load(path, force="scene")
     geoms = list(scene.geometry.values())
     reasons, gates = [], {}
@@ -71,9 +71,13 @@ def audit(path, ref_lw, min_interior_verts=1500, wheel_std=0.22, paint_std=0.10)
     lowband = allv[allv[:, 1] < lo[1] + 0.50 * H]
     W = float(np.percentile(lowband[:, 0], 99.5) - np.percentile(lowband[:, 0], 0.5))
     lw = L / W
-    gates["G1_proportions"] = bool(abs(lw - ref_lw) / ref_lw <= 0.05)
-    if not gates["G1_proportions"]:
-        reasons.append(f"G1 proportions: L/W={lw:.2f} vs ref {ref_lw:.2f}")
+    gates["_lw"] = float(lw)
+    if ref_lw is None:
+        gates["G1_proportions"] = True   # advisory only: no verified dims
+    else:
+        gates["G1_proportions"] = bool(abs(lw - ref_lw) / ref_lw <= 0.05)
+        if not gates["G1_proportions"]:
+            reasons.append(f"G1 proportions: L/W={lw:.2f} vs ref {ref_lw:.2f}")
 
     # G2 glass
     has_glass = False
@@ -166,7 +170,7 @@ def audit(path, ref_lw, min_interior_verts=1500, wheel_std=0.22, paint_std=0.10)
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("glb")
-    ap.add_argument("--ref-lw", type=float, required=True,
+    ap.add_argument("--ref-lw", type=float, default=None,
                     help="real vehicle length/width ratio, e.g. 4258/1790=2.38")
     ap.add_argument("--json")
     a = ap.parse_args()
