@@ -566,6 +566,43 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     area_light("fill", 1.2 * S, -0.8 * S, 0.5 * S, 16 * S2, 1.1 * S, (0.95, 0.97, 1.0))
     area_light("wheelkick", -0.3 * S, -1.15 * S, 0.10 * S, 10 * S2, 0.45 * S, (0.92, 0.95, 1.0))
 
+    # side fill cards: automotive-studio reflectors along both flanks,
+    # invisible to camera. The tumblehome band under the windows reflects the
+    # BACKDROP (not the lights) — with a dark studio that reads as a black
+    # "gap" stripe across the doors on side views. A long soft bright card is
+    # what real car studios use to put the premium highlight streak there.
+    L_axis = 0 if (hi[0] - lo[0]) >= (hi[1] - lo[1]) else 1
+    W_axis = 1 - L_axis
+    car_len = hi[L_axis] - lo[L_axis]
+    for sgn in (-1.0, 1.0):
+        cm = bpy.data.meshes.new(f"fillcard{sgn}")
+        bmc = bmesh.new()
+        half_l = car_len * 0.75
+        z_lo, z_hi = c[2], c[2] + height * 1.1
+        for dl, dz in ((-half_l, z_lo), (half_l, z_lo),
+                       (half_l, z_hi), (-half_l, z_hi)):
+            p = [0.0, 0.0, dz]
+            p[L_axis] = c[L_axis] + dl
+            p[W_axis] = c[W_axis] + sgn * size * 1.05
+            bmc.verts.new(p)
+        bmc.faces.new(bmc.verts)
+        bmc.to_mesh(cm)
+        bmc.free()
+        card = bpy.data.objects.new(f"fillcard{sgn}", cm)
+        bpy.context.collection.objects.link(card)
+        cmat = bpy.data.materials.new(f"fillcard{sgn}")
+        cmat.use_nodes = True
+        nt = cmat.node_tree
+        for n in list(nt.nodes):
+            nt.nodes.remove(n)
+        em = nt.nodes.new("ShaderNodeEmission")
+        em.inputs["Color"].default_value = (1.0, 0.99, 0.97, 1)
+        em.inputs["Strength"].default_value = 1.6
+        outn = nt.nodes.new("ShaderNodeOutputMaterial")
+        nt.links.new(em.outputs["Emission"], outn.inputs["Surface"])
+        cm.materials.append(cmat)
+        card.visible_camera = False
+
     # glossy dark floor. Sized as a STAGE (2.5x car) not an infinite plane:
     # a huge sharp floor mirror-reflects the bright HDRI room at grazing
     # angles and smears it across the frame edges; a stage keeps the premium
