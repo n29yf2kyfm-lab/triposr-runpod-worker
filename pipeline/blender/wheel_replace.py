@@ -23,6 +23,17 @@ from car_common import detect_axes, wheel_arches
 argv = sys.argv[sys.argv.index("--") + 1:]
 SRC, DST = argv[0], argv[1]
 
+
+def _opt(flag):
+    return float(argv[argv.index(flag) + 1]) if flag in argv else None
+
+
+# ground-truth overrides (fractions of length from the lo end / absolute z):
+# smooth shells (NURBS clay) have no arch density to detect — pass the axle
+# positions measured from the donor model instead.
+FFRAC, RFRAC = _opt("--ffrac"), _opt("--rfrac")
+RADFRAC, CZABS = _opt("--radfrac"), _opt("--cz")
+
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=SRC)
 obj = [o for o in bpy.context.scene.objects if o.type == "MESH"][0]
@@ -46,7 +57,15 @@ cx = (lo[0] + hi[0]) / 2
 
 arch = wheel_arches(vs, 1)
 front, rear, R, czw = arch["front"], arch["rear"], arch["R"], arch["czw"]
-wheel_top = lo[2] + 2.05 * R
+if FFRAC is not None:
+    front = lo[1] + FFRAC * L
+if RFRAC is not None:
+    rear = lo[1] + RFRAC * L
+if RADFRAC is not None:
+    R = RADFRAC * L
+if CZABS is not None:
+    czw = CZABS
+wheel_top = czw + 1.05 * R
 
 # outer x of the existing wheels (per side) for placement
 wheelverts = vs[(vs[:, 2] < wheel_top) &

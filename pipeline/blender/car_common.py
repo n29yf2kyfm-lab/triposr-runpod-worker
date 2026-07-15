@@ -68,11 +68,16 @@ def wheel_arches(vs, la, bins=40, band_frac=0.22):
     lo, hi = vs.min(0), vs.max(0)
     d = hi - lo
     length, height = d[la], d[2]
-    cl = (lo[la] + hi[la]) / 2
     band = vs[vs[:, 2] < lo[2] + band_frac * height]
     histo, edges = np.histogram(band[:, la], bins=bins)
-    front = float(edges[np.argmax(histo * (edges[:-1] < cl))])
-    rear = float(edges[np.argmax(histo * (edges[:-1] >= cl))])
+    # axles live at roughly 15-25% in from each end — never in the outer 8%
+    # (bumpers) or the middle. Constraining the peak search stops smooth
+    # meshes (e.g. NURBS clay) from "finding" their axles on the bumpers.
+    e = edges[:-1]
+    zone_f = (e >= lo[la] + 0.08 * length) & (e <= lo[la] + 0.42 * length)
+    zone_r = (e >= lo[la] + 0.58 * length) & (e <= lo[la] + 0.92 * length)
+    front = float(e[zone_f][np.argmax(histo[zone_f])])
+    rear = float(e[zone_r][np.argmax(histo[zone_r])])
     r = WHEEL_R_FRAC * length
     return dict(front=front, rear=rear, R=r, czw=float(lo[2] + r))
 
