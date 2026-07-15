@@ -58,6 +58,64 @@
     "oemPaintCode": { "type": ["string", "null"] },
     "oemPaintName": { "type": ["string", "null"] },
     "colourVariants": { "type": "object", "additionalProperties": { "type": "string", "format": "uri" } },
+    "customization": {
+      "type": ["object", "null"],
+      "description": "Swappable-component sets for an interactive configurator. Populated by our own assembly pipeline (wheel_replace / clear_glass / recolour); every component is a self-generated GLB or texture we own. configuratorReady gates whether the app should offer live customization for this asset.",
+      "additionalProperties": false,
+      "properties": {
+        "configuratorReady": { "type": "boolean" },
+        "componentPipelineVersion": { "type": ["string", "null"] },
+        "wheelSets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "label", "glbUrl"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,60}$" },
+              "label": { "type": "string" },
+              "glbUrl": { "type": "string", "format": "uri" },
+              "thumbnailUrl": { "type": ["string", "null"] },
+              "isDefault": { "type": "boolean" }
+            }
+          }
+        },
+        "wraps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "label", "family"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,60}$" },
+              "label": { "type": "string" },
+              "family": { "enum": ["black", "white", "grey", "silver", "blue", "red", "green", "yellow", "orange", "brown", "beige", "purple", "gold", "bronze", "multicolour", "unknown"] },
+              "finish": { "enum": ["gloss", "matte", "satin", "metallic", "pearl", "chrome"] },
+              "glbUrl": { "type": ["string", "null"] },
+              "textureUrl": { "type": ["string", "null"] },
+              "thumbnailUrl": { "type": ["string", "null"] }
+            }
+          }
+        },
+        "colourOptions": {
+          "type": "array",
+          "description": "Structured form of colourVariants: a paint choice with its render-palette family, display label, hex, and (optional) pre-tinted GLB.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["family", "label"],
+            "properties": {
+              "family": { "type": "string" },
+              "label": { "type": "string" },
+              "hex": { "type": ["string", "null"], "pattern": "^(#[0-9a-fA-F]{6})?$" },
+              "finish": { "enum": ["solid", "metallic", "pearl", "mica", "multi-coat", "tri-coat", "matte", "crystal"] },
+              "oemPaintName": { "type": ["string", "null"] },
+              "glbUrl": { "type": ["string", "null"] }
+            }
+          }
+        }
+      }
+    },
     "desktopGlbUrl": { "type": "string", "format": "uri" },
     "mobileGlbUrl": { "type": ["string", "null"] },
     "fallbackGlbUrl": { "type": ["string", "null"] },

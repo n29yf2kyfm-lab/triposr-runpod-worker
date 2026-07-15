@@ -10,6 +10,31 @@ export type Provenance = "sourced" | "generated-from-reference" | "licensed" | "
 export type BodyStyle =
   | "hatchback" | "saloon" | "estate" | "suv" | "coupe" | "convertible"
   | "mpv" | "pickup" | "van" | "roadster";
+export type PaintFinish =
+  | "solid" | "metallic" | "pearl" | "mica" | "multi-coat" | "tri-coat" | "matte" | "crystal";
+export type WrapFinish = "gloss" | "matte" | "satin" | "metallic" | "pearl" | "chrome";
+
+/** Swappable-component sets for an interactive configurator (Tier A).
+ *  Every component is a GLB/texture our own pipeline generates and we own —
+ *  wheel_replace.py (wheels), clear_glass/recolour (colour), wrap textures.
+ *  configuratorReady gates whether the app offers live customization. */
+export type Customization = {
+  configuratorReady?: boolean;
+  componentPipelineVersion?: string | null;
+  wheelSets?: Array<{
+    id: string; label: string; glbUrl: string;
+    thumbnailUrl?: string | null; isDefault?: boolean;
+  }>;
+  wraps?: Array<{
+    id: string; label: string; family: ColourFamily;
+    finish?: WrapFinish; glbUrl?: string | null;
+    textureUrl?: string | null; thumbnailUrl?: string | null;
+  }>;
+  colourOptions?: Array<{
+    family: string; label: string; hex?: string | null;
+    finish?: PaintFinish; oemPaintName?: string | null; glbUrl?: string | null;
+  }>;
+};
 
 /** Schema v2 catalogue entry. Mirrors schemas/vehicle-asset.schema.json. */
 export type VehicleAsset = {
@@ -59,6 +84,7 @@ export type VehicleAsset = {
   oemPaintCode?: string | null;
   oemPaintName?: string | null;
   colourVariants?: Record<string, string>;
+  customization?: Customization | null;
   desktopGlbUrl: string;
   mobileGlbUrl?: string | null;
   fallbackGlbUrl?: string | null;
