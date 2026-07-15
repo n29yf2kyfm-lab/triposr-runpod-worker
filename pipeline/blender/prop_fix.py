@@ -14,7 +14,10 @@ lo, hi = vs.min(0), vs.max(0)
 d = hi - lo
 LA = int(np.argmax([d[0], d[1], 0]))      # length axis among horizontal x,y (z=up in Blender)
 WA = 1 - LA
-L, W, H = d[LA], d[WA], d[2]
+L, H = d[LA], d[2]
+# mirror-safe width: same measure as asset_audit (lower-body percentiles)
+lowband = vs[vs[:, 2] < lo[2] + 0.50 * H]
+W = float(np.percentile(lowband[:, WA], 99.5) - np.percentile(lowband[:, WA], 0.5))
 k_len = T_LW / (L / W)
 k_h = T_HW / (H / W)
 print(f"axes L={'xy'[LA]} L/W={L/W:.2f}->{T_LW} k_len={k_len:.3f} H/W={H/W:.2f}->{T_HW} k_h={k_h:.3f}")
