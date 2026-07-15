@@ -1,15 +1,24 @@
 """Replace AI-generated wheel blobs with clean parametric wheels.
 
-1. Detect axles + wheel radius from the mesh (same histogram method).
+1. Detect axles + wheel radius from the mesh (car_common histogram method).
 2. Delete generated wheel faces (cylinder around each axle, outboard only).
 3. Build one parametric wheel: tyre torus + rim disc + 10 spokes + hub,
    instanced at all four corners; dark arch-liner disc closes the shell hole.
 Materials: Wheel_Tyre (matte near-black), Wheel_Rim (machined silver),
 Wheel_Dark (arch liner) — names the render worker excludes from recolour.
+
+Axis handling: the construction maths below is written for the canonical frame
+(x = width, y = length). Instead of assuming the input matches (the old bug —
+an x-length model got wheels through its doors), we DETECT the length axis and
+rotate the car into the canonical frame first, then rotate everything back
+before export. The validated canonical code path is unchanged.
 """
-import bpy, bmesh, math, sys
+import bpy, bmesh, math, os, sys
 import numpy as np
 from mathutils import Vector, Matrix
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from car_common import detect_axes, wheel_arches
 
 argv = sys.argv[sys.argv.index("--") + 1:]
 SRC, DST = argv[0], argv[1]
@@ -19,17 +28,24 @@ bpy.ops.import_scene.gltf(filepath=SRC)
 obj = [o for o in bpy.context.scene.objects if o.type == "MESH"][0]
 me = obj.data
 vs = np.array([v.co[:] for v in me.vertices])
+LA, WA = detect_axes(vs)
+rotated = False
+if LA == 0:                       # length along x -> rotate 90° about z
+    rotated = True
+    for o in bpy.context.scene.objects:
+        if o.parent is None:
+            o.rotation_euler.rotate_axis("Z", math.radians(90))
+    bpy.ops.object.select_all(action="SELECT")
+    bpy.ops.object.transform_apply(rotation=True)
+    vs = np.array([v.co[:] for v in me.vertices])
+    print("rotated to canonical frame (length -> y)")
+
 lo, hi = vs.min(0), vs.max(0)
 W, L, H = hi - lo
 cx = (lo[0] + hi[0]) / 2
 
-band = vs[vs[:, 2] < lo[2] + 0.22 * H]
-histo, edges = np.histogram(band[:, 1], bins=40)
-mid = (lo[1] + hi[1]) / 2
-front = float(edges[np.argmax(histo * (edges[:-1] < mid))])
-rear = float(edges[np.argmax(histo * (edges[:-1] >= mid))])
-R = 0.085 * L
-czw = lo[2] + R
+arch = wheel_arches(vs, 1)
+front, rear, R, czw = arch["front"], arch["rear"], arch["R"], arch["czw"]
 wheel_top = lo[2] + 2.05 * R
 
 # outer x of the existing wheels (per side) for placement
@@ -68,7 +84,6 @@ m_dark = mat("Wheel_Dark", (0.02, 0.02, 0.022, 1), 0.8)
 def build_wheel(name, ay, side):
     parts = []
     xw = cx + side * (x_out - 0.02 * R)
-    rot = Matrix.Rotation(math.radians(90), 4, 'Y')     # cylinder axis -> x
     # tyre
     bpy.ops.mesh.primitive_torus_add(major_radius=R * 0.80, minor_radius=R * 0.20,
         major_segments=48, minor_segments=16, location=(xw - side * R * 0.12, ay, czw))
@@ -105,6 +120,13 @@ def build_wheel(name, ay, side):
 for side in (-1, 1):
     for ay in (front, rear):
         build_wheel(f"wheel_{side}_{ay:.1f}", ay, side)
+
+if rotated:                       # back to the source orientation
+    for o in bpy.context.scene.objects:
+        if o.parent is None:
+            o.rotation_euler.rotate_axis("Z", math.radians(-90))
+    bpy.ops.object.select_all(action="SELECT")
+    bpy.ops.object.transform_apply(rotation=True)
 
 bpy.ops.object.select_all(action="SELECT")
 bpy.ops.export_scene.gltf(filepath=DST, export_format="GLB", export_apply=True,

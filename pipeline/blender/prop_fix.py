@@ -1,33 +1,37 @@
 """Generalized proportion corrector: auto-detects the length axis, stretches
 body to target L/W (wheels rigid-translated), compresses above wheel-top to
 target H/W. Args: src dst target_LW target_HW"""
-import bpy, sys
+import bpy, os, sys
 import numpy as np
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from car_common import detect_axes, body_width, wheel_arches
+
 argv = sys.argv[sys.argv.index("--") + 1:]
 SRC, DST, T_LW, T_HW = argv[0], argv[1], float(argv[2]), float(argv[3])
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=SRC)
-obj = [o for o in bpy.context.scene.objects if o.type == "MESH"][0]
+mesh_objs = [o for o in bpy.context.scene.objects if o.type == "MESH"]
+if len(mesh_objs) != 1:
+    # designed for fused AI shells; silently "fixing" one object of many
+    # produced wrong geometry before — refuse loudly instead
+    print(f"FIX_ERROR expected 1 mesh object, got {len(mesh_objs)}")
+    sys.exit(1)
+obj = mesh_objs[0]
 me = obj.data
 vs = np.array([v.co[:] for v in me.vertices])
 lo, hi = vs.min(0), vs.max(0)
 d = hi - lo
-LA = int(np.argmax([d[0], d[1], 0]))      # length axis among horizontal x,y (z=up in Blender)
-WA = 1 - LA
+LA, WA = detect_axes(vs)
 L, H = d[LA], d[2]
 # mirror-safe width: same measure as asset_audit (lower-body percentiles)
-lowband = vs[vs[:, 2] < lo[2] + 0.50 * H]
-W = float(np.percentile(lowband[:, WA], 99.5) - np.percentile(lowband[:, WA], 0.5))
+W = body_width(vs, WA)
 k_len = T_LW / (L / W)
 k_h = T_HW / (H / W)
 print(f"axes L={'xy'[LA]} L/W={L/W:.2f}->{T_LW} k_len={k_len:.3f} H/W={H/W:.2f}->{T_HW} k_h={k_h:.3f}")
 cl = (lo[LA] + hi[LA]) / 2
-band = vs[vs[:, 2] < lo[2] + 0.22 * H]
-histo, edges = np.histogram(band[:, LA], bins=40)
-front = edges[np.argmax(histo * (edges[:-1] < cl))]
-rear = edges[np.argmax(histo * (edges[:-1] >= cl))]
-R = 0.085 * L
-czw = lo[2] + R
+arch = wheel_arches(vs, LA)
+front, rear, R, czw = arch["front"], arch["rear"], arch["R"], arch["czw"]
 wheel_top = lo[2] + 2.1 * R
 new = vs.copy()
 for i, co in enumerate(vs):

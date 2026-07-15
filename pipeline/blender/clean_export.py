@@ -34,6 +34,27 @@ bpy.ops.import_scene.gltf(filepath=IN)
 meshes = [o for o in bpy.context.scene.objects if o.type == "MESH"]
 print(f"imported {len(meshes)} mesh objects from {os.path.basename(IN)}")
 
+
+def auto_smooth(o, angle_deg):
+    """Angle-split smooth shading across Blender versions. use_auto_smooth was
+    REMOVED in 4.1 — the old silent try/except meant every clean_export on
+    Blender >=4.1 shipped WITHOUT its advertised smoothing fix. On 4.1+ the
+    shade_auto_smooth op adds a 'Smooth by Angle' modifier, which we APPLY
+    immediately: this file exports with export_apply=False (to keep hierarchy/
+    pivots for animation) and the glTF exporter ignores unapplied modifiers."""
+    for p in o.data.polygons:
+        p.use_smooth = True
+    if hasattr(o.data, "use_auto_smooth"):        # Blender <= 4.0
+        o.data.use_auto_smooth = True
+        o.data.auto_smooth_angle = math.radians(angle_deg)
+        return "attr"
+    before = {m.name for m in o.modifiers}
+    bpy.ops.object.shade_auto_smooth(angle=math.radians(angle_deg))
+    for m in list(o.modifiers):
+        if m.name not in before:
+            bpy.ops.object.modifier_apply(modifier=m.name)
+    return "modifier_applied"
+
 fixed = dict(merged=0, degenerate=0, loose=0, recalc=0)
 for o in meshes:
     bpy.context.view_layer.objects.active = o
@@ -49,14 +70,10 @@ for o in meshes:
     bpy.ops.mesh.normals_make_consistent(inside=False)
     bpy.ops.object.mode_set(mode="OBJECT")
     # 4) auto-smooth: smooth shading but split hard edges so panels stay crisp
-    for p in o.data.polygons: p.use_smooth = True
-    try:  # Blender 4.0 API
-        o.data.use_auto_smooth = True
-        o.data.auto_smooth_angle = math.radians(SMOOTH)
-    except Exception:
-        m = o.modifiers.new("WeightedNormal", "WEIGHTED_NORMAL"); m.keep_sharp = True
+    smooth_path = auto_smooth(o, SMOOTH)
     o.select_set(False)
     fixed["recalc"] += 1
+    fixed["smooth_path"] = smooth_path
 
 # preserve exact transforms / origins; export keeping names + hierarchy + anims
 bpy.ops.object.select_all(action="SELECT")
@@ -71,4 +88,5 @@ bpy.ops.export_scene.gltf(
     export_animations=True,
     export_extras=True,               # keep custom object names/props
 )
-print(f"CLEAN_OK wrote {OUT}  ({os.path.getsize(OUT)//1024} KB)  normals-recalc on {fixed['recalc']} objects")
+print(f"CLEAN_OK wrote {OUT}  ({os.path.getsize(OUT)//1024} KB)  "
+      f"normals-recalc on {fixed['recalc']} objects  smooth={fixed['smooth_path']}")

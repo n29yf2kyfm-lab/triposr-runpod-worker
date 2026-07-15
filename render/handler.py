@@ -7,14 +7,31 @@ AgX). Renders on the GPU via Cycles (OPTIX/CUDA), scale-to-zero when idle.
 Input (job["input"]):
   glb_b64 | glb_url | glb_path(+glb_base)  - the model (one is required)
   colour        - DVLA colour name to repaint the body material (optional)
+  finish        - OEM paint FINISH (Solid|Metallic|Pearl|Mica|Multi-coat|
+                  Tri-coat|Crystal|Matte, from platform/paint/oem_paint_db.csv);
+                  optional — omitted keeps the legacy semi-metallic look
+  recolour      - "auto" (default) | "flat" | "tint" | "off".
+                  auto: paint-named body materials get a clean flat respray;
+                  anything else (fused/generated shells, generic-named bodies)
+                  gets a MULTIPLY tint so baked shading/detail survives —
+                  flat repaint is never flooded onto a shell without a real
+                  paint material (the quarantine-sweep rule, now in code).
   plate         - UK reg text, e.g. "LV24 TGN" (optional; drawn on front bumper)
+  plate_end     - "auto" (default: end nearest the camera) | "hi" | "lo"
+                  (explicit end on the length axis). Turntable sweeps must pass
+                  the value reported as plate_end_used by frame 0, or the plate
+                  jumps ends mid-sweep.
   az, elev      - camera azimuth (deg) / elevation fraction (default 40 / 0.15)
   zfrac         - plate height as a fraction of car height (default 0.32)
   samples       - Cycles samples (default 160)
   width, height - output resolution (default 1600x900)
+  studio        - clean dark backdrop + bright reflections (default TRUE:
+                  one consistent catalogue look; pass false for the legacy
+                  colour-dependent backdrop)
 
 Output: { "status": "success", "png_b64": "...", "device": "OPTIX|CUDA|CPU",
-          "seconds": <float> }
+          "seconds": <float>, "recolour": {mode, paint_named, coverage,
+          materials}, "plate_end_used": "hi|lo|null" }
 """
 import os
 import sys
@@ -72,6 +89,29 @@ def _paint_rgb(colour):
     k = str(colour).strip().lower()
     return _RGB.get(k) or _RGB.get(k.replace("-", " "))
 
+
+# FINISH column of platform/paint/oem_paint_db.csv -> shader params. Base
+# roughness sits UNDER the clearcoat, so metallic paint keeps flake depth while
+# the coat provides the gloss. Legacy (finish omitted) preserves the exact look
+# shipped before finish awareness.
+_FIN_LEGACY = dict(metal=0.6, rough=0.11, coat=1.0, coat_r=0.03)
+_FIN_PEARL = dict(metal=0.40, rough=0.18, coat=1.0, coat_r=0.02)
+_FINISH = {
+    "solid": dict(metal=0.05, rough=0.32, coat=1.0, coat_r=0.03),
+    "metallic": dict(metal=0.85, rough=0.30, coat=1.0, coat_r=0.03),
+    "mica": dict(metal=0.85, rough=0.30, coat=1.0, coat_r=0.03),
+    "pearl": _FIN_PEARL, "multi-coat": _FIN_PEARL, "tri-coat": _FIN_PEARL,
+    "crystal": _FIN_PEARL,
+    "matte": dict(metal=0.20, rough=0.48, coat=0.0, coat_r=0.10),
+}
+
+
+def _finish_params(finish):
+    if not finish:
+        return _FIN_LEGACY
+    k = str(finish).strip().lower().replace("_", "-").replace(" ", "-")
+    return _FINISH.get(k, _FIN_LEGACY)
+
 _gpu_device = None  # cached across warm invocations
 
 import re as _re
@@ -96,9 +136,20 @@ def _norm_name(n):
 
 
 def _classify_materials(bpy):
-    """Per-material metadata as Blender sees it: summed face area + role flags."""
+    """Per-material metadata as Blender sees it: summed face area + role flags.
+
+    Areas are WORLD-space: p.area is local mesh space, and objects arrive with
+    node scales (e.g. unit-cube parts scaled down) — summing local areas made a
+    scaled-down interior box outweigh the whole car shell and skewed the
+    body-choice area rule on every multi-object GLB. For a planar face under a
+    linear map M, world_area = local_area * |cofactor(M) @ n_local|."""
     meta = {}
     for o in [x for x in bpy.context.scene.objects if x.type == "MESH"]:
+        m3 = o.matrix_world.to_3x3()
+        try:
+            cof = m3.inverted().transposed() * m3.determinant()
+        except ValueError:
+            cof = None  # degenerate transform: fall back to local area
         for p in o.data.polygons:
             mi = p.material_index
             if mi >= len(o.material_slots):
@@ -130,7 +181,10 @@ def _classify_materials(bpy):
                         a = b.inputs.get("Alpha")
                         if a is not None:
                             alpha = float(a.default_value)
-                            if alpha < 0.55:
+                            # 0.9 matches the QC gate (asset_audit G2) and
+                            # cabin_assembly's 0.72 tint — anything that
+                            # renders see-through must never be repainted.
+                            if alpha < 0.9:
                                 glass = True
                     except Exception:
                         pass
@@ -148,7 +202,7 @@ def _classify_materials(bpy):
                            "excl": excl, "paint": bool(_PAINT.search(nn)), "mat": mm,
                            "dbg": {"alpha": alpha, "tw": tw, "emiss": emiss}}
                 d = meta[n]
-            d["area"] += p.area
+            d["area"] += p.area * ((cof @ p.normal).length if cof else 1.0)
     return meta
 
 
@@ -260,7 +314,8 @@ def _fetch_glb(job_input):
 
 
 def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
-            samples, resx, resy, bright=False, studio=False):
+            samples, resx, resy, bright=False, studio=True,
+            finish=None, recolour_mode="auto", plate_end="auto"):
     import mathutils
     import bmesh
     import re
@@ -283,12 +338,28 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
         pass
 
     # premium clearcoat (+ optional recolour) on the DETECTED body materials.
-    # Detection is by role flags + area in Blender (not just material name), so
-    # generic-named / non-English bodies still repaint and glass/lights/wheels
-    # are spared. Any baked texture or vertex-colour feeding Base Color is
-    # unlinked so the DVLA colour always wins (fixes camo-wrap models).
+    # Detection is by role flags + area in Blender (not just material name).
+    # Recolour has two methods and the choice is now a machine rule:
+    #   flat — unlink Base Color inputs, set the colour (clean OEM respray;
+    #          destroys baked detail, so ONLY safe on paint-named materials)
+    #   tint — MULTIPLY the existing Base Color chain by the colour, so baked
+    #          shading, shutlines and trim survive (the method that shipped the
+    #          Golf colour variants). Used whenever the body is not paint-named
+    #          — fused/generated shells, generic atlases — which also encodes
+    #          the "never flood-paint a fused shell" quarantine rule.
     meta = _classify_materials(bpy)
     chosen = _choose_body(meta)
+    _rgb = _paint_rgb(colour)
+    fin = _finish_params(finish)
+    paint_named = any(meta[n]["paint"] for n in chosen)
+    tot_area = sum(d["area"] for d in meta.values()) or 1.0
+    mode = recolour_mode if recolour_mode in ("flat", "tint", "off") \
+        else ("flat" if paint_named else "tint")
+    recolour_info = {
+        "mode": mode if (_rgb is not None and mode != "off") else "none",
+        "paint_named": paint_named,
+        "coverage": round(sum(meta[n]["area"] for n in chosen) / tot_area, 3),
+        "materials": sorted(chosen)}
     for bn in chosen:
         m = meta[bn]["mat"]
         if not m or not m.use_nodes or not m.node_tree:
@@ -296,16 +367,30 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
         b = m.node_tree.nodes.get("Principled BSDF")
         if not b:
             continue
-        _rgb = _paint_rgb(colour)
-        if _rgb is not None:
-            for lnk in list(b.inputs["Base Color"].links):
-                m.node_tree.links.remove(lnk)
-            b.inputs["Base Color"].default_value = (*_rgb, 1)
-            b.inputs["Metallic"].default_value = 0.6
-        b.inputs["Roughness"].default_value = 0.11
+        if _rgb is not None and mode != "off":
+            links = list(b.inputs["Base Color"].links)
+            if mode == "flat" or not links:
+                for lnk in links:
+                    m.node_tree.links.remove(lnk)
+                b.inputs["Base Color"].default_value = (*_rgb, 1)
+            else:
+                src = links[0].from_socket
+                m.node_tree.links.remove(links[0])
+                mix = m.node_tree.nodes.new("ShaderNodeMix")
+                mix.data_type = "RGBA"
+                mix.blend_type = "MULTIPLY"
+                mix.inputs["Factor"].default_value = 1.0
+                m.node_tree.links.new(src, mix.inputs[6])
+                # 1.25 lift compensates multiply darkening on mid-tone bakes
+                # (same constant the offline tint pipeline shipped with)
+                mix.inputs[7].default_value = \
+                    (*[min(1.0, cc * 1.25) for cc in _rgb], 1.0)
+                m.node_tree.links.new(mix.outputs[2], b.inputs["Base Color"])
+            b.inputs["Metallic"].default_value = fin["metal"]
+        b.inputs["Roughness"].default_value = fin["rough"]
         if "Coat Weight" in b.inputs:
-            b.inputs["Coat Weight"].default_value = 1.0
-            b.inputs["Coat Roughness"].default_value = 0.03
+            b.inputs["Coat Weight"].default_value = fin["coat"]
+            b.inputs["Coat Roughness"].default_value = fin["coat_r"]
 
     # normalize scale: GLBs arrive at wildly different scales (some cars are
     # ~0.05 units); scale the scene so the car is ~4.5 units so camera/DOF/light
@@ -461,7 +546,11 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     fb.inputs["Roughness"].default_value = 0.06
     fm.materials.append(fmat)
 
-    # optional plate on the camera-facing end
+    # optional plate. plate_end "hi"/"lo" pins the end on the length axis so
+    # turntable sweeps don't re-decide per frame (the plate used to teleport
+    # from nose to tail as the camera crossed the side); "auto" keeps the
+    # camera-facing choice for single hero frames.
+    plate_end_used = None
     if plate_reg:
         plate_png = _make_plate(plate_reg)
         L = 0 if (hi[0] - lo[0]) >= (hi[1] - lo[1]) else 1
@@ -469,7 +558,13 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
         scale = (hi[L] - lo[L]) / 4.5
         pw = 0.52 * scale / 2
         ph = 0.11 * scale / 2
-        end = hi[L] if abs(loc[L] - hi[L]) < abs(loc[L] - lo[L]) else lo[L]
+        if plate_end == "hi":
+            end = hi[L]
+        elif plate_end == "lo":
+            end = lo[L]
+        else:
+            end = hi[L] if abs(loc[L] - hi[L]) < abs(loc[L] - lo[L]) else lo[L]
+        plate_end_used = "hi" if end == hi[L] else "lo"
         outward = 1.0 if end == hi[L] else -1.0
         Lc = end + outward * size * 0.006
         Wc = c[Wd]
@@ -528,7 +623,7 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     sc.render.image_settings.file_format = "PNG"
     sc.render.filepath = out
     bpy.ops.render.render(write_still=True)
-    return device
+    return device, recolour_info, plate_end_used
 
 
 def _diag():
@@ -589,7 +684,7 @@ def handler(job):
         glb = _fetch_glb(ji)
         out = os.path.join(tempfile.gettempdir(), "render.png")
         t0 = time.time()
-        device = _render(
+        device, recolour_info, plate_end_used = _render(
             bpy, glb, out,
             colour=ji.get("colour") or ji.get("color"),
             plate_reg=ji.get("plate"),
@@ -600,13 +695,17 @@ def handler(job):
             resx=int(ji.get("width", 1600)),
             resy=int(ji.get("height", 900)),
             bright=bool(ji.get("bright", False)),
-            studio=bool(ji.get("studio", False)),
+            studio=bool(ji.get("studio", True)),
+            finish=ji.get("finish"),
+            recolour_mode=str(ji.get("recolour", "auto")).lower(),
+            plate_end=str(ji.get("plate_end", "auto")).lower(),
         )
         dt = round(time.time() - t0, 1)
         with open(out, "rb") as f:
             png_b64 = base64.b64encode(f.read()).decode("utf-8")
         return {"status": "success", "png_b64": png_b64,
-                "device": device, "seconds": dt}
+                "device": device, "seconds": dt,
+                "recolour": recolour_info, "plate_end_used": plate_end_used}
     except Exception as e:
         import traceback
         return {"error": str(e), "traceback": traceback.format_exc()}

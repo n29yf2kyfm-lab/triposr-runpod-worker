@@ -11,8 +11,11 @@ Door articulation is NOT attempted here (stage 2: shutline cut + hinge).
 
 Run: blender -b -noaudio --python cabin_assembly.py -- in.glb out.glb
 """
-import bpy, math, sys
+import bpy, math, os, sys
 import numpy as np
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from car_common import detect_axes, wheel_arches
 
 argv = sys.argv[sys.argv.index("--") + 1:]
 SRC, DST = argv[0], argv[1]
@@ -24,8 +27,7 @@ me = obj.data
 vs = np.array([v.co[:] for v in me.vertices])
 lo, hi = vs.min(0), vs.max(0)
 d = hi - lo
-LA = int(np.argmax([d[0], d[1], 0]))          # length axis among x,y
-WA = 1 - LA
+LA, WA = detect_axes(vs)
 L, W, H = d[LA], d[WA], d[2]
 cx_w = (lo[WA] + hi[WA]) / 2
 cl = (lo[LA] + hi[LA]) / 2
@@ -52,12 +54,8 @@ me.materials.append(m_wheel)
 wi = len(me.materials) - 1
 
 # ---- classify glass + wheels on the shell (length-axis aware) --------------
-band = vs[vs[:, 2] < lo[2] + 0.22 * H]
-histo, edges = np.histogram(band[:, LA], bins=40)
-front = edges[np.argmax(histo * (edges[:-1] < cl))]
-rear = edges[np.argmax(histo * (edges[:-1] >= cl))]
-R = 0.085 * L
-czw = lo[2] + R
+arch = wheel_arches(vs, LA)
+front, rear, R, czw = arch["front"], arch["rear"], arch["R"], arch["czw"]
 belt_z = lo[2] + 0.60 * H
 shoulder = W / 2
 nglass = nwheel = 0

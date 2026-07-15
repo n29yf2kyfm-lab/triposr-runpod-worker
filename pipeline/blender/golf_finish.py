@@ -37,10 +37,13 @@ for o in meshes:
     bpy.ops.mesh.normals_make_consistent(inside=False)
     bpy.ops.object.mode_set(mode="OBJECT")
     for p in o.data.polygons: p.use_smooth = True
-    try:
+    # use_auto_smooth was removed in Blender 4.1 — the old try/except silently
+    # skipped the angle split there, leaving glass/trim blobby. On 4.1+ the op
+    # adds a 'Smooth by Angle' modifier, baked by export_apply=True below.
+    if hasattr(o.data, "use_auto_smooth"):        # Blender <= 4.0
         o.data.use_auto_smooth = True; o.data.auto_smooth_angle = math.radians(40)
-    except Exception:
-        pass
+    else:
+        bpy.ops.object.shade_auto_smooth(angle=math.radians(40))
     if is_paint(o):
         # feature-preserving relax of the wavy panels
         cs = o.modifiers.new("Corrective", "CORRECTIVE_SMOOTH")
