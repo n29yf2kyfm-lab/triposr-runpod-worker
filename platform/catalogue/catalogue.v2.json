@@ -280,12 +280,17 @@
   "make": "volkswagen",
   "model": "golf",
   "modelFamily": "golf",
-  "modelAliases": [],
+  "modelAliases": [
+   "golf gtd",
+   "golf gte",
+   "golf gti",
+   "golf r"
+  ],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": 2020,
-  "yearEnd": 2022,
+  "yearStart": null,
+  "yearEnd": null,
   "bodyStyle": "hatchback",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
@@ -338,7 +343,8 @@
   "publishedAt": null,
   "replacedAssetId": null,
   "needsHumanReview": [
-   "generation unconfirmed (source title 2021 GTI, body resembles Mk7.5)"
+   "generation unconfirmed (source title 2021 GTI, body resembles Mk7.5)",
+   "year window NULLED 2026-07-15: title year (2021) contradicts the measured body (proportions match Mk7.5 factory dims, L/W 2.38) — a window built from the title rejected the very years the body fits. Unknown beats wrong."
   ],
   "notes": [
    "2026-07-14: replaced sourced Mk7.5-style mesh with Mk8 TRELLIS build; previous asset at vw/golf_sourced_v26_uc.glb",
