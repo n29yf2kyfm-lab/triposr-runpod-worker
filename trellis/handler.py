@@ -189,6 +189,11 @@ def handler(job):
     # Mesh knobs (safe defaults tuned for car assets served to a web viewer).
     decimation_target = int(job_input.get("decimation_target", 500000))
     texture_size = int(job_input.get("texture_size", 2048))
+    # Quality knobs surfaced from Trellis2ImageTo3DPipeline.run() (Alam 3D
+    # upgrade): 1536 cascade auto-degrades resolution under VRAM pressure via
+    # max_num_tokens, so it is safe to request on 24GB workers.
+    pipeline_type = job_input.get("pipeline_type", "1536_cascade")
+    num_samples = int(job_input.get("num_samples", 1))
 
     if not image_url and not image_b64:
         # TRELLIS.2-4B is image-to-3D. A prompt with no image is a client error.
@@ -209,9 +214,12 @@ def handler(job):
 
         pipeline = get_image_pipeline()
         try:
-            mesh = pipeline.run(
-                img, seed=seed, preprocess_image=not skip_preprocess
-            )[0]
+            meshes = pipeline.run(
+                img, seed=seed, preprocess_image=not skip_preprocess,
+                pipeline_type=pipeline_type, num_samples=num_samples,
+            )
+            # best-of-N: keep the sample with the most faces (densest recon)
+            mesh = max(meshes, key=lambda m: len(m.faces)) if len(meshes) > 1 else meshes[0]
         except TypeError:
             torch.manual_seed(seed)
             mesh = pipeline.run(img)[0]
