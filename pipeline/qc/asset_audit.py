@@ -61,7 +61,11 @@ def luma_std_of_faces(mesh, face_mask, lowfreq=False):
 
 def audit(path, ref_lw=None, min_interior_verts=1500, wheel_std=0.22, paint_std=0.10):
     scene = trimesh.load(path, force="scene")
-    geoms = list(scene.geometry.values())
+    geoms = [g for g in scene.geometry.values()
+             if isinstance(g, trimesh.Trimesh) and len(g.vertices) > 0 and len(g.faces) > 0]
+    if not geoms:
+        return {"file": path, "verdict": "ERROR", "gates": {}, "action": "inspect",
+                "reasons": ["unreadable: no triangle geometry (draco-compressed or empty)"]}
     reasons, gates = [], {}
 
     allv = np.vstack([g.vertices for g in geoms])
