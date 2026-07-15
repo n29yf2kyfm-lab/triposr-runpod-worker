@@ -318,8 +318,15 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "paintMaterialNames": [
+   "Paint_Color"
+  ],
+  "glassMaterialNames": [
+   "front_glass_tint",
+   "int_screen",
+   "privacy_glass",
+   "roof_glass"
+  ],
   "defaultColourFamily": "grey",
   "renderColourLabel": "Dolphin Grey Metallic (render)",
   "oemPaintVerified": false,
@@ -664,7 +671,9 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "glassMaterialNames": [
+   "glass__spec_tran1"
+  ],
   "defaultColourFamily": "black",
   "renderColourLabel": "Black",
   "oemPaintVerified": false,
@@ -868,8 +877,16 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "paintMaterialNames": [
+   "defenderM_CarPaintBadge_Max1",
+   "defenderM_Chassis_Max1",
+   "defenderM_GrilleA_CarPaint_Max1"
+  ],
+  "glassMaterialNames": [
+   "defenderM_LightGlassNormal_OuterClear_Low1",
+   "defenderM_LightGlassNormal_OuterOrange_Low1",
+   "defenderM_LightGlassNormal_OuterRed_Low1"
+  ],
   "defaultColourFamily": "silver",
   "renderColourLabel": "Silver",
   "oemPaintVerified": false,
@@ -939,7 +956,10 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "glassMaterialNames": [
+   "glass.0",
+   "glass.1"
+  ],
   "defaultColourFamily": "white",
   "renderColourLabel": "White",
   "oemPaintVerified": false,
@@ -1965,7 +1985,9 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "Paint_Color"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
@@ -2099,7 +2121,14 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "Mesheschassis0111_diff",
+   "Mesheschassis0131_diff",
+   "Mesheschassis0141_diff",
+   "Mesheschassis0171_diff",
+   "Mesheschassis0291_diff",
+   "Mesheschassis0301_diff"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
@@ -3119,7 +3148,10 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "bodyParts",
+   "paint"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
@@ -3256,7 +3288,9 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "glassMaterialNames": [
+   "glass"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -3462,7 +3496,9 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "glassMaterialNames": [
+   "material_6"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -3806,7 +3842,9 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "glassMaterialNames": [
+   "polo17lightglass_R"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -4145,7 +4183,9 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "Paint_Color"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
@@ -4352,7 +4392,9 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "glassMaterialNames": [
+   "light_glass_clear"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -4896,7 +4938,10 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "glassMaterialNames": [
+   "glass",
+   "taillight_glass"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -5505,8 +5550,14 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "paintMaterialNames": [
+   "c1_paint"
+  ],
+  "glassMaterialNames": [
+   "c1_tailglass",
+   "covet_glass",
+   "glass"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -5980,8 +6031,13 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "paintMaterialNames": [
+   "Shared_Car_Chassis"
+  ],
+  "glassMaterialNames": [
+   "Glass_Fabric",
+   "Screen_Glow_Giulia"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -6048,8 +6104,12 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "paintMaterialNames": [
+   "carPaint_int"
+  ],
+  "glassMaterialNames": [
+   "Intglass"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -6117,7 +6177,9 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "glassMaterialNames": [
+   "glass_interior"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -7137,7 +7199,9 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "chassis.1"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
@@ -7614,8 +7678,13 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "paintMaterialNames": [
+   "Chassis"
+  ],
+  "glassMaterialNames": [
+   "Illuminated_Gauges",
+   "Screen"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -7751,7 +7820,9 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "glassMaterialNames": [
+   "hyui40_glass"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -8499,8 +8570,13 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "paintMaterialNames": [
+   "wrxM_CarPaintNormal_Max1",
+   "wrxM_Chassis_Max1"
+  ],
+  "glassMaterialNames": [
+   "wrxM_LightGlassNormal_Clear_Low1"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -8705,7 +8781,12 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "glassMaterialNames": [
+   "Glass1Mtl",
+   "Glass2Mtl",
+   "Glass4Mtl",
+   "Glass5Mtl"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -8773,8 +8854,22 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "paintMaterialNames": [
+   "Meshesmeshes1chassisdummy0011Mtl",
+   "Meshesmeshes1chassisdummy0021Mtl",
+   "Meshesmeshes1chassisdummy0031Mtl",
+   "Meshesmeshes1chassisdummy0041Mtl"
+  ],
+  "glassMaterialNames": [
+   "Meshesmeshes1bonnetok0021Mtl",
+   "Meshesmeshes1doorlfok0061Mtl",
+   "Meshesmeshes1doorrfok0071Mtl",
+   "Meshesmeshes1light1Mtl",
+   "Meshesmeshes1readiator0021Mtl",
+   "Meshesmeshes1windscreenok0031Mtl",
+   "Meshesmeshes1windscreenok0041Mtl",
+   "Meshesmeshes1windscreenok1Mtl"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -8910,8 +9005,12 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "paintMaterialNames": [
+   "Chassis"
+  ],
+  "glassMaterialNames": [
+   "Screen"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -8978,8 +9077,12 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "glass"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -9865,8 +9968,18 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "paintMaterialNames": [
+   "chassis.0",
+   "chassis.1",
+   "chassis.2",
+   "chassis.5",
+   "chassis.6",
+   "chassis.8",
+   "chassis.9"
+  ],
+  "glassMaterialNames": [
+   "glass"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -9934,7 +10047,9 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "body_kit_screw"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
@@ -10416,7 +10531,10 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "glassMaterialNames": [
+   "etk800_glass",
+   "vivace_glass"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -10687,8 +10805,18 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "paintMaterialNames": [
+   "Chassis0081Mtl",
+   "Chassis0091Mtl",
+   "Chassis1Mtl"
+  ],
+  "glassMaterialNames": [
+   "Bootok0071Mtl",
+   "Doorrfok0121Mtl",
+   "Fari0041Mtl",
+   "Seat1Mtl",
+   "Windscreenok1Mtl"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,
@@ -10962,7 +11090,9 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "BMW_E30_M3_PAINT"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
@@ -11098,8 +11228,15 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
-  "glassMaterialNames": [],
+  "paintMaterialNames": [
+   "Carpaint",
+   "EXT_BODY_2",
+   "M_CarPaint_Trim_CarbonA_Max"
+  ],
+  "glassMaterialNames": [
+   "EXt_GLASS",
+   "redg"
+  ],
   "defaultColourFamily": "unknown",
   "renderColourLabel": "Native (as-modelled)",
   "oemPaintVerified": false,

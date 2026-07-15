@@ -1,0 +1,80 @@
+{
+ "generatedAt": "2026-07-15",
+ "realPaintCount": 8,
+ "cleanPaintCars": [
+  {
+   "make": "volkswagen",
+   "model": "golf",
+   "paint": [
+    "Paint_Color"
+   ],
+   "glassMats": 4,
+   "bodyPct": 27.9
+  },
+  {
+   "make": "land-rover",
+   "model": "defender",
+   "paint": [
+    "defenderM_CarPaintBadge_Max1",
+    "defenderM_GrilleA_CarPaint_Max1"
+   ],
+   "glassMats": 3,
+   "bodyPct": 20.5
+  },
+  {
+   "make": "mercedes-benz",
+   "model": "gla",
+   "paint": [
+    "Paint_Color"
+   ],
+   "glassMats": 0,
+   "bodyPct": 12.5
+  },
+  {
+   "make": "mercedes-benz",
+   "model": "vito",
+   "paint": [
+    "paint"
+   ],
+   "glassMats": 0,
+   "bodyPct": 70.5
+  },
+  {
+   "make": "volkswagen",
+   "model": "id4",
+   "paint": [
+    "Paint_Color"
+   ],
+   "glassMats": 0,
+   "bodyPct": 66.8
+  },
+  {
+   "make": "alfa-romeo",
+   "model": "stelvio",
+   "paint": [
+    "carPaint_int"
+   ],
+   "glassMats": 1,
+   "bodyPct": 17.7
+  },
+  {
+   "make": "subaru",
+   "model": "impreza",
+   "paint": [
+    "wrxM_CarPaintNormal_Max1"
+   ],
+   "glassMats": 1,
+   "bodyPct": 20.9
+  },
+  {
+   "make": "bmw",
+   "model": "m5",
+   "paint": [
+    "Carpaint",
+    "M_CarPaint_Trim_CarbonA_Max"
+   ],
+   "glassMats": 2,
+   "bodyPct": 8.9
+  }
+ ]
+}
