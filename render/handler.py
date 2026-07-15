@@ -403,15 +403,29 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
                 mix.inputs[7].default_value = \
                     (*[min(1.0, cc * 1.25) for cc in _rgb], 1.0)
                 m.node_tree.links.new(mix.outputs[2], b.inputs["Base Color"])
-            if mode == "flat":
-                b.inputs["Metallic"].default_value = fin["metal"]
-        # tint mode = colour + clearcoat ONLY. The tinted body keeps its own
-        # metallic/roughness: forcing finish metallic onto a baked texture
-        # turns the car liquid-silver wherever the bright HDRI reflects
-        # (measured on the Alam Golf — rear half lost its colour entirely).
-        # This matches the shipped offline tint recipe exactly.
-        if mode != "tint":
-            b.inputs["Roughness"].default_value = fin["rough"]
+
+        def _force(name, val):
+            # setting default_value on a LINKED input is silently ignored —
+            # generated assets drive Metallic/Roughness from a baked
+            # metallicRoughness texture (implicit factor 1.0 = chrome car),
+            # so the link must be cut before the value can land.
+            inp = b.inputs.get(name)
+            if inp is None:
+                return
+            for lnk in list(inp.links):
+                m.node_tree.links.remove(lnk)
+            inp.default_value = val
+        if mode == "flat":
+            _force("Metallic", fin["metal"])
+            _force("Roughness", fin["rough"])
+        elif mode == "tint" and _rgb is not None:
+            # tinted (generated/fused) bodies render as DIELECTRIC paint:
+            # the baked metallicRoughness atlas is photo noise, not paint
+            # data — it's what made the Alam Golf liquid-silver. Colour
+            # detail still comes from the multiplied base texture; gloss
+            # comes from the clearcoat.
+            _force("Metallic", 0.15)
+            _force("Roughness", 0.30)
         if "Coat Weight" in b.inputs:
             b.inputs["Coat Weight"].default_value = fin["coat"]
             b.inputs["Coat Roughness"].default_value = fin["coat_r"]
