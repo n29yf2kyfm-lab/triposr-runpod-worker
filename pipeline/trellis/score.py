@@ -34,8 +34,10 @@ def load(path):
 def symmetry(m):
     v = m.vertices - m.vertices.mean(0)
     ext = v.max(0) - v.min(0)
-    wa = int(np.argmax([ext[0], 0, ext[2]]))  # width axis = larger of x/z (crude)
-    wa = 0 if ext[0] >= ext[2] else 2
+    # width axis = the SMALLER horizontal extent. (Audit finding A3: this
+    # used to pick the larger — the LENGTH axis — so the metric scored
+    # front/back mirror agreement instead of left/right symmetry.)
+    wa = 0 if ext[0] <= ext[2] else 2
     mir = v.copy(); mir[:, wa] *= -1
     # nearest-neighbour distance between v and its mirror, normalised by size
     from scipy.spatial import cKDTree
@@ -51,7 +53,6 @@ def proportions(m):
 
 def cleanliness(m):
     try:
-        nm = (~m.edges_unique_length.astype(bool)).sum() if False else 0
         ratio = len(m.faces[m.area_faces < 1e-9]) / max(1, len(m.faces))
         wt = 1.0 if m.is_watertight else 0.6
         return float(max(0.0, wt - ratio * 5))

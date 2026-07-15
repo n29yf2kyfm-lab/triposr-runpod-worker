@@ -26,7 +26,8 @@ HONEST LIMITATIONS (stage 3):
 import os, sys, json, time, base64, argparse, subprocess, urllib.request
 
 EP = "nd0fagqlr5z2ur"   # TRELLIS.2-4B
-RP = os.path.join(os.path.dirname(__file__), "..", "..", "scratchpad", "rp.py")  # RunPod helper
+# committed helper (audit A2 fix) — needs RUNPOD_API_KEY in the environment
+RP = os.path.join(os.path.dirname(__file__), "..", "rp.py")
 
 def submit(img_path, seed, texture, decimate):
     b64 = base64.b64encode(open(img_path, "rb").read()).decode()

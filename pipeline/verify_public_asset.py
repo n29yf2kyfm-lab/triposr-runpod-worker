@@ -19,7 +19,9 @@ import argparse, hashlib, json, os, subprocess, sys, tempfile, urllib.request, d
 def check(entry):
     res = {"assetId": entry["assetId"], "url": entry["desktopGlbUrl"], "checks": {}}
     try:
-        data = urllib.request.urlopen(entry["desktopGlbUrl"] + "?cb=verify", timeout=300).read()
+        u = entry["desktopGlbUrl"]
+        data = urllib.request.urlopen(
+            u + ("&" if "?" in u else "?") + "cb=verify", timeout=300).read()
     except Exception as e:
         res["checks"]["fetch"] = f"FAIL: {e}"
         res["status"] = "failed"

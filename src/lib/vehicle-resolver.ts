@@ -101,7 +101,17 @@ export function scoreAsset(asset: VehicleAsset, v: VehicleIdentity): Scored {
   return { asset, score: Math.max(0, Math.min(100, score)), matched, mismatched, missing };
 }
 
-export function resolveVehicle(v: VehicleIdentity, catalogue: VehicleAsset[]): VehicleResolution {
+export function resolveVehicle(
+  v: VehicleIdentity,
+  catalogue: VehicleAsset[],
+  opts?: { minScore?: number },
+): VehicleResolution {
+  // Default 75 assumes generation/year-enriched asset metadata. The deployed
+  // Edge Function passes 40 until enrichment lands (audit A1, 2026-07-15):
+  // the hard rejections above still make wrong-generation serves impossible;
+  // a conflict-free thin-metadata match serves as "representative" with its
+  // honest disclosure instead of blanking the product.
+  const minScore = opts?.minScore ?? 75;
   const candidates = catalogue
     .filter((a) => a.publicationStatus === "approved" && a.qualityGrade !== "rejected")
     .map((a) => scoreAsset(a, v))
@@ -111,7 +121,7 @@ export function resolveVehicle(v: VehicleIdentity, catalogue: VehicleAsset[]): V
   candidates.sort((a: Scored, b: Scored) => b.score - a.score);
   const best = candidates[0];
 
-  if (best.score < 75) return { ...UNAVAILABLE };
+  if (best.score < minScore) return { ...UNAVAILABLE };
 
   let resolutionType: ResolutionType;
   if (best.score >= 90) {

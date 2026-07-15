@@ -9,9 +9,9 @@ REF="tfkvthprsntexrcuqpyd"; SBKEY=os.environ["SB_KEY"]
 BASE=f"https://{REF}.supabase.co/storage/v1/object"; PUB=f"{BASE}/public/car-renders"
 
 # DVLA colour vocabulary (applies to all vehicles)
-COLOURS=["Black","White","Silver","Grey","Blue","Red","Green","Grey","Bronze",
-         "Orange","Yellow","Purple","Brown","Gold","Beige","Maroon","Pink","Turquoise"]
-COLOURS=sorted(set(COLOURS))
+COLOURS=sorted(["Black","White","Silver","Grey","Blue","Red","Green","Bronze",
+                "Orange","Yellow","Purple","Brown","Gold","Beige","Maroon",
+                "Pink","Turquoise"])
 
 P,D,H,E=["petrol"],["diesel"],["hybrid"],["electric"]
 PD=["petrol","diesel"]; PDH=["petrol","diesel","hybrid"]; PHE=["petrol","hybrid","electric"]
@@ -67,13 +67,9 @@ CARS={
    ("E-Class","W213",2016,2023,"saloon",PDH),("GLA","H247",2020,2026,"suv",PDH),("GLC","X253",2015,2022,"suv",PDH),
    ("GLC","X254",2022,2026,"suv",PH),("EQA","H243",2021,2026,"suv",E),("EQC","N293",2019,2024,"suv",E)],
  "volkswagen":[("Polo","AW",2017,2026,"hatchback",P),("Golf","Mk7",2015,2020,"hatchback",PDH),("Golf","Mk8",2020,2026,"hatchback",PDH),
-   ("T-Roc","A1",2017,2026,"suv",PD),("Tiguan","AD",2016,2024,"suv",PDH),("Tiguan","CT",2024,2026,"suv",PH),
-   ("Passat","B8",2015,2023,"saloon",PDH),("ID.3","E1",2020,2026,"hatchback",E),("ID.4","E2",2021,2026,"suv",E),
-   ("Up","AA",2015,2023,"hatchback",PE),("Arteon","3H",2017,2024,"saloon",PDH)] if False else
-   [("Polo","AW",2017,2026,"hatchback",P),("Golf","Mk7",2015,2020,"hatchback",PDH),("Golf","Mk8",2020,2026,"hatchback",PDH),
    ("T-Roc","A1",2017,2026,"suv",PD),("T-Cross","C1",2019,2026,"suv",P),("Tiguan","AD",2016,2024,"suv",PDH),
    ("Passat","B8",2015,2023,"saloon",PDH),("ID.3","E1",2020,2026,"hatchback",E),("ID.4","E2",2021,2026,"suv",E),
-   ("Up","AA",2015,2023,"hatchback",["petrol","electric"]),("Arteon","3H",2017,2024,"saloon",PDH)],
+   ("Up","AA",2015,2023,"hatchback",PE),("Arteon","3H",2017,2024,"saloon",PDH)],
  "ford":[("Fiesta","Mk7",2017,2023,"hatchback",PH),("Focus","Mk4",2018,2026,"hatchback",PDH),
    ("Puma","J1",2019,2026,"suv",PH),("Kuga","CX482",2019,2026,"suv",PDH),("Mustang Mach-E","CX727",2020,2026,"suv",E),
    ("EcoSport","B515",2015,2022,"suv",PD),("Mondeo","CD391",2015,2022,"saloon",PDH)],
@@ -125,10 +121,8 @@ CARS={
 
 # ---- VANS ----
 VANS={
- "ford":[("Transit","V363",2015,2026,"panel van",D),("Transit Custom","V362",2015,2026,"panel van",PDE),
-   ("Transit Connect","",2015,2026,"panel van",D),("Ranger","P703",2015,2026,"pickup",PD)] if False else
-   [("Transit","V363",2015,2026,"panel van",["diesel","electric"]),("Transit Custom","V362",2015,2026,"panel van",["diesel","electric"]),
-    ("Transit Connect","PJ2",2015,2026,"panel van",D),("Ranger","P703",2015,2026,"pickup",PD)],
+ "ford":[("Transit","V363",2015,2026,"panel van",DE),("Transit Custom","V362",2015,2026,"panel van",DE),
+   ("Transit Connect","PJ2",2015,2026,"panel van",D),("Ranger","P703",2015,2026,"pickup",PD)],
  "volkswagen":[("Transporter","T6",2015,2026,"panel van",["diesel","electric"]),("Caddy","SB",2020,2026,"panel van",PD),("Crafter","SY",2017,2026,"panel van",D)],
  "mercedes-benz":[("Sprinter","W907",2018,2026,"panel van",["diesel","electric"]),("Vito","W447",2015,2026,"panel van",["diesel","electric"]),("Citan","W420",2021,2026,"panel van",D)],
  "vauxhall":[("Vivaro","K0",2019,2026,"panel van",["diesel","electric"]),("Combo","K9",2018,2026,"panel van",["diesel","electric"]),("Movano","",2021,2026,"panel van",["diesel","electric"])],

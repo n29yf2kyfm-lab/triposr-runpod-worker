@@ -227,16 +227,16 @@ def handler(job):
                 pipeline_type=pipeline_type, num_samples=num_samples)
             mesh = max(meshes, key=lambda m: len(m.faces)) if len(meshes) > 1 else meshes[0]
         else:
-          try:
-            meshes = pipeline.run(
-                img, seed=seed, preprocess_image=not skip_preprocess,
-                pipeline_type=pipeline_type, num_samples=num_samples,
-            )
-            # best-of-N: keep the sample with the most faces (densest recon)
-            mesh = max(meshes, key=lambda m: len(m.faces)) if len(meshes) > 1 else meshes[0]
-          except TypeError:
-            torch.manual_seed(seed)
-            mesh = pipeline.run(img)[0]
+            try:
+                meshes = pipeline.run(
+                    img, seed=seed, preprocess_image=not skip_preprocess,
+                    pipeline_type=pipeline_type, num_samples=num_samples,
+                )
+                # best-of-N: keep the sample with the most faces (densest recon)
+                mesh = max(meshes, key=lambda m: len(m.faces)) if len(meshes) > 1 else meshes[0]
+            except TypeError:
+                torch.manual_seed(seed)
+                mesh = pipeline.run(img)[0]
 
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         persisted_path = os.path.join(OUTPUT_DIR, f"{job_id}.glb")
