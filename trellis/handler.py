@@ -185,6 +185,7 @@ def handler(job):
     prompt = job_input.get("prompt", "")
     image_url = job_input.get("image_url", "")
     image_b64 = job_input.get("image_b64", "")
+    images_b64 = job_input.get("images_b64") or []   # multi-view (Alam 3D)
     seed = job_input.get("seed", 1)
     # Mesh knobs (safe defaults tuned for car assets served to a web viewer).
     decimation_target = int(job_input.get("decimation_target", 500000))
@@ -195,7 +196,7 @@ def handler(job):
     pipeline_type = job_input.get("pipeline_type", "1536_cascade")
     num_samples = int(job_input.get("num_samples", 1))
 
-    if not image_url and not image_b64:
+    if not image_url and not image_b64 and not images_b64:
         # TRELLIS.2-4B is image-to-3D. A prompt with no image is a client error.
         return {
             "error": "TRELLIS.2 is image-to-3D: provide image_url or image_b64"
@@ -203,9 +204,14 @@ def handler(job):
         }
 
     try:
-        if image_b64:
+        if images_b64:
+            imgs = [_load_image(base64.b64decode(b)) for b in images_b64]
+            img = imgs[0]
+        elif image_b64:
+            imgs = None
             img = _load_image(base64.b64decode(image_b64))
         else:
+            imgs = None
             img = fetch_image(image_url)
 
         # A real cutout (RGBA with transparency) skips the on-worker background
@@ -213,14 +219,22 @@ def handler(job):
         skip_preprocess = _has_cutout_alpha(img)
 
         pipeline = get_image_pipeline()
-        try:
+        if imgs and len(imgs) > 1:
+            from alam3d_multiview import run_multi_image
+            meshes = run_multi_image(
+                pipeline, imgs, seed=seed,
+                preprocess_image=not all(_has_cutout_alpha(i) for i in imgs),
+                pipeline_type=pipeline_type, num_samples=num_samples)
+            mesh = max(meshes, key=lambda m: len(m.faces)) if len(meshes) > 1 else meshes[0]
+        else:
+          try:
             meshes = pipeline.run(
                 img, seed=seed, preprocess_image=not skip_preprocess,
                 pipeline_type=pipeline_type, num_samples=num_samples,
             )
             # best-of-N: keep the sample with the most faces (densest recon)
             mesh = max(meshes, key=lambda m: len(m.faces)) if len(meshes) > 1 else meshes[0]
-        except TypeError:
+          except TypeError:
             torch.manual_seed(seed)
             mesh = pipeline.run(img)[0]
 

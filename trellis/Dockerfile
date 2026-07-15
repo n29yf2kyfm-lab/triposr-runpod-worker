@@ -87,5 +87,6 @@ ENV TRANSFORMERS_CACHE=/runpod-volume/hf_cache
 ENV TORCH_HOME=/runpod-volume/torch_cache
 
 COPY handler.py /app/handler.py
+COPY alam3d_multiview.py /app/alam3d_multiview.py
 
 CMD ["python", "-u", "/app/handler.py"]
