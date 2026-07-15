@@ -402,7 +402,25 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
                 # (same constant the offline tint pipeline shipped with)
                 mix.inputs[7].default_value = \
                     (*[min(1.0, cc * 1.25) for cc in _rgb], 1.0)
-                m.node_tree.links.new(mix.outputs[2], b.inputs["Base Color"])
+                # multiply CRUSHES dark targets (petrol blue on the Tiguan
+                # rendered black, hue gone): restore hue by blending a
+                # fraction of the flat target on top, scaled by target
+                # darkness — dark paints get up to ~45% flat colour, light
+                # paints keep nearly all baked detail. A texture-luma mask
+                # was tried and rejected: on palette models whose SOURCE car
+                # was dark, body texels are as dark as trim texels, so the
+                # mask kills the restore exactly where it's needed. Uniform
+                # restore slightly tints dark trim — acceptable; wrong paint
+                # colour is not.
+                luma = 0.2126 * _rgb[0] + 0.7152 * _rgb[1] + 0.0722 * _rgb[2]
+                restore = max(0.12, min(0.45, 0.12 + (0.35 - luma)))
+                fix = m.node_tree.nodes.new("ShaderNodeMix")
+                fix.data_type = "RGBA"
+                fix.blend_type = "MIX"
+                fix.inputs["Factor"].default_value = restore
+                m.node_tree.links.new(mix.outputs[2], fix.inputs[6])
+                fix.inputs[7].default_value = (*_rgb, 1.0)
+                m.node_tree.links.new(fix.outputs[2], b.inputs["Base Color"])
 
         def _force(name, val):
             # setting default_value on a LINKED input is silently ignored —
