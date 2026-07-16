@@ -250,8 +250,13 @@ def handler(job):
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         persisted_path = os.path.join(OUTPUT_DIR, f"{job_id}.glb")
         # extension_webp=True stores textures as WebP inside the GLB — much
-        # smaller PBR maps, as in upstream example.py.
-        glb.export(persisted_path, extension_webp=True)
+        # smaller PBR maps, as in upstream example.py. If the PIL/WebP
+        # toolchain is broken, fall back to a plain export rather than losing
+        # a finished model to a codec problem (live-hit on attempt 7).
+        try:
+            glb.export(persisted_path, extension_webp=True)
+        except Exception:
+            glb.export(persisted_path)
 
         with open(persisted_path, "rb") as f:
             glb_b64 = base64.b64encode(f.read()).decode("utf-8")

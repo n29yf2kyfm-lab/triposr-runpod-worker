@@ -44,8 +44,13 @@ RUN pip install --no-cache-dir imageio imageio-ffmpeg tqdm easydict opencv-pytho
     pip install --no-cache-dir trimesh transformers tensorboard pandas lpips zstandard && \
     pip install --no-cache-dir kornia timm && \
     pip install --no-cache-dir "git+https://github.com/EasternJournalist/utils3d.git@9a4eb15e4021b67b12c460c7057d642626897ec8"
-# pillow-simd is a drop-in faster PIL; if its build ever fails, fall back to Pillow.
-RUN pip install --no-cache-dir --force-reinstall pillow-simd || pip install --no-cache-dir pillow
+# NO pillow-simd (upstream setup.sh installs it; we deliberately don't): its
+# source build here lacks WebP support, and glb.export(extension_webp=True)
+# crashed with "module 'PIL._webp' has no attribute 'HAVE_WEBPANIM'" — the
+# ONLY failure in an otherwise complete generation (live, attempt 7). Modern
+# Pillow wheels bundle full WebP; SIMD speed isn't worth a broken encoder.
+RUN pip uninstall -y pillow-simd 2>/dev/null || true; \
+    pip install --no-cache-dir --upgrade --force-reinstall pillow
 
 # GPU-less CI runner: nvcc can't auto-detect the target arch, so every native
 # extension must be told explicitly or it compiles for the wrong/no SM and
