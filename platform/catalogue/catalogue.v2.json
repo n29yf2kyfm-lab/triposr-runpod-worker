@@ -13301,5 +13301,156 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "porsche-macan-v1",
+  "make": "porsche",
+  "model": "macan",
+  "modelFamily": "macan",
+  "modelAliases": [
+   "macan s",
+   "macan gts",
+   "macan turbo"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2014,
+  "yearEnd": 2021,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Porsche Macan With HQ Interior",
+  "sourceUrl": "https://sketchfab.com/3d-models/2eaf5997e49445db938643e298fec98c",
+  "sourceCreator": null,
+  "sourceReferenceId": "2eaf5997e49445db938643e298fec98c",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [
+   "GlassLights",
+   "GlassLightsDk",
+   "GlassLightsLtBump",
+   "GlassRedLights",
+   "GlassWinds",
+   "GlassWindsTinted"
+  ],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Crayon",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/macan.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/macan.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/porsche/macan/crayon.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6052872,
+  "mobileFileSizeBytes": 6052872,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "sketchfab-ingest-2026-07-16",
+  "publishedAt": "2026-07-16T12:55:23Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Porsche Macan (95B, first generation). Body identifies as pre-facelift/facelift 1st-gen; production span 2014-2021. No year stated in source."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "sketchfab-ingest-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Crayon",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Crayon",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Arctic Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Volcano Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Volcano Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Jet Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Carrara White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carrara White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "GT Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "GT Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Gentian Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Gentian Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Shark Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Shark Blue",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
