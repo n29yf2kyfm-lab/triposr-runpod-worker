@@ -33,10 +33,13 @@ fi
 # Progress beacon: when running unattended inside a RunPod pod (RUNPOD_POD_ID
 # is auto-set) with RUNPOD_API_KEY in the env, publish each phase into the
 # pod's own name so it's watchable from the outside via GET /v1/pods/<id>.
+# NOTE: pass the account key as RUNPOD_ACCOUNT_KEY — RunPod injects its own
+# pod-scoped RUNPOD_API_KEY into every pod, which shadows a same-named env
+# and cannot rename pods (live-confirmed: the beacon stayed mute for 2h).
 report() {
-    [ -n "${RUNPOD_POD_ID:-}" ] && [ -n "${RUNPOD_API_KEY:-}" ] || return 0
+    [ -n "${RUNPOD_POD_ID:-}" ] && [ -n "${RUNPOD_ACCOUNT_KEY:-}" ] || return 0
     curl -s -X PATCH "https://rest.runpod.io/v1/pods/$RUNPOD_POD_ID" \
-        -H "Authorization: Bearer $RUNPOD_API_KEY" \
+        -H "Authorization: Bearer $RUNPOD_ACCOUNT_KEY" \
         -H "Content-Type: application/json" \
         -d "{\"name\": \"t2-smoke-$1\"}" > /dev/null || true
 }

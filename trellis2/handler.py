@@ -177,16 +177,28 @@ def handler(job):
     vehicle = job_input.get("vehicle")
     image_url = job_input.get("image_url", "")
     image_b64 = job_input.get("image_b64", "")
-    seed = int(job_input.get("seed", 1))
     # A structured vehicle spec takes precedence over a free-text prompt.
     if vehicle:
         prompt = build_vehicle_prompt(vehicle)
-    # trim + colour knobs
-    decimation_target = int(job_input.get("decimation_target", DEFAULT_DECIMATION_TARGET))
-    texture_size = int(job_input.get("texture_size", DEFAULT_TEXTURE_SIZE))
-    # optional T2I knobs
-    t2i_steps = job_input.get("t2i_steps")
-    t2i_guidance = job_input.get("t2i_guidance")
+
+    # Validate + clamp numeric knobs: a bad type returns a clear error instead
+    # of a traceback, and extreme values can't OOM the worker (texture baking
+    # at absurd resolutions / decimation targets was flagged in review).
+    try:
+        seed = int(job_input.get("seed", 1))
+        decimation_target = int(job_input.get("decimation_target", DEFAULT_DECIMATION_TARGET))
+        texture_size = int(job_input.get("texture_size", DEFAULT_TEXTURE_SIZE))
+        t2i_steps = job_input.get("t2i_steps")
+        t2i_steps = None if t2i_steps is None else int(t2i_steps)
+        t2i_guidance = job_input.get("t2i_guidance")
+        t2i_guidance = None if t2i_guidance is None else float(t2i_guidance)
+    except (TypeError, ValueError) as e:
+        return {"error": f"Invalid numeric input: {e}. seed/decimation_target/"
+                         f"texture_size/t2i_steps must be integers, t2i_guidance a number."}
+    decimation_target = max(20_000, min(decimation_target, 2_000_000))
+    texture_size = max(512, min(texture_size, 4096))
+    if t2i_steps is not None:
+        t2i_steps = max(1, min(t2i_steps, 100))
 
     if not prompt and not image_url and not image_b64:
         return {

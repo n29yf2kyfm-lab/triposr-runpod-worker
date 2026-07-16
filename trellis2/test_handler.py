@@ -177,6 +177,14 @@ H.T2I_LORA = "/runpod-volume/loras/cars-v1"; H._t2i_pipeline = None
 r = H.handler({"id": "t7", "input": {"prompt": "a truck"}})
 check("lora loaded from configured path", captured.get("lora_loaded") == "/runpod-volume/loras/cars-v1")
 
+# ---- Test 8: input validation + clamping ----
+print("Test 8: knob validation and clamping")
+r = H.handler({"id": "t8a", "input": {"prompt": "a mug", "texture_size": "huge"}})
+check("bad numeric type -> clear error, no traceback", "Invalid numeric input" in r.get("error", "") and "traceback" not in r)
+r = H.handler({"id": "t8b", "input": {"prompt": "a mug", "texture_size": 999999, "decimation_target": 1}})
+check("oversize texture clamped to 4096", captured["to_glb"]["texture_size"] == 4096)
+check("tiny decimation clamped to 20k", captured["to_glb"]["decimation_target"] == 20_000)
+
 print()
 print("RESULT:", f"{len(fails)} failures" if fails else "ALL TESTS PASSED")
 sys.exit(1 if fails else 0)
