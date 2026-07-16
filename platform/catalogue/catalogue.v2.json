@@ -17893,5 +17893,139 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "alfa-romeo-brera-v1",
+  "make": "alfa-romeo",
+  "model": "brera",
+  "modelFamily": "brera",
+  "modelAliases": [
+   "brera"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2005,
+  "yearEnd": 2010,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Alfa Romeo Brera (source: 'Autodelta Brera J5 3.2 C')",
+  "sourceUrl": "https://sketchfab.com/3d-models/4314381b826d47f9942b6dc3ebabd848",
+  "sourceCreator": null,
+  "sourceReferenceId": "4314381b826d47f9942b6dc3ebabd848",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Vesuvio Grey Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/alfa-romeo-brera-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/alfa-romeo-brera-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/alfa-romeo/alfa-romeo-brera-v1/vesuvio-grey-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 8271516,
+  "mobileFileSizeBytes": 8271516,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-16T22:47:15Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: 'Alfa Romeo Autodelta Brera J5 3.2 C'. Stored as base Brera; make corrected from mislabeled 'Peugeot'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Vesuvio Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vesuvio Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Vulcano Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vulcano Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alfa White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alfa White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Alfa Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alfa Red",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Competizione Red",
+     "hex": null,
+     "finish": "tri-coat",
+     "oemPaintName": "Competizione Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Misano Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Misano Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Montreal Green",
+     "hex": null,
+     "finish": "tri-coat",
+     "oemPaintName": "Montreal Green",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
