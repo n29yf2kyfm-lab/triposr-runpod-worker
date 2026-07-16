@@ -339,10 +339,83 @@ def _fetch_glb(job_input):
     return path
 
 
+def _pose_audit(bpy):
+    """Hardened structure/orientation gate — the checks the paint QC never ran,
+    so upside-down cars, wheels-off race shells, doors-open poses and wrecked
+    floorpans get auto-rejected instead of reaching a human. Runs AFTER
+    auto-upright, so a fail means upright could not save it. Scale-invariant:
+    everything is a fraction of the model's own bounding box.
+
+    Signals (world space, Z is vertical after upright):
+      glass_zf  area-weighted glass centroid height, 0=floor .. 1=roof
+      wheel_zf  area-weighted wheel centroid height
+      glass_af  glass share of total surface area (a real car has windows)
+      wheel_af  wheel/tyre share (a sellable car has its wheels on)
+      h_over_l  height / longest-horizontal (doors-up & on-side balloon this)
+    """
+    import mathutils
+    glo = [1e9] * 3; ghi = [-1e9] * 3
+    acc = {"glass": [0.0, 0.0], "wheel": [0.0, 0.0], "all": [0.0, 0.0]}  # [sum(area*z), sum(area)]
+    for o in [x for x in bpy.context.scene.objects if x.type == "MESH"]:
+        mw = o.matrix_world
+        m3 = mw.to_3x3()
+        try:
+            cof = m3.inverted().transposed() * m3.determinant()
+        except ValueError:
+            cof = None
+        for cnr in o.bound_box:
+            wv = mw @ mathutils.Vector(cnr)
+            for i in range(3):
+                glo[i] = min(glo[i], wv[i]); ghi[i] = max(ghi[i], wv[i])
+        for p in o.data.polygons:
+            mi = p.material_index
+            mm = o.material_slots[mi].material if mi < len(o.material_slots) else None
+            nn = _norm_name(mm.name) if mm else ""
+            a = p.area * ((cof @ p.normal).length if cof else 1.0)
+            cz = (mw @ p.center).z
+            acc["all"][0] += a * cz; acc["all"][1] += a
+            if _GLASS.search(nn):
+                acc["glass"][0] += a * cz; acc["glass"][1] += a
+            if _WHEEL.search(nn) or _TYRE.search(nn):
+                acc["wheel"][0] += a * cz; acc["wheel"][1] += a
+    ext = [ghi[i] - glo[i] for i in range(3)]
+    zmin = glo[2]; zspan = ext[2] or 1.0
+    tot = acc["all"][1] or 1.0
+
+    def zf(k):
+        s = acc[k]
+        return None if s[1] <= 0 else round((s[0] / s[1] - zmin) / zspan, 3)
+
+    glass_zf = zf("glass"); wheel_zf = zf("wheel")
+    glass_af = round(acc["glass"][1] / tot, 4); wheel_af = round(acc["wheel"][1] / tot, 4)
+    length = max(ext[0], ext[1]) or 1.0
+    h_over_l = round(ext[2] / length, 3)
+
+    reject, warn = [], []
+    # HARD rejects — strong, unambiguous, no normal car trips these
+    if wheel_af < 0.002:
+        reject.append("wheels-missing")
+    if glass_zf is not None and glass_zf < 0.42:
+        reject.append(f"upside-down(glass_zf={glass_zf})")
+    if wheel_zf is not None and wheel_zf > 0.55:
+        reject.append(f"upside-down(wheel_zf={wheel_zf})")
+    # WARN — flag for the human, do not auto-kill (vans/odd glass names live here)
+    if glass_af < 0.006:
+        warn.append(f"no-greenhouse(glass_af={glass_af})")
+    if h_over_l > 0.55:
+        warn.append(f"too-tall(h/l={h_over_l})")
+    if glass_zf is not None and 0.42 <= glass_zf < 0.50:
+        warn.append(f"glass-low(glass_zf={glass_zf})")
+    verdict = "reject" if reject else ("warn" if warn else "ok")
+    return {"verdict": verdict, "reject": reject, "warn": warn,
+            "glass_zf": glass_zf, "wheel_zf": wheel_zf,
+            "glass_af": glass_af, "wheel_af": wheel_af, "h_over_l": h_over_l}
+
+
 def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
             samples, resx, resy, bright=False, studio=True,
             finish=None, recolour_mode="auto", plate_end="auto",
-            plates_both=False):
+            plates_both=False, audit=False):
     import mathutils
     import bmesh
     import re
@@ -862,8 +935,12 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     sc.view_settings.exposure = -0.15
     sc.render.image_settings.file_format = "PNG"
     sc.render.filepath = out
+    # hardened pose/structure audit (post-upright geometry, pre-render is fine —
+    # recolour/glass polish never move geometry). Only when asked, so the 8-colour
+    # store renders skip the extra geometry pass.
+    pose_info = _pose_audit(bpy) if audit else None
     bpy.ops.render.render(write_still=True)
-    return device, recolour_info, plate_end_used
+    return device, recolour_info, plate_end_used, pose_info
 
 
 def _diag():
@@ -924,7 +1001,7 @@ def handler(job):
         glb = _fetch_glb(ji)
         out = os.path.join(tempfile.gettempdir(), "render.png")
         t0 = time.time()
-        device, recolour_info, plate_end_used = _render(
+        device, recolour_info, plate_end_used, pose_info = _render(
             bpy, glb, out,
             colour=ji.get("colour") or ji.get("color"),
             plate_reg=ji.get("plate"),
@@ -940,13 +1017,17 @@ def handler(job):
             recolour_mode=str(ji.get("recolour", "auto")).lower(),
             plate_end=str(ji.get("plate_end", "auto")).lower(),
             plates_both=bool(ji.get("plates_both", False)),
+            audit=bool(ji.get("audit") or ji.get("debug_materials")),
         )
         dt = round(time.time() - t0, 1)
         with open(out, "rb") as f:
             png_b64 = base64.b64encode(f.read()).decode("utf-8")
-        return {"status": "success", "png_b64": png_b64,
+        resp = {"status": "success", "png_b64": png_b64,
                 "device": device, "seconds": dt,
                 "recolour": recolour_info, "plate_end_used": plate_end_used}
+        if pose_info is not None:
+            resp["audit"] = pose_info
+        return resp
     except Exception as e:
         import traceback
         return {"error": str(e), "traceback": traceback.format_exc()}
