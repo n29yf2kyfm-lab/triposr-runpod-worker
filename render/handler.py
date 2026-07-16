@@ -524,6 +524,61 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
                     gm.node_tree.links.remove(lnk)
                 es.default_value = 0.0
 
+    # auto-upright: a correctly-oriented car has its SMALLEST bbox extent vertical
+    # (height < width < length). Some GLBs are authored tipped (length/width along
+    # world-up) and render lying on their side or standing on the nose. If the
+    # vertical (Blender Z) extent isn't clearly the smallest, rotate the whole
+    # scene 90deg so the smallest extent becomes vertical.
+    ulo = [1e9] * 3
+    uhi = [-1e9] * 3
+    for o in meshes():
+        for cnr in o.bound_box:
+            wv = o.matrix_world @ mathutils.Vector(cnr)
+            for i in range(3):
+                ulo[i] = min(ulo[i], wv[i]); uhi[i] = max(uhi[i], wv[i])
+    uext = [uhi[i] - ulo[i] for i in range(3)]
+    min_axis = min(range(3), key=lambda i: uext[i])
+    if min_axis != 2 and uext[min_axis] < 0.85 * uext[2]:
+        import math as _math
+
+        def _apply(Rm):
+            for o in list(bpy.context.scene.objects):
+                if o.parent is None:
+                    o.matrix_world = Rm @ o.matrix_world
+            bpy.context.view_layer.update()
+
+        if min_axis == 0:      # X smallest -> rotate about Y so X becomes up
+            _apply(mathutils.Matrix.Rotation(_math.radians(90), 4, 'Y'))
+        else:                  # Y smallest -> rotate about X so Y becomes up
+            _apply(mathutils.Matrix.Rotation(_math.radians(90), 4, 'X'))
+
+        # 180deg ambiguity: a car is WIDER at the bottom (body/wheels) than the
+        # top (cabin). Sample the widest horizontal span in the top third vs the
+        # bottom third; if the top is wider the car is upside down -> flip 180.
+        zs = []
+        pts = []
+        for o in meshes():
+            m = o.matrix_world
+            for v in o.data.vertices:
+                w = m @ v.co
+                pts.append((w.x, w.y, w.z)); zs.append(w.z)
+            if len(pts) > 40000:
+                break
+        if zs:
+            zlo, zhi = min(zs), max(zs); span = (zhi - zlo) or 1.0
+            def _wid(frac_lo, frac_hi):
+                sel = [(x, y) for (x, y, z) in pts
+                       if zlo + frac_lo * span <= z <= zlo + frac_hi * span]
+                if not sel:
+                    return 0.0
+                xs = [p[0] for p in sel]; ys = [p[1] for p in sel]
+                return max(max(xs) - min(xs), max(ys) - min(ys))
+            if _wid(0.66, 1.0) > 1.15 * _wid(0.0, 0.34):
+                # centre on length axis, flip about it
+                cax = 0 if uext[0] >= uext[1] else 1  # longest horizontal = length
+                axis = 'X' if cax == 0 else 'Y'
+                _apply(mathutils.Matrix.Rotation(_math.radians(180), 4, axis))
+
     # normalize scale: GLBs arrive at wildly different scales (some cars are
     # ~0.05 units); scale the scene so the car is ~4.5 units so camera/DOF/light
     # math all operate in a sane range.
