@@ -15395,5 +15395,145 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-m3-v1",
+  "make": "bmw",
+  "model": "m3",
+  "modelFamily": "3-series",
+  "modelAliases": [],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": 2026,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": "M3",
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "BMW M3 Sedan topaz blue car",
+  "sourceUrl": "https://sketchfab.com/3d-models/981462d1149b48628fc3d8d993a3f959",
+  "sourceCreator": null,
+  "sourceReferenceId": "981462d1149b48628fc3d8d993a3f959",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Brooklyn Grey Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/m3.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/m3.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/m3/brooklyn-grey-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4670144,
+  "mobileFileSizeBytes": 4670144,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-16T16:31:37Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "BMW M3 (G80) saloon."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
