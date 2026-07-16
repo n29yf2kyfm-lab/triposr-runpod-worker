@@ -59,9 +59,14 @@ ENV FORCE_CUDA=1
 # silently installed as an empty package named "UNKNOWN".
 RUN pip install --no-cache-dir --upgrade "setuptools>=64" wheel ninja packaging
 
-# --flash-attn : MAX_JOBS caps parallel nvcc if pip falls back to a source build.
+# --flash-attn : PyPI ships source-only (an hour+ of nvcc on a CI runner), but
+# upstream publishes prebuilt cu12/torch2.6/cp310 wheels on GitHub releases.
+# Try those first (torch 2.6 pip wheels are cxx11abi FALSE; TRUE second for
+# safety), fall back to source compile with MAX_JOBS capping parallel nvcc.
 ENV MAX_JOBS=4
-RUN pip install --no-cache-dir --no-build-isolation flash-attn==2.7.3
+RUN pip install --no-cache-dir "flash-attn @ https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.3/flash_attn-2.7.3+cu12torch2.6cxx11abiFALSE-cp310-cp310-linux_x86_64.whl" || \
+    pip install --no-cache-dir "flash-attn @ https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.3/flash_attn-2.7.3+cu12torch2.6cxx11abiTRUE-cp310-cp310-linux_x86_64.whl" || \
+    pip install --no-cache-dir --no-build-isolation flash-attn==2.7.3
 
 # --nvdiffrast (v0.4.0) / --nvdiffrec : native extensions whose setup.py imports
 # torch -> --no-build-isolation so they see the torch installed above.

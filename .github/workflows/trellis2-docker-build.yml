@@ -2,7 +2,10 @@ name: Build and Push TRELLIS.2 Docker Image
 
 on:
   push:
-    branches: [ main ]
+    # The feature branch is included so the image can build and deploy to a
+    # fresh endpoint while PR #13 is still under review — the trellis2-* tags
+    # are new and collide with nothing in production.
+    branches: [ main, claude/custom-upgrade-path-2vszoo ]
     paths:
       - 'trellis2/**'
       - '.github/workflows/trellis2-docker-build.yml'
