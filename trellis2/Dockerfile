@@ -77,6 +77,11 @@ RUN git clone --recursive https://github.com/JeffreyXiang/CuMesh.git /tmp/extens
 RUN git clone --recursive https://github.com/JeffreyXiang/FlexGEMM.git /tmp/extensions/FlexGEMM && \
     pip install --no-cache-dir --no-build-isolation /tmp/extensions/FlexGEMM
 
+# Text-to-3D stage 1: diffusion text-to-image (SDXL by default, override with
+# T2I_MODEL env). TRELLIS.2 has no native text mode, so the worker renders the
+# prompt to an image first, then runs image-to-3D on it.
+RUN pip install --no-cache-dir diffusers accelerate safetensors
+
 # Serverless glue.
 RUN pip install --no-cache-dir runpod requests
 
