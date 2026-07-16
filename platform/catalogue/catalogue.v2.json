@@ -11243,7 +11243,7 @@
   "oemPaintCode": null,
   "oemPaintName": null,
   "colourVariants": {},
-  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m5_uc.glb",
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/m5.glb",
   "mobileGlbUrl": null,
   "fallbackGlbUrl": null,
   "posterUrl": null,
@@ -11262,7 +11262,31 @@
   "needsHumanReview": [
    "year range unknown"
   ],
-  "notes": []
+  "notes": [],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
