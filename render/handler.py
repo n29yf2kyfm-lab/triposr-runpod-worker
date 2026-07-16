@@ -284,12 +284,14 @@ def _enable_gpu(bpy):
     return _gpu_device
 
 
-def _make_plate(reg):
-    """Render a UK plate PNG (white, blue UK band, black chars). Returns path."""
+def _make_plate(reg, rear=False):
+    """Render a UK plate PNG (blue GB band, black chars). Front = white,
+    rear = yellow. Returns path."""
     from PIL import Image, ImageDraw, ImageFont
     reg = reg.upper().strip()
     W, H = 1040, 220
-    img = Image.new("RGB", (W, H), (250, 250, 248))
+    bg = (255, 205, 0) if rear else (250, 250, 248)
+    img = Image.new("RGB", (W, H), bg)
     d = ImageDraw.Draw(img)
     band = 78
     d.rectangle([0, 0, band, H], fill=(0, 51, 153))
@@ -302,7 +304,7 @@ def _make_plate(reg):
     tw = d.textlength(reg, font=fp)
     d.text(((W + band - tw) / 2, H / 2 - 92), reg, font=fp, fill=(15, 15, 15))
     d.rectangle([1, 1, W - 2, H - 2], outline=(120, 120, 120), width=2)
-    path = os.path.join(tempfile.gettempdir(), "plate.png")
+    path = os.path.join(tempfile.gettempdir(), "plate_rear.png" if rear else "plate.png")
     img.save(path)
     return path
 
@@ -332,7 +334,8 @@ def _fetch_glb(job_input):
 
 def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
             samples, resx, resy, bright=False, studio=True,
-            finish=None, recolour_mode="auto", plate_end="auto"):
+            finish=None, recolour_mode="auto", plate_end="auto",
+            plates_both=False):
     import mathutils
     import bmesh
     import re
@@ -649,55 +652,67 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     # camera-facing choice for single hero frames.
     plate_end_used = None
     if plate_reg:
-        plate_png = _make_plate(plate_reg)
         L = 0 if (hi[0] - lo[0]) >= (hi[1] - lo[1]) else 1
         Wd = 1 - L
         scale = (hi[L] - lo[L]) / 4.5
         pw = 0.52 * scale / 2
         ph = 0.11 * scale / 2
-        if plate_end == "hi":
-            end = hi[L]
-        elif plate_end == "lo":
-            end = lo[L]
-        else:
-            end = hi[L] if abs(loc[L] - hi[L]) < abs(loc[L] - lo[L]) else lo[L]
-        plate_end_used = "hi" if end == hi[L] else "lo"
-        outward = 1.0 if end == hi[L] else -1.0
-        Lc = end + outward * size * 0.006
         Wc = c[Wd]
         Zc = zmin + zfrac * height
-        pm = bpy.data.meshes.new("plate")
-        bm = bmesh.new()
 
-        def V(dw, dz):
-            p = [0, 0, 0]
-            p[L] = Lc
-            p[Wd] = Wc + dw
-            p[2] = Zc + dz
-            return bm.verts.new(p)
-        vs = [V(-pw, -ph), V(-pw, ph), V(pw, ph), V(pw, -ph)]
-        f = bm.faces.new(vs)
-        uvl = bm.loops.layers.uv.new("UVMap")
-        uvs = [(1, 0), (1, 1), (0, 1), (0, 0)] if outward > 0 \
-            else [(0, 0), (0, 1), (1, 1), (1, 0)]
-        for lp2, uv in zip(f.loops, uvs):
-            lp2[uvl].uv = uv
-        bm.to_mesh(pm)
-        bm.free()
-        pobj = bpy.data.objects.new("plate", pm)
-        bpy.context.collection.objects.link(pobj)
-        pmat = bpy.data.materials.new("plate")
-        pmat.use_nodes = True
-        nt = pmat.node_tree
-        pb = nt.nodes.get("Principled BSDF")
-        tex = nt.nodes.new("ShaderNodeTexImage")
-        tex.image = bpy.data.images.load(plate_png)
-        nt.links.new(tex.outputs["Color"], pb.inputs["Base Color"])
-        pb.inputs["Roughness"].default_value = 0.3
-        if "Emission Color" in pb.inputs:
-            nt.links.new(tex.outputs["Color"], pb.inputs["Emission Color"])
-            pb.inputs["Emission Strength"].default_value = 0.6
-        pm.materials.append(pmat)
+        def _place_plate(name, end, png):
+            outward = 1.0 if end == hi[L] else -1.0
+            Lc = end + outward * size * 0.006
+            pm = bpy.data.meshes.new(name)
+            bm = bmesh.new()
+
+            def V(dw, dz):
+                p = [0, 0, 0]
+                p[L] = Lc
+                p[Wd] = Wc + dw
+                p[2] = Zc + dz
+                return bm.verts.new(p)
+            vs = [V(-pw, -ph), V(-pw, ph), V(pw, ph), V(pw, -ph)]
+            f = bm.faces.new(vs)
+            uvl = bm.loops.layers.uv.new("UVMap")
+            uvs = [(1, 0), (1, 1), (0, 1), (0, 0)] if outward > 0 \
+                else [(0, 0), (0, 1), (1, 1), (1, 0)]
+            for lp2, uv in zip(f.loops, uvs):
+                lp2[uvl].uv = uv
+            bm.to_mesh(pm)
+            bm.free()
+            pobj = bpy.data.objects.new(name, pm)
+            bpy.context.collection.objects.link(pobj)
+            pmat = bpy.data.materials.new(name)
+            pmat.use_nodes = True
+            nt = pmat.node_tree
+            pb = nt.nodes.get("Principled BSDF")
+            tex = nt.nodes.new("ShaderNodeTexImage")
+            tex.image = bpy.data.images.load(png)
+            nt.links.new(tex.outputs["Color"], pb.inputs["Base Color"])
+            pb.inputs["Roughness"].default_value = 0.3
+            if "Emission Color" in pb.inputs:
+                nt.links.new(tex.outputs["Color"], pb.inputs["Emission Color"])
+                pb.inputs["Emission Strength"].default_value = 0.6
+            pm.materials.append(pmat)
+
+        if plates_both:
+            # front = end the camera faces (hero shots frame the front); rear =
+            # the opposite end. Front white, rear yellow.
+            front_end = hi[L] if abs(loc[L] - hi[L]) < abs(loc[L] - lo[L]) else lo[L]
+            rear_end = lo[L] if front_end == hi[L] else hi[L]
+            _place_plate("plate_front", front_end, _make_plate(plate_reg, rear=False))
+            _place_plate("plate_rear", rear_end, _make_plate(plate_reg, rear=True))
+            plate_end_used = "both"
+        else:
+            if plate_end == "hi":
+                end = hi[L]
+            elif plate_end == "lo":
+                end = lo[L]
+            else:
+                end = hi[L] if abs(loc[L] - hi[L]) < abs(loc[L] - lo[L]) else lo[L]
+            plate_end_used = "hi" if end == hi[L] else "lo"
+            _place_plate("plate", end, _make_plate(plate_reg, rear=False))
 
     # render
     device = _enable_gpu(bpy)
@@ -796,6 +811,7 @@ def handler(job):
             finish=ji.get("finish"),
             recolour_mode=str(ji.get("recolour", "auto")).lower(),
             plate_end=str(ji.get("plate_end", "auto")).lower(),
+            plates_both=bool(ji.get("plates_both", False)),
         )
         dt = round(time.time() - t0, 1)
         with open(out, "rb") as f:
