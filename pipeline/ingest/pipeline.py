@@ -258,13 +258,13 @@ def store(spec):
         base = raw
     glb_url = upload("car-meshes", f"finished/{make}/{model}.glb", open(base, "rb").read(), "model/gltf-binary")
     assert verify_asset(glb_url), "GLB upload failed verification"
-    base_kb = os.path.getsize(base) // 1024
+    base_bytes = os.path.getsize(base)
     # clean up temp GLBs immediately — they're uploaded now; leaving them fills
     # the session's disk allowance (source GLBs run 60-180 MB each).
     for f in (raw, base):
         try: os.remove(f)
         except OSError: pass
-    log(f"GLB stored+verified {base_kb}KB")
+    log(f"GLB stored+verified {base_bytes // 1024}KB")
 
     hero_az = spec.get("az", 40)
     plate = spec.get("plate", "AL24 3D")
@@ -307,7 +307,7 @@ def store(spec):
         "oemPaintCode": None, "oemPaintName": None, "colourVariants": {},
         "desktopGlbUrl": glb_url, "mobileGlbUrl": glb_url, "fallbackGlbUrl": None,
         "posterUrl": colours[0]["renderUrl"], "turntableUrl": None, "interiorUrl": None,
-        "fileSizeBytes": os.path.getsize(base), "mobileFileSizeBytes": os.path.getsize(base),
+        "fileSizeBytes": base_bytes, "mobileFileSizeBytes": base_bytes,
         "contentHash": None, "pipelineVersion": "ingest-pipeline-v1",
         "publishedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "needsHumanReview": [], "notes": [spec["generationNote"]] if spec.get("generationNote") else [],
