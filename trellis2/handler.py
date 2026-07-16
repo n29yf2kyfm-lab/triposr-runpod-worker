@@ -48,12 +48,17 @@ T2I_LORA = os.environ.get("T2I_LORA", "")
 # Prompt scaffolding that biases the T2I stage toward images TRELLIS.2 handles
 # best: one full object, centered, no crop, uncluttered background.
 T2I_PROMPT_SUFFIX = (
-    ", single object, centered, full object in view, 3d asset style, "
-    "plain studio background, soft even lighting, high detail"
+    ", exactly one single vehicle, one single view, whole subject centered "
+    "and fully in frame, photorealistic dslr photograph, natural daylight, "
+    "eye-level view, high detail"
 )
+# "multiple views/three-view/blueprint" guards added after a live run where
+# SDXL drew a 3-view spec-sheet collage and the 3D stage faithfully built
+# all three overlapping cars.
 T2I_NEGATIVE_PROMPT = (
-    "cropped, out of frame, multiple objects, collage, text, watermark, "
-    "busy background, scenery, people"
+    "multiple views, three-view, blueprint, spec sheet, collage, grid, "
+    "multiple objects, cropped, out of frame, text, watermark, toy, "
+    "miniature, render, cartoon, people"
 )
 
 # GLB baking defaults — mirror upstream example.py. Both are per-request
@@ -123,15 +128,25 @@ def get_t2i_pipeline():
     global _t2i_pipeline
     if _t2i_pipeline is None:
         from diffusers import AutoPipelineForText2Image
-        _t2i_pipeline = AutoPipelineForText2Image.from_pretrained(
-            T2I_MODEL,
-            torch_dtype=torch.float16,
-            variant="fp16",
-            use_safetensors=True,
-        )
+        # fp16 variant first (smaller download), fall back for checkpoints
+        # that only publish full-precision weights (many finetunes do).
+        try:
+            _t2i_pipeline = AutoPipelineForText2Image.from_pretrained(
+                T2I_MODEL, torch_dtype=torch.float16,
+                variant="fp16", use_safetensors=True,
+            )
+        except Exception:
+            _t2i_pipeline = AutoPipelineForText2Image.from_pretrained(
+                T2I_MODEL, torch_dtype=torch.float16, use_safetensors=True,
+            )
         if T2I_LORA:
             _t2i_pipeline.load_lora_weights(T2I_LORA)
-        _t2i_pipeline.to("cuda")
+        if os.environ.get("T2I_OFFLOAD") == "1":
+            # big models (FLUX) can't stay resident next to TRELLIS.2 on a
+            # 48GB card — stream weights from CPU per generation instead.
+            _t2i_pipeline.enable_model_cpu_offload()
+        else:
+            _t2i_pipeline.to("cuda")
     return _t2i_pipeline
 
 
@@ -193,9 +208,13 @@ def fetch_image(image_url):
     return Image.open(BytesIO(response.content)).convert("RGB")
 
 
-def run_pipeline(pipeline, img, seed):
+def run_pipeline(pipeline, img, seed, pipeline_type=None):
     """Run generation. Signature verified against the vendored pipeline:
-    run(image, num_samples=1, seed=42, ...) -> List[MeshWithVoxel]."""
+    run(image, num_samples=1, seed=42, ..., pipeline_type=None) ->
+    List[MeshWithVoxel]. pipeline_type: '512' | '1024' | '1024_cascade' |
+    '1536_cascade' (default from the model's pipeline.json)."""
+    if pipeline_type:
+        return pipeline.run(img, seed=seed, pipeline_type=pipeline_type)[0]
     return pipeline.run(img, seed=seed)[0]
 
 
@@ -235,6 +254,11 @@ def handler(job):
     texture_size = max(512, min(texture_size, 4096))
     if t2i_steps is not None:
         t2i_steps = max(1, min(t2i_steps, 100))
+    # geometry detail tier — TRELLIS.2's pipeline_type ('1536_cascade' is the
+    # premium setting: highest-res geometry, slower, more VRAM)
+    pipeline_type = job_input.get("pipeline_type")
+    if pipeline_type not in (None, "512", "1024", "1024_cascade", "1536_cascade"):
+        return {"error": "pipeline_type must be one of 512, 1024, 1024_cascade, 1536_cascade"}
 
     if not prompt and not image_url and not image_b64:
         return {
@@ -263,7 +287,7 @@ def handler(job):
         # --- Stage 2: make model ---
         pipeline = get_pipeline()
         with torch.no_grad():
-            mesh = run_pipeline(pipeline, img, seed)
+            mesh = run_pipeline(pipeline, img, seed, pipeline_type)
 
         # --- Stage 3: trim (remesh + decimate) and colour (bake PBR) -> GLB ---
         # Signature verified against vendored o_voxel/postprocess.py and
