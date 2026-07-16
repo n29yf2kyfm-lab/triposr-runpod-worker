@@ -16771,5 +16771,145 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "nissan-micra-v1",
+  "make": "nissan",
+  "model": "micra",
+  "modelFamily": "micra",
+  "modelAliases": [],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1982,
+  "yearEnd": 1992,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Nissan Micra (K10) 1982",
+  "sourceUrl": "https://sketchfab.com/3d-models/a646c835325a4a0faf27fced42d10e2b",
+  "sourceCreator": null,
+  "sourceReferenceId": "a646c835325a4a0faf27fced42d10e2b",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Gun Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/micra.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/micra.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/nissan/micra/gun-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3131728,
+  "mobileFileSizeBytes": 3131728,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-16T20:46:34Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Nissan Micra (K10); source title 1982."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Gun Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Gun Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Ceramic Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Ceramic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Storm White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Storm White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Pearl Black",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Pearl Black",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Blade Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Blade Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Magnetic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fuji Sunset Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fuji Sunset Red",
+     "glbUrl": null
+    },
+    {
+     "family": "burgundy",
+     "label": "Burgundy Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Burgundy Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
