@@ -13438,5 +13438,141 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-hr-v-v1",
+  "make": "honda",
+  "model": "hr-v",
+  "modelFamily": "hr-v",
+  "modelAliases": [
+   "vezel",
+   "hrv",
+   "hr-v e:hev"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": 2026,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": "e:HEV RS",
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Honda Vezel e:HEV RS (HR-V)",
+  "sourceUrl": "https://sketchfab.com/3d-models/bf835b5a5e6f4b79a134db5156992cf0",
+  "sourceCreator": null,
+  "sourceReferenceId": "bf835b5a5e6f4b79a134db5156992cf0",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Sonic Grey Pearl",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/hr-v.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/hr-v.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/hr-v/sonic-grey-pearl.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 13768832,
+  "mobileFileSizeBytes": 13768832,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-16T13:20:11Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Honda HR-V / Vezel 3rd gen (e:HEV RS per source title); production 2021-. Model too large to auto-measure materials; recolour verified visually."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
