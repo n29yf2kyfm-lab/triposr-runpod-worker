@@ -283,6 +283,20 @@ def to_glb(
     roughness = np.clip(attrs[..., attr_layout['roughness']].cpu().numpy() * 255, 0, 255).astype(np.uint8)
     alpha = np.clip(attrs[..., attr_layout['alpha']].cpu().numpy() * 255, 0, 255).astype(np.uint8)
     alpha_mode = 'OPAQUE'
+    # WORKER CHANGE: the generated PBR attrs carry real per-texel opacity
+    # (window glass), but alphaMode was hardcoded OPAQUE so viewers render
+    # glass as solid. Auto-switch to BLEND when the baked alpha actually
+    # contains translucency (>0.2% of valid texels), unless disabled via
+    # GLB_ALPHA_MODE=opaque. See TRELLIS.2/WORKER_CHANGES.md.
+    import os as _os
+    if _os.environ.get('GLB_ALPHA_MODE', 'auto').lower() != 'opaque':
+        _valid = mask.astype(bool) if hasattr(mask, 'astype') else None
+        _a = alpha[..., 0] if alpha.ndim == 3 else alpha
+        _translucent = (_a < 250)
+        if _valid is not None and _valid.shape == _translucent.shape:
+            _translucent = _translucent & _valid
+        if _translucent.mean() > 0.002:
+            alpha_mode = 'BLEND'
     
     # Inpainting: fill gaps (dilation) to prevent black seams at UV boundaries
     mask_inv = (~mask).astype(np.uint8)
