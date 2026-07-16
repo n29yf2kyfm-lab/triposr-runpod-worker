@@ -15115,5 +15115,145 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "porsche-718-cayman-v1",
+  "make": "porsche",
+  "model": "718-cayman",
+  "modelFamily": "cayman",
+  "modelAliases": [],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2016,
+  "yearEnd": 2026,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": "GT4",
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Porsche 718 Cayman GT4",
+  "sourceUrl": "https://sketchfab.com/3d-models/0b210ff1ee3e4f75acf3fd31e6b1b298",
+  "sourceCreator": null,
+  "sourceReferenceId": "0b210ff1ee3e4f75acf3fd31e6b1b298",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Crayon",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/718-cayman.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/718-cayman.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/porsche/718-cayman/crayon.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3134584,
+  "mobileFileSizeBytes": 3134584,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-16T16:22:00Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Porsche 718 Cayman (982); GT4 per title."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Crayon",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Crayon",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Arctic Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Volcano Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Volcano Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Jet Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Carrara White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carrara White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "GT Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "GT Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Gentian Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Gentian Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Shark Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Shark Blue",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
