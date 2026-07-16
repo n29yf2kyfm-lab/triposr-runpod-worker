@@ -122,8 +122,8 @@ _GLASS = _re.compile(r"(glass|window|windscreen|windshield|screen|vidro|glas|sch
 _LIGHT = _re.compile(r"(light|lamp|head[\s_-]?l|tail[\s_-]?l|indicator|reflector|\bled\b|drl|blinker|\blens\b|faro|phare)", _re.I)
 _TYRE = _re.compile(r"(tyre|tire|rubber|reifen|pneu|gomma|llanta)", _re.I)
 _WHEEL = _re.compile(r"(wheel|\brim\b|alloy|\bhub\b|jante|felge|cerchi|caliper|\bbrake)", _re.I)
-_TRIM = _re.compile(r"(chrome|trim|grill|grille|badge|logo|emblem|number[\s_-]?plate|licen|mirror|molding|moulding|\bseal\b|wiper|antenna|handle)", _re.I)
-_INNER = _re.compile(r"(interior|seat|dash|leather|fabric|carpet|steering|cabin|\binner\b|interno|innen|cockpit|door[\s_-]?card|belt|pedal)", _re.I)
+_TRIM = _re.compile(r"(chrome|trim|grill|grille|badge|logo|emblem|number[\s_-]?plate|plate[\s_-]|licen|mirror|molding|moulding|\bseal\b|wiper|antenna|handle)", _re.I)
+_INNER = _re.compile(r"(interior|seat|dash|leather|fabric|carpet|steering|cabin|\binner\b|interno|innen|cockpit|door[\s_-]?card|belt|pedal|\bint(?:erior|plastic|carpet|leather|trim|panel|console|floor|cloth|roof)|headliner|sunvisor|armrest|gauge|speedo)", _re.I)
 _DARKP = _re.compile(r"(lower[\s_-]?clad|cladding|\bunder\b|under[\s_-]?body|undercarriag|arch[\s_-]?liner|wheel[\s_-]?arch|sill[\s_-]?trim|mud[\s_-]?flap)", _re.I)
 _PAINT = _re.compile(r"(car[\s_-]?paint|body[\s_-]?paint|\bbody\w*|\bpaint\w*|pintura|\black\b|lackier|karosser|carrosser|carrocer|verniz|vernice|\bcoat\b|exterior|\bshell\b|chassis|metal[\s_-]?car|paintwork|lacca)", _re.I)
 
@@ -223,10 +223,17 @@ def _choose_body(meta):
     # sized) or absent.
     if paint and sum(cands[n]["area"] for n in paint) >= big * 0.15:
         return paint
+    # No authoritative paint material: the body is spread across many generic or
+    # colour-coded panel materials (e.g. Macan exports one 'wire_<rgb>' material
+    # PER panel — bonnet, each door, roof...). The old 55%-of-biggest cutoff only
+    # caught the two largest and left the doors unpainted (two-tone car). Instead
+    # paint EVERY non-excluded, non-interior panel down to a small share of the
+    # whole, so all body panels recolour together. Interior/glass/wheels/trim/
+    # underbody are already excluded upstream.
     chosen = set(paint)
-    thresh = big * 0.55
+    total = sum(d["area"] for d in meta.values()) or 1.0
     for n, d in cands.items():
-        if d["area"] >= thresh:
+        if d["area"] >= 0.01 * total:
             chosen.add(n)
     return chosen
 
@@ -458,6 +465,7 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     # GPU/live renders never got it. Apply it to every render: glass -> real
     # transmissive clear glass (Cycles refraction shows the interior); light
     # lenses -> glossy clearcoat + modest emission so coloured lenses read vivid.
+    _gtot = sum(d["area"] for d in meta.values()) or 1.0
     for gn, gd in meta.items():
         gm = gd["mat"]
         if not gm or not gm.use_nodes or not gm.node_tree or gn in chosen:
@@ -474,8 +482,15 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
             return inp
 
         if gd["glass"]:
-            for nm, val in (("Transmission Weight", 1.0), ("Transmission", 1.0),
-                            ("Roughness", 0.03), ("Metallic", 0.0),
+            # Safety net: a single 'glass' material covering an implausibly large
+            # share of the car is almost certainly mislabeled bodywork (the Golf's
+            # finished GLB had roof_glass 27% + privacy_glass 24%). Full trans-
+            # mission on that renders a see-through glass shell, so keep oversized
+            # 'glass' opaque and lightly tinted instead of fully clear.
+            oversized = gd["area"] > 0.22 * _gtot
+            trans = 0.0 if oversized else 1.0
+            for nm, val in (("Transmission Weight", trans), ("Transmission", trans),
+                            ("Roughness", 0.10 if oversized else 0.03), ("Metallic", 0.0),
                             ("Alpha", 1.0), ("IOR", 1.45)):
                 inp = _gcut(nm)
                 if inp is not None:
