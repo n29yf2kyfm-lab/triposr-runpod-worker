@@ -79,15 +79,25 @@ class DinoV3FeatureExtractor:
         self.model.cpu()
 
     def extract_features(self, image: torch.Tensor) -> torch.Tensor:
-        image = image.to(self.model.embeddings.patch_embeddings.weight.dtype)
-        hidden_states = self.model.embeddings(image, bool_masked_pos=None)
-        position_embeddings = self.model.rope_embeddings(image)
-
-        for i, layer_module in enumerate(self.model.layer):
-            hidden_states = layer_module(
-                hidden_states,
-                position_embeddings=position_embeddings,
-            )
+        # WORKER CHANGE: upstream reaches into DINOv3ViTModel internals
+        # (embeddings / rope_embeddings / .layer), which newer transformers
+        # releases renamed — live deploy hit "'DINOv3ViTModel' object has no
+        # attribute 'layer'". Keep upstream's manual loop as the fast path,
+        # but fall back to the stable public forward() (hidden_states[-1] is
+        # the last block's output pre-final-norm, matching what the manual
+        # loop produced) when internals don't match. See WORKER_CHANGES.md.
+        image = image.to(next(self.model.parameters()).dtype)
+        try:
+            hidden_states = self.model.embeddings(image, bool_masked_pos=None)
+            position_embeddings = self.model.rope_embeddings(image)
+            for i, layer_module in enumerate(self.model.layer):
+                hidden_states = layer_module(
+                    hidden_states,
+                    position_embeddings=position_embeddings,
+                )
+        except AttributeError:
+            outputs = self.model(pixel_values=image, output_hidden_states=True)
+            hidden_states = outputs.hidden_states[-1]
 
         return F.layer_norm(hidden_states, hidden_states.shape[-1:])
         
