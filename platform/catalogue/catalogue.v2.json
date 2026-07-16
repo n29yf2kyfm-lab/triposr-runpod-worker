@@ -15675,5 +15675,145 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mercedes-benz-sprinter-v1",
+  "make": "mercedes-benz",
+  "model": "sprinter",
+  "modelFamily": "sprinter",
+  "modelAliases": [],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2018,
+  "yearEnd": 2026,
+  "bodyStyle": "van",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2019 Mercedes-Benz Sprinter",
+  "sourceUrl": "https://sketchfab.com/3d-models/5788a290ddb5483fbbd5831aeef829a1",
+  "sourceCreator": null,
+  "sourceReferenceId": "5788a290ddb5483fbbd5831aeef829a1",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Selenite Grey Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/sprinter.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/sprinter.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mercedes-benz/sprinter/selenite-grey-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1526172,
+  "mobileFileSizeBytes": 1526172,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-16T16:50:00Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Mercedes Sprinter panel van."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
