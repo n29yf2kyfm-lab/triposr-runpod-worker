@@ -60,11 +60,23 @@ A `prompt` field is rejected with a clear error — TRELLIS.2 does not do text-t
 The GLB is a **PBR** asset with WebP-compressed textures (`extension_webp=True`),
 ready for Blender / Unity / Unreal.
 
+## Code layout — the model code lives HERE
+
+The TRELLIS.2 source is **vendored into this repo** at `TRELLIS.2/` (from
+`microsoft/TRELLIS.2` at the commit in `TRELLIS.2/UPSTREAM_COMMIT`) and is now
+maintained as our own project: modify the pipeline/model code directly in
+`TRELLIS.2/trellis2/` and `TRELLIS.2/o-voxel/`, and the Docker build picks it
+up — no upstream clone at build time, no drift. Training-only code, demo apps,
+and 40MB of assets/third-party headers were stripped; the full delta vs
+upstream is documented in `TRELLIS.2/WORKER_CHANGES.md`.
+
 ## Build
 
 `.github/workflows/trellis2-docker-build.yml` builds and pushes on any push to
 `trellis2/**` on `main`, tagged `alamk123/ai-mechanic:trellis2-v1`,
-`:trellis2-latest`, and `:trellis2-<sha>`.
+`:trellis2-latest`, and `:trellis2-<sha>`. Dependencies install before the
+source `COPY`, so code edits reuse every cached extension-build layer and only
+rebuild `o-voxel` onward.
 
 The Dockerfile bypasses TRELLIS.2's `setup.sh` and installs each of its flags
 explicitly (`--basic --flash-attn --nvdiffrast --nvdiffrec --cumesh --o-voxel
