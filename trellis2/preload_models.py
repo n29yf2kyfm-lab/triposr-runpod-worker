@@ -54,6 +54,18 @@ def main():
     failures = []
     for repo_id, allow, ignore, gated in MODELS:
         print(f"\n=== {repo_id} ===")
+        # Local-first: a complete cache hit is success with no network and no
+        # token — this is what lets a pod/worker reuse gated models already on
+        # the shared volume without re-authenticating.
+        try:
+            path = snapshot_download(
+                repo_id, allow_patterns=allow, ignore_patterns=ignore,
+                local_files_only=True,
+            )
+            print(f"    cached -> {path}")
+            continue
+        except Exception:
+            pass
         try:
             path = snapshot_download(
                 repo_id,
