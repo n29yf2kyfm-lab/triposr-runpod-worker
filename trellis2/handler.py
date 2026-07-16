@@ -179,7 +179,7 @@ def build_vehicle_prompt(vehicle):
 def text_to_image(prompt, seed, steps=None, guidance=None):
     """Stage 1 of text-to-3D: render the prompt to a single-object image."""
     pipe = get_t2i_pipeline()
-    is_turbo = "turbo" in T2I_MODEL.lower() or "schnell" in T2I_MODEL.lower()
+    is_turbo = any(k in T2I_MODEL.lower() for k in ("turbo", "schnell", "lightning"))
     if steps is None:
         steps = 4 if is_turbo else 30
     if guidance is None:
@@ -283,6 +283,14 @@ def handler(job):
             # return the intermediate image so callers can see/reuse it
             generated_image_b64 = image_to_b64(img)
             mode = "text"
+            # publish the image immediately via job progress — the app can
+            # display it while the 3D stage is still generating
+            try:
+                runpod.serverless.progress_update(
+                    job, {"stage": "image_ready",
+                          "generated_image_b64": generated_image_b64})
+            except Exception:
+                pass
 
         # --- Stage 2: make model ---
         pipeline = get_pipeline()
