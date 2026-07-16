@@ -31,3 +31,4 @@ directory into the image and compiles `o-voxel` from it.
 | File | Change | Why |
 |---|---|---|
 | `trellis2/pipelines/trellis2_image_to_3d.py` | `from_pretrained` honors a `REMBG_MODEL` env var to override the background-removal checkpoint from `pipeline.json` | upstream pins `briaai/RMBG-2.0`, which is license-gated on HF (live deploy confirmed 403); `ZhengPeng7/BiRefNet` — the wrapper's own default — is public and equivalent |
+| `trellis2/pipelines/rembg/BiRefNet.py` | `__call__` casts the input tensor to the model's parameter dtype (and the prediction back to fp32) | RMBG-2.0 ships fp32 so upstream never casts; ZhengPeng7/BiRefNet ships fp16 — fp32 input crashed with "Input type (float) and bias type (c10::Half)" (live-confirmed) |

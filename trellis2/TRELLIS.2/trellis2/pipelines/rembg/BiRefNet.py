@@ -30,10 +30,15 @@ class BiRefNet:
         
     def __call__(self, image: Image.Image) -> Image.Image:
         image_size = image.size
-        input_images = self.transform_image(image).unsqueeze(0).to("cuda")
+        # WORKER CHANGE: match the model's parameter dtype. briaai/RMBG-2.0
+        # ships fp32 so upstream never casts, but ZhengPeng7/BiRefNet (the
+        # non-gated substitute) ships fp16 — feeding it fp32 crashes with
+        # "Input type (float) and bias type (c10::Half)" (live-confirmed).
+        model_dtype = next(self.model.parameters()).dtype
+        input_images = self.transform_image(image).unsqueeze(0).to("cuda", dtype=model_dtype)
         # Prediction
         with torch.no_grad():
-            preds = self.model(input_images)[-1].sigmoid().cpu()
+            preds = self.model(input_images)[-1].sigmoid().float().cpu()
         pred = preds[0].squeeze()
         pred_pil = transforms.ToPILImage()(pred)
         mask = pred_pil.resize(image_size)
