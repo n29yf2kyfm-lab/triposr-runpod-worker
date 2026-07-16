@@ -13149,5 +13149,157 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "porsche-911-carrera-4s-v1",
+  "make": "porsche",
+  "model": "911",
+  "modelFamily": "911",
+  "modelAliases": [
+   "carrera",
+   "carrera 4s",
+   "911 carrera"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2011,
+  "yearEnd": 2019,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "(FREE) Porsche 911 Carrera 4S",
+  "sourceUrl": "https://sketchfab.com/3d-models/d01b254483794de3819786d93e0e1ebf",
+  "sourceCreator": null,
+  "sourceReferenceId": "d01b254483794de3819786d93e0e1ebf",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "coat",
+   "paint"
+  ],
+  "glassMaterialNames": [
+   "coat",
+   "glass",
+   "lights",
+   "window"
+  ],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Crayon",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/911.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/911.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/porsche/911/crayon.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4021600,
+  "mobileFileSizeBytes": 4021600,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "sketchfab-ingest-2026-07-16",
+  "publishedAt": "2026-07-16T11:51:28Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Porsche 911 Carrera 4S (per source title). Body identifies as 991 generation, production span 2011-2019."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "sketchfab-ingest-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Crayon",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Crayon",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Arctic Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Volcano Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Volcano Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Jet Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Carrara White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carrara White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "GT Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "GT Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Gentian Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Gentian Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Shark Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Shark Blue",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
