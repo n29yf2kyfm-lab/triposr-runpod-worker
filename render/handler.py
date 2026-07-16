@@ -489,26 +489,25 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
             except Exception:
                 pass
         elif gd["light"]:
-            for nm, val in (("Roughness", 0.10), ("Metallic", 0.0)):
+            # crisp glossy CLEAR lens (glass-like), NOT an emissive glow —
+            # emission washed chrome-ringed lamps (classic Fiat 500) to a milky
+            # foggy haze. Gloss + light transmission + clearcoat reads as a real
+            # lamp cover; coloured lenses (red tails) stay deep and glossy.
+            for nm, val in (("Roughness", 0.04), ("Metallic", 0.0),
+                            ("Transmission Weight", 0.35), ("Transmission", 0.35),
+                            ("IOR", 1.45)):
                 inp = _gcut(nm)
                 if inp is not None:
                     inp.default_value = val
             if "Coat Weight" in gb.inputs:
-                gb.inputs["Coat Weight"].default_value = 0.6
-                gb.inputs["Coat Roughness"].default_value = 0.05
-            # drive emission from the lens colour so it glows subtly (AgX mutes
-            # emission, so a modest strength reads as a crisp lit lens)
-            ec = gb.inputs.get("Emission Color") or gb.inputs.get("Emission")
-            bc = gb.inputs.get("Base Color")
-            if ec is not None and bc is not None:
-                blinks = list(bc.links)
-                if blinks:
-                    gm.node_tree.links.new(blinks[0].from_socket, ec)
-                else:
-                    ec.default_value = bc.default_value
+                gb.inputs["Coat Weight"].default_value = 0.7
+                gb.inputs["Coat Roughness"].default_value = 0.03
+            # kill any residual emissive glow that reads as fog
             es = gb.inputs.get("Emission Strength")
             if es is not None:
-                es.default_value = 1.4
+                for lnk in list(es.links):
+                    gm.node_tree.links.remove(lnk)
+                es.default_value = 0.0
 
     # normalize scale: GLBs arrive at wildly different scales (some cars are
     # ~0.05 units); scale the scene so the car is ~4.5 units so camera/DOF/light
