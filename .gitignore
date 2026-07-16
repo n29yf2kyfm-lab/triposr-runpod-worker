@@ -2,3 +2,4 @@ node_modules/
 pipeline/node_modules/
 __pycache__/
 *.pyc
+.firecrawl/
