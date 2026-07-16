@@ -185,6 +185,20 @@ r = H.handler({"id": "t8b", "input": {"prompt": "a mug", "texture_size": 999999,
 check("oversize texture clamped to 4096", captured["to_glb"]["texture_size"] == 4096)
 check("tiny decimation clamped to 20k", captured["to_glb"]["decimation_target"] == 20_000)
 
+# ---- Test 9: delivery — Supabase upload + size-gated inline base64 ----
+print("Test 9: delivery (upload + size gate)")
+H.SUPABASE_URL = "https://x.supabase.co"; H.SUPABASE_KEY = "k"; H.SUPABASE_BUCKET = "car-meshes"
+fake_up = types.SimpleNamespace(status_code=200, text="")
+with mock.patch.object(H.requests, "post", return_value=fake_up) as up:
+    r = H.handler({"id": "t9", "input": {"prompt": "a chair"}})
+check("glb_url returned", r.get("glb_url") == "https://x.supabase.co/storage/v1/object/public/car-meshes/trellis2/t9.glb")
+check("upload hit bucket path", "car-meshes/trellis2/t9.glb" in up.call_args.args[0])
+check("small glb still inlined", "glb_b64" in r and r.get("glb_size_bytes", 0) <= H.MAX_INLINE_BYTES)
+H.MAX_INLINE_BYTES = 4  # force the file over the cap
+with mock.patch.object(H.requests, "post", return_value=fake_up):
+    r = H.handler({"id": "t9b", "input": {"prompt": "a chair"}})
+check("oversized glb NOT inlined (url only)", "glb_b64" not in r and r.get("glb_url"))
+
 print()
 print("RESULT:", f"{len(fails)} failures" if fails else "ALL TESTS PASSED")
 sys.exit(1 if fails else 0)

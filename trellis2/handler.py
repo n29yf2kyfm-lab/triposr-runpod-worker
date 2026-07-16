@@ -65,6 +65,42 @@ REMESH = True
 
 OUTPUT_DIR = "/runpod-volume/outputs"
 
+# Delivery: RunPod drops job outputs that exceed its response-size cap
+# (live-confirmed: attempt 8 COMPLETED with a multi-MB GLB and the platform
+# returned output=None). So the primary delivery is an upload to Supabase
+# storage (same pattern/bucket as the production worker); inline base64 is
+# included only when the file is small enough to survive the cap.
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
+SUPABASE_BUCKET = os.environ.get("SUPABASE_BUCKET", "")
+MAX_INLINE_BYTES = 4_000_000  # raw bytes; ~5.3MB as base64, safely under the cap
+
+
+def upload_to_supabase(path, object_name, content_type):
+    """Upload a file to Supabase storage; returns its public URL or None."""
+    if not (SUPABASE_URL and SUPABASE_KEY and SUPABASE_BUCKET):
+        return None
+    try:
+        with open(path, "rb") as f:
+            data = f.read()
+        r = requests.post(
+            f"{SUPABASE_URL}/storage/v1/object/{SUPABASE_BUCKET}/{object_name}",
+            data=data,
+            headers={
+                "Authorization": f"Bearer {SUPABASE_KEY}",
+                "apikey": SUPABASE_KEY,
+                "Content-Type": content_type,
+                "x-upsert": "true",
+            },
+            timeout=180,
+        )
+        if r.status_code in (200, 201):
+            return f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/{object_name}"
+        print(f"supabase upload failed: {r.status_code} {r.text[:200]}", file=sys.stderr)
+    except Exception as e:
+        print(f"supabase upload error: {e}", file=sys.stderr)
+    return None
+
 _pipeline = None
 _t2i_pipeline = None
 
@@ -258,16 +294,24 @@ def handler(job):
         except Exception:
             glb.export(persisted_path)
 
-        with open(persisted_path, "rb") as f:
-            glb_b64 = base64.b64encode(f.read()).decode("utf-8")
+        glb_size = os.path.getsize(persisted_path)
+        glb_url = upload_to_supabase(
+            persisted_path, f"trellis2/{job_id}.glb", "model/gltf-binary")
 
         result = {
             "status": "success",
-            "glb_b64": glb_b64,
+            "glb_url": glb_url,
             "glb_path": persisted_path,
+            "glb_size_bytes": glb_size,
             "mode": mode,
             "message": "GLB generated successfully",
         }
+        # Inline base64 only when it fits under RunPod's output cap —
+        # otherwise the platform silently drops the ENTIRE output.
+        if glb_size <= MAX_INLINE_BYTES:
+            with open(persisted_path, "rb") as f:
+                result["glb_b64"] = base64.b64encode(f.read()).decode("utf-8")
+
         if generated_image_b64:
             result["generated_image_b64"] = generated_image_b64
             # echo the engineered prompt so callers can see/tune what the
