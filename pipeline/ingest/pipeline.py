@@ -258,7 +258,13 @@ def store(spec):
         base = raw
     glb_url = upload("car-meshes", f"finished/{make}/{model}.glb", open(base, "rb").read(), "model/gltf-binary")
     assert verify_asset(glb_url), "GLB upload failed verification"
-    log(f"GLB stored+verified {os.path.getsize(base)//1024}KB")
+    base_kb = os.path.getsize(base) // 1024
+    # clean up temp GLBs immediately — they're uploaded now; leaving them fills
+    # the session's disk allowance (source GLBs run 60-180 MB each).
+    for f in (raw, base):
+        try: os.remove(f)
+        except OSError: pass
+    log(f"GLB stored+verified {base_kb}KB")
 
     hero_az = spec.get("az", 40)
     plate = spec.get("plate", "AL24 3D")
