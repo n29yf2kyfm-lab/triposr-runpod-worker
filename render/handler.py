@@ -451,6 +451,65 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
             b.inputs["Coat Weight"].default_value = fin["coat"]
             b.inputs["Coat Roughness"].default_value = fin["coat_r"]
 
+    # --- glass + light polish -------------------------------------------------
+    # Raw sourced GLBs ship glass as dark/opaque slabs and light lenses as dull,
+    # un-emissive plastic, so windscreens render BLACK and headlights render as
+    # grey blobs. This polish used to live only in the offline finish step, so
+    # GPU/live renders never got it. Apply it to every render: glass -> real
+    # transmissive clear glass (Cycles refraction shows the interior); light
+    # lenses -> glossy clearcoat + modest emission so coloured lenses read vivid.
+    for gn, gd in meta.items():
+        gm = gd["mat"]
+        if not gm or not gm.use_nodes or not gm.node_tree or gn in chosen:
+            continue
+        gb = gm.node_tree.nodes.get("Principled BSDF")
+        if not gb:
+            continue
+
+        def _gcut(name):
+            inp = gb.inputs.get(name)
+            if inp is not None:
+                for lnk in list(inp.links):
+                    gm.node_tree.links.remove(lnk)
+            return inp
+
+        if gd["glass"]:
+            for nm, val in (("Transmission Weight", 1.0), ("Transmission", 1.0),
+                            ("Roughness", 0.03), ("Metallic", 0.0),
+                            ("Alpha", 1.0), ("IOR", 1.45)):
+                inp = _gcut(nm)
+                if inp is not None:
+                    inp.default_value = val
+            bc = _gcut("Base Color")
+            if bc is not None:
+                bc.default_value = (0.74, 0.80, 0.84, 1.0)   # faint cool tint
+            try:
+                gm.use_screen_refraction = True
+                gm.blend_method = "OPAQUE"
+            except Exception:
+                pass
+        elif gd["light"]:
+            for nm, val in (("Roughness", 0.10), ("Metallic", 0.0)):
+                inp = _gcut(nm)
+                if inp is not None:
+                    inp.default_value = val
+            if "Coat Weight" in gb.inputs:
+                gb.inputs["Coat Weight"].default_value = 0.6
+                gb.inputs["Coat Roughness"].default_value = 0.05
+            # drive emission from the lens colour so it glows subtly (AgX mutes
+            # emission, so a modest strength reads as a crisp lit lens)
+            ec = gb.inputs.get("Emission Color") or gb.inputs.get("Emission")
+            bc = gb.inputs.get("Base Color")
+            if ec is not None and bc is not None:
+                blinks = list(bc.links)
+                if blinks:
+                    gm.node_tree.links.new(blinks[0].from_socket, ec)
+                else:
+                    ec.default_value = bc.default_value
+            es = gb.inputs.get("Emission Strength")
+            if es is not None:
+                es.default_value = 1.4
+
     # normalize scale: GLBs arrive at wildly different scales (some cars are
     # ~0.05 units); scale the scene so the car is ~4.5 units so camera/DOF/light
     # math all operate in a sane range.
