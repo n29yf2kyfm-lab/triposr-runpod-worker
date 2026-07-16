@@ -17051,5 +17051,145 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "lexus-rx-v1",
+  "make": "lexus",
+  "model": "rx",
+  "modelFamily": "rx",
+  "modelAliases": [],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": 2026,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": "RX 500h F Sport",
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2023 Lexus RX500h F Sport",
+  "sourceUrl": "https://sketchfab.com/3d-models/8a3267c9972e4b638a3d5cc7e049211b",
+  "sourceCreator": null,
+  "sourceReferenceId": "8a3267c9972e4b638a3d5cc7e049211b",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Sonic Titanium",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/rx.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/rx.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/lexus/rx/sonic-titanium.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6524840,
+  "mobileFileSizeBytes": 6524840,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-16T21:04:01Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Lexus RX 500h F Sport; source title 2023."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Titanium",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sonic Titanium",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mercury Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mercury Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Graphite Black",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Black",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Sonic White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Sonic Silver",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sonic Silver",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Celestial Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Celestial Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Mesa Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mesa Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Terrane Khaki",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Terrane Khaki",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
