@@ -12996,5 +12996,158 @@
    "year range unknown"
   ],
   "notes": []
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "fiat-500-classic-v1",
+  "make": "fiat",
+  "model": "500",
+  "modelFamily": "500",
+  "modelAliases": [
+   "500 classic",
+   "nuova 500",
+   "cinquecento"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1957,
+  "yearEnd": 1975,
+  "bodyStyle": "citycar",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Fiat 500 | Personal Work",
+  "sourceUrl": "https://sketchfab.com/3d-models/148e5d74c60345aa81f26a119819ef4b",
+  "sourceCreator": null,
+  "sourceReferenceId": "148e5d74c60345aa81f26a119819ef4b",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body_bottom",
+   "body_chrome",
+   "body_cloth",
+   "body_glass",
+   "body_headlight",
+   "body_lights_inside",
+   "body_logo_red",
+   "body_orange_glass",
+   "body_paint",
+   "body_plastic",
+   "body_red_glass"
+  ],
+  "glassMaterialNames": [
+   "body_glass",
+   "body_headlight",
+   "body_orange_glass",
+   "body_red_glass"
+  ],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Moda Grey Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/500.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/500.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/fiat/500/moda-grey-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6397540,
+  "mobileFileSizeBytes": 6397540,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "sketchfab-ingest-2026-07-16",
+  "publishedAt": "2026-07-16T10:44:10Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Classic rear-engined Fiat Nuova 500 (identified from body; production span 1957-1975). Not the 2007+ modern 500."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "sketchfab-ingest-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Moda Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moda Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cinema Black",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Cinema Black",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Gelato White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Gelato White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Passione Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Passione Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Italia Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Italia Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Sicilia Orange",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sicilia Orange",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Ocean Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ocean Green",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
