@@ -16631,5 +16631,145 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ferrari-308-v1",
+  "make": "ferrari",
+  "model": "308",
+  "modelFamily": "308",
+  "modelAliases": [],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1975,
+  "yearEnd": 1985,
+  "bodyStyle": "targa",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": "GTS",
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Ferrari 308 GTS",
+  "sourceUrl": "https://sketchfab.com/3d-models/dacffa75e5fe46ce99fe6dd6223cb5a7",
+  "sourceCreator": null,
+  "sourceReferenceId": "dacffa75e5fe46ce99fe6dd6223cb5a7",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Grigio Silverstone",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ferrari/308.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ferrari/308.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ferrari/308/grigio-silverstone.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 2102544,
+  "mobileFileSizeBytes": 2102544,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-16T20:43:08Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Ferrari 308 GTS."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Grigio Silverstone",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Grigio Silverstone",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nero Daytona",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nero Daytona",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianco Avus",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianco Avus",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Rosso Corsa",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Rosso Corsa",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Rosso Scuderia",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Rosso Scuderia",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Giallo Modena",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Giallo Modena",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Blu Tour de France",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Blu Tour de France",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Verde British",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Verde British",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
