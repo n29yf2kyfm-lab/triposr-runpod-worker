@@ -276,11 +276,17 @@ def handler(job):
         return result
 
     except Exception as e:
+        # Tracebacks are debug output: they leak file paths and internals to
+        # whoever calls the endpoint. Ship them only when DEBUG=1 is set on
+        # the endpoint (as during bring-up); production gets the message and
+        # the full trace goes to worker logs instead.
         import traceback
-        return {
-            "error": str(e),
-            "traceback": traceback.format_exc(),
-        }
+        result = {"error": str(e)}
+        if os.environ.get("DEBUG") == "1":
+            result["traceback"] = traceback.format_exc()
+        else:
+            print(traceback.format_exc(), file=sys.stderr)
+        return result
 
 
 runpod.serverless.start({"handler": handler})
