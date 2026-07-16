@@ -66,9 +66,59 @@ Image-to-3D via URL or base64 (same shape as the other workers):
 }
 ```
 
+Structured vehicle spec (the "make me this exact car" path — expands into an
+engineered prompt, echoed back as `prompt_used`):
+
+```json
+{
+  "input": {
+    "vehicle": {
+      "year": 2019, "make": "Toyota", "model": "Corolla", "trim": "SE",
+      "color": "silver", "body_style": "sedan"
+    }
+  }
+}
+```
+
+Optional `vehicle` fields: `view` (default "three-quarter front view"),
+`condition`, `extras`.
+
 Optional knobs (all requests): `decimation_target` (trim — target faces after
 remesh, default 1,000,000), `texture_size` (colour — baked PBR resolution,
 default 4096). Text requests also accept `t2i_steps` and `t2i_guidance`.
+
+## Offline operation (no internet at runtime)
+
+The worker needs five model downloads if caches are cold: `TRELLIS.2-4B`, one
+reused v1 checkpoint, the DINOv3 conditioner **[gated]**, `briaai/RMBG-2.0`
+background removal **[gated]**, and the T2I model. `preload_models.py` fetches
+all of them into `HF_HOME` in one shot and tells you exactly which gated
+licenses still need accepting:
+
+```sh
+# once, onto the network volume (from any pod that mounts it):
+HF_HOME=/runpod-volume/hf_cache HF_TOKEN=hf_... python /app/preload_models.py
+```
+
+Then set `OFFLINE=1` on the endpoint — the handler flips on
+`HF_HUB_OFFLINE`/`TRANSFORMERS_OFFLINE`, so any cache miss fails fast instead
+of silently reaching for the network. For a **fully self-contained image**
+(no volume, no internet — e.g. air-gapped or edge boxes), build with
+`--build-arg PRELOAD_MODELS=1` and a BuildKit `hf_token` secret; that bakes
+~20GB of weights into the image (too big for GitHub CI — build locally or on
+a RunPod pod).
+
+## Car-accuracy roadmap (the hard part)
+
+Base SDXL renders common vehicles believably but won't nail every
+year/trim-specific detail. The plan, in order:
+
+1. **Now** — `vehicle` spec → engineered prompt (shipped, above).
+2. **Next** — fine-tune a LoRA on real vehicle photos keyed to specs, then set
+   `T2I_LORA=/runpod-volume/loras/cars-v1` (or an HF repo) on the endpoint —
+   the hook is already in the handler, no code change needed.
+3. **Alternative for known cars** — skip T2I entirely and pass a real photo as
+   `image_url`; TRELLIS.2's own background removal handles dealer-lot shots.
 
 ## Output
 

@@ -12,6 +12,13 @@ os.environ.setdefault("OPENCV_IO_ENABLE_OPENEXR", "1")
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 os.environ.setdefault("ATTN_BACKEND", "flash-attn")
 
+# OFFLINE=1 forbids ALL model downloads at request time — every weight must
+# already be in HF_HOME (see preload_models.py). Any cache miss then fails
+# fast with a clear "offline mode" error instead of hanging on a download.
+if os.environ.get("OFFLINE") == "1":
+    os.environ["HF_HUB_OFFLINE"] = "1"
+    os.environ["TRANSFORMERS_OFFLINE"] = "1"
+
 sys.path.insert(0, "/app/TRELLIS.2")
 
 from trellis2.pipelines import Trellis2ImageTo3DPipeline
@@ -31,6 +38,12 @@ IMAGE_MODEL = "microsoft/TRELLIS.2-4B"
 #   T2I_MODEL=stabilityai/sdxl-turbo        (much faster, research license)
 #   T2I_MODEL=black-forest-labs/FLUX.1-schnell (Apache-2.0, needs more VRAM)
 T2I_MODEL = os.environ.get("T2I_MODEL", "stabilityai/stable-diffusion-xl-base-1.0")
+
+# Optional LoRA adapter for the T2I stage. This is the drop-in point for the
+# planned car-specific fine-tune: once a LoRA is trained on real vehicle photos
+# (so specs like "2019 Toyota Corolla SE" render factory-accurate), point this
+# at its HF repo or a local/volume path — no code change, no rebuild.
+T2I_LORA = os.environ.get("T2I_LORA", "")
 
 # Prompt scaffolding that biases the T2I stage toward images TRELLIS.2 handles
 # best: one full object, centered, no crop, uncluttered background.
@@ -74,8 +87,36 @@ def get_t2i_pipeline():
             variant="fp16",
             use_safetensors=True,
         )
+        if T2I_LORA:
+            _t2i_pipeline.load_lora_weights(T2I_LORA)
         _t2i_pipeline.to("cuda")
     return _t2i_pipeline
+
+
+def build_vehicle_prompt(vehicle):
+    """Turn a structured vehicle spec into an engineered T2I prompt.
+
+    This is the current answer to 'make the model know what the car looks
+    like from a spec': a deterministic template that front-loads the exact
+    identity (year make model trim) — which base SDXL renders reasonably for
+    common vehicles — plus controlled view/condition details. Accuracy on
+    rare trims is what the future car LoRA (T2I_LORA) will fix; the input
+    contract here stays the same when it lands.
+    """
+    identity = " ".join(
+        str(vehicle[k]) for k in ("year", "make", "model", "trim") if vehicle.get(k)
+    )
+    details = []
+    if vehicle.get("color"):
+        details.append(f"{vehicle['color']} paint")
+    if vehicle.get("body_style"):
+        details.append(vehicle["body_style"])
+    details.append(vehicle.get("view", "three-quarter front view"))
+    if vehicle.get("condition"):
+        details.append(vehicle["condition"])
+    if vehicle.get("extras"):
+        details.append(str(vehicle["extras"]))
+    return f"a {identity}, " + ", ".join(details) + ", factory-accurate proportions and design"
 
 
 def text_to_image(prompt, seed, steps=None, guidance=None):
@@ -127,9 +168,13 @@ def handler(job):
     job_id = job.get("id", "unknown")
 
     prompt = job_input.get("prompt", "")
+    vehicle = job_input.get("vehicle")
     image_url = job_input.get("image_url", "")
     image_b64 = job_input.get("image_b64", "")
     seed = int(job_input.get("seed", 1))
+    # A structured vehicle spec takes precedence over a free-text prompt.
+    if vehicle:
+        prompt = build_vehicle_prompt(vehicle)
     # trim + colour knobs
     decimation_target = int(job_input.get("decimation_target", DEFAULT_DECIMATION_TARGET))
     texture_size = int(job_input.get("texture_size", DEFAULT_TEXTURE_SIZE))
@@ -139,8 +184,8 @@ def handler(job):
 
     if not prompt and not image_url and not image_b64:
         return {
-            "error": "Provide prompt (text-to-3D via built-in text-to-image), "
-                     "or image_url / image_b64 (image-to-3D)."
+            "error": "Provide prompt or vehicle spec (text-to-3D via built-in "
+                     "text-to-image), or image_url / image_b64 (image-to-3D)."
         }
 
     try:
@@ -202,6 +247,9 @@ def handler(job):
         }
         if generated_image_b64:
             result["generated_image_b64"] = generated_image_b64
+            # echo the engineered prompt so callers can see/tune what the
+            # vehicle spec expanded to
+            result["prompt_used"] = prompt
         return result
 
     except Exception as e:

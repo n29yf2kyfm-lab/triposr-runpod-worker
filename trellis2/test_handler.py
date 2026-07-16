@@ -83,6 +83,8 @@ class FakeT2I:
         captured["t2i_model"] = name
         return cls()
     def to(self, dev): return self
+    def load_lora_weights(self, path):
+        captured["lora_loaded"] = path
     def __call__(self, prompt, negative_prompt=None, num_inference_steps=None,
                  guidance_scale=None, width=None, height=None, generator=None):
         captured["t2i_prompt"] = prompt
@@ -156,6 +158,24 @@ print("Test 5: T2I_MODEL=sdxl-turbo auto steps/guidance")
 H.T2I_MODEL = "stabilityai/sdxl-turbo"; H._t2i_pipeline = None
 r = H.handler({"id": "t5", "input": {"prompt": "a mug"}})
 check("turbo steps=4/guidance=0.0", captured["t2i_steps"] == 4 and captured["t2i_guidance"] == 0.0)
+
+# ---- Test 6: structured vehicle spec -> engineered prompt ----
+print("Test 6: vehicle spec")
+r = H.handler({"id": "t6", "input": {"vehicle": {
+    "year": 2019, "make": "Toyota", "model": "Corolla", "trim": "SE",
+    "color": "silver", "body_style": "sedan"}}})
+check("success", r.get("status") == "success", json.dumps(r)[:300])
+p = captured.get("t2i_prompt", "")
+check("identity front-loaded", "2019 Toyota Corolla SE" in p)
+check("colour + body style in prompt", "silver paint" in p and "sedan" in p)
+check("default view applied", "three-quarter front view" in p)
+check("prompt_used echoed", "2019 Toyota Corolla SE" in r.get("prompt_used", ""))
+
+# ---- Test 7: LoRA hook loads when T2I_LORA is set ----
+print("Test 7: T2I_LORA hook")
+H.T2I_LORA = "/runpod-volume/loras/cars-v1"; H._t2i_pipeline = None
+r = H.handler({"id": "t7", "input": {"prompt": "a truck"}})
+check("lora loaded from configured path", captured.get("lora_loaded") == "/runpod-volume/loras/cars-v1")
 
 print()
 print("RESULT:", f"{len(fails)} failures" if fails else "ALL TESTS PASSED")

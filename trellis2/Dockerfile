@@ -113,6 +113,24 @@ ENV TORCH_HOME=/runpod-volume/torch_cache
 ENV OPENCV_IO_ENABLE_OPENEXR=1
 ENV PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
+COPY preload_models.py /app/preload_models.py
 COPY handler.py /app/handler.py
+
+# Optional: bake ALL model weights into the image for fully-offline operation
+# (no network volume, no internet at runtime — pair with OFFLINE=1 on the
+# endpoint). Adds ~20GB to the image, so it will NOT fit on a stock GitHub
+# runner — build this variant locally or on a RunPod pod:
+#   docker build --build-arg PRELOAD_MODELS=1 --secret id=hf_token,src=token.txt .
+# The HF token (BuildKit secret, never stored in a layer) must belong to an
+# account that accepted the licenses of the two gated repos (facebook/dinov3,
+# briaai/RMBG-2.0). Weights land in /runpod-volume/hf_cache INSIDE the image,
+# matching HF_HOME above — but if a network volume is attached it mounts OVER
+# that path and hides the baked weights, so offline images run volume-less.
+ARG PRELOAD_MODELS=0
+RUN --mount=type=secret,id=hf_token \
+    if [ "$PRELOAD_MODELS" = "1" ]; then \
+      HF_TOKEN=$(cat /run/secrets/hf_token 2>/dev/null || true) \
+      python /app/preload_models.py; \
+    fi
 
 CMD ["python", "-u", "/app/handler.py"]
