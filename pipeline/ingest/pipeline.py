@@ -247,16 +247,21 @@ def verify_asset(url):
 
 def store(spec):
     uid = spec["uid"]; make, model = spec["make"], spec["model"]
+    # Storage key is the assetId, NOT make/model: the catalogue holds multiple
+    # variants per make+model (different year/generation/spec — resolver picks by
+    # year), so paths keyed on make/model would overwrite each other. assetId is
+    # unique per variant, so every variant's mesh + renders live at their own path.
+    key = slug(spec["assetId"])
     dl = skfb_download(uid)
     assert dl, "no downloadable GLB at store time"
-    raw = f"/tmp/_{make}_{model}_raw.glb"
+    raw = f"/tmp/_{key}_raw.glb"
     open(raw, "wb").write(getb(dl["url"]))
-    base = f"/tmp/{make}_{model}.glb"
+    base = f"/tmp/{key}.glb"
     subprocess.run(["npx", "--yes", "@gltf-transform/cli", "draco", raw, base],
                    cwd=f"{REPO}/pipeline", capture_output=True, timeout=300)
     if not os.path.exists(base) or os.path.getsize(base) < 1000:
         base = raw
-    glb_url = upload("car-meshes", f"finished/{make}/{model}.glb", open(base, "rb").read(), "model/gltf-binary")
+    glb_url = upload("car-meshes", f"finished/{make}/{key}.glb", open(base, "rb").read(), "model/gltf-binary")
     assert verify_asset(glb_url), "GLB upload failed verification"
     base_bytes = os.path.getsize(base)
     # clean up temp GLBs immediately — they're uploaded now; leaving them fills
@@ -276,7 +281,7 @@ def store(spec):
                      plates_both=True, az=hero_az, elev=0.13, samples=150, width=1600, height=900)
         if not png:
             raise RuntimeError(f"render failed after retries: {p['name']} — ABORT (no partial store)")
-        url = upload("car-renders", f"finished/{make}/{model}/{sl}.jpg", png, "image/png")
+        url = upload("car-renders", f"finished/{make}/{key}/{sl}.jpg", png, "image/png")
         if not verify_asset(url):
             raise RuntimeError(f"upload verify failed: {p['name']} — ABORT")
         colours.append({"oemName": p["name"], "family": p["colourFamily"],
