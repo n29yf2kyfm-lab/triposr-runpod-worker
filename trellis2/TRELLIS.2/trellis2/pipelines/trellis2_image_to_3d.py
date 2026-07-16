@@ -102,7 +102,16 @@ class Trellis2ImageTo3DPipeline(Pipeline):
         pipeline.tex_slat_normalization = args['tex_slat_normalization']
 
         pipeline.image_cond_model = getattr(image_feature_extractor, args['image_cond_model']['name'])(**args['image_cond_model']['args'])
-        pipeline.rembg_model = getattr(rembg, args['rembg_model']['name'])(**args['rembg_model']['args'])
+        # WORKER CHANGE: pipeline.json pins rembg to briaai/RMBG-2.0, which is
+        # license-gated on HF and 403s for tokens that haven't accepted it.
+        # REMBG_MODEL overrides the checkpoint (e.g. the public
+        # ZhengPeng7/BiRefNet that the wrapper class itself defaults to)
+        # without editing pipeline.json. See TRELLIS.2/WORKER_CHANGES.md.
+        import os as _os
+        rembg_args = dict(args['rembg_model']['args'])
+        if _os.environ.get('REMBG_MODEL'):
+            rembg_args['model_name'] = _os.environ['REMBG_MODEL']
+        pipeline.rembg_model = getattr(rembg, args['rembg_model']['name'])(**rembg_args)
         
         pipeline.low_vram = args.get('low_vram', True)
         pipeline.default_pipeline_type = args.get('default_pipeline_type', '1024_cascade')

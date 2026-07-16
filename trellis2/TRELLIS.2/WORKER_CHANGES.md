@@ -28,5 +28,6 @@ directory into the image and compiles `o-voxel` from it.
 
 ## Modified
 
-*(none yet — code is byte-identical to upstream apart from the removals above;
-list every in-file change here as we make them)*
+| File | Change | Why |
+|---|---|---|
+| `trellis2/pipelines/trellis2_image_to_3d.py` | `from_pretrained` honors a `REMBG_MODEL` env var to override the background-removal checkpoint from `pipeline.json` | upstream pins `briaai/RMBG-2.0`, which is license-gated on HF (live deploy confirmed 403); `ZhengPeng7/BiRefNet` — the wrapper's own default — is public and equivalent |

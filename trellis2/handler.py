@@ -69,6 +69,12 @@ _pipeline = None
 _t2i_pipeline = None
 
 
+# Background removal checkpoint override — handled inside our vendored
+# pipeline (trellis2_image_to_3d.py reads REMBG_MODEL). pipeline.json pins the
+# license-gated briaai/RMBG-2.0 (verified 403 in live deploy); setting
+# REMBG_MODEL=ZhengPeng7/BiRefNet uses the public equivalent, no rebuild.
+
+
 def get_pipeline():
     global _pipeline
     if _pipeline is None:
