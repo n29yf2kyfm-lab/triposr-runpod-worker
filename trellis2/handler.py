@@ -111,17 +111,9 @@ def fetch_image(image_url):
 
 
 def run_pipeline(pipeline, img, seed):
-    """Run generation, passing seed if the installed pipeline accepts it.
-
-    Upstream example.py calls `pipeline.run(image)` with no seed; the demo app
-    exposes a seed control, so the kwarg is expected to exist. Guard with a
-    TypeError fallback so a signature mismatch degrades to a non-seeded run
-    instead of a hard crash.
-    """
-    try:
-        return pipeline.run(img, seed=seed)[0]
-    except TypeError:
-        return pipeline.run(img)[0]
+    """Run generation. Signature verified against the vendored pipeline:
+    run(image, num_samples=1, seed=42, ...) -> List[MeshWithVoxel]."""
+    return pipeline.run(img, seed=seed)[0]
 
 
 def image_to_b64(img):
@@ -175,6 +167,8 @@ def handler(job):
             mesh = run_pipeline(pipeline, img, seed)
 
         # --- Stage 3: trim (remesh + decimate) and colour (bake PBR) -> GLB ---
+        # Signature verified against vendored o_voxel/postprocess.py and
+        # example.py — aabb is REQUIRED (no default); values match upstream.
         glb = o_voxel.postprocess.to_glb(
             vertices=mesh.vertices,
             faces=mesh.faces,
@@ -182,9 +176,12 @@ def handler(job):
             coords=mesh.coords,
             attr_layout=mesh.layout,
             voxel_size=mesh.voxel_size,
+            aabb=[[-0.5, -0.5, -0.5], [0.5, 0.5, 0.5]],
             decimation_target=decimation_target,
             texture_size=texture_size,
             remesh=REMESH,
+            remesh_band=1,
+            remesh_project=0,
         )
 
         os.makedirs(OUTPUT_DIR, exist_ok=True)
