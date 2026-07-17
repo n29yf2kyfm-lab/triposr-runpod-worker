@@ -53,3 +53,21 @@ Read from the environment: `SKFB_TOKEN`, `RUNPOD_KEY`, `RENDER_ENDPOINT`,
 ```
 `az` frames the car's FRONT so UK plate sides land correctly (use ~220 for
 reverse-oriented / rear-engined models — confirm in the Gate-1 angles).
+
+## Gate 0 — hardened geometry audit (`geom_audit.py`)
+
+Runs *before* the eye and before the expensive per-colour render, catching
+structural faults the paint/coverage QC is blind to: upside-down, on-side,
+wheels-off race shells, doors-open poses, wrecked floorpans.
+
+- `geom_signals(glb)` — name-independent world-space vertex signals
+  (`h_over_l`, `top_over_bot`, `upper_frac`). Robust to scraped GLBs that don't
+  name their glass/wheel materials.
+- `verdict(geom, handler_audit)` — combines those with the render worker's glass
+  metrics (`audit` block: `glass_zf`, `glass_af`) → `ok` | `warn` | `reject`.
+
+Thresholds calibrated 2026-07-17 on a 12-car known-truth set: **5/6 broken
+auto-rejected, 0/6 good false-rejected**. Residual gap: soft "melt" geometry with
+normal proportions still needs a human glance at the hero — keep a sheet review
+in the loop. `reject` cars are dropped silently; `warn` cars (tall estates/vans,
+melt suspects) are shown but flagged.
