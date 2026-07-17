@@ -14544,5 +14544,147 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "kia-ev6-2022-v1",
+  "make": "kia",
+  "model": "ev6",
+  "modelFamily": "ev6",
+  "modelAliases": [
+   "ev6"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": null,
+  "bodyStyle": "fastback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022 Kia EV6 GT-Line AWD",
+  "sourceUrl": "https://sketchfab.com/3d-models/776181e22d694282b90c50969298b84c",
+  "sourceCreator": null,
+  "sourceReferenceId": "776181e22d694282b90c50969298b84c",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "red",
+  "renderColourLabel": "Runway Red",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-ev6-2022-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-ev6-2022-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-ev6-2022-v1/runway-red.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 15954056,
+  "mobileFileSizeBytes": 15954056,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T21:29:53Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2022 Kia EV6 GT-Line AWD'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Interstellar Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Interstellar Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Steel Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Steel Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Aurora Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Aurora Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snow White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snow White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fusion White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fusion White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Runway Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Runway Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Mineral Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Experience Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Experience Green",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
