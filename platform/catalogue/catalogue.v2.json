@@ -12870,5 +12870,147 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "vauxhall-astra-g-v1",
+  "make": "vauxhall",
+  "model": "astra",
+  "modelFamily": "astra",
+  "modelAliases": [
+   "astra"
+  ],
+  "generation": "G",
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Opel Astra G",
+  "sourceUrl": "https://sketchfab.com/3d-models/f3eed38d0b2143889cbc465769e146cc",
+  "sourceCreator": null,
+  "sourceReferenceId": "f3eed38d0b2143889cbc465769e146cc",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "yellow",
+  "renderColourLabel": "Electric Yellow",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-astra-g-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-astra-g-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/vauxhall/vauxhall-astra-g-v1/electric-yellow.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 36186040,
+  "mobileFileSizeBytes": 36186040,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T20:16:13Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: 'Opel Astra G'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
