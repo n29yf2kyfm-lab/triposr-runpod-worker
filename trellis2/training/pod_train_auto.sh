@@ -20,12 +20,12 @@ upload_log() {
     --data-binary @"$LOG" > /dev/null 2>&1 || true
 }
 report() {
+  # log-only beacons. NEVER rename the pod from inside the pod: PATCHing
+  # the pod restarts its container, which killed the script ~4s after every
+  # boot — all three earlier attempts crash-looped on their own progress
+  # beacon (468 restarts/36min, confirmed from the shipped log).
   echo "=== phase lora-$1 $(date -u +%H:%M:%S) ===" >> "$LOG" 2>/dev/null || true
   upload_log
-  [ -n "${RUNPOD_POD_ID:-}" ] && [ -n "${RUNPOD_ACCOUNT_KEY:-}" ] || return 0
-  curl -s -X PATCH "https://rest.runpod.io/v1/pods/$RUNPOD_POD_ID" \
-    -H "Authorization: Bearer $RUNPOD_ACCOUNT_KEY" -H "Content-Type: application/json" \
-    -d "{\"name\": \"lora-$1\"}" > /dev/null || true
 }
 trap 'report FAILED' ERR
 # heartbeat: ship the log every 5 min so a mid-phase death is diagnosable
