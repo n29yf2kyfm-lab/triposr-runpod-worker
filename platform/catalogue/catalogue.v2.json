@@ -12180,5 +12180,148 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "kia-sportage-2023-v1",
+  "make": "kia",
+  "model": "sportage",
+  "modelFamily": "sportage",
+  "modelAliases": [
+   "sportage",
+   "sportage gt-line"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2023 Kia Sportage GT-Line",
+  "sourceUrl": "https://sketchfab.com/3d-models/b89d15a4b99349d78c06dcc38e79fd60",
+  "sourceCreator": null,
+  "sourceReferenceId": "b89d15a4b99349d78c06dcc38e79fd60",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "red",
+  "renderColourLabel": "Runway Red",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2023-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2023-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-sportage-2023-v1/runway-red.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 13365476,
+  "mobileFileSizeBytes": 13365476,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T19:53:10Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2023 Kia Sportage GT-Line'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Interstellar Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Interstellar Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Steel Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Steel Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Aurora Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Aurora Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snow White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snow White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fusion White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fusion White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Runway Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Runway Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Mineral Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Experience Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Experience Green",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
