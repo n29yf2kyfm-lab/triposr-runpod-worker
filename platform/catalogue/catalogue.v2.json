@@ -14686,5 +14686,147 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "dacia-logan-v1",
+  "make": "dacia",
+  "model": "logan",
+  "modelFamily": "logan",
+  "modelAliases": [
+   "logan"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Dacia/Renault Logan Politia - High-poly",
+  "sourceUrl": "https://sketchfab.com/3d-models/7da8b84f438745cb9e06ed1a2ce5c552",
+  "sourceCreator": null,
+  "sourceReferenceId": "7da8b84f438745cb9e06ed1a2ce5c552",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Iron Blue",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/dacia/dacia-logan-v1/iron-blue.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 7106792,
+  "mobileFileSizeBytes": 7106792,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T21:32:39Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: 'Dacia/Renault Logan Politia - High-poly'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "white",
+     "label": "Glacier White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacier White",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Pearl Black",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Pearl Black",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Comet Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Comet Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Highland Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Highland Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Iron Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Iron Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fusion Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fusion Red",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Arizona Orange",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arizona Orange",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Lichen Khaki",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Lichen Khaki",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
