@@ -22763,5 +22763,148 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "aston-martin-vantage-v1",
+  "make": "aston-martin",
+  "model": "vantage",
+  "modelFamily": "vantage",
+  "modelAliases": [
+   "vantage",
+   "v8 vantage"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2005,
+  "yearEnd": 2017,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2008 Aston Martin V8 Vantage",
+  "sourceUrl": "https://sketchfab.com/3d-models/bbff5774ca704cf1bf0516fc1a4f5846",
+  "sourceCreator": null,
+  "sourceReferenceId": "bbff5774ca704cf1bf0516fc1a4f5846",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "green",
+  "renderColourLabel": "Aston Martin Racing Green",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-vantage-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-vantage-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/aston-martin/aston-martin-vantage-v1/aston-martin-racing-green.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4841520,
+  "mobileFileSizeBytes": 4841520,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T12:16:51Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2008 Aston Martin V8 Vantage'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "green",
+     "label": "Aston Martin Racing Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Aston Martin Racing Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Zaffre Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Zaffre Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Hyper Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hyper Red",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Lightning Silver",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lightning Silver",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Jet Black",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Morning Frost White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Morning Frost White",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "China Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "China Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
