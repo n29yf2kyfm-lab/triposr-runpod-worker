@@ -340,11 +340,12 @@ def _fetch_glb(job_input):
 
 
 def _pose_audit(bpy):
-    """Hardened structure/orientation gate — the checks the paint QC never ran,
-    so upside-down cars, wheels-off race shells, doors-open poses and wrecked
-    floorpans get auto-rejected instead of reaching a human. Runs AFTER
-    auto-upright, so a fail means upright could not save it. Scale-invariant:
-    everything is a fraction of the model's own bounding box.
+    """Structure/orientation METRICS the paint QC never measured — feeds the
+    real gate in pipeline/ingest/geom_audit.py (which adds name-independent
+    vertex geometry). Returns raw numbers only, no verdict: name-based glass/
+    wheel detection is too unreliable on scraped GLBs to judge on alone. Runs
+    AFTER auto-upright. Scale-invariant: everything is a fraction of the model's
+    own bounding box.
 
     Signals (world space, Z is vertical after upright):
       glass_zf  area-weighted glass centroid height, 0=floor .. 1=roof
@@ -391,24 +392,13 @@ def _pose_audit(bpy):
     length = max(ext[0], ext[1]) or 1.0
     h_over_l = round(ext[2] / length, 3)
 
-    reject, warn = [], []
-    # HARD rejects — strong, unambiguous, no normal car trips these
-    if wheel_af < 0.002:
-        reject.append("wheels-missing")
-    if glass_zf is not None and glass_zf < 0.42:
-        reject.append(f"upside-down(glass_zf={glass_zf})")
-    if wheel_zf is not None and wheel_zf > 0.55:
-        reject.append(f"upside-down(wheel_zf={wheel_zf})")
-    # WARN — flag for the human, do not auto-kill (vans/odd glass names live here)
-    if glass_af < 0.006:
-        warn.append(f"no-greenhouse(glass_af={glass_af})")
-    if h_over_l > 0.55:
-        warn.append(f"too-tall(h/l={h_over_l})")
-    if glass_zf is not None and 0.42 <= glass_zf < 0.50:
-        warn.append(f"glass-low(glass_zf={glass_zf})")
-    verdict = "reject" if reject else ("warn" if warn else "ok")
-    return {"verdict": verdict, "reject": reject, "warn": warn,
-            "glass_zf": glass_zf, "wheel_zf": wheel_zf,
+    # Raw metrics only — deliberately NO verdict here. Name-based wheel/glass
+    # detection is unreliable on scraped GLBs (most don't name those materials),
+    # so a verdict computed from these alone false-rejects good cars. The real
+    # gate is pipeline/ingest/geom_audit.py, which combines these glass metrics
+    # with name-independent vertex geometry. Consumers must call that, not judge
+    # off this dict.
+    return {"glass_zf": glass_zf, "wheel_zf": wheel_zf,
             "glass_af": glass_af, "wheel_af": wheel_af, "h_over_l": h_over_l}
 
 
@@ -935,10 +925,16 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     sc.view_settings.exposure = -0.15
     sc.render.image_settings.file_format = "PNG"
     sc.render.filepath = out
-    # hardened pose/structure audit (post-upright geometry, pre-render is fine —
+    # hardened pose/structure metrics (post-upright geometry, pre-render is fine —
     # recolour/glass polish never move geometry). Only when asked, so the 8-colour
-    # store renders skip the extra geometry pass.
-    pose_info = _pose_audit(bpy) if audit else None
+    # store renders skip the extra geometry pass. Never let an audit error abort a
+    # render — a malformed mesh should still produce a picture.
+    pose_info = None
+    if audit:
+        try:
+            pose_info = _pose_audit(bpy)
+        except Exception as _e:
+            pose_info = {"error": str(_e)[:120]}
     bpy.ops.render.render(write_still=True)
     return device, recolour_info, plate_end_used, pose_info
 
