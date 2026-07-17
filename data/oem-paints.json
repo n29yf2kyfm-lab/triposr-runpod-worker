@@ -1905,6 +1905,62 @@
    "dvlaColour": "BLUE",
    "colourFamily": "Dark Blue",
    "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Aston Martin",
+   "name": "Aston Martin Racing Green",
+   "dvlaColour": "GREEN",
+   "colourFamily": "Green",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Aston Martin",
+   "name": "Zaffre Blue",
+   "dvlaColour": "BLUE",
+   "colourFamily": "Blue",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Aston Martin",
+   "name": "Hyper Red",
+   "dvlaColour": "RED",
+   "colourFamily": "Red",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Aston Martin",
+   "name": "Lightning Silver",
+   "dvlaColour": "SILVER",
+   "colourFamily": "Silver",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Aston Martin",
+   "name": "Jet Black",
+   "dvlaColour": "BLACK",
+   "colourFamily": "Black",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Aston Martin",
+   "name": "Morning Frost White",
+   "dvlaColour": "WHITE",
+   "colourFamily": "White",
+   "finish": "Solid"
+  },
+  {
+   "manufacturer": "Aston Martin",
+   "name": "China Grey",
+   "dvlaColour": "GREY",
+   "colourFamily": "Gunmetal Grey",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Aston Martin",
+   "name": "Cobalt Blue",
+   "dvlaColour": "BLUE",
+   "colourFamily": "Dark Blue",
+   "finish": "Metallic"
   }
  ]
 }
