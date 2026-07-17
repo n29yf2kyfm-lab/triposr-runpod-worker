@@ -19436,5 +19436,149 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "skoda-octavia-estate-v1",
+  "make": "skoda",
+  "model": "octavia",
+  "modelFamily": "octavia",
+  "modelAliases": [
+   "octavia estate",
+   "octavia combi",
+   "octavia"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": 2026,
+  "bodyStyle": "estate",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2020 Skoda Octavia Estate",
+  "sourceUrl": "https://sketchfab.com/3d-models/f8bb8c0c29d14a1a83740f477915486c",
+  "sourceCreator": null,
+  "sourceReferenceId": "f8bb8c0c29d14a1a83740f477915486c",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Graphite Grey Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-estate-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-estate-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/skoda/skoda-octavia-estate-v1/graphite-grey-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3807224,
+  "mobileFileSizeBytes": 3807224,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T00:13:49Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2020 Skoda Octavia Estate'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Steel Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Steel Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Magic Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Black Magic Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Moon White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moon White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Brilliant Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brilliant Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Race Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Race Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Energy Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Energy Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Velvet Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Velvet Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
