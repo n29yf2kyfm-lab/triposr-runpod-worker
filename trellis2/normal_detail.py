@@ -70,6 +70,21 @@ def apply_panel_detail(glb_path, spec=True):
             print("panel_detail: no line features found, skipped", file=sys.stderr)
             return None
         line = np.clip(line / ref, 0, 1.0) ** 0.8
+
+        # keep only ELONGATED features: a shut line is a ridge, texture
+        # noise is round. Structure-tensor coherence separates them — dots
+        # rendered as paint blisters in review ("paint work bubbles").
+        def box(a, k=4):
+            c = np.cumsum(np.cumsum(np.pad(a, ((k + 1, k), (k + 1, k)),
+                                           mode="edge"), 0), 1)
+            n = 2 * k + 1
+            return (c[n:, n:] - c[n:, :-n] - c[:-n, n:] + c[:-n, :-n]) / (n * n)
+        gy_l, gx_l = np.gradient(line)
+        jxx, jyy, jxy = box(gx_l * gx_l), box(gy_l * gy_l), box(gx_l * gy_l)
+        coh = (np.sqrt((jxx - jyy) ** 2 + 4 * jxy ** 2)
+               / np.maximum(jxx + jyy, 1e-12))
+        line *= np.clip((coh - 0.35) / 0.25, 0.0, 1.0)
+
         # tiny blur only — keep seams crisp (reviewed as "a little soft")
         line = np.asarray(Image.fromarray((line * 255).astype(np.uint8))
                           .filter(ImageFilter.GaussianBlur(0.6))).astype(np.float64) / 255

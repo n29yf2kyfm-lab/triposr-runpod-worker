@@ -230,16 +230,18 @@ def polish_texture(j, bin_data, sharpen=1.0):
     rgb = im.convert("RGB")
     a = np.asarray(im)[..., 3]
 
-    # paint-tone de-blotch: smooth chroma only, keep luminance detail
+    # paint-tone de-blotch: smooth chroma only; median the luminance to kill
+    # salt-and-pepper bake noise (sharpening it produced "paint bubbles")
     ycc = rgb.convert("YCbCr")
     yy, cb, cr = ycc.split()
+    yy = yy.filter(ImageFilter.MedianFilter(3))
     cb = cb.filter(ImageFilter.GaussianBlur(3))
     cr = cr.filter(ImageFilter.GaussianBlur(3))
     rgb = Image.merge("YCbCr", (yy, cb, cr)).convert("RGB")
 
     # edge crispness: moderate unsharp mask, thresholded against noise
     pct = int(np.clip(120 * sharpen, 20, 300))
-    rgb = rgb.filter(ImageFilter.UnsharpMask(radius=2, percent=pct, threshold=3))
+    rgb = rgb.filter(ImageFilter.UnsharpMask(radius=2, percent=pct, threshold=6))
 
     out = np.dstack([np.asarray(rgb), a]).astype(np.uint8)
     # glass texels keep their original colour (sharpening halos on glass
