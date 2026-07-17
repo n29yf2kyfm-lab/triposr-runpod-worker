@@ -67,6 +67,48 @@
   },
   {
    "manufacturer": "BMW",
+   "name": "Black Sapphire Metallic",
+   "dvlaColour": "BLACK",
+   "colourFamily": "Black",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "BMW",
+   "name": "Alpine White",
+   "dvlaColour": "WHITE",
+   "colourFamily": "White",
+   "finish": "Solid"
+  },
+  {
+   "manufacturer": "BMW",
+   "name": "Portimao Blue Metallic",
+   "dvlaColour": "BLUE",
+   "colourFamily": "Blue",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "BMW",
+   "name": "Toronto Red Metallic",
+   "dvlaColour": "RED",
+   "colourFamily": "Red",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "BMW",
+   "name": "Isle of Man Green Metallic",
+   "dvlaColour": "GREEN",
+   "colourFamily": "Green",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "BMW",
+   "name": "Tanzanite Blue Metallic",
+   "dvlaColour": "BLUE",
+   "colourFamily": "Dark Blue",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "BMW",
    "name": "Skyscraper Grey Metallic",
    "dvlaColour": "GREY",
    "colourFamily": "Dark Grey",
@@ -88,13 +130,6 @@
   },
   {
    "manufacturer": "BMW",
-   "name": "Black Sapphire Metallic",
-   "dvlaColour": "BLACK",
-   "colourFamily": "Black",
-   "finish": "Metallic"
-  },
-  {
-   "manufacturer": "BMW",
    "name": "Carbon Black Metallic",
    "dvlaColour": "BLACK",
    "colourFamily": "Blue Black",
@@ -102,30 +137,9 @@
   },
   {
    "manufacturer": "BMW",
-   "name": "Alpine White",
-   "dvlaColour": "WHITE",
-   "colourFamily": "White",
-   "finish": "Solid"
-  },
-  {
-   "manufacturer": "BMW",
    "name": "Mineral White Metallic",
    "dvlaColour": "WHITE",
    "colourFamily": "Pearl White",
-   "finish": "Metallic"
-  },
-  {
-   "manufacturer": "BMW",
-   "name": "Portimao Blue Metallic",
-   "dvlaColour": "BLUE",
-   "colourFamily": "Blue",
-   "finish": "Metallic"
-  },
-  {
-   "manufacturer": "BMW",
-   "name": "Tanzanite Blue Metallic",
-   "dvlaColour": "BLUE",
-   "colourFamily": "Dark Blue",
    "finish": "Metallic"
   },
   {
@@ -137,23 +151,9 @@
   },
   {
    "manufacturer": "BMW",
-   "name": "Isle of Man Green Metallic",
-   "dvlaColour": "GREEN",
-   "colourFamily": "Green",
-   "finish": "Metallic"
-  },
-  {
-   "manufacturer": "BMW",
    "name": "Thundernight Metallic",
    "dvlaColour": "PURPLE",
    "colourFamily": "Purple",
-   "finish": "Metallic"
-  },
-  {
-   "manufacturer": "BMW",
-   "name": "Toronto Red Metallic",
-   "dvlaColour": "RED",
-   "colourFamily": "Red",
    "finish": "Metallic"
   },
   {
