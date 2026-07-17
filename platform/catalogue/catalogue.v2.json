@@ -20276,5 +20276,123 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "seat-ibiza-mk2-v1",
+  "make": "seat",
+  "model": "ibiza",
+  "modelFamily": "ibiza",
+  "modelAliases": [
+   "ibiza"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1993,
+  "yearEnd": 2002,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Seat Ibiza Mk2",
+  "sourceUrl": "https://sketchfab.com/3d-models/fb0f07322c974db394ce69bb6b088d53",
+  "sourceCreator": null,
+  "sourceReferenceId": "fb0f07322c974db394ce69bb6b088d53",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Magnetic Tech Grey Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ibiza-mk2-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ibiza-mk2-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-ibiza-mk2-v1/magnetic-tech-grey-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4431052,
+  "mobileFileSizeBytes": 4431052,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T00:40:28Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: 'Seat Ibiza Mk2'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Tech Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Tech Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nevada White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nevada White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Desire Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desire Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
