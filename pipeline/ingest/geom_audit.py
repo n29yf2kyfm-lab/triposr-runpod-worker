@@ -67,18 +67,28 @@ def geom_signals(glb_path):
             "upper_frac": round(float((zf > 0.65).mean()), 3)}
 
 
-def verdict(geom, handler_audit=None):
+def verdict(geom, handler_audit=None, coverage=None):
     """Combine geometry signals with the render worker's glass metrics.
 
     Returns (verdict, reasons) where verdict is 'reject' | 'warn' | 'ok'.
     'reject' cars must never reach a human sheet; 'warn' cars are shown but
     flagged (tall estates/vans, and the geometry-normal 'melt' cases).
+
+    `coverage` is the render worker's recolour body-paint share. A fully
+    transparent 'glass shell' GLB (every material transmissive, no solid
+    body) has normal proportions so no geometry signal fires, but the body
+    detector finds nothing to paint -> coverage collapses to ~0. A real car
+    always paints >=0.15, so coverage below ~0.02 means there is no opaque
+    body at all: a see-through shell or an empty scene. (Caught the glass
+    Mitsubishi Colt that passed every geometry check, 2026-07-17.)
     """
     hh = handler_audit or {}
     tob = geom["top_over_bot"]; hl = geom["h_over_l"]
     gaf = hh.get("glass_af") or 0
     gzf = hh.get("glass_zf")
     R, W = [], []
+    if coverage is not None and coverage < 0.02:
+        R.append(f"glass-shell/no-body(coverage={coverage})")
     if gaf > 0.012 and gzf is not None and gzf < 0.40:
         R.append(f"upside-down(glass_zf={gzf})")
     if tob > 1.20:
