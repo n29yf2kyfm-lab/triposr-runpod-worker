@@ -606,6 +606,29 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
                 for lnk in list(es.links):
                     gm.node_tree.links.remove(lnk)
                 es.default_value = 0.0
+        else:
+            # Untextured 'clay' trim. On fully-generic models (every material named
+            # Material_xx, no textures) the lights/grille/mirrors — and the wheels
+            # the geometric guard spared from body paint — render as matte WHITE fog
+            # and read unfinished. If a non-body material has no base-colour texture
+            # and reads bright + neutral (white/grey clay), retreat it as glossy dark
+            # trim: smoked lens / gloss-black grille / dark alloy — a cohesive premium
+            # accent. Textured parts and saturated colours (red tail-lenses) are left
+            # untouched so nothing real is destroyed.
+            bc = gb.inputs.get("Base Color")
+            if bc is not None and not bc.links:
+                v = bc.default_value
+                bright = min(v[0], v[1], v[2]) > 0.45
+                neutral = (max(v[0], v[1], v[2]) - min(v[0], v[1], v[2])) < 0.12
+                if bright and neutral:
+                    bc.default_value = (0.035, 0.035, 0.038, 1.0)
+                    for nm, val in (("Metallic", 0.0), ("Roughness", 0.22)):
+                        inp = gb.inputs.get(nm)
+                        if inp is not None and not inp.links:
+                            inp.default_value = val
+                    if "Coat Weight" in gb.inputs:
+                        gb.inputs["Coat Weight"].default_value = 0.6
+                        gb.inputs["Coat Roughness"].default_value = 0.06
 
     # auto-upright: a correctly-oriented car has its SMALLEST bbox extent vertical
     # (height < width < length). Some GLBs are authored tipped (length/width along
