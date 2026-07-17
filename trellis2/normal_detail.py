@@ -70,11 +70,11 @@ def apply_panel_detail(glb_path, spec=True):
             print("panel_detail: no line features found, skipped", file=sys.stderr)
             return None
         line = np.clip(line / ref, 0, 1.0) ** 0.8
-        # soften so the groove has a shoulder instead of a 1px step
+        # tiny blur only — keep seams crisp (reviewed as "a little soft")
         line = np.asarray(Image.fromarray((line * 255).astype(np.uint8))
-                          .filter(ImageFilter.GaussianBlur(1))).astype(np.float64) / 255
+                          .filter(ImageFilter.GaussianBlur(0.6))).astype(np.float64) / 255
 
-        height = -line * 2.6 * strength     # grooves, in pixel units
+        height = -line * 3.6 * strength     # grooves, in pixel units
         gy, gx = np.gradient(height)        # axis0 = rows, axis1 = cols
         # tangent frame: +X = +U (right), +Y = up = -rows (OpenGL/glTF style)
         nx, ny, nz = -gx, gy, np.ones_like(gx)

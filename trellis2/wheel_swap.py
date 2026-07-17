@@ -23,17 +23,28 @@ import sys
 
 import numpy as np
 
-# brand -> rim look. spokes counted as major arms; twin doubles each arm.
+# brand -> rim look, tuned toward each marque's signature alloy language.
+# spokes = major arms; twin doubles each arm into a V pair; w_hub/w_rim are
+# tangential arm widths (fractions of wheel radius) at hub and rim end.
 WHEEL_STYLES = {
-    "audi":       {"spokes": 5, "twin": True,  "rim_hex": "#C9CDCF"},
-    "bmw":        {"spokes": 5, "twin": True,  "rim_hex": "#BFC3C6"},
-    "mercedes":   {"spokes": 5, "twin": False, "rim_hex": "#CDD1D3"},
-    "land rover": {"spokes": 6, "twin": False, "rim_hex": "#9FA4A8"},
-    "range rover": {"spokes": 6, "twin": False, "rim_hex": "#9FA4A8"},
-    "volkswagen": {"spokes": 5, "twin": True,  "rim_hex": "#C5C9CB"},
-    "porsche":    {"spokes": 5, "twin": False, "rim_hex": "#C9CDCF"},
-    "black":      {"spokes": 5, "twin": True,  "rim_hex": "#26282B"},
-    "default":    {"spokes": 5, "twin": False, "rim_hex": "#C5C9CB"},
+    "audi":       {"spokes": 5, "twin": False, "rim_hex": "#C9CDCF",
+                   "w_hub": 0.17, "w_rim": 0.10},   # 5-arm star
+    "bmw":        {"spokes": 5, "twin": True,  "rim_hex": "#BFC3C6",
+                   "w_hub": 0.06, "w_rim": 0.045},  # M double-spoke
+    "mercedes":   {"spokes": 5, "twin": False, "rim_hex": "#CDD1D3",
+                   "w_hub": 0.18, "w_rim": 0.11},
+    "land rover": {"spokes": 6, "twin": False, "rim_hex": "#9FA4A8",
+                   "w_hub": 0.14, "w_rim": 0.11},   # 6-spoke utility
+    "range rover": {"spokes": 6, "twin": False, "rim_hex": "#9FA4A8",
+                    "w_hub": 0.14, "w_rim": 0.11},
+    "volkswagen": {"spokes": 5, "twin": True,  "rim_hex": "#C5C9CB",
+                   "w_hub": 0.075, "w_rim": 0.055},  # V-pair (GTE-ish)
+    "porsche":    {"spokes": 5, "twin": False, "rim_hex": "#C9CDCF",
+                   "w_hub": 0.16, "w_rim": 0.09},
+    "black":      {"spokes": 5, "twin": True,  "rim_hex": "#26282B",
+                   "w_hub": 0.075, "w_rim": 0.055},
+    "default":    {"spokes": 5, "twin": False, "rim_hex": "#C5C9CB",
+                   "w_hub": 0.15, "w_rim": 0.10},
 }
 
 
@@ -139,20 +150,22 @@ def detect_wheels(verts):
         return None
 
     # radius: real-car heuristic (tyre radius ~= 0.115 * wheelbase), refined
-    # by measuring the wheel-column height above each contact patch — an
-    # undersized overlay would leave the melted original tyre poking out
+    # by measuring the arch-opening height above each contact patch. The
+    # wheel must FIT INSIDE the arch (user-confirmed oversize when the column
+    # reached fender/door height): cap the column just above arch level and
+    # size the tyre to sit inside the opening with a visible gap.
     r_h = 0.115 * wheelbase
     measured = []
     for (cu, cv), out_v in zip(centers, outer):
-        col = ((np.abs(u - cu) < 0.9 * r_h)
+        col = ((np.abs(u - cu) < 0.75 * r_h)
                & (np.sign(v) == np.sign(cv))
                & (np.abs(v) > abs(cv) - 0.35 * r_h)
-               & (y < y0 + 3.2 * r_h))
+               & (y < y0 + 2.6 * r_h))
         if col.sum() > 30:
-            measured.append((np.percentile(y[col], 97) - y0) / 2 * 0.95)
+            measured.append((np.percentile(y[col], 97) - y0) / 2 * 0.92)
     if measured:
-        r_h = float(np.clip(np.median(measured), 0.8 * r_h, 1.45 * r_h))
-    radius = float(np.clip(r_h, 0.045 * length, 0.11 * length))
+        r_h = float(np.clip(np.median(measured), 0.85 * r_h, 1.15 * r_h))
+    radius = float(np.clip(r_h, 0.045 * length, 0.10 * length))
     # Y-rotation mapping local +X to the lateral direction: rotation about +Y
     # takes +X to (cos a, 0, -sin a), so a = atan2(-v_z, v_x)
     yaw = float(np.arctan2(-v_dir[1], v_dir[0]))
@@ -221,6 +234,22 @@ def _box(hx, hy, hz):
     return _orient(V, F)
 
 
+def _spoke(t, y0, y1, w0, w1, c0, c1, xc):
+    """Tapered prism arm: radial span y0->y1, tangential width w0->w1,
+    tangential center offset c0->c1 (V-pairs), axial thickness t at xc."""
+    V = np.zeros((8, 3))
+    i = 0
+    for ix in (-1, 1):
+        for (yy, ww, cc) in ((y0, w0, c0), (y1, w1, c1)):
+            for iz in (-1, 1):
+                V[i] = [xc + ix * t / 2, yy, cc + iz * ww / 2]
+                i += 1
+    F = np.array([[0, 1, 3], [0, 3, 2], [4, 6, 7], [4, 7, 5],
+                  [0, 4, 5], [0, 5, 1], [2, 3, 7], [2, 7, 6],
+                  [0, 2, 6], [0, 6, 4], [1, 5, 7], [1, 7, 3]], dtype=np.int64)
+    return _orient(V, F)
+
+
 def _rot_x(V, angle):
     ca, sa = np.cos(angle), np.sin(angle)
     R = np.array([[1, 0, 0], [0, ca, -sa], [0, sa, ca]])
@@ -251,11 +280,12 @@ def build_wheel(radius, style):
     r = radius
     w = 0.62 * r                      # tyre width (~235/700 automotive ratio)
     rim_r = 0.74 * r                  # modern low-profile rim
-    # tyre: near-vertical sidewalls + flat tread, slightly proud (1.02) so it
-    # silhouettes over the original melted wheel it overlays
-    tyre_prof = [(rim_r * 0.97, -w / 2), (0.97 * r, -w * 0.44),
-                 (1.02 * r, -w * 0.34), (1.02 * r, w * 0.34),
-                 (0.97 * r, w * 0.44), (rim_r * 0.97, w / 2)]
+    # tyre: near-vertical sidewalls + flat tread, sized exactly to the
+    # detected radius — the arch fit matters more than covering every last
+    # sliver of the original wheel (user-confirmed)
+    tyre_prof = [(rim_r * 0.97, -w / 2), (0.96 * r, -w * 0.44),
+                 (1.00 * r, -w * 0.34), (1.00 * r, w * 0.34),
+                 (0.96 * r, w * 0.44), (rim_r * 0.97, w / 2)]
     tyre = _lathe(tyre_prof)
     barrel = _lathe([(rim_r * 0.94, -w * 0.40), (rim_r * 0.94, w * 0.42),
                      (rim_r, w * 0.44)])
@@ -265,14 +295,17 @@ def build_wheel(radius, style):
 
     n = style.get("spokes", 5)
     twin = style.get("twin", False)
-    arm_len = (rim_r * 0.90 - 0.16 * r) / 2
+    w0 = style.get("w_hub", 0.15) * r
+    w1 = style.get("w_rim", 0.10) * r
+    y0s, y1s = 0.16 * r, rim_r * 0.92
     spokes = []
     for k in range(n):
         base = 2 * np.pi * k / n
-        for db in ((-0.018, 0.018) if twin else (0.0,)):
-            sv, sf = _box(0.050 * r, arm_len, (0.055 if twin else 0.085) * r)
-            sv = sv + [w * 0.35, arm_len + 0.16 * r, 0]
-            spokes.append((_rot_x(sv, base + db * np.pi * 2), sf))
+        for sgn in ((-1, 1) if twin else (0,)):
+            # twin: V pair joined at the hub, opening toward the rim
+            sv, sf = _spoke(0.05 * r, y0s, y1s, w0, w1,
+                            sgn * 0.020 * r, sgn * 0.105 * r, w * 0.35)
+            spokes.append((_rot_x(sv, base), sf))
     rim = _merge([barrel, lip, hub] + spokes)
 
     # brake sits just behind the spokes so it reads through the gaps

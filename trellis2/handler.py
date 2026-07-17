@@ -117,20 +117,20 @@ _t2i_pipeline = None
 def finalize_glass(glb_path):
     """Post-export glass enable: if the baked baseColor texture carries real
     translucency (TRELLIS.2 generates window-glass alpha), flip the GLB's
-    materials to alphaMode=BLEND. Upstream o-voxel hardcodes OPAQUE; an
-    in-pipeline gate missed on its first live run, so this operates on the
-    FINAL file — wherever the alpha came from, it is honored. Disable with
-    GLB_ALPHA_MODE=opaque. Returns True if transparency was enabled."""
+    materials to alphaMode=BLEND — and BOOST the glass so the modeled
+    interior (dashboard, seats, wheel) is actually visible: the baked alpha
+    sits around 60-80% opaque, which renders as near-black windows
+    (user-confirmed on the Golf), so the translucent band is remapped to
+    ~60-85% transparent and its tint lifted. Upstream o-voxel hardcodes
+    OPAQUE; an in-pipeline gate missed on its first live run, so this
+    operates on the FINAL file. Disable with GLB_ALPHA_MODE=opaque.
+    Returns True if transparency was enabled."""
     if os.environ.get("GLB_ALPHA_MODE", "auto").lower() == "opaque":
         return False
     try:
-        import struct, json as _json
-        data = open(glb_path, "rb").read()
-        if data[:4] != b"glTF":
-            return False
-        jlen, jtype = struct.unpack("<II", data[12:20])
-        j = _json.loads(data[20:20 + jlen])
-        rest = data[20 + jlen:]
+        from wheel_swap import _read_glb, _write_glb
+        from oem_paint import _tex_source
+        j, jtype, bin_data = _read_glb(glb_path)
         mats = j.get("materials") or []
         if not mats:
             return False
@@ -138,11 +138,10 @@ def finalize_glass(glb_path):
                    .get("baseColorTexture") or {}).get("index")
         if tex_ref is None:
             return False
-        img_idx = j["textures"][tex_ref].get("source")
+        img_idx = _tex_source(j["textures"][tex_ref])
         bv = j["bufferViews"][j["images"][img_idx]["bufferView"]]
-        bin_data = rest[8:8 + struct.unpack("<I", rest[0:4])[0]]
         off = bv.get("byteOffset", 0)
-        im = Image.open(BytesIO(bin_data[off:off + bv["byteLength"]]))
+        im = Image.open(BytesIO(bytes(bin_data[off:off + bv["byteLength"]])))
         if im.mode != "RGBA":
             print("glass check: texture has no alpha channel", file=sys.stderr)
             return False
@@ -158,14 +157,33 @@ def finalize_glass(glb_path):
             print("glass check: translucency too widespread, keeping OPAQUE",
                   file=sys.stderr)
             return False
+        # interior-reveal boost on the translucent band only
+        import numpy as _np
+        arr = _np.asarray(im).astype(_np.float64)
+        a = arr[..., 3]
+        band = (a >= 30) & (a < 210)
+        if band.any():
+            arr[..., 3] = _np.where(
+                band, _np.clip(35 + (a - 30) * 0.35, 35, 100), a)
+            arr[..., :3] = _np.where(
+                band[..., None], _np.clip(arr[..., :3] * 1.6 + 18, 0, 255),
+                arr[..., :3])
+            buf = BytesIO()
+            mime = j["images"][img_idx].get("mimeType", "image/webp")
+            Image.fromarray(arr.astype(_np.uint8)).save(
+                buf, "WEBP" if "webp" in mime else "PNG", quality=95)
+            blob = buf.getvalue()
+            while len(bin_data) % 4:
+                bin_data.append(0)
+            start = len(bin_data)
+            bin_data.extend(blob)
+            j["bufferViews"].append({"buffer": 0, "byteOffset": start,
+                                     "byteLength": len(blob)})
+            j["images"][img_idx]["bufferView"] = len(j["bufferViews"]) - 1
         for m in mats:
             m["alphaMode"] = "BLEND"
             m["doubleSided"] = True
-        nj = _json.dumps(j, separators=(",", ":")).encode()
-        nj += b" " * ((4 - len(nj) % 4) % 4)
-        out = (data[:8] + struct.pack("<I", 12 + 8 + len(nj) + len(rest))
-               + struct.pack("<II", len(nj), jtype) + nj + rest)
-        open(glb_path, "wb").write(out)
+        _write_glb(glb_path, j, jtype, bin_data)
         return True
     except Exception as e:
         print(f"glass check skipped: {e}", file=sys.stderr)
