@@ -289,6 +289,14 @@ def store(spec):
         log(f"  OEM {p['name']} rendered+uploaded+verified")
     assert len(colours) == len(want), "colour count mismatch — ABORT"
 
+    # hero colour: default the poster to the first VIVID (non-neutral) colour so
+    # cars read as painted, not grey clay (low-texture models looked unpainted in
+    # gunmetal). Falls back to the first colour if the palette is all neutral.
+    _NEUT = ("grey", "gray", "gunmetal", "silver", "white", "black", "sand",
+             "beige", "cement", "graphite", "platinum", "pearl")
+    hero = next((c for c in colours if not any(s in c["family"].lower() for s in _NEUT)),
+                colours[0] if colours else None)
+
     # atomic catalogue write
     cat = json.load(open(CAT))
     tmpl = copy.deepcopy([e for e in cat if e["make"] == "volkswagen" and e["model"] == "golf"][0])
@@ -307,11 +315,11 @@ def store(spec):
         "publicationStatus": "approved", "quarantineReason": None,
         "paintMaterialNames": spec.get("paintMaterialNames", []),
         "glassMaterialNames": spec.get("glassMaterialNames", []),
-        "defaultColourFamily": (colours[0]["family"].lower().split()[-1] if colours else "grey"),
-        "renderColourLabel": colours[0]["oemName"], "oemPaintVerified": False,
+        "defaultColourFamily": (hero["family"].lower().split()[-1] if hero else "grey"),
+        "renderColourLabel": (hero["oemName"] if hero else None), "oemPaintVerified": False,
         "oemPaintCode": None, "oemPaintName": None, "colourVariants": {},
         "desktopGlbUrl": glb_url, "mobileGlbUrl": glb_url, "fallbackGlbUrl": None,
-        "posterUrl": colours[0]["renderUrl"], "turntableUrl": None, "interiorUrl": None,
+        "posterUrl": (hero["renderUrl"] if hero else None), "turntableUrl": None, "interiorUrl": None,
         "fileSizeBytes": base_bytes, "mobileFileSizeBytes": base_bytes,
         "contentHash": None, "pipelineVersion": "ingest-pipeline-v1",
         "publishedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
