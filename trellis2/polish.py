@@ -259,15 +259,25 @@ def polish_texture(j, bin_data, sharpen=1.0, gloss=True):
     # gloss on dark plastics: lamps/diffuser/trim are matte in the bake.
     # Low roughness there gives lenses their glint and separates trim
     # pieces by their reflections.
-    # skipped when an OEM paint finish was applied: the luminance-only mask
-    # can't tell dark paint from dark plastic and glossed over matte/black
-    # body colours (review #4)
+    # skipped when an OEM paint finish was applied (review #4); ALSO gated
+    # on low saturation + a small-area ceiling here: a plain luminance
+    # threshold caught dark-but-CHROMATIC paint too (a navy/phytonic blue
+    # X5 got its body panels glossed body-wide -> reflective fireflies
+    # rendered as a white speckle/snow artifact over the paint, live-caught
+    # by the user). Plastic trim is desaturated AND small; paint, even dark
+    # paint, is either saturated or covers a large contiguous area.
     mr_ref = pbr.get("metallicRoughnessTexture") if gloss else None
     if mr_ref is not None:
-        arr = out.astype(np.float64)
+        # decide from the ORIGINAL bake, not the chroma-smoothed `out`: the
+        # radius-3 blur above bleeds saturation across boundaries, so a thin
+        # black trim strip next to coloured paint reads as saturated too and
+        # silently skips gloss (caught by the paint/plastic regression test)
+        arr = orig.astype(np.float64)
         lum = arr[..., :3].mean(-1)
-        dark = (lum < 92) & (a >= 200)
-        if dark.mean() > 0.005:
+        mx, mn = arr[..., :3].max(-1), arr[..., :3].min(-1)
+        sat = (mx - mn) / np.maximum(mx, 1)
+        dark = (lum < 92) & (a >= 200) & (sat < 0.15)
+        if 0.005 < dark.mean() <= 0.10:
             mr_i = _tex_source(j["textures"][mr_ref["index"]])
             mbv = j["bufferViews"][j["images"][mr_i]["bufferView"]]
             mo, ml = mbv.get("byteOffset", 0), mbv["byteLength"]

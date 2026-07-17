@@ -478,6 +478,61 @@ try:
     check("ripple reduced", float(np.abs(V1[:, 1]).mean()) < float(np.abs(V0[:, 1]).mean()))
     check("texture re-encoded", jx["images"][0]["bufferView"] != 3)
     check("polish opt-out shape", apply_polish(glb_s, {"smooth_iters": 0, "flatten_iters": 0}) is not None)
+
+    # 17b regression: dark SATURATED paint (navy blue) must NOT get glossed
+    # -- live bug: a phytonic-blue X5's body panels were glossed body-wide,
+    # rendering as a fireflies/"snow" artifact over the paint. Only dark AND
+    # desaturated (true black plastic) should gain gloss.
+    def make_gloss_glb(path):
+        # realistic proportions: most of the atlas is body paint, trim is a
+        # small strip -- a 50/50 split tripped the (correct) area ceiling
+        # that caps gloss from ever covering a large contiguous region.
+        w, h = 50, 20
+        img = Image.new("RGBA", (w, h), (18, 22, 60, 255))  # navy paint (dark, saturated)
+        for x in range(w - 4, w):   # 8% strip: black plastic trim (dark, grey)
+            for y in range(h):
+                img.putpixel((x, y), (20, 20, 20, 255))
+        mr = Image.new("RGB", (w, h), (0, 200, 0))  # roughness=200 (matte)
+        ib = io.BytesIO(); img.save(ib, "PNG"); png = ib.getvalue()
+        mb = io.BytesIO(); mr.save(mb, "PNG"); mrpng = mb.getvalue()
+        parts, views, off = [], [], 0
+        for blob in (png, mrpng):
+            blob = blob + b"\x00" * ((4 - len(blob) % 4) % 4)
+            parts.append(blob)
+            views.append({"buffer": 0, "byteOffset": off, "byteLength": len(blob)})
+            off += len(blob)
+        bb = b"".join(parts)
+        jj = {"asset": {"version": "2.0"}, "buffers": [{"byteLength": len(bb)}],
+              "bufferViews": views,
+              "materials": [{"pbrMetallicRoughness": {
+                  "baseColorTexture": {"index": 0},
+                  "metallicRoughnessTexture": {"index": 1}}}],
+              "textures": [{"source": 0}, {"source": 1}],
+              "images": [{"bufferView": 0, "mimeType": "image/png"},
+                        {"bufferView": 1, "mimeType": "image/png"}]}
+        nj = json.dumps(jj, separators=(",", ":")).encode()
+        nj += b" " * ((4 - len(nj) % 4) % 4)
+        open(path, "wb").write(
+            b"glTF" + _st.pack("<II", 2, 12 + 8 + len(nj) + 8 + len(bb))
+            + _st.pack("<I", len(nj)) + b"JSON" + nj
+            + _st.pack("<I", len(bb)) + b"BIN\x00" + bb)
+
+    glb_g = f"{H.OUTPUT_DIR}/gloss_paint.glb"
+    make_gloss_glb(glb_g)
+    apply_polish(glb_g, {"smooth_iters": 0, "flatten_iters": 0})
+    jg, _, bg = _rg(glb_g)
+    mr_i = jg["materials"][0]["pbrMetallicRoughness"]["metallicRoughnessTexture"]["index"]
+    mr_img_i = jg["textures"][mr_i]["source"]
+    mbv = jg["bufferViews"][jg["images"][mr_img_i]["bufferView"]]
+    mrim = Image.open(io.BytesIO(bytes(bg[mbv.get("byteOffset", 0):
+                                          mbv.get("byteOffset", 0) + mbv["byteLength"]])))
+    mrarr = np.asarray(mrim)
+    paint_rough = mrarr[10, 5, 1]     # navy-paint region
+    plastic_rough = mrarr[10, 48, 1]  # black-plastic trim strip
+    check("dark saturated paint NOT glossed", int(paint_rough) >= 150,
+          f"roughness={paint_rough}")
+    check("dark desaturated plastic IS glossed", int(plastic_rough) < 150,
+          f"roughness={plastic_rough}")
 except ImportError:
     print("  SKIP (numpy unavailable in this env)")
 
