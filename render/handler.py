@@ -200,9 +200,15 @@ def _classify_materials(bpy):
                             or _TRIM.search(nn) or _INNER.search(nn) or _DARKP.search(nn))
                 meta[n] = {"area": 0.0, "glass": glass, "light": light,
                            "excl": excl, "paint": bool(_PAINT.search(nn)), "mat": mm,
+                           "z0": 1e18, "z1": -1e18,  # world-space vertical span of this material
                            "dbg": {"alpha": alpha, "tw": tw, "emiss": emiss}}
                 d = meta[n]
             d["area"] += p.area * ((cof @ p.normal).length if cof else 1.0)
+            cz = (o.matrix_world @ p.center).z
+            if cz < d["z0"]:
+                d["z0"] = cz
+            if cz > d["z1"]:
+                d["z1"] = cz
     return meta
 
 
@@ -213,6 +219,20 @@ def _choose_body(meta):
     cands = {n: d for n, d in meta.items() if not d["excl"]}
     if not cands:
         return set()
+    # Geometric wheel/low-part guard. Scraped GLBs often name wheels generically
+    # ('Material_25') so the name rules miss them, and flat paint then bleeds onto
+    # the alloys. A wheel/tyre/underbody/low-trim material's HIGHEST point sits in
+    # the bottom of the car; a real body panel (door, wing, bumper, roof) reaches
+    # up to the beltline/roof. Exclude any candidate whose top is under ~42% of the
+    # car's height — this catches unnamed wheels without touching upright panels.
+    zs = [d for d in meta.values() if d.get("z1", -1e18) > -1e17]
+    car_z0 = min(d["z0"] for d in zs) if zs else 0.0
+    car_z1 = max(d["z1"] for d in zs) if zs else 1.0
+    car_h = (car_z1 - car_z0) or 1.0
+
+    def low_part(d):
+        return (d.get("z1", -1e18) - car_z0) < 0.42 * car_h
+
     big = max(d["area"] for d in cands.values())
     paint = set(n for n, d in cands.items() if d["paint"])
     # explicitly paint-named materials are authoritative: on models that ALSO
@@ -222,20 +242,20 @@ def _choose_body(meta):
     # area when the paint-named materials are implausibly small (mirror-cap
     # sized) or absent.
     if paint and sum(cands[n]["area"] for n in paint) >= big * 0.15:
-        return paint
+        return {n for n in paint if not low_part(cands[n])}
     # No authoritative paint material: the body is spread across many generic or
     # colour-coded panel materials (e.g. Macan exports one 'wire_<rgb>' material
     # PER panel — bonnet, each door, roof...). The old 55%-of-biggest cutoff only
     # caught the two largest and left the doors unpainted (two-tone car). Instead
     # paint EVERY non-excluded, non-interior panel down to a small share of the
     # whole, so all body panels recolour together. Interior/glass/wheels/trim/
-    # underbody are already excluded upstream.
+    # underbody are already excluded upstream; low_part() drops unnamed wheels.
     chosen = set(paint)
     total = sum(d["area"] for d in meta.values()) or 1.0
     for n, d in cands.items():
-        if d["area"] >= 0.01 * total:
+        if d["area"] >= 0.01 * total and not low_part(d):
             chosen.add(n)
-    return chosen
+    return {n for n in chosen if not low_part(cands[n])}
 
 
 def _load_bpy():
