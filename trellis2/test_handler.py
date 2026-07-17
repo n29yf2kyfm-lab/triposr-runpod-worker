@@ -412,6 +412,75 @@ try:
 except ImportError:
     print("  SKIP (numpy unavailable in this env)")
 
+# ---- Test 17: polish (normal/position smoothing + texture sharpen) ----
+print("Test 17: polish (surface + texture)")
+try:
+    import numpy as np
+    from polish import apply_polish
+    import struct as _st
+
+    def make_mesh_tex_glb(path):
+        """Wavy plane with texture — vertices carry deliberate ripple."""
+        n = 24
+        gx, gz = np.meshgrid(np.linspace(0, 1, n), np.linspace(0, 1, n))
+        ripple = 0.01 * np.sin(gx * 40) * np.sin(gz * 40)
+        V = np.stack([gx, ripple, gz], -1).reshape(-1, 3).astype(np.float32)
+        N = np.tile(np.array([0, 1, 0], np.float32), (len(V), 1))
+        idx = []
+        for r in range(n - 1):
+            for c in range(n - 1):
+                a = r * n + c
+                idx += [[a, a + 1, a + n], [a + 1, a + n + 1, a + n]]
+        F = np.array(idx, np.uint32)
+        img = Image.new("RGBA", (32, 32), (100, 120, 140, 255))
+        for x in range(32):
+            img.putpixel((x, 16), (20, 22, 25, 255))
+        ib = io.BytesIO(); img.save(ib, "PNG"); png = ib.getvalue()
+        parts, views, accs, off = [], [], [], 0
+        for blob in (V.tobytes(), N.tobytes(), F.tobytes(), png):
+            blob += b"\x00" * ((4 - len(blob) % 4) % 4)
+            parts.append(blob)
+            views.append({"buffer": 0, "byteOffset": off, "byteLength": len(blob)})
+            off += len(blob)
+        bb = b"".join(parts)
+        jj = {"asset": {"version": "2.0"}, "buffers": [{"byteLength": len(bb)}],
+              "bufferViews": views,
+              "accessors": [
+                  {"bufferView": 0, "componentType": 5126, "count": len(V),
+                   "type": "VEC3", "min": V.min(0).tolist(), "max": V.max(0).tolist()},
+                  {"bufferView": 1, "componentType": 5126, "count": len(N), "type": "VEC3"},
+                  {"bufferView": 2, "componentType": 5125, "count": int(F.size), "type": "SCALAR"}],
+              "materials": [{"pbrMetallicRoughness": {"baseColorTexture": {"index": 0}}}],
+              "textures": [{"source": 0}],
+              "images": [{"bufferView": 3, "mimeType": "image/png"}],
+              "meshes": [{"primitives": [{
+                  "attributes": {"POSITION": 0, "NORMAL": 1},
+                  "indices": 2, "material": 0}]}],
+              "nodes": [{"mesh": 0}], "scenes": [{"nodes": [0]}], "scene": 0}
+        nj = json.dumps(jj, separators=(",", ":")).encode()
+        nj += b" " * ((4 - len(nj) % 4) % 4)
+        open(path, "wb").write(
+            b"glTF" + _st.pack("<II", 2, 12 + 8 + len(nj) + 8 + len(bb))
+            + _st.pack("<I", len(nj)) + b"JSON" + nj
+            + _st.pack("<I", len(bb)) + b"BIN\x00" + bb)
+        return V
+
+    glb_s = f"{H.OUTPUT_DIR}/polish.glb"
+    V0 = make_mesh_tex_glb(glb_s)
+    rep = apply_polish(glb_s, True)
+    check("polish applied", bool(rep and rep.get("applied")))
+    from wheel_swap import _read_glb as _rg
+    jx, _, bx = _rg(glb_s)
+    accp = jx["accessors"][0]
+    bvp = jx["bufferViews"][accp["bufferView"]]
+    V1 = np.frombuffer(bytes(bx[bvp["byteOffset"]:bvp["byteOffset"] + len(V0) * 12]),
+                       dtype=np.float32).reshape(-1, 3)
+    check("ripple reduced", float(np.abs(V1[:, 1]).mean()) < float(np.abs(V0[:, 1]).mean()))
+    check("texture re-encoded", jx["images"][0]["bufferView"] != 3)
+    check("polish opt-out shape", apply_polish(glb_s, {"smooth_iters": 0, "flatten_iters": 0}) is not None)
+except ImportError:
+    print("  SKIP (numpy unavailable in this env)")
+
 print()
 print("RESULT:", f"{len(fails)} failures" if fails else "ALL TESTS PASSED")
 sys.exit(1 if fails else 0)

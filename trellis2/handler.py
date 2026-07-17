@@ -27,6 +27,7 @@ import o_voxel
 from oem_paint import apply_oem_paint
 from wheel_swap import apply_wheel_swap
 from normal_detail import apply_panel_detail
+from polish import apply_polish
 
 # TRELLIS.2 itself is image-to-3D only, so text-to-3D is a two-stage pipeline
 # owned by this worker:
@@ -416,6 +417,15 @@ def handler(job):
         paint_report = None
         if job_input.get("oem_paint"):
             paint_report = apply_oem_paint(persisted_path, job_input["oem_paint"])
+        # Polish: crease-preserving normal smoothing (flattens wavy voxel
+        # panels) + texture edge sharpening/paint de-blotch. Runs before
+        # panel detail so the line extraction sees the crisper texture.
+        polish_report = None
+        pol = job_input.get("polish")
+        if pol is None:
+            pol = (mode == "text")
+        if pol:
+            polish_report = apply_polish(persisted_path, pol)
         # Panel detail: normal map derived from shut-line features in the
         # baked texture so gaps read as grooves. Same default policy as wheels.
         detail_report = None
@@ -449,6 +459,7 @@ def handler(job):
             "oem_paint": paint_report,
             "wheels": wheel_report,
             "panel_detail": detail_report,
+            "polish": polish_report,
             "mode": mode,
             "message": "GLB generated successfully",
         }
