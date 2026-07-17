@@ -20813,5 +20813,148 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "tesla-model-3-v1",
+  "make": "tesla",
+  "model": "model-3",
+  "modelFamily": "model-3",
+  "modelAliases": [
+   "model 3",
+   "model3"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2017,
+  "yearEnd": 2026,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Tesla Model 3 2020",
+  "sourceUrl": "https://sketchfab.com/3d-models/596bbf266fce430181e6d0e2b1903364",
+  "sourceCreator": null,
+  "sourceReferenceId": "596bbf266fce430181e6d0e2b1903364",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Stealth Grey",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/tesla/tesla-model-3-v1/stealth-grey.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3260236,
+  "mobileFileSizeBytes": 3260236,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T00:52:33Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: 'Tesla Model 3 2020'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Stealth Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Stealth Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Midnight Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Solid Black",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Solid Black",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pearl White Multi-Coat",
+     "hex": null,
+     "finish": "multi-coat",
+     "oemPaintName": "Pearl White Multi-Coat",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Quicksilver",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quicksilver",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Deep Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Deep Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultra Red",
+     "hex": null,
+     "finish": "multi-coat",
+     "oemPaintName": "Ultra Red",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Midnight Cherry Red",
+     "hex": null,
+     "finish": "multi-coat",
+     "oemPaintName": "Midnight Cherry Red",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
