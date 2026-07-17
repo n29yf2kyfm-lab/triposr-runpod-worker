@@ -11,8 +11,9 @@ Signals (all fractions of the model's own bounding box — scale & unit free; th
 vertical axis is taken as the smallest bbox extent, matching the render worker's
 auto-upright assumption height < width < length):
 
-  h_over_l      height / longest-horizontal. Normal car ~0.30-0.42, SUV ~0.45-0.52.
-                Very low = flat floorpan/wreck; very high = doors-up / on-side.
+  h_over_l      height / longest-horizontal. Low sedans/sports ~0.24-0.30,
+                saloons/hatch ~0.30-0.42, SUV ~0.45-0.52. Very low (<0.22) =
+                flat floorpan/road-scene/wreck; very high = doors-up / on-side.
   top_over_bot  width of the top third / width of the bottom third. A car is wide
                 at the wheels and narrow at the roof, so good cars sit ~0.65-0.80.
                 >1.2 = wide-top (roll cage / wheels-up flip); <0.55 = flip/on-side.
@@ -95,7 +96,7 @@ def verdict(geom, handler_audit=None, coverage=None):
         R.append(f"wide-top/cage(tob={tob})")
     if tob < 0.55:
         R.append(f"flipped/on-side(tob={tob})")
-    if hl < 0.29:
+    if hl < 0.22:
         R.append(f"floorpan/wreck(h/l={hl})")
     if tob < 0.62 and hl > 0.50:
         R.append(f"doors-open(tob={tob},h/l={hl})")
