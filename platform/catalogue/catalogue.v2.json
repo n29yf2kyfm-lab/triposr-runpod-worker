@@ -19293,5 +19293,148 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mercedes-benz-c-class-w206-estate-v1",
+  "make": "mercedes-benz",
+  "model": "c-class",
+  "modelFamily": "c-class",
+  "modelAliases": [
+   "c class estate",
+   "c class"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": 2026,
+  "bodyStyle": "estate",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022 Mercedes-Benz C-Class Estate",
+  "sourceUrl": "https://sketchfab.com/3d-models/c155d348b23146f99dca662753c21c67",
+  "sourceCreator": null,
+  "sourceReferenceId": "c155d348b23146f99dca662753c21c67",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Selenite Grey Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-c-class-w206-estate-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-c-class-w206-estate-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mercedes-benz/mercedes-benz-c-class-w206-estate-v1/selenite-grey-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4398856,
+  "mobileFileSizeBytes": 4398856,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T00:10:39Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2022 Mercedes-Benz C-Class Estate'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
