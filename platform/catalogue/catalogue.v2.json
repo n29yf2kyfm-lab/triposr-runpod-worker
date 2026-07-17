@@ -20670,5 +20670,148 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-tucson-2014-v1",
+  "make": "hyundai",
+  "model": "tucson",
+  "modelFamily": "tucson",
+  "modelAliases": [
+   "tucson",
+   "ix35"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2010,
+  "yearEnd": 2015,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2014 Hyundai Tucson",
+  "sourceUrl": "https://sketchfab.com/3d-models/19484159a9bd40d9a49368e1d4e08c0f",
+  "sourceCreator": null,
+  "sourceReferenceId": "19484159a9bd40d9a49368e1d4e08c0f",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Cyber Grey Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tucson-2014-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tucson-2014-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-tucson-2014-v1/cyber-grey-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 10367892,
+  "mobileFileSizeBytes": 10367892,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T00:50:21Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2014 Hyundai Tucson'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
