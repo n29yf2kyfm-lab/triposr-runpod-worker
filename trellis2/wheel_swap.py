@@ -126,7 +126,8 @@ def detect_wheels(verts):
         return None
     pu, pv = u[patch], v[patch]
 
-    centers, outer = [], []
+    py = y[patch]
+    centers, outer, grounds = [], [], []
     for su in (-1, 1):          # rear/front (sign along u)
         for sv in (-1, 1):      # left/right
             m = (np.sign(pu - np.median(u)) == su) & (np.sign(pv) == sv)
@@ -134,7 +135,15 @@ def detect_wheels(verts):
                 return None
             centers.append((np.median(pu[m]), np.median(pv[m])))
             outer.append(np.percentile(np.abs(pv[m]), 95))
+            grounds.append(np.percentile(py[m], 5))
     centers = np.array(centers)
+    # each wheel sits on ITS OWN measured ground: the global percentile floor
+    # sat ~15% of a wheel radius above the true tyre bottoms on the live
+    # Golf, floating the overlays and letting the old tyre poke out beneath
+    # (read as "crooked wheels" in review)
+    gmed = float(np.median(grounds))
+    grounds = [float(np.clip(g, gmed - 0.02 * length, gmed + 0.02 * length))
+               for g in grounds]
 
     # sanity gates: plausible wheelbase, track symmetry, axle alignment
     wheelbase = abs((centers[0, 0] + centers[1, 0]) / 2
@@ -166,9 +175,14 @@ def detect_wheels(verts):
     if measured:
         r_h = float(np.clip(np.median(measured), 0.85 * r_h, 1.15 * r_h))
     radius = float(np.clip(r_h, 0.045 * length, 0.10 * length))
-    # Y-rotation mapping local +X to the lateral direction: rotation about +Y
-    # takes +X to (cos a, 0, -sin a), so a = atan2(-v_z, v_x)
-    yaw = float(np.arctan2(-v_dir[1], v_dir[0]))
+    # wheel axis = the MEASURED axle line (left->right pair centers), not the
+    # PCA minor axis — kills any residual toe on skewed generations
+    ax_uv = ((centers[1] - centers[0]) + (centers[3] - centers[2])) / 2
+    ax_xz = ax_uv[0] * u_dir + ax_uv[1] * v_dir
+    ax_xz /= max(np.linalg.norm(ax_xz), 1e-12)
+    # Y-rotation mapping local +X to the axle direction: rotation about +Y
+    # takes +X to (cos a, 0, -sin a), so a = atan2(-z, x)
+    yaw = float(np.arctan2(-ax_xz[1], ax_xz[0]))
     # body half-width at fender height: tyre outer face should sit flush with
     # the body side, not proud of it (live Golf test: patch-based placement
     # pushed wheels visibly out of the arches)
@@ -176,17 +190,17 @@ def detect_wheels(verts):
     body_half = float(np.percentile(np.abs(v[band]), 99)) if band.sum() > 100 \
         else float(np.median(track))
     world = []
-    for (cu, cv), out_v in zip(centers, outer):
+    for (cu, cv), out_v, g in zip(centers, outer, grounds):
         target = abs(cv)
         if body_half > 0.7 * radius:
             target = min(max(abs(cv), out_v - 0.31 * radius),
-                         body_half - 0.30 * radius)
+                         body_half - 0.32 * radius)
         cv = np.sign(cv) * max(target, 0.35 * radius)
         p = c + u_dir * cu + v_dir * cv
-        world.append([float(p[0]), float(y0 + radius), float(p[1])])
+        world.append([float(p[0]), float(g + radius), float(p[1])])
     return {"centers": world, "sides": [-1, 1, -1, 1], "radius": radius,
             "yaw": yaw, "wheelbase": float(wheelbase), "length": float(length),
-            "ground": float(y0)}
+            "ground": float(gmed)}
 
 
 # ----------------------------------------------------------- wheel mesh build
