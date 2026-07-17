@@ -581,6 +581,94 @@ r19f = H.handler({"id": "t19f", "input": {"prompt": "a car",
 check("huge guidance clamped (no crash)", r19f.get("status") == "success"
       or "error" not in r19f)
 
+# ---- Test 20: FULL five-stage chain on one realistic GLB ----
+# The reviewer's top coverage gap: every handler test no-ops the stages on a
+# fake binary, so ordering/interaction bugs were invisible. This fixture has
+# real geometry (car point cloud + normals + indices) AND a real RGBA
+# texture (translucent glass band + dark shut lines), so every stage fires.
+print("Test 20: full stage chain integration")
+try:
+    import numpy as np
+    import struct as _st
+    from wheel_swap import (_read_glb as _rg20, apply_wheel_swap as _ws20,
+                            compact_glb as _cg20, _positions as _pos20)
+    from polish import apply_polish as _pol20
+    from normal_detail import apply_panel_detail as _pd20
+
+    def make_full_car_glb(path, wheel_r=0.075):
+        rs = np.random.RandomState(7)
+        pts = [np.stack([rs.uniform(-0.45, 0.45, 6000),
+                         rs.uniform(2 * wheel_r + 0.01, 0.34, 6000),
+                         rs.uniform(-0.17, 0.17, 6000)], 1)]
+        for wx in (-0.27, 0.27):
+            for wz in (-0.18, 0.18):
+                th = rs.uniform(0, 2 * np.pi, 900)
+                rr = wheel_r * np.sqrt(rs.uniform(0, 1, 900))
+                pts.append(np.stack([wx + rr * np.cos(th),
+                                     wheel_r + rr * np.sin(th),
+                                     wz + rs.uniform(-0.03, 0.03, 900)], 1))
+        V = np.concatenate(pts).astype(np.float32)
+        N = np.tile(np.array([0, 1, 0], np.float32), (len(V), 1))
+        F = np.arange((len(V) // 3) * 3, dtype=np.uint32)
+        tex = Image.new("RGBA", (64, 64), (40, 80, 160, 255))
+        for x in range(64):
+            tex.putpixel((x, 20), (15, 16, 18, 255))   # shut line
+        for x in range(20, 40):                         # glass band ~5%
+            for y in range(4):
+                tex.putpixel((x, 50 + y), (30, 40, 45, 120))
+        ib = io.BytesIO(); tex.save(ib, "PNG"); png = ib.getvalue()
+        parts, views, off = [], [], 0
+        for blob in (V.tobytes(), N.tobytes(), F.tobytes(), png):
+            blob += b"\x00" * ((4 - len(blob) % 4) % 4)
+            parts.append(blob)
+            views.append({"buffer": 0, "byteOffset": off, "byteLength": len(blob)})
+            off += len(blob)
+        bb = b"".join(parts)
+        jj = {"asset": {"version": "2.0"}, "buffers": [{"byteLength": len(bb)}],
+              "bufferViews": views,
+              "accessors": [
+                  {"bufferView": 0, "componentType": 5126, "count": len(V),
+                   "type": "VEC3", "min": V.min(0).tolist(), "max": V.max(0).tolist()},
+                  {"bufferView": 1, "componentType": 5126, "count": len(N), "type": "VEC3"},
+                  {"bufferView": 2, "componentType": 5125, "count": int(F.size), "type": "SCALAR"}],
+              "materials": [{"pbrMetallicRoughness": {"baseColorTexture": {"index": 0}}}],
+              "textures": [{"source": 0}],
+              "images": [{"bufferView": 3, "mimeType": "image/png"}],
+              "meshes": [{"primitives": [{
+                  "attributes": {"POSITION": 0, "NORMAL": 1},
+                  "indices": 2, "material": 0}]}],
+              "nodes": [{"mesh": 0}], "scenes": [{"nodes": [0]}], "scene": 0}
+        nj = json.dumps(jj, separators=(",", ":")).encode()
+        nj += b" " * ((4 - len(nj) % 4) % 4)
+        open(path, "wb").write(
+            b"glTF" + _st.pack("<II", 2, 12 + 8 + len(nj) + 8 + len(bb))
+            + _st.pack("<I", len(nj)) + b"JSON" + nj
+            + _st.pack("<I", len(bb)) + b"BIN\x00" + bb)
+
+    glb_f = f"{H.OUTPUT_DIR}/fullchain.glb"
+    make_full_car_glb(glb_f)
+    g_ok = H.finalize_glass(glb_f)
+    p_ok = _pol20(glb_f, True)
+    d_ok = _pd20(glb_f, True)
+    w_ok = _ws20(glb_f, {"style": "audi"})
+    c_saved = _cg20(glb_f)
+    check("chain: glass fired", g_ok is True)
+    check("chain: polish fired", bool(p_ok and p_ok.get("applied")))
+    check("chain: panel detail fired", bool(d_ok and d_ok.get("applied")))
+    check("chain: wheels fired", bool(w_ok and w_ok.get("applied")))
+    check("chain: compaction ran", c_saved is not None and c_saved >= 0)
+    jf, _, bf = _rg20(glb_f)
+    ok_f = (all(bv.get("byteOffset", 0) + bv["byteLength"] <= len(bf)
+                for bv in jf["bufferViews"])
+            and jf["buffers"][0]["byteLength"] == len(bf))
+    check("chain: final GLB structurally valid", ok_f)
+    check("chain: material is BLEND with normal map",
+          jf["materials"][0].get("alphaMode") == "BLEND"
+          and "normalTexture" in jf["materials"][0])
+    check("chain: positions still parseable", len(_pos20(jf, bf)) > 6000)
+except ImportError:
+    print("  SKIP (numpy unavailable in this env)")
+
 print()
 print("RESULT:", f"{len(fails)} failures" if fails else "ALL TESTS PASSED")
 sys.exit(1 if fails else 0)

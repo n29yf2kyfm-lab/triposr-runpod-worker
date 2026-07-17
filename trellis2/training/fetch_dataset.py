@@ -41,7 +41,8 @@ def main(manifest_path, out_dir):
     global white_background
     white_background = make_white_background()
     meta = open(os.path.join(out_dir, "metadata.jsonl"), "w")
-    lic = csv.writer(open(os.path.join(out_dir, "licences.csv"), "w"))
+    lic_f = open(os.path.join(out_dir, "licences.csv"), "w")
+    lic = csv.writer(lic_f)
     lic.writerow(["file", "source_url", "licence", "artist"])
     n = 0
     for term in mf["search_terms"]:
@@ -76,6 +77,7 @@ def main(manifest_path, out_dir):
             time.sleep(0.4)  # be polite to Commons
         print(f"{term}: {got}")
     meta.close()
+    lic_f.close()
     print(f"TOTAL {n} images")
 
 def make_white_background():
