@@ -110,6 +110,57 @@ _pipeline = None
 _t2i_pipeline = None
 
 
+def finalize_glass(glb_path):
+    """Post-export glass enable: if the baked baseColor texture carries real
+    translucency (TRELLIS.2 generates window-glass alpha), flip the GLB's
+    materials to alphaMode=BLEND. Upstream o-voxel hardcodes OPAQUE; an
+    in-pipeline gate missed on its first live run, so this operates on the
+    FINAL file — wherever the alpha came from, it is honored. Disable with
+    GLB_ALPHA_MODE=opaque. Returns True if transparency was enabled."""
+    if os.environ.get("GLB_ALPHA_MODE", "auto").lower() == "opaque":
+        return False
+    try:
+        import struct, json as _json
+        data = open(glb_path, "rb").read()
+        if data[:4] != b"glTF":
+            return False
+        jlen, jtype = struct.unpack("<II", data[12:20])
+        j = _json.loads(data[20:20 + jlen])
+        rest = data[20 + jlen:]
+        mats = j.get("materials") or []
+        if not mats:
+            return False
+        tex_ref = (mats[0].get("pbrMetallicRoughness", {})
+                   .get("baseColorTexture") or {}).get("index")
+        if tex_ref is None:
+            return False
+        img_idx = j["textures"][tex_ref].get("source")
+        bv = j["bufferViews"][j["images"][img_idx]["bufferView"]]
+        bin_data = rest[8:8 + struct.unpack("<I", rest[0:4])[0]]
+        off = bv.get("byteOffset", 0)
+        im = Image.open(BytesIO(bin_data[off:off + bv["byteLength"]]))
+        if im.mode != "RGBA":
+            print("glass check: texture has no alpha channel", file=sys.stderr)
+            return False
+        hist = im.getchannel("A").histogram()
+        frac = sum(hist[:250]) / float(im.size[0] * im.size[1])
+        print(f"glass check: translucent fraction={frac:.4f}", file=sys.stderr)
+        if frac < 0.002:
+            return False
+        for m in mats:
+            m["alphaMode"] = "BLEND"
+            m["doubleSided"] = True
+        nj = _json.dumps(j, separators=(",", ":")).encode()
+        nj += b" " * ((4 - len(nj) % 4) % 4)
+        out = (data[:8] + struct.pack("<I", 12 + 8 + len(nj) + len(rest))
+               + struct.pack("<II", len(nj), jtype) + nj + rest)
+        open(glb_path, "wb").write(out)
+        return True
+    except Exception as e:
+        print(f"glass check skipped: {e}", file=sys.stderr)
+        return False
+
+
 # Background removal checkpoint override — handled inside our vendored
 # pipeline (trellis2_image_to_3d.py reads REMBG_MODEL). pipeline.json pins the
 # license-gated briaai/RMBG-2.0 (verified 403 in live deploy); setting
@@ -179,11 +230,15 @@ def build_vehicle_prompt(vehicle):
 def text_to_image(prompt, seed, steps=None, guidance=None):
     """Stage 1 of text-to-3D: render the prompt to a single-object image."""
     pipe = get_t2i_pipeline()
-    is_turbo = any(k in T2I_MODEL.lower() for k in ("turbo", "schnell", "lightning"))
+    name = T2I_MODEL.lower()
+    is_lightning = "lightning" in name
+    is_turbo = "turbo" in name or "schnell" in name
     if steps is None:
-        steps = 4 if is_turbo else 30
+        steps = 6 if is_lightning else (4 if is_turbo else 30)
     if guidance is None:
-        guidance = 0.0 if is_turbo else 7.0
+        # lightning keeps guidance >1 so the negative prompt (anti-collage
+        # guards) stays active; turbo/schnell are trained for cfg=0
+        guidance = 1.5 if is_lightning else (0.0 if is_turbo else 7.0)
     generator = torch.Generator("cuda").manual_seed(seed)
     result = pipe(
         prompt=prompt + T2I_PROMPT_SUFFIX,
@@ -326,6 +381,7 @@ def handler(job):
         except Exception:
             glb.export(persisted_path)
 
+        glass_enabled = finalize_glass(persisted_path)
         glb_size = os.path.getsize(persisted_path)
         glb_url = upload_to_supabase(
             persisted_path, f"trellis2/{job_id}.glb", "model/gltf-binary")
@@ -335,6 +391,7 @@ def handler(job):
             "glb_url": glb_url,
             "glb_path": persisted_path,
             "glb_size_bytes": glb_size,
+            "glass": glass_enabled,
             "mode": mode,
             "message": "GLB generated successfully",
         }

@@ -199,6 +199,47 @@ with mock.patch.object(H.requests, "post", return_value=fake_up):
     r = H.handler({"id": "t9b", "input": {"prompt": "a chair"}})
 check("oversized glb NOT inlined (url only)", "glb_b64" not in r and r.get("glb_url"))
 
+# ---- Test 10: glass finalizer on real mini-GLBs ----
+print("Test 10: glass finalizer")
+import struct
+def make_glb(path, alpha_value):
+    img = Image.new("RGBA", (8, 8), (30, 30, 30, alpha_value))
+    ibuf = io.BytesIO(); img.save(ibuf, "PNG"); png = ibuf.getvalue()
+    png += b"\x00" * ((4 - len(png) % 4) % 4)
+    j = {"asset": {"version": "2.0"},
+         "materials": [{"pbrMetallicRoughness": {"baseColorTexture": {"index": 0}}}],
+         "textures": [{"source": 0}],
+         "images": [{"bufferView": 0, "mimeType": "image/png"}],
+         "bufferViews": [{"buffer": 0, "byteOffset": 0, "byteLength": len(png)}],
+         "buffers": [{"byteLength": len(png)}]}
+    nj = json.dumps(j, separators=(",", ":")).encode()
+    nj += b" " * ((4 - len(nj) % 4) % 4)
+    out = (b"glTF" + struct.pack("<II", 2, 12 + 8 + len(nj) + 8 + len(png))
+           + struct.pack("<I", len(nj)) + b"JSON" + nj
+           + struct.pack("<I", len(png)) + b"BIN\x00" + png)
+    open(path, "wb").write(out)
+
+def read_alpha_mode(path):
+    d = open(path, "rb").read()
+    ln = struct.unpack("<I", d[12:16])[0]
+    return json.loads(d[20:20+ln])["materials"][0].get("alphaMode", "OPAQUE")
+
+glb_t = f"{H.OUTPUT_DIR}/glass_translucent.glb"; make_glb(glb_t, 80)
+glb_o = f"{H.OUTPUT_DIR}/glass_opaque.glb"; make_glb(glb_o, 255)
+check("translucent texture -> BLEND", H.finalize_glass(glb_t) is True and read_alpha_mode(glb_t) == "BLEND")
+check("opaque texture -> untouched", H.finalize_glass(glb_o) is False and read_alpha_mode(glb_o) == "OPAQUE")
+check("garbage file tolerated", H.finalize_glass(__file__) is False)
+os.environ["GLB_ALPHA_MODE"] = "opaque"
+make_glb(glb_t, 80)
+check("GLB_ALPHA_MODE=opaque disables", H.finalize_glass(glb_t) is False)
+del os.environ["GLB_ALPHA_MODE"]
+
+# ---- Test 11: lightning auto-tune ----
+print("Test 11: Lightning model auto-tune")
+H.T2I_MODEL = "SG161222/RealVisXL_V4.0_Lightning"; H._t2i_pipeline = None
+r = H.handler({"id": "t11", "input": {"prompt": "a van"}})
+check("lightning steps=6/guidance=1.5", captured["t2i_steps"] == 6 and captured["t2i_guidance"] == 1.5)
+
 print()
 print("RESULT:", f"{len(fails)} failures" if fails else "ALL TESTS PASSED")
 sys.exit(1 if fails else 0)
