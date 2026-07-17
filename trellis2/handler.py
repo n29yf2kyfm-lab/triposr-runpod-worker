@@ -20,9 +20,11 @@ if os.environ.get("OFFLINE") == "1":
     os.environ["TRANSFORMERS_OFFLINE"] = "1"
 
 sys.path.insert(0, "/app/TRELLIS.2")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from trellis2.pipelines import Trellis2ImageTo3DPipeline
 import o_voxel
+from oem_paint import apply_oem_paint
 
 # TRELLIS.2 itself is image-to-3D only, so text-to-3D is a two-stage pipeline
 # owned by this worker:
@@ -389,6 +391,11 @@ def handler(job):
             glb.export(persisted_path)
 
         glass_enabled = finalize_glass(persisted_path)
+        # OEM paint stage: repaint the body to a factory colour (texture-space,
+        # shading-preserving) — beats baked-in ambient every time
+        paint_report = None
+        if job_input.get("oem_paint"):
+            paint_report = apply_oem_paint(persisted_path, job_input["oem_paint"])
         glb_size = os.path.getsize(persisted_path)
         glb_url = upload_to_supabase(
             persisted_path, f"trellis2/{job_id}.glb", "model/gltf-binary")
@@ -399,6 +406,7 @@ def handler(job):
             "glb_path": persisted_path,
             "glb_size_bytes": glb_size,
             "glass": glass_enabled,
+            "oem_paint": paint_report,
             "mode": mode,
             "message": "GLB generated successfully",
         }

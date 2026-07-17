@@ -264,6 +264,39 @@ print("Test 13: glass ceiling (body-wide translucency stays opaque)")
 glb_w = f"{H.OUTPUT_DIR}/glass_wide.glb"; make_glb(glb_w, 100)  # 100% translucent
 check("body-wide translucency -> stays OPAQUE", H.finalize_glass(glb_w) is False and read_alpha_mode(glb_w) == "OPAQUE")
 
+# ---- Test 14: OEM paint stage ----
+print("Test 14: OEM paint (texture-space recolour)")
+try:
+    import numpy  # oem_paint needs real numpy
+    from oem_paint import apply_oem_paint
+    glb_p = f"{H.OUTPUT_DIR}/paint.glb"
+    img = Image.new("RGBA", (16, 16), (30, 80, 40, 255))  # green "paint"
+    ibuf = io.BytesIO(); img.save(ibuf, "PNG"); png = ibuf.getvalue()
+    png += b"\x00" * ((4 - len(png) % 4) % 4)
+    import struct as _st
+    jj = {"asset": {"version": "2.0"},
+          "materials": [{"pbrMetallicRoughness": {"baseColorTexture": {"index": 0}}}],
+          "textures": [{"source": 0}],
+          "images": [{"bufferView": 0, "mimeType": "image/png"}],
+          "bufferViews": [{"buffer": 0, "byteOffset": 0, "byteLength": len(png)}],
+          "buffers": [{"byteLength": len(png)}]}
+    nj = json.dumps(jj, separators=(",", ":")).encode(); nj += b" " * ((4 - len(nj) % 4) % 4)
+    open(glb_p, "wb").write(b"glTF" + _st.pack("<II", 2, 12+8+len(nj)+8+len(png))
+        + _st.pack("<I", len(nj)) + b"JSON" + nj + _st.pack("<I", len(png)) + b"BIN\x00" + png)
+    rep = apply_oem_paint(glb_p, {"hex": "#8E1B21", "finish": "solid"})
+    check("paint applied with coverage", bool(rep and rep.get("applied") and rep["coverage"] > 0.5))
+    d = open(glb_p, "rb").read()
+    ln = _st.unpack("<I", d[12:16])[0]; jx = json.loads(d[20:20+ln])
+    rest = d[20+ln:]; bl = _st.unpack("<I", rest[0:4])[0]; bd = rest[8:8+bl]
+    bv = jx["bufferViews"][jx["images"][0]["bufferView"]]
+    im2 = Image.open(io.BytesIO(bd[bv.get("byteOffset",0):bv.get("byteOffset",0)+bv["byteLength"]])).convert("RGB")
+    r_, g_, b_ = im2.getpixel((8, 8))
+    check("texture recoloured toward target red", r_ > g_ and r_ > b_)
+    check("named paint resolves", apply_oem_paint(glb_p, {"name": "Nardo Grey"}) is not None)
+    check("unknown spec skipped", apply_oem_paint(glb_p, {"name": "not-a-paint"}) is None)
+except ImportError:
+    print("  SKIP (numpy unavailable in this env)")
+
 print()
 print("RESULT:", f"{len(fails)} failures" if fails else "ALL TESTS PASSED")
 sys.exit(1 if fails else 0)
