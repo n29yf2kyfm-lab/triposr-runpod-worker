@@ -147,6 +147,13 @@ def finalize_glass(glb_path):
         print(f"glass check: translucent fraction={frac:.4f}", file=sys.stderr)
         if frac < 0.002:
             return False
+        if frac > 0.25:
+            # windows are a small share of a car's surface; body-wide
+            # translucency means bad segmentation, not glass — forcing BLEND
+            # would ghost the whole model (live-confirmed failure mode)
+            print("glass check: translucency too widespread, keeping OPAQUE",
+                  file=sys.stderr)
+            return False
         for m in mats:
             m["alphaMode"] = "BLEND"
             m["doubleSided"] = True
@@ -402,10 +409,20 @@ def handler(job):
                 result["glb_b64"] = base64.b64encode(f.read()).decode("utf-8")
 
         if generated_image_b64:
-            result["generated_image_b64"] = generated_image_b64
+            # persist the intermediate image next to the GLB — RunPod job
+            # outputs expire in ~30 min; the bucket copy is permanent
+            img_path = os.path.join(OUTPUT_DIR, f"{job_id}.png")
+            with open(img_path, "wb") as f:
+                f.write(base64.b64decode(generated_image_b64))
+            result["image_url"] = upload_to_supabase(
+                img_path, f"trellis2/{job_id}.png", "image/png")
             # echo the engineered prompt so callers can see/tune what the
             # vehicle spec expanded to
             result["prompt_used"] = prompt
+            # return_image=false -> clean text->3D response (no inline image
+            # payload); image_url is always included
+            if job_input.get("return_image", True):
+                result["generated_image_b64"] = generated_image_b64
         return result
 
     except Exception as e:

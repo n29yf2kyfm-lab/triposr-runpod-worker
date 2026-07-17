@@ -192,7 +192,7 @@ fake_up = types.SimpleNamespace(status_code=200, text="")
 with mock.patch.object(H.requests, "post", return_value=fake_up) as up:
     r = H.handler({"id": "t9", "input": {"prompt": "a chair"}})
 check("glb_url returned", r.get("glb_url") == "https://x.supabase.co/storage/v1/object/public/car-meshes/trellis2/t9.glb")
-check("upload hit bucket path", "car-meshes/trellis2/t9.glb" in up.call_args.args[0])
+check("upload hit bucket path", any("car-meshes/trellis2/t9.glb" in c.args[0] for c in up.call_args_list))
 check("small glb still inlined", "glb_b64" in r and r.get("glb_size_bytes", 0) <= H.MAX_INLINE_BYTES)
 H.MAX_INLINE_BYTES = 4  # force the file over the cap
 with mock.patch.object(H.requests, "post", return_value=fake_up):
@@ -202,8 +202,14 @@ check("oversized glb NOT inlined (url only)", "glb_b64" not in r and r.get("glb_
 # ---- Test 10: glass finalizer on real mini-GLBs ----
 print("Test 10: glass finalizer")
 import struct
-def make_glb(path, alpha_value):
-    img = Image.new("RGBA", (8, 8), (30, 30, 30, alpha_value))
+def make_glb(path, alpha_value, frac=1.0):
+    img = Image.new("RGBA", (8, 8), (30, 30, 30, 255))
+    if alpha_value < 255:
+        # paint a localized "window" patch covering ~frac of the texture
+        n = max(1, int(64 * frac))
+        px = img.load()
+        for i in range(n):
+            px[i % 8, i // 8] = (30, 30, 30, alpha_value)
     ibuf = io.BytesIO(); img.save(ibuf, "PNG"); png = ibuf.getvalue()
     png += b"\x00" * ((4 - len(png) % 4) % 4)
     j = {"asset": {"version": "2.0"},
@@ -224,13 +230,13 @@ def read_alpha_mode(path):
     ln = struct.unpack("<I", d[12:16])[0]
     return json.loads(d[20:20+ln])["materials"][0].get("alphaMode", "OPAQUE")
 
-glb_t = f"{H.OUTPUT_DIR}/glass_translucent.glb"; make_glb(glb_t, 80)
+glb_t = f"{H.OUTPUT_DIR}/glass_translucent.glb"; make_glb(glb_t, 80, frac=0.14)
 glb_o = f"{H.OUTPUT_DIR}/glass_opaque.glb"; make_glb(glb_o, 255)
 check("translucent texture -> BLEND", H.finalize_glass(glb_t) is True and read_alpha_mode(glb_t) == "BLEND")
 check("opaque texture -> untouched", H.finalize_glass(glb_o) is False and read_alpha_mode(glb_o) == "OPAQUE")
 check("garbage file tolerated", H.finalize_glass(__file__) is False)
 os.environ["GLB_ALPHA_MODE"] = "opaque"
-make_glb(glb_t, 80)
+make_glb(glb_t, 80, frac=0.14)
 check("GLB_ALPHA_MODE=opaque disables", H.finalize_glass(glb_t) is False)
 del os.environ["GLB_ALPHA_MODE"]
 
@@ -239,6 +245,24 @@ print("Test 11: Lightning model auto-tune")
 H.T2I_MODEL = "SG161222/RealVisXL_V4.0_Lightning"; H._t2i_pipeline = None
 r = H.handler({"id": "t11", "input": {"prompt": "a van"}})
 check("lightning steps=6/guidance=1.5", captured["t2i_steps"] == 6 and captured["t2i_guidance"] == 1.5)
+
+# ---- Test 12: return_image flag + image persistence ----
+print("Test 12: return_image flag + image_url")
+H.SUPABASE_URL = "https://x.supabase.co"; H.SUPABASE_KEY = "k"; H.SUPABASE_BUCKET = "car-meshes"
+fake_up = types.SimpleNamespace(status_code=200, text="")
+with mock.patch.object(H.requests, "post", return_value=fake_up):
+    r = H.handler({"id": "t12", "input": {"prompt": "a bike", "return_image": False}})
+check("inline image suppressed", "generated_image_b64" not in r)
+check("image_url still returned", r.get("image_url", "").endswith("trellis2/t12.png"))
+check("image persisted to disk", os.path.exists(f"{H.OUTPUT_DIR}/t12.png"))
+with mock.patch.object(H.requests, "post", return_value=fake_up):
+    r = H.handler({"id": "t12b", "input": {"prompt": "a bike"}})
+check("inline image on by default", "generated_image_b64" in r)
+
+# ---- Test 13: glass gate upper bound ----
+print("Test 13: glass ceiling (body-wide translucency stays opaque)")
+glb_w = f"{H.OUTPUT_DIR}/glass_wide.glb"; make_glb(glb_w, 100)  # 100% translucent
+check("body-wide translucency -> stays OPAQUE", H.finalize_glass(glb_w) is False and read_alpha_mode(glb_w) == "OPAQUE")
 
 print()
 print("RESULT:", f"{len(fails)} failures" if fails else "ALL TESTS PASSED")
