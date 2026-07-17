@@ -12728,5 +12728,147 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "suzuki-jimny-v1",
+  "make": "suzuki",
+  "model": "jimny",
+  "modelFamily": "jimny",
+  "modelAliases": [
+   "jimny"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "SUZUKI JIMNY",
+  "sourceUrl": "https://sketchfab.com/3d-models/942987d14be64808ad8dce51ad527c7c",
+  "sourceCreator": null,
+  "sourceReferenceId": "942987d14be64808ad8dce51ad527c7c",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Speedy Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-jimny-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-jimny-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/suzuki/suzuki-jimny-v1/speedy-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 8203400,
+  "mobileFileSizeBytes": 8203400,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T20:10:32Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: 'SUZUKI JIMNY'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "white",
+     "label": "Superior White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Superior White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silky Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silky Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmic Black Pearl Metallic",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Cosmic Black Pearl Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Speedy Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Speedy Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Burning Red Pearl Metallic",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Burning Red Pearl Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Kinetic Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Kinetic Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Jungle Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Jungle Green",
+     "glbUrl": null
+    },
+    {
+     "family": "brown",
+     "label": "Chestnut Brown Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Chestnut Brown Pearl",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
