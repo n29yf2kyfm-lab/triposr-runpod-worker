@@ -273,12 +273,18 @@ def store(spec):
 
     hero_az = spec.get("az", 40)
     plate = spec.get("plate", "AL24 3D")
+    # recolour mode: "auto" (tint on generic bodies) or "flat" (clean metallic
+    # respray — premium look on low-texture 'clay' models). Only force flat when
+    # the body is a separate material from lights/wheels, or flat overspills onto
+    # them; the caller sizes that up front and only passes flat when it's safe.
+    rmode = spec.get("recolour", "auto")
     want = oem_for(make)
     colours = []
     for p in want:
         sl = slug(p["name"])
         png = render(glb_url, colour=p["colourFamily"].lower(), finish=p["finish"], plate=plate,
-                     plates_both=True, az=hero_az, elev=0.13, samples=150, width=1600, height=900)
+                     plates_both=True, az=hero_az, elev=0.13, samples=150, width=1600, height=900,
+                     recolour=rmode)
         if not png:
             raise RuntimeError(f"render failed after retries: {p['name']} — ABORT (no partial store)")
         url = upload("car-renders", f"finished/{make}/{key}/{sl}.jpg", png, "image/png")
