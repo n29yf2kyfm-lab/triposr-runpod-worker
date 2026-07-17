@@ -231,7 +231,14 @@ def _choose_body(meta):
     car_h = (car_z1 - car_z0) or 1.0
 
     def low_part(d):
-        return (d.get("z1", -1e18) - car_z0) < 0.42 * car_h
+        # Wheels/tyres/underbody, spared from body paint even when generically
+        # named. Two signatures: (a) the whole material sits low — its TOP is under
+        # ~42% of car height (alloy centres, sills, undertray); (b) it TOUCHES THE
+        # GROUND and stays low — a tyre reaches ~46% (above (a)) but its bottom is
+        # the car's lowest point, unlike a bumper/valance whose lip clears the road.
+        top = d.get("z1", -1e18) - car_z0
+        bot = d.get("z0", 1e18) - car_z0
+        return (top < 0.42 * car_h) or (bot < 0.05 * car_h and top < 0.52 * car_h)
 
     big = max(d["area"] for d in cands.values())
     paint = set(n for n, d in cands.items() if d["paint"])
