@@ -23741,5 +23741,142 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "fiat-500e-v1",
+  "make": "fiat",
+  "model": "500e",
+  "modelFamily": "500",
+  "modelAliases": [
+   "500e",
+   "500 electric",
+   "e500",
+   "500"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2021 Fiat e500",
+  "sourceUrl": "https://sketchfab.com/3d-models/94dd3a8ce4ad45c8819541a33cb400b2",
+  "sourceCreator": null,
+  "sourceReferenceId": "94dd3a8ce4ad45c8819541a33cb400b2",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "red",
+  "renderColourLabel": "Passione Red",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500e-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500e-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/fiat/fiat-500e-v1/passione-red.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1767108,
+  "mobileFileSizeBytes": 1767108,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T14:45:59Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2021 Fiat e500'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Moda Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moda Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cinema Black",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Cinema Black",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Gelato White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Gelato White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Passione Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Passione Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Italia Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Italia Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Sicilia Orange",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sicilia Orange",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Ocean Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ocean Green",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
