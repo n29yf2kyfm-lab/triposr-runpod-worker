@@ -38,6 +38,8 @@ def caption_for(term):
 def main(manifest_path, out_dir):
     mf = json.load(open(manifest_path))
     os.makedirs(out_dir, exist_ok=True)
+    global white_background
+    white_background = make_white_background()
     meta = open(os.path.join(out_dir, "metadata.jsonl"), "w")
     lic = csv.writer(open(os.path.join(out_dir, "licences.csv"), "w"))
     lic.writerow(["file", "source_url", "licence", "artist"])
@@ -60,6 +62,7 @@ def main(manifest_path, out_dir):
                 im = im.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
                 l, t = (im.width - 1024) // 2, (im.height - 1024) // 2
                 im = im.crop((l, t, l + 1024, t + 1024))
+                im = white_background(im)
                 fn = f"{n:05d}.jpg"
                 im.save(os.path.join(out_dir, fn), quality=92)
                 meta.write(json.dumps({"file_name": fn, "text": caption_for(term)}) + "\n")
@@ -74,6 +77,33 @@ def main(manifest_path, out_dir):
         print(f"{term}: {got}")
     meta.close()
     print(f"TOTAL {n} images")
+
+def make_white_background():
+    """Composite each training photo onto white so the dataset matches the
+    worker's generation style (single car, plain background — user request).
+    Uses rembg when available (pod v2 installs it); otherwise a no-op so the
+    fetch never fails on a missing extra."""
+    if os.environ.get("WHITE_BG", "1") != "1":
+        return lambda im: im
+    try:
+        from rembg import remove, new_session
+        session = new_session("u2net")
+
+        def _wb(im):
+            try:
+                cut = remove(im, session=session)  # RGBA
+                from PIL import Image as _I
+                bg = _I.new("RGB", cut.size, (255, 255, 255))
+                bg.paste(cut, mask=cut.getchannel("A"))
+                return bg
+            except Exception:
+                return im
+        print("white-background: rembg active")
+        return _wb
+    except Exception:
+        print("white-background: rembg unavailable, keeping originals")
+        return lambda im: im
+
 
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])

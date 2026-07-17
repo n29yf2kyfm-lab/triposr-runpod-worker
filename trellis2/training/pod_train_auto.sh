@@ -21,6 +21,7 @@ mkdir -p $DATA/img
 curl -fsSL $RAW/model_manifest.json -o /workspace/manifest.json
 curl -fsSL $RAW/fetch_dataset.py -o /workspace/fetch_dataset.py
 pip install -q requests pillow
+pip install -q 'rembg[cpu]' onnxruntime || echo 'rembg optional, continuing without white-bg'
 python3 /workspace/fetch_dataset.py /workspace/manifest.json $DATA/img 2>&1 | tail -5
 N=$(ls $DATA/img/*.jpg 2>/dev/null | wc -l)
 echo "dataset: $N images"

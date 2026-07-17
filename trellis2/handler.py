@@ -293,6 +293,33 @@ def fetch_image(image_url):
     return Image.open(BytesIO(response.content)).convert("RGB")
 
 
+def vehicle_slug(vehicle):
+    """Canonical registry key for a vehicle spec: make-model-year-trim."""
+    parts = [str(vehicle.get(k, "")).strip().lower()
+             for k in ("make", "model", "year", "trim")]
+    slug = "-".join(p for p in parts if p)
+    return "".join(c if c.isalnum() or c == "-" else "-" for c in slug) or None
+
+
+def fetch_reference(slug):
+    """Approved reference image for this vehicle from the bucket, or None.
+    The resolver idea: once a good generation exists for a make/model/year,
+    every later request reuses ITS reference image instead of re-rolling the
+    dice — consistent models, and an approved look stays locked in."""
+    if not (SUPABASE_URL and SUPABASE_BUCKET and slug):
+        return None
+    url = (f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/"
+           f"references/{slug}.png")
+    try:
+        r = requests.get(url, timeout=20)
+        if r.status_code == 200 and r.content:
+            print(f"reference cache HIT: {slug}", file=sys.stderr)
+            return Image.open(BytesIO(r.content)).convert("RGB"), url
+    except Exception as e:
+        print(f"reference fetch skipped: {e}", file=sys.stderr)
+    return None
+
+
 def run_pipeline(pipeline, img, seed, pipeline_type=None):
     """Run generation. Signature verified against the vendored pipeline:
     run(image, num_samples=1, seed=42, ..., pipeline_type=None) ->
@@ -363,11 +390,32 @@ def handler(job):
             img = fetch_image(image_url)
             mode = "image"
         else:
-            with torch.no_grad():
-                img = text_to_image(prompt, seed, t2i_steps, t2i_guidance)
+            # vehicle resolver: reuse the approved reference image for this
+            # make/model/year when one exists (reference: "use" default;
+            # "refresh" re-generates and replaces it; "off" disables)
+            ref_mode = job_input.get("reference", "use")
+            slug = vehicle_slug(vehicle) if isinstance(vehicle, dict) else None
+            reference_url = None
+            img = None
+            if slug and ref_mode == "use":
+                hit = fetch_reference(slug)
+                if hit:
+                    img, reference_url = hit
+                    mode = "reference"
+            if img is None:
+                with torch.no_grad():
+                    img = text_to_image(prompt, seed, t2i_steps, t2i_guidance)
+                mode = "text"
+                if slug and ref_mode in ("use", "refresh"):
+                    # store as the vehicle's reference for future requests
+                    # (x-upsert: "refresh" replaces an existing one)
+                    ref_path = os.path.join(OUTPUT_DIR, f"ref_{slug}.png")
+                    os.makedirs(OUTPUT_DIR, exist_ok=True)
+                    img.save(ref_path)
+                    reference_url = upload_to_supabase(
+                        ref_path, f"references/{slug}.png", "image/png")
             # return the intermediate image so callers can see/reuse it
             generated_image_b64 = image_to_b64(img)
-            mode = "text"
             # publish the image immediately via job progress — the app can
             # display it while the 3D stage is still generating
             try:
@@ -423,7 +471,7 @@ def handler(job):
         polish_report = None
         pol = job_input.get("polish")
         if pol is None:
-            pol = (mode == "text")
+            pol = (mode in ("text", "reference"))
         if pol:
             polish_report = apply_polish(persisted_path, pol)
         # Panel detail: normal map derived from shut-line features in the
@@ -431,7 +479,7 @@ def handler(job):
         detail_report = None
         pd = job_input.get("panel_detail")
         if pd is None:
-            pd = (mode == "text")
+            pd = (mode in ("text", "reference"))
         if pd:
             detail_report = apply_panel_detail(persisted_path, pd)
         # Wheel swap: overlay clean parametric OEM-style wheels (voxel-baked
@@ -440,7 +488,7 @@ def handler(job):
         wheel_report = None
         ws = job_input.get("wheel_swap")
         if ws is None:
-            ws = (mode == "text")
+            ws = (mode in ("text", "reference"))
         if ws:
             if not isinstance(ws, dict):
                 make = (vehicle or {}).get("make", "") if isinstance(vehicle, dict) else ""
@@ -461,6 +509,7 @@ def handler(job):
             "panel_detail": detail_report,
             "polish": polish_report,
             "mode": mode,
+            "reference_url": reference_url if mode in ("text", "reference") else None,
             "message": "GLB generated successfully",
         }
         # Inline base64 only when it fits under RunPod's output cap —

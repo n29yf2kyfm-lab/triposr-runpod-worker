@@ -481,6 +481,33 @@ try:
 except ImportError:
     print("  SKIP (numpy unavailable in this env)")
 
+# ---- Test 18: vehicle resolver / reference cache ----
+print("Test 18: vehicle reference cache")
+check("slug canonical", H.vehicle_slug(
+    {"make": "BMW", "model": "X5 M Sport", "year": 2020}) == "bmw-x5-m-sport-2020")
+check("slug empty spec", H.vehicle_slug({}) is None)
+_refpng = io.BytesIO(); Image.new("RGB", (8, 8), (10, 10, 10)).save(_refpng, "PNG")
+fake_hit = mock.Mock(status_code=200, content=_refpng.getvalue())
+fake_miss = mock.Mock(status_code=404, content=b"")
+veh = {"vehicle": {"make": "BMW", "model": "X5", "year": 2020}}
+with mock.patch.object(H.requests, "get", return_value=fake_hit), \
+     mock.patch.object(H.requests, "post", return_value=fake_up):
+    r = H.handler({"id": "t18a", "input": dict(veh)})
+check("cache hit -> reference mode", r.get("mode") == "reference")
+check("hit returns reference url",
+      (r.get("reference_url") or "").endswith("references/bmw-x5-2020.png"))
+with mock.patch.object(H.requests, "get", return_value=fake_miss), \
+     mock.patch.object(H.requests, "post", return_value=fake_up):
+    r2 = H.handler({"id": "t18b", "input": dict(veh)})
+check("cache miss -> text mode + stored",
+      r2.get("mode") == "text"
+      and (r2.get("reference_url") or "").endswith("references/bmw-x5-2020.png"))
+with mock.patch.object(H.requests, "get", return_value=fake_hit), \
+     mock.patch.object(H.requests, "post", return_value=fake_up):
+    r3 = H.handler({"id": "t18c", "input": {**veh, "reference": "off"}})
+check("reference off -> no cache use",
+      r3.get("mode") == "text" and r3.get("reference_url") is None)
+
 print()
 print("RESULT:", f"{len(fails)} failures" if fails else "ALL TESTS PASSED")
 sys.exit(1 if fails else 0)

@@ -20,9 +20,17 @@ Request (`POST /run` on the endpoint):
 }
 ```
 
-- `wheel_swap` / `panel_detail` default ON for generated (text/vehicle) cars —
-  send `false` to opt out. `wheel_swap` accepts `{"style": "audi"}` to force a
-  rim style; by default the style follows `vehicle.make`.
+- `wheel_swap` / `panel_detail` / `polish` default ON for generated
+  (text/vehicle) cars — send `false` to opt out. `wheel_swap` accepts
+  `{"style": "audi"}` to force a rim style; by default the style follows
+  `vehicle.make`.
+- `reference` (vehicle jobs): `"use"` (default) reuses the stored reference
+  image for that make/model/year from the bucket (`references/<slug>.png`) so
+  repeat requests produce the SAME car; a miss generates one and stores it.
+  `"refresh"` re-generates and replaces the stored reference (use after a bad
+  one); `"off"` disables the cache. The response's `reference_url` tells you
+  which image the model was built from — show it or store it against the
+  vehicle record.
 - Output: `glb_url` (Supabase, permanent), `image_url` (the generated
   reference image), `glass` (bool — model ships with real alpha windows),
   `wheels` / `panel_detail` / `oem_paint` (per-stage reports or null).
