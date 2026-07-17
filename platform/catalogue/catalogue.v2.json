@@ -11759,5 +11759,148 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volkswagen-tiguan-allspace-2022-v1",
+  "make": "volkswagen",
+  "model": "tiguan",
+  "modelFamily": "tiguan",
+  "modelAliases": [
+   "tiguan",
+   "tiguan allspace"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022 Volkswagen Tiguan L - Allspace",
+  "sourceUrl": "https://sketchfab.com/3d-models/c8780d08e8dc4050a1287fa99c31824c",
+  "sourceCreator": null,
+  "sourceReferenceId": "c8780d08e8dc4050a1287fa99c31824c",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Atlantic Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-tiguan-allspace-2022-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-tiguan-allspace-2022-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-tiguan-allspace-2022-v1/atlantic-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6654088,
+  "mobileFileSizeBytes": 6654088,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T19:36:15Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2022 Volkswagen Tiguan L - Allspace'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Uranium Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Uranium Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Dolphin Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dolphin Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Moonstone Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Moonstone Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Deep Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Deep Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Reflex Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Reflex Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Atlantic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Atlantic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lapiz Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lapiz Blue Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
