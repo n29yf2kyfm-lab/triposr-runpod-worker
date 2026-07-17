@@ -8,13 +8,30 @@ BRANCH="${BRANCH:-claude/custom-upgrade-path-2vszoo}"
 RAW="https://raw.githubusercontent.com/n29yf2kyfm-lab/triposr-runpod-worker/$BRANCH/trellis2/training"
 OUT="${OUT:-/runpod-volume/loras/cars-v1}"
 DATA=/workspace/data
+LOG=/runpod-volume/lora_train.log
+upload_log() {
+  # observability: the first two runs crash-looped invisibly (truncating tee
+  # destroyed the evidence each restart) — now the log ships to the bucket
+  [ -n "${SUPABASE_URL:-}" ] && [ -n "${SUPABASE_KEY:-}" ] || return 0
+  curl -s -X POST \
+    "$SUPABASE_URL/storage/v1/object/${SUPABASE_BUCKET:-car-meshes}/trellis2/lora_train_live.log" \
+    -H "Authorization: Bearer $SUPABASE_KEY" -H "apikey: $SUPABASE_KEY" \
+    -H "Content-Type: text/plain" -H "x-upsert: true" \
+    --data-binary @"$LOG" > /dev/null 2>&1 || true
+}
 report() {
+  echo "=== phase lora-$1 $(date -u +%H:%M:%S) ===" >> "$LOG" 2>/dev/null || true
+  upload_log
   [ -n "${RUNPOD_POD_ID:-}" ] && [ -n "${RUNPOD_ACCOUNT_KEY:-}" ] || return 0
   curl -s -X PATCH "https://rest.runpod.io/v1/pods/$RUNPOD_POD_ID" \
     -H "Authorization: Bearer $RUNPOD_ACCOUNT_KEY" -H "Content-Type: application/json" \
     -d "{\"name\": \"lora-$1\"}" > /dev/null || true
 }
 trap 'report FAILED' ERR
+# heartbeat: ship the log every 5 min so a mid-phase death is diagnosable
+( while true; do sleep 300; upload_log; done ) &
+HEARTBEAT=$!
+trap 'kill $HEARTBEAT 2>/dev/null || true' EXIT
 
 report 1-dataset
 mkdir -p $DATA/img
