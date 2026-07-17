@@ -92,13 +92,19 @@ def smooth_normals(j, bin_data, iters=2, pos_iters=6,
     np.add.at(cnt, inv, 1.0)
     Pw /= cnt[:, None]
 
-    # --- coarse flattening field: voxel waviness spans dozens of edges, far
+    # --- coarse flattening fields: voxel waviness spans dozens of edges, far
     # beyond what 1-ring iterations reach (live Golf tailgate stayed lumpy).
-    # Cluster the surface into ~2.5%-of-model cells, smooth the cell centers
-    # along their normals, and apply the low-frequency correction back. ---
-    if pos_iters:
+    # Cluster the surface into cells, smooth the cell centers along their
+    # normals, and apply the low-frequency correction back. Runs at TWO
+    # scales: the panel-sized field catches broad waves (its crease mask is
+    # computed at the same coarse scale, so real edges still diverge and
+    # stay protected), the finer field catches mid-scale ripple. ---
+    for cell_frac_i, lim_frac_i, its in (
+            (cell_frac * 2.0, lim_frac * 2.0, 10),
+            (cell_frac, lim_frac, 8)):
+      if pos_iters:
         scale = float(np.linalg.norm(Pw.max(0) - Pw.min(0)))
-        cell = float(cell_frac) * max(scale, 1e-9)
+        cell = float(cell_frac_i) * max(scale, 1e-9)
         q = np.floor(Pw / cell).astype(np.int64)
         uq, binv = np.unique(q, axis=0, return_inverse=True)
         B = len(uq)
@@ -121,7 +127,7 @@ def smooth_normals(j, bin_data, iters=2, pos_iters=6,
             bdeg = np.zeros(B)
             np.add.at(bdeg, be[:, 0], 1.0)
             bc0 = bc.copy()
-            for it in range(8):
+            for it in range(its):
                 acc = np.zeros((B, 3))
                 np.add.at(acc, be[:, 0], bc[be[:, 1]])
                 nbm = acc / np.maximum(bdeg, 1.0)[:, None]
@@ -140,7 +146,7 @@ def smooth_normals(j, bin_data, iters=2, pos_iters=6,
                 np.add.at(acc, e[:, 0], vdisp[e[:, 1]])
                 vdisp = 0.5 * vdisp + 0.5 * acc / np.maximum(deg, 1.0)[:, None]
             mag = np.linalg.norm(vdisp, axis=1, keepdims=True)
-            lim = float(lim_frac) * scale
+            lim = float(lim_frac_i) * scale
             vdisp *= np.minimum(1.0, lim / np.maximum(mag, 1e-12))
             Pw += vdisp
             fn = np.cross(Pw[Fw[:, 1]] - Pw[Fw[:, 0]],
@@ -210,8 +216,9 @@ def smooth_normals(j, bin_data, iters=2, pos_iters=6,
 
 
 def polish_texture(j, bin_data, sharpen=1.0):
-    """Unsharp-mask + chroma smoothing on baseColor. Returns new blob's
-    (image index, bytes) or None."""
+    """Unsharp-mask + chroma smoothing on baseColor, plus a gloss pass on
+    dark plastics (lamp lenses, diffuser, trim read as one matte blob
+    otherwise). Returns {"basecolor": (img_i, bytes), "mr": ... or None}."""
     mat = j["materials"][0]
     pbr = mat.get("pbrMetallicRoughness", {})
     if "baseColorTexture" not in pbr:
@@ -245,7 +252,34 @@ def polish_texture(j, bin_data, sharpen=1.0):
     mime = j["images"][img_i].get("mimeType", "image/webp")
     Image.fromarray(out).save(buf, "WEBP" if "webp" in mime else "PNG",
                               quality=95)
-    return img_i, buf.getvalue()
+    result = {"basecolor": (img_i, buf.getvalue()), "mr": None}
+
+    # gloss on dark plastics: lamps/diffuser/trim are matte in the bake.
+    # Low roughness there gives lenses their glint and separates trim
+    # pieces by their reflections.
+    mr_ref = pbr.get("metallicRoughnessTexture")
+    if mr_ref is not None:
+        arr = out.astype(np.float64)
+        lum = arr[..., :3].mean(-1)
+        dark = (lum < 92) & (a >= 200)
+        if dark.mean() > 0.005:
+            mr_i = _tex_source(j["textures"][mr_ref["index"]])
+            mbv = j["bufferViews"][j["images"][mr_i]["bufferView"]]
+            mo, ml = mbv.get("byteOffset", 0), mbv["byteLength"]
+            mim = Image.open(BytesIO(bytes(bin_data[mo:mo + ml]))).convert("RGB")
+            mr = np.asarray(mim).astype(np.float64)
+            if mr.shape[:2] == dark.shape:
+                # feather the mask so gloss fades in
+                dm = Image.fromarray((dark * 255).astype(np.uint8))
+                dm = np.asarray(dm.filter(ImageFilter.GaussianBlur(2))) / 255.0
+                target = 70.0  # glossy plastic/lens roughness (G channel)
+                mr[..., 1] = mr[..., 1] * (1 - dm) + np.minimum(mr[..., 1], target) * dm
+                b2 = BytesIO()
+                mmime = j["images"][mr_i].get("mimeType", "image/webp")
+                Image.fromarray(mr.astype(np.uint8)).save(
+                    b2, "WEBP" if "webp" in mmime else "PNG", quality=95)
+                result["mr"] = (mr_i, b2.getvalue())
+    return result
 
 
 def apply_polish(glb_path, spec=True):
@@ -267,14 +301,17 @@ def apply_polish(glb_path, spec=True):
         if frac is None and tex is None:
             return None
         if tex is not None:
-            img_i, blob = tex
-            while len(bin_data) % 4:
-                bin_data.append(0)
-            start = len(bin_data)
-            bin_data.extend(blob)
-            j["bufferViews"].append({"buffer": 0, "byteOffset": start,
-                                     "byteLength": len(blob)})
-            j["images"][img_i]["bufferView"] = len(j["bufferViews"]) - 1
+            for pair in (tex["basecolor"], tex["mr"]):
+                if pair is None:
+                    continue
+                img_i, blob = pair
+                while len(bin_data) % 4:
+                    bin_data.append(0)
+                start = len(bin_data)
+                bin_data.extend(blob)
+                j["bufferViews"].append({"buffer": 0, "byteOffset": start,
+                                         "byteLength": len(blob)})
+                j["images"][img_i]["bufferView"] = len(j["bufferViews"]) - 1
         _write_glb(glb_path, j, jtype, bin_data)
         print(f"polish: normals smoothed on {frac:.1%} of surface, "
               f"texture sharpen={sharpen}" if frac is not None else

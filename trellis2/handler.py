@@ -165,9 +165,9 @@ def finalize_glass(glb_path):
         band = (a >= 30) & (a < 210)
         if band.any():
             arr[..., 3] = _np.where(
-                band, _np.clip(35 + (a - 30) * 0.35, 35, 100), a)
+                band, _np.clip(30 + (a - 30) * 0.32, 30, 88), a)
             arr[..., :3] = _np.where(
-                band[..., None], _np.clip(arr[..., :3] * 1.6 + 18, 0, 255),
+                band[..., None], _np.clip(arr[..., :3] * 1.9 + 26, 0, 255),
                 arr[..., :3])
             buf = BytesIO()
             mime = j["images"][img_idx].get("mimeType", "image/webp")
