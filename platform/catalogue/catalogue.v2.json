@@ -20142,5 +20142,139 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "renault-captur-2025-v1",
+  "make": "renault",
+  "model": "captur",
+  "modelFamily": "captur",
+  "modelAliases": [
+   "captur"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": 2026,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2025 Renault Captur",
+  "sourceUrl": "https://sketchfab.com/3d-models/9f1c61486653471e94b7ec0bcb0f56a0",
+  "sourceCreator": null,
+  "sourceReferenceId": "9f1c61486653471e94b7ec0bcb0f56a0",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Shadow Grey Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-captur-2025-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-captur-2025-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/renault/renault-captur-2025-v1/shadow-grey-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3101440,
+  "mobileFileSizeBytes": 3101440,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T00:38:52Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2025 Renault Captur'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Shadow Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Shadow Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacier White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Diamond White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Diamond White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Iron Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Iron Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Flame Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Flame Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Valencia Orange",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Valencia Orange",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
