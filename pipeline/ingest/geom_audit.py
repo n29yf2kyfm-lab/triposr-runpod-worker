@@ -94,12 +94,18 @@ def verdict(geom, handler_audit=None, coverage=None):
         R.append(f"upside-down(glass_zf={gzf})")
     if tob > 1.20:
         R.append(f"wide-top/cage(tob={tob})")
-    if tob < 0.55:
+    if tob < 0.40:
         R.append(f"flipped/on-side(tob={tob})")
     if hl < 0.22:
         R.append(f"floorpan/wreck(h/l={hl})")
     if tob < 0.62 and hl > 0.50:
         R.append(f"doors-open(tob={tob},h/l={hl})")
+    # tob 0.40-0.55: a genuinely flipped/on-side car has a narrow top third, but so
+    # does an upright PICKUP (open bed, no rear roof) or convertible/targa. Don't
+    # hard-reject that zone — inversion is already caught by glass_zf<0.40 above and
+    # by the h/l floor; flag it for the human sheet instead of binning good trucks.
+    if not R and 0.40 <= tob < 0.55:
+        W.append(f"low-top(tob={tob})=pickup/convertible?")
     if not R and hl > 0.52:
         W.append(f"tall(h/l={hl})=van/estate?")
     return ("reject", R) if R else (("warn", W) if W else ("ok", []))
