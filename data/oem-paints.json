@@ -1961,6 +1961,62 @@
    "dvlaColour": "BLUE",
    "colourFamily": "Dark Blue",
    "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Suzuki",
+   "name": "Superior White",
+   "dvlaColour": "WHITE",
+   "colourFamily": "White",
+   "finish": "Solid"
+  },
+  {
+   "manufacturer": "Suzuki",
+   "name": "Silky Silver Metallic",
+   "dvlaColour": "SILVER",
+   "colourFamily": "Silver",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Suzuki",
+   "name": "Cosmic Black Pearl Metallic",
+   "dvlaColour": "BLACK",
+   "colourFamily": "Black",
+   "finish": "Pearl"
+  },
+  {
+   "manufacturer": "Suzuki",
+   "name": "Speedy Blue Metallic",
+   "dvlaColour": "BLUE",
+   "colourFamily": "Blue",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Suzuki",
+   "name": "Burning Red Pearl Metallic",
+   "dvlaColour": "RED",
+   "colourFamily": "Red",
+   "finish": "Pearl"
+  },
+  {
+   "manufacturer": "Suzuki",
+   "name": "Kinetic Yellow",
+   "dvlaColour": "YELLOW",
+   "colourFamily": "Yellow",
+   "finish": "Solid"
+  },
+  {
+   "manufacturer": "Suzuki",
+   "name": "Jungle Green",
+   "dvlaColour": "GREEN",
+   "colourFamily": "Green",
+   "finish": "Solid"
+  },
+  {
+   "manufacturer": "Suzuki",
+   "name": "Chestnut Brown Pearl",
+   "dvlaColour": "BROWN",
+   "colourFamily": "Brown",
+   "finish": "Pearl"
   }
  ]
 }
