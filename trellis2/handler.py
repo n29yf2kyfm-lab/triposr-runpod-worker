@@ -26,6 +26,7 @@ from trellis2.pipelines import Trellis2ImageTo3DPipeline
 import o_voxel
 from oem_paint import apply_oem_paint
 from wheel_swap import apply_wheel_swap
+from normal_detail import apply_panel_detail
 
 # TRELLIS.2 itself is image-to-3D only, so text-to-3D is a two-stage pipeline
 # owned by this worker:
@@ -397,6 +398,14 @@ def handler(job):
         paint_report = None
         if job_input.get("oem_paint"):
             paint_report = apply_oem_paint(persisted_path, job_input["oem_paint"])
+        # Panel detail: normal map derived from shut-line features in the
+        # baked texture so gaps read as grooves. Same default policy as wheels.
+        detail_report = None
+        pd = job_input.get("panel_detail")
+        if pd is None:
+            pd = (mode == "text")
+        if pd:
+            detail_report = apply_panel_detail(persisted_path, pd)
         # Wheel swap: overlay clean parametric OEM-style wheels (voxel-baked
         # rims are the worst-scoring feature). Default ON for generated cars,
         # opt-in for photo mode, opt-out with wheel_swap: false.
@@ -421,6 +430,7 @@ def handler(job):
             "glass": glass_enabled,
             "oem_paint": paint_report,
             "wheels": wheel_report,
+            "panel_detail": detail_report,
             "mode": mode,
             "message": "GLB generated successfully",
         }

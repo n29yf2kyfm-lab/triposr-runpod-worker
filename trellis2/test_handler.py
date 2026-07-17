@@ -370,6 +370,48 @@ try:
 except ImportError:
     print("  SKIP (numpy unavailable in this env)")
 
+# ---- Test 16: panel-detail normal map ----
+print("Test 16: panel detail (shut-line normal map)")
+try:
+    import numpy as np
+    from normal_detail import apply_panel_detail
+    import struct as _st
+
+    def make_tex_glb(path, img):
+        ibuf = io.BytesIO(); img.save(ibuf, "PNG"); png = ibuf.getvalue()
+        png += b"\x00" * ((4 - len(png) % 4) % 4)
+        jj = {"asset": {"version": "2.0"},
+              "materials": [{"pbrMetallicRoughness": {"baseColorTexture": {"index": 0}}}],
+              "textures": [{"source": 0}],
+              "images": [{"bufferView": 0, "mimeType": "image/png"}],
+              "bufferViews": [{"buffer": 0, "byteOffset": 0, "byteLength": len(png)}],
+              "buffers": [{"byteLength": len(png)}]}
+        nj = json.dumps(jj, separators=(",", ":")).encode()
+        nj += b" " * ((4 - len(nj) % 4) % 4)
+        open(path, "wb").write(
+            b"glTF" + _st.pack("<II", 2, 12 + 8 + len(nj) + 8 + len(png))
+            + _st.pack("<I", len(nj)) + b"JSON" + nj
+            + _st.pack("<I", len(png)) + b"BIN\x00" + png)
+
+    glb_n = f"{H.OUTPUT_DIR}/detail.glb"
+    body = Image.new("RGBA", (64, 64), (120, 140, 160, 255))
+    for x in range(64):  # two dark shut lines
+        body.putpixel((x, 20), (20, 22, 25, 255))
+        body.putpixel((x, 40), (20, 22, 25, 255))
+    make_tex_glb(glb_n, body)
+    rep = apply_panel_detail(glb_n, {"strength": 1.5})
+    check("detail applied on lined texture", bool(rep and rep.get("applied")))
+    d = open(glb_n, "rb").read()
+    ln_ = _st.unpack("<I", d[12:16])[0]; jx = json.loads(d[20:20 + ln_])
+    check("normalTexture attached", "normalTexture" in jx["materials"][0])
+    check("normal image appended", any(i.get("name") == "panel_normal" for i in jx["images"]))
+    check("second run refuses to stack", apply_panel_detail(glb_n, True) is None)
+    glb_f = f"{H.OUTPUT_DIR}/detail_flat.glb"
+    make_tex_glb(glb_f, Image.new("RGBA", (64, 64), (120, 140, 160, 255)))
+    check("flat texture skipped", apply_panel_detail(glb_f, True) is None)
+except ImportError:
+    print("  SKIP (numpy unavailable in this env)")
+
 print()
 print("RESULT:", f"{len(fails)} failures" if fails else "ALL TESTS PASSED")
 sys.exit(1 if fails else 0)
