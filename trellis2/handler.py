@@ -25,6 +25,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from trellis2.pipelines import Trellis2ImageTo3DPipeline
 import o_voxel
 from oem_paint import apply_oem_paint
+from wheel_swap import apply_wheel_swap
 
 # TRELLIS.2 itself is image-to-3D only, so text-to-3D is a two-stage pipeline
 # owned by this worker:
@@ -396,6 +397,18 @@ def handler(job):
         paint_report = None
         if job_input.get("oem_paint"):
             paint_report = apply_oem_paint(persisted_path, job_input["oem_paint"])
+        # Wheel swap: overlay clean parametric OEM-style wheels (voxel-baked
+        # rims are the worst-scoring feature). Default ON for generated cars,
+        # opt-in for photo mode, opt-out with wheel_swap: false.
+        wheel_report = None
+        ws = job_input.get("wheel_swap")
+        if ws is None:
+            ws = (mode == "text")
+        if ws:
+            if not isinstance(ws, dict):
+                make = (vehicle or {}).get("make", "") if isinstance(vehicle, dict) else ""
+                ws = {"style": make.lower() or prompt.lower()[:60]}
+            wheel_report = apply_wheel_swap(persisted_path, ws)
         glb_size = os.path.getsize(persisted_path)
         glb_url = upload_to_supabase(
             persisted_path, f"trellis2/{job_id}.glb", "model/gltf-binary")
@@ -407,6 +420,7 @@ def handler(job):
             "glb_size_bytes": glb_size,
             "glass": glass_enabled,
             "oem_paint": paint_report,
+            "wheels": wheel_report,
             "mode": mode,
             "message": "GLB generated successfully",
         }

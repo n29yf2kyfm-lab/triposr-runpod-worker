@@ -297,6 +297,79 @@ try:
 except ImportError:
     print("  SKIP (numpy unavailable in this env)")
 
+# ---- Test 15: wheel swap ----
+print("Test 15: wheel swap (detection + parametric overlay)")
+try:
+    import numpy as np  # wheel_swap needs real numpy
+    from wheel_swap import apply_wheel_swap, detect_wheels, _read_glb, _positions
+
+    def make_car_glb(path, wheel_r=0.075, rot_deg=25):
+        """Point-cloud car: box body + 4 wheel disks, rotated about Y."""
+        rs = np.random.RandomState(42)
+        pts = [np.stack([rs.uniform(-0.45, 0.45, 4000),
+                         rs.uniform(2 * wheel_r + 0.01, 0.34, 4000),
+                         rs.uniform(-0.17, 0.17, 4000)], 1)]
+        for wx in (-0.27, 0.27):
+            for wz in (-0.18, 0.18):
+                th = rs.uniform(0, 2 * np.pi, 900)
+                rr = wheel_r * np.sqrt(rs.uniform(0, 1, 900))
+                pts.append(np.stack([wx + rr * np.cos(th),
+                                     wheel_r + rr * np.sin(th),
+                                     wz + rs.uniform(-0.03, 0.03, 900)], 1))
+        V = np.concatenate(pts).astype(np.float32)
+        a = np.deg2rad(rot_deg)
+        R = np.array([[np.cos(a), 0, np.sin(a)], [0, 1, 0],
+                      [-np.sin(a), 0, np.cos(a)]], np.float32)
+        V = V @ R.T
+        F = np.arange((len(V) // 3) * 3, dtype=np.uint32)
+        pos, idx = V.tobytes(), F.tobytes()
+        bb = bytearray(pos + idx)
+        while len(bb) % 4:
+            bb.append(0)
+        import struct as _st
+        jj = {"asset": {"version": "2.0"}, "buffers": [{"byteLength": len(bb)}],
+              "bufferViews": [
+                  {"buffer": 0, "byteOffset": 0, "byteLength": len(pos)},
+                  {"buffer": 0, "byteOffset": len(pos), "byteLength": len(idx)}],
+              "accessors": [
+                  {"bufferView": 0, "componentType": 5126, "count": len(V),
+                   "type": "VEC3", "min": V.min(0).tolist(), "max": V.max(0).tolist()},
+                  {"bufferView": 1, "componentType": 5125, "count": len(F),
+                   "type": "SCALAR"}],
+              "materials": [{"pbrMetallicRoughness": {}}],
+              "meshes": [{"primitives": [{"attributes": {"POSITION": 0},
+                                          "indices": 1, "material": 0}]}],
+              "nodes": [{"mesh": 0}], "scenes": [{"nodes": [0]}], "scene": 0}
+        nj = json.dumps(jj, separators=(",", ":")).encode()
+        nj += b" " * ((4 - len(nj) % 4) % 4)
+        open(path, "wb").write(
+            b"glTF" + _st.pack("<II", 2, 12 + 8 + len(nj) + 8 + len(bb))
+            + _st.pack("<I", len(nj)) + b"JSON" + nj
+            + _st.pack("<I", len(bb)) + b"BIN\x00" + bytes(bb))
+
+    glb_c = f"{H.OUTPUT_DIR}/wheels.glb"
+    make_car_glb(glb_c)
+    jj0, _, bb0 = _read_glb(glb_c)
+    det = detect_wheels(_positions(jj0, bb0))
+    check("4 wheels detected on rotated car", det is not None and len(det["centers"]) == 4)
+    check("wheelbase plausible", det is not None and 0.45 < det["wheelbase"] < 0.65)
+    check("radius plausible", det is not None and 0.04 < det["radius"] < 0.11)
+    rep = apply_wheel_swap(glb_c, {"style": "audi"})
+    check("swap applied", bool(rep and rep.get("applied")))
+    jj1, _, bb1 = _read_glb(glb_c)
+    wn = [n for n in jj1["nodes"] if n.get("name") == "oem_wheel_node"]
+    check("4 wheel nodes appended", len(wn) == 4)
+    check("wheel materials appended", len(jj1["materials"]) == 4)
+    ok = all(bv.get("byteOffset", 0) + bv["byteLength"] <= len(bb1)
+             for bv in jj1["bufferViews"]) and jj1["buffers"][0]["byteLength"] == len(bb1)
+    check("binary chunk consistent", ok)
+    check("original mesh untouched", jj1["meshes"][0] == jj0["meshes"][0])
+    # negative control: a shapeless blob must be refused (GLB untouched)
+    blob = rs_v = np.random.RandomState(7).uniform(-0.4, 0.4, (3000, 3)).astype(np.float32)
+    check("no false positive on blob", detect_wheels(blob) is None)
+except ImportError:
+    print("  SKIP (numpy unavailable in this env)")
+
 print()
 print("RESULT:", f"{len(fails)} failures" if fails else "ALL TESTS PASSED")
 sys.exit(1 if fails else 0)
