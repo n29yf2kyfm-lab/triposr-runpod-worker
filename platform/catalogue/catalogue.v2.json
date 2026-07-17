@@ -6382,7 +6382,7 @@
   "accuracyGrade": "representative",
   "qualityGrade": "B",
   "technicalStatus": "pending",
-  "visualStatus": "pending",
+  "visualStatus": "passed",
   "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
@@ -6398,8 +6398,8 @@
    "Glass_Fabric",
    "Screen_Glow_Giulia"
   ],
-  "defaultColourFamily": "unknown",
-  "renderColourLabel": "Native (as-modelled)",
+  "defaultColourFamily": "red",
+  "renderColourLabel": "Alfa Red",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -6407,7 +6407,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/alfa-romeo/alfa-romeo-giulia-x-2016-2018-v1/alfa-red.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/alfa-romeo/giulia/native/manifest.json",
   "interiorUrl": null,
   "fileSizeBytes": 713728,
@@ -6423,7 +6423,67 @@
   "needsHumanReview": [
    "generation unconfirmed"
   ],
-  "notes": []
+  "notes": [],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Vesuvio Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vesuvio Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Vulcano Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vulcano Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alfa White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alfa White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Alfa Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alfa Red",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Competizione Red",
+     "hex": null,
+     "finish": "tri-coat",
+     "oemPaintName": "Competizione Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Misano Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Misano Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Montreal Green",
+     "hex": null,
+     "finish": "tri-coat",
+     "oemPaintName": "Montreal Green",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -6455,7 +6515,7 @@
   "accuracyGrade": "representative",
   "qualityGrade": "B",
   "technicalStatus": "pending",
-  "visualStatus": "pending",
+  "visualStatus": "passed",
   "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
@@ -6470,8 +6530,8 @@
   "glassMaterialNames": [
    "Intglass"
   ],
-  "defaultColourFamily": "unknown",
-  "renderColourLabel": "Native (as-modelled)",
+  "defaultColourFamily": "red",
+  "renderColourLabel": "Alfa Red",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -6479,7 +6539,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/stelvio.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/stelvio_uc.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/alfa-romeo/alfa-romeo-stelvio-x-2016-2018-v1/alfa-red.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/alfa-romeo/stelvio/native/manifest.json",
   "interiorUrl": null,
   "fileSizeBytes": 2158592,
@@ -8093,7 +8153,7 @@
   "accuracyGrade": "representative",
   "qualityGrade": "B",
   "technicalStatus": "pending",
-  "visualStatus": "pending",
+  "visualStatus": "passed",
   "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
@@ -8109,8 +8169,8 @@
    "Illuminated_Gauges",
    "Screen"
   ],
-  "defaultColourFamily": "unknown",
-  "renderColourLabel": "Native (as-modelled)",
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Magnetic Blue Metallic",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -8118,7 +8178,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/nissan/nissan-370z-x-2017-2019-v1/magnetic-blue-metallic.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/nissan/370z/native/manifest.json",
   "interiorUrl": null,
   "fileSizeBytes": 1129472,
@@ -8134,7 +8194,75 @@
   "needsHumanReview": [
    "generation unconfirmed"
   ],
-  "notes": []
+  "notes": [],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Gun Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Gun Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Ceramic Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Ceramic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Storm White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Storm White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Pearl Black",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Pearl Black",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Blade Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Blade Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Magnetic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fuji Sunset Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fuji Sunset Red",
+     "glbUrl": null
+    },
+    {
+     "family": "burgundy",
+     "label": "Burgundy Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Burgundy Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
