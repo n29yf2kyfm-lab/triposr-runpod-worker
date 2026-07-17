@@ -18,6 +18,7 @@ Orientation is NOT assumed: the ground-plane long axis comes from PCA, so a
 Input (handler): wheel_swap: true | {"style": "audi"} | false
 """
 import json
+import os
 import struct
 import sys
 
@@ -70,7 +71,59 @@ def _write_glb(path, j, jtype, bin_data):
                                  12 + 8 + len(nj) + 8 + len(bin_data))
            + struct.pack("<II", len(nj), jtype) + nj
            + struct.pack("<I", len(bin_data)) + b"BIN\x00" + bytes(bin_data))
-    open(path, "wb").write(out)
+    # atomic: a hard kill mid-write must not leave a truncated GLB behind
+    tmp = path + ".tmp"
+    open(tmp, "wb").write(out)
+    os.replace(tmp, path)
+
+
+def compact_glb(glb_path):
+    """Drop orphaned bufferView bytes. Every texture-writing stage appends a
+    re-encoded blob and repoints the image, stranding the old bytes — ~10MB
+    of dead weight per model after the full chain (review #8). Rebuilds the
+    BIN chunk keeping only views referenced by accessors/images and remaps
+    indices. Returns bytes saved, or None on any surprise (file untouched)."""
+    try:
+        j, jtype, bin_data = _read_glb(glb_path)
+        used = set()
+        for acc in j.get("accessors", []):
+            if "bufferView" in acc:
+                used.add(acc["bufferView"])
+        for img in j.get("images", []):
+            if "bufferView" in img:
+                used.add(img["bufferView"])
+        views = j.get("bufferViews", [])
+        if len(used) == len(views):
+            return 0
+        new_bin = bytearray()
+        remap = {}
+        new_views = []
+        for i, bv in enumerate(views):
+            if i not in used:
+                continue
+            while len(new_bin) % 4:
+                new_bin.append(0)
+            off, ln = bv.get("byteOffset", 0), bv["byteLength"]
+            nv = dict(bv)
+            nv["byteOffset"] = len(new_bin)
+            new_bin.extend(bin_data[off:off + ln])
+            remap[i] = len(new_views)
+            new_views.append(nv)
+        j["bufferViews"] = new_views
+        for acc in j.get("accessors", []):
+            if "bufferView" in acc:
+                acc["bufferView"] = remap[acc["bufferView"]]
+        for img in j.get("images", []):
+            if "bufferView" in img:
+                img["bufferView"] = remap[img["bufferView"]]
+        saved = len(bin_data) - len(new_bin)
+        _write_glb(glb_path, j, jtype, new_bin)
+        print(f"compact_glb: dropped {saved} orphaned bytes "
+              f"({len(views) - len(new_views)} views)", file=sys.stderr)
+        return saved
+    except Exception as e:
+        print(f"compact_glb skipped: {e}", file=sys.stderr)
+        return None
 
 
 def _positions(j, bin_data):

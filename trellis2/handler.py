@@ -154,8 +154,17 @@ def finalize_glass(glb_path):
         if frac > 0.25:
             # windows are a small share of a car's surface; body-wide
             # translucency means bad segmentation, not glass — forcing BLEND
-            # would ghost the whole model (live-confirmed failure mode)
-            print("glass check: translucency too widespread, keeping OPAQUE",
+            # would ghost the whole model (live-confirmed failure mode).
+            # The vendored o-voxel exporter has no upper bound and may have
+            # already written BLEND, so actively force OPAQUE (review #2).
+            changed = False
+            for m in mats:
+                if m.get("alphaMode", "OPAQUE") != "OPAQUE":
+                    m["alphaMode"] = "OPAQUE"
+                    changed = True
+            if changed:
+                _write_glb(glb_path, j, jtype, bin_data)
+            print("glass check: translucency too widespread, forcing OPAQUE",
                   file=sys.stderr)
             return False
         # interior-reveal boost on the translucent band only
@@ -257,9 +266,11 @@ def build_vehicle_prompt(vehicle):
     return f"a {identity}, " + ", ".join(details) + ", factory-accurate proportions and design"
 
 
-def text_to_image(prompt, seed, steps=None, guidance=None):
+def text_to_image(prompt, seed, steps=None, guidance=None, is_vehicle=True):
     """Stage 1 of text-to-3D: render the prompt to a single-object image."""
     pipe = get_t2i_pipeline()
+    suffix = T2I_PROMPT_SUFFIX if is_vehicle else \
+        T2I_PROMPT_SUFFIX.replace("vehicle", "object")
     name = T2I_MODEL.lower()
     is_lightning = "lightning" in name
     is_turbo = "turbo" in name or "schnell" in name
@@ -271,7 +282,7 @@ def text_to_image(prompt, seed, steps=None, guidance=None):
         guidance = 1.5 if is_lightning else (0.0 if is_turbo else 7.0)
     generator = torch.Generator("cuda").manual_seed(seed)
     result = pipe(
-        prompt=prompt + T2I_PROMPT_SUFFIX,
+        prompt=prompt + suffix,
         negative_prompt=T2I_NEGATIVE_PROMPT if guidance > 1.0 else None,
         num_inference_steps=steps,
         guidance_scale=guidance,
@@ -294,9 +305,10 @@ def fetch_image(image_url):
 
 
 def vehicle_slug(vehicle):
-    """Canonical registry key for a vehicle spec: make-model-year-trim."""
+    """Canonical registry key for a vehicle spec. Colour is part of the key —
+    without it a red request silently reused a blue reference (review #5)."""
     parts = [str(vehicle.get(k, "")).strip().lower()
-             for k in ("make", "model", "year", "trim")]
+             for k in ("make", "model", "year", "trim", "color", "colour")]
     slug = "-".join(p for p in parts if p)
     return "".join(c if c.isalnum() or c == "-" else "-" for c in slug) or None
 
@@ -344,6 +356,9 @@ def handler(job):
     vehicle = job_input.get("vehicle")
     image_url = job_input.get("image_url", "")
     image_b64 = job_input.get("image_b64", "")
+    if vehicle is not None and not isinstance(vehicle, dict):
+        return {"error": "vehicle must be an object, e.g. "
+                         '{"make": "BMW", "model": "X5", "year": 2020}'}
     # A structured vehicle spec takes precedence over a free-text prompt.
     if vehicle:
         prompt = build_vehicle_prompt(vehicle)
@@ -366,6 +381,8 @@ def handler(job):
     texture_size = max(512, min(texture_size, 4096))
     if t2i_steps is not None:
         t2i_steps = max(1, min(t2i_steps, 100))
+    if t2i_guidance is not None:
+        t2i_guidance = max(0.0, min(t2i_guidance, 30.0))
     # geometry detail tier — TRELLIS.2's pipeline_type ('1536_cascade' is the
     # premium setting: highest-res geometry, slower, more VRAM)
     pipeline_type = job_input.get("pipeline_type")
@@ -403,8 +420,20 @@ def handler(job):
                     img, reference_url = hit
                     mode = "reference"
             if img is None:
+                # vehicle scaffolding only when the request is a vehicle —
+                # a plain "a mug" prompt got "exactly one single vehicle"
+                # appended before (review #12)
+                veh_words = ("car", "vehicle", "van", "truck", "suv", "coupe",
+                             "saloon", "sedan", "hatchback", "estate", "4x4",
+                             "motorbike", "motorcycle", "bus", "pickup")
+                is_veh = bool(vehicle) or any(
+                    w in prompt.lower() for w in veh_words) or any(
+                    m in prompt.lower() for m in
+                    ("bmw", "audi", "volkswagen", "mercedes", "land rover",
+                     "ford", "toyota", "golf", "defender", "porsche"))
                 with torch.no_grad():
-                    img = text_to_image(prompt, seed, t2i_steps, t2i_guidance)
+                    img = text_to_image(prompt, seed, t2i_steps, t2i_guidance,
+                                        is_vehicle=is_veh)
                 mode = "text"
                 if slug and ref_mode in ("use", "refresh"):
                     # store as the vehicle's reference for future requests
@@ -473,6 +502,10 @@ def handler(job):
         if pol is None:
             pol = (mode in ("text", "reference"))
         if pol:
+            # the dark-plastic gloss pass would overwrite an OEM paint
+            # finish (matte/dark colours) — disable it when paint ran
+            if paint_report:
+                pol = {**(pol if isinstance(pol, dict) else {}), "gloss": False}
             polish_report = apply_polish(persisted_path, pol)
         # Panel detail: normal map derived from shut-line features in the
         # baked texture so gaps read as grooves. Same default policy as wheels.
@@ -494,6 +527,10 @@ def handler(job):
                 make = (vehicle or {}).get("make", "") if isinstance(vehicle, dict) else ""
                 ws = {"style": make.lower() or prompt.lower()[:60]}
             wheel_report = apply_wheel_swap(persisted_path, ws)
+        # drop the orphaned bytes the texture-writing stages left behind
+        # (~10MB/model otherwise — review #8)
+        from wheel_swap import compact_glb
+        compact_glb(persisted_path)
         glb_size = os.path.getsize(persisted_path)
         glb_url = upload_to_supabase(
             persisted_path, f"trellis2/{job_id}.glb", "model/gltf-binary")
@@ -517,6 +554,14 @@ def handler(job):
         if glb_size <= MAX_INLINE_BYTES:
             with open(persisted_path, "rb") as f:
                 result["glb_b64"] = base64.b64encode(f.read()).decode("utf-8")
+        elif not glb_url:
+            # no upload channel and too big to inline: the caller cannot
+            # retrieve this model — say so loudly instead of "success"
+            result["warning"] = (
+                "GLB too large to inline and Supabase delivery is not "
+                "configured (SUPABASE_URL/KEY/BUCKET) — the model is only "
+                "on the worker volume at glb_path and will be lost when "
+                "the worker recycles.")
 
         if generated_image_b64:
             # persist the intermediate image next to the GLB — RunPod job

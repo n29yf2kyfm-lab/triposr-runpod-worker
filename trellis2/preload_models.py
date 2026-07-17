@@ -44,6 +44,9 @@ MODELS = [
      ["ckpts/ss_dec_conv3d_16l8_fp16*", "pipeline.json"], None, False),
     ("facebook/dinov3-vitl16-pretrain-lvd1689m", None, None, True),
     ("briaai/RMBG-2.0", None, ["*.onnx*"], True),
+    # production sets REMBG_MODEL=ZhengPeng7/BiRefNet (RMBG-2.0 is gated and
+    # 403s even with a token — live-confirmed); OFFLINE=1 needs it cached too
+    ("ZhengPeng7/BiRefNet", None, ["*.onnx*"], False),
     # fp16-friendly subset; skip the giant fp32 .bin duplicates.
     (T2I_MODEL, None, ["*.bin", "*.onnx*", "*.ckpt"], False),
 ]

@@ -188,7 +188,9 @@ def apply_oem_paint(glb_path, spec):
                    + struct.pack("<I", 12 + 8 + len(nj) + 8 + len(bin_data))
                    + struct.pack("<II", len(nj), jtype) + nj
                    + struct.pack("<I", len(bin_data)) + b"BIN\x00" + bytes(bin_data))
-        open(glb_path, "wb").write(out_glb)
+        tmp = glb_path + ".tmp"
+        open(tmp, "wb").write(out_glb)
+        os.replace(tmp, glb_path)
         print(f"oem_paint: applied #{spec.get('hex') or spec.get('name')} "
               f"({finish}) over {frac:.1%} of texture", file=sys.stderr)
         return {"applied": True, "finish": finish, "coverage": round(frac, 4)}

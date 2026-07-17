@@ -11,7 +11,7 @@ No TANGENT attribute is added: three.js and Blender both derive tangents in
 the shader/importer when a normal map is present (glTF spec fallback).
 
 Input (handler): panel_detail: true (default for generated cars) | false
-                 or {"strength": 0.5..2.0}
+                 or {"strength": 0.2..3.0}
 """
 import json
 import struct

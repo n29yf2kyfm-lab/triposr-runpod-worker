@@ -508,6 +508,79 @@ with mock.patch.object(H.requests, "get", return_value=fake_hit), \
 check("reference off -> no cache use",
       r3.get("mode") == "text" and r3.get("reference_url") is None)
 
+# ---- Test 19: review-fix regressions ----
+print("Test 19: adversarial-review fixes")
+# 19a: Dockerfile must COPY every local module handler imports at top level
+_here = os.path.dirname(os.path.abspath(__file__))
+_dockerfile = open(os.path.join(_here, "Dockerfile")).read()
+_local_mods = []
+for line in open(os.path.join(_here, "handler.py")):
+    m = line.strip()
+    if m.startswith("from ") and " import " in m:
+        mod = m.split()[1].split(".")[0]
+        if os.path.exists(os.path.join(_here, mod + ".py")):
+            _local_mods.append(mod)
+missing = [m for m in set(_local_mods) if (m + ".py") not in _dockerfile]
+check("Dockerfile copies all handler imports", not missing,
+      f"missing: {missing}")
+
+try:
+    import numpy as np
+    from wheel_swap import _read_glb as _rg19, _write_glb as _wg19, compact_glb
+
+    # 19b: glass ceiling actively forces OPAQUE on an exporter-set BLEND
+    glb_c19 = f"{H.OUTPUT_DIR}/ceiling_blend.glb"
+    make_glb(glb_c19, 100)  # 100% translucent = bad segmentation
+    j19, t19, b19 = _rg19(glb_c19)
+    j19["materials"][0]["alphaMode"] = "BLEND"
+    _wg19(glb_c19, j19, t19, b19)
+    r19 = H.finalize_glass(glb_c19)
+    check("ceiling forces OPAQUE over exporter BLEND",
+          r19 is False and read_alpha_mode(glb_c19) == "OPAQUE")
+
+    # 19c: compaction drops orphaned bufferViews and keeps the file valid
+    glb_o19 = f"{H.OUTPUT_DIR}/orphan.glb"
+    make_glb(glb_o19, 255)
+    j19, t19, b19 = _rg19(glb_o19)
+    b19 = bytearray(b19)
+    blob = b"\x00" * 5000
+    start = len(b19); b19.extend(blob)
+    j19["bufferViews"].append({"buffer": 0, "byteOffset": start,
+                               "byteLength": len(blob)})
+    # repoint the image to the new view -> its old view becomes an orphan...
+    old_bv = j19["images"][0]["bufferView"]
+    px = b19[j19["bufferViews"][old_bv].get("byteOffset", 0):
+             j19["bufferViews"][old_bv].get("byteOffset", 0)
+             + j19["bufferViews"][old_bv]["byteLength"]]
+    b19[start:start + len(px)] = px  # keep it a decodable image
+    j19["bufferViews"][-1]["byteLength"] = len(px)
+    j19["images"][0]["bufferView"] = len(j19["bufferViews"]) - 1
+    _wg19(glb_o19, j19, t19, b19)
+    size_before = os.path.getsize(glb_o19)
+    saved = compact_glb(glb_o19)
+    check("compaction saves bytes", bool(saved) and saved > 0
+          and os.path.getsize(glb_o19) < size_before)
+    j19b, _, b19b = _rg19(glb_o19)
+    ok19 = all(bv.get("byteOffset", 0) + bv["byteLength"] <= len(b19b)
+               for bv in j19b["bufferViews"])
+    check("compacted GLB structurally valid", ok19)
+    check("compaction idempotent", compact_glb(glb_o19) == 0)
+except ImportError:
+    print("  SKIP numpy-dependent 19b-c")
+
+# 19d: colour is part of the reference slug
+check("slug includes colour", H.vehicle_slug(
+    {"make": "VW", "model": "Golf", "year": 2021, "color": "Dolphin Blue"})
+    == "vw-golf-2021-dolphin-blue")
+# 19e: non-dict vehicle is a clean error, not a crash
+r19e = H.handler({"id": "t19e", "input": {"vehicle": "2020 BMW X5"}})
+check("string vehicle -> clean error", "error" in r19e)
+# 19f: t2i_guidance clamped
+r19f = H.handler({"id": "t19f", "input": {"prompt": "a car",
+                                          "t2i_guidance": 1e9}})
+check("huge guidance clamped (no crash)", r19f.get("status") == "success"
+      or "error" not in r19f)
+
 print()
 print("RESULT:", f"{len(fails)} failures" if fails else "ALL TESTS PASSED")
 sys.exit(1 if fails else 0)

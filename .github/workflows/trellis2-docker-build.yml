@@ -38,6 +38,23 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # Production tags only from main: a workflow_dispatch on a feature
+      # branch must not overwrite the deployed :trellis2-latest/-v1 tags.
+      - name: Compute tags
+        id: tags
+        run: |
+          TAGS="alamk123/ai-mechanic:trellis2-${{ github.sha }}"
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            TAGS="$TAGS
+          alamk123/ai-mechanic:trellis2-v1
+          alamk123/ai-mechanic:trellis2-latest"
+          fi
+          {
+            echo "tags<<EOF"
+            echo "$TAGS"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Build and Push
         uses: docker/build-push-action@v5
         with:
@@ -46,9 +63,6 @@ jobs:
           # SHA-based tag alongside :trellis2-latest so RunPod is forced to pull
           # fresh content instead of reusing a cached image for a tag it has
           # already seen (same stale-worker workaround as the v1 build).
-          tags: |
-            alamk123/ai-mechanic:trellis2-v1
-            alamk123/ai-mechanic:trellis2-latest
-            alamk123/ai-mechanic:trellis2-${{ github.sha }}
+          tags: ${{ steps.tags.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

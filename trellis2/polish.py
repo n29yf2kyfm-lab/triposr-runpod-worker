@@ -215,7 +215,7 @@ def smooth_normals(j, bin_data, iters=2, pos_iters=6,
     return smoothed_frac
 
 
-def polish_texture(j, bin_data, sharpen=1.0):
+def polish_texture(j, bin_data, sharpen=1.0, gloss=True):
     """Unsharp-mask + chroma smoothing on baseColor, plus a gloss pass on
     dark plastics (lamp lenses, diffuser, trim read as one matte blob
     otherwise). Returns {"basecolor": (img_i, bytes), "mr": ... or None}."""
@@ -259,7 +259,10 @@ def polish_texture(j, bin_data, sharpen=1.0):
     # gloss on dark plastics: lamps/diffuser/trim are matte in the bake.
     # Low roughness there gives lenses their glint and separates trim
     # pieces by their reflections.
-    mr_ref = pbr.get("metallicRoughnessTexture")
+    # skipped when an OEM paint finish was applied: the luminance-only mask
+    # can't tell dark paint from dark plastic and glossed over matte/black
+    # body colours (review #4)
+    mr_ref = pbr.get("metallicRoughnessTexture") if gloss else None
     if mr_ref is not None:
         arr = out.astype(np.float64)
         lum = arr[..., :3].mean(-1)
@@ -287,7 +290,7 @@ def polish_texture(j, bin_data, sharpen=1.0):
 def apply_polish(glb_path, spec=True):
     """Sharpen + flatten a generated GLB in place. Returns report or None."""
     try:
-        sharpen, iters, flatten = 1.0, 2, 6
+        sharpen, iters, flatten, gloss = 1.0, 2, 6, True
         cell_frac, lim_frac = 0.025, 0.006
         if isinstance(spec, dict):
             sharpen = float(np.clip(spec.get("sharpen", 1.0), 0.2, 2.0))
@@ -295,11 +298,12 @@ def apply_polish(glb_path, spec=True):
             flatten = int(np.clip(spec.get("flatten_iters", 6), 0, 12))
             cell_frac = float(np.clip(spec.get("flatten_cell", 0.025), 0.01, 0.06))
             lim_frac = float(np.clip(spec.get("flatten_limit", 0.006), 0.0, 0.02))
+            gloss = bool(spec.get("gloss", True))
 
         j, jtype, bin_data = _read_glb(glb_path)
         frac = (smooth_normals(j, bin_data, iters, flatten, cell_frac, lim_frac)
                 if (iters or flatten) else None)
-        tex = polish_texture(j, bin_data, sharpen)
+        tex = polish_texture(j, bin_data, sharpen, gloss)
         if frac is None and tex is None:
             return None
         if tex is not None:

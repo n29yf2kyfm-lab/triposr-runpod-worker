@@ -125,6 +125,9 @@ ENV PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
 COPY preload_models.py /app/preload_models.py
 COPY handler.py /app/handler.py
+# post-processing stages imported at handler top level — the image is a
+# crash-loop without them (review finding: ModuleNotFoundError on boot)
+COPY oem_paint.py wheel_swap.py normal_detail.py polish.py /app/
 
 # Optional: bake ALL model weights into the image for fully-offline operation
 # (no network volume, no internet at runtime — pair with OFFLINE=1 on the

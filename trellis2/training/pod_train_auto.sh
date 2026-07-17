@@ -36,7 +36,7 @@ git clone -q --depth 1 https://github.com/huggingface/diffusers /tmp/diffusers |
 accelerate launch --mixed_precision fp16 \
   /tmp/diffusers/examples/text_to_image/train_text_to_image_lora_sdxl.py \
   --pretrained_model_name_or_path "$BASE" \
-  --train_data_dir "$DATA/img" --caption_column text --image_column file_name \
+  --train_data_dir "$DATA/img" --caption_column text --image_column image \
   --resolution 1024 --random_flip \
   --train_batch_size 2 --gradient_accumulation_steps 4 \
   --max_train_steps 3000 --checkpointing_steps 1000 \
