@@ -2017,6 +2017,62 @@
    "dvlaColour": "BROWN",
    "colourFamily": "Brown",
    "finish": "Pearl"
+  },
+  {
+   "manufacturer": "Dacia",
+   "name": "Glacier White",
+   "dvlaColour": "WHITE",
+   "colourFamily": "White",
+   "finish": "Solid"
+  },
+  {
+   "manufacturer": "Dacia",
+   "name": "Pearl Black",
+   "dvlaColour": "BLACK",
+   "colourFamily": "Black",
+   "finish": "Pearl"
+  },
+  {
+   "manufacturer": "Dacia",
+   "name": "Comet Grey",
+   "dvlaColour": "GREY",
+   "colourFamily": "Gunmetal Grey",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Dacia",
+   "name": "Highland Grey",
+   "dvlaColour": "GREY",
+   "colourFamily": "Light Grey",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Dacia",
+   "name": "Iron Blue",
+   "dvlaColour": "BLUE",
+   "colourFamily": "Blue",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Dacia",
+   "name": "Fusion Red",
+   "dvlaColour": "RED",
+   "colourFamily": "Red",
+   "finish": "Metallic"
+  },
+  {
+   "manufacturer": "Dacia",
+   "name": "Arizona Orange",
+   "dvlaColour": "ORANGE",
+   "colourFamily": "Orange",
+   "finish": "Solid"
+  },
+  {
+   "manufacturer": "Dacia",
+   "name": "Lichen Khaki",
+   "dvlaColour": "GREEN",
+   "colourFamily": "Green",
+   "finish": "Solid"
   }
  ]
 }
