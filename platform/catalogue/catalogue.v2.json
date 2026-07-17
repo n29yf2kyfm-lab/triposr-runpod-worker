@@ -9461,7 +9461,7 @@
   "accuracyGrade": "representative",
   "qualityGrade": "B",
   "technicalStatus": "pending",
-  "visualStatus": "pending",
+  "visualStatus": "passed",
   "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
@@ -9486,8 +9486,8 @@
    "Meshesmeshes1windscreenok0041Mtl",
    "Meshesmeshes1windscreenok1Mtl"
   ],
-  "defaultColourFamily": "unknown",
-  "renderColourLabel": "Native (as-modelled)",
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Dark Sapphire",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -9495,7 +9495,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bentley/bentley-continental-x-undated-v1/dark-sapphire.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bentley/continental/native/manifest.json",
   "interiorUrl": null,
   "fileSizeBytes": 1047552,
@@ -9512,7 +9512,67 @@
    "generation unconfirmed",
    "year range unknown"
   ],
-  "notes": []
+  "notes": [],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Meteor",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteor",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Beluga",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Beluga",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacier White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moonbeam",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moonbeam",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Dark Sapphire",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dark Sapphire",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Dragon Red II",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dragon Red II",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -11697,7 +11757,7 @@
   "accuracyGrade": "representative",
   "qualityGrade": "B",
   "technicalStatus": "pending",
-  "visualStatus": "pending",
+  "visualStatus": "passed",
   "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
@@ -11710,8 +11770,8 @@
    "BMW_E30_M3_PAINT"
   ],
   "glassMaterialNames": [],
-  "defaultColourFamily": "unknown",
-  "renderColourLabel": "Native (as-modelled)",
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Portimao Blue Metallic",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -11719,7 +11779,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m3_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m3_uc.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-m3-e30-undated-v1/portimao-blue-metallic.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/m3/native/manifest.json",
   "interiorUrl": null,
   "fileSizeBytes": 1201152,
@@ -11735,7 +11795,75 @@
   "needsHumanReview": [
    "year range unknown"
   ],
-  "notes": []
+  "notes": [],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
