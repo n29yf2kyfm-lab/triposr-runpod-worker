@@ -1,0 +1,27 @@
+{
+  "comment": "Target vehicles for LoRA v1 - from the app's live vehicles table (UK car park distribution) plus generation-accuracy problem cases seen in production.",
+  "search_terms": [
+    "Audi A1 2019", "Audi A3 2020 sportback", "Audi A3 2015", "Audi A6 2018", "Audi Q7 2024", "Audi Q7 2016",
+    "BMW 3 Series 2020 G20", "BMW 5 Series 2024 G60", "BMW X5 2023 G05", "BMW 1 Series 2020",
+    "Volkswagen Golf 8 2021", "Volkswagen Golf 7 2015", "Volkswagen Passat 2019", "Volkswagen T-Roc 2022", "Volkswagen Polo 2021",
+    "Land Rover Defender 110 2022 L663", "Land Rover Discovery Sport 2018", "Range Rover Sport 2023 L461",
+    "Ford Fiesta 2018", "Ford Kuga 2021", "Ford Ranger 2023", "Ford Puma 2021", "Ford Focus 2019",
+    "Mercedes-Benz A-Class 2019 W177", "Mercedes-Benz C-Class 2022 W206", "Mercedes-Benz CLA 2020",
+    "Toyota Yaris 2021", "Toyota Corolla 2020", "Toyota RAV4 2021",
+    "Nissan Qashqai 2022 J12", "Nissan Juke 2021",
+    "Hyundai Tucson 2021 NX4", "Hyundai i30 2019",
+    "Kia Sportage 2022", "Kia Picanto 2020",
+    "Peugeot 208 2020", "Peugeot 3008 2021",
+    "Vauxhall Corsa 2020", "Vauxhall Astra 2022", "Vauxhall Mokka 2021",
+    "SEAT Leon 2021", "SEAT Arona 2022",
+    "Skoda Octavia 2021", "Skoda Kodiaq 2022",
+    "MINI Cooper 2021 F56", "MINI Countryman 2021",
+    "Porsche Macan 2022", "Porsche Cayenne 2020",
+    "Tesla Model 3 2021", "Tesla Model Y 2022",
+    "Volvo XC60 2021", "Volvo V90 2019",
+    "Mazda MX-5 ND 2019", "Mazda CX-5 2021",
+    "Fiat 500 2021", "BYD Seal U 2024"
+  ],
+  "images_per_term": 20,
+  "min_width": 900
+}
