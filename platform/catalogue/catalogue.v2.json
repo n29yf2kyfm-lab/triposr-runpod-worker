@@ -20000,5 +20000,147 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "vauxhall-mokka-2021-v1",
+  "make": "vauxhall",
+  "model": "mokka",
+  "modelFamily": "mokka",
+  "modelAliases": [
+   "mokka"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": 2026,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Vauxhall Mokka 2021",
+  "sourceUrl": "https://sketchfab.com/3d-models/08f890ceffe944ddbcba5e77af683dc0",
+  "sourceCreator": null,
+  "sourceReferenceId": "08f890ceffe944ddbcba5e77af683dc0",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Graphic Grey",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-mokka-2021-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-mokka-2021-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/vauxhall/vauxhall-mokka-2021-v1/graphic-grey.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3417776,
+  "mobileFileSizeBytes": 3417776,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-17T00:36:24Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: 'Vauxhall Mokka 2021'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
