@@ -2328,7 +2328,7 @@
   "accuracyGrade": "representative",
   "qualityGrade": "B",
   "technicalStatus": "pending",
-  "visualStatus": "pending",
+  "visualStatus": "passed",
   "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
@@ -2346,8 +2346,8 @@
    "Mesheschassis0301_diff"
   ],
   "glassMaterialNames": [],
-  "defaultColourFamily": "unknown",
-  "renderColourLabel": "Native (as-modelled)",
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Spectral Blue Metallic",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -2355,7 +2355,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mercedes-benz/mercedes-benz-e-class-w213-undated-v1/spectral-blue-metallic.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/e-class/native/manifest.json",
   "interiorUrl": null,
   "fileSizeBytes": 1532928,
@@ -2371,7 +2371,75 @@
   "needsHumanReview": [
    "year range unknown"
   ],
-  "notes": []
+  "notes": [],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -7674,7 +7742,7 @@
   "accuracyGrade": "representative",
   "qualityGrade": "B",
   "technicalStatus": "pending",
-  "visualStatus": "pending",
+  "visualStatus": "passed",
   "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
@@ -7687,8 +7755,8 @@
    "chassis.1"
   ],
   "glassMaterialNames": [],
-  "defaultColourFamily": "unknown",
-  "renderColourLabel": "Native (as-modelled)",
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Atlantic Blue Metallic",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -7696,7 +7764,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-touran-x-2009-2011-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/touran/native/manifest.json",
   "interiorUrl": null,
   "fileSizeBytes": 939008,
@@ -7712,7 +7780,75 @@
   "needsHumanReview": [
    "generation unconfirmed"
   ],
-  "notes": []
+  "notes": [],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Uranium Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Uranium Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Dolphin Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dolphin Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Moonstone Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Moonstone Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Deep Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Deep Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Reflex Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Reflex Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Atlantic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Atlantic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lapiz Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lapiz Blue Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -9113,7 +9249,7 @@
   "accuracyGrade": "representative",
   "qualityGrade": "B",
   "technicalStatus": "pending",
-  "visualStatus": "pending",
+  "visualStatus": "passed",
   "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
@@ -9129,8 +9265,8 @@
   "glassMaterialNames": [
    "wrxM_LightGlassNormal_Clear_Low1"
   ],
-  "defaultColourFamily": "unknown",
-  "renderColourLabel": "Native (as-modelled)",
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "WR Blue Pearl",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -9138,7 +9274,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/impreza_uc.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/subaru/subaru-impreza-x-2010-2012-v1/wr-blue-pearl.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/subaru/impreza/native/manifest.json",
   "interiorUrl": null,
   "fileSizeBytes": 925696,
@@ -9672,7 +9808,7 @@
   "accuracyGrade": "representative",
   "qualityGrade": "B",
   "technicalStatus": "pending",
-  "visualStatus": "pending",
+  "visualStatus": "passed",
   "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
@@ -9687,8 +9823,8 @@
   "glassMaterialNames": [
    "Screen"
   ],
-  "defaultColourFamily": "unknown",
-  "renderColourLabel": "Native (as-modelled)",
+  "defaultColourFamily": "green",
+  "renderColourLabel": "Aston Martin Racing Green",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -9696,7 +9832,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/aston-martin/db11_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/aston-martin/db11_uc.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/aston-martin/aston-martin-db11-x-2016-2018-v1/aston-martin-racing-green.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/aston-martin/db11/native/manifest.json",
   "interiorUrl": null,
   "fileSizeBytes": 1326080,
@@ -9712,7 +9848,75 @@
   "needsHumanReview": [
    "generation unconfirmed"
   ],
-  "notes": []
+  "notes": [],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "green",
+     "label": "Aston Martin Racing Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Aston Martin Racing Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Zaffre Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Zaffre Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Hyper Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hyper Red",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Lightning Silver",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lightning Silver",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Jet Black",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Morning Frost White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Morning Frost White",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "China Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "China Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -9744,7 +9948,7 @@
   "accuracyGrade": "representative",
   "qualityGrade": "B",
   "technicalStatus": "pending",
-  "visualStatus": "pending",
+  "visualStatus": "passed",
   "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
@@ -9759,8 +9963,8 @@
   "glassMaterialNames": [
    "glass"
   ],
-  "defaultColourFamily": "unknown",
-  "renderColourLabel": "Native (as-modelled)",
+  "defaultColourFamily": "green",
+  "renderColourLabel": "Verde Mantis",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -9768,7 +9972,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lamborghini/urus_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lamborghini/urus_uc.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/lamborghini/lamborghini-urus-x-2017-2019-v1/verde-mantis.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/lamborghini/urus/native/manifest.json",
   "interiorUrl": null,
   "fileSizeBytes": 686080,
@@ -9784,7 +9988,75 @@
   "needsHumanReview": [
    "generation unconfirmed"
   ],
-  "notes": []
+  "notes": [],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Grigio Telesto",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Grigio Telesto",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nero Noctis",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nero Noctis",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianco Monocerus",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianco Monocerus",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Verde Mantis",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Verde Mantis",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Arancio Borealis",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Arancio Borealis",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Giallo Inti",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Giallo Inti",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Blu Cepheus",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Blu Cepheus",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Viola Pasifae",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Viola Pasifae",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -11963,7 +12235,7 @@
   "accuracyGrade": "representative",
   "qualityGrade": "B",
   "technicalStatus": "pending",
-  "visualStatus": "pending",
+  "visualStatus": "passed",
   "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
@@ -11981,8 +12253,8 @@
    "EXt_GLASS",
    "redg"
   ],
-  "defaultColourFamily": "unknown",
-  "renderColourLabel": "Native (as-modelled)",
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Portimao Blue Metallic",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -11990,7 +12262,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/m5.glb",
   "mobileGlbUrl": null,
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-m5-f90-undated-v1/portimao-blue-metallic.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/m5/native/manifest.json",
   "interiorUrl": null,
   "fileSizeBytes": 3425280,
@@ -12022,43 +12294,11 @@
      "glbUrl": null
     },
     {
-     "family": "grey",
-     "label": "Skyscraper Grey Metallic",
-     "hex": null,
-     "finish": "metallic",
-     "oemPaintName": "Skyscraper Grey Metallic",
-     "glbUrl": null
-    },
-    {
-     "family": "gunmetal",
-     "label": "Dravit Grey Metallic",
-     "hex": null,
-     "finish": "metallic",
-     "oemPaintName": "Dravit Grey Metallic",
-     "glbUrl": null
-    },
-    {
-     "family": "grey",
-     "label": "Mineral Grey Metallic",
-     "hex": null,
-     "finish": "metallic",
-     "oemPaintName": "Mineral Grey Metallic",
-     "glbUrl": null
-    },
-    {
      "family": "black",
      "label": "Black Sapphire Metallic",
      "hex": null,
      "finish": "metallic",
      "oemPaintName": "Black Sapphire Metallic",
-     "glbUrl": null
-    },
-    {
-     "family": "black",
-     "label": "Carbon Black Metallic",
-     "hex": null,
-     "finish": "metallic",
-     "oemPaintName": "Carbon Black Metallic",
      "glbUrl": null
     },
     {
@@ -12070,11 +12310,43 @@
      "glbUrl": null
     },
     {
-     "family": "white",
-     "label": "Mineral White Metallic",
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
      "hex": null,
      "finish": "metallic",
-     "oemPaintName": "Mineral White Metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
      "glbUrl": null
     }
    ]
