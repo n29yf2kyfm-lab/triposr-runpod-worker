@@ -12,7 +12,30 @@ import requests
 from PIL import Image
 
 API = "https://commons.wikimedia.org/w/api.php"
-UA = {"User-Agent": "ExpertCarCheck-LoRA-dataset/1.0 (training data collection)"}
+# Wikimedia UA policy: descriptive agent + contact. Downloads without this
+# (or from rate-limited datacenter IPs) get HTML error pages, which the
+# v6 run decoded as "cannot identify image file" x hundreds -> 2 images.
+UA = {"User-Agent": "ExpertCarCheckDatasetBot/1.1 "
+                    "(https://github.com/n29yf2kyfm-lab/triposr-runpod-worker; "
+                    "contact: ddmrnnnjc6@privaterelay.appleid.com) requests"}
+
+
+def dl_image(url):
+    """Download with status/content-type checks and 429-aware backoff."""
+    for attempt in range(4):
+        try:
+            r = requests.get(url, headers=UA, timeout=60)
+        except Exception as e:
+            print(f"  http error {e}; retry")
+            time.sleep(3 * (attempt + 1))
+            continue
+        ct = r.headers.get("content-type", "")
+        if r.status_code == 200 and ct.startswith("image/"):
+            return r.content
+        wait = int(r.headers.get("retry-after") or 0) or (3 * 2 ** attempt)
+        print(f"  http {r.status_code} ct={ct[:20]}, backoff {wait}s")
+        time.sleep(min(wait, 120))
+    return None
 
 def commons_search(term, limit):
     r = requests.get(API, params={
@@ -57,7 +80,10 @@ def main(manifest_path, out_dir):
             if ii.get("mime") != "image/jpeg" or ii.get("width", 0) < mf["min_width"]:
                 continue
             try:
-                img = requests.get(ii["url"], headers=UA, timeout=60).content
+                img = dl_image(ii["url"])
+                if img is None:
+                    print("  skip: download failed after retries")
+                    continue
                 im = Image.open(io.BytesIO(img)).convert("RGB")
                 s = 1024 / min(im.size)
                 im = im.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
@@ -74,7 +100,7 @@ def main(manifest_path, out_dir):
                 n += 1; got += 1
             except Exception as e:
                 print(f"  skip: {e}")
-            time.sleep(0.4)  # be polite to Commons
+            time.sleep(1.2)  # be polite to Commons (datacenter IPs get limited)
         print(f"{term}: {got}")
     meta.close()
     lic_f.close()
