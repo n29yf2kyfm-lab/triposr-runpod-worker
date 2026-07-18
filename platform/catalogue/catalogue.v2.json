@@ -27001,5 +27001,147 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volvo-xc90-v1",
+  "make": "volvo",
+  "model": "xc90",
+  "modelFamily": "xc90",
+  "modelAliases": [
+   "xc90"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Volvo XC90 Inscription",
+  "sourceUrl": "https://sketchfab.com/3d-models/e91e35e356ea456ca2c682efe36360b2",
+  "sourceCreator": null,
+  "sourceReferenceId": "e91e35e356ea456ca2c682efe36360b2",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "taupe",
+  "renderColourLabel": "Bright Dusk Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc90-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc90-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volvo/volvo-xc90-v1/bright-dusk-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 2496660,
+  "mobileFileSizeBytes": 2496660,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T17:58:07Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: 'Volvo XC90 Inscription'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Thunder Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thunder Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Vapour Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vapour Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Onyx Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Onyx Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Crystal White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "taupe",
+     "label": "Bright Dusk Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Bright Dusk Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Denim Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Denim Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Forest Lake Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Forest Lake Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
