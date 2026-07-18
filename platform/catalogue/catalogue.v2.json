@@ -18030,5 +18030,140 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "cupra-leon-2025-v1",
+  "make": "cupra",
+  "model": "leon",
+  "modelFamily": "leon",
+  "modelAliases": [
+   "leon",
+   "leon sportstourer"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2025,
+  "yearEnd": 2025,
+  "bodyStyle": "estate",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2025 Cupra Leon Sportstourer",
+  "sourceUrl": "https://sketchfab.com/3d-models/81ec833ce95044a29bd10ead9cd3577f",
+  "sourceCreator": null,
+  "sourceReferenceId": "81ec833ce95044a29bd10ead9cd3577f",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Petrol Blue Matte",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-leon-2025-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-leon-2025-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/cupra/cupra-leon-2025-v1/petrol-blue-matte.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3792268,
+  "mobileFileSizeBytes": 3792268,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T13:51:22Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2025 Cupra Leon Sportstourer'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphene Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Graphene Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Magnetic Tech Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Tech Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nevada White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nevada White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Petrol Blue Matte",
+     "hex": null,
+     "finish": "matte",
+     "oemPaintName": "Petrol Blue Matte",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Dark Forest",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dark Forest",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Century Bronze Matte",
+     "hex": null,
+     "finish": "matte",
+     "oemPaintName": "Century Bronze Matte",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
