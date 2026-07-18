@@ -22242,5 +22242,148 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mercedes-benz-gls-2022-v1",
+  "make": "mercedes-benz",
+  "model": "gls",
+  "modelFamily": "gls",
+  "modelAliases": [
+   "gls",
+   "gls-class"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": 2022,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022 Mercedes-Benz AMG GLS 63",
+  "sourceUrl": "https://sketchfab.com/3d-models/d6d814e099914c5c84a3a8635fad4bb2",
+  "sourceCreator": null,
+  "sourceReferenceId": "d6d814e099914c5c84a3a8635fad4bb2",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Spectral Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mercedes-benz/mercedes-benz-gls-2022-v1/spectral-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 5335748,
+  "mobileFileSizeBytes": 5335748,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T15:20:36Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2022 Mercedes-Benz AMG GLS 63'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
