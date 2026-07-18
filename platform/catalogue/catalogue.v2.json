@@ -25292,5 +25292,149 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volkswagen-id3-gtx-2024-v1",
+  "make": "volkswagen",
+  "model": "id3",
+  "modelFamily": "id3",
+  "modelAliases": [
+   "id3",
+   "id.3",
+   "id3 gtx"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2024,
+  "yearEnd": 2024,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2024 Volkswagen ID3 GTX",
+  "sourceUrl": "https://sketchfab.com/3d-models/4fd068646440476ea33f23831ea73754",
+  "sourceCreator": null,
+  "sourceReferenceId": "4fd068646440476ea33f23831ea73754",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Atlantic Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-id3-gtx-2024-v1/atlantic-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3812080,
+  "mobileFileSizeBytes": 3812080,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T16:22:24Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2024 Volkswagen ID3 GTX'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Uranium Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Uranium Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Dolphin Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dolphin Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Moonstone Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Moonstone Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Deep Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Deep Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Reflex Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Reflex Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Atlantic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Atlantic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lapiz Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lapiz Blue Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
