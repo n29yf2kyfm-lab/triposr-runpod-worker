@@ -24438,5 +24438,147 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "skoda-kodiaq-2022-v1",
+  "make": "skoda",
+  "model": "kodiaq",
+  "modelFamily": "kodiaq",
+  "modelAliases": [
+   "kodiaq"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": 2022,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022 Skoda Kodiaq TSI 330",
+  "sourceUrl": "https://sketchfab.com/3d-models/ad0fb4edf2c245338ddfcc9639555584",
+  "sourceCreator": null,
+  "sourceReferenceId": "ad0fb4edf2c245338ddfcc9639555584",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Race Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-kodiaq-2022-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-kodiaq-2022-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/skoda/skoda-kodiaq-2022-v1/race-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 2893876,
+  "mobileFileSizeBytes": 2893876,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T16:03:19Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2022 Skoda Kodiaq TSI 330'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Steel Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Steel Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Magic Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Black Magic Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Moon White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moon White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Brilliant Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brilliant Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Race Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Race Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Energy Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Energy Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Velvet Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Velvet Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
