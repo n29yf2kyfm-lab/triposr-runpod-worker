@@ -15933,5 +15933,139 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "cupra-born-2022-v1",
+  "make": "cupra",
+  "model": "born",
+  "modelFamily": "born",
+  "modelAliases": [
+   "born"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": 2022,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022-2024 Cupra Born",
+  "sourceUrl": "https://sketchfab.com/3d-models/c41e05dde4244592898e62fae766e8a8",
+  "sourceCreator": null,
+  "sourceReferenceId": "c41e05dde4244592898e62fae766e8a8",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Petrol Blue Matte",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-born-2022-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-born-2022-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/cupra/cupra-born-2022-v1/petrol-blue-matte.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 2899104,
+  "mobileFileSizeBytes": 2899104,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T10:53:52Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2022-2024 Cupra Born'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphene Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Graphene Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Magnetic Tech Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Tech Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nevada White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nevada White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Petrol Blue Matte",
+     "hex": null,
+     "finish": "matte",
+     "oemPaintName": "Petrol Blue Matte",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Dark Forest",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dark Forest",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Century Bronze Matte",
+     "hex": null,
+     "finish": "matte",
+     "oemPaintName": "Century Bronze Matte",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
