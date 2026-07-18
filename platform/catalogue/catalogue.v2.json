@@ -20667,5 +20667,149 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-ioniq-6-2023-v1",
+  "make": "hyundai",
+  "model": "ioniq-6",
+  "modelFamily": "ioniq-6",
+  "modelAliases": [
+   "ioniq 6",
+   "ioniq-6",
+   "ioniq6"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": 2023,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2023 Hyundai IONIQ 6",
+  "sourceUrl": "https://sketchfab.com/3d-models/3fc37cd0e0cf436d97ac234632f3f3d9",
+  "sourceCreator": null,
+  "sourceReferenceId": "3fc37cd0e0cf436d97ac234632f3f3d9",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Performance Blue",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-ioniq-6-2023-v1/performance-blue.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4016704,
+  "mobileFileSizeBytes": 4016704,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T14:46:47Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2023 Hyundai IONIQ 6'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
