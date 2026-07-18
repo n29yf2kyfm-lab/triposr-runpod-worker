@@ -20381,5 +20381,147 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-i30-2010-v1",
+  "make": "hyundai",
+  "model": "i30",
+  "modelFamily": "i30",
+  "modelAliases": [
+   "i30"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2010,
+  "yearEnd": 2010,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Hyundai i30 2010",
+  "sourceUrl": "https://sketchfab.com/3d-models/28a62ae0e7af4b408c82daa57c990b8f",
+  "sourceCreator": null,
+  "sourceReferenceId": "28a62ae0e7af4b408c82daa57c990b8f",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Performance Blue",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i30-2010-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i30-2010-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-i30-2010-v1/performance-blue.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3206680,
+  "mobileFileSizeBytes": 3206680,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T14:40:41Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: 'Hyundai i30 2010'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
