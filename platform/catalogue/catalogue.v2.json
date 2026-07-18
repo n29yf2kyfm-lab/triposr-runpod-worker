@@ -19685,5 +19685,147 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-fiesta-2014-v1",
+  "make": "ford",
+  "model": "fiesta",
+  "modelFamily": "fiesta",
+  "modelAliases": [
+   "fiesta"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2014,
+  "yearEnd": 2014,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2014 Ford Fiesta ST",
+  "sourceUrl": "https://sketchfab.com/3d-models/44a06a21f2714c31b25a51c6a4ecd9df",
+  "sourceCreator": null,
+  "sourceReferenceId": "44a06a21f2714c31b25a51c6a4ecd9df",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Chrome Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-2014-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-2014-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ford/ford-fiesta-2014-v1/chrome-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3597916,
+  "mobileFileSizeBytes": 3597916,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T14:25:27Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2014 Ford Fiesta ST'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carbonised Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbonised Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Agate Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Agate Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Frozen White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Frozen White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moondust Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moondust Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Chrome Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Chrome Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Desert Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desert Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fantastic Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fantastic Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
