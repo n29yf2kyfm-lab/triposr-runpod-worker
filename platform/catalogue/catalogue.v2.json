@@ -12532,8 +12532,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-leon-2022-v1/fjord-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 13861564,
-  "mobileFileSizeBytes": 13861564,
+  "fileSizeBytes": 11373524,
+  "mobileFileSizeBytes": 11373524,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -12544,7 +12544,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 Seat Leon FR E-Hybrid - 5 Door'."
+   "Source title: '2022 Seat Leon FR E-Hybrid - 5 Door'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 568355, \"facesAfter\": 151828, \"ratio\": 0.264}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -12593,7 +12594,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -12651,8 +12653,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-ceed-2022-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 12999904,
-  "mobileFileSizeBytes": 12999904,
+  "fileSizeBytes": 10907384,
+  "mobileFileSizeBytes": 10907384,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -12663,7 +12665,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 Kia Ceed Sportswagon GT-PlusLine'."
+   "Source title: '2022 Kia Ceed Sportswagon GT-PlusLine'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 565354, \"facesAfter\": 152557, \"ratio\": 0.265}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -12736,7 +12739,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -12794,8 +12798,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-i20-2022-v1/performance-blue.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 9596480,
-  "mobileFileSizeBytes": 9596480,
+  "fileSizeBytes": 7853556,
+  "mobileFileSizeBytes": 7853556,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -12806,7 +12810,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 Hyundai i20 N Line'."
+   "Source title: '2022 Hyundai i20 N Line'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 690012, \"facesAfter\": 182758, \"ratio\": 0.217}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -12879,7 +12884,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -12936,8 +12942,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/suzuki/suzuki-jimny-v1/speedy-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 8203400,
-  "mobileFileSizeBytes": 8203400,
+  "fileSizeBytes": 6219652,
+  "mobileFileSizeBytes": 6219652,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -12948,7 +12954,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'SUZUKI JIMNY'."
+   "Source title: 'SUZUKI JIMNY'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1190296, \"facesAfter\": 152688, \"ratio\": 0.126}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -13021,7 +13028,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -13078,8 +13086,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/vauxhall/vauxhall-astra-g-v1/electric-yellow.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 36186040,
-  "mobileFileSizeBytes": 36186040,
+  "fileSizeBytes": 23828884,
+  "mobileFileSizeBytes": 23828884,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -13090,7 +13098,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Opel Astra G'."
+   "Source title: 'Opel Astra G'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 2569378, \"facesAfter\": 151276, \"ratio\": 0.058}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -13163,7 +13172,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -13220,8 +13230,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-stinger-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 7608228,
-  "mobileFileSizeBytes": 7608228,
+  "fileSizeBytes": 2581312,
+  "mobileFileSizeBytes": 2581312,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -13232,7 +13242,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Kia Stinger'."
+   "Source title: 'Kia Stinger'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 32, \"facesBefore\": 560904, \"facesAfter\": 151327, \"ratio\": 0.267}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -13305,7 +13316,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -13362,8 +13374,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mercedes-benz/mercedes-benz-cls-2022-v1/spectral-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4278932,
-  "mobileFileSizeBytes": 4278932,
+  "fileSizeBytes": 1957952,
+  "mobileFileSizeBytes": 1957952,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -13374,7 +13386,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Mercedes-Benz CLS53 AMG 2022'."
+   "Source title: 'Mercedes-Benz CLS53 AMG 2022'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1217175, \"facesAfter\": 151448, \"ratio\": 0.123}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -13447,7 +13460,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -13504,8 +13518,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/suzuki/suzuki-alto-2020-v1/speedy-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4721392,
-  "mobileFileSizeBytes": 4721392,
+  "fileSizeBytes": 3635952,
+  "mobileFileSizeBytes": 3635952,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -13516,7 +13530,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2020 Maruti Suzuki Alto 800'."
+   "Source title: '2020 Maruti Suzuki Alto 800'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 633954, \"facesAfter\": 152841, \"ratio\": 0.237}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -13589,7 +13604,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -13646,8 +13662,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/peugeot/peugeot-508-v1/vertigo-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5600744,
-  "mobileFileSizeBytes": 5600744,
+  "fileSizeBytes": 3980912,
+  "mobileFileSizeBytes": 3980912,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -13658,7 +13674,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Peugeot 508'."
+   "Source title: 'Peugeot 508'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 874658, \"facesAfter\": 195101, \"ratio\": 0.171}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -13731,7 +13748,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -13788,8 +13806,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/suzuki/suzuki-vitara-2024-v1/speedy-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5303012,
-  "mobileFileSizeBytes": 5303012,
+  "fileSizeBytes": 3066832,
+  "mobileFileSizeBytes": 3066832,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -13800,7 +13818,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2024 Suzuki Vitara Hybrid 1.4 EU'."
+   "Source title: '2024 Suzuki Vitara Hybrid 1.4 EU'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 608956, \"facesAfter\": 150448, \"ratio\": 0.246}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -13873,7 +13892,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -13932,8 +13952,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-320i-2023-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 7549660,
-  "mobileFileSizeBytes": 7549660,
+  "fileSizeBytes": 2475216,
+  "mobileFileSizeBytes": 2475216,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -13944,7 +13964,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2023 bmw 3 series'."
+   "Source title: '2023 bmw 3 series'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 2692991, \"facesAfter\": 169987, \"ratio\": 0.056}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -14017,7 +14038,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -14074,8 +14096,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/peugeot/peugeot-207-v1/vertigo-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 9105876,
-  "mobileFileSizeBytes": 9105876,
+  "fileSizeBytes": 6727528,
+  "mobileFileSizeBytes": 6727528,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -14086,7 +14108,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Peugeot Expert'."
+   "Source title: 'Peugeot Expert'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 951344, \"facesAfter\": 150627, \"ratio\": 0.158}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -14159,7 +14182,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -14216,8 +14240,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-tarraco-2020-v1/fjord-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 13202052,
-  "mobileFileSizeBytes": 13202052,
+  "fileSizeBytes": 11059796,
+  "mobileFileSizeBytes": 11059796,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -14228,7 +14252,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2020 Seat Tarraco e-HYBRID'."
+   "Source title: '2020 Seat Tarraco e-HYBRID'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 587046, \"facesAfter\": 153126, \"ratio\": 0.256}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -14277,7 +14302,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -14334,8 +14360,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-niro-2024-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 12366084,
-  "mobileFileSizeBytes": 12366084,
+  "fileSizeBytes": 10899592,
+  "mobileFileSizeBytes": 10899592,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -14346,7 +14372,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2024 Kia Niro PHEV Dynamic Line'."
+   "Source title: '2024 Kia Niro PHEV Dynamic Line'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 539529, \"facesAfter\": 172231, \"ratio\": 0.278}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -14419,7 +14446,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -14476,8 +14504,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-q3-2023-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 14266328,
-  "mobileFileSizeBytes": 14266328,
+  "fileSizeBytes": 10956672,
+  "mobileFileSizeBytes": 10956672,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -14488,7 +14516,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2023 Audi Q3 40 TFSI'."
+   "Source title: '2023 Audi Q3 40 TFSI'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 995854, \"facesAfter\": 163764, \"ratio\": 0.151}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -14553,7 +14582,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
