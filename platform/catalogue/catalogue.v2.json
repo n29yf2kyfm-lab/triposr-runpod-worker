@@ -22521,5 +22521,147 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "nissan-leaf-2023-v1",
+  "make": "nissan",
+  "model": "leaf",
+  "modelFamily": "leaf",
+  "modelAliases": [
+   "leaf"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": 2023,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2023 Nissan Leaf SV Plus",
+  "sourceUrl": "https://sketchfab.com/3d-models/dc43dc90417f4a34911445d48bf89da5",
+  "sourceCreator": null,
+  "sourceReferenceId": "dc43dc90417f4a34911445d48bf89da5",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Magnetic Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-leaf-2023-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-leaf-2023-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/nissan/nissan-leaf-2023-v1/magnetic-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6653164,
+  "mobileFileSizeBytes": 6653164,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T15:25:42Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2023 Nissan Leaf SV Plus'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Gun Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Gun Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Ceramic Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Ceramic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Storm White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Storm White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Pearl Black",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Pearl Black",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Blade Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Blade Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Magnetic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fuji Sunset Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fuji Sunset Red",
+     "glbUrl": null
+    },
+    {
+     "family": "burgundy",
+     "label": "Burgundy Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Burgundy Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
