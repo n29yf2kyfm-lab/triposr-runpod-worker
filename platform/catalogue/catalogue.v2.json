@@ -209,8 +209,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mercedes-benz/mercedes-benz-e-class-w213-undated-v1/spectral-blue-metallic.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/mercedes-benz/e-class/native/manifest.json",
   "interiorUrl": null,
-  "fileSizeBytes": 1532928,
-  "mobileFileSizeBytes": 1532928,
+  "fileSizeBytes": 1780420,
+  "mobileFileSizeBytes": 1780420,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -222,7 +222,9 @@
   "needsHumanReview": [
    "year range unknown"
   ],
-  "notes": [],
+  "notes": [
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 155329, \"facesAfter\": 150021, \"ratio\": 0.966}"
+  ],
   "customization": {
    "colourOptions": [
     {
@@ -290,7 +292,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -482,8 +485,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/alfa-romeo/alfa-romeo-stelvio-x-2016-2018-v1/alfa-red.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/alfa-romeo/stelvio/native/manifest.json",
   "interiorUrl": null,
-  "fileSizeBytes": 2158592,
-  "mobileFileSizeBytes": 2158592,
+  "fileSizeBytes": 1993032,
+  "mobileFileSizeBytes": 1993032,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -495,7 +498,9 @@
   "needsHumanReview": [
    "generation unconfirmed"
   ],
-  "notes": [],
+  "notes": [
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 186266, \"facesAfter\": 151182, \"ratio\": 0.805}"
+  ],
   "customization": {
    "configuratorReady": true,
    "componentPipelineVersion": "overnight-2026-07-16",
@@ -559,7 +564,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -616,8 +622,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-touran-x-2009-2011-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/volkswagen/touran/native/manifest.json",
   "interiorUrl": null,
-  "fileSizeBytes": 939008,
-  "mobileFileSizeBytes": 939008,
+  "fileSizeBytes": 1323064,
+  "mobileFileSizeBytes": 1323064,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -629,7 +635,9 @@
   "needsHumanReview": [
    "generation unconfirmed"
   ],
-  "notes": [],
+  "notes": [
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 171187, \"facesAfter\": 150066, \"ratio\": 0.876}"
+  ],
   "customization": {
    "colourOptions": [
     {
@@ -697,7 +705,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -1177,8 +1186,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/aston-martin/aston-martin-db11-x-2016-2018-v1/aston-martin-racing-green.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/aston-martin/db11/native/manifest.json",
   "interiorUrl": null,
-  "fileSizeBytes": 1326080,
-  "mobileFileSizeBytes": 1326080,
+  "fileSizeBytes": 1320920,
+  "mobileFileSizeBytes": 1320920,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -1190,7 +1199,9 @@
   "needsHumanReview": [
    "generation unconfirmed"
   ],
-  "notes": [],
+  "notes": [
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 209868, \"facesAfter\": 150429, \"ratio\": 0.715}"
+  ],
   "customization": {
    "colourOptions": [
     {
@@ -1258,7 +1269,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -1598,8 +1610,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-m5-f90-undated-v1/portimao-blue-metallic.jpg",
   "turntableUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/bmw/m5/native/manifest.json",
   "interiorUrl": null,
-  "fileSizeBytes": 3425280,
-  "mobileFileSizeBytes": null,
+  "fileSizeBytes": 3312376,
+  "mobileFileSizeBytes": 3312376,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -1611,7 +1623,9 @@
   "needsHumanReview": [
    "year range unknown"
   ],
-  "notes": [],
+  "notes": [
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 258504, \"facesAfter\": 152017, \"ratio\": 0.58}"
+  ],
   "customization": {
    "configuratorReady": true,
    "componentPipelineVersion": "overnight-2026-07-16",
@@ -1683,7 +1697,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -1750,8 +1765,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/porsche/911/gentian-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4021600,
-  "mobileFileSizeBytes": 4021600,
+  "fileSizeBytes": 3152284,
+  "mobileFileSizeBytes": 3152284,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -1762,7 +1777,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Porsche 911 Carrera 4S (per source title). Body identifies as 991 generation, production span 2011-2019."
+   "Porsche 911 Carrera 4S (per source title). Body identifies as 991 generation, production span 2011-2019.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 652660, \"facesAfter\": 150550, \"ratio\": 0.23}"
   ],
   "customization": {
    "configuratorReady": true,
@@ -1835,7 +1851,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -1897,8 +1914,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/fiat/500/passione-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 6397540,
-  "mobileFileSizeBytes": 6397540,
+  "fileSizeBytes": 1025804,
+  "mobileFileSizeBytes": 1025804,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -1909,7 +1926,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Classic rear-engined Fiat Nuova 500 (identified from body; 1957-1975). Not the 2007+ modern 500."
+   "Classic rear-engined Fiat Nuova 500 (identified from body; 1957-1975). Not the 2007+ modern 500.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 2321956, \"facesAfter\": 162721, \"ratio\": 0.065}"
   ],
   "customization": {
    "configuratorReady": true,
@@ -1974,7 +1992,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -2032,8 +2051,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/range-rover-sport/portofino-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 7320036,
-  "mobileFileSizeBytes": 7320036,
+  "fileSizeBytes": 3852956,
+  "mobileFileSizeBytes": 3852956,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -2044,7 +2063,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Range Rover Sport (L494); source title states 2016 and 'Custom' (aftermarket styling). Production 2013-2022."
+   "Range Rover Sport (L494); source title states 2016 and 'Custom' (aftermarket styling). Production 2013-2022.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1535330, \"facesAfter\": 471549, \"ratio\": 0.098}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -2117,7 +2137,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -2176,8 +2197,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/q8/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 9073844,
-  "mobileFileSizeBytes": 9073844,
+  "fileSizeBytes": 4392484,
+  "mobileFileSizeBytes": 4392484,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -2188,7 +2209,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Audi Q8 (RS Q8 per source); source title states 2020; production 2018-."
+   "Audi Q8 (RS Q8 per source); source title states 2020; production 2018-.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1650413, \"facesAfter\": 154709, \"ratio\": 0.091}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -2253,7 +2275,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -2311,8 +2334,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/skoda/octavia/race-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4493864,
-  "mobileFileSizeBytes": 4493864,
+  "fileSizeBytes": 1438136,
+  "mobileFileSizeBytes": 1438136,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -2323,7 +2346,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Skoda Octavia Mk4 (RS per source); source title states 2025; production 2020-."
+   "Skoda Octavia Mk4 (RS per source); source title states 2025; production 2020-.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1617337, \"facesAfter\": 152527, \"ratio\": 0.093}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -2396,7 +2420,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -2453,8 +2478,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ford/transit/chrome-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5175328,
-  "mobileFileSizeBytes": 5175328,
+  "fileSizeBytes": 1735824,
+  "mobileFileSizeBytes": 1735824,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -2465,7 +2490,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Ford Transit (L3H3 panel van); source title states 2021."
+   "Ford Transit (L3H3 panel van); source title states 2021.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1600306, \"facesAfter\": 201856, \"ratio\": 0.094}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -2538,7 +2564,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -2733,8 +2760,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/porsche/carrera-gt/gentian-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5292824,
-  "mobileFileSizeBytes": 5292824,
+  "fileSizeBytes": 4618452,
+  "mobileFileSizeBytes": 4618452,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -2745,7 +2772,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Porsche Carrera GT (980), 2004-2007."
+   "Porsche Carrera GT (980), 2004-2007.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 225217, \"facesAfter\": 158076, \"ratio\": 0.666}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -2818,7 +2846,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -2873,8 +2902,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/porsche/718-cayman/gentian-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3134584,
-  "mobileFileSizeBytes": 3134584,
+  "fileSizeBytes": 2645680,
+  "mobileFileSizeBytes": 2645680,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -2885,7 +2914,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Porsche 718 Cayman (982); GT4 per title."
+   "Porsche 718 Cayman (982); GT4 per title.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 199186, \"facesAfter\": 154496, \"ratio\": 0.753}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -2958,7 +2988,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -3013,8 +3044,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/nissan/gt-r/magnetic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 19241684,
-  "mobileFileSizeBytes": 19241684,
+  "fileSizeBytes": 16335736,
+  "mobileFileSizeBytes": 16335736,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -3025,7 +3056,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Nissan GT-R (R35); source title states 2008."
+   "Nissan GT-R (R35); source title states 2008.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 756972, \"facesAfter\": 153914, \"ratio\": 0.198}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -3098,7 +3130,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
