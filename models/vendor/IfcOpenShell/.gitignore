@@ -1,0 +1,136 @@
+# Dependency and build folders created by the build scripts
+/_deps/
+/_build-vs*-x*/
+/_deps-vs*-x*-installed/
+/_installed-vs*-x*/
+/build/
+/build.log
+/output/
+/src/examples/build/
+# ifctester docs output
+/src/ifctester/test/build/
+
+# output directories
+/cmake/out/
+/src/examples/out/
+/src/ifcmax/out/
+/src/ifcwrap/out/
+/src/qtviewer/out/
+/src/ifctester/webapp/public/pyodide/
+
+/win/BuildDepsCache*.txt
+
+# General Python residue
+__pycache__
+*.py.bak
+venv
+uv.lock
+
+# Visual Studio Code files
+.vscode
+!.vscode/launch.json
+!.vscode/tasks.json
+.vs
+/*.code-workspace
+
+# PyCharm files
+.idea
+
+# Docs
+/docs/cpp-api/output
+
+# gettext binary translation files
+*.mo
+
+# Vim
+*.swp
+*.swo
+
+# Flask
+instance/*
+!instance/.gitignore
+.webassets-cache
+.env
+*.db
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
+
+# pipenv
+Pipfile
+Pipfile.lock
+
+# Database
+*.db
+
+# PyTest
+htmlcov
+.coverage
+
+# Blender
+*.blend1
+
+# Sphinx
+_build/
+
+# IDS Docs
+src/ifcopenshell-python/test/build
+
+# tox cache
+.tox/
+*.egg-info/
+
+# mypy cache
+.mypy_cache
+
+# bonsai i18n
+src/bonsai/bonsai/translations.py
+
+# bonsai external dependencies (cloned for just ty checks)
+src/bonsai/external_dependencies/
+
+# bonsai test temp/cache files
+src/bonsai/test/files/temp
+src/bonsai/test/files/*.cache.blend
+src/bonsai/test/files/*.cache.json
+src/bonsai/test/files/*.cache.sqlite
+
+# bonsai data
+src/bonsai/bonsai/bim/data/build/
+src/bonsai/bonsai/bim/data/gantt/index.html
+src/bonsai/bonsai/bim/data/gantt/jsgantt.js
+src/bonsai/bonsai/bim/data/gantt/jsgantt.css
+src/bonsai/bonsai/bim/data/webui/static/js/jquery.min.js
+src/bonsai/bonsai/bim/data/webui/running_pid.json
+
+# ifcopenshell swig and compiled files
+src/ifcopenshell-python/ifcopenshell/_ifcopenshell_wrapper*.so
+src/ifcopenshell-python/ifcopenshell/ifcopenshell_wrapper.py
+
+# apple
+.DS_Store
+
+# clangd config
+.clangd
+# clangd cache
+.cache
+
+# Brickschema
+src/bonsai/bonsai/bim/schema/Brick.ttl
+
+bonsaiDecoratorForLoads.code-workspace
+dev_environment.bat
+
+.pixi/
+
+src/ifcopenshell-python/ifcopenshell/express/*.exp
+src/ifcopenshell-python/ifcopenshell/express/*.exp.cache.dat
+
+
+# temp files from AI coding tools
+*.claude
+CLAUDE.local.md
+*.py.tmp*
+*.json.tmp*
+

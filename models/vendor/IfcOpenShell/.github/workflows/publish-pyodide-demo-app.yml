@@ -1,0 +1,57 @@
+name: Deploy Pyodide Demo App to static page repo
+
+permissions:
+  id-token: write
+  pages: write
+
+on:
+  push:
+    paths:
+      - 'src/pyodide/**'
+      - '.github/workflows/publish-pyodide-demo-app.yml'
+    branches:
+      - v0.8.0
+  workflow_dispatch:
+
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+    if: |
+      github.repository == 'IfcOpenShell/IfcOpenShell'
+    steps:
+    - name: Set env
+      run: echo ok go
+      
+  build:
+    needs: activate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (recursive)
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - name: Checkout intermediate Pages repo
+        uses: actions/checkout@v6
+        with:
+          repository: IfcOpenShell/wasm_ifcopenshell_org_static_html
+          ref: gh-pages
+          path: output
+          token: ${{ secrets.WEBSITE_PUBLISH }}
+      - name: Sync demo app into target subfolder
+        run: |
+          rsync -av --delete --exclude='.git/' src/pyodide/demo-app/ output/
+      - name: Commit and push if changed
+        working-directory: output
+        run: |
+          git config --global user.name 'IfcOpenBot'
+          git config --global user.email 'IfcOpenBot@users.noreply.github.com'
+
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "$(git log --oneline -1)"
+          git push origin gh-pages
