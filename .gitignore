@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+
+# Cloned upstream model repos (fetched via models/clone_models.sh)
+models/vendor/

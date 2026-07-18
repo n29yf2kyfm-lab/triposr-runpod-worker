@@ -1,0 +1,7 @@
+# Pinned commits — verified reachable on 2026-07-18. Run: ./clone_models.sh --pinned
+# name|commit
+TRELLIS|442aa1e1afb9014e80681d3bf604e8d728a86ee7
+TripoSR|107cefdc244c39106fa830359024f6a2f1c78871
+Mask3D|11bd5ff94477ff7194e9a7c52e9fae54d73ac3b5
+PointTransformerV3|3229e9b7de1770c8ad17c316f8e349982de509f8
+IfcOpenShell|71a598e63a4e27c99d7b53cbe05c611ea4e8f1ed
