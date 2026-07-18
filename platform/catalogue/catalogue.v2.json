@@ -15098,5 +15098,141 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-sq8-e-tron-2023-v1",
+  "make": "audi",
+  "model": "sq8",
+  "modelFamily": "q8",
+  "modelAliases": [
+   "sq8",
+   "q8 e-tron",
+   "sq8 e-tron"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2023 Audi SQ8 e tron",
+  "sourceUrl": "https://sketchfab.com/3d-models/8428af67eb1a43cca3b576d241ee6a32",
+  "sourceCreator": null,
+  "sourceReferenceId": "8428af67eb1a43cca3b576d241ee6a32",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Navarra Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-sq8-e-tron-2023-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-sq8-e-tron-2023-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-sq8-e-tron-2023-v1/navarra-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3667244,
+  "mobileFileSizeBytes": 3667244,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T10:34:39Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2023 Audi SQ8 e tron'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
