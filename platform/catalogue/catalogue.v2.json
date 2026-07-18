@@ -16640,5 +16640,140 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-rs3-2022-v1",
+  "make": "audi",
+  "model": "rs3",
+  "modelFamily": "rs3",
+  "modelAliases": [
+   "rs3",
+   "rs 3"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": 2022,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Audi Rs3 sedan 2022",
+  "sourceUrl": "https://sketchfab.com/3d-models/83259ff918624d63adbce959f1d5b4aa",
+  "sourceCreator": null,
+  "sourceReferenceId": "83259ff918624d63adbce959f1d5b4aa",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Navarra Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs3-2022-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs3-2022-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-rs3-2022-v1/navarra-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 2489776,
+  "mobileFileSizeBytes": 2489776,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T11:16:47Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: 'Audi Rs3 sedan 2022'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
