@@ -2051,8 +2051,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/range-rover-sport/portofino-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3852956,
-  "mobileFileSizeBytes": 3852956,
+  "fileSizeBytes": 3178592,
+  "mobileFileSizeBytes": 3178592,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -2478,8 +2478,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ford/transit/chrome-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1735824,
-  "mobileFileSizeBytes": 1735824,
+  "fileSizeBytes": 1197352,
+  "mobileFileSizeBytes": 1197352,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -3046,8 +3046,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/nissan/gt-r/magnetic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 16335736,
-  "mobileFileSizeBytes": 16335736,
+  "fileSizeBytes": 3409764,
+  "mobileFileSizeBytes": 3409764,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -3133,7 +3133,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -5017,8 +5018,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-a8-2008-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 6059412,
-  "mobileFileSizeBytes": 6059412,
+  "fileSizeBytes": 1724760,
+  "mobileFileSizeBytes": 1724760,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -5096,7 +5097,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -5153,8 +5155,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/alfa-romeo/alfa-romeo-brera-v1/alfa-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 6265828,
-  "mobileFileSizeBytes": 6265828,
+  "fileSizeBytes": 1545888,
+  "mobileFileSizeBytes": 1545888,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -5232,7 +5234,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -5862,8 +5865,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk2-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 14289452,
-  "mobileFileSizeBytes": 14289452,
+  "fileSizeBytes": 3229920,
+  "mobileFileSizeBytes": 3229920,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -5949,7 +5952,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -7968,8 +7972,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-m3-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1712976,
-  "mobileFileSizeBytes": 1712976,
+  "fileSizeBytes": 1408220,
+  "mobileFileSizeBytes": 1408220,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -9105,8 +9109,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-e-v1/premium-crystal-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 23937460,
-  "mobileFileSizeBytes": 23937460,
+  "fileSizeBytes": 3827648,
+  "mobileFileSizeBytes": 3827648,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -9184,7 +9188,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -10386,8 +10391,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volvo/volvo-s90-v1/bright-dusk-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 21944612,
-  "mobileFileSizeBytes": 21944612,
+  "fileSizeBytes": 2798168,
+  "mobileFileSizeBytes": 2798168,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -10473,7 +10478,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -10674,8 +10680,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/peugeot/peugeot-308-2022-v1/vertigo-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 7515704,
-  "mobileFileSizeBytes": 7515704,
+  "fileSizeBytes": 1566272,
+  "mobileFileSizeBytes": 1566272,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -10761,7 +10767,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -10963,8 +10970,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-m3-f80-2013-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1711552,
-  "mobileFileSizeBytes": 1711552,
+  "fileSizeBytes": 1360532,
+  "mobileFileSizeBytes": 1360532,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -11109,8 +11116,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-e-tron-gt-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5992728,
-  "mobileFileSizeBytes": 5992728,
+  "fileSizeBytes": 1262884,
+  "mobileFileSizeBytes": 1262884,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -11188,7 +11195,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -11827,8 +11835,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-accord-2021-v1/premium-crystal-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5323156,
-  "mobileFileSizeBytes": 5323156,
+  "fileSizeBytes": 1915796,
+  "mobileFileSizeBytes": 1915796,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -11906,7 +11914,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -12254,8 +12263,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/fiat/fiat-500-2016-v1/passione-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 7046832,
-  "mobileFileSizeBytes": 7046832,
+  "fileSizeBytes": 1578628,
+  "mobileFileSizeBytes": 1578628,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -12333,7 +12342,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -12391,8 +12401,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-sportage-2023-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 11175964,
-  "mobileFileSizeBytes": 11175964,
+  "fileSizeBytes": 2982724,
+  "mobileFileSizeBytes": 2982724,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -12478,7 +12488,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -12536,8 +12547,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-leon-2022-v1/fjord-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 11373524,
-  "mobileFileSizeBytes": 11373524,
+  "fileSizeBytes": 2039392,
+  "mobileFileSizeBytes": 2039392,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -12599,7 +12610,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -12657,8 +12669,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-ceed-2022-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 10907384,
-  "mobileFileSizeBytes": 10907384,
+  "fileSizeBytes": 3384760,
+  "mobileFileSizeBytes": 3384760,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -12744,7 +12756,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -12802,8 +12815,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-i20-2022-v1/performance-blue.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 7853556,
-  "mobileFileSizeBytes": 7853556,
+  "fileSizeBytes": 2078164,
+  "mobileFileSizeBytes": 2078164,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -12889,7 +12902,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -12946,8 +12960,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/suzuki/suzuki-jimny-v1/speedy-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 6219652,
-  "mobileFileSizeBytes": 6219652,
+  "fileSizeBytes": 1150188,
+  "mobileFileSizeBytes": 1150188,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -13033,7 +13047,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -13090,8 +13105,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/vauxhall/vauxhall-astra-g-v1/electric-yellow.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 23828884,
-  "mobileFileSizeBytes": 23828884,
+  "fileSizeBytes": 2611480,
+  "mobileFileSizeBytes": 2611480,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -13177,7 +13192,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -14100,8 +14116,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/peugeot/peugeot-207-v1/vertigo-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 6727528,
-  "mobileFileSizeBytes": 6727528,
+  "fileSizeBytes": 1584076,
+  "mobileFileSizeBytes": 1584076,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -14187,7 +14203,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -14244,8 +14261,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-tarraco-2020-v1/fjord-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 11059796,
-  "mobileFileSizeBytes": 11059796,
+  "fileSizeBytes": 2170560,
+  "mobileFileSizeBytes": 2170560,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -14307,7 +14324,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -14364,8 +14382,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-niro-2024-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 10899592,
-  "mobileFileSizeBytes": 10899592,
+  "fileSizeBytes": 3480704,
+  "mobileFileSizeBytes": 3480704,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -14451,7 +14469,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -14508,8 +14527,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-q3-2023-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 10956672,
-  "mobileFileSizeBytes": 10956672,
+  "fileSizeBytes": 2529264,
+  "mobileFileSizeBytes": 2529264,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -14587,7 +14606,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -14644,8 +14664,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volvo/volvo-xc60-v1/bright-dusk-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 7250692,
-  "mobileFileSizeBytes": 7250692,
+  "fileSizeBytes": 1652120,
+  "mobileFileSizeBytes": 1652120,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -14731,7 +14751,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -14788,8 +14809,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-ev6-2022-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 13790140,
-  "mobileFileSizeBytes": 13790140,
+  "fileSizeBytes": 3478836,
+  "mobileFileSizeBytes": 3478836,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -14875,7 +14896,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -15077,8 +15099,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/alfa-romeo/alfa-romeo-milano-2023-v1/alfa-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 8450956,
-  "mobileFileSizeBytes": 8450956,
+  "fileSizeBytes": 2200544,
+  "mobileFileSizeBytes": 2200544,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -15156,7 +15178,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -16770,8 +16793,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ford/ford-s-max-v1/chrome-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2516516,
-  "mobileFileSizeBytes": 2516516,
+  "fileSizeBytes": 1995232,
+  "mobileFileSizeBytes": 1995232,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -19171,8 +19194,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-a7-2018-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 7982092,
-  "mobileFileSizeBytes": 7982092,
+  "fileSizeBytes": 1942312,
+  "mobileFileSizeBytes": 1942312,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -19250,7 +19273,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -20139,8 +20163,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ford/ford-kuga-v1/chrome-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5585548,
-  "mobileFileSizeBytes": 5585548,
+  "fileSizeBytes": 1648824,
+  "mobileFileSizeBytes": 1648824,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -20226,7 +20250,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -22869,8 +22894,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/nissan/nissan-leaf-2023-v1/magnetic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 8354220,
-  "mobileFileSizeBytes": 8354220,
+  "fileSizeBytes": 1483536,
+  "mobileFileSizeBytes": 1483536,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -22956,7 +22981,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -23158,8 +23184,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/nissan/nissan-x-trail-2023-v1/magnetic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5663808,
-  "mobileFileSizeBytes": 5663808,
+  "fileSizeBytes": 1601776,
+  "mobileFileSizeBytes": 1601776,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -23245,7 +23271,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -24142,8 +24169,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-arona-2022-v1/fjord-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1223476,
-  "mobileFileSizeBytes": 1223476,
+  "fileSizeBytes": 852760,
+  "mobileFileSizeBytes": 852760,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -25969,8 +25996,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-passat-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5058212,
-  "mobileFileSizeBytes": 5058212,
+  "fileSizeBytes": 1301864,
+  "mobileFileSizeBytes": 1301864,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -26056,7 +26083,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -27123,8 +27151,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volvo/volvo-v90-v1/bright-dusk-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5065988,
-  "mobileFileSizeBytes": 5065988,
+  "fileSizeBytes": 1248464,
+  "mobileFileSizeBytes": 1248464,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -27210,7 +27238,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "textureOptimised": true
  },
  {
   "schemaVersion": 2,
