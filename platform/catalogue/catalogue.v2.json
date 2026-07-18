@@ -16209,5 +16209,149 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mazda-3-2020-v1",
+  "make": "mazda",
+  "model": "3",
+  "modelFamily": "3",
+  "modelAliases": [
+   "3",
+   "mazda3",
+   "3 sedan"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": 2020,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2020 Mazda 3 Sedan",
+  "sourceUrl": "https://sketchfab.com/3d-models/7e2ef9be2dd74cf4b980d068d272dfff",
+  "sourceCreator": null,
+  "sourceReferenceId": "7e2ef9be2dd74cf4b980d068d272dfff",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "red",
+  "renderColourLabel": "Soul Red Crystal",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-3-2020-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-3-2020-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mazda/mazda-3-2020-v1/soul-red-crystal.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 5127968,
+  "mobileFileSizeBytes": 5127968,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T11:01:29Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2020 Mazda 3 Sedan'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Machine Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Machine Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Polymetal Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Polymetal Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Jet Black Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Rhodium White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Rhodium White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snowflake White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snowflake White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Soul Red Crystal",
+     "hex": null,
+     "finish": "crystal",
+     "oemPaintName": "Soul Red Crystal",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Deep Crystal Blue Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Deep Crystal Blue Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "sand",
+     "label": "Zircon Sand Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Zircon Sand Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
