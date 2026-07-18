@@ -22098,5 +22098,149 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mercedes-benz-glc-2020-v1",
+  "make": "mercedes-benz",
+  "model": "glc",
+  "modelFamily": "glc",
+  "modelAliases": [
+   "glc",
+   "glc-class",
+   "glc300"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": 2020,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2020 Mercedes-Benz GLC300",
+  "sourceUrl": "https://sketchfab.com/3d-models/950d36030fe1468aa9033d5edfc9550c",
+  "sourceCreator": null,
+  "sourceReferenceId": "950d36030fe1468aa9033d5edfc9550c",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Spectral Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mercedes-benz/mercedes-benz-glc-2020-v1/spectral-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4479588,
+  "mobileFileSizeBytes": 4479588,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T15:17:33Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2020 Mercedes-Benz GLC300'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
