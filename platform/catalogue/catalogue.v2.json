@@ -23866,8 +23866,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/renault/renault-master-v1/iron-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3508620,
-  "mobileFileSizeBytes": 3508620,
+  "fileSizeBytes": 1044456,
+  "mobileFileSizeBytes": 1044456,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -23878,7 +23878,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Renault Master Panel Van'."
+   "Source title: 'Renault Master Panel Van'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1203415, \"facesAfter\": 151436, \"ratio\": 0.125}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -23943,7 +23944,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -24000,8 +24002,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/renault/renault-zoe-2012-v1/iron-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3096428,
-  "mobileFileSizeBytes": 3096428,
+  "fileSizeBytes": 3062800,
+  "mobileFileSizeBytes": 3062800,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -24012,7 +24014,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2012 Renault Zoe'."
+   "Source title: '2012 Renault Zoe'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 364760, \"facesAfter\": 150285, \"ratio\": 0.411}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -24077,7 +24080,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -24134,8 +24138,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-arona-2022-v1/fjord-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3226932,
-  "mobileFileSizeBytes": 3226932,
+  "fileSizeBytes": 1223476,
+  "mobileFileSizeBytes": 1223476,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -24146,7 +24150,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 Seat Arona'."
+   "Source title: '2022 Seat Arona'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1145686, \"facesAfter\": 222625, \"ratio\": 0.131}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -24195,7 +24200,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -24252,8 +24258,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-ateca-2020-v1/fjord-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3654596,
-  "mobileFileSizeBytes": 3654596,
+  "fileSizeBytes": 1119276,
+  "mobileFileSizeBytes": 1119276,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -24264,7 +24270,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2020 Seat Ateca (5FP)'."
+   "Source title: '2020 Seat Ateca (5FP)'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1259949, \"facesAfter\": 153526, \"ratio\": 0.119}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -24313,7 +24320,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -24370,8 +24378,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/skoda/skoda-fabia-v1/race-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2060192,
-  "mobileFileSizeBytes": 2060192,
+  "fileSizeBytes": 1203996,
+  "mobileFileSizeBytes": 1203996,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -24382,7 +24390,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Skoda Fabia Mk.2'."
+   "Source title: 'Skoda Fabia Mk.2'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 628420, \"facesAfter\": 153402, \"ratio\": 0.239}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -24455,7 +24464,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -24512,8 +24522,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/skoda/skoda-kamiq-v1/race-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3728584,
-  "mobileFileSizeBytes": 3728584,
+  "fileSizeBytes": 2408768,
+  "mobileFileSizeBytes": 2408768,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -24524,7 +24534,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Skoda Kamiq'."
+   "Source title: 'Skoda Kamiq'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 3, \"facesBefore\": 231456, \"facesAfter\": 150157, \"ratio\": 0.648}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -24597,7 +24608,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -24796,8 +24808,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/skoda/skoda-kodiaq-2022-v1/race-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2893876,
-  "mobileFileSizeBytes": 2893876,
+  "fileSizeBytes": 2592620,
+  "mobileFileSizeBytes": 2592620,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -24808,7 +24820,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 Skoda Kodiaq TSI 330'."
+   "Source title: '2022 Skoda Kodiaq TSI 330'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 336295, \"facesAfter\": 154660, \"ratio\": 0.446}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -24881,7 +24894,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -24938,8 +24952,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/skoda/skoda-scala-2019-v1/race-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3337416,
-  "mobileFileSizeBytes": 3337416,
+  "fileSizeBytes": 953180,
+  "mobileFileSizeBytes": 953180,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -24950,7 +24964,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Skoda Scala 2019'."
+   "Source title: 'Skoda Scala 2019'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1348377, \"facesAfter\": 151428, \"ratio\": 0.111}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -25023,7 +25038,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -25080,8 +25096,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/suzuki/suzuki-swift-2017-v1/speedy-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4247276,
-  "mobileFileSizeBytes": 4247276,
+  "fileSizeBytes": 1121192,
+  "mobileFileSizeBytes": 1121192,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -25092,7 +25108,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2017-2020 Suzuki Swift (VI)'."
+   "Source title: '2017-2020 Suzuki Swift (VI)'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1489014, \"facesAfter\": 152384, \"ratio\": 0.101}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -25165,7 +25182,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -25223,8 +25241,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/toyota/toyota-rav4-2010-v1/juniper-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4606928,
-  "mobileFileSizeBytes": 4606928,
+  "fileSizeBytes": 3733160,
+  "mobileFileSizeBytes": 3733160,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -25235,7 +25253,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2010 Rav4 Limited Edition'."
+   "Source title: '2010 Rav4 Limited Edition'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 558862, \"facesAfter\": 150239, \"ratio\": 0.268}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -25308,7 +25327,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -25365,8 +25385,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/vauxhall/vauxhall-corsa-2011-v1/electric-yellow.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2798408,
-  "mobileFileSizeBytes": 2798408,
+  "fileSizeBytes": 1039860,
+  "mobileFileSizeBytes": 1039860,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -25377,7 +25397,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Opel Corsa 5door 2011'."
+   "Source title: 'Opel Corsa 5door 2011'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 973631, \"facesAfter\": 149963, \"ratio\": 0.154}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -25450,7 +25471,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -25508,8 +25530,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-arteon-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4020760,
-  "mobileFileSizeBytes": 4020760,
+  "fileSizeBytes": 1562000,
+  "mobileFileSizeBytes": 1562000,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -25520,7 +25542,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2021 Volkswagen Arteon Shooting Brake Hybrid'."
+   "Source title: '2021 Volkswagen Arteon Shooting Brake Hybrid'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1159182, \"facesAfter\": 152326, \"ratio\": 0.129}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -25593,7 +25616,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -25652,8 +25676,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-id3-gtx-2024-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3812080,
-  "mobileFileSizeBytes": 3812080,
+  "fileSizeBytes": 1139692,
+  "mobileFileSizeBytes": 1139692,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -25664,7 +25688,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2024 Volkswagen ID3 GTX'."
+   "Source title: '2024 Volkswagen ID3 GTX'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1521411, \"facesAfter\": 152362, \"ratio\": 0.099}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -25737,7 +25762,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -25795,8 +25821,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-id5-gtx-2022-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3448328,
-  "mobileFileSizeBytes": 3448328,
+  "fileSizeBytes": 1232680,
+  "mobileFileSizeBytes": 1232680,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -25807,7 +25833,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 Volkswagen ID5 GTX'."
+   "Source title: '2022 Volkswagen ID5 GTX'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1305586, \"facesAfter\": 151878, \"ratio\": 0.115}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -25880,7 +25907,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -25937,8 +25965,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-passat-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 6148580,
-  "mobileFileSizeBytes": 6148580,
+  "fileSizeBytes": 5058212,
+  "mobileFileSizeBytes": 5058212,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -25949,7 +25977,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Volkswagen Passat 3D Scan'."
+   "Source title: 'Volkswagen Passat 3D Scan'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 299988, \"facesAfter\": 149997, \"ratio\": 0.5}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -26022,7 +26051,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
