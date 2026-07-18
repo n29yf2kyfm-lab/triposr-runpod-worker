@@ -22385,5 +22385,141 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mini-cooper-v1",
+  "make": "mini",
+  "model": "cooper",
+  "modelFamily": "cooper",
+  "modelAliases": [
+   "cooper",
+   "cooper s",
+   "cooper-s"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Mini_ Cooper_S_clubman_2011",
+  "sourceUrl": "https://sketchfab.com/3d-models/3091ff12530340f28439106d91e4eff4",
+  "sourceCreator": null,
+  "sourceReferenceId": "3091ff12530340f28439106d91e4eff4",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "green",
+  "renderColourLabel": "British Racing Green Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mini/mini-cooper-v1/british-racing-green-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3139016,
+  "mobileFileSizeBytes": 3139016,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T15:23:34Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: 'Mini_ Cooper_S_clubman_2011'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Rooftop Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Rooftop Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Melting Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Melting Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nanuq White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nanuq White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Chili Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Chili Red",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
