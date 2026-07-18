@@ -5,3 +5,6 @@ __pycache__/
 .env
 *.env
 .env.*
+
+# Downloaded datasets (fetched via datasets/download.sh) — too large / licence-restricted to commit
+datasets/data/

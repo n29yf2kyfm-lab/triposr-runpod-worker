@@ -20,6 +20,21 @@ The licence-clear open-source building blocks behind BuildScan AI. Run
 | **PointTransformerV3** | Pointcept/PointTransformerV3 | MIT | SOTA point-cloud semantic-segmentation backbone (77.6% mIoU ScanNet) | ⚠️ same weights caveat as Mask3D |
 | **IfcOpenShell** | IfcOpenShell/IfcOpenShell | LGPL-3.0 | IFC read/write, geometry engine, quantity take-off; `IfcConvert` for IFC→GLB | ✅ safe as a library (LGPL — dynamic linking is fine; don't statically fold into closed source) |
 
+## Defect-screening stack (Area 7) — vendored, all Apache-2.0 (no AGPL trap)
+
+Cloned into `models/vendor/`. These stack into one pipeline: Grounding DINO finds
+regions by text prompt → SAM2 segments them → Detectron2 trains the final detector.
+
+| Model | Path | Licence | Role |
+|---|---|---|---|
+| **SAM2** | `vendor/SAM2/` | Apache-2.0 | Promptable segmentation (crack/damp region masks) |
+| **GroundingDINO** | `vendor/GroundingDINO/` | Apache-2.0 | Open-vocabulary detection ("find damp stain", "crack") |
+| **Detectron2** | `vendor/Detectron2/` | Apache-2.0 | Detection/segmentation training framework |
+| **InstantMesh** | `vendor/InstantMesh/` | Apache-2.0 | Alt image→3D (multiview → mesh), pairs with TRELLIS |
+
+> Deliberately avoided **Ultralytics YOLO (AGPL-3.0)** — it would force you to open-source
+> your server or buy a commercial licence. The Apache-2.0 stack above does the same job.
+
 ## Not cloned (install as libraries)
 
 | Tool | How | Licence | Role |
