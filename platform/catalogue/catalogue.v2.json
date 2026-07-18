@@ -24864,5 +24864,148 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-rav4-2010-v1",
+  "make": "toyota",
+  "model": "rav4",
+  "modelFamily": "rav4",
+  "modelAliases": [
+   "rav4",
+   "rav-4"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2010,
+  "yearEnd": 2010,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2010 Rav4 Limited Edition",
+  "sourceUrl": "https://sketchfab.com/3d-models/450e36f0992c4ae09bd6c8d509a51a77",
+  "sourceCreator": null,
+  "sourceReferenceId": "450e36f0992c4ae09bd6c8d509a51a77",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Juniper Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-rav4-2010-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-rav4-2010-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/toyota/toyota-rav4-2010-v1/juniper-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4606928,
+  "mobileFileSizeBytes": 4606928,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T16:12:44Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2010 Rav4 Limited Edition'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
