@@ -5288,8 +5288,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mercedes-benz/mercedes-benz-c-class-w202-v1/spectral-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3548216,
-  "mobileFileSizeBytes": 3548216,
+  "fileSizeBytes": 997320,
+  "mobileFileSizeBytes": 997320,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -5300,7 +5300,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Mercedes-Benz C-Class (W202) sedan'."
+   "Source title: 'Mercedes-Benz C-Class (W202) sedan'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1222427, \"facesAfter\": 150028, \"ratio\": 0.123}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -5373,7 +5374,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -5431,8 +5433,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-polo-2023-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3557220,
-  "mobileFileSizeBytes": 3557220,
+  "fileSizeBytes": 3353692,
+  "mobileFileSizeBytes": 3353692,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -5443,7 +5445,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2023 Volkswagen Polo GTI'."
+   "Source title: '2023 Volkswagen Polo GTI'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 416183, \"facesAfter\": 151281, \"ratio\": 0.36}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -5516,7 +5519,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -5719,8 +5723,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/renault/renault-clio-2020-v1/iron-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4874104,
-  "mobileFileSizeBytes": 4874104,
+  "fileSizeBytes": 1691656,
+  "mobileFileSizeBytes": 1691656,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -5731,7 +5735,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Renault Clio RS Line 2020'."
+   "Source title: 'Renault Clio RS Line 2020'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1548355, \"facesAfter\": 184748, \"ratio\": 0.097}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -5796,7 +5801,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -5854,8 +5860,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk2-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 20002244,
-  "mobileFileSizeBytes": 20002244,
+  "fileSizeBytes": 14289452,
+  "mobileFileSizeBytes": 14289452,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -5866,7 +5872,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Volkswagen Golf Mk2'."
+   "Source title: 'Volkswagen Golf Mk2'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1854262, \"facesAfter\": 150258, \"ratio\": 0.081}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -5939,7 +5946,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -5996,8 +6004,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/nissan/nissan-juke-v1/magnetic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4694144,
-  "mobileFileSizeBytes": 4694144,
+  "fileSizeBytes": 1482776,
+  "mobileFileSizeBytes": 1482776,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -6008,7 +6016,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Nissan Juke'."
+   "Source title: 'Nissan Juke'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1540446, \"facesAfter\": 163060, \"ratio\": 0.097}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -6081,7 +6090,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -6282,8 +6292,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/renault/renault-megane-v1/iron-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1699600,
-  "mobileFileSizeBytes": 1699600,
+  "fileSizeBytes": 817252,
+  "mobileFileSizeBytes": 817252,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -6294,7 +6304,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Renault Megane Sedan'."
+   "Source title: 'Renault Megane Sedan'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 518236, \"facesAfter\": 151204, \"ratio\": 0.289}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -6359,7 +6370,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -6418,8 +6430,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-hr-v-v1/racing-blue-pearl.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 13768832,
-  "mobileFileSizeBytes": 13768832,
+  "fileSizeBytes": 3310100,
+  "mobileFileSizeBytes": 3310100,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -6430,7 +6442,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Honda Vezel e:HEV RS (HR-V)'."
+   "Source title: 'Honda Vezel e:HEV RS (HR-V)'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 2056952, \"facesAfter\": 158949, \"ratio\": 0.073}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -6495,7 +6508,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -6552,8 +6566,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/vauxhall/vauxhall-mokka-2021-v1/electric-yellow.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3417776,
-  "mobileFileSizeBytes": 3417776,
+  "fileSizeBytes": 1134984,
+  "mobileFileSizeBytes": 1134984,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -6564,7 +6578,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Vauxhall Mokka 2021'."
+   "Source title: 'Vauxhall Mokka 2021'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1260277, \"facesAfter\": 151278, \"ratio\": 0.119}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -6637,7 +6652,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -6694,8 +6710,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-ibiza-mk2-v1/fjord-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4431052,
-  "mobileFileSizeBytes": 4431052,
+  "fileSizeBytes": 3169432,
+  "mobileFileSizeBytes": 3169432,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -6706,7 +6722,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Seat Ibiza Mk2'."
+   "Source title: 'Seat Ibiza Mk2'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 386027, \"facesAfter\": 159402, \"ratio\": 0.389}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -6755,7 +6772,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -6813,8 +6831,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-tucson-2014-v1/performance-blue.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 10367892,
-  "mobileFileSizeBytes": 10367892,
+  "fileSizeBytes": 3780956,
+  "mobileFileSizeBytes": 3780956,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -6825,7 +6843,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2014 Hyundai Tucson'."
+   "Source title: '2014 Hyundai Tucson'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1500000, \"facesAfter\": 149995, \"ratio\": 0.1}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -6898,7 +6917,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -6956,8 +6976,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/tesla/tesla-model-3-v1/deep-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3260236,
-  "mobileFileSizeBytes": 3260236,
+  "fileSizeBytes": 2963720,
+  "mobileFileSizeBytes": 2963720,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -6968,7 +6988,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Tesla Model 3 2020'."
+   "Source title: 'Tesla Model 3 2020'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 176689, \"facesAfter\": 150028, \"ratio\": 0.849}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -7041,7 +7062,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -7098,8 +7120,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/citroen/citroen-c4-2008-v1/eclipse-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3891792,
-  "mobileFileSizeBytes": 3891792,
+  "fileSizeBytes": 2515160,
+  "mobileFileSizeBytes": 2515160,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -7110,7 +7132,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2008 Citroen C4 Sedan LX Plus'."
+   "Source title: '2008 Citroen C4 Sedan LX Plus'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 549863, \"facesAfter\": 153008, \"ratio\": 0.273}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -7175,7 +7198,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -7233,8 +7257,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-q5-2022-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5624920,
-  "mobileFileSizeBytes": 5624920,
+  "fileSizeBytes": 4383332,
+  "mobileFileSizeBytes": 4383332,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -7245,7 +7269,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 Audi Q5 Sportback'."
+   "Source title: '2022 Audi Q5 Sportback'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 460315, \"facesAfter\": 150308, \"ratio\": 0.326}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -7310,7 +7335,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -7509,8 +7535,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-niro-2021-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1783216,
-  "mobileFileSizeBytes": 1783216,
+  "fileSizeBytes": 1187012,
+  "mobileFileSizeBytes": 1187012,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -7521,7 +7547,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2021 Kia Niro FE Eco Hybrid'."
+   "Source title: '2021 Kia Niro FE Eco Hybrid'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 205551, \"facesAfter\": 150159, \"ratio\": 0.73}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -7594,7 +7621,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
