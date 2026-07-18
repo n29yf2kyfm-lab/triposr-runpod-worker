@@ -16766,8 +16766,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ford/ford-s-max-v1/chrome-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 13108872,
-  "mobileFileSizeBytes": 13108872,
+  "fileSizeBytes": 2516516,
+  "mobileFileSizeBytes": 2516516,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -16778,7 +16778,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Ford S-MAX HQ Interior'."
+   "Source title: 'Ford S-MAX HQ Interior'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 4358931, \"facesAfter\": 226628, \"ratio\": 0.034}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -16851,7 +16852,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -16909,8 +16911,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-rs3-2022-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2489776,
-  "mobileFileSizeBytes": 2489776,
+  "fileSizeBytes": 1452664,
+  "mobileFileSizeBytes": 1452664,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -16921,7 +16923,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Audi Rs3 sedan 2022'."
+   "Source title: 'Audi Rs3 sedan 2022'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 580917, \"facesAfter\": 150150, \"ratio\": 0.258}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -16986,7 +16989,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -17043,8 +17047,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-s5-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4143072,
-  "mobileFileSizeBytes": 4143072,
+  "fileSizeBytes": 1878968,
+  "mobileFileSizeBytes": 1878968,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -17055,7 +17059,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Audi S5 Convertible'."
+   "Source title: 'Audi S5 Convertible'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 903920, \"facesAfter\": 149997, \"ratio\": 0.166}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -17120,7 +17125,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -17177,8 +17183,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-x1-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4681920,
-  "mobileFileSizeBytes": 4681920,
+  "fileSizeBytes": 1544436,
+  "mobileFileSizeBytes": 1544436,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -17189,7 +17195,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'BMW X1 M- Sport 2020'."
+   "Source title: 'BMW X1 M- Sport 2020'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1346550, \"facesAfter\": 156878, \"ratio\": 0.111}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -17262,7 +17269,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -17319,8 +17327,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-i3-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2435416,
-  "mobileFileSizeBytes": 2435416,
+  "fileSizeBytes": 1325536,
+  "mobileFileSizeBytes": 1325536,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -17331,7 +17339,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Bmw I3'."
+   "Source title: 'Bmw I3'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 613378, \"facesAfter\": 156939, \"ratio\": 0.245}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -17404,7 +17413,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -17461,8 +17471,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-i4-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3117124,
-  "mobileFileSizeBytes": 3117124,
+  "fileSizeBytes": 1913072,
+  "mobileFileSizeBytes": 1913072,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -17473,7 +17483,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'bmw-i4'."
+   "Source title: 'bmw-i4'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 913305, \"facesAfter\": 149962, \"ratio\": 0.164}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -17546,7 +17557,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -17603,8 +17615,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-ix-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5411940,
-  "mobileFileSizeBytes": 5411940,
+  "fileSizeBytes": 1906956,
+  "mobileFileSizeBytes": 1906956,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -17615,7 +17627,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'bmw-ix-m60'."
+   "Source title: 'bmw-ix-m60'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1286846, \"facesAfter\": 150522, \"ratio\": 0.117}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -17688,7 +17701,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -17746,8 +17760,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/citroen/citroen-ds3-2018-v1/eclipse-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5305400,
-  "mobileFileSizeBytes": 5305400,
+  "fileSizeBytes": 1280016,
+  "mobileFileSizeBytes": 1280016,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -17758,7 +17772,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Citroen DS3 Crossback 2018'."
+   "Source title: 'Citroen DS3 Crossback 2018'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1888312, \"facesAfter\": 176346, \"ratio\": 0.079}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -17823,7 +17838,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -17880,8 +17896,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-m6-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4447512,
-  "mobileFileSizeBytes": 4447512,
+  "fileSizeBytes": 3945552,
+  "mobileFileSizeBytes": 3945552,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -17892,7 +17908,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'BMW M6 [Gran Coupe]'."
+   "Source title: 'BMW M6 [Gran Coupe]'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 411218, \"facesAfter\": 157103, \"ratio\": 0.365}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -17965,7 +17982,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -18022,8 +18040,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-m8-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4766336,
-  "mobileFileSizeBytes": 4766336,
+  "fileSizeBytes": 4068996,
+  "mobileFileSizeBytes": 4068996,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -18034,7 +18052,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2020 BMW M8 Coupe'."
+   "Source title: '2020 BMW M8 Coupe'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 225932, \"facesAfter\": 158390, \"ratio\": 0.664}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -18107,7 +18126,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -18164,8 +18184,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/cupra/cupra-formentor-2022-v1/petrol-blue-matte.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2545068,
-  "mobileFileSizeBytes": 2545068,
+  "fileSizeBytes": 952088,
+  "mobileFileSizeBytes": 952088,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -18176,7 +18196,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022-2024 Cupra Formentor'."
+   "Source title: '2022-2024 Cupra Formentor'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 913018, \"facesAfter\": 150041, \"ratio\": 0.164}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -18241,7 +18262,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -18299,8 +18321,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/cupra/cupra-leon-2025-v1/petrol-blue-matte.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3792268,
-  "mobileFileSizeBytes": 3792268,
+  "fileSizeBytes": 1023420,
+  "mobileFileSizeBytes": 1023420,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -18311,7 +18333,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2025 Cupra Leon Sportstourer'."
+   "Source title: '2025 Cupra Leon Sportstourer'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1678472, \"facesAfter\": 192270, \"ratio\": 0.089}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -18376,7 +18399,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -18576,8 +18600,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-x3-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5871028,
-  "mobileFileSizeBytes": 5871028,
+  "fileSizeBytes": 4292772,
+  "mobileFileSizeBytes": 4292772,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -18588,7 +18612,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'BMW X3 M40i'."
+   "Source title: 'BMW X3 M40i'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 426708, \"facesAfter\": 155386, \"ratio\": 0.352}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -18661,7 +18686,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -18718,8 +18744,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-a4-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3989476,
-  "mobileFileSizeBytes": 3989476,
+  "fileSizeBytes": 3956284,
+  "mobileFileSizeBytes": 3956284,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -18730,7 +18756,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Audi A4 (B5)'."
+   "Source title: 'Audi A4 (B5)'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 219888, \"facesAfter\": 152509, \"ratio\": 0.682}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -18795,7 +18822,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -18852,8 +18880,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-x5-2024-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5658192,
-  "mobileFileSizeBytes": 5658192,
+  "fileSizeBytes": 4149108,
+  "mobileFileSizeBytes": 4149108,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -18864,7 +18892,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2024 Bmw X5 xDrive40i'."
+   "Source title: '2024 Bmw X5 xDrive40i'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 414341, \"facesAfter\": 156216, \"ratio\": 0.362}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -18937,7 +18966,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
