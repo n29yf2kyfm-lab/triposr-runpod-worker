@@ -4820,8 +4820,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-a1-quattro-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 11982328,
-  "mobileFileSizeBytes": 11982328,
+  "fileSizeBytes": 3026440,
+  "mobileFileSizeBytes": 3026440,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -4832,7 +4832,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Audi A1 Quattro (A1II)'. No year asserted."
+   "Source title: 'Audi A1 Quattro (A1II)'. No year asserted.",
+   "web-optimised 2026-07-18: stripped 9 stray LINES primitives (scribble artifacts), re-welded + re-Draco (12MB→3MB)"
   ],
   "customization": {
    "configuratorReady": false,
