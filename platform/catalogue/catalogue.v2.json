@@ -21667,5 +21667,149 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mazda-mx-5-2015-v1",
+  "make": "mazda",
+  "model": "mx-5",
+  "modelFamily": "mx-5",
+  "modelAliases": [
+   "mx-5",
+   "mx5",
+   "miata"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2015,
+  "yearEnd": null,
+  "bodyStyle": "roadster",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2015 Mazda MX-5 Speedster",
+  "sourceUrl": "https://sketchfab.com/3d-models/af789c6f7484487bb4217f98491d44b0",
+  "sourceCreator": null,
+  "sourceReferenceId": "af789c6f7484487bb4217f98491d44b0",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "red",
+  "renderColourLabel": "Soul Red Crystal",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2015-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2015-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mazda/mazda-mx-5-2015-v1/soul-red-crystal.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 2882572,
+  "mobileFileSizeBytes": 2882572,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T15:09:07Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2015 Mazda MX-5 Speedster'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Machine Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Machine Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Polymetal Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Polymetal Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Jet Black Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Rhodium White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Rhodium White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snowflake White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snowflake White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Soul Red Crystal",
+     "hex": null,
+     "finish": "crystal",
+     "oemPaintName": "Soul Red Crystal",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Deep Crystal Blue Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Deep Crystal Blue Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "sand",
+     "label": "Zircon Sand Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Zircon Sand Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
