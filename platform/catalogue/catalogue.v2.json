@@ -10382,8 +10382,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volvo/volvo-s90-v1/bright-dusk-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 37065760,
-  "mobileFileSizeBytes": 37065760,
+  "fileSizeBytes": 21944612,
+  "mobileFileSizeBytes": 21944612,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -10394,7 +10394,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Volvo S90 Recharge (Free)'."
+   "Source title: 'Volvo S90 Recharge (Free)'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3273670, \"facesAfter\": 151284, \"ratio\": 0.046}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -10467,7 +10468,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -10524,8 +10526,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ford/ford-ranger-2023-v1/chrome-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2589704,
-  "mobileFileSizeBytes": 2589704,
+  "fileSizeBytes": 1158152,
+  "mobileFileSizeBytes": 1158152,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -10536,7 +10538,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Ford Ranger Next-Gen 2023 Sport'."
+   "Source title: 'Ford Ranger Next-Gen 2023 Sport'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 792791, \"facesAfter\": 151238, \"ratio\": 0.189}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -10609,7 +10612,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -10666,8 +10670,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/peugeot/peugeot-308-2022-v1/vertigo-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 10025108,
-  "mobileFileSizeBytes": 10025108,
+  "fileSizeBytes": 7515704,
+  "mobileFileSizeBytes": 7515704,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -10678,7 +10682,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 | Peugeot 308'."
+   "Source title: '2022 | Peugeot 308'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 913119, \"facesAfter\": 154552, \"ratio\": 0.164}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -10751,7 +10756,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -10808,8 +10814,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/nissan/nissan-navara-2021-v1/magnetic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3868776,
-  "mobileFileSizeBytes": 3868776,
+  "fileSizeBytes": 2475152,
+  "mobileFileSizeBytes": 2475152,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -10820,7 +10826,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Nissan Navara 2021 Calibre E'."
+   "Source title: 'Nissan Navara 2021 Calibre E'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 612955, \"facesAfter\": 154514, \"ratio\": 0.245}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -10893,7 +10900,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -10951,8 +10959,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-m3-f80-2013-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4577664,
-  "mobileFileSizeBytes": 4577664,
+  "fileSizeBytes": 1711552,
+  "mobileFileSizeBytes": 1711552,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -10963,7 +10971,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'BMW M3 Sedan 2013'."
+   "Source title: 'BMW M3 Sedan 2013'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1353401, \"facesAfter\": 260539, \"ratio\": 0.111}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -11036,7 +11045,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -11095,8 +11105,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-e-tron-gt-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 8169096,
-  "mobileFileSizeBytes": 8169096,
+  "fileSizeBytes": 5992728,
+  "mobileFileSizeBytes": 5992728,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -11107,7 +11117,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Audi e-Tron GT - made with Blender'."
+   "Source title: 'Audi e-Tron GT - made with Blender'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1258890, \"facesAfter\": 153494, \"ratio\": 0.119}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -11172,7 +11183,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -11232,8 +11244,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mercedes-benz/mercedes-benz-sl-63-amg-2022-v1/spectral-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5901280,
-  "mobileFileSizeBytes": 5901280,
+  "fileSizeBytes": 3800888,
+  "mobileFileSizeBytes": 3800888,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -11244,7 +11256,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 Mercedes-Benz SL 63 AMG'."
+   "Source title: '2022 Mercedes-Benz SL 63 AMG'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 574126, \"facesAfter\": 154865, \"ratio\": 0.261}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -11317,7 +11330,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -11375,8 +11389,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-m3-e46-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2689144,
-  "mobileFileSizeBytes": 2689144,
+  "fileSizeBytes": 1382504,
+  "mobileFileSizeBytes": 1382504,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -11387,7 +11401,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'BMW M3 E46'."
+   "Source title: 'BMW M3 E46'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 846922, \"facesAfter\": 155234, \"ratio\": 0.177}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -11460,7 +11475,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -11517,8 +11533,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ford/ford-focus-v1/chrome-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3494044,
-  "mobileFileSizeBytes": 3494044,
+  "fileSizeBytes": 2109588,
+  "mobileFileSizeBytes": 2109588,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -11529,7 +11545,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Ford Focus Sedan'."
+   "Source title: 'Ford Focus Sedan'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 804649, \"facesAfter\": 151051, \"ratio\": 0.186}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -11602,7 +11619,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -11661,8 +11679,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mercedes-benz/mercedes-benz-amg-gt-2015-v1/spectral-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2673568,
-  "mobileFileSizeBytes": 2673568,
+  "fileSizeBytes": 1851676,
+  "mobileFileSizeBytes": 1851676,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -11673,7 +11691,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Mercedes-Benz AMG-GT 2015'."
+   "Source title: 'Mercedes-Benz AMG-GT 2015'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 661880, \"facesAfter\": 153948, \"ratio\": 0.227}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -11746,7 +11765,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -11803,8 +11823,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-accord-2021-v1/premium-crystal-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 8172512,
-  "mobileFileSizeBytes": 8172512,
+  "fileSizeBytes": 5323156,
+  "mobileFileSizeBytes": 5323156,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -11815,7 +11835,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2021 Honda Accord'."
+   "Source title: '2021 Honda Accord'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 933379, \"facesAfter\": 171380, \"ratio\": 0.161}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -11880,7 +11901,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -11938,8 +11960,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-tiguan-allspace-2022-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 6654088,
-  "mobileFileSizeBytes": 6654088,
+  "fileSizeBytes": 4701724,
+  "mobileFileSizeBytes": 4701724,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -11950,7 +11972,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 Volkswagen Tiguan L - Allspace'."
+   "Source title: '2022 Volkswagen Tiguan L - Allspace'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 811914, \"facesAfter\": 161747, \"ratio\": 0.185}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -12023,7 +12046,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -12081,8 +12105,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-kona-2025-n-line-v1/performance-blue.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4904428,
-  "mobileFileSizeBytes": 4904428,
+  "fileSizeBytes": 3422792,
+  "mobileFileSizeBytes": 3422792,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -12093,7 +12117,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2025 Hyundai Kona N Line'."
+   "Source title: '2025 Hyundai Kona N Line'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 794108, \"facesAfter\": 162722, \"ratio\": 0.189}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -12166,7 +12191,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -12224,8 +12250,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/fiat/fiat-500-2016-v1/passione-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 11650960,
-  "mobileFileSizeBytes": 11650960,
+  "fileSizeBytes": 7046832,
+  "mobileFileSizeBytes": 7046832,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -12236,7 +12262,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Fiat 500 (2016)'."
+   "Source title: 'Fiat 500 (2016)'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1258516, \"facesAfter\": 150761, \"ratio\": 0.119}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -12301,7 +12328,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -12359,8 +12387,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-sportage-2023-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 13365476,
-  "mobileFileSizeBytes": 13365476,
+  "fileSizeBytes": 11175964,
+  "mobileFileSizeBytes": 11175964,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -12371,7 +12399,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2023 Kia Sportage GT-Line'."
+   "Source title: '2023 Kia Sportage GT-Line'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 587223, \"facesAfter\": 173450, \"ratio\": 0.255}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -12444,7 +12473,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
