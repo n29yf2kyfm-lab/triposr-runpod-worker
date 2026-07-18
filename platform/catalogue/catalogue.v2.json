@@ -2051,8 +2051,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/range-rover-sport/portofino-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3178592,
-  "mobileFileSizeBytes": 3178592,
+  "fileSizeBytes": 4036172,
+  "mobileFileSizeBytes": 4036172,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -2061,7 +2061,9 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-16T14:35:51Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "range-rover-sport: re-sourced+re-optimised 2026-07-18 (1.5M->180k, normals recalc); verify orientation/quality in live app"
+  ],
   "notes": [
    "Range Rover Sport (L494); source title states 2016 and 'Custom' (aftermarket styling). Production 2013-2022.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1535330, \"facesAfter\": 471549, \"ratio\": 0.098}"
