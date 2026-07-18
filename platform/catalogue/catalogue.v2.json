@@ -19415,5 +19415,139 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "citroen-c3-2015-v1",
+  "make": "citroen",
+  "model": "c3",
+  "modelFamily": "c3",
+  "modelAliases": [
+   "c3"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2015,
+  "yearEnd": 2015,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2015 Citroën C3",
+  "sourceUrl": "https://sketchfab.com/3d-models/0761dead5baf4775ac929ec0bf4c8708",
+  "sourceCreator": null,
+  "sourceReferenceId": "0761dead5baf4775ac929ec0bf4c8708",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Eclipse Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2015-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2015-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/citroen/citroen-c3-2015-v1/eclipse-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3817484,
+  "mobileFileSizeBytes": 3817484,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T14:20:44Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2015 Citroën C3'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Platinum Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Platinum Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Perla Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Perla Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Eclipse Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "sand",
+     "label": "Soft Sand",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Soft Sand",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
