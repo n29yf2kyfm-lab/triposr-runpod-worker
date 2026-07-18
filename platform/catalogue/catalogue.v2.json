@@ -19549,5 +19549,141 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "citroen-c5-2022-v1",
+  "make": "citroen",
+  "model": "c5",
+  "modelFamily": "c5",
+  "modelAliases": [
+   "c5",
+   "c5x",
+   "c5 x"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": 2022,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022 Citroën C5X",
+  "sourceUrl": "https://sketchfab.com/3d-models/d50146310c3b4a748e5935b793be0a6b",
+  "sourceCreator": null,
+  "sourceReferenceId": "d50146310c3b4a748e5935b793be0a6b",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Eclipse Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c5-2022-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c5-2022-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/citroen/citroen-c5-2022-v1/eclipse-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3783112,
+  "mobileFileSizeBytes": 3783112,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T14:22:55Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2022 Citroën C5X'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Platinum Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Platinum Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Perla Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Perla Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Eclipse Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "sand",
+     "label": "Soft Sand",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Soft Sand",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
