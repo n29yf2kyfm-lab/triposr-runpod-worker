@@ -14828,5 +14828,140 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "alfa-romeo-milano-2023-v1",
+  "make": "alfa-romeo",
+  "model": "milano",
+  "modelFamily": "milano",
+  "modelAliases": [
+   "milano",
+   "junior"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2023 Alfa Romeo Milano",
+  "sourceUrl": "https://sketchfab.com/3d-models/e9d204f9ecf640338b4cc007a4f31f9a",
+  "sourceCreator": null,
+  "sourceReferenceId": "e9d204f9ecf640338b4cc007a4f31f9a",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "red",
+  "renderColourLabel": "Alfa Red",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/alfa-romeo-milano-2023-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/alfa-romeo-milano-2023-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/alfa-romeo/alfa-romeo-milano-2023-v1/alfa-red.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 13464996,
+  "mobileFileSizeBytes": 13464996,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T10:27:24Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2023 Alfa Romeo Milano'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Vesuvio Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vesuvio Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Vulcano Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vulcano Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alfa White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alfa White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Alfa Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alfa Red",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Competizione Red",
+     "hex": null,
+     "finish": "tri-coat",
+     "oemPaintName": "Competizione Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Misano Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Misano Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Montreal Green",
+     "hex": null,
+     "finish": "tri-coat",
+     "oemPaintName": "Montreal Green",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
