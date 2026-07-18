@@ -20246,5 +20246,140 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-jazz-2018-v1",
+  "make": "honda",
+  "model": "jazz",
+  "modelFamily": "jazz",
+  "modelAliases": [
+   "jazz",
+   "fit"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2018,
+  "yearEnd": 2018,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2018 Honda Fit / Jazz",
+  "sourceUrl": "https://sketchfab.com/3d-models/2b1f535f185e4a6abf6b0a3222487704",
+  "sourceCreator": null,
+  "sourceReferenceId": "2b1f535f185e4a6abf6b0a3222487704",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "red",
+  "renderColourLabel": "Premium Crystal Red",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2018-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2018-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-jazz-2018-v1/premium-crystal-red.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4191748,
+  "mobileFileSizeBytes": 4191748,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T14:37:45Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2018 Honda Fit / Jazz'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
