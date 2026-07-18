@@ -15369,5 +15369,149 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-5-series-e60-v1",
+  "make": "bmw",
+  "model": "5-series",
+  "modelFamily": "5-series",
+  "modelAliases": [
+   "5 series",
+   "520d",
+   "530d"
+  ],
+  "generation": "E60",
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2007,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2007 - 2010 BMW 5series E60",
+  "sourceUrl": "https://sketchfab.com/3d-models/fb051ba83016478f9c107eb68789fd73",
+  "sourceCreator": null,
+  "sourceReferenceId": "fb051ba83016478f9c107eb68789fd73",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Portimao Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-e60-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-e60-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-5-series-e60-v1/portimao-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3869596,
+  "mobileFileSizeBytes": 3869596,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T10:41:27Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2007 - 2010 BMW 5series E60'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
