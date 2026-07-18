@@ -8,3 +8,6 @@ __pycache__/
 
 # Downloaded datasets (fetched via datasets/download.sh) — too large / licence-restricted to commit
 datasets/data/
+
+# AVM trained model binary (regenerate: python3 avm/train_avm.py)
+avm/artifacts/*.joblib

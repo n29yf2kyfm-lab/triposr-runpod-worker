@@ -1,0 +1,10 @@
+{
+  "n_train": 3437192,
+  "n_test": 859298,
+  "median_abs_pct_error": 17.54,
+  "mean_abs_pct_error": 24.15,
+  "within_10pct": 30.7,
+  "within_20pct": 55.4,
+  "mae_gbp": 83517,
+  "r2_logprice": 0.7572
+}
