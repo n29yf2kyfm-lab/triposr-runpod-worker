@@ -21381,5 +21381,148 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-velar-v1",
+  "make": "land-rover",
+  "model": "range-rover-velar",
+  "modelFamily": "range-rover-velar",
+  "modelAliases": [
+   "velar",
+   "range rover velar"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Range Rover Velar 2020",
+  "sourceUrl": "https://sketchfab.com/3d-models/27a86dd93ebf4ac5acfd37879b04c3d2",
+  "sourceCreator": null,
+  "sourceReferenceId": "27a86dd93ebf4ac5acfd37879b04c3d2",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Portofino Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-velar-v1/portofino-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 5220284,
+  "mobileFileSizeBytes": 5220284,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T15:00:44Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: 'Range Rover Velar 2020'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
