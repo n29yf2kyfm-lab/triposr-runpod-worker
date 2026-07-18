@@ -19167,8 +19167,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-a7-2018-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 10256108,
-  "mobileFileSizeBytes": 10256108,
+  "fileSizeBytes": 7982092,
+  "mobileFileSizeBytes": 7982092,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -19179,7 +19179,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Audi A7 Sportback 2018 55 TFSI'."
+   "Source title: 'Audi A7 Sportback 2018 55 TFSI'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1284283, \"facesAfter\": 188241, \"ratio\": 0.117}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -19244,7 +19245,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -19301,8 +19303,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-x7-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2816604,
-  "mobileFileSizeBytes": 2816604,
+  "fileSizeBytes": 2355348,
+  "mobileFileSizeBytes": 2355348,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -19313,7 +19315,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'BMW X7 M60i'."
+   "Source title: 'BMW X7 M60i'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 437850, \"facesAfter\": 159309, \"ratio\": 0.343}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -19386,7 +19389,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -19579,8 +19583,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-tt-2018-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 9261788,
-  "mobileFileSizeBytes": 9261788,
+  "fileSizeBytes": 1004632,
+  "mobileFileSizeBytes": 1004632,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -19591,7 +19595,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2018 Audi TT RS'."
+   "Source title: '2018 Audi TT RS'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 1, \"facesBefore\": 4895224, \"facesAfter\": 189205, \"ratio\": 0.031}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -19656,7 +19661,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -19713,8 +19719,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/citroen/citroen-c3-2015-v1/eclipse-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3817484,
-  "mobileFileSizeBytes": 3817484,
+  "fileSizeBytes": 3555544,
+  "mobileFileSizeBytes": 3555544,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -19725,7 +19731,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2015 Citroën C3'."
+   "Source title: '2015 Citroën C3'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 403628, \"facesAfter\": 150211, \"ratio\": 0.372}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -19790,7 +19797,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -19849,8 +19857,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/citroen/citroen-c5-2022-v1/eclipse-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3783112,
-  "mobileFileSizeBytes": 3783112,
+  "fileSizeBytes": 3751112,
+  "mobileFileSizeBytes": 3751112,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -19861,7 +19869,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 Citroën C5X'."
+   "Source title: '2022 Citroën C5X'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 318815, \"facesAfter\": 150066, \"ratio\": 0.47}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -19926,7 +19935,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -20125,8 +20135,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ford/ford-kuga-v1/chrome-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5737476,
-  "mobileFileSizeBytes": 5737476,
+  "fileSizeBytes": 5585548,
+  "mobileFileSizeBytes": 5585548,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -20137,7 +20147,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Ford Kuga ST-Line'."
+   "Source title: 'Ford Kuga ST-Line'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 325477, \"facesAfter\": 156564, \"ratio\": 0.461}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -20210,7 +20221,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -20267,8 +20279,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ford/ford-mondeo-2021-v1/chrome-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3018948,
-  "mobileFileSizeBytes": 3018948,
+  "fileSizeBytes": 2853140,
+  "mobileFileSizeBytes": 2853140,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -20279,7 +20291,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2021 Ford Mondeo Hybrid Estate'."
+   "Source title: '2021 Ford Mondeo Hybrid Estate'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 396450, \"facesAfter\": 150357, \"ratio\": 0.378}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -20352,7 +20365,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -20410,8 +20424,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-cr-v-v1/premium-crystal-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 13110156,
-  "mobileFileSizeBytes": 13110156,
+  "fileSizeBytes": 2724216,
+  "mobileFileSizeBytes": 2724216,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -20422,7 +20436,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Honda CR-V'."
+   "Source title: 'Honda CR-V'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 2440681, \"facesAfter\": 149990, \"ratio\": 0.061}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -20487,7 +20502,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -20545,8 +20561,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-jazz-2018-v1/premium-crystal-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4191748,
-  "mobileFileSizeBytes": 4191748,
+  "fileSizeBytes": 3175296,
+  "mobileFileSizeBytes": 3175296,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -20557,7 +20573,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2018 Honda Fit / Jazz'."
+   "Source title: '2018 Honda Fit / Jazz'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 360956, \"facesAfter\": 156256, \"ratio\": 0.416}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -20622,7 +20639,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -20679,8 +20697,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-i30-2010-v1/performance-blue.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3206680,
-  "mobileFileSizeBytes": 3206680,
+  "fileSizeBytes": 1249884,
+  "mobileFileSizeBytes": 1249884,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -20691,7 +20709,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Hyundai i30 2010'."
+   "Source title: 'Hyundai i30 2010'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1139376, \"facesAfter\": 151013, \"ratio\": 0.132}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -20764,7 +20783,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -20823,8 +20843,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-ioniq-5-2022-v1/performance-blue.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 11586256,
-  "mobileFileSizeBytes": 11586256,
+  "fileSizeBytes": 1081516,
+  "mobileFileSizeBytes": 1081516,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -20835,7 +20855,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022+ Hyundai+IONIQ+5'."
+   "Source title: '2022+ Hyundai+IONIQ+5'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 8, \"facesBefore\": 939270, \"facesAfter\": 166573, \"ratio\": 0.16}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -20908,7 +20929,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -20967,8 +20989,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-ioniq-6-2023-v1/performance-blue.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4016704,
-  "mobileFileSizeBytes": 4016704,
+  "fileSizeBytes": 3072400,
+  "mobileFileSizeBytes": 3072400,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -20979,7 +21001,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2023 Hyundai IONIQ 6'."
+   "Source title: '2023 Hyundai IONIQ 6'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 502431, \"facesAfter\": 150672, \"ratio\": 0.299}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -21052,7 +21075,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -21109,8 +21133,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-ix35-v1/performance-blue.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1821200,
-  "mobileFileSizeBytes": 1821200,
+  "fileSizeBytes": 2840560,
+  "mobileFileSizeBytes": 2840560,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -21121,7 +21145,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Hyundai ix35 (Tucson)'."
+   "Source title: 'Hyundai ix35 (Tucson)'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 165271, \"facesAfter\": 152166, \"ratio\": 0.908}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -21194,7 +21219,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -21395,8 +21421,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-optima-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1524624,
-  "mobileFileSizeBytes": 1524624,
+  "fileSizeBytes": 2571324,
+  "mobileFileSizeBytes": 2571324,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -21407,7 +21433,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Kia Optima (K5)'."
+   "Source title: 'Kia Optima (K5)'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 166620, \"facesAfter\": 152373, \"ratio\": 0.9}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -21480,7 +21507,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -21537,8 +21565,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-soul-2020-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3667208,
-  "mobileFileSizeBytes": 3667208,
+  "fileSizeBytes": 1631752,
+  "mobileFileSizeBytes": 1631752,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -21549,7 +21577,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Kia Soul EV 2020'."
+   "Source title: 'Kia Soul EV 2020'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1122015, \"facesAfter\": 154609, \"ratio\": 0.134}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -21622,7 +21651,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
