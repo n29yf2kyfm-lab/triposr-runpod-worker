@@ -7680,8 +7680,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-m4-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 11968532,
-  "mobileFileSizeBytes": 11968532,
+  "fileSizeBytes": 4195740,
+  "mobileFileSizeBytes": 4195740,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -7692,7 +7692,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "BMW M4 (G82); production 2021-."
+   "BMW M4 (G82); production 2021-.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1492320, \"facesAfter\": 150145, \"ratio\": 0.101}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -7765,7 +7766,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -7820,8 +7822,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-3-series-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3456176,
-  "mobileFileSizeBytes": 3456176,
+  "fileSizeBytes": 1086960,
+  "mobileFileSizeBytes": 1086960,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -7832,7 +7834,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "BMW 3 Series Touring (E46), 1998-2005."
+   "BMW 3 Series Touring (E46), 1998-2005.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1194284, \"facesAfter\": 158399, \"ratio\": 0.126}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -7905,7 +7908,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -7960,8 +7964,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-m3-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4670144,
-  "mobileFileSizeBytes": 4670144,
+  "fileSizeBytes": 1712976,
+  "mobileFileSizeBytes": 1712976,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -7972,7 +7976,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "BMW M3 (G80) saloon."
+   "BMW M3 (G80) saloon.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1353401, \"facesAfter\": 245003, \"ratio\": 0.111}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -8045,7 +8050,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -8386,8 +8392,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/peugeot/peugeot-307-2008-v1/vertigo-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4983328,
-  "mobileFileSizeBytes": 4983328,
+  "fileSizeBytes": 4806588,
+  "mobileFileSizeBytes": 4806588,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -8398,7 +8404,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2008 Peugeot 307'."
+   "Source title: '2008 Peugeot 307'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 391970, \"facesAfter\": 150342, \"ratio\": 0.383}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -8471,7 +8478,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -8529,8 +8537,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/nissan/nissan-micra-k10-v1/magnetic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3131728,
-  "mobileFileSizeBytes": 3131728,
+  "fileSizeBytes": 1243752,
+  "mobileFileSizeBytes": 1243752,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -8541,7 +8549,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Nissan Micra (K10) 1982'."
+   "Source title: 'Nissan Micra (K10) 1982'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 897822, \"facesAfter\": 150450, \"ratio\": 0.167}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -8614,7 +8623,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -8672,8 +8682,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/alfa-romeo/alfa-romeo-8c-v1/alfa-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4392120,
-  "mobileFileSizeBytes": 4392120,
+  "fileSizeBytes": 1059008,
+  "mobileFileSizeBytes": 1059008,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -8684,7 +8694,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2008 Alfa Romeo 8C Competizione'."
+   "Source title: '2008 Alfa Romeo 8C Competizione'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1808842, \"facesAfter\": 178049, \"ratio\": 0.083}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -8749,7 +8760,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -8807,8 +8819,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/aston-martin/aston-martin-vantage-v1/aston-martin-racing-green.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4841520,
-  "mobileFileSizeBytes": 4841520,
+  "fileSizeBytes": 2424788,
+  "mobileFileSizeBytes": 2424788,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -8819,7 +8831,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2008 Aston Martin V8 Vantage'."
+   "Source title: '2008 Aston Martin V8 Vantage'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 766407, \"facesAfter\": 153451, \"ratio\": 0.196}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -8892,7 +8905,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -8950,8 +8964,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-s3-8p-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5986296,
-  "mobileFileSizeBytes": 5986296,
+  "fileSizeBytes": 3512200,
+  "mobileFileSizeBytes": 3512200,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -8962,7 +8976,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Audi S3 (8P) STOCK'."
+   "Source title: 'Audi S3 (8P) STOCK'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 408028, \"facesAfter\": 155044, \"ratio\": 0.368}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -9027,7 +9042,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -9085,8 +9101,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-e-v1/premium-crystal-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 30680584,
-  "mobileFileSizeBytes": 30680584,
+  "fileSizeBytes": 23937460,
+  "mobileFileSizeBytes": 23937460,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -9097,7 +9113,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'FREE // Honda E (Detailed Interior) 2021'."
+   "Source title: 'FREE // Honda E (Detailed Interior) 2021'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 2186735, \"facesAfter\": 197671, \"ratio\": 0.069}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -9162,7 +9179,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -9498,8 +9516,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-discovery-p360-v1/portofino-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4965068,
-  "mobileFileSizeBytes": 4965068,
+  "fileSizeBytes": 3794216,
+  "mobileFileSizeBytes": 3794216,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -9510,7 +9528,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 Land Rover Discovery P360 Facelift'."
+   "Source title: '2022 Land Rover Discovery P360 Facelift'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 451688, \"facesAfter\": 150339, \"ratio\": 0.332}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -9583,7 +9602,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -9640,8 +9660,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-caddy-2022-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4342800,
-  "mobileFileSizeBytes": 4342800,
+  "fileSizeBytes": 3881948,
+  "mobileFileSizeBytes": 3881948,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -9652,7 +9672,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 Volkswagen Caddy'."
+   "Source title: '2022 Volkswagen Caddy'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 370112, \"facesAfter\": 150240, \"ratio\": 0.405}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -9725,7 +9746,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -9785,8 +9807,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/fiat/fiat-500e-v1/passione-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1767108,
-  "mobileFileSizeBytes": 1767108,
+  "fileSizeBytes": 3139128,
+  "mobileFileSizeBytes": 3139128,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -9797,7 +9819,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2021 Fiat e500'."
+   "Source title: '2021 Fiat e500'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 158157, \"facesAfter\": 150295, \"ratio\": 0.948}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -9862,7 +9885,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -9920,8 +9944,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/vauxhall/vauxhall-insignia-grand-sport-2020-v1/electric-yellow.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3807384,
-  "mobileFileSizeBytes": 3807384,
+  "fileSizeBytes": 1142040,
+  "mobileFileSizeBytes": 1142040,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -9932,7 +9956,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Opel Insignia Grand Sport 2020'."
+   "Source title: 'Opel Insignia Grand Sport 2020'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1361498, \"facesAfter\": 150074, \"ratio\": 0.11}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -10005,7 +10030,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -10064,8 +10090,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/skoda/skoda-octavia-mk3-rs-v1/race-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 14402456,
-  "mobileFileSizeBytes": 14402456,
+  "fileSizeBytes": 4373768,
+  "mobileFileSizeBytes": 4373768,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -10076,7 +10102,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Skoda Octavia (MK3) RS 230'."
+   "Source title: 'Skoda Octavia (MK3) RS 230'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1724158, \"facesAfter\": 195951, \"ratio\": 0.087}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -10149,7 +10176,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -10209,8 +10237,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/skoda/skoda-octavia-rs-combi-2025-v1/race-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4457920,
-  "mobileFileSizeBytes": 4457920,
+  "fileSizeBytes": 1479700,
+  "mobileFileSizeBytes": 1479700,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -10221,7 +10249,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2025 Skoda Octavia RS Combi'."
+   "Source title: '2025 Skoda Octavia RS Combi'.",
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1616859, \"facesAfter\": 161076, \"ratio\": 0.093}"
   ],
   "customization": {
    "configuratorReady": false,
@@ -10294,7 +10323,8 @@
      "glbUrl": null
     }
    ]
-  }
+  },
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
