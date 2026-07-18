@@ -26291,5 +26291,147 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volvo-c40-2022-v1",
+  "make": "volvo",
+  "model": "c40",
+  "modelFamily": "c40",
+  "modelAliases": [
+   "c40"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": 2022,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022 Volvo C40 Recharge",
+  "sourceUrl": "https://sketchfab.com/3d-models/3ea5457f30f54f288e8e5898956265ea",
+  "sourceCreator": null,
+  "sourceReferenceId": "3ea5457f30f54f288e8e5898956265ea",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "taupe",
+  "renderColourLabel": "Bright Dusk Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-c40-2022-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-c40-2022-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volvo/volvo-c40-2022-v1/bright-dusk-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4724104,
+  "mobileFileSizeBytes": 4724104,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T17:42:04Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2022 Volvo C40 Recharge'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Thunder Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thunder Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Vapour Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vapour Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Onyx Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Onyx Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Crystal White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "taupe",
+     "label": "Bright Dusk Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Bright Dusk Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Denim Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Denim Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Forest Lake Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Forest Lake Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
