@@ -24722,5 +24722,147 @@
     }
    ]
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "suzuki-swift-2017-v1",
+  "make": "suzuki",
+  "model": "swift",
+  "modelFamily": "swift",
+  "modelAliases": [
+   "swift"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2017,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2017-2020 Suzuki Swift (VI)",
+  "sourceUrl": "https://sketchfab.com/3d-models/18a4e224353148f1868c6a56ea9a587e",
+  "sourceCreator": null,
+  "sourceReferenceId": "18a4e224353148f1868c6a56ea9a587e",
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Speedy Blue Metallic",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2017-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2017-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/suzuki/suzuki-swift-2017-v1/speedy-blue-metallic.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4247276,
+  "mobileFileSizeBytes": 4247276,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-pipeline-v1",
+  "publishedAt": "2026-07-18T16:09:58Z",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "Source title: '2017-2020 Suzuki Swift (VI)'."
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "ingest-pipeline-v1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "white",
+     "label": "Superior White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Superior White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silky Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silky Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmic Black Pearl Metallic",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Cosmic Black Pearl Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Speedy Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Speedy Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Burning Red Pearl Metallic",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Burning Red Pearl Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Kinetic Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Kinetic Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Jungle Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Jungle Green",
+     "glbUrl": null
+    },
+    {
+     "family": "brown",
+     "label": "Chestnut Brown Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Chestnut Brown Pearl",
+     "glbUrl": null
+    }
+   ]
+  }
  }
 ]
