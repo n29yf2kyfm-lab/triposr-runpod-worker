@@ -5837,10 +5837,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "A",
-  "technicalStatus": "passed",
+  "qualityGrade": "rejected",
+  "technicalStatus": "failed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "quarantined",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -5877,12 +5877,15 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-16T23:44:48Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "unrecoverable"
+  ],
   "notes": [
    "Source title: 'Renault Clio RS Line 2020'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1548355, \"facesAfter\": 184748, \"ratio\": 0.097}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "fix pass 2026-07-19: recalculated normals to clear black-facet corruption."
+   "fix pass 2026-07-19: recalculated normals to clear black-facet corruption.",
+   "2026-07-19: normals fix (clear custom split normals + make_consistent) removed the black back-face shards, but crumpled/self-intersecting GEOMETRY on hood+front wings persists through matte and metallic paint — not shading, the source scan mesh is corrupted in that region. Set aside as unrecoverable; RE-SOURCE a clean CC-BY Renault Clio."
   ],
   "customization": {
    "configuratorReady": false,
