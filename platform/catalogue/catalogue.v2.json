@@ -2345,7 +2345,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/octavia__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/octavia__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/octavia__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/octavia__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/octavia.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/octavia.glb",
   "fallbackGlbUrl": null,
@@ -2365,7 +2370,8 @@
   "needsHumanReview": [],
   "notes": [
    "Skoda Octavia Mk4 (RS per source); source title states 2025; production 2020-.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1617337, \"facesAfter\": 152527, \"ratio\": 0.093}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1617337, \"facesAfter\": 152527, \"ratio\": 0.093}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -3905,7 +3911,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/civic__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/civic__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/civic__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/civic__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/civic.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/civic.glb",
   "fallbackGlbUrl": null,
@@ -3925,7 +3936,8 @@
   "needsHumanReview": [],
   "notes": [
    "Honda Civic Type R (FL5); source title 2023.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 561617, \"facesAfter\": 150769, \"ratio\": 0.267}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 561617, \"facesAfter\": 150769, \"ratio\": 0.267}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -4326,7 +4338,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/c-class__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/c-class__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/c-class__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/c-class__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/c-class.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/c-class.glb",
   "fallbackGlbUrl": null,
@@ -4346,7 +4363,8 @@
   "needsHumanReview": [],
   "notes": [
    "Mercedes C-Class (W205); source title 2020.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 199722, \"facesAfter\": 150054, \"ratio\": 0.751}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 199722, \"facesAfter\": 150054, \"ratio\": 0.751}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -6218,7 +6236,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-megane-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-megane-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-megane-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-megane-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-megane-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-megane-v1.glb",
   "fallbackGlbUrl": null,
@@ -6238,7 +6261,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Renault Megane Sedan'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 518236, \"facesAfter\": 151204, \"ratio\": 0.289}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 518236, \"facesAfter\": 151204, \"ratio\": 0.289}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -6494,7 +6518,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-mokka-2021-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-mokka-2021-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-mokka-2021-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-mokka-2021-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-mokka-2021-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-mokka-2021-v1.glb",
   "fallbackGlbUrl": null,
@@ -6514,7 +6543,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Vauxhall Mokka 2021'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1260277, \"facesAfter\": 151278, \"ratio\": 0.119}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1260277, \"facesAfter\": 151278, \"ratio\": 0.119}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -6639,7 +6669,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ibiza-mk2-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ibiza-mk2-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ibiza-mk2-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ibiza-mk2-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ibiza-mk2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ibiza-mk2-v1.glb",
   "fallbackGlbUrl": null,
@@ -6659,7 +6694,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Seat Ibiza Mk2'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 386027, \"facesAfter\": 159402, \"ratio\": 0.389}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 386027, \"facesAfter\": 159402, \"ratio\": 0.389}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -7333,7 +7369,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2019-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2019-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2019-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2019-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2019-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2019-v1.glb",
   "fallbackGlbUrl": null,
@@ -7352,7 +7393,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2019 Hyundai Kona EV'."
+   "Source title: '2019 Hyundai Kona EV'.",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -7476,7 +7518,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-niro-2021-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-niro-2021-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-niro-2021-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-niro-2021-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-niro-2021-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-niro-2021-v1.glb",
   "fallbackGlbUrl": null,
@@ -7496,7 +7543,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2021 Kia Niro FE Eco Hybrid'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 205551, \"facesAfter\": 150159, \"ratio\": 0.73}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 205551, \"facesAfter\": 150159, \"ratio\": 0.73}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -10635,7 +10683,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2022-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2022-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2022-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2022-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2022-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2022-v1.glb",
   "fallbackGlbUrl": null,
@@ -10655,7 +10708,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2022 | Peugeot 308'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 913119, \"facesAfter\": 154552, \"ratio\": 0.164}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 913119, \"facesAfter\": 154552, \"ratio\": 0.164}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -11937,7 +11991,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-tiguan-allspace-2022-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-tiguan-allspace-2022-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-tiguan-allspace-2022-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-tiguan-allspace-2022-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-tiguan-allspace-2022-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-tiguan-allspace-2022-v1.glb",
   "fallbackGlbUrl": null,
@@ -11957,7 +12016,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2022 Volkswagen Tiguan L - Allspace'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 811914, \"facesAfter\": 161747, \"ratio\": 0.185}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 811914, \"facesAfter\": 161747, \"ratio\": 0.185}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -12526,7 +12586,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-leon-2022-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-leon-2022-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-leon-2022-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-leon-2022-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-leon-2022-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-leon-2022-v1.glb",
   "fallbackGlbUrl": null,
@@ -12546,7 +12611,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2022 Seat Leon FR E-Hybrid - 5 Door'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 568355, \"facesAfter\": 151828, \"ratio\": 0.264}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 568355, \"facesAfter\": 151828, \"ratio\": 0.264}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -12796,7 +12862,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i20-2022-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i20-2022-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i20-2022-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i20-2022-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i20-2022-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i20-2022-v1.glb",
   "fallbackGlbUrl": null,
@@ -12816,7 +12887,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2022 Hyundai i20 N Line'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 690012, \"facesAfter\": 182758, \"ratio\": 0.217}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 690012, \"facesAfter\": 182758, \"ratio\": 0.217}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -16522,7 +16594,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-3-2020-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-3-2020-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-3-2020-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-3-2020-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-3-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-3-2020-v1.glb",
   "fallbackGlbUrl": null,
@@ -16542,7 +16619,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2020 Mazda 3 Sedan'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 500500, \"facesAfter\": 150359, \"ratio\": 0.3}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 500500, \"facesAfter\": 150359, \"ratio\": 0.3}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -18382,7 +18460,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-leon-2025-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-leon-2025-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-leon-2025-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-leon-2025-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-leon-2025-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-leon-2025-v1.glb",
   "fallbackGlbUrl": null,
@@ -18402,7 +18485,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2025 Cupra Leon Sportstourer'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1678472, \"facesAfter\": 192270, \"ratio\": 0.089}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1678472, \"facesAfter\": 192270, \"ratio\": 0.089}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -18808,7 +18892,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a4-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a4-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a4-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a4-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a4-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a4-v1.glb",
   "fallbackGlbUrl": null,
@@ -18828,7 +18917,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Audi A4 (B5)'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 219888, \"facesAfter\": 152509, \"ratio\": 0.682}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 219888, \"facesAfter\": 152509, \"ratio\": 0.682}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -19791,7 +19881,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2015-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2015-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2015-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2015-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2015-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2015-v1.glb",
   "fallbackGlbUrl": null,
@@ -19811,7 +19906,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2015 Citroën C3'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 403628, \"facesAfter\": 150211, \"ratio\": 0.372}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 403628, \"facesAfter\": 150211, \"ratio\": 0.372}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -20216,7 +20312,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-kuga-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-kuga-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-kuga-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-kuga-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-kuga-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-kuga-v1.glb",
   "fallbackGlbUrl": null,
@@ -20236,7 +20337,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Ford Kuga ST-Line'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 325477, \"facesAfter\": 156564, \"ratio\": 0.461}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 325477, \"facesAfter\": 156564, \"ratio\": 0.461}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -20646,7 +20748,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2018-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2018-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2018-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2018-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2018-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2018-v1.glb",
   "fallbackGlbUrl": null,
@@ -20666,7 +20773,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2018 Honda Fit / Jazz'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 360956, \"facesAfter\": 156256, \"ratio\": 0.416}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 360956, \"facesAfter\": 156256, \"ratio\": 0.416}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -20783,7 +20891,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i30-2010-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i30-2010-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i30-2010-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i30-2010-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i30-2010-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-i30-2010-v1.glb",
   "fallbackGlbUrl": null,
@@ -20803,7 +20916,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Hyundai i30 2010'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1139376, \"facesAfter\": 151013, \"ratio\": 0.132}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1139376, \"facesAfter\": 151013, \"ratio\": 0.132}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -21949,7 +22063,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1.glb",
   "fallbackGlbUrl": null,
@@ -21969,7 +22088,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Mazda CX-30 HQ interior 2020'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3283346, \"facesAfter\": 167089, \"ratio\": 0.046}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3283346, \"facesAfter\": 167089, \"ratio\": 0.046}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
