@@ -4139,8 +4139,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Duplicate of nissan-micra-k10-v1 (same K10 1982 asset); de-duplicated.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -4174,7 +4174,8 @@
   "needsHumanReview": [],
   "notes": [
    "Nissan Micra (K10); source title 1982.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 897822, \"facesAfter\": 150450, \"ratio\": 0.167}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 897822, \"facesAfter\": 150450, \"ratio\": 0.167}",
+   "quarantined 2026-07-19 (audit): Duplicate of nissan-micra-k10-v1 (same K10 1982 asset); de-duplicated."
   ],
   "customization": {
    "configuratorReady": false,
@@ -13952,8 +13953,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Geometry is a Peugeot Expert van, not a 207 supermini.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -13987,7 +13988,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Peugeot Expert'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 951344, \"facesAfter\": 150627, \"ratio\": 0.158}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 951344, \"facesAfter\": 150627, \"ratio\": 0.158}",
+   "quarantined 2026-07-19 (audit): Geometry is a Peugeot Expert van, not a 207 supermini."
   ],
   "customization": {
    "configuratorReady": false,
@@ -14790,8 +14792,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Romanian police livery / roof light-bar (source 'Logan Politia'); not a civilian car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -14825,7 +14827,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Dacia/Renault Logan Politia - High-poly'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 910032, \"facesAfter\": 149966, \"ratio\": 0.165}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 910032, \"facesAfter\": 149966, \"ratio\": 0.165}",
+   "quarantined 2026-07-19 (audit): Romanian police livery / roof light-bar (source 'Logan Politia'); not a civilian car."
   ],
   "customization": {
    "configuratorReady": false,
@@ -16036,7 +16039,7 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": 2022,
+  "yearEnd": 2024,
   "bodyStyle": "hatchback",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
@@ -16091,7 +16094,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2022-2024 Cupra Born'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 961011, \"facesAfter\": 153139, \"ratio\": 0.156}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 961011, \"facesAfter\": 153139, \"ratio\": 0.156}",
+   "audit 2026-07-19: yearEnd 2022->2024 per source title '2022-2024'."
   ],
   "customization": {
    "configuratorReady": false,
@@ -18027,7 +18031,7 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": 2022,
+  "yearEnd": 2024,
   "bodyStyle": "suv",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
@@ -18082,7 +18086,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2022-2024 Cupra Formentor'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 913018, \"facesAfter\": 150041, \"ratio\": 0.164}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 913018, \"facesAfter\": 150041, \"ratio\": 0.164}",
+   "audit 2026-07-19: yearEnd 2022->2024 per source title '2022-2024'."
   ],
   "customization": {
    "configuratorReady": false,
@@ -23309,8 +23314,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Geometry is a Peugeot 206, not a 208 (source title 'CAR-PEUGEOT 206').",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -23344,7 +23349,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'CAR-PEUGEOT 206'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 453092, \"facesAfter\": 150162, \"ratio\": 0.331}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 453092, \"facesAfter\": 150162, \"ratio\": 0.331}",
+   "quarantined 2026-07-19 (audit): Geometry is a Peugeot 206, not a 208 (source title 'CAR-PEUGEOT 206')."
   ],
   "customization": {
    "configuratorReady": false,
@@ -26987,8 +26993,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Geometry is a Volvo S90 saloon, not a V90 estate.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -27022,7 +27028,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Volvo S90'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3273670, \"facesAfter\": 151288, \"ratio\": 0.046}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3273670, \"facesAfter\": 151288, \"ratio\": 0.046}",
+   "quarantined 2026-07-19 (audit): Geometry is a Volvo S90 saloon, not a V90 estate."
   ],
   "customization": {
    "configuratorReady": false,
@@ -27396,17 +27403,18 @@
   "modelAliases": [
    "golf gti",
    "golf",
-   "golf 7",
    "golf 8",
+   "golf 8 gti",
    "gti",
-   "golf mk7",
-   "mk8"
+   "mk8",
+   "golf mk8",
+   "a8"
   ],
   "generation": "Mk8",
   "generationAliases": [],
-  "generationConfirmed": false,
-  "yearStart": 2013,
-  "yearEnd": 2020,
+  "generationConfirmed": true,
+  "yearStart": 2020,
+  "yearEnd": null,
   "bodyStyle": "hatchback",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
@@ -27460,8 +27468,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: 'Volkswagen Golf 7 (Mk7)'.",
-   "replaced gappy Mk7 with sourced Mk8 GTI (A8) 2026-07-19; web-optimised 120k faces"
+   "replaced gappy Mk7 with sourced Mk8 GTI (A8) 2026-07-19; web-optimised 120k faces",
+   "audit 2026-07-19: geometry confirmed genuine Mk8 GTI (A8); corrected stale Mk7 years/aliases; generation confirmed."
   ],
   "customization": {
    "configuratorReady": false,
