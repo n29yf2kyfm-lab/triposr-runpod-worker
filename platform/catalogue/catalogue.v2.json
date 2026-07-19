@@ -224,7 +224,8 @@
    "year range unknown"
   ],
   "notes": [
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 155329, \"facesAfter\": 150021, \"ratio\": 0.966}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 155329, \"facesAfter\": 150021, \"ratio\": 0.966}",
+   "colour variants baked 2026-07-19: []"
   ],
   "customization": {
    "colourOptions": [
@@ -4633,7 +4634,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1.glb",
   "fallbackGlbUrl": null,
@@ -4653,7 +4659,8 @@
   "needsHumanReview": [],
   "notes": [
    "Range Rover Evoque (L551); source title '2022 Land Rover Range Rover Evoque'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 204453, \"facesAfter\": 150098, \"ratio\": 0.734}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 204453, \"facesAfter\": 150098, \"ratio\": 0.734}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -7232,7 +7239,11 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q5-2022-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q5-2022-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q5-2022-v1__black.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q5-2022-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q5-2022-v1.glb",
   "fallbackGlbUrl": null,
@@ -7252,7 +7263,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2022 Audi Q5 Sportback'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 460315, \"facesAfter\": 150308, \"ratio\": 0.326}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 460315, \"facesAfter\": 150308, \"ratio\": 0.326}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -9951,7 +9963,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-insignia-grand-sport-2020-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-insignia-grand-sport-2020-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-insignia-grand-sport-2020-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-insignia-grand-sport-2020-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-insignia-grand-sport-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-insignia-grand-sport-2020-v1.glb",
   "fallbackGlbUrl": null,
@@ -9971,7 +9988,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Opel Insignia Grand Sport 2020'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1361498, \"facesAfter\": 150074, \"ratio\": 0.11}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1361498, \"facesAfter\": 150074, \"ratio\": 0.11}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -12143,7 +12161,11 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2025-n-line-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2025-n-line-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2025-n-line-v1__black.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2025-n-line-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2025-n-line-v1.glb",
   "fallbackGlbUrl": null,
@@ -12163,7 +12185,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2025 Hyundai Kona N Line'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 794108, \"facesAfter\": 162722, \"ratio\": 0.189}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 794108, \"facesAfter\": 162722, \"ratio\": 0.189}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -12289,7 +12312,11 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500-2016-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500-2016-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500-2016-v1__black.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500-2016-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500-2016-v1.glb",
   "fallbackGlbUrl": null,
@@ -12309,7 +12336,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Fiat 500 (2016)'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1258516, \"facesAfter\": 150761, \"ratio\": 0.119}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1258516, \"facesAfter\": 150761, \"ratio\": 0.119}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -14604,7 +14632,11 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q3-2023-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q3-2023-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q3-2023-v1__black.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q3-2023-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q3-2023-v1.glb",
   "fallbackGlbUrl": null,
@@ -14624,7 +14656,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2023 Audi Q3 40 TFSI'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 995854, \"facesAfter\": 163764, \"ratio\": 0.151}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 995854, \"facesAfter\": 163764, \"ratio\": 0.151}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -14742,7 +14775,11 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc60-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc60-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc60-v1__black.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc60-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc60-v1.glb",
   "fallbackGlbUrl": null,
@@ -14762,7 +14799,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Volvo XC60'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 547551, \"facesAfter\": 155649, \"ratio\": 0.274}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 547551, \"facesAfter\": 155649, \"ratio\": 0.274}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -15319,7 +15357,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a5-sportback-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a5-sportback-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a5-sportback-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a5-sportback-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a5-sportback-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a5-sportback-v1.glb",
   "fallbackGlbUrl": null,
@@ -15339,7 +15382,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Audi A5 Sportback (A5II)'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 950856, \"facesAfter\": 185588, \"ratio\": 0.158}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 950856, \"facesAfter\": 185588, \"ratio\": 0.158}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -17313,7 +17357,11 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-v1__black.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-v1.glb",
   "fallbackGlbUrl": null,
@@ -17333,7 +17381,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'BMW X1 M- Sport 2020'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1346550, \"facesAfter\": 156878, \"ratio\": 0.111}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1346550, \"facesAfter\": 156878, \"ratio\": 0.111}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -18604,7 +18653,11 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__black.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1.glb",
   "fallbackGlbUrl": null,
@@ -18623,7 +18676,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2021 BMW 218i Gran Coupé 1.5'."
+   "Source title: '2021 BMW 218i Gran Coupé 1.5'.",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -18747,7 +18801,11 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x3-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x3-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x3-v1__black.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x3-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x3-v1.glb",
   "fallbackGlbUrl": null,
@@ -18767,7 +18825,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'BMW X3 M40i'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 426708, \"facesAfter\": 155386, \"ratio\": 0.352}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 426708, \"facesAfter\": 155386, \"ratio\": 0.352}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -21771,7 +21830,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1.glb",
   "fallbackGlbUrl": null,
@@ -21791,7 +21855,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Kia Soul EV 2020'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1122015, \"facesAfter\": 154609, \"ratio\": 0.134}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1122015, \"facesAfter\": 154609, \"ratio\": 0.134}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -22509,7 +22574,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1.glb",
   "fallbackGlbUrl": null,
@@ -22529,7 +22599,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Mercedes-Benz GLA-Class 2020'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 176140, \"facesAfter\": 150029, \"ratio\": 0.852}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 176140, \"facesAfter\": 150029, \"ratio\": 0.852}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -22656,7 +22727,11 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1__black.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1.glb",
   "fallbackGlbUrl": null,
@@ -22676,7 +22751,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2020 Mercedes-Benz GLC300'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 463207, \"facesAfter\": 150392, \"ratio\": 0.324}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 463207, \"facesAfter\": 150392, \"ratio\": 0.324}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -25937,7 +26013,11 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1__black.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1.glb",
   "fallbackGlbUrl": null,
@@ -25957,7 +26037,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2024 Volkswagen ID3 GTX'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1521411, \"facesAfter\": 152362, \"ratio\": 0.099}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1521411, \"facesAfter\": 152362, \"ratio\": 0.099}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -26083,7 +26164,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id5-gtx-2022-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id5-gtx-2022-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id5-gtx-2022-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id5-gtx-2022-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id5-gtx-2022-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id5-gtx-2022-v1.glb",
   "fallbackGlbUrl": null,
@@ -26103,7 +26189,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2022 Volkswagen ID5 GTX'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1305586, \"facesAfter\": 151878, \"ratio\": 0.115}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1305586, \"facesAfter\": 151878, \"ratio\": 0.115}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -26228,7 +26315,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-passat-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-passat-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-passat-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-passat-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-passat-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-passat-v1.glb",
   "fallbackGlbUrl": null,
@@ -26248,7 +26340,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Volkswagen Passat 3D Scan'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 299988, \"facesAfter\": 149997, \"ratio\": 0.5}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 299988, \"facesAfter\": 149997, \"ratio\": 0.5}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -26521,7 +26614,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-t-roc-2020-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-t-roc-2020-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-t-roc-2020-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-t-roc-2020-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-t-roc-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-t-roc-2020-v1.glb",
   "fallbackGlbUrl": null,
@@ -26541,7 +26639,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Volkswagen T- Roc R 2020'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 847237, \"facesAfter\": 155525, \"ratio\": 0.177}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 847237, \"facesAfter\": 155525, \"ratio\": 0.177}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -27537,7 +27636,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc40-2020-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc40-2020-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc40-2020-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc40-2020-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc40-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc40-2020-v1.glb",
   "fallbackGlbUrl": null,
@@ -27557,7 +27661,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Volvo XC40 Recharge 2020'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1451258, \"facesAfter\": 151771, \"ratio\": 0.103}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1451258, \"facesAfter\": 151771, \"ratio\": 0.103}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -27988,7 +28093,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-rio-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-rio-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-rio-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-rio-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-rio-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-rio-v1.glb",
   "fallbackGlbUrl": null,
@@ -28005,7 +28115,8 @@
   "needsHumanReview": [],
   "platesBaked": true,
   "notes": [
-   "ingested 2026-07-19 from CSV shortlist; rendered from original GLB (no decimation), texture-webp + draco, GB plates baked, visually reviewed on the pre-publish sheet."
+   "ingested 2026-07-19 from CSV shortlist; rendered from original GLB (no decimation), texture-webp + draco, GB plates baked, visually reviewed on the pre-publish sheet.",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ]
  },
  {
@@ -28121,7 +28232,10 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-5-v1__silver.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-5-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-5-v1.glb",
   "fallbackGlbUrl": null,
@@ -28138,7 +28252,8 @@
   "needsHumanReview": [],
   "platesBaked": true,
   "notes": [
-   "ingested 2026-07-19 from CSV shortlist; rendered from original GLB (no decimation), texture-webp + draco, GB plates baked, visually reviewed on the pre-publish sheet."
+   "ingested 2026-07-19 from CSV shortlist; rendered from original GLB (no decimation), texture-webp + draco, GB plates baked, visually reviewed on the pre-publish sheet.",
+   "colour variants baked 2026-07-19: ['grey', 'silver']"
   ]
  },
  {
@@ -28187,7 +28302,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-enyaq-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-enyaq-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-enyaq-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-enyaq-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-enyaq-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-enyaq-v1.glb",
   "fallbackGlbUrl": null,
@@ -28204,7 +28324,8 @@
   "needsHumanReview": [],
   "platesBaked": true,
   "notes": [
-   "ingested 2026-07-19 from CSV shortlist; rendered from original GLB (no decimation), texture-webp + draco, GB plates baked, visually reviewed on the pre-publish sheet."
+   "ingested 2026-07-19 from CSV shortlist; rendered from original GLB (no decimation), texture-webp + draco, GB plates baked, visually reviewed on the pre-publish sheet.",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ]
  },
  {
@@ -28253,7 +28374,11 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-v1__black.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-v1.glb",
   "fallbackGlbUrl": null,
@@ -28270,7 +28395,8 @@
   "needsHumanReview": [],
   "platesBaked": true,
   "notes": [
-   "ingested 2026-07-19 from CSV shortlist; rendered from original GLB (no decimation), texture-webp + draco, GB plates baked, visually reviewed on the pre-publish sheet."
+   "ingested 2026-07-19 from CSV shortlist; rendered from original GLB (no decimation), texture-webp + draco, GB plates baked, visually reviewed on the pre-publish sheet.",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black']"
   ]
  },
  {
