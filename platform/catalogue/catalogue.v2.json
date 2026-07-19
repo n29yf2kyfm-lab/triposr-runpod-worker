@@ -7953,7 +7953,8 @@
    "BMW M3 (G80) saloon.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1353401, \"facesAfter\": 245003, \"ratio\": 0.111}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): renders as a red hatch on a baked ground slab — wrong/low-quality (other M3 gens cover M3). Pulled from live pending restore/re-source."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): renders as a red hatch on a baked ground slab — wrong/low-quality (other M3 gens cover M3). Pulled from live pending restore/re-source.",
+   "2026-07-19: redundant — bmw-m3-e30/f80/e46 cover M3 lookups; leaving quarantined."
   ],
   "customization": {
    "configuratorReady": false,
@@ -10345,7 +10346,8 @@
    "Source title: 'Volvo S90 Recharge (Free)'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3273670, \"facesAfter\": 151284, \"ratio\": 0.046}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): renders overhead (mis-oriented). Pulled from live pending restore/re-source."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): renders overhead (mis-oriented). Pulled from live pending restore/re-source.",
+   "2026-07-19: restore attempted (no-auto-upright AND auto-upright) — still renders overhead; source is 146MB and non-axis-aligned (kuga-class). Re-source a lighter, correctly-oriented S90."
   ],
   "customization": {
    "configuratorReady": false,
@@ -14377,7 +14379,8 @@
    "Source title: '2024 Kia Niro PHEV Dynamic Line'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 539529, \"facesAfter\": 172231, \"ratio\": 0.278}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): renders overhead (mis-oriented); kia-niro-2021-v1 covers Niro. Pulled from live pending restore/re-source."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): renders overhead (mis-oriented); kia-niro-2021-v1 covers Niro. Pulled from live pending restore/re-source.",
+   "2026-07-19: redundant — kia-niro-2021-v1 covers Niro; leaving quarantined."
   ],
   "customization": {
    "configuratorReady": false,
