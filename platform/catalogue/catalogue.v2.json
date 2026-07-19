@@ -21169,8 +21169,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-ioniq-5-2022-v1/performance-blue.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2874508,
-  "mobileFileSizeBytes": 2874508,
+  "fileSizeBytes": 2939728,
+  "mobileFileSizeBytes": 2939728,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -21185,7 +21185,8 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 8, \"facesBefore\": 939270, \"facesAfter\": 166573, \"ratio\": 0.16}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-19 rigorous re-audit (fresh high-quality render): body mesh missing/invisible — only wheels+plate render. Pulled from live pending restore/re-source.",
-   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean.",
+   "2026-07-19 GLASS FIX: reprocessed from source with material preservation (gltf-transform `copy`+`webp`+`draco`, not `optimize` which merged glass/lights into body -> frosty). glass/lights materials restored; re-baked hero + variants ['grey', 'silver', 'black', 'white']."
   ],
   "customization": {
    "configuratorReady": false,
@@ -24039,8 +24040,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/porsche/porsche-taycan-v1/gentian-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 6143444,
-  "mobileFileSizeBytes": 6143444,
+  "fileSizeBytes": 6868048,
+  "mobileFileSizeBytes": 6868048,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -24055,7 +24056,8 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 2432828, \"facesAfter\": 162377, \"ratio\": 0.062}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-19 rigorous re-audit (fresh high-quality render): black-facet geometry corruption across body. Pulled from live pending restore/re-source.",
-   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean.",
+   "2026-07-19 GLASS FIX: reprocessed from source with material preservation (gltf-transform `copy`+`webp`+`draco`, not `optimize` which merged glass/lights into body -> frosty). glass/lights materials restored; re-baked hero + variants ['grey', 'silver', 'black', 'white']."
   ],
   "customization": {
    "configuratorReady": false,
@@ -27898,8 +27900,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volvo/volvo-xc40-2020-v1/bright-dusk-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3228528,
-  "mobileFileSizeBytes": 3228528,
+  "fileSizeBytes": 4181648,
+  "mobileFileSizeBytes": 4181648,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -27914,7 +27916,8 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1451258, \"facesAfter\": 151771, \"ratio\": 0.103}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-19 rigorous re-audit (fresh high-quality render): front wheel exploded/splayed geometry. Pulled from live pending restore/re-source.",
-   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean.",
+   "2026-07-19 GLASS FIX: reprocessed from source with material preservation (gltf-transform `copy`+`webp`+`draco`, not `optimize` which merged glass/lights into body -> frosty). glass/lights materials restored; re-baked hero + variants ['grey', 'silver', 'black', 'white']."
   ],
   "customization": {
    "configuratorReady": false,
