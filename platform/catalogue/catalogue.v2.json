@@ -15099,7 +15099,8 @@
    ]
   },
   "webOptimised": true,
-  "textureOptimised": true
+  "textureOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -15236,7 +15237,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -15801,7 +15803,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -15938,7 +15941,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -16083,7 +16087,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -16364,7 +16369,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -16938,7 +16944,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -17074,7 +17081,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -17218,7 +17226,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -17506,7 +17515,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -17787,7 +17797,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
