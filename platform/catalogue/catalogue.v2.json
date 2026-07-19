@@ -2135,8 +2135,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "wrong vehicle: file is a Honda Civic Type R, not a Range Rover Sport; also black-facet corruption",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -2178,7 +2178,8 @@
   "notes": [
    "Range Rover Sport (L494); source title states 2016 and 'Custom' (aftermarket styling). Production 2013-2022.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1535330, \"facesAfter\": 471549, \"ratio\": 0.098}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "quarantined 2026-07-19 (fix pass): Honda Civic Type R mislabel + corruption"
   ],
   "customization": {
    "configuratorReady": false,
@@ -5880,7 +5881,8 @@
   "notes": [
    "Source title: 'Renault Clio RS Line 2020'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1548355, \"facesAfter\": 184748, \"ratio\": 0.097}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "fix pass 2026-07-19: recalculated normals to clear black-facet corruption."
   ],
   "customization": {
    "configuratorReady": false,
@@ -9824,8 +9826,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "exploded/disassembled mesh (no body shell)",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -9859,7 +9861,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2022 Land Rover Discovery P360 Facelift'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 451688, \"facesAfter\": 150339, \"ratio\": 0.332}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 451688, \"facesAfter\": 150339, \"ratio\": 0.332}",
+   "quarantined 2026-07-19 (fix pass): exploded/disassembled mesh (no body shell)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -13113,8 +13116,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "wrong vehicle: file is an exploded Land Rover Discovery P360, not a Ceed",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -13148,7 +13151,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2022 Kia Ceed Sportswagon GT-PlusLine'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 565354, \"facesAfter\": 152557, \"ratio\": 0.265}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 565354, \"facesAfter\": 152557, \"ratio\": 0.265}",
+   "quarantined 2026-07-19 (fix pass): wrong vehicle: file is an exploded Land Rover Discovery P360, not a Ceed"
   ],
   "customization": {
    "configuratorReady": false,
@@ -24118,8 +24122,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "wrong vehicle: file is a black Audi saloon, not an X-Trail SUV",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -24153,7 +24157,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2023 Nissan X-Trail 4x4-i'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 199090, \"facesAfter\": 151585, \"ratio\": 0.753}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 199090, \"facesAfter\": 151585, \"ratio\": 0.753}",
+   "quarantined 2026-07-19 (fix pass): wrong vehicle: file is a black Audi saloon, not an X-Trail SUV"
   ],
   "customization": {
    "configuratorReady": false,
