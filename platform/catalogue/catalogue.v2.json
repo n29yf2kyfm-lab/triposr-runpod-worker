@@ -11382,8 +11382,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "US-market Focus SALOON (not the UK hatchback); junk material names ('Salon' interior) cause blue paint to flood the tyres. Re-source a genuine UK Focus hatch.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -11417,7 +11417,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Ford Focus Sedan'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 804649, \"facesAfter\": 151051, \"ratio\": 0.186}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 804649, \"facesAfter\": 151051, \"ratio\": 0.186}",
+   "quarantined 2026-07-19 (audit): wrong body (US saloon) + tyre overspill from atlas materials; flagged for re-source."
   ],
   "customization": {
    "configuratorReady": false,
@@ -12246,7 +12247,11 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "PaletteMaterial004",
+   "PaletteMaterial012",
+   "carPaint_Sensor"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "red",
   "renderColourLabel": "Runway Red",
@@ -12260,8 +12265,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-sportage-2023-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2982724,
-  "mobileFileSizeBytes": 2982724,
+  "fileSizeBytes": 3195452,
+  "mobileFileSizeBytes": 3195452,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -12273,7 +12278,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2023 Kia Sportage GT-Line'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 587223, \"facesAfter\": 173450, \"ratio\": 0.255}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 587223, \"facesAfter\": 173450, \"ratio\": 0.255}",
+   "audit 2026-07-19: separated wheel/tyre objects into dedicated materials so body recolour no longer bleeds onto the alloys; re-rendered Runway Red."
   ],
   "customization": {
    "configuratorReady": false,
