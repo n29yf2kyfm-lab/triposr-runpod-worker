@@ -5880,11 +5880,14 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T00:07:38Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "frosty-glass-untextured-source"
+  ],
   "notes": [
    "Source title: 'Nissan Juke'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1540446, \"facesAfter\": 163060, \"ratio\": 0.097}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
   ],
   "customization": {
    "configuratorReady": false,
@@ -8999,11 +9002,14 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T13:23:31Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "frosty-glass-untextured-source"
+  ],
   "notes": [
    "Source title: 'Audi S3 (8P) STOCK'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 408028, \"facesAfter\": 155044, \"ratio\": 0.368}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
   ],
   "customization": {
    "configuratorReady": false,
@@ -17051,11 +17057,14 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T11:16:47Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "frosty-glass-untextured-source"
+  ],
   "notes": [
    "Source title: 'Audi Rs3 sedan 2022'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 580917, \"facesAfter\": 150150, \"ratio\": 0.258}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
   ],
   "customization": {
    "configuratorReady": false,
@@ -21788,11 +21797,14 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T14:53:32Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "frosty-glass-untextured-source"
+  ],
   "notes": [
    "Source title: 'Kia Optima (K5)'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 166620, \"facesAfter\": 152373, \"ratio\": 0.9}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
   ],
   "customization": {
    "configuratorReady": false,
@@ -26553,11 +26565,14 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T17:26:33Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "frosty-glass-untextured-source"
+  ],
   "notes": [
    "Source title: 'Volkswagen Passat 3D Scan'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 299988, \"facesAfter\": 149997, \"ratio\": 0.5}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
   ],
   "customization": {
    "configuratorReady": false,
@@ -28373,11 +28388,14 @@
   "pipelineVersion": "csv-ingest-v2",
   "publishedAt": "2026-07-19T00:00:00Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "frosty-glass-untextured-source"
+  ],
   "platesBaked": true,
   "notes": [
    "ingested 2026-07-19 from CSV shortlist; rendered from original GLB (no decimation), texture-webp + draco, GB plates baked, visually reviewed on the pre-publish sheet.",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
   ]
  },
  {
@@ -29081,12 +29099,15 @@
   "fileSizeBytes": 4610496,
   "mobileFileSizeBytes": 4610496,
   "platesBaked": true,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "frosty-glass-untextured-source"
+  ],
   "pipelineVersion": "csv-ingest-v2",
   "publishedAt": "2026-07-19T00:00:00Z",
   "notes": [
    "ingested 2026-07-19 wave-3 (direct Sketchfab search); original GLB no-decimation, texture-webp+draco, plates baked, sheet-reviewed.",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
   ]
  },
  {
@@ -29441,11 +29462,14 @@
   "fileSizeBytes": 356616,
   "mobileFileSizeBytes": 356616,
   "platesBaked": true,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "frosty-glass-untextured-source"
+  ],
   "pipelineVersion": "resource-v2",
   "publishedAt": "2026-07-19T00:00:00Z",
   "notes": [
-   "re-sourced 2026-07-19 to replace an audit-quarantined asset; fix_glb (upright + wheel-sep + plates), texture-webp+draco, sheet-reviewed. variants=['grey', 'silver', 'black', 'white']"
+   "re-sourced 2026-07-19 to replace an audit-quarantined asset; fix_glb (upright + wheel-sep + plates), texture-webp+draco, sheet-reviewed. variants=['grey', 'silver', 'black', 'white']",
+   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
   ]
  },
  {
