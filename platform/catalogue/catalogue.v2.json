@@ -3905,10 +3905,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "rejected",
-  "technicalStatus": "failed",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "quarantined",
+  "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -3935,8 +3935,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/civic/racing-blue-pearl.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3607708,
-  "mobileFileSizeBytes": 3607708,
+  "fileSizeBytes": 1992528,
+  "mobileFileSizeBytes": 1992528,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -3945,14 +3945,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-16T17:07:39Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "reaudit-broken"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Honda Civic Type R (FL5); source title 2023.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 561617, \"facesAfter\": 150769, \"ratio\": 0.267}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): black-facet geometry corruption across body. Pulled from live pending restore/re-source."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): black-facet geometry corruption across body. Pulled from live pending restore/re-source.",
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
   ],
   "customization": {
    "configuratorReady": false,
@@ -6867,10 +6866,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "rejected",
-  "technicalStatus": "failed",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "quarantined",
+  "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -6897,8 +6896,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/tesla/tesla-model-3-v1/deep-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2963720,
-  "mobileFileSizeBytes": 2963720,
+  "fileSizeBytes": 4283648,
+  "mobileFileSizeBytes": 4283648,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -6907,14 +6906,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T00:52:33Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "reaudit-broken"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: 'Tesla Model 3 2020'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 176689, \"facesAfter\": 150028, \"ratio\": 0.849}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): body renders as an unlit black blob (material issue). Pulled from live pending restore/re-source."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): body renders as an unlit black blob (material issue). Pulled from live pending restore/re-source.",
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
   ],
   "customization": {
    "configuratorReady": false,
@@ -7608,10 +7606,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "rejected",
-  "technicalStatus": "failed",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "quarantined",
+  "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -7638,8 +7636,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-m4-v1/portimao-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4195740,
-  "mobileFileSizeBytes": 4195740,
+  "fileSizeBytes": 6576848,
+  "mobileFileSizeBytes": 6576848,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -7648,14 +7646,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T07:36:40Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "reaudit-broken"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "BMW M4 (G82); production 2021-.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1492320, \"facesAfter\": 150145, \"ratio\": 0.101}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): renders overhead (mis-oriented). Pulled from live pending restore/re-source."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): renders overhead (mis-oriented). Pulled from live pending restore/re-source.",
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
   ],
   "customization": {
    "configuratorReady": false,
@@ -11064,10 +11061,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "rejected",
-  "technicalStatus": "failed",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "quarantined",
+  "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -11094,8 +11091,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-e-tron-gt-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1262884,
-  "mobileFileSizeBytes": 1262884,
+  "fileSizeBytes": 3103656,
+  "mobileFileSizeBytes": 3103656,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -11104,14 +11101,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T19:15:11Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "reaudit-broken"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: 'Audi e-Tron GT - made with Blender'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1258890, \"facesAfter\": 153494, \"ratio\": 0.119}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): renders overhead in all orientations (mis-oriented, roof axis not aligned). Pulled from live pending restore/re-source."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): renders overhead in all orientations (mis-oriented, roof axis not aligned). Pulled from live pending restore/re-source.",
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
   ],
   "customization": {
    "configuratorReady": false,
@@ -13150,10 +13146,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "rejected",
-  "technicalStatus": "failed",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "quarantined",
+  "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -13180,8 +13176,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-stinger-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2581312,
-  "mobileFileSizeBytes": 2581312,
+  "fileSizeBytes": 2195332,
+  "mobileFileSizeBytes": 2195332,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -13190,14 +13186,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T20:19:09Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "reaudit-broken"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: 'Kia Stinger'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 32, \"facesBefore\": 560904, \"facesAfter\": 151327, \"ratio\": 0.267}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): black-facet geometry corruption across body. Pulled from live pending restore/re-source."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): black-facet geometry corruption across body. Pulled from live pending restore/re-source.",
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
   ],
   "customization": {
    "configuratorReady": false,
@@ -21141,10 +21136,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "rejected",
-  "technicalStatus": "failed",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "quarantined",
+  "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -21171,8 +21166,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-ioniq-5-2022-v1/performance-blue.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1081516,
-  "mobileFileSizeBytes": 1081516,
+  "fileSizeBytes": 2874508,
+  "mobileFileSizeBytes": 2874508,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -21181,14 +21176,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T14:43:57Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "reaudit-broken"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: '2022+ Hyundai+IONIQ+5'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 8, \"facesBefore\": 939270, \"facesAfter\": 166573, \"ratio\": 0.16}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): body mesh missing/invisible — only wheels+plate render. Pulled from live pending restore/re-source."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): body mesh missing/invisible — only wheels+plate render. Pulled from live pending restore/re-source.",
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
   ],
   "customization": {
    "configuratorReady": false,
@@ -22205,10 +22199,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "rejected",
-  "technicalStatus": "failed",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "quarantined",
+  "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -22235,8 +22229,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mazda/mazda-cx-30-2020-v1/soul-red-crystal.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1918276,
-  "mobileFileSizeBytes": 1918276,
+  "fileSizeBytes": 6184868,
+  "mobileFileSizeBytes": 6184868,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -22245,14 +22239,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T15:05:53Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "reaudit-broken"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: 'Mazda CX-30 HQ interior 2020'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3283346, \"facesAfter\": 167089, \"ratio\": 0.046}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): front wheel exploded/splayed geometry. Pulled from live pending restore/re-source."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): front wheel exploded/splayed geometry. Pulled from live pending restore/re-source.",
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
   ],
   "customization": {
    "configuratorReady": false,
@@ -24013,10 +24006,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "rejected",
-  "technicalStatus": "failed",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "quarantined",
+  "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -24043,8 +24036,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/porsche/porsche-taycan-v1/gentian-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1766656,
-  "mobileFileSizeBytes": 1766656,
+  "fileSizeBytes": 6143444,
+  "mobileFileSizeBytes": 6143444,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -24053,14 +24046,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T15:41:56Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "reaudit-broken"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: 'Porsche Taycan 4S Cross Turismo 2021'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 2432828, \"facesAfter\": 162377, \"ratio\": 0.062}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): black-facet geometry corruption across body. Pulled from live pending restore/re-source."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): black-facet geometry corruption across body. Pulled from live pending restore/re-source.",
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
   ],
   "customization": {
    "configuratorReady": false,
@@ -26211,10 +26203,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "rejected",
-  "technicalStatus": "failed",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "quarantined",
+  "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -26232,7 +26224,8 @@
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1__black.glb"
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1__white.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id3-gtx-2024-v1.glb",
@@ -26240,8 +26233,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-id3-gtx-2024-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1139692,
-  "mobileFileSizeBytes": 1139692,
+  "fileSizeBytes": 3132096,
+  "mobileFileSizeBytes": 3132096,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -26250,14 +26243,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T16:22:24Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "reaudit-broken"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: '2024 Volkswagen ID3 GTX'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1521411, \"facesAfter\": 152362, \"ratio\": 0.099}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): body mesh missing/invisible — only wheels+plate render. Pulled from live pending restore/re-source."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): body mesh missing/invisible — only wheels+plate render. Pulled from live pending restore/re-source.",
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
   ],
   "customization": {
    "configuratorReady": false,
@@ -27873,10 +27865,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "rejected",
-  "technicalStatus": "failed",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "quarantined",
+  "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -27903,8 +27895,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volvo/volvo-xc40-2020-v1/bright-dusk-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1261724,
-  "mobileFileSizeBytes": 1261724,
+  "fileSizeBytes": 3228528,
+  "mobileFileSizeBytes": 3228528,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -27913,14 +27905,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T17:55:33Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "reaudit-broken"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: 'Volvo XC40 Recharge 2020'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1451258, \"facesAfter\": 151771, \"ratio\": 0.103}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): front wheel exploded/splayed geometry. Pulled from live pending restore/re-source."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): front wheel exploded/splayed geometry. Pulled from live pending restore/re-source.",
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
   ],
   "customization": {
    "configuratorReady": false,
