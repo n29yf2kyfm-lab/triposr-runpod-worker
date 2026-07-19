@@ -5985,10 +5985,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "A",
-  "technicalStatus": "passed",
+  "qualityGrade": "rejected",
+  "technicalStatus": "failed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "quarantined",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -6025,11 +6025,14 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T00:00:50Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "audit-quarantine"
+  ],
   "notes": [
    "Source title: 'Volkswagen Golf Mk2'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1854262, \"facesAfter\": 150258, \"ratio\": 0.081}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19 audit: weathered photogrammetry scan with a baked-in asphalt ground plane that can't be cleanly removed; Mk8 hero already serves Golf lookups. Quarantined; re-source only if a clean CC-BY Mk2 appears."
   ],
   "customization": {
    "configuratorReady": false,
@@ -9676,10 +9679,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "A",
-  "technicalStatus": "passed",
+  "qualityGrade": "rejected",
+  "technicalStatus": "failed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "quarantined",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -9716,10 +9719,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T14:08:28Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "audit-quarantine"
+  ],
   "notes": [
    "Source title: '2014 Ford Transit Connect Cargo'.",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19 audit: body renders as an unlit black blob and wheels are mis-coloured blue (scrambled materials) — not premium. Quarantined; re-source a clean CC-BY Transit Connect."
   ],
   "customization": {
    "configuratorReady": false,
