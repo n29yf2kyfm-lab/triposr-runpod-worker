@@ -147,8 +147,7 @@
      "glbUrl": null
     }
    ]
-  },
-  "platesBaked": true
+  }
  },
  {
   "schemaVersion": 2,
@@ -428,8 +427,7 @@
      "glbUrl": null
     }
    ]
-  },
-  "platesBaked": true
+  }
  },
  {
   "schemaVersion": 2,
@@ -852,8 +850,7 @@
      "glbUrl": null
     }
    ]
-  },
-  "platesBaked": true
+  }
  },
  {
   "schemaVersion": 2,
@@ -990,8 +987,7 @@
      "glbUrl": null
     }
    ]
-  },
-  "platesBaked": true
+  }
  },
  {
   "schemaVersion": 2,
@@ -1558,8 +1554,7 @@
      "glbUrl": null
     }
    ]
-  },
-  "platesBaked": true
+  }
  },
  {
   "schemaVersion": 2,
@@ -1709,8 +1704,7 @@
     }
    ]
   },
-  "webOptimised": true,
-  "platesBaked": true
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -2153,7 +2147,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -2291,8 +2286,7 @@
     }
    ]
   },
-  "webOptimised": true,
-  "platesBaked": true
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -2724,7 +2718,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -2866,7 +2861,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -3294,7 +3290,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -3712,8 +3709,7 @@
     }
    ]
   },
-  "webOptimised": true,
-  "platesBaked": true
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -3847,7 +3843,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -5122,7 +5119,8 @@
    ]
   },
   "webOptimised": true,
-  "textureOptimised": true
+  "textureOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -5405,7 +5403,8 @@
     }
    ]
   },
-  "webOptimised": true
+  "webOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -5550,8 +5549,7 @@
     }
    ]
   },
-  "webOptimised": true,
-  "platesBaked": true
+  "webOptimised": true
  },
  {
   "schemaVersion": 2,
@@ -5835,7 +5833,8 @@
    ]
   },
   "webOptimised": true,
-  "textureOptimised": true
+  "textureOptimised": true,
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
