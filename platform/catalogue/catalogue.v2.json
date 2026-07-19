@@ -27448,7 +27448,15 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "Meshesuntitleduniqueid1500011Mtl",
+   "Meshesuntitleduniqueid1500051Mtl",
+   "Meshesuntitleduniqueid1500071Mtl",
+   "Meshesuntitleduniqueid1500101Mtl",
+   "Meshesuntitleduniqueid1500121Mtl",
+   "Meshesuntitleduniqueid1500131Mtl",
+   "Meshesuntitleduniqueid1500151Mtl"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "blue",
   "renderColourLabel": "Atlantic Blue Metallic",
@@ -27475,7 +27483,8 @@
   "needsHumanReview": [],
   "notes": [
    "replaced gappy Mk7 with sourced Mk8 GTI (A8) 2026-07-19; web-optimised 120k faces",
-   "audit 2026-07-19: geometry confirmed genuine Mk8 GTI (A8); corrected stale Mk7 years/aliases; generation confirmed."
+   "audit 2026-07-19: geometry confirmed genuine Mk8 GTI (A8); corrected stale Mk7 years/aliases; generation confirmed.",
+   "audit 2026-07-19: recorded body-paint material names for client-side DVLA recolour."
   ],
   "customization": {
    "configuratorReady": false,
