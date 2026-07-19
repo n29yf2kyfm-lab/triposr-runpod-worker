@@ -20955,10 +20955,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "A",
-  "technicalStatus": "passed",
+  "qualityGrade": "rejected",
+  "technicalStatus": "failed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "quarantined",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -20995,11 +20995,14 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T14:28:20Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "unrecoverable-orientation"
+  ],
   "notes": [
    "Source title: 'Ford Kuga ST-Line'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 325477, \"facesAfter\": 156564, \"ratio\": 0.461}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19: model renders overhead in every orientation (12 rotations tested) — its roof axis is not axis-aligned (saved at an arbitrary tilt), so no 90-degree rotation uprights it in the pipeline. Set aside as untractable; RE-SOURCE a clean CC-BY Ford Kuga."
   ],
   "customization": {
    "configuratorReady": false,
@@ -29399,7 +29402,8 @@
   "publishedAt": "2026-07-19T00:00:00Z",
   "notes": [
    "ingested 2026-07-19 wave-2 (direct Sketchfab search); original GLB no-decimation, texture-webp+draco, plates baked, sheet-reviewed.",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19 audit fix: re-uprighted + wheel-sep + recompress cleared black-facet artefacts; re-baked colour variants [] and hero from fixed source."
   ]
  },
  {
@@ -29493,7 +29497,8 @@
   "publishedAt": "2026-07-19T00:00:00Z",
   "notes": [
    "ingested 2026-07-19 wave-3 (direct Sketchfab search); original GLB no-decimation, texture-webp+draco, plates baked, sheet-reviewed.",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19 audit fix: source was upright; earlier auto-upright wrongly inverted it. Re-exported identity orientation (no auto-upright) + re-baked variants ['grey', 'silver', 'black', 'white'] + hero. Model carries its own front plate."
   ]
  },
  {
