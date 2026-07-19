@@ -27463,7 +27463,9 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk8-v1__grey.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk8-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk8-v1.glb",
   "fallbackGlbUrl": null,
@@ -27484,7 +27486,8 @@
   "notes": [
    "replaced gappy Mk7 with sourced Mk8 GTI (A8) 2026-07-19; web-optimised 120k faces",
    "audit 2026-07-19: geometry confirmed genuine Mk8 GTI (A8); corrected stale Mk7 years/aliases; generation confirmed.",
-   "audit 2026-07-19: recorded body-paint material names for client-side DVLA recolour."
+   "audit 2026-07-19: recorded body-paint material names for client-side DVLA recolour.",
+   "audit 2026-07-19: baked grey colour variant (flat body respray) for deterministic DVLA-colour display."
   ],
   "customization": {
    "configuratorReady": false,
