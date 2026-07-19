@@ -29452,7 +29452,7 @@
  },
  {
   "schemaVersion": 2,
-  "assetId": "renault-clio-mk4-v1",
+  "assetId": "renault-clio-v1",
   "make": "renault",
   "model": "clio",
   "modelFamily": "clio",
@@ -29465,8 +29465,8 @@
   "yearEnd": null,
   "bodyStyle": "hatchback",
   "provenance": "sourced",
-  "sourceTitle": "Renault Clio MK4 2012-2020",
-  "sourceUrl": "https://sketchfab.com/3d-models/70a12bd8056647c7a4226f6fa7171c15",
+  "sourceTitle": "2020 Renault Clio",
+  "sourceUrl": "https://sketchfab.com/3d-models/4c528fefa4154004bbc6305faf71836c",
   "licence": "CC-BY (attribution required)",
   "accuracyGrade": "representative",
   "qualityGrade": "A",
@@ -29474,18 +29474,23 @@
   "visualStatus": "passed",
   "publicationStatus": "approved",
   "paintMaterialNames": [],
-  "colourVariants": {},
-  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-mk4-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-mk4-v1.glb",
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/renault/renault-clio-mk4-v1/hero.jpg",
-  "fileSizeBytes": 210676,
-  "mobileFileSizeBytes": 210676,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-v1__white.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-v1.glb",
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/renault/renault-clio-v1/hero.jpg",
+  "fileSizeBytes": 999524,
+  "mobileFileSizeBytes": 999524,
   "platesBaked": true,
   "needsHumanReview": [],
   "pipelineVersion": "resource-v2",
   "publishedAt": "2026-07-19T00:00:00Z",
   "notes": [
-   "re-sourced 2026-07-19 to replace an audit-quarantined asset; fix_glb (upright + wheel-sep + plates), texture-webp+draco, sheet-reviewed. variants=[]"
+   "re-sourced 2026-07-19: replaces the wheelless clio-mk4 shell with a full model that has wheels (2020 Renault Clio). fix_glb (upright+wheel-sep+plates), texture-webp+draco, wheel-verified. variants=['grey', 'silver', 'black', 'white']"
   ]
  }
 ]
