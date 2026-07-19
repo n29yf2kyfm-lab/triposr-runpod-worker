@@ -4825,8 +4825,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mercedes-benz/mercedes-benz-a-class-2000-v1/spectral-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4146120,
-  "mobileFileSizeBytes": 4146120,
+  "fileSizeBytes": 1581480,
+  "mobileFileSizeBytes": 1581480,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -4839,7 +4839,8 @@
   "notes": [
    "Source title: '2000 Mercedes-Benz A-Class A140'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 178723, \"facesAfter\": 150117, \"ratio\": 0.839}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19 GLASS FIX: reprocessed from source with material preservation (gltf-transform `copy`+`webp`+`draco`, not `optimize` which merged glass/lights into body -> frosty). glass/lights materials restored; re-baked hero + variants ['grey', 'silver', 'black', 'white']."
   ],
   "customization": {
    "configuratorReady": false,
@@ -5840,7 +5841,7 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "A",
+  "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "approved",
@@ -5887,7 +5888,7 @@
    "Source title: 'Nissan Juke'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1540446, \"facesAfter\": 163060, \"ratio\": 0.097}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
+   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass."
   ],
   "customization": {
    "configuratorReady": false,
@@ -9002,14 +9003,12 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T13:23:31Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "frosty-glass-untextured-source"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: 'Audi S3 (8P) STOCK'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 408028, \"facesAfter\": 155044, \"ratio\": 0.368}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
+   "2026-07-19 GLASS AUDIT: render-verified CLEAR glass + proper wheels — the frosty flag was incorrect (model has real transparent BLEND glass that survived). Flag cleared."
   ],
   "customization": {
    "configuratorReady": false,
@@ -17017,10 +17016,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "A",
+  "qualityGrade": "F",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "quarantined",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -17058,13 +17057,13 @@
   "publishedAt": "2026-07-18T11:16:47Z",
   "replacedAssetId": null,
   "needsHumanReview": [
-   "frosty-glass-untextured-source"
+   "broken-missing-wheels"
   ],
   "notes": [
    "Source title: 'Audi Rs3 sedan 2022'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 580917, \"facesAfter\": 150150, \"ratio\": 0.258}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
+   "2026-07-19 GLASS AUDIT: render-verified BROKEN — no tyres (empty wheel wells) + translucent body; material-preserving reprocess from source did not recover wheels. Quarantined pending re-source."
   ],
   "customization": {
    "configuratorReady": false,
@@ -21334,8 +21333,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-ioniq-6-2023-v1/performance-blue.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3072400,
-  "mobileFileSizeBytes": 3072400,
+  "fileSizeBytes": 4903932,
+  "mobileFileSizeBytes": 4903932,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -21348,7 +21347,8 @@
   "notes": [
    "Source title: '2023 Hyundai IONIQ 6'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 502431, \"facesAfter\": 150672, \"ratio\": 0.299}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-19 GLASS FIX: reprocessed from source with material preservation (gltf-transform `copy`+`webp`+`draco`, not `optimize` which merged glass/lights into body -> frosty). glass/lights materials restored; re-baked hero + variants ['grey', 'silver', 'black', 'white']."
   ],
   "customization": {
    "configuratorReady": false,
@@ -21757,7 +21757,7 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "A",
+  "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "approved",
@@ -21804,7 +21804,7 @@
    "Source title: 'Kia Optima (K5)'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 166620, \"facesAfter\": 152373, \"ratio\": 0.9}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
+   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass."
   ],
   "customization": {
    "configuratorReady": false,
@@ -26525,7 +26525,7 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "A",
+  "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "approved",
@@ -26572,7 +26572,7 @@
    "Source title: 'Volkswagen Passat 3D Scan'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 299988, \"facesAfter\": 149997, \"ratio\": 0.5}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
+   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass."
   ],
   "customization": {
    "configuratorReady": false,
@@ -28381,21 +28381,19 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-rio-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1370000,
-  "mobileFileSizeBytes": 1370000,
+  "fileSizeBytes": 4419644,
+  "mobileFileSizeBytes": 4419644,
   "triangleCount": null,
   "vertexCount": null,
   "pipelineVersion": "csv-ingest-v2",
   "publishedAt": "2026-07-19T00:00:00Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "frosty-glass-untextured-source"
-  ],
+  "needsHumanReview": [],
   "platesBaked": true,
   "notes": [
    "ingested 2026-07-19 from CSV shortlist; rendered from original GLB (no decimation), texture-webp + draco, GB plates baked, visually reviewed on the pre-publish sheet.",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
+   "2026-07-19 GLASS FIX: reprocessed from source with material preservation (gltf-transform `copy`+`webp`+`draco`, not `optimize` which merged glass/lights into body -> frosty). glass/lights materials restored; re-baked hero + variants ['grey', 'silver', 'black', 'white']."
   ]
  },
  {
@@ -29045,18 +29043,24 @@
   "publicationStatus": "approved",
   "quarantineReason": null,
   "paintMaterialNames": [],
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-eclipse-cross-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-eclipse-cross-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-eclipse-cross-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-eclipse-cross-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-eclipse-cross-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-eclipse-cross-v1.glb",
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mitsubishi/mitsubishi-eclipse-cross-v1/hero.jpg",
-  "fileSizeBytes": 1444256,
-  "mobileFileSizeBytes": 1444256,
+  "fileSizeBytes": 4916804,
+  "mobileFileSizeBytes": 4916804,
   "platesBaked": true,
   "needsHumanReview": [],
   "pipelineVersion": "csv-ingest-v2",
   "publishedAt": "2026-07-19T00:00:00Z",
   "notes": [
-   "ingested 2026-07-19 wave-3 (direct Sketchfab search); original GLB no-decimation, texture-webp+draco, plates baked, sheet-reviewed."
+   "ingested 2026-07-19 wave-3 (direct Sketchfab search); original GLB no-decimation, texture-webp+draco, plates baked, sheet-reviewed.",
+   "2026-07-19 GLASS FIX: reprocessed from source with material preservation (gltf-transform `copy`+`webp`+`draco`, not `optimize` which merged glass/lights into body -> frosty). glass/lights materials restored; re-baked hero + variants ['grey', 'silver', 'black', 'white']."
   ]
  },
  {
@@ -29081,7 +29085,7 @@
   "sourceUrl": "https://sketchfab.com/3d-models/44f9bd3fedfa4b48bb9970da1953fc0e",
   "licence": "CC-BY (attribution required)",
   "accuracyGrade": "representative",
-  "qualityGrade": "A",
+  "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "approved",
@@ -29107,7 +29111,7 @@
   "notes": [
    "ingested 2026-07-19 wave-3 (direct Sketchfab search); original GLB no-decimation, texture-webp+draco, plates baked, sheet-reviewed.",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
+   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass."
   ]
  },
  {
@@ -29445,10 +29449,10 @@
   "sourceUrl": "https://sketchfab.com/3d-models/252b6243fdf54f79a96aae5f1b6c8f78",
   "licence": "CC-BY (attribution required)",
   "accuracyGrade": "representative",
-  "qualityGrade": "A",
+  "qualityGrade": "F",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "quarantined",
   "paintMaterialNames": [],
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-v1__grey.glb",
@@ -29463,13 +29467,13 @@
   "mobileFileSizeBytes": 356616,
   "platesBaked": true,
   "needsHumanReview": [
-   "frosty-glass-untextured-source"
+   "untextured-clay-source"
   ],
   "pipelineVersion": "resource-v2",
   "publishedAt": "2026-07-19T00:00:00Z",
   "notes": [
    "re-sourced 2026-07-19 to replace an audit-quarantined asset; fix_glb (upright + wheel-sep + plates), texture-webp+draco, sheet-reviewed. variants=['grey', 'silver', 'black', 'white']",
-   "2026-07-19 glass audit: source model has no window-glass material (untextured/opaque windows) so the render worker can't tint the glass — re-processing doesn't help. Re-source candidate for clear glass."
+   "2026-07-19 GLASS AUDIT: render-verified untextured clay model (opaque frosty glass, flat plastic wheels, mirrored plate). Not premium. Quarantined pending re-source."
   ]
  },
  {
