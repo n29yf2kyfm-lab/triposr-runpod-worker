@@ -4763,7 +4763,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-a-class-2000-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-a-class-2000-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-a-class-2000-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-a-class-2000-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-a-class-2000-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-a-class-2000-v1.glb",
   "fallbackGlbUrl": null,
@@ -4783,7 +4788,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2000 Mercedes-Benz A-Class A140'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 178723, \"facesAfter\": 150117, \"ratio\": 0.839}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 178723, \"facesAfter\": 150117, \"ratio\": 0.839}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -5471,7 +5477,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2023-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2023-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2023-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2023-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2023-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2023-v1.glb",
   "fallbackGlbUrl": null,
@@ -5491,7 +5502,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2023 Volkswagen Polo GTI'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 416183, \"facesAfter\": 151281, \"ratio\": 0.36}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 416183, \"facesAfter\": 151281, \"ratio\": 0.36}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -5618,7 +5630,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-2020-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-2020-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-2020-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-2020-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-2020-v1.glb",
   "fallbackGlbUrl": null,
@@ -5638,7 +5655,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Renault Clio RS Line 2020'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1548355, \"facesAfter\": 184748, \"ratio\": 0.097}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1548355, \"facesAfter\": 184748, \"ratio\": 0.097}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -5902,7 +5920,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-v1.glb",
   "fallbackGlbUrl": null,
@@ -5922,7 +5945,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Nissan Juke'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1540446, \"facesAfter\": 163060, \"ratio\": 0.097}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1540446, \"facesAfter\": 163060, \"ratio\": 0.097}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -6737,7 +6761,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tucson-2014-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tucson-2014-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tucson-2014-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tucson-2014-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tucson-2014-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tucson-2014-v1.glb",
   "fallbackGlbUrl": null,
@@ -6757,7 +6786,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2014 Hyundai Tucson'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1500000, \"facesAfter\": 149995, \"ratio\": 0.1}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1500000, \"facesAfter\": 149995, \"ratio\": 0.1}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -12342,7 +12372,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2023-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2023-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2023-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2023-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2023-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2023-v1.glb",
   "fallbackGlbUrl": null,
@@ -12363,7 +12398,8 @@
   "notes": [
    "Source title: '2023 Kia Sportage GT-Line'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 587223, \"facesAfter\": 173450, \"ratio\": 0.255}",
-   "audit 2026-07-19: separated wheel/tyre objects into dedicated materials so body recolour no longer bleeds onto the alloys; re-rendered Runway Red."
+   "audit 2026-07-19: separated wheel/tyre objects into dedicated materials so body recolour no longer bleeds onto the alloys; re-rendered Runway Red.",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -13052,7 +13088,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-astra-g-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-astra-g-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-astra-g-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-astra-g-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-astra-g-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-astra-g-v1.glb",
   "fallbackGlbUrl": null,
@@ -13072,7 +13113,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Opel Astra G'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 2569378, \"facesAfter\": 151276, \"ratio\": 0.058}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 2569378, \"facesAfter\": 151276, \"ratio\": 0.058}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -13925,7 +13967,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1.glb",
   "fallbackGlbUrl": null,
@@ -13945,7 +13992,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2023 bmw 3 series'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 2692991, \"facesAfter\": 169987, \"ratio\": 0.056}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 2692991, \"facesAfter\": 169987, \"ratio\": 0.056}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -20019,7 +20067,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-2014-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-2014-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-2014-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-2014-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-2014-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-2014-v1.glb",
   "fallbackGlbUrl": null,
@@ -20038,7 +20091,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2014 Ford Fiesta ST'."
+   "Source title: '2014 Ford Fiesta ST'.",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -23058,7 +23112,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1.glb",
   "fallbackGlbUrl": null,
@@ -23078,7 +23137,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2018 Nissan Qashqai'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 154932, \"facesAfter\": 150191, \"ratio\": 0.968}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 154932, \"facesAfter\": 150191, \"ratio\": 0.968}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -23350,7 +23410,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1.glb",
   "fallbackGlbUrl": null,
@@ -23370,7 +23435,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Peugeot 2008 GT 2020'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3682303, \"facesAfter\": 168881, \"ratio\": 0.041}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3682303, \"facesAfter\": 168881, \"ratio\": 0.041}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
@@ -25452,7 +25518,12 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-corsa-2011-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-corsa-2011-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-corsa-2011-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-corsa-2011-v1__white.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-corsa-2011-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-corsa-2011-v1.glb",
   "fallbackGlbUrl": null,
@@ -25472,7 +25543,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Opel Corsa 5door 2011'.",
-   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 973631, \"facesAfter\": 149963, \"ratio\": 0.154}"
+   "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 973631, \"facesAfter\": 149963, \"ratio\": 0.154}",
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
   ],
   "customization": {
    "configuratorReady": false,
