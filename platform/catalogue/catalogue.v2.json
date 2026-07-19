@@ -5832,7 +5832,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "Nissan Juke",
-  "sourceUrl": "https://sketchfab.com/3d-models/de76d5100906451bb09eed0011e900c2",
+  "sourceUrl": "https://sketchfab.com/3d-models/b28ed98292d2420d97fb94e2d45b0ffc",
   "sourceCreator": null,
   "sourceReferenceId": "de76d5100906451bb09eed0011e900c2",
   "sourceRetrievedAt": null,
@@ -5841,7 +5841,7 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "B",
+  "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "approved",
@@ -5871,8 +5871,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/nissan/nissan-juke-v1/magnetic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1482776,
-  "mobileFileSizeBytes": 1482776,
+  "fileSizeBytes": 2493364,
+  "mobileFileSizeBytes": 2493364,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -5881,14 +5881,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T00:07:38Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "frosty-glass-untextured-source"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: 'Nissan Juke'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1540446, \"facesAfter\": 163060, \"ratio\": 0.097}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass."
+   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
+   "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model b28ed98292d2420d97fb94e2d45b0ffc, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade A."
   ],
   "customization": {
    "configuratorReady": false,
@@ -17007,7 +17006,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "Audi Rs3 sedan 2022",
-  "sourceUrl": "https://sketchfab.com/3d-models/83259ff918624d63adbce959f1d5b4aa",
+  "sourceUrl": "https://sketchfab.com/3d-models/96fdd80794004df28342b8e035348801",
   "sourceCreator": null,
   "sourceReferenceId": "83259ff918624d63adbce959f1d5b4aa",
   "sourceRetrievedAt": null,
@@ -17016,10 +17015,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "F",
+  "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "quarantined",
+  "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -17046,8 +17045,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-rs3-2022-v1/navarra-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1452664,
-  "mobileFileSizeBytes": 1452664,
+  "fileSizeBytes": 547380,
+  "mobileFileSizeBytes": 547380,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -17056,14 +17055,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T11:16:47Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "broken-missing-wheels"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: 'Audi Rs3 sedan 2022'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 580917, \"facesAfter\": 150150, \"ratio\": 0.258}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 GLASS AUDIT: render-verified BROKEN — no tyres (empty wheel wells) + translucent body; material-preserving reprocess from source did not recover wheels. Quarantined pending re-source."
+   "2026-07-19 GLASS AUDIT: render-verified BROKEN — no tyres (empty wheel wells) + translucent body; material-preserving reprocess from source did not recover wheels. Quarantined pending re-source.",
+   "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model 96fdd80794004df28342b8e035348801, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade A."
   ],
   "customization": {
    "configuratorReady": false,
@@ -21748,7 +21746,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "Kia Optima (K5)",
-  "sourceUrl": "https://sketchfab.com/3d-models/a50e6423aa49488bb1e6936979884748",
+  "sourceUrl": "https://sketchfab.com/3d-models/6fc788c08348419d92588f2f541c5b50",
   "sourceCreator": null,
   "sourceReferenceId": "a50e6423aa49488bb1e6936979884748",
   "sourceRetrievedAt": null,
@@ -21757,7 +21755,7 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "B",
+  "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "approved",
@@ -21787,8 +21785,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-optima-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2571324,
-  "mobileFileSizeBytes": 2571324,
+  "fileSizeBytes": 828868,
+  "mobileFileSizeBytes": 828868,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -21797,14 +21795,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T14:53:32Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "frosty-glass-untextured-source"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: 'Kia Optima (K5)'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 166620, \"facesAfter\": 152373, \"ratio\": 0.9}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass."
+   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
+   "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model 6fc788c08348419d92588f2f541c5b50, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade A."
   ],
   "customization": {
    "configuratorReady": false,
@@ -26516,7 +26513,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "Volkswagen Passat 3D Scan",
-  "sourceUrl": "https://sketchfab.com/3d-models/c839fbd24faa4477b9fb7b3fc6f68fa4",
+  "sourceUrl": "https://sketchfab.com/3d-models/29e59c86cd6049cdbeb97680e7db3a36",
   "sourceCreator": null,
   "sourceReferenceId": "c839fbd24faa4477b9fb7b3fc6f68fa4",
   "sourceRetrievedAt": null,
@@ -26525,7 +26522,7 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "B",
+  "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "approved",
@@ -26555,8 +26552,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-passat-v1/atlantic-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1301864,
-  "mobileFileSizeBytes": 1301864,
+  "fileSizeBytes": 2111504,
+  "mobileFileSizeBytes": 2111504,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -26565,14 +26562,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T17:26:33Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "frosty-glass-untextured-source"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: 'Volkswagen Passat 3D Scan'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 299988, \"facesAfter\": 149997, \"ratio\": 0.5}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass."
+   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
+   "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model 29e59c86cd6049cdbeb97680e7db3a36, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade A."
   ],
   "customization": {
    "configuratorReady": false,
@@ -29082,7 +29078,7 @@
   "compatibleFuelTypes": [],
   "provenance": "sourced",
   "sourceTitle": "Mitsubishi L200 Triton Athlete 2024",
-  "sourceUrl": "https://sketchfab.com/3d-models/44f9bd3fedfa4b48bb9970da1953fc0e",
+  "sourceUrl": "https://sketchfab.com/3d-models/372e50454f3246239a5a1551f839f862",
   "licence": "CC-BY (attribution required)",
   "accuracyGrade": "representative",
   "qualityGrade": "B",
@@ -29100,18 +29096,17 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-l200-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-l200-v1.glb",
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mitsubishi/mitsubishi-l200-v1/hero.jpg",
-  "fileSizeBytes": 4610496,
-  "mobileFileSizeBytes": 4610496,
+  "fileSizeBytes": 154004,
+  "mobileFileSizeBytes": 154004,
   "platesBaked": true,
-  "needsHumanReview": [
-   "frosty-glass-untextured-source"
-  ],
+  "needsHumanReview": [],
   "pipelineVersion": "csv-ingest-v2",
   "publishedAt": "2026-07-19T00:00:00Z",
   "notes": [
    "ingested 2026-07-19 wave-3 (direct Sketchfab search); original GLB no-decimation, texture-webp+draco, plates baked, sheet-reviewed.",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass."
+   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
+   "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model 372e50454f3246239a5a1551f839f862, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade B."
   ]
  },
  {
@@ -29446,13 +29441,13 @@
   "bodyStyle": "suv",
   "provenance": "sourced",
   "sourceTitle": "Land Rover Discovery 5",
-  "sourceUrl": "https://sketchfab.com/3d-models/252b6243fdf54f79a96aae5f1b6c8f78",
+  "sourceUrl": "https://sketchfab.com/3d-models/d9e961c0a10a49d5bdb64b97d8452814",
   "licence": "CC-BY (attribution required)",
   "accuracyGrade": "representative",
-  "qualityGrade": "F",
+  "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "quarantined",
+  "publicationStatus": "approved",
   "paintMaterialNames": [],
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-v1__grey.glb",
@@ -29463,17 +29458,16 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-v1.glb",
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-discovery-v1/hero.jpg",
-  "fileSizeBytes": 356616,
-  "mobileFileSizeBytes": 356616,
+  "fileSizeBytes": 4887940,
+  "mobileFileSizeBytes": 4887940,
   "platesBaked": true,
-  "needsHumanReview": [
-   "untextured-clay-source"
-  ],
+  "needsHumanReview": [],
   "pipelineVersion": "resource-v2",
   "publishedAt": "2026-07-19T00:00:00Z",
   "notes": [
    "re-sourced 2026-07-19 to replace an audit-quarantined asset; fix_glb (upright + wheel-sep + plates), texture-webp+draco, sheet-reviewed. variants=['grey', 'silver', 'black', 'white']",
-   "2026-07-19 GLASS AUDIT: render-verified untextured clay model (opaque frosty glass, flat plastic wheels, mirrored plate). Not premium. Quarantined pending re-source."
+   "2026-07-19 GLASS AUDIT: render-verified untextured clay model (opaque frosty glass, flat plastic wheels, mirrored plate). Not premium. Quarantined pending re-source.",
+   "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model d9e961c0a10a49d5bdb64b97d8452814, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade A."
   ]
  },
  {
