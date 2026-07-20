@@ -3,6 +3,8 @@ diffusers>=0.32.0
 transformers>=4.44.0
 accelerate
 sentencepiece
+protobuf
+tiktoken
 imageio
 imageio-ffmpeg
 Pillow
