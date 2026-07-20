@@ -48,8 +48,8 @@
    "defenderM_LightGlassNormal_OuterOrange_Low1",
    "defenderM_LightGlassNormal_OuterRed_Low1"
   ],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Portofino Blue Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -57,7 +57,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/batch/land-rover/defender_uc.glb",
@@ -81,7 +85,8 @@
    "year range unknown"
   ],
   "notes": [
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -205,8 +210,8 @@
    "Mesheschassis0301_diff"
   ],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Spectral Blue Metallic",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -214,7 +219,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc.glb",
@@ -238,7 +247,8 @@
    "colour variants baked 2026-07-19: []",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-19 rigorous re-audit (fresh high-quality render): renders as a small blue bubble car — wrong vehicle. Pulled from live pending restore/re-source.",
-   "2026-07-20 RE-SOURCED from CSV library-fill: CC-BY model 119c5e10733142b197aa53b86f6aeb04 (Mercedes E-Class W212), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A."
+   "2026-07-20 RE-SOURCED from CSV library-fill: CC-BY model 119c5e10733142b197aa53b86f6aeb04 (Mercedes E-Class W212), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "colourOptions": [
@@ -357,8 +367,8 @@
    "Glass_Fabric",
    "Screen_Glow_Giulia"
   ],
-  "defaultColourFamily": "red",
-  "renderColourLabel": "Alfa Red",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -366,7 +376,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/giulia_uc.glb",
@@ -388,7 +402,8 @@
    "generation unconfirmed"
   ],
   "notes": [
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "colourOptions": [
@@ -497,8 +512,8 @@
   "glassMaterialNames": [
    "Intglass"
   ],
-  "defaultColourFamily": "red",
-  "renderColourLabel": "Alfa Red",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -506,7 +521,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/stelvio__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/stelvio__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/stelvio__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/stelvio__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/stelvio__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/stelvio__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/stelvio__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/stelvio__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/stelvio__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/stelvio.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/alfa-romeo/stelvio_uc.glb",
@@ -529,7 +548,8 @@
   ],
   "notes": [
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 186266, \"facesAfter\": 151182, \"ratio\": 0.805}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -641,8 +661,8 @@
    "chassis.1"
   ],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Atlantic Blue Metallic",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -650,7 +670,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran_uc.glb",
@@ -673,7 +697,8 @@
   ],
   "notes": [
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 171187, \"facesAfter\": 150066, \"ratio\": 0.876}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "colourOptions": [
@@ -792,8 +817,8 @@
    "Illuminated_Gauges",
    "Screen"
   ],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Magnetic Blue Metallic",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -801,7 +826,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/370z_uc.glb",
@@ -823,7 +852,8 @@
    "generation unconfirmed"
   ],
   "notes": [
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "colourOptions": [
@@ -941,8 +971,8 @@
   "glassMaterialNames": [
    "wrxM_LightGlassNormal_Clear_Low1"
   ],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "WR Blue Pearl",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -950,7 +980,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/impreza_uc.glb",
@@ -972,7 +1006,8 @@
    "generation unconfirmed"
   ],
   "notes": [
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -1095,8 +1130,8 @@
    "Meshesmeshes1windscreenok0041Mtl",
    "Meshesmeshes1windscreenok1Mtl"
   ],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Dark Sapphire",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -1104,7 +1139,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc.glb",
@@ -1127,7 +1166,8 @@
    "year range unknown"
   ],
   "notes": [
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "colourOptions": [
@@ -1236,8 +1276,8 @@
   "glassMaterialNames": [
    "Screen"
   ],
-  "defaultColourFamily": "green",
-  "renderColourLabel": "Aston Martin Racing Green",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -1245,7 +1285,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/aston-martin/db11_uc__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/aston-martin/db11_uc__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/aston-martin/db11_uc__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/aston-martin/db11_uc__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/aston-martin/db11_uc__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/aston-martin/db11_uc__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/aston-martin/db11_uc__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/aston-martin/db11_uc__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/aston-martin/db11_uc__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/aston-martin/db11_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/aston-martin/db11_uc.glb",
@@ -1268,7 +1312,8 @@
   ],
   "notes": [
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 209868, \"facesAfter\": 150429, \"ratio\": 0.715}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "colourOptions": [
@@ -1386,8 +1431,8 @@
   "glassMaterialNames": [
    "glass"
   ],
-  "defaultColourFamily": "green",
-  "renderColourLabel": "Verde Mantis",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -1395,7 +1440,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lamborghini/urus_uc__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lamborghini/urus_uc__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lamborghini/urus_uc__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lamborghini/urus_uc__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lamborghini/urus_uc__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lamborghini/urus_uc__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lamborghini/urus_uc__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lamborghini/urus_uc__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lamborghini/urus_uc__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lamborghini/urus_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lamborghini/urus_uc.glb",
@@ -1417,7 +1466,8 @@
    "generation unconfirmed"
   ],
   "notes": [
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "colourOptions": [
@@ -1532,8 +1582,8 @@
    "BMW_E30_M3_PAINT"
   ],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Portimao Blue Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -1541,7 +1591,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m3_uc__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m3_uc__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m3_uc__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m3_uc__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m3_uc__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m3_uc__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m3_uc__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m3_uc__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m3_uc__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m3_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/m3_uc.glb",
@@ -1563,7 +1617,8 @@
    "year range unknown"
   ],
   "notes": [
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "colourOptions": [
@@ -1845,8 +1900,8 @@
    "lights",
    "window"
   ],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Gentian Blue Metallic",
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Studio Grey",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -1854,7 +1909,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/911__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/911__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/911__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/911__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/911__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/911__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/911__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/911__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/911__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/911.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/911.glb",
@@ -1876,7 +1935,8 @@
   "notes": [
    "Porsche 911 Carrera 4S (per source title). Body identifies as 991 generation, production span 2011-2019.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 652660, \"facesAfter\": 150550, \"ratio\": 0.23}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'grey' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": true,
