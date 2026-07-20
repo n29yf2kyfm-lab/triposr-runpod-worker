@@ -42693,7 +42693,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 7bccb635920343d9b03823bf09cb0f43 (2024 Subaru BRZ tS), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=152)."
+   "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=152).",
+   "2026-07-20 hero poster re-rendered in default colour (grey) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -42842,7 +42843,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model f7ce18246466400e8a2b99337b183b74 (2011 Subaru WRX STI Hatchback), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=184)."
+   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=184).",
+   "2026-07-20 hero poster re-rendered in default colour (silver) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -42993,7 +42995,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 1f3ef39f1c95445197ac5076a2d696c2 (2011 Mazda 2), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=196)."
+   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=196).",
+   "2026-07-20 hero poster re-rendered in default colour (silver) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -43143,7 +43146,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model fbf600c22be0419fa4e304675e41ca51 (2011 Mazda RX-8 Spirit R), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=178)."
+   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=178).",
+   "2026-07-20 hero poster re-rendered in default colour (silver) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -43292,7 +43296,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model c9031d4501f74639a2552539fd2dba36 (2019 Volkswagen Jetta), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=163)."
+   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=163).",
+   "2026-07-20 hero poster re-rendered in default colour (silver) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -43443,7 +43448,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 4b52cfc4ce32438aa732880fae81c047 (2017 Porsche 718 Boxster S), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=166)."
+   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=166).",
+   "2026-07-20 hero poster re-rendered in default colour (silver) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -43594,7 +43600,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 5ab56c0a7666450cabb59d5e44539a12 (2019 Porsche 718 Boxster T), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=128)."
+   "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=128).",
+   "2026-07-20 hero poster re-rendered in default colour (grey) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -43745,7 +43752,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 1a87f610bb854c6395ed8b03ba8e1965 (Porsche 718 Boxster Spyder RS), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=142)."
+   "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=142).",
+   "2026-07-20 hero poster re-rendered in default colour (grey) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -43894,7 +43902,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model e9411dfa29f745d6a69021d8ce19d2e7 (2017 Honda NSX), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=224)."
+   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=224).",
+   "2026-07-20 hero poster re-rendered in default colour (white) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -44043,7 +44052,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 3d3dc53289eb46d1b57e6c8741e09c0c (2009 Alfa Romeo MiTo), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=161)."
+   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=161).",
+   "2026-07-20 hero poster re-rendered in default colour (silver) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -44196,7 +44206,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 5b7e696453894150bdb594a4770e93a3 (Mini Cooper S Pre-Facelift), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=205)."
+   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=205).",
+   "2026-07-20 hero poster re-rendered in default colour (white) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -44348,7 +44359,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model f52304cd51b44ac3af057c24b90d73d8 (Mini John Cooper Works Convertible), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=129)."
+   "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=129).",
+   "2026-07-20 hero poster re-rendered in default colour (grey) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -44497,7 +44509,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model fbbeae0a1a40455896557f6642b31eb5 (Mercedes Vito Van 2010 Facelift Short Version), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=221)."
+   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=221).",
+   "2026-07-20 hero poster re-rendered in default colour (white) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -44646,7 +44659,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 40dc7c8a08e1479ba3bbd93d06744ede (2020 Skoda Rapid), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=154)."
+   "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=154).",
+   "2026-07-20 hero poster re-rendered in default colour (grey) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -44795,7 +44809,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 65d6e3b831274a46b26e821477b0147d (2000 Alfa Romeo 147 Twin Spark), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=230)."
+   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=230).",
+   "2026-07-20 hero poster re-rendered in default colour (white) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -44945,7 +44960,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model bae4423cff184f8ebf3a46a1ffaf064a (2023 Toyota bZ4X), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=179)."
+   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=179).",
+   "2026-07-20 hero poster re-rendered in default colour (silver) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -45094,7 +45110,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model e10068b2511b4ed7b724a8d87a362727 (Toyota bZ4X), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=207)."
+   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=207).",
+   "2026-07-20 hero poster re-rendered in default colour (white) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -45244,7 +45261,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 24f78b3dc6e84fe0b0b2afdb43d547ea (2020 Polestar 2), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=232)."
+   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=232).",
+   "2026-07-20 hero poster re-rendered in default colour (white) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -45393,7 +45411,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 8c314a85594749a198d21d1ebff8e515 (2021 Cupra Ateca), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=194)."
+   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=194).",
+   "2026-07-20 hero poster re-rendered in default colour (silver) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -45542,7 +45561,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 5fb13d2daeb5480e8be44e475e2acf59 (Volvo C30 R-Design), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=204)."
+   "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=204).",
+   "2026-07-20 hero poster re-rendered in default colour (white) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -45692,7 +45712,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 751c7d18c05946d18ba7953dc046dec6 (2020 Toyota Proace Verso City), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=183)."
+   "2026-07-20 default studio colour family set from source hero luminance: silver (Studio Silver, sampled L=183).",
+   "2026-07-20 hero poster re-rendered in default colour (silver) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected)."
   ],
   "customization": {
    "configuratorReady": true,
