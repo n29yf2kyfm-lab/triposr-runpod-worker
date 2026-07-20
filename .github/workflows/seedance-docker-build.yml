@@ -2,7 +2,9 @@ name: Build and Push Seedance Video Docker Image
 
 on:
   push:
-    branches: [ main ]
+    # claude/review-crfuui is included temporarily so the image can be built and
+    # pushed from the feature branch before merge. Remove it once merged to main.
+    branches: [ main, claude/review-crfuui ]
     paths:
       - 'seedance-video/**'
       - '.github/workflows/seedance-docker-build.yml'
