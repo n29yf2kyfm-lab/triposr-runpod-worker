@@ -1,5 +1,4 @@
 runpod
-torch>=2.2.0
 diffusers>=0.32.0
 transformers>=4.44.0
 accelerate
