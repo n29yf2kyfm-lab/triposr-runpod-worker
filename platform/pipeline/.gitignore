@@ -1,0 +1,4 @@
+pipeline_work/
+__pycache__/
+*.pyc
+golf_publish.py
