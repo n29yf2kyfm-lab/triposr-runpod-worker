@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # The base image ships torch 2.2.0, but diffusers' LTX pipeline references
 # torch.xpu (added in torch 2.4). Upgrade torch/torchvision to a cu121 build
 # before installing the rest.
-RUN pip install --no-cache-dir torch==2.5.1 torchvision==0.20.1 \
+RUN pip install --no-cache-dir torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 \
     --index-url https://download.pytorch.org/whl/cu121
 
 COPY requirements.txt /app/requirements.txt
