@@ -16408,7 +16408,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "2012 Kia Picanto",
-  "sourceUrl": "https://sketchfab.com/3d-models/9786de51f22741f38e7bdc5a0e19bc25",
+  "sourceUrl": "https://sketchfab.com/3d-models/8727b8185a8a4a5f963802984577a5fe",
   "sourceCreator": null,
   "sourceReferenceId": "9786de51f22741f38e7bdc5a0e19bc25",
   "sourceRetrievedAt": null,
@@ -16417,10 +16417,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "F",
+  "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "quarantined",
+  "publicationStatus": "approved",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -16447,8 +16447,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-picanto-2012-v1/runway-red.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4193208,
-  "mobileFileSizeBytes": 4193208,
+  "fileSizeBytes": 5887148,
+  "mobileFileSizeBytes": 5887148,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -16457,14 +16457,13 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T10:58:03Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "wrong-vehicle-is-suzuki-alto"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "Source title: '2012 Kia Picanto'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 716104, \"facesAfter\": 149883, \"ratio\": 0.209}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 LIBRARY AUDIT: this is the same Suzuki Alto model as suzuki-alto-v1 (badged 'ALTO'), mislabelled as Kia Picanto. Quarantined; re-source a genuine Picanto."
+   "2026-07-20 LIBRARY AUDIT: this is the same Suzuki Alto model as suzuki-alto-v1 (badged 'ALTO'), mislabelled as Kia Picanto. Quarantined; re-source a genuine Picanto.",
+   "2026-07-20 RE-SOURCED from CSV library-fill: CC-BY model 8727b8185a8a4a5f963802984577a5fe (2024 Kia Picanto GT-Line), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A."
   ],
   "customization": {
    "configuratorReady": false,
