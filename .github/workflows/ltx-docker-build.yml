@@ -2,9 +2,7 @@ name: Build and Push LTX-Video Docker Image
 
 on:
   push:
-    # claude/review-crfuui included temporarily to build from the feature branch
-    # before merge. Remove once merged to main.
-    branches: [ main, claude/review-crfuui ]
+    branches: [ main ]
     paths:
       - 'ltx-video/**'
       - '.github/workflows/ltx-docker-build.yml'
