@@ -21835,8 +21835,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Performance Blue",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -21844,7 +21844,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1.glb",
@@ -21869,7 +21873,8 @@
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-19 rigorous re-audit (fresh high-quality render): body mesh missing/invisible — only wheels+plate render. Pulled from live pending restore/re-source.",
    "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean.",
-   "2026-07-19 GLASS FIX: reprocessed from source with material preservation (gltf-transform `copy`+`webp`+`draco`, not `optimize` which merged glass/lights into body -> frosty). glass/lights materials restored; re-baked hero + variants ['grey', 'silver', 'black', 'white']."
+   "2026-07-19 GLASS FIX: reprocessed from source with material preservation (gltf-transform `copy`+`webp`+`draco`, not `optimize` which merged glass/lights into body -> frosty). glass/lights materials restored; re-baked hero + variants ['grey', 'silver', 'black', 'white'].",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -21991,8 +21996,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Performance Blue",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -22000,7 +22005,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1.glb",
@@ -22023,7 +22032,8 @@
    "Source title: '2023 Hyundai IONIQ 6'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 502431, \"facesAfter\": 150672, \"ratio\": 0.299}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 GLASS FIX: reprocessed from source with material preservation (gltf-transform `copy`+`webp`+`draco`, not `optimize` which merged glass/lights into body -> frosty). glass/lights materials restored; re-baked hero + variants ['grey', 'silver', 'black', 'white']."
+   "2026-07-19 GLASS FIX: reprocessed from source with material preservation (gltf-transform `copy`+`webp`+`draco`, not `optimize` which merged glass/lights into body -> frosty). glass/lights materials restored; re-baked hero + variants ['grey', 'silver', 'black', 'white'].",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -22143,8 +22153,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Performance Blue",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -22152,7 +22162,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix35-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix35-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix35-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix35-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix35-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix35-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix35-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix35-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix35-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix35-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix35-v1.glb",
@@ -22174,7 +22188,8 @@
   "notes": [
    "Source title: 'Hyundai ix35 (Tucson)'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 165271, \"facesAfter\": 152166, \"ratio\": 0.908}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -22295,8 +22310,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Performance Blue",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -22304,7 +22319,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1.glb",
@@ -22325,7 +22344,8 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: '2020 Hyundai Santa Fe TM 380T HTrac China'.",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -22445,8 +22465,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "red",
-  "renderColourLabel": "Runway Red",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -22454,7 +22474,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-optima-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-optima-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-optima-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-optima-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-optima-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-optima-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-optima-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-optima-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-optima-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-optima-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-optima-v1.glb",
@@ -22478,7 +22502,8 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 166620, \"facesAfter\": 152373, \"ratio\": 0.9}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
-   "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model 6fc788c08348419d92588f2f541c5b50, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade A."
+   "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model 6fc788c08348419d92588f2f541c5b50, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade A.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -22598,8 +22623,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "red",
-  "renderColourLabel": "Runway Red",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -22607,7 +22632,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1.glb",
@@ -22629,7 +22658,8 @@
   "notes": [
    "Source title: 'Kia Soul EV 2020'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1122015, \"facesAfter\": 154609, \"ratio\": 0.134}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -22750,8 +22780,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Portofino Blue Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -22759,7 +22789,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1.glb",
@@ -22781,7 +22815,8 @@
   "notes": [
    "Source title: 'Range Rover Velar 2020'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1707842, \"facesAfter\": 151644, \"ratio\": 0.088}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -22902,8 +22937,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "red",
-  "renderColourLabel": "Soul Red Crystal",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -22911,7 +22946,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-30-2020-v1.glb",
@@ -22935,7 +22974,8 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3283346, \"facesAfter\": 167089, \"ratio\": 0.046}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-19 rigorous re-audit (fresh high-quality render): front wheel exploded/splayed geometry. Pulled from live pending restore/re-source.",
-   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean."
+   "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -23057,8 +23097,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "red",
-  "renderColourLabel": "Soul Red Crystal",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -23066,7 +23106,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2015-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2015-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2015-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2015-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2015-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2015-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2015-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2015-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2015-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2015-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2015-v1.glb",
@@ -23088,7 +23132,8 @@
   "notes": [
    "Source title: '2015 Mazda MX-5 Speedster'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1247878, \"facesAfter\": 150879, \"ratio\": 0.12}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -23210,8 +23255,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Spectral Blue Metallic",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -23219,7 +23264,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-g-class-2018-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-g-class-2018-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-g-class-2018-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-g-class-2018-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-g-class-2018-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-g-class-2018-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-g-class-2018-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-g-class-2018-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-g-class-2018-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-g-class-2018-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-g-class-2018-v1.glb",
@@ -23241,7 +23290,8 @@
   "notes": [
    "Source title: 'Mercedes G-class 2018'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 887829, \"facesAfter\": 150748, \"ratio\": 0.169}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -23362,8 +23412,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Spectral Blue Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -23371,7 +23421,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1.glb",
@@ -23393,7 +23447,8 @@
   "notes": [
    "Source title: 'Mercedes-Benz GLA-Class 2020'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 176140, \"facesAfter\": 150029, \"ratio\": 0.852}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -23515,15 +23570,20 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Spectral Blue Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1__black.glb"
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1.glb",
@@ -23545,7 +23605,8 @@
   "notes": [
    "Source title: '2020 Mercedes-Benz GLC300'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 463207, \"facesAfter\": 150392, \"ratio\": 0.324}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -23666,8 +23727,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Spectral Blue Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -23675,7 +23736,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1.glb",
@@ -23697,7 +23762,8 @@
   "notes": [
    "Source title: '2022 Mercedes-Benz AMG GLS 63'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 483956, \"facesAfter\": 150771, \"ratio\": 0.31}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -23819,8 +23885,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "green",
-  "renderColourLabel": "British Racing Green Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -23828,7 +23894,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-v1.glb",
@@ -23850,7 +23920,8 @@
   "notes": [
    "Source title: 'Mini_ Cooper_S_clubman_2011'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1075456, \"facesAfter\": 152160, \"ratio\": 0.139}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -23962,8 +24033,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Magnetic Blue Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -23971,7 +24042,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-leaf-2023-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-leaf-2023-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-leaf-2023-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-leaf-2023-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-leaf-2023-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-leaf-2023-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-leaf-2023-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-leaf-2023-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-leaf-2023-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-leaf-2023-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-leaf-2023-v1.glb",
@@ -23993,7 +24068,8 @@
   "notes": [
    "Source title: '2023 Nissan Leaf SV Plus'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 104055, \"facesAfter\": 104055, \"ratio\": 1.0}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -24114,8 +24190,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Magnetic Blue Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -24123,7 +24199,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2018-v1.glb",
@@ -24145,7 +24225,8 @@
   "notes": [
    "Source title: '2018 Nissan Qashqai'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 154932, \"facesAfter\": 150191, \"ratio\": 0.968}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -24266,8 +24347,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Magnetic Blue Metallic",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -24275,7 +24356,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-x-trail-2023-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-x-trail-2023-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-x-trail-2023-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-x-trail-2023-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-x-trail-2023-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-x-trail-2023-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-x-trail-2023-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-x-trail-2023-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-x-trail-2023-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-x-trail-2023-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-x-trail-2023-v1.glb",
@@ -24298,7 +24383,8 @@
    "Source title: '2023 Nissan X-Trail 4x4-i'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 199090, \"facesAfter\": 151585, \"ratio\": 0.753}",
    "quarantined 2026-07-19 (fix pass): wrong vehicle: file is a black Audi saloon, not an X-Trail SUV",
-   "2026-07-20 RE-SOURCED from CSV library-fill: CC-BY model f9f2cbdacac74ee7acfe1c731195ccaa (2023 Nissan X-Trail), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A."
+   "2026-07-20 RE-SOURCED from CSV library-fill: CC-BY model f9f2cbdacac74ee7acfe1c731195ccaa (2023 Nissan X-Trail), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -24419,8 +24505,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Vertigo Blue Metallic",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -24428,7 +24514,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-v1.glb",
@@ -24450,7 +24540,8 @@
   "notes": [
    "Source title: 'Peugeot 2008 GT 2020'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3682303, \"facesAfter\": 168881, \"ratio\": 0.041}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -24869,8 +24960,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Iron Blue Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -24878,7 +24969,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kadjar-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kadjar-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kadjar-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kadjar-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kadjar-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kadjar-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kadjar-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kadjar-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kadjar-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kadjar-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kadjar-v1.glb",
@@ -24900,7 +24995,8 @@
   "notes": [
    "Source title: 'Renault_Kadjar_2018'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 183114, \"facesAfter\": 150072, \"ratio\": 0.819}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -25012,8 +25108,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Iron Blue Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -25021,7 +25117,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-v1.glb",
@@ -25043,7 +25143,8 @@
   "notes": [
    "Source title: 'Renault Master Panel Van'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1203415, \"facesAfter\": 151436, \"ratio\": 0.125}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -25155,8 +25256,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Iron Blue Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -25164,7 +25265,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-zoe-2012-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-zoe-2012-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-zoe-2012-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-zoe-2012-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-zoe-2012-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-zoe-2012-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-zoe-2012-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-zoe-2012-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-zoe-2012-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-zoe-2012-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-zoe-2012-v1.glb",
@@ -25186,7 +25291,8 @@
   "notes": [
    "Source title: '2012 Renault Zoe'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 364760, \"facesAfter\": 150285, \"ratio\": 0.411}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -25298,8 +25404,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Fjord Blue Metallic",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -25307,7 +25413,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-arona-2022-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-arona-2022-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-arona-2022-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-arona-2022-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-arona-2022-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-arona-2022-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-arona-2022-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-arona-2022-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-arona-2022-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-arona-2022-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-arona-2022-v1.glb",
@@ -25329,7 +25439,8 @@
   "notes": [
    "Source title: '2022 Seat Arona'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1145686, \"facesAfter\": 222625, \"ratio\": 0.131}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -25425,8 +25536,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Fjord Blue Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -25434,7 +25545,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ateca-2020-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ateca-2020-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ateca-2020-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ateca-2020-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ateca-2020-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ateca-2020-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ateca-2020-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ateca-2020-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ateca-2020-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ateca-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-ateca-2020-v1.glb",
@@ -25456,7 +25571,8 @@
   "notes": [
    "Source title: '2020 Seat Ateca (5FP)'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1259949, \"facesAfter\": 153526, \"ratio\": 0.119}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
@@ -25552,8 +25668,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "blue",
-  "renderColourLabel": "Race Blue Metallic",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -25561,7 +25677,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-v1.glb",
@@ -25583,7 +25703,8 @@
   "notes": [
    "Source title: 'Skoda Fabia Mk.2'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 628420, \"facesAfter\": 153402, \"ratio\": 0.239}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": false,
