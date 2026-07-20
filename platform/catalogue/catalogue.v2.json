@@ -12851,10 +12851,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "A",
+  "qualityGrade": "F",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "quarantined",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -12891,11 +12891,14 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T20:10:32Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "broken-orientation-detached-wheel"
+  ],
   "notes": [
    "Source title: 'SUZUKI JIMNY'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1190296, \"facesAfter\": 152688, \"ratio\": 0.126}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 LIBRARY AUDIT: render shows model on its side with a detached wheel — broken geometry/orientation. Quarantined; re-source needed."
   ],
   "customization": {
    "configuratorReady": false,
@@ -16414,10 +16417,10 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "A",
+  "qualityGrade": "F",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "quarantined",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -16454,11 +16457,14 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T10:58:03Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "wrong-vehicle-is-suzuki-alto"
+  ],
   "notes": [
    "Source title: '2012 Kia Picanto'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 716104, \"facesAfter\": 149883, \"ratio\": 0.209}",
-   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']"
+   "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
+   "2026-07-20 LIBRARY AUDIT: this is the same Suzuki Alto model as suzuki-alto-v1 (badged 'ALTO'), mislabelled as Kia Picanto. Quarantined; re-source a genuine Picanto."
   ],
   "customization": {
    "configuratorReady": false,
