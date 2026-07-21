@@ -78306,6 +78306,7 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -79102,6 +79103,7 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -80463,6 +80465,657 @@
    },
    "yellow": {
     "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-elgrand-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic"
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-tourneo-v1",
+  "make": "ford",
+  "model": "Tourneo",
+  "modelFamily": "Tourneo",
+  "modelAliases": [
+   "tourneo",
+   "tourneo connect",
+   "transit connect"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "mpv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Ford Tourneo Connect MK1 2002–2013",
+  "sourceUrl": "https://sketchfab.com/3d-models/ef441fcc51fa425aaa393d589a156ba6",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "good",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Silver",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": "Moondust Silver Metallic",
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ford/ford-tourneo-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1696276,
+  "mobileFileSizeBytes": 1696276,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model ef441fcc51fa425aaa393d589a156ba6 (Ford Tourneo Connect MK1 2002–2013), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
+   "2026-07-21 CSV-matched wave 1 (GLB_1000_UK_MATCHED): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Agate Black Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Frozen White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Moondust Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Magnetic Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Chrome Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Fantastic Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": "Mean Green",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic"
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "alpina-b7-v1",
+  "make": "alpina",
+  "model": "B7",
+  "modelFamily": "B7",
+  "modelAliases": [
+   "alpina",
+   "b7",
+   "alpina b7"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2016 Alpina B7 Bi-Turbo xDrive (G12)",
+  "sourceUrl": "https://sketchfab.com/3d-models/52a937d3e94c4a53968ba29fa7e56e37",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "premium",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "BODY"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/alpina/alpina-b7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3611768,
+  "mobileFileSizeBytes": 3611768,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 52a937d3e94c4a53968ba29fa7e56e37 (2016 Alpina B7 Bi-Turbo xDrive (G12)), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
+   "2026-07-21 CSV-matched wave 1 (GLB_1000_UK_MATCHED): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "White",
+  "oemPaintFinish": null
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-cortina-v1",
+  "make": "ford",
+  "model": "Cortina",
+  "modelFamily": "Cortina",
+  "modelAliases": [
+   "cortina",
+   "cortina mk3"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Ford Cortina Mk3",
+  "sourceUrl": "https://sketchfab.com/3d-models/3b7687a785d7419ab79510842a449cf5",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "good",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Ford_Cortina_Base_colour"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Silver",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": "Moondust Silver Metallic",
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ford/ford-cortina-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 2482752,
+  "mobileFileSizeBytes": 2482752,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 3b7687a785d7419ab79510842a449cf5 (Ford Cortina Mk3), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
+   "2026-07-21 CSV-matched wave 1 (GLB_1000_UK_MATCHED): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Agate Black Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Frozen White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Moondust Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Magnetic Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Chrome Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Fantastic Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": "Mean Green",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1__yellow.glb",
     "dvlaColour": "Yellow",
     "oemPaintName": null,
     "oemFinish": null,
