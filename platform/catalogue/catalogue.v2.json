@@ -54660,7 +54660,7 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "rejected",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -54704,7 +54704,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 19f66660d6a54534bf6a519faed0833c (Audi RS6 GT Avant), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-21 rejected: ABT RS6-R red-stripe livery, not stock. Superseded by clean audi-rs6-v1."
   ],
   "customization": {
    "configuratorReady": true,
@@ -78307,6 +78308,7 @@
   "notes": [
    "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -79103,6 +79105,7 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
@@ -81124,5 +81127,866 @@
   },
   "defaultDvlaColour": "Silver",
   "oemPaintFinish": "Metallic"
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "fiat-124-spider-v1",
+  "make": "fiat",
+  "model": "124 Spider",
+  "modelFamily": "124 Spider",
+  "modelAliases": [
+   "124",
+   "124 spider",
+   "abarth 124"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "convertible",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2016 Abarth 124",
+  "sourceUrl": "https://sketchfab.com/3d-models/6e7eedcfb5fe40a69b7c64a788a610fc",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "good",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": "Gelato White",
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/fiat/fiat-124-spider-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1524316,
+  "mobileFileSizeBytes": 1524316,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 6e7eedcfb5fe40a69b7c64a788a610fc (2016 Abarth 124), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
+   "2026-07-21 CSV-matched wave 2: CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Cinema Black",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Gelato White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Moda Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Italia Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Passione Red",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": "Ocean Green",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "White",
+  "oemPaintFinish": "Solid"
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-205-v1",
+  "make": "peugeot",
+  "model": "205",
+  "modelFamily": "205",
+  "modelAliases": [
+   "205",
+   "205 gti"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "convertible",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Peugeot 205 cabriolet convertible",
+  "sourceUrl": "https://sketchfab.com/3d-models/ff2b04cf7da94cbdbd277fe23b7204b8",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "good",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": "Okenite White",
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/peugeot/peugeot-205-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 2469868,
+  "mobileFileSizeBytes": 2469868,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model ff2b04cf7da94cbdbd277fe23b7204b8 (Peugeot 205 cabriolet convertible), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
+   "2026-07-21 CSV-matched wave 2: CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Nera Black Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Okenite White",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Cumulus Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Vertigo Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Elixir Red",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": "Olivine Green",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "White",
+  "oemPaintFinish": "Pearl"
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-elantra-v1",
+  "make": "hyundai",
+  "model": "Elantra",
+  "modelFamily": "Elantra",
+  "modelAliases": [
+   "elantra",
+   "lantra",
+   "elantra n"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022 Hyundai Elantra N",
+  "sourceUrl": "https://sketchfab.com/3d-models/cd5741852515425aa3c058b7e081dd2c",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "good",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": "Serenity White Pearl",
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-elantra-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 7107044,
+  "mobileFileSizeBytes": 7107044,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model cd5741852515425aa3c058b7e081dd2c (2022 Hyundai Elantra N), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
+   "2026-07-21 CSV-matched wave 2: CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Phantom Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Serenity White Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Cyber Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Intense Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Ultimate Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "White",
+  "oemPaintFinish": "Pearl"
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "renault-koleos-v1",
+  "make": "renault",
+  "model": "Koleos",
+  "modelFamily": "Koleos",
+  "modelAliases": [
+   "koleos"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Renault Koleos 2020",
+  "sourceUrl": "https://sketchfab.com/3d-models/4773a926871948fca1c5746ffccd1d2e",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "good",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": "Diamond White",
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/renault/renault-koleos-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4536820,
+  "mobileFileSizeBytes": 4536820,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 4773a926871948fca1c5746ffccd1d2e (Renault Koleos 2020), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
+   "2026-07-21 CSV-matched wave 2: CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Diamond Black Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Diamond White",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Shadow Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Iron Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Flame Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "White",
+  "oemPaintFinish": "Pearl"
  }
 ]
