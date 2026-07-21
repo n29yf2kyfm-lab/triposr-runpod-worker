@@ -48390,7 +48390,7 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "replaced",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -48421,11 +48421,12 @@
   "contentHash": null,
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
-  "replacedAssetId": null,
+  "replacedAssetId": "toyota-auris-2019-v1",
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 21b2d277397049879e2756b63199ded8 (Toyota Auris Touring Sports), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants []. grade A.",
-   "2026-07-21 m0 investigation: single-material model ('Toyota_Auris' covers body+glass+trim). Recolour would overspill onto glass — left at neutral studio finish, not force-painted. Needs a material-separated re-source to gain colour swap."
+   "2026-07-21 m0 investigation: single-material model ('Toyota_Auris' covers body+glass+trim). Recolour would overspill onto glass — left at neutral studio finish, not force-painted. Needs a material-separated re-source to gain colour swap.",
+   "2026-07-21 REPLACED by toyota-auris-2019-v1 (material-separated). This single-material scan cannot colour-swap; retired from serving."
   ],
   "customization": {
    "configuratorReady": true,
@@ -71129,5 +71130,223 @@
   },
   "defaultDvlaColour": "Silver",
   "oemPaintFinish": null
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-auris-2019-v1",
+  "make": "toyota",
+  "model": "Auris",
+  "modelFamily": "Auris",
+  "modelAliases": [
+   "auris",
+   "corolla hatch",
+   "corolla hatchback"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Toyota Auris 2019",
+  "sourceUrl": "https://sketchfab.com/3d-models/c7aad552ce6f4700b179615b2c9a346b",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "good",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": "Platinum White Pearl",
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/toyota/toyota-auris-2019-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3265656,
+  "mobileFileSizeBytes": 3265656,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model c7aad552ce6f4700b179615b2c9a346b (Toyota Auris 2019), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
+   "2026-07-21 re-sourced material-separated replacement for single-mesh toyota-auris-v1: this GLB has a real 'body' paint material split from glass (glass/d_glass/r_glass). paintMaterialNames=['body'] set for clean colour swap.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Attitude Black Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Platinum White Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Silver Blade Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Decuma Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Juniper Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Scarlet Flare",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "White",
+  "oemPaintFinish": "Pearl"
  }
 ]
