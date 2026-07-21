@@ -58079,16 +58079,20 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "grey",
-  "renderColourLabel": "Grey",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
-  "oemPaintName": "Dolphin Grey Metallic",
+  "oemPaintName": "Reflex Silver Metallic",
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1.glb",
@@ -58108,7 +58112,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 65a3bacfe328426baaff2843c1884bf1 (2015 VW Scirocco R), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A."
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 65a3bacfe328426baaff2843c1884bf1 (2015 VW Scirocco R), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -58211,9 +58216,37 @@
     "oemPaintName": "Pure White",
     "oemFinish": "Solid",
     "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
    }
   },
-  "defaultDvlaColour": "Grey",
+  "defaultDvlaColour": "Silver",
   "oemPaintFinish": "Metallic"
  },
  {
@@ -60820,16 +60853,20 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "grey",
-  "renderColourLabel": "Grey",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
-  "oemPaintName": "Meteoroid Grey Metallic",
+  "oemPaintName": "Platinum White Pearl",
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1.glb",
@@ -60849,7 +60886,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 01bd4f2a73f949d8840afb711429b3c1 (Honda Insight 2010), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A."
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 01bd4f2a73f949d8840afb711429b3c1 (Honda Insight 2010), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -60952,10 +60990,38 @@
     "oemPaintName": "Platinum White Pearl",
     "oemFinish": "Pearl",
     "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Racing Blue Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Premium Crystal Red",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
    }
   },
-  "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "defaultDvlaColour": "White",
+  "oemPaintFinish": "Pearl"
  },
  {
   "schemaVersion": 2,
@@ -65748,16 +65814,20 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "grey",
-  "renderColourLabel": "Studio Grey",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
-  "oemPaintName": null,
+  "oemPaintName": "Frozen White",
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1.glb",
@@ -65777,7 +65847,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 8d2529f41c7d4404881f6c4014d4f04c (Ford Transit Custom Double Cargo Van), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B."
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 8d2529f41c7d4404881f6c4014d4f04c (Ford Transit Custom Double Cargo Van), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -65854,64 +65925,64 @@
   "platesBaked": true,
   "colourVariantPaints": {
    "grey": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__grey.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__grey.glb",
     "dvlaColour": "Grey",
-    "oemPaintName": "Eiger Grey Metallic",
+    "oemPaintName": "Magnetic Grey Metallic",
     "oemFinish": "Metallic",
     "confirmed": false
    },
    "silver": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__silver.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__silver.glb",
     "dvlaColour": "Silver",
-    "oemPaintName": "Hakuba Silver Metallic",
+    "oemPaintName": "Moondust Silver Metallic",
     "oemFinish": "Metallic",
     "confirmed": false
    },
    "black": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__black.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__black.glb",
     "dvlaColour": "Black",
-    "oemPaintName": "Santorini Black Metallic",
+    "oemPaintName": "Agate Black Metallic",
     "oemFinish": "Metallic",
     "confirmed": false
    },
    "white": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__white.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__white.glb",
     "dvlaColour": "White",
-    "oemPaintName": "Ostuni Pearl White",
-    "oemFinish": "Pearl",
+    "oemPaintName": "Frozen White",
+    "oemFinish": "Solid",
     "confirmed": false
    },
    "blue": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__blue.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__blue.glb",
     "dvlaColour": "Blue",
-    "oemPaintName": "Portofino Blue Metallic",
+    "oemPaintName": "Chrome Blue Metallic",
     "oemFinish": "Metallic",
     "confirmed": false
    },
    "red": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__red.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__red.glb",
     "dvlaColour": "Red",
-    "oemPaintName": null,
-    "oemFinish": null,
-    "confirmed": false
-   },
-   "green": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__green.glb",
-    "dvlaColour": "Green",
-    "oemPaintName": "Belgravia Green Metallic",
+    "oemPaintName": "Fantastic Red Metallic",
     "oemFinish": "Metallic",
     "confirmed": false
    },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": "Mean Green",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
    "yellow": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__yellow.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-custom-v1__yellow.glb",
     "dvlaColour": "Yellow",
     "oemPaintName": null,
     "oemFinish": null,
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "defaultDvlaColour": "White",
+  "oemPaintFinish": "Solid"
  },
  {
   "schemaVersion": 2,
@@ -65956,8 +66027,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "grey",
-  "renderColourLabel": "Studio Grey",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -65965,7 +66036,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1.glb",
@@ -65985,7 +66060,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 685aadd153804845a8f022d3e9ea4a0f (2012 Peugeot Expert), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B."
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 685aadd153804845a8f022d3e9ea4a0f (2012 Peugeot Expert), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -66062,56 +66138,56 @@
   "platesBaked": true,
   "colourVariantPaints": {
    "grey": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__grey.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__grey.glb",
     "dvlaColour": "Grey",
-    "oemPaintName": "Eiger Grey Metallic",
+    "oemPaintName": "Cumulus Grey Metallic",
     "oemFinish": "Metallic",
     "confirmed": false
    },
    "silver": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__silver.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__silver.glb",
     "dvlaColour": "Silver",
-    "oemPaintName": "Hakuba Silver Metallic",
-    "oemFinish": "Metallic",
-    "confirmed": false
-   },
-   "black": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__black.glb",
-    "dvlaColour": "Black",
-    "oemPaintName": "Santorini Black Metallic",
-    "oemFinish": "Metallic",
-    "confirmed": false
-   },
-   "white": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__white.glb",
-    "dvlaColour": "White",
-    "oemPaintName": "Ostuni Pearl White",
-    "oemFinish": "Pearl",
-    "confirmed": false
-   },
-   "blue": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__blue.glb",
-    "dvlaColour": "Blue",
-    "oemPaintName": "Portofino Blue Metallic",
-    "oemFinish": "Metallic",
-    "confirmed": false
-   },
-   "red": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__red.glb",
-    "dvlaColour": "Red",
     "oemPaintName": null,
     "oemFinish": null,
     "confirmed": false
    },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Nera Black Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Okenite White",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Vertigo Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Elixir Red",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
    "green": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__green.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__green.glb",
     "dvlaColour": "Green",
-    "oemPaintName": "Belgravia Green Metallic",
+    "oemPaintName": "Olivine Green",
     "oemFinish": "Metallic",
     "confirmed": false
    },
    "yellow": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__yellow.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1__yellow.glb",
     "dvlaColour": "Yellow",
     "oemPaintName": null,
     "oemFinish": null,
@@ -66119,7 +66195,7 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": null
  },
  {
   "schemaVersion": 2,
@@ -66164,8 +66240,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "grey",
-  "renderColourLabel": "Studio Grey",
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -66173,7 +66249,11 @@
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1.glb",
@@ -66193,7 +66273,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 8a651ad182414bb0a8b6c6d8d5bd7c01 (2014 Fiat Ducato), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B."
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 8a651ad182414bb0a8b6c6d8d5bd7c01 (2014 Fiat Ducato), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -66270,56 +66351,56 @@
   "platesBaked": true,
   "colourVariantPaints": {
    "grey": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__grey.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__grey.glb",
     "dvlaColour": "Grey",
-    "oemPaintName": "Eiger Grey Metallic",
+    "oemPaintName": "Moda Grey Metallic",
     "oemFinish": "Metallic",
     "confirmed": false
    },
    "silver": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__silver.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__silver.glb",
     "dvlaColour": "Silver",
-    "oemPaintName": "Hakuba Silver Metallic",
-    "oemFinish": "Metallic",
-    "confirmed": false
-   },
-   "black": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__black.glb",
-    "dvlaColour": "Black",
-    "oemPaintName": "Santorini Black Metallic",
-    "oemFinish": "Metallic",
-    "confirmed": false
-   },
-   "white": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__white.glb",
-    "dvlaColour": "White",
-    "oemPaintName": "Ostuni Pearl White",
-    "oemFinish": "Pearl",
-    "confirmed": false
-   },
-   "blue": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__blue.glb",
-    "dvlaColour": "Blue",
-    "oemPaintName": "Portofino Blue Metallic",
-    "oemFinish": "Metallic",
-    "confirmed": false
-   },
-   "red": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__red.glb",
-    "dvlaColour": "Red",
     "oemPaintName": null,
     "oemFinish": null,
     "confirmed": false
    },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Cinema Black",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Gelato White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Italia Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Passione Red",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
    "green": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__green.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__green.glb",
     "dvlaColour": "Green",
-    "oemPaintName": "Belgravia Green Metallic",
+    "oemPaintName": "Ocean Green",
     "oemFinish": "Metallic",
     "confirmed": false
    },
    "yellow": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__yellow.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-v1__yellow.glb",
     "dvlaColour": "Yellow",
     "oemPaintName": null,
     "oemFinish": null,
@@ -66327,7 +66408,7 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": null
  },
  {
   "schemaVersion": 2,
@@ -66372,16 +66453,20 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "grey",
-  "renderColourLabel": "Studio Grey",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
-  "oemPaintName": null,
+  "oemPaintName": "Storm White Pearl",
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__grey.glb",
    "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__white.glb"
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1.glb",
@@ -66401,7 +66486,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 1cd12df9e6824aba943ca7932c15d6a2 (2011 Nissan NV200 SV), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B."
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 1cd12df9e6824aba943ca7932c15d6a2 (2011 Nissan NV200 SV), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -66478,63 +66564,63 @@
   "platesBaked": true,
   "colourVariantPaints": {
    "grey": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__grey.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__grey.glb",
     "dvlaColour": "Grey",
-    "oemPaintName": "Eiger Grey Metallic",
+    "oemPaintName": "Gun Metallic",
     "oemFinish": "Metallic",
     "confirmed": false
    },
    "silver": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__silver.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__silver.glb",
     "dvlaColour": "Silver",
-    "oemPaintName": "Hakuba Silver Metallic",
+    "oemPaintName": "Blade Silver Metallic",
     "oemFinish": "Metallic",
     "confirmed": false
    },
    "black": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__black.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__black.glb",
     "dvlaColour": "Black",
-    "oemPaintName": "Santorini Black Metallic",
-    "oemFinish": "Metallic",
+    "oemPaintName": "Pearl Black",
+    "oemFinish": "Pearl",
     "confirmed": false
    },
    "white": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__white.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__white.glb",
     "dvlaColour": "White",
-    "oemPaintName": "Ostuni Pearl White",
+    "oemPaintName": "Storm White Pearl",
     "oemFinish": "Pearl",
     "confirmed": false
    },
    "blue": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__blue.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__blue.glb",
     "dvlaColour": "Blue",
-    "oemPaintName": "Portofino Blue Metallic",
+    "oemPaintName": "Magnetic Blue Metallic",
     "oemFinish": "Metallic",
     "confirmed": false
    },
    "red": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__red.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__red.glb",
     "dvlaColour": "Red",
+    "oemPaintName": "Fuji Sunset Red",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__green.glb",
+    "dvlaColour": "Green",
     "oemPaintName": null,
     "oemFinish": null,
     "confirmed": false
    },
-   "green": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__green.glb",
-    "dvlaColour": "Green",
-    "oemPaintName": "Belgravia Green Metallic",
-    "oemFinish": "Metallic",
-    "confirmed": false
-   },
    "yellow": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__yellow.glb",
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-v1__yellow.glb",
     "dvlaColour": "Yellow",
     "oemPaintName": null,
     "oemFinish": null,
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "defaultDvlaColour": "White",
+  "oemPaintFinish": "Pearl"
  }
 ]
