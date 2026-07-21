@@ -1,0 +1,50 @@
+name: Build and Push LTX-Video Docker Image
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'ltx-video/**'
+      - '.github/workflows/ltx-docker-build.yml'
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # CUDA base + torch + diffusers stack does not fit the ~14GB free on a stock
+      # runner. Strip preinstalled SDKs before building.
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: true
+          docker-images: false
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push
+        uses: docker/build-push-action@v5
+        with:
+          context: ltx-video
+          push: true
+          tags: |
+            alamk123/ai-mechanic:ltx-v1
+            alamk123/ai-mechanic:ltx-latest
+            alamk123/ai-mechanic:ltx-${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
