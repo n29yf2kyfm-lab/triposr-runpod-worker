@@ -55086,7 +55086,7 @@
   "generatedFromReference": false,
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
-  "qualityGrade": "premium",
+  "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "approved",
@@ -55097,9 +55097,7 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [
-   "AAudi_RS6AvantRewardRecycled_2020Paint_Material1"
-  ],
+  "paintMaterialNames": [],
   "glassMaterialNames": [],
   "defaultColourFamily": "silver",
   "renderColourLabel": "Silver",
@@ -55107,10 +55105,10 @@
   "oemPaintCode": null,
   "oemPaintName": null,
   "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__silver.glb",
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__black.glb",
    "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__white.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__silver.glb",
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__grey.glb",
    "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__blue.glb",
    "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__red.glb",
    "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__green.glb",
@@ -55135,9 +55133,6 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 980dbda2cbbb4bae8decaed2fa80aa0c (2020 Audi RS6 Avant), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 980dbda2cbbb4bae8decaed2fa80aa0c (2020 Audi RS6 Avant), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
-   "2026-07-21 wave 7 (exotics/premium): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -55214,6 +55209,20 @@
   },
   "platesBaked": true,
   "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Manhattan Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
    "black": {
     "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__black.glb",
     "dvlaColour": "Black",
@@ -55225,20 +55234,6 @@
     "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__white.glb",
     "dvlaColour": "White",
     "oemPaintName": "Glacier White Metallic",
-    "oemFinish": "Metallic",
-    "confirmed": false
-   },
-   "silver": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__silver.glb",
-    "dvlaColour": "Silver",
-    "oemPaintName": null,
-    "oemFinish": null,
-    "confirmed": false
-   },
-   "grey": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-v1__grey.glb",
-    "dvlaColour": "Grey",
-    "oemPaintName": "Manhattan Grey Metallic",
     "oemFinish": "Metallic",
     "confirmed": false
    },
@@ -76305,6 +76300,1945 @@
  },
  {
   "schemaVersion": 2,
+  "assetId": "mclaren-artura-v1",
+  "make": "mclaren",
+  "model": "Artura",
+  "modelFamily": "Artura",
+  "modelAliases": [
+   "artura"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2023 McLaren Artura",
+  "sourceUrl": "https://sketchfab.com/3d-models/d393abd807f04d62b96b1bd82119b5d4",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "premium",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "McLaren_ArturaRewardRecycled_2022Paint_Material"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "yellow",
+  "renderColourLabel": "Yellow",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mclaren/mclaren-artura-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3209716,
+  "mobileFileSizeBytes": 3209716,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model d393abd807f04d62b96b1bd82119b5d4 (2023 McLaren Artura), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'yellow' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mclaren/mclaren-artura-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Yellow",
+  "oemPaintFinish": null
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "aston-martin-dbs-v1",
+  "make": "aston-martin",
+  "model": "DBS",
+  "modelFamily": "DBS",
+  "modelAliases": [
+   "dbs",
+   "dbs superleggera"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2009 Aston Martin DBS",
+  "sourceUrl": "https://sketchfab.com/3d-models/8cc47e47ff6548f29408baaf98a0cf39",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "premium",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint1Mtl"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Grey",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/aston-martin/aston-martin-dbs-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 2293188,
+  "mobileFileSizeBytes": 2293188,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 8cc47e47ff6548f29408baaf98a0cf39 (2009 Aston Martin DBS), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'grey' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-dbs-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Grey",
+  "oemPaintFinish": null
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "chevrolet-corvette-v1",
+  "make": "chevrolet",
+  "model": "Corvette",
+  "modelFamily": "Corvette",
+  "modelAliases": [
+   "corvette",
+   "corvette c8",
+   "stingray"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2019 Chevrolet Corvette C8 Stingray",
+  "sourceUrl": "https://sketchfab.com/3d-models/790c40ccff6843eab0b7b4bd18421ff8",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "premium",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Body_Color"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Silver",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/chevrolet/chevrolet-corvette-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1913344,
+  "mobileFileSizeBytes": 1913344,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 790c40ccff6843eab0b7b4bd18421ff8 (2019 Chevrolet Corvette C8 Stingray), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chevrolet/chevrolet-corvette-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": null
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-rs7-v1",
+  "make": "audi",
+  "model": "RS7",
+  "modelFamily": "RS7",
+  "modelAliases": [
+   "rs7",
+   "s7",
+   "a7 sportback"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2020 Audi RS7 Sportback",
+  "sourceUrl": "https://sketchfab.com/3d-models/61dd9575a8c645558aa912042af0cfc1",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "premium",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "untitledAudi_RS7SportbackReward_2020Paint_Material1"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Silver",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-rs7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3075768,
+  "mobileFileSizeBytes": 3075768,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 61dd9575a8c645558aa912042af0cfc1 (2020 Audi RS7 Sportback), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Mythos Black Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Glacier White Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Manhattan Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Navarra Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Progressive Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": null
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "lotus-emeya-v1",
+  "make": "lotus",
+  "model": "Emeya",
+  "modelFamily": "Emeya",
+  "modelAliases": [
+   "emeya"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2025 Lotus Emeya",
+  "sourceUrl": "https://sketchfab.com/3d-models/2a8bf6c9275c4a4ea951caf0f5e21077",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "premium",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "lMAT_Lotus_EMEYA_2022_Base1"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/lotus/lotus-emeya-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1397908,
+  "mobileFileSizeBytes": 1397908,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 2a8bf6c9275c4a4ea951caf0f5e21077 (2025 Lotus Emeya), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants []. grade premium.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lotus/lotus-emeya-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "White",
+  "oemPaintFinish": null
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mitsubishi-mirage-v1",
+  "make": "mitsubishi",
+  "model": "Mirage",
+  "modelFamily": "Mirage",
+  "modelAliases": [
+   "mirage",
+   "space star"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2023 Mitsubishi Mirage XLS",
+  "sourceUrl": "https://sketchfab.com/3d-models/d8e74e359c874e1cae7c93ff9609c23b",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "good",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": "White Diamond",
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mitsubishi/mitsubishi-mirage-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3848988,
+  "mobileFileSizeBytes": 3848988,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model d8e74e359c874e1cae7c93ff9609c23b (2023 Mitsubishi Mirage XLS), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Graphite Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Sterling Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Jet Black Mica",
+    "oemFinish": "Mica",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "White Diamond",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Lightning Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Red Diamond",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-mirage-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "White",
+  "oemPaintFinish": "Pearl"
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volvo-v70-v1",
+  "make": "volvo",
+  "model": "V70",
+  "modelFamily": "V70",
+  "modelAliases": [
+   "v70"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "estate",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Volvo V70 MK3 2013-2016",
+  "sourceUrl": "https://sketchfab.com/3d-models/d3d3761ba303447abeddc18cc7506deb",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "good",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "v70_paint"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": "Crystal White Pearl",
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volvo/volvo-v70-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 2172632,
+  "mobileFileSizeBytes": 2172632,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model d3d3761ba303447abeddc18cc7506deb (Volvo V70 MK3 2013-2016), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Onyx Black Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Crystal White Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Thunder Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Denim Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": "Forest Lake Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v70-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "White",
+  "oemPaintFinish": "Pearl"
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-vellfire-v1",
+  "make": "toyota",
+  "model": "Vellfire",
+  "modelFamily": "Vellfire",
+  "modelAliases": [
+   "vellfire",
+   "alphard"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "mpv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Toyota Vellfire Aero 2015",
+  "sourceUrl": "https://sketchfab.com/3d-models/009ef02eaf1942a2821676e03c351d34",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "good",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": "Platinum White Pearl",
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/toyota/toyota-vellfire-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3452316,
+  "mobileFileSizeBytes": 3452316,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 009ef02eaf1942a2821676e03c351d34 (Toyota Vellfire Aero 2015), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Decuma Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Silver Blade Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Attitude Black Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Platinum White Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Juniper Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Scarlet Flare",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "White",
+  "oemPaintFinish": "Pearl"
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "suzuki-across-v1",
+  "make": "suzuki",
+  "model": "Across",
+  "modelFamily": "Across",
+  "modelAliases": [
+   "across",
+   "rav4 phev"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2021 Suzuki Across",
+  "sourceUrl": "https://sketchfab.com/3d-models/fd61cd5500734b7c8acf850fc3d39145",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "good",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "silver",
+  "renderColourLabel": "Silver",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/suzuki/suzuki-across-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3010980,
+  "mobileFileSizeBytes": 3010980,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model fd61cd5500734b7c8acf850fc3d39145 (2021 Suzuki Across), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-across-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": null
+ },
+ {
+  "schemaVersion": 2,
   "assetId": "ferrari-f8-v1",
   "make": "ferrari",
   "model": "F8",
@@ -76325,7 +78259,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "2019 Ferrari F8 Tributo",
-  "sourceUrl": "https://sketchfab.com/3d-models/17f50b26310847b1a1e701edc0598ba4",
+  "sourceUrl": "https://sketchfab.com/3d-models/17f50b2631",
   "sourceCreator": null,
   "sourceReferenceId": null,
   "sourceRetrievedAt": null,
@@ -76359,8 +78293,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ferrari/ferrari-f8-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 655192,
-  "mobileFileSizeBytes": 655192,
+  "fileSizeBytes": 1769472,
+  "mobileFileSizeBytes": 1769472,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -76371,10 +78305,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 17f50b26310847b1a1e701edc0598ba4 (2019 Ferrari F8 Tributo), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
-   "2026-07-21 wave 7 (exotics/premium): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-21 colour-swap not available: body is texture-driven (all *.etc.png atlas materials); base-colour respray can't override. Served as single neutral (white); premium geometry retained.",
+   "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -76477,7 +78408,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "2021 Ferrari SF90 Spider",
-  "sourceUrl": "https://sketchfab.com/3d-models/94a830f22c974dc2a8d437fab830456f",
+  "sourceUrl": "https://sketchfab.com/3d-models/94a830f22c",
   "sourceCreator": null,
   "sourceReferenceId": null,
   "sourceRetrievedAt": null,
@@ -76522,8 +78453,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ferrari/ferrari-sf90-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4236724,
-  "mobileFileSizeBytes": 4236724,
+  "fileSizeBytes": 1769472,
+  "mobileFileSizeBytes": 1769472,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -76534,8 +78465,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 94a830f22c974dc2a8d437fab830456f (2021 Ferrari SF90 Spider), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
-   "2026-07-21 wave 7 (exotics/premium): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -76695,7 +78625,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "2018 Ferrari 812 Superfast",
-  "sourceUrl": "https://sketchfab.com/3d-models/6716d40cad6c4f7db9c42e2db3a94ce3",
+  "sourceUrl": "https://sketchfab.com/3d-models/6716d40cad",
   "sourceCreator": null,
   "sourceReferenceId": null,
   "sourceRetrievedAt": null,
@@ -76740,8 +78670,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ferrari/ferrari-812-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1981724,
-  "mobileFileSizeBytes": 1981724,
+  "fileSizeBytes": 1769472,
+  "mobileFileSizeBytes": 1769472,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -76752,8 +78682,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 6716d40cad6c4f7db9c42e2db3a94ce3 (2018 Ferrari 812 Superfast), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
-   "2026-07-21 wave 7 (exotics/premium): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'yellow' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -76911,7 +78840,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "2023 Ferrari Purosangue",
-  "sourceUrl": "https://sketchfab.com/3d-models/541dc84c37174356a7b0efd44904593d",
+  "sourceUrl": "https://sketchfab.com/3d-models/541dc84c37",
   "sourceCreator": null,
   "sourceReferenceId": null,
   "sourceRetrievedAt": null,
@@ -76956,8 +78885,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ferrari/ferrari-purosangue-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4060852,
-  "mobileFileSizeBytes": 4060852,
+  "fileSizeBytes": 1769472,
+  "mobileFileSizeBytes": 1769472,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -76968,8 +78897,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 541dc84c37174356a7b0efd44904593d (2023 Ferrari Purosangue), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
-   "2026-07-21 wave 7 (exotics/premium): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -77127,7 +79055,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "Rolls-Royce Ghost",
-  "sourceUrl": "https://sketchfab.com/3d-models/4a590f4afa094fa8b407a14db77a63a8",
+  "sourceUrl": "https://sketchfab.com/3d-models/4a590f4afa",
   "sourceCreator": null,
   "sourceReferenceId": null,
   "sourceRetrievedAt": null,
@@ -77161,8 +79089,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/rolls-royce/rolls-royce-ghost-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3491640,
-  "mobileFileSizeBytes": 3491640,
+  "fileSizeBytes": 1769472,
+  "mobileFileSizeBytes": 1769472,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -77173,11 +79101,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 4a590f4afa094fa8b407a14db77a63a8 (Rolls-Royce Ghost), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
-   "2026-07-21 wave 7 (exotics/premium): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-21 colour-swap not shipped: 70-material model, rear body panel maps to an un-isolated material (two-tone artefact on respray). Served as single neutral (silver hero); premium geometry retained."
+   "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
    "configuratorReady": true,
@@ -77278,7 +79203,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "1968 Volkswagen Beetle",
-  "sourceUrl": "https://sketchfab.com/3d-models/969a477451ee40bb8e715ec0907d187e",
+  "sourceUrl": "https://sketchfab.com/3d-models/969a477451",
   "sourceCreator": null,
   "sourceReferenceId": null,
   "sourceRetrievedAt": null,
@@ -77323,8 +79248,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-beetle-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 647208,
-  "mobileFileSizeBytes": 647208,
+  "fileSizeBytes": 1769472,
+  "mobileFileSizeBytes": 1769472,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -77335,8 +79260,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 969a477451ee40bb8e715ec0907d187e (1968 Volkswagen Beetle), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
-   "2026-07-21 wave 7 (exotics/premium): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -77496,7 +79420,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "1963 Jaguar E-Type Series 1",
-  "sourceUrl": "https://sketchfab.com/3d-models/d526aafcb857434284b1a432993a77cf",
+  "sourceUrl": "https://sketchfab.com/3d-models/d526aafcb8",
   "sourceCreator": null,
   "sourceReferenceId": null,
   "sourceRetrievedAt": null,
@@ -77541,8 +79465,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/jaguar/jaguar-e-type-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1341560,
-  "mobileFileSizeBytes": 1341560,
+  "fileSizeBytes": 1769472,
+  "mobileFileSizeBytes": 1769472,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -77553,8 +79477,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model d526aafcb857434284b1a432993a77cf (1963 Jaguar E-Type Series 1), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
-   "2026-07-21 wave 7 (exotics/premium): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'yellow' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -77712,7 +79635,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "2025 MG Cyberster",
-  "sourceUrl": "https://sketchfab.com/3d-models/194c998698594d7e825c9f5dedcdbef3",
+  "sourceUrl": "https://sketchfab.com/3d-models/194c998698",
   "sourceCreator": null,
   "sourceReferenceId": null,
   "sourceRetrievedAt": null,
@@ -77755,8 +79678,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mg/mg-cyberster-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2043016,
-  "mobileFileSizeBytes": 2043016,
+  "fileSizeBytes": 1769472,
+  "mobileFileSizeBytes": 1769472,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -77767,8 +79690,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 194c998698594d7e825c9f5dedcdbef3 (2025 MG Cyberster), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
-   "2026-07-21 wave 7 (exotics/premium): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -77927,7 +79849,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "2005 Subaru Legacy B4",
-  "sourceUrl": "https://sketchfab.com/3d-models/9667a67a339c4664bcc899a30bc19fb9",
+  "sourceUrl": "https://sketchfab.com/3d-models/9667a67a33",
   "sourceCreator": null,
   "sourceReferenceId": null,
   "sourceRetrievedAt": null,
@@ -77973,8 +79895,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/subaru/subaru-legacy-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 858964,
-  "mobileFileSizeBytes": 858964,
+  "fileSizeBytes": 1769472,
+  "mobileFileSizeBytes": 1769472,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -77985,9 +79907,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 9667a67a339c4664bcc899a30bc19fb9 (2005 Subaru Legacy B4), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
-   "2026-07-21 wave 7 (exotics/premium): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -78146,7 +80066,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "2020 Peugeot Boxer 435 L4H2",
-  "sourceUrl": "https://sketchfab.com/3d-models/5f342921b4ff4c929fe17fb1f6b72a8c",
+  "sourceUrl": "https://sketchfab.com/3d-models/5f342921b4",
   "sourceCreator": null,
   "sourceReferenceId": null,
   "sourceRetrievedAt": null,
@@ -78189,8 +80109,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/peugeot/peugeot-boxer-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 3789944,
-  "mobileFileSizeBytes": 3789944,
+  "fileSizeBytes": 1769472,
+  "mobileFileSizeBytes": 1769472,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -78201,8 +80121,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 5f342921b4ff4c929fe17fb1f6b72a8c (2020 Peugeot Boxer 435 L4H2), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
-   "2026-07-21 wave 7 (exotics/premium): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -78361,7 +80280,7 @@
   "exactTrim": false,
   "provenance": "sourced",
   "sourceTitle": "2006 Nissan Elgrand Highway Star",
-  "sourceUrl": "https://sketchfab.com/3d-models/6101fb5f68f3495eb3717455cfd10a05",
+  "sourceUrl": "https://sketchfab.com/3d-models/6101fb5f68",
   "sourceCreator": null,
   "sourceReferenceId": null,
   "sourceRetrievedAt": null,
@@ -78404,8 +80323,8 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/nissan/nissan-elgrand-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1689760,
-  "mobileFileSizeBytes": 1689760,
+  "fileSizeBytes": 1769472,
+  "mobileFileSizeBytes": 1769472,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
@@ -78416,8 +80335,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 6101fb5f68f3495eb3717455cfd10a05 (2006 Nissan Elgrand Highway Star), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
-   "2026-07-21 wave 7 (exotics/premium): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
+   "2026-07-21 RECOVERED after background-commit race dropped wave-7 entries; GLB intact on Supabase, entry+hero+variants rebuilt from serving URL.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
