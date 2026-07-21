@@ -12668,8 +12668,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "solid black opaque windows, no visible interior",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -12709,7 +12709,9 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T13:23:31Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior — re-source with material-separated glass + modelled cabin"
+  ],
   "notes": [
    "Source title: 'Audi S3 (8P) STOCK'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 408028, \"facesAfter\": 155044, \"ratio\": 0.368}",
@@ -47313,8 +47315,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "solid black opaque windows, no visible interior",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -47354,7 +47356,9 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior — re-source with material-separated glass + modelled cabin"
+  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model a5d33c632d664174922adaebb8d7940c (Fiat Panda (classic)), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
@@ -52096,8 +52100,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "opaque windows + flat black disc wheels (broken geometry)",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -52137,7 +52141,9 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior — re-source with material-separated glass + modelled cabin"
+  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model ae21290ed9724e73abdf7495d1313d4f (2013 Ford C-Max Titanium), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'grey' set from hero; fabricated OEM label removed (honest neutral label)."
@@ -58711,8 +58717,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "opaque windows, no visible interior",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -58752,7 +58758,9 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior — re-source with material-separated glass + modelled cabin"
+  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model a96fb412e30f450c864f74e2124ac2de (Renault Twingo), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
@@ -59990,8 +59998,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "opaque rear glass, no visible interior",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -60031,7 +60039,9 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior — re-source with material-separated glass + modelled cabin"
+  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 6bafa70ee29243ab8205cb54b109a9fe (2022 Jeep Compass Limited), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
@@ -66233,8 +66243,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "opaque windows painted body-colour, no glass material, no visible interior",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -66274,7 +66284,9 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior — re-source with material-separated glass + modelled cabin"
+  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 8d2529f41c7d4404881f6c4014d4f04c (Ford Transit Custom Double Cargo Van), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
