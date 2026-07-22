@@ -67070,11 +67070,14 @@
   "schemaVersion": 2,
   "assetId": "volkswagen-golf-mk7-v1",
   "make": "volkswagen",
-  "model": "golf",
+  "model": "Golf Mk7",
   "modelFamily": "golf",
   "modelAliases": [
    "golf",
-   "golf mk7"
+   "golf mk7",
+   "Golf Mk7",
+   "Golf 7",
+   "Golf VII"
   ],
   "generation": null,
   "generationAliases": [],
@@ -67144,7 +67147,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 39c3aa1a2a1f43b3b225445a42c5f74c (Volkswagen Golf GTI Mk7), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 de-dup: distinguished from Golf Mk8 so a plain \"Golf\" lookup resolves to one car (fixes viewer overlap)."
   ],
   "customization": {
    "configuratorReady": true,
