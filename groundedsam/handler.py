@@ -54,10 +54,17 @@ def segment(img, prompt, box_thr, text_thr):
     W, H = img.size
     inp = gd_proc(images=img, text=prompt, return_tensors="pt").to(DEVICE)
     out = gd_model(**inp)
-    det = gd_proc.post_process_grounded_object_detection(
-        out, inp.input_ids, box_threshold=box_thr, text_threshold=text_thr,
-        target_sizes=[(H, W)])[0]
-    boxes, labels = det["boxes"], det["labels"]
+    # transformers renamed box_threshold -> threshold (4.44+); support both.
+    try:
+        det = gd_proc.post_process_grounded_object_detection(
+            out, inp.input_ids, threshold=box_thr, text_threshold=text_thr,
+            target_sizes=[(H, W)])[0]
+    except TypeError:
+        det = gd_proc.post_process_grounded_object_detection(
+            out, inp.input_ids, box_threshold=box_thr, text_threshold=text_thr,
+            target_sizes=[(H, W)])[0]
+    boxes = det["boxes"]
+    labels = det.get("labels", det.get("text_labels"))   # key renamed across versions
     cm = np.zeros((H, W), np.uint8)
     if len(boxes) == 0:
         return cm
