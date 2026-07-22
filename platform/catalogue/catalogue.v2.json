@@ -2143,8 +2143,8 @@
   "schemaVersion": 2,
   "assetId": "bmw-m3-e30-undated-v1",
   "make": "bmw",
-  "model": "m3",
-  "modelFamily": "m3",
+  "model": "M3 E30",
+  "modelFamily": "M3 E30",
   "modelAliases": [],
   "generation": "e30",
   "generationAliases": [],
@@ -2218,7 +2218,8 @@
   ],
   "notes": [
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'M3 E30'."
   ],
   "customization": {
    "colourOptions": [
@@ -2802,12 +2803,9 @@
   "schemaVersion": 2,
   "assetId": "fiat-500-classic-v1",
   "make": "fiat",
-  "model": "500",
-  "modelFamily": "500",
-  "modelAliases": [
-   "500 classic",
-   "nuova 500"
-  ],
+  "model": "500 Classic",
+  "modelFamily": "500 Classic",
+  "modelAliases": [],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -2882,7 +2880,8 @@
    "Classic rear-engined Fiat Nuova 500 (identified from body; 1957-1975). Not the 2007+ modern 500.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 2321956, \"facesAfter\": 162721, \"ratio\": 0.065}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> '500 Classic'."
   ],
   "customization": {
    "configuratorReady": true,
@@ -3019,7 +3018,6 @@
   "modelFamily": "q8",
   "modelAliases": [
    "rs q8",
-   "sq8",
    "q8 rs"
   ],
   "generation": null,
@@ -3092,7 +3090,8 @@
    "Audi Q8 (RS Q8 per source); source title states 2020; production 2018-.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1650413, \"facesAfter\": 154709, \"ratio\": 0.091}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated: removed alias(es) that collided with another model's canonical name. Stripped ['sq8']."
   ],
   "customization": {
    "configuratorReady": false,
@@ -5157,9 +5156,11 @@
   "schemaVersion": 2,
   "assetId": "mini-countryman-v1",
   "make": "mini",
-  "model": "countryman",
-  "modelFamily": "countryman",
-  "modelAliases": [],
+  "model": "Countryman JCW",
+  "modelFamily": "Countryman JCW",
+  "modelAliases": [
+   "Countryman John Cooper Works"
+  ],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -5230,7 +5231,8 @@
    "Mini Countryman JCW.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1251586, \"facesAfter\": 158302, \"ratio\": 0.12}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'Countryman JCW'."
   ],
   "customization": {
    "configuratorReady": false,
@@ -6999,12 +7001,9 @@
   "schemaVersion": 2,
   "assetId": "audi-a1-quattro-v1",
   "make": "audi",
-  "model": "a1",
-  "modelFamily": "a1",
-  "modelAliases": [
-   "a1 quattro",
-   "a1 sportback"
-  ],
+  "model": "A1 Quattro",
+  "modelFamily": "A1 Quattro",
+  "modelAliases": [],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -7076,7 +7075,8 @@
    "web-optimised 2026-07-18: stripped 9 stray LINES primitives (scribble artifacts), re-welded + re-Draco (12MB→3MB)",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 862084, \"facesAfter\": 149984, \"ratio\": 0.174}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'A1 Quattro'."
   ],
   "customization": {
    "configuratorReady": false,
@@ -7628,12 +7628,9 @@
   "schemaVersion": 2,
   "assetId": "mercedes-benz-c-class-w202-v1",
   "make": "mercedes-benz",
-  "model": "c-class",
-  "modelFamily": "c-class",
-  "modelAliases": [
-   "c class",
-   "w202"
-  ],
+  "model": "C-Class W202",
+  "modelFamily": "C-Class W202",
+  "modelAliases": [],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -7704,7 +7701,8 @@
    "Source title: 'Mercedes-Benz C-Class (W202) sedan'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1222427, \"facesAfter\": 150028, \"ratio\": 0.123}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'C-Class W202'."
   ],
   "customization": {
    "configuratorReady": false,
@@ -7845,12 +7843,9 @@
   "schemaVersion": 2,
   "assetId": "volkswagen-polo-2023-v1",
   "make": "volkswagen",
-  "model": "polo",
-  "modelFamily": "polo",
-  "modelAliases": [
-   "polo gti",
-   "polo"
-  ],
+  "model": "Polo GTI",
+  "modelFamily": "Polo GTI",
+  "modelAliases": [],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -7921,7 +7916,8 @@
    "Source title: '2023 Volkswagen Polo GTI'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 416183, \"facesAfter\": 151281, \"ratio\": 0.36}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'Polo GTI'."
   ],
   "customization": {
    "configuratorReady": false,
@@ -8247,8 +8243,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "undated ambiguous duplicate — dated Juke kept as nissan-juke-2020-v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -8295,7 +8291,8 @@
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
    "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model b28ed98292d2420d97fb94e2d45b0ffc, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: undated ambiguous duplicate — dated Juke kept as nissan-juke-2020-v1"
   ],
   "customization": {
    "configuratorReady": false,
@@ -8436,12 +8433,10 @@
   "schemaVersion": 2,
   "assetId": "skoda-octavia-estate-v1",
   "make": "skoda",
-  "model": "octavia",
-  "modelFamily": "octavia",
+  "model": "Octavia Estate",
+  "modelFamily": "Octavia Estate",
   "modelAliases": [
-   "octavia estate",
-   "octavia combi",
-   "octavia"
+   "Octavia Combi"
   ],
   "generation": null,
   "generationAliases": [],
@@ -8513,7 +8508,8 @@
    "Source title: '2020 Skoda Octavia Estate'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1321883, \"facesAfter\": 151346, \"ratio\": 0.113}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'Octavia Estate'."
   ],
   "customization": {
    "configuratorReady": false,
@@ -9485,8 +9481,7 @@
   "model": "tucson",
   "modelFamily": "tucson",
   "modelAliases": [
-   "tucson",
-   "ix35"
+   "tucson"
   ],
   "generation": null,
   "generationAliases": [],
@@ -9558,7 +9553,8 @@
    "Source title: '2014 Hyundai Tucson'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1500000, \"facesAfter\": 149995, \"ratio\": 0.1}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated: removed alias(es) that collided with another model's canonical name. Stripped ['ix35']."
   ],
   "customization": {
    "configuratorReady": false,
@@ -10335,10 +10331,10 @@
   "schemaVersion": 2,
   "assetId": "hyundai-kona-2019-v1",
   "make": "hyundai",
-  "model": "kona",
-  "modelFamily": "kona",
+  "model": "Kona (2019)",
+  "modelFamily": "Kona (2019)",
   "modelAliases": [
-   "kona"
+   "Kona EV 2019"
   ],
   "generation": null,
   "generationAliases": [],
@@ -10409,7 +10405,8 @@
   "notes": [
    "Source title: '2019 Hyundai Kona EV'.",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'Kona (2019)'."
   ],
   "customization": {
    "configuratorReady": false,
@@ -10984,9 +10981,11 @@
   "schemaVersion": 2,
   "assetId": "bmw-3-series-v1",
   "make": "bmw",
-  "model": "3-series",
-  "modelFamily": "3-series",
-  "modelAliases": [],
+  "model": "3 Series Touring",
+  "modelFamily": "3 Series Touring",
+  "modelAliases": [
+   "3 Series Estate"
+  ],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -11057,7 +11056,8 @@
    "BMW 3 Series Touring (E46), 1998-2005.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1194284, \"facesAfter\": 158399, \"ratio\": 0.126}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> '3 Series Touring'."
   ],
   "customization": {
    "configuratorReady": false,
@@ -11563,12 +11563,10 @@
   "schemaVersion": 2,
   "assetId": "bmw-z4-2008-v1",
   "make": "bmw",
-  "model": "z4",
-  "modelFamily": "z4",
+  "model": "Z4 Coupe (2008)",
+  "modelFamily": "Z4 Coupe (2008)",
   "modelAliases": [
-   "z4 m",
-   "z4 m coupe",
-   "z4 coupe"
+   "Z4 M Coupe"
   ],
   "generation": null,
   "generationAliases": [],
@@ -11639,7 +11637,8 @@
   "notes": [
    "Source title: '2008 BMW Z4 M Coupe'.",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'Z4 Coupe (2008)'."
   ],
   "customization": {
    "configuratorReady": false,
@@ -13641,8 +13640,7 @@
   "modelAliases": [
    "500e",
    "500 electric",
-   "e500",
-   "500"
+   "e500"
   ],
   "generation": null,
   "generationAliases": [],
@@ -13714,7 +13712,8 @@
    "Source title: '2021 Fiat e500'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 158157, \"facesAfter\": 150295, \"ratio\": 0.948}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated: removed alias(es) that collided with another model's canonical name. Stripped ['500']."
   ],
   "customization": {
    "configuratorReady": false,
@@ -14095,8 +14094,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant RS liftback duplicate — skoda-octavia-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -14141,7 +14140,8 @@
    "Source title: 'Skoda Octavia (MK3) RS 230'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1724158, \"facesAfter\": 195951, \"ratio\": 0.087}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant RS liftback duplicate — skoda-octavia-v1 kept"
   ],
   "customization": {
    "configuratorReady": false,
@@ -14314,8 +14314,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant RS estate duplicate — Octavia Estate kept as skoda-octavia-estate-v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -14360,7 +14360,8 @@
    "Source title: '2025 Skoda Octavia RS Combi'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1616859, \"facesAfter\": 161076, \"ratio\": 0.093}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant RS estate duplicate — Octavia Estate kept as skoda-octavia-estate-v1"
   ],
   "customization": {
    "configuratorReady": false,
@@ -15528,8 +15529,7 @@
   "modelFamily": "e-tron gt",
   "modelAliases": [
    "e-tron gt",
-   "etron gt",
-   "e-tron"
+   "etron gt"
   ],
   "generation": null,
   "generationAliases": [],
@@ -15603,7 +15603,8 @@
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-19 rigorous re-audit (fresh high-quality render): renders overhead in all orientations (mis-oriented, roof axis not aligned). Pulled from live pending restore/re-source.",
    "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated: removed alias(es) that collided with another model's canonical name. Stripped ['e-tron']."
   ],
   "customization": {
    "configuratorReady": false,
@@ -15956,12 +15957,9 @@
   "schemaVersion": 2,
   "assetId": "bmw-m3-e46-v1",
   "make": "bmw",
-  "model": "m3",
-  "modelFamily": "m3",
-  "modelAliases": [
-   "m3",
-   "m3 coupe"
-  ],
+  "model": "M3 E46",
+  "modelFamily": "M3 E46",
+  "modelAliases": [],
   "generation": "E46",
   "generationAliases": [],
   "generationConfirmed": false,
@@ -16032,7 +16030,8 @@
    "Source title: 'BMW M3 E46'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 846922, \"facesAfter\": 155234, \"ratio\": 0.177}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'M3 E46'."
   ],
   "customization": {
    "configuratorReady": false,
@@ -22024,13 +22023,9 @@
   "schemaVersion": 2,
   "assetId": "bmw-5-series-e60-v1",
   "make": "bmw",
-  "model": "5-series",
-  "modelFamily": "5-series",
-  "modelAliases": [
-   "5 series",
-   "520d",
-   "530d"
-  ],
+  "model": "5 Series E60",
+  "modelFamily": "5 Series E60",
+  "modelAliases": [],
   "generation": "E60",
   "generationAliases": [],
   "generationConfirmed": false,
@@ -22101,7 +22096,8 @@
    "Source title: '2007 - 2010 BMW 5series E60'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1374743, \"facesAfter\": 156865, \"ratio\": 0.109}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> '5 Series E60'."
   ],
   "customization": {
    "configuratorReady": false,
@@ -32722,8 +32718,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant Clubman-bodied duplicate (src 'Cooper S clubman 2011'); Mini Hatch owns cooper/hatch, Clubman kept as mini-clubman-v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -32768,7 +32764,8 @@
    "Source title: 'Mini_ Cooper_S_clubman_2011'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1075456, \"facesAfter\": 152160, \"ratio\": 0.139}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 Quarantined: redundant Clubman-bodied duplicate (src 'Cooper S clubman 2011'); Mini Hatch owns cooper/hatch, Clubman kept as mini-clubman-v1"
   ],
   "customization": {
    "configuratorReady": false,
@@ -40279,8 +40276,7 @@
   "model": "208",
   "modelFamily": "208",
   "modelAliases": [
-   "208",
-   "e-208"
+   "208"
   ],
   "generation": null,
   "generationAliases": [],
@@ -40346,7 +40342,8 @@
   "notes": [
    "ingested 2026-07-19 from CSV shortlist; rendered from original GLB (no decimation), texture-webp + draco, GB plates baked, visually reviewed on the pre-publish sheet.",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated: removed alias(es) that collided with another model's canonical name. Stripped ['e-208']."
   ],
   "colourVariantPaints": {
    "grey": {
@@ -41177,8 +41174,7 @@
   "modelFamily": "s-cross",
   "modelAliases": [
    "s-cross",
-   "scross",
-   "sx4"
+   "scross"
   ],
   "generation": null,
   "generationAliases": [],
@@ -41221,7 +41217,8 @@
    "ingested 2026-07-19 wave-2 (direct Sketchfab search); original GLB no-decimation, texture-webp+draco, plates baked, sheet-reviewed.",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-19 audit fix: re-uprighted + wheel-sep + recompress cleared black-facet artefacts; re-baked colour variants [] and hero from fixed source.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated: removed alias(es) that collided with another model's canonical name. Stripped ['sx4']."
   ],
   "defaultColourFamily": "white",
   "renderColourLabel": "White",
@@ -50637,12 +50634,10 @@
   "schemaVersion": 2,
   "assetId": "jaguar-f-type-v2",
   "make": "jaguar",
-  "model": "f-type",
-  "modelFamily": "f-type",
+  "model": "F-Type Convertible",
+  "modelFamily": "F-Type Convertible",
   "modelAliases": [
-   "ftype",
-   "f-type",
-   "f type"
+   "F-Type Cabriolet"
   ],
   "generation": null,
   "generationAliases": [],
@@ -50712,7 +50707,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 7c2c7dde73664c32be7dc1a5a6522ec7 (2021 Jaguar F-Type R Convertible), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'grey' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'grey' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'F-Type Convertible'."
   ],
   "customization": {
    "configuratorReady": true,
@@ -50883,8 +50879,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant duplicate — F-Type Convertible already kept as jaguar-f-type-v2",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -50927,7 +50923,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 8728eaa6caab4231b07d6666b0adb845 (2017 Jaguar F-Type R Convertible), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate — F-Type Convertible already kept as jaguar-f-type-v2"
   ],
   "customization": {
    "configuratorReady": true,
@@ -51737,8 +51734,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant duplicate RC F — lexus-rc-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -51781,7 +51778,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 1e3a80ea410343cc8bdb836b15bfcb6f (2023 Lexus RC F Performance), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate RC F — lexus-rc-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -52528,8 +52526,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant duplicate (same G02 gen) — bmw-x4-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -52572,7 +52570,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model a5eb74a0ad3f4ed594e854a862a0e029 (2019 BMW X4 xDrive20d), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (same G02 gen) — bmw-x4-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -52741,8 +52740,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant duplicate — M2 Competition already kept as bmw-m2-v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -52785,7 +52784,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 30ed9c85be1f44878181d7683b65a068 (2018 BMW M2 Competition), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate — M2 Competition already kept as bmw-m2-v1"
   ],
   "customization": {
    "configuratorReady": true,
@@ -52954,8 +52954,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant duplicate — M2 already kept as bmw-m2-v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -52998,7 +52998,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model d382aeb1d3e2413c9269ae6795e28c6a (BMW M2), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate — M2 already kept as bmw-m2-v1"
   ],
   "customization": {
    "configuratorReady": true,
@@ -53382,8 +53383,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "exact duplicate of bmw-7-series-v1 (both F01 sedan)",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -53426,7 +53427,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model ae06612d010344ea90d958b0af38deb7 (BMW 7-Series Sedan (F01)), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: exact duplicate of bmw-7-series-v1 (both F01 sedan)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -54240,8 +54242,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "exact duplicate of audi-q4-e-tron-v1 (both 2022 Q4 e-tron)",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -54284,7 +54286,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 89d8009af27340d6a63d127e77780751 (2022 Audi Q4 e-tron), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: exact duplicate of audi-q4-e-tron-v1 (both 2022 Q4 e-tron)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -54424,10 +54427,10 @@
   "schemaVersion": 2,
   "assetId": "audi-rs4-v1",
   "make": "audi",
-  "model": "rs4",
-  "modelFamily": "rs4",
+  "model": "RS4 (2013)",
+  "modelFamily": "RS4 (2013)",
   "modelAliases": [
-   "rs4"
+   "RS4 Avant 2013"
   ],
   "generation": null,
   "generationAliases": [],
@@ -54497,7 +54500,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 09c0c62808364c1e9381b2363dc76916 (2013 Audi RS4 Avant), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'grey' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'grey' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'RS4 (2013)'."
   ],
   "customization": {
    "configuratorReady": true,
@@ -55309,8 +55313,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "tuner mod (ABT RS6-R) — violates no-mods bar; stock RS6 kept as audi-rs6-v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -55353,7 +55357,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 8efe6fd313234bef9b63c64293114dbf (2020 ABT Audi RS6-R), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'grey' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'grey' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: tuner mod (ABT RS6-R) — violates no-mods bar; stock RS6 kept as audi-rs6-v1"
   ],
   "customization": {
    "configuratorReady": true,
@@ -55493,10 +55498,10 @@
   "schemaVersion": 2,
   "assetId": "toyota-yaris-v1",
   "make": "toyota",
-  "model": "yaris",
-  "modelFamily": "yaris",
+  "model": "GR Yaris",
+  "modelFamily": "GR Yaris",
   "modelAliases": [
-   "yaris"
+   "Yaris GR"
   ],
   "generation": null,
   "generationAliases": [],
@@ -55566,7 +55571,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 98e6611ad034451982b6a9908c63fc47 (Toyota GR Yaris), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'GR Yaris'."
   ],
   "customization": {
    "configuratorReady": true,
@@ -55919,11 +55925,9 @@
   "schemaVersion": 2,
   "assetId": "mercedes-benz-cla-v1",
   "make": "mercedes-benz",
-  "model": "cla",
-  "modelFamily": "cla",
-  "modelAliases": [
-   "cla"
-  ],
+  "model": "CLA Shooting Brake",
+  "modelFamily": "CLA Shooting Brake",
+  "modelAliases": [],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -55992,7 +55996,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 9423d22e95aa461e9cdd65039d32e75f (2016 Mercedes CLA45 Shooting Brake), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'CLA Shooting Brake'."
   ],
   "customization": {
    "configuratorReady": true,
@@ -57013,8 +57018,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant duplicate (same gen) — porsche-macan-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -57057,7 +57062,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model b61426730e5f49c0a73c48f0004406c5 (2019 Porsche Macan Turbo), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (same gen) — porsche-macan-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -57410,10 +57416,10 @@
   "schemaVersion": 2,
   "assetId": "porsche-cayenne-v2",
   "make": "porsche",
-  "model": "cayenne",
-  "modelFamily": "cayenne",
+  "model": "Cayenne (2009)",
+  "modelFamily": "Cayenne (2009)",
   "modelAliases": [
-   "cayenne"
+   "Cayenne Turbo S 2009"
   ],
   "generation": null,
   "generationAliases": [],
@@ -57483,7 +57489,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model b52a9d6e47ed440a93986a5b955b6d64 (2009 Porsche Cayenne Turbo S), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'Cayenne (2009)'."
   ],
   "customization": {
    "configuratorReady": true,
@@ -57623,10 +57630,10 @@
   "schemaVersion": 2,
   "assetId": "porsche-cayenne-v3",
   "make": "porsche",
-  "model": "cayenne",
-  "modelFamily": "cayenne",
+  "model": "Cayenne Coupe",
+  "modelFamily": "Cayenne Coupe",
   "modelAliases": [
-   "cayenne"
+   "Cayenne Turbo Coupe"
   ],
   "generation": null,
   "generationAliases": [],
@@ -57696,7 +57703,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 4774f59cbb1146be81cffd795f61a9f6 (2020 Porsche Cayenne Turbo Coupe), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'Cayenne Coupe'."
   ],
   "customization": {
    "configuratorReady": true,
@@ -58078,8 +58086,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant duplicate (971 gen) — porsche-panamera-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -58122,7 +58130,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model f472abb10e07442b80f46ade49a24d64 (2017 Porsche Panamera Turbo), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (971 gen) — porsche-panamera-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -58291,8 +58300,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "undated redundant duplicate — porsche-panamera-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -58335,7 +58344,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model a4045a52962f4301b34a839b9c4ed9b9 (Porsche Panamera), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: undated redundant duplicate — porsche-panamera-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -59572,8 +59582,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant duplicate (same gen GT-Line) — kia-stonic-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -59616,7 +59626,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 5b7c8064a6164870bc3f469891a57da7 (2021 Kia Stonic GT-Line), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (same gen GT-Line) — kia-stonic-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -60429,8 +60440,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant duplicate Trackhawk — jeep-grand-cherokee-v2 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -60473,7 +60484,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model f8024595e11c48119877c9c7cc554abc (Jeep Grand Cherokee Trackhawk), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate Trackhawk — jeep-grand-cherokee-v2 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -60827,12 +60839,9 @@
   "schemaVersion": 2,
   "assetId": "jeep-grand-cherokee-v3",
   "make": "jeep",
-  "model": "grand cherokee",
-  "modelFamily": "grand cherokee",
-  "modelAliases": [
-   "grandcherokee",
-   "grand cherokee"
-  ],
+  "model": "Grand Cherokee MK2",
+  "modelFamily": "Grand Cherokee MK2",
+  "modelAliases": [],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -60901,7 +60910,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 73bd5b50f8e54bde9dad4e6d04b3225b (Jeep Grand Cherokee MK2), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'Grand Cherokee MK2'."
   ],
   "customization": {
    "configuratorReady": true,
@@ -61044,8 +61054,7 @@
   "model": "sx4",
   "modelFamily": "sx4",
   "modelAliases": [
-   "sx4",
-   "s-cross"
+   "sx4"
   ],
   "generation": null,
   "generationAliases": [],
@@ -61115,7 +61124,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model f3e6146da4dd4f998937790319c9a533 (Suzuki SX4 Sportback), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated: removed alias(es) that collided with another model's canonical name. Stripped ['s-cross']."
   ],
   "customization": {
    "configuratorReady": true,
@@ -63007,8 +63017,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant duplicate (718 Boxster) — porsche-718-boxster-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -63053,7 +63063,8 @@
    "2026-07-20 NEW from CSV library-fill: CC-BY model 5ab56c0a7666450cabb59d5e44539a12 (2019 Porsche 718 Boxster T), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=128).",
    "2026-07-20 hero poster re-rendered in default colour (grey) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected).",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (718 Boxster) — porsche-718-boxster-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -63224,8 +63235,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "exotic special (Spyder RS) — violates bar; stock 718 Boxster kept as v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -63270,7 +63281,8 @@
    "2026-07-20 NEW from CSV library-fill: CC-BY model 1a87f610bb854c6395ed8b03ba8e1965 (Porsche 718 Boxster Spyder RS), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=142).",
    "2026-07-20 hero poster re-rendered in default colour (grey) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected).",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: exotic special (Spyder RS) — violates bar; stock 718 Boxster kept as v1"
   ],
   "customization": {
    "configuratorReady": true,
@@ -65167,8 +65179,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "redundant duplicate — toyota-bz4x-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -65213,7 +65225,8 @@
    "2026-07-20 NEW from CSV library-fill: CC-BY model e10068b2511b4ed7b724a8d87a362727 (Toyota bZ4X), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
    "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=207).",
    "2026-07-20 hero poster re-rendered in default colour (white) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected).",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate — toyota-bz4x-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -67073,7 +67086,6 @@
   "model": "Golf Mk7",
   "modelFamily": "golf",
   "modelAliases": [
-   "golf",
    "golf mk7",
    "Golf Mk7",
    "Golf 7",
@@ -67148,7 +67160,8 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 39c3aa1a2a1f43b3b225445a42c5f74c (Volkswagen Golf GTI Mk7), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 de-dup: distinguished from Golf Mk8 so a plain \"Golf\" lookup resolves to one car (fixes viewer overlap)."
+   "2026-07-22 de-dup: distinguished from Golf Mk8 so a plain \"Golf\" lookup resolves to one car (fixes viewer overlap).",
+   "2026-07-22 De-duplicated: removed alias(es) that collided with another model's canonical name. Stripped ['golf']."
   ],
   "customization": {
    "configuratorReady": true,
@@ -67501,10 +67514,10 @@
   "schemaVersion": 2,
   "assetId": "kia-sportage-2012-v1",
   "make": "kia",
-  "model": "sportage",
-  "modelFamily": "sportage",
+  "model": "Sportage (2012)",
+  "modelFamily": "Sportage (2012)",
   "modelAliases": [
-   "sportage"
+   "Sportage SL"
   ],
   "generation": null,
   "generationAliases": [],
@@ -67574,7 +67587,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model f15205a444fb42f7a2ebf6765a36026a (Kia Sportage SL 2011-2014), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'Sportage (2012)'."
   ],
   "customization": {
    "configuratorReady": true,
@@ -67714,11 +67728,10 @@
   "schemaVersion": 2,
   "assetId": "peugeot-208-2020-v1",
   "make": "peugeot",
-  "model": "208",
-  "modelFamily": "208",
+  "model": "e-208",
+  "modelFamily": "e-208",
   "modelAliases": [
-   "208",
-   "e-208"
+   "Peugeot e-208"
   ],
   "generation": null,
   "generationAliases": [],
@@ -67788,7 +67801,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model a4f8becd0740468ca0c12cf403e4a42e (Peugeot e-208 2020), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'e-208'."
   ],
   "customization": {
    "configuratorReady": true,
@@ -68597,8 +68611,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "exact duplicate of toyota-corolla-v1 (both GR Corolla)",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -68641,7 +68655,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model e14fc132d13a4d09a01181341c70e690 (Toyota GR Corolla), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: exact duplicate of toyota-corolla-v1 (both GR Corolla)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -68994,11 +69009,9 @@
   "schemaVersion": 2,
   "assetId": "hyundai-i30-2018-v1",
   "make": "hyundai",
-  "model": "i30",
-  "modelFamily": "i30",
-  "modelAliases": [
-   "i30"
-  ],
+  "model": "i30 N",
+  "modelFamily": "i30 N",
+  "modelAliases": [],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -69067,7 +69080,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model c85b558abbd14acab590f92be22423a4 (2018 Hyundai i30 N), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'i30 N'."
   ],
   "customization": {
    "configuratorReady": true,
@@ -69236,8 +69250,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "exact duplicate of mini-clubman-v1 (both JCW Clubman 2011)",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -69280,7 +69294,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model dd1175d3aa534a25a51c043f13d1e38a (Mini JCW Clubman 2011), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: exact duplicate of mini-clubman-v1 (both JCW Clubman 2011)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -70313,8 +70328,8 @@
   "qualityGrade": "premium",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "exact duplicate of bmw-8-series-v1 (both G15 M850i coupe)",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -70357,7 +70372,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model b378b55aa98e4971a63c298afa855c7c (BMW 8-Series (G15) Coupe M850i 2019), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: exact duplicate of bmw-8-series-v1 (both G15 M850i coupe)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -72446,7 +72462,6 @@
   "modelFamily": "Multivan",
   "modelAliases": [
    "multivan",
-   "transporter",
    "caravelle"
   ],
   "generation": null,
@@ -72517,7 +72532,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 24d70484a10240b79f1ddb33bf6a9b1d (2022 Volkswagen Multivan), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated: removed alias(es) that collided with another model's canonical name. Stripped ['transporter']."
   ],
   "customization": {
    "configuratorReady": true,
@@ -73951,7 +73967,6 @@
   "modelFamily": "GR86",
   "modelAliases": [
    "gr86",
-   "gt86",
    "86"
   ],
   "generation": null,
@@ -74025,7 +74040,8 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 2724aadbf88b4706a26cf7d1b2332d0c (2022 Toyota GR86), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
    "2026-07-21 aggressive wave 4: CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated: removed alias(es) that collided with another model's canonical name. Stripped ['gt86']."
   ],
   "customization": {
    "configuratorReady": true,
@@ -76973,8 +76989,7 @@
   "modelFamily": "RS7",
   "modelAliases": [
    "rs7",
-   "s7",
-   "a7 sportback"
+   "s7"
   ],
   "generation": null,
   "generationAliases": [],
@@ -77046,7 +77061,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 61dd9575a8c645558aa912042af0cfc1 (2020 Audi RS7 Sportback), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated: removed alias(es) that collided with another model's canonical name. Stripped ['a7 sportback']."
   ],
   "customization": {
    "configuratorReady": true,
@@ -82803,11 +82819,9 @@
   "schemaVersion": 2,
   "assetId": "hyundai-ioniq-v1",
   "make": "HYUNDAI",
-  "model": "Ioniq 5",
-  "modelFamily": "Ioniq 5",
-  "modelAliases": [
-   "Ioniq"
-  ],
+  "model": "Ioniq 5 N",
+  "modelFamily": "Ioniq 5 N",
+  "modelAliases": [],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -82878,7 +82892,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 8d16325eb7974a948627b3cd77f30f52 (2024 Hyundai Ioniq 5 N), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'Ioniq 5 N'."
   ],
   "customization": {
    "configuratorReady": true,
@@ -83260,8 +83275,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "custom/modified — violates no-mods bar; stock kept as land-rover-range-rover-sport-2018-v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -83306,7 +83321,8 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 54b717eea6ab44f9820736cbbc4dd566 (2016 Custom Land Rover Range Rover Sport), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: custom/modified — violates no-mods bar; stock kept as land-rover-range-rover-sport-2018-v1"
   ],
   "customization": {
    "configuratorReady": true,
