@@ -10533,7 +10533,7 @@
   "paintMaterialNames": [],
   "glassMaterialNames": [],
   "defaultColourFamily": "silver",
-  "renderColourLabel": "Silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -10555,14 +10555,18 @@
   "publishedAt": "2026-07-17T07:05:28Z",
   "replacedAssetId": null,
   "needsHumanReview": [
-   "recolour audit FAILED (retroactive sweep): body colour did not change across variants; reverted to single-neutral"
+   "recolour audit FAILED (retroactive sweep): body colour did not change across variants; reverted to single-neutral",
+   "recolour audit FAILED after re-bake attempt: body is textured/merged, no isolable paint material; single-neutral"
   ],
   "notes": [
    "Source title: '2021 Kia Niro FE Eco Hybrid'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 205551, \"facesAfter\": 150159, \"ratio\": 0.73}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "recolour-audit revert -> single-neutral (was paintMaterialNames=[])"
+   "recolour-audit revert -> single-neutral (was paintMaterialNames=[])",
+   "fix-not-drop re-bake attempt: body material corrected to 'EXT_BODY_insides' (was mis-identified)",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "fix-not-drop re-bake FAILED audit -> single-neutral"
   ],
   "customization": {
    "configuratorReady": false,
@@ -22210,14 +22214,25 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "CARPAINT"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "white",
-  "renderColourLabel": "White",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
-  "oemPaintName": "Frozen White",
-  "colourVariants": {},
+  "oemPaintName": null,
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-v1.glb",
   "fallbackGlbUrl": null,
@@ -22234,15 +22249,15 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T10:44:12Z",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "recolour audit FAILED (retroactive sweep): body colour did not change across variants; reverted to single-neutral"
-  ],
   "notes": [
    "Source title: 'Ford Ka'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 625898, \"facesAfter\": 150024, \"ratio\": 0.24}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "recolour-audit revert -> single-neutral (was paintMaterialNames=[])"
+   "recolour-audit revert -> single-neutral (was paintMaterialNames=[])",
+   "fix-not-drop re-bake attempt: body material corrected to 'CARPAINT' (was mis-identified)",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "fix-not-drop: recovered — corrected body material, re-baked 8 colours, recolour audit PASS"
   ],
   "customization": {
    "configuratorReady": false,
@@ -67254,14 +67269,25 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "primary"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "silver",
-  "renderColourLabel": "Silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
-  "oemPaintName": "Reflex Silver Metallic",
-  "colourVariants": {},
+  "oemPaintName": null,
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2016-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2016-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2016-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2016-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2016-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2016-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2016-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2016-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2016-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2016-v1.glb",
   "fallbackGlbUrl": null,
@@ -67278,13 +67304,13 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "recolour audit FAILED (retroactive sweep): body colour did not change across variants; reverted to single-neutral"
-  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model bab77902c638427bb85e68b6762a481f (2016 Volkswagen Polo), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "recolour-audit revert -> single-neutral (was paintMaterialNames=[])"
+   "recolour-audit revert -> single-neutral (was paintMaterialNames=[])",
+   "fix-not-drop re-bake attempt: body material corrected to 'primary' (was mis-identified)",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "fix-not-drop: recovered — corrected body material, re-baked 8 colours, recolour audit PASS"
   ],
   "customization": {
    "configuratorReady": true,
@@ -69385,10 +69411,10 @@
   "paintMaterialNames": [],
   "glassMaterialNames": [],
   "defaultColourFamily": "white",
-  "renderColourLabel": "White",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
-  "oemPaintName": "Okenite White",
+  "oemPaintName": null,
   "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-rcz-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-rcz-v1.glb",
@@ -69407,12 +69433,16 @@
   "publishedAt": null,
   "replacedAssetId": null,
   "needsHumanReview": [
-   "recolour audit FAILED (retroactive sweep): body colour did not change across variants; reverted to single-neutral"
+   "recolour audit FAILED (retroactive sweep): body colour did not change across variants; reverted to single-neutral",
+   "recolour audit FAILED after re-bake attempt: body is textured/merged, no isolable paint material; single-neutral"
   ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 3f1376cfec0340208806d94ae49e19bb (Peugeot RCZ), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants []. grade B.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "recolour-audit revert -> single-neutral (was paintMaterialNames=['carpaint.002'])"
+   "recolour-audit revert -> single-neutral (was paintMaterialNames=['carpaint.002'])",
+   "fix-not-drop re-bake attempt: body material corrected to 'carpaint.002' (was mis-identified)",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "fix-not-drop re-bake FAILED audit -> single-neutral"
   ],
   "customization": {
    "configuratorReady": true,
@@ -82756,14 +82786,25 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "hHyundai_Ioniq5NRewardRecycled_2023Paint_Material1"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "silver",
-  "renderColourLabel": "Silver",
+  "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/HYUNDAI/hyundai-ioniq-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/HYUNDAI/hyundai-ioniq-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/HYUNDAI/hyundai-ioniq-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/HYUNDAI/hyundai-ioniq-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/HYUNDAI/hyundai-ioniq-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/HYUNDAI/hyundai-ioniq-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/HYUNDAI/hyundai-ioniq-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/HYUNDAI/hyundai-ioniq-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/HYUNDAI/hyundai-ioniq-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/HYUNDAI/hyundai-ioniq-v1.glb",
   "fallbackGlbUrl": null,
@@ -82780,14 +82821,14 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "recolour audit FAILED (retroactive sweep): body colour did not change across variants; reverted to single-neutral"
-  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 8d16325eb7974a948627b3cd77f30f52 (2024 Hyundai Ioniq 5 N), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Relabelled model -> 'Ioniq 5 N'.",
-   "recolour-audit revert -> single-neutral (was paintMaterialNames=['red_paint'])"
+   "recolour-audit revert -> single-neutral (was paintMaterialNames=['red_paint'])",
+   "fix-not-drop re-bake attempt: body material corrected to 'hHyundai_Ioniq5NRewardRecycled_2023Paint_Material1' (was mis-identified)",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "fix-not-drop: recovered — corrected body material, re-baked 8 colours, recolour audit PASS"
   ],
   "customization": {
    "configuratorReady": true,
@@ -84882,14 +84923,25 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "material-a0000000-0000-0000-0000-000000000000"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "white",
-  "renderColourLabel": "White",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/MERCEDES/mercedes-eqs-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/MERCEDES/mercedes-eqs-v1__white.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/MERCEDES/mercedes-eqs-v1__silver.glb",
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/MERCEDES/mercedes-eqs-v1__grey.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/MERCEDES/mercedes-eqs-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/MERCEDES/mercedes-eqs-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/MERCEDES/mercedes-eqs-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/MERCEDES/mercedes-eqs-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/MERCEDES/mercedes-eqs-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/MERCEDES/mercedes-eqs-v1.glb",
   "fallbackGlbUrl": null,
@@ -84906,13 +84958,13 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "recolour audit FAILED (retroactive sweep): body colour did not change across variants; reverted to single-neutral"
-  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 06fc55dd9c4748dcb332305600a9fe8e (Mercedes-Benz EQS 450+), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "recolour-audit revert -> single-neutral (was paintMaterialNames=['Material-Matte_Blue_Anodized_Aluminum'])"
+   "recolour-audit revert -> single-neutral (was paintMaterialNames=['Material-Matte_Blue_Anodized_Aluminum'])",
+   "fix-not-drop re-bake attempt: body material corrected to 'material-a0000000-0000-0000-0000-000000000000' (was mis-identified)",
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "fix-not-drop: recovered — corrected body material, re-baked 8 colours, recolour audit PASS"
   ],
   "customization": {
    "configuratorReady": true,
