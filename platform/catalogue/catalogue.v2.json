@@ -221,11 +221,21 @@
   "generation": "w213",
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2023,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -646,7 +656,11 @@
   "yearStart": 2016,
   "yearEnd": 2018,
   "bodyStyle": null,
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -1272,7 +1286,10 @@
   "yearStart": 2010,
   "yearEnd": 2012,
   "bodyStyle": null,
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -1469,10 +1486,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2003,
+  "yearEnd": 2026,
   "bodyStyle": null,
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -1882,7 +1901,9 @@
   "yearStart": 2017,
   "yearEnd": 2019,
   "bodyStyle": null,
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -2098,11 +2119,19 @@
   "generation": "e30",
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1986,
+  "yearEnd": 1991,
   "bodyStyle": null,
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -2316,11 +2345,20 @@
   "generation": "f90",
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2011,
+  "yearEnd": 2026,
   "bodyStyle": null,
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -2551,7 +2589,9 @@
   "yearStart": 2011,
   "yearEnd": 2019,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -2779,8 +2819,16 @@
   "yearStart": 1957,
   "yearEnd": 1975,
   "bodyStyle": "citycar",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "La Prima",
+   "Lounge",
+   "Pop",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -2999,8 +3047,18 @@
   "yearStart": 2018,
   "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": "RS Q8",
   "exactTrim": false,
   "provenance": "sourced",
@@ -3215,8 +3273,18 @@
   "yearStart": 2020,
   "yearEnd": 2026,
   "bodyStyle": "liftback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "S",
+   "SE",
+   "SE L",
+   "Sportline",
+   "vRS"
+  ],
   "exactDerivative": "RS",
   "exactTrim": false,
   "provenance": "sourced",
@@ -3437,8 +3505,18 @@
   "yearStart": 2014,
   "yearEnd": 2026,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "ST",
+   "ST-Line",
+   "Titanium",
+   "Vignale",
+   "Zetec"
+  ],
   "exactDerivative": "L3H3 Trend",
   "exactTrim": false,
   "provenance": "sourced",
@@ -3657,8 +3735,19 @@
   "yearStart": 2013,
   "yearEnd": 2020,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": "S65 AMG",
   "exactTrim": false,
   "provenance": "sourced",
@@ -3877,7 +3966,9 @@
   "yearStart": 2004,
   "yearEnd": 2007,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -4097,7 +4188,10 @@
   "yearStart": 2016,
   "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": "GT4",
   "exactTrim": false,
@@ -4317,8 +4411,16 @@
   "yearStart": 2007,
   "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Acenta",
+   "N-Connecta",
+   "N-Design",
+   "Tekna",
+   "Visia"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -4538,7 +4640,10 @@
   "yearStart": 2013,
   "yearEnd": 2015,
   "bodyStyle": "roadster",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -4758,8 +4863,17 @@
   "yearStart": 2018,
   "yearEnd": 2026,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -4978,7 +5092,10 @@
   "yearStart": 2017,
   "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": "LC 500",
   "exactTrim": false,
@@ -5200,8 +5317,17 @@
   "yearStart": 2017,
   "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Classic",
+   "Exclusive",
+   "John Cooper Works",
+   "Sport"
+  ],
   "exactDerivative": "JCW",
   "exactTrim": false,
   "provenance": "sourced",
@@ -5413,8 +5539,18 @@
   "yearStart": 2019,
   "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": "RS Q3",
   "exactTrim": false,
   "provenance": "sourced",
@@ -5625,8 +5761,18 @@
   "yearStart": 2022,
   "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "EX",
+   "S",
+   "SE",
+   "SR",
+   "Sport"
+  ],
   "exactDerivative": "Type R",
   "exactTrim": false,
   "provenance": "sourced",
@@ -5839,7 +5985,9 @@
   "yearStart": 1975,
   "yearEnd": 1985,
   "bodyStyle": "targa",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": "GTS",
   "exactTrim": false,
@@ -6202,8 +6350,18 @@
   "yearStart": 2014,
   "yearEnd": 2021,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -6422,7 +6580,9 @@
   "yearStart": 2022,
   "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": "RX 500h F Sport",
   "exactTrim": false,
@@ -6645,7 +6805,11 @@
   "yearStart": 2019,
   "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -6870,8 +7034,18 @@
   "yearStart": 1997,
   "yearEnd": 2004,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -7088,11 +7262,22 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -7308,8 +7493,20 @@
   "yearStart": 2002,
   "yearEnd": 2010,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -7523,7 +7720,10 @@
   "yearStart": 2005,
   "yearEnd": 2010,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -7736,8 +7936,18 @@
   "yearStart": 1993,
   "yearEnd": 2000,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -7957,8 +8167,19 @@
   "yearStart": 2018,
   "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -8555,8 +8776,18 @@
   "yearStart": 2020,
   "yearEnd": 2026,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "S",
+   "SE",
+   "SE L",
+   "Sportline",
+   "vRS"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -8775,11 +9006,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2022,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Iconic",
+   "Play",
+   "RS Line",
+   "S Edition"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -8993,11 +9232,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2021,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "EX",
+   "S",
+   "SE",
+   "SR",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -9210,8 +9458,18 @@
   "yearStart": 2021,
   "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Elite",
+   "GS",
+   "SE",
+   "SRi",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -9432,8 +9690,16 @@
   "yearStart": 1993,
   "yearEnd": 2002,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Cupra",
+   "FR",
+   "SE",
+   "SE Technology",
+   "Xcellence"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -9842,8 +10108,14 @@
   "yearStart": 2017,
   "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Long Range",
+   "Performance",
+   "Standard Range"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -10066,8 +10338,16 @@
   "yearStart": 2004,
   "yearEnd": 2010,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Feel",
+   "Flair",
+   "Shine",
+   "Touch"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -10281,8 +10561,20 @@
   "yearStart": 2021,
   "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -10495,8 +10787,19 @@
   "yearStart": 2017,
   "yearEnd": 2023,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "N",
+   "N Line",
+   "Premium",
+   "S",
+   "SE Connect",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -10931,8 +11234,16 @@
   "yearStart": 2021,
   "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -11155,8 +11466,19 @@
   "yearStart": 1998,
   "yearEnd": 2005,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -11529,8 +11851,19 @@
   "yearStart": 2017,
   "yearEnd": 2023,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -11749,8 +12082,16 @@
   "yearStart": 2003,
   "yearEnd": 2008,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -11970,8 +12311,16 @@
   "yearStart": 2001,
   "yearEnd": 2008,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "Allure",
+   "GT",
+   "GT Line"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -12193,8 +12542,16 @@
   "yearStart": 1982,
   "yearEnd": 1992,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Acenta",
+   "N-Connecta",
+   "N-Design",
+   "Tekna",
+   "Visia"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -12416,7 +12773,9 @@
   "yearStart": 2007,
   "yearEnd": 2010,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -12631,7 +12990,9 @@
   "yearStart": 2005,
   "yearEnd": 2017,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -13268,10 +13629,22 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2018,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -13633,10 +14006,22 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -13857,10 +14242,17 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2021,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "La Prima",
+   "Lounge",
+   "Pop",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -14073,10 +14465,20 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2020,
-  "yearEnd": null,
+  "yearEnd": 2022,
   "bodyStyle": "liftback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Elite",
+   "GS",
+   "SE",
+   "SRi",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -14891,10 +15293,20 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2023,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "pickup",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "ST",
+   "ST-Line",
+   "Titanium",
+   "Vignale",
+   "Zetec"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -15113,10 +15525,19 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "Allure",
+   "GT",
+   "GT Line"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -15336,10 +15757,18 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2021,
-  "yearEnd": null,
+  "yearEnd": 2024,
   "bodyStyle": "pickup",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel"
+  ],
+  "compatibleTrimFamilies": [
+   "Acenta",
+   "N-Connecta",
+   "N-Design",
+   "Tekna",
+   "Visia"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -15559,10 +15988,18 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2013,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -15781,11 +16218,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2021,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -16003,10 +16450,18 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "roadster",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -16222,11 +16677,19 @@
   "generation": "E46",
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2000,
+  "yearEnd": 2006,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -16445,11 +16908,22 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "ST",
+   "ST-Line",
+   "Titanium",
+   "Vignale",
+   "Zetec"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -16670,10 +17144,19 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2015,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -16891,11 +17374,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": 2021,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2021,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "EX",
+   "S",
+   "SE",
+   "SR",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -17108,10 +17600,23 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": null,
+  "yearEnd": 2024,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -17331,10 +17836,21 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2025,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "N",
+   "N Line",
+   "Premium",
+   "S",
+   "SE Connect",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -17554,10 +18070,18 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2016,
-  "yearEnd": null,
+  "yearEnd": 2024,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "La Prima",
+   "Lounge",
+   "Pop",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -17770,10 +18294,22 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2023,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "GT",
+   "GT-Line",
+   "GT-Line S"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -17999,10 +18535,20 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Cupra",
+   "FR",
+   "SE",
+   "SE Technology",
+   "Xcellence"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -18199,10 +18745,20 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "N",
+   "N Line",
+   "Premium",
+   "S",
+   "SE Connect",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -18421,11 +18977,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1998,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "SZ-T",
+   "SZ3",
+   "SZ5",
+   "Ultra"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -18647,11 +19210,23 @@
   "generation": "G",
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Elite",
+   "GS",
+   "SE",
+   "SRi",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -18870,11 +19445,22 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2023,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "GT",
+   "GT-Line",
+   "GT-Line S"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -19095,10 +19681,20 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": null,
+  "yearEnd": 2023,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -19316,11 +19912,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": 2020,
-  "yearEnd": null,
+  "yearStart": 2014,
+  "yearEnd": 2020,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "SZ-T",
+   "SZ3",
+   "SZ5",
+   "Ultra"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -19526,11 +20129,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2010,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "Allure",
+   "GT",
+   "GT Line"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -19749,10 +20361,18 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2024,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "SZ-T",
+   "SZ3",
+   "SZ5",
+   "Ultra"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -19973,10 +20593,21 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2023,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -20341,10 +20972,20 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2020,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Cupra",
+   "FR",
+   "SE",
+   "SE Technology",
+   "Xcellence"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -20696,10 +21337,22 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2023,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -20910,11 +21563,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Inscription",
+   "Momentum",
+   "Plus",
+   "R-Design",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -21134,10 +21797,20 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "fastback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "GT",
+   "GT-Line",
+   "GT-Line S"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -21356,11 +22029,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2004,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Essential",
+   "Expression",
+   "Extreme",
+   "Journey"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -21580,9 +22261,13 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2023,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -21795,11 +22480,22 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -22012,10 +22708,20 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2023,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -22229,8 +22935,18 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -22439,10 +23155,21 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2007,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -22877,8 +23604,16 @@
   "yearStart": 2023,
   "yearEnd": 2023,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid"
+  ],
+  "compatibleTrimFamilies": [
+   "EX",
+   "S",
+   "SE",
+   "SR",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -23089,11 +23824,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -23314,8 +24058,15 @@
   "yearStart": 2022,
   "yearEnd": 2024,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "V1",
+   "V2",
+   "V3",
+   "VZ"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -23529,8 +24280,18 @@
   "yearStart": 2012,
   "yearEnd": 2012,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "GT",
+   "GT-Line",
+   "GT-Line S"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -23755,8 +24516,15 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GT Sport",
+   "Homura",
+   "SE-L",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -23979,8 +24747,16 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GT Sport",
+   "Homura",
+   "SE-L",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -24199,11 +24975,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2006,
+  "yearEnd": 2023,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "ST",
+   "ST-Line",
+   "Titanium",
+   "Vignale",
+   "Zetec"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -24626,11 +25412,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -24845,11 +25641,22 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -25067,11 +25874,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2013,
+  "yearEnd": 2022,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -25289,11 +26104,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2021,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -25511,11 +26334,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2021,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -25737,8 +26568,16 @@
   "yearStart": 2018,
   "yearEnd": 2018,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Feel",
+   "Flair",
+   "Shine",
+   "Touch"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -25948,11 +26787,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2012,
+  "yearEnd": 2018,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -26170,11 +27017,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -26395,8 +27250,16 @@
   "yearStart": 2022,
   "yearEnd": 2024,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "V1",
+   "V2",
+   "V3",
+   "VZ"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -26611,8 +27474,16 @@
   "yearStart": 2025,
   "yearEnd": 2025,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "V1",
+   "V2",
+   "V3",
+   "VZ"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -26826,8 +27697,17 @@
   "yearStart": 2021,
   "yearEnd": 2021,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -27043,11 +27923,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -27265,11 +28155,23 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -27482,8 +28384,18 @@
   "yearStart": 2024,
   "yearEnd": 2024,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -27704,8 +28616,17 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -27925,8 +28846,20 @@
   "yearStart": 2018,
   "yearEnd": 2018,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -28125,11 +29058,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -28347,11 +29289,23 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -28564,8 +29518,18 @@
   "yearStart": 2018,
   "yearEnd": 2018,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -28778,8 +29742,16 @@
   "yearStart": 2015,
   "yearEnd": 2015,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Feel",
+   "Flair",
+   "Shine",
+   "Touch"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -28994,8 +29966,17 @@
   "yearStart": 2022,
   "yearEnd": 2022,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Feel",
+   "Flair",
+   "Shine",
+   "Touch"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -29208,8 +30189,18 @@
   "yearStart": 2014,
   "yearEnd": 2014,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "ST",
+   "ST-Line",
+   "Titanium",
+   "Vignale",
+   "Zetec"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -29583,8 +30574,19 @@
   "yearStart": 2021,
   "yearEnd": 2021,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "ST",
+   "ST-Line",
+   "Titanium",
+   "Vignale",
+   "Zetec"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -29803,11 +30805,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "EX",
+   "S",
+   "SE",
+   "SR",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -30021,8 +31032,17 @@
   "yearStart": 2018,
   "yearEnd": 2018,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "EX",
+   "S",
+   "SE",
+   "SR",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -30235,8 +31255,18 @@
   "yearStart": 2010,
   "yearEnd": 2010,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "N",
+   "N Line",
+   "Premium",
+   "S",
+   "SE Connect",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -30459,8 +31489,17 @@
   "yearStart": 2022,
   "yearEnd": 2022,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "N",
+   "N Line",
+   "Premium",
+   "S",
+   "SE Connect",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -30686,8 +31725,17 @@
   "yearStart": 2023,
   "yearEnd": 2023,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "N",
+   "N Line",
+   "Premium",
+   "S",
+   "SE Connect",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -30906,11 +31954,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2010,
+  "yearEnd": 2015,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "N",
+   "N Line",
+   "Premium",
+   "S",
+   "SE Connect",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -31132,8 +32190,18 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "N",
+   "N Line",
+   "Premium",
+   "S",
+   "SE Connect",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -31350,11 +32418,23 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2000,
+  "yearEnd": 2020,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "GT",
+   "GT-Line",
+   "GT-Line S"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -31577,8 +32657,19 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "GT",
+   "GT-Line",
+   "GT-Line S"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -31797,10 +32888,14 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -32023,8 +33118,15 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GT Sport",
+   "Homura",
+   "SE-L",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -32247,10 +33349,17 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2015,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "roadster",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GT Sport",
+   "Homura",
+   "SE-L",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -32473,8 +33582,18 @@
   "yearStart": 2018,
   "yearEnd": 2018,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -32696,8 +33815,18 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -32920,8 +34049,18 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -33143,8 +34282,18 @@
   "yearStart": 2022,
   "yearEnd": 2022,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -33576,8 +34725,16 @@
   "yearStart": 2023,
   "yearEnd": 2023,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Acenta",
+   "N-Connecta",
+   "N-Design",
+   "Tekna",
+   "Visia"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -33799,8 +34956,18 @@
   "yearStart": 2018,
   "yearEnd": 2018,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Acenta",
+   "N-Connecta",
+   "N-Design",
+   "Tekna",
+   "Visia"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -34022,8 +35189,17 @@
   "yearStart": 2023,
   "yearEnd": 2023,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Acenta",
+   "N-Connecta",
+   "N-Design",
+   "Tekna",
+   "Visia"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -34243,11 +35419,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "Allure",
+   "GT",
+   "GT Line"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -34610,10 +35794,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -34835,11 +36021,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2022,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Iconic",
+   "Play",
+   "RS Line",
+   "S Edition"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -35049,11 +36243,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Iconic",
+   "Play",
+   "RS Line",
+   "S Edition"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -35266,8 +36468,15 @@
   "yearStart": 2012,
   "yearEnd": 2012,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Iconic",
+   "Play",
+   "RS Line",
+   "S Edition"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -35478,10 +36687,18 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Cupra",
+   "FR",
+   "SE",
+   "SE Technology",
+   "Xcellence"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -35678,8 +36895,17 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Cupra",
+   "FR",
+   "SE",
+   "SE Technology",
+   "Xcellence"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -35873,11 +37099,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2021,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "S",
+   "SE",
+   "SE L",
+   "Sportline",
+   "vRS"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -36095,11 +37329,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "S",
+   "SE",
+   "SE L",
+   "Sportline",
+   "vRS"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -36320,8 +37562,17 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "S",
+   "SE",
+   "SE L",
+   "Sportline",
+   "vRS"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -36540,8 +37791,18 @@
   "yearStart": 2022,
   "yearEnd": 2022,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "S",
+   "SE",
+   "SE L",
+   "Sportline",
+   "vRS"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -36762,8 +38023,16 @@
   "yearStart": 2019,
   "yearEnd": 2019,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "S",
+   "SE",
+   "SE L",
+   "Sportline",
+   "vRS"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -36982,10 +38251,18 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2017,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "SZ-T",
+   "SZ3",
+   "SZ5",
+   "Ultra"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -37207,8 +38484,17 @@
   "yearStart": 2010,
   "yearEnd": 2010,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -37429,8 +38715,19 @@
   "yearStart": 2011,
   "yearEnd": 2011,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Elite",
+   "GS",
+   "SE",
+   "SRi",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -37649,11 +38946,24 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2024,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -37876,8 +39186,19 @@
   "yearStart": 2024,
   "yearEnd": 2024,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -38099,10 +39420,21 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -38320,11 +39652,24 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2023,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -38549,8 +39894,19 @@
   "yearStart": 2021,
   "yearEnd": 2021,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -38772,8 +40128,20 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -38994,8 +40362,19 @@
   "yearStart": 2022,
   "yearEnd": 2022,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -39213,11 +40592,24 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2002,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -39438,8 +40830,16 @@
   "yearStart": 2022,
   "yearEnd": 2022,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Inscription",
+   "Momentum",
+   "Plus",
+   "R-Design",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -39660,8 +41060,18 @@
   "yearStart": 2004,
   "yearEnd": 2004,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Inscription",
+   "Momentum",
+   "Plus",
+   "R-Design",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -39882,8 +41292,18 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Inscription",
+   "Momentum",
+   "Plus",
+   "R-Design",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -40101,11 +41521,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2026,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Inscription",
+   "Momentum",
+   "Plus",
+   "R-Design",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -40327,8 +41757,18 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Inscription",
+   "Momentum",
+   "Plus",
+   "R-Design",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -40549,11 +41989,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Inscription",
+   "Momentum",
+   "Plus",
+   "R-Design",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -40779,10 +42229,23 @@
   "generationAliases": [],
   "generationConfirmed": true,
   "yearStart": 2020,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -41010,10 +42473,20 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2021,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "GT",
+   "GT-Line",
+   "GT-Line S"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -41153,10 +42626,18 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2021,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "Allure",
+   "GT",
+   "GT Line"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -41297,11 +42778,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GT Sport",
+   "Homura",
+   "SE-L",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -41440,11 +42929,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2021,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "S",
+   "SE",
+   "SE L",
+   "Sportline",
+   "vRS"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -41584,10 +43081,20 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2012,
-  "yearEnd": null,
+  "yearEnd": 2022,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "ST",
+   "ST-Line",
+   "Titanium",
+   "Vignale",
+   "Zetec"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -41726,9 +43233,13 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2020,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric",
+   "petrol"
+  ],
   "provenance": "sourced",
   "sourceTitle": "2020 BMW X2",
   "sourceUrl": "https://sketchfab.com/3d-models/0171e70eb4df4b47878c3cd81e698a3e",
@@ -41833,7 +43344,14 @@
    "variantsHash": "cd2a5696ee01b2718013976c5b527ebc5336de68",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -41848,9 +43366,11 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2020,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
   "provenance": "sourced",
   "sourceTitle": "2020 Nissan Ariya",
   "sourceUrl": "https://sketchfab.com/3d-models/414019b3a89a45fe914b977e48925f39",
@@ -41955,7 +43475,14 @@
    "variantsHash": "0976cc5b97dd52938194a807302fd5957a9ff61d",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleTrimFamilies": [
+   "Acenta",
+   "N-Connecta",
+   "N-Design",
+   "Tekna",
+   "Visia"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -41970,9 +43497,12 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2019,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "provenance": "sourced",
   "sourceTitle": "2019 Renault Arkana",
   "sourceUrl": "https://sketchfab.com/3d-models/b28e3bd3a038423b9d1a5c27cc45087f",
@@ -42077,7 +43607,13 @@
    "variantsHash": "94813abeb1428dadcbcc7da4a84c9e68538e6c7f",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleTrimFamilies": [
+   "Iconic",
+   "Play",
+   "RS Line",
+   "S Edition"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -42092,10 +43628,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "provenance": "sourced",
   "sourceTitle": "Suzuki S Cross - Azul",
   "sourceUrl": "https://sketchfab.com/3d-models/5ea3fad3b61143fa95dfa51cc8a05d3d",
@@ -42202,7 +43741,13 @@
    "variantsHash": "9d1c1e1c1d36909ee0473e8e8ae35b7ba1e47085",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleTrimFamilies": [
+   "SZ-T",
+   "SZ3",
+   "SZ5",
+   "Ultra"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -42216,10 +43761,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
   "provenance": "sourced",
   "sourceTitle": "Jaguar XF",
   "sourceUrl": "https://sketchfab.com/3d-models/f27d0e569b7a44fc8786f1d914bc687d",
@@ -42324,7 +43872,14 @@
    "variantsHash": "8a7749f8dbd929f0c818a7cec4609772dec799f9",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleTrimFamilies": [
+   "HSE",
+   "R",
+   "R-Dynamic",
+   "S",
+   "SE"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -42339,9 +43894,12 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2011,
-  "yearEnd": null,
+  "yearEnd": 2024,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
   "provenance": "sourced",
   "sourceTitle": "Mini John- Cooper- Works clubman 2011",
   "sourceUrl": "https://sketchfab.com/3d-models/dd1175d3aa534a25a51c043f13d1e38a",
@@ -42447,7 +44005,13 @@
    "variantsHash": "1df3f3dd77113dc4c398a72e94156ea66b4a5d59",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleTrimFamilies": [
+   "Classic",
+   "Exclusive",
+   "John Cooper Works",
+   "Sport"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -42461,10 +44025,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2010,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "provenance": "sourced",
   "sourceTitle": "Mitsubishi ASX",
   "sourceUrl": "https://sketchfab.com/3d-models/79304f5b3fd342ad812cd584695ebbad",
@@ -42585,9 +44152,12 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "provenance": "sourced",
   "sourceTitle": "2022 Mitsubishi Eclipse Cross PHEV",
   "sourceUrl": "https://sketchfab.com/3d-models/6dbaa348dbe84df991f1890559a2f16b",
@@ -42708,9 +44278,11 @@
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2024,
-  "yearEnd": null,
+  "yearEnd": 2024,
   "bodyStyle": "pickup",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel"
+  ],
   "provenance": "sourced",
   "sourceTitle": "Mitsubishi L200 Triton Athlete 2024",
   "sourceUrl": "https://sketchfab.com/3d-models/372e50454f3246239a5a1551f839f862",
@@ -42830,8 +44402,8 @@
   ],
   "generation": null,
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2010,
+  "yearEnd": 2020,
   "bodyStyle": "hatchback",
   "provenance": "sourced",
   "sourceTitle": "Alfa Romeo Giulietta",
@@ -42936,7 +44508,11 @@
    "variantsHash": "56d913a71bd9acc36b0a490648c096b4869ba3dc",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -42949,8 +44525,8 @@
   ],
   "generation": null,
   "generationConfirmed": false,
-  "yearStart": 2022,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2022,
   "bodyStyle": "hatchback",
   "provenance": "sourced",
   "sourceTitle": "2022 Maruti Suzuki Baleno",
@@ -43055,7 +44631,16 @@
    "variantsHash": "b769a36bc80a58e00503df62044370c2c4746e76",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "SZ-T",
+   "SZ3",
+   "SZ5",
+   "Ultra"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -43069,7 +44654,7 @@
   "generation": null,
   "generationConfirmed": false,
   "yearStart": 2022,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
   "provenance": "sourced",
   "sourceTitle": "2022 Suzuki Ignis",
@@ -43174,7 +44759,17 @@
    "variantsHash": "d3213720e8d90d4bc2c0617a809b5dd0e1aa4c8d",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "SZ-T",
+   "SZ3",
+   "SZ5",
+   "Ultra"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -43189,7 +44784,7 @@
   "generation": null,
   "generationConfirmed": false,
   "yearStart": 2018,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "mpv",
   "provenance": "sourced",
   "sourceTitle": "Opel Combo E 2018",
@@ -43294,7 +44889,19 @@
    "variantsHash": "46b0d0617a65d6c5f366a0a4adfc2157bf212694",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Elite",
+   "GS",
+   "SE",
+   "SRi",
+   "Ultimate"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -43310,7 +44917,7 @@
   "generation": null,
   "generationConfirmed": false,
   "yearStart": 2014,
-  "yearEnd": null,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
   "provenance": "sourced",
   "sourceTitle": "Citroen C4 Cactus 2014-2020",
@@ -43415,7 +45022,17 @@
    "variantsHash": "022a959bd4263c7fffa02eafd2287439afb9c498",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Feel",
+   "Flair",
+   "Shine",
+   "Touch"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -43430,7 +45047,7 @@
   "generation": null,
   "generationConfirmed": false,
   "yearStart": 1990,
-  "yearEnd": null,
+  "yearEnd": 2018,
   "bodyStyle": "hatchback",
   "provenance": "sourced",
   "sourceTitle": "1990 Nissan Pulsar GTI-R",
@@ -43535,7 +45152,18 @@
    "variantsHash": "f4e05c31ed86def62b19d960d6dfd518b6e80a52",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Acenta",
+   "N-Connecta",
+   "N-Design",
+   "Tekna",
+   "Visia"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -43551,8 +45179,8 @@
   ],
   "generation": null,
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
   "provenance": "sourced",
   "sourceTitle": "KIA Ceed",
@@ -43656,7 +45284,21 @@
    "variantsHash": "7ccde8bf0f8860fb05b23c7050d826d15513f8dc",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "GT",
+   "GT-Line",
+   "GT-Line S"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -43671,8 +45313,8 @@
   ],
   "generation": null,
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
   "provenance": "sourced",
   "sourceTitle": "Land Rover Discovery 5",
@@ -43778,7 +45420,12 @@
    "variantsHash": "c7a20500bcde141bdeb80be2c3e5dc91f7c25f76",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -43794,8 +45441,8 @@
   ],
   "generation": null,
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2022,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
   "provenance": "sourced",
   "sourceTitle": "Range Rover Sport 2018",
@@ -43899,7 +45546,12 @@
    "variantsHash": "5a135047580e883b38b4e027b27cee3e5594a3fd",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -43912,8 +45564,8 @@
   ],
   "generation": null,
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
   "provenance": "sourced",
   "sourceTitle": "2020 Renault Clio",
@@ -44017,7 +45669,17 @@
    "variantsHash": "9b92c635d82446d4cb008accafbf732edf120791",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Iconic",
+   "Play",
+   "RS Line",
+   "S Edition"
+  ]
  },
  {
   "schemaVersion": 2,
@@ -44032,11 +45694,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "N",
+   "N Line",
+   "Premium",
+   "S",
+   "SE Connect",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -44251,11 +45922,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Iconic",
+   "Play",
+   "RS Line",
+   "S Edition"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -44470,11 +46149,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2023,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "S",
+   "SE",
+   "SE L",
+   "Sportline",
+   "vRS"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -44676,11 +46365,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2024,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "Allure",
+   "GT",
+   "GT Line"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -44895,11 +46593,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2021,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Essential",
+   "Expression",
+   "Extreme",
+   "Journey"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -45114,11 +46819,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Essential",
+   "Expression",
+   "Extreme",
+   "Journey"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -45334,11 +47046,17 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2021,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Long Range",
+   "Performance",
+   "Standard Range"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -45553,11 +47271,24 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -45773,11 +47504,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -45993,11 +47734,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -46212,11 +47962,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1999,
+  "yearEnd": 2019,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Elite",
+   "GS",
+   "SE",
+   "SRi",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -46431,11 +48191,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2024,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "HSE",
+   "R",
+   "R-Dynamic",
+   "S",
+   "SE"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -46650,11 +48419,23 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "GT",
+   "GT-Line",
+   "GT-Line S"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -46873,11 +48654,22 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2021,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -47092,11 +48884,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2005,
+  "yearEnd": 2022,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Feel",
+   "Flair",
+   "Shine",
+   "Touch"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -47311,10 +49110,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1997,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -47530,10 +49332,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1994,
+  "yearEnd": 2026,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -47750,11 +49555,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "La Prima",
+   "Lounge",
+   "Pop",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -47969,11 +49782,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2004,
+  "yearEnd": 2022,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Acenta",
+   "N-Connecta",
+   "N-Design",
+   "Tekna",
+   "Visia"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -48188,11 +50010,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1996,
+  "yearEnd": 2026,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Iconic",
+   "Play",
+   "RS Line",
+   "S Edition"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -48622,11 +50454,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1993,
+  "yearEnd": 2018,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "La Prima",
+   "Lounge",
+   "Pop",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -48842,11 +50682,17 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Long Range",
+   "Performance",
+   "Standard Range"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -49062,11 +50908,17 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Long Range",
+   "Performance",
+   "Standard Range"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -49281,11 +51133,23 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2023,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -49500,11 +51364,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Feel",
+   "Flair",
+   "Shine",
+   "Touch"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -49866,11 +51738,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -50085,11 +51966,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2023,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -50304,11 +52194,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2026,
   "bodyStyle": "pickup",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -50524,11 +52422,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -50744,11 +52651,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2012,
+  "yearEnd": 2020,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -50964,11 +52879,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1985,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -51183,11 +53106,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1982,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -51402,11 +53333,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -51623,11 +53563,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2013,
+  "yearEnd": 2024,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "HSE",
+   "R",
+   "R-Dynamic",
+   "S",
+   "SE"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -51842,11 +53790,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2013,
+  "yearEnd": 2024,
   "bodyStyle": "convertible",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "HSE",
+   "R",
+   "R-Dynamic",
+   "S",
+   "SE"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -52280,11 +54236,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "HSE",
+   "R",
+   "R-Dynamic",
+   "S",
+   "SE"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -52499,10 +54463,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -52718,10 +54684,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -53140,10 +55109,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2011,
+  "yearEnd": 2022,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -53504,11 +55475,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2014,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -54366,11 +56346,22 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -54800,11 +56791,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -55021,11 +57022,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2014,
+  "yearEnd": 2026,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -55242,11 +57252,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2021,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -55677,11 +57697,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2012,
+  "yearEnd": 2026,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -56111,11 +58141,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2012,
+  "yearEnd": 2026,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -56333,11 +58373,22 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2013,
+  "yearEnd": 2026,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -56766,11 +58817,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -56986,10 +59046,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "hybrid"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -57203,11 +59266,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2013,
+  "yearEnd": 2026,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -57423,11 +59496,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2013,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -57642,11 +59725,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "ST",
+   "ST-Line",
+   "Titanium",
+   "Vignale",
+   "Zetec"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -57861,11 +59953,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -58080,10 +60180,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -58513,10 +60615,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -58732,10 +60837,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -58952,10 +61060,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -59172,10 +61283,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2009,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -59819,11 +61933,23 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2008,
+  "yearEnd": 2017,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -60253,11 +62379,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Iconic",
+   "Play",
+   "RS Line",
+   "S Edition"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -60473,11 +62607,23 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -60692,11 +62838,22 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "GT",
+   "GT-Line",
+   "GT-Line S"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -61125,10 +63282,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2014,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -61344,10 +63504,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -61567,10 +63730,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2007,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -62002,10 +64168,14 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1992,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -62219,10 +64389,14 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1992,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -62439,11 +64613,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2006,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "SZ-T",
+   "SZ3",
+   "SZ5",
+   "Ultra"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -62659,11 +64841,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2009,
+  "yearEnd": 2014,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid"
+  ],
+  "compatibleTrimFamilies": [
+   "EX",
+   "S",
+   "SE",
+   "SR",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -62878,11 +65068,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "La Prima",
+   "Lounge",
+   "Pop",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -63097,10 +65295,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2012,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -63318,10 +65518,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1992,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -63541,11 +65743,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GT Sport",
+   "Homura",
+   "SE-L",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -63763,11 +65973,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2003,
+  "yearEnd": 2012,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GT Sport",
+   "Homura",
+   "SE-L",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -63984,11 +66201,23 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1979,
+  "yearEnd": 2019,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -64207,10 +66436,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2026,
   "bodyStyle": "convertible",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -64864,11 +67096,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1990,
+  "yearEnd": 2022,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "EX",
+   "S",
+   "SE",
+   "SR",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -65085,10 +67326,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2008,
+  "yearEnd": 2018,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -65310,11 +67553,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Classic",
+   "Exclusive",
+   "John Cooper Works",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -65534,11 +67785,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2004,
+  "yearEnd": 2026,
   "bodyStyle": "convertible",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Classic",
+   "Exclusive",
+   "John Cooper Works",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -65755,11 +68013,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -65976,11 +68243,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2012,
+  "yearEnd": 2019,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "S",
+   "SE",
+   "SE L",
+   "Sportline",
+   "vRS"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -66197,10 +68473,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2000,
+  "yearEnd": 2010,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -66419,11 +68698,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2022,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -66857,11 +69144,17 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2026,
   "bodyStyle": "fastback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Performance",
+   "Plus",
+   "Standard"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -67078,11 +69371,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "V1",
+   "V2",
+   "V3",
+   "VZ"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -67299,11 +69599,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2006,
+  "yearEnd": 2013,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Inscription",
+   "Momentum",
+   "Plus",
+   "R-Design",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -67521,11 +69830,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2026,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -67958,11 +70276,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2026,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "Allure",
+   "GT",
+   "GT Line"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -68177,11 +70503,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "La Prima",
+   "Lounge",
+   "Pop",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -68396,11 +70730,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2009,
+  "yearEnd": 2026,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Acenta",
+   "N-Connecta",
+   "N-Design",
+   "Tekna",
+   "Visia"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -68618,11 +70961,24 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -69048,11 +71404,23 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "GT",
+   "GT-Line",
+   "GT-Line S"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -69268,11 +71636,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "Allure",
+   "GT",
+   "GT Line"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -69488,11 +71863,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Classic",
+   "Exclusive",
+   "John Cooper Works",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -69707,11 +72091,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Acenta",
+   "N-Connecta",
+   "N-Design",
+   "Tekna",
+   "Visia"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -69926,11 +72319,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -70360,11 +72762,22 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -70577,11 +72990,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "N",
+   "N Line",
+   "Premium",
+   "S",
+   "SE Connect",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -71224,11 +73647,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2002,
+  "yearEnd": 2009,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Acenta",
+   "N-Connecta",
+   "N-Design",
+   "Tekna",
+   "Visia"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -71445,11 +73876,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1999,
+  "yearEnd": 2009,
   "bodyStyle": "convertible",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "EX",
+   "S",
+   "SE",
+   "SR",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -71667,11 +74106,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1978,
+  "yearEnd": 2002,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GT Sport",
+   "Homura",
+   "SE-L",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -72104,11 +74550,23 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2010,
+  "yearEnd": 2026,
   "bodyStyle": "pickup",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -72326,10 +74784,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1992,
+  "yearEnd": 2016,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -72547,11 +75007,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1996,
+  "yearEnd": 2015,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "HSE",
+   "R",
+   "R-Dynamic",
+   "S",
+   "SE"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -72768,11 +75236,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2002,
+  "yearEnd": 2026,
   "bodyStyle": "convertible",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -72989,11 +75465,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -73213,11 +75698,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Excite",
+   "Exclusive",
+   "Trophy"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -73437,11 +75929,17 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2022,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Excite",
+   "Exclusive",
+   "Trophy"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -73659,11 +76157,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Excite",
+   "Exclusive",
+   "Trophy"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -73883,11 +76388,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2026,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Elite",
+   "GS",
+   "SE",
+   "SRi",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -74103,11 +76618,24 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2003,
+  "yearEnd": 2026,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -74325,11 +76853,22 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2022,
+  "yearEnd": 2026,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -74545,10 +77084,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2022,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -74764,10 +77306,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -74984,11 +77529,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2023,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "GT",
+   "GT-Line",
+   "GT-Line S"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -75204,11 +77759,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2024,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "V1",
+   "V2",
+   "V3",
+   "VZ"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -75427,10 +77989,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -75650,11 +78214,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2021,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -75873,10 +78445,14 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -76093,11 +78669,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2022,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "M",
+   "M Sport",
+   "M Sport Pro",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -76314,11 +78899,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -76537,10 +79130,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1998,
+  "yearEnd": 2024,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -76758,10 +79354,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2022,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -76978,10 +79576,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -77200,11 +79800,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1968,
+  "yearEnd": 2000,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "ST",
+   "ST-Line",
+   "Titanium",
+   "Vignale",
+   "Zetec"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -77421,10 +80031,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -77645,11 +80257,17 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Excite",
+   "Exclusive",
+   "Trophy"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -77867,11 +80485,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1978,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -78089,10 +80715,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2021,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -78311,10 +80940,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2018,
+  "yearEnd": 2023,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -78534,10 +81165,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1997,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -78756,11 +81389,22 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2013,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -78978,10 +81622,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2024,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -79200,10 +81846,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2012,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -79419,11 +82067,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1996,
+  "yearEnd": 2016,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Inscription",
+   "Momentum",
+   "Plus",
+   "R-Design",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -79641,11 +82298,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2008,
+  "yearEnd": 2026,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid"
+  ],
+  "compatibleTrimFamilies": [
+   "Design",
+   "Excel",
+   "GR",
+   "GR Sport",
+   "Icon"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -79861,11 +82526,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "SZ-T",
+   "SZ3",
+   "SZ5",
+   "Ultra"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -80083,10 +82756,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2023,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -80234,10 +82909,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2026,
   "bodyStyle": "convertible",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -80457,10 +83135,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -80678,10 +83358,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2023,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -80899,10 +83581,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2009,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -81049,11 +83733,23 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1997,
+  "yearEnd": 2019,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "GTD",
+   "GTE",
+   "GTI",
+   "R",
+   "R-Line",
+   "S",
+   "SE",
+   "SE L"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -81272,11 +83968,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1961,
+  "yearEnd": 1975,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "HSE",
+   "R",
+   "R-Dynamic",
+   "S",
+   "SE"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -81493,11 +84197,17 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2024,
+  "yearEnd": 2026,
   "bodyStyle": "convertible",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Excite",
+   "Exclusive",
+   "Trophy"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -81713,10 +84423,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1989,
+  "yearEnd": 2020,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -81936,11 +84649,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "Allure",
+   "GT",
+   "GT Line"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -82156,11 +84877,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1997,
+  "yearEnd": 2020,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Acenta",
+   "N-Connecta",
+   "N-Design",
+   "Tekna",
+   "Visia"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -82377,11 +85107,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "ST",
+   "ST-Line",
+   "Titanium",
+   "Vignale",
+   "Zetec"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -82599,10 +85338,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2023,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -82822,11 +85563,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1962,
+  "yearEnd": 1982,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "ST",
+   "ST-Line",
+   "Titanium",
+   "Vignale",
+   "Zetec"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -83046,11 +85796,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2016,
+  "yearEnd": 2020,
   "bodyStyle": "convertible",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "La Prima",
+   "Lounge",
+   "Pop",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -83267,11 +86024,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1983,
+  "yearEnd": 1998,
   "bodyStyle": "convertible",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "Allure",
+   "GT",
+   "GT Line"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -83489,11 +86254,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2000,
+  "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "N",
+   "N Line",
+   "Premium",
+   "S",
+   "SE Connect",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -83709,11 +86483,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2007,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Iconic",
+   "Play",
+   "RS Line",
+   "S Edition"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -83930,10 +86712,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2022,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -84151,10 +86935,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2023,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -84370,10 +87156,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2017,
+  "yearEnd": 2026,
   "bodyStyle": "coupe",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -84518,11 +87306,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1995,
+  "yearEnd": 2019,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Inscription",
+   "Momentum",
+   "Plus",
+   "R-Design",
+   "Ultimate"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -84945,10 +87742,12 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2023,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -85380,11 +88179,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2022,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Iconic",
+   "Play",
+   "RS Line",
+   "S Edition"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -85585,11 +88392,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2024,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "V1",
+   "V2",
+   "V3",
+   "VZ"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -85804,11 +88619,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -86023,11 +88848,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2024,
+  "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "GT",
+   "GT-Line",
+   "GT-Line S"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -86228,11 +89063,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2022,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "AMG",
+   "AMG Line",
+   "AMG Line Premium",
+   "SE",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -86447,11 +89290,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2024,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Feel",
+   "Flair",
+   "Shine",
+   "Touch"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -86666,10 +89516,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -87078,10 +89931,13 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2011,
+  "yearEnd": 2023,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -87297,11 +90153,18 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2020,
+  "yearEnd": 2026,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid"
+  ],
+  "compatibleTrimFamilies": [
+   "SZ-T",
+   "SZ3",
+   "SZ5",
+   "Ultra"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -87516,11 +90379,20 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2011,
+  "yearEnd": 2021,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Cupra",
+   "FR",
+   "SE",
+   "SE Technology",
+   "Xcellence"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -87735,11 +90607,21 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2019,
+  "yearEnd": 2023,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -87954,11 +90836,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1998,
+  "yearEnd": 2012,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Active",
+   "Allure",
+   "GT",
+   "GT Line"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -88173,11 +91063,17 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2022,
+  "yearEnd": 2026,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "electric"
+  ],
+  "compatibleTrimFamilies": [
+   "Excite",
+   "Exclusive",
+   "Trophy"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -88395,11 +91291,22 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 1999,
+  "yearEnd": 2005,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "diesel",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "Black Edition",
+   "RS",
+   "S",
+   "S line",
+   "SE",
+   "Sport",
+   "Vorsprung"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
@@ -88616,11 +91523,19 @@
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
-  "yearStart": null,
-  "yearEnd": null,
+  "yearStart": 2015,
+  "yearEnd": 2024,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [],
-  "compatibleTrimFamilies": [],
+  "compatibleFuelTypes": [
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [
+   "La Prima",
+   "Lounge",
+   "Pop",
+   "Sport"
+  ],
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",

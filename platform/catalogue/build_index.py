@@ -198,6 +198,8 @@ def asset_block(c):
     return {"assetId":c["assetId"],"posterUrl":c.get("posterUrl"),
             "turntableUrl":c.get("turntableUrl"),"desktopGlbUrl":c.get("desktopGlbUrl"),
             "defaultColourFamily":c.get("defaultColourFamily"),
+            "yearStart":c.get("yearStart"),"yearEnd":c.get("yearEnd"),
+            "fuel":c.get("compatibleFuelTypes") or [],"trims":c.get("compatibleTrimFamilies") or [],
             "colours":colours,"recolourVerified":(c.get("recolourAudit") or {}).get("status")=="pass"}
 
 def nkey(s): return norm(s).replace(" ","").replace("-","")
@@ -234,6 +236,11 @@ for e in index:
     if cands:
         c=pick(cands,e.get("generation")); e["has_3d"]=True; e["asset"]=asset_block(c)
         e.pop("manifest_url",None); matched.add(c["assetId"])
+        # prefer the asset's enriched spec over the representative master row
+        if c.get("yearStart") is not None: e["year_from"]=c["yearStart"]
+        if c.get("yearEnd") is not None: e["year_to"]=c["yearEnd"]
+        if c.get("compatibleFuelTypes"): e["fuel"]=c["compatibleFuelTypes"]
+        if c.get("compatibleTrimFamilies"): e["trims"]=c["compatibleTrimFamilies"]
 
 # rows for approved assets not directly covered: inherit year/trim from the
 # parent master model where the asset is a body/trim variant (Polo GTI -> Polo);
@@ -250,16 +257,12 @@ for c in cat:
     row={"class":"car","make":norm(c.get("make")),"model":norm(c.get("model")),
          "generation":c.get("generation") or "",
          "body_style":c.get("bodyStyle"),
+         "year_from":c.get("yearStart"),"year_to":c.get("yearEnd"),
+         "fuel":c.get("compatibleFuelTypes") or [],"trims":c.get("compatibleTrimFamilies") or [],
          "colours":sorted((c.get("colourVariants") or {}).keys()),
-         "has_3d":True,"asset":asset_block(c)}
-    if m:
-        row.update({"year_from":m["year_from"],"year_to":m["year_to"],
-                    "fuel":m["fuel"],"trims":m["trims"],
-                    "source":f"year/trim inherited from curated '{m['model']}' ({how})"})
-        inherited+=1
-    else:
-        row.update({"year_from":None,"year_to":None,"fuel":[],"trims":[],
-                    "source":"catalogue-only (no curated year/trim — niche/classic model)"})
+         "has_3d":True,"asset":asset_block(c),
+         "source":"enriched asset spec (make/model/year/trim/fuel)"}
+    if c.get("yearStart") is not None: inherited+=1
     index.append(row)
 
 payload={"generated":"2015-2026 UK master index (representative) + curated 3D catalogue join",
