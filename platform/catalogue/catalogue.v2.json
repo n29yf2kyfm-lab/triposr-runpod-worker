@@ -43485,16 +43485,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Graphite Grey Metallic",
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1.glb",
   "fallbackGlbUrl": null,
@@ -43511,7 +43502,9 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "recolour audit FAILED (textured body, variants stayed brown); reverted to single-neutral"
+  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model b41979349dc14884906ac8e6c7b51bd9 (2020 Skoda Superb TSI 380), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'grey' set from hero; fabricated OEM label removed (honest neutral label)."
