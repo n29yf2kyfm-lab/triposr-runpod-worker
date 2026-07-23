@@ -175,24 +175,106 @@ def rows(group, klass):
 
 index=rows(CARS,"car")+rows(VANS,"van")+rows(BIKES,"motorbike")
 
-# join has_3d from the live 3D catalogue
-try:
-    cat=json.loads(urllib.request.urlopen(f"{PUB}/catalogue.json",timeout=40).read())
-    have={(c["make"].lower(),c["model"].lower()):c for c in cat}
-    for e in index:
-        key=(e["make"].lower(),e["model"].lower())
-        if key in have:
-            e["has_3d"]=True; e["manifest_url"]=have[key]["manifest_url"]
-except Exception as ex:
-    print("catalogue join skipped:",ex)
+# ---- join the curated 3D catalogue (v2, approved only) ---------------------
+# Index dimensions: make / model / trim / year / colour.
+#  * year_from/year_to and trims are REPRESENTATIVE model facts from the curated
+#    master above (not per-asset claims) — they let the app filter make+model+year
+#    +trim. Asset selection still keys on make+model(+generation); the app's DVLA
+#    decode supplies the actual year/trim/colour for a specific reg.
+#  * colours come from the asset's render-verified colourVariants (OEM paint name
+#    + DVLA colour + variant URL per family).
+HERE=os.path.dirname(os.path.abspath(__file__))
+CATV2=os.environ.get("CATALOGUE") or os.path.join(HERE, "catalogue.v2.json")
 
-payload={"generated":"2015-2026 UK master index (representative)","colours":COLOURS,
+def norm(s): return (s or "").strip().lower()
+def asset_block(c):
+    cvp=c.get("colourVariantPaints") or {}
+    colours=[]
+    for fam,url in (c.get("colourVariants") or {}).items():
+        p=cvp.get(fam) or {}
+        colours.append({"family":fam,"dvlaColour":p.get("dvlaColour"),
+                        "oemPaintName":p.get("oemPaintName"),
+                        "oemFinish":p.get("oemFinish"),"url":url})
+    return {"assetId":c["assetId"],"posterUrl":c.get("posterUrl"),
+            "turntableUrl":c.get("turntableUrl"),"desktopGlbUrl":c.get("desktopGlbUrl"),
+            "defaultColourFamily":c.get("defaultColourFamily"),
+            "colours":colours,"recolourVerified":(c.get("recolourAudit") or {}).get("status")=="pass"}
+
+def nkey(s): return norm(s).replace(" ","").replace("-","")
+cat=[c for c in json.load(open(CATV2)) if c.get("publicationStatus")=="approved"]
+by_mm={}
+for c in cat: by_mm.setdefault((norm(c.get("make")),norm(c.get("model"))),[]).append(c)
+
+# master rows grouped by make, for inheriting year/trim onto body/trim variants
+master_by_make={}
+for r in index: master_by_make.setdefault(norm(r["make"]),[]).append(r)
+def match_master(make, model, gen):
+    rows=master_by_make.get(norm(make),[]); mk=nkey(model); g=nkey(gen)
+    if g:                                             # 1. generation code match
+        for r in rows:
+            if r.get("generation") and nkey(r["generation"])==g: return r,"generation"
+    for r in rows:                                    # 2. exact normalized model
+        if nkey(r["model"])==mk: return r,"exact"
+    best=None                                         # 3. longest master-model prefix
+    for r in rows:
+        rk=nkey(r["model"])
+        if len(rk)>=2 and (mk.startswith(rk) or rk.startswith(mk)):
+            if not best or len(nkey(r["model"]))>len(nkey(best["model"])): best=r
+    return (best,"variant") if best else (None,None)
+
+matched=set()
+def pick(cands, gen):
+    g=norm(gen)
+    if g:
+        for c in cands:
+            if norm(c.get("generation"))==g: return c
+    return cands[0]
+for e in index:
+    cands=by_mm.get((norm(e["make"]),norm(e["model"])))
+    if cands:
+        c=pick(cands,e.get("generation")); e["has_3d"]=True; e["asset"]=asset_block(c)
+        e.pop("manifest_url",None); matched.add(c["assetId"])
+
+# rows for approved assets not directly covered: inherit year/trim from the
+# parent master model where the asset is a body/trim variant (Polo GTI -> Polo);
+# leave year null / trims [] for genuinely niche models (no fabricated spec).
+inherited=0
+for c in cat:
+    if c["assetId"] in matched: continue
+    m,how=match_master(c.get("make"), c.get("model"), c.get("generation"))
+    aliases=c.get("modelAliases") or []
+    if not m:
+        for a in aliases:
+            m,how=match_master(c.get("make"), a, c.get("generation"))
+            if m: break
+    row={"class":"car","make":norm(c.get("make")),"model":norm(c.get("model")),
+         "generation":c.get("generation") or "",
+         "body_style":c.get("bodyStyle"),
+         "colours":sorted((c.get("colourVariants") or {}).keys()),
+         "has_3d":True,"asset":asset_block(c)}
+    if m:
+        row.update({"year_from":m["year_from"],"year_to":m["year_to"],
+                    "fuel":m["fuel"],"trims":m["trims"],
+                    "source":f"year/trim inherited from curated '{m['model']}' ({how})"})
+        inherited+=1
+    else:
+        row.update({"year_from":None,"year_to":None,"fuel":[],"trims":[],
+                    "source":"catalogue-only (no curated year/trim — niche/classic model)"})
+    index.append(row)
+
+payload={"generated":"2015-2026 UK master index (representative) + curated 3D catalogue join",
+         "indexedOn":["make","model","trim","year","colour"],"colours":COLOURS,
          "counts":{}, "vehicles":index}
 from collections import Counter
 c=Counter(e["class"] for e in index)
 mk=len(set((e["class"],e["make"]) for e in index))
+assets_with_yeartrim=sum(1 for e in index if e.get("has_3d") and e.get("asset") and e.get("year_from"))
 payload["counts"]={"total":len(index),"cars":c["car"],"vans":c["van"],
-                   "motorbikes":c["motorbike"],"makes":mk,"with_3d":sum(e["has_3d"] for e in index)}
+                   "motorbikes":c["motorbike"],"makes":mk,"with_3d":sum(e["has_3d"] for e in index),
+                   "approved_assets":len(cat),"assets_matched":len(matched),
+                   "assets_inherited_yeartrim":inherited,
+                   "assets_no_yeartrim":len(cat)-len(matched)-inherited,
+                   "assets_with_yeartrim_total":assets_with_yeartrim}
 
 # upload
 def up(path,data,ct):
