@@ -1,5 +1,24 @@
 # Project memory — ExpertCarCheck / triposr-runpod-worker
 
+## Quality-gate standard — visual review before anything ships (owner standard 2026-07-23)
+
+Automated audits prove one narrow thing each; they are NOT a model-quality gate.
+The recolour audit (`pipeline/qc/recolour_audit.py`) only proves a colour-swap
+moves the body colour — it says nothing about proportions, sharpness, wrong or
+duplicate vehicles, or whether the model looks premium. Never present an
+automated "PASS" as if the car is good.
+
+**The standard, applied to every batch before it ships and on demand:**
+- Render the library into numbered contact sheets with
+  `pipeline/qc/review_sheets.py` (uses existing posters; 6×5 grid; each tile is
+  `#N + assetId`, with an `INDEX.txt` mapping `#N → assetId`).
+- A human eyeballs fidelity and calls out the numbers to cull.
+- Scrap via the reversible pattern: `publicationStatus="quarantined"` +
+  `quarantineReason`, keep the entry/assets, re-serve both Supabase paths, commit.
+- The bar is premium: proportions right, sharp, correct vehicle, no scan mush. If
+  in doubt, it does not ship. Truth over volume — a smaller honest catalogue beats
+  a padded one full of low-tier scans.
+
 ## Root-cause analysis method (apply whenever investigating a problem)
 
 Saved at the user's request. When something breaks, is slow, is wrong, or
