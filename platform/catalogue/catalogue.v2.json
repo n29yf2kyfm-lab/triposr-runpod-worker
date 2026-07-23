@@ -86487,10 +86487,10 @@
   ],
   "glassMaterialNames": [],
   "defaultColourFamily": "white",
-  "renderColourLabel": "Studio White",
+  "renderColourLabel": "White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
-  "oemPaintName": null,
+  "oemPaintName": "Glacier White Metallic",
   "colourVariants": {
    "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/Audi/audi-a2-v1__black.glb",
    "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/Audi/audi-a2-v1__white.glb",
@@ -86598,20 +86598,6 @@
   },
   "platesBaked": true,
   "colourVariantPaints": {
-   "grey": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/Audi/audi-a2-v1__grey.glb",
-    "dvlaColour": "Grey",
-    "oemPaintName": "Manhattan Grey Metallic",
-    "oemFinish": "Metallic",
-    "confirmed": false
-   },
-   "silver": {
-    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/Audi/audi-a2-v1__silver.glb",
-    "dvlaColour": "Silver",
-    "oemPaintName": null,
-    "oemFinish": null,
-    "confirmed": false
-   },
    "black": {
     "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/Audi/audi-a2-v1__black.glb",
     "dvlaColour": "Black",
@@ -86623,6 +86609,20 @@
     "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/Audi/audi-a2-v1__white.glb",
     "dvlaColour": "White",
     "oemPaintName": "Glacier White Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/Audi/audi-a2-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/Audi/audi-a2-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Manhattan Grey Metallic",
     "oemFinish": "Metallic",
     "confirmed": false
    },
@@ -86656,6 +86656,208 @@
    }
   },
   "defaultDvlaColour": "White",
+  "oemPaintFinish": "Metallic"
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "fiat-500l-v1",
+  "make": "Fiat",
+  "model": "500L",
+  "modelFamily": "500L",
+  "modelAliases": [],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "mpv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2017 Fiat 500L (Remastered)",
+  "sourceUrl": "https://sketchfab.com/3d-models/22142721f156425da89a29d4ac145f8c",
+  "sourceCreator": null,
+  "sourceReferenceId": null,
+  "sourceRetrievedAt": null,
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "A",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [],
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Studio Grey",
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {},
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/Fiat/fiat-500l-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/Fiat/fiat-500l-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/Fiat/fiat-500l-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 734808,
+  "mobileFileSizeBytes": 734808,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 22142721f156425da89a29d4ac145f8c (2017 Fiat 500L (Remastered)), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
+   "autofill: single-neutral (texture-driven body or no isolable paint material)"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Eiger Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Hakuba Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Santorini Black Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Ostuni Pearl White",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Portofino Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": "Belgravia Green Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
   "oemPaintFinish": "Metallic"
  }
 ]
