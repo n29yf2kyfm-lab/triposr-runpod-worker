@@ -27,17 +27,17 @@
   "Yellow"
  ],
  "counts": {
-  "total": 503,
-  "cars": 410,
+  "total": 494,
+  "cars": 401,
   "vans": 34,
   "motorbikes": 59,
   "makes": 73,
-  "with_3d": 382,
+  "with_3d": 384,
   "approved_assets": 366,
-  "assets_matched": 134,
-  "assets_inherited_yeartrim": 232,
+  "assets_matched": 143,
+  "assets_inherited_yeartrim": 223,
   "assets_no_yeartrim": 0,
-  "assets_with_yeartrim_total": 382
+  "assets_with_yeartrim_total": 384
  },
  "vehicles": [
   {
@@ -1618,19 +1618,19 @@
    "make": "bmw",
    "model": "2 Series",
    "generation": "F44",
-   "year_from": 2020,
-   "year_to": 2026,
+   "year_from": 2021,
+   "year_to": 2021,
    "body_style": "saloon",
    "fuel": [
-    "petrol",
-    "diesel"
+    "diesel",
+    "petrol"
    ],
    "trims": [
-    "SE",
-    "Sport",
+    "M",
     "M Sport",
     "M Sport Pro",
-    "M"
+    "SE",
+    "Sport"
    ],
    "colours": [
     "Beige",
@@ -1651,28 +1651,107 @@
     "White",
     "Yellow"
    ],
-   "has_3d": false,
-   "manifest_url": null
+   "has_3d": true,
+   "asset": {
+    "assetId": "bmw-2-series-2021-v1",
+    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-2-series-2021-v1/portimao-blue-metallic.jpg",
+    "turntableUrl": null,
+    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1.glb",
+    "defaultColourFamily": "silver",
+    "yearStart": 2021,
+    "yearEnd": 2021,
+    "fuel": [
+     "diesel",
+     "petrol"
+    ],
+    "trims": [
+     "M",
+     "M Sport",
+     "M Sport Pro",
+     "SE",
+     "Sport"
+    ],
+    "colours": [
+     {
+      "family": "grey",
+      "dvlaColour": "Grey",
+      "oemPaintName": "Brooklyn Grey Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__grey.glb"
+     },
+     {
+      "family": "silver",
+      "dvlaColour": "Silver",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__silver.glb"
+     },
+     {
+      "family": "black",
+      "dvlaColour": "Black",
+      "oemPaintName": "Black Sapphire Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__black.glb"
+     },
+     {
+      "family": "white",
+      "dvlaColour": "White",
+      "oemPaintName": "Mineral White Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__white.glb"
+     },
+     {
+      "family": "blue",
+      "dvlaColour": "Blue",
+      "oemPaintName": "Portimao Blue Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__blue.glb"
+     },
+     {
+      "family": "red",
+      "dvlaColour": "Red",
+      "oemPaintName": "Toronto Red Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__red.glb"
+     },
+     {
+      "family": "green",
+      "dvlaColour": "Green",
+      "oemPaintName": "Isle of Man Green Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__green.glb"
+     },
+     {
+      "family": "yellow",
+      "dvlaColour": "Yellow",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__yellow.glb"
+     }
+    ],
+    "recolourVerified": true
+   }
   },
   {
    "class": "car",
    "make": "bmw",
    "model": "3 Series",
    "generation": "F30",
-   "year_from": 2015,
-   "year_to": 2019,
+   "year_from": 2023,
+   "year_to": 2026,
    "body_style": "saloon",
    "fuel": [
-    "petrol",
     "diesel",
-    "hybrid"
+    "electric",
+    "hybrid",
+    "petrol"
    ],
    "trims": [
-    "SE",
-    "Sport",
+    "M",
     "M Sport",
     "M Sport Pro",
-    "M"
+    "SE",
+    "Sport"
    ],
    "colours": [
     "Beige",
@@ -1693,28 +1772,109 @@
     "White",
     "Yellow"
    ],
-   "has_3d": false,
-   "manifest_url": null
+   "has_3d": true,
+   "asset": {
+    "assetId": "bmw-320i-2023-v1",
+    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-320i-2023-v1/portimao-blue-metallic.jpg",
+    "turntableUrl": null,
+    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1.glb",
+    "defaultColourFamily": "white",
+    "yearStart": 2023,
+    "yearEnd": 2026,
+    "fuel": [
+     "diesel",
+     "electric",
+     "hybrid",
+     "petrol"
+    ],
+    "trims": [
+     "M",
+     "M Sport",
+     "M Sport Pro",
+     "SE",
+     "Sport"
+    ],
+    "colours": [
+     {
+      "family": "grey",
+      "dvlaColour": "Grey",
+      "oemPaintName": "Brooklyn Grey Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__grey.glb"
+     },
+     {
+      "family": "silver",
+      "dvlaColour": "Silver",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__silver.glb"
+     },
+     {
+      "family": "black",
+      "dvlaColour": "Black",
+      "oemPaintName": "Black Sapphire Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__black.glb"
+     },
+     {
+      "family": "white",
+      "dvlaColour": "White",
+      "oemPaintName": "Mineral White Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__white.glb"
+     },
+     {
+      "family": "blue",
+      "dvlaColour": "Blue",
+      "oemPaintName": "Portimao Blue Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__blue.glb"
+     },
+     {
+      "family": "red",
+      "dvlaColour": "Red",
+      "oemPaintName": "Toronto Red Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__red.glb"
+     },
+     {
+      "family": "green",
+      "dvlaColour": "Green",
+      "oemPaintName": "Isle of Man Green Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__green.glb"
+     },
+     {
+      "family": "yellow",
+      "dvlaColour": "Yellow",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__yellow.glb"
+     }
+    ],
+    "recolourVerified": true
+   }
   },
   {
    "class": "car",
    "make": "bmw",
    "model": "3 Series",
    "generation": "G20",
-   "year_from": 2019,
+   "year_from": 2023,
    "year_to": 2026,
    "body_style": "saloon",
    "fuel": [
-    "petrol",
+    "diesel",
+    "electric",
     "hybrid",
-    "electric"
+    "petrol"
    ],
    "trims": [
-    "SE",
-    "Sport",
+    "M",
     "M Sport",
     "M Sport Pro",
-    "M"
+    "SE",
+    "Sport"
    ],
    "colours": [
     "Beige",
@@ -1735,8 +1895,88 @@
     "White",
     "Yellow"
    ],
-   "has_3d": false,
-   "manifest_url": null
+   "has_3d": true,
+   "asset": {
+    "assetId": "bmw-320i-2023-v1",
+    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-320i-2023-v1/portimao-blue-metallic.jpg",
+    "turntableUrl": null,
+    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1.glb",
+    "defaultColourFamily": "white",
+    "yearStart": 2023,
+    "yearEnd": 2026,
+    "fuel": [
+     "diesel",
+     "electric",
+     "hybrid",
+     "petrol"
+    ],
+    "trims": [
+     "M",
+     "M Sport",
+     "M Sport Pro",
+     "SE",
+     "Sport"
+    ],
+    "colours": [
+     {
+      "family": "grey",
+      "dvlaColour": "Grey",
+      "oemPaintName": "Brooklyn Grey Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__grey.glb"
+     },
+     {
+      "family": "silver",
+      "dvlaColour": "Silver",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__silver.glb"
+     },
+     {
+      "family": "black",
+      "dvlaColour": "Black",
+      "oemPaintName": "Black Sapphire Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__black.glb"
+     },
+     {
+      "family": "white",
+      "dvlaColour": "White",
+      "oemPaintName": "Mineral White Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__white.glb"
+     },
+     {
+      "family": "blue",
+      "dvlaColour": "Blue",
+      "oemPaintName": "Portimao Blue Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__blue.glb"
+     },
+     {
+      "family": "red",
+      "dvlaColour": "Red",
+      "oemPaintName": "Toronto Red Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__red.glb"
+     },
+     {
+      "family": "green",
+      "dvlaColour": "Green",
+      "oemPaintName": "Isle of Man Green Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__green.glb"
+     },
+     {
+      "family": "yellow",
+      "dvlaColour": "Yellow",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__yellow.glb"
+     }
+    ],
+    "recolourVerified": true
+   }
   },
   {
    "class": "car",
@@ -1866,16 +2106,17 @@
    "year_to": 2023,
    "body_style": "saloon",
    "fuel": [
-    "petrol",
     "diesel",
-    "hybrid"
+    "electric",
+    "hybrid",
+    "petrol"
    ],
    "trims": [
-    "SE",
-    "Sport",
+    "M",
     "M Sport",
     "M Sport Pro",
-    "M"
+    "SE",
+    "Sport"
    ],
    "colours": [
     "Beige",
@@ -1896,28 +2137,109 @@
     "White",
     "Yellow"
    ],
-   "has_3d": false,
-   "manifest_url": null
+   "has_3d": true,
+   "asset": {
+    "assetId": "bmw-5-series-v1",
+    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-5-series-v1/portimao-blue-metallic.jpg",
+    "turntableUrl": null,
+    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1.glb",
+    "defaultColourFamily": "grey",
+    "yearStart": 2017,
+    "yearEnd": 2023,
+    "fuel": [
+     "diesel",
+     "electric",
+     "hybrid",
+     "petrol"
+    ],
+    "trims": [
+     "M",
+     "M Sport",
+     "M Sport Pro",
+     "SE",
+     "Sport"
+    ],
+    "colours": [
+     {
+      "family": "grey",
+      "dvlaColour": "Grey",
+      "oemPaintName": "Brooklyn Grey Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__grey.glb"
+     },
+     {
+      "family": "silver",
+      "dvlaColour": "Silver",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__silver.glb"
+     },
+     {
+      "family": "black",
+      "dvlaColour": "Black",
+      "oemPaintName": "Black Sapphire Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__black.glb"
+     },
+     {
+      "family": "white",
+      "dvlaColour": "White",
+      "oemPaintName": "Mineral White Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__white.glb"
+     },
+     {
+      "family": "blue",
+      "dvlaColour": "Blue",
+      "oemPaintName": "Portimao Blue Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__blue.glb"
+     },
+     {
+      "family": "red",
+      "dvlaColour": "Red",
+      "oemPaintName": "Toronto Red Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__red.glb"
+     },
+     {
+      "family": "green",
+      "dvlaColour": "Green",
+      "oemPaintName": "Isle of Man Green Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__green.glb"
+     },
+     {
+      "family": "yellow",
+      "dvlaColour": "Yellow",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__yellow.glb"
+     }
+    ],
+    "recolourVerified": true
+   }
   },
   {
    "class": "car",
    "make": "bmw",
    "model": "5 Series",
    "generation": "G60",
-   "year_from": 2023,
-   "year_to": 2026,
+   "year_from": 2017,
+   "year_to": 2023,
    "body_style": "saloon",
    "fuel": [
-    "petrol",
+    "diesel",
+    "electric",
     "hybrid",
-    "electric"
+    "petrol"
    ],
    "trims": [
-    "SE",
-    "Sport",
+    "M",
     "M Sport",
     "M Sport Pro",
-    "M"
+    "SE",
+    "Sport"
    ],
    "colours": [
     "Beige",
@@ -1938,8 +2260,88 @@
     "White",
     "Yellow"
    ],
-   "has_3d": false,
-   "manifest_url": null
+   "has_3d": true,
+   "asset": {
+    "assetId": "bmw-5-series-v1",
+    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-5-series-v1/portimao-blue-metallic.jpg",
+    "turntableUrl": null,
+    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1.glb",
+    "defaultColourFamily": "grey",
+    "yearStart": 2017,
+    "yearEnd": 2023,
+    "fuel": [
+     "diesel",
+     "electric",
+     "hybrid",
+     "petrol"
+    ],
+    "trims": [
+     "M",
+     "M Sport",
+     "M Sport Pro",
+     "SE",
+     "Sport"
+    ],
+    "colours": [
+     {
+      "family": "grey",
+      "dvlaColour": "Grey",
+      "oemPaintName": "Brooklyn Grey Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__grey.glb"
+     },
+     {
+      "family": "silver",
+      "dvlaColour": "Silver",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__silver.glb"
+     },
+     {
+      "family": "black",
+      "dvlaColour": "Black",
+      "oemPaintName": "Black Sapphire Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__black.glb"
+     },
+     {
+      "family": "white",
+      "dvlaColour": "White",
+      "oemPaintName": "Mineral White Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__white.glb"
+     },
+     {
+      "family": "blue",
+      "dvlaColour": "Blue",
+      "oemPaintName": "Portimao Blue Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__blue.glb"
+     },
+     {
+      "family": "red",
+      "dvlaColour": "Red",
+      "oemPaintName": "Toronto Red Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__red.glb"
+     },
+     {
+      "family": "green",
+      "dvlaColour": "Green",
+      "oemPaintName": "Isle of Man Green Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__green.glb"
+     },
+     {
+      "family": "yellow",
+      "dvlaColour": "Yellow",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__yellow.glb"
+     }
+    ],
+    "recolourVerified": true
+   }
   },
   {
    "class": "car",
@@ -9268,19 +9670,19 @@
    "make": "hyundai",
    "model": "Ioniq 5",
    "generation": "NE",
-   "year_from": 2021,
-   "year_to": 2026,
+   "year_from": 2022,
+   "year_to": 2022,
    "body_style": "suv",
    "fuel": [
     "electric"
    ],
    "trims": [
+    "N",
+    "N Line",
+    "Premium",
     "S",
     "SE Connect",
-    "Premium",
-    "Ultimate",
-    "N Line",
-    "N"
+    "Ultimate"
    ],
    "colours": [
     "Beige",
@@ -9301,28 +9703,106 @@
     "White",
     "Yellow"
    ],
-   "has_3d": false,
-   "manifest_url": null
+   "has_3d": true,
+   "asset": {
+    "assetId": "hyundai-ioniq-5-2022-v1",
+    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-ioniq-5-2022-v1/performance-blue.jpg",
+    "turntableUrl": null,
+    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1.glb",
+    "defaultColourFamily": "white",
+    "yearStart": 2022,
+    "yearEnd": 2022,
+    "fuel": [
+     "electric"
+    ],
+    "trims": [
+     "N",
+     "N Line",
+     "Premium",
+     "S",
+     "SE Connect",
+     "Ultimate"
+    ],
+    "colours": [
+     {
+      "family": "grey",
+      "dvlaColour": "Grey",
+      "oemPaintName": "Cyber Grey Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__grey.glb"
+     },
+     {
+      "family": "silver",
+      "dvlaColour": "Silver",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__silver.glb"
+     },
+     {
+      "family": "black",
+      "dvlaColour": "Black",
+      "oemPaintName": "Phantom Black Pearl",
+      "oemFinish": "Pearl",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__black.glb"
+     },
+     {
+      "family": "white",
+      "dvlaColour": "White",
+      "oemPaintName": "Serenity White Pearl",
+      "oemFinish": "Pearl",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__white.glb"
+     },
+     {
+      "family": "blue",
+      "dvlaColour": "Blue",
+      "oemPaintName": "Intense Blue Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__blue.glb"
+     },
+     {
+      "family": "red",
+      "dvlaColour": "Red",
+      "oemPaintName": "Ultimate Red Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__red.glb"
+     },
+     {
+      "family": "green",
+      "dvlaColour": "Green",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__green.glb"
+     },
+     {
+      "family": "yellow",
+      "dvlaColour": "Yellow",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__yellow.glb"
+     }
+    ],
+    "recolourVerified": true
+   }
   },
   {
    "class": "car",
    "make": "hyundai",
    "model": "Santa Fe",
    "generation": "MX5",
-   "year_from": 2024,
-   "year_to": 2026,
+   "year_from": 2020,
+   "year_to": 2020,
    "body_style": "suv",
    "fuel": [
-    "petrol",
-    "hybrid"
+    "hybrid",
+    "petrol"
    ],
    "trims": [
+    "N",
+    "N Line",
+    "Premium",
     "S",
     "SE Connect",
-    "Premium",
-    "Ultimate",
-    "N Line",
-    "N"
+    "Ultimate"
    ],
    "colours": [
     "Beige",
@@ -9343,8 +9823,87 @@
     "White",
     "Yellow"
    ],
-   "has_3d": false,
-   "manifest_url": null
+   "has_3d": true,
+   "asset": {
+    "assetId": "hyundai-santa-fe-2020-v1",
+    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-santa-fe-2020-v1/performance-blue.jpg",
+    "turntableUrl": null,
+    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1.glb",
+    "defaultColourFamily": "white",
+    "yearStart": 2020,
+    "yearEnd": 2020,
+    "fuel": [
+     "hybrid",
+     "petrol"
+    ],
+    "trims": [
+     "N",
+     "N Line",
+     "Premium",
+     "S",
+     "SE Connect",
+     "Ultimate"
+    ],
+    "colours": [
+     {
+      "family": "grey",
+      "dvlaColour": "Grey",
+      "oemPaintName": "Cyber Grey Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__grey.glb"
+     },
+     {
+      "family": "silver",
+      "dvlaColour": "Silver",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__silver.glb"
+     },
+     {
+      "family": "black",
+      "dvlaColour": "Black",
+      "oemPaintName": "Phantom Black Pearl",
+      "oemFinish": "Pearl",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__black.glb"
+     },
+     {
+      "family": "white",
+      "dvlaColour": "White",
+      "oemPaintName": "Serenity White Pearl",
+      "oemFinish": "Pearl",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__white.glb"
+     },
+     {
+      "family": "blue",
+      "dvlaColour": "Blue",
+      "oemPaintName": "Intense Blue Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__blue.glb"
+     },
+     {
+      "family": "red",
+      "dvlaColour": "Red",
+      "oemPaintName": "Ultimate Red Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__red.glb"
+     },
+     {
+      "family": "green",
+      "dvlaColour": "Green",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__green.glb"
+     },
+     {
+      "family": "yellow",
+      "dvlaColour": "Yellow",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__yellow.glb"
+     }
+    ],
+    "recolourVerified": true
+   }
   },
   {
    "class": "car",
@@ -13780,9 +14339,9 @@
    "year_to": 2026,
    "body_style": "suv",
    "fuel": [
-    "petrol",
     "diesel",
-    "hybrid"
+    "hybrid",
+    "petrol"
    ],
    "trims": [
     "S",
@@ -13810,8 +14369,81 @@
     "White",
     "Yellow"
    ],
-   "has_3d": false,
-   "manifest_url": null
+   "has_3d": true,
+   "asset": {
+    "assetId": "land-rover-range-rover-evoque-v1",
+    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-evoque-v1/portofino-blue-metallic.jpg",
+    "turntableUrl": null,
+    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1.glb",
+    "defaultColourFamily": "silver",
+    "yearStart": 2019,
+    "yearEnd": 2026,
+    "fuel": [
+     "diesel",
+     "hybrid",
+     "petrol"
+    ],
+    "trims": [],
+    "colours": [
+     {
+      "family": "grey",
+      "dvlaColour": "Grey",
+      "oemPaintName": "Eiger Grey Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__grey.glb"
+     },
+     {
+      "family": "silver",
+      "dvlaColour": "Silver",
+      "oemPaintName": "Hakuba Silver Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__silver.glb"
+     },
+     {
+      "family": "black",
+      "dvlaColour": "Black",
+      "oemPaintName": "Santorini Black Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__black.glb"
+     },
+     {
+      "family": "white",
+      "dvlaColour": "White",
+      "oemPaintName": "Ostuni Pearl White",
+      "oemFinish": "Pearl",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__white.glb"
+     },
+     {
+      "family": "blue",
+      "dvlaColour": "Blue",
+      "oemPaintName": "Portofino Blue Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__blue.glb"
+     },
+     {
+      "family": "red",
+      "dvlaColour": "Red",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__red.glb"
+     },
+     {
+      "family": "green",
+      "dvlaColour": "Green",
+      "oemPaintName": "Belgravia Green Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__green.glb"
+     },
+     {
+      "family": "yellow",
+      "dvlaColour": "Yellow",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__yellow.glb"
+     }
+    ],
+    "recolourVerified": true
+   }
   },
   {
    "class": "car",
@@ -13822,9 +14454,9 @@
    "year_to": 2026,
    "body_style": "suv",
    "fuel": [
-    "petrol",
     "diesel",
-    "hybrid"
+    "hybrid",
+    "petrol"
    ],
    "trims": [
     "S",
@@ -13852,8 +14484,81 @@
     "White",
     "Yellow"
    ],
-   "has_3d": false,
-   "manifest_url": null
+   "has_3d": true,
+   "asset": {
+    "assetId": "land-rover-range-rover-velar-v1",
+    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-velar-v1/portofino-blue-metallic.jpg",
+    "turntableUrl": null,
+    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1.glb",
+    "defaultColourFamily": "silver",
+    "yearStart": 2017,
+    "yearEnd": 2026,
+    "fuel": [
+     "diesel",
+     "hybrid",
+     "petrol"
+    ],
+    "trims": [],
+    "colours": [
+     {
+      "family": "grey",
+      "dvlaColour": "Grey",
+      "oemPaintName": "Eiger Grey Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__grey.glb"
+     },
+     {
+      "family": "silver",
+      "dvlaColour": "Silver",
+      "oemPaintName": "Hakuba Silver Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__silver.glb"
+     },
+     {
+      "family": "black",
+      "dvlaColour": "Black",
+      "oemPaintName": "Santorini Black Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__black.glb"
+     },
+     {
+      "family": "white",
+      "dvlaColour": "White",
+      "oemPaintName": "Ostuni Pearl White",
+      "oemFinish": "Pearl",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__white.glb"
+     },
+     {
+      "family": "blue",
+      "dvlaColour": "Blue",
+      "oemPaintName": "Portofino Blue Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__blue.glb"
+     },
+     {
+      "family": "red",
+      "dvlaColour": "Red",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__red.glb"
+     },
+     {
+      "family": "green",
+      "dvlaColour": "Green",
+      "oemPaintName": "Belgravia Green Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__green.glb"
+     },
+     {
+      "family": "yellow",
+      "dvlaColour": "Yellow",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__yellow.glb"
+     }
+    ],
+    "recolourVerified": true
+   }
   },
   {
    "class": "car",
@@ -13864,9 +14569,9 @@
    "year_to": 2026,
    "body_style": "suv",
    "fuel": [
-    "petrol",
     "diesel",
-    "hybrid"
+    "hybrid",
+    "petrol"
    ],
    "trims": [
     "S",
@@ -13894,8 +14599,81 @@
     "White",
     "Yellow"
    ],
-   "has_3d": false,
-   "manifest_url": null
+   "has_3d": true,
+   "asset": {
+    "assetId": "land-rover-range-rover-sport-2018-v1",
+    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-sport-2018-v1/hero.jpg",
+    "turntableUrl": null,
+    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1.glb",
+    "defaultColourFamily": "silver",
+    "yearStart": 2022,
+    "yearEnd": 2026,
+    "fuel": [
+     "diesel",
+     "hybrid",
+     "petrol"
+    ],
+    "trims": [],
+    "colours": [
+     {
+      "family": "grey",
+      "dvlaColour": "Grey",
+      "oemPaintName": "Eiger Grey Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__grey.glb"
+     },
+     {
+      "family": "silver",
+      "dvlaColour": "Silver",
+      "oemPaintName": "Hakuba Silver Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__silver.glb"
+     },
+     {
+      "family": "black",
+      "dvlaColour": "Black",
+      "oemPaintName": "Santorini Black Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__black.glb"
+     },
+     {
+      "family": "white",
+      "dvlaColour": "White",
+      "oemPaintName": "Ostuni Pearl White",
+      "oemFinish": "Pearl",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__white.glb"
+     },
+     {
+      "family": "blue",
+      "dvlaColour": "Blue",
+      "oemPaintName": "Portofino Blue Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__blue.glb"
+     },
+     {
+      "family": "red",
+      "dvlaColour": "Red",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__red.glb"
+     },
+     {
+      "family": "green",
+      "dvlaColour": "Green",
+      "oemPaintName": "Belgravia Green Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__green.glb"
+     },
+     {
+      "family": "yellow",
+      "dvlaColour": "Yellow",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__yellow.glb"
+     }
+    ],
+    "recolourVerified": true
+   }
   },
   {
    "class": "car",
@@ -14425,16 +15203,16 @@
    "make": "tesla",
    "model": "Model 3",
    "generation": "",
-   "year_from": 2019,
+   "year_from": 2017,
    "year_to": 2026,
    "body_style": "saloon",
    "fuel": [
     "electric"
    ],
    "trims": [
-    "Standard Range",
     "Long Range",
-    "Performance"
+    "Performance",
+    "Standard Range"
    ],
    "colours": [
     "Beige",
@@ -14455,8 +15233,83 @@
     "White",
     "Yellow"
    ],
-   "has_3d": false,
-   "manifest_url": null
+   "has_3d": true,
+   "asset": {
+    "assetId": "tesla-model-3-v1",
+    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/tesla/tesla-model-3-v1/deep-blue-metallic.jpg",
+    "turntableUrl": null,
+    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1.glb",
+    "defaultColourFamily": "silver",
+    "yearStart": 2017,
+    "yearEnd": 2026,
+    "fuel": [
+     "electric"
+    ],
+    "trims": [
+     "Long Range",
+     "Performance",
+     "Standard Range"
+    ],
+    "colours": [
+     {
+      "family": "grey",
+      "dvlaColour": "Grey",
+      "oemPaintName": "Stealth Grey",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__grey.glb"
+     },
+     {
+      "family": "silver",
+      "dvlaColour": "Silver",
+      "oemPaintName": "Quicksilver",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__silver.glb"
+     },
+     {
+      "family": "black",
+      "dvlaColour": "Black",
+      "oemPaintName": "Solid Black",
+      "oemFinish": "Solid",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__black.glb"
+     },
+     {
+      "family": "white",
+      "dvlaColour": "White",
+      "oemPaintName": "Pearl White Multi-Coat",
+      "oemFinish": "Multi-coat",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__white.glb"
+     },
+     {
+      "family": "blue",
+      "dvlaColour": "Blue",
+      "oemPaintName": "Deep Blue Metallic",
+      "oemFinish": "Metallic",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__blue.glb"
+     },
+     {
+      "family": "red",
+      "dvlaColour": "Red",
+      "oemPaintName": "Ultra Red",
+      "oemFinish": "Multi-coat",
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__red.glb"
+     },
+     {
+      "family": "green",
+      "dvlaColour": "Green",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__green.glb"
+     },
+     {
+      "family": "yellow",
+      "dvlaColour": "Yellow",
+      "oemPaintName": null,
+      "oemFinish": null,
+      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__yellow.glb"
+     }
+    ],
+    "recolourVerified": true
+   }
   },
   {
    "class": "car",
@@ -24133,107 +24986,6 @@
   },
   {
    "class": "car",
-   "make": "land-rover",
-   "model": "range-rover-evoque",
-   "generation": "",
-   "body_style": "suv",
-   "year_from": 2019,
-   "year_to": 2026,
-   "fuel": [
-    "diesel",
-    "hybrid",
-    "petrol"
-   ],
-   "trims": [],
-   "colours": [
-    "black",
-    "blue",
-    "green",
-    "grey",
-    "red",
-    "silver",
-    "white",
-    "yellow"
-   ],
-   "has_3d": true,
-   "asset": {
-    "assetId": "land-rover-range-rover-evoque-v1",
-    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-evoque-v1/portofino-blue-metallic.jpg",
-    "turntableUrl": null,
-    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1.glb",
-    "defaultColourFamily": "silver",
-    "yearStart": 2019,
-    "yearEnd": 2026,
-    "fuel": [
-     "diesel",
-     "hybrid",
-     "petrol"
-    ],
-    "trims": [],
-    "colours": [
-     {
-      "family": "grey",
-      "dvlaColour": "Grey",
-      "oemPaintName": "Eiger Grey Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__grey.glb"
-     },
-     {
-      "family": "silver",
-      "dvlaColour": "Silver",
-      "oemPaintName": "Hakuba Silver Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__silver.glb"
-     },
-     {
-      "family": "black",
-      "dvlaColour": "Black",
-      "oemPaintName": "Santorini Black Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__black.glb"
-     },
-     {
-      "family": "white",
-      "dvlaColour": "White",
-      "oemPaintName": "Ostuni Pearl White",
-      "oemFinish": "Pearl",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__white.glb"
-     },
-     {
-      "family": "blue",
-      "dvlaColour": "Blue",
-      "oemPaintName": "Portofino Blue Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__blue.glb"
-     },
-     {
-      "family": "red",
-      "dvlaColour": "Red",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__red.glb"
-     },
-     {
-      "family": "green",
-      "dvlaColour": "Green",
-      "oemPaintName": "Belgravia Green Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__green.glb"
-     },
-     {
-      "family": "yellow",
-      "dvlaColour": "Yellow",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-v1__yellow.glb"
-     }
-    ],
-    "recolourVerified": true
-   },
-   "source": "enriched asset spec (make/model/year/trim/fuel)"
-  },
-  {
-   "class": "car",
    "make": "audi",
    "model": "a1 quattro",
    "generation": "",
@@ -24906,111 +25658,6 @@
   },
   {
    "class": "car",
-   "make": "tesla",
-   "model": "model-3",
-   "generation": "",
-   "body_style": "saloon",
-   "year_from": 2017,
-   "year_to": 2026,
-   "fuel": [
-    "electric"
-   ],
-   "trims": [
-    "Long Range",
-    "Performance",
-    "Standard Range"
-   ],
-   "colours": [
-    "black",
-    "blue",
-    "green",
-    "grey",
-    "red",
-    "silver",
-    "white",
-    "yellow"
-   ],
-   "has_3d": true,
-   "asset": {
-    "assetId": "tesla-model-3-v1",
-    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/tesla/tesla-model-3-v1/deep-blue-metallic.jpg",
-    "turntableUrl": null,
-    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1.glb",
-    "defaultColourFamily": "silver",
-    "yearStart": 2017,
-    "yearEnd": 2026,
-    "fuel": [
-     "electric"
-    ],
-    "trims": [
-     "Long Range",
-     "Performance",
-     "Standard Range"
-    ],
-    "colours": [
-     {
-      "family": "grey",
-      "dvlaColour": "Grey",
-      "oemPaintName": "Stealth Grey",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__grey.glb"
-     },
-     {
-      "family": "silver",
-      "dvlaColour": "Silver",
-      "oemPaintName": "Quicksilver",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__silver.glb"
-     },
-     {
-      "family": "black",
-      "dvlaColour": "Black",
-      "oemPaintName": "Solid Black",
-      "oemFinish": "Solid",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__black.glb"
-     },
-     {
-      "family": "white",
-      "dvlaColour": "White",
-      "oemPaintName": "Pearl White Multi-Coat",
-      "oemFinish": "Multi-coat",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__white.glb"
-     },
-     {
-      "family": "blue",
-      "dvlaColour": "Blue",
-      "oemPaintName": "Deep Blue Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__blue.glb"
-     },
-     {
-      "family": "red",
-      "dvlaColour": "Red",
-      "oemPaintName": "Ultra Red",
-      "oemFinish": "Multi-coat",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__red.glb"
-     },
-     {
-      "family": "green",
-      "dvlaColour": "Green",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__green.glb"
-     },
-     {
-      "family": "yellow",
-      "dvlaColour": "Yellow",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-v1__yellow.glb"
-     }
-    ],
-    "recolourVerified": true
-   },
-   "source": "enriched asset spec (make/model/year/trim/fuel)"
-  },
-  {
-   "class": "car",
    "make": "hyundai",
    "model": "kona (2019)",
    "generation": "",
@@ -25342,121 +25989,6 @@
       "oemPaintName": null,
       "oemFinish": null,
       "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-3-series-v1__yellow.glb"
-     }
-    ],
-    "recolourVerified": true
-   },
-   "source": "enriched asset spec (make/model/year/trim/fuel)"
-  },
-  {
-   "class": "car",
-   "make": "bmw",
-   "model": "5-series",
-   "generation": "",
-   "body_style": "saloon",
-   "year_from": 2017,
-   "year_to": 2023,
-   "fuel": [
-    "diesel",
-    "electric",
-    "hybrid",
-    "petrol"
-   ],
-   "trims": [
-    "M",
-    "M Sport",
-    "M Sport Pro",
-    "SE",
-    "Sport"
-   ],
-   "colours": [
-    "black",
-    "blue",
-    "green",
-    "grey",
-    "red",
-    "silver",
-    "white",
-    "yellow"
-   ],
-   "has_3d": true,
-   "asset": {
-    "assetId": "bmw-5-series-v1",
-    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-5-series-v1/portimao-blue-metallic.jpg",
-    "turntableUrl": null,
-    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1.glb",
-    "defaultColourFamily": "grey",
-    "yearStart": 2017,
-    "yearEnd": 2023,
-    "fuel": [
-     "diesel",
-     "electric",
-     "hybrid",
-     "petrol"
-    ],
-    "trims": [
-     "M",
-     "M Sport",
-     "M Sport Pro",
-     "SE",
-     "Sport"
-    ],
-    "colours": [
-     {
-      "family": "grey",
-      "dvlaColour": "Grey",
-      "oemPaintName": "Brooklyn Grey Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__grey.glb"
-     },
-     {
-      "family": "silver",
-      "dvlaColour": "Silver",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__silver.glb"
-     },
-     {
-      "family": "black",
-      "dvlaColour": "Black",
-      "oemPaintName": "Black Sapphire Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__black.glb"
-     },
-     {
-      "family": "white",
-      "dvlaColour": "White",
-      "oemPaintName": "Mineral White Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__white.glb"
-     },
-     {
-      "family": "blue",
-      "dvlaColour": "Blue",
-      "oemPaintName": "Portimao Blue Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__blue.glb"
-     },
-     {
-      "family": "red",
-      "dvlaColour": "Red",
-      "oemPaintName": "Toronto Red Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__red.glb"
-     },
-     {
-      "family": "green",
-      "dvlaColour": "Green",
-      "oemPaintName": "Isle of Man Green Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__green.glb"
-     },
-     {
-      "family": "yellow",
-      "dvlaColour": "Yellow",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-5-series-v1__yellow.glb"
      }
     ],
     "recolourVerified": true
@@ -27131,121 +27663,6 @@
       "oemPaintName": null,
       "oemFinish": null,
       "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-508-v1__yellow.glb"
-     }
-    ],
-    "recolourVerified": true
-   },
-   "source": "enriched asset spec (make/model/year/trim/fuel)"
-  },
-  {
-   "class": "car",
-   "make": "bmw",
-   "model": "3-series",
-   "generation": "G20",
-   "body_style": "saloon",
-   "year_from": 2023,
-   "year_to": 2026,
-   "fuel": [
-    "diesel",
-    "electric",
-    "hybrid",
-    "petrol"
-   ],
-   "trims": [
-    "M",
-    "M Sport",
-    "M Sport Pro",
-    "SE",
-    "Sport"
-   ],
-   "colours": [
-    "black",
-    "blue",
-    "green",
-    "grey",
-    "red",
-    "silver",
-    "white",
-    "yellow"
-   ],
-   "has_3d": true,
-   "asset": {
-    "assetId": "bmw-320i-2023-v1",
-    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-320i-2023-v1/portimao-blue-metallic.jpg",
-    "turntableUrl": null,
-    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1.glb",
-    "defaultColourFamily": "white",
-    "yearStart": 2023,
-    "yearEnd": 2026,
-    "fuel": [
-     "diesel",
-     "electric",
-     "hybrid",
-     "petrol"
-    ],
-    "trims": [
-     "M",
-     "M Sport",
-     "M Sport Pro",
-     "SE",
-     "Sport"
-    ],
-    "colours": [
-     {
-      "family": "grey",
-      "dvlaColour": "Grey",
-      "oemPaintName": "Brooklyn Grey Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__grey.glb"
-     },
-     {
-      "family": "silver",
-      "dvlaColour": "Silver",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__silver.glb"
-     },
-     {
-      "family": "black",
-      "dvlaColour": "Black",
-      "oemPaintName": "Black Sapphire Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__black.glb"
-     },
-     {
-      "family": "white",
-      "dvlaColour": "White",
-      "oemPaintName": "Mineral White Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__white.glb"
-     },
-     {
-      "family": "blue",
-      "dvlaColour": "Blue",
-      "oemPaintName": "Portimao Blue Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__blue.glb"
-     },
-     {
-      "family": "red",
-      "dvlaColour": "Red",
-      "oemPaintName": "Toronto Red Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__red.glb"
-     },
-     {
-      "family": "green",
-      "dvlaColour": "Green",
-      "oemPaintName": "Isle of Man Green Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__green.glb"
-     },
-     {
-      "family": "yellow",
-      "dvlaColour": "Yellow",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-320i-2023-v1__yellow.glb"
      }
     ],
     "recolourVerified": true
@@ -29017,117 +29434,6 @@
   {
    "class": "car",
    "make": "bmw",
-   "model": "2-series",
-   "generation": "",
-   "body_style": "coupe",
-   "year_from": 2021,
-   "year_to": 2021,
-   "fuel": [
-    "diesel",
-    "petrol"
-   ],
-   "trims": [
-    "M",
-    "M Sport",
-    "M Sport Pro",
-    "SE",
-    "Sport"
-   ],
-   "colours": [
-    "black",
-    "blue",
-    "green",
-    "grey",
-    "red",
-    "silver",
-    "white",
-    "yellow"
-   ],
-   "has_3d": true,
-   "asset": {
-    "assetId": "bmw-2-series-2021-v1",
-    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/bmw/bmw-2-series-2021-v1/portimao-blue-metallic.jpg",
-    "turntableUrl": null,
-    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1.glb",
-    "defaultColourFamily": "silver",
-    "yearStart": 2021,
-    "yearEnd": 2021,
-    "fuel": [
-     "diesel",
-     "petrol"
-    ],
-    "trims": [
-     "M",
-     "M Sport",
-     "M Sport Pro",
-     "SE",
-     "Sport"
-    ],
-    "colours": [
-     {
-      "family": "grey",
-      "dvlaColour": "Grey",
-      "oemPaintName": "Brooklyn Grey Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__grey.glb"
-     },
-     {
-      "family": "silver",
-      "dvlaColour": "Silver",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__silver.glb"
-     },
-     {
-      "family": "black",
-      "dvlaColour": "Black",
-      "oemPaintName": "Black Sapphire Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__black.glb"
-     },
-     {
-      "family": "white",
-      "dvlaColour": "White",
-      "oemPaintName": "Mineral White Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__white.glb"
-     },
-     {
-      "family": "blue",
-      "dvlaColour": "Blue",
-      "oemPaintName": "Portimao Blue Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__blue.glb"
-     },
-     {
-      "family": "red",
-      "dvlaColour": "Red",
-      "oemPaintName": "Toronto Red Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__red.glb"
-     },
-     {
-      "family": "green",
-      "dvlaColour": "Green",
-      "oemPaintName": "Isle of Man Green Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__green.glb"
-     },
-     {
-      "family": "yellow",
-      "dvlaColour": "Yellow",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-2-series-2021-v1__yellow.glb"
-     }
-    ],
-    "recolourVerified": true
-   },
-   "source": "enriched asset spec (make/model/year/trim/fuel)"
-  },
-  {
-   "class": "car",
-   "make": "bmw",
    "model": "x6",
    "generation": "",
    "body_style": "suv",
@@ -29512,117 +29818,6 @@
   {
    "class": "car",
    "make": "hyundai",
-   "model": "ioniq-5",
-   "generation": "",
-   "body_style": "suv",
-   "year_from": 2022,
-   "year_to": 2022,
-   "fuel": [
-    "electric"
-   ],
-   "trims": [
-    "N",
-    "N Line",
-    "Premium",
-    "S",
-    "SE Connect",
-    "Ultimate"
-   ],
-   "colours": [
-    "black",
-    "blue",
-    "green",
-    "grey",
-    "red",
-    "silver",
-    "white",
-    "yellow"
-   ],
-   "has_3d": true,
-   "asset": {
-    "assetId": "hyundai-ioniq-5-2022-v1",
-    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-ioniq-5-2022-v1/performance-blue.jpg",
-    "turntableUrl": null,
-    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1.glb",
-    "defaultColourFamily": "white",
-    "yearStart": 2022,
-    "yearEnd": 2022,
-    "fuel": [
-     "electric"
-    ],
-    "trims": [
-     "N",
-     "N Line",
-     "Premium",
-     "S",
-     "SE Connect",
-     "Ultimate"
-    ],
-    "colours": [
-     {
-      "family": "grey",
-      "dvlaColour": "Grey",
-      "oemPaintName": "Cyber Grey Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__grey.glb"
-     },
-     {
-      "family": "silver",
-      "dvlaColour": "Silver",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__silver.glb"
-     },
-     {
-      "family": "black",
-      "dvlaColour": "Black",
-      "oemPaintName": "Phantom Black Pearl",
-      "oemFinish": "Pearl",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__black.glb"
-     },
-     {
-      "family": "white",
-      "dvlaColour": "White",
-      "oemPaintName": "Serenity White Pearl",
-      "oemFinish": "Pearl",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__white.glb"
-     },
-     {
-      "family": "blue",
-      "dvlaColour": "Blue",
-      "oemPaintName": "Intense Blue Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__blue.glb"
-     },
-     {
-      "family": "red",
-      "dvlaColour": "Red",
-      "oemPaintName": "Ultimate Red Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__red.glb"
-     },
-     {
-      "family": "green",
-      "dvlaColour": "Green",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__green.glb"
-     },
-     {
-      "family": "yellow",
-      "dvlaColour": "Yellow",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1__yellow.glb"
-     }
-    ],
-    "recolourVerified": true
-   },
-   "source": "enriched asset spec (make/model/year/trim/fuel)"
-  },
-  {
-   "class": "car",
-   "make": "hyundai",
    "model": "ioniq-6",
    "generation": "",
    "body_style": "saloon",
@@ -29838,119 +30033,6 @@
       "oemPaintName": null,
       "oemFinish": null,
       "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix35-v1__yellow.glb"
-     }
-    ],
-    "recolourVerified": true
-   },
-   "source": "enriched asset spec (make/model/year/trim/fuel)"
-  },
-  {
-   "class": "car",
-   "make": "hyundai",
-   "model": "santa-fe",
-   "generation": "",
-   "body_style": "suv",
-   "year_from": 2020,
-   "year_to": 2020,
-   "fuel": [
-    "hybrid",
-    "petrol"
-   ],
-   "trims": [
-    "N",
-    "N Line",
-    "Premium",
-    "S",
-    "SE Connect",
-    "Ultimate"
-   ],
-   "colours": [
-    "black",
-    "blue",
-    "green",
-    "grey",
-    "red",
-    "silver",
-    "white",
-    "yellow"
-   ],
-   "has_3d": true,
-   "asset": {
-    "assetId": "hyundai-santa-fe-2020-v1",
-    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/hyundai/hyundai-santa-fe-2020-v1/performance-blue.jpg",
-    "turntableUrl": null,
-    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1.glb",
-    "defaultColourFamily": "white",
-    "yearStart": 2020,
-    "yearEnd": 2020,
-    "fuel": [
-     "hybrid",
-     "petrol"
-    ],
-    "trims": [
-     "N",
-     "N Line",
-     "Premium",
-     "S",
-     "SE Connect",
-     "Ultimate"
-    ],
-    "colours": [
-     {
-      "family": "grey",
-      "dvlaColour": "Grey",
-      "oemPaintName": "Cyber Grey Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__grey.glb"
-     },
-     {
-      "family": "silver",
-      "dvlaColour": "Silver",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__silver.glb"
-     },
-     {
-      "family": "black",
-      "dvlaColour": "Black",
-      "oemPaintName": "Phantom Black Pearl",
-      "oemFinish": "Pearl",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__black.glb"
-     },
-     {
-      "family": "white",
-      "dvlaColour": "White",
-      "oemPaintName": "Serenity White Pearl",
-      "oemFinish": "Pearl",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__white.glb"
-     },
-     {
-      "family": "blue",
-      "dvlaColour": "Blue",
-      "oemPaintName": "Intense Blue Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__blue.glb"
-     },
-     {
-      "family": "red",
-      "dvlaColour": "Red",
-      "oemPaintName": "Ultimate Red Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__red.glb"
-     },
-     {
-      "family": "green",
-      "dvlaColour": "Green",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__green.glb"
-     },
-     {
-      "family": "yellow",
-      "dvlaColour": "Yellow",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2020-v1__yellow.glb"
      }
     ],
     "recolourVerified": true
@@ -30183,107 +30265,6 @@
       "oemPaintName": null,
       "oemFinish": null,
       "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1__yellow.glb"
-     }
-    ],
-    "recolourVerified": true
-   },
-   "source": "enriched asset spec (make/model/year/trim/fuel)"
-  },
-  {
-   "class": "car",
-   "make": "land-rover",
-   "model": "range-rover-velar",
-   "generation": "",
-   "body_style": "suv",
-   "year_from": 2017,
-   "year_to": 2026,
-   "fuel": [
-    "diesel",
-    "hybrid",
-    "petrol"
-   ],
-   "trims": [],
-   "colours": [
-    "black",
-    "blue",
-    "green",
-    "grey",
-    "red",
-    "silver",
-    "white",
-    "yellow"
-   ],
-   "has_3d": true,
-   "asset": {
-    "assetId": "land-rover-range-rover-velar-v1",
-    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-velar-v1/portofino-blue-metallic.jpg",
-    "turntableUrl": null,
-    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1.glb",
-    "defaultColourFamily": "silver",
-    "yearStart": 2017,
-    "yearEnd": 2026,
-    "fuel": [
-     "diesel",
-     "hybrid",
-     "petrol"
-    ],
-    "trims": [],
-    "colours": [
-     {
-      "family": "grey",
-      "dvlaColour": "Grey",
-      "oemPaintName": "Eiger Grey Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__grey.glb"
-     },
-     {
-      "family": "silver",
-      "dvlaColour": "Silver",
-      "oemPaintName": "Hakuba Silver Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__silver.glb"
-     },
-     {
-      "family": "black",
-      "dvlaColour": "Black",
-      "oemPaintName": "Santorini Black Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__black.glb"
-     },
-     {
-      "family": "white",
-      "dvlaColour": "White",
-      "oemPaintName": "Ostuni Pearl White",
-      "oemFinish": "Pearl",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__white.glb"
-     },
-     {
-      "family": "blue",
-      "dvlaColour": "Blue",
-      "oemPaintName": "Portofino Blue Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__blue.glb"
-     },
-     {
-      "family": "red",
-      "dvlaColour": "Red",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__red.glb"
-     },
-     {
-      "family": "green",
-      "dvlaColour": "Green",
-      "oemPaintName": "Belgravia Green Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__green.glb"
-     },
-     {
-      "family": "yellow",
-      "dvlaColour": "Yellow",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1__yellow.glb"
      }
     ],
     "recolourVerified": true
@@ -32793,107 +32774,6 @@
       "oemPaintName": null,
       "oemFinish": null,
       "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-v1__yellow.glb"
-     }
-    ],
-    "recolourVerified": true
-   },
-   "source": "enriched asset spec (make/model/year/trim/fuel)"
-  },
-  {
-   "class": "car",
-   "make": "land-rover",
-   "model": "range-rover-sport",
-   "generation": "",
-   "body_style": "suv",
-   "year_from": 2022,
-   "year_to": 2026,
-   "fuel": [
-    "diesel",
-    "hybrid",
-    "petrol"
-   ],
-   "trims": [],
-   "colours": [
-    "black",
-    "blue",
-    "green",
-    "grey",
-    "red",
-    "silver",
-    "white",
-    "yellow"
-   ],
-   "has_3d": true,
-   "asset": {
-    "assetId": "land-rover-range-rover-sport-2018-v1",
-    "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-sport-2018-v1/hero.jpg",
-    "turntableUrl": null,
-    "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1.glb",
-    "defaultColourFamily": "silver",
-    "yearStart": 2022,
-    "yearEnd": 2026,
-    "fuel": [
-     "diesel",
-     "hybrid",
-     "petrol"
-    ],
-    "trims": [],
-    "colours": [
-     {
-      "family": "grey",
-      "dvlaColour": "Grey",
-      "oemPaintName": "Eiger Grey Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__grey.glb"
-     },
-     {
-      "family": "silver",
-      "dvlaColour": "Silver",
-      "oemPaintName": "Hakuba Silver Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__silver.glb"
-     },
-     {
-      "family": "black",
-      "dvlaColour": "Black",
-      "oemPaintName": "Santorini Black Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__black.glb"
-     },
-     {
-      "family": "white",
-      "dvlaColour": "White",
-      "oemPaintName": "Ostuni Pearl White",
-      "oemFinish": "Pearl",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__white.glb"
-     },
-     {
-      "family": "blue",
-      "dvlaColour": "Blue",
-      "oemPaintName": "Portofino Blue Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__blue.glb"
-     },
-     {
-      "family": "red",
-      "dvlaColour": "Red",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__red.glb"
-     },
-     {
-      "family": "green",
-      "dvlaColour": "Green",
-      "oemPaintName": "Belgravia Green Metallic",
-      "oemFinish": "Metallic",
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__green.glb"
-     },
-     {
-      "family": "yellow",
-      "dvlaColour": "Yellow",
-      "oemPaintName": null,
-      "oemFinish": null,
-      "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-v1__yellow.glb"
      }
     ],
     "recolourVerified": true

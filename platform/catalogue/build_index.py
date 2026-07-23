@@ -205,13 +205,14 @@ def asset_block(c):
 def nkey(s): return norm(s).replace(" ","").replace("-","")
 cat=[c for c in json.load(open(CATV2)) if c.get("publicationStatus")=="approved"]
 by_mm={}
-for c in cat: by_mm.setdefault((norm(c.get("make")),norm(c.get("model"))),[]).append(c)
+# hyphen/space-insensitive key so 'land-rover' == 'land rover', '3-series' == '3 Series'
+for c in cat: by_mm.setdefault((nkey(c.get("make")),nkey(c.get("model"))),[]).append(c)
 
 # master rows grouped by make, for inheriting year/trim onto body/trim variants
 master_by_make={}
-for r in index: master_by_make.setdefault(norm(r["make"]),[]).append(r)
+for r in index: master_by_make.setdefault(nkey(r["make"]),[]).append(r)
 def match_master(make, model, gen):
-    rows=master_by_make.get(norm(make),[]); mk=nkey(model); g=nkey(gen)
+    rows=master_by_make.get(nkey(make),[]); mk=nkey(model); g=nkey(gen)
     if g:                                             # 1. generation code match
         for r in rows:
             if r.get("generation") and nkey(r["generation"])==g: return r,"generation"
@@ -232,7 +233,7 @@ def pick(cands, gen):
             if norm(c.get("generation"))==g: return c
     return cands[0]
 for e in index:
-    cands=by_mm.get((norm(e["make"]),norm(e["model"])))
+    cands=by_mm.get((nkey(e["make"]),nkey(e["model"])))
     if cands:
         c=pick(cands,e.get("generation")); e["has_3d"]=True; e["asset"]=asset_block(c)
         e.pop("manifest_url",None); matched.add(c["assetId"])
