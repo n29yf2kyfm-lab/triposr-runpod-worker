@@ -10,16 +10,35 @@ Usage: recolour_audit.py <assetId> [colA] [colB]   (default red vs blue)
 Exit 0 = PASS (colours differ), 2 = FAIL (recolour did not take), 3 = skip.
 Prints:  RECOLOUR_AUDIT <aid> <PASS|FAIL|SKIP> dist=<n>
 """
-import sys, os, json, subprocess, urllib.request, struct, math
+import sys, os, json, subprocess, urllib.request, struct, math, hashlib, datetime
 import numpy as np
 from PIL import Image
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 CAT = os.environ.get("CATALOGUE") or os.path.join(REPO, "platform", "catalogue", "catalogue.v2.json")
 TMP = os.environ.get("TMPDIR", "/tmp")
 GT = ["npx", "--yes", "@gltf-transform/cli@4"]
-AID = sys.argv[1]
-CA = sys.argv[2] if len(sys.argv) > 2 else "red"
-CB = sys.argv[3] if len(sys.argv) > 3 else "blue"
+STAMP = "--stamp" in sys.argv
+pos = [a for a in sys.argv[1:] if not a.startswith("--")]
+AID = pos[0]
+CA = pos[1] if len(pos) > 1 else "red"
+CB = pos[2] if len(pos) > 2 else "blue"
+
+def variants_hash(cv):
+    """Stable fingerprint of a car's colour-variant set. Re-baking changes the
+    URLs (or their set), which changes the hash and invalidates a stale stamp —
+    so the gate can never accept a verdict that predates the current variants."""
+    payload = json.dumps(sorted((cv or {}).items()), separators=(",", ":"))
+    return hashlib.sha1(payload.encode()).hexdigest()
+
+def write_stamp(status, dist):
+    cat = json.load(open(CAT))
+    for x in cat:
+        if x["assetId"] == AID:
+            x["recolourAudit"] = {"status": status, "dist": round(dist, 4),
+                                  "variantsHash": variants_hash(x.get("colourVariants")),
+                                  "method": "render", "at": datetime.date.today().isoformat()}
+            break
+    json.dump(cat, open(CAT, "w"), indent=1, ensure_ascii=False)
 
 BLENDER = r'''
 import bpy,sys,math,mathutils
@@ -83,8 +102,10 @@ def main():
         print(f"RECOLOUR_AUDIT {AID} SKIP render-failed"); sys.exit(3)
     dist = float(np.linalg.norm(ma-mb))
     ok = dist >= 0.08        # body colour must move meaningfully between two DVLA colours
+    if STAMP: write_stamp("pass" if ok else "fail", dist)
     print(f"RECOLOUR_AUDIT {AID} {'PASS' if ok else 'FAIL'} dist={dist:.3f} "
-          f"{CA}={[round(x,2) for x in ma]} {CB}={[round(x,2) for x in mb]}")
+          f"{CA}={[round(x,2) for x in ma]} {CB}={[round(x,2) for x in mb]}"
+          f"{' [stamped]' if STAMP else ''}")
     sys.exit(0 if ok else 2)
 
 main()

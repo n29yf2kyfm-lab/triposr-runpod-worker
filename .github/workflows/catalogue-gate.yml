@@ -1,0 +1,32 @@
+name: Catalogue recolour gate
+
+# Enforces that no approved car ships a colour-swap that has not been
+# render-verified. Pure JSON validation of the audit ledger baked into the
+# catalogue (recolourAudit stamps) — no rendering, no secrets. A broken or
+# unverified swap fails the check and blocks the change.
+
+on:
+  push:
+    branches: [ main, claude/lovable-connection-ki7jch ]
+    paths:
+      - 'platform/catalogue/catalogue.v2.json'
+      - 'pipeline/qc/gate_catalogue.py'
+      - '.github/workflows/catalogue-gate.yml'
+  pull_request:
+    paths:
+      - 'platform/catalogue/catalogue.v2.json'
+      - 'pipeline/qc/gate_catalogue.py'
+  workflow_dispatch: {}
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run catalogue recolour gate
+        run: python3 pipeline/qc/gate_catalogue.py

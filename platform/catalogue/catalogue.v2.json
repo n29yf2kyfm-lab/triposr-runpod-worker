@@ -428,7 +428,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "e4755fa790edcaed2ff9b0fcb16053617070b577",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -836,7 +842,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "28f3aed8250cf2af3ea9996c0f4276eeb39eadd2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -2090,7 +2102,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "2615b1cc873f479fe22e4de2fe0a2470fb336bb0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -3171,7 +3189,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "68c1329530c78357f43d619350f6731719a7404b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -3818,7 +3842,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "641a6f011162a366265e7d7a62fe0aeb22509f20",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -4032,7 +4062,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "3546aebe4be9166b8f762b6891415bd0086987ff",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -5518,7 +5554,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "9baafaedc3b9066f48e259f41b380a1b43334fe9",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -5726,7 +5768,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7e69fb22e99df33e96325a6e328fe906dbbd4529",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -6297,7 +6345,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "63ee72228753ece505e894d38d82e2e20691c857",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -6948,7 +7002,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "baca37010ede826dffb7ef908c356fa6755f3649",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -7156,7 +7216,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "5f4b4d97eeeb95752e7dba85bac13daded5a89b3",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -9233,7 +9299,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "c5fba1eeb7551ca3e819695971aa3f3a4a6301a4",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -9855,7 +9927,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f2c004e54022a024a31c5376b24b9e02535429d7",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -10063,7 +10141,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "5876817facd09b8448b132dccee84a2bcb77d8e4",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -10920,7 +11004,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "037536900ff062b2a4d684924fcb1d200f6d19f2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -11717,7 +11807,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "3baeea0d8e720a796d35f6f4ffdcab4f1d944fa0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -12150,7 +12246,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "cccba8e39b082f3e75404aaddd8d3acca93d2f85",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -12359,7 +12461,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "0d3c4c45e0c501af2550bc558f7d830c576cf5af",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -12576,7 +12684,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "64a49a0a56585ea137ee7d0b93bdee21458d8247",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -13996,7 +14110,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a6b394523c390226d26d4b4a88f83361b6abcbaa",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -15241,7 +15361,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b92cfd567ea88288da40ebc41e2d1f476e564c51",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -15458,7 +15584,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "505d0b4e73113e306c0c45362a3f880444f22caf",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -15671,7 +15803,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "58ff52bc3c61a9da858711c6efa82feb30116165",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -16105,7 +16243,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "1cdfb7203389b4e9a5e05a4b477f3fbdb80812b0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -16539,7 +16683,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f6ef0eaf82c9c001dddf5a18b472dca178797afc",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -17809,7 +17959,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "50ce2839ec9c98c792ae664f3fbe35ce8a62298b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -18027,7 +18183,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "8a0f8c3093dd67d6c1e0e0a041c6c7d753edc927",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -19330,7 +19492,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b9cd5dec2dc7d05dc7af0f4802529283ef145503",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -20103,7 +20271,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b17aed3dc1f66c01643b6332de80942790877921",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -20685,7 +20859,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "869f63b093c65d4508975e52a10c9b7a2894ac27",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -21747,7 +21927,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "894cab2af72c55754597e44a24f4d09efbded8b9",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -21956,7 +22142,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "c9880e52620836767c7d616453994c90afba278e",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -23018,7 +23210,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "cc292c2b6113fad6ece5101dad6e1bc67be7a9b7",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -23672,7 +23870,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "46a54df5d152b4687f9a967c069732b3544a435d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -24523,7 +24727,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6abb2334ac41de8a525467a68801319295ff7b81",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -24739,7 +24949,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "9977b733edeb48e0989511fe860960ec9b35de79",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -25380,7 +25596,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6571c337a6efe4505e499ea232412a814999992d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -25812,7 +26034,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f673964537d3443e8b4cbfb57fa341c60eb458dd",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -26230,7 +26458,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "3923ee6f54a9f3ac6ff47f659402d3cfa11cec33",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -26445,7 +26679,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7b4d52ff5a50e35710a829c71407a2befccc98ca",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -26661,7 +26901,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a862fade0966efa71525169105e661daf2b9665a",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -27085,7 +27331,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "d790e64abd5144e4327634e626c76f28d35e69d6",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -27933,7 +28185,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "c7c19329509442ce4c84b32f4d4adbaa807a7211",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -29355,7 +29613,13 @@
    }
   },
   "defaultDvlaColour": "Red",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "12e31ba0118e7f0c3c41b6f4a81fdc9a66f0787d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -30001,7 +30265,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7c610375f6ea518c655c5352ed46e5e7b6e261c9",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -30220,7 +30490,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fbebd2286aec75c999dfca0efa483cab034c8d05",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -30436,7 +30712,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "3aa152864a0f1a29d4531cefcf05052fbd1aad24",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -31522,7 +31804,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "600d6b487617667e2c78a685eb79212b2b457097",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -31740,7 +32028,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "bde5ea44d5147b98754601056c00d21586ca7dee",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -32175,7 +32469,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6f2eb565572812a2fc07edcf63d5f45aa6b366d3",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -32393,7 +32693,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fccb5f8cd3afcf05d4fb863da2114d409870965b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -33038,7 +33344,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a4434b90cf68fa9e559fd1a895b3af81291ab76d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -33254,7 +33566,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fc74fc2666feb892930fe165592164ffe02e23ae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -33473,7 +33791,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "c251e1a9b44a4345f9800dcc8d5334761321d21d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -33689,7 +34013,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97474fcebf7529e9cb52283db222c933db91133c",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -34053,7 +34383,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "934aa5b84956890287ab72b078cd31f0aea35da8",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -34261,7 +34597,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fd29f861c7bee381cbd5cf2ebf053793ab35a19f",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -34469,7 +34811,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4e5610b7c55c40cf7e884d400be293e78e999eef",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -34677,7 +35025,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "16d0c1f69579342c71d26628f3c8d6b1d625e3d8",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -35277,7 +35631,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6ce750efd15ea344dbd6e893713eb981d1507f91",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -35707,7 +36067,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "32f1be99ae31abfdfaddef44e351a34722c15811",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -36139,7 +36505,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "522f6e7133132d2e682d4f6b80453da910094e23",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -37225,7 +37597,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "989668a6f61a2f6ec7f312c72b92925a625f2ae4",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -38095,7 +38473,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "c50f4c1f379380e0903b9c6e2e4f689aa36daf2f",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -38959,7 +39343,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "94f8ae9fbcea1e35a76315d59931d3009864d316",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -39175,7 +39565,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4a54e363c664662790ea2d2613a0825262770dc1",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -39392,7 +39788,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "d2433214813f741a1ddf4490753cc77fb2105d4a",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -39611,7 +40013,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6b295e4fc7e021790eef9d138840252c4f114ad7",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -40196,7 +40604,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "78fa1cab589bad5d95c758beafdcb7a447b88aac",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -40333,7 +40747,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "5840434e3966b973bd79dedcb2d47737adee7d10",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -40471,7 +40891,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "8b216dedf58dcff82333941a32193b8df517319a",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -40608,7 +41034,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "c6f238b928ad59e7244482dbedfb7c9d5b5c8fea",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -40745,7 +41177,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "09f7b83abf593af26e1d78d71bfceaf7160d6025",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -40977,7 +41415,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "0976cc5b97dd52938194a807302fd5957a9ff61d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -41212,7 +41656,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "9d1c1e1c1d36909ee0473e8e8ae35b7ba1e47085",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -41445,7 +41895,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "1df3f3dd77113dc4c398a72e94156ea66b4a5d59",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -41678,7 +42134,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "9630a1c982c8f7da3000621d10bcd05728b3a99a",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -41797,7 +42259,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f1c6f1342a82807e05b98b4d331f4201f364a77d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -42136,7 +42604,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "d3213720e8d90d4bc2c0617a809b5dd0e1aa4c8d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -42250,7 +42724,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "46b0d0617a65d6c5f366a0a4adfc2157bf212694",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -42479,7 +42959,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f4e05c31ed86def62b19d960d6dfd518b6e80a52",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -42594,7 +43080,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7ccde8bf0f8860fb05b23c7050d826d15513f8dc",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -42710,7 +43202,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "c7a20500bcde141bdeb80be2c3e5dc91f7c25f76",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -42825,7 +43323,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "5a135047580e883b38b4e027b27cee3e5594a3fd",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -42937,7 +43441,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "9b92c635d82446d4cb008accafbf732edf120791",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -43151,7 +43661,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b302c261631f43a22e76e17f31a1ee1d33034fff",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -44209,7 +44725,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f2fa7e70962567c7f8c49ac7aad4867e40cfeca2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -45706,7 +46228,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "8c5f2b4e822bc27341ecd42b94e43ae02252df97",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -46986,7 +47514,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b8a9758d9396b63d575ae3f024df4520f787a255",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -47199,7 +47733,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f61c2fb68a016a6314dbc7f6b6959b0ef1b27c33",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -47627,7 +48167,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "302be42e18dc7d00c6d5a236fe8374fe14041fc0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -47841,7 +48387,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4056f3126cd8ad9840812b05ca863a61e6a19ee4",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -48268,7 +48820,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "57755c259b363993ddb79bcac39c6bf5c1f5f7e5",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -48481,7 +49039,13 @@
    }
   },
   "defaultDvlaColour": "Blue",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "0d22e2760f91d8eb89bfb5e6f616e91b2e50628c",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -48841,7 +49405,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ac8333872e055e449201d108b8b8522e5376d6fe",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -49054,7 +49624,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "79ff180fa7dbf873de40d969e173acf0b7c45c28",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -49267,7 +49843,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "088b76d4962812da0dadc5cd157216fb995df47c",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -49481,7 +50063,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "690ff4c16faf47f94bdd0ec23eb3f865636247f7",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -50122,7 +50710,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "2437263b863ea0f474c1a78a2cc73175930a9041",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -50550,7 +51144,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "983beb7918cae42ffa812284dfa7d82c101a92e2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -50764,7 +51364,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "449347eac02fe6b46d5f00d6a235776b60b90d20",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -53697,7 +54303,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b60e838f5174d096c8dc7bda13277e75c866f78f",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -53912,7 +54524,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "754cfc6809fe84b272eba48eeedc38629180a61f",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -55628,7 +56246,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7c025d847250acfe0c505883c514bd5e527b96ab",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -55841,7 +56465,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "00a165112ee5e0344ac4ff5af91467300c1c5502",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -56053,7 +56683,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "e03dcdbc27dedf1882b976b58ceaa7b689aba6fd",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -56692,7 +57328,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "bd8311ae229d688256f6d2c07958dffe147da304",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -57332,7 +57974,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "04372697117cb10342dd9467261cf9d2b731fbb9",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -57546,7 +58194,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "263286b125e3834bdc4f99fed6641d16221bcf0f",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -57760,7 +58414,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "e68646995284ad69672b40b0057379fb1f5ad4a3",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -59256,7 +59916,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a3bb787f7cf2bc86d64999790e6ec5c56a6bc82a",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -59896,7 +60562,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "be0e74035ba6d27b7c9388abd90100d401a2ffc0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -61181,7 +61853,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7549397b7fd9508914bbd9467e481a459e481c25",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -64420,7 +65098,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4eb5d73587d9afd930151673a9304ae86a89c48f",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -64850,7 +65534,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "e94115ec388e65b4cff0ee83cdd60333f0cbc1ee",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -65498,7 +66188,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "cd216897cbcc20f7fdd12ee71f67d2511b356767",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -65928,7 +66624,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6ebd38aef27edb16fb6d83ceae55a88ce9512438",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -67640,7 +68342,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "e06caab2838f68240d1ab55f383dd9b8d70a82de",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -67854,7 +68562,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "8f5b43215061857dc37b041b4dc387bdc099f173",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -68067,7 +68781,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f64b17ae01d408846f8b7cfd4a552f064ec1a3b5",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -68280,7 +69000,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4b2ec8d77eebde4f0649219215ce771c70abef03",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -68493,7 +69219,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "17cb7d81c80e2000803cce5181a23f3a428ac541",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -68921,7 +69653,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7059c47b03818d5357ef77ddf878dee2b51c940e",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -69988,7 +70726,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "776c27de7f0969f97f32adc4221a8670f5d883ac",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -70204,7 +70948,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "43daf679f8f74481671272ab8383127c29a58811",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -70635,7 +71385,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f3c003f08df0fa2869c069f570a69c03a36df885",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -71066,7 +71822,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b0b893c051ac30d0d1ada3925f4e86619045e1bf",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -71499,7 +72261,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "c1f3da16f4624bcdebfecb0d030a3a9a6ba870ce",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -72366,7 +73134,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f6a11a02ec896c5a9d3d75979c19289cc1c81bb9",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -73871,7 +74645,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "843a4b2b10972db5c60b8826f131160fccac2bc2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -74517,7 +75297,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "81773969a9cda60c5a6dd5baaf43ea3b3dba85e8",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -74734,7 +75520,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "586a3bbac9c7df9e2b0e9d850fd06bdd2aaea8bf",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -74949,7 +75741,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b9a514c8d8ded6949c2474d93b9d9e0ca2f25f2b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -75164,7 +75962,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "2918a339e132a786fc99b225c66643a3311d0d25",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -75378,7 +76182,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "0d1e6e6d0ed7800b8fd3fb834d34d9646511ecc6",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -76245,7 +77055,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4fb6cdcfb9ae70d696a3616a37d62693bc5f188b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -76676,7 +77492,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7d9b4f6cd604f2dbabd9978d3e64dfef02c57174",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -77110,7 +77932,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a42adc3752dad87b5559602e54cb4ebaf9ec7ae8",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -77968,7 +78796,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "c5a8c85e89c2c1d0b66308878b9645f4892f4163",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -78551,7 +79385,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a72ff27252f15262d424eaee92e4196a4e451eb4",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -78983,7 +79823,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "5453ea5a025b8aa929706b25a9c9166620fc91a3",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -79995,7 +80841,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "16d31beca98ee479c7630835c020c597c8e49449",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -80209,7 +81061,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "5672c27f7ef2d4185b8fd53a03d3602f15221f66",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -80857,7 +81715,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b47cdb8a180450d02156511c1b42164de85130a1",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -81290,7 +82154,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ab011006cb166a8a53bd5daa6de01827a61497f2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -81935,7 +82805,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6888c13ebfe3bdb50715ad4acab2c64a47c386b0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -83790,7 +84666,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "12b57be4a723eb3c26bff5bdaafbd1e306597728",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -85701,7 +86583,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "03b7ff4e15f9f22889db8064867e431e8b20d367",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
