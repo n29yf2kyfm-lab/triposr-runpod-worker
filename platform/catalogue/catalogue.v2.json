@@ -1298,10 +1298,7 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [
-   "wrxM_CarPaintNormal_Max1",
-   "wrxM_Chassis_Max1"
-  ],
+  "paintMaterialNames": [],
   "glassMaterialNames": [
    "wrxM_LightGlassNormal_Clear_Low1"
   ],
@@ -1310,16 +1307,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Ice Silver Metallic",
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/impreza_uc.glb",
   "fallbackGlbUrl": null,
@@ -1337,11 +1325,13 @@
   "publishedAt": null,
   "replacedAssetId": null,
   "needsHumanReview": [
-   "generation unconfirmed"
+   "generation unconfirmed",
+   "recolour audit FAILED (full render sweep 2026-07-23): body colour did not move; demoted to single-neutral"
   ],
   "notes": [
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "recolour-gate demote -> single-neutral (render sweep dist below threshold)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -1508,12 +1498,7 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [
-   "Meshesmeshes1chassisdummy0011Mtl",
-   "Meshesmeshes1chassisdummy0021Mtl",
-   "Meshesmeshes1chassisdummy0031Mtl",
-   "Meshesmeshes1chassisdummy0041Mtl"
-  ],
+  "paintMaterialNames": [],
   "glassMaterialNames": [
    "Meshesmeshes1bonnetok0021Mtl",
    "Meshesmeshes1doorlfok0061Mtl",
@@ -1529,16 +1514,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Moonbeam",
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc.glb",
   "fallbackGlbUrl": null,
@@ -1557,11 +1533,13 @@
   "replacedAssetId": null,
   "needsHumanReview": [
    "generation unconfirmed",
-   "year range unknown"
+   "year range unknown",
+   "recolour audit FAILED (full render sweep 2026-07-23): body colour did not move; demoted to single-neutral"
   ],
   "notes": [
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "recolour-gate demote -> single-neutral (render sweep dist below threshold)"
   ],
   "customization": {
    "colourOptions": [
@@ -2320,7 +2298,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fca2dad191bf85af2b615f1707cc32413526c0b0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -2542,7 +2526,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f5e5492018580fccca466f8d9be70e9c72d4baae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -2768,7 +2758,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6440c3b8388f26d0f08bd32f9b8e8761253ecce0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -2979,7 +2975,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "e74792033bc3dc8c5669ba0300459e403eacfe5d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -3412,7 +3414,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "c5204b6092124ba95ad76677903f5c62280097e9",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -3628,7 +3636,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "2cc197e697d0ca39e3aa0d6f21b07d1ea7be1de2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -4282,7 +4296,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a6287e03204de7701d94f6fe7becd93ec7a10332",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -4497,7 +4517,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a9d0b4f1ba4e13fe5ba2b6c8b3d50a06fa03bd70",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -4711,7 +4737,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fd102342fcb7a86f1d95a0b1280a5772786c8ad0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -4925,7 +4957,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "db6fad019fd81489f4d6fd726aaa0ee0f8dc8bbd",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -5139,7 +5177,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "d57ac78e639e9919e87b15b1ce6586a90b1639d0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -5348,7 +5392,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fff95afcd0244632f9325a52ef0465947d5b0a7a",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -5988,7 +6038,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ae55ec8e930d014b2dba6ec7a2ed301b5fe41d89",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -6565,7 +6621,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "e4a2235f4758b6131583355dc786c9d8d96a3dbb",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -6783,7 +6845,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "9078372c5ab7aa535a50fe8d2217d9ee56975cf1",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -7432,7 +7500,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "53d7e144252451dab53fe6a639905460a0338080",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -7641,7 +7715,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "eba2f00202b795188517c95336f6d54ed676780d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -7856,7 +7936,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "822aae23c2e55baace0e953dd0323b82988b1240",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -8071,7 +8157,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97f42f31e2e943db973c7793c21d148139f907fc",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -8663,7 +8755,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7fbe1cce92b745684a7f1325e3e242ac390a4e16",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -8873,7 +8971,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b850cc15e0999285e98e93115f7551892ffd8063",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -9083,7 +9187,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ca75ef422ddabf402fca5a7cd9235d57317a0920",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -9497,7 +9607,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "49d4bd61bbdb941a8ac7b154fbc3f07532596f2e",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -10356,7 +10472,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b24418cbfdf77b4d43a618bc9e19bb3dab1b6ab1",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -10571,7 +10693,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "105a1b551c9a86873599754998d5573667adace2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -11227,7 +11355,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "005f13e6f3398a46bb96afc6ffd2db9f15f5d276",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -11592,7 +11726,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "2b199e96f7decb1cc12f0ea46de3da6d2784d321",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -12029,7 +12169,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "3b4a78c121c13d75c7a3b58b8a2c525691d87dd2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -13313,7 +13459,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "5de3817eb999c3e46ab59f7c04b4b26671f56a55",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -13682,7 +13834,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6eeb06d2f35598b5ced59d76f9e06ea90b35d7f5",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -13893,7 +14051,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ff63a1da6bc9b3f0997e02f9fe6cabdecb9da06d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -14928,7 +15092,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "2235b10667ac38c612ab4fb1799abdd4048224be",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -15145,7 +15315,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "525c2f28fca3cc3b98da626f6f6acf60724c6b1b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -16028,7 +16204,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "9db99194b55a47d18abd0d6091db093c58b4f7a1",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -16465,7 +16647,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4bcd76a8e703fc142db88b95a14a57160db37688",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -16898,7 +17086,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "bfef5ce45b897f3530bf092728a4917ff4aed78c",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -17115,7 +17309,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "758b07b915199639b6a47a2499bd0d9289b943c0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -17332,7 +17532,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "504ce05db818a20c11573391fd2287464772bf1c",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -17542,7 +17748,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "8164e32f5d04e185c80ff7c18722a9b27c164b34",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -17765,7 +17977,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b3bcaf95978d7f45d4a7d0e947a5248853c14a62",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -18409,7 +18627,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "42545a4f9c5262c9ebb706f4210e15d27c703fdf",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -18626,7 +18850,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "022a512bd461816872573ae8d7fb21b40f132cbe",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -18844,7 +19074,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "558e4c1fce73e68fa5f10c59f9c963d27bd01e44",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -19060,7 +19296,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "63f9f53acc62bef3bc078bf7b023ed522686404d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -19110,16 +19352,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1.glb",
   "fallbackGlbUrl": null,
@@ -19136,12 +19369,15 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T21:16:18Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "recolour audit FAILED (full render sweep 2026-07-23): body colour did not move; demoted to single-neutral"
+  ],
   "notes": [
    "Source title: '2020 Maruti Suzuki Alto 800'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 633954, \"facesAfter\": 152841, \"ratio\": 0.237}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "recolour-gate demote -> single-neutral (render sweep dist below threshold)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -19714,7 +19950,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4e1944d861293c04d738dff8fd2eac3afe64a28b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -19932,7 +20174,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f71c14363935507fb9e0ebc1ed55126b796653c2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -20642,7 +20890,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ac68e43cdc5ec74d7530848fb0477e4fcb150125",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -21082,7 +21336,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ba4d9c2ad96fac5bbc338c76807ef6a2e051266f",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -21298,7 +21558,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ea6cafdb34d986cca586349e1c9c802ca0673648",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -21508,7 +21774,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "35df50e206cdc73109a9280d2db2042b24b5561a",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -21717,7 +21989,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "abd6e21aff9d26b43421baa7d876e44e1cae9cee",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -22363,7 +22641,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "5efdeb4bf5dfbbc274c4320e2fc27b0e0b0bc988",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -22784,7 +23068,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "75de6ad33777bf26b2b4c31283d3c411790758a8",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -23001,7 +23291,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "65e838f40241dfab5d6355f4db040299de2450a6",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -23434,7 +23730,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "8801a6f547d0f70e2c5f200d3d6195089683fcf3",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -23652,7 +23954,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "c8532eeffc3fdffeec26f48ec09fef2c8645f7b3",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -24093,7 +24401,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "2f417ad51177d87e0ae63b86c1cb3eebbc1c1c56",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -24511,7 +24825,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "bc9d11f2bda8c2d5c187c7915831ab137f20f20a",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -25171,7 +25491,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ed7751e2e60face23787858b917bad6303839df8",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -25387,7 +25713,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "abebf76fc2c119e81d8a4f452303b6e5728d321d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -25818,7 +26150,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "64c56fdd012d1f35b047a873f596a86de95cda08",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -26249,7 +26587,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "5dbb0d7a79d80cfc98dacb8a9b717272c971f25b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -27115,7 +27459,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "9d02c770c9c53518c04a3f6f0b6b0e49069678d0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -27551,7 +27901,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "570dfa4222a3a590c6a529735b5f9e7da1d464d8",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -27595,25 +27951,14 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [
-   "Car_paint.007"
-  ],
+  "paintMaterialNames": [],
   "glassMaterialNames": [],
   "defaultColourFamily": "silver",
   "renderColourLabel": "Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__white.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__silver.glb",
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__grey.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1.glb",
   "fallbackGlbUrl": null,
@@ -27630,12 +27975,15 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T14:07:58Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "recolour audit FAILED (full render sweep 2026-07-23): body colour did not move; demoted to single-neutral"
+  ],
   "notes": [
    "Source title: 'Audi A7 Sportback 2018 55 TFSI'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1284283, \"facesAfter\": 188241, \"ratio\": 0.117}",
    "2026-07-21 m0 salvage: worker auto-detect missed body material; set paintMaterialNames=['Car_paint.007'] explicitly (real body-paint material present in GLB). Re-baking 8 DVLA colours.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "recolour-gate demote -> single-neutral (render sweep dist below threshold)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -27979,7 +28327,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "231f6e78be492c0c7cc7fd641f8e76d52760d6da",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -28401,7 +28755,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4f117cc7d4402187618ef674c6d3b31dade196de",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -28609,7 +28969,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "250693963bb1a5e4b3e6615150fb27dbe485f909",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -28819,7 +29185,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "8ba003aa7ea348173de9a6b29b2999f5ad3e1c97",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -29033,7 +29405,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fa06f913b93c59262756aa41862be6eaa5cd96c9",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -29404,7 +29782,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "62cb54da74bbb24d491e52b3ac6a3875f05c0506",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -29828,7 +30212,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "5e5a5ed712d8b713378aca4f349ae714cdea9597",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -30044,7 +30434,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "2e4f00a297374d6ab6b57ba9109bce1d36aa185b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -30933,7 +31329,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "2c33f4da9e8de4edb58cba71aa9f35b78bc3aec2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -31152,7 +31554,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fde7e2da554fe560bfd863ca34eea3c4501f2e4d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -31368,7 +31776,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "9034181cf26dd64b5cf9005aa5bc04f1c36ccefd",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -31585,7 +31999,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6292255ccbb96cff0439c9a7493ee5136fb9b04e",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -32252,7 +32672,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "3bf3aca67a2afe2cf24c1effc25a3f880ce86fad",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -32916,7 +33342,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "1c2c9e456f5f605c832e1ceb063beb8bc4f612f9",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -35223,7 +35655,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "8f76767de57e530fc57280b35c1f596efa758727",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -35415,7 +35853,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "93b19d02e48e14761be3088005b93c5e289cfdee",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -35853,7 +36297,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a41da2de7596ef3e2a7d957b7184948e8230063b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -36289,7 +36739,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ea1e41ff9e6710a69adcc9cd0c16c9ed7c08ec9d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -36727,7 +37183,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "0200e59366d02b7cf7c91b67e80ba2b2a9c735c2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -36944,7 +37406,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b7740cbe192d64b94b9bfa5ed62afeda51119ad4",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -37160,7 +37628,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "471a26aa48180defbf99ce38bde7bf5439ae9109",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -37377,7 +37851,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "3448f8f3c0bf2e94ad392ada2cf79eabdda47185",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -37820,7 +38300,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4a49e97547c9f44a90589974870eef05dab4fe9b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -38039,7 +38525,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a5761867b30f1ae18f6ad9a5056a1925d374af9a",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -38256,7 +38748,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "21d27242a1951b1adabfd13671ab8256a9f50255",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -38695,7 +39193,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "37b4517d5f673176de3ed90aaca411646fc36b01",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -38911,7 +39415,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a5e0f4ed14b02dca4772ab8cd2e2a25d405f7a11",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -39127,7 +39637,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "1eafafb6b1a75e7c0052f7c7e778175e65c3e469",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -40235,7 +40751,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "29421609a78038811b1fedbaf0fd23902a27cc4c",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -40467,7 +40989,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "e5b1e63dbab487d077bdebc84462b47d186c774f",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -41299,7 +41827,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "cd2a5696ee01b2718013976c5b527ebc5336de68",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -41537,7 +42071,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "94813abeb1428dadcbcc7da4a84c9e68538e6c7f",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -41778,7 +42318,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "8a7749f8dbd929f0c818a7cec4609772dec799f9",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -42017,7 +42563,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a6e238a4826a2358e01b91cef6e342b0ce7b9fcc",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -42378,7 +42930,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "56d913a71bd9acc36b0a490648c096b4869ba3dc",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -42491,7 +43049,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b769a36bc80a58e00503df62044370c2c4746e76",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -42845,7 +43409,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "022a959bd4263c7fffa02eafd2287439afb9c498",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -43880,7 +44450,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "d9ea95af000dfdff8e714664262a546ca2b8223d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -44299,7 +44875,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "c17308420dfed8cb08c2f03dc09f1a38e0ff090d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -44512,7 +45094,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "64bd46ebc121fc3eadd08ea7da04cec0083a5fdb",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -44945,7 +45533,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fa57763095213470274471e1549c61c80a411f56",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -45158,7 +45752,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ad8b206b853850437f7d292d2713b54392f005d1",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -45372,7 +45972,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "c242585db5322739be47171f920d504706d65885",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -45586,7 +46192,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "612b70ee42f0fb65c4792b40dac8c335d67e90b8",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -45799,7 +46411,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "835e1d296c8427b9f27a57a93cc7d8ce572e97d7",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -46012,7 +46630,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7d4454b189d086729b6eaaf6147e2a2070cd7721",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -46448,7 +47072,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "e6c11420e8729f13b7e8f7765268d0d33a457e27",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -46661,7 +47291,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "82c1a9052224e24b1f73c65fe23cc6333503638f",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -46874,7 +47510,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "712dd912167dd0d79c0cce8dd64d54ea0a1145d5",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -47087,7 +47729,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a2fc2f7829a85ff730fbf7d1ce1742adf5634991",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -47301,7 +47949,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "32fba21d43efd9ebe9fff123f6226b3fb1797eaf",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -48607,7 +49261,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f70600ee9350da1c25e48b24a95ace4246c7b0fc",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -50283,7 +50943,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "3be7b6d6444d88de95c97212eaad1ba6843becaf",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -50497,7 +51163,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "e3de044f44b1e7dac57596abe9a6bd40870f8951",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -50929,7 +51601,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "27eb351c97d2e4686aced2d74d169f15ab7b09d7",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -51801,7 +52479,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "9dfb8cf9d4f86d29d5ec23e19e17774fe95de20b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -52014,7 +52698,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "17ed55c092997165b6223be4ec2a9580af335b1c",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -52064,16 +52754,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Sonic Silver",
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1.glb",
   "fallbackGlbUrl": null,
@@ -52090,10 +52771,13 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "recolour audit FAILED (full render sweep 2026-07-23): body colour did not move; demoted to single-neutral"
+  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 2cb8265d1ce84bc4a3145ce641c1435f (Lexus RC F (USC10)), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "recolour-gate demote -> single-neutral (render sweep dist below threshold)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -53019,7 +53703,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fbafd0e199b3331e9f550a9685ade95d9c55e56b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -53875,7 +54565,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "bfaab696bf7e3bd264bca655906b1fe14a610843",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -54745,7 +55441,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "5d9bbca6bab4c52f3564c023a352a3578b7b328a",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -55175,7 +55877,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "0ef3365bc3e7f1e18613b2a8369fe9f3fc53832e",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -55605,7 +56313,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "294364573171d6e1fba233f89832c684ee7c4b53",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -55818,7 +56532,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "2e0a1d1ea22fd80ff8381601b405ac9875029e0d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -56902,7 +57622,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "5ee819e90be0ef568cca322077ae20330b632fab",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -57115,7 +57841,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "d23d100fef8cc733d257bb9ea2e23cecb027fae9",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -57547,7 +58279,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b933aa7b68c99f3afe0cf4550e0359f1303d6a2f",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -58633,7 +59371,13 @@
    }
   },
   "defaultDvlaColour": "Yellow",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ecaccab9123249bedd5d2a76a50f9c01b9e0d30b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -59274,7 +60018,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "da5c688f8098512b5fe88204915ccce69203f115",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -59702,7 +60452,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "25d5085188149815b34e615d5fa808a60ed6045c",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -60135,7 +60891,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "0c0d6974c4283f9e2621c695fbabdac5f306fbcc",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -60785,7 +61547,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "d378e0ef0eb53fda71973d06bed25621d503b869",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -60998,7 +61766,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fea6d12746df9e7055ce0ea830d01293985c0c68",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -61427,7 +62201,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "cdab388763f700a10757f8c6c9911c8c37490fa4",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -61639,7 +62419,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4b5304b103a43fdbc0ed8ca3bc637d592be47433",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -62072,7 +62858,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "904e4912788d67ecca5281afde404faea00aa3d0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -62285,7 +63077,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fa688975b9ba63b41fc23167a3e2676eef64a3b0",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -62500,7 +63298,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ee1c5a6d125f2fb17bec8956d7c594a7630f9b81",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -62715,7 +63519,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "fcfa039dfe4dd194733f0e2f971a72dadfec9795",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -62932,7 +63742,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "22cdb5b4ccd53de9796e3f74e8d545ea6cbaddcd",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -63148,7 +63964,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "1688e39d8ebffc67f9f4b807ea551432d9d4e86a",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -63363,7 +64185,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "9551a6ecbca7af719a7b81189b2071f7032dde13",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -63580,7 +64408,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7e202025ef7a2e7b222483db8b1d54e1285ba2d6",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -64231,7 +65065,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "cb0d4facdb9915c6773d1f5c059541f1136637aa",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -64446,7 +65286,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4b76b7efcf8fd39495395431a721f768f3f8fe9c",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -64665,7 +65511,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "8af37e234a2ce0b8a9afc15333d66483ce94533b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -64883,7 +65735,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "22e2a16973e15d34fb1247fe0628ec13772f9893",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -65319,7 +66177,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6efeba95adc188d60b19bd99cda21306d4b0f65d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -65756,7 +66620,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "a48f4ffbd4f3ac5384270c2836b5fcab56b23641",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -66409,7 +67279,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7c575616dfc9b94b8e5625b5a72c476c722994a2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -66846,7 +67722,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "e5fc60fb795c89ffbdba6974ba2b5ae953324caf",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -67275,7 +68157,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "bcc3e9007be173ddbe937bf1ac77651b17d7f408",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -67488,7 +68376,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "1f6397c23016cd38e26a4357db9557542f06d38b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -67701,7 +68595,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "d1122735d1aefa4386e6a3481156954293212338",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -67919,7 +68819,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -69871,7 +70777,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4e73556fbe300ec2911b27e4c73151d38e504afa",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -70511,7 +71423,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "0a1e7a20bc6ea66630c3e53d44bcb25c0df46c72",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -71607,7 +72525,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "0667bd3cd7698c93d622e8151a2e207dd5737463",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -72043,7 +72967,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "369ed67c0342adaa0cbb7453f791e4d802b9db88",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -72485,7 +73415,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ba823d9b10198eadeed11443e231ea9e7d028cd7",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -72701,7 +73637,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "5ec39b15aabff0df2899816eaa9d81a3fcdcfefe",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -72919,7 +73861,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "384e18a9ef09a9cc75e9ae81ddc2e7a2b7dd16bf",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -73355,7 +74303,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f33d165142ca7535f7cfc74446f500e2e361ffee",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -73570,7 +74524,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "07bc674f17b74893a42717ae647c986dc56df0bd",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -73784,7 +74744,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "aeff444e95415e1469fdabaa5a4fed2789276eb8",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -73997,7 +74963,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "0a0ad5ae3b309dd9b03a616e87226548277cdbed",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -74211,7 +75183,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "05123ebaeec787fdcc64194e5ad80fa66b9f87a4",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -74428,7 +75406,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "02e0cf3ad03409328ca3ca869bdc939aba7907cc",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -74869,7 +75853,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "3ec5c8deafa24f9cd78da33b32996aeacc0a9e30",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -75083,7 +76073,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6bb683d475e0b906a1caefdc583b4b54ebc2e81e",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -76404,7 +77400,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "347994492ed1c73eb0f6b138c8bc6fb29a8e261d",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -76621,7 +77623,13 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "74fedb609451e29e9cf8d24905474379f22b399b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -76837,7 +77845,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "19f73d37e507444b9994bd1ee2b49687eebed8a4",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -77276,7 +78290,13 @@
    }
   },
   "defaultDvlaColour": "Yellow",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "21fdd9bd7547c899a386ea7dbc053b666324e6fe",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -77715,7 +78735,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b46c55abe2a1b6ae633ca7a8513123fbe2771fce",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -78153,7 +79179,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7cdb962feaa241146d265ca271f239bd546037d5",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -78367,7 +79399,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6efd7fb0df68ac5ce7eb80f5f3c98a6e18ee41f2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -78582,7 +79620,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4aab10ef8230a9d3e85293d02f6f33835df2f8c1",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -79018,7 +80062,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "dde8e2169b978b5d952aa5ed9c78294e74bdcc7e",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -79608,7 +80658,13 @@
    }
   },
   "defaultDvlaColour": "Yellow",
-  "oemPaintFinish": "Solid"
+  "oemPaintFinish": "Solid",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "02d1f30116b76c287104eaaea5d9bb7089968db7",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -80194,7 +81250,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "7f53dbbbf06c493baf4dd396c028b4d14c6362e3",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -80411,7 +81473,13 @@
    }
   },
   "defaultDvlaColour": "Yellow",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6b97aef8875359d7584a4d342e9ac5184fb2ed34",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -80624,7 +81692,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "92eb9f08274ab264f8d230fc3c28053597dbd3db",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -81281,7 +82355,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "aae08a20cab9b8953bd0f16522e203c739a4a1a3",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -81497,7 +82577,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "8f7e1b0e67b99d4dc9d70d8b9b8f64a1ab6d6f5b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -81938,7 +83024,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4c4837f81e063b4ace5fc3f33ee4dde116e8a259",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -82375,7 +83467,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "ddc6defd77a44e60e40cfa2e1896271d4d8c0c85",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -82591,7 +83689,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "32b9e0b4a1cb5ebfb85fee89b4c633d0c195fedb",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -83027,7 +84131,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "422c436d8f9bdd87fc4860e5c1fa4a0b46130210",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -83242,7 +84352,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "770462363e2db0529980827bee24525a52da5db6",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -83603,7 +84719,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "73c0ce43465d78964e90b52c48b7b77966c5bfb2",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -84024,7 +85146,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4fbd45b33774e4631aff1339cd98a42ac6423894",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -84281,25 +85409,14 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [
-   "M_2020_Renault_Espace_mat_2_009_NONE"
-  ],
+  "paintMaterialNames": [],
   "glassMaterialNames": [],
   "defaultColourFamily": "white",
   "renderColourLabel": "White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Diamond White",
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/RENAULT/renault-austral-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/RENAULT/renault-austral-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/RENAULT/renault-austral-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/RENAULT/renault-austral-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/RENAULT/renault-austral-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/RENAULT/renault-austral-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/RENAULT/renault-austral-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/RENAULT/renault-austral-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/RENAULT/renault-austral-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/RENAULT/renault-austral-v1.glb",
   "fallbackGlbUrl": null,
@@ -84316,10 +85433,13 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "recolour audit FAILED (full render sweep 2026-07-23): body colour did not move; demoted to single-neutral"
+  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 0e25e7fc073444ea9485f1fae903a0db (2022 Renault Austral), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "recolour-gate demote -> single-neutral (render sweep dist below threshold)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -84885,7 +86005,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b3632a38f1f3bbd9ce81bb93088eeeaf0f78f34b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -84926,25 +86052,14 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [
-   "sv1ev3_plastic_doorpanel"
-  ],
+  "paintMaterialNames": [],
   "glassMaterialNames": [],
   "defaultColourFamily": "white",
   "renderColourLabel": "White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Snow White Pearl",
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/KIA/kia-ev3-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/KIA/kia-ev3-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/KIA/kia-ev3-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/KIA/kia-ev3-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/KIA/kia-ev3-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/KIA/kia-ev3-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/KIA/kia-ev3-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/KIA/kia-ev3-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/KIA/kia-ev3-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/KIA/kia-ev3-v1.glb",
   "fallbackGlbUrl": null,
@@ -84961,10 +86076,13 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "recolour audit FAILED (full render sweep 2026-07-23): body colour did not move; demoted to single-neutral"
+  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 5ce33177bdf34fcfaa0d01cd6ec3515c (Kia Ev3), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "recolour-gate demote -> single-neutral (render sweep dist below threshold)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -85311,7 +86429,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "0eb83c77f82c1dc9e6ecfc4355471d597bfcd06b",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -85524,7 +86648,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "f224afe3650b71914514999a42b44bfffe566f84",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -85565,25 +86695,14 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [
-   "Heather_Soles"
-  ],
+  "paintMaterialNames": [],
   "glassMaterialNames": [],
   "defaultColourFamily": "white",
   "renderColourLabel": "White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/SSANGYONG/ssangyong-tivoli-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/SSANGYONG/ssangyong-tivoli-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/SSANGYONG/ssangyong-tivoli-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/SSANGYONG/ssangyong-tivoli-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/SSANGYONG/ssangyong-tivoli-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/SSANGYONG/ssangyong-tivoli-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/SSANGYONG/ssangyong-tivoli-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/SSANGYONG/ssangyong-tivoli-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/SSANGYONG/ssangyong-tivoli-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/SSANGYONG/ssangyong-tivoli-v1.glb",
   "fallbackGlbUrl": null,
@@ -85600,10 +86719,13 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "recolour audit FAILED (full render sweep 2026-07-23): body colour did not move; demoted to single-neutral"
+  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 805ee9bb23fc4a869b3490e17ec06ec3 (2015 Ssangyong Tivoli), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "recolour-gate demote -> single-neutral (render sweep dist below threshold)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -86157,7 +87279,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Pearl"
+  "oemPaintFinish": "Pearl",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "b99d813aee6248dc37536433d1f4be1e348e32ac",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -86370,7 +87498,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "e3108ff611bfdd4d5a3b42030c003ac33189f88c",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -86802,7 +87936,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "4486b4afcdd061c20e1df549fcd945e6ffa1fa55",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -87015,7 +88155,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "6b92ea0c208571188d36bb24c2301fc82fc8a7d7",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -87231,7 +88377,13 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "2e9d24d23166457beb2bbeca41e8da0bf4d72863",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
@@ -87446,7 +88598,13 @@
    }
   },
   "defaultDvlaColour": "White",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "51769f65d2e193e80d60a31265b45919fe0e9b0a",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  },
  {
   "schemaVersion": 2,
