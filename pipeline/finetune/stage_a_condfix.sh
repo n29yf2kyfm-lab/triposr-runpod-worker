@@ -47,6 +47,69 @@ bash data_toolkit/setup.sh || echo "setup.sh failed (continuing)"
 # upstream's installer uses sudo which containers lack — install directly
 apt-get update -qq && apt-get install -y -qq libxi6 libxkbcommon-x11-0 libxfixes3 libxrender1 libsm6 libgl1 2>&1 | tail -1 || true
 
+status webp-to-png
+# ROOT CAUSE (proven by un-devnulled blender log 2026-07-24): the 218 failing
+# assets embed WebP textures (EXT_texture_webp) — Blender 3.0.1's glTF importer
+# (pinned by upstream) predates WebP. Convert the textures to PNG in-place in
+# the raw GLBs; geometry untouched, trainer never reads raw/, and the sha256
+# filenames stay as row keys (metadata is NOT rewritten — a concurrent Stage B
+# resume re-reads it). Idempotent: files without webp are left byte-identical.
+python3 - <<'PY'
+import glob, io, json, os, struct
+from PIL import Image
+
+def convert(path):
+    raw=open(path,'rb').read()
+    if raw[:4]!=b'glTF': return "not-glb"
+    ln=struct.unpack('<I',raw[8:12])[0]
+    off=12; js=bn=None
+    while off<ln:
+        clen,ctyp=struct.unpack('<I4s',raw[off:off+8]); data=raw[off+8:off+8+clen]
+        if ctyp==b'JSON': js=json.loads(data)
+        elif ctyp==b'BIN\x00': bn=bytearray(data)
+        off+=8+clen
+    if js is None or 'images' not in js: return "no-images"
+    if 'EXT_texture_webp' not in (js.get('extensionsUsed') or []): return "no-webp"
+    bvs=js.get('bufferViews',[])
+    changed=False
+    for img in js['images']:
+        if img.get('mimeType')!='image/webp': continue
+        bv=bvs[img['bufferView']]
+        s=bv.get('byteOffset',0); e=s+bv['byteLength']
+        png=io.BytesIO(); Image.open(io.BytesIO(bytes(bn[s:e]))).save(png,'PNG')
+        pad=(-len(bn))%4; bn.extend(b'\0'*pad)
+        bvs.append({'buffer':0,'byteOffset':len(bn),'byteLength':len(png.getvalue())})
+        bn.extend(png.getvalue())
+        img['bufferView']=len(bvs)-1; img['mimeType']='image/png'; changed=True
+    for tex in js.get('textures',[]):
+        ext=(tex.get('extensions') or {}).pop('EXT_texture_webp',None)
+        if ext is not None:
+            tex.setdefault('source',ext.get('source'))
+            if tex['source'] is None: tex['source']=ext.get('source')
+            if not tex['extensions']: del tex['extensions']
+            changed=True
+    for key in ('extensionsUsed','extensionsRequired'):
+        if key in js and 'EXT_texture_webp' in js[key]:
+            js[key]=[x for x in js[key] if x!='EXT_texture_webp']
+            if not js[key]: del js[key]
+    if not changed: return "no-webp"
+    js['buffers'][0]['byteLength']=len(bn)
+    jb=json.dumps(js,separators=(',',':')).encode(); jb+=b' '*((-len(jb))%4)
+    bb=bytes(bn)+b'\0'*((-len(bn))%4)
+    out=struct.pack('<4sII',b'glTF',2,12+8+len(jb)+8+len(bb))
+    out+=struct.pack('<I4s',len(jb),b'JSON')+jb+struct.pack('<I4s',len(bb),b'BIN\x00')+bb
+    open(path,'wb').write(out)
+    return "converted"
+
+stats={}
+for p in sorted(glob.glob('/workspace/alamcars/raw/*.glb')):
+    try: r=convert(p)
+    except Exception as e: r=f"ERROR {str(e)[:60]}"
+    stats[r]=stats.get(r,0)+1
+    if r.startswith(("converted","ERROR")): print(os.path.basename(p)[:12], r)
+print("WEBP2PNG:", stats)
+PY
+
 status reproduce-one-failure
 # upstream devnulls blender output, hiding why 218 instances fail in ~1.5s;
 # un-silence it so the real per-instance error lands in this log
