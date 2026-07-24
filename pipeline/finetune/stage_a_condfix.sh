@@ -19,6 +19,9 @@ status boot
 nvidia-smi -L || true
 cd /app/TRELLIS.2 || { status FATAL-no-trellis2; sleep infinity; }
 export PYTHONPATH=/app/TRELLIS.2:$PYTHONPATH
+# datasets/ ships empty upstream (subset modules are user-provided), so a fresh
+# container has no such dir — py3 namespace packages make it importable bare
+mkdir -p datasets
 cp "$ROOT/AlamCars.py" datasets/ || { status FATAL-no-shim; sleep infinity; }
 
 status audit-before
