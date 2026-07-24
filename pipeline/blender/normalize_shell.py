@@ -14,6 +14,7 @@ Run: blender -b -noaudio --python normalize_shell.py -- in.glb out.glb
 import bpy, sys, numpy as np, mathutils
 argv = sys.argv[sys.argv.index("--")+1:]
 SRC, DST = argv[0], argv[1]
+TRUE_LEN_MM = float(argv[2]) if len(argv) > 2 else None   # factory length -> true-scale the shell
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=SRC)
 obj=[o for o in bpy.context.scene.objects if o.type=="MESH"][0]
@@ -34,6 +35,14 @@ vs2=np.array([(obj.matrix_world@v.co)[:] for v in obj.data.vertices])
 lo2,hi2=vs2.min(0),vs2.max(0); c2=(lo2+hi2)/2
 obj.location = (obj.location[0]-c2[0], obj.location[1]-c2[1], obj.location[2]-lo2[2])
 bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
+if TRUE_LEN_MM:
+    vs3=np.array([(obj.matrix_world@v.co)[:] for v in obj.data.vertices])
+    span_y=vs3[:,1].max()-vs3[:,1].min()
+    if span_y>0:
+        f=(TRUE_LEN_MM/1000.0)/span_y
+        obj.scale=(f,f,f)
+        bpy.ops.object.transform_apply(scale=True)
+        print(f"TRUE_SCALE applied: length {span_y:.3f} -> {TRUE_LEN_MM/1000.0:.3f}m (x{f:.4f})")
 bpy.ops.export_scene.gltf(filepath=DST, export_format="GLB")
 d=hi2-lo2
 print(f"NORMALIZE_OK L(y)={d[max(L,0)]:.2f} orig-span={span.round(2).tolist()} -> Y-length,Z-up")

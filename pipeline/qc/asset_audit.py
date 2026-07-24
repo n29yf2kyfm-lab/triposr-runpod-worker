@@ -176,10 +176,19 @@ def audit(path, ref_lw=None, min_interior_verts=1500, wheel_std=0.22, paint_std=
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("glb")
+    ap.add_argument("--make", default=None, help="with --model: derive --ref-lw from platform/geometry/vehicle_dims.csv")
+    ap.add_argument("--model", default=None)
     ap.add_argument("--ref-lw", type=float, default=None,
                     help="real vehicle length/width ratio, e.g. 4258/1790=2.38")
     ap.add_argument("--json")
     a = ap.parse_args()
+    if a.ref_lw is None and a.make and a.model:
+        import os as _os, sys as _sys
+        _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))), "geometry"))
+        from dims_lookup import ref_lw as _rlw
+        a.ref_lw = _rlw(a.make, a.model)
+        if a.ref_lw:
+            print(f"ref L/W {a.ref_lw:.3f} from vehicle_dims.csv ({a.make} {a.model})")
     r = audit(a.glb, a.ref_lw)
     print(json.dumps(r, indent=1))
     if a.json:
