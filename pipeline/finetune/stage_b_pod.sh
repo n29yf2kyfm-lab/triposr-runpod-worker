@@ -25,10 +25,13 @@ if "aesthetic_score" not in m.columns:
     # internal curation flag for the training filter (our own curated set),
     # NOT a public-fact claim; datasets filter on this column unconditionally
     m["aesthetic_score"]=6.0
-    m.to_csv(p,index=False)
-    print("aesthetic_score column injected (6.0)")
-else:
-    print("aesthetic_score already present")
+# encode steps completed 365/365 in Stage A but their record merge never reached
+# metadata.csv; the training datasets filter on these flags
+for col in ("shape_latent_encoded","ss_latent_encoded"):
+    if col not in m.columns:
+        m[col]=True
+m.to_csv(p,index=False)
+print("metadata flags ready:",[c for c in m.columns])
 PY
 
 status build-smoke-config
@@ -70,8 +73,8 @@ python3 - <<'PY'
 from trellis2 import models
 import glob
 tried=[]
-for name in ("shape_slat_flow_model_1024","shape_slat_flow_model_512",
-             "slat_flow_img2shape_1024","slat_flow_img2shape_512"):
+for name in ("slat_flow_img2shape_dit_1_3B_512_bf16",
+             "slat_flow_img2shape_dit_1_3B_1024_bf16"):
     try:
         m=models.from_pretrained(f"microsoft/TRELLIS.2-4B/ckpts/{name}")
         n=sum(p.numel() for p in m.parameters())
