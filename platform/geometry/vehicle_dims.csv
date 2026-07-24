@@ -1,0 +1,6 @@
+make,model,generation,length_mm,width_mm,height_mm,wheelbase_mm,source_page,source,fetched
+mercedes-benz,e-class,w213,4923,1852,1468,2939,Mercedes-Benz E-Class (W213),en.wikipedia,2026-07-24
+alfa-romeo,stelvio,,4687,1903,1648,2818,Alfa Romeo Stelvio,en.wikipedia,2026-07-24
+subaru,impreza,,4340,1690,1405,2520,Subaru Impreza,en.wikipedia,2026-07-24
+bentley,continental,,4808,1918,1390,2746,Bentley Continental GT,en.wikipedia,2026-07-24
+lamborghini,urus,,5113,2017,1638,3002,Lamborghini Urus,en.wikipedia,2026-07-24
