@@ -111,11 +111,20 @@ def main():
                     done[(r["make"].lower(), r["model"].lower())] = r
 
     today = datetime.date.today().isoformat()
+    cols = ["make", "model", "generation", "length_mm", "width_mm", "height_mm",
+            "wheelbase_mm", "source_page", "source", "fetched"]
+    os.makedirs(os.path.dirname(a.out), exist_ok=True)
+    # incremental: rewrite header now, append each row as it lands (a crash
+    # loses at most the in-flight model, never the run)
+    outf = open(a.out, "w", newline="")
+    writer = csv.DictWriter(outf, fieldnames=cols)
+    writer.writeheader()
     rows, hit = [], 0
     for i, t in enumerate(targets):
         prev = done.get((t["make"].lower(), t["model"].lower()))
         if prev:
             rows.append(prev); hit += 1
+            writer.writerow({k: prev.get(k, "") for k in cols}); outf.flush()
             continue
         # generation-specific page first (e.g. "Volkswagen Golf Mk7"), then base model
         queries = []
@@ -136,19 +145,14 @@ def main():
                "source_page": page or "", "source": "en.wikipedia", "fetched": today}
         row.update({c: dims.get(c, "") for c in SANE})
         rows.append(row)
+        writer.writerow({k: row.get(k, "") for k in cols}); outf.flush()
         if dims:
             hit += 1
         print(f"[{i+1}/{len(targets)}] {t['make']} {t['model']}: "
               f"{dims if dims else 'NO DIMS'} ({page})", flush=True)
         time.sleep(a.sleep)
 
-    os.makedirs(os.path.dirname(a.out), exist_ok=True)
-    cols = ["make", "model", "generation", "length_mm", "width_mm", "height_mm",
-            "wheelbase_mm", "source_page", "source", "fetched"]
-    with open(a.out, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=cols)
-        w.writeheader()
-        w.writerows(rows)
+    outf.close()
     full = sum(1 for r in rows if r["length_mm"] and r["width_mm"])
     print(f"\nVEHICLE_DIMS {a.out}: {len(rows)} models, {hit} with any dims, "
           f"{full} with length+width")
