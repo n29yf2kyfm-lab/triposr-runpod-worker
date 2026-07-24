@@ -24,17 +24,29 @@ m=pd.read_csv(p).set_index("sha256")
 # merge every step's new_records (incl. the encoders' shape/ss token counts +
 # encoded flags that build_metadata never picked up)
 merged=0
-for f in glob.glob("/workspace/alamcars/**/new_records/part_*.csv", recursive=True):
-    try:
-        df=pd.read_csv(f)
-        if "sha256" in df.columns:
-            m=df.set_index("sha256").combine_first(m); merged+=1
-    except Exception as e:
-        print("skip",f,str(e)[:60])
+# Stage A's build_metadata consumed each step's new_records into PER-DIRECTORY
+# metadata.csv files (upstream layout); sweep them all, plus any leftovers.
+pats=["/workspace/alamcars/*/metadata.csv",
+      "/workspace/alamcars/*/*/metadata.csv",
+      "/workspace/alamcars/**/new_records/part_*.csv",
+      "/workspace/alamcars/**/merged_records/*.csv"]
+seen=set()
+for pat in pats:
+    for f in glob.glob(pat, recursive=True):
+        if f in seen or f=="/workspace/alamcars/metadata.csv": continue
+        seen.add(f)
+        try:
+            df=pd.read_csv(f)
+            if "sha256" in df.columns:
+                m=df.set_index("sha256").combine_first(m); merged+=1
+        except Exception as e:
+            print("skip",f,str(e)[:60])
 if "aesthetic_score" not in m.columns:
     m["aesthetic_score"]=6.0    # our curation flag for the dataset filter
 m.reset_index().to_csv(p,index=False)
 print(f"merged {merged} record files; columns: {sorted(m.columns)}")
+if "shape_latent_tokens" not in m.columns:
+    print("CONTRACT-MISSING shape_latent_tokens — training will fail; check volume layout")
 PYIN
 
 status build-smoke-config
