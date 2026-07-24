@@ -15,7 +15,13 @@ RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
 WORKDIR /app
 # --recursive: o-voxel and other pieces live as submodules inside the repo, and
 # setup.sh copies o-voxel/ out of the checkout, so it must be present.
-RUN git clone -b main --recurse-submodules https://github.com/microsoft/TRELLIS.2.git
+# PINNED to a known-good commit (2026-07-24) so builds are reproducible and
+# upstream main cannot silently change our worker's behaviour. Bump the hash
+# deliberately when upgrading; Alam-3D fine-tune work assumes this revision.
+ARG TRELLIS2_COMMIT=75fbf0183001ed9876c8dbb35de6b68552ee08bd
+RUN git clone https://github.com/microsoft/TRELLIS.2.git && \
+    cd TRELLIS.2 && git checkout ${TRELLIS2_COMMIT} && \
+    git submodule update --init --recursive
 
 WORKDIR /app/TRELLIS.2
 
