@@ -11,6 +11,11 @@ mkdir -p "$OUT/logs"
 exec > >(tee -a "$OUT/logs/stage_b.log") 2>&1
 status(){ printf '{"step":"%s","at":"%s"}\n' "$1" "$(date -u +%FT%TZ)" > "$OUT/logs/status.json"; echo "===== $1 ====="; }
 status boot
+# RunPod writes pod env vars to /etc/rp_environment; non-interactive boot
+# shells don't source it, which strands HF_TOKEN outside the process env
+[ -f /etc/rp_environment ] && source /etc/rp_environment
+export HF_TOKEN HUGGING_FACE_HUB_TOKEN 2>/dev/null
+[ -n "$HF_TOKEN" ] && echo "HF token: present (${#HF_TOKEN} chars)" || echo "HF token: MISSING from env"
 nvidia-smi -L || true
 cd /app/TRELLIS.2 || { status FATAL-no-trellis2; sleep infinity; }
 export PYTHONPATH=/app/TRELLIS.2:$PYTHONPATH
