@@ -33,7 +33,7 @@ mercedes-benz,C-Class W202,,4505,1720,1425,2670,Mercedes-Benz C-Class (W202),en.
 volkswagen,Polo GTI,,,,,,Volkswagen Golf,en.wikipedia,2026-07-24
 skoda,Octavia Estate,,4511,1731,1429,2512,Škoda Octavia,en.wikipedia,2026-07-24
 renault,megane,,,,,2580,Renault Mégane,en.wikipedia,2026-07-24
-honda,hr-v,,,1695,1590,,Honda HR-V,en.wikipedia,2026-07-24
+honda,hr-v,,4090,1635,1290,2320,Honda Prelude,en.wikipedia,2026-07-24
 vauxhall,mokka,,4280,1775,1646,2555,Opel Mokka,en.wikipedia,2026-07-24
 seat,ibiza,,3683,1610,1395,2443,SEAT Ibiza,en.wikipedia,2026-07-24
 tesla,model-3,,,,,,Tesla Model 3,en.wikipedia,2026-07-24
@@ -41,9 +41,9 @@ citroen,c4,,4274,1769,1458,2608,Citroën C4,en.wikipedia,2026-07-24
 audi,q5,,4639,1880,1650,2807,Audi Q5,en.wikipedia,2026-07-24
 hyundai,Kona (2019),,,1800,,2600,Hyundai Kona,en.wikipedia,2026-07-24
 bmw,m4,,4671,1870,1383,2812,BMW M4,en.wikipedia,2026-07-24
-bmw,3 Series Touring,,,,,,BMW 3 Series,en.wikipedia,2026-07-24
+bmw,3 Series Touring,,4433,1710,,2700,BMW 3 Series (E36),en.wikipedia,2026-07-24
 bmw,5-series,,,,,,BMW 5 Series,en.wikipedia,2026-07-24
-bmw,Z4 Coupe (2008),,,,,,BMW Z,en.wikipedia,2026-07-24
+bmw,Z4 Coupe (2008),,4090,1780,1300,2495,BMW Z4 (E85),en.wikipedia,2026-07-24
 peugeot,307,,4210,1730,1510,2608,Peugeot 307,en.wikipedia,2026-07-24
 nissan,micra,,3785,1560,1395,2300,Nissan Micra,en.wikipedia,2026-07-24
 alfa-romeo,8c,,4381,1894,1341,2646,Alfa Romeo 8C Competizione,en.wikipedia,2026-07-24
@@ -58,10 +58,10 @@ nissan,navara,,,,,,Nissan Navara,en.wikipedia,2026-07-24
 bmw,m3,F80,4345,1680,1370,2562,BMW M3,en.wikipedia,2026-07-24
 audi,e-tron gt,,4990,1960,1410,2900,Audi e-tron GT,en.wikipedia,2026-07-24
 mercedes-benz,sl,,4520,1790,1300,2400,Mercedes-Benz SL-Class,en.wikipedia,2026-07-24
-bmw,M3 E46,E46,,,,2725,BMW 3 Series (E46),en.wikipedia,2026-07-24
-ford,focus,,,,,,Ford Focus,en.wikipedia,2026-07-24
+bmw,M3 E46,E46,4345,1680,1370,2562,BMW M3,en.wikipedia,2026-07-24
+ford,focus,,4378,1825,1454,2700,Ford Focus (fourth generation),en.wikipedia,2026-07-24
 mercedes-benz,amg gt,,,,,,Mercedes-AMG GT,en.wikipedia,2026-07-24
-honda,accord,,,1620,,2380,Honda Accord,en.wikipedia,2026-07-24
+honda,accord,,4726,1840,1440,2705,Honda Accord (Japan and Europe eighth generation),en.wikipedia,2026-07-24
 volkswagen,tiguan,,,1809,,,Volkswagen Tiguan,en.wikipedia,2026-07-24
 hyundai,kona,,,1800,,2600,Hyundai Kona,en.wikipedia,2026-07-24
 fiat,500,,2970,1320,1320,1840,Fiat 500,en.wikipedia,2026-07-24
