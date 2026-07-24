@@ -16,23 +16,26 @@ cd /app/TRELLIS.2 || { status FATAL-no-trellis2; sleep infinity; }
 export PYTHONPATH=/app/TRELLIS.2:$PYTHONPATH
 pip install -q tensorboard pandas easydict || true
 
-status metadata-aesthetic
-python3 - <<'PY'
-import pandas as pd
+status metadata-merge
+python3 - <<'PYIN'
+import glob, pandas as pd
 p="/workspace/alamcars/metadata.csv"
-m=pd.read_csv(p)
+m=pd.read_csv(p).set_index("sha256")
+# merge every step's new_records (incl. the encoders' shape/ss token counts +
+# encoded flags that build_metadata never picked up)
+merged=0
+for f in glob.glob("/workspace/alamcars/**/new_records/part_*.csv", recursive=True):
+    try:
+        df=pd.read_csv(f)
+        if "sha256" in df.columns:
+            m=df.set_index("sha256").combine_first(m); merged+=1
+    except Exception as e:
+        print("skip",f,str(e)[:60])
 if "aesthetic_score" not in m.columns:
-    # internal curation flag for the training filter (our own curated set),
-    # NOT a public-fact claim; datasets filter on this column unconditionally
-    m["aesthetic_score"]=6.0
-# encode steps completed 365/365 in Stage A but their record merge never reached
-# metadata.csv; the training datasets filter on these flags
-for col in ("shape_latent_encoded","ss_latent_encoded"):
-    if col not in m.columns:
-        m[col]=True
-m.to_csv(p,index=False)
-print("metadata flags ready:",[c for c in m.columns])
-PY
+    m["aesthetic_score"]=6.0    # our curation flag for the dataset filter
+m.reset_index().to_csv(p,index=False)
+print(f"merged {merged} record files; columns: {sorted(m.columns)}")
+PYIN
 
 status build-smoke-config
 python3 - <<'PY'
