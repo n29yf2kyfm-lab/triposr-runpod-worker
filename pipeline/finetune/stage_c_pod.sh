@@ -61,6 +61,25 @@ if "ALAM3D_INIT_FROM" not in s:
 PY
 export ALAM3D_INIT_FROM="microsoft/TRELLIS.2-4B/ckpts/slat_flow_img2shape_dit_1_3B_512_bf16"
 
+status export-smoke-loss
+python3 - <<'PY'
+# print the Stage B smoke run's loss curve (the last unverified smoke verdict)
+import glob
+try:
+    from tensorboard.backend.event_processing.event_accumulator import EventAccumulator
+    evs=sorted(glob.glob("/workspace/alam3d_smoke/**/events.out.tfevents.*", recursive=True))
+    for ev in evs:
+        ea=EventAccumulator(ev); ea.Reload()
+        for tag in ea.Tags().get("scalars", []):
+            if "loss" in tag.lower():
+                pts=ea.Scalars(tag)
+                if not pts: continue
+                sampled=pts[::max(1,len(pts)//30)]
+                print(f"SMOKE_LOSS {tag} ({len(pts)} pts): "+", ".join(f"{p.step}:{p.value:.4f}" for p in sampled))
+except Exception as e:
+    print("smoke loss export failed:", e)
+PY
+
 status metadata-merge
 python3 - <<'PYIN'
 import glob, pandas as pd
@@ -108,9 +127,11 @@ import json
 c=json.load(open("configs/gen/slat_flow_img2shape_dit_1_3B_512_bf16.json"))
 t=c["trainer"]["args"]
 # short low-LR domain fine-tune: 6000 steps, LR 1e-5 (10x below scratch),
-# checkpoint hourly-ish; sampling disabled via ALAM3D_NO_SNAPSHOT
+# checkpoint hourly-ish; sampling disabled via ALAM3D_NO_SNAPSHOT.
+# Single-A100 economy mode: effective batch 4 via gradient accumulation
+# (batch_split micro-batches of 1) — fits 80GB and the account balance.
 t.update({"max_steps":6000,"i_log":10,"i_save":1000,"i_sample":10**9,
-          "batch_size_per_gpu":1,"batch_split":1,"learning_rate":1e-5})
+          "batch_size_per_gpu":4,"batch_split":4,"learning_rate":1e-5})
 c["dataset"]["args"]["min_aesthetic_score"]=0.0
 c["dataset"]["args"]["max_tokens"]=32768
 json.dump(c,open("/workspace/alamcars/stage_c_cfg.json","w"),indent=1)
