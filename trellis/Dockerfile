@@ -48,8 +48,12 @@ RUN pip install --no-cache-dir --upgrade "setuptools>=64" wheel ninja psutil pac
 # non-interactive container (proven on the v1 image: the whole `. ./setup.sh`
 # step ran in <1s and only printed --help, installing nothing). So we run the
 # exact commands from setup.sh directly instead of invoking its CLI.
+# transformers is PINNED: TRELLIS.2's conditioner iterates DINOv3ViTModel.layer
+# directly, and transformers 5.4+ moved those layers into a nested encoder
+# ("'DINOv3ViTModel' object has no attribute 'layer'" at train/inference time).
+# 4.57.x is the upstream-era API that DINOv3 support shipped with.
 RUN pip install --no-cache-dir imageio imageio-ffmpeg tqdm easydict \
-        opencv-python-headless ninja trimesh transformers \
+        opencv-python-headless ninja trimesh "transformers==4.57.6" \
         tensorboard pandas lpips zstandard kornia timm && \
     pip install --no-cache-dir git+https://github.com/EasternJournalist/utils3d.git@9a4eb15e4021b67b12c460c7057d642626897ec8
 

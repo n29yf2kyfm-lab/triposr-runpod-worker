@@ -20,6 +20,11 @@ nvidia-smi -L || true
 cd /app/TRELLIS.2 || { status FATAL-no-trellis2; sleep infinity; }
 export PYTHONPATH=/app/TRELLIS.2:$PYTHONPATH
 pip install -q tensorboard pandas easydict || true
+# TRELLIS.2 iterates DINOv3ViTModel.layer directly; transformers >=5.4 moved
+# the layers into a nested encoder, so the unpinned image install crashes the
+# conditioner. Pin to the upstream-era API until the image itself is pinned.
+pip install -q "transformers==4.57.6" || true
+python3 -c "import transformers; print('transformers', transformers.__version__)"
 
 status metadata-merge
 python3 - <<'PYIN'
