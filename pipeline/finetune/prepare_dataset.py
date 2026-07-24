@@ -68,7 +68,9 @@ def foreach_instance(metadata, download_root, func, max_workers=None, desc='', n
     def call(row):
         try:
             if no_file:
-                return func(row)
+                # upstream per-instance funcs keep a vestigial first arg
+                # (file) even when data comes from earlier dumps via sha256
+                return func(None, row)
             return func(os.path.join(download_root, 'raw', row['local_path']), row)
         except Exception as e:  # keep the batch alive; record nothing for failures
             print(f"foreach_instance error {str(row.get('sha256'))[:12]}: {e}")

@@ -28,7 +28,7 @@ run dump_mesh    python3 data_toolkit/dump_mesh.py    AlamCars --root "$ROOT"
 run dump_pbr     python3 data_toolkit/dump_pbr.py     AlamCars --root "$ROOT"
 run dual_grid    python3 data_toolkit/dual_grid.py    AlamCars --root "$ROOT" --resolution 256,512,1024
 run voxelize_pbr python3 data_toolkit/voxelize_pbr.py AlamCars --root "$ROOT"
-run render_cond  python3 data_toolkit/render_cond.py  AlamCars --root "$ROOT" --num_views 16
+run render_cond  python3 data_toolkit/render_cond.py  AlamCars --root "$ROOT" --num_cond_views 16
 run enc_shape    python3 data_toolkit/encode_shape_latent.py --root "$ROOT" --resolution 1024
 run enc_pbr      python3 data_toolkit/encode_pbr_latent.py   --root "$ROOT"
 LNAME=$(ls "$ROOT/shape_latents" 2>/dev/null | head -1)
