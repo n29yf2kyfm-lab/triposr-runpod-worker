@@ -8,7 +8,12 @@ ROOT=/workspace/alamcars
 OUT=/workspace/alam3d_smoke
 mkdir -p "$OUT/logs"
 ( cd "$OUT/logs" && python3 -m http.server 8000 >/dev/null 2>&1 & )
-exec > >(tee -a "$OUT/logs/stage_b.log") 2>&1
+# Per-run log (pod id + boot time): the old single append-log mixed nine runs'
+# errors together and nearly caused misdiagnoses. stage_b.log stays as a
+# symlink to the current run so existing pollers keep working.
+RUN_LOG="stage_b_$(hostname)_$(date -u +%Y%m%dT%H%M%SZ).log"
+ln -sf "$RUN_LOG" "$OUT/logs/stage_b.log"
+exec > >(tee -a "$OUT/logs/$RUN_LOG") 2>&1
 status(){ printf '{"step":"%s","at":"%s"}\n' "$1" "$(date -u +%FT%TZ)" > "$OUT/logs/status.json"; echo "===== $1 ====="; }
 status boot
 # RunPod writes pod env vars to /etc/rp_environment; non-interactive boot
@@ -25,6 +30,12 @@ pip install -q tensorboard pandas easydict || true
 # conditioner. Pin to the upstream-era API until the image itself is pinned.
 pip install -q "transformers==4.57.6" || true
 python3 -c "import transformers; print('transformers', transformers.__version__)"
+# Upstream basic.py samples whenever step % i_sample == 0, and 0 % n == 0 —
+# so a 64-image snapshot always burns GPU time at step 0 no matter how large
+# i_sample is. Guard it so only real intervals (and never step 0) sample.
+sed -i 's/if self.step % self.i_sample == 0:/if self.step and self.step % self.i_sample == 0:/' \
+    trellis2/trainers/basic.py
+grep -n "self.i_sample == 0" trellis2/trainers/basic.py | head -2
 
 status metadata-merge
 python3 - <<'PYIN'
@@ -86,7 +97,7 @@ t.update({"max_steps":300,"i_log":10,"i_save":300,"i_sample":1000000,
 c["dataset"]["args"]["min_aesthetic_score"]=4.5
 c["dataset"]["args"]["max_tokens"]=32768   # 8192 admitted only 5 of 365 cars
 json.dump(c,open("/workspace/alamcars/smoke_cfg.json","w"),indent=1)
-print("smoke config written (300 steps, bs 2)")
+print("smoke config written (300 steps, bs 1)")
 PY
 
 status tryrun
