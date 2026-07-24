@@ -65,9 +65,11 @@ for p in me.polygons:
         c += vs[vi_]
     c /= len(p.vertices)
     n = np.array(p.normal[:])
-    inwheel = any((c[LA] - ay) ** 2 + (c[2] - czw) ** 2 < (R * 1.18) ** 2
-                  for ay in (front + R * 0.2, rear - R * 0.2))
-    if inwheel and c[2] < lo[2] + 0.42 * H:
+    # wheel = tight circle around each arch centre AND low AND outward-ish facing,
+    # so rocker/door skin between the arches is not swept into the dark material
+    inwheel = any((c[LA] - ay) ** 2 + (c[2] - czw) ** 2 < (R * 0.92) ** 2
+                  for ay in (front, rear))
+    if inwheel and c[2] < lo[2] + 0.32 * H and abs(n[WA]) > 0.30:
         p.material_index = wi; nwheel += 1
         continue
     if c[2] > belt_z:
@@ -85,7 +87,7 @@ cab0 = front + (rear - front) * 0.18
 cab1 = front + (rear - front) * 0.92
 floor_z = lo[2] + 0.30 * H
 belt = lo[2] + 0.58 * H
-iw = 0.62 * W
+iw = 0.46 * W   # cabin floor width — well inside the door skin (was 0.62, which splayed seats through the doors on narrow-cabin shells)
 
 def box(name, center, size, m, seg=3):
     bpy.ops.mesh.primitive_cube_add(size=1)
