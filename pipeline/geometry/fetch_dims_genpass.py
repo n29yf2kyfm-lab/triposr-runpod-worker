@@ -14,6 +14,7 @@ import argparse, csv, datetime, json, os, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from fetch_dims import SANE, extract_dims, search_page, wikitext, REPO
+from validate_dims import page_matches
 
 CSV = os.path.join(REPO, "platform", "geometry", "vehicle_dims.csv")
 CAT = os.path.join(REPO, "platform", "catalogue", "catalogue.v2.json")
@@ -52,7 +53,9 @@ def main():
             if not title:
                 continue
             d = extract_dims(wikitext(title))
-            if d.get("length_mm") and d.get("width_mm"):
+            # a page with dims is NOT enough — it must name this model
+            # (observed wrong-page hits: Taigo<-Golf Mk4, Model Y<-Geely)
+            if d.get("length_mm") and d.get("width_mm") and page_matches(r["model"], title):
                 got = (d, title)
                 break
             time.sleep(a.sleep)

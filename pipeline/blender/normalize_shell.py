@@ -17,9 +17,12 @@ SRC, DST = argv[0], argv[1]
 TRUE_LEN_MM = float(argv[2]) if len(argv) > 2 else None   # factory length -> true-scale the shell
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=SRC)
-obj=[o for o in bpy.context.scene.objects if o.type=="MESH"][0]
+meshes=[o for o in bpy.context.scene.objects if o.type=="MESH"]
+roots=list({(o.parent or o) for o in bpy.context.scene.objects if o.parent is None or o.type=="MESH"})
+roots=[o for o in bpy.context.scene.objects if o.parent is None]
+obj=meshes[0]
 bpy.context.view_layer.objects.active=obj
-vs=np.array([(obj.matrix_world@v.co)[:] for v in obj.data.vertices])
+vs=np.vstack([np.array([(o.matrix_world@v.co)[:] for v in o.data.vertices]) for o in meshes])
 lo,hi=vs.min(0),vs.max(0); span=hi-lo; cen=(lo+hi)/2; cent=vs.mean(0)
 L=int(np.argmax(span)); U=int(np.argmin(span)); W=3-L-U
 # columns map source axis -> target: X<-W, Y<-L, Z<-U
@@ -28,19 +31,22 @@ if np.linalg.det(R)<0: R[1,:]*=-1          # flip length dir to stay a proper ro
 if cent[U]>cen[U]: R[2,:]*=-1; 
 if np.linalg.det(R)<0: R[1,:]*=-1          # keep det +1 after up flip
 M=mathutils.Matrix([list(R[i])+[0] for i in range(3)]+[[0,0,0,1]])
-obj.matrix_world = M @ obj.matrix_world
+for _r in roots:
+    _r.matrix_world = M @ _r.matrix_world
 bpy.context.view_layer.update()
 # recentre on origin, floor at z=0
-vs2=np.array([(obj.matrix_world@v.co)[:] for v in obj.data.vertices])
+vs2=np.vstack([np.array([(o.matrix_world@v.co)[:] for o2 in [o] for v in o.data.vertices]) for o in meshes])
 lo2,hi2=vs2.min(0),vs2.max(0); c2=(lo2+hi2)/2
-obj.location = (obj.location[0]-c2[0], obj.location[1]-c2[1], obj.location[2]-lo2[2])
+for _r in roots:
+    _r.location = (_r.location[0]-c2[0], _r.location[1]-c2[1], _r.location[2]-lo2[2])
+for _o in bpy.context.scene.objects: _o.select_set(_o in roots or _o in meshes)
 bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
 if TRUE_LEN_MM:
-    vs3=np.array([(obj.matrix_world@v.co)[:] for v in obj.data.vertices])
+    vs3=np.vstack([np.array([(o.matrix_world@v.co)[:] for v in o.data.vertices]) for o in meshes])
     span_y=vs3[:,1].max()-vs3[:,1].min()
     if span_y>0:
         f=(TRUE_LEN_MM/1000.0)/span_y
-        obj.scale=(f,f,f)
+        for _r in roots: _r.scale=(f,f,f)
         bpy.ops.object.transform_apply(scale=True)
         print(f"TRUE_SCALE applied: length {span_y:.3f} -> {TRUE_LEN_MM/1000.0:.3f}m (x{f:.4f})")
 bpy.ops.export_scene.gltf(filepath=DST, export_format="GLB")
