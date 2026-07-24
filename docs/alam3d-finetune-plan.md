@@ -63,3 +63,22 @@ owning the engine, not a blocker for the catalogue.
 Push checkpoint to HF (`Alamj/alam-3d-v0`, **private**), set `IMAGE_MODEL`,
 rebuild the pinned Docker image, A/B on the eval set once more from the live
 endpoint, then flip.
+
+## Stage A — COMPLETED 2026-07-24 (~7h pod time, ~$5)
+
+Volume `alam3d-data` (EU-RO-1, 250GB) now holds the AlamCars training set:
+
+| Artefact | Size | State |
+|---|---|---|
+| raw GLBs (366) + metadata | 935M | ✅ |
+| mesh_dumps | 2.6G | ✅ |
+| pbr_dumps | 9.1G | ✅ (minority rejected: exotic material graphs) |
+| dual_grid 256/512/1024 (O-Voxel) | 227M/890M/3.4G | ✅ |
+| renders_cond (16 views/car) | 1.6G | ✅ |
+| shape_latents | 535M | ✅ |
+| ss_latents | 49M | ✅ |
+| pbr voxels + latents | — | ❌ known gap: voxelize_pbr produced no records (enc_pbr KeyError 'pbr_voxelized'). Blocks TEXTURE-model training only, which the plan defers; shape-first Stage B/C is unblocked. Full log saved for the eventual texture pass. |
+
+Pod `alam3d-stage-a` stopped (restart re-runs the bootstrap, which now fast-skips
+everything present). Stage B (smoke train of the shape flow model on this
+volume) is ready to light.
