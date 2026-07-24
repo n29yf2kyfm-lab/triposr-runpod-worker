@@ -30,10 +30,11 @@ RUN pip install --upgrade pip && \
     pip install --no-cache-dir torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu124
 
 # GPU-less CI build: nvcc can't auto-detect the target SM, so extensions would
-# compile for the wrong arch and crash on first GPU use. 8.6 covers RunPod's
-# AMPERE_24 pool (RTX 3090 / A5000 / A6000, all >=24GB as TRELLIS.2 requires);
-# +PTX keeps it JIT-forward-compatible with newer GPUs (Ada/Hopper).
-ENV TORCH_CUDA_ARCH_LIST="8.6+PTX"
+# compile for the wrong arch and crash on first GPU use. Cover the full fleet:
+# 8.0 A100 (training pods), 8.6 RTX 3090/A5000/A6000, 8.9 RTX 4090/L40S,
+# 9.0 H100; +PTX keeps JIT forward-compat. (8.6-only builds crashed on A100
+# with "no kernel image" — PTX only JITs forward, never to older arches.)
+ENV TORCH_CUDA_ARCH_LIST="8.0;8.6;8.9;9.0+PTX"
 # Native extensions import torch inside their setup.py; pip's default build
 # isolation hides the already-installed torch, so every extension below uses
 # --no-build-isolation and we upgrade the build backend first. psutil + packaging
