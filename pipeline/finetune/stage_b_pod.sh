@@ -72,8 +72,9 @@ import json
 c=json.load(open("configs/gen/slat_flow_img2shape_dit_1_3B_512_bf16.json"))
 t=c["trainer"]["args"]
 t.update({"max_steps":300,"i_log":10,"i_save":300,"i_sample":1000000,
-          "batch_size_per_gpu":2,"batch_split":1})
+          "batch_size_per_gpu":1,"batch_split":1})
 c["dataset"]["args"]["min_aesthetic_score"]=4.5
+c["dataset"]["args"]["max_tokens"]=32768   # 8192 admitted only 5 of 365 cars
 json.dump(c,open("/workspace/alamcars/smoke_cfg.json","w"),indent=1)
 print("smoke config written (300 steps, bs 2)")
 PY
