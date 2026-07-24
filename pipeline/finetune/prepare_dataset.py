@@ -33,20 +33,53 @@ import argparse, csv, hashlib, json, os, sys, urllib.request
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 SHIM = '''"""AlamCars — curated ExpertCarCheck car library as a TRELLIS.2 subset.
-metadata.csv and raw/ are pre-built by pipeline/finetune/prepare_dataset.py;
-there is nothing to crawl or download.
+metadata.csv and raw/ are pre-built by pipeline/finetune/prepare_dataset.py.
+Implements the full data_toolkit subset contract (derived from the toolkit's
+call sites at pinned commit 75fbf01): add_args, get_metadata, download,
+foreach_instance(metadata, download_root, func, max_workers, desc, no_file).
 """
 import os
+from concurrent.futures import ThreadPoolExecutor
+
 import pandas as pd
+from tqdm import tqdm
+
+
+def add_args(parser):
+    pass  # no subset-specific CLI args
 
 
 def get_metadata(root, **kwargs):
     return pd.read_csv(os.path.join(root, 'metadata.csv'))
 
 
-def download(metadata, output_dir, **kwargs):
+def download(metadata, output_dir=None, **kwargs):
     # assets are already local under raw/ — nothing to download
-    return metadata.assign(local_path=metadata['local_path'])
+    return metadata
+
+
+def foreach_instance(metadata, download_root, func, max_workers=None, desc='', no_file=False):
+    # no_file=True steps (dual_grid / voxelize) run CUDA work per instance:
+    # keep them serial unless explicitly widened. File steps (blender dumps,
+    # renders) parallelise across subprocesses safely.
+    workers = max_workers if (max_workers and max_workers > 0) else (1 if no_file else 4)
+    rows = [row for _, row in metadata.iterrows()]
+
+    def call(row):
+        try:
+            if no_file:
+                return func(row)
+            return func(os.path.join(download_root, 'raw', row['local_path']), row)
+        except Exception as e:  # keep the batch alive; record nothing for failures
+            print(f"foreach_instance error {str(row.get('sha256'))[:12]}: {e}")
+            return None
+
+    records = []
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        for r in tqdm(ex.map(call, rows), total=len(rows), desc=desc):
+            if r is not None:
+                records.append(r)
+    return pd.DataFrame.from_records(records)
 '''
 
 
