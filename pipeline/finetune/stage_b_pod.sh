@@ -49,6 +49,23 @@ if "shape_latent_tokens" not in m.columns:
     print("CONTRACT-MISSING shape_latent_tokens — training will fail; check volume layout")
 PYIN
 
+status build-data-roots
+DATA_JSON=$(python3 - <<'PYIN'
+import glob, json
+root="/workspace/alamcars"
+def first(p):
+    g=sorted(glob.glob(p))
+    return g[0].rstrip("/") if g else None
+roots={"meta": root,
+       "render_cond": root+"/renders_cond",
+       "shape_latent": first(root+"/shape_latents/*/"),
+       "ss_latent": first(root+"/ss_latents/*/")}
+roots={k:v for k,v in roots.items() if v}
+print(json.dumps({"AlamCars": roots}))
+PYIN
+)
+echo "data roots: $DATA_JSON"
+
 status build-smoke-config
 python3 - <<'PY'
 import json
@@ -63,12 +80,12 @@ PY
 
 status tryrun
 python3 train.py --config /workspace/alamcars/smoke_cfg.json \
-  --output_dir "$OUT" --data_dir "$ROOT" --tryrun \
+  --output_dir "$OUT" --data_dir "$DATA_JSON" --tryrun \
   || { echo "TRYRUN FAILED"; }
 
 status train-300
 python3 train.py --config /workspace/alamcars/smoke_cfg.json \
-  --output_dir "$OUT" --data_dir "$ROOT" \
+  --output_dir "$OUT" --data_dir "$DATA_JSON" \
   || echo "TRAIN FAILED (see log)"
 
 status resume-probe
@@ -79,7 +96,7 @@ c["trainer"]["args"]["max_steps"]=320
 json.dump(c,open("/workspace/alamcars/smoke_cfg2.json","w"),indent=1)
 PY
 python3 train.py --config /workspace/alamcars/smoke_cfg2.json \
-  --output_dir "$OUT" --data_dir "$ROOT" --ckpt latest \
+  --output_dir "$OUT" --data_dir "$DATA_JSON" --ckpt latest \
   || echo "RESUME FAILED (see log)"
 
 status hf-weights-probe
