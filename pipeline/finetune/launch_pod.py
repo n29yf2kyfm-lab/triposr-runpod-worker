@@ -61,6 +61,7 @@ def main():
     ap.add_argument("--script", required=True, help="bootstrap filename in the finetune bucket")
     ap.add_argument("--name", default="alam3d-stage")
     ap.add_argument("--tier", choices=TIERS, default="80gb")
+    ap.add_argument("--gpus", type=int, default=1, help="GPUs per pod (Stage C uses 4)")
     ap.add_argument("--hours", type=float, default=6, help="poll budget before teardown")
     ap.add_argument("--hunt-hours", type=float, default=2, help="capacity-hunt budget")
     ap.add_argument("--keep", action="store_true", help="do NOT delete the pod on terminal state")
@@ -82,7 +83,7 @@ def main():
         for gpus in TIERS[a.tier]:
             d = api(key, "pods", "POST", {
                 "name": a.name, "imageName": IMAGE, "cloudType": "SECURE",
-                "gpuTypeIds": gpus, "gpuCount": 1, "containerDiskInGb": 60,
+                "gpuTypeIds": gpus, "gpuCount": a.gpus, "containerDiskInGb": 60,
                 "networkVolumeId": VOLUME, "volumeMountPath": "/workspace",
                 "ports": ["8000/http"], "env": env,
                 "dockerStartCmd": ["bash", "-c", boot]})
