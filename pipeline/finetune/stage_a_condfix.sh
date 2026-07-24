@@ -41,6 +41,28 @@ for f in $(find /workspace -maxdepth 3 -name "*stage_a*.log" 2>/dev/null | head 
   grep -aiE "foreach_instance error|Traceback|killed|CUDA|blender" "$f" | sort | uniq -c | sort -rn | head -10
 done
 
+status deps
+bash data_toolkit/setup.sh || echo "setup.sh failed (continuing)"
+# blender needs X client libs even headless; image has some, not all, and
+# upstream's installer uses sudo which containers lack — install directly
+apt-get update -qq && apt-get install -y -qq libxi6 libxkbcommon-x11-0 libxfixes3 libxrender1 libsm6 libgl1 2>&1 | tail -1 || true
+
+status reproduce-one-failure
+# upstream devnulls blender output, hiding why 218 instances fail in ~1.5s;
+# un-silence it so the real per-instance error lands in this log
+sed -i 's/call(args, stdout=DEVNULL, stderr=DEVNULL)/call(args)/' data_toolkit/render_cond.py
+python3 - <<'PY'
+import os, glob, pandas as pd
+root="/workspace/alamcars"
+m=pd.read_csv(f"{root}/metadata.csv")
+have={os.path.basename(os.path.dirname(p)) for p in glob.glob(f"{root}/renders_cond/*/transforms.json")}
+missing=[r for _,r in m.iterrows() if r["sha256"] not in have]
+if missing:
+    r=missing[0]
+    print("reproducing:", r["sha256"][:12], r.get("make"), r.get("model"), r.get("local_path"))
+    open("/tmp/one_missing.txt","w").write(r["sha256"])
+PY
+
 status render-cond-backfill
 python3 data_toolkit/render_cond.py AlamCars --root "$ROOT" \
   --num_cond_views 16 --max_workers 8 \

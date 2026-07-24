@@ -16,7 +16,7 @@ Usage:
   python3 pipeline/finetune/launch_pod.py --script stage_b_pod.sh \
       [--name alam3d-stage-b] [--tier 80gb|render] [--hours 6] [--keep]
 """
-import argparse, json, os, sys, time, urllib.request
+import argparse, json, os, subprocess, sys, time, urllib.request
 
 BUCKET = "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finetune"
 VOLUME = "yiv4apiad7"          # alam3d-data (EU-RO-1)
@@ -98,22 +98,28 @@ def main():
         return
 
     url = f"https://{pod}-8000.proxy.runpod.net"
+
+    # NB: poll with curl, not urllib — the sandbox egress proxy 403s python
+    # urllib for *.proxy.runpod.net while letting curl through, which made
+    # earlier pollers silently blind (they never saw DONE/FATAL).
+    def fetch(path, timeout=30):
+        r = subprocess.run(["curl", "-s", "-m", str(timeout), url + path],
+                           capture_output=True, text=True)
+        return r.stdout if r.returncode == 0 else ""
+
     outcome = "POLL_TIMEOUT"
+    last = ""
     for _ in range(int(a.hours * 3600 / 120)):
         time.sleep(120)
-        try:
-            s = urllib.request.urlopen(url + "/status.json", timeout=20).read().decode()
-        except Exception:
-            s = ""
-        if s:
+        s = fetch("/status.json")
+        if s and s != last:
             print("status:", s.strip(), flush=True)
+            last = s
         if "DONE" in s or "FATAL" in s:
             outcome = "DONE" if "DONE" in s else "FATAL"
-            try:
-                tail = urllib.request.urlopen(url + "/stage_b.log", timeout=60).read().decode()[-4000:]
+            tail = fetch("/stage_b.log", timeout=90)[-4000:]
+            if tail:
                 print(tail, flush=True)
-            except Exception:
-                pass
             break
     print(f"TERMINAL {outcome}", flush=True)
     if not a.keep:
