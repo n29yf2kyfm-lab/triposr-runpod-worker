@@ -76,6 +76,8 @@ def main():
     env = {"HF_HOME": "/workspace/hf_cache"}
     if hf:
         env["HF_TOKEN"] = env["HUGGING_FACE_HUB_TOKEN"] = hf
+    if os.environ.get("SB_KEY"):    # lets eval pods upload results; never in scripts
+        env["SB_KEY"] = os.environ["SB_KEY"]
 
     pod = None
     deadline = time.time() + a.hunt_hours * 3600
