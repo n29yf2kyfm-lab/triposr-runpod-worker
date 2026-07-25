@@ -81,17 +81,30 @@ diagnostics-platform/
 ├── db/
 │   ├── schema.sql             ← Supabase schema (Postgres + pgvector)
 │   └── seed_example.sql       ← a couple of demo coding defs + DTCs
+├── PROTOCOLS.md               ← diagnostic protocol + tool per manufacturer
+├── BLUETOOTH.md               ← dongle layer, iOS constraint, RE workflow
 ├── coding_engine/
 │   ├── requirements.txt
 │   ├── transport.py           ← CAN / CAN-FD + ISO-TP factory
 │   ├── uds_client.py          ← udsoncan wrapper (read/write DID, routines)
 │   ├── security.py            ← seed→key & SFD token plug-in interfaces
 │   ├── supabase_store.py      ← fetch defs, write audit log
+│   ├── ble/                   ← Bluetooth OBD dongle (laptop/RE side, via bleak)
+│   │   ├── dongle_registry.py ← known BLE dongle GATT UUIDs
+│   │   ├── elm327.py          ← ELM327/STN AT protocol (OBD, raw CAN, monitor)
+│   │   └── ble_dongle.py      ← bleak BLE transport
 │   ├── platforms/
-│   │   ├── bmw.py             ← FDL coding (NCD/CAFD model)
-│   │   └── vag.py             ← long-coding + adaptations
+│   │   ├── coders.py          ← shared coding mechanics + policy gates
+│   │   ├── bmw.py  vag.py     ← FDL / long-coding + adaptations
+│   │   └── toyota.py french.py← Toyota + Renault/PSA (UDS/CAN; K-Line notes)
 │   └── examples/
 │       └── read_and_code.py   ← runnable demo (works against ELM327-emulator)
+├── re_tools/                  ← reverse-engineering, driven by the dongle
+│   ├── can_sniffer.py         ← capture + diff CAN frames (find coding signals)
+│   └── uds_scan.py            ← sweep DIDs (0x22) to locate coding blocks
+├── app/bluetooth/             ← phone-app BLE (TypeScript)
+│   ├── obdBle.ts              ← Capacitor BLE (iOS+Android) + Web Bluetooth fallback
+│   └── dongles.ts             ← dongle registry (mirrors the Python one)
 ├── ai/
 │   ├── README.md              ← RAG vs fine-tune decision
 │   ├── embeddings.py          ← build pgvector embeddings from the KB

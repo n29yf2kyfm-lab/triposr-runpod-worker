@@ -2,6 +2,7 @@
 python-can>=4.3          # CAN + CAN-FD bus abstraction
 can-isotp>=2.0           # ISO-TP (ISO 15765-2) segmentation over CAN/CAN-FD
 udsoncan>=1.23           # UDS (ISO 14229): read/write DID, routines, security access
+bleak>=0.22              # BLE — connect to a Bluetooth OBD dongle (laptop/RE side)
 
 # Storage
 supabase>=2.6            # Supabase Python client (defs, audit log)
