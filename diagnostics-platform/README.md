@@ -101,7 +101,12 @@ diagnostics-platform/
 │       └── read_and_code.py   ← runnable demo (works against ELM327-emulator)
 ├── re_tools/                  ← reverse-engineering, driven by the dongle
 │   ├── can_sniffer.py         ← capture + diff CAN frames (find coding signals)
-│   └── uds_scan.py            ← sweep DIDs (0x22) to locate coding blocks
+│   ├── uds_scan.py            ← sweep DIDs (0x22) on one ECU to locate coding blocks
+│   └── module_discovery.py    ← sweep 0x700-0x7FF to find ALL ECUs → auto-fill `ecu` rows
+├── data/
+│   └── dtc_curated.py         ← curated plain-English DTC database
+├── ingest/
+│   └── ingest_dtc_module.py   ← load data/dtc_curated.py into dtc_library
 ├── app/bluetooth/             ← phone-app BLE (TypeScript)
 │   ├── obdBle.ts              ← Capacitor BLE (iOS+Android) + Web Bluetooth fallback
 │   └── dongles.ts             ← dongle registry (mirrors the Python one)
