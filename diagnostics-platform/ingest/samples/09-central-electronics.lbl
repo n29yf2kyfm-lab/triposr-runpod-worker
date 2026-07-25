@@ -1,0 +1,17 @@
+;-----------------------------------------------------------------------
+; Sample plaintext VCDS-style label — VAG 09 Central Electronics (BCM)
+; Illustrative long-coding bit map for pipeline testing. NOT verified coding.
+; Real labels: use only plaintext files you are licensed to use (see SAFETY.md).
+;-----------------------------------------------------------------------
+;LONG CODING
+Byte;7;Bit;0;;Mirror fold on lock active
+Byte;7;Bit;1;;Cornering lights active
+Byte;8;Bit;2;;Coming home lights active
+Byte;8;Bit;3;;Leaving home lights active
+Byte;9;Bit;0;;Comfort windows via remote active
+Byte;9;Bit;4;;Comfort windows via door key active
+Byte;11;Bit;1;;Daytime running lights active
+Byte;11;Bit;2;;DRL dimming when indicating active
+Byte;12;Bit;5;;Seatbelt warning acoustic active
+Byte;14;Bit;0;;Emergency brake light flashing active
+Byte;15;Bit;3;;Rear fog light in trailer mode active

@@ -98,8 +98,33 @@ diagnostics-platform/
 │   └── rag.py                 ← retrieve + explain/guide with Claude
 └── ingest/
     ├── ingest_dtc.py          ← load an open DTC database into Supabase
-    └── ingest_vag_labels.py   ← parse plaintext VCDS labels → coding_definitions
+    ├── ingest_vag_labels.py   ← parse plaintext VCDS labels → coding_definitions
+    ├── ingest_coding_csv.py   ← generic coding-definition CSV loader (BMW/any brand)
+    └── samples/               ← real-format sample sources (proven working)
+        ├── 09-central-electronics.lbl   (VAG plaintext label)
+        └── bmw_fem_features.csv          (BMW FDL feature list)
 ```
+
+### Loading your own BMW / VAG definitions
+The pipeline is proven on the sample files (run with `--dry-run` to see it parse
+with no DB):
+
+```bash
+# VAG — plaintext VCDS labels → coding definitions
+python ingest/ingest_vag_labels.py --labels ingest/samples/09-central-electronics.lbl --dry-run
+python ingest/ingest_vag_labels.py --labels ./your-plaintext-labels/ --ecu-id <ecu-uuid>
+
+# BMW (or any brand) — export your feature list to CSV, then:
+python ingest/ingest_coding_csv.py --csv ingest/samples/bmw_fem_features.csv --dry-run
+python ingest/ingest_coding_csv.py --csv ./your-bmw-features.csv --ecu-id <ecu-uuid>
+
+# then make everything RAG-searchable
+python ai/embeddings.py
+```
+
+> BMW FDL definitions derive from CAFD/PSdZData (proprietary, binary) — don't parse
+> that here. Export the human feature list to CSV and load it with `ingest_coding_csv.py`.
+> Only ingest plaintext/licensed sources you're entitled to use (see `SAFETY.md`).
 
 ## Quick start
 
