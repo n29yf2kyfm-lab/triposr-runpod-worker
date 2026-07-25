@@ -16,7 +16,8 @@ from fastapi import Depends, FastAPI, HTTPException
 from coding_engine.bitcoding import apply_bits, lock_state
 from .models import (
     ApplyRequest, ApplyResponse, AssistantRequest, AssistantResponse,
-    CodingFeature, CodingOption, DtcDecode, PreviewRequest, PreviewResponse,
+    CodingFeature, CodingOption, DtcDecode, OnboardRequest, OnboardResponse,
+    PreviewRequest, PreviewResponse,
 )
 
 app = FastAPI(title="Expert Car Check — Diagnostics API", version="0.1.0")
@@ -115,6 +116,37 @@ def assistant(req: AssistantRequest):
     from ai.rag import resolve
     result = resolve(req.request, req.ecu_ids)
     return AssistantResponse(**{k: result.get(k) for k in AssistantResponse.model_fields})
+
+
+# --- onboarding: turn an in-app scan into a platform + ECUs ------------------
+@app.post("/onboard", response_model=OnboardResponse)
+def onboard(req: OnboardRequest, store=Depends(get_store)):
+    from re_tools.onboard import decode_vin
+    from re_tools.module_discovery import ecu_key
+
+    vinfo = decode_vin(req.vin or "")
+    make = req.make or vinfo["make"] or "Unknown"
+    family = vinfo["family"] or "scanned"
+    platform = {
+        "make": make, "family": family, "year_from": vinfo["year"],
+        "bus": req.bus, "protocol": "uds",
+        "notes": f"Onboarded from in-app scan. VIN {req.vin or 'n/a'}.",
+    }
+    prow = store.db.table("platform").insert(platform).execute().data[0]
+
+    ecu_rows = [{
+        "platform_id": prow["id"],
+        "key": ecu_key(m.name, m.respId),
+        "name": m.name,
+        "req_id": m.respId - 8 if m.respId >= 0x7E8 else m.respId,
+        "resp_id": m.respId,
+        "safety_critical": m.respId in (0x703, 0x707, 0x715),
+    } for m in req.modules]
+    if ecu_rows:
+        store.db.table("ecu").upsert(ecu_rows, on_conflict="platform_id,key").execute()
+
+    return OnboardResponse(platform_id=prow["id"], make=make, family=family,
+                           ecu_count=len(ecu_rows))
 
 
 # --- policy (mirrors coders._policy_check) -----------------------------------

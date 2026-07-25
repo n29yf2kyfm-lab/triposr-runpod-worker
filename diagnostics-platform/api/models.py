@@ -84,3 +84,25 @@ class AssistantResponse(BaseModel):
     explanation: str
     risk: str
     refuse_reason: str | None = None
+
+
+# --- onboarding (from an in-app scan) ----------------------------------------
+class OnboardModule(BaseModel):
+    respId: int
+    name: str
+    part: str | None = None
+    sw: str | None = None
+
+
+class OnboardRequest(BaseModel):
+    vin: str | None = None
+    make: str | None = None
+    bus: str = "can"
+    modules: list[OnboardModule] = []
+
+
+class OnboardResponse(BaseModel):
+    platform_id: str
+    make: str
+    family: str | None = None
+    ecu_count: int

@@ -102,7 +102,8 @@ diagnostics-platform/
 ├── re_tools/                  ← reverse-engineering, driven by the dongle
 │   ├── can_sniffer.py         ← capture + diff CAN frames (find coding signals)
 │   ├── uds_scan.py            ← sweep DIDs (0x22) on one ECU to locate coding blocks
-│   └── module_discovery.py    ← sweep 0x700-0x7FF to find ALL ECUs → auto-fill `ecu` rows
+│   ├── module_discovery.py    ← sweep 0x700-0x7FF to find ALL ECUs → auto-fill `ecu` rows
+│   └── onboard.py             ← scan → VIN-decode → create platform + ECUs (auto-onboard)
 ├── data/
 │   └── dtc_curated.py         ← curated plain-English DTC database
 ├── ingest/
@@ -110,6 +111,9 @@ diagnostics-platform/
 ├── app/bluetooth/             ← phone-app BLE (TypeScript)
 │   ├── obdBle.ts              ← Capacitor BLE (iOS+Android) + Web Bluetooth fallback
 │   └── dongles.ts             ← dongle registry (mirrors the Python one)
+├── app/re/                    ← in-app "scan my car" flow (TypeScript/React)
+│   ├── moduleDiscovery.ts     ← phone-side ECU sweep + VIN decode over BLE
+│   └── ScanMyCar.tsx          ← guided scan UI with live progress → /onboard
 ├── api/                       ← FastAPI: thin-transport/smart-server keystone
 │   ├── main.py                ← DTC decode, coding list+preview+apply, RAG assistant
 │   └── models.py              ← request/response schemas

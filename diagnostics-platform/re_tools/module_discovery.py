@@ -181,15 +181,23 @@ def read_idents(found, sim=False, elm=None):
     return found
 
 
+def ecu_key(name: str, rid: int) -> str:
+    """Clean, DB-friendly key: 'ABS / ESP' → 'ABS_ESP'."""
+    import re
+    slug = re.sub(r"[^A-Za-z0-9]+", "_", name).strip("_").upper()
+    return slug or f"MODULE_{rid:03X}"
+
+
 def to_ecu_rows(found, platform_id):
     """Shape discovered modules into `ecu` table rows."""
     rows = []
     for rid, data in sorted(found.items()):
         req = rid - 8 if rid >= 0x7E8 else rid
+        name = MODULE_NAMES.get(rid, f"Unknown module {rid:#05x}")
         rows.append({
             "platform_id": platform_id,
-            "key": MODULE_NAMES.get(rid, f"MODULE_{rid:03X}").upper().replace(" ", "_").replace("/", "_"),
-            "name": MODULE_NAMES.get(rid, f"Unknown module {rid:#05x}"),
+            "key": ecu_key(name, rid),
+            "name": name,
             "req_id": req, "resp_id": rid,
             "safety_critical": rid in (0x703, 0x707, 0x715),   # ABS, airbag, ESL
         })
