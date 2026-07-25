@@ -105,6 +105,9 @@ diagnostics-platform/
 ├── app/bluetooth/             ← phone-app BLE (TypeScript)
 │   ├── obdBle.ts              ← Capacitor BLE (iOS+Android) + Web Bluetooth fallback
 │   └── dongles.ts             ← dongle registry (mirrors the Python one)
+├── api/                       ← FastAPI: thin-transport/smart-server keystone
+│   ├── main.py                ← DTC decode, coding list+preview+apply, RAG assistant
+│   └── models.py              ← request/response schemas
 ├── ai/
 │   ├── README.md              ← RAG vs fine-tune decision
 │   ├── embeddings.py          ← build pgvector embeddings from the KB
