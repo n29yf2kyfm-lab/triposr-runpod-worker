@@ -63,6 +63,10 @@ CKPT = ck[-1]
 print("evaluating checkpoint:", os.path.basename(CKPT))
 
 pipeline = handler.get_image_pipeline()
+# product-quality eval: full cascade (the 512-only pass undersold sharpness);
+# our tuned 512 stage feeds the stock 1024 refiner, exactly as production would
+PIPE = os.environ.get("EVAL_PIPE", "1024_cascade")
+print("pipeline_type:", PIPE)
 
 CASES = {
     "golf":   sorted(glob.glob("/workspace/eval_inputs/golf/*.jpg")),
@@ -76,10 +80,10 @@ def gen(case, paths, tag):
     if len(imgs) > 1:
         from alam3d_multiview import run_multi_image
         meshes = run_multi_image(pipeline, imgs, seed=42, preprocess_image=True,
-                                 pipeline_type="512", num_samples=1)
+                                 pipeline_type=PIPE, num_samples=1)
     else:
         meshes = pipeline.run(imgs[0], seed=42, preprocess_image=True,
-                              pipeline_type="512", num_samples=1)
+                              pipeline_type=PIPE, num_samples=1)
     mesh = max(meshes, key=lambda m: len(m.faces)) if len(meshes) > 1 else meshes[0]
     glb = o_voxel.postprocess.to_glb(
         vertices=mesh.vertices, faces=mesh.faces, attr_volume=mesh.attrs,
