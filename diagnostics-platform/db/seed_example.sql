@@ -62,3 +62,63 @@ values
    'medium', 'Carbon build-up in the EGR valve/passages',
    'Clean or replace the EGR valve.', 120, 400)
 on conflict do nothing;
+
+-- ---------------------------------------------------------------------------
+-- Toyota (UDS over CAN) — a customer-setting coding example
+-- ---------------------------------------------------------------------------
+insert into platform (id, make, family, year_from, bus, protocol)
+values ('00000000-0000-0000-0000-0000000000b3', 'Toyota', 'CAN', 2012, 'can', 'uds')
+on conflict do nothing;
+insert into ecu (id, platform_id, key, name, req_id, resp_id)
+values ('00000000-0000-0000-0000-0000000000e3',
+        '00000000-0000-0000-0000-0000000000b3', 'BODY_MAIN', 'Main Body ECU', 1937, 1841)
+on conflict do nothing;
+insert into coding_definition
+  (ecu_id, feature_key, label, description, kind, did, byte_offset, bit_offset,
+   bit_length, options, legal_class, risk, operation, source, verified)
+values
+  ('00000000-0000-0000-0000-0000000000e3', 'auto_door_lock_speed',
+   'Auto-lock doors when moving', 'Locks the doors automatically once you drive off.',
+   'long_coding', 1552, 3, 1, 1,
+   '[{"label":"On","raw":1},{"label":"Off","raw":0}]',
+   'comfort', 'low', 'coding', 'community', false)
+on conflict do nothing;
+
+-- ---------------------------------------------------------------------------
+-- French — PSA (DiagBox-class, UDS over CAN). Renault mirrors this shape.
+-- ---------------------------------------------------------------------------
+insert into platform (id, make, family, year_from, bus, protocol)
+values ('00000000-0000-0000-0000-0000000000b4', 'PSA', 'CAN', 2014, 'can', 'uds')
+on conflict do nothing;
+insert into ecu (id, platform_id, key, name, req_id, resp_id)
+values ('00000000-0000-0000-0000-0000000000e4',
+        '00000000-0000-0000-0000-0000000000b4', 'BSI_BODY', 'BSI (body control)', 1808, 1712)
+on conflict do nothing;
+insert into coding_definition
+  (ecu_id, feature_key, label, description, kind, did, byte_offset, bit_offset,
+   bit_length, options, legal_class, risk, operation, source, verified)
+values
+  ('00000000-0000-0000-0000-0000000000e4', 'follow_me_home_lights',
+   'Follow-me-home lights', 'Headlights stay on to light your way after locking.',
+   'long_coding', 1600, 2, 0, 1,
+   '[{"label":"On","raw":1},{"label":"Off","raw":0}]',
+   'lighting', 'low', 'coding', 'community', false)
+on conflict do nothing;
+
+-- ---------------------------------------------------------------------------
+-- HIGH-RISK REPAIR examples (RoutineControl). Legitimate repairs, hard-gated:
+-- risk='high', require allow_high_risk + licensed security. NOT consumer features.
+-- ---------------------------------------------------------------------------
+insert into coding_definition
+  (ecu_id, feature_key, label, description, kind, routine_id,
+   options, legal_class, risk, operation, security_level, source, verified)
+values
+  ('00000000-0000-0000-0000-0000000000e1', 'abs_pump_bleed',
+   'ABS hydraulic bleed / new-pump init',
+   'Cycles the ABS pump to bleed air after replacing the modulator. Workshop-only.',
+   'routine', 20481, '[]', 'safety', 'high', 'abs_service', 3, 'reverse_engineered', false),
+  ('00000000-0000-0000-0000-0000000000e1', 'esl_init',
+   'Steering-column lock (ESL/ELV) initialisation',
+   'Pairs a replaced electronic steering lock to the car. Workshop-only.',
+   'routine', 20482, '[]', 'safety', 'high', 'esl_service', 3, 'reverse_engineered', false)
+on conflict do nothing;

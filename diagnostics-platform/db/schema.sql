@@ -17,11 +17,13 @@ create table if not exists platform (
     family        text not null,                       -- 'F-series', 'G-series', 'MQB', 'MQB-Evo', 'MEB'
     year_from     int,
     year_to       int,
-    bus           text not null check (bus in ('can', 'canfd')),
+    bus           text not null check (bus in ('can', 'canfd', 'kline')),
     can_bitrate   int  not null default 500000,        -- arbitration bitrate
     canfd_data_bitrate int,                            -- null for classic CAN
-    transport     text not null default 'isotp'        -- 'isotp' | 'doip'
-                  check (transport in ('isotp', 'doip')),
+    transport     text not null default 'isotp'        -- how UDS/KWP is carried
+                  check (transport in ('isotp', 'doip', 'kwp', 'kline')),
+    protocol      text not null default 'uds'          -- diagnostic language (see PROTOCOLS.md)
+                  check (protocol in ('uds', 'kwp2000', 'ds2', 'iso9141')),
     sfd_locked    boolean not null default false,      -- VW 2020+ etc.
     secure_gateway boolean not null default false,
     notes         text
@@ -52,7 +54,10 @@ create table if not exists coding_definition (
     feature_key   text not null,                       -- 'mirror_fold_on_lock'
     label         text not null,                       -- 'Fold mirrors on lock'
     description   text,                                -- plain-English, embedded for RAG
-    kind          text not null check (kind in ('fdl', 'long_coding', 'adaptation')),
+    kind          text not null check (kind in ('fdl', 'long_coding', 'adaptation', 'routine')),
+    -- 'routine' = RoutineControl (0x31): ABS bleed, steering-lock (ESL/ELV) init, calibrations.
+    operation     text not null default 'coding'       -- POLICY: 'key'/'immobilizer' are refused
+                  check (operation in ('coding','calibration','abs_service','esl_service')),
 
     -- Where the value lives:
     did           int,                                 -- UDS Data Identifier (0x22/0x2E), FDL/long-coding block

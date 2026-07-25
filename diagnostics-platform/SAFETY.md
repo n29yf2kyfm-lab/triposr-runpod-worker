@@ -17,6 +17,22 @@ the way software is.** This document is the contract the whole engine is built t
    safety ECUs (airbag/SRS, ABS actuator programming) are **gated behind an explicit
    `allow_high_risk` capability** and are out of scope for the consumer app.
 
+## Scope of operations
+
+**Supported (with gating):**
+- Comfort/lighting coding — normal path.
+- High-risk **repair** routines — ABS pump bleed/replace init, steering-column-lock (ESL/ELV)
+  init, calibrations. Legitimate workshop repairs, gated by `risk='high'` →
+  `allow_high_risk=True` + a licensed security provider + audit. (`coders.run_service_routine`)
+
+**Refused by policy (enforced in `coders._policy_check`):**
+- **Key / immobilizer programming** — `operation in ('key','immobilizer')` is hard-refused.
+  Key programming is the primary vehicle-theft vector. Legitimate key work is done by
+  **identity-verified** locksmiths/dealers through OEM-gated authorisation (NASTF VSP, OEM
+  security PIN/incode-outcode) — it does not belong in a consumer app and is not implemented
+  here. This is a deliberate line, not an oversight.
+- **Emissions defeat** coding — blocked unless an explicit authorised off-road context.
+
 ## Security gates you must respect (not bypass)
 - **Security Access (UDS 0x27):** the seed→key algorithm is the manufacturer's. Supply your
   own **licensed** algorithm/token via the `security.py` plug-in. This repo ships **no**
