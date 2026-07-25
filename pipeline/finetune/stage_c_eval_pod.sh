@@ -36,12 +36,23 @@ ls -la /workspace/eval_inputs/*/
 
 status generate
 python3 - <<'PY'
-import glob, io, json, os, sys, subprocess
+import glob, io, json, os, sys, subprocess, types
+import importlib.util
 import torch
 from PIL import Image
 sys.path.insert(0, "/app")
 
-from trellis2.pipelines import Trellis2ImageTo3DPipeline
+# Load the pipeline THROUGH the production handler so we inherit its patches:
+# the ungated MIT BiRefNet (the config's briaai/RMBG-2.0 is restricted AND
+# non-commercial — it 403'd eval run 1) and the DINOv3 feature-extraction fix.
+# handler.py calls runpod.serverless.start at import, so stub runpod first.
+_fake = types.ModuleType("runpod")
+_fake.serverless = types.SimpleNamespace(start=lambda *a, **k: None)
+sys.modules["runpod"] = _fake
+spec = importlib.util.spec_from_file_location("handler", "/app/handler.py")
+handler = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(handler)
+
 import o_voxel
 
 OUT = "/workspace/alam3d_eval/logs"
@@ -51,8 +62,7 @@ if not ck:
 CKPT = ck[-1]
 print("evaluating checkpoint:", os.path.basename(CKPT))
 
-pipeline = Trellis2ImageTo3DPipeline.from_pretrained("microsoft/TRELLIS.2-4B")
-pipeline.cuda()
+pipeline = handler.get_image_pipeline()
 
 CASES = {
     "golf":   sorted(glob.glob("/workspace/eval_inputs/golf/*.jpg")),
@@ -96,6 +106,7 @@ for case, paths in CASES.items():
     gen(case, paths, "alam3d")
 print("EVAL_GENERATION_COMPLETE")
 PY
+[ $? -ne 0 ] && { echo "GENERATE FAILED"; status FATAL-generate; sleep infinity; }
 
 status upload
 if [ -n "$SB_KEY" ]; then
