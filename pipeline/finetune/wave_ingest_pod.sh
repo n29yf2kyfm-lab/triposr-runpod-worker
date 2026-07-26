@@ -96,6 +96,25 @@ with open(meta,"w",newline="") as f:
 print(f"INGEST: +{added} new assets; dataset now {len(rows)} rows")
 PY
 
+status drop-culled
+# Shapes culled AFTER they were ingested (the retro hard audit) must leave the
+# dataset or they would still train. Manifest is the source of truth.
+python3 - <<'PYIN'
+import csv, json, urllib.request
+PUB="https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public"
+cands=json.loads(urllib.request.urlopen(f"{PUB}/car-renders/finetune/training_candidates.json?cb=2",timeout=120).read())
+cull={c["uid"] for c in cands if str(c.get("status","")).startswith("culled")}
+p="/workspace/alamcars/metadata.csv"
+rows=list(csv.DictReader(open(p)))
+keep=[r for r in rows if r.get("file_identifier") not in cull]
+if len(keep)!=len(rows):
+    cols=list(rows[0].keys())
+    with open(p,"w",newline="") as f:
+        w=csv.DictWriter(f,fieldnames=cols); w.writeheader()
+        for r in keep: w.writerow(r)
+print(f"DROP-CULLED: {len(rows)-len(keep)} removed; dataset now {len(keep)} rows")
+PYIN
+
 status webp-to-png
 python3 - <<'PY'
 # Blender 3.0.1 (pinned by the toolkit) cannot import EXT_texture_webp; convert
