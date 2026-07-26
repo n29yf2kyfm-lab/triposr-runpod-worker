@@ -108,13 +108,26 @@ def gen(case, paths, tag):
 for case, paths in CASES.items():
     gen(case, paths, "base")
 
-# swap in the fine-tuned weights (fp32 master params -> bf16 module, cast on copy)
-sd = torch.load(CKPT, map_location="cuda", weights_only=True)
-model = pipeline.models["shape_slat_flow_model_512"]
-missing, unexpected = model.load_state_dict(sd, strict=False)
-print(f"weight swap: missing={len(missing)} unexpected={len(unexpected)}")
-if len(missing) > 20:
-    print("TOO MANY MISSING KEYS — aborting tuned eval"); sys.exit(1)
+# swap in the fine-tuned weights. Stage C tuned the 512 shape stage; Stage D
+# tuned the 1024 refiner — with both loaded, the whole geometry cascade is ours.
+def swap(stage_key, ckpt_glob, label):
+    ck = sorted(glob.glob(ckpt_glob), reverse=True)
+    if not ck:
+        print(f"no {label} checkpoint ({ckpt_glob}) — leaving stock")
+        return None
+    sd = torch.load(ck[0], map_location="cuda", weights_only=True)
+    m = pipeline.models[stage_key]
+    missing, unexpected = m.load_state_dict(sd, strict=False)
+    print(f"{label} swap [{os.path.basename(ck[0])}]: missing={len(missing)} unexpected={len(unexpected)}")
+    if len(missing) > 20:
+        raise SystemExit(f"{label}: too many missing keys, aborting")
+    return ck[0]
+
+swap("shape_slat_flow_model_512",
+     "/workspace/alam3d_stage_c/ckpts/denoiser_ema*step*.pt", "Stage C 512")
+if os.environ.get("EVAL_STAGE_D", "1") == "1":
+    swap("shape_slat_flow_model_1024",
+         "/workspace/alam3d_stage_d/ckpts/denoiser_ema*step*.pt", "Stage D 1024")
 
 for case, paths in CASES.items():
     gen(case, paths, "alam3d")
