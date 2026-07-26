@@ -80,6 +80,37 @@ if "ALAM3D_INIT_FROM" not in s:
 PY
 export ALAM3D_INIT_FROM="microsoft/TRELLIS.2-4B/ckpts/slat_flow_img2shape_dit_1_3B_1024_bf16"
 
+status metadata-merge
+# The toolkit writes each step's flags (shape_latent_encoded, token counts) into
+# PER-DIRECTORY metadata.csv files. Without merging them into the root file the
+# dataset filter silently sees only the original Stage A assets — Stage D run 1
+# trained on 365 of 543 shapes before this was caught.
+python3 - <<'PYIN'
+import glob, pandas as pd
+p="/workspace/alamcars/metadata.csv"
+m=pd.read_csv(p).set_index("sha256")
+merged=0
+pats=["/workspace/alamcars/*/metadata.csv","/workspace/alamcars/*/*/metadata.csv",
+      "/workspace/alamcars/**/new_records/part_*.csv","/workspace/alamcars/**/merged_records/*.csv"]
+seen=set()
+for pat in pats:
+    for f in glob.glob(pat, recursive=True):
+        if f in seen or f==p: continue
+        seen.add(f)
+        try:
+            df=pd.read_csv(f)
+            if "sha256" in df.columns:
+                m=df.set_index("sha256").combine_first(m); merged+=1
+        except Exception as e:
+            print("skip",f,str(e)[:60])
+if "aesthetic_score" not in m.columns:
+    m["aesthetic_score"]=6.0
+m.reset_index().to_csv(p,index=False)
+enc=m.get("shape_latent_encoded")
+print(f"merged {merged} record files; rows {len(m)}; "
+      f"shape-latent-encoded {int(enc.fillna(False).sum()) if enc is not None else '?'}")
+PYIN
+
 status build-data-roots
 DATA_JSON=$(python3 - <<'PYIN'
 import glob, json
