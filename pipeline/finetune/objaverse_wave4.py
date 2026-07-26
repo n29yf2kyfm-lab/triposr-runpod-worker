@@ -33,6 +33,20 @@ BAD = re.compile(r"(?i)\b(low ?poly|lowpoly|low-poly|game ?ready|gameready|game 
                  r"abandoned|sticker|logo|badge|diorama|scene|pack|bundle|collection)")
 
 
+VEHICLE_NAME = re.compile(r"(?i)\b(car|auto|vehicle|van|truck|lorry|pickup|ute|suv|4x4|jeep|"
+                          r"sedan|saloon|hatch(back)?|estate|wagon|coupe|convertible|cabrio|"
+                          r"minivan|mpv|crossover|transit|sprinter|transporter|defender|"
+                          r"land ?rover|range ?rover|bmw|audi|mercedes|volkswagen|vw|ford|toyota|"
+                          r"honda|nissan|mazda|kia|hyundai|peugeot|renault|citroen|skoda|seat|"
+                          r"volvo|fiat|opel|vauxhall|subaru|mitsubishi|suzuki|dacia|tesla|"
+                          r"porsche|jaguar|lexus|mini|dodge|chevrolet|chevy|gmc|ram|cadillac)\b")
+# non-car vehicles that would teach the wrong prior
+WRONG_CLASS = re.compile(r"(?i)\b(train|locomotive|tram|railcar|boat|ship|yacht|plane|aircraft|"
+                         r"jet|helicopter|drone|bike|bicycle|motorbike|motorcycle|scooter|quad|"
+                         r"atv|forklift|excavator|bulldozer|crane|tractor|combine|golf ?cart|"
+                         r"go.?kart|trailer|caravan|bus|coach|tank|tram)\b")
+
+
 def norm(s):
     return unicodedata.normalize("NFKD", (s or "").lower()).encode("ascii", "ignore").decode()
 
@@ -40,6 +54,39 @@ def norm(s):
 def gz(u, timeout=300):
     rq = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"})
     return json.loads(gzip.decompress(urllib.request.urlopen(rq, timeout=timeout).read()))
+
+
+def geometry_ok(data):
+    """Validate the actual mesh: metadata can lie, geometry cannot.
+
+    Rejects anything whose bounding box is not car/van shaped, and anything
+    that is really a scene (many scattered parts) rather than one vehicle.
+    """
+    try:
+        import trimesh
+        scene = trimesh.load(io.BytesIO(data), file_type="glb")
+    except Exception as e:
+        return False, f"unloadable ({str(e)[:24]})"
+    try:
+        geoms = list(scene.geometry.values()) if hasattr(scene, "geometry") else [scene]
+        if not geoms:
+            return False, "no geometry"
+        ext = sorted(scene.bounding_box.extents, reverse=True)
+        if ext[2] <= 0:
+            return False, "flat/degenerate"
+        L, W, Hh = ext          # longest, middle, shortest
+        if not (1.6 <= L / W <= 3.6):
+            return False, f"aspect L/W={L/W:.1f}"
+        if not (1.5 <= L / Hh <= 4.5):
+            return False, f"aspect L/H={L/Hh:.1f}"
+        faces = sum(len(g.faces) for g in geoms if hasattr(g, "faces"))
+        if faces < 40_000:
+            return False, "faces<40k after load"
+        if len(geoms) > 400:
+            return False, f"scene-like ({len(geoms)} parts)"
+        return True, "ok"
+    except Exception as e:
+        return False, f"check failed ({str(e)[:24]})"
 
 
 def upload(key, bucket, path, data, ctype):
@@ -88,8 +135,23 @@ def main():
                 continue
             tags = " ".join(t.get("name", "") for t in (r.get("tags") or []))
             txt = norm(f"{r.get('name','')} {r.get('description','')} {tags}")
+            name = norm(r.get("name", ""))
             hit = BAD.search(txt)
-            verdict[u] = f"game/stylised: {hit.group(0)}" if hit else "OK"
+            wrong = WRONG_CLASS.search(txt)
+            if hit:
+                verdict[u] = f"game/stylised: {hit.group(0)}"
+            elif wrong:
+                verdict[u] = f"wrong vehicle class: {wrong.group(0)}"
+            elif not VEHICLE_NAME.search(name):
+                # tags lie (wave 1 pulled an aircraft carrier tagged 'car');
+                # the NAME must independently identify a road vehicle
+                verdict[u] = "name does not identify a car/van"
+            elif (r.get("animationCount") or 0) > 0:
+                verdict[u] = "animated (rigged game asset)"
+            elif r.get("isAgeRestricted"):
+                verdict[u] = "age-restricted"
+            else:
+                verdict[u] = "OK"
         if (i + 1) % 30 == 0:
             ok = sum(1 for v in verdict.values() if v == "OK")
             print(f"  {i+1}/{len(shards)} shards, {ok} passing", flush=True)
@@ -99,6 +161,7 @@ def main():
     print(f"\nHARD AUDIT: {len(approved)} pass, {culled} rejected before download", flush=True)
 
     rows, thumbs, got = [], [], 0
+    geom_rejects = {}
     for c in approved:
         if got >= a.target:
             break
@@ -108,7 +171,11 @@ def main():
         except Exception as e:
             print(f"  dl fail {c['uid'][:8]}: {str(e)[:40]}", flush=True)
             continue
-        if not (200 * 1024 <= len(data) <= 48 * 1024 * 1024):
+        if not (1024 * 1024 <= len(data) <= 48 * 1024 * 1024):
+            continue                       # a premium car GLB is never under 1MB
+        ok, why = geometry_ok(data)
+        if not ok:
+            geom_rejects[why] = geom_rejects.get(why, 0) + 1
             continue
         slug = re.sub(r"[^a-z0-9]+", "-", norm(c["name"] or "vehicle"))[:40].strip("-")
         path = f"training/w4-{slug}--{c['uid'][:8]}.glb"
@@ -121,7 +188,7 @@ def main():
                      "licence": c["licence"], "creator": c["creator"],
                      "source_url": c["source_url"], "glb_path": path, "bytes": len(data),
                      "faces": c["faces"], "wave": 4, "dataset": "objaverse",
-                     "status": "approved-shape [hard audit pre-download]"})
+                     "status": "approved-shape [hard audit + geometry gate]"})
         if c.get("thumb"):
             thumbs.append((slug, c["thumb"]))
         got += 1
@@ -136,6 +203,7 @@ def main():
     upload(key, "car-renders", "finetune/training_candidates.json",
            json.dumps(merged, indent=1).encode(), "application/json")
     json.dump(merged, open(f"{OUT}/training_candidates.json", "w"), indent=1)
+    print("geometry rejects:", geom_rejects)
     appr = sum(1 for r in merged if str(r.get("status", "")).startswith("approved"))
     print(f"\nWAVE4 STAGED {len(rows)} | manifest total {len(merged)} ({appr} approved)")
 
