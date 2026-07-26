@@ -42,6 +42,8 @@ A_SIDE = _opt("--side", 0.66)        # side/rear glass
 DO_PLATES = "--no-plates" not in argv
 DO_SYMMETRY = "--no-symmetry" not in argv
 GLASS_PCT = _opt("--glass-pct", 25.0)
+DO_MATERIALS = "--no-materials" not in argv
+TRUE_LENGTH_MM = _opt("--length-mm", 0.0)
 REG = _opt("--reg", "", str)
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -225,6 +227,79 @@ if glass_faces:
     fb.inputs["Alpha"].default_value = A_FRONT
     fmat.blend_method = "BLEND"
 
+# ---- 1b. automotive materials + glass thickness --------------------------
+# Generated shells arrive as one flat texture-lit material: no clearcoat, tyres
+# as shiny as the paint, no glass thickness. Assign real automotive shading so
+# the render worker's studio lighting has something to work with.
+if DO_MATERIALS:
+    ARCH = lo[ZA] + 0.34 * H          # below this, wheels/tyres/sills live
+    rubber = bpy.data.materials.new("tyre_rubber_ai")
+    rubber.use_nodes = True
+    rb = rubber.node_tree.nodes.get("Principled BSDF")
+    rb.inputs["Base Color"].default_value = (0.022, 0.022, 0.024, 1.0)
+    rb.inputs["Roughness"].default_value = 0.92
+    if "Specular IOR Level" in rb.inputs:
+        rb.inputs["Specular IOR Level"].default_value = 0.18
+
+    tyre_faces = 0
+    for o in meshes:
+        me = o.data
+        if rubber.name not in [m.name for m in me.materials]:
+            me.materials.append(rubber)
+        ridx = [i for i, m in enumerate(me.materials) if m and m.name == rubber.name][0]
+        gset = {i for i, m in enumerate(me.materials) if m and m.name.startswith("glass_ai")}
+        mw = np.asarray(o.matrix_world.to_4x4())
+        tex = texture_of(me.materials[0] if me.materials else None)
+        bm = bmesh.new(); bm.from_mesh(me); bm.faces.ensure_lookup_table()
+        uvl = bm.loops.layers.uv.active
+        for f in bm.faces:
+            if f.material_index in gset:
+                continue
+            c = f.calc_center_median()
+            wc = (mw @ np.array([c.x, c.y, c.z, 1.0]))[:3]
+            if wc[ZA] > ARCH:
+                continue                      # only the wheel band
+            if tex and uvl:
+                px, tw, th = tex
+                if face_luma(px, tw, th, [l[uvl].uv for l in f.loops]) > 0.10:
+                    continue                  # bright = alloy spoke or sill, not tyre
+            f.material_index = ridx
+            tyre_faces += 1
+        bm.to_mesh(me); bm.free()
+
+        # body paint: clearcoat over the baked texture (keeps the car's colour)
+        for m in me.materials:
+            if not m or m.name.startswith(("glass_ai", "tyre_rubber_ai", "plate_")):
+                continue
+            b = m.node_tree.nodes.get("Principled BSDF") if m.use_nodes else None
+            if not b:
+                continue
+            b.inputs["Roughness"].default_value = 0.22
+            if "Metallic" in b.inputs:
+                b.inputs["Metallic"].default_value = 0.35
+            for coat in ("Coat Weight", "Clearcoat"):
+                if coat in b.inputs:
+                    b.inputs[coat].default_value = 1.0
+            for cr in ("Coat Roughness", "Clearcoat Roughness"):
+                if cr in b.inputs:
+                    b.inputs[cr].default_value = 0.04
+    print(f"AI_PREMIUM materials: {tyre_faces} tyre faces -> rubber; clearcoat paint applied")
+
+    # glass thickness: a single-surface window renders like a decal; give it
+    # real depth so edges catch light at grazing angles
+    for o in meshes:
+        if any(m and m.name.startswith("glass_ai") for m in o.data.materials):
+            sol = o.modifiers.new("glass_thickness", "SOLIDIFY")
+            sol.thickness = max(0.0015, 0.004 * H)
+            sol.offset = 0.0
+            sol.material_offset = 0
+            bpy.context.view_layer.objects.active = o
+            try:
+                bpy.ops.object.modifier_apply(modifier=sol.name)
+                print(f"AI_PREMIUM glass thickness {sol.thickness:.4f} applied")
+            except Exception as e:
+                print(f"AI_PREMIUM solidify skipped: {str(e)[:60]}")
+
 # ---- 2. number plate -----------------------------------------------------
 # Front = the length-end furthest from the roof-band centroid (long bonnet).
 if DO_PLATES:
@@ -274,6 +349,17 @@ if DO_PLATES:
     plate(front_is_max, 0.30, "plate_front_ai", fpath)
     plate(not front_is_max, 0.46, "plate_rear_ai", rpath)
     print(f"AI_PREMIUM plates: front_at_{'max' if front_is_max else 'min'} width={pw:.3f}")
+
+# ---- 3. true scale -------------------------------------------------------
+# Factory length from platform/geometry/vehicle_dims.csv (verified, sourced).
+if TRUE_LENGTH_MM:
+    target = TRUE_LENGTH_MM / 1000.0
+    factor = target / size[LA]
+    for o in bpy.context.scene.objects:
+        if o.parent is None:
+            o.scale = tuple(v * factor for v in o.scale)
+    bpy.context.view_layer.update()
+    print(f"AI_PREMIUM true-scale: {size[LA]:.3f} -> {target:.3f} m (x{factor:.3f})")
 
 bpy.ops.export_scene.gltf(filepath=DST, export_format="GLB", export_materials="EXPORT")
 print(f"AI_PREMIUM done -> {DST} ({os.path.getsize(DST)//1024}KB)")
