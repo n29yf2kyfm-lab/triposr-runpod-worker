@@ -26,10 +26,11 @@ pip install -q "transformers==4.57.6" || true
 
 status fetch-inputs
 PUB=https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finetune/eval_inputs
-mkdir -p /workspace/eval_inputs/{golf,escape,model3}
+mkdir -p /workspace/eval_inputs/{golf,escape,model3,gti}
 for i in 0 1 2 3; do
   curl -sf "$PUB/golf/$i.jpg"   -o /workspace/eval_inputs/golf/$i.jpg   || true
   curl -sf "$PUB/escape/$i.jpg" -o /workspace/eval_inputs/escape/$i.jpg || true
+  curl -sf "$PUB/gti/$i.jpg"    -o /workspace/eval_inputs/gti/$i.jpg    || true
 done
 curl -sf "$PUB/model3/0.jpg" -o /workspace/eval_inputs/model3/0.jpg || true
 ls -la /workspace/eval_inputs/*/
@@ -72,7 +73,13 @@ CASES = {
     "golf":   sorted(glob.glob("/workspace/eval_inputs/golf/*.jpg")),
     "model3": sorted(glob.glob("/workspace/eval_inputs/model3/*.jpg")),
     "escape": sorted(glob.glob("/workspace/eval_inputs/escape/*.jpg")),
+    "gti":    sorted(glob.glob("/workspace/eval_inputs/gti/*.jpg")),
 }
+# EVAL_CASES=gti runs one case only — fast, cheap spot-checks of new vehicles
+_only = [c for c in os.environ.get("EVAL_CASES", "").split(",") if c]
+if _only:
+    CASES = {k: v for k, v in CASES.items() if k in _only}
+print("cases:", list(CASES))
 
 def gen(case, paths, tag):
     imgs = [Image.open(p) for p in paths]
