@@ -78,6 +78,9 @@ def main():
         env["HF_TOKEN"] = env["HUGGING_FACE_HUB_TOKEN"] = hf
     if os.environ.get("SB_KEY"):    # lets eval pods upload results; never in scripts
         env["SB_KEY"] = os.environ["SB_KEY"]
+    for k in ("EVAL_CASES", "EVAL_PIPE"):   # eval knobs (single-case spot checks)
+        if os.environ.get(k):
+            env[k] = os.environ[k]
 
     pod = None
     deadline = time.time() + a.hunt_hours * 3600
