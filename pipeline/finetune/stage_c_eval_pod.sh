@@ -5,7 +5,12 @@
 # Produces 6 GLBs (3 cases x base/alam3d) and uploads them to the
 # car-meshes bucket under eval/ for rendering + human review.
 # Secrets (HF_TOKEN for gated DINOv3, SB_KEY for upload) arrive via pod env.
-OUT=/workspace/alam3d_eval
+# Outputs live on CONTAINER-LOCAL disk, not the network volume. On 2026-07-26
+# the volume hit its quota and three eval pods went dark: the logs were created
+# with plausible sizes but read back as all-NUL, so there was no way to see what
+# the run was doing. Only the checkpoints are read from /workspace; a handful of
+# GLBs fit easily on the 60GB container disk and go straight to Supabase.
+OUT=/root/alam3d_eval
 CKPT_DIR=/workspace/alam3d_stage_c/ckpts
 mkdir -p "$OUT/logs"
 ( cd "$OUT/logs" && python3 -m http.server 8000 >/dev/null 2>&1 & )
@@ -24,22 +29,38 @@ cd /app/TRELLIS.2 || { status FATAL-no-trellis2; sleep infinity; }
 export PYTHONPATH=/app/TRELLIS.2:/app:$PYTHONPATH
 pip install -q "transformers==4.57.6" || true
 
+# Fail fast and loudly if the volume is out of quota again — a silent quota
+# error is what truncated Stage D's step-4000 checkpoint mid-save.
+python3 - <<'PY' || { status FATAL-volume-quota; sleep infinity; }
+import os, sys
+p = "/workspace/_eval_quota_probe"
+try:
+    with open(p, "wb") as f:
+        f.write(b"X" * 8_000_000); f.flush(); os.fsync(f.fileno())
+    ok = open(p, "rb").read() == b"X" * 8_000_000
+finally:
+    try: os.remove(p)
+    except Exception: pass
+print("volume writable:", ok)
+sys.exit(0 if ok else 1)
+PY
+
 status fetch-inputs
 PUB=https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finetune/eval_inputs
-mkdir -p /workspace/eval_inputs/{golf,escape,model3,gti,gti8}
+mkdir -p /root/eval_inputs/{golf,escape,model3,gti,gti8}
 for i in 0 1 2 3; do
-  curl -sf "$PUB/golf/$i.jpg"   -o /workspace/eval_inputs/golf/$i.jpg   || true
-  curl -sf "$PUB/escape/$i.jpg" -o /workspace/eval_inputs/escape/$i.jpg || true
-  curl -sf "$PUB/gti/$i.jpg"    -o /workspace/eval_inputs/gti/$i.jpg    || true
-  for j in 4 5 6 7; do curl -sf "$PUB/gti8/$j.jpg" -o /workspace/eval_inputs/gti8/$j.jpg || true; done
-  curl -sf "$PUB/gti8/$i.jpg"   -o /workspace/eval_inputs/gti8/$i.jpg   || true
+  curl -sf "$PUB/golf/$i.jpg"   -o /root/eval_inputs/golf/$i.jpg   || true
+  curl -sf "$PUB/escape/$i.jpg" -o /root/eval_inputs/escape/$i.jpg || true
+  curl -sf "$PUB/gti/$i.jpg"    -o /root/eval_inputs/gti/$i.jpg    || true
+  for j in 4 5 6 7; do curl -sf "$PUB/gti8/$j.jpg" -o /root/eval_inputs/gti8/$j.jpg || true; done
+  curl -sf "$PUB/gti8/$i.jpg"   -o /root/eval_inputs/gti8/$i.jpg   || true
 done
-curl -sf "$PUB/model3/0.jpg" -o /workspace/eval_inputs/model3/0.jpg || true
-ls -la /workspace/eval_inputs/*/
+curl -sf "$PUB/model3/0.jpg" -o /root/eval_inputs/model3/0.jpg || true
+ls -la /root/eval_inputs/*/
 
 status generate
 python3 - <<'PY'
-import glob, io, json, os, sys, subprocess, types
+import glob, io, json, os, sys, subprocess, types, zipfile
 import importlib.util
 import torch
 from PIL import Image
@@ -58,7 +79,7 @@ spec.loader.exec_module(handler)
 
 import o_voxel
 
-OUT = "/workspace/alam3d_eval/logs"
+OUT = "/root/alam3d_eval/logs"
 ck = sorted(glob.glob("/workspace/alam3d_stage_c/ckpts/denoiser_ema0.9999_step*.pt"))
 if not ck:
     print("NO EMA CHECKPOINT FOUND"); open(f"{OUT}/status.json","w").write('{"step":"FATAL-no-ckpt"}'); sys.exit(1)
@@ -72,11 +93,11 @@ PIPE = os.environ.get("EVAL_PIPE", "1024_cascade")
 print("pipeline_type:", PIPE)
 
 CASES = {
-    "golf":   sorted(glob.glob("/workspace/eval_inputs/golf/*.jpg")),
-    "model3": sorted(glob.glob("/workspace/eval_inputs/model3/*.jpg")),
-    "escape": sorted(glob.glob("/workspace/eval_inputs/escape/*.jpg")),
-    "gti":    sorted(glob.glob("/workspace/eval_inputs/gti/*.jpg")),
-    "gti8":   sorted(glob.glob("/workspace/eval_inputs/gti8/*.jpg")),
+    "golf":   sorted(glob.glob("/root/eval_inputs/golf/*.jpg")),
+    "model3": sorted(glob.glob("/root/eval_inputs/model3/*.jpg")),
+    "escape": sorted(glob.glob("/root/eval_inputs/escape/*.jpg")),
+    "gti":    sorted(glob.glob("/root/eval_inputs/gti/*.jpg")),
+    "gti8":   sorted(glob.glob("/root/eval_inputs/gti8/*.jpg")),
 }
 # EVAL_CASES=gti runs one case only — fast, cheap spot-checks of new vehicles
 _only = [c for c in os.environ.get("EVAL_CASES", "").split(",") if c]
@@ -111,10 +132,23 @@ for case, paths in CASES.items():
 # swap in the fine-tuned weights. Stage C tuned the 512 shape stage; Stage D
 # tuned the 1024 refiner — with both loaded, the whole geometry cascade is ours.
 def swap(stage_key, ckpt_glob, label):
+    # A missing or truncated checkpoint must ABORT, never fall through to stock
+    # weights: the run would still emit "alam3d" GLBs that are really Microsoft's
+    # model, and the comparison sheet would be a lie. The full volume truncated
+    # Stage D's step-4000 save on 2026-07-26, so verify the archive too — a
+    # torch .pt is a zip, and reading its central directory proves it all landed.
     ck = sorted(glob.glob(ckpt_glob), reverse=True)
-    if not ck:
-        print(f"no {label} checkpoint ({ckpt_glob}) — leaving stock")
-        return None
+    good = []
+    for p in ck:
+        try:
+            with zipfile.ZipFile(p):
+                good.append(p)
+        except Exception as e:
+            print(f"{label}: SKIPPING truncated checkpoint {os.path.basename(p)} ({type(e).__name__})")
+    if not good:
+        raise SystemExit(f"{label}: no loadable checkpoint matching {ckpt_glob} — aborting "
+                         f"rather than silently evaluating stock weights")
+    ck = good
     sd = torch.load(ck[0], map_location="cuda", weights_only=True)
     m = pipeline.models[stage_key]
     missing, unexpected = m.load_state_dict(sd, strict=False)
