@@ -33,18 +33,22 @@ BAD = re.compile(r"(?i)\b(low ?poly|lowpoly|low-poly|game ?ready|gameready|game 
                  r"abandoned|sticker|logo|badge|diorama|scene|pack|bundle|collection)")
 
 
-VEHICLE_NAME = re.compile(r"(?i)\b(car|auto|vehicle|van|truck|lorry|pickup|ute|suv|4x4|jeep|"
-                          r"sedan|saloon|hatch(back)?|estate|wagon|coupe|convertible|cabrio|"
-                          r"minivan|mpv|crossover|transit|sprinter|transporter|defender|"
-                          r"land ?rover|range ?rover|bmw|audi|mercedes|volkswagen|vw|ford|toyota|"
-                          r"honda|nissan|mazda|kia|hyundai|peugeot|renault|citroen|skoda|seat|"
-                          r"volvo|fiat|opel|vauxhall|subaru|mitsubishi|suzuki|dacia|tesla|"
-                          r"porsche|jaguar|lexus|mini|dodge|chevrolet|chevy|gmc|ram|cadillac)\b")
+BRANDS = (r"bmw|audi|mercedes|benz|volkswagen|vw|ford|toyota|honda|nissan|mazda|kia|"
+          r"hyundai|peugeot|renault|citroen|skoda|seat|volvo|fiat|opel|vauxhall|subaru|"
+          r"mitsubishi|suzuki|dacia|tesla|porsche|jaguar|lexus|mini|dodge|chevrolet|chevy|"
+          r"gmc|cadillac|chrysler|jeep|land ?rover|range ?rover|defender|lotus|bentley|"
+          r"rolls ?royce|aston ?martin|maserati|alfa|lancia|infiniti|acura|genesis|"
+          r"isuzu|daihatsu|ssangyong|cupra|smart|saab|mg\b")
+BODY = (r"sedan|saloon|hatchback|hatch ?back|coupe|convertible|cabriolet|cabrio|roadster|"
+        r"suv|crossover|4x4|estate car|station ?wagon|pickup ?truck|pick-?up|"
+        r"panel ?van|cargo ?van|minivan|mpv|people ?carrier|transit|sprinter|transporter")
+VEHICLE_NAME = re.compile(r"(?i)\b(" + BRANDS + r"|" + BODY + r")\b")
+
 # non-car vehicles that would teach the wrong prior
 WRONG_CLASS = re.compile(r"(?i)\b(train|locomotive|tram|railcar|boat|ship|yacht|plane|aircraft|"
                          r"jet|helicopter|drone|bike|bicycle|motorbike|motorcycle|scooter|quad|"
                          r"atv|forklift|excavator|bulldozer|crane|tractor|combine|golf ?cart|"
-                         r"go.?kart|trailer|caravan|bus|coach|tank|tram)\b")
+                         r"go.?kart|trailer|caravan|bus|coach|tank|tram|skateboard|skate|longboard|railway|railroad|rail ?car|carriage|wagon ?model|passenger ?wagon|freight|horse|cart|chariot|trolley|wheelbarrow|dump ?truck|tipper|mixer|tanker|vacuum|sweeper|refuse|garbage|fire ?truck|ambulance|semi ?truck|articulated|hgv|lorry|18.?wheeler|monster|6 ?x ?6|8 ?x ?8|overwatch|zelda|romani|halo|fallout|apex|valorant|csgo|warcraft|pubg|starcraft|mario|sonic)\\b")
 
 
 def norm(s):
