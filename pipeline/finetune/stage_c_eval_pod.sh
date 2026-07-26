@@ -157,14 +157,41 @@ def swap(stage_key, ckpt_glob, label):
         raise SystemExit(f"{label}: too many missing keys, aborting")
     return ck[0]
 
-swap("shape_slat_flow_model_512",
-     "/workspace/alam3d_stage_c/ckpts/denoiser_ema*step*.pt", "Stage C 512")
-if os.environ.get("EVAL_STAGE_D", "1") == "1":
-    swap("shape_slat_flow_model_1024",
-         "/workspace/alam3d_stage_d/ckpts/denoiser_ema*step*.pt", "Stage D 1024")
+C_GLOB = "/workspace/alam3d_stage_c/ckpts/denoiser_ema*step*.pt"
+D_GLOB = "/workspace/alam3d_stage_d/ckpts/denoiser_ema*step*.pt"
+K512, K1024 = "shape_slat_flow_model_512", "shape_slat_flow_model_1024"
 
-for case, paths in CASES.items():
-    gen(case, paths, "alam3d")
+if os.environ.get("EVAL_ISOLATE") == "1":
+    # ISOLATION RUN. The C+D cascade came out visibly worse than stock on the
+    # GTI, but "worse" does not say WHICH stage did it. Four variants from one
+    # pipeline, one seed, one pod answers that: whichever variant carries the
+    # defect owns it, and if both C-only and D-only look fine while C+D does
+    # not, the fault is in how the two stack rather than in either checkpoint.
+    stock = {k: {n: t.detach().cpu().clone() for n, t in pipeline.models[k].state_dict().items()}
+             for k in (K512, K1024)}
+    print(f"stashed stock weights for {list(stock)}")
+
+    def restore(k, label):
+        pipeline.models[k].load_state_dict(stock[k], strict=False)
+        print(f"restored stock {label}")
+
+    swap(K512, C_GLOB, "Stage C 512")
+    for case, paths in CASES.items():
+        gen(case, paths, "conly")          # tuned C  + stock D
+
+    swap(K1024, D_GLOB, "Stage D 1024")
+    for case, paths in CASES.items():
+        gen(case, paths, "cd")             # tuned C  + tuned D
+
+    restore(K512, "512")
+    for case, paths in CASES.items():
+        gen(case, paths, "donly")          # stock C  + tuned D
+else:
+    swap(K512, C_GLOB, "Stage C 512")
+    if os.environ.get("EVAL_STAGE_D", "1") == "1":
+        swap(K1024, D_GLOB, "Stage D 1024")
+    for case, paths in CASES.items():
+        gen(case, paths, "alam3d")
 print("EVAL_GENERATION_COMPLETE")
 PY
 [ $? -ne 0 ] && { echo "GENERATE FAILED"; status FATAL-generate; sleep infinity; }
