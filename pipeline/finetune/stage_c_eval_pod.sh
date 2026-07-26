@@ -26,11 +26,13 @@ pip install -q "transformers==4.57.6" || true
 
 status fetch-inputs
 PUB=https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finetune/eval_inputs
-mkdir -p /workspace/eval_inputs/{golf,escape,model3,gti}
+mkdir -p /workspace/eval_inputs/{golf,escape,model3,gti,gti8}
 for i in 0 1 2 3; do
   curl -sf "$PUB/golf/$i.jpg"   -o /workspace/eval_inputs/golf/$i.jpg   || true
   curl -sf "$PUB/escape/$i.jpg" -o /workspace/eval_inputs/escape/$i.jpg || true
   curl -sf "$PUB/gti/$i.jpg"    -o /workspace/eval_inputs/gti/$i.jpg    || true
+  for j in 4 5 6 7; do curl -sf "$PUB/gti8/$j.jpg" -o /workspace/eval_inputs/gti8/$j.jpg || true; done
+  curl -sf "$PUB/gti8/$i.jpg"   -o /workspace/eval_inputs/gti8/$i.jpg   || true
 done
 curl -sf "$PUB/model3/0.jpg" -o /workspace/eval_inputs/model3/0.jpg || true
 ls -la /workspace/eval_inputs/*/
@@ -74,6 +76,7 @@ CASES = {
     "model3": sorted(glob.glob("/workspace/eval_inputs/model3/*.jpg")),
     "escape": sorted(glob.glob("/workspace/eval_inputs/escape/*.jpg")),
     "gti":    sorted(glob.glob("/workspace/eval_inputs/gti/*.jpg")),
+    "gti8":   sorted(glob.glob("/workspace/eval_inputs/gti8/*.jpg")),
 }
 # EVAL_CASES=gti runs one case only — fast, cheap spot-checks of new vehicles
 _only = [c for c in os.environ.get("EVAL_CASES", "").split(",") if c]
