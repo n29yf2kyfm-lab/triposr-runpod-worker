@@ -66,14 +66,41 @@ H = size[ZA]
 print(f"AI_PREMIUM bbox={np.round(size,3)} length_axis={LA} up={ZA} width_axis={WA}")
 
 
-def albedo_of(mat):
-    """Base colour of a material, or None when it is texture-driven."""
+def texture_of(mat):
+    """(pixels HxWx4, width, height) of the material's base-colour image.
+
+    Generated shells are ONE texture-driven material, so a material's
+    Base Color default_value is meaningless white — the colour that matters
+    lives in the baked image and has to be sampled per face (reading the
+    default silently classified every face as 'bright paint' and found no
+    glass at all).
+    """
     if not mat or not mat.use_nodes:
         return None
     for n in mat.node_tree.nodes:
-        if n.type == "BSDF_PRINCIPLED":
-            return np.array(n.inputs["Base Color"].default_value[:3])
+        # NB: images packed in a GLB load lazily — has_data is False until the
+        # pixels are touched, so gating on it skips every texture.
+        if n.type != "TEX_IMAGE" or not n.image:
+            continue
+        try:
+            w, h = n.image.size
+            if not (w and h):
+                continue
+            px = np.array(n.image.pixels[:], dtype=np.float32).reshape(h, w, 4)
+            return px, w, h
+        except Exception as e:
+            print(f"AI_PREMIUM texture read failed ({n.image.name}): {str(e)[:60]}")
     return None
+
+
+def face_luma(px, w, h, uvs):
+    """Mean luminance of a face, sampled at its UV centroid."""
+    u = float(np.mean([c[0] for c in uvs])) % 1.0
+    v = float(np.mean([c[1] for c in uvs])) % 1.0
+    x = min(int(u * w), w - 1)
+    y = min(int(v * h), h - 1)
+    r, g, b = px[y, x, :3]
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
 
 
 # ---- 1. glass ------------------------------------------------------------
@@ -101,21 +128,44 @@ for o in meshes:
         me.materials.append(gmat)
     gidx = [i for i, m in enumerate(me.materials) if m and m.name == gmat.name][0]
     mw = np.asarray(o.matrix_world.to_4x4())
+    # normals need the rotation part only — the glTF importer rotates Y-up to
+    # Z-up, so a raw local normal's z is NOT world up (this silently matched
+    # zero faces until caught).
+    rot = np.asarray(o.matrix_world.to_3x3())
+    tex = texture_of(me.materials[0] if me.materials else None)
     bm = bmesh.new(); bm.from_mesh(me); bm.faces.ensure_lookup_table()
+    uvl = bm.loops.layers.uv.active
+
+    # pass 1: which faces sit in the greenhouse and are pitched like glazing
+    band = []
     for f in bm.faces:
         c = f.calc_center_median()
         wc = (mw @ np.array([c.x, c.y, c.z, 1.0]))[:3]
         if not (WAIST < wc[ZA] < ROOF):
             continue
-        n = f.normal
-        nz = abs([n.x, n.y, n.z][ZA]) / (np.linalg.norm([n.x, n.y, n.z]) + 1e-9)
-        if nz > 0.80:                    # near-horizontal -> roof panel, not glass
-            continue
-        base = albedo_of(me.materials[f.material_index] if f.material_index < len(me.materials) else None)
-        if base is not None and base.mean() > 0.35:
-            continue                     # bright panel paint, not tinted glass
-        f.material_index = gidx
-        glass_faces += 1
+        n = rot @ np.array([f.normal.x, f.normal.y, f.normal.z])
+        if abs(n[ZA]) / (np.linalg.norm(n) + 1e-9) > 0.80:
+            continue                     # near-horizontal -> roof panel, not glass
+        band.append(f)
+
+    # pass 2: inside that band, glass is the DARK cluster. Absolute thresholds
+    # fail on dark cars (the GTI is near-black paint), so take a percentile of
+    # the band itself — relative darkness separates glazing from bodywork on
+    # any colour.
+    if tex and band and uvl:
+        px, tw, th = tex
+        lum = np.array([face_luma(px, tw, th, [l[uvl].uv for l in f.loops]) for f in band])
+        cut = max(0.03, float(np.percentile(lum, 45)))
+        for f, L in zip(band, lum):
+            if L <= cut:
+                f.material_index = gidx
+                glass_faces += 1
+        print(f"AI_PREMIUM band={len(band)} faces, luma p45={cut:.3f}, "
+              f"median={np.median(lum):.3f}")
+    else:                                 # no texture: fall back to geometry only
+        for f in band:
+            f.material_index = gidx
+            glass_faces += 1
     bm.to_mesh(me); bm.free()
 print(f"AI_PREMIUM glass: {glass_faces} faces -> 'glass_ai' (alpha {A_SIDE})")
 
