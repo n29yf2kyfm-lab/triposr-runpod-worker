@@ -52,11 +52,20 @@ poll `.../status/{jobId}`; header `Authorization: Bearer $RUNPOD_API_KEY`.
 
 | Purpose | Endpoint ID | Image | Notes |
 |---|---|---|---|
-| **Render** (hero studio) | **`ng8oiz4p2l0xa0`** (`RUNPOD_RENDER_ENDPOINT`, default in `platform/pipeline/config.py:32`) | `alamk123/ai-mechanic:render-latest` | OPTIX, scale-to-zero, ~5–7 s/frame |
-| **TRELLIS.2 generation** | name **`trellis2-v2`** (ID **not in repo** — get from RunPod console) | `alamk123/ai-mechanic:trellis2-latest` | image-to-3D; the offline gap-filler |
-| **Grounded-SAM** (part seg) | env **`GSAM_EP`** (ID not committed) | `alamk123/ai-mechanic:gsam-latest` | optional; `segment/masks_and_vote.py:30` |
+| **Render** (hero studio) | **`ng8oiz4p2l0xa0`** (name `render-v2`; `RUNPOD_RENDER_ENDPOINT`, default in `platform/pipeline/config.py:32`) | `alamk123/ai-mechanic:render-latest` | RTX 4090, workersMax=2, idle 15s, execTimeout 600s, no network volume |
+| **TRELLIS.2 generation** | **`nd0fagqlr5z2ur`** (name `trellis2-v2`) | `alamk123/ai-mechanic:trellis2-latest` | RTX A5000, network volume `kyh32l0npu` (hunyuan3d-models, EU-SE-1), idle 30s, execTimeout 1800s. ⚠️ **`workersMax=0` — currently disabled; will not serve until raised** |
+| **Grounded-SAM** (part seg) | env **`GSAM_EP`** (no live endpoint found on the account) | `alamk123/ai-mechanic:gsam-latest` | optional; `segment/masks_and_vote.py:30` |
 | Hunyuan3D 2.1 | — | — | **endpoints DELETED** (UK-excluded licence, retired) |
 | TRELLIS v1 (legacy) | — | `:trellis-latest` / `:trellis-v1` | superseded by v2 |
+
+**Live account state (2026-07-26, via `rest.runpod.io/v1`):** only the two
+endpoints above exist. **All pods are EXITED — nothing is billing.** The
+`alam3d-stage-a` pod (`r0uucvv8f3wkf3`, vol `yiv4apiad7`) is retained but stopped;
+Stage B/C/eval pods are gone (the launcher auto-deletes on terminal state), so
+the Stage C outcome is not recoverable from the pod list — only from the volume.
+Network volumes: **`yiv4apiad7`** `alam3d-data` 250 GB EU-RO-1 (the training
+set + any checkpoint); `kyh32l0npu` hunyuan3d-models 200 GB EU-SE-1; three
+50 GB scratch volumes.
 
 - **Account cap: 10 serverless workers across ALL endpoints** (CLAUDE.md).
 - **List endpoints live:** `GET https://rest.runpod.io/v1/endpoints`
