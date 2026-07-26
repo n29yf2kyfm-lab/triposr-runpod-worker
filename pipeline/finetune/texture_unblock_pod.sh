@@ -60,7 +60,11 @@ print(f"PBR-DUMPED ROWS: {dumped} of {len(m)}   <- voxelize_pbr saw 0 of these b
 PY
 
 status voxelize-pbr
-python3 data_toolkit/voxelize_pbr.py AlamCars --root "$ROOT" || echo "STEP-FAILED voxelize_pbr"
+# UPSTREAM BUG: --resolution is declared type=str with default=1024 (an int),
+# and the parser then calls .split(",") on it — so omitting the flag always
+# raises AttributeError. Stage A omitted it, which is why no PBR voxels exist.
+python3 data_toolkit/voxelize_pbr.py AlamCars --root "$ROOT" --resolution 512,1024 \
+  || echo "STEP-FAILED voxelize_pbr"
 python3 data_toolkit/build_metadata.py AlamCars --root "$ROOT" >/dev/null 2>&1 || true
 
 status encode-pbr-latent
