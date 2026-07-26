@@ -3,3 +3,7 @@ pipeline/node_modules/
 __pycache__/
 *.pyc
 .firecrawl/
+.env
+.env.*
+*.secrets
+secrets.*
