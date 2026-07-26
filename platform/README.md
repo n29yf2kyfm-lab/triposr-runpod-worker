@@ -21,8 +21,8 @@ match instantly and are built offline for the next visitor.
 
 | File | What it is |
 |------|-----------|
-| `schema.sql` | Normalised Postgres/Supabase catalogue (manufacturers → models → generations → trims → variants), asset registry, render sets, VRM index, and the `variant_resolved` materialised view. Run once in the SQL editor. |
-| `resolver/index.ts` | Supabase Edge Function `resolve-vehicle`: decoded spec (or hashed VRM) → best-matching asset + frame manifest. Scores make/model/year/trim/colour; never triggers AI on the hot path. |
+| `schema.sql` | Normalised Postgres/Supabase catalogue (manufacturers → models → generations → trims → variants), asset registry, render sets, and the `variant_resolved` view. RLS is enabled on every table (public read, writes service-role only). Run once in the SQL editor. **No registration is ever keyed, indexed or stored — there is deliberately no VRM table.** |
+| `resolver/index.ts` | Supabase Edge Function `resolve-vehicle`: takes the **decoded spec** (make/model/year/trim/body/fuel — never the reg) → best-matching asset + frame manifest. Self-contained: reads the published `catalogue.v2.json` + `aliases.json` from public storage (no DB, no service-role key). Scores make/model/year/trim/colour; never triggers AI on the hot path. |
 | `catalogue/build_catalogue.py` | Builds the storage-backed catalogue: uploads turntable frames + per-car `manifest.json`, publishes `catalogue.json`. Idempotent. |
 | `catalogue/catalogue.json` | The generated MVP catalogue index (4 cars). |
 | `viewer.html` | The drag-to-spin showroom viewer. Reads `window.__CARS__` (inlined for the artifact demo) or, in the app, fetches manifests from Supabase. |
@@ -49,11 +49,18 @@ reg → (app decodes VRM: make/model/year/trim/colour)
 
 ## Wiring into the Lovable app (next)
 
-1. Run `schema.sql` in the app's Supabase project.
-2. Deploy `resolver/index.ts` as the `resolve-vehicle` Edge Function
-   (secrets: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `VRM_PEPPER`).
-3. On the reg-check result page, call the function with the decoded vehicle and
-   mount the viewer against the returned manifest URL.
+1. Run `schema.sql` in the app's Supabase project (enables RLS on all tables).
+2. Deploy `resolver/index.ts` as the `resolve-vehicle` Edge Function. It needs
+   **no secrets** — it reads the public catalogue from storage. Optional env:
+   `RESOLVER_DATA_BASE` (point at a non-prod bucket) and `RESOLVER_MIN_SCORE`
+   (defaults to 40). Do **not** give it a service-role key or a VRM pepper —
+   it neither writes the DB nor sees the registration.
+3. Deploy `dvsa-lookup/index.ts` (secrets: `DVSA_CLIENT_ID`,
+   `DVSA_CLIENT_SECRET`, `DVSA_API_KEY`, `DVSA_TOKEN_URL`, `DVSA_SCOPE`). The
+   app POSTs `{ reg }` in the body (never the query string) to decode it, then
+   passes only the decoded spec on to `resolve-vehicle`.
+4. On the reg-check result page, call `resolve-vehicle` with the decoded vehicle
+   and mount the viewer against the returned manifest URL.
 
 ## Extending the library
 

@@ -11,6 +11,18 @@ import requests, runpod, torch
 from PIL import Image
 
 
+def _truthy(v, default=True):
+    """Coerce a JSON flag to bool; treat "false"/"0"/"no"/"" as False (plain
+    bool() of a non-empty string like "false" would otherwise be True)."""
+    if isinstance(v, bool):
+        return v
+    if v is None:
+        return default
+    if isinstance(v, str):
+        return v.strip().lower() not in ("", "false", "0", "no", "off")
+    return bool(v)
+
+
 def _assert_safe_url(url):
     """SSRF guard: only http(s), and the host must resolve to public IPs only
     (never loopback/link-local/private/reserved, e.g. 169.254.169.254)."""
@@ -110,7 +122,7 @@ def _handle(job):
     # as a billboard wall (measured: 61% of pixels at partial alpha on smoke
     # test 2). Tencent's remover paints the background white (bgcolor
     # 255,255,255,0), which is what the shape pipeline expects.
-    if inp.get("remove_bg", True):
+    if _truthy(inp.get("remove_bg"), default=True):
         img = rembg(img.convert("RGB"))
     else:
         img = img.convert("RGBA")
@@ -137,7 +149,7 @@ def _handle(job):
     out_path = raw
     tex_err = None
 
-    if inp.get("texture", True):
+    if _truthy(inp.get("texture"), default=True):
         try:
             src_png = f"{OUT}/{uid}.png"
             img.save(src_png)

@@ -32,7 +32,10 @@ def repair_utf8(s):
 
 GEN_PATTERNS = [
     (re.compile(r"\bmk\s?(\d+(?:\.\d)?)\b", re.I), lambda m: f"mk{m.group(1)}"),
-    (re.compile(r"\b([wcefgj]\d{2,3})\b", re.I), lambda m: m.group(1).lower()),
+    # NOTE: no broad "[letter]+digits" catch-all — it matched trim/engine tokens
+    # (C63, E300, e208) and recorded them as chassis generations, asserting a
+    # generation the source never stated. Only the explicit chassis whitelist
+    # below is trusted; unknown codes are left blank rather than guessed.
     (re.compile(r"\b(8[pvy])\b", re.I), lambda m: m.group(1).lower()),
     (re.compile(r"\b(b[5-9])\b", re.I), lambda m: m.group(1).lower()),
     (re.compile(r"\b(t3[23])\b", re.I), lambda m: m.group(1).lower()),
@@ -114,8 +117,10 @@ def migrate_entry(c, sizes):
     else:
         ys = [int(x) for x in YEAR_RE.findall(title)]
         if len(ys) == 1:
-            # single stated year: defensible as "around this year", ±1 window
-            year_start, year_end = ys[0] - 1, ys[0] + 1
+            # Only the single stated year is defensible — do NOT invent a ±1
+            # production span the source never states (accuracy rule). The ±1
+            # tolerance for matching lives in the resolver's year gate, not here.
+            year_start = year_end = ys[0]
 
     kb = sizes.get(f"{make}/{model}")
     status, reason, review = "approved", None, []
