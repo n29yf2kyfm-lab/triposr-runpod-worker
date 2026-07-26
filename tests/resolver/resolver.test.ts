@@ -1,7 +1,18 @@
 import { describe, it, expect } from "vitest";
 import { normaliseVehicle, normaliseMake, normaliseModel, normaliseColourFamily } from "../../src/lib/vehicle-normalisation";
-import { resolveVehicle, DISCLOSURES } from "../../src/lib/vehicle-resolver";
+import { resolveVehicle, scoreAsset, DISCLOSURES } from "../../src/lib/vehicle-resolver";
 import type { VehicleAsset } from "../../src/types/vehicle-asset";
+import type { VehicleIdentity } from "../../src/types/vehicle";
+
+/** Build a VehicleIdentity directly so tests control generation/year without
+ *  the year->generation inference confounding a boundary case. */
+function vid(over: Partial<VehicleIdentity>): VehicleIdentity {
+  return {
+    make: "volkswagen", model: "golf", modelFamily: "golf",
+    sourceConfidence: { make: 1, model: 1, year: 0, generation: 0, bodyStyle: 0, derivative: 0, colour: 0 },
+    ...over,
+  };
+}
 
 /** Minimal valid asset factory — real fields, no shortcuts. */
 function asset(over: Partial<VehicleAsset>): VehicleAsset {
@@ -76,6 +87,11 @@ describe("normalisation", () => {
     expect(normaliseColourFamily("GREY")).toBe("grey");
     expect(normaliseColourFamily("Metallic Blue")).toBe("blue");
     expect(normaliseColourFamily("Nardo")).toBe("unknown");
+    expect(normaliseColourFamily("MULTI-COLOUR")).toBe("multicolour"); // hyphen tolerated
+  });
+  it("model fallback strips trailing trim words to the family (first token)", () => {
+    // no alias table for an unknown make -> exercises the fallback directly
+    expect(normaliseModel("Acme", "Widget Sport")).toBe("widget");
   });
   it("infers generation from year tables", () => {
     const v = normaliseVehicle({ make: "VW", model: "Golf GTE", manufactureYear: 2023 });
@@ -145,7 +161,8 @@ describe("resolver policies", () => {
     });
     const v = normaliseVehicle({ make: "VW", model: "Golf", manufactureYear: 2021, bodyStyle: "hatchback" });
     const r = resolveVehicle(v, [gen]);
-    if (r.asset) expect(r.disclosure).toBe(DISCLOSURES["approximate-generated"]);
+    expect(r.asset).not.toBeNull();          // assert resolution first — no vacuous pass
+    expect(r.disclosure).toBe(DISCLOSURES["approximate-generated"]);
   });
   it("no year + no generation stays below the exact band (representative at best)", () => {
     const v = normaliseVehicle({ make: "VW", model: "Golf" });
@@ -156,5 +173,76 @@ describe("resolver policies", () => {
     const v = normaliseVehicle({ make: "VW", model: "Tiguan Allspace", manufactureYear: 2022, bodyStyle: "SUV" });
     const r = resolveVehicle(v, [tiguanSuv]);
     expect(r.asset?.assetId).toBe(tiguanSuv.assetId);
+  });
+});
+
+// A thin-metadata asset (no generation, no yearStart) is exactly the pre-
+// enrichment shape that made the deployed minScore:40 path risky.
+const golfThin = asset({ assetId: "vw-golf-thin-v1" }); // no generation, no yearStart
+// A clean asset with a year range but no generation, for year-gate boundaries.
+const golfYearOnly = asset({
+  assetId: "vw-golf-yearonly-v1", yearStart: 2020, yearEnd: 2024, bodyStyle: "hatchback",
+});
+
+describe("deployed thin-metadata path (minScore 40)", () => {
+  it("refuses a make+model-only match when the caller gave a year we cannot confirm", () => {
+    // caller supplies a year (a discriminator) but the asset can't confirm it —
+    // must not serve a possibly-wrong-generation shell.
+    const v = vid({ manufactureYear: 2005 });
+    const r = resolveVehicle(v, [golfThin], { minScore: 40 });
+    expect(r.resolutionType).toBe("unavailable");
+  });
+  it("serves a representative when the caller gave NO discriminator to violate", () => {
+    const v = vid({}); // make + model only, no year, no generation
+    const r = resolveVehicle(v, [golfThin], { minScore: 40 });
+    expect(r.resolutionType).toBe("representative");
+    expect(r.asset?.assetId).toBe(golfThin.assetId);
+  });
+  it("serves when the year positively matches, even on thin generation metadata", () => {
+    const v = vid({ manufactureYear: 2022 });
+    const r = resolveVehicle(v, [golfYearOnly], { minScore: 40 });
+    expect(r.asset?.assetId).toBe(golfYearOnly.assetId);
+    expect(r.matchedFields).toContain("year");
+  });
+});
+
+describe("year gate boundaries (±1 year tolerance)", () => {
+  it("rejects a year 2+ before the range", () => {
+    expect(scoreAsset(golfYearOnly, vid({ manufactureYear: 2018 })).rejected).toBe("year-out-of-range");
+  });
+  it("accepts the year at range start minus 1", () => {
+    expect(scoreAsset(golfYearOnly, vid({ manufactureYear: 2019 })).rejected).toBeUndefined();
+  });
+  it("accepts the year at range end plus 1", () => {
+    expect(scoreAsset(golfYearOnly, vid({ manufactureYear: 2025 })).rejected).toBeUndefined();
+  });
+  it("rejects a year 2+ after the range", () => {
+    expect(scoreAsset(golfYearOnly, vid({ manufactureYear: 2026 })).rejected).toBe("year-out-of-range");
+  });
+});
+
+describe("exact tier + deterministic tie-break", () => {
+  it("an exact-derivative asset resolves as 'exact'", () => {
+    const gti = asset({
+      assetId: "vw-golf-gti-exact-v1", generation: "mk8", yearStart: 2020, yearEnd: 2024,
+      bodyStyle: "hatchback", exactTrim: true, exactDerivative: "gti", qualityGrade: "A",
+    });
+    const v = vid({ generation: "mk8", manufactureYear: 2022, bodyStyle: "hatchback", derivative: "gti" });
+    const r = resolveVehicle(v, [gti]);
+    expect(r.resolutionType).toBe("exact");
+    expect(r.disclosure).toBe(DISCLOSURES.exact);
+  });
+  it("breaks equal-score ties by accuracy/quality, not array order", () => {
+    const worse = asset({
+      assetId: "tie-worse", generation: "mk8", yearStart: 2020, yearEnd: 2024,
+      bodyStyle: "hatchback", qualityGrade: "B", accuracyGrade: "representative",
+    });
+    const better = asset({
+      assetId: "tie-better", generation: "mk8", yearStart: 2020, yearEnd: 2024,
+      bodyStyle: "hatchback", qualityGrade: "A", accuracyGrade: "generation-correct",
+    });
+    const v = vid({ generation: "mk8", manufactureYear: 2022, bodyStyle: "hatchback" });
+    expect(resolveVehicle(v, [worse, better]).asset?.assetId).toBe("tie-better");
+    expect(resolveVehicle(v, [better, worse]).asset?.assetId).toBe("tie-better");
   });
 });

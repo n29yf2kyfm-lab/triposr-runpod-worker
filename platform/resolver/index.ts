@@ -29,7 +29,10 @@
 // Response keeps the old keys (match/confidence/vehicle/asset) so the current
 // app keeps working, and adds `resolution` with the v2 truth.
 
+// Base is configurable so the function can be pointed at staging/other projects
+// without a code edit; falls back to the production serving bucket.
 const DATA_BASE =
+  Deno.env.get("RESOLVER_DATA_BASE") ??
   "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/resolver";
 const CACHE_MS = 10 * 60 * 1000;
 // see OPERATIONAL THRESHOLD note above — 75 once metadata enrichment lands
@@ -47,12 +50,21 @@ let cache: { at: number; catalogue: any[]; aliases: Aliases } | null = null;
 
 async function loadData(): Promise<{ catalogue: any[]; aliases: Aliases }> {
   if (cache && Date.now() - cache.at < CACHE_MS) return cache;
-  const [catalogue, aliases] = await Promise.all([
-    (await fetch(`${DATA_BASE}/catalogue.v2.json`)).json(),
-    (await fetch(`${DATA_BASE}/aliases.json`)).json(),
-  ]);
-  cache = { at: Date.now(), catalogue, aliases };
-  return cache;
+  try {
+    const [catRes, aliRes] = await Promise.all([
+      fetch(`${DATA_BASE}/catalogue.v2.json`, { signal: AbortSignal.timeout(8000) }),
+      fetch(`${DATA_BASE}/aliases.json`, { signal: AbortSignal.timeout(8000) }),
+    ]);
+    if (!catRes.ok || !aliRes.ok) throw new Error(`storage ${catRes.status}/${aliRes.status}`);
+    const [catalogue, aliases] = await Promise.all([catRes.json(), aliRes.json()]);
+    cache = { at: Date.now(), catalogue, aliases };
+    return cache;
+  } catch (e) {
+    // Serve the last good copy through a transient storage blip rather than
+    // taking the whole resolver down; only fail hard if we never loaded once.
+    if (cache) return cache;
+    throw e;
+  }
 }
 
 // ---- normalisation (port of src/lib/vehicle-normalisation.ts) --------------
@@ -145,27 +157,48 @@ function scoreAsset(a: any, v: any) {
   }
   if (v.bodyStyle && a.bodyStyle && v.bodyStyle === a.bodyStyle) { score += 15; matched.push("bodyStyle"); }
   if (v.fuel && (a.compatibleFuelTypes ?? []).map(clean).includes(v.fuel)) { score += 5; matched.push("fuel"); }
+  // Faithful port of the lib's derivative scoring: an exact derivative match
+  // adds the "derivative" marker, which (with exactTrim, at score>=90) unlocks
+  // the "exact" tier. Without this the "exact" branch below was unreachable.
+  if (v.derivative && a.exactDerivative && clean(a.exactDerivative) === v.derivative) {
+    score += 10; matched.push("derivative");
+  }
   if (v.trim && (a.compatibleTrimFamilies ?? []).map(clean).includes(v.trim)) { score += 5; matched.push("trim"); }
   if (a.provenance === "generated-from-reference" || a.accuracyGrade === "approximate") score -= 15;
   if (a.qualityGrade === "C") score -= 20;
   return { a, score: Math.max(0, Math.min(100, score)), matched };
 }
 
+const cors: Record<string, string> = {
+  "access-control-allow-origin": "*",
+  "access-control-allow-headers": "content-type, authorization, apikey",
+  "access-control-allow-methods": "POST, OPTIONS",
+};
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), {
     status,
-    headers: { "content-type": "application/json", "access-control-allow-origin": "*" },
+    headers: { "content-type": "application/json", ...cors },
+  });
+// 204 is a null-body status — giving it a body throws in Deno and breaks the
+// CORS preflight, so return an empty-body response for OPTIONS.
+const noContent = () => new Response(null, { status: 204, headers: cors });
+const unavailable = (d: unknown, score: number) =>
+  json({
+    match: "none", enqueue: true, vehicle: d, asset: null, confidence: 0,
+    resolution: { type: "unavailable", score, disclosure: DISCLOSURES.unavailable },
   });
 
 Deno.serve(async (req) => {
-  if (req.method === "OPTIONS") return json({}, 204);
+  if (req.method === "OPTIONS") return noContent();
   let d: any = {};
   try { d = await req.json(); } catch { /* empty body */ }
-  if (!d.make || !d.model) {
+  if (typeof d.make !== "string" || typeof d.model !== "string" || !d.make || !d.model) {
     return json({ error: "Provide make + model (the app decodes these from the reg)." }, 400);
   }
 
-  const { catalogue, aliases } = await loadData();
+  let catalogue: any[], aliases: Aliases;
+  try { ({ catalogue, aliases } = await loadData()); }
+  catch { return json({ error: "catalogue_unavailable" }, 503); }
   const make = normaliseMake(d.make, aliases);
   const modelFamily = normaliseModel(d.make, d.model, aliases);
   const year = d.year ? Number(d.year) : undefined;
@@ -176,21 +209,32 @@ Deno.serve(async (req) => {
     bodyStyle: normaliseBodyStyle(d.bodyStyle, aliases),
     fuel: d.fuel ? clean(d.fuel) : undefined,
     trim: d.trim ? clean(d.trim) : undefined,
+    derivative: d.derivative ? clean(d.derivative) : undefined,
   };
+
+  // Deterministic tie-break: equal scores fall back to accuracy, then quality,
+  // then provenance — not catalogue array order.
+  const ACC: Record<string, number> = { exact: 3, "generation-correct": 2, representative: 1, approximate: 0 };
+  const QUAL: Record<string, number> = { A: 3, B: 2, C: 1 };
+  const rank = (s: any): number =>
+    (ACC[s.a.accuracyGrade] ?? 0) * 100 + (QUAL[s.a.qualityGrade] ?? 0) * 10 +
+    (s.a.provenance === "generated-from-reference" ? 0 : 1);
 
   const candidates = catalogue
     .filter((a: any) => a.publicationStatus === "approved" && a.qualityGrade !== "rejected")
     .map((a: any) => scoreAsset(a, v))
     .filter((s: any) => !s.rejected)
-    .sort((x: any, y_: any) => y_.score - x.score);
+    .sort((x: any, y_: any) => (y_.score - x.score) || (rank(y_) - rank(x)));
 
   const best = candidates[0];
-  if (!best || best.score < MIN_SCORE) {
-    return json({
-      match: "none", enqueue: true, vehicle: d,
-      resolution: { type: "unavailable", score: best?.score ?? 0, disclosure: DISCLOSURES.unavailable },
-    });
-  }
+  if (!best || best.score < MIN_SCORE) return unavailable(d, best?.score ?? 0);
+
+  // Safety floor: below the generation-correct tier, if the caller gave us a
+  // discriminator (year or generation) that this asset could NOT positively
+  // confirm, refuse rather than risk serving a wrong-generation shell.
+  const confirmed = best.matched.includes("generation") || best.matched.includes("year");
+  const callerHadDiscriminator = v.year != null || v.generation != null;
+  if (best.score < 75 && callerHadDiscriminator && !confirmed) return unavailable(d, best.score);
 
   const a = best.a;
   let type = "representative";

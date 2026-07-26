@@ -38,7 +38,14 @@ def write_stamp(status, dist):
                                   "variantsHash": variants_hash(x.get("colourVariants")),
                                   "method": "render", "at": datetime.date.today().isoformat()}
             break
-    json.dump(cat, open(CAT, "w"), indent=1, ensure_ascii=False)
+    # Atomic write: a crash or concurrent run mid-write would otherwise corrupt
+    # the catalogue that the gate and build steps read. Write a temp file,
+    # validate it parses, then rename over the live file.
+    tmp = CAT + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(cat, f, indent=1, ensure_ascii=False)
+    json.load(open(tmp))
+    os.replace(tmp, CAT)
 
 BLENDER = r'''
 import bpy,sys,math,mathutils

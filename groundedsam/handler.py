@@ -84,23 +84,36 @@ def segment(img, prompt, box_thr, text_thr):
         m = (m[0] if m.ndim == 3 else m).numpy() > 0.5
         # paint by priority so wheels beat glass on overlap
         cur = cm[m]
+        # An empty mask (box with no pixels above threshold) makes np.vectorize
+        # raise on a size-0 array — skip it.
+        if cur.size == 0:
+            continue
         cm[m] = np.where(
-            (cur == 0) | (np.vectorize(lambda x: PRIORITY.get(x, 0))(cur) < PRIORITY.get(cid, 0)),
+            (cur == 0) | (np.vectorize(lambda x: PRIORITY.get(x, 0), otypes=[np.uint8])(cur) < PRIORITY.get(cid, 0)),
             cid, cur)
     return cm
 
 def handler(event):
-    inp = event.get("input", {})
-    imgs = inp.get("images_b64", [])
-    prompt = inp.get("prompt", DEFAULT_PROMPT)
-    box_thr = float(inp.get("box_threshold", 0.28))
-    text_thr = float(inp.get("text_threshold", 0.22))
-    outs = []
-    for b64 in imgs:
-        img = Image.open(io.BytesIO(base64.b64decode(b64))).convert("RGB")
-        cm = segment(img, prompt, box_thr, text_thr)
-        buf = io.BytesIO(); Image.fromarray(cm, mode="L").save(buf, "PNG")
-        outs.append(base64.b64encode(buf.getvalue()).decode())
-    return {"masks_b64": outs, "count": len(outs)}
+    try:
+        inp = event.get("input", {}) or {}
+        imgs = inp.get("images_b64", []) or []
+        if not isinstance(imgs, list):
+            return {"error": "images_b64 must be a list"}
+        # Bound the batch so an oversized request can't exhaust GPU/host memory.
+        if len(imgs) > 24:
+            return {"error": f"too many images ({len(imgs)}); max 24 per request"}
+        prompt = inp.get("prompt", DEFAULT_PROMPT)
+        box_thr = float(inp.get("box_threshold", 0.28))
+        text_thr = float(inp.get("text_threshold", 0.22))
+        outs = []
+        for b64 in imgs:
+            img = Image.open(io.BytesIO(base64.b64decode(b64))).convert("RGB")
+            cm = segment(img, prompt, box_thr, text_thr)
+            buf = io.BytesIO(); Image.fromarray(cm, mode="L").save(buf, "PNG")
+            outs.append(base64.b64encode(buf.getvalue()).decode())
+        return {"masks_b64": outs, "count": len(outs)}
+    except Exception as e:
+        import traceback
+        return {"error": f"{type(e).__name__}: {e}", "traceback": traceback.format_exc()}
 
 runpod.serverless.start({"handler": handler})

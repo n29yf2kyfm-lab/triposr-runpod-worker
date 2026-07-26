@@ -3,11 +3,32 @@ Mirrors trellis/handler.py I/O: {image_b64|image_url, seed?, texture?:bool}
 -> {glb_url} via Supabase upload (same env vars as the TRELLIS worker).
 VRAM: ~10GB shape-only, ~29GB with texture -> run texture=True only on 48GB pool.
 """
-import base64, os, sys, time, uuid
+import base64, ipaddress, os, socket, sys, time, uuid
 from io import BytesIO
+from urllib.parse import urlparse
 
 import requests, runpod, torch
 from PIL import Image
+
+
+def _assert_safe_url(url):
+    """SSRF guard: only http(s), and the host must resolve to public IPs only
+    (never loopback/link-local/private/reserved, e.g. 169.254.169.254)."""
+    parsed = urlparse(url)
+    if parsed.scheme not in ("http", "https"):
+        raise ValueError(f"unsupported URL scheme: {parsed.scheme!r}")
+    host = parsed.hostname
+    if not host:
+        raise ValueError("URL has no host")
+    try:
+        infos = socket.getaddrinfo(host, None)
+    except socket.gaierror as e:
+        raise ValueError(f"cannot resolve host: {host}") from e
+    for info in infos:
+        ip = ipaddress.ip_address(info[4][0])
+        if (ip.is_private or ip.is_loopback or ip.is_link_local
+                or ip.is_reserved or ip.is_multicast or ip.is_unspecified):
+            raise ValueError(f"URL resolves to a non-public address: {ip}")
 
 sys.path.insert(0, "/app/Hunyuan3D-2.1/hy3dshape")
 sys.path.insert(0, "/app/Hunyuan3D-2.1/hy3dpaint")
@@ -66,11 +87,20 @@ def upload(local, dest):
 
 
 def handler(job):
+    try:
+        return _handle(job)
+    except Exception as e:
+        import traceback
+        return {"error": f"{type(e).__name__}: {e}", "traceback": traceback.format_exc()}
+
+
+def _handle(job):
     inp = job.get("input", {}) or {}
     t0 = time.time()
     if inp.get("image_b64"):
         img = Image.open(BytesIO(base64.b64decode(inp["image_b64"])))
     elif inp.get("image_url"):
+        _assert_safe_url(inp["image_url"])
         img = Image.open(BytesIO(requests.get(inp["image_url"], timeout=120).content))
     else:
         return {"error": "need image_b64 or image_url"}
@@ -95,7 +125,10 @@ def handler(job):
     a[~hard, :3] = 255
     img = Image.fromarray(a)
 
-    seed = int(inp.get("seed", 0))
+    try:
+        seed = int(inp.get("seed", 0))
+    except (TypeError, ValueError):
+        seed = 0
     torch.manual_seed(seed)
     mesh = shape_pipe(image=img)[0]
     uid = str(uuid.uuid4())
@@ -116,6 +149,15 @@ def handler(job):
             out_path = raw
 
     url = upload(out_path, f"hunyuan21/{os.path.basename(out_path)}")
+    # Clean up the local artifacts once uploaded so the shared network volume
+    # doesn't grow unboundedly (Supabase is the durable copy). Keep them only if
+    # the upload produced no URL, so the mesh is still retrievable from the pod.
+    if url is not None:
+        for p in (raw, out_path, f"{OUT}/{uid}.png"):
+            try:
+                os.remove(p)
+            except OSError:
+                pass
     return {"glb_url": url, "seconds": round(time.time() - t0, 1),
             "textured": out_path != raw, "seed": seed, "texture_error": tex_err}
 

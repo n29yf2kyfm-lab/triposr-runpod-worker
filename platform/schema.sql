@@ -156,9 +156,21 @@ from variants v
 create index if not exists idx_vr_make_model on variant_resolved(make, model, year_from);
 
 -- ── row-level security: catalogue is world-readable, writes service-role only
-alter table variants enable row level security;
-do $$ begin
-  if not exists (select 1 from pg_policies where tablename='variants' and policyname='read_all') then
-    create policy read_all on variants for select using (true);
-  end if;
+-- Every catalogue table must have RLS ENABLED, otherwise Supabase's default
+-- grants let the public anon key INSERT/UPDATE/DELETE via PostgREST (e.g.
+-- repoint an assets_3d.glb_url at a malicious payload). We enable RLS on all of
+-- them and add a read-only SELECT policy; with no write policy present, writes
+-- are only possible through the service-role key (which bypasses RLS).
+do $$
+declare t text;
+begin
+  foreach t in array array[
+    'manufacturers','models','generations','engines','trims','colours','wheels',
+    'licences','assets_3d','render_sets','specifications','variants'
+  ] loop
+    execute format('alter table %I enable row level security', t);
+    if not exists (select 1 from pg_policies where tablename=t and policyname='read_all') then
+      execute format('create policy read_all on %I for select using (true)', t);
+    end if;
+  end loop;
 end $$;

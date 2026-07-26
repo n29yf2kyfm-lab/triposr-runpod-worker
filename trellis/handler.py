@@ -3,10 +3,48 @@ import torch
 import requests
 import base64
 import os
+import ipaddress
+import socket
 import numpy as np
 from io import BytesIO
 from PIL import Image
+from urllib.parse import urlparse
 import sys
+
+
+def _assert_safe_url(url):
+    """Guard server-side fetches against SSRF.
+
+    Only http(s) is allowed, and the host must resolve exclusively to public
+    addresses — never loopback/link-local/private/reserved (e.g. the cloud
+    metadata endpoint 169.254.169.254 or internal services). Note: this does not
+    fully close a DNS-rebinding window between resolution and the actual fetch,
+    but it blocks the direct-address and internal-hostname vectors.
+    """
+    parsed = urlparse(url)
+    if parsed.scheme not in ("http", "https"):
+        raise ValueError(f"unsupported URL scheme: {parsed.scheme!r}")
+    host = parsed.hostname
+    if not host:
+        raise ValueError("URL has no host")
+    try:
+        infos = socket.getaddrinfo(host, None)
+    except socket.gaierror as e:
+        raise ValueError(f"cannot resolve host: {host}") from e
+    for info in infos:
+        ip = ipaddress.ip_address(info[4][0])
+        if (ip.is_private or ip.is_loopback or ip.is_link_local
+                or ip.is_reserved or ip.is_multicast or ip.is_unspecified):
+            raise ValueError(f"URL resolves to a non-public address: {ip}")
+
+
+def _clampi(v, default, lo, hi):
+    """Parse an int input and clamp it to [lo, hi]; bad values -> default."""
+    try:
+        v = int(v)
+    except (TypeError, ValueError):
+        return default
+    return max(lo, min(v, hi))
 
 # TRELLIS.2 repo is cloned to /app/TRELLIS.2 in the Dockerfile; its `trellis2`
 # package is imported from there. The CUDA extension `o_voxel` is pip-installed.
@@ -173,6 +211,7 @@ def fetch_image(image_url):
         "User-Agent": "Mozilla/5.0 (compatible; TRELLIS-Worker/1.0)",
         "Accept": "image/webp,image/apng,image/*,*/*;q=0.8",
     }
+    _assert_safe_url(image_url)
     response = requests.get(image_url, headers=headers, timeout=30)
     response.raise_for_status()
     return _load_image(response.content)
@@ -186,15 +225,20 @@ def handler(job):
     image_url = job_input.get("image_url", "")
     image_b64 = job_input.get("image_b64", "")
     images_b64 = job_input.get("images_b64") or []   # multi-view (Alam 3D)
-    seed = job_input.get("seed", 1)
-    # Mesh knobs (safe defaults tuned for car assets served to a web viewer).
-    decimation_target = int(job_input.get("decimation_target", 500000))
-    texture_size = int(job_input.get("texture_size", 2048))
+    # Cap the multi-view batch so an oversized list can't exhaust GPU/host memory.
+    if isinstance(images_b64, list) and len(images_b64) > 8:
+        images_b64 = images_b64[:8]
+    seed = _clampi(job_input.get("seed", 1), 1, 0, 2**31 - 1)
+    # Mesh knobs (safe defaults tuned for car assets served to a web viewer);
+    # clamped so a caller can't request a mesh/texture that OOMs the GPU or runs
+    # forever on an expensive instance.
+    decimation_target = _clampi(job_input.get("decimation_target", 500000), 500000, 1000, 2_000_000)
+    texture_size = _clampi(job_input.get("texture_size", 2048), 2048, 256, 4096)
     # Quality knobs surfaced from Trellis2ImageTo3DPipeline.run() (Alam 3D
     # upgrade): 1536 cascade auto-degrades resolution under VRAM pressure via
     # max_num_tokens, so it is safe to request on 24GB workers.
     pipeline_type = job_input.get("pipeline_type", "1536_cascade")
-    num_samples = int(job_input.get("num_samples", 1))
+    num_samples = _clampi(job_input.get("num_samples", 1), 1, 1, 8)
 
     if not image_url and not image_b64 and not images_b64:
         # TRELLIS.2-4B is image-to-3D. A prompt with no image is a client error.
@@ -278,11 +322,25 @@ def handler(job):
             with open(persisted_path, "rb") as f:
                 glb_b64 = base64.b64encode(f.read()).decode("utf-8")
 
+        # Supabase is the durable copy once the upload succeeds, so drop the local
+        # volume file to stop the shared /runpod-volume from filling over time.
+        # Keep it only as a fallback when there is no uploaded URL.
+        kept_path = persisted_path
+        if glb_url is not None:
+            try:
+                os.remove(persisted_path)
+                kept_path = None
+            except OSError:
+                pass
+
+        # A job that produced neither a URL nor an inline payload delivered no
+        # retrievable asset — report that as an error, not a success.
+        no_asset = glb_url is None and glb_b64 is None
         result = {
-            "status": "success",
+            "status": "error" if no_asset else "success",
             "glb_url": glb_url,
             "glb_b64": glb_b64,
-            "glb_path": persisted_path,
+            "glb_path": kept_path,
             "glb_bytes": glb_bytes,
             "mode": "image",
             "model": IMAGE_MODEL,
@@ -290,11 +348,11 @@ def handler(job):
         }
         if upload_error:
             result["upload_error"] = upload_error
-        if glb_url is None and glb_b64 is None:
-            result["warning"] = (
-                f"GLB is {glb_bytes} bytes: too large to inline and no Supabase "
-                "upload configured. Set SUPABASE_URL/SUPABASE_KEY or lower "
-                "texture_size/decimation_target."
+        if no_asset:
+            result["error"] = (
+                f"GLB is {glb_bytes} bytes: too large to inline and Supabase "
+                "upload did not produce a URL. Set SUPABASE_URL/SUPABASE_KEY or "
+                "lower texture_size/decimation_target."
             )
         return result
 

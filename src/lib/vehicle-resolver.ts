@@ -118,10 +118,27 @@ export function resolveVehicle(
     .filter((s: Scored) => !s.rejected);
 
   if (candidates.length === 0) return { ...UNAVAILABLE };
-  candidates.sort((a: Scored, b: Scored) => b.score - a.score);
+  // Deterministic tie-break: equal scores fall back to accuracy, then quality,
+  // then provenance — never catalogue array order.
+  const ACC: Record<string, number> = { exact: 3, "generation-correct": 2, representative: 1, approximate: 0 };
+  const QUAL: Record<string, number> = { A: 3, B: 2, C: 1 };
+  const rank = (s: Scored): number =>
+    (ACC[s.asset.accuracyGrade] ?? 0) * 100 + (QUAL[s.asset.qualityGrade] ?? 0) * 10 +
+    (s.asset.provenance === "generated-from-reference" ? 0 : 1);
+  candidates.sort((a: Scored, b: Scored) => (b.score - a.score) || (rank(b) - rank(a)));
   const best = candidates[0];
 
   if (best.score < minScore) return { ...UNAVAILABLE };
+
+  // Safety floor: below the generation-correct tier, if the caller supplied a
+  // discriminator (year or generation) that this asset could NOT positively
+  // confirm, refuse rather than risk serving a wrong-generation shell. This is
+  // what makes the header's "never silently cross generations" guarantee hold
+  // even at the deployed minScore of 40.
+  const confirmed = best.matched.includes("generation") || best.matched.includes("year");
+  const callerHadDiscriminator =
+    v.generation != null || (v.manufactureYear ?? v.registrationYear) != null;
+  if (best.score < 75 && callerHadDiscriminator && !confirmed) return { ...UNAVAILABLE };
 
   let resolutionType: ResolutionType;
   if (best.score >= 90) {

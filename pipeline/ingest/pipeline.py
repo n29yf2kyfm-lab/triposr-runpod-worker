@@ -25,7 +25,7 @@ Secrets come from the environment (never hardcoded):
 Metadata rule: only verifiable fields are written. Year/trim/generation are left
 null unless the spec passes a factual value (e.g. a model's production span).
 """
-import base64, copy, json, os, re, struct, subprocess, sys, time, urllib.request
+import base64, json, os, re, struct, subprocess, sys, time, urllib.request
 
 TOKEN = os.environ["SKFB_TOKEN"]
 RUNPOD_KEY = os.environ["RUNPOD_KEY"]
@@ -109,14 +109,14 @@ def mat_audit(glb_url):
 def glb_integrity(glb_bytes):
     """Parse the glTF JSON chunk (no Blender). Returns (ok, reason, meta)."""
     if not glb_bytes or glb_bytes[:4] != b"glTF":
-        return False, "not a glТF binary", {}
+        return False, "not a glTF binary", {}
     if len(glb_bytes) < MIN_BYTES:
         return False, f"too small ({len(glb_bytes)} bytes) — not a real car", {}
     try:
         jlen = struct.unpack("<I", glb_bytes[12:16])[0]
         js = json.loads(glb_bytes[20:20 + jlen].decode("utf-8", "replace"))
     except Exception as e:
-        return False, f"unparseable glТF ({str(e)[:40]})", {}
+        return False, f"unparseable glTF ({str(e)[:40]})", {}
     meshes = js.get("meshes", [])
     prims = sum(len(m.get("primitives", [])) for m in meshes)
     if not meshes or prims == 0:
@@ -128,7 +128,9 @@ def glb_integrity(glb_bytes):
                 if "POSITION" in p.get("attributes", {}) and p["attributes"]["POSITION"] < len(accs))
     meta = {"n_meshes": len(meshes), "n_primitives": prims, "verts": verts,
             "materials": len(js.get("materials", [])), "bytes": len(glb_bytes)}
-    if verts and (verts < MIN_FACES or verts > MAX_FACES):
+    if verts == 0:
+        return False, "no measurable geometry (no POSITION accessors)", meta
+    if verts < MIN_FACES or verts > MAX_FACES:
         return False, f"implausible geometry ({verts} verts)", meta
     return True, "ok", meta
 
@@ -194,7 +196,7 @@ def qc(uid, out_dir):
     ma = mat_audit(glb_url)
     if ma and ma.get("n_materials"):
         cov = (ma.get("body_pct") or 0) / 100.0
-        glass = sum(m["pct"] for m in ma.get("materials", []) if m.get("glass")) / 100.0
+        glass = sum(m.get("pct", 0) for m in ma.get("materials", []) if m.get("glass")) / 100.0
         rep["gates"]["coverage"] = round(cov, 3)
         rep["gates"]["glass_share"] = round(glass, 3)
         rep["gates"]["n_materials"] = ma.get("n_materials")
@@ -287,7 +289,7 @@ def store(spec):
                      recolour=rmode)
         if not png:
             raise RuntimeError(f"render failed after retries: {p['name']} — ABORT (no partial store)")
-        url = upload("car-renders", f"finished/{make}/{key}/{sl}.jpg", png, "image/png")
+        url = upload("car-renders", f"finished/{make}/{key}/{sl}.png", png, "image/png")
         if not verify_asset(url):
             raise RuntimeError(f"upload verify failed: {p['name']} — ABORT")
         colours.append({"oemName": p["name"], "family": p["colourFamily"],
@@ -303,31 +305,50 @@ def store(spec):
     hero = next((c for c in colours if not any(s in c["family"].lower() for s in _NEUT)),
                 colours[0] if colours else None)
 
-    # atomic catalogue write
+    # Build the catalogue entry from an EXPLICIT literal — never by cloning
+    # another car (a deepcopy of the Golf row silently leaked every field not
+    # overwritten: interior/openable-parts flags, source attribution, triangle
+    # counts, stale audit stamps). Every field is set here to a value true for a
+    # freshly-sourced asset.
     cat = json.load(open(CAT))
-    tmpl = copy.deepcopy([e for e in cat if e["make"] == "volkswagen" and e["model"] == "golf"][0])
-    e = tmpl
-    e.update({
+    e = {
+        "schemaVersion": 2,
         "assetId": spec["assetId"], "make": make, "model": model,
         "modelFamily": spec.get("modelFamily", model), "modelAliases": spec.get("modelAliases", []),
         "generation": spec.get("generation"), "generationConfirmed": False,
+        "generationAliases": spec.get("generationAliases", []),
         "yearStart": spec.get("yearStart"), "yearEnd": spec.get("yearEnd"),
         "bodyStyle": spec.get("bodyStyle"), "exactDerivative": spec.get("exactDerivative"),
-        "exactTrim": False, "provenance": "sourced",
+        "exactTrim": False,
+        "compatibleFuelTypes": spec.get("compatibleFuelTypes", []),
+        "compatibleTrimFamilies": spec.get("compatibleTrimFamilies", []),
+        "provenance": "sourced", "generatedFromReference": False, "referenceImageCount": 0,
         "sourceTitle": spec.get("sourceTitle"), "sourceUrl": f"https://sketchfab.com/3d-models/{uid}",
-        "sourceReferenceId": uid, "licence": "CC-BY (attribution required)",
+        "sourceReferenceId": uid, "sourceCreator": spec.get("sourceCreator"),
+        "sourceEvidenceUrl": spec.get("sourceEvidenceUrl"),
+        "sourceRetrievedAt": spec.get("sourceRetrievedAt") or time.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "licence": "CC-BY (attribution required)",
         "accuracyGrade": "representative", "qualityGrade": "A",
         "technicalStatus": "passed", "visualStatus": "passed",
         "publicationStatus": "approved", "quarantineReason": None,
         "paintMaterialNames": spec.get("paintMaterialNames", []),
         "glassMaterialNames": spec.get("glassMaterialNames", []),
+        # Sourced turntable assets are exterior shells: no interior, no openable
+        # parts, no plates baked into the mesh (plates are drawn on the render).
+        "hasInterior": False, "interiorMode": "none",
+        "hasSeparateDoors": False, "hasSeparateBonnet": False, "hasSeparateBoot": False,
+        "supportsOpenableParts": False, "platesBaked": False,
         "defaultColourFamily": (hero["family"].lower().split()[-1] if hero else "grey"),
         "renderColourLabel": (hero["oemName"] if hero else None), "oemPaintVerified": False,
         "oemPaintCode": None, "oemPaintName": None, "colourVariants": {},
         "desktopGlbUrl": glb_url, "mobileGlbUrl": glb_url, "fallbackGlbUrl": None,
         "posterUrl": (hero["renderUrl"] if hero else None), "turntableUrl": None, "interiorUrl": None,
         "fileSizeBytes": base_bytes, "mobileFileSizeBytes": base_bytes,
+        "maxTextureResolution": None, "textureMemoryBytes": None,
+        "triangleCount": spec.get("triangleCount"), "vertexCount": spec.get("vertexCount"),
+        "textureOptimised": False, "webOptimised": True,  # draco geometry compression applied
         "contentHash": None, "pipelineVersion": "ingest-pipeline-v1",
+        "replacedAssetId": spec.get("replacedAssetId"),
         "publishedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "needsHumanReview": [], "notes": [spec["generationNote"]] if spec.get("generationNote") else [],
         "customization": {"configuratorReady": bool(spec.get("paintMaterialNames")),
@@ -336,28 +357,40 @@ def store(spec):
                           "colourOptions": [{"family": c["family"].lower().split()[-1], "label": c["oemName"],
                                              "hex": None, "finish": (c["finish"] or "solid").lower(),
                                              "oemPaintName": c["oemName"], "glbUrl": None} for c in colours]},
-    })
+    }
+    # Storage is keyed on slug(assetId) (see `key` above). Guard against a
+    # DIFFERENT assetId that slugs to the SAME storage path in the same make —
+    # storing would overwrite its mesh while leaving its catalogue row dangling.
+    collision = next((x for x in cat
+                      if x["assetId"] != spec["assetId"] and x.get("make") == make
+                      and slug(x["assetId"]) == key), None)
+    if collision:
+        raise RuntimeError(
+            f"assetId slug collision: {spec['assetId']!r} and {collision['assetId']!r} "
+            f"both map to storage key {make}/{key} — choose a distinct assetId")
     cat = [x for x in cat if x["assetId"] != spec["assetId"]]
     cat.append(e)
     tmp = CAT + ".tmp"
     json.dump(cat, open(tmp, "w"), indent=1, ensure_ascii=False)
     json.load(open(tmp))                       # validate JSON parses
-    os.replace(tmp, CAT)
+    # Upload to Supabase (the served source of truth) and read-back-verify FIRST;
+    # only commit the local file once the remote is confirmed live, so the local
+    # catalogue can never race ahead of what the frontend actually resolves.
     upload("car-renders", "resolver/catalogue.v2.json",
            json.dumps(cat, indent=1, ensure_ascii=False).encode(), "application/json")
-
-    # finished/index.json
-    idx = getj(f"{OBASE}/public/car-renders/finished/index.json") or {"cars": []}
-    idx.setdefault("cars", [])
-    idx["cars"] = [c for c in idx["cars"] if not (c.get("make") == make and c.get("model") == model)]
-    idx["cars"].append({"make": make, "model": model, "finishedGlb": glb_url, "oemColours": colours})
-    idx["generatedAt"] = time.strftime("%Y-%m-%dT%H:%M:%SZ")
-    upload("car-renders", "finished/index.json", json.dumps(idx, indent=1).encode(), "application/json")
-
-    # post-store read-back verification
     live = getj(f"{OBASE}/public/car-renders/resolver/catalogue.v2.json?cb={int(time.time())}") or []
     if not any(x.get("assetId") == spec["assetId"] and x.get("publicationStatus") == "approved" for x in live):
         raise RuntimeError("post-store: entry not found approved in live resolver")
+    os.replace(tmp, CAT)
+
+    # finished/index.json — keyed on assetId (multiple variants share a make+model)
+    idx = getj(f"{OBASE}/public/car-renders/finished/index.json") or {"cars": []}
+    idx.setdefault("cars", [])
+    idx["cars"] = [c for c in idx["cars"] if c.get("assetId") != spec["assetId"]]
+    idx["cars"].append({"assetId": spec["assetId"], "make": make, "model": model,
+                        "finishedGlb": glb_url, "oemColours": colours})
+    idx["generatedAt"] = time.strftime("%Y-%m-%dT%H:%M:%SZ")
+    upload("car-renders", "finished/index.json", json.dumps(idx, indent=1).encode(), "application/json")
     log(f"STORE_VERIFIED {make}/{model} colours={len(colours)} approved={len([x for x in cat if x['publicationStatus']=='approved'])}")
 
 

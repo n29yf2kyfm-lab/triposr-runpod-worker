@@ -47,8 +47,13 @@ export function normaliseModel(make: string, raw: string): string {
   for (const k of keys) {
     if (c === k || c.startsWith(k + " ")) return slug(table[k]);
   }
-  // fall back: first token run that isn't a trim word
-  return slug(c);
+  // Fall back to the first token: DVLA appends trim words to the family
+  // ("Golf Match", "Focus Active"), and the family is almost always the first
+  // token. Genuinely multi-token families ("3 series", "c class") belong in
+  // model-aliases.json and are matched above; slugging the whole string turned
+  // "Golf Match" into "golf-match" and lost the match to a catalogued car.
+  const first = c.split(" ")[0];
+  return slug(first || c);
 }
 
 export function normaliseBodyStyle(raw?: string | null): string | undefined {
@@ -72,7 +77,9 @@ export function normaliseFuel(raw?: string | null): string | undefined {
 /** DVLA colour is a FAMILY, never an exact paint. */
 export function normaliseColourFamily(raw?: string | null): ColourFamily {
   if (!raw) return "unknown";
-  const c = clean(raw);
+  // Strip hyphens so DVLA's "MULTI-COLOUR" matches the "multicolour" family
+  // (clean() preserves internal hyphens; families are single unhyphenated words).
+  const c = clean(raw).replace(/-/g, "");
   return (COLOUR_FAMILIES.find((f) => c === f || c.includes(f)) ?? "unknown") as ColourFamily;
 }
 

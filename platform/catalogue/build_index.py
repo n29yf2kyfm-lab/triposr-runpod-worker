@@ -231,11 +231,17 @@ def pick(cands, gen):
     if g:
         for c in cands:
             if norm(c.get("generation"))==g: return c
+        # A specific generation was requested but no asset matches it — do NOT
+        # fall back to an unrelated-generation asset (that would attach the wrong
+        # 3D model and relabel its years). Leave this master row without a 3D.
+        return None
     return cands[0]
 for e in index:
     cands=by_mm.get((nkey(e["make"]),nkey(e["model"])))
     if cands:
-        c=pick(cands,e.get("generation")); e["has_3d"]=True; e["asset"]=asset_block(c)
+        c=pick(cands,e.get("generation"))
+        if c is None: continue
+        e["has_3d"]=True; e["asset"]=asset_block(c)
         e.pop("manifest_url",None); matched.add(c["assetId"])
         # prefer the asset's enriched spec over the representative master row
         if c.get("yearStart") is not None: e["year_from"]=c["yearStart"]
@@ -263,7 +269,21 @@ for c in cat:
          "colours":sorted((c.get("colourVariants") or {}).keys()),
          "has_3d":True,"asset":asset_block(c),
          "source":"enriched asset spec (make/model/year/trim/fuel)"}
-    if c.get("yearStart") is not None: inherited+=1
+    # Fill ONLY missing year/trim/fuel from the matched parent master row — the
+    # curated UK master is authoritative production data, not a guess. Never
+    # overwrite the asset's own verified values, and never fabricate when the
+    # master has nothing (leave null/[]).
+    did_inherit=False
+    if m:
+        if row["year_from"] is None and m.get("year_from") is not None:
+            row["year_from"]=m.get("year_from"); row["year_to"]=m.get("year_to"); did_inherit=True
+        if not row["trims"] and m.get("trims"):
+            row["trims"]=m.get("trims"); did_inherit=True
+        if not row["fuel"] and m.get("fuel"):
+            row["fuel"]=m.get("fuel"); did_inherit=True
+    if did_inherit:
+        inherited+=1
+        row["source"]=f"enriched asset spec + inherited master {how} year/trim"
     index.append(row)
 
 payload={"generated":"2015-2026 UK master index (representative) + curated 3D catalogue join",

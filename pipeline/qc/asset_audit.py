@@ -146,11 +146,16 @@ def audit(path, ref_lw=None, min_interior_verts=1500, wheel_std=0.22, paint_std=
         mask = (near < R) & (fc[:, 1] < lo[1] + 2.0 * R)
         stdv = luma_std_of_faces(g, mask)
         gates["_wheel_luma_std"] = stdv
-        wheel_ok = stdv is not None and stdv <= wheel_std
         if stdv is None:
-            reasons.append("G4 wheels: no texture to assess and no wheel material")
-        elif not wheel_ok:
-            reasons.append(f"G4 wheels: patchy (luma std {stdv:.2f} > {wheel_std})")
+            # No sampleable wheel texture (plain / vertex-coloured PBR wheels):
+            # there is nothing to assess, so don't hard-reject an otherwise clean
+            # model for the mere absence of a texture — pass with an advisory.
+            wheel_ok = True
+            reasons.append("G4 wheels: no texture to assess (untextured wheels) — passed with warning")
+        else:
+            wheel_ok = stdv <= wheel_std
+            if not wheel_ok:
+                reasons.append(f"G4 wheels: patchy (luma std {stdv:.2f} > {wheel_std})")
     gates["G4_wheels"] = bool(wheel_ok)
 
     # G5 paint: body band blotchiness. On separated models sample only the

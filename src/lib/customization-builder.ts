@@ -14,7 +14,25 @@
  * at least one swappable set. Fused scan meshes never qualify.
  */
 import { normaliseMake } from "./vehicle-normalisation";
-import type { Customization, PaintFinish, VehicleAsset } from "../types/vehicle-asset";
+import type { Customization, PaintFinish, WrapFinish, VehicleAsset } from "../types/vehicle-asset";
+import type { ColourFamily } from "../types/vehicle";
+
+// Valid wrap colour families (ColourFamily minus "unknown" — a wrap with an
+// unknown family cannot be palette-resolved) and wrap finishes.
+const WRAP_FAMILIES: ColourFamily[] = [
+  "black", "white", "grey", "silver", "blue", "red", "green", "yellow",
+  "orange", "brown", "beige", "purple", "gold", "bronze", "multicolour",
+];
+const WRAP_FINISHES: WrapFinish[] = ["gloss", "matte", "satin", "metallic", "pearl", "chrome"];
+
+const toWrapFamily = (v: string): ColourFamily | null => {
+  const c = (v ?? "").toLowerCase().trim();
+  return (WRAP_FAMILIES as string[]).includes(c) ? (c as ColourFamily) : null;
+};
+const toWrapFinish = (v?: string): WrapFinish => {
+  const c = (v ?? "").toLowerCase().trim();
+  return (WRAP_FINISHES as string[]).includes(c) ? (c as WrapFinish) : "gloss";
+};
 
 export interface OemPaintRow {
   manufacturer: string;
@@ -103,11 +121,19 @@ export function buildCustomization(
 ): Customization {
   const colourOptions = opts.paints ? colourOptionsForAsset(asset, opts.paints) : [];
   const wheelSets = opts.wheelSets ?? [];
-  const wraps = (opts.wraps ?? []).map((w) => ({
-    ...w,
-    family: (w.family as any),
-    finish: w.finish as any,
-  }));
+  // Validate each wrap against the ColourFamily/WrapFinish unions rather than
+  // casting: an unknown family (e.g. "burgundy") can't be palette-resolved, so
+  // drop it instead of laundering it through the type as if it were valid.
+  const wraps: NonNullable<Customization["wraps"]> = [];
+  for (const w of opts.wraps ?? []) {
+    const family = toWrapFamily(w.family);
+    if (family === null) continue;
+    wraps.push({
+      id: w.id, label: w.label, family, finish: toWrapFinish(w.finish),
+      glbUrl: w.glbUrl ?? null, textureUrl: w.textureUrl ?? null,
+      thumbnailUrl: w.thumbnailUrl ?? null,
+    });
+  }
 
   const hasRealPaint = (asset.paintMaterialNames?.length ?? 0) > 0;
   const hasSwaps =
@@ -118,7 +144,7 @@ export function buildCustomization(
       && asset.publicationStatus === "approved",
     componentPipelineVersion: opts.componentPipelineVersion ?? null,
     wheelSets,
-    wraps: wraps as any,
+    wraps,
     colourOptions,
   };
 }

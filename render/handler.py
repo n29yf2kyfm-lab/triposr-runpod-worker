@@ -40,8 +40,55 @@ import math
 import base64
 import tempfile
 
+import ipaddress
+import socket
+from urllib.parse import urlparse
+
 import runpod
 import requests
+
+
+def _assert_safe_url(url):
+    """SSRF guard: only http(s), and the host must resolve to public IPs only
+    (never loopback/link-local/private/reserved, e.g. 169.254.169.254)."""
+    parsed = urlparse(url)
+    if parsed.scheme not in ("http", "https"):
+        raise ValueError(f"unsupported URL scheme: {parsed.scheme!r}")
+    host = parsed.hostname
+    if not host:
+        raise ValueError("URL has no host")
+    try:
+        infos = socket.getaddrinfo(host, None)
+    except socket.gaierror as e:
+        raise ValueError(f"cannot resolve host: {host}") from e
+    for info in infos:
+        ip = ipaddress.ip_address(info[4][0])
+        if (ip.is_private or ip.is_loopback or ip.is_link_local
+                or ip.is_reserved or ip.is_multicast or ip.is_unspecified):
+            raise ValueError(f"URL resolves to a non-public address: {ip}")
+
+
+def _truthy(v, default=False):
+    """Coerce a JSON value to bool, treating the strings 'false'/'0'/'no'/''
+    as False (plain bool() of any non-empty string is True — a client sending
+    "false" would otherwise flip the flag on)."""
+    if isinstance(v, bool):
+        return v
+    if v is None:
+        return default
+    if isinstance(v, str):
+        return v.strip().lower() not in ("", "false", "0", "no", "off")
+    return bool(v)
+
+
+def _clampi(v, default, lo, hi):
+    """Parse an int input and clamp it to [lo, hi]; bad values -> default."""
+    try:
+        v = int(v)
+    except (TypeError, ValueError):
+        return default
+    return max(lo, min(v, hi))
+
 
 HDRI = os.environ.get("HDRI_PATH", "/app/assets/hdri.hdr")
 FONT = os.environ.get(
@@ -356,6 +403,7 @@ def _fetch_glb(job_input):
         url = f"{base}/{job_input['glb_path'].lstrip('/')}"
     if not url:
         raise ValueError("provide glb_b64, glb_url, or glb_path(+glb_base)")
+    _assert_safe_url(url)
     headers = {}
     if job_input.get("glb_auth"):
         headers["Authorization"] = job_input["glb_auth"]
@@ -445,6 +493,8 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
         return [o for o in bpy.context.scene.objects if o.type == "MESH"]
 
     ms = meshes()
+    if not ms:
+        raise ValueError("GLB contains no mesh objects (empty or corrupt model)")
     bpy.ops.object.select_all(action="DESELECT")
     for o in ms:
         o.select_set(True)
@@ -625,9 +675,11 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
             bc = gb.inputs.get("Base Color")
             if bc is not None and not bc.links:
                 v = bc.default_value
-                bright = min(v[0], v[1], v[2]) > 0.45
+                # NOTE: use a loop-local name — do NOT reuse `bright`, which is
+                # the caller's backdrop flag read later at use_bright.
+                _is_bright = min(v[0], v[1], v[2]) > 0.45
                 neutral = (max(v[0], v[1], v[2]) - min(v[0], v[1], v[2])) < 0.12
-                if bright and neutral:
+                if _is_bright and neutral:
                     bc.default_value = (0.035, 0.035, 0.038, 1.0)
                     for nm, val in (("Metallic", 0.0), ("Roughness", 0.22)):
                         inp = gb.inputs.get(nm)
@@ -1054,16 +1106,16 @@ def handler(job):
             az_deg=float(ji.get("az", 40)),
             elev=float(ji.get("elev", 0.15)),
             zfrac=float(ji.get("zfrac", 0.32)),
-            samples=int(ji.get("samples", 160)),
-            resx=int(ji.get("width", 1600)),
-            resy=int(ji.get("height", 900)),
-            bright=bool(ji.get("bright", False)),
-            studio=bool(ji.get("studio", True)),
+            samples=_clampi(ji.get("samples", 160), 160, 1, 1024),
+            resx=_clampi(ji.get("width", 1600), 1600, 64, 4096),
+            resy=_clampi(ji.get("height", 900), 900, 64, 4096),
+            bright=_truthy(ji.get("bright", False)),
+            studio=_truthy(ji.get("studio", True), default=True),
             finish=ji.get("finish"),
             recolour_mode=str(ji.get("recolour", "auto")).lower(),
             plate_end=str(ji.get("plate_end", "auto")).lower(),
-            plates_both=bool(ji.get("plates_both", False)),
-            audit=bool(ji.get("audit") or ji.get("debug_materials")),
+            plates_both=_truthy(ji.get("plates_both", False)),
+            audit=_truthy(ji.get("audit")) or _truthy(ji.get("debug_materials")),
         )
         dt = round(time.time() - t0, 1)
         with open(out, "rb") as f:

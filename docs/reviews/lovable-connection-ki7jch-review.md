@@ -1,5 +1,15 @@
 # Code review — branch `claude/lovable-connection-ki7jch`
 
+> **Resolution (2026-07-26):** the CRITICAL and MAJOR findings, plus the
+> quick MINOR/hygiene items, have been **fixed on this branch**
+> (`claude/lovable-connection-review-tefew6`) in the commit that follows this
+> document. Verified with `vitest` (resolver suite green, incl. new
+> thin-metadata / year-boundary / exact-tier / tie-break tests), `tsc --noEmit`
+> clean, and `py_compile` across all touched handlers/pipeline. The one
+> remaining test failure (`catalogue v2 integrity > known stubs are
+> quarantined`) is **pre-existing and unrelated** — it is a data mismatch in
+> `catalogue.v2.json`, untouched by these fixes.
+
 **Reviewed:** 2026-07-26 · **Head:** `f77ac70` · **Base:** `main` (`2d622c2`)
 **Scope:** the code surface of the branch (frontend-facing TypeScript, Supabase
 edge functions, RunPod worker handlers, ingest/QC/catalogue pipeline). The
