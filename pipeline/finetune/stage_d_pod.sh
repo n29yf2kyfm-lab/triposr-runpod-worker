@@ -103,12 +103,20 @@ for pat in pats:
                 m=df.set_index("sha256").combine_first(m); merged+=1
         except Exception as e:
             print("skip",f,str(e)[:60])
+# BLANK is not zero: rows added after Stage A have an empty aesthetic_score,
+# and NaN fails even ">= 0.0", which silently cut 543 trainable shapes to 365.
 if "aesthetic_score" not in m.columns:
     m["aesthetic_score"]=6.0
-m.reset_index().to_csv(p,index=False)
+m["aesthetic_score"]=pd.to_numeric(m["aesthetic_score"], errors="coerce").fillna(6.0)
+# Write to a PRIVATE meta dir: the wave-3 ingest pod is mutating the shared
+# metadata.csv on this same volume, so training must not read a moving file.
+import os
+priv="/workspace/alam3d_stage_d/meta"; os.makedirs(priv, exist_ok=True)
+m.reset_index().to_csv(f"{priv}/metadata.csv", index=False)
 enc=m.get("shape_latent_encoded")
 print(f"merged {merged} record files; rows {len(m)}; "
-      f"shape-latent-encoded {int(enc.fillna(False).sum()) if enc is not None else '?'}")
+      f"shape-latent-encoded {int(enc.fillna(False).sum()) if enc is not None else '?'}; "
+      f"aesthetic filled -> {int(m['aesthetic_score'].notna().sum())}")
 PYIN
 
 status build-data-roots
@@ -121,7 +129,7 @@ def pick(pattern, prefer):
     for p in g:
         if prefer in p: return p.rstrip("/")
     return g[-1].rstrip("/")
-roots={"meta": root, "render_cond": root+"/renders_cond",
+roots={"meta": "/workspace/alam3d_stage_d/meta", "render_cond": root+"/renders_cond",
        # the 1024 stage trains on the finer latent set when one exists
        "shape_latent": pick(root+"/shape_latents/*/", "1024"),
        "ss_latent": pick(root+"/ss_latents/*/", "")}
