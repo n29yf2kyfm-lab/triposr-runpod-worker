@@ -3,29 +3,23 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>TripoSR Studio</title>
-<meta name="description" content="Drop an image, get a 3D mesh — a demo UI for the TripoSR RunPod worker." />
-
-<!-- 3D viewer web component -->
-<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
-<!-- Fonts -->
+<title>TripoSR Studio — DESIGN.md Preview</title>
+<meta name="description" content="Visual catalog of the TripoSR Studio design system defined in DESIGN.md." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
 <style>
 /* ============================================================
-   TripoSR Studio — styled per DESIGN.md
+   TripoSR Studio — DESIGN.md visual preview (static, offline)
+   Every value below is drawn from DESIGN.md.
    ============================================================ */
 :root{
-  /* color tokens */
   --bg-viewport:#0B0C0E; --bg-surface:#16181D; --bg-surface-raised:#1E2128;
   --bg-inset:#101216; --border-hairline:#262A31; --border-strong:#3A404A;
   --text-primary:#F4F5F7; --text-secondary:#9BA1AC; --text-muted:#5C636E;
   --accent-violet:#7C5CFF; --accent-cyan:#22D3EE; --accent-ink:#0B0C0E;
   --success:#34D399; --warning:#FBBF24; --danger:#F87171;
   --gradient-signature:linear-gradient(135deg,#7C5CFF 0%,#22D3EE 100%);
-  /* spacing scale */
   --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px; --s10:40px;
   --r-input:10px; --r-card:14px; --r-drop:16px;
   --sh1:0 1px 2px rgba(0,0,0,.4); --sh2:0 4px 16px rgba(0,0,0,.5); --sh3:0 12px 40px rgba(0,0,0,.6);
@@ -33,40 +27,92 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0}
-body{
-  background:var(--bg-viewport); color:var(--text-primary);
-  font-family:Inter,-apple-system,system-ui,sans-serif;
-  font-size:15px; line-height:24px; -webkit-font-smoothing:antialiased;
-}
+body{background:var(--bg-viewport); color:var(--text-primary);
+  font-family:Inter,-apple-system,system-ui,sans-serif; font-size:15px; line-height:24px;
+  -webkit-font-smoothing:antialiased}
 .mono{font-family:var(--mono); font-size:13px}
 a{color:var(--accent-cyan); text-decoration:none}
 a:hover{text-decoration:underline}
 
-/* layout */
 .wrap{max-width:1200px; margin:0 auto; padding:var(--s10) var(--s6) 72px}
 @media (max-width:600px){.wrap{padding:var(--s8) var(--s4) var(--s10)}}
 
-header{margin-bottom:var(--s10)}
+/* header */
 .brand{display:flex; align-items:center; gap:var(--s3)}
 .logo{width:32px; height:32px; border-radius:9px; background:var(--gradient-signature);
   box-shadow:0 0 24px rgba(124,92,255,.35); flex:none}
 .brand h1{font-size:20px; line-height:28px; font-weight:600; letter-spacing:-.01em; margin:0}
-.tagline{margin:var(--s4) 0 0; max-width:640px; color:var(--text-secondary)}
 .hero-title{font-size:40px; line-height:44px; font-weight:600; letter-spacing:-.02em; margin:var(--s6) 0 0}
 .hero-title .grad{background:var(--gradient-signature); -webkit-background-clip:text;
   background-clip:text; -webkit-text-fill-color:transparent}
 @media (max-width:600px){.hero-title{font-size:32px; line-height:36px}}
+.tagline{margin:var(--s4) 0 0; max-width:680px; color:var(--text-secondary)}
+.tagline code{font-family:var(--mono); font-size:13px; color:var(--text-primary)}
 
-.grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--s6); margin-top:var(--s8)}
-@media (max-width:900px){.grid{grid-template-columns:1fr}}
+/* section shell */
+section{margin-top:56px}
+.sec-head{display:flex; align-items:baseline; gap:var(--s3); margin-bottom:var(--s5);
+  padding-bottom:var(--s3); border-bottom:1px solid var(--border-hairline)}
+.sec-head h2{font-size:28px; line-height:34px; font-weight:600; letter-spacing:-.01em; margin:0}
+.sec-head .n{font-family:var(--mono); font-size:13px; color:var(--accent-violet)}
+.sec-head .desc{margin-left:auto; color:var(--text-muted); font-size:13px}
 
-/* card */
 .card{background:var(--bg-surface); border:1px solid var(--border-hairline);
   border-radius:var(--r-card); box-shadow:var(--sh1); padding:var(--s6)}
-.card-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--s5)}
-.card-head h2{font-size:20px; line-height:28px; font-weight:600; letter-spacing:-.01em; margin:0}
+.grid{display:grid; gap:var(--s4)}
+.cols-2{grid-template-columns:1fr 1fr}
+@media (max-width:900px){.cols-2{grid-template-columns:1fr}}
 
-/* labels + inputs */
+/* --- color swatches --- */
+.swatches{display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:var(--s3)}
+.swatch{border:1px solid var(--border-hairline); border-radius:var(--r-input); overflow:hidden;
+  background:var(--bg-surface); cursor:copy}
+.swatch .chip{height:64px}
+.swatch .meta{padding:var(--s3)}
+.swatch .tok{font-family:var(--mono); font-size:12px; color:var(--text-primary)}
+.swatch .hex{font-family:var(--mono); font-size:12px; color:var(--text-secondary)}
+.swatch .role{font-size:12px; line-height:16px; color:var(--text-muted); margin-top:2px}
+.gradbar{height:72px; border-radius:var(--r-card); background:var(--gradient-signature);
+  display:flex; align-items:flex-end; padding:var(--s3)}
+.gradbar .lab{font-family:var(--mono); font-size:12px; color:var(--accent-ink)}
+
+/* --- typography --- */
+.type-row{display:flex; align-items:baseline; gap:var(--s5); padding:var(--s3) 0;
+  border-bottom:1px solid var(--border-hairline)}
+.type-row:last-child{border-bottom:none}
+.type-row .spec{font-family:var(--mono); font-size:12px; color:var(--text-muted);
+  min-width:150px; flex:none}
+.t-display{font-size:40px; line-height:44px; font-weight:600; letter-spacing:-.02em}
+.t-h1{font-size:28px; line-height:34px; font-weight:600; letter-spacing:-.01em}
+.t-h2{font-size:20px; line-height:28px; font-weight:600; letter-spacing:-.01em}
+.t-body{font-size:15px; line-height:24px; font-weight:400}
+.t-strong{font-size:15px; font-weight:500}
+.t-label{font-size:13px; line-height:16px; font-weight:500; letter-spacing:.01em}
+.t-caption{font-size:12px; line-height:16px; color:var(--text-secondary)}
+
+/* --- buttons --- */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:var(--s2);
+  height:44px; padding:0 20px; border-radius:var(--r-input); font-size:13px; font-weight:500;
+  letter-spacing:.01em; font-family:inherit; cursor:pointer; border:1px solid transparent;
+  transition:filter .15s ease, background .15s ease, transform .05s ease}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:none; box-shadow:0 0 0 2px rgba(34,211,238,.6); outline-offset:2px}
+.btn-primary{background:var(--gradient-signature); color:var(--accent-ink)}
+.btn-primary:hover{filter:brightness(1.06)}
+.btn-secondary{background:var(--bg-surface-raised); color:var(--text-primary);
+  border-color:var(--border-hairline)}
+.btn-secondary:hover{background:var(--border-hairline)}
+.btn-ghost{background:transparent; color:var(--text-secondary); height:40px}
+.btn-ghost:hover{color:var(--text-primary)}
+.btn-danger{background:transparent; color:var(--danger); height:40px;
+  border-color:rgba(248,113,113,.4)}
+.btn-danger:hover{background:rgba(248,113,113,.1)}
+.btn:disabled{opacity:.4; cursor:not-allowed; filter:none}
+.btn-focus{box-shadow:0 0 0 2px rgba(34,211,238,.6); outline-offset:2px}
+.btn-rail{display:flex; flex-wrap:wrap; gap:var(--s4); align-items:center}
+.tag{font-family:var(--mono); font-size:11px; color:var(--text-muted); margin-top:var(--s2)}
+
+/* --- form controls --- */
 label.lbl{display:block; font-size:13px; line-height:16px; font-weight:500; letter-spacing:.01em;
   color:var(--text-secondary); margin:0 0 var(--s2)}
 .field{width:100%; height:44px; padding:0 14px; background:var(--bg-inset);
@@ -76,18 +122,12 @@ label.lbl{display:block; font-size:13px; line-height:16px; font-weight:500; lett
 .field.mono{font-family:var(--mono); font-size:13px}
 .field::placeholder{color:var(--text-muted)}
 .field:focus{border-color:var(--border-strong); box-shadow:0 0 0 2px rgba(34,211,238,.6)}
-.row{display:grid; grid-template-columns:1fr 1fr; gap:var(--s4)}
-@media (max-width:600px){.row{grid-template-columns:1fr}}
-.stack{display:flex; flex-direction:column; gap:var(--s4)}
-.hint{font-size:12px; line-height:16px; color:var(--text-muted); margin:var(--s2) 0 0}
+.field.is-focus{border-color:var(--border-strong); box-shadow:0 0 0 2px rgba(34,211,238,.6)}
 
 /* drop zone */
-.drop{position:relative; min-height:320px; border:2px dashed var(--border-hairline);
-  border-radius:var(--r-drop); background:var(--bg-surface); display:flex; flex-direction:column;
-  align-items:center; justify-content:center; text-align:center; gap:var(--s2); cursor:pointer;
-  transition:border-color .15s ease, box-shadow .15s ease; overflow:hidden; padding:var(--s6)}
-@media (max-width:600px){.drop{min-height:220px}}
-.drop:hover{border-color:var(--border-strong)}
+.drop{min-height:220px; border:2px dashed var(--border-hairline); border-radius:var(--r-drop);
+  background:var(--bg-surface); display:flex; flex-direction:column; align-items:center;
+  justify-content:center; text-align:center; gap:var(--s2); padding:var(--s6)}
 .drop.dragover{border-style:solid; border-color:transparent;
   background:linear-gradient(var(--bg-surface),var(--bg-surface)) padding-box,
              var(--gradient-signature) border-box;
@@ -95,27 +135,8 @@ label.lbl{display:block; font-size:13px; line-height:16px; font-weight:500; lett
 .drop svg{color:var(--text-muted)}
 .drop .d1{color:var(--text-secondary)}
 .drop .d2{font-size:12px; line-height:16px; color:var(--text-muted)}
-.drop img.preview{position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
-  background:var(--bg-inset); padding:var(--s4)}
-.drop .clear{position:absolute; top:var(--s3); right:var(--s3); z-index:2}
 
-/* buttons */
-.btn{display:inline-flex; align-items:center; justify-content:center; gap:var(--s2);
-  height:44px; padding:0 20px; border-radius:var(--r-input); font-size:13px; font-weight:500;
-  letter-spacing:.01em; font-family:inherit; cursor:pointer; border:1px solid transparent;
-  transition:filter .15s ease, background .15s ease, transform .05s ease; user-select:none}
-.btn:active{transform:translateY(1px)}
-.btn:focus-visible{outline:none; box-shadow:0 0 0 2px rgba(34,211,238,.6); outline-offset:2px}
-.btn-primary{background:var(--gradient-signature); color:var(--accent-ink); width:100%}
-.btn-primary:hover{filter:brightness(1.06)}
-.btn-primary:disabled{opacity:.4; cursor:not-allowed; filter:none}
-.btn-secondary{background:var(--bg-surface-raised); color:var(--text-primary);
-  border-color:var(--border-hairline); height:36px; padding:0 14px}
-.btn-secondary:hover{background:var(--border-hairline)}
-.btn-ghost{background:transparent; color:var(--text-secondary); height:32px; padding:0 10px}
-.btn-ghost:hover{color:var(--text-primary)}
-
-/* status pill */
+/* status pills */
 .pill{display:inline-flex; align-items:center; gap:6px; height:24px; padding:0 10px;
   border-radius:999px; font-size:12px; font-weight:500; line-height:1}
 .pill .dot{width:6px; height:6px; border-radius:50%; background:currentColor}
@@ -123,34 +144,63 @@ label.lbl{display:block; font-size:13px; line-height:16px; font-weight:500; lett
 .pill.run{background:rgba(124,92,255,.15); color:var(--accent-violet)}
 .pill.ok{background:rgba(52,211,153,.15); color:var(--success)}
 .pill.err{background:rgba(248,113,113,.15); color:var(--danger)}
+.pill-rail{display:flex; gap:var(--s3); flex-wrap:wrap}
 
 /* progress beam */
-.beam{height:4px; border-radius:999px; background:var(--bg-inset); overflow:hidden; margin-top:var(--s5)}
+.beam{height:4px; border-radius:999px; background:var(--bg-inset); overflow:hidden}
 .beam > i{display:block; height:100%; width:40%; border-radius:999px;
   background:var(--gradient-signature); animation:sweep 1.2s ease-in-out infinite}
 @keyframes sweep{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
 
-/* viewer */
+/* elevation */
+.elev-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s4)}
+@media (max-width:700px){.elev-grid{grid-template-columns:repeat(2,1fr)}}
+.elev{border-radius:var(--r-card); padding:var(--s5); min-height:120px; display:flex;
+  flex-direction:column; justify-content:flex-end; border:1px solid var(--border-hairline)}
+.elev .lv{font-family:var(--mono); font-size:12px; color:var(--text-secondary)}
+.elev .use{font-size:12px; color:var(--text-muted)}
+.e0{background:var(--bg-viewport)}
+.e1{background:var(--bg-surface); box-shadow:var(--sh1)}
+.e2{background:var(--bg-surface-raised); box-shadow:var(--sh2)}
+.e3{background:var(--bg-surface-raised); box-shadow:var(--sh3)}
+
+/* 3D viewer placeholder */
 .viewer{position:relative; width:100%; aspect-ratio:4/3; background:var(--bg-inset);
-  border-radius:var(--r-card); box-shadow:inset 0 1px 0 rgba(255,255,255,.02); overflow:hidden}
-@media (max-width:600px){.viewer{aspect-ratio:1/1}}
+  border-radius:var(--r-card); box-shadow:inset 0 1px 0 rgba(255,255,255,.02); overflow:hidden;
+  display:flex; align-items:center; justify-content:center}
 .viewer::after{content:""; position:absolute; inset:0; pointer-events:none;
   background:radial-gradient(120% 120% at 50% 40%, transparent 40%, rgba(0,0,0,.45) 100%)}
-model-viewer{width:100%; height:100%; --poster-color:transparent}
-.viewer .empty{position:absolute; inset:0; display:flex; flex-direction:column; gap:var(--s3);
-  align-items:center; justify-content:center; color:var(--text-muted); text-align:center; padding:var(--s6)}
+.wire{width:44%; aspect-ratio:1; transform:rotate(-8deg)}
+.wire path,.wire line{stroke:var(--accent-violet); stroke-width:1.2; fill:none; opacity:.9}
 .viewer .meta{position:absolute; left:var(--s4); bottom:var(--s4); z-index:2}
 
-.msg{margin-top:var(--s4); font-size:13px; line-height:20px}
-.msg.err{color:var(--danger)}
-.foot{margin-top:56px; color:var(--text-muted); font-size:12px; line-height:18px}
+/* spacing scale */
+.space-rail{display:flex; flex-direction:column; gap:var(--s3)}
+.space-row{display:flex; align-items:center; gap:var(--s4)}
+.space-row .n{font-family:var(--mono); font-size:12px; color:var(--text-secondary); width:56px; flex:none}
+.space-row .bar{height:16px; border-radius:4px; background:var(--gradient-signature)}
+
+/* do / don't */
+.rules{display:grid; grid-template-columns:1fr 1fr; gap:var(--s4)}
+@media (max-width:700px){.rules{grid-template-columns:1fr}}
+.rules ul{margin:var(--s2) 0 0; padding-left:0; list-style:none}
+.rules li{position:relative; padding:6px 0 6px 26px; color:var(--text-secondary); font-size:14px;
+  border-bottom:1px solid var(--border-hairline)}
+.rules li:last-child{border-bottom:none}
+.rules li::before{position:absolute; left:0; top:6px; font-family:var(--mono); font-weight:500}
+.do li::before{content:"✓"; color:var(--success)}
+.dont li::before{content:"✕"; color:var(--danger)}
+.rules h3{font-size:13px; font-weight:500; letter-spacing:.01em; text-transform:uppercase;
+  color:var(--text-muted); margin:0}
+
+.foot{margin-top:72px; padding-top:var(--s6); border-top:1px solid var(--border-hairline);
+  color:var(--text-muted); font-size:12px; line-height:18px}
 .foot code{font-family:var(--mono)}
-.actions{display:flex; gap:var(--s3); margin-top:var(--s5); flex-wrap:wrap}
-.divider{height:1px; background:var(--border-hairline); margin:var(--s6) 0}
-.summary{cursor:pointer; color:var(--text-secondary); font-size:13px; font-weight:500; list-style:none}
-.summary::-webkit-details-marker{display:none}
-.summary::before{content:"▸ "; color:var(--text-muted)}
-details[open] .summary::before{content:"▾ "}
+.copied{position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+  background:var(--bg-surface-raised); border:1px solid var(--border-hairline);
+  color:var(--text-primary); font-size:13px; padding:8px 14px; border-radius:10px;
+  box-shadow:var(--sh3); opacity:0; transition:opacity .15s ease; pointer-events:none}
+.copied.show{opacity:1}
 </style>
 </head>
 <body>
@@ -160,244 +210,233 @@ details[open] .summary::before{content:"▾ "}
       <div class="logo" aria-hidden="true"></div>
       <h1>TripoSR Studio</h1>
     </div>
-    <p class="hero-title">Image in. <span class="grad">Mesh out.</span></p>
-    <p class="tagline">Drop a single image and the TripoSR RunPod worker returns a textured
-      GLB in seconds. This demo speaks directly to your serverless endpoint.</p>
+    <p class="hero-title"><span class="grad">DESIGN.md</span> preview</p>
+    <p class="tagline">A visual catalog of the design system in <code>DESIGN.md</code> — tokens,
+      type, and components rendered exactly as specified. Static and offline; nothing here calls a
+      backend. Click any swatch to copy its hex.</p>
   </header>
 
-  <div class="grid">
-    <!-- INPUT -->
-    <section class="card" aria-label="Input">
-      <div class="card-head"><h2>Input</h2><span id="src-pill" class="pill idle"><span class="dot"></span>No image</span></div>
+  <!-- 1. THEME -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>Theme</h2><span class="desc">Visual theme &amp; atmosphere</span></div>
+    <div class="card">
+      <p class="t-body" style="margin:0 0 var(--s4); max-width:760px; color:var(--text-secondary)">
+        Dark render-viewport studio. The canvas is near-black graphite so imagery and 3D output are
+        the brightest thing on screen; chrome recedes. The signature move is an iridescent
+        <strong style="color:var(--text-primary)">violet→cyan gradient</strong> — the colors of a 3D
+        normal map — used <em>only</em> for the primary action and active state.</p>
+      <div class="gradbar"><span class="lab">--gradient-signature · linear-gradient(135deg, #7C5CFF → #22D3EE)</span></div>
+    </div>
+  </section>
 
-      <div id="drop" class="drop" tabindex="0" role="button" aria-label="Drop image or click to browse">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        <div class="d1">Drop image or click to browse</div>
-        <div class="d2">PNG · JPG · WEBP</div>
-      </div>
-      <input id="file" type="file" accept="image/*" hidden />
+  <!-- 2. COLOR -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>Color</h2><span class="desc">Semantic tokens &amp; roles</span></div>
+    <div class="swatches" id="swatches"></div>
+  </section>
 
-      <div class="divider"></div>
+  <!-- 3. TYPOGRAPHY -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Typography</h2><span class="desc">Inter UI · JetBrains Mono values · weights 400/500/600</span></div>
+    <div class="card">
+      <div class="type-row"><span class="spec">Display · 40/600</span><span class="t-display">Image in. Mesh out.</span></div>
+      <div class="type-row"><span class="spec">H1 · 28/600</span><span class="t-h1">Generate a 3D mesh</span></div>
+      <div class="type-row"><span class="spec">H2 · 20/600</span><span class="t-h2">Endpoint settings</span></div>
+      <div class="type-row"><span class="spec">Body · 15/400</span><span class="t-body">Drop a single image and the worker returns a textured GLB in seconds.</span></div>
+      <div class="type-row"><span class="spec">Body-strong · 15/500</span><span class="t-strong">One primary task per screen.</span></div>
+      <div class="type-row"><span class="spec">Label · 13/500</span><span class="t-label">RUNPOD ENDPOINT ID</span></div>
+      <div class="type-row"><span class="spec">Caption · 12/400</span><span class="t-caption">PNG · JPG · WEBP</span></div>
+      <div class="type-row"><span class="spec">Mono · 13/400</span><span class="mono">mj7aiqksmbnkw1 · 512×512px · 248 KB · #7C5CFF</span></div>
+    </div>
+  </section>
 
-      <div class="stack">
-        <div>
-          <label class="lbl" for="url">…or paste an image URL</label>
-          <input id="url" class="field mono" type="url" placeholder="https://example.com/car.jpg" />
+  <!-- 4. COMPONENTS -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>Components</h2><span class="desc">Buttons, inputs, drop zone, pills, progress</span></div>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">BUTTONS</h3>
+        <div class="btn-rail">
+          <div><button class="btn btn-primary">Generate mesh</button><div class="tag">primary · gradient</div></div>
+          <div><button class="btn btn-secondary">Download GLB</button><div class="tag">secondary</div></div>
+          <div><button class="btn btn-ghost">Reset</button><div class="tag">ghost</div></div>
+          <div><button class="btn btn-danger">Delete</button><div class="tag">danger</div></div>
+        </div>
+        <div class="btn-rail" style="margin-top:var(--s5)">
+          <div><button class="btn btn-primary btn-focus">Focused</button><div class="tag">focus ring</div></div>
+          <div><button class="btn btn-primary" disabled>Disabled</button><div class="tag">disabled 40%</div></div>
         </div>
       </div>
 
-      <details style="margin-top:var(--s5)">
-        <summary class="summary">Endpoint settings</summary>
-        <div class="stack" style="margin-top:var(--s4)">
-          <div class="row">
-            <div>
-              <label class="lbl" for="endpoint">RunPod endpoint ID</label>
-              <input id="endpoint" class="field mono" value="mj7aiqksmbnkw1" spellcheck="false" />
-            </div>
-            <div>
-              <label class="lbl" for="apikey">RunPod API key</label>
-              <input id="apikey" class="field mono" type="password" placeholder="rpa_…" spellcheck="false" />
-            </div>
-          </div>
-          <p class="hint">Stored only in this tab (sessionStorage). Calls go to
-            <code class="mono">api.runpod.ai/v2/&lt;id&gt;/runsync</code>.</p>
+      <div class="card">
+        <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">INPUTS</h3>
+        <label class="lbl" for="p-url">Image URL</label>
+        <input id="p-url" class="field mono" type="url" placeholder="https://example.com/car.jpg" />
+        <label class="lbl" for="p-id" style="margin-top:var(--s4)">Endpoint ID · focused</label>
+        <input id="p-id" class="field mono is-focus" value="mj7aiqksmbnkw1" spellcheck="false" />
+      </div>
+    </div>
+
+    <div class="grid cols-2" style="margin-top:var(--s4)">
+      <div class="card">
+        <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">DROP ZONE — default</h3>
+        <div class="drop">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <div class="d1">Drop image or click to browse</div>
+          <div class="d2">PNG · JPG · WEBP</div>
         </div>
-      </details>
-
-      <div style="margin-top:var(--s6)">
-        <button id="gen" class="btn btn-primary" disabled>Generate mesh</button>
-        <div id="beam" class="beam" hidden><i></i></div>
-        <div id="msg" class="msg"></div>
       </div>
-    </section>
-
-    <!-- OUTPUT -->
-    <section class="card" aria-label="Output">
-      <div class="card-head"><h2>Output</h2><span id="out-pill" class="pill idle"><span class="dot"></span>Idle</span></div>
-
-      <div class="viewer">
-        <div id="empty" class="empty">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
-          <div>Your 3D mesh will appear here</div>
+      <div class="card">
+        <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">DROP ZONE — drag-over</h3>
+        <div class="drop dragover">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <div class="d1" style="color:var(--text-primary)">Release to add image</div>
+          <div class="d2">gradient border · violet glow</div>
         </div>
-        <model-viewer id="mv" hidden camera-controls auto-rotate touch-action="pan-y"
-          shadow-intensity="0.6" exposure="1.0" environment-image="neutral"
-          interaction-prompt="none"></model-viewer>
-        <span id="dims" class="mono meta pill idle" hidden></span>
       </div>
+    </div>
 
-      <div class="actions">
-        <button id="download" class="btn btn-secondary" disabled>Download GLB</button>
-        <button id="reset" class="btn btn-ghost">Reset</button>
+    <div class="card" style="margin-top:var(--s4)">
+      <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">STATUS PILLS &amp; PROGRESS BEAM</h3>
+      <div class="pill-rail">
+        <span class="pill idle"><span class="dot"></span>No image</span>
+        <span class="pill run"><span class="dot"></span>Generating…</span>
+        <span class="pill ok"><span class="dot"></span>Mesh ready</span>
+        <span class="pill err"><span class="dot"></span>Failed</span>
       </div>
-    </section>
-  </div>
+      <div class="beam" style="margin-top:var(--s5)"><i></i></div>
+      <p class="tag" style="margin-top:var(--s3)">Progress is a sweeping gradient beam — never a bare spinner.</p>
+    </div>
+  </section>
+
+  <!-- 5. 3D VIEWER + LAYOUT -->
+  <section>
+    <div class="sec-head"><span class="n">05</span><h2>Viewer &amp; Layout</h2><span class="desc">Recessed viewport · two-column</span></div>
+    <div class="grid cols-2">
+      <div class="card">
+        <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">3D VIEWER</h3>
+        <div class="viewer">
+          <svg class="wire" viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M50 8 L86 28 L86 72 L50 92 L14 72 L14 28 Z"/>
+            <path d="M50 8 L50 50 M50 50 L86 28 M50 50 L14 28 M50 50 L50 92"/>
+            <line x1="14" y1="28" x2="86" y2="72"/><line x1="86" y1="28" x2="14" y2="72"/>
+          </svg>
+          <span class="mono meta pill idle">GLB · 248 KB</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">SPACING SCALE — 4px base</h3>
+        <div class="space-rail" id="spaceRail"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. ELEVATION -->
+  <section>
+    <div class="sec-head"><span class="n">06</span><h2>Elevation</h2><span class="desc">Surface lightness + hairline + soft shadow</span></div>
+    <div class="elev-grid">
+      <div class="elev e0"><span class="lv">Level 0</span><span class="use">App background</span></div>
+      <div class="elev e1"><span class="lv">Level 1</span><span class="use">Cards, panels</span></div>
+      <div class="elev e2"><span class="lv">Level 2</span><span class="use">Hover / raised</span></div>
+      <div class="elev e3"><span class="lv">Level 3</span><span class="use">Popovers, modals</span></div>
+    </div>
+  </section>
+
+  <!-- 7. DO / DON'T -->
+  <section>
+    <div class="sec-head"><span class="n">07</span><h2>Guardrails</h2><span class="desc">Do's &amp; Don'ts</span></div>
+    <div class="card">
+      <div class="rules">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Keep the canvas near-black so imagery stays brightest</li>
+            <li>Reserve the gradient for the single primary action</li>
+            <li>Set every technical value (IDs, px, MB, hex) in Mono</li>
+            <li>Use the 4px spacing scale and four elevation levels</li>
+            <li>Keep motion physical: ease-out, 150–250ms, no bounce</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Use pure #FFFFFF text or pure #000000 surfaces</li>
+            <li>Put more than one gradient in a view</li>
+            <li>Use weights ≥700 or decorative drop shadows</li>
+            <li>Show a bare spinner instead of the gradient beam</li>
+            <li>Stack colored glows — one accent glow per screen</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <p class="foot">
-    Powered by the <a href="../README.md">TripoSR RunPod worker</a>. Styled with
-    <a href="../DESIGN.md">DESIGN.md</a>.<br />
-    Note: browsers enforce CORS. If a direct call is blocked, run the endpoint call from a
-    small proxy or your backend and point this page at it.
+    TripoSR Studio — a static preview of <a href="../DESIGN.md">DESIGN.md</a>, in the
+    <a href="https://github.com/voltagent/awesome-design-md">awesome-design-md</a> format.
+    Part of the <a href="../README.md">TripoSR RunPod worker</a>. No networking; open it anywhere.
   </p>
 </div>
+
+<div id="toast" class="copied">Copied</div>
 
 <script>
 (() => {
   "use strict";
-  const $ = (id) => document.getElementById(id);
-  const drop = $("drop"), fileInput = $("file"), urlInput = $("url");
-  const genBtn = $("gen"), beam = $("beam"), msg = $("msg");
-  const mv = $("mv"), empty = $("empty"), dims = $("dims");
-  const dlBtn = $("download"), resetBtn = $("reset");
-  const srcPill = $("src-pill"), outPill = $("out-pill");
-  const endpointInput = $("endpoint"), apikeyInput = $("apikey");
-
-  let imageB64 = null;      // data URL of selected file (for preview + payload)
-  let glbBlobUrl = null;    // object URL of decoded GLB
-
-  // persist endpoint settings in this tab only
-  try {
-    endpointInput.value = sessionStorage.getItem("triposr_endpoint") || endpointInput.value;
-    apikeyInput.value = sessionStorage.getItem("triposr_key") || "";
-  } catch (_) {}
-  endpointInput.addEventListener("change", () => { try { sessionStorage.setItem("triposr_endpoint", endpointInput.value.trim()); } catch(_){} });
-  apikeyInput.addEventListener("change", () => { try { sessionStorage.setItem("triposr_key", apikeyInput.value.trim()); } catch(_){} });
-
-  function setPill(el, cls, text) {
-    el.className = "pill " + cls;
-    el.innerHTML = '<span class="dot"></span>' + text;
+  // Color tokens — mirror of DESIGN.md section 2
+  const COLORS = [
+    ["--bg-viewport","#0B0C0E","App background"],
+    ["--bg-surface","#16181D","Cards, panels, drop zone"],
+    ["--bg-surface-raised","#1E2128","Hover surfaces, popovers"],
+    ["--bg-inset","#101216","Inset wells, inputs, viewer"],
+    ["--border-hairline","#262A31","Default 1px borders"],
+    ["--border-strong","#3A404A","Focused/active borders"],
+    ["--text-primary","#F4F5F7","Headings, primary copy"],
+    ["--text-secondary","#9BA1AC","Labels, secondary copy"],
+    ["--text-muted","#5C636E","Placeholders, hints"],
+    ["--accent-violet","#7C5CFF","Signature start · primary"],
+    ["--accent-cyan","#22D3EE","Signature end · links, focus"],
+    ["--accent-ink","#0B0C0E","Text on the bright gradient"],
+    ["--success","#34D399","Success · mesh ready"],
+    ["--warning","#FBBF24","Warnings"],
+    ["--danger","#F87171","Errors"],
+  ];
+  const toast = document.getElementById("toast");
+  let toastTimer;
+  function copy(text){
+    const done = () => { toast.textContent = "Copied " + text; toast.classList.add("show");
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove("show"), 1200); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(done);
+    } else { done(); }
   }
-  function setMsg(text, isErr) { msg.textContent = text || ""; msg.className = "msg" + (isErr ? " err" : ""); }
-  function refreshGenState() {
-    const hasImage = !!imageB64 || !!urlInput.value.trim();
-    genBtn.disabled = !hasImage;
-  }
-
-  // ---- image selection ----
-  function loadFile(file) {
-    if (!file || !file.type.startsWith("image/")) { setMsg("Please choose an image file.", true); return; }
-    const reader = new FileReader();
-    reader.onload = () => {
-      imageB64 = reader.result;              // data:image/...;base64,....
-      urlInput.value = "";
-      // show preview inside drop zone
-      drop.innerHTML = '<img class="preview" alt="selected image" src="' + imageB64 + '"/>' +
-        '<button class="btn btn-secondary clear" type="button" id="clearImg">Clear</button>';
-      $("clearImg").addEventListener("click", (e) => { e.stopPropagation(); clearImage(); });
-      setPill(srcPill, "ok", "Image ready");
-      setMsg("");
-      refreshGenState();
-    };
-    reader.readAsDataURL(file);
-  }
-  function clearImage() {
-    imageB64 = null;
-    drop.innerHTML =
-      '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>' +
-      '<div class="d1">Drop image or click to browse</div><div class="d2">PNG · JPG · WEBP</div>';
-    fileInput.value = "";
-    setPill(srcPill, urlInput.value.trim() ? "ok" : "idle", urlInput.value.trim() ? "URL set" : "No image");
-    refreshGenState();
-  }
-
-  drop.addEventListener("click", () => fileInput.click());
-  drop.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fileInput.click(); } });
-  fileInput.addEventListener("change", (e) => loadFile(e.target.files[0]));
-  ["dragenter","dragover"].forEach(ev => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("dragover"); }));
-  ["dragleave","drop"].forEach(ev => drop.addEventListener(ev, (e) => { e.preventDefault(); if (ev==="drop" || e.target===drop) drop.classList.remove("dragover"); }));
-  drop.addEventListener("drop", (e) => { const f = e.dataTransfer.files[0]; if (f) loadFile(f); });
-  urlInput.addEventListener("input", () => {
-    if (urlInput.value.trim()) { imageB64 = null; setPill(srcPill, "ok", "URL set"); }
-    else if (!imageB64) { setPill(srcPill, "idle", "No image"); }
-    refreshGenState();
+  const isLight = (hex) => {
+    const n = parseInt(hex.slice(1),16), r=(n>>16)&255, g=(n>>8)&255, b=n&255;
+    return (0.299*r + 0.587*g + 0.114*b) > 150;
+  };
+  const sw = document.getElementById("swatches");
+  COLORS.forEach(([tok,hex,role]) => {
+    const el = document.createElement("div");
+    el.className = "swatch"; el.title = "Click to copy " + hex;
+    const border = isLight(hex) ? "" : "box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)";
+    el.innerHTML =
+      '<div class="chip" style="background:'+hex+';'+border+'"></div>' +
+      '<div class="meta"><div class="tok">'+tok+'</div><div class="hex">'+hex+'</div>' +
+      '<div class="role">'+role+'</div></div>';
+    el.addEventListener("click", () => copy(hex));
+    sw.appendChild(el);
   });
 
-  // ---- generate ----
-  function busy(on) {
-    genBtn.disabled = on || genBtn.disabled;
-    beam.hidden = !on;
-    if (on) { setPill(outPill, "run", "Generating…"); genBtn.textContent = "Generating…"; }
-    else { genBtn.textContent = "Generate mesh"; refreshGenState(); }
-  }
-
-  async function generate() {
-    const endpoint = endpointInput.value.trim();
-    const apiKey = apikeyInput.value.trim();
-    if (!endpoint) { setMsg("Set a RunPod endpoint ID in Endpoint settings.", true); return; }
-    if (!apiKey) { setMsg("Set your RunPod API key in Endpoint settings.", true); return; }
-
-    // build payload matching handler.py: image_b64 or image_url
-    const input = {};
-    if (imageB64) input.image_b64 = imageB64.split(",")[1]; // strip data: prefix
-    else if (urlInput.value.trim()) input.image_url = urlInput.value.trim();
-    else { setMsg("Choose an image or paste a URL first.", true); return; }
-
-    setMsg(""); busy(true);
-    try {
-      const res = await fetch(`https://api.runpod.ai/v2/${endpoint}/runsync`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
-        body: JSON.stringify({ input }),
-      });
-      if (!res.ok) throw new Error(`Endpoint returned HTTP ${res.status} ${res.statusText}`);
-      const data = await res.json();
-
-      // runsync wraps the handler return in { status, output: {...} }
-      const out = data.output || data;
-      if (out.error) throw new Error(out.error);
-      const glbB64 = out.glb_b64;
-      if (!glbB64) throw new Error("No glb_b64 in response — job status: " + (data.status || "unknown"));
-
-      showMesh(glbB64);
-      setPill(outPill, "ok", "Mesh ready");
-      setMsg(out.message || "GLB generated successfully.");
-    } catch (err) {
-      setPill(outPill, "err", "Failed");
-      const cors = /Failed to fetch|NetworkError/i.test(String(err.message));
-      setMsg((cors
-        ? "Request blocked (likely CORS or network). Route the call through a backend/proxy and retry. "
-        : "") + err.message, true);
-    } finally {
-      busy(false);
-    }
-  }
-
-  function showMesh(glbB64) {
-    // decode base64 → bytes → blob → object URL
-    const bin = atob(glbB64);
-    const bytes = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-    const blob = new Blob([bytes], { type: "model/gltf-binary" });
-    if (glbBlobUrl) URL.revokeObjectURL(glbBlobUrl);
-    glbBlobUrl = URL.createObjectURL(blob);
-
-    mv.src = glbBlobUrl;
-    mv.hidden = false;
-    empty.hidden = true;
-    dlBtn.disabled = false;
-
-    const kb = (blob.size / 1024).toFixed(0);
-    dims.textContent = `GLB · ${kb} KB`;
-    dims.hidden = false;
-  }
-
-  dlBtn.addEventListener("click", () => {
-    if (!glbBlobUrl) return;
-    const a = document.createElement("a");
-    a.href = glbBlobUrl; a.download = "triposr-output.glb";
-    document.body.appendChild(a); a.click(); a.remove();
+  // spacing scale bars
+  const SPACE = [4,8,12,16,20,24,32,40,56,72];
+  const rail = document.getElementById("spaceRail");
+  SPACE.forEach(px => {
+    const row = document.createElement("div");
+    row.className = "space-row";
+    row.innerHTML = '<span class="n">'+px+'px</span><span class="bar" style="width:'+px+'px"></span>';
+    rail.appendChild(row);
   });
-
-  resetBtn.addEventListener("click", () => {
-    clearImage(); urlInput.value = "";
-    if (glbBlobUrl) { URL.revokeObjectURL(glbBlobUrl); glbBlobUrl = null; }
-    mv.hidden = true; mv.removeAttribute("src"); empty.hidden = false;
-    dims.hidden = true; dlBtn.disabled = true;
-    setPill(outPill, "idle", "Idle"); setPill(srcPill, "idle", "No image");
-    setMsg(""); refreshGenState();
-  });
-
-  genBtn.addEventListener("click", generate);
 })();
 </script>
 </body>

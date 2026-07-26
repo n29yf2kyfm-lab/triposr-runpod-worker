@@ -47,12 +47,13 @@ Or base64:
 Endpoint ID: `mj7aiqksmbnkw1` on RunPod (AMPERE_48 GPU)
 # Trigger rebuild - secrets now configured
 
-## Web UI
+## Design system
 
-A demo front-end lives in [`web/index.html`](web/index.html): drop an image, call the
-worker, and view the returned GLB in an interactive 3D viewer. Open it in a browser and
-add your RunPod endpoint ID + API key under **Endpoint settings**.
+[`DESIGN.md`](DESIGN.md) is a plain-markdown, AI-agent-readable design document in the
+[awesome-design-md](https://github.com/voltagent/awesome-design-md) format. Point your
+coding agent at it to generate UI that matches the **TripoSR Studio** look — a dark
+render-viewport aesthetic with a violet→cyan signature.
 
-The UI follows the [`DESIGN.md`](DESIGN.md) design system — a plain-markdown, AI-agent-readable
-design document in the [awesome-design-md](https://github.com/voltagent/awesome-design-md)
-format. Point your coding agent at `DESIGN.md` to generate UI that matches TripoSR Studio.
+[`web/index.html`](web/index.html) is a static **preview** of that system: a visual catalog
+of the tokens, typography, and components rendered exactly as `DESIGN.md` specifies. It's
+self-contained and offline — no networking, no backend calls. Open it in any browser.
