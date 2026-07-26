@@ -23,6 +23,8 @@ match instantly and are built offline for the next visitor.
 |------|-----------|
 | `schema.sql` | Normalised Postgres/Supabase catalogue (manufacturers → models → generations → trims → variants), asset registry, render sets, and the `variant_resolved` view. RLS is enabled on every table (public read, writes service-role only). Run once in the SQL editor. **No registration is ever keyed, indexed or stored — there is deliberately no VRM table.** |
 | `resolver/index.ts` | Supabase Edge Function `resolve-vehicle`: takes the **decoded spec** (make/model/year/trim/body/fuel — never the reg) → best-matching asset + frame manifest. Self-contained: reads the published `catalogue.v2.json` + `aliases.json` from public storage (no DB, no service-role key). Scores make/model/year/trim/colour; never triggers AI on the hot path. |
+| `dvsa-lookup/index.ts` | Supabase Edge Function: **reg → make/model/colour/fuel/year** via the DVSA MOT History API. Reg is read from the POST body only, never logged/stored. |
+| `autodev-vin/index.ts` | Supabase Edge Function: **VIN → make/model/year/trim/body/engine/drive** via the auto.dev VIN decode API. Richer than DVSA (adds trim + body + drivetrain); returns a `resolverInput` block ready for `resolve-vehicle`. Needs `AUTODEV_API_KEY`. |
 | `catalogue/build_catalogue.py` | Builds the storage-backed catalogue: uploads turntable frames + per-car `manifest.json`, publishes `catalogue.json`. Idempotent. |
 | `catalogue/catalogue.json` | The generated MVP catalogue index (4 cars). |
 | `viewer.html` | The drag-to-spin showroom viewer. Reads `window.__CARS__` (inlined for the artifact demo) or, in the app, fetches manifests from Supabase. |
@@ -59,7 +61,11 @@ reg → (app decodes VRM: make/model/year/trim/colour)
    `DVSA_CLIENT_SECRET`, `DVSA_API_KEY`, `DVSA_TOKEN_URL`, `DVSA_SCOPE`). The
    app POSTs `{ reg }` in the body (never the query string) to decode it, then
    passes only the decoded spec on to `resolve-vehicle`.
-4. On the reg-check result page, call `resolve-vehicle` with the decoded vehicle
+4. (Optional, richer) Deploy `autodev-vin/index.ts` (secret: `AUTODEV_API_KEY`).
+   When the decode yields a VIN, POST `{ vin }` to it for trim/body/drivetrain;
+   use its `resolverInput` block (or merge it over the DVSA spec) before calling
+   `resolve-vehicle` — the extra trim/body sharpens the resolver's score.
+5. On the reg-check result page, call `resolve-vehicle` with the decoded vehicle
    and mount the viewer against the returned manifest URL.
 
 ## Extending the library
