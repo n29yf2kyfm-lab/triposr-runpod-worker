@@ -43,6 +43,10 @@ DO_PLATES = "--no-plates" not in argv
 DO_SYMMETRY = "--no-symmetry" not in argv
 GLASS_PCT = _opt("--glass-pct", 25.0)
 DO_MATERIALS = "--no-materials" not in argv
+DO_SMOOTH = "--no-smooth" not in argv
+SHARP_ANGLE = _opt("--sharp-angle", 34.0)      # keep creases above this
+SMOOTH_ITERS = int(_opt("--smooth-iters", 2))
+SMOOTH_LAMBDA = _opt("--smooth-lambda", 0.35)
 TRUE_LENGTH_MM = _opt("--length-mm", 0.0)
 REG = _opt("--reg", "", str)
 
@@ -274,9 +278,9 @@ if DO_MATERIALS:
             b = m.node_tree.nodes.get("Principled BSDF") if m.use_nodes else None
             if not b:
                 continue
-            b.inputs["Roughness"].default_value = 0.22
+            b.inputs["Roughness"].default_value = 0.28
             if "Metallic" in b.inputs:
-                b.inputs["Metallic"].default_value = 0.35
+                b.inputs["Metallic"].default_value = 0.15
             for coat in ("Coat Weight", "Clearcoat"):
                 if coat in b.inputs:
                     b.inputs[coat].default_value = 1.0
@@ -299,6 +303,41 @@ if DO_MATERIALS:
                 print(f"AI_PREMIUM glass thickness {sol.thickness:.4f} applied")
             except Exception as e:
                 print(f"AI_PREMIUM solidify skipped: {str(e)[:60]}")
+
+# ---- 1c. surface quality -------------------------------------------------
+# Generated shells carry micro-ripple and flat-shaded facets, so studio
+# reflections break up instead of flowing along the body — the "not a real car"
+# tell that survives every other fix. Two cheap treatments:
+#   * shade-smooth with a sharp-edge angle: normals blend across panels but
+#     creases (bonnet shut line, arch lips) stay hard;
+#   * a light volume-preserving Laplacian pass on BODY faces only, which flattens
+#     ripple without eating the little crease detail the model did resolve.
+if DO_SMOOTH:
+    for o in meshes:
+        me = o.data
+        for poly in me.polygons:
+            poly.use_smooth = True
+        try:                                   # Blender 4.1+ dropped auto_smooth
+            me.set_sharp_from_angle(angle=float(np.radians(SHARP_ANGLE)))
+        except Exception:
+            try:
+                me.use_auto_smooth = True
+                me.auto_smooth_angle = float(np.radians(SHARP_ANGLE))
+            except Exception:
+                pass
+        bpy.context.view_layer.objects.active = o
+        lap = o.modifiers.new("body_smooth", "LAPLACIANSMOOTH")
+        lap.iterations = SMOOTH_ITERS
+        lap.lambda_factor = SMOOTH_LAMBDA
+        lap.lambda_border = 0.0
+        lap.use_volume_preserve = True
+        lap.use_x = lap.use_y = lap.use_z = True
+        try:
+            bpy.ops.object.modifier_apply(modifier=lap.name)
+            print(f"AI_PREMIUM surface: shade-smooth @{SHARP_ANGLE}deg + laplacian "
+                  f"x{SMOOTH_ITERS} lambda={SMOOTH_LAMBDA}")
+        except Exception as e:
+            print(f"AI_PREMIUM smoothing skipped: {str(e)[:60]}")
 
 # ---- 2. number plate -----------------------------------------------------
 # Front = the length-end furthest from the roof-band centroid (long bonnet).
