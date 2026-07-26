@@ -37,9 +37,11 @@ def _opt(flag, default, cast=float):
     return cast(argv[argv.index(flag) + 1]) if flag in argv else default
 
 
-A_FRONT = _opt("--front", 0.30)      # windscreen alpha (lower = clearer)
-A_SIDE = _opt("--side", 0.52)        # side/rear glass
+A_FRONT = _opt("--front", 0.42)      # windscreen alpha (lower = clearer)
+A_SIDE = _opt("--side", 0.66)        # side/rear glass
 DO_PLATES = "--no-plates" not in argv
+DO_SYMMETRY = "--no-symmetry" not in argv
+GLASS_PCT = _opt("--glass-pct", 25.0)
 REG = _opt("--reg", "", str)
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -103,6 +105,51 @@ def face_luma(px, w, h, uvs):
     return 0.2126 * r + 0.7152 * g + 0.0722 * b
 
 
+# ---- 0. symmetry --------------------------------------------------------
+# The generator builds left and right independently, so a front-LEFT render
+# shows a different headlight from a front-RIGHT render. That is the single
+# biggest "AI tell" — it reads as geometry changing between views when it is
+# really two mismatched halves. Bisect at the centreline, keep the better half
+# (more faces in the nose region = more resolved detail), mirror it back.
+if DO_SYMMETRY:
+    import mathutils
+    cw = (lo[WA] + hi[WA]) / 2
+    for o in meshes:
+        mw = np.asarray(o.matrix_world.to_4x4())
+        me = o.data
+        bm = bmesh.new(); bm.from_mesh(me)
+        nose = lo[LA] + 0.25 * size[LA]
+        cnt = {"+": 0, "-": 0}
+        for f in bm.faces:
+            c = f.calc_center_median()
+            wc = (mw @ np.array([c.x, c.y, c.z, 1.0]))[:3]
+            if wc[LA] < nose or wc[LA] > hi[LA] - 0.25 * size[LA]:
+                cnt["+" if wc[WA] >= cw else "-"] += 1
+        keep_positive = cnt["+"] >= cnt["-"]
+        print(f"AI_PREMIUM symmetry: end-detail faces +{cnt['+']} / -{cnt['-']} "
+              f"-> keeping {'+' if keep_positive else '-'} side")
+        # world-space cut plane -> local space for bmesh.bisect_plane
+        inv = np.linalg.inv(mw)
+        p_w = np.zeros(3); p_w[WA] = cw
+        p_l = (inv @ np.array([p_w[0], p_w[1], p_w[2], 1.0]))[:3]
+        n_w = np.zeros(3); n_w[WA] = 1.0 if keep_positive else -1.0
+        n_l = (inv[:3, :3] @ n_w)
+        res = bmesh.ops.bisect_plane(bm, geom=list(bm.faces) + list(bm.edges) + list(bm.verts),
+                                     plane_co=mathutils.Vector(p_l),
+                                     plane_no=mathutils.Vector(n_l),
+                                     clear_inner=True, clear_outer=False)
+        bmesh.ops.delete(bm, geom=[g for g in res.get("geom_cut", []) if isinstance(g, bmesh.types.BMFace)],
+                         context="FACES_ONLY")
+        bm.to_mesh(me); bm.free()
+        m = o.modifiers.new("mirror", "MIRROR")
+        m.use_axis = tuple(i == WA for i in range(3))
+        m.use_clip = True
+        m.use_mirror_merge = True
+        m.merge_threshold = 0.0008
+        bpy.context.view_layer.objects.active = o
+        bpy.ops.object.modifier_apply(modifier=m.name)
+    print("AI_PREMIUM symmetry: mirrored — headlights/lights/bumper now identical L/R")
+
 # ---- 1. glass ------------------------------------------------------------
 # Cabin band: above the waistline (~52% of height) and below the roof, with a
 # surface normal that is not near-horizontal (roof panels are horizontal, glass
@@ -155,7 +202,9 @@ for o in meshes:
     if tex and band and uvl:
         px, tw, th = tex
         lum = np.array([face_luma(px, tw, th, [l[uvl].uv for l in f.loops]) for f in band])
-        cut = max(0.03, float(np.percentile(lum, 45)))
+        # 45% was too generous on a black car (paint and glass luminance nearly
+        # match) and bled into pillars/quarter panels; 25% keeps the glazing core
+        cut = max(0.02, float(np.percentile(lum, GLASS_PCT)))
         for f, L in zip(band, lum):
             if L <= cut:
                 f.material_index = gidx
