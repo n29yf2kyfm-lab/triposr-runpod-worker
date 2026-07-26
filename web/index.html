@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TripoSR Studio</title>
+<meta name="description" content="Drop an image, get a 3D mesh — a demo UI for the TripoSR RunPod worker." />
+
+<!-- 3D viewer web component -->
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   TripoSR Studio — styled per DESIGN.md
+   ============================================================ */
+:root{
+  /* color tokens */
+  --bg-viewport:#0B0C0E; --bg-surface:#16181D; --bg-surface-raised:#1E2128;
+  --bg-inset:#101216; --border-hairline:#262A31; --border-strong:#3A404A;
+  --text-primary:#F4F5F7; --text-secondary:#9BA1AC; --text-muted:#5C636E;
+  --accent-violet:#7C5CFF; --accent-cyan:#22D3EE; --accent-ink:#0B0C0E;
+  --success:#34D399; --warning:#FBBF24; --danger:#F87171;
+  --gradient-signature:linear-gradient(135deg,#7C5CFF 0%,#22D3EE 100%);
+  /* spacing scale */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px; --s10:40px;
+  --r-input:10px; --r-card:14px; --r-drop:16px;
+  --sh1:0 1px 2px rgba(0,0,0,.4); --sh2:0 4px 16px rgba(0,0,0,.5); --sh3:0 12px 40px rgba(0,0,0,.6);
+  --mono:"JetBrains Mono","SF Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg-viewport); color:var(--text-primary);
+  font-family:Inter,-apple-system,system-ui,sans-serif;
+  font-size:15px; line-height:24px; -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:var(--mono); font-size:13px}
+a{color:var(--accent-cyan); text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* layout */
+.wrap{max-width:1200px; margin:0 auto; padding:var(--s10) var(--s6) 72px}
+@media (max-width:600px){.wrap{padding:var(--s8) var(--s4) var(--s10)}}
+
+header{margin-bottom:var(--s10)}
+.brand{display:flex; align-items:center; gap:var(--s3)}
+.logo{width:32px; height:32px; border-radius:9px; background:var(--gradient-signature);
+  box-shadow:0 0 24px rgba(124,92,255,.35); flex:none}
+.brand h1{font-size:20px; line-height:28px; font-weight:600; letter-spacing:-.01em; margin:0}
+.tagline{margin:var(--s4) 0 0; max-width:640px; color:var(--text-secondary)}
+.hero-title{font-size:40px; line-height:44px; font-weight:600; letter-spacing:-.02em; margin:var(--s6) 0 0}
+.hero-title .grad{background:var(--gradient-signature); -webkit-background-clip:text;
+  background-clip:text; -webkit-text-fill-color:transparent}
+@media (max-width:600px){.hero-title{font-size:32px; line-height:36px}}
+
+.grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--s6); margin-top:var(--s8)}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+
+/* card */
+.card{background:var(--bg-surface); border:1px solid var(--border-hairline);
+  border-radius:var(--r-card); box-shadow:var(--sh1); padding:var(--s6)}
+.card-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--s5)}
+.card-head h2{font-size:20px; line-height:28px; font-weight:600; letter-spacing:-.01em; margin:0}
+
+/* labels + inputs */
+label.lbl{display:block; font-size:13px; line-height:16px; font-weight:500; letter-spacing:.01em;
+  color:var(--text-secondary); margin:0 0 var(--s2)}
+.field{width:100%; height:44px; padding:0 14px; background:var(--bg-inset);
+  border:1px solid var(--border-hairline); border-radius:var(--r-input);
+  color:var(--text-primary); font-family:inherit; font-size:15px; outline:none;
+  transition:border-color .15s ease, box-shadow .15s ease}
+.field.mono{font-family:var(--mono); font-size:13px}
+.field::placeholder{color:var(--text-muted)}
+.field:focus{border-color:var(--border-strong); box-shadow:0 0 0 2px rgba(34,211,238,.6)}
+.row{display:grid; grid-template-columns:1fr 1fr; gap:var(--s4)}
+@media (max-width:600px){.row{grid-template-columns:1fr}}
+.stack{display:flex; flex-direction:column; gap:var(--s4)}
+.hint{font-size:12px; line-height:16px; color:var(--text-muted); margin:var(--s2) 0 0}
+
+/* drop zone */
+.drop{position:relative; min-height:320px; border:2px dashed var(--border-hairline);
+  border-radius:var(--r-drop); background:var(--bg-surface); display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center; gap:var(--s2); cursor:pointer;
+  transition:border-color .15s ease, box-shadow .15s ease; overflow:hidden; padding:var(--s6)}
+@media (max-width:600px){.drop{min-height:220px}}
+.drop:hover{border-color:var(--border-strong)}
+.drop.dragover{border-style:solid; border-color:transparent;
+  background:linear-gradient(var(--bg-surface),var(--bg-surface)) padding-box,
+             var(--gradient-signature) border-box;
+  box-shadow:0 0 0 4px rgba(124,92,255,.12)}
+.drop svg{color:var(--text-muted)}
+.drop .d1{color:var(--text-secondary)}
+.drop .d2{font-size:12px; line-height:16px; color:var(--text-muted)}
+.drop img.preview{position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  background:var(--bg-inset); padding:var(--s4)}
+.drop .clear{position:absolute; top:var(--s3); right:var(--s3); z-index:2}
+
+/* buttons */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:var(--s2);
+  height:44px; padding:0 20px; border-radius:var(--r-input); font-size:13px; font-weight:500;
+  letter-spacing:.01em; font-family:inherit; cursor:pointer; border:1px solid transparent;
+  transition:filter .15s ease, background .15s ease, transform .05s ease; user-select:none}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:none; box-shadow:0 0 0 2px rgba(34,211,238,.6); outline-offset:2px}
+.btn-primary{background:var(--gradient-signature); color:var(--accent-ink); width:100%}
+.btn-primary:hover{filter:brightness(1.06)}
+.btn-primary:disabled{opacity:.4; cursor:not-allowed; filter:none}
+.btn-secondary{background:var(--bg-surface-raised); color:var(--text-primary);
+  border-color:var(--border-hairline); height:36px; padding:0 14px}
+.btn-secondary:hover{background:var(--border-hairline)}
+.btn-ghost{background:transparent; color:var(--text-secondary); height:32px; padding:0 10px}
+.btn-ghost:hover{color:var(--text-primary)}
+
+/* status pill */
+.pill{display:inline-flex; align-items:center; gap:6px; height:24px; padding:0 10px;
+  border-radius:999px; font-size:12px; font-weight:500; line-height:1}
+.pill .dot{width:6px; height:6px; border-radius:50%; background:currentColor}
+.pill.idle{background:var(--bg-surface-raised); color:var(--text-secondary)}
+.pill.run{background:rgba(124,92,255,.15); color:var(--accent-violet)}
+.pill.ok{background:rgba(52,211,153,.15); color:var(--success)}
+.pill.err{background:rgba(248,113,113,.15); color:var(--danger)}
+
+/* progress beam */
+.beam{height:4px; border-radius:999px; background:var(--bg-inset); overflow:hidden; margin-top:var(--s5)}
+.beam > i{display:block; height:100%; width:40%; border-radius:999px;
+  background:var(--gradient-signature); animation:sweep 1.2s ease-in-out infinite}
+@keyframes sweep{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
+
+/* viewer */
+.viewer{position:relative; width:100%; aspect-ratio:4/3; background:var(--bg-inset);
+  border-radius:var(--r-card); box-shadow:inset 0 1px 0 rgba(255,255,255,.02); overflow:hidden}
+@media (max-width:600px){.viewer{aspect-ratio:1/1}}
+.viewer::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(120% 120% at 50% 40%, transparent 40%, rgba(0,0,0,.45) 100%)}
+model-viewer{width:100%; height:100%; --poster-color:transparent}
+.viewer .empty{position:absolute; inset:0; display:flex; flex-direction:column; gap:var(--s3);
+  align-items:center; justify-content:center; color:var(--text-muted); text-align:center; padding:var(--s6)}
+.viewer .meta{position:absolute; left:var(--s4); bottom:var(--s4); z-index:2}
+
+.msg{margin-top:var(--s4); font-size:13px; line-height:20px}
+.msg.err{color:var(--danger)}
+.foot{margin-top:56px; color:var(--text-muted); font-size:12px; line-height:18px}
+.foot code{font-family:var(--mono)}
+.actions{display:flex; gap:var(--s3); margin-top:var(--s5); flex-wrap:wrap}
+.divider{height:1px; background:var(--border-hairline); margin:var(--s6) 0}
+.summary{cursor:pointer; color:var(--text-secondary); font-size:13px; font-weight:500; list-style:none}
+.summary::-webkit-details-marker{display:none}
+.summary::before{content:"▸ "; color:var(--text-muted)}
+details[open] .summary::before{content:"▾ "}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <h1>TripoSR Studio</h1>
+    </div>
+    <p class="hero-title">Image in. <span class="grad">Mesh out.</span></p>
+    <p class="tagline">Drop a single image and the TripoSR RunPod worker returns a textured
+      GLB in seconds. This demo speaks directly to your serverless endpoint.</p>
+  </header>
+
+  <div class="grid">
+    <!-- INPUT -->
+    <section class="card" aria-label="Input">
+      <div class="card-head"><h2>Input</h2><span id="src-pill" class="pill idle"><span class="dot"></span>No image</span></div>
+
+      <div id="drop" class="drop" tabindex="0" role="button" aria-label="Drop image or click to browse">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <div class="d1">Drop image or click to browse</div>
+        <div class="d2">PNG · JPG · WEBP</div>
+      </div>
+      <input id="file" type="file" accept="image/*" hidden />
+
+      <div class="divider"></div>
+
+      <div class="stack">
+        <div>
+          <label class="lbl" for="url">…or paste an image URL</label>
+          <input id="url" class="field mono" type="url" placeholder="https://example.com/car.jpg" />
+        </div>
+      </div>
+
+      <details style="margin-top:var(--s5)">
+        <summary class="summary">Endpoint settings</summary>
+        <div class="stack" style="margin-top:var(--s4)">
+          <div class="row">
+            <div>
+              <label class="lbl" for="endpoint">RunPod endpoint ID</label>
+              <input id="endpoint" class="field mono" value="mj7aiqksmbnkw1" spellcheck="false" />
+            </div>
+            <div>
+              <label class="lbl" for="apikey">RunPod API key</label>
+              <input id="apikey" class="field mono" type="password" placeholder="rpa_…" spellcheck="false" />
+            </div>
+          </div>
+          <p class="hint">Stored only in this tab (sessionStorage). Calls go to
+            <code class="mono">api.runpod.ai/v2/&lt;id&gt;/runsync</code>.</p>
+        </div>
+      </details>
+
+      <div style="margin-top:var(--s6)">
+        <button id="gen" class="btn btn-primary" disabled>Generate mesh</button>
+        <div id="beam" class="beam" hidden><i></i></div>
+        <div id="msg" class="msg"></div>
+      </div>
+    </section>
+
+    <!-- OUTPUT -->
+    <section class="card" aria-label="Output">
+      <div class="card-head"><h2>Output</h2><span id="out-pill" class="pill idle"><span class="dot"></span>Idle</span></div>
+
+      <div class="viewer">
+        <div id="empty" class="empty">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+          <div>Your 3D mesh will appear here</div>
+        </div>
+        <model-viewer id="mv" hidden camera-controls auto-rotate touch-action="pan-y"
+          shadow-intensity="0.6" exposure="1.0" environment-image="neutral"
+          interaction-prompt="none"></model-viewer>
+        <span id="dims" class="mono meta pill idle" hidden></span>
+      </div>
+
+      <div class="actions">
+        <button id="download" class="btn btn-secondary" disabled>Download GLB</button>
+        <button id="reset" class="btn btn-ghost">Reset</button>
+      </div>
+    </section>
+  </div>
+
+  <p class="foot">
+    Powered by the <a href="../README.md">TripoSR RunPod worker</a>. Styled with
+    <a href="../DESIGN.md">DESIGN.md</a>.<br />
+    Note: browsers enforce CORS. If a direct call is blocked, run the endpoint call from a
+    small proxy or your backend and point this page at it.
+  </p>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  const drop = $("drop"), fileInput = $("file"), urlInput = $("url");
+  const genBtn = $("gen"), beam = $("beam"), msg = $("msg");
+  const mv = $("mv"), empty = $("empty"), dims = $("dims");
+  const dlBtn = $("download"), resetBtn = $("reset");
+  const srcPill = $("src-pill"), outPill = $("out-pill");
+  const endpointInput = $("endpoint"), apikeyInput = $("apikey");
+
+  let imageB64 = null;      // data URL of selected file (for preview + payload)
+  let glbBlobUrl = null;    // object URL of decoded GLB
+
+  // persist endpoint settings in this tab only
+  try {
+    endpointInput.value = sessionStorage.getItem("triposr_endpoint") || endpointInput.value;
+    apikeyInput.value = sessionStorage.getItem("triposr_key") || "";
+  } catch (_) {}
+  endpointInput.addEventListener("change", () => { try { sessionStorage.setItem("triposr_endpoint", endpointInput.value.trim()); } catch(_){} });
+  apikeyInput.addEventListener("change", () => { try { sessionStorage.setItem("triposr_key", apikeyInput.value.trim()); } catch(_){} });
+
+  function setPill(el, cls, text) {
+    el.className = "pill " + cls;
+    el.innerHTML = '<span class="dot"></span>' + text;
+  }
+  function setMsg(text, isErr) { msg.textContent = text || ""; msg.className = "msg" + (isErr ? " err" : ""); }
+  function refreshGenState() {
+    const hasImage = !!imageB64 || !!urlInput.value.trim();
+    genBtn.disabled = !hasImage;
+  }
+
+  // ---- image selection ----
+  function loadFile(file) {
+    if (!file || !file.type.startsWith("image/")) { setMsg("Please choose an image file.", true); return; }
+    const reader = new FileReader();
+    reader.onload = () => {
+      imageB64 = reader.result;              // data:image/...;base64,....
+      urlInput.value = "";
+      // show preview inside drop zone
+      drop.innerHTML = '<img class="preview" alt="selected image" src="' + imageB64 + '"/>' +
+        '<button class="btn btn-secondary clear" type="button" id="clearImg">Clear</button>';
+      $("clearImg").addEventListener("click", (e) => { e.stopPropagation(); clearImage(); });
+      setPill(srcPill, "ok", "Image ready");
+      setMsg("");
+      refreshGenState();
+    };
+    reader.readAsDataURL(file);
+  }
+  function clearImage() {
+    imageB64 = null;
+    drop.innerHTML =
+      '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>' +
+      '<div class="d1">Drop image or click to browse</div><div class="d2">PNG · JPG · WEBP</div>';
+    fileInput.value = "";
+    setPill(srcPill, urlInput.value.trim() ? "ok" : "idle", urlInput.value.trim() ? "URL set" : "No image");
+    refreshGenState();
+  }
+
+  drop.addEventListener("click", () => fileInput.click());
+  drop.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fileInput.click(); } });
+  fileInput.addEventListener("change", (e) => loadFile(e.target.files[0]));
+  ["dragenter","dragover"].forEach(ev => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("dragover"); }));
+  ["dragleave","drop"].forEach(ev => drop.addEventListener(ev, (e) => { e.preventDefault(); if (ev==="drop" || e.target===drop) drop.classList.remove("dragover"); }));
+  drop.addEventListener("drop", (e) => { const f = e.dataTransfer.files[0]; if (f) loadFile(f); });
+  urlInput.addEventListener("input", () => {
+    if (urlInput.value.trim()) { imageB64 = null; setPill(srcPill, "ok", "URL set"); }
+    else if (!imageB64) { setPill(srcPill, "idle", "No image"); }
+    refreshGenState();
+  });
+
+  // ---- generate ----
+  function busy(on) {
+    genBtn.disabled = on || genBtn.disabled;
+    beam.hidden = !on;
+    if (on) { setPill(outPill, "run", "Generating…"); genBtn.textContent = "Generating…"; }
+    else { genBtn.textContent = "Generate mesh"; refreshGenState(); }
+  }
+
+  async function generate() {
+    const endpoint = endpointInput.value.trim();
+    const apiKey = apikeyInput.value.trim();
+    if (!endpoint) { setMsg("Set a RunPod endpoint ID in Endpoint settings.", true); return; }
+    if (!apiKey) { setMsg("Set your RunPod API key in Endpoint settings.", true); return; }
+
+    // build payload matching handler.py: image_b64 or image_url
+    const input = {};
+    if (imageB64) input.image_b64 = imageB64.split(",")[1]; // strip data: prefix
+    else if (urlInput.value.trim()) input.image_url = urlInput.value.trim();
+    else { setMsg("Choose an image or paste a URL first.", true); return; }
+
+    setMsg(""); busy(true);
+    try {
+      const res = await fetch(`https://api.runpod.ai/v2/${endpoint}/runsync`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+        body: JSON.stringify({ input }),
+      });
+      if (!res.ok) throw new Error(`Endpoint returned HTTP ${res.status} ${res.statusText}`);
+      const data = await res.json();
+
+      // runsync wraps the handler return in { status, output: {...} }
+      const out = data.output || data;
+      if (out.error) throw new Error(out.error);
+      const glbB64 = out.glb_b64;
+      if (!glbB64) throw new Error("No glb_b64 in response — job status: " + (data.status || "unknown"));
+
+      showMesh(glbB64);
+      setPill(outPill, "ok", "Mesh ready");
+      setMsg(out.message || "GLB generated successfully.");
+    } catch (err) {
+      setPill(outPill, "err", "Failed");
+      const cors = /Failed to fetch|NetworkError/i.test(String(err.message));
+      setMsg((cors
+        ? "Request blocked (likely CORS or network). Route the call through a backend/proxy and retry. "
+        : "") + err.message, true);
+    } finally {
+      busy(false);
+    }
+  }
+
+  function showMesh(glbB64) {
+    // decode base64 → bytes → blob → object URL
+    const bin = atob(glbB64);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    const blob = new Blob([bytes], { type: "model/gltf-binary" });
+    if (glbBlobUrl) URL.revokeObjectURL(glbBlobUrl);
+    glbBlobUrl = URL.createObjectURL(blob);
+
+    mv.src = glbBlobUrl;
+    mv.hidden = false;
+    empty.hidden = true;
+    dlBtn.disabled = false;
+
+    const kb = (blob.size / 1024).toFixed(0);
+    dims.textContent = `GLB · ${kb} KB`;
+    dims.hidden = false;
+  }
+
+  dlBtn.addEventListener("click", () => {
+    if (!glbBlobUrl) return;
+    const a = document.createElement("a");
+    a.href = glbBlobUrl; a.download = "triposr-output.glb";
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  resetBtn.addEventListener("click", () => {
+    clearImage(); urlInput.value = "";
+    if (glbBlobUrl) { URL.revokeObjectURL(glbBlobUrl); glbBlobUrl = null; }
+    mv.hidden = true; mv.removeAttribute("src"); empty.hidden = false;
+    dims.hidden = true; dlBtn.disabled = true;
+    setPill(outPill, "idle", "Idle"); setPill(srcPill, "idle", "No image");
+    setMsg(""); refreshGenState();
+  });
+
+  genBtn.addEventListener("click", generate);
+})();
+</script>
+</body>
+</html>
