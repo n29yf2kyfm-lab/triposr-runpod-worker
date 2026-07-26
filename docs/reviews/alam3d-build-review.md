@@ -151,6 +151,32 @@ To resume the actual build, set in this environment: `RUNPOD_API_KEY` (`rpa_…`
 
 ---
 
+## Volume ground-truth (2026-07-26, read-only pod inspection of `yiv4apiad7`)
+
+Resolves the open questions below with direct evidence (pod created + deleted,
+no writes, ~$0.05):
+
+- **Training set staged = 365 shapes** (`alamcars/metadata.csv` 365 rows, `raw/`
+  367 GLBs), all CC-BY, 61 makes (bmw 30, audi 23, vw 22, mercedes 18, toyota
+  18, …). Full toolkit artefacts present (mesh 2.6G, pbr_dumps 9.1G, dual_grid
+  256/512/1024, renders_cond 3.9G, shape_latents 535M, ss_latents 49M).
+- **`pbr_latents` empty** — the PBR gap persists; texture training still blocked.
+- **No `wave`/`v1`/`orphan` dataset exists** on the volume or in git. The
+  "539 shapes staged" figure is unsupported — 539 was the *target* for v1
+  (≈366 + ~174 to source), not staged data.
+- **Stage C trained to step 4000, not 6000.** Checkpoints on the volume:
+  `denoiser_ema0.9999_step{1000..4000}.pt` (5.2 GB) + `denoiser_step*` +
+  `misc_step*`. `ckpt-4000` is what the eval used (matches the owner's sheets).
+  Smoke-loss healthy (1.96 → ~1.29). `alam-3d-v0` on HF is still empty.
+- Data-hygiene: `metadata.csv` has case-duplicate makes (`audi`/`AUDI`,
+  `MERCEDES`, `SUZUKI`…) — normalise before any wave-2 rebuild.
+- Volume usage: alam3d_stage_c 78G, alam3d_smoke 20G, alamcars 22G, hf_cache
+  17G on the 250 GB volume (~137 G used).
+
+**Building wave 2 (=539) requires:** source + QC ~174 more cars, normalise
+makes, re-run `prepare_dataset.py` + toolkit, then train — none staged yet — and
+a RunPod top-up (v1 ≈ $35 vs ≈ $21 balance).
+
 ## Open questions blocking a decision
 
 1. Did Stage C training finish 6000 steps and leave EMA checkpoints at
