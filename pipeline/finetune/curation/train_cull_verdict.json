@@ -1,0 +1,6750 @@
+[
+ {
+  "n": 1,
+  "sheet": 1,
+  "sha256": "001c39eee61fe7d491c872fcb0492645c91accd54d348b6eb16b285a5abc765a",
+  "verdict": "cull",
+  "reason": "dune buggy - not a road car"
+ },
+ {
+  "n": 2,
+  "sheet": 1,
+  "sha256": "009f2ff413a413379fccd08466a0489a62d8b6bc83425f3320afcef2f41994ea",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 3,
+  "sheet": 1,
+  "sha256": "01214d9df90ce5f22a00771a9a3f9c6498fed7dcc8a285d5533d52353456db7c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 4,
+  "sheet": 1,
+  "sha256": "0166215495110375ae604556bbe4108efcc6c542f164d3a228b7607ede9f0ada",
+  "verdict": "cull",
+  "reason": "diorama: three tiny cars on plinths"
+ },
+ {
+  "n": 5,
+  "sheet": 1,
+  "sha256": "02729d4903243ed692ce6db2a04484e910592795546f46c4d73341b5431239a5",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 6,
+  "sheet": 1,
+  "sha256": "0276be86e9d95971e1a67401bcfaf612f6f6b352415b9e202e54f57ff4236298",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 7,
+  "sheet": 1,
+  "sha256": "02bd272dc8f9ba0c02ab9a5714de4eeeed6c0fcf8e4cbfbdd796e8e2717d6fa1",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 8,
+  "sheet": 1,
+  "sha256": "02f9fe99f50e9c7e4f500de303609ac32cd347d4a79d14c3ed099cbf8aa18b3c",
+  "verdict": "cull",
+  "reason": "rock/terrain scan, not a vehicle"
+ },
+ {
+  "n": 9,
+  "sheet": 1,
+  "sha256": "037685617caa39a454ad946142829d999b697a8507e3dd00c81054fe602441ef",
+  "verdict": "cull",
+  "reason": "vintage delivery wagon - wrong class"
+ },
+ {
+  "n": 10,
+  "sheet": 1,
+  "sha256": "03b8118219a4f7643dd4d5947600183a2443c6032c1c40672f11ead3d13f0443",
+  "verdict": "cull",
+  "reason": "cartoon cart/kart - wrong class"
+ },
+ {
+  "n": 11,
+  "sheet": 1,
+  "sha256": "03f61906bc193523a76c58ad2fee031a94337069d7ae21018fd69d651f3fcd2a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 12,
+  "sheet": 1,
+  "sha256": "042652e80a153b5818583990aa93be7e501d0cab32ef10f3851978db6b9104f6",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 13,
+  "sheet": 1,
+  "sha256": "0490d636e3e847a7d10a3afb9c38de4a171ca91855888165dc3dcbfc3e098742",
+  "verdict": "cull",
+  "reason": "panel van - commercial, not passenger car"
+ },
+ {
+  "n": 14,
+  "sheet": 1,
+  "sha256": "04def64d04cdccaf62b5c5211b90bb690ad335c5145428d5d8443eff8f301537",
+  "verdict": "cull",
+  "reason": "artic tractor unit - HGV"
+ },
+ {
+  "n": 15,
+  "sheet": 1,
+  "sha256": "05a584e20d84376c3cc81808d7baede071eac41c4ae79966de5cd20781478179",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 16,
+  "sheet": 1,
+  "sha256": "05cdd30a7259e97b63f1296b667b79283f9a6b9d556954bb2a8b7e09da3f3542",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 17,
+  "sheet": 1,
+  "sha256": "0792019d14dcf8e8db80b71caeea494e4974e244d39cb498fd908d081f22b2d1",
+  "verdict": "cull",
+  "reason": "flattened wreck / fragment"
+ },
+ {
+  "n": 18,
+  "sheet": 1,
+  "sha256": "07bc21fd1fcdacc2867dde14dd18bce9b3babbf0576007f142f3c3a9f65a210f",
+  "verdict": "cull",
+  "reason": "MPV with missing-texture magenta patches"
+ },
+ {
+  "n": 19,
+  "sheet": 1,
+  "sha256": "07e465298bc8507375b6ce07f6fffbebe74b5854153668f0cc4560014ecac2fb",
+  "verdict": "cull",
+  "reason": "amphibious 6x6 military"
+ },
+ {
+  "n": 20,
+  "sheet": 1,
+  "sha256": "084d23bffab548f4e347d7e48b1aa847f21f8d7e762ebafc338cea0ffbf00192",
+  "verdict": "cull",
+  "reason": "grey slab geometry - not a vehicle"
+ },
+ {
+  "n": 21,
+  "sheet": 1,
+  "sha256": "0855382ea33a75578bd923b99c281bcfd320c4633bcc765390dd471f0b0f21ed",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 22,
+  "sheet": 1,
+  "sha256": "0862d006a40955b66587c687e59a3620b775c9c3e0a8783259975c9d48c4f184",
+  "verdict": "cull",
+  "reason": "near-black flat blob, unusable"
+ },
+ {
+  "n": 23,
+  "sheet": 1,
+  "sha256": "08736d8bbb4e1915e1988c7cb67c5171e5fdec431a21fdc9f746cf69e06852b6",
+  "verdict": "cull",
+  "reason": "pickup with roof light bar - non-stock"
+ },
+ {
+  "n": 24,
+  "sheet": 1,
+  "sha256": "094bc5b71af25df319436640bfc8ec6bf7cf711c87a0dc7b4d2b7b24f0ed143b",
+  "verdict": "cull",
+  "reason": "near-empty tile"
+ },
+ {
+  "n": 25,
+  "sheet": 1,
+  "sha256": "094fce043a067ae8a9c31224afadcb9eb79d567f16a2360d5279257ffbaac86e",
+  "verdict": "cull",
+  "reason": "statue/figure"
+ },
+ {
+  "n": 26,
+  "sheet": 1,
+  "sha256": "095377978249535f6b6764ef860fdd07dde10d4035aa5687f06b326f793d6215",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 27,
+  "sheet": 1,
+  "sha256": "097906a7a3bb06f2dd1239210d4b3a95892ef58f43e38ce1e5a9260c183df78e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 28,
+  "sheet": 1,
+  "sha256": "0a1d7a52519376942f2e5e1edbf1a7350c5a4dcfa85255835fbd879d68015cfd",
+  "verdict": "cull",
+  "reason": "house"
+ },
+ {
+  "n": 29,
+  "sheet": 1,
+  "sha256": "0a83f90e978b4e5f892b6191feb762ae452d902492a7199cc691ee94dfcd92fe",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 30,
+  "sheet": 1,
+  "sha256": "0a981b0251eaa525578cf8a6fa09761e3f6c2315f64707c9b05b133a40725067",
+  "verdict": "cull",
+  "reason": "exhibition stand"
+ },
+ {
+  "n": 31,
+  "sheet": 2,
+  "sha256": "0aad25ec9cae220733dc0d1285d4e8344663b5821de1cb65e25fbae10916a714",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 32,
+  "sheet": 2,
+  "sha256": "0abb964d2c588bb71925ea5719a47cf5d7d1728e1bed6e928cd5c2bf120dee1c",
+  "verdict": "cull",
+  "reason": "rock/terrain scan"
+ },
+ {
+  "n": 33,
+  "sheet": 2,
+  "sha256": "0abf3a2575d65e2fbcc60a5bba75ac81791b0f431a0bcc4d739336685db4de5c",
+  "verdict": "cull",
+  "reason": "flat plane sliver - no vehicle"
+ },
+ {
+  "n": 34,
+  "sheet": 2,
+  "sha256": "0b06246b9402d2e07635b8598cfad848fa590b876b7a7b19bc73927b0c9e566c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 35,
+  "sheet": 2,
+  "sha256": "0b6903dfda65b0ceaea6da16cefa0dafda558d216e81288ac1baf08685353282",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 36,
+  "sheet": 2,
+  "sha256": "0bd38943bf45b58d1808a5e64f1c563a7ef294ff736ff197111473e756dc8056",
+  "verdict": "cull",
+  "reason": "US pickup - wrong class"
+ },
+ {
+  "n": 37,
+  "sheet": 2,
+  "sha256": "0c007e4cadba9bdd1885d033beb4b4c50c32e89e263d44ca89ece71434b381d2",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 38,
+  "sheet": 2,
+  "sha256": "0c01644809a8efe2dd563ca15b24ce38eed9d00d5486746b091d34fbebdfaf45",
+  "verdict": "cull",
+  "reason": "pre-1980 convertible - vintage, not target domain"
+ },
+ {
+  "n": 39,
+  "sheet": 2,
+  "sha256": "0c3ab0507f3cc710bb82cd8fe150c9079c08a8731ca0b568469f1d2260c3703b",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 40,
+  "sheet": 2,
+  "sha256": "0d2319ddbea00c80449bec41722a89b5c0a84e470afa8eb902fdf90b2c25d974",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 41,
+  "sheet": 2,
+  "sha256": "0d2f8006f0e0d9f5164008616bf1104cd56a89509e4e6bcacf3bdcb22fb49ae7",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 42,
+  "sheet": 2,
+  "sha256": "0d44692a50864ede4dfa36b0e74f4fa7a0a5c23b7d668f47a0ceda758b2e0b3f",
+  "verdict": "cull",
+  "reason": "kei box van - commercial"
+ },
+ {
+  "n": 43,
+  "sheet": 2,
+  "sha256": "0e2e24b9997af98830632499a2bea7269e4b487ec71dd8248bd7d3c293db86f0",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 44,
+  "sheet": 2,
+  "sha256": "0e5b513aff44f75689540633ad304754387e82443e6a93c6792310101b50ed81",
+  "verdict": "cull",
+  "reason": "white silhouette diorama scene"
+ },
+ {
+  "n": 45,
+  "sheet": 2,
+  "sha256": "0e70276079366bb73586be4c82b2167d9533e59a25778911a52177c1ed70c14b",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 46,
+  "sheet": 2,
+  "sha256": "0e975eb7dda7d82f547e2e455b52bcb708d9f680775bfd0a0cd30cf30b334a04",
+  "verdict": "cull",
+  "reason": "industrial machinery on flatbed"
+ },
+ {
+  "n": 47,
+  "sheet": 2,
+  "sha256": "0efeacf1ba87adbf1c56defb3c8b5d42c7126e14ea4db3c4f8af4dec4652ba25",
+  "verdict": "cull",
+  "reason": "single-deck bus"
+ },
+ {
+  "n": 48,
+  "sheet": 2,
+  "sha256": "0f1551b2a07b4e9e4733abce6e485719cbec606ce725cb29d025a012169a0c5d",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 49,
+  "sheet": 2,
+  "sha256": "0f294a4667d5b71520289176fa289f0723212715463e14843ef12987a1864671",
+  "verdict": "cull",
+  "reason": "two tiny unidentifiable objects"
+ },
+ {
+  "n": 50,
+  "sheet": 2,
+  "sha256": "0f9565fa6523339cd5c0c6d41cb6123b86be9aa25b14ec1b00412d341b40bb3a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 51,
+  "sheet": 2,
+  "sha256": "0ffa1412ff97b20cc94233571bd55791ec468058998e31c423a40668b9cd7364",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 52,
+  "sheet": 2,
+  "sha256": "0ffb2edd4d8445763705db7eb53eaf88a0fe4edf279aa4bf5ff30e8ab6132a3b",
+  "verdict": "cull",
+  "reason": "flatbed lorry with cargo"
+ },
+ {
+  "n": 53,
+  "sheet": 2,
+  "sha256": "10650d6db416219e70499168c24166432db16a1eecaa1513f0a201cfe95717d2",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 54,
+  "sheet": 2,
+  "sha256": "106e5e88c3bf7fabffd2bb44ddebf181fe43269b2833d5446598995ee6163e6b",
+  "verdict": "cull",
+  "reason": "truck tractor unit"
+ },
+ {
+  "n": 55,
+  "sheet": 2,
+  "sha256": "10bb06fa885f84f61a3979351637e56bc48a5e7c68a9a920ee97ccad4525043f",
+  "verdict": "cull",
+  "reason": "panel van with roof rack"
+ },
+ {
+  "n": 56,
+  "sheet": 2,
+  "sha256": "1154ec476d5b4b79559d28896ffd2ff8571f88424cd20c16a0dda29d9e1fae91",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 57,
+  "sheet": 2,
+  "sha256": "115ebe663fcd9d90dc0bd430c2c9e628d4823e977cac8cac0747688efb7fd54b",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 58,
+  "sheet": 2,
+  "sha256": "1198a1987643d1e270eee1613e6f6041e3ea13fcdb4c5201cd227faf0b56f7ea",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 59,
+  "sheet": 2,
+  "sha256": "11a69c64e30e66375be0552478f59074e136b184c4599701147c7e0811e866ab",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 60,
+  "sheet": 2,
+  "sha256": "11bd5a2db6cd1d54c9fb90a97612ad90551b3669fbe045c78fa3ac8a11d8ea70",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 61,
+  "sheet": 3,
+  "sha256": "11fca903d776aaf4a8042447c6a52ae48f16ac8bd37242c89c7a1d52e424c35e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 62,
+  "sheet": 3,
+  "sha256": "124b4051d7e899cce2af37a03078bff3ab9626126451d96e1f5bf10d745b543a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 63,
+  "sheet": 3,
+  "sha256": "127bc356e47d33595389f458e0f61d00c2e6cab46eb630da00287baa3b839007",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 64,
+  "sheet": 3,
+  "sha256": "12ca636801b22147cac26cacaedcfee5376bd394f375d782b03cff188b60b319",
+  "verdict": "cull",
+  "reason": "box lorry with advertising livery"
+ },
+ {
+  "n": 65,
+  "sheet": 3,
+  "sha256": "12cf45524ec0d49a78b1aac9f38a29bdbda56b416b430b1108e4c423dbd41b4a",
+  "verdict": "cull",
+  "reason": "car standing on its nose - broken orientation"
+ },
+ {
+  "n": 66,
+  "sheet": 3,
+  "sha256": "131df64e6ab1cfae23e5bd3621bf5b5be457e97038496cdda3f34ec1687d4cf4",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 67,
+  "sheet": 3,
+  "sha256": "135fc9d032100d6441f348fcc159c5db58ef14c47e1df41c5754b145a8c9b4c2",
+  "verdict": "cull",
+  "reason": "tracked military vehicle"
+ },
+ {
+  "n": 68,
+  "sheet": 3,
+  "sha256": "136e74d64f213631fba48057df121f8cb56761467f1bab5d93e64c024b317978",
+  "verdict": "cull",
+  "reason": "tiny fragment, no readable vehicle"
+ },
+ {
+  "n": 69,
+  "sheet": 3,
+  "sha256": "137bcb9bb0f1e4ca11b2e3e94b503427d0212d5e5953c36b235d5762bbd1c830",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 70,
+  "sheet": 3,
+  "sha256": "13bf122c1ef024739d5325eefc37f680c950a0ce40b57f7f7ab2094c7553a5f8",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 71,
+  "sheet": 3,
+  "sha256": "13c2a63c710764c37559d66999fcd064bf7042066f0585d8146d74f91b4f58da",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 72,
+  "sheet": 3,
+  "sha256": "1479a594fe4138fb8f7a4268e5f34c17f252e046a1513c548b5ddfafaf67c1b7",
+  "verdict": "cull",
+  "reason": "coupe with black missing-material blotches"
+ },
+ {
+  "n": 73,
+  "sheet": 3,
+  "sha256": "14c1ca698e6a361164460f8b75a54d1e1a14fab212da9ad498296c8380d95f7b",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 74,
+  "sheet": 3,
+  "sha256": "14e5600e65cda69cdfc1978c4e8da2762d1c2fa9e8996986aa3e0b5389cca6e3",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 75,
+  "sheet": 3,
+  "sha256": "155a3bf80338a158dcd1608a99e2867ffa3bbd08952d4eb783a2bcbf283ade05",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 76,
+  "sheet": 3,
+  "sha256": "15c30651e0d6fde95a26746c5c97446afbd41c2e75a4338c66e9d6f5d62f5aa5",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 77,
+  "sheet": 3,
+  "sha256": "161c7b75e5f92f49e6cf8690270eb4454513bbe9e6002537f8eb3ccc79cfc68c",
+  "verdict": "cull",
+  "reason": "top-down orientation - unusable as conditioning view"
+ },
+ {
+  "n": 78,
+  "sheet": 3,
+  "sha256": "1620bf6b6fbd34709238ab2b5b5d98d7477ddfda077bc6ac9eff6e5408bae5c6",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 79,
+  "sheet": 3,
+  "sha256": "16f2122a6e9507110b637a86bcade6c804ac45537fc5cab0965cb24660fd6104",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 80,
+  "sheet": 3,
+  "sha256": "176fbaf189bc7e5840b903d934810834e78dc99462c56aa1784109e79d9615bf",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 81,
+  "sheet": 3,
+  "sha256": "17add0038346ab39dfee4b0a8061f7493e596e01808b8e57e8aab79fb81263e0",
+  "verdict": "cull",
+  "reason": "old bus/van"
+ },
+ {
+  "n": 82,
+  "sheet": 3,
+  "sha256": "17baf2edc1efd565914cab97dd13fa43c2dfff387d10000470f94a14e36ab330",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 83,
+  "sheet": 3,
+  "sha256": "1857d2b2e6ab1c447ad996607c99835e77a52b9e482412539f05f8df460f86c5",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 84,
+  "sheet": 3,
+  "sha256": "18a5e4912d7380010e881d014331bb9008d2cf4f1318830b23f205dd2a8e47ef",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 85,
+  "sheet": 3,
+  "sha256": "18ef0cd00590b64f99981186eda7c27ee9ba9c1c030998a9d62f048dc0445007",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 86,
+  "sheet": 3,
+  "sha256": "18f25c9372b53df30bd1495ceca46d1b81bfb1f9d1657dc6457d2cd0b75d2ace",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 87,
+  "sheet": 3,
+  "sha256": "190b47aedc7f0a1b95869ad7f5d0d385417bb26c1fc34d52b89a99b9bdf0d1f9",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 88,
+  "sheet": 3,
+  "sha256": "19690fd0eb15e5661e7cbc98e31853a215f8c320054ea829b83247043e6aaa73",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 89,
+  "sheet": 3,
+  "sha256": "1972462564754dcacbcc8c2dd1d801e6ce772701a4944e015b20824e6228b3b5",
+  "verdict": "cull",
+  "reason": "tiny jeep on a large empty plane"
+ },
+ {
+  "n": 90,
+  "sheet": 3,
+  "sha256": "19c4b569b16fe7be05d03923dff22f15b6aff47544b85ae2588b8c70fbdfb179",
+  "verdict": "cull",
+  "reason": "mech/robot - not a vehicle"
+ },
+ {
+  "n": 91,
+  "sheet": 4,
+  "sha256": "19df66e64df9ef2315de7519f5a0ea1fa6fe812c33d1f461768e57c93704ed3d",
+  "verdict": "cull",
+  "reason": "cone/cylinder primitives"
+ },
+ {
+  "n": 92,
+  "sheet": 4,
+  "sha256": "19e29161c06a997d3dc313b2c6c22f26f18437ce388c39977ac6d4abb2eaf33d",
+  "verdict": "cull",
+  "reason": "camo race livery - non-stock"
+ },
+ {
+  "n": 93,
+  "sheet": 4,
+  "sha256": "1a06fbc16b7c2cdc209ad8e1f292a62df071c93cca8559b1f09a0a4cdb8186d3",
+  "verdict": "cull",
+  "reason": "angel statue"
+ },
+ {
+  "n": 94,
+  "sheet": 4,
+  "sha256": "1a106efc66a8b49f34ab379c0a1e344349249b9a48b1db7fecf5a11dac21915a",
+  "verdict": "cull",
+  "reason": "caravan / food trailer"
+ },
+ {
+  "n": 95,
+  "sheet": 4,
+  "sha256": "1a176bfdb67e92f7fbd33e6840507903bc870d175ec30d0070d692af93f41be9",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 96,
+  "sheet": 4,
+  "sha256": "1a7fe80b5f69060e97a5de64147f3dd8eff61302761ed16f3471e327f3d236ff",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 97,
+  "sheet": 4,
+  "sha256": "1a8ac0315f78f7cb16f88e562d092f4e052f1670ec754866e43eb1cbd52ffb9f",
+  "verdict": "cull",
+  "reason": "box cart on wheels"
+ },
+ {
+  "n": 98,
+  "sheet": 4,
+  "sha256": "1a9cf515c4547cd858b087606c73665c93ab45b2d915add35901a99b5001f1f4",
+  "verdict": "cull",
+  "reason": "car rotated to top-down - broken orientation"
+ },
+ {
+  "n": 99,
+  "sheet": 4,
+  "sha256": "1b0ec4bfdab666fa7c5dad6423e764c5d959bf5e3d68b60788a7fff811148a4c",
+  "verdict": "cull",
+  "reason": "minibus with graffiti livery"
+ },
+ {
+  "n": 100,
+  "sheet": 4,
+  "sha256": "1c27d39a6160493d8800a9256982ab514f3571abb462704df93907fc4e8fc253",
+  "verdict": "cull",
+  "reason": "wall/gate panel"
+ },
+ {
+  "n": 101,
+  "sheet": 4,
+  "sha256": "1c525c4fae77e106beb50610e92324163c2e4342f4096df17f71d0ca6da48588",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 102,
+  "sheet": 4,
+  "sha256": "1c9509a4c4bba53f47d278dc9f16c3329d62e8eb0197aa24bf0120cfbce342ec",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 103,
+  "sheet": 4,
+  "sha256": "1ca709208865cd6f5dba389b801e19875e6d0d89237b69b6a94ac7913de2fb93",
+  "verdict": "cull",
+  "reason": "race car with dragon livery"
+ },
+ {
+  "n": 104,
+  "sheet": 4,
+  "sha256": "1cd0242772a7e7268dc5182d30b9f07711ddb80f3c512c3cacbf26f75c47cb7e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 105,
+  "sheet": 4,
+  "sha256": "1d39f733cf7b1f3cd5e667ee3bbd826d1303361a80972db687da93bcb75deb41",
+  "verdict": "cull",
+  "reason": "flat diorama of debris"
+ },
+ {
+  "n": 106,
+  "sheet": 4,
+  "sha256": "1d534b83b0aa42d1749de0c8ed982047f469506b4aaa64b70e8f51cf2b92ef13",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 107,
+  "sheet": 4,
+  "sha256": "1d794f5e16477fe12dd8c7ffee52d5a179c12e37260bf282c09d658f42edc1f6",
+  "verdict": "cull",
+  "reason": "car rotated 90 degrees onto its nose"
+ },
+ {
+  "n": 108,
+  "sheet": 4,
+  "sha256": "1d92a455ffb2338b369bd718e57bce4988fb066e986c8b1eb51a52d36d606156",
+  "verdict": "cull",
+  "reason": "Sheriff-liveried SUV - non-stock"
+ },
+ {
+  "n": 109,
+  "sheet": 4,
+  "sha256": "1dbe0586a57f3a17ba87a3d23e9148982c28f9980854d85bd1f935bc0b14ffdb",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 110,
+  "sheet": 4,
+  "sha256": "1ddeabbafdf2d8de5fe4442cf3b038daecbe77a5707fcfdbe84a91bb11cc7687",
+  "verdict": "cull",
+  "reason": "flat plane with debris"
+ },
+ {
+  "n": 111,
+  "sheet": 4,
+  "sha256": "1e61cb8a22c7d13243eb2a8b86f1980a92ea7e62ef55a41464e689a04fc10609",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 112,
+  "sheet": 4,
+  "sha256": "1eef29579d7cc2d98b31bfcc1b55d50dd97531e526eeb2b24fd91c573d1fba11",
+  "verdict": "cull",
+  "reason": "race-liveried saloon"
+ },
+ {
+  "n": 113,
+  "sheet": 4,
+  "sha256": "1f3e1d56fcebf9e58ccba8f2681b56e1186b3b561fc61ea5b03d327db04acd70",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 114,
+  "sheet": 4,
+  "sha256": "1f54de0ea7b6ea3f7fcd62dced2e22f8fb52499a91b4cb2c19ec4967672f5174",
+  "verdict": "cull",
+  "reason": "dark featureless blob"
+ },
+ {
+  "n": 115,
+  "sheet": 4,
+  "sha256": "1fed2f437fed1b215670abae2d46ffcd5999f6ded9410fa2836c068041e5fdae",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 116,
+  "sheet": 4,
+  "sha256": "205cbeaec60ad3cbb466443a4bb435473a036b5e600cf93c1f7c71eab91d952d",
+  "verdict": "cull",
+  "reason": "1980s cabrio - outside modern UK-road era, coarse geometry"
+ },
+ {
+  "n": 117,
+  "sheet": 4,
+  "sha256": "20d448f01f24203d409cbcb019d2cdddf0429addf3ccc8506c3105df3c549ff3",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 118,
+  "sheet": 4,
+  "sha256": "20ef1bef4016df4b0d14126ca8842875fe4818ae9262192cf73c3055070d447c",
+  "verdict": "cull",
+  "reason": "bare skateboard chassis, no body"
+ },
+ {
+  "n": 119,
+  "sheet": 4,
+  "sha256": "2133b5d9f6021c8a300756da9b68490df91eeb2887a2d2d3336a991bbfb2bd85",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 120,
+  "sheet": 4,
+  "sha256": "213739a8f33431703c7b1834bacd6d502bb4bb89cfcfea1e4b260a3699048996",
+  "verdict": "cull",
+  "reason": "truck cab"
+ },
+ {
+  "n": 121,
+  "sheet": 5,
+  "sha256": "214a404944495886eba46be95ba2a9c5fff8086c7965b809381b3637d9fffa85",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 122,
+  "sheet": 5,
+  "sha256": "215b9ea49be3639ae658dd5822aa06af83cfc1bac868f70b0fea2f6ccfc31e56",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 123,
+  "sheet": 5,
+  "sha256": "2171643585fa1a93612e629fa58aa4d77c47e8d080f533477bcc1e3577984d5e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 124,
+  "sheet": 5,
+  "sha256": "2196d520407f2d779e60f4cfa9f7a0690361624b6bfc33594a35b3a3c225c53e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 125,
+  "sheet": 5,
+  "sha256": "21efcc632a3e92e2bc4429b985b5fd04d0878e220a679c33ad3c1a72afbd2f5e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 126,
+  "sheet": 5,
+  "sha256": "22287126c03ed4e2ce79d033f8d77024d95e55abdfcdb965788885ba78e58b8a",
+  "verdict": "cull",
+  "reason": "box lorry"
+ },
+ {
+  "n": 127,
+  "sheet": 5,
+  "sha256": "225bf3931cf60e13f94672569318908f2965c639114fa38df0f50c438a91050c",
+  "verdict": "cull",
+  "reason": "untextured box van"
+ },
+ {
+  "n": 128,
+  "sheet": 5,
+  "sha256": "228af31072ee1f63d880536e040d90c06e3be45b8277cc0a9242217425211c3d",
+  "verdict": "cull",
+  "reason": "utility truck with rig"
+ },
+ {
+  "n": 129,
+  "sheet": 5,
+  "sha256": "22bccd09809ec7e41042fe7a4a524537d0eade14788b399be01b3c0e6b5793d2",
+  "verdict": "cull",
+  "reason": "truck tractor unit"
+ },
+ {
+  "n": 130,
+  "sheet": 5,
+  "sha256": "22e8a97847ee570b5eee24542df0a007e79271b15e89d514f2b88396a861a42f",
+  "verdict": "cull",
+  "reason": "car rotated 90 degrees upright"
+ },
+ {
+  "n": 131,
+  "sheet": 5,
+  "sha256": "2340efb65fc0173ea111b3e2cc3e02287fd0d8915fb531fdf9ac74f3060eef14",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 132,
+  "sheet": 5,
+  "sha256": "23a2f3145170abffabf38e84582729f860e67b312cb63bb0cc5b48d3845daad6",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 133,
+  "sheet": 5,
+  "sha256": "23b739b7f467903875a79e2c69f21631a179e61e49092c375a9f93d2d30bd03f",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 134,
+  "sheet": 5,
+  "sha256": "23be986122a0e51ea6b14696425d73f94966a33ae2436ac90d1fe2b5f8d31da7",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 135,
+  "sheet": 5,
+  "sha256": "23d0613c5cf2766e470fafbfb7da68240d6d6f2ef2e6ec68c3e9b59b7f8785ec",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 136,
+  "sheet": 5,
+  "sha256": "23d85f4fd5c7b3c78aae05a3f278e38b35f0af746534afff6c5b0ee8ad94bdf1",
+  "verdict": "cull",
+  "reason": "motorcycle"
+ },
+ {
+  "n": 137,
+  "sheet": 5,
+  "sha256": "23f34d81ed7f7aaeeb201bcaf46190b65e50e122dae5a383cf31f60d075bc241",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 138,
+  "sheet": 5,
+  "sha256": "23f6210f79153107f5d2d4ec7935f57aba2ef2975123087d88612f062c362614",
+  "verdict": "cull",
+  "reason": "broken geometry, purple wheel artifacts"
+ },
+ {
+  "n": 139,
+  "sheet": 5,
+  "sha256": "2572a68e30c8d0e3bf70ac1042a8cc91b7d5ca1b3c4118e2e52c28662565039c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 140,
+  "sheet": 5,
+  "sha256": "25886cab8f94a7ec8739c4dd78295d7aabd870892d358ec8ea0169ca5fb37dbf",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 141,
+  "sheet": 5,
+  "sha256": "25ed78a3e188db7afe944af97f94b460ad8841460cbe4deaccdea1da7103c88f",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 142,
+  "sheet": 5,
+  "sha256": "26572ccac840983f4162aa1578c6f663909e4e2f392061dacd7dc4a3b26f8683",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 143,
+  "sheet": 5,
+  "sha256": "2658c70fa22f467fbb623e69f730c49107e240060c171a3f5bfaa7758c3bb6df",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 144,
+  "sheet": 5,
+  "sha256": "26c5716a0d000707c96849415ac261cce8428851e99f35bd044b8dd6a19cae98",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 145,
+  "sheet": 5,
+  "sha256": "26eb57c9a49d6097ffdfc936332d9bf34c1298cc23f247ba4ef749ba0561d851",
+  "verdict": "cull",
+  "reason": "lorry with graffiti box body"
+ },
+ {
+  "n": 146,
+  "sheet": 5,
+  "sha256": "26ecf7df934d1c6ce129cd6c4bddffdd957e55503612f9262cbf5f7cb6f34a03",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 147,
+  "sheet": 5,
+  "sha256": "279e2bcec21b53d7463e6e222cc1129e9f354af33f65f6b2f0786ec1cdf42c36",
+  "verdict": "cull",
+  "reason": "ice cream van"
+ },
+ {
+  "n": 148,
+  "sheet": 5,
+  "sha256": "27d091ae5a1fa3a864d93349d0bee628b6d056e6702ee56de9fd6e98a33e08a5",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 149,
+  "sheet": 5,
+  "sha256": "27fa0faac100fee69e1522e176987afdb49df2104812347d88de5767bcc74df8",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 150,
+  "sheet": 5,
+  "sha256": "28116c9f4f707ed197a0e3bd0d51079ea219403178ace2286debc88cbf0e872f",
+  "verdict": "cull",
+  "reason": "scan mush - noisy pickup, no clean surfaces"
+ },
+ {
+  "n": 151,
+  "sheet": 6,
+  "sha256": "285d65fabb00f06d4ffbb8659e84371909cc6e95d9ef089ef05445b8d4b2a9c5",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 152,
+  "sheet": 6,
+  "sha256": "288bfd5d62bfd1133da152df6152497bb217c3c3e9f86c048bc4aa7eed4e0aba",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 153,
+  "sheet": 6,
+  "sha256": "28d416c43bae1683c6cdff177aefe385056dbc84072711d1ca760c28e9592284",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 154,
+  "sheet": 6,
+  "sha256": "29ff06d51b985c391797b650d251e165979eda5dba831d185ca314d94765823b",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 155,
+  "sheet": 6,
+  "sha256": "2b09213d956ecab7db17865ba43cbdff4fa1148584ce85f6105e1b489283db89",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 156,
+  "sheet": 6,
+  "sha256": "2b62106758de7173b95b16c009671102c6b5aac942b55ff768d3a25be75f1230",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 157,
+  "sheet": 6,
+  "sha256": "2b8bdb12b0ed779d0b69310cfba3438c19c36e70cdff2cd82a262e5c60d28467",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 158,
+  "sheet": 6,
+  "sha256": "2bf51c7f6ba6569fd9b476dedd90188a55c04d5904ee7b9d70af0e7a5129ee56",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 159,
+  "sheet": 6,
+  "sha256": "2c07bab286c26ce754a35696188605a8b1d6a62b3ee505af7f83f2e7293782d7",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 160,
+  "sheet": 6,
+  "sha256": "2c1a13901e5542e6acf4d3b9f00b4118e572d56d1a7f4d3d1c5338489a5ddc27",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 161,
+  "sheet": 6,
+  "sha256": "2c4e8438ff74de295713a36c4fdf1e95b4799406c44ef853f978191a0ec1c288",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 162,
+  "sheet": 6,
+  "sha256": "2c5e0e0ba5242cf2790d6273ae6f44ab960744db28004fecd561d94fd79bf57a",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 163,
+  "sheet": 6,
+  "sha256": "2c8b5601b4762f5fdf722dfca54716522c5a5fd468e10faf4e56cfcd517b1cc5",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 164,
+  "sheet": 6,
+  "sha256": "2ce89ec33d335d541ef6928745b6ae5fd7050631d3bff26ecca8ff653e0ddbee",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 165,
+  "sheet": 6,
+  "sha256": "2d369b66983a91795dcce643b9a90d158afb5602cc102315ebe0e6ac3ac3960b",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 166,
+  "sheet": 6,
+  "sha256": "2d84b9868fcf0a91e257a9c5191974d75f1c2698193be67826255cb03b728a62",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 167,
+  "sheet": 6,
+  "sha256": "2d9774d02b9293abf17e2212b664bcf5df7273eb3e2adb3be2a6abf378e2ca82",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 168,
+  "sheet": 6,
+  "sha256": "2de69a9958eb8cf4c1f110299857359f51d02ef32b28943cfee7158bef36453c",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 169,
+  "sheet": 6,
+  "sha256": "2df946d3c8165b5a6e286fece80cc798e4e2fe95f834a555b949013edb4efb40",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 170,
+  "sheet": 6,
+  "sha256": "2e143f0bd7f44220f4ee97656a3ae49e217b037a968597c04d3c7227a95c7857",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 171,
+  "sheet": 6,
+  "sha256": "2eac6d97efeb32a86e9428a6587e677915933cf3bc28e79b205816b392ddf27d",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 172,
+  "sheet": 6,
+  "sha256": "2eaf475159d7bce3a34d4ae4732293dba9427b89dd91ddbffdbed4e3c447f4bc",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 173,
+  "sheet": 6,
+  "sha256": "2efa1c04f8cedb23b0776921369a67981a8a4f5201fa9098090edcadb084d23f",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 174,
+  "sheet": 6,
+  "sha256": "2f26aa4749db7ffbbfc6ec9e93c1056c36dacd2181c262389efc844f9bc45272",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 175,
+  "sheet": 6,
+  "sha256": "2f2e0d9d2780232727993270a02f3eee536cf2850e36e6b1483f07b744ed2b3b",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 176,
+  "sheet": 6,
+  "sha256": "2f51265013354883db6fb33d2b9b9d8dfd2eaf7c32722e3b7260723aba665655",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 177,
+  "sheet": 6,
+  "sha256": "302902a1c9645b3c6931b502f9863040126d293226cc3b80ef14dfd4b7edb404",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 178,
+  "sheet": 6,
+  "sha256": "30356a102ba944841d2a798a70b4a0b173c57172af50d2c4e66e45b469379f89",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 179,
+  "sheet": 6,
+  "sha256": "3096e21682e294919e980ddfea19b11ea3bd8103d18da1271cbed5f35c73ef22",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 180,
+  "sheet": 6,
+  "sha256": "30f561fad36b12d78a5716f1ef30d8aeb24bab8efd640715e387a8b81a36b15f",
+  "verdict": "ungraded",
+  "reason": "contact sheet missing from car-meshes/audit/train/"
+ },
+ {
+  "n": 181,
+  "sheet": 7,
+  "sha256": "31565e615795863f7ee6c1b9e14a64d938d5a8cba263d2a114c31e8c6042cf04",
+  "verdict": "cull",
+  "reason": "van with satellite dish - commercial"
+ },
+ {
+  "n": 182,
+  "sheet": 7,
+  "sha256": "31a6813864607febdc52db2f51d09896611f1def98779c9dc6052bf8393afb90",
+  "verdict": "cull",
+  "reason": "tangled spaghetti mesh, not a vehicle"
+ },
+ {
+  "n": 183,
+  "sheet": 7,
+  "sha256": "31b9649ecd948edc5660bb3c3de0ee68fce730b9efa82d938680cdcfc9e595d4",
+  "verdict": "cull",
+  "reason": "rat rod hot rod - non-stock"
+ },
+ {
+  "n": 184,
+  "sheet": 7,
+  "sha256": "31f0e20a48c7bdf5a65eb9bfdae412da36fbc2473f00a4ad740b997a4fa7f30f",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 185,
+  "sheet": 7,
+  "sha256": "32430ea8383ab314a3c942d472e586396be2430a0892b2ebf996402d170238ab",
+  "verdict": "cull",
+  "reason": "flat wreck/debris"
+ },
+ {
+  "n": 186,
+  "sheet": 7,
+  "sha256": "32518c1a251573042f99bddb0a9d2a838cb07b448af444b3d813963d53064d80",
+  "verdict": "cull",
+  "reason": "grey pod/capsule"
+ },
+ {
+  "n": 187,
+  "sheet": 7,
+  "sha256": "3278bef4137ff45bb8d4c7f5aa3f58c2c81be46b4c4543be39a9b387c7fb2488",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 188,
+  "sheet": 7,
+  "sha256": "327a15dbf3c4b2a14054c98f50fafc57125ed6306dbe4f066260ef6cd16cc73a",
+  "verdict": "cull",
+  "reason": "exhibition stand"
+ },
+ {
+  "n": 189,
+  "sheet": 7,
+  "sha256": "32a9fa2dc74204e1e35094ecba775e5a41305224da08ca3c5b03b9038fbd532d",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 190,
+  "sheet": 7,
+  "sha256": "32aa122e526fcb7085d23e3c2b5568dfaf9170ec77bd405e03a7335c9048cc41",
+  "verdict": "cull",
+  "reason": "melted/broken front end"
+ },
+ {
+  "n": 191,
+  "sheet": 7,
+  "sha256": "32fdaab35d9947b06e3f0d2b9d001c9dff8de324b965ae14a8a795942fe4b4ee",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 192,
+  "sheet": 7,
+  "sha256": "32fdb06e31ed08adbf7e6b1f306af11621d60aacbb855c194a0bbb12f213d715",
+  "verdict": "cull",
+  "reason": "F1 single-seater"
+ },
+ {
+  "n": 193,
+  "sheet": 7,
+  "sha256": "3377d7803fcb118d2de5b4f4ff02d7a78e178970413a393a19f3af99348ac299",
+  "verdict": "cull",
+  "reason": "sci-fi pod"
+ },
+ {
+  "n": 194,
+  "sheet": 7,
+  "sha256": "33c0f26557d6d9ffb924b472d0a5c9d5d778b5e355ed03cff7d1c65aa82165e9",
+  "verdict": "cull",
+  "reason": "SUV with patchy broken material"
+ },
+ {
+  "n": 195,
+  "sheet": 7,
+  "sha256": "33d2648824b5cf482de6f39182f351d371ff0b54478d1d386d405c5604c118e7",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 196,
+  "sheet": 7,
+  "sha256": "34463b0654fd163d3377e66cfc5cdeab866be49c8212a367e52e08d9090d1c4b",
+  "verdict": "cull",
+  "reason": "chair"
+ },
+ {
+  "n": 197,
+  "sheet": 7,
+  "sha256": "34ccc682bce35e64bec5f2c3c074788cd83286f2477c95fdbc12865fdb28c39e",
+  "verdict": "cull",
+  "reason": "near-empty sliver"
+ },
+ {
+  "n": 198,
+  "sheet": 7,
+  "sha256": "34d81eae7b014c608d409f377b9e3b7ff6ac4090af2a6e35b41c9a09a14a3425",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 199,
+  "sheet": 7,
+  "sha256": "359e9d3e9a789c238cace968b3c1b4df7a72938d02a1103db63b38862fb95847",
+  "verdict": "cull",
+  "reason": "voxel cube"
+ },
+ {
+  "n": 200,
+  "sheet": 7,
+  "sha256": "35d38c60a7fcee73e7d32116c4e835552c607412297a042882b04385ace26c6a",
+  "verdict": "cull",
+  "reason": "delivery van rear"
+ },
+ {
+  "n": 201,
+  "sheet": 7,
+  "sha256": "3605d9edbc7b02409fcbf6bb113a4f80f66c36d860ed7db0d7b3dfb6e148827d",
+  "verdict": "cull",
+  "reason": "camper van on scan ground plane"
+ },
+ {
+  "n": 202,
+  "sheet": 7,
+  "sha256": "3617baf6eade8508dc562468856fabcbc7a49268d0784deda49c6435fbec1639",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 203,
+  "sheet": 7,
+  "sha256": "36cbcd8d631c51c61482298ac85896450d811834e1a26fc139cdab07c782e0c6",
+  "verdict": "cull",
+  "reason": "tiny car plus specks, mostly empty"
+ },
+ {
+  "n": 204,
+  "sheet": 7,
+  "sha256": "36dd6fc6a2023b2b2b788bb04a4f945da086db4d1e8b2a9c841e464e7c548a19",
+  "verdict": "cull",
+  "reason": "featureless soft blob body - no shut lines or detail"
+ },
+ {
+  "n": 205,
+  "sheet": 7,
+  "sha256": "370dae417d84388fa4af68d9b24e704146149d5d6bb18f92ca823a4647a0384e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 206,
+  "sheet": 7,
+  "sha256": "371d96e0c781f857f0c30f7f2bab322a8f66cee9038b6d9490b06dce505e51c8",
+  "verdict": "cull",
+  "reason": "untextured SUV with mesh-line artifacts"
+ },
+ {
+  "n": 207,
+  "sheet": 7,
+  "sha256": "373fc3228718c5f493e9cbc1e5157cbb9ab28149c2a0f05830cbb07ba47b173f",
+  "verdict": "cull",
+  "reason": "empty tile"
+ },
+ {
+  "n": 208,
+  "sheet": 7,
+  "sha256": "3788e9ca2a6d269764535a1985cb22000905fdc84f6ea85d84e2e4c405183bb4",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 209,
+  "sheet": 7,
+  "sha256": "37aad7cdea965a51c1416a631cefc08930861464afcef8388b91e299e65858fa",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 210,
+  "sheet": 7,
+  "sha256": "37c4f1bc878be0d36f73e72ec0a0b373d71b9b27e5723b92d0f54842268e90d5",
+  "verdict": "cull",
+  "reason": "classic Fiat 500 - outside modern UK-road era"
+ },
+ {
+  "n": 211,
+  "sheet": 8,
+  "sha256": "3800e867fbdb9ade0c020aa13c5e30b21f8a35557ceadc6cfa4586be1194972d",
+  "verdict": "cull",
+  "reason": "top-down orientation"
+ },
+ {
+  "n": 212,
+  "sheet": 8,
+  "sha256": "381ca9c7721c612bcaebbc854524e4ac5e23472356f0de442569bb3a5030528a",
+  "verdict": "cull",
+  "reason": "abstract shelving/plinth scene"
+ },
+ {
+  "n": 213,
+  "sheet": 8,
+  "sha256": "3856acaf8a5d8ca908f06202b5cee987071523c9c727d2aa1b32522f42f19690",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 214,
+  "sheet": 8,
+  "sha256": "38693dd951d462a3188c6d2efc6f1ae1a9f11ecc4ba6f64904363ad469335774",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 215,
+  "sheet": 8,
+  "sha256": "389a12345951233c9d1b8e20644a224c34979ca947e94388b89eb5344e86348c",
+  "verdict": "cull",
+  "reason": "grey dome primitive"
+ },
+ {
+  "n": 216,
+  "sheet": 8,
+  "sha256": "38d6c246d55a6b021c6256c9a6a3f37c64f2e8897323dc1e353153d754bf212a",
+  "verdict": "cull",
+  "reason": "hatch rear with magenta missing-texture artifacts"
+ },
+ {
+  "n": 217,
+  "sheet": 8,
+  "sha256": "39347b4b1cff7df44670fe154d5cbe05758ed2d3ef798492b68559882f82f344",
+  "verdict": "cull",
+  "reason": "car tiny in frame, mostly empty"
+ },
+ {
+  "n": 218,
+  "sheet": 8,
+  "sha256": "3950bf40c9f24365a7e59b574696b612b993ac1c7954e1f3e101d02aff0188ff",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 219,
+  "sheet": 8,
+  "sha256": "396f394be530fe8c2c7c46c824f314089f49e41739d939c13f485ba65dd2efdf",
+  "verdict": "cull",
+  "reason": "wreck on scan ground plane"
+ },
+ {
+  "n": 220,
+  "sheet": 8,
+  "sha256": "39922e19a1892098b1188dbad2fec5b0e24eb0b6ba6acc4edc01f9190a80970c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 221,
+  "sheet": 8,
+  "sha256": "39abcd0067b8c760cc864bbf7993d12bdd656a731a0a62dc84c7997cf2ceb25d",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 222,
+  "sheet": 8,
+  "sha256": "39bfbbd0666f119ed0fa2e173feba8d8f9ca6faa1a94547f8233d023b358b355",
+  "verdict": "cull",
+  "reason": "Sprinter panel van"
+ },
+ {
+  "n": 223,
+  "sheet": 8,
+  "sha256": "39c14591eed9e9575cbb3c38cbc1ba1ef331f795f064754d62cd4663ad1966ce",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 224,
+  "sheet": 8,
+  "sha256": "39f6ee79b1767abed022e159844a443e366c49385973cc93804b1c17ea4b2aed",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 225,
+  "sheet": 8,
+  "sha256": "3a595a3972d232fd7333a8618660ec3da8ef4e3ccb8475cf5183c89136175c0b",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 226,
+  "sheet": 8,
+  "sha256": "3a6aaf49167ec7095455fdb6bc227ceaa2a37c10f50a4a58f7376de53d0751ef",
+  "verdict": "cull",
+  "reason": "tiny car on large empty plane"
+ },
+ {
+  "n": 227,
+  "sheet": 8,
+  "sha256": "3b01827bd40b930aed51d1e73cd98c3d22749d84d88ed3f659a0f3617648fe2c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 228,
+  "sheet": 8,
+  "sha256": "3b1228afc162ee4ee508e6d35fa75648b73dbbac759de7d4c7f2e6d7325b5375",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 229,
+  "sheet": 8,
+  "sha256": "3b333e1e68c0b1852b1aa8691210704bd7ad77f8bea3332f50e903a151fd55d5",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 230,
+  "sheet": 8,
+  "sha256": "3b49ef5a688f63566ad96278d95fb551acfcbc3e0b8a3414f793e1e95f2960ee",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 231,
+  "sheet": 8,
+  "sha256": "3b956c5b0db55639bd17a70075eb627d129ced0d6fb656a8652862cc859c66bb",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 232,
+  "sheet": 8,
+  "sha256": "3b96833ad9373b6be0907c9c8b74f03e0b1ef55c83005da3da1ef5c5ad6035f8",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 233,
+  "sheet": 8,
+  "sha256": "3bc3ffc1e58876785e8cf0c71fb3e7ca216a182aa7b370a4a805c693a5af9ba7",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 234,
+  "sheet": 8,
+  "sha256": "3c16fece82838becf8c02769e082c0cf3f45fe07c11badc76b4f6aa43ce62b74",
+  "verdict": "cull",
+  "reason": "rock/shell scan"
+ },
+ {
+  "n": 235,
+  "sheet": 8,
+  "sha256": "3cac1bef429c8e8e3748e4a6c992f9c140807168b7d0378bd59b7d2fbafc352e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 236,
+  "sheet": 8,
+  "sha256": "3cb5d365c2f3f4212bdf8bfd1ec1ab65f57bf8c29967da38596090b791400243",
+  "verdict": "cull",
+  "reason": "small car front, too rough to read detail"
+ },
+ {
+  "n": 237,
+  "sheet": 8,
+  "sha256": "3d5b45cbd4dc39e75370e810692523c82e06f95941512748d756b6c6e0e03f94",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 238,
+  "sheet": 8,
+  "sha256": "3d71a74acbed03e1672dcf7ac0e4881ae8ccee3de2aed2af6d740b07209bca21",
+  "verdict": "cull",
+  "reason": "untextured truck bed, no car body"
+ },
+ {
+  "n": 239,
+  "sheet": 8,
+  "sha256": "3d94114493b1820c2a19864df0a9eb1923dadeeee4b6f98878f84e5fffcf02ad",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 240,
+  "sheet": 8,
+  "sha256": "3da1ad76fb86d1c56503f1bf011e687133a622eaeab38dca930cd54788a6f197",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 241,
+  "sheet": 9,
+  "sha256": "3e0d5aec62cb9c43b35c4a8e505847b9cdf124513816e5e568a1d811e57a7ad9",
+  "verdict": "cull",
+  "reason": "molecule model"
+ },
+ {
+  "n": 242,
+  "sheet": 9,
+  "sha256": "3e6fff230f178d4ba75cb819aeaa17acbf9bc92c3a53902ec27a614ef885519d",
+  "verdict": "cull",
+  "reason": "toy pink truck front"
+ },
+ {
+  "n": 243,
+  "sheet": 9,
+  "sha256": "3edbceebc9a0ae4d75a9f99a69b5b5f7555757a34e68e186e13c3bde4da18b1a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 244,
+  "sheet": 9,
+  "sha256": "3f75d45d88a376d931f089dc10877d022effb7f2f2004c2fa7aca15ed69b2c0d",
+  "verdict": "cull",
+  "reason": "exhibition booth with mannequins"
+ },
+ {
+  "n": 245,
+  "sheet": 9,
+  "sha256": "3f86a604365b7457357dd67fa03c96ea1f1ae7120e849b395787b271239024fa",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 246,
+  "sheet": 9,
+  "sha256": "3fafa507218491020a15e9eea526fa00064df33d438daac2edcda0b375478469",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 247,
+  "sheet": 9,
+  "sha256": "40c3978da836f9f30e016888848363e5f1c0de8eb6e58d58518b0046fd08be42",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 248,
+  "sheet": 9,
+  "sha256": "4102de054cab449e58085391d45559b9b6de0ebfe21ff2e8b4850951cca70a4b",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 249,
+  "sheet": 9,
+  "sha256": "413154ee06a5e0b361ec267eb198fd52616da69642e7dd5f3fa6030dd8900fd2",
+  "verdict": "cull",
+  "reason": "utility lift vehicle"
+ },
+ {
+  "n": 250,
+  "sheet": 9,
+  "sha256": "41552805aa13f6e1c50b5da83b4d668e180a56a5de9b84438482456426b1b3c7",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 251,
+  "sheet": 9,
+  "sha256": "41e787b8cfce722ea0299d6bd66637672ec0ad5158564680822d7a00a4973d8a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 252,
+  "sheet": 9,
+  "sha256": "41f6ba3ba228e24e0084f62f0fb3f5b82cbd1cbc7a56b1b5fcb620899a274159",
+  "verdict": "cull",
+  "reason": "small commercial van"
+ },
+ {
+  "n": 253,
+  "sheet": 9,
+  "sha256": "427b71dee06c5a78986c4b170094a9b3d92d6b0441c9016a8dfef75b13c680bf",
+  "verdict": "cull",
+  "reason": "wrecked cars on a diorama plinth"
+ },
+ {
+  "n": 254,
+  "sheet": 9,
+  "sha256": "4294d85a852caba34ae4041331e6c777c680ab31fa8e88b35d114d5efdf53704",
+  "verdict": "cull",
+  "reason": "boxy pre-1990 utility 4x4"
+ },
+ {
+  "n": 255,
+  "sheet": 9,
+  "sha256": "42a1c5a1fd957f9a099d60759ee309fd8e033e2e4e16a209393752f101e770ec",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 256,
+  "sheet": 9,
+  "sha256": "42ef253f0bb024e4c0e317c8b6c8184237a9152390a630fa98cd338d84e9e3ea",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 257,
+  "sheet": 9,
+  "sha256": "43804a4be476952e4baf8c43df3f13b9b52c4201b8120d6ef1c13794d3307709",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 258,
+  "sheet": 9,
+  "sha256": "43d615dd722422506e6d9dba96f155a3bc847091c3848722c528a4acc358cb20",
+  "verdict": "cull",
+  "reason": "blocky untextured rear, no readable detail"
+ },
+ {
+  "n": 259,
+  "sheet": 9,
+  "sha256": "43e676922250d5aa2a1539cb4db99c59274323e4647de3d81f3d4322ac28f98e",
+  "verdict": "cull",
+  "reason": "1990s utility 4x4 with sport stripes - non-stock"
+ },
+ {
+  "n": 260,
+  "sheet": 9,
+  "sha256": "43e8ddaa28999e5a1fef2420386e99d9a8af0219af149d60052072101df2e33d",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 261,
+  "sheet": 9,
+  "sha256": "43fa0bba45af4beb7511fddfd008bb8f42b5711a1f96f4d93e60d092093c82d6",
+  "verdict": "cull",
+  "reason": "Transit panel van"
+ },
+ {
+  "n": 262,
+  "sheet": 9,
+  "sha256": "4494fc5c4a870e8b95b27b9dd685f6f139129432e06de18a51ff4b005bc2d38b",
+  "verdict": "cull",
+  "reason": "exhibition wall"
+ },
+ {
+  "n": 263,
+  "sheet": 9,
+  "sha256": "452a9b114a173e3f412245eacedc9535d368cb1884464fe296f19c8bd37b3305",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 264,
+  "sheet": 9,
+  "sha256": "4533ea6b7ace85b7ea55ea5646a5e748e8a4f873453a829eacf4c80e3a55d249",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 265,
+  "sheet": 9,
+  "sha256": "453e268bd2aa25663314d5cd470ec6ed1da7ac8039181aad6c8ef60d2056b657",
+  "verdict": "cull",
+  "reason": "1980s hatch - outside modern UK-road era"
+ },
+ {
+  "n": 266,
+  "sheet": 9,
+  "sha256": "45561a01ea3c6c72e6749d79d1ea32e5849c6054c84428699299b36574af34a1",
+  "verdict": "cull",
+  "reason": "anatomical knee bone"
+ },
+ {
+  "n": 267,
+  "sheet": 9,
+  "sha256": "469935e9b50cf5a598664e9a29891cb9d0935f8097fb2a687e8885652150c27e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 268,
+  "sheet": 9,
+  "sha256": "47545abffcad4c680cd2f3acfef4370dbd001da29601dbafdd7d880816729cd1",
+  "verdict": "cull",
+  "reason": "empty plane with tiny object"
+ },
+ {
+  "n": 269,
+  "sheet": 9,
+  "sha256": "47790c7ddfc61f7a64aa8ec9061e42cd381096b7f5e06c420b91168d1da345d0",
+  "verdict": "cull",
+  "reason": "excavator/forklift"
+ },
+ {
+  "n": 270,
+  "sheet": 9,
+  "sha256": "478ae80e3d4622da12a76b496ab4a49253748aa8a323fcea8230b7b116acc769",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 271,
+  "sheet": 10,
+  "sha256": "4804ca55e774c74e87e2fec68f2bea86b8b3a589175a78c2a1fe9415754d4100",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 272,
+  "sheet": 10,
+  "sha256": "48630b2ce971dea30c2e041ab45d74c783347f3fdc01a628aca3aa5bdd60b4bb",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 273,
+  "sheet": 10,
+  "sha256": "488c43d35e16cbd388303ca8439c92507530fd5699449a2cbe1473246a6ecc0c",
+  "verdict": "cull",
+  "reason": "tiny machinery scene on a plane"
+ },
+ {
+  "n": 274,
+  "sheet": 10,
+  "sha256": "48da4ae1bdbf8f0a43dbd8d7a2d609f02570c4097d90ebaf9790cd2d314ee3e2",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 275,
+  "sheet": 10,
+  "sha256": "495f2d347d171bb4d392ddb95ba286b2d45f905a79966eb60674183a48aa0ea3",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 276,
+  "sheet": 10,
+  "sha256": "496603e4f0b460b5cebacc858ee0183fab964675f41e12e90b3eb0c776a2a91d",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 277,
+  "sheet": 10,
+  "sha256": "4991039b3de13e01005f3444d896f4c4df9d47ffc1410734c0d9ca7175416934",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 278,
+  "sheet": 10,
+  "sha256": "49a28882fcd79c489e0f60a583002b58a6a6df973393a02240960e9081cc6f87",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 279,
+  "sheet": 10,
+  "sha256": "4a204c1a7a3f7a58d8cd019ca92b652f24f9fecc8cf4d5fd69cd490b411f0993",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 280,
+  "sheet": 10,
+  "sha256": "4a6df0b2ddb36962b4ac56177041b25974c5d84c332ba522162e80493a32be92",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 281,
+  "sheet": 10,
+  "sha256": "4aa5518a6ac5a04b7ad25995276ddb3c55c1b67e16abcd00e207c2a66a1a5cf6",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 282,
+  "sheet": 10,
+  "sha256": "4af350460ea34b7901c8512adafd2c04faa632629ab6b2bcbbbb48694f902738",
+  "verdict": "cull",
+  "reason": "1980s hatch rear, tiny in frame"
+ },
+ {
+  "n": 283,
+  "sheet": 10,
+  "sha256": "4b533bc3c8aeb59a9ba229325e8013062501ac9369429ecb73b9666ab28d5094",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 284,
+  "sheet": 10,
+  "sha256": "4b5e6e70e26124f20842873b51c9ce24969080863c62573f307a4622db0c7b23",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 285,
+  "sheet": 10,
+  "sha256": "4b658ac8bb87d7a95e5eda7002dde403323404f6a1e83e58c5ae32440655ab18",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 286,
+  "sheet": 10,
+  "sha256": "4bb972e9a6ecc5477571ea78020d70f9ca93baaf92a1ce5b471f7620a20c8bcc",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 287,
+  "sheet": 10,
+  "sha256": "4bbd058c31fe878e9b40d5bccd2de4db829a6f7b2a0c10f0cb97aaa180cd7c26",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 288,
+  "sheet": 10,
+  "sha256": "4be21eb80fb43ad873a4494eca40f55f551c62ceef9c5a872b4d05c97ab44b89",
+  "verdict": "cull",
+  "reason": "Berlingo-style van"
+ },
+ {
+  "n": 289,
+  "sheet": 10,
+  "sha256": "4c20ba251d02924759a1dc6016da470d8e2f5131651c07bc3a5fae0ba376bf8e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 290,
+  "sheet": 10,
+  "sha256": "4cfc8ec0d56515e5968f1e87b636271b6a21dbe3a5a18ce81dc59342215ffc39",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 291,
+  "sheet": 10,
+  "sha256": "4d6bba0851133868db1554a6809a5c07987b131b18191b8e3e116f565889757a",
+  "verdict": "cull",
+  "reason": "untextured panel van"
+ },
+ {
+  "n": 292,
+  "sheet": 10,
+  "sha256": "4e2cefedbbff4993bc3f545df8887871927df370af2bf7f9f47a4118472bf863",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 293,
+  "sheet": 10,
+  "sha256": "4e7d83d80140d50eb417dd879592a2bbd68c0bd78a54010c26e7e2e6f34fd138",
+  "verdict": "cull",
+  "reason": "off-road trophy truck - non-stock"
+ },
+ {
+  "n": 294,
+  "sheet": 10,
+  "sha256": "4e960fd9a0a62380b408032322aab2390988b7aa0aa0ff6f912535b80b24af95",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 295,
+  "sheet": 10,
+  "sha256": "4ea39ab217fef383f55e11e29ced1ce2287492db53a2e01bfadd3090cd394238",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 296,
+  "sheet": 10,
+  "sha256": "4f1201dc8231148d2838c1920f37c604ceb5f0e7c9380a6bdf5cb16a5c054ccf",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 297,
+  "sheet": 10,
+  "sha256": "4f309ca72014ce4dc13286d8d17ce12d4412da9c1dca01aa49044417810f9c95",
+  "verdict": "cull",
+  "reason": "scan of boxes/clutter"
+ },
+ {
+  "n": 298,
+  "sheet": 10,
+  "sha256": "4f4c67d4d3cb8a2bdabe7706c6c19976692b19c0de2fb3129ca50e03bc16f7ae",
+  "verdict": "cull",
+  "reason": "exhibition stand"
+ },
+ {
+  "n": 299,
+  "sheet": 10,
+  "sha256": "4f63c084ecc4989a23474f01eb4c3eabd07a32892f61cefb9ad68799b9c583be",
+  "verdict": "cull",
+  "reason": "wood/rock scan"
+ },
+ {
+  "n": 300,
+  "sheet": 10,
+  "sha256": "4fc3b5d08f9b333a35d13f4f8a659257d71392174fb55239766a22e3c46a184a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 301,
+  "sheet": 11,
+  "sha256": "503689dc217f10c460bef419576aa4741c1aae83d533ba4f3f8c87328aee9437",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 302,
+  "sheet": 11,
+  "sha256": "50f43b97dc2b70df40cdbfe1bef1c7e4f9ba31a773b2560a17dec4e94954202b",
+  "verdict": "cull",
+  "reason": "crushed flat wreck"
+ },
+ {
+  "n": 303,
+  "sheet": 11,
+  "sha256": "515560431b5f761e00255d30174e4fe83b76f6f2e6790ae1e43d10fba4d1ca81",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 304,
+  "sheet": 11,
+  "sha256": "51aac2e6231ce65d9e7a2ffbdd575f5fe74abf418dc6d1d8ad6256f7e5662c5f",
+  "verdict": "cull",
+  "reason": "two-tone pink/blue custom livery"
+ },
+ {
+  "n": 305,
+  "sheet": 11,
+  "sha256": "51e0cd9c50ea430d59a652f384aaa457df85619cd093007778a77421bbc846e9",
+  "verdict": "cull",
+  "reason": "minibus rear"
+ },
+ {
+  "n": 306,
+  "sheet": 11,
+  "sha256": "51e12cab94b71ed7f1e402b4bd3cdb25acba2c4cf6183a8d5cf4a5ba39c55e02",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 307,
+  "sheet": 11,
+  "sha256": "51f1c089cc7fb79d8b24b70d2eb725dfa7d7fc62852bf507da8ae249ef2eac98",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 308,
+  "sheet": 11,
+  "sha256": "52ba5acdeac32bd7c80c5959bcd5f85d778c0d4ce4182a18066cd72734a8c0f1",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 309,
+  "sheet": 11,
+  "sha256": "52ef1317f49daa9d5b134c652aeebc4d2287a9efacc9d614bbc554063ef665d5",
+  "verdict": "cull",
+  "reason": "vintage truck with snowplough"
+ },
+ {
+  "n": 310,
+  "sheet": 11,
+  "sha256": "530def26fff52549e22741b96785af6466c1d68da3a2f906fe584b99a98edf59",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 311,
+  "sheet": 11,
+  "sha256": "5325d9093d6f79c78f2304ef8f9317a15f0755e86fc4ec1cb4d144a6c3724550",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 312,
+  "sheet": 11,
+  "sha256": "535ce02fe5021bc620291e4d831f274fad41bd56d07b995297dd1edb5b11d4f8",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 313,
+  "sheet": 11,
+  "sha256": "536798c6acc11e70077c2f345584d8a2788bc45606e0586db0f23211950973dc",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 314,
+  "sheet": 11,
+  "sha256": "53d26a50c420246fa1aa6648edbbace40c75438bab3edb6189f161bc622ca5e8",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 315,
+  "sheet": 11,
+  "sha256": "53ebb1c3337b2b7e57c4c4a57991a30ccb5078f41719a68a65bb1107d674818f",
+  "verdict": "cull",
+  "reason": "wireframe/edge-line artifacts over body"
+ },
+ {
+  "n": 316,
+  "sheet": 11,
+  "sha256": "5407d021fab53d32f3499e5f64219b1d481ce04fd231ac8125a48f868c7dc6ed",
+  "verdict": "cull",
+  "reason": "featureless white blob body"
+ },
+ {
+  "n": 317,
+  "sheet": 11,
+  "sha256": "542e310cdbd25e868f558b7504a3086b4db58431fe7b9d3d23ff42c9672cd41f",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 318,
+  "sheet": 11,
+  "sha256": "5435e7cfe41e19d7376b59b82b7473ace4f02f7eaf6e36463fb550eb6dcdab15",
+  "verdict": "cull",
+  "reason": "house diorama"
+ },
+ {
+  "n": 319,
+  "sheet": 11,
+  "sha256": "54421f6b1976ac384ee32f5c1f620c8b86c6705ee01165826dcbddb0a3a4bd60",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 320,
+  "sheet": 11,
+  "sha256": "547aeadcde0114afda476e7a1ff3d824c5b8e1f9e046210d1e64a540e15277e6",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 321,
+  "sheet": 11,
+  "sha256": "54e372636d64905bbef21842705cb521f7fe0063d9ea70e9262db6a6e5dd0852",
+  "verdict": "cull",
+  "reason": "gazebo"
+ },
+ {
+  "n": 322,
+  "sheet": 11,
+  "sha256": "552ac4905857ae5989f9769bb2c7ba1c4782fa639a5d542134b9e06b3b09b6b9",
+  "verdict": "cull",
+  "reason": "grey box primitive"
+ },
+ {
+  "n": 323,
+  "sheet": 11,
+  "sha256": "555774ab56a63bfa1525fa24ee007bf4427c9838b010a2338118f0200db52ad0",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 324,
+  "sheet": 11,
+  "sha256": "5587ac0f9868556aa299af3c7a77509e8e4e3e4fc6035a880a1d9904b2876199",
+  "verdict": "cull",
+  "reason": "robed statue"
+ },
+ {
+  "n": 325,
+  "sheet": 11,
+  "sha256": "55a03eb997abe27d4e47eb4714a2cfea8e3c5bd0be27bdde594bbdd4dfe84e93",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 326,
+  "sheet": 11,
+  "sha256": "5683e90697257edb448c684c48dfd77a96736cc9c3fdfca496eac020b6fbbe53",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 327,
+  "sheet": 11,
+  "sha256": "56d8db3ea7288a6f02c4860756f135d1080dbb857a673af6868b8c7c9294509d",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 328,
+  "sheet": 11,
+  "sha256": "56e4b70ea9e1e0fcd99947a4ada84a6b03b7aa306e898437cbc09a8ac06ad1ba",
+  "verdict": "cull",
+  "reason": "low-poly toy Jeep"
+ },
+ {
+  "n": 329,
+  "sheet": 11,
+  "sha256": "56f769fddbe2766cf2f138a526b92bb73f4a1ebb7cab6ea99df55a7336431166",
+  "verdict": "cull",
+  "reason": "person scan"
+ },
+ {
+  "n": 330,
+  "sheet": 11,
+  "sha256": "57461f4d9f7a79aa353f51b96c8080229328e344388bb63eaf5d4a8c37bd8eda",
+  "verdict": "cull",
+  "reason": "fragment scan"
+ },
+ {
+  "n": 331,
+  "sheet": 12,
+  "sha256": "574bbd9f3a11213c7e1f9875c85635e7eacac007aa7146bf5cb2cdec34fa4c24",
+  "verdict": "cull",
+  "reason": "panel van on scan ground plane"
+ },
+ {
+  "n": 332,
+  "sheet": 12,
+  "sha256": "575c9cfebed7842f28a5cc46ca668c971c74eb7906a75cd2a843435aad414a15",
+  "verdict": "cull",
+  "reason": "bus/wagon on scan plane"
+ },
+ {
+  "n": 333,
+  "sheet": 12,
+  "sha256": "5801defec847107713388da996651a41cfe8b1507ede6348aa64ad249f2a8b40",
+  "verdict": "cull",
+  "reason": "SUV with melted/broken front end"
+ },
+ {
+  "n": 334,
+  "sheet": 12,
+  "sha256": "58116110e77cfaaa60a8c669ee72a12e6f86afc6333950f3c11a0f63a88013e9",
+  "verdict": "cull",
+  "reason": "1980s convertible - outside modern UK-road era"
+ },
+ {
+  "n": 335,
+  "sheet": 12,
+  "sha256": "5851639cb88c6847ebbdb23f1ccfeb0d9fb2ee528e703d757f000c5408365742",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 336,
+  "sheet": 12,
+  "sha256": "587b2104ae1a0033c24f387d17d37f5a37a7b5bd7ecdbba681a5bec2c81ae41e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 337,
+  "sheet": 12,
+  "sha256": "5882f2e2865b3964ac6fc62283ad813b330349a482a28d5acb04b0140f9c9ac1",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 338,
+  "sheet": 12,
+  "sha256": "58ae6fa8d7223ec920e0c36695c773d32a09bba4f3b2943070bb82d8ca026bf3",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 339,
+  "sheet": 12,
+  "sha256": "58befc9bb9b9c3ddf6644646b2d957bc108fc5d784c9f6b9e48e0bd8563643ba",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 340,
+  "sheet": 12,
+  "sha256": "58c88fae83bfd050dc750cf9b4feb063d2e52b32c08f2059d06b8e5e9d03127a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 341,
+  "sheet": 12,
+  "sha256": "58cfc1c1f0539d832f21df0edd8b1eb8d556bf1f2d4fce1dfda675d15811f5c1",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 342,
+  "sheet": 12,
+  "sha256": "5a127fd851d1ffd881b3a61e0c4c402dcb16453c3f2fe87d9cd283e2f8e0c3d5",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 343,
+  "sheet": 12,
+  "sha256": "5a1d9fabaa3fb001565d7b0dba840c143d55b3df7c9ad699b9cf8d6351cb4944",
+  "verdict": "cull",
+  "reason": "Transit panel van"
+ },
+ {
+  "n": 344,
+  "sheet": 12,
+  "sha256": "5a8d6f9182ff6bf70ca23e2d5f6de91b7a5ec9e6ff958195521c230294ec4f95",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 345,
+  "sheet": 12,
+  "sha256": "5abf45bc67264e4825a325307c6444aa9f09b87605c5ca59975e17ce2d4fe37e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 346,
+  "sheet": 12,
+  "sha256": "5b3ba4f73c3a33d85a1f8c826a2a1ec38befdfa01f9611e2886d1b2904b0616d",
+  "verdict": "cull",
+  "reason": "tiny machine fragment"
+ },
+ {
+  "n": 347,
+  "sheet": 12,
+  "sha256": "5b7cd2c28bcf5d75914214356ee8f5624d0b13181612933f4fa0ba4968dd00cd",
+  "verdict": "cull",
+  "reason": "featureless white blob body"
+ },
+ {
+  "n": 348,
+  "sheet": 12,
+  "sha256": "5bc55292ef4f5f48afb7ab178785cb07b02f9ed049bff2a7d5a910a5e0fd34f4",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 349,
+  "sheet": 12,
+  "sha256": "5c97cd04486f75bb83de932acd4a74c1793026d48083a5209118b59e51bc7eb8",
+  "verdict": "cull",
+  "reason": "armoured riot van"
+ },
+ {
+  "n": 350,
+  "sheet": 12,
+  "sha256": "5ca5d438aaf352a528a914d951c9fe22615d8c65528180fbad37355c4b8392b6",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 351,
+  "sheet": 12,
+  "sha256": "5ceb76cfa1ede99fc9525a854476e638513430f05822b06812436aba77d68763",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 352,
+  "sheet": 12,
+  "sha256": "5d00d9d2f7d346cfc562b6ad2cfda5c7543afc8a794d68894f3c8bc9672fb3be",
+  "verdict": "cull",
+  "reason": "rough scan car on ground plane"
+ },
+ {
+  "n": 353,
+  "sheet": 12,
+  "sha256": "5d19ff2cd84837024e52bc9d45c7d45e10a218b3c4a6de1b1e8459c2180d1296",
+  "verdict": "cull",
+  "reason": "pickup, tiny and low detail"
+ },
+ {
+  "n": 354,
+  "sheet": 12,
+  "sha256": "5d3573bd9d49358e476fc73a3ed9c998f55dd811eff0201104ce9807a23986fc",
+  "verdict": "cull",
+  "reason": "kei flatbed truck"
+ },
+ {
+  "n": 355,
+  "sheet": 12,
+  "sha256": "5d598e15d81c684580dc2844877b3f616f26c301a7694acb757ae07fdbc90b34",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 356,
+  "sheet": 12,
+  "sha256": "5db400038fef984619d0f27822c552cd721453d5ffa9eafa1bdc253e1e8e2955",
+  "verdict": "cull",
+  "reason": "broken/deformed sports body"
+ },
+ {
+  "n": 357,
+  "sheet": 12,
+  "sha256": "5e4dac4ebe891f9b854588d640b13eed834fd2d176f1fbc77244d17cdc03cb94",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 358,
+  "sheet": 12,
+  "sha256": "5e547277a219fad79966ed01a4cbe651d39e28e60f451ff48a88947694b7aa6a",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 359,
+  "sheet": 12,
+  "sha256": "5ebaeda0fec0867c6be9e0a1e411cb9c3dc80877483b2284d27707f3fdbd2925",
+  "verdict": "cull",
+  "reason": "diorama with trees"
+ },
+ {
+  "n": 360,
+  "sheet": 12,
+  "sha256": "5efcc0f0ca8971cef82e16cbe8253f04761b8f1829d94cf253e4eb94a7eebae1",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 361,
+  "sheet": 13,
+  "sha256": "5f41fce1094d34c678115438dc76f2cd25f9351800e13d22ea94d10613e70fe8",
+  "verdict": "cull",
+  "reason": "rough scan of an old estate, no clean surfaces"
+ },
+ {
+  "n": 362,
+  "sheet": 13,
+  "sha256": "5f69d2f4a9ccd6741cd0309923d20d48e5e64b8dd629b378d178b2059d64f046",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 363,
+  "sheet": 13,
+  "sha256": "605765ca7ad5a3b59486fb77b72b7d701996756f8438183ea073fb40cc9bc184",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 364,
+  "sheet": 13,
+  "sha256": "60c1e73ceba4a04f4e9770f8bd41d1622ccc678682dbdafa276577e8e6307217",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 365,
+  "sheet": 13,
+  "sha256": "61112619aa07ff07c99b9e6a3e5f0b5295548cbdaa84c9479ba944aadf127c3c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 366,
+  "sheet": 13,
+  "sha256": "613264b82c9290014bcd1dceac78ce8461071e3f8edd29c3c0ad9e4dc3a6bdc2",
+  "verdict": "cull",
+  "reason": "police livery - non-stock"
+ },
+ {
+  "n": 367,
+  "sheet": 13,
+  "sha256": "6133ec46e2a4fe7a0f0cec66a10dea517acc2cdf60aeb16753ffd7c80b242913",
+  "verdict": "cull",
+  "reason": "lamppost/column"
+ },
+ {
+  "n": 368,
+  "sheet": 13,
+  "sha256": "615c452812e5bf031b07844ba96c3cc2848a8ad2cdd9eb52a344ff5228af0cf7",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 369,
+  "sheet": 13,
+  "sha256": "6175ee68d1eeb389a8451f707fe4aa7eb577d175b9735df0a129c9533255930d",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 370,
+  "sheet": 13,
+  "sha256": "618220d7fd39f8e687114ad70551ab90855a95c9b575b043c7fa7739996d0ec3",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 371,
+  "sheet": 13,
+  "sha256": "6202af572b93a43d8314b22a7aecfd7ab692c2430dc691284a296c6820c21b00",
+  "verdict": "cull",
+  "reason": "featureless coupe blob"
+ },
+ {
+  "n": 372,
+  "sheet": 13,
+  "sha256": "628e3c6426b07e8ff313a7cad2c6bb7596613e88576f6d1b26fab311511be91f",
+  "verdict": "cull",
+  "reason": "murky scan on ground plane"
+ },
+ {
+  "n": 373,
+  "sheet": 13,
+  "sha256": "62b76fcc4b62a1b63db3646236bf7b4b7f29a6d3795682b179985609963df7c1",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 374,
+  "sheet": 13,
+  "sha256": "63a56f670bf23fa0aff076413d2cc8eb0d79267ca482ac998c25d84fd57dc700",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 375,
+  "sheet": 13,
+  "sha256": "63f111496c5bb22c06db18e9559fddbab290472c583d18461c547f1a0b40bc56",
+  "verdict": "cull",
+  "reason": "wireframe/edge artifacts over SUV body"
+ },
+ {
+  "n": 376,
+  "sheet": 13,
+  "sha256": "63fd7237c76f015779ba713b981783e6cf38915daa526d9355349cddf7a908ba",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 377,
+  "sheet": 13,
+  "sha256": "64671f3628574e06727ccd1eb1f762dc38b6c00770f0f76467d0e49832820d8d",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 378,
+  "sheet": 13,
+  "sha256": "648bb682bf053adc103a7e6ea8e74e3158e884ab14f5b848e789a814f890248c",
+  "verdict": "cull",
+  "reason": "scan debris on a plane"
+ },
+ {
+  "n": 379,
+  "sheet": 13,
+  "sha256": "648ede9d97e73d3b39266cc08805c1e946292ea6c3ba1f13af91ae3732f79076",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 380,
+  "sheet": 13,
+  "sha256": "64a49157b2c75688a0318ba86b42adcc628e7f7bf04bbb31312c94d0d8cac2f7",
+  "verdict": "cull",
+  "reason": "dark scan blob on grass"
+ },
+ {
+  "n": 381,
+  "sheet": 13,
+  "sha256": "64f4b2d7c47ef2215a32fa8049d5aba056e71481870ed8d73cf84bc1be1ea043",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 382,
+  "sheet": 13,
+  "sha256": "64f73baace8b2350a902addd93959bad60cefb31e8f02439a23ccb7011295e84",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 383,
+  "sheet": 13,
+  "sha256": "65a35dd9232f2e8cbfc3ab0f911f411e5a878e3eb9117d9a40228e5ef814adc8",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 384,
+  "sheet": 13,
+  "sha256": "65f9d0bbf18a25af876a7380baac573db9efca3b4690984008d407a1fbc0d6eb",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 385,
+  "sheet": 13,
+  "sha256": "663467f02ec539ab339b00ccd910b91dba203dd828e1dbe66c33afb02e6ea7e9",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 386,
+  "sheet": 13,
+  "sha256": "66dc8b38970cd8d5c4b57eff7e3f4ee106b4bb7c122e34e5e734bf811a870850",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 387,
+  "sheet": 13,
+  "sha256": "67105b336f5dbb2c217101c4b250026de94e84d428a03711cc652d7889df4c5c",
+  "verdict": "cull",
+  "reason": "ancient vase artifact"
+ },
+ {
+  "n": 388,
+  "sheet": 13,
+  "sha256": "67e0223a4f11a856c99c8172b46a93eb4257a6e0d04c8f9750d7dd403075831f",
+  "verdict": "cull",
+  "reason": "flat sliver plane"
+ },
+ {
+  "n": 389,
+  "sheet": 13,
+  "sha256": "67fc95e4123f6d267296dea6aeabc5288d2f19f6de3fd3dca5b1fd83a6410242",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 390,
+  "sheet": 13,
+  "sha256": "682729d128c2c6bb69ecb76e3b445d5da79ce3040985be6dc8907ccd11456620",
+  "verdict": "cull",
+  "reason": "rough scan car rear"
+ },
+ {
+  "n": 391,
+  "sheet": 14,
+  "sha256": "683d5939cbaea02d6565ae4069db5f1dfcf2c9ce66a421462a9feb9ab937ad30",
+  "verdict": "cull",
+  "reason": "broken scan fragment"
+ },
+ {
+  "n": 392,
+  "sheet": 14,
+  "sha256": "684a9e557e4b46af4493b91238ac4539f14aff11eaa7dea4f8d078fd16e313a3",
+  "verdict": "cull",
+  "reason": "white scan debris"
+ },
+ {
+  "n": 393,
+  "sheet": 14,
+  "sha256": "6853a30165a001daf13bc771844f94f3431790ef8d18254c32ca878be0f4db53",
+  "verdict": "cull",
+  "reason": "blocky pickup front"
+ },
+ {
+  "n": 394,
+  "sheet": 14,
+  "sha256": "6858e84922dc9aa13b3d69ca0f6e60427bb403fc054b9a8ca21d103f4036de45",
+  "verdict": "cull",
+  "reason": "zebra advertising livery"
+ },
+ {
+  "n": 395,
+  "sheet": 14,
+  "sha256": "685c96ff0e1e671efe4586c013ce87e6ac643307c3a1a26b6035d417cf572bd4",
+  "verdict": "cull",
+  "reason": "old utility jeep rear"
+ },
+ {
+  "n": 396,
+  "sheet": 14,
+  "sha256": "68976364b65fdc87d05116e48dfb317b77be81ee527f161b249c04f45caecbc2",
+  "verdict": "cull",
+  "reason": "wooden cart/trailer scan"
+ },
+ {
+  "n": 397,
+  "sheet": 14,
+  "sha256": "68b81633d9e96f05b01ee73b8cfe2e81fa24d534dfc75d45e69c70fc73298817",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 398,
+  "sheet": 14,
+  "sha256": "68b8b261b519344f5df7c3221a7df447f3be796c35b768599c3a91ff41fe5dd9",
+  "verdict": "cull",
+  "reason": "horsebox lorry on scan ground"
+ },
+ {
+  "n": 399,
+  "sheet": 14,
+  "sha256": "68c398c957c1b0ae5005b2ab582116ddd2ef7650bb7aa0826a2bf47945375aff",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 400,
+  "sheet": 14,
+  "sha256": "6ac3de0f3556b82b1120d57eaf4d0145c2f8b76fc20514cdcfd3f0312f7dfcad",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 401,
+  "sheet": 14,
+  "sha256": "6ad4b96ca9cd5619c6ffe853c0771f6849551cd8dee2163400c5622f21cb990e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 402,
+  "sheet": 14,
+  "sha256": "6b00282361f327ce6ef7e200de851f4e17314f3f73199731acdad6185335a22b",
+  "verdict": "cull",
+  "reason": "featureless car blob"
+ },
+ {
+  "n": 403,
+  "sheet": 14,
+  "sha256": "6b7b656cae5e1f7f60bd1070d0203ad7efc6aa4ab26600924c154b3187355c20",
+  "verdict": "cull",
+  "reason": "statue on plinth scan"
+ },
+ {
+  "n": 404,
+  "sheet": 14,
+  "sha256": "6bbec55fdc39d99f7aa2e91d5b2dbc28458bdbfece473694d573108b37528a11",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 405,
+  "sheet": 14,
+  "sha256": "6bf98f8b2b326201b8d0a69e521722ce7ea6de6073d973dc3ab8d4f90435ec8b",
+  "verdict": "cull",
+  "reason": "1980s cabrio - outside modern UK-road era"
+ },
+ {
+  "n": 406,
+  "sheet": 14,
+  "sha256": "6c1b1fe3fb686cee78976d109a836bb4c57ef2ba20a22656bba739bb9183f3a6",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 407,
+  "sheet": 14,
+  "sha256": "6c1d91348d7457e8ae96f281e1a82a6888ceef02acdfe5913965ff35f81b0582",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 408,
+  "sheet": 14,
+  "sha256": "6c2b383ecc5f42de752f71bd8ac13aa5065a983b940f088c82c016cad79f2310",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 409,
+  "sheet": 14,
+  "sha256": "6c3fc2b10608535c300c8d87df58742f0aebf0914a171bf94c210d2422d1451a",
+  "verdict": "cull",
+  "reason": "1980s saloon - outside modern UK-road era"
+ },
+ {
+  "n": 410,
+  "sheet": 14,
+  "sha256": "6c49b76200cb419bfbf418ffbb08f17b763554d096619eecd486bc34bcdc498e",
+  "verdict": "cull",
+  "reason": "wooden statue"
+ },
+ {
+  "n": 411,
+  "sheet": 14,
+  "sha256": "6cd27145220346b7c6bbfc9ab13bda0732fd72208a884ded67d60371b721c773",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 412,
+  "sheet": 14,
+  "sha256": "6d5fcc0b2ac0ac61fa8c6b23e1786d8875ac2a466c59a06ed794c0e893d31663",
+  "verdict": "cull",
+  "reason": "armoured military vehicle"
+ },
+ {
+  "n": 413,
+  "sheet": 14,
+  "sha256": "6d70f533281ae3cb54a67f27d164ff442262a63fee33b157919afd45213b9631",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 414,
+  "sheet": 14,
+  "sha256": "6db1df8abab1137711a88a16d85435e191d32ed4a66074a827533158312bc371",
+  "verdict": "cull",
+  "reason": "house diorama"
+ },
+ {
+  "n": 415,
+  "sheet": 14,
+  "sha256": "6e3e0a1ef5e5fce9aaced87424015cfba1b89daf6574cdc09a508cb2b4850e49",
+  "verdict": "cull",
+  "reason": "top-down orientation"
+ },
+ {
+  "n": 416,
+  "sheet": 14,
+  "sha256": "6e46526264d67c41e12af79ba252893efa3da3f1aa7a2910d867a832ee3918ca",
+  "verdict": "cull",
+  "reason": "vintage corrugated van"
+ },
+ {
+  "n": 417,
+  "sheet": 14,
+  "sha256": "6e8bba5825a70c656a94a2cd3ddcf64c6f57b72cb0353f63ca0ea11876b7313e",
+  "verdict": "cull",
+  "reason": "wood plank scan"
+ },
+ {
+  "n": 418,
+  "sheet": 14,
+  "sha256": "6eb319b0a3910f04ef60ffeee854768ce0d8555fe0347ddc44ebbc8c5fa5d91f",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 419,
+  "sheet": 14,
+  "sha256": "6f592cd381ab783f3f0f4bc59b362786b9fb0a51fef4ce5f154a2a6a37553168",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 420,
+  "sheet": 14,
+  "sha256": "6fe2844ce04f93f8cd6c5d8ae45a7c6e2dad43ce0eb69fc4c5151f929dcf28a6",
+  "verdict": "cull",
+  "reason": "car rotated vertical - broken orientation"
+ },
+ {
+  "n": 421,
+  "sheet": 15,
+  "sha256": "7004f1ddbaaec6deaf803412dc0177a72af0efb9e1a4cf083078b7fcdb97e3ca",
+  "verdict": "cull",
+  "reason": "scan blob on a plane"
+ },
+ {
+  "n": 422,
+  "sheet": 15,
+  "sha256": "70546bd0f6f36e695c76ab9a097f5573eb7014cf49ff48382a6948e5bff46229",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 423,
+  "sheet": 15,
+  "sha256": "70749b6e78be71f7edff96f90c7f034c12c394fb175bb536dc8df13df625bfbd",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 424,
+  "sheet": 15,
+  "sha256": "707b83aaf1e13c161abcdb3e46a69c715eedf0055867e2e332fa279399fabf28",
+  "verdict": "cull",
+  "reason": "black slab/bench primitive"
+ },
+ {
+  "n": 425,
+  "sheet": 15,
+  "sha256": "70adb5554d34c2e59f8c85484c432ec85279123329f95c023036c54dbe417050",
+  "verdict": "cull",
+  "reason": "wooden post scan"
+ },
+ {
+  "n": 426,
+  "sheet": 15,
+  "sha256": "70d9c18b1eeb5db1f983deefdbc8fd2508822d1b99f54a2073fb85a6d073b0fc",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 427,
+  "sheet": 15,
+  "sha256": "710ea11a85c92c95f9483530490555529081d5ec56c4c7aa14a88b6d662bc374",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 428,
+  "sheet": 15,
+  "sha256": "715ba129ed21b2949bd05c199bcdd5fc35dea8ed3e4cbff4330dd7373009cfd9",
+  "verdict": "cull",
+  "reason": "broken estate with doors detached"
+ },
+ {
+  "n": 429,
+  "sheet": 15,
+  "sha256": "716f5858565713ebe4c65896f8a5fbe634d83b6a37037020d7d9e10021458248",
+  "verdict": "cull",
+  "reason": "Beethoven bust"
+ },
+ {
+  "n": 430,
+  "sheet": 15,
+  "sha256": "7235656be7d34cc1e7b5ba7e1238f78cd13b4f36b30aeba8eaf1bb294773816b",
+  "verdict": "cull",
+  "reason": "articulated lorry trailer"
+ },
+ {
+  "n": 431,
+  "sheet": 15,
+  "sha256": "7242882f8e6d4b67b1fd8fef2a71a04289ab79150d2d2bf0424355dbcd64546e",
+  "verdict": "cull",
+  "reason": "skid-steer loader"
+ },
+ {
+  "n": 432,
+  "sheet": 15,
+  "sha256": "7250b6371a3301117bd2c7a1ec44bb4fd61c609f87da15c4a9aa44837373df0b",
+  "verdict": "cull",
+  "reason": "vintage VW T1 bus"
+ },
+ {
+  "n": 433,
+  "sheet": 15,
+  "sha256": "728e4c6187a5112ba38bb04d70baaf0bf882aea10477f43f5ec0705aafed317e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 434,
+  "sheet": 15,
+  "sha256": "72d938e4f20f9798c30d97c22dff3f769a09e072f9d102efb5e9efd7b4631528",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 435,
+  "sheet": 15,
+  "sha256": "72fa5e573863a0ef9195466b66119c76db0e1d150ccd4a62da12c2d59d210a34",
+  "verdict": "cull",
+  "reason": "amorphous white shape"
+ },
+ {
+  "n": 436,
+  "sheet": 15,
+  "sha256": "7357918fb805b2cc07a6a33dfdfba592ac2fae97c03a0d5761d60826fa952633",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 437,
+  "sheet": 15,
+  "sha256": "73d02e6cbaf116e252915fff236fda91e55b102155a1a7422e324c7c311ffbd2",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 438,
+  "sheet": 15,
+  "sha256": "73fde56a5e2f2c939db207b0f5767cfd62e7314de7a36239f627e9a4e168265a",
+  "verdict": "cull",
+  "reason": "white shell/blob"
+ },
+ {
+  "n": 439,
+  "sheet": 15,
+  "sha256": "742c3f19e375beefeceea3b140a8bfd62e1db82060fdaa15c192c701beccdbc3",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 440,
+  "sheet": 15,
+  "sha256": "74c4bb4efd8a3375d7989f74cd49fd74b120024a4af014e81b45642d1be8279e",
+  "verdict": "cull",
+  "reason": "trailer/cart"
+ },
+ {
+  "n": 441,
+  "sheet": 15,
+  "sha256": "74ce21b73a51b02904a464438d6afc42869bab062a19edc15e0ffb5cdbd285be",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 442,
+  "sheet": 15,
+  "sha256": "74e2f53975f9eceb81fae73def85d4c3f7683068f121fd279d2b8fb0c76cef0f",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 443,
+  "sheet": 15,
+  "sha256": "74e631afbe15d0d55d8cadc2647c17a364d0cc49951fe99c7b6481b335608445",
+  "verdict": "cull",
+  "reason": "horse carriage"
+ },
+ {
+  "n": 444,
+  "sheet": 15,
+  "sha256": "74f90939caa0e5e71a399539be4ac7a00e9bdf9a9b4d7886f3771ced8fe2364c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 445,
+  "sheet": 15,
+  "sha256": "754d89f02b503c17fa0452a4947bb09f68761975b3b4af326b3149ec33266a7b",
+  "verdict": "cull",
+  "reason": "rusty scan fragment"
+ },
+ {
+  "n": 446,
+  "sheet": 15,
+  "sha256": "75732c59ccf3d02e76fd5c3a5cd3703055eddc64b197dabd86d8d0e2f967336a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 447,
+  "sheet": 15,
+  "sha256": "75b5401fff22b757089884927048687de51c9904132b20d3f24771e32c2c1d64",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 448,
+  "sheet": 15,
+  "sha256": "75b860de01cf45c5519a91c58c91ed417d6acc9cfe4c5f59a9ca15ade9cc3f5f",
+  "verdict": "cull",
+  "reason": "1980s saloon - outside modern UK-road era"
+ },
+ {
+  "n": 449,
+  "sheet": 15,
+  "sha256": "75ca857023386f9bce3be92dd370d4341ae4ea4e72fa6760e53df061787b1961",
+  "verdict": "cull",
+  "reason": "sofa"
+ },
+ {
+  "n": 450,
+  "sheet": 15,
+  "sha256": "75eccaff52875ba1d746e2fd33e51d97527a255907b12c5068f65fdf28e60439",
+  "verdict": "cull",
+  "reason": "crushed scan, unreadable"
+ },
+ {
+  "n": 451,
+  "sheet": 16,
+  "sha256": "75f40168c93ae9338350bc414ab2c4014250f33e2b1caa2faa53dfcbf087afc5",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 452,
+  "sheet": 16,
+  "sha256": "762102e920f17e40f5eae9b45ebfa96ed4053b07a2c60503ec89b1c24d250c91",
+  "verdict": "cull",
+  "reason": "diorama with containers and trees"
+ },
+ {
+  "n": 453,
+  "sheet": 16,
+  "sha256": "762a288a1b23992f5b86ce9b683b3ae45eddfd6cf852b291cf17df815496219d",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 454,
+  "sheet": 16,
+  "sha256": "766548ed7c7069ae93f4b0f786a36067cc8bb0c528419c1353d908ce6ee4a3a7",
+  "verdict": "cull",
+  "reason": "top-down orientation"
+ },
+ {
+  "n": 455,
+  "sheet": 16,
+  "sha256": "769a39d61df3b0b30814e37ca3b04829a707c60516a70378d6fc1bccb7aabfa7",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 456,
+  "sheet": 16,
+  "sha256": "76a6b6b6a3d874d61eba26dd7a0959b1faf46106837c16003bc0a0c554dc2ef2",
+  "verdict": "cull",
+  "reason": "vintage Land Rover with advertising livery"
+ },
+ {
+  "n": 457,
+  "sheet": 16,
+  "sha256": "76c068cf60c0f889322b89dca30e37acbb789958c8fa44fb2d370e941545cd5f",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 458,
+  "sheet": 16,
+  "sha256": "76cc68057466a3d1aa8094ce933b58dcf0b38d97e691344775f489eb20c2320a",
+  "verdict": "cull",
+  "reason": "1970s saloon - outside modern UK-road era"
+ },
+ {
+  "n": 459,
+  "sheet": 16,
+  "sha256": "76eb714bf98fec241219a2cb260f59c5e7389b68a37bc4ba54815c9b6c398f11",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 460,
+  "sheet": 16,
+  "sha256": "76ee550096d67efaf13358f73f1d523a080a6fa407d5c26602a1910e8577dcaa",
+  "verdict": "cull",
+  "reason": "wreck/debris scan"
+ },
+ {
+  "n": 461,
+  "sheet": 16,
+  "sha256": "77226fd7f5b61d982253e14862ba44d4ca82663dc2e2fd3e96e790d97ee23ab3",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 462,
+  "sheet": 16,
+  "sha256": "7747b1bf9c710c3dbc612bea1d0c5a8000a56799263fc1e78d37ff60aea199ad",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 463,
+  "sheet": 16,
+  "sha256": "774a4cf809a7d856378b9a35758b0e604fb032b02a8cb248935b596df68bea63",
+  "verdict": "cull",
+  "reason": "rock/soil scan"
+ },
+ {
+  "n": 464,
+  "sheet": 16,
+  "sha256": "775de7cd58cfe2a663cdec517309ff8f08ff380157f4d55eab983bcc2a0fec2c",
+  "verdict": "cull",
+  "reason": "wooden plank"
+ },
+ {
+  "n": 465,
+  "sheet": 16,
+  "sha256": "7845a0cb1db02e5e42cdcb092dcd4a9f7284bdf4da3243862091942aaee5935e",
+  "verdict": "cull",
+  "reason": "copper plate/dish"
+ },
+ {
+  "n": 466,
+  "sheet": 16,
+  "sha256": "788d2b12e9351850f60b2a7a38ee57c8b8f3afefd71af8c9dbbeacc7099ed87e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 467,
+  "sheet": 16,
+  "sha256": "788df5ba775e8d9adc5ff0628f4aff869e7016f819ca484348c1f388608d12e4",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 468,
+  "sheet": 16,
+  "sha256": "78b2cd08fd277403afb5d2aba2954ebda9c424a1b71183eba34062ed19ef09e1",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 469,
+  "sheet": 16,
+  "sha256": "7918b23f3887a8344b142756f800e0d4b82f038a24291e4cfb948385de4f7edc",
+  "verdict": "cull",
+  "reason": "jeepney bus with livery"
+ },
+ {
+  "n": 470,
+  "sheet": 16,
+  "sha256": "79e51eadd557e1eb2a421f0776c46122cbfb9ff0959afafaf1791884e5914d53",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 471,
+  "sheet": 16,
+  "sha256": "79f44803ba0e4780de1d90a750b0e72abcfbf1324313e9ca6558c496f0497a8a",
+  "verdict": "cull",
+  "reason": "plush unicorn toy"
+ },
+ {
+  "n": 472,
+  "sheet": 16,
+  "sha256": "79f838c64fe6c08bf105ca1b1a287b173d87154035562a394686b357eb6d2225",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 473,
+  "sheet": 16,
+  "sha256": "79fb03d24960fa872dbb4912aff4807a7d99fd71b84c887e22777cbb91d1e894",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 474,
+  "sheet": 16,
+  "sha256": "7ae683ca535577190c058c9662e14e39acf536a2bc30d0ffe2f119ea81fa4c7e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 475,
+  "sheet": 16,
+  "sha256": "7af462fb711cb83999a86f06103d766398b0c91fc148375c81ec032adf2677d4",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 476,
+  "sheet": 16,
+  "sha256": "7afc8d8ae33b44e9de3cce6ccb9b66e2cfa578fa163354bc5704e1f5e7cf7a44",
+  "verdict": "cull",
+  "reason": "bottle/canister"
+ },
+ {
+  "n": 477,
+  "sheet": 16,
+  "sha256": "7b6664196a8b48be1c00a6c09b7aa1bf5486d004321ccaf267353de80fe7cc79",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 478,
+  "sheet": 16,
+  "sha256": "7b96c01321badbed4121e658ddb1d393ebdf03658a689952f4ce51419cc98a4b",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 479,
+  "sheet": 16,
+  "sha256": "7c252d35546d2cef56adcfe7936471fe6e6ca9710961d18d9901b0be846a9572",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 480,
+  "sheet": 16,
+  "sha256": "7c68a9027defa4b889e4be1835b181795307a8b6ddf2f55e5a21d2ba90bc5ed5",
+  "verdict": "cull",
+  "reason": "tiny machine fragment"
+ },
+ {
+  "n": 481,
+  "sheet": 17,
+  "sha256": "7c94c89d664c54f4d30a747519a201479756c82435c5b66027142107656e5aef",
+  "verdict": "cull",
+  "reason": "vehicle sat on a baked ground disc"
+ },
+ {
+  "n": 482,
+  "sheet": 17,
+  "sha256": "7c94dabbe140221cee78f6f3c15b57d564bba3276a8a8f9903efd0b6b8058eed",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 483,
+  "sheet": 17,
+  "sha256": "7cc1f50c46364d58a231c359528f9b59a9296816a50c6a157d0cbed6eecaeb19",
+  "verdict": "cull",
+  "reason": "camo/blotch texture over body"
+ },
+ {
+  "n": 484,
+  "sheet": 17,
+  "sha256": "7cc7480dc744a4055476c58532fdc4961d194c876ff32424ca3ca05f22bd0c33",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 485,
+  "sheet": 17,
+  "sha256": "7d415e212f25f5b089aea5ad4c258dddd99db9a620329d4e18b84b196607e11a",
+  "verdict": "cull",
+  "reason": "low-poly blocky SUV"
+ },
+ {
+  "n": 486,
+  "sheet": 17,
+  "sha256": "7dc8e4ce6026ed7772812e1eb91a9575613424302f6f13958618558e1e72eadd",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 487,
+  "sheet": 17,
+  "sha256": "7e10aeab49cfd05d4e6bfbffd9c9ff68dc609dab90bd40374d3cbd66a70684ed",
+  "verdict": "cull",
+  "reason": "flat house/roof scan"
+ },
+ {
+  "n": 488,
+  "sheet": 17,
+  "sha256": "7e1318701ac024cbf8f54ef8db67eee06ef799d91b48504c30e4af9b7f559f9e",
+  "verdict": "cull",
+  "reason": "Van Gogh painting"
+ },
+ {
+  "n": 489,
+  "sheet": 17,
+  "sha256": "7e42b92334c4318d30b7ccf7a9e69017d2b153b6abbbe8fcca90a2533cf0250f",
+  "verdict": "cull",
+  "reason": "cartoon box truck"
+ },
+ {
+  "n": 490,
+  "sheet": 17,
+  "sha256": "7e6dbed476a05d02334ae5e6dc4e1e811cf4d3e37e458485c5d913b84fa33ef4",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 491,
+  "sheet": 17,
+  "sha256": "7e91edfef73b928c709f869436d2c6cd0714a356bdc9eca5c7a831b5512fd7ef",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 492,
+  "sheet": 17,
+  "sha256": "7f078f5bed38c35c8c7b96af123ec30b654d1166ae265a8a9aa04628ef3af55a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 493,
+  "sheet": 17,
+  "sha256": "7f2aba10fc62de9d19fc434a6babfceef8679d1243797c0df26347f398403b93",
+  "verdict": "cull",
+  "reason": "ring/torus jewellery"
+ },
+ {
+  "n": 494,
+  "sheet": 17,
+  "sha256": "7f3a09d450b0be55d91a3e78ea8d2485c465f6d791950594c9281fd177466150",
+  "verdict": "cull",
+  "reason": "school bus"
+ },
+ {
+  "n": 495,
+  "sheet": 17,
+  "sha256": "7f72aa3ef00350256a4b2b505e1887ee88516e875db4dbc8770123abad159ebd",
+  "verdict": "cull",
+  "reason": "vintage truck"
+ },
+ {
+  "n": 496,
+  "sheet": 17,
+  "sha256": "7fa9e813720947d0f0135ea983d45555008f9a34296d94edd8d772a01b0d0667",
+  "verdict": "cull",
+  "reason": "rusty derelict pickup scan"
+ },
+ {
+  "n": 497,
+  "sheet": 17,
+  "sha256": "804cd13d22be09e9bdcf83d98a1f2cc61a1ee83c3afa2fd1a976e266fdf58fd3",
+  "verdict": "cull",
+  "reason": "blurred low-detail coupe"
+ },
+ {
+  "n": 498,
+  "sheet": 17,
+  "sha256": "806d619f33703bdced870056e0c4dd5bb042801d5c57cd2fbc0735c4c42828a9",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 499,
+  "sheet": 17,
+  "sha256": "807feb548bbb553b8d86e8205d09e3c16841f68167de029ec89a6627947f3579",
+  "verdict": "cull",
+  "reason": "go-kart/buggy"
+ },
+ {
+  "n": 500,
+  "sheet": 17,
+  "sha256": "80b15b4e8e1c1f6a4f11d7b8d4f602d45711ca12aaee2ebfaf8a6cf320ed6ec1",
+  "verdict": "cull",
+  "reason": "protein ribbon diagram"
+ },
+ {
+  "n": 501,
+  "sheet": 17,
+  "sha256": "80c8fea0bbf645110536b549bef0d11a9f127754a40175aef0ea86ec92f704f4",
+  "verdict": "cull",
+  "reason": "bone/horn scan"
+ },
+ {
+  "n": 502,
+  "sheet": 17,
+  "sha256": "80cddefdc5c1b9381cbe255f8e533c4acdddff411abd203545a11daa5a92dc1b",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 503,
+  "sheet": 17,
+  "sha256": "8102e0de9d4346082922217b9c6e02c033ee39843822e09eadc5efa5be0b043d",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 504,
+  "sheet": 17,
+  "sha256": "813ecf90db053c3c53d457a60a0405afaea5ef4b735ac1d8dde5059db861e076",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 505,
+  "sheet": 17,
+  "sha256": "81c9b34bcd3f83b98034c169f0b512c53252082159beea4ae532728cf1511997",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 506,
+  "sheet": 17,
+  "sha256": "81cbf51981c1cd53172d56da5dd4d77ba9c6f9262577454210dc1316f117a664",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 507,
+  "sheet": 17,
+  "sha256": "8243a35eecba564956c64052fd911994d06ca2c5b0a63959f65d1e4430283abe",
+  "verdict": "cull",
+  "reason": "van/MPV - commercial"
+ },
+ {
+  "n": 508,
+  "sheet": 17,
+  "sha256": "8247609de593fed1a4f8663c4267ea80b4ea7583d189bdcf493f79c1699a9fd5",
+  "verdict": "cull",
+  "reason": "1960s saloon - outside modern UK-road era"
+ },
+ {
+  "n": 509,
+  "sheet": 17,
+  "sha256": "82a4442b9e692fea0038913bec3825475779c38b74ca1068036c8a702c9e2698",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 510,
+  "sheet": 17,
+  "sha256": "83083c8cf3d6f28f0cedf72c3c927e60852be02d4688de82c26ab3334aef263b",
+  "verdict": "cull",
+  "reason": "camo-wrapped pickup"
+ },
+ {
+  "n": 511,
+  "sheet": 18,
+  "sha256": "8312d2807d79f4759e5075e6ccb3cb1b4bacd2a76907c56a85670a16740157e1",
+  "verdict": "cull",
+  "reason": "skull"
+ },
+ {
+  "n": 512,
+  "sheet": 18,
+  "sha256": "835b9778d078a33d344644d4212cd8d909fc0251cecfa54125ecb2289c1db5df",
+  "verdict": "cull",
+  "reason": "scan fragments"
+ },
+ {
+  "n": 513,
+  "sheet": 18,
+  "sha256": "8373911b9578735d9886008e1ff370b75612e3d8fa4fe6ee5519d566feef241a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 514,
+  "sheet": 18,
+  "sha256": "83925e0a18f6d4363bf3bd419a3cc8e8c1397e4541dc1d6edbb6986fe6edb730",
+  "verdict": "cull",
+  "reason": "noisy muscle-car scan"
+ },
+ {
+  "n": 515,
+  "sheet": 18,
+  "sha256": "83ac07e6816cbb0fff98cae1b1fac4b503577135f6cddfb262f06d1cb6e09054",
+  "verdict": "cull",
+  "reason": "rough saloon scan, no clean surfaces"
+ },
+ {
+  "n": 516,
+  "sheet": 18,
+  "sha256": "83e370d38f6e67d36a138fbd4f9433463018477778f1a63f50ba82703c08f3c3",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 517,
+  "sheet": 18,
+  "sha256": "83e622f93c182aa623326f2fbcd97097770b033f3c81855312420182030a69a1",
+  "verdict": "cull",
+  "reason": "rusty VW bus scan"
+ },
+ {
+  "n": 518,
+  "sheet": 18,
+  "sha256": "84e9731c0fee9c57cfbb20ed694696a6d802f41967de26c223c27314318cb55a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 519,
+  "sheet": 18,
+  "sha256": "85967f6702da8a7f06ea420d644782f3b7267961642de2ce744aa9479d0070c7",
+  "verdict": "cull",
+  "reason": "green amorphous blob"
+ },
+ {
+  "n": 520,
+  "sheet": 18,
+  "sha256": "85b470b1c801810cf3285d660ee3b59f25d654c541b0d54345da9afaf52bb4f9",
+  "verdict": "cull",
+  "reason": "gypsy caravan on plinth"
+ },
+ {
+  "n": 521,
+  "sheet": 18,
+  "sha256": "85b68cf6b6c4fe28196018a67513239bf654df4459d45e58a9e00d586c204a6c",
+  "verdict": "cull",
+  "reason": "flat dark sliver"
+ },
+ {
+  "n": 522,
+  "sheet": 18,
+  "sha256": "86c72a1c114d4a547b48913e2a340dc55d6b1a6c8c5c54790def2de5f56732c1",
+  "verdict": "cull",
+  "reason": "old pickup"
+ },
+ {
+  "n": 523,
+  "sheet": 18,
+  "sha256": "86fd64f628aead692f648b81b26aa0bba4a3e6b512c541ca57ed74f707fc05f0",
+  "verdict": "cull",
+  "reason": "SUV scan with wireframe artifacts"
+ },
+ {
+  "n": 524,
+  "sheet": 18,
+  "sha256": "86fe02a82d9ed24c76486a5828b55f055f00f2bd6416b30ae5106c654ca35a71",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 525,
+  "sheet": 18,
+  "sha256": "8828918ce8f998a5f86078732b4e1227ee03b0fa1c4e759f89a33a8099a0500a",
+  "verdict": "cull",
+  "reason": "diorama street scene"
+ },
+ {
+  "n": 526,
+  "sheet": 18,
+  "sha256": "88a6475511dc2cafd6e73f8d4a87717532723bfbb11c2f104572b6d88fe32ad1",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 527,
+  "sheet": 18,
+  "sha256": "89789849bb41d833976566bf93fa5b7bfbbcf128fbe5c5d5a9c6b46b22539d82",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 528,
+  "sheet": 18,
+  "sha256": "89e140dfe68a908b39ecc998286f009a1287df18dd2af48e6576f6967ec5d66a",
+  "verdict": "cull",
+  "reason": "stairs/structure"
+ },
+ {
+  "n": 529,
+  "sheet": 18,
+  "sha256": "8b247b142ae7bcecb029bb88ea3ff127f36583116bfacb9f1cc46a528cc8a454",
+  "verdict": "cull",
+  "reason": "rusty vintage truck"
+ },
+ {
+  "n": 530,
+  "sheet": 18,
+  "sha256": "8b8820c0e06f13583c86ee42b4c6341bbc1d2fa63790e7ffc606946d120df521",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 531,
+  "sheet": 18,
+  "sha256": "8bb123c81cdb84c548ff7567a32b8960601d5b3f79ae11faddad12cadc773836",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 532,
+  "sheet": 18,
+  "sha256": "8beafddcf8b3fadf03a406188b685f980aecb8bf4302999632e6727e44d6f4cf",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 533,
+  "sheet": 18,
+  "sha256": "8c1483c60e83b87cad10a822420ecab6c5efb4f53fe3bab624544efd473ecc4a",
+  "verdict": "cull",
+  "reason": "house diorama"
+ },
+ {
+  "n": 534,
+  "sheet": 18,
+  "sha256": "8c4bb01750596fbb6a98be5234546fab87b5b309575014127f01539b49e73aee",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 535,
+  "sheet": 18,
+  "sha256": "8ca9c116b1253dc3937d5bed6d9f9d75fde50d43c6f83ef01a31c56aa30917a2",
+  "verdict": "cull",
+  "reason": "old pickup scan"
+ },
+ {
+  "n": 536,
+  "sheet": 18,
+  "sha256": "8caf99beb0224350fe1d7f73410b953c664b01811963d76f3cfdd321ff21a276",
+  "verdict": "cull",
+  "reason": "rat-rod truck scan"
+ },
+ {
+  "n": 537,
+  "sheet": 18,
+  "sha256": "8cefc35fb29ccb1ef9a55e155cf1bc8d6256669b432a9fe51d55c9f0f78d35c0",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 538,
+  "sheet": 18,
+  "sha256": "8cf5ad49da6a89cb27cd00b9eb7dffad3435c7ab56970129c82c232cf0fd40cf",
+  "verdict": "cull",
+  "reason": "machinery/trolley scan"
+ },
+ {
+  "n": 539,
+  "sheet": 18,
+  "sha256": "8d886131e3389343b3844f9b0940b48758564bad4fc3ed0bacab88f8d9e0b498",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 540,
+  "sheet": 18,
+  "sha256": "8da77f899401e9a04dd7624df350a3b1a99b154d721a905ea8154a894a95e904",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 541,
+  "sheet": 19,
+  "sha256": "8dd984053dca28ed1346610d2d84c6f6d98c66eb5b283864f2e8ad9e11079538",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 542,
+  "sheet": 19,
+  "sha256": "8e4b4c300aa630b30268585565a72ec00de9d0087579ceb0b930bbdce2896266",
+  "verdict": "cull",
+  "reason": "small commercial van"
+ },
+ {
+  "n": 543,
+  "sheet": 19,
+  "sha256": "8e811d78a0be27c4f704127f18ef3bc2ea1c620d7dcf58a3a828ad024dec5274",
+  "verdict": "cull",
+  "reason": "panel van"
+ },
+ {
+  "n": 544,
+  "sheet": 19,
+  "sha256": "8e96c146e3a356dccea140e961776b7118c565ebe1fbb7009a4c73c704eb2c65",
+  "verdict": "cull",
+  "reason": "van-derived MPV"
+ },
+ {
+  "n": 545,
+  "sheet": 19,
+  "sha256": "8e9f7e889f1f18e19d724e6df2b62dfe8f746cf6003df3df6422720f567ace85",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 546,
+  "sheet": 19,
+  "sha256": "8f17b7bde7dd08aac15d365e789df2fe4835f240c896a69b674d5146fb163756",
+  "verdict": "cull",
+  "reason": "rough dark car scan"
+ },
+ {
+  "n": 547,
+  "sheet": 19,
+  "sha256": "8f238884d74a6505c5f460495cf767e56826660a802812951a0e3603e1f95666",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 548,
+  "sheet": 19,
+  "sha256": "8f256690e36c7f64517b2f52445453bd7c790d95c50ed0759178338c4113c8c5",
+  "verdict": "cull",
+  "reason": "flat sliver diorama"
+ },
+ {
+  "n": 549,
+  "sheet": 19,
+  "sha256": "8f4704924e68d58c9f7ddec4aabc4d0f2d3695032efd0291d2124a23df5dce96",
+  "verdict": "cull",
+  "reason": "bus"
+ },
+ {
+  "n": 550,
+  "sheet": 19,
+  "sha256": "8f8e2430357d476842cb4371f0ed7b1c6ef7a4fffeb8b08d91ea193c5c3b34f1",
+  "verdict": "cull",
+  "reason": "exhibition stand"
+ },
+ {
+  "n": 551,
+  "sheet": 19,
+  "sha256": "8fb2a999747803b223fc7fb7b919be3ade6fae60391fa25e8b300e9093feffc1",
+  "verdict": "cull",
+  "reason": "race-liveried car"
+ },
+ {
+  "n": 552,
+  "sheet": 19,
+  "sha256": "8fc68ac2c7b0162609ae540df964cca53bb25c6b99a93fc1ca83ad4900851966",
+  "verdict": "cull",
+  "reason": "smooth featureless estate blob"
+ },
+ {
+  "n": 553,
+  "sheet": 19,
+  "sha256": "9042c21a4c1e6c43f55add64913fa9f3b21ce5e986a0740747040a11edc36bf0",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 554,
+  "sheet": 19,
+  "sha256": "90552353e542a14bdc2f8565bbe59ca0cd6716d4ced8458e9e98db8ea07b2998",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 555,
+  "sheet": 19,
+  "sha256": "9103e5c6fa5c2257132749c60ccdb3075f4ca7f9c82acd6b3b78c31a82c05041",
+  "verdict": "cull",
+  "reason": "orange lens/shell shape"
+ },
+ {
+  "n": 556,
+  "sheet": 19,
+  "sha256": "91189914aafe0a43921c75e492fd5f94d706220dd9ab7aae28d08e50a378737e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 557,
+  "sheet": 19,
+  "sha256": "9144c607fd02a726816557668a2f452dd135324c7053d72c014da8664da4ba7c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 558,
+  "sheet": 19,
+  "sha256": "91a61173842e53d22f0e01997f1829ee7f674c590d518ecd9df6a836a39258b2",
+  "verdict": "cull",
+  "reason": "ambiguous boxy front, cannot confirm a passenger car"
+ },
+ {
+  "n": 559,
+  "sheet": 19,
+  "sha256": "91d78c60d88510b4b90bc02eac618861de3bf8c6466b5d48a7be02d96fc57246",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 560,
+  "sheet": 19,
+  "sha256": "925c67adfde35e2d235dc98b803c48bbb6759ea21ec11f65a09eed7fc0c78043",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 561,
+  "sheet": 19,
+  "sha256": "92a9276900a232ccea2851c240776112c8bec014feb22a11db4a42a9a1cb3f47",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 562,
+  "sheet": 19,
+  "sha256": "92bbf78f34743dbb4644fd37fdf91d6cadfc18470442edfae0769ab0ac4a7f9e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 563,
+  "sheet": 19,
+  "sha256": "92ebd2a39f9558d31b868e12395719812996f84185a0c45cda324acfcb283ce5",
+  "verdict": "cull",
+  "reason": "noisy SUV scan"
+ },
+ {
+  "n": 564,
+  "sheet": 19,
+  "sha256": "93cbff502fcbc2f485c7b4b7eb701676a8785d0f2abf6ad0c088edfd335f432a",
+  "verdict": "cull",
+  "reason": "cluttered tile: picture plus tiny pickup"
+ },
+ {
+  "n": 565,
+  "sheet": 19,
+  "sha256": "940099515c5c9d8cd16f41d9889223d90c2ed1d79c4dbb191b8efcece19fa73f",
+  "verdict": "cull",
+  "reason": "near-empty tile"
+ },
+ {
+  "n": 566,
+  "sheet": 19,
+  "sha256": "94a6fe62158e839696f6845320a25f9d9b8f94b78d239bc1bc5ce6d29ea1b4bc",
+  "verdict": "cull",
+  "reason": "stone slab scan"
+ },
+ {
+  "n": 567,
+  "sheet": 19,
+  "sha256": "94b2b3cf01c8907442d3381f5a4ef29fdcf2281989a955a7ef76d600a945ad8a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 568,
+  "sheet": 19,
+  "sha256": "94fe9a4c838b6de996c4979dd3c0aab8fdc4fc216379ed5932e211b5a973589f",
+  "verdict": "cull",
+  "reason": "rock scan"
+ },
+ {
+  "n": 569,
+  "sheet": 19,
+  "sha256": "953d38845632cc42cad031e6ef22c10c6846f868f1adbbb5a2fc49a1ff1e28c6",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 570,
+  "sheet": 19,
+  "sha256": "95889c04ba8fdcc17be461f42957ac199bc917ff0d2927ba1d5d6302534163ca",
+  "verdict": "cull",
+  "reason": "rough SUV scan"
+ },
+ {
+  "n": 571,
+  "sheet": 20,
+  "sha256": "95dfb6208af3ec5e89b68d7ed824769710f338875cf8db7e77412dcf915100c5",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 572,
+  "sheet": 20,
+  "sha256": "96185a701a8ed97873378affcd89bf1a59763844ac0c44fa6967a8fd7f7bfa6f",
+  "verdict": "cull",
+  "reason": "bare chassis frame, no body"
+ },
+ {
+  "n": 573,
+  "sheet": 20,
+  "sha256": "96431001f7c042c23e175ab766ebcb8e96685f94b5a674f13119c32fef1e6c29",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 574,
+  "sheet": 20,
+  "sha256": "966ac74d93e8e2a52b23c7057431e52ac832c7e317368fc75ef40893ca301c28",
+  "verdict": "cull",
+  "reason": "vintage sports car - outside modern UK-road era"
+ },
+ {
+  "n": 575,
+  "sheet": 20,
+  "sha256": "96fb2607057ca8b4dc601ce4525cba90837838d9faa1c49bf9eecdcbeba1eedf",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 576,
+  "sheet": 20,
+  "sha256": "977074d6e7b5390279ec1091fb39cae2c12e5505e4b1e976c601d7befd06908a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 577,
+  "sheet": 20,
+  "sha256": "9785e06443c21e6b2192c9a62a828892788d4fe7297d1b2a4cbe67aa271f2349",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 578,
+  "sheet": 20,
+  "sha256": "97b4953686b1bfd454c25a914b77927070309c6690fe5ded931456713db0c1c8",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 579,
+  "sheet": 20,
+  "sha256": "97c94f43565a1cc4f7d941ec6263a623b3ab2c6b390650c373bee324a15e638d",
+  "verdict": "cull",
+  "reason": "industrial machinery"
+ },
+ {
+  "n": 580,
+  "sheet": 20,
+  "sha256": "97fd3c176c292b7fb15f04832a31ab2b1a366e3e79c9ed9d375138228afb87a3",
+  "verdict": "cull",
+  "reason": "1970s coupe - outside modern UK-road era"
+ },
+ {
+  "n": 581,
+  "sheet": 20,
+  "sha256": "98892434659b04a2b12f3b8e3914cb29950f70b47f1243e2a894fa2dcdc3a3cd",
+  "verdict": "cull",
+  "reason": "tiny machinery rig"
+ },
+ {
+  "n": 582,
+  "sheet": 20,
+  "sha256": "989de69d9fc14da0f4c03c7b2e9d09b7f04b16c289c22c6239021ce3cf847efb",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 583,
+  "sheet": 20,
+  "sha256": "994148e881951dff71cadfb64ee1efc7f496a2e7c1f7b6b9541f57d6619c9bbd",
+  "verdict": "cull",
+  "reason": "panel van rear"
+ },
+ {
+  "n": 584,
+  "sheet": 20,
+  "sha256": "996c6bf26879c6e726db5ba1515118eb2d291a929fc29fb7b4b20771e330b5fe",
+  "verdict": "cull",
+  "reason": "building/architecture"
+ },
+ {
+  "n": 585,
+  "sheet": 20,
+  "sha256": "9a3ed148aee02a6317f6ec11ede0e08d52dec6a8486613f8fd7a47ce643c7622",
+  "verdict": "cull",
+  "reason": "mining dump truck"
+ },
+ {
+  "n": 586,
+  "sheet": 20,
+  "sha256": "9a90a63c3ce3406b21fa80eee278ce1e92bb6f8b6810064e71b2dc612a9de205",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 587,
+  "sheet": 20,
+  "sha256": "9a920ef0e1b10897524d22c9b9f5d9398c2aafa28ea5ca25908c58f2faff8ba9",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 588,
+  "sheet": 20,
+  "sha256": "9ab5221ecbdf47df63d427c246bf195ceb25ec01b52b74b31a078810cd562f98",
+  "verdict": "cull",
+  "reason": "flat diorama plane"
+ },
+ {
+  "n": 589,
+  "sheet": 20,
+  "sha256": "9ab668d57efda016b31560f466ee405441afd0015afb5672831d69c90c21b7ae",
+  "verdict": "cull",
+  "reason": "noisy saloon scan"
+ },
+ {
+  "n": 590,
+  "sheet": 20,
+  "sha256": "9b9d5d15c753cbd92514eb24b1471a50714e15ac7a2a4fff14b41c0e6c88e7a5",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 591,
+  "sheet": 20,
+  "sha256": "9bba5a9e5021e514624ce9dd8dbe5ef5e5418bba6043373081ed0d01078249da",
+  "verdict": "cull",
+  "reason": "cylinder/silo primitive"
+ },
+ {
+  "n": 592,
+  "sheet": 20,
+  "sha256": "9bc2f9209e513a338ba60a8b075871b19f5217e8e85ca1d817be950777c18277",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 593,
+  "sheet": 20,
+  "sha256": "9c50fe5b075c4a288104db34aaca3c3ceef25db207563c3e3e4e56fdbb3fb777",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 594,
+  "sheet": 20,
+  "sha256": "9c666e735c4349955b1fa9f518a9e37b6af0b2bd15ac092f88801ea899d1a494",
+  "verdict": "cull",
+  "reason": "custom pink/green Mustang livery"
+ },
+ {
+  "n": 595,
+  "sheet": 20,
+  "sha256": "9c8b23d1ea118a669674b3d66b15912e91905286a37d3480ff2176e4996dfd27",
+  "verdict": "cull",
+  "reason": "dark low-detail car rear"
+ },
+ {
+  "n": 596,
+  "sheet": 20,
+  "sha256": "9c8eb395255698f73ad8d48cfdfb69a98aec639966f9f0c147fb4b13d8474002",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 597,
+  "sheet": 20,
+  "sha256": "9d03b7862666c6f239a57e02f340c6499280fb5cb656f6e6b602c66853901c4a",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 598,
+  "sheet": 20,
+  "sha256": "9d09330d4bc8a2816d92d26aa092ae766f9ea54b3bcea52406bc24b0472cf9ba",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 599,
+  "sheet": 20,
+  "sha256": "9d427faa56843104abf77a935ae231c641b91a190ac0cf2b111d8662b899526a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 600,
+  "sheet": 20,
+  "sha256": "9d5bebab915d9aaf2c1cf2aa5fa6529d0ab3873ef965bdc70e74bad515c6d11b",
+  "verdict": "cull",
+  "reason": "top-down orientation"
+ },
+ {
+  "n": 601,
+  "sheet": 21,
+  "sha256": "9e1ac3bbbb17aa0a17064324e7aca9de6d0f13d08c89aa88cea88867d2ffae11",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 602,
+  "sheet": 21,
+  "sha256": "9e782059fe5f83a62209d37cf9831a05563c4357c3781908596a729567e2b370",
+  "verdict": "cull",
+  "reason": "black box primitive"
+ },
+ {
+  "n": 603,
+  "sheet": 21,
+  "sha256": "9e8c706a13775d1f6c3fba57079081ce61fd3165ac33d2e032595fba3f734f73",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 604,
+  "sheet": 21,
+  "sha256": "a03905a7c29912a101d820057a8a036be77c0456e7b4b16bbad4a5e704e32748",
+  "verdict": "cull",
+  "reason": "1920s vintage car"
+ },
+ {
+  "n": 605,
+  "sheet": 21,
+  "sha256": "a064b4b8dafb32e86a4112a63f782935fb75f44603f6b877e02e9f70f886bf79",
+  "verdict": "cull",
+  "reason": "flat panel/canvas"
+ },
+ {
+  "n": 606,
+  "sheet": 21,
+  "sha256": "a0b589b09a037a61ec3616dbb06f5d442b815cf6d50c62d5c12c4aa77dd61718",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 607,
+  "sheet": 21,
+  "sha256": "a0f9e9726e8939754deef532406393277ef31f150323fbcb267b2e0c60ba822f",
+  "verdict": "cull",
+  "reason": "toy police SUV"
+ },
+ {
+  "n": 608,
+  "sheet": 21,
+  "sha256": "a1269dd5c6ada05c46f1cd5ad2a4e6c2c0df055c575c475b996f823b37aac470",
+  "verdict": "cull",
+  "reason": "shell/coral on plinth"
+ },
+ {
+  "n": 609,
+  "sheet": 21,
+  "sha256": "a16510e76301fcf45cab9f9fc76b3637cc2373afe227c708635cc21b74435d6d",
+  "verdict": "cull",
+  "reason": "featureless coupe blob"
+ },
+ {
+  "n": 610,
+  "sheet": 21,
+  "sha256": "a17b3b9edc0997ba77837ae4358e3dfe7b7aa7f59364d7c15b6fb01a3452d26b",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 611,
+  "sheet": 21,
+  "sha256": "a1ce15b2c933dd6b044b192188dd48e0260357efe1fd74e520122d027c8baa09",
+  "verdict": "cull",
+  "reason": "cabinet/locker"
+ },
+ {
+  "n": 612,
+  "sheet": 21,
+  "sha256": "a1df73e7a4cf28ae652eb238e54da61b5a96ffddfec008fde136255bf8d7dcdf",
+  "verdict": "cull",
+  "reason": "saloon rear with dark material artifacts"
+ },
+ {
+  "n": 613,
+  "sheet": 21,
+  "sha256": "a27d430960b879997d36d9577134fdac166ff415401bdeb98f14db99a98c8da1",
+  "verdict": "cull",
+  "reason": "car rotated vertical"
+ },
+ {
+  "n": 614,
+  "sheet": 21,
+  "sha256": "a2c59e46ff046246cd57a50b2f220597dbe388e8cc14e6e38cb0fd28dcf9d428",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 615,
+  "sheet": 21,
+  "sha256": "a30134e5bfd1f796d62a7567bdf6046325325dd8289e34d21fc13f899c5badaa",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 616,
+  "sheet": 21,
+  "sha256": "a32077edcf289002bcddd543798b1ed3b2d4e74ae778c0574c35fa743594d8c1",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 617,
+  "sheet": 21,
+  "sha256": "a3eb521c2f6beea884355db0cf3472280e3d04e75559db0f6097bcabed949e71",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 618,
+  "sheet": 21,
+  "sha256": "a3fc8b93a4a073097dc76b43887506dc0d18ce8fd0f295b1914b6196c7f8bfc4",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 619,
+  "sheet": 21,
+  "sha256": "a4536a21f2139f44932717880d42b1f255ab894a2e4b607ab1977ec7d1a6e748",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 620,
+  "sheet": 21,
+  "sha256": "a4b3ffae2f9e405e5726dc484909a6d351107b5c564fe262f2e4a6e975cc968a",
+  "verdict": "cull",
+  "reason": "old estate scan, heavy noise"
+ },
+ {
+  "n": 621,
+  "sheet": 21,
+  "sha256": "a4e1d489467a5feaf420e2cbee652db09fb15038d349d8b9b7f4fc05fec7b994",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 622,
+  "sheet": 21,
+  "sha256": "a4f092cd2d7d907f4469fe1719e7145d98cadc1443a7ddc415f17685ce7880e3",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 623,
+  "sheet": 21,
+  "sha256": "a54b790c1dacfeb4136d606f1bde82bd4be6585bae74391309642b28cff1f7ab",
+  "verdict": "cull",
+  "reason": "off-road Defender build with roof rack - non-stock"
+ },
+ {
+  "n": 624,
+  "sheet": 21,
+  "sha256": "a5691c3f2c70a6ff45b086d911fa9424a7446070c0d61ca463c7f43dde5c307a",
+  "verdict": "cull",
+  "reason": "stone statue scan"
+ },
+ {
+  "n": 625,
+  "sheet": 21,
+  "sha256": "a56d7e30e8c6e9d3f3e317f88d8101668a56c16808293db8983acfdf9bbcf2c8",
+  "verdict": "cull",
+  "reason": "trailer/container"
+ },
+ {
+  "n": 626,
+  "sheet": 21,
+  "sha256": "a5739cde4e9d6e922a21949a9bd1ec6f958592d6b302adc540efe8b65bf8d6e1",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 627,
+  "sheet": 21,
+  "sha256": "a57a996f3856c4dfcb1de090ac6e9a53adaee2ab9699a6334e79c754c6053b8d",
+  "verdict": "cull",
+  "reason": "marble bust"
+ },
+ {
+  "n": 628,
+  "sheet": 21,
+  "sha256": "a5eee13013303827f5d4ee905a221894332501157c83e7965887fd04514b7e5e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 629,
+  "sheet": 21,
+  "sha256": "a609a086784b5594304727d53d2f71dc417e5c848eba148e0ee7ec8902013e57",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 630,
+  "sheet": 21,
+  "sha256": "a60d834f5deecbb2c81f3506ae08df4562f150a81741a25789504a97d3faebef",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 631,
+  "sheet": 22,
+  "sha256": "a6260ea47f9a69e53664a5ba0fec083a3fe6426c3df2608215ff533738985123",
+  "verdict": "cull",
+  "reason": "grey slab primitive"
+ },
+ {
+  "n": 632,
+  "sheet": 22,
+  "sha256": "a6391f118d5104490bdbe457d7d9fb0dc2fde2556b56fc0fd2fadca8b1cfd31c",
+  "verdict": "cull",
+  "reason": "buggy chassis, no body"
+ },
+ {
+  "n": 633,
+  "sheet": 22,
+  "sha256": "a64f90954bb2b6c1829f6c2d49160880fef818d1fcdd722c16c9402ccc24dea0",
+  "verdict": "cull",
+  "reason": "stone relief"
+ },
+ {
+  "n": 634,
+  "sheet": 22,
+  "sha256": "a6c26b33565e2e14974dbef0c93587f2f2c736544b46954a1e6a1bc6432dd337",
+  "verdict": "cull",
+  "reason": "minivan on scan ground plane"
+ },
+ {
+  "n": 635,
+  "sheet": 22,
+  "sha256": "a6f127d4247a5eb50adbf4a97fd70b5306339e895c08c273d8901ddcd8bda188",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 636,
+  "sheet": 22,
+  "sha256": "a786520bc66d5f0291607d75f0fab3cf529b86627302ca225a1e65709fe8fb32",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 637,
+  "sheet": 22,
+  "sha256": "a80d935441ec6c879269493e769402d0252af74c4a1a7acb1cb9c442eca9972f",
+  "verdict": "cull",
+  "reason": "box lorry"
+ },
+ {
+  "n": 638,
+  "sheet": 22,
+  "sha256": "a817024ab489cc1b85eeda4f66a48b44f777de92cc978adb13ebc99579eab01e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 639,
+  "sheet": 22,
+  "sha256": "a85a06a29ba62a39cb19134a1e71cabeab609dcbea9b6b4b69f6359405272528",
+  "verdict": "cull",
+  "reason": "building fragment scan"
+ },
+ {
+  "n": 640,
+  "sheet": 22,
+  "sha256": "a85aa77d9b81915c669d30a11a687a470e1279c74aa9f019699505ca482463d0",
+  "verdict": "cull",
+  "reason": "US pickup"
+ },
+ {
+  "n": 641,
+  "sheet": 22,
+  "sha256": "a85e26614043663d7ce6eadf3b8ef5103595594feb9ce1ebc40f065cb5eba3a9",
+  "verdict": "cull",
+  "reason": "organic flesh blob"
+ },
+ {
+  "n": 642,
+  "sheet": 22,
+  "sha256": "a8e6f92ad32b9efd9d7a8aa965b623b3122e97a1fb5a3a3260af3cec5b55398a",
+  "verdict": "cull",
+  "reason": "vintage military truck"
+ },
+ {
+  "n": 643,
+  "sheet": 22,
+  "sha256": "a8e72906f90244b161fc4c9c7c13d15a6bcdf4bd8e0b9333bcc25078a65da6eb",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 644,
+  "sheet": 22,
+  "sha256": "a92519747f261aa39ad70d29b0cc57efc8dcb4efa2c9b974c2f1b7a53aed46cd",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 645,
+  "sheet": 22,
+  "sha256": "a9dbe6e5d20c141a31684c27dddfbe309a5cfb45f85a260efd02b176aea56356",
+  "verdict": "cull",
+  "reason": "small commercial van"
+ },
+ {
+  "n": 646,
+  "sheet": 22,
+  "sha256": "aa72d4989d6b8479ab47dd65f6b8d1199c92832bcbfac8bf334d080f65fbb11d",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 647,
+  "sheet": 22,
+  "sha256": "aa7961d41a33c423992ca0321404418f77b3415da922ea1b2045b6dd905a6cdc",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 648,
+  "sheet": 22,
+  "sha256": "ab15d731f74d80544fa28adac0811f963858a56e71a6cf49a42b118af5a360ad",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 649,
+  "sheet": 22,
+  "sha256": "ab2c1904e31fcbadad8a81673b4124b166681a397af33aee5d56193fbf9825db",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 650,
+  "sheet": 22,
+  "sha256": "ab2dacb01aed3f5289ae6fda72a302f640623370aaaf799052c4ecfb646a2fae",
+  "verdict": "cull",
+  "reason": "rock/moss blob"
+ },
+ {
+  "n": 651,
+  "sheet": 22,
+  "sha256": "ab3c1404925fc5777688c9784e750fd7dfada1d5f7a7583052bbf8a676138ab0",
+  "verdict": "cull",
+  "reason": "car-carrier lorry"
+ },
+ {
+  "n": 652,
+  "sheet": 22,
+  "sha256": "ab9e58eb1041853e1349aea32230c16493974628f49bae3e949aa14279f72f2e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 653,
+  "sheet": 22,
+  "sha256": "abb24328f813a8f66fb5537528efbbfe9b62027321435dd97ffe93ecd7697131",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 654,
+  "sheet": 22,
+  "sha256": "ac15e8848e6a2f822f09fcabb46cd82d60759f52d0404ba32ad7acf0edd612de",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 655,
+  "sheet": 22,
+  "sha256": "ac2a71e644db7a4e41eff6bd2c8ed2757646d51e27f7ccbe4c3958ab236375a2",
+  "verdict": "cull",
+  "reason": "house diorama"
+ },
+ {
+  "n": 656,
+  "sheet": 22,
+  "sha256": "ad80eba7a95de27b06710a98b9334c257cae7e5afeaec238301aed2709261e57",
+  "verdict": "cull",
+  "reason": "flat plane with tiny building"
+ },
+ {
+  "n": 657,
+  "sheet": 22,
+  "sha256": "ad86239e60a1ba5cf3a066605c5f6b62f1294d630f3a321ac5f9643970038fa5",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 658,
+  "sheet": 22,
+  "sha256": "ad8db85581f1b5be23dd2ea9339ece4edec3be862bfeb941e14835545c497fe7",
+  "verdict": "cull",
+  "reason": "low-detail small car"
+ },
+ {
+  "n": 659,
+  "sheet": 22,
+  "sha256": "adf5cd1b86bfe908c491b85f37846368cd81fe5029c68ccb65fd73f4067c5cdf",
+  "verdict": "cull",
+  "reason": "drum/cylinder primitive"
+ },
+ {
+  "n": 660,
+  "sheet": 22,
+  "sha256": "adfc9617d5be45d9a0f53d1716a75aae21490c52a557e977d901c7e47add91b8",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 661,
+  "sheet": 23,
+  "sha256": "ae585384608f246e7105435d0fb40a4ee1ed24950e8671feafb854a719873eed",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 662,
+  "sheet": 23,
+  "sha256": "ae7a8883defd1cba7d9983e8b2547f9b26970064ee976ed269f58add9380e100",
+  "verdict": "cull",
+  "reason": "1950s roadster - outside modern UK-road era"
+ },
+ {
+  "n": 663,
+  "sheet": 23,
+  "sha256": "aec642222cee42b147b0d35e764649cfced5da7517030c0c66f51b2ce322f26a",
+  "verdict": "cull",
+  "reason": "blobby untextured car on a ground plane"
+ },
+ {
+  "n": 664,
+  "sheet": 23,
+  "sha256": "aeeca9087c63e4f6ef807226bd079e4a6a52157149d44c02fb59ddba16507d64",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 665,
+  "sheet": 23,
+  "sha256": "aef2b67c383b9cd8c772e7f2775566f50fe130d35006ae362039324859424b9e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 666,
+  "sheet": 23,
+  "sha256": "af1e99f3a85f796039c4138b62534cfc17f15ee1572ca232554b1040e4e69076",
+  "verdict": "cull",
+  "reason": "machinery/rig scan"
+ },
+ {
+  "n": 667,
+  "sheet": 23,
+  "sha256": "af490b7fab8a488c9529f98b3387f632c8eadf6852f1ebb9c85abcd9ac9b99d6",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 668,
+  "sheet": 23,
+  "sha256": "af5377e4cd10336d78711764cf22a9fbdcf3e104d5e58b34d0b2270ed5329e76",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 669,
+  "sheet": 23,
+  "sha256": "af775145e8d8366ea0be9b72325228c4bdbef8a21c6623b7e6d6b8da608b17cf",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 670,
+  "sheet": 23,
+  "sha256": "afa856a591ef328e6a814e397613ac67cc53e3514dc252f2b517c7eff0e0e346",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 671,
+  "sheet": 23,
+  "sha256": "afc8c8b7f53983e0624c868fe3238fc4743492ca42a7df77e7bf8bc611ab7e8e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 672,
+  "sheet": 23,
+  "sha256": "afcb06aa194503d893eb2ac2e3bcde3cf2e0e9f38ca2fedb98c702e85e45fa2f",
+  "verdict": "cull",
+  "reason": "tiny red fragment"
+ },
+ {
+  "n": 673,
+  "sheet": 23,
+  "sha256": "afd20af1f8d1819f407f519ecc15d38df85a6391793f2c1455580a7045237207",
+  "verdict": "cull",
+  "reason": "green cube grid"
+ },
+ {
+  "n": 674,
+  "sheet": 23,
+  "sha256": "b0df9e3b446bde4ce09e937ef0fd03e3b199f5d31082f0baf59487a98b45eebe",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 675,
+  "sheet": 23,
+  "sha256": "b1216f3f7628ad08ba59d5f1fbc391a30df24c316044e6acb696800178007de0",
+  "verdict": "cull",
+  "reason": "saloon with blue window material artifacts"
+ },
+ {
+  "n": 676,
+  "sheet": 23,
+  "sha256": "b176631921fa7eb9d8c12561ded47e8a405d488e9ea368a686dbcb2c7c45e350",
+  "verdict": "cull",
+  "reason": "scan debris on a plane"
+ },
+ {
+  "n": 677,
+  "sheet": 23,
+  "sha256": "b1aa9900acb46b011c5c76c1fbc61bf658e95a1554dff899e931ca9c3563c15a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 678,
+  "sheet": 23,
+  "sha256": "b1b855f9426148976c86a8791b9da8055d0c384c461443530aba01560a397b57",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 679,
+  "sheet": 23,
+  "sha256": "b1f1f8285df2cb4bdccfdf5583a21160725c58cfd51557f5ce819e340823db28",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 680,
+  "sheet": 23,
+  "sha256": "b1f4129fa49cee46938062df649b81209367bf68b288f3de71c01d4e65767585",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 681,
+  "sheet": 23,
+  "sha256": "b22095fe7c5d9d8ae4edb5b8c07083cbe28bd27349681b679631ea2ec95537f3",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 682,
+  "sheet": 23,
+  "sha256": "b25fe13bc313220777b5890584a4100596233e5a7cde0aa72dc77a00c26d1bd4",
+  "verdict": "cull",
+  "reason": "stone statue"
+ },
+ {
+  "n": 683,
+  "sheet": 23,
+  "sha256": "b30babda991521aa39f2fbe9aa8e322aad0ffca28be3d85bc7075fd6f5123e90",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 684,
+  "sheet": 23,
+  "sha256": "b32b25338a02cf33a29d9e95bb8e0a77320f87c8f036fc63dfa7b0875f4fc5ea",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 685,
+  "sheet": 23,
+  "sha256": "b347ba556fdad516146ab827769d33a6bb175fc7c9455dc4885b824c9712a933",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 686,
+  "sheet": 23,
+  "sha256": "b3f8bf5a6dbbbaab2dc199a408a583d723ff0686c0813a162f844868a9d497f6",
+  "verdict": "cull",
+  "reason": "news van with satellite dish"
+ },
+ {
+  "n": 687,
+  "sheet": 23,
+  "sha256": "b4125e57cc0932ce0d0ac9b06b094beb21f72bb8e57f28587264cfec7b02ba22",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 688,
+  "sheet": 23,
+  "sha256": "b4df36d716d3e38f90aa8223f77540ccf009d53cc9e3b7c37db7e004f3b83d3a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 689,
+  "sheet": 23,
+  "sha256": "b51a29def5329a2d4810a44b720a02c14f64e81f3c8f65b349f79c17f5b6a566",
+  "verdict": "cull",
+  "reason": "Jeep floating above stilt artifacts"
+ },
+ {
+  "n": 690,
+  "sheet": 23,
+  "sha256": "b5202db2c2d54e88ec3f72216276c9601b915387b728fe3a428c97a14583772e",
+  "verdict": "cull",
+  "reason": "Vito/V-class van-based MPV"
+ },
+ {
+  "n": 691,
+  "sheet": 24,
+  "sha256": "b53058da9d47fb2eb77d99f79f34d565cac243ce4bb91347771e798f1706728d",
+  "verdict": "cull",
+  "reason": "untextured van/MPV"
+ },
+ {
+  "n": 692,
+  "sheet": 24,
+  "sha256": "b57d22dcc656971becd16a60c61a6c00bb9372aa4e3f8de0e2e6f369b25945a4",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 693,
+  "sheet": 24,
+  "sha256": "b586b3bf34d87ff86892c5636669f10d516613e82c2dcecd7d7c82576e5cb32f",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 694,
+  "sheet": 24,
+  "sha256": "b5bfb3c2637323f49a3be4adba29d7150383ea811722d79bc984023c3fdf0c2e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 695,
+  "sheet": 24,
+  "sha256": "b690bb74b22b269507969a3ddeaa89add443c4f4c39d183e8f2ef95e15a69609",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 696,
+  "sheet": 24,
+  "sha256": "b692800061fb207a4cb3aff06feb612b049ad65947119bb25394843af4085f98",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 697,
+  "sheet": 24,
+  "sha256": "b69b6466bbd5d28198d3716ada418df9c93f52caa5e6fde9bdd924340f5ae14c",
+  "verdict": "cull",
+  "reason": "car rotated vertical"
+ },
+ {
+  "n": 698,
+  "sheet": 24,
+  "sha256": "b6c676fa3e5227a4be2ec71a28f99a631d1a44479840a2e1d6bbe0ce5224eb9b",
+  "verdict": "cull",
+  "reason": "street lamp / building cluster"
+ },
+ {
+  "n": 699,
+  "sheet": 24,
+  "sha256": "b6f4e202321aa5f3cc9db18308996fb5ca2d8b3efa0c073e6439db1f63c21ee8",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 700,
+  "sheet": 24,
+  "sha256": "b7820d440e73be02c7028689eb7f76ce955146fa49dc1c9160a17fcb8ef1ff36",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 701,
+  "sheet": 24,
+  "sha256": "b7beb72a776b62133f78b7e9169c51828cce935096609d386e342ffb89c524df",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 702,
+  "sheet": 24,
+  "sha256": "b7db001cf23d0d0eff6d9e1edb5a5abcf32e414da75ba4d54fd79d4609b07872",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 703,
+  "sheet": 24,
+  "sha256": "b8783e13b146de085ab1302a3aa0edb85fc3095820749c18cb3f907476aafc72",
+  "verdict": "cull",
+  "reason": "top-down orientation"
+ },
+ {
+  "n": 704,
+  "sheet": 24,
+  "sha256": "b8b4f981a5627f293271f6d40614fd0ddc38c2a4b0f07d7af2423e48cd02e642",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 705,
+  "sheet": 24,
+  "sha256": "b8f9e6a0565065d3918ba216c8599472538618d1f50a0ff14a38da9de838b036",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 706,
+  "sheet": 24,
+  "sha256": "b908984f9ae2c513bc88cff7b6265b490bffe43453cebb324cbb421ee3bf05c3",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 707,
+  "sheet": 24,
+  "sha256": "b90f2acd965fec48ba11b5071032a77de736beab2c2a724f16de8ebbe4bdc1b0",
+  "verdict": "cull",
+  "reason": "saloon with white streak artifact through body"
+ },
+ {
+  "n": 708,
+  "sheet": 24,
+  "sha256": "b9210c10cfd248188a3e531ae14c10939a50ed9d68ceceba48642d7e88aef7f0",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 709,
+  "sheet": 24,
+  "sha256": "b958af2b21dc194e2d8439ce6adf3c3f5340fbbbe3378de8a73ddbb890760869",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 710,
+  "sheet": 24,
+  "sha256": "b992b61b62670b4994666d4b459bd6ac31a28b27d1786479a3074a5037fd57ec",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 711,
+  "sheet": 24,
+  "sha256": "ba860e99af8c4338241e3deae3ca0d98f32053f5aecbe00bb0fc6dedd310854d",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 712,
+  "sheet": 24,
+  "sha256": "baae6ab6a754259fb0113d1b42c7076db05102419c9c53922807a9bb34198d83",
+  "verdict": "cull",
+  "reason": "noisy old utility 4x4 scan"
+ },
+ {
+  "n": 713,
+  "sheet": 24,
+  "sha256": "bb5a0d115d6ad525cfbf403f7789aa76453a63376181824c0e4bcde8ef145d12",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 714,
+  "sheet": 24,
+  "sha256": "bbd4cfd6e49e3802f780b8d63ab68120cfa024e5b90822be793908258be6b8d0",
+  "verdict": "cull",
+  "reason": "near-black low-detail sports car"
+ },
+ {
+  "n": 715,
+  "sheet": 24,
+  "sha256": "bbfa75f650361ab033927ee544915e513b2e4466e7915d9e657511fcebcc5107",
+  "verdict": "cull",
+  "reason": "SUV with wireframe artifacts"
+ },
+ {
+  "n": 716,
+  "sheet": 24,
+  "sha256": "bc88608ded2bcffec4aab49bf00f7facb8df1936c426ab48e49a4c4fa81d32f1",
+  "verdict": "cull",
+  "reason": "armoured security van"
+ },
+ {
+  "n": 717,
+  "sheet": 24,
+  "sha256": "bcb5823881b25911ed507a4b301347bbec14169658da5c54ba4b8a2d3ac02f01",
+  "verdict": "cull",
+  "reason": "vintage roadster on a display disc"
+ },
+ {
+  "n": 718,
+  "sheet": 24,
+  "sha256": "bcb65861e77ee55ed3f33661823b41491193738c6c29e957540302b90d75da80",
+  "verdict": "cull",
+  "reason": "noisy Jeep rear scan"
+ },
+ {
+  "n": 719,
+  "sheet": 24,
+  "sha256": "bd32918375072353cf2c74cef40e57852026938ed486c5328b2d63e636822401",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 720,
+  "sheet": 24,
+  "sha256": "bd7bd165b140391ca9806fc73522c0f5eae8b68d4bcf8a99f4093c1996cad0c9",
+  "verdict": "cull",
+  "reason": "near-empty tile"
+ },
+ {
+  "n": 721,
+  "sheet": 25,
+  "sha256": "bd983ef519e7f8fe6e74ae8610b176491716565dae87d729263666cceb208673",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 722,
+  "sheet": 25,
+  "sha256": "bd9929851ec70029698e0fc143abeee2d9e6e6a89c8208f62d42c84ca0101787",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 723,
+  "sheet": 25,
+  "sha256": "bdb07f420560a12bff7db007753f84872492f02581152f7d21a78adf212c8002",
+  "verdict": "cull",
+  "reason": "pink camo pickup"
+ },
+ {
+  "n": 724,
+  "sheet": 25,
+  "sha256": "be4de247bf2d24968def09a68b808209fb9c3c244441b1674ab1c907231d6120",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 725,
+  "sheet": 25,
+  "sha256": "beb78f6e67c0fb2a9886209485ba7738725ad068c815bfecaf0f8600e5035358",
+  "verdict": "cull",
+  "reason": "coupe with magenta missing-texture patches"
+ },
+ {
+  "n": 726,
+  "sheet": 25,
+  "sha256": "bf4ee0ac0b810050756ea1ced596cfb35b5cd1e823c0ffa4b325c375c4a42115",
+  "verdict": "cull",
+  "reason": "black boxy scan fragments"
+ },
+ {
+  "n": 727,
+  "sheet": 25,
+  "sha256": "bf5db394b71919382853e630f449ba5e5f78283c4a39366faa97ce8a89015c90",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 728,
+  "sheet": 25,
+  "sha256": "bf88c7eda776810796e8171600c583bf93098e01124a76f3b8917ea3598b545e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 729,
+  "sheet": 25,
+  "sha256": "bf990fdeaddd184ae597f23a88a5255d50caf271b16af4bfb9bc3244ce20f8a6",
+  "verdict": "cull",
+  "reason": "untextured van rear"
+ },
+ {
+  "n": 730,
+  "sheet": 25,
+  "sha256": "c03b08029887ca47297a39247ca8497169956e863d97031dddd5b3be94afa60d",
+  "verdict": "cull",
+  "reason": "overland pickup with roof rack - non-stock"
+ },
+ {
+  "n": 731,
+  "sheet": 25,
+  "sha256": "c04a7ca444a609cecbf03863e89c232f34928d0f4b0d1c732c1838edad45603e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 732,
+  "sheet": 25,
+  "sha256": "c059836ea511c0562ec67851b90a0c09b31617228d4af531883fd2e9cb7a735e",
+  "verdict": "cull",
+  "reason": "supercar cut off and unlit, cannot judge"
+ },
+ {
+  "n": 733,
+  "sheet": 25,
+  "sha256": "c060250f27400e3da79310422743706eb6a0bd3bf86dc0e2909f04e9a9385a4a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 734,
+  "sheet": 25,
+  "sha256": "c0900c156e641cf5fecc3890a810c71d71eee398861d98bc1ccf5c9b2891dcf0",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 735,
+  "sheet": 25,
+  "sha256": "c0d6abeca85a61e3e613c1b55176263435f9ae719fa8060fa8baefdee3aa81fd",
+  "verdict": "cull",
+  "reason": "car tiny in frame"
+ },
+ {
+  "n": 736,
+  "sheet": 25,
+  "sha256": "c10fcb2ea8ea22f717ffcd3de6bbb51bcaf4a707e60916d09a81dbd0846de982",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 737,
+  "sheet": 25,
+  "sha256": "c23ef372da8e1901bf4f0e628a63cbdfa6eec9c88fc6622feb10b94c2348c40e",
+  "verdict": "cull",
+  "reason": "military jeep"
+ },
+ {
+  "n": 738,
+  "sheet": 25,
+  "sha256": "c2596a7ee7f8f2ed3889e404658d65b289d6418bb0c03a5a78fab5be927ba767",
+  "verdict": "cull",
+  "reason": "low-res car on scan ground"
+ },
+ {
+  "n": 739,
+  "sheet": 25,
+  "sha256": "c27fc020925b3b5ad4068e0ddcbc52266d199d627e13e615d5874a47bedf0ce4",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 740,
+  "sheet": 25,
+  "sha256": "c29a9fdc7cb64cb20c62f118f99666b2039eb5a07e4884976efd9b9393053322",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 741,
+  "sheet": 25,
+  "sha256": "c3710de479ef745f06ff74fdfa00e3501013ef34017db8ddf48b0bd3dcd10a79",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 742,
+  "sheet": 25,
+  "sha256": "c3c46dd2746ba22670ded62db02e185463ead4a9a0bb3f11ddeed23970afbe79",
+  "verdict": "cull",
+  "reason": "kei MPV/van"
+ },
+ {
+  "n": 743,
+  "sheet": 25,
+  "sha256": "c3eba95faee45d716a87e20ce9fcfb97964ae51ea313d0afb8a29173b7e13165",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 744,
+  "sheet": 25,
+  "sha256": "c3eec61087480b7c377c18675ce5f2925819f755edc901689b077b1d2433717c",
+  "verdict": "cull",
+  "reason": "machinery on a plane"
+ },
+ {
+  "n": 745,
+  "sheet": 25,
+  "sha256": "c3f21368c2495f02fc38a2c5c378b62b084a8861186038a52be997a742ef02a8",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 746,
+  "sheet": 25,
+  "sha256": "c42fc2e423c83fd0bd6439036c51830f5ae4208f8a8008771d2f6865fd1f22b7",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 747,
+  "sheet": 25,
+  "sha256": "c43c1763d392e682b0dc59bc98473258cfd1cd5c420c3937ea309d489d023bbb",
+  "verdict": "cull",
+  "reason": "cartoon figure"
+ },
+ {
+  "n": 748,
+  "sheet": 25,
+  "sha256": "c49633b1117d1f39d90e376869dd5fdbd5a8e9b62492fea9bee7889682654075",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 749,
+  "sheet": 25,
+  "sha256": "c4ac15082f6c891b3d9cd8f267a23ddfba85974611cd2a7338bddc115603cdbb",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 750,
+  "sheet": 25,
+  "sha256": "c4ce98d95b713b675de61c6cc003a02ea001deda6ebfbeac175c1299557c0382",
+  "verdict": "cull",
+  "reason": "untextured van"
+ },
+ {
+  "n": 751,
+  "sheet": 26,
+  "sha256": "c5b19dc4a1aac97bc4e4e11a1a13db4db1e8a916582b849735c3e263563ce558",
+  "verdict": "cull",
+  "reason": "lamp/sphere on stand"
+ },
+ {
+  "n": 752,
+  "sheet": 26,
+  "sha256": "c601bba334c7a696bcd2d92ee15c870aba903641f80d48501f0619fb5472a553",
+  "verdict": "cull",
+  "reason": "leopard-print wrap - non-stock"
+ },
+ {
+  "n": 753,
+  "sheet": 26,
+  "sha256": "c628adf67895b640608cd8ed76bb96a0b44cc33d0209031f86359ab83481e584",
+  "verdict": "cull",
+  "reason": "cartoon ice cream truck"
+ },
+ {
+  "n": 754,
+  "sheet": 26,
+  "sha256": "c6b405fcfff329234130e51ecdee6a132561b4930f82b3197d8c42cea664ed4c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 755,
+  "sheet": 26,
+  "sha256": "c6c1664727803952fda9e0189e2b476414a56439d9c62efc7ee11ac7e7e439f6",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 756,
+  "sheet": 26,
+  "sha256": "c6c8d386d16710ea314029400a35ad65a4d9c2e9bb52d5ed3937438552f76a0e",
+  "verdict": "cull",
+  "reason": "old pickup"
+ },
+ {
+  "n": 757,
+  "sheet": 26,
+  "sha256": "c6cc803e83040fcbd5669a8eeee41860e390787d181377dd2d68e7c8defdc3f1",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 758,
+  "sheet": 26,
+  "sha256": "c6f29d51136b9a6cb23c1ad1167ac5eb721aa094eaf8cacf6472108801d898bc",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 759,
+  "sheet": 26,
+  "sha256": "c6fabad83095cabb7d0b16437280104d0dd9f522ca0c53c1db53066a873f5466",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 760,
+  "sheet": 26,
+  "sha256": "c6fad4345b6d6c4e231e56b0b49d759f9337fc7d1626591c958633f1d226fcaf",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 761,
+  "sheet": 26,
+  "sha256": "c70a08eaf27106849340665db242f56236415ec100c1d2fc7b32df4d7e68cc35",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 762,
+  "sheet": 26,
+  "sha256": "c70c1b396d1ef8c178e6f45ba0f2d36ea72bbd5cc8d1db168d8ac4b19e4f2fb0",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 763,
+  "sheet": 26,
+  "sha256": "c70eabc49e40eafa52fb19f4f516c13e932d09e1236d4c9853f97a134e2433ba",
+  "verdict": "cull",
+  "reason": "toy car with lightbulb on roof"
+ },
+ {
+  "n": 764,
+  "sheet": 26,
+  "sha256": "c739f91f7ac4eeaf28555f402eda1613c66447620d5eef51d4832799b2606720",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 765,
+  "sheet": 26,
+  "sha256": "c73d0ad4299bb5eb698f688973e377971c87a9e4b87893ee9156543a4b438e99",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 766,
+  "sheet": 26,
+  "sha256": "c7feb73b1d4c4fe782c8780d91dc68ba950282a29a39e9c6f9cb1c2b9b228c44",
+  "verdict": "cull",
+  "reason": "low-poly untextured estate"
+ },
+ {
+  "n": 767,
+  "sheet": 26,
+  "sha256": "c85a75abbb8b6eccc4bc69112099b9cd33a2f2f0043472cf7b54a30ca14a891c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 768,
+  "sheet": 26,
+  "sha256": "c99db31327b3d5b4bff0bbae0071ec4007d45ee49331ead498106382a63735c7",
+  "verdict": "cull",
+  "reason": "architectural diorama"
+ },
+ {
+  "n": 769,
+  "sheet": 26,
+  "sha256": "c9a7b02b3aba0e9f2a845081bc2d730577337b0ec50741f2c6d1013ba085e0de",
+  "verdict": "cull",
+  "reason": "camping diorama"
+ },
+ {
+  "n": 770,
+  "sheet": 26,
+  "sha256": "c9d72c9d5706b22d6a970e3519cc9d7983ca66cb9f597e41c2d2d1e14ff903c0",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 771,
+  "sheet": 26,
+  "sha256": "ca2c0797b2d4976c84b25bae0ce9267a70b81919685908bbdf5828b47dc2a7eb",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 772,
+  "sheet": 26,
+  "sha256": "caaad501e1c9a5d8670e49dfdd28bf1c160858e6b0acdae2ccc7df8751e65d69",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 773,
+  "sheet": 26,
+  "sha256": "cb010be679f8e67b6a0c18e3b2e861ae5bef06173b65624acdfdb71c23041c3e",
+  "verdict": "cull",
+  "reason": "untextured van"
+ },
+ {
+  "n": 774,
+  "sheet": 26,
+  "sha256": "cb0d97b9be3a45cd1fa7e18ee5e2b881f1d94c50bc5f95942d1d5777d2451383",
+  "verdict": "cull",
+  "reason": "Van Gogh art box"
+ },
+ {
+  "n": 775,
+  "sheet": 26,
+  "sha256": "cc802e59ecba3c9ce659a01065e51703743fec7857f3fda61a9397d2d7398e7b",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 776,
+  "sheet": 26,
+  "sha256": "ccc73fb3aaf500870a1207c1627250138561d21a1e47c43e6a86363adc1ea0cf",
+  "verdict": "cull",
+  "reason": "car transporter lorry"
+ },
+ {
+  "n": 777,
+  "sheet": 26,
+  "sha256": "ccd534e23f052fac46b5a2e8f00c1d02fd067b7e5b0357bf7bf483cea24d1693",
+  "verdict": "cull",
+  "reason": "skeleton"
+ },
+ {
+  "n": 778,
+  "sheet": 26,
+  "sha256": "cd8b542afe4019657568c7044f8bd700445f6bc4f134eb2537bd0fab63f71d33",
+  "verdict": "cull",
+  "reason": "marble bust"
+ },
+ {
+  "n": 779,
+  "sheet": 26,
+  "sha256": "cda3e169f0d437b9b2c6a52b8d1a5950fc348356d304471c67e8ed3df70fd40d",
+  "verdict": "cull",
+  "reason": "van, top-down orientation"
+ },
+ {
+  "n": 780,
+  "sheet": 26,
+  "sha256": "ce22faf01d94ac55da96dd52db27cd06d5f6b46945662da381a5e2399fc2f741",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 781,
+  "sheet": 27,
+  "sha256": "ce27703569f245251cf152c8c69fe8919ee63932a7b4a44378e3315ef6709a65",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 782,
+  "sheet": 27,
+  "sha256": "cedb037cf4da03447325a377a81127b4364a625fae88c398da37f14413d050c7",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 783,
+  "sheet": 27,
+  "sha256": "cf16704df01c5d8776d95db9e3f50bc540c2fb91324b45668db5eedefe670e99",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 784,
+  "sheet": 27,
+  "sha256": "cf54076be1d574c12583d5a26b7e47a122ed3d6e39090ea0ee02319a66d08176",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 785,
+  "sheet": 27,
+  "sha256": "cf8f332dcc73ef2996c49e53d9961be651db42c96a3de462674358dfd640d4c6",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 786,
+  "sheet": 27,
+  "sha256": "cfa1d8fcaf5771a34b75ef7f9ab3ef317b1624b0ff6078e975eac34a8b1e5924",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 787,
+  "sheet": 27,
+  "sha256": "d00db2b0a2c894ab77045d8a4bc6102699c0a4c15b8c0bda1c7075f58d14fc76",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 788,
+  "sheet": 27,
+  "sha256": "d02852e23f3552408386224f040f8f74bc2e9b46dbd38af738343a3660cfbe3f",
+  "verdict": "cull",
+  "reason": "small van front"
+ },
+ {
+  "n": 789,
+  "sheet": 27,
+  "sha256": "d0321ca0a63c48fd4b1526c7dbca09eb8c5313ee896584f28d8329701556b011",
+  "verdict": "cull",
+  "reason": "crashed car with detached panels"
+ },
+ {
+  "n": 790,
+  "sheet": 27,
+  "sha256": "d059e10de2e659e2e1811d61742f655baac074df818a24cc29053dd5bcbded29",
+  "verdict": "cull",
+  "reason": "flat wooden pallet plane"
+ },
+ {
+  "n": 791,
+  "sheet": 27,
+  "sha256": "d0af6cfd76d5dc0c76dbd1da10827fa7316be4bf20705b66dec2fa07b7e227ad",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 792,
+  "sheet": 27,
+  "sha256": "d0c04c3185eca1cb43fdd72a327b83a9053daf90e9937b4c58519cd6179d1099",
+  "verdict": "cull",
+  "reason": "vintage truck with box body"
+ },
+ {
+  "n": 793,
+  "sheet": 27,
+  "sha256": "d0e49ab30b080244ee13b6dd21a843bb013687ee0d66fee731da3b4a03cb08c0",
+  "verdict": "cull",
+  "reason": "SUV on a baked ground disc"
+ },
+ {
+  "n": 794,
+  "sheet": 27,
+  "sha256": "d10d2996306ffa909d2437e789161e1a6d94ebd304d12fd732aa54e99528df36",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 795,
+  "sheet": 27,
+  "sha256": "d12549e16829f0c0b7c8b24a0823764dd1ffed3a4363d9f905266d242854b544",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 796,
+  "sheet": 27,
+  "sha256": "d13f7dbead03b2dab8e961b3691cfc5bf7e300f4cd926db74c1f57100450f7ca",
+  "verdict": "cull",
+  "reason": "cone and cylinder primitives"
+ },
+ {
+  "n": 797,
+  "sheet": 27,
+  "sha256": "d1a6e5b2bbd55b3ff6cf5f61532b68625c7229f98f9f53af61d3945f39f8ed91",
+  "verdict": "cull",
+  "reason": "trailer chassis and flat panel"
+ },
+ {
+  "n": 798,
+  "sheet": 27,
+  "sha256": "d1dfdb72c04dd75ff708685648448725c9b685020fbc99379e7b28d36ed2b0cf",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 799,
+  "sheet": 27,
+  "sha256": "d20b1a1642fc36641bcfb7b426fc81531a918ed735f7b027f9c6175bb9574198",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 800,
+  "sheet": 27,
+  "sha256": "d21bb606f205b964756f12d14d124165e1af593452e75b07d9be64f440c6aadd",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 801,
+  "sheet": 27,
+  "sha256": "d25b053d5ddfa94c802cc34303f9419598eb9cee7901e5ceb9fc61a824113416",
+  "verdict": "cull",
+  "reason": "refrigerated box lorry"
+ },
+ {
+  "n": 802,
+  "sheet": 27,
+  "sha256": "d25ca2cf75790f811ad6e2d6c45bc6dc8e2405bf0218c01ddf3b6775cafd9988",
+  "verdict": "cull",
+  "reason": "tiny car plus specks"
+ },
+ {
+  "n": 803,
+  "sheet": 27,
+  "sha256": "d2c3243f7e6c6ba86c3c82a2c737875723d6e6c4b302dd832468bbfa336e0ba6",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 804,
+  "sheet": 27,
+  "sha256": "d2f0f247be7fc7bf574fe18df5ccb562ae8eef8dfcf3c5407993be0324905509",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 805,
+  "sheet": 27,
+  "sha256": "d3305b4552c4044a881d1aa99b18a7823fb5f45d6e04a32b6ea9d629ff2f7c29",
+  "verdict": "cull",
+  "reason": "minibus"
+ },
+ {
+  "n": 806,
+  "sheet": 27,
+  "sha256": "d3a1f172c0bad6b2b7aebde3157c424b5ba585f4dd0da0b1d793ab48833fecf2",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 807,
+  "sheet": 27,
+  "sha256": "d408cb52dc9bd761dbd013e2b448d471ebad97b8e3231863941ba1e67b124296",
+  "verdict": "cull",
+  "reason": "arch/wall scan"
+ },
+ {
+  "n": 808,
+  "sheet": 27,
+  "sha256": "d57a58cb38a81d6163e193c97fa8aa50159c793f7ba6d257b0dd3f90d652aa21",
+  "verdict": "cull",
+  "reason": "derelict graffiti van"
+ },
+ {
+  "n": 809,
+  "sheet": 27,
+  "sha256": "d6212c7b4e0b037cd9adcd7d36ed02436e018dde483936f5f31a1d777f8ffc48",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 810,
+  "sheet": 27,
+  "sha256": "d63f9d46d423de2bbb86748e5bea7872bb695eb324d1045760d3959ef08975ab",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 811,
+  "sheet": 28,
+  "sha256": "d644d8672584dfbef998822c8c43082b8260db181b19fc255713ebdad08c18ec",
+  "verdict": "cull",
+  "reason": "flat scan plane"
+ },
+ {
+  "n": 812,
+  "sheet": 28,
+  "sha256": "d69b17514178f0ec8fa82a092e2f8ef5019393b502fd153bf07d23018907d1a0",
+  "verdict": "cull",
+  "reason": "1960s E-Type - outside modern UK-road era"
+ },
+ {
+  "n": 813,
+  "sheet": 28,
+  "sha256": "d6dc92292d6d5b0712c23af3fa0f2e4565d37457284f52a1c491a06820e3d5f8",
+  "verdict": "cull",
+  "reason": "Sprinter van rear"
+ },
+ {
+  "n": 814,
+  "sheet": 28,
+  "sha256": "d6e2b5e94fbca0319a2e5a89d64097bfc1e4e199b86d709a26587930012e349a",
+  "verdict": "cull",
+  "reason": "top-down orientation"
+ },
+ {
+  "n": 815,
+  "sheet": 28,
+  "sha256": "d7064585beeaf80edd2c143e9933a53a9aec06b1eb89111ee3bb7ec17f8a58f4",
+  "verdict": "cull",
+  "reason": "noisy SUV scan"
+ },
+ {
+  "n": 816,
+  "sheet": 28,
+  "sha256": "d72e6fa48bf78901cbec86aa8c1e72419fd1620a23eac2104822d36a42c228ed",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 817,
+  "sheet": 28,
+  "sha256": "d7398396281e7638ae37803655a545704571fec1bf34397234434c380f161e4c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 818,
+  "sheet": 28,
+  "sha256": "d7d71251357b77d950a4f5fb569106e201265bf495e2006a52ca95db40569e65",
+  "verdict": "cull",
+  "reason": "vintage VW camper"
+ },
+ {
+  "n": 819,
+  "sheet": 28,
+  "sha256": "d80389a1bc18d2f1f78b0be906e48d97f6de1573a200117418ca38643506a8f4",
+  "verdict": "cull",
+  "reason": "exhibition stand"
+ },
+ {
+  "n": 820,
+  "sheet": 28,
+  "sha256": "d82189456993a001db81593112698b5f94be947ca023632d95d118a0ace14766",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 821,
+  "sheet": 28,
+  "sha256": "d83d729452dad844d5a4e2a6afdd9baafc4f182f9fd0ae79dd75e75055e7c1c4",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 822,
+  "sheet": 28,
+  "sha256": "d88de0cbc366e50824947aa7edc1e4e18855a649813df8cb8a17219db8ae3f18",
+  "verdict": "cull",
+  "reason": "WW2 military jeep with gun"
+ },
+ {
+  "n": 823,
+  "sheet": 28,
+  "sha256": "d893fb4031671d0f63a05e23a8c5babac945baa121b6a1738c2b75c91467d3be",
+  "verdict": "cull",
+  "reason": "tiny low-detail Jeep"
+ },
+ {
+  "n": 824,
+  "sheet": 28,
+  "sha256": "d8d2266791b34eaeae5f0c8f33af4c93dae36cb85d3921689dccf35024274ea3",
+  "verdict": "cull",
+  "reason": "1980s estate rear - outside modern UK-road era"
+ },
+ {
+  "n": 825,
+  "sheet": 28,
+  "sha256": "d8fbc9d53b2831dea7e6b905c7863c9f8e2517627f5a2669fc3523e5d85fd70e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 826,
+  "sheet": 28,
+  "sha256": "d904ed0e677135c4b513cd371b83aba3c0e124bd210e6ec90340df450566b107",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 827,
+  "sheet": 28,
+  "sha256": "d9650b1801c217da3b92dbddef95478a3202f29c9dd94b3d970c82c65f17349e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 828,
+  "sheet": 28,
+  "sha256": "d97514a1bae361e7395ca7b9f5389d7215153e13014d8761479e3fe55470a81a",
+  "verdict": "cull",
+  "reason": "vintage pickup"
+ },
+ {
+  "n": 829,
+  "sheet": 28,
+  "sha256": "d9c5c76d870204dcba91404060d99002f344a56f4ce59167620193021decbd2f",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 830,
+  "sheet": 28,
+  "sha256": "d9fc4a6fb7bf19d953ef45eb602e29149c4ccaccfe4f4e8143cd7e69749ebdfc",
+  "verdict": "cull",
+  "reason": "wireframe/mesh overlay on body"
+ },
+ {
+  "n": 831,
+  "sheet": 28,
+  "sha256": "da12bd0d16309f1ab1e46f3593bf24074f63b187ec431316093f73a3d4228859",
+  "verdict": "cull",
+  "reason": "wooden block"
+ },
+ {
+  "n": 832,
+  "sheet": 28,
+  "sha256": "da5b1fc0dfe31321860d870b6837cdf15e348df8933301a84b011e762e6b56d0",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 833,
+  "sheet": 28,
+  "sha256": "da76053c7b621075decf5bfc630ae9841a750b79278fdd1232f0e09e0de59990",
+  "verdict": "cull",
+  "reason": "tiny car on a large ground disc"
+ },
+ {
+  "n": 834,
+  "sheet": 28,
+  "sha256": "daa3bc665fcc082863cbf98a04e717f37eb73f19dfe1460959d327eab0d87f34",
+  "verdict": "cull",
+  "reason": "house diorama"
+ },
+ {
+  "n": 835,
+  "sheet": 28,
+  "sha256": "dbb85c5be260d7cdf5795854d5f86ae982b33cade44e72b17e6a0d49b8d358d3",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 836,
+  "sheet": 28,
+  "sha256": "dc06875ce3f5ffa3d9fa782a75929037888a08c52b907b141a449e171133adf9",
+  "verdict": "cull",
+  "reason": "car rotated vertical"
+ },
+ {
+  "n": 837,
+  "sheet": 28,
+  "sha256": "dc116f1cac6845cffdcb67904aa6614316f1ec4d4278b81e8d279cf6a4cada00",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 838,
+  "sheet": 28,
+  "sha256": "dc50687a327c9a1e2800c2b536f6f0f2906f87d3c58e38ee2a5ef1ce5072b88a",
+  "verdict": "cull",
+  "reason": "computer monitor"
+ },
+ {
+  "n": 839,
+  "sheet": 28,
+  "sha256": "dc514c640c483e99dd1fa8300dc98c70ed345e712437c37c995835a742de3bfe",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 840,
+  "sheet": 28,
+  "sha256": "dc7cbc88ef394d0e5c7d325feb1c69609c5fd6ed964105a4edc920359c9a655b",
+  "verdict": "cull",
+  "reason": "rally livery - non-stock"
+ },
+ {
+  "n": 841,
+  "sheet": 29,
+  "sha256": "dceddba93755eac6953c1e287d16be701e814b0446afa40a820d7ed9db3c2370",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 842,
+  "sheet": 29,
+  "sha256": "dd3a9a4c8dfb2fe97eade5d0cced2e484d9dcd8cddda16e608d005795d97b851",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 843,
+  "sheet": 29,
+  "sha256": "dda3f4adc8c1cf5677255bdf474b5ecb873bdef5dab5218395ea3627b8ee4c62",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 844,
+  "sheet": 29,
+  "sha256": "dda57ed6c225d9aff97fba85bb981ab6811ce3b1ad2006f5aeac2692d195a4b6",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 845,
+  "sheet": 29,
+  "sha256": "ddde6161326df93caaba061f378530e59cc47a2fd063ff00023e2be8e9ff830e",
+  "verdict": "cull",
+  "reason": "pickup posed on a ramp/wedge prop"
+ },
+ {
+  "n": 846,
+  "sheet": 29,
+  "sha256": "de0a03ba8f1162f6625f54bb175df8f6422315441eda63a3339d872654bea210",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 847,
+  "sheet": 29,
+  "sha256": "de3294c9b197bef61a1743d7c8936ae16053e4feeb967af1d17c0fa3d43dbc03",
+  "verdict": "cull",
+  "reason": "truck tractor unit"
+ },
+ {
+  "n": 848,
+  "sheet": 29,
+  "sha256": "dead9ce72f5ba6e3a500b5786af4aba84eae7bc1ecffaef37ea0d8383fe02a4c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 849,
+  "sheet": 29,
+  "sha256": "debcb3aa4b7a0a3e9a51820f56f801569e463a9ad60ce689aefbaf27bc4bb9ef",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 850,
+  "sheet": 29,
+  "sha256": "dececfdf9758ef1715d72a9d67ac24463a453cf8bd3e8e658861f3d0059b817b",
+  "verdict": "cull",
+  "reason": "WW2 military jeep"
+ },
+ {
+  "n": 851,
+  "sheet": 29,
+  "sha256": "df20bc46f4c78a88b5d3bc7bdaa3f754aa42956bb5da0ea0bd9b6fe546390d49",
+  "verdict": "cull",
+  "reason": "Berlingo van"
+ },
+ {
+  "n": 852,
+  "sheet": 29,
+  "sha256": "df36bdb6301e1318b9d3afbc7666d9a897a8c3673d21dbf09c60bbd14c1a3d5a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 853,
+  "sheet": 29,
+  "sha256": "df38dd8992629d7c97c060035e1f2e47b585c003e3ac6ec676fb56a8818aaecc",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 854,
+  "sheet": 29,
+  "sha256": "df4ff5fcc4d1933b72c8ef3b5b106fc67b763bd7385a284cd3fc81f19e054bb5",
+  "verdict": "cull",
+  "reason": "agricultural harvester header"
+ },
+ {
+  "n": 855,
+  "sheet": 29,
+  "sha256": "dfc440a9036abb61b3a61ee3743055d6f351b4a8d2269621b706d03095725434",
+  "verdict": "cull",
+  "reason": "statue/stone scan fragments"
+ },
+ {
+  "n": 856,
+  "sheet": 29,
+  "sha256": "dfdd44617b9b8283d86e5a130a6aa59799c4ecdcd8e4be3c70bf4aaea91486a8",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 857,
+  "sheet": 29,
+  "sha256": "dfdf203d8a237532d0e634eb72d9d30aeb41f903a87153728e47e5a9ea18758a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 858,
+  "sheet": 29,
+  "sha256": "dff4c4498dfde862dfa7699871124e7cc444a77cb6352738aefdb1120b4ad165",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 859,
+  "sheet": 29,
+  "sha256": "e03675c6c790511c5c1b01709cd786de4272a69370d76220206a0257fc1be952",
+  "verdict": "cull",
+  "reason": "leather bag/basket scan"
+ },
+ {
+  "n": 860,
+  "sheet": 29,
+  "sha256": "e0842ee01367996938836571db68c754bb8aad96ef0a486cbdc4a2ff5067745c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 861,
+  "sheet": 29,
+  "sha256": "e14bc619f9b09244173feeecf754280e6c1db95de02e503a77b7f80940843489",
+  "verdict": "cull",
+  "reason": "tiny speck, no readable vehicle"
+ },
+ {
+  "n": 862,
+  "sheet": 29,
+  "sha256": "e1a5c052a8f996f8eb47d92b667721f582e56109e4a0d9743eeb84cd2a3a853a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 863,
+  "sheet": 29,
+  "sha256": "e1fc6b87d00b5f15a8c00d467fbb56e561ea3b9fc621d738c673614fb0a991c8",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 864,
+  "sheet": 29,
+  "sha256": "e2053c2714b9b15276baf53e85cd1c345c2a931be7a0fa7beb753a77f94ff080",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 865,
+  "sheet": 29,
+  "sha256": "e23c5ffe229a312eb376d41f7d0cb993386614479b450e7130800ec54e7a130d",
+  "verdict": "cull",
+  "reason": "toy/cartoon car"
+ },
+ {
+  "n": 866,
+  "sheet": 29,
+  "sha256": "e284ae8136e2cc8eeb1837b41c6429f9d43eb28c4d092e6328dd6716379ce21e",
+  "verdict": "cull",
+  "reason": "classic Fiat 500 - outside modern UK-road era"
+ },
+ {
+  "n": 867,
+  "sheet": 29,
+  "sha256": "e3db3bd23d3986f7432773db7873e911fecee78ca291470090670182b1bc0dbd",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 868,
+  "sheet": 29,
+  "sha256": "e40fab4172f80b8e342c2acfb8c14e62c56eba63083f3456f609d47af079fb7f",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 869,
+  "sheet": 29,
+  "sha256": "e421307cb21c15ce1fce53e350a5ca1a09fce1234f6f92b9dba9b33c3ad5a96d",
+  "verdict": "cull",
+  "reason": "container/skip"
+ },
+ {
+  "n": 870,
+  "sheet": 29,
+  "sha256": "e4c735ccdd0b3d44a2474de5ff51375d9d8b2cea302f05be149afacdf69de5d1",
+  "verdict": "cull",
+  "reason": "diorama fragment"
+ },
+ {
+  "n": 871,
+  "sheet": 30,
+  "sha256": "e4d336d19e5a5ff55b61532838d2d92312a87459cdcca22ac2d7a9164b77e6d4",
+  "verdict": "cull",
+  "reason": "scan blob"
+ },
+ {
+  "n": 872,
+  "sheet": 30,
+  "sha256": "e4d9445c333acfe70ed8aaaa800b1c79a60d1702cdc2db0bdffc5124450aff0e",
+  "verdict": "cull",
+  "reason": "flattened/squashed car"
+ },
+ {
+  "n": 873,
+  "sheet": 30,
+  "sha256": "e4ddc7d1bd3cfadbada92cb76859bc8eebad18defd7f7d766fde9ce880a4ab4e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 874,
+  "sheet": 30,
+  "sha256": "e4eb8e440415cf74ce9776ada0aa3728ef4dbe45a7602b929ee582fc5e8bee26",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 875,
+  "sheet": 30,
+  "sha256": "e609709edd788fe6a2ab5bbc096f6e070633946f795f3656504f4473235eff78",
+  "verdict": "cull",
+  "reason": "blocky toy-grade G-class"
+ },
+ {
+  "n": 876,
+  "sheet": 30,
+  "sha256": "e63ee65714e4c8015af7db92b59b625131349aa890166e69e1972a7a87f695c2",
+  "verdict": "cull",
+  "reason": "flat sliver"
+ },
+ {
+  "n": 877,
+  "sheet": 30,
+  "sha256": "e6439ad1dc64dd2e1ae53a7e529bd69971ab78f3d48dafa0b2440b26e6d7c5f9",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 878,
+  "sheet": 30,
+  "sha256": "e66da773b310b28759ccc606ae5147764a03927d12fc8d837377b221806cb003",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 879,
+  "sheet": 30,
+  "sha256": "e693ec4d4c948ade2ea011d92d50c02ecbaf0985bc1490a69a113866fd93f4a3",
+  "verdict": "cull",
+  "reason": "rusty vehicle scan on a plane"
+ },
+ {
+  "n": 880,
+  "sheet": 30,
+  "sha256": "e708f8b962b2d813d79dc3fce0cc278eec581674962273124a9458cea918d74f",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 881,
+  "sheet": 30,
+  "sha256": "e77951e04cac9fcaa2aae274068fc5e99482574022e99c84461c4d5c9f7310ab",
+  "verdict": "cull",
+  "reason": "thin spike artifact"
+ },
+ {
+  "n": 882,
+  "sheet": 30,
+  "sha256": "e79543874bce8fdfd702b96ee4a7337a0a0a323ba0982103446aa126a2c512c6",
+  "verdict": "cull",
+  "reason": "box lorry"
+ },
+ {
+  "n": 883,
+  "sheet": 30,
+  "sha256": "e7c94fdec72b2ec908b2b4ac29df72b662d8a3842152a6530ca6af620c574bc0",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 884,
+  "sheet": 30,
+  "sha256": "e8a982ca215c1701248b6d072d64feebce1e05ae42d5d0d5ee7b8acb33d641a2",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 885,
+  "sheet": 30,
+  "sha256": "e8aa75578843e05bb3ea38c93a7f5ad8e964b9dbf9aa1c508bbbe60418df6c81",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 886,
+  "sheet": 30,
+  "sha256": "e8af3ed3f5bde8e73072ecb210910bbe794e7fca694a5650fe49ca259179cf34",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 887,
+  "sheet": 30,
+  "sha256": "e8c0f661180ac30f4c1dc92502f4563afa8f41b623747af176019b27e70e7d6d",
+  "verdict": "cull",
+  "reason": "police estate livery"
+ },
+ {
+  "n": 888,
+  "sheet": 30,
+  "sha256": "e97af8c6c6491aa0a23ca841c1c5aa403f2da432a43ec43ccb312ef20125ef44",
+  "verdict": "cull",
+  "reason": "service/ice-cream van"
+ },
+ {
+  "n": 889,
+  "sheet": 30,
+  "sha256": "e988a9d811e7389be3a7a91715b447ce5e87986644ae28ab22a83e76b45d156f",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 890,
+  "sheet": 30,
+  "sha256": "e9bccc6a7bf84af7973e4056d243de88e29732d6adf01ac0545229df60835ca4",
+  "verdict": "cull",
+  "reason": "US semi truck"
+ },
+ {
+  "n": 891,
+  "sheet": 30,
+  "sha256": "ea2768f61b862fb86ca419005fcab24d532813b3562ad270ef43e4bcef8ef56e",
+  "verdict": "cull",
+  "reason": "Ford Model T - vintage"
+ },
+ {
+  "n": 892,
+  "sheet": 30,
+  "sha256": "ea2d07dca7a08845a2084890610ded53da22a07be0beb57766efbdca9df5a894",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 893,
+  "sheet": 30,
+  "sha256": "ea3af9ab05ce911242bcb5e29eae21288595bac7cc875a0748a076d27c73363e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 894,
+  "sheet": 30,
+  "sha256": "ea9997c795dba8c80864b810813136dcdd68d9d4b7bc65523df05cdfa185f9e2",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 895,
+  "sheet": 30,
+  "sha256": "ead4091cd0716f834d222a009f99f5d3f34f778f55220a8fc9eadb45e0ae4472",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 896,
+  "sheet": 30,
+  "sha256": "eafac61fd5859c9d03d29add440683a29176908af5141bb25fd38d860f701806",
+  "verdict": "cull",
+  "reason": "flat scan of a trailer"
+ },
+ {
+  "n": 897,
+  "sheet": 30,
+  "sha256": "eb077238ed594b9c6a4186c09b53e47c1bc0c9712a7ed85b4ce570968c3bf40e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 898,
+  "sheet": 30,
+  "sha256": "eb5598dd8cbb666431557365526bc928347634ec65535b13ab506ed9a1a3eef6",
+  "verdict": "cull",
+  "reason": "rickshaw/tuk-tuk"
+ },
+ {
+  "n": 899,
+  "sheet": 30,
+  "sha256": "eb788c5c40115bdc37eaceb9de0df3e042c87b0f9c3ed47618e5df9d78b654e6",
+  "verdict": "cull",
+  "reason": "Bipper van"
+ },
+ {
+  "n": 900,
+  "sheet": 30,
+  "sha256": "ebb0472c97d536df2d956c3142fa02aeff581e7b367aa026cc24dea87e5213c0",
+  "verdict": "cull",
+  "reason": "flat white panel"
+ },
+ {
+  "n": 901,
+  "sheet": 31,
+  "sha256": "ec00f56dd0194ae98376dac05fd1455d5d02c6a921c76f484570b55149bee47c",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 902,
+  "sheet": 31,
+  "sha256": "ec3164015a21918227d4a5e2c3e2d75b71c1b74e5cf54156174fec4c64762cde",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 903,
+  "sheet": 31,
+  "sha256": "ec55a476e137f1df402ebb02319e1874e4de7311f9ac8caa3f5b1f9d8e62b872",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 904,
+  "sheet": 31,
+  "sha256": "ec6758ecf58f97a8a5976ff6849dd7996118bc10bc710b1c40b304ffb7dd2635",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 905,
+  "sheet": 31,
+  "sha256": "ed03b914942ebffbaaed9ad6c43a1dc17c65551e100f4b336cb32dfb28dbb19a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 906,
+  "sheet": 31,
+  "sha256": "ed5fed881b1027bbcf75f6f04b782da2e52b5e627f5cbcdb534daf1820079c05",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 907,
+  "sheet": 31,
+  "sha256": "ed796410f518e1eec9476c7ad3a80ef65726d193218e2106c66b9029abb6b245",
+  "verdict": "cull",
+  "reason": "horse-drawn cannon/carriage"
+ },
+ {
+  "n": 908,
+  "sheet": 31,
+  "sha256": "edec2dcfd22287416001956f60febf072079bae305e2bef4d30aea84b83db08e",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 909,
+  "sheet": 31,
+  "sha256": "eef1234d3e0748c7b3dc5cbed6e56e6fb63c1e0625f8e0b6306b02d592a73486",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 910,
+  "sheet": 31,
+  "sha256": "ef9fd8e4ab865911a8e4fbfa45aef75c20a7ea000b9f229950ff142498f07f45",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 911,
+  "sheet": 31,
+  "sha256": "efb345b909926a313ecba0204f8028c27d0505bb3744f4a0d94f3c1aa619610c",
+  "verdict": "cull",
+  "reason": "building diorama"
+ },
+ {
+  "n": 912,
+  "sheet": 31,
+  "sha256": "efd43cb2c61f7736289adc23f6ba45dd6522c8d41ff54cd9cbd5794562de4878",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 913,
+  "sheet": 31,
+  "sha256": "f05e82fd21e379b77c5533d550db589c7608e33c37a432915adb86c32a9dccd8",
+  "verdict": "cull",
+  "reason": "articulated lorry"
+ },
+ {
+  "n": 914,
+  "sheet": 31,
+  "sha256": "f1015da5358cc9e1b71c7708c1363e7a962e5ddcc04f7a6f942ffdc66ea990cf",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 915,
+  "sheet": 31,
+  "sha256": "f11c2fbeb6203552ddbb7284037f866de2c684f631dafeacabfe0457070ba804",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 916,
+  "sheet": 31,
+  "sha256": "f1b0d73b91e3ce160a6f1415a69239c32be4bc635728e3088b3f4c70586d1fcd",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 917,
+  "sheet": 31,
+  "sha256": "f1d28bf15ebe51975e2f358394ec9ed181e7210caa54ec7a0c2ca0ddd1f3f2d9",
+  "verdict": "cull",
+  "reason": "hatch with green window material artifacts"
+ },
+ {
+  "n": 918,
+  "sheet": 31,
+  "sha256": "f1d76a281059d66c06b1b8819bf7e5e4e623a4e3edf33d2ce355254c65c1ce34",
+  "verdict": "cull",
+  "reason": "low-quality car on scan ground"
+ },
+ {
+  "n": 919,
+  "sheet": 31,
+  "sha256": "f1ed95003bed91bf4ba9e45abce5e5ed2272abfd7a1eb7e2489518b5a1fdec62",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 920,
+  "sheet": 31,
+  "sha256": "f1f3caa5784b8639ec13902ae9cf352b6b0351fac8816d9b140fc9ab43e79e04",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 921,
+  "sheet": 31,
+  "sha256": "f325c05d4e7a25d268a76f7d8ae45372c64400f58c9ab080dc385be645d8ce71",
+  "verdict": "cull",
+  "reason": "flat white slab"
+ },
+ {
+  "n": 922,
+  "sheet": 31,
+  "sha256": "f32ea48a56be135909286b6a20690419ac92410015437bc69fa8c9da475f8cd2",
+  "verdict": "cull",
+  "reason": "classic Fiat 500 - outside modern UK-road era"
+ },
+ {
+  "n": 923,
+  "sheet": 31,
+  "sha256": "f35eb7d5e360c1dfb165f54e4f827af0a8f20fa1676ddb0b0c2f82a3f7be24d4",
+  "verdict": "cull",
+  "reason": "1970s muscle car - outside modern UK-road era"
+ },
+ {
+  "n": 924,
+  "sheet": 31,
+  "sha256": "f40525befb931d166f824481c4fc577264e71fa4d35be6b4666014d6449f9d4d",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 925,
+  "sheet": 31,
+  "sha256": "f40f60a560699b176c6baeb002c9f1e7702cc0dc9ae36aa74e8af49e00ff96af",
+  "verdict": "cull",
+  "reason": "statue"
+ },
+ {
+  "n": 926,
+  "sheet": 31,
+  "sha256": "f43d66a221ec9e95d7a60fe0766737520fa68f6c9929a7c53c83587c22e6a11c",
+  "verdict": "cull",
+  "reason": "blob on a plane"
+ },
+ {
+  "n": 927,
+  "sheet": 31,
+  "sha256": "f464107c63202c7a619f030ba87d85e5c19c5d5bd9e904d4a68c9c95cfbf46cf",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 928,
+  "sheet": 31,
+  "sha256": "f47953574425ceeee7b63a3b60da7d9e7a56d42a96b41476c7527ac25faf660f",
+  "verdict": "cull",
+  "reason": "low-detail car on a display disc"
+ },
+ {
+  "n": 929,
+  "sheet": 31,
+  "sha256": "f4d4e7f9b9d2960ede9a011022cba5443de692c312aeb90408b359b2429bb9ed",
+  "verdict": "cull",
+  "reason": "pickup truck"
+ },
+ {
+  "n": 930,
+  "sheet": 31,
+  "sha256": "f538118351559f7d02160849d2d2dffadb283fa601a01a188788fa1338a59fec",
+  "verdict": "cull",
+  "reason": "human bust"
+ },
+ {
+  "n": 931,
+  "sheet": 32,
+  "sha256": "f6fcded3b0c97aa6a714ef2bd8077a1e31294d0d0aab3930ac9edef8a4b2664b",
+  "verdict": "cull",
+  "reason": "noisy SUV front scan"
+ },
+ {
+  "n": 932,
+  "sheet": 32,
+  "sha256": "f7039e49bbc40e6acb414bfc7c25a71d34d913c5cc511e5fe4e735dfd872a3fd",
+  "verdict": "cull",
+  "reason": "1980s Countach - outside modern UK-road era"
+ },
+ {
+  "n": 933,
+  "sheet": 32,
+  "sha256": "f72d5326e267394aa5363a3b66fa3c1249bcbebe317f162e450a2c100c1c2721",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 934,
+  "sheet": 32,
+  "sha256": "f783eed1ea17cab0f4acc4fafe35143672b6a518cde7dd4417a71ae6d52a905a",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 935,
+  "sheet": 32,
+  "sha256": "f794cdcab7ed008ad35e0f6eb77384ef4ba0b4da3b82803c8048b4ea5fe18687",
+  "verdict": "cull",
+  "reason": "classic Beetle - outside modern UK-road era"
+ },
+ {
+  "n": 936,
+  "sheet": 32,
+  "sha256": "f7eefed3a8664fbed8fa6dd44084ea9ef790bcf7ebd21dfb54e1fc0f5e27d26d",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 937,
+  "sheet": 32,
+  "sha256": "f82ebc158a77f375d302e96955d5d22dc3c9d8ede9f06ae243fa46cc130cd92b",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 938,
+  "sheet": 32,
+  "sha256": "f82ff92f37db794f9150cd76a1a4a0a70abccd7cba590d42407804d26e1f19e3",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 939,
+  "sheet": 32,
+  "sha256": "f969dcc7c21c763feb849d206f2f0c39ec496879d84db50cc7c0c1872198ddb2",
+  "verdict": "cull",
+  "reason": "car tiny in frame"
+ },
+ {
+  "n": 940,
+  "sheet": 32,
+  "sha256": "f97586a375d0101e6cea30b4f0d8748fe85f7cfda12891fabf55a067ce59d006",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 941,
+  "sheet": 32,
+  "sha256": "fa16c7361928987aea801b5c5d913d3527cd4f658af5cdc390e8ab01e4e18810",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 942,
+  "sheet": 32,
+  "sha256": "fac09d53600a20f193e70e1ad0c16d5bb52a86930fedede2126d8bcfe648d868",
+  "verdict": "cull",
+  "reason": "abstract sculpture"
+ },
+ {
+  "n": 943,
+  "sheet": 32,
+  "sha256": "faec014ac9e046c521a03e550f6ea823fba133a5ae73f0006f2164df90fff8c5",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 944,
+  "sheet": 32,
+  "sha256": "fb2f81545f58ac06ca3882545122d66b8980ac36310bb692c40b3d8e42d6b749",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 945,
+  "sheet": 32,
+  "sha256": "fb4f2f93c62a8ececb0f7b6261782f8766cc6f94e5bf607ebd559407f18bdedf",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 946,
+  "sheet": 32,
+  "sha256": "fba1cbc1c72f8fb72ecd410aa1811a019ee114847de0cca2f7e858e18b1acccc",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 947,
+  "sheet": 32,
+  "sha256": "fbc01ac54b922a55449f598aed0bfa0175559fb3b9d22e14935c6381b360fc53",
+  "verdict": "cull",
+  "reason": "classical temple building"
+ },
+ {
+  "n": 948,
+  "sheet": 32,
+  "sha256": "fc7d17be3ac2da398a6e0068568dbaaeee0d15262275cda58b9bb9bbb46b253e",
+  "verdict": "cull",
+  "reason": "Venice building diorama"
+ },
+ {
+  "n": 949,
+  "sheet": 32,
+  "sha256": "fc85a66adf5a1c52ac2bbec0d6a9be1abc8433daf40d50c12a6ed89bd6d7fc16",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 950,
+  "sheet": 32,
+  "sha256": "fc8a08377c68243ff9ecfa7d02a299623b3b06f3a130b91decdd6a263cc89f59",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 951,
+  "sheet": 32,
+  "sha256": "fce3eb5f9d68660cab3d59326e4dac6d3d188df73e01c22c28f4090dfcfc932b",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 952,
+  "sheet": 32,
+  "sha256": "fd3d46c79ba4a6d70cd926537034d5052546388f0eefc0028b9473235e244df5",
+  "verdict": "cull",
+  "reason": "derelict VW bus with junk load"
+ },
+ {
+  "n": 953,
+  "sheet": 32,
+  "sha256": "fd401c16ad95082c96d5a5cee4acfb71b5289518774b967bdce0cc7343ed7953",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 954,
+  "sheet": 32,
+  "sha256": "fdb50e8260b8c0a0c0bebbce8f7c99e5979644578856ef32974f0c40a57b3884",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 955,
+  "sheet": 32,
+  "sha256": "fdd54a4fa96c4f313fad76cdf8a7d9b1b6a791ae8fd84cec0f85bde40f0600d7",
+  "verdict": "cull",
+  "reason": "noisy car front scan"
+ },
+ {
+  "n": 956,
+  "sheet": 32,
+  "sha256": "fe14d78e69d78df452c5d0c3e677eb893265870c89170a34c70304369f47b829",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 957,
+  "sheet": 32,
+  "sha256": "fe428ed21038cef048535a50174872a2c99b49b16dc3bb5e3a4ea4e344ba03c6",
+  "verdict": "cull",
+  "reason": "scan debris on ground"
+ },
+ {
+  "n": 958,
+  "sheet": 32,
+  "sha256": "fe5035f721d06eaa9e7f0b3545922eba0a8a37549780aa222b8f24da9e0342a3",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 959,
+  "sheet": 32,
+  "sha256": "fe53f232ce41d490fdd6a4e6290d2839b3d66e1b21ae8140ec208cee29e05223",
+  "verdict": "cull",
+  "reason": "shapeless white scan"
+ },
+ {
+  "n": 960,
+  "sheet": 32,
+  "sha256": "fe7b8c7d6b48263ebdc2617ee0ba861b692cc4e86b641bbf6cc4946cb7b5fea2",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 961,
+  "sheet": 33,
+  "sha256": "febf1ffc74a5f98fff96e74414cf767bbaa7a5c641792cc42317b215195e5261",
+  "verdict": "cull",
+  "reason": "WW2 Willys jeep"
+ },
+ {
+  "n": 962,
+  "sheet": 33,
+  "sha256": "fed1de2fe1314d98171be8221807e6665d87a45b68556b890a3f277453182492",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 963,
+  "sheet": 33,
+  "sha256": "ffbcd2437c8618928e9dcd6b86f52b1647d5117850a1a47f6271afbe8505ed6d",
+  "verdict": "keep",
+  "reason": ""
+ },
+ {
+  "n": 964,
+  "sheet": 33,
+  "sha256": "ffc6ba0a51fb71ffa05e119deaf588840abde87b6c83df7d3e7631546f926c11",
+  "verdict": "keep",
+  "reason": ""
+ }
+]
