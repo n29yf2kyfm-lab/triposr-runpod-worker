@@ -10,21 +10,56 @@ make+model join reports.
 
 ---
 
-## The cheap win: `ford-kuga-v1` is not a quality failure, it is rotated 90°
+## CORRECTION — `ford-kuga-v1` is genuinely broken, not merely rotated
 
-Quarantined with `quarantineReason: None` — no justification was ever recorded.
-Its poster (`finished/ford/ford-kuga-v1/chrome-blue-metallic.jpg`) shows the car
-**lying on its side**, with the number plate consequently mirrored.
+**My first read of this asset was wrong and is retracted.**
 
-Everything the premium bar actually asks for is already there: deep metallic
-paint with clean reflections, transparent glass with a visible interior, correct
-proportions, sharp shut lines, real badges. **This is a transform defect, not a
-model defect**, and the Kuga is a top-10 UK seller.
+I inferred from the poster (`chrome-blue-metallic.jpg`) that the car was a premium
+model lying on its side — a transform bug worth a free recovery. Then I rendered
+the actual GLB through the render endpoint. It is a **collapsed shell**: the body
+is flattened to a slab, the wheels are detached and floating, and the plate is a
+separate sliver beside the car.
 
-Fix: correct the root rotation, re-bake the GB plate, re-render, un-quarantine.
-No sourcing, no licence work, no new asset. Highest value-per-pound on this list.
+Measured on the mesh (which decodes in trimesh, 186k verts, so these numbers are
+real): `L 2.96 × W 1.78 × H 0.37`, i.e. ratios `1 : 0.60 : 0.125`. A Ford Kuga is
+`1 : 0.41 : 0.36`. It is 147% too wide and 35% of the height it should be, and
+**no rotation changes a ratio**. All four colour variants are identically
+collapsed.
 
----
+The poster was rendered from an earlier, healthy state of this asset; the
+finishing pipeline flattened it afterwards. `technicalStatus: "failed"` was
+accurate — nobody wrote the reason down, which is why it looked recoverable.
+
+**A poster is not evidence about the GLB it is named after.** Cost of learning
+that: two render jobs, about a penny.
+
+Recovering the Kuga means re-processing from the CC-BY source
+(`sketchfab.com/3d-models/c1605bbcdf2e4aafb1c66fc8aacf6f19`, "Ford Kuga ST-Line"),
+not editing the finished file — and first finding what in the finishing pipeline
+flattens a model, since that bug produced this.
+
+## Do NOT trust trimesh extents on this library
+
+I then swept all 366 approved assets measuring bounding-box proportions, and got
+"331 of 366 squashed". **That result is invalid.** 267 of them reported extents of
+exactly zero, which is not a flat car — it is trimesh failing to decode the file.
+
+Every asset checked is **Draco-compressed**. `CLAUDE.md` line 207 already says so:
+
+> Draco GLBs render BLANK in the local model-viewer harness unless
+> dracoDecoderLocation points at the local decoder. A blank render or trimesh
+> score of a _uc.glb proves nothing about the model.
+
+The warning was already written down and I walked into it anyway. Some Draco files
+partially decode and return plausible-looking wrong numbers, which is worse than
+failing outright — `porsche-911-carrera-4s-v1` returned `1 : 0.199 : 0.186`, and
+that number means nothing.
+
+**The correct instrument is the render path**, which uses Blender and decodes Draco
+properly — i.e. the contact-sheet review that already exists
+(`pipeline/qc/review_sheets.py`, reusing existing posters at zero render cost),
+with the owner calling the numbers, exactly as `CLAUDE.md` requires. Any
+catalogue-health claim must come from that, not from a local mesh library.
 
 ## Gaps that already have an asset (7)
 
