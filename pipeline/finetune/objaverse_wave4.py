@@ -25,12 +25,15 @@ MIN_FACES = 40_000
 BAD = re.compile(r"(?i)\b(low ?poly|lowpoly|low-poly|game ?ready|gameready|game ?asset|for ?games|"
                  r"unity|unreal|ue4|ue5|roblox|minecraft|fortnite|gta|forza|nfs|need ?for ?speed|"
                  r"rocket ?league|beamng|assetto|simulator|mobile ?game|cartoon|toon|stylized|"
-                 r"stylised|anime|chibi|cute|voxel|blocky|fantasy|sci-?fi|scifi|futuristic|alien|"
+                 r"stylised|anime|chibi|cute|voxel|blocky|fantasy|sci ?fi|scifi|futuristic|alien|"
                  r"cyberpunk|apocalypse|zombie|mad ?max|steampunk|hover|flying ?car|toy|miniature|"
                  r"papercraft|origami|clay|sculpt(ing)? ?practice|study|exercise|tutorial|"
                  r"my ?first|beginner|practice|wip|placeholder|dummy|free ?(download|asset|model)|"
                  r"rigged ?for|scan|photogrammetry|lidar|wreck|destroyed|damaged|burnt|rusty|"
-                 r"abandoned|sticker|logo|badge|diorama|scene|pack|bundle|collection)")
+                 r"abandoned|sticker|logo|badge|diorama|scene|pack|bundle|collection)\b")
+# NB the trailing \b is load-bearing. Without it this pattern matched PREFIXES:
+# "toy" inside "Toyota", "scan" inside "scanner", "pack" inside "Packard".
+# Measured 2026-07-27: 15 Toyotas in the training set were flagged as toys.
 
 
 BRANDS = (r"bmw|audi|mercedes|benz|volkswagen|vw|ford|toyota|honda|nissan|mazda|kia|"
@@ -38,21 +41,61 @@ BRANDS = (r"bmw|audi|mercedes|benz|volkswagen|vw|ford|toyota|honda|nissan|mazda|
           r"mitsubishi|suzuki|dacia|tesla|porsche|jaguar|lexus|mini|dodge|chevrolet|chevy|"
           r"gmc|cadillac|chrysler|jeep|land ?rover|range ?rover|defender|lotus|bentley|"
           r"rolls ?royce|aston ?martin|maserati|alfa|lancia|infiniti|acura|genesis|"
-          r"isuzu|daihatsu|ssangyong|cupra|smart|saab|mg\b")
+          r"isuzu|daihatsu|ssangyong|cupra|smart|saab|"
+          # marques whose absence made VEHICLE_NAME reject real cars: measured
+          # 2026-07-27, 31 genuine cars in the training set failed the name test
+          r"ferrari|lamborghini|mclaren|lincoln|polestar|byd|alpina|pontiac|"
+          r"bugatti|koenigsegg|pagani|rivian|polaris|abarth|ds ?automobiles|"
+          r"wuling|chery|great ?wall|haval|ora|nio|xpeng|lynk|geely|"
+          r"mg\b")
 BODY = (r"sedan|saloon|hatchback|hatch ?back|coupe|convertible|cabriolet|cabrio|roadster|"
-        r"suv|crossover|4x4|estate car|station ?wagon|pickup ?truck|pick-?up|"
+        r"suv|crossover|4x4|estate car|station ?wagon|pickup ?truck|pick ?up|"
         r"panel ?van|cargo ?van|minivan|mpv|people ?carrier|transit|sprinter|transporter")
 VEHICLE_NAME = re.compile(r"(?i)\b(" + BRANDS + r"|" + BODY + r")\b")
 
-# non-car vehicles that would teach the wrong prior
-WRONG_CLASS = re.compile(r"(?i)\b(train|locomotive|tram|railcar|boat|ship|yacht|plane|aircraft|"
-                         r"jet|helicopter|drone|bike|bicycle|motorbike|motorcycle|scooter|quad|"
-                         r"atv|forklift|excavator|bulldozer|crane|tractor|combine|golf ?cart|"
-                         r"go.?kart|trailer|caravan|bus|coach|tank|tram|skateboard|skate|longboard|railway|railroad|rail ?car|carriage|wagon ?model|passenger ?wagon|freight|horse|cart|chariot|trolley|wheelbarrow|dump ?truck|tipper|mixer|tanker|vacuum|sweeper|refuse|garbage|fire ?truck|ambulance|semi ?truck|articulated|hgv|lorry|18.?wheeler|monster|6 ?x ?6|8 ?x ?8|overwatch|zelda|romani|halo|fallout|apex|valorant|csgo|warcraft|pubg|starcraft|mario|sonic)\\b")
+# Non-car vehicles that would teach the wrong prior.
+#
+# THIS PATTERN WAS DEAD FOR ITS ENTIRE LIFE. It used to end `)\\b` inside an
+# r-string, i.e. a literal backslash followed by 'b', which no title contains —
+# so it matched NOTHING and every bus, tractor and fire truck walked straight
+# through the "hard audit". Verified 2026-07-27 against the exact titles it was
+# claimed to catch: 0/8 hits. Do not "tidy" the terminator.
+#
+# Several terms are deliberately narrowed because the bare word appears in
+# legitimate car metadata (measured against 2,155 real titles):
+#   jet    -> "Jet Black" is a paint name
+#   tank   -> "fuel tank" appears in descriptions
+#   sonic  -> the Chevrolet Sonic is a real car
+#   monster-> only "monster truck", not the drinks sponsor
+WRONG_CLASS = re.compile(
+    r"(?i)\b("
+    r"train|locomotive|tram|railcar|railway|railroad|rail ?car|freight|"
+    r"boat|ship|yacht|plane|aircraft|airplane|helicopter|drone|"
+    r"(fighter|jumbo) ?jet|jet ?(fighter|plane|liner)|"
+    r"bike|bicycle|motorbike|motorcycle|scooter|moped|quad|atv|"
+    r"forklift|excavator|bulldozer|digger|crane|tractor|combine|harvester|"
+    r"golf ?cart|go.?kart|trailer|caravan|motorhome|"
+    r"bus|coach|minibus|panzer|battle ?tank|"
+    r"skateboard|skate|longboard|carriage|wagon ?model|passenger ?wagon|"
+    r"horse|cart|chariot|trolley|wheelbarrow|rickshaw|tuk.?tuk|"
+    r"dump ?truck|tipper|mixer|tanker|vacuum|sweeper|refuse|garbage|"
+    r"fire ?truck|fire ?engine|ambulance|police ?car|semi ?truck|"
+    r"articulated|hgv|lorry|18.?wheeler|monster ?truck|6 ?x ?6|8 ?x ?8|"
+    r"overwatch|zelda|romani|halo|fallout|apex|valorant|csgo|warcraft|"
+    r"pubg|starcraft|mario"
+    r")\b")
 
 
 def norm(s):
-    return unicodedata.normalize("NFKD", (s or "").lower()).encode("ascii", "ignore").decode()
+    """Lowercase ASCII, with separators flattened to spaces.
+
+    The separator step matters: \\b does not fire between an underscore and a
+    letter, and a hyphen splits a two-word marque. Without this,
+    "Rolls-Royce Ghost", "Renault_Kadjar_2018" and "Cupra_Terramar" all failed
+    the VEHICLE_NAME test and were rejected as "not a car".
+    """
+    s = unicodedata.normalize("NFKD", (s or "").lower()).encode("ascii", "ignore").decode()
+    return re.sub(r"[_\-/|.,()\[\]]+", " ", s)
 
 
 def gz(u, timeout=300):
