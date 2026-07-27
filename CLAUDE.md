@@ -1,5 +1,39 @@
 # Project memory — ExpertCarCheck / triposr-runpod-worker
 
+## NO GUESSING — verify every action before acting (owner standard 2026-07-27)
+
+Owner instruction, verbatim: **"No more guessing each action. Verify."**
+
+Every claim, every plan, every root cause is CHECKED against the real system
+before it is acted on or reported. This is not a style preference — guessing has
+cost this project real hours and real money, repeatedly:
+
+- Told the owner the wave-4 audit was "hardened twice and verified against the
+  exact failing titles". A code review found the `WRONG_CLASS` regex ends in
+  `\\b` inside a raw string, so it is a literal backslash-b and **has never
+  matched anything**. 224 shapes were staged behind a filter that never ran.
+- Claimed the Stage C training pool was ~37% junk and that this caused the
+  regression. Measuring the actual 365 shapes showed they are almost all clean
+  cars. The theory was wrong; the junk was in a set only Stage D ever saw.
+- Recommended augmenting backgrounds/HDRIs. Reading the pipeline showed
+  `preprocess_image` runs BiRefNet background removal — the background is gone
+  before the model sees it. The recommendation would have been wasted work.
+- Blamed "volume contention" for stalled pods. The volume was simply FULL
+  (`Errno 122`), which had silently truncated a checkpoint mid-save.
+
+**The rules:**
+1. Read the code/config/log that decides the behaviour. Never assert from
+   memory or from what a script's name or comment implies.
+2. Prove a filter, regex, or gate actually fires — run it against inputs it is
+   supposed to catch AND inputs it must not. A gate nobody tested is a gate
+   that does not exist.
+3. Measure before concluding. Sample the real data; state sample size.
+4. Test destructive or expensive work on one item before running it on 11GB or
+   spending a training run.
+5. Give a confidence level and say plainly what is measured vs inferred.
+6. When a check disproves something already told to the owner, say so directly
+   and correct it — do not quietly move on.
+
 ## Quality-gate standard — visual review before anything ships (owner standard 2026-07-23)
 
 Automated audits prove one narrow thing each; they are NOT a model-quality gate.
