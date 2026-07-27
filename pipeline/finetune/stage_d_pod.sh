@@ -147,6 +147,10 @@ c["models"]["denoiser"]["args"]["resolution"] = 64
 t=c["trainer"]["args"]
 t.update({"max_steps":4000,"i_log":10,"i_save":1000,"i_sample":10**9,
           "batch_size_per_gpu":1,"batch_split":1,"learning_rate":8e-6})
+# The optimizer reads trainer.args.optimizer.args.lr, NOT learning_rate.
+# Without the line below this script trains at the stock 1e-4 while
+# claiming 8e-6 — which is what the runs from this script actually did.
+t.setdefault("optimizer",{}).setdefault("args",{})["lr"]=8e-6
 c["dataset"]["args"]["min_aesthetic_score"]=0.0
 c["dataset"]["args"]["max_tokens"]=32768
 json.dump(c,open("/workspace/alamcars/stage_d_cfg.json","w"),indent=1)

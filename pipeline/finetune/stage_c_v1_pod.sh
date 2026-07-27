@@ -253,21 +253,55 @@ case "$DATA_JSON" in *renders_cond_aug*) echo "confirmed: training on AUGMENTED 
 
 status build-config
 python3 - <<'PY'
-import json
+import json, sys
+LR = 5e-6
 c = json.load(open("configs/gen/slat_flow_img2shape_dit_1_3B_512_bf16.json"))
 t = c["trainer"]["args"]
 t.update({"max_steps": 2000, "i_log": 10, "i_save": 500, "i_sample": 10**9,
-          "batch_size_per_gpu": 4, "batch_split": 4, "learning_rate": 5e-6})
+          "batch_size_per_gpu": 4, "batch_split": 4, "learning_rate": LR})
+
+# THE LEARNING RATE LIVES IN TWO PLACES AND ONLY ONE OF THEM IS REAL.
+# trainer.args.learning_rate is decorative — the optimizer reads
+# trainer.args.optimizer.args.lr. Every run this project has done set only the
+# decorative one, so v0 (nominally 1e-5) and Stage D (nominally 8e-6) both
+# actually trained at the stock 1e-4. Caught 2026-07-27 by reading the trainer's
+# own "Learning rate:" banner, which printed 0.0001 while our config said 5e-6.
+opt = t.setdefault("optimizer", {}).setdefault("args", {})
+was = opt.get("lr")
+opt["lr"] = LR
+print(f"optimizer lr: {was} -> {opt['lr']}")
+if float(opt["lr"]) != LR:
+    print("FATAL: optimizer lr did not take"); sys.exit(1)
 c["dataset"]["args"]["min_aesthetic_score"] = 0.0
 c["dataset"]["args"]["max_tokens"] = 32768
 json.dump(c, open("/workspace/alamcars/stage_c_v1_cfg.json", "w"), indent=1)
-print("v1 config: 2000 steps, lr 5e-6, save every 500 (4 sweepable checkpoints)")
+# read the file back: what we wrote is not proof of what landed on disk
+rb = json.load(open("/workspace/alamcars/stage_c_v1_cfg.json"))
+eff = float(rb["trainer"]["args"]["optimizer"]["args"]["lr"])
+if eff != LR:
+    print(f"FATAL: config on disk has lr {eff}, expected {LR}"); sys.exit(1)
+print(f"v1 config: 2000 steps, OPTIMIZER lr {eff}, save every 500 "
+      f"(4 sweepable checkpoints)")
 PY
 
 status tryrun
 python3 train.py --config /workspace/alamcars/stage_c_v1_cfg.json \
   --output_dir "$OUT" --data_dir "$DATA_JSON" --tryrun \
   || { echo "TRYRUN FAILED"; status FATAL-tryrun; sleep infinity; }
+
+# End-to-end proof, not config-file proof: the trainer prints the learning rate
+# it will actually optimise with. The tryrun above has just printed it. If that
+# banner disagrees with what we asked for, the config did not reach the
+# optimizer and a 10-hour run at the wrong step size is about to start.
+BANNER_LR=$(grep -a "^  - Learning rate:" "$OUT/logs/$RUN_LOG" | tail -1 | awk '{print $NF}')
+echo "trainer reports effective learning rate: ${BANNER_LR:-<none found>}"
+case "$BANNER_LR" in
+  5e-06|5.0e-06|0.000005) echo "learning rate confirmed at the optimizer" ;;
+  "") echo "FATAL: no learning-rate banner in the log — cannot confirm the rate"
+      status FATAL-lr-unverified; sleep infinity ;;
+  *)  echo "FATAL: trainer will optimise at $BANNER_LR, not 5e-06."
+      status FATAL-lr-mismatch; sleep infinity ;;
+esac
 
 status train-2000
 python3 train.py --config /workspace/alamcars/stage_c_v1_cfg.json \

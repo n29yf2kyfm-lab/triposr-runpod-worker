@@ -132,6 +132,10 @@ t=c["trainer"]["args"]
 # (batch_split micro-batches of 1) — fits 80GB and the account balance.
 t.update({"max_steps":6000,"i_log":10,"i_save":1000,"i_sample":10**9,
           "batch_size_per_gpu":4,"batch_split":4,"learning_rate":1e-5})
+# The optimizer reads trainer.args.optimizer.args.lr, NOT learning_rate.
+# Without the line below this script trains at the stock 1e-4 while
+# claiming 1e-5 — which is what the runs from this script actually did.
+t.setdefault("optimizer",{}).setdefault("args",{})["lr"]=1e-5
 c["dataset"]["args"]["min_aesthetic_score"]=0.0
 c["dataset"]["args"]["max_tokens"]=32768
 json.dump(c,open("/workspace/alamcars/stage_c_cfg.json","w"),indent=1)
