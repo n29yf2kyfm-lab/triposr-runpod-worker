@@ -34,6 +34,32 @@ cost this project real hours and real money, repeatedly:
 6. When a check disproves something already told to the owner, say so directly
    and correct it — do not quietly move on.
 
+## Per-car audit rubric (owner standard 2026-07-27)
+
+The owner's own words, judging a four-view sheet of a sourced GLB. This is the
+bar every training candidate and every catalogue car is measured against — use
+these exact criteria, in this order, when auditing individually.
+
+**Passes:**
+- proportions read as the right car instantly
+- front three-quarter view is strong
+- roof, pillars and wheelbase consistent across all four views
+- reflections clean
+- paint finish looks premium
+
+**Fails / needs work:**
+- grille edges soft, honeycomb texture shallow
+- headlights lacking sharp internal LED elements
+- wheel spokes inconsistent between views
+- rear bumper and diffuser soft versus the real car
+- door and bonnet shut lines not defined
+
+**Critical distinction, established the same day:** a sourced Sketchfab/Objaverse
+GLB is NOT model output. Defects in a sourced asset cannot be fixed by training —
+the only options are keep, cull, or replace with a better source. Never present a
+sourced asset as something the model produced, and never treat a critique of a
+sourced asset as a training target.
+
 ## Quality-gate standard — visual review before anything ships (owner standard 2026-07-23)
 
 Automated audits prove one narrow thing each; they are NOT a model-quality gate.
