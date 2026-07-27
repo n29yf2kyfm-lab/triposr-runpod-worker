@@ -60,6 +60,23 @@ export PYTHONUNBUFFERED=1
 pip install -q tensorboard pandas easydict || true
 pip install -q "transformers==4.57.6" || true
 
+status gated-check
+# DINOv3 is the image conditioner and it is a GATED repo. Without a valid
+# HF_TOKEN the trainer 401s, prints "Retrying (1/3)", burns three attempts and
+# then EXITS ZERO having trained nothing — the pod looks busy, the GPU shows
+# activity, and the log says "Starting training..." forever. Run 4 lost 20
+# minutes to exactly this because the launcher had no HF_TOKEN in its env.
+# Fail here, loudly, before a single GPU-hour is spent.
+DINO="https://huggingface.co/facebook/dinov3-vitl16-pretrain-lvd1689m/resolve/main/config.json"
+CODE=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${HF_TOKEN}" "$DINO")
+echo "gated conditioner check: HTTP $CODE"
+if [ "$CODE" != "200" ]; then
+  echo "FATAL: cannot read the DINOv3 conditioner (HTTP $CODE)."
+  echo "       HF_TOKEN is ${HF_TOKEN:+present but rejected}${HF_TOKEN:-MISSING from the pod env}."
+  echo "       Training would retry three times and then exit 0 having done nothing."
+  status FATAL-gated-conditioner; sleep infinity
+fi
+
 status preflight
 # Verify the inputs exist BEFORE burning GPU hours. v0's sibling runs were lost
 # to a full volume and to a metadata merge that silently trained on 365 of 543;
