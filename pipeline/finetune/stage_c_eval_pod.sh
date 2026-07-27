@@ -47,11 +47,12 @@ PY
 
 status fetch-inputs
 PUB=https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finetune/eval_inputs
-mkdir -p /root/eval_inputs/{golf,escape,model3,gti,gti8}
+mkdir -p /root/eval_inputs/{golf,escape,model3,gti,gti8,qashqai}
 for i in 0 1 2 3; do
   curl -sf "$PUB/golf/$i.jpg"   -o /root/eval_inputs/golf/$i.jpg   || true
   curl -sf "$PUB/escape/$i.jpg" -o /root/eval_inputs/escape/$i.jpg || true
   curl -sf "$PUB/gti/$i.jpg"    -o /root/eval_inputs/gti/$i.jpg    || true
+  curl -sf "$PUB/qashqai/$i.jpg" -o /root/eval_inputs/qashqai/$i.jpg || true
   for j in 4 5 6 7; do curl -sf "$PUB/gti8/$j.jpg" -o /root/eval_inputs/gti8/$j.jpg || true; done
   curl -sf "$PUB/gti8/$i.jpg"   -o /root/eval_inputs/gti8/$i.jpg   || true
 done
@@ -124,6 +125,8 @@ CASES = {
     "escape": sorted(glob.glob("/root/eval_inputs/escape/*.jpg")),
     "gti":    sorted(glob.glob("/root/eval_inputs/gti/*.jpg")),
     "gti8":   sorted(glob.glob("/root/eval_inputs/gti8/*.jpg")),
+    # a car sourced fresh today and never seen by any checkpoint
+    "qashqai": sorted(glob.glob("/root/eval_inputs/qashqai/*.jpg")),
     # renders, not photographs — the in-distribution control for the domain test
     "holdout": sorted(glob.glob("/root/eval_inputs/holdout/*.png"))
                + sorted(glob.glob("/root/eval_inputs/holdout/*.jpg")),
