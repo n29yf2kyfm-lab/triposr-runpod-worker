@@ -22,6 +22,18 @@
 #                                      usable checkpoint behind
 #   365 shapes   -> the audited subset  culls applied (see below)
 #
+# RESUME RUN (2026-07-27 evening). This continues from the step-500
+# checkpoint of the first correctly-configured run rather than restarting.
+# Target comes from MAX_STEPS, set by the remaining balance, not by a round
+# number: checkpoints land every 250 steps so stopping early always leaves
+# something usable, and the run can be killed at any point without loss.
+#
+# Three gates now sit in front of the GPU spend, each reading what the
+# PROGRAM reports rather than what this script printed:
+#   resume-check  - every checkpoint zip-verified, highest intact step chosen
+#   G2            - aborts if the trainer re-initialised from stock weights
+#   G3            - aborts if instance count != the audited metadata rows
+#
 # ON THE ASSET SET — this changed after the file was first written, and the
 # reason is worth keeping. The plan was to hold the 365 fixed so exactly one
 # variable moved against a known-bad baseline. Then every shape was audited
@@ -275,13 +287,45 @@ echo "data roots: $DATA_JSON"
 case "$DATA_JSON" in *renders_cond_aug*) echo "confirmed: training on AUGMENTED views";;
   *) echo "FATAL: data roots not pointing at renders_cond_aug"; status FATAL-roots; sleep infinity;; esac
 
+status resume-check
+# RESUMING. Upstream's find_ckpt populates cfg.load_ckpt from $OUT/ckpts, which
+# is what makes a resume happen at all — but a truncated checkpoint loads as
+# garbage or explodes hours in. Stage D lost a 5.2GB save to a full volume and
+# nobody noticed until the eval. Prove the file before paying for the GPU.
+python3 - <<'PYRES' || { status FATAL-resume-ckpt; sleep infinity; }
+import glob, os, re, sys, zipfile
+ck = sorted(glob.glob("/workspace/alam3d_stage_c_v1/ckpts/*.pt"))
+if not ck:
+    print("FATAL: nothing to resume from - no checkpoints in OUT/ckpts"); sys.exit(1)
+good = []
+for path in ck:
+    sz = os.path.getsize(path)
+    try:
+        with zipfile.ZipFile(path):
+            pass
+        m = re.search(r"step0*(\d+)", os.path.basename(path))
+        good.append((int(m.group(1)) if m else -1, os.path.basename(path), sz))
+        print("  ok      %s (%.0fMB)" % (os.path.basename(path), sz / 1e6))
+    except Exception as e:
+        print("  CORRUPT %s (%.0fMB) %s" % (os.path.basename(path), sz / 1e6, type(e).__name__))
+if not good:
+    print("FATAL: every checkpoint is unreadable"); sys.exit(1)
+top = max(good)
+print("RESUME FROM step %d (%s, %.0fMB)" % (top[0], top[1], top[2] / 1e6))
+if top[0] < 250:
+    print("FATAL: highest intact checkpoint is below step 250"); sys.exit(1)
+open("/workspace/alam3d_stage_c_v1/.resume_step", "w").write(str(top[0]))
+PYRES
+RESUME_STEP=$(cat "$OUT/.resume_step")
+echo "resume step recorded: $RESUME_STEP"
+
 status build-config
 python3 - <<'PY'
-import json, sys
+import json, os, sys
 LR = 5e-6
 c = json.load(open("configs/gen/slat_flow_img2shape_dit_1_3B_512_bf16.json"))
 t = c["trainer"]["args"]
-t.update({"max_steps": 2000, "i_log": 10, "i_save": 250, "i_sample": 10**9,
+t.update({"max_steps": int(os.environ.get("MAX_STEPS", "2000")), "i_log": 10, "i_save": 250, "i_sample": 10**9,
           "batch_size_per_gpu": 4, "batch_split": 4, "learning_rate": LR})
 
 # THE LEARNING RATE LIVES IN TWO PLACES AND ONLY ONE OF THEM IS REAL.
@@ -304,8 +348,12 @@ rb = json.load(open("/workspace/alamcars/stage_c_v1_cfg.json"))
 eff = float(rb["trainer"]["args"]["optimizer"]["args"]["lr"])
 if eff != LR:
     print(f"FATAL: config on disk has lr {eff}, expected {LR}"); sys.exit(1)
-print(f"v1 config: 2000 steps, OPTIMIZER lr {eff}, save every 500 "
-      f"(4 sweepable checkpoints)")
+# Print the values actually in the config, never a hardcoded copy of them.
+# stage_c_pod.sh:142 prints "bs 1/gpu" on the line after setting
+# batch_size_per_gpu 4 - a log that lies about its own run. Do not add another.
+_ms = rb["trainer"]["args"]["max_steps"]; _is = rb["trainer"]["args"]["i_save"]
+print(f"v1 config: {_ms} steps, OPTIMIZER lr {eff}, save every {_is} "
+      f"({_ms // _is} sweepable checkpoints)")
 PY
 
 status tryrun
@@ -326,6 +374,31 @@ case "$BANNER_LR" in
   *)  echo "FATAL: trainer will optimise at $BANNER_LR, not 5e-06."
       status FATAL-lr-mismatch; sleep infinity ;;
 esac
+
+# G2 - PROVE IT RESUMED, by absence of a signal we control.
+# Our injected HF-init block only fires when cfg.load_ckpt is None, i.e. when
+# the trainer is starting from Microsoft's weights. If it resumed from our
+# checkpoint the marker is ABSENT. So the marker appearing means we are about to
+# retrain from scratch and throw away step 500.
+if grep -qa "\[alam3d\] denoiser initialised from" "$OUT/logs/$RUN_LOG"; then
+  echo "FATAL: trainer re-initialised from stock weights instead of resuming."
+  echo "       cfg.load_ckpt was None - the step-$RESUME_STEP checkpoint was NOT picked up."
+  status FATAL-not-resumed; sleep infinity
+fi
+echo "confirmed: resumed from checkpoint (no stock re-init marker in the log)"
+
+# G3 - PROVE THE CULL REACHED THE TRAINER.
+# The cull survives only because culled rows carry NaN in aesthetic_score, and
+# upstream unions metadata across every data root. Add that column anywhere and
+# the 474 culled cars silently return. The trainer prints the truth; read it.
+INSTANCES=$(grep -a "Total instances:" "$OUT/logs/$RUN_LOG" | tail -1 | awk '{print $NF}')
+WANT=$(python3 -c "import csv;print(sum(1 for _ in csv.DictReader(open('$OUT/meta/metadata.csv'))))")
+echo "trainer reports $INSTANCES instances; private metadata holds $WANT rows"
+if [ "$INSTANCES" != "$WANT" ]; then
+  echo "FATAL: the trainer is not training the set we selected."
+  status FATAL-instance-count; sleep infinity
+fi
+echo "confirmed: training exactly $INSTANCES audited shapes"
 
 status train-2000
 python3 -u train.py --config /workspace/alamcars/stage_c_v1_cfg.json \
