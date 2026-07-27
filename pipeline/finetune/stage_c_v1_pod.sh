@@ -81,6 +81,27 @@ with open(p, "wb") as f:
 ok = os.path.getsize(p) == 32_000_000
 os.remove(p)
 print("volume writable:", ok)
+
+# The dataset loader reads a metadata.csv from INSIDE the render root, not just
+# the per-shape image folders. The augment pass copied the folders and not that
+# file, so run 1 died with "No such file: renders_cond_aug/metadata.csv" after
+# burning a pod. Heal it here — copying root-level files is instant and makes
+# the run self-sufficient rather than depending on the augment pass being
+# re-run correctly.
+import shutil
+copied = []
+for f in glob.glob(src + "/*"):
+    if os.path.isdir(f):
+        continue
+    dst = os.path.join(aug, os.path.basename(f))
+    if not os.path.exists(dst):
+        shutil.copy2(f, dst); copied.append(os.path.basename(f))
+print(f"root-level files copied into renders_cond_aug: {copied or 'none needed'}")
+need = os.path.join(aug, "metadata.csv")
+if not os.path.exists(need):
+    print(f"FATAL: {need} still missing — loader cannot index the dataset")
+    sys.exit(1)
+print("renders_cond_aug/metadata.csv present")
 sys.exit(0 if ok else 1)
 PY
 
@@ -206,6 +227,17 @@ status train-2000
 python3 train.py --config /workspace/alamcars/stage_c_v1_cfg.json \
   --output_dir "$OUT" --data_dir "$DATA_JSON" \
   || { echo "TRAIN FAILED (see log)"; status FATAL-train; sleep infinity; }
+
+# Exit code 0 is NOT proof of training. Run 1 hit a missing metadata.csv,
+# printed "Retrying (3/3)", then exited ZERO — so this guard never fired and
+# the pod reported DONE having trained nothing at all. A run that produced no
+# checkpoint did not train, whatever it returned.
+if [ -z "$(ls -A "$OUT/ckpts" 2>/dev/null)" ]; then
+  echo "TRAIN PRODUCED NO CHECKPOINTS — exit code lied"
+  status FATAL-no-ckpts
+  sleep infinity
+fi
+echo "checkpoints written: $(ls "$OUT/ckpts" | wc -l) files"
 
 status export-loss
 python3 - <<'PY'

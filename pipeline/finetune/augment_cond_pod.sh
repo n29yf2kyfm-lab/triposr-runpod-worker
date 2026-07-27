@@ -149,8 +149,20 @@ PY
 
 status verify
 python3 - <<'PY'
-import glob, os
+import glob, os, shutil
 SRC="/workspace/alamcars/renders_cond"; DST="/workspace/alamcars/renders_cond_aug"
+# Root-level files, metadata.csv above all: the dataset loader indexes the
+# render root through it. The first version of this script copied only the
+# per-shape image folders, so training died on a missing metadata.csv after a
+# pod had already been paid for.
+copied=[]
+for f in glob.glob(SRC+"/*"):
+    if os.path.isdir(f): continue
+    d=os.path.join(DST, os.path.basename(f))
+    if not os.path.exists(d):
+        shutil.copy2(f, d); copied.append(os.path.basename(f))
+print(f"root-level files copied: {copied or 'none'}")
+print("metadata.csv present:", os.path.exists(os.path.join(DST,'metadata.csv')))
 s=[os.path.basename(d) for d in glob.glob(SRC+"/*") if os.path.isdir(d)]
 t=[os.path.basename(d) for d in glob.glob(DST+"/*") if os.path.isdir(d)]
 print(f"shape dirs: src={len(s)} dst={len(t)} missing={len(set(s)-set(t))}")
