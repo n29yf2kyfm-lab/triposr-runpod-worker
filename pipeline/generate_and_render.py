@@ -17,13 +17,12 @@ This is that path:
                                               car-renders/<make>/<model>/
 
 WHY THE CREDENTIALS STAY HERE
-The obvious design is to let the pod call the render endpoint itself. That
-requires a RUNPOD_API_KEY inside the container, and a key inside a container
-can create pods. On 2026-07-27 five unexplained ComfyUI pods at $5.89/hr each
-appeared on this account and burned the balance from $18 to $4 in ~25 minutes.
-Until that is explained, account-level credentials do not go into workloads.
-The orchestrator holds them; the pod only ever gets SB_KEY and HF_TOKEN, which
-is what it already had.
+The obvious design is to let the pod call the render endpoint itself, but that
+requires a RUNPOD_API_KEY inside the container — and that key can create pods,
+delete pods, and read the whole account. A render job needs none of that.
+Least privilege: the orchestrator holds the account key, and the pod continues
+to receive only SB_KEY and HF_TOKEN, exactly what it had before. The cost is
+one extra hop; the benefit is that a training container can never spend money.
 
 Two modes:
   --from-run RUNID    render GLBs an earlier generation run already uploaded
