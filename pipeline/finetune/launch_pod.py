@@ -78,13 +78,23 @@ def main():
         env["HF_TOKEN"] = env["HUGGING_FACE_HUB_TOKEN"] = hf
     if os.environ.get("SB_KEY"):    # lets eval pods upload results; never in scripts
         env["SB_KEY"] = os.environ["SB_KEY"]
-    # eval knobs: single-case spot checks, pipeline type, and the four-way
-    # stage-isolation run. A knob missing from this list is silently dropped and
-    # the pod quietly runs the default eval instead.
-    for k in ("EVAL_CASES", "EVAL_PIPE", "EVAL_ISOLATE", "EVAL_STAGE_D", "EVAL_SWEEP",
-              "EVAL_HOLDOUT_SHA", "MAX_STEPS", "HF_REPO"):
+    # eval knobs: single-case spot checks, pipeline type, run directory, and the
+    # four-way stage-isolation run.
+    # Forward EVERY EVAL_* knob by prefix rather than by name. A name-based
+    # allowlist has now silently dropped three knobs: HF_REPO (published to the
+    # wrong repo), MAX_STEPS (ran 2000 steps instead of 1250) and EVAL_RUN_DIR
+    # (would have evaluated v0's damaged weights while reporting them as v1).
+    # The old comment warned that a missing name is silently dropped; the
+    # warning did not help, so the mechanism changed instead.
+    forwarded = sorted(k for k in os.environ
+                       if k.startswith("EVAL_") and os.environ[k])
+    for k in ("MAX_STEPS", "HF_REPO"):
         if os.environ.get(k):
-            env[k] = os.environ[k]
+            forwarded.append(k)
+    for k in forwarded:
+        env[k] = os.environ[k]
+    if forwarded:
+        print("forwarding to pod: " + ", ".join(forwarded), flush=True)
 
     pod = None
     deadline = time.time() + a.hunt_hours * 3600

@@ -11,7 +11,19 @@
 # the run was doing. Only the checkpoints are read from /workspace; a handful of
 # GLBs fit easily on the 60GB container disk and go straight to Supabase.
 OUT=/root/alam3d_eval
-CKPT_DIR=/workspace/alam3d_stage_c/ckpts
+# M5: this used to be hardcoded to /workspace/alam3d_stage_c (v0). Evaluating
+# v1 silently graded v0's damaged weights instead. EVAL_RUN_DIR now drives
+# every path below and defaults to v1; v0 must be asked for by name.
+EVAL_RUN_DIR="${EVAL_RUN_DIR:-/workspace/alam3d_stage_c_v1}"
+CKPT_DIR="$EVAL_RUN_DIR/ckpts"
+echo "EVAL RUN DIR: $EVAL_RUN_DIR"
+if [ ! -d "$CKPT_DIR" ]; then
+  echo "FATAL: $CKPT_DIR does not exist - nothing to evaluate"
+  mkdir -p "$OUT/logs"
+  printf '{"step":"FATAL-no-run-dir"}' > "$OUT/logs/status.json"
+  sleep infinity
+fi
+export EVAL_RUN_DIR
 mkdir -p "$OUT/logs"
 ( cd "$OUT/logs" && python3 -m http.server 8000 >/dev/null 2>&1 & )
 RUN_LOG="eval_$(hostname)_$(date -u +%Y%m%dT%H%M%SZ).log"
@@ -107,7 +119,9 @@ spec.loader.exec_module(handler)
 import o_voxel
 
 OUT = "/root/alam3d_eval/logs"
-ck = sorted(glob.glob("/workspace/alam3d_stage_c/ckpts/denoiser_ema0.9999_step*.pt"))
+RUN_DIR = os.environ.get("EVAL_RUN_DIR", "/workspace/alam3d_stage_c_v1")
+ck = sorted(glob.glob(f"{RUN_DIR}/ckpts/denoiser_ema0.9999_step*.pt"))
+print("checkpoint source:", RUN_DIR)
 if not ck:
     print("NO EMA CHECKPOINT FOUND"); open(f"{OUT}/status.json","w").write('{"step":"FATAL-no-ckpt"}'); sys.exit(1)
 CKPT = ck[-1]
@@ -186,11 +200,13 @@ def swap(stage_key, ckpt_glob, label):
     m = pipeline.models[stage_key]
     missing, unexpected = m.load_state_dict(sd, strict=False)
     print(f"{label} swap [{os.path.basename(ck[0])}]: missing={len(missing)} unexpected={len(unexpected)}")
-    if len(missing) > 20:
-        raise SystemExit(f"{label}: too many missing keys, aborting")
+    if missing:
+        raise SystemExit(
+            f"{label}: {len(missing)} tensors did not load - those weights would "
+            f"stay STOCK while the result is reported as a fine-tune. Aborting.")
     return ck[0]
 
-C_GLOB = "/workspace/alam3d_stage_c/ckpts/denoiser_ema*step*.pt"
+C_GLOB = os.environ.get("EVAL_RUN_DIR", "/workspace/alam3d_stage_c_v1") + "/ckpts/denoiser_ema*step*.pt"
 D_GLOB = "/workspace/alam3d_stage_d/ckpts/denoiser_ema*step*.pt"
 K512, K1024 = "shape_slat_flow_model_512", "shape_slat_flow_model_1024"
 
