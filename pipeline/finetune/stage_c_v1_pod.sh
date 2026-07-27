@@ -18,11 +18,21 @@
 #   6000 steps   -> 2000               damage starts ~2000; stop at the edge
 #   lr 1e-5      -> 5e-6               half the drift per step
 #   i_save 1000  -> 500                4 checkpoints so the sweep can pick one
+#   365 shapes   -> the audited subset  culls applied (see below)
 #
-# WHAT DELIBERATELY DOES NOT CHANGE: the asset set. v1 trains on the SAME 365
-# shapes as v0 so exactly one thing varies against a known-bad baseline. A
-# bigger pool is v2, once it has been culled; changing both at once would leave
-# us unable to say which change helped.
+# ON THE ASSET SET — this changed after the file was first written, and the
+# reason is worth keeping. The plan was to hold the 365 fixed so exactly one
+# variable moved against a known-bad baseline. Then every shape was audited
+# individually and the 365 turned out to contain unmarked police cars, a
+# race-team car, a photogrammetry scan and several vans. Holding those in for
+# experimental purity means paying ten hours to teach the model things we will
+# then have to untrain. The pool is now filtered by
+# car-meshes/audit/train/CULL_VERDICT.json at build-meta time.
+#
+# The comparison against v0 is therefore no longer single-variable. That is a
+# real cost and it is accepted deliberately: the previous statement that the
+# 365 were "almost all real cars" came from a coarser check than the per-shape
+# audit that replaced it.
 ROOT=/workspace/alamcars
 OUT=/workspace/alam3d_stage_c_v1
 AUG="$ROOT/renders_cond_aug"
@@ -158,6 +168,39 @@ if len(pre) != 365:
     print(f"FATAL: expected 365, got {len(pre)} — the mtime split no longer holds")
     sys.exit(1)
 
+# v1 change: drop the shapes the per-shape audit rejected. v0 trained on all
+# 365 including three unmarked police cars, a race-team car, a photogrammetry
+# scan and assorted vans — every one of them teaching the model something we
+# do not want it to learn.
+import json, urllib.request
+VERDICT = ("https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/"
+           "car-meshes/audit/train/CULL_VERDICT.json")
+try:
+    rows = json.loads(urllib.request.urlopen(VERDICT + "?cb=" + str(int(os.times()[4])),
+                                             timeout=120).read())
+except Exception as e:
+    print(f"FATAL: cannot read the cull verdict ({type(e).__name__}: {str(e)[:60]}). "
+          f"Refusing to train on an unaudited set."); sys.exit(1)
+by_sha = {r["sha256"]: r["verdict"] for r in rows}
+culled   = [s for s in pre if by_sha.get(s) == "cull"]
+ungraded = [s for s in pre if by_sha.get(s) == "ungraded"]
+unknown  = [s for s in pre if s not in by_sha]
+clean    = [s for s in pre if by_sha.get(s) == "keep" or s in unknown]
+print(f"cull verdict: {len(rows)} rows | of v0's {len(pre)}: "
+      f"{len(clean)} keep, {len(culled)} culled, {len(ungraded)} ungraded, "
+      f"{len(unknown)} not in the verdict (kept — no evidence against them)")
+# Bands, not a fixed number: the verdict file is expected to evolve, but a
+# collapse to a tiny set or a no-op filter both mean something is wrong.
+if not (250 <= len(clean) < len(pre)):
+    print(f"FATAL: filtered pool is {len(clean)} of {len(pre)} — outside the sane "
+          f"band [250, {len(pre)}). Either the verdict file did not apply or it "
+          f"gutted the set; not spending a 10-hour run to find out which.")
+    sys.exit(1)
+if len(unknown) > 40:
+    print(f"FATAL: {len(unknown)} of v0's shapes are absent from the verdict file — "
+          f"the audit did not cover this training set"); sys.exit(1)
+pre = clean
+
 p = "/workspace/alamcars/metadata.csv"
 m = pd.read_csv(p).set_index("sha256")
 merged = 0
@@ -179,8 +222,11 @@ priv = "/workspace/alam3d_stage_c_v1/meta"
 os.makedirs(priv, exist_ok=True)
 m.reset_index().to_csv(f"{priv}/metadata.csv", index=False)
 print(f"merged {merged} record files; private metadata rows: {len(m)}")
-if len(m) < 350:
-    print("FATAL: metadata lost rows"); sys.exit(1)
+# The guard is relative to the filtered pool, not a hardcoded 350 — with the
+# cull applied the pool is deliberately smaller, and a stale constant here
+# would have failed the run for doing exactly what it was asked to do.
+if len(m) < len(pre) - 5:
+    print(f"FATAL: metadata lost rows — {len(m)} for {len(pre)} shapes"); sys.exit(1)
 PY
 
 status build-data-roots
