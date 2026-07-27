@@ -17,7 +17,9 @@
 #   renders_cond -> renders_cond_aug   tone/sensor/alpha-edge augmented views
 #   6000 steps   -> 2000               damage starts ~2000; stop at the edge
 #   lr 1e-5      -> 5e-6               half the drift per step
-#   i_save 1000  -> 500                4 checkpoints so the sweep can pick one
+#   i_save 1000  -> 250                8 checkpoints: the balance may force an
+#                                      early stop, and every stop must leave a
+#                                      usable checkpoint behind
 #   365 shapes   -> the audited subset  culls applied (see below)
 #
 # ON THE ASSET SET — this changed after the file was first written, and the
@@ -50,6 +52,11 @@ export HF_TOKEN HUGGING_FACE_HUB_TOKEN 2>/dev/null
 nvidia-smi -L || true
 cd /app/TRELLIS.2 || { status FATAL-no-trellis2; sleep infinity; }
 export PYTHONPATH=/app/TRELLIS.2:$PYTHONPATH
+# Run 3 spent 80 minutes at 100% GPU printing NOTHING: python block-buffers
+# stdout through the tee pipe, and i_log lines are ~100 bytes, so the first
+# flush was hundreds of steps away. Unbuffered output is the difference
+# between a measurable run and a blind one.
+export PYTHONUNBUFFERED=1
 pip install -q tensorboard pandas easydict || true
 pip install -q "transformers==4.57.6" || true
 
@@ -257,7 +264,7 @@ import json, sys
 LR = 5e-6
 c = json.load(open("configs/gen/slat_flow_img2shape_dit_1_3B_512_bf16.json"))
 t = c["trainer"]["args"]
-t.update({"max_steps": 2000, "i_log": 10, "i_save": 500, "i_sample": 10**9,
+t.update({"max_steps": 2000, "i_log": 10, "i_save": 250, "i_sample": 10**9,
           "batch_size_per_gpu": 4, "batch_split": 4, "learning_rate": LR})
 
 # THE LEARNING RATE LIVES IN TWO PLACES AND ONLY ONE OF THEM IS REAL.
@@ -285,7 +292,7 @@ print(f"v1 config: 2000 steps, OPTIMIZER lr {eff}, save every 500 "
 PY
 
 status tryrun
-python3 train.py --config /workspace/alamcars/stage_c_v1_cfg.json \
+python3 -u train.py --config /workspace/alamcars/stage_c_v1_cfg.json \
   --output_dir "$OUT" --data_dir "$DATA_JSON" --tryrun \
   || { echo "TRYRUN FAILED"; status FATAL-tryrun; sleep infinity; }
 
@@ -304,7 +311,7 @@ case "$BANNER_LR" in
 esac
 
 status train-2000
-python3 train.py --config /workspace/alamcars/stage_c_v1_cfg.json \
+python3 -u train.py --config /workspace/alamcars/stage_c_v1_cfg.json \
   --output_dir "$OUT" --data_dir "$DATA_JSON" \
   || { echo "TRAIN FAILED (see log)"; status FATAL-train; sleep infinity; }
 
