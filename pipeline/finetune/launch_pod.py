@@ -81,7 +81,7 @@ def main():
     # eval knobs: single-case spot checks, pipeline type, and the four-way
     # stage-isolation run. A knob missing from this list is silently dropped and
     # the pod quietly runs the default eval instead.
-    for k in ("EVAL_CASES", "EVAL_PIPE", "EVAL_ISOLATE", "EVAL_STAGE_D", "EVAL_SWEEP"):
+    for k in ("EVAL_CASES", "EVAL_PIPE", "EVAL_ISOLATE", "EVAL_STAGE_D", "EVAL_SWEEP", "EVAL_HOLDOUT_SHA"):
         if os.environ.get(k):
             env[k] = os.environ[k]
 

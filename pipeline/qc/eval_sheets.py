@@ -31,6 +31,8 @@ ROW_LABELS = {
     "c2000":  "STAGE C @ 2000 steps",
     "c3000":  "STAGE C @ 3000 steps",
     "c4000":  "STAGE C @ 4000 steps",
+    "c5000":  "STAGE C @ 5000 steps",
+    "c6000":  "STAGE C @ 6000 steps",
 }
 
 

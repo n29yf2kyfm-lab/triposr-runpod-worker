@@ -56,6 +56,32 @@ for i in 0 1 2 3; do
   curl -sf "$PUB/gti8/$i.jpg"   -o /root/eval_inputs/gti8/$i.jpg   || true
 done
 curl -sf "$PUB/model3/0.jpg" -o /root/eval_inputs/model3/0.jpg || true
+
+# DOMAIN TEST. Every training image is a Blender render of a GLB on a black
+# background; every eval so far fed real dealer photographs. That gap is a live
+# suspect for the Stage C regression — fine-tuning hard onto one renderer's look
+# can push real photos further out of distribution than they were before.
+#
+# EVAL_HOLDOUT_SHA names a car whose latents were encoded AFTER Stage C started,
+# so it is genuinely unseen. Feeding 4 of its own conditioning views makes the
+# input perfectly in-distribution. Good on renders + bad on photos = domain gap,
+# and the fix is render augmentation rather than less training.
+if [ -n "$EVAL_HOLDOUT_SHA" ]; then
+  SRC="/workspace/alamcars/renders_cond/$EVAL_HOLDOUT_SHA"
+  mkdir -p /root/eval_inputs/holdout
+  if [ -d "$SRC" ]; then
+    # 4 views spread around the 16-view orbit, mirroring the 4-photo GTI setup
+    n=0
+    for i in 000 004 008 012; do
+      f=$(ls "$SRC"/*"$i"* 2>/dev/null | head -1)
+      [ -n "$f" ] && cp "$f" "/root/eval_inputs/holdout/$i.png" && n=$((n+1))
+    done
+    [ "$n" -eq 0 ] && ls "$SRC" | head -4 | while read -r f; do cp "$SRC/$f" /root/eval_inputs/holdout/; done
+    echo "holdout case: $EVAL_HOLDOUT_SHA -> $(ls /root/eval_inputs/holdout | wc -l) views"
+  else
+    echo "holdout: NO RENDERS at $SRC — case will be skipped"
+  fi
+fi
 ls -la /root/eval_inputs/*/
 
 status generate
@@ -98,7 +124,11 @@ CASES = {
     "escape": sorted(glob.glob("/root/eval_inputs/escape/*.jpg")),
     "gti":    sorted(glob.glob("/root/eval_inputs/gti/*.jpg")),
     "gti8":   sorted(glob.glob("/root/eval_inputs/gti8/*.jpg")),
+    # renders, not photographs — the in-distribution control for the domain test
+    "holdout": sorted(glob.glob("/root/eval_inputs/holdout/*.png"))
+               + sorted(glob.glob("/root/eval_inputs/holdout/*.jpg")),
 }
+CASES = {k: v for k, v in CASES.items() if v}   # drop cases with no inputs
 # EVAL_CASES=gti runs one case only — fast, cheap spot-checks of new vehicles
 _only = [c for c in os.environ.get("EVAL_CASES", "").split(",") if c]
 if _only:
