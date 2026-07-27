@@ -60,7 +60,7 @@ ls -la /root/eval_inputs/*/
 
 status generate
 python3 - <<'PY'
-import glob, io, json, os, sys, subprocess, types, zipfile
+import glob, io, json, os, re, sys, subprocess, types, zipfile
 import importlib.util
 import torch
 from PIL import Image
@@ -161,7 +161,33 @@ C_GLOB = "/workspace/alam3d_stage_c/ckpts/denoiser_ema*step*.pt"
 D_GLOB = "/workspace/alam3d_stage_d/ckpts/denoiser_ema*step*.pt"
 K512, K1024 = "shape_slat_flow_model_512", "shape_slat_flow_model_1024"
 
-if os.environ.get("EVAL_ISOLATE") == "1":
+if os.environ.get("EVAL_SWEEP") == "1":
+    # STEP SWEEP. The contamination theory for Stage C was falsified: its 365
+    # shapes are almost all clean cars, while the junk sits in the 598 added
+    # later that only Stage D ever saw — and Stage D came out fine. The
+    # surviving explanation is dose, not diet: Stage C ran 6000 steps at
+    # lr 1e-5 over 365 shapes, far more epochs than Stage D's 3000 at 8e-6
+    # over 543, which is how a 1.3B model gets dragged off its pretrained prior.
+    #
+    # Testable without retraining anything, because every Stage C EMA
+    # checkpoint survived the volume purge. If damage accumulates with steps,
+    # quality falls monotonically from 1000 to 4000 — and an early checkpoint
+    # may already be a Stage C worth keeping.
+    stock1024 = {n: t.detach().cpu().clone()
+                 for n, t in pipeline.models[K1024].state_dict().items()}
+    cks = sorted(glob.glob(C_GLOB))
+    print(f"sweeping {len(cks)} Stage C checkpoints (1024 stage stays stock throughout)")
+    for p in cks:
+        m = re.search(r"step0*(\d+)", os.path.basename(p))
+        tag = "c" + (m.group(1) if m else os.path.basename(p)[:4])
+        sd = torch.load(p, map_location="cuda", weights_only=True)
+        missing, unexpected = pipeline.models[K512].load_state_dict(sd, strict=False)
+        print(f"{tag}: loaded {os.path.basename(p)} missing={len(missing)} unexpected={len(unexpected)}")
+        del sd
+        pipeline.models[K1024].load_state_dict(stock1024, strict=False)
+        for case, paths in CASES.items():
+            gen(case, paths, tag)
+elif os.environ.get("EVAL_ISOLATE") == "1":
     # ISOLATION RUN. The C+D cascade came out visibly worse than stock on the
     # GTI, but "worse" does not say WHICH stage did it. Four variants from one
     # pipeline, one seed, one pod answers that: whichever variant carries the

@@ -26,6 +26,11 @@ ROW_LABELS = {
     "conly":  "STAGE C ONLY     (tuned 512 + stock 1024)",
     "donly":  "STAGE D ONLY     (stock 512 + tuned 1024)",
     "cd":     "STAGE C + D      (tuned 512 + tuned 1024)",
+    # step sweep: same 1024 stage throughout, only the Stage C checkpoint moves
+    "c1000":  "STAGE C @ 1000 steps",
+    "c2000":  "STAGE C @ 2000 steps",
+    "c3000":  "STAGE C @ 3000 steps",
+    "c4000":  "STAGE C @ 4000 steps",
 }
 
 
