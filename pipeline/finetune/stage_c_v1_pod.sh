@@ -53,13 +53,27 @@ aug = "/workspace/alamcars/renders_cond_aug"
 src = "/workspace/alamcars/renders_cond"
 if not os.path.isdir(aug):
     print("FATAL: renders_cond_aug missing — run augment_cond_pod.sh first"); sys.exit(1)
-a = [d for d in glob.glob(aug + "/*") if os.path.isdir(d)]
-s = [d for d in glob.glob(src + "/*") if os.path.isdir(d)]
-empty = [d for d in a if not glob.glob(d + "/*")]
-print(f"augmented shape dirs: {len(a)}  (source has {len(s)})")
-print(f"empty augmented dirs: {len(empty)}")
-if len(a) < len(s) * 0.98 or empty:
-    print("FATAL: augmentation incomplete"); sys.exit(1)
+# Compare PER DIRECTORY against the source. The first version of this check
+# failed on "any empty output dir", which is the wrong rule: the augment run
+# reported exactly one empty output, and an empty output is only a fault if the
+# INPUT had views to copy. renders_cond is already known to hold a shape with
+# no renders (the review pass found 966 of 967 entries had images), so a
+# blanket ban would block the run over a harmless pre-existing gap.
+lost, empty_src = [], 0
+sdirs = sorted(os.path.basename(d.rstrip("/")) for d in glob.glob(src + "/*/"))
+for name in sdirs:
+    ns = len(glob.glob(f"{src}/{name}/*"))
+    nd = len(glob.glob(f"{aug}/{name}/*"))
+    if ns == 0:
+        empty_src += 1
+    elif nd < ns:
+        lost.append((name, ns, nd))
+print(f"source shape dirs: {len(sdirs)} | empty AT SOURCE (pre-existing): {empty_src}")
+print(f"dirs where augmentation LOST views: {len(lost)}")
+for name, ns, nd in lost[:10]:
+    print(f"  {name[:12]}: src {ns} -> dst {nd}")
+if lost:
+    print("FATAL: augmentation dropped views"); sys.exit(1)
 # writability, so a full volume cannot truncate this run's checkpoints
 p = "/workspace/_v1_probe"
 with open(p, "wb") as f:
