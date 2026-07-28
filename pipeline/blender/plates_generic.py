@@ -34,8 +34,14 @@ V = np.vstack(allv)
 lo, hi = V.min(0), V.max(0)
 size = hi - lo
 ctr = (lo + hi) / 2
-LA = 0 if size[0] >= size[2] else 2       # length axis (x or z; Blender z-up)
-WA = 2 if LA == 0 else 0                   # width axis
+# Length and width are the two HORIZONTAL axes; z (2) is always height in
+# this file's z-up convention. The previous version chose length from {x, z}
+# and width as the other of that pair - so a car whose length lies on x got
+# WA=2, and since the plate builder writes p[WA] and p[2] into the same slot,
+# every plate degenerated to a zero-width vertical line (found 2026-07-28 on
+# bmw-320i-2023-v1; the quads were in the file, 0.0 units wide).
+LA = 0 if size[0] >= size[1] else 1        # length: the longer horizontal axis
+WA = 1 - LA                                # width: the other horizontal axis
 gz = lo[2]
 H = size[2]
 Wd = size[WA]
@@ -43,7 +49,20 @@ Wd = size[WA]
 roof = V[V[:, 2] > gz + 0.80 * H]
 roof_l = roof[:, LA].mean() if len(roof) > 30 else ctr[LA]
 front_end = lo[LA] if abs(lo[LA] - roof_l) > abs(hi[LA] - roof_l) else hi[LA]
+# SALOON TRAP (found 2026-07-28 on bmw-320i-2023-v1): the roof-of-a-hatchback
+# heuristic picks the wrong end on a three-box saloon whose roof centroid sits
+# toward the nose. The result is a yellow plate on the kidney grille with
+# mirrored text - both symptoms from the one wrong pick, verified by render.
+# --front lo|hi overrides the guess when a human has looked.
+if "--front" in argv:
+    front_end = lo[LA] if argv[argv.index("--front") + 1] == "lo" else hi[LA]
 rear_end = hi[LA] if front_end == lo[LA] else lo[LA]
+
+# idempotent: a re-bake must strip the previous bake's plates first, or the
+# new quads z-fight the old ones and the old orientation wins on camera
+for _o in [o for o in bpy.context.scene.objects
+           if o.name.startswith(("plate_front", "plate_rear"))]:
+    bpy.data.objects.remove(_o, do_unlink=True)
 
 pw = (0.52 / 1.80 * Wd) / 2               # half-width of a 520mm plate
 ph = (pw * 111 / 520)
