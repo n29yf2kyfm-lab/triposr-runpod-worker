@@ -171,14 +171,20 @@ PYSMOKE
 
 status fetch-inputs
 PUB=https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finetune/eval_inputs
-mkdir -p /root/eval_inputs/{gti,qashqai}
-for i in 0 1 2 3; do
-  curl -sf "$PUB/gti/$i.jpg"     -o /root/eval_inputs/gti/$i.jpg     || true
-  curl -sf "$PUB/qashqai/$i.jpg" -o /root/eval_inputs/qashqai/$i.jpg || true
+# cases come from D3S2_CASES (comma list, forwarded by the launcher's D3S2_
+# prefix); each case downloads photo 0 from eval_inputs/<case>/
+D3S2_CASES="${D3S2_CASES:-gti,qashqai}"
+export D3S2_CASES
+echo "cases: $D3S2_CASES"
+for c in $(echo "$D3S2_CASES" | tr ',' ' '); do
+  mkdir -p /root/eval_inputs/$c
+  for i in 0 1 2 3; do
+    curl -sf "$PUB/$c/$i.jpg" -o /root/eval_inputs/$c/$i.jpg || true
+  done
+  [ -s /root/eval_inputs/$c/0.jpg ] \
+    || { echo "FATAL: eval photo $c/0.jpg missing from bucket"; status FATAL-inputs; sleep infinity; }
+  ls -la /root/eval_inputs/$c
 done
-ls -la /root/eval_inputs/gti /root/eval_inputs/qashqai
-[ -s /root/eval_inputs/gti/0.jpg ] && [ -s /root/eval_inputs/qashqai/0.jpg ] \
-  || { echo "FATAL: eval photos missing from bucket"; status FATAL-inputs; sleep infinity; }
 
 status api-discovery
 # The first attempt died 16 seconds in, at import time — before any of the
@@ -224,8 +230,8 @@ from PIL import Image
 
 # Direct3D-S2 is single-image; photo 0 of each case is the same front-3/4 the
 # TRELLIS evals lead with, which keeps the comparison same-photo.
-CASES = [("gti", "/root/eval_inputs/gti/0.jpg"),
-         ("qashqai", "/root/eval_inputs/qashqai/0.jpg")]
+CASES = [(c, f"/root/eval_inputs/{c}/0.jpg")
+         for c in os.environ.get("D3S2_CASES", "gti,qashqai").split(",") if c]
 RES = int(os.environ.get("D3S2_RES", "1024"))
 RUNID = os.environ["RUNID"]
 SB = os.environ["SB_KEY"]
