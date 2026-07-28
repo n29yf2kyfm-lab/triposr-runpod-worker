@@ -105,6 +105,14 @@ def delete_pod(key, pod, why):
         if "err" not in r:
             print(f"pod {pod} deleted ({why})", flush=True)
             return True
+        if "404" in str(r.get("err", "")):
+            # Already gone — someone else (watchdog, another supervisor) beat
+            # us to it. That is success, not an alarm: the council audit found
+            # six zombie launchers queued to cry "STILL BILLING" over pods
+            # deleted out-of-band, training the operator to ignore the one
+            # message that must never be ignorable.
+            print(f"pod {pod} already deleted ({why})", flush=True)
+            return True
         time.sleep(10 * (attempt + 1))
     print(f"POD_DELETE_FAILED {pod} — DELETE IT MANUALLY, IT IS STILL BILLING", flush=True)
     return False
@@ -126,7 +134,14 @@ def main():
         sys.exit("RUNPOD_API_KEY missing from env")
     hf = os.environ.get("HF_TOKEN", "")
 
-    boot = (f"curl -sSL '{BUCKET}/{a.script}?cb='$(date +%s) | bash; sleep infinity")
+    # Preflight the script URL: without -f, a 404 pipes a JSON error into bash,
+    # nothing starts, no status server exists, and the launcher polls silence
+    # for its whole --hours budget — ~$14 of A100 for a filename typo.
+    head = subprocess.run(["curl", "-sfI", "-m", "30", f"{BUCKET}/{a.script}"],
+                          capture_output=True)
+    if head.returncode != 0:
+        sys.exit(f"bootstrap script not fetchable: {BUCKET}/{a.script}")
+    boot = (f"curl -sfSL '{BUCKET}/{a.script}?cb='$(date +%s) | bash; sleep infinity")
     env = {"HF_HOME": "/workspace/hf_cache"}
     if hf:
         env["HF_TOKEN"] = env["HUGGING_FACE_HUB_TOKEN"] = hf
@@ -140,8 +155,12 @@ def main():
     # (would have evaluated v0's damaged weights while reporting them as v1).
     # The old comment warned that a missing name is silently dropped; the
     # warning did not help, so the mechanism changed instead.
+    # Any new pod-script knob MUST use one of these prefixes or be named here —
+    # the council audit found D3S2_RUN_ID, D3S2_RES and TEX_MIN_POOL silently
+    # unreachable, the exact bug class this mechanism was built to kill.
     forwarded = sorted(k for k in os.environ
-                       if k.startswith(("EVAL_", "PUBLISH_")) and os.environ[k])
+                       if k.startswith(("EVAL_", "PUBLISH_", "D3S2_", "TEX_"))
+                       and os.environ[k])
     for k in ("MAX_STEPS", "HF_REPO", "MIN_FREE_GB"):
         if os.environ.get(k):
             forwarded.append(k)
@@ -192,9 +211,20 @@ def main():
 
     outcome = "POLL_TIMEOUT"
     last = ""
+    quiet = 0
     for _ in range(int(a.hours * 3600 / 120)):
         time.sleep(120)
         s = fetch("/status.json")
+        # Silence is ambiguous: booting pod, dead proxy, or a pod deleted
+        # out-of-band. After 5 consecutive empty polls, ask the API whether
+        # the pod still exists — a launcher polling a deleted pod for its
+        # whole --hours budget is a zombie (six of them existed 2026-07-28).
+        quiet = quiet + 1 if not s else 0
+        if quiet >= 5:
+            if "err" in api(key, f"pods/{pod}"):
+                print(f"pod {pod} no longer exists (deleted out-of-band) — exiting", flush=True)
+                return
+            quiet = 0
         if s and s != last:
             print("status:", s.strip(), flush=True)
             last = s

@@ -62,6 +62,75 @@ export PYTHONUNBUFFERED=1
 pip install -q tensorboard pandas easydict || true
 pip install -q "transformers==4.57.6" || true
 
+status hdri-check
+# THE ACTUAL KILLER OF RUNS 1-3. The texture dataset
+# (trellis2/datasets/structured_latent_svpbr.py:114) hardcodes
+#   cv2.cvtColor(cv2.imread('assets/hdri/forest.exr', IMREAD_UNCHANGED), ...)
+# for PBR relighting — a relative path inside the image, nothing to do with our
+# data, which is why sweeping 429 shapes' images twice found nothing. If the
+# file is absent, or cv2 gates EXR decode behind OPENCV_IO_ENABLE_OPENEXR,
+# imread returns None and the first batch dies with "!_src.empty()". The shape
+# dataset class never touches HDRIs, which is why no shape run ever hit this.
+# Probe the EXACT failing op; heal by downloading the upstream asset, else by
+# writing a neutral studio HDRI; FATAL only if the op still fails.
+export OPENCV_IO_ENABLE_OPENEXR=1
+python3 - <<'PYHDRI' || { status FATAL-hdri; sleep infinity; }
+import os, sys
+import cv2
+import numpy as np
+os.environ.setdefault("OPENCV_IO_ENABLE_OPENEXR", "1")
+p = "assets/hdri/forest.exr"
+os.makedirs(os.path.dirname(p), exist_ok=True)
+print(f"cv2 {cv2.__version__}; {p}: exists={os.path.exists(p)} "
+      f"size={os.path.getsize(p) if os.path.exists(p) else 0}")
+
+def op_ok():
+    try:
+        im = cv2.imread(p, cv2.IMREAD_UNCHANGED)
+        if im is None or im.size == 0:
+            return False
+        cv2.cvtColor(im, cv2.COLOR_BGR2RGB)   # the trainer's exact line
+        return True
+    except Exception as e:
+        print(f"  op failed: {type(e).__name__} {str(e)[:100]}")
+        return False
+
+if op_ok():
+    print("HDRI gate: upstream asset loads as-is; no patch needed")
+    sys.exit(0)
+
+# cv2 5.0 wheels ship with EXR support COMPILED OUT (measured in the sandbox:
+# imwrite/'imread' of .exr fail with 'could not find a writer', env var or
+# not) - so no file we could download or synthesise is loadable. The only
+# heal that can work is patching the loader itself: swap the file-read for an
+# in-memory neutral studio HDRI (float32 vertical gradient - our conditioning
+# renders are studio-lit, so neutral is domain-appropriate).
+SRC = "trellis2/datasets/structured_latent_svpbr.py"
+OLD = "cv2.cvtColor(cv2.imread('assets/hdri/forest.exr', cv2.IMREAD_UNCHANGED), cv2.COLOR_BGR2RGB),"
+NEW = ("np.repeat(np.repeat(np.linspace(2.5, 0.05, 512, dtype=np.float32)"
+       "[:, None], 1024, axis=1)[..., None], 3, axis=2),  # ALAM3D_HDRI_PATCH")
+s = open(SRC).read()
+if "ALAM3D_HDRI_PATCH" in s:
+    print("loader already patched")
+elif OLD in s:
+    open(SRC, "w").write(s.replace(OLD, NEW, 1))
+    print(f"patched {SRC}: EXR file-read replaced with in-memory neutral HDRI")
+else:
+    print(f"FATAL: expected HDRI line not found verbatim in {SRC} - the")
+    print("       upstream source drifted; refusing to guess. Line sought:")
+    print(f"       {OLD}")
+    sys.exit(1)
+# prove the replacement expression actually constructs, in this interpreter
+arr = np.repeat(np.repeat(np.linspace(2.5, 0.05, 512, dtype=np.float32)
+                          [:, None], 1024, axis=1)[..., None], 3, axis=2)
+assert arr.shape == (512, 1024, 3) and arr.dtype == np.float32
+# and that the patched module still parses
+import ast
+ast.parse(open(SRC).read())
+print(f"HDRI gate: patch applied, replacement array {arr.shape} {arr.dtype}, "
+      f"module parses")
+PYHDRI
+
 status config-exists
 # The texture config name is inferred from the shape config's naming scheme.
 # Inference is not knowledge: prove the file exists before anything costs money,
@@ -253,12 +322,21 @@ for sha in keep:
         continue
     src_ok = readable(os.path.join(SRC, sha))
     if src_ok > 0:
+        # Clear the aug dir BEFORE healing: aug filenames need not match src
+        # filenames, so copying over the top can leave the original corrupt
+        # file in place while the log claims "healed" (council reviewer 1,
+        # finding 1). Then RE-VERIFY the healed dir with the same reader —
+        # a heal nobody re-checked is a gate nobody tested.
+        shutil.rmtree(os.path.join(AUG, sha), ignore_errors=True)
         os.makedirs(os.path.join(AUG, sha), exist_ok=True)
         for f in glob.glob(os.path.join(SRC, sha, "*")):
             if f.lower().endswith(EXT):
                 shutil.copy2(f, os.path.join(AUG, sha, os.path.basename(f)))
-        healed.append(sha)
-        verified.append(sha)
+        if readable(os.path.join(AUG, sha)) > 0:
+            healed.append(sha)
+            verified.append(sha)
+        else:
+            dropped.append(sha)
     else:
         dropped.append(sha)
 print(f"image verification (cv2 full decode): {len(verified)} pool shapes ok "

@@ -51,6 +51,11 @@ def main():
     key = os.environ.get("RUNPOD_API_KEY")
     if not key:
         sys.exit("RUNPOD_API_KEY missing from env")
+    # Say up front whether evidence archiving is armed — a watchdog launched
+    # without SB_KEY silently skips the Supabase archive and nobody knows
+    # until the evidence is needed.
+    print("log archiving:", "ARMED" if os.environ.get("SB_KEY") else
+          "DISARMED (no SB_KEY in env - captures print locally only)", flush=True)
     url = f"https://{pod}-8000.proxy.runpod.net"
 
     last = ""
@@ -67,6 +72,9 @@ def main():
             # of the failure it is reacting to guards money by spending it
             # again on the retry.
             tail = fetch(url + "/stage_b.log", timeout=90)[-12000:]
+            if not tail:
+                time.sleep(5)   # one retry: a race with the proxy is cheaper than lost evidence
+                tail = fetch(url + "/stage_b.log", timeout=90)[-12000:]
             if tail:
                 print("---- last 12000 bytes of pod log ----", flush=True)
                 print(tail, flush=True)
