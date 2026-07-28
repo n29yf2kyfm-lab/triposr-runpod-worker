@@ -213,20 +213,22 @@ if len(keep) < floor:
           f"(floor {floor}). The texture data is thinner than expected — "
           f"check the unblock run before spending training money."); sys.exit(1)
 
-# VERIFY THE IMAGES, NOT THE FLAGS. Run 1 died at the first batch with
-# OpenCV's "!_src.empty()": the pool here is latents ∩ keep-verdict, which
-# admits ~133 shapes Stage C never trained, and renders_cond_aug predates
-# them — so metadata said "Cond rendered: 429" while the files for some
-# shapes were absent or empty. Metadata is a claim; only opening the file is
-# a fact. For each pool shape: verify the aug dir has readable images; if
-# not, fall back to copying the PRISTINE renders_cond images in (augmentation
-# is a robustness nicety, not a requirement); drop the shape only if neither
-# location has a single readable image.
+# VERIFY THE IMAGES WITH THE TRAINER'S OWN READER. Runs 1 and 2 both died at
+# the first batches with OpenCV's "!_src.empty()" — and run 2 died AFTER a
+# PIL-verify pass had blessed all 429 shapes, which proves PIL's shallow
+# verify() is weaker than cv2's decode (a truncated file from the volume-full
+# era can pass one and fail the other). The only check that predicts the
+# trainer's behaviour is the trainer's own reader: cv2.imread, full decode,
+# every image, every pool shape. One undecodable view kills a whole run —
+# upstream retries the same sample 3x and then exits zero — so a dir with any
+# bad image is rejected and healed from pristine, or the shape is dropped.
 import shutil
-from PIL import Image
+import cv2
+import numpy as np
 AUG = "/workspace/alamcars/renders_cond_aug"
 SRC = "/workspace/alamcars/renders_cond"
 EXT = (".png", ".jpg", ".jpeg", ".webp")
+bad_files = []
 
 def readable(d):
     n = 0
@@ -235,12 +237,13 @@ def readable(d):
             continue
         try:
             if os.path.getsize(f) == 0:
-                return 0          # one empty image can kill a batch; reject the dir
-            with Image.open(f) as im:
-                im.verify()
+                bad_files.append((f, "zero bytes")); return 0
+            im = cv2.imread(f, cv2.IMREAD_UNCHANGED)
+            if im is None or im.size == 0:
+                bad_files.append((f, "cv2 decode returned empty")); return 0
             n += 1
-        except Exception:
-            return 0
+        except Exception as e:
+            bad_files.append((f, type(e).__name__)); return 0
     return n
 
 verified, healed, dropped = [], [], []
@@ -258,11 +261,17 @@ for sha in keep:
         verified.append(sha)
     else:
         dropped.append(sha)
-print(f"image verification: {len(verified)} pool shapes have readable cond "
-      f"images ({len(healed)} healed from pristine renders), {len(dropped)} "
-      f"dropped with no readable images anywhere")
+print(f"image verification (cv2 full decode): {len(verified)} pool shapes ok "
+      f"({len(healed)} healed from pristine renders), {len(dropped)} dropped")
+for f, why in bad_files[:20]:
+    print(f"  BAD IMAGE: {f}  ({why})")
 for s in dropped[:10]:
     print(f"  dropped: {s[:16]}")
+if not bad_files:
+    print("NOTE: cv2 decoded every cond image cleanly. If the trainer still "
+          "dies on an empty cvtColor source, the loader is reading a file "
+          "class this sweep does not cover — see the dataset source dumped "
+          "below for what it actually opens.")
 keep = verified
 if len(keep) < floor:
     print(f"FATAL: after image verification the pool is {len(keep)} "
@@ -291,6 +300,23 @@ m.reset_index().to_csv(f"{priv}/metadata.csv", index=False)
 print(f"merged {merged} record files; private metadata rows: {len(m)}")
 if len(m) < len(keep) - 5:
     print(f"FATAL: metadata lost rows — {len(m)} for {len(keep)} shapes"); sys.exit(1)
+PY
+
+status dataset-source
+# EVIDENCE, NOT INFERENCE: dump what the dataset class actually reads. Two
+# runs died in the loader; if the cv2 sweep above finds nothing, the answer
+# is in this dump, not in another theory.
+python3 - <<'PY'
+import glob, re
+for f in sorted(set(glob.glob("trellis2/datasets/**/*.py", recursive=True) +
+                    glob.glob("datasets/*.py"))):
+    src = open(f, errors="ignore").read()
+    if "ImageConditionedSLatPbr" not in src and "SLatPbr" not in src:
+        continue
+    print(f"===== {f} =====")
+    for i, line in enumerate(src.splitlines(), 1):
+        if re.search(r"imread|cvtColor|Image\.open|\.png|\.jpg|\.webp|os\.path\.join|glob|open\(", line):
+            print(f"  {i:>4}: {line.rstrip()[:140]}")
 PY
 
 status build-data-roots
