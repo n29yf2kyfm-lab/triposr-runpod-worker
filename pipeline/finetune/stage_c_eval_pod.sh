@@ -41,6 +41,39 @@ cd /app/TRELLIS.2 || { status FATAL-no-trellis2; sleep infinity; }
 export PYTHONPATH=/app/TRELLIS.2:/app:$PYTHONPATH
 pip install -q "transformers==4.57.6" || true
 
+status arch-check
+# ARCHITECTURE GUARD. The container's CUDA kernels are compiled for a fixed set
+# of architectures. Land on a newer card and every kernel launch fails with
+# "no kernel image is available for execution on the device" - but only once
+# real work starts, which on 2026-07-28 meant 25 minutes and $0.45 spent before
+# an H100 admitted it could not run this image.
+#
+# torch knows both halves of the answer at import time. Ask it, in seconds,
+# before anything expensive happens. This sits INSIDE the pod deliberately: a
+# launcher allowlist protects only against the mistakes we already know about.
+python3 - <<'PYARCH' || { status FATAL-gpu-arch; sleep infinity; }
+import sys
+import torch
+if not torch.cuda.is_available():
+    print("FATAL: no CUDA device visible"); sys.exit(1)
+name = torch.cuda.get_device_name(0)
+cap = torch.cuda.get_device_capability(0)
+have = f"sm_{cap[0]}{cap[1]}"
+built = list(torch.cuda.get_arch_list())
+print(f"GPU: {name}  compute={have}")
+print(f"image built for: {' '.join(built) or '(none reported)'}")
+# A kernel runs if its exact arch is present, or if a lower sm_XY of the same
+# major generation is present and PTX can JIT forward. Exact match is the only
+# thing worth trusting here, so require it.
+if built and have not in built:
+    print(f"FATAL: this image has no kernels for {have} ({name}).")
+    print(f"       Supported: {' '.join(built)}")
+    print("       Every kernel launch would fail once generation starts.")
+    sys.exit(1)
+print(f"arch OK: {have} is supported by this image")
+PYARCH
+
+
 # Fail fast and loudly if the volume is out of quota again — a silent quota
 # error is what truncated Stage D's step-4000 checkpoint mid-save.
 python3 - <<'PY' || { status FATAL-volume-quota; sleep infinity; }

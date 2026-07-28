@@ -21,29 +21,33 @@ import argparse, json, os, subprocess, sys, time, urllib.request
 BUCKET = "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finetune"
 VOLUME = "yiv4apiad7"          # alam3d-data (EU-RO-1)
 IMAGE = "alamk123/ai-mechanic:trellis2-latest"
+# WHAT THE CONTAINER CAN ACTUALLY RUN.
+# alamk123/ai-mechanic:trellis2-latest is compiled for sm_80 and below. On an
+# H100 (sm_90) it dies with "CUDA error: no kernel image is available for
+# execution on the device" - after loading the model, 25 minutes and $0.45 in.
+# Measured 2026-07-28 on pod wbaly1yo5vxwb9.
+#
+# So a wider GPU list is NOT a better capacity hunt. Asking for hardware the
+# image cannot execute converts "wait for an A100" into "pay for a guaranteed
+# failure". H100/H200/Blackwell ids are deliberately absent until the image is
+# rebuilt with kernels for them; the pod-side guard in the bootstraps is the
+# backstop if one ever sneaks back in.
+#
+# Note the log line prints gpus[0] while the API receives the whole group, so a
+# refusal covers every id listed - and the CREATED line now reports the real
+# allocated cost so a mismatch is visible immediately.
 TIERS = {
-    # 80GB-class only: 24GB cards cudaMalloc-OOM the 1.3B trainer.
-    # Widened 2026-07-28 after 14 consecutive "no instances currently
-    # available" refusals: the old list named four types and RunPod had none of
-    # them, while H100 NVL (94GB), H200 (141GB) and RTX PRO 6000 (96GB) were all
-    # purchasable in secure cloud. A capacity hunt is only as good as the set it
-    # asks for. Note the log line prints gpus[0] but the API receives the whole
-    # list, so a refusal covers every id in the group.
-    "80gb": [["NVIDIA A100 80GB PCIe", "NVIDIA A100-SXM4-80GB",
-              "NVIDIA H100 PCIe", "NVIDIA H100 80GB HBM3",
-              "NVIDIA H100 NVL", "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-              "NVIDIA H200", "NVIDIA H200 NVL"],
+    # 80GB-class, sm_80 or below: 24GB cards cudaMalloc-OOM the 1.3B trainer
+    "80gb": [["NVIDIA A100 80GB PCIe", "NVIDIA A100-SXM4-80GB"],
              ["NVIDIA A100-SXM4-80GB"]],
-    # INFERENCE-ONLY work (the checkpoint sweep, generation, eval). Training
-    # needs 80GB; generating does not. Measured: last night's TRAINING run peaked
-    # at 33% of an 80GB card, ~26GB, and inference is lighter than training - so
-    # 48GB carries real headroom. These are also far cheaper and far more
-    # available than an A100: RTX A6000 is $0.33/hr against $1.39.
+    # INFERENCE-ONLY (checkpoint sweeps, generation). Training needs 80GB;
+    # generating does not - last night's training peaked at 33% of an 80GB card,
+    # ~26GB, and inference is lighter. 48GB Ampere/Ada parts are sm_86/sm_89,
+    # inside what the image supports, and cost a fraction of an A100.
     "eval": [["NVIDIA RTX A6000", "NVIDIA L40S", "NVIDIA L40",
               "NVIDIA RTX 6000 Ada Generation"],
-             ["NVIDIA A100 80GB PCIe", "NVIDIA A100-SXM4-80GB",
-              "NVIDIA H100 NVL", "NVIDIA RTX PRO 6000 Blackwell Server Edition"]],
-    # render/encode work (e.g. render_cond backfill) is fine on 24GB
+             ["NVIDIA A100 80GB PCIe", "NVIDIA A100-SXM4-80GB"]],
+    # render/encode work is fine on 24GB
     "render": [["NVIDIA RTX A5000", "NVIDIA GeForce RTX 3090",
                 "NVIDIA RTX A6000", "NVIDIA L40S"],
                ["NVIDIA GeForce RTX 4090"]],
@@ -125,7 +129,15 @@ def main():
                 "dockerStartCmd": ["bash", "-c", boot]})
             if d.get("id"):
                 pod = d["id"]
-                print(f"POD CREATED {pod} tier={gpus[0]} cost={d.get('costPerHr')}", flush=True)
+                # gpus[0] is what we ASKED FIRST for, not what we got. The
+                # allocated costPerHr is the honest signal: an A100 PCIe is
+                # $1.19 and an H100 PCIe is $1.99, so a surprising price means a
+                # surprising GPU. Printing the requested id alone is how a
+                # 25-minute H100 failure got logged as "tier=A100".
+                print(f"POD CREATED {pod} requested={gpus[0]} "
+                      f"ACTUAL_COST={d.get('costPerHr')}/hr "
+                      f"(A100 PCIe=1.19 A100 SXM=1.39 - anything higher is NOT an A100)",
+                      flush=True)
                 break
             print(f"no capacity ({gpus[0]}): {d.get('err', '?')[:100]}", flush=True)
         if not pod:
