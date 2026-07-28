@@ -22,10 +22,27 @@ BUCKET = "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-
 VOLUME = "yiv4apiad7"          # alam3d-data (EU-RO-1)
 IMAGE = "alamk123/ai-mechanic:trellis2-latest"
 TIERS = {
-    # 80GB-class only: 24GB cards cudaMalloc-OOM the 1.3B trainer
+    # 80GB-class only: 24GB cards cudaMalloc-OOM the 1.3B trainer.
+    # Widened 2026-07-28 after 14 consecutive "no instances currently
+    # available" refusals: the old list named four types and RunPod had none of
+    # them, while H100 NVL (94GB), H200 (141GB) and RTX PRO 6000 (96GB) were all
+    # purchasable in secure cloud. A capacity hunt is only as good as the set it
+    # asks for. Note the log line prints gpus[0] but the API receives the whole
+    # list, so a refusal covers every id in the group.
     "80gb": [["NVIDIA A100 80GB PCIe", "NVIDIA A100-SXM4-80GB",
-              "NVIDIA H100 PCIe", "NVIDIA H100 80GB HBM3"],
+              "NVIDIA H100 PCIe", "NVIDIA H100 80GB HBM3",
+              "NVIDIA H100 NVL", "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+              "NVIDIA H200", "NVIDIA H200 NVL"],
              ["NVIDIA A100-SXM4-80GB"]],
+    # INFERENCE-ONLY work (the checkpoint sweep, generation, eval). Training
+    # needs 80GB; generating does not. Measured: last night's TRAINING run peaked
+    # at 33% of an 80GB card, ~26GB, and inference is lighter than training - so
+    # 48GB carries real headroom. These are also far cheaper and far more
+    # available than an A100: RTX A6000 is $0.33/hr against $1.39.
+    "eval": [["NVIDIA RTX A6000", "NVIDIA L40S", "NVIDIA L40",
+              "NVIDIA RTX 6000 Ada Generation"],
+             ["NVIDIA A100 80GB PCIe", "NVIDIA A100-SXM4-80GB",
+              "NVIDIA H100 NVL", "NVIDIA RTX PRO 6000 Blackwell Server Edition"]],
     # render/encode work (e.g. render_cond backfill) is fine on 24GB
     "render": [["NVIDIA RTX A5000", "NVIDIA GeForce RTX 3090",
                 "NVIDIA RTX A6000", "NVIDIA L40S"],
