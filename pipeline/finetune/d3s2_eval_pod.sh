@@ -123,8 +123,12 @@ fi
 # the real compiler error truncated - the classic cause is the missing
 # sparsehash headers, so install them and print the FULL error if it still
 # fails. Either route satisfying the import unblocks the pipeline load.
-export SPARSE_BACKEND=spconv
-echo "SPARSE_BACKEND=spconv exported (spconv present in image: $(python3 -c 'import spconv, sys; print(spconv.__version__)' 2>/dev/null || echo NO))"
+# v9 taught the final lesson the hard way: torchsparse BUILT successfully
+# (libsparsehash was the missing piece) and then the spconv env override -
+# added as a shortcut when spconv was assumed present - told the module to
+# import the one backend the image does NOT have. Ask for what we build.
+export SPARSE_BACKEND=torchsparse
+echo "SPARSE_BACKEND=torchsparse exported"
 python3 -c "import torchsparse" 2>/dev/null && echo "torchsparse: already present" || {
   echo "building torchsparse as backup (undeclared dep)..."
   apt-get update -qq 2>/dev/null; apt-get install -y -qq libsparsehash-dev 2>/dev/null \
@@ -132,7 +136,7 @@ python3 -c "import torchsparse" 2>/dev/null && echo "torchsparse: already presen
   pip install --no-build-isolation -c /tmp/torch_pins.txt \
     "git+https://github.com/mit-han-lab/torchsparse.git" 2>&1 | tail -20
   python3 -c "import torchsparse; print('torchsparse OK:', torchsparse.__version__)" \
-    || echo "torchsparse build FAILED - relying on SPARSE_BACKEND=spconv route"
+    || { echo "FATAL: torchsparse build failed and it is the only backend route"; exit 1; }
 }
 # build every nested extension the repo carries (voxelize, udf_ext, ...)
 find . -mindepth 2 -maxdepth 5 -name setup.py | while read -r s; do
