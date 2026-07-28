@@ -132,7 +132,7 @@ ls -la /root/eval_inputs/*/
 
 status generate
 python3 - <<'PY'
-import glob, io, json, os, re, sys, subprocess, types, zipfile
+import glob, io, json, os, re, sys, subprocess, types, zipfile, time, urllib.request
 import importlib.util
 import torch
 from PIL import Image
@@ -185,6 +185,32 @@ if _only:
     CASES = {k: v for k, v in CASES.items() if k in _only}
 print("cases:", list(CASES))
 
+RUNID = os.environ.get("EVAL_RUN_ID") or time.strftime("%Y%m%dT%H%M", time.gmtime())
+_SB = os.environ.get("SB_KEY", "")
+_pushed = []
+
+def _push(local, name):
+    """Ship one GLB immediately. Never raises - a failed upload must not kill a
+    sweep that is otherwise producing good results, but it must be VISIBLE, so
+    every outcome is printed and counted."""
+    if not _SB:
+        print(f"  upload skipped (no SB_KEY): {name}", flush=True); return
+    url = ("https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/"
+           f"car-meshes/eval/{RUNID}/{name}")
+    try:
+        with open(local, "rb") as fh:
+            data = fh.read()
+        rq = urllib.request.Request(url, data=data, method="POST")
+        for h, v in (("apikey", _SB), ("Authorization", "Bearer " + _SB),
+                     ("Content-Type", "model/gltf-binary"), ("x-upsert", "true")):
+            rq.add_header(h, v)
+        urllib.request.urlopen(rq, timeout=300).read()
+        _pushed.append(name)
+        print(f"  uploaded {name} -> car-meshes/eval/{RUNID}/ ({len(_pushed)} so far)", flush=True)
+    except Exception as e:
+        print(f"  UPLOAD FAILED {name}: {type(e).__name__} {str(e)[:80]}", flush=True)
+
+
 def gen(case, paths, tag):
     imgs = [Image.open(p) for p in paths]
     torch.manual_seed(42)
@@ -204,7 +230,9 @@ def gen(case, paths, tag):
         remesh=True, remesh_band=1, remesh_project=0, verbose=False)
     path = f"{OUT}/{case}_{tag}.glb"
     glb.export(path, extension_webp=False)
-    print(f"GLB {case}/{tag}: {os.path.getsize(path)//1024}KB")
+    kb = os.path.getsize(path) // 1024
+    print(f"GLB {case}/{tag}: {kb}KB", flush=True)
+    _push(path, f"{case}_{tag}.glb")
 
 for case, paths in CASES.items():
     gen(case, paths, "base")
@@ -258,6 +286,27 @@ if os.environ.get("EVAL_SWEEP") == "1":
     stock1024 = {n: t.detach().cpu().clone()
                  for n, t in pipeline.models[K1024].state_dict().items()}
     cks = sorted(glob.glob(C_GLOB))
+    # PRE-FLIGHT: zip-verify every checkpoint before generating anything.
+    # step-1250 of the 2026-07-27 run was truncated by a full volume and took
+    # the whole sweep down at the fourth load, throwing away three checkpoints'
+    # worth of finished cars. A corrupt file is now a skipped file.
+    good, bad = [], []
+    for _p in cks:
+        try:
+            with zipfile.ZipFile(_p):
+                pass
+            good.append(_p)
+        except Exception as _e:
+            bad.append((os.path.basename(_p), type(_e).__name__,
+                        os.path.getsize(_p) // (1024 * 1024)))
+    for _n, _t, _mb in bad:
+        print(f"  CORRUPT, skipping: {_n} ({_mb}MB, {_t})", flush=True)
+    if not good:
+        print("FATAL: every checkpoint is unreadable"); sys.exit(1)
+    if bad:
+        print(f"  {len(bad)} of {len(cks)} checkpoints are unusable - "
+              f"sweeping the {len(good)} that are intact", flush=True)
+    cks = good
     print(f"sweeping {len(cks)} Stage C checkpoints (1024 stage stays stock throughout)")
     for p in cks:
         m = re.search(r"step0*(\d+)", os.path.basename(p))
