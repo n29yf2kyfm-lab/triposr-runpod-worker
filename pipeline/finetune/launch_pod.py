@@ -48,10 +48,16 @@ TIERS = {
     "eval": [["NVIDIA RTX A6000", "NVIDIA L40S", "NVIDIA L40",
               "NVIDIA RTX 6000 Ada Generation"],
              ["NVIDIA A100 80GB PCIe", "NVIDIA A100-SXM4-80GB"]],
-    # render/encode work is fine on 24GB
+    # render/encode/single-model inference: fine on 24GB. Widened 2026-07-28
+    # after the d3s2 hunt sat refused on a 4-id list - every id here is
+    # Ampere/Ada (sm_86/sm_89), inside what the image runs and outside the
+    # Hopper cuDNN failure. Cheapest group first; 48GB group second; A100 as
+    # the priced last resort so a long queue cannot strand the job.
     "render": [["NVIDIA RTX A5000", "NVIDIA GeForce RTX 3090",
-                "NVIDIA RTX A6000", "NVIDIA L40S"],
-               ["NVIDIA GeForce RTX 4090"]],
+                "NVIDIA GeForce RTX 4090", "NVIDIA L4"],
+               ["NVIDIA RTX A6000", "NVIDIA A40", "NVIDIA L40",
+                "NVIDIA L40S", "NVIDIA RTX 6000 Ada Generation"],
+               ["NVIDIA A100 80GB PCIe", "NVIDIA A100-SXM4-80GB"]],
 }
 
 
