@@ -60,12 +60,14 @@ print(f"PBR-DUMPED ROWS: {dumped} of {len(m)}   <- voxelize_pbr saw 0 of these b
 PY
 
 status arch-check
-# ARCHITECTURE GUARD. The container's CUDA kernels are compiled for sm_80 and
-# below. Land on a newer card and every kernel launch fails with "no kernel
-# image is available for execution on the device" — but only once real work
-# starts, which on 2026-07-28 meant 25 minutes and $0.45 spent before an H100
-# admitted it could not run this image. torch knows both halves of the answer at
-# import time; ask it in seconds, before anything expensive happens.
+# ARCHITECTURE GUARD. The container has no kernels for some newer GPUs — an
+# H100 (sm_90) fails every kernel launch with "no kernel image is available for
+# execution on the device", but only once real work starts, which on 2026-07-28
+# meant 25 minutes and $0.45 spent before the H100 admitted it. A100 (sm_80) is
+# proven good. Everything else is untested, so no claim is hardcoded here:
+# torch knows both halves of the answer at import time — the device's compute
+# capability and the image's compiled arch list — and this guard asks it, in
+# seconds, before anything expensive happens.
 python3 - <<'PYARCH' || { status FATAL-gpu-arch; sleep infinity; }
 import sys
 import torch

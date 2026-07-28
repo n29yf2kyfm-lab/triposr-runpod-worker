@@ -21,21 +21,20 @@ import argparse, json, os, subprocess, sys, time, urllib.request
 BUCKET = "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finetune"
 VOLUME = "yiv4apiad7"          # alam3d-data (EU-RO-1)
 IMAGE = "alamk123/ai-mechanic:trellis2-latest"
-# WHAT THE CONTAINER CAN ACTUALLY RUN.
-# alamk123/ai-mechanic:trellis2-latest is compiled for sm_80 and below. On an
-# H100 (sm_90) it dies with "CUDA error: no kernel image is available for
-# execution on the device" - after loading the model, 25 minutes and $0.45 in.
-# Measured 2026-07-28 on pod wbaly1yo5vxwb9.
+# WHAT THE CONTAINER CAN ACTUALLY RUN — measured, not asserted.
+# alamk123/ai-mechanic:trellis2-latest has no sm_90 kernels: on an H100 it dies
+# with "CUDA error: no kernel image is available for execution on the device",
+# after loading the model, 25 minutes and $0.45 in (pod wbaly1yo5vxwb9,
+# 2026-07-28). A100-class (sm_80) is proven good by every successful run.
+# Anything else is UNTESTED — an earlier version of this comment said
+# "compiled for sm_80 and below", which was a guess; the runtime arch guard in
+# the bootstraps (torch.cuda.get_arch_list vs the device) is the authority.
 #
 # So a wider GPU list is NOT a better capacity hunt. Asking for hardware the
 # image cannot execute converts "wait for an A100" into "pay for a guaranteed
 # failure". H100/H200/Blackwell ids are deliberately absent until the image is
-# rebuilt with kernels for them; the pod-side guard in the bootstraps is the
-# backstop if one ever sneaks back in.
-#
-# Note the log line prints gpus[0] while the API receives the whole group, so a
-# refusal covers every id listed - and the CREATED line now reports the real
-# allocated cost so a mismatch is visible immediately.
+# rebuilt with kernels for them; the pod-side guard is the backstop if one
+# ever sneaks back in.
 TIERS = {
     # 80GB-class, sm_80 or below: 24GB cards cudaMalloc-OOM the 1.3B trainer
     "80gb": [["NVIDIA A100 80GB PCIe", "NVIDIA A100-SXM4-80GB"],
@@ -64,6 +63,32 @@ def api(key, path, method="GET", body=None):
         return json.loads(raw) if raw else {}
     except urllib.error.HTTPError as e:
         return {"err": f"{e.code} {e.read().decode()[:140]}"}
+
+
+def allocated_gpu(key, pod):
+    """The GPU the pod actually landed on, from the API — not the requested id,
+    not a price heuristic. REST /pods omits the machine's GPU type; the GraphQL
+    machine{gpuTypeId} field is where RunPod reports it (verified 2026-07-28
+    against the account's own pods). Best-effort: a lookup failure must never
+    kill a launch that has already paid for a pod."""
+    # curl, not urllib: the sandbox egress proxy 403s python urllib for this
+    # host while letting curl through — the exact failure mode that blinded the
+    # early pod pollers, and it reproduced here on the first live test of this
+    # function (urllib: HTTPError; curl: clean response).
+    q = '{"query":"query{myself{pods{id machine{gpuTypeId}}}}"}'
+    try:
+        r = subprocess.run(
+            ["curl", "-s", "-m", "60", "https://api.runpod.io/graphql",
+             "-H", "Authorization: Bearer " + key,
+             "-H", "Content-Type: application/json", "-d", q],
+            capture_output=True, text=True, check=True)
+        d = json.loads(r.stdout)
+        for p in d["data"]["myself"]["pods"]:
+            if p["id"] == pod:
+                return (p.get("machine") or {}).get("gpuTypeId") or "unreported"
+        return "pod not in listing"
+    except Exception as e:
+        return f"lookup failed: {type(e).__name__}"
 
 
 def delete_pod(key, pod, why):
@@ -129,15 +154,16 @@ def main():
                 "dockerStartCmd": ["bash", "-c", boot]})
             if d.get("id"):
                 pod = d["id"]
-                # gpus[0] is what we ASKED FIRST for, not what we got. The
-                # allocated costPerHr is the honest signal: an A100 PCIe is
-                # $1.19 and an H100 PCIe is $1.99, so a surprising price means a
-                # surprising GPU. Printing the requested id alone is how a
-                # 25-minute H100 failure got logged as "tier=A100".
+                # gpus[0] is what we ASKED FIRST for, not what we got — printing
+                # the requested id alone is how a 25-minute H100 failure got
+                # logged as "tier=A100". An earlier fix printed costPerHr next to
+                # a hardcoded price table ("A100 PCIe=1.19") so a surprising
+                # price would flag a surprising GPU; that table was itself a
+                # guess, and a healthy A100 run at a regional $1.49 tripped it.
+                # Ask the API what machine the pod actually landed on instead.
                 print(f"POD CREATED {pod} requested={gpus[0]} "
-                      f"ACTUAL_COST={d.get('costPerHr')}/hr "
-                      f"(A100 PCIe=1.19 A100 SXM=1.39 - anything higher is NOT an A100)",
-                      flush=True)
+                      f"cost={d.get('costPerHr')}/hr", flush=True)
+                print(f"ALLOCATED GPU: {allocated_gpu(key, pod)}", flush=True)
                 break
             print(f"no capacity ({gpus[0]}): {d.get('err', '?')[:100]}", flush=True)
         if not pod:
