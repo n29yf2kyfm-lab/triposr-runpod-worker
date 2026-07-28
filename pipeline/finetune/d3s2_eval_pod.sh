@@ -115,16 +115,24 @@ if [ -f requirements.txt ]; then
     fi
   done < /tmp/req_safe.txt
 fi
-# torchsparse: the sparse backend their models require ("[SPARSE] Backend:
-# torchsparse") but their requirements never declare - v7 cleared every other
-# layer and the weight load was rejected solely on this import. It is a
-# build-from-git CUDA package users are expected to preinstall. ~5-15 min.
+# SPARSE BACKEND, two routes. Their "[SPARSE] Backend:" banner is the format
+# of TRELLIS's vendored sparse module, which selects its backend from the
+# SPARSE_BACKEND env var - and spconv is ALREADY in this image (TRELLIS
+# trains with it). Route 1 costs nothing: ask for spconv. Route 2 is the
+# torchsparse build v8 attempted, which failed "Failed building wheel" with
+# the real compiler error truncated - the classic cause is the missing
+# sparsehash headers, so install them and print the FULL error if it still
+# fails. Either route satisfying the import unblocks the pipeline load.
+export SPARSE_BACKEND=spconv
+echo "SPARSE_BACKEND=spconv exported (spconv present in image: $(python3 -c 'import spconv, sys; print(spconv.__version__)' 2>/dev/null || echo NO))"
 python3 -c "import torchsparse" 2>/dev/null && echo "torchsparse: already present" || {
-  echo "building torchsparse (undeclared dep, needs CUDA build)..."
+  echo "building torchsparse as backup (undeclared dep)..."
+  apt-get update -qq 2>/dev/null; apt-get install -y -qq libsparsehash-dev 2>/dev/null \
+    && echo "libsparsehash-dev installed" || echo "apt sparsehash install failed (build may still work)"
   pip install --no-build-isolation -c /tmp/torch_pins.txt \
-    "git+https://github.com/mit-han-lab/torchsparse.git" 2>&1 | tail -6
+    "git+https://github.com/mit-han-lab/torchsparse.git" 2>&1 | tail -20
   python3 -c "import torchsparse; print('torchsparse OK:', torchsparse.__version__)" \
-    || echo "torchsparse build FAILED - pipeline load will fail; see above"
+    || echo "torchsparse build FAILED - relying on SPARSE_BACKEND=spconv route"
 }
 # build every nested extension the repo carries (voxelize, udf_ext, ...)
 find . -mindepth 2 -maxdepth 5 -name setup.py | while read -r s; do
