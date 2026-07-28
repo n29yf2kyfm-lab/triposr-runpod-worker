@@ -75,32 +75,57 @@ cd /root/Direct3D-S2
 # deps (pipeline import dies on missing omegaconf) - they live in
 # requirements.txt - and direct3d_s2.utils needs udf_ext, a custom CUDA
 # extension with its own setup.py. Install all three layers explicitly.
-pip install -q rembg onnxruntime trimesh omegaconf einops ninja || true
-# Attempt 3 failed on pip BUILD ISOLATION: several of their deps (and the
-# third_party extensions) import torch in setup.py, and pip builds them in an
-# isolated venv that has no torch - "No module named 'torch'" from inside a
-# pip subprocess. --no-build-isolation lets builds see the image's torch.
-# Their requirements may also pin torch itself; installing that would replace
-# the image's CUDA-matched stack, so torch lines are filtered out first.
+# Attempt 4's captured log: even with direct torch lines filtered from
+# requirements.txt, a TRANSITIVE pin replaced the image's torch with 2.5.1
+# ("Successfully installed ... torch-2.5.1"), and the editable install died
+# leaving no module. Three changes, each answering a measured failure:
+#  1. CONSTRAINTS pin the image's exact torch trio for every pip call - pip
+#     cannot replace what a constraint pins, direct or transitive.
+#  2. No editable install at all: the package is used from the source tree
+#     via PYTHONPATH (this is how attempt 1 imported it successfully).
+#  3. The kernel smoke test re-runs AFTER installs, because a mutated torch
+#     that still imports is worse than one that fails loudly.
+python3 - <<'PY'
+import torch
+open("/tmp/torch_pins.txt", "w").write(
+    f"torch=={torch.__version__}\n")
+print("pinned:", open("/tmp/torch_pins.txt").read().strip())
+PY
+pip install -q -c /tmp/torch_pins.txt rembg onnxruntime trimesh omegaconf einops ninja || true
 if [ -f requirements.txt ]; then
   echo "--- requirements.txt (verbatim) ---"; cat requirements.txt; echo "---"
-  grep -viE "^torch([=<>~ ]|$)|^torchvision|^torchaudio" requirements.txt > /tmp/req_safe.txt
-  pip install --no-build-isolation -r /tmp/req_safe.txt 2>&1 | tail -8
+  pip install --no-build-isolation -c /tmp/torch_pins.txt -r requirements.txt 2>&1 | tail -8
 fi
-pip install --no-build-isolation -e . 2>&1 | tail -5
 # build every nested extension the repo carries (voxelize, udf_ext, ...)
 find . -mindepth 2 -maxdepth 5 -name setup.py | while read -r s; do
   d=$(dirname "$s")
   echo "building extension: $d"
-  ( cd "$d" && pip install --no-build-isolation -e . 2>&1 | tail -3 ) \
+  ( cd "$d" && pip install --no-build-isolation -c /tmp/torch_pins.txt -e . 2>&1 | tail -3 ) \
     || echo "  extension build FAILED: $d (continuing - may be optional)"
 done
-# import check from OUTSIDE the repo dir: attempt 2's check passed vacuously
-# because cwd=/root/Direct3D-S2 shadows a failed pip install with the raw
-# source tree, deps unchecked.
-( cd /root && python3 -c "import direct3d_s2, omegaconf; print('import OK from clean cwd')" ) \
+export PYTHONPATH=/root/Direct3D-S2:$PYTHONPATH
+# import check from OUTSIDE the repo dir (attempt 2's check passed vacuously
+# via cwd shadowing) - with PYTHONPATH carrying the source tree, this now
+# proves deps + package together.
+( cd /root && python3 -c "
+import torch, omegaconf, direct3d_s2
+print(f'import OK from clean cwd; torch {torch.__version__}')" ) \
   || { echo "FATAL: package (or its deps) do not import from a clean cwd";
        status FATAL-install; sleep infinity; }
+# torch must be byte-for-byte the version we pinned, and still able to launch
+# a kernel - a replaced stack that imports is the silent version of the H100
+python3 - <<'PYSMOKE' || { status FATAL-torch-mutated; sleep infinity; }
+import sys
+import torch
+want = open("/tmp/torch_pins.txt").read().strip().split("==")[1]
+if torch.__version__ != want:
+    print(f"FATAL: torch is {torch.__version__}, pinned {want} - pip replaced it")
+    sys.exit(1)
+x = torch.nn.functional.conv2d(torch.randn(1, 3, 16, 16, device="cuda"),
+                               torch.randn(4, 3, 3, 3, device="cuda"))
+torch.cuda.synchronize()
+print(f"post-install smoke OK: torch {torch.__version__}, conv2d runs")
+PYSMOKE
 
 status fetch-inputs
 PUB=https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finetune/eval_inputs
