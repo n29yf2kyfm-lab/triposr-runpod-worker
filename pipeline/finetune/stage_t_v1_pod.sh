@@ -57,7 +57,10 @@ export HF_TOKEN
 export HUGGING_FACE_HUB_TOKEN="${HUGGING_FACE_HUB_TOKEN:-$HF_TOKEN}"
 [ -n "$HF_TOKEN" ] && echo "HF token: present (${#HF_TOKEN} chars)" || echo "HF token: MISSING from env"
 # evidence for the launcher's dead-man fuse: which self-delete path exists here
-echo "fuse probe: runpodctl=$(command -v runpodctl || echo ABSENT) pod-scoped-key=${RUNPOD_API_KEY:+present}${RUNPOD_API_KEY:-ABSENT} pod-id=${RUNPOD_POD_ID:-ABSENT}"
+# NB: never interpolate the key itself — a prior version's ${VAR:-ABSENT}
+# printed the pod-scoped key VALUE into a served log when set
+if [ -n "$RUNPOD_API_KEY" ]; then KEYSTATE=present; else KEYSTATE=ABSENT; fi
+echo "fuse probe: runpodctl=$(command -v runpodctl || echo ABSENT) pod-scoped-key=$KEYSTATE pod-id=${RUNPOD_POD_ID:-ABSENT}"
 nvidia-smi -L || true
 cd /app/TRELLIS.2 || { status FATAL-no-trellis2; sleep infinity; }
 export PYTHONPATH=/app/TRELLIS.2:$PYTHONPATH
