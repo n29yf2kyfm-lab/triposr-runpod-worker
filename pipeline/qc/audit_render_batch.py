@@ -25,7 +25,14 @@ from concurrent.futures import ThreadPoolExecutor
 
 EP = os.environ.get("RENDER_ENDPOINT", "ng8oiz4p2l0xa0")
 SUPA = "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object"
-OUTP = "car-meshes/audit/glb"
+# Output destination is configurable: this script has been pointed at two
+# different audits now, and a hardcoded destination is how one run silently
+# overwrites another's results. Split once, here, so the resume check and the
+# upload can never disagree about which bucket they are talking to - they did
+# briefly, which would have made every asset look un-rendered and re-rendered
+# the whole batch at full cost.
+OUTP = os.environ.get("AUDIT_PREFIX", "car-meshes/audit/glb")
+BUCKET, PREFIX = OUTP.split("/", 1)
 
 
 def rp(url, key, body=None, timeout=180):
@@ -42,8 +49,8 @@ def rp(url, key, body=None, timeout=180):
 
 
 def exists(sb, name):
-    rq = urllib.request.Request(f"{SUPA}/list/car-meshes", method="POST",
-                                data=json.dumps({"prefix": f"audit/glb/{name}",
+    rq = urllib.request.Request(f"{SUPA}/list/{BUCKET}", method="POST",
+                                data=json.dumps({"prefix": f"{PREFIX}/{name}",
                                                  "limit": 1}).encode())
     for h, v in (("apikey", sb), ("Authorization", "Bearer " + sb),
                  ("Content-Type", "application/json")):
@@ -55,7 +62,7 @@ def exists(sb, name):
 
 
 def upload(sb, name, data):
-    rq = urllib.request.Request(f"{SUPA}/car-meshes/audit/glb/{name}",
+    rq = urllib.request.Request(f"{SUPA}/{BUCKET}/{PREFIX}/{name}",
                                 data=data, method="POST")
     for h, v in (("apikey", sb), ("Authorization", "Bearer " + sb),
                  ("Content-Type", "image/png"), ("x-upsert", "true")):
