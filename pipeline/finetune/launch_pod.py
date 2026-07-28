@@ -108,8 +108,8 @@ def main():
     # The old comment warned that a missing name is silently dropped; the
     # warning did not help, so the mechanism changed instead.
     forwarded = sorted(k for k in os.environ
-                       if k.startswith("EVAL_") and os.environ[k])
-    for k in ("MAX_STEPS", "HF_REPO"):
+                       if k.startswith(("EVAL_", "PUBLISH_")) and os.environ[k])
+    for k in ("MAX_STEPS", "HF_REPO", "MIN_FREE_GB"):
         if os.environ.get(k):
             forwarded.append(k)
     for k in forwarded:
