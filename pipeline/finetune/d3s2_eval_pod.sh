@@ -89,9 +89,44 @@ ls -la /root/eval_inputs/gti /root/eval_inputs/qashqai
 [ -s /root/eval_inputs/gti/0.jpg ] && [ -s /root/eval_inputs/qashqai/0.jpg ] \
   || { echo "FATAL: eval photos missing from bucket"; status FATAL-inputs; sleep infinity; }
 
+status api-discovery
+# The first attempt died 16 seconds in, at import time — before any of the
+# defensive call-signature logic could help — because the import path was
+# INFERRED from the README. Stop inferring: read the installed package and the
+# repo's own example code, print what actually exists, and write the findings
+# where the generate step can use them.
+python3 - <<'PY' || { status FATAL-api-discovery; sleep infinity; }
+import glob, importlib, inspect, json, pkgutil, sys
+
+import direct3d_s2
+print("package file:", direct3d_s2.__file__)
+mods = [m.name for m in pkgutil.walk_packages(direct3d_s2.__path__, "direct3d_s2.")]
+print("modules:", mods)
+found = []
+for name in mods:
+    try:
+        mod = importlib.import_module(name)
+    except Exception as e:
+        print(f"  {name}: import failed ({type(e).__name__}: {str(e)[:60]})")
+        continue
+    for cname, obj in inspect.getmembers(mod, inspect.isclass):
+        if "Pipeline" in cname and obj.__module__ == name:
+            has_fp = hasattr(obj, "from_pretrained")
+            found.append({"module": name, "cls": cname, "from_pretrained": has_fp})
+            print(f"  candidate: {name}.{cname} (from_pretrained={has_fp})")
+print("repo example files:")
+for f in glob.glob("/root/Direct3D-S2/*.py") + glob.glob("/root/Direct3D-S2/app*.py"):
+    print(f"--- {f} (first 40 lines) ---")
+    print("\n".join(open(f, errors="ignore").read().splitlines()[:40]))
+if not found:
+    print("FATAL: no Pipeline class found anywhere in the installed package")
+    sys.exit(1)
+json.dump(found, open("/root/d3s2_api.json", "w"))
+PY
+
 status generate
 python3 - <<'PY' || { echo "GENERATE FAILED"; status FATAL-generate; sleep infinity; }
-import os, sys, time, urllib.request
+import importlib, json, os, sys, time, traceback, urllib.request
 
 import torch
 from PIL import Image
@@ -105,22 +140,57 @@ RUNID = os.environ["RUNID"]
 SB = os.environ["SB_KEY"]
 OUT = "/root/d3s2_eval"
 
-from direct3d_s2.pipeline import Direct3DS2Pipeline
-pipe = Direct3DS2Pipeline.from_pretrained("wushuang98/Direct3D-S2",
-                                          subfolder=f"direct3d-s2-v-1-1")
-pipe.to("cuda")
-print("pipeline loaded", flush=True)
-
-def push(local, name):
+def push_bytes(data, name, ctype):
     url = ("https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/"
            f"car-meshes/eval/{RUNID}/{name}")
-    with open(local, "rb") as fh:
-        data = fh.read()
     rq = urllib.request.Request(url, data=data, method="POST")
     for h, v in (("apikey", SB), ("Authorization", "Bearer " + SB),
-                 ("Content-Type", "model/gltf-binary"), ("x-upsert", "true")):
+                 ("Content-Type", ctype), ("x-upsert", "true")):
         rq.add_header(h, v)
     urllib.request.urlopen(rq, timeout=300).read()
+
+def die(stage, exc):
+    """The watchdog deletes FATAL pods fast; the traceback must outlive the
+    pod, so ship it to the bucket before exiting."""
+    tb = f"stage: {stage}\n{traceback.format_exc()}"
+    print(tb, flush=True)
+    try:
+        push_bytes(tb.encode(), "ERROR.txt", "text/plain")
+        print("traceback archived to the eval bucket", flush=True)
+    except Exception:
+        print("traceback archive ALSO failed", flush=True)
+    sys.exit(1)
+
+try:
+    cands = json.load(open("/root/d3s2_api.json"))
+    pipe = None
+    for c in [c for c in cands if c["from_pretrained"]] or cands:
+        try:
+            cls = getattr(importlib.import_module(c["module"]), c["cls"])
+            for sub in ("direct3d-s2-v-1-1", "direct3d-s2-v-1-0", None):
+                try:
+                    pipe = (cls.from_pretrained("wushuang98/Direct3D-S2", subfolder=sub)
+                            if sub else cls.from_pretrained("wushuang98/Direct3D-S2"))
+                    print(f"loaded {c['module']}.{c['cls']} subfolder={sub}", flush=True)
+                    break
+                except Exception as e:
+                    print(f"  load rejected ({c['cls']}, {sub}): {str(e)[:80]}", flush=True)
+            if pipe is not None:
+                break
+        except Exception as e:
+            print(f"  candidate failed ({c['module']}.{c['cls']}): {str(e)[:80]}", flush=True)
+    if pipe is None:
+        raise RuntimeError("no pipeline candidate could load the released weights")
+    pipe.to("cuda")
+    print("pipeline on GPU", flush=True)
+except SystemExit:
+    raise
+except Exception as e:
+    die("pipeline-load", e)
+
+def push(local, name):
+    with open(local, "rb") as fh:
+        push_bytes(fh.read(), name, "model/gltf-binary")
     print(f"  uploaded {name}", flush=True)
 
 def run_pipe(photo):
@@ -145,7 +215,8 @@ def run_pipe(photo):
             print(f"  signature rejected ({name}): {str(e)[:80]}", flush=True)
     raise last
 
-for case, photo in CASES:
+try:
+  for case, photo in CASES:
     t0 = time.time()
     out = run_pipe(photo)
     mesh = out["mesh"] if isinstance(out, dict) else getattr(out, "mesh", out)
@@ -159,6 +230,10 @@ for case, photo in CASES:
     print(f"GLB {case}: {kb}KB in {time.time()-t0:.0f}s "
           f"({len(mesh.vertices)} verts, {len(mesh.faces)} faces)", flush=True)
     push(path, f"{case}_d3s2.glb")   # ship immediately - the incremental lesson
+except SystemExit:
+  raise
+except Exception as e:
+  die("generate-loop", e)
 
 print("D3S2_GENERATE_OK", flush=True)
 PY

@@ -60,6 +60,33 @@ def main():
             print(f"{time.strftime('%H:%M:%S')} {status.strip()}", flush=True)
             last = status
         if "DONE" in status or "FATAL" in status:
+            # CAPTURE THE LOG BEFORE THE DELETE. On 2026-07-28 this watchdog
+            # deleted a FATAL pod 47 seconds after the failure — faster than
+            # anyone could read the traceback — and the only copy of the
+            # diagnosis died with it. A watchdog that destroys the evidence
+            # of the failure it is reacting to guards money by spending it
+            # again on the retry.
+            tail = fetch(url + "/stage_b.log", timeout=90)[-12000:]
+            if tail:
+                print("---- last 12000 bytes of pod log ----", flush=True)
+                print(tail, flush=True)
+                print("---- end of pod log ----", flush=True)
+                sb = os.environ.get("SB_KEY")
+                if sb:
+                    try:
+                        rq = urllib.request.Request(
+                            "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/"
+                            f"car-meshes/audit/pod_logs/{pod}_{time.strftime('%Y%m%dT%H%M%SZ', time.gmtime())}.log",
+                            data=tail.encode(), method="POST")
+                        for h, v in (("apikey", sb), ("Authorization", "Bearer " + sb),
+                                     ("Content-Type", "text/plain"), ("x-upsert", "true")):
+                            rq.add_header(h, v)
+                        urllib.request.urlopen(rq, timeout=120).read()
+                        print("log tail archived to car-meshes/audit/pod_logs/", flush=True)
+                    except Exception as e:
+                        print(f"log archive failed (kept locally above): {str(e)[:70]}", flush=True)
+            else:
+                print("WARNING: could not fetch the pod log before deletion", flush=True)
             delete(pod, key, "DONE" if "DONE" in status else "FATAL")
             return
         time.sleep(POLL_SECONDS)
