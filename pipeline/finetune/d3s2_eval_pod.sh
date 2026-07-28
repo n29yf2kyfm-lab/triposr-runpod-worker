@@ -71,11 +71,24 @@ which nvcc && nvcc --version | tail -1 || echo "note: nvcc not on PATH - trying 
 git clone --depth 1 https://github.com/DreamTechAI/Direct3D-S2.git /root/Direct3D-S2 \
   || { status FATAL-clone; sleep infinity; }
 cd /root/Direct3D-S2
-pip install -q rembg onnxruntime trimesh || true
-# torchsparse-style deps + the package itself; surface the real error if it dies
-pip install -e . 2>&1 | tail -15
-python3 -c "import direct3d_s2" \
-  || { echo "FATAL: package did not import after install - see pip output above";
+# Attempt 2's discovery step proved: setup.py does NOT declare the runtime
+# deps (pipeline import dies on missing omegaconf) - they live in
+# requirements.txt - and direct3d_s2.utils needs udf_ext, a custom CUDA
+# extension with its own setup.py. Install all three layers explicitly.
+pip install -q rembg onnxruntime trimesh omegaconf einops ninja || true
+[ -f requirements.txt ] && { echo "installing requirements.txt:"; pip install -q -r requirements.txt 2>&1 | tail -5; }
+pip install -e . 2>&1 | tail -5
+# build every nested extension the repo carries (udf_ext and friends)
+find . -mindepth 2 -maxdepth 5 -name setup.py | while read -r s; do
+  d=$(dirname "$s")
+  echo "building extension: $d"
+  ( cd "$d" && pip install -e . 2>&1 | tail -3 ) || echo "  extension build FAILED: $d (continuing - may be optional)"
+done
+# import check from OUTSIDE the repo dir: attempt 2's check passed vacuously
+# because cwd=/root/Direct3D-S2 shadows a failed pip install with the raw
+# source tree, deps unchecked.
+( cd /root && python3 -c "import direct3d_s2, omegaconf; print('import OK from clean cwd')" ) \
+  || { echo "FATAL: package (or its deps) do not import from a clean cwd";
        status FATAL-install; sleep infinity; }
 
 status fetch-inputs
