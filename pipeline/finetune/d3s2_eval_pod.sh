@@ -94,7 +94,14 @@ PY
 pip install -q -c /tmp/torch_pins.txt rembg onnxruntime trimesh omegaconf einops ninja || true
 if [ -f requirements.txt ]; then
   echo "--- requirements.txt (verbatim) ---"; cat requirements.txt; echo "---"
-  pip install --no-build-isolation -c /tmp/torch_pins.txt -r requirements.txt 2>&1 | tail -8
+  # BOTH defences, learned one failure each: filter the torch trio out of
+  # requirements (v5's constraints CONFLICTED with their direct torch pin and
+  # pip aborted the ENTIRE transaction - nothing installed, pymeshfix missing)
+  # AND keep constraints (v4's filtering alone let a transitive pin replace
+  # torch). Loud failure instead of tail-swallowed.
+  grep -viE "^torch([=<>~ ]|$)|^torchvision|^torchaudio" requirements.txt > /tmp/req_safe.txt
+  pip install --no-build-isolation -c /tmp/torch_pins.txt -r /tmp/req_safe.txt 2>&1 | tail -15 \
+    || echo "REQUIREMENTS INSTALL FAILED - the import check below will judge"
 fi
 # build every nested extension the repo carries (voxelize, udf_ext, ...)
 find . -mindepth 2 -maxdepth 5 -name setup.py | while read -r s; do

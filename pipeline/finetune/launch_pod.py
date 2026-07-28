@@ -245,9 +245,29 @@ def main():
             last = s
         if "DONE" in s or "FATAL" in s:
             outcome = "DONE" if "DONE" in s else "FATAL"
-            tail = fetch("/stage_b.log", timeout=90)[-4000:]
+            # Same evidence discipline as the watchdog: capture BEFORE any
+            # teardown and archive off-box. The launcher won the delete race
+            # on d3s2 v5 with only a 4KB local tail; d3s2 pods log to
+            # container-local disk, so the launcher's delete destroyed the
+            # only full copy (council reviewer 2, F4/F8).
+            tail = fetch("/stage_b.log", timeout=90)[-12000:]
+            if not tail:
+                time.sleep(5)
+                tail = fetch("/stage_b.log", timeout=90)[-12000:]
             if tail:
-                print(tail, flush=True)
+                print(tail[-4000:], flush=True)
+                sb = os.environ.get("SB_KEY")
+                if sb:
+                    ts = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
+                    subprocess.run(
+                        ["curl", "-s", "-m", "60", "-X", "POST",
+                         "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/"
+                         f"car-meshes/audit/pod_logs/{pod}_{ts}_launcher.log",
+                         "-H", f"apikey: {sb}", "-H", f"Authorization: Bearer {sb}",
+                         "-H", "Content-Type: text/plain", "-H", "x-upsert: true",
+                         "--data-binary", "@-"],
+                        input=tail.encode(), capture_output=True)
+                    print("log tail archived to car-meshes/audit/pod_logs/", flush=True)
             break
     print(f"TERMINAL {outcome}", flush=True)
     if not a.keep:
