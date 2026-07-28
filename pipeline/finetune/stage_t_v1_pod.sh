@@ -213,6 +213,61 @@ if len(keep) < floor:
           f"(floor {floor}). The texture data is thinner than expected — "
           f"check the unblock run before spending training money."); sys.exit(1)
 
+# VERIFY THE IMAGES, NOT THE FLAGS. Run 1 died at the first batch with
+# OpenCV's "!_src.empty()": the pool here is latents ∩ keep-verdict, which
+# admits ~133 shapes Stage C never trained, and renders_cond_aug predates
+# them — so metadata said "Cond rendered: 429" while the files for some
+# shapes were absent or empty. Metadata is a claim; only opening the file is
+# a fact. For each pool shape: verify the aug dir has readable images; if
+# not, fall back to copying the PRISTINE renders_cond images in (augmentation
+# is a robustness nicety, not a requirement); drop the shape only if neither
+# location has a single readable image.
+import shutil
+from PIL import Image
+AUG = "/workspace/alamcars/renders_cond_aug"
+SRC = "/workspace/alamcars/renders_cond"
+EXT = (".png", ".jpg", ".jpeg", ".webp")
+
+def readable(d):
+    n = 0
+    for f in glob.glob(os.path.join(d, "*")):
+        if not f.lower().endswith(EXT):
+            continue
+        try:
+            if os.path.getsize(f) == 0:
+                return 0          # one empty image can kill a batch; reject the dir
+            with Image.open(f) as im:
+                im.verify()
+            n += 1
+        except Exception:
+            return 0
+    return n
+
+verified, healed, dropped = [], [], []
+for sha in keep:
+    if readable(os.path.join(AUG, sha)) > 0:
+        verified.append(sha)
+        continue
+    src_ok = readable(os.path.join(SRC, sha))
+    if src_ok > 0:
+        os.makedirs(os.path.join(AUG, sha), exist_ok=True)
+        for f in glob.glob(os.path.join(SRC, sha, "*")):
+            if f.lower().endswith(EXT):
+                shutil.copy2(f, os.path.join(AUG, sha, os.path.basename(f)))
+        healed.append(sha)
+        verified.append(sha)
+    else:
+        dropped.append(sha)
+print(f"image verification: {len(verified)} pool shapes have readable cond "
+      f"images ({len(healed)} healed from pristine renders), {len(dropped)} "
+      f"dropped with no readable images anywhere")
+for s in dropped[:10]:
+    print(f"  dropped: {s[:16]}")
+keep = verified
+if len(keep) < floor:
+    print(f"FATAL: after image verification the pool is {len(keep)} "
+          f"(floor {floor})"); sys.exit(1)
+
 p = "/workspace/alamcars/metadata.csv"
 m = pd.read_csv(p).set_index("sha256")
 merged = 0
