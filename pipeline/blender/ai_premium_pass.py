@@ -197,9 +197,10 @@ for o in meshes:
         if not (WAIST < wc[ZA] < ROOF):
             continue
         n = rot @ np.array([f.normal.x, f.normal.y, f.normal.z])
-        if abs(n[ZA]) / (np.linalg.norm(n) + 1e-9) > 0.80:
+        nz = abs(n[ZA]) / (np.linalg.norm(n) + 1e-9)
+        if nz > 0.80:
             continue                     # near-horizontal -> roof panel, not glass
-        band.append(f)
+        band.append((f, wc[ZA], nz))
 
     # pass 2: inside that band, glass is the DARK cluster. Absolute thresholds
     # fail on dark cars (the GTI is near-black paint), so take a percentile of
@@ -207,20 +208,28 @@ for o in meshes:
     # any colour.
     if tex and band and uvl:
         px, tw, th = tex
-        lum = np.array([face_luma(px, tw, th, [l[uvl].uv for l in f.loops]) for f in band])
+        lum = np.array([face_luma(px, tw, th, [l[uvl].uv for l in f.loops]) for f, _, _ in band])
         # 45% was too generous on a black car (paint and glass luminance nearly
         # match) and bled into pillars/quarter panels; 25% keeps the glazing core
         cut = max(0.02, float(np.percentile(lum, GLASS_PCT)))
-        for f, L in zip(band, lum):
+        for (f, _, _), L in zip(band, lum):
             if L <= cut:
                 f.material_index = gidx
                 glass_faces += 1
         print(f"AI_PREMIUM band={len(band)} faces, luma p45={cut:.3f}, "
               f"median={np.median(lum):.3f}")
-    else:                                 # no texture: fall back to geometry only
-        for f in band:
-            f.material_index = gidx
-            glass_faces += 1
+    else:
+        # no texture: geometry only. Marking the WHOLE band as glass turned the
+        # d3s2 Golf's doors, wings and cowl into glazing — the band includes
+        # every side panel above half height. Real glazing is TILTED: the
+        # windscreen/backlight slope hard and side glass has tumblehome, while
+        # door and quarter panels are near-vertical. Keep only pitched faces,
+        # and start the band at the actual beltline, not half height.
+        WAIST_NT = lo[ZA] + 0.60 * H
+        for f, wz, nz in band:
+            if wz > WAIST_NT and 0.18 < nz <= 0.80:
+                f.material_index = gidx
+                glass_faces += 1
     bm.to_mesh(me); bm.free()
 print(f"AI_PREMIUM glass: {glass_faces} faces -> 'glass_ai' (alpha {A_SIDE})")
 
@@ -256,17 +265,44 @@ if DO_MATERIALS:
         tex = texture_of(me.materials[0] if me.materials else None)
         bm = bmesh.new(); bm.from_mesh(me); bm.faces.ensure_lookup_table()
         uvl = bm.loops.layers.uv.active
+        centers = []
         for f in bm.faces:
+            c = f.calc_center_median()
+            centers.append((mw @ np.array([c.x, c.y, c.z, 1.0]))[:3])
+        centers = np.array(centers)
+        # Without a texture there is no bright-luma escape hatch, so a plain
+        # height band paints bumpers and sills black (the d3s2 Golf wore a
+        # black belt to mid-door). Find the axles instead — the two densest
+        # clusters of near-ground faces along the length axis — and keep the
+        # rubber inside the wheel-arch zones around them.
+        axles = None
+        if not (tex and uvl):
+            low = centers[centers[:, ZA] < lo[ZA] + 0.12 * H]
+            if len(low) > 100:
+                bl = hi[LA] - lo[LA]
+                hist, edges = np.histogram(low[:, LA], bins=40)
+                mid = (edges[:-1] + edges[1:]) / 2
+                front_half = mid < lo[LA] + 0.5 * bl
+                a1 = mid[front_half][np.argmax(hist[front_half])]
+                a2 = mid[~front_half][np.argmax(hist[~front_half])]
+                axles = (a1, a2, 0.125 * bl)
+                print(f"AI_PREMIUM axles at {a1:.2f}/{a2:.2f} (len axis), "
+                      f"arch half-width {axles[2]:.2f}")
+        for i, f in enumerate(bm.faces):
             if f.material_index in gset:
                 continue
-            c = f.calc_center_median()
-            wc = (mw @ np.array([c.x, c.y, c.z, 1.0]))[:3]
+            wc = centers[i]
             if wc[ZA] > ARCH:
                 continue                      # only the wheel band
             if tex and uvl:
                 px, tw, th = tex
                 if face_luma(px, tw, th, [l[uvl].uv for l in f.loops]) > 0.10:
                     continue                  # bright = alloy spoke or sill, not tyre
+            elif axles is not None:
+                a1, a2, hw = axles
+                near_wheel = min(abs(wc[LA] - a1), abs(wc[LA] - a2)) < hw
+                if not near_wheel and wc[ZA] > lo[ZA] + 0.06 * H:
+                    continue                  # sill/bumper between axles: stays paint
             f.material_index = ridx
             tyre_faces += 1
         bm.to_mesh(me); bm.free()
@@ -288,6 +324,57 @@ if DO_MATERIALS:
                 if cr in b.inputs:
                     b.inputs[cr].default_value = 0.04
     print(f"AI_PREMIUM materials: {tyre_faces} tyre faces -> rubber; clearcoat paint applied")
+
+    # island cleanup: heuristic classification leaves confetti — a dozen glass
+    # faces stranded on the bonnet render as dark specks, a dozen paint faces
+    # inside a window as white specks. Absorb any connected same-material patch
+    # smaller than MIN_ISLAND into whichever material surrounds it most.
+    MIN_ISLAND = int(_opt("--min-island", 0))
+    for o in meshes:
+        me = o.data
+        n_faces = len(me.polygons)
+        min_isl = MIN_ISLAND or max(50, n_faces // 400)
+        bm = bmesh.new(); bm.from_mesh(me); bm.faces.ensure_lookup_table()
+        mat_of = [f.material_index for f in bm.faces]
+        adj = [[] for _ in range(len(mat_of))]
+        for e in bm.edges:
+            lf = e.link_faces
+            if len(lf) == 2:
+                adj[lf[0].index].append(lf[1].index)
+                adj[lf[1].index].append(lf[0].index)
+        comp = [-1] * len(mat_of)
+        cid = 0
+        sizes, members = [], []
+        for s in range(len(mat_of)):
+            if comp[s] != -1:
+                continue
+            stack = [s]; comp[s] = cid; mem = [s]
+            while stack:
+                u = stack.pop()
+                for v in adj[u]:
+                    if comp[v] == -1 and mat_of[v] == mat_of[u]:
+                        comp[v] = cid; stack.append(v); mem.append(v)
+            sizes.append(len(mem)); members.append(mem)
+            cid += 1
+        absorbed = 0
+        for k in range(cid):
+            if sizes[k] >= min_isl:
+                continue
+            votes = {}
+            for u in members[k]:
+                for v in adj[u]:
+                    if comp[v] != k:
+                        votes[mat_of[v]] = votes.get(mat_of[v], 0) + 1
+            if votes:
+                new_mat = max(votes, key=votes.get)
+                for u in members[k]:
+                    mat_of[u] = new_mat
+                absorbed += sizes[k]
+        for f in bm.faces:
+            f.material_index = mat_of[f.index]
+        bm.to_mesh(me); bm.free()
+        print(f"AI_PREMIUM island cleanup: absorbed {absorbed} faces in patches "
+              f"<{min_isl} (of {n_faces})")
 
     # glass thickness: a single-surface window renders like a decal; give it
     # real depth so edges catch light at grazing angles.
@@ -322,7 +409,7 @@ if DO_MATERIALS:
             gobj = new[0]
         sol = gobj.modifiers.new("glass_thickness", "SOLIDIFY")
         sol.thickness = max(0.0015, 0.004 * H)
-        sol.offset = 0.0
+        sol.offset = -1.0   # thickness grows inward: centred shells poke through voxel bumps as specks
         sol.material_offset = 0
         bpy.context.view_layer.objects.active = gobj
         try:
