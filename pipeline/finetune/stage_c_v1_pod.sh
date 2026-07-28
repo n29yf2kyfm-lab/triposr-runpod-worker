@@ -93,15 +93,29 @@ have = f"sm_{cap[0]}{cap[1]}"
 built = list(torch.cuda.get_arch_list())
 print(f"GPU: {name}  compute={have}")
 print(f"image built for: {' '.join(built) or '(none reported)'}")
-# A kernel runs if its exact arch is present, or if a lower sm_XY of the same
-# major generation is present and PTX can JIT forward. Exact match is the only
-# thing worth trusting here, so require it.
+# The arch list is context, NOT the gate. Measured 2026-07-28: this image
+# reports sm_90 in torch.cuda.get_arch_list(), yet the H100 run died at the
+# first F.conv2d with "no kernel image is available" - conv2d dispatches to
+# cuDNN, which ships kernels torch's list says nothing about (the cuDNN in
+# this image predating Hopper is the likely mechanism; the failure itself is
+# the measured fact). So the gate is a real launch of the op that died, plus
+# a matmul, on the actual device.
 if built and have not in built:
-    print(f"FATAL: this image has no kernels for {have} ({name}).")
-    print(f"       Supported: {' '.join(built)}")
-    print("       Every kernel launch would fail once generation starts.")
+    print(f"note: {have} absent from the compiled arch list - relying on the "
+          f"live kernel test below, not the list")
+try:
+    x = torch.randn(1, 3, 32, 32, device="cuda")
+    w = torch.randn(8, 3, 3, 3, device="cuda")
+    y = torch.nn.functional.conv2d(x, w)          # the op the H100 died on
+    z = torch.randn(64, 64, device="cuda") @ torch.randn(64, 64, device="cuda")
+    torch.cuda.synchronize()
+    s = float(y.sum()) + float(z.sum())
+except Exception as e:
+    print(f"FATAL: kernel smoke test failed on {name} ({have}).")
+    print(f"       {type(e).__name__}: {str(e)[:160]}")
+    print("       Real work would die exactly like the H100 did on 2026-07-28.")
     sys.exit(1)
-print(f"arch OK: {have} is supported by this image")
+print(f"arch OK: conv2d + matmul ran on {name} ({have})")
 PYARCH
 
 status gated-check

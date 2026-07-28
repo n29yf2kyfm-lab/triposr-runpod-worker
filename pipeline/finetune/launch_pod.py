@@ -22,13 +22,15 @@ BUCKET = "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-
 VOLUME = "yiv4apiad7"          # alam3d-data (EU-RO-1)
 IMAGE = "alamk123/ai-mechanic:trellis2-latest"
 # WHAT THE CONTAINER CAN ACTUALLY RUN — measured, not asserted.
-# alamk123/ai-mechanic:trellis2-latest has no sm_90 kernels: on an H100 it dies
+# On an H100, alamk123/ai-mechanic:trellis2-latest dies at the first F.conv2d
 # with "CUDA error: no kernel image is available for execution on the device",
 # after loading the model, 25 minutes and $0.45 in (pod wbaly1yo5vxwb9,
-# 2026-07-28). A100-class (sm_80) is proven good by every successful run.
-# Anything else is UNTESTED — an earlier version of this comment said
-# "compiled for sm_80 and below", which was a guess; the runtime arch guard in
-# the bootstraps (torch.cuda.get_arch_list vs the device) is the authority.
+# 2026-07-28). The mechanism is NOT torch's compiled arch list — the image
+# reports sm_90 in torch.cuda.get_arch_list() (read live on pod 4r2da7o1qkab9n)
+# — conv2d dispatches to cuDNN, which ships its own kernels; a pre-Hopper cuDNN
+# is the likely culprit. A100 (sm_80) is proven good by every successful run;
+# a 4090 (sm_89) ran stage-a. The pod-side guard now launches a real conv2d on
+# the device instead of trusting any list — that guard is the authority.
 #
 # So a wider GPU list is NOT a better capacity hunt. Asking for hardware the
 # image cannot execute converts "wait for an A100" into "pay for a guaranteed
