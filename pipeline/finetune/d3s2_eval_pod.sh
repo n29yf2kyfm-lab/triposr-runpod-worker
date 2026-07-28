@@ -100,8 +100,20 @@ if [ -f requirements.txt ]; then
   # AND keep constraints (v4's filtering alone let a transitive pin replace
   # torch). Loud failure instead of tail-swallowed.
   grep -viE "^torch([=<>~ ]|$)|^torchvision|^torchaudio" requirements.txt > /tmp/req_safe.txt
-  pip install --no-build-isolation -c /tmp/torch_pins.txt -r /tmp/req_safe.txt 2>&1 | tail -15 \
-    || echo "REQUIREMENTS INSTALL FAILED - the import check below will judge"
+  # ONE LINE AT A TIME. v6 proved a single conflicting requirement aborts the
+  # whole pip transaction, and `pip | tail` reports tail's exit status so the
+  # abort was invisible - pymeshfix was collateral damage of some other line
+  # twice in a row. Per-line installs isolate the poison and name it.
+  while IFS= read -r req; do
+    req=$(echo "$req" | sed 's/#.*//;s/^ *//;s/ *$//')
+    [ -z "$req" ] && continue
+    if pip install --no-build-isolation -c /tmp/torch_pins.txt "$req" >/tmp/pipout 2>&1; then
+      echo "  ok:     $req"
+    else
+      echo "  FAILED: $req"
+      tail -4 /tmp/pipout | sed 's/^/          /'
+    fi
+  done < /tmp/req_safe.txt
 fi
 # build every nested extension the repo carries (voxelize, udf_ext, ...)
 find . -mindepth 2 -maxdepth 5 -name setup.py | while read -r s; do
