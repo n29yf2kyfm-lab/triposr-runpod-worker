@@ -91,7 +91,7 @@ open("/tmp/torch_pins.txt", "w").write(
     f"torch=={torch.__version__}\n")
 print("pinned:", open("/tmp/torch_pins.txt").read().strip())
 PY
-pip install -q -c /tmp/torch_pins.txt rembg onnxruntime trimesh omegaconf einops ninja || true
+pip install -q -c /tmp/torch_pins.txt rembg onnxruntime trimesh omegaconf einops ninja fast_simplification || true
 if [ -f requirements.txt ]; then
   echo "--- requirements.txt (verbatim) ---"; cat requirements.txt; echo "---"
   # BOTH defences, learned one failure each: filter the torch trio out of
@@ -320,6 +320,25 @@ try:
     kb = os.path.getsize(path) // 1024
     print(f"GLB {case}: {kb}KB in {time.time()-t0:.0f}s "
           f"({len(mesh.vertices)} verts, {len(mesh.faces)} faces)", flush=True)
+    # v10 GENERATED the Golf (2.3M verts, 80MB) and died at upload: Supabase
+    # caps objects at ~50MB. Decimate until it fits - a geometry audition
+    # does not need 4.6M faces to judge shut lines and grille depth.
+    LIMIT_KB = 45 * 1024
+    if kb > LIMIT_KB:
+        import fast_simplification
+        v, f = mesh.vertices, mesh.faces
+        reduction = 0.5
+        for _ in range(4):
+            v2, f2 = fast_simplification.simplify(v, f, target_reduction=reduction)
+            m2 = trimesh.Trimesh(vertices=v2, faces=f2)
+            m2.export(path)
+            kb = os.path.getsize(path) // 1024
+            print(f"  decimated {reduction:.0%}: {len(f2)} faces, {kb}KB", flush=True)
+            if kb <= LIMIT_KB:
+                break
+            reduction = min(0.95, reduction + 0.2)
+        if kb > LIMIT_KB:
+            raise RuntimeError(f"{case}: still {kb}KB after decimation")
     push(path, f"{case}_d3s2.glb")   # ship immediately - the incremental lesson
 except SystemExit:
   raise
