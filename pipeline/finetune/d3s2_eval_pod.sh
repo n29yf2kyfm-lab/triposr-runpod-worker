@@ -115,6 +115,17 @@ if [ -f requirements.txt ]; then
     fi
   done < /tmp/req_safe.txt
 fi
+# torchsparse: the sparse backend their models require ("[SPARSE] Backend:
+# torchsparse") but their requirements never declare - v7 cleared every other
+# layer and the weight load was rejected solely on this import. It is a
+# build-from-git CUDA package users are expected to preinstall. ~5-15 min.
+python3 -c "import torchsparse" 2>/dev/null && echo "torchsparse: already present" || {
+  echo "building torchsparse (undeclared dep, needs CUDA build)..."
+  pip install --no-build-isolation -c /tmp/torch_pins.txt \
+    "git+https://github.com/mit-han-lab/torchsparse.git" 2>&1 | tail -6
+  python3 -c "import torchsparse; print('torchsparse OK:', torchsparse.__version__)" \
+    || echo "torchsparse build FAILED - pipeline load will fail; see above"
+}
 # build every nested extension the repo carries (voxelize, udf_ext, ...)
 find . -mindepth 2 -maxdepth 5 -name setup.py | while read -r s; do
   d=$(dirname "$s")
