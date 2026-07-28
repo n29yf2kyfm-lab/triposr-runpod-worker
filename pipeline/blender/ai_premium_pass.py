@@ -290,19 +290,47 @@ if DO_MATERIALS:
     print(f"AI_PREMIUM materials: {tyre_faces} tyre faces -> rubber; clearcoat paint applied")
 
     # glass thickness: a single-surface window renders like a decal; give it
-    # real depth so edges catch light at grazing angles
-    for o in meshes:
-        if any(m and m.name.startswith("glass_ai") for m in o.data.materials):
-            sol = o.modifiers.new("glass_thickness", "SOLIDIFY")
-            sol.thickness = max(0.0015, 0.004 * H)
-            sol.offset = 0.0
-            sol.material_offset = 0
+    # real depth so edges catch light at grazing angles.
+    # SOLIDIFY MUST ONLY SEE GLASS FACES. On a fused AI shell the glass shares
+    # one mesh with the body, and solidifying that object duplicates the WHOLE
+    # car into two shells ±thickness/2 apart — the coincident surfaces render
+    # as salt-and-pepper "popcorn" over every panel (root-caused on the d3s2
+    # Golf, 2026-07-28). Separate the glass faces into their own object first
+    # and solidify only that.
+    for o in list(meshes):
+        gset = {i for i, m in enumerate(o.data.materials)
+                if m and m.name.startswith("glass_ai")}
+        if not gset:
+            continue
+        n_glass = sum(1 for p in o.data.polygons if p.material_index in gset)
+        if n_glass == 0:
+            continue
+        if n_glass == len(o.data.polygons):
+            gobj = o                      # already a pure glass object
+        else:
+            for p in o.data.polygons:
+                p.select = p.material_index in gset
+            before = set(bpy.data.objects)
             bpy.context.view_layer.objects.active = o
-            try:
-                bpy.ops.object.modifier_apply(modifier=sol.name)
-                print(f"AI_PREMIUM glass thickness {sol.thickness:.4f} applied")
-            except Exception as e:
-                print(f"AI_PREMIUM solidify skipped: {str(e)[:60]}")
+            bpy.ops.object.mode_set(mode="EDIT")
+            bpy.ops.mesh.separate(type="SELECTED")
+            bpy.ops.object.mode_set(mode="OBJECT")
+            new = [x for x in set(bpy.data.objects) - before if x.type == "MESH"]
+            if not new:
+                print("AI_PREMIUM solidify skipped: glass separate produced no object")
+                continue
+            gobj = new[0]
+        sol = gobj.modifiers.new("glass_thickness", "SOLIDIFY")
+        sol.thickness = max(0.0015, 0.004 * H)
+        sol.offset = 0.0
+        sol.material_offset = 0
+        bpy.context.view_layer.objects.active = gobj
+        try:
+            bpy.ops.object.modifier_apply(modifier=sol.name)
+            print(f"AI_PREMIUM glass thickness {sol.thickness:.4f} applied "
+                  f"({n_glass} glass faces separated, body untouched)")
+        except Exception as e:
+            print(f"AI_PREMIUM solidify skipped: {str(e)[:60]}")
 
 # ---- 1c. surface quality -------------------------------------------------
 # Generated shells carry micro-ripple and flat-shaded facets, so studio
