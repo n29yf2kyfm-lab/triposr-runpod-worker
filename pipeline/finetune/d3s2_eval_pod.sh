@@ -76,13 +76,24 @@ cd /root/Direct3D-S2
 # requirements.txt - and direct3d_s2.utils needs udf_ext, a custom CUDA
 # extension with its own setup.py. Install all three layers explicitly.
 pip install -q rembg onnxruntime trimesh omegaconf einops ninja || true
-[ -f requirements.txt ] && { echo "installing requirements.txt:"; pip install -q -r requirements.txt 2>&1 | tail -5; }
-pip install -e . 2>&1 | tail -5
-# build every nested extension the repo carries (udf_ext and friends)
+# Attempt 3 failed on pip BUILD ISOLATION: several of their deps (and the
+# third_party extensions) import torch in setup.py, and pip builds them in an
+# isolated venv that has no torch - "No module named 'torch'" from inside a
+# pip subprocess. --no-build-isolation lets builds see the image's torch.
+# Their requirements may also pin torch itself; installing that would replace
+# the image's CUDA-matched stack, so torch lines are filtered out first.
+if [ -f requirements.txt ]; then
+  echo "--- requirements.txt (verbatim) ---"; cat requirements.txt; echo "---"
+  grep -viE "^torch([=<>~ ]|$)|^torchvision|^torchaudio" requirements.txt > /tmp/req_safe.txt
+  pip install --no-build-isolation -r /tmp/req_safe.txt 2>&1 | tail -8
+fi
+pip install --no-build-isolation -e . 2>&1 | tail -5
+# build every nested extension the repo carries (voxelize, udf_ext, ...)
 find . -mindepth 2 -maxdepth 5 -name setup.py | while read -r s; do
   d=$(dirname "$s")
   echo "building extension: $d"
-  ( cd "$d" && pip install -e . 2>&1 | tail -3 ) || echo "  extension build FAILED: $d (continuing - may be optional)"
+  ( cd "$d" && pip install --no-build-isolation -e . 2>&1 | tail -3 ) \
+    || echo "  extension build FAILED: $d (continuing - may be optional)"
 done
 # import check from OUTSIDE the repo dir: attempt 2's check passed vacuously
 # because cwd=/root/Direct3D-S2 shadows a failed pip install with the raw
