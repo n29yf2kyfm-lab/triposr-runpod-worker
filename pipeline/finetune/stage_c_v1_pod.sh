@@ -1,6 +1,11 @@
 #!/bin/bash
 # stage_c_v1_pod.sh — Stage C, second attempt. Fixes what the evidence showed.
 #
+# NOT RUNNABLE AS WRITTEN since 2026-07-28: build-meta anchors on the mtime
+# of /workspace/alam3d_stage_c, which was purged that day to reclaim the
+# volume. A relaunch dies FATAL-meta (fails safe). Kept for the record and
+# for the gates later scripts inherit.
+#
 # WHY v0 FAILED (measured 2026-07-27, not guessed):
 #   * four-way isolation: the tuned 512 stage carries the damage; the tuned
 #     1024 refiner is clean.
@@ -366,7 +371,7 @@ RESUME_STEP=$(cat "$OUT/.resume_step")
 echo "resume step recorded: $RESUME_STEP"
 
 status build-config
-python3 - <<'PY'
+python3 - <<'PY' || { status FATAL-config; sleep infinity; }
 import json, os, sys
 LR = 5e-6
 c = json.load(open("configs/gen/slat_flow_img2shape_dit_1_3B_512_bf16.json"))
@@ -481,15 +486,22 @@ PY
 
 status verify-ckpts
 # a checkpoint that will not open is not a checkpoint — this is how v0's Stage D
-# step-4000 save was found to be truncated
-python3 - <<'PY'
-import glob, os, zipfile
+# step-4000 save was found to be truncated. The council audit found the first
+# version of this step printed CORRUPT and then reached DONE regardless — a
+# report wearing a gate's clothes. It now fails the run.
+python3 - <<'PY' || { status FATAL-ckpt-verify; sleep infinity; }
+import glob, os, sys, zipfile
+bad = 0
 for p in sorted(glob.glob("/workspace/alam3d_stage_c_v1/ckpts/*.pt")):
     try:
         with zipfile.ZipFile(p) as z: n = len(z.namelist())
         print(f"OK      {os.path.getsize(p):>13,}  {n:>4} entries  {os.path.basename(p)}")
     except Exception as e:
+        bad += 1
         print(f"CORRUPT {os.path.getsize(p):>13,}  {type(e).__name__}  {os.path.basename(p)}")
+if bad:
+    print(f"{bad} corrupt checkpoint(s) — the volume is eating saves; not DONE")
+    sys.exit(1)
 PY
 
 status DONE

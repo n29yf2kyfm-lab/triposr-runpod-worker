@@ -33,7 +33,7 @@ status(){ printf '{"step":"%s","at":"%s"}\n' "$1" "$(date -u +%FT%TZ)" > "$OUT_L
 
 status boot
 [ -f /etc/rp_environment ] && source /etc/rp_environment
-export HF_TOKEN HUGGING_FACE_HUB_TOKEN SB_KEY
+export HF_TOKEN SB_KEY; export HUGGING_FACE_HUB_TOKEN="${HUGGING_FACE_HUB_TOKEN:-$HF_TOKEN}"
 [ -n "$HF_TOKEN" ] && echo "HF token: present (${#HF_TOKEN} chars)" || echo "HF token: MISSING"
 [ -n "$SB_KEY" ] && echo "SB key: present" || echo "SB key: MISSING (reports will not upload)"
 nvidia-smi -L || true
@@ -120,8 +120,15 @@ PY
 status fetch-diag
 PUB=https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finetune
 curl -sSL "$PUB/gap_diag.py?cb=$(date +%s)" -o /tmp/gap_diag.py
+# sha-pinned: the fetched file must be the exact revision this script was
+# committed against, or a stale bucket copy silently runs old diagnosis logic
+# (council reviewer 1, #5). UPDATE THIS HASH whenever gap_diag.py changes.
+GAP_SHA_WANT=8a19e2cc3afc4195c1cbf46b120f72a22f8ebd2ac7fb6e188d5b4f223033c736
+GAP_SHA_GOT=$(sha256sum /tmp/gap_diag.py | awk '{print $1}')
+[ "$GAP_SHA_GOT" = "$GAP_SHA_WANT" ] \
+  || { echo "gap_diag.py sha mismatch: got $GAP_SHA_GOT want $GAP_SHA_WANT — re-upload it"; status FATAL-diag-sha; sleep infinity; }
 python3 -c "import ast;ast.parse(open('/tmp/gap_diag.py').read())" \
-  || { echo "gap_diag.py failed to fetch or parse"; status FATAL-no-diag; sleep infinity; }
+  || { echo "gap_diag.py failed to parse"; status FATAL-no-diag; sleep infinity; }
 
 status diagnose-before
 python3 /tmp/gap_diag.py before || { status FATAL-diagnose; sleep infinity; }

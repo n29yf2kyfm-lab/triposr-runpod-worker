@@ -141,7 +141,22 @@ def main():
                           capture_output=True)
     if head.returncode != 0:
         sys.exit(f"bootstrap script not fetchable: {BUCKET}/{a.script}")
-    boot = (f"curl -sfSL '{BUCKET}/{a.script}?cb='$(date +%s) | bash; sleep infinity")
+    # DEAD-MAN FUSE, pod-side. Every supervisor (launcher, watchdog) lives in a
+    # restartable sandbox container; one restart already orphaned a pod for
+    # $7.60 and the council audit rated this the top open money hole. The fuse
+    # backgrounds BEFORE the bootstrap runs and hard-caps pod life at
+    # --hours + 1h using RunPod's own POD-SCOPED credential ($RUNPOD_API_KEY
+    # as injected into the pod env by RunPod — ours is deliberately never
+    # forwarded, so the pod can only ever kill itself). runpodctl first, REST
+    # fallback; if the image has neither, the fuse is a no-op and the
+    # watchdogs remain the (imperfect) backstop — the bootstraps print which
+    # case holds so the next launch proves it one way or the other.
+    fuse = int((a.hours + 1) * 3600)
+    boot = (f"( sleep {fuse}; "
+            f"runpodctl remove pod $RUNPOD_POD_ID 2>/dev/null || "
+            f"curl -s -m 60 -X DELETE -H \"Authorization: Bearer $RUNPOD_API_KEY\" "
+            f"https://rest.runpod.io/v1/pods/$RUNPOD_POD_ID ) & "
+            f"curl -sfSL '{BUCKET}/{a.script}?cb='$(date +%s) | bash; sleep infinity")
     env = {"HF_HOME": "/workspace/hf_cache"}
     if hf:
         env["HF_TOKEN"] = env["HUGGING_FACE_HUB_TOKEN"] = hf

@@ -51,8 +51,13 @@ status(){ printf '{"step":"%s","at":"%s"}\n' "$1" "$(date -u +%FT%TZ)" > "$OUT/l
 
 status boot
 [ -f /etc/rp_environment ] && source /etc/rp_environment
-export HF_TOKEN HUGGING_FACE_HUB_TOKEN 2>/dev/null
+# mirror the value, not just the name: a lib that reads only the HUB_TOKEN
+# name would 401 while the curl gated-check (which uses HF_TOKEN) passes
+export HF_TOKEN
+export HUGGING_FACE_HUB_TOKEN="${HUGGING_FACE_HUB_TOKEN:-$HF_TOKEN}"
 [ -n "$HF_TOKEN" ] && echo "HF token: present (${#HF_TOKEN} chars)" || echo "HF token: MISSING from env"
+# evidence for the launcher's dead-man fuse: which self-delete path exists here
+echo "fuse probe: runpodctl=$(command -v runpodctl || echo ABSENT) pod-scoped-key=${RUNPOD_API_KEY:+present}${RUNPOD_API_KEY:-ABSENT} pod-id=${RUNPOD_POD_ID:-ABSENT}"
 nvidia-smi -L || true
 cd /app/TRELLIS.2 || { status FATAL-no-trellis2; sleep infinity; }
 export PYTHONPATH=/app/TRELLIS.2:$PYTHONPATH
@@ -216,12 +221,18 @@ grep -rl "def snapshot" trellis2/trainers | while read f; do
   python3 - "$f" <<'PY'
 import re, sys
 p=sys.argv[1]; s=open(p).read()
-if "ALAM3D_NO_SNAPSHOT" in s: sys.exit()
-s2,n=re.subn(r"(\n(\s+)def snapshot\(self[^)]*\):\n)",
+if "ALAM3D_NO_SNAPSHOT" in s:
+    print(f"snapshot already patched in {p}"); sys.exit()
+s2,n=re.subn(r"(\n(\s+)def snapshot\(self[^)]*\):[^\n]*\n)",
              r"\1\2    import os\n\2    if os.environ.get('ALAM3D_NO_SNAPSHOT'):\n\2        print('snapshot skipped')\n\2        return\n", s)
+if n == 0:
+    # fail closed: an unpatched snapshot silently burns GPU time at step 0
+    print(f"FATAL: snapshot signature in {p} did not match the patch regex")
+    sys.exit(1)
 open(p,"w").write(s2)
 print(f"patched snapshot x{n} in {p}")
 PY
+  [ $? -ne 0 ] && { status FATAL-snapshot-patch; sleep infinity; }
 done
 export ALAM3D_NO_SNAPSHOT=1
 python3 - <<'PY'
@@ -252,11 +263,20 @@ python3 - <<'PY' || { status FATAL-meta; sleep infinity; }
 import glob, json, os, sys, time, urllib.request
 import pandas as pd
 
+# Index the SAME dir the trainer will read. build-data-roots hands the
+# trainer sorted(...)[0] only; indexing the union of all latent-name dirs
+# admits shapes whose latent lives in a second dir the trainer never opens —
+# they pass every gate and then die at getitem (council reviewer 1, #4).
+lat_dirs = sorted(glob.glob("/workspace/alamcars/pbr_latents/*/"))
+if not lat_dirs:
+    print("FATAL: no pbr_latents dir at all"); sys.exit(1)
+if len(lat_dirs) > 1:
+    print(f"note: {len(lat_dirs)} pbr latent dirs exist; pool indexes ONLY "
+          f"{lat_dirs[0]} (the one the trainer reads)")
 lat = set()
-for d in glob.glob("/workspace/alamcars/pbr_latents/*/"):
-    for f in glob.glob(d + "*.npz") + glob.glob(d + "*.pt"):
-        lat.add(os.path.splitext(os.path.basename(f))[0])
-print(f"pbr latents on volume: {len(lat)}")
+for f in glob.glob(lat_dirs[0] + "*.npz") + glob.glob(lat_dirs[0] + "*.pt"):
+    lat.add(os.path.splitext(os.path.basename(f))[0])
+print(f"pbr latents in the trainer's dir: {len(lat)}")
 if not lat:
     print("FATAL: zero pbr latents — texture_unblock_pod.sh has not succeeded "
           "on this volume; there is nothing to train on"); sys.exit(1)

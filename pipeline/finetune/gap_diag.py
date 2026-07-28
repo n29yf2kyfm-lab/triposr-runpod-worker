@@ -56,9 +56,16 @@ def sb_put(path, data):
 
 
 def file_index(subdir):
-    """sha256 -> True for every file under ROOT/subdir/*/ (any latent name)."""
+    """sha256 set from the FIRST-sorted latent-name dir only — the same one
+    the stage scripts' pick() hands the trainer. Indexing the union of all
+    dirs counts latents the trainer never opens (council reviewer 1, #4)."""
+    dirs = sorted(glob.glob(f"{ROOT}/{subdir}/*/"))
     out = set()
-    for p in glob.glob(f"{ROOT}/{subdir}/**/*", recursive=True):
+    if not dirs:
+        return out
+    if len(dirs) > 1:
+        print(f"  note: {len(dirs)} {subdir} dirs; indexing only {dirs[0]}")
+    for p in glob.glob(dirs[0] + "*"):
         if os.path.isfile(p):
             out.add(os.path.basename(p).split(".")[0])
     return out
@@ -85,6 +92,15 @@ def main():
     # version, so find it rather than assert it.
     tok_cols = [c for c in m.columns if "token" in c.lower()]
     print(f"token columns found: {tok_cols or 'none'}")
+    # flag columns are DISCOVERED and printed, not silently assumed: if the
+    # toolkit names them differently, every keep would misclassify as
+    # no_mesh_dump and the whole report would lie about the gap's cause.
+    flag_cols = [c for c in m.columns
+                 if any(k in c.lower() for k in ("dump", "render", "encod", "voxel"))]
+    print(f"flag columns found: {flag_cols or 'NONE'}")
+    if not any("dump" in c.lower() for c in m.columns):
+        print("FATAL: no mesh-dump flag column in metadata — cause attribution "
+              "would be fiction. Refusing to report."); sys.exit(1)
 
     causes = {}
     for sha in keeps:
@@ -141,9 +157,19 @@ def main():
             print(f"complete: all {len(keeps)} keeps trainable"); return
         if trainable > b:
             print(f"progress: trainable keeps {b} -> {trainable}"); return
-        print(f"FATAL: no progress — trainable keeps {b} -> {trainable}. "
-              f"The backfill ran but nothing new became trainable; the "
-              f"remaining gap is in the causes above, not in unrun steps.")
+        # A residual gap made ENTIRELY of causes re-running cannot fix is a
+        # correct diagnosis, not a failure — the pod's own header says token-
+        # capped shapes never become trainable. FATALing on that made "did
+        # everything right" indistinguishable from "did nothing" in
+        # status.json (council reviewer 1, #6).
+        unfixable = counts.get("over_token_cap", 0)
+        if trainable + unfixable >= len(keeps):
+            print(f"complete-with-permanent-gap: {trainable} trainable, "
+                  f"{unfixable} over the token cap (unfixable by re-running). "
+                  f"Nothing left for a backfill to do."); return
+        print(f"FATAL: no progress — trainable keeps {b} -> {trainable}, and "
+              f"{len(keeps) - trainable - unfixable} keeps remain in fixable "
+              f"causes. The backfill ran but fixed nothing; see the causes above.")
         sys.exit(1)
 
 

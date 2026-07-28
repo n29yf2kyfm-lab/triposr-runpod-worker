@@ -141,7 +141,10 @@ optimiser state were never anybody's job to remove.
 - **The only good weights are unbacked.** A volume incident now costs the entire
   correctly-configured run, not an experiment.
 - **Cost.** 600 GB of volumes plus 2,120 GB of stopped-pod disk, currently
-  $0.55/hr ≈ **$396/year**, for storage that is mostly void or abandoned.
+  $0.55/hr ≈ **$4,800/year** (correction 2026-07-28: this line originally
+  said "$396/year", a 12x arithmetic error caught by the council audit —
+  the hourly figure is the measured one, from currentSpendPerHr with no
+  pods running), for storage that is mostly void or abandoned.
 
 ## KPIs TO MONITOR
 - Free space on `alam3d-data` before and after every run
@@ -193,7 +196,7 @@ of optimiser state, is still being paid.
 
 ### Other lenses
 
-- **Financial:** the storage bill is ~$396/year against a balance of $16.76. The
+- **Financial:** the storage bill is ~$0.55/hr (~$400/month) against the balance. The
   storage costs more per year than every GPU-hour this project has ever spent.
 - **Engineering:** every fix today changed a *mechanism* rather than adding a
   warning — the env allowlist became prefix-based, the LR became a read-back

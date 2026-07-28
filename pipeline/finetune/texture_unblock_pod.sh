@@ -22,7 +22,7 @@ status(){ printf '{"step":"%s","at":"%s"}\n' "$1" "$(date -u +%FT%TZ)" > "$ROOT/
 
 status boot
 [ -f /etc/rp_environment ] && source /etc/rp_environment
-export HF_TOKEN HUGGING_FACE_HUB_TOKEN
+export HF_TOKEN; export HUGGING_FACE_HUB_TOKEN="${HUGGING_FACE_HUB_TOKEN:-$HF_TOKEN}"
 nvidia-smi -L || true
 cd /app/TRELLIS.2 || { status FATAL-no-trellis2; sleep infinity; }
 export PYTHONPATH=/app/TRELLIS.2:$PYTHONPATH
@@ -148,7 +148,10 @@ import glob, os, sys
 root = "/workspace/alamcars"
 vox = 0
 for d in sorted(glob.glob(f"{root}/pbr_voxels*")):
-    n = len(glob.glob(f"{d}/*.vxz")) or len(glob.glob(f"{d}/*"))
+    # strict: count real voxel files only. The old fallback counted ANY dir
+    # entry (subdirs, partials), so the vox==0 consistency gate was weaker
+    # than it read (council reviewer 1, #13).
+    n = len(glob.glob(f"{d}/*.vxz"))
     vox += n
     print(f"  {os.path.basename(d)}: {n} voxel files")
 lat = 0
