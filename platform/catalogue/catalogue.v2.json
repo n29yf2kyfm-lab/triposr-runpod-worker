@@ -92401,5 +92401,4769 @@
    "method": "render",
    "at": "2026-07-23"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-x1-w5-v1",
+  "make": "bmw",
+  "model": "BMW X1",
+  "modelFamily": "bmw x1",
+  "modelAliases": [
+   "BMW X1"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "BMW X1",
+  "sourceUrl": "https://sketchfab.com/3d-models/4fe53c88cd9442b4ac0496b6926b0fe2",
+  "sourceCreator": "Sloftm_Carz",
+  "sourceReferenceId": "4fe53c88cd9442b4ac0496b6926b0fe2",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Material.024",
+   "Material.026",
+   "Material.027",
+   "Material.029",
+   "Material.030",
+   "Material.032",
+   "Material.042",
+   "Material.044",
+   "mesh_11__0"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Sloftm_Carz', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "citroen-c3-2025-w5-v1",
+  "make": "citroen",
+  "model": "Citroen C3",
+  "modelFamily": "citroen c3",
+  "modelAliases": [
+   "Citroen C3"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2025,
+  "yearEnd": 2025,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2025 Citroën C3",
+  "sourceUrl": "https://sketchfab.com/3d-models/a3c6ca57f0294992be496d7c62e120fa",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "a3c6ca57f0294992be496d7c62e120fa",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "BODY.001"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2025-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2025-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2025-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2025-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2025-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2025-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2025-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2025-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2025-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "citroen-ds3-2018-w5-v1",
+  "make": "citroen",
+  "model": "Citroen DS3",
+  "modelFamily": "citroen ds3",
+  "modelAliases": [
+   "Citroen DS3"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2018,
+  "yearEnd": 2018,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Citroen DS3 Crossback 2018",
+  "sourceUrl": "https://sketchfab.com/3d-models/5c8038736d7d4497bcfc51bec2fb488a",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "5c8038736d7d4497bcfc51bec2fb488a",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body",
+   "body2"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-ds3-2018-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-ds3-2018-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-ds3-2018-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-ds3-2018-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-ds3-2018-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-ds3-2018-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-ds3-2018-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-ds3-2018-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-ds3-2018-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "cupra-formentor-2021-w5-v1",
+  "make": "cupra",
+  "model": "Formentor",
+  "modelFamily": "formentor",
+  "modelAliases": [
+   "Formentor"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": 2021,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Cupra Formentor 2021",
+  "sourceUrl": "https://sketchfab.com/models/3674038309c84faa86c3be4642db2c27",
+  "sourceCreator": "Sloftm_Carz",
+  "sourceReferenceId": "3674038309c84faa86c3be4642db2c27",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Material.002",
+   "Material.003",
+   "Material.007",
+   "Material.010",
+   "Material.014",
+   "Material.016",
+   "Material.017",
+   "Material.018",
+   "Material.019",
+   "Material.020",
+   "Material.021",
+   "Material.023",
+   "Material.027"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-formentor-2021-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-formentor-2021-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-formentor-2021-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-formentor-2021-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-formentor-2021-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-formentor-2021-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-formentor-2021-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-formentor-2021-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-formentor-2021-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Sloftm_Carz', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "dacia-logan-2012-w5-v1",
+  "make": "dacia",
+  "model": "Dacia Logan",
+  "modelFamily": "dacia logan",
+  "modelAliases": [
+   "Dacia Logan"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2012,
+  "yearEnd": 2012,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Dacia Logan 2012",
+  "sourceUrl": "https://sketchfab.com/3d-models/08bc95b090394ffb9d0d6fafb51022c4",
+  "sourceCreator": "Fratzica",
+  "sourceReferenceId": "08bc95b090394ffb9d0d6fafb51022c4",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "chasis.1",
+   "chasis2.3",
+   "chasis2.4",
+   "grila.1",
+   "primary",
+   "siduhi.4",
+   "siduhi.5",
+   "torpedo.4"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2012-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2012-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2012-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2012-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2012-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2012-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2012-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2012-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2012-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Fratzica', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "dacia-logan-2023-w5-v1",
+  "make": "dacia",
+  "model": "Dacia Logan",
+  "modelFamily": "dacia logan",
+  "modelAliases": [
+   "Dacia Logan"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": 2023,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "dacia logan 2023",
+  "sourceUrl": "https://sketchfab.com/3d-models/79c761d9b43e4fba935c0b33e63c3ceb",
+  "sourceCreator": "xray collection",
+  "sourceReferenceId": "79c761d9b43e4fba935c0b33e63c3ceb",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2023-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2023-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2023-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2023-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2023-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2023-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2023-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2023-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2023-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'xray collection', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "fiat-ducato-2022-w5-v1",
+  "make": "fiat",
+  "model": "Fiat Ducato",
+  "modelFamily": "fiat ducato",
+  "modelAliases": [
+   "Fiat Ducato"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": 2022,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Fiat Ducato Chassis Truck Single Cab 3450WB 2022",
+  "sourceUrl": "https://sketchfab.com/3d-models/fc89c33e0d9c47e080f6c65e61fd27c8",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "fc89c33e0d9c47e080f6c65e61fd27c8",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2022-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2022-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2022-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2022-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2022-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2022-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2022-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2022-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2022-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-ecosport-2012-w5-v1",
+  "make": "ford",
+  "model": "Ford EcoSport",
+  "modelFamily": "ford ecosport",
+  "modelAliases": [
+   "Ford EcoSport"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2012,
+  "yearEnd": 2012,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2012 Ford EcoSport",
+  "sourceUrl": "https://sketchfab.com/models/4e491913d5f74b60a838555cb7ab610b",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "4e491913d5f74b60a838555cb7ab610b",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-2012-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-2012-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-2012-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-2012-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-2012-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-2012-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-2012-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-2012-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-2012-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-ka-sedan-2015-w5-v1",
+  "make": "ford",
+  "model": "Ford Ka Sedan",
+  "modelFamily": "ford ka sedan",
+  "modelAliases": [
+   "Ford Ka Sedan"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2015,
+  "yearEnd": 2015,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2015 Ford Ka Sedan",
+  "sourceUrl": "https://sketchfab.com/models/56da378ebc4d479cbf071c3dd4c9bb94",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "56da378ebc4d479cbf071c3dd4c9bb94",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-sedan-2015-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-sedan-2015-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-sedan-2015-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-sedan-2015-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-sedan-2015-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-sedan-2015-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-sedan-2015-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-sedan-2015-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-sedan-2015-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-ranger-2023-w5-v1",
+  "make": "ford",
+  "model": "Ford Ranger",
+  "modelFamily": "ford ranger",
+  "modelAliases": [
+   "Ford Ranger"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": 2023,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Ford Ranger Next-Gen 2023 Sport",
+  "sourceUrl": "https://sketchfab.com/3d-models/e93ac097ee9a46a4a9decca9aceed03c",
+  "sourceCreator": "Asadawut.Kaewma",
+  "sourceReferenceId": "e93ac097ee9a46a4a9decca9aceed03c",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2023-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2023-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2023-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2023-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2023-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2023-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2023-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2023-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2023-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Asadawut.Kaewma', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-transit-van-2021-w5-v1",
+  "make": "ford",
+  "model": "Ford Transit Van",
+  "modelFamily": "ford transit van",
+  "modelAliases": [
+   "Ford Transit Van"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": 2021,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Ford Transit Van L3H3 Trend 2021",
+  "sourceUrl": "https://sketchfab.com/3d-models/53e5c8099f784a518a5425bb1a5f9a83",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "53e5c8099f784a518a5425bb1a5f9a83",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-van-2021-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-van-2021-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-van-2021-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-van-2021-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-van-2021-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-van-2021-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-van-2021-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-van-2021-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-van-2021-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-accord-2017-w5-v1",
+  "make": "honda",
+  "model": "Honda Accord",
+  "modelFamily": "honda accord",
+  "modelAliases": [
+   "Honda Accord"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2017,
+  "yearEnd": 2017,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "honda accord 2017",
+  "sourceUrl": "https://sketchfab.com/3d-models/68892cd369e84a218e5e5dcf82365ee3",
+  "sourceCreator": "L95XP",
+  "sourceReferenceId": "68892cd369e84a218e5e5dcf82365ee3",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "AccordFIR.001",
+   "AccordFIR_torpedka.001",
+   "black.001",
+   "black.002"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2017-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2017-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2017-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2017-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2017-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2017-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2017-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2017-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2017-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'L95XP', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-civic-2007-w5-v1",
+  "make": "honda",
+  "model": "Honda Civic",
+  "modelFamily": "honda civic",
+  "modelAliases": [
+   "Honda Civic"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2007,
+  "yearEnd": 2007,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Honda Civic 2007",
+  "sourceUrl": "https://sketchfab.com/3d-models/1325afb508f14c4bbb40e9f849b0d4a2",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "1325afb508f14c4bbb40e9f849b0d4a2",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2007-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2007-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2007-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2007-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2007-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2007-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2007-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2007-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2007-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-civic-2016-w5-v1",
+  "make": "honda",
+  "model": "Honda Civic",
+  "modelFamily": "honda civic",
+  "modelAliases": [
+   "Honda Civic"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2016,
+  "yearEnd": 2016,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Honda Civic 2016",
+  "sourceUrl": "https://sketchfab.com/3d-models/ff844e296f214e709c0d0691d031c68b",
+  "sourceCreator": "Aldios",
+  "sourceReferenceId": "ff844e296f214e709c0d0691d031c68b",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "black",
+   "blackkkk",
+   "chrom",
+   "chrom_1",
+   "kaca",
+   "main_material"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2016-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2016-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2016-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2016-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2016-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2016-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2016-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2016-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2016-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Aldios', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-zr-v-2023-w5-v1",
+  "make": "honda",
+  "model": "Honda ZR-V",
+  "modelFamily": "honda zr v",
+  "modelAliases": [
+   "Honda ZR-V"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": 2023,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2023 Honda ZR-V",
+  "sourceUrl": "https://sketchfab.com/models/33eb3630e2ef4693b908322683784734",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "33eb3630e2ef4693b908322683784734",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "M_2023_Honda_ZR_V__JP__Black1",
+   "M_2023_Honda_ZR_V__JP__Urban_Gray_Pearl"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-zr-v-2023-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-zr-v-2023-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-zr-v-2023-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-zr-v-2023-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-zr-v-2023-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-zr-v-2023-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-zr-v-2023-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-zr-v-2023-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-zr-v-2023-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-casper-2023-w5-v1",
+  "make": "hyundai",
+  "model": "Hyundai Casper",
+  "modelFamily": "hyundai casper",
+  "modelAliases": [
+   "Hyundai Casper"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": 2023,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2023 Hyundai Casper",
+  "sourceUrl": "https://sketchfab.com/models/756bda485fc840babe274997874dde1a",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "756bda485fc840babe274997874dde1a",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "EXT_BODY"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-casper-2023-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-casper-2023-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-casper-2023-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-casper-2023-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-casper-2023-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-casper-2023-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-casper-2023-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-casper-2023-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-casper-2023-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-ioniq-2022-w5-v1",
+  "make": "hyundai",
+  "model": "Hyundai Ioniq",
+  "modelFamily": "hyundai ioniq",
+  "modelAliases": [
+   "Hyundai Ioniq"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": 2022,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022+ Hyundai+IONIQ+5",
+  "sourceUrl": "https://sketchfab.com/3d-models/b2fca33744e44313b2330044b4b87d01",
+  "sourceCreator": "qkralsgur310",
+  "sourceReferenceId": "b2fca33744e44313b2330044b4b87d01",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "2022_Hyundai_IONIQ_5_Galactic_Grey",
+   "2022_Hyundai_IONIQ_5_UnderCarrier"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-2022-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-2022-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-2022-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-2022-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-2022-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-2022-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-2022-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-2022-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-2022-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'qkralsgur310', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-ioniq-6-2023-w5-v1",
+  "make": "hyundai",
+  "model": "Hyundai IONIQ 6",
+  "modelFamily": "hyundai ioniq 6",
+  "modelAliases": [
+   "Hyundai IONIQ 6"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": 2023,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2023 Hyundai IONIQ 6",
+  "sourceUrl": "https://sketchfab.com/models/3fc37cd0e0cf436d97ac234632f3f3d9",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "3fc37cd0e0cf436d97ac234632f3f3d9",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "M_2023_Hyundai_Ioniq_6_car_paint",
+   "M_2023_Hyundai_Ioniq_6_ionic6_reto_exterior04blinn1",
+   "M_2023_Hyundai_Ioniq_6_ionic6_reto_exterior04blinn12",
+   "M_2023_Hyundai_Ioniq_6_ionic6_reto_exterior04lambert2",
+   "M_2023_Hyundai_Ioniq_6_ionic6_reto_exterior04lambert5",
+   "M_2023_Hyundai_Ioniq_6_ionic6_reto_exterior04lambert6"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-ioniq-6-w5-v1",
+  "make": "hyundai",
+  "model": "Ioniq 6",
+  "modelFamily": "ioniq 6",
+  "modelAliases": [
+   "Ioniq 6"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Hyundai Ioniq 6",
+  "sourceUrl": "https://sketchfab.com/models/84b503d8606542ae80c09a859e9fd2f2",
+  "sourceCreator": "Mona x Supercars",
+  "sourceReferenceId": "84b503d8606542ae80c09a859e9fd2f2",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "2023_Hyundai_Ioniq_6_High_Glossy",
+   "2023_Hyundai_Ioniq_6_High_Glossy.001",
+   "2023_Hyundai_Ioniq_6_Material__99",
+   "2023_Hyundai_Ioniq_6_ionic6_reto_exterior04blinn1",
+   "2023_Hyundai_Ioniq_6_ionic6_reto_exterior04blinn12",
+   "2023_Hyundai_Ioniq_6_ionic6_reto_exterior04lambert2",
+   "2023_Hyundai_Ioniq_6_ionic6_reto_exterior04lambert5",
+   "2023_Hyundai_Ioniq_6_ionic6_reto_exterior04lambert6",
+   "2023_Hyundai_Ioniq_6_side_skirt",
+   "material_2",
+   "material_3"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Mona x Supercars', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "kia-soul-2020-w5-v1",
+  "make": "kia",
+  "model": "Kia Soul",
+  "modelFamily": "kia soul",
+  "modelAliases": [
+   "Kia Soul"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": 2020,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Kia Soul EV 2020",
+  "sourceUrl": "https://sketchfab.com/3d-models/bb8a52faa37d4458ad24f8d6275084c1",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "bb8a52faa37d4458ad24f8d6275084c1",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "kia-sportage-2015-w5-v1",
+  "make": "kia",
+  "model": "Kia Sportage",
+  "modelFamily": "kia sportage",
+  "modelAliases": [
+   "Kia Sportage"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2015,
+  "yearEnd": 2015,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [
+   "diesel",
+   "hybrid",
+   "petrol"
+  ],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Kia Sportage GT-Line QL 2015-2021",
+  "sourceUrl": "https://sketchfab.com/3d-models/89cc320440ef47c289c8b4f04ffee008",
+  "sourceCreator": "Merc_TV",
+  "sourceReferenceId": "89cc320440ef47c289c8b4f04ffee008",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "passed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "sportage16_black1",
+   "sportage16_black8",
+   "sportage16_mesh_shader",
+   "sportage16_roof",
+   "sportage16paint",
+   "vivace",
+   "vivace_engine",
+   "vivace_mechanical"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2015-w5-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2015-w5-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2015-w5-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2015-w5-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2015-w5-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2015-w5-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2015-w5-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2015-w5-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2015-w5-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 1057120,
+  "mobileFileSizeBytes": 1057120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": null,
+  "pipelineVersion": "ingest-hardened-2026-07-20",
+  "publishedAt": null,
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only"
+  ],
+  "customization": {
+   "configuratorReady": true,
+   "componentPipelineVersion": "overnight-2026-07-16",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": true,
+  "colourVariantPaints": {
+   "grey": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__grey.glb",
+    "dvlaColour": "Grey",
+    "oemPaintName": "Dolphin Grey Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "silver": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__silver.glb",
+    "dvlaColour": "Silver",
+    "oemPaintName": "Reflex Silver Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "black": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__black.glb",
+    "dvlaColour": "Black",
+    "oemPaintName": "Deep Black Pearl",
+    "oemFinish": "Pearl",
+    "confirmed": false
+   },
+   "white": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__white.glb",
+    "dvlaColour": "White",
+    "oemPaintName": "Pure White",
+    "oemFinish": "Solid",
+    "confirmed": false
+   },
+   "blue": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__blue.glb",
+    "dvlaColour": "Blue",
+    "oemPaintName": "Atlantic Blue Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "red": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__red.glb",
+    "dvlaColour": "Red",
+    "oemPaintName": "Kings Red Metallic",
+    "oemFinish": "Metallic",
+    "confirmed": false
+   },
+   "green": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__green.glb",
+    "dvlaColour": "Green",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   },
+   "yellow": {
+    "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1__yellow.glb",
+    "dvlaColour": "Yellow",
+    "oemPaintName": null,
+    "oemFinish": null,
+    "confirmed": false
+   }
+  },
+  "defaultDvlaColour": "Silver",
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "variantsHash": "97e912c964abad65b3b501ea9bbf4497af5c6cae",
+   "method": "render",
+   "at": "2026-07-23"
+  }
  }
 ]
