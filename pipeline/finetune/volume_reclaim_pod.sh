@@ -25,7 +25,7 @@ status(){ printf '{"step":"%s","at":"%s"}\n' "$1" "$(date -u +%FT%TZ)" > "$LOCAL
 
 status inventory
 df -h /workspace | tail -1
-for d in /workspace/alam3d_stage_c/ckpts /workspace/alam3d_stage_d/ckpts; do
+for d in /workspace/alam3d_stage_c/ckpts /workspace/alam3d_stage_d/ckpts /workspace/alam3d_stage_t_v1/ckpts; do
   echo "--- $d"
   ls -la "$d" 2>/dev/null | awk 'NR>1{printf "  %12d  %s\n", $5, $NF}'
 done
@@ -69,6 +69,12 @@ for s in 0001000 0002000; do
   del "/workspace/alam3d_stage_d/ckpts/misc_step$s.pt"
   del "/workspace/alam3d_stage_d/ckpts/denoiser_step$s.pt"
 done
+# Stage T (texture, 2026-07-29): non-EMA + optimizer state for the swept steps.
+# Step 1000's resume state is kept so the run could continue; EMA untouched.
+for s in 0000250 0000500 0000750; do
+  del "/workspace/alam3d_stage_t_v1/ckpts/misc_step$s.pt"
+  del "/workspace/alam3d_stage_t_v1/ckpts/denoiser_step$s.pt"
+done
 
 # 3. anything the integrity pass proved truncated — it cannot be loaded, and
 #    leaving it in place would let the eval's "newest step wins" glob pick it
@@ -100,7 +106,8 @@ echo "--- which Stage D EMA checkpoint the eval will now pick:"
 python3 - <<'PY'
 import glob, os, zipfile
 for pat, label in (("/workspace/alam3d_stage_c/ckpts/denoiser_ema*step*.pt", "Stage C 512"),
-                   ("/workspace/alam3d_stage_d/ckpts/denoiser_ema*step*.pt", "Stage D 1024")):
+                   ("/workspace/alam3d_stage_d/ckpts/denoiser_ema*step*.pt", "Stage D 1024"),
+                   ("/workspace/alam3d_stage_t_v1/ckpts/denoiser_ema*step*.pt", "Stage T tex-512")):
     ck = sorted(glob.glob(pat), reverse=True)
     if not ck:
         print(f"{label}: NONE FOUND"); continue
