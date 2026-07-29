@@ -283,11 +283,18 @@ if DO_MATERIALS:
                 hist, edges = np.histogram(low[:, LA], bins=40)
                 mid = (edges[:-1] + edges[1:]) / 2
                 front_half = mid < lo[LA] + 0.5 * bl
-                a1 = mid[front_half][np.argmax(hist[front_half])]
-                a2 = mid[~front_half][np.argmax(hist[~front_half])]
-                axles = (a1, a2, 0.125 * bl)
-                print(f"AI_PREMIUM axles at {a1:.2f}/{a2:.2f} (len axis), "
-                      f"arch half-width {axles[2]:.2f}")
+                # both halves must actually contain ground faces: a mesh whose
+                # low geometry sits entirely in one half (vans, odd pivots)
+                # crashed argmax on the empty other half (2026-07-29)
+                if hist[front_half].any() and hist[~front_half].any():
+                    a1 = mid[front_half][np.argmax(hist[front_half])]
+                    a2 = mid[~front_half][np.argmax(hist[~front_half])]
+                    axles = (a1, a2, 0.125 * bl)
+                    print(f"AI_PREMIUM axles at {a1:.2f}/{a2:.2f} (len axis), "
+                          f"arch half-width {axles[2]:.2f}")
+                else:
+                    print("AI_PREMIUM axles: ground faces all in one half - "
+                          "falling back to plain height band")
         for i, f in enumerate(bm.faces):
             if f.material_index in gset:
                 continue
