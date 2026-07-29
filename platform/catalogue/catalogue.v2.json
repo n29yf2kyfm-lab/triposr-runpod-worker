@@ -111613,5 +111613,1136 @@
    ]
   },
   "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-ranger-2003-w6-v1",
+  "make": "ford",
+  "model": "Ranger",
+  "modelFamily": "ford ranger",
+  "modelAliases": [
+   "Ranger"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2003,
+  "yearEnd": 2003,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Ford Ranger Mk1 Double Cab 2003",
+  "sourceUrl": "https://sketchfab.com/3d-models/ford-ranger-mk1-double-cab-2003-a0c1230493a54275b47b9c40038fb614",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "a0c1230493a54275b47b9c40038fb614",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2003-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2003-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 34182740,
+  "mobileFileSizeBytes": 34182740,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "bae0baa907674028eabc5cd36b2037e03fe594a5e92d79f0e8194585c4759eb5",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carbonised Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbonised Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Agate Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Agate Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Frozen White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Frozen White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moondust Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moondust Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Chrome Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Chrome Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Desert Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desert Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fantastic Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fantastic Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mean Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mean Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Grabber Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Grabber Blue",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-transit-1978-w6-v1",
+  "make": "ford",
+  "model": "Transit",
+  "modelFamily": "ford transit",
+  "modelAliases": [
+   "Transit"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1978,
+  "yearEnd": 1978,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Ford Transit (Mk2) Panel Van 1978",
+  "sourceUrl": "https://sketchfab.com/3d-models/ford-transit-mk2-panel-van-1978-d001d1e7d7594143b391c7e797d9e8a4",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "d001d1e7d7594143b391c7e797d9e8a4",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "orangeglass",
+   "redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-1978-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-1978-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 19690192,
+  "mobileFileSizeBytes": 19690192,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "9d7e526c5ce621dab7f66d9608b0e1222769fac5b05a5338789edabe79957df9",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carbonised Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbonised Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Agate Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Agate Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Frozen White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Frozen White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moondust Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moondust Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Chrome Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Chrome Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Desert Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desert Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fantastic Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fantastic Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mean Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mean Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Grabber Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Grabber Blue",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "genesis-g70-w6-v1",
+  "make": "genesis",
+  "model": "G70",
+  "modelFamily": "genesis g70",
+  "modelAliases": [
+   "G70"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Genesis G70",
+  "sourceUrl": "https://sketchfab.com/3d-models/genesis-g70-509a72789a224bc894944638fc602426",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "509a72789a224bc894944638fc602426",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "body"
+   ]
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "Glass.001",
+   "redglass.005",
+   "glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 34582888,
+  "mobileFileSizeBytes": 34582888,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "a1f8883cc42201ca496e8708b94d062534803192a42af70b855c24ae7f1dfac3",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "genesis-g70-w6-v2",
+  "make": "genesis",
+  "model": "G70",
+  "modelFamily": "genesis g70",
+  "modelAliases": [
+   "G70"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Genesis G70",
+  "sourceUrl": "https://sketchfab.com/3d-models/genesis-g70-ded2c8428fb9499ebd2bfc69c5592b02",
+  "sourceCreator": "Lucas.Karlsmoen",
+  "sourceReferenceId": "ded2c8428fb9499ebd2bfc69c5592b02",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Paint",
+    "Paint0",
+    "Paint1",
+    "Paint2",
+    "Paint4",
+    "Paint6",
+    "Paint7",
+    "Paint8"
+   ]
+  ],
+  "glassMaterialNames": [
+   "window_glass1",
+   "window_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 35536704,
+  "mobileFileSizeBytes": 35536704,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "aa16250186d5ea27b16fa17f46ee12f9c1e61a7c1830aefed0fdbd0db47d1030",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Lucas.Karlsmoen'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-kona-w6-v1",
+  "make": "hyundai",
+  "model": "Kona",
+  "modelFamily": "hyundai kona",
+  "modelAliases": [
+   "Kona"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Hyundai Kona",
+  "sourceUrl": "https://sketchfab.com/3d-models/hyundai-kona-bb927b0cd4404b4abc3acaf30d41e0ce",
+  "sourceCreator": "MattDoesBlender",
+  "sourceReferenceId": "bb927b0cd4404b4abc3acaf30d41e0ce",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint",
+    "carpaintBlack"
+   ]
+  ],
+  "glassMaterialNames": [
+   "glass_dark",
+   "glass_darkB",
+   "glass_clear",
+   "glass_red"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 16496580,
+  "mobileFileSizeBytes": 16496580,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "dc34e95c9fccc8ec019263a3ad04adfbb40328888bffc90893d5af8a3694b80d",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'MattDoesBlender'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-kona-w6-v2",
+  "make": "hyundai",
+  "model": "Kona",
+  "modelFamily": "hyundai kona",
+  "modelAliases": [
+   "Kona"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Hyundai Kona",
+  "sourceUrl": "https://sketchfab.com/3d-models/hyundai-kona-343a128d7284471b91e7c4575910722e",
+  "sourceCreator": "Mona x Supercars",
+  "sourceReferenceId": "343a128d7284471b91e7c4575910722e",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "2019_Hyundai_Encino_Kona_EV_CeramicBlue",
+    "2019_Hyundai_Encino_Kona_EV_Doors"
+   ]
+  ],
+  "glassMaterialNames": [
+   "2019_Hyundai_Encino_Kona_EV_Windows",
+   "2019_Hyundai_Encino_Kona_EV_Tailights_Glass",
+   "2019_Hyundai_Encino_Kona_EV_HeadLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-w6-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-w6-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 14844756,
+  "mobileFileSizeBytes": 14844756,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "b5498290078dc0e0ae9f824e36785c5cab33d442784c30efaabe7f728683a506",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Mona x Supercars'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-i-pace-w6-v1",
+  "make": "jaguar",
+  "model": "I-Pace",
+  "modelFamily": "jaguar i-pace",
+  "modelAliases": [
+   "I-Pace"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Jaguar I-Pace",
+  "sourceUrl": "https://sketchfab.com/3d-models/jaguar-i-pace-296a97a6c07041cf9c48f8a303315ed2",
+  "sourceCreator": "Mona x Supercars",
+  "sourceReferenceId": "296a97a6c07041cf9c48f8a303315ed2",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Body",
+    "Body_noir"
+   ]
+  ],
+  "glassMaterialNames": [
+   "Vitre",
+   "Jante_noir"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-i-pace-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-i-pace-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 8902780,
+  "mobileFileSizeBytes": 8902780,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "44b7078f5917f7f5e572dda478afb319408f418340e5510bddf84b00ce0652e6",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Mona x Supercars'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-xf-2014-w6-v1",
+  "make": "jaguar",
+  "model": "XF",
+  "modelFamily": "jaguar xf",
+  "modelAliases": [
+   "XF"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2014,
+  "yearEnd": 2014,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2014 Jaguar XF-RS (X250)",
+  "sourceUrl": "https://sketchfab.com/3d-models/2014-jaguar-xf-rs-x250-36e8b609ab42489aaead26c208ef4360",
+  "sourceCreator": "DisneyCars",
+  "sourceReferenceId": "36e8b609ab42489aaead26c208ef4360",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Body0071Mtl",
+    "Body1Mtl",
+    "Bootok0051Mtl",
+    "Bumperr01Mtl",
+    "Bumprearok0031Mtl",
+    "Doorlrok0091Mtl",
+    "Trunk21Mtl"
+   ]
+  ],
+  "glassMaterialNames": [
+   "Window0021Mtl",
+   "Doorlrglass1Mtl",
+   "Doorlfglass1Mtl",
+   "Bootglass21Mtl",
+   "Gls0021Mtl",
+   "Window0011Mtl"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xf-2014-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xf-2014-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 17059156,
+  "mobileFileSizeBytes": 17059156,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "ba29797899ee584542c4424428a45abd26431af1fa3afe169f36755a13f3f3ef",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'DisneyCars'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
