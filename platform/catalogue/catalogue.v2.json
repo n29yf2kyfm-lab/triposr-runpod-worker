@@ -109914,10 +109914,8 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "CarPaint",
-    "Carpaint_Flakes_Signal_Blue_1"
-   ]
+   "CarPaint",
+   "Carpaint_Flakes_Signal_Blue_1"
   ],
   "glassMaterialNames": [
    "glass",
@@ -110001,18 +109999,16 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "D_PlasIN",
-    "Material__2125654726",
-    "Material__2125713530",
-    "auto_12",
-    "auto_13",
-    "auto_14",
-    "auto_15",
-    "auto_20",
-    "auto_21",
-    "auto_24"
-   ]
+   "D_PlasIN",
+   "Material__2125654726",
+   "Material__2125713530",
+   "auto_12",
+   "auto_13",
+   "auto_14",
+   "auto_15",
+   "auto_20",
+   "auto_21",
+   "auto_24"
   ],
   "glassMaterialNames": [
    "D_glass"
@@ -110094,9 +110090,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Carro_Pintura"
-   ]
+   "Carro_Pintura"
   ],
   "glassMaterialNames": [
    "Carro_Vidros2",
@@ -110181,9 +110175,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Carro_Pintura"
-   ]
+   "Carro_Pintura"
   ],
   "glassMaterialNames": [
    "Carro_Vidros",
@@ -110324,9 +110316,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Carro_Pintura"
-   ]
+   "Carro_Pintura"
   ],
   "glassMaterialNames": [
    "Carro_Vidros",
@@ -110467,9 +110457,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Carro_Pintura"
-   ]
+   "Carro_Pintura"
   ],
   "glassMaterialNames": [
    "Carro_Vidros",
@@ -110611,10 +110599,8 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "M_2021_Cupra_Leon_5_Door_Graphene_Gray_Metallic",
-    "M_2021_Cupra_Leon_5_Door_UnderCarrier"
-   ]
+   "M_2021_Cupra_Leon_5_Door_Graphene_Gray_Metallic",
+   "M_2021_Cupra_Leon_5_Door_UnderCarrier"
   ],
   "glassMaterialNames": [
    "M_2021_Cupra_Leon_5_Door_Windows",
@@ -110756,9 +110742,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint.248"
-   ]
+   "carpaint.248"
   ],
   "glassMaterialNames": [
    "greenglass.065",
@@ -110842,9 +110826,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Carro_Pintura"
-   ]
+   "Carro_Pintura"
   ],
   "glassMaterialNames": [
    "Carro_Vidros",
@@ -110984,9 +110966,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "windowglass",
@@ -111152,9 +111132,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "windowglass",
@@ -111322,9 +111300,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "body1"
-   ]
+   "body1"
   ],
   "glassMaterialNames": [
    "window1",
@@ -111490,9 +111466,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "body1"
-   ]
+   "body1"
   ],
   "glassMaterialNames": [
    "window1",
@@ -111656,9 +111630,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "windowglass",
@@ -111824,9 +111796,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "windowglass",
@@ -111992,9 +111962,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "body"
-   ]
+   "body"
   ],
   "glassMaterialNames": [
    "d_glass",
@@ -112079,16 +112047,14 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Paint",
-    "Paint0",
-    "Paint1",
-    "Paint2",
-    "Paint4",
-    "Paint6",
-    "Paint7",
-    "Paint8"
-   ]
+   "Paint",
+   "Paint0",
+   "Paint1",
+   "Paint2",
+   "Paint4",
+   "Paint6",
+   "Paint7",
+   "Paint8"
   ],
   "glassMaterialNames": [
    "window_glass1",
@@ -112171,10 +112137,8 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint",
-    "carpaintBlack"
-   ]
+   "carpaint",
+   "carpaintBlack"
   ],
   "glassMaterialNames": [
    "glass_dark",
@@ -112324,10 +112288,8 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "2019_Hyundai_Encino_Kona_EV_CeramicBlue",
-    "2019_Hyundai_Encino_Kona_EV_Doors"
-   ]
+   "2019_Hyundai_Encino_Kona_EV_CeramicBlue",
+   "2019_Hyundai_Encino_Kona_EV_Doors"
   ],
   "glassMaterialNames": [
    "2019_Hyundai_Encino_Kona_EV_Windows",
@@ -112476,10 +112438,8 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Body",
-    "Body_noir"
-   ]
+   "Body",
+   "Body_noir"
   ],
   "glassMaterialNames": [
    "Vitre",
@@ -112627,15 +112587,13 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Body0071Mtl",
-    "Body1Mtl",
-    "Bootok0051Mtl",
-    "Bumperr01Mtl",
-    "Bumprearok0031Mtl",
-    "Doorlrok0091Mtl",
-    "Trunk21Mtl"
-   ]
+   "Body0071Mtl",
+   "Body1Mtl",
+   "Bootok0051Mtl",
+   "Bumperr01Mtl",
+   "Bumprearok0031Mtl",
+   "Doorlrok0091Mtl",
+   "Trunk21Mtl"
   ],
   "glassMaterialNames": [
    "Window0021Mtl",
@@ -112787,9 +112745,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "windowglass",
@@ -112940,9 +112896,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Carro_Pintura"
-   ]
+   "Carro_Pintura"
   ],
   "glassMaterialNames": [
    "Carro_Vidros",
@@ -113027,11 +112981,9 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "2022_Kia_Carnival_Black1",
-    "2022_Kia_Carnival_Panthera_Metal",
-    "2022_Kia_Carnival_UnderCarrier"
-   ]
+   "2022_Kia_Carnival_Black1",
+   "2022_Kia_Carnival_Panthera_Metal",
+   "2022_Kia_Carnival_UnderCarrier"
   ],
   "glassMaterialNames": [
    "2022_Kia_Carnival_Windows",
@@ -113181,10 +113133,8 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Carro_Pintura",
-    "Carro_Pintura_1"
-   ]
+   "Carro_Pintura",
+   "Carro_Pintura_1"
   ],
   "glassMaterialNames": [
    "Carro_Vidros"
@@ -113331,10 +113281,8 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "M_2022_Kia_EV6_Standard_remap__prim_env_4_spec",
-    "M_2022_Kia_EV6_Standard_suedebmp__spec"
-   ]
+   "M_2022_Kia_EV6_Standard_remap__prim_env_4_spec",
+   "M_2022_Kia_EV6_Standard_suedebmp__spec"
   ],
   "glassMaterialNames": [
    "M_2022_Kia_EV6_Standard_Windows",
@@ -113485,11 +113433,9 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "2021_Kia_Picanto_GT-Line_Black1",
-    "2021_Kia_Picanto_GT-Line_Titanium_Grey",
-    "2021_Kia_Picanto_GT-Line_UnderCarrier"
-   ]
+   "2021_Kia_Picanto_GT-Line_Black1",
+   "2021_Kia_Picanto_GT-Line_Titanium_Grey",
+   "2021_Kia_Picanto_GT-Line_UnderCarrier"
   ],
   "glassMaterialNames": [
    "2021_Kia_Picanto_GT-Line_Windows",
@@ -113639,9 +113585,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "windowglass",
@@ -113790,19 +113734,17 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "kia_sportage_mat_0",
-    "kia_sportage_mat_0__1",
-    "kia_sportage_mat_14_001",
-    "kia_sportage_mat_22_001",
-    "kia_sportage_mat_36",
-    "kia_sportage_mat_36__1.002",
-    "kia_sportage_mat_43",
-    "kia_sportage_mat_51__1",
-    "kia_sportage_mat_54",
-    "kia_sportage_mat_59__1",
-    "material"
-   ]
+   "kia_sportage_mat_0",
+   "kia_sportage_mat_0__1",
+   "kia_sportage_mat_14_001",
+   "kia_sportage_mat_22_001",
+   "kia_sportage_mat_36",
+   "kia_sportage_mat_36__1.002",
+   "kia_sportage_mat_43",
+   "kia_sportage_mat_51__1",
+   "kia_sportage_mat_54",
+   "kia_sportage_mat_59__1",
+   "material"
   ],
   "glassMaterialNames": [
    "GLASSSS"
@@ -113949,10 +113891,8 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "defenderM_CarPaint_Max1",
-    "defenderM_Chassis_Max1"
-   ]
+   "defenderM_CarPaint_Max1",
+   "defenderM_Chassis_Max1"
   ],
   "glassMaterialNames": [
    "defenderM_Glass_WindowFront_Low1",
@@ -114108,16 +114048,14 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020blac",
-    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020black",
-    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020black_",
-    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020body_1",
-    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020body_2",
-    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020rims_b",
-    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020silve",
-    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020silver"
-   ]
+   "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020blac",
+   "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020black",
+   "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020black_",
+   "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020body_1",
+   "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020body_2",
+   "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020rims_b",
+   "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020silve",
+   "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020silver"
   ],
   "glassMaterialNames": [
    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020d_glas",
@@ -114275,9 +114213,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Vehicle_-_Body_-_Paint"
-   ]
+   "Vehicle_-_Body_-_Paint"
   ],
   "glassMaterialNames": [
    "Glass_EEVEE_002"
@@ -114434,12 +114370,10 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "1Mtl",
-    "Meshpart1Mtl",
-    "Part1Mtl",
-    "Steelie1Mtl"
-   ]
+   "1Mtl",
+   "Meshpart1Mtl",
+   "Part1Mtl",
+   "Steelie1Mtl"
   ],
   "glassMaterialNames": [
    "Window3Mtl",
@@ -114590,9 +114524,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Body"
-   ]
+   "Body"
   ],
   "glassMaterialNames": [
    "glass.001",
@@ -114743,21 +114675,19 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Back_Bamper",
-    "Baked_Back_sideniya",
-    "Baked_Dveri_obshivki",
-    "Baked_Potolok",
-    "Baked_Torpeda_map",
-    "Bottom_color",
-    "Kuzov_Main_color",
-    "Kuzov_black_color",
-    "Kuzov_potolok",
-    "PANARAMA",
-    "Salon_black",
-    "Specular_Railing",
-    "baked_Back_Door"
-   ]
+   "Back_Bamper",
+   "Baked_Back_sideniya",
+   "Baked_Dveri_obshivki",
+   "Baked_Potolok",
+   "Baked_Torpeda_map",
+   "Bottom_color",
+   "Kuzov_Main_color",
+   "Kuzov_black_color",
+   "Kuzov_potolok",
+   "PANARAMA",
+   "Salon_black",
+   "Specular_Railing",
+   "baked_Back_Door"
   ],
   "glassMaterialNames": [
    "Glass_Windows"
@@ -114904,9 +114834,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "windowglass",
@@ -115056,9 +114984,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "windowglass",
@@ -115208,9 +115134,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "windowglass",
@@ -115360,9 +115284,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "windowglass",
@@ -115498,10 +115420,8 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "M_2022_Mitsubishi_Eclipse_Cross_PHEV_UnderCarrier",
-    "M_2022_Mitsubishi_Eclipse_Cross_PHEV_White_Diamond_Metallic"
-   ]
+   "M_2022_Mitsubishi_Eclipse_Cross_PHEV_UnderCarrier",
+   "M_2022_Mitsubishi_Eclipse_Cross_PHEV_White_Diamond_Metallic"
   ],
   "glassMaterialNames": [
    "M_2022_Mitsubishi_Eclipse_Cross_PHEV_Windows",
@@ -115634,9 +115554,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "body_color"
-   ]
+   "body_color"
   ],
   "glassMaterialNames": [
    "glass_window",
@@ -115770,17 +115688,15 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "Chassis.10",
-    "Chassis.7",
-    "Chassis.9",
-    "chassis_cleber.006",
-    "chassis_cleber.1",
-    "chassis_cleber.2",
-    "chassis_cleber.3",
-    "chassis_cleber.4",
-    "chassis_cleber.5"
-   ]
+   "Chassis.10",
+   "Chassis.7",
+   "Chassis.9",
+   "chassis_cleber.006",
+   "chassis_cleber.1",
+   "chassis_cleber.2",
+   "chassis_cleber.3",
+   "chassis_cleber.4",
+   "chassis_cleber.5"
   ],
   "glassMaterialNames": [
    "glass",
@@ -115928,9 +115844,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "body"
-   ]
+   "body"
   ],
   "glassMaterialNames": [
    "d_glass",
@@ -116079,9 +115993,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "greenglass",
@@ -116231,11 +116143,9 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "M_2022_Nissan_Qashqai_Black1",
-    "M_2022_Nissan_Qashqai_UnderCarrier",
-    "M_2022_Nissan_Qashqai_Vivid_Blue"
-   ]
+   "M_2022_Nissan_Qashqai_Black1",
+   "M_2022_Nissan_Qashqai_UnderCarrier",
+   "M_2022_Nissan_Qashqai_Vivid_Blue"
   ],
   "glassMaterialNames": [
    "M_2022_Nissan_Qashqai_WindowsTrim",
@@ -116384,9 +116294,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "windowglass",
@@ -116471,9 +116379,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "greenglass",
@@ -116558,9 +116464,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "carpaint"
-   ]
+   "carpaint"
   ],
   "glassMaterialNames": [
    "windowglass",
@@ -116645,9 +116549,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   [
-    "body__prim_env_4_spec"
-   ]
+   "body__prim_env_4_spec"
   ],
   "glassMaterialNames": [
    "Matte__82000000__env_5_spec_trans",

@@ -206,7 +206,10 @@ def publish_item(row):
     audit = mat_audit_public(pub_url)                                        # G2
     mats = audit.get("materials", [])
     body_name = audit.get("chosen_body")
-    glass_names = [m["name"] for m in mats if m.get("glass") and m.get("name")]
+    # worker returns chosen_body as a str or a list of material names
+    body_names = ([str(b) for b in body_name] if isinstance(body_name, list)
+                  else [str(body_name)] if body_name else [])
+    glass_names = [str(m["name"]) for m in mats if m.get("glass") and m.get("name")]
 
     today = datetime.date.today().isoformat()
     entry = {
@@ -227,13 +230,13 @@ def publish_item(row):
         "licence": "CC-BY (attribution required)",
         "generatedFromReference": False, "referenceImageCount": 0,
         "accuracyGrade": "representative", "qualityGrade": "B",
-        "technicalStatus": "passed" if body_name else "no-body-material",
+        "technicalStatus": "passed" if body_names else "no-body-material",
         "visualStatus": "owner-reviewed",     # G1 proved the owner's verdict
         "publicationStatus": "approved", "quarantineReason": None,
         "hasInterior": False, "interiorMode": "none",
         "hasSeparateDoors": False, "hasSeparateBonnet": False,
         "hasSeparateBoot": False, "supportsOpenableParts": False,
-        "paintMaterialNames": [body_name] if body_name else [],
+        "paintMaterialNames": body_names,
         "glassMaterialNames": glass_names,
         "defaultColourFamily": None, "renderColourLabel": None,
         "oemPaintVerified": False, "oemPaintCode": None, "oemPaintName": None,
