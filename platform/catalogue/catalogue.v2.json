@@ -113440,5 +113440,3317 @@
    ]
   },
   "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "kia-picanto-w6-v1",
+  "make": "kia",
+  "model": "Picanto",
+  "modelFamily": "kia picanto",
+  "modelAliases": [
+   "Picanto"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "GT-Line"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Kia Picanto Morning GT-Line",
+  "sourceUrl": "https://sketchfab.com/3d-models/kia-picanto-morning-gt-line-b4fd928f3e814ef29900c706bccc344d",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "b4fd928f3e814ef29900c706bccc344d",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "2021_Kia_Picanto_GT-Line_Black1",
+    "2021_Kia_Picanto_GT-Line_Titanium_Grey",
+    "2021_Kia_Picanto_GT-Line_UnderCarrier"
+   ]
+  ],
+  "glassMaterialNames": [
+   "2021_Kia_Picanto_GT-Line_Windows",
+   "2021_Kia_Picanto_GT-Line_WindowsTrims",
+   "2021_Kia_Picanto_GT-Line_BrakeLightsGlass",
+   "2021_Kia_Picanto_GT-Line_HeadLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-picanto-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-picanto-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 12941000,
+  "mobileFileSizeBytes": 12941000,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "b7feabc351b45a8308bf7d1b6f4578e3c3f672a00091120e01b953d11cfb53b1",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Interstellar Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Interstellar Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Steel Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Steel Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Aurora Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Aurora Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snow White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snow White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fusion White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fusion White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Runway Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Runway Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Mineral Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Experience Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Experience Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "kia-sportage-2011-w6-v1",
+  "make": "kia",
+  "model": "Sportage",
+  "modelFamily": "kia sportage",
+  "modelAliases": [
+   "Sportage"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2011,
+  "yearEnd": 2011,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Kia Sportage 2011",
+  "sourceUrl": "https://sketchfab.com/3d-models/kia-sportage-2011-1bf75af459fc4eab9878c1753376f2ed",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "1bf75af459fc4eab9878c1753376f2ed",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2011-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2011-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 36608480,
+  "mobileFileSizeBytes": 36608480,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "b9860594511f72f9562f2e2b2cab95a3a38ca04238d200fe6af40beb1671e9a7",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Interstellar Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Interstellar Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Steel Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Steel Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Aurora Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Aurora Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snow White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snow White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fusion White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fusion White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Runway Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Runway Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Mineral Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Experience Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Experience Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "kia-sportage-w6-v1",
+  "make": "kia",
+  "model": "Sportage",
+  "modelFamily": "kia sportage",
+  "modelAliases": [
+   "Sportage"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Carro KIA Sportage Xnova360",
+  "sourceUrl": "https://sketchfab.com/3d-models/carro-kia-sportage-xnova360-212016fe1b8b47fda3d0c30e1a22af2f",
+  "sourceCreator": "xnova360",
+  "sourceReferenceId": "212016fe1b8b47fda3d0c30e1a22af2f",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "kia_sportage_mat_0",
+    "kia_sportage_mat_0__1",
+    "kia_sportage_mat_14_001",
+    "kia_sportage_mat_22_001",
+    "kia_sportage_mat_36",
+    "kia_sportage_mat_36__1.002",
+    "kia_sportage_mat_43",
+    "kia_sportage_mat_51__1",
+    "kia_sportage_mat_54",
+    "kia_sportage_mat_59__1",
+    "material"
+   ]
+  ],
+  "glassMaterialNames": [
+   "GLASSSS"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 11301820,
+  "mobileFileSizeBytes": 11301820,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "64c5ccabbd9f53d77bc998bd955f7c23b134e3b8cfd411b9bcfcc68acadc854c",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'xnova360'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Interstellar Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Interstellar Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Steel Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Steel Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Aurora Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Aurora Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snow White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snow White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fusion White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fusion White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Runway Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Runway Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Mineral Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Experience Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Experience Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-defender-w6-v1",
+  "make": "land-rover",
+  "model": "Defender",
+  "modelFamily": "land rover defender",
+  "modelAliases": [
+   "Defender"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Land Rover Defender 110 Double Cab Pick Up",
+  "sourceUrl": "https://sketchfab.com/3d-models/land-rover-defender-110-double-cab-pick-up-0fbbc07768a5456c9f6f8c9c7e048d28",
+  "sourceCreator": "Ddiaz Design",
+  "sourceReferenceId": "0fbbc07768a5456c9f6f8c9c7e048d28",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "defenderM_CarPaint_Max1",
+    "defenderM_Chassis_Max1"
+   ]
+  ],
+  "glassMaterialNames": [
+   "defenderM_Glass_WindowFront_Low1",
+   "defenderM_SoftPlastic_Max1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 11680428,
+  "mobileFileSizeBytes": 11680428,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "3edbbd243a617ec7dc485cbde5d83c20b3e3dacf51f299a1c62886986e6755b0",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Ddiaz Design'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-defender-2021-w6-v1",
+  "make": "land-rover",
+  "model": "Defender",
+  "modelFamily": "land rover defender",
+  "modelAliases": [
+   "Defender"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": 2021,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2021 Land Rover Defender 110",
+  "sourceUrl": "https://sketchfab.com/3d-models/2021-land-rover-defender-110-26f042fcf1594890a529bfb41f0fae0d",
+  "sourceCreator": "David_Holiday",
+  "sourceReferenceId": "26f042fcf1594890a529bfb41f0fae0d",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020blac",
+    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020black",
+    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020black_",
+    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020body_1",
+    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020body_2",
+    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020rims_b",
+    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020silve",
+    "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020silver"
+   ]
+  ],
+  "glassMaterialNames": [
+   "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020d_glas",
+   "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020glass",
+   "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020r_glas",
+   "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020glass_"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-2021-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-2021-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 22580684,
+  "mobileFileSizeBytes": 22580684,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "495f2d347d171bb4d392ddb95ba286b2d45f905a79966eb60674183a48aa0ea3",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'David_Holiday'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-evoque-2011-w6-v1",
+  "make": "land-rover",
+  "model": "Range Rover Evoque",
+  "modelFamily": "land rover range rover evoque",
+  "modelAliases": [
+   "Range Rover Evoque"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2011,
+  "yearEnd": 2011,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2011 - Range Rover Evoque - Free Vehicle Archive",
+  "sourceUrl": "https://sketchfab.com/3d-models/2011-range-rover-evoque-free-vehicle-archive-f7632f55ed4c49e29f44c409260416f1",
+  "sourceCreator": "Free Vehicle Archive",
+  "sourceReferenceId": "f7632f55ed4c49e29f44c409260416f1",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Vehicle_-_Body_-_Paint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "Glass_EEVEE_002"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-2011-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-2011-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 7413572,
+  "mobileFileSizeBytes": 7413572,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "4e4c241b9fd91e96b7c6cddbc13df04da9544339fa08b6801a383a6f0700c544",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Free Vehicle Archive'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "lexus-es-hybrid-w6-v1",
+  "make": "lexus",
+  "model": "ES Hybrid",
+  "modelFamily": "lexus es hybrid",
+  "modelAliases": [
+   "ES Hybrid"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Hybrid"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Lexus ES Hybrid",
+  "sourceUrl": "https://sketchfab.com/3d-models/lexus-es-hybrid-b4edfa2fd5cc48ada679352215e0105e",
+  "sourceCreator": "Mona x Supercars",
+  "sourceReferenceId": "b4edfa2fd5cc48ada679352215e0105e",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "1Mtl",
+    "Meshpart1Mtl",
+    "Part1Mtl",
+    "Steelie1Mtl"
+   ]
+  ],
+  "glassMaterialNames": [
+   "Window3Mtl",
+   "GlassRl1Mtl",
+   "Glass21Mtl",
+   "Lightglass1Mtl",
+   "Glass11Mtl"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-es-hybrid-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-es-hybrid-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 12569716,
+  "mobileFileSizeBytes": 12569716,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "0856115fa9bc50f4390e5f801b26bccb0235a83bf470e803d61f220ca2498e22",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Mona x Supercars'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Titanium",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sonic Titanium",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mercury Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mercury Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Graphite Black",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Black",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Sonic White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Sonic Silver",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sonic Silver",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Celestial Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Celestial Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Mesa Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mesa Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Terrane Khaki",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Terrane Khaki",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "lexus-ls-w6-v1",
+  "make": "lexus",
+  "model": "LS",
+  "modelFamily": "lexus ls",
+  "modelAliases": [
+   "LS"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Lexus LS 500 F Sport",
+  "sourceUrl": "https://sketchfab.com/3d-models/lexus-ls-500-f-sport-bc240e796ced4190bedf123f77a140e9",
+  "sourceCreator": "SeKali",
+  "sourceReferenceId": "bc240e796ced4190bedf123f77a140e9",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Body"
+   ]
+  ],
+  "glassMaterialNames": [
+   "glass.001",
+   "glass_rearlight",
+   "Material.037"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 35187140,
+  "mobileFileSizeBytes": 35187140,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "bd983ef519e7f8fe6e74ae8610b176491716565dae87d729263666cceb208673",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'SeKali'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Titanium",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sonic Titanium",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mercury Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mercury Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Graphite Black",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Black",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Sonic White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Sonic Silver",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sonic Silver",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Celestial Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Celestial Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Mesa Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mesa Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Terrane Khaki",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Terrane Khaki",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mini-cooper-s-facelift-w6-v1",
+  "make": "mini",
+  "model": "Cooper S Facelift",
+  "modelFamily": "mini cooper s facelift",
+  "modelAliases": [
+   "Cooper S Facelift"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Cooper S"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Mini Cooper S Facelift",
+  "sourceUrl": "https://sketchfab.com/3d-models/mini-cooper-s-facelift-2baca439d2494e02b99596014b49ebd3",
+  "sourceCreator": "Mona x Supercars",
+  "sourceReferenceId": "2baca439d2494e02b99596014b49ebd3",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Back_Bamper",
+    "Baked_Back_sideniya",
+    "Baked_Dveri_obshivki",
+    "Baked_Potolok",
+    "Baked_Torpeda_map",
+    "Bottom_color",
+    "Kuzov_Main_color",
+    "Kuzov_black_color",
+    "Kuzov_potolok",
+    "PANARAMA",
+    "Salon_black",
+    "Specular_Railing",
+    "baked_Back_Door"
+   ]
+  ],
+  "glassMaterialNames": [
+   "Glass_Windows"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-s-facelift-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-s-facelift-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6843576,
+  "mobileFileSizeBytes": 6843576,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "e3294abda748317d7fa8fea5ff3828cff8b679d7b83d52adabcfae79472c6db3",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Mona x Supercars'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Rooftop Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Rooftop Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Melting Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Melting Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nanuq White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nanuq White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Rebel Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Rebel Green",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Chili Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Chili Red",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mazda-3-2003-w6-v1",
+  "make": "mazda",
+  "model": "3",
+  "modelFamily": "mazda 3",
+  "modelAliases": [
+   "3"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2003,
+  "yearEnd": 2003,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Mazda 3 (Mk1) sedan HQ interior 2003",
+  "sourceUrl": "https://sketchfab.com/3d-models/mazda-3-mk1-sedan-hq-interior-2003-6c06bd35a9804c53a82078e72b2db549",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "6c06bd35a9804c53a82078e72b2db549",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "orangeglass",
+   "redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-3-2003-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-3-2003-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 48343164,
+  "mobileFileSizeBytes": 48343164,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "36cd7384fb851b810e958b20d81fa6cc22e8db64cdba68f2b221cd304250c286",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Machine Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Machine Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Polymetal Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Polymetal Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Jet Black Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Rhodium White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Rhodium White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snowflake White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snowflake White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Soul Red Crystal",
+     "hex": null,
+     "finish": "crystal",
+     "oemPaintName": "Soul Red Crystal",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Deep Crystal Blue Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Deep Crystal Blue Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "sand",
+     "label": "Zircon Sand Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Zircon Sand Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mazda-3-2011-w6-v1",
+  "make": "mazda",
+  "model": "3",
+  "modelFamily": "mazda 3",
+  "modelAliases": [
+   "3"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2011,
+  "yearEnd": 2011,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Mazda 3 sedan 2011",
+  "sourceUrl": "https://sketchfab.com/3d-models/mazda-3-sedan-2011-a204c83664e5494e97cf5ac8d5972dc2",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "a204c83664e5494e97cf5ac8d5972dc2",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-3-2011-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-3-2011-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 20566572,
+  "mobileFileSizeBytes": 20566572,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f7b456116308cfc144c5de7832c92c455efee3311be27626dc864a747c992054",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Machine Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Machine Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Polymetal Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Polymetal Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Jet Black Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Rhodium White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Rhodium White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snowflake White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snowflake White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Soul Red Crystal",
+     "hex": null,
+     "finish": "crystal",
+     "oemPaintName": "Soul Red Crystal",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Deep Crystal Blue Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Deep Crystal Blue Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "sand",
+     "label": "Zircon Sand Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Zircon Sand Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mazda-mx-5-w6-v1",
+  "make": "mazda",
+  "model": "MX-5",
+  "modelFamily": "mazda mx-5",
+  "modelAliases": [
+   "MX-5"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Mazda MX-5 (NB)",
+  "sourceUrl": "https://sketchfab.com/3d-models/mazda-mx-5-nb-07fa2ea039894c929805353ee03ec188",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "07fa2ea039894c929805353ee03ec188",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 25163920,
+  "mobileFileSizeBytes": 25163920,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "de05c5270e26b9a86d5e8d16354689fc6e318eabd68b77e2b03ab338a6708711",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Machine Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Machine Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Polymetal Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Polymetal Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Jet Black Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Rhodium White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Rhodium White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snowflake White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snowflake White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Soul Red Crystal",
+     "hex": null,
+     "finish": "crystal",
+     "oemPaintName": "Soul Red Crystal",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Deep Crystal Blue Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Deep Crystal Blue Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "sand",
+     "label": "Zircon Sand Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Zircon Sand Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mitsubishi-colt-1966-w6-v1",
+  "make": "mitsubishi",
+  "model": "Colt",
+  "modelFamily": "mitsubishi colt",
+  "modelAliases": [
+   "Colt"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1966,
+  "yearEnd": 1966,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Mitsubishi_Colt_(Mk3)_(1000F)_3door_1966",
+  "sourceUrl": "https://sketchfab.com/3d-models/mitsubishi-colt-mk3-1000f-3door-1966-36c8a440a7774282a48ddf737be39b57",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "36c8a440a7774282a48ddf737be39b57",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-colt-1966-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-colt-1966-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 35627436,
+  "mobileFileSizeBytes": 35627436,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f123673de7d4fe2bdf437dbc699e86b2583401e6f706b40be363d7a02a229b70",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Jet Black Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "White Diamond",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "White Diamond",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Sterling Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sterling Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lightning Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lightning Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Red Diamond",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Red Diamond",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mitsubishi-eclipse-cross-phev-2022-w6-v1",
+  "make": "mitsubishi",
+  "model": "Eclipse Cross PHEV",
+  "modelFamily": "mitsubishi eclipse cross phev",
+  "modelAliases": [
+   "Eclipse Cross PHEV"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": 2022,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "PHEV"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022 Mitsubishi Eclipse Cross PHEV",
+  "sourceUrl": "https://sketchfab.com/3d-models/2022-mitsubishi-eclipse-cross-phev-6dbaa348dbe84df991f1890559a2f16b",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "6dbaa348dbe84df991f1890559a2f16b",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "M_2022_Mitsubishi_Eclipse_Cross_PHEV_UnderCarrier",
+    "M_2022_Mitsubishi_Eclipse_Cross_PHEV_White_Diamond_Metallic"
+   ]
+  ],
+  "glassMaterialNames": [
+   "M_2022_Mitsubishi_Eclipse_Cross_PHEV_Windows",
+   "M_2022_Mitsubishi_Eclipse_Cross_PHEV_WindowsTrims1",
+   "M_2022_Mitsubishi_Eclipse_Cross_PHEV_BrakeLightsRedGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-eclipse-cross-phev-2022-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-eclipse-cross-phev-2022-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 46000480,
+  "mobileFileSizeBytes": 46000480,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "c7f1180052e870952564a18c3d8191d946e94da5719598ea5d5f99704793bff4",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Jet Black Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "White Diamond",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "White Diamond",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Sterling Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sterling Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lightning Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lightning Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Red Diamond",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Red Diamond",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mitsubishi-i-miev-2010-w6-v1",
+  "make": "mitsubishi",
+  "model": "I MiEV",
+  "modelFamily": "mitsubishi i miev",
+  "modelAliases": [
+   "I MiEV"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2010,
+  "yearEnd": 2010,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2010 Mitsubishi I MiEV",
+  "sourceUrl": "https://sketchfab.com/3d-models/2010-mitsubishi-i-miev-392afed23f6f41c8a4fe7710d1386255",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "392afed23f6f41c8a4fe7710d1386255",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "body_color"
+   ]
+  ],
+  "glassMaterialNames": [
+   "glass_window",
+   "glass_lamp",
+   "glass_lamp_frosted",
+   "glass_projector"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-i-miev-2010-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-i-miev-2010-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 11756904,
+  "mobileFileSizeBytes": 11756904,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d475ee25434dc229211d4b8c17d880097b7c07c53449164cbdad62ed0ccd706f",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Jet Black Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "White Diamond",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "White Diamond",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Sterling Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sterling Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lightning Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lightning Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Red Diamond",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Red Diamond",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "nissan-micra-w6-v1",
+  "make": "nissan",
+  "model": "Micra",
+  "modelFamily": "nissan micra",
+  "modelAliases": [
+   "Micra"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Nissan Micra",
+  "sourceUrl": "https://sketchfab.com/3d-models/nissan-micra-4920e8c5856848afb577d8a022fe5980",
+  "sourceCreator": "BHP3D",
+  "sourceReferenceId": "4920e8c5856848afb577d8a022fe5980",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Chassis.10",
+    "Chassis.7",
+    "Chassis.9",
+    "chassis_cleber.006",
+    "chassis_cleber.1",
+    "chassis_cleber.2",
+    "chassis_cleber.3",
+    "chassis_cleber.4",
+    "chassis_cleber.5"
+   ]
+  ],
+  "glassMaterialNames": [
+   "glass",
+   "glass.001"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 10757316,
+  "mobileFileSizeBytes": 10757316,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f7f28e6072184ac6d7d2c2bb657549bab0e95fbd2dbcf1939e4c2d7272664db1",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'BHP3D'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Gun Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Gun Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Ceramic Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Ceramic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Storm White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Storm White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Pearl Black",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Pearl Black",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Blade Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Blade Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Magnetic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fuji Sunset Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fuji Sunset Red",
+     "glbUrl": null
+    },
+    {
+     "family": "burgundy",
+     "label": "Burgundy Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Burgundy Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "nissan-juke-w6-v1",
+  "make": "nissan",
+  "model": "Juke",
+  "modelFamily": "nissan juke",
+  "modelAliases": [
+   "Juke"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Nissan Juke",
+  "sourceUrl": "https://sketchfab.com/3d-models/nissan-juke-62cb9919523947caa4cdef27da902d04",
+  "sourceCreator": "Ford mondeo",
+  "sourceReferenceId": "62cb9919523947caa4cdef27da902d04",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "body"
+   ]
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "chrome",
+   "glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 17029572,
+  "mobileFileSizeBytes": 17029572,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "26f4706fa96cb3b39fe35687b53f983acb962e9956c6e1e8e99a9aea121eb883",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Ford mondeo'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Gun Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Gun Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Ceramic Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Ceramic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Storm White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Storm White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Pearl Black",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Pearl Black",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Blade Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Blade Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Magnetic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fuji Sunset Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fuji Sunset Red",
+     "glbUrl": null
+    },
+    {
+     "family": "burgundy",
+     "label": "Burgundy Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Burgundy Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "nissan-micra-w6-v2",
+  "make": "nissan",
+  "model": "Micra",
+  "modelFamily": "nissan micra",
+  "modelAliases": [
+   "Micra"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Nissan Micra March",
+  "sourceUrl": "https://sketchfab.com/3d-models/nissan-micra-march-1f276cfbcddd4fa09a962c9926ba8292",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "1f276cfbcddd4fa09a962c9926ba8292",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "greenglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 32863168,
+  "mobileFileSizeBytes": 32863168,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "475167c4d9091bbb0f7857078016d6220b1dbd2d8e24509830022ab12c8ab54d",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Gun Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Gun Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Ceramic Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Ceramic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Storm White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Storm White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Pearl Black",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Pearl Black",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Blade Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Blade Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Magnetic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fuji Sunset Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fuji Sunset Red",
+     "glbUrl": null
+    },
+    {
+     "family": "burgundy",
+     "label": "Burgundy Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Burgundy Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "nissan-qashqai-2022-w6-v1",
+  "make": "nissan",
+  "model": "Qashqai",
+  "modelFamily": "nissan qashqai",
+  "modelAliases": [
+   "Qashqai"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": 2022,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022 Nissan Qashqai",
+  "sourceUrl": "https://sketchfab.com/3d-models/2022-nissan-qashqai-3c7f36f8e67d43b7b26e901880806503",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "3c7f36f8e67d43b7b26e901880806503",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "M_2022_Nissan_Qashqai_Black1",
+    "M_2022_Nissan_Qashqai_UnderCarrier",
+    "M_2022_Nissan_Qashqai_Vivid_Blue"
+   ]
+  ],
+  "glassMaterialNames": [
+   "M_2022_Nissan_Qashqai_WindowsTrim",
+   "M_2022_Nissan_Qashqai_Windows",
+   "M_2022_Nissan_Qashqai_BrakeLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2022-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2022-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 46550572,
+  "mobileFileSizeBytes": 46550572,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "12754b73acc75d214180c327a19a6a92449447fe298ed3dd5039898a8e6f5770",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Gun Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Gun Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Ceramic Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Ceramic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Storm White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Storm White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Pearl Black",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Pearl Black",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Blade Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Blade Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Magnetic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fuji Sunset Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fuji Sunset Red",
+     "glbUrl": null
+    },
+    {
+     "family": "burgundy",
+     "label": "Burgundy Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Burgundy Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "opel-astra-1991-w6-v1",
+  "make": "opel",
+  "model": "Astra",
+  "modelFamily": "opel astra",
+  "modelAliases": [
+   "Astra"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1991,
+  "yearEnd": 1991,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Opel Astra 3door G Si 1991",
+  "sourceUrl": "https://sketchfab.com/3d-models/opel-astra-3door-g-si-1991-534cb7e473e84a28918c27359ae0bbc3",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "534cb7e473e84a28918c27359ae0bbc3",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-astra-1991-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-astra-1991-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 34206224,
+  "mobileFileSizeBytes": 34206224,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d492e091c83f3a6a927cd3bef52558c28227ea1c01bdeaa29954c6beefe7952f",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "opel-corsa-w6-v1",
+  "make": "opel",
+  "model": "Corsa",
+  "modelFamily": "opel corsa",
+  "modelAliases": [
+   "Corsa"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Opel Corsa 3door",
+  "sourceUrl": "https://sketchfab.com/3d-models/opel-corsa-3door-156090c948f04ca0b5fd32f6ac232ca3",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "156090c948f04ca0b5fd32f6ac232ca3",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "greenglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-corsa-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-corsa-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 17773600,
+  "mobileFileSizeBytes": 17773600,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "50810913c790a220ca79a17d38da218247b64dfe0782095fa19c18a748f4657b",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "opel-corsa-1985-w6-v1",
+  "make": "opel",
+  "model": "Corsa",
+  "modelFamily": "opel corsa",
+  "modelAliases": [
+   "Corsa"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1985,
+  "yearEnd": 1985,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Opel Corsa A 3door 1985",
+  "sourceUrl": "https://sketchfab.com/3d-models/opel-corsa-a-3door-1985-8041289a5bd94681889a5b87d17b60a9",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "8041289a5bd94681889a5b87d17b60a9",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "orangeglass",
+   "redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-corsa-1985-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-corsa-1985-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 24945976,
+  "mobileFileSizeBytes": 24945976,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "5bca3bc486ca8bfed9a9190751d300e625702b21e2f268a30dbab4a061911200",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-206-w6-v1",
+  "make": "peugeot",
+  "model": "206",
+  "modelFamily": "peugeot 206",
+  "modelAliases": [
+   "206"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Peugeot 206",
+  "sourceUrl": "https://sketchfab.com/3d-models/peugeot-206-44ac8a85939f4e3089649d4712275886",
+  "sourceCreator": "Mona x Supercars",
+  "sourceReferenceId": "44ac8a85939f4e3089649d4712275886",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "body__prim_env_4_spec"
+   ]
+  ],
+  "glassMaterialNames": [
+   "Matte__82000000__env_5_spec_trans",
+   "Lamp.001"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6531992,
+  "mobileFileSizeBytes": 6531992,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "762d807cd143118b76bc5e53c69d11a987284a5f9f58e737e2705b9c73db3933",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Mona x Supercars'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
