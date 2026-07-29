@@ -98751,17 +98751,17 @@
   "schemaVersion": 2,
   "assetId": "mini-cooper-s-2011-w5-v1",
   "make": "mini",
-  "model": "Mini Cooper S",
+  "model": "Cooper S Convertible",
   "modelFamily": "mini cooper s",
   "modelAliases": [
    "Mini Cooper S"
   ],
-  "generation": null,
+  "generation": "R57",
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2011,
   "yearEnd": 2011,
-  "bodyStyle": null,
+  "bodyStyle": "convertible",
   "compatibleFuelTypes": [
    "diesel",
    "hybrid",
@@ -98829,7 +98829,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "poster re-inspection 2026-07-29: body style identified visually (soft top visible)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -105496,17 +105497,17 @@
   "schemaVersion": 2,
   "assetId": "skoda-fabia-2019-w5-v1",
   "make": "skoda",
-  "model": "Skoda Fabia",
+  "model": "Fabia Estate",
   "modelFamily": "skoda fabia",
   "modelAliases": [
    "Skoda Fabia"
   ],
-  "generation": null,
+  "generation": "Mk3 Combi",
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2019,
   "yearEnd": 2019,
-  "bodyStyle": null,
+  "bodyStyle": "estate",
   "compatibleFuelTypes": [
    "diesel",
    "hybrid",
@@ -105576,7 +105577,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "poster re-inspection 2026-07-29: body style identified visually (roof rails + estate rear)"
   ],
   "customization": {
    "configuratorReady": true,
