@@ -109871,5 +109871,1747 @@
   },
   "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "byd-atto-3-w6-v1",
+  "make": "byd",
+  "model": "Atto 3",
+  "modelFamily": "byd atto 3",
+  "modelAliases": [
+   "Atto 3"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Byd-atto-3",
+  "sourceUrl": "https://sketchfab.com/3d-models/byd-atto-3-b5274dc9e76a420488f4716e05daddbb",
+  "sourceCreator": "Glennaguair",
+  "sourceReferenceId": "b5274dc9e76a420488f4716e05daddbb",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "CarPaint",
+    "Carpaint_Flakes_Signal_Blue_1"
+   ]
+  ],
+  "glassMaterialNames": [
+   "glass",
+   "red_glass_1",
+   "glass_Light"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/byd/byd-atto-3-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/byd/byd-atto-3-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 15752048,
+  "mobileFileSizeBytes": 15752048,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "ae5dc427cce56ce3a5382d4f3b884653ecf4c491e2a5b1a47d8a7286937b96a4",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Glennaguair'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "byd-dolphin-2025-w6-v1",
+  "make": "byd",
+  "model": "Dolphin",
+  "modelFamily": "byd dolphin",
+  "modelAliases": [
+   "Dolphin"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2025,
+  "yearEnd": 2025,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "BYD DOLPHIN 2025",
+  "sourceUrl": "https://sketchfab.com/3d-models/byd-dolphin-2025-aa2681e5b992410fad9058343e6904ac",
+  "sourceCreator": "UZBEK 3D",
+  "sourceReferenceId": "aa2681e5b992410fad9058343e6904ac",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "D_PlasIN",
+    "Material__2125654726",
+    "Material__2125713530",
+    "auto_12",
+    "auto_13",
+    "auto_14",
+    "auto_15",
+    "auto_20",
+    "auto_21",
+    "auto_24"
+   ]
+  ],
+  "glassMaterialNames": [
+   "D_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/byd/byd-dolphin-2025-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/byd/byd-dolphin-2025-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 25564256,
+  "mobileFileSizeBytes": 25564256,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "cc707151917dcdf146f422cc008af6c199b1d23103b70463098f4de5855a6378",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'UZBEK 3D'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "byd-dolphin-mini-2024-w6-v1",
+  "make": "byd",
+  "model": "Dolphin Mini",
+  "modelFamily": "byd dolphin mini",
+  "modelAliases": [
+   "Dolphin Mini"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2024,
+  "yearEnd": 2024,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2024 BYD Dolphin Mini",
+  "sourceUrl": "https://sketchfab.com/3d-models/2024-byd-dolphin-mini-c4a97baaadda487faa7ed90ecd1b057d",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "c4a97baaadda487faa7ed90ecd1b057d",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Carro_Pintura"
+   ]
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros2",
+   "Carro_Vidro_Vermelho2",
+   "Carro_Vidro_Vermelho2_1",
+   "Carro_Vidro_Vermelho2_2"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/byd/byd-dolphin-mini-2024-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/byd/byd-dolphin-mini-2024-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 25153712,
+  "mobileFileSizeBytes": 25153712,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f3430c439a06dde012a8cc43f8c5cd44edcc8fffa4685c7cf494015ef759603a",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "citroen-c3-picasso-2017-w6-v1",
+  "make": "citroen",
+  "model": "C3 Picasso",
+  "modelFamily": "citroen c3 picasso",
+  "modelAliases": [
+   "C3 Picasso"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2017,
+  "yearEnd": 2017,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2017 Citroën C3 Picasso",
+  "sourceUrl": "https://sketchfab.com/3d-models/2017-citroen-c3-picasso-a20ec194df314b91b4527b2bde00fa86",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "a20ec194df314b91b4527b2bde00fa86",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Carro_Pintura"
+   ]
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidros_1",
+   "Carro_Vidros_Vermelhos"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-picasso-2017-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-picasso-2017-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 35661208,
+  "mobileFileSizeBytes": 35661208,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "e9b38d7cfe2f970e29ffbad50e200c2d806e0ca42bd8eb79d37bbaab9ba120af",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Platinum Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Platinum Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Perla Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Perla Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Eclipse Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "sand",
+     "label": "Soft Sand",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Soft Sand",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "citroen-c4-lounge-2018-w6-v1",
+  "make": "citroen",
+  "model": "C4 Lounge",
+  "modelFamily": "citroen c4 lounge",
+  "modelAliases": [
+   "C4 Lounge"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2018,
+  "yearEnd": 2018,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2018 Citroën C4 Lounge",
+  "sourceUrl": "https://sketchfab.com/3d-models/2018-citroen-c4-lounge-e330880f272449709c36050a393e1574",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "e330880f272449709c36050a393e1574",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Carro_Pintura"
+   ]
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidros_Vermelhos",
+   "Carro_Vidro_R"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c4-lounge-2018-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c4-lounge-2018-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 10813980,
+  "mobileFileSizeBytes": 10813980,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "0b6b679719bbd7eed852ff90d0af00aa59e465cf7ed8e7467bc50a4eb579f4e4",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Platinum Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Platinum Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Perla Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Perla Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Eclipse Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "sand",
+     "label": "Soft Sand",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Soft Sand",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "citroen-cactus-2015-w6-v1",
+  "make": "citroen",
+  "model": "Cactus",
+  "modelFamily": "citroen cactus",
+  "modelAliases": [
+   "Cactus"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2015,
+  "yearEnd": 2015,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2015 Citroën Cactus",
+  "sourceUrl": "https://sketchfab.com/3d-models/2015-citroen-cactus-5dc2cd7baa314777a8ed6c5a0494f42c",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "5dc2cd7baa314777a8ed6c5a0494f42c",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Carro_Pintura"
+   ]
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidros_Vermelhos",
+   "Carro_Vidro_Laranja",
+   "Carro_Vidro_R"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-cactus-2015-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-cactus-2015-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 35755448,
+  "mobileFileSizeBytes": 35755448,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "2624465630564c8b0c867616698a735fcb95b7d093048cf98365c1e7cd70e265",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Platinum Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Platinum Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Perla Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Perla Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Eclipse Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "sand",
+     "label": "Soft Sand",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Soft Sand",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "cupra-leon-2021-w6-v1",
+  "make": "cupra",
+  "model": "Leon",
+  "modelFamily": "cupra leon",
+  "modelAliases": [
+   "Leon"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": 2021,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2021 Cupra Leon 5Door",
+  "sourceUrl": "https://sketchfab.com/3d-models/2021-cupra-leon-5door-36867fe47085483a9437149a5f0d33cf",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "36867fe47085483a9437149a5f0d33cf",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "M_2021_Cupra_Leon_5_Door_Graphene_Gray_Metallic",
+    "M_2021_Cupra_Leon_5_Door_UnderCarrier"
+   ]
+  ],
+  "glassMaterialNames": [
+   "M_2021_Cupra_Leon_5_Door_Windows",
+   "M_2021_Cupra_Leon_5_Door_WindowsTrims",
+   "M_2021_Cupra_Leon_5_Door_BrakeLightsGlass",
+   "M_2021_Cupra_Leon_5_Door_HeadLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-leon-2021-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-leon-2021-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 48440932,
+  "mobileFileSizeBytes": 48440932,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d2dfe2f653b82afdd650fd47dcf0cd14a3d9faec2a548ee2f3110d3392ff79c6",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphene Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Graphene Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Magnetic Tech Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Tech Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nevada White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nevada White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Petrol Blue Matte",
+     "hex": null,
+     "finish": "matte",
+     "oemPaintName": "Petrol Blue Matte",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Dark Forest",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dark Forest",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Century Bronze Matte",
+     "hex": null,
+     "finish": "matte",
+     "oemPaintName": "Century Bronze Matte",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "dacia-logan-w6-v1",
+  "make": "dacia",
+  "model": "Logan",
+  "modelFamily": "dacia logan",
+  "modelAliases": [
+   "Logan"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Dacia Logan",
+  "sourceUrl": "https://sketchfab.com/3d-models/dacia-logan-c656b7e6945f4311ae7e1b19b8a1efc5",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "c656b7e6945f4311ae7e1b19b8a1efc5",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint.248"
+   ]
+  ],
+  "glassMaterialNames": [
+   "greenglass.065",
+   "clearglass.248",
+   "redglass.247"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 48690344,
+  "mobileFileSizeBytes": 48690344,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "b2b593ca94a207f293d69aad8ce494a59f0899a26bca8ff8801896b7a23bc6ff",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "fiat-bravo-2011-w6-v1",
+  "make": "fiat",
+  "model": "Bravo",
+  "modelFamily": "fiat bravo",
+  "modelAliases": [
+   "Bravo"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2011,
+  "yearEnd": 2011,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2011 Fiat Bravo",
+  "sourceUrl": "https://sketchfab.com/3d-models/2011-fiat-bravo-e59c3d9c7eb34afeb9a96ada26110138",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "e59c3d9c7eb34afeb9a96ada26110138",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Carro_Pintura"
+   ]
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidros_1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-bravo-2011-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-bravo-2011-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 11336876,
+  "mobileFileSizeBytes": 11336876,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "599456529b18e5472af628b774832db2d9d2c3f6b4277bdcfff29b11fec23137",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Moda Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moda Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cinema Black",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Cinema Black",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Gelato White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Gelato White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Passione Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Passione Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Italia Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Italia Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Sicilia Orange",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sicilia Orange",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Ocean Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ocean Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-fiesta-w6-v1",
+  "make": "ford",
+  "model": "Fiesta",
+  "modelFamily": "ford fiesta",
+  "modelAliases": [
+   "Fiesta"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Ford Fiesta II 3door",
+  "sourceUrl": "https://sketchfab.com/3d-models/ford-fiesta-ii-3door-e6bbedd56a744d258036a02dd860115e",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "e6bbedd56a744d258036a02dd860115e",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "orangeglass",
+   "redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 30583596,
+  "mobileFileSizeBytes": 30583596,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "fd4cbfbc741a27af97ee85fe78388a18299d0f590022f5bf1b8110a7e592d711",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carbonised Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbonised Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Agate Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Agate Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Frozen White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Frozen White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moondust Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moondust Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Chrome Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Chrome Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Desert Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desert Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fantastic Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fantastic Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mean Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mean Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Grabber Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Grabber Blue",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-escort-w6-v1",
+  "make": "ford",
+  "model": "Escort",
+  "modelFamily": "ford escort",
+  "modelAliases": [
+   "Escort"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Ford Escort II EU",
+  "sourceUrl": "https://sketchfab.com/3d-models/ford-escort-ii-eu-89db9019af1c451690bfac179ea04706",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "89db9019af1c451690bfac179ea04706",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-escort-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-escort-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 29238556,
+  "mobileFileSizeBytes": 29238556,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "def83a254fe60c718d765209c8e96cf1aa2a9717bf78fde984c0a98e670cd1ed",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carbonised Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbonised Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Agate Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Agate Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Frozen White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Frozen White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moondust Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moondust Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Chrome Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Chrome Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Desert Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desert Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fantastic Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fantastic Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mean Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mean Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Grabber Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Grabber Blue",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-focus-w6-v1",
+  "make": "ford",
+  "model": "Focus",
+  "modelFamily": "ford focus",
+  "modelAliases": [
+   "Focus"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "ST"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Ford Focus ST (MK3)",
+  "sourceUrl": "https://sketchfab.com/3d-models/ford-focus-st-mk3-9a4b0859a3484e2ebfbc9eb54537b5eb",
+  "sourceCreator": "Savelliy 07",
+  "sourceReferenceId": "9a4b0859a3484e2ebfbc9eb54537b5eb",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "body1"
+   ]
+  ],
+  "glassMaterialNames": [
+   "window1",
+   "black_glass1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-focus-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-focus-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 8771672,
+  "mobileFileSizeBytes": 8771672,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "5bd9a19dc6b450231724e58f4d13b38ae67d15a712bc057e306a62a9a4cad6ed",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Savelliy 07'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carbonised Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbonised Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Agate Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Agate Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Frozen White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Frozen White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moondust Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moondust Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Chrome Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Chrome Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Desert Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desert Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fantastic Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fantastic Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mean Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mean Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Grabber Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Grabber Blue",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-focus-w6-v2",
+  "make": "ford",
+  "model": "Focus",
+  "modelFamily": "ford focus",
+  "modelAliases": [
+   "Focus"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "ST"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Ford Focus ST",
+  "sourceUrl": "https://sketchfab.com/3d-models/ford-focus-st-dd628f95e2ef46ff864c13b8315b7cb6",
+  "sourceCreator": "RES1N",
+  "sourceReferenceId": "dd628f95e2ef46ff864c13b8315b7cb6",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "body1"
+   ]
+  ],
+  "glassMaterialNames": [
+   "window1",
+   "black_glass1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-focus-w6-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-focus-w6-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 9414804,
+  "mobileFileSizeBytes": 9414804,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "bf14880338b4c82060f5c522f2958c1e46c2d5924c957e3a05ca2a8fb8c37b67",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'RES1N'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carbonised Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbonised Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Agate Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Agate Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Frozen White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Frozen White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moondust Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moondust Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Chrome Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Chrome Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Desert Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desert Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fantastic Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fantastic Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mean Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mean Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Grabber Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Grabber Blue",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]

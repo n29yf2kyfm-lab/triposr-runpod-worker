@@ -135,13 +135,25 @@ def slug(s):
 
 def mat_audit_public(url):
     """Fresh measured audit of the uploaded public GLB (G2) — also proves the
-    public URL actually serves."""
+    public URL actually serves. runsync can return early with a job id on a
+    cold worker, so fall back to polling /status."""
     body = json.dumps({"input": {"mat_audit": True, "glb_url": url}}).encode()
     rq = urllib.request.Request(f"{RP_EP}/runsync", data=body,
         headers={"Authorization": f"Bearer {RP}", "Content-Type": "application/json"})
-    out = json.loads(net(rq, 300)).get("output", {})
+    resp = json.loads(net(rq, 300))
+    out = resp.get("output", {})
+    jid = resp.get("id")
+    t0 = time.time()
+    while not out and jid and time.time() - t0 < 600:
+        time.sleep(10)
+        st = json.loads(net(urllib.request.Request(f"{RP_EP}/status/{jid}",
+            headers={"Authorization": f"Bearer {RP}"}), 60))
+        if st.get("status") == "COMPLETED":
+            out = st.get("output", {})
+        elif st.get("status") in ("FAILED", "CANCELLED", "TIMED_OUT"):
+            break
     if out.get("status") != "success":
-        raise RuntimeError(f"mat_audit on public URL failed: {str(out)[:120]}")
+        raise RuntimeError(f"mat_audit on public URL failed: {str(out or resp)[:120]}")
     return out
 
 def serve_catalogue():
