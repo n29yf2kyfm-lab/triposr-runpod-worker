@@ -112744,5 +112744,701 @@
    ]
   },
   "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-xj-2010-w6-v1",
+  "make": "jaguar",
+  "model": "XJ",
+  "modelFamily": "jaguar xj",
+  "modelAliases": [
+   "XJ"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2010,
+  "yearEnd": 2010,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Jaguar XJ 2010",
+  "sourceUrl": "https://sketchfab.com/3d-models/jaguar-xj-2010-b032cfc819fe489ebec28508ac36f8de",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "b032cfc819fe489ebec28508ac36f8de",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "carpaint"
+   ]
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "darkglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj-2010-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj-2010-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 41542412,
+  "mobileFileSizeBytes": 41542412,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "961b8581d4c3b69d590cc3ba87064877fbcaddc343c28046d6c9c9e598954132",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-renegade-2021-w6-v1",
+  "make": "jeep",
+  "model": "Renegade",
+  "modelFamily": "jeep renegade",
+  "modelAliases": [
+   "Renegade"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": 2021,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2021 Jeep Renegade",
+  "sourceUrl": "https://sketchfab.com/3d-models/2021-jeep-renegade-9cc773cb7f6e4f10893ea460aa11654b",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "9cc773cb7f6e4f10893ea460aa11654b",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Carro_Pintura"
+   ]
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidros_Vermelhos",
+   "Carro_Vidro_Laranja",
+   "Carro_Vidro_R"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-renegade-2021-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-renegade-2021-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 24458820,
+  "mobileFileSizeBytes": 24458820,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "18e774fb76e23782c96c439ada663645c59a520655579aa95501a7a89ef2f1ee",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "kia-carnival-w6-v1",
+  "make": "kia",
+  "model": "Carnival",
+  "modelFamily": "kia carnival",
+  "modelAliases": [
+   "Carnival"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Kia Carnival",
+  "sourceUrl": "https://sketchfab.com/3d-models/kia-carnival-85cc817cc9984fafb879760df5af3ae8",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "85cc817cc9984fafb879760df5af3ae8",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "2022_Kia_Carnival_Black1",
+    "2022_Kia_Carnival_Panthera_Metal",
+    "2022_Kia_Carnival_UnderCarrier"
+   ]
+  ],
+  "glassMaterialNames": [
+   "2022_Kia_Carnival_Windows",
+   "2022_Kia_Carnival_WindowsTrims",
+   "2022_Kia_Carnival_BrakeLightsGlass",
+   "2022_Kia_Carnival_HeadLightsGlass1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-carnival-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-carnival-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 12162956,
+  "mobileFileSizeBytes": 12162956,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "defb7a24ebdb968e01c88b95a0c00d3f2021e2c381f1961cfde1ef34a18e0029",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Interstellar Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Interstellar Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Steel Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Steel Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Aurora Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Aurora Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snow White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snow White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fusion White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fusion White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Runway Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Runway Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Mineral Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Experience Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Experience Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "kia-carnival-2022-w6-v1",
+  "make": "kia",
+  "model": "Carnival",
+  "modelFamily": "kia carnival",
+  "modelAliases": [
+   "Carnival"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": 2022,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022 Kia Carnival",
+  "sourceUrl": "https://sketchfab.com/3d-models/2022-kia-carnival-d7c438d0d2d64ce092e396fa802d7830",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "d7c438d0d2d64ce092e396fa802d7830",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "Carro_Pintura",
+    "Carro_Pintura_1"
+   ]
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-carnival-2022-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-carnival-2022-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 46428396,
+  "mobileFileSizeBytes": 46428396,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "12de80ab7cdbbab5aebdcaad31e2133bc66df99f7559adfa28e83f5787ade6a5",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Interstellar Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Interstellar Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Steel Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Steel Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Aurora Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Aurora Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snow White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snow White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fusion White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fusion White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Runway Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Runway Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Mineral Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Experience Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Experience Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "kia-ev6-2022-w6-v1",
+  "make": "kia",
+  "model": "EV6",
+  "modelFamily": "kia ev6",
+  "modelAliases": [
+   "EV6"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": 2022,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022 Kia EV6",
+  "sourceUrl": "https://sketchfab.com/3d-models/2022-kia-ev6-44d11e83ef40492bb4bc3d9fbc41e5e0",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "44d11e83ef40492bb4bc3d9fbc41e5e0",
+  "sourceRetrievedAt": "2026-07-29",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   [
+    "M_2022_Kia_EV6_Standard_remap__prim_env_4_spec",
+    "M_2022_Kia_EV6_Standard_suedebmp__spec"
+   ]
+  ],
+  "glassMaterialNames": [
+   "M_2022_Kia_EV6_Standard_Windows",
+   "M_2022_Kia_EV6_Standard_BrakeLightsGlass",
+   "M_2022_Kia_EV6_Standard_HeadLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-ev6-2022-w6-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-ev6-2022-w6-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 36938880,
+  "mobileFileSizeBytes": 36938880,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "5ca5d438aaf352a528a914d951c9fe22615d8c65528180fbad37355c4b8392b6",
+  "pipelineVersion": "publish-batch-w6-2026-07-29",
+  "publishedAt": "2026-07-29",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w6",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Interstellar Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Interstellar Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Steel Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Steel Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Aurora Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Aurora Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snow White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snow White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fusion White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fusion White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Runway Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Runway Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Mineral Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Experience Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Experience Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
