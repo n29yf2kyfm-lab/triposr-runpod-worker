@@ -91738,11 +91738,7 @@
   "yearStart": 2019,
   "yearEnd": 2019,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [
    "S-Line"
   ],
@@ -91790,12 +91786,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a1-2019-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a1-2019-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a1-2019-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -91807,7 +91803,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -91940,7 +91937,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -91958,11 +91955,7 @@
   "yearStart": 2021,
   "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -92013,12 +92006,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-e-tron-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-e-tron-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-e-tron-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -92032,7 +92025,8 @@
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'gbarzu', hardened audit pass; year/trim from source title only",
    "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
-   "council audit 2026-07-29: confirmed e-tron GT identity (slug retained, identity fields corrected)"
+   "council audit 2026-07-29: confirmed e-tron GT identity (slug retained, identity fields corrected)",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -92165,7 +92159,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -92183,11 +92177,7 @@
   "yearStart": 2014,
   "yearEnd": 2014,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -92233,12 +92223,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q3-2014-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q3-2014-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q3-2014-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -92250,7 +92240,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -92383,7 +92374,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -92401,11 +92392,7 @@
   "yearStart": 2015,
   "yearEnd": 2022,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -92459,12 +92446,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x1-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -92477,7 +92464,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Sloftm_Carz', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -92610,7 +92598,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -92628,11 +92616,7 @@
   "yearStart": 2025,
   "yearEnd": 2025,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -92678,12 +92662,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2025-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2025-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2025-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -92695,7 +92679,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -92828,7 +92813,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -92846,11 +92831,7 @@
   "yearStart": 2018,
   "yearEnd": 2018,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -92897,12 +92878,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-ds3-2018-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-ds3-2018-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-ds3-2018-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -92914,7 +92895,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -93047,7 +93029,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -93065,11 +93047,7 @@
   "yearStart": 2021,
   "yearEnd": 2021,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -93127,12 +93105,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-formentor-2021-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-formentor-2021-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-formentor-2021-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -93144,7 +93122,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Sloftm_Carz', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Sloftm_Carz', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -93277,7 +93256,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -93295,11 +93274,7 @@
   "yearStart": 2012,
   "yearEnd": 2012,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -93352,12 +93327,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2012-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2012-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2012-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -93369,7 +93344,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Fratzica', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Fratzica', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -93502,7 +93478,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -93520,11 +93496,7 @@
   "yearStart": 2023,
   "yearEnd": 2023,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -93570,12 +93542,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2023-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2023-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2023-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -93587,7 +93559,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'xray collection', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'xray collection', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -93720,7 +93693,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -93738,11 +93711,7 @@
   "yearStart": 2022,
   "yearEnd": 2022,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -93788,12 +93757,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2022-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2022-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2022-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -93805,7 +93774,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -93938,7 +93908,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -93956,11 +93926,7 @@
   "yearStart": 2012,
   "yearEnd": 2012,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -94006,12 +93972,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-2012-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-2012-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ecosport-2012-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -94023,7 +93989,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -94156,7 +94123,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -94174,11 +94141,7 @@
   "yearStart": 2015,
   "yearEnd": 2015,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -94224,12 +94187,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-sedan-2015-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-sedan-2015-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ka-sedan-2015-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -94241,7 +94204,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -94374,7 +94338,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -94392,11 +94356,7 @@
   "yearStart": 2023,
   "yearEnd": 2023,
   "bodyStyle": "pickup",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -94442,12 +94402,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2023-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2023-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-ranger-2023-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -94459,7 +94419,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Asadawut.Kaewma', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Asadawut.Kaewma', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -94592,7 +94553,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -94610,11 +94571,7 @@
   "yearStart": 2021,
   "yearEnd": 2021,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -94660,12 +94617,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-van-2021-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-van-2021-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-van-2021-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -94677,7 +94634,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -94810,7 +94768,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -94828,11 +94786,7 @@
   "yearStart": 2017,
   "yearEnd": 2017,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -94881,12 +94835,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2017-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2017-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2017-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -94898,7 +94852,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'L95XP', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'L95XP', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -95031,7 +94986,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -95049,11 +95004,7 @@
   "yearStart": 2007,
   "yearEnd": 2007,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -95099,12 +95050,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2007-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2007-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2007-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -95116,7 +95067,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -95249,7 +95201,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -95267,11 +95219,7 @@
   "yearStart": 2016,
   "yearEnd": 2016,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -95322,12 +95270,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2016-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2016-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2016-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -95339,7 +95287,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Aldios', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Aldios', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -95472,7 +95421,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -95490,11 +95439,7 @@
   "yearStart": 2023,
   "yearEnd": 2023,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -95541,12 +95486,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-zr-v-2023-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-zr-v-2023-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-zr-v-2023-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -95558,7 +95503,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -95691,7 +95637,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -95709,11 +95655,7 @@
   "yearStart": 2023,
   "yearEnd": 2023,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -95759,12 +95701,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-casper-2023-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-casper-2023-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-casper-2023-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -95776,7 +95718,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -95909,7 +95852,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -95927,11 +95870,7 @@
   "yearStart": 2022,
   "yearEnd": 2022,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -95978,12 +95917,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-2022-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-2022-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-2022-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -95996,7 +95935,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'qkralsgur310', hardened audit pass; year/trim from source title only",
-   "council audit 2026-07-29: source is a 2022 IONIQ 5, not the Ioniq liftback"
+   "council audit 2026-07-29: source is a 2022 IONIQ 5, not the Ioniq liftback",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -96129,7 +96069,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -96147,11 +96087,7 @@
   "yearStart": 2023,
   "yearEnd": 2023,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -96202,12 +96138,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -96219,7 +96155,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -96352,7 +96289,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -96370,11 +96307,7 @@
   "yearStart": 2022,
   "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -96430,12 +96363,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -96448,7 +96381,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Mona x Supercars', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -96581,7 +96515,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -96599,11 +96533,7 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -96649,12 +96579,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -96666,7 +96596,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -96799,7 +96730,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -96817,11 +96748,7 @@
   "yearStart": 2015,
   "yearEnd": 2015,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -96874,12 +96801,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2015-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2015-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2015-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -96891,7 +96818,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -97024,7 +96952,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -97042,11 +96970,7 @@
   "yearStart": 2020,
   "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -97094,12 +97018,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -97112,7 +97036,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'hartwelkisaka', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -97245,7 +97170,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -97263,11 +97188,7 @@
   "yearStart": 2018,
   "yearEnd": 2018,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -97313,12 +97234,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -97330,7 +97251,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'diw3d', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'diw3d', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -97463,7 +97385,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -97481,11 +97403,7 @@
   "yearStart": 2023,
   "yearEnd": 2026,
   "bodyStyle": "mpv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -97533,12 +97451,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-lm-hybrid-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-lm-hybrid-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-lm-hybrid-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -97551,7 +97469,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Mona x Supercars', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -97684,7 +97603,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -97702,11 +97621,7 @@
   "yearStart": 2014,
   "yearEnd": 2014,
   "bodyStyle": "convertible",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -97753,12 +97668,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2014-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2014-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-mx-5-2014-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -97770,7 +97685,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -97903,7 +97819,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -97921,11 +97837,7 @@
   "yearStart": 2014,
   "yearEnd": 2026,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -97971,12 +97883,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-mercedes-vito-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-mercedes-vito-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-mercedes-vito-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -97989,7 +97901,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'solid3DDD', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -98122,7 +98035,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -98140,11 +98053,7 @@
   "yearStart": 2010,
   "yearEnd": 2010,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -98191,12 +98100,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-mercedes-vito-2010-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-mercedes-vito-2010-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-mercedes-vito-2010-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -98208,7 +98117,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'solid3DDD', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'solid3DDD', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -98341,7 +98251,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -98359,11 +98269,7 @@
   "yearStart": 2011,
   "yearEnd": 2011,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -98410,12 +98316,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-clubman-2011-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-clubman-2011-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-clubman-2011-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -98427,7 +98333,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -98560,7 +98467,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -98578,11 +98485,7 @@
   "yearStart": 2011,
   "yearEnd": 2011,
   "bodyStyle": "convertible",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -98628,12 +98531,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-s-2011-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-s-2011-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-s-2011-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -98646,7 +98549,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
-   "poster re-inspection 2026-07-29: body style identified visually (soft top visible)"
+   "poster re-inspection 2026-07-29: body style identified visually (soft top visible)",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -98779,7 +98683,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -98797,11 +98701,7 @@
   "yearStart": 2007,
   "yearEnd": 2014,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -98848,12 +98748,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-s-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-s-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-cooper-s-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -98866,7 +98766,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -98999,7 +98900,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -99017,11 +98918,7 @@
   "yearStart": 2010,
   "yearEnd": 2023,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -99073,12 +98970,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-asx-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-asx-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-asx-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -99091,7 +98988,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Ford mondeo', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -99224,7 +99122,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -99242,11 +99140,7 @@
   "yearStart": 2011,
   "yearEnd": 2011,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -99292,12 +99186,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-asx-2011-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-asx-2011-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-asx-2011-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -99309,7 +99203,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -99442,7 +99337,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -99460,11 +99355,7 @@
   "yearStart": 2011,
   "yearEnd": 2011,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -99510,12 +99401,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-2011-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-2011-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-2011-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -99527,7 +99418,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -99660,7 +99552,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -99678,11 +99570,7 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -99728,12 +99616,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-2020-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-2020-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-2020-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -99745,7 +99633,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -99878,7 +99767,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -99896,11 +99785,7 @@
   "yearStart": 2022,
   "yearEnd": 2022,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -99948,12 +99833,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-2022-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-2022-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-2022-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -99965,7 +99850,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'feyley'd', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'feyley'd', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -100098,7 +99984,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -100116,11 +100002,7 @@
   "yearStart": 2021,
   "yearEnd": 2021,
   "bodyStyle": "pickup",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -100166,12 +100048,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-navara-2021-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-navara-2021-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-navara-2021-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -100183,7 +100065,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Asadawut.Kaewma', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Asadawut.Kaewma', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -100316,7 +100199,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -100334,11 +100217,7 @@
   "yearStart": 2015,
   "yearEnd": 2022,
   "bodyStyle": "pickup",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -100384,12 +100263,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-navara-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-navara-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-navara-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -100402,7 +100281,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'HiQ3D', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -100535,7 +100415,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -100553,11 +100433,7 @@
   "yearStart": 2022,
   "yearEnd": 2022,
   "bodyStyle": "pickup",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -100603,12 +100479,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-navara-2022-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-navara-2022-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-navara-2022-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -100620,7 +100496,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'davidmarton1987', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'davidmarton1987', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -100753,7 +100630,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -100771,11 +100648,7 @@
   "yearStart": 2010,
   "yearEnd": 2010,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -100821,12 +100694,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-2010-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-2010-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-nv200-2010-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -100838,7 +100711,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -100971,7 +100845,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -100989,11 +100863,7 @@
   "yearStart": 2010,
   "yearEnd": 2010,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -101039,12 +100909,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2010-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2010-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2010-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -101056,7 +100926,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -101189,7 +101060,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -101207,11 +101078,7 @@
   "yearStart": 2012,
   "yearEnd": 2012,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -101257,12 +101124,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-astra-2012-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-astra-2012-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-astra-2012-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -101274,7 +101141,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -101407,7 +101275,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -101425,11 +101293,7 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -101475,12 +101339,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-astra-2020-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-astra-2020-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-astra-2020-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -101492,7 +101356,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -101625,7 +101490,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -101643,11 +101508,7 @@
   "yearStart": 1997,
   "yearEnd": 1997,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -101693,12 +101554,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-corsa-1997-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-corsa-1997-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-corsa-1997-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -101710,7 +101571,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -101843,7 +101705,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -101861,11 +101723,7 @@
   "yearStart": 2011,
   "yearEnd": 2011,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -101911,12 +101769,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-corsa-2011-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-corsa-2011-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/opel/opel-corsa-2011-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -101928,7 +101786,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -102061,7 +101920,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -102079,11 +101938,7 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -102129,12 +101984,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-208-2020-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-208-2020-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-208-2020-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -102146,7 +102001,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -102279,7 +102135,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -102297,11 +102153,7 @@
   "yearStart": 2018,
   "yearEnd": 2026,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -102347,12 +102199,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-508-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-508-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-508-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -102365,7 +102217,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Mona x Supercars', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -102498,7 +102351,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -102516,11 +102369,7 @@
   "yearStart": 2024,
   "yearEnd": 2024,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [
    "SWB"
   ],
@@ -102569,12 +102418,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-partner-2024-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-partner-2024-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-partner-2024-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -102586,7 +102435,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -102719,7 +102569,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -102737,11 +102587,7 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -102791,12 +102637,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2020-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2020-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2020-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -102808,7 +102654,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'David_Holiday', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'David_Holiday', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -102941,7 +102788,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -102959,11 +102806,7 @@
   "yearStart": 2012,
   "yearEnd": 2012,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -103009,12 +102852,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2012-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2012-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2012-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -103026,7 +102869,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -103159,7 +103003,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -103177,11 +103021,7 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -103227,12 +103067,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-boxer-2020-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-boxer-2020-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-boxer-2020-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -103244,7 +103084,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -103377,7 +103218,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -103395,11 +103236,7 @@
   "yearStart": 2010,
   "yearEnd": 2010,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -103445,12 +103282,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kangoo-2010-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kangoo-2010-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kangoo-2010-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -103462,7 +103299,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -103595,7 +103433,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -103613,11 +103451,7 @@
   "yearStart": 2011,
   "yearEnd": 2011,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -103663,12 +103497,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kangoo-2011-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kangoo-2011-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-kangoo-2011-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -103680,7 +103514,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -103813,7 +103648,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -103831,11 +103666,7 @@
   "yearStart": 2002,
   "yearEnd": 2009,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -103881,12 +103712,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-megane-sedan-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-megane-sedan-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-megane-sedan-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -103899,7 +103730,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Mona x Supercars', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -104032,7 +103864,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -104050,11 +103882,7 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -104100,12 +103928,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-2020-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-2020-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-2020-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -104117,7 +103945,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -104250,7 +104079,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -104268,11 +104097,7 @@
   "yearStart": 2010,
   "yearEnd": 2024,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -104318,12 +104143,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -104336,7 +104161,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -104469,7 +104295,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -104487,11 +104313,7 @@
   "yearStart": 2014,
   "yearEnd": 2014,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -104538,12 +104360,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-2014-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-2014-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-master-2014-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -104555,7 +104377,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -104688,7 +104511,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -104706,11 +104529,7 @@
   "yearStart": 2021,
   "yearEnd": 2021,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [
    "FR"
   ],
@@ -104758,12 +104577,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-tarraco-fr-2021-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-tarraco-fr-2021-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-tarraco-fr-2021-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -104775,7 +104594,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -104908,7 +104728,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -104926,11 +104746,7 @@
   "yearStart": 2011,
   "yearEnd": 2011,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -104976,12 +104792,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-2011-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-2011-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-2011-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -104993,7 +104809,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -105126,7 +104943,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -105144,11 +104961,7 @@
   "yearStart": 2019,
   "yearEnd": 2019,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [
    "Combi"
   ],
@@ -105196,12 +105009,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-2019-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-2019-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-fabia-2019-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -105214,7 +105027,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
-   "poster re-inspection 2026-07-29: body style identified visually (roof rails + estate rear)"
+   "poster re-inspection 2026-07-29: body style identified visually (roof rails + estate rear)",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -105347,7 +105161,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -105365,11 +105179,7 @@
   "yearStart": 2014,
   "yearEnd": 2014,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -105417,12 +105227,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2014-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2014-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2014-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -105434,7 +105244,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -105567,7 +105378,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -105585,11 +105396,7 @@
   "yearStart": 2017,
   "yearEnd": 2017,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [
    "Combi"
   ],
@@ -105637,12 +105444,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-combi-2017-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-combi-2017-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-combi-2017-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -105654,7 +105461,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -105787,7 +105595,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -105805,11 +105613,7 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [
    "Estate"
   ],
@@ -105857,12 +105661,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-estate-2020-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-estate-2020-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-estate-2020-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -105874,7 +105678,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -106007,7 +105812,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -106025,11 +105830,7 @@
   "yearStart": 2019,
   "yearEnd": 2019,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -106075,12 +105876,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-scala-2019-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-scala-2019-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-scala-2019-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -106092,7 +105893,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -106225,7 +106027,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -106243,11 +106045,7 @@
   "yearStart": 2009,
   "yearEnd": 2009,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -106296,12 +106094,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-2009-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-2009-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-2009-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -106313,7 +106111,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'BHP3D', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'BHP3D', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -106446,7 +106245,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -106464,11 +106263,7 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -106515,12 +106310,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -106532,7 +106327,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'BHP3D', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'BHP3D', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -106665,7 +106461,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -106683,11 +106479,7 @@
   "yearStart": 2024,
   "yearEnd": 2024,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -106733,12 +106525,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2024-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2024-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2024-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -106750,7 +106542,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'BHP3D', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'BHP3D', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -106883,7 +106676,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -106901,11 +106694,7 @@
   "yearStart": 2022,
   "yearEnd": 2022,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -106953,12 +106742,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-ignis-2022-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-ignis-2022-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-ignis-2022-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -106970,7 +106759,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author '@ShreyanshChaurasia_12', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author '@ShreyanshChaurasia_12', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -107103,7 +106893,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -107121,11 +106911,7 @@
   "yearStart": 2017,
   "yearEnd": 2023,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -107179,12 +106965,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -107197,7 +106983,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'dannzjs', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -107330,7 +107117,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -107348,11 +107135,7 @@
   "yearStart": 2018,
   "yearEnd": 2018,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -107406,12 +107189,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-2018-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-2018-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-2018-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -107423,7 +107206,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Ameer Studio', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Ameer Studio', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -107556,7 +107340,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -107574,11 +107358,7 @@
   "yearStart": 2023,
   "yearEnd": 2023,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -107632,12 +107412,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-2023-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-2023-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-3-2023-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -107649,7 +107429,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'DisneyCars', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'DisneyCars', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -107782,7 +107563,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -107800,11 +107581,7 @@
   "yearStart": 2025,
   "yearEnd": 2025,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -107850,12 +107627,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-y-2025-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-y-2025-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-y-2025-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -107867,7 +107644,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'joyemeng', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'joyemeng', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -108000,7 +107778,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -108018,11 +107796,7 @@
   "yearStart": 2000,
   "yearEnd": 2000,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -108068,12 +107842,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-rav4-2000-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-rav4-2000-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-rav4-2000-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -108085,7 +107859,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -108218,7 +107993,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -108236,11 +108011,7 @@
   "yearStart": 2014,
   "yearEnd": 2014,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -108286,12 +108057,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-corsa-2014-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-corsa-2014-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-corsa-2014-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -108303,7 +108074,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -108436,7 +108208,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -108454,11 +108226,7 @@
   "yearStart": 2021,
   "yearEnd": 2021,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -108505,12 +108273,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-opel-mokka-2021-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-opel-mokka-2021-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-opel-mokka-2021-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -108522,7 +108290,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'SuperStock232', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'SuperStock232', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -108655,7 +108424,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -108673,11 +108442,7 @@
   "yearStart": 1979,
   "yearEnd": 1993,
   "bodyStyle": "convertible",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -108731,12 +108496,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-vw-golf-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-vw-golf-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-vw-golf-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -108749,7 +108514,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Configcars : maxipano360@gmail.com', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -108882,7 +108648,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -108900,11 +108666,7 @@
   "yearStart": 2013,
   "yearEnd": 2013,
   "bodyStyle": "hatchback",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [
    "Cross"
   ],
@@ -108952,12 +108714,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v40-2013-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v40-2013-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v40-2013-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -108969,7 +108731,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -109102,7 +108865,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -109120,11 +108883,7 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "estate",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [
    "Cross"
   ],
@@ -109172,12 +108931,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v90-2020-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v90-2020-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v90-2020-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -109189,7 +108948,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -109322,7 +109082,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -109340,11 +109100,7 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -109391,12 +109147,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc40-2020-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc40-2020-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc40-2020-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -109408,7 +109164,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -109541,7 +109298,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -109559,11 +109316,7 @@
   "yearStart": 2017,
   "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -109618,12 +109371,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc60-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc60-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc60-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -109636,7 +109389,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: generation/years/body style identified from source title + audit posters; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -109769,7 +109523,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -109787,11 +109541,7 @@
   "yearStart": 2008,
   "yearEnd": 2008,
   "bodyStyle": null,
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -109841,12 +109591,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-2008-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-2008-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-2008-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -109858,7 +109608,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -109991,7 +109742,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -110009,11 +109760,7 @@
   "yearStart": 2022,
   "yearEnd": 2022,
   "bodyStyle": null,
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -110061,12 +109808,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -110078,7 +109825,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author '@ShreyanshChaurasia_12', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author '@ShreyanshChaurasia_12', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -110211,7 +109959,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -110229,11 +109977,7 @@
   "yearStart": 2018,
   "yearEnd": 2018,
   "bodyStyle": null,
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -110287,12 +110031,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-yaris-2018-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-yaris-2018-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-yaris-2018-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -110304,7 +110048,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Palma123 JAAT', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Palma123 JAAT', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -110437,7 +110182,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -110455,11 +110200,7 @@
   "yearStart": 2004,
   "yearEnd": 2004,
   "bodyStyle": null,
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -110512,12 +110253,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-astra-2004-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-astra-2004-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-astra-2004-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -110529,7 +110270,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only"
+   "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Merc_TV', hardened audit pass; year/trim from source title only",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -110662,7 +110404,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -110680,11 +110422,7 @@
   "yearStart": 2016,
   "yearEnd": 2023,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [
    "R-Line"
   ],
@@ -110735,12 +110473,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-tiguan-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-tiguan-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-tiguan-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -110753,7 +110491,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: identified from audit poster; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: identified from audit poster; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -110886,7 +110625,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -110904,11 +110643,7 @@
   "yearStart": 2023,
   "yearEnd": 2023,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -110962,12 +110697,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2023-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2023-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-2023-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -110980,7 +110715,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'DR1KING100K', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: identified from audit poster; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: identified from audit poster; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -111113,7 +110849,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -111131,11 +110867,7 @@
   "yearStart": 2004,
   "yearEnd": 2011,
   "bodyStyle": "saloon",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -111185,12 +110917,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-focus-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-focus-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-focus-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -111204,7 +110936,8 @@
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'BHP3D', hardened audit pass; year/trim from source title only",
    "metadata research pass 2026-07-29: identified from audit poster; not manufacturer-confirmed",
-   "council audit 2026-07-29: approved on agent self-review only; owner eyeball pending"
+   "council audit 2026-07-29: approved on agent self-review only; owner eyeball pending",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -111337,7 +111070,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -111355,11 +111088,7 @@
   "yearStart": 2026,
   "yearEnd": 2026,
   "bodyStyle": "suv",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -111406,12 +111135,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-2026-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-2026-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-2026-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -111424,7 +111153,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Raouf designer', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: identified from audit poster; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: identified from audit poster; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -111557,7 +111287,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  },
  {
@@ -111575,11 +111305,7 @@
   "yearStart": 2020,
   "yearEnd": 2020,
   "bodyStyle": "van",
-  "compatibleFuelTypes": [
-   "diesel",
-   "hybrid",
-   "petrol"
-  ],
+  "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
   "exactTrim": false,
@@ -111626,12 +111352,12 @@
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-boxer-435-l4h2-2020-w5-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-boxer-435-l4h2-2020-w5-v1.glb",
-  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-boxer-435-l4h2-2020-w5-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-mk7-v1/hero.jpg",
+  "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1057120,
+  "fileSizeBytes": null,
   "mobileFileSizeBytes": 1057120,
   "triangleCount": null,
   "vertexCount": null,
@@ -111644,7 +111370,8 @@
   "needsHumanReview": [],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'tonielpro520', hardened audit pass; year/trim from source title only",
-   "metadata research pass 2026-07-29: identified from audit poster; not manufacturer-confirmed"
+   "metadata research pass 2026-07-29: identified from audit poster; not manufacturer-confirmed",
+   "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)"
   ],
   "customization": {
    "configuratorReady": true,
@@ -111777,7 +111504,7 @@
     "confirmed": false
    }
   },
-  "defaultDvlaColour": "Silver",
+  "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic"
  }
 ]
