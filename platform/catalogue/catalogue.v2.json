@@ -109965,7 +109965,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.343,
+   "variantsHash": "468c71cd87dce9c8258aa7c997a4bf994c3bb7a7",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -110066,7 +110073,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.311,
+   "variantsHash": "eebbb0eb16d4f4f80be10acc949e54e69a032c67",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -110161,7 +110175,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.383,
+   "variantsHash": "fb235f770b46fc9b4679ab93555f2356903078f9",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -110312,7 +110333,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.297,
+   "variantsHash": "60b65abc1a2572e908108da4ff93a791cc789ea6",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -110463,7 +110491,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.345,
+   "variantsHash": "8d188ef464fc27110b3622816a7a93e261693a8c",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -110615,7 +110650,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.297,
+   "variantsHash": "552a9353f6f5a2f66fdb51aaec06f5a20ec2a2a9",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -110768,7 +110810,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.248,
+   "variantsHash": "df7fc0cd910b8919630adbe550edd0216a516e72",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -110862,7 +110911,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.267,
+   "variantsHash": "ea43d6296783835c1a6d124679d855c4234ea9e2",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -111012,7 +111068,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.382,
+   "variantsHash": "d5f111270dcb381c62c4d6dc2204355733d4e8d0",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -111188,7 +111251,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.336,
+   "variantsHash": "f578646d1a757c99c15eec256bdcad2d106862b8",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -111364,7 +111434,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.332,
+   "variantsHash": "a7b083990d89bcd77b97afa77285ac7482d64bcf",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -111540,7 +111617,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.252,
+   "variantsHash": "e47cb3cef2473860c461e9d6d34d12094ac820a0",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -111716,7 +111800,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.326,
+   "variantsHash": "9e72708965de69e1ff9ac9293a36f94ae8e218bb",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -111892,7 +111983,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.331,
+   "variantsHash": "4f9c33700d44f2407acf698ebbdeb6ef570c5c9d",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -112068,7 +112166,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.447,
+   "variantsHash": "01cf013a35a6278e59772fcc0370797e9d2f8f9f",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -112163,7 +112268,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.372,
+   "variantsHash": "deead3eee489e54eaf7c2ee3a7f53f19fc73585b",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -112225,16 +112337,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__yellow.glb"
-  },
+  "colourVariants": null,
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2.glb",
   "fallbackGlbUrl": null,
@@ -112254,7 +112357,8 @@
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Lucas.Karlsmoen'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "recolour audit 2026-07-29: FAIL dist=0.067 - variants withdrawn, single-neutral"
   ],
   "customization": {
    "configuratorReady": false,
@@ -112263,7 +112367,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.067,
+   "variantsHash": "285669a0a778e9f908399e341a81ef509bd376ae",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -112424,7 +112535,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.271,
+   "variantsHash": "6a7fa1cbc081183cf9d45641bdac7b3cc3f8dec9",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -112584,7 +112702,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.233,
+   "variantsHash": "2e6d0ea4d3f592539b0a2e2973e2ec522fcd4f74",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -112743,7 +112868,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.349,
+   "variantsHash": "b7b53d0dac5613fb479fb26f6514479c6ee08ec4",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -112911,7 +113043,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.45,
+   "variantsHash": "2646e38284e6b9ea309fa0ca4166df93ac84b3dc",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -113072,7 +113211,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.24,
+   "variantsHash": "5fd7a24b39294cfe026630b70d4873267051767f",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -113167,7 +113313,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.323,
+   "variantsHash": "3efa1fe018133808830b556bceb63e488d5c5449",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -113329,7 +113482,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.344,
+   "variantsHash": "56fda53ceb2b90f8e970c8d9282b00282a7e67dd",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -113487,7 +113647,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.299,
+   "variantsHash": "59ea334690cf8bd68b664505ae30f592705a15a5",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -113647,7 +113814,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.378,
+   "variantsHash": "475bdbbfd8bdb7c3559d6a733d8d41bafedc278f",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -113811,7 +113985,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.375,
+   "variantsHash": "cedf93cb13734eb41c204a97d70f88d1607f8f85",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -113970,7 +114151,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.327,
+   "variantsHash": "f6253d5e76cbedbf3fb0465923e6dada685b364f",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -114137,7 +114325,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.475,
+   "variantsHash": "b2707c7013aa98e8c65c9418c9293afdeb4d5f90",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -114304,7 +114499,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.419,
+   "variantsHash": "ac4dc56853f239d8178c14bdabb513ecc1f19069",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -114479,7 +114681,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.302,
+   "variantsHash": "668eee4b8bb0c52043e3a7e047237c8311d1f377",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -114644,7 +114853,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.401,
+   "variantsHash": "bbb4835e4c1c4dd56c9b1aa1f49dcbaf9f99813d",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -114810,7 +115026,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.314,
+   "variantsHash": "0e31db43fb67dd06df9cd6787d7549333c5e8afd",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -114866,16 +115089,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__yellow.glb"
-  },
+  "colourVariants": null,
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1.glb",
   "fallbackGlbUrl": null,
@@ -114895,7 +115109,8 @@
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'SeKali'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "recolour audit 2026-07-29: FAIL dist=0.000 - variants withdrawn, single-neutral"
   ],
   "customization": {
    "configuratorReady": false,
@@ -114969,7 +115184,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.0,
+   "variantsHash": "616064693dd515809c22a376e995184afbd9bdea",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -115140,7 +115362,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.396,
+   "variantsHash": "1d6de0a3c32d2f38fdf0a14197a43daec2759f38",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -115300,7 +115529,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.325,
+   "variantsHash": "e2adb839931a9b98a23374dfab579632b1c3f18b",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -115460,7 +115696,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.303,
+   "variantsHash": "32b238e2007b77bf3c7acc398243af6958327f79",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -115620,7 +115863,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.306,
+   "variantsHash": "79c8d5f98ce68abe0a25ac80c82c9e4fefab34ef",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -115764,7 +116014,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.341,
+   "variantsHash": "6e5961dc436ed8b9a062f69a0aead4a555d51cbe",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -115910,7 +116167,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.234,
+   "variantsHash": "a5034a670f751fc1f06f4f4f31c38e145316d399",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -116054,7 +116318,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.29,
+   "variantsHash": "35bd9336e0c5ca87c734d40846833ae139fbf44b",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -116117,16 +116388,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__yellow.glb"
-  },
+  "colourVariants": null,
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1.glb",
   "fallbackGlbUrl": null,
@@ -116146,7 +116408,8 @@
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'BHP3D'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "recolour audit 2026-07-29: FAIL dist=0.075 - variants withdrawn, single-neutral"
   ],
   "customization": {
    "configuratorReady": false,
@@ -116220,7 +116483,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.075,
+   "variantsHash": "80bef48054011a897760f0eaa2907d176e17a5f4",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -116379,7 +116649,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.368,
+   "variantsHash": "302e943af39e2eb1e550886aa8c6aa1f91c8533b",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -116539,7 +116816,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.267,
+   "variantsHash": "083da7c8b362db7b5f1129d493f45a5dbb45810a",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -116700,7 +116984,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.369,
+   "variantsHash": "5e1516856bf12f9da03e56d8763d14957329556d",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -116795,7 +117086,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.35,
+   "variantsHash": "7040c477f74d0cc5f031fc5c0e0f7f95d353ee96",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -116890,7 +117188,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.315,
+   "variantsHash": "e72b4d642bcfb85ac80c00ed13adba2242d18a81",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -116985,7 +117290,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.345,
+   "variantsHash": "0040469dfc87dd8f52ecb5c8e001b73a647bc575",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  },
  {
   "schemaVersion": 2,
@@ -117143,6 +117455,13 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.279,
+   "variantsHash": "02d73296299db962b74a2d482fc317d8e09109b5",
+   "method": "render",
+   "at": "2026-07-29"
+  }
  }
 ]
