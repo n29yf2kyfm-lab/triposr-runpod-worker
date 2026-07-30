@@ -115483,20 +115483,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 48343164,
-  "mobileFileSizeBytes": 48343164,
+  "fileSizeBytes": 4646960,
+  "mobileFileSizeBytes": 4646960,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "36cd7384fb851b810e958b20d81fa6cc22e8db64cdba68f2b221cd304250c286",
+  "contentHash": "0af72693539295b4b4286e6582e047ada6b905dd0fc1eb98c662906cfe35e271",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -115570,7 +115571,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.325,
@@ -115650,20 +115651,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 20566572,
-  "mobileFileSizeBytes": 20566572,
+  "fileSizeBytes": 1919416,
+  "mobileFileSizeBytes": 1919416,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "f7b456116308cfc144c5de7832c92c455efee3311be27626dc864a747c992054",
+  "contentHash": "2b12db640a0315d3ab098a6b3e7667649c5b3c43a96d32ddf86c1f1c4ace1602",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -115737,7 +115739,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.303,
@@ -115817,20 +115819,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 25163920,
-  "mobileFileSizeBytes": 25163920,
+  "fileSizeBytes": 2361896,
+  "mobileFileSizeBytes": 2361896,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "de05c5270e26b9a86d5e8d16354689fc6e318eabd68b77e2b03ab338a6708711",
+  "contentHash": "7f1247dad0ed3daf1ba5e34461f78f8aea2f457d51efa92b5916f85e82195952",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -115904,7 +115907,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.306,
@@ -116138,20 +116141,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 46000480,
-  "mobileFileSizeBytes": 46000480,
+  "fileSizeBytes": 5429336,
+  "mobileFileSizeBytes": 5429336,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "c7f1180052e870952564a18c3d8191d946e94da5719598ea5d5f99704793bff4",
+  "contentHash": "ef10588acd78367a9d6ee8dccc7ae7331c02022eee8327eb7c9d8704cc2557f0",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -116209,7 +116213,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.234,
@@ -116289,20 +116293,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 11756904,
-  "mobileFileSizeBytes": 11756904,
+  "fileSizeBytes": 1407120,
+  "mobileFileSizeBytes": 1407120,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "d475ee25434dc229211d4b8c17d880097b7c07c53449164cbdad62ed0ccd706f",
+  "contentHash": "2383339cfa0b47cc7b232f1095c81d7681361528016217c6fa6840f7e246caee",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -116360,7 +116365,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.29,
@@ -116437,13 +116442,13 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 10757316,
-  "mobileFileSizeBytes": 10757316,
+  "fileSizeBytes": 3805032,
+  "mobileFileSizeBytes": 3805032,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "f7f28e6072184ac6d7d2c2bb657549bab0e95fbd2dbcf1939e4c2d7272664db1",
+  "contentHash": "5b308ac1d5e9fe9547775193a312fdfe473ab90ef7f4cdc585453822fd654ae0",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
@@ -116451,7 +116456,8 @@
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'BHP3D'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
-   "recolour audit 2026-07-29: FAIL dist=0.075 - variants withdrawn, single-neutral"
+   "recolour audit 2026-07-29: FAIL dist=0.075 - variants withdrawn, single-neutral",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -116525,7 +116531,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "fail",
    "dist": 0.075,
@@ -116604,20 +116610,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 17029572,
-  "mobileFileSizeBytes": 17029572,
+  "fileSizeBytes": 2678072,
+  "mobileFileSizeBytes": 2678072,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "26f4706fa96cb3b39fe35687b53f983acb962e9956c6e1e8e99a9aea121eb883",
+  "contentHash": "9d83149a864f0690a9e4ba9479eff93bd6b324df45338eda8f36a0a4f4e1a79f",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Ford mondeo'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -116691,7 +116698,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.368,
@@ -129329,5 +129336,790 @@
    "method": "render",
    "at": "2026-07-30"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-wrangler-1997-w8-v1",
+  "make": "jeep",
+  "model": "Wrangler",
+  "modelFamily": "jeep wrangler",
+  "modelAliases": [
+   "Wrangler"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1997,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Jeep wrangler 1997 Reworked",
+  "sourceUrl": "https://sketchfab.com/3d-models/jeep-wrangler-1997-reworked-00e6dba30cdd47eeb37a5a0a4d79d084",
+  "sourceCreator": "MojoLeeDa",
+  "sourceReferenceId": "00e6dba30cdd47eeb37a5a0a4d79d084",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "CarPaint"
+  ],
+  "glassMaterialNames": [
+   "Window_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-wrangler-1997-w8-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-wrangler-1997-w8-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 39426076,
+  "mobileFileSizeBytes": 39426076,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "357225469e04d918dcd9e03fbcb9c8dfd812aec4aaeea2ea28f64feecd4979d4",
+  "pipelineVersion": "publish-batch-w8-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w8 gated publish 2026-07-30: licence live-verified CC Attribution (author 'MojoLeeDa'), owner keep verdict 2026-07-30 owner-approved-rescue, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w8",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-kona-2021-w8-v1",
+  "make": "hyundai",
+  "model": "Kona",
+  "modelFamily": "hyundai kona",
+  "modelAliases": [
+   "Kona"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Hyundai Kona 2021",
+  "sourceUrl": "https://sketchfab.com/3d-models/hyundai-kona-2021-07fae8a344984f24bf2bccf83f4e9efc",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "07fae8a344984f24bf2bccf83f4e9efc",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "glass",
+   "r_glass",
+   "o_glass",
+   "r_glass_bump"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2021-w8-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2021-w8-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 5899372,
+  "mobileFileSizeBytes": 5899372,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "93d0626587d27fc4af85673311bccd484056d1b875ad32dd153d925c740e7bcf",
+  "pipelineVersion": "publish-batch-w8-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w8 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-rescue, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w8",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volkswagen-transporter-w8-v1",
+  "make": "volkswagen",
+  "model": "Transporter",
+  "modelFamily": "volkswagen transporter",
+  "modelAliases": [
+   "Transporter"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Transporter, Bus, Kombi, Volkswagen van",
+  "sourceUrl": "https://sketchfab.com/3d-models/transporter-bus-kombi-volkswagen-van-1094c8a9e9a2413d9d24508d1d68219c",
+  "sourceCreator": "Erfan Sheikh",
+  "sourceReferenceId": "1094c8a9e9a2413d9d24508d1d68219c",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Bottom",
+   "Roof",
+   "material"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-w8-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-w8-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 22665196,
+  "mobileFileSizeBytes": 22665196,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "ec1ef2b7cfffdfccc9c56843e0ffd12ceaf0f8e329d6efb1edf124168d11568c",
+  "pipelineVersion": "publish-batch-w8-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w8 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Erfan Sheikh'), owner keep verdict 2026-07-30 owner-approved-rescue, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w8",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Uranium Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Uranium Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Dolphin Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dolphin Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Moonstone Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Moonstone Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Deep Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Deep Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Candy White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Candy White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Reflex Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Reflex Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Atlantic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Atlantic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lapiz Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lapiz Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Kings Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Kings Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Tornado Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Tornado Red",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "skoda-octavia-2017-w8-v1",
+  "make": "skoda",
+  "model": "Octavia",
+  "modelFamily": "skoda octavia",
+  "modelAliases": [
+   "Octavia"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2017,
+  "yearEnd": null,
+  "bodyStyle": "Combi",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2017 Skoda Octavia Combi",
+  "sourceUrl": "https://sketchfab.com/3d-models/2017-skoda-octavia-combi-1504bfb83b144dfabd8d9b53029692ee",
+  "sourceCreator": "hk3328854",
+  "sourceReferenceId": "1504bfb83b144dfabd8d9b53029692ee",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carrosserie"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2017-w8-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2017-w8-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 27873852,
+  "mobileFileSizeBytes": 27873852,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "e6b4dd77fbf9470775c347e703246c22118c6b2fde4bd3c41b14b9222a6685fa",
+  "pipelineVersion": "publish-batch-w8-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w8 gated publish 2026-07-30: licence live-verified CC Attribution (author 'hk3328854'), owner keep verdict 2026-07-30 owner-approved-rescue, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w8",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Steel Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Steel Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Magic Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Black Magic Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Moon White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moon White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Brilliant Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brilliant Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Race Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Race Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Energy Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Energy Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Velvet Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Velvet Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mamba Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mamba Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "renault-clio-w8-v1",
+  "make": "renault",
+  "model": "Clio",
+  "modelFamily": "renault clio",
+  "modelAliases": [
+   "Clio"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Williams"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Renault Clio Williams",
+  "sourceUrl": "https://sketchfab.com/3d-models/renault-clio-williams-1dad7e4438c74f3b8bac1ab72acd78ed",
+  "sourceCreator": "Mona x Supercars",
+  "sourceReferenceId": "1dad7e4438c74f3b8bac1ab72acd78ed",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carroserie",
+   "Dessous_de_caisse",
+   "Plastic_Noir",
+   "Vitres"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-w8-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-w8-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 14379468,
+  "mobileFileSizeBytes": 14379468,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "8f0e26016131c185871d0dd7c3a9ff51bebe125d1d1ba41e60452f7fb7a1ec9c",
+  "pipelineVersion": "publish-batch-w8-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w8 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Mona x Supercars'), owner keep verdict 2026-07-30 owner-approved-rescue, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w8",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Shadow Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Shadow Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacier White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Diamond White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Diamond White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Iron Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Iron Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Flame Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Flame Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Valencia Orange",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Valencia Orange",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mercedes-benz-eqe-w8-v1",
+  "make": "mercedes-benz",
+  "model": "EQE",
+  "modelFamily": "mercedes-benz eqe",
+  "modelAliases": [
+   "EQE"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "AMG"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Mercedes Benz EQE AMG",
+  "sourceUrl": "https://sketchfab.com/3d-models/mercedes-benz-eqe-amg-1f1dfa0adfc943039d3870a5b958f069",
+  "sourceCreator": "Casacade Models",
+  "sourceReferenceId": "1f1dfa0adfc943039d3870a5b958f069",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "glasss",
+   "glasss_dark",
+   "GlassRed"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqe-w8-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqe-w8-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 25420860,
+  "mobileFileSizeBytes": 25420860,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "fce2ef60ef1ea206243c20b77ba333e5ed1e3d85048d93dd72a8b55794a24d49",
+  "pipelineVersion": "publish-batch-w8-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w8 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Casacade Models'), owner keep verdict 2026-07-30 owner-approved-rescue, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w8",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
  }
 ]
