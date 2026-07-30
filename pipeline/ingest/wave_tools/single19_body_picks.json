@@ -1,0 +1,21 @@
+{
+ "subaru-impreza-x-2010-2012-v1": ["PaletteMaterial001"],
+ "bentley-continental-x-undated-v1": ["PaletteMaterial001"],
+ "suzuki-alto-2020-v1": ["primary"],
+ "audi-a7-2018-v1": ["PaletteMaterial002"],
+ "skoda-superb-v1": ["default1"],
+ "lexus-rc-v1": ["Mirrorbasela0021Mtl", "Bodyantennaa0021Mtl"],
+ "lexus-ct-v1": ["carpaint.261"],
+ "ferrari-f8-v1": ["2019_ferrari_f8_tributo_ext.etc.png"],
+ "rolls-royce-ghost-v1": ["rrghost_paint", "rrghost_paint.001", "rrghost_paint_b"],
+ "alpine-a110-v1": ["Metal_2"],
+ "kia-ev3-v1": ["sv1ev3_exterior"],
+ "ssangyong-tivoli-v1": ["tivoli23_spadie"],
+ "fiat-500l-v1": ["Material_5", "Material_9"],
+ "lexus-lm-hybrid-w5-v1": ["Doorrf0011Mtl"],
+ "genesis-g70-w6-v2": ["Paint", "Paint0", "Paint1", "Paint2", "Paint3", "Paint4", "Paint5", "Paint6", "Paint7", "Paint8", "Material__287", "Material__288"],
+ "lexus-ls-w6-v1": ["Body"],
+ "nissan-micra-w6-v1": ["primary"],
+ "skoda-octavia-w7-v1": ["Int_gauges_rs_A_4"],
+ "suzuki-swift-2022-w7-v1": ["primary"]
+}

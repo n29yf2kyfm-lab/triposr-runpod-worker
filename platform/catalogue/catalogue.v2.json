@@ -1315,7 +1315,9 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "PaletteMaterial001"
+  ],
   "glassMaterialNames": [
    "wrxM_LightGlassNormal_Clear_Low1"
   ],
@@ -1324,7 +1326,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Ice Silver Metallic",
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/subaru-impreza-x-2010-2012-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/subaru-impreza-x-2010-2012-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/subaru-impreza-x-2010-2012-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/subaru-impreza-x-2010-2012-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/subaru-impreza-x-2010-2012-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/subaru-impreza-x-2010-2012-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/subaru-impreza-x-2010-2012-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/subaru-impreza-x-2010-2012-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/impreza.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/impreza_uc.glb",
   "fallbackGlbUrl": null,
@@ -1474,7 +1485,14 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3789,
+   "variantsHash": "4900e7c57c9a3f1a05ed8fe00d6050c7eb5db48f",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -1517,7 +1535,9 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "PaletteMaterial001"
+  ],
   "glassMaterialNames": [
    "Meshesmeshes1bonnetok0021Mtl",
    "Meshesmeshes1doorlfok0061Mtl",
@@ -1533,7 +1553,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Moonbeam",
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bentley/bentley-continental-x-undated-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bentley/bentley-continental-x-undated-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bentley/bentley-continental-x-undated-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bentley/bentley-continental-x-undated-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bentley/bentley-continental-x-undated-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bentley/bentley-continental-x-undated-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bentley/bentley-continental-x-undated-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bentley/bentley-continental-x-undated-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bentley/continental_uc.glb",
   "fallbackGlbUrl": null,
@@ -1680,7 +1709,14 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3696,
+   "variantsHash": "c2be8d2b34b1657913f24c0e0d1527dd2adcd2bb",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -19950,14 +19986,25 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "primary"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "silver",
   "renderColourLabel": "Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-alto-2020-v1.glb",
   "fallbackGlbUrl": null,
@@ -20117,7 +20164,14 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3575,
+   "variantsHash": "d67f1e2537976b1969c82c1e2c7dde98cbbcb8a4",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -28888,14 +28942,25 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "PaletteMaterial002"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "silver",
   "renderColourLabel": "Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2018-v1.glb",
   "fallbackGlbUrl": null,
@@ -29048,7 +29113,14 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3316,
+   "variantsHash": "b3d0a1f23690fc511e269fbcdd0182e6ff33a381",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -46188,14 +46260,25 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "default1"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "grey",
   "renderColourLabel": "Grey",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Graphite Grey Metallic",
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-superb-v1.glb",
   "fallbackGlbUrl": null,
@@ -46360,7 +46443,14 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3931,
+   "variantsHash": "42035ad7d6bc0ad3f8d02a414a2fd63ee81dd387",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -54855,14 +54945,26 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "Mirrorbasela0021Mtl",
+   "Bodyantennaa0021Mtl"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "silver",
   "renderColourLabel": "Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Sonic Silver",
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-v1.glb",
   "fallbackGlbUrl": null,
@@ -55020,7 +55122,14 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3495,
+   "variantsHash": "567e3a0240944ec876b9bdf193174cb261e586a8",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -55280,14 +55389,25 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "carpaint.261"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "white",
   "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ct-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ct-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ct-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ct-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ct-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ct-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ct-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ct-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ct-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ct-v1.glb",
   "fallbackGlbUrl": null,
@@ -55385,7 +55505,14 @@
    ]
   },
   "platesBaked": true,
-  "colourVariantPaints": {}
+  "colourVariantPaints": {},
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3189,
+   "variantsHash": "446d83b5ec8600835fdb89d4a9c660a7658dbd46",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -81938,14 +82065,25 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "2019_ferrari_f8_tributo_ext.etc.png"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "white",
   "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ferrari/ferrari-f8-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ferrari/ferrari-f8-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ferrari/ferrari-f8-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ferrari/ferrari-f8-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ferrari/ferrari-f8-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ferrari/ferrari-f8-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ferrari/ferrari-f8-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ferrari/ferrari-f8-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ferrari/ferrari-f8-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ferrari/ferrari-f8-v1.glb",
   "fallbackGlbUrl": null,
@@ -82045,7 +82183,14 @@
   "platesBaked": true,
   "colourVariantPaints": {},
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3851,
+   "variantsHash": "0e6c7da7747fd17e87e114816f10cf02f2f6308f",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -86065,14 +86210,25 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [],
+  "paintMaterialNames": [
+   "Metal_2"
+  ],
   "glassMaterialNames": [],
   "defaultColourFamily": "silver",
   "renderColourLabel": "Studio Silver",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ALPINE/alpine-a110-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ALPINE/alpine-a110-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ALPINE/alpine-a110-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ALPINE/alpine-a110-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ALPINE/alpine-a110-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ALPINE/alpine-a110-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ALPINE/alpine-a110-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ALPINE/alpine-a110-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ALPINE/alpine-a110-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ALPINE/alpine-a110-v1.glb",
   "fallbackGlbUrl": null,
@@ -86106,7 +86262,14 @@
   "platesBaked": true,
   "colourVariantPaints": {},
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3546,
+   "variantsHash": "0a5b39589fe667f1756c27997c79e76308884d09",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -112351,10 +112514,14 @@
    "Paint0",
    "Paint1",
    "Paint2",
+   "Paint3",
    "Paint4",
+   "Paint5",
    "Paint6",
    "Paint7",
-   "Paint8"
+   "Paint8",
+   "Material__287",
+   "Material__288"
   ],
   "glassMaterialNames": [
    "window_glass1",
@@ -112365,7 +112532,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/genesis/genesis-g70-w6-v2.glb",
   "fallbackGlbUrl": null,
@@ -112398,11 +112574,11 @@
   },
   "platesBaked": true,
   "recolourAudit": {
-   "status": "fail",
-   "dist": 0.067,
+   "status": "pass",
+   "dist": 0.2655,
    "variantsHash": "285669a0a778e9f908399e341a81ef509bd376ae",
    "method": "render",
-   "at": "2026-07-29"
+   "at": "2026-07-30"
   }
  },
  {
@@ -115135,7 +115311,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1.glb",
   "fallbackGlbUrl": null,
@@ -115233,11 +115418,11 @@
   },
   "platesBaked": true,
   "recolourAudit": {
-   "status": "fail",
-   "dist": 0.0,
+   "status": "pass",
+   "dist": 0.2538,
    "variantsHash": "616064693dd515809c22a376e995184afbd9bdea",
    "method": "render",
-   "at": "2026-07-29"
+   "at": "2026-07-30"
   }
  },
  {
@@ -116423,15 +116608,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   "Chassis.10",
-   "Chassis.7",
-   "Chassis.9",
-   "chassis_cleber.006",
-   "chassis_cleber.1",
-   "chassis_cleber.2",
-   "chassis_cleber.3",
-   "chassis_cleber.4",
-   "chassis_cleber.5"
+   "primary"
   ],
   "glassMaterialNames": [
    "glass",
@@ -116442,7 +116619,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-w6-v1.glb",
   "fallbackGlbUrl": null,
@@ -116540,11 +116726,11 @@
   },
   "platesBaked": true,
   "recolourAudit": {
-   "status": "fail",
-   "dist": 0.075,
+   "status": "pass",
+   "dist": 0.3793,
    "variantsHash": "80bef48054011a897760f0eaa2907d176e17a5f4",
    "method": "render",
-   "at": "2026-07-29"
+   "at": "2026-07-30"
   }
  },
  {
@@ -118536,15 +118722,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   "Material_105EE",
-   "int_repro_2",
-   "int_roof_console_plastic",
-   "int_roof_console_plastic_3",
-   "int_roof_console_plastic_6",
-   "plastic_smooth_int_0",
-   "plastic_smooth_int_2",
-   "sw_details_frame45",
-   "sw_details_frame45_1"
+   "Int_gauges_rs_A_4"
   ],
   "glassMaterialNames": [
    "ext_glass_8"
@@ -118554,7 +118732,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1.glb",
   "fallbackGlbUrl": null,
@@ -118657,7 +118844,14 @@
     }
    ]
   },
-  "platesBaked": true
+  "platesBaked": true,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2948,
+   "variantsHash": "e1d4a8cc0fc86ce33a4cf463d5d857301f6466a4",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -123695,9 +123889,7 @@
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
   "paintMaterialNames": [
-   "chassis.1",
-   "chassis.3",
-   "chassis.4"
+   "primary"
   ],
   "glassMaterialNames": [
    "glass.002",
@@ -123709,7 +123901,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v1.glb",
   "fallbackGlbUrl": null,
@@ -123739,7 +123940,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": true
+  "platesBaked": true,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3463,
+   "variantsHash": "2b35da9ed44b7de388ad655178f23de7eab27f97",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
