@@ -49145,8 +49145,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of subaru-forester-2019-w7-v1 — colour-independent render shape-similarity 0.158; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -49190,7 +49190,8 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 611ae23685c14134b5a4f3decde248e9 (2020 Subaru Forester), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'subaru'"
+   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'subaru'",
+   "quarantined (reversible: assets kept) — duplicate of subaru-forester-2019-w7-v1 — colour-independent render shape-similarity 0.158; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": true,
@@ -49360,8 +49361,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of subaru-outback-2022-w7-v1 — colour-independent render shape-similarity 0.130; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -49405,7 +49406,8 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model a44abee6689e429881209fc6299f505c (2022 Subaru Outback), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'subaru'"
+   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'subaru'",
+   "quarantined (reversible: assets kept) — duplicate of subaru-outback-2022-w7-v1 — colour-independent render shape-similarity 0.130; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": true,
@@ -63544,8 +63546,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of jeep-renegade-2021-w6-v1 — colour-independent render shape-similarity 0.229; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -63589,7 +63591,8 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 9cc773cb7f6e4f10893ea460aa11654b (2021 Jeep Renegade), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; 'jeep' absent from oem_paint_db so options cleared (families still served via colourVariants)"
+   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; 'jeep' absent from oem_paint_db so options cleared (families still served via colourVariants)",
+   "quarantined (reversible: assets kept) — duplicate of jeep-renegade-2021-w6-v1 — colour-independent render shape-similarity 0.229; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": true,
@@ -86956,8 +86959,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of renault-austral-2022-w7-v1 — colour-independent render shape-similarity 0.188; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -86995,7 +86998,8 @@
    "2026-07-20 NEW from CSV library-fill: CC-BY model 0e25e7fc073444ea9485f1fae903a0db (2022 Renault Austral), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "recolour-gate demote -> single-neutral (render sweep dist below threshold)",
-   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'renault'"
+   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'renault'",
+   "quarantined (reversible: assets kept) — duplicate of renault-austral-2022-w7-v1 — colour-independent render shape-similarity 0.188; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": true,
@@ -101528,8 +101532,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of renault-kangoo-v1 — colour-independent render shape-similarity 0.120; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -101576,7 +101580,8 @@
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
    "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)",
    "owner visual review 2026-07-29: approved in one-by-one render pass (55-car pack)",
-   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'renault'"
+   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'renault'",
+   "quarantined (reversible: assets kept) — duplicate of renault-kangoo-v1 — colour-independent render shape-similarity 0.120; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": true,
@@ -111679,8 +111684,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of ford-focus-w6-v1 — colour-independent render shape-similarity 0.251; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -111729,7 +111734,8 @@
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'RES1N'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
-   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "quarantined (reversible: assets kept) — duplicate of ford-focus-w6-v1 — colour-independent render shape-similarity 0.251; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -112769,8 +112775,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of jaguar-i-pace-v1 — colour-independent render shape-similarity 0.179; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -112820,7 +112826,8 @@
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Mona x Supercars'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
-   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "quarantined (reversible: assets kept) — duplicate of jaguar-i-pace-v1 — colour-independent render shape-similarity 0.179; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -116947,20 +116954,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 46550572,
-  "mobileFileSizeBytes": 46550572,
+  "fileSizeBytes": 6015288,
+  "mobileFileSizeBytes": 6015288,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "12754b73acc75d214180c327a19a6a92449447fe298ed3dd5039898a8e6f5770",
+  "contentHash": "b7d9e0373661cdb9545249a3643b9c0bc3154f0e9c8ebfefa903ba1037bece7c",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -117034,7 +117042,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.369,
@@ -117114,20 +117122,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 34206224,
-  "mobileFileSizeBytes": 34206224,
+  "fileSizeBytes": 3365520,
+  "mobileFileSizeBytes": 3365520,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "d492e091c83f3a6a927cd3bef52558c28227ea1c01bdeaa29954c6beefe7952f",
+  "contentHash": "f0d7e997174076ad13855d5cae816505eef920e0736659d331d0d5c036ec0cf6",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -117136,7 +117145,7 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.35,
@@ -117216,20 +117225,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 17773600,
-  "mobileFileSizeBytes": 17773600,
+  "fileSizeBytes": 1673164,
+  "mobileFileSizeBytes": 1673164,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "50810913c790a220ca79a17d38da218247b64dfe0782095fa19c18a748f4657b",
+  "contentHash": "dd47a40c4fee3373d551d304859d768ac59f79e130313d8e2cf5eeab2f924f30",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -117238,7 +117248,7 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.315,
@@ -119203,8 +119213,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of tesla-model-3-2018-w5-v1 — colour-independent render shape-similarity 0.083; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -119260,7 +119270,8 @@
   "needsHumanReview": [],
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'TeslaFan'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "quarantined (reversible: assets kept) — duplicate of tesla-model-3-2018-w5-v1 — colour-independent render shape-similarity 0.083; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -122088,8 +122099,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of subaru-forester-2019-w7-v1 — colour-independent render shape-similarity 0.172; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -122140,7 +122151,8 @@
   "needsHumanReview": [],
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "quarantined (reversible: assets kept) — duplicate of subaru-forester-2019-w7-v1 — colour-independent render shape-similarity 0.172; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -122248,8 +122260,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of tesla-model-3-2023-w5-v1 — colour-independent render shape-similarity 0.134; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -122305,7 +122317,8 @@
   "needsHumanReview": [],
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'marcelowmt'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "quarantined (reversible: assets kept) — duplicate of tesla-model-3-2023-w5-v1 — colour-independent render shape-similarity 0.134; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -124441,8 +124454,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of volvo-xc60-2023-w7-v1 — colour-independent render shape-similarity 0.138; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -124482,7 +124495,8 @@
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Maroi Mister Let Me Think Official 3D Studio'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 variants demoted single-neutral: recolour audit FAIL dist=0.0",
-   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "quarantined (reversible: assets kept) — duplicate of volvo-xc60-2023-w7-v1 — colour-independent render shape-similarity 0.138; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -125271,8 +125285,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of volvo-v90-v1 — colour-independent render shape-similarity 0.165; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -125323,7 +125337,8 @@
   "needsHumanReview": [],
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "quarantined (reversible: assets kept) — duplicate of volvo-v90-v1 — colour-independent render shape-similarity 0.165; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -125764,8 +125779,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of peugeot-208-v2 — colour-independent render shape-similarity 0.207; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -125813,7 +125828,8 @@
   "needsHumanReview": [],
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "quarantined (reversible: assets kept) — duplicate of peugeot-208-v2 — colour-independent render shape-similarity 0.207; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -126980,8 +126996,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of suzuki-swift-2022-w7-v1 — colour-independent render shape-similarity 0.247; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -127024,7 +127040,8 @@
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'nisarashariff24'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 variants demoted single-neutral: recolour audit FAIL dist=0.008",
-   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "quarantined (reversible: assets kept) — duplicate of suzuki-swift-2022-w7-v1 — colour-independent render shape-similarity 0.247; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -127687,8 +127704,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of mercedes-benz-sprinter-w7-v1 — colour-independent render shape-similarity 0.120; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -127738,7 +127755,8 @@
   "needsHumanReview": [],
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'RES1N'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "quarantined (reversible: assets kept) — duplicate of mercedes-benz-sprinter-w7-v1 — colour-independent render shape-similarity 0.120; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -127955,8 +127973,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of renault-twingo-w7-v1 — colour-independent render shape-similarity 0.180; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -128004,7 +128022,8 @@
   "needsHumanReview": [],
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'saidiishaq4'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "quarantined (reversible: assets kept) — duplicate of renault-twingo-w7-v1 — colour-independent render shape-similarity 0.180; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -128891,8 +128910,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "duplicate of opel-corsa-1997-w5-v1 — colour-independent render shape-similarity 0.198; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -128942,7 +128961,8 @@
   "needsHumanReview": [],
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "quarantined (reversible: assets kept) — duplicate of opel-corsa-1997-w5-v1 — colour-independent render shape-similarity 0.198; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -129427,7 +129447,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4257,
+   "variantsHash": "d1fd58bdc9b1d49928712ee076bb1f04fb1f0204",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -129587,7 +129614,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.173,
+   "variantsHash": "10ef6267f822dc77625af9aba22fdf296acbacf7",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -129641,7 +129675,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-w8-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-w8-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-w8-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-w8-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-w8-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-w8-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-w8-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-w8-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-w8-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-w8-v1.glb",
   "fallbackGlbUrl": null,
@@ -129758,7 +129801,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3494,
+   "variantsHash": "2cadcfe085c585630331560b4627ad5d39a8a456",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -129810,7 +129860,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2017-w8-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2017-w8-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2017-w8-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2017-w8-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2017-w8-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2017-w8-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2017-w8-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2017-w8-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2017-w8-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2017-w8-v1.glb",
   "fallbackGlbUrl": null,
@@ -129911,7 +129970,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3277,
+   "variantsHash": "4d4895ba77229cadd3da52261dd791904970af98",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -129968,7 +130034,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-w8-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-w8-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-w8-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-w8-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-w8-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-w8-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-w8-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-w8-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-w8-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-w8-v1.glb",
   "fallbackGlbUrl": null,
@@ -130053,7 +130128,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4337,
+   "variantsHash": "5e5cad71718f0f635b162580b7a2b5857d4a7327",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -130111,7 +130193,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqe-w8-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqe-w8-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqe-w8-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqe-w8-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqe-w8-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqe-w8-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqe-w8-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqe-w8-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqe-w8-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqe-w8-v1.glb",
   "fallbackGlbUrl": null,
@@ -130139,6 +130230,13 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4815,
+   "variantsHash": "bdef2ef80315901e99798b2b1563170583d568d0",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  }
 ]
