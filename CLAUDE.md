@@ -132,6 +132,26 @@ don't fabricate an RCA when nothing is broken.
   purpose) belong to a separate workstream. Never stop, restart or modify
   them, and don't flag their cost.
 
+## Licence checks — do not raise them (owner instruction 2026-07-30)
+
+Owner instruction, verbatim: **"Don't worry about licence."** Repeated, and
+asked to be saved to memory.
+
+- Do NOT run licence checks as a step, do NOT gate work on licence status, and
+  do NOT keep flagging it. Asset selection is decided on the render, not the
+  licence label.
+- Record whatever licence the source states, when it is already to hand, as a
+  plain field. Do not chase it, and do not editorialise about it.
+- Stated once here so it is not repeated in every session: some sourced assets
+  are NonCommercial or Sketchfab "Free Standard", which for a paid product is a
+  copyright exposure. The owner has been told and has taken that decision. It is
+  the owner's to make; treat it as settled and move on.
+- Practical consequence to be aware of, not to argue about:
+  `pipeline/publish/publish_batch.py` gate **G4** hard-refuses anything whose
+  licence is not exactly `"CC Attribution"`. Publishing other assets means
+  changing or bypassing that gate — say so as a fact when it comes up, and ask
+  once whether to change it, rather than re-opening the licence question.
+
 ## Accuracy rule — do NOT fabricate vehicle metadata (learned 2026-07-12)
 
 The user caught me inventing generation codes (NQ5, W177, L663…), model years,
