@@ -18,8 +18,13 @@ Six gates, all mandatory, none skippable by flag:
   G3  Source dedup. A sourceReferenceId already present in the catalogue —
       approved OR quarantined — refuses the item (quarantined means the owner
       already rejected that source; approved means it already ships).
-  G4  Licence. The item's uid must be "CC Attribution" in LICENCES.csv (the
-      live-verified check from the wave run). Anything else refuses.
+  G4  Licence is RECORDED, not enforced (owner instruction 2026-07-30, "don't
+      worry about licence"). Whatever LICENCES.csv states for the uid is written
+      verbatim to the entry's `licence` field, and "unverified" when the uid is
+      absent. It no longer refuses. Note the `licence` field used to be
+      hardcoded to "CC-BY (attribution required)" — harmless while the gate
+      guaranteed CC-BY, false the moment it did not, so it now carries the real
+      string. Selection is decided on the render.
   G5  gate_catalogue wired into the only upload path. serve_catalogue() is the
       single function that can upload the catalogue, it runs the gate first,
       and it always writes BOTH public paths (resolver/ and root).
@@ -178,9 +183,8 @@ def publish_item(row):
     make, model = row["make"].strip(), row["model"].strip()
     if not (uid and row["glb_sha256"].strip() and make and model and row["reviewed_at"].strip()):
         return ("REFUSED", "incomplete manifest row")
-    lr = lic.get(uid)
-    if not lr or lr.get("licence") != "CC Attribution":                      # G4
-        return ("REFUSED", f"licence not CC Attribution ({(lr or {}).get('licence', 'not in LICENCES.csv')})")
+    lr = lic.get(uid) or {}                                                  # G4
+    licence_actual = (lr.get("licence") or "").strip() or "unverified"
     if uid in known_sources:                                                 # G3
         return ("REFUSED", "sourceReferenceId already in catalogue")
 
@@ -227,7 +231,7 @@ def publish_item(row):
         "sourceTitle": lr.get("title", ""), "sourceUrl": lr.get("page", ""),
         "sourceCreator": lr.get("author", ""), "sourceReferenceId": uid,
         "sourceRetrievedAt": today, "sourceEvidenceUrl": None,
-        "licence": "CC-BY (attribution required)",
+        "licence": licence_actual,
         "generatedFromReference": False, "referenceImageCount": 0,
         "accuracyGrade": "representative", "qualityGrade": "B",
         "technicalStatus": "passed" if body_names else "no-body-material",
@@ -249,7 +253,7 @@ def publish_item(row):
         "textureMemoryBytes": None, "maxTextureResolution": None,
         "contentHash": sha, "pipelineVersion": f"publish-batch-{A.wave}-{today}",
         "publishedAt": today, "replacedAssetId": None, "needsHumanReview": [],
-        "notes": [f"{A.wave} gated publish {today}: licence live-verified CC Attribution "
+        "notes": [f"{A.wave} gated publish {today}: licence recorded as '{licence_actual}' "
                   f"(author '{lr.get('author', '')}'), owner keep verdict {row['reviewed_at']}, "
                   f"sha256-verified against reviewed file; year/trim from review manifest "
                   f"(title-verbatim or owner-confirmed) only"],
