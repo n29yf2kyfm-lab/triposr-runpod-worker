@@ -16971,13 +16971,13 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/ford/ford-focus-v1/chrome-blue-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 1135140,
-  "mobileFileSizeBytes": 1135140,
+  "fileSizeBytes": 1128192,
+  "mobileFileSizeBytes": 1128192,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": null,
+  "contentHash": "6cd05cb87ba9597281c3f0da9f1f27100f4a3eb83941ccab5d0f6482496b8609",
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T19:23:56Z",
   "replacedAssetId": null,
@@ -16987,7 +16987,8 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 804649, \"facesAfter\": 151051, \"ratio\": 0.186}",
    "quarantined 2026-07-19 (audit): wrong body (US saloon) + tyre overspill from atlas materials; flagged for re-source.",
    "2026-07-20 RE-SOURCED from CSV library-fill: CC-BY model 27e25fcead154e62a1dd8e92ccedb691 (2016 Ford Focus RS), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -17127,7 +17128,8 @@
    "variantsHash": "4bcd76a8e703fc142db88b95a14a57160db37688",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
