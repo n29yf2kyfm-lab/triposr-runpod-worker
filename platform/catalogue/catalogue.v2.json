@@ -88276,8 +88276,8 @@
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "recolour-gate demote -> single-neutral (render sweep dist below threshold)",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; 'ssangyong' absent from oem_paint_db so options cleared (families still served via colourVariants)",
-   "plates re-baked 2026-07-30: GB front/rear added; the previous platesBaked=true was wrong, the GLB had no plate mesh",
-   "colour 'White' measured from the served render 2026-07-30"
+   "colour 'White' measured from the served render 2026-07-30",
+   "platesBaked=false 2026-07-30: the GLB has no plate mesh. A bake was attempted and rejected on sight — plates_generic placed floating slabs off the bumpers on this body shape. Base GLB restored to pre-bake."
   ],
   "customization": {
    "configuratorReady": true,
@@ -88286,7 +88286,7 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": true,
+  "platesBaked": false,
   "colourVariantPaints": {
    "grey": {
     "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/SSANGYONG/ssangyong-tivoli-v1__grey.glb",
@@ -90076,8 +90076,8 @@
    "2026-07-20 NEW from CSV library-fill: CC-BY model 22142721f156425da89a29d4ac145f8c (2017 Fiat 500L (Remastered)), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "autofill: single-neutral (texture-driven body or no isolable paint material)",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'fiat'",
-   "plates re-baked 2026-07-30: GB front/rear added; the previous platesBaked=true was wrong, the GLB had no plate mesh",
-   "colour 'Beige' measured from the served render 2026-07-30"
+   "colour 'Beige' measured from the served render 2026-07-30",
+   "platesBaked=false 2026-07-30: the GLB has no plate mesh. A bake was attempted and rejected on sight — plates_generic placed floating slabs off the bumpers on this body shape. Base GLB restored to pre-bake."
   ],
   "customization": {
    "configuratorReady": true,
@@ -90143,7 +90143,7 @@
     }
    ]
   },
-  "platesBaked": true,
+  "platesBaked": false,
   "colourVariantPaints": {
    "grey": {
     "url": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/defender__grey.glb",
@@ -95998,8 +95998,8 @@
    "owner visual review 2026-07-29: approved in one-by-one render pass (55-car pack)",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'lexus'",
    "recolour audit 2026-07-29: FAIL dist=0.058 (body colour does not move between red/blue variants — wrong paint material pick); demoted to single-neutral per gate rule, variants withdrawn until re-baked with correct body material",
-   "plates re-baked 2026-07-30: GB front/rear added; the previous platesBaked=true was wrong, the GLB had no plate mesh",
-   "colour 'Black' measured from the served render 2026-07-30"
+   "colour 'Black' measured from the served render 2026-07-30",
+   "platesBaked=false 2026-07-30: the GLB has no plate mesh. A bake was attempted and rejected on sight — plates_generic placed floating slabs off the bumpers on this body shape. Base GLB restored to pre-bake."
   ],
   "customization": {
    "configuratorReady": true,
@@ -96073,7 +96073,7 @@
     }
    ]
   },
-  "platesBaked": true,
+  "platesBaked": false,
   "colourVariantPaints": null,
   "defaultDvlaColour": null,
   "oemPaintFinish": "Metallic",
