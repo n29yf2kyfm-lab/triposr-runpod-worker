@@ -121907,19 +121907,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 30264404,
-  "mobileFileSizeBytes": 30264404,
+  "fileSizeBytes": 3454236,
+  "mobileFileSizeBytes": 3454236,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "9ab950c521cfb0b66114469659e4eb3a63ca5f802438ecf09d1b626d822dc37f",
+  "contentHash": "94b8f3ab384c60f2fc857fc4d99629be01e093a42480ad2b6781a0448414f12d",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -121993,7 +121994,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.3686,
@@ -122074,19 +122075,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5001176,
-  "mobileFileSizeBytes": 5001176,
+  "fileSizeBytes": 6163376,
+  "mobileFileSizeBytes": 6163376,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "c28f89c83801254de026346194caf16198bf09785b666bd2e9ecb34b2cc9c9b2",
+  "contentHash": "d4eed83d9135ae4f42ccc8b6c82d227ca451365688bab1a43b42a3e05cd098ee",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -122152,7 +122154,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.3353,
@@ -122238,19 +122240,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 22671120,
-  "mobileFileSizeBytes": 22671120,
+  "fileSizeBytes": 3952660,
+  "mobileFileSizeBytes": 3952660,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "a4b3b5a03f1e9efce208063addf184e8e81455f9a145de393f2deb3802e77082",
+  "contentHash": "70a304836f780267430feb28b0382c8169e1ee881cccea97c67e831dde09a343",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'marcelowmt'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'marcelowmt'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -122324,7 +122327,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.3927,
