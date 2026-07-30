@@ -111110,8 +111110,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "owner review 2026-07-30: 1970s classic, clay-like render, out of place vs modern stock",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -111161,7 +111161,8 @@
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: 1970s classic, clay-like render, out of place vs modern stock"
   ],
   "customization": {
    "configuratorReady": false,
@@ -111293,8 +111294,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "owner review 2026-07-30: 1970s classic, clay-like render, out of place vs modern stock",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -111344,7 +111345,8 @@
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: 1970s classic, clay-like render, out of place vs modern stock"
   ],
   "customization": {
    "configuratorReady": false,
@@ -111842,8 +111844,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "owner review 2026-07-30: plain untextured utility shell, no detail",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -111893,7 +111895,8 @@
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: plain untextured utility shell, no detail"
   ],
   "customization": {
    "configuratorReady": false,
@@ -112025,8 +112028,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "owner review 2026-07-30: plain untextured utility shell, no detail",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -112076,7 +112079,8 @@
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: plain untextured utility shell, no detail"
   ],
   "customization": {
    "configuratorReady": false,
@@ -115228,8 +115232,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "owner review 2026-07-30: broken/torn geometry around the front bumper",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -115288,7 +115292,8 @@
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Mona x Supercars'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: broken/torn geometry around the front bumper"
   ],
   "customization": {
    "configuratorReady": false,
@@ -115905,8 +115910,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "owner review 2026-07-30: very crude low-poly body, below the premium bar",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -115956,7 +115961,8 @@
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: very crude low-poly body, below the premium bar"
   ],
   "customization": {
    "configuratorReady": false,
@@ -117230,8 +117236,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "owner review 2026-07-30: blocky low-poly body, below the premium bar",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -117281,7 +117287,8 @@
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: blocky low-poly body, below the premium bar"
   ],
   "customization": {
    "configuratorReady": false,
@@ -117332,8 +117339,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "owner review 2026-07-30: bright green tuner-look, not stock presentation",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -117381,7 +117388,8 @@
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Mona x Supercars'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: bright green tuner-look, not stock presentation"
   ],
   "customization": {
    "configuratorReady": false,
