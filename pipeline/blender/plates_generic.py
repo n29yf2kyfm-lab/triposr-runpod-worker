@@ -44,7 +44,15 @@ LA = 0 if size[0] >= size[1] else 1        # length: the longer horizontal axis
 WA = 1 - LA                                # width: the other horizontal axis
 gz = lo[2]
 H = size[2]
-Wd = size[WA]
+# Robust width and centreline. The raw bounding box is the wrong reference for
+# BOTH: on fiat-500l-v1 two stray objects of 24 and 27 verts set the whole box
+# and inflated the width by 13%, and any asymmetric part drags the midpoint off
+# the car's real centreline. Clipping the outer 0.1% drops the strays while
+# keeping the body (measured 2026-07-30 across five cars).
+w_all = V[:, WA]
+w_lo, w_hi = np.percentile(w_all, 0.1), np.percentile(w_all, 99.9)
+Wd = float(w_hi - w_lo)
+CW = float((w_lo + w_hi) / 2)              # centreline, not ctr[WA]
 
 roof = V[V[:, 2] > gz + 0.80 * H]
 roof_l = roof[:, LA].mean() if len(roof) > 30 else ctr[LA]
@@ -64,13 +72,33 @@ for _o in [o for o in bpy.context.scene.objects
            if o.name.startswith(("plate_front", "plate_rear"))]:
     bpy.data.objects.remove(_o, do_unlink=True)
 
-pw = (0.52 / 1.80 * Wd) / 2               # half-width of a 520mm plate
-ph = (pw * 111 / 520)
+def body_width_at(zc, half):
+    """Width of the car at plate height. Sizing a plate off the FULL car width
+    includes the door mirrors, which sit well outboard of the bumper: on
+    lexus-lm-hybrid-w5-v1 that produced a plate 29% of an over-mirror width,
+    visibly larger than the plate recess the model was built with, and on
+    fiat-500l-v1 it reached 33% of body width. At bumper height the mirrors are
+    out of the band, so this is the honest reference."""
+    band = V[(V[:, 2] >= zc - half) & (V[:, 2] <= zc + half)]
+    if len(band) < 200:
+        return Wd
+    b_lo, b_hi = np.percentile(band[:, WA], 0.5), np.percentile(band[:, WA], 99.5)
+    bw = float(b_hi - b_lo)
+    # never trust a band narrower than half the car - that means the slice
+    # caught a spoiler or an air intake rather than the bumper
+    return bw if bw > 0.5 * Wd else Wd
 
 
-def bumper_face(end_val, zc):
+def plate_half_dims(zc):
+    guess = (0.52 / 1.80 * Wd) / 2         # first pass, to give the band a height
+    bw = body_width_at(zc, guess * 111 / 520)
+    pw = (0.52 / 1.80 * bw) / 2            # half-width of a 520mm plate
+    return pw, pw * 111 / 520
+
+
+def bumper_face(end_val, zc, pw, ph):
     band = V[(V[:, 2] >= zc - ph) & (V[:, 2] <= zc + ph) &
-             (np.abs(V[:, WA] - ctr[WA]) < Wd * 0.28)]
+             (np.abs(V[:, WA] - CW) < pw)]
     if len(band) < 5:
         return end_val
     return band[:, LA].max() if end_val == hi[LA] else band[:, LA].min()
@@ -89,9 +117,10 @@ def plate_mat(name, img):
 
 
 def add_plate(name, img, end_val, zc):
+    pw, ph = plate_half_dims(zc)
     outward = 1.0 if end_val == hi[LA] else -1.0
-    Lc = bumper_face(end_val, zc) + outward * size[LA] * 0.004
-    Wc = ctr[WA]
+    Lc = bumper_face(end_val, zc, pw, ph) + outward * size[LA] * 0.004
+    Wc = CW
     me = bpy.data.meshes.new(name)
     bm = bmesh.new()
 
