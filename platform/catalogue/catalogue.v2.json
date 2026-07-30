@@ -117616,7 +117616,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3729,
+   "variantsHash": "293eaa63b58f72830cd41a26fde6bbbfbcce92d9",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -117925,7 +117932,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3694,
+   "variantsHash": "bca1a8c4086d014bb325b9d8552df0ac5be05b6d",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -118380,7 +118394,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3796,
+   "variantsHash": "2cbdb7772d8b7628fe2ea97da2b537bb9646845b",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -118444,16 +118465,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1__yellow.glb"
-  },
+  "colourVariants": null,
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1.glb",
   "fallbackGlbUrl": null,
@@ -118472,7 +118484,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'DR1KING100K'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'DR1KING100K'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 variants demoted single-neutral: recolour audit FAIL dist=0.024"
   ],
   "customization": {
    "configuratorReady": false,
@@ -118722,7 +118735,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.1808,
+   "variantsHash": "fc1698485e838e75edfd541a8527c847540da2a5",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
