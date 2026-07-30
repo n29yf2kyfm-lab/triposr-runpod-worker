@@ -31,6 +31,27 @@ for o in bpy.context.scene.objects:
     M = np.array(o.matrix_world)
     allv.append(co.reshape(-1, 3) @ M[:3, :3].T + M[:3, 3])
 V = np.vstack(allv)
+
+# YAW ALIGNMENT (found 2026-07-30 on lexus-lm-hybrid-w5-v1). Everything below
+# assumes the car's length lies on X or Y. A model parked at an angle breaks
+# that silently: the bounding box becomes the DIAGONAL footprint, so the width
+# is inflated and its faces are not the car's faces. The LM sits 19.8 deg off
+# axis - bbox width 12.18 against a true width of 8.31, a 46% error - and its
+# plate came out oversized and floating beside the bumper. The Fiat 500L is
+# 8.9 deg off. The three cars whose plates were already right (Ferrari, Lexus
+# RC, Tivoli) are all within 0.5 deg. So: measure and place in the car's own
+# frame, then rotate the finished plate quads back.
+_P = V[:, :2] - V[:, :2].mean(0)
+_S = _P if len(_P) <= 200000 else _P[np.random.default_rng(0).choice(len(_P), 200000, replace=False)]
+_ev, _evec = np.linalg.eigh(np.cov(_S.T))
+_main = _evec[:, np.argmax(_ev)]
+YAW_C, YAW_S = float(_main[0]), float(_main[1])          # cos, sin of the yaw
+# R maps the car's length onto +X; R_inv puts the plate quads back
+R = np.array([[YAW_C, YAW_S, 0.0], [-YAW_S, YAW_C, 0.0], [0.0, 0.0, 1.0]])
+R_INV = R.T
+PIVOT = np.array([V[:, 0].mean(), V[:, 1].mean(), 0.0])
+V = (V - PIVOT) @ R.T + PIVOT
+
 lo, hi = V.min(0), V.max(0)
 size = hi - lo
 ctr = (lo + hi) / 2
@@ -72,28 +93,27 @@ for _o in [o for o in bpy.context.scene.objects
            if o.name.startswith(("plate_front", "plate_rear"))]:
     bpy.data.objects.remove(_o, do_unlink=True)
 
-def body_width_at(zc, half):
-    """Width of the car at plate height. Sizing a plate off the FULL car width
-    includes the door mirrors, which sit well outboard of the bumper: on
-    lexus-lm-hybrid-w5-v1 that produced a plate 29% of an over-mirror width,
-    visibly larger than the plate recess the model was built with, and on
-    fiat-500l-v1 it reached 33% of body width. At bumper height the mirrors are
-    out of the band, so this is the honest reference."""
-    band = V[(V[:, 2] >= zc - half) & (V[:, 2] <= zc + half)]
+def body_width():
+    """The car's width across the BODY. Sizing off the full bounding box picks
+    up the door mirrors and makes the plate too big; sizing off a thin slice at
+    plate height picks up a tapered bumper and makes it too small (the Lexus LM
+    came out at 23% of body). Mirrors live high, so take the widest point in the
+    band between 15% and 50% of car height — sills, doors and bumpers, no
+    mirrors."""
+    band = V[(V[:, 2] >= gz + 0.15 * H) & (V[:, 2] <= gz + 0.50 * H)]
     if len(band) < 200:
         return Wd
-    b_lo, b_hi = np.percentile(band[:, WA], 0.5), np.percentile(band[:, WA], 99.5)
-    bw = float(b_hi - b_lo)
-    # never trust a band narrower than half the car - that means the slice
-    # caught a spoiler or an air intake rather than the bumper
+    bw = float(np.percentile(band[:, WA], 99.5) - np.percentile(band[:, WA], 0.5))
     return bw if bw > 0.5 * Wd else Wd
 
 
+BW = body_width()
+PW = (0.52 / 1.80 * BW) / 2                # half-width of a 520mm plate
+PH = PW * 111 / 520
+
+
 def plate_half_dims(zc):
-    guess = (0.52 / 1.80 * Wd) / 2         # first pass, to give the band a height
-    bw = body_width_at(zc, guess * 111 / 520)
-    pw = (0.52 / 1.80 * bw) / 2            # half-width of a 520mm plate
-    return pw, pw * 111 / 520
+    return PW, PH
 
 
 def bumper_face(end_val, zc, pw, ph):
@@ -125,17 +145,28 @@ def add_plate(name, img, end_val, zc):
     bm = bmesh.new()
 
     def V4(dw, dz):
-        p = [0.0, 0.0, 0.0]
+        p = np.zeros(3)
         p[LA] = Lc
         p[WA] = Wc + dw
         p[2] = zc + dz
-        return bm.verts.new(p)
-    vs = [V4(-pw, -ph), V4(-pw, ph), V4(pw, ph), V4(pw, -ph)]
+        # back out of the yaw-aligned frame into world space
+        p = (p - PIVOT) @ R_INV.T + PIVOT
+        return bm.verts.new(p.tolist())
+    # Which way is "right" for someone standing in front of the plate? Derive it
+    # from the outward normal instead of assuming an axis pairing. The old code
+    # keyed the UVs off `outward` alone, which is only correct while LA==1; once
+    # yaw alignment started producing LA==0 the plates came out mirrored, blue
+    # band on the right and GB reversed (seen 2026-07-30 on the Ferrari and Fiat).
+    # Viewer at +o looking back along -o with up +Z has right = Z x o, which
+    # reduces to +WA for LA==0 and -WA for LA==1, times outward.
+    right = outward * (1.0 if LA == 0 else -1.0)
+    vs = [V4(-right * pw, -ph), V4(-right * pw, ph),
+          V4(right * pw, ph), V4(right * pw, -ph)]
     f = bm.faces.new(vs)
     uvl = bm.loops.layers.uv.new("UVMap")
-    uvs = [(1, 0), (1, 1), (0, 1), (0, 0)] if outward > 0 \
-        else [(0, 0), (0, 1), (1, 1), (1, 0)]
-    for lp, uv in zip(f.loops, uvs):
+    # u runs 0 -> 1 left to right as seen from outside, so the GB band at u=0
+    # lands on the viewer's left, where a UK plate carries it
+    for lp, uv in zip(f.loops, [(0, 0), (0, 1), (1, 1), (1, 0)]):
         lp[uvl].uv = uv
     bm.to_mesh(me)
     bm.free()
@@ -151,4 +182,7 @@ bpy.ops.object.select_all(action="SELECT")
 bpy.ops.export_scene.gltf(filepath=DST, export_format="GLB", export_apply=True,
                           export_yup=True, export_normals=True,
                           export_materials="EXPORT")
-print(f"PLATES_GENERIC_OK front_end={front_end:.2f} rear_end={rear_end:.2f} LA={LA}")
+_yaw = np.degrees(np.arctan2(YAW_S, YAW_C)) % 180.0
+print(f"PLATES_GENERIC_OK front_end={front_end:.2f} rear_end={rear_end:.2f} LA={LA} "
+      f"yaw={_yaw:.2f}deg bbox_w={float(hi[WA] - lo[WA]):.3f} body_w={BW:.3f} "
+      f"plate_w={2 * PW:.3f} ({100 * 2 * PW / BW:.1f}% of body)")
