@@ -117538,19 +117538,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 4632756,
-  "mobileFileSizeBytes": 4632756,
+  "fileSizeBytes": 6118628,
+  "mobileFileSizeBytes": 6118628,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "212e98408e26c7119f42e435137aee8d098259cdce8b63ecbad1b500fcad5293",
+  "contentHash": "bedc18d13eac7b9a77be21654324e5af5d25619db23925de901e42453ae6be85",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -117616,7 +117617,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.3729,
@@ -117695,19 +117696,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 32308020,
-  "mobileFileSizeBytes": 32308020,
+  "fileSizeBytes": 2518484,
+  "mobileFileSizeBytes": 2518484,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "158d88bc6f777ce7be73c486a5b87bb9ff5fb56483ff61b8dfadf0a9115baba9",
+  "contentHash": "660f83040d6ed1fa5b1580a0d14455d3a4bb2e12c5a10699a50630a3daf5097a",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -117781,7 +117783,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.2213,
@@ -117861,19 +117863,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5238508,
-  "mobileFileSizeBytes": 5238508,
+  "fileSizeBytes": 7079388,
+  "mobileFileSizeBytes": 7079388,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "1369c6c89ef2ca5414fa025d3088686b108dcdb7848ca5b2384442e5cd4d3e6d",
+  "contentHash": "c3b2befa4bcdae0ba7b76c7b8afbec92e814cf761700bb1e98421b3a1b9618b7",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -117939,7 +117942,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.3694,
@@ -127507,19 +127510,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 34674400,
-  "mobileFileSizeBytes": 34674400,
+  "fileSizeBytes": 34631636,
+  "mobileFileSizeBytes": 34631636,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "413407715403668d7d2bae1d455b302d5bec78e87cdb0bd10a14eaf7565eb4ca",
+  "contentHash": "84db6e086710ba5853f8ea9379e99b10733a78ce26fd52a425e1897c1df4c377",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 orientation corrective: base + variants re-baked from vertex-baked upright source (armature transforms rendered inconsistently)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -127531,7 +127535,7 @@
   "platesBaked": false,
   "recolourAudit": {
    "status": "pass",
-   "dist": 0.3787,
+   "dist": 0.2929,
    "variantsHash": "d72e0bf08338fedd6973c7618367c9889706c048",
    "method": "render",
    "at": "2026-07-30"
