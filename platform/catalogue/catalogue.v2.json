@@ -117463,5 +117463,1193 @@
    "method": "render",
    "at": "2026-07-29"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "renault-koleos-2008-w7-v1",
+  "make": "renault",
+  "model": "Koleos",
+  "modelFamily": "renault koleos",
+  "modelAliases": [
+   "Koleos"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2008,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2008 Renault Koleos",
+  "sourceUrl": "https://sketchfab.com/3d-models/2008-renault-koleos-044137e8a94145c38c1fc7fa1ad41cf5",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "044137e8a94145c38c1fc7fa1ad41cf5",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Color_E08",
+   "Color_M08",
+   "auto_1",
+   "auto_11",
+   "body1_3",
+   "int_2"
+  ],
+  "glassMaterialNames": [
+   "glass_001",
+   "glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-2008-w7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-2008-w7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4632756,
+  "mobileFileSizeBytes": 4632756,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "212e98408e26c7119f42e435137aee8d098259cdce8b63ecbad1b500fcad5293",
+  "pipelineVersion": "publish-batch-w7-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w7",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Shadow Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Shadow Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacier White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Diamond White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Diamond White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Iron Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Iron Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Flame Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Flame Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Valencia Orange",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Valencia Orange",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-308-2012-w7-v1",
+  "make": "peugeot",
+  "model": "308",
+  "modelFamily": "peugeot 308",
+  "modelAliases": [
+   "308"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2012,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Peugeot 308 SW 2012",
+  "sourceUrl": "https://sketchfab.com/3d-models/peugeot-308-sw-2012-0d29517f84ef41168a00304bcb8c2db5",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "0d29517f84ef41168a00304bcb8c2db5",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "greenglass",
+   "clearglass",
+   "redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2012-w7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2012-w7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 32308020,
+  "mobileFileSizeBytes": 32308020,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "158d88bc6f777ce7be73c486a5b87bb9ff5fb56483ff61b8dfadf0a9115baba9",
+  "pipelineVersion": "publish-batch-w7-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w7",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "renault-austral-2022-w7-v1",
+  "make": "renault",
+  "model": "Austral",
+  "modelFamily": "renault austral",
+  "modelAliases": [
+   "Austral"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2022 Renault Austral",
+  "sourceUrl": "https://sketchfab.com/3d-models/2022-renault-austral-0e25e7fc073444ea9485f1fae903a0db",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "0e25e7fc073444ea9485f1fae903a0db",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Meshpart38Mtl",
+   "auto_1",
+   "auto_3",
+   "auto_6"
+  ],
+  "glassMaterialNames": [
+   "Meshpart42Mtl"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-austral-2022-w7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-austral-2022-w7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 5238508,
+  "mobileFileSizeBytes": 5238508,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "1369c6c89ef2ca5414fa025d3088686b108dcdb7848ca5b2384442e5cd4d3e6d",
+  "pipelineVersion": "publish-batch-w7-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w7",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Shadow Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Shadow Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacier White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Diamond White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Diamond White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Iron Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Iron Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Flame Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Flame Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Valencia Orange",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Valencia Orange",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "renault-m-gane-grand-tour-2006-w7-v1",
+  "make": "renault",
+  "model": "Mégane Grand Tour",
+  "modelFamily": "renault mégane grand tour",
+  "modelAliases": [
+   "Mégane Grand Tour"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2006,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2006 Renault Mégane Grand Tour",
+  "sourceUrl": "https://sketchfab.com/3d-models/2006-renault-megane-grand-tour-0e5443d16a374c349e54f29acdcd7b8f",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "0e5443d16a374c349e54f29acdcd7b8f",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura",
+   "Carro_Pintura_1"
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros2",
+   "Carro_Vidro_Vermelho2"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-m-gane-grand-tour-2006-w7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-m-gane-grand-tour-2006-w7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 17752756,
+  "mobileFileSizeBytes": 17752756,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "92b9fd839baa79d2f6f6355a040c0464eac28c18121dd7f11251f9a2acb110ca",
+  "pipelineVersion": "publish-batch-w7-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w7",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Shadow Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Shadow Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacier White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Diamond White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Diamond White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Iron Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Iron Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Flame Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Flame Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Valencia Orange",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Valencia Orange",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mitsubishi-eclipse-cross-w7-v1",
+  "make": "mitsubishi",
+  "model": "Eclipse Cross",
+  "modelFamily": "mitsubishi eclipse cross",
+  "modelAliases": [
+   "Eclipse Cross"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Mitsubishi Eclipse Cross Facelift",
+  "sourceUrl": "https://sketchfab.com/3d-models/mitsubishi-eclipse-cross-facelift-0e8fa443b40b42f1a9f728430d26736f",
+  "sourceCreator": "Nieve5677",
+  "sourceReferenceId": "0e8fa443b40b42f1a9f728430d26736f",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "glass",
+   "r_glass",
+   "o_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-eclipse-cross-w7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-eclipse-cross-w7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6786604,
+  "mobileFileSizeBytes": 6786604,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "9c2723520d44a526fc03248cf5cb600ee146e73fe6afb61dad2f9d050148e584",
+  "pipelineVersion": "publish-batch-w7-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w7",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Jet Black Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "White Diamond",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "White Diamond",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Sterling Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sterling Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lightning Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lightning Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Red Diamond",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Red Diamond",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "lexus-rx450h-2023-w7-v1",
+  "make": "lexus",
+  "model": "RX450h",
+  "modelFamily": "lexus rx450h",
+  "modelAliases": [
+   "RX450h"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2023 Lexus RX450h",
+  "sourceUrl": "https://sketchfab.com/3d-models/2023-lexus-rx450h-13ddc257995b4e3fa6be35af690251c8",
+  "sourceCreator": "tonielpro520",
+  "sourceReferenceId": "13ddc257995b4e3fa6be35af690251c8",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "M_2023_Lexus_RX450h__BOTTOMPARTATION",
+   "M_2023_Lexus_RX450h__CERAMIC",
+   "M_2023_Lexus_RX450h__E_Matt_Black_Plastic",
+   "M_2023_Lexus_RX450h__E_Shiny_Black_Plastic",
+   "M_2023_Lexus_RX450h__Sonic_Silver",
+   "M_2023_Lexus_RX450h__VC_FA3"
+  ],
+  "glassMaterialNames": [
+   "M_2023_Lexus_RX450h__Windows",
+   "M_2023_Lexus_RX450h__CLEARGLASS"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rx450h-2023-w7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rx450h-2023-w7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6413880,
+  "mobileFileSizeBytes": 6413880,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "0f7ea5c3b96c8c58537ef18ff65b01ef5c2392c1a424f2494f495ff8afde0c34",
+  "pipelineVersion": "publish-batch-w7-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w7",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Titanium",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sonic Titanium",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mercury Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mercury Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Graphite Black",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Black",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Sonic White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Sonic Silver",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sonic Silver",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Celestial Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Celestial Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Mesa Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mesa Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Terrane Khaki",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Terrane Khaki",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "skoda-octavia-w7-v1",
+  "make": "skoda",
+  "model": "Octavia",
+  "modelFamily": "skoda octavia",
+  "modelAliases": [
+   "Octavia"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "RS"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Skoda Octavia (MK4) RS",
+  "sourceUrl": "https://sketchfab.com/3d-models/skoda-octavia-mk4-rs-146db6aa7d7541b49c7f6f7e2253e18c",
+  "sourceCreator": "DR1KING100K",
+  "sourceReferenceId": "146db6aa7d7541b49c7f6f7e2253e18c",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Material_105EE",
+   "int_repro_2",
+   "int_roof_console_plastic",
+   "int_roof_console_plastic_3",
+   "int_roof_console_plastic_6",
+   "plastic_smooth_int_0",
+   "plastic_smooth_int_2",
+   "sw_details_frame45",
+   "sw_details_frame45_1"
+  ],
+  "glassMaterialNames": [
+   "ext_glass_8"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6793284,
+  "mobileFileSizeBytes": 6793284,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "04bae78cbd760e7c24e8ebacd957ae86de0651a0126a6c591dc69831d414cfef",
+  "pipelineVersion": "publish-batch-w7-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'DR1KING100K'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w7",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Steel Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Steel Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Magic Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Black Magic Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Moon White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moon White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Brilliant Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brilliant Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Race Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Race Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Energy Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Energy Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Velvet Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Velvet Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mamba Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mamba Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-velar-2018-w7-v1",
+  "make": "land-rover",
+  "model": "Range Rover Velar",
+  "modelFamily": "land rover range rover velar",
+  "modelAliases": [
+   "Range Rover Velar"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2018,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "Land-Rover_Range_Rover_Velar_First_edition_2018",
+  "sourceUrl": "https://sketchfab.com/3d-models/land-rover-range-rover-velar-first-edition-2018-15f96fe8f85f46dba4dcd31d72a7340e",
+  "sourceCreator": "Kapi9526",
+  "sourceReferenceId": "15f96fe8f85f46dba4dcd31d72a7340e",
+  "sourceRetrievedAt": "2026-07-30",
+  "sourceEvidenceUrl": null,
+  "licence": "CC-BY (attribution required)",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "darkglass",
+   "clearglass",
+   "orangeglass",
+   "redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-2018-w7-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-2018-w7-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 14312392,
+  "mobileFileSizeBytes": 14312392,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "bd5103787f93d9d05bb416045d9b6c6e7c28a73e7c203be9138f27e4653cefa5",
+  "pipelineVersion": "publish-batch-w7-2026-07-30",
+  "publishedAt": "2026-07-30",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Kapi9526'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-w7",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
