@@ -127055,19 +127055,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 41267144,
-  "mobileFileSizeBytes": 41267144,
+  "fileSizeBytes": 4383012,
+  "mobileFileSizeBytes": 4383012,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "3d13b093d0a78a88e25c11cd59872da482d38de2aa9185c1c90534f7646c2f62",
+  "contentHash": "141a2d3d4c24de69f3e8091bc4a5046c61babe0a735a55d76763eda622178702",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -127157,7 +127158,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.2851,
@@ -127237,19 +127238,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 38109820,
-  "mobileFileSizeBytes": 38109820,
+  "fileSizeBytes": 4595916,
+  "mobileFileSizeBytes": 4595916,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "869af5d876666d8350a6b9a6faebac799fd8b7937ded43a4d6531faea0dd429e",
+  "contentHash": "8ed34c5a131fc66267c16e683e340e6e1667f8f17c4068c8cacfd819783e10b8",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -127331,7 +127333,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.2758,
@@ -127409,19 +127411,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 43072248,
-  "mobileFileSizeBytes": 43072248,
+  "fileSizeBytes": 3202500,
+  "mobileFileSizeBytes": 3202500,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "8eefa6769228e7c87f600db0823a06d4e8534d2d8b2a6bcab6dabba2d4a9aca8",
+  "contentHash": "c2f0c26db604a6163ea88851b436d6499565b573991070c194343e4af0cf9114",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'saidiishaq4'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'saidiishaq4'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -127487,7 +127490,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.3152,
@@ -127567,20 +127570,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 34631636,
-  "mobileFileSizeBytes": 34631636,
+  "fileSizeBytes": 3429416,
+  "mobileFileSizeBytes": 3429416,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "84db6e086710ba5853f8ea9379e99b10733a78ce26fd52a425e1897c1df4c377",
+  "contentHash": "659df02f03b342322ff413c54abe8ff0bfa99c6f068f89d879c967efb5626158",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w7 orientation corrective: base + variants re-baked from vertex-baked upright source (armature transforms rendered inconsistently)"
+   "w7 orientation corrective: base + variants re-baked from vertex-baked upright source (armature transforms rendered inconsistently)",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -127589,7 +127593,7 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.2929,
@@ -127669,19 +127673,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 34562552,
-  "mobileFileSizeBytes": 34562552,
+  "fileSizeBytes": 3405840,
+  "mobileFileSizeBytes": 3405840,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "2a989f8506e70efd9b9754b281b66f8f34827dae6b53452a7182485596d18480",
+  "contentHash": "57cf9f849817051ab96511e099589910a7faf7e05a51f9ecc203c14d929f82d8",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'RES1N'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'RES1N'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -127690,7 +127695,7 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.2958,
@@ -127769,19 +127774,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 33881320,
-  "mobileFileSizeBytes": 33881320,
+  "fileSizeBytes": 3102080,
+  "mobileFileSizeBytes": 3102080,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "4b441699f59a9b3f52fb035117b2cd8c1f3f4faf584ea741205df9aada351edf",
+  "contentHash": "4d0384e7f396036aad619f7de6567d9b664afc4a2154f26a541596d5fc13f25a",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -127855,7 +127861,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.2287,
@@ -127933,19 +127939,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 43206900,
-  "mobileFileSizeBytes": 43206900,
+  "fileSizeBytes": 3225664,
+  "mobileFileSizeBytes": 3225664,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "78ecb539ecf647529b97e2b5173ca18866e286592ceb536efab607913e111027",
+  "contentHash": "6014669236fb67cee56e1cdc4e0b5d7eaffc232739246e6f19d4f4f986605315",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'saidiishaq4'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'saidiishaq4'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -128011,7 +128018,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.3302,
@@ -128090,19 +128097,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 27739436,
-  "mobileFileSizeBytes": 27739436,
+  "fileSizeBytes": 2411456,
+  "mobileFileSizeBytes": 2411456,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "b377e433aa57f759630203ac0bbd14bda12db0924877a9d6f3c2773287eecb26",
+  "contentHash": "bcceb8eb056af00d7df46fb2228ac06b6874f9ff3177e2b3e782f1010da0a6da",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -128176,7 +128184,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.2781,
