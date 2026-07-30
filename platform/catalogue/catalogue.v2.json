@@ -1276,8 +1276,8 @@
  {
   "schemaVersion": 2,
   "assetId": "subaru-impreza-x-2010-2012-v1",
-  "make": "subaru",
-  "model": "impreza",
+  "make": "Subaru",
+  "model": "Impreza",
   "modelFamily": "impreza",
   "modelAliases": [],
   "generation": null,
@@ -1285,7 +1285,7 @@
   "generationConfirmed": false,
   "yearStart": 2010,
   "yearEnd": 2012,
-  "bodyStyle": null,
+  "bodyStyle": "hatchback",
   "compatibleFuelTypes": [
    "hybrid",
    "petrol"
@@ -1319,8 +1319,8 @@
   "glassMaterialNames": [
    "wrxM_LightGlassNormal_Clear_Low1"
   ],
-  "defaultColourFamily": "silver",
-  "renderColourLabel": "Silver",
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Blue",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Ice Silver Metallic",
@@ -1348,7 +1348,9 @@
   "notes": [
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "recolour-gate demote -> single-neutral (render sweep dist below threshold)"
+   "recolour-gate demote -> single-neutral (render sweep dist below threshold)",
+   "trim=WRX STI per source title, not otherwise verified",
+   "colour 'Blue' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": true,
@@ -1474,13 +1476,14 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "trim": "WRX STI"
  },
  {
   "schemaVersion": 2,
   "assetId": "bentley-continental-x-undated-v1",
-  "make": "bentley",
-  "model": "continental",
+  "make": "Bentley",
+  "model": "Continental",
   "modelFamily": "continental",
   "modelAliases": [],
   "generation": null,
@@ -1488,7 +1491,7 @@
   "generationConfirmed": false,
   "yearStart": 2003,
   "yearEnd": 2026,
-  "bodyStyle": null,
+  "bodyStyle": "coupe",
   "compatibleFuelTypes": [
    "petrol"
   ],
@@ -1528,8 +1531,8 @@
    "Meshesmeshes1windscreenok0041Mtl",
    "Meshesmeshes1windscreenok1Mtl"
   ],
-  "defaultColourFamily": "silver",
-  "renderColourLabel": "Silver",
+  "defaultColourFamily": "green",
+  "renderColourLabel": "Green",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Moonbeam",
@@ -1558,7 +1561,9 @@
   "notes": [
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "recolour-gate demote -> single-neutral (render sweep dist below threshold)"
+   "recolour-gate demote -> single-neutral (render sweep dist below threshold)",
+   "trim=GT V8 per source title, not otherwise verified",
+   "colour 'Green' measured from the served render 2026-07-30"
   ],
   "customization": {
    "colourOptions": [
@@ -1680,7 +1685,8 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "trim": "GT V8"
  },
  {
   "schemaVersion": 2,
@@ -19905,8 +19911,8 @@
  {
   "schemaVersion": 2,
   "assetId": "suzuki-alto-2020-v1",
-  "make": "suzuki",
-  "model": "alto",
+  "make": "Suzuki",
+  "model": "Alto",
   "modelFamily": "alto",
   "modelAliases": [
    "alto"
@@ -19952,8 +19958,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "silver",
-  "renderColourLabel": "Silver",
+  "defaultColourFamily": "red",
+  "renderColourLabel": "Red",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -19982,7 +19988,9 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 633954, \"facesAfter\": 152841, \"ratio\": 0.237}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "recolour-gate demote -> single-neutral (render sweep dist below threshold)"
+   "recolour-gate demote -> single-neutral (render sweep dist below threshold)",
+   "trim=800 per source title, not otherwise verified",
+   "colour 'Red' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": false,
@@ -20117,7 +20125,8 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "trim": "800"
  },
  {
   "schemaVersion": 2,
@@ -28837,8 +28846,8 @@
  {
   "schemaVersion": 2,
   "assetId": "audi-a7-2018-v1",
-  "make": "audi",
-  "model": "a7",
+  "make": "Audi",
+  "model": "A7",
   "modelFamily": "a7",
   "modelAliases": [
    "a7",
@@ -28890,8 +28899,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "silver",
-  "renderColourLabel": "Silver",
+  "defaultColourFamily": "black",
+  "renderColourLabel": "Black",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -28920,7 +28929,9 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1284283, \"facesAfter\": 188241, \"ratio\": 0.117}",
    "2026-07-21 m0 salvage: worker auto-detect missed body material; set paintMaterialNames=['Car_paint.007'] explicitly (real body-paint material present in GLB). Re-baking 8 DVLA colours.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "recolour-gate demote -> single-neutral (render sweep dist below threshold)"
+   "recolour-gate demote -> single-neutral (render sweep dist below threshold)",
+   "trim=55 TFSI per source title, not otherwise verified",
+   "colour 'Black' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": false,
@@ -29048,7 +29059,8 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": null
+  "oemPaintFinish": null,
+  "trim": "55 TFSI"
  },
  {
   "schemaVersion": 2,
@@ -46140,8 +46152,8 @@
  {
   "schemaVersion": 2,
   "assetId": "skoda-superb-v1",
-  "make": "skoda",
-  "model": "superb",
+  "make": "Skoda",
+  "model": "Superb",
   "modelFamily": "superb",
   "modelAliases": [
    "superb"
@@ -46190,8 +46202,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "grey",
-  "renderColourLabel": "Grey",
+  "defaultColourFamily": "brown",
+  "renderColourLabel": "Brown",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Graphite Grey Metallic",
@@ -46218,7 +46230,9 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model b41979349dc14884906ac8e6c7b51bd9 (2020 Skoda Superb TSI 380), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'grey' set from hero; fabricated OEM label removed (honest neutral label).",
-   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'skoda'"
+   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'skoda'",
+   "trim=TSI 380 per source title, not otherwise verified",
+   "colour 'Brown' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": true,
@@ -46360,7 +46374,8 @@
    }
   },
   "defaultDvlaColour": "Grey",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "trim": "TSI 380"
  },
  {
   "schemaVersion": 2,
@@ -54814,13 +54829,13 @@
  {
   "schemaVersion": 2,
   "assetId": "lexus-rc-v1",
-  "make": "lexus",
-  "model": "rc",
+  "make": "Lexus",
+  "model": "RC",
   "modelFamily": "rc",
   "modelAliases": [
    "rc"
   ],
-  "generation": null,
+  "generation": "USC10",
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 2015,
@@ -54857,8 +54872,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "silver",
-  "renderColourLabel": "Silver",
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Blue",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": "Sonic Silver",
@@ -54886,7 +54901,10 @@
    "2026-07-20 NEW from CSV library-fill: CC-BY model 2cb8265d1ce84bc4a3145ce641c1435f (Lexus RC F (USC10)), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "recolour-gate demote -> single-neutral (render sweep dist below threshold)",
-   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'lexus'"
+   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'lexus'",
+   "generation=USC10 per source title, not otherwise verified",
+   "trim=F per source title, not otherwise verified",
+   "colour 'Blue' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": true,
@@ -55020,7 +55038,8 @@
    }
   },
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "trim": "F"
  },
  {
   "schemaVersion": 2,
@@ -55239,8 +55258,8 @@
  {
   "schemaVersion": 2,
   "assetId": "lexus-ct-v1",
-  "make": "lexus",
-  "model": "ct",
+  "make": "Lexus",
+  "model": "CT",
   "modelFamily": "ct",
   "modelAliases": [
    "ct",
@@ -55283,7 +55302,7 @@
   "paintMaterialNames": [],
   "glassMaterialNames": [],
   "defaultColourFamily": "white",
-  "renderColourLabel": "Studio White",
+  "renderColourLabel": "White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -55310,7 +55329,9 @@
    "2026-07-21 m0 salvage: worker auto-detect missed body material; set paintMaterialNames=['carpaint.261'] explicitly (real body-paint material present in GLB). Re-baking 8 DVLA colours.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "2026-07-21 m0 salvage FAILED: visible body panel is texture-driven (base-colour respray of every material — carpaint.261, Material__1-4.114, blue/black/chrome — left body white). Cannot recolour with current bake tooling. Reverted to single neutral (white) finish; flagged for material-separated re-source.",
-   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'lexus'"
+   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'lexus'",
+   "trim=200h per source title, not otherwise verified",
+   "colour 'White' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": true,
@@ -55385,7 +55406,8 @@
    ]
   },
   "platesBaked": true,
-  "colourVariantPaints": {}
+  "colourVariantPaints": {},
+  "trim": "200h"
  },
  {
   "schemaVersion": 2,
@@ -81897,7 +81919,7 @@
  {
   "schemaVersion": 2,
   "assetId": "ferrari-f8-v1",
-  "make": "ferrari",
+  "make": "Ferrari",
   "model": "F8",
   "modelFamily": "F8",
   "modelAliases": [
@@ -81941,7 +81963,7 @@
   "paintMaterialNames": [],
   "glassMaterialNames": [],
   "defaultColourFamily": "white",
-  "renderColourLabel": "Studio White",
+  "renderColourLabel": "White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -81968,7 +81990,9 @@
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'ferrari'"
+   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'ferrari'",
+   "trim=Tributo per source title, not otherwise verified",
+   "colour 'White' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": true,
@@ -82045,7 +82069,8 @@
   "platesBaked": true,
   "colourVariantPaints": {},
   "defaultDvlaColour": "Silver",
-  "oemPaintFinish": "Metallic"
+  "oemPaintFinish": "Metallic",
+  "trim": "Tributo"
  },
  {
   "schemaVersion": 2,
@@ -82727,7 +82752,7 @@
  {
   "schemaVersion": 2,
   "assetId": "rolls-royce-ghost-v1",
-  "make": "rolls-royce",
+  "make": "Rolls-Royce",
   "model": "Ghost",
   "modelFamily": "Ghost",
   "modelAliases": [
@@ -82769,8 +82794,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "silver",
-  "renderColourLabel": "Studio Silver",
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -82797,7 +82822,8 @@
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; 'rolls royce' absent from oem_paint_db so options cleared (families still served via colourVariants)"
+   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; 'rolls royce' absent from oem_paint_db so options cleared (families still served via colourVariants)",
+   "colour 'White' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": true,
@@ -86027,7 +86053,7 @@
  {
   "schemaVersion": 2,
   "assetId": "alpine-a110-v1",
-  "make": "ALPINE",
+  "make": "Alpine",
   "model": "A110",
   "modelFamily": "A110",
   "modelAliases": [],
@@ -86067,8 +86093,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "silver",
-  "renderColourLabel": "Studio Silver",
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Grey",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -86094,7 +86120,8 @@
    "2026-07-20 NEW from CSV library-fill: CC-BY model 71ba4baa3fa44cec9b1602f94079298e (Renault Alpine A110), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "2026-07-21 shipped SINGLE-NEUTRAL silver: body material shares generic Metal/Plaster names with wheel spokes, so DVLA colour-swap would tint rims (non-stock look). Serve one clean stock finish instead.",
-   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; 'alpine' absent from oem_paint_db so options cleared (families still served via colourVariants)"
+   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; 'alpine' absent from oem_paint_db so options cleared (families still served via colourVariants)",
+   "colour 'Grey' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": true,
@@ -87618,8 +87645,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "owner review 2026-07-30 — wheels missing from the model, empty arches front and rear",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -88178,7 +88205,7 @@
  {
   "schemaVersion": 2,
   "assetId": "ssangyong-tivoli-v1",
-  "make": "SSANGYONG",
+  "make": "SsangYong",
   "model": "Tivoli",
   "modelFamily": "Tivoli",
   "modelAliases": [],
@@ -88231,13 +88258,13 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/SSANGYONG/ssangyong-tivoli-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 5155516,
-  "mobileFileSizeBytes": 5155516,
+  "fileSizeBytes": 6745040,
+  "mobileFileSizeBytes": 6745040,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": null,
+  "contentHash": "d272113201658da5a73b63dc70089a370c63b9c83ff7ff72619288e0991f472f",
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
@@ -88248,7 +88275,9 @@
    "2026-07-20 NEW from CSV library-fill: CC-BY model 805ee9bb23fc4a869b3490e17ec06ec3 (2015 Ssangyong Tivoli), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "recolour-gate demote -> single-neutral (render sweep dist below threshold)",
-   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; 'ssangyong' absent from oem_paint_db so options cleared (families still served via colourVariants)"
+   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; 'ssangyong' absent from oem_paint_db so options cleared (families still served via colourVariants)",
+   "plates re-baked 2026-07-30: GB front/rear added; the previous platesBaked=true was wrong, the GLB had no plate mesh",
+   "colour 'White' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": true,
@@ -90020,8 +90049,8 @@
   "supportsOpenableParts": false,
   "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": "grey",
-  "renderColourLabel": "Studio Grey",
+  "defaultColourFamily": "beige",
+  "renderColourLabel": "Beige",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -90032,13 +90061,13 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/Fiat/fiat-500l-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 734808,
-  "mobileFileSizeBytes": 734808,
+  "fileSizeBytes": 734420,
+  "mobileFileSizeBytes": 734420,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": null,
+  "contentHash": "a875ae2e6758645f2657333e03e941f6b53b50262ecc1fe8b6d758c88acd7e5e",
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
@@ -90046,7 +90075,9 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 22142721f156425da89a29d4ac145f8c (2017 Fiat 500L (Remastered)), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "autofill: single-neutral (texture-driven body or no isolable paint material)",
-   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'fiat'"
+   "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'fiat'",
+   "plates re-baked 2026-07-30: GB front/rear added; the previous platesBaked=true was wrong, the GLB had no plate mesh",
+   "colour 'Beige' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": true,
@@ -95893,8 +95924,8 @@
  {
   "schemaVersion": 2,
   "assetId": "lexus-lm-hybrid-w5-v1",
-  "make": "lexus",
-  "model": "LM Hybrid",
+  "make": "Lexus",
+  "model": "LM",
   "modelFamily": "lm hybrid",
   "modelAliases": [
    "LM Hybrid"
@@ -95937,8 +95968,8 @@
    "Body11Mtl"
   ],
   "glassMaterialNames": [],
-  "defaultColourFamily": null,
-  "renderColourLabel": null,
+  "defaultColourFamily": "black",
+  "renderColourLabel": "Black",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -95949,13 +95980,13 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": null,
-  "mobileFileSizeBytes": 1057120,
+  "fileSizeBytes": 5743336,
+  "mobileFileSizeBytes": 5743336,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": null,
+  "contentHash": "ff2c8b0cebb7407947ee86870f67b82dd92a873adc459c088b31f093df7d7b75",
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
@@ -95966,7 +95997,9 @@
    "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)",
    "owner visual review 2026-07-29: approved in one-by-one render pass (55-car pack)",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'lexus'",
-   "recolour audit 2026-07-29: FAIL dist=0.058 (body colour does not move between red/blue variants — wrong paint material pick); demoted to single-neutral per gate rule, variants withdrawn until re-baked with correct body material"
+   "recolour audit 2026-07-29: FAIL dist=0.058 (body colour does not move between red/blue variants — wrong paint material pick); demoted to single-neutral per gate rule, variants withdrawn until re-baked with correct body material",
+   "plates re-baked 2026-07-30: GB front/rear added; the previous platesBaked=true was wrong, the GLB had no plate mesh",
+   "colour 'Black' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": true,
@@ -112308,7 +112341,7 @@
  {
   "schemaVersion": 2,
   "assetId": "genesis-g70-w6-v2",
-  "make": "genesis",
+  "make": "Genesis",
   "model": "G70",
   "modelFamily": "genesis g70",
   "modelAliases": [
@@ -112319,7 +112352,7 @@
   "generationConfirmed": false,
   "yearStart": null,
   "yearEnd": null,
-  "bodyStyle": null,
+  "bodyStyle": "saloon",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
@@ -112360,8 +112393,8 @@
    "window_glass1",
    "window_glass"
   ],
-  "defaultColourFamily": null,
-  "renderColourLabel": null,
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -112387,7 +112420,8 @@
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Lucas.Karlsmoen'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
    "recolour audit 2026-07-29: FAIL dist=0.067 - variants withdrawn, single-neutral",
-   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "colour 'White' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": false,
@@ -115084,7 +115118,7 @@
  {
   "schemaVersion": 2,
   "assetId": "lexus-ls-w6-v1",
-  "make": "lexus",
+  "make": "Lexus",
   "model": "LS",
   "modelFamily": "lexus ls",
   "modelAliases": [
@@ -115095,7 +115129,7 @@
   "generationConfirmed": false,
   "yearStart": null,
   "yearEnd": null,
-  "bodyStyle": null,
+  "bodyStyle": "saloon",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
@@ -115130,8 +115164,8 @@
    "glass_rearlight",
    "Material.037"
   ],
-  "defaultColourFamily": null,
-  "renderColourLabel": null,
+  "defaultColourFamily": "white",
+  "renderColourLabel": "White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -115157,7 +115191,9 @@
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'SeKali'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
    "recolour audit 2026-07-29: FAIL dist=0.000 - variants withdrawn, single-neutral",
-   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "trim=F Sport per source title, not otherwise verified",
+   "colour 'White' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": false,
@@ -115238,7 +115274,8 @@
    "variantsHash": "616064693dd515809c22a376e995184afbd9bdea",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "trim": "F Sport"
  },
  {
   "schemaVersion": 2,
@@ -116384,7 +116421,7 @@
  {
   "schemaVersion": 2,
   "assetId": "nissan-micra-w6-v1",
-  "make": "nissan",
+  "make": "Nissan",
   "model": "Micra",
   "modelFamily": "nissan micra",
   "modelAliases": [
@@ -116395,7 +116432,7 @@
   "generationConfirmed": false,
   "yearStart": null,
   "yearEnd": null,
-  "bodyStyle": null,
+  "bodyStyle": "hatchback",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
@@ -116437,8 +116474,8 @@
    "glass",
    "glass.001"
   ],
-  "defaultColourFamily": null,
-  "renderColourLabel": null,
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Blue",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -116464,7 +116501,8 @@
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'BHP3D'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
    "recolour audit 2026-07-29: FAIL dist=0.075 - variants withdrawn, single-neutral",
-   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "colour 'Blue' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": false,
@@ -118495,18 +118533,18 @@
  {
   "schemaVersion": 2,
   "assetId": "skoda-octavia-w7-v1",
-  "make": "skoda",
+  "make": "Skoda",
   "model": "Octavia",
   "modelFamily": "skoda octavia",
   "modelAliases": [
    "Octavia"
   ],
-  "generation": null,
+  "generation": "MK4",
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": null,
   "yearEnd": null,
-  "bodyStyle": null,
+  "bodyStyle": "hatchback",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [
    "RS"
@@ -118549,8 +118587,8 @@
   "glassMaterialNames": [
    "ext_glass_8"
   ],
-  "defaultColourFamily": null,
-  "renderColourLabel": null,
+  "defaultColourFamily": "grey",
+  "renderColourLabel": "Grey",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -118575,7 +118613,10 @@
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'DR1KING100K'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 variants demoted single-neutral: recolour audit FAIL dist=0.024",
-   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "generation=MK4 per source title, not otherwise verified",
+   "trim=RS per source title, not otherwise verified",
+   "colour 'Grey' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": false,
@@ -118657,7 +118698,8 @@
     }
    ]
   },
-  "platesBaked": true
+  "platesBaked": true,
+  "trim": "RS"
  },
  {
   "schemaVersion": 2,
@@ -123656,7 +123698,7 @@
  {
   "schemaVersion": 2,
   "assetId": "suzuki-swift-2022-w7-v1",
-  "make": "suzuki",
+  "make": "Suzuki",
   "model": "Swift",
   "modelFamily": "suzuki swift",
   "modelAliases": [
@@ -123667,7 +123709,7 @@
   "generationConfirmed": false,
   "yearStart": 2022,
   "yearEnd": null,
-  "bodyStyle": null,
+  "bodyStyle": "saloon",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
@@ -123704,8 +123746,8 @@
    "glass.001",
    "headlight_glass.1"
   ],
-  "defaultColourFamily": null,
-  "renderColourLabel": null,
+  "defaultColourFamily": "blue",
+  "renderColourLabel": "Blue",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
@@ -123730,7 +123772,9 @@
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'BHP3D'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 variants demoted single-neutral: recolour audit FAIL dist=0.008",
-   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
+   "trim=Dzire per source title, not otherwise verified",
+   "colour 'Blue' measured from the served render 2026-07-30"
   ],
   "customization": {
    "configuratorReady": false,
@@ -123739,7 +123783,8 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": true
+  "platesBaked": true,
+  "trim": "Dzire"
  },
  {
   "schemaVersion": 2,
