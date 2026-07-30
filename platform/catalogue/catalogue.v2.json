@@ -22091,13 +22091,13 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/dacia/dacia-logan-v1/iron-blue.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 2796804,
-  "mobileFileSizeBytes": 2796804,
+  "fileSizeBytes": 2978164,
+  "mobileFileSizeBytes": 2978164,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": null,
+  "contentHash": "31be23e76103fad3dfa1a4baf75e4b2968c6616c0d7a41ecb6cc16af8a1bc045",
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-17T21:32:39Z",
   "replacedAssetId": null,
@@ -22107,7 +22107,8 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 910032, \"facesAfter\": 149966, \"ratio\": 0.165}",
    "quarantined 2026-07-19 (audit): Romanian police livery / roof light-bar (source 'Logan Politia'); not a civilian car.",
    "2026-07-20 RE-SOURCED from CSV library-fill: CC-BY model bbc91a59fe444852a95fe9fe4a109cd9 (Dacia Logan), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -22247,7 +22248,8 @@
    "variantsHash": "ea6cafdb34d986cca586349e1c9c802ca0673648",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
@@ -41585,13 +41587,13 @@
   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volvo/volvo-v90-v1/bright-dusk-metallic.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 7359676,
-  "mobileFileSizeBytes": 7359676,
+  "fileSizeBytes": 7110008,
+  "mobileFileSizeBytes": 7110008,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": null,
+  "contentHash": "b45bdc7516f8ecf5d5d2e9bb8821eaa841d77354c7e3c0f9970f2012d9681c87",
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T17:52:06Z",
   "replacedAssetId": null,
@@ -41601,7 +41603,8 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3273670, \"facesAfter\": 151288, \"ratio\": 0.046}",
    "quarantined 2026-07-19 (audit): Geometry is a Volvo S90 saloon, not a V90 estate.",
    "2026-07-20 NEW from CSV library-fill: CC-BY model bf16b64b8c2642d28fcc1817644e1023 (2020 Volvo V90), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
-   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label)."
+   "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -41742,7 +41745,8 @@
    "variantsHash": "d2433214813f741a1ddf4490753cc77fb2105d4a",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "platesBaked": true
  },
  {
   "schemaVersion": 2,
