@@ -637,11 +637,13 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
                         gb.inputs["Coat Weight"].default_value = 0.6
                         gb.inputs["Coat Roughness"].default_value = 0.06
 
-    # auto-upright: a correctly-oriented car has its SMALLEST bbox extent vertical
-    # (height < width < length). Some GLBs are authored tipped (length/width along
-    # world-up) and render lying on their side or standing on the nose. If the
-    # vertical (Blender Z) extent isn't clearly the smallest, rotate the whole
-    # scene 90deg so the smallest extent becomes vertical.
+    # auto-upright, conservative: only rescue the UNAMBIGUOUS wreck — the
+    # vertical extent is clearly the LARGEST, i.e. the car stands on its
+    # nose/tail with its length pointing up. The old rule ("smallest extent
+    # must be vertical") mis-rotated vehicles whose height rightly exceeds
+    # their width — Sprinter-class vans, and cars whose roof aerial inflates
+    # the height — and ingest now uprights staged GLBs, so an already-
+    # horizontal model is trusted as authored.
     ulo = [1e9] * 3
     uhi = [-1e9] * 3
     for o in meshes():
@@ -650,8 +652,7 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
             for i in range(3):
                 ulo[i] = min(ulo[i], wv[i]); uhi[i] = max(uhi[i], wv[i])
     uext = [uhi[i] - ulo[i] for i in range(3)]
-    min_axis = min(range(3), key=lambda i: uext[i])
-    if min_axis != 2 and uext[min_axis] < 0.85 * uext[2]:
+    if uext[2] > 1.25 * max(uext[0], uext[1]):
         import math as _math
 
         def _apply(Rm):
@@ -660,10 +661,20 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
                     o.matrix_world = Rm @ o.matrix_world
             bpy.context.view_layer.update()
 
-        if min_axis == 0:      # X smallest -> rotate about Y so X becomes up
+        # lay the length down (Z -> Y), then if the car landed on its side
+        # (height ended up horizontal on X) roll it upright
+        _apply(mathutils.Matrix.Rotation(_math.radians(90), 4, 'X'))
+        lo2 = [1e9] * 3
+        hi2 = [-1e9] * 3
+        for o in meshes():
+            for cnr in o.bound_box:
+                wv = o.matrix_world @ mathutils.Vector(cnr)
+                for i in range(3):
+                    lo2[i] = min(lo2[i], wv[i]); hi2[i] = max(hi2[i], wv[i])
+        ext2 = [hi2[i] - lo2[i] for i in range(3)]
+        if min(range(3), key=lambda i: ext2[i]) != 2:
             _apply(mathutils.Matrix.Rotation(_math.radians(90), 4, 'Y'))
-        else:                  # Y smallest -> rotate about X so Y becomes up
-            _apply(mathutils.Matrix.Rotation(_math.radians(90), 4, 'X'))
+        uext = ext2  # keep the 180-flip's length-axis pick consistent
 
         # 180deg ambiguity: a car is WIDER at the bottom (body/wheels) than the
         # top (cabin). Sample the widest horizontal span in the top third vs the
