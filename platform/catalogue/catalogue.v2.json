@@ -129174,19 +129174,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 45129420,
-  "mobileFileSizeBytes": 45129420,
+  "fileSizeBytes": 4116816,
+  "mobileFileSizeBytes": 4116816,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "7a70af213780779bae5f5040a494f0bee2cee0ac2476a3d6f74a0aec8da19db9",
+  "contentHash": "bb7f1080458247e69106fd210ccf23b94f31485f7170f4479ee8b221a4fa5965",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'haraldina'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'haraldina'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -129276,7 +129277,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.4707,
