@@ -114097,20 +114097,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 36608480,
-  "mobileFileSizeBytes": 36608480,
+  "fileSizeBytes": 3541796,
+  "mobileFileSizeBytes": 3541796,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "b9860594511f72f9562f2e2b2cab95a3a38ca04238d200fe6af40beb1671e9a7",
+  "contentHash": "9a73ddfbae7b554df53b5ae213ef0a4c72bc5f7e3eee69bbad2e78441bd57def",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -114184,7 +114185,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.327,
@@ -114271,20 +114272,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 11301820,
-  "mobileFileSizeBytes": 11301820,
+  "fileSizeBytes": 1377220,
+  "mobileFileSizeBytes": 1377220,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "64c5ccabbd9f53d77bc998bd955f7c23b134e3b8cfd411b9bcfcc68acadc854c",
+  "contentHash": "38478258c5d532f1195843f940252e8cf6875d6f4c167ad17e2d62b1e85b7dda",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'xnova360'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -114358,7 +114360,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.475,
@@ -114437,20 +114439,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 11680428,
-  "mobileFileSizeBytes": 11680428,
+  "fileSizeBytes": 4294368,
+  "mobileFileSizeBytes": 4294368,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "3edbbd243a617ec7dc485cbde5d83c20b3e3dacf51f299a1c62886986e6755b0",
+  "contentHash": "08c9c30c371cde759a3dee7018545f1aff5bcd40f5f846c749b0548012f9d352",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Ddiaz Design'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -114532,7 +114535,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.419,
@@ -114619,20 +114622,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 22580684,
-  "mobileFileSizeBytes": 22580684,
+  "fileSizeBytes": 3218452,
+  "mobileFileSizeBytes": 3218452,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "495f2d347d171bb4d392ddb95ba286b2d45f905a79966eb60674183a48aa0ea3",
+  "contentHash": "be07f99bfcb0477cdd3af37ad52c78f6685958448217314057e115dd18c291b2",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'David_Holiday'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -114714,7 +114718,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.302,
@@ -114791,20 +114795,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 7413572,
-  "mobileFileSizeBytes": 7413572,
+  "fileSizeBytes": 2988000,
+  "mobileFileSizeBytes": 2988000,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "4e4c241b9fd91e96b7c6cddbc13df04da9544339fa08b6801a383a6f0700c544",
+  "contentHash": "d66c2ffd25d7d284e8fca09309e37a14bed24ad432f03e40ee9bf0ff7515b339",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Free Vehicle Archive'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -114886,7 +114891,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.401,
@@ -114972,20 +114977,21 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 12569716,
-  "mobileFileSizeBytes": 12569716,
+  "fileSizeBytes": 4179592,
+  "mobileFileSizeBytes": 4179592,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "0856115fa9bc50f4390e5f801b26bccb0235a83bf470e803d61f220ca2498e22",
+  "contentHash": "7065aa449151369529c4ab13bb42c4b5233e25ecb73235d2a41417beb9e50aaa",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Mona x Supercars'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
-   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)"
+   "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -115059,7 +115065,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.314,
@@ -115129,13 +115135,13 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 35187140,
-  "mobileFileSizeBytes": 35187140,
+  "fileSizeBytes": 2698092,
+  "mobileFileSizeBytes": 2698092,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "bd983ef519e7f8fe6e74ae8610b176491716565dae87d729263666cceb208673",
+  "contentHash": "e19e61506b2c0d61aa9db654e81019ac0848ee0417cf5fa437dcf04049e9ece8",
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
@@ -115143,7 +115149,8 @@
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'SeKali'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
-   "recolour audit 2026-07-29: FAIL dist=0.000 - variants withdrawn, single-neutral"
+   "recolour audit 2026-07-29: FAIL dist=0.000 - variants withdrawn, single-neutral",
+   "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -115217,7 +115224,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "fail",
    "dist": 0.0,
