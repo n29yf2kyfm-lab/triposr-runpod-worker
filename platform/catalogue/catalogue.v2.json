@@ -124600,7 +124600,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3341,
+   "variantsHash": "d61f1ad1666614323c2d4092401f8eba81af0071",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -124769,7 +124776,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.1213,
+   "variantsHash": "635330c00c6a1ecfa2fcd647a2551a5d415f03fc",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -124930,7 +124944,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3677,
+   "variantsHash": "929da0fa373fdcde71a40d2459a6c756d538b362",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -125087,7 +125108,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3894,
+   "variantsHash": "8734dc12bd473d94d2c1a582dca1a6f159cf3bd7",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -125247,7 +125275,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2481,
+   "variantsHash": "2885247196cbc425869d46a9ee687a71df98b80e",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -125405,7 +125440,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2897,
+   "variantsHash": "012d49bde8f1f7155aa8e3c8532bd3710a5afb9e",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -125556,7 +125598,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2414,
+   "variantsHash": "236de90291a4044e2533cde19d56f26ca4c92cf7",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -125713,7 +125762,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3651,
+   "variantsHash": "3a3e6cb0242b00be96ec77aa7f7ce0ade4f3f3c4",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -125884,7 +125940,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4274,
+   "variantsHash": "b3ecc74bc0dee65e493d61c8eff00c431fc7d55e",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -125976,7 +126039,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3144,
+   "variantsHash": "270464f5840fe6f5bd777b28adccadf50a9bed3a",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -126137,7 +126207,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2583,
+   "variantsHash": "c9838be15892fe7508ec23ccf2b935048955a4d4",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -126311,7 +126388,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2738,
+   "variantsHash": "4f641d067b9ed2ad894f825bc46f3a5a462d9547",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -126453,7 +126537,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.422,
+   "variantsHash": "c47e32bbc146d12023bee526bb41bac141021438",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -126614,7 +126705,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.5092,
+   "variantsHash": "1a758cd95b3dc3cbfb39c5172ce0356bd88292c2",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -126708,7 +126806,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2258,
+   "variantsHash": "9de954824d465b5b501c2e65c17f31db3c3761cb",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -126766,16 +126871,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v2__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v2__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v2__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v2__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v2__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v2__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v2__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v2__yellow.glb"
-  },
+  "colourVariants": null,
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-swift-2022-w7-v2.glb",
   "fallbackGlbUrl": null,
@@ -126794,7 +126890,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'nisarashariff24'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'nisarashariff24'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 variants demoted single-neutral: recolour audit FAIL dist=0.008"
   ],
   "customization": {
    "configuratorReady": false,
@@ -126979,7 +127076,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2851,
+   "variantsHash": "084781896b359b6612f3e1e5d74470ccdd8697d2",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
