@@ -117781,7 +117781,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2213,
+   "variantsHash": "73cb16f99132ff26352aac3ecf455f64cfca82fe",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -118089,7 +118096,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3276,
+   "variantsHash": "5909a161c9cd5fe511d1f56a1fae776467f765ff",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -118232,7 +118246,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3079,
+   "variantsHash": "26fc70ae1ccfca7598a11b9dbeab10d3e8d09210",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -127250,7 +127271,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2758,
+   "variantsHash": "3f5f551d164eb7a14273b3ac99054aa6de331e28",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -127399,7 +127427,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3152,
+   "variantsHash": "027b604404fa71cfe7544b77366d0017025e1af5",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -127493,7 +127528,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3787,
+   "variantsHash": "d72e0bf08338fedd6973c7618367c9889706c048",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -127587,7 +127629,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2958,
+   "variantsHash": "cf77e8f60521ce016f9c0d1fae0ea42bd3fcf2bb",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -127745,7 +127794,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2287,
+   "variantsHash": "fa5d9d90875a906ac6876960fc34add8e0840e51",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -127894,7 +127950,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3302,
+   "variantsHash": "07e4b65f1430e2d9ae9b0bc67b48be0ba2cb1136",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -128052,7 +128115,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2781,
+   "variantsHash": "2232ff2b27fb2d6946ac40beb2c030da469149bf",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -128212,7 +128282,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2694,
+   "variantsHash": "e5de4e4007816a3e8c80088972522e624b828d82",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -128379,7 +128456,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2519,
+   "variantsHash": "f9239854f0383fd9316d906b0013bb368956799e",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -128539,7 +128623,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2515,
+   "variantsHash": "3a11e2b24fe615986042c1a7131a05e81ec3a095",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -128633,7 +128724,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3147,
+   "variantsHash": "b78611b0cee58e1a3fa2fe30c69dd51940860674",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -128727,7 +128825,14 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2603,
+   "variantsHash": "8e62a11de4acbf2be830261f2de3f31a30921e56",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -128909,7 +129014,14 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2545,
+   "variantsHash": "b6e8ed415051cee947d2ea0c2ab579b525c37155",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  },
  {
   "schemaVersion": 2,
@@ -129089,6 +129201,13 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4707,
+   "variantsHash": "4be1de784918fb0da825edeefd3c91ade9d2e8f6",
+   "method": "render",
+   "at": "2026-07-30"
+  }
  }
 ]
