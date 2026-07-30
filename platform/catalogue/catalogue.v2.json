@@ -128978,19 +128978,20 @@
   "posterUrl": null,
   "turntableUrl": null,
   "interiorUrl": null,
-  "fileSizeBytes": 41375064,
-  "mobileFileSizeBytes": 41375064,
+  "fileSizeBytes": 2326176,
+  "mobileFileSizeBytes": 2326176,
   "triangleCount": null,
   "vertexCount": null,
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
-  "contentHash": "e4e91f775c8204b527ceb7f9dab8e5ae37fa6a86831ad862a4e059997d8d2c19",
+  "contentHash": "60b3e62661f9390ac82e05c666e724c08c813934d620c774d600ff03c4a5109e",
   "pipelineVersion": "publish-batch-w7-2026-07-30",
   "publishedAt": "2026-07-30",
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Lame3D models'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Lame3D models'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)"
   ],
   "customization": {
    "configuratorReady": false,
@@ -129088,7 +129089,7 @@
     }
    ]
   },
-  "platesBaked": false,
+  "platesBaked": true,
   "recolourAudit": {
    "status": "pass",
    "dist": 0.2545,
