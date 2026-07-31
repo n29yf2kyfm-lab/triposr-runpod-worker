@@ -1,5 +1,27 @@
 # Project memory — ExpertCarCheck / triposr-runpod-worker
 
+## Credentials live in `~/.alam3d_env` — never in the repo (2026-07-31)
+
+All four secrets this project needs are kept in `/root/.alam3d_env` (mode 600,
+outside the repo, untracked). Load them with `set -a; . /root/.alam3d_env; set +a`.
+
+| variable | what it is |
+|---|---|
+| `RUNPOD_API_KEY` | RunPod account key — endpoints, pods, job submit/status. Owner re-supplied a new key 2026-07-31; the previous one still worked but was replaced. |
+| `SB_KEY` | Supabase service key for `tfkvthprsntexrcuqpyd` (buckets `car-renders`, `car-meshes`) |
+| `HF_TOKEN` | Hugging Face — checkpoint archive `Alamj/alam-3d-v1` |
+| `SKETCHFAB_TOKENS` | the three rotated Sketchfab tokens (see below) |
+
+**Never write any of these values into this repo or any tracked file** — push
+protection blocks them and the owner's standing rule forbids it. Record only the
+variable NAME here, never the value.
+
+This file is the first thing to check after a container rollback: the git
+checkout and the scratchpad get discarded, but `~/.alam3d_env` has survived every
+rollback so far. Verify a RunPod key with `GET https://rest.runpod.io/v1/endpoints`
+— note that `api.runpod.io/graphql` returns 403 for `myself{...}` queries with
+these keys, so use the REST API, not GraphQL, to read or PATCH endpoint config.
+
 ## Sketchfab tokens — THREE, rotated (owner instruction 2026-07-31)
 
 There are **three** Sketchfab API tokens and all three are used in rotation.
