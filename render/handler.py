@@ -28,6 +28,13 @@ Input (job["input"]):
   studio        - clean dark backdrop + bright reflections (default TRUE:
                   one consistent catalogue look; pass false for the legacy
                   colour-dependent backdrop)
+  glass_tint    - window glass base colour: "r,g,b", [r,g,b] or a single float
+                  for neutral grey. Default 0.18,0.20,0.22 (env GLASS_TINT).
+                  The worker overrides the GLB's own glass material, so this is
+                  the ONLY lever on how dark the windows read.
+  fill_strength - emission strength of the invisible flank reflector cards.
+                  Default 1.6 (env FILL_STRENGTH). Lowering it calms both the
+                  highlight streak on the paint and the haze seen through glass.
 
 Output: { "status": "success", "png_b64": "...", "device": "OPTIX|CUDA|CPU",
           "seconds": <float>, "recolour": {mode, paint_named, coverage,
@@ -113,6 +120,66 @@ def _finish_params(finish):
     return _FINISH.get(k, _FIN_LEGACY)
 
 _gpu_device = None  # cached across warm invocations
+
+# Glass tint + flank-reflector brightness, tunable without a rebuild.
+#
+# These two numbers together decide how much white haze fills the windows. The
+# worker OVERRIDES whatever glass material the GLB ships with, so the GLB has no
+# say: it forces transmission 1.0 and stamps this base colour on. At the old
+# hardcoded 0.74/0.80/0.84 the "tint" was near-white, so transmitted light came
+# through almost unattenuated — and what it transmits is not the dark backdrop
+# the camera sees but the flank reflector cards (emission, visible_camera=False)
+# plus the HDRI, which non-camera rays see at strength 1.5. Near-white glass in
+# front of a bright emitter reads as fog inside the cabin. Real automotive glass
+# is a much darker tint; drop this and the windows read as glass again.
+#
+# Measured on the Tiguan R-Line at az90, sampling the greenhouse (19,181 px) and
+# the red bodywork separately:
+#
+#   tint                 window mean   body mean   windows vs paint
+#   0.74,0.80,0.84 (old)     119.1        68.3       1.74x BRIGHTER
+#   0.30,0.33,0.36            75.5        68.2       1.11x
+#   0.18,0.20,0.22 (now)      58.4        68.2       0.86x
+#   0.10,0.11,0.13            46.6        61.9       0.75x
+#
+# Glass reading 74% brighter than the paint is what "white mist" was. 0.18 puts
+# the windows just under the bodywork, which is how tinted automotive glass
+# actually reads, and leaves the paint untouched (68.2 vs 68.3) so the approved
+# highlight is unchanged. Dimming the reflector cards also fixes the haze but
+# costs 9% of body brightness, so it is left at 1.6 and offered as a knob.
+_GLASS_TINT_DEFAULT = (0.18, 0.20, 0.22)
+_FILL_STRENGTH_DEFAULT = 1.6
+
+
+def _f3(v, fallback):
+    """Accept (r,g,b), [r,g,b], "r,g,b" or a single float meaning neutral grey."""
+    if v is None:
+        return fallback
+    if isinstance(v, (int, float)):
+        return (float(v),) * 3
+    if isinstance(v, str):
+        v = [p for p in v.replace(" ", "").split(",") if p]
+    try:
+        t = tuple(float(x) for x in v)
+    except (TypeError, ValueError):
+        return fallback
+    if len(t) == 1:
+        return (t[0],) * 3
+    return t[:3] if len(t) >= 3 else fallback
+
+
+def _glass_tint(override=None):
+    return _f3(override if override is not None
+               else os.environ.get("GLASS_TINT"), _GLASS_TINT_DEFAULT)
+
+
+def _fill_strength(override=None):
+    v = override if override is not None else os.environ.get("FILL_STRENGTH")
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return _FILL_STRENGTH_DEFAULT
+
 
 import re as _re
 # Role classifiers for body detection. Names come from wildly inconsistent
@@ -432,7 +499,8 @@ def _pose_audit(bpy):
 def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
             samples, resx, resy, bright=False, studio=True,
             finish=None, recolour_mode="auto", plate_end="auto",
-            plates_both=False, audit=False):
+            plates_both=False, audit=False,
+            glass_tint=None, fill_strength=None):
     import mathutils
     import bmesh
     import re
@@ -587,7 +655,7 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
                     inp.default_value = val
             bc = _gcut("Base Color")
             if bc is not None:
-                bc.default_value = (0.74, 0.80, 0.84, 1.0)   # faint cool tint
+                bc.default_value = tuple(_glass_tint(glass_tint)) + (1.0,)
             try:
                 gm.use_screen_refraction = True
                 gm.blend_method = "OPAQUE"
@@ -870,7 +938,7 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
             nt.nodes.remove(n)
         em = nt.nodes.new("ShaderNodeEmission")
         em.inputs["Color"].default_value = (1.0, 0.99, 0.97, 1)
-        em.inputs["Strength"].default_value = 1.6
+        em.inputs["Strength"].default_value = _fill_strength(fill_strength)
         outn = nt.nodes.new("ShaderNodeOutputMaterial")
         nt.links.new(em.outputs["Emission"], outn.inputs["Surface"])
         cm.materials.append(cmat)
@@ -1075,6 +1143,8 @@ def handler(job):
             plate_end=str(ji.get("plate_end", "auto")).lower(),
             plates_both=bool(ji.get("plates_both", False)),
             audit=bool(ji.get("audit") or ji.get("debug_materials")),
+            glass_tint=ji.get("glass_tint"),
+            fill_strength=ji.get("fill_strength"),
         )
         dt = round(time.time() - t0, 1)
         with open(out, "rb") as f:
