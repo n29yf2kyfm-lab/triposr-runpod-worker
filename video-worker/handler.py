@@ -25,6 +25,9 @@ MAX_FRAMES = int(os.environ.get("MAX_FRAMES", "257"))
 MAX_STEPS = int(os.environ.get("MAX_STEPS", "60"))
 MAX_DIM = int(os.environ.get("MAX_DIM", "1280"))
 MAX_IMAGE_BYTES = int(os.environ.get("MAX_IMAGE_BYTES", str(16 * 1024 * 1024)))
+# Decoded-pixel ceiling. A few-hundred-KB PNG can expand to gigapixels; PIL only
+# WARNS by default, so the limit is set explicitly while decoding caller images.
+MAX_IMAGE_PIXELS = int(os.environ.get("MAX_IMAGE_PIXELS", str(50_000_000)))
 
 _T2V = None   # text-to-video pipeline
 _I2V = None   # image-to-video pipeline (LTX only)
@@ -87,6 +90,34 @@ def _is_public_http_url(url):
     return True
 
 
+def decode_image_b64(image_b64):
+    """Decode a base64 image under the SAME size ceiling as fetch_image().
+
+    image_url was capped at MAX_IMAGE_BYTES with streaming, but image_b64 went
+    straight into base64.b64decode() and then PIL with no limit at all - so the
+    cheaper-to-abuse path was the unguarded one. Pillow's own decompression-bomb
+    check is also raised explicitly here: the default DecompressionBombWarning is
+    only a warning, and a small file can still expand to a huge bitmap.
+    """
+    if isinstance(image_b64, str) and image_b64.strip().startswith("data:") \
+            and "," in image_b64:
+        image_b64 = image_b64.split(",", 1)[1]
+    # 4 base64 chars encode 3 bytes; reject before allocating the decoded buffer.
+    if len(image_b64) > (MAX_IMAGE_BYTES // 3 + 1) * 4:
+        raise ValueError("image_b64 exceeds max allowed size")
+    raw = base64.b64decode(image_b64, validate=False)
+    if len(raw) > MAX_IMAGE_BYTES:
+        raise ValueError("image_b64 exceeds max allowed size")
+    prev = Image.MAX_IMAGE_PIXELS
+    try:
+        Image.MAX_IMAGE_PIXELS = MAX_IMAGE_PIXELS
+        img = Image.open(BytesIO(raw))
+        img.load()                      # force decode so a bomb raises here
+        return img.convert("RGB")
+    finally:
+        Image.MAX_IMAGE_PIXELS = prev
+
+
 def fetch_image(url):
     if not _is_public_http_url(url):
         raise ValueError("image_url must be a public http(s) URL")
@@ -142,7 +173,7 @@ def handler(job):
         image_b64 = inp.get("image_b64", "")
         image_url = inp.get("image_url", "")
         if image_b64:
-            init_image = Image.open(BytesIO(base64.b64decode(image_b64))).convert("RGB")
+            init_image = decode_image_b64(image_b64)
         elif image_url:
             init_image = fetch_image(image_url)
 
