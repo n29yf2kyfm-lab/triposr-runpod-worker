@@ -639,7 +639,16 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
                     gm.node_tree.links.remove(lnk)
             return inp
 
-        if gd["glass"]:
+        # A car has TWO kinds of glass and they must not share a branch. Window
+        # glass is near-colourless and transmissive; a lamp lens is coloured and
+        # must stay saturated. _GLASS matched first, so any material named like
+        # BOTH - 'HeadLightsGlass', 'BrakeLightsGlass', 'Tailights_Glass',
+        # 'wrxM_LightGlassNormal_Clear' - was being made fully transmissive and
+        # stamped with the window tint, i.e. rendered as a grey window where the
+        # car has a red tail light. 53 such materials across 38 catalogue cars.
+        # Requiring "glass AND NOT light" sends them to the lamp branch below,
+        # which is what they always should have hit.
+        if gd["glass"] and not gd["light"]:
             # Safety net: a single 'glass' material covering an implausibly large
             # share of the car is almost certainly mislabeled bodywork (the Golf's
             # finished GLB had roof_glass 27% + privacy_glass 24%). Full trans-
