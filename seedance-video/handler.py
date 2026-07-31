@@ -11,9 +11,24 @@ import tempfile
 #   https://replicate.com/bytedance/seedance-2.0
 DEFAULT_MODEL = os.environ.get("SEEDANCE_MODEL", "bytedance/seedance-2.0")
 
+# `model` is CALLER-SUPPLIED and was being handed straight to replicate.run(),
+# which meant any caller could run ANY model on Replicate billed to the owner's
+# REPLICATE_API_TOKEN. resolution and aspect_ratio were already allow-listed;
+# model was the one input that was not. Operators can widen this with
+# SEEDANCE_ALLOWED_MODELS (comma-separated) but the default is closed.
+ALLOWED_MODELS = {
+    m.strip() for m in os.environ.get(
+        "SEEDANCE_ALLOWED_MODELS",
+        "bytedance/seedance-2.0,bytedance/seedance-1-pro,bytedance/seedance-1-lite"
+    ).split(",") if m.strip()
+} | {DEFAULT_MODEL}
+
 # Verified against the live Replicate input schema (see seedance-video/README.md).
 RESOLUTIONS = {"480p", "720p", "1080p", "4k"}
 ASPECT_RATIOS = {"16:9", "4:3", "1:1", "3:4", "9:16", "21:9", "9:21", "adaptive"}
+# Replicate's schema is -1 (intelligent) or 1..15 seconds. Unbounded ints here
+# are a direct cost lever for a caller, so clamp to the documented range.
+DURATION_MIN, DURATION_MAX = 1, 15
 
 
 def _b64_to_tempfile(image_b64, tmpdir, name):
@@ -53,6 +68,8 @@ def handler(job):
         return {"error": "Provide a 'prompt' describing the desired motion/scene."}
 
     model = job_input.get("model", DEFAULT_MODEL)
+    if model not in ALLOWED_MODELS:
+        return {"error": f"model must be one of {sorted(ALLOWED_MODELS)}"}
 
     # Build the payload with only the keys the caller set, so the model's own
     # defaults apply to everything else.
@@ -72,7 +89,11 @@ def handler(job):
         payload["aspect_ratio"] = aspect_ratio
 
     if "duration" in job_input:
-        payload["duration"] = int(job_input["duration"])  # -1 = intelligent, 1..15
+        dur = int(job_input["duration"])
+        if dur != -1 and not (DURATION_MIN <= dur <= DURATION_MAX):
+            return {"error": f"duration must be -1 (intelligent) or "
+                             f"{DURATION_MIN}..{DURATION_MAX} seconds"}
+        payload["duration"] = dur
     if "generate_audio" in job_input:
         payload["generate_audio"] = bool(job_input["generate_audio"])
     if "seed" in job_input and job_input["seed"] is not None:

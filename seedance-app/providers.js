@@ -94,13 +94,19 @@ async function runpod({ prompt, imageDataUrl, opts }) {
     await sleep(3000);
     r = await fetch(`https://api.runpod.ai/v2/${ep}/status/${id}`, { headers: { Authorization: `Bearer ${key}` } });
     const s = await r.json();
+    // Declared OUTSIDE the COMPLETED branch on purpose. It used to be a `const`
+    // inside that block, which made the FAILED line below reference a name that
+    // was not in scope: when RunPod returns FAILED *without* an `error` field the
+    // `||` stops short-circuiting, evaluates the missing name, and throws
+    // "ReferenceError: o is not defined" - masking the real failure at exactly
+    // the moment the diagnosis matters.
+    const out = s.output || {};
     if (s.status === "COMPLETED") {
-      const o = s.output || {};
-      if (o.video_url) return { videoUrl: o.video_url };
-      if (o.video_b64) return { videoBase64: o.video_b64 };
+      if (out.video_url) return { videoUrl: out.video_url };
+      if (out.video_b64) return { videoBase64: out.video_b64 };
       throw new Error("runpod: no video in output");
     }
-    if (s.status === "FAILED") throw new Error(`runpod failed: ${JSON.stringify(s.error || o)}`);
+    if (s.status === "FAILED") throw new Error(`runpod failed: ${JSON.stringify(s.error || out)}`);
   }
   throw new Error("runpod: timed out");
 }
