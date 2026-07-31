@@ -17,11 +17,39 @@ OUT=/root/alam3d_eval
 EVAL_RUN_DIR="${EVAL_RUN_DIR:-/workspace/alam3d_stage_c_v1}"
 CKPT_DIR="$EVAL_RUN_DIR/ckpts"
 echo "EVAL RUN DIR: $EVAL_RUN_DIR"
-if [ ! -d "$CKPT_DIR" ]; then
-  echo "FATAL: $CKPT_DIR does not exist - nothing to evaluate"
-  mkdir -p "$OUT/logs"
-  printf '{"step":"FATAL-no-run-dir"}' > "$OUT/logs/status.json"
-  sleep infinity
+# HF FALLBACK. The checkpoints live on the network volume, but purge_void_runs
+# exists and the volume has hit quota before — and a FATAL here does `sleep
+# infinity`, so a missing dir burns the whole poll budget to learn one fact.
+# The Stage C v1 EMA checkpoints are archived at Alamj/alam-3d-v1, so pull the
+# wanted step from there instead of dying. EVAL_HF_STEP selects it.
+if [ ! -d "$CKPT_DIR" ] || [ -z "$(ls -A "$CKPT_DIR"/denoiser_ema*step*.pt 2>/dev/null)" ]; then
+  echo "checkpoints absent on the volume — falling back to HF Alamj/alam-3d-v1"
+  STEP="${EVAL_HF_STEP:-0000500}"
+  mkdir -p "$CKPT_DIR"
+  python3 - <<PYHF || { mkdir -p "$OUT/logs"; printf '{"step":"FATAL-no-ckpt"}' > "$OUT/logs/status.json"; sleep infinity; }
+import os, sys, urllib.request
+step = "${STEP}"
+name = f"denoiser_ema0.9999_step{step}.pt"
+url = f"https://huggingface.co/Alamj/alam-3d-v1/resolve/main/ckpts/{name}"
+tok = os.environ.get("HF_TOKEN", "")
+rq = urllib.request.Request(url, headers={"Authorization": f"Bearer {tok}"} if tok else {})
+dst = os.path.join("${CKPT_DIR}", name)
+try:
+    with urllib.request.urlopen(rq, timeout=1800) as r, open(dst, "wb") as f:
+        n = 0
+        while True:
+            b = r.read(1 << 22)
+            if not b:
+                break
+            f.write(b); n += len(b)
+except Exception as e:
+    print(f"FATAL: HF checkpoint fetch failed: {type(e).__name__} {str(e)[:160]}")
+    sys.exit(1)
+# A truncated 5.2GB download would silently evaluate garbage weights.
+if n < 4_000_000_000:
+    print(f"FATAL: fetched only {n/1e9:.2f} GB — truncated"); sys.exit(1)
+print(f"fetched {name} ({n/1e9:.2f} GB) from HF")
+PYHF
 fi
 export EVAL_RUN_DIR
 mkdir -p "$OUT/logs"
@@ -344,6 +372,15 @@ if os.environ.get("EVAL_SWEEP") == "1":
               f"sweeping the {len(good)} that are intact", flush=True)
     cks = good
     print(f"sweeping {len(cks)} Stage C checkpoints (1024 stage stays stock throughout)")
+    # STOCK BASELINE, generated in this same pod before any swap. There was no
+    # stock arm in this script at all: the sweep only ever tagged checkpoints,
+    # so "better than stock" rested on a stock render made in some other run,
+    # on some other pod, at some other time. Generating it here means the
+    # comparison shares one pipeline load, one seed and one set of inputs, and
+    # the only difference between arms is the 512 weights.
+    if os.environ.get("EVAL_STOCK", "1") == "1":
+        for case, paths in CASES.items():
+            gen(case, paths, "stock")
     for p in cks:
         m = re.search(r"step0*(\d+)", os.path.basename(p))
         tag = "c" + (m.group(1) if m else os.path.basename(p)[:4])
