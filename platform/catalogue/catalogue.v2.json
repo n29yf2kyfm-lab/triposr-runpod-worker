@@ -132908,7 +132908,7 @@
   "referenceImageCount": 0,
   "accuracyGrade": "representative",
   "qualityGrade": "B",
-  "technicalStatus": "passed",
+  "technicalStatus": "fused-shell",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "approved",
   "quarantineReason": null,
@@ -132918,25 +132918,14 @@
   "hasSeparateBonnet": false,
   "hasSeparateBoot": false,
   "supportsOpenableParts": false,
-  "paintMaterialNames": [
-   "car_jeep_ren"
-  ],
+  "paintMaterialNames": [],
   "glassMaterialNames": [],
-  "defaultColourFamily": null,
-  "renderColourLabel": null,
+  "defaultColourFamily": "white",
+  "renderColourLabel": "Studio White",
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-renegade-2016-w12-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-renegade-2016-w12-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-renegade-2016-w12-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-renegade-2016-w12-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-renegade-2016-w12-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-renegade-2016-w12-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-renegade-2016-w12-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-renegade-2016-w12-v1__yellow.glb"
-  },
+  "colourVariants": null,
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-renegade-2016-w12-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-renegade-2016-w12-v1.glb",
   "fallbackGlbUrl": null,
@@ -132955,7 +132944,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w12 gated publish 2026-07-31: licence recorded as 'CC Attribution' (author 'Jose Bronze'), owner keep verdict 2026-07-31, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "w12 gated publish 2026-07-31: licence recorded as 'CC Attribution' (author 'Jose Bronze'), owner keep verdict 2026-07-31, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "2026-07-31 demoted to single-colour: this is a FUSED SHELL - 2 materials, 2 primitives, and one baseColorTexture paints the whole vehicle including glass and wheels. Respraying it flattens the entire car to a silhouette. The recolour audit PASSED it at dist=0.83 precisely because everything changed colour, which is why the visual pass is the real gate. The 8 flat variants have been deleted."
   ],
   "customization": {
    "configuratorReady": false,
@@ -132964,14 +132954,7 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false,
-  "recolourAudit": {
-   "status": "pass",
-   "dist": 0.8318,
-   "variantsHash": "57b53e764fbbdb45583d100fee8fda72abef5493",
-   "method": "render",
-   "at": "2026-07-31"
-  }
+  "platesBaked": false
  },
  {
   "schemaVersion": 2,
