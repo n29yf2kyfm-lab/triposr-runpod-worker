@@ -106,6 +106,20 @@ PY
 
 status fetch-inputs
 PUB=https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finetune/eval_inputs
+# EVAL_EXTRA_CASES: comma-separated case dirs to fetch alongside the six fixed photo
+# cases, each holding 0.png..3.png. Added so the sweep can run at 30-car scale;
+# the fixed six stayed hardcoded and two vehicles was never enough to tell a
+# real gain from a lucky car. These are RENDERS, not photographs — read them as
+# the in-distribution arm and the photo cases as the reality check.
+for c in $(echo "${EVAL_EXTRA_CASES:-}" | tr ',' ' '); do
+  [ -z "$c" ] && continue
+  mkdir -p "/root/eval_inputs/$c"
+  for i in 0 1 2 3; do
+    curl -sf "$PUB/$c/$i.png" -o "/root/eval_inputs/$c/$i.png" || true
+  done
+  n=$(ls "/root/eval_inputs/$c" 2>/dev/null | wc -l)
+  [ "$n" -eq 0 ] && echo "WARN: extra case $c fetched 0 views" && rmdir "/root/eval_inputs/$c"
+done
 mkdir -p /root/eval_inputs/{golf,escape,model3,gti,gti8,qashqai}
 for i in 0 1 2 3; do
   curl -sf "$PUB/golf/$i.jpg"   -o /root/eval_inputs/golf/$i.jpg   || true
@@ -192,6 +206,14 @@ CASES = {
     "holdout": sorted(glob.glob("/root/eval_inputs/holdout/*.png"))
                + sorted(glob.glob("/root/eval_inputs/holdout/*.jpg")),
 }
+# EVAL_EXTRA_CASES dirs fetched above. Discovered from disk rather than trusted from
+# the env var, so a case whose fetch produced nothing cannot enter the sweep and
+# silently score as a failure of the checkpoint.
+for _c in [c for c in os.environ.get("EVAL_EXTRA_CASES", "").split(",") if c]:
+    _v = sorted(glob.glob(f"/root/eval_inputs/{_c}/*.png")) + \
+         sorted(glob.glob(f"/root/eval_inputs/{_c}/*.jpg"))
+    if _v:
+        CASES[_c] = _v
 CASES = {k: v for k, v in CASES.items() if v}   # drop cases with no inputs
 # EVAL_CASES=gti runs one case only — fast, cheap spot-checks of new vehicles
 _only = [c for c in os.environ.get("EVAL_CASES", "").split(",") if c]
