@@ -1,5 +1,49 @@
 # Project memory — ExpertCarCheck / triposr-runpod-worker
 
+## Sketchfab tokens — THREE, rotated (owner instruction 2026-07-31)
+
+There are **three** Sketchfab API tokens and all three are used in rotation.
+`platform/pipeline/config.py` reads them from `SKETCHFAB_TOKENS`
+(comma-separated) and `itertools.cycle`s them, rotating on 429/403.
+
+Accounts, in the order the owner supplied them:
+1. `Alamkhan1`
+2. `FreshRaccoon5597`
+3. `C4LLUMM0H` — the owner calls this one "sketch feb", added 2026-07-31
+
+**Never write a token value into this repo or any tracked file** — push
+protection blocks it and the owner's standing rule forbids it. Values belong in
+`SKETCHFAB_TOKENS` only.
+
+**Do not claim a token does not exist without the uid-subtraction search.** A
+Sketchfab token and a Sketchfab model uid are BOTH 32 lowercase hex, so grep
+cannot tell them apart — a scratchpad scan returns thousands of hex-32 strings
+that are almost all model uids. I told the owner "only one token has ever
+existed here" after grepping for `TOKEN =` / `Token ` / `SKETCHFAB_TOKENS=`;
+that was wrong, and the owner was right. The method that actually works:
+harvest every hex-32 string, subtract the known-uid universe (candidate CSVs,
+catalogue `sourceReferenceId`s, mesh-bucket names), then validate each survivor
+against `GET /v3/me` — the only proof a string is a real token.
+
+## Ephemeral container — assume local disk will be lost (learned 2026-07-31)
+
+This container reverted to an earlier snapshot **four times in one session**,
+each time discarding the git checkout, the scratchpad and `~/.alam3d_env`.
+Anything that exists only on local disk should be treated as already gone.
+
+- **Upload every work product to Supabase the moment it validates**, then drop
+  the local copy. This is what saved the 77 wave-10 GLBs: a rollback hit
+  mid-run and cost nothing, because each file went to `staging/w10/` on
+  completion. The earlier wave-10 attempt held GLBs and renders in the
+  scratchpad only, and all of it was lost.
+- **Push commits immediately.** Origin is what survived every rollback; the
+  local checkout reset to a pre-session commit each time.
+- **Prune the scratchpad after each wave.** It reached 14GB of finished-wave
+  leftovers and the volume hit 100% full, which is when the rollbacks began.
+- Recovery after a rollback: `git fetch origin <branch> && git merge --ff-only`,
+  re-export `SKETCHFAB_TOKENS`, and resume — the batch tools are all resumable
+  by checking what is already in the bucket.
+
 ## NO GUESSING — verify every action before acting (owner standard 2026-07-27)
 
 Owner instruction, verbatim: **"No more guessing each action. Verify."**
