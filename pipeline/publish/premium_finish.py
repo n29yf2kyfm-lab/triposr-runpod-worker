@@ -18,11 +18,25 @@ Two changes, both material-only, both reversible, neither touching geometry:
 The BIN chunk is copied byte-for-byte, so geometry, Draco payload and file size
 are untouched. Writes to a NEW path; nothing live is overwritten.
 """
-import json, os, struct, sys
+import json, os, re, struct, sys
 
 CLEARCOAT = "KHR_materials_clearcoat"
 TRANSMISSION = "KHR_materials_transmission"
 IOR = "KHR_materials_ior"
+
+# A car has TWO kinds of glass and they must not be treated alike. Window glass
+# is near-colourless and transmissive; a lamp lens is coloured and must stay
+# saturated. The first version of this file matched 'red_glas' on the Golf as
+# window glass, made it 86% transmissive, and washed the tail lights out to pink.
+LENS = re.compile(r"lamp|light|led|lens|tail|head|brake|signal|indicat|blink|fog|rear_?l|stop",
+                  re.I)
+WINDOW = re.compile(r"glass|window|windscreen|windshield|screen|glazing", re.I)
+
+
+def is_window(name):
+    """Window glass only: named like glass AND not named like a lamp."""
+    return bool(WINDOW.search(name or "")) and not LENS.search(name or "")
+
 
 
 def read_glb(path):
@@ -52,9 +66,15 @@ def _use(j, ext):
 
 
 def premium(src, dst, body_names, glass_names=()):
-    """Clear-coat the body materials; make the glass materials real glass."""
+    """Clear-coat the body materials; make WINDOW glass real glass.
+
+    glass_names is filtered through is_window(), so lamp lenses that happen to
+    be named '..._glass' keep their colour instead of being made transparent.
+    """
     j, rest = read_glb(src)
-    body, glass = set(body_names or []), set(glass_names or [])
+    body = set(body_names or [])
+    glass = {g for g in (glass_names or []) if is_window(g)}
+    lenses = [g for g in (glass_names or []) if g not in glass]
     did_body, did_glass = [], []
     for m in j.get("materials", []):
         nm = m.get("name") or ""
@@ -86,7 +106,7 @@ def premium(src, dst, body_names, glass_names=()):
     if not did_body and not did_glass:
         return None
     write_glb(dst, j, rest)
-    return {"clearcoated": did_body, "glass": did_glass}
+    return {"clearcoated": did_body, "glass": did_glass, "lens_skipped": lenses}
 
 
 if __name__ == "__main__":
