@@ -222,12 +222,35 @@ app, the web viewer.
 
 Everything else is already written, already debugged, already tested.
 
-### 3.1 First refactor: extract `common/`
+### 3.1 Isolation: the vehicle product must not be touched
 
-`upload_to_supabase()`, the error handler, input validation and the GLB read/write helpers
-are duplicated or about to be. Before adding a third worker, lift them into `common/` with
-tests. Small job, compounding payoff — and it stops the building worker re-learning the
-RunPod output-cap lesson the hard way.
+The vehicle worker is live and earning. **The building product ships as a completely
+separate deployment, sharing nothing at runtime.**
+
+| Resource | Vehicle (existing — do not touch) | Building (new) |
+|---|---|---|
+| RunPod endpoint | `mj7aiqksmbnkw1` | **new endpoint, own ID** |
+| Docker image | `alamk123/ai-mechanic:trellis2-*` | **`alamk123/building-scan:*`** |
+| CI workflow | `trellis2-docker-build.yml`, path filter `trellis2/**` | **`building-docker-build.yml`, path filter `building/**`** |
+| Network volume | existing (region-locked) | **own volume** — or at minimum own paths |
+| Supabase bucket | existing | **own bucket** |
+| Output dir | `/runpod-volume/outputs` | `/runpod-volume/building-outputs` |
+| GPU pool | 48 GB (L40S/A6000/A100) | sized separately (§4.2) |
+
+The existing CI workflow only triggers on `trellis2/**`, so adding a `building/` directory
+cannot rebuild the vehicle image. That isolation holds **as long as nothing edits
+`trellis2/`**.
+
+**Which is why the `common/` refactor is cancelled.** An earlier draft of this plan
+proposed lifting `upload_to_supabase()` and friends into a shared `common/` module. That
+would mean editing `trellis2/handler.py`, which would trigger a rebuild and redeploy of the
+**live vehicle image** — exactly the risk we are avoiding. So instead:
+
+> **Copy the patterns into `building/`. Do not extract them.**
+
+A few hundred duplicated lines is a trivial price next to the risk of breaking a working
+production worker. If the two products ever need to converge, do it later, deliberately,
+when the building worker is itself stable. `trellis2/` stays byte-for-byte untouched.
 
 ---
 
@@ -235,28 +258,86 @@ RunPod output-cap lesson the hard way.
 
 ```
 repo/
-├── common/                  # NEW — shared worker library
-│   ├── delivery.py          #   supabase upload + size-gated inline
-│   ├── validation.py        #   input parsing, clamping, errors
-│   └── progress.py          #   staged progress updates
-├── handler.py               # TripoSR (legacy)
-├── trellis/                 # TRELLIS v1 (superseded)
-├── trellis2/                # TRELLIS.2 — vehicles (current product)
-└── building/                # NEW — building scanner
+├── handler.py               # TripoSR (legacy)          ─┐
+├── trellis/                 # TRELLIS v1 (superseded)    │ UNTOUCHED
+├── trellis2/                # TRELLIS.2 — vehicles, live ─┘
+└── building/                # NEW — building scanner, fully self-contained
     ├── handler.py           #   job router: reconstruct | structure | price | condition
     ├── Dockerfile
-    ├── reconstruct.py       #   VGGT/MASt3R fast path, COLMAP quality path, gsplat
+    ├── delivery.py          #   supabase upload + size gating  (copied from trellis2)
+    ├── validation.py        #   input parsing, clamping, errors (copied)
+    ├── reconstruct.py       #   MapAnything fast path, COLMAP quality path, gsplat
     ├── register.py          #   ICP: open↔closed, room↔room, inside↔outside
     ├── structure.py         #   Cloud2BIM wrap → IFC
     ├── services.py          #   pipe/cable extraction → IfcPipeSegment etc.
     ├── takeoff.py           #   IFC → quantities → priced quote
-    ├── condition.py         #   thermal + RGB defect detection → 3D pins
+    ├── condition.py         #   SAM 2 + YOLO defect detection → 3D pins
     ├── vendor/Cloud2BIM/    #   vendored at a pinned commit
     ├── preload_models.py
+    ├── pod_setup.sh
     └── test_handler.py
 ```
 
-### 4.1 Stack
+Self-contained by design — see §3.1. Nothing in `building/` imports from `trellis2/`.
+
+### 4.1 The 3D engine — what to use, and why
+
+Researched against the 2025–26 state of the art. Two properties decide it: **metric scale**
+(a building model without real dimensions is worthless) and **licence** (this is a product
+to sell).
+
+| Model | Metric | Licence | Verdict |
+|---|---|---|---|
+| **MapAnything** (Meta) | **Yes, by design** | **Apache 2.0** code | **Primary.** Universal feed-forward *metric* reconstruction, and a modular interface that runs VGGT / DUSt3R / MASt3R / MUSt3R / Pi3-X as swappable backends. Checkpoint licences vary by training data — check per weight. |
+| **VGGT** (Meta/Oxford) | Up to scale | Code commercial-friendly; **original checkpoint non-commercial**, `VGGT-1B-Commercial` available by application | **Secondary backend** via MapAnything. CVPR 2025 Best Paper; hundreds of views in seconds; a May 2026 memory fix gives 2–3× more frames per GPU. |
+| **AMB3R** | **Yes** | Not documented — **check before use** | **Evaluate for the accuracy path.** CVPR 2026 Highlight, "metric-scale with backend", ships VO/SLAM and SfM modes. Newest and likely most accurate. |
+| **MASt3R / DUSt3R** (Naver) | No | **Non-commercial** | Avoid as a dependency. Reachable through MapAnything for testing only. |
+| **COLMAP** | With reference | **BSD** | **Quality path.** The accuracy benchmark; slow. |
+| **gsplat / Nerfstudio** | Follows input | **Apache 2.0** | **Photoreal twin.** Not a measurement source. |
+
+**The decision: MapAnything as the primary engine, COLMAP as the quality path.**
+MapAnything is the only option that is Apache 2.0, metric by design, *and* an abstraction
+layer — so if AMB3R proves more accurate, or a better model lands next year, it swaps in
+behind the same interface instead of forcing a rewrite. AMB3R gets evaluated in Phase 1 and
+promoted if its licence permits.
+
+Worth knowing: on aerial blocks these feed-forward models achieved **completeness gains up
+to 50 % over COLMAP**, with VGGT best on efficiency and scalability. Feed-forward wins on
+coverage and speed; COLMAP still wins on raw accuracy. Hence both, behind a quality flag.
+
+### 4.2 The machine — GPU sizing
+
+RunPod serverless, 2026 rates:
+
+| GPU | VRAM | ~$/hr serverless | Use |
+|---|---|---|---|
+| **A6000 / A40** | 48 GB | **$1.22** | **Default.** Best value; matches what the vehicle worker already targets. |
+| L40S | 48 GB | ~$0.99 (pod) | Ada; good for the dev pod |
+| A100 | 80 GB | $2.72 | Large properties / many frames |
+| H100 | 80 GB | $4.55 | Only if throughput demands it |
+
+**Start on 48 GB (A6000/A40).** Feed-forward reconstruction scales VRAM with frame count,
+so cap frames per job and tile large properties rather than reaching for an 80 GB card.
+Promote to A100 only when a real scan proves it necessary — and keep the pool **separate
+from the vehicle endpoint's**.
+
+### 4.3 Open AI tooling — the rest of the pipeline
+
+| Job | Model | Licence |
+|---|---|---|
+| **Defect segmentation** (cracks, damp, tiles, mould) | **SAM 2** + **YOLOv11 / YOLO-E** two-stage: YOLO locates, SAM 2 segments to pixel level | Apache 2.0 / AGPL — check YOLO variant |
+| **Report writing, plan reading, defect classification** | **Qwen3-VL** / **Qwen2.5-VL** (strong on documents, diagrams, object localisation) or **InternVL3** | Apache 2.0 (Qwen) |
+| **Background/segmentation** | **BiRefNet** — already proven in `trellis2/` as the non-gated alternative | Public |
+| **Point cloud → BIM** | **Cloud2BIM** | MIT |
+| **Quantity takeoff** | **QTO Buccaneer** | Open |
+| **IFC read/write** | **IfcOpenShell** | LGPL |
+
+The two-stage YOLO→SAM 2 pattern is exactly what the 2026 crack-segmentation literature
+converged on, and there is already published work combining **SAM 2 with 3D Gaussian
+splatting** for defect segmentation and 3D reconstruction of concrete structures — the same
+architecture this plan proposes. Condition Mode is following a proven path, not inventing one.
+
+### 4.4 Stack
 
 **Capture (iOS, Swift):** Apple **RoomPlan** for interiors — LiDAR, returns *parametric*
 walls, doors, windows, openings with dimensions, not just a mesh. **ARKit** for depth and
@@ -264,10 +345,10 @@ poses. Guided video walk-around plus GPS for exteriors. **FLIR One**/**Seek** cl
 thermal. RoomPlan needs a LiDAR iPhone/iPad Pro and caps at ~5 min per session, so capture
 is room-by-room and stitched — which doubles as a natural progress UI.
 
-**Reconstruct (GPU worker):** **VGGT** / **MASt3R** / **MapAnything** feed-forward for the
-fast path (seconds, and MapAnything gives metric scale directly); **COLMAP** for
-survey-grade refinement; **3D Gaussian Splatting** (`gsplat`/Nerfstudio) for the photoreal
-twin; **Open3D**/**PDAL** for cloud handling; **ICP** for all registration.
+**Reconstruct (GPU worker):** **MapAnything** feed-forward for the fast path (metric by
+design, Apache 2.0, swappable backends — see §4.1); **COLMAP** for survey-grade refinement;
+**3D Gaussian Splatting** (`gsplat`/Nerfstudio) for the photoreal twin; **Open3D**/**PDAL**
+for cloud handling; **ICP** for all registration.
 
 **Structure:** **Cloud2BIM** (density analysis + morphological ops, handles non-orthogonal
 geometry) → **IFC** via **IfcOpenShell**. Iterative **RANSAC line segmentation** for floor
@@ -293,14 +374,17 @@ editor, quote builder, defect register; RunPod serverless workers behind both.
 
 ## Part 5 — Build order
 
-**Phase 0 — Platform prep.** Extract `common/`. Scaffold `building/` with handler,
-Dockerfile, CI workflow, test file — copying the `trellis2/` patterns. Define the job
-contract: capture bundle in (video / images / RoomPlan USDZ + poses + GPS), point cloud +
-metadata out.
-*Ships:* a deployable worker skeleton that echoes a validated job.
+**Phase 0 — Scaffold, isolated.** Create `building/` with handler, Dockerfile, its own CI
+workflow (`building/**` path filter, `building-scan` image tag) and test file, **copying**
+the `trellis2/` patterns rather than extracting them (§3.1). Stand up a **new RunPod
+endpoint, volume and bucket**. Define the job contract: capture bundle in (video / images /
+RoomPlan USDZ + poses + GPS), point cloud + metadata out.
+*Ships:* a deployable worker skeleton on its own endpoint that echoes a validated job —
+with `trellis2/` provably untouched.
 
-**Phase 1 — Reconstruction.** Feed-forward path first, COLMAP + splat behind a quality
-flag. Metric scale enforced.
+**Phase 1 — Reconstruction.** MapAnything fast path, COLMAP + splat behind a quality flag,
+metric scale enforced. Benchmark **AMB3R** against MapAnything on a real property and
+promote it if it wins and its licence permits.
 *Ships:* walk a property, get a scaled 3D model with a tape measure.
 
 **Phase 2 — Price Mode.** Areas, lengths and counts straight from RoomPlan's parametric
@@ -341,6 +425,8 @@ against real services.
 | **CUDA build failures** on new deps | The `trellis2/` Dockerfile lessons apply directly; build on a pod before trusting CI |
 | **GPU cost per scan** | Feed-forward fast path; COLMAP + splat only on demand |
 | **Unbounded storage** — `trellis2` already notes `/runpod-volume/outputs` grows forever; scans are much larger | Retention policy and pruning job **before** the first real user |
+| **Breaking the live vehicle product** | Total deployment isolation (§3.1): own endpoint, image, workflow, volume, bucket. **`trellis2/` is never edited** — patterns are copied, not extracted. |
+| **Model licence blocks commercial use** — several leading reconstruction models are non-commercial | MapAnything (Apache 2.0) as the primary engine; verify each *checkpoint* licence separately from the code licence; confirm AMB3R's before promoting it |
 | **Liability** — someone builds or cuts on a wrong number | Confidence on every dimension; measured vs inferred always distinguished; verification notice on every export |
 
 ---
@@ -349,6 +435,11 @@ against real services.
 
 | Component | Source |
 |---|---|
+| **MapAnything** — metric feed-forward reconstruction (primary engine) | https://github.com/facebookresearch/map-anything |
+| **AMB3R** — metric feed-forward + backend (evaluate) | https://github.com/HengyiWang/amb3r |
+| **VGGT** — feed-forward backend | https://github.com/facebookresearch/vggt |
+| **SAM 2** — defect segmentation | https://github.com/facebookresearch/sam2 |
+| **Qwen-VL** — report generation, plan reading | https://github.com/QwenLM/Qwen3-VL |
 | Cloud2BIM — point cloud → IFC | https://github.com/VaclavNezerka/Cloud2BIM |
 | QTO Buccaneer — IFC quantity takeoff | https://github.com/simondilhas/qto_buccaneer |
 | OpenConstructionERP — estimating / BOQ | https://community.osarch.org/discussion/3437 |
@@ -371,8 +462,10 @@ blocker on building and testing.
 
 ## Part 8 — Next step
 
-**Phase 0.** Extract `common/` from `trellis2/handler.py`, then scaffold `building/` with
-its handler, Dockerfile, CI workflow and test file following the `trellis2/` patterns. That
-gives a deployable worker skeleton to build Phase 1 into — and pays back immediately by
-stopping the new worker from re-learning the RunPod output-cap and CUDA-build lessons the
-hard way.
+**Phase 0.** Scaffold `building/` — handler, Dockerfile, its own CI workflow and test file
+— copying the `trellis2/` patterns so the new worker inherits the solved problems (RunPod's
+output cap, the CUDA build recipe, offline preloading) without a single edit to the live
+vehicle worker. Then stand up its own RunPod endpoint, volume and bucket.
+
+That gives a deployable skeleton to build Phase 1 into, on infrastructure that cannot
+affect the vehicle product.
