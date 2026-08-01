@@ -12,7 +12,7 @@ This worker shares **nothing at runtime** with the live vehicle worker in `trell
 
 | | Vehicle (live — do not touch) | Building (this) |
 |---|---|---|
-| Endpoint | `mj7aiqksmbnkw1` | its own |
+| Endpoint | `nd0fagqlr5z2ur` (`trellis2-v2`) · `ng8oiz4p2l0xa0` (`render-v2`) | its own, not yet created |
 | Image | `alamk123/ai-mechanic:trellis2-*` | `alamk123/building-scan:*` |
 | CI trigger | `trellis2/**` | `building/**` |
 | HF cache | `/runpod-volume/hf_cache` | `/runpod-volume/building_hf_cache` |

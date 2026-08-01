@@ -209,7 +209,7 @@ line (vehicle 3D generation) across three generations:
 
 | Worker | Model | State |
 |---|---|---|
-| `handler.py` (root) | TripoSR | v10.1, deployed to endpoint `mj7aiqksmbnkw1` |
+| `handler.py` (root) | TripoSR | v10.1; its endpoint has been retired |
 | `trellis/` | TRELLIS v1 | Superseded |
 | `trellis2/` | TRELLIS.2-4B | **Current, ~3,400 lines, production-hardened** |
 
@@ -241,7 +241,7 @@ Nearly every non-obvious line exists because a live run failed and the fix was w
 
 | Resource | Vehicle (do not touch) | Building (new) |
 |---|---|---|
-| RunPod endpoint | `mj7aiqksmbnkw1` | **new endpoint** |
+| RunPod endpoint | `nd0fagqlr5z2ur` (trellis2-v2), `ng8oiz4p2l0xa0` (render-v2) | **new endpoint** |
 | Docker image | `alamk123/ai-mechanic:trellis2-*` | **`alamk123/building-scan:*`** |
 | CI workflow | filter `trellis2/**` | **filter `building/**`** |
 | Network volume | existing (region-locked) | **own volume** |
