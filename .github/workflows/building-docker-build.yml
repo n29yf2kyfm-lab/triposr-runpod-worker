@@ -36,6 +36,8 @@ jobs:
         run: python building/test_regs.py
       - name: Run safety and access tests
         run: python building/test_safety.py
+      - name: Run site and terrain tests
+        run: python building/test_terrain.py
 
   build:
     needs: test
