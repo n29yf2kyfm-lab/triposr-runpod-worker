@@ -50,6 +50,15 @@ EA_CELL_M = 1.0
 
 HTTP_TIMEOUT = 60
 
+# Overpass rejects requests with no User-Agent — live-confirmed HTTP 406,
+# which is not an obvious failure mode from the status code alone. Identify
+# properly on every outbound call; it is also the courteous thing to do
+# against free community infrastructure.
+USER_AGENT = os.environ.get(
+    "BUILDING_USER_AGENT",
+    "building-scan/1.0 (roof takeoff; +https://github.com/n29yf2kyfm-lab)")
+HTTP_HEADERS = {"User-Agent": USER_AGENT}
+
 
 def _requests():
     import requests
@@ -95,7 +104,7 @@ def _geocode_uk(address):
             continue
         try:
             r = requests.get(f"{POSTCODE_API}/postcodes/{cleaned}",
-                             timeout=HTTP_TIMEOUT)
+                             headers=HTTP_HEADERS, timeout=HTTP_TIMEOUT)
             if r.status_code == 200:
                 res = r.json().get("result") or {}
                 if res.get("latitude") is not None:
@@ -122,7 +131,7 @@ def fetch_footprint(lat, lon, radius_m=30):
              f"out geom;")
     try:
         r = requests.post(OVERPASS_API, data={"data": query},
-                          timeout=HTTP_TIMEOUT)
+                          headers=HTTP_HEADERS, timeout=HTTP_TIMEOUT)
         r.raise_for_status()
         elements = r.json().get("elements") or []
     except Exception as e:
@@ -171,24 +180,71 @@ def polygon_perimeter(polygon):
 
 # --- elevation -------------------------------------------------------------
 
+_COVERAGE_CACHE = {}
+
+
+def coverage_id(wcs_url):
+    """Discover the WCS coverage id for a dataset.
+
+    EA coverage ids embed a dataset UUID, e.g.
+    '<uuid>__Lidar_Composite_Elevation_LZ_DSM_1m', so they cannot be
+    hard-coded safely — they change when the dataset is republished. Read
+    them from GetCapabilities once per process and cache.
+
+    Each service publishes both an Elevation and a Hillshade coverage.
+    Hillshade is a shaded-relief PICTURE, not heights — selecting it by
+    accident would yield a plausible-looking raster of meaningless values,
+    so match on Elevation explicitly.
+    """
+    if wcs_url in _COVERAGE_CACHE:
+        return _COVERAGE_CACHE[wcs_url]
+
+    requests = _requests()
+    try:
+        r = requests.get(wcs_url, headers=HTTP_HEADERS, timeout=HTTP_TIMEOUT,
+                         params={"service": "WCS",
+                                 "request": "GetCapabilities"})
+        r.raise_for_status()
+        import re
+        ids = re.findall(r"<wcs:CoverageId>([^<]+)</wcs:CoverageId>", r.text)
+    except Exception as e:
+        print(f"WCS GetCapabilities failed: {e}", file=sys.stderr)
+        return None
+
+    chosen = next((i for i in ids if "Elevation" in i), ids[0] if ids else None)
+    _COVERAGE_CACHE[wcs_url] = chosen
+    return chosen
+
+
 def fetch_surface(bbox, wcs_url, cell_m=EA_CELL_M):
     """Fetch an elevation grid for a bounding box via WCS.
 
     Returns [(easting, northing, z)] or None. Failure is returned, not
     raised: a caller can still work from a supplied raster, and a clear
     "could not reach the data" beats a traceback.
+
+    The service publishes on EPSG:27700 with axis labels E and N, so the
+    subset is given in National Grid metres directly — no reprojection.
     """
     requests = _requests()
+    cid = coverage_id(wcs_url)
+    if not cid:
+        print(f"no coverage id for {wcs_url}", file=sys.stderr)
+        return None
+
     minx, miny, maxx, maxy = bbox
-    params = {
-        "service": "WCS", "version": "2.0.1", "request": "GetCoverage",
-        "format": "image/tiff",
-        "subset": [f"E({minx},{maxx})", f"N({miny},{maxy})"],
-    }
+    # Repeated 'subset' params, one per axis — a dict would collapse them.
+    params = [
+        ("service", "WCS"), ("version", "2.0.1"), ("request", "GetCoverage"),
+        ("coverageId", cid), ("format", "image/tiff"),
+        ("subset", f"E({minx},{maxx})"), ("subset", f"N({miny},{maxy})"),
+    ]
     try:
-        r = requests.get(wcs_url, params=params, timeout=HTTP_TIMEOUT)
+        r = requests.get(wcs_url, params=params, headers=HTTP_HEADERS,
+                         timeout=HTTP_TIMEOUT)
         if r.status_code != 200 or not r.content:
-            print(f"WCS {wcs_url} returned {r.status_code}", file=sys.stderr)
+            print(f"WCS {wcs_url} returned {r.status_code}: "
+                  f"{r.text[:200]}", file=sys.stderr)
             return None
         return _decode_geotiff(r.content, bbox, cell_m)
     except Exception as e:

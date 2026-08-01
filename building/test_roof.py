@@ -108,6 +108,41 @@ check("2c too few points -> None", rg.fit_plane([(0, 0, 0), (1, 1, 1)]) is None)
 check("2d degenerate -> None",
       rg.fit_plane([(0, 0, 0), (1, 0, 1), (2, 0, 2)]) is None)
 
+# --- numerical conditioning ----------------------------------------------
+# THE bug that real data found and synthetic data hid. Inputs arrive in
+# British National Grid coordinates (E~413000, N~289000), which makes the
+# normal equations' sums-of-squares ~1.7e11 per point. Without centring, the
+# fit loses all precision and collapses to horizontal — turning every pitched
+# roof in the country flat while origin-centred tests pass happily.
+NG_E, NG_N = 413218.0, 289299.0
+near_origin = grid(lambda x, y: 3 + y * SLOPE)
+at_grid = [(x + NG_E, y + NG_N, z) for x, y, z in near_origin]
+
+p_origin = rg.fit_plane(near_origin)
+p_grid = rg.fit_plane(at_grid)
+check("2e-1 plane fit survives National Grid magnitudes",
+      abs(p_grid.pitch_deg - 35) < 0.01, f"{p_grid.pitch_deg:.4f} deg")
+check("2e-2 grid and origin fits agree on pitch",
+      abs(p_grid.pitch_deg - p_origin.pitch_deg) < 1e-6)
+check("2e-3 grid and origin fits agree on aspect",
+      abs(p_grid.aspect_deg - p_origin.aspect_deg) < 1e-6)
+# The plane must still evaluate correctly in the ORIGINAL coordinates —
+# centring is undone via the constant term, and the seam test depends on it.
+check("2e-4 z_at correct at grid coordinates",
+      abs(p_grid.z_at(NG_E + 2.0, NG_N + 4.0)
+          - (3 + 4.0 * SLOPE)) < 1e-6,
+      f"{p_grid.z_at(NG_E + 2.0, NG_N + 4.0):.6f}")
+
+gable_at_grid = [(x + NG_E, y + NG_N, z) for x, y, z in GABLE]
+pl_grid = rg.segment_planes(gable_at_grid, inlier_m=0.05, min_points=20)
+check("2e-5 segmentation works at grid magnitudes",
+      len(pl_grid) == 2 and all(abs(pl.pitch_deg - 35) < 0.5
+                                for pl in pl_grid),
+      str([round(pl.pitch_deg, 1) for pl in pl_grid]))
+ed_grid = rg.find_edges(pl_grid, CELL)
+check("2e-6 edges classify at grid magnitudes",
+      [e.kind for e in ed_grid] == ["ridge"], str([e.kind for e in ed_grid]))
+
 # --- pitch, aspect, area --------------------------------------------------
 p = rg.fit_plane([(0, 0, 0), (1, 0, 0), (0, 1, SLOPE)])
 check("2e pitch matches construction", abs(p.pitch_deg - 35) < 0.01,

@@ -107,12 +107,29 @@ def fit_plane(points):
 
     Solves the normal equations for z = ax + by + c directly — a 3x3 system,
     small enough that Cramer's rule is clearer than bringing in a solver.
+
+    Points are CENTRED on their own mean before fitting, then the constant
+    term is shifted back. This is not a nicety: real inputs arrive in British
+    National Grid coordinates around E=413000, N=289000, which makes the
+    sums-of-squares terms ~1.7e11 per point. The normal equations lose all
+    precision at that magnitude and the fit collapses to a horizontal plane —
+    silently turning every pitched roof in the country flat, while synthetic
+    tests near the origin pass happily. Live-confirmed on a Birmingham
+    address before this centring was added.
+
+    Translation changes only the constant term, so a and b — and therefore
+    pitch, aspect and area — are unaffected by the shift.
     """
     n = len(points)
     if n < 3:
         return None
+
+    mx = sum(p[0] for p in points) / n
+    my = sum(p[1] for p in points) / n
+
     sx = sy = sz = sxx = syy = sxy = sxz = syz = 0.0
-    for x, y, z in points:
+    for px, py, z in points:
+        x, y = px - mx, py - my
         sx += x; sy += y; sz += z
         sxx += x * x; syy += y * y; sxy += x * y
         sxz += x * z; syz += y * z
@@ -137,7 +154,9 @@ def fit_plane(points):
                 - mm[0][1] * (mm[1][0] * mm[2][2] - mm[1][2] * mm[2][0])
                 + mm[0][2] * (mm[1][0] * mm[2][1] - mm[1][1] * mm[2][0])) / det
 
-    return Plane(_solve(0), _solve(1), _solve(2), list(points))
+    a, b, c_centred = _solve(0), _solve(1), _solve(2)
+    # Undo the centring: z = a(x-mx) + b(y-my) + c'  =>  c = c' - a*mx - b*my
+    return Plane(a, b, c_centred - a * mx - b * my, list(points))
 
 
 def segment_planes(points, inlier_m=DEFAULT_INLIER_M,
