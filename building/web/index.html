@@ -1,0 +1,531 @@
+<title>SiteScan — Roof Takeoff</title>
+<style>
+  /* ---- tokens: light ground, slate bias toward the instrument teal ---- */
+  :root {
+    --ground:    #EEF1F4;
+    --surface:   #FFFFFF;
+    --surface-2: #E4E9EE;
+    --line:      #CBD4DD;
+    --ink:       #10161D;
+    --ink-dim:   #5A6875;
+    --ink-faint: #8593A1;
+    --accent:    #0E8C86;
+    --accent-dim:#D3EBE9;
+    --warn:      #A96A08;
+    --warn-bg:   #FBEFD8;
+    --shadow:    0 1px 2px rgba(16,22,29,.06), 0 8px 24px rgba(16,22,29,.06);
+
+    --pitch-0:  #4C7FA8;  /* flat  — cool */
+    --pitch-1:  #4E9C86;
+    --pitch-2:  #86A857;
+    --pitch-3:  #C99A3C;
+    --pitch-4:  #C2643C;  /* steep — warm */
+
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    --r: 10px;
+    --pad: 18px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground:    #0E1319;
+      --surface:   #161D26;
+      --surface-2: #1E2732;
+      --line:      #2B3644;
+      --ink:       #EDF1F5;
+      --ink-dim:   #97A4B3;
+          --ink-faint: #6B7A8B;
+      --accent:    #4DD0C7;
+      --accent-dim:#123230;
+      --warn:      #E8B04B;
+      --warn-bg:   #2A2113;
+      --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+      --pitch-0:  #5B9CC9;
+      --pitch-1:  #4FBFA0;
+      --pitch-2:  #9DC65F;
+      --pitch-3:  #E3B155;
+      --pitch-4:  #E07A52;
+    }
+  }
+  /* viewer toggle must win over the media query in BOTH directions */
+  :root[data-theme="dark"] {
+    --ground:#0E1319; --surface:#161D26; --surface-2:#1E2732; --line:#2B3644;
+    --ink:#EDF1F5; --ink-dim:#97A4B3; --ink-faint:#6B7A8B;
+    --accent:#4DD0C7; --accent-dim:#123230; --warn:#E8B04B; --warn-bg:#2A2113;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+    --pitch-0:#5B9CC9; --pitch-1:#4FBFA0; --pitch-2:#9DC65F; --pitch-3:#E3B155; --pitch-4:#E07A52;
+  }
+  :root[data-theme="light"] {
+    --ground:#EEF1F4; --surface:#FFFFFF; --surface-2:#E4E9EE; --line:#CBD4DD;
+    --ink:#10161D; --ink-dim:#5A6875; --ink-faint:#8593A1;
+    --accent:#0E8C86; --accent-dim:#D3EBE9; --warn:#A96A08; --warn-bg:#FBEFD8;
+    --shadow:0 1px 2px rgba(16,22,29,.06), 0 8px 24px rgba(16,22,29,.06);
+    --pitch-0:#4C7FA8; --pitch-1:#4E9C86; --pitch-2:#86A857; --pitch-3:#C99A3C; --pitch-4:#C2643C;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--sans); font-size: 15px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 20px 16px 64px; }
+
+  /* ---- masthead ---- */
+  header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 20px; }
+  .mark {
+    font-family: var(--mono); font-size: 17px; font-weight: 700;
+    letter-spacing: -.02em; color: var(--ink);
+  }
+  .mark b { color: var(--accent); font-weight: 700; }
+  .tagline {
+    font-size: 11px; color: var(--ink-faint); letter-spacing: .06em;
+    text-transform: uppercase; margin-left: auto;
+  }
+
+  /* ---- shared card ---- */
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--r); padding: var(--pad); box-shadow: var(--shadow);
+  }
+  .stack { display: flex; flex-direction: column; gap: 14px; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 600;
+  }
+
+  /* ---- search ---- */
+  .search { display: flex; flex-direction: column; gap: 10px; }
+  label.field { font-size: 13px; color: var(--ink-dim); font-weight: 500; }
+  input[type=text] {
+    width: 100%; padding: 15px 14px; font-size: 19px; font-family: var(--mono);
+    text-transform: uppercase; letter-spacing: .06em;
+    background: var(--ground); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 8px;
+  }
+  input[type=text]:focus-visible, button:focus-visible, select:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px;
+  }
+  button.go {
+    padding: 15px; font-size: 16px; font-weight: 650; letter-spacing: .01em;
+    background: var(--accent); color: var(--ground);
+    border: none; border-radius: 8px; cursor: pointer;
+  }
+  button.go:hover { filter: brightness(1.08); }
+  button.go:disabled { opacity: .5; cursor: default; }
+  .examples { font-size: 12px; color: var(--ink-faint); }
+  .examples button {
+    background: none; border: none; padding: 0 2px; cursor: pointer;
+    font-family: var(--mono); font-size: 12px; color: var(--accent);
+    text-decoration: underline; text-underline-offset: 2px;
+  }
+
+  /* ---- pipeline ---- */
+  .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+  .steps li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: var(--ink-faint);
+    font-family: var(--mono);
+  }
+  .steps li .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--line); flex: none;
+  }
+  .steps li.on { color: var(--ink); }
+  .steps li.on .dot { background: var(--accent); }
+  .steps li.done .dot { background: var(--accent); opacity: .45; }
+  .steps li.done { color: var(--ink-dim); }
+
+  /* ---- the readout: the number this whole tool exists to produce ---- */
+  .readout { padding: 22px var(--pad) var(--pad); }
+  .readout .big {
+    font-family: var(--mono); font-weight: 700;
+    font-size: clamp(46px, 15vw, 66px); line-height: .95;
+    letter-spacing: -.035em; font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  .readout .big .unit {
+    font-size: .34em; letter-spacing: 0; color: var(--ink-dim); margin-left: 6px;
+  }
+  .readout .what {
+    font-size: 12px; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--accent); font-weight: 650; margin-bottom: 8px;
+  }
+
+  /* uplift bar — makes the plan-vs-sloped gap physical, not a number to skim */
+  .uplift { margin-top: 18px; }
+  .bar {
+    display: flex; height: 34px; border-radius: 6px; overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .bar .plan { background: var(--surface-2); }
+  .bar .add  { background: var(--accent); }
+  .bar span {
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 11px; font-weight: 700;
+    white-space: nowrap; overflow: hidden;
+  }
+  .bar .plan span { color: var(--ink-dim); }
+  .bar .add span { color: var(--ground); }
+  .uplift-note {
+    margin-top: 9px; font-size: 12.5px; color: var(--ink-dim); line-height: 1.45;
+  }
+  .uplift-note b { color: var(--ink); font-weight: 650; }
+
+  /* ---- metric strip ---- */
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line);
+             border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+  .metric { background: var(--surface); padding: 13px 12px; }
+  .metric .v {
+    font-family: var(--mono); font-size: 21px; font-weight: 700;
+    font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+  }
+  .metric .v small { font-size: .55em; color: var(--ink-dim); font-weight: 500; }
+  .metric .k { font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase;
+               color: var(--ink-faint); margin-top: 3px; font-weight: 600; }
+
+  /* ---- aspect rose: wedges by area, placed by bearing, coloured by pitch ---- */
+  .rose-wrap { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .rose { flex: none; }
+  .rose text { font-family: var(--mono); font-size: 9px; fill: var(--ink-faint); }
+  .legend { display: flex; flex-direction: column; gap: 7px; font-size: 12px; min-width: 150px; flex: 1; }
+  .legend .row { display: flex; align-items: center; gap: 8px; }
+  .legend .sw { width: 11px; height: 11px; border-radius: 2px; flex: none; }
+  .legend .lbl { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .legend .area { margin-left: auto; color: var(--ink-dim); font-family: var(--mono); }
+
+  /* ---- tables ---- */
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th {
+    text-align: left; font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 600; padding: 0 0 8px; border-bottom: 1px solid var(--line);
+  }
+  td { padding: 9px 0; border-bottom: 1px solid var(--line); }
+  tr:last-child td { border-bottom: none; }
+  td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .pitchchip {
+    display: inline-block; width: 9px; height: 9px; border-radius: 2px;
+    margin-right: 7px; vertical-align: baseline;
+  }
+
+  /* ---- confidence: deliberately prominent ---- */
+  .conf { border-left: 3px solid var(--warn); background: var(--warn-bg); }
+  .conf .eyebrow { color: var(--warn); }
+  .conf ul { margin: 10px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 7px;
+             font-size: 13px; color: var(--ink-dim); line-height: 1.45; }
+  .conf .verify {
+    margin-top: 13px; padding-top: 11px; border-top: 1px solid var(--line);
+    font-size: 13px; font-weight: 650; color: var(--ink);
+  }
+  .provenance { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 4px;
+                font-family: var(--mono); font-size: 11.5px; color: var(--ink-dim); }
+  .provenance b { color: var(--ink); font-weight: 600; }
+
+  /* ---- materials ---- */
+  .mat td:first-child { color: var(--ink); }
+  .mat .sub { display: block; font-size: 11px; color: var(--ink-faint); }
+  select {
+    font-family: var(--sans); font-size: 13px; padding: 7px 9px;
+    background: var(--ground); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 6px;
+  }
+  .cover-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .cover-row label { font-size: 13px; color: var(--ink-dim); }
+
+  .hint { font-size: 12px; color: var(--ink-faint); margin-top: 10px; line-height: 1.45; }
+  .hidden { display: none !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+  @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .35 } }
+  .steps li.on .dot { animation: pulse 1.1s ease-in-out infinite; }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="mark">Site<b>Scan</b></span>
+    <span class="tagline">Roof takeoff</span>
+  </header>
+
+  <!-- ============ SEARCH ============ -->
+  <section class="card search" id="search">
+    <label class="field" for="pc">Property postcode</label>
+    <input type="text" id="pc" placeholder="B36 8AR" autocomplete="postal-code" spellcheck="false">
+    <button class="go" id="go">Measure roof</button>
+    <p class="examples">
+      No site visit needed — measured from national aerial survey data.
+      Try <button data-pc="B36 8AR">B36 8AR</button>
+    </p>
+  </section>
+
+  <!-- ============ PIPELINE ============ -->
+  <section class="card hidden" id="working">
+    <p class="eyebrow">Measuring</p>
+    <ul class="steps" id="steps">
+      <li data-s="0"><span class="dot"></span>Locating property</li>
+      <li data-s="1"><span class="dot"></span>Finding building outline</li>
+      <li data-s="2"><span class="dot"></span>Fetching elevation data</li>
+      <li data-s="3"><span class="dot"></span>Fitting roof planes</li>
+      <li data-s="4"><span class="dot"></span>Calculating quantities</li>
+    </ul>
+  </section>
+
+  <!-- ============ REPORT ============ -->
+  <div class="stack hidden" id="report">
+
+    <section class="card readout">
+      <p class="what">True sloped area</p>
+      <div class="big" id="sloped">—<span class="unit">m²</span></div>
+
+      <div class="uplift">
+        <div class="bar" id="bar">
+          <div class="plan" style="flex:1"><span id="planLbl"></span></div>
+          <div class="add" style="flex:0"><span id="addLbl"></span></div>
+        </div>
+        <p class="uplift-note" id="upliftNote"></p>
+      </div>
+    </section>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="v" id="pitch">—<small>°</small></div>
+        <div class="k">Pitch</div>
+      </div>
+      <div class="metric">
+        <div class="v" id="ridge">—<small>m</small></div>
+        <div class="k">Ridge + hip</div>
+      </div>
+      <div class="metric">
+        <div class="v" id="eaves">—<small>m</small></div>
+        <div class="k">Eaves</div>
+      </div>
+    </div>
+
+    <section class="card">
+      <p class="eyebrow">Roof faces</p>
+      <div class="rose-wrap" style="margin-top:14px">
+        <svg class="rose" id="rose" width="176" height="176" viewBox="-100 -100 200 200"
+             role="img" aria-label="Roof faces by compass direction, sized by area and coloured by pitch"></svg>
+        <div class="legend" id="legend"></div>
+      </div>
+      <p class="hint">Each wedge is one roof face — pointing the way it slopes, sized by its area, coloured by pitch.</p>
+    </section>
+
+    <section class="card">
+      <p class="eyebrow">Materials</p>
+      <div class="cover-row" style="margin-top:12px">
+        <label for="cover">Covering</label>
+        <select id="cover">
+          <option value="concrete_interlocking">Concrete interlocking</option>
+          <option value="plain_tile">Plain tile</option>
+          <option value="natural_slate">Natural slate</option>
+        </select>
+      </div>
+      <div class="scroll">
+        <table class="mat">
+          <thead><tr><th>Item</th><th class="n">Quantity</th></tr></thead>
+          <tbody id="mats"></tbody>
+        </table>
+      </div>
+      <p class="hint">Includes a 10% waste allowance. Quantities derive from sloped area, never the footprint.</p>
+    </section>
+
+    <section class="card conf">
+      <p class="eyebrow">Confidence</p>
+      <div class="provenance" id="prov"></div>
+      <ul id="notes"></ul>
+      <p class="verify">Estimate from aerial survey data. Verify on site before ordering.</p>
+    </section>
+
+    <section class="card">
+      <p class="eyebrow">Roof planes</p>
+      <div class="scroll" style="margin-top:10px">
+        <table>
+          <thead><tr><th>Face</th><th class="n">Pitch</th><th class="n">Area</th></tr></thead>
+          <tbody id="planes"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+// ---------------------------------------------------------------------------
+// Real measured response for B36 8AR, from the Environment Agency 1m LIDAR
+// pipeline. Swap MEASURE() for a fetch when the worker endpoint is wired up.
+// ---------------------------------------------------------------------------
+const SAMPLE = {
+  location: { grid_ref: "SP13218929", lidar_tile: "SP18nw" },
+  source: { name: "EA National LIDAR 1m", imagery: "2022", rmse_m: 0.15 },
+  quantities: {
+    plan_area_m2: 121.09, sloped_area_m2: 138.82, slope_uplift_pct: 13.5,
+    predominant_pitch_deg: 32, pitch_uncertainty_deg: 4.4,
+    ridge_m: 7.39, hip_m: 0, valley_m: 0, eaves_m: 45.09
+  },
+  planes: [
+    { pitch_deg: 32.3, aspect_deg: 43.8,  sloped_area_m2: 33.8 },
+    { pitch_deg: 32.4, aspect_deg: 222.9, sloped_area_m2: 16.6 },
+    { pitch_deg: 2.8,  aspect_deg: 257.8, sloped_area_m2: 12.0 }
+  ],
+  notes: [
+    "Pitch from 1m aerial LIDAR reads low on small domestic roofs — measured 3–4° under independent survey. Treat the tile count as a floor.",
+    "1m sampling cannot resolve small dormers, porches or narrow roof planes.",
+    "The survey composite merges flights of different dates — a recent extension may not appear."
+  ]
+};
+
+// Units per m² of TRUE sloped area, and batten run per m².
+const COVERINGS = {
+  concrete_interlocking: { label: "Concrete interlocking tiles", per_m2: 10,  batten: 3.33 },
+  plain_tile:            { label: "Plain tiles",                 per_m2: 60,  batten: 10.0 },
+  natural_slate:         { label: "Natural slates",              per_m2: 20,  batten: 4.5  }
+};
+const WASTE = 1.10, MEMBRANE_LAP = 1.15, RIDGE_PER_M = 3.33;
+
+const $ = s => document.querySelector(s);
+const fmt = (n, d = 0) => n.toLocaleString("en-GB", { minimumFractionDigits: d, maximumFractionDigits: d });
+const COMPASS = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"];
+const bearingName = d => COMPASS[Math.round(((d % 360) / 22.5)) % 16];
+
+// Pitch ramp — the same cool-to-warm convention elevation data is drawn with.
+function pitchColour(p) {
+  const stops = ["--pitch-0","--pitch-1","--pitch-2","--pitch-3","--pitch-4"];
+  const i = p < 5 ? 0 : p < 20 ? 1 : p < 30 ? 2 : p < 40 ? 3 : 4;
+  return getComputedStyle(document.documentElement).getPropertyValue(stops[i]).trim();
+}
+
+let current = null;
+
+function render(data) {
+  const q = data.quantities;
+
+  // --- headline -----------------------------------------------------------
+  $("#sloped").innerHTML = fmt(q.sloped_area_m2, 1) + '<span class="unit">m²</span>';
+
+  const planPct = 100 / (1 + q.slope_uplift_pct / 100);
+  $("#bar .plan").style.flex = planPct;
+  $("#bar .add").style.flex = 100 - planPct;
+  $("#planLbl").textContent = fmt(q.plan_area_m2, 0) + " m² footprint";
+  $("#addLbl").textContent = "+" + fmt(q.slope_uplift_pct, 1) + "%";
+  $("#upliftNote").innerHTML =
+    "The roof covers <b>" + fmt(q.plan_area_m2, 0) + " m²</b> of ground, but at " +
+    fmt(q.predominant_pitch_deg, 0) + "° the surface you tile is <b>" +
+    fmt(q.sloped_area_m2, 1) + " m²</b>. Ordering against the footprint would leave you " +
+    fmt(q.sloped_area_m2 - q.plan_area_m2, 0) + " m² short.";
+
+  // --- metrics ------------------------------------------------------------
+  $("#pitch").innerHTML = fmt(q.predominant_pitch_deg, 0) +
+    '<small>° ±' + fmt(q.pitch_uncertainty_deg, 1) + "</small>";
+  $("#ridge").innerHTML = fmt(q.ridge_m + q.hip_m, 1) + "<small>m</small>";
+  $("#eaves").innerHTML = fmt(q.eaves_m, 1) + "<small>m</small>";
+
+  // --- aspect rose --------------------------------------------------------
+  drawRose(data.planes);
+
+  // --- planes table -------------------------------------------------------
+  $("#planes").innerHTML = data.planes.map((p, i) =>
+    "<tr><td><span class='pitchchip' style='background:" + pitchColour(p.pitch_deg) + "'></span>" +
+    "Face " + (i + 1) + " · " + bearingName(p.aspect_deg) + "</td>" +
+    "<td class='n'>" + fmt(p.pitch_deg, 1) + "°</td>" +
+    "<td class='n'>" + fmt(p.sloped_area_m2, 1) + " m²</td></tr>").join("");
+
+  // --- confidence ---------------------------------------------------------
+  $("#prov").innerHTML =
+    "<span>Source <b>" + data.source.name + "</b></span>" +
+    "<span>Flown <b>" + data.source.imagery + "</b></span>" +
+    "<span>Grid <b>" + data.location.grid_ref + "</b></span>";
+  $("#notes").innerHTML = data.notes.map(n => "<li>" + n + "</li>").join("");
+
+  renderMaterials();
+}
+
+function renderMaterials() {
+  const q = current.quantities, c = COVERINGS[$("#cover").value];
+  const sloped = q.sloped_area_m2;
+  const rows = [
+    [c.label, Math.ceil(sloped * c.per_m2 * WASTE) + " units", "sloped area × " + c.per_m2 + "/m² × 10% waste"],
+    ["Battens", fmt(sloped * c.batten * WASTE, 0) + " m", "at " + c.batten + " m/m²"],
+    ["Breather membrane", fmt(sloped * MEMBRANE_LAP, 0) + " m²", "includes laps"],
+    ["Ridge tiles", Math.ceil((q.ridge_m + q.hip_m) * RIDGE_PER_M * WASTE) + " units", "ridge + hip run"],
+    ["Guttering", fmt(q.eaves_m, 1) + " m", "eaves run"]
+  ];
+  $("#mats").innerHTML = rows.map(r =>
+    "<tr><td>" + r[0] + "<span class='sub'>" + r[2] + "</span></td>" +
+    "<td class='n'>" + r[1] + "</td></tr>").join("");
+}
+
+function drawRose(planes) {
+  const svg = $("#rose");
+  const max = Math.max(...planes.map(p => p.sloped_area_m2));
+  let out = "";
+
+  // graticule + cardinals
+  [40, 70, 92].forEach(r =>
+    out += `<circle cx="0" cy="0" r="${r}" fill="none" stroke="var(--line)" stroke-width="1"/>`);
+  [["N",0],["E",90],["S",180],["W",270]].forEach(([l, deg]) => {
+    const a = (deg - 90) * Math.PI / 180;
+    out += `<text x="${Math.cos(a) * 99}" y="${Math.sin(a) * 99 + 3}" text-anchor="middle">${l}</text>`;
+  });
+
+  planes.forEach(p => {
+    const r = 22 + (p.sloped_area_m2 / max) * 68;
+    const half = 20; // wedge half-width in degrees
+    const a0 = (p.aspect_deg - half - 90) * Math.PI / 180;
+    const a1 = (p.aspect_deg + half - 90) * Math.PI / 180;
+    const x0 = Math.cos(a0) * r, y0 = Math.sin(a0) * r;
+    const x1 = Math.cos(a1) * r, y1 = Math.sin(a1) * r;
+    out += `<path d="M0,0 L${x0.toFixed(1)},${y0.toFixed(1)} A${r},${r} 0 0 1 ${x1.toFixed(1)},${y1.toFixed(1)} Z"
+             fill="${pitchColour(p.pitch_deg)}" fill-opacity=".82"
+             stroke="var(--surface)" stroke-width="1.5"/>`;
+  });
+  svg.innerHTML = out;
+
+  $("#legend").innerHTML = planes.map((p, i) =>
+    "<div class='row'><span class='sw' style='background:" + pitchColour(p.pitch_deg) + "'></span>" +
+    "<span class='lbl'>" + bearingName(p.aspect_deg) + " · " + fmt(p.pitch_deg, 1) + "°</span>" +
+    "<span class='area'>" + fmt(p.sloped_area_m2, 1) + " m²</span></div>").join("");
+}
+
+// --- the measure run --------------------------------------------------------
+const STAGE_MS = [700, 900, 1500, 1100, 600];
+
+function measure() {
+  const pc = $("#pc").value.trim();
+  if (!pc) { $("#pc").focus(); return; }
+
+  $("#search").classList.add("hidden");
+  $("#report").classList.add("hidden");
+  $("#working").classList.remove("hidden");
+
+  const items = [...document.querySelectorAll("#steps li")];
+  items.forEach(li => li.className = "");
+
+  let i = 0;
+  (function step() {
+    if (i > 0) items[i - 1].className = "done";
+    if (i === items.length) {
+      current = SAMPLE;
+      render(current);
+      $("#working").classList.add("hidden");
+      $("#report").classList.remove("hidden");
+      $("#report").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    items[i].className = "on";
+    setTimeout(step, STAGE_MS[i++]);
+  })();
+}
+
+$("#go").addEventListener("click", measure);
+$("#pc").addEventListener("keydown", e => { if (e.key === "Enter") measure(); });
+$("#cover").addEventListener("change", renderMaterials);
+document.querySelectorAll(".examples button").forEach(b =>
+  b.addEventListener("click", () => { $("#pc").value = b.dataset.pc; measure(); }));
+
+// Re-resolve theme-dependent colours when the viewer flips theme.
+new MutationObserver(() => { if (current) { drawRose(current.planes); render(current); } })
+  .observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+</script>

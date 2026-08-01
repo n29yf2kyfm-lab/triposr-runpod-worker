@@ -44,5 +44,6 @@ Or base64:
 
 ## Deployment
 
-Endpoint ID: `mj7aiqksmbnkw1` on RunPod (AMPERE_48 GPU)
+Endpoint: `nd0fagqlr5z2ur` (`trellis2-v2`) on RunPod.
+The older `mj7aiqksmbnkw1` endpoint has been retired.
 # Trigger rebuild - secrets now configured

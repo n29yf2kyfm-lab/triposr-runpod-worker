@@ -1,0 +1,138 @@
+# Building Scanner — RunPod Serverless Worker
+
+Scan a real building. Reconstruct it 1:1 inside and out, including the pipes and cables
+behind the walls. Price the job at live local material prices and order the materials.
+Audit its condition. Design the extension.
+
+Full spec: [`../PLAN.md`](../PLAN.md) · Competitor teardown: [`../COMPETITORS.md`](../COMPETITORS.md)
+
+## Isolation — read this first
+
+This worker shares **nothing at runtime** with the live vehicle worker in `trellis2/`.
+
+| | Vehicle (live — do not touch) | Building (this) |
+|---|---|---|
+| Endpoint | `nd0fagqlr5z2ur` (`trellis2-v2`) · `ng8oiz4p2l0xa0` (`render-v2`) | its own, not yet created |
+| Image | `alamk123/ai-mechanic:trellis2-*` | `alamk123/building-scan:*` |
+| CI trigger | `trellis2/**` | `building/**` |
+| HF cache | `/runpod-volume/hf_cache` | `/runpod-volume/building_hf_cache` |
+| Outputs | `/runpod-volume/outputs` | `/runpod-volume/building-outputs` |
+| Bucket | existing | `building-scans` |
+
+`validation.py` and `delivery.py` duplicate patterns from `trellis2/handler.py` **on
+purpose**. Extracting them into a shared module would mean editing the vehicle worker,
+which would rebuild and redeploy its production image. A few hundred duplicated lines cost
+far less than breaking a product that is earning. A test asserts this isolation holds.
+
+## Job contract
+
+```json
+{
+  "input": {
+    "mode": "reconstruct",
+    "project_id": "12-acacia-avenue",
+    "scan_id": "kitchen-first-fix",
+    "stage": "open",
+    "quality": "survey",
+    "video_url": "https://.../walkaround.mp4",
+    "roomplan_url": "https://.../kitchen.usdz",
+    "depth_url": "https://.../depth.bin"
+  }
+}
+```
+
+### Modes
+
+| Mode | Does | Phase |
+|---|---|---|
+| `reconstruct` | capture → registered metric point cloud | 1 |
+| `register` | align two scans (open↔closed, room↔room) | 1 / 4 |
+| `price` | IFC or RoomPlan → quantities → priced quote | 2 |
+| `supply` | quantities → merchant basket → RFQ → order | 2b |
+| `structure` | point cloud → IFC walls, slabs, openings, rooms | 3 |
+| `services` | open-scan cloud → pipe and cable runs → IFC systems | 4 |
+| `condition` | imagery + thermal → 3D-located, costed defects | 5 |
+| `design` | footprint + rules → massing + planning checks | 6 |
+
+Unimplemented modes return `status: "not_implemented"` with the implementing phase and a
+validated manifest — never a bare 500.
+
+### Key fields
+
+- **`stage`** — `open` (first fix, services exposed) or `closed` (finished). Pairing the two
+  is what produces the X-ray. An `open` scan on `quality: "fast"` warns: thin services sit
+  near the resolution limit and **the wall cannot be recaptured once boarded**.
+- **`quality`** — `fast` (MapAnything feed-forward), `quality` (+ COLMAP), `survey`
+  (+ Gaussian splat).
+- **`scale_source`** — defaults to `auto`. LiDAR depth is metric directly and always wins;
+  otherwise scale comes from known-object anchors and the response **warns**, because an
+  unscaled model is dangerous to quote or cut from.
+
+### Scale anchors (non-LiDAR path)
+
+| Anchor | Dimension | Why |
+|---|---|---|
+| **Brick coursing** | **4 courses = 300 mm** | Best reference in Britain — national standard, on nearly every house, and averaging across 20 courses beats any single object |
+| Socket height | 450 mm | Building Regs Part M — mandated, so reliable indoors |
+| Switch height | 1200 mm | Part M |
+| Internal door | 762×1981 mm | Near-universal |
+| Plasterboard | 2400×1200 mm | On every first-fix site |
+
+## Output
+
+```json
+{
+  "status": "success",
+  "mode": "reconstruct",
+  "manifest": { "...how your input was interpreted..." },
+  "artifacts": {
+    "cloud.ply": { "url": "https://...", "size_bytes": 84000000 }
+  },
+  "warnings": ["..."]
+}
+```
+
+**Delivery matters more here than anywhere.** RunPod silently drops oversized outputs — the
+vehicle worker hit this live, returning `COMPLETED` with `output=None`. Point clouds and IFC
+models are far larger than GLBs, so object storage is the primary channel; inline base64
+only under 4 MB; and when neither can deliver, the response says so loudly rather than
+claiming success.
+
+## Environment
+
+| Variable | Purpose |
+|---|---|
+| `SUPABASE_URL` / `SUPABASE_KEY` / `SUPABASE_BUCKET` | Artifact delivery (bucket defaults to `building-scans`) |
+| `BUILDING_OUTPUT_DIR` | Local artifact path (default `/runpod-volume/building-outputs`) |
+| `HF_HOME` | Model cache — **must** be the building path, not the vehicle one |
+| `OFFLINE=1` | Forbid runtime downloads; pair with `preload_models.py` |
+| `DEBUG=1` | Include tracebacks in responses (bring-up only — they leak paths) |
+| `GOOGLE_SOLAR_API_KEY` | Optional. Enables the Google Solar cross-check on Roof Mode. **Never commit a key** — set it on the endpoint, as with `SUPABASE_KEY` |
+| `FOOTPRINT_CACHE_DIR` | On-disk cache of OSM footprints (Overpass rate-limits and its mirrors time out) |
+
+## Deployment
+
+- **GPU: 48 GB (A6000 / A40)** as the default tier. Feed-forward reconstruction scales VRAM
+  with frame count, so `max_frames` is capped and enforced rather than advisory; tile large
+  properties instead of reaching for an 80 GB card.
+- **Own network volume.** RunPod volumes are region-locked, so the endpoint's GPU pool must
+  sit in the same data centre as its volume. It does **not** need to match the vehicle
+  worker's region.
+- **Retention.** Nothing prunes `building-outputs`, and scans are far larger than GLBs. Set
+  a retention policy **before** the first real user, not after.
+
+## Tests
+
+```sh
+python building/test_handler.py
+```
+
+83 assertions, no GPU, no network, runs in seconds — same approach as the vehicle worker:
+stub the heavy modules, then test the contract logic. CI runs these **before** building the
+image, so a broken contract never reaches a deployable tag.
+
+## Build
+
+`.github/workflows/building-docker-build.yml` — triggers only on `building/**`, tags
+`alamk123/building-scan:{sha,v1,latest}`. Dependencies install before the source `COPY`, so
+code edits reuse the cached layers.
