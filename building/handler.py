@@ -52,6 +52,9 @@ PHASE_OF_MODE = {
     "reconstruct": ("1", "MapAnything fast path, COLMAP quality path, "
                          "metric scale enforced"),
     "register":    ("1", "ICP alignment; open<->closed pairing lands in Phase 4"),
+    "roof":        ("1b", "open LIDAR (EA National LIDAR Programme, ~99% of "
+                          "England at 1m, free) -> roof planes, pitch, areas; "
+                          "OpenDroneMap for optional drone capture"),
     "price":       ("2", "quantities from RoomPlan parametric output -> "
                          "rate card -> quote"),
     "supply":      ("2b", "basket -> merchant RFQ -> order; invoice OCR "
@@ -74,7 +77,7 @@ def _pipeline_available(mode):
     module = {
         "reconstruct": "reconstruct", "register": "register",
         "structure": "structure", "services": "services",
-        "price": "takeoff", "supply": "supply",
+        "roof": "roof", "price": "takeoff", "supply": "supply",
         "condition": "condition", "design": "design",
     }.get(mode)
     if not module:
@@ -108,6 +111,28 @@ def _resolve_scale_source(spec):
     return "anchors"
 
 
+def _resolve_roof_source(spec):
+    """Decide how this job gets roof geometry.
+
+    Open LIDAR first, deliberately. The Environment Agency's National LIDAR
+    Programme covers ~99% of England at 1m resolution with +/-15cm vertical
+    RMSE, free and without an account. That is enough for pitch, plane areas
+    and ridge/hip/valley lines — enough to price a re-roof — from an address
+    alone, with no site visit, no aircraft and no CAA paperwork.
+
+    Drone last. UK rules from January 2026 require Flyer and Operator IDs, an
+    A2 CofC for closer work, and separation distances that make close roof
+    surveys impractical on an ordinary residential street.
+    """
+    if spec["roof_source"] != "auto":
+        return spec["roof_source"]
+    if spec["address"] or spec["gps"]:
+        return "lidar_open"
+    if spec["drone_image_urls"]:
+        return "drone"
+    return "ground"
+
+
 def _job_manifest(spec, job_id, scale_source):
     """The normalised job description. Returned on every response so a
     caller can see exactly how their input was interpreted — which is also
@@ -130,7 +155,11 @@ def _job_manifest(spec, job_id, scale_source):
             "thermal": len(spec["thermal_urls"]),
             "point_cloud": bool(spec["point_cloud_url"]),
             "ifc": bool(spec["ifc_url"]),
+            "drone_images": len(spec["drone_image_urls"]),
+            "address": bool(spec["address"]),
         },
+        "roof_source": _resolve_roof_source(spec) if spec["mode"] == "roof"
+                       else None,
         "limits": {
             "max_frames": spec["max_frames"],
             "max_points": spec["max_points"],
@@ -228,7 +257,7 @@ def _dispatch(mode, spec, prog):
     module_name = {
         "reconstruct": "reconstruct", "register": "register",
         "structure": "structure", "services": "services",
-        "price": "takeoff", "supply": "supply",
+        "roof": "roof", "price": "takeoff", "supply": "supply",
         "condition": "condition", "design": "design",
     }[mode]
     module = __import__(module_name)

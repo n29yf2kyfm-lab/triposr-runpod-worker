@@ -22,11 +22,27 @@ MODES = (
     "structure",     # point cloud -> IFC (walls, slabs, openings, rooms)
     "services",      # open-scan point cloud -> pipe/cable runs -> IFC systems
     "register",      # align two scans (open<->closed, room<->room)
+    "roof",          # aerial LIDAR / drone -> roof planes, pitch, areas
     "price",         # IFC/RoomPlan -> quantities -> priced quote
     "supply",        # quantities -> merchant basket + RFQ
     "condition",     # imagery + thermal -> 3D-located defects
     "design",        # footprint + rules -> massing, planning checks
 )
+
+# Roof capture sources, cheapest and easiest first.
+#
+# "lidar_open" is the important one: the Environment Agency's National LIDAR
+# Programme covers ~99% of England at 1m resolution with +/-15cm vertical
+# RMSE, as free open data with no account needed. That is enough for roof
+# pitch, plane areas, ridge/hip/valley lines and chimney positions — i.e.
+# enough to price a re-roof — from nothing but an address. No drone, no CAA
+# paperwork, no site visit.
+#
+# Drone is deliberately LAST. UK rules from January 2026 require a Flyer ID
+# and Operator ID, an A2 CofC for closer work, and impose separation
+# distances that make close roof surveys impractical on a normal residential
+# street with legacy aircraft.
+ROOF_SOURCES = ("lidar_open", "ground", "drone", "auto")
 
 # Scale sources, in order of trust. LiDAR depth is metric directly; the
 # anchor path derives scale from known-size objects (UK brick coursing,
@@ -165,6 +181,15 @@ def parse_job(job_input):
                                        "scale_reference_m", None, 0.01, 100.0)
     spec["gps"] = job_input.get("gps") or None
 
+    # --- roof ----------------------------------------------------------
+    # An address or grid reference is enough to pull open LIDAR coverage,
+    # so roof geometry needs no site visit at all for most English property.
+    spec["address"] = (str(job_input.get("address") or "").strip() or None)
+    spec["roof_source"] = _one_of(job_input.get("roof_source"), "roof_source",
+                                  ROOF_SOURCES, default="auto")
+    spec["drone_image_urls"] = _str_list(job_input.get("drone_image_urls"),
+                                         "drone_image_urls", MAX_FRAMES)
+
     # --- per-mode extras ------------------------------------------------
     spec["rate_card"] = job_input.get("rate_card") or None
     spec["registration_target"] = (
@@ -209,6 +234,13 @@ def _check_required_inputs(spec):
                                     or spec["thermal_urls"]):
         raise InputError(
             "condition needs imagery: image_urls, video_url or thermal_urls.")
+
+    if mode == "roof" and not (spec["address"] or spec["gps"]
+                               or spec["drone_image_urls"]
+                               or spec["image_urls"]):
+        raise InputError(
+            "roof needs address or gps (to fetch open LIDAR coverage), or "
+            "drone_image_urls / image_urls to reconstruct from.")
 
     if mode == "design" and not (spec["ifc_url"] or spec["design_rules"]):
         raise InputError(

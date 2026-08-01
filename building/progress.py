@@ -28,6 +28,8 @@ STAGE_PLANS = {
                     "classifying", "building_ifc", "exporting"],
     "register":    ["fetching", "coarse_align", "icp", "scoring",
                     "exporting"],
+    "roof":        ["fetching", "clipping_footprint", "fitting_planes",
+                    "extracting_edges", "quantities", "exporting"],
     "price":       ["fetching", "quantities", "pricing", "exporting"],
     "supply":      ["fetching", "matching_products", "quoting", "exporting"],
     "condition":   ["fetching", "detecting", "locating_3d", "grading",

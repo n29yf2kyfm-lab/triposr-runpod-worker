@@ -141,7 +141,40 @@ survey.
 **Never sell this alone** — uSurv gives photo defect detection away free. Sell it bundled
 with 3D location, measured extent, thermal, and services correlation.
 
-## 1.6 Design Mode
+## 1.6 Roof Mode — and why you probably don't need a drone
+
+Roofing, fascia and guttering are big-ticket work, so roof geometry matters for pricing. The
+cheapest route is also the best one, and it needs no aircraft.
+
+**Three tiers, cheapest first:**
+
+| Tier | Source | Cost | Covers |
+|---|---|---|---|
+| **1. Open LIDAR** | **EA National LIDAR Programme** | **Free** | **~99% of England**, 1 m resolution, **±15 cm vertical RMSE**, LAZ point cloud or GeoTIFF DSM/DTM, **no account needed** |
+| 2. Ground | The exterior walk-around already planned | Free | Eaves, fascia, guttering, verges, lower roof |
+| 3. Drone | **OpenDroneMap / WebODM** | Kit + licensing | Detail inspection, complex or steep roofs |
+
+**Tier 1 is the unlock.** 1 m resolution with ±15 cm vertical accuracy is enough for **roof
+pitch, plane areas, ridge/hip/valley lines and chimney positions** — enough to price a
+re-roof — **from nothing but an address.** No site visit, no aircraft, no CAA paperwork, no
+weather window. Fetch the tile, clip to the building footprint, RANSAC the planes, extract
+the edges. **No model, no training** — it is open data plus plane fitting.
+
+Note the 25 cm and 50 cm products were withdrawn from the portal; 1 m and 2 m remain.
+
+**Why drone is last, not first.** UK rules from January 2026 require a Flyer ID (free) for
+anything over 100 g and an Operator ID (£12.34/yr), with an **A2 CofC** (£70–100) for closer
+work. The separation distances **"effectively prevent close façade, roof and
+confined-structure surveys"** with legacy aircraft — A2 CofC holders keep **50 m from
+uninvolved people**, and a UK2-class drone is needed to work at 30 m or 5 m. On an ordinary
+terraced street, 50 m separation is not achievable. Drone stays supported and optional; it
+is not the default.
+
+**Competitive consequence.** EagleView and Hover charge per report for aerial roof
+measurement — Hover is $999/yr plus per-project fees. **In England the underlying data is
+free.** That is a structural cost advantage on every UK roof job, not a feature difference.
+
+## 1.7 Design Mode
 
 Procedural shape-grammar massing (the CityEngine/CGA approach: footprint + rules → 3D
 building), parametric IFC editing via IfcOpenShell, AI layouts constrained to the *measured*
@@ -271,6 +304,8 @@ raw accuracy. Hence both, behind a quality flag.
 | DXF export | **ezdxf** | MIT |
 | Web BIM viewer | **web-ifc / IFC.js** + **three.js** | MPL / MIT |
 | Thermal | FLIR One / Seek clip-on | Hardware |
+| Roof (default) | **EA National LIDAR** — open data | Open Government Licence |
+| Roof (drone) | **OpenDroneMap / WebODM** | AGPL / MPL |
 
 The two-stage **YOLO → SAM 2** pattern is what the 2026 crack-segmentation literature
 converged on, and published work already pairs **SAM 2 with Gaussian splatting** for defect
@@ -493,6 +528,12 @@ it wins. **Validate accuracy against ScanNet++ laser ground truth and publish th
 iGUIDE claims 0.5% / 1 cm@40 m; we need our own figure before any 1:1 claim.
 *Ships:* walk a property, get a scaled 3D model with a tape measure.
 
+**Phase 1b — Roof Mode.** Fetch EA open LIDAR by address, clip to footprint, RANSAC roof
+planes, extract ridge/hip/valley, output pitch and areas. OpenDroneMap path for optional
+drone capture. **No model and no training — open data plus plane fitting.**
+*Ships:* type an address, get a measured roof. **Free where EagleView and Hover charge per
+report.**
+
 **Phase 2 — Price Mode.** Areas, lengths and counts from RoomPlan's parametric output → rate
 card → itemised quote PDF. **Does not need the full BIM pipeline.**
 *Ships:* scan a room, price the plastering, painting, flooring, tiling. **First revenue.**
@@ -571,6 +612,9 @@ multi-storey stitching, collaboration, client portal.
 | COLMAP | https://colmap.github.io |
 | gsplat / Nerfstudio | https://docs.nerf.studio |
 | Apple RoomPlan | https://developer.apple.com/augmented-reality/roomplan |
+| EA National LIDAR (free, ~99% of England) | https://environment.data.gov.uk/survey |
+| OpenDroneMap / WebODM | https://webodm.org |
+| UK drone rules (CAA) | https://register-drones.caa.co.uk |
 | ARKitScenes | https://github.com/apple/ARKitScenes |
 | web-ifc / IFC.js | https://ifcjs.github.io/info |
 | SPON's / BCIS / NRM2 | https://www.bcis.co.uk |

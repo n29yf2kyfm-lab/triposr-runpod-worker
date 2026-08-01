@@ -153,6 +153,7 @@ cases = [
     ({"mode": "price"}, "ifc_url"),
     ({"mode": "condition"}, "image_urls"),
     ({"mode": "design"}, "ifc_url"),
+    ({"mode": "roof"}, "address"),
 ]
 for job_input, expected in cases:
     r = run(job_input)
@@ -164,12 +165,38 @@ for mode, (phase, _desc) in H.PHASE_OF_MODE.items():
     job_input = {
         "mode": mode, "video_url": "u", "point_cloud_url": "p",
         "ifc_url": "i", "image_urls": ["a"], "registration_target": "scan1",
+        "address": "12 Acacia Avenue",
     }
     r = run(job_input)
     check(f"8 {mode} routed", r.get("status") == "not_implemented",
           str(r)[:120])
     check(f"8 {mode} reports phase {phase}", r.get("phase") == phase)
     check(f"8 {mode} returns a manifest", "manifest" in r)
+
+# ---- Test 8b: roof source resolution -------------------------------------
+# Open LIDAR must win whenever an address or GPS is available: it covers
+# ~99% of England at 1m free, so most roofs need no site visit and no drone.
+s = parse_job({"mode": "roof", "address": "12 Acacia Avenue"})
+check("8b-1 address -> open lidar", H._resolve_roof_source(s) == "lidar_open")
+s = parse_job({"mode": "roof", "gps": {"lat": 51.5, "lon": -0.1}})
+check("8b-2 gps -> open lidar", H._resolve_roof_source(s) == "lidar_open")
+s = parse_job({"mode": "roof", "drone_image_urls": ["d1", "d2"]})
+check("8b-3 drone imagery -> drone", H._resolve_roof_source(s) == "drone")
+s = parse_job({"mode": "roof", "image_urls": ["g1"]})
+check("8b-4 ground imagery only -> ground",
+      H._resolve_roof_source(s) == "ground")
+# An address plus drone imagery still prefers the free, instant path.
+s = parse_job({"mode": "roof", "address": "12 Acacia Avenue",
+               "drone_image_urls": ["d1"]})
+check("8b-5 address beats drone", H._resolve_roof_source(s) == "lidar_open")
+s = parse_job({"mode": "roof", "address": "x", "roof_source": "drone"})
+check("8b-6 explicit source honoured", H._resolve_roof_source(s) == "drone")
+r = run({"mode": "roof", "address": "12 Acacia Avenue"})
+check("8b-7 roof source in manifest",
+      r["manifest"]["roof_source"] == "lidar_open", str(r["manifest"])[:160])
+r = run({"mode": "reconstruct", "video_url": "u"})
+check("8b-8 roof source absent for other modes",
+      r["manifest"]["roof_source"] is None)
 
 # ---- Test 9: the manifest reflects the input faithfully ------------------
 r = run({"mode": "reconstruct", "image_urls": ["a", "b", "c"],
