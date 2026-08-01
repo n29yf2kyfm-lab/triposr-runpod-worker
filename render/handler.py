@@ -888,14 +888,35 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
 
     # robust bounds via vertex percentiles (stray verts can't blow up framing)
     axs = [[], [], []]
-    zmin_true = 1e9
     for o in meshes():
         mw = o.matrix_world
         for v in o.data.vertices:
             w = mw @ v.co
             axs[0].append(w[0]); axs[1].append(w[1]); axs[2].append(w[2])
-            if w[2] < zmin_true:
-                zmin_true = w[2]
+
+    # Ground height comes from the object bounding boxes, NOT from raw
+    # o.data.vertices.
+    #
+    # The two disagree. Measured on the VW Sharan at the moment the floor is
+    # built: bound_box puts the car at Z 0.000..1.767 (correct -- 1.767 m is a
+    # Sharan's height, and this number tracked the Icosphere rig removal
+    # exactly, 2.767 -> 1.767). The vertex scan returns -2.170. `o.data.vertices`
+    # is the raw stored mesh, unevaluated: it does not reflect the depsgraph
+    # state Blender actually renders, so for rigged/parented meshes -- this
+    # model's wheels are `wheel_lf.child.001/.002/.003` -- it reports positions
+    # the renderer never uses.
+    #
+    # The floor is laid at this value, so a -2.170 reading put the studio floor
+    # 2.17 units BENEATH the wheels and every hero rendered with the car hanging
+    # in mid-air. Four earlier diagnoses of that symptom (strip_env damage, a
+    # stray mesh below, spare wheels above, the Icosphere) were all wrong; this
+    # is the measured cause.
+    zmin_true = 1e9
+    for o in meshes():
+        for cnr in o.bound_box:
+            wz = (o.matrix_world @ mathutils.Vector(cnr))[2]
+            if wz < zmin_true:
+                zmin_true = wz
     for a in axs:
         a.sort()
 
