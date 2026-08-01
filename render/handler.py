@@ -500,6 +500,54 @@ _RIG_MAX_FACES = 200     # a sphere/box rig; car parts are far denser
 _RIG_ISOTROPY = 1.30     # max/min extent — a ball or box, not a car part
 _RIG_MIN_SPAN = 0.35     # of car length: big enough to move the bbox
 
+# Thresholds for stepping over a stray that sits below the wheels. Both must
+# hold before a mesh is skipped, and the floor may never climb past _STRAY_MAX
+# of the model's vertical spread, so a bad call can only sink a car slightly --
+# never lift it back into the air, which is the failure being fixed.
+_STRAY_GAP = 0.05        # of the zmin spread: a clear void under the car
+_STRAY_MASS = 0.01       # of total faces: negligible geometry, never a wheel
+_STRAY_MAX = 0.30        # of the zmin spread: hard ceiling on the correction
+
+
+def _ground_z(meshes):
+    """Height of the ground the car stands on.
+
+    Takes the bottom of the CAR, not the bottom of the scene. Scraped GLBs
+    routinely carry a stray -- a shadow plane, an aerial, a leftover locator --
+    whose bounding box reaches below the tyres, and a blind minimum lays the
+    studio floor under that instead, leaving the car hanging in mid-air.
+
+    Walks the per-mesh bbox minima upward and steps over a mesh only when it
+    sits alone in a gap beneath everything else AND holds under _STRAY_MASS of
+    the faces. A wheel fails both tests: it carries real geometry, and it sits
+    level with the other three, so there is no gap above it to step across.
+    Where no such gap exists this returns the plain minimum, so models that
+    were already correct are untouched.
+    """
+    import mathutils as _mu
+    ms = []
+    for o in meshes():
+        zs = [(o.matrix_world @ _mu.Vector(c))[2] for c in o.bound_box]
+        ms.append((min(zs), len(o.data.polygons)))
+    if not ms:
+        return 0.0
+    ms.sort(key=lambda t: t[0])
+    spread = ms[-1][0] - ms[0][0]
+    total = sum(f for _, f in ms)
+    if spread <= 0 or total <= 0:
+        return ms[0][0]
+
+    floor, cum = ms[0][0], 0
+    for i in range(len(ms) - 1):
+        cum += ms[i][1]
+        if (ms[i + 1][0] - ms[i][0]) > _STRAY_GAP * spread \
+                and cum <= _STRAY_MASS * total \
+                and (ms[i + 1][0] - ms[0][0]) <= _STRAY_MAX * spread:
+            floor = ms[i + 1][0]
+            continue
+        break
+    return floor
+
 
 def _drop_rigs(bpy, mathutils, meshes):
     """Remove enclosing environment rigs before anything measures the scene.
@@ -911,12 +959,20 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     # in mid-air. Four earlier diagnoses of that symptom (strip_env damage, a
     # stray mesh below, spare wheels above, the Icosphere) were all wrong; this
     # is the measured cause.
-    zmin_true = 1e9
-    for o in meshes():
-        for cnr in o.bound_box:
-            wz = (o.matrix_world @ mathutils.Vector(cnr))[2]
-            if wz < zmin_true:
-                zmin_true = wz
+    #
+    # A blind minimum over every mesh is still wrong, and that was measured too.
+    # The 2017 Golf (Sketchfab 0fcad851) carries `Object_177`, a 1,008-face
+    # stray spanning the whole scene vertically: the body sits at -28.352 and
+    # that one object reaches -40.236, so the floor went 11.9 units under the
+    # tyres and the car floated exactly as before. So take the bottom of the
+    # CAR, not the bottom of the scene: walk the per-mesh bbox minima upward and
+    # step over anything that sits alone in a gap below everything else while
+    # holding a negligible share of the faces. A wheel never qualifies -- it
+    # carries real geometry and sits level with the other wheels. Nothing is
+    # deleted here, only excluded from the floor height, so the worst case of a
+    # misjudgement is a car sunk slightly into the floor rather than one
+    # missing its wheels.
+    zmin_true = _ground_z(meshes)
     for a in axs:
         a.sort()
 
