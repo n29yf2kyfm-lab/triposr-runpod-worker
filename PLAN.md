@@ -482,26 +482,34 @@ repo/
 ├── handler.py               # TripoSR (legacy)          ─┐
 ├── trellis/                 # TRELLIS v1 (superseded)    │ UNTOUCHED
 ├── trellis2/                # TRELLIS.2 — vehicles, live ─┘
-├── PLAN.md                  # this document
-├── COMPETITORS.md           # teardown + patents
-└── building/                # NEW — fully self-contained
-    ├── handler.py           #   router: reconstruct | structure | price | supply | condition
-    ├── Dockerfile
-    ├── delivery.py          #   supabase upload + size gating   (copied from trellis2)
-    ├── validation.py        #   input parsing, clamping, errors  (copied)
-    ├── reconstruct.py       #   MapAnything fast path, COLMAP quality path, gsplat
-    ├── register.py          #   ICP: open↔closed, room↔room, inside↔outside
-    ├── scale.py             #   LiDAR primary; UK brick/socket fallback anchors
-    ├── structure.py         #   Cloud2BIM wrap → IFC
-    ├── services.py          #   pipe/cable extraction → IfcPipeSegment etc.
-    ├── takeoff.py           #   IFC → quantities → priced quote → ESX
-    ├── supply.py            #   basket → merchant RFQ; invoice OCR price index
-    ├── condition.py         #   YOLO + SAM 2 → 3D defect pins → health score
-    ├── design.py            #   procedural massing + permitted-development checks
-    ├── vendor/Cloud2BIM/    #   vendored at a pinned commit
-    ├── preload_models.py
-    ├── pod_setup.sh
-    └── test_handler.py
+└── building/                # the building scanner, self-contained
+    ├── handler.py           #   job router across all modes
+    ├── validation.py        #   input parsing, clamping, errors   (copied)
+    ├── delivery.py          #   storage upload + size gating      (copied)
+    ├── progress.py          #   staged progress for long jobs
+    │
+    ├── osgb.py              # ✅ WGS84 ↔ British National Grid
+    ├── roof.py              # ✅ Roof Mode — open LIDAR → takeoff
+    ├── roof_geometry.py     # ✅ plane fitting, pitch, edges, quantities
+    ├── solar.py             # ✅ Google Solar cross-check
+    ├── scale.py             # ✅ metric scale, or refuse
+    ├── reconstruct.py       # ⚠  frame selection ✅, model call UNTESTED
+    ├── takeoff.py           # ✅ Price Mode — quantities → quote
+    ├── prices.py            # ✅ three tiers, ranked sources, forecasting
+    ├── regs.py              # ✅ UK Building Regs, uncertainty-aware
+    ├── safety.py            # ✅ scaffolding, work at height, CDM
+    ├── terrain.py           # ✅ levels, earthworks, drainage, foundations
+    │
+    ├── valuation.py         # ○ Land Registry + EPC
+    ├── supply.py            # ○ merchant RFQ, invoice OCR index
+    ├── structure.py         # ○ Cloud2BIM → IFC
+    ├── services.py          # ○ pipe/cable extraction → the X-ray
+    ├── condition.py         # ○ YOLO + SAM 2 defects
+    ├── design.py            # ○ procedural massing + planning checks
+    ├── vendor/Cloud2BIM/    # ○ vendored at a pinned commit
+    └── web/index.html       # ✅ roof report UI
+
+    ✅ built and tested   ⚠ written, unproven   ○ not started
 ```
 
 Nothing in `building/` imports from `trellis2/`.
@@ -516,6 +524,34 @@ defect register); RunPod serverless workers behind both.
 ---
 
 # Part 8 — Build order
+
+**Status at this commit: 611 tests passing, `trellis2/` untouched throughout.**
+
+| | Phase | State |
+|---|---|---|
+| ✅ | 0 — scaffold, isolated | done |
+| ✅ | 1b — Roof Mode | **works on real addresses** |
+| ✅ | 1 — metric scale | done |
+| ⚠ | 1 — reconstruction | orchestration done; **model call never run** |
+| ✅ | 2 — Price Mode | done |
+| ✅ | — material prices, 3 tiers, forecasting | done |
+| ✅ | — Building Regs engine | done |
+| ✅ | — safety, scaffolding, CDM | done |
+| ✅ | — site levels, earthworks, foundations | done |
+| ○ | — valuation (Land Registry + EPC) | researched, free |
+| ○ | 2b — Supply Mode (RFQ + invoice OCR) | next |
+| ○ | 3 — Structure → IFC | |
+| ○ | 4 — **the X-ray** | the wedge |
+| ○ | 5 — Condition Mode | |
+| ○ | 6 — Design Mode | |
+| ○ | 7 — 2D drawing takeoff, Xactimate ESX | the two competitor gaps |
+
+**The one real blocker:** the reconstruction path needs a GPU to be proven.
+CI only builds the image on `main`, so that needs either a merge or a pod build.
+Every bug found so far in the roof path came from running against real data —
+the reconstruction path has not had that yet, and should be expected to yield
+the same crop.
+
 
 **Phase 0 — Scaffold, isolated.** `building/` with handler, Dockerfile, own CI workflow
 (`building/**` filter, `building-scan` tag), test file — **copying** `trellis2/` patterns.
