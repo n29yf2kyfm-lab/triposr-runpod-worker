@@ -101,6 +101,7 @@ Four modes, one model.
 | **Open Scan** | Capture at first fix — pipes and cables exposed, before plasterboard | Builder, on site |
 | **Closed Scan** | Capture the finished building, registered to the open scan → X-ray view | Anyone, later |
 | **Price Mode** | Scan a job → quantities → itemised quote | Estimating |
+| **Supply Mode** | Quantities → **live local merchant prices → basket → order** | Buying materials |
 | **Condition Mode** | Find damp, leaks, cracked tiles, cracks → pin in 3D → price the fix | Surveys, snagging, audits |
 
 ### 2.1 The core idea: scan before the plasterboard
@@ -165,7 +166,52 @@ list. Re-scan mid-job and variations price themselves against the original.
 This is the fastest route to revenue, and it is what the very first reference searched for:
 *AI construction takeoff*.
 
-### 2.3 Condition Mode
+### 2.3 Supply Mode — "Amazon for builders"
+
+Price Mode ends at a number. Supply Mode carries it through to materials arriving on site:
+
+```
+  scan ─► quantities ─► live local prices ─► basket ─► order ─► delivered
+```
+
+**Nobody currently joins that chain.** The market splits cleanly in two, and neither half
+crosses the gap:
+
+- **Scan-and-estimate tools** (magicplan, Togal, Hover) end at a number, priced off a
+  *static* price list the user maintains by hand.
+- **Materials marketplaces** (BuildBuddy — "Skyscanner for building materials",
+  BuyMaterials.com, Materials Market, PriceNailer, and Kojo in the US) start from a builder
+  *typing in* what they need.
+
+The scan already knows the quantities. Going straight from measured geometry to a priced,
+orderable basket of real materials at real local prices is the missing link — and it is
+what makes Price Mode differentiated rather than a magicplan clone.
+
+**Getting real prices — the honest engineering problem.** There is no public API for
+Travis Perkins, Jewson, Screwfix or the rest, and scraping breaches their terms. Worse,
+there is no such thing as "the price of a sheet of plasterboard": **trade pricing is
+account-specific and confidential**, with discount terms negotiated per builder. Trade
+beats retail by 15–40%, and every builder's number differs.
+
+Four legitimate routes, in build order:
+
+| Route | How | Notes |
+|---|---|---|
+| **1. RFQ to merchant network** | Send the basket to local merchants; they respond with their price | **No API needed at all.** Proven — this is exactly how BuyMaterials.com works. The pragmatic starting point. |
+| **2. Invoice OCR price index** | Users photograph their own delivery notes and invoices; OCR them into a **local, real, paid-price index** | **The moat.** Legally clean — it is the user's own data. Improves with every job and every user. Nobody can buy this. |
+| **3. Merchant partnerships / affiliate** | Formal integration and referral commission | The revenue model; needs relationships, not code |
+| **4. Punchout catalogues (cXML / OCI)** | Standard e-procurement integration | Larger merchants only |
+
+Route 2 is the interesting one. It is the same logic as the first-fix corpus: **the data
+only exists at the moment a builder is standing there**, and capturing it builds an asset
+that compounds. A live, crowd-sourced index of what materials actually cost, locally, this
+week — versus a static price book — is genuinely valuable on its own.
+
+**Revenue.** This changes the business model. A builder spends tens of thousands a year on
+materials; a small commission on that dwarfs a £40/month subscription. Software becomes the
+thing that wins the customer; materials become the thing that pays.
+
+### 2.4 Condition Mode
 
 | Defect | Detected by |
 |---|---|
@@ -185,7 +231,7 @@ damp patch grew 400 mm. That comparison is worth more than any single survey.
 Out: pre-purchase survey, snagging list, dilapidations schedule, insurance pack, post-build
 audit.
 
-### 2.4 Design
+### 2.5 Design
 
 Procedural shape-grammar massing (the CityEngine/CGA approach — footprint + rules → 3D
 building), parametric IFC editing via IfcOpenShell, AI layouts constrained to the
@@ -487,6 +533,20 @@ gives no model, but it needs nothing captured in advance.
 | magicplan | Scan → takeoff → estimate | **Direct** |
 | Kreo / Bluebeam / eTakeoff / Buildxact | Established estimating | Plan-based |
 
+**Materials marketplaces / procurement**
+
+| Product | What it does | Threat |
+|---|---|---|
+| **BuildBuddy** (UK) | "Skyscanner for building materials" — compare prices across suppliers | Direct on price comparison |
+| **BuyMaterials.com** (UK) | Basket → one click RFQ to local merchant network; Universal Trade Accounts, 30-day terms | **Closest model.** Proves the RFQ route works. |
+| **Materials Market** (UK) | Bulky materials — timber, insulation, plasterboard — one point of contact across suppliers | Established |
+| **PriceNailer** (UK) | Live weekly price tracker, 14 major merchants | Price data, not ordering |
+| **Kojo** (US) | Procurement platform; **Sourcing Grid** compares current *and historical* pricing across suppliers | The mature version of this idea |
+| EasyEstimate (UK) | Free tier with live material prices | Estimating + prices |
+
+**None of them start from a scan.** Every one begins with the builder typing in what they
+need. That is the gap Supply Mode occupies.
+
 **Condition / defect survey**
 
 | Product | What it does | Threat |
@@ -505,7 +565,9 @@ The honest gaps:
 
 1. **Price Mode is not open ground.** magicplan already does scan → plan → takeoff →
    estimate on a phone. Shipping a generic version of that competes with an established,
-   cheap product. It needs a reason to exist.
+   cheap product. **Supply Mode is its reason to exist** — magicplan prices against a
+   static list the user maintains; this prices against live local merchant quotes and ends
+   in an order.
 2. **Condition Mode faces a free competitor.** uSurv gives away damp/mould/crack detection.
 3. **The X-ray has the clearest gap** — but iGUIDE occupies the "record before drywall"
    idea, and radar tools occupy "see inside this wall". What neither does is
@@ -553,6 +615,13 @@ output → rate card → itemised quote PDF. **Does not need the full BIM pipeli
 already carries wall and floor areas — so it ships early.
 *Ships:* scan a room, price the plastering, painting, flooring, tiling. **First thing
 anyone pays for.**
+
+**Phase 2b — Supply Mode.** Quantities → materials basket → **RFQ to local merchants**
+(route 1, no APIs required) → itemised order. Ship the **invoice OCR price index** (route 2)
+alongside it from day one, so the local price corpus starts building immediately.
+*Ships:* scan a job, get real local prices, place the order. **This is what makes Price
+Mode differentiated rather than a magicplan clone — and it opens materials commission,
+a far bigger revenue pool than subscriptions.**
 
 **Phase 3 — Structure.** Vendor Cloud2BIM. Point cloud → IFC. Floor plan vectorization.
 Inside/outside registration. Export IFC/DXF/PDF.
