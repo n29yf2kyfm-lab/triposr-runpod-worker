@@ -107,6 +107,41 @@ def _one_of(value, name, allowed, default=None):
     return value
 
 
+def _quantities(value):
+    """Validate a measured-quantities map.
+
+    A quantity is what gets ordered and what gets charged, so a malformed one
+    must fail here rather than turn into a delivery. Zero and negative are
+    refused outright: a zero-quantity line is either a measurement that
+    failed or an element that is not there, and both are worth saying out
+    loud instead of quietly pricing at nothing.
+    """
+    if value is None:
+        return None
+    if not isinstance(value, dict):
+        raise InputError(
+            "quantities must be an object mapping product to amount, e.g. "
+            '{"battens": 503.3, "membrane": 158.0}')
+    out = {}
+    for key, amount in value.items():
+        name = str(key).strip()
+        if not name:
+            raise InputError("quantities has an entry with no product name")
+        try:
+            number = float(amount)
+        except (TypeError, ValueError):
+            raise InputError(
+                f"quantities[{name!r}] must be a number — got {amount!r}")
+        if number != number or number in (float("inf"), float("-inf")):
+            raise InputError(f"quantities[{name!r}] is not a finite number")
+        if number <= 0:
+            raise InputError(
+                f"quantities[{name!r}] is {number}. A quantity must be "
+                f"positive; drop the line rather than sending a zero.")
+        out[name] = number
+    return out or None
+
+
 def _str_list(value, name, max_len):
     """Coerce to a list of non-empty strings, with a length cap."""
     if value is None:
@@ -196,6 +231,29 @@ def parse_job(job_input):
 
     # --- per-mode extras ------------------------------------------------
     spec["rate_card"] = job_input.get("rate_card") or None
+    # Measured quantities, keyed by product. Price mode can work straight
+    # from these — a roof job already has them from roof mode, and until the
+    # IFC path lands it is the only way to reach Price Mode at all.
+    spec["quantities"] = _quantities(job_input.get("quantities"))
+
+    # --- supply ----------------------------------------------------------
+    # A price list, either inline or by URL. No scraping: this is the user's
+    # own trade prices, a licensed affiliate product feed, or a published
+    # list. See supply.py for why the VAT basis is mandatory rather than
+    # inferred.
+    spec["price_list_csv"] = (job_input.get("price_list_csv") or None)
+    spec["price_list_url"] = (str(job_input.get("price_list_url") or "").strip()
+                              or None)
+    spec["channel"] = _one_of(job_input.get("channel"), "channel",
+                              ("trade_account", "invoice", "quote",
+                               "affiliate_feed", "published"),
+                              default="published")
+    spec["vat"] = _one_of(job_input.get("vat"), "vat",
+                          ("ex", "inc", "unknown"), default="unknown")
+    spec["supplier"] = (str(job_input.get("supplier") or "").strip() or None)
+    spec["tier"] = _one_of(job_input.get("tier"), "tier",
+                           ("economy", "standard", "premium"),
+                           default="standard")
     spec["registration_target"] = (
         str(job_input.get("registration_target") or "").strip() or None)
     # Design Mode: procedural rules in the CGA lineage — a footprint plus
@@ -230,9 +288,19 @@ def _check_required_inputs(spec):
             "against (typically the open scan).")
 
     if mode == "price" and not (spec["ifc_url"] or spec["roomplan_url"]
-                                or spec["point_cloud_url"]):
+                                or spec["point_cloud_url"]
+                                or spec["quantities"]):
         raise InputError(
-            "price needs ifc_url, roomplan_url, or point_cloud_url.")
+            "price needs measured quantities, or something to derive them "
+            "from: pass quantities directly (roof mode returns them), or "
+            "ifc_url, roomplan_url, or point_cloud_url.")
+
+    if mode == "supply" and not (spec["price_list_csv"]
+                                 or spec["price_list_url"]):
+        raise InputError(
+            "supply needs a price list: price_list_csv inline, or "
+            "price_list_url pointing at a CSV export from your merchant "
+            "account or a licensed product feed.")
 
     if mode == "condition" and not (spec["image_urls"] or spec["video_url"]
                                     or spec["thermal_urls"]):

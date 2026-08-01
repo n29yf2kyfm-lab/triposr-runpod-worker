@@ -320,6 +320,58 @@ check("16c own output dir, not the vehicle worker's",
 check("16d own default bucket",
       'SUPABASE_BUCKET", "building-scans"' in src)
 
+# ---- Test 18: quantities and the supply contract --------------------------
+# A quantity is what gets ordered and what gets charged, so a malformed one
+# must fail at the door rather than turn into a delivery.
+s = parse_job({"mode": "price", "quantities": {"battens": 503.3}})
+check("18a quantities reach the spec", s["quantities"] == {"battens": 503.3},
+      str(s["quantities"]))
+check("18b price mode is reachable from quantities alone", True)
+
+for bad, label in [({"battens": 0}, "zero"),
+                   ({"battens": -5}, "negative"),
+                   ({"battens": "loads"}, "non-numeric"),
+                   ({"": 5}, "unnamed"),
+                   ([("battens", 5)], "not an object")]:
+    try:
+        parse_job({"mode": "price", "quantities": bad})
+        check(f"18c {label} quantity refused", False)
+    except InputError:
+        check(f"18c {label} quantity refused", True)
+
+# Price mode with nothing at all to work from must still refuse.
+try:
+    parse_job({"mode": "price"})
+    check("18d price with no source of quantities refused", False)
+except InputError as e:
+    check("18d price with no source of quantities refused",
+          "quantities" in str(e), str(e))
+
+check("18e supply is implemented", "supply" in IMPLEMENTED, str(IMPLEMENTED))
+s = parse_job({"mode": "supply", "price_list_csv": "a,b\n1,2\n",
+               "vat": "ex", "channel": "trade_account"})
+check("18f supply fields reach the spec",
+      s["vat"] == "ex" and s["channel"] == "trade_account", str(s["vat"]))
+check("18g vat defaults to unknown, never to a guess",
+      parse_job({"mode": "supply", "price_list_url": "u"})["vat"] == "unknown")
+
+try:
+    parse_job({"mode": "supply"})
+    check("18h supply with no price list refused", False)
+except InputError as e:
+    check("18h supply with no price list refused", "price list" in str(e),
+          str(e))
+
+for bad, label in [({"channel": "carrier_pigeon"}, "channel"),
+                   ({"vat": "maybe"}, "vat"),
+                   ({"tier": "deluxe"}, "tier")]:
+    try:
+        parse_job(dict({"mode": "supply", "price_list_url": "u"}, **bad))
+        check(f"18i unknown {label} refused", False)
+    except InputError:
+        check(f"18i unknown {label} refused", True)
+
+
 # ---- Test 17: the suite must run on a bare Python --------------------------
 # CI installs nothing: these tests exist to run with no GPU, no network and
 # no dependencies. A module-level `import requests` in delivery.py broke the

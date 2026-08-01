@@ -41,6 +41,9 @@ jobs:
       - name: Run material price tests
         run: python building/test_prices.py
 
+      - name: Run supply and price-list import tests
+        run: python building/test_supply.py
+
   build:
     needs: test
     runs-on: ubuntu-latest

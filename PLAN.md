@@ -501,7 +501,7 @@ repo/
     ├── terrain.py           # ✅ levels, earthworks, drainage, foundations
     │
     ├── valuation.py         # ○ Land Registry + EPC
-    ├── supply.py            # ○ merchant RFQ, invoice OCR index
+    ├── supply.py            # ✅ price-list import, multi-supplier, basket
     ├── structure.py         # ○ Cloud2BIM → IFC
     ├── services.py          # ○ pipe/cable extraction → the X-ray
     ├── condition.py         # ○ YOLO + SAM 2 defects
@@ -539,7 +539,8 @@ defect register); RunPod serverless workers behind both.
 | ✅ | — safety, scaffolding, CDM | done |
 | ✅ | — site levels, earthworks, foundations | done |
 | ○ | — valuation (Land Registry + EPC) | researched, free |
-| ○ | 2b — Supply Mode (RFQ + invoice OCR) | next |
+| ✅ | 2b — Supply Mode: price-list import, multi-supplier, basket | done |
+| ○ | 2b — Supply Mode: merchant RFQ round-trip | next |
 | ○ | 3 — Structure → IFC | |
 | ○ | 4 — **the X-ray** | the wedge |
 | ○ | 5 — Condition Mode | |
