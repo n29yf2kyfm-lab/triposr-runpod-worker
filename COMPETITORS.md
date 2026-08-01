@@ -256,7 +256,102 @@ Worth writing down, because pretending otherwise leads to bad decisions.
 
 ---
 
-## 5. Consequences for the build
+## 5. Patent intelligence
+
+Patents are the legitimate route to a competitor's actual method. The bargain is public
+disclosure in exchange for protection — **reading them is free and intended**. Implementing
+a live claim in a jurisdiction where it is granted is not. So they serve two purposes:
+free technical education, and a map of what to design around.
+
+### 5.1 Hover — the scaling problem, solved
+
+Hover holds a substantial portfolio on smartphone-photo → 3D building models:
+
+| Patent | Subject |
+|---|---|
+| **US20160224696A1** | **Scaling in a multi-dimensional building model** |
+| US9437033B2 | Generating 3D building models with ground-level and orthogonal images |
+| US10713842B2 | Real-time processing of captured building imagery |
+| US11721066B2 | 3D building model materials auto-populator |
+| US9330504B2 | 3D building model construction tools |
+
+**US20160224696A1 addresses our number-one risk: metric scale from a phone camera with no
+LiDAR.** Their claimed method:
+
+1. Detect known architectural elements — **doors, windows, bricks** — by object or line
+   detection.
+2. Measure each element's **width-to-height ratio in pixels**.
+3. Compare against a library of architectural standards within an error tolerance (~±10%).
+4. Derive scale from the relative error of the matched ratio.
+5. Apply the scale factor to the whole model.
+6. A **weighted decision engine** averages multiple elements per image, improving
+   statistically over time.
+
+Their cited references are US standards: exterior doors at **36″×80″ (9:20 ratio)**, and
+modular/Norman brick dimensions.
+
+**This confirms the approach works** — and it is worth far more to us adapted to the UK,
+where the standards are different and, in one case, better:
+
+| UK reference | Dimension | Why it's good |
+|---|---|---|
+| **Brick coursing** | **4 courses = 300 mm exactly** (215×102.5×65 mm brick + 10 mm joint) | **The best scale reference in Britain.** National standard, on nearly every house, visible from any exterior photo, and self-averaging over many courses |
+| Brick coordinating length | 225 mm | Horizontal equivalent |
+| Internal door | 762×1981 mm | Near-universal domestic |
+| External door | 838×1981 mm | Common |
+| **Socket height** | **450 mm from finished floor** | **Building Regs Part M — mandated, so reliable indoors** |
+| **Switch height** | **1200 mm** | Also Part M |
+| Plasterboard sheet | 2400×1200 mm | On every first-fix site |
+| Scaffold tube | 48.3 mm dia | Present on most exteriors mid-job |
+
+Brick coursing is the standout: measuring across **twenty courses** rather than one door
+averages out detection error and gives a far tighter scale estimate than any single object.
+The socket and switch heights are regs-mandated, which makes them dependable *interior*
+references — something the Hover patent, being exterior-focused, does not address.
+
+**Design-around position.** Our primary scale source is **LiDAR depth**, which is metric
+directly and touches none of this. The known-object method is only the **non-LiDAR
+fallback**, we would implement it against UK standards and multi-course averaging rather
+than their US ratio-library method, and "use a known-size object for photogrammetric scale"
+has decades of surveying prior art. Even so: **get a patent attorney to clear the fallback
+before shipping it commercially.** Note the patent was filed ~2015, so it runs to roughly
+2035, and patents are jurisdictional — a US grant does not bind UK operation unless they
+also hold UK/EP equivalents. Worth checking.
+
+### 5.2 Matterport — 64 patents
+
+A deep portfolio covering 3D capture, immersive navigation (including orbiting a model and
+viewing an orthographic floor plan), and Cortex's deep-learning spatial understanding.
+
+**Implication:** the crowded ground is *real-estate 3D tour presentation*. Our territory —
+first-fix services capture, trade pricing, materials ordering — sits outside it. Another
+reason not to chase Matterport's game.
+
+### 5.3 Planitar (iGUIDE) — only 3 patents
+
+Thin protection for the company whose concept is closest to ours. Their moat is **hardware
+and accuracy**, not patent coverage.
+
+**Business intel worth knowing: REA Group took a majority stake in Planitar in October
+2025.** iGUIDE now has major property-group backing, so expect faster movement — and note
+that REA is a *property portal* group, which points them further toward real estate rather
+than trade work.
+
+### 5.4 What to do with this
+
+1. **Adopt UK brick coursing as the fallback scale anchor** — better than anything in the
+   Hover patent, and free.
+2. **Use socket/switch heights as interior scale anchors** — regs-mandated, unaddressed by
+   their exterior-focused claims.
+3. **Keep LiDAR as the primary scale path** so the patented method is never on the critical
+   path.
+4. **Clear the fallback with an attorney** before commercial launch.
+5. **Read the rest of the Hover portfolio** — the materials auto-populator (US11721066B2) is
+   relevant to Supply Mode and worth a full read.
+
+---
+
+## 6. Consequences for the build
 
 1. **Accuracy validation moves early.** iGUIDE publishes 0.5% / 1 cm. We need our own
    number, measured against ScanNet++'s sub-millimetre laser ground truth, before making
