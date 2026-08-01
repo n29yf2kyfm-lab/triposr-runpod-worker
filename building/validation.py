@@ -189,6 +189,10 @@ def parse_job(job_input):
                                   ROOF_SOURCES, default="auto")
     spec["drone_image_urls"] = _str_list(job_input.get("drone_image_urls"),
                                          "drone_image_urls", MAX_FRAMES)
+    # Escape hatch for an isolated building with no OSM footprint. Off by
+    # default: without a footprint the samples cover the neighbourhood, and
+    # a street-sized quantity is worse than no quantity.
+    spec["allow_unclipped"] = bool(job_input.get("allow_unclipped", False))
 
     # --- per-mode extras ------------------------------------------------
     spec["rate_card"] = job_input.get("rate_card") or None

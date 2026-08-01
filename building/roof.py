@@ -40,8 +40,14 @@ EA_DTM_WCS = os.environ.get(
     "https://environment.data.gov.uk/spatialdata/"
     "lidar-composite-digital-terrain-model-dtm-1m/wcs")
 POSTCODE_API = os.environ.get("POSTCODE_API", "https://api.postcodes.io")
-OVERPASS_API = os.environ.get("OVERPASS_API",
-                              "https://overpass-api.de/api/interpreter")
+# Overpass is free community infrastructure and rate-limits under load. A
+# transient failure there must never be allowed to silently degrade a quote,
+# so try the public mirrors in turn before giving up.
+OVERPASS_APIS = [u for u in os.environ.get(
+    "OVERPASS_APIS",
+    "https://overpass-api.de/api/interpreter,"
+    "https://overpass.kumi.systems/api/interpreter,"
+    "https://overpass.osm.ch/api/interpreter").split(",") if u.strip()]
 
 # EA composite vertical accuracy. Carried into every result so a caller can
 # see the error bar rather than infer false precision.
@@ -129,13 +135,19 @@ def fetch_footprint(lat, lon, radius_m=30):
     query = (f"[out:json][timeout:{HTTP_TIMEOUT}];"
              f"way(around:{radius_m},{lat},{lon})[building];"
              f"out geom;")
-    try:
-        r = requests.post(OVERPASS_API, data={"data": query},
-                          headers=HTTP_HEADERS, timeout=HTTP_TIMEOUT)
-        r.raise_for_status()
-        elements = r.json().get("elements") or []
-    except Exception as e:
-        print(f"footprint lookup failed: {e}", file=sys.stderr)
+
+    elements = None
+    for endpoint in OVERPASS_APIS:
+        try:
+            r = requests.post(endpoint, data={"data": query},
+                              headers=HTTP_HEADERS, timeout=HTTP_TIMEOUT)
+            r.raise_for_status()
+            elements = r.json().get("elements") or []
+            break
+        except Exception as e:
+            print(f"footprint lookup via {endpoint} failed: {e}",
+                  file=sys.stderr)
+    if elements is None:
         return None
 
     best, best_d = None, float("inf")
@@ -441,11 +453,25 @@ def run(spec, prog, output_dir):
         footprint_area = polygon_area(footprint)
         prog.note(f"{before} -> {len(inside)} in footprint -> {len(points)} "
                   f"clear of the {BOUNDARY_INSET_M}m edge")
+    elif not spec.get("allow_unclipped"):
+        # Without a footprint the samples cover the whole neighbourhood, not
+        # one building. Live-confirmed when Overpass rate-limited mid-test:
+        # the same house returned 2,696 m2 and 29,669 tiles — the entire
+        # street. A warning is not enough for a number that wrong, because a
+        # quote carrying it is worse than no quote at all.
+        raise RuntimeError(
+            "No building footprint could be found for this location, so the "
+            "roof cannot be separated from its neighbours. Refusing to "
+            "produce quantities that would cover the whole street. "
+            "OpenStreetMap may not have this building mapped, or the lookup "
+            "may have been rate-limited — retry, or pass an explicit "
+            "footprint. Set allow_unclipped=true only for an isolated "
+            "building with nothing else within 60m.")
     else:
         notes.append(
-            "No building footprint found in OpenStreetMap for this location. "
-            "Points were NOT clipped to one building, so neighbouring roofs "
-            "may be included and areas may be overstated.")
+            "UNCLIPPED: no footprint was used, so these figures may include "
+            "neighbouring buildings. Areas and quantities are upper bounds, "
+            "not a takeoff.")
 
     if dtm:
         points = normalise(points, dtm)
