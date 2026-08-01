@@ -493,6 +493,9 @@ editor, quote builder, defect register; RunPod serverless workers behind both.
 Every mode in this plan is contested. Researched honestly, because the differentiation is
 narrower than the first draft assumed.
 
+> **Full teardown: [`COMPETITORS.md`](./COMPETITORS.md)** — capability-by-capability audit
+> of every product below, mapped to how we build and beat each one. Summary follows.
+
 **Scan → 3D / floor plan**
 
 | Product | What it does | Threat |
