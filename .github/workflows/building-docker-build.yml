@@ -32,6 +32,8 @@ jobs:
         run: python building/test_reconstruct.py
       - name: Run price mode tests
         run: python building/test_takeoff.py
+      - name: Run building regulations tests
+        run: python building/test_regs.py
 
   build:
     needs: test
