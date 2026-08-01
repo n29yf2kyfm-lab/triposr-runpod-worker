@@ -442,6 +442,97 @@ editor, quote builder, defect register; RunPod serverless workers behind both.
 
 ---
 
+## Part 4.8 — Competitive landscape
+
+Every mode in this plan is contested. Researched honestly, because the differentiation is
+narrower than the first draft assumed.
+
+**Scan → 3D / floor plan**
+
+| Product | What it does | Threat |
+|---|---|---|
+| **magicplan** | AR/LiDAR room scan → measured floor plan → **takeoff → cost estimating** | **Highest.** Ships Phases 2–3 today, on phones, cheap. |
+| Matterport | 3D tours, Cortex AI, floor plans | Real-estate focused, not trade |
+| Polycam | Consumer/prosumer 3D capture, strong exports | Designers, not contractors |
+| Canvas (Occipital) | Scan → CAD, as a paid service | Turnaround service, not instant |
+| Cupix | Construction digital twins, imports any point cloud | Enterprise |
+| Apple RoomPlan | Free, built into iOS | It's our own dependency |
+
+**Progress capture / before drywall**
+
+| Product | What it does | Threat |
+|---|---|---|
+| **iGUIDE** | Explicitly markets *"see behind the walls"* — captures plumbing, HVAC, framing and wiring before drywall, scanning at each stage to build a 3D record | **Closest to the core idea.** But it is a panoramic photo record for renovation documentation, not a measured MEP model with AR overlay. |
+| OpenSpace / Buildots | 360° walkthroughs, AI maps to floor plan, compares to BIM and schedule | Enterprise, main-contractor focused |
+| StructionSite / Disperse / Doxel / PlanRadar | Same category | Same |
+
+**Seeing through finished walls — the hardware route**
+
+| Product | What it does | Threat |
+|---|---|---|
+| **Resolv InSite Pro** | Radar wall imaging, annotate and export scans, builds a "living digital history of hidden structural details" | **Real.** Different technical route to the same outcome. |
+| Walabot DIY | ~£100 consumer through-wall radar, ~100 mm depth | Cheap and good enough for "don't drill here" |
+| Bosch D-tect / Hilti PS | Professional wall scanners | Established trade tools |
+
+**This category deserves respect: radar works on *existing* buildings with no prior scan** —
+the exact case our open/closed approach cannot serve. It is shallow, low-resolution and
+gives no model, but it needs nothing captured in advance.
+
+**Takeoff / estimating**
+
+| Product | Price | Threat |
+|---|---|---|
+| **Togal.AI** | $299/user/month, ~98% on floor plans | 2D plans, not scans |
+| **Hover** | $999/yr + per project — photos → measurements | Exterior; strong in roofing/siding |
+| magicplan | Scan → takeoff → estimate | **Direct** |
+| Kreo / Bluebeam / eTakeoff / Buildxact | Established estimating | Plan-based |
+
+**Condition / defect survey**
+
+| Product | What it does | Threat |
+|---|---|---|
+| **uSurv homeSurvey** | AI defect detection — damp, mould, cracks — **free on iOS and Android** | **High.** Free undercuts a paid defect feature. |
+| Inspekt AI | Façade analysis, thermal, 3D | Commercial buildings |
+| Pointivo | AI defect investigation | Enterprise |
+| DampApp Pro | UK damp survey software and compliance | UK, established |
+
+### What this means
+
+**No competitor does all four modes on one measured model.** That is real, but it is a
+weaker claim than "nobody does this".
+
+The honest gaps:
+
+1. **Price Mode is not open ground.** magicplan already does scan → plan → takeoff →
+   estimate on a phone. Shipping a generic version of that competes with an established,
+   cheap product. It needs a reason to exist.
+2. **Condition Mode faces a free competitor.** uSurv gives away damp/mould/crack detection.
+3. **The X-ray has the clearest gap** — but iGUIDE occupies the "record before drywall"
+   idea, and radar tools occupy "see inside this wall". What neither does is
+   **phone-only capture at first fix producing a measured, classified MEP model that
+   overlays in AR on the finished wall.**
+
+### The strategic answer: the modes are one product, not four
+
+The differentiator is not any single mode — it is that **the services model makes the
+pricing and condition modes better than a standalone tool can be.**
+
+- magicplan prices what it can see. **This prices what is behind the wall too** — "moving
+  that soil stack to fit the new bathroom costs £X" — because the pipe run is in the model.
+- uSurv finds a damp patch. **This finds a damp patch and knows there is a pipe joint
+  400 mm behind it**, and prices the repair.
+- Radar tells you not to drill. **This tells you what the pipe is, where it runs, what it
+  serves, and what it costs to move.**
+
+That is defensible in a way that any one mode alone is not — and it rests on the first-fix
+data corpus (§4.5), which is the one asset a competitor cannot download.
+
+**Build-order consequence:** Phase 2 (Price Mode) remains the fastest revenue, but it is
+**not** the differentiator and should not be marketed as one. The wedge is the X-ray. Treat
+early pricing revenue as funding the thing that actually distinguishes the product.
+
+---
+
 ## Part 5 — Build order
 
 **Phase 0 — Scaffold, isolated.** Create `building/` with handler, Dockerfile, its own CI
