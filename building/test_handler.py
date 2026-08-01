@@ -227,9 +227,19 @@ check("9e records quality", m["quality"] == "survey")
 check("9f records job id", m["job_id"] == "job-9")
 check("9g records scale source", m["scale_source"] == "anchors")
 
-# ---- Test 10: manifest persisted to disk ---------------------------------
+# ---- Test 10: manifest persisted on every path ---------------------------
+# The manifest records how the input was interpreted, which matters most
+# when the job did NOT do what the caller expected — so it is written
+# whether the job succeeded, was unimplemented, or failed outright.
 path = os.path.join(_TMP, "job-9.manifest.json")
 check("10a manifest written", os.path.exists(path))
+r = run({"mode": "reconstruct", "video_url": "u"}, job_id="job-fail")
+check("10c manifest written even when the job fails",
+      os.path.exists(os.path.join(_TMP, "job-fail.manifest.json")),
+      str(r)[:100])
+check("10d failed job still carries its warnings",
+      any("anchor" in w.lower() for w in r.get("warnings", [])),
+      str(r.get("warnings")))
 if os.path.exists(path):
     with open(path) as f:
         saved = json.load(f)

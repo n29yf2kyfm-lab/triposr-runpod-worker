@@ -239,17 +239,36 @@ def handler(job):
         return result
 
     except InputError as e:
-        return {"error": str(e), "manifest": manifest}
+        return _fail({"error": str(e)}, manifest, warnings, job_id)
     except Exception as e:
         # Tracebacks leak paths and internals to whoever calls the endpoint.
         # Ship them only under DEBUG=1; production gets the message and the
         # full trace goes to worker logs. Same policy as the vehicle worker.
-        result = {"error": f"{type(e).__name__}: {e}", "manifest": manifest}
+        result = {"error": f"{type(e).__name__}: {e}"}
         if os.environ.get("DEBUG") == "1":
             result["traceback"] = traceback.format_exc()
         else:
             print(traceback.format_exc(), file=sys.stderr)
-        return result
+        return _fail(result, manifest, warnings, job_id)
+
+
+def _fail(result, manifest, warnings, job_id):
+    """Attach everything the caller can still act on to a failed job.
+
+    Warnings are computed before the work starts — an anchor-derived scale,
+    a first-fix scan on the fast tier — and they stay relevant when the job
+    fails. Dropping them on the error path throws away the diagnosis at
+    exactly the moment someone needs it.
+
+    The manifest is persisted on every path for the same reason: it records
+    how the input was interpreted, which is most valuable when the result
+    was not what the caller expected.
+    """
+    result["manifest"] = manifest
+    if warnings:
+        result["warnings"] = warnings
+    _persist_manifest(manifest, job_id, result)
+    return result
 
 
 def _dispatch(mode, spec, prog):
