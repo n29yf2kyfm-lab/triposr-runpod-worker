@@ -26,6 +26,8 @@ jobs:
         run: python building/test_handler.py
       - name: Run roof geometry tests
         run: python building/test_roof.py
+      - name: Run metric scale tests
+        run: python building/test_scale.py
 
   build:
     needs: test
