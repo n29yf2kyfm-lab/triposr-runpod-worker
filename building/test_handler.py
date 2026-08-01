@@ -160,8 +160,15 @@ for job_input, expected in cases:
     check(f"7 {job_input['mode']} requires {expected}",
           "error" in r and expected in r["error"], str(r)[:140])
 
-# ---- Test 8: routing reports the implementing phase honestly -------------
+# ---- Test 8: routing ------------------------------------------------------
+# Implemented modes dispatch; the rest report the phase that builds them,
+# so the API is honest about what it can do today.
+IMPLEMENTED = {m for m in H.PHASE_OF_MODE if H._pipeline_available(m)}
+check("8-0 roof is implemented", "roof" in IMPLEMENTED, str(IMPLEMENTED))
+
 for mode, (phase, _desc) in H.PHASE_OF_MODE.items():
+    if mode in IMPLEMENTED:
+        continue
     job_input = {
         "mode": mode, "video_url": "u", "point_cloud_url": "p",
         "ifc_url": "i", "image_urls": ["a"], "registration_target": "scan1",
@@ -172,6 +179,15 @@ for mode, (phase, _desc) in H.PHASE_OF_MODE.items():
           str(r)[:120])
     check(f"8 {mode} reports phase {phase}", r.get("phase") == phase)
     check(f"8 {mode} returns a manifest", "manifest" in r)
+
+# An implemented mode that cannot reach its data must fail with an
+# actionable message, not a traceback — the worker has no network here.
+r = run({"mode": "roof", "address": "not a real postcode"})
+check("8-1 roof dispatches for real", "error" in r, str(r)[:120])
+check("8-2 roof error is actionable",
+      "postcode" in r.get("error", "") or "gps" in r.get("error", ""),
+      r.get("error", "")[:160])
+check("8-3 no traceback leaked", "traceback" not in r)
 
 # ---- Test 8b: roof source resolution -------------------------------------
 # Open LIDAR must win whenever an address or GPS is available: it covers

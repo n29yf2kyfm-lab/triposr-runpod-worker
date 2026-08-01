@@ -24,6 +24,8 @@ jobs:
           python-version: '3.10'
       - name: Run handler tests
         run: python building/test_handler.py
+      - name: Run roof geometry tests
+        run: python building/test_roof.py
 
   build:
     needs: test
