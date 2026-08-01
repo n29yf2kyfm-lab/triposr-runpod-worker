@@ -40,7 +40,7 @@ Semantic tokens first — reference these names, not raw hex, in components.
 | `--border-strong`     | `#3A404A`  | Focused/active borders                                     |
 | `--text-primary`      | `#F4F5F7`  | Headings, primary copy                                     |
 | `--text-secondary`    | `#9BA1AC`  | Labels, secondary copy, metadata                          |
-| `--text-muted`        | `#5C636E`  | Placeholders, disabled, hints                             |
+| `--text-muted`        | `#818996`  | Placeholders, disabled, hints — AA on every surface       |
 | `--accent-violet`     | `#7C5CFF`  | Signature start — primary action, active                  |
 | `--accent-cyan`       | `#22D3EE`  | Signature end — highlights, links, focus ring             |
 | `--accent-ink`        | `#0B0C0E`  | Text/icon color on top of the bright gradient             |
@@ -59,6 +59,22 @@ Semantic tokens first — reference these names, not raw hex, in components.
 - Exactly one gradient per view carrying the primary action. Everything else is flat.
 - Semantic colors (success/warning/danger) appear only in status, never decoration.
 - Text on the gradient is always `--accent-ink`, never white, to hold AA contrast.
+
+**Measured contrast — do not change these values without re-measuring**
+
+| pair | ratio | note |
+| --- | --- | --- |
+| `--accent-ink` on `--accent-violet` | **4.50:1** | AA, with zero margin — darkening the violet breaks it |
+| `--accent-ink` on `--accent-cyan` | 10.83:1 | comfortable |
+| `#FFFFFF` on `--accent-violet` | 4.35:1 | fails — this is why ink, not white |
+| `--text-secondary` on `--bg-surface` | 6.84:1 | |
+| `--text-muted` on `--bg-surface` | 5.03:1 | |
+| `--text-muted` on `--bg-surface-raised` | 4.57:1 | the tightest of the three surfaces |
+
+`--text-muted` was `#5C636E`, which measured 2.93:1 on `--bg-surface` and 2.66:1
+on raised — a clear AA failure on the smallest type in the system (placeholders,
+hints, Caption). It was lifted to `#818996`, the smallest same-hue change that
+clears 4.5:1 on all three surfaces.
 
 ---
 
@@ -213,7 +229,7 @@ THEME     Dark render-viewport studio. Near-black canvas, iridescent violet→cy
           signature (normal-map colors) used ONLY for the primary action + active state.
 
 COLOR     bg #0B0C0E · surface #16181D · raised #1E2128 · inset #101216
-          border #262A31 · text #F4F5F7 / #9BA1AC / #5C636E
+          border #262A31 · text #F4F5F7 / #9BA1AC / #818996
           accent violet #7C5CFF → cyan #22D3EE  (gradient 135deg)
           success #34D399 · warning #FBBF24 · danger #F87171
           Text on gradient = #0B0C0E (never white).

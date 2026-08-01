@@ -5,10 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TripoSR Studio — DESIGN.md Preview</title>
 <meta name="description" content="Visual catalog of the TripoSR Studio design system defined in DESIGN.md." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
+/* Fonts are self-hosted so the page makes NO third-party request. It previously
+   pulled Inter and JetBrains Mono from fonts.googleapis.com while the README
+   promised "self-contained and offline" -- which was untrue, left the type
+   catalog rendering in fallback faces exactly when opened offline, and sent
+   every visitor's IP and referrer to Google. Both are variable fonts (one file
+   spans the whole weight range) and both are SIL Open Font License 1.1. */
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 600;font-display:swap;
+  src:url(fonts/Inter-var-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,
+    U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 500;font-display:swap;
+  src:url(fonts/JetBrainsMono-var-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,
+    U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 /* ============================================================
    TripoSR Studio — DESIGN.md visual preview (static, offline)
    Every value below is drawn from DESIGN.md.
@@ -16,7 +27,7 @@
 :root{
   --bg-viewport:#0B0C0E; --bg-surface:#16181D; --bg-surface-raised:#1E2128;
   --bg-inset:#101216; --border-hairline:#262A31; --border-strong:#3A404A;
-  --text-primary:#F4F5F7; --text-secondary:#9BA1AC; --text-muted:#5C636E;
+  --text-primary:#F4F5F7; --text-secondary:#9BA1AC; --text-muted:#818996;
   --accent-violet:#7C5CFF; --accent-cyan:#22D3EE; --accent-ink:#0B0C0E;
   --success:#34D399; --warning:#FBBF24; --danger:#F87171;
   --gradient-signature:linear-gradient(135deg,#7C5CFF 0%,#22D3EE 100%);
@@ -66,7 +77,10 @@ section{margin-top:56px}
 /* --- color swatches --- */
 .swatches{display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:var(--s3)}
 .swatch{border:1px solid var(--border-hairline); border-radius:var(--r-input); overflow:hidden;
-  background:var(--bg-surface); cursor:copy}
+  background:var(--bg-surface); cursor:copy; display:block; width:100%; padding:0;
+  text-align:left; font:inherit; color:inherit}
+.swatch:focus-visible{outline:none; box-shadow:0 0 0 2px var(--bg-viewport),
+  0 0 0 4px rgba(34,211,238,.6)}
 .swatch .chip{height:64px}
 .swatch .meta{padding:var(--s3)}
 .swatch .tok{font-family:var(--mono); font-size:12px; color:var(--text-primary)}
@@ -96,7 +110,11 @@ section{margin-top:56px}
   letter-spacing:.01em; font-family:inherit; cursor:pointer; border:1px solid transparent;
   transition:filter .15s ease, background .15s ease, transform .05s ease}
 .btn:active{transform:translateY(1px)}
-.btn:focus-visible{outline:none; box-shadow:0 0 0 2px rgba(34,211,238,.6); outline-offset:2px}
+/* Two shadow layers, not outline-offset: `outline-offset` is inert next to
+   `outline:none`, so the DESIGN.md-specified 2px offset never rendered. The
+   first layer paints the gap in the page background, the second is the ring. */
+.btn:focus-visible{outline:none;
+  box-shadow:0 0 0 2px var(--bg-viewport), 0 0 0 4px rgba(34,211,238,.6)}
 .btn-primary{background:var(--gradient-signature); color:var(--accent-ink)}
 .btn-primary:hover{filter:brightness(1.06)}
 .btn-secondary{background:var(--bg-surface-raised); color:var(--text-primary);
@@ -108,7 +126,7 @@ section{margin-top:56px}
   border-color:rgba(248,113,113,.4)}
 .btn-danger:hover{background:rgba(248,113,113,.1)}
 .btn:disabled{opacity:.4; cursor:not-allowed; filter:none}
-.btn-focus{box-shadow:0 0 0 2px rgba(34,211,238,.6); outline-offset:2px}
+.btn-focus{box-shadow:0 0 0 2px var(--bg-surface), 0 0 0 4px rgba(34,211,238,.6)}
 .btn-rail{display:flex; flex-wrap:wrap; gap:var(--s4); align-items:center}
 .tag{font-family:var(--mono); font-size:11px; color:var(--text-muted); margin-top:var(--s2)}
 
@@ -143,6 +161,7 @@ label.lbl{display:block; font-size:13px; line-height:16px; font-weight:500; lett
 .pill.idle{background:var(--bg-surface-raised); color:var(--text-secondary)}
 .pill.run{background:rgba(124,92,255,.15); color:var(--accent-violet)}
 .pill.ok{background:rgba(52,211,153,.15); color:var(--success)}
+.pill.warn{background:rgba(251,191,36,.15); color:var(--warning)}
 .pill.err{background:rgba(248,113,113,.15); color:var(--danger)}
 .pill-rail{display:flex; gap:var(--s3); flex-wrap:wrap}
 
@@ -172,7 +191,11 @@ label.lbl{display:block; font-size:13px; line-height:16px; font-weight:500; lett
   background:radial-gradient(120% 120% at 50% 40%, transparent 40%, rgba(0,0,0,.45) 100%)}
 .wire{width:44%; aspect-ratio:1; transform:rotate(-8deg)}
 .wire path,.wire line{stroke:var(--accent-violet); stroke-width:1.2; fill:none; opacity:.9}
-.viewer .meta{position:absolute; left:var(--s4); bottom:var(--s4); z-index:2}
+/* DESIGN.md section 8: 1:1 on mobile, 4:3 on desktop. */
+@media (max-width:600px){.viewer{aspect-ratio:1/1}}
+/* .pill sets 12px and wins on source order, so the Mono spec of 13px was lost
+   on this chip; state it explicitly. */
+.viewer .meta{position:absolute; left:var(--s4); bottom:var(--s4); z-index:2; font-size:13px}
 
 /* spacing scale */
 .space-rail{display:flex; flex-direction:column; gap:var(--s3)}
@@ -303,6 +326,7 @@ label.lbl{display:block; font-size:13px; line-height:16px; font-weight:500; lett
         <span class="pill idle"><span class="dot"></span>No image</span>
         <span class="pill run"><span class="dot"></span>Generating…</span>
         <span class="pill ok"><span class="dot"></span>Mesh ready</span>
+        <span class="pill warn"><span class="dot"></span>Cold start</span>
         <span class="pill err"><span class="dot"></span>Failed</span>
       </div>
       <div class="beam" style="margin-top:var(--s5)"><i></i></div>
@@ -373,9 +397,12 @@ label.lbl{display:block; font-size:13px; line-height:16px; font-weight:500; lett
   </section>
 
   <p class="foot">
-    TripoSR Studio — a static preview of <a href="../DESIGN.md">DESIGN.md</a>, in the
-    <a href="https://github.com/voltagent/awesome-design-md">awesome-design-md</a> format.
-    Part of the <a href="../README.md">TripoSR RunPod worker</a>. No networking; open it anywhere.
+    TripoSR Studio — a static preview of
+    <a href="https://github.com/n29yf2kyfm-lab/triposr-runpod-worker/blob/main/DESIGN.md">DESIGN.md</a>,
+    in the <a href="https://github.com/voltagent/awesome-design-md">awesome-design-md</a> format.
+    Part of the
+    <a href="https://github.com/n29yf2kyfm-lab/triposr-runpod-worker">TripoSR RunPod worker</a>.
+    Fonts are self-hosted and nothing here calls out — open it offline.
   </p>
 </div>
 
@@ -394,7 +421,7 @@ label.lbl{display:block; font-size:13px; line-height:16px; font-weight:500; lett
     ["--border-strong","#3A404A","Focused/active borders"],
     ["--text-primary","#F4F5F7","Headings, primary copy"],
     ["--text-secondary","#9BA1AC","Labels, secondary copy"],
-    ["--text-muted","#5C636E","Placeholders, hints"],
+    ["--text-muted","#818996","Placeholders, hints"],
     ["--accent-violet","#7C5CFF","Signature start · primary"],
     ["--accent-cyan","#22D3EE","Signature end · links, focus"],
     ["--accent-ink","#0B0C0E","Text on the bright gradient"],
@@ -404,12 +431,34 @@ label.lbl{display:block; font-size:13px; line-height:16px; font-weight:500; lett
   ];
   const toast = document.getElementById("toast");
   let toastTimer;
+  function flash(msg){
+    toast.textContent = msg; toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+  // Report what actually happened. The previous version routed both the
+  // rejection path and the no-clipboard-API path into the same "Copied"
+  // toast, so a denied permission or a non-secure origin still claimed
+  // success.
+  function legacyCopy(text){
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.cssText = "position:fixed;top:-9999px;opacity:0";
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
   function copy(text){
-    const done = () => { toast.textContent = "Copied " + text; toast.classList.add("show");
-      clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove("show"), 1200); };
+    const win = () => flash("Copied " + text);
+    const fail = () => flash(legacyCopy(text) ? "Copied " + text
+                                              : "Press ⌘C / Ctrl+C to copy " + text);
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(done).catch(done);
-    } else { done(); }
+      navigator.clipboard.writeText(text).then(win).catch(fail);
+    } else { fail(); }
   }
   const isLight = (hex) => {
     const n = parseInt(hex.slice(1),16), r=(n>>16)&255, g=(n>>8)&255, b=n&255;
@@ -417,8 +466,14 @@ label.lbl{display:block; font-size:13px; line-height:16px; font-weight:500; lett
   };
   const sw = document.getElementById("swatches");
   COLORS.forEach(([tok,hex,role]) => {
-    const el = document.createElement("div");
-    el.className = "swatch"; el.title = "Click to copy " + hex;
+    // A real <button>, not a div with a click handler: the previous markup was
+    // unreachable by keyboard in a document whose own rule is "Never remove
+    // focus". This gets tab order, Enter/Space and the focus ring for free.
+    const el = document.createElement("button");
+    el.type = "button";
+    el.className = "swatch";
+    el.setAttribute("aria-label", "Copy " + tok + " " + hex);
+    el.title = "Copy " + hex;
     const border = isLight(hex) ? "" : "box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)";
     el.innerHTML =
       '<div class="chip" style="background:'+hex+';'+border+'"></div>' +

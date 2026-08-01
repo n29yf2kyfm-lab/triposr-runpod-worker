@@ -55,5 +55,10 @@ coding agent at it to generate UI that matches the **TripoSR Studio** look — a
 render-viewport aesthetic with a violet→cyan signature.
 
 [`web/index.html`](web/index.html) is a static **preview** of that system: a visual catalog
-of the tokens, typography, and components rendered exactly as `DESIGN.md` specifies. It's
-self-contained and offline — no networking, no backend calls. Open it in any browser.
+of the tokens, typography, and components rendered exactly as `DESIGN.md` specifies. It is
+not a demo app — there is no upload, no worker call and no GLB rendering in it.
+
+It is genuinely self-contained: no backend calls, and no third-party requests either. Inter
+and JetBrains Mono are self-hosted from [`web/fonts/`](web/fonts) (78KB of latin-subset
+woff2, both SIL Open Font License 1.1), so the type catalog renders correctly offline and
+no visitor data reaches a font CDN. Open `web/index.html` in any browser.
