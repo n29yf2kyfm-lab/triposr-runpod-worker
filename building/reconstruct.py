@@ -243,12 +243,27 @@ def sharpness_scores(frame_paths):
     return scores
 
 
-def fetch_capture(spec, work_dir):
-    """Assemble the capture into a list of local frame paths."""
-    os.makedirs(work_dir, exist_ok=True)
+def _requests():
+    """Imported lazily, as in every other module here — see delivery.py."""
     import requests
+    return requests
+
+
+def fetch_capture(spec, work_dir):
+    """Assemble the capture into a list of local frame paths.
+
+    The input is validated BEFORE the HTTP library is touched, and the local
+    video path never touches it at all. An empty capture must surface as a
+    ReconstructError the caller can act on; importing first turned that into
+    an ImportError raised before the input had even been looked at.
+    """
+    if not spec.get("image_urls") and not spec.get("video_url"):
+        raise ReconstructError("no video_url or image_urls in this capture")
+
+    os.makedirs(work_dir, exist_ok=True)
 
     if spec.get("image_urls"):
+        requests = _requests()
         paths = []
         for i, url in enumerate(spec["image_urls"]):
             dest = os.path.join(work_dir, f"i{i:06d}.jpg")
@@ -269,14 +284,12 @@ def fetch_capture(spec, work_dir):
         if os.path.exists(spec["video_url"]):
             shutil.copy(spec["video_url"], video)
         else:
-            r = requests.get(spec["video_url"], timeout=600, stream=True)
+            r = _requests().get(spec["video_url"], timeout=600, stream=True)
             r.raise_for_status()
             with open(video, "wb") as f:
                 for chunk in r.iter_content(1 << 20):
                     f.write(chunk)
         return extract_frames(video, os.path.join(work_dir, "frames"))
-
-    raise ReconstructError("no video_url or image_urls in this capture")
 
 
 # ---------------------------------------------------------------------------

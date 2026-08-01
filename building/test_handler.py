@@ -350,6 +350,50 @@ check("17a no module-level third-party imports", not _offenders,
 check("17b delivery imports requests lazily",
       "def _requests" in open(os.path.join(HERE, "delivery.py")).read())
 
+# 17a only sees MODULE-level imports. The second failure on main was subtler:
+# `import requests` sat at the top of a function BODY, above that function's
+# own input validation, so calling it with junk raised ModuleNotFoundError
+# instead of the actionable error the caller was meant to get. Validate
+# first, import second — checked behaviourally, and by blocking the module
+# rather than relying on CI happening to be bare, so this keeps its teeth if
+# dependencies are ever installed.
+class _Blocked:
+    """Make `import requests` fail regardless of what is installed."""
+
+    def find_module(self, name, path=None):        # py2-style, still honoured
+        return self if name.split(".")[0] == "requests" else None
+
+    def find_spec(self, name, path=None, target=None):
+        if name.split(".")[0] == "requests":
+            raise ImportError("blocked by test 17c")
+        return None
+
+
+_blocker = _Blocked()
+_saved = sys.modules.pop("requests", None)
+sys.meta_path.insert(0, _blocker)
+try:
+    import reconstruct as _R
+
+    try:
+        _R.fetch_capture({}, os.path.join(tempfile.gettempdir(), "b17"))
+        check("17c empty capture refused before any network import", False)
+    except _R.ReconstructError as e:
+        check("17c empty capture refused before any network import",
+              "image_urls" in str(e), str(e))
+    except ImportError as e:
+        check("17c empty capture refused before any network import", False,
+              f"imported before validating: {e}")
+
+    _r = run({"mode": "roof", "address": "not a real postcode"})
+    check("17d unreachable geocoder still yields an actionable error",
+          "postcode" in _r.get("error", "") or "gps" in _r.get("error", ""),
+          _r.get("error", "")[:160])
+finally:
+    sys.meta_path.remove(_blocker)
+    if _saved is not None:
+        sys.modules["requests"] = _saved
+
 
 # ---- summary --------------------------------------------------------------
 print()

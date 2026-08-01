@@ -102,7 +102,6 @@ def resolve_location(spec):
 
 def _geocode_uk(address):
     """Resolve a UK postcode (or the postcode inside an address) to lat/lon."""
-    requests = _requests()
     token = address.replace(",", " ").split()[-2:]
     candidates = [" ".join(token), address.split(",")[-1].strip(), address]
     for candidate in candidates:
@@ -110,6 +109,12 @@ def _geocode_uk(address):
         if not cleaned:
             continue
         try:
+            # Imported inside the attempt rather than above the loop. If the
+            # HTTP library is missing the geocoder is simply unreachable, and
+            # that is the same outcome as the network being down — the caller
+            # needs the actionable "supply a postcode or gps" below, not an
+            # ImportError raised three frames deep.
+            requests = _requests()
             r = requests.get(f"{POSTCODE_API}/postcodes/{cleaned}",
                              headers=HTTP_HEADERS, timeout=HTTP_TIMEOUT)
             if r.status_code == 200:
