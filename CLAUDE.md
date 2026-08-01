@@ -16,11 +16,36 @@ outside the repo, untracked). Load them with `set -a; . /root/.alam3d_env; set +
 protection blocks them and the owner's standing rule forbids it. Record only the
 variable NAME here, never the value.
 
-This file is the first thing to check after a container rollback: the git
-checkout and the scratchpad get discarded, but `~/.alam3d_env` has survived every
-rollback so far. Verify a RunPod key with `GET https://rest.runpod.io/v1/endpoints`
-— note that `api.runpod.io/graphql` returns 403 for `myself{...}` queries with
-these keys, so use the REST API, not GraphQL, to read or PATCH endpoint config.
+This file is the first thing to check after a container rollback. **It is NOT
+rollback-proof** — the 2026-08-01 rollback reverted it to its 28 July contents,
+silently dropping `SKETCHFAB_TOKENS` (added 31 July) and resetting the mode to
+644. An earlier version of this section claimed the file "has survived every
+rollback so far"; that was wrong. After any rollback, check the file's mtime and
+confirm **every** variable is present, not just that the file exists.
+
+Verify the credentials, don't assume them:
+
+- **RunPod:** `GET https://rest.runpod.io/v1/endpoints` → 200. Note that
+  `api.runpod.io/graphql` returns 403 for `myself{...}` queries with these keys,
+  so use the REST API, not GraphQL, to read or PATCH endpoint config.
+- **Supabase:** `SB_KEY` is a `sb_secret_…` key, not a JWT, and storage
+  **requires the `apikey:` header as well as `Authorization: Bearer`**. With
+  `Authorization` alone it returns `403 Invalid Compact JWS`, which looks exactly
+  like an expired key and cost time being misread as one.
+- **Sketchfab:** `GET /v3/me` with `Authorization: Token <t>` → the username. This
+  is the only proof a hex-32 string is a real token.
+
+**Recovering a lost token:** the session transcript at
+`/root/.claude/projects/-home-user-triposr-runpod-worker/<session>.jsonl` is
+append-only and survived the rollback that took the env file. Harvest hex-32
+strings from it — near the word `token`, and from `type=="user"` messages, which
+is where the owner pastes them — then validate each against `/v3/me`. All three
+Sketchfab tokens were recovered this way on 2026-08-01.
+
+**Tools must load this file themselves** rather than trusting the caller to
+source it (`pipeline/ingest/wave_render.py:load_env`). A relaunch that forgot to
+source it died one line in, and the failure was indistinguishable from a healthy
+start: it logged its manifest count and exited, and was reported as running.
 
 ## Sketchfab tokens — THREE, rotated (owner instruction 2026-07-31)
 
