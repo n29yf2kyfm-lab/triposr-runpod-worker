@@ -107,6 +107,38 @@ def norm(s):
     return re.sub(r"[^a-z0-9]+", " ", (s or "").lower())
 
 
+def class_gates():
+    """The hardened title gates from the Objaverse curator, or None.
+
+    `BAD` rejects toy/game/stylised assets, `WRONG_CLASS` rejects the wrong
+    vehicle class (train, boat, bus, tractor, fire truck…). Both were repaired
+    and regression-tested on 2026-07-27 — see the comments around their
+    definitions, and do not "tidy" their terminators.
+
+    This wave's own "every target word must be in the title" rule is already
+    stricter than these for the common case: nothing that matches both
+    "volkswagen" and "polo" is a helicopter. These add the case that rule
+    cannot see — a correctly-named listing that is a toy, a game asset or a
+    Polo-badged van. Verified against the 29 VW titles staged on 2026-08-01:
+    0 flagged, so this narrows nothing that was already passing.
+
+    Imported lazily and defensively: the curator lives under pipeline/finetune
+    and is not a dependency of sourcing. If it cannot be loaded the wave still
+    runs, and says so, rather than silently dropping a gate.
+    """
+    import importlib.util
+    p = os.path.join(REPO, "pipeline", "finetune", "objaverse_wave4.py")
+    try:
+        spec = importlib.util.spec_from_file_location("_ow4", p)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.BAD, mod.WRONG_CLASS
+    except Exception as e:
+        log(f"warn: hardened title gates unavailable ({type(e).__name__}) - "
+            f"harvest runs WITHOUT them")
+        return None
+
+
 def harvest(specs, cat_path):
     """specs: ["Make Model:yr,yr,yr", ...] -> candidate list.
 
@@ -122,7 +154,8 @@ def harvest(specs, cat_path):
     except Exception as e:
         log("warn: catalogue unreadable", e)
     tok = toks()
-    picks, seen = [], set()
+    gates = class_gates()
+    picks, seen, rejects = [], set(), []
     for spec in specs:
         plate, _, ys = spec.partition(":")
         years = [int(y) for y in ys.split(",") if y.strip()]
@@ -145,6 +178,35 @@ def harvest(specs, cat_path):
                         continue
                     if r["uid"] in known or r["uid"] in seen:
                         continue
+                    warn = None
+                    if gates:
+                        # Title is a hard reject; description and tags only warn.
+                        #
+                        # Measured 2026-08-01 against the 29 staged VW titles:
+                        # the title test flagged 0, and extending it to
+                        # description+tags flagged 8 -- every one of them for a
+                        # sim-mod tag (gta, assetto, forza, beamng) or for
+                        # "freedownload", not for being the wrong vehicle. BAD
+                        # was written to curate a TRAINING pool, where an
+                        # Assetto Corsa conversion is noise; for the serving
+                        # catalogue those are often the most accurate car
+                        # geometry on the site. Rejecting on them would have
+                        # dropped 8 of 29, including the only Sharan that exists
+                        # in the band.
+                        #
+                        # So the owner's eye stays the gate (2026-07-23
+                        # standard: an automated pass is not a quality verdict),
+                        # and the warning rides along to the contact sheet.
+                        nmh = gates[0].search(nm) or gates[1].search(nm)
+                        if nmh:
+                            rejects.append((r.get("name", "")[:44], nmh.group(0)))
+                            log(f"  reject [{nmh.group(0)}] {r.get('name','')[:44]}")
+                            seen.add(r["uid"])
+                            continue
+                        tags = " ".join(t.get("name", "") for t in (r.get("tags") or []))
+                        body = norm(f"{r.get('description','')} {tags}")
+                        bh = gates[0].search(body) or gates[1].search(body)
+                        warn = bh.group(0) if bh else None
                     fc = r.get("faceCount") or 0
                     if not face_score(fc):
                         continue
@@ -156,13 +218,19 @@ def harvest(specs, cat_path):
                                 "likes": r.get("likeCount", 0), "plate": plate,
                                 "anchor": yr, "score": sc,
                                 "licence": (r.get("license") or {}).get("label", "?"),
-                                "author": (r.get("user") or {}).get("displayName", "")}
+                                "author": (r.get("user") or {}).get("displayName", ""),
+                                "class_warn": warn}
                 time.sleep(1.2)
             if best:
                 seen.add(best["uid"]); picks.append(best)
-                log(f"  {plate} {yr} -> {best['name'][:44]} ({best['faces']:,}f)")
+                w = f"  WARN[{best['class_warn']}]" if best.get("class_warn") else ""
+                log(f"  {plate} {yr} -> {best['name'][:44]} ({best['faces']:,}f){w}")
             else:
                 log(f"  {plate} {yr} -> nothing in-band")
+    if gates:
+        log(f"hardened title gates rejected {len(rejects)} listing(s)")
+        for nm, why in rejects:
+            log(f"    [{why}] {nm}")
     return picks
 
 
@@ -262,9 +330,11 @@ def run(picks, work, stage, sheets, limit=None):
         nm = len((mats or {}).get("materials") or [])
         cov = (mats or {}).get("coverage") or 0.0
         adv = 1 <= nm <= 2 and 0.05 <= cov <= 0.45
+        cw = p.get("class_warn")
         d.text((10, 5), f"{p['plate']}  gen~{p['anchor']}  |  {p['name'][:44]}  |  "
                         f"{p['faces']:,}f  |  body mats={nm} cov={cov:.3f}  |  "
-                        f"{'recolourable' if adv else 'MATERIAL SPLIT SUSPECT'}",
+                        f"{'recolourable' if adv else 'MATERIAL SPLIT SUSPECT'}"
+                        + (f"  |  TAGGED '{cw}'" if cw else ""),
                fill=(150, 255, 170) if adv else (255, 170, 170), font=FT)
         for j, (im, lab) in enumerate(ims):
             x = (j % 2) * TW; y = PAD + (j // 2) * (TH + PAD)
