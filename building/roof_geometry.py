@@ -355,10 +355,17 @@ MATERIAL_DEFAULTS = {
 
 
 def quantities(planes, edges, cell_area, cell_size, eaves_length_m=None,
-               materials=None):
+               materials=None, footprint_area_m2=None):
     """Roof takeoff — the numbers that go into a quote.
 
     Everything derives from TRUE sloped area, never plan area.
+
+    `footprint_area_m2`, when given, is the authoritative plan area and the
+    per-plane areas are apportioned to match it by their share of samples.
+    Two reasons this beats counting cells: a 1m grid quantises the outline
+    and gains or loses up to half a metre all the way round, and samples
+    near the wall line are dropped before fitting, so the surviving count
+    covers less than the real roof.
     """
     cfg = dict(MATERIAL_DEFAULTS)
     if materials:
@@ -371,8 +378,17 @@ def quantities(planes, edges, cell_area, cell_size, eaves_length_m=None,
             f"unknown covering {covering!r}; known: "
             f"{', '.join(cfg['coverings'])}")
 
-    sloped = sum(p.sloped_area(cell_area) for p in planes)
-    plan = sum(p.plan_area(cell_area) for p in planes)
+    sampled_plan = sum(p.plan_area(cell_area) for p in planes)
+    if footprint_area_m2 and sampled_plan > 0:
+        scale = footprint_area_m2 / sampled_plan
+        plan = footprint_area_m2
+        # Each plane keeps its own slope factor; only the area is rescaled.
+        sloped = sum(p.plan_area(cell_area) * scale * p.slope_factor
+                     for p in planes)
+    else:
+        scale = 1.0
+        plan = sampled_plan
+        sloped = sum(p.sloped_area(cell_area) for p in planes)
     waste = cfg["waste_factor"]
 
     by_kind = {"ridge": 0.0, "hip": 0.0, "valley": 0.0}
@@ -385,6 +401,9 @@ def quantities(planes, edges, cell_area, cell_size, eaves_length_m=None,
     return {
         "plan_area_m2": round(plan, 2),
         "sloped_area_m2": round(sloped, 2),
+        "plan_area_source": ("footprint_polygon" if footprint_area_m2
+                             else "sampled_cells"),
+        "sampled_plan_area_m2": round(sampled_plan, 2),
         # The number that stops the classic under-order.
         "slope_uplift_pct": (round((sloped / plan - 1) * 100, 1)
                              if plan > 0 else 0.0),
@@ -394,7 +413,8 @@ def quantities(planes, edges, cell_area, cell_size, eaves_length_m=None,
                                                 if round(x) == v)), 1)
                                   if pitch_values else None),
         "plane_count": len(planes),
-        "flat_area_m2": round(sum(p.sloped_area(cell_area)
+        "flat_area_m2": round(sum(p.plan_area(cell_area) * scale
+                                  * p.slope_factor
                                   for p in planes if p.is_flat), 2),
         "ridge_m": round(by_kind.get("ridge", 0.0), 2),
         "hip_m": round(by_kind.get("hip", 0.0), 2),

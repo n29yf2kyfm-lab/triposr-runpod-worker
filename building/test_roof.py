@@ -280,6 +280,42 @@ check("7e keeps the building", len(kept) == 2, str(kept))
 check("7f drops low clutter", all(p[2] > 5 for p in kept))
 check("7g no DTM -> passthrough", roof.normalise(dsm, None) == dsm)
 
+# Shoelace area — the authoritative plan area, better than counting cells.
+check("7d-1 polygon area", abs(roof.polygon_area(square) - 80) < 1e-6,
+      str(roof.polygon_area(square)))
+check("7d-2 area is orientation-independent",
+      abs(roof.polygon_area(list(reversed(square))) - 80) < 1e-6)
+
+# Boundary distance — what keeps mixed roof/ground cells out of the fit.
+check("7d-3 centre is furthest from boundary",
+      abs(roof.distance_to_boundary(5, 4, square) - 4) < 1e-6,
+      str(roof.distance_to_boundary(5, 4, square)))
+check("7d-4 near an edge", abs(roof.distance_to_boundary(0.5, 4, square)
+                               - 0.5) < 1e-6)
+check("7d-5 on a corner", roof.distance_to_boundary(0, 0, square) < 1e-6)
+
+# Rescaling to the footprint polygon. Samples near the wall are dropped
+# before fitting, so the surviving count covers less than the real roof —
+# quantities must come from the polygon, not the sample count.
+pl, ed = edges_of(GABLE)
+q_cells = rg.quantities(pl, ed, CELL * CELL, CELL)
+q_poly = rg.quantities(pl, ed, CELL * CELL, CELL, footprint_area_m2=160.0)
+check("7d-6 polygon area overrides sampled area",
+      q_poly["plan_area_m2"] == 160.0, str(q_poly["plan_area_m2"]))
+check("7d-7 sampled area still reported",
+      abs(q_poly["sampled_plan_area_m2"] - 80) < 1.0,
+      str(q_poly["sampled_plan_area_m2"]))
+check("7d-8 source is labelled",
+      q_poly["plan_area_source"] == "footprint_polygon"
+      and q_cells["plan_area_source"] == "sampled_cells")
+# Doubling the plan area doubles the sloped area — the slope factor is
+# preserved, which is what keeps the tile count honest.
+check("7d-9 sloped area scales with plan area",
+      abs(q_poly["sloped_area_m2"] - 2 * q_cells["sloped_area_m2"]) < 0.1,
+      f'{q_poly["sloped_area_m2"]} vs {q_cells["sloped_area_m2"]}')
+check("7d-10 slope uplift unchanged by rescaling",
+      abs(q_poly["slope_uplift_pct"] - q_cells["slope_uplift_pct"]) < 0.1)
+
 pts = roof.load_points([(1, 2, 3), (4, 5, 6)])
 check("7h loads supplied point list", pts == [(1.0, 2.0, 3.0), (4.0, 5.0, 6.0)])
 
