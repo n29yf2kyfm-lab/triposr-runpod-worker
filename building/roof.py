@@ -25,6 +25,7 @@ import math
 
 import osgb
 import roof_geometry as rg
+import solar
 
 # --- data sources ----------------------------------------------------------
 # There is no formal REST API for EA LIDAR tiles: the portal is manual and
@@ -124,13 +125,36 @@ def _geocode_uk(address):
 
 # --- footprint -------------------------------------------------------------
 
+FOOTPRINT_CACHE_DIR = os.environ.get(
+    "FOOTPRINT_CACHE_DIR", "/runpod-volume/building-outputs/footprints")
+
+
+def _cache_path(lat, lon):
+    # ~11m resolution — fine enough to key one building, coarse enough that
+    # repeat scans of the same property hit the same entry.
+    return os.path.join(FOOTPRINT_CACHE_DIR, f"{lat:.4f}_{lon:.4f}.json")
+
+
 def fetch_footprint(lat, lon, radius_m=30):
     """Building footprint polygon around a point, from OpenStreetMap.
 
     Returns a list of (easting, northing) in National Grid, or None. The
     footprint is what separates the target roof from its neighbours — without
     it, a terrace becomes one continuous surface.
+
+    Cached on disk. Overpass is free community infrastructure and its public
+    mirrors time out under load — live-confirmed, all endpoints failing
+    within one test session. Building outlines effectively never change, so
+    re-querying for a property already scanned is both fragile and rude.
     """
+    cached = _cache_path(lat, lon)
+    if os.path.exists(cached):
+        try:
+            with open(cached) as f:
+                return [tuple(p) for p in json.load(f)]
+        except Exception:
+            pass
+
     requests = _requests()
     query = (f"[out:json][timeout:{HTTP_TIMEOUT}];"
              f"way(around:{radius_m},{lat},{lon})[building];"
@@ -163,7 +187,16 @@ def fetch_footprint(lat, lon, radius_m=30):
 
     if not best:
         return None
-    return [osgb.latlon_to_easting_northing(g["lat"], g["lon"]) for g in best]
+
+    polygon = [osgb.latlon_to_easting_northing(g["lat"], g["lon"])
+               for g in best]
+    try:
+        os.makedirs(FOOTPRINT_CACHE_DIR, exist_ok=True)
+        with open(cached, "w") as f:
+            json.dump(polygon, f)
+    except Exception as e:
+        print(f"footprint cache write skipped: {e}", file=sys.stderr)
+    return polygon
 
 
 def point_in_polygon(x, y, polygon):
@@ -516,6 +549,24 @@ def run(spec, prog, output_dir):
     q["pitch_uncertainty_deg"] = rg.pitch_uncertainty_deg(
         EA_VERTICAL_RMSE_M, run_m)
 
+    # --- cross-check against Google Solar, when a key is configured -----
+    # Independent source, finer imagery. Used to validate rather than
+    # replace: the free path must stay the default, since Solar is metered
+    # and its coverage is not universal.
+    solar_result = cross_check = None
+    if solar.available():
+        solar_result = solar.parse_segments(
+            solar.fetch_building_insights(location["lat"], location["lon"]))
+        cross_check = solar.compare(q, solar_result)
+        if cross_check:
+            notes.extend(cross_check.get("notes", []))
+            prog.note("cross-checked against Google Solar",
+                      **{k: v for k, v in cross_check.items() if k != "notes"})
+
+    # The 1m LIDAR pitch under-read is a property of the source data, not a
+    # bug — state it whenever quantities came from that path.
+    notes.append(rg.PITCH_BIAS_NOTE)
+
     # --- export ---------------------------------------------------------
     prog.stage("exporting")
     payload = {
@@ -526,6 +577,8 @@ def run(spec, prog, output_dir):
         "planes": [p.as_dict(cell_area) for p in planes],
         "edges": [e.as_dict() for e in edges],
         "quantities": q,
+        "solar": solar_result,
+        "cross_check": cross_check,
         "notes": notes,
         "limits": [
             "1m sampling cannot resolve small dormers, porches or narrow "

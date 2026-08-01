@@ -106,7 +106,7 @@ WORKDIR /app
 # stays cached.
 # ---------------------------------------------------------------------------
 COPY validation.py delivery.py progress.py handler.py preload_models.py /app/
-COPY osgb.py roof_geometry.py roof.py /app/
+COPY osgb.py roof_geometry.py roof.py solar.py /app/
 # Phase modules land here as each phase ships; the handler imports them
 # lazily and reports "not implemented" until they exist.
 COPY *.py /app/

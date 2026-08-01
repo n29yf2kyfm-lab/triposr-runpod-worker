@@ -196,6 +196,7 @@ def segment_planes(points, inlier_m=DEFAULT_INLIER_M,
         # Refit on all inliers — the 3-point sample only located the plane.
         refined = fit_plane(best_inliers) or best_plane
         refined.points = best_inliers
+        refined = refine_plane(refined) or refined
         planes.append(refined)
 
         inlier_set = set(map(id, best_inliers))
@@ -203,6 +204,61 @@ def segment_planes(points, inlier_m=DEFAULT_INLIER_M,
 
     planes.sort(key=lambda p: len(p.points), reverse=True)
     return planes
+
+
+# Successively tighter inlier bands used to clean up a plane after RANSAC.
+REFINE_BANDS = (0.18, 0.14, 0.10)
+# Never refine below this many supporting points — a plane fitted to a
+# handful of samples is more precise-looking than it is accurate.
+REFINE_MIN_POINTS = 8
+
+
+def refine_plane(plane, bands=REFINE_BANDS, min_points=REFINE_MIN_POINTS):
+    """Tighten a RANSAC plane by refitting on progressively closer inliers.
+
+    RANSAC needs a generous inlier band to find a plane at all, but that same
+    band admits samples that do not belong to it — chiefly grid cells
+    straddling a ridge or eaves, which average two surfaces into one
+    intermediate height and drag the fit toward horizontal.
+
+    Measured on a real roof against Google Solar API ground truth, this
+    recovers roughly 1.5 degrees of the pitch that the loose fit loses.
+
+    It does NOT close the gap entirely, and that is a property of the data
+    rather than of this function — see PITCH_BIAS_NOTE.
+    """
+    current = plane
+    for band in bands:
+        inliers = [p for p in current.points if current.distance(p) <= band]
+        if len(inliers) < min_points:
+            break
+        tightened = fit_plane(inliers)
+        if tightened is None:
+            break
+        tightened.points = inliers
+        current = tightened
+    return current
+
+
+# Measured against Google Solar API on a Birmingham semi (HIGH quality,
+# 2022 imagery): EA 1m LIDAR fitted 30.9 and 32.4 degrees where Solar
+# reported 34.9 and 35.8 — a consistent 3-4 degree UNDER-read, in the same
+# direction on every plane.
+#
+# The cause is resolution, not method. A domestic rafter run is about 5m,
+# giving only ~5 samples across it at 1m; the cells at ridge and eaves both
+# straddle a break line, so a third of the evidence is smoothed before it
+# arrives. Tightening the fit and excluding seam-adjacent samples were both
+# tried and recover only part of it.
+#
+# Deliberately NOT corrected by a fudge factor: one building is not a
+# calibration set, and a blanket offset would be wrong on flat and steep
+# roofs alike. It is reported instead, so a quote carries the caveat.
+PITCH_BIAS_NOTE = (
+    "Pitch from 1m open LIDAR reads low on small domestic roofs — measured "
+    "3-4 degrees under Google Solar API ground truth on a two-storey semi. "
+    "Sloped area is therefore likely understated by around 4%. Treat the "
+    "tile count as a floor, and measure the pitch on site before ordering.")
 
 
 class Edge:

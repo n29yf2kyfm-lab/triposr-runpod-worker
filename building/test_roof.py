@@ -333,6 +333,84 @@ except ValueError as ex:
 
 
 # ==========================================================================
+# Google Solar cross-check (pure parsing — no network, no key)
+# ==========================================================================
+import solar  # noqa: E402
+
+check("8a absent key means unavailable",
+      not solar.available() or bool(solar.api_key()))
+check("8b no payload -> no segments", solar.parse_segments(None) is None)
+check("8c empty payload -> no segments", solar.parse_segments({}) is None)
+
+# Shape mirrors a real buildingInsights response.
+payload = {
+    "imageryQuality": "HIGH",
+    "imageryDate": {"year": 2022, "month": 5, "day": 14},
+    "solarPotential": {
+        "buildingStats": {"areaMeters2": 116.609955},
+        "wholeRoofStats": {"areaMeters2": 93.58868},
+        # The six segments a real response returned for a two-storey semi.
+        "roofSegmentStats": [
+            {"pitchDegrees": 34.9, "azimuthDegrees": 41.7,
+             "stats": {"areaMeters2": 28.7}},
+            {"pitchDegrees": 35.8, "azimuthDegrees": 222.0,
+             "stats": {"areaMeters2": 22.8}},
+            {"pitchDegrees": 36.6, "azimuthDegrees": 314.1,
+             "stats": {"areaMeters2": 13.7}},
+            {"pitchDegrees": 8.9, "azimuthDegrees": 336.7,
+             "stats": {"areaMeters2": 10.2}},
+            {"pitchDegrees": 21.6, "azimuthDegrees": 33.6,
+             "stats": {"areaMeters2": 9.8}},
+            {"pitchDegrees": 18.2, "azimuthDegrees": 51.3,
+             "stats": {"areaMeters2": 8.5}},
+        ],
+    },
+}
+parsed = solar.parse_segments(payload)
+check("8d parses segments", len(parsed["planes"]) == 6)
+check("8e carries quality and date",
+      parsed["quality"] == "HIGH" and parsed["imagery_date"] == "2022-05-14")
+# Solar reports SLOPED area per segment; plan area is that foreshortened.
+# Getting this backwards would inflate every downstream quantity.
+seg = parsed["planes"][0]
+check("8f plan area is foreshortened from sloped",
+      seg["plan_area_m2"] < seg["sloped_area_m2"], str(seg))
+check("8g foreshortening uses the pitch",
+      abs(seg["plan_area_m2"] - 28.7 * math.cos(math.radians(34.9))) < 0.02)
+check("8h predominant pitch is the largest pitched segment",
+      parsed["predominant_pitch_deg"] == 34.9,
+      str(parsed["predominant_pitch_deg"]))
+check("8i no segment here is flat",
+      not any(p["flat"] for p in parsed["planes"]),
+      str([p["pitch_deg"] for p in parsed["planes"]]))
+
+# The comparison must NOT measure our full roof against Solar's analysed
+# roof: Solar only reports panel-suitable area, which was 93.6 m2 against a
+# 116.6 m2 footprint here — physically impossible for a 35-degree roof, and
+# it produced a 48% false alarm before this was fixed.
+cmp = solar.compare({"predominant_pitch_deg": 32.0, "plan_area_m2": 121.09,
+                     "sloped_area_m2": 138.82}, parsed)
+check("8j compares against implied full roof, not analysed area",
+      abs(cmp["sloped_area_m2"]["delta_pct"]) < 10,
+      str(cmp["sloped_area_m2"]))
+check("8k implied area exceeds the footprint",
+      cmp["sloped_area_m2"]["solar_implied"] > 116.6)
+# Solar's analysed roof (93.7) is SMALLER than the building footprint
+# (116.6) — impossible for a 35-degree roof, and exactly why it must not be
+# used as the comparison basis.
+check("8l analysed area still reported for transparency",
+      abs(cmp["sloped_area_m2"]["solar_analysed"] - 93.7) < 0.5,
+      str(cmp["sloped_area_m2"]["solar_analysed"]))
+check("8l-2 analysed area is below the footprint, proving it is partial",
+      cmp["sloped_area_m2"]["solar_analysed"] < 116.6)
+check("8m pitch disagreement is flagged",
+      any("disagree" in n for n in cmp["notes"]), str(cmp["notes"]))
+check("8n no false alarm on area",
+      not any("Sloped area" in n for n in cmp["notes"]), str(cmp["notes"]))
+check("8o no solar result -> no comparison", solar.compare({}, None) is None)
+
+
+# ==========================================================================
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

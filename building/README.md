@@ -107,6 +107,8 @@ claiming success.
 | `HF_HOME` | Model cache — **must** be the building path, not the vehicle one |
 | `OFFLINE=1` | Forbid runtime downloads; pair with `preload_models.py` |
 | `DEBUG=1` | Include tracebacks in responses (bring-up only — they leak paths) |
+| `GOOGLE_SOLAR_API_KEY` | Optional. Enables the Google Solar cross-check on Roof Mode. **Never commit a key** — set it on the endpoint, as with `SUPABASE_KEY` |
+| `FOOTPRINT_CACHE_DIR` | On-disk cache of OSM footprints (Overpass rate-limits and its mirrors time out) |
 
 ## Deployment
 
