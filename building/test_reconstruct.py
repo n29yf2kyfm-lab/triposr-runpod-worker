@@ -222,6 +222,64 @@ if not R.model_available():
 
 
 # ==========================================================================
+# 6b. The model contract — verified against MapAnything's actual source
+# ==========================================================================
+# Written from documentation and never executed, this call had three bugs
+# that only reading the real API exposed. These assertions lock in what was
+# checked, because none of it can be exercised without a GPU.
+_src = open(os.path.join(HERE, "reconstruct.py")).read()
+# Strip comments before asserting on usage: the comments deliberately NAME
+# the wrong keys to explain the bugs, so matching raw text would fail on the
+# explanation rather than the code.
+_code = "\n".join(l.split("#")[0] for l in _src.splitlines())
+
+# LICENCE. MapAnything ships two checkpoints trained on different data:
+#   facebook/map-anything          cc-by-nc-4.0  (confirmed on HF)
+#   facebook/map-anything-apache   apache-2.0    (confirmed on HF)
+# The plain name is what the documentation reaches for first and it scores
+# slightly better, so taking it is the natural mistake — and it would
+# quietly make the whole product non-commercial.
+check("6b-1 uses the Apache checkpoint",
+      R.MODEL_ID == "facebook/map-anything-apache", R.MODEL_ID)
+check("6b-2 never defaults to the non-commercial checkpoint",
+      '"facebook/map-anything"' not in _code)
+check("6b-3 the licence split is documented in the source",
+      "cc-by-nc" in _src.lower() and "apache" in _src.lower())
+
+# INPUT FORMAT. infer() validates against normalised tensors plus a
+# data_norm_type; there is no img_path key, so the original call would have
+# failed on the first real job.
+check("6b-4 preprocesses through load_images", "load_images" in _code)
+check("6b-5 does not pass raw paths as views", "img_path" not in _code,
+      [l for l in _code.splitlines() if "img_path" in l][:1])
+
+# OUTPUT KEYS. 'img' is the NORMALISED tensor — colouring a cloud from it
+# would tint everything with the encoder's normalisation. RGB is
+# 'img_no_norm'.
+check("6b-6 colours from img_no_norm", '"img_no_norm"' in _code)
+check("6b-7 reads pts3d and mask",
+      '"pts3d"' in _code and '"mask"' in _code)
+
+# memory_efficient_inference trades negligible speed for far more views per
+# card; disabling it on the fast tier capped coverage for no gain.
+check("6b-8 memory-efficient inference is always on",
+      "memory_efficient_inference=True" in _code)
+
+# The model reports whether it actually produced metric scale — worth
+# carrying, since scale.py has to decide how much to trust it.
+check("6b-9 captures the metric scaling factor",
+      "metric_scaling_factor" in _code)
+
+# preload_models must fetch the SAME checkpoint the handler loads, or an
+# offline worker downloads nothing useful.
+_pre = open(os.path.join(HERE, "preload_models.py")).read()
+check("6b-10 preload fetches the Apache checkpoint",
+      "map-anything-apache" in _pre)
+check("6b-11 preload and handler share one override",
+      "MAPANYTHING_MODEL" in _pre and "MAPANYTHING_MODEL" in _code)
+
+
+# ==========================================================================
 # 7. Capture handling
 # ==========================================================================
 try:

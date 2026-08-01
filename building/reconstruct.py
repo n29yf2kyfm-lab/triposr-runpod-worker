@@ -291,12 +291,29 @@ def model_available():
         return False
 
 
-def run_mapanything(frame_paths, quality):
-    """Feed-forward reconstruction. Returns (points, colours) in model units.
+# WHICH CHECKPOINT, and why it is not the obvious one.
+#
+# MapAnything ships two sets of weights with DIFFERENT licences, trained on
+# different data:
+#
+#   facebook/map-anything          CC-BY-NC 4.0  — non-commercial
+#   facebook/map-anything-apache   Apache 2.0    — commercial
+#
+# The Apache repo is used here deliberately. The plain name is the one the
+# documentation reaches for first and it scores slightly better, so taking
+# it is the natural mistake — and it would quietly make the whole product
+# non-commercial. This is exactly the trap the engine research flagged: a
+# project's CODE licence and its CHECKPOINT licence are separate things, and
+# only the checkpoint follows the training data.
+MODEL_ID = os.environ.get("MAPANYTHING_MODEL", "facebook/map-anything-apache")
 
-    MapAnything is metric by design, but its scale is only as good as the
-    intrinsics it infers, so the result still goes through scale.py rather
-    than being trusted outright.
+
+def run_mapanything(frame_paths, quality):
+    """Feed-forward reconstruction. Returns (points, colours, info).
+
+    MapAnything predicts metric scale, but from image content rather than
+    measurement, so the result still goes through scale.py rather than being
+    trusted outright.
     """
     if not model_available():
         raise ReconstructError(
@@ -305,34 +322,71 @@ def run_mapanything(frame_paths, quality):
             "failed install, or run the roof or price modes, which do not "
             "need it.")
 
-    from mapanything.models import MapAnything  # type: ignore
-    import torch  # type: ignore
+    from mapanything.models import MapAnything
+    from mapanything.utils.image import load_images
+    import torch
 
-    model = MapAnything.from_pretrained("facebook/map-anything")
-    model = model.to("cuda" if torch.cuda.is_available() else "cpu").eval()
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model = MapAnything.from_pretrained(MODEL_ID).to(device).eval()
 
-    views = [{"img_path": p} for p in frame_paths]
+    # infer() takes NORMALISED TENSORS plus a data_norm_type, not paths.
+    # load_images does the resize, normalisation and packing that infer()
+    # validates against. The first version of this function passed
+    # [{"img_path": p}] and would have failed on the first real job.
+    views = load_images(list(frame_paths))
+    if not views:
+        raise ReconstructError("no frames survived preprocessing")
+
     with torch.no_grad():
-        result = model.infer(views, memory_efficient_inference=(quality != "fast"))
+        predictions = model.infer(
+            views,
+            # Trades negligible speed for far more views per card. The first
+            # version disabled this on the fast tier, which capped how much
+            # of a property fits in one job for no real gain.
+            memory_efficient_inference=True,
+            use_amp=True,
+            amp_dtype="bf16",
+            apply_mask=True,
+            mask_edges=True,
+            apply_confidence_mask=(quality != "fast"),
+        )
 
-    points, colours = [], []
-    for view in result:
-        pts = view["pts3d"].reshape(-1, 3).cpu().numpy()
-        mask = view.get("mask")
-        rgb = view.get("img")
-        if mask is not None:
-            keep = mask.reshape(-1).cpu().numpy().astype(bool)
+    points, colours, scale_factors = [], [], []
+    for pred in predictions:
+        pts = pred["pts3d"].reshape(-1, 3).float().cpu().numpy()
+        keep = None
+        if pred.get("mask") is not None:
+            keep = pred["mask"].reshape(-1).cpu().numpy().astype(bool)
             pts = pts[keep]
         points.extend(map(tuple, pts.tolist()))
+
+        # RGB comes back as 'img_no_norm'. 'img' is the NORMALISED tensor,
+        # so colouring from it would tint the whole cloud with whatever the
+        # encoder's normalisation happens to look like.
+        rgb = pred.get("img_no_norm")
         if rgb is not None:
-            cols = (rgb.reshape(-1, 3).cpu().numpy() * 255).astype("uint8")
-            if mask is not None:
+            cols = rgb.reshape(-1, 3).float().cpu().numpy()
+            if cols.max() <= 1.0 + 1e-6:
+                cols = cols * 255.0
+            if keep is not None:
                 cols = cols[keep]
-            colours.extend(map(tuple, cols.tolist()))
+            colours.extend(map(tuple, cols.astype("uint8").tolist()))
+
+        if pred.get("metric_scaling_factor") is not None:
+            try:
+                scale_factors.append(
+                    float(pred["metric_scaling_factor"].reshape(-1)[0]))
+            except Exception:
+                pass
 
     if not points:
         raise ReconstructError("the model returned no geometry for this capture")
-    return points, (colours if len(colours) == len(points) else None)
+
+    info = {"model": MODEL_ID, "views": len(predictions),
+            "metric_scaling_factor": (
+                round(sum(scale_factors) / len(scale_factors), 6)
+                if scale_factors else None)}
+    return points, (colours if len(colours) == len(points) else None), info
 
 
 # ---------------------------------------------------------------------------
@@ -410,7 +464,8 @@ def run(spec, prog, output_dir):
 
     # --- reconstruction --------------------------------------------------
     prog.stage("densifying")
-    points, colours = run_mapanything(selected_paths, spec.get("quality", "fast"))
+    points, colours, model_info = run_mapanything(
+        selected_paths, spec.get("quality", "fast"))
     prog.note(f"{len(points)} points reconstructed")
 
     if len(points) > spec.get("max_points", 8_000_000):
@@ -451,6 +506,7 @@ def run(spec, prog, output_dir):
         "frames_dropped": dropped,
         "coverage_gaps": gaps,
         "points": len(points),
+        "model": model_info,
         "scale": scale_report,
         "bounds_m": box,
         "notes": notes,

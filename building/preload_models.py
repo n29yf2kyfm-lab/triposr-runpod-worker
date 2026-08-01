@@ -27,10 +27,14 @@ TOKEN = os.environ.get("HF_TOKEN") or None
 # vision models, so a failure there should not fail the whole preload.
 MODELS = [
     # --- Phase 1: reconstruction -------------------------------------
-    # MapAnything: Apache 2.0 code, metric by design. Checkpoint licences
-    # vary by training data — verify each one separately from the code
-    # licence before commercial release.
-    ("facebook/map-anything", None, ["*.onnx*"], "1", True),
+    # MapAnything ships TWO checkpoints under different licences:
+    #   facebook/map-anything          CC-BY-NC 4.0  — non-commercial
+    #   facebook/map-anything-apache   Apache 2.0    — commercial
+    # The Apache one is required here. Pulling the plain name — which the
+    # documentation reaches for first — would quietly make the product
+    # non-commercial. Must match MAPANYTHING_MODEL in reconstruct.py.
+    (os.environ.get("MAPANYTHING_MODEL", "facebook/map-anything-apache"),
+     None, ["*.onnx*"], "1", True),
 
     # --- Phase 5: condition -------------------------------------------
     # SAM 2 segments what YOLO locates — the two-stage pattern the 2026
