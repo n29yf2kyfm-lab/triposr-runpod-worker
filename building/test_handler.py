@@ -320,6 +320,37 @@ check("16c own output dir, not the vehicle worker's",
 check("16d own default bucket",
       'SUPABASE_BUCKET", "building-scans"' in src)
 
+# ---- Test 17: the suite must run on a bare Python --------------------------
+# CI installs nothing: these tests exist to run with no GPU, no network and
+# no dependencies. A module-level `import requests` in delivery.py broke the
+# whole suite on the first merge to main, so every worker module is checked
+# for third-party imports outside a function.
+import ast as _ast
+
+_THIRD_PARTY = {"requests", "numpy", "torch", "cv2", "PIL", "mapanything",
+                "open3d", "ifcopenshell", "scipy", "sklearn", "transformers"}
+_offenders = {}
+for _f in sorted(os.listdir(HERE)):
+    if not _f.endswith(".py") or _f.startswith("test_"):
+        continue
+    _tree = _ast.parse(open(os.path.join(HERE, _f)).read())
+    _bad = []
+    for _node in _tree.body:            # module level only — nested is fine
+        if isinstance(_node, _ast.Import):
+            _bad += [n.name.split(".")[0] for n in _node.names
+                     if n.name.split(".")[0] in _THIRD_PARTY]
+        elif isinstance(_node, _ast.ImportFrom) and _node.module:
+            if _node.module.split(".")[0] in _THIRD_PARTY:
+                _bad.append(_node.module.split(".")[0])
+    if _bad:
+        _offenders[_f] = _bad
+
+check("17a no module-level third-party imports", not _offenders,
+      str(_offenders))
+check("17b delivery imports requests lazily",
+      "def _requests" in open(os.path.join(HERE, "delivery.py")).read())
+
+
 # ---- summary --------------------------------------------------------------
 print()
 for f in FAILED:

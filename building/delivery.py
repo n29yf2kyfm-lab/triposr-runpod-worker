@@ -19,8 +19,6 @@ import sys
 import base64
 import mimetypes
 
-import requests
-
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
 # Own bucket, separate from the vehicle worker's (PLAN.md §2.3 isolation).
@@ -48,6 +46,19 @@ _CONTENT_TYPES = {
     ".json": "application/json",
     ".pdf": "application/pdf",
 }
+
+
+def _requests():
+    """Imported lazily, as in every other module here.
+
+    A module-level `import requests` broke CI: the test runner is a bare
+    Python with no packages, by design — the whole point of these tests is
+    that they need no GPU, no network and no dependencies. Delivery is only
+    ever exercised in its unconfigured form there, so the import must not
+    happen until an upload is actually attempted.
+    """
+    import requests
+    return requests
 
 
 def content_type_for(path):
@@ -79,7 +90,7 @@ def upload(path, object_name, content_type=None):
     try:
         with open(path, "rb") as f:
             data = f.read()
-        r = requests.post(
+        r = _requests().post(
             f"{SUPABASE_URL}/storage/v1/object/{SUPABASE_BUCKET}/{object_name}",
             data=data,
             headers={
