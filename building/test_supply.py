@@ -128,6 +128,41 @@ check("5g unreadable is None", S.normalise_unit("widgets") is None)
 check("5h empty is None", S.normalise_unit("") is None)
 
 
+# ---- 5b. dimensions read off the description ------------------------------
+# A merchant nearly always states the size, and reading it beats assuming a
+# average: a 100mm loft roll and a PIR board differ by about two times.
+check("5b-1 metres by metres", abs(S.parse_area_m2("Membrane 1.5m x 50m")
+                                   - 75.0) < 1e-9)
+check("5b-2 a 1m roll", abs(S.parse_area_m2("Felt 1m x 10m") - 10.0) < 1e-9)
+check("5b-3 millimetres by millimetres",
+      abs(S.parse_area_m2("Plasterboard 2400x1200") - 2.88) < 1e-9,
+      str(S.parse_area_m2("Plasterboard 2400x1200")))
+check("5b-4 a thickness is not a size",
+      S.parse_area_m2("Mineral Wool Loft Roll 100mm") is None,
+      str(S.parse_area_m2("Mineral Wool Loft Roll 100mm")))
+check("5b-5 timber section is not a sheet size",
+      S.parse_area_m2("C24 Sawn Carcassing 47x200") is None)
+check("5b-6 nothing stated is None", S.parse_area_m2("Facing Brick") is None)
+
+# The stated size must WIN over the fallback table.
+line = S.Line(description="Bitumen Felt Underlay 1m x 10m", price=22.50,
+              unit="Roll", vat=S.VAT_EX)
+S.normalise_line(line)
+check("5b-7 stated size beats the assumed one",
+      abs(line.unit_price_ex_vat - 2.25) < 1e-9, str(line.unit_price_ex_vat))
+check("5b-8 and is not flagged, because nothing was guessed",
+      not any("check this line" in n for n in line.notes), str(line.notes))
+
+# No stated size: the fallback applies but must announce itself.
+line = S.Line(description="Mineral Wool Loft Roll 100mm", price=19.90,
+              unit="Roll", vat=S.VAT_EX)
+S.normalise_line(line)
+check("5b-9 an assumed area is flagged",
+      any("check this line" in n for n in line.notes), str(line.notes))
+check("5b-10 and says it assumed",
+      any("ASSUMED" in n for n in line.notes), str(line.notes))
+
+
 # ---- 6. product and tier matching -----------------------------------------
 p, _ = S.match_product("12.5mm Standard Plasterboard 2400 x 1200mm")
 check("6a plasterboard matched", p == "plasterboard", str(p))
@@ -156,6 +191,42 @@ check("6j economy read from spec",
       S.match_tier("Untreated ungraded batten") == prices.ECONOMY)
 check("6k no signal defaults to standard",
       S.match_tier("Roofing batten 25x50") == prices.STANDARD)
+
+# Tier is defined per PRODUCT by the catalogue, not by a global word list.
+# "Natural slate" is premium as a roof covering and meaningless as a batten;
+# "half-round" is the economy gutter while "deepflow" is the standard one.
+# A product-blind keyword list gets every one of these wrong.
+for description, product, want in [
+        ("Concrete Interlocking Roof Tile", "roof_covering", prices.ECONOMY),
+        ("Concrete Plain Tile 265x165", "roof_covering", prices.STANDARD),
+        ("Natural Welsh Slate 500x250", "roof_covering", prices.PREMIUM),
+        ("Half Round Guttering 4m White", "guttering", prices.ECONOMY),
+        ("Deepflow Guttering 4m Black", "guttering", prices.STANDARD),
+        ("Mineral Wool Loft Roll 100mm", "insulation", prices.ECONOMY),
+        ("PIR Insulation Board 50mm 2400x1200", "insulation", prices.STANDARD),
+        ("Bitumen Felt Underlay 1m x 10m", "membrane", prices.ECONOMY),
+        ("Breathable Roofing Membrane 1.5m x 50m", "membrane",
+         prices.STANDARD),
+        ("Common Brick 65mm", "bricks", prices.ECONOMY),
+        ("Facing Brick 65mm", "bricks", prices.STANDARD),
+        ("C16 Sawn Carcassing 47x100", "structural_timber", prices.ECONOMY),
+        ("C24 Sawn Carcassing 47x200", "structural_timber", prices.STANDARD),
+        ("9.5mm Plasterboard 2400x1200", "plasterboard", prices.ECONOMY),
+        ("12.5mm Moisture Resistant Plasterboard", "plasterboard",
+         prices.PREMIUM)]:
+    got = S.match_tier(description, product)
+    check(f"6l {description[:34]} -> {want}", got == want, got)
+
+# THE one that must not invert. "treated" is a substring of "untreated" and
+# "graded" of "ungraded", so substring matching reads the economy batten as
+# the standard one — backwards, on the item whose economy choice carries a
+# BS 5534 failure warning.
+check("6m untreated batten is economy, not standard",
+      S.match_tier("Untreated batten 25x50 ungraded", "battens")
+      == prices.ECONOMY)
+check("6n treated graded batten is standard",
+      S.match_tier("Treated Roofing Batten 25x50 BS5534 graded", "battens")
+      == prices.STANDARD)
 
 
 # ---- 7. normalising a line end to end -------------------------------------

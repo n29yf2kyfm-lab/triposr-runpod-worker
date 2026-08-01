@@ -293,13 +293,46 @@ def normalise_unit(text):
     return None
 
 
-# Sheet and roll sizes seen on essentially every UK merchant list, used to
-# convert a per-sheet price into a per-square-metre one.
+# Fallback sheet and roll sizes, used only when the description does not
+# state its own dimensions. These are the common sizes, not the only ones —
+# a 100mm mineral wool loft roll covers nearer 5.5 m2 than a PIR board's
+# 2.88 — so anything priced off them is flagged rather than trusted.
 SHEET_AREAS_M2 = {
     "plasterboard": 2.88,       # 2400 x 1200
-    "insulation": 2.88,         # 2400 x 1200 PIR
-    "membrane": 75.0,           # 1m x 50m roll is 50; 1.5m x 50m is 75
+    "insulation": 2.88,         # 2400 x 1200 PIR board
+    "membrane": 75.0,           # 1.5m x 50m roll
 }
+
+# Merchants nearly always state the size, so read it rather than assume it.
+# Two conventions, both universal: metres for rolls ("1.5m x 50m") and
+# millimetres for boards ("2400x1200").
+_DIM_METRES = re.compile(
+    r"(\d+(?:\.\d+)?)\s*m\s*[x×]\s*(\d+(?:\.\d+)?)\s*m\b", re.I)
+_DIM_MM = re.compile(r"\b(\d{3,4})\s*[x×]\s*(\d{3,4})\b")
+
+
+def parse_area_m2(description):
+    """Area of one sheet or roll, read off the description. None if absent.
+
+    Preferred over the fallback table every time it succeeds: the stated size
+    is a fact about the actual product, and the table is an average over
+    products that genuinely differ by a factor of two.
+    """
+    if not description:
+        return None
+    blob = str(description)
+
+    match = _DIM_METRES.search(blob)
+    if match:
+        area = float(match.group(1)) * float(match.group(2))
+        return area if 0.1 <= area <= 200.0 else None
+
+    match = _DIM_MM.search(blob)
+    if match:
+        area = (float(match.group(1)) / 1000.0) * (float(match.group(2)) / 1000.0)
+        return area if 0.05 <= area <= 20.0 else None
+
+    return None
 
 # Tiles per square metre at typical gauge. These are ASSUMPTIONS — the true
 # figure depends on the batten gauge chosen for the actual roof pitch and
@@ -377,16 +410,62 @@ def match_product(description):
     return best, best_score
 
 
+# Words that carry no discriminating power between tiers.
+_STOPWORDS = {"a", "an", "and", "or", "the", "for", "of", "not", "with",
+              "incl", "including", "per", "mm", "weak"}
+
+_TOKEN = re.compile(r"[a-z0-9][a-z0-9.]*")
+
+
+def _tokens(text):
+    """Word tokens, keeping "12.5mm" and "c24" intact.
+
+    Whole tokens, never substrings: "treated" is a substring of "untreated"
+    and "graded" of "ungraded", so substring matching reads an economy batten
+    as the standard one — precisely backwards, and on the item where the
+    economy choice carries a BS 5534 failure warning.
+    """
+    return {t for t in _TOKEN.findall((text or "").lower())
+            if t not in _STOPWORDS and len(t) > 1}
+
+
+def _spec_tokens(product, tier):
+    return _tokens(prices.CATALOGUE[product][tier]["spec"])
+
+
 def match_tier(description, product=None):
-    """Which quality tier a description implies. Defaults to standard."""
+    """Which quality tier a description implies. Defaults to standard.
+
+    Scored against the CATALOGUE's own spec strings for that product, which
+    is the only place the tiers are actually defined. A product-blind keyword
+    list cannot work here: "natural slate" is premium as a roof covering and
+    meaningless as a batten, and "half-round" is the economy gutter while
+    "deepflow" is the standard one — none of that generalises across
+    products, and a hand-maintained list drifts out of step with the
+    catalogue the moment either changes.
+
+    Generic keywords still apply, for the case where the product is unknown.
+    """
     blob = (description or "").lower()
-    premium = sum(1 for w in TIER_KEYWORDS[prices.PREMIUM] if w in blob)
-    economy = sum(1 for w in TIER_KEYWORDS[prices.ECONOMY] if w in blob)
-    if premium > economy:
-        return prices.PREMIUM
-    if economy > premium:
-        return prices.ECONOMY
-    return prices.STANDARD
+    tokens = _tokens(blob)
+    scores = dict.fromkeys(prices.TIERS, 0)
+
+    if product in prices.CATALOGUE:
+        for tier in prices.TIERS:
+            # Weighted above the generic keywords: the catalogue is the
+            # definition, the keyword list is a fallback.
+            scores[tier] += 2 * len(tokens & _spec_tokens(product, tier))
+
+    for tier in (prices.ECONOMY, prices.PREMIUM):
+        scores[tier] += sum(1 for word in TIER_KEYWORDS[tier] if word in blob)
+
+    best = max(scores.values())
+    if best == 0:
+        return prices.STANDARD
+    winners = [t for t in prices.TIERS if scores[t] == best]
+    # A tie is not evidence. Standard is the honest default — it is what most
+    # of what a merchant stocks in volume actually is.
+    return prices.STANDARD if len(winners) > 1 else winners[0]
 
 
 # --- normalising one line --------------------------------------------------
@@ -495,14 +574,20 @@ def _convert_unit(price, have, wanted, product, line):
                 f"unit not stated — assumed the catalogue unit ({wanted})")
         return price
 
-    if have in ("sheet", "each") and wanted == "m2" and product in SHEET_AREAS_M2:
+    if have in ("sheet", "each", "roll") and wanted == "m2" \
+            and product in SHEET_AREAS_M2:
+        stated = parse_area_m2(line.description)
+        if stated:
+            line.notes.append(
+                f"per {have} -> per m2 at {round(stated, 3)} m2, read from "
+                f"the stated size")
+            return price / stated
         area = SHEET_AREAS_M2[product]
-        line.notes.append(f"per {have} -> per m2 at {area} m2 each")
-        return price / area
-
-    if have == "roll" and wanted == "m2" and product in SHEET_AREAS_M2:
-        area = SHEET_AREAS_M2[product]
-        line.notes.append(f"per roll -> per m2 at {area} m2 a roll")
+        # No stated size: the fallback can be a factor of two out (a loft
+        # roll against a PIR board), so this is a guess and must read as one.
+        line.notes.append(
+            f"per {have} -> per m2 at an ASSUMED {area} m2 — no size given "
+            f"in the description, check this line")
         return price / area
 
     if have == "each" and wanted == "each":
@@ -628,8 +713,10 @@ def import_price_list(text, vat=VAT_UNKNOWN, channel="published",
     flagged = [l for l in lines if any("check this line" in n for n in l.notes)]
     if flagged:
         warnings.append(
-            f"{len(flagged)} lines are priced in a unit that could not be "
-            f"converted — they will be wrong by whatever the conversion was.")
+            f"{len(flagged)} of {len(lines)} lines needed a guess about the "
+            f"unit, pack size or sheet area, and are only right if the guess "
+            f"was. Each one says which guess it made — check them before "
+            f"quoting from this list.")
 
     return {
         "lines": [l.as_dict() for l in lines],
