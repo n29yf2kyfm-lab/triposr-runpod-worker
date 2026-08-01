@@ -3,6 +3,23 @@ name: Build and Push Docker Image
 on:
   push:
     branches: [ main ]
+    # WITHOUT THIS FILTER, ANY push to main rebuilt and republished
+    # alamk123/ai-mechanic:latest — including a README or docs change. That
+    # tag lives in the same Docker repository the vehicle worker publishes
+    # to, so an edit to a markdown file could replace an image something may
+    # be pulling. Every other workflow here is scoped to its own directory;
+    # this one was not.
+    #
+    # The workflow file itself is deliberately NOT in this list. Including it
+    # is the usual practice, but it would mean a change to this very filter
+    # republishes :latest as a side effect, which is the thing being
+    # prevented. This worker is legacy and rarely touched; when it does need
+    # rebuilding, run it by hand from the Actions tab.
+    paths:
+      - 'handler.py'
+      - 'Dockerfile'
+      - 'requirements.txt'
+  workflow_dispatch: {}
 
 jobs:
   build:
