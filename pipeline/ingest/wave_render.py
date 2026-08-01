@@ -23,6 +23,34 @@ flight. Usage:
 """
 import argparse, json, os, re, struct, sys, time, types, urllib.error, urllib.parse, urllib.request
 
+ENV_FILE = "/root/.alam3d_env"
+
+
+def load_env(path=ENV_FILE):
+    """Populate missing credentials from the out-of-repo env file.
+
+    A relaunch that forgets to source this file used to die one line in, and the
+    failure looked exactly like a healthy start: the process logged the manifest
+    count, then exited. Reading the file here means the tool cannot be launched
+    without its credentials. Values already in the environment always win.
+    """
+    try:
+        with open(path) as fh:
+            body = fh.read()
+    except OSError:
+        return
+    for line in body.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        line = line[7:].lstrip() if line.startswith("export ") else line
+        name, sep, value = line.partition("=")
+        if sep and not os.environ.get(name.strip()):
+            os.environ[name.strip()] = value.strip().strip("'\"")
+
+
+load_env()
+
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 R = os.path.join(REPO, "render")
 os.environ.setdefault("HDRI_PATH", os.path.join(R, "assets", "hdri.hdr"))
