@@ -496,6 +496,90 @@ def _pose_audit(bpy):
             "glass_af": glass_af, "wheel_af": wheel_af, "h_over_l": h_over_l}
 
 
+_RIG_MAX_FACES = 200     # a sphere/box rig; car parts are far denser
+_RIG_ISOTROPY = 1.30     # max/min extent — a ball or box, not a car part
+_RIG_MIN_SPAN = 0.35     # of car length: big enough to move the bbox
+
+
+def _drop_rigs(bpy, mathutils, meshes):
+    """Remove enclosing environment rigs before anything measures the scene.
+
+    Sourced GLBs ship studio props baked in. The VW Sharan carries an
+    `Icosphere`, 80 faces, 1.9 x 2.0 x 2.0, spanning Z -1.000..+1.000 while the
+    car itself occupies Z 0.000..1.767. Nothing removed it at render time, so
+    the scene bbox came out 2.767 tall instead of 1.767, and since the floor is
+    built at the scene's zmin the studio floor was laid ONE METRE BENEATH THE
+    WHEELS. Every hero rendered with the car hanging in mid-air.
+
+    `strip_env.py` exists to catch exactly this, but it only runs in the
+    sourcing wave, and it uploads its cleaned copy only when its self-check
+    passes -- the Sharan's returned ok=False, so no clean GLB was ever stored
+    and the render worker got the raw file. Serving cannot depend on an offline
+    step having succeeded, so the guard belongs here too.
+
+    A rig is low-poly AND roughly isotropic AND large next to the car:
+
+      faces <= 200          an 80-face icosphere or a 12-face cube
+      max/min extent < 1.30 a ball or box, not a car part
+      max extent >= 35%     of car length, so small props are left alone
+
+    Thresholds set by measurement, not taste. The Sharan's Icosphere is 80
+    faces, isotropy 1.05, span 42%. The nearest false positive found was the
+    Touran's `EngineMesh_wiper.4_0` at 183 faces, isotropy 1.52, span 26% --
+    a real car part that an earlier, looser cut (300 / 1.6 / 25%) deleted.
+    Every threshold now sits between the two.
+
+    All three must hold. Verified on the Sharan (drops the Icosphere, bbox
+    2.767 -> 1.767, car sits on the floor) and against Golf 2000, Golf 2021,
+    Passat 2001, Touran 2004, Touran 2010 and Tiguan 2021, which lose nothing.
+
+    An earlier attempt at this used a body-envelope test built on measurements
+    from a helper that disagreed with Blender; it would have deleted the four
+    real wheels. Everything here is measured through Blender itself.
+    """
+    ms = meshes()
+    if len(ms) < 3:
+        return []
+
+    def world_box(o):
+        lo = [1e30] * 3
+        hi = [-1e30] * 3
+        for cnr in o.bound_box:
+            w = o.matrix_world @ mathutils.Vector(cnr)
+            for i in range(3):
+                lo[i] = min(lo[i], w[i]); hi[i] = max(hi[i], w[i])
+        return lo, hi, [hi[i] - lo[i] for i in range(3)]
+
+    boxes = {o.name: world_box(o) for o in ms}
+    car_len = max(max(boxes[o.name][2]) for o in ms)
+
+    drop = []
+    for o in ms:
+        ext = sorted(boxes[o.name][2], reverse=True)
+        if ext[2] <= 1e-9:
+            continue
+        if (len(o.data.polygons) <= _RIG_MAX_FACES
+                and ext[0] / ext[2] < _RIG_ISOTROPY
+                and ext[0] >= _RIG_MIN_SPAN * car_len):
+            drop.append(o)
+
+    # Refuse to gut the car: if this ever selects a large share of the scene the
+    # test is wrong, and rendering the raw model beats rendering a hollow one.
+    if not drop or len(drop) > 0.25 * len(ms):
+        return []
+
+    names = [o.name for o in drop]
+    # bpy.ops.object.delete() silently did nothing here -- the operator depends
+    # on a context this worker does not have, and the scene bbox came back
+    # unchanged with the rig still in it. Remove from bpy.data directly, then
+    # confirm the objects are actually gone before reporting success.
+    for o in drop:
+        bpy.data.objects.remove(o, do_unlink=True)
+    bpy.context.view_layer.update()
+    left = {o.name for o in meshes()}
+    return [n for n in names if n not in left]
+
+
 def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
             samples, resx, resy, bright=False, studio=True,
             finish=None, recolour_mode="auto", plate_end="auto",
@@ -511,6 +595,8 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
 
     def meshes():
         return [o for o in bpy.context.scene.objects if o.type == "MESH"]
+
+    _dropped_rigs = _drop_rigs(bpy, mathutils, meshes)
 
     ms = meshes()
     bpy.ops.object.select_all(action="DESELECT")
