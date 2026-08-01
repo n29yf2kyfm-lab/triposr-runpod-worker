@@ -337,7 +337,77 @@ converged on, and there is already published work combining **SAM 2 with 3D Gaus
 splatting** for defect segmentation and 3D reconstruction of concrete structures — the same
 architecture this plan proposes. Condition Mode is following a proven path, not inventing one.
 
-### 4.4 Stack
+### 4.4 Training data — what needs training, and what does not
+
+**Most of this pipeline needs no training at all.** That is the single biggest cost saving
+available, and it is easy to miss.
+
+| Stage | Trained? | Why |
+|---|---|---|
+| Reconstruction (MapAnything, VGGT, AMB3R) | **No** | Pretrained foundation models. Zero-shot on scenes they have never seen. Use as-is. |
+| Structure (Cloud2BIM) | **No** | Algorithmic — density analysis and morphological ops, not learned. |
+| Quantity takeoff | **No** | Geometry and arithmetic. |
+| Defect detection | **Yes** — fine-tune | Open datasets exist (below). |
+| Service/first-fix recognition | **Yes** — and **no open data exists** | See §4.5. |
+
+So the question is not "how do we train a 3D model" — it is "what do we fine-tune the two
+recognition models on".
+
+**Open datasets that are usable today:**
+
+| Dataset | Contents | Use |
+|---|---|---|
+| **ARKitScenes** (Apple) | 5,047 captures / 1,661 scenes, **captured with Apple LiDAR** | Best match — literally the same capture hardware as the app. Development + validation. |
+| **ScanNet++** | 460 scenes: sub-mm laser scanner + 33MP DSLR + **iPhone RGB-D**, 3.7M frames | The accuracy benchmark. Laser ground truth to measure our error against. |
+| **Matterport3D** | 90 building-scale scenes, 194,400 RGB-D images | Whole-building scale. |
+| **S3DIS** | 271 rooms, 6,000+ m², 215M points, instance-level labels, 13 classes | Semantic segmentation. |
+| **BIMNet** | openBIM scan-to-BIM benchmark, IFC annotation, 14 IFC categories | **Directly benchmarks Phase 3** — point cloud → IFC. |
+| **SDNET2018** | 56,000+ images, cracks 0.06–25 mm, with shadows/roughness/holes | Crack detection. Free. |
+| **CrackForest (CFD)**, **BD3** | Crack and building-defect benchmarks | Cross-domain validation. |
+| Yin et al. industrial plant | ibeam, pipe, pump, rbeam, tank | Pipe geometry — **but industrial, and excludes electrical**. |
+| **ConSite** | Active construction site point clouds | Closest to a live site. |
+
+### 4.5 The data gap — and why it is the moat
+
+There is **no open dataset of UK domestic first fix**. Nothing covering 15 mm vs 22 mm
+copper, plastic push-fit, socket back boxes, consumer units, cable runs in safe zones, stud
+spacing, noggins, soil stacks. The MEP datasets that exist are **industrial plant** — big
+pipes, pumps, tanks — and the largest one **excludes electrical entirely**.
+
+That gap cuts both ways:
+
+- It is why Condition Mode can lean on open data (cracks are cracks) but **Service Mode
+  cannot**.
+- It is also **the most defensible thing in this product.** Reconstruction models are
+  free to everyone. Cloud2BIM is MIT. Anyone can assemble the same pipeline in a month.
+  What nobody can download is a labelled corpus of real first-fix walls — because it only
+  exists in the ninety minutes before the plasterboard goes on, and only a builder is
+  standing there when it does.
+
+**Strategy:** capture first-fix footage from every job, from day one, before the app can
+even process it. Raw video is enough — it can be reprocessed as the pipeline matures. Every
+job filmed is a permanent, appreciating asset that a competitor cannot buy.
+
+### 4.6 On YouTube and scraped video
+
+Tempting, and largely a dead end for the 3D work:
+
+- **Legally:** downloading YouTube video without permission breaches its terms, and training
+  on scraped copyrighted video is actively litigated. This is a different question from the
+  MIT-vs-GPL one — that is a licence choice, this is copyright exposure on a product being sold.
+- **Technically:** edited video is poor reconstruction input. Cuts, zooms, jump edits,
+  motion blur, overlays, no depth, no camera intrinsics, no metric scale, and rarely the
+  slow overlapping sweep of a single wall that reconstruction needs. A first-fix YouTube
+  video is entertainment, not a scan.
+- **Where it does work:** individual *frames* are reasonable training data for **2D
+  recognition** — "that is a socket back box", "that is 22 mm copper". That is
+  classification, not reconstruction. The clean route is licensing footage from a few trade
+  channels directly rather than scraping.
+
+Verdict: **do not build on scraped video.** Fine-tune defect models on the open datasets
+above, and build the first-fix corpus from real jobs.
+
+### 4.7 Stack
 
 **Capture (iOS, Swift):** Apple **RoomPlan** for interiors — LiDAR, returns *parametric*
 walls, doors, windows, openings with dimensions, not just a mesh. **ARKit** for depth and
