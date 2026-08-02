@@ -148,7 +148,37 @@ INDEX_FIELD = {
 # registered key. Without it the module falls back to indexing the property's
 # own last sale, which needs no key at all and is stronger evidence about
 # that specific house than any comparable set.
-EPC_API = "https://epc.opendatacommunities.org/api/v1/domestic/search"
+#
+# THIS WAS DEAD CODE. The constant was defined and referenced nowhere else,
+# nothing ever built the floor_areas map parse_ppd_item accepts, and so the
+# per-square-metre method — the headline claim of this module, and the only
+# thing a measured scan can improve on — was unreachable from run(). Every
+# valuation silently took the fallback and said nothing about it.
+#
+# The old host is also gone: epc.opendatacommunities.org now redirects to an
+# HTML sign-in page, and the service moved to MHCLG in 2025.
+EPC_SEARCH_API = ("https://api.get-energy-performance-data.communities.gov.uk"
+                  "/api/domestic/search")
+EPC_CERTIFICATE_API = (
+    "https://api.get-energy-performance-data.communities.gov.uk"
+    "/api/certificate")
+EPC_KEY_ENV = "BUILDING_EPC_API_KEY"
+
+# Certificates to look at for one postcode. A residential postcode holds
+# 10-20 addresses; this allows for reissued certificates on the same house.
+MAX_EPC_CERTIFICATES = 120
+
+# Two certificates for the same address that disagree by more than this are
+# not describing the same dwelling — most often two flats sharing a house
+# number. Neither is used.
+EPC_AREA_TOLERANCE = 0.10
+
+# Widest half-spread that can still be reported. At 1.0 the lower bound
+# reaches zero and beyond it goes negative, which is not a wide valuation
+# but a broken one. A split market inside this bound is still reported, with
+# its spread and a low confidence — that is a real finding about a mixed
+# postcode, and suppressing it would lose information.
+MAX_RANGE_BAND = 0.95
 
 
 class ValuationError(ValueError):
@@ -292,6 +322,168 @@ def _address_key(postcode, paon):
     """
     return (re.sub(r"\s+", "", str(postcode).upper()),
             re.sub(r"\s+", "", str(paon).upper()))
+
+
+def _epc_paons(address_line):
+    """Candidate PAONs for one EPC address line.
+
+    Price Paid holds a primary addressable object name — "12", "12A", "The
+    Old Rectory" — and the EPC register holds a free-text first address
+    line, "12 Acacia Avenue". Both are joined on postcode plus PAON because
+    neither publishes a UPRN in its open form.
+
+    Returns every reading that could be a PAON rather than choosing one; a
+    key that matches nothing costs nothing, and choosing wrong silently
+    attaches another house's floor area to this sale.
+    """
+    text = str(address_line or "").strip()
+    if not text:
+        return []
+    out = []
+    # "Flat 3, 12 Acacia Avenue" — the flat number is not the PAON.
+    stripped = re.sub(
+        r"^(?:flat|apartment|apt|unit|room)\s*[0-9a-z]*\s*[,.]?\s*", "",
+        text, flags=re.I)
+    for candidate in (text, stripped):
+        match = re.match(r"^(\d+\s*[A-Za-z]?)\b", candidate)
+        if match:
+            # "12 Acacia Avenue" captures "12 " and "12 A High St" captures
+            # "12 A"; Price Paid writes those as "12" and "12A".
+            out.append(re.sub(r"\s+", "", match.group(1)))
+    # A named house: the whole line is the name, and _address_key strips the
+    # spaces, so "The Old Rectory" joins to PAON "THE OLD RECTORY".
+    out.append(text)
+    if stripped != text:
+        out.append(stripped)
+    return out
+
+
+def fetch_floor_areas(postcode, wanted=None, timeout=HTTP_TIMEOUT,
+                      max_certificates=MAX_EPC_CERTIFICATES):
+    """Floor areas from the EPC register, keyed for the Price Paid join.
+
+    Returns ({address_key: m2}, note). An empty map with a note is the
+    normal, honest answer when no key is configured — this is the one input
+    in the module that needs registering for, and the module works without
+    it, less precisely.
+
+    `wanted` is the set of address keys the caller actually has sales for.
+    The register answers a postcode search with a summary that carries no
+    floor area, so each certificate needs its own request; filtering to the
+    addresses in the comparable set turns 40 requests into 8.
+    """
+    import os
+
+    token = os.environ.get(EPC_KEY_ENV)
+    if not token:
+        return {}, (
+            f"No EPC key configured ({EPC_KEY_ENV}), so no floor areas were "
+            f"available and the valuation could not use price per square "
+            f"metre. Register free at "
+            f"get-energy-performance-data.communities.gov.uk.")
+    if not postcode:
+        return {}, "No postcode, so the EPC register could not be searched."
+
+    import requests
+    headers = {"Authorization": f"Bearer {token}",
+               "Accept": "application/json"}
+    try:
+        response = requests.get(
+            EPC_SEARCH_API, headers=headers, timeout=timeout,
+            params={"postcode": str(postcode).upper().strip(),
+                    "page_size": max_certificates})
+        response.raise_for_status()
+        rows = (response.json() or {}).get("data") or []
+    except Exception as e:
+        return {}, f"EPC register unavailable ({type(e).__name__}), so no floor areas."
+
+    # Newest certificate first: a house recertified after an extension has
+    # two, and the current one describes the house as it stands.
+    rows.sort(key=lambda r: str(r.get("registrationDate") or ""), reverse=True)
+
+    seen, areas, conflicts = set(), {}, set()
+    fetched, matched = 0, 0
+    for row in rows:
+        keys = [_address_key(row.get("postcode") or postcode, paon)
+                for paon in _epc_paons(row.get("addressLine1"))]
+        keys = [k for k in keys if wanted is None or k in wanted]
+        if not keys or all(k in seen for k in keys):
+            continue
+        number = row.get("certificateNumber")
+        if not number:
+            continue
+        area = _epc_floor_area(number, headers, timeout)
+        fetched += 1
+        if area is None:
+            continue
+        matched += 1
+        for key in keys:
+            if key in areas and abs(areas[key] - area) > \
+                    max(areas[key], area) * EPC_AREA_TOLERANCE:
+                # Two dwellings behind one house number, most often flats.
+                conflicts.add(key)
+            else:
+                areas.setdefault(key, area)
+        seen.update(keys)
+
+    for key in conflicts:
+        areas.pop(key, None)
+
+    # Counted in CERTIFICATES, not keys. Each address contributes several
+    # candidate join keys, so counting keys reported four floor areas for
+    # two houses.
+    note = (f"{matched} floor areas from the EPC register "
+            f"({fetched} certificates read)")
+    if conflicts:
+        note += (f"; {len(conflicts)} addresses skipped where two "
+                 f"certificates disagreed, which usually means flats sharing "
+                 f"a house number")
+    return areas, note
+
+
+def _epc_floor_area(certificate_number, headers, timeout):
+    """Total floor area in m2 for one certificate, or None."""
+    import requests
+    try:
+        response = requests.get(
+            EPC_CERTIFICATE_API, headers=headers, timeout=timeout,
+            params={"certificate_number": certificate_number})
+        response.raise_for_status()
+        data = (response.json() or {}).get("data") or {}
+    except Exception:
+        return None
+    area = data.get("total_floor_area")
+    # The SAP block also carries a total_floor_area, but that one is a single
+    # floor: 38.05 against a whole-dwelling 78 on the certificate I checked.
+    # Taking it would halve the size of every two-storey house.
+    try:
+        area = float(area)
+    except (TypeError, ValueError):
+        return None
+    return area if 5.0 <= area <= 2000.0 else None
+
+
+def attach_floor_areas(sales, postcode, timeout=HTTP_TIMEOUT):
+    """Join EPC floor areas onto sales. Returns (sales, note)."""
+    wanted = set()
+    for sale in sales:
+        if sale.postcode and sale.address:
+            paon = str(sale.address).split(" ")[0]
+            wanted.add(_address_key(sale.postcode, paon))
+    if not wanted:
+        return sales, "No addressed sales to join floor areas to."
+
+    areas, note = fetch_floor_areas(postcode, wanted=wanted, timeout=timeout)
+    joined = 0
+    for sale in sales:
+        if sale.floor_area_m2 or not (sale.postcode and sale.address):
+            continue
+        paon = str(sale.address).split(" ")[0]
+        area = areas.get(_address_key(sale.postcode, paon))
+        if area:
+            sale.floor_area_m2 = area
+            joined += 1
+    return sales, f"{note}; {joined} of {len(sales)} sales matched"
 
 
 def fetch_sales(postcode=None, district=None, since=None, limit=100,
@@ -469,7 +661,17 @@ def index_price(price, sold_on, index_series, to_date=None):
             f"the house price index does not cover {sold_on.isoformat()}, so "
             f"this sale cannot be indexed forward. Widen the series or drop "
             f"the comparable.")
-    if start <= 0:
+    # `end` was never checked, and the asymmetry mattered: indexing to a date
+    # BEFORE the series begins — which the backtest path does deliberately —
+    # left end as None and raised TypeError on the division. Callers here
+    # catch ValuationError specifically so they can drop one comparable and
+    # carry on; a TypeError escapes all of them and kills the whole
+    # valuation on one bad row.
+    if end is None:
+        raise ValuationError(
+            f"the house price index does not reach back to "
+            f"{to_date.isoformat()}, so nothing can be indexed to that date.")
+    if start <= 0 or end <= 0:
         raise ValuationError("house price index values must be positive")
 
     return price * (end / start)
@@ -564,7 +766,23 @@ def value_from_comparables(sales, floor_area_m2, property_type,
     # The range is the honest output. Half the observed spread, floored at a
     # figure no comparables method can beat: valuations from sold evidence
     # are not a ±2% instrument however tidy the arithmetic looks.
+    #
+    # CAPPED AS WELL AS FLOORED. There was a floor and no cap, so a surviving
+    # spread above 200% of the median put range_low BELOW ZERO: an inner-city
+    # postcode with nothing rejected produced "£340,000, range -£68,000 to
+    # £748,000", and the docstring called that the honest output. A negative
+    # pound figure is not a wide valuation, it is a broken one.
+    #
+    # A split market INSIDE the cap is still reported, with its spread and a
+    # low confidence, because that is a real finding about the postcode.
     band = max(spread / 2.0, 0.05)
+    if band > MAX_RANGE_BAND:
+        raise ValuationError(
+            f"comparable sales for this property type span "
+            f"{spread * 100:.0f}% of their own median — wide enough that the "
+            f"lower bound would be at or below zero. That is not one market, "
+            f"so no price per square metre from it would mean anything. Try "
+            f"a tighter postcode, or value from the property's own last sale.")
     central = rate * floor_area_m2
 
     return {
@@ -827,23 +1045,41 @@ def extension_uplift(current_value, current_floor_area_m2, added_m2,
     }
 
     if capped_at is not None:
+        # The haircut has two separate causes and the note used to blame the
+        # ceiling for both. The marginal factor is what usually costs most:
+        # on the case I checked the ceiling cost £5,000 and the marginal
+        # factor £20,000, and the note — inside the ceiling explanation —
+        # said "£25,000 is not recoverable here". The numbers were right;
+        # the explanation a builder reads out to a customer was not.
+        by_ceiling = max(0.0, marginal - uplift)
         result["ceiling_note"] = (
             f"Capped by the street. The best recent sale nearby was "
             f"£{street_ceiling:,.0f}, and value above about "
             f"£{capped_at:,.0f} is unlikely to be realised however good the "
-            f"work is. £{gross - uplift:,.0f} of the theoretical uplift is "
-            f"not recoverable here.")
-        # The case worth calling out by name: the house is ALREADY at what
-        # the street achieves, so the headroom is the ceiling tolerance and
-        # nothing else. Every extension size returns the same figure, which
-        # looks like a bug and is in fact the finding.
-        if current_value >= street_ceiling * (1 - AT_CEILING_MARGIN):
-            result["at_ceiling"] = True
-            result["ceiling_note"] += (
-                f" This property is already at the top of what the street "
-                f"achieves, so there is very little headroom at any size — "
-                f"a bigger extension does not earn more here. If they want "
-                f"the space, build it for the space.")
+            f"work is. The street ceiling costs £{by_ceiling:,.0f} of the "
+            f"uplift; the remaining £{gross - marginal:,.0f} of the "
+            f"difference from the headline £{gross:,.0f} is the marginal "
+            f"factor above, not the ceiling.")
+
+    # The case worth calling out by name: the house is ALREADY at what the
+    # street achieves, so the headroom is the ceiling tolerance and nothing
+    # else. Every extension size returns the same figure, which looks like a
+    # bug and is in fact the finding.
+    #
+    # Computed OUTSIDE the cap branch, because it used to sit inside it. A
+    # house already above the street ceiling got the full uplift and no flag
+    # whenever the extension was small enough not to trip the 10% tolerance
+    # — the smaller, commoner job, and precisely the one where "build it for
+    # the space" is the right advice.
+    if street_ceiling and current_value >= street_ceiling * (
+            1 - AT_CEILING_MARGIN):
+        result["at_ceiling"] = True
+        note = (" This property is already at the top of what the street "
+                "achieves, so there is very little headroom at any size — "
+                "a bigger extension does not earn more here. If they want "
+                "the space, build it for the space.")
+        result["ceiling_note"] = (result.get("ceiling_note") or
+                                  "At the street ceiling.") + note
 
     if build_cost is not None:
         if build_cost <= 0:
@@ -991,6 +1227,21 @@ def run(spec, prog, output_dir):
     # Best available method, in order of how much it can be trusted.
     floor_area = spec.get("floor_area_m2")
     value = None
+
+    # Price Paid carries no floor area, so the comparables method needs the
+    # EPC register joined on address. Nothing used to do this join, so the
+    # method below could never run and the fallback took every valuation
+    # without ever saying why.
+    if floor_area:
+        sales, epc_note = attach_floor_areas(sales, postcode)
+        same_type = [s for s in sales if s.property_type == ptype]
+        result["epc_note"] = epc_note
+    else:
+        result["epc_note"] = (
+            "No floor_area_m2 supplied, so price per square metre could not "
+            "be used. Scan the property and pass its measured floor area — "
+            "that measurement is the whole advantage over an estimate.")
+
     if floor_area and any(s.floor_area_m2 for s in same_type):
         try:
             value = value_from_comparables(sales, floor_area, ptype,
@@ -998,6 +1249,11 @@ def run(spec, prog, output_dir):
             value["method"] = "comparables_per_m2"
         except ValuationError as e:
             result["comparables_note"] = str(e)
+    elif floor_area:
+        result["comparables_note"] = (
+            "No comparable sale could be matched to a floor area, so price "
+            "per square metre was not available and the property's own last "
+            "sale was indexed instead.")
 
     if value is None and index_series:
         # Fall back to indexing the property's own last sale. Needs no floor

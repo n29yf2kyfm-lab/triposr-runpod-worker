@@ -108,6 +108,7 @@ claiming success.
 | `OFFLINE=1` | Forbid runtime downloads; pair with `preload_models.py` |
 | `DEBUG=1` | Include tracebacks in responses (bring-up only — they leak paths) |
 | `GOOGLE_SOLAR_API_KEY` | Optional. Enables the Google Solar cross-check on Roof Mode. **Never commit a key** — set it on the endpoint, as with `SUPABASE_KEY` |
+| `BUILDING_EPC_API_KEY` | Optional but it changes the answer. Bearer token for the EPC register, free from [get-energy-performance-data.communities.gov.uk](https://get-energy-performance-data.communities.gov.uk). Land Registry publishes what a house **sold for** but not how **big** it was, so without this there is no price per square metre and Valuation Mode falls back to indexing the property's own last sale. With it, a measured scan can be valued against real £/m² — which is the entire advantage over an agent's estimate. **Never commit the token** — set it on the endpoint |
 | `FOOTPRINT_CACHE_DIR` | On-disk cache of OSM footprints (Overpass rate-limits and its mirrors time out) |
 
 ## Deployment
