@@ -100,6 +100,10 @@ INDEX_GRACE_MONTHS = 6
 PPD_API = "https://landregistry.data.gov.uk/data/ppi/transaction-record.json"
 UKHPI_API = ("https://landregistry.data.gov.uk/data/ukhpi/region/"
              "{region}/month/{month}.json")
+# The collection form, which takes a min-refMonth filter and returns the
+# whole series in one response. Always prefer this over walking months.
+UKHPI_RANGE_API = ("https://landregistry.data.gov.uk/data/ukhpi/region/"
+                   "{region}/month.json")
 
 HTTP_TIMEOUT = 60
 USER_AGENT = "building-scan/1.0 (property valuation; open data)"
@@ -323,7 +327,7 @@ def _tidy_postcode(postcode):
 
 
 def fetch_index(region, property_type, months, timeout=HTTP_TIMEOUT):
-    """UKHPI index values for a region, one request per month.
+    """UKHPI index values for a region, in ONE request.
 
     Free, no key, OGL. `region` is the local authority slug as UKHPI names
     it — "birmingham", "west-midlands", "england".
@@ -331,6 +335,13 @@ def fetch_index(region, property_type, months, timeout=HTTP_TIMEOUT):
     Per PROPERTY TYPE, deliberately: the all-property index would age a
     semi-detached sale by the flat market's movement, and those diverge
     sharply enough to swamp the answer.
+
+    ONE request, not one per month. The first version walked the months and
+    fetched each individually, which is fine on a laptop and unusable in
+    production: a five-year comparable window is 66 months, so a single
+    valuation opened 66 sequential HTTPS connections and spent four minutes
+    doing it. The collection endpoint takes a min-refMonth filter and returns
+    the whole series at once, so the same work is one round trip.
     """
     if not region:
         raise ValuationError("a UKHPI region is needed to build an index")
@@ -339,35 +350,57 @@ def fetch_index(region, property_type, months, timeout=HTTP_TIMEOUT):
     if not months:
         raise ValuationError("no months requested")
 
-    import requests
     field = INDEX_FIELD[property_type]
+    earliest = min(months)
+
+    import requests
+    url = UKHPI_RANGE_API.format(region=str(region).lower().strip())
+    try:
+        response = requests.get(
+            url,
+            params={"_pageSize": 500,
+                    "min-refMonth": earliest.strftime("%Y-%m"),
+                    "_properties": f"refMonth,{field}"},
+            timeout=timeout,
+            headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
+        response.raise_for_status()
+        items = (response.json().get("result") or {}).get("items") or []
+    except Exception as e:
+        raise ValuationError(
+            f"could not fetch the UKHPI series for {region!r}: "
+            f"{type(e).__name__}. The index is what brings old sales to "
+            f"today's money, so a valuation without it would be comparing "
+            f"different years directly.")
+
     series = {}
-    for month in months:
-        url = UKHPI_API.format(region=str(region).lower().strip(),
-                               month=month.strftime("%Y-%m"))
-        try:
-            response = requests.get(
-                url, timeout=timeout,
-                headers={"User-Agent": USER_AGENT,
-                         "Accept": "application/json"})
-            if response.status_code != 200:
+    for item in items:
+        month = _parse_ref_month(item.get("refMonth"))
+        value = item.get(field)
+        if month and value:
+            try:
+                series[month] = float(value)
+            except (TypeError, ValueError):
                 continue
-            topic = (response.json().get("result") or {}).get("primaryTopic")
-            value = (topic or {}).get(field)
-            if value:
-                series[date(month.year, month.month, 1)] = float(value)
-        except Exception:
-            # A month the index has not reached yet, or a transient failure.
-            # Both are survivable — the series just covers less ground, and
-            # index_price refuses honestly if it covers too little.
-            continue
 
     if not series:
         raise ValuationError(
-            f"UKHPI returned nothing for region {region!r}. Check the region "
-            f"slug — it is the local authority name as UKHPI spells it, e.g. "
-            f"'birmingham', 'west-midlands', 'england'.")
+            f"UKHPI returned no {field} values for region {region!r}. Check "
+            f"the region slug — it is the local authority name as UKHPI "
+            f"spells it, e.g. 'birmingham', 'west-midlands', 'england'.")
     return series
+
+
+def _parse_ref_month(value):
+    """UKHPI's refMonth, as "2026-05". Comes back bare under a _properties
+    projection and wrapped in a node without one, so handle both."""
+    if isinstance(value, dict):
+        value = value.get("_value") or value.get("label") or ""
+    text = str(value or "").strip()[:7]
+    try:
+        year, month = text.split("-")
+        return date(int(year), int(month), 1)
+    except (ValueError, AttributeError):
+        return None
 
 
 def months_back(count, from_date=None):

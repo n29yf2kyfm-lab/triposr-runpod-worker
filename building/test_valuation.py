@@ -361,6 +361,23 @@ for kwargs, label in [({}, "no postcode or district"),
     except ImportError as e:
         check(f"7b-19 {label} refused", False, f"imported first: {e}")
 
+# THE production bug. The first version fetched one month at a time, which
+# is fine on a laptop and unusable on a worker: a five-year comparable window
+# is 66 months, so one valuation opened 66 sequential HTTPS connections and
+# spent four minutes doing it. Only a real run surfaced it.
+_src = open(os.path.join(HERE, "valuation.py")).read()
+check("7b-20a the index is fetched as a range, not month by month",
+      "UKHPI_RANGE_API" in _src and "min-refMonth" in _src)
+check("7b-20b and the per-month walk is gone",
+      "for month in months:" not in _src, "still loops per month")
+
+check("7b-20c refMonth parses bare", V._parse_ref_month("2026-05")
+      == date(2026, 5, 1))
+check("7b-20d refMonth parses wrapped",
+      V._parse_ref_month({"_value": "2026-05"}) == date(2026, 5, 1))
+check("7b-20e a junk refMonth is None", V._parse_ref_month("nonsense") is None)
+check("7b-20f a missing refMonth is None", V._parse_ref_month(None) is None)
+
 for kwargs, label in [({"region": "", "property_type": "S",
                         "months": [date(2026, 1, 1)]}, "no region"),
                       ({"region": "birmingham", "property_type": "X",
