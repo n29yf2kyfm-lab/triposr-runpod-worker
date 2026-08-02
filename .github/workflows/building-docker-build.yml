@@ -53,6 +53,9 @@ jobs:
       - name: Run drawing takeoff tests
         run: python building/test_drawing.py
 
+      - name: Run structure segmentation tests
+        run: python building/test_structure.py
+
   build:
     needs: test
     runs-on: ubuntu-latest

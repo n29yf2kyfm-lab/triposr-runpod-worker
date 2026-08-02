@@ -345,6 +345,12 @@ def parse_job(job_input):
                       or None)
     # --- drawing ----------------------------------------------------------
     # Assisted takeoff. The scale is never inferred silently — see drawing.py.
+    # --- structure --------------------------------------------------------
+    spec["point_cloud_path"] = (
+        str(job_input.get("point_cloud_path") or "").strip() or None)
+    spec["voxel_m"] = _float(job_input.get("voxel_m"), "voxel_m", None,
+                             0.005, 0.5)
+
     spec["drawing_url"] = (str(job_input.get("drawing_url") or "").strip()
                            or None)
     spec["page"] = _int(job_input.get("page"), "page", 0, 0, 500)
@@ -387,7 +393,8 @@ def _check_required_inputs(spec):
             "roomplan_url.")
 
     if mode in ("structure", "services") and not (
-            spec["point_cloud_url"] or has_capture):
+            spec["point_cloud_url"] or spec["point_cloud_path"]
+            or has_capture):
         raise InputError(
             f"{mode} needs point_cloud_url (or a capture to build one from).")
 

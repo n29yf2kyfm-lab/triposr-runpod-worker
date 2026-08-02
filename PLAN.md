@@ -511,7 +511,7 @@ repo/
     ├── valuation.py         # ✅ Land Registry + UKHPI, extension uplift
     ├── drawing.py           # ✅ 2D PDF takeoff at a confirmed scale
     ├── supply.py            # ✅ price-list import, multi-supplier, basket
-    ├── structure.py         # ○ Cloud2BIM → IFC
+    ├── structure.py         # ✅ density segmentation → walls/slabs → IFC
     ├── services.py          # ○ pipe/cable extraction → the X-ray
     ├── condition.py         # ○ YOLO + SAM 2 defects
     ├── design.py            # ○ procedural massing + planning checks
@@ -550,7 +550,7 @@ defect register); RunPod serverless workers behind both.
 | ✅ | 2c — valuation: Price Paid + UKHPI, street ceiling, extension uplift | done |
 | ✅ | 2b — Supply Mode: price-list import, multi-supplier, basket | done |
 | ○ | 2b — Supply Mode: merchant RFQ round-trip | next |
-| ○ | 3 — Structure → IFC | |
+| ✅ | 3 — Structure: cloud → walls, slabs, storeys, IFC | done |
 | ○ | 4 — **the X-ray** | the wedge |
 | ○ | 5 — Condition Mode | |
 | ○ | 6 — Design Mode | |
