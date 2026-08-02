@@ -1,0 +1,143 @@
+"""Sweep every downloadable model for a marque, not the single best per query.
+
+`wave_render.harvest` is deliberately narrow: it asks for one nameplate-year at
+a time and keeps the top-scoring result, which is the right tool for filling a
+known gap. Asked to sweep a whole marque it returns one car per query -- Audi
+came back with 33 candidates that way, against the 347 the Volkswagen sweep
+produced -- because 566 in-band models were never considered, only outranked.
+
+This walks the search API by cursor across a generic marque query plus one
+query per nameplate, keeps EVERY result inside the serving face band, dedupes
+by uid, and drops anything already in the catalogue or refused by the hardened
+title gates. Breadth is the point; ranking happens later, by eye, off the
+rendered sheets.
+
+The face band is the same one the serving pipeline uses (gap_search:
+FACE_LO/FACE_HI). Below it a model is a low-poly proxy; above it the browser
+decodes millions of triangles however well the file compresses.
+
+Usage:
+    marque_sweep.py --marque Audi --out /tmp/audi/manifest.json
+                    [--nameplates "A1,A3,A4,..."] [--max-pages 60]
+"""
+import argparse, json, os, sys, time, urllib.error, urllib.parse, urllib.request
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(os.path.dirname(HERE))
+sys.path.insert(0, HERE)
+from gap_search import API, FACE_LO, FACE_HI, toks          # noqa: E402
+from wave_render import class_gates, norm                    # noqa: E402
+
+CAT = os.path.join(REPO, "platform", "catalogue", "catalogue.v2.json")
+
+
+def log(*a):
+    print(time.strftime("%H:%M:%S"), *a, flush=True)
+
+
+def walk(tok, q, max_pages):
+    """Every downloadable result for one query, following the cursor."""
+    out, cursor, pages = {}, None, 0
+    while pages < max_pages:
+        p = {"type": "models", "q": q, "downloadable": "true",
+             "count": 24, "archives_flavours": "false"}
+        if cursor:
+            p["cursor"] = cursor
+        rq = urllib.request.Request(f"{API}/search?" + urllib.parse.urlencode(p),
+            headers={"Authorization": f"Token {next(tok)}",
+                     "User-Agent": "Mozilla/5.0"})
+        try:
+            d = json.load(urllib.request.urlopen(rq, timeout=60))
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 403):
+                time.sleep(3)
+                continue
+            break
+        except Exception:
+            break
+        res = d.get("results") or []
+        for r in res:
+            out[r["uid"]] = r
+        pages += 1
+        nxt = (d.get("cursors") or {}).get("next")
+        if not res or not nxt or nxt == cursor:
+            break
+        cursor = nxt
+        time.sleep(0.15)
+    return out
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--marque", required=True)
+    ap.add_argument("--nameplates", default="",
+                    help="comma-separated; each becomes '<marque> <nameplate>'")
+    ap.add_argument("--out", required=True)
+    ap.add_argument("--max-pages", type=int, default=60)
+    a = ap.parse_args()
+
+    tok = toks()
+    gates = class_gates()
+    try:
+        known = {e["sourceReferenceId"] for e in json.load(open(CAT))
+                 if e.get("sourceReferenceId")}
+    except Exception:
+        known = set()
+    log(f"catalogue already holds {len(known)} sourced uids")
+
+    queries = [a.marque] + [f"{a.marque} {n.strip()}"
+                            for n in a.nameplates.split(",") if n.strip()]
+    pool = {}
+    for q in queries:
+        got = walk(tok, q, a.max_pages)
+        fresh = len(set(got) - set(pool))
+        pool.update(got)
+        log(f"  {q:28s} {len(got):4d} results, {fresh:4d} new  (pool {len(pool)})")
+
+    band, thin, heavy = [], 0, 0
+    for r in pool.values():
+        fc = r.get("faceCount") or 0
+        if fc < FACE_LO:
+            thin += 1
+        elif fc > FACE_HI:
+            heavy += 1
+        else:
+            band.append(r)
+
+    picks, dupes, rejects = [], 0, []
+    want = norm(a.marque)
+    for r in sorted(band, key=lambda x: -(x.get("faceCount") or 0)):
+        if r["uid"] in known:
+            dupes += 1
+            continue
+        nm = norm(r.get("name", ""))
+        if want not in nm:                       # keep the sweep on-marque
+            continue
+        if gates:
+            hit = gates[0].search(nm) or gates[1].search(nm)
+            if hit:
+                rejects.append((r.get("name", "")[:46], hit.group(0)))
+                continue
+        picks.append({"uid": r["uid"], "name": r.get("name", ""),
+                      "faces": r.get("faceCount") or 0,
+                      "likes": r.get("likeCount") or 0,
+                      "licence": ((r.get("license") or {}).get("label") or ""),
+                      "author": ((r.get("user") or {}).get("displayName")
+                                 or (r.get("user") or {}).get("username") or ""),
+                      "plate": a.marque, "anchor": 0})
+
+    log(f"\nunique downloadable : {len(pool)}")
+    log(f"  below {FACE_LO:,} faces : {thin}")
+    log(f"  above {FACE_HI:,} faces : {heavy}")
+    log(f"  inside the band     : {len(band)}")
+    log(f"  already catalogued  : {dupes}")
+    log(f"  title gates rejected: {len(rejects)}")
+    for n, why in rejects[:10]:
+        log(f"      [{why}] {n}")
+    log(f"CANDIDATES          : {len(picks)}")
+    json.dump(picks, open(a.out, "w"), indent=1)
+    log(f"wrote {a.out}")
+
+
+if __name__ == "__main__":
+    main()
