@@ -93,9 +93,10 @@ SHELL_COV = 0.89
 MIN_FACES = 100_000
 CLEAN_LO, CLEAN_HI = 0.05, 0.45
 
-JUNK = re.compile(r"(?i)\b(scan|photogrammetry|lidar|wreck|wrecked|destroyed|damaged|"
-                  r"burnt|burned|rusty|rusted|abandoned|derelict|junk|toy|lowpoly|"
-                  r"low.?poly|cartoon|stylized|stylised|voxel|papercraft)\b")
+JUNK = re.compile(r"(?i)\b(scan|photogrammetry|lidar|wreck|wrecked|crash|crashed|"
+                  r"destroyed|damaged|burnt|burned|rusty|rusted|abandoned|derelict|"
+                  r"junk|toy|lowpoly|low.?poly|cartoon|stylized|stylised|voxel|"
+                  r"papercraft|dealership|showroom|vertriebstelle|vetriebstelle)\b")
 
 
 def sbk():
