@@ -198,6 +198,51 @@ def _quantities(value):
     return out or None
 
 
+MAX_OBSERVATIONS = 200
+
+
+def _observations(value):
+    """Validate known-object scale anchors.
+
+    Each is {"kind": "brick_course", "measured_units": 0.031, "repeats": 4}:
+    what was recognised, how big it came out in model units, and how many of
+    them were averaged. These set the scale of the whole model, so a bad one
+    is a wrong dimension on every quantity that follows.
+    """
+    if value is None:
+        return []
+    if not isinstance(value, (list, tuple)):
+        raise InputError(
+            'scale_observations must be a list of '
+            '{"kind": ..., "measured_units": ...} objects')
+    if len(value) > MAX_OBSERVATIONS:
+        raise InputError(
+            f"scale_observations has {len(value)} entries; the cap is "
+            f"{MAX_OBSERVATIONS}")
+    out = []
+    for i, item in enumerate(value):
+        if not isinstance(item, dict):
+            raise InputError(
+                f"scale_observations[{i}] must be an object with kind and "
+                f"measured_units")
+        kind = str(item.get("kind") or "").strip()
+        if not kind:
+            raise InputError(
+                f"scale_observations[{i}] has no kind — name the object that "
+                f"was recognised, e.g. brick_course or socket_height")
+        measured = _float(item.get("measured_units"),
+                          f"scale_observations[{i}].measured_units")
+        if measured is None or measured <= 0:
+            raise InputError(
+                f"scale_observations[{i}].measured_units must be a positive "
+                f"size in model units")
+        repeats = _int(item.get("repeats"), f"scale_observations[{i}].repeats",
+                       default=1, lo=1, hi=10_000)
+        out.append({"kind": kind, "measured_units": measured,
+                    "repeats": repeats})
+    return out
+
+
 def _str_list(value, name, max_len):
     """Coerce to a list of non-empty strings, with a length cap."""
     if value is None:
@@ -428,6 +473,21 @@ def parse_job(job_input):
     # A manually measured reference, in metres, for scale_source="manual".
     spec["scale_reference_m"] = _float(job_input.get("scale_reference_m"),
                                        "scale_reference_m", None, 0.01, 100.0)
+    # Model units per reference unit. Dropped from the whitelist, this
+    # silently defaulted to 1.0, which is wrong for any caller whose model
+    # is not in metres.
+    spec["scale_reference_units"] = _float(
+        job_input.get("scale_reference_units"), "scale_reference_units",
+        None, 1e-6, 1e6)
+    # THE KNOWN-OBJECT ANCHOR PATH. Brick coursing at 4 courses to 300mm,
+    # Part M socket and switch heights — the way a capture with no LiDAR
+    # gets a real dimension. This was missing from the whitelist entirely,
+    # so reconstruct.py always read an empty list and told a caller who had
+    # just supplied scale observations to supply scale observations. Same
+    # class of bug as the one that made Price Mode unreachable, and the same
+    # cause: a field the job needs, silently dropped at the door.
+    spec["scale_observations"] = _observations(
+        job_input.get("scale_observations"))
     spec["gps"] = job_input.get("gps") or None
 
     # --- roof ----------------------------------------------------------
@@ -449,6 +509,10 @@ def parse_job(job_input):
     # from these — a roof job already has them from roof mode, and until the
     # IFC path lands it is the only way to reach Price Mode at all.
     spec["quantities"] = _quantities(job_input.get("quantities"))
+    # A whole roof-mode result, so its quantities can be handed straight on
+    # without unpacking them, and free-text notes for the quote.
+    spec["roof"] = job_input.get("roof") or None
+    spec["notes"] = _str_list(job_input.get("notes"), "notes", 100)
 
     # --- supply ----------------------------------------------------------
     # A price list, either inline or by URL. No scraping: this is the user's
@@ -479,6 +543,8 @@ def parse_job(job_input):
     # UKHPI names regions by local authority slug: "birmingham", "england".
     spec["region"] = (str(job_input.get("region") or "").strip().lower()
                       or None)
+    spec["max_sales"] = _int(job_input.get("max_sales"), "max_sales",
+                             None, 10, 2000)
     # --- drawing ----------------------------------------------------------
     # Assisted takeoff. The scale is never inferred silently — see drawing.py.
     # --- structure --------------------------------------------------------
@@ -499,6 +565,13 @@ def parse_job(job_input):
     spec["confirm_scale"] = bool(job_input.get("confirm_scale", False))
     spec["calibration"] = job_input.get("calibration") or None
     spec["traced"] = job_input.get("traced") or None
+    # A local PDF, and the page's true size in points. Without the latter,
+    # effective_scale cannot correct a sheet that has been reprinted at a
+    # different size — the A1-drawn-printed-at-A3 trap, which is a factor of
+    # two on every length.
+    spec["drawing_path"] = (str(job_input.get("drawing_path") or "").strip()
+                            or None)
+    spec["page_size_pt"] = job_input.get("page_size_pt") or None
 
     spec["extension_m2"] = _float(job_input.get("extension_m2"),
                                   "extension_m2", None, 1.0, 500.0)

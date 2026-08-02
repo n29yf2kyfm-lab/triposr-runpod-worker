@@ -334,7 +334,74 @@ check("16d own default bucket",
 s = parse_job({"mode": "price", "quantities": {"battens": 503.3}})
 check("18a quantities reach the spec", s["quantities"] == {"battens": 503.3},
       str(s["quantities"]))
-check("18b price mode is reachable from quantities alone", True)
+# 18b was `check("...", True)` — hardcoded, calling nothing. It was the test
+# guarding the very bug the author found in production: `quantities` was
+# missing from parse_job's whitelist, so Price Mode could not be reached
+# through the handler at all. A test that asserts a literal cannot catch
+# that, and it did not.
+#
+# The general property is what matters: every field a mode's run() reads out
+# of the spec must survive parse_job. Assert it for each mode, by name.
+_REQUIRED_FIELDS = {
+    "price": ["quantities", "rate_card", "roof", "notes"],
+    "roof": ["address", "gps", "roof_source", "drone_image_urls",
+             "allow_unclipped"],
+    "supply": ["price_list_csv", "price_list_url", "channel", "vat",
+               "supplier"],
+    "valuation": ["postcode", "property_type", "floor_area_m2", "region",
+                  "max_sales"],
+    "drawing": ["drawing_url", "drawing_path", "page", "page_size_pt",
+                "scale_ratio", "scale_note", "confirm_scale", "calibration",
+                "traced"],
+    "structure": ["point_cloud_path", "point_cloud_url", "voxel_m",
+                  "max_points"],
+    "services": ["point_cloud_url", "wall", "accessories", "stage"],
+    "reconstruct": ["image_urls", "video_url", "scale_source",
+                    "scale_reference_m", "scale_reference_units",
+                    "scale_observations"],
+}
+_spec_keys = set(parse_job({"mode": "price",
+                            "quantities": {"battens": 1.0}}))
+for _mode, _fields in _REQUIRED_FIELDS.items():
+    for _field in _fields:
+        check(f"18b {_mode} mode's {_field} survives parse_job",
+              _field in _spec_keys,
+              f"{_field} is dropped — {_mode} mode can never see it")
+
+# The known-object anchor path, end to end through parse_job. This is how a
+# capture with no LiDAR gets a real dimension: UK brick coursing at four
+# courses to 300mm, Part M socket heights. scale_observations was not in the
+# whitelist, so reconstruct.py always read an empty list and told a caller
+# who HAD supplied observations to supply observations.
+_anchored = parse_job({
+    "mode": "reconstruct",
+    "image_urls": ["https://example.com/a.jpg"],
+    "scale_observations": [
+        {"kind": "brick_course", "measured_units": 0.031, "repeats": 4},
+        {"kind": "socket_height", "measured_units": 0.45},
+    ],
+})
+check("18b2 scale observations reach the spec",
+      len(_anchored["scale_observations"]) == 2,
+      str(_anchored.get("scale_observations")))
+check("18b3 with their repeats, defaulted to 1",
+      [o["repeats"] for o in _anchored["scale_observations"]] == [4, 1],
+      str(_anchored["scale_observations"]))
+
+for _bad, _label in [([{"measured_units": 0.03}], "no kind"),
+                     ([{"kind": "brick_course"}], "no measurement"),
+                     ([{"kind": "brick_course", "measured_units": -1}],
+                      "negative measurement"),
+                     ([{"kind": "b", "measured_units": float("nan")}],
+                      "NaN measurement"),
+                     ("not a list", "not a list")]:
+    try:
+        parse_job({"mode": "reconstruct",
+                   "image_urls": ["https://example.com/a.jpg"],
+                   "scale_observations": _bad})
+        check(f"18b4 a scale observation with {_label} is refused", False)
+    except InputError:
+        check(f"18b4 a scale observation with {_label} is refused", True)
 
 for bad, label in [({"battens": -5}, "negative"),
                    ({"battens": float("inf")}, "infinite"),
@@ -662,7 +729,12 @@ finally:
 import ast as _ast
 
 _THIRD_PARTY = {"requests", "numpy", "torch", "cv2", "PIL", "mapanything",
-                "open3d", "ifcopenshell", "scipy", "sklearn", "transformers"}
+                "open3d", "ifcopenshell", "scipy", "sklearn", "transformers",
+                # pdfplumber, shapely and ezdxf were missing from this set,
+                # so nothing would have flagged a module-level import of
+                # them — and pdfplumber was missing from the Dockerfile too,
+                # which is how Drawing Mode's PDF half shipped dead.
+                "pdfplumber", "shapely", "ezdxf", "pyquaternion", "networkx"}
 _offenders = {}
 for _f in sorted(os.listdir(HERE)):
     if not _f.endswith(".py") or _f.startswith("test_"):

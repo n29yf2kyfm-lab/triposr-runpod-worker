@@ -245,6 +245,10 @@ def handler(job):
         result.update(extra or {})
         if warnings:
             result["warnings"] = warnings
+        # On EVERY path, as the comment below _fail says. It was persisted
+        # only on the two failure paths, so the successful scans — the ones
+        # actually worth keeping — got no durable record at all.
+        _persist_manifest(manifest, job_id, result)
         return result
 
     except InputError as e:
@@ -309,6 +313,12 @@ def _persist_manifest(manifest, job_id, result):
                               "application/json")
         if url:
             result["manifest_url"] = url
+            # Written twice deliberately. The URL is only known after the
+            # upload, and without this the stored record is the one copy
+            # that does not carry its own address.
+            with open(path, "w") as f:
+                json.dump({"manifest": manifest, "result": result}, f,
+                          indent=2)
     except Exception as e:
         print(f"manifest persist skipped: {e}", file=sys.stderr)
 

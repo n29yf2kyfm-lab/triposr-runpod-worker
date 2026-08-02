@@ -22,6 +22,24 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+
+      # THE DEPENDENCIES THE IMAGE ACTUALLY SHIPS. Without this step the
+      # runner is a bare interpreter, so every lazy third-party import in
+      # the worker takes its ImportError branch and the tests validate the
+      # degraded path instead of the one that runs in production. That is
+      # how write_ifc reached the deployed image having never once executed:
+      # it used ip_class= for ifc_class= and reached for a submodule it had
+      # not imported, and CI could not see either, because CI never had
+      # ifcopenshell installed.
+      #
+      # Deliberately NOT the whole requirements file — torch and the
+      # reconstruction stack need a GPU runner and 14GB. These are the
+      # CPU-only libraries the contract tests can genuinely exercise.
+      - name: Install the libraries the tests exercise
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests ifcopenshell pdfplumber
+
       - name: Run handler tests
         run: python building/test_handler.py
       - name: Run roof geometry tests
