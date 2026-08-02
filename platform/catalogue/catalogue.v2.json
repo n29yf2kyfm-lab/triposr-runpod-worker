@@ -140707,5 +140707,1305 @@
    "method": "render",
    "at": "2026-07-31"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volkswagen-fox-2004-vw1-v1",
+  "make": "volkswagen",
+  "model": "fox",
+  "modelFamily": "volkswagen fox",
+  "modelAliases": [
+   "fox"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2004,
+  "yearEnd": 2004,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "2673fe0f4af14326abbdb5b8d704b4e7",
+  "sourceRetrievedAt": "2026-08-02",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura"
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidro_R",
+   "Carro_Vidros_Vermelhos"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/fox__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/fox__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/fox__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/fox__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/fox__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/fox__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/fox__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/fox__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-fox-2004-vw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-fox-2004-vw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 13278136,
+  "mobileFileSizeBytes": 13278136,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "0b6d9fc633074d72c094e03ae27d20f33155a28456a9aea46bf919e707d0d98b",
+  "pipelineVersion": "publish-batch-vw1-2026-08-02",
+  "publishedAt": "2026-08-02",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "vw1 gated publish 2026-08-02: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-02T00:00:41Z, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-vw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Uranium Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Uranium Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Dolphin Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dolphin Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Moonstone Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Moonstone Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Deep Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Deep Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Candy White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Candy White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Reflex Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Reflex Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Atlantic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Atlantic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lapiz Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lapiz Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Kings Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Kings Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Tornado Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Tornado Red",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3793,
+   "variantsHash": "b60aba8737c84b5e7a8a604cf10f28886b5996f4",
+   "method": "render",
+   "at": "2026-08-02"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volkswagen-sharan-vw1-v1",
+  "make": "volkswagen",
+  "model": "sharan",
+  "modelFamily": "volkswagen sharan",
+  "modelAliases": [
+   "sharan"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "b969f5fdabb74d6c978fc14974cd7aee",
+  "sourceRetrievedAt": "2026-08-02",
+  "sourceEvidenceUrl": null,
+  "licence": "Free Standard",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "paint"
+  ],
+  "glassMaterialNames": [
+   "r_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/sharan__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/sharan__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/sharan__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/sharan__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/sharan__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/sharan__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/sharan__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/sharan__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-sharan-vw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-sharan-vw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 39651540,
+  "mobileFileSizeBytes": 39651540,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "dd88fc996fed25a59535c8351c88617794f3bba4aeab813404ca8bfba0f34a47",
+  "pipelineVersion": "publish-batch-vw1-2026-08-02",
+  "publishedAt": "2026-08-02",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "vw1 gated publish 2026-08-02: licence recorded as 'Free Standard' (author ''), owner keep verdict 2026-08-02T00:00:41Z, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-vw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Uranium Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Uranium Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Dolphin Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dolphin Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Moonstone Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Moonstone Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Deep Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Deep Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Candy White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Candy White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Reflex Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Reflex Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Atlantic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Atlantic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lapiz Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lapiz Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Kings Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Kings Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Tornado Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Tornado Red",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4053,
+   "variantsHash": "3d2777c18cc27c9e0b8e399b4bdfff1b6c6dc11a",
+   "method": "render",
+   "at": "2026-08-02"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volkswagen-t2-1967-vw1-v1",
+  "make": "volkswagen",
+  "model": "t2",
+  "modelFamily": "volkswagen t2",
+  "modelAliases": [
+   "t2"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1967,
+  "yearEnd": 1979,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "1b9aa591e9784f6099f6d38f8a0b7a72",
+  "sourceRetrievedAt": "2026-08-02",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carpaint_mtl_0",
+   "body_additional_paint"
+  ],
+  "glassMaterialNames": [
+   "glass_clear",
+   "frontlight_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t2__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-t2-1967-vw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-t2-1967-vw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 2986904,
+  "mobileFileSizeBytes": 2986904,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "b2442ea7c4005f9271d9be98bc38a14fbb68df66df3972cd221c11883162ebbd",
+  "pipelineVersion": "publish-batch-vw1-2026-08-02",
+  "publishedAt": "2026-08-02",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "vw1 gated publish 2026-08-02: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-02T00:00:41Z, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-vw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Uranium Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Uranium Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Dolphin Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dolphin Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Moonstone Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Moonstone Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Deep Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Deep Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Candy White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Candy White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Reflex Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Reflex Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Atlantic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Atlantic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lapiz Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lapiz Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Kings Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Kings Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Tornado Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Tornado Red",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.302,
+   "variantsHash": "28296e963fe3588630765bc474da4831c391599f",
+   "method": "render",
+   "at": "2026-08-02"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volkswagen-t3-vw1-v1",
+  "make": "volkswagen",
+  "model": "t3",
+  "modelFamily": "volkswagen t3",
+  "modelAliases": [
+   "t3"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "6359a800f9a94b3a8aadc5824e0556b9",
+  "sourceRetrievedAt": "2026-08-02",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint_base"
+  ],
+  "glassMaterialNames": [
+   "Glass_Arch_Window__Exterior",
+   "Glass1",
+   "Glass3",
+   "vray_Glass_Mirror"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t3__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t3__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t3__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t3__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t3__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t3__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t3__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/t3__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-t3-vw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-t3-vw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 35950444,
+  "mobileFileSizeBytes": 35950444,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "7740f939ae1482ea4adda52c30ba64d97bd244d5d98045cbcd1d6d27948a5bdb",
+  "pipelineVersion": "publish-batch-vw1-2026-08-02",
+  "publishedAt": "2026-08-02",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "vw1 gated publish 2026-08-02: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-02T00:00:41Z, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-vw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Uranium Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Uranium Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Dolphin Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dolphin Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Moonstone Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Moonstone Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Deep Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Deep Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Candy White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Candy White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Reflex Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Reflex Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Atlantic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Atlantic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lapiz Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lapiz Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Kings Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Kings Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Tornado Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Tornado Red",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.364,
+   "variantsHash": "6ec07fa5fa7707992c04cc5c530412b78af3b92d",
+   "method": "render",
+   "at": "2026-08-02"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volkswagen-touran-2011-vw1-v1",
+  "make": "volkswagen",
+  "model": "touran",
+  "modelFamily": "volkswagen touran",
+  "modelAliases": [
+   "touran"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2011,
+  "yearEnd": 2015,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "0409ea27bb0c44c7b6b520f306af9cfa",
+  "sourceRetrievedAt": "2026-08-02",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/touran__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-touran-2011-vw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-touran-2011-vw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 38616376,
+  "mobileFileSizeBytes": 38616376,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "90473b054c54801fc73b52f7aa84f63d3ee9f73277f19fb0eaeb7b3191810716",
+  "pipelineVersion": "publish-batch-vw1-2026-08-02",
+  "publishedAt": "2026-08-02",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "vw1 gated publish 2026-08-02: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-02T00:00:41Z, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-vw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Uranium Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Uranium Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Dolphin Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dolphin Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Moonstone Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Moonstone Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Deep Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Deep Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Candy White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Candy White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Reflex Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Reflex Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Atlantic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Atlantic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lapiz Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lapiz Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Kings Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Kings Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Tornado Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Tornado Red",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3314,
+   "variantsHash": "7bef4598b2f126010c53f16648aef06ca691289a",
+   "method": "render",
+   "at": "2026-08-02"
+  }
  }
 ]

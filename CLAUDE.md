@@ -263,11 +263,15 @@ asked to be saved to memory.
   are NonCommercial or Sketchfab "Free Standard", which for a paid product is a
   copyright exposure. The owner has been told and has taken that decision. It is
   the owner's to make; treat it as settled and move on.
-- Practical consequence to be aware of, not to argue about:
-  `pipeline/publish/publish_batch.py` gate **G4** hard-refuses anything whose
-  licence is not exactly `"CC Attribution"`. Publishing other assets means
-  changing or bypassing that gate — say so as a fact when it comes up, and ask
-  once whether to change it, rather than re-opening the licence question.
+- **G4 no longer blocks anything — do not raise it as a blocker.** This note
+  used to say `publish_batch.py` gate **G4** hard-refuses any licence that is
+  not exactly `"CC Attribution"`. That was true when written and is now false:
+  G4 was rewritten the same day to RECORD the licence instead of enforcing it,
+  writing whatever `LICENCES.csv` states verbatim and `"unverified"` when the
+  uid is absent. On 2026-08-02 I quoted this stale note to the owner as a
+  blocker and asked them to authorise a bypass they did not need. **Read
+  `publish_batch.py` before describing any gate** — the docstring at the top of
+  that file is the authority on what the gates do, not this file.
 
 ## Accuracy rule — do NOT fabricate vehicle metadata (learned 2026-07-12)
 
