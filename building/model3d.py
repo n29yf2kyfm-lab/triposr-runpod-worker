@@ -242,9 +242,25 @@ MIN_PITCH_DEG, MAX_PITCH_DEG = 12.0, 60.0
 DEFAULT_PITCH_DEG = 35.0
 DEFAULT_EAVES_OVERHANG_M = 0.30
 
+# How far a roof can span in ONE range before it stops being a roof and
+# becomes a structure. A trussed rafter goes to roughly 11m, and beyond
+# that a domestic or small commercial building is not roofed in one span at
+# all — it is DOUBLE-PILE: two or more parallel ranges with a valley gutter
+# down between them. That is why Victorian pubs, terraces and mills read as
+# an M from the end.
+#
+# Ignoring this is not a cosmetic error. A single hip over a 14.3m footprint
+# at 35 degrees rises 5.0m, putting the ridge 5 metres above the wall head
+# on a building whose storeys are 2.75m — a roof about two storeys tall,
+# which is instantly wrong to anybody who has looked at a building. Split
+# into two ranges the same footprint rises 2.5m, which is what is actually
+# built.
+MAX_ROOF_SPAN_M = 9.0
+
 
 def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
-              overhang=DEFAULT_EAVES_OVERHANG_M, base_z=0.0):
+              overhang=DEFAULT_EAVES_OVERHANG_M, base_z=0.0,
+              max_span=MAX_ROOF_SPAN_M):
     """A pitched roof over a rectangular footprint.
 
     THE NUMBER THAT MATTERS IS THE SLOPED AREA, not the plan area, and the
@@ -256,6 +272,12 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
     Hipped and gabled are both here because they carry different quantities
     — a hip needs hip tiles and cut tiles down both ends, a gable needs
     verge and no hips at all — and getting that wrong is a real bill.
+
+    A footprint too deep for one span becomes several parallel RANGES with
+    valley gutters between them. The sloped area is unchanged by that —
+    every plane is still at the same pitch — but the ridge height, the ridge
+    run, the hip count and the valley length all change, and those are four
+    separate lines on the quote.
     """
     if not MIN_PITCH_DEG <= pitch_deg <= MAX_PITCH_DEG:
         raise ModelError(
@@ -274,35 +296,60 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
 
     theta = math.radians(pitch_deg)
     # The ridge runs along the LONGER axis; the slope climbs across the
-    # shorter one, so the rise is half the short span times tan(pitch).
+    # shorter one. A footprint too deep to span in one go is split into that
+    # many parallel ranges across the short axis.
     along_x = width >= depth
-    span = depth if along_x else width
+    total_span = depth if along_x else width
+    run = width if along_x else depth          # length of a ridge, gable end
+    n_ranges = max(1, int(math.ceil(total_span / max_span - 1e-9)))
+    span = total_span / n_ranges
     rise = (span / 2.0) * math.tan(theta)
     ridge_z = base_z + rise
 
-    cx, cy = (x0 + x1) / 2.0, (y0 + y1) / 2.0
-    if kind == "hipped":
-        inset = span / 2.0
+    # Each range: its band across the short axis, and its ridge line.
+    ranges, ridges, hips, valleys = [], [], [], []
+    lo0 = (y0 if along_x else x0)
+    for i in range(n_ranges):
+        lo = lo0 + i * span
+        hi = lo + span
+        mid = (lo + hi) / 2.0
+        if kind == "hipped":
+            inset = span / 2.0
+            ends = (x0 + inset, x1 - inset) if along_x else (y0 + inset,
+                                                             y1 - inset)
+        else:                               # gabled — ridge runs wall to wall
+            ends = (x0, x1) if along_x else (y0, y1)
         if along_x:
-            ridge = [(x0 + inset, cy), (x1 - inset, cy)]
+            band = {"y": [round(lo, 3), round(hi, 3)],
+                    "x": [round(x0, 3), round(x1, 3)]}
+            line = [(ends[0], mid), (ends[1], mid)]
         else:
-            ridge = [(cx, y0 + inset), (cx, y1 - inset)]
-    else:                                   # gabled — ridge runs wall to wall
-        ridge = ([(x0, cy), (x1, cy)] if along_x else [(cx, y0), (cx, y1)])
+            band = {"x": [round(lo, 3), round(hi, 3)],
+                    "y": [round(y0, 3), round(y1, 3)]}
+            line = [(mid, ends[0]), (mid, ends[1])]
+        ridges.append(line)
+        ranges.append({"band_m": band,
+                       "ridge": [[round(v, 3) for v in p] for p in line],
+                       "span_m": round(span, 3)})
+        # A hip runs from each ridge end down to a corner of its own range.
+        # Its true length is the 3D diagonal, not the plan diagonal.
+        if kind == "hipped":
+            half = span / 2.0
+            hips += [math.hypot(math.hypot(half, half), rise)] * 4
+        # Where two ranges abut there is a valley gutter at eaves level,
+        # running the full length of the building. It is not eaves and it is
+        # not ridge: it is a lined gutter, and it is the line on a re-roof
+        # that leaks if it is left off the quote.
+        if i:
+            valleys.append(run)
 
-    ridge_len = math.hypot(ridge[1][0] - ridge[0][0],
-                           ridge[1][1] - ridge[0][1])
+    ridge = ridges[0]
+    ridge_len = sum(math.hypot(r[1][0] - r[0][0], r[1][1] - r[0][1])
+                    for r in ridges)
     plan_area = width * depth
+    # Unchanged by the split: every plane is still at the same pitch, so the
+    # covering is the same. Only the ridge height and the linear items move.
     sloped_area = plan_area / math.cos(theta)
-
-    # A hip runs from each ridge end down to a corner. Its true length is
-    # the 3D diagonal, not the plan diagonal.
-    hips = []
-    if kind == "hipped":
-        half = span / 2.0
-        hip_plan = math.hypot(half, half)
-        hip_true = math.hypot(hip_plan, rise)
-        hips = [hip_true] * 4
 
     return {
         "kind": kind,
@@ -312,12 +359,15 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
         "eaves_z_m": round(base_z, 3),
         "ridge_z_m": round(ridge_z, 3),
         "rise_m": round(rise, 3),
+        "ranges": n_ranges,
+        "span_m": round(span, 3),
+        "range_list": ranges,
         "ridge": [[round(v, 3) for v in p] for p in ridge],
         "ridge_m": round(ridge_len, 2),
         "hip_m": round(sum(hips), 2),
-        "valley_m": 0.0,
+        "valley_m": round(sum(valleys), 2),
         "eaves_m": round(2 * (width + depth), 2),
-        "verge_m": round(2 * span, 2) if kind == "gabled" else 0.0,
+        "verge_m": round(2 * total_span, 2) if kind == "gabled" else 0.0,
         "plan_area_m2": round(plan_area, 2),
         "sloped_area_m2": round(sloped_area, 2),
         "uplift_pct": round((sloped_area / plan_area - 1) * 100, 1),
@@ -327,13 +377,20 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
                  f"{plan_area:.1f} m2 footprint — {(sloped_area/plan_area-1)*100:.0f}% "
                  f"more material than the plan area suggests. Ordering off "
                  f"the footprint is how a roof comes up short."),
+        "range_note": (
+            f"{total_span:.1f}m is more than a roof spans in one go, so this "
+            f"is {n_ranges} ranges of {span:.1f}m with "
+            f"{n_ranges - 1} valley gutter{'s' if n_ranges > 2 else ''} "
+            f"between them — the ridge sits {rise:.2f}m above the wall head "
+            f"instead of {total_span / 2 * math.tan(theta):.2f}m."
+        ) if n_ranges > 1 else None,
     }
 
 
 def roof_quantities(roof, covering="concrete_interlocking"):
     """Roof takeoff, in the shape Price Mode already accepts."""
     a = roof["sloped_area_m2"]
-    return {
+    out = {
         "sloped_area_m2": a,
         "plan_area_m2": roof["plan_area_m2"],
         "ridge_m": roof["ridge_m"],
@@ -348,6 +405,12 @@ def roof_quantities(roof, covering="concrete_interlocking"):
             "ridge_units": round((roof["ridge_m"] + roof["hip_m"]) / 0.30, 0),
         },
     }
+    # A valley gutter is lined, not tiled — GRP or lead over a valley board,
+    # with a 10% allowance for the laps and the ends. Leaving it off is the
+    # cheapest line on the quote and the first thing to leak.
+    if roof["valley_m"]:
+        out["materials"]["valley_lining_m"] = round(roof["valley_m"] * 1.1, 1)
+    return out
 
 
 # --- the model --------------------------------------------------------------
@@ -535,49 +598,45 @@ def write_obj(model, path):
 
 
 def _roof_faces(roof, verts, faces, groups):
-    """The roof as real sloped surfaces — four for a hip, two for a gable.
+    """The roof as real sloped surfaces — four planes per hipped range.
 
     Written as actual pitched planes rather than a box with a lid, because
     the whole point of the roof is that it is not flat: a viewer showing a
     flat top would hide the 22% of extra covering the sloped area accounts
     for, and that is the number a builder orders from.
+
+    Every RANGE is drawn. A double-pile roof drawn as one range is the same
+    error as a three-storey block drawn as a bungalow — it looks fine and it
+    is a different building.
     """
-    (rx0, rx1) = roof["footprint_m"]["x"]
-    (ry0, ry1) = roof["footprint_m"]["y"]
     ez, rz = roof["eaves_z_m"], roof["ridge_z_m"]
-    (r0x, r0y), (r1x, r1y) = roof["ridge"]
+    along_x = roof["along_x"]
 
     def V(x, y, z):
         verts.append((x, z, -y))          # OBJ Y-up, plan Y into -Z
         return len(verts)
 
-    eaves = {"a": V(rx0, ry0, ez), "b": V(rx1, ry0, ez),
-             "c": V(rx1, ry1, ez), "d": V(rx0, ry1, ez)}
-    r0, r1 = V(r0x, r0y, rz), V(r1x, r1y, rz)
-
     groups.append(("roof", len(faces)))
-    if roof["kind"] == "hipped":
-        if roof["along_x"]:
-            faces.append((eaves["a"], eaves["b"], r1, r0))     # front slope
-            faces.append((eaves["c"], eaves["d"], r0, r1))     # back slope
-            faces.append((eaves["d"], eaves["a"], r0))         # left hip
-            faces.append((eaves["b"], eaves["c"], r1))         # right hip
+    for band in roof.get("range_list") or [
+            {"band_m": roof["footprint_m"], "ridge": roof["ridge"]}]:
+        bx0, bx1 = band["band_m"]["x"]
+        by0, by1 = band["band_m"]["y"]
+        (r0x, r0y), (r1x, r1y) = band["ridge"]
+
+        a, b = V(bx0, by0, ez), V(bx1, by0, ez)
+        c, d = V(bx1, by1, ez), V(bx0, by1, ez)
+        r0, r1 = V(r0x, r0y, rz), V(r1x, r1y, rz)
+
+        if along_x:
+            faces.append((a, b, r1, r0))          # front slope
+            faces.append((c, d, r0, r1))          # back slope
+            faces.append((d, a, r0))              # left end
+            faces.append((b, c, r1))              # right end
         else:
-            faces.append((eaves["b"], eaves["c"], r1, r0))
-            faces.append((eaves["d"], eaves["a"], r0, r1))
-            faces.append((eaves["a"], eaves["b"], r0))
-            faces.append((eaves["c"], eaves["d"], r1))
-    else:                                   # gabled — two slopes, two gables
-        if roof["along_x"]:
-            faces.append((eaves["a"], eaves["b"], r1, r0))
-            faces.append((eaves["c"], eaves["d"], r0, r1))
-            faces.append((eaves["d"], eaves["a"], r0))
-            faces.append((eaves["b"], eaves["c"], r1))
-        else:
-            faces.append((eaves["b"], eaves["c"], r1, r0))
-            faces.append((eaves["d"], eaves["a"], r0, r1))
-            faces.append((eaves["a"], eaves["b"], r0))
-            faces.append((eaves["c"], eaves["d"], r1))
+            faces.append((b, c, r1, r0))
+            faces.append((d, a, r0, r1))
+            faces.append((a, b, r0))
+            faces.append((c, d, r1))
 
 
 def _split_for_openings(lo, hi, wall):

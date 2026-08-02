@@ -268,6 +268,59 @@ try:
 except M.ModelError:
     check("4t an unsupported roof kind is refused, not approximated", True)
 
+# A FOOTPRINT TOO DEEP TO SPAN IN ONE GO. A trussed rafter reaches about
+# 11m; past that a building is DOUBLE-PILE — parallel ranges with a valley
+# gutter between them, which is why Victorian pubs and terraces read as an M
+# from the end. Roofing 14m in a single hip put the ridge 5m above the wall
+# head on a building with 2.75m storeys: a roof nearly two storeys tall.
+wide = M.roof_over(0, 0, 14.32, 17.36, pitch_deg=35.0, overhang=0.0)
+check("4y a footprint too deep for one span becomes several ranges",
+      wide["ranges"] == 2, str(wide["ranges"]))
+check("4z each range is within the span a roof is actually built to",
+      wide["span_m"] <= M.MAX_ROOF_SPAN_M, str(wide["span_m"]))
+check("4aa which halves the rise",
+      abs(wide["rise_m"] - 14.32 / 4 * math.tan(math.radians(35))) < 0.01,
+      str(wide["rise_m"]))
+check("4ab the roof is no longer taller than a storey",
+      wide["rise_m"] < 2.75, str(wide["rise_m"]))
+check("4ac the ridge run is the sum of both ranges, not one",
+      wide["ridge_m"] > 15.0, str(wide["ridge_m"]))
+check("4ad a valley gutter appears between the ranges",
+      abs(wide["valley_m"] - 17.36) < 0.01, str(wide["valley_m"]))
+check("4ae and there is one gutter for two ranges",
+      abs(wide["valley_m"] / 17.36 - (wide["ranges"] - 1)) < 0.01)
+check("4af every range is emitted so the mesh can draw them all",
+      len(wide["range_list"]) == wide["ranges"])
+check("4ag the ranges tile the footprint with no gap and no overlap",
+      abs(sum(b["band_m"]["x"][1] - b["band_m"]["x"][0]
+              for b in wide["range_list"]) - 14.32) < 0.01)
+check("4ah the split is explained, with both ridge heights",
+      wide["range_note"] and "5.01" in wide["range_note"],
+      str(wide["range_note"]))
+# THE COVERING DOES NOT CHANGE. Every plane is still at the same pitch, so
+# splitting the roof moves the linear items and nothing else — if the tile
+# quantity moved too, one of the two answers would be wrong.
+single = M.roof_over(0, 0, 14.32, 17.36, pitch_deg=35.0, overhang=0.0,
+                     max_span=100.0)
+check("4ai splitting the roof does not change the covering",
+      abs(wide["sloped_area_m2"] - single["sloped_area_m2"]) < 0.01,
+      f"{wide['sloped_area_m2']} vs {single['sloped_area_m2']}")
+check("4aj but it does change the ridge height",
+      wide["ridge_z_m"] < single["ridge_z_m"] - 2.0)
+check("4ak a single-range roof has no valley and says nothing about ranges",
+      single["valley_m"] == 0.0 and single["range_note"] is None)
+check("4al a small footprint is still one range",
+      M.roof_over(0, 0, 8.0, 6.0, overhang=0.0)["ranges"] == 1)
+check("4am a very deep footprint takes three",
+      M.roof_over(0, 0, 26.0, 30.0, overhang=0.0)["ranges"] == 3)
+
+wq = M.roof_quantities(wide)
+check("4an the valley gutter reaches the take-off, with a lap allowance",
+      wq["materials"]["valley_lining_m"] > wide["valley_m"],
+      str(wq["materials"].get("valley_lining_m")))
+check("4ao a roof with no valley carries no valley line",
+      "valley_lining_m" not in M.roof_quantities(single)["materials"])
+
 q = M.roof_quantities(rf)
 check("4u the take-off measures the SLOPE, not the footprint",
       q["sloped_area_m2"] == rf["sloped_area_m2"]
@@ -455,6 +508,29 @@ flat_zs = [float(ln.split()[2]) for ln in open(flat_obj).read().splitlines()
            if ln.startswith("v ")]
 check("7h a roofless model stops at the eaves",
       abs(max(flat_zs) - one["eaves_z_m"]) < 0.01, str(max(flat_zs)))
+
+# EVERY RANGE IS DRAWN. A double-pile roof drawn as one range is the same
+# class of error as a three-storey block drawn as a bungalow: it looks fine
+# and it is a different building.
+big = [room("Hall", 0, 0, 14.0, 17.0)]
+two = M.build(big, roof={"pitch_deg": 35.0, "kind": "hipped"})
+one_rng = M.build(big, roof={"pitch_deg": 35.0, "kind": "hipped"})
+one_rng["roof"] = M.roof_over(0, 0, 14.0, 17.0, pitch_deg=35.0,
+                              overhang=M.DEFAULT_EAVES_OVERHANG_M,
+                              base_z=one_rng["eaves_z_m"], max_span=100.0)
+
+
+def _roof_face_count(model):
+    verts, faces, groups = [], [], []
+    M._roof_faces(model["roof"], verts, faces, groups)
+    return len(faces)
+
+
+check("7j a two-range roof draws twice the planes of a one-range roof",
+      _roof_face_count(two) == 2 * _roof_face_count(one_rng),
+      f"{_roof_face_count(two)} vs {_roof_face_count(one_rng)}")
+check("7k and its mesh stops well below the single-span ridge",
+      two["roof"]["ridge_z_m"] < one_rng["roof"]["ridge_z_m"] - 2.0)
 
 gabled = M.build(plate(), roof={"pitch_deg": 40.0, "kind": "gabled"})
 gobj = M.write_obj(gabled, os.path.join(tmp, "g.obj"))
@@ -658,10 +734,16 @@ check("11c no room went unmodelled",
       not any(r["status"] == "not modelled" for r in vc["rooms"]))
 check("11d the roof needs a fifth more covering than its footprint",
       vine["roof"]["uplift_pct"] > 20.0, str(vine["roof"]["uplift_pct"]))
-check("11e the ridge clears three storeys",
-      vine["totals"]["ridge_height_m"] > vine["totals"]["eaves_height_m"] + 3,
+# THE ROOF THAT WAS TOO BIG. One hip over the whole footprint rose 5.01m —
+# a roof nearly two storeys tall on a building with 2.75m storeys, which is
+# instantly wrong to anybody who has looked at a pub.
+check("11e the roof is not taller than a storey",
+      vine["roof"]["rise_m"] < vine["storey_height_m"],
+      f"rise {vine['roof']['rise_m']} vs storey {vine['storey_height_m']}")
+check("11f the ridge sits above the wall head, not on it",
+      vine["totals"]["ridge_height_m"] > vine["totals"]["eaves_height_m"],
       str(vine["totals"]["ridge_height_m"]))
-check("11f every en-suite got a door, not a window",
+check("11g every en-suite got a door, not a window",
       vine["totals"]["doors"] > 0)
 
 

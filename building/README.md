@@ -72,6 +72,12 @@ room boundary, so there is nothing honest to write for them.
 printed geometry illustrates it. Give it rooms and it returns walls with real thickness,
 storeys, a pitched roof, an OBJ and an IFC, and a take-off.
 
+A footprint too deep to span in one go becomes several parallel **ranges** with valley gutters
+between them, which is what a double-pile roof is and why a Victorian pub reads as an M from
+the end. Roofing 14 m in a single hip put the ridge 5 m above the wall head on a building with
+2.75 m storeys — a roof nearly two storeys tall — and left the valley gutter off the quote
+entirely.
+
 Two things make it trustworthy rather than merely plausible. It **checks itself against the
 drawing's own room schedule** — the areas the architect printed in each room, which the model
 never saw — so a dimension read wrong shows up as a percentage rather than propagating
@@ -158,7 +164,7 @@ claiming success.
 python building/test_handler.py
 ```
 
-That file alone carries 221 assertions; the whole suite is **1771 across 18 files** — run
+That file alone carries 221 assertions; the whole suite is **1791 across 18 files** — run
 them all with `for f in building/test_*.py; do python "$f"; done`. No GPU. Same approach as
 the vehicle worker: stub the heavy modules, then test the contract logic. CI runs these
 **before** building the image, so a broken contract never reaches a deployable tag.
