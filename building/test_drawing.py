@@ -503,6 +503,23 @@ for _text, _scale, _sheet in [
           f"{D.parse_scale_note(_text)} / {D.parse_sheet_note(_text)}")
 
 
+# Real title blocks, verbatim, from three different UK drawing offices. Each
+# writes them differently, and a parser that only handles one is a parser
+# that works on one office's drawings.
+_VINE = ("NOTES: Scaling and dimensions to be used for planning approval "
+         "purposes only. All dimensions to be checked on site. "
+         "Project Location: THE VINE, LICHFIELD ROAD, ASTON, BIRMINGHAM, "
+         "B6 5SL Drawing: 07 Proposed Building First Floor Plan "
+         "Scale 1:100 Size A3 Date 09/25 "
+         "Scale 1:100 0 1 2 3 4 5 10 15 FIRST FLOOR 1:100")
+check("12b7 a title block laid out as a TABLE still parses",
+      D.parse_scale_note(_VINE) == 100, str(D.parse_scale_note(_VINE)))
+check("12b8 with the sheet in its own cell — 'Size A3'",
+      D.parse_sheet_note(_VINE) == "A3", str(D.parse_sheet_note(_VINE)))
+check("12b9 and 'Scaling ... to be used for planning approval' is not NTS",
+      not D.is_not_to_scale(_VINE))
+
+
 # ---- 13. the confirmation is bound to the VALUE --------------------------
 # The module claimed it was "structurally impossible to get a quantity
 # without a person having seen the scale". It was not: confirm_scale sat in
