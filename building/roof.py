@@ -42,6 +42,9 @@ EA_DTM_WCS = os.environ.get(
     "https://environment.data.gov.uk/spatialdata/"
     "lidar-composite-digital-terrain-model-dtm-1m/wcs")
 POSTCODE_API = os.environ.get("POSTCODE_API", "https://api.postcodes.io")
+# The OSM Foundation's own map API — a different operator from Overpass, and
+# the reason roof mode survives Overpass refusing a datacentre IP range.
+OSM_API = os.environ.get("OSM_API", "https://api.openstreetmap.org/api/0.6")
 # Overpass is free community infrastructure and rate-limits under load. A
 # transient failure there must never be allowed to silently degrade a quote,
 # so try the public mirrors in turn before giving up.
@@ -142,6 +145,77 @@ def _cache_path(lat, lon):
     return os.path.join(FOOTPRINT_CACHE_DIR, f"{lat:.4f}_{lon:.4f}.json")
 
 
+def _footprints_from_overpass(lat, lon, radius_m):
+    """Building outlines near a point, via Overpass. [] if none, None if the
+    service could not be reached at all — the caller needs that difference."""
+    requests = _requests()
+    query = (f"[out:json][timeout:{HTTP_TIMEOUT}];"
+             f"way(around:{radius_m},{lat},{lon})[building];"
+             f"out geom;")
+    for endpoint in OVERPASS_APIS:
+        try:
+            r = requests.post(endpoint, data={"data": query},
+                              headers=HTTP_HEADERS, timeout=HTTP_TIMEOUT)
+            r.raise_for_status()
+            return [el["geometry"] for el in (r.json().get("elements") or [])
+                    if len(el.get("geometry") or []) >= 4]
+        except Exception as e:
+            print(f"footprint via {endpoint} failed: {e}", file=sys.stderr)
+    return None
+
+
+def _footprints_from_osm_api(lat, lon, radius_m):
+    """The same outlines from the OSM Foundation's own map API.
+
+    Deliberately a SEPARATE service, not another Overpass mirror. Overpass
+    was live-confirmed to serve this exact query happily from one host while
+    refusing it from a RunPod worker every time — the signature of a
+    datacentre IP range being rate-limited, which no number of Overpass
+    mirrors fixes because they share that policy. api.openstreetmap.org is
+    different infrastructure with a different one.
+
+    Returns geometry in the same shape as the Overpass path so the caller
+    does not care which answered.
+    """
+    import xml.etree.ElementTree as ET
+
+    # Degrees per metre: latitude is constant, longitude narrows with it.
+    dlat = radius_m / 111_320.0
+    dlon = radius_m / (111_320.0 * max(math.cos(math.radians(lat)), 1e-6))
+    bbox = f"{lon - dlon},{lat - dlat},{lon + dlon},{lat + dlat}"
+
+    try:
+        r = _requests().get(f"{OSM_API}/map", params={"bbox": bbox},
+                            headers=HTTP_HEADERS, timeout=HTTP_TIMEOUT)
+        r.raise_for_status()
+        root = ET.fromstring(r.content)
+    except Exception as e:
+        print(f"footprint via {OSM_API} failed: {e}", file=sys.stderr)
+        return None
+
+    nodes = {n.get("id"): (float(n.get("lat")), float(n.get("lon")))
+             for n in root.findall("node")}
+    out = []
+    for way in root.findall("way"):
+        if not any(t.get("k") == "building" for t in way.findall("tag")):
+            continue
+        # The API returns node references rather than inline geometry, so the
+        # ring has to be reassembled from the node table.
+        ring = [nodes[nd.get("ref")] for nd in way.findall("nd")
+                if nd.get("ref") in nodes]
+        if len(ring) >= 4:
+            out.append([{"lat": a, "lon": b} for a, b in ring])
+    return out
+
+
+# Tried in order. Each is a different operator, so one being unreachable or
+# rate-limiting this worker does not take roof mode down with it.
+FOOTPRINT_SOURCES = (
+    ("openstreetmap-api", _footprints_from_osm_api),
+    ("overpass", _footprints_from_overpass),
+)
+
+
 def fetch_footprint(lat, lon, radius_m=30):
     """Building footprint polygon around a point, from OpenStreetMap.
 
@@ -149,10 +223,15 @@ def fetch_footprint(lat, lon, radius_m=30):
     footprint is what separates the target roof from its neighbours — without
     it, a terrace becomes one continuous surface.
 
-    Cached on disk. Overpass is free community infrastructure and its public
-    mirrors time out under load — live-confirmed, all endpoints failing
-    within one test session. Building outlines effectively never change, so
-    re-querying for a property already scanned is both fragile and rude.
+    TWO INDEPENDENT SOURCES, and that is the point. Overpass is free
+    community infrastructure that rate-limits hard, and it was live-confirmed
+    serving this query from one host while refusing it from a RunPod worker
+    three times running. Adding mirrors does not help when the block is on the
+    address range; adding a different operator does.
+
+    Cached on disk. Building outlines effectively never change, so re-querying
+    for a property already scanned is both fragile and rude — though the cache
+    only survives the worker unless a network volume is attached.
     """
     cached = _cache_path(lat, lon)
     if os.path.exists(cached):
@@ -162,30 +241,27 @@ def fetch_footprint(lat, lon, radius_m=30):
         except Exception:
             pass
 
-    requests = _requests()
-    query = (f"[out:json][timeout:{HTTP_TIMEOUT}];"
-             f"way(around:{radius_m},{lat},{lon})[building];"
-             f"out geom;")
-
-    elements = None
-    for endpoint in OVERPASS_APIS:
-        try:
-            r = requests.post(endpoint, data={"data": query},
-                              headers=HTTP_HEADERS, timeout=HTTP_TIMEOUT)
-            r.raise_for_status()
-            elements = r.json().get("elements") or []
-            break
-        except Exception as e:
-            print(f"footprint lookup via {endpoint} failed: {e}",
+    geometries = None
+    for name, fetch in FOOTPRINT_SOURCES:
+        found = fetch(lat, lon, radius_m)
+        if found:
+            print(f"footprint from {name}: {len(found)} candidates",
                   file=sys.stderr)
-    if elements is None:
+            geometries = found
+            break
+        if found == []:
+            # Reached the service; it genuinely has no building here. Trying
+            # another copy of the same map will not invent one.
+            print(f"{name}: no buildings mapped at this location",
+                  file=sys.stderr)
+            geometries = []
+            break
+
+    if not geometries:
         return None
 
     best, best_d = None, float("inf")
-    for el in elements:
-        geom = el.get("geometry") or []
-        if len(geom) < 4:
-            continue
+    for geom in geometries:
         cy = sum(g["lat"] for g in geom) / len(geom)
         cx = sum(g["lon"] for g in geom) / len(geom)
         d = (cy - lat) ** 2 + (cx - lon) ** 2

@@ -410,6 +410,86 @@ check("8n no false alarm on area",
 check("8o no solar result -> no comparison", solar.compare({}, None) is None)
 
 
+# ---- 9. two independent footprint sources ---------------------------------
+# Overpass was live-confirmed serving this query happily from one host while
+# refusing it from a RunPod worker three times running — the signature of a
+# datacentre IP range being rate-limited. More Overpass mirrors do not help,
+# because they share that policy. A different OPERATOR does.
+check("9a there is more than one source", len(roof.FOOTPRINT_SOURCES) >= 2)
+check("9b they are different operators",
+      len({n for n, _ in roof.FOOTPRINT_SOURCES}) == len(roof.FOOTPRINT_SOURCES),
+      str([n for n, _ in roof.FOOTPRINT_SOURCES]))
+check("9c the non-Overpass source is tried FIRST",
+      roof.FOOTPRINT_SOURCES[0][0] != "overpass",
+      str(roof.FOOTPRINT_SOURCES[0][0]))
+
+_SQUARE = [{"lat": 52.5014 + dy, "lon": -1.8067 + dx}
+           for dy, dx in ((0, 0), (0, 0.0001), (0.0001, 0.0001), (0.0001, 0))]
+
+_calls = []
+
+
+def _dead(lat, lon, r):
+    _calls.append("dead")
+    return None                      # service unreachable
+
+
+def _empty(lat, lon, r):
+    _calls.append("empty")
+    return []                        # reached it; nothing mapped here
+
+
+def _works(lat, lon, r):
+    _calls.append("works")
+    return [_SQUARE]
+
+
+_saved_sources = roof.FOOTPRINT_SOURCES
+_saved_cache = roof.FOOTPRINT_CACHE_DIR
+roof.FOOTPRINT_CACHE_DIR = os.path.join(
+    __import__("tempfile").gettempdir(), "fp-test-9")
+try:
+    import shutil as _sh
+    # A dead first source must fall through to the second.
+    _sh.rmtree(roof.FOOTPRINT_CACHE_DIR, ignore_errors=True)
+    _calls.clear()
+    roof.FOOTPRINT_SOURCES = (("a", _dead), ("b", _works))
+    got = roof.fetch_footprint(52.5014, -1.8067)
+    check("9d a dead source falls through to the next", got is not None)
+    check("9e and both were tried in order", _calls == ["dead", "works"],
+          str(_calls))
+
+    # But an EMPTY answer is information, not a failure: the service was
+    # reached and there is genuinely no building here. Asking another copy of
+    # the same map will not invent one.
+    _sh.rmtree(roof.FOOTPRINT_CACHE_DIR, ignore_errors=True)
+    _calls.clear()
+    roof.FOOTPRINT_SOURCES = (("a", _empty), ("b", _works))
+    got = roof.fetch_footprint(52.5014, -1.8067)
+    check("9f an empty answer stops the search", got is None, str(got))
+    check("9g so the second source is not called", _calls == ["empty"],
+          str(_calls))
+
+    # Everything down is still a refusal, never a guess.
+    _sh.rmtree(roof.FOOTPRINT_CACHE_DIR, ignore_errors=True)
+    roof.FOOTPRINT_SOURCES = (("a", _dead), ("b", _dead))
+    check("9h all sources down means no footprint, not a fabricated one",
+          roof.fetch_footprint(52.5014, -1.8067) is None)
+
+    # The cache short-circuits every source.
+    _sh.rmtree(roof.FOOTPRINT_CACHE_DIR, ignore_errors=True)
+    roof.FOOTPRINT_SOURCES = (("b", _works),)
+    roof.fetch_footprint(52.5014, -1.8067)
+    _calls.clear()
+    roof.FOOTPRINT_SOURCES = (("a", _dead),)
+    cached = roof.fetch_footprint(52.5014, -1.8067)
+    check("9i a cached footprint needs no network at all",
+          cached is not None and _calls == [], str(_calls))
+finally:
+    roof.FOOTPRINT_SOURCES = _saved_sources
+    roof.FOOTPRINT_CACHE_DIR = _saved_cache
+
+
 # ==========================================================================
 print()
 for f in FAILED:
