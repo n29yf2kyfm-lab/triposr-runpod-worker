@@ -140775,7 +140775,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-fox-2004-vw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-fox-2004-vw1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-fox-2004-vw1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 13278136,
@@ -141033,7 +141033,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-sharan-vw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-sharan-vw1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-sharan-vw1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 39651540,
@@ -141817,7 +141817,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-touran-2011-vw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-touran-2011-vw1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-touran-2011-vw1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 38616376,
@@ -142078,7 +142078,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-beetle-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-beetle-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-beetle-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 15088424,
@@ -142338,7 +142338,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-new-beetle-2006-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-new-beetle-2006-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-new-beetle-2006-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 11784464,
@@ -142597,7 +142597,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-gti-2014-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-gti-2014-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-gti-2014-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 35899288,
@@ -142860,7 +142860,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-2017-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-2017-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-2017-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 30563616,
@@ -143044,6 +143044,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3085,
+   "variantsHash": "89275c86abc292988ac0bfb437072dda72b1b649",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -143115,7 +143122,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-gti-2025-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-gti-2025-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-gti-2025-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 30729888,
@@ -143299,6 +143306,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2964,
+   "variantsHash": "77a22bbe3027f2dcd05b1ef99140d7c1e4311a5f",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -143366,7 +143380,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-gti-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-gti-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-gti-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 33154224,
@@ -143550,6 +143564,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3799,
+   "variantsHash": "db5ff522b8f2af195fa794809750a18f09285017",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -143619,7 +143640,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-r-2019-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-r-2019-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-r-2019-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 18472484,
@@ -143803,6 +143824,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.436,
+   "variantsHash": "1d6bfc9d198f7cc395dc7d4a46d0ebce1b674e9d",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -143868,7 +143896,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-gti-2021-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-gti-2021-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-gti-2021-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 19975272,
@@ -144052,6 +144080,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4282,
+   "variantsHash": "e4b53582feb06ea0104a1031127169bd5f5bf679",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -144122,7 +144157,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id-buzz-2021-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-id-buzz-2021-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-id-buzz-2021-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 8324928,
@@ -144306,6 +144341,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.165,
+   "variantsHash": "2e60592d135af5e6b360aec5b7d4bc825a6980b9",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -144376,7 +144418,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-jetta-2010-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-jetta-2010-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-jetta-2010-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 26917260,
@@ -144560,6 +144602,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2406,
+   "variantsHash": "52947d3f53d4ee0e4c3a28cfa985ad20988b7274",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -144631,7 +144680,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-jetta-2019-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-jetta-2019-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-jetta-2019-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 21205048,
@@ -144815,6 +144864,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4199,
+   "variantsHash": "74a81e476c5a3e660400ee73c54e6fc91b6955cb",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -144885,7 +144941,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2001-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2001-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-polo-2001-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 20707236,
@@ -145069,6 +145125,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3326,
+   "variantsHash": "07582e32e577922bed05252158a899e8ef2b5ab5",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -145140,7 +145203,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-gti-2023-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-gti-2023-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-polo-gti-2023-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 14367340,
@@ -145324,6 +145387,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4222,
+   "variantsHash": "0765a47567580d367dc0ed2b271275175a1eb60d",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -145393,7 +145463,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-gti-2011-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-gti-2011-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-polo-gti-2011-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 9740944,
@@ -145577,6 +145647,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4439,
+   "variantsHash": "1d034b70a99cb67bb2d101f3fbe252f8b791b459",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -145645,7 +145722,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-r-2015-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-scirocco-r-2015-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-scirocco-r-2015-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 10345424,
@@ -145829,6 +145906,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4346,
+   "variantsHash": "eba0870fce252e0be542b3824c605f182b95f04c",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -145897,7 +145981,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-taigun-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-taigun-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-taigun-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 10033608,
@@ -146081,6 +146165,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3632,
+   "variantsHash": "d4730fd50cbc1e2f1ea2d68e4db1cc56b2820939",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -146146,7 +146237,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-tiguan-2020-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-tiguan-2020-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-tiguan-2020-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 15977768,
@@ -146330,6 +146421,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3705,
+   "variantsHash": "03e8a086082a20995c7df26bca0d3ee8c3e9db3c",
+   "method": "render",
+   "at": "2026-08-02"
   }
  },
  {
@@ -146399,7 +146497,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-2003-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-2003-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-transporter-2003-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 3773308,
@@ -146583,6 +146681,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4113,
+   "variantsHash": "d754f1090277e48dd9edf3b66c7771d7986bf1bc",
+   "method": "render",
+   "at": "2026-08-02"
   }
  }
 ]
