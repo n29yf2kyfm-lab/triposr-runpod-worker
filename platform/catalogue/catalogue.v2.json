@@ -145917,9 +145917,9 @@
  },
  {
   "schemaVersion": 2,
-  "assetId": "volkswagen-taigun-vw2-v1",
+  "assetId": "volkswagen-t-cross-vw2-v1",
   "make": "volkswagen",
-  "model": "taigun",
+  "model": "t-cross",
   "modelFamily": "volkswagen taigun",
   "modelAliases": [
    "taigun"
@@ -145969,19 +145969,19 @@
   "oemPaintCode": null,
   "oemPaintName": null,
   "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-taigun-vw2-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-taigun-vw2-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-taigun-vw2-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-taigun-vw2-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-taigun-vw2-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-taigun-vw2-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-taigun-vw2-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-taigun-vw2-v1__yellow.glb"
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-t-cross-vw2-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-t-cross-vw2-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-t-cross-vw2-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-t-cross-vw2-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-t-cross-vw2-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-t-cross-vw2-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-t-cross-vw2-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-t-cross-vw2-v1__yellow.glb"
   },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-taigun-vw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-taigun-vw2-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-taigun-vw2-v1/hero.jpg",
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-t-cross-vw2-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 10033608,
@@ -145996,7 +145996,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "vw2 gated publish 2026-08-02: licence recorded as 'CC Attribution' (author 'BML Palms Authority'), owner keep verdict 2026-08-02T00:00:41Z, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "vw2 gated publish 2026-08-02: licence recorded as 'CC Attribution' (author 'BML Palms Authority'), owner keep verdict 2026-08-02T00:00:41Z, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "Source title says \"Volkswagen Taigun\"; the model's own tailgate and plates read T-CROSS. Owner ruled 2026-08-02 to list it as t-cross. sourceTitle is left verbatim per the accuracy rule; \"taigun\" is kept as a modelAlias so the original name still resolves."
   ],
   "customization": {
    "configuratorReady": false,
@@ -146169,7 +146170,7 @@
   "recolourAudit": {
    "status": "pass",
    "dist": 0.3632,
-   "variantsHash": "d4730fd50cbc1e2f1ea2d68e4db1cc56b2820939",
+   "variantsHash": "2d0eb86a9a8bbb1407737d6dad6c6c7204c632e4",
    "method": "render",
    "at": "2026-08-02"
   }
