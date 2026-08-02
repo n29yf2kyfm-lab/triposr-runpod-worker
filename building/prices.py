@@ -58,6 +58,10 @@ SOURCE_TRUST = {INVOICE: 100, QUOTE: 70, PUBLISHED: 40, INDEX: 10}
 HALF_LIFE_DAYS = 120
 STALE_DAYS = 365
 
+# How far a price may be dated into the future before it stops being clock
+# drift and starts being bad data. Timezones alone account for a day.
+CLOCK_SKEW_DAYS = 2
+
 REFRESH_INTERVAL_DAYS = 7
 
 # --- the catalogue ---------------------------------------------------------
@@ -183,6 +187,14 @@ class Observation:
         HALF_LIFE_DAYS and reaches zero once stale.
         """
         age = self.age_days(today)
+        # A price dated slightly in the future is a clock, not a claim about
+        # the future. The worker, the caller and the merchant's export can sit
+        # in different timezones and drift apart, and treating a day of skew
+        # as "weight zero" silently voided every line of a price list
+        # imported minutes earlier — surfacing as "no usable price" gaps
+        # rather than as an error anyone could act on.
+        if -CLOCK_SKEW_DAYS <= age < 0:
+            age = 0
         if age < 0 or age > STALE_DAYS:
             return 0.0
         return SOURCE_TRUST[self.source] * (0.5 ** (age / HALF_LIFE_DAYS))
@@ -221,12 +233,29 @@ def estimate(observations, product, tier, today=None):
                 if o.product == product and o.tier == tier
                 and o.weight(today) > 0]
     if not relevant:
+        # Distinguish "nothing was ever supplied" from "everything supplied
+        # was discarded", because they call for opposite actions and both
+        # otherwise arrive as the same shrug.
+        matching = [o for o in observations
+                    if o.product == product and o.tier == tier]
+        stale = [o for o in matching if o.age_days(today) > STALE_DAYS]
+        future = [o for o in matching if o.age_days(today) < 0]
+        if future:
+            why = (f"{len(future)} price(s) are dated in the future by more "
+                   f"than {CLOCK_SKEW_DAYS} days, so they were ignored. "
+                   f"Check the clock on whatever produced them.")
+        elif stale:
+            why = (f"{len(stale)} price(s) exist but are all over "
+                   f"{STALE_DAYS} days old. Materials moved too far for "
+                   f"those to be quotable — re-import a current list.")
+        else:
+            why = ("Add an invoice, request a quote, or fall back to your "
+                   "rate card.")
         return {
             "product": product, "tier": tier, "price": None,
             "confidence": "none",
-            "message": f"No usable price for {product} at {tier} tier. "
-                       f"Add an invoice, request a quote, or fall back to "
-                       f"your rate card.",
+            "observations_discarded": len(matching),
+            "message": f"No usable price for {product} at {tier} tier. {why}",
         }
 
     pairs = [(o.price, o.weight(today)) for o in relevant]

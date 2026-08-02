@@ -128,6 +128,21 @@ check("3j missing index is warned about loudly",
       str(r_noindex["warnings"]))
 check("3k and confidence drops to low", r_noindex["confidence"] == "low")
 
+# Recency must be scored against the DATE THE VALUATION IS FOR, not the real
+# clock. Reading date.today() here made every backtest quietly wrong about
+# how fresh its own comparables were.
+_hist = V.value_from_comparables(COMPS, 92.0, "S", INDEX, date(2025, 8, 1))
+check("3l a historical valuation scores recency against its own date",
+      _hist["confidence"] in ("good", "fair", "low"), _hist["confidence"])
+import inspect  # noqa: E402
+check("3m _confidence takes today rather than reading the clock",
+      "today=None" in inspect.signature(V._confidence).__str__()
+      or "today" in inspect.signature(V._confidence).parameters,
+      str(inspect.signature(V._confidence)))
+check("3n and passes it to age_years",
+      "age_years(today)" in inspect.getsource(V._confidence),
+      inspect.getsource(V._confidence))
+
 
 # ---- 4. what must be excluded ---------------------------------------------
 # Category B is repossessions and non-market transfers. Including them

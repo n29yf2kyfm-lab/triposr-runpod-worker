@@ -175,6 +175,66 @@ def _str_list(value, name, max_len):
     return out
 
 
+class UnsafeURLError(InputError):
+    """Raised for a URL the worker must not fetch on a caller's behalf."""
+
+
+# Allowing a caller to name any address the worker can reach turns this
+# endpoint into a proxy for the private network it sits in — cloud metadata
+# services, internal APIs, anything on localhost — and the fetched content
+# comes back in the response. Only ordinary public HTTP(S) is accepted.
+ALLOWED_URL_SCHEMES = ("http", "https")
+
+
+def check_fetchable_url(url, field="url"):
+    """Refuse a URL the worker should not fetch for a caller.
+
+    Blocks non-HTTP schemes (file://, gopher://) and any host that resolves
+    into loopback, private, link-local, or otherwise reserved space — which
+    is where 169.254.169.254 and every internal service live.
+
+    HONEST LIMIT: this resolves the name to check it and the HTTP client
+    resolves it again to connect, so a name that changes answer between the
+    two calls (DNS rebinding) can still slip past. Closing that needs the
+    connection pinned to the vetted address. This stops the straightforward
+    attempt, which is the one that actually gets made.
+    """
+    import ipaddress
+    import socket
+    from urllib.parse import urlparse
+
+    text = str(url or "").strip()
+    if not text:
+        raise UnsafeURLError(f"{field} is empty")
+
+    parsed = urlparse(text)
+    if parsed.scheme.lower() not in ALLOWED_URL_SCHEMES:
+        raise UnsafeURLError(
+            f"{field} must be an http or https URL — got "
+            f"{parsed.scheme or 'no'} scheme. Local paths and other schemes "
+            f"are not fetched on a caller's behalf.")
+    host = parsed.hostname
+    if not host:
+        raise UnsafeURLError(f"{field} has no host")
+
+    try:
+        infos = socket.getaddrinfo(host, parsed.port or
+                                   (443 if parsed.scheme == "https" else 80),
+                                   proto=socket.IPPROTO_TCP)
+    except OSError as e:
+        raise UnsafeURLError(f"{field}: cannot resolve {host!r} ({e})")
+
+    for info in infos:
+        address = ipaddress.ip_address(info[4][0])
+        if (address.is_private or address.is_loopback or address.is_reserved
+                or address.is_link_local or address.is_multicast
+                or address.is_unspecified):
+            raise UnsafeURLError(
+                f"{field} resolves to {address}, which is a private or "
+                f"reserved address. The worker only fetches public URLs.")
+    return text
+
+
 def parse_job(job_input):
     """Validate a raw job input dict into a normalised job spec.
 

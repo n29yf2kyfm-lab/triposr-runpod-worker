@@ -580,7 +580,7 @@ def value_from_comparables(sales, floor_area_m2, property_type,
         "comparables_unindexable": unindexable,
         "spread_pct": round(spread * 100, 1),
         "indexed_to": today.isoformat(),
-        "confidence": _confidence(kept, spread, usable, index_series),
+        "confidence": _confidence(kept, spread, usable, index_series, today),
         "basis": ("Comparable sold prices from HM Land Registry Price Paid "
                   "Data, indexed to today with UKHPI, on a per-square-metre "
                   "basis." if index_series else
@@ -639,8 +639,12 @@ def _reject_outliers(rates):
     return kept, rejected
 
 
-def _confidence(kept, spread, usable, index_series):
-    recent = [s for s in usable if s.age_years() <= 2]
+def _confidence(kept, spread, usable, index_series, today=None):
+    # `today` is threaded through rather than defaulted, so a valuation run
+    # against a historical date scores recency against THAT date. Reading the
+    # real clock here made every backtest quietly wrong about how fresh its
+    # own comparables were.
+    recent = [s for s in usable if s.age_years(today) <= 2]
     if not index_series:
         return "low"
     if len(kept) >= 8 and spread <= 0.25 and len(recent) >= 3:

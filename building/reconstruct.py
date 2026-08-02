@@ -262,12 +262,15 @@ def fetch_capture(spec, work_dir):
 
     os.makedirs(work_dir, exist_ok=True)
 
+    import validation
+
     if spec.get("image_urls"):
         requests = _requests()
         paths = []
         for i, url in enumerate(spec["image_urls"]):
             dest = os.path.join(work_dir, f"i{i:06d}.jpg")
             try:
+                validation.check_fetchable_url(url, f"image_urls[{i}]")
                 r = requests.get(url, timeout=60)
                 r.raise_for_status()
                 with open(dest, "wb") as f:
@@ -281,9 +284,14 @@ def fetch_capture(spec, work_dir):
 
     if spec.get("video_url"):
         video = os.path.join(work_dir, "capture.mp4")
-        if os.path.exists(spec["video_url"]):
+        # A local path is honoured only when the operator has explicitly
+        # opted in. Left open, a caller-supplied string could name any file
+        # the worker can read and have it treated as a capture.
+        local_ok = os.environ.get("BUILDING_ALLOW_LOCAL_CAPTURE") == "1"
+        if local_ok and os.path.exists(spec["video_url"]):
             shutil.copy(spec["video_url"], video)
         else:
+            validation.check_fetchable_url(spec["video_url"], "video_url")
             r = _requests().get(spec["video_url"], timeout=600, stream=True)
             r.raise_for_status()
             with open(video, "wb") as f:

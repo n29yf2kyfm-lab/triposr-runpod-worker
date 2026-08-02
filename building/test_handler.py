@@ -440,6 +440,45 @@ for bad, label in [({"channel": "carrier_pigeon"}, "channel"),
         check(f"18i unknown {label} refused", True)
 
 
+# ---- Test 20: the worker must not fetch on a caller's behalf --------------
+# Left open, a caller-supplied URL turns this endpoint into a proxy for the
+# private network it sits in — cloud metadata, internal APIs, localhost — and
+# the fetched content comes back in the response.
+for url, label in [("file:///etc/passwd", "file scheme"),
+                   ("/etc/passwd", "bare local path"),
+                   ("../../etc/passwd", "relative path"),
+                   ("gopher://evil/x", "gopher scheme"),
+                   ("http://127.0.0.1:8080/x", "loopback"),
+                   ("http://localhost/admin", "localhost by name"),
+                   ("http://169.254.169.254/latest/meta-data/", "metadata"),
+                   ("http://10.0.0.5/internal", "private 10/8"),
+                   ("http://192.168.1.1/admin", "private 192.168/16"),
+                   ("http://[::1]/x", "IPv6 loopback"),
+                   ("", "empty")]:
+    try:
+        validation.check_fetchable_url(url, "test_url")
+        check(f"20a refused: {label}", False, f"ALLOWED {url}")
+    except validation.UnsafeURLError:
+        check(f"20a refused: {label}", True)
+
+check("20b an ordinary public URL is still allowed",
+      validation.check_fetchable_url(
+          "https://landregistry.data.gov.uk/x.csv", "u").startswith("https://"))
+check("20c UnsafeURLError is an InputError, so the handler answers cleanly",
+      issubclass(validation.UnsafeURLError, InputError))
+
+_supply_src = open(os.path.join(HERE, "supply.py")).read()
+check("20d supply no longer reads local paths",
+      "os.path.exists(url)" not in _supply_src)
+check("20e supply checks the URL before fetching",
+      "check_fetchable_url" in _supply_src)
+_recon_src = open(os.path.join(HERE, "reconstruct.py")).read()
+check("20f reconstruct checks its URLs too",
+      _recon_src.count("check_fetchable_url") >= 2)
+check("20g local capture is opt-in only",
+      "BUILDING_ALLOW_LOCAL_CAPTURE" in _recon_src)
+
+
 # ---- Test 19: the SDK progress call must stay opt-in ----------------------
 # Bought expensively on the live endpoint: every job that called
 # runpod.serverless.progress_update() reached its final stage and then never

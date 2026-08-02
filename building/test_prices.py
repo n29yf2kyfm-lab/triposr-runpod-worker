@@ -215,6 +215,43 @@ check("10i empty set does not divide by zero",
       P.coverage([], TODAY)["own_price_share"] == 0.0)
 
 
+
+# ---- clock skew must not void a whole price list -------------------------
+# A price dated slightly in the future is a clock, not a claim about the
+# future. The worker, the caller and the merchant's export can sit in
+# different timezones; treating a day of drift as "weight zero" silently
+# voided every line of a list imported minutes earlier, and it surfaced as
+# "no usable price" rather than as anything anyone could act on.
+_today = date(2026, 8, 1)
+_skewed = P.Observation("battens", P.STANDARD, 0.92, P.INVOICE,
+                        date(2026, 8, 2))          # one day ahead
+check("skew-1 one day of drift still counts",
+      _skewed.weight(_today) > 0, str(_skewed.weight(_today)))
+check("skew-2 and counts as fresh, not decayed",
+      abs(_skewed.weight(_today) - P.SOURCE_TRUST[P.INVOICE]) < 1e-9,
+      str(_skewed.weight(_today)))
+
+_far = P.Observation("battens", P.STANDARD, 0.92, P.INVOICE,
+                     date(2026, 12, 1))            # four months ahead
+check("skew-3 a genuinely future date is still refused",
+      _far.weight(_today) == 0.0, str(_far.weight(_today)))
+
+# ...and when everything IS discarded, say which of the two reasons it was.
+_r = P.estimate([_far], "battens", P.STANDARD, today=_today)
+check("skew-4 a future-dated discard explains itself",
+      "future" in _r["message"], _r["message"])
+check("skew-5 and counts what it threw away",
+      _r.get("observations_discarded") == 1, str(_r.get("observations_discarded")))
+
+_old = P.Observation("battens", P.STANDARD, 0.92, P.INVOICE, date(2024, 1, 1))
+_r = P.estimate([_old], "battens", P.STANDARD, today=_today)
+check("skew-6 a stale discard explains itself differently",
+      "old" in _r["message"], _r["message"])
+
+_r = P.estimate([], "battens", P.STANDARD, today=_today)
+check("skew-7 nothing supplied still reads as nothing supplied",
+      "rate card" in _r["message"], _r["message"])
+
 # ==========================================================================
 print()
 for f in FAILED:

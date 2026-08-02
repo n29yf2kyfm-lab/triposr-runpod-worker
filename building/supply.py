@@ -887,14 +887,16 @@ def run(spec, prog, output_dir):
         raise SupplyError(f"vat must be one of {', '.join(VAT_BASES)}")
 
     if not text:
-        if os.path.exists(url):
-            with open(url) as f:
-                text = f.read()
-        else:
-            import requests
-            response = requests.get(url, timeout=120)
-            response.raise_for_status()
-            text = response.text
+        # The local-path branch that used to live here read any file the
+        # worker could see and returned its parsed contents in the response,
+        # on nothing but a caller-supplied string. A price list arrives over
+        # HTTP or inline; there is no case for reading the worker's disk.
+        import validation
+        validation.check_fetchable_url(url, "price_list_url")
+        import requests
+        response = requests.get(url, timeout=120)
+        response.raise_for_status()
+        text = response.text
 
     prog.stage("matching_products")
     report = import_price_list(text, vat=vat, channel=channel,
