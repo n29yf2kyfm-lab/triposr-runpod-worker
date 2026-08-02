@@ -52,6 +52,18 @@ SCOTTISH_POSTCODE_AREAS = {
     "PA", "PH", "TD", "ZE",
 }
 
+# The Crown Dependencies are not part of the United Kingdom and keep their own
+# land registers, but they use UK-format postcodes — so they sail straight
+# through a check that only screens for Scotland and Northern Ireland, and the
+# caller gets "no recorded sales" for a property in the wrong jurisdiction
+# rather than "wrong country". Named individually so the refusal points at the
+# register that actually holds the data.
+CROWN_DEPENDENCY_REGISTRIES = {
+    "GY": "Guernsey keeps its own land register at the Greffe.",
+    "JE": "Jersey keeps its own Public Registry at the Royal Court.",
+    "IM": "The Isle of Man keeps its own Land Registry.",
+}
+
 # --- property types, as Price Paid Data codes them -------------------------
 PROPERTY_TYPES = {
     "D": "Detached",
@@ -1063,4 +1075,8 @@ def check_coverage(postcode):
         raise ValuationError(
             "Scotland is not in HM Land Registry Price Paid Data. Sales "
             "there are registered with Registers of Scotland.")
+    if area in CROWN_DEPENDENCY_REGISTRIES:
+        raise ValuationError(
+            f"{CROWN_DEPENDENCY_REGISTRIES[area]} Price Paid Data covers "
+            f"England and Wales only.")
     return True

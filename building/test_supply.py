@@ -62,6 +62,32 @@ for text, want in [("£12.50", 12.50), ("12.50", 12.50), ("1,234.56", 1234.56),
 
 check("2b pence convention", abs(S.parse_money("85p") - 0.85) < 1e-9,
       str(S.parse_money("85p")))
+
+# THE hundredfold error. Merchant exports carry whatever locale the export
+# tool was set to, and the two conventions collide exactly where it hurts:
+# no UK convention writes "12,50" for twelve pounds fifty, but half of Europe
+# does, and reading it as 1250 poisons every line in the file while looking
+# entirely ordinary.
+for text, want in [("£12,50", 12.50),        # European decimal comma
+                   ("1.234,56", 1234.56),    # European thousands + decimal
+                   ("1,234.56", 1234.56),    # UK/US thousands + decimal
+                   ("1,234", 1234.0),        # UK thousands grouping
+                   ("2.999,99", 2999.99),
+                   ("0,85", 0.85)]:
+    got = S.parse_money(text)
+    check(f"2b2 {text!r} -> {want}",
+          got is not None and abs(got - want) < 1e-9, str(got))
+
+# When both separators appear the LAST one is the decimal point; that
+# resolves the ambiguity without guessing.
+check("2b3 the last separator decides",
+      S.parse_money("1.234,56") == S.parse_money("1,234.56"))
+
+# A token that is not a readable number must be refused, not salvaged for a
+# prefix — that is how a mangled cell becomes a confident wrong price.
+check("2b4 a mangled number is refused", S.parse_money("12.50.60") is None,
+      str(S.parse_money("12.50.60")))
+check("2b5 a negative is still refused", S.parse_money("-12.50") is None)
 check("2c a number is a number", S.parse_money(9.99) == 9.99)
 # A zero in a price column is an export artefact, not a free material.
 check("2d zero is treated as missing", S.parse_money("0.00") is None)
@@ -318,6 +344,22 @@ check("8e trade account is invoice-grade",
 
 obs = report["observations"]
 check("8f observations built", len(obs) == 5, str(len(obs)))
+
+# A line the PRICE ENGINE rejects must become a visible skip, not an
+# exception from another module. to_observations promises SupplyError, and
+# one unusable row must not lose the other forty-nine.
+_bad = S.Line(description="Facing brick", price=-5.0, unit="each",
+              vat=S.VAT_EX)
+S.normalise_line(_bad)
+try:
+    _o, _s = S.to_observations([_bad], channel="trade_account", when=TODAY)
+    check("8f2 a price the engine rejects is skipped, not raised",
+          len(_o) == 0 and len(_s) == 1, f"{len(_o)}/{len(_s)}")
+    check("8f3 and the reason is recorded on the line",
+          any("price engine" in n for n in _s[0].notes), str(_s[0].notes))
+except prices.PriceError as e:
+    check("8f2 a price the engine rejects is skipped, not raised", False,
+          f"PriceError escaped: {e}")
 check("8g supplier carried onto every observation",
       all(o.merchant == "Local Merchant" for o in obs))
 board = [o for o in obs if o.product == "plasterboard"][0]

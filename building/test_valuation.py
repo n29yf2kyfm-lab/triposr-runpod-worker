@@ -199,6 +199,24 @@ check("6e a Carlisle postcode is covered", V.check_coverage("CA1 1AA"))
 check("6f the area is read from the front, not from every letter",
       V.check_coverage("B36 8AR"))
 
+# The Crown Dependencies are NOT in the UK and keep their own land registers,
+# but they use UK-format postcodes — so they sail through a check that only
+# screens Scotland and Northern Ireland, and the caller gets "no recorded
+# sales" for the wrong jurisdiction rather than "wrong country".
+for postcode, register in [("GY1 1AA", "Guernsey"),
+                           ("JE2 3AB", "Jersey"),
+                           ("IM1 1AA", "Isle of Man")]:
+    try:
+        V.check_coverage(postcode)
+        check(f"6f2 {postcode} ({register}) refused", False,
+              "passed as England and Wales")
+    except V.ValuationError as e:
+        check(f"6f2 {postcode} ({register}) refused", register in str(e),
+              str(e)[:80])
+        check(f"6f3 {postcode} names the right register",
+              "own" in str(e) and "England and Wales only" in str(e),
+              str(e)[:80])
+
 for postcode, nation in [("EH1 2AB", "Scotland"), ("G12 8QQ", "Scotland"),
                          ("AB10 1AA", "Scotland"), ("KY1 1AA", "Scotland"),
                          ("BT1 1AA", "Land & Property")]:

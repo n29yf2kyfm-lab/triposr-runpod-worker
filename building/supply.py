@@ -139,7 +139,40 @@ def detect_columns(header):
 
 
 # --- money -----------------------------------------------------------------
-_MONEY = re.compile(r"-?\d[\d,]*\.?\d*")
+# Grab the whole numeric token INCLUDING its separators, so the decimal
+# convention can be worked out from the token rather than guessed at.
+_MONEY = re.compile(r"-?\d[\d.,]*\d|-?\d")
+
+# A comma followed by exactly two digits at the end of a number is a decimal
+# comma: no UK convention writes "12,50" for twelve pounds fifty, but half of
+# Europe does, and reading it as 1250 is a hundredfold error in the direction
+# that quietly wrecks a quote.
+_DECIMAL_COMMA = re.compile(r",\d{2}$")
+
+
+def _normalise_decimal(token):
+    """Put a numeric token into a form float() reads correctly.
+
+    Merchant exports carry whatever locale the export tool was set to, and
+    the two conventions collide exactly where it hurts:
+
+        1,234.56   UK/US   comma groups thousands
+        1.234,56   EU      dot groups thousands
+        12,50      EU      twelve and a half, NOT one thousand two hundred
+
+    When both separators appear the LAST one is the decimal point, which
+    resolves the first two without ambiguity. With only commas, two trailing
+    digits mean a decimal comma and anything else means thousands grouping.
+    """
+    if "." in token and "," in token:
+        if token.rfind(",") > token.rfind("."):        # 1.234,56 — European
+            return token.replace(".", "").replace(",", ".")
+        return token.replace(",", "")                  # 1,234.56 — UK/US
+    if "," in token:
+        if _DECIMAL_COMMA.search(token):               # 12,50 — European
+            return token.replace(",", ".")
+        return token.replace(",", "")                  # 1,234 — thousands
+    return token
 
 
 def parse_money(text):
@@ -167,8 +200,11 @@ def parse_money(text):
     if not match:
         return None
     try:
-        value = float(match.group(0).replace(",", ""))
+        value = float(_normalise_decimal(match.group(0)))
     except ValueError:
+        # A token that is not a readable number at all — "12.50.60" and the
+        # like. Refuse it rather than salvaging a prefix, which is how a
+        # mangled cell becomes a confident wrong price.
         return None
     if pence:
         value /= 100.0
@@ -675,10 +711,19 @@ def to_observations(lines, channel="published", when=None):
         if not line.product or line.unit_price_ex_vat is None:
             skipped.append(line)
             continue
-        observations.append(prices.Observation(
-            product=line.product, tier=line.tier,
-            price=line.unit_price_ex_vat, source=source, observed_on=when,
-            merchant=line.supplier, unit=line.catalogue_unit))
+        try:
+            observations.append(prices.Observation(
+                product=line.product, tier=line.tier,
+                price=line.unit_price_ex_vat, source=source, observed_on=when,
+                merchant=line.supplier, unit=line.catalogue_unit))
+        except prices.PriceError as e:
+            # The price engine has its own guards — a non-positive price is
+            # the one that bites. Let a bad line become a visible skip rather
+            # than an exception from another module: this function promises
+            # SupplyError, and skipped lines are already surfaced in the
+            # report, so one unusable row does not lose the other forty-nine.
+            line.notes.append(f"rejected by the price engine: {e}")
+            skipped.append(line)
     return observations, skipped
 
 
