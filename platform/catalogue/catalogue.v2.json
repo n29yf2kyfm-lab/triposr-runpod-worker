@@ -141259,8 +141259,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "owner scrapped on review 2026-08-02 — classic van, not wanted in the library",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -141484,7 +141484,8 @@
    "variantsHash": "dbee9e09847e4ab898afdf45a523e79819e095f7",
    "method": "render",
    "at": "2026-08-02"
-  }
+  },
+  "quarantinedAt": "2026-08-02T08:02:23Z"
  },
  {
   "schemaVersion": 2,
@@ -141519,8 +141520,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "owner scrapped on review 2026-08-02 — classic van, not wanted in the library",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -141745,7 +141746,8 @@
    "variantsHash": "a09504248ea1e90a44bb0297492c38001ffaa6d9",
    "method": "render",
    "at": "2026-08-02"
-  }
+  },
+  "quarantinedAt": "2026-08-02T08:02:23Z"
  },
  {
   "schemaVersion": 2,
