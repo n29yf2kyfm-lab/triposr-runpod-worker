@@ -47,6 +47,9 @@ jobs:
       - name: Run valuation tests
         run: python building/test_valuation.py
 
+      - name: Run output path tests
+        run: python building/test_paths.py
+
   build:
     needs: test
     runs-on: ubuntu-latest

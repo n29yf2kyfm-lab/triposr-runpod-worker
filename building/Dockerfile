@@ -97,7 +97,11 @@ RUN pip install --no-cache-dir runpod requests pyyaml
 # ---------------------------------------------------------------------------
 ENV HF_HOME=/runpod-volume/building_hf_cache
 ENV TORCH_HOME=/runpod-volume/building_torch_cache
-ENV BUILDING_OUTPUT_DIR=/runpod-volume/building-outputs
+# BUILDING_OUTPUT_DIR is deliberately NOT set here. An endpoint only has
+# /runpod-volume when a network volume is attached to it, and baking the
+# path in as an env var overrides the runtime check in paths.py — which is
+# exactly how the first live job ended up writing into an unbacked mount.
+# Set it on the endpoint only when a volume really is attached.
 
 WORKDIR /app
 

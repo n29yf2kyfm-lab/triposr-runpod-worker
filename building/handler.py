@@ -40,10 +40,15 @@ import runpod  # noqa: E402
 from validation import parse_job, InputError  # noqa: E402
 from progress import Progress  # noqa: E402
 import delivery  # noqa: E402
+import paths  # noqa: E402
 
 # Own output directory — NOT the vehicle worker's /runpod-volume/outputs.
-OUTPUT_DIR = os.environ.get("BUILDING_OUTPUT_DIR",
-                            "/runpod-volume/building-outputs")
+#
+# Resolved against what is actually writable rather than assumed: an endpoint
+# only has /runpod-volume when a network volume is attached to it, and this
+# worker writes kilobytes of JSON that must not depend on that being true.
+OUTPUT_DIR = paths.resolve("BUILDING_OUTPUT_DIR", "building-outputs",
+                           "building-outputs")
 
 # Which phase implements each mode. Returned verbatim to callers hitting an
 # unimplemented mode, so the API is honest about what it can do today rather
@@ -196,7 +201,7 @@ def handler(job):
             "and treat exported dimensions as provisional until validated.")
 
     try:
-        os.makedirs(OUTPUT_DIR, exist_ok=True)
+        paths.ensure(OUTPUT_DIR)
         prog.stage("fetching", **manifest["inputs"])
 
         # --- route ------------------------------------------------------
@@ -295,7 +300,8 @@ def _persist_manifest(manifest, job_id, result):
     was interpreted.
     """
     try:
-        path = os.path.join(OUTPUT_DIR, f"{job_id}.manifest.json")
+        path = os.path.join(paths.ensure(OUTPUT_DIR),
+                            f"{job_id}.manifest.json")
         with open(path, "w") as f:
             json.dump({"manifest": manifest, "result": result}, f, indent=2)
         url = delivery.upload(path, f"manifests/{job_id}.json",

@@ -24,6 +24,7 @@ import json
 import math
 
 import osgb
+import paths
 import roof_geometry as rg
 import solar
 
@@ -130,8 +131,9 @@ def _geocode_uk(address):
 
 # --- footprint -------------------------------------------------------------
 
-FOOTPRINT_CACHE_DIR = os.environ.get(
-    "FOOTPRINT_CACHE_DIR", "/runpod-volume/building-outputs/footprints")
+FOOTPRINT_CACHE_DIR = paths.resolve(
+    "FOOTPRINT_CACHE_DIR", "building-outputs/footprints",
+    "building-footprints")
 
 
 def _cache_path(lat, lon):
@@ -196,7 +198,7 @@ def fetch_footprint(lat, lon, radius_m=30):
     polygon = [osgb.latlon_to_easting_northing(g["lat"], g["lon"])
                for g in best]
     try:
-        os.makedirs(FOOTPRINT_CACHE_DIR, exist_ok=True)
+        paths.ensure(FOOTPRINT_CACHE_DIR)
         with open(cached, "w") as f:
             json.dump(polygon, f)
     except Exception as e:
@@ -598,7 +600,7 @@ def run(spec, prog, output_dir):
         ],
     }
 
-    os.makedirs(output_dir, exist_ok=True)
+    output_dir = paths.ensure(output_dir)
     scan = spec.get("scan_id") or location["grid_ref"].replace(" ", "")
     json_path = os.path.join(output_dir, f"roof_{scan}.json")
     with open(json_path, "w") as f:

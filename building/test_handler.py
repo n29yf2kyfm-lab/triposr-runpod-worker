@@ -314,9 +314,17 @@ for name in ("handler.py", "validation.py", "delivery.py", "progress.py"):
         src += f.read()
 check("16a no import of trellis2", "import trellis2" not in src)
 check("16b no trellis2 path insertion", "/app/TRELLIS" not in src)
+# The output directory is now resolved at runtime rather than hardcoded (an
+# endpoint only has /runpod-volume when a volume is attached), so the
+# isolation requirement is checked against the subdirectory it resolves to.
+# The requirement itself is unchanged: never the vehicle worker's directory.
+with open(os.path.join(HERE, "paths.py")) as f:
+    src += f.read()
 check("16c own output dir, not the vehicle worker's",
-      "/runpod-volume/building-outputs" in src
-      and '"/runpod-volume/outputs"' not in src)
+      "building-outputs" in src and '"/runpod-volume/outputs"' not in src)
+check("16c2 the output dir is resolved, not hardcoded to a volume",
+      'paths.resolve("BUILDING_OUTPUT_DIR"' in src
+      and '"/runpod-volume/building-outputs")' not in src)
 check("16d own default bucket",
       'SUPABASE_BUCKET", "building-scans"' in src)
 
