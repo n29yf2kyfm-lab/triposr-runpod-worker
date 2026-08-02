@@ -512,7 +512,7 @@ repo/
     ├── drawing.py           # ✅ 2D PDF takeoff at a confirmed scale
     ├── supply.py            # ✅ price-list import, multi-supplier, basket
     ├── structure.py         # ✅ density segmentation → walls/slabs → IFC
-    ├── services.py          # ○ pipe/cable extraction → the X-ray
+    ├── services.py          # ✅ pipe/cable runs + BS 7671 safe zones
     ├── condition.py         # ○ YOLO + SAM 2 defects
     ├── design.py            # ○ procedural massing + planning checks
     ├── vendor/Cloud2BIM/    # ○ vendored at a pinned commit
@@ -551,7 +551,8 @@ defect register); RunPod serverless workers behind both.
 | ✅ | 2b — Supply Mode: price-list import, multi-supplier, basket | done |
 | ○ | 2b — Supply Mode: merchant RFQ round-trip | next |
 | ✅ | 3 — Structure: cloud → walls, slabs, storeys, IFC | done |
-| ○ | 4 — **the X-ray** | the wedge |
+| ✅ | 4 — **the X-ray**: runs sized, BS 7671 zones checked | done |
+| ○ | 4b — open↔closed registration (register.py) | next |
 | ○ | 5 — Condition Mode | |
 | ○ | 6 — Design Mode | |
 | ✅ | 7 — 2D drawing takeoff (assisted, scale-safe) | done |

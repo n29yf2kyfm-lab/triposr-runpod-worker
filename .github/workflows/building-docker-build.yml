@@ -56,6 +56,9 @@ jobs:
       - name: Run structure segmentation tests
         run: python building/test_structure.py
 
+      - name: Run services X-ray tests
+        run: python building/test_services.py
+
   build:
     needs: test
     runs-on: ubuntu-latest

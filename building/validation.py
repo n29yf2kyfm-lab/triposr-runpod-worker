@@ -346,6 +346,8 @@ def parse_job(job_input):
     # --- drawing ----------------------------------------------------------
     # Assisted takeoff. The scale is never inferred silently — see drawing.py.
     # --- structure --------------------------------------------------------
+    spec["wall"] = job_input.get("wall") or None
+    spec["accessories"] = job_input.get("accessories") or None
     spec["point_cloud_path"] = (
         str(job_input.get("point_cloud_path") or "").strip() or None)
     spec["voxel_m"] = _float(job_input.get("voxel_m"), "voxel_m", None,
