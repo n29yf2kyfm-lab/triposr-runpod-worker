@@ -523,6 +523,16 @@ def _ground_z(meshes):
     level with the other three, so there is no gap above it to step across.
     Where no such gap exists this returns the plain minimum, so models that
     were already correct are untouched.
+
+    KNOWN LIMIT, measured -- this handles ONE stray, not a scatter. The Touran
+    Mk1 (Sketchfab 539194f and 518767f) carries a spray of loose VW badge
+    meshes at many different heights below the body. No single gap between
+    consecutive minima clears _STRAY_GAP, so the walk stops at the first badge
+    and the car still floats. Widening the thresholds to catch that would risk
+    stepping over real wheels, and it would not help those files anyway: the
+    badges are IN the model and render as debris on the floor at any floor
+    height. Such assets are a sourcing problem, not a render problem, and the
+    audit scraps them.
     """
     import mathutils as _mu
     ms = []

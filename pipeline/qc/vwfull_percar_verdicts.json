@@ -1,0 +1,394 @@
+{
+ "P001": [
+  "KEEP",
+  "Beetle 1950 - proportions instant, sharp lamp internals, crisp louvres, consistent 4 views, premium gloss"
+ ],
+ "P002": [
+  "KEEP",
+  "Beetle - sharp lamps, defined door/bonnet shut lines, consistent hubcaps; minor wing surface waviness"
+ ],
+ "P003": [
+  "SCRAP",
+  "bodyshell only - no wheels, no glass, faceted panels, BeamNG parts kit"
+ ],
+ "P004": [
+  "KEEP",
+  "2006 New Beetle - instant proportions, projector lamp internals, 5-spoke alloys consistent, badges present"
+ ],
+ "P005": [
+  "SCRAP",
+  "not a car - a tyre"
+ ],
+ "P006": [
+  "SCRAP",
+  "faceted roof and rear lid, blank headlights, lumpy wings, stray loose wheel + hitch part; 88k faces"
+ ],
+ "P007": [
+  "SCRAP",
+  "non-stock: roof rack fitted and '1969 edition' decals baked into doors; wavy bonnet"
+ ],
+ "P008": [
+  "SCRAP",
+  "broken import - grey box slab through cabin, flat crumpled doors, no glass, 3 wheels missing"
+ ],
+ "P009": [
+  "SCRAP",
+  "model is upside down (inverted up-axis); also a pickup, not a car"
+ ],
+ "P010": [
+  "KEEP",
+  "2004 Fox - instant proportions, crisp grille+badge, lamp internals, consistent alloys, clean panels"
+ ],
+ "P011": [
+  "SCRAP",
+  "3 wheels missing, balances on one; recolour left nose and bonnet white - two-tone"
+ ],
+ "P012": [
+  "SCRAP",
+  "modified: big rear wing, front splitter, canards, slammed - not a stock 2014 GTI"
+ ],
+ "P013": [
+  "KEEP",
+  "Mk7 GTI 916k f - honeycomb grille w/ GTI stripe, lamp internals sharp, shut lines defined, mesh alloys consistent; mods limited to lip/stance/wheels"
+ ],
+ "P014": [
+  "KEEP",
+  "Mk7.5 Golf 818k f - chrome grille slats, LED lamp internals, red tail lenses, consistent alloys, clean panels. Float was the render bug; re-rendered on 4e4e1fd and it now sits correctly on the floor"
+ ],
+ "P015": [
+  "SCRAP",
+  "exploded model - bumper assemblies float detached, wheels hang outside arches on struts, no tyres"
+ ],
+ "P016": [
+  "SCRAP",
+  "stands on its nose (90 deg off) and exploded - panels scattered loose"
+ ],
+ "P017": [
+  "KEEP",
+  "2025 Mk8.5 GTI 550k f - deep honeycomb grille, LED nose bar, sharp lamp internals, twin exhausts in defined diffuser, consistent alloys"
+ ],
+ "P018": [
+  "SCRAP",
+  "front lower grille has taken body colour instead of dark honeycomb; headlight internals soft - both fails in the front 3/4"
+ ],
+ "P019": [
+  "SCRAP",
+  "interior renders as black/white checkerboard (missing texture), clearly visible through rear and side glass in 3 of 4 views"
+ ],
+ "P020": [
+  "SCRAP",
+  "stance build not stock Mk3 - lip, skirts, roof spoiler, slammed w/ negative camber; headlights plain blobs, grille edges soft"
+ ],
+ "P021": [
+  "SCRAP",
+  "extreme stance - heavy negative camber all four, slammed; detached part lying on floor behind car; flat headlights"
+ ],
+ "P022": [
+  "SCRAP",
+  "parts kit - front bumper detached on floor, 3 wheels missing, bonnet open, spare bumpers scattered"
+ ],
+ "P023": [
+  "SCRAP",
+  "duplicate of P022, same broken parts kit re-uploaded"
+ ],
+ "P024": [
+  "KEEP",
+  "Mk5 GTI 318k f - honeycomb grille w/ red stripe, lamp internals sharp, Monza alloys consistent, shut lines defined, twin exhausts, stock"
+ ],
+ "P025": [
+  "SCRAP",
+  "window surround/B-pillar render olive-green; rear quarter glass opaque white. Same Mk5 platform as P024 which is cleaner"
+ ],
+ "P026": [
+  "KEEP",
+  "2019 Mk7.5 Golf R 298k f - dark grille slots correct, lamp internals visible, quad exhausts, alloys consistent, shut lines defined"
+ ],
+ "P027": [
+  "SCRAP",
+  "Assetto Corsa mod build - front-mount intercooler through bumper, side skirts, lowered on aftermarket wheels; not stock"
+ ],
+ "P028": [
+  "KEEP",
+  "Mk7.5 GTI 260k f - honeycomb grille w/ red stripe, sharp lamp internals, red calipers, twin exhausts, consistent alloys. Front plate has 'ItsDiyor' watermark, replaced by GB plate bake"
+ ],
+ "P029": [
+  "SCRAP",
+  "re-rendered on 4e4e1fd: floor fixed and car sits correctly, but the stray white plane and a loose spare wheel remain in the file, visible in 3 views"
+ ],
+ "P030": [
+  "SCRAP",
+  "duplicate of P029 - identical 239,207 faces, same cov, same stray plane"
+ ],
+ "P031": [
+  "SCRAP",
+  "exploded - front wings, bumper and grille float above the car, bonnet detached, wheels missing"
+ ],
+ "P032": [
+  "SCRAP",
+  "widebody custom - flared arches, non-standard bumpers/diffuser, slammed, headlights dark blobs; not stock Mk4"
+ ],
+ "P033": [
+  "SCRAP",
+  "balances on one wheel, three missing; recolour left bumpers and arch surrounds grey while body went red"
+ ],
+ "P034": [
+  "SCRAP",
+  "stance build on gold split-rims w/ stretched tyres, slammed; flat grille, no lamp internals; 107k faces thin"
+ ],
+ "P035": [
+  "SCRAP",
+  "Mk4 R32 clean body but front soft at 82k f - grille mesh flat, headlight internals undefined"
+ ],
+ "P036": [
+  "SCRAP",
+  "heavy polygon faceting across roof/bonnet/flanks at 76k faces"
+ ],
+ "P037": [
+  "SCRAP",
+  "ID Buzz Concept, not the production van - would not match a real reg"
+ ],
+ "P038": [
+  "KEEP",
+  "production ID Buzz 244k f - deep honeycomb grille, LED nose bar, sharp lamp internals, consistent alloys, correct two-tone split"
+ ],
+ "P039": [
+  "SCRAP",
+  "blotchy polygon shading on every panel (broken normals); headlights flat dark slabs"
+ ],
+ "P040": [
+  "SCRAP",
+  "China-market ID.4 X with SAIC Chinese badging baked into tailgate, not the UK ID.4"
+ ],
+ "P041": [
+  "SCRAP",
+  "upside down; blotchy faceted shading"
+ ],
+ "P042": [
+  "KEEP",
+  "2010 Jetta A5 851k f - instant proportions, crisp chrome grille slats, lamp internals, consistent alloys, defined shut lines. 'HUMSTER' watermark plate replaced by GB bake"
+ ],
+ "P043": [
+  "SCRAP",
+  "re-rendered: a giant white plane in the file dwarfs the car so the camera frames the plane; Jetta renders tiny in every view"
+ ],
+ "P044": [
+  "SCRAP",
+  "re-rendered and sits correctly, but wheels are featureless white discs with no spokes and the grille is body-coloured, not dark mesh"
+ ],
+ "P045": [
+  "KEEP",
+  "2019 Jetta 377k f - chrome grille depth, LED lamp internals defined, turbine alloys sharp and consistent, tail-light internals, clean gloss"
+ ],
+ "P046": [
+  "SCRAP",
+  "not a car - a wheel and tyre"
+ ],
+ "P047": [
+  "SCRAP",
+  "three wheels missing, bare hubs/discs exposed, balances on one wheel"
+ ],
+ "P048": [
+  "SCRAP",
+  "China-market SAIC Passat PHEV - different body from the UK Passat; Chinese badging and green NEV plates baked in"
+ ],
+ "P049": [
+  "SCRAP",
+  "China-market SAIC Passat Pro fastback, not a UK Passat"
+ ],
+ "P050": [
+  "SCRAP",
+  "three wheels missing (white hub stubs), balances on one; windscreen renders shattered"
+ ],
+ "P051": [
+  "SCRAP",
+  "China-market SAIC Passat 330 TSI with Chinese badging/trim naming"
+ ],
+ "P052": [
+  "KEEP",
+  "re-rendered w/ close rear: tail lights are complete with lens structure, badge, POLO text and wiper - the 'cavity' was the angle. Twin round lamps w/ internals, consistent alloys, crisp shut lines, 636k f"
+ ],
+ "P053": [
+  "SCRAP",
+  "front bumper stayed grey while body took paint; a wheel arch renders as empty cavity; rippled BeamNG deformable panels"
+ ],
+ "P054": [
+  "SCRAP",
+  "re-rendered: still hovers, and panel faceting is unmistakable at size - angular patches across roof, doors, bonnet. P056 covers the Polo GTI"
+ ],
+ "P055": [
+  "SCRAP",
+  "duplicate of P056 (416,188 vs 416,184 faces); P056 is the better render of the same asset"
+ ],
+ "P056": [
+  "KEEP",
+  "2023 Polo GTI 416k f - red GTI nose stripe, honeycomb grille w/ depth, red calipers, lamp internals, consistent alloys, defined shut lines"
+ ],
+ "P057": [
+  "SCRAP",
+  "three wheels missing, bare brake discs exposed, balances on one"
+ ],
+ "P058": [
+  "KEEP",
+  "2011 Polo GTI 6R 177k f - red GTI stripe on honeycomb grille w/ depth, sharp lamp internals, red calipers, twin exhausts, consistent alloys"
+ ],
+ "P059": [
+  "SCRAP",
+  "same 6R Polo GTI as P058 but tail lights are flat orange slabs with no internals; also floats. P058 is the better asset"
+ ],
+ "P060": [
+  "SCRAP",
+  "three wheels missing, balances on one; recolour left bumpers and arch liners white"
+ ],
+ "P061": [
+  "SCRAP",
+  "identical duplicate of P060 (same 102,282 faces, same render)"
+ ],
+ "P062": [
+  "KEEP",
+  "2015 Scirocco R 124k f - strong front 3/4, defined grille slats + splitter, lamp internals, black alloys consistent, clean smooth panels"
+ ],
+ "P063": [
+  "KEEP",
+  "Sharan 522k f - sits correctly, instant proportions, chrome grille slats + lamp internals, consistent alloys, sliding-door track and shut lines crisp"
+ ],
+ "P064": [
+  "SCRAP",
+  "T-Cross 'LEGEND' special - red wheels/roof rails/trim/decals baked in, would persist through every colour; not the UK T-Cross"
+ ],
+ "P065": [
+  "SCRAP",
+  "geometry destroyed - faceted blob, no recognisable body, one loose wheel"
+ ],
+ "P066": [
+  "KEEP",
+  "Tiguan 2020 193k f - chrome grille bars w/ depth, LED lamp internals, tail-light internals, consistent alloys, clean shut lines"
+ ],
+ "P067": [
+  "SCRAP",
+  "headlights are empty black cavities - no lens or internals; tail lights featureless dark blobs"
+ ],
+ "P068": [
+  "SCRAP",
+  "car lies on its side with three spare bumper variants floating alongside - wrong orientation + parts kit"
+ ],
+ "P069": [
+  "KEEP",
+  "Touran MK1 2011-2015 1.15M f - instant proportions, chrome grille bars, lamp internals defined, consistent alloys, roof rails and shut lines crisp"
+ ],
+ "P070": [
+  "SCRAP",
+  "re-rendered: still floats. Root cause is in the file - a scatter of stray VW badge meshes at different heights below the car; they would litter any render"
+ ],
+ "P071": [
+  "SCRAP",
+  "identical asset to P070 (same 539,194 faces, same stray badges), different year range in title"
+ ],
+ "P072": [
+  "SCRAP",
+  "re-rendered: same scattered stray badges as P070, still floats"
+ ],
+ "P073": [
+  "SCRAP",
+  "China-market SAIC Cross Touran L with Chinese badging and 'CROSS TOURAN L' decals baked into the body"
+ ],
+ "P074": [
+  "SCRAP",
+  "wheel arches render as empty cavities with wheels sunk into the body; stray grey box floats over the bonnet"
+ ],
+ "P075": [
+  "KEEP",
+  "Transporter T5 96k f - instant proportions, grille bars + headlight reflector structure, steel wheels w/ hubcaps consistent, crisp sliding-door and tailgate shut lines, no faceting"
+ ],
+ "P076": [
+  "SCRAP",
+  "up! 77k f - panel reflections ripple along the flanks rather than running clean; weak headlight internals"
+ ],
+ "P077": [
+  "SCRAP",
+  "W12 Nardo Coupe Concept - a one-off concept, no registered examples to match"
+ ],
+ "P078": [
+  "SCRAP",
+  "identical duplicate of P077"
+ ],
+ "P079": [
+  "SCRAP",
+  "US-market Rabbit pickup, not a UK car; cov 0.059 means paint barely lands on the body"
+ ],
+ "P080": [
+  "KEEP",
+  "T3 Van 1.07M f - instant proportions, grille slats + twin round lamps w/ internals, steel wheels consistent, crisp shut lines, smooth panels. Cyrillic plate replaced by GB bake"
+ ],
+ "P081": [
+  "SCRAP",
+  "exploded parts kit - door frames, grilles, arch liners floating around; also a China/US model not sold in the UK"
+ ],
+ "P082": [
+  "SCRAP",
+  "China-market Teramont with Chinese badging; not sold in the UK"
+ ],
+ "P083": [
+  "SCRAP",
+  "China-only Lamando L with SAIC badging"
+ ],
+ "P084": [
+  "SCRAP",
+  "China-only Lamando L LEGEND; red wheels/trim/interior baked in, survive any colour change"
+ ],
+ "P085": [
+  "SCRAP",
+  "China-only Viloran MPV"
+ ],
+ "P086": [
+  "SCRAP",
+  "China-only ID.6 X with SAIC badging; never sold in the UK"
+ ],
+ "P087": [
+  "SCRAP",
+  "same China-only ID.6 X as P086 with red roof/wheels/trim baked in"
+ ],
+ "P088": [
+  "SCRAP",
+  "China-only Phideon saloon"
+ ],
+ "P089": [
+  "SCRAP",
+  "China-only Teramont X with SAIC badging"
+ ],
+ "P090": [
+  "SCRAP",
+  "lying on its side (wrong orientation); US-market Rabbit, not a UK Golf"
+ ],
+ "P091": [
+  "SCRAP",
+  "China/Latin-America-only Tharu with SAIC badging"
+ ],
+ "P092": [
+  "SCRAP",
+  "China-only Lavida saloon"
+ ],
+ "P093": [
+  "KEEP",
+  "same 172,102-face asset as P064 without the red LEGEND trim; model's own badging/tailgate read T-Cross not Taigun. Chrome grille bars, LED lamp internals, consistent alloys. Fills the T-Cross hole - title/badging conflict flagged for owner"
+ ],
+ "P094": [
+  "SCRAP",
+  "China-only Lavida Qihang"
+ ],
+ "P095": [
+  "SCRAP",
+  "China-only e-Lavida PHEV with green NEV plates baked in"
+ ],
+ "P096": [
+  "SCRAP",
+  "XL Sport Concept - never reached production"
+ ],
+ "P097": [
+  "SCRAP",
+  "India/Brazil-only Virtus; 74k-face BeamNG mesh with rippled panels"
+ ],
+ "P098": [
+  "KEEP",
+  "T2 Bay window 67k f - instant proportions, correct twin round lamps + chrome bumpers, steel wheels consistent, panel highlights smooth, no faceting"
+ ]
+}

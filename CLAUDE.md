@@ -35,6 +35,32 @@ Verify the credentials, don't assume them:
 - **Sketchfab:** `GET /v3/me` with `Authorization: Token <t>` → the username. This
   is the only proof a hex-32 string is a real token.
 
+## Repinning a RunPod template does NOT update running workers (learned 2026-08-01)
+
+PATCHing `imageName` on template `hrtuk90f9p` changes what NEW workers pull.
+Warm workers keep serving the OLD image until they cycle, and a scale-to-zero
+endpoint can hold one warm for a long time. There is no error and no warning —
+jobs succeed, returning output from the previous build.
+
+This silently invalidated a whole 347-car wave: the ground-height fix was
+committed, built, and the template repinned, but every sheet in the wave was
+rendered by a warm worker still on the pre-fix image, so cars that were fine
+rendered floating and were nearly scrapped for it.
+
+**Always force a recycle after repinning, then re-render one known case and
+LOOK at it:**
+
+```
+PATCH /v1/endpoints/<id>  {"workersMax":0}   # kill warm workers
+sleep 45
+PATCH /v1/endpoints/<id>  {"workersMax":6}   # restore
+```
+
+The first submit after this returns **HTTP 409 Conflict** while the endpoint
+settles — retry with backoff, it is not a failure. Never conclude a fix "did not
+work" from a render taken before the recycle; that conclusion was drawn twice
+here and was wrong both times.
+
 **Recovering a lost token:** the session transcript at
 `/root/.claude/projects/-home-user-triposr-runpod-worker/<session>.jsonl` is
 append-only and survived the rollback that took the env file. Harvest hex-32
