@@ -484,13 +484,132 @@ check("20c UnsafeURLError is an InputError, so the handler answers cleanly",
 _supply_src = open(os.path.join(HERE, "supply.py")).read()
 check("20d supply no longer reads local paths",
       "os.path.exists(url)" not in _supply_src)
-check("20e supply checks the URL before fetching",
-      "check_fetchable_url" in _supply_src)
+
+# 20e-20f were "check_fetchable_url appears in the source", which is not a
+# test of anything: it passed for a year while every one of these modules
+# followed redirects into private space, because requests.get defaults to
+# allow_redirects=True. Checking the first hop and then letting the client
+# chase a 302 to 169.254.169.254 is the whole attack, reinstated by a default
+# argument. Assert the property that actually matters instead — no module
+# fetches a caller-supplied URL through a bare requests.get.
+_CALLER_URL_MODULES = ("supply", "structure", "services", "drawing",
+                       "reconstruct")
+for _mod in _CALLER_URL_MODULES:
+    _src = open(os.path.join(HERE, f"{_mod}.py")).read()
+    check(f"20e {_mod} fetches caller URLs through fetch_checked",
+          "validation.fetch_checked" in _src)
+    check(f"20f {_mod} makes no bare requests.get call",
+          "requests.get(" not in _src and "_requests().get(" not in _src,
+          f"{_mod} still calls requests.get directly")
+
+# And the redirect itself, behaviourally: a chain that ends in private space
+# must be refused at the hop that goes private, not followed.
+_hops = []
+
+
+class _FakeResponse:
+    def __init__(self, code, location=None):
+        self.status_code = code
+        self.headers = {"location": location} if location else {}
+        self.text = "SHOULD NOT BE REACHED"
+
+    def close(self):
+        pass
+
+
+def _fake_get(url, **kw):
+    _hops.append(url)
+    check("20h redirect target is never actually fetched",
+          "169.254.169.254" not in url, f"fetched {url}")
+    if url == "https://public.example/list.csv":
+        return _FakeResponse(302, "http://169.254.169.254/latest/meta-data/")
+    return _FakeResponse(200)
+
+
+_real_check = validation.check_fetchable_url
+validation.check_fetchable_url = (
+    lambda u, f="url": u if u.startswith("https://public.example")
+    else _real_check(u, f))
+_fake_requests = types.ModuleType("requests")
+_fake_requests.get = _fake_get
+sys.modules["requests"] = _fake_requests
+try:
+    validation.fetch_checked("https://public.example/list.csv", "price_list_url")
+    check("20i a redirect into private space is refused", False, "followed it")
+except validation.UnsafeURLError as e:
+    check("20i a redirect into private space is refused",
+          "169.254.169.254" in str(e), str(e))
+finally:
+    validation.check_fetchable_url = _real_check
+    sys.modules.pop("requests", None)
+
+check("20j the refusal happened before the second fetch", len(_hops) == 1,
+      f"hops: {_hops}")
+
 _recon_src = open(os.path.join(HERE, "reconstruct.py")).read()
-check("20f reconstruct checks its URLs too",
-      _recon_src.count("check_fetchable_url") >= 2)
 check("20g local capture is opt-in only",
       "BUILDING_ALLOW_LOCAL_CAPTURE" in _recon_src)
+
+
+# ---- Test 21: NaN must not clamp, and an id must not be a path -----------
+# max(lo, nan) returns lo and min(hi, lo) returns lo, so clamping a NaN
+# silently produced the BOTTOM of the range. A build_cost of NaN became £100
+# and the extension then "paid for itself" several times over. Neither bound
+# is an answer; there is no safe value to guess.
+for _bad, _label in [(float("nan"), "NaN"), (float("inf"), "inf"),
+                     (float("-inf"), "-inf")]:
+    try:
+        validation._float(_bad, "build_cost", None, 100.0, 5000.0)
+        check(f"21a {_label} build_cost is refused, not clamped", False,
+              "clamped silently")
+    except InputError:
+        check(f"21a {_label} build_cost is refused, not clamped", True)
+
+try:
+    validation._float(10 ** 400, "floor_area_m2", None, 5.0, 2000.0)
+    check("21b a JSON integer too large for a float is a clean error", False)
+except InputError:
+    check("21b a JSON integer too large for a float is a clean error", True)
+except OverflowError:
+    check("21b a JSON integer too large for a float is a clean error", False,
+          "OverflowError escaped as a traceback")
+
+check("21c an ordinary measurement still passes",
+      validation._float(120.0, "floor_area_m2", None, 5.0, 2000.0) == 120.0)
+
+# scan_id is interpolated into a filename by structure, reconstruct and
+# services, and into a delivery object key by all of them. "../../etc/x"
+# wrote outside the output directory — confirmed on disk, not reasoned about.
+for _bad in ["../../etc/x", "..\\..\\win", "a/b", "a b", ".hidden",
+             "x" * 200, "a\x00b"]:
+    # Checked on _identifier directly: routed through parse_job, an unrelated
+    # required-inputs error would satisfy the same except clause and the test
+    # would pass without the sanitiser doing anything.
+    try:
+        validation._identifier(_bad, "scan_id")
+        check(f"21d scan_id {_bad[:14]!r} is refused", False, "accepted")
+    except InputError:
+        check(f"21d scan_id {_bad[:14]!r} is refused", True)
+
+check("21e an ordinary scan_id still passes",
+      parse_job({"mode": "roof", "address": "1 Test St, Birmingham",
+                 "scan_id": "job-2026_08-02.v2"})["scan_id"]
+      == "job-2026_08-02.v2")
+
+# A quantity that is NaN one level down reached json.dump and produced a bare
+# NaN token, which is not RFC 8259 and most consumers reject outright.
+try:
+    validation._quantities({"sloped_area_m2": 100.0,
+                            "materials": {"battens_m": "nan"}})
+    check("21f a nested NaN never reaches the quote", False, "passed through")
+except InputError:
+    check("21f a nested NaN never reaches the quote", True)
+
+check("21g a legitimate nested materials block still passes",
+      validation._quantities(
+          {"sloped_area_m2": 100.0, "covering": "slate",
+           "materials": {"battens_m": 503.3}})["materials"]["battens_m"]
+      == 503.3)
 
 
 # ---- Test 19: the SDK progress call must stay opt-in ----------------------

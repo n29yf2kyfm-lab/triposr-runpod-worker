@@ -141,7 +141,29 @@ def detect_columns(header):
 # --- money -----------------------------------------------------------------
 # Grab the whole numeric token INCLUDING its separators, so the decimal
 # convention can be worked out from the token rather than guessed at.
-_MONEY = re.compile(r"-?\d[\d.,]*\d|-?\d")
+#
+# Three alternatives, tried in order, and each one is here because the naive
+# version got a real price wrong by a factor of 100:
+#   1. space-grouped thousands ("1 234,56") — Excel's # ##0.00 format and the
+#      default in several European locales. The old pattern stopped at the
+#      space and read £1.00.
+#   2. a leading decimal separator (".50") — a routine rendering of fifty
+#      pence. The old pattern required a leading digit, skipped the dot, and
+#      read £50.00. On a 1,000-tile roof that is £50,000 instead of £500.
+#   3. the ordinary form.
+_MONEY = re.compile(
+    r"-?\d{1,3}(?:[  ]\d{3})+(?:[.,]\d+)?"
+    r"|-?[.,]\d+"
+    r"|-?\d[\d.,]*\d"
+    r"|-?\d")
+
+# Scientific notation in a price cell is a mangled export, not a price. The
+# old pattern salvaged the mantissa, so "1.5e3" quoted as £1.50.
+_EXPONENT = re.compile(r"\d\s*[eE][-+]?\d")
+
+# Well-formed comma-grouped thousands. "1,2345" is not — no convention writes
+# that — so it is refused rather than read as 12345.
+_GROUPED = re.compile(r"^-?\d{1,3}(?:,\d{3})+$")
 
 # A comma followed by exactly two digits at the end of a number is a decimal
 # comma: no UK convention writes "12,50" for twelve pounds fifty, but half of
@@ -162,8 +184,16 @@ def _normalise_decimal(token):
 
     When both separators appear the LAST one is the decimal point, which
     resolves the first two without ambiguity. With only commas, two trailing
-    digits mean a decimal comma and anything else means thousands grouping.
+    digits mean a decimal comma and anything else must be well-formed
+    thousands grouping — "1,2345" is neither, and returning None so the
+    caller refuses it beats reading it as £12,345.
+
+    Returns a float-readable string, or None if the token is not a number
+    under any convention.
     """
+    # A space (or non-breaking space) inside a numeric token is only ever
+    # thousands grouping.
+    token = token.replace(" ", "").replace(" ", "")
     if "." in token and "," in token:
         if token.rfind(",") > token.rfind("."):        # 1.234,56 — European
             return token.replace(".", "").replace(",", ".")
@@ -171,7 +201,9 @@ def _normalise_decimal(token):
     if "," in token:
         if _DECIMAL_COMMA.search(token):               # 12,50 — European
             return token.replace(",", ".")
-        return token.replace(",", "")                  # 1,234 — thousands
+        if _GROUPED.match(token):                      # 1,234 — thousands
+            return token.replace(",", "")
+        return None
     return token
 
 
@@ -192,6 +224,8 @@ def parse_money(text):
     cleaned = str(text).strip()
     if not cleaned:
         return None
+    if _EXPONENT.search(cleaned):
+        return None
     # Strip a trailing "p" pence convention only when there is no decimal
     # point and no pound sign: "85p" is 0.85, but "£85p" is a typo we ignore.
     pence = bool(re.fullmatch(r"\d+\s*p", cleaned, re.I))
@@ -199,8 +233,11 @@ def parse_money(text):
     match = _MONEY.search(cleaned.replace("£", " "))
     if not match:
         return None
+    normalised = _normalise_decimal(match.group(0))
+    if normalised is None:
+        return None
     try:
-        value = float(_normalise_decimal(match.group(0)))
+        value = float(normalised)
     except ValueError:
         # A token that is not a readable number at all — "12.50.60" and the
         # like. Refuse it rather than salvaging a prefix, which is how a
@@ -217,16 +254,30 @@ def vat_basis_of(text, default=VAT_UNKNOWN):
     Only an EXPLICIT statement counts. Silence means unknown, and unknown
     stays unknown all the way to the caller rather than defaulting to
     whichever basis happens to make the numbers look reasonable.
+
+    PUNCTUATION IS NORMALISED FIRST, and that is not a detail. The first
+    version matched on `[\\s.]*` between the word and "vat", so "ex VAT" and
+    "ex. VAT" worked but "ex-VAT" did not — the hyphenated form this module's
+    own docstrings use throughout. With a file-level vat='inc', a line
+    reading "price excludes VAT" was divided by 1.2 anyway, putting two
+    identical tiles 16.7% apart. Collapsing everything that is not a letter
+    or digit to a single space makes the whole family work at once.
     """
     if not text:
         return default
-    blob = str(text).lower()
-    if re.search(r"\b(?:ex|excl|excluding|plus|nett?)\b[\s.]*(?:of\s+)?vat",
-                 blob) or \
-            "+vat" in blob.replace(" ", "") or "exvat" in blob.replace(" ", ""):
+    raw = str(text).lower()
+    compact = re.sub(r"[^a-z0-9+]", "", raw)
+    blob = re.sub(r"[^a-z0-9]+", " ", raw)
+
+    ex_word = r"(?:ex|excl|exclude[sd]?|excluding|exclusive|plus|nett?|before)"
+    inc_word = r"(?:inc|incl|include[sd]?|including|inclusive)"
+    if (re.search(rf"\b{ex_word}\b(?:\s+of)?\s*vat", blob)
+            or re.search(rf"\bvat\b\s*(?:is\s+)?{ex_word}\b", blob)
+            or "+vat" in compact or "exvat" in compact):
         return VAT_EX
-    if re.search(r"\b(inc|incl|including)[\s.]*vat", blob) or \
-            "incvat" in blob.replace(" ", "") or "vat inclusive" in blob:
+    if (re.search(rf"\b{inc_word}\b(?:\s+of)?\s*vat", blob)
+            or re.search(rf"\bvat\b\s*(?:is\s+)?{inc_word}\b", blob)
+            or "incvat" in compact):
         return VAT_INC
     return default
 
@@ -252,13 +303,27 @@ def to_ex_vat(amount, basis, rate=UK_VAT_RATE):
 # --- pack sizes ------------------------------------------------------------
 # Ordered: the first pattern to match wins, so the explicit forms are tried
 # before the bare parenthesised number.
+
+# Units that can follow a number in a merchant description. If one of these
+# comes next, the number is a LENGTH, not a pack count: "per 4.8m" was read
+# as a pack of 4, which divided a £28.50 joist to £7.13 and reported nothing.
+_TRAILING_UNIT = (r"(?:m|mm|cm|metre|metres|meter|meters|kg|g|t|l|ml|"
+                  r"m2|m²|sqm|m3|m³|ft|in|yd)\b")
+
 _PACK_PATTERNS = (
     re.compile(r"\b(?:pack|box|bag|bundle|case|carton|crate)\s*of\s*(\d+)", re.I),
     re.compile(r"\b(\d+)\s*(?:per\s*)?(?:pack|pk|box|bag|bundle|case)\b", re.I),
     re.compile(r"\bpack\s*(?:size)?\s*[:=]?\s*(\d+)\b", re.I),
-    re.compile(r"\bper\s*(\d+)\b", re.I),
+    # "per N" only counts when N is a whole count of things, not the leading
+    # digits of a measurement.
+    re.compile(rf"\bper\s*(\d+)(?![.,]\d)(?!\s*{_TRAILING_UNIT})\b", re.I),
     re.compile(r"\((\d{2,4})\)\s*$"),
 )
+
+# "2400x1200" — a board or sheet size. Its components turn up in brackets on
+# the same line ("Gyproc WallBoard 2400x1200 (2400)") and were read as a pack
+# of 2400.
+_DIMENSION = re.compile(r"(\d+)\s*[x×]\s*(\d+)(?:\s*[x×]\s*(\d+))?", re.I)
 
 
 def parse_pack(text):
@@ -271,12 +336,20 @@ def parse_pack(text):
     if not text:
         return 1
     blob = str(text)
+    # Numbers that are part of a stated size. "Gyproc WallBoard 2400x1200
+    # (2400)" is a board, not a pack of two thousand four hundred boards.
+    sizes = set()
+    for match in _DIMENSION.finditer(blob):
+        sizes.update(int(g) for g in match.groups() if g)
+
     for pattern in _PACK_PATTERNS:
         match = pattern.search(blob)
         if match:
             try:
                 count = int(match.group(1))
             except ValueError:
+                continue
+            if count in sizes:
                 continue
             # A "pack of 1" is meaningless and a five-digit "pack" is a
             # product code that happened to sit in brackets.
@@ -426,16 +499,39 @@ TIER_KEYWORDS = {
 MIN_MATCH_SCORE = 4
 
 
+# An accessory names the product it is FOR. "Drywall screws for plasterboard"
+# and "plasterboard adhesive" both scored on "plasterboard" alone and were
+# filed as plasterboard at £0.0156/m2 and £12.00/m2 against a true £3.40 —
+# three "prices" for one product, two of them for something else entirely.
+# The weighted median survived three lines; it does not survive a list where
+# the fixings outnumber the boards, which is most real merchant lists.
+_ACCESSORY_WORDS = (
+    "screw", "nail", "fixing", "fixings", "adhesive", "glue", "primer",
+    "sealant", "silicone", "tape", "jointing", "joint compound", "filler",
+    "bead", "mesh", "cleaner", "solvent", "flux", "clip", "clips", "bracket",
+    "hanger", "connector", "plug", "anchor", "washer", "bolt", "wall plug",
+)
+_ACCESSORY = re.compile(
+    r"\b(?:" + "|".join(re.escape(w) for w in _ACCESSORY_WORDS) + r")s?\b",
+    re.I)
+
+
 def match_product(description):
     """Best (product, score) for a description, or (None, 0).
 
     Scores are summed over every keyword present, so "roofing batten" beats a
     bare "batten" and a line mentioning both "tile" and "batten" lands on
     battens, which is the correct reading of "tile batten".
+
+    An accessory line is refused rather than filed under the product it names,
+    because a mis-filed price silently corrupts a tier and the corruption is
+    invisible downstream — a box of screws is not a square metre of anything.
     """
     if not description:
         return None, 0
     blob = str(description).lower()
+    if _ACCESSORY.search(blob):
+        return None, 0
     best, best_score = None, 0
     for product, keywords in PRODUCT_KEYWORDS.items():
         score = sum(weight for word, weight in keywords if word in blob)
@@ -567,7 +663,14 @@ def normalise_line(line, vat_rate=UK_VAT_RATE):
 
     if line.pack > 1:                                      # 2. per unit
         price /= line.pack
-        line.notes.append(f"divided by pack of {line.pack}")
+        # Escalated deliberately. A pack division cuts the price by the pack
+        # count, so reading a length as a pack ("per 4.8m" -> 4) quartered a
+        # joist price and nothing surfaced it: the report only escalates
+        # notes carrying the literal "check this line", and this one did not.
+        # The parse is much tighter now, but a wrong pack is still the single
+        # largest silent error this importer can make, so it gets seen.
+        line.notes.append(
+            f"divided by pack of {line.pack}, check this line")
 
     wanted = prices.CATALOGUE[product]["unit"]             # 3. unit convert
     line.catalogue_unit = wanted
@@ -892,9 +995,7 @@ def run(spec, prog, output_dir):
         # on nothing but a caller-supplied string. A price list arrives over
         # HTTP or inline; there is no case for reading the worker's disk.
         import validation
-        validation.check_fetchable_url(url, "price_list_url")
-        import requests
-        response = requests.get(url, timeout=120)
+        response = validation.fetch_checked(url, "price_list_url", timeout=120)
         response.raise_for_status()
         text = response.text
 

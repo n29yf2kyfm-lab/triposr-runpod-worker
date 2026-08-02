@@ -270,8 +270,8 @@ def fetch_capture(spec, work_dir):
         for i, url in enumerate(spec["image_urls"]):
             dest = os.path.join(work_dir, f"i{i:06d}.jpg")
             try:
-                validation.check_fetchable_url(url, f"image_urls[{i}]")
-                r = requests.get(url, timeout=60)
+                r = validation.fetch_checked(url, f"image_urls[{i}]",
+                                             timeout=60)
                 r.raise_for_status()
                 with open(dest, "wb") as f:
                     f.write(r.content)
@@ -291,8 +291,8 @@ def fetch_capture(spec, work_dir):
         if local_ok and os.path.exists(spec["video_url"]):
             shutil.copy(spec["video_url"], video)
         else:
-            validation.check_fetchable_url(spec["video_url"], "video_url")
-            r = _requests().get(spec["video_url"], timeout=600, stream=True)
+            r = validation.fetch_checked(spec["video_url"], "video_url",
+                                         timeout=600, stream=True)
             r.raise_for_status()
             with open(video, "wb") as f:
                 for chunk in r.iter_content(1 << 20):

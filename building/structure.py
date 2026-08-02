@@ -602,11 +602,10 @@ def run_mode(spec, prog, output_dir):
 
     if not os.path.exists(cloud):
         import validation
-        validation.check_fetchable_url(cloud, "point_cloud_url")
-        import requests
         directory = paths.ensure(output_dir)
         local = os.path.join(directory, "cloud.ply")
-        response = requests.get(cloud, timeout=600)
+        response = validation.fetch_checked(cloud, "point_cloud_url",
+                                            timeout=600)
         response.raise_for_status()
         with open(local, "wb") as f:
             f.write(response.content)

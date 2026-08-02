@@ -588,11 +588,10 @@ def run(spec, prog, output_dir):
         if local and os.path.exists(local):
             path = local
         else:
-            validation.check_fetchable_url(pdf_url, "drawing_url")
-            import requests
             os.makedirs(output_dir, exist_ok=True)
             path = os.path.join(output_dir, "drawing.pdf")
-            response = requests.get(pdf_url, timeout=120)
+            response = validation.fetch_checked(pdf_url, "drawing_url",
+                                                timeout=120)
             response.raise_for_status()
             with open(path, "wb") as f:
                 f.write(response.content)

@@ -75,7 +75,7 @@ def _int(value, name, default=None, lo=None, hi=None):
         return None
     try:
         out = int(value)
-    except (TypeError, ValueError):
+    except (TypeError, ValueError, OverflowError):
         raise InputError(f"{name} must be an integer, got {value!r}")
     if lo is not None:
         out = max(lo, out)
@@ -85,14 +85,32 @@ def _int(value, name, default=None, lo=None, hi=None):
 
 
 def _float(value, name, default=None, lo=None, hi=None):
+    """Parse a float, clamp it, and name the field in any error.
+
+    NaN IS REFUSED RATHER THAN CLAMPED, and the difference is not academic.
+    max() and min() both return their *first* argument when the other is NaN,
+    so clamping a NaN to [lo, hi] silently yields `lo` — the bottom of the
+    range. A build_cost of NaN became £100, and the extension valuation then
+    reported that the job paid for itself several times over. A quantity that
+    is not a number has to stop here; there is no safe value to guess.
+
+    Infinity is refused for the same reason: it clamps to `hi`, which is a
+    cap chosen as a sanity bound, not as an answer.
+    """
     if value is None:
         value = default
     if value is None:
         return None
     try:
         out = float(value)
-    except (TypeError, ValueError):
+    except (TypeError, ValueError, OverflowError):
         raise InputError(f"{name} must be a number, got {value!r}")
+    if out != out:
+        raise InputError(
+            f"{name} is not a number (NaN). Check the value that produced it "
+            f"— clamping it to the nearest bound would hide the fault.")
+    if out in (float("inf"), float("-inf")):
+        raise InputError(f"{name} is infinite, which is not a measurement")
     if lo is not None:
         out = max(lo, out)
     if hi is not None:
@@ -126,10 +144,13 @@ def _quantities(value):
 
     Negative and non-finite are still refused. Those cannot mean anything.
 
-    Values that are not numbers pass through untouched, because roof mode's
-    quantities carry a nested `materials` block and a covering name alongside
-    the measurements, and this validator has no business flattening the shape
-    its own consumer expects.
+    Values that are not numbers pass through, because roof mode's quantities
+    carry a nested `materials` block and a covering name alongside the
+    measurements, and this validator has no business flattening the shape its
+    own consumer expects. Nested blocks are walked rather than waved through,
+    though: takeoff.py floats whatever it finds in `materials`, so a string
+    "nan" one level down became a bare NaN token in the delivered quote — not
+    valid JSON, and rejected by most consumers.
     """
     if value is None:
         return None
@@ -142,12 +163,29 @@ def _quantities(value):
         name = str(key).strip()
         if not name:
             raise InputError("quantities has an entry with no product name")
-        if isinstance(amount, (dict, list, str)) or amount is None:
+        if isinstance(amount, dict):
+            out[name] = _quantities(amount) or {}
+            continue
+        if isinstance(amount, str):
+            # A covering name is a legitimate string. A string that parses as
+            # a non-finite number is not — it is a NaN wearing quotes.
+            try:
+                probe = float(amount)
+            except (TypeError, ValueError, OverflowError):
+                out[name] = amount
+                continue
+            if probe != probe or probe in (float("inf"), float("-inf")):
+                raise InputError(
+                    f"quantities[{name!r}] is {amount!r}, which is not a "
+                    f"finite number")
+            out[name] = amount
+            continue
+        if isinstance(amount, list) or amount is None:
             out[name] = amount
             continue
         try:
             number = float(amount)
-        except (TypeError, ValueError):
+        except (TypeError, ValueError, OverflowError):
             raise InputError(
                 f"quantities[{name!r}] must be a number — got {amount!r}")
         if number != number or number in (float("inf"), float("-inf")):
@@ -176,6 +214,49 @@ def _str_list(value, name, max_len):
     return out
 
 
+# Characters an identifier may contain. Deliberately narrow: scan_id and
+# project_id are interpolated into filenames under the output directory AND
+# into delivery object keys, so anything that means something to a path or a
+# URL has to be excluded at the door.
+_IDENTIFIER_OK = set(
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.")
+MAX_IDENTIFIER_LEN = 128
+
+
+def _identifier(value, name):
+    """Validate an id that will be used as a filename and an object key.
+
+    structure, reconstruct and services all build an output path as
+    f"{scan_id}.ply" and friends, so a scan_id of "../../etc/x" wrote outside
+    the output directory — confirmed, not theoretical. The other modules
+    escaped that only by accident, because their template happens to put a
+    literal prefix in front ("quote_..") which fails to open rather than
+    escaping. Accident is not a control.
+
+    Refused rather than rewritten. Silently stripping the dangerous parts
+    would map two different scans onto one filename, and the second would
+    overwrite the first.
+    """
+    text = str(value or "").strip()
+    if not text:
+        return None
+    if len(text) > MAX_IDENTIFIER_LEN:
+        raise InputError(
+            f"{name} is {len(text)} characters; the cap is "
+            f"{MAX_IDENTIFIER_LEN}")
+    bad = sorted({c for c in text if c not in _IDENTIFIER_OK})
+    if bad:
+        raise InputError(
+            f"{name} may only contain letters, digits, dot, dash and "
+            f"underscore — {''.join(repr(c) for c in bad[:5])} is not allowed. "
+            f"It is used as a filename and as a delivery key.")
+    if text.startswith(".") or ".." in text:
+        raise InputError(
+            f"{name} must not start with a dot or contain '..' — it is used "
+            f"as a filename")
+    return text
+
+
 class UnsafeURLError(InputError):
     """Raised for a URL the worker must not fetch on a caller's behalf."""
 
@@ -194,11 +275,17 @@ def check_fetchable_url(url, field="url"):
     into loopback, private, link-local, or otherwise reserved space — which
     is where 169.254.169.254 and every internal service live.
 
+    Checking the URL is not enough on its own — see fetch_checked below. A
+    302 from a public host to 169.254.169.254 walks straight past a check
+    that only ever looks at the first hop, and requests follows redirects by
+    default. Every caller-supplied URL must be fetched through fetch_checked,
+    not through requests.get.
+
     HONEST LIMIT: this resolves the name to check it and the HTTP client
     resolves it again to connect, so a name that changes answer between the
     two calls (DNS rebinding) can still slip past. Closing that needs the
     connection pinned to the vetted address. This stops the straightforward
-    attempt, which is the one that actually gets made.
+    attempts, which are the ones that actually get made.
     """
     import ipaddress
     import socket
@@ -225,15 +312,64 @@ def check_fetchable_url(url, field="url"):
     except OSError as e:
         raise UnsafeURLError(f"{field}: cannot resolve {host!r} ({e})")
 
+    # RFC 6598 shared address space: the range carriers and container
+    # platforms use for internal NAT. Python reports it as neither private
+    # nor reserved, so it has to be named.
+    cgnat = ipaddress.ip_network("100.64.0.0/10")
+
     for info in infos:
         address = ipaddress.ip_address(info[4][0])
-        if (address.is_private or address.is_loopback or address.is_reserved
-                or address.is_link_local or address.is_multicast
-                or address.is_unspecified):
-            raise UnsafeURLError(
-                f"{field} resolves to {address}, which is a private or "
-                f"reserved address. The worker only fetches public URLs.")
+        mapped = getattr(address, "ipv4_mapped", None)
+        for candidate in (address, mapped):
+            if candidate is None:
+                continue
+            if (candidate.is_private or candidate.is_loopback
+                    or candidate.is_reserved or candidate.is_link_local
+                    or candidate.is_multicast or candidate.is_unspecified
+                    or (candidate.version == 4 and candidate in cgnat)):
+                raise UnsafeURLError(
+                    f"{field} resolves to {address}, which is a private or "
+                    f"reserved address. The worker only fetches public URLs.")
     return text
+
+
+# A redirect chain is still a fetch. Cap it, and check every hop.
+MAX_REDIRECTS = 5
+_REDIRECT_CODES = (301, 302, 303, 307, 308)
+
+
+def fetch_checked(url, field="url", timeout=120, stream=False, headers=None):
+    """GET a caller-supplied URL, validating the destination at every hop.
+
+    check_fetchable_url on its own guards the first hop only. requests
+    follows redirects by default, so a public host the check allows can
+    answer 302 Location: http://169.254.169.254/latest/meta-data/ and the
+    worker fetches it and returns the body — the whole attack the check
+    exists to stop, reinstated by a default argument. Confirmed against a
+    local server, not reasoned about.
+
+    Every caller-supplied URL in this worker goes through here. Fixed API
+    endpoints the worker chooses itself (Land Registry, OS, postcodes.io) do
+    not need it, because no caller controls where they point.
+    """
+    import requests
+    from urllib.parse import urljoin
+
+    current = check_fetchable_url(url, field)
+    for _ in range(MAX_REDIRECTS):
+        response = requests.get(current, timeout=timeout, stream=stream,
+                                headers=headers, allow_redirects=False)
+        if response.status_code not in _REDIRECT_CODES:
+            return response
+        location = response.headers.get("location")
+        response.close()
+        if not location:
+            raise UnsafeURLError(
+                f"{field} answered {response.status_code} with no Location")
+        current = check_fetchable_url(urljoin(current, location), field)
+    raise UnsafeURLError(
+        f"{field} redirected more than {MAX_REDIRECTS} times without "
+        f"answering")
 
 
 def parse_job(job_input):
@@ -249,8 +385,8 @@ def parse_job(job_input):
 
     spec = {
         "mode": mode,
-        "project_id": (str(job_input.get("project_id") or "").strip() or None),
-        "scan_id": (str(job_input.get("scan_id") or "").strip() or None),
+        "project_id": _identifier(job_input.get("project_id"), "project_id"),
+        "scan_id": _identifier(job_input.get("scan_id"), "scan_id"),
         # "open" = first fix, services exposed. "closed" = finished building.
         # The pairing of the two is what produces the X-ray (PLAN.md §1.2).
         "stage": _one_of(job_input.get("stage"), "stage",

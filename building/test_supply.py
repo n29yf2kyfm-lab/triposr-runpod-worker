@@ -502,6 +502,98 @@ except ImportError as e:
           f"imported before validating: {e}")
 
 
+# ---- Test 12: money forms that produced confident wrong prices -----------
+# Every one of these was live while all 150 tests above passed. They are
+# grouped here because they share a cause: a numeric token was salvaged out
+# of a cell the parser did not actually understand.
+
+# ".50" is a routine Excel rendering of fifty pence. The old pattern required
+# a leading digit, skipped the dot and read £50.00 — a 100x overprice. On a
+# 1,000-tile roof that is £50,000 of tiles instead of £500.
+check("12a a leading decimal point is fifty pence, not fifty pounds",
+      S.parse_money(".50") == 0.5, str(S.parse_money(".50")))
+
+# Space-grouped thousands: Excel's "# ##0.00" and several European locales.
+# The old pattern stopped at the space and read £1.00 out of £1,234.56.
+check("12b space-grouped thousands read whole",
+      S.parse_money("1 234,56") == 1234.56, str(S.parse_money("1 234,56")))
+check("12c space-grouped thousands with a decimal point too",
+      S.parse_money("1 234.56") == 1234.56, str(S.parse_money("1 234.56")))
+
+# Refusals. The module's stated policy is that a cell it cannot read is
+# refused rather than salvaged for a prefix, and these were the exceptions.
+check("12d scientific notation is a mangled export, not a price",
+      S.parse_money("1.5e3") is None, str(S.parse_money("1.5e3")))
+check("12e a malformed comma group is refused, not read as thousands",
+      S.parse_money("1,2345") is None, str(S.parse_money("1,2345")))
+check("12f the original mangled-cell case still refuses",
+      S.parse_money("12.50.60") is None)
+
+# Everything that already worked must keep working.
+for _text, _want in [("£12.50", 12.5), ("1,234.56", 1234.56),
+                     ("1.234,56", 1234.56), ("12,50", 12.5),
+                     ("85p", 0.85), ("4.99", 4.99), ("GBP 4.99", 4.99)]:
+    check(f"12g {_text!r} still reads as {_want}",
+          S.parse_money(_text) == _want, str(S.parse_money(_text)))
+
+# "per 4.8m" is a LENGTH. Read as a pack of 4 it quartered a £28.50 joist to
+# £7.13, and the report's warnings list came back empty.
+check("12h 'per 4.8m' is a length, not a pack of four",
+      S.parse_pack("Timber C24 47x225 per 4.8m") == 1,
+      str(S.parse_pack("Timber C24 47x225 per 4.8m")))
+check("12i 'per 2.4m' likewise",
+      S.parse_pack("C16 studwork per 2.4m") == 1)
+check("12j a bracketed board dimension is not a pack of 2400",
+      S.parse_pack("Gyproc WallBoard 2400x1200 (2400)") == 1,
+      str(S.parse_pack("Gyproc WallBoard 2400x1200 (2400)")))
+check("12k a real pack is still read", S.parse_pack("Screws box of 200") == 200)
+check("12l 'per 24' with no unit after it is still a pack",
+      S.parse_pack("Roof tiles per 24") == 24)
+check("12m a bracketed count with no dimension on the line is still a pack",
+      S.parse_pack("Galvanised nails (500)") == 500)
+
+# A pack division cuts the price by the pack count, so it has to be visible.
+_packed = S.normalise_line(S.Line(
+    description="Roof tile pack of 24", price=48.0, unit="pack",
+    vat=S.VAT_EX), S.UK_VAT_RATE)
+check("12n a pack division carries the phrase the report escalates on",
+      any("check this line" in n for n in _packed.notes),
+      str(_packed.notes))
+
+# ex-VAT is this module's own spelling throughout its docstrings, and it read
+# as unknown. With a file-level vat='inc', a line saying "excludes VAT" was
+# divided by 1.2 anyway, putting two identical tiles 16.7% apart.
+for _text, _want in [("ex-VAT", S.VAT_EX), ("excludes VAT", S.VAT_EX),
+                     ("exclusive of VAT", S.VAT_EX),
+                     ("VAT excluded", S.VAT_EX), ("before VAT", S.VAT_EX),
+                     ("inc-VAT", S.VAT_INC), ("includes VAT", S.VAT_INC),
+                     ("inclusive of VAT", S.VAT_INC),
+                     ("VAT included", S.VAT_INC)]:
+    check(f"12o {_text!r} reads as {_want}",
+          S.vat_basis_of(_text) == _want, S.vat_basis_of(_text))
+
+check("12p silence still means unknown",
+      S.vat_basis_of("Roof tile 420x330") == S.VAT_UNKNOWN)
+check("12q the forms that already worked still work",
+      S.vat_basis_of("ex VAT") == S.VAT_EX
+      and S.vat_basis_of("12.50+VAT") == S.VAT_EX
+      and S.vat_basis_of("inc vat") == S.VAT_INC)
+
+# An accessory names the product it is for. Filed under that product, its
+# price corrupts the tier: £0.0156/m2 for screws against £3.40 for board.
+for _acc in ["Drywall screws for plasterboard 38mm box of 200",
+             "Plasterboard adhesive bag", "Copper pipe clips 15mm",
+             "Jointing tape for plasterboard 90m"]:
+    check(f"12r accessory refused: {_acc[:30]!r}",
+          S.match_product(_acc)[0] is None, str(S.match_product(_acc)))
+
+check("12s the real product still matches",
+      S.match_product("Gyproc plasterboard 12.5mm 2400x1200")[0]
+      == "plasterboard")
+check("12t and so does a batten",
+      S.match_product("Roofing batten 25x50 treated")[0] == "battens")
+
+
 # ==========================================================================
 print()
 for f in FAILED:
