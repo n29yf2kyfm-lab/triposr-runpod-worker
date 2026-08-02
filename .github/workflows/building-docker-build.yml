@@ -80,6 +80,9 @@ jobs:
       - name: Run planning constraint tests
         run: python building/test_planning.py
 
+      - name: Run scan registration tests
+        run: python building/test_register.py
+
   build:
     needs: test
     runs-on: ubuntu-latest

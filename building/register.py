@@ -109,8 +109,13 @@ class Transform:
             self.tz + other.tz)
 
     def as_dict(self):
+        # Signed, in (-180, 180]. A registration correction is a small angle
+        # either side of zero, and reporting the same -12 degree correction
+        # as 348 is technically true and useless: it reads as most of a full
+        # turn, and nobody eyeballing a fit can tell 348 from a failure.
+        degrees = (math.degrees(self.yaw) + 180.0) % 360.0 - 180.0
         return {
-            "yaw_deg": round(math.degrees(self.yaw), 4),
+            "yaw_deg": round(degrees, 4),
             "translation_m": [round(self.tx, 4), round(self.ty, 4),
                               round(self.tz, 4)],
         }
@@ -279,6 +284,38 @@ def _better(candidate, incumbent):
     return candidate["cost"] < incumbent["cost"]
 
 
+def _thin(points, target_count):
+    """A bounded, evenly-spread subset. DELIBERATELY NOT A STRIDE.
+
+    This one line is why the module did not work for a fortnight.
+
+    A stride assumes the cloud's order carries no structure. It always does:
+    a PLY is written in whatever order the producer chose, and a room
+    generator that appends wall points in pairs — (i, 0) then (i, depth) —
+    puts one wall on even indices and its opposite on odd. An even stride
+    then keeps one member of every pair forever, which deleted TWO OF THE
+    FOUR WALLS:
+
+        full   {x=0: 2758, x=5: 2758, y=0: 3518, y=4: 3276}
+        [::6]  {x=0:  896, x=5:   24, y=0: 1132, y=4:    0}
+
+    Half a room has a different centroid from a whole one — 0.72m different
+    here, five times the widest polish radius — so the centroid start landed
+    somewhere ICP could never walk back from. It presented as "the two scans
+    do not align", and the fault was in the sampler, not the alignment.
+
+    The comment two lines below this call has always warned about exactly
+    this hazard, and applied the lesson only to the target.
+
+    A seeded shuffle cannot correlate with write order however the cloud was
+    written, and being seeded it stays reproducible: the same pair of scans
+    always aligns the same way, which matters when someone re-runs a job to
+    check a measurement they are about to drill against.
+    """
+    import random
+    return random.Random(0).sample(points, target_count)
+
+
 def align(source, target, inlier_m=INLIER_M, max_iterations=MAX_ITERATIONS):
     """Iterative closest point, 3-DOF, from a centroid start.
 
@@ -290,11 +327,22 @@ def align(source, target, inlier_m=INLIER_M, max_iterations=MAX_ITERATIONS):
     if not source or not target:
         raise RegistrationError("both scans need points to align")
 
-    # Work with a bounded, evenly-spread subset. Striding rather than taking
-    # a prefix matters: a prefix of a scan is one wall, and a fit computed
-    # from one wall is free to slide along it.
+    # Work with a bounded, evenly-spread subset — see _thin, which is where
+    # this went wrong. A prefix of a scan is one wall, and a fit computed
+    # from one wall is free to slide along it; a STRIDE of a scan can be two
+    # walls of four, which is worse, because it still looks like a room.
+    #
+    # Centroid and principal yaw come from the FULL cloud, before thinning.
+    # Both are O(n) single passes, so there is nothing to save by computing
+    # them from the subset — and computing them from the subset costs
+    # accuracy: the centroid of 3000 samples of an 18000-point room differs
+    # from the true centroid by sampling noise, which lands the ICP
+    # initialisation ~14mm out and leaves it there.
+    cs, ct = centroid(source), centroid(target)
+    yaw_source = principal_yaw(source)
+
     if len(source) > MAX_ALIGN_POINTS:
-        source = source[::max(1, len(source) // MAX_ALIGN_POINTS)]
+        source = _thin(source, MAX_ALIGN_POINTS)
     # The TARGET is never thinned. Only the source costs time — it drives the
     # lookups — while the target only costs memory in the grid, and a denser
     # target strictly improves every correspondence. Thinning it was actively
@@ -303,12 +351,11 @@ def align(source, target, inlier_m=INLIER_M, max_iterations=MAX_ITERATIONS):
     # points end up further from where a source point actually lands.
 
     grid = Grid(target, max(inlier_m, GRID_M))
-    cs, ct = centroid(source), centroid(target)
 
     # Square both scans up first, then let ICP polish. A rectangle looks the
     # same rotated by 90 degrees, so all four are tried and scored — cheap,
     # and it removes the one failure mode a global yaw estimate has.
-    base = principal_yaw(target) - principal_yaw(source)
+    base = yaw_source - principal_yaw(target)
 
     best = None
     for quarter in range(4):
