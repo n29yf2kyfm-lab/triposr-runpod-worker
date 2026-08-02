@@ -569,7 +569,14 @@ def parse_job(job_input):
                                  None, 1.0, 5000.0)
     spec["scale_note"] = (str(job_input.get("scale_note") or "").strip()
                           or None)
-    spec["confirm_scale"] = bool(job_input.get("confirm_scale", False))
+    # Either `true` (a bare assertion) or the ratio the user actually read
+    # off the sheet, which drawing.py cross-checks against the scale it
+    # resolved. The value form is the one that cannot go stale.
+    _confirm = job_input.get("confirm_scale", False)
+    spec["confirm_scale"] = (
+        _float(_confirm, "confirm_scale", None, 1.0, 5000.0)
+        if isinstance(_confirm, (int, float)) and not isinstance(_confirm, bool)
+        else bool(_confirm))
     spec["calibration"] = job_input.get("calibration") or None
     spec["traced"] = job_input.get("traced") or None
     # A local PDF, and the page's true size in points. Without the latter,
