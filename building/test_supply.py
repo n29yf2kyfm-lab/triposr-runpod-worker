@@ -587,6 +587,33 @@ for _acc in ["Drywall screws for plasterboard 38mm box of 200",
     check(f"12r accessory refused: {_acc[:30]!r}",
           S.match_product(_acc)[0] is None, str(S.match_product(_acc)))
 
+# The COVERAGE trap the module docstring has always named, and which nothing
+# implemented — TILES_PER_M2 and COVERAGE_NOTE were referenced only by their
+# own definitions. A merchant quoting slate by the covered square metre is
+# not quoting what the catalogue prices, which is per tile.
+for _desc, _per_m2 in [("Natural slate 500x250 roofing", 21.0),
+                       ("Concrete interlocking roof tile", 9.7),
+                       ("Concrete plain roof tile", 60.0)]:
+    _line = S.normalise_line(
+        S.Line(description=_desc, price=48.50, unit="m2", vat=S.VAT_EX),
+        S.UK_VAT_RATE)
+    check(f"12u {_desc[:28]!r} converts per m2 to per tile",
+          abs(_line.unit_price_ex_vat - 48.50 / _per_m2) < 1e-6,
+          str(_line.unit_price_ex_vat))
+    check(f"12v and flags the gauge as an assumption: {_desc[:22]!r}",
+          any("ASSUMED" in n and "check this line" in n
+              for n in _line.notes), str(_line.notes))
+
+# Interlocking is 9.7 per m2 and plain is 60 — a factor of six. Where the
+# description does not say which, nothing is converted.
+_vague = S.normalise_line(
+    S.Line(description="Roof tile", price=48.50, unit="m2", vat=S.VAT_EX),
+    S.UK_VAT_RATE)
+check("12w an unidentifiable covering is NOT converted",
+      _vague.unit_price_ex_vat == 48.50, str(_vague.unit_price_ex_vat))
+check("12x and says why, with the numbers",
+      any("factor of six" in n for n in _vague.notes), str(_vague.notes))
+
 check("12s the real product still matches",
       S.match_product("Gyproc plasterboard 12.5mm 2400x1200")[0]
       == "plasterboard")

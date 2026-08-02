@@ -301,7 +301,7 @@ raw accuracy. Hence both, behind a quality flag.
 | Reconstruction (quality) | **COLMAP** | BSD |
 | Photoreal twin | **gsplat / Nerfstudio** | Apache 2.0 |
 | Point cloud processing | **Open3D**, **PDAL** | MIT / BSD |
-| Registration | **ICP** (Open3D) | MIT |
+| Registration | **ICP** — own implementation, pure stdlib (`register.py`), not Open3D | — |
 | Point cloud → IFC | **Cloud2BIM** | MIT |
 | IFC read/write | **IfcOpenShell** | LGPL |
 | Quantity takeoff | **QTO Buccaneer** | Open |
@@ -534,7 +534,13 @@ defect register); RunPod serverless workers behind both.
 
 # Part 8 — Build order
 
-**Status at this commit: 611 tests passing, `trellis2/` untouched throughout.**
+**Status at this commit: 1588 tests passing, `trellis2/` untouched throughout.**
+
+Three independent forensic audits ran against this code on 2026-08-02 and found real
+damage behind green ticks — a mode that crashed on every job, an X-ray that could not
+report a hazard, wall lengths 5x over, a 100x price error, an SSRF hole. Every one was
+found by EXECUTING, none by reading, and all 1231 tests passed while they were live. The
+states below are what the code does when run, not what it was written to do.
 
 | | Phase | State |
 |---|---|---|
@@ -547,15 +553,16 @@ defect register); RunPod serverless workers behind both.
 | ✅ | — Building Regs engine | done |
 | ✅ | — safety, scaffolding, CDM | done |
 | ✅ | — site levels, earthworks, foundations | done |
-| ✅ | 2c — valuation: Price Paid + UKHPI, street ceiling, extension uplift | done |
+| ✅ | 2c — valuation: Price Paid + UKHPI + EPC floor areas, street ceiling, extension uplift | done — £/m² needs BUILDING_EPC_API_KEY |
 | ✅ | 2b — Supply Mode: price-list import, multi-supplier, basket | done |
 | ○ | 2b — Supply Mode: merchant RFQ round-trip | next |
-| ✅ | 3 — Structure: cloud → walls, slabs, storeys, IFC | done |
-| ✅ | 4 — **the X-ray**: runs sized, BS 7671 zones checked | done |
-| ○ | 4b — open↔closed registration (register.py) | next |
+| ✅ | 3 — Structure: cloud → walls, slabs, storeys, IFC | done — IFC has geometry; no openings or spaces |
+| ✅ | 4 — **the X-ray**: runs sized, BS 7671 zones checked | done — identifies pipe vs cable from cross-section shape |
+| ✅ | 4b — open↔closed registration (register.py) | done — exact on synthetic rooms; never run on a real pair |
+| ✅ | 2d — Planning Mode: Article 4, conservation, listed, flood, TPO | done — England only, screening not a decision |
 | ○ | 5 — Condition Mode | |
 | ○ | 6 — Design Mode | |
-| ✅ | 7 — 2D drawing takeoff (assisted, scale-safe) | done |
+| ✅ | 7 — 2D drawing takeoff (assisted, scale-safe) | done — PDF path needs pdfplumber, now in the image |
 | ✕ | 7 — Xactimate ESX | dropped: buy per-report, needs Verisk |
 
 **The one real blocker:** the reconstruction path needs a GPU to be proven.
@@ -582,7 +589,7 @@ drone capture. **No model and no training — open data plus plane fitting.**
 *Ships:* type an address, get a measured roof. **Free where EagleView and Hover charge per
 report.**
 
-**Phase 2 — Price Mode.** Areas, lengths and counts from RoomPlan's parametric output → rate
+**Phase 2 — Price Mode.** Areas, lengths and counts from measured quantities → rate
 card → itemised quote PDF. **Does not need the full BIM pipeline.**
 *Ships:* scan a room, price the plastering, painting, flooring, tiling. **First revenue.**
 
@@ -592,7 +599,7 @@ starts building.
 *Ships:* real local prices, one-tap ordering. **This is what makes Price Mode more than a
 magicplan clone — and opens materials commission.**
 
-**Phase 3 — Structure.** Vendor Cloud2BIM. Point cloud → IFC. Floor plan vectorization.
+**Phase 3 — Structure.** Reimplement after Cloud2BIM (MIT), not vendored. Point cloud → IFC. Floor plan vectorization.
 Inside/outside registration. Export IFC/DXF/PDF/ESX.
 *Ships:* real measured drawings; Price Mode goes accurate across every trade.
 

@@ -252,6 +252,37 @@ _r = P.estimate([], "battens", P.STANDARD, today=_today)
 check("skew-7 nothing supplied still reads as nothing supplied",
       "rate card" in _r["message"], _r["message"])
 
+# ---- confidence must test the SPREAD at every tier -----------------------
+# The "good" tier tested source and freshness only, so three observations of
+# the same product at £1, £5 and £1,000 — disagreeing by 20,000% — came back
+# labelled "good" because one of them was a recent invoice. Freshness says
+# nothing about whether the observations describe the same thing.
+_today = date(2026, 8, 1)
+_wild = [P.Observation("plasterboard", "standard", 1.0, P.INVOICE,
+                       date(2026, 7, 1)),
+         P.Observation("plasterboard", "standard", 1000.0, P.PUBLISHED,
+                       date(2026, 7, 1)),
+         P.Observation("plasterboard", "standard", 5.0, P.PUBLISHED,
+                       date(2026, 7, 1))]
+_e = P.estimate(_wild, "plasterboard", "standard", _today)
+check("C1 a wildly split price set is not called confident",
+      _e["confidence"] not in ("high", "good"),
+      f"{_e['confidence']} on spread {_e['spread_pct']}%")
+
+# A tight, fresh, invoice-backed set must still read high — the guard must
+# not have made the whole scale useless.
+_tight = [P.Observation("plasterboard", "standard", 3.40, P.INVOICE,
+                        date(2026, 7, 20)),
+          P.Observation("plasterboard", "standard", 3.50, P.INVOICE,
+                        date(2026, 7, 20)),
+          P.Observation("plasterboard", "standard", 3.45, P.QUOTE,
+                        date(2026, 7, 20))]
+check("C2 a tight fresh invoice-backed set is still high",
+      P.estimate(_tight, "plasterboard", "standard", _today)["confidence"]
+      == "high",
+      str(P.estimate(_tight, "plasterboard", "standard", _today)))
+
+
 # ==========================================================================
 print()
 for f in FAILED:

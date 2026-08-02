@@ -27,9 +27,14 @@ parsing code around it:
   PACKS    "plasterboard, pack of 3, £30" is not £30 a board, and it is not
            £30 a square metre either. Comparing a pack price against an each
            price is the most common way a materials list comes out nonsense.
-  COVERAGE a tile price per tile only becomes a price per square metre once
-           you know the gauge. That conversion is an assumption and is
-           labelled as one.
+  COVERAGE a merchant quoting roofing by the covered square metre is not
+           quoting the same thing as the catalogue, which prices per tile
+           because a roof is counted in tiles. Converting needs the gauge,
+           which follows from the pitch and headlap of the actual roof, so
+           it is an assumption and is labelled as one — and where the
+           description does not say whether the tiles are interlocking
+           (9.7/m2), plain (60/m2) or slate (21/m2), nothing is converted at
+           all. That is a factor of six, which is not a guess worth making.
 
 Pure stdlib. Network fetches are lazy and always behind validation.
 """
@@ -107,9 +112,11 @@ def _norm_header(text):
 def detect_columns(header):
     """Map a real CSV header row onto the fields we need.
 
-    Returns {field: index}. Matching is exact-first then prefix, because
-    "price" must not lose to "priceincludingvat" simply by being shorter,
-    and "unit" must not swallow "unitprice".
+    Returns {field: index}. Matching is exact-first, then CONTAINMENT — not
+    prefix, as this used to say. Containment is the better rule and the code
+    was right: it catches "Trade Price Each", where the pattern sits in the
+    middle. Exact-first is what stops "price" losing to "priceincludingvat"
+    by being shorter, and "unit" swallowing "unitprice".
     """
     normed = [_norm_header(h) for h in header]
     found = {}
@@ -642,10 +649,18 @@ class Line:
 def normalise_line(line, vat_rate=UK_VAT_RATE):
     """Take a raw Line to a per-catalogue-unit, ex-VAT price.
 
-    Order matters and is the whole point: VAT off first, then divide by the
-    pack, then convert the unit. Doing the pack division after a coverage
-    conversion — or forgetting it — is how a pack of three boards ends up
-    priced as one.
+    VAT off first, then divide by the pack, then convert the unit.
+
+    The order is what the CONTROL FLOW needs — the unit step reads line.pack
+    to decide whether a "per pack" price has already been reduced to a per
+    item one — but the arithmetic itself does not care, and this docstring
+    used to claim otherwise: "order matters and is the whole point". Three
+    scalar divisions commute, exactly, including in floating point.
+    199.99/1.2/3/2.88 and 199.99/2.88/3/1.2 are the same number.
+
+    What actually matters is that no step is FORGOTTEN. Skipping the pack
+    division is how a pack of three boards ends up priced as one, and that
+    is a real error worth the emphasis; reordering is not.
     """
     product, score = match_product(line.description)
     if not product:
@@ -729,6 +744,36 @@ def _convert_unit(price, have, wanted, product, line):
             f"in the description, check this line")
         return price / area
 
+    # THE COVERAGE CASE, which the module docstring has always named as one
+    # of its three traps and which nothing implemented — TILES_PER_M2 and
+    # COVERAGE_NOTE sat unreferenced.
+    #
+    # The direction that actually occurs is m2 -> each, not the reverse: the
+    # catalogue prices roofing per tile because roof mode counts tiles, while
+    # merchants quote slate and some concrete tiles by the covered square
+    # metre. Without this, such a line came back unconverted at roughly 10x
+    # to 60x the per-tile price, carrying only a note.
+    #
+    # The gauge is genuinely an assumption — it follows from the pitch and
+    # headlap of the actual roof — so the note carries "check this line" and
+    # the report escalation picks it up. Where the covering cannot be told
+    # apart, nothing is converted: concrete interlocking runs at 9.7 tiles
+    # per m2 and plain tiles at 60, a factor of six, and guessing between
+    # them would be far worse than declining.
+    if have == "m2" and wanted == "each" and product == "roof_covering":
+        per_m2 = TILES_PER_M2.get(_covering_family(line.description))
+        if per_m2:
+            line.notes.append(
+                f"per m2 -> per tile at an ASSUMED {per_m2} tiles/m2, "
+                f"{COVERAGE_NOTE}, check this line")
+            return price / per_m2
+        line.notes.append(
+            "priced per m2 but the catalogue prices roofing per tile, and "
+            "the description does not say whether these are interlocking "
+            "(9.7/m2), plain (60/m2) or slate (21/m2) — a factor of six. "
+            "Not converted, check this line")
+        return price
+
     if have == "each" and wanted == "each":
         return price
 
@@ -736,6 +781,23 @@ def _convert_unit(price, have, wanted, product, line):
         f"priced per {have} but the catalogue wants per {wanted} — not "
         f"converted, check this line")
     return price
+
+
+def _covering_family(description):
+    """Which coverage rate a roofing line implies. None if it cannot be told.
+
+    A concrete interlocking tile covers 9.7 per m2 and a plain tile 60 — a
+    factor of six — so guessing between them would be far worse than
+    refusing. Only an explicit word in the description decides it.
+    """
+    blob = str(description or "").lower()
+    if "slate" in blob:
+        return "natural_slate"
+    if "plain" in blob:
+        return "concrete_plain"
+    if "interlocking" in blob or "pantile" in blob:
+        return "concrete_interlocking"
+    return None
 
 
 # --- reading a whole list --------------------------------------------------

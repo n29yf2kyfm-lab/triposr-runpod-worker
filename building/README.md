@@ -47,12 +47,23 @@ far less than breaking a product that is earning. A test asserts this isolation 
 |---|---|---|
 | `reconstruct` | capture → registered metric point cloud | 1 |
 | `register` | align two scans (open↔closed, room↔room) | 1 / 4 |
-| `price` | IFC or RoomPlan → quantities → priced quote | 2 |
-| `supply` | quantities → merchant basket → RFQ → order | 2b |
-| `structure` | point cloud → IFC walls, slabs, openings, rooms | 3 |
-| `services` | open-scan cloud → pipe and cable runs → IFC systems | 4 |
+| `roof` | address → open LIDAR → planes, pitch, true sloped areas | 1b |
+| `price` | measured quantities → rate card → priced quote | 2 |
+| `supply` | price list → matched products → basket, supplier comparison | 2b |
+| `valuation` | address → Land Registry + EPC + UKHPI → value, extension uplift | 2c |
+| `planning` | address → site designations → is this permitted development? | 2d |
+| `structure` | point cloud → walls, slabs, storeys → IFC | 3 |
+| `services` | open-scan cloud → pipe and cable runs, BS 7671 zones | 4 |
+| `drawing` | 2D PDF → confirmed scale → measured quantities | 7 |
 | `condition` | imagery + thermal → 3D-located, costed defects | 5 |
 | `design` | footprint + rules → massing + planning checks | 6 |
+
+`price` takes quantities directly, or a whole `roof` result. It does **not** yet parse
+RoomPlan or IFC — `structure` writes IFC but nothing reads one back in.
+
+`structure` emits IFC walls and storey slabs with real placements and swept solids. It does
+**not** emit openings or spaces: nothing in the segmentation detects a door, a window or a
+room boundary, so there is nothing honest to write for them.
 
 Unimplemented modes return `status: "not_implemented"` with the implementing phase and a
 validated manifest — never a bare 500.
@@ -128,9 +139,19 @@ claiming success.
 python building/test_handler.py
 ```
 
-83 assertions, no GPU, no network, runs in seconds — same approach as the vehicle worker:
-stub the heavy modules, then test the contract logic. CI runs these **before** building the
-image, so a broken contract never reaches a deployable tag.
+That file alone carries 223 assertions; the whole suite is **1588 across 17 files** — run
+them all with `for f in building/test_*.py; do python "$f"; done`. No GPU. Same approach as
+the vehicle worker: stub the heavy modules, then test the contract logic. CI runs these
+**before** building the image, so a broken contract never reaches a deployable tag.
+
+Almost network-free: `test_handler.py` makes a handful of live calls to `api.postcodes.io`
+while exercising geocoding failure paths. Every other file is offline, and the tests assert
+an error is returned either way, so a postcodes.io outage does not fail the build.
+
+CI installs `requests`, `ifcopenshell` and `pdfplumber` before running them. Without that the
+runner is a bare interpreter, every lazy third-party import takes its `ImportError` branch,
+and the suite validates the degraded path instead of the one that ships — which is exactly
+how a broken IFC writer reached the deployed image with 1231 tests green.
 
 ## Build
 

@@ -284,13 +284,23 @@ def estimate(observations, product, tier, today=None):
 
 
 def _confidence(relevant, spread, today):
+    """How much the estimate can be relied on: source, freshness AND spread.
+
+    Every tier tests the spread. The "good" tier used not to, so a price set
+    whose members disagreed by 20,000x — £1, £5 and £1,000 for the same
+    product — came back labelled "good" purely because one of them was an
+    invoice from last month. Freshness says nothing about whether the
+    observations describe the same thing, and disagreement that wide almost
+    always means a mis-filed line rather than a real market.
+    """
     own = [o for o in relevant if o.source == INVOICE]
     freshest = min(o.age_days(today) for o in relevant)
     if own and freshest <= 60 and spread <= 0.15:
         return "high"
-    if (own or any(o.source == QUOTE for o in relevant)) and freshest <= 120:
+    if ((own or any(o.source == QUOTE for o in relevant))
+            and freshest <= 120 and spread <= 0.60):
         return "good"
-    if freshest <= 240:
+    if freshest <= 240 and spread <= 1.50:
         return "fair"
     return "low"
 
