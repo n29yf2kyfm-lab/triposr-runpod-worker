@@ -534,7 +534,7 @@ defect register); RunPod serverless workers behind both.
 
 # Part 8 — Build order
 
-**Status at this commit: 1598 tests passing, `trellis2/` untouched throughout.**
+**Status at this commit: 1609 tests passing, `trellis2/` untouched throughout.**
 
 Three independent forensic audits ran against this code on 2026-08-02 and found real
 damage behind green ticks — a mode that crashed on every job, an X-ray that could not

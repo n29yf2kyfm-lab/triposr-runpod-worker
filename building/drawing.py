@@ -87,8 +87,14 @@ class DrawingError(ValueError):
 
 # --- reading the scale off the sheet ---------------------------------------
 
-# "1:50", "1 : 100", "Scale 1/50", "SCALE 1:20 @ A1"
-_SCALE_NOTE = re.compile(r"\b1\s*[:/]\s*(\d{1,4})\b")
+# "1:50", "1 : 100", "Scale 1/50", "SCALE 1:20 @ A1", "1:1,250"
+#
+# The thousands separator is not optional. Location and block plans are
+# drawn at 1:1250 and 1:2500 — the Ordnance Survey scales — and every
+# drawing office writes them "1:1,250". Without the comma in the pattern
+# that parsed as 1:1, which is a 1250x error on every length, and it was a
+# real location plan that showed it.
+_SCALE_NOTE = re.compile(r"\b1\s*[:/]\s*(\d{1,3}(?:[,  ]\d{3})+|\d{1,4})\b")
 
 # The same ratio, but explicitly labelled as the drawing scale. Preferred
 # over any bare 1:N, because a sheet carries several ratios that are not the
@@ -110,6 +116,29 @@ _GRADIENT = re.compile(
 # or 1:12 is not among them, which is a second, independent reason to
 # distrust a drainage fall that has wandered into the scale slot.
 STANDARD_SCALES = (1, 2, 5, 10, 20, 25, 50, 100, 200, 500, 1000, 1250, 2500)
+
+# A GRAPHIC SCALE BAR — the little ruler printed on a drawing so it can be
+# measured after photocopying. It reads "1:50 0 0.5m 1 1.5 2 2.5 3 3.5m",
+# and a sheet carries a whole bank of them: 1:50, 1:100, 1:200, 1:500,
+# 1:1,250, 1:2,500. NOT ONE of them is the drawing's scale — they are a
+# legend.
+#
+# Found on a real architect's elevation. The ranker took the first bare
+# ratio on the page, which was the top of the scale-bar bank, and only got
+# the right answer because that sheet's bar happened to start at its true
+# scale. Shift the bar to start at 1:20 and the same drawing measures 5x
+# out, silently.
+#
+# The tell is what FOLLOWS the ratio: a zero, then a run of distances.
+_SCALE_BAR = re.compile(
+    r"1\s*[:/]\s*\d{1,3}(?:[,  ]\d{3})*\s+0\s+[\d.]+\s*(?:m|mm)\b", re.I)
+
+# "1:100 @ A1" — a ratio stated together with the sheet it was drawn for.
+# The strongest signal there is, because it is the drawing office saying
+# exactly that, and a scale bar never carries one.
+_RATIO_WITH_SHEET = re.compile(
+    r"1\s*[:/]\s*(\d{1,3}(?:[,  ]\d{3})*|\d{1,4})\s*"
+    r"(?:@|\bat\b|\bon\b|\()\s*A[0-4]\b", re.I)
 
 # "NTS" or "not to scale" — a statement that the drawing HAS no scale.
 _NOT_TO_SCALE = re.compile(
@@ -142,12 +171,18 @@ def _ratio_candidates(text):
         for inner in _SCALE_NOTE.finditer(match.group(0)):
             excluded.add(match.start() + inner.start())
 
+    scale_bar = set()
+    for match in _SCALE_BAR.finditer(blob):
+        for inner in _SCALE_NOTE.finditer(match.group(0)):
+            scale_bar.add(match.start() + inner.start())
+
     labelled = {m.start(1) for m in _SCALE_LABELLED.finditer(blob)}
+    with_sheet = {m.start(1) for m in _RATIO_WITH_SHEET.finditer(blob)}
 
     out = []
     for match in _SCALE_NOTE.finditer(blob):
         try:
-            ratio = int(match.group(1))
+            ratio = int(re.sub(r"[,  ]", "", match.group(1)))
         except ValueError:
             continue
         if not 1 <= ratio <= 5000:
@@ -156,7 +191,9 @@ def _ratio_candidates(text):
             "ratio": ratio,
             "at": match.start(),
             "gradient": match.start() in excluded,
+            "scale_bar": match.start() in scale_bar,
             "labelled": match.start(1) in labelled,
+            "with_sheet": match.start(1) in with_sheet,
             "standard": ratio in STANDARD_SCALES,
         })
     return out
@@ -167,19 +204,30 @@ def parse_scale_note(text):
 
     Returns the ratio denominator: "1:50" -> 50.
 
-    A sheet carries several ratios and only one of them is the scale. They
-    are ranked rather than taken in reading order: a ratio labelled "SCALE"
-    beats an unlabelled one, a standard architectural scale beats a
-    non-standard number, and a ratio sitting after the word "fall" or
-    "gradient" is discarded outright.
+    A sheet carries several ratios and only one of them is the scale, so
+    they are RANKED rather than taken in reading order. Strongest first:
+
+      1. stated with its sheet — "1:100 @ A1". The drawing office saying
+         exactly what this is, and a scale bar never carries one.
+      2. labelled "SCALE".
+      3. not part of a graphic scale bar.
+      4. a standard architectural scale rather than an arbitrary number.
+      5. whichever comes first.
+
+    Ratios after "fall", "gradient" or "pitch" are discarded outright, and
+    so are the entries of a scale-bar ruler unless there is nothing else on
+    the sheet at all — in which case the top of the bar is a fair guess and
+    the caller still has to confirm the scale before anything is measured.
     """
     if not text:
         return None
     candidates = [c for c in _ratio_candidates(text) if not c["gradient"]]
     if not candidates:
         return None
-    candidates.sort(key=lambda c: (not c["labelled"], not c["standard"],
-                                   c["at"]))
+    real = [c for c in candidates if not c["scale_bar"]]
+    candidates = real or candidates
+    candidates.sort(key=lambda c: (not c["with_sheet"], not c["labelled"],
+                                   not c["standard"], c["at"]))
     return candidates[0]["ratio"]
 
 

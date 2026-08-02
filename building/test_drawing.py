@@ -452,6 +452,57 @@ except Exception as e:
           "http" in str(e).lower() or "scheme" in str(e).lower(), str(e)[:80])
 
 
+# ---- 12b. what real architects' drawings actually contain ----------------
+# Both of these were found by running the module against five real UK
+# drawings — J Harper & Sons elevations, sections and a ground floor detail,
+# on A3 and A1 sheets with up to 20,850 vector lines each. Neither could
+# have been found from a synthetic fixture, because neither trap is one
+# anybody would think to invent.
+
+# A GRAPHIC SCALE BAR is the little ruler printed on a drawing so it can be
+# measured after photocopying: "1:50 0 0.5m 1 1.5 2 2.5 3 3.5m". A sheet
+# carries a whole bank of them — 1:50, 1:100, 1:200, 1:500, 1:1,250,
+# 1:2,500 — and NOT ONE is the drawing's scale. The real sheet escaped only
+# because its bar happened to start at its true scale.
+_BAR = ("Refer to other Specialists drawings, details and specifications. "
+        "1:20 0 0.2m 0.4 0.6 0.8 1m  1:50 0 0.5m 1 1.5 2 2.5 3 3.5m  "
+        "1:100 0 1m 2 3 4 5 6 7m  1:200 0 2m 4 6 8 10 12 14m  "
+        "window cill 375 1:100 @ A1 integrity")
+check("12b1 a scale-bar ruler is not read as the drawing scale",
+      D.parse_scale_note(_BAR) == 100, str(D.parse_scale_note(_BAR)))
+check("12b2 the bar entries are identified as such",
+      sum(c["scale_bar"] for c in D._ratio_candidates(_BAR)) >= 4,
+      str([(c["ratio"], c["scale_bar"]) for c in D._ratio_candidates(_BAR)]))
+check("12b3 a ratio stated WITH its sheet outranks a bare one",
+      any(c["with_sheet"] for c in D._ratio_candidates(_BAR)))
+
+# With nothing else on the sheet, the top of the bar is a fair guess — the
+# caller still has to confirm before anything is measured.
+_BAR_ONLY = "1:50 0 0.5m 1 1.5 2 2.5 3 3.5m 1:100 0 1m 2 3 4 5 6 7m"
+check("12b4 a bar alone still yields something to confirm",
+      D.parse_scale_note(_BAR_ONLY) == 50, str(D.parse_scale_note(_BAR_ONLY)))
+
+# THE ORDNANCE SURVEY SCALES. Location and block plans are drawn at 1:1250
+# and 1:2500, and every drawing office writes them with a thousands comma.
+# Without it in the pattern "1:1,250" parsed as 1:1 — a 1250x error.
+for _text, _want in [("Location plan 1:1,250 @ A3", 1250),
+                     ("Site plan 1:2,500", 2500),
+                     ("Block plan 1:1250", 1250),
+                     ("SCALE 1:1,000 @ A1", 1000)]:
+    check(f"12b5 {_text!r} reads as 1:{_want}",
+          D.parse_scale_note(_text) == _want, str(D.parse_scale_note(_text)))
+
+# And the real title blocks, verbatim from the five drawings.
+for _text, _scale, _sheet in [
+        ("Ventilation SCALE 1:5@A3 openings are", 5, "A3"),
+        ("Tap Tap 0.000 FFL / Datum SCALE 1:100@A3 0 DE 18-0", 100, "A3"),
+        ("J Harper & Sons Ltd SCALE 1:50@A3 DATE SEPT", 50, "A3")]:
+    check(f"12b6 real title block reads 1:{_scale} on {_sheet}",
+          D.parse_scale_note(_text) == _scale
+          and D.parse_sheet_note(_text) == _sheet,
+          f"{D.parse_scale_note(_text)} / {D.parse_sheet_note(_text)}")
+
+
 # ---- 13. the confirmation is bound to the VALUE --------------------------
 # The module claimed it was "structurally impossible to get a quantity
 # without a person having seen the scale". It was not: confirm_scale sat in
