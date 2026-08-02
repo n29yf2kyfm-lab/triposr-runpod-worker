@@ -445,6 +445,17 @@ check("10h an incomplete basket is not marked complete",
 check("10i quantity is kept on the gap so it can be chased",
       gappy["gaps"][0]["quantity"] == 5000.0)
 
+# Roof mode reports every element it measures, so a plain gable arrives with
+# hip_m: 0 and valley_m: 0. An element that is not there is not a basket line
+# — pricing it at £0 puts an item on a materials list nobody needs to buy.
+zeroed = S.basket({"battens": 100.0, "hip_m": 0, "valley_m": 0}, both,
+                  today=TODAY)
+check("10k zero-length elements produce no basket line",
+      len(zeroed["lines"]) == 1, str(zeroed["lines"]))
+check("10l and are not reported as gaps either", not zeroed["gaps"],
+      str(zeroed["gaps"]))
+check("10m so the basket still reads complete", zeroed["complete"])
+
 unknown = S.basket({"unobtainium": 5.0}, both, today=TODAY)
 check("10j a product outside the catalogue is a gap, not a crash",
       unknown["gaps"][0]["reason"] == "not in the catalogue")

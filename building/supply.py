@@ -819,6 +819,12 @@ def basket(quantities, observations, tier=prices.STANDARD, today=None):
     """
     out, gaps, total = [], [], 0.0
     for product, quantity in sorted(quantities.items()):
+        # Roof mode reports every element it measures, so a plain gable comes
+        # through with hip_m: 0 and valley_m: 0. An element that is not there
+        # is not a basket line, and pricing it at £0 would put an item on a
+        # materials list that nobody needs to buy.
+        if not isinstance(quantity, (int, float)) or quantity <= 0:
+            continue
         if product not in prices.CATALOGUE:
             gaps.append({"product": product, "reason": "not in the catalogue"})
             continue

@@ -112,10 +112,23 @@ def _quantities(value):
     """Validate a measured-quantities map.
 
     A quantity is what gets ordered and what gets charged, so a malformed one
-    must fail here rather than turn into a delivery. Zero and negative are
-    refused outright: a zero-quantity line is either a measurement that
-    failed or an element that is not there, and both are worth saying out
-    loud instead of quietly pricing at nothing.
+    must fail here rather than turn into a delivery.
+
+    ZERO IS ALLOWED, and the first version got this wrong in a way that broke
+    the product's main chain. Roof mode emits its full measurement set every
+    time, so a plain gable — the commonest roof in Britain — comes back with
+    hip_m: 0 and valley_m: 0 because it genuinely has neither. Refusing zero
+    meant roof output could not be fed to price mode at all, which is the one
+    path the two modes exist to make. Zero means "this element is not there",
+    and takeoff.py already reads it that way: it emits no line for a
+    zero-length element rather than a £0 one.
+
+    Negative and non-finite are still refused. Those cannot mean anything.
+
+    Values that are not numbers pass through untouched, because roof mode's
+    quantities carry a nested `materials` block and a covering name alongside
+    the measurements, and this validator has no business flattening the shape
+    its own consumer expects.
     """
     if value is None:
         return None
@@ -128,6 +141,9 @@ def _quantities(value):
         name = str(key).strip()
         if not name:
             raise InputError("quantities has an entry with no product name")
+        if isinstance(amount, (dict, list, str)) or amount is None:
+            out[name] = amount
+            continue
         try:
             number = float(amount)
         except (TypeError, ValueError):
@@ -135,10 +151,10 @@ def _quantities(value):
                 f"quantities[{name!r}] must be a number — got {amount!r}")
         if number != number or number in (float("inf"), float("-inf")):
             raise InputError(f"quantities[{name!r}] is not a finite number")
-        if number <= 0:
+        if number < 0:
             raise InputError(
-                f"quantities[{name!r}] is {number}. A quantity must be "
-                f"positive; drop the line rather than sending a zero.")
+                f"quantities[{name!r}] is {number}. A quantity cannot be "
+                f"negative.")
         out[name] = number
     return out or None
 

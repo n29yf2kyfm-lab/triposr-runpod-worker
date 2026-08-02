@@ -336,9 +336,8 @@ check("18a quantities reach the spec", s["quantities"] == {"battens": 503.3},
       str(s["quantities"]))
 check("18b price mode is reachable from quantities alone", True)
 
-for bad, label in [({"battens": 0}, "zero"),
-                   ({"battens": -5}, "negative"),
-                   ({"battens": "loads"}, "non-numeric"),
+for bad, label in [({"battens": -5}, "negative"),
+                   ({"battens": float("inf")}, "infinite"),
                    ({"": 5}, "unnamed"),
                    ([("battens", 5)], "not an object")]:
     try:
@@ -346,6 +345,42 @@ for bad, label in [({"battens": 0}, "zero"),
         check(f"18c {label} quantity refused", False)
     except InputError:
         check(f"18c {label} quantity refused", True)
+
+# THE roof -> price chain. Verified against the exact quantities block a real
+# RunPod roof job returned for B36 8AR. The first version of this validator
+# refused zero, and a plain gable — the commonest roof in Britain — reports
+# hip_m: 0 and valley_m: 0 because it genuinely has neither. That made roof
+# output unpriceable, breaking the one path the two modes exist to create.
+REAL_ROOF_QUANTITIES = {
+    "eaves_m": 45.09, "flat_area_m2": 24.8, "hip_m": 0,
+    "materials": {"battens_m": 508.5, "covering": "concrete_interlocking",
+                  "covering_units": 1527, "guttering_m": 45.1,
+                  "membrane_m2": 159.6, "ridge_units": 23, "valley_m": 0,
+                  "waste_factor": 1.1},
+    "pitch_uncertainty_deg": 5.7, "plan_area_m2": 121.09,
+    "plan_area_source": "footprint_polygon", "plane_count": 3,
+    "predominant_pitch_deg": 32, "sampled_plan_area_m2": 44,
+    "ridge_m": 6.05, "slope_uplift_pct": 14.6, "sloped_area_m2": 138.82,
+    "valley_m": 0,
+}
+try:
+    _s = parse_job({"mode": "price", "quantities": REAL_ROOF_QUANTITIES})
+    check("18c2 real roof output survives validation", True)
+    check("18c3 zero-length elements are kept, not refused",
+          _s["quantities"]["hip_m"] == 0)
+    check("18c4 the nested materials block passes through intact",
+          _s["quantities"]["materials"]["covering_units"] == 1527)
+    check("18c5 a text field passes through",
+          _s["quantities"]["plan_area_source"] == "footprint_polygon")
+    check("18c6 the sloped area survives — the number the product exists for",
+          _s["quantities"]["sloped_area_m2"] == 138.82)
+except InputError as e:
+    for _n in ("18c2 real roof output survives validation",
+               "18c3 zero-length elements are kept, not refused",
+               "18c4 the nested materials block passes through intact",
+               "18c5 a text field passes through",
+               "18c6 the sloped area survives — the number the product exists for"):
+        check(_n, False, str(e))
 
 # Price mode with nothing at all to work from must still refuse.
 try:
