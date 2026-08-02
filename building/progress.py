@@ -51,6 +51,8 @@ STAGE_PLANS = {
     "supply":      ["fetching", "matching_products", "quoting", "exporting"],
     "valuation":   ["fetching", "comparables", "indexing", "valuing",
                     "exporting"],
+    "drawing":     ["fetching", "reading", "scaling", "measuring",
+                    "exporting"],
     "condition":   ["fetching", "detecting", "locating_3d", "grading",
                     "costing", "exporting"],
     "design":      ["fetching", "massing", "compliance_check", "exporting"],

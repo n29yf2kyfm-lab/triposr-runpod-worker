@@ -79,11 +79,18 @@ Rate card is the user's own, editable and versioned, optionally seeded from **SP
 Out: itemised quote PDF, bill of quantities, materials list. Re-scan mid-job and variations
 price themselves.
 
-**Required for insurance/restoration work:** Xactimate **ESX** export. magicplan, iGUIDE and
-Hover all have it; it is the price of entry.
+**Xactimate ESX — dropped for now.** The payload uses a compression wrapper standard tooling
+cannot read, no public schema exists, and every company shipping ESX does so under a signed
+Verisk agreement. Buy it per-report (~$11) rather than build it, and first confirm UK clients
+want it at all — the ESX ecosystem is North American. See [`MARKET.md`](./MARKET.md) Part 4b.
 
-**Known gap:** we cannot read 2D drawings. Togal.AI does this at ~98% and most jobs arrive
-with drawings. This needs adding.
+**2D drawings — now partly closed.** `drawing.py` measures areas, lengths and counts off a
+vector PDF at a confirmed scale. It is deliberately **assisted, not automatic**: published
+benchmarks put frontier models at 0.40–0.55 on counting doors and windows (AECV-Bench, Jan
+2026), and Togal's "98%" traces to a study limited to architectural drawings — the peer-reviewed
+comparison reports ~70% time saved within a 5% margin. Given a confirmed scale and a traced
+boundary, area and length are sub-1%; deciding what a region *is* stays with the person. See
+[`MARKET.md`](./MARKET.md) Part 4b.
 
 ## 1.4 Supply Mode — "Amazon for builders"
 
@@ -502,6 +509,7 @@ repo/
     ├── terrain.py           # ✅ levels, earthworks, drainage, foundations
     │
     ├── valuation.py         # ✅ Land Registry + UKHPI, extension uplift
+    ├── drawing.py           # ✅ 2D PDF takeoff at a confirmed scale
     ├── supply.py            # ✅ price-list import, multi-supplier, basket
     ├── structure.py         # ○ Cloud2BIM → IFC
     ├── services.py          # ○ pipe/cable extraction → the X-ray
@@ -546,7 +554,8 @@ defect register); RunPod serverless workers behind both.
 | ○ | 4 — **the X-ray** | the wedge |
 | ○ | 5 — Condition Mode | |
 | ○ | 6 — Design Mode | |
-| ○ | 7 — 2D drawing takeoff, Xactimate ESX | the two competitor gaps |
+| ✅ | 7 — 2D drawing takeoff (assisted, scale-safe) | done |
+| ✕ | 7 — Xactimate ESX | dropped: buy per-report, needs Verisk |
 
 **The one real blocker:** the reconstruction path needs a GPU to be proven.
 CI only builds the image on `main`, so that needs either a merge or a pod build.

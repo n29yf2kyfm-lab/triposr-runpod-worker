@@ -50,6 +50,9 @@ jobs:
       - name: Run output path tests
         run: python building/test_paths.py
 
+      - name: Run drawing takeoff tests
+        run: python building/test_drawing.py
+
   build:
     needs: test
     runs-on: ubuntu-latest

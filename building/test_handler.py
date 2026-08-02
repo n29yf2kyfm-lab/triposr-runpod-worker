@@ -393,6 +393,20 @@ except InputError as e:
 check("18e supply is implemented", "supply" in IMPLEMENTED, str(IMPLEMENTED))
 check("18e2 valuation is implemented", "valuation" in IMPLEMENTED,
       str(IMPLEMENTED))
+check("18e2b drawing is implemented", "drawing" in IMPLEMENTED,
+      str(IMPLEMENTED))
+
+# Drawing mode: the scale must never arrive already confirmed by default,
+# because a confirmed scale is what unlocks quantities.
+s = parse_job({"mode": "drawing", "drawing_url": "https://x/y.pdf"})
+check("18e2c confirm_scale defaults to False", s["confirm_scale"] is False)
+check("18e2d page defaults to the first", s["page"] == 0)
+try:
+    parse_job({"mode": "drawing"})
+    check("18e2e drawing with nothing to measure refused", False)
+except InputError as e:
+    check("18e2e drawing with nothing to measure refused",
+          "drawing_url" in str(e), str(e))
 
 s = parse_job({"mode": "valuation", "postcode": "B36 8AR",
                "region": "Birmingham", "floor_area_m2": 96.0,

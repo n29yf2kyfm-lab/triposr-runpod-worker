@@ -28,6 +28,7 @@ MODES = (
     "condition",     # imagery + thermal -> 3D-located defects
     "design",        # footprint + rules -> massing, planning checks
     "valuation",     # address -> sold comparables -> value, extension uplift
+    "drawing",       # 2D PDF/DXF -> confirmed scale -> measured quantities
 )
 
 # Roof capture sources, cheapest and easiest first.
@@ -342,6 +343,19 @@ def parse_job(job_input):
     # UKHPI names regions by local authority slug: "birmingham", "england".
     spec["region"] = (str(job_input.get("region") or "").strip().lower()
                       or None)
+    # --- drawing ----------------------------------------------------------
+    # Assisted takeoff. The scale is never inferred silently — see drawing.py.
+    spec["drawing_url"] = (str(job_input.get("drawing_url") or "").strip()
+                           or None)
+    spec["page"] = _int(job_input.get("page"), "page", 0, 0, 500)
+    spec["scale_ratio"] = _float(job_input.get("scale_ratio"), "scale_ratio",
+                                 None, 1.0, 5000.0)
+    spec["scale_note"] = (str(job_input.get("scale_note") or "").strip()
+                          or None)
+    spec["confirm_scale"] = bool(job_input.get("confirm_scale", False))
+    spec["calibration"] = job_input.get("calibration") or None
+    spec["traced"] = job_input.get("traced") or None
+
     spec["extension_m2"] = _float(job_input.get("extension_m2"),
                                   "extension_m2", None, 1.0, 500.0)
     spec["build_cost"] = _float(job_input.get("build_cost"), "build_cost",
@@ -395,6 +409,11 @@ def _check_required_inputs(spec):
             "valuation needs a postcode (or an address containing one) to "
             "find sold comparables. HM Land Registry Price Paid Data covers "
             "England and Wales only.")
+
+    if mode == "drawing" and not (spec["drawing_url"] or spec["traced"]):
+        raise InputError(
+            "drawing mode needs drawing_url (a PDF to inspect), or traced "
+            "geometry to measure.")
 
     if mode == "supply" and not (spec["price_list_csv"]
                                  or spec["price_list_url"]):
