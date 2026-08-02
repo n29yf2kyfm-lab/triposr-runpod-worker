@@ -1,0 +1,297 @@
+"""Tests for Register Mode — aligning the open scan to the closed one.
+
+The stake here is different from everywhere else in this worker. A wrong
+quantity costs money; a wrong registration puts a live cable 200mm from
+where the app says it is, and somebody drills there.
+
+So the tests that matter are the ones where it refuses: two scans of
+different rooms, a fit too loose to drill on, a tilted scan that would align
+to a plausible-looking wrong answer.
+
+Run: python building/test_register.py
+"""
+import math
+import os
+import sys
+import tempfile
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+
+import register as G  # noqa: E402
+
+PASSED, FAILED = [], []
+
+
+def check(name, cond, detail=""):
+    (PASSED if cond else FAILED).append(
+        name if cond else f"{name}{' — ' + detail if detail else ''}")
+
+
+def make_room(width=5.0, depth=4.0, height=2.4, step=0.03):
+    """A room with enough structure to be alignable — four walls and a floor.
+
+    The TARGET is sampled finer than the source on purpose. A perfectly
+    regular lattice is an unrealistic worst case: rotate it and every point
+    lands between grid nodes, so nothing finds a neighbour inside the inlier
+    radius however good the alignment is. Real scans are dense and irregular,
+    and two scans of one room never share a sampling grid — so the fixture
+    uses a fine target and a coarse source, which is what actually happens.
+    """
+    pts = []
+    nx, ny, nz = int(width / step), int(depth / step), int(height / step)
+    for i in range(nx + 1):
+        for j in range(ny + 1):
+            pts.append((i * step, j * step, 0.0))
+    # A chimney breast. Not decoration: a bare rectangular box is symmetric
+    # under a 180-degree rotation, so a flipped alignment fits it exactly as
+    # well as the right one and the fixture is genuinely ambiguous. Real
+    # rooms have a breast, a bay, a door — something that breaks it. This is
+    # the smallest thing that does.
+    bx0, bx1, by = 1.0, 2.0, 0.35
+    for i in range(int((bx1 - bx0) / step) + 1):
+        for k in range(nz):
+            pts.append((bx0 + i * step, by, k * step))
+    for j in range(int(by / step) + 1):
+        for k in range(nz):
+            pts.append((bx0, j * step, k * step))
+            pts.append((bx1, j * step, k * step))
+    for k in range(1, nz):
+        z = k * step
+        for i in range(nx + 1):
+            pts.append((i * step, 0.0, z))
+            pts.append((i * step, depth, z))
+        for j in range(ny + 1):
+            pts.append((0.0, j * step, z))
+            pts.append((width, j * step, z))
+    return pts
+
+
+ROOM = make_room()                 # dense target
+COARSE = make_room(step=0.06)      # a second, sparser scan of the same room
+
+
+def moved(points, yaw_deg=0.0, tx=0.0, ty=0.0, tz=0.0):
+    return G.Transform(math.radians(yaw_deg), tx, ty, tz).apply(points)
+
+
+# ---- 1. transforms --------------------------------------------------------
+t = G.Transform(math.radians(90), 1.0, 2.0, 3.0)
+p = t.apply([(1.0, 0.0, 0.0)])[0]
+check("1a rotation and translation", abs(p[0] - 1.0) < 1e-9
+      and abs(p[1] - 3.0) < 1e-9 and abs(p[2] - 3.0) < 1e-9, str(p))
+
+identity = G.Transform()
+check("1b identity does nothing", identity.apply([(1, 2, 3)])[0] == (1, 2, 3))
+
+# Composition must equal applying them one after the other.
+a = G.Transform(math.radians(30), 1.0, 0.5, 0.0)
+b = G.Transform(math.radians(20), -0.3, 0.2, 0.1)
+one = a.then(b).apply([(2.0, 1.0, 0.5)])[0]
+two = b.apply(a.apply([(2.0, 1.0, 0.5)]))[0]
+check("1c composition matches sequential application",
+      all(abs(x - y) < 1e-9 for x, y in zip(one, two)), f"{one} vs {two}")
+
+check("1d yaw reported in degrees",
+      abs(G.Transform(math.radians(45)).as_dict()["yaw_deg"] - 45) < 1e-6)
+
+try:
+    G.centroid([])
+    check("1e empty centroid refused", False)
+except G.RegistrationError:
+    check("1e empty centroid refused", True)
+
+
+# ---- 2. the neighbour grid ------------------------------------------------
+grid = G.Grid(ROOM)
+q, d = grid.nearest((0.0, 0.0, 0.0), 0.1)
+check("2a finds an exact point", d is not None and d < 1e-9, str(d))
+q, d = grid.nearest((100.0, 100.0, 100.0), 0.1)
+check("2b finds nothing far away", q is None)
+q, d = grid.nearest((0.01, 0.01, 0.0), 0.1)
+check("2c finds a near point", d is not None and d < 0.05, str(d))
+
+
+# ---- 3. the closed-form step ----------------------------------------------
+# A known rotation and translation must be recovered exactly.
+source = [(0.0, 0.0, 0.0), (1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (1.0, 1.0, 0.5)]
+target = moved(source, yaw_deg=30, tx=2.0, ty=-1.0, tz=0.4)
+step = G.solve_step(list(zip(source, target)))
+check("3a yaw recovered", abs(math.degrees(step.yaw) - 30) < 1e-6,
+      str(math.degrees(step.yaw)))
+check("3b translation recovered",
+      abs(step.tx - 2.0) < 1e-6 and abs(step.ty + 1.0) < 1e-6
+      and abs(step.tz - 0.4) < 1e-6, str(step.as_dict()))
+
+back = step.apply(source)
+check("3c and it maps source onto target",
+      all(abs(a - b) < 1e-6 for p, q in zip(back, target) for a, b in zip(p, q)))
+
+try:
+    G.solve_step([])
+    check("3d no correspondences refused", False)
+except G.RegistrationError:
+    check("3d no correspondences refused", True)
+
+
+# ---- 4. alignment ---------------------------------------------------------
+# The real case: the same room scanned twice, the second from a different
+# position and facing a different way.
+shifted = moved(COARSE, yaw_deg=12, tx=0.6, ty=-0.4, tz=0.05)
+transform, fit = G.align(shifted, ROOM)
+check("4a converges", fit["iterations"] >= 1)
+check("4b most points find a match", fit["inlier_ratio"] > 0.8,
+      str(fit["inlier_ratio"]))
+check("4c and closely", fit["rmse_m"] < G.GOOD_RMSE_M, str(fit["rmse_m"]))
+check("4d the yaw is recovered", abs(transform.as_dict()["yaw_deg"] + 12) < 2.0,
+      str(transform.as_dict()))
+
+verdict = G.verify(fit)
+check("4e verified usable", verdict["usable"])
+check("4f and confident", verdict["confidence"] == "good", str(verdict))
+check("4g the error is stated in millimetres", "mm" in verdict["note"])
+
+# Identical clouds are the easy case and must not somehow fail.
+_t, same = G.align(ROOM, ROOM)
+check("4h a cloud aligns to itself", same["rmse_m"] < 1e-6, str(same["rmse_m"]))
+
+try:
+    G.align([], ROOM)
+    check("4i an empty scan is refused", False)
+except G.RegistrationError:
+    check("4i an empty scan is refused", True)
+
+
+# ---- 5. THE refusals ------------------------------------------------------
+# Two different rooms must not be forced together. Somebody drills on this.
+other = make_room(width=9.0, depth=2.0, height=3.2, step=0.06)
+_t, bad = G.align(other, ROOM)
+try:
+    G.verify(bad)
+    check("5a two different rooms are refused", False)
+except G.RegistrationError as e:
+    check("5a two different rooms are refused",
+          "do not align" in str(e) or "too loose" in str(e), str(e))
+    check("5b and it says not to position services from it",
+          "NOT" in str(e) or "re-scan" in str(e).lower(), str(e))
+
+# A fit that matches plenty of points but loosely is still unusable — the
+# ratio alone is not enough, because a loose fit matches everything badly.
+try:
+    G.verify({"inlier_ratio": 0.95, "rmse_m": 0.05})
+    check("5c a loose fit is refused even at high inlier ratio", False)
+except G.RegistrationError as e:
+    check("5c a loose fit is refused even at high inlier ratio",
+          "too loose" in str(e), str(e))
+    check("5d and quantifies the risk", "mm" in str(e))
+
+try:
+    G.verify({"inlier_ratio": 0.1, "rmse_m": 0.001})
+    check("5e a tight fit on few points is refused", False)
+except G.RegistrationError as e:
+    check("5e a tight fit on few points is refused", "do not align" in str(e))
+
+try:
+    G.verify({"inlier_ratio": 0.0, "rmse_m": None})
+    check("5f no matches at all is refused", False)
+except G.RegistrationError:
+    check("5f no matches at all is refused", True)
+
+# A borderline fit is usable but must say so, not claim confidence.
+fair = G.verify({"inlier_ratio": 0.45, "rmse_m": 0.020})
+check("5g a borderline fit is fair, not good", fair["confidence"] == "fair")
+check("5h and says to verify before drilling",
+      "before drilling" in fair["note"], fair["note"])
+
+
+# ---- 6. tilt --------------------------------------------------------------
+# 3-DOF is the whole design: both scans are gravity-aligned, so a tilted one
+# CANNOT be rescued by this and must not appear to be.
+angle = math.radians(20)
+tilted = [(x, y * math.cos(angle) - z * math.sin(angle),
+           y * math.sin(angle) + z * math.cos(angle)) for x, y, z in COARSE]
+_t, tilt_fit = G.align(tilted, ROOM)
+try:
+    G.verify(tilt_fit)
+    check("6a a tilted scan does not pass as aligned", False,
+          str(tilt_fit))
+except G.RegistrationError:
+    check("6a a tilted scan does not pass as aligned", True)
+
+
+# ---- 7. the whole thing ---------------------------------------------------
+result = G.register(shifted, ROOM)
+check("7a registration succeeds", result["verdict"]["usable"])
+check("7b transform reported", "yaw_deg" in result["transform"])
+check("7c the gravity assumption is stated",
+      any("gravity-aligned" in w for w in result["warnings"]))
+check("7d and the detector advice",
+      any("detector" in w for w in result["warnings"]), str(result["warnings"]))
+
+try:
+    G.register(other, ROOM)
+    check("7e a bad pair raises rather than returning a best effort", False)
+except G.RegistrationError:
+    check("7e a bad pair raises rather than returning a best effort", True)
+
+
+# ---- 8. handler entry -----------------------------------------------------
+class _Prog:
+    def stage(self, *a, **k):
+        pass
+
+
+import reconstruct as R  # noqa: E402
+TMP = tempfile.gettempdir()
+OUT = os.path.join(TMP, "register-test")
+open_path = os.path.join(TMP, "open_scan.ply")
+closed_path = os.path.join(TMP, "closed_scan.ply")
+R.write_ply(open_path, shifted)
+R.write_ply(closed_path, ROOM)
+
+arts, extra = G.run({"point_cloud_path": open_path,
+                     "registration_target_path": closed_path,
+                     "scan_id": "r1"}, _Prog(), OUT)
+res = extra["registration"]
+check("8a end to end", res["verdict"]["usable"], str(res["verdict"]))
+check("8b both point counts reported",
+      res["points"]["open"] > 0 and res["points"]["closed"] > 0)
+check("8c artifact written", os.path.exists(arts[0][0]))
+
+# A failed registration must come back WITH its numbers, not as an exception:
+# the fit statistics are exactly what tells a user how to re-scan.
+bad_path = os.path.join(TMP, "other_scan.ply")
+R.write_ply(bad_path, other)
+arts, extra = G.run({"point_cloud_path": bad_path,
+                     "registration_target_path": closed_path,
+                     "scan_id": "r2"}, _Prog(), OUT)
+res = extra["registration"]
+check("8d a failed fit reports rather than raises",
+      res["verdict"]["usable"] is False, str(res["verdict"]))
+check("8e and keeps the numbers that say how to re-scan",
+      "inlier_ratio" in res["fit"] and "reason" in res["verdict"],
+      str(res["fit"]))
+
+for bad, phrase in [({}, "two scans"),
+                    ({"point_cloud_path": open_path}, "two scans")]:
+    try:
+        G.run(bad, _Prog(), OUT)
+        check(f"8f refused: {phrase}", False)
+    except G.RegistrationError as e:
+        check(f"8f refused: {phrase}", "two scans" in str(e), str(e))
+
+try:
+    G.run({"point_cloud_url": "file:///etc/passwd",
+           "registration_target": "file:///etc/hosts"}, _Prog(), OUT)
+    check("8g a local-file URL is refused", False)
+except Exception as e:
+    check("8g a local-file URL is refused",
+          "http" in str(e).lower() or "scheme" in str(e).lower(), str(e)[:70])
+
+
+# ==========================================================================
+print()
+for f in FAILED:
+    print(f"FAIL  {f}")
+print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
+sys.exit(1 if FAILED else 0)
