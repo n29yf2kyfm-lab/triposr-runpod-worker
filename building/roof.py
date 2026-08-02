@@ -20,6 +20,7 @@ number has to be exact, verify on site.
 """
 import os
 import sys
+import time
 import json
 import math
 
@@ -361,6 +362,20 @@ MIN_SAMPLES_PER_M2 = 0.45
 
 _COVERAGE_CACHE = {}
 
+# The EA capabilities endpoint flaps. Measured live: 1 success in 10 calls
+# over 30 seconds, the rest connection resets, while the coverage data
+# itself served fine throughout.
+COVERAGE_RETRIES = 4
+COVERAGE_BACKOFF_S = 1.5
+
+# Coverage ids embed a dataset UUID and change when the EA republishes, so
+# the cache is aged out rather than kept forever. A week is far shorter than
+# the republication cycle and far longer than an outage.
+COVERAGE_CACHE_TTL_S = 7 * 24 * 3600
+COVERAGE_CACHE_DIR = paths.resolve(
+    "COVERAGE_CACHE_DIR", "building-outputs/coverage",
+    "building-outputs/coverage")
+
 
 def coverage_id(wcs_url):
     """Discover the WCS coverage id for a dataset.
@@ -378,21 +393,83 @@ def coverage_id(wcs_url):
     if wcs_url in _COVERAGE_CACHE:
         return _COVERAGE_CACHE[wcs_url]
 
+    disk = _coverage_from_disk(wcs_url)
+    if disk:
+        _COVERAGE_CACHE[wcs_url] = disk
+        return disk
+
     requests = _requests()
+    import re
+    import time
+
+    # RETRIED AND PERSISTED, because this endpoint is genuinely unreliable
+    # and a failure here fails a job that would otherwise have worked.
+    # Measured against the live service: ten GetCapabilities calls three
+    # seconds apart returned ONE 200 and nine connection resets. The
+    # coverage data itself was fine throughout — it is only the metadata
+    # document that flaps — so a single unlucky call was losing the whole
+    # roof job with "no elevation data", which reads as "no LIDAR here"
+    # rather than "the catalogue was briefly down".
+    last = None
+    for attempt in range(COVERAGE_RETRIES):
+        try:
+            r = requests.get(wcs_url, headers=HTTP_HEADERS,
+                             timeout=HTTP_TIMEOUT,
+                             params={"service": "WCS",
+                                     "request": "GetCapabilities"})
+            r.raise_for_status()
+            ids = re.findall(r"<wcs:CoverageId>([^<]+)</wcs:CoverageId>",
+                             r.text)
+            chosen = next((i for i in ids if "Elevation" in i),
+                          ids[0] if ids else None)
+            if chosen:
+                _COVERAGE_CACHE[wcs_url] = chosen
+                _coverage_to_disk(wcs_url, chosen)
+                return chosen
+            last = "no coverage ids in the capabilities document"
+        except Exception as e:
+            last = f"{type(e).__name__}: {e}"
+        if attempt < COVERAGE_RETRIES - 1:
+            time.sleep(COVERAGE_BACKOFF_S * (2 ** attempt))
+
+    print(f"WCS GetCapabilities failed after {COVERAGE_RETRIES} attempts "
+          f"({last})", file=sys.stderr)
+    return None
+
+
+def _coverage_cache_path(wcs_url):
+    import hashlib
+    key = hashlib.sha256(wcs_url.encode()).hexdigest()[:16]
+    return os.path.join(COVERAGE_CACHE_DIR, f"coverage_{key}.txt")
+
+
+def _coverage_from_disk(wcs_url):
+    """A previously discovered coverage id, if it is still fresh.
+
+    Persisted rather than held per-process: a serverless worker is a new
+    process on every cold start, so an in-memory cache never survives to be
+    used. Aged out because the ids embed a dataset UUID and do change when
+    the EA republishes — a stale one would fetch nothing and look like no
+    coverage.
+    """
+    path = _coverage_cache_path(wcs_url)
     try:
-        r = requests.get(wcs_url, headers=HTTP_HEADERS, timeout=HTTP_TIMEOUT,
-                         params={"service": "WCS",
-                                 "request": "GetCapabilities"})
-        r.raise_for_status()
-        import re
-        ids = re.findall(r"<wcs:CoverageId>([^<]+)</wcs:CoverageId>", r.text)
-    except Exception as e:
-        print(f"WCS GetCapabilities failed: {e}", file=sys.stderr)
+        age = time.time() - os.path.getmtime(path)
+        if age > COVERAGE_CACHE_TTL_S:
+            return None
+        with open(path) as f:
+            return f.read().strip() or None
+    except OSError:
         return None
 
-    chosen = next((i for i in ids if "Elevation" in i), ids[0] if ids else None)
-    _COVERAGE_CACHE[wcs_url] = chosen
-    return chosen
+
+def _coverage_to_disk(wcs_url, coverage):
+    try:
+        paths.ensure(COVERAGE_CACHE_DIR)
+        with open(_coverage_cache_path(wcs_url), "w") as f:
+            f.write(coverage)
+    except OSError as e:
+        print(f"coverage cache not written: {e}", file=sys.stderr)
 
 
 def fetch_surface(bbox, wcs_url, cell_m=EA_CELL_M):
@@ -404,6 +481,12 @@ def fetch_surface(bbox, wcs_url, cell_m=EA_CELL_M):
 
     The service publishes on EPSG:27700 with axis labels E and N, so the
     subset is given in National Grid metres directly — no reprojection.
+
+    RETRIED, for the same measured reason as coverage_id: the EA endpoint
+    resets connections under load. A single-shot fetch turned a transient
+    reset into "No elevation data… Coverage is England only", which tells a
+    builder their house is not covered when in fact the service blinked. A
+    wrong answer about coverage is worse than a slow one.
     """
     requests = _requests()
     cid = coverage_id(wcs_url)
@@ -418,17 +501,28 @@ def fetch_surface(bbox, wcs_url, cell_m=EA_CELL_M):
         ("coverageId", cid), ("format", "image/tiff"),
         ("subset", f"E({minx},{maxx})"), ("subset", f"N({miny},{maxy})"),
     ]
-    try:
-        r = requests.get(wcs_url, params=params, headers=HTTP_HEADERS,
-                         timeout=HTTP_TIMEOUT)
-        if r.status_code != 200 or not r.content:
-            print(f"WCS {wcs_url} returned {r.status_code}: "
-                  f"{r.text[:200]}", file=sys.stderr)
-            return None
-        return _decode_geotiff(r.content, bbox, cell_m)
-    except Exception as e:
-        print(f"WCS fetch failed: {e}", file=sys.stderr)
-        return None
+    last = None
+    for attempt in range(COVERAGE_RETRIES):
+        try:
+            r = requests.get(wcs_url, params=params, headers=HTTP_HEADERS,
+                             timeout=HTTP_TIMEOUT)
+            if r.status_code == 200 and r.content:
+                return _decode_geotiff(r.content, bbox, cell_m)
+            # 4xx is a real answer about this request — a bad bbox or an
+            # expired coverage id — and repeating it will not change it.
+            if 400 <= r.status_code < 500:
+                print(f"WCS {wcs_url} returned {r.status_code}: "
+                      f"{r.text[:200]}", file=sys.stderr)
+                return None
+            last = f"HTTP {r.status_code}"
+        except Exception as e:
+            last = f"{type(e).__name__}: {e}"
+        if attempt < COVERAGE_RETRIES - 1:
+            time.sleep(COVERAGE_BACKOFF_S * (2 ** attempt))
+
+    print(f"WCS fetch failed after {COVERAGE_RETRIES} attempts ({last})",
+          file=sys.stderr)
+    return None
 
 
 def _decode_geotiff(data, bbox, cell_m):

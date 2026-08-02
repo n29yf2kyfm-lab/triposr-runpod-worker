@@ -131,6 +131,42 @@ CATALOGUE = {
     },
 }
 
+# What a unit of each product could plausibly cost, ex-VAT, in the
+# catalogue's own unit. NOT an estimate — the estimate comes from
+# observations. This is an order-of-magnitude sanity band, and it exists
+# because of a real import.
+#
+# The government's own DBT building-materials tables were fed through the
+# importer as a price list. They are an INDEX (2015 = 100), not pounds, and
+# 29 of 30 lines were correctly refused as unmatched — but "Precast
+# concrete: blocks, bricks, tiles and flagstones" matched `bricks` and its
+# index value of 173.1 was filed as £173.10 PER BRICK, with no note at all.
+# A facing brick is well under a pound. Nothing in the module could catch a
+# 200x error, because nothing in the module knew what a brick costs.
+#
+# Bands are deliberately wide — wider than any real price spread — because
+# the job is to catch a unit mix-up, an index mistaken for money, or pence
+# read as pounds, not to second-guess a merchant.
+PLAUSIBLE_PRICE = {
+    "roof_covering":     (0.15, 12.00),    # per tile: concrete to handmade clay
+    "battens":           (0.20, 5.00),     # per m
+    "membrane":          (0.30, 12.00),    # per m2
+    "plasterboard":      (1.00, 25.00),    # per m2
+    "insulation":        (1.00, 60.00),    # per m2: mineral wool to PIR
+    "structural_timber": (0.80, 40.00),    # per m: batten to glulam
+    "bricks":            (0.15, 8.00),     # each: common to handmade
+    "guttering":         (1.50, 60.00),    # per m: uPVC to cast iron
+}
+
+
+def plausible_price(product, price):
+    """Whether a unit price could be real for this product. None if unknown."""
+    band = PLAUSIBLE_PRICE.get(product)
+    if band is None or price is None:
+        return None
+    return band[0] <= price <= band[1]
+
+
 # DBT Construction Material Price Indices, published monthly on the first
 # Wednesday, free and official, with commodity series running back decades.
 # The series names below map our catalogue onto theirs.

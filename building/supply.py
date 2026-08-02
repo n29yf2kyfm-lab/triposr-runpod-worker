@@ -702,6 +702,28 @@ def normalise_line(line, vat_rate=UK_VAT_RATE):
         have = "each"
 
     price = _convert_unit(price, have, wanted, product, line)
+
+    # 4. LAST GATE: could this be a real price for this product at all?
+    #
+    # Found by importing the government's own DBT building-materials tables.
+    # They are an index (2015 = 100), not pounds; 29 of 30 lines were
+    # correctly refused as unmatched, but one matched `bricks` and its index
+    # value of 173.1 was filed as £173.10 PER BRICK with no note. Every
+    # earlier check passed, because each of them asks "is this line
+    # well-formed" and none asks "is this number possible".
+    #
+    # Refused rather than warned. A price 200x out is not a line to look at
+    # twice, it is a line that must not reach the price engine — one
+    # observation like that drags a weighted median off any real value.
+    if price is not None and prices.plausible_price(product, price) is False:
+        low, high = prices.PLAUSIBLE_PRICE[product]
+        line.notes.append(
+            f"£{price:,.2f} per {wanted} is outside anything {product} could "
+            f"plausibly cost (£{low:g}–£{high:g}). Most often this is an "
+            f"index or a rate rather than a price, or pence read as pounds. "
+            f"Not used, check this line")
+        return line
+
     line.unit_price_ex_vat = price
     return line
 

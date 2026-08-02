@@ -355,8 +355,13 @@ try:
     _o, _s = S.to_observations([_bad], channel="trade_account", when=TODAY)
     check("8f2 a price the engine rejects is skipped, not raised",
           len(_o) == 0 and len(_s) == 1, f"{len(_o)}/{len(_s)}")
+    # A reason must be recorded, whichever gate caught it. The plausibility
+    # band now catches a negative brick price before the engine sees it —
+    # defence in depth, and a clearer message — so this asserts that SOME
+    # gate explained itself rather than naming one of them.
     check("8f3 and the reason is recorded on the line",
-          any("price engine" in n for n in _s[0].notes), str(_s[0].notes))
+          any("price engine" in n or "plausibly cost" in n
+              for n in _s[0].notes), str(_s[0].notes))
 except prices.PriceError as e:
     check("8f2 a price the engine rejects is skipped, not raised", False,
           f"PriceError escaped: {e}")
@@ -610,9 +615,51 @@ _vague = S.normalise_line(
     S.Line(description="Roof tile", price=48.50, unit="m2", vat=S.VAT_EX),
     S.UK_VAT_RATE)
 check("12w an unidentifiable covering is NOT converted",
-      _vague.unit_price_ex_vat == 48.50, str(_vague.unit_price_ex_vat))
+      not any("per m2 -> per tile" in n for n in _vague.notes),
+      str(_vague.notes))
 check("12x and says why, with the numbers",
       any("factor of six" in n for n in _vague.notes), str(_vague.notes))
+# And because £48.50 cannot be a per-tile price either, the plausibility
+# band stops it reaching the engine at all rather than passing it through.
+check("12x2 and the unconverted figure is not filed as a price",
+      _vague.unit_price_ex_vat is None, str(_vague.unit_price_ex_vat))
+
+# THE GUARD THAT WAS MISSING, found by importing the government's own DBT
+# building-materials tables as a price list. They are an INDEX (2015 = 100),
+# not pounds. 29 of 30 lines were correctly refused as unmatched, but
+# "Precast concrete: blocks, bricks, tiles and flagstones" matched `bricks`
+# and its index value of 173.1 was filed as £173.10 PER BRICK, with no note.
+# Every earlier check passed: each asks "is this line well-formed", none
+# asked "is this number possible".
+_index = S.normalise_line(
+    S.Line(description="Cement and concrete - Precast concrete: blocks, "
+                       "bricks, tiles and flagstones",
+           price=173.1, unit="each", vat=S.VAT_EX), S.UK_VAT_RATE)
+check("12y an index value is not filed as a price",
+      _index.unit_price_ex_vat is None, str(_index.unit_price_ex_vat))
+check("12z and the line says what it probably was",
+      any("index or a rate" in n for n in _index.notes), str(_index.notes))
+
+# Pence read as pounds is the same class of error in the other direction.
+_pence = S.normalise_line(
+    S.Line(description="Facing brick", price=0.004, unit="each",
+           vat=S.VAT_EX), S.UK_VAT_RATE)
+check("12z2 an implausibly LOW price is refused too",
+      _pence.unit_price_ex_vat is None, str(_pence.unit_price_ex_vat))
+
+# The band must not reject real prices. These are ordinary UK trade figures.
+for _desc, _price, _unit in [("Facing brick", 0.62, "each"),
+                             ("Handmade facing brick", 3.20, "each"),
+                             ("Gyproc plasterboard 12.5mm", 3.40, "m2"),
+                             ("Roofing batten 25x50 treated", 0.95, "m"),
+                             ("Concrete interlocking roof tile", 1.10, "each"),
+                             ("Breathable roofing membrane", 1.80, "m2")]:
+    _ok = S.normalise_line(
+        S.Line(description=_desc, price=_price, unit=_unit, vat=S.VAT_EX),
+        S.UK_VAT_RATE)
+    check(f"12z3 a real price passes: {_desc[:26]!r} at £{_price}",
+          _ok.unit_price_ex_vat is not None,
+          f"refused: {_ok.notes}")
 
 check("12s the real product still matches",
       S.match_product("Gyproc plasterboard 12.5mm 2400x1200")[0]
