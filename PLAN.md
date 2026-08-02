@@ -4,8 +4,9 @@ Scan a real building. Reconstruct it 1:1, inside and out, including the pipes an
 behind the walls. Price the job at live local material prices and order the materials.
 Audit its condition. Design the extension. Export real CAD.
 
-**Companion document:** [`COMPETITORS.md`](./COMPETITORS.md) — full competitor teardown,
-capability matrix and patent intelligence.
+**Companion documents:** [`COMPETITORS.md`](./COMPETITORS.md) — competitor teardown, capability
+matrix and patent intelligence. [`MARKET.md`](./MARKET.md) — the surrounding software market,
+open-source licences verified by execution, UK material-price reality, and integration targets.
 
 ---
 
