@@ -77,6 +77,9 @@ jobs:
       - name: Run services X-ray tests
         run: python building/test_services.py
 
+      - name: Run planning constraint tests
+        run: python building/test_planning.py
+
   build:
     needs: test
     runs-on: ubuntu-latest

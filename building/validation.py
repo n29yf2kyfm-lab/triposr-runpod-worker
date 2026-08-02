@@ -29,6 +29,7 @@ MODES = (
     "design",        # footprint + rules -> massing, planning checks
     "valuation",     # address -> sold comparables -> value, extension uplift
     "drawing",       # 2D PDF/DXF -> confirmed scale -> measured quantities
+    "planning",      # address -> site designations -> can this be built?
 )
 
 # Roof capture sources, cheapest and easiest first.
@@ -545,6 +546,12 @@ def parse_job(job_input):
                       or None)
     spec["max_sales"] = _int(job_input.get("max_sales"), "max_sales",
                              None, 10, 2000)
+
+    # --- planning ---------------------------------------------------------
+    # How far to look for designations whose SETTING reaches the site — a
+    # listed building next door still constrains the design.
+    spec["search_radius_m"] = _float(job_input.get("search_radius_m"),
+                                     "search_radius_m", None, 10.0, 1000.0)
     # --- drawing ----------------------------------------------------------
     # Assisted takeoff. The scale is never inferred silently — see drawing.py.
     # --- structure --------------------------------------------------------
@@ -608,6 +615,12 @@ def _check_required_inputs(spec):
             or has_capture):
         raise InputError(
             f"{mode} needs point_cloud_url (or a capture to build one from).")
+
+    if mode == "planning" and not (spec["address"] or spec["postcode"]
+                                   or spec["gps"]):
+        raise InputError(
+            "planning needs an address, a postcode, or gps {lat, lon} to "
+            "know which site to screen for designations.")
 
     if mode == "register" and not spec["registration_target"]:
         raise InputError(

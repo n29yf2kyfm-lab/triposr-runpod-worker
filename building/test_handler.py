@@ -10,6 +10,7 @@ import os
 import sys
 import json
 import types
+import re as _re
 import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -283,11 +284,35 @@ p.stage("fetching")
 p.stage("poses")
 p.note("142 frames")
 check("14a stages advance", p.emitted[1]["step"] == 2, str(p.emitted[1]))
-check("14b step count exposed", p.emitted[0]["steps"] == 6)
+check("14b step count exposed",
+      p.emitted[0]["steps"] == len(progress.STAGE_PLANS["reconstruct"]))
 check("14c notes do not advance", p.emitted[2]["stage"] == "note")
 check("14d every mode has a stage plan",
       all(m in progress.STAGE_PLANS for m in validation.MODES),
       str(set(validation.MODES) - set(progress.STAGE_PLANS)))
+
+# A plan promising stages the module never emits is worse than no plan: the
+# progress bar jumps 1 -> 2 -> 4 and finishes at 5 of 5 having skipped one,
+# which reads as a stalled job. Four plans listed stages nothing reached —
+# reconstruct's "meshing", structure's "fitting_planes", services'
+# "connecting" and "building_ifc".
+_emitted_by_module = {}
+for _name in sorted(os.listdir(HERE)):
+    if not _name.endswith(".py") or _name.startswith("test_"):
+        continue
+    _emitted_by_module[_name[:-3]] = set(
+        _re.findall(r'prog\.stage\(\s*["\']([a-z_]+)["\']',
+                    open(os.path.join(HERE, _name)).read()))
+
+_MODULE_OF_MODE = {"price": "takeoff"}
+for _mode, _plan in sorted(progress.STAGE_PLANS.items()):
+    _module = _MODULE_OF_MODE.get(_mode, _mode)
+    _emitted = _emitted_by_module.get(_module)
+    if _emitted is None or not _emitted:
+        continue                    # mode not implemented yet
+    _phantom = [s for s in _plan if s not in _emitted]
+    check(f"14e {_mode}'s plan promises no stage it never emits",
+          not _phantom, f"planned but never emitted: {_phantom}")
 
 # ---- Test 15: errors never leak tracebacks without DEBUG -----------------
 def _boom(*a, **k):
