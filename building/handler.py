@@ -83,6 +83,8 @@ PHASE_OF_MODE = {
     "planning":    ("2d", "Planning Data platform -> Article 4, conservation "
                           "area, listed, green belt, flood zone, TPO -> is "
                           "this permitted development?"),
+    "model":       ("3b", "drawing's figured dimensions -> walls, storeys, "
+                          "roof -> OBJ + IFC + take-off"),
 }
 
 
@@ -98,7 +100,7 @@ def _pipeline_available(mode):
         "roof": "roof", "price": "takeoff", "supply": "supply",
         "condition": "condition", "design": "design",
         "valuation": "valuation", "drawing": "drawing",
-        "planning": "planning",
+        "planning": "planning", "model": "model3d",
     }.get(mode)
     if not module:
         return False
@@ -303,7 +305,7 @@ def _dispatch(mode, spec, prog):
         "roof": "roof", "price": "takeoff", "supply": "supply",
         "condition": "condition", "design": "design",
         "valuation": "valuation", "drawing": "drawing",
-        "planning": "planning",
+        "planning": "planning", "model": "model3d",
     }[mode]
     module = __import__(module_name)
     return module.run(spec, prog, OUTPUT_DIR)

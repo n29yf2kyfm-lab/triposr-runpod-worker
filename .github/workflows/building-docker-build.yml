@@ -83,6 +83,9 @@ jobs:
       - name: Run scan registration tests
         run: python building/test_register.py
 
+      - name: Run model (drawing -> 3D) tests
+        run: python building/test_model3d.py
+
   build:
     needs: test
     runs-on: ubuntu-latest

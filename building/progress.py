@@ -51,6 +51,7 @@ STAGE_PLANS = {
     "services":    ["fetching", "extracting_runs", "classifying",
                     "exporting"],
     "planning":    ["fetching", "screening", "exporting"],
+    "model":       ["reading", "building", "exporting"],
     "register":    ["fetching", "coarse_align", "icp", "scoring",
                     "exporting"],
     "roof":        ["fetching", "clipping_footprint", "fitting_planes",

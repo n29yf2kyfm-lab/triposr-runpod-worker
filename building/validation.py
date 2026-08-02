@@ -30,6 +30,7 @@ MODES = (
     "valuation",     # address -> sold comparables -> value, extension uplift
     "drawing",       # 2D PDF/DXF -> confirmed scale -> measured quantities
     "planning",      # address -> site designations -> can this be built?
+    "model",         # drawing's figured dimensions -> 3D building -> OBJ/IFC
 )
 
 # Roof capture sources, cheapest and easiest first.
@@ -200,6 +201,129 @@ def _quantities(value):
 
 
 MAX_OBSERVATIONS = 200
+
+# Model mode caps. A plan is typed in from a drawing by hand, so these are
+# generous limits on a human's patience rather than on the machine.
+MAX_PLAN_ROOMS = 2000
+# model3d.build refuses more than this, so clamping any higher would only
+# swap a clear validation message for a later one.
+MAX_STOREYS = 20
+# A room bigger than this is a warehouse, not a room, and is far more likely
+# to be a millimetre figure that was not divided by a thousand.
+MAX_ROOM_SIDE_M = 200.0
+MIN_ROOM_SIDE_M = 0.30
+
+
+def _plan(value):
+    """Validate a Model Mode plan: the rooms typed off a drawing.
+
+    Every room is a name, a position and a size in METRES. Millimetres are
+    the trap here — a drawing is figured in mm, and 4570 read straight across
+    is a room 4.57km wide that no downstream check would question. The side
+    bounds below catch exactly that, which is why they are tighter than the
+    machine needs.
+    """
+    if value is None:
+        return None
+    if not isinstance(value, dict):
+        raise InputError(
+            'plan must be an object: {"rooms": [...], "schedule": {...}}')
+
+    entries = value.get("rooms")
+    if not isinstance(entries, (list, tuple)) or not entries:
+        raise InputError(
+            'plan.rooms must be a non-empty list of '
+            '{"name": ..., "x": ..., "y": ..., "width_m": ..., "depth_m": ...}')
+    if len(entries) > MAX_PLAN_ROOMS:
+        raise InputError(
+            f"plan.rooms has {len(entries)} entries; the cap is "
+            f"{MAX_PLAN_ROOMS}")
+
+    rooms = []
+    for i, item in enumerate(entries):
+        if not isinstance(item, dict):
+            raise InputError(f"plan.rooms[{i}] must be an object")
+        name = str(item.get("name") or "").strip()
+        if not name:
+            raise InputError(
+                f"plan.rooms[{i}] has no name — the name is what the room "
+                f"schedule is checked against, so it has to match the drawing")
+        room = {"name": name}
+        for key, lo, hi in (("x", -MAX_ROOM_SIDE_M, MAX_ROOM_SIDE_M),
+                            ("y", -MAX_ROOM_SIDE_M, MAX_ROOM_SIDE_M)):
+            room[key] = _float(item.get(key), f"plan.rooms[{i}].{key}",
+                               0.0, lo, hi)
+        for key in ("width", "depth"):
+            got = item.get(f"{key}_m", item.get(key))
+            # NOT CLAMPED. Every other size in this file clamps to a sanity
+            # bound, and here that would be the bug: a drawing is figured in
+            # millimetres, so 4570 typed straight across is the commonest
+            # mistake there is — and clamping it to 200 m turns an obvious
+            # fault into a plausible room that nothing downstream questions.
+            side = _float(got, f"plan.rooms[{i}].{key}_m")
+            if side is None:
+                raise InputError(
+                    f"plan.rooms[{i}] ({name}) has no {key}_m. Take it from "
+                    f"the drawing's figured dimensions, in metres.")
+            if not MIN_ROOM_SIDE_M <= side <= MAX_ROOM_SIDE_M:
+                raise InputError(
+                    f"plan.rooms[{i}] ({name}) is {side:g} m {key}, outside "
+                    f"the {MIN_ROOM_SIDE_M}–{MAX_ROOM_SIDE_M:.0f} m a room "
+                    f"can be. Check the units: a drawing is figured in "
+                    f"MILLIMETRES, so 4570 means 4.57.")
+            room[f"{key}_m"] = side
+        height = _float(item.get("height_m"), f"plan.rooms[{i}].height_m",
+                        None, 1.5, 20.0)
+        if height is not None:
+            room["height_m"] = height
+        room["kind"] = str(item.get("kind") or "room").strip() or "room"
+        rooms.append(room)
+
+    out = {"rooms": rooms}
+
+    schedule = value.get("schedule")
+    if schedule is not None:
+        if not isinstance(schedule, dict):
+            raise InputError(
+                'plan.schedule must be an object mapping room name -> the '
+                'floor area printed on the drawing, in m2')
+        checked = {}
+        for name, area in schedule.items():
+            key = str(name).strip()
+            if not key:
+                raise InputError("plan.schedule has an entry with no name")
+            number = _float(area, f"plan.schedule[{key!r}]", None,
+                            0.1, MAX_ROOM_SIDE_M ** 2)
+            if number is None:
+                raise InputError(
+                    f"plan.schedule[{key!r}] must be an area in m2")
+            checked[key] = number
+        out["schedule"] = checked
+
+    out["storeys"] = _int(value.get("storeys"), "plan.storeys", 1, 1,
+                          MAX_STOREYS)
+    out["height_m"] = _float(value.get("height_m"), "plan.height_m", None,
+                             1.5, 20.0)
+    out["storey_height_m"] = _float(value.get("storey_height_m"),
+                                    "plan.storey_height_m", None, 1.8, 25.0)
+
+    roof = value.get("roof")
+    if roof is not None:
+        if roof is True:
+            roof = {}
+        if not isinstance(roof, dict):
+            raise InputError(
+                'plan.roof must be an object: '
+                '{"pitch_deg": 35, "kind": "hipped", "overhang_m": 0.3}')
+        out["roof"] = {
+            "pitch_deg": _float(roof.get("pitch_deg"), "plan.roof.pitch_deg",
+                                None, 0.0, 89.0),
+            "kind": _one_of(roof.get("kind"), "plan.roof.kind",
+                            ("hipped", "gabled"), default="hipped"),
+            "overhang_m": _float(roof.get("overhang_m"),
+                                 "plan.roof.overhang_m", None, 0.0, 2.0),
+        }
+    return out
 
 
 def _observations(value):
@@ -552,6 +676,11 @@ def parse_job(job_input):
     # listed building next door still constrains the design.
     spec["search_radius_m"] = _float(job_input.get("search_radius_m"),
                                      "search_radius_m", None, 10.0, 1000.0)
+    # --- model ------------------------------------------------------------
+    # A plan typed off the drawing's figured dimensions. Not traced — traced
+    # linework is what the drawing itself tells you not to scale from.
+    spec["plan"] = _plan(job_input.get("plan"))
+
     # --- drawing ----------------------------------------------------------
     # Assisted takeoff. The scale is never inferred silently — see drawing.py.
     # --- structure --------------------------------------------------------
@@ -628,6 +757,12 @@ def _check_required_inputs(spec):
         raise InputError(
             "planning needs an address, a postcode, or gps {lat, lon} to "
             "know which site to screen for designations.")
+
+    if mode == "model" and not spec["plan"]:
+        raise InputError(
+            "model needs a plan: the rooms typed off the drawing's figured "
+            "dimensions, each with a name, an x/y position in metres and a "
+            "width_m and depth_m.")
 
     if mode == "register" and not spec["registration_target"]:
         raise InputError(

@@ -53,6 +53,7 @@ far less than breaking a product that is earning. A test asserts this isolation 
 | `valuation` | address → Land Registry + EPC + UKHPI → value, extension uplift | 2c |
 | `planning` | address → site designations → is this permitted development? | 2d |
 | `structure` | point cloud → walls, slabs, storeys → IFC | 3 |
+| `model` | drawing's figured dimensions → walls, storeys, roof → OBJ + IFC | 3b |
 | `services` | open-scan cloud → pipe and cable runs, BS 7671 zones | 4 |
 | `drawing` | 2D PDF → confirmed scale → measured quantities | 7 |
 | `condition` | imagery + thermal → 3D-located, costed defects | 5 |
@@ -64,6 +65,24 @@ RoomPlan or IFC — `structure` writes IFC but nothing reads one back in.
 `structure` emits IFC walls and storey slabs with real placements and swept solids. It does
 **not** emit openings or spaces: nothing in the segmentation detects a door, a window or a
 room boundary, so there is nothing honest to write for them.
+
+`model` runs the opposite way to `structure`: a plan in, a building out. It takes the
+**figured dimensions** off a drawing — never the linework — because every UK sheet carries
+"do not scale from this drawing" and means it: the dimension string is the contract and the
+printed geometry illustrates it. Give it rooms and it returns walls with real thickness,
+storeys, a pitched roof, an OBJ and an IFC, and a take-off.
+
+Two things make it trustworthy rather than merely plausible. It **checks itself against the
+drawing's own room schedule** — the areas the architect printed in each room, which the model
+never saw — so a dimension read wrong shows up as a percentage rather than propagating
+silently. And it measures the roof on the **true slope**: at 35° that is 22% more covering
+than the footprint, and ordering off the footprint is how a re-roof comes up a fifth short on
+a job already priced.
+
+What it refuses to do is invent a dimension. A room with no stated size is reported missing,
+not modelled at a guess. Rooms are rectangles; a bay or a splay is not in the model. And a
+width outside 0.3–200 m is refused rather than clamped, because a drawing is figured in
+millimetres and `4570` typed straight across is the commonest mistake there is.
 
 Unimplemented modes return `status: "not_implemented"` with the implementing phase and a
 validated manifest — never a bare 500.
@@ -139,7 +158,7 @@ claiming success.
 python building/test_handler.py
 ```
 
-That file alone carries 223 assertions; the whole suite is **1618 across 17 files** — run
+That file alone carries 221 assertions; the whole suite is **1771 across 18 files** — run
 them all with `for f in building/test_*.py; do python "$f"; done`. No GPU. Same approach as
 the vehicle worker: stub the heavy modules, then test the contract logic. CI runs these
 **before** building the image, so a broken contract never reaches a deployable tag.
