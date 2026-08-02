@@ -32,6 +32,8 @@ STAGE_PLANS = {
                     "extracting_edges", "quantities", "exporting"],
     "price":       ["fetching", "quantities", "pricing", "exporting"],
     "supply":      ["fetching", "matching_products", "quoting", "exporting"],
+    "valuation":   ["fetching", "comparables", "indexing", "valuing",
+                    "exporting"],
     "condition":   ["fetching", "detecting", "locating_3d", "grading",
                     "costing", "exporting"],
     "design":      ["fetching", "massing", "compliance_check", "exporting"],

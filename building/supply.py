@@ -845,12 +845,12 @@ def run(spec, prog, output_dir):
             response.raise_for_status()
             text = response.text
 
-    prog.stage("quantities")
+    prog.stage("matching_products")
     report = import_price_list(text, vat=vat, channel=channel,
                                supplier=spec.get("supplier"))
     observations = report.pop("observations")
 
-    prog.stage("pricing")
+    prog.stage("quoting")
     quantities = spec.get("quantities") or {}
     if quantities:
         report["basket"] = basket(quantities, observations,

@@ -27,6 +27,7 @@ MODES = (
     "supply",        # quantities -> merchant basket + RFQ
     "condition",     # imagery + thermal -> 3D-located defects
     "design",        # footprint + rules -> massing, planning checks
+    "valuation",     # address -> sold comparables -> value, extension uplift
 )
 
 # Roof capture sources, cheapest and easiest first.
@@ -251,6 +252,24 @@ def parse_job(job_input):
     spec["vat"] = _one_of(job_input.get("vat"), "vat",
                           ("ex", "inc", "unknown"), default="unknown")
     spec["supplier"] = (str(job_input.get("supplier") or "").strip() or None)
+
+    # --- valuation --------------------------------------------------------
+    # Sold comparables come from an address; the floor area ideally comes
+    # from the SCAN, which is the whole advantage — everyone else works from
+    # an agent's estimate or a decade-old EPC.
+    spec["postcode"] = (str(job_input.get("postcode") or "").strip() or None)
+    spec["property_type"] = _one_of(job_input.get("property_type"),
+                                    "property_type",
+                                    ("D", "S", "T", "F", "O"), default=None)
+    spec["floor_area_m2"] = _float(job_input.get("floor_area_m2"),
+                                   "floor_area_m2", None, 5.0, 2000.0)
+    # UKHPI names regions by local authority slug: "birmingham", "england".
+    spec["region"] = (str(job_input.get("region") or "").strip().lower()
+                      or None)
+    spec["extension_m2"] = _float(job_input.get("extension_m2"),
+                                  "extension_m2", None, 1.0, 500.0)
+    spec["build_cost"] = _float(job_input.get("build_cost"), "build_cost",
+                                None, 100.0, 5_000_000.0)
     spec["tier"] = _one_of(job_input.get("tier"), "tier",
                            ("economy", "standard", "premium"),
                            default="standard")
@@ -294,6 +313,12 @@ def _check_required_inputs(spec):
             "price needs measured quantities, or something to derive them "
             "from: pass quantities directly (roof mode returns them), or "
             "ifc_url, roomplan_url, or point_cloud_url.")
+
+    if mode == "valuation" and not (spec["postcode"] or spec["address"]):
+        raise InputError(
+            "valuation needs a postcode (or an address containing one) to "
+            "find sold comparables. HM Land Registry Price Paid Data covers "
+            "England and Wales only.")
 
     if mode == "supply" and not (spec["price_list_csv"]
                                  or spec["price_list_url"]):

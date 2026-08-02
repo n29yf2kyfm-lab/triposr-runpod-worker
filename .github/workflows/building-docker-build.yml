@@ -44,6 +44,9 @@ jobs:
       - name: Run supply and price-list import tests
         run: python building/test_supply.py
 
+      - name: Run valuation tests
+        run: python building/test_valuation.py
+
   build:
     needs: test
     runs-on: ubuntu-latest

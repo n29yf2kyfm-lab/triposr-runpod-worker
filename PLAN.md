@@ -500,7 +500,7 @@ repo/
     ├── safety.py            # ✅ scaffolding, work at height, CDM
     ├── terrain.py           # ✅ levels, earthworks, drainage, foundations
     │
-    ├── valuation.py         # ○ Land Registry + EPC
+    ├── valuation.py         # ✅ Land Registry + UKHPI, extension uplift
     ├── supply.py            # ✅ price-list import, multi-supplier, basket
     ├── structure.py         # ○ Cloud2BIM → IFC
     ├── services.py          # ○ pipe/cable extraction → the X-ray
@@ -538,7 +538,7 @@ defect register); RunPod serverless workers behind both.
 | ✅ | — Building Regs engine | done |
 | ✅ | — safety, scaffolding, CDM | done |
 | ✅ | — site levels, earthworks, foundations | done |
-| ○ | — valuation (Land Registry + EPC) | researched, free |
+| ✅ | 2c — valuation: Price Paid + UKHPI, street ceiling, extension uplift | done |
 | ✅ | 2b — Supply Mode: price-list import, multi-supplier, basket | done |
 | ○ | 2b — Supply Mode: merchant RFQ round-trip | next |
 | ○ | 3 — Structure → IFC | |

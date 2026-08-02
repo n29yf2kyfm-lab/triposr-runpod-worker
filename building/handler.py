@@ -65,6 +65,8 @@ PHASE_OF_MODE = {
     "condition":   ("5", "YOLO + SAM 2 defect detection -> 3D pins -> "
                          "costed remedies"),
     "design":      ("6", "procedural massing + permitted-development checks"),
+    "valuation":   ("2c", "Land Registry Price Paid + UKHPI -> value, street "
+                          "ceiling, extension uplift"),
 }
 
 
@@ -79,6 +81,7 @@ def _pipeline_available(mode):
         "structure": "structure", "services": "services",
         "roof": "roof", "price": "takeoff", "supply": "supply",
         "condition": "condition", "design": "design",
+        "valuation": "valuation",
     }.get(mode)
     if not module:
         return False
@@ -278,6 +281,7 @@ def _dispatch(mode, spec, prog):
         "structure": "structure", "services": "services",
         "roof": "roof", "price": "takeoff", "supply": "supply",
         "condition": "condition", "design": "design",
+        "valuation": "valuation",
     }[mode]
     module = __import__(module_name)
     return module.run(spec, prog, OUTPUT_DIR)

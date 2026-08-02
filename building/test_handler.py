@@ -348,6 +348,31 @@ except InputError as e:
           "quantities" in str(e), str(e))
 
 check("18e supply is implemented", "supply" in IMPLEMENTED, str(IMPLEMENTED))
+check("18e2 valuation is implemented", "valuation" in IMPLEMENTED,
+      str(IMPLEMENTED))
+
+s = parse_job({"mode": "valuation", "postcode": "B36 8AR",
+               "region": "Birmingham", "floor_area_m2": 96.0,
+               "extension_m2": 20.0, "build_cost": 55_000})
+check("18e3 valuation fields reach the spec",
+      s["postcode"] == "B36 8AR" and s["extension_m2"] == 20.0, str(s))
+check("18e4 the UKHPI region is lowercased for the API",
+      s["region"] == "birmingham", str(s["region"]))
+
+try:
+    parse_job({"mode": "valuation"})
+    check("18e5 valuation with no postcode refused", False)
+except InputError as e:
+    check("18e5 valuation with no postcode refused", "postcode" in str(e))
+    check("18e6 and states the coverage limit",
+          "England and Wales" in str(e), str(e))
+
+try:
+    parse_job({"mode": "valuation", "postcode": "B36 8AR",
+               "property_type": "mansion"})
+    check("18e7 unknown property type refused", False)
+except InputError:
+    check("18e7 unknown property type refused", True)
 s = parse_job({"mode": "supply", "price_list_csv": "a,b\n1,2\n",
                "vat": "ex", "channel": "trade_account"})
 check("18f supply fields reach the spec",
