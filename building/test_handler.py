@@ -405,6 +405,48 @@ for bad, label in [({"channel": "carrier_pigeon"}, "channel"),
         check(f"18i unknown {label} refused", True)
 
 
+# ---- Test 19: the SDK progress call must stay opt-in ----------------------
+# Bought expensively on the live endpoint: every job that called
+# runpod.serverless.progress_update() reached its final stage and then never
+# finalised, across every mode including one that makes no network calls. The
+# only job that ever returned cleanly was one rejected by validation, which
+# returns before Progress is constructed. 224ms against seven minutes.
+check("19a SDK progress is off by default", progress.SDK_PROGRESS is False,
+      str(progress.SDK_PROGRESS))
+check("19b it is controlled by an env var, not a constant",
+      'os.environ.get("BUILDING_SDK_PROGRESS"' in
+      open(os.path.join(HERE, "progress.py")).read())
+
+# Stage reporting must still WORK — the logging is what makes a four-minute
+# job legible, and it is what survived.
+_p = progress.Progress({"id": "t"}, "supply")
+_p.stage("fetching")
+_p.stage("quoting")
+check("19c stages are still recorded", len(_p.emitted) == 2, str(_p.emitted))
+check("19d step index still advances", _p.emitted[-1]["step"] == 3,
+      str(_p.emitted[-1]))
+check("19e the stage plan is still reported",
+      _p.emitted[-1]["steps"] == 4, str(_p.emitted[-1]))
+
+# And publishing must never raise, whatever the SDK does.
+class _Boom:
+    class serverless:
+        @staticmethod
+        def progress_update(job, payload):
+            raise RuntimeError("SDK exploded")
+
+
+_saved_rp, _saved_flag = progress.runpod, progress.SDK_PROGRESS
+progress.runpod, progress.SDK_PROGRESS = _Boom, True
+try:
+    progress.Progress({"id": "t"}, "supply").stage("fetching")
+    check("19f a failing SDK never kills the job", True)
+except Exception as e:
+    check("19f a failing SDK never kills the job", False, str(e))
+finally:
+    progress.runpod, progress.SDK_PROGRESS = _saved_rp, _saved_flag
+
+
 # ---- Test 17: the suite must run on a bare Python --------------------------
 # CI installs nothing: these tests exist to run with no GPU, no network and
 # no dependencies. A module-level `import requests` in delivery.py broke the

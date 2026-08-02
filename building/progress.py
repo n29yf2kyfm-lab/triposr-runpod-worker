@@ -9,6 +9,7 @@ The vehicle worker proved the pattern — it publishes the intermediate image
 the moment it exists so the app can display it while the slow 3D stage runs.
 Same idea, more stages.
 """
+import os
 import sys
 
 try:
@@ -16,6 +17,22 @@ try:
 except ImportError:  # tests and local runs
     runpod = None
 
+
+# Whether to push progress through the RunPod SDK as well as to the log.
+#
+# OFF by default, and that default was bought expensively. On the live
+# endpoint every job that called runpod.serverless.progress_update() reached
+# its final stage and then never finalised — the job sat IN_PROGRESS until it
+# was cancelled, across every mode, including one that makes no network calls
+# at all. The single job that ever returned cleanly was one rejected by
+# validation, which returns BEFORE this class is constructed and so never
+# calls the SDK. A malformed-input job on the same warm worker answers in
+# 224ms; identical work with progress updates ran past seven minutes.
+#
+# Live progress is a nice-to-have. A job that never returns is fatal, so the
+# optional thing is what gets degraded. Set BUILDING_SDK_PROGRESS=1 to turn
+# it back on once a worker is confirmed to finalise jobs with it enabled.
+SDK_PROGRESS = os.environ.get("BUILDING_SDK_PROGRESS", "0") == "1"
 
 # Ordered stages per mode, so the client can render a real progress bar
 # instead of an indeterminate spinner.
@@ -76,8 +93,10 @@ class Progress:
         return payload
 
     def _publish(self, payload):
+        # Always to stderr: it costs nothing, it lands in the worker logs,
+        # and it is the only progress reporting that has never let us down.
         print(f"[progress] {payload}", file=sys.stderr)
-        if runpod is None:
+        if runpod is None or not SDK_PROGRESS:
             return
         try:
             runpod.serverless.progress_update(self.job, payload)
