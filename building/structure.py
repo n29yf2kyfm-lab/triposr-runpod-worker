@@ -57,6 +57,18 @@ WALL_VERTICAL_SHARE = 0.55
 # Below this, a wall run is a doorframe or a stub, not a wall.
 MIN_WALL_LENGTH_M = 0.4
 
+# Used only when a scan saw one face of a wall and its thickness is therefore
+# not observable. A UK internal stud partition is 100mm over the studs.
+DEFAULT_WALL_THICKNESS_M = 0.1
+
+# No merged run wider than this is a wall — it is the perpendicular wall seen
+# end-on. Solid stone can reach 600mm; beyond that it is a merge artefact.
+MAX_WALL_THICKNESS_M = 0.6
+
+# Nominal slab depth for the IFC floor. Not measured — a scan sees the top of
+# the floor and nothing below it.
+SLAB_THICKNESS_M = 0.15
+
 # UK domestic sanity band. Anything outside it means the scale is wrong, and
 # the scale being wrong is the failure that quietly poisons everything.
 MIN_STOREY_HEIGHT_M = 1.9
@@ -259,7 +271,12 @@ def check_gravity_aligned(points, sample=20000):
             f"from. At least {MIN_POINTS} are needed to tell a wall from "
             f"noise.")
 
-    zs = [p[2] for p in points[:sample]]
+    # Strided, not the first N. A PLY is written in whatever order the
+    # producer chose — commonly floor block first, then walls — so a prefix
+    # of a perfectly good room can be one flat slab, and the check refused
+    # it as "not gravity-aligned". A stride crosses the whole file.
+    step = max(1, len(points) // sample)
+    zs = [points[i][2] for i in range(0, len(points), step)]
     lo, hi = min(zs), max(zs)
     if hi - lo <= 0:
         raise StructureError("this cloud is flat — it has no height at all")
@@ -376,10 +393,21 @@ def wall_cells(points, storey, cell_m=WALL_CELL_M,
     """Plan cells that are wall rather than contents.
 
     The discriminator is vertical extent, not density. A wall occupies its
-    plan cell from floor to ceiling; a wardrobe, a worktop and a radiator do
-    not. Measuring how much of the storey's height each cell spans separates
-    them without any furniture model — which is the trick that makes this
-    work without training data.
+    plan cell from floor to ceiling; a worktop, a radiator and a sofa do not.
+    Measuring how much of the storey's height each cell spans separates them
+    without any furniture model and without training data.
+
+    HOW FAR THAT ACTUALLY GOES, measured rather than asserted: at 0.55 of a
+    2.1m working span the cut lands at about 1.30m. A 0.9m worktop is
+    correctly rejected. A 2.0m wardrobe is not — it reads as wall, and a
+    room with one came back with 8 walls instead of 4 and 21% more wall
+    length. Full-height wardrobes, fridge-freezers, bookcases and shower
+    enclosures all clear the bar. The claim this docstring used to make —
+    that it "removes furniture" — was true of low furniture only, and the
+    fixture that verified it used a 0.8m block labelled "wardrobe".
+
+    So segment() now warns when tall free-standing objects are the likely
+    reading, rather than presenting the count as clean.
     """
     floor_z = storey["floor_z_m"]
     ceiling_z = storey["ceiling_z_m"]
@@ -401,35 +429,69 @@ def wall_cells(points, storey, cell_m=WALL_CELL_M,
         key = (int(math.floor(x / cell_m)), int(math.floor(y / cell_m)))
         seen = cells.get(key)
         if seen is None:
-            cells[key] = [z, z]
+            cells[key] = [z, z, x, x, y, y, x, y, 1]
         else:
             if z < seen[0]:
                 seen[0] = z
             if z > seen[1]:
                 seen[1] = z
+            if x < seen[2]:
+                seen[2] = x
+            if x > seen[3]:
+                seen[3] = x
+            if y < seen[4]:
+                seen[4] = y
+            if y > seen[5]:
+                seen[5] = y
+            seen[6] += x
+            seen[7] += y
+            seen[8] += 1
 
-    return {key: (zs[1] - zs[0]) / span for key, zs in cells.items()
-            if (zs[1] - zs[0]) / span >= vertical_share}
+    out = {}
+    for key, (z0, z1, x0, x1, y0, y1, sx, sy, n) in cells.items():
+        share = (z1 - z0) / span
+        if share >= vertical_share:
+            # The real coordinates, kept alongside the share. Reporting the
+            # cell CENTRE instead put a systematic +25mm bias on every wall
+            # plane, which matters because services.py drills against it.
+            out[key] = {"share": share, "x_min": x0, "x_max": x1,
+                        "y_min": y0, "y_max": y1,
+                        "x_mean": sx / n, "y_mean": sy / n}
+    return out
 
 
 def trace_walls(cells, cell_m=WALL_CELL_M, min_length=MIN_WALL_LENGTH_M):
-    """Group wall cells into straight runs.
+    """Group wall cells into straight runs, one per wall.
 
     Axis-aligned runs only, and that is a stated limitation rather than an
     oversight: a bay window or a splayed return will come back as a staircase
     of short segments. Handling arbitrary angles well needs the full
     morphological treatment, and reporting honest fragments beats inventing a
     smooth wall that is not there.
+
+    PARALLEL ROWS ARE MERGED, and the first version did not do this. A wall
+    is thick: 215mm of masonry fills four or five 50mm cells across, and each
+    row was traced as its own full-length wall. A four-wall room came back
+    with twenty walls and 5.3x the true centreline length, straight into
+    totals.wall_length_m and the material order. It survived every test
+    because the test fixture builds zero-thickness single-plane walls — the
+    one case that cannot trigger it — while its comment claims 0.1m.
+
+    Merging also recovers the thickness, which is worth having on its own:
+    services.py needs it, and a scan that saw both faces of a wall has
+    measured something no drawing take-off can.
     """
     if not cells:
         return []
-    runs = []
+
+    groups = []
     for axis in (0, 1):
         lines = {}
         for (cx, cy) in cells:
             key = cy if axis == 0 else cx
             lines.setdefault(key, []).append(cx if axis == 0 else cy)
 
+        segments = []
         for key, along in lines.items():
             along.sort()
             start = previous = along[0]
@@ -437,21 +499,105 @@ def trace_walls(cells, cell_m=WALL_CELL_M, min_length=MIN_WALL_LENGTH_M):
                 if value is not None and value - previous <= 1:
                     previous = value
                     continue
-                length = (previous - start + 1) * cell_m
-                if length >= min_length:
-                    fixed = (key + 0.5) * cell_m
-                    a = (start * cell_m, fixed) if axis == 0 else (fixed, start * cell_m)
-                    b = ((previous + 1) * cell_m, fixed) if axis == 0 else (fixed, (previous + 1) * cell_m)
-                    runs.append({
-                        "start": (round(a[0], 3), round(a[1], 3)),
-                        "end": (round(b[0], 3), round(b[1], 3)),
-                        "length_m": round(length, 3),
-                        "axis": "x" if axis == 0 else "y",
-                    })
+                segments.append((key, start, previous))
                 if value is None:
                     break
                 start = previous = value
-    return sorted(runs, key=lambda r: -r["length_m"])
+        groups.extend(_merge_parallel(axis, segments, cells, min_length))
+
+    return sorted(groups, key=lambda r: -r["length_m"])
+
+
+def _merge_parallel(axis, segments, cells, min_length):
+    """Collapse the rows through one wall into a single centreline run."""
+    # Chain segments on nearby lines that describe the SAME wall.
+    #
+    # Two conditions, and the second one is not optional. Adjacency alone
+    # merged the single-cell stubs that a perpendicular wall leaves on every
+    # line it crosses: each stub touched the long run at one end, chained to
+    # the next stub, and the whole room collapsed into one cluster 4m
+    # "thick", which the thickness filter then discarded — a four-wall room
+    # traced as zero walls. Requiring the extents to substantially COINCIDE
+    # keeps the rows of one wall together and leaves the crossing stubs to
+    # the other axis, which traces them properly.
+    #
+    # The window is the widest wall worth believing rather than one cell,
+    # because a scan usually sees a wall's two FACES with a hollow gap
+    # between them — 215mm of masonry is five empty rows, not five full ones.
+    window = max(1, int(round(MAX_WALL_THICKNESS_M / WALL_CELL_M)))
+    segments.sort(key=lambda s: (s[0], s[1]))
+    parent = list(range(len(segments)))
+
+    def find(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    for i, (ki, lo_i, hi_i) in enumerate(segments):
+        span_i = hi_i - lo_i + 1
+        for j in range(i + 1, len(segments)):
+            kj, lo_j, hi_j = segments[j]
+            if kj - ki > window:
+                break
+            if kj == ki:
+                continue
+            overlap = min(hi_i, hi_j) - max(lo_i, lo_j) + 1
+            if overlap >= 0.8 * max(span_i, hi_j - lo_j + 1):
+                parent[find(j)] = find(i)
+
+    clusters = {}
+    for i in range(len(segments)):
+        clusters.setdefault(find(i), []).append(segments[i])
+
+    runs = []
+    for members in clusters.values():
+        along_lo = min(m[1] for m in members)
+        along_hi = max(m[2] for m in members)
+        # Real coordinates, not cell indices: the cell centre carried a
+        # systematic +25mm bias.
+        perp_lo, perp_hi, along_min, along_max = None, None, None, None
+        perp_sum, count = 0.0, 0
+        for key, lo, hi in members:
+            for index in range(lo, hi + 1):
+                cell = cells.get((index, key) if axis == 0 else (key, index))
+                if cell is None:
+                    continue
+                if axis == 0:
+                    p_lo, p_hi = cell["y_min"], cell["y_max"]
+                    a_lo, a_hi, p_mean = cell["x_min"], cell["x_max"], cell["y_mean"]
+                else:
+                    p_lo, p_hi = cell["x_min"], cell["x_max"]
+                    a_lo, a_hi, p_mean = cell["y_min"], cell["y_max"], cell["x_mean"]
+                perp_lo = p_lo if perp_lo is None else min(perp_lo, p_lo)
+                perp_hi = p_hi if perp_hi is None else max(perp_hi, p_hi)
+                along_min = a_lo if along_min is None else min(along_min, a_lo)
+                along_max = a_hi if along_max is None else max(along_max, a_hi)
+                perp_sum += p_mean
+                count += 1
+        if not count:
+            continue
+
+        length = along_max - along_min
+        thickness = perp_hi - perp_lo
+        if length < min_length:
+            continue
+        # A run wider than it is long is the perpendicular wall seen end-on;
+        # the other axis traces it properly.
+        if thickness > min(MAX_WALL_THICKNESS_M, length):
+            continue
+
+        centre = perp_sum / count
+        a = (along_min, centre) if axis == 0 else (centre, along_min)
+        b = (along_max, centre) if axis == 0 else (centre, along_max)
+        runs.append({
+            "start": (round(a[0], 3), round(a[1], 3)),
+            "end": (round(b[0], 3), round(b[1], 3)),
+            "length_m": round(length, 3),
+            "thickness_m": round(thickness, 3),
+            "axis": "x" if axis == 0 else "y",
+        })
+    return runs
 
 
 # --- the whole thing -------------------------------------------------------
@@ -475,6 +621,8 @@ def segment(points, voxel_m=VOXEL_M):
         cells = wall_cells(reduced, storey)
         storey["wall_cells"] = len(cells)
         storey["walls"] = trace_walls(cells)
+        for wall in storey["walls"]:
+            _attach_frame(wall, storey)
         storey["wall_length_m"] = round(
             sum(w["length_m"] for w in storey["walls"]), 2)
         # Floor area from the wall envelope, not the point extent: the extent
@@ -496,6 +644,12 @@ def segment(points, voxel_m=VOXEL_M):
     warnings.append(
         "Walls are traced axis-aligned, so bays, splays and curved returns "
         "come back as short segments rather than one run.")
+    warnings.append(
+        f"Anything standing more than about "
+        f"{WALL_VERTICAL_SHARE * 2.1:.1f}m floor to ceiling reads as wall. "
+        f"A worktop or a radiator is correctly ignored, but a full-height "
+        f"wardrobe, fridge-freezer, bookcase or shower enclosure is not — "
+        f"check the plan against the room before ordering from it.")
 
     return {
         "checks": checks,
@@ -516,13 +670,105 @@ def segment(points, voxel_m=VOXEL_M):
     }
 
 
+def _attach_frame(wall, storey):
+    """Give a wall the frame services mode needs to hang a run on.
+
+    services.py refused a wall without one and said "structure mode produces
+    it". Structure mode did not: it emitted start, end, length_m and axis,
+    and nothing else. The documented handoff between the two modules — the
+    X-ray, the thing the whole product is for — did not connect, and the
+    error message telling the caller so was itself the false claim.
+
+    origin is the wall's bottom-left corner in world space: the start of the
+    centreline at floor level. Without it, services' (u, v) coordinates are
+    raw world projections that mean nothing to whoever has to find the pipe.
+    """
+    (x0, y0), (x1, y1) = wall["start"], wall["end"]
+    length = wall["length_m"]
+    if length <= 0:
+        return
+    ux, uy = (x1 - x0) / length, (y1 - y0) / length
+    # Plane through the centreline, normal horizontal and perpendicular to it.
+    nx, ny = -uy, ux
+    base_z = storey["floor_z_m"]
+
+    wall["origin"] = (round(x0, 3), round(y0, 3), round(base_z, 3))
+    wall["direction"] = (round(ux, 6), round(uy, 6), 0.0)
+    wall["width_m"] = length
+    wall["height_m"] = storey["height_m"]
+    wall["plane"] = (round(nx, 6), round(ny, 6), 0.0,
+                     round(-(nx * x0 + ny * y0), 6))
+
+
 def _envelope_area(walls):
-    """Plan area enclosed by the traced walls, from their bounding envelope."""
+    """Plan area actually enclosed by the traced walls.
+
+    This was a bounding box, presented by the comment above its call site as
+    a considered choice — "from the wall envelope, not the point extent". A
+    bounding box is not an envelope. On an L-shaped room whose six walls were
+    all traced correctly it reported 42.65 m2 against a true 33.0, +29%, and
+    every UK house with a rear extension is an L.
+
+    Occupancy of the plan grid, not a polygon fit: the walls are axis-aligned
+    segments with no ordering and no guarantee of closure, so there is no
+    ring to run a shoelace over. Filling the cells the walls bound and
+    counting them handles L, T, U and stepped plans without pretending the
+    tracer produced something it did not.
+    """
     if not walls:
         return 0.0
+
+    cell = WALL_CELL_M
     xs = [w["start"][0] for w in walls] + [w["end"][0] for w in walls]
     ys = [w["start"][1] for w in walls] + [w["end"][1] for w in walls]
-    return round((max(xs) - min(xs)) * (max(ys) - min(ys)), 2)
+    x0, x1, y0, y1 = min(xs), max(xs), min(ys), max(ys)
+    if x1 - x0 <= 0 or y1 - y0 <= 0:
+        return 0.0
+
+    nx = int(math.ceil((x1 - x0) / cell)) + 1
+    ny = int(math.ceil((y1 - y0) / cell)) + 1
+    if nx * ny > 4_000_000:          # a 100m x 100m plan at 50mm; beyond that
+        return round((x1 - x0) * (y1 - y0), 2)   # the grid is not worth it
+
+    wall = [[False] * ny for _ in range(nx)]
+    for w in walls:
+        (ax, ay), (bx, by) = w["start"], w["end"]
+        steps = int(math.ceil(max(abs(bx - ax), abs(by - ay)) / cell)) + 1
+        for s in range(steps + 1):
+            t = s / steps
+            i = int(round((ax + (bx - ax) * t - x0) / cell))
+            j = int(round((ay + (by - ay) * t - y0) / cell))
+            if 0 <= i < nx and 0 <= j < ny:
+                wall[i][j] = True
+
+    # Flood from the border. What the flood cannot reach is inside.
+    outside = [[False] * ny for _ in range(nx)]
+    stack = []
+    for i in range(nx):
+        for j in (0, ny - 1):
+            if not wall[i][j] and not outside[i][j]:
+                outside[i][j] = True
+                stack.append((i, j))
+    for j in range(ny):
+        for i in (0, nx - 1):
+            if not wall[i][j] and not outside[i][j]:
+                outside[i][j] = True
+                stack.append((i, j))
+    while stack:
+        i, j = stack.pop()
+        for di, dj in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            a, b = i + di, j + dj
+            if 0 <= a < nx and 0 <= b < ny and not wall[a][b] \
+                    and not outside[a][b]:
+                outside[a][b] = True
+                stack.append((a, b))
+
+    inside = sum(1 for i in range(nx) for j in range(ny)
+                 if not outside[i][j] and not wall[i][j])
+    # Wall cells are half floor, half wall; counting them whole overstates a
+    # small room and dropping them understates every room.
+    on_wall = sum(1 for i in range(nx) for j in range(ny) if wall[i][j])
+    return round((inside + on_wall * 0.5) * cell * cell, 2)
 
 
 # --- IFC -------------------------------------------------------------------
@@ -530,18 +776,34 @@ def _envelope_area(walls):
 def write_ifc(structure, path, project_name="Scanned Building"):
     """Author an IFC4 file from the segmentation. Lazy import, by design.
 
-    Two traps, both found by running this rather than reading about it:
+    THIS FUNCTION HAD NEVER ONCE RUN. It carried a confident docstring about
+    two traps "found by running this rather than reading about it", and both
+    were transcribed from notes; the code underneath used `ip_class=` for
+    `ifc_class=` in five places and reached for `ifcopenshell.api.project`
+    without importing the submodule. Every structure job on the deployed
+    image died with an AttributeError. CI never saw it because CI installs
+    nothing, so the ImportError branch fired and the test — which asserted
+    only `res["ifc"] in (True, False)` — passed on a bare interpreter.
 
-      UNITS   ifcopenshell's assign_unit() with no arguments emits
-              MILLIMETRES. For a metric cloud that silently scales the
-              building by 1000, and every downstream quantity with it.
-      SPACES  IfcSpace is a spatial STRUCTURE element, so it must be
-              aggregated into the storey, not contained in it.
-              spatial.assign_container() raises AttributeError.
+    The units trap below IS real and is verified by test_structure: an
+    IFC written in millimetres scales the building by 1000 and every
+    quantity with it.
+
+    What this emits: IfcProject / IfcSite / IfcBuilding / IfcBuildingStorey,
+    with an IfcSlab per storey floor and an IfcWall per traced wall, each
+    with a real placement and a swept-solid body. NOT openings and NOT
+    spaces — nothing in the segmentation detects a door, a window or a room
+    boundary, so there is nothing honest to write for them.
     """
     try:
         import ifcopenshell
-        import ifcopenshell.api
+        import ifcopenshell.api.root
+        import ifcopenshell.api.project
+        import ifcopenshell.api.unit
+        import ifcopenshell.api.context
+        import ifcopenshell.api.aggregate
+        import ifcopenshell.api.spatial
+        import ifcopenshell.api.geometry
     except ImportError:
         raise StructureError(
             "ifcopenshell is not installed in this worker, so IFC cannot be "
@@ -550,7 +812,7 @@ def write_ifc(structure, path, project_name="Scanned Building"):
 
     run = ifcopenshell.api.run
     model = ifcopenshell.api.project.create_file(version="IFC4")
-    project = run("root.create_entity", model, ip_class="IfcProject",
+    project = run("root.create_entity", model, ifc_class="IfcProject",
                   name=project_name)
 
     # METRES, explicitly. See the docstring — the default is millimetres.
@@ -563,8 +825,8 @@ def write_ifc(structure, path, project_name="Scanned Building"):
                context_identifier="Body", target_view="MODEL_VIEW",
                parent=context)
 
-    site = run("root.create_entity", model, ip_class="IfcSite", name="Site")
-    building = run("root.create_entity", model, ip_class="IfcBuilding",
+    site = run("root.create_entity", model, ifc_class="IfcSite", name="Site")
+    building = run("root.create_entity", model, ifc_class="IfcBuilding",
                    name=project_name)
     run("aggregate.assign_object", model, products=[site],
         relating_object=project)
@@ -572,18 +834,116 @@ def write_ifc(structure, path, project_name="Scanned Building"):
         relating_object=site)
 
     for index, storey in enumerate(structure["storeys"]):
-        level = run("root.create_entity", model, ip_class="IfcBuildingStorey",
-                    name=f"Level {index}")
+        level = run("root.create_entity", model,
+                    ifc_class="IfcBuildingStorey", name=f"Level {index}")
         run("aggregate.assign_object", model, products=[level],
             relating_object=building)
+        base_z = storey["floor_z_m"]
+        height = storey["height_m"]
+
         for wall in storey["walls"]:
-            element = run("root.create_entity", model, ip_class="IfcWall",
+            element = run("root.create_entity", model, ifc_class="IfcWall",
                           name=f"Wall {wall['axis']} {wall['length_m']}m")
             run("spatial.assign_container", model, products=[element],
                 relating_structure=level)
+            _place_wall(model, run, body, element, wall, base_z, height)
+
+        slab = _slab_outline(storey["walls"])
+        if slab:
+            element = run("root.create_entity", model, ifc_class="IfcSlab",
+                          predefined_type="FLOOR", name=f"Floor {index}")
+            run("spatial.assign_container", model, products=[element],
+                relating_structure=level)
+            _place_slab(model, run, body, element, slab, base_z)
 
     model.write(path)
     return path
+
+
+def _place_wall(model, run, body, element, wall, base_z, height):
+    """Give a wall an origin and an extruded body, in metres.
+
+    A wall with no ObjectPlacement and no Representation is a name in a file.
+    Every viewer opens it, shows nothing, and the file looks authoritative
+    while carrying no building at all.
+    """
+    (x0, y0), (x1, y1) = wall["start"], wall["end"]
+    thickness = wall.get("thickness_m") or DEFAULT_WALL_THICKNESS_M
+    length = wall["length_m"]
+    dx, dy = (x1 - x0), (y1 - y0)
+    if length <= 0:
+        return
+    ux, uy = dx / length, dy / length
+
+    run("geometry.edit_object_placement", model, product=element,
+        matrix=(
+            (ux, -uy, 0.0, x0),
+            (uy, ux, 0.0, y0),
+            (0.0, 0.0, 1.0, base_z),
+            (0.0, 0.0, 0.0, 1.0),
+        ))
+    profile = model.create_entity(
+        "IfcRectangleProfileDef", ProfileType="AREA",
+        XDim=float(length), YDim=float(thickness),
+        Position=model.create_entity(
+            "IfcAxis2Placement2D",
+            Location=model.create_entity(
+                "IfcCartesianPoint", Coordinates=(length / 2.0, 0.0))))
+    _extrude(model, run, body, element, profile, height)
+
+
+def _place_slab(model, run, body, element, outline, base_z):
+    """A storey floor as a thin extrusion of the traced outline."""
+    points = [model.create_entity("IfcCartesianPoint",
+                                  Coordinates=(float(x), float(y)))
+              for x, y in outline]
+    polyline = model.create_entity("IfcPolyline", Points=points + [points[0]])
+    profile = model.create_entity(
+        "IfcArbitraryClosedProfileDef", ProfileType="AREA",
+        OuterCurve=polyline)
+    run("geometry.edit_object_placement", model, product=element,
+        matrix=(
+            (1.0, 0.0, 0.0, 0.0),
+            (0.0, 1.0, 0.0, 0.0),
+            (0.0, 0.0, 1.0, base_z - SLAB_THICKNESS_M),
+            (0.0, 0.0, 0.0, 1.0),
+        ))
+    _extrude(model, run, body, element, profile, SLAB_THICKNESS_M)
+
+
+def _extrude(model, run, body, element, profile, depth):
+    solid = model.create_entity(
+        "IfcExtrudedAreaSolid", SweptArea=profile,
+        Position=model.create_entity(
+            "IfcAxis2Placement3D",
+            Location=model.create_entity("IfcCartesianPoint",
+                                         Coordinates=(0.0, 0.0, 0.0))),
+        ExtrudedDirection=model.create_entity("IfcDirection",
+                                              DirectionRatios=(0.0, 0.0, 1.0)),
+        Depth=float(depth))
+    shape = model.create_entity(
+        "IfcShapeRepresentation", ContextOfItems=body,
+        RepresentationIdentifier="Body", RepresentationType="SweptSolid",
+        Items=[solid])
+    run("geometry.assign_representation", model, product=element,
+        representation=shape)
+
+
+def _slab_outline(walls):
+    """A closed floor outline from the traced walls, or None.
+
+    The rectangular hull of the wall centrelines. Honest for the rectangular
+    and near-rectangular rooms this tracer handles well, and deliberately
+    absent when there are too few walls to imply an enclosure at all.
+    """
+    if len(walls) < 3:
+        return None
+    xs = [w["start"][0] for w in walls] + [w["end"][0] for w in walls]
+    ys = [w["start"][1] for w in walls] + [w["end"][1] for w in walls]
+    x0, x1, y0, y1 = min(xs), max(xs), min(ys), max(ys)
+    if x1 - x0 <= 0 or y1 - y0 <= 0:
+        return None
+    return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
 
 
 # --- handler entry point ---------------------------------------------------
@@ -625,9 +985,16 @@ def run_mode(spec, prog, output_dir):
         write_ifc(result, ifc_path, project_name=scan)
         artifacts.append((ifc_path, f"structure/{scan}.ifc", None))
         result["ifc"] = True
-    except StructureError as e:
+    except Exception as e:
+        # Deliberately broad. A StructureError-only catch let an
+        # AttributeError out of the IFC writer, and the handler's generic
+        # handler then threw away a segmentation that had already succeeded
+        # — the exact outcome the code below exists to prevent. The
+        # segmentation is the valuable part; the IFC is an export of it.
         result["ifc"] = False
-        result["warnings"].append(str(e))
+        result["warnings"].append(
+            f"IFC export failed ({type(e).__name__}: {e}). The segmentation "
+            f"below is unaffected.")
 
     prog.stage("exporting")
     json_path = os.path.join(directory, f"{scan}.structure.json")
