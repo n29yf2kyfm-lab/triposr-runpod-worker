@@ -183,3 +183,9 @@ how a broken IFC writer reached the deployed image with 1231 tests green.
 `.github/workflows/building-docker-build.yml` — triggers only on `building/**`, tags
 `alamk123/building-scan:{sha,v1,latest}`. Dependencies install before the source `COPY`, so
 code edits reuse the cached layers.
+
+**Tests run on every branch and every pull request; the image is built only from `main`** (or
+a deliberate `workflow_dispatch`, which produces a SHA tag and never moves `v1` or `latest`).
+Gating the whole workflow on `main` meant the suite never ran in CI on the branch the work
+happens on — which is the same hole that let a `write_ifc` that had never once executed reach
+a deployed image with 1231 tests green.

@@ -4,9 +4,19 @@ name: Build and Push Building Scanner Docker Image
 # The vehicle worker's workflow triggers only on trellis2/**. Neither can
 # rebuild the other's production image, which is what keeps the live vehicle
 # endpoint safe while this product is developed.
+#
+# TESTS RUN ON EVERY BRANCH; THE IMAGE IS BUILT ONLY FROM MAIN. Restricting
+# the whole workflow to main meant the suite never ran in CI on the branch
+# where the work actually happens — every commit was gated by one developer
+# machine. That is the same hole that let a write_ifc which had never once
+# executed reach a deployed image with 1231 tests green. The `if:` on the
+# build job below is what keeps the isolation guarantee, not the trigger.
 on:
   push:
-    branches: [ main ]
+    paths:
+      - 'building/**'
+      - '.github/workflows/building-docker-build.yml'
+  pull_request:
     paths:
       - 'building/**'
       - '.github/workflows/building-docker-build.yml'
@@ -88,6 +98,11 @@ jobs:
 
   build:
     needs: test
+    # Pushing an image costs a Docker Hub write and ten minutes of runner;
+    # a branch does not need one on every commit. Dispatch this workflow
+    # deliberately to get a SHA-tagged image off a branch — the tag step
+    # below still refuses to move v1 or latest unless it is on main.
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
