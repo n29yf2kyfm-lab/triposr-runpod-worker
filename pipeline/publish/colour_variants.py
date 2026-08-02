@@ -121,12 +121,41 @@ def oem_paints(make):
     return out
 
 
-def variant_path(make, model, colour):
-    slug = "".join(c if c.isalnum() or c in "-_" else "-" for c in (model or "").lower())
-    return f"car-meshes/library/{make}/{slug}__{colour}.glb"
+def variant_path(asset_id, make, colour):
+    """Storage path for one colour, keyed on assetId.
+
+    It must be assetId, never make+model. A make+model key collides the moment
+    two entries share a nameplate, and the library is full of those: four
+    Mercedes E-Class entries, four Skoda Octavias, three Honda Civics, eleven
+    Volkswagen Golfs. On a collision the second bake overwrites the first's
+    eight GLBs and both entries' colourVariants then point at the same files,
+    so two different cars serve one model -- and nothing catches it, because
+    gate_catalogue only checks that variantsHash matches and recolourAudit
+    passed, and both still hold when the shared file recolours correctly.
+
+    This is also the convention the library already uses: every wave-tagged
+    entry is `<assetId>__<colour>.glb`. Only the oldest `-v1` entries still
+    carry the superseded `<model>_uc__<colour>.glb` form.
+    """
+    return f"car-meshes/library/{make}/{asset_id}__{colour}.glb"
 
 
-def bake(entry, work, dry=False):
+def claimed_paths(entries):
+    """{storage path: assetId} for every variant already referenced anywhere.
+
+    Belt and braces behind the assetId key: even if a future edit reintroduces
+    an ambiguous path scheme, a bake that would land on another entry's file
+    refuses instead of silently overwriting it.
+    """
+    out = {}
+    for e in entries:
+        for url in (e.get("colourVariants") or {}).values():
+            out[url.split("/object/public/", 1)[-1]] = e.get("assetId")
+    return out
+
+
+def bake(entry, work, dry=False, taken=None):
+    taken = taken or {}
     aid = entry["assetId"]
     body = entry.get("paintMaterialNames") or []
     if not body:
@@ -151,7 +180,9 @@ def bake(entry, work, dry=False):
             return None, f"respray failed: {str(e)[:90]}"
         if not glb_ok(dst):
             return None, f"{colour}: wrote a bad GLB"
-        p = variant_path(entry["make"], entry["model"], colour)
+        p = variant_path(entry["assetId"], entry["make"], colour)
+        if p in taken and taken[p] != entry["assetId"]:
+            return None, f"path {p} already claimed by {taken[p]} — refusing to overwrite"
         if not dry:
             sb_put(p, open(dst, "rb").read())
         made[colour] = f"{SB}/public/{p}"
@@ -168,6 +199,10 @@ def main():
     ap.add_argument("--assets", default="", help="comma-separated assetIds")
     ap.add_argument("--wave", default="", help="all approved entries whose assetId ends -<wave>-v1")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--rebake", action="store_true",
+                    help="also re-bake entries that already carry colourVariants "
+                         "(re-baking changes variantsHash, so recolour_audit --stamp "
+                         "must run again before the gate will serve them)")
     a = ap.parse_args()
 
     cat = json.load(open(CAT))
@@ -175,18 +210,21 @@ def main():
     want = {s for s in a.assets.split(",") if s}
     todo = [e for e in entries
             if e.get("publicationStatus") == "approved"
-            and not (e.get("colourVariants") or {})
+            and (a.rebake or not (e.get("colourVariants") or {}))
             and (e.get("assetId") in want if want else
                  (a.wave and (e.get("assetId") or "").endswith(f"-{a.wave}-v1")))]
     if not todo:
         sys.exit("nothing to do — no matching approved entry lacks colourVariants")
     log(f"{len(todo)} entrie(s) to bake" + ("  [DRY RUN]" if a.dry_run else ""))
 
+    rebaking = {e.get("assetId") for e in todo}
+    taken = {p: aid for p, aid in claimed_paths(entries).items() if aid not in rebaking}
+
     work = tempfile.mkdtemp(prefix="cvar-")
     ok = fail = 0
     try:
         for e in todo:
-            got, err = bake(e, work, a.dry_run)
+            got, err = bake(e, work, a.dry_run, taken)
             if err:
                 log(f"  SKIP {e['assetId']}: {err}")
                 fail += 1
