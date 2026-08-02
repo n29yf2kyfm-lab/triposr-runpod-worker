@@ -92,6 +92,16 @@ MAX_VOID_DEPTH_M = 0.20
 # ~60mm, which bridges a 45mm stud and nothing larger.
 MAX_GAP_CELLS = 3
 
+# The widest thing that is still one run. A 110mm soil pipe is the largest
+# service in a domestic wall; a 160mm drain does not go in one. Beyond this,
+# parallel lines of cells are two runs side by side, not one fat one.
+MAX_RUN_WIDTH_M = 0.130
+
+# Resolution the cross-section profile is measured at. Much finer than the
+# tracing grid, because a 10mm cable and a 15mm pipe both fit inside one
+# 20mm cell and nothing about their shape survives at that scale.
+PROFILE_BIN_M = 0.001
+
 
 class ServicesError(ValueError):
     """Raised when services cannot be recovered honestly.
@@ -155,17 +165,33 @@ def _normalise(v):
     return tuple(component / length for component in v)
 
 
-def project_to_plane(points, plane):
-    """Wall-local (u, v) coordinates for a set of points."""
+def project_to_plane(points, plane, origin=None):
+    """Wall-local (u, v) coordinates for a set of points.
+
+    ORIGIN IS SUBTRACTED FIRST, and without it these are not wall-local
+    coordinates at all — they are raw world projections wearing the name.
+    On a wall running from (3,5) to (7,8), a pipe 1.000m along it was
+    reported at u=6.380: off the end of a 5m wall, with nothing to say so.
+    A builder cannot find a pipe from that, and in_safe_zone cannot judge
+    one. On a building surveyed against the OS grid, u came back as 458210.
+
+    origin is the wall's bottom-left corner in world space. Structure mode
+    emits it as `origin` on every traced wall.
+    """
     u, v = plane_basis(plane)
-    return [((p[0] * u[0] + p[1] * u[1] + p[2] * u[2]),
-             (p[0] * v[0] + p[1] * v[1] + p[2] * v[2])) for p in points]
+    ox, oy, oz = origin or (0.0, 0.0, 0.0)
+    out = []
+    for p in points:
+        dx, dy, dz = p[0] - ox, p[1] - oy, p[2] - oz
+        out.append((dx * u[0] + dy * u[1] + dz * u[2],
+                    dx * v[0] + dy * v[1] + dz * v[2]))
+    return out
 
 
 # --- finding runs ----------------------------------------------------------
 
 def trace_runs(void, plane, cell_m=0.02, min_length=MIN_RUN_LENGTH_M,
-               max_gap_cells=MAX_GAP_CELLS):
+               max_gap_cells=MAX_GAP_CELLS, origin=None):
     """Group void points into straight service runs.
 
     Services at first fix are overwhelmingly vertical drops and horizontal
@@ -173,30 +199,57 @@ def trace_runs(void, plane, cell_m=0.02, min_length=MIN_RUN_LENGTH_M,
     square because that is what fits between the timbers. So the same
     axis-aligned tracing structure Structure Mode uses works here, and the
     same limitation applies: a diagonal run comes back as steps.
+
+    PARALLEL LINES ARE MERGED, and this is what makes the module work at
+    all. Tracing one line of cells at a time meant a run wider than a cell
+    became several runs side by side: a single 110mm soil pipe came back as
+    three, totalling 6.06m for a 2.00m pipe. Worse, no single line can show
+    a run's WIDTH, so width_m was never emitted, so profile_of() — the
+    round/flat test this module calls THE discriminator between a pipe and a
+    cable — always returned None. identify() was never confident, is_cable
+    was never set, and totals.compliance_failures was structurally always
+    zero. The BS 7671 check could not fire. A module whose stated purpose is
+    finding a cable before someone drills into it could not report one.
     """
     if not void:
         return []
 
     points = [p for p, _depth in void]
-    depths = {}
-    flat = project_to_plane(points, plane)
+    cells = {}
+    flat = project_to_plane(points, plane, origin)
     for (u, v), (_p, depth) in zip(flat, void):
         key = (int(math.floor(u / cell_m)), int(math.floor(v / cell_m)))
-        seen = depths.get(key)
+        seen = cells.get(key)
         if seen is None:
-            depths[key] = [depth, depth, 1]
+            seen = cells[key] = {"d_min": depth, "d_max": depth, "n": 1,
+                                 "u_min": u, "u_max": u,
+                                 "v_min": v, "v_max": v,
+                                 "prof_u": {}, "prof_v": {}}
         else:
-            seen[0] = min(seen[0], depth)
-            seen[1] = max(seen[1], depth)
-            seen[2] += 1
+            seen["d_min"] = min(seen["d_min"], depth)
+            seen["d_max"] = max(seen["d_max"], depth)
+            seen["u_min"] = min(seen["u_min"], u)
+            seen["u_max"] = max(seen["u_max"], u)
+            seen["v_min"] = min(seen["v_min"], v)
+            seen["v_max"] = max(seen["v_max"], v)
+            seen["n"] += 1
+        # The cross-section, at a much finer resolution than the tracing
+        # grid: a 10mm cable and a 15mm pipe both fit inside one 20mm cell,
+        # so nothing about their shape survives at cell resolution.
+        for name, coord in (("prof_u", u), ("prof_v", v)):
+            bin_key = int(math.floor(coord / PROFILE_BIN_M))
+            band = seen[name]
+            if depth > band.get(bin_key, -1.0):
+                band[bin_key] = depth
 
     runs = []
     for axis in (0, 1):
         lines = {}
-        for (cu, cv) in depths:
+        for (cu, cv) in cells:
             key = cv if axis == 0 else cu
             lines.setdefault(key, []).append(cu if axis == 0 else cv)
 
+        segments = []
         for key, along in lines.items():
             along.sort()
             start = previous = along[0]
@@ -204,63 +257,179 @@ def trace_runs(void, plane, cell_m=0.02, min_length=MIN_RUN_LENGTH_M,
                 if value is not None and value - previous <= max_gap_cells:
                     previous = value
                     continue
-                length = (previous - start + 1) * cell_m
-                if length >= min_length:
-                    members = [(key, i) if axis else (i, key)
-                               for i in range(start, previous + 1)]
-                    members = [m for m in members if m in depths]
-                    thickness = _thickness(members, depths, cell_m)
-                    runs.append({
-                        "axis": "horizontal" if axis == 0 else "vertical",
-                        "length_m": round(length, 3),
-                        "u_m": round((start if axis == 0 else key) * cell_m, 3),
-                        "v_m": round((key if axis == 0 else start) * cell_m, 3),
-                        "depth_m": round(
-                            sum(depths[m][0] for m in members) / len(members), 4),
-                        "thickness_m": round(thickness, 4),
-                        "points": sum(depths[m][2] for m in members),
-                    })
+                segments.append((key, start, previous))
                 if value is None:
                     break
                 start = previous = value
+
+        runs.extend(_merge_lines(axis, segments, cells, cell_m, min_length))
+
     return sorted(runs, key=lambda r: -r["length_m"])
 
 
-def _thickness(members, depths, cell_m):
+def _merge_lines(axis, segments, cells, cell_m, min_length):
+    """Collapse the parallel cell lines through one run into a single run."""
+    # Same rule as structure.trace_walls: near lines whose extents
+    # substantially COINCIDE are the same run. Overlap alone would chain a
+    # crossing run into this one at the point they meet.
+    window = max(1, int(round(MAX_RUN_WIDTH_M / cell_m)))
+    segments.sort(key=lambda s: (s[0], s[1]))
+    parent = list(range(len(segments)))
+
+    def find(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    for i, (ki, lo_i, hi_i) in enumerate(segments):
+        span_i = hi_i - lo_i + 1
+        for j in range(i + 1, len(segments)):
+            kj, lo_j, hi_j = segments[j]
+            if kj - ki > window:
+                break
+            if kj == ki:
+                continue
+            overlap = min(hi_i, hi_j) - max(lo_i, lo_j) + 1
+            if overlap >= 0.8 * max(span_i, hi_j - lo_j + 1):
+                parent[find(j)] = find(i)
+
+    clusters = {}
+    for i in range(len(segments)):
+        clusters.setdefault(find(i), []).append(segments[i])
+
+    out = []
+    for members in clusters.values():
+        keys = [
+            (index, key) if axis == 0 else (key, index)
+            for key, lo, hi in members for index in range(lo, hi + 1)
+        ]
+        keys = [k for k in keys if k in cells]
+        if not keys:
+            continue
+        records = [cells[k] for k in keys]
+
+        u_lo = min(r["u_min"] for r in records)
+        u_hi = max(r["u_max"] for r in records)
+        v_lo = min(r["v_min"] for r in records)
+        v_hi = max(r["v_max"] for r in records)
+        along = (u_hi - u_lo) if axis == 0 else (v_hi - v_lo)
+        across = (v_hi - v_lo) if axis == 0 else (u_hi - u_lo)
+        if along < min_length:
+            continue
+        # Wider than it is long is the perpendicular run seen end-on; the
+        # other axis traces it properly.
+        if across > min(MAX_RUN_WIDTH_M, along):
+            continue
+
+        band = "prof_v" if axis == 0 else "prof_u"
+        merged = {}
+        for record in records:
+            for bin_key, depth in record[band].items():
+                if depth > merged.get(bin_key, -1.0):
+                    merged[bin_key] = depth
+
+        out.append({
+            "axis": "horizontal" if axis == 0 else "vertical",
+            "length_m": round(along, 3),
+            "width_m": round(across, 4),
+            "u_m": round(u_lo, 3),
+            "v_m": round(v_lo, 3),
+            "u_end_m": round(u_hi, 3),
+            "v_end_m": round(v_hi, 3),
+            "depth_m": round(sum(r["d_min"] for r in records)
+                             / len(records), 4),
+            "thickness_m": round(_thickness(records), 4),
+            "flat_share": _flat_share(merged),
+            "points": sum(r["n"] for r in records),
+        })
+    return out
+
+
+def _flat_share(profile):
+    """How much of a run's width stands at close to its full depth.
+
+    This is the round/flat discriminator, and it replaces a ratio of two
+    extents that could not work. A scanner in the room sees the face of a
+    service that is turned towards it, so for a pipe it sees the near HALF
+    of a cylinder: the depth spread it measures is the RADIUS, not the
+    diameter. 10mm copper therefore measured 10mm across and 5mm deep, a
+    ratio of 2.0 — squarely in the "flat" band — and was reported as
+    2.5mm2 twin-and-earth. A pipe identified as a cable is the same error
+    as a cable identified as a pipe, and it is the error this module exists
+    to prevent.
+
+    What actually separates them is the SHAPE of the cross-section. A cable
+    presents a flat face: near enough constant depth right across its width,
+    then a sharp edge. A pipe is a curve, deepest along its crown and
+    falling away continuously to either side. Measuring the share of the
+    width sitting within 15% of the peak gives ~1.0 for a flat face and
+    ~0.53 for a circle, which is a wide enough gap to judge on.
+
+    Measured relative to the run's OWN shallowest point, not to the wall.
+    A service sits on a clip or a batten, and that standoff — 20mm is
+    typical — is shared by every part of the cross-section. Left in, it
+    swamps the few millimetres of shape: a 10mm pipe standing 20mm off the
+    wall varies between 25mm and 30mm deep, which is within 15% right across
+    its width, so a circle measured as flat and copper came back as cable.
+
+    Returns None when the run is too narrow to resolve a shape at all.
+    """
+    if len(profile) < 4:
+        return None
+    peak = max(profile.values())
+    floor = min(profile.values())
+    relief = peak - floor
+    if relief <= 0:
+        # Constant depth right across the run. That IS a flat face — it is
+        # what a cable looks like — and reporting it as unknown threw away
+        # the cleanest reading the method produces.
+        return 1.0
+    near = sum(1 for d in profile.values() if d - floor >= relief * 0.85)
+    return round(near / len(profile), 3)
+
+
+def _thickness(records):
     """Apparent cross-section of a run, from how far it stands off the plane.
 
     A scanner sees the near face of a pipe, so the depth spread across the
     run's cells approximates its diameter. Approximate is the honest word:
     it is why identify() refuses rather than rounds when the number falls
     between two products.
+
+    NO FLOOR. The first version floored this at half a cell — 10.0mm at the
+    default 20mm cell — which is exactly the one collision in the product
+    table: 10mm microbore copper against 2.5mm2 twin-and-earth. Every run in
+    the worker reported a thickness of precisely 10.0mm, so nothing was ever
+    identifiable. A thin measurement is now reported as thin, and identify()
+    refuses it if it matches nothing, which is the honest answer.
     """
-    if not members:
+    if not records:
         return 0.0
-    spread = max(depths[m][1] for m in members) - min(depths[m][0]
-                                                      for m in members)
-    # A single-cell-wide run cannot show its diameter through depth spread
-    # alone, so fall back to the cell size as a floor.
-    return max(spread, cell_m * 0.5)
+    return max(r["d_max"] for r in records) - min(r["d_min"] for r in records)
 
 
 # --- what is it? -----------------------------------------------------------
 
-def profile_of(thickness_m, width_m):
+def profile_of(run):
     """Whether a run's cross-section is round or flat. None if unknown.
 
     THE discriminator between a pipe and a cable, and it is not size. 10mm
     microbore copper and 2.5mm2 twin-and-earth are both nominally 10mm
-    across, so no measurement of one dimension can separate them — but
-    copper is round and T&E is flat, roughly 10mm by 4mm. A scan that
-    captures both dimensions of a run knows which it is; one that captures
-    only the diameter genuinely does not, and says so.
+    across, so no measurement of one dimension can separate them.
+
+    It is not the ratio of two dimensions either, which is what this used to
+    be. See _flat_share: a scanner sees half a cylinder, so a pipe's
+    measured depth is its radius and its width-to-depth ratio is about 2 —
+    the same as a cable's. Both read as "flat" and copper was reported as
+    cable. It is the SHAPE of the cross-section that separates them.
     """
-    if not thickness_m or not width_m or thickness_m <= 0 or width_m <= 0:
+    share = run.get("flat_share") if isinstance(run, dict) else None
+    if share is None:
         return None
-    ratio = max(width_m, thickness_m) / min(width_m, thickness_m)
-    if ratio >= 1.8:
+    if share >= 0.80:
         return "flat"
-    if ratio <= 1.3:
+    if share <= 0.65:
         return "round"
     return None
 
@@ -268,18 +437,18 @@ def profile_of(thickness_m, width_m):
 def characteristic_size(run):
     """The dimension a product is actually NAMED by, and its profile.
 
-    Round and flat products are named by different things, and mixing them up
-    finds nothing. A pipe is called 15mm because that is its diameter. Twin
-    and earth is called 2.5mm2, but the dimension a scan can see is its ~10mm
-    width ACROSS THE FLAT — not its ~4mm thickness. Matching a flat cable on
-    its thin dimension looks for a 4mm product, and there isn't one.
+    For both families that is the width the scan sees ACROSS the run — the
+    silhouette. For a pipe that width is its diameter, which is what it is
+    called. For twin and earth it is the ~10mm across the flat, which is the
+    only dimension of a 2.5mm2 cable a scan can see; matching it on its ~4mm
+    thickness looks for a 4mm product, and there isn't one.
+
+    Returning the DEPTH for round goods, as this used to, asked for a 7.5mm
+    product when looking at 15mm copper — half the true size, every time.
     """
-    thickness = run.get("thickness_m")
-    width = run.get("width_m")
-    profile = profile_of(thickness, width)
-    if profile == "flat":
-        return max(thickness or 0.0, width or 0.0), profile
-    return thickness, profile
+    if not isinstance(run, dict):
+        return None, None
+    return run.get("width_m"), profile_of(run)
 
 
 def identify(size_m, profile=None):
@@ -356,6 +525,23 @@ def in_safe_zone(run, wall, accessories=None):
     Only meaningful for cables. A pipe outside a "safe zone" is not a
     regulatory problem — it is just a pipe — and reporting it as one would
     bury the cable findings that matter.
+
+    TWO FAILURES, BOTH TOWARD "SAFE", both fixed here.
+
+    The tests were one-sided. `height - v <= SAFE_ZONE_M` is satisfied by
+    every v ABOVE the wall as well as every v near its top, and `width - u`
+    likewise, so any run whose coordinates fell outside the wall's nominal
+    range read as compliant. Only a ground-floor wall with its corner exactly
+    at the world origin was assessed correctly; move the same room 6m along,
+    or up one storey, or survey it against the OS grid, and a dangerous
+    cable flipped to PASS. (The coordinates themselves were the deeper
+    fault — see project_to_plane.)
+
+    A run was also treated as its single start corner, with length_m and
+    axis ignored. A cable straight across the middle of a wall passed
+    because its left end touched a corner, while 3.7m of it sat in no zone
+    at all. The whole EXTENT is now tested, and a run only counts as in a
+    zone if all of it is: BS 7671 protects the cable, not its endpoint.
     """
     width = wall.get("width_m")
     height = wall.get("height_m")
@@ -364,19 +550,43 @@ def in_safe_zone(run, wall, accessories=None):
             "safe zones need the wall's width and height — the zones are "
             "defined relative to its edges")
 
-    u, v = run["u_m"], run["v_m"]
-    reasons = []
+    u0, v0 = run["u_m"], run["v_m"]
+    u1 = run.get("u_end_m", u0)
+    v1 = run.get("v_end_m", v0)
+    if run.get("length_m") and "u_end_m" not in run:
+        # A run recorded only by its start corner: derive the far end.
+        if run.get("axis") == "horizontal":
+            u1 = u0 + run["length_m"]
+        else:
+            v1 = v0 + run["length_m"]
+    u0, u1 = min(u0, u1), max(u0, u1)
+    v0, v1 = min(v0, v1), max(v0, v1)
 
-    if height - v <= SAFE_ZONE_M:
+    reasons = []
+    if not (-SAFE_ZONE_M <= u0 and u1 <= width + SAFE_ZONE_M
+            and -SAFE_ZONE_M <= v0 and v1 <= height + SAFE_ZONE_M):
+        return {
+            "in_zone": False,
+            "reasons": [],
+            "note": (f"this run lies outside the wall it was measured "
+                     f"against (u {u0:.2f}–{u1:.2f}m on a {width:.2f}m wall, "
+                     f"v {v0:.2f}–{v1:.2f}m on a {height:.2f}m wall). No "
+                     f"zone judgement is possible — check the wall origin."),
+        }
+
+    # Every part of the run must be in the zone, so test the far edge.
+    if height - v0 <= SAFE_ZONE_M:
         reasons.append("within 150mm of the top of the wall")
-    if u <= SAFE_ZONE_M or width - u <= SAFE_ZONE_M:
+    if u1 <= SAFE_ZONE_M or width - u0 <= SAFE_ZONE_M:
         reasons.append("within 150mm of a wall angle")
 
     for accessory in (accessories or []):
-        if abs(accessory.get("u_m", 1e9) - u) <= SAFE_ZONE_M:
+        au = accessory.get("u_m")
+        if au is not None and u0 - SAFE_ZONE_M <= au <= u1 + SAFE_ZONE_M:
             reasons.append(
                 f"vertically in line with {accessory.get('name', 'an accessory')}")
-        if abs(accessory.get("v_m", 1e9) - v) <= SAFE_ZONE_M:
+        av = accessory.get("v_m")
+        if av is not None and v0 - SAFE_ZONE_M <= av <= v1 + SAFE_ZONE_M:
             reasons.append(
                 f"horizontally in line with {accessory.get('name', 'an accessory')}")
 
@@ -429,7 +639,8 @@ def extract(points, wall, accessories=None):
     if not plane or len(plane) != 4:
         raise ServicesError(
             "services mode needs the wall plane as (a, b, c, d) with a unit "
-            "normal — structure mode produces it.")
+            "normal. Structure mode emits it on every traced wall, as "
+            "`plane`, alongside `origin`, `width_m` and `height_m`.")
     if not wall.get("width_m") or not wall.get("height_m"):
         raise ServicesError(
             "services mode needs the wall's width_m and height_m as well as "
@@ -437,6 +648,17 @@ def extract(points, wall, accessories=None):
             "edges, and without them no cable can be assessed.")
     if not points:
         raise ServicesError("no points supplied")
+
+    origin = wall.get("origin")
+    if origin is None:
+        # Without it, (u, v) are world projections and every distance to a
+        # wall edge is measured from the wrong place. Answer honestly rather
+        # than assessing against coordinates that do not mean what they say.
+        raise ServicesError(
+            "services mode needs the wall's `origin` — its bottom-left "
+            "corner in world coordinates. Without it a run's position on "
+            "the wall cannot be established, so neither can its BS 7671 "
+            "zone. Structure mode emits it on every traced wall.")
 
     void = void_points(points, plane)
     if not void:
@@ -448,7 +670,7 @@ def extract(points, wall, accessories=None):
                 "when it was scanned, or the plane is wrong."],
         }
 
-    runs = trace_runs(void, plane)
+    runs = trace_runs(void, plane, origin=origin)
     assessed = [check_run(r, wall, accessories) for r in runs]
 
     cables = [a for a in assessed
