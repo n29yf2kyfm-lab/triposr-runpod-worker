@@ -1,0 +1,9 @@
+feature_key,label,description,kind,did,byte_offset,bit_offset,bit_length,on_raw,off_raw,legal_class,risk,security_level,sfd_required,source
+mirror_fold_on_lock,Fold mirrors on lock,Folds the door mirrors automatically when the car is locked,fdl,0x3000,7,0,1,1,0,comfort,low,,false,community
+digital_speed_cluster,Digital speed in cluster,Shows exact speed as a number in the instrument cluster,fdl,0x3000,7,1,1,1,0,comfort,low,,false,community
+one_touch_indicator_5,One-touch indicators 5 blinks,Lane-change flash gives 5 blinks instead of 3,fdl,0x3001,2,0,3,5,3,comfort,low,,false,community
+comfort_windows_key,Comfort windows from key,Hold unlock on the key to open all windows,fdl,0x3002,4,0,1,1,0,comfort,medium,0x03,false,community
+drl_brightness_boost,DRL brightness boost,Brighter daytime running lights,fdl,0x3004,1,2,2,3,1,lighting,medium,0x03,false,community
+startup_disclaimer_off,Startup disclaimer off,Skip the iDrive legal warning at startup,fdl,0x3005,0,3,1,1,0,comfort,low,,false,community
+auto_start_stop_default_off,Auto start-stop default off,Engine stop-start stays off until switched on,fdl,0x3006,6,0,1,1,0,comfort,low,,false,community
+video_in_motion,Video in motion,Allow screen video while moving (passenger use),fdl,0x3007,3,0,1,1,0,safety,high,0x03,false,community
