@@ -874,6 +874,83 @@ check("11i and the fill figure is in the two-thirds range",
 
 
 # ==========================================================================
+# ---- 12. GLB export ------------------------------------------------------
+# The OBJ opens anywhere but carries no materials of its own, and IFC needs
+# software to read. GLB is the one an app hands to a viewer, to QuickLook on
+# an iPhone, or to a client. Written with the standard library — a GLB is a
+# header, a JSON chunk and a binary chunk, and putting Blender in the image
+# to do that would cost ~1GB for a serialisation job.
+import struct as _struct, json as _json, tempfile as _tf, os as _os
+
+_gm = M.build([room(n, x, y, w, d) for n, x, y, w, d in PUB],
+              schedule=PUB_SCHEDULE, storeys=3,
+              roof={"pitch_deg": 35.0, "kind": "hipped", "overhang": 0.30})
+_gp = _os.path.join(_tf.mkdtemp(), "m.glb")
+M.write_glb(_gm, _gp)
+_raw = open(_gp, "rb").read()
+
+_magic, _ver, _len = _struct.unpack("<III", _raw[:12])
+check("12a the magic is glTF", _magic == 0x46546C67, hex(_magic))
+check("12b version 2", _ver == 2, str(_ver))
+check("12c the declared length is the file length",
+      _len == len(_raw), f"{_len} vs {len(_raw)}")
+
+_o, _chunks = 12, []
+while _o < len(_raw):
+    _cl, _ct = _struct.unpack("<II", _raw[_o:_o + 8]); _o += 8
+    _chunks.append((_ct, _raw[_o:_o + _cl])); _o += _cl
+check("12d two chunks, JSON then BIN",
+      [c[0] for c in _chunks] == [0x4E4F534A, 0x004E4942],
+      str([hex(c[0]) for c in _chunks]))
+# Every chunk must be 4-byte aligned or strict parsers reject the file.
+check("12e chunks are 4-byte aligned",
+      all(len(c[1]) % 4 == 0 for c in _chunks))
+
+_g = _json.loads(_chunks[0][1]); _bin = _chunks[1][1]
+check("12f the buffer length matches the binary chunk",
+      _g["buffers"][0]["byteLength"] == len(_bin))
+check("12g materials are declared", len(_g["materials"]) >= 5,
+      str(len(_g["materials"])))
+check("12h glass is a blended material, not opaque",
+      any(m.get("alphaMode") == "BLEND" for m in _g["materials"]))
+
+_prims = _g["meshes"][0]["primitives"]
+check("12i geometry is split per material", len(_prims) >= 4, str(len(_prims)))
+
+# AN INDEX PAST THE END OF ITS OWN VERTEX ARRAY renders as garbage or
+# crashes the viewer, and nothing in the writer would otherwise catch it.
+_bad = 0
+for _pr in _prims:
+    _ia = _g["accessors"][_pr["indices"]]
+    _iv = _g["bufferViews"][_ia["bufferView"]]
+    _idx = _struct.unpack_from(f"<{_ia['count']}I", _bin, _iv["byteOffset"])
+    if max(_idx) >= _g["accessors"][_pr["attributes"]["POSITION"]]["count"]:
+        _bad += 1
+check("12j no index runs past its own vertex array", _bad == 0, str(_bad))
+check("12k every bufferView sits inside the buffer",
+      all(v["byteOffset"] + v["byteLength"] <= len(_bin)
+          for v in _g["bufferViews"]))
+check("12l every bufferView is 4-byte aligned",
+      all(v["byteOffset"] % 4 == 0 for v in _g["bufferViews"]))
+
+# THE MODEL MUST BE THE RIGHT SIZE. glTF is Y-up, so the model's ridge height
+# has to come back as the maximum Y — this is what catches an axis swap, and
+# an axis swap is invisible in a triangle count.
+_ymax = max(_g["accessors"][_pr["attributes"]["POSITION"]]["max"][1]
+            for _pr in _prims)
+check("12m the top of the GLB is the ridge height, so Y really is up",
+      abs(_ymax - _gm["totals"]["ridge_height_m"]) < 0.02,
+      f"{_ymax:.3f} vs {_gm['totals']['ridge_height_m']}")
+
+# and it must agree with the OBJ rather than being a mirror image of it
+_op = _os.path.join(_tf.mkdtemp(), "m.obj")
+M.write_obj(_gm, _op)
+_ov = [l.split()[1:] for l in open(_op) if l.startswith("v ")]
+_oy = max(float(v[1]) for v in _ov)
+check("12n the GLB and the OBJ describe the same building",
+      abs(_oy - _ymax) < 0.02, f"obj {_oy:.3f} vs glb {_ymax:.3f}")
+
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

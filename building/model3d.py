@@ -893,6 +893,22 @@ def run_mode(spec, prog, output_dir):
     artifacts.append((obj_path, f"models/{scan}.obj", None))
     model["obj"] = True
 
+    # GLB is the one an app can actually show. An OBJ needs a viewer that
+    # understands .mtl and carries no materials on its own; a GLB is a single
+    # file with PBR materials that opens in a browser, in QuickLook on an
+    # iPhone, and in every 3D tool. Same failure policy as IFC: a broken
+    # export must not take down the quantities, which are the point.
+    glb_path = os.path.join(directory, f"{scan}.glb")
+    try:
+        write_glb(model, glb_path)
+        artifacts.append((glb_path, f"models/{scan}.glb", None))
+        model["glb"] = True
+    except Exception as e:
+        model["glb"] = False
+        model["warnings"].append(
+            f"GLB export failed ({type(e).__name__}: {e}). The OBJ and every "
+            f"quantity above are unaffected.")
+
     ifc_path = os.path.join(directory, f"{scan}.ifc")
     try:
         write_ifc(model, ifc_path, project_name=scan)
@@ -913,3 +929,235 @@ def run_mode(spec, prog, output_dir):
 
 
 run = run_mode
+
+
+# --- glTF binary ------------------------------------------------------------
+#
+# WHY NOT BLENDER. GLB is the right thing to hand an app: one file, PBR
+# materials, opens in a browser, in QuickLook on an iPhone and in every
+# viewer there is. Blender is not needed to produce one — a GLB is a 12-byte
+# header, a JSON chunk and a binary chunk, and writing it here keeps the
+# image small and the tests dependency-free, exactly as write_obj and
+# write_ifc already are. Adding Blender would put ~1GB and a headless render
+# stack into the worker to do a serialisation job the standard library can
+# do. What Blender would genuinely buy — baked lighting and ambient
+# occlusion — belongs in a render step, not in the geometry export.
+
+GLB_MATERIALS = [
+    # name,          base colour RGBA,             metallic, roughness
+    ("brick",        (0.62, 0.37, 0.27, 1.0),      0.0, 0.95),
+    ("plaster",      (0.87, 0.85, 0.82, 1.0),      0.0, 0.90),
+    ("tile",         (0.29, 0.26, 0.24, 1.0),      0.0, 0.85),
+    ("glass",        (0.44, 0.62, 0.72, 0.45),     0.0, 0.10),
+    ("door",         (0.56, 0.42, 0.29, 1.0),      0.0, 0.60),
+    ("floor",        (0.72, 0.52, 0.29, 1.0),      0.0, 0.70),
+    ("slab",         (0.78, 0.77, 0.75, 1.0),      0.0, 0.90),
+]
+_GLB_INDEX = {name: i for i, (name, *_) in enumerate(GLB_MATERIALS)}
+
+
+def _glb_mesh(model):
+    """Triangles per material, in glTF's Y-up axes.
+
+    Returns {material_name: (positions, normals, indices)}. Positions are
+    flat lists of floats; the plan's Y runs into -Z, matching write_obj so
+    the two exports describe the same building rather than two mirror
+    images of it.
+    """
+    out = {}
+
+    def emit(mat, quad):
+        pos, nrm, idx = out.setdefault(mat, ([], [], []))
+        a, b, c, d = [(p[0], p[2], -p[1]) for p in quad]
+        u = [b[i] - a[i] for i in range(3)]
+        v = [c[i] - a[i] for i in range(3)]
+        n = [u[1] * v[2] - u[2] * v[1],
+             u[2] * v[0] - u[0] * v[2],
+             u[0] * v[1] - u[1] * v[0]]
+        m = math.sqrt(sum(k * k for k in n)) or 1.0
+        n = [k / m for k in n]
+        base = len(pos) // 3
+        for p in (a, b, c, d):
+            pos.extend(p)
+            nrm.extend(n)
+        idx.extend([base, base + 1, base + 2, base, base + 2, base + 3])
+
+    storeys = model.get("storeys", 1)
+    per = model.get("storey_height_m", DEFAULT_CEILING_HEIGHT_M)
+    x0, x1 = model["extent_m"]["x"]
+    y0, y1 = model["extent_m"]["y"]
+
+    for level in range(storeys):
+        z = level * per
+        emit("slab", [(x0, y0, z), (x1, y0, z), (x1, y1, z), (x0, y1, z)])
+        for w in model["walls"]:
+            (ax, ay), (bx, by) = w["start"], w["end"]
+            L = math.hypot(bx - ax, by - ay)
+            if L <= 0:
+                continue
+            ux, uy = (bx - ax) / L, (by - ay) / L
+            nx, ny = -uy * w["thickness_m"] / 2.0, ux * w["thickness_m"] / 2.0
+            h = w["height_m"]
+            mat = "brick" if w["external"] else "plaster"
+            ops = sorted(w.get("openings") or [], key=lambda o: o["along"])
+
+            for sgn, face_mat in ((1, mat), (-1, "plaster")):
+                px, py = ax + nx * sgn, ay + ny * sgn
+
+                def P(s, zz):
+                    return (px + ux * s, py + uy * s, z + zz)
+
+                if not ops:
+                    emit(face_mat, [P(0, 0), P(L, 0), P(L, h), P(0, h)])
+                    continue
+                cursor = 0.0
+                for o in ops:
+                    a0, a1 = o["along"], o["along"] + o["width"]
+                    zb = o.get("sill", 0.0) if o["kind"] != "door" else 0.0
+                    zt = zb + o["height"]
+                    if a0 > cursor:
+                        emit(face_mat, [P(cursor, 0), P(a0, 0),
+                                        P(a0, h), P(cursor, h)])
+                    if zb > 0:
+                        emit(face_mat, [P(a0, 0), P(a1, 0), P(a1, zb),
+                                        P(a0, zb)])
+                    if zt < h:
+                        emit(face_mat, [P(a0, zt), P(a1, zt), P(a1, h),
+                                        P(a0, h)])
+                    cursor = a1
+                if cursor < L:
+                    emit(face_mat, [P(cursor, 0), P(L, 0), P(L, h),
+                                    P(cursor, h)])
+
+            # the pane or leaf, on the wall centreline
+            for o in ops:
+                a0, a1 = o["along"], o["along"] + o["width"]
+                zb = o.get("sill", 0.0) if o["kind"] != "door" else 0.0
+                zt = zb + o["height"]
+                p0 = (ax + ux * a0, ay + uy * a0)
+                p1 = (ax + ux * a1, ay + uy * a1)
+                emit("glass" if o["kind"] != "door" else "door",
+                     [(p0[0], p0[1], z + zb), (p1[0], p1[1], z + zb),
+                      (p1[0], p1[1], z + zt), (p0[0], p0[1], z + zt)])
+
+            # wall head
+            emit(face_mat, [(ax + nx, ay + ny, z + h), (bx + nx, by + ny, z + h),
+                            (bx - nx, by - ny, z + h), (ax - nx, ay - ny, z + h)])
+
+    roof = model.get("roof")
+    if roof:
+        ez, rz = roof["eaves_z_m"], roof["ridge_z_m"]
+        for band in roof.get("range_list") or []:
+            bx = band["band_m"]["x"]
+            by = band["band_m"]["y"]
+            (rax, ray), (rbx, rby) = band["ridge"]
+            if roof["along_x"]:
+                emit("tile", [(bx[0], by[0], ez), (bx[1], by[0], ez),
+                              (rbx, rby, rz), (rax, ray, rz)])
+                emit("tile", [(bx[1], by[1], ez), (bx[0], by[1], ez),
+                              (rax, ray, rz), (rbx, rby, rz)])
+                emit("tile", [(bx[0], by[0], ez), (rax, ray, rz),
+                              (rax, ray, rz), (bx[0], by[1], ez)])
+                emit("tile", [(bx[1], by[1], ez), (rbx, rby, rz),
+                              (rbx, rby, rz), (bx[1], by[0], ez)])
+            else:
+                emit("tile", [(bx[0], by[0], ez), (bx[0], by[1], ez),
+                              (rbx, rby, rz), (rax, ray, rz)])
+                emit("tile", [(bx[1], by[1], ez), (bx[1], by[0], ez),
+                              (rax, ray, rz), (rbx, rby, rz)])
+                emit("tile", [(bx[0], by[0], ez), (rax, ray, rz),
+                              (rax, ray, rz), (bx[1], by[0], ez)])
+                emit("tile", [(bx[1], by[1], ez), (rbx, rby, rz),
+                              (rbx, rby, rz), (bx[0], by[1], ez)])
+    return out
+
+
+def write_glb(model, path):
+    """The building as a binary glTF 2.0 file.
+
+    One file an app can hand straight to a viewer, to QuickLook on an
+    iPhone, or to any 3D tool. Stdlib only — see the note above GLB_MATERIALS
+    for why this does not go through Blender.
+    """
+    import struct
+    import base64  # noqa: F401  (kept for callers that inline the buffer)
+
+    groups = _glb_mesh(model)
+    if not groups:
+        raise ModelError("nothing to export — the model has no geometry")
+
+    buf = bytearray()
+    accessors, views, prims = [], [], []
+
+    def pad4():
+        while len(buf) % 4:
+            buf.append(0)
+
+    for name, (pos, nrm, idx) in groups.items():
+        if not idx:
+            continue
+        # indices
+        pad4()
+        off = len(buf)
+        buf.extend(struct.pack(f"<{len(idx)}I", *idx))
+        views.append({"buffer": 0, "byteOffset": off,
+                      "byteLength": len(idx) * 4, "target": 34963})
+        accessors.append({"bufferView": len(views) - 1, "componentType": 5125,
+                          "count": len(idx), "type": "SCALAR",
+                          "min": [min(idx)], "max": [max(idx)]})
+        i_acc = len(accessors) - 1
+
+        def vec3(data):
+            pad4()
+            o = len(buf)
+            buf.extend(struct.pack(f"<{len(data)}f", *data))
+            views.append({"buffer": 0, "byteOffset": o,
+                          "byteLength": len(data) * 4, "target": 34962})
+            xs, ys, zs = data[0::3], data[1::3], data[2::3]
+            accessors.append({
+                "bufferView": len(views) - 1, "componentType": 5126,
+                "count": len(data) // 3, "type": "VEC3",
+                "min": [min(xs), min(ys), min(zs)],
+                "max": [max(xs), max(ys), max(zs)]})
+            return len(accessors) - 1
+
+        p_acc = vec3(pos)
+        n_acc = vec3(nrm)
+        prims.append({"attributes": {"POSITION": p_acc, "NORMAL": n_acc},
+                      "indices": i_acc, "material": _GLB_INDEX[name]})
+
+    pad4()
+    materials = []
+    for name, rgba, metal, rough in GLB_MATERIALS:
+        m = {"name": name,
+             "pbrMetallicRoughness": {"baseColorFactor": list(rgba),
+                                      "metallicFactor": metal,
+                                      "roughnessFactor": rough},
+             "doubleSided": True}
+        if rgba[3] < 1.0:
+            m["alphaMode"] = "BLEND"
+        materials.append(m)
+
+    gltf = {
+        "asset": {"version": "2.0", "generator": "building-scan model mode"},
+        "scene": 0,
+        "scenes": [{"nodes": [0]}],
+        "nodes": [{"mesh": 0, "name": "building"}],
+        "meshes": [{"name": "building", "primitives": prims}],
+        "materials": materials,
+        "accessors": accessors,
+        "bufferViews": views,
+        "buffers": [{"byteLength": len(buf)}],
+    }
+    js = json.dumps(gltf, separators=(",", ":")).encode("utf-8")
+    while len(js) % 4:
+        js += b" "
+
+    with open(path, "wb") as f:
+        total = 12 + 8 + len(js) + 8 + len(buf)
+        f.write(struct.pack("<III", 0x46546C67, 2, total))
+        f.write(struct.pack("<II", len(js), 0x4E4F534A))
+        f.write(js)
+        f.write(struct.pack("<II", len(buf), 0x004E4942))
+        f.write(bytes(buf))
+    return path

@@ -53,7 +53,7 @@ far less than breaking a product that is earning. A test asserts this isolation 
 | `valuation` | address → Land Registry + EPC + UKHPI → value, extension uplift | 2c |
 | `planning` | address → site designations → is this permitted development? | 2d |
 | `structure` | point cloud → walls, slabs, storeys → IFC | 3 |
-| `model` | drawing's figured dimensions → walls, storeys, roof → OBJ + IFC | 3b |
+| `model` | drawing's figured dimensions → walls, storeys, roof → GLB + OBJ + IFC | 3b |
 | `schedule` | (library) drawing's own room schedule → the areas Model Mode checks against | 3b |
 | `services` | open-scan cloud → pipe and cable runs, BS 7671 zones | 4 |
 | `drawing` | 2D PDF → confirmed scale → measured quantities | 7 |
@@ -74,6 +74,15 @@ RoomPlan or IFC — `structure` writes IFC but nothing reads one back in.
 `structure` emits IFC walls and storey slabs with real placements and swept solids. It does
 **not** emit openings or spaces: nothing in the segmentation detects a door, a window or a
 room boundary, so there is nothing honest to write for them.
+
+It emits **GLB, OBJ and IFC**. GLB is the one an app can actually show — a single file
+carrying PBR materials that opens in a browser, in QuickLook on an iPhone and in every 3D
+tool; an OBJ needs a viewer that understands `.mtl` and carries no materials on its own, and
+IFC needs software to read. It is written with the **standard library**: a GLB is a 12-byte
+header, a JSON chunk and a binary chunk. Putting Blender in the image to do that would cost
+around a gigabyte and a headless render stack for a serialisation job. What Blender would
+genuinely buy — baked lighting and ambient occlusion — belongs in a render step, not in a
+geometry export.
 
 `model` runs the opposite way to `structure`: a plan in, a building out. It takes the
 **figured dimensions** off a drawing — never the linework — because every UK sheet carries
@@ -191,7 +200,7 @@ claiming success.
 python building/test_handler.py
 ```
 
-That file alone carries 221 assertions; the whole suite is **1964 across 20 files** — run
+That file alone carries 221 assertions; the whole suite is **1978 across 20 files** — run
 them all with `for f in building/test_*.py; do python "$f"; done`. No GPU. Same approach as
 the vehicle worker: stub the heavy modules, then test the contract logic. CI runs these
 **before** building the image, so a broken contract never reaches a deployable tag.
