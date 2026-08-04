@@ -520,6 +520,28 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
             f"plans before taking a quantity off them.")
     if roof_model:
         result["warnings"].append(roof_model["note"])
+        # THE ENVELOPE IS NOT THE BUILDING, and nothing here checks that it
+        # is. The rooms get verified against the drawing's own schedule; the
+        # rectangle drawn round them gets verified against nothing. Roof The
+        # Vine's first-floor plan and you get a roof over 229.9 m2, when the
+        # building on the ground is 369.6 m2 and L-shaped round a corner —
+        # every roof quantity below is then for a building that is not there.
+        #
+        # Cheap and reliable tell: rooms only fill a rectangular plate if the
+        # plan is the whole floor. A partial plan, a wing, or an L leaves the
+        # bounding box well short.
+        fill = (sum(r.area_m2 for r in rooms) / ((x1 - x0) * (y1 - y0))
+                if (x1 - x0) * (y1 - y0) > 0 else 1.0)
+        result["roof"]["plan_fill_pct"] = round(fill * 100, 1)
+        if fill < 0.75:
+            result["warnings"].append(
+                f"THE ROOF IS OVER A BOUNDING BOX, NOT A MEASURED FOOTPRINT. "
+                f"The rooms supplied fill only {fill * 100:.0f}% of the "
+                f"rectangle drawn round them, so this is a partial plan, a "
+                f"wing, or an L-shaped building squared off. The rooms are "
+                f"checked against the drawing; this rectangle is checked "
+                f"against nothing. Confirm the real footprint before taking "
+                f"a roof quantity off it.")
         result["assumptions"].append(
             f"Roof {roof_model['kind']} at {roof_model['pitch_deg']:.0f} "
             f"degrees with a {roof_model['overhang_m'] * 1000:.0f}mm eaves "

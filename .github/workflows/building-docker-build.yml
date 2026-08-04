@@ -96,6 +96,9 @@ jobs:
       - name: Run model (drawing -> 3D) tests
         run: python building/test_model3d.py
 
+      - name: Run Google Solar cross-check tests
+        run: python building/test_solar.py
+
   build:
     needs: test
     # Pushing an image costs a Docker Hub write and ten minutes of runner;

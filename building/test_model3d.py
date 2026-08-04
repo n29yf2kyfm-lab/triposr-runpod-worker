@@ -422,6 +422,30 @@ check("5w the sloped-vs-plan warning is carried into the model",
 check("5x the pitch is recorded as an assumption, since it was read off "
       "an elevation",
       any("overhang" in x for x in roofed["assumptions"]))
+# THE ENVELOPE IS NOT THE BUILDING. The rooms are checked against the
+# drawing's schedule; the rectangle drawn round them is checked against
+# nothing. Roofing The Vine's first-floor plan produced a roof over 229.9 m2
+# when the real building measures 369.6 m2 and wraps an L round a corner —
+# confirmed against Google Solar and the aerial height model.
+_partial = M.build(
+    [room("A", 0, 0, 4, 4), room("B", 12, 12, 4, 4)],
+    roof={"pitch_deg": 35.0})
+check("5x2 a plan that leaves its bounding box mostly empty is flagged",
+      any("BOUNDING BOX" in w for w in _partial["warnings"]),
+      str(_partial["roof"]["plan_fill_pct"]))
+check("5x3 and the fill percentage is reported as a number",
+      _partial["roof"]["plan_fill_pct"] < 25,
+      str(_partial["roof"]["plan_fill_pct"]))
+_full = M.build([room("A", 0, 0, 5, 4), room("B", 5, 0, 5, 4),
+                 room("C", 0, 4, 10, 4)], roof={"pitch_deg": 35.0})
+check("5x4 a complete rectangular plate is NOT flagged",
+      not any("BOUNDING BOX" in w for w in _full["warnings"]))
+check("5x5 and reports 100% fill",
+      _full["roof"]["plan_fill_pct"] == 100.0,
+      str(_full["roof"]["plan_fill_pct"]))
+check("5x6 a roofless model carries no fill figure to misread",
+      M.build([room("A", 0, 0, 4, 4)]).get("roof") is None)
+
 check("5y a model with no roof says so rather than implying a flat one",
       one["roof"] is None and one["roof_quantities"] is None)
 check("5z with no roof, ridge height is the eaves height",
@@ -745,6 +769,15 @@ check("11f the ridge sits above the wall head, not on it",
       str(vine["totals"]["ridge_height_m"]))
 check("11g every en-suite got a door, not a window",
       vine["totals"]["doors"] > 0)
+# The real Vine, measured from the air: 369.6 m2 footprint, L-shaped round a
+# corner plot. The rooms on this one sheet fill two thirds of the rectangle
+# drawn round them, which is exactly the signal that says so.
+check("11h the partial first-floor plan is flagged before anyone roofs it",
+      any("BOUNDING BOX" in w for w in vine["warnings"]),
+      str(vine["roof"]["plan_fill_pct"]))
+check("11i and the fill figure is in the two-thirds range",
+      60 < vine["roof"]["plan_fill_pct"] < 75,
+      str(vine["roof"]["plan_fill_pct"]))
 
 
 # ==========================================================================

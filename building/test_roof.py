@@ -377,36 +377,56 @@ check("8f plan area is foreshortened from sloped",
       seg["plan_area_m2"] < seg["sloped_area_m2"], str(seg))
 check("8g foreshortening uses the pitch",
       abs(seg["plan_area_m2"] - 28.7 * math.cos(math.radians(34.9))) < 0.02)
-check("8h predominant pitch is the largest pitched segment",
+# PITCH IS AREA-WEIGHTED, NOT THE LARGEST PLANE. This assertion used to
+# demand the largest segment's pitch, which is the same thing the bug did —
+# a test can enforce a fault as easily as it can catch one. On The Vine that
+# rule picked a 57.8-degree dormer cheek for a 34-degree roof. Here the
+# weighted median lands on the same 34.9 anyway, because these six segments
+# genuinely are one roof; that agreement is the point, not the number.
+check("8h pitch is the area-weighted median, not the biggest plane",
       parsed["predominant_pitch_deg"] == 34.9,
       str(parsed["predominant_pitch_deg"]))
+check("8h-2 and the mean is reported alongside it",
+      parsed["mean_pitch_deg"] is not None
+      and abs(parsed["mean_pitch_deg"] - 29.6) < 1.0,
+      str(parsed["mean_pitch_deg"]))
+check("8h-3 a six-plane roof spanning 28 degrees is flagged complex",
+      parsed["complex"] is True, str(parsed["pitch_spread_deg"]))
 check("8i no segment here is flat",
       not any(p["flat"] for p in parsed["planes"]),
       str([p["pitch_deg"] for p in parsed["planes"]]))
 
-# The comparison must NOT measure our full roof against Solar's analysed
-# roof: Solar only reports panel-suitable area, which was 93.6 m2 against a
-# 116.6 m2 footprint here — physically impossible for a 35-degree roof, and
-# it produced a 48% false alarm before this was fixed.
+# BOTH SOLAR AREAS ARE SURFACES, and one is a subset of the other:
+# wholeRoofStats is the part broken into planes, buildingStats is the whole
+# building's roof. 93.6 being smaller than 116.6 is a subset being smaller
+# than its superset — not, as this test previously asserted, something
+# "physically impossible" that needed working around. The Vine shows the
+# identical relationship at 277.81 against 308.01.
+#
+# So the comparison basis is buildingStats: measured, and whole.
 cmp = solar.compare({"predominant_pitch_deg": 32.0, "plan_area_m2": 121.09,
                      "sloped_area_m2": 138.82}, parsed)
-check("8j compares against implied full roof, not analysed area",
-      abs(cmp["sloped_area_m2"]["delta_pct"]) < 10,
+check("8j the basis is Solar's measured whole roof",
+      abs(cmp["sloped_area_m2"]["solar_measured"] - 116.61) < 0.05,
       str(cmp["sloped_area_m2"]))
-check("8k implied area exceeds the footprint",
-      cmp["sloped_area_m2"]["solar_implied"] > 116.6)
-# Solar's analysed roof (93.7) is SMALLER than the building footprint
-# (116.6) — impossible for a 35-degree roof, and exactly why it must not be
-# used as the comparison basis.
-check("8l analysed area still reported for transparency",
-      abs(cmp["sloped_area_m2"]["solar_analysed"] - 93.7) < 0.5,
-      str(cmp["sloped_area_m2"]["solar_analysed"]))
-check("8l-2 analysed area is below the footprint, proving it is partial",
-      cmp["sloped_area_m2"]["solar_analysed"] < 116.6)
+check("8k it is not derived from a pitch",
+      "solar_implied" not in cmp["sloped_area_m2"]
+      and "measured" in cmp["sloped_area_m2"]["basis"])
+check("8l the segmented subset is still reported for transparency",
+      abs(cmp["sloped_area_m2"]["solar_segmented"] - 93.59) < 0.05,
+      str(cmp["sloped_area_m2"]["solar_segmented"]))
+check("8l-2 and it is smaller than the whole, as a subset must be",
+      cmp["sloped_area_m2"]["solar_segmented"]
+      < cmp["sloped_area_m2"]["solar_measured"])
+# This mock predates the fixture and carries no groundAreaMeters2, so there
+# is no footprint to compare — which must be handled by omitting the
+# comparison, not by substituting a surface area for it.
+check("8l-3 with no groundAreaMeters2 there is no footprint comparison",
+      "plan_area_m2" not in cmp, str(cmp.get("plan_area_m2")))
 check("8m pitch disagreement is flagged",
       any("disagree" in n for n in cmp["notes"]), str(cmp["notes"]))
-check("8n no false alarm on area",
-      not any("Sloped area" in n for n in cmp["notes"]), str(cmp["notes"]))
+check("8n a 19% area gap IS reported rather than smoothed away",
+      any("Sloped area" in n for n in cmp["notes"]), str(cmp["notes"]))
 check("8o no solar result -> no comparison", solar.compare({}, None) is None)
 
 

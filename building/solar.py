@@ -114,24 +114,68 @@ def parse_segments(payload):
         return None
 
     date = payload.get("imageryDate") or {}
+    building = potential.get("buildingStats") or {}
+    whole = potential.get("wholeRoofStats") or {}
+
+    # THE FOOTPRINT IS groundAreaMeters2, NOT areaMeters2.
+    #
+    # Solar reports both, and they are not the same thing: areaMeters2 is the
+    # roof's SURFACE, already inflated by the pitch, while groundAreaMeters2
+    # is its shadow on the ground. Reading the surface as a footprint and
+    # then dividing by cos(pitch) — which compare() does — applies the slope
+    # twice. Live on The Vine that turned a 278 m2 roof into 406 m2: a 46%
+    # over-order, on the one number this module exists to get right.
+    footprint = round(building.get("groundAreaMeters2") or 0, 2) or None
+    roof_ground = round(whole.get("groundAreaMeters2") or 0, 2) or None
+
+    pitched = [p for p in planes if not p["flat"]]
+    weighted = median = spread = None
+    if pitched:
+        total = sum(p["sloped_area_m2"] for p in pitched)
+        weighted = round(
+            sum(p["pitch_deg"] * p["sloped_area_m2"] for p in pitched)
+            / total, 1)
+        ordered = sorted(pitched, key=lambda p: p["pitch_deg"])
+        # Area-weighted median: walk the segments in pitch order until half
+        # the roof is behind you. On a roof with a few steep outliers this
+        # is the number a roofer would recognise; the mean is not.
+        run = 0.0
+        for p in ordered:
+            run += p["sloped_area_m2"]
+            if run >= total / 2:
+                median = p["pitch_deg"]
+                break
+        spread = round(ordered[-1]["pitch_deg"] - ordered[0]["pitch_deg"], 1)
+
     return {
         "source": "google_solar",
         "quality": payload.get("imageryQuality"),
         "imagery_date": (f"{date.get('year')}-{date.get('month'):02d}-"
                          f"{date.get('day'):02d}"
                          if date.get("year") else None),
-        "building_area_m2": round(
-            (potential.get("buildingStats") or {}).get("areaMeters2", 0), 2)
-        or None,
-        "whole_roof_area_m2": round(
-            (potential.get("wholeRoofStats") or {}).get("areaMeters2", 0), 2)
-        or None,
+        "footprint_m2": footprint,
+        "roof_ground_area_m2": roof_ground,
+        # Kept under its old name because roof.py and the tests read it, but
+        # it is now unambiguously the roof SURFACE, not a plan area.
+        "building_area_m2": round(building.get("areaMeters2") or 0, 2) or None,
+        "whole_roof_area_m2": round(whole.get("areaMeters2") or 0, 2) or None,
         "planes": planes,
+        "segments": len(planes),
         "sloped_area_m2": round(sum(p["sloped_area_m2"] for p in planes), 2),
         "plan_area_m2": round(sum(p["plan_area_m2"] for p in planes), 2),
-        "predominant_pitch_deg": max(
-            (p for p in planes if not p["flat"]),
-            key=lambda p: p["sloped_area_m2"], default={}).get("pitch_deg"),
+        # PITCH IS AREA-WEIGHTED, NOT THE BIGGEST SEGMENT.
+        #
+        # Picking the largest single plane works on a simple roof and fails
+        # badly on a real one. The Vine has 12 segments; the largest is 18%
+        # of the area and sits at 57.8 degrees — a dormer cheek or a gable,
+        # not the roof. It was reported as the pitch, 17 degrees above the
+        # weighted mean and 24 above what the height model shows.
+        "predominant_pitch_deg": median,
+        "mean_pitch_deg": weighted,
+        "pitch_spread_deg": spread,
+        # A roof this varied is not one pitch, and a single figure taken off
+        # it should be treated as indicative rather than as a measurement.
+        "complex": bool(spread is not None and spread >= 15.0),
     }
 
 
@@ -155,7 +199,11 @@ def compare(lidar_quantities, solar_result):
                             "delta": round(sp - lp, 1)}
 
     la = lidar_quantities.get("plan_area_m2")
-    sa = solar_result.get("building_area_m2")
+    # groundAreaMeters2, not areaMeters2 — see parse_segments. Falls back to
+    # the roof's own ground area, then to nothing, rather than silently
+    # comparing a plan area against a sloped one.
+    sa = (solar_result.get("footprint_m2")
+          or solar_result.get("roof_ground_area_m2"))
     if la and sa:
         out["plan_area_m2"] = {
             "lidar": la, "solar": sa,
@@ -170,8 +218,34 @@ def compare(lidar_quantities, solar_result):
     #
     # The sound comparison derives Solar's implied full roof from its own
     # footprint and pitch: area = footprint / cos(pitch).
+    # THE FULL ROOF IS buildingStats.areaMeters2.
+    #
+    # Solar publishes two surface areas and one is a subset of the other:
+    # wholeRoofStats covers the part it broke into segments, buildingStats
+    # covers the whole building. On The Vine that is 277.81 against 308.01,
+    # and the sum of the twelve segments reproduces the first exactly.
+    #
+    # An earlier fix here read buildingStats as a FOOTPRINT, decided that a
+    # 93.6 m2 roof over a 116.6 m2 footprint was "physically impossible for a
+    # 35 degree roof", and built a workaround on that. It was a surface
+    # against a surface all along, and a subset being smaller than its
+    # superset is not a paradox. The workaround — footprint / cos(pitch) —
+    # is kept only for responses that carry no measured area at all.
     ls = lidar_quantities.get("sloped_area_m2")
-    if ls and sa and sp is not None:
+    measured = (solar_result.get("building_area_m2")
+                or solar_result.get("whole_roof_area_m2"))
+    if ls and measured:
+        out["sloped_area_m2"] = {
+            "lidar": ls,
+            "solar_measured": measured,
+            "solar_segmented": solar_result.get("whole_roof_area_m2"),
+            "delta_pct": round((ls - measured) / measured * 100, 1),
+            "basis": "solar buildingStats.areaMeters2 — the whole roof "
+                     "surface as measured, not derived from a pitch. "
+                     "solar_segmented is the part Solar broke into planes "
+                     "and is a subset of it.",
+        }
+    elif ls and sa and sp is not None:
         import math
         implied = sa / math.cos(math.radians(sp))
         out["sloped_area_m2"] = {
@@ -179,8 +253,8 @@ def compare(lidar_quantities, solar_result):
             "solar_implied": round(implied, 2),
             "solar_analysed": solar_result.get("sloped_area_m2"),
             "delta_pct": round((ls - implied) / implied * 100, 1),
-            "basis": "solar footprint / cos(solar pitch); solar_analysed is "
-                     "panel-suitable roof only and is not the full area",
+            "basis": "solar FOOTPRINT / cos(solar pitch), used only where "
+                     "Solar reports no measured roof area",
         }
 
     notes = []
@@ -195,5 +269,11 @@ def compare(lidar_quantities, solar_result):
         notes.append(
             f"Sloped area sources disagree by {area_delta:+.1f}%. Check the "
             f"footprint covers the same building.")
+    if solar_result.get("complex"):
+        notes.append(
+            f"This roof is {solar_result.get('segments')} planes spanning "
+            f"{solar_result.get('pitch_spread_deg')} degrees of pitch — it is "
+            f"not one roof at one angle. A single pitch figure is indicative "
+            f"only; measure the range you are actually working on.")
     out["notes"] = notes
     return out

@@ -85,6 +85,13 @@ silently. And it measures the roof on the **true slope**: at 35° that is 22% mo
 than the footprint, and ordering off the footprint is how a re-roof comes up a fifth short on
 a job already priced.
 
+What it will **not** do is put a roof on a plan and stay quiet about it. The rooms get
+checked against the drawing's schedule; the rectangle drawn round them gets checked against
+nothing, so when the rooms fill less than 75% of their own bounding box the output says so.
+The Vine's first-floor plan fills 66% — it is one sheet of an L-shaped building that wraps a
+corner, and Google Solar measures the real footprint at 369.6 m² against the 229.9 m² that
+plan implies.
+
 What it refuses to do is invent a dimension. A room with no stated size is reported missing,
 not modelled at a guess. Rooms are rectangles; a bay or a splay is not in the model. And a
 width outside 0.3–200 m is refused rather than clamped, because a drawing is figured in
@@ -164,7 +171,7 @@ claiming success.
 python building/test_handler.py
 ```
 
-That file alone carries 221 assertions; the whole suite is **1791 across 18 files** — run
+That file alone carries 221 assertions; the whole suite is **1846 across 19 files** — run
 them all with `for f in building/test_*.py; do python "$f"; done`. No GPU. Same approach as
 the vehicle worker: stub the heavy modules, then test the contract logic. CI runs these
 **before** building the image, so a broken contract never reaches a deployable tag.

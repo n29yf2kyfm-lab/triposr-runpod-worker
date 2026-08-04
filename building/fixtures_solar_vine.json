@@ -1,0 +1,111 @@
+{
+ "name": "buildings/ChIJ7-o-T1m7cEgR61ivNsljZm0",
+ "center": {
+  "latitude": 52.5015742,
+  "longitude": -1.8767813000000002
+ },
+ "imageryDate": {
+  "year": 2023,
+  "month": 5,
+  "day": 3
+ },
+ "imageryQuality": "HIGH",
+ "postalCode": "B6 5SH",
+ "regionCode": "GB",
+ "solarPotential": {
+  "buildingStats": {
+   "areaMeters2": 308.0091,
+   "groundAreaMeters2": 224.49
+  },
+  "wholeRoofStats": {
+   "areaMeters2": 277.80542,
+   "groundAreaMeters2": 206.94
+  },
+  "roofSegmentStats": [
+   {
+    "pitchDegrees": 31.041998,
+    "azimuthDegrees": 328.15045,
+    "stats": {
+     "areaMeters2": 46.49917
+    }
+   },
+   {
+    "pitchDegrees": 34.244015,
+    "azimuthDegrees": 21.951181,
+    "stats": {
+     "areaMeters2": 46.694572
+    }
+   },
+   {
+    "pitchDegrees": 57.7548,
+    "azimuthDegrees": 238.28091,
+    "stats": {
+     "areaMeters2": 49.74288
+    }
+   },
+   {
+    "pitchDegrees": 45.48057,
+    "azimuthDegrees": 196.54462,
+    "stats": {
+     "areaMeters2": 26.74174
+    }
+   },
+   {
+    "pitchDegrees": 30.964619,
+    "azimuthDegrees": 144.79904,
+    "stats": {
+     "areaMeters2": 21.749647
+    }
+   },
+   {
+    "pitchDegrees": 45.543926,
+    "azimuthDegrees": 23.03744,
+    "stats": {
+     "areaMeters2": 20.03249
+    }
+   },
+   {
+    "pitchDegrees": 33.35062,
+    "azimuthDegrees": 191.72388,
+    "stats": {
+     "areaMeters2": 15.227661
+    }
+   },
+   {
+    "pitchDegrees": 48.051037,
+    "azimuthDegrees": 62.392498,
+    "stats": {
+     "areaMeters2": 16.709839
+    }
+   },
+   {
+    "pitchDegrees": 21.54643,
+    "azimuthDegrees": 91.73155,
+    "stats": {
+     "areaMeters2": 10.43951
+    }
+   },
+   {
+    "pitchDegrees": 40.896896,
+    "azimuthDegrees": 231.80226,
+    "stats": {
+     "areaMeters2": 8.916654
+    }
+   },
+   {
+    "pitchDegrees": 49.488503,
+    "azimuthDegrees": 114.36626,
+    "stats": {
+     "areaMeters2": 8.220435
+    }
+   },
+   {
+    "pitchDegrees": 44.763657,
+    "azimuthDegrees": 116.46604,
+    "stats": {
+     "areaMeters2": 6.830817
+    }
+   }
+  ]
+ }
+}
