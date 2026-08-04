@@ -146758,7 +146758,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-2006-rr1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-2006-rr1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-2006-rr1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 12560788,
@@ -146857,14 +146857,67 @@
   },
   "platesBaked": false,
   "colourVariantPaints": {
-   "grey": [],
-   "silver": [],
-   "black": [],
-   "white": [],
-   "blue": [],
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
    "red": [],
-   "green": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2593,
+   "variantsHash": "3dbd539c014013268d117c5cb8580b40f902e18e",
+   "method": "render",
+   "at": "2026-08-04"
   }
  },
  {
@@ -146936,7 +146989,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2015-rr1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2015-rr1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-sport-2015-rr1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 5471164,
@@ -147035,14 +147088,67 @@
   },
   "platesBaked": false,
   "colourVariantPaints": {
-   "grey": [],
-   "silver": [],
-   "black": [],
-   "white": [],
-   "blue": [],
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
    "red": [],
-   "green": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4166,
+   "variantsHash": "087162157b4a1df15ddcca26a54ff6f039769e6e",
+   "method": "render",
+   "at": "2026-08-04"
   }
  },
  {
@@ -147112,7 +147218,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-rr1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-rr1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-sport-2018-rr1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 23172552,
@@ -147211,14 +147317,67 @@
   },
   "platesBaked": false,
   "colourVariantPaints": {
-   "grey": [],
-   "silver": [],
-   "black": [],
-   "white": [],
-   "blue": [],
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
    "red": [],
-   "green": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.445,
+   "variantsHash": "c2bb2f186128e9948262f1e05fc615e1f1849c60",
+   "method": "render",
+   "at": "2026-08-04"
   }
  },
  {
@@ -147289,7 +147448,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2023-rr1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2023-rr1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-sport-2023-rr1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 16370368,
@@ -147388,14 +147547,67 @@
   },
   "platesBaked": false,
   "colourVariantPaints": {
-   "grey": [],
-   "silver": [],
-   "black": [],
-   "white": [],
-   "blue": [],
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
    "red": [],
-   "green": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3809,
+   "variantsHash": "193c2090c636c6e3e9d08b36a4d1a75c2f30ebe2",
+   "method": "render",
+   "at": "2026-08-04"
   }
  }
 ]
