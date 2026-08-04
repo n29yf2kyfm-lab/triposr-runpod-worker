@@ -292,23 +292,30 @@ def _plan(value):
             key = str(name).strip()
             if not key:
                 raise InputError("plan.schedule has an entry with no name")
-            # check_against_schedule matches names case- and space-insensitively,
-            # so two keys that normalise the same are two rows for one room —
-            # and if their areas differ, one says the room agrees and the other
-            # says it does not. Which figure the drawing actually prints is not
-            # something to guess at.
-            norm = " ".join(key.lower().split())
-            if norm in seen:
-                raise InputError(
-                    f"plan.schedule lists {seen[norm]!r} and {key!r}, which are "
-                    f"the same room. Give it one area, as the drawing does.")
-            seen[norm] = key
             number = _float(area, f"plan.schedule[{key!r}]", None,
                             0.1, MAX_ROOM_SIDE_M ** 2)
             if number is None:
                 raise InputError(
                     f"plan.schedule[{key!r}] must be an area in m2")
-            checked[key] = number
+            # NAMES THAT NORMALISE THE SAME ARE SUMMED, NOT REFUSED.
+            #
+            # Refusing them was wrong on a real drawing: a first-floor plan
+            # legitimately carries two rooms both labelled "Ensuite", and a
+            # building has a Hallway on every storey. Rejecting that rejects
+            # the sheet.
+            #
+            # Summing is the rule the other side already uses —
+            # check_against_schedule sums the MODEL's rooms by name, because
+            # an L-shaped kitchen is two rectangles under one label. Both
+            # sides summing is what makes the comparison mean anything. And
+            # when a duplicate really was a typo, the doubled area shows up
+            # as a large error in the check rather than as a silent pass.
+            norm = " ".join(key.lower().split())
+            if norm in seen:
+                checked[seen[norm]] = round(checked[seen[norm]] + number, 3)
+            else:
+                seen[norm] = key
+                checked[key] = number
         out["schedule"] = checked
 
     out["storeys"] = _int(value.get("storeys"), "plan.storeys", 1, 1,
@@ -701,6 +708,16 @@ def parse_job(job_input):
     # A plan typed off the drawing's figured dimensions. Not traced — traced
     # linework is what the drawing itself tells you not to scale from.
     spec["plan"] = _plan(job_input.get("plan"))
+    # Read the room schedule off the drawing itself instead of typing it in.
+    # The areas an architect prints beside each room are the only independent
+    # check Model Mode has, and a check nobody can be bothered to enter is a
+    # check that does not happen.
+    spec["schedule_url"] = (str(job_input.get("schedule_url") or "").strip()
+                            or None)
+    spec["schedule_path"] = (str(job_input.get("schedule_path") or "").strip()
+                             or None)
+    spec["schedule_level"] = _int(job_input.get("schedule_level"),
+                                  "schedule_level", None, 1, 60)
 
     # --- drawing ----------------------------------------------------------
     # Assisted takeoff. The scale is never inferred silently — see drawing.py.

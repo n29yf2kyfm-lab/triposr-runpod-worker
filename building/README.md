@@ -54,6 +54,7 @@ far less than breaking a product that is earning. A test asserts this isolation 
 | `planning` | address → site designations → is this permitted development? | 2d |
 | `structure` | point cloud → walls, slabs, storeys → IFC | 3 |
 | `model` | drawing's figured dimensions → walls, storeys, roof → OBJ + IFC | 3b |
+| `schedule` | (library) drawing's own room schedule → the areas Model Mode checks against | 3b |
 | `services` | open-scan cloud → pipe and cable runs, BS 7671 zones | 4 |
 | `drawing` | 2D PDF → confirmed scale → measured quantities | 7 |
 | `condition` | imagery + thermal → 3D-located, costed defects | 5 |
@@ -171,7 +172,7 @@ claiming success.
 python building/test_handler.py
 ```
 
-That file alone carries 221 assertions; the whole suite is **1866 across 19 files** — run
+That file alone carries 221 assertions; the whole suite is **1901 across 20 files** — run
 them all with `for f in building/test_*.py; do python "$f"; done`. No GPU. Same approach as
 the vehicle worker: stub the heavy modules, then test the contract logic. CI runs these
 **before** building the image, so a broken contract never reaches a deployable tag.

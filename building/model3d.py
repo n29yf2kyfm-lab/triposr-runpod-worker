@@ -854,11 +854,34 @@ def run_mode(spec, prog, output_dir):
             height=e.get("height_m") or plan.get("height_m"),
             kind=e.get("kind", "room")))
 
+    # A schedule given directly wins; otherwise read the drawing's own.
+    sched = plan.get("schedule")
+    sched_note = None
+    src = spec.get("schedule_path") or spec.get("schedule_url")
+    if not sched and src:
+        try:
+            import schedule as _sched
+            parsed = _sched.parse(src)
+            lvl = spec.get("schedule_level")
+            sched = _sched.as_check_input(parsed, level_no=lvl)
+            sched_note = (
+                f"Room schedule read off the drawing: {len(parsed['rooms'])} "
+                f"rooms across {len(_sched.levels(parsed))} level(s)"
+                + (f", narrowed to level {lvl}." if lvl else "."))
+        except Exception as e:
+            sched_note = (f"Could not read a room schedule from the drawing "
+                          f"({type(e).__name__}: {e}). The model is built "
+                          f"from the dimensions either way, but nothing "
+                          f"independent has checked it.")
+
     prog.stage("building")
-    model = build(rooms, schedule=plan.get("schedule"),
+    model = build(rooms, schedule=sched,
                   storeys=int(plan.get("storeys", 1)),
                   storey_height=plan.get("storey_height_m"),
                   roof=plan.get("roof"))
+
+    if sched_note:
+        model["warnings"].append(sched_note)
 
     prog.stage("exporting")
     directory = paths.ensure(output_dir)

@@ -766,18 +766,33 @@ except M.ModelError as e:
     check("10k-4 and roof_over refuses it with the reason",
           "shed water" in str(e), str(e))
 
-# A schedule keyed twice for one room produces two rows in the check, and if
-# the areas differ one says it agrees while the other says it does not.
-for _dupe in ({"A": 16.0, "a": 16.0}, {"Room 7": 18.8, "room  7": 20.0}):
-    try:
-        validation.parse_job({"mode": "model", "plan": {
-            "rooms": [{"name": "A", "x": 0, "y": 0,
-                       "width_m": 4.0, "depth_m": 4.0}],
-            "schedule": _dupe}})
-        check("10k-5 a schedule naming one room twice is refused", False)
-    except validation.InputError as e:
-        check("10k-5 a schedule naming one room twice is refused",
-              "same room" in str(e), str(e))
+# NAMES THAT NORMALISE THE SAME ARE SUMMED, NOT REFUSED.
+#
+# This asserted a refusal until a real drawing disproved it. A first-floor
+# plan legitimately carries two rooms both labelled "Ensuite", and a building
+# has a Hallway on every storey — read straight off the sheet by
+# schedule.py. Refusing that rejects the drawing.
+#
+# Summing is the rule the model side already uses: check_against_schedule
+# sums the MODEL's rooms by name, because an L-shaped kitchen is two
+# rectangles under one label. Both sides summing is what makes the
+# comparison mean anything. A duplicate that really was a typo shows up as a
+# doubled area and a large error in the check, not as a silent pass.
+_summed = validation.parse_job({"mode": "model", "plan": {
+    "rooms": [{"name": "Ensuite", "x": 0, "y": 0,
+               "width_m": 1.7, "depth_m": 1.8},
+              {"name": "Ensuite", "x": 3, "y": 0,
+               "width_m": 1.7, "depth_m": 1.8}],
+    "schedule": {"Ensuite": 3.0, "ensuite": 3.0}}})["plan"]["schedule"]
+check("10k-5 two schedule rows for one room are summed, not refused",
+      _summed == {"Ensuite": 6.0}, str(_summed))
+_rooms = [room("Ensuite", 0, 0, 1.7, 1.8), room("Ensuite", 3, 0, 1.7, 1.8)]
+_row = M.check_against_schedule(_rooms, _summed)["rooms"][0]
+check("10k-5b so two modelled en-suites agree with two scheduled ones",
+      _row["status"] == "agrees", str(_row))
+check("10k-5c and a typo shows up as a large error rather than a silent pass",
+      M.check_against_schedule([room("Ensuite", 0, 0, 1.7, 1.8)],
+                               _summed)["rooms"][0]["status"] == "DISAGREES")
 check("10k-6 two genuinely different rooms are fine",
       len(validation.parse_job({"mode": "model", "plan": {
           "rooms": [{"name": "A", "x": 0, "y": 0,
