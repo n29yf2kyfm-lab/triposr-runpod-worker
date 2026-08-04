@@ -450,5 +450,37 @@
  "U111": [
   "SCRAP",
   "2011 R18 Ultra - a Le Mans LMP1 prototype in full Audi Sport race livery with number 2 roundels. not a road car; G7 missed it because R18 is not in the motorsport pattern"
+ ],
+ "U112": [
+  "SCRAP",
+  "RS6 Avant C8 250k f - clean car, but redundant: U061 is the same RS6 Avant C8 at 422k f and was kept"
+ ],
+ "U113": [
+  "SCRAP",
+  "1988 Audi V8 - the body carries a baked green striped texture with visible repeating banding across every panel, and with mats=1 at cov 0.141 that pattern is not the paint material, so it survives every colour swap"
+ ],
+ "U114": [
+  "SCRAP",
+  "2020 RS6 Avant C8 227k f - good grille and lamp internals but redundant with U061 at 422k f"
+ ],
+ "U115": [
+  "SCRAP",
+  "2009 R15 TDI - Le Mans LMP1 prototype, not a road car. G7 missed it because R15 is not in the motorsport pattern"
+ ],
+ "U117": [
+  "SCRAP",
+  "2009 R10 TDI - Le Mans LMP1 prototype, not a road car. same pattern gap as R15 and R18"
+ ],
+ "U118": [
+  "KEEP",
+  "Audi S1 8X three-door 202k f cov 0.128 - honeycomb grille with real depth, headlights with sharp internal LED elements and the S1 signature, black alloys with red calipers consistent across all four views, defined shut lines, quad exhausts, contrast black roof. the library has three A1s and no S1"
+ ],
+ "U119": [
+  "SCRAP",
+  "titled Audi A90 but it is an Audi 90 IMSA GTO race car - widebody, roll cage, huge rear wing, BBS centre-lock wheels, aero antennae. not a road car"
+ ],
+ "U120": [
+  "SCRAP",
+  "audi_a90, 199,748 f against U119 200,574 f at identical cov 0.231 - same IMSA GTO race car re-uploaded by a different author. G11 missed the pair because the A90 nameplate does not match the [aq]digit word-boundary pattern"
  ]
 }
