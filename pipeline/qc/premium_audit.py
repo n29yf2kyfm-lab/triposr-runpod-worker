@@ -58,6 +58,49 @@ every threshold traces to a car the owner personally called.
                     owner for the eye test, which remains the only thing that
                     decides premium.
 
+The gates below were added after the Audi wave. G1-G6 measure whether a car CAN
+be painted; they say nothing about whether it is the right car, and 9 of the
+first 11 Audi candidates cleared G6 and were still scrapped by eye. Each gate
+here is traceable to specific cars in that set and is tested in
+`tests/test_premium_audit.py` against the ones it must catch AND the ones it
+must not touch.
+
+  G7 NOT ROAD LEGAL motorsport vocabulary in the title: dtm, gt3/gt4/gte, lms,
+                    lmp, wrc, rally, race/racing, drift, formula, nascar, plus
+                    liveried service vehicles (police, taxi, ambulance).
+                    A silhouette racer is not the car a UK registration decodes
+                    to, however good the mesh is. Catches the A4 DTM R14, RS5
+                    DTM, TT-R DTM, R8 LMS GT4, Quattro Rally, LMS Evo II GT3 --
+                    7 of 129 in the Audi wave. NOT SALVAGEABLE.
+
+  G8 WRONG MARKET   `A3 L`, `A4 L40 tfsi` and the like -- China-market
+                    long-wheelbase saloons. Visibly longer than the UK car, so a
+                    UK lookup would return the wrong shape. Catches exactly the
+                    two the owner's rubric rejected by eye (U005, U010). NOT
+                    SALVAGEABLE.
+
+  G9 NEAR DUPLICATE same author, same nameplate, face counts within 2%.
+                    One uploader put the same current A3 8Y on the site five
+                    times; four cleared every material gate and three were
+                    scrapped by hand as copies of the first. The largest member
+                    survives and the rest are scrapped naming it.
+                    LIMIT, stated plainly: "largest wins" is a heuristic, not a
+                    quality judgement. It happened to pick right here (the 539k
+                    A3 was the keeper, and the 536k copy had a torn shut line),
+                    but a bigger mesh is not automatically a better car. The
+                    survivor still faces the eye.
+
+  G10 THIN PAINT    coverage < 0.10. FLAG ONLY -- never scraps.
+                    The A4 B6 at 0.081 turned out to be a patchwork of
+                    mismatched baked textures that no respray could reach. This
+                    is ONE observation, which is not enough to cull on, so it
+                    only asks for a closer look. 5 of 129 in the Audi wave.
+
+NOT COVERED, and worth stating so nobody reads a PASS as more than it is: an
+asset that renders upside down (the A4 Avant ships rolled 180 degrees), and a
+body built from mismatched baked textures. Both are geometry/texture defects
+invisible in the metadata this tool reads, and both were caught only by looking.
+
 Nothing here is deleted. Everything is marked, with its gate and reason, and the
 GLB and sheet stay in the bucket.
 
@@ -98,6 +141,58 @@ JUNK = re.compile(r"(?i)\b(scan|photogrammetry|lidar|wreck|wrecked|crash|crashed
                   r"junk|toy|lowpoly|low.?poly|cartoon|stylized|stylised|voxel|"
                   r"papercraft|dealership|showroom|vertriebstelle|vetriebstelle)\b")
 
+# G7: not the car a UK registration decodes to. "lms"/"lmp"/"gte" are whole
+# words only -- "lms" must not fire inside a longer token.
+RACE = re.compile(r"(?i)\b(dtm|gt3|gt4|gte|lms|lmp\d?|wrc|rally|rallye|race|racecar|"
+                  r"racing|drift|formula|nascar|safety.?car|police|polizei|taxi|"
+                  r"ambulance)\b")
+
+# G8: China-market long-wheelbase. Two shapes seen in the wild -- "a3 L 35 tfsi"
+# (L as its own word) and "a4 L40 tfsi" (L glued to the power figure). Anchored
+# on a model code so a stray "L" elsewhere in a title cannot trigger it.
+LWB = re.compile(r"(?i)\b[aq]\d\s*l\b|\b[aq]\d\s*l\d{2}\b|\bl\d{2}\s*tfsi\b")
+
+DUP_FACE_TOL = 0.02      # face counts within 2% of the cluster's largest
+THIN_PAINT = 0.10        # G10 flag only
+
+
+def nameplate(name):
+    """The model token a duplicate cluster is keyed on: a3, q7, r8, tt, e-tron.
+
+    Without this, two different cars by one prolific author (an A3 and a Q5 that
+    happen to land within 2% on face count) would cluster as duplicates of each
+    other and one would be scrapped for no reason.
+    """
+    n = (name or "").lower()
+    m = re.search(r"\b(rs\s?\d|sq\d|s\d|[aq]\d|r8|tt|e.?tron)\b", n)
+    return re.sub(r"[\s.-]", "", m.group(1)) if m else ""
+
+
+def duplicate_clusters(rows):
+    """-> {uid: (survivor_uid, survivor_faces)} for every row that is a copy.
+
+    Same author + same nameplate + face count within DUP_FACE_TOL of the
+    largest in the group. The largest survives; see the G9 limit in the module
+    docstring -- this is a heuristic, not a verdict on which car is better.
+    """
+    groups = {}
+    for r in rows:
+        key = ((r.get("author") or "").strip().lower(), nameplate(r.get("name")))
+        if key[0] and key[1]:
+            groups.setdefault(key, []).append(r)
+    out = {}
+    for members in groups.values():
+        if len(members) < 2:
+            continue
+        members = sorted(members, key=lambda r: -(r.get("faces") or 0))
+        top = members[0]
+        tf = top.get("faces") or 0
+        for r in members[1:]:
+            f = r.get("faces") or 0
+            if tf and abs(tf - f) / tf <= DUP_FACE_TOL:
+                out[r["uid"]] = (top["uid"], tf)
+    return out
+
 
 def sbk():
     k = os.environ.get("SB_KEY")
@@ -119,8 +214,12 @@ def sb_put(p, blob, ctype="application/json"):
                  "Content-Type": ctype, "x-upsert": "true"}), timeout=600).status
 
 
-def judge(r):
-    """-> (gate, verdict, reason). verdict in PASS | SALVAGE | SCRAP | UNKNOWN."""
+def judge(r, dups=None):
+    """-> (gate, verdict, reason). verdict in PASS | SALVAGE | SCRAP | UNKNOWN.
+
+    `dups` is duplicate_clusters(rows) when judging a whole wave; omitted when
+    judging one row, in which case G9 simply cannot fire.
+    """
     text = " ".join(str(r.get(k) or "") for k in ("name", "class_warn"))
     cov = r.get("coverage")
     mats = r.get("bodyMaterials")
@@ -130,6 +229,21 @@ def judge(r):
     if hit:
         return "G3", "SCRAP", f"source describes a defect: '{hit.group(0)}'"
 
+    # wrong car entirely -- checked before any material gate, because a material
+    # split says nothing about whether this is the vehicle a UK reg decodes to
+    hit = RACE.search(text)
+    if hit:
+        return "G7", "SCRAP", (f"'{hit.group(0)}' - motorsport or service vehicle, "
+                               f"not the road car a UK registration decodes to")
+    hit = LWB.search(text)
+    if hit:
+        return "G8", "SCRAP", (f"'{hit.group(0).strip()}' - China-market long-wheelbase, "
+                               f"visibly longer than the UK car of the same name")
+    if dups and r.get("uid") in dups:
+        keep, kf = dups[r["uid"]]
+        return "G9", "SCRAP", (f"near-duplicate of {keep} ({kf:,} f) by the same author "
+                               f"at {faces:,} f - within {DUP_FACE_TOL:.0%}")
+
     if cov is None or mats is None:
         return "G0", "UNKNOWN", "no material verdict captured"
     if mats == 0:
@@ -138,6 +252,9 @@ def judge(r):
         return "G1", "SCRAP", (f"coverage {cov:.3f} - one material spans the car; no separate "
                                f"glass or lamp lenses; tint recolour proven to flood them")
     if mats <= 2 and CLEAN_LO <= cov <= CLEAN_HI:
+        if cov < THIN_PAINT:
+            return "G10", "SALVAGE", (f"clean split but coverage only {cov:.3f} - the one car "
+                                      f"seen this thin was a patchwork of baked textures; look closer")
         return "G6", "PASS", f"clean split - {mats} body material(s), coverage {cov:.3f}"
     if faces and faces < MIN_FACES:
         return "G4", "SALVAGE", f"only {faces:,} faces - thin for four-view scrutiny, needs an eye"
@@ -156,12 +273,13 @@ def main():
     rows = json.loads(sb_get(mpath))
     now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
+    dups = duplicate_clusters(rows)
     tally, examples = {}, {}
     for r in rows:
         if r.get("publicationStatus") == "quarantined" and r.get("quarantineReason"):
             tally["already-scrapped"] = tally.get("already-scrapped", 0) + 1
             continue
-        gate, verdict, reason = judge(r)
+        gate, verdict, reason = judge(r, dups)
         r["auditGate"] = gate
         r["auditVerdict"] = verdict
         r["auditReason"] = reason
