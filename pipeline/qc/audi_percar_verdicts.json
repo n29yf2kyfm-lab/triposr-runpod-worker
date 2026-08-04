@@ -418,5 +418,37 @@
  "U102": [
   "KEEP",
   "2026 RS e-tron GT Performance 760k f cov 0.128 - correct closed EV grille panel, headlights with sharp internal LED elements and the RS signature, multi-spoke alloys with red calipers consistent across all four views, defined shut lines, correct rear light bar, clean gloss. audi-e-tron-gt-v1 is live but this is the RS Performance facelift"
+ ],
+ "U103": [
+  "SCRAP",
+  "2022 RS e-tron GT 746k f - genuinely good, but U102 is the same nameplate as the 2026 RS Performance facelift at 760k f and was kept. one RS e-tron GT is enough"
+ ],
+ "U104": [
+  "SCRAP",
+  "titled AUDI V8 R10 PLUS but it is an R8 Type 4S - no such car as a V8 R10. headlights are blank white shapes and the tail lamps are flat orange blocks"
+ ],
+ "U105": [
+  "SCRAP",
+  "RS7 C8 - the car FLOATS well clear of the ground plane in every view with its shadow far below, and large black billboard slabs with baked text stand in the scene as geometry. second scene-not-a-car in this wave. cov 0.079 also trips the thin-paint flag"
+ ],
+ "U106": [
+  "SCRAP",
+  "e-tron Concept - a 2010 Detroit show car that was never produced, so no UK registration decodes to it. same reason as the A1 clubsport quattro"
+ ],
+ "U107": [
+  "KEEP",
+  "2026 SQ5 Sportback 522k f cov 0.142 - deep honeycomb single-frame grille, headlights with sharp internal LED segments and the split DRL signature, multi-spoke alloys consistent across all four views, defined shut lines, clean gloss, correct rear light bar. already carries a UK plate. neither Q5 in the library covers the SQ5 Sportback body"
+ ],
+ "U108": [
+  "SCRAP",
+  "titled Audi RS8, which does not exist - it is an R8 Type 4S. headlights are dark voids and the R8 is already covered by U072"
+ ],
+ "U109": [
+  "SCRAP",
+  "2021 e-tron RS GT 326k f - headlights are blank white shapes with no internal structure. U102 covers the RS e-tron GT at 760k f with the lamps intact"
+ ],
+ "U111": [
+  "SCRAP",
+  "2011 R18 Ultra - a Le Mans LMP1 prototype in full Audi Sport race livery with number 2 roundels. not a road car; G7 missed it because R18 is not in the motorsport pattern"
  ]
 }
