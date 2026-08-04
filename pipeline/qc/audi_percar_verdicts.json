@@ -386,5 +386,37 @@
  "U091": [
   "SCRAP",
   "2015 R8 V10 Plus Type 4S - headlights are dark voids, and at 99,732 f it is below the four-view line. U072 covers the R8 at 891k f"
+ ],
+ "U092": [
+  "SCRAP",
+  "2013 R8 V10 Spyder 98k f - headlights are flat silver panels with no internal structure, and it is below the four-view face line"
+ ],
+ "U093": [
+  "SCRAP",
+  "2023 R8 Coupe - renders as a featureless BLACK SILHOUETTE in all four views, no grille, lamps or shut lines visible at all. second instance of this failure after the S6 C6"
+ ],
+ "U094": [
+  "SCRAP",
+  "R8 2017 72k f - headlights are simply ABSENT, blank white panels where the lamps should be, and the grille is a flat white slab"
+ ],
+ "U097": [
+  "SCRAP",
+  "R8 Azul 63,689 f - crude side blade modelled as a flat black slab, headlights are dark voids, Ukrainian AA 1234 AA plate baked in, and it is the second thinnest R8 in the wave"
+ ],
+ "U098": [
+  "SCRAP",
+  "2021 R8 V10 Performance - renders well for its budget with a real honeycomb grille and headlight internals, but at 62,053 f it is the thinnest R8 here and U072 covers the car at 891k f"
+ ],
+ "U099": [
+  "SCRAP",
+  "Audi Coupe Quattro B3/B4 1.06M f - headlights are flat dark rectangles, tail lamps flat red blocks, grille a flat slab and the wheels are plain discs with almost no spoke definition. high face count spent on a shell with no detail"
+ ],
+ "U100": [
+  "SCRAP",
+  "Audi Quattro - Group B S1 rally replica, exploded: doors and panels detached and floating in space, huge wings, no interior. not a road car and not assembled"
+ ],
+ "U102": [
+  "KEEP",
+  "2026 RS e-tron GT Performance 760k f cov 0.128 - correct closed EV grille panel, headlights with sharp internal LED elements and the RS signature, multi-spoke alloys with red calipers consistent across all four views, defined shut lines, correct rear light bar, clean gloss. audi-e-tron-gt-v1 is live but this is the RS Performance facelift"
  ]
 }
