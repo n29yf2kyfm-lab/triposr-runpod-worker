@@ -126,7 +126,12 @@ check("10% apart not clustered", cross_author_clusters(farfaces), {})
 print("G12 tuner conversions must fire")
 for name in ("2014 Audi RS5 Coupe LB WORKS Body Kit", "Audi RS6-R C8 Avant ABT",
              "2020 ABT Sportline Audi RS6-R", "2013 Audi RS 5 Liberty Walk",
-             "Audi Q7 Mansory", "Audi A5 widebody", "Audi S3 slammed"):
+             "Audi Q7 Mansory", "Audi A5 widebody", "Audi S3 slammed",
+             # real titles whose separators defeat a naive \b match -- the
+             # underscore one walked straight past the gate on first release
+             "2020_ABT_ Sportline_ Audi_RS6-R",
+             "2014 Audi RS5 Coupe LB\u2605WORKS Body Kit",
+             "Audi.RS6.ABT.2020", "Audi-A5-widebody"):
     check(name, judge(row(name=name))[0], "G12")
 
 print("G12 must NOT fire on factory cars (incl. every kept car's title)")
@@ -148,6 +153,8 @@ check("G5 split suspect", judge(row(coverage=0.60))[:2], ("G5", "SALVAGE"))
 print("regexes are real patterns, not literal backslash-b")
 check("RACE matches a bare word", bool(RACE.search("dtm")), True)
 check("RACE does not match inside a word", bool(RACE.search("adtmx")), False)
+check("separators normalise so \\b can match", judge(row(name="a_ABT_b"))[0], "G12")
+check("but a real word is still not split", judge(row(name="Audi Sabbath"))[0] != "G12", True)
 check("LWB does not match a lone L", bool(LWB.search("Audi L")), False)
 check("JUNK still matches 'scan'", bool(JUNK.search("a 3d scan of a car")), True)
 

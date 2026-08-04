@@ -282,5 +282,45 @@
  "U126": [
   "SCRAP",
   "auto-scrapped by hardened gate G12: 'Liberty Walk' - aftermarket conversion, not the factory car a UK registration decodes to"
+ ],
+ "U063": [
+  "SCRAP",
+  "RS6 GT Avant - the GT is a 660-unit limited edition, not the RS6 a UK registration decodes to, and U061 already covers the standard RS6 Avant C8 at 422k f"
+ ],
+ "U064": [
+  "SCRAP",
+  "2024 RS6 Avant GT - the GT livery graphics are baked on the flanks and bonnet, and with mats=1 at cov 0.157 they sit OUTSIDE the paint material, so they survive all eight colours. same defect as the two-tone S5. also a 660-unit special"
+ ],
+ "U066": [
+  "SCRAP",
+  "2020 ABT Sportline RS6-R - ABT tuner conversion. G12 missed it only because the title separates words with underscores, which defeats the word boundary; fixing that in the gate"
+ ],
+ "U067": [
+  "SCRAP",
+  "RS6 Avant 2020 - front and rear wheels do not match: the fronts render white/silver while the rears are black, in every view. grille is a flat pale slab with no honeycomb"
+ ],
+ "U068": [
+  "SCRAP",
+  "2001 RS6 C5 - wheels broken: bare brake discs with no wheel or tyre on most corners and a stray wheel floating under the car in the side view"
+ ],
+ "U069": [
+  "SCRAP",
+  "RS6 C8 110k f - tail lamps are flat solid red blocks with no internal structure, the front wheel is a black void in the left three-quarter, panels lumpy, and it is thin at 110,172 f"
+ ],
+ "U070": [
+  "SCRAP",
+  "RS7 Sportback C7 1.01M f - headlights are dark voids with only a faint internal line, not the sharp LED elements the rubric asks for. audi-rs7-v1 already covers the nameplate"
+ ],
+ "U071": [
+  "SCRAP",
+  "R8 Type 4S 1.03M f - headlights are flat pale shapes with no internal LED structure at all, which on an R8 is the signature feature, and the tail lamps are dark voids. torn shut line at the door in the side view"
+ ],
+ "U073": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G7: 'lms' - motorsport or service vehicle, not the road car a UK registration decodes to"
+ ],
+ "U116": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G7: 'lmp1' - motorsport or service vehicle, not the road car a UK registration decodes to"
  ]
 }

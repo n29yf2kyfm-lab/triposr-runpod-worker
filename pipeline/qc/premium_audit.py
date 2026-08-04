@@ -286,6 +286,19 @@ def sb_put(p, blob, ctype="application/json"):
                  "Content-Type": ctype, "x-upsert": "true"}), timeout=600).status
 
 
+def searchable(*vals):
+    """Title text with separators normalised to spaces before any \\b match.
+
+    Underscores are word characters, so `\\bABT\\b` does NOT match inside
+    "2020_ABT_ Sportline_ Audi_RS6-R" -- and that is a real title from the Audi
+    wave, an ABT conversion the tuner gate walked straight past. Sketchfab
+    titles arrive with underscores, dots and stars scattered through them
+    ("LB*WORKS", "audi_a4_avant_2013_fbx"), so every gate matches against this
+    rather than the raw string.
+    """
+    return re.sub(r"[_.*+/|\\-]+", " ", " ".join(str(v or "") for v in vals))
+
+
 def judge(r, dups=None, xdups=None):
     """-> (gate, verdict, reason). verdict in PASS | SALVAGE | SCRAP | UNKNOWN.
 
@@ -293,7 +306,7 @@ def judge(r, dups=None, xdups=None):
     judging a whole wave; omitted when judging one row, in which case G9 and G11
     simply cannot fire.
     """
-    text = " ".join(str(r.get(k) or "") for k in ("name", "class_warn"))
+    text = searchable(r.get("name"), r.get("class_warn"))
     cov = r.get("coverage")
     mats = r.get("bodyMaterials")
     faces = r.get("faces") or 0
