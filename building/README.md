@@ -162,6 +162,8 @@ claiming success.
 | `DEBUG=1` | Include tracebacks in responses (bring-up only — they leak paths) |
 | `GOOGLE_SOLAR_API_KEY` | Optional. Enables the Google Solar cross-check on Roof Mode. **Never commit a key** — set it on the endpoint, as with `SUPABASE_KEY` |
 | `BUILDING_EPC_API_KEY` | Optional but it changes the answer. Bearer token for the EPC register, free from [get-energy-performance-data.communities.gov.uk](https://get-energy-performance-data.communities.gov.uk). Land Registry publishes what a house **sold for** but not how **big** it was, so without this there is no price per square metre and Valuation Mode falls back to indexing the property's own last sale. With it, a measured scan can be valued against real £/m² — which is the entire advantage over an agent's estimate. **Never commit the token** — set it on the endpoint |
+| `SUPABASE_PUBLIC_BUCKET` | Defaults to **false**, and that default is the safe one. The bucket holds interior scans of people's homes, their addresses and their floor plans, and object names come from project and scan ids rather than being unguessable. A private bucket gets a **signed, expiring** link; the `/object/public/` form 404s against it while the job still reports success with a `url` — a dead link presented as a delivered artifact |
+| `SUPABASE_SIGNED_URL_TTL` | Seconds a delivered link stays valid (default 7 days — long enough to open a Friday quote on Monday) |
 | `FOOTPRINT_CACHE_DIR` | On-disk cache of OSM footprints (Overpass rate-limits and its mirrors time out) |
 
 ## Deployment
@@ -181,7 +183,7 @@ claiming success.
 python building/test_handler.py
 ```
 
-That file alone carries 221 assertions; the whole suite is **1932 across 20 files** — run
+That file alone carries 221 assertions; the whole suite is **1940 across 20 files** — run
 them all with `for f in building/test_*.py; do python "$f"; done`. No GPU. Same approach as
 the vehicle worker: stub the heavy modules, then test the contract logic. CI runs these
 **before** building the image, so a broken contract never reaches a deployable tag.

@@ -921,6 +921,101 @@ check("19d a LiDAR capture does not warn", not _warned(_r),
       str(_r.get("warnings"))[:200])
 
 
+# ---- 20. a private bucket must not hand back a /public/ link --------------
+# THE BUG THIS PINS: on a successful upload, delivery returned
+#   {SUPABASE_URL}/storage/v1/object/public/{bucket}/{name}
+# for every artifact. That form only resolves on a PUBLIC bucket. This one
+# holds interior scans of people's homes, their addresses and their floor
+# plans, so it has to be private — and against a private bucket the link
+# 404s while the job still reports success with a `url` field. A dead link
+# presented as a delivered artifact is the same class of lie as returning
+# COMPLETED with no output at all.
+#
+# Caught before Supabase was ever wired up, by reading what the URL would
+# have to resolve against. Private buckets now get a signed, expiring URL.
+
+_saved = (delivery.SUPABASE_URL, delivery.SUPABASE_KEY,
+          delivery.SUPABASE_PUBLIC_BUCKET)
+_calls = []
+
+
+class _Resp:
+    def __init__(self, code, payload=None, text=""):
+        self.status_code, self._payload, self.text = code, payload, text
+
+    def json(self):
+        return self._payload
+
+
+def _fake_requests(post_impl):
+    return types.SimpleNamespace(post=post_impl)
+
+
+try:
+    delivery.SUPABASE_URL = "https://proj.supabase.co"
+    delivery.SUPABASE_KEY = "service-role-key"
+    delivery.SUPABASE_BUCKET = "building-scans"
+    delivery.SUPABASE_PUBLIC_BUCKET = False
+
+    def _post(url, **kw):
+        _calls.append(url)
+        if "/object/sign/" in url:
+            return _Resp(200, {"signedURL":
+                               "/object/sign/building-scans/a.ply?token=abc"})
+        return _Resp(200, {})
+
+    delivery._requests = lambda: _fake_requests(_post)
+
+    _u = delivery.upload(small, "test/a.ply")
+    check("20a a private bucket returns a SIGNED url, never /object/public/",
+          _u and "/object/public/" not in _u, str(_u))
+    check("20b and the signed url is absolute, keeping the /storage/v1 prefix",
+          _u == "https://proj.supabase.co/storage/v1/object/sign/"
+                "building-scans/a.ply?token=abc", str(_u))
+    check("20c signing was actually requested",
+          any("/object/sign/" in c for c in _calls), str(_calls))
+
+    # A bucket deliberately made public still gets the public form — it is
+    # cheaper and does not expire. It just must not be the default.
+    delivery.SUPABASE_PUBLIC_BUCKET = True
+    _u = delivery.upload(small, "test/a.ply")
+    check("20d an explicitly public bucket still gets the public url",
+          _u and "/object/public/" in _u, str(_u))
+    delivery.SUPABASE_PUBLIC_BUCKET = False
+
+    # Signing can fail — an expired key, a missing bucket. The upload
+    # succeeded but the caller cannot reach the file, so this must NOT come
+    # back as a usable url.
+    def _post_signfail(url, **kw):
+        if "/object/sign/" in url:
+            return _Resp(400, {}, "Bucket not found")
+        return _Resp(200, {})
+
+    delivery._requests = lambda: _fake_requests(_post_signfail)
+    check("20e a failed signing yields no url rather than a broken one",
+          delivery.upload(small, "test/a.ply") is None)
+
+    # And the warning must not send someone to re-check env vars they have
+    # already set correctly. Configured-but-failing is a different problem
+    # from not-configured, and they get one message to act on.
+    d = delivery.deliver(big, "test/big.ply", inline_key="ply_b64")
+    check("20f a configured store that FAILED does not claim to be "
+          "unconfigured",
+          "is not configured" not in d.get("warning", ""), d.get("warning", ""))
+    check("20g and it points at the bucket and permissions instead",
+          "bucket exists" in d.get("warning", ""), d.get("warning", ""))
+finally:
+    (delivery.SUPABASE_URL, delivery.SUPABASE_KEY,
+     delivery.SUPABASE_PUBLIC_BUCKET) = _saved
+    delivery._requests = lambda: __import__("requests")
+
+# The default is the safe one. A bucket of house interiors must not be
+# public because somebody forgot to set a flag.
+check("20h private is the DEFAULT, not something you opt into",
+      os.environ.get("SUPABASE_PUBLIC_BUCKET") is None
+      and not delivery.SUPABASE_PUBLIC_BUCKET)
+
+
 # ---- summary --------------------------------------------------------------
 print()
 for f in FAILED:

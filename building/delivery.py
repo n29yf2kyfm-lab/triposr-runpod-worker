@@ -32,6 +32,24 @@ MAX_INLINE_BYTES = 4_000_000
 # building site is optimistic; 10 minutes is not excessive here.
 UPLOAD_TIMEOUT = 600
 
+# How long a returned link stays valid. Seven days: long enough for a builder
+# to open a quote on Monday that was produced on a Friday, short enough that a
+# forwarded link does not stay live for ever.
+SIGNED_URL_TTL = int(os.environ.get("SUPABASE_SIGNED_URL_TTL", 7 * 24 * 3600))
+
+# Whether the bucket is public. Defaults to FALSE, and that default is the
+# safe one: this bucket holds interior scans of people's homes, their
+# addresses and their floor plans, and a public bucket makes every one of
+# them readable by anyone who can guess a path.
+#
+# It has to be configured because the two cases need DIFFERENT URLS, and
+# getting it wrong is silent. The public form only resolves on a public
+# bucket; against a private one it 404s while the job still reports success
+# with a `url` field — a dead link presented as a delivered artifact.
+SUPABASE_PUBLIC_BUCKET = (
+    os.environ.get("SUPABASE_PUBLIC_BUCKET", "").strip().lower()
+    in ("1", "true", "yes"))
+
 _CONTENT_TYPES = {
     ".glb": "model/gltf-binary",
     ".gltf": "model/gltf+json",
@@ -73,6 +91,48 @@ def storage_configured():
     return bool(SUPABASE_URL and SUPABASE_KEY and SUPABASE_BUCKET)
 
 
+def sign(object_name, ttl=None):
+    """A time-limited URL for an object in a PRIVATE bucket, or None.
+
+    Supabase serves private objects only against a signed token, so the
+    `/object/public/...` form — which is what this module used to return for
+    every upload — 404s on a private bucket. The job still reported success
+    with a `url` field, so the caller got a dead link presented as a
+    delivered artifact, which is the same class of lie as returning
+    COMPLETED with no output at all.
+
+    The bucket must stay private. It holds interior scans of people's homes,
+    their addresses and their floor plans; a public bucket makes all of it
+    readable by anyone who can guess a path, and object names here are
+    derived from project and scan ids rather than being unguessable.
+    """
+    if not storage_configured():
+        return None
+    try:
+        r = _requests().post(
+            f"{SUPABASE_URL}/storage/v1/object/sign/"
+            f"{SUPABASE_BUCKET}/{object_name}",
+            json={"expiresIn": int(ttl or SIGNED_URL_TTL)},
+            headers={"Authorization": f"Bearer {SUPABASE_KEY}",
+                     "apikey": SUPABASE_KEY,
+                     "Content-Type": "application/json"},
+            timeout=60,
+        )
+        if r.status_code == 200:
+            # Supabase returns a path like "/object/sign/bucket/name?token=..."
+            # relative to /storage/v1, so joining it needs care: the leading
+            # slash means urljoin would throw away the /storage/v1 prefix.
+            signed = (r.json() or {}).get("signedURL") or ""
+            if signed:
+                return f"{SUPABASE_URL}/storage/v1{signed}"
+        print(f"delivery: signing failed {r.status_code} {r.text[:200]}",
+              file=sys.stderr)
+    except Exception as e:
+        print(f"delivery: signing error {type(e).__name__}: {e}",
+              file=sys.stderr)
+    return None
+
+
 def upload(path, object_name, content_type=None):
     """Upload a file to object storage; return its public URL, or None.
 
@@ -102,8 +162,10 @@ def upload(path, object_name, content_type=None):
             timeout=UPLOAD_TIMEOUT,
         )
         if r.status_code in (200, 201):
-            return (f"{SUPABASE_URL}/storage/v1/object/public/"
-                    f"{SUPABASE_BUCKET}/{object_name}")
+            if SUPABASE_PUBLIC_BUCKET:
+                return (f"{SUPABASE_URL}/storage/v1/object/public/"
+                        f"{SUPABASE_BUCKET}/{object_name}")
+            return sign(object_name)
         print(f"delivery: upload failed {r.status_code} {r.text[:200]}",
               file=sys.stderr)
     except Exception as e:
@@ -131,10 +193,23 @@ def deliver(path, object_name, inline_key=None, allow_inline=True):
         # No upload channel and too large to inline: the caller cannot get
         # this file. Reporting "success" here would be a lie — the artifact
         # dies with the worker.
+        #
+        # The two causes need different words. "Not configured" is a
+        # deployment step somebody has not done; a configured store that
+        # failed is a bucket, a permission or a network problem, and sending
+        # someone to re-check environment variables they already set wastes
+        # the one message they get.
+        if storage_configured():
+            cause = ("object storage is configured but the upload or the "
+                     "signing step failed — check the worker log, and that "
+                     f"the {SUPABASE_BUCKET!r} bucket exists and the key can "
+                     f"write to it")
+        else:
+            cause = ("object storage is not configured "
+                     "(SUPABASE_URL/KEY/BUCKET)")
         out["warning"] = (
             f"{os.path.basename(path)} is {size / 1e6:.1f}MB — too large to "
-            f"inline, and object storage is not configured "
-            f"(SUPABASE_URL/KEY/BUCKET). The file exists only on the worker "
+            f"inline, and {cause}. The file exists only on the worker "
             f"volume at {path} and will be lost when the worker recycles.")
     return out
 
