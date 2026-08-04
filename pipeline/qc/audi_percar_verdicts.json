@@ -10,5 +10,37 @@
  "U005": [
   "SCRAP",
   "China-market A3 L long-wheelbase saloon - tailgate badge reads A3L, Chinese 35 TFSI naming; not the UK A3"
+ ],
+ "U003": [
+  "SCRAP",
+  "third copy of the same current A3 8Y from ankitcomxrr (536,613 f vs U001 539,297) - and the worse one: torn shut line at the front door/wing with a black gap through it, crumpled front wing in side view"
+ ],
+ "U004": [
+  "SCRAP",
+  "fourth copy of the same A3 8Y from ankitcomxrr (535,310 f) - cleaner than U003 but adds nothing over U001, which is already kept"
+ ],
+ "U006": [
+  "KEEP",
+  "A3 8Y SALOON 194k f - distinct body style from U001 Sportback, not a duplicate. deep honeycomb single-frame grille, LED headlight internals with segment detail, consistent 5-twin-spoke alloys across all four views, defined door/bonnet shut lines, clean gloss. carries a WC CREATES creator plate that would be replaced with a GB plate"
+ ],
+ "U007": [
+  "SCRAP",
+  "stripped race/drift A4 - no tyres (bare hubs and rotors), roll cage, lime bucket seats, oversized rear wing, and floating shard geometry above the roof in all four views"
+ ],
+ "U008": [
+  "SCRAP",
+  "A4 Avant 2013 renders UPSIDE DOWN in all four views - asset ships rolled 180 deg (FBX up-axis). bodywork underneath looks clean, so this is orientation not fidelity, and is re-sourceable if wanted"
+ ],
+ "U009": [
+  "SCRAP",
+  "A4 B6 cov 0.081 - body is a patchwork of mismatched baked textures (one pale door against dark faceted panels) with visible triangular faceting across the shell; same defect class as the scrapped 2006 Range Rover, no respray can reach it"
+ ],
+ "U010": [
+  "SCRAP",
+  "China-market A4 L long-wheelbase saloon - boot badge reads A4 L, 40 TFSI naming; not the UK A4. same reason as U005. bodywork itself is clean and premium"
+ ],
+ "U011": [
+  "SCRAP",
+  "A4 DTM R14 Redbull race car - silhouette racer with full aero, not a road car"
  ]
 }
