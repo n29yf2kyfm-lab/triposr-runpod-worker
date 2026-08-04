@@ -226,6 +226,40 @@ def walls_from_rooms(rooms, internal=DEFAULT_WALL_THICKNESS_M,
                 both += 1
         wall.external = both < 2
 
+    # A WALL CAN BE "EXTERNAL" AND STILL FACE INDOORS. Real plans are not
+    # flush: two rooms drawn 100mm apart leave a void strip between them, and
+    # the probe correctly reports "no room on the other side" — but that
+    # other side is a cavity inside the building, not the street. Treating it
+    # as street put a WINDOW on it, glazing a view of the neighbouring
+    # wall's face 100mm away. Seen literally, in a walkthrough: glass with
+    # brickwork pressed against it.
+    #
+    # The tell is cheap: if the outside probe point still lands inside the
+    # plan's own bounding box, the wall faces a void, not the sky.
+    if rooms:
+        ex0 = min(r.x for r in rooms); ex1 = max(r.x + r.width for r in rooms)
+        ey0 = min(r.y for r in rooms); ey1 = max(r.y + r.depth for r in rooms)
+    for wall in walls:
+        wall.void_facing = False
+        if not wall.external or not rooms:
+            continue
+        (ax, ay), (bx, by) = wall.start, wall.end
+        length = wall.length_m
+        if length <= 0:
+            continue
+        mx, my = (ax + bx) / 2.0, (ay + by) / 2.0
+        nx, ny = -(by - ay) / length, (bx - ax) / length
+        step = max(internal, external) + 0.05
+        for sign in (1, -1):
+            px, py = mx + nx * step * sign, my + ny * step * sign
+            in_room = any(r.x - 1e-6 <= px <= r.x + r.width + 1e-6
+                          and r.y - 1e-6 <= py <= r.y + r.depth + 1e-6
+                          for r in rooms)
+            if not in_room:
+                wall.void_facing = (ex0 + 1e-6 < px < ex1 - 1e-6
+                                    and ey0 + 1e-6 < py < ey1 - 1e-6)
+                break
+
     for wall in walls:
         wall.thickness = external if wall.external else internal
     return walls
@@ -483,6 +517,9 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
 
     if wall_openings:
         for wall in walls:
+            if getattr(wall, "void_facing", False):
+                # No window onto a 100mm cavity, and no door into it either.
+                continue
             if wall.external and wall.length_m >= 1.8:
                 wall.add_opening("window", wall.length_m / 2 - 0.6, 1.2,
                                  WINDOW_H_M, WINDOW_SILL_M)

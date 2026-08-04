@@ -1018,6 +1018,38 @@ check("14d two storeys actually came out",
       str(_m14["totals"]))
 
 
+# ---- 15. no window onto a void ---------------------------------------------
+# Two rooms drawn 100mm apart — the normal state of a real plan — leave a
+# void strip. The walls flanking it are rightly "external" (no room on the
+# other side), but that side is a cavity inside the building, not the
+# street, and glazing it produced a window with the neighbouring wall's
+# brickwork 100mm behind the glass. Seen literally in the walkthrough.
+# The void must be wider than the probe step (0.35m): a thinner gap is
+# stepped straight over into the far room, which classifies both walls
+# internal — a different (and acceptable) outcome. 0.5m is the awkward one.
+_v15 = M.build([M.Room("South", 0, 0, 4.0, 3.0),
+                M.Room("North", 0, 3.5, 4.0, 3.0)], storeys=1)
+_void15 = [w for w in _v15["walls"]
+           if w["external"] and not w["openings"]
+           and (abs(w["start"][1] - 3.0) < 1e-6
+                or abs(w["start"][1] - 3.5) < 1e-6)
+           and abs(w["start"][1] - w["end"][1]) < 1e-6]
+check("15a the two walls flanking the void carry NO openings",
+      len(_void15) == 2, str(len(_void15)))
+# the true outside walls still get their windows
+check("15b the street-facing walls still get windows",
+      sum(1 for w in _v15["walls"]
+          if any(o["kind"] == "window" for o in w["openings"])) >= 4,
+      str(_v15["totals"]["windows"]))
+# and a genuinely flush pair still shares one internal wall with a door
+_f15 = M.build([M.Room("A", 0, 0, 4.0, 3.0), M.Room("B", 0, 3.0, 4.0, 3.0)],
+               storeys=1)
+check("15c flush rooms still share a doored internal wall",
+      any(not w["external"] and any(o["kind"] == "door"
+                                    for o in w["openings"])
+          for w in _f15["walls"]))
+
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")
