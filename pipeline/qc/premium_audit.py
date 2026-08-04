@@ -96,10 +96,36 @@ must not touch.
                     is ONE observation, which is not enough to cull on, so it
                     only asks for a closer look. 5 of 129 in the Audi wave.
 
-NOT COVERED, and worth stating so nobody reads a PASS as more than it is: an
-asset that renders upside down (the A4 Avant ships rolled 180 degrees), and a
-body built from mismatched baked textures. Both are geometry/texture defects
-invisible in the metadata this tool reads, and both were caught only by looking.
+  G11 RE-UPLOAD     same nameplate, faces within 1.5%, AND coverage equal to
+                    three decimals -- regardless of author.
+                    G9 keys on author deliberately, so it is blind to the same
+                    file posted by two different people, which turns out to be
+                    common: the 2021 RS5 Sportback appears at 523,832 and
+                    517,930 faces under two names whose four renders are
+                    pixel-for-pixel identical. Coverage is a measured property
+                    of the mesh; two independent models matching to 3dp AND
+                    sitting within 1.5% on face count is not chance. Found 5
+                    pairs in the Audi wave, picked the larger every time, and
+                    touched none of the 16 cars kept by eye.
+
+  G12 TUNER         aftermarket conversions: LB Works, Liberty Walk, ABT,
+                    Mansory, Brabus, Rocket Bunny, widebody, body kit, Prior
+                    Design, Hamann, stance, slammed, bagged.
+                    The owner already quarantined audi-rs6-v3 for being an ABT
+                    RS6-R; this wave then offered the SAME car again, plus an
+                    LB Works RS5 and a Liberty Walk RS5. "low"/"lowered" are
+                    deliberately NOT in the list -- too easy to hit an innocent
+                    title. 4 of 129. NOT SALVAGEABLE.
+
+NOT COVERED, and worth stating so nobody reads a PASS as more than it is:
+  - an asset that renders upside down (the A4 Avant ships rolled 180 degrees)
+  - a body built from mismatched baked textures, or two-tone with the second
+    tone outside the paint material, which survives every colour
+  - missing, detached or exploded geometry -- four cars in this wave had no
+    wheels, floating wheels, or every panel separated in space
+  - a body that renders as a featureless black silhouette
+All are geometry or material-value defects invisible in the metadata this tool
+reads, and every one was caught only by looking at the render.
 
 Nothing here is deleted. Everything is marked, with its gate and reason, and the
 GLB and sheet stay in the bucket.
@@ -152,8 +178,16 @@ RACE = re.compile(r"(?i)\b(dtm|gt3|gt4|gte|lms|lmp\d?|wrc|rally|rallye|race|race
 # on a model code so a stray "L" elsewhere in a title cannot trigger it.
 LWB = re.compile(r"(?i)\b[aq]\d\s*l\b|\b[aq]\d\s*l\d{2}\b|\bl\d{2}\s*tfsi\b")
 
-DUP_FACE_TOL = 0.02      # face counts within 2% of the cluster's largest
+DUP_FACE_TOL = 0.02      # G9: same author, face counts within 2% of the largest
+XDUP_FACE_TOL = 0.015    # G11: any author -- tighter, and coverage must match too
 THIN_PAINT = 0.10        # G10 flag only
+
+# G12: aftermarket conversions. The body is not the car a UK registration
+# decodes to, and the owner already quarantined audi-rs6-v3 on exactly this.
+# "low"/"lowered" are deliberately absent -- too easy to hit an innocent title.
+TUNER = re.compile(r"(?i)\b(lb.?works|liberty.?walk|abt|mansory|brabus|rocket.?bunny|"
+                   r"widebody|wide.?body|body.?kit|bodykit|prior.?design|hamann|"
+                   r"stance|slammed|bagged)\b")
 
 
 def nameplate(name):
@@ -194,6 +228,44 @@ def duplicate_clusters(rows):
     return out
 
 
+def cross_author_clusters(rows):
+    """G11: the same file re-uploaded by a DIFFERENT person.
+
+    G9 keys on author on purpose -- two people modelling the same car
+    independently is normal and both deserve a look. But two people posting the
+    same file is not modelling, and it happens constantly: this wave has the
+    RS5 Sportback at 523,832 and 517,930 faces under different names whose four
+    renders are pixel-for-pixel identical, plus the same story for a Q3
+    Sportback, an R8 and an A3.
+
+    The signature is deliberately tighter than G9's: same nameplate, face
+    counts within 1.5%, AND coverage equal to three decimals. Coverage is a
+    measured property of the mesh, so two genuinely independent models of the
+    same car landing on the same value to 3dp while also sitting within 1.5% on
+    face count is not something that happens by chance. Measured on the Audi
+    wave it found 5 pairs, picked the larger member every time, and touched
+    none of the 16 cars kept by eye.
+    """
+    groups = {}
+    for r in rows:
+        cov = r.get("coverage")
+        np_ = nameplate(r.get("name"))
+        if np_ and cov is not None:
+            groups.setdefault((np_, round(cov, 3)), []).append(r)
+    out = {}
+    for members in groups.values():
+        if len(members) < 2:
+            continue
+        members = sorted(members, key=lambda r: -(r.get("faces") or 0))
+        top = members[0]
+        tf = top.get("faces") or 0
+        for r in members[1:]:
+            f = r.get("faces") or 0
+            if tf and abs(tf - f) / tf <= XDUP_FACE_TOL:
+                out[r["uid"]] = (top["uid"], tf)
+    return out
+
+
 def sbk():
     k = os.environ.get("SB_KEY")
     if not k:
@@ -214,11 +286,12 @@ def sb_put(p, blob, ctype="application/json"):
                  "Content-Type": ctype, "x-upsert": "true"}), timeout=600).status
 
 
-def judge(r, dups=None):
+def judge(r, dups=None, xdups=None):
     """-> (gate, verdict, reason). verdict in PASS | SALVAGE | SCRAP | UNKNOWN.
 
-    `dups` is duplicate_clusters(rows) when judging a whole wave; omitted when
-    judging one row, in which case G9 simply cannot fire.
+    `dups`/`xdups` are duplicate_clusters(rows)/cross_author_clusters(rows) when
+    judging a whole wave; omitted when judging one row, in which case G9 and G11
+    simply cannot fire.
     """
     text = " ".join(str(r.get(k) or "") for k in ("name", "class_warn"))
     cov = r.get("coverage")
@@ -239,10 +312,18 @@ def judge(r, dups=None):
     if hit:
         return "G8", "SCRAP", (f"'{hit.group(0).strip()}' - China-market long-wheelbase, "
                                f"visibly longer than the UK car of the same name")
+    hit = TUNER.search(text)
+    if hit:
+        return "G12", "SCRAP", (f"'{hit.group(0)}' - aftermarket conversion, not the "
+                                f"factory car a UK registration decodes to")
     if dups and r.get("uid") in dups:
         keep, kf = dups[r["uid"]]
         return "G9", "SCRAP", (f"near-duplicate of {keep} ({kf:,} f) by the same author "
                                f"at {faces:,} f - within {DUP_FACE_TOL:.0%}")
+    if xdups and r.get("uid") in xdups:
+        keep, kf = xdups[r["uid"]]
+        return "G11", "SCRAP", (f"same file as {keep} ({kf:,} f) re-uploaded by a different "
+                                f"author at {faces:,} f - identical coverage {cov}")
 
     if cov is None or mats is None:
         return "G0", "UNKNOWN", "no material verdict captured"
@@ -274,12 +355,13 @@ def main():
     now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
     dups = duplicate_clusters(rows)
+    xdups = cross_author_clusters(rows)
     tally, examples = {}, {}
     for r in rows:
         if r.get("publicationStatus") == "quarantined" and r.get("quarantineReason"):
             tally["already-scrapped"] = tally.get("already-scrapped", 0) + 1
             continue
-        gate, verdict, reason = judge(r, dups)
+        gate, verdict, reason = judge(r, dups, xdups)
         r["auditGate"] = gate
         r["auditVerdict"] = verdict
         r["auditReason"] = reason

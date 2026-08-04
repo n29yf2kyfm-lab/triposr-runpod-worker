@@ -16,8 +16,8 @@ import json, os, sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(REPO, "pipeline", "qc"))
-from premium_audit import (judge, duplicate_clusters, nameplate,      # noqa: E402
-                           RACE, LWB, JUNK)
+from premium_audit import (judge, duplicate_clusters, cross_author_clusters,  # noqa: E402
+                           nameplate, RACE, LWB, JUNK, TUNER)
 
 UNIQ = os.path.join(REPO, "pipeline", "qc", "audi_unique129.json")
 
@@ -102,6 +102,43 @@ check("A4 B6 at cov 0.081 -> G10", g, "G10")
 check("G10 is SALVAGE, not SCRAP", v, "SALVAGE")
 check("cov 0.175 (kept A3) still G6 PASS", judge(row(coverage=0.175))[:2], ("G6", "PASS"))
 
+print("G11 cross-author re-uploads: the real RS5 Sportback pair")
+rs5 = [row(uid="U056", name="2021 Audi RS5 Sportback", author="Ddiaz Design",
+           faces=523_832, coverage=0.152),
+       row(uid="U057", name="2021 Audi RS5 Sportback Car", author="l4096466",
+           faces=517_930, coverage=0.152)]
+x = cross_author_clusters(rs5)
+check("larger (U056) survives", "U056" in x, False)
+check("U057 flagged as re-upload", x.get("U057", (None,))[0], "U056")
+check("U057 judged G11 SCRAP", judge(rs5[1], None, x)[:2], ("G11", "SCRAP"))
+check("G9 alone does NOT catch it", duplicate_clusters(rs5), {})
+
+print("G11 must NOT fire when coverage differs")
+diffcov = [row(uid="a", name="Audi A3", author="x", faces=200_000, coverage=0.150),
+           row(uid="b", name="Audi A3", author="y", faces=199_000, coverage=0.137)]
+check("different coverage not clustered", cross_author_clusters(diffcov), {})
+
+print("G11 must NOT fire when face counts are more than 1.5% apart")
+farfaces = [row(uid="a", name="Audi A3", author="x", faces=200_000, coverage=0.150),
+            row(uid="b", name="Audi A3", author="y", faces=180_000, coverage=0.150)]
+check("10% apart not clustered", cross_author_clusters(farfaces), {})
+
+print("G12 tuner conversions must fire")
+for name in ("2014 Audi RS5 Coupe LB WORKS Body Kit", "Audi RS6-R C8 Avant ABT",
+             "2020 ABT Sportline Audi RS6-R", "2013 Audi RS 5 Liberty Walk",
+             "Audi Q7 Mansory", "Audi A5 widebody", "Audi S3 slammed"):
+    check(name, judge(row(name=name))[0], "G12")
+
+print("G12 must NOT fire on factory cars (incl. every kept car's title)")
+for name in ("Audi A3 Progressive Red_ Advanced", "Audi A3 2021 trim",
+             "Audi A6 C7 Limousine", "Audi A6 C8 Limousine", "AUDI Q3 SPORTBACK",
+             "2022 Audi Q5 S-Line", "Audi TT RS II (8J) 2006-2014",
+             "Audi TTS Coupe", "Audi A7 Sportback 2017", "Audi Q4 Etron(SUV 45)",
+             "Audi S3 Limousine 8V", "2021 Audi S5 Convertible", "audi Rs3 2022",
+             "2021 Audi RS5 Sportback", "2020 Audi RS5 Coupe",
+             "2021 Audi RS6 Avant C8"):
+    check(name, judge(row(name=name))[0] != "G12", True)
+
 print("existing gates still hold")
 check("G1 shell", judge(row(coverage=0.94))[:2], ("G1", "SCRAP"))
 check("G2 no body material", judge(row(bodyMaterials=0))[:2], ("G2", "SCRAP"))
@@ -117,11 +154,12 @@ check("JUNK still matches 'scan'", bool(JUNK.search("a 3d scan of a car")), True
 print("\nthe whole Audi wave re-judged against the 11 hand verdicts")
 uniq = json.load(open(UNIQ))
 dups = duplicate_clusters(uniq)
+xdups = cross_author_clusters(uniq)
 idx = {f"U{i + 1:03d}": e for i, e in enumerate(uniq)}
 hand = json.load(open(os.path.join(REPO, "pipeline", "qc", "audi_percar_verdicts.json")))
 caught = kept = 0
 for k, (verdict, _) in sorted(hand.items()):
-    g, v, reason = judge(idx[k], dups)
+    g, v, reason = judge(idx[k], dups, xdups)
     if verdict == "SCRAP" and v == "SCRAP":
         caught += 1
     print(f"  {k} eye={verdict:5s} tool={g} {v:7s} {reason[:62]}")

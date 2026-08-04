@@ -234,5 +234,53 @@
  "U053": [
   "KEEP",
   "RS3 2022 Sportback 696k f cov 0.116 - big RS honeycomb grille with real depth, headlights with sharp internal LED elements and the RS3 daytime signature, multi-spoke alloys consistent across all four views, defined shut lines, sharp diffuser, clean gloss. DIRECT REPLACEMENT CANDIDATE: audi-rs3-2022-v1 is currently quarantined as below the premium bar"
+ ],
+ "U054": [
+  "SCRAP",
+  "RS3 Sportback 8Y facelift 479k f - torn shut line with a black gap at the front door-to-wing junction, and a dented rear bumper in the left three-quarter. same uploader and same defect as U003. U053 covers the RS3 at 696k f without it"
+ ],
+ "U055": [
+  "SCRAP",
+  "RS4 B5 titled no textures, and it is exactly that - flat untextured white shell, three empty wheel arches with only one wheel present, 83,827 f"
+ ],
+ "U056": [
+  "KEEP",
+  "2021 RS5 Sportback 524k f cov 0.152 - RS honeycomb grille with real depth, headlights with sharp internal LED elements, dark multi-spoke alloys consistent across all four views, defined shut lines, sharp diffuser and oval exhausts. the library has no RS5 at all"
+ ],
+ "U057": [
+  "SCRAP",
+  "2021 RS5 Sportback Car, 517,930 f against U056 523,832 f at identical cov 0.152 - the four renders are pixel-for-pixel identical. same asset, different uploader. fourth confirmed cross-author duplicate pair in this wave"
+ ],
+ "U058": [
+  "KEEP",
+  "2020 RS5 Coupe 232k f cov 0.162 - RS honeycomb grille with depth, headlight internals present, alloys consistent across all four views, defined shut lines, clean gloss. coupe is a distinct body from the U056 Sportback and the library has neither"
+ ],
+ "U060": [
+  "SCRAP",
+  "2014 RS5 Coupe LB WORKS Body Kit - Liberty Walk widebody conversion. no-mods bar, the same rule that quarantined audi-rs6-v3"
+ ],
+ "U061": [
+  "KEEP",
+  "2021 RS6 Avant C8 422k f cov 0.153 - RS honeycomb grille with real depth, headlights with sharp internal LED elements, dark 5-double-spoke alloys consistent across all four views, defined shut lines, correct diffuser and oval exhausts, clean gloss"
+ ],
+ "U062": [
+  "SCRAP",
+  "RS6-R C8 Avant ABT - ABT tuner conversion, and this is the SAME car already quarantined in the library as audi-rs6-v3 with reason tuner mod (ABT RS6-R) violates no-mods bar"
+ ],
+ "U065": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G12: 'ABT' - aftermarket conversion, not the factory car a UK registration decodes to"
+ ],
+ "U075": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G11: same file as U074 (447,328 f) re-uploaded by a different author at 447,204 f - identical coverage 0.251"
+ ],
+ "U095": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G11: same file as U094 (72,290 f) re-uploaded by a different author at 72,171 f - identical coverage 0.154"
+ ],
+ "U126": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G12: 'Liberty Walk' - aftermarket conversion, not the factory car a UK registration decodes to"
  ]
 }
