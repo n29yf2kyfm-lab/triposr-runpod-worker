@@ -322,5 +322,37 @@
  "U116": [
   "SCRAP",
   "auto-scrapped by hardened gate G7: 'lmp1' - motorsport or service vehicle, not the road car a UK registration decodes to"
+ ],
+ "U072": [
+  "KEEP",
+  "R8 Type 4S 891k f cov 0.219 - the best R8 in the wave so far. headlights carry visible internal segments, honeycomb grille has real depth, 5-spoke alloys with red calipers consistent across all four views, defined shut lines, correct side blade, clean gloss"
+ ],
+ "U074": [
+  "SCRAP",
+  "R8 heavily modified - widebody arches, aftermarket deep-dish wheels on stretched tyres, oversized front splitter and canards. not a factory R8, and the headlights are dark voids"
+ ],
+ "U076": [
+  "SCRAP",
+  "R8 gen 1 - the side blade is a crude flat grey slab that wraps over the roof, nothing like the real part. headlights and tail lamps are dark voids and the whole shell reads soft and melted"
+ ],
+ "U077": [
+  "SCRAP",
+  "R8 V10 - wheels are flat grey discs with no spoke detail, headlights are dark voids, side blade is a flat dark panel. reads as an untextured placeholder"
+ ],
+ "U079": [
+  "SCRAP",
+  "2015 R8 V10 Plus - headlights are flat white shapes with no internal structure, which on an R8 is the defining feature. tail lamps carry some detail but the front does not"
+ ],
+ "U080": [
+  "SCRAP",
+  "R8 gen 1 Type 42 - tail lamps are flat solid red blocks with no internals, headlights are dark voids, grille is a flat slab"
+ ],
+ "U081": [
+  "SCRAP",
+  "R8 gen 1 - the MIRRORS render bright turquoise, a wrong material colour that sits outside the paint material and so survives all eight colours. headlights are dark voids"
+ ],
+ "U082": [
+  "SCRAP",
+  "2023 R8 facelift 277k f - genuinely good, honeycomb grille with depth and headlight internals present, but U072 is the same car at 891k f and was kept. one R8 is enough"
  ]
 }
