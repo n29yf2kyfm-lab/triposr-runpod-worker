@@ -146724,8 +146724,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Scrapped on owner review 2026-08-04: paint material covers only 7.1% of the mesh, so the doors, wings and bumpers keep their own baked textures and the car stays two-tone in all eight colours; German plate baked in as its own material. Recolour audit passed (dist 0.259) -- it measures that the body colour moved, not fidelity.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -146928,7 +146928,8 @@
    "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-2006-rr1-v1/colours/red.jpg",
    "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-2006-rr1-v1/colours/green.jpg",
    "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/land-rover/land-rover-range-rover-2006-rr1-v1/colours/yellow.jpg"
-  }
+  },
+  "quarantinedAt": "2026-08-04"
  },
  {
   "schemaVersion": 2,
