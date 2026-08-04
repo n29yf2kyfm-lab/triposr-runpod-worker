@@ -1023,8 +1023,11 @@ check("20h private is the DEFAULT, not something you opt into",
 # the raw form returned nothing at all, the percent-encoded form returned a
 # Key.
 #
-# Object names are the bigger risk. They come from project_id and scan_id,
-# which people TYPE. "Plot 16 first fix" is an ordinary scan name.
+# The bucket name is the live case: it comes from the environment and this
+# worker never validates it. Object names cannot actually carry a space —
+# parse_job restricts project_id and scan_id to letters, digits, dot, dash
+# and underscore, and a real job proved it by being refused at validation.
+# The object-name encoding below is belt and braces, not a live hole.
 
 check("22a a bucket name with a space is encoded",
       delivery._seg("building-scans Pro") == "building-scans%20Pro",

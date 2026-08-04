@@ -89,9 +89,18 @@ def _seg(value, keep_slashes=False):
     not happen. Live-confirmed: the raw form returns nothing at all, the
     percent-encoded form returns a Key.
 
-    Object names matter more than bucket names, because they are built from
-    project_id and scan_id, which people type. "Plot 16 first fix" is a
-    perfectly reasonable scan name and would have gone the same way.
+    CORRECTION. This docstring first claimed object names were the bigger
+    exposure, "because they are built from project_id and scan_id, which
+    people type". That is wrong, and running a real job through the deployed
+    worker is what showed it: parse_job restricts both identifiers to
+    letters, digits, dot, dash and underscore, so an object name can never
+    carry a space in the first place. The job was refused at validation
+    before delivery was ever reached.
+
+    So the encoding earns its place for the BUCKET name, which this worker
+    does not validate — it arrives from the environment, and Supabase accepts
+    a space. The object-name encoding is belt and braces against a future
+    caller that builds a key some other way; it is not fixing a live hole.
 
     Slashes are kept in object names — they are the path separators that
     give the bucket its folder structure — and encoded in bucket names,
