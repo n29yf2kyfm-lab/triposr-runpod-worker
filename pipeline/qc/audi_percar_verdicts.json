@@ -42,5 +42,69 @@
  "U011": [
   "SCRAP",
   "A4 DTM R14 Redbull race car - silhouette racer with full aero, not a road car"
+ ],
+ "U012": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G3: source describes a defect: 'Crashed'"
+ ],
+ "U028": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G7: 'DTM' - motorsport or service vehicle, not the road car a UK registration decodes to"
+ ],
+ "U059": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G7: 'DTM' - motorsport or service vehicle, not the road car a UK registration decodes to"
+ ],
+ "U078": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G7: 'gt4' - motorsport or service vehicle, not the road car a UK registration decodes to"
+ ],
+ "U084": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G7: 'LMS' - motorsport or service vehicle, not the road car a UK registration decodes to"
+ ],
+ "U096": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G7: 'LMS' - motorsport or service vehicle, not the road car a UK registration decodes to"
+ ],
+ "U101": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G7: 'Rally' - motorsport or service vehicle, not the road car a UK registration decodes to"
+ ],
+ "U110": [
+  "SCRAP",
+  "auto-scrapped by hardened gate G7: 'Lms' - motorsport or service vehicle, not the road car a UK registration decodes to"
+ ],
+ "U013": [
+  "KEEP",
+  "A6 C7 saloon 461k f cov 0.185 - proportions read as a C7 instantly, chrome-framed single-frame grille with real slat depth, headlights carry internal LED elements, 5-twin-spoke alloys consistent across all four views, defined bonnet/door/boot shut lines, clean gloss"
+ ],
+ "U014": [
+  "SCRAP",
+  "A6 C6 - soft everywhere: headlights are flat dark patches with no internal elements, grille slats shallow, tail lamps undefined blobs, and panel surfaces are visibly wavy in the reflections on bonnet, roof and boot. Russian plate baked in"
+ ],
+ "U015": [
+  "KEEP",
+  "A6 C8 saloon 302k f cov 0.223 - sharp C8 lamp signature with internal LED segments, deep single-frame grille, black 5-twin-spoke alloys with red calipers consistent across views, defined shut lines, correct rear light bar. German IN A 6815 plate would be replaced with GB"
+ ],
+ "U016": [
+  "SCRAP",
+  "A6 Avant C5 - the GLB is a scene, not a car: a full Audi paint swatch board (LZ colour codes) is baked in as geometry and a SECOND A6 saloon stands behind it. tail lamps are flat red/white blocks with no internals, grille a flat oval"
+ ],
+ "U017": [
+  "SCRAP",
+  "A6 C7 - MISSING WHEELS. both rear arches are empty with bare suspension visible in every view, only the front pair is present. panels soft and the whole asset carries a lilac cast"
+ ],
+ "U018": [
+  "SCRAP",
+  "A1 clubsport quattro - a 2011 Woerthersee CONCEPT show car, not production: huge rear wing, widebody arches, no UK registration decodes to it. front wing and rear quarter also visibly crumpled in the side view"
+ ],
+ "U019": [
+  "SCRAP",
+  "titled audi q3 but it is NOT a Q3 - a low-slung saloon/estate with no SUV proportions at all. body severely deformed: crumpled panels, torn door shut lines with black gaps through them, headlights are dark voids, hole in the roof"
+ ],
+ "U020": [
+  "KEEP",
+  "Q3 Sportback 343k f cov 0.123 - distinct body style from both Q3s already in the library. deep honeycomb single-frame grille, headlights with sharp internal LED elements, 5-spoke black alloys with red calipers consistent across all four views, defined shut lines, clean gloss, correct rear light bar"
  ]
 }
