@@ -1163,6 +1163,36 @@ def street_ceiling(sales, index_series=None, today=None, percentile=0.9):
 
 # --- coverage --------------------------------------------------------------
 
+def region_slug(name):
+    """A local-authority name as UKHPI spells it: lower case, hyphenated.
+
+    "Birmingham" -> "birmingham", "City of Westminster" ->
+    "city-of-westminster". Punctuation UKHPI drops (apostrophes, commas,
+    dots) is dropped rather than hyphenated: "King's Lynn and West Norfolk"
+    -> "kings-lynn-and-west-norfolk".
+    """
+    import re as _re
+    text = _re.sub(r"[\'\u2019.,()]", "", str(name or "").strip().lower())
+    text = _re.sub(r"[\s/]+", "-", text)
+    return text or None
+
+
+def derive_region(postcode):
+    """The postcode's own local authority, as a UKHPI slug, or None.
+
+    Uses the same postcodes.io record the geocoder already reads — the
+    admin_district field is the local authority. Returns None rather than
+    raising: a failed lookup falls back to the explicit-region path, whose
+    refusal message survives unchanged.
+    """
+    try:
+        import roof
+        rec = roof._geocode_uk_full(postcode)
+        return region_slug(rec.get("admin_district"))
+    except Exception:
+        return None
+
+
 def run(spec, prog, output_dir):
     """Valuation mode entry point.
 
@@ -1205,6 +1235,19 @@ def run(spec, prog, output_dir):
 
     prog.stage("indexing")
     region = spec.get("region")
+    region_note = None
+    if not region:
+        # THE CALLER SHOULD NOT HAVE TO KNOW UKHPI'S REGION SLUGS. The
+        # postcode already names its own local authority — postcodes.io
+        # returns admin_district on the same lookup the geocoder makes — so
+        # asking the app to separately supply "birmingham" was a failure
+        # waiting on every request that forgot. Live-confirmed: valuation
+        # without region FAILED outright. Derive it, say so, and only fall
+        # back to the old refusal when the lookup itself cannot answer.
+        region = derive_region(postcode)
+        if region:
+            region_note = (f"UKHPI region derived from the postcode's own "
+                           f"local authority: {region!r}.")
     index_series = None
     index_note = None
     if region:
@@ -1228,6 +1271,8 @@ def run(spec, prog, output_dir):
         "sales": [s.as_dict() for s in sorted(
             sales, key=lambda s: s.sold_on, reverse=True)[:20]],
     }
+    if region_note:
+        result["region_note"] = region_note
     if index_note:
         result["index_note"] = index_note
 

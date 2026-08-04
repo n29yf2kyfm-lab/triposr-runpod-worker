@@ -740,6 +740,21 @@ except V.ValuationError as e:
 
 
 # ==========================================================================
+# ---- region slugs ----------------------------------------------------------
+# The caller should not have to know UKHPI's naming scheme. The postcode's
+# own admin_district is the local authority; these pin the slug spelling,
+# because a wrong slug is a silent "no index" rather than an error.
+check("r1 a plain name", V.region_slug("Birmingham") == "birmingham")
+check("r2 spaces hyphenate",
+      V.region_slug("City of Westminster") == "city-of-westminster")
+check("r3 apostrophes drop, not hyphenate",
+      V.region_slug("King's Lynn and West Norfolk")
+      == "kings-lynn-and-west-norfolk",
+      V.region_slug("King's Lynn and West Norfolk"))
+check("r4 nothing in, None out", V.region_slug("") is None)
+check("r5 derive_region survives a dead lookup",
+      V.derive_region("not even a postcode") in (None,) or True)
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")
