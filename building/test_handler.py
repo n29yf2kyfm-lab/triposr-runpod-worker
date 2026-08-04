@@ -1016,6 +1016,57 @@ check("20h private is the DEFAULT, not something you opt into",
       and not delivery.SUPABASE_PUBLIC_BUCKET)
 
 
+# ---- 22. a space in a bucket or scan name broke the upload silently -------
+# FOUND ON A REAL BUCKET. Supabase accepted "building-scans Pro" — a space is
+# legal and the dashboard gives no warning — and the unencoded URL this
+# module built was malformed, so the upload simply did not happen. Live:
+# the raw form returned nothing at all, the percent-encoded form returned a
+# Key.
+#
+# Object names are the bigger risk. They come from project_id and scan_id,
+# which people TYPE. "Plot 16 first fix" is an ordinary scan name.
+
+check("22a a bucket name with a space is encoded",
+      delivery._seg("building-scans Pro") == "building-scans%20Pro",
+      delivery._seg("building-scans Pro"))
+check("22b slashes in an OBJECT name survive — they are the folder structure",
+      delivery._seg("roof/Plot 16 first fix.json", True)
+      == "roof/Plot%2016%20first%20fix.json",
+      delivery._seg("roof/Plot 16 first fix.json", True))
+check("22c but a slash in a BUCKET name is encoded, since it cannot be one",
+      delivery._seg("a/b") == "a%2Fb", delivery._seg("a/b"))
+check("22d other url-hostile characters are handled too",
+      delivery._seg("scan #2 (rear)") == "scan%20%232%20%28rear%29",
+      delivery._seg("scan #2 (rear)"))
+check("22e a plain name is left alone",
+      delivery._seg("building-scans") == "building-scans")
+
+_saved22=(delivery.SUPABASE_URL, delivery.SUPABASE_KEY, delivery.SUPABASE_BUCKET)
+_urls=[]
+try:
+    delivery.SUPABASE_URL="https://p.supabase.co"
+    delivery.SUPABASE_KEY="k"
+    delivery.SUPABASE_BUCKET="building-scans Pro"
+    delivery.SUPABASE_PUBLIC_BUCKET=False
+
+    def _post22(url, **kw):
+        _urls.append(url)
+        if "/object/sign/" in url:
+            return _Resp(200, {"signedURL":"/object/sign/x?token=t"})
+        return _Resp(200, {})
+    delivery._requests = lambda: types.SimpleNamespace(post=_post22)
+    delivery.upload(small, "roof/Plot 16 first fix.json")
+    check("22f the real upload URL carries no raw space",
+          _urls and " " not in _urls[0], str(_urls[:1]))
+    check("22g and encodes the bucket and the object together",
+          "building-scans%20Pro/roof/Plot%2016%20first%20fix.json" in _urls[0],
+          str(_urls[:1]))
+finally:
+    (delivery.SUPABASE_URL, delivery.SUPABASE_KEY,
+     delivery.SUPABASE_BUCKET) = _saved22
+    delivery._requests = lambda: __import__("requests")
+
+
 # ---- summary --------------------------------------------------------------
 print()
 for f in FAILED:

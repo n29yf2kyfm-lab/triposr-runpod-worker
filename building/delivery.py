@@ -18,6 +18,7 @@ import os
 import sys
 import base64
 import mimetypes
+from urllib.parse import quote
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
@@ -79,6 +80,26 @@ def _requests():
     return requests
 
 
+def _seg(value, keep_slashes=False):
+    """Percent-encode one path segment of a storage URL.
+
+    NOTHING HERE WAS ENCODED, and a real bucket found it. A Supabase bucket
+    named "building-scans Pro" — a space is legal, and the dashboard offers
+    no warning — produced a malformed request URL and the upload simply did
+    not happen. Live-confirmed: the raw form returns nothing at all, the
+    percent-encoded form returns a Key.
+
+    Object names matter more than bucket names, because they are built from
+    project_id and scan_id, which people type. "Plot 16 first fix" is a
+    perfectly reasonable scan name and would have gone the same way.
+
+    Slashes are kept in object names — they are the path separators that
+    give the bucket its folder structure — and encoded in bucket names,
+    where a slash cannot be part of the name.
+    """
+    return quote(str(value), safe="/" if keep_slashes else "")
+
+
 def content_type_for(path):
     ext = os.path.splitext(path)[1].lower()
     if ext in _CONTENT_TYPES:
@@ -111,7 +132,7 @@ def sign(object_name, ttl=None):
     try:
         r = _requests().post(
             f"{SUPABASE_URL}/storage/v1/object/sign/"
-            f"{SUPABASE_BUCKET}/{object_name}",
+            f"{_seg(SUPABASE_BUCKET)}/{_seg(object_name, True)}",
             json={"expiresIn": int(ttl or SIGNED_URL_TTL)},
             headers={"Authorization": f"Bearer {SUPABASE_KEY}",
                      "apikey": SUPABASE_KEY,
@@ -151,7 +172,8 @@ def upload(path, object_name, content_type=None):
         with open(path, "rb") as f:
             data = f.read()
         r = _requests().post(
-            f"{SUPABASE_URL}/storage/v1/object/{SUPABASE_BUCKET}/{object_name}",
+            f"{SUPABASE_URL}/storage/v1/object/"
+            f"{_seg(SUPABASE_BUCKET)}/{_seg(object_name, True)}",
             data=data,
             headers={
                 "Authorization": f"Bearer {SUPABASE_KEY}",
@@ -164,7 +186,7 @@ def upload(path, object_name, content_type=None):
         if r.status_code in (200, 201):
             if SUPABASE_PUBLIC_BUCKET:
                 return (f"{SUPABASE_URL}/storage/v1/object/public/"
-                        f"{SUPABASE_BUCKET}/{object_name}")
+                        f"{_seg(SUPABASE_BUCKET)}/{_seg(object_name, True)}")
             return sign(object_name)
         print(f"delivery: upload failed {r.status_code} {r.text[:200]}",
               file=sys.stderr)
