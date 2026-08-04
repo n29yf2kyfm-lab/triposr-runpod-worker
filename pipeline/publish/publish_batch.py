@@ -106,6 +106,56 @@ def preflight():
     rq = urllib.request.Request(f"{RP_EP}/health", headers={"Authorization": f"Bearer {RP}"})
     net(rq, 30)
     print("preflight OK: supabase + render endpoint reachable", flush=True)
+    catalogue_is_current()
+
+
+def catalogue_is_current():
+    """G0: refuse to run on a catalogue that is behind the live one.
+
+    serve_catalogue() overwrites BOTH public paths with whatever is on local
+    disk. Correct when the checkout is current; catastrophic when it is not.
+    On 2026-08-04 this container rolled back mid-session, reverting
+    catalogue.v2.json to a pre-wave state, and the next publish served that
+    stale file over production. The live index lost 20 approved entries -- every
+    car published that day -- and none of the six gates noticed, because they
+    all check the ITEM being published and none checks the BASE it is added to.
+
+    Nothing was destroyed: the GLBs, colour variants and posters live under
+    other paths and were never written, and origin still held the good
+    catalogue, so recovery was a fast-forward and a re-serve. The hole is
+    closed here rather than left to discipline -- a rollback is silent, and
+    "remember to check git first" is not a control.
+
+    Refusing on a LOWER local approved set is the point; a higher one is
+    expected, since this batch is about to add to it. PUBLISH_ALLOW_STALE=1
+    overrides, for a deliberate rollback only.
+    """
+    try:
+        live = json.loads(net(sb_req("car-renders/catalogue.v2.json"), 60))
+    except Exception as e:
+        print(f"WARNING: could not read the live catalogue ({type(e).__name__}); "
+              "staleness UNVERIFIED", flush=True)
+        return
+    live = live if isinstance(live, list) else live.get("entries", live)
+    local = json.load(open(CAT))
+    local = local if isinstance(local, list) else local.get("entries", local)
+    la = {e["assetId"] for e in live if e.get("publicationStatus") == "approved"}
+    ca = {e["assetId"] for e in local if e.get("publicationStatus") == "approved"}
+    lost = sorted(la - ca)
+    if lost:
+        print(f"STALE CATALOGUE: local is missing {len(lost)} approved entries that are "
+              f"live, e.g. {lost[:5]}", flush=True)
+        print("  the checkout is behind production — publishing would overwrite the live "
+              "index and drop those cars.", flush=True)
+        print("  fix: git fetch origin <branch> && git merge --ff-only origin/<branch>",
+              flush=True)
+        if os.environ.get("PUBLISH_ALLOW_STALE") != "1":
+            jlog(event="STALE_CATALOGUE", missing=len(lost))
+            sys.exit(4)
+        print("  PUBLISH_ALLOW_STALE=1 set — proceeding anyway", flush=True)
+    print(f"catalogue current: local {len(ca)} approved vs live {len(la)}", flush=True)
+
+
 try:
     preflight()
 except SystemExit:

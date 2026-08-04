@@ -34,7 +34,7 @@ Usage:
     colour_variants.py --assets volkswagen-fox-2004-vw1-v1,... [--dry-run]
     colour_variants.py --wave vw1
 """
-import argparse, csv, json, os, shutil, struct, sys, tempfile, time, urllib.request
+import argparse, csv, json, os, re, shutil, struct, sys, tempfile, time, urllib.request
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.join(REPO, "pipeline", "publish"))
@@ -102,6 +102,19 @@ def glb_ok(path):
         struct.unpack("<I", head[8:12])[0] == os.path.getsize(path)
 
 
+def _mk(s):
+    """Manufacturer key: case, spaces, hyphens and underscores all equivalent.
+
+    The catalogue slugs makes ("land-rover", "alfa-romeo") while the paint
+    database spells them out ("Land Rover", "Alfa Romeo"). A plain lowercase
+    comparison misses those, silently: the entry publishes with an empty paint
+    list and nothing complains. Measured on the live catalogue, that was 27
+    approved cars -- 19 Land Rover, 8 Alfa Romeo -- getting no OEM candidates
+    for no reason other than a hyphen.
+    """
+    return re.sub(r"[\s_-]+", " ", (s or "").strip().lower())
+
+
 def oem_paints(make):
     """{DVLA_COLOUR: [{name, family, finish}]} for one manufacturer.
 
@@ -109,10 +122,10 @@ def oem_paints(make):
     failure the customization.colourOptions rule exists to prevent.
     """
     out = {}
-    want = (make or "").strip().lower()
+    want = _mk(make)
     with open(PAINT_DB, newline="") as fh:
         for row in csv.DictReader(fh):
-            if (row["MANUFACTURER"] or "").strip().lower() != want:
+            if _mk(row["MANUFACTURER"]) != want:
                 continue
             out.setdefault((row["DVLA_COLOUR"] or "").strip().upper(), []).append(
                 {"oemPaintName": (row["OEM_PAINT_NAME"] or "").strip(),

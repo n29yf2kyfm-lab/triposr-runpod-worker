@@ -146690,5 +146690,712 @@
    "method": "render",
    "at": "2026-08-02"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-2006-rr1-v1",
+  "make": "land-rover",
+  "model": "range rover",
+  "modelFamily": "land-rover range rover",
+  "modelAliases": [
+   "range rover"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2006,
+  "yearEnd": 2006,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2006_supercharged",
+  "sourceUrl": "",
+  "sourceCreator": "supplied by owner via email 2026-08-04",
+  "sourceReferenceId": "rr_2006_supercharged",
+  "sourceRetrievedAt": "2026-08-04",
+  "sourceEvidenceUrl": null,
+  "licence": "owner-supplied",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "PaintFl1Mtl"
+  ],
+  "glassMaterialNames": [
+   "CoatFl1Mtl",
+   "Faraglass1Mtl",
+   "Glass2Mtl"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2006-rr1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2006-rr1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2006-rr1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2006-rr1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2006-rr1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2006-rr1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2006-rr1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2006-rr1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-2006-rr1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-2006-rr1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 12560788,
+  "mobileFileSizeBytes": 12560788,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "640a4e51609c89b101f2169809f329ad607822a4d1e7a14c96b310f4ea25c8a4",
+  "pipelineVersion": "publish-batch-rr1-2026-08-04",
+  "publishedAt": "2026-08-04",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "rr1 gated publish 2026-08-04: licence recorded as 'owner-supplied' (author 'supplied by owner via email 2026-08-04'), owner keep verdict 2026-08-04T19:06:00Z, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-rr1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-sport-2015-rr1-v1",
+  "make": "land-rover",
+  "model": "range rover sport",
+  "modelFamily": "land-rover range rover sport",
+  "modelAliases": [
+   "range rover sport"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2015,
+  "yearEnd": 2015,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2015_sport_svr",
+  "sourceUrl": "",
+  "sourceCreator": "supplied by owner via email 2026-08-04",
+  "sourceReferenceId": "rr_2015_sport_svr",
+  "sourceRetrievedAt": "2026-08-04",
+  "sourceEvidenceUrl": null,
+  "licence": "owner-supplied",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carPaint",
+   "rM_Chassis_Max1",
+   "rM_Opaque_PaintSolidBlack_Max1"
+  ],
+  "glassMaterialNames": [
+   "rM_Glass_WindowFront_Low1",
+   "rM_Glass_WindowSurroundFront_Low1",
+   "glass_N"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2015-rr1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2015-rr1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2015-rr1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2015-rr1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2015-rr1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2015-rr1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2015-rr1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2015-rr1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2015-rr1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2015-rr1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 5471164,
+  "mobileFileSizeBytes": 5471164,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "b848384ba72f5a003017436d0f98a05ddbe6dcb3f00458876735d60fa9611922",
+  "pipelineVersion": "publish-batch-rr1-2026-08-04",
+  "publishedAt": "2026-08-04",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "rr1 gated publish 2026-08-04: licence recorded as 'owner-supplied' (author 'supplied by owner via email 2026-08-04'), owner keep verdict 2026-08-04T19:06:00Z, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-rr1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-sport-2018-rr1-v1",
+  "make": "land-rover",
+  "model": "range rover sport",
+  "modelFamily": "land-rover range rover sport",
+  "modelAliases": [
+   "range rover sport"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2018,
+  "yearEnd": 2018,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2018_sport",
+  "sourceUrl": "",
+  "sourceCreator": "supplied by owner via email 2026-08-04",
+  "sourceReferenceId": "rr_2018_sport",
+  "sourceRetrievedAt": "2026-08-04",
+  "sourceEvidenceUrl": null,
+  "licence": "owner-supplied",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Car_Paint"
+  ],
+  "glassMaterialNames": [
+   "Glass",
+   "Trasnsparent_Glass",
+   "Yellow_Glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2018-rr1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2018-rr1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2018-rr1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2018-rr1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2018-rr1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2018-rr1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2018-rr1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2018-rr1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-rr1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2018-rr1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 23172552,
+  "mobileFileSizeBytes": 23172552,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "30be280e7de7e31fcdc2489fc5ca211c6103a22b1a63c6ebe80e3260dcc80319",
+  "pipelineVersion": "publish-batch-rr1-2026-08-04",
+  "publishedAt": "2026-08-04",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "rr1 gated publish 2026-08-04: licence recorded as 'owner-supplied' (author 'supplied by owner via email 2026-08-04'), owner keep verdict 2026-08-04T19:06:00Z, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-rr1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-sport-2023-rr1-v1",
+  "make": "land-rover",
+  "model": "range rover sport",
+  "modelFamily": "land-rover range rover sport",
+  "modelAliases": [
+   "range rover sport"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": 2023,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "2023_sport",
+  "sourceUrl": "",
+  "sourceCreator": "supplied by owner via email 2026-08-04",
+  "sourceReferenceId": "rr_2023_sport",
+  "sourceRetrievedAt": "2026-08-04",
+  "sourceEvidenceUrl": null,
+  "licence": "owner-supplied",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "2023_Land_Rover_Range_Rover_Sport_Black1",
+   "2023_Land_Rover_Range_Rover_Sport_Black2",
+   "2023_Land_Rover_Range_Rover_Sport_Firenze_Red"
+  ],
+  "glassMaterialNames": [
+   "2023_Land_Rover_Range_Rover_Sport_Windows",
+   "2023_Land_Rover_Range_Rover_Sport_TailightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-rr1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-rr1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-rr1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-rr1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-rr1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-rr1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-rr1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-rr1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2023-rr1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2023-rr1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 16370368,
+  "mobileFileSizeBytes": 16370368,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "46e1c22d8a16190e60c2bb0c983790429c03c845a9c9f2bd16e968dd279007fb",
+  "pipelineVersion": "publish-batch-rr1-2026-08-04",
+  "publishedAt": "2026-08-04",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "rr1 gated publish 2026-08-04: licence recorded as 'owner-supplied' (author 'supplied by owner via email 2026-08-04'), owner keep verdict 2026-08-04T19:06:00Z, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-rr1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  }
  }
 ]
