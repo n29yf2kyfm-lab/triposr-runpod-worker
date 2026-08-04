@@ -60,6 +60,14 @@ far less than breaking a product that is earning. A test asserts this isolation 
 | `condition` | imagery + thermal → 3D-located, costed defects | 5 |
 | `design` | footprint + rules → massing + planning checks | 6 |
 
+**A postcode is not a building.** Geocoding returns the postcode CENTROID, and a UK postcode
+averages about fifteen addresses — B36 8AR has fourteen mapped buildings within 30 m, five
+houses of 102–122 m² and three garage blocks. Roof Mode measures the one nearest that
+centroid and now says so: `building_choice` reports how many candidates there were, which
+was taken, how far it sat from the centre and what the others measure. Where two are within
+6 m — a semi-detached pair is about 8 m centre to centre — the choice is flagged **ambiguous**
+and the output says not to order off it. Pass `gps` to remove the ambiguity entirely.
+
 `price` takes quantities directly, or a whole `roof` result. It does **not** yet parse
 RoomPlan or IFC — `structure` writes IFC but nothing reads one back in.
 
@@ -183,7 +191,7 @@ claiming success.
 python building/test_handler.py
 ```
 
-That file alone carries 221 assertions; the whole suite is **1940 across 20 files** — run
+That file alone carries 221 assertions; the whole suite is **1952 across 20 files** — run
 them all with `for f in building/test_*.py; do python "$f"; done`. No GPU. Same approach as
 the vehicle worker: stub the heavy modules, then test the contract logic. CI runs these
 **before** building the image, so a broken contract never reaches a deployable tag.

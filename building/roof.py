@@ -258,6 +258,80 @@ FOOTPRINT_SOURCES = (
 )
 
 
+# Two candidate buildings whose centroids are within this of each other, as
+# measured from the query point, are not distinguishable by a postcode. A
+# semi-detached pair sits about 8m centre to centre.
+AMBIGUOUS_MARGIN_M = 6.0
+
+# Diagnostics from the most recent footprint choice, so run() can warn about
+# it. A return value would be cleaner, but fetch_footprint's list return is
+# used by callers and tests, and widening it to a tuple is a change with no
+# upside over this.
+_LAST_CHOICE = {}
+
+
+def _choose_building(geometries, lat, lon):
+    """Pick the building nearest the query point, and describe the choice.
+
+    A POSTCODE IS NOT A BUILDING, and this is where that bites. Geocoding
+    "B36 8AR" returns the postcode CENTROID; the real postcode holds five
+    mapped residential buildings of 102-122 m2 plus three garage blocks, and
+    this function silently returned whichever happened to sit nearest that
+    centroid. A builder typing their client's postcode could be handed the
+    neighbour's roof with nothing in the output to say so. UK postcodes
+    average about fifteen addresses.
+
+    That cannot be fixed here — the caller has to say which building — but it
+    can stop being invisible, so the alternatives are reported and an
+    ambiguous choice is flagged.
+
+    DISTANCE IS IN METRES, NOT DEGREES. The previous metric was
+    (dlat**2 + dlon**2) on raw degrees, and a degree of longitude at 52.5N is
+    only 61% of a degree of latitude — so east-west separation was
+    over-penalised about 2.7x and the choice was biased toward buildings
+    offset north-south. bbox_around twelve lines up already scales longitude
+    by cos(latitude); the selection never did.
+    """
+    scale = max(math.cos(math.radians(lat)), 1e-6)
+    scored = []
+    for geom in geometries:
+        if not geom:
+            continue
+        cy = sum(g["lat"] for g in geom) / len(geom)
+        cx = sum(g["lon"] for g in geom) / len(geom)
+        dy = (cy - lat) * 111_320.0
+        dx = (cx - lon) * 111_320.0 * scale
+        scored.append((math.hypot(dx, dy), geom))
+
+    if not scored:
+        return None, {"candidates": 0}
+
+    scored.sort(key=lambda s: s[0])
+    best_d, best = scored[0]
+
+    def _area(geom):
+        pts = [osgb.latlon_to_easting_northing(g["lat"], g["lon"])
+               for g in geom]
+        if len(pts) < 3:
+            return 0.0
+        if pts[0] != pts[-1]:
+            pts = pts + [pts[0]]
+        return round(abs(sum(a[0] * b[1] - b[0] * a[1]
+                             for a, b in zip(pts, pts[1:]))) / 2.0, 1)
+
+    choice = {
+        "candidates": len(scored),
+        "chosen_area_m2": _area(best),
+        "chosen_offset_m": round(best_d, 1),
+        "other_areas_m2": [_area(g) for _, g in scored[1:6]],
+        "ambiguous": False,
+    }
+    if len(scored) > 1:
+        choice["runner_up_offset_m"] = round(scored[1][0], 1)
+        choice["ambiguous"] = (scored[1][0] - best_d) < AMBIGUOUS_MARGIN_M
+    return best, choice
+
+
 def fetch_footprint(lat, lon, radius_m=30):
     """Building footprint polygon around a point, from OpenStreetMap.
 
@@ -302,13 +376,9 @@ def fetch_footprint(lat, lon, radius_m=30):
     if not geometries:
         return None
 
-    best, best_d = None, float("inf")
-    for geom in geometries:
-        cy = sum(g["lat"] for g in geom) / len(geom)
-        cx = sum(g["lon"] for g in geom) / len(geom)
-        d = (cy - lat) ** 2 + (cx - lon) ** 2
-        if d < best_d:
-            best, best_d = geom, d
+    best, choice = _choose_building(geometries, lat, lon)
+    _LAST_CHOICE.clear()
+    _LAST_CHOICE.update(choice)
 
     if not best:
         return None
@@ -682,7 +752,33 @@ def run(spec, prog, output_dir):
 
     # --- footprint -----------------------------------------------------
     footprint = fetch_footprint(location["lat"], location["lon"])
+    choice = dict(_LAST_CHOICE)
     eaves_m = footprint_area = None
+
+    # WHICH BUILDING DID WE MEASURE? A postcode geocodes to a centroid, and
+    # a UK postcode averages about fifteen addresses — so on a street of
+    # semis this picked one of several mapped buildings and said nothing.
+    # The quantities were correct for A roof; nobody could tell whether it
+    # was THE roof.
+    if choice.get("candidates", 0) > 1 and not spec.get("gps"):
+        others = choice.get("other_areas_m2") or []
+        notes.append(
+            f"{choice['candidates']} mapped buildings sit within 30m of this "
+            f"postcode. Measured the one {choice['chosen_offset_m']}m from "
+            f"the postcode centre, at {choice['chosen_area_m2']} m2 on plan; "
+            f"the others are {', '.join(str(a) for a in others)} m2. "
+            f"A postcode is not a building — CONFIRM this is the right one, "
+            f"or pass gps: {{\"lat\": ..., \"lon\": ...}} for the actual "
+            f"property.")
+        if choice.get("ambiguous"):
+            notes.append(
+                f"The choice is genuinely ambiguous: the next building is "
+                f"only {choice['runner_up_offset_m']}m from the postcode "
+                f"centre against {choice['chosen_offset_m']}m for the one "
+                f"measured. On a semi-detached pair or a terrace the "
+                f"postcode cannot tell them apart. Do not order off this "
+                f"without confirming the building.")
+
     if footprint:
         before = len(points)
         inside = [p for p in points
@@ -797,6 +893,10 @@ def run(spec, prog, output_dir):
         "quantities": q,
         "solar": solar_result,
         "cross_check": cross_check,
+        # WHICH of the buildings at this postcode was measured. Machine
+        # readable so the app can put the alternatives in front of a builder
+        # and let them pick, rather than making them read a warning string.
+        "building_choice": choice or None,
         "notes": notes,
         "limits": [
             "1m sampling cannot resolve small dormers, porches or narrow "

@@ -511,6 +511,84 @@ finally:
 
 
 # ==========================================================================
+# ---- 20. a postcode is not a building -------------------------------------
+# Roof Mode takes a postcode, geocodes it to a CENTROID, and measures the
+# building nearest that point. A UK postcode averages about fifteen
+# addresses; B36 8AR has fourteen mapped buildings within 30m — five houses
+# of 102-122 m2 and three garage blocks. The choice was made silently, so a
+# builder could be handed the neighbour's roof with nothing in the output to
+# say a choice had been made at all.
+
+def _sq(clat, clon, half=0.00004):
+    """A small square building centred on a point."""
+    return [{"lat": clat - half, "lon": clon - half},
+            {"lat": clat - half, "lon": clon + half},
+            {"lat": clat + half, "lon": clon + half},
+            {"lat": clat + half, "lon": clon - half}]
+
+
+_LAT, _LON = 52.5, -1.9
+_near = _sq(_LAT + 0.00002, _LON)
+_far = _sq(_LAT + 0.00050, _LON)
+_best, _info = roof._choose_building([_far, _near], _LAT, _LON)
+check("20a the nearest building is chosen", _best is _near)
+check("20b the alternatives are reported, not hidden",
+      _info["candidates"] == 2, str(_info))
+check("20c the offset from the query point is in METRES",
+      _info["chosen_offset_m"] < 5.0, str(_info["chosen_offset_m"]))
+check("20d the other areas come back so a builder can sanity-check",
+      len(_info["other_areas_m2"]) == 1, str(_info))
+
+# THE COS(LATITUDE) BUG. The old metric was (dlat**2 + dlon**2) on RAW
+# DEGREES. At 52.5N a degree of longitude is 61% of a degree of latitude, so
+# east-west separation was over-penalised about 2.7x and the choice tipped
+# toward whichever building was offset north-south.
+#
+# This case is built to expose exactly that: an EAST building genuinely
+# closer in metres than a NORTH one, but further in raw degrees. bbox_around
+# in the same module already scales longitude by cos(latitude); the
+# selection never did.
+_M_LAT = 1.0 / 111_320.0
+_M_LON = _M_LAT / math.cos(math.radians(_LAT))
+_east = _sq(_LAT, _LON + 10.0 * _M_LON)      # 10 m east
+_north = _sq(_LAT + 12.0 * _M_LAT, _LON)     # 12 m north — further away
+_best, _info = roof._choose_building([_north, _east], _LAT, _LON)
+check("20e the closer building in METRES wins, not in degrees",
+      _best is _east,
+      f"picked the 12m-north building over the 10m-east one: {_info}")
+check("20f and its measured offset is about 10m, not 16m",
+      abs(_info["chosen_offset_m"] - 10.0) < 1.0,
+      str(_info["chosen_offset_m"]))
+# Proof the old metric really would have got it wrong, so this test is
+# guarding a live fault rather than restating the implementation.
+_dn = ((_LAT + 12.0 * _M_LAT) - _LAT) ** 2
+_de = ((_LON + 10.0 * _M_LON) - _LON) ** 2
+check("20g (the degree metric genuinely preferred the further building)",
+      _dn < _de, f"north {_dn:.3e} vs east {_de:.3e}")
+
+# A semi-detached pair sits about 8m centre to centre, which a postcode
+# centroid cannot separate. That has to be called ambiguous rather than
+# quietly resolved.
+_a = _sq(_LAT + 2.0 * _M_LAT, _LON)
+_b = _sq(_LAT + 6.0 * _M_LAT, _LON)
+_best, _info = roof._choose_building([_a, _b], _LAT, _LON)
+check("20h two buildings a few metres apart are flagged ambiguous",
+      _info["ambiguous"] is True, str(_info))
+# A clear winner is not.
+_best, _info = roof._choose_building([_a, _sq(_LAT + 40.0 * _M_LAT, _LON)],
+                                     _LAT, _LON)
+check("20i a clear winner is not flagged", _info["ambiguous"] is False,
+      str(_info))
+# One building is not a choice at all.
+_best, _info = roof._choose_building([_a], _LAT, _LON)
+check("20j a single candidate is never ambiguous",
+      _info["candidates"] == 1 and _info["ambiguous"] is False, str(_info))
+check("20k no candidates yields no building rather than a crash",
+      roof._choose_building([], _LAT, _LON) == (None, {"candidates": 0}))
+check("20l an empty geometry is skipped, not divided by zero",
+      roof._choose_building([[], _a], _LAT, _LON)[0] is _a)
+
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")
