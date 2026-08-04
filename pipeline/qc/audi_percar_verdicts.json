@@ -202,5 +202,37 @@
  "U045": [
   "SCRAP",
   "S4 B8 Avant - a large flat billboard plane sticks out of the roof in all four views, flat untextured grey rectangles sit on the doors, lamps have no internals, and it is only 88,832 f"
+ ],
+ "U046": [
+  "SCRAP",
+  "S5 Coupe B8 pre-facelift 846k f - headlights are flat dark rectangles with no internal LED structure and the tail lamps are equally flat. high face count does not rescue the lamps"
+ ],
+ "U047": [
+  "SCRAP",
+  "S5 Sportback B8 pre-facelift 828k f - same flat lampless front and rear as U046, same generation, same defect"
+ ],
+ "U048": [
+  "KEEP",
+  "2021 S5 Convertible 465k f cov 0.344 - honeycomb single-frame grille with real depth, headlights with sharp internal LED elements, multi-spoke dark alloys with red calipers consistent across all four views, defined shut lines, clean interior, correct tail lamp internals. cabriolet is a body style the library has none of"
+ ],
+ "U049": [
+  "SCRAP",
+  "2008 S5 - third B8 pre-facelift S5 with the same flat featureless headlights and tail lamps"
+ ],
+ "U050": [
+  "SCRAP",
+  "2017 S5 Sportback - two-tone: roof and rear quarter are WHITE while the body is purple, and with mats=1 at cov 0.236 that white is not the paint material, so it survives every colour. same defect that scrapped the 2006 Range Rover. also thin at 85,865 f"
+ ],
+ "U051": [
+  "SCRAP",
+  "2019 S5 Sportback - only 61,572 f, the thinnest candidate yet and 38 percent below the four-view line. renders cleanly for its budget but the S5 nameplate is already covered by audi-s5-v1 and the U048 convertible keep"
+ ],
+ "U052": [
+  "SCRAP",
+  "2010 S6 C6 - renders as a featureless BLACK SILHOUETTE in all four views. the body material absorbs all light: no grille, no lamps, no shut lines, no surface detail of any kind is visible"
+ ],
+ "U053": [
+  "KEEP",
+  "RS3 2022 Sportback 696k f cov 0.116 - big RS honeycomb grille with real depth, headlights with sharp internal LED elements and the RS3 daytime signature, multi-spoke alloys consistent across all four views, defined shut lines, sharp diffuser, clean gloss. DIRECT REPLACEMENT CANDIDATE: audi-rs3-2022-v1 is currently quarantined as below the premium bar"
  ]
 }
