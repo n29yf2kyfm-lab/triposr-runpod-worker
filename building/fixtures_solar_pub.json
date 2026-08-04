@@ -1,17 +1,10 @@
 {
- "name": "buildings/ChIJ7-o-T1m7cEgR61ivNsljZm0",
- "center": {
-  "latitude": 52.5015742,
-  "longitude": -1.8767813000000002
- },
  "imageryDate": {
   "year": 2023,
   "month": 5,
   "day": 3
  },
  "imageryQuality": "HIGH",
- "postalCode": "B6 5SH",
- "regionCode": "GB",
  "solarPotential": {
   "buildingStats": {
    "areaMeters2": 308.0091,

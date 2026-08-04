@@ -571,7 +571,7 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
         # THE ENVELOPE IS NOT THE BUILDING, and nothing here checks that it
         # is. The rooms get verified against the drawing's own schedule; the
         # rectangle drawn round them gets verified against nothing. Roof The
-        # Vine's first-floor plan and you get a roof over 229.9 m2, when the
+        # a real first-floor plan and you get a roof over 229.9 m2, when the
         # building on the ground is 369.6 m2 and L-shaped round a corner —
         # every roof quantity below is then for a building that is not there.
         #

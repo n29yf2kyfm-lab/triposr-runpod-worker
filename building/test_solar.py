@@ -1,7 +1,7 @@
 """Tests for the Google Solar cross-check.
 
-Every one of these runs against `fixtures_solar_vine.json` — a REAL
-buildingInsights response for THE VINE, Lichfield Road, Aston, Birmingham,
+Every one of these runs against `fixtures_solar_pub.json` — a REAL
+buildingInsights response for a real UK pub conversion,
 HIGH quality imagery dated 2023-05-03. Not a hand-written mock. The two bugs
 this file exists to pin down were both invisible to a mock, because a mock
 gets written with the same wrong idea of the payload that the parser had.
@@ -9,7 +9,7 @@ gets written with the same wrong idea of the payload that the parser had.
 WHAT WENT WRONG, LIVE:
 
   1. `predominant_pitch_deg` took the single LARGEST roof plane. On a simple
-     roof that is the roof. On The Vine — twelve planes, the biggest being
+     roof that is the roof. On a real pub roof — twelve planes, the biggest being
      18% of the area at 57.8 degrees, which is a dormer cheek or a gable —
      it reported 57.8 for a roof the height model puts at 33.8.
 
@@ -42,8 +42,8 @@ def check(name, cond, detail=""):
         name if cond else f"{name}{' — ' + detail if detail else ''}")
 
 
-VINE = json.load(open(os.path.join(HERE, "fixtures_solar_vine.json")))
-R = S.parse_segments(VINE)
+PUB = json.load(open(os.path.join(HERE, "fixtures_solar_pub.json")))
+R = S.parse_segments(PUB)
 
 
 # ---- 1. the fixture is what we think it is --------------------------------

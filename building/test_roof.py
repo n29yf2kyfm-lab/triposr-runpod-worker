@@ -379,7 +379,7 @@ check("8g foreshortening uses the pitch",
       abs(seg["plan_area_m2"] - 28.7 * math.cos(math.radians(34.9))) < 0.02)
 # PITCH IS AREA-WEIGHTED, NOT THE LARGEST PLANE. This assertion used to
 # demand the largest segment's pitch, which is the same thing the bug did —
-# a test can enforce a fault as easily as it can catch one. On The Vine that
+# a test can enforce a fault as easily as it can catch one. On the reference building that
 # rule picked a 57.8-degree dormer cheek for a 34-degree roof. Here the
 # weighted median lands on the same 34.9 anyway, because these six segments
 # genuinely are one roof; that agreement is the point, not the number.
@@ -400,7 +400,7 @@ check("8i no segment here is flat",
 # wholeRoofStats is the part broken into planes, buildingStats is the whole
 # building's roof. 93.6 being smaller than 116.6 is a subset being smaller
 # than its superset — not, as this test previously asserted, something
-# "physically impossible" that needed working around. The Vine shows the
+# "physically impossible" that needed working around. A real roof shows the
 # identical relationship at 277.81 against 308.01.
 #
 # So the comparison basis is buildingStats: measured, and whole.

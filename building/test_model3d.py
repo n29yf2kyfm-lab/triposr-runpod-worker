@@ -424,7 +424,7 @@ check("5x the pitch is recorded as an assumption, since it was read off "
       any("overhang" in x for x in roofed["assumptions"]))
 # THE ENVELOPE IS NOT THE BUILDING. The rooms are checked against the
 # drawing's schedule; the rectangle drawn round them is checked against
-# nothing. Roofing The Vine's first-floor plan produced a roof over 229.9 m2
+# nothing. Roofing the reference sheet's first-floor plan produced a roof over 229.9 m2
 # when the real building measures 369.6 m2 and wraps an L round a corner —
 # confirmed against Google Solar and the aerial height model.
 _partial = M.build(
@@ -823,26 +823,26 @@ check("10o model mode does not touch the vehicle worker",
 
 
 # ---- 11. the real drawing --------------------------------------------------
-# The Vine, Birmingham — a pub converted to rooms with en-suites. These are
+# A real UK pub converted to rooms with en-suites. These are
 # the figured dimensions off the architect's first-floor plan, checked
 # against the areas the same sheet prints in each room. Nothing here is
 # traced; nothing is scaled off the linework.
 
-VINE = [("Utility", 0.00, 0.00, 1.95, 4.20), ("Kitchen / Dining", 2.05, 0.00,
+PUB = [("Utility", 0.00, 0.00, 1.95, 4.20), ("Kitchen / Dining", 2.05, 0.00,
         4.57, 4.20), ("Kitchen / Dining", 2.05, 4.30, 2.85, 0.71),
         ("Room 8", 6.72, 0.00, 3.57, 4.20), ("En-suite 8", 10.39, 0.00,
         1.70, 1.99), ("Room 7", 6.72, 4.30, 4.47, 4.20),
         ("En-suite 7", 11.29, 4.30, 1.70, 2.00),
         ("Room 9", 2.05, 4.30, 2.14, 4.44),
         ("En-suite 9", 0.00, 4.30, 1.77, 1.89)]
-VINE_SCHEDULE = {"Utility": 8.2, "Kitchen / Dining": 21.2, "Room 8": 15.0,
+PUB_SCHEDULE = {"Utility": 8.2, "Kitchen / Dining": 21.2, "Room 8": 15.0,
                  "Room 7": 18.8, "Room 9": 9.5, "En-suite 8": 3.4,
                  "En-suite 7": 3.4, "En-suite 9": 3.3}
 
-vine = M.build([room(n, x, y, w, d) for n, x, y, w, d in VINE],
-               schedule=VINE_SCHEDULE, storeys=3,
+pub = M.build([room(n, x, y, w, d) for n, x, y, w, d in PUB],
+               schedule=PUB_SCHEDULE, storeys=3,
                roof={"pitch_deg": 35.0, "kind": "hipped", "overhang_m": 0.30})
-vc = vine["schedule_check"]
+vc = pub["schedule_check"]
 check("11a every room on the sheet agrees with the drawing's own schedule",
       vc["within_tolerance"], f"worst {vc['worst_error_pct']}%")
 check("11b and the worst disagreement is under 2%",
@@ -850,27 +850,27 @@ check("11b and the worst disagreement is under 2%",
 check("11c no room went unmodelled",
       not any(r["status"] == "not modelled" for r in vc["rooms"]))
 check("11d the roof needs a fifth more covering than its footprint",
-      vine["roof"]["uplift_pct"] > 20.0, str(vine["roof"]["uplift_pct"]))
+      pub["roof"]["uplift_pct"] > 20.0, str(pub["roof"]["uplift_pct"]))
 # THE ROOF THAT WAS TOO BIG. One hip over the whole footprint rose 5.01m —
 # a roof nearly two storeys tall on a building with 2.75m storeys, which is
 # instantly wrong to anybody who has looked at a pub.
 check("11e the roof is not taller than a storey",
-      vine["roof"]["rise_m"] < vine["storey_height_m"],
-      f"rise {vine['roof']['rise_m']} vs storey {vine['storey_height_m']}")
+      pub["roof"]["rise_m"] < pub["storey_height_m"],
+      f"rise {pub['roof']['rise_m']} vs storey {pub['storey_height_m']}")
 check("11f the ridge sits above the wall head, not on it",
-      vine["totals"]["ridge_height_m"] > vine["totals"]["eaves_height_m"],
-      str(vine["totals"]["ridge_height_m"]))
+      pub["totals"]["ridge_height_m"] > pub["totals"]["eaves_height_m"],
+      str(pub["totals"]["ridge_height_m"]))
 check("11g every en-suite got a door, not a window",
-      vine["totals"]["doors"] > 0)
-# The real Vine, measured from the air: 369.6 m2 footprint, L-shaped round a
+      pub["totals"]["doors"] > 0)
+# The real building, measured from the air: 369.6 m2 footprint, L-shaped round a
 # corner plot. The rooms on this one sheet fill two thirds of the rectangle
 # drawn round them, which is exactly the signal that says so.
 check("11h the partial first-floor plan is flagged before anyone roofs it",
-      any("BOUNDING BOX" in w for w in vine["warnings"]),
-      str(vine["roof"]["plan_fill_pct"]))
+      any("BOUNDING BOX" in w for w in pub["warnings"]),
+      str(pub["roof"]["plan_fill_pct"]))
 check("11i and the fill figure is in the two-thirds range",
-      60 < vine["roof"]["plan_fill_pct"] < 75,
-      str(vine["roof"]["plan_fill_pct"]))
+      60 < pub["roof"]["plan_fill_pct"] < 75,
+      str(pub["roof"]["plan_fill_pct"]))
 
 
 # ==========================================================================

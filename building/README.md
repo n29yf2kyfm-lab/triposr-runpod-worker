@@ -89,7 +89,7 @@ a job already priced.
 What it will **not** do is put a roof on a plan and stay quiet about it. The rooms get
 checked against the drawing's schedule; the rectangle drawn round them gets checked against
 nothing, so when the rooms fill less than 75% of their own bounding box the output says so.
-The Vine's first-floor plan fills 66% — it is one sheet of an L-shaped building that wraps a
+The reference sheet's first-floor plan fills 66% — it is one sheet of an L-shaped building that wraps a
 corner, and Google Solar measures the real footprint at 369.6 m² against the 229.9 m² that
 plan implies.
 

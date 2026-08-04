@@ -123,7 +123,7 @@ def parse_segments(payload):
     # roof's SURFACE, already inflated by the pitch, while groundAreaMeters2
     # is its shadow on the ground. Reading the surface as a footprint and
     # then dividing by cos(pitch) — which compare() does — applies the slope
-    # twice. Live on The Vine that turned a 278 m2 roof into 406 m2: a 46%
+    # twice. Live, that turned a 278 m2 roof into 406 m2 — a 46%
     # over-order, on the one number this module exists to get right.
     footprint = round(building.get("groundAreaMeters2") or 0, 2) or None
     roof_ground = round(whole.get("groundAreaMeters2") or 0, 2) or None
@@ -170,7 +170,7 @@ def parse_segments(payload):
         # PITCH IS AREA-WEIGHTED, NOT THE BIGGEST SEGMENT.
         #
         # Picking the largest single plane works on a simple roof and fails
-        # badly on a real one. The Vine has 12 segments; the largest is 18%
+        # badly on a real one. A real pub roof has 12 segments, the largest only 18%
         # of the area and sits at 57.8 degrees — a dormer cheek or a gable,
         # not the roof. It was reported as the pitch, 17 degrees above the
         # weighted mean and 24 above what the height model shows.
@@ -226,7 +226,7 @@ def compare(lidar_quantities, solar_result):
     #
     # Solar publishes two surface areas and one is a subset of the other:
     # wholeRoofStats covers the part it broke into segments, buildingStats
-    # covers the whole building. On The Vine that is 277.81 against 308.01,
+    # covers the whole building. On a real pub roof that is 277.81 against 308.01,
     # and the sum of the twelve segments reproduces the first exactly.
     #
     # An earlier fix here read buildingStats as a FOOTPRINT, decided that a
