@@ -987,6 +987,37 @@ check("13d a plan with no storeys or roof still validates",
       ["storeys"] == 1)
 
 
+# ---- 14. the validator's own output must build ----------------------------
+# parse_job stores "not stated" as an explicit None: a job with
+# {"roof": {"pitch_deg": 35}} arrives at build() as
+# {"pitch_deg": 35.0, "kind": "hipped", "overhang_m": None}. The key EXISTS,
+# so roof.get("overhang_m", DEFAULT) never falls back, and None reached the
+# arithmetic — `float - NoneType`, the whole job down, live on the deployed
+# worker. Every test above hand-builds its roof dict with all keys set,
+# which is why the suite was green while the worker crashed. This one feeds
+# the validator's real output through the real path.
+import validation as _V14
+_spec14 = _V14.parse_job({"mode": "model", "plan": {
+    "rooms": [{"name": "A", "x": 0, "y": 0, "width_m": 4, "depth_m": 3},
+              {"name": "B", "x": 4.1, "y": 0, "width_m": 3, "depth_m": 3}],
+    "storeys": 2, "roof": {"pitch_deg": 35.0}}})
+check("14a the parsed roof really does carry an explicit None",
+      _spec14["plan"]["roof"]["overhang_m"] is None,
+      str(_spec14["plan"]["roof"]))
+_m14 = M.build([M.Room(r["name"], r["x"], r["y"], r["width_m"], r["depth_m"])
+                for r in _spec14["plan"]["rooms"]],
+               storeys=_spec14["plan"]["storeys"],
+               roof=_spec14["plan"]["roof"])
+check("14b and build() survives it", _m14["roof"] is not None)
+check("14c the default overhang was applied, not zero",
+      abs(_m14["roof"]["overhang_m"] - 0.30) < 1e-9,
+      str(_m14["roof"]["overhang_m"]))
+check("14d two storeys actually came out",
+      _m14["totals"]["storeys"] == 2 and
+      _m14["totals"]["ridge_height_m"] > 5.0,
+      str(_m14["totals"]))
+
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

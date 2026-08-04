@@ -507,11 +507,21 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
 
     roof_model = None
     if roof:
+        # The validator stores "not stated" as an explicit None — the key is
+        # PRESENT, so dict.get(key, default) never falls back, and None
+        # reached roof_over's arithmetic. Live-confirmed on the deployed
+        # worker: {"roof": {"pitch_deg": 35}} crashed the whole job with
+        # `float - NoneType` because overhang_m arrived as None. Every local
+        # test hand-built its roof dict with all keys set, so the shape the
+        # validator actually produces had never once been fed through here.
+        def _given(key, default):
+            v = roof.get(key)
+            return default if v is None else v
         roof_model = roof_over(
             x0, y0, x1, y1,
-            pitch_deg=roof.get("pitch_deg", DEFAULT_PITCH_DEG),
-            kind=roof.get("kind", "hipped"),
-            overhang=roof.get("overhang_m", DEFAULT_EAVES_OVERHANG_M),
+            pitch_deg=_given("pitch_deg", DEFAULT_PITCH_DEG),
+            kind=_given("kind", "hipped"),
+            overhang=_given("overhang_m", DEFAULT_EAVES_OVERHANG_M),
             base_z=eaves_z)
 
     top = roof_model["ridge_z_m"] if roof_model else eaves_z
