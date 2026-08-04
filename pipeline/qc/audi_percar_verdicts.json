@@ -106,5 +106,69 @@
  "U020": [
   "KEEP",
   "Q3 Sportback 343k f cov 0.123 - distinct body style from both Q3s already in the library. deep honeycomb single-frame grille, headlights with sharp internal LED elements, 5-spoke black alloys with red calipers consistent across all four views, defined shut lines, clean gloss, correct rear light bar"
+ ],
+ "U021": [
+  "SCRAP",
+  "Q3 Sportback, good car but redundant - U020 is the same body style at 343k f vs this 192k, and was kept. library needs one Q3 Sportback"
+ ],
+ "U022": [
+  "SCRAP",
+  "Q3 Sportback again, 190,779 f cov 0.138 - visually identical to U021 (192,188 f, same cov) but a DIFFERENT author, so G9 cannot see it. redundant with the kept U020"
+ ],
+ "U023": [
+  "SCRAP",
+  "SQ5 with its WHEELS DETACHED - three sit beside empty arches as floating white discs and one oversized wheel is mounted under the centre of the car. broken node transforms, visible in all four views"
+ ],
+ "U024": [
+  "KEEP",
+  "2022 Q5 S-Line 426k f cov 0.321 - honeycomb single-frame grille with real depth, alloys consistent across all four views, defined shut lines, clean gloss. NOTE the library already ships audi-q5-2022-v1; this only publishes if it beats that car on the eye test"
+ ],
+ "U025": [
+  "SCRAP",
+  "A5 Sportback B8 - headlights are flat dark rectangles with no internal elements, grille mesh soft-edged, tail lamps near featureless, panels wavy. fails the rubric on lamps and shut lines"
+ ],
+ "U026": [
+  "KEEP",
+  "TT RS 1.1M f cov 0.213, per source title TT RS II (8J) 2006-2014 - honeycomb grille with real depth, headlight internals present, 5-spoke alloys consistent across views, defined shut lines, correct fixed wing and oval exhausts. HUMSTER3D watermark plate would be replaced with GB"
+ ],
+ "U027": [
+  "KEEP",
+  "TTS Coupe 617k f cov 0.172 - fine mesh grille with depth, sharp headlight internals, multi-spoke alloys consistent across all four views, defined shut lines, quad exhausts and diffuser crisp, clean gloss"
+ ],
+ "U029": [
+  "SCRAP",
+  "2020 TT RS Coupe - only 83,297 f, below the 100k thin-for-four-view line, and the same Mk3 TT body is already kept at 617k as U027. good for its face count but the thinnest of three TT candidates"
+ ],
+ "U030": [
+  "SCRAP",
+  "2020 TT RS Coupe remix, 83,254 f vs U029 83,297 f with identical cov 0.211 - 43 faces apart and a different author, so this is the same mesh re-uploaded. G9 cannot see cross-author copies"
+ ],
+ "U031": [
+  "SCRAP",
+  "2020 TT RS Coupe Type 8S, only 74,003 f - thinnest of four TT candidates and the Mk3 TT body is already kept as U027 at 617k f. grille and lamps are decent for the face count"
+ ],
+ "U032": [
+  "SCRAP",
+  "Q8 2019 titled Low - lowered stance is a modification, and the no-mods bar already quarantined audi-rs6-v3 (ABT RS6-R) on the same grounds. bodywork itself is high quality at 993k f"
+ ],
+ "U033": [
+  "SCRAP",
+  "2023 Q8 - wheels render as near-solid black voids with no spoke definition in any of the four views. fails the rubric on wheel spokes; Q8 is already covered by audi-q8-v1"
+ ],
+ "U034": [
+  "KEEP",
+  "A7 Sportback 2017 791k f cov 0.206 - proportions read instantly, chrome-framed grille with slat depth, headlight internals present, multi-spoke alloys consistent across all four views, defined shut lines, clean gloss. NOTE audi-a7-2018-v1 is live with ZERO colour variants, so this is a candidate to replace it"
+ ],
+ "U035": [
+  "SCRAP",
+  "A7 Sportback MK1 4G pre-facelift - headlights are flat dark shapes with almost no internals and tail lamps are featureless. U034 covers the A7 far better"
+ ],
+ "U036": [
+  "SCRAP",
+  "A7 Sportback MK2 C8 - NO WHEELS AT ALL. every arch is an empty black void in all four views, front and rear"
+ ],
+ "U037": [
+  "SCRAP",
+  "A8/S8 D4 - EXPLODED PARTS LAYOUT. bumpers, both doors, bonnet, boot lid, mirrors and wheels all float detached in space around the shell. this is a parts sheet, not an assembled car"
  ]
 }
