@@ -287,11 +287,22 @@ def _plan(value):
             raise InputError(
                 'plan.schedule must be an object mapping room name -> the '
                 'floor area printed on the drawing, in m2')
-        checked = {}
+        checked, seen = {}, {}
         for name, area in schedule.items():
             key = str(name).strip()
             if not key:
                 raise InputError("plan.schedule has an entry with no name")
+            # check_against_schedule matches names case- and space-insensitively,
+            # so two keys that normalise the same are two rows for one room —
+            # and if their areas differ, one says the room agrees and the other
+            # says it does not. Which figure the drawing actually prints is not
+            # something to guess at.
+            norm = " ".join(key.lower().split())
+            if norm in seen:
+                raise InputError(
+                    f"plan.schedule lists {seen[norm]!r} and {key!r}, which are "
+                    f"the same room. Give it one area, as the drawing does.")
+            seen[norm] = key
             number = _float(area, f"plan.schedule[{key!r}]", None,
                             0.1, MAX_ROOM_SIDE_M ** 2)
             if number is None:
@@ -315,9 +326,19 @@ def _plan(value):
             raise InputError(
                 'plan.roof must be an object: '
                 '{"pitch_deg": 35, "kind": "hipped", "overhang_m": 0.3}')
+        # NOT CLAMPED, for the same reason room widths are not: a pitch of 200
+        # clamped to 89 is then refused by roof_over as "an 89 degree pitch",
+        # which is not the number anybody typed. Refuse it here and say so;
+        # leave the 12-60 buildable range to roof_over, whose message explains
+        # why a tile will not shed water below it.
+        _pitch = _float(roof.get("pitch_deg"), "plan.roof.pitch_deg")
+        if _pitch is not None and not 0.0 <= _pitch < 90.0:
+            raise InputError(
+                f"plan.roof.pitch_deg is {_pitch:g}. A roof pitch is an angle "
+                f"from horizontal, between 0 and 90 degrees — a UK tiled roof "
+                f"is normally 12 to 60.")
         out["roof"] = {
-            "pitch_deg": _float(roof.get("pitch_deg"), "plan.roof.pitch_deg",
-                                None, 0.0, 89.0),
+            "pitch_deg": _pitch,
             "kind": _one_of(roof.get("kind"), "plan.roof.kind",
                             ("hipped", "gabled"), default="hipped"),
             "overhang_m": _float(roof.get("overhang_m"),

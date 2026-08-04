@@ -413,6 +413,54 @@ def roof_quantities(roof, covering="concrete_interlocking"):
     return out
 
 
+# Above this, the exact union costs more than the answer is worth — the check
+# is a yes/no about whether a plan looks partial, not a quantity anybody
+# orders from. Past it, fall back to the sum and cap it, which can only ever
+# understate how empty the plate is.
+UNION_EXACT_MAX_ROOMS = 400
+
+
+def _union_area(rooms):
+    """Area covered by the rooms, counting overlaps once.
+
+    Sweeps the x edges, and for each vertical slab merges the y intervals of
+    the rooms crossing it. Exact for axis-aligned rectangles, which is all a
+    plan holds, and it needs no geometry library.
+    """
+    if not rooms:
+        return 0.0
+    if len(rooms) > UNION_EXACT_MAX_ROOMS:
+        total = sum(r.area_m2 for r in rooms)
+        xs = [c[0] for r in rooms for c in r.corners()]
+        ys = [c[1] for r in rooms for c in r.corners()]
+        box = (max(xs) - min(xs)) * (max(ys) - min(ys))
+        return min(total, box) if box > 0 else total
+
+    edges = sorted({r.x for r in rooms} | {r.x + r.width for r in rooms})
+    area = 0.0
+    for i in range(len(edges) - 1):
+        left, right = edges[i], edges[i + 1]
+        width = right - left
+        if width <= 0:
+            continue
+        mid = (left + right) / 2.0
+        spans = sorted((r.y, r.y + r.depth) for r in rooms
+                       if r.x <= mid <= r.x + r.width)
+        covered = 0.0
+        run_lo = run_hi = None
+        for lo, hi in spans:
+            if run_hi is None or lo > run_hi:
+                if run_hi is not None:
+                    covered += run_hi - run_lo
+                run_lo, run_hi = lo, hi
+            elif hi > run_hi:
+                run_hi = hi
+        if run_hi is not None:
+            covered += run_hi - run_lo
+        area += width * covered
+    return area
+
+
 # --- the model --------------------------------------------------------------
 
 def build(rooms, schedule=None, wall_openings=True, storeys=1,
@@ -530,8 +578,16 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
         # Cheap and reliable tell: rooms only fill a rectangular plate if the
         # plan is the whole floor. A partial plan, a wing, or an L leaves the
         # bounding box well short.
-        fill = (sum(r.area_m2 for r in rooms) / ((x1 - x0) * (y1 - y0))
-                if (x1 - x0) * (y1 - y0) > 0 else 1.0)
+        #
+        # MEASURED AS A UNION, NOT A SUM. Summing room areas is the obvious
+        # thing and it is wrong in the one direction that matters: two rooms
+        # that overlap — an L-shaped space entered as two overlapping
+        # rectangles, or a room typed in twice — push the figure past 100%
+        # and switch the warning off. The check exists to catch a plan that
+        # is missing area; a bug that hides it on a plan with duplicated
+        # area is worse than not having the check.
+        box = (x1 - x0) * (y1 - y0)
+        fill = _union_area(rooms) / box if box > 0 else 1.0
         result["roof"]["plan_fill_pct"] = round(fill * 100, 1)
         if fill < 0.75:
             result["warnings"].append(

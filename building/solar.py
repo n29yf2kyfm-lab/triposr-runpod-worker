@@ -128,7 +128,11 @@ def parse_segments(payload):
     footprint = round(building.get("groundAreaMeters2") or 0, 2) or None
     roof_ground = round(whole.get("groundAreaMeters2") or 0, 2) or None
 
-    pitched = [p for p in planes if not p["flat"]]
+    # A degenerate segment — zero area, or one rounded to zero — must not take
+    # the job down. Weighting by area divides by the total, and a response
+    # whose only pitched plane has no area made that a ZeroDivisionError on
+    # the whole roof job, for a plane that contributes nothing anyway.
+    pitched = [p for p in planes if not p["flat"] and p["sloped_area_m2"] > 0]
     weighted = median = spread = None
     if pitched:
         total = sum(p["sloped_area_m2"] for p in pitched)

@@ -443,6 +443,39 @@ check("5x4 a complete rectangular plate is NOT flagged",
 check("5x5 and reports 100% fill",
       _full["roof"]["plan_fill_pct"] == 100.0,
       str(_full["roof"]["plan_fill_pct"]))
+# FILL IS A UNION, NOT A SUM. Summing room areas is the obvious thing and it
+# fails in the one direction that matters: two rooms that overlap — an L
+# entered as two overlapping rectangles, or a room typed twice — push the
+# figure past 100% and switch the warning OFF. A bug that hides the check on
+# a plan with duplicated area is worse than not having the check.
+_dup = M.build([room("A", 0, 0, 10, 10), room("B", 0, 0, 10, 10)],
+               roof={"pitch_deg": 35.0})
+check("5x6a two rooms overlapping exactly report 100%, not 200%",
+      _dup["roof"]["plan_fill_pct"] == 100.0,
+      str(_dup["roof"]["plan_fill_pct"]))
+check("5x6b and a plate that IS full does not warn",
+      not any("BOUNDING BOX" in w for w in _dup["warnings"]))
+_half = M.build([room("A", 0, 0, 10, 10), room("B", 5, 0, 10, 10)],
+                roof={"pitch_deg": 35.0})
+check("5x6c half-overlapping rooms cannot exceed their own bounding box",
+      _half["roof"]["plan_fill_pct"] <= 100.0,
+      str(_half["roof"]["plan_fill_pct"]))
+
+check("5x6d the union counts disjoint rooms in full",
+      abs(M._union_area([room("A", 0, 0, 5, 10), room("B", 5, 0, 5, 10)])
+          - 100.0) < 1e-9)
+check("5x6e and counts an overlap once",
+      abs(M._union_area([room("A", 0, 0, 10, 10), room("B", 5, 0, 10, 10)])
+          - 150.0) < 1e-9,
+      str(M._union_area([room("A", 0, 0, 10, 10), room("B", 5, 0, 10, 10)])))
+check("5x6f an L-shape unions to its true area",
+      abs(M._union_area([room("A", 0, 0, 10, 4), room("B", 0, 4, 4, 6)])
+          - 64.0) < 1e-9)
+check("5x6g a room fully inside another adds nothing",
+      abs(M._union_area([room("A", 0, 0, 10, 10), room("B", 2, 2, 4, 4)])
+          - 100.0) < 1e-9)
+check("5x6h no rooms unions to zero", M._union_area([]) == 0.0)
+
 check("5x6 a roofless model carries no fill figure to misread",
       M.build([room("A", 0, 0, 4, 4)]).get("roof") is None)
 
@@ -705,6 +738,51 @@ for bad_plan, why in [
         check(f"10k {why} is refused at the door", False)
     except validation.InputError:
         check(f"10k {why} is refused at the door", True)
+
+# PITCH IS NOT CLAMPED EITHER. 200 clamped to 89 is then refused by
+# roof_over as "an 89 degree pitch" — a number nobody typed, in a message
+# about a roof nobody described. Refuse it here; leave the 12-60 buildable
+# range to roof_over, whose message explains why a tile will not shed water.
+for _bad_pitch in (200, -5, 90):
+    try:
+        validation.parse_job({"mode": "model", "plan": {
+            "rooms": [{"name": "A", "x": 0, "y": 0,
+                       "width_m": 4.0, "depth_m": 4.0}],
+            "roof": {"pitch_deg": _bad_pitch}}})
+        check(f"10k-2 a {_bad_pitch} degree pitch is refused at the door", False)
+    except validation.InputError as e:
+        check(f"10k-2 a {_bad_pitch} degree pitch is refused at the door",
+              str(_bad_pitch) in str(e), str(e))
+
+_shallow = validation.parse_job({"mode": "model", "plan": {
+    "rooms": [{"name": "A", "x": 0, "y": 0, "width_m": 4.0, "depth_m": 4.0}],
+    "roof": {"pitch_deg": 3}}})["plan"]
+check("10k-3 but a 3 degree pitch reaches roof_over, which owns that rule",
+      _shallow["roof"]["pitch_deg"] == 3.0)
+try:
+    M.roof_over(0, 0, 6, 6, pitch_deg=3.0)
+    check("10k-4 and roof_over refuses it with the reason", False)
+except M.ModelError as e:
+    check("10k-4 and roof_over refuses it with the reason",
+          "shed water" in str(e), str(e))
+
+# A schedule keyed twice for one room produces two rows in the check, and if
+# the areas differ one says it agrees while the other says it does not.
+for _dupe in ({"A": 16.0, "a": 16.0}, {"Room 7": 18.8, "room  7": 20.0}):
+    try:
+        validation.parse_job({"mode": "model", "plan": {
+            "rooms": [{"name": "A", "x": 0, "y": 0,
+                       "width_m": 4.0, "depth_m": 4.0}],
+            "schedule": _dupe}})
+        check("10k-5 a schedule naming one room twice is refused", False)
+    except validation.InputError as e:
+        check("10k-5 a schedule naming one room twice is refused",
+              "same room" in str(e), str(e))
+check("10k-6 two genuinely different rooms are fine",
+      len(validation.parse_job({"mode": "model", "plan": {
+          "rooms": [{"name": "A", "x": 0, "y": 0,
+                     "width_m": 4.0, "depth_m": 4.0}],
+          "schedule": {"A": 16.0, "B": 12.0}}})["plan"]["schedule"]) == 2)
 
 check("10l plan is a dict, not a list",
       isinstance(parsed["plan"], dict))

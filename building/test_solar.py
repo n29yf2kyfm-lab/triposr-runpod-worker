@@ -212,6 +212,28 @@ check("6f a genuinely flat roof reports no pitch rather than a fake one",
 check("6g and compare copes with that",
       S.compare(MINE, flat_only) is not None)
 
+# A DEGENERATE SEGMENT MUST NOT TAKE THE JOB DOWN. Weighting the pitch by
+# area divides by the total, so a response whose only pitched plane has zero
+# area was a ZeroDivisionError on the whole roof job — for a plane that
+# contributes nothing either way.
+zero = S.parse_segments({"solarPotential": {"roofSegmentStats": [
+    {"pitchDegrees": 40.0, "azimuthDegrees": 0.0,
+     "stats": {"areaMeters2": 0.0}}]}})
+check("6f-2 a zero-area segment does not crash the parse", zero is not None)
+check("6f-3 and reports no pitch rather than a fabricated one",
+      zero["predominant_pitch_deg"] is None
+      and zero["mean_pitch_deg"] is None)
+mixed = S.parse_segments({"solarPotential": {"roofSegmentStats": [
+    {"pitchDegrees": 40.0, "azimuthDegrees": 0.0,
+     "stats": {"areaMeters2": 0.0}},
+    {"pitchDegrees": 30.0, "azimuthDegrees": 180.0,
+     "stats": {"areaMeters2": 50.0}}]}})
+check("6f-4 a zero-area segment alongside a real one is simply ignored",
+      mixed["predominant_pitch_deg"] == 30.0,
+      str(mixed["predominant_pitch_deg"]))
+check("6f-5 and compare copes",
+      S.compare(MINE, zero) is not None)
+
 check("6h the key is read from the environment, never hard-coded",
       "AIza" not in open(os.path.join(HERE, "solar.py")).read())
 check("6i and the module names the env var it wants",
