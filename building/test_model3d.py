@@ -951,6 +951,42 @@ check("12n the GLB and the OBJ describe the same building",
       abs(_oy - _ymax) < 0.02, f"obj {_oy:.3f} vs glb {_ymax:.3f}")
 
 
+# ---- 13. storeys and roof belong INSIDE plan, and saying so ---------------
+# A real job sent {"mode":"model","storeys":2,"roof":{...},"plan":{...}} and
+# came back as ONE storey with a 2.4m "ridge" — a bungalow with a flat top.
+# The top-level `roof` key belongs to ROOF mode and top-level `storeys` is
+# read by nothing, so both were silently dropped. Nothing warned; the totals
+# looked perfectly reasonable for a building nobody asked for.
+import validation as _V13
+_plan13 = {"rooms": [{"name": "A", "x": 0, "y": 0, "width_m": 4, "depth_m": 3}]}
+
+for _stray in ("storeys", "roof", "storey_height_m"):
+    _job = {"mode": "model", "plan": dict(_plan13)}
+    _job[_stray] = 2 if _stray != "roof" else {"pitch_deg": 35.0}
+    try:
+        _V13.parse_job(_job)
+        check(f"13a top-level {_stray} is refused, not ignored", False,
+              "accepted silently")
+    except _V13.InputError as e:
+        check(f"13a top-level {_stray} is refused, not ignored",
+              "inside `plan`" in str(e), str(e)[:90])
+
+# Inside the plan it is accepted, and it actually takes effect.
+_ok = _V13.parse_job({"mode": "model",
+                      "plan": {"rooms": _plan13["rooms"], "storeys": 2,
+                               "roof": {"pitch_deg": 40.0}}})
+check("13b inside plan, storeys is read", _ok["plan"]["storeys"] == 2,
+      str(_ok["plan"].get("storeys")))
+check("13c inside plan, the roof is read",
+      (_ok["plan"].get("roof") or {}).get("pitch_deg") == 40.0,
+      str(_ok["plan"].get("roof")))
+
+# and a plain job with neither is still fine
+check("13d a plan with no storeys or roof still validates",
+      _V13.parse_job({"mode": "model", "plan": dict(_plan13)})["plan"]
+      ["storeys"] == 1)
+
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

@@ -789,6 +789,34 @@ def parse_job(job_input):
     # rules produces the massing (PLAN.md §1.6).
     spec["design_rules"] = job_input.get("design_rules") or None
 
+    # STOREYS AND ROOF LIVE INSIDE plan, AND PUTTING THEM OUTSIDE IT USED TO
+    # BE SILENT. A job asking for {"storeys": 2, "roof": {...}} at the top
+    # level came back as a single storey with no roof — the top-level `roof`
+    # key belongs to ROOF mode, and top-level `storeys` is read by nothing.
+    # Found by running a real job and reading the totals: 40.87 m2 and a
+    # 2.4m "ridge", which is a bungalow with a flat top, not the two-storey
+    # house that was asked for.
+    #
+    # Refused rather than quietly relocated, for the same reason a width
+    # outside 0.3-200m is refused: the caller is telling us something about
+    # the building, and guessing which of two readings they meant is how a
+    # whole extra floor of quantities goes missing.
+    if mode == "model":
+        # Test the RAW plan, not the parsed one. parse fills plan.storeys
+        # with its default of 1, so the parsed plan never looks absent and a
+        # top-level storeys sailed through this check on its first outing.
+        raw_plan = job_input.get("plan") or {}
+        stray = [k for k in ("storeys", "roof", "storey_height_m")
+                 if job_input.get(k) is not None
+                 and raw_plan.get(k) is None]
+        if stray:
+            raise InputError(
+                f"model mode reads {', '.join(stray)} from inside `plan`, not "
+                f"from the top level of the job. As sent, "
+                f"{'they were' if len(stray) > 1 else 'it was'} ignored and "
+                f"the building would come back wrong — move "
+                f"{'them' if len(stray) > 1 else 'it'} into `plan`.")
+
     _check_required_inputs(spec)
     return spec
 
@@ -823,6 +851,7 @@ def _check_required_inputs(spec):
             "model needs a plan: the rooms typed off the drawing's figured "
             "dimensions, each with a name, an x/y position in metres and a "
             "width_m and depth_m.")
+
 
     if mode == "register" and not spec["registration_target"]:
         raise InputError(
