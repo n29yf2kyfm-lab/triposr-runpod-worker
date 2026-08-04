@@ -50,8 +50,41 @@ for bad, nation in [("EH1 1AA", "Scotland"), ("G1 1AA", "Scotland"),
     try:
         P.check_coverage(bad)
         check(f"1d {bad} ({nation}) refused", False, "accepted")
-    except P.PlanningError as e:
+    except P.OutsideCoverageError as e:
         check(f"1d {bad} ({nation}) refused", nation in str(e), str(e))
+
+# BEING IN WALES IS NOT A BREAKAGE. The refusal is right — Welsh PD rights
+# come from a different order and answering from English data would be wrong
+# rather than incomplete — but it is an answer about jurisdiction, and the
+# handler completes the job with status "no_data" instead of failing it.
+#
+# This deliberately does NOT inherit PlanningError. A caller catching that is
+# handling "the screening could not be done"; "the site is in Wales" is a
+# different statement and wants a different response from the app.
+from validation import NoDataError as _NoData  # noqa: E402
+try:
+    P.check_coverage("CF10 1AA")
+    check("1d-i outside coverage is a no-data answer, not a failure", False)
+except _NoData:
+    check("1d-i outside coverage is a no-data answer, not a failure", True)
+check("1d-ii outside coverage is NOT a PlanningError",
+      not issubclass(P.OutsideCoverageError, P.PlanningError))
+# An unreadable postcode still IS a failure — the caller typed something
+# wrong, and retrying with the same input will not help.
+#
+# "12345" and not "not a postcode": postcode_area reads the leading letters,
+# so that string yields the area "NO", which is no recognised nation and
+# sails straight through. check_coverage screens jurisdiction, it is not the
+# postcode validator, and pretending otherwise here would test the wrong
+# function.
+try:
+    P.check_coverage("12345")
+    check("1d-iii an unreadable postcode still fails", False)
+except _NoData:
+    check("1d-iii an unreadable postcode still fails", False,
+          "classed as no_data — bad input is not missing data")
+except P.PlanningError:
+    check("1d-iii an unreadable postcode still fails", True)
 
 # THE parsing bug this guards, same one valuation.py hit: "B36 8AR" contains
 # A and R in its inward code, so collecting every letter turns Birmingham
@@ -355,6 +388,89 @@ try:
 except validation.InputError as e:
     check("7o a planning job with no site is refused at the door",
           "address" in str(e), str(e))
+
+
+# ---- 8. the jurisdiction guard runs on the path the app actually uses -----
+# check_coverage passed every test in section 1 while run() never called it
+# on an address. `{"mode": "planning", "address": "CF10 1AA"}` — a Cardiff
+# postcode, which is exactly the shape the app sends — geocoded to Wales,
+# screened against the ENGLISH register, and came back "success" with no
+# constraints found. A confident all-clear for a site in a different planning
+# jurisdiction is the worst thing this module can emit: it is a builder
+# starting work that needed consent.
+#
+# The guard was `if postcode: check_coverage(postcode)`, and spec["postcode"]
+# is only set when the caller fills that field separately. Found by running a
+# real job, not by reading — section 1 was green throughout.
+
+for _bad, _nation in [("CF10 1AA", "Wales"), ("EH1 1AA", "Scotland"),
+                      ("BT1 1AA", "Northern Ireland")]:
+    try:
+        P.run({"address": _bad, "scan_id": "t"}, _Prog(), tempfile.mkdtemp())
+        check(f"8a {_nation} in `address` is refused, not screened", False,
+              "returned a result for a site outside England")
+    except P.OutsideCoverageError as e:
+        check(f"8a {_nation} in `address` is refused, not screened",
+              _nation in str(e), str(e)[:100])
+
+# Refused BEFORE any network call, so it costs nothing and cannot depend on
+# the register being up.
+try:
+    P.run({"postcode": "CF10 1AA", "scan_id": "t"}, _Prog(), tempfile.mkdtemp())
+    check("8b the separate postcode field is still screened", False)
+except P.OutsideCoverageError:
+    check("8b the separate postcode field is still screened", True)
+
+# And it is a no_data answer, not a breakage — the handler completes the job.
+check("8c outside coverage reaches the handler as no-data",
+      issubclass(P.OutsideCoverageError, validation.NoDataError))
+
+# THE POSTCODE AREA IS A HEURISTIC; THE GEOCODER IS THE ANSWER. Screening on
+# the prefix needs a maintained table of which areas are Welsh — it cannot
+# know "B" is Birmingham and "BT" is Belfast on its own. postcodes.io states
+# the country outright, so a border case or a newly-issued area cannot slip
+# through a stale list. This stubs a postcode whose area looks English while
+# the geocoder says otherwise.
+import roof as _roof
+_saved_full = _roof._geocode_uk_full
+try:
+    _roof._geocode_uk_full = lambda a: {
+        "latitude": 51.4791, "longitude": -3.1781, "country": "Wales"}
+    try:
+        P.run({"address": "ZZ1 1ZZ", "scan_id": "t"}, _Prog(),
+              tempfile.mkdtemp())
+        check("8d the geocoder overrules a postcode area that looks English",
+              False, "screened a Welsh site")
+    except P.OutsideCoverageError as e:
+        check("8d the geocoder overrules a postcode area that looks English",
+              "Wales" in str(e), str(e)[:100])
+
+    # England still goes through.
+    _roof._geocode_uk_full = lambda a: {
+        "latitude": 52.5014, "longitude": -1.8067, "country": "England"}
+    _arts, _extra = P.run({"address": "ZZ1 1ZZ", "scan_id": "t"}, _Prog(),
+                          tempfile.mkdtemp())
+    check("8e an English site still screens normally",
+          "planning" in _extra, str(list(_extra)))
+    check("8f an English site is not warned about jurisdiction",
+          not any("jurisdiction was NOT confirmed" in w
+                  for w in _extra["warnings"]))
+finally:
+    _roof._geocode_uk_full = _saved_full
+
+# Raw coordinates carry no country, so nothing can confirm the site is in
+# England. Screening silently would let an all-clear stand for a Welsh site,
+# so the gap is stated instead of hidden. A reverse geocode is the proper
+# fix; this is the honest interim and the warning says which check did not
+# run.
+_arts, _extra = P.run({"gps": {"lat": 51.4791, "lon": -3.1781},
+                       "scan_id": "t"}, _Prog(), tempfile.mkdtemp())
+check("8g a gps-only screen says the jurisdiction was not confirmed",
+      any("jurisdiction was NOT confirmed" in w for w in _extra["warnings"]),
+      str(_extra["warnings"])[:160])
+check("8h and that warning comes first, ahead of the standard caveat",
+      "jurisdiction was NOT confirmed" in _extra["warnings"][0],
+      _extra["warnings"][0][:90])
 
 
 # ==========================================================================

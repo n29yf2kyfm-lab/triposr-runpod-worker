@@ -826,6 +826,101 @@ finally:
         sys.modules["requests"] = _saved
 
 
+# ---- 18. "no data here" is an ANSWER, not a failed job ---------------------
+# THIS IS WHY THE ENDPOINT READ 14 COMPLETED AGAINST 13 FAILED.
+#
+# Sent `valuation` at a postcode with no sale history, the worker raised
+# ValuationError("no recorded sales at ...") — which is true, useful, and
+# exactly what a caller needs to hear. It went out as {"error": ...}, RunPod
+# marked the job FAILED, and the app on the other end could not tell that
+# from a dead worker. So it either retries something that will never succeed,
+# or shows a builder a crash screen for a new-build with no history.
+#
+# A source having nothing is a completed job with status "no_data".
+
+class _Missing(validation.NoDataError):
+    pass
+
+
+_saved_dispatch = H._dispatch
+
+
+def _dispatch_raises(exc):
+    def _d(mode, spec, prog):
+        raise exc
+    return _d
+
+
+try:
+    H._dispatch = _dispatch_raises(_Missing("no recorded sales at ZZ1 1ZZ"))
+    r = run({"mode": "valuation", "address": "B1 1AA"})
+    check("18a a source with no data completes, it does not fail",
+          r.get("status") == "no_data", str(r.get("status")))
+    check("18b the reason survives, so the app can show it",
+          "no recorded sales" in r.get("reason", ""), r.get("reason", ""))
+    check("18c the raising class is named, so it can be handled precisely",
+          r.get("source") == "_Missing", str(r.get("source")))
+    check("18d no_data carries no error key — it is not an error",
+          "error" not in r, str(r.get("error")))
+    check("18e the manifest still comes back", isinstance(r.get("manifest"), dict))
+
+    # The distinction has to hold in BOTH directions or it is worthless. A
+    # source that could not be REACHED is still a failure: "the planning
+    # register timed out" is not the same statement as "this site has no
+    # designations", and treating them alike is how someone builds without
+    # consent.
+    H._dispatch = _dispatch_raises(RuntimeError("planning register timed out"))
+    r = run({"mode": "valuation", "address": "B1 1AA"})
+    check("18f an unreachable source is still a failure",
+          "error" in r and r.get("status") != "no_data", str(r)[:120])
+
+    # NoDataError subclasses ValueError, and several of the real ones also
+    # subclass their module's own error. If the no_data clause sat after the
+    # InputError clause it would be dead code for anything deriving from it.
+    class _BothWays(validation.InputError, validation.NoDataError):
+        pass
+
+    H._dispatch = _dispatch_raises(_BothWays("nothing at this address"))
+    r = run({"mode": "valuation", "address": "B1 1AA"})
+    check("18g no_data is checked before InputError, not after",
+          r.get("status") == "no_data", str(r.get("status")))
+finally:
+    H._dispatch = _saved_dispatch
+
+
+# ---- 19. the scale warning only fires where there is something to scale ----
+# It fired on EVERY response, including a roof take-off from a postcode,
+# telling the caller to "include a scale reference in frame" on a job with no
+# frame and no camera. A warning printed on every job is a warning nobody
+# reads, which costs exactly the times it matters.
+
+def _warned(res):
+    return any("scale reference in frame" in w for w in (res.get("warnings") or []))
+
+
+for _m in ("roof", "valuation", "planning", "price", "supply", "drawing",
+           "model", "design"):
+    _r = run({"mode": _m, "address": "B36 8AR"})
+    check(f"19a {_m} does not warn about a capture it never had",
+          not _warned(_r), str(_r.get("warnings"))[:160])
+
+# And it MUST still fire where it matters. reconstruct with no depth is the
+# case the warning exists for: an unscaled model is dangerous to quote or cut
+# from, and that has to stay loud.
+_r = run({"mode": "reconstruct", "video_url": "https://example.com/a.mp4"})
+check("19b reconstruct with no LiDAR still warns", _warned(_r),
+      str(_r.get("warnings"))[:200])
+_r = run({"mode": "services", "point_cloud_url": "https://example.com/a.ply",
+          "stage": "open"})
+check("19c the X-ray still warns — a mis-scaled cloud puts a pipe in the "
+      "wrong place", _warned(_r), str(_r.get("warnings"))[:200])
+# LiDAR depth is metric, so there is nothing to warn about.
+_r = run({"mode": "reconstruct", "video_url": "https://example.com/a.mp4",
+          "depth_url": "https://example.com/d.bin"})
+check("19d a LiDAR capture does not warn", not _warned(_r),
+      str(_r.get("warnings"))[:200])
+
+
 # ---- summary --------------------------------------------------------------
 print()
 for f in FAILED:

@@ -26,8 +26,35 @@ import math
 
 import osgb
 import paths
+from validation import NoDataError
 import roof_geometry as rg
 import solar
+
+
+class NoCoverageError(RuntimeError, NoDataError):
+    """The open LIDAR programme does not reach this location.
+
+    England is covered at ~99%, so the 1% is real: Wales, Scotland, Northern
+    Ireland, and the odd English gap. That is a fact about the data, not a
+    fault in the worker, and the caller's next move is a drone flight or an
+    exported grid rather than a retry.
+    """
+
+
+class NoFootprintError(RuntimeError, NoDataError):
+    """OpenStreetMap has no building mapped here.
+
+    Refusing is still right — without a footprint the samples cover the whole
+    street, live-confirmed at 2,696 m2 for one house — but it is an absence in
+    somebody else's dataset, so the job completes and says which one.
+
+    NOTE the ambiguity this does NOT resolve: Overpass rate-limiting produces
+    the same empty result as a genuinely unmapped building, and the two want
+    opposite responses (retry vs. supply a footprint). The message says both.
+    Distinguishing them needs the fetch layer to report WHY it came back
+    empty, which it currently does not.
+    """
+
 
 # --- data sources ----------------------------------------------------------
 # There is no formal REST API for EA LIDAR tiles: the portal is manual and
@@ -107,6 +134,20 @@ def resolve_location(spec):
 
 def _geocode_uk(address):
     """Resolve a UK postcode (or the postcode inside an address) to lat/lon."""
+    res = _geocode_uk_full(address)
+    return float(res["latitude"]), float(res["longitude"])
+
+
+def _geocode_uk_full(address):
+    """As _geocode_uk, but hands back the whole postcodes.io record.
+
+    The record carries `country` — "England", "Wales", "Scotland", "Northern
+    Ireland" — which several modules need and which this function used to
+    throw away. Planning Mode reads an England-only register, and screening a
+    Cardiff postcode against it returned a confident "no constraints found"
+    for a site in a different planning jurisdiction. Guessing the nation from
+    the postcode area is a prefix heuristic; this is the answer.
+    """
     token = address.replace(",", " ").split()[-2:]
     candidates = [" ".join(token), address.split(",")[-1].strip(), address]
     for candidate in candidates:
@@ -125,7 +166,7 @@ def _geocode_uk(address):
             if r.status_code == 200:
                 res = r.json().get("result") or {}
                 if res.get("latitude") is not None:
-                    return float(res["latitude"]), float(res["longitude"])
+                    return res
         except Exception as e:
             print(f"geocode attempt failed: {e}", file=sys.stderr)
     raise ValueError(
@@ -631,7 +672,7 @@ def run(spec, prog, output_dir):
         dtm = fetch_surface(bbox, EA_DTM_WCS) if points else None
 
     if not points:
-        raise RuntimeError(
+        raise NoCoverageError(
             "No elevation data. The Environment Agency LIDAR service could "
             "not be reached or returned nothing for this location. Coverage "
             "is England only (~99% at 1m). Supply point_cloud_url with an "
@@ -669,7 +710,7 @@ def run(spec, prog, output_dir):
         # the same house returned 2,696 m2 and 29,669 tiles — the entire
         # street. A warning is not enough for a number that wrong, because a
         # quote carrying it is worse than no quote at all.
-        raise RuntimeError(
+        raise NoFootprintError(
             "No building footprint could be found for this location, so the "
             "roof cannot be separated from its neighbours. Refusing to "
             "produce quantities that would cover the whole street. "

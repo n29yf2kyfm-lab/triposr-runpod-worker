@@ -28,6 +28,8 @@ import math
 import os
 import re
 
+from validation import NoDataError
+
 # The national register. Free, no key, no rate limit published.
 PLANNING_API = os.environ.get(
     "PLANNING_API", "https://www.planning.data.gov.uk/entity.json")
@@ -215,6 +217,20 @@ SCREENING_WARNING = (
     "before pricing on it.")
 
 
+class OutsideCoverageError(NoDataError):
+    """The site is outside the register this module reads.
+
+    Wales, Scotland and Northern Ireland each have their own permitted
+    development order and their own register. Answering from English data
+    would be wrong rather than merely incomplete, so this refuses — but it is
+    a statement about jurisdiction, not a breakage, and the job completes.
+
+    Declared before PlanningError so it does not inherit it: a caller
+    catching PlanningError is handling "the screening failed", which is a
+    different thing from "this site is in Wales".
+    """
+
+
 class PlanningError(ValueError):
     """Raised when site constraints cannot be established honestly.
 
@@ -266,7 +282,7 @@ def check_coverage(postcode):
             f"{postcode!r} is not a recognisable UK postcode")
     nation = NON_ENGLISH_AREAS.get(area)
     if nation and area not in BORDER_AREAS:
-        raise PlanningError(
+        raise OutsideCoverageError(
             f"the national planning register covers England only, and {area} "
             f"is {nation}. {nation} has its own permitted development order "
             f"and its own register, and answering from English data would be "
@@ -564,6 +580,7 @@ def run(spec, prog, output_dir):
     prog.stage("fetching")
     gps = spec.get("gps") or {}
     lat, lon = gps.get("lat"), gps.get("lon")
+    jurisdiction_checked = False
 
     if lat is None or lon is None:
         postcode = spec.get("postcode")
@@ -572,15 +589,42 @@ def run(spec, prog, output_dir):
             raise PlanningError(
                 "planning mode needs an address, a postcode, or gps "
                 "{lat, lon} to know which site to screen.")
-        if postcode:
-            check_coverage(postcode)
+        # Screen whatever the caller actually gave. This used to run only on
+        # spec["postcode"], so `{"mode": "planning", "address": "CF10 1AA"}`
+        # — a Cardiff postcode, which is exactly how the app sends one —
+        # skipped the check, geocoded to Wales, screened against the ENGLISH
+        # register and returned "no constraints found". A confident all-clear
+        # for a site in a different planning jurisdiction is the worst output
+        # this module can produce: it is a builder starting work that needed
+        # consent. check_coverage passed its own tests the whole time; run()
+        # never called it on the path the app uses.
+        check_coverage(postcode or address)
         import roof
         try:
-            lat, lon = roof._geocode_uk(address)
+            located = roof._geocode_uk_full(address)
+            lat, lon = float(located["latitude"]), float(located["longitude"])
+        except NoDataError:
+            raise
         except Exception as e:
             raise PlanningError(
                 f"could not locate {address!r} ({type(e).__name__}). Supply "
                 f"gps: {{\"lat\": ..., \"lon\": ...}} directly.")
+
+        # And then confirm it against the geocoder rather than the postcode
+        # prefix. check_coverage works off the postcode AREA, which is a
+        # heuristic — it cannot know that "B" is Birmingham and "BT" is
+        # Belfast without a table, and the table has to be maintained.
+        # postcodes.io states the country outright, so a border case or a
+        # newly-issued area cannot slip through a stale list.
+        country = (located.get("country") or "").strip()
+        if country and country != "England":
+            raise OutsideCoverageError(
+                f"{address} is in {country}. The national planning register "
+                f"this screens against covers England only, and {country} "
+                f"has its own permitted development order and its own "
+                f"register — answering from English data would be wrong "
+                f"rather than merely incomplete.")
+        jurisdiction_checked = True
 
     prog.stage("screening")
     result = screen(lat, lon,
@@ -595,6 +639,19 @@ def run(spec, prog, output_dir):
         json.dump(result, f, indent=2)
 
     warnings = list(result["warnings"])
+    # Raw coordinates carry no country, so nothing above could confirm this
+    # site is in England — and the register only covers England. Rather than
+    # screen silently and let an all-clear stand for a Welsh or Scottish
+    # site, say which check did not run. A reverse geocode would settle it
+    # and is the proper fix; this is the honest interim.
+    if not jurisdiction_checked:
+        warnings.insert(
+            0, "Screened from raw coordinates, so the jurisdiction was NOT "
+               "confirmed. This register covers England only; Wales, "
+               "Scotland and Northern Ireland each have their own permitted "
+               "development order and their own register, and an all-clear "
+               "here means nothing for a site outside England. Pass a "
+               "postcode to have that checked.")
     critical = [f for f in result["constraints"]
                 if f["severity"] == CRITICAL and f["on_site"]]
     for finding in critical:

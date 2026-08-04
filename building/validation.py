@@ -69,6 +69,28 @@ class InputError(ValueError):
     {"error": ...} response rather than a traceback."""
 
 
+class NoDataError(ValueError):
+    """The input was fine; the source simply has nothing for it.
+
+    "No recorded sales at this postcode" is not a fault. Price Paid starts in
+    1995 and a new development genuinely has no history — that is the true
+    answer, and it is useful. Raising it as an error made RunPod mark the job
+    FAILED, which is why this endpoint reads 14 completed against 13 failed
+    when nothing had actually broken.
+
+    It matters more than tidiness. An app on the other end cannot tell a
+    crashed worker from an honest "nothing here" if both come back as a
+    failure, so it either retries something that will never succeed or shows
+    the user a breakage that is really an answer. The handler turns this into
+    a COMPLETED job with status "no_data" and the reason attached.
+
+    Reserved for absence of DATA. A source that could not be reached is a
+    failure and must stay one — a timed-out planning register is not the same
+    statement as "this site has no designations", and conflating them is how
+    someone builds without checking.
+    """
+
+
 def _int(value, name, default=None, lo=None, hi=None):
     """Parse an int, clamp it, and name the field in any error."""
     if value is None:

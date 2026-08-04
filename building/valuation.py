@@ -43,6 +43,8 @@ import re
 import statistics
 from datetime import date
 
+from validation import NoDataError
+
 # Postcode areas registered in Scotland, which Price Paid Data does not
 # cover. "G" is Glasgow and is Scottish; "GL" (Gloucester) and "GU"
 # (Guildford) are not, which is why these are matched as whole areas rather
@@ -187,6 +189,16 @@ class ValuationError(ValueError):
     Deliberately fatal. A confident wrong valuation is worse than none: it
     is the number someone borrows against, or the reason they spend £70k on
     an extension that will not come back.
+    """
+
+
+class NoSalesError(ValuationError, NoDataError):
+    """Price Paid has no sales at this postcode.
+
+    Still fatal for the valuation — nothing can be inferred — but it is an
+    ANSWER, not a breakage, so the handler completes the job and says so.
+    Inheriting ValuationError too means every existing `except ValuationError`
+    keeps catching it.
     """
 
 
@@ -1177,7 +1189,7 @@ def run(spec, prog, output_dir):
 
     sales = fetch_sales(postcode=postcode, limit=spec.get("max_sales", 200))
     if not sales:
-        raise ValuationError(
+        raise NoSalesError(
             f"no recorded sales at {postcode}. Price Paid covers England and "
             f"Wales since 1995; a brand new development may not appear yet.")
 

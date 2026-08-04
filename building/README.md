@@ -101,6 +101,15 @@ millimetres and `4570` typed straight across is the commonest mistake there is.
 Unimplemented modes return `status: "not_implemented"` with the implementing phase and a
 validated manifest — never a bare 500.
 
+**A source with nothing in it is not a failed job.** "No recorded sales at this postcode"
+is true, useful, and the answer — Price Paid starts in 1995 and a new-build genuinely has
+no history. Returning it as an error made RunPod mark the job FAILED, which is most of why
+the endpoint read 14 completed against 13 failed with nothing broken, and left the app
+unable to tell a dead worker from an honest "nothing here". Those return
+`status: "no_data"` with the reason and the raising class. A source that could not be
+REACHED is still a failure and stays one: a timed-out planning register is not the same
+statement as "this site has no designations".
+
 ### Key fields
 
 - **`stage`** — `open` (first fix, services exposed) or `closed` (finished). Pairing the two
@@ -172,7 +181,7 @@ claiming success.
 python building/test_handler.py
 ```
 
-That file alone carries 221 assertions; the whole suite is **1901 across 20 files** — run
+That file alone carries 221 assertions; the whole suite is **1932 across 20 files** — run
 them all with `for f in building/test_*.py; do python "$f"; done`. No GPU. Same approach as
 the vehicle worker: stub the heavy modules, then test the contract logic. CI runs these
 **before** building the image, so a broken contract never reaches a deployable tag.

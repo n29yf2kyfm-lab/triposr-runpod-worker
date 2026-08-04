@@ -44,7 +44,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import runpod  # noqa: E402
 
-from validation import parse_job, InputError  # noqa: E402
+from validation import parse_job, InputError, NoDataError  # noqa: E402
 from progress import Progress  # noqa: E402
 import delivery  # noqa: E402
 import paths  # noqa: E402
@@ -56,6 +56,25 @@ import paths  # noqa: E402
 # worker writes kilobytes of JSON that must not depend on that being true.
 OUTPUT_DIR = paths.resolve("BUILDING_OUTPUT_DIR", "building-outputs",
                            "building-outputs")
+
+# Modes whose geometry comes off a camera or a depth sensor, and which
+# therefore have a scale that can be wrong.
+#
+# Everything else starts from something already dimensioned: a postcode, a
+# figured drawing, a list of quantities. Asking those to "include a scale
+# reference in frame" is nonsense, and printing it on every response is how
+# the one job that genuinely IS unscaled gets waved through.
+#
+# structure, services and register take a point cloud rather than a capture,
+# but that cloud carries whatever scale reconstruct gave it — so the warning
+# stays relevant and they stay in.
+CAPTURE_MODES = frozenset({
+    "reconstruct",   # video / images in
+    "structure",     # consumes a cloud whose scale it inherits
+    "services",      # same, and this one is the X-ray
+    "register",      # aligns two clouds; a scale error misaligns both
+    "condition",     # imagery and thermal
+})
 
 # Which phase implements each mode. Returned verbatim to callers hitting an
 # unimplemented mode, so the API is honest about what it can do today rather
@@ -206,8 +225,14 @@ def handler(job):
 
     warnings = list(spec.get("warnings", []))
 
-    # An unscaled model is the one failure that must never pass silently.
-    if scale_source == "anchors":
+    # An unscaled model is the one failure that must never pass silently —
+    # but only where there is something to scale. This fired on EVERY job,
+    # including a roof take-off from a postcode and a valuation from an
+    # address, telling the caller to "include a scale reference in frame" on
+    # a job that has no frame and no camera. A warning that appears on every
+    # response is a warning nobody reads, which costs exactly the times it
+    # matters.
+    if scale_source == "anchors" and mode in CAPTURE_MODES:
         warnings.append(
             "No LiDAR depth in this capture — scale will be derived from "
             "known-object anchors (UK brick coursing outside, Part M socket "
@@ -261,6 +286,29 @@ def handler(job):
         # On EVERY path, as the comment below _fail says. It was persisted
         # only on the two failure paths, so the successful scans — the ones
         # actually worth keeping — got no durable record at all.
+        _persist_manifest(manifest, job_id, result)
+        return result
+
+    except NoDataError as e:
+        # NOT a failure. The input was valid, the work ran, and the answer is
+        # that the source holds nothing for this address. Returning it as an
+        # error made RunPod mark the job FAILED, which is most of why this
+        # endpoint reads 14 completed against 13 failed with nothing broken —
+        # and it left the app unable to tell a dead worker from a new-build
+        # with no sale history, so it would retry forever or show a crash.
+        #
+        # Checked BEFORE InputError and Exception: NoDataError subclasses
+        # ValueError, and several of these also subclass their module's own
+        # error, so an earlier clause would swallow them.
+        result = {
+            "status": "no_data",
+            "mode": mode,
+            "reason": str(e),
+            "source": type(e).__name__,
+            "manifest": manifest,
+        }
+        if warnings:
+            result["warnings"] = warnings
         _persist_manifest(manifest, job_id, result)
         return result
 
