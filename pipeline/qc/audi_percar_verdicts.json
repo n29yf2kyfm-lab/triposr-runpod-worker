@@ -170,5 +170,37 @@
  "U037": [
   "SCRAP",
   "A8/S8 D4 - EXPLODED PARTS LAYOUT. bumpers, both doors, bonnet, boot lid, mirrors and wheels all float detached in space around the shell. this is a parts sheet, not an assembled car"
+ ],
+ "U038": [
+  "SCRAP",
+  "A8 D3 - wheels broken again: hubs sunk into the arches with white discs protruding and a loose wheel floating under the car centre in the side view. same broken-transform defect as U023 and U037"
+ ],
+ "U039": [
+  "SCRAP",
+  "A8 D2 - huge flat polygon sheets stab straight through the body in every view, wheels are featureless dark cylinders with no spokes, bodywork deformed. broken export"
+ ],
+ "U040": [
+  "KEEP",
+  "Q4 e-tron SUV 45, 756k f cov 0.181 - correct closed-off EV grille pattern, headlights with internal LED detail, aero alloys consistent across all four views, defined shut lines, clean gloss, e-tron script on the rear light bar. NOTE audi-q4-e-tron-v1 is already live"
+ ],
+ "U041": [
+  "SCRAP",
+  "2014 S3 Limousine - same Assetto Corsa conversion as U042 (210,615 vs 200,149 f, identical white alloys and body) by a different author. U042 kept instead: cov 0.137 vs this 0.099, which trips the thin-paint flag"
+ ],
+ "U042": [
+  "KEEP",
+  "S3 Limousine 8V, 200k f cov 0.137 - honeycomb grille with depth, headlight internals present, alloys consistent across views, defined shut lines, quad exhausts, clean gloss. Assetto Corsa conversion, which the owner ruled a warning not a cull. NOTE audi-s3-v1 is already live"
+ ],
+ "U043": [
+  "SCRAP",
+  "S4 B6 - headlights and tail lamps are flat dark shapes with no internal elements, grille slats soft, and the wheels are aftermarket deep-dish rather than stock. interior geometry pokes through the rear glass"
+ ],
+ "U044": [
+  "SCRAP",
+  "1997 S4 B5 - headlights are flat pale blobs with almost no internal structure and the tail lamps are equally featureless. fails the rubric on lamps"
+ ],
+ "U045": [
+  "SCRAP",
+  "S4 B8 Avant - a large flat billboard plane sticks out of the roof in all four views, flat untextured grey rectangles sit on the doors, lamps have no internals, and it is only 88,832 f"
  ]
 }
