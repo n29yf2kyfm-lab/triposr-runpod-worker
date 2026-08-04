@@ -584,6 +584,49 @@ check("13h and a boolean one still does",
 
 
 # ==========================================================================
+# ---- 21. drawing_path was a validated input that could never run ----------
+# parse_job parses it, the docs list it, and drawing.py reads it — but BOTH
+# guards demanded drawing_url, so a job carrying only a local file was
+# refused before reaching the code that would have used it. Exactly the
+# shape of the scale_observations bug: validated, then unreachable.
+#
+# It is the case that matters for an app: the worker has the PDF on its
+# volume, or the app posted an upload the worker already wrote down. Neither
+# has a URL.
+import tempfile as _tf, os as _os
+_pdf = _os.path.join(HERE, "fixtures_schedule.pdf")
+
+_spec = _V.parse_job({"mode": "drawing", "drawing_path": _pdf})
+check("21a a local path alone is accepted by the validator",
+      _spec["drawing_path"] == _pdf, str(_spec.get("drawing_path")))
+
+_arts, _extra = D.run(_spec, _Prog(), _tf.mkdtemp())
+_d = _extra["drawing"]
+check("21b and the drawing actually gets read",
+      _d["page"]["pages"] >= 1, str(_d.get("page")))
+check("21c the page size comes off the real file",
+      _d["page"]["width_pt"] > 0 and _d["page"]["height_pt"] > 0)
+
+# A path that is not there must say so plainly rather than silently falling
+# through to a URL fetch that was never supplied.
+try:
+    D.run(_V.parse_job({"mode": "drawing",
+                       "drawing_path": "/nope/missing.pdf"}),
+          _Prog(), _tf.mkdtemp())
+    check("21d a missing local file is refused with a usable message", False)
+except D.DrawingError as e:
+    check("21d a missing local file is refused with a usable message",
+          "does not exist" in str(e), str(e)[:90])
+
+# Neither source at all is still an error.
+try:
+    _V.parse_job({"mode": "drawing"})
+    check("21e a drawing job with no source is still refused", False)
+except _V.InputError as e:
+    check("21e a drawing job with no source is still refused",
+          "drawing_path" in str(e), str(e)[:90])
+
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

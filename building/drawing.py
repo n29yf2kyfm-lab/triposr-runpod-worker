@@ -833,18 +833,27 @@ def run(spec, prog, output_dir):
     prog.stage("fetching")
     pdf_url = spec.get("drawing_url")
     traced = spec.get("traced")
+    local_pdf = spec.get("drawing_path")
 
-    if not pdf_url and not traced:
+    if not pdf_url and not local_pdf and not traced:
         raise DrawingError(
-            "drawing mode needs drawing_url (a PDF to inspect), or traced "
-            "geometry to measure.")
+            "drawing mode needs drawing_url or drawing_path (a PDF to "
+            "inspect), or traced geometry to measure.")
 
     page = None
-    if pdf_url:
+    local = spec.get("drawing_path")
+    if pdf_url or local:
         import validation
-        local = spec.get("drawing_path")
+        # A local file is a complete source on its own. This used to sit
+        # behind `if pdf_url:`, so drawing_path could only ever act as a
+        # cache for a URL that had to be supplied anyway — the one case it
+        # exists for, a file already on the worker, could not run at all.
         if local and os.path.exists(local):
             path = local
+        elif not pdf_url:
+            raise DrawingError(
+                f"drawing_path {local!r} does not exist on this worker. Pass "
+                f"drawing_url, or write the file to the volume first.")
         else:
             os.makedirs(output_dir, exist_ok=True)
             path = os.path.join(output_dir, "drawing.pdf")

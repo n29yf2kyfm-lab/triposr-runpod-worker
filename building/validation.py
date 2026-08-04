@@ -843,10 +843,17 @@ def _check_required_inputs(spec):
             "find sold comparables. HM Land Registry Price Paid Data covers "
             "England and Wales only.")
 
-    if mode == "drawing" and not (spec["drawing_url"] or spec["traced"]):
+    # drawing_path counts. It is parsed and documented, and drawing.py reads
+    # it — but this check demanded a URL, so a job carrying only a local file
+    # was refused before it reached the code that would have used it. The
+    # same dead-input shape as scale_observations: validated, then
+    # unreachable. A worker with the PDF already on its volume, or an app
+    # posting an upload the worker has written down, both look like this.
+    if mode == "drawing" and not (spec["drawing_url"] or spec["drawing_path"]
+                                  or spec["traced"]):
         raise InputError(
-            "drawing mode needs drawing_url (a PDF to inspect), or traced "
-            "geometry to measure.")
+            "drawing mode needs drawing_url or drawing_path (a PDF to "
+            "inspect), or traced geometry to measure.")
 
     if mode == "supply" and not (spec["price_list_csv"]
                                  or spec["price_list_url"]):
