@@ -1,0 +1,22 @@
+# python
+api/.venv/
+__pycache__/
+*.pyc
+api/.env
+.env
+
+# uploaded images (runtime data)
+api/data/uploads/*
+!api/data/uploads/.gitkeep
+
+# node
+web/node_modules/
+web/dist/
+web/*.tsbuildinfo
+web/node_modules/.tmp/
+# emitted by the composite tsc build of vite.config.ts
+web/vite.config.js
+web/vite.config.d.ts
+
+# os
+.DS_Store
