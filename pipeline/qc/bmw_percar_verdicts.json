@@ -1,0 +1,34 @@
+{
+ "b0e11e993b834a65a6a673033cea91a3": [
+  "KEEP",
+  "M3 E92 1.18M f cov 0.182 - fills a real gap, the library has E30/E46/F80/2023 M3s and no E92. power-dome bonnet and side gills read instantly, kidney grille has slat depth, headlights carry the corona-ring internals, multi-spoke alloys consistent across all four views, defined shut lines, quad exhausts. NOTE it sits low enough to read as lowered; stock-looking bumpers and no widebody, so recorded rather than scrapped"
+ ],
+ "fc0d4041a161457496891c161116e758": [
+  "SCRAP",
+  "M4 G82 titled only BMW Car 3D model - 1.1M faces spent on a soft shell: headlights are dark shapes with a single faint internal line, grille slats shallow, bonnet surface visibly lumpy. library already ships bmw-m4-v1 and bmw-m4-w12-v1"
+ ],
+ "b78e420240f44349bd4efc21f01afe66": [
+  "SCRAP",
+  "K1600 GTL is a MOTORCYCLE, not a car. the sweep gate catches the word motorbike but not BMW bike model codes"
+ ],
+ "e90fcb01959d4006a74466eb358481bc": [
+  "SCRAP",
+  "2 Series Coupe F22 220d - headlights are dark voids with no internal structure and the tail lamps are flat dark shapes. bmw-2-series-2021-v1 already covers the nameplate"
+ ],
+ "eb73c4bdb3814e229c16cf791ae53818": [
+  "SCRAP",
+  "S1000RR is a MOTORCYCLE, not a car. same gate gap as the K1600 GTL"
+ ],
+ "f1097224b2c240e3903b20ec46d471b5": [
+  "SCRAP",
+  "E36 318ti Compact - headlights are flat pale rectangles with no internals, tail lamps flat red blocks, grille a flat slab. non-stock M-tech bumpers and lowered stance on aftermarket wheels"
+ ],
+ "75147446ebaa49a6b10d7d51139c23a6": [
+  "KEEP",
+  "M440i Convertible G23 984k f cov 0.176 - CABRIOLET, a body style the library has none of in the 4 Series. tall kidney grille with real mesh depth, headlight internals present, multi-spoke alloys consistent across all four views, defined shut lines, interior and roll hoops modelled, clean gloss"
+ ],
+ "93fce305fc644254a20f01fda89abe97": [
+  "KEEP",
+  "3 Series Touring F31 940k f cov 0.175 - chrome-framed kidney grille with real slat depth, headlights carry corona-ring internals, tail lamps have the L-shape structure, black multi-spoke alloys consistent across all four views, defined shut lines throughout. NOTE bmw-3-series-v1 is already a 3 Series Touring, so this only publishes if it beats that car on the eye test"
+ ]
+}
