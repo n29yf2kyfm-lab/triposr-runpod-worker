@@ -54,7 +54,7 @@ HDR = {"apikey": KEY, "Authorization": "Bearer " + KEY}
 
 
 def queue():
-    q = json.load(open(QUEUE))
+    q = [r for r in json.load(open(QUEUE)) if not r.get("_scope")]
     idx = {r["uid"]: r for r in q}
     if len(idx) != len(q):
         sys.exit(f"FATAL: {len(q) - len(idx)} duplicate uids in the queue")
