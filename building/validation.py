@@ -629,6 +629,12 @@ def parse_job(job_input):
     # off it alone without the full BIM pipeline (PLAN.md Phase 2).
     spec["roomplan_url"] = (str(job_input.get("roomplan_url") or "").strip()
                             or None)
+    # A local export file, mirroring drawing_path. Same reachability rule
+    # learned there: a path field that no mode reads is a documented lie, so
+    # model mode's required-inputs check below must accept it wherever the
+    # URL form is accepted.
+    spec["roomplan_path"] = (str(job_input.get("roomplan_path") or "").strip()
+                             or None)
     spec["depth_url"] = (str(job_input.get("depth_url") or "").strip() or None)
     spec["poses_url"] = (str(job_input.get("poses_url") or "").strip() or None)
     spec["thermal_urls"] = _str_list(job_input.get("thermal_urls"),
@@ -846,11 +852,13 @@ def _check_required_inputs(spec):
             "planning needs an address, a postcode, or gps {lat, lon} to "
             "know which site to screen for designations.")
 
-    if mode == "model" and not spec["plan"]:
+    if mode == "model" and not (spec["plan"] or spec["roomplan_url"]
+                                or spec["roomplan_path"]):
         raise InputError(
-            "model needs a plan: the rooms typed off the drawing's figured "
+            "model needs a plan (the rooms typed off the drawing's figured "
             "dimensions, each with a name, an x/y position in metres and a "
-            "width_m and depth_m.")
+            "width_m and depth_m) or a scan: roomplan_url / roomplan_path "
+            "pointing at an Apple RoomPlan JSON export.")
 
 
     if mode == "register" and not spec["registration_target"]:

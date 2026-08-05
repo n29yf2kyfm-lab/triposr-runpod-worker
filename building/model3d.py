@@ -879,12 +879,33 @@ def write_ifc(model, path, project_name="Modelled Building"):
 # --- handler entry point ----------------------------------------------------
 
 def run_mode(spec, prog, output_dir):
-    """Model mode entry point."""
+    """Model mode entry point.
+
+    Two ways in, one model out: a plan typed off a drawing's figured
+    dimensions, or an Apple RoomPlan scan (roomplan_url / roomplan_path).
+    The scan wins when both are absent-vs-present is unambiguous; when a
+    caller sends BOTH, the plan is used and the scan noted, because typed
+    dimensions were deliberate and a stale scan URL riding along in a
+    re-used job body should not silently replace them.
+    """
     import paths
 
     prog.stage("reading")
     plan = spec.get("plan") or {}
     entries = plan.get("rooms") or spec.get("rooms")
+    scan_src = spec.get("roomplan_url") or spec.get("roomplan_path")
+
+    if not entries and scan_src:
+        import roomplan
+        directory = paths.ensure(output_dir)
+        local = roomplan.fetch_export(spec, directory)
+        prog.stage("building")
+        model = roomplan.to_model(roomplan.parse(local))
+        prog.stage("exporting")
+        artifacts = _export_artifacts(
+            model, directory, spec.get("scan_id") or "roomplan")
+        return artifacts, {"model": model, "warnings": model["warnings"]}
+
     if not entries:
         raise ModelError(
             "model mode needs a plan: a list of rooms, each with a name, an "
@@ -929,10 +950,27 @@ def run_mode(spec, prog, output_dir):
 
     if sched_note:
         model["warnings"].append(sched_note)
+    if scan_src:
+        model["warnings"].append(
+            "Both a typed plan and a RoomPlan scan were supplied. The typed "
+            "plan was used — deliberate dimensions beat a scan URL riding "
+            "along in a re-used job body. Send the scan without a plan to "
+            "model from it.")
 
     prog.stage("exporting")
     directory = paths.ensure(output_dir)
-    scan = spec.get("scan_id") or "model"
+    artifacts = _export_artifacts(model, directory,
+                                  spec.get("scan_id") or "model")
+    return artifacts, {"model": model, "warnings": model["warnings"]}
+
+
+def _export_artifacts(model, directory, scan):
+    """OBJ, GLB, IFC and JSON for a finished model dict.
+
+    Shared by the plan path and the RoomPlan path — the writers do not care
+    where a model came from, and having two copies of this block is how the
+    two paths drift apart one bugfix at a time.
+    """
     artifacts = []
 
     obj_path = os.path.join(directory, f"{scan}.obj")
@@ -972,7 +1010,7 @@ def run_mode(spec, prog, output_dir):
         json.dump(model, f, indent=2)
     artifacts.append((json_path, f"models/{scan}.json", None))
 
-    return artifacts, {"model": model, "warnings": model["warnings"]}
+    return artifacts
 
 
 run = run_mode
