@@ -102,5 +102,29 @@
  "6b08783d39ab4967b975045653cc8f12": [
   "SCRAP",
   "M440i Gran Coupe 2022 - a large BLACK PATCH covers the front wing and door in both front three-quarters, and with mats=1 at cov 0.143 it is not the paint material, so it survives every colour. wheels also mismatched between views and the car is slammed on stretched tyres"
+ ],
+ "d41e7c75bbe64699b80bfd6dca5d48e6": [
+  "SCRAP",
+  "M2 F87 LCI - EXPLODED parts layout. roof panels, glass, bonnet, both bumpers and the wheels all float above and beside the shell in every view"
+ ],
+ "f787107eedda4434ac3880fbd1cbb079": [
+  "KEEP",
+  "M4 Competition G82 2021 683k f cov 0.171 - the best G82 M4 in the wave. tall kidney grille with real vertical slat depth, headlights carry the L-shaped DRL and dark inner element, multi-spoke alloys with red calipers consistent across all four views, defined shut lines, carbon roof and side gill, sharp quad exhausts and diffuser. NOTE bmw-m4-v1 and bmw-m4-w12-v1 are already live, so this only publishes if it beats them"
+ ],
+ "7e7626fd8dd34e4b8f0a5b21eb0a1fb0": [
+  "KEEP",
+  "728i E23 1982 701k f cov 0.175 - proportions read as an E23 instantly. quad round headlights with visible internal reflector structure, chrome-framed kidney grille with slat depth, period BBS-style alloys consistent across all four views, crisp chrome bumpers and window trim, defined bonnet/door/boot shut lines, interior modelled. the library has no E23 -- bmw-7-series-v1 is an F01. HUMSTER3D watermark plate would be replaced with GB"
+ ],
+ "2b78bdc540e24cde960c35543639cca0": [
+  "SCRAP",
+  "M3 F80 - NO WHEELS. every arch is empty with bare dampers and brake assemblies exposed, and a single loose wheel sits under the car in the side view. bmw-m3-f80-2013-v1 already covers the car"
+ ],
+ "51d7e131e8f8478e9991b789fa049823": [
+  "SCRAP",
+  "M3 E30 - a stance build: slammed to the floor with the arches over the tyre tops, deep-dish wheels on stretched rubber, and the body carries visible smeared streaking across the doors and rear quarter. bmw-m3-e30-undated-v1 already covers the E30 M3"
+ ],
+ "5219e3bee5984350a8efd38dbc2675a6": [
+  "SCRAP",
+  "3 Series E36 saloon - NO WHEELS, all four arches empty with a bare damper propping the car up, and the front and rear bumper assemblies are detached and floating clear of the shell in every view. this is the survivor of the identical-face-count pair that exposed the G9 clustering bug; its twin is now auto-scrapped"
  ]
 }
