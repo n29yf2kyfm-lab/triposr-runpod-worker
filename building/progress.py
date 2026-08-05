@@ -65,6 +65,7 @@ STAGE_PLANS = {
     "condition":   ["fetching", "detecting", "locating_3d", "grading",
                     "costing", "exporting"],
     "design":      ["fetching", "massing", "compliance_check", "exporting"],
+    "render":      ["aerial", "rendering", "delivering"],
 }
 
 

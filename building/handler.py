@@ -120,6 +120,7 @@ def _pipeline_available(mode):
         "condition": "condition", "design": "design",
         "valuation": "valuation", "drawing": "drawing",
         "planning": "planning", "model": "model3d",
+        "render": "sitevisual",
     }.get(mode)
     if not module:
         return False
@@ -354,6 +355,7 @@ def _dispatch(mode, spec, prog):
         "condition": "condition", "design": "design",
         "valuation": "valuation", "drawing": "drawing",
         "planning": "planning", "model": "model3d",
+        "render": "sitevisual",
     }[mode]
     module = __import__(module_name)
     return module.run(spec, prog, OUTPUT_DIR)

@@ -31,6 +31,7 @@ MODES = (
     "drawing",       # 2D PDF/DXF -> confirmed scale -> measured quantities
     "planning",      # address -> site designations -> can this be built?
     "model",         # drawing's figured dimensions -> 3D building -> OBJ/IFC
+    "render",        # gps + measured zone -> proposal drawn on real aerial
 )
 
 # Roof capture sources, cheapest and easiest first.
@@ -797,6 +798,53 @@ def parse_job(job_input):
                             or None)
     spec["page_size_pt"] = job_input.get("page_size_pt") or None
 
+    # --- render ------------------------------------------------------------
+    # The measured rectangle a proposed extension must stay inside, in the
+    # house's own frame. Validated hard because the constraint IS the mode:
+    # a zone that sailed through malformed would put the proposal on the
+    # neighbour's roof with full confidence.
+    rz = job_input.get("render_zone")
+    if rz is not None:
+        if not isinstance(rz, dict):
+            raise InputError(
+                'render_zone must be an object: {"bearing_deg": ..., '
+                '"along0_m": ..., "along1_m": ..., "out0_m": ..., '
+                '"out1_m": ...}')
+        checked = {
+            "bearing_deg": _float(rz.get("bearing_deg"),
+                                  "render_zone.bearing_deg", None, 0.0, 360.0),
+            "along0_m": _float(rz.get("along0_m"), "render_zone.along0_m",
+                               None, -30.0, 30.0),
+            "along1_m": _float(rz.get("along1_m"), "render_zone.along1_m",
+                               None, -30.0, 30.0),
+            "out0_m": _float(rz.get("out0_m"), "render_zone.out0_m",
+                             None, -30.0, 30.0),
+            "out1_m": _float(rz.get("out1_m"), "render_zone.out1_m",
+                             None, -30.0, 30.0),
+            "out_positive": bool(rz.get("out_positive", True)),
+        }
+        missing = [k for k, val in checked.items()
+                   if val is None and k != "out_positive"]
+        if missing:
+            raise InputError(
+                f"render_zone is missing {', '.join(missing)} — every edge "
+                f"of the constraint rectangle must be stated in metres.")
+        for a, b, what in ((checked["along0_m"], checked["along1_m"], "along"),
+                           (checked["out0_m"], checked["out1_m"], "out")):
+            if b <= a:
+                raise InputError(
+                    f"render_zone {what}1_m must exceed {what}0_m.")
+            if b - a > 12.0:
+                raise InputError(
+                    f"render_zone spans {b - a:.1f}m in {what} — beyond "
+                    f"12m this is not an extension. Check the units.")
+        spec["render_zone"] = checked
+    else:
+        spec["render_zone"] = None
+    spec["extension"] = (job_input.get("extension")
+                         if isinstance(job_input.get("extension"), dict)
+                         else None)
+
     spec["extension_m2"] = _float(job_input.get("extension_m2"),
                                   "extension_m2", None, 1.0, 500.0)
     spec["build_cost"] = _float(job_input.get("build_cost"), "build_cost",
@@ -888,6 +936,17 @@ def _check_required_inputs(spec):
             "price needs measured quantities, or something to derive them "
             "from: pass quantities directly (roof mode returns them), or "
             "ifc_url, roomplan_url, or point_cloud_url.")
+
+    if mode == "render":
+        if not spec["gps"]:
+            raise InputError(
+                "render needs gps {lat, lon} of the HOUSE itself — a "
+                "postcode centroid lands on the wrong roof. Pin the house "
+                "first (the aerial from roof mode shows it).")
+        if not spec["render_zone"]:
+            raise InputError(
+                "render needs render_zone — the measured rectangle the "
+                "extension must stay inside. See validation of its fields.")
 
     if mode == "valuation" and not (spec["postcode"] or spec["address"]):
         raise InputError(
