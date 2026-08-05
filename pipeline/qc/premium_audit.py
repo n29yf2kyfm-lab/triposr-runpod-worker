@@ -191,15 +191,40 @@ TUNER = re.compile(r"(?i)\b(lb.?works|liberty.?walk|abt|mansory|brabus|rocket.?b
 
 
 def nameplate(name):
-    """The model token a duplicate cluster is keyed on: a3, q7, r8, tt, e-tron.
+    """The model token a duplicate cluster is keyed on: a3, q7, r8, 3series, x5.
 
     Without this, two different cars by one prolific author (an A3 and a Q5 that
     happen to land within 2% on face count) would cluster as duplicates of each
     other and one would be scrapped for no reason.
+
+    The pattern was Audi-only when it was written, which made G9 and G11 silently
+    blind to every other marque: on 902 BMW candidates it matched nothing and
+    found zero duplicates, not because there were none but because "3 Series"
+    and "X5" are not Audi model codes. Patterns are ordered longest-first so
+    "3 series" wins over the bare "s3"-shaped fallback, and each marque's
+    additions are listed separately so the next wave can extend it without
+    disturbing the ones already validated.
     """
-    n = (name or "").lower()
-    m = re.search(r"\b(rs\s?\d|sq\d|s\d|[aq]\d|r8|tt|e.?tron)\b", n)
-    return re.sub(r"[\s.-]", "", m.group(1)) if m else ""
+    n = re.sub(r"[_.]+", " ", (name or "").lower())
+    for pat in (
+        # BMW -- series numbers, X/Z/i ranges, M cars
+        r"\b(\d)\s*series\b", r"\b([xz]\d)\b", r"\b(i[x3-8])\b", r"\b(m\d)\b",
+        r"\b(xm)\b",
+        # Audi
+        r"\b(rs\s?\d|sq\d|s\d|[aq]\d|r8|tt|e.?tron)\b",
+        # BMW engine codes (520i, 116d, 740Li) -- LAST on purpose. It is the
+        # loosest pattern here and would otherwise eat a trailing power figure
+        # in another marque's title ("Audi A6 3.0 TDI 245" -> "2series"), so
+        # every named model code gets to match before it does. The optional
+        # leading m catches M340i/M550i, whose digits carry no word boundary.
+        r"\bm?([1-8])\d{2}[a-z]{0,2}\b",
+    ):
+        m = re.search(pat, n)
+        if m:
+            g = m.group(1)
+            return (g + "series") if "series" in pat or pat.endswith(r"[a-z]{0,2}\b") \
+                else re.sub(r"[\s-]", "", g)
+    return ""
 
 
 def duplicate_clusters(rows):
