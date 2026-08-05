@@ -148694,5 +148694,1939 @@
    ]
   },
   "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-tts-ad1-v1",
+  "make": "audi",
+  "model": "tts",
+  "modelFamily": "audi tts",
+  "modelAliases": [
+   "tts"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "140dda12dd2644bc953b02058b62320d",
+  "sourceRetrievedAt": "2026-08-05",
+  "sourceEvidenceUrl": null,
+  "licence": "Free Standard",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "r_glass",
+   "glass",
+   "r_glass_001"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-tts-ad1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-tts-ad1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 27884640,
+  "mobileFileSizeBytes": 27884640,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "19349dc78d226af0bfffa3b0d90cdfd9c05931633dc71518fc5d3e2ae650c14f",
+  "pipelineVersion": "publish-batch-ad1-2026-08-05",
+  "publishedAt": "2026-08-05",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ad1 gated publish 2026-08-05: licence recorded as 'Free Standard' (author ''), owner keep verdict 2026-08-05, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ad1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-a7-2017-ad1-v1",
+  "make": "audi",
+  "model": "a7",
+  "modelFamily": "audi a7",
+  "modelAliases": [
+   "a7"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2017,
+  "yearEnd": null,
+  "bodyStyle": "sportback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "a5b6383c37fb47c6bc9e927b4eaef563",
+  "sourceRetrievedAt": "2026-08-05",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Default_Metallic_Paint",
+   "White_Paint"
+  ],
+  "glassMaterialNames": [
+   "Glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2017-ad1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a7-2017-ad1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 30510772,
+  "mobileFileSizeBytes": 30510772,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d04bb081c4100a907b71e3d67a75a421c7358339a8a9b0a8f05c117cdddd70e3",
+  "pipelineVersion": "publish-batch-ad1-2026-08-05",
+  "publishedAt": "2026-08-05",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ad1 gated publish 2026-08-05: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-05, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ad1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-q4-e-tron-ad1-v1",
+  "make": "audi",
+  "model": "q4 e-tron",
+  "modelFamily": "audi q4 e-tron",
+  "modelAliases": [
+   "q4 e-tron"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "17930a5fbd6a4868b4f25c5c1ec1915b",
+  "sourceRetrievedAt": "2026-08-05",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Exterior_main"
+  ],
+  "glassMaterialNames": [
+   "Windowglass",
+   "Glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q4-e-tron-ad1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q4-e-tron-ad1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 45895988,
+  "mobileFileSizeBytes": 45895988,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "ffb975b87746305cf85beac3c28b0f68644f784ef146ccc482895e61e5a7100c",
+  "pipelineVersion": "publish-batch-ad1-2026-08-05",
+  "publishedAt": "2026-08-05",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ad1 gated publish 2026-08-05: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-05, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ad1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-s3-ad1-v1",
+  "make": "audi",
+  "model": "s3",
+  "modelFamily": "audi s3",
+  "modelAliases": [
+   "s3"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "4658de67e4444184b6e5d29facc09038",
+  "sourceRetrievedAt": "2026-08-05",
+  "sourceEvidenceUrl": null,
+  "licence": "Free Standard",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "VIDROS",
+   "BLACKGLASS",
+   "REDCLEAR"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-s3-ad1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-s3-ad1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 25392748,
+  "mobileFileSizeBytes": 25392748,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "115812543949c3a146317d63bafe4bdca64cf72a9b2059fb7fbf42c959faa615",
+  "pipelineVersion": "publish-batch-ad1-2026-08-05",
+  "publishedAt": "2026-08-05",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ad1 gated publish 2026-08-05: licence recorded as 'Free Standard' (author ''), owner keep verdict 2026-08-05, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ad1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-s5-2021-ad1-v1",
+  "make": "audi",
+  "model": "s5",
+  "modelFamily": "audi s5",
+  "modelAliases": [
+   "s5"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": "convertible",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "eb5e1f8ff3224d5296d28913edea1229",
+  "sourceRetrievedAt": "2026-08-05",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "M_2021_Audi_S5_Convertible_Quantum_Grey",
+   "M_2021_Audi_S5_Convertible_UnderCarrier"
+  ],
+  "glassMaterialNames": [
+   "M_2021_Audi_S5_Convertible_Windows",
+   "M_2021_Audi_S5_Convertible_WindowsTrims",
+   "M_2021_Audi_S5_Convertible_BrakeLightsGlass",
+   "M_2021_Audi_S5_Convertible_HeadLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-s5-2021-ad1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-s5-2021-ad1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 47739028,
+  "mobileFileSizeBytes": 47739028,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "ab8f7e5604a1cf79e8fd0058ec96b099b028f942c04a16ea05a423d3118addf5",
+  "pipelineVersion": "publish-batch-ad1-2026-08-05",
+  "publishedAt": "2026-08-05",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ad1 gated publish 2026-08-05: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-05, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ad1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-rs3-2022-ad1-v1",
+  "make": "audi",
+  "model": "rs3",
+  "modelFamily": "audi rs3",
+  "modelAliases": [
+   "rs3"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": null,
+  "bodyStyle": "sportback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "43fa3a263daf4c2da6e303d4d388bdd7",
+  "sourceRetrievedAt": "2026-08-05",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "glass_clear"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs3-2022-ad1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs3-2022-ad1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 23701224,
+  "mobileFileSizeBytes": 23701224,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "ccb3dff6e3e9eee477b067c171a39e33869252dd8f79a1a0be72b2e2a51dcd54",
+  "pipelineVersion": "publish-batch-ad1-2026-08-05",
+  "publishedAt": "2026-08-05",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ad1 gated publish 2026-08-05: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-05, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ad1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-rs5-2021-ad1-v1",
+  "make": "audi",
+  "model": "rs5",
+  "modelFamily": "audi rs5",
+  "modelAliases": [
+   "rs5"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": "sportback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "75088a5f8c2940fc8baac4ad98bec713",
+  "sourceRetrievedAt": "2026-08-05",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "rs5Car_paint3"
+  ],
+  "glassMaterialNames": [
+   "rs5Windshiled2",
+   "rs5Roof_black2",
+   "rs5Tail_cover4",
+   "rs5HL_Cover2"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs5-2021-ad1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs5-2021-ad1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 22942736,
+  "mobileFileSizeBytes": 22942736,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "4f1b779ac1f79553562e063b9331771dcdd792fd21830d2525d0c6564df37e5f",
+  "pipelineVersion": "publish-batch-ad1-2026-08-05",
+  "publishedAt": "2026-08-05",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ad1 gated publish 2026-08-05: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-05, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ad1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-rs5-2020-ad1-v1",
+  "make": "audi",
+  "model": "rs5",
+  "modelFamily": "audi rs5",
+  "modelAliases": [
+   "rs5"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "61ca88b0c03447a78ea9aded4ad04b85",
+  "sourceRetrievedAt": "2026-08-05",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint"
+  ],
+  "glassMaterialNames": [
+   "Window"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs5-2020-ad1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs5-2020-ad1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 10589144,
+  "mobileFileSizeBytes": 10589144,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f3d295798d31fd0b36ea7e16db3430cd87e2759bd281ee5c8da8e014f49876a4",
+  "pipelineVersion": "publish-batch-ad1-2026-08-05",
+  "publishedAt": "2026-08-05",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ad1 gated publish 2026-08-05: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-05, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ad1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-rs6-2021-ad1-v1",
+  "make": "audi",
+  "model": "rs6",
+  "modelFamily": "audi rs6",
+  "modelAliases": [
+   "rs6"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": "estate",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "3d9072a19a3a4c1189bccb49d314e8ce",
+  "sourceRetrievedAt": "2026-08-05",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint",
+   "paint2"
+  ],
+  "glassMaterialNames": [
+   "Glass",
+   "glassinside"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-2021-ad1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs6-2021-ad1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 18111880,
+  "mobileFileSizeBytes": 18111880,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "4b97144acdc7ecc70b31d7c128edf4bc671aa43af72578fc55889adb0568f909",
+  "pipelineVersion": "publish-batch-ad1-2026-08-05",
+  "publishedAt": "2026-08-05",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ad1 gated publish 2026-08-05: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-05, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ad1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-r8-ad1-v1",
+  "make": "audi",
+  "model": "r8",
+  "modelFamily": "audi r8",
+  "modelAliases": [
+   "r8"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "d7fb18d450124225a97bdd4b2d122d59",
+  "sourceRetrievedAt": "2026-08-05",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Car_Paint",
+   "Car_Paint.001"
+  ],
+  "glassMaterialNames": [
+   "Window",
+   "Headlight_glass",
+   "Rearlight_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-r8-ad1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-r8-ad1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 39036496,
+  "mobileFileSizeBytes": 39036496,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "0b498de4ea66d08c574a8c131be6429f213e5e68bf784a8682503bbb8d5ea0b2",
+  "pipelineVersion": "publish-batch-ad1-2026-08-05",
+  "publishedAt": "2026-08-05",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ad1 gated publish 2026-08-05: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-05, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ad1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-rs-e-tron-gt-2026-ad1-v1",
+  "make": "audi",
+  "model": "rs e-tron gt",
+  "modelFamily": "audi rs e-tron gt",
+  "modelAliases": [
+   "rs e-tron gt"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2026,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "7d46935b6a6048429332156ff6d9bdb5",
+  "sourceRetrievedAt": "2026-08-05",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "EXT_BODYBLACK_12",
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "EXT_WINDOW_GLASS",
+   "INT_GLASS",
+   "GlassRed1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs-e-tron-gt-2026-ad1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-rs-e-tron-gt-2026-ad1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 25878660,
+  "mobileFileSizeBytes": 25878660,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "395f2ecada0a89d6b1839dd96c1303a505e892f17bfea688f818a53dc9851003",
+  "pipelineVersion": "publish-batch-ad1-2026-08-05",
+  "publishedAt": "2026-08-05",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ad1 gated publish 2026-08-05: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-05, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ad1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-sq5-sportback-2026-ad1-v1",
+  "make": "audi",
+  "model": "sq5 sportback",
+  "modelFamily": "audi sq5 sportback",
+  "modelAliases": [
+   "sq5 sportback"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2026,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "1c71c71d66394be89500171d067e8c82",
+  "sourceRetrievedAt": "2026-08-05",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Car_paint"
+  ],
+  "glassMaterialNames": [
+   "GlassBlack.001",
+   "GlassRed.001"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-sq5-sportback-2026-ad1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-sq5-sportback-2026-ad1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 21873768,
+  "mobileFileSizeBytes": 21873768,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "b398ba282789b5d7bc1a4970e251d8413829742472a18027a5f18bf6db7265b9",
+  "pipelineVersion": "publish-batch-ad1-2026-08-05",
+  "publishedAt": "2026-08-05",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ad1 gated publish 2026-08-05: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-05, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ad1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-s1-ad1-v1",
+  "make": "audi",
+  "model": "s1",
+  "modelFamily": "audi s1",
+  "modelAliases": [
+   "s1"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "ddcb8661b544409da43f58c9ca6beca0",
+  "sourceRetrievedAt": "2026-08-05",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Body0011Mtl"
+  ],
+  "glassMaterialNames": [
+   "Geovetroant1Mtl"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-s1-ad1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-s1-ad1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 17001912,
+  "mobileFileSizeBytes": 17001912,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f1f3caa5784b8639ec13902ae9cf352b6b0351fac8816d9b140fc9ab43e79e04",
+  "pipelineVersion": "publish-batch-ad1-2026-08-05",
+  "publishedAt": "2026-08-05",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ad1 gated publish 2026-08-05: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-05, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ad1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
