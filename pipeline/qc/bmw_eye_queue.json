@@ -1,6 +1,6 @@
 [
  {
-  "_scope": "owner decision: review the 213 G6 clean-splits only. flagged rows (G5/G4/G10) stay here unjudged and unscrapped -- each needs remedial work even if the eye liked it. deferred, not rejected: drop the --gate filter to pick them up."
+  "_scope": "owner decision: review the G6 clean-splits only. flagged rows (G5/G4/G10) stay here unjudged and unscrapped -- each needs remedial work even if the eye liked it. deferred, not rejected: drop the --gate filter to pick them up."
  },
  {
   "uid": "3fdc4ab04e384ec5bdc26eed6700517f",
@@ -499,22 +499,6 @@
   "auditReason": "9 body material(s), coverage 0.624 - paint would bleed into trim/glass; fixable by a material split"
  },
  {
-  "uid": "2e32a3e273ab482b83970603539de06a",
-  "name": "BMW 3-Series E46 1998-2006",
-  "faces": 831308,
-  "likes": 10,
-  "licence": "CC Attribution",
-  "author": "Merc_TV",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 3,
-  "coverage": 0.291,
-  "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "3 body material(s), coverage 0.291 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
   "uid": "20e97631ea1f40c5ac4d6afa974858d8",
   "name": "BMW E36",
   "faces": 826708,
@@ -995,22 +979,6 @@
   "auditReason": "9 body material(s), coverage 0.320 - paint would bleed into trim/glass; fixable by a material split"
  },
  {
-  "uid": "cfcdf32ecf454d6a968c1210a7e071b1",
-  "name": "BMW 3-Series E30 1982-1994",
-  "faces": 644224,
-  "likes": 8,
-  "licence": "CC Attribution",
-  "author": "Merc_TV",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 8,
-  "coverage": 0.342,
-  "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "8 body material(s), coverage 0.342 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
   "uid": "94d5aa388336407d96a76af50d9948be",
   "name": "Llanta BMW",
   "faces": 638464,
@@ -1089,22 +1057,6 @@
   "auditGate": "G5",
   "auditVerdict": "SALVAGE",
   "auditReason": "1 body material(s), coverage 0.764 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
-  "uid": "3368810eb1fa4c78b21b406c00e172d7",
-  "name": "BMW E60 5-Series 2004-2010",
-  "faces": 624259,
-  "likes": 9,
-  "licence": "CC Attribution",
-  "author": "Merc_TV",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 2,
-  "coverage": 0.215,
-  "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 2 body material(s), coverage 0.215"
  },
  {
   "uid": "774e5fd51fdd4b0e96639adf8a8e4e35",
@@ -1609,22 +1561,6 @@
   "likes": 644,
   "licence": "CC Attribution",
   "author": "autoNgraphic",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 6,
-  "coverage": 0.465,
-  "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "6 body material(s), coverage 0.465 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
-  "uid": "31bda0b5f0764992acf80014d0676cf5",
-  "name": "BMW F22",
-  "faces": 516384,
-  "likes": 8,
-  "licence": "CC Attribution",
-  "author": "El Misterioso",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 6,
@@ -5667,22 +5603,6 @@
   "auditReason": "9 body material(s), coverage 0.735 - paint would bleed into trim/glass; fixable by a material split"
  },
  {
-  "uid": "9eac54389f0541aba2dfd9c30d1cd5b7",
-  "name": "Bmw 5-Series F10 2010-2017",
-  "faces": 130102,
-  "likes": 11,
-  "licence": "CC Attribution",
-  "author": "Merc_TV",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 7,
-  "coverage": 0.531,
-  "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "7 body material(s), coverage 0.531 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
   "uid": "8682f4a557bc44ad8ae47b23aa687bcb",
   "name": "Bmw e3 blender free+paintable",
   "faces": 128586,
@@ -6771,38 +6691,6 @@
   "auditReason": "only 85,115 faces - thin for four-view scrutiny, needs an eye"
  },
  {
-  "uid": "6d4ca2cabcee4c6f9980a5b019b01448",
-  "name": "BMW 7-series (F01)",
-  "faces": 85018,
-  "likes": 31,
-  "licence": "CC Attribution",
-  "author": "Savelliy 07",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 1,
-  "coverage": 0.266,
-  "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 1 body material(s), coverage 0.266"
- },
- {
-  "uid": "96a46925bdd04f35941abccc6f5f0c13",
-  "name": "bmw_7-series_f01",
-  "faces": 85018,
-  "likes": 2,
-  "licence": "CC Attribution",
-  "author": "9810264190",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 1,
-  "coverage": 0.266,
-  "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 1 body material(s), coverage 0.266"
- },
- {
   "uid": "bc3e714e021b44f4844ddf847288e99a",
   "name": "2020 BMW X4",
   "faces": 83914,
@@ -7187,22 +7075,6 @@
   "auditReason": "only 73,531 faces - thin for four-view scrutiny, needs an eye"
  },
  {
-  "uid": "75cf6cb2fb4540c4b5ee4e15a87b24d4",
-  "name": "BMW 750d",
-  "faces": 73531,
-  "likes": 9,
-  "licence": "CC Attribution",
-  "author": "bharathsrk13",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 3,
-  "coverage": 0.612,
-  "sheetVerdict": "split",
-  "auditGate": "G4",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "only 73,531 faces - thin for four-view scrutiny, needs an eye"
- },
- {
   "uid": "e453bdae0ee1423ea79f1322db1c7459",
   "name": "1986 BMW E30 (FL, LP)",
   "faces": 72700,
@@ -7217,22 +7089,6 @@
   "auditGate": "G4",
   "auditVerdict": "SALVAGE",
   "auditReason": "only 72,700 faces - thin for four-view scrutiny, needs an eye"
- },
- {
-  "uid": "5a7c1d10d26c4814860a3cec3174789f",
-  "name": "1986_bmw_e30_fl_lp",
-  "faces": 72678,
-  "likes": 3,
-  "licence": "CC Attribution",
-  "author": "rexrain studio",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 3,
-  "coverage": 0.332,
-  "sheetVerdict": "split",
-  "auditGate": "G4",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "only 72,678 faces - thin for four-view scrutiny, needs an eye"
  },
  {
   "uid": "6778694cf5de49adb80a819cb8b35c4b",

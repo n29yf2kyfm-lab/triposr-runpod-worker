@@ -205,7 +205,7 @@ def nameplate(name):
     additions are listed separately so the next wave can extend it without
     disturbing the ones already validated.
     """
-    n = re.sub(r"[_.]+", " ", (name or "").lower())
+    n = re.sub(r"[-_.]+", " ", (name or "").lower())
     for pat in (
         # BMW -- series numbers, X/Z/i ranges, M cars
         r"\b(\d)\s*series\b", r"\b([xz]\d)\b", r"\b(i[x3-8])\b", r"\b(m\d)\b",
@@ -218,6 +218,17 @@ def nameplate(name):
         # every named model code gets to match before it does. The optional
         # leading m catches M340i/M550i, whose digits carry no word boundary.
         r"\bm?([1-8])\d{2}[a-z]{0,2}\b",
+        # Chassis codes (E31, E46, F30, G20) -- many titles carry nothing else:
+        # "BMW E31" and "BMW M8 (E31)" are the same 670,440-face file under two
+        # authors, and without this they resolve to different nameplates and
+        # G11 never compares them. 69 of 731 BMW rows had no nameplate at all
+        # until this pattern existed. LAST of all on purpose: a title carrying both a
+        # chassis code and a series or engine number ("BMW F30 320d") must key on
+        # the series, or it fragments away from every other 3 Series. It groups an E46 Coupe with an E46
+        # Touring, which is no coarser than the "3series" key already grouping
+        # a saloon with an estate -- the face-count and coverage tolerances are
+        # what stop different bodies pairing, not the key.
+        r"\b([efg]\d{2})\b",
     ):
         m = re.search(pat, n)
         if m:

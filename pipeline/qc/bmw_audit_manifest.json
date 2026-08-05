@@ -203,9 +203,9 @@
   "bodyMaterials": 0,
   "coverage": 0.0,
   "sheetVerdict": "split",
-  "auditGate": "G2",
+  "auditGate": "G11",
   "auditVerdict": "SCRAP",
-  "auditReason": "no body material - DVLA colour can never be applied"
+  "auditReason": "same file as 34cbf0494ce64181aebc8383ecce40c5 (1,102,371 f) re-uploaded by a different author at 1,088,157 f - identical coverage 0.0"
  },
  {
   "uid": "7107678acf7b4e0f8ebd7d8b5f2f6da9",
@@ -219,9 +219,9 @@
   "bodyMaterials": 0,
   "coverage": 0.0,
   "sheetVerdict": "split",
-  "auditGate": "G11",
+  "auditGate": "G9",
   "auditVerdict": "SCRAP",
-  "auditReason": "same file as 34cbf0494ce64181aebc8383ecce40c5 (1,102,371 f) re-uploaded by a different author at 1,088,156 f - identical coverage 0.0"
+  "auditReason": "near-duplicate of c4a7c1b7dc564c2bb408dda4880e8723 (1,088,157 f) by the same author at 1,088,156 f - within 2%"
  },
  {
   "uid": "b78e420240f44349bd4efc21f01afe66",
@@ -411,9 +411,9 @@
   "bodyMaterials": 2,
   "coverage": 0.985,
   "sheetVerdict": "split",
-  "auditGate": "G1",
+  "auditGate": "G9",
   "auditVerdict": "SCRAP",
-  "auditReason": "coverage 0.985 - one material spans the car; no separate glass or lamp lenses; tint recolour proven to flood them"
+  "auditReason": "near-duplicate of 29b3d481cf3f438e8a7f1ddea33de727 (1,016,765 f) by the same author at 1,003,422 f - within 2%"
  },
  {
   "uid": "f1097224b2c240e3903b20ec46d471b5",
@@ -1035,9 +1035,9 @@
   "bodyMaterials": 3,
   "coverage": 0.291,
   "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "3 body material(s), coverage 0.291 - paint would bleed into trim/glass; fixable by a material split"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of 5b63530830944183a6d3c194e1e166a5 (841,108 f) by the same author at 831,308 f - within 2%"
  },
  {
   "uid": "20e97631ea1f40c5ac4d6afa974858d8",
@@ -1947,9 +1947,9 @@
   "bodyMaterials": 8,
   "coverage": 0.342,
   "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "8 body material(s), coverage 0.342 - paint would bleed into trim/glass; fixable by a material split"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of 1ffeebe4ed364ab08a16c274d9398574 (652,494 f) by the same author at 644,224 f - within 2%"
  },
  {
   "uid": "a509ae91bbe64e30b67ea0e758b2f0d6",
@@ -2059,9 +2059,9 @@
   "bodyMaterials": 2,
   "coverage": 0.215,
   "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 2 body material(s), coverage 0.215"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of b607c870d0ee440c934c19c953eb0f7b (626,912 f) by the same author at 624,259 f - within 2%"
  },
  {
   "uid": "774e5fd51fdd4b0e96639adf8a8e4e35",
@@ -2715,9 +2715,9 @@
   "bodyMaterials": 6,
   "coverage": 0.465,
   "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "6 body material(s), coverage 0.465 - paint would bleed into trim/glass; fixable by a material split"
+  "auditGate": "G11",
+  "auditVerdict": "SCRAP",
+  "auditReason": "same file as d4ffe0df9066481fa028eb1e1348c4b0 (516,422 f) re-uploaded by a different author at 516,384 f - identical coverage 0.465"
  },
  {
   "uid": "d90e6bded27a49e5aed006a3df8d2d4f",
@@ -8459,9 +8459,9 @@
   "bodyMaterials": 1,
   "coverage": 1.0,
   "sheetVerdict": "split",
-  "auditGate": "G1",
+  "auditGate": "G9",
   "auditVerdict": "SCRAP",
-  "auditReason": "coverage 1.000 - one material spans the car; no separate glass or lamp lenses; tint recolour proven to flood them"
+  "auditReason": "near-duplicate of a471598220664ff0b9e419c31ed0142e (150,210 f) by the same author at 150,210 f - within 2%"
  },
  {
   "uid": "81cfe93bd90f489893bd77134b496bd1",
@@ -8843,9 +8843,9 @@
   "bodyMaterials": 7,
   "coverage": 0.531,
   "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "7 body material(s), coverage 0.531 - paint would bleed into trim/glass; fixable by a material split"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of 012b5ced800446cb917a9c837fdfaadf (132,160 f) by the same author at 130,102 f - within 2%"
  },
  {
   "uid": "8682f4a557bc44ad8ae47b23aa687bcb",
@@ -10411,9 +10411,9 @@
   "bodyMaterials": 1,
   "coverage": 0.266,
   "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 1 body material(s), coverage 0.266"
+  "auditGate": "G11",
+  "auditVerdict": "SCRAP",
+  "auditReason": "same file as 0806c39847ae42e5996917f50527dda0 (85,186 f) re-uploaded by a different author at 85,018 f - identical coverage 0.266"
  },
  {
   "uid": "96a46925bdd04f35941abccc6f5f0c13",
@@ -10427,9 +10427,9 @@
   "bodyMaterials": 1,
   "coverage": 0.266,
   "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 1 body material(s), coverage 0.266"
+  "auditGate": "G11",
+  "auditVerdict": "SCRAP",
+  "auditReason": "same file as 0806c39847ae42e5996917f50527dda0 (85,186 f) re-uploaded by a different author at 85,018 f - identical coverage 0.266"
  },
  {
   "uid": "29a4c13761cb40e6a050871bd40a0963",
@@ -11051,9 +11051,9 @@
   "bodyMaterials": 3,
   "coverage": 0.612,
   "sheetVerdict": "split",
-  "auditGate": "G4",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "only 73,531 faces - thin for four-view scrutiny, needs an eye"
+  "auditGate": "G11",
+  "auditVerdict": "SCRAP",
+  "auditReason": "same file as ae06612d010344ea90d958b0af38deb7 (73,531 f) re-uploaded by a different author at 73,531 f - identical coverage 0.612"
  },
  {
   "uid": "5e13679409c74911ad8d95e288858440",
@@ -11099,9 +11099,9 @@
   "bodyMaterials": 3,
   "coverage": 0.332,
   "sheetVerdict": "split",
-  "auditGate": "G4",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "only 72,678 faces - thin for four-view scrutiny, needs an eye"
+  "auditGate": "G11",
+  "auditVerdict": "SCRAP",
+  "auditReason": "same file as e453bdae0ee1423ea79f1322db1c7459 (72,700 f) re-uploaded by a different author at 72,678 f - identical coverage 0.332"
  },
  {
   "uid": "6778694cf5de49adb80a819cb8b35c4b",

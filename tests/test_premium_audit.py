@@ -93,7 +93,15 @@ for name, want in (("Audi A3 2021 trim", "a3"), ("audi q5 L", "q5"),
                    # cluster together instead of splitting into two nameplates
                    ("Audi RS 6 Avant", "rs6"), ("Audi e-tron GT", "etron"),
                    ("2003 Audi TT-R DTM", "tt"), ("Audi R8 V10", "r8"),
-                   ("Volkswagen Golf", "")):
+                   ("Volkswagen Golf", ""),
+                   # BMW: named model codes beat the engine number, which beats
+                   # the chassis code. "F30 320d" must key on the series or it
+                   # fragments away from every other 3 Series; "E31" alone has
+                   # nothing else to key on and the chassis code is all there is
+                   ("BMW 3-Series Touring", "3series"), ("BMW F30 320d", "3series"),
+                   ("BMW 520i Touring", "5series"), ("BMW M3 E46", "m3"),
+                   ("BMW M8 (E31)", "m8"), ("BMW E31", "e31"),
+                   ("BMW E46 Coupe", "e46"), ("BMW X5 E70", "x5")):
     check(f"nameplate({name!r})", nameplate(name), want)
 
 print("G10 thin paint flags but never scraps")
