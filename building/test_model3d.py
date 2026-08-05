@@ -1050,6 +1050,51 @@ check("15c flush rooms still share a doored internal wall",
           for w in _f15["walls"]))
 
 
+# --- 16. the ridge goes where the drawing says, not where the guess does ----
+# A real section sheet (7370-W-603, a 5.4m-front 8.9m-deep terrace type)
+# ridges along its FRONTAGE — the shorter axis — and spans 9.1m in one go.
+# The longest-axis default gets both wrong: ridge turned 90 degrees, and the
+# 9m span cap splitting one clear trussed roof into two ranges with an
+# invented valley gutter on the quote.
+_r16 = M.roof_over(0, 0, 5.38, 8.87, pitch_deg=35, kind="gabled",
+                   overhang=0.13, base_z=4.95)
+check("16a the default still ridges along the longer axis",
+      _r16["along_x"] is False)
+_r16b = M.roof_over(0, 0, 5.38, 8.87, pitch_deg=35, kind="gabled",
+                    overhang=0.13, base_z=4.95, ridge_along="x", max_span=10)
+check("16b ridge_along overrides the longest-axis guess",
+      _r16b["along_x"] is True and _r16b["ranges"] == 1)
+check("16c one clear span once max_span says the drawing shows one",
+      abs(_r16b["span_m"] - 9.13) < 0.01, str(_r16b["span_m"]))
+check("16d rise follows the stated span", abs(_r16b["rise_m"] - 3.196) < 0.01,
+      str(_r16b["rise_m"]))
+try:
+    M.roof_over(0, 0, 5, 8, ridge_along="diagonal")
+    check("16e a nonsense ridge_along is refused", False)
+except M.ModelError:
+    check("16e a nonsense ridge_along is refused", True)
+# and the whole thing flows through build()'s roof dict, None-safe
+_b16 = M.build([M.Room("Plate", 0, 0, 4.78, 8.27)], storeys=2,
+               storey_height=2.75,
+               roof={"pitch_deg": 35, "kind": "gabled", "overhang_m": 0.43,
+                     "ridge_along": "x", "max_span_m": 10,
+                     "storeys": None})
+check("16f build() plumbs ridge_along and max_span through",
+      _b16["roof"]["along_x"] is True and _b16["roof"]["ranges"] == 1)
+# ...and through the VALIDATOR, where both keys died on their first outing:
+# build() accepted them, parse_job's whitelist silently dropped them, and
+# the ridge came back turned 90 degrees. The joint, again.
+import validation as _val16  # noqa: E402
+_s16 = _val16.parse_job({"mode": "model", "plan": {
+    "rooms": [{"name": "R", "x": 0, "y": 0, "width_m": 4.78,
+               "depth_m": 8.27}],
+    "roof": {"pitch_deg": 35, "kind": "gabled", "ridge_along": "x",
+             "max_span_m": 10}}})
+check("16g parse_job keeps ridge_along and max_span_m",
+      _s16["plan"]["roof"]["ridge_along"] == "x"
+      and _s16["plan"]["roof"]["max_span_m"] == 10.0)
+
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

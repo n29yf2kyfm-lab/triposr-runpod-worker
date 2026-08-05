@@ -372,6 +372,17 @@ def _plan(value):
                             ("hipped", "gabled"), default="hipped"),
             "overhang_m": _float(roof.get("overhang_m"),
                                  "plan.roof.overhang_m", None, 0.0, 2.0),
+            # Both exist because a real section sheet needed them, and both
+            # DIED HERE on their first outing — build() accepted them but
+            # this whitelist silently dropped them, so the ridge came back
+            # turned 90 degrees. The fourth appearance of the dead-input
+            # pattern in this codebase: a documented field is not a wired
+            # field until a job has been seen using it.
+            "ridge_along": _one_of(roof.get("ridge_along"),
+                                   "plan.roof.ridge_along", ("x", "y"),
+                                   default=None),
+            "max_span_m": _float(roof.get("max_span_m"),
+                                 "plan.roof.max_span_m", None, 2.0, 30.0),
         }
     return out
 

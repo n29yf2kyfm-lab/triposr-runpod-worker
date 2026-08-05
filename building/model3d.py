@@ -294,7 +294,7 @@ MAX_ROOF_SPAN_M = 9.0
 
 def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
               overhang=DEFAULT_EAVES_OVERHANG_M, base_z=0.0,
-              max_span=MAX_ROOF_SPAN_M):
+              max_span=MAX_ROOF_SPAN_M, ridge_along=None):
     """A pitched roof over a rectangular footprint.
 
     THE NUMBER THAT MATTERS IS THE SLOPED AREA, not the plan area, and the
@@ -329,10 +329,19 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
         raise ModelError("a roof needs a positive footprint")
 
     theta = math.radians(pitch_deg)
-    # The ridge runs along the LONGER axis; the slope climbs across the
-    # shorter one. A footprint too deep to span in one go is split into that
-    # many parallel ranges across the short axis.
-    along_x = width >= depth
+    # The ridge runs along the LONGER axis by default; the slope climbs
+    # across the shorter one. That default is right for most plans and WRONG
+    # for a narrow-fronted house, which a real section sheet demonstrated:
+    # a 5.4m-front, 8.9m-deep terrace type ridges along its 5.4m frontage,
+    # spanning the full 8.9m depth — the exact opposite of longest-axis.
+    # `ridge_along` ("x" or "y") lets the caller state what the drawing
+    # shows instead of accepting the guess.
+    if ridge_along is None:
+        along_x = width >= depth
+    elif ridge_along in ("x", "y"):
+        along_x = ridge_along == "x"
+    else:
+        raise ModelError("ridge_along must be 'x' or 'y' when given")
     total_span = depth if along_x else width
     run = width if along_x else depth          # length of a ridge, gable end
     n_ranges = max(1, int(math.ceil(total_span / max_span - 1e-9)))
@@ -559,7 +568,13 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
             pitch_deg=_given("pitch_deg", DEFAULT_PITCH_DEG),
             kind=_given("kind", "hipped"),
             overhang=_given("overhang_m", DEFAULT_EAVES_OVERHANG_M),
-            base_z=eaves_z)
+            base_z=eaves_z,
+            ridge_along=_given("ridge_along", None),
+            # The default cap exists to stop a whole-building footprint
+            # being roofed in one impossible span. When the section shows
+            # one clear span — as a 9.1m trussed roof on a real sheet did —
+            # the caller states it and the drawing wins over the heuristic.
+            max_span=_given("max_span_m", MAX_ROOF_SPAN_M))
 
     top = roof_model["ridge_z_m"] if roof_model else eaves_z
 
