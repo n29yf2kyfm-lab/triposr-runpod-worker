@@ -126,5 +126,41 @@
  "5219e3bee5984350a8efd38dbc2675a6": [
   "SCRAP",
   "3 Series E36 saloon - NO WHEELS, all four arches empty with a bare damper propping the car up, and the front and rear bumper assemblies are detached and floating clear of the shell in every view. this is the survivor of the identical-face-count pair that exposed the G9 clustering bug; its twin is now auto-scrapped"
+ ],
+ "64351cab0b9248c1b317618c48517b00": [
+  "SCRAP",
+  "E31 8 Series - retracted pop-up lamp bays render as flat black rectangles with no internal structure, front bumper and rear quarter panels read soft and melted. the better E31 in this wave is the 850CSi at 668,986 f"
+ ],
+ "ae6fe26a8c4b4b8b8d4ec8630bdbcc47": [
+  "SCRAP",
+  "titled M8 (E31) but it is the IDENTICAL FILE to the E31 above - 670,440 f and cov 0.261 on both, different authors. G11 still cannot pair them because the named code M8 wins the nameplate for one and the chassis code E31 for the other, which is the precedence tradeoff I chose deliberately. also mislabelled: the E31 M8 was a single prototype, never produced"
+ ],
+ "f4a831ecb5c1492c8fef8030d913aaa8": [
+  "KEEP",
+  "850CSi E31 1996 669k f cov 0.241 - the library has no E31; bmw-8-series-v1 is a modern G15. retracted pop-up bays show real internal structure, slim kidney grille with slat depth, period BBS-style alloys consistent across all four views, defined shut lines, smooth panels and clean gloss. HUMSTER3D plate would be replaced with GB"
+ ],
+ "394feedd0a0742c595917c7b0f6edcad": [
+  "SCRAP",
+  "M2 F87 wearing a BMW M livery wrap - red/blue/light-blue stripes baked across the bonnet, roof, doors and bumpers. with mats=2 at cov 0.266 the stripes are not the paint material, so they survive all eight colour swaps. bmw-m2-v1 already covers the M2"
+ ],
+ "b607c870d0ee440c934c19c953eb0f7b": [
+  "SCRAP",
+  "5 Series E39 - EXPLODED. bonnet floating above the roof, all four wheels off with only bare hubs left, headlight and tail lamp assemblies scattered in mid-air either side, engine bay open. a parts sheet, not an assembled car"
+ ],
+ "1cdb8a361e5c487c9218bbccd2575efa": [
+  "SCRAP",
+  "5 Series E34 - NO WHEELS, all four arches empty with a bare damper propping the shell up, and the glass carries a jagged white shard texture across the rear screen and door windows in every view"
+ ],
+ "d0cbf277689f4ed39b06e238bcd04f73": [
+  "SCRAP",
+  "ALPINA XB7 - an Alpina coachbuilt conversion, not the factory X7, on 23-inch Alpina Classic wheels with a bespoke bumper and spoiler. no-mods bar. the front left wheel also renders as a black void in the left three-quarter. bmw-x7-v1 already covers the X7"
+ ],
+ "3c788a7801464fef80e3db1965d1e129": [
+  "SCRAP",
+  "titled Alpine X7, 611,328 f against the Alpina XB7 at 611,337 f and identical cov 0.229 - the same file re-uploaded, 9 faces apart. G11 missed it because Alpine/Alpina both resolve to the x7 nameplate only via chassis fallback while the other keys on x7 directly. also an Alpina conversion, and here BOTH front wheels render as black voids"
+ ],
+ "beb2400a3bc54cd2b446a6819efeb47b": [
+  "KEEP",
+  "Z8 2000 580k f cov 0.264 - the library has no Z8 and no Z-car older than the Z4. proportions read as a Z8 instantly, the recessed side vent and long bonnet are right, headlights sit under clear covers with visible internal reflectors, five-spoke alloys with red calipers consistent across all four views, defined bonnet and door shut lines, hard top modelled, clean gloss"
  ]
 }
