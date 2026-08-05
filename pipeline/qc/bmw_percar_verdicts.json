@@ -78,5 +78,29 @@
  "4a918a985c0a4ea89ac3d65e1f95c0b7": [
   "SCRAP",
   "E39 5-Series is an ASSET PACK, not a car - three or four E39 bodies (saloon and touring) share the scene, several stripped to shells with doors removed, wheels missing and headlight assemblies floating loose, plus a cluster of stray dots above"
+ ],
+ "ad59e622808642ad9bc399b12364e405": [
+  "KEEP",
+  "i8 Roadster 2019 793k f cov 0.143 - the library has NO i8 at all and this is the roadster body. correct closed i8 grille, headlights carry internal LED structure, aero multi-spoke alloys consistent across all four views, defined shut lines including the butterfly door cut, interior modelled, clean gloss"
+ ],
+ "9d5ca9da045a44609b9394d0c229b5fb": [
+  "SCRAP",
+  "M5 G90 2024 - the asset is ROTATED onto its roof/side so every view shows the undercarriage, exhaust runs and suspension. no wheels fitted. second orientation defect in this project after the Audi A4 Avant rolled 180 degrees"
+ ],
+ "c1cb4e1ba20d423492d23a10106e499c": [
+  "SCRAP",
+  "3 Series F31 - UPSIDE DOWN, with both wheel pairs detached and parked separately beside the car, and stray white slab geometry blowing out the framing so the shell occupies a fraction of each view. three defects at once"
+ ],
+ "e952026741634220b451f327f065ec55": [
+  "SCRAP",
+  "M1 Concept - the 2008 M1 Hommage concept, a one-off show car that never entered production"
+ ],
+ "d1d98103c93142c9a54b217675d91165": [
+  "SCRAP",
+  "5 Series E60 - NO WHEELS, all four arches empty with a bare damper visible under the sill, and the front bumper/wing assembly is detached and floating clear of the body in the side and rear three-quarter views"
+ ],
+ "6b08783d39ab4967b975045653cc8f12": [
+  "SCRAP",
+  "M440i Gran Coupe 2022 - a large BLACK PATCH covers the front wing and door in both front three-quarters, and with mats=1 at cov 0.143 it is not the paint material, so it survives every colour. wheels also mismatched between views and the car is slammed on stretched tyres"
  ]
 }
