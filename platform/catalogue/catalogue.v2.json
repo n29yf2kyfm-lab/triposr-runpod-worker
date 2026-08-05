@@ -110804,6 +110804,51 @@
    "variantsHash": "60b65abc1a2572e908108da4ff93a791cc789ea6",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Platinum Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Light Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Perla Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Polar White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Eclipse Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -110964,6 +111009,51 @@
    "variantsHash": "8d188ef464fc27110b3622816a7a93e261693a8c",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Platinum Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Light Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Perla Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Polar White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Eclipse Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -111125,6 +111215,51 @@
    "variantsHash": "552a9353f6f5a2f66fdb51aaec06f5a20ec2a2a9",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Platinum Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Light Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Perla Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Polar White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Eclipse Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -111287,6 +111422,51 @@
    "variantsHash": "df7fc0cd910b8919630adbe550edd0216a516e72",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphene Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Magnetic Tech Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Midnight Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Nevada White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Petrol Blue Matte",
+     "colourFamily": "Petrol Blue",
+     "finish": "Matte"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Dark Forest",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -111549,6 +111729,52 @@
    "variantsHash": "d5f111270dcb381c62c4d6dc2204355733d4e8d0",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -112102,6 +112328,73 @@
    "variantsHash": "e47cb3cef2473860c461e9d6d34d12094ac820a0",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetic Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbonised Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Moondust Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Agate Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Frozen White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Chrome Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Desert Island Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Grabber Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fantastic Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mean Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -113031,6 +113324,61 @@
    "variantsHash": "6a7fa1cbc081183cf9d45641bdac7b3cc3f8dec9",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cyber Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Amazon Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Phantom Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Atlas White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Serenity White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Performance Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Intense Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultimate Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -113200,6 +113548,61 @@
    "variantsHash": "2e6d0ea4d3f592539b0a2e2973e2ec522fcd4f74",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cyber Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Amazon Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Phantom Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Atlas White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Serenity White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Performance Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Intense Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultimate Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -113545,6 +113948,62 @@
    "variantsHash": "2646e38284e6b9ea309fa0ca4166df93ac84b3dc",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -113715,6 +114174,62 @@
    "variantsHash": "5fd7a24b39294cfe026630b70d4873267051767f",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -113990,6 +114505,62 @@
    "variantsHash": "56fda53ceb2b90f8e970c8d9282b00282a7e67dd",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Interstellar Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Aurora Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Snow White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Fusion White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Mineral Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Runway Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Experience Green",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -114157,6 +114728,62 @@
    "variantsHash": "59ea334690cf8bd68b664505ae30f592705a15a5",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Interstellar Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Aurora Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Snow White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Fusion White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Mineral Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Runway Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Experience Green",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -114326,6 +114953,62 @@
    "variantsHash": "475bdbbfd8bdb7c3559d6a733d8d41bafedc278f",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Interstellar Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Aurora Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Snow White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Fusion White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Mineral Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Runway Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Experience Green",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -114499,6 +115182,62 @@
    "variantsHash": "cedf93cb13734eb41c204a97d70f88d1607f8f85",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Interstellar Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Aurora Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Snow White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Fusion White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Mineral Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Runway Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Experience Green",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -114667,6 +115406,62 @@
    "variantsHash": "f6253d5e76cbedbf3fb0465923e6dada685b364f",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Interstellar Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Aurora Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Snow White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Fusion White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Mineral Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Runway Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Experience Green",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -114843,6 +115638,62 @@
    "variantsHash": "b2707c7013aa98e8c65c9418c9293afdeb4d5f90",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Interstellar Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Aurora Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Snow White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Fusion White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Mineral Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Runway Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Experience Green",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -115019,6 +115870,62 @@
    "variantsHash": "ac4dc56853f239d8178c14bdabb513ecc1f19069",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -115203,6 +116110,62 @@
    "variantsHash": "668eee4b8bb0c52043e3a7e047237c8311d1f377",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -115377,6 +116340,62 @@
    "variantsHash": "bbb4835e4c1c4dd56c9b1aa1f49dcbaf9f99813d",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -115552,6 +116571,63 @@
    "variantsHash": "0e31db43fb67dd06df9cd6787d7549333c5e8afd",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Titanium",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mercury Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Sonic Silver",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Graphite Black",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Sonic White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Celestial Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Mesa Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Terrane Khaki",
+     "colourFamily": "Khaki Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -116063,6 +117139,56 @@
    "variantsHash": "e2adb839931a9b98a23374dfab579632b1c3f18b",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Machine Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Polymetal Grey Metallic",
+     "colourFamily": "Cement Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Mica",
+     "colourFamily": "Black",
+     "finish": "Mica"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Rhodium White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Snowflake White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Deep Crystal Blue Mica",
+     "colourFamily": "Dark Blue",
+     "finish": "Mica"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Soul Red Crystal",
+     "colourFamily": "Red",
+     "finish": "Crystal"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -116232,6 +117358,56 @@
    "variantsHash": "32b238e2007b77bf3c7acc398243af6958327f79",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Machine Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Polymetal Grey Metallic",
+     "colourFamily": "Cement Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Mica",
+     "colourFamily": "Black",
+     "finish": "Mica"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Rhodium White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Snowflake White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Deep Crystal Blue Mica",
+     "colourFamily": "Dark Blue",
+     "finish": "Mica"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Soul Red Crystal",
+     "colourFamily": "Red",
+     "finish": "Crystal"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -116401,6 +117577,56 @@
    "variantsHash": "79c8d5f98ce68abe0a25ac80c82c9e4fefab34ef",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Machine Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Polymetal Grey Metallic",
+     "colourFamily": "Cement Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Mica",
+     "colourFamily": "Black",
+     "finish": "Mica"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Rhodium White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Snowflake White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Deep Crystal Blue Mica",
+     "colourFamily": "Dark Blue",
+     "finish": "Mica"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Soul Red Crystal",
+     "colourFamily": "Red",
+     "finish": "Crystal"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -116708,6 +117934,52 @@
    "variantsHash": "a5034a670f751fc1f06f4f4f31c38e145316d399",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Sterling Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Mica",
+     "colourFamily": "Black",
+     "finish": "Mica"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "White Diamond",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Lightning Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Red Diamond",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -116861,6 +118133,52 @@
    "variantsHash": "35bd9336e0c5ca87c734d40846833ae139fbf44b",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Sterling Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Mica",
+     "colourFamily": "Black",
+     "finish": "Mica"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "White Diamond",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Lightning Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Red Diamond",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -117197,6 +118515,57 @@
    "variantsHash": "302e943af39e2eb1e550886aa8c6aa1f91c8533b",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Gun Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Ceramic Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Blade Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Pearl Black",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Storm White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Magnetic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fuji Sunset Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -117366,6 +118735,57 @@
    "variantsHash": "083da7c8b362db7b5f1129d493f45a5dbb45810a",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Gun Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Ceramic Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Blade Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Pearl Black",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Storm White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Magnetic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fuji Sunset Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -117536,6 +118956,57 @@
    "variantsHash": "5e1516856bf12f9da03e56d8763d14957329556d",
    "method": "render",
    "at": "2026-07-29"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Gun Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Ceramic Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Blade Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Pearl Black",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Storm White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Magnetic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fuji Sunset Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -118176,6 +119647,51 @@
    "variantsHash": "293eaa63b58f72830cd41a26fde6bbbfbcce92d9",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -118343,6 +119859,62 @@
    "variantsHash": "73cb16f99132ff26352aac3ecf455f64cfca82fe",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -118503,6 +120075,51 @@
    "variantsHash": "bca1a8c4086d014bb325b9d8552df0ac5be05b6d",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -118662,6 +120279,51 @@
    "variantsHash": "5909a161c9cd5fe511d1f56a1fae776467f765ff",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -118814,6 +120476,52 @@
    "variantsHash": "26fc70ae1ccfca7598a11b9dbeab10d3e8d09210",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Sterling Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Mica",
+     "colourFamily": "Black",
+     "finish": "Mica"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "White Diamond",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Lightning Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Red Diamond",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -118985,6 +120693,63 @@
    "variantsHash": "2cbdb7772d8b7628fe2ea97da2b537bb9646845b",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Titanium",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mercury Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Sonic Silver",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Graphite Black",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Sonic White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Celestial Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Mesa Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Terrane Khaki",
+     "colourFamily": "Khaki Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -119334,6 +121099,62 @@
    "variantsHash": "fc1698485e838e75edfd541a8527c847540da2a5",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -119502,6 +121323,56 @@
    "variantsHash": "8cc53eb343980444b18b16d8173d9f1a90c4e09c",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Machine Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Polymetal Grey Metallic",
+     "colourFamily": "Cement Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Mica",
+     "colourFamily": "Black",
+     "finish": "Mica"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Rhodium White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Snowflake White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Deep Crystal Blue Mica",
+     "colourFamily": "Dark Blue",
+     "finish": "Mica"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Soul Red Crystal",
+     "colourFamily": "Red",
+     "finish": "Crystal"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -119681,6 +121552,68 @@
    "variantsHash": "e37b044b833b57fed591c9fca4aa1d5a629cdee1",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Brilliant Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Black Magic Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Moon White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Race Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Energy Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Velvet Red Metallic",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mamba Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -120021,6 +121954,63 @@
    "variantsHash": "3661b58775aa63792116693077e9de553dfd9580",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Titanium",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mercury Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Sonic Silver",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Graphite Black",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Sonic White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Celestial Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Mesa Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Terrane Khaki",
+     "colourFamily": "Khaki Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -120211,6 +122201,77 @@
    "variantsHash": "3d7ccd182b3d983c4153781197c550053eefa50f",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -120314,6 +122375,72 @@
    "variantsHash": "99eedb0b5b5064eed933cea6d4c03f693b437c4b",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Selenite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mountain Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Graphite Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "High-Tech Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Obsidian Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cosmos Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Polar White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Digital White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Spectral Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -120484,6 +122611,56 @@
    "variantsHash": "b4cf10ff3e491efb8669f4568834e2f37a7ec83c",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Thunder Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Vapour Grey Metallic",
+     "colourFamily": "Light Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Onyx Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Crystal White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Denim Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Fjord Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Forest Lake Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -120759,6 +122936,62 @@
    "variantsHash": "d193498f2750cf935cf880e10d971094ab9399f8",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Stealth Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Midnight Silver Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Quicksilver",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Solid Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pearl White Multi-Coat",
+     "colourFamily": "Pearl White",
+     "finish": "Multi-coat"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Deep Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultra Red",
+     "colourFamily": "Red",
+     "finish": "Multi-coat"
+    },
+    {
+     "oemPaintName": "Midnight Cherry Red",
+     "colourFamily": "Dark Red",
+     "finish": "Multi-coat"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -120920,6 +123153,57 @@
    "variantsHash": "0699689a71c75adaaec873037540934c633e978a",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Ice Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Silica",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Crystal White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "WR Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Sapphire Blue Pearl",
+     "colourFamily": "Dark Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Crimson Red Pearl",
+     "colourFamily": "Dark Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -121090,6 +123374,62 @@
    "variantsHash": "0bcf1f54ed87d9ba40f92ba0e37befb6b6966530",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Stealth Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Midnight Silver Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Quicksilver",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Solid Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pearl White Multi-Coat",
+     "colourFamily": "Pearl White",
+     "finish": "Multi-coat"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Deep Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultra Red",
+     "colourFamily": "Red",
+     "finish": "Multi-coat"
+    },
+    {
+     "oemPaintName": "Midnight Cherry Red",
+     "colourFamily": "Dark Red",
+     "finish": "Multi-coat"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -121281,6 +123621,77 @@
    "variantsHash": "54a31b6709e49cc3b72e50901bc096cf7531f5f5",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -121465,6 +123876,72 @@
    "variantsHash": "74462485db91ef6bea641844675dd1c3f8df5874",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Decuma Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Manhattan Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Silver Blade Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Attitude Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Eclipse Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Juniper Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cyan Splash",
+     "colourFamily": "Turquoise Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Scarlet Flare",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -121646,6 +124123,62 @@
    "variantsHash": "1fa7f808d184e85113b8027cdbb023c1dd17b82e",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -121822,6 +124355,62 @@
    "variantsHash": "db41f6eac6714560ac3195d955ef0b730abf1070",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -121980,6 +124569,51 @@
    "variantsHash": "ea715fe803a59ce676a69335cc4f1b77cec02736",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -122150,6 +124784,63 @@
    "variantsHash": "561a9ab3db10fc56ee0d38349aa56d95cd9d335a",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Titanium",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mercury Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Sonic Silver",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Graphite Black",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Sonic White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Celestial Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Mesa Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Terrane Khaki",
+     "colourFamily": "Khaki Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -122311,6 +125002,51 @@
    "variantsHash": "4b0e2bcccb171d19514b78d6dc35ac206d62e419",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -122584,6 +125320,62 @@
    "variantsHash": "de3d222b62e22fc2625beb7cf1f2a33a6c3ad822",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Stealth Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Midnight Silver Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Quicksilver",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Solid Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pearl White Multi-Coat",
+     "colourFamily": "Pearl White",
+     "finish": "Multi-coat"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Deep Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultra Red",
+     "colourFamily": "Red",
+     "finish": "Multi-coat"
+    },
+    {
+     "oemPaintName": "Midnight Cherry Red",
+     "colourFamily": "Dark Red",
+     "finish": "Multi-coat"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -123080,6 +125872,52 @@
    "variantsHash": "84759d60034d8bd98bf02e408f3056c2bf15f161",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -123253,6 +126091,68 @@
    "variantsHash": "c60c8360abbc68a2ddc08bd4d5bafaaa3bbaa849",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Brilliant Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Black Magic Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Moon White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Race Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Energy Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Velvet Red Metallic",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mamba Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -123422,6 +126322,62 @@
    "variantsHash": "4c81d95e884d486589c86e9765de4f8ad13ccd5c",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Interstellar Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Aurora Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Snow White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Fusion White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Mineral Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Runway Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Experience Green",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -123581,6 +126537,57 @@
    "variantsHash": "501fbe367f15e240633c0a9575ae6448ace01c5c",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Ice Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Silica",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Crystal White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "WR Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Sapphire Blue Pearl",
+     "colourFamily": "Dark Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Crimson Red Pearl",
+     "colourFamily": "Dark Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -123852,6 +126859,62 @@
    "variantsHash": "8a2ff972157f9bf250d161be4731c2b6468e6880",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -124018,6 +127081,62 @@
    "variantsHash": "c699187123024c2633b5a9cb44bcdafe74bd45ff",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Interstellar Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Aurora Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Snow White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Fusion White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Mineral Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Runway Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Experience Green",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -124179,6 +127298,51 @@
    "variantsHash": "670b1756b9359cd835c2be0d22814e89fb23d6eb",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -124437,6 +127601,56 @@
    "variantsHash": "4d6282586b92536388225ab5752089702c3a1ddf",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Thunder Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Vapour Grey Metallic",
+     "colourFamily": "Light Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Onyx Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Crystal White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Denim Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Fjord Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Forest Lake Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -124633,6 +127847,77 @@
    "variantsHash": "59d561e7c95b633595c7539fb29411d08f5192e2",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -124794,6 +128079,57 @@
    "variantsHash": "f7aa51d9bd601839b87262d12515cd6c177edae9",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Ice Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Silica",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Crystal White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "WR Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Sapphire Blue Pearl",
+     "colourFamily": "Dark Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Crimson Red Pearl",
+     "colourFamily": "Dark Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -124955,6 +128291,51 @@
    "variantsHash": "662e8ddcf7b9e8571498635dcc0dc8da3392013f",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -125276,6 +128657,63 @@
    "variantsHash": "d61f1ad1666614323c2d4092401f8eba81af0071",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Titanium",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mercury Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Sonic Silver",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Graphite Black",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Sonic White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Celestial Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Mesa Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Terrane Khaki",
+     "colourFamily": "Khaki Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -125454,6 +128892,68 @@
    "variantsHash": "635330c00c6a1ecfa2fcd647a2551a5d415f03fc",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphic Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Quartz Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Crystal Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Arctic White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Cobalt Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Crimson Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": [
+    {
+     "oemPaintName": "Electric Yellow",
+     "colourFamily": "Yellow",
+     "finish": "Solid"
+    }
+   ]
   }
  },
  {
@@ -125624,6 +129124,62 @@
    "variantsHash": "929da0fa373fdcde71a40d2459a6c756d538b362",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Interstellar Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Aurora Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Snow White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Fusion White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Mineral Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Runway Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Experience Green",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -125790,6 +129346,62 @@
    "variantsHash": "8734dc12bd473d94d2c1a582dca1a6f159cf3bd7",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Stealth Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Midnight Silver Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Quicksilver",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Solid Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pearl White Multi-Coat",
+     "colourFamily": "Pearl White",
+     "finish": "Multi-coat"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Deep Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultra Red",
+     "colourFamily": "Red",
+     "finish": "Multi-coat"
+    },
+    {
+     "oemPaintName": "Midnight Cherry Red",
+     "colourFamily": "Dark Red",
+     "finish": "Multi-coat"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -126126,6 +129738,62 @@
    "variantsHash": "012d49bde8f1f7155aa8e3c8532bd3710a5afb9e",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Stealth Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Midnight Silver Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Quicksilver",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Solid Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pearl White Multi-Coat",
+     "colourFamily": "Pearl White",
+     "finish": "Multi-coat"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Deep Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultra Red",
+     "colourFamily": "Red",
+     "finish": "Multi-coat"
+    },
+    {
+     "oemPaintName": "Midnight Cherry Red",
+     "colourFamily": "Dark Red",
+     "finish": "Multi-coat"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -126286,6 +129954,51 @@
    "variantsHash": "236de90291a4044e2533cde19d56f26ca4c92cf7",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -126632,6 +130345,62 @@
    "variantsHash": "b3ecc74bc0dee65e493d61c8eff00c431fc7d55e",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -126903,6 +130672,62 @@
    "variantsHash": "c9838be15892fe7508ec23ccf2b935048955a4d4",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Stealth Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Midnight Silver Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Quicksilver",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Solid Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pearl White Multi-Coat",
+     "colourFamily": "Pearl White",
+     "finish": "Multi-coat"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Deep Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultra Red",
+     "colourFamily": "Red",
+     "finish": "Multi-coat"
+    },
+    {
+     "oemPaintName": "Midnight Cherry Red",
+     "colourFamily": "Dark Red",
+     "finish": "Multi-coat"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -127086,6 +130911,72 @@
    "variantsHash": "4f641d067b9ed2ad894f825bc46f3a5a462d9547",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Decuma Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Manhattan Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Silver Blade Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Attitude Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Eclipse Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Juniper Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cyan Splash",
+     "colourFamily": "Turquoise Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Scarlet Flare",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -127237,6 +131128,52 @@
    "variantsHash": "c47e32bbc146d12023bee526bb41bac141021438",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Sterling Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Mica",
+     "colourFamily": "Black",
+     "finish": "Mica"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "White Diamond",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Lightning Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Red Diamond",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -127407,6 +131344,63 @@
    "variantsHash": "1a758cd95b3dc3cbfb39c5172ce0356bd88292c2",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Rooftop Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Melting Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Midnight Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Nanuq White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Island Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Chili Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Rebel Green",
+     "colourFamily": "Dark Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -127510,6 +131504,72 @@
    "variantsHash": "9de954824d465b5b501c2e65c17f31db3c3761cb",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Selenite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mountain Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Graphite Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "High-Tech Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Obsidian Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cosmos Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Polar White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Digital White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Spectral Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -127784,6 +131844,73 @@
    "variantsHash": "084781896b359b6612f3e1e5d74470ccdd8697d2",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetic Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbonised Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Moondust Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Agate Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Frozen White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Chrome Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Desert Island Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Grabber Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fantastic Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mean Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -127960,6 +132087,68 @@
    "variantsHash": "3f5f551d164eb7a14273b3ac99054aa6de331e28",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Brilliant Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Black Magic Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Moon White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Race Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Energy Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Velvet Red Metallic",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mamba Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -128118,6 +132307,51 @@
    "variantsHash": "027b604404fa71cfe7544b77366d0017025e1af5",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -128222,6 +132456,72 @@
    "variantsHash": "d72e0bf08338fedd6973c7618367c9889706c048",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Selenite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mountain Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Graphite Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "High-Tech Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Obsidian Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cosmos Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Polar White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Digital White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Spectral Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -128492,6 +132792,63 @@
    "variantsHash": "fa5d9d90875a906ac6876960fc34add8e0840e51",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Rooftop Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Melting Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Midnight Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Nanuq White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Island Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Chili Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Rebel Green",
+     "colourFamily": "Dark Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -128817,6 +133174,62 @@
    "variantsHash": "2232ff2b27fb2d6946ac40beb2c030da469149bf",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -128986,6 +133399,63 @@
    "variantsHash": "e5de4e4007816a3e8c80088972522e624b828d82",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Titanium",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mercury Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Sonic Silver",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Graphite Black",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Sonic White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Celestial Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Mesa Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Terrane Khaki",
+     "colourFamily": "Khaki Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -129162,6 +133632,62 @@
    "variantsHash": "f9239854f0383fd9316d906b0013bb368956799e",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -129331,6 +133857,61 @@
    "variantsHash": "3a11e2b24fe615986042c1a7131a05e81ec3a095",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cyber Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Amazon Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Phantom Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Atlas White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Serenity White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Performance Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Intense Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultimate Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -129434,6 +134015,72 @@
    "variantsHash": "b78611b0cee58e1a3fa2fe30c69dd51940860674",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Selenite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mountain Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Graphite Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "High-Tech Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Obsidian Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cosmos Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Polar White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Digital White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Spectral Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -129728,6 +134375,77 @@
    "variantsHash": "b6e8ed415051cee947d2ea0c2ab579b525c37155",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -129917,6 +134635,73 @@
    "variantsHash": "4be1de784918fb0da825edeefd3c91ade9d2e8f6",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetic Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbonised Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Moondust Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Agate Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Frozen White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Chrome Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Desert Island Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Grabber Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fantastic Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mean Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -130182,6 +134967,61 @@
    "variantsHash": "10ef6267f822dc77625af9aba22fdf296acbacf7",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cyber Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Amazon Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Phantom Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Atlas White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Serenity White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Performance Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Intense Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultimate Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -130369,6 +135209,77 @@
    "variantsHash": "2cadcfe085c585630331560b4627ad5d39a8a456",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -130538,6 +135449,68 @@
    "variantsHash": "4d4895ba77229cadd3da52261dd791904970af98",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Brilliant Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Black Magic Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Moon White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Race Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Energy Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Velvet Red Metallic",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mamba Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -130696,6 +135669,51 @@
    "variantsHash": "5e5cad71718f0f635b162580b7a2b5857d4a7327",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -130798,6 +135816,72 @@
    "variantsHash": "bdef2ef80315901e99798b2b1563170583d568d0",
    "method": "render",
    "at": "2026-07-30"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Selenite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mountain Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Graphite Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "High-Tech Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Obsidian Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cosmos Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Polar White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Digital White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Spectral Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -131402,6 +136486,61 @@
    "variantsHash": "08b7d988e0849e6d27bdd01c42b58055ac832b8a",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cyber Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Amazon Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Phantom Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Atlas White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Serenity White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Performance Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Intense Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultimate Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -131598,6 +136737,77 @@
    "variantsHash": "4e12bc100067ff03175dc60a582380d9507f4334",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -131699,6 +136909,72 @@
    "variantsHash": "c971e2aee1e0158948ce2119f51c085e75a46cdb",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Selenite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mountain Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Graphite Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "High-Tech Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Obsidian Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cosmos Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Polar White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Digital White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Spectral Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -131875,6 +137151,68 @@
    "variantsHash": "c639dc8cce640ed93603db1f0293dc2d5f01c404",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Brilliant Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Black Magic Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Moon White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Race Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Energy Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Velvet Red Metallic",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mamba Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -132093,6 +137431,87 @@
    "variantsHash": "d2689f4900d150f7398ba278fef6adbdea6602cb",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -132254,6 +137673,56 @@
    "variantsHash": "b3d61221fed92669a202d73b9dfe00f5e85dc995",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -132546,6 +138015,77 @@
    "variantsHash": "758f79da139a279905924609fe5865472448a7fa",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -132766,6 +138306,87 @@
    "variantsHash": "715bbed00b0723b0dd4dfbd3a1661817a33f32f4",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -133054,6 +138675,72 @@
    "variantsHash": "4c03c97f7de3def8d5ff7651ce95747b46b50613",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Selenite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mountain Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Graphite Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "High-Tech Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Obsidian Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cosmos Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Polar White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Digital White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Spectral Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -133158,6 +138845,72 @@
    "variantsHash": "f3c3836864d5afeeef0486ea58aa252ff96a196f",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Selenite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mountain Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Graphite Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "High-Tech Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Obsidian Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cosmos Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Polar White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Digital White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Spectral Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -133335,6 +139088,68 @@
    "variantsHash": "9c14da871ab601a5855071d2b8092ebbd47148ae",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphic Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Quartz Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Crystal Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Arctic White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Cobalt Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Crimson Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": [
+    {
+     "oemPaintName": "Electric Yellow",
+     "colourFamily": "Yellow",
+     "finish": "Solid"
+    }
+   ]
   }
  },
  {
@@ -133499,6 +139314,62 @@
    "variantsHash": "c8f221614f947b7e9265c52b5077aeac8d88a6a8",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -133665,6 +139536,62 @@
    "variantsHash": "85f4a82a8c30257a741fbcee15cffd7c8a87158a",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -133854,6 +139781,77 @@
    "variantsHash": "1fd2a3c369a05b9e1f99e379a35bffccb7bb9887",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -134025,6 +140023,57 @@
    "variantsHash": "4afd45272067220bd60f93d166366d056d1cce92",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Gun Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Ceramic Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Blade Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Pearl Black",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Storm White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Magnetic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fuji Sunset Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -134194,6 +140243,61 @@
    "variantsHash": "b22727a099282874dda9b2aac1fd5df6c75457d4",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Nardo Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Daytona Grey Pearl",
+     "colourFamily": "Dark Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Manhattan Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Mythos Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Navarra Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Ascari Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Progressive Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -134377,6 +140481,73 @@
    "variantsHash": "bcc946e0583808600eff78243f30bce03164ad79",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetic Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbonised Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Moondust Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Agate Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Frozen White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Chrome Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Desert Island Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Grabber Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fantastic Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mean Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -134559,6 +140730,73 @@
    "variantsHash": "7c5a5e33e43d9ddde132dc55c0051ed8452f551f",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetic Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbonised Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Moondust Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Agate Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Frozen White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Chrome Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Desert Island Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Grabber Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fantastic Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mean Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -134743,6 +140981,73 @@
    "variantsHash": "bc9fcb7598a5caca6b3f59c068056da48887f61d",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetic Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbonised Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Moondust Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Agate Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Frozen White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Chrome Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Desert Island Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Grabber Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fantastic Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mean Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -134919,6 +141224,62 @@
    "variantsHash": "9d4ed5cbb4def53eacc3feb097e53a70cbc69776",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -135103,6 +141464,73 @@
    "variantsHash": "a5678bc811491acd1925237c552238fde8a9488c",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetic Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbonised Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Moondust Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Agate Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Frozen White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Chrome Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Desert Island Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Grabber Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fantastic Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mean Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -135317,6 +141745,87 @@
    "variantsHash": "dd9150a906ebd50c15981eb97d965c2a5b95778c",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -135502,6 +142011,73 @@
    "variantsHash": "3d62f427794bea4c80f3de522058fa437e8c0597",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetic Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbonised Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Moondust Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Agate Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Frozen White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Chrome Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Desert Island Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Grabber Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fantastic Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mean Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -135662,6 +142238,56 @@
    "variantsHash": "0c4af672c7c4e8f87fcc23d0a509ecc8560f4c56",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -135880,6 +142506,87 @@
    "variantsHash": "bd58456f82c41acbfb98776af859e84720c78a6b",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -136096,6 +142803,87 @@
    "variantsHash": "8c39c3b196eb28b956e98f423d97fb004b592080",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -136272,6 +143060,68 @@
    "variantsHash": "d59b1fe61600bbf853316535a84803ed0659c181",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Brilliant Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Black Magic Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Moon White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Race Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Energy Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Velvet Red Metallic",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mamba Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -136489,6 +143339,87 @@
    "variantsHash": "663f97348f1ccc5d115886831c9995a01211bfb2",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -136682,6 +143613,78 @@
    "variantsHash": "f2dbd081066d2e0cd62cd9d3252c6d8409a6265e",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -136856,6 +143859,68 @@
    "variantsHash": "82d703497b93f36d80f36b4815cf9a619380473d",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Brilliant Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Black Magic Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Moon White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Race Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Energy Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Velvet Red Metallic",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mamba Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -137031,6 +144096,68 @@
    "variantsHash": "09566e20ce88b7756a5f5f8eb20b5bd9df9b28c3",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Brilliant Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Black Magic Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Moon White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Race Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Energy Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Velvet Red Metallic",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mamba Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -137222,6 +144349,77 @@
    "variantsHash": "65ee93074c7c0b8cc5ba0f91bb1d7d68e748d7fb",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -137436,6 +144634,87 @@
    "variantsHash": "fd38486e2724b264ed47a99e363c987bc3871665",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -137619,6 +144898,73 @@
    "variantsHash": "360120509d6b682f3d374a49979a1598c94180c8",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetic Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbonised Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Moondust Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Agate Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Frozen White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Chrome Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Desert Island Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Grabber Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fantastic Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mean Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -137810,6 +145156,77 @@
    "variantsHash": "0ce67d23b352452a0787e4794505decb5dfa143d",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -138002,6 +145419,77 @@
    "variantsHash": "308931e2aacf598abded357f746705ce5ff60312",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -138171,6 +145659,61 @@
    "variantsHash": "fd50bba66c4932b8958f55f1299073bcc51ddec4",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cyber Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Amazon Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Phantom Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Atlas White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Serenity White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Performance Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Intense Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultimate Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -138338,6 +145881,61 @@
    "variantsHash": "a4f242a9e7b447b39a67fb8cadd4a2ed385f4477",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cyber Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Amazon Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Phantom Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Atlas White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Serenity White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Performance Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Intense Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultimate Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -138442,6 +146040,72 @@
    "variantsHash": "e2ef8b975d22467ab113cd341d3933602b4b48c9",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Selenite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mountain Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Graphite Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "High-Tech Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Obsidian Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cosmos Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Polar White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Digital White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Spectral Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -138632,6 +146296,77 @@
    "variantsHash": "448aa6e81dfa13ad6b5cabe8f4090c8d78240a14",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -138822,6 +146557,77 @@
    "variantsHash": "93caac79d9a65e1ed20e23e9185c6a603a857ba2",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -138985,6 +146791,61 @@
    "variantsHash": "d65de3a80b2d4d7c0da25a066f3fb71ef74ce5a7",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cyber Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Amazon Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Phantom Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Atlas White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Serenity White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Performance Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Intense Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Ultimate Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -139283,6 +147144,77 @@
    "variantsHash": "56dc91d9d6e6aaed0aa3809f8c4ecc25ec9e92a9",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -139474,6 +147406,77 @@
    "variantsHash": "f91301e0712949c24e01e6269b45156d489c6c40",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -139633,6 +147636,52 @@
    "variantsHash": "275fc0330d2e5824784d68dd93a86bfe886dd856",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -139738,6 +147787,72 @@
    "variantsHash": "2c685ab8a1b9e857f635d00f5144a0c21046d6c3",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Selenite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mountain Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Graphite Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "High-Tech Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Obsidian Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cosmos Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Polar White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Digital White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Spectral Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -139909,6 +148024,62 @@
    "variantsHash": "b9bf342e5d38ca98bfd94629a4ca1c0ccfba662f",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -140074,6 +148245,62 @@
    "variantsHash": "9000b19f22f689fde9d078aa31b01d15ff2ccc49",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -140243,6 +148470,62 @@
    "variantsHash": "67ba20470db94dd865a137204ba6a781c63e401a",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
@@ -140535,6 +148818,77 @@
    "variantsHash": "0e2517c052b1b83a2f2e2156fb98f492fe9b6b60",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
   }
  },
  {
@@ -140706,6 +149060,56 @@
    "variantsHash": "0839400bd329082e92eabaa983fe04ed5923442b",
    "method": "render",
    "at": "2026-07-31"
+  },
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Thunder Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Vapour Grey Metallic",
+     "colourFamily": "Light Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Onyx Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Crystal White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Denim Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Fjord Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Forest Lake Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
   }
  },
  {
