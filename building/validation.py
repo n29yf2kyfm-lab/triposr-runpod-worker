@@ -342,6 +342,10 @@ def _plan(value):
 
     out["storeys"] = _int(value.get("storeys"), "plan.storeys", 1, 1,
                           MAX_STOREYS)
+    # Ground-floor entrance door, on by default — a dwelling has one, and
+    # the first real render came back without. False for outbuildings and
+    # single-room plates where an invented entrance would be wrong.
+    out["front_door"] = bool(value.get("front_door", True))
     out["height_m"] = _float(value.get("height_m"), "plan.height_m", None,
                              1.5, 20.0)
     out["storey_height_m"] = _float(value.get("storey_height_m"),

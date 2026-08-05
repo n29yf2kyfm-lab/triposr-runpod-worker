@@ -370,14 +370,29 @@ for bad in (0, 21):
 
 # MULTI-STOREY. The plate is repeated upward, and the quantities have to
 # scale with it — a three-storey block with one storey of plasterboard on it
-# is a quote that loses money twice over.
+# is a quote that loses money twice over. EXCEPT the front door: it is
+# pinned to the ground floor, so doors scale as internal x storeys + 1, and
+# the net wall area gives back the door's cut on the storeys it is not on.
+# The original x3 assertion here was asserting a phantom door per floor.
 one = M.build(plate())
 three = M.build(plate(), storeys=3)
-for key in ("rooms", "walls", "floor_area_m2", "wall_length_m",
-            "wall_area_net_m2", "doors", "windows"):
+for key in ("rooms", "walls", "floor_area_m2", "wall_length_m", "windows"):
     check(f"5m {key} scales with the storey count",
           abs(three["totals"][key] - one["totals"][key] * 3) < 0.02,
           f"{three['totals'][key]} vs {one['totals'][key]} x3")
+check("5m doors scale per storey plus ONE front door",
+      three["totals"]["doors"] == (one["totals"]["doors"] - 1) * 3 + 1,
+      f"{three['totals']['doors']} vs ({one['totals']['doors']}-1)x3+1")
+_door_cut = 0.838 * 1.981
+check("5m net wall area gives the door cut back on upper storeys",
+      abs(three["totals"]["wall_area_net_m2"]
+          - (one["totals"]["wall_area_net_m2"] * 3 + 2 * _door_cut)) < 0.02,
+      f"{three['totals']['wall_area_net_m2']}")
+# and the door is really there, once, on the front
+_fd = [(o, w) for w in one["walls"] for o in w["openings"]
+       if o["kind"] == "door" and o.get("level") == 0]
+check("5m the front door exists, pinned to level 0", len(_fd) == 1,
+      str(len(_fd)))
 
 # FLOOR TO FLOOR IS NOT CEILING HEIGHT. Ignoring the floor zone — joists,
 # deck, ceiling — stacks the storeys 350mm too close and puts the roof

@@ -156,14 +156,22 @@ class Wall:
         return max(0.0, gross - sum(o["width"] * o["height"]
                                     for o in self.openings))
 
-    def add_opening(self, kind, along_m, width, height, sill=0.0):
+    def add_opening(self, kind, along_m, width, height, sill=0.0,
+                    level=None):
+        """`level` pins an opening to ONE storey (0-based) when the floor
+        plate repeats. Walls are written once and redrawn per storey, so an
+        un-pinned front door repeats up the building — a floating door on
+        every upper floor, which is how the first render of a real house
+        type came back with no door at all: nobody had added one because
+        there was no way to add it only once."""
         if along_m < 0 or along_m + width > self.length_m + 1e-6:
             raise ModelError(
                 f"an opening {width:.2f}m wide at {along_m:.2f}m does not fit "
                 f"in a wall {self.length_m:.2f}m long")
         self.openings.append({"kind": kind, "along": float(along_m),
                               "width": float(width), "height": float(height),
-                              "sill": float(sill)})
+                              "sill": float(sill),
+                              "level": None if level is None else int(level)})
 
     def as_dict(self):
         return {"start": [round(v, 3) for v in self.start],
@@ -507,7 +515,7 @@ def _union_area(rooms):
 # --- the model --------------------------------------------------------------
 
 def build(rooms, schedule=None, wall_openings=True, storeys=1,
-          storey_height=None, roof=None):
+          storey_height=None, roof=None, front_door=True):
     """Rooms in, a whole building out.
 
     `storeys` repeats the floor plate upward. That is what a conversion of
@@ -544,6 +552,36 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
     xs = [c[0] for r in rooms for c in r.corners()]
     ys = [c[1] for r in rooms for c in r.corners()]
     x0, x1, y0, y1 = min(xs), max(xs), min(ys), max(ys)
+
+    # A dwelling has a front door, and the first render of a real house
+    # type came back without one: the auto-openings put windows on external
+    # walls and doors on internal ones, and no rule ever said "someone has
+    # to be able to get in". The front is the y0 edge — the elevation a plan
+    # is conventionally drawn facing — and the door goes on its longest
+    # external wall, on the GROUND FLOOR ONLY (level=0): walls repeat per
+    # storey, so an unpinned door would float on every upper floor.
+    if wall_openings and front_door:
+        fronts = [w for w in walls if w.external
+                  and abs(w.start[1] - y0) < 1e-6
+                  and abs(w.end[1] - y0) < 1e-6]
+        if fronts:
+            dw = max(fronts, key=lambda w: w.length_m)
+            taken = [(o["along"], o["along"] + o["width"])
+                     for o in dw.openings]
+            a, placed = 0.25, False
+            while a + DOOR_W_M + 0.25 <= dw.length_m:
+                if all(a + DOOR_W_M <= s - 0.1 or a >= e + 0.1
+                       for s, e in taken):
+                    dw.add_opening("door", a, DOOR_W_M, DOOR_H_M, level=0)
+                    placed = True
+                    break
+                a += 0.1
+            if not placed and dw.length_m >= DOOR_W_M + 0.2:
+                # A short front wall whose window leaves no room: the door
+                # matters more than the window it displaces.
+                dw.openings.clear()
+                dw.add_opening("door", (dw.length_m - DOOR_W_M) / 2,
+                               DOOR_W_M, DOOR_H_M, level=0)
     # The eaves sit on TOP OF THE TOPMOST WALL, not a floor zone above it.
     # `per_storey * storeys` reads naturally and is wrong by exactly one
     # floor zone: it leaves the roof floating 350mm clear of the walls it is
@@ -578,6 +616,18 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
 
     top = roof_model["ridge_z_m"] if roof_model else eaves_z
 
+    # Openings pinned to one level count ONCE, not once per storey — the
+    # front door is on the ground floor, and multiplying it up put a phantom
+    # door (and its missing wall area) on every floor of the take-off.
+    def _count(kind):
+        return sum(storeys if o["level"] is None else 1
+                   for w in walls for o in w.openings if o["kind"] == kind)
+
+    gross_wall = sum(w.length_m * w.height for w in walls) * storeys
+    cut = sum((o["width"] * o["height"])
+              * (storeys if o["level"] is None else 1)
+              for w in walls for o in w.openings)
+
     result = {
         "rooms": [r.as_dict() for r in rooms],
         "walls": [w.as_dict() for w in walls],
@@ -595,12 +645,9 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
             "floor_area_m2": round(sum(r.area_m2 for r in rooms) * storeys, 2),
             "walls": len(walls) * storeys,
             "wall_length_m": round(sum(w.length_m for w in walls) * storeys, 2),
-            "wall_area_net_m2": round(
-                sum(w.area_m2 for w in walls) * storeys, 2),
-            "doors": sum(1 for w in walls for o in w.openings
-                         if o["kind"] == "door") * storeys,
-            "windows": sum(1 for w in walls for o in w.openings
-                           if o["kind"] == "window") * storeys,
+            "wall_area_net_m2": round(max(0.0, gross_wall - cut), 2),
+            "doors": _count("door"),
+            "windows": _count("window"),
             "ceiling_height_m": round(height, 3),
             "eaves_height_m": round(eaves_z, 3),
             "ridge_height_m": round(top, 3),
@@ -709,13 +756,13 @@ def write_obj(model, path):
             if abs(bx - ax) >= abs(by - ay):        # runs along x
                 lo, hi = sorted((ax, bx))
                 for j, (s, e, zlo, zhi) in enumerate(
-                        _split_for_openings(lo, hi, w)):
+                        _split_for_openings(lo, hi, w, level)):
                     box(s, ay - t, z + zlo, e, ay + t, z + zhi,
                         f"L{level}_wall_{i}_{j}")
             else:                                   # runs along y
                 lo, hi = sorted((ay, by))
                 for j, (s, e, zlo, zhi) in enumerate(
-                        _split_for_openings(lo, hi, w)):
+                        _split_for_openings(lo, hi, w, level)):
                     box(ax - t, s, z + zlo, ax + t, e, z + zhi,
                         f"L{level}_wall_{i}_{j}")
 
@@ -779,7 +826,14 @@ def _roof_faces(roof, verts, faces, groups):
             faces.append((c, d, r1))
 
 
-def _split_for_openings(lo, hi, wall):
+def _openings_at(wall, level):
+    """The openings that exist on THIS storey: unpinned ones repeat with
+    the plate; a level-pinned one (the front door) appears once."""
+    return [o for o in wall["openings"]
+            if o.get("level") is None or o.get("level") == level]
+
+
+def _split_for_openings(lo, hi, wall, level=0):
     """A wall with a hole in it is several boxes, not one.
 
     Returns [(from, to, z_low, z_high)]. Above a door there is still a
@@ -788,10 +842,11 @@ def _split_for_openings(lo, hi, wall):
     brickwork.
     """
     h = wall["height_m"]
-    if not wall["openings"]:
+    ops = _openings_at(wall, level)
+    if not ops:
         return [(lo, hi, 0.0, h)]
     out, cursor = [], lo
-    for o in sorted(wall["openings"], key=lambda o: o["along"]):
+    for o in sorted(ops, key=lambda o: o["along"]):
         s = lo + o["along"]
         e = s + o["width"]
         if s > cursor:
@@ -961,7 +1016,8 @@ def run_mode(spec, prog, output_dir):
     model = build(rooms, schedule=sched,
                   storeys=int(plan.get("storeys", 1)),
                   storey_height=plan.get("storey_height_m"),
-                  roof=plan.get("roof"))
+                  roof=plan.get("roof"),
+                  front_door=plan.get("front_door", True))
 
     if sched_note:
         model["warnings"].append(sched_note)
@@ -1099,7 +1155,7 @@ def _glb_mesh(model):
             nx, ny = -uy * w["thickness_m"] / 2.0, ux * w["thickness_m"] / 2.0
             h = w["height_m"]
             mat = "brick" if w["external"] else "plaster"
-            ops = sorted(w.get("openings") or [], key=lambda o: o["along"])
+            ops = sorted(_openings_at(w, level), key=lambda o: o["along"])
 
             for sgn, face_mat in ((1, mat), (-1, "plaster")):
                 px, py = ax + nx * sgn, ay + ny * sgn
