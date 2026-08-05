@@ -1,6 +1,6 @@
 [
  {
-  "_scope": "owner decision: review the 213 G6 clean-splits only. the 282 flagged rows (G5 229, G4 47, G10 6) stay in this file, unjudged and unscrapped, because each would need remedial work even if the eye liked it -- G5 paint bleeds into trim or glass, G4 is too thin for four-view scrutiny, G10 is suspiciously thin paint. they are deferred, not rejected, and can be picked up by dropping the --gate filter."
+  "_scope": "owner decision: review the 213 G6 clean-splits only. flagged rows (G5/G4/G10) stay here unjudged and unscrapped -- each needs remedial work even if the eye liked it. deferred, not rejected: drop the --gate filter to pick them up."
  },
  {
   "uid": "3fdc4ab04e384ec5bdc26eed6700517f",
@@ -659,22 +659,6 @@
   "auditReason": "clean split - 2 body material(s), coverage 0.119"
  },
  {
-  "uid": "c1cb4e1ba20d423492d23a10106e499c",
-  "name": "BMW 3 Series MK6 (F31) 2011-2018",
-  "faces": 779909,
-  "likes": 2,
-  "licence": "CC Attribution",
-  "author": "Merc_TV",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 1,
-  "coverage": 0.175,
-  "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 1 body material(s), coverage 0.175"
- },
- {
   "uid": "8b1d7338d2614ef1a8ae509421a2cb65",
   "name": "BMW F30 UK-Spec 2011-2018",
   "faces": 777405,
@@ -835,38 +819,6 @@
   "auditReason": "clean split - 1 body material(s), coverage 0.264"
  },
  {
-  "uid": "e182a045fc2d4509afff1196b49e4fb2",
-  "name": "BMW 3 Series MK3 (E36) 1990-1999",
-  "faces": 712126,
-  "likes": 2,
-  "licence": "CC Attribution",
-  "author": "Merc_TV",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 1,
-  "coverage": 0.273,
-  "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 1 body material(s), coverage 0.273"
- },
- {
-  "uid": "2741522991f743f28cd6c76e495b7f78",
-  "name": "BMW 3 Series (E46) Facelift 2001",
-  "faces": 708786,
-  "likes": 2,
-  "licence": "CC Attribution",
-  "author": "Merc_TV",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 6,
-  "coverage": 0.739,
-  "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "6 body material(s), coverage 0.739 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
   "uid": "2b78bdc540e24cde960c35543639cca0",
   "name": "BMW M3 F80 2013-2019",
   "faces": 704672,
@@ -961,22 +913,6 @@
   "auditGate": "G5",
   "auditVerdict": "SALVAGE",
   "auditReason": "7 body material(s), coverage 0.299 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
-  "uid": "736296aa230048e994491e48157c0711",
-  "name": "BMW 3 Series MK5 (E90) 2004-2012",
-  "faces": 679921,
-  "likes": 7,
-  "licence": "CC Attribution",
-  "author": "Merc_TV",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 1,
-  "coverage": 0.229,
-  "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 1 body material(s), coverage 0.229"
  },
  {
   "uid": "394feedd0a0742c595917c7b0f6edcad",
@@ -3571,22 +3507,6 @@
   "auditReason": "clean split - 1 body material(s), coverage 0.157"
  },
  {
-  "uid": "d2b715563f1e474099b8eef1f262c8a6",
-  "name": "BMW 3 Series Coupe (E92) 2006-2013",
-  "faces": 274107,
-  "likes": 10,
-  "licence": "CC Attribution",
-  "author": "Merc_TV",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 3,
-  "coverage": 0.162,
-  "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "3 body material(s), coverage 0.162 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
   "uid": "8fa21fe97a6042a2a09e0b09fd546b91",
   "name": "BMW M3 Coupe (E30) 1986",
   "faces": 272300,
@@ -4099,38 +4019,6 @@
   "auditReason": "5 body material(s), coverage 0.627 - paint would bleed into trim/glass; fixable by a material split"
  },
  {
-  "uid": "66f9969f57e646bf961a51334cb12906",
-  "name": "BMW M4 G82 with Adro kit",
-  "faces": 239781,
-  "likes": 50,
-  "licence": "CC Attribution",
-  "author": "Drifter Models✨",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 5,
-  "coverage": 0.627,
-  "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "5 body material(s), coverage 0.627 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
-  "uid": "d76fb2b133164f54ab38bb3628785224",
-  "name": "BMW G82 M4",
-  "faces": 239781,
-  "likes": 11,
-  "licence": "CC Attribution",
-  "author": "davidmarton1987",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 5,
-  "coverage": 0.627,
-  "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "5 body material(s), coverage 0.627 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
   "uid": "3f8cf1cdc3d941dfbfd1c730229da3f3",
   "name": "2009 BMW M5 E60",
   "faces": 239177,
@@ -4161,22 +4049,6 @@
   "auditGate": "G5",
   "auditVerdict": "SALVAGE",
   "auditReason": "5 body material(s), coverage 0.603 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
-  "uid": "b16d7a4d771e4abd85ce4e29d41402ed",
-  "name": "2021 BMW M4 Competition (G82)",
-  "faces": 238549,
-  "likes": 107,
-  "licence": "CC Attribution-NonCommercial-ShareAlike",
-  "author": "Ddiaz Design",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 5,
-  "coverage": 0.612,
-  "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "5 body material(s), coverage 0.612 - paint would bleed into trim/glass; fixable by a material split"
  },
  {
   "uid": "39f68b5bef64479a9cff309b7502a77f",
@@ -4505,22 +4377,6 @@
   "likes": 126,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
   "author": "Ddiaz Design",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 4,
-  "coverage": 0.521,
-  "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "4 body material(s), coverage 0.521 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
-  "uid": "fabdf303e9ee4d4d83c2f302cf78d2ce",
-  "name": "BMW M2 Competition (F87)",
-  "faces": 215101,
-  "likes": 20,
-  "licence": "CC Attribution",
-  "author": "Mona x Supercars",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 4,
@@ -4867,22 +4723,6 @@
   "auditReason": "3 body material(s), coverage 0.193 - paint would bleed into trim/glass; fixable by a material split"
  },
  {
-  "uid": "6bfdc66c8ea4498fb229c86ac4578c76",
-  "name": "BMW M3 E92",
-  "faces": 199983,
-  "likes": 34,
-  "licence": "CC Attribution",
-  "author": "fvrenbld",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 6,
-  "coverage": 0.182,
-  "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "6 body material(s), coverage 0.182 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
   "uid": "4cdbc766525d48b299d2d664c04b2118",
   "name": "Bmw M5 E34",
   "faces": 199858,
@@ -4897,22 +4737,6 @@
   "auditGate": "G5",
   "auditVerdict": "SALVAGE",
   "auditReason": "6 body material(s), coverage 0.544 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
-  "uid": "a62942f2417846b4aa5af5e054a66ef1",
-  "name": "bmw_m3_e92",
-  "faces": 199682,
-  "likes": 2,
-  "licence": "CC Attribution",
-  "author": "b4_cobra",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 6,
-  "coverage": 0.182,
-  "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "6 body material(s), coverage 0.182 - paint would bleed into trim/glass; fixable by a material split"
  },
  {
   "uid": "ac996465672a41ca84169db30bacddab",
@@ -5939,22 +5763,6 @@
   "auditReason": "clean split - 1 body material(s), coverage 0.197"
  },
  {
-  "uid": "f8141ecd755547989c9209784b71ad43",
-  "name": "2025 BMW M4 Competition",
-  "faces": 125819,
-  "likes": 244,
-  "licence": "CC Attribution-NonCommercial-ShareAlike",
-  "author": "Ddiaz Design",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 3,
-  "coverage": 0.402,
-  "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "3 body material(s), coverage 0.402 - paint would bleed into trim/glass; fixable by a material split"
- },
- {
   "uid": "0dff25e0122a42819f874e07e64f2378",
   "name": "BMWM4",
   "faces": 125819,
@@ -6611,22 +6419,6 @@
   "auditReason": "only 98,011 faces - thin for four-view scrutiny, needs an eye"
  },
  {
-  "uid": "f52eb5b5c9404e5db39a8594bba0d2c7",
-  "name": "BMW 730i E38 2000",
-  "faces": 97812,
-  "likes": 8,
-  "licence": "CC Attribution",
-  "author": "Merc_TV",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 7,
-  "coverage": 0.517,
-  "sheetVerdict": "split",
-  "auditGate": "G4",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "only 97,812 faces - thin for four-view scrutiny, needs an eye"
- },
- {
   "uid": "5606a222423444da92d0ef6da15f1dd2",
   "name": "BMW X5 E53 1999-2006",
   "faces": 97768,
@@ -6641,22 +6433,6 @@
   "auditGate": "G6",
   "auditVerdict": "PASS",
   "auditReason": "clean split - 1 body material(s), coverage 0.103"
- },
- {
-  "uid": "05a3a251190b47a8a82ec6fb6050ec6b",
-  "name": "BMW 740i E38 1997",
-  "faces": 97493,
-  "likes": 3,
-  "licence": "CC Attribution",
-  "author": "Merc_TV",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 8,
-  "coverage": 0.639,
-  "sheetVerdict": "split",
-  "auditGate": "G4",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "only 97,493 faces - thin for four-view scrutiny, needs an eye"
  },
  {
   "uid": "b5c660d8e39340538a06561eaca69b5f",
@@ -6689,22 +6465,6 @@
   "auditGate": "G4",
   "auditVerdict": "SALVAGE",
   "auditReason": "only 96,455 faces - thin for four-view scrutiny, needs an eye"
- },
- {
-  "uid": "aaaa6848e4004fab85e51f78315e70f6",
-  "name": "2011 BMW M3 GT2 (Le Mans)",
-  "faces": 95890,
-  "likes": 18,
-  "licence": "CC Attribution",
-  "author": "Dave Love SketchFab",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 3,
-  "coverage": 0.433,
-  "sheetVerdict": "split",
-  "auditGate": "G4",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "only 95,890 faces - thin for four-view scrutiny, needs an eye"
  },
  {
   "uid": "9fbd8f1672484886b95989d7530baab1",
@@ -6849,22 +6609,6 @@
   "auditGate": "G4",
   "auditVerdict": "SALVAGE",
   "auditReason": "only 91,010 faces - thin for four-view scrutiny, needs an eye"
- },
- {
-  "uid": "ffd34b20db5a431a884bb5cdb9b1de26",
-  "name": "2011 BMW 740Li",
-  "faces": 89934,
-  "likes": 14,
-  "licence": "CC Attribution",
-  "author": "tonielpro520",
-  "plate": "BMW",
-  "anchor": 0,
-  "bodyMaterials": 1,
-  "coverage": 0.263,
-  "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 1 body material(s), coverage 0.263"
  },
  {
   "uid": "1e23d7c74d134f47918ac21e6ddde6bc",

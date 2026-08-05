@@ -227,12 +227,39 @@ def nameplate(name):
     return ""
 
 
+def _cluster(members, tol):
+    """-> {uid: (survivor_uid, survivor_faces)} for every member that is a copy.
+
+    Members are compared against a SURVIVOR, not against the group maximum, and
+    the group is worked through largest-first so each cluster is anchored on its
+    own biggest member. Comparing everything to the single largest was the
+    original bug: a prolific author with 24 3-Series uploads spanning 140k to
+    1.09M faces had only the handful within 2% of 1.09M considered, so two
+    byte-identical 712,126-face copies sat unflagged and both went to the eye.
+    G9 and G11 have been under-reporting duplicates in every wave because of it.
+    """
+    out, pool = {}, sorted(members, key=lambda r: -(r.get("faces") or 0))
+    while pool:
+        top = pool.pop(0)
+        tf = top.get("faces") or 0
+        rest = []
+        for r in pool:
+            f = r.get("faces") or 0
+            if tf and abs(tf - f) / tf <= tol:
+                out[r["uid"]] = (top["uid"], tf)
+            else:
+                rest.append(r)
+        pool = rest
+    return out
+
+
 def duplicate_clusters(rows):
-    """-> {uid: (survivor_uid, survivor_faces)} for every row that is a copy.
+    """G9: the same car posted more than once by ONE author.
 
     Same author + same nameplate + face count within DUP_FACE_TOL of the
-    largest in the group. The largest survives; see the G9 limit in the module
-    docstring -- this is a heuristic, not a verdict on which car is better.
+    cluster survivor. The largest of each cluster survives; see the G9 limit in
+    the module docstring -- this is a heuristic, not a verdict on which car is
+    better.
     """
     groups = {}
     for r in rows:
@@ -241,15 +268,8 @@ def duplicate_clusters(rows):
             groups.setdefault(key, []).append(r)
     out = {}
     for members in groups.values():
-        if len(members) < 2:
-            continue
-        members = sorted(members, key=lambda r: -(r.get("faces") or 0))
-        top = members[0]
-        tf = top.get("faces") or 0
-        for r in members[1:]:
-            f = r.get("faces") or 0
-            if tf and abs(tf - f) / tf <= DUP_FACE_TOL:
-                out[r["uid"]] = (top["uid"], tf)
+        if len(members) > 1:
+            out.update(_cluster(members, DUP_FACE_TOL))
     return out
 
 
@@ -279,36 +299,9 @@ def cross_author_clusters(rows):
             groups.setdefault((np_, round(cov, 3)), []).append(r)
     out = {}
     for members in groups.values():
-        if len(members) < 2:
-            continue
-        members = sorted(members, key=lambda r: -(r.get("faces") or 0))
-        top = members[0]
-        tf = top.get("faces") or 0
-        for r in members[1:]:
-            f = r.get("faces") or 0
-            if tf and abs(tf - f) / tf <= XDUP_FACE_TOL:
-                out[r["uid"]] = (top["uid"], tf)
+        if len(members) > 1:
+            out.update(_cluster(members, XDUP_FACE_TOL))
     return out
-
-
-def sbk():
-    k = os.environ.get("SB_KEY")
-    if not k:
-        sys.exit("FATAL: SB_KEY not set")
-    return k
-
-
-def sb_get(p):
-    return urllib.request.urlopen(urllib.request.Request(
-        f"{SB}/storage/v1/object/{p}",
-        headers={"apikey": sbk(), "Authorization": f"Bearer {sbk()}"}), timeout=300).read()
-
-
-def sb_put(p, blob, ctype="application/json"):
-    return urllib.request.urlopen(urllib.request.Request(
-        f"{SB}/storage/v1/object/{p}", data=blob, method="POST",
-        headers={"apikey": sbk(), "Authorization": f"Bearer {sbk()}",
-                 "Content-Type": ctype, "x-upsert": "true"}), timeout=600).status
 
 
 def searchable(*vals):

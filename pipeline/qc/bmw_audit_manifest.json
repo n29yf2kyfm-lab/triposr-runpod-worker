@@ -219,9 +219,9 @@
   "bodyMaterials": 0,
   "coverage": 0.0,
   "sheetVerdict": "split",
-  "auditGate": "G2",
+  "auditGate": "G11",
   "auditVerdict": "SCRAP",
-  "auditReason": "no body material - DVLA colour can never be applied"
+  "auditReason": "same file as 34cbf0494ce64181aebc8383ecce40c5 (1,102,371 f) re-uploaded by a different author at 1,088,156 f - identical coverage 0.0"
  },
  {
   "uid": "b78e420240f44349bd4efc21f01afe66",
@@ -725,7 +725,7 @@
   "faces": 908369,
   "likes": 94,
   "licence": "CC Attribution",
-  "author": "kevin (\u30b1\u30d3\u30f3)",
+  "author": "kevin (ケビン)",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 2,
@@ -897,7 +897,7 @@
  },
  {
   "uid": "8a3a63aac6fc4ce3a1bceab3191337ef",
-  "name": "BMW M2 Coup\u00e9 RR Edition",
+  "name": "BMW M2 Coupé RR Edition",
   "faces": 867798,
   "likes": 10,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
@@ -1307,9 +1307,9 @@
   "bodyMaterials": 1,
   "coverage": 0.175,
   "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 1 body material(s), coverage 0.175"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of 087efd9833714af2a68561bde9181985 (795,759 f) by the same author at 779,909 f - within 2%"
  },
  {
   "uid": "8b1d7338d2614ef1a8ae509421a2cb65",
@@ -1547,9 +1547,9 @@
   "bodyMaterials": 1,
   "coverage": 0.273,
   "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 1 body material(s), coverage 0.273"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of 5219e3bee5984350a8efd38dbc2675a6 (712,126 f) by the same author at 712,126 f - within 2%"
  },
  {
   "uid": "2741522991f743f28cd6c76e495b7f78",
@@ -1563,9 +1563,9 @@
   "bodyMaterials": 6,
   "coverage": 0.739,
   "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "6 body material(s), coverage 0.739 - paint would bleed into trim/glass; fixable by a material split"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of 5219e3bee5984350a8efd38dbc2675a6 (712,126 f) by the same author at 708,786 f - within 2%"
  },
  {
   "uid": "6a4638f2b5b548508a2a4d80fc566dad",
@@ -1787,9 +1787,9 @@
   "bodyMaterials": 1,
   "coverage": 0.229,
   "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 1 body material(s), coverage 0.229"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of 4ba85df44dae4f0687b3b9d69a3153a3 (680,345 f) by the same author at 679,921 f - within 2%"
  },
  {
   "uid": "394feedd0a0742c595917c7b0f6edcad",
@@ -2981,7 +2981,7 @@
   "faces": 489613,
   "likes": 20,
   "licence": "CC Attribution",
-  "author": "Nazh Design \u2714",
+  "author": "Nazh Design ✔",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 1,
@@ -3553,7 +3553,7 @@
  },
  {
   "uid": "a41efb9c01e64d9d81a7896d2bbbb167",
-  "name": "2022 BMW M440i xDrive Gran Coup\u00e9",
+  "name": "2022 BMW M440i xDrive Gran Coupé",
   "faces": 413582,
   "likes": 74,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
@@ -3925,7 +3925,7 @@
   "faces": 388678,
   "likes": 26,
   "licence": "CC Attribution",
-  "author": "Nazh Design \u2714",
+  "author": "Nazh Design ✔",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 1,
@@ -3973,7 +3973,7 @@
   "faces": 384756,
   "likes": 10,
   "licence": "CC Attribution",
-  "author": "Nazh Design \u2714",
+  "author": "Nazh Design ✔",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 1,
@@ -3989,7 +3989,7 @@
   "faces": 383181,
   "likes": 93,
   "licence": "CC Attribution",
-  "author": "kevin (\u30b1\u30d3\u30f3)",
+  "author": "kevin (ケビン)",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 3,
@@ -4225,7 +4225,7 @@
  },
  {
   "uid": "23aea45df6da44fab8785df6c3b09ecd",
-  "name": "BMW M235i Gran Coup\u00e9",
+  "name": "BMW M235i Gran Coupé",
   "faces": 373864,
   "likes": 20,
   "licence": "Free Standard",
@@ -4305,7 +4305,7 @@
  },
  {
   "uid": "19189c85e6534beba67b2ab559b7836d",
-  "name": "BMW M3 Evolution II \u201888",
+  "name": "BMW M3 Evolution II ‘88",
   "faces": 360230,
   "likes": 38,
   "licence": "CC Attribution",
@@ -4357,7 +4357,7 @@
   "faces": 360217,
   "likes": 3,
   "licence": "CC Attribution",
-  "author": "mr_Ved\u2019",
+  "author": "mr_Ved’",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 6,
@@ -4449,11 +4449,11 @@
  },
  {
   "uid": "25d5b4f6d13e4217afa09bbf89f8d993",
-  "name": "BMW M8 F92 Coup\u00e9 Competition",
+  "name": "BMW M8 F92 Coupé Competition",
   "faces": 350608,
   "likes": 204,
   "licence": "CC Attribution",
-  "author": "kevin (\u30b1\u30d3\u30f3)",
+  "author": "kevin (ケビン)",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 3,
@@ -4469,7 +4469,7 @@
   "faces": 349762,
   "likes": 35,
   "licence": "CC Attribution",
-  "author": "Kemal \u00c7olak",
+  "author": "Kemal Çolak",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 1,
@@ -4609,7 +4609,7 @@
  },
  {
   "uid": "1efbe2ff21414af89fb14c70655cc88b",
-  "name": "2019 BMW M235i xDrive Gran Coup\u00e9",
+  "name": "2019 BMW M235i xDrive Gran Coupé",
   "faces": 323597,
   "likes": 74,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
@@ -4747,9 +4747,9 @@
   "bodyMaterials": 6,
   "coverage": 0.914,
   "sheetVerdict": "split",
-  "auditGate": "G1",
+  "auditGate": "G9",
   "auditVerdict": "SCRAP",
-  "auditReason": "coverage 0.914 - one material spans the car; no separate glass or lamp lenses; tint recolour proven to flood them"
+  "auditReason": "near-duplicate of 24dc3839915d41c19ef79129d4d430a4 (318,773 f) by the same author at 314,046 f - within 2%"
  },
  {
   "uid": "908303b4a6f848469b9c58d448c977c5",
@@ -5029,7 +5029,7 @@
   "faces": 295100,
   "likes": 24,
   "licence": "CC Attribution",
-  "author": "Nazh Design \u2714",
+  "author": "Nazh Design ✔",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 1,
@@ -5233,7 +5233,7 @@
  },
  {
   "uid": "7a608716b25b4589a8cc323e9cbd1e8d",
-  "name": "2023 BMW M2 G87 Coup\u00e9",
+  "name": "2023 BMW M2 G87 Coupé",
   "faces": 281450,
   "likes": 95,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
@@ -5253,7 +5253,7 @@
   "faces": 281449,
   "likes": 244,
   "licence": "CC Attribution-NonCommercial",
-  "author": "Outlaw Games\u2122",
+  "author": "Outlaw Games™",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 6,
@@ -5297,7 +5297,7 @@
  },
  {
   "uid": "9fa5ee53db79447f9a3fa3581c77cb57",
-  "name": "2023 BMW M2 G87 Coup\u00e9 [ Blacked out Windows ]",
+  "name": "2023 BMW M2 G87 Coupé [ Blacked out Windows ]",
   "faces": 281447,
   "likes": 16,
   "licence": "CC Attribution",
@@ -5477,7 +5477,7 @@
   "faces": 275927,
   "likes": 11,
   "licence": "CC Attribution",
-  "author": "\u0410\u0414\u0418\u041e\u041d\u041e\u0412",
+  "author": "АДИОНОВ",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 1,
@@ -5515,9 +5515,9 @@
   "bodyMaterials": 3,
   "coverage": 0.162,
   "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "3 body material(s), coverage 0.162 - paint would bleed into trim/glass; fixable by a material split"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of b94e907d247e4ade964f613d17293b31 (276,028 f) by the same author at 274,107 f - within 2%"
  },
  {
   "uid": "8fa21fe97a6042a2a09e0b09fd546b91",
@@ -5605,7 +5605,7 @@
   "faces": 270475,
   "likes": 9,
   "licence": "CC Attribution",
-  "author": "\ud83c\uddf7\ud83c\uddf4\u30b7Rulet\u0103\u30b7\ud83c\uddf7\ud83c\uddf4",
+  "author": "🇷🇴シRuletăシ🇷🇴",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 2,
@@ -5681,7 +5681,7 @@
  },
  {
   "uid": "9ee2e82650614df6affaf69806973342",
-  "name": "2021 BMW M4 G82 Coup\u00e9 M Performance",
+  "name": "2021 BMW M4 G82 Coupé M Performance",
   "faces": 262813,
   "likes": 96,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
@@ -6197,15 +6197,15 @@
   "faces": 239781,
   "likes": 50,
   "licence": "CC Attribution",
-  "author": "Drifter Models\u2728",
+  "author": "Drifter Models✨",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 5,
   "coverage": 0.627,
   "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "5 body material(s), coverage 0.627 - paint would bleed into trim/glass; fixable by a material split"
+  "auditGate": "G11",
+  "auditVerdict": "SCRAP",
+  "auditReason": "same file as bdea1df6c22e4efd9b01a52034789fd7 (239,781 f) re-uploaded by a different author at 239,781 f - identical coverage 0.627"
  },
  {
   "uid": "d76fb2b133164f54ab38bb3628785224",
@@ -6219,9 +6219,9 @@
   "bodyMaterials": 5,
   "coverage": 0.627,
   "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "5 body material(s), coverage 0.627 - paint would bleed into trim/glass; fixable by a material split"
+  "auditGate": "G11",
+  "auditVerdict": "SCRAP",
+  "auditReason": "same file as bdea1df6c22e4efd9b01a52034789fd7 (239,781 f) re-uploaded by a different author at 239,781 f - identical coverage 0.627"
  },
  {
   "uid": "3f8cf1cdc3d941dfbfd1c730229da3f3",
@@ -6241,7 +6241,7 @@
  },
  {
   "uid": "3ef64497e63e4c569419fde9aa238b76",
-  "name": "2021 BMW M4 Coup\u00e9 Competition",
+  "name": "2021 BMW M4 Coupé Competition",
   "faces": 238846,
   "likes": 171,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
@@ -6283,9 +6283,9 @@
   "bodyMaterials": 5,
   "coverage": 0.612,
   "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "5 body material(s), coverage 0.612 - paint would bleed into trim/glass; fixable by a material split"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of 3ef64497e63e4c569419fde9aa238b76 (238,846 f) by the same author at 238,549 f - within 2%"
  },
  {
   "uid": "39f68b5bef64479a9cff309b7502a77f",
@@ -6321,7 +6321,7 @@
  },
  {
   "uid": "f68a25584899494391c8f2ae28c03b2f",
-  "name": "2020 BMW M8 Competition Coup\u00e9",
+  "name": "2020 BMW M8 Competition Coupé",
   "faces": 235434,
   "likes": 70,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
@@ -6561,7 +6561,7 @@
  },
  {
   "uid": "f3557814de544abe8be017405f2eec49",
-  "name": "2020 BMW M8 Coup\u00e9",
+  "name": "2020 BMW M8 Coupé",
   "faces": 225948,
   "likes": 126,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
@@ -6843,9 +6843,9 @@
   "bodyMaterials": 4,
   "coverage": 0.521,
   "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "4 body material(s), coverage 0.521 - paint would bleed into trim/glass; fixable by a material split"
+  "auditGate": "G11",
+  "auditVerdict": "SCRAP",
+  "auditReason": "same file as e43741a793da4e3f8e9747e31a1a8ff6 (215,111 f) re-uploaded by a different author at 215,101 f - identical coverage 0.521"
  },
  {
   "uid": "4e5b1490982c411c82e05c54e5e4efd1",
@@ -6917,7 +6917,7 @@
   "faces": 210580,
   "likes": 0,
   "licence": "CC Attribution",
-  "author": "\u0411\u043b\u0435\u043d\u0434\u0435\u0440#\u0441\u0438\u043b\u0430",
+  "author": "Блендер#сила",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 1,
@@ -6965,7 +6965,7 @@
   "faces": 210138,
   "likes": 29,
   "licence": "CC Attribution",
-  "author": "Nazh Design \u2714",
+  "author": "Nazh Design ✔",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 1,
@@ -7029,7 +7029,7 @@
   "faces": 209421,
   "likes": 10,
   "licence": "CC Attribution",
-  "author": "\ud83c\uddf7\ud83c\uddf4\u30b7Rulet\u0103\u30b7\ud83c\uddf7\ud83c\uddf4",
+  "author": "🇷🇴シRuletăシ🇷🇴",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 8,
@@ -7173,7 +7173,7 @@
   "faces": 205740,
   "likes": 14,
   "licence": "CC Attribution",
-  "author": "Nazh Design \u2714",
+  "author": "Nazh Design ✔",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 1,
@@ -7221,7 +7221,7 @@
   "faces": 202981,
   "likes": 22,
   "licence": "CC Attribution",
-  "author": "\ud83c\uddf7\ud83c\uddf4\u30b7Rulet\u0103\u30b7\ud83c\uddf7\ud83c\uddf4",
+  "author": "🇷🇴シRuletăシ🇷🇴",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 7,
@@ -7355,9 +7355,9 @@
   "bodyMaterials": 6,
   "coverage": 0.182,
   "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "6 body material(s), coverage 0.182 - paint would bleed into trim/glass; fixable by a material split"
+  "auditGate": "G11",
+  "auditVerdict": "SCRAP",
+  "auditReason": "same file as e82d5ab2319d4e768613876758df0927 (202,367 f) re-uploaded by a different author at 199,983 f - identical coverage 0.182"
  },
  {
   "uid": "4cdbc766525d48b299d2d664c04b2118",
@@ -7365,7 +7365,7 @@
   "faces": 199858,
   "likes": 20,
   "licence": "CC Attribution",
-  "author": "\ud83c\uddf7\ud83c\uddf4\u30b7Rulet\u0103\u30b7\ud83c\uddf7\ud83c\uddf4",
+  "author": "🇷🇴シRuletăシ🇷🇴",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 6,
@@ -7387,9 +7387,9 @@
   "bodyMaterials": 6,
   "coverage": 0.182,
   "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "6 body material(s), coverage 0.182 - paint would bleed into trim/glass; fixable by a material split"
+  "auditGate": "G11",
+  "auditVerdict": "SCRAP",
+  "auditReason": "same file as e82d5ab2319d4e768613876758df0927 (202,367 f) re-uploaded by a different author at 199,682 f - identical coverage 0.182"
  },
  {
   "uid": "ac996465672a41ca84169db30bacddab",
@@ -7569,7 +7569,7 @@
  },
  {
   "uid": "b0ad12456d4c4b038048448792290f0d",
-  "name": "2001 - BMW M3 GTR (N\u00fcrburgring 24 Hours)",
+  "name": "2001 - BMW M3 GTR (Nürburgring 24 Hours)",
   "faces": 191008,
   "likes": 2,
   "licence": "CC Attribution",
@@ -7585,7 +7585,7 @@
  },
  {
   "uid": "e011f88469d34d5da1ef961f60bdc027",
-  "name": "2001 BMW M3 GTR (N\u00fcrburgring)",
+  "name": "2001 BMW M3 GTR (Nürburgring)",
   "faces": 190914,
   "likes": 42,
   "licence": "CC Attribution",
@@ -7765,7 +7765,7 @@
   "faces": 180084,
   "likes": 131,
   "licence": "CC Attribution",
-  "author": "kevin (\u30b1\u30d3\u30f3)",
+  "author": "kevin (ケビン)",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 10,
@@ -8197,7 +8197,7 @@
   "faces": 164939,
   "likes": 15,
   "licence": "CC Attribution",
-  "author": "\ud83c\uddf7\ud83c\uddf4\u30b7Rulet\u0103\u30b7\ud83c\uddf7\ud83c\uddf4",
+  "author": "🇷🇴シRuletăシ🇷🇴",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 5,
@@ -8325,7 +8325,7 @@
   "faces": 157195,
   "likes": 7,
   "licence": "CC Attribution",
-  "author": "\ud83c\uddf7\ud83c\uddf4\u30b7Rulet\u0103\u30b7\ud83c\uddf7\ud83c\uddf4",
+  "author": "🇷🇴シRuletăシ🇷🇴",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 11,
@@ -8357,7 +8357,7 @@
   "faces": 154831,
   "likes": 6,
   "licence": "CC Attribution",
-  "author": "\ud83c\uddf7\ud83c\uddf4\u30b7Rulet\u0103\u30b7\ud83c\uddf7\ud83c\uddf4",
+  "author": "🇷🇴シRuletăシ🇷🇴",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 3,
@@ -8917,7 +8917,7 @@
   "faces": 127794,
   "likes": 105,
   "licence": "CC Attribution",
-  "author": "kevin (\u30b1\u30d3\u30f3)",
+  "author": "kevin (ケビン)",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 1,
@@ -8971,9 +8971,9 @@
   "bodyMaterials": 3,
   "coverage": 0.402,
   "sheetVerdict": "split",
-  "auditGate": "G5",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "3 body material(s), coverage 0.402 - paint would bleed into trim/glass; fixable by a material split"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of 08030fc6db9b4167b1cddcb04a5d70c1 (126,375 f) by the same author at 125,819 f - within 2%"
  },
  {
   "uid": "dcfe4bf7b03948eca9e6d7de382bb9eb",
@@ -9281,7 +9281,7 @@
  },
  {
   "uid": "a1dee7c4b8d342bcaff3fa18b50b596e",
-  "name": "BMW M4 Test f\u00fcr OMNI",
+  "name": "BMW M4 Test für OMNI",
   "faces": 116894,
   "likes": 16,
   "licence": "CC Attribution",
@@ -9717,7 +9717,7 @@
   "faces": 101956,
   "likes": 104,
   "licence": "CC Attribution",
-  "author": "kevin (\u30b1\u30d3\u30f3)",
+  "author": "kevin (ケビン)",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 3,
@@ -9915,9 +9915,9 @@
   "bodyMaterials": 7,
   "coverage": 0.517,
   "sheetVerdict": "split",
-  "auditGate": "G4",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "only 97,812 faces - thin for four-view scrutiny, needs an eye"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of 1be2a6b44ac749079596e118ab872a29 (98,261 f) by the same author at 97,812 f - within 2%"
  },
  {
   "uid": "5606a222423444da92d0ef6da15f1dd2",
@@ -9947,9 +9947,9 @@
   "bodyMaterials": 8,
   "coverage": 0.639,
   "sheetVerdict": "split",
-  "auditGate": "G4",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "only 97,493 faces - thin for four-view scrutiny, needs an eye"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of 1be2a6b44ac749079596e118ab872a29 (98,261 f) by the same author at 97,493 f - within 2%"
  },
  {
   "uid": "b5c660d8e39340538a06561eaca69b5f",
@@ -9985,7 +9985,7 @@
  },
  {
   "uid": "867fe7c171e2427b82fbb03a760a45f5",
-  "name": "2009 BMW M3 GT2 (N\u00fcrburgring)",
+  "name": "2009 BMW M3 GT2 (Nürburgring)",
   "faces": 96455,
   "likes": 22,
   "licence": "CC Attribution",
@@ -10011,9 +10011,9 @@
   "bodyMaterials": 3,
   "coverage": 0.433,
   "sheetVerdict": "split",
-  "auditGate": "G4",
-  "auditVerdict": "SALVAGE",
-  "auditReason": "only 95,890 faces - thin for four-view scrutiny, needs an eye"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of 867fe7c171e2427b82fbb03a760a45f5 (96,455 f) by the same author at 95,890 f - within 2%"
  },
  {
   "uid": "9fbd8f1672484886b95989d7530baab1",
@@ -10021,7 +10021,7 @@
   "faces": 95364,
   "likes": 58,
   "licence": "CC Attribution-NonCommercial",
-  "author": "\u200e\u3164\u200e\u3164\u200e\u3164\u200e\u3164",
+  "author": "‎ㅤ‎ㅤ‎ㅤ‎ㅤ",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 5,
@@ -10097,7 +10097,7 @@
  },
  {
   "uid": "3d507e8432494480b31bdc0dcdcf51d5",
-  "name": "2021 BMW 430i xDrive Coup\u00e9 (4-Series)",
+  "name": "2021 BMW 430i xDrive Coupé (4-Series)",
   "faces": 92166,
   "likes": 60,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
@@ -10203,9 +10203,9 @@
   "bodyMaterials": 1,
   "coverage": 0.263,
   "sheetVerdict": "OK",
-  "auditGate": "G6",
-  "auditVerdict": "PASS",
-  "auditReason": "clean split - 1 body material(s), coverage 0.263"
+  "auditGate": "G9",
+  "auditVerdict": "SCRAP",
+  "auditReason": "near-duplicate of ac2b1a1da19d46fd95b31fd25ea0e683 (91,318 f) by the same author at 89,934 f - within 2%"
  },
  {
   "uid": "1e23d7c74d134f47918ac21e6ddde6bc",
@@ -10459,9 +10459,9 @@
   "bodyMaterials": 0,
   "coverage": 0.0,
   "sheetVerdict": "split",
-  "auditGate": "G2",
+  "auditGate": "G11",
   "auditVerdict": "SCRAP",
-  "auditReason": "no body material - DVLA colour can never be applied"
+  "auditReason": "same file as 29a4c13761cb40e6a050871bd40a0963 (84,706 f) re-uploaded by a different author at 84,706 f - identical coverage 0.0"
  },
  {
   "uid": "91de2f17130e46bd9d3ca5173e7eb24b",
@@ -10475,9 +10475,9 @@
   "bodyMaterials": 0,
   "coverage": 0.0,
   "sheetVerdict": "split",
-  "auditGate": "G2",
+  "auditGate": "G11",
   "auditVerdict": "SCRAP",
-  "auditReason": "no body material - DVLA colour can never be applied"
+  "auditReason": "same file as 29a4c13761cb40e6a050871bd40a0963 (84,706 f) re-uploaded by a different author at 84,644 f - identical coverage 0.0"
  },
  {
   "uid": "bc3e714e021b44f4844ddf847288e99a",
@@ -10709,7 +10709,7 @@
   "faces": 78999,
   "likes": 1058,
   "licence": "CC Attribution-NonCommercial",
-  "author": "\u15e9\u14aaE\u166d. K\u15e9.\ud83d\ude97",
+  "author": "ᗩᒪE᙭. Kᗩ.🚗",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 4,
@@ -11461,7 +11461,7 @@
   "faces": 66731,
   "likes": 322,
   "licence": "CC Attribution-NonCommercial",
-  "author": "Outlaw Games\u2122",
+  "author": "Outlaw Games™",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 3,
@@ -11541,7 +11541,7 @@
   "faces": 65730,
   "likes": 3,
   "licence": "Free Standard",
-  "author": "Sefa \u015eAH\u0130N",
+  "author": "Sefa ŞAHİN",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 1,
@@ -11653,7 +11653,7 @@
   "faces": 61519,
   "likes": 29,
   "licence": "CC Attribution-NonCommercial",
-  "author": "\u200e\u3164\u200e\u3164\u200e\u3164\u200e\u3164",
+  "author": "‎ㅤ‎ㅤ‎ㅤ‎ㅤ",
   "plate": "BMW",
   "anchor": 0,
   "bodyMaterials": 4,
