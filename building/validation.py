@@ -32,6 +32,7 @@ MODES = (
     "planning",      # address -> site designations -> can this be built?
     "model",         # drawing's figured dimensions -> 3D building -> OBJ/IFC
     "render",        # gps + measured zone -> proposal drawn on real aerial
+    "propose",       # address -> measured house + designed extension in 3D
 )
 
 # Roof capture sources, cheapest and easiest first.
@@ -947,6 +948,14 @@ def _check_required_inputs(spec):
             raise InputError(
                 "render needs render_zone — the measured rectangle the "
                 "extension must stay inside. See validation of its fields.")
+
+    if mode == "propose" and not (spec["address"] or spec["postcode"]
+                                  or spec["gps"]):
+        raise InputError(
+            "propose needs an address, a postcode, or gps. Give it an "
+            "address and it will find the outline, the roof and which way "
+            "the house faces; on a terrace it needs gps for the house "
+            "itself, because the map holds the whole row as one building.")
 
     if mode == "valuation" and not (spec["postcode"] or spec["address"]):
         raise InputError(
