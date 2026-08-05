@@ -100,6 +100,36 @@ p2 = S._prompt({})
 check("4d defaults exist when caller silent", "brickwork" in p2)
 
 
+# --- 5. the deterministic composite stays inside its zone -------------------
+# Two live endpoint runs proved the AI cannot be trusted with geometry; the
+# composite exists so the roof CANNOT land on the street. Verified by
+# construction: every changed pixel lies within the zone's bounding box
+# plus the shadow margin.
+import tempfile
+from PIL import Image
+import numpy as np
+
+with tempfile.TemporaryDirectory() as td:
+    base = os.path.join(td, "aerial_crop.jpg")
+    Image.new("RGB", (900, 900), (120, 110, 100)).save(base, quality=92)
+    out = S.composite(base, zone, td)
+    a = np.asarray(Image.open(base).convert("RGB"), dtype=int)
+    b = np.asarray(Image.open(out).convert("RGB"), dtype=int)
+    diff = (np.abs(a - b).sum(axis=2) > 12)
+    ys, xs = np.nonzero(diff)
+    check("5a the composite changed something", len(xs) > 1000)
+    pol = S.zone_polygon(zone)
+    pxs = [p[0] for p in pol]; pys = [p[1] for p in pol]
+    m = 30   # shadow + fascia margin
+    inside = ((xs >= min(pxs) - m) & (xs <= max(pxs) + m) &
+              (ys >= min(pys) - m) & (ys <= max(pys) + m))
+    check("5b every changed pixel is inside the zone (+shadow margin)",
+          bool(inside.all()),
+          f"{int((~inside).sum())} stray pixels")
+    check("5c rooflights present (bright frames on dark roof)",
+          bool((b[diff][:, 0] > 180).any()))
+
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

@@ -139,6 +139,72 @@ def crop_and_mark(aerial_path, lat, lon, zone, work_dir):
     return clean, marked_path
 
 
+def composite(clean_path, zone, work_dir, sun_deg=225.0):
+    """Draw the proposed roof-plan INTO the zone, deterministically.
+
+    Two live endpoint runs asked the generator to respect the constraint
+    rectangle and it slabbed the whole terrace both times. Geometry is not
+    something to request politely from a diffusion model — it is placed by
+    code, to the millimetre-equivalent, every single run. The membrane
+    tone, fascia, rooflights and a sun-side shadow are drawn at the crop's
+    scale; the AI pass (style="ai") remains available for styling but the
+    DEFAULT ships the version that cannot put the roof on the street.
+    """
+    from PIL import Image, ImageDraw, ImageFilter
+    import random
+
+    im = Image.open(clean_path).convert("RGB")
+    ppm = OUT_PX / (2 * CROP_HALF_M)
+    poly = zone_polygon(zone, ppm=ppm)
+
+    # soft drop shadow first, offset away from the sun
+    sh = Image.new("L", im.size, 0)
+    off = 0.45 * ppm / 25 * 25
+    dx = -math.sin(math.radians(sun_deg)) * 0.35 * ppm / 6
+    dy = math.cos(math.radians(sun_deg)) * 0.35 * ppm / 6
+    ImageDraw.Draw(sh).polygon([(x + dx * 6, y + dy * 6) for x, y in poly],
+                               fill=110)
+    sh = sh.filter(ImageFilter.GaussianBlur(6))
+    black = Image.new("RGB", im.size, (10, 10, 12))
+    im = Image.composite(black, im, sh.point(lambda v: v // 2))
+
+    d = ImageDraw.Draw(im)
+    d.polygon(poly, fill=(74, 76, 79))                    # membrane
+    # subtle tonal noise so the surface is not a flat vector
+    rnd = random.Random(37)
+    minx = int(min(p[0] for p in poly)); maxx = int(max(p[0] for p in poly))
+    miny = int(min(p[1] for p in poly)); maxy = int(max(p[1] for p in poly))
+    mask = Image.new("L", im.size, 0)
+    ImageDraw.Draw(mask).polygon(poly, fill=255)
+    px = im.load(); mk = mask.load()
+    for _ in range((maxx - minx) * (maxy - miny) // 14):
+        x = rnd.randint(minx, maxx - 1); y = rnd.randint(miny, maxy - 1)
+        if mk[x, y]:
+            r, g, b = px[x, y]
+            v = rnd.randint(-7, 7)
+            px[x, y] = (r + v, g + v, b + v)
+    d.polygon(poly, outline=(52, 54, 57), width=3)        # fascia line
+
+    # two rooflights on the long axis, thirds of the zone
+    def lerp(p, q, f):
+        return (p[0] + (q[0] - p[0]) * f, p[1] + (q[1] - p[1]) * f)
+    for f in (1 / 3, 2 / 3):
+        c = lerp(lerp(poly[0], poly[1], f), lerp(poly[3], poly[2], f), 0.5)
+        u = ((poly[1][0] - poly[0][0]) / max(1e-9, math.dist(poly[0], poly[1])),
+             (poly[1][1] - poly[0][1]) / max(1e-9, math.dist(poly[0], poly[1])))
+        v = ((poly[3][0] - poly[0][0]) / max(1e-9, math.dist(poly[0], poly[3])),
+             (poly[3][1] - poly[0][1]) / max(1e-9, math.dist(poly[0], poly[3])))
+        hw = 0.55 * ppm; hh = 0.4 * ppm
+        quad = [(c[0] + sx * hw * u[0] + sy * hh * v[0],
+                 c[1] + sx * hw * u[1] + sy * hh * v[1])
+                for sx, sy in ((-1, -1), (1, -1), (1, 1), (-1, 1))]
+        d.polygon(quad, fill=(38, 44, 54), outline=(210, 212, 214), width=2)
+
+    out = os.path.join(work_dir, "render.png")
+    im.save(out)
+    return out
+
+
 def _prompt(spec):
     e = spec.get("extension") or {}
     finish = e.get("finish") or "facing brickwork matched to the house"
@@ -217,7 +283,10 @@ def run(spec, prog, output_dir):
     clean, marked = crop_and_mark(aerial, lat, lon, zone, directory)
 
     prog.stage("rendering")
-    render = gemini_edit(marked, _prompt(spec), gemini_key, directory)
+    if (spec.get("extension") or {}).get("style") == "ai":
+        render = gemini_edit(marked, _prompt(spec), gemini_key, directory)
+    else:
+        render = composite(clean, zone, directory)
 
     prog.stage("delivering")
     scan = spec.get("scan_id") or "render"
