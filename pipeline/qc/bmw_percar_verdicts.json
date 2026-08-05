@@ -30,5 +30,29 @@
  "93fce305fc644254a20f01fda89abe97": [
   "KEEP",
   "3 Series Touring F31 940k f cov 0.175 - chrome-framed kidney grille with real slat depth, headlights carry corona-ring internals, tail lamps have the L-shape structure, black multi-spoke alloys consistent across all four views, defined shut lines throughout. NOTE bmw-3-series-v1 is already a 3 Series Touring, so this only publishes if it beats that car on the eye test"
+ ],
+ "903de51362834571af1dc13145b61765": [
+  "SCRAP",
+  "X1 E84 2013 - wheels change material between views: black multi-spoke in both front three-quarters, bright silver in the side and rear three-quarter. that is the rubric fail item verbatim. X1 is also already covered twice by bmw-x1-v1 and bmw-x1-2020-w12-v1"
+ ],
+ "df6b8dba339f4818ab06480791a6853d": [
+  "SCRAP",
+  "E46 Touring - the GLB is a scene, not a car: huge white slab geometry and a small floating object dominate the bounding box, so the framing pulls back and the car occupies a fraction of every view. same defect class as the Audi A6 Avant with the paint swatch board"
+ ],
+ "a65d9f1c5fb64e289c8a0dfebd79ebc7": [
+  "KEEP",
+  "M1 E26 914k f cov 0.232 - proportions read as an M1 instantly, period-correct fan-blade wheels consistent across all four views, defined bonnet/door/engine-louvre shut lines, clean gloss, correct kidney grille and amber marker lenses. headlights are retracted pop-ups so the LED-internals criterion does not apply to a 1978 car. the library has no M1"
+ ],
+ "8e3e61542c3d468abb35e5d356ee0a65": [
+  "SCRAP",
+  "3.0 CSL Hommage is a 2015 concept show car, never produced, so no UK registration decodes to it"
+ ],
+ "6b0257c4a9744567bf02235da2874bba": [
+  "SCRAP",
+  "titled BMW-M-Power-Electrical but it is the 3.0 CSL Hommage R concept - huge rear wing, race aero, not a production car. second upload of the same concept in this batch"
+ ],
+ "1af5806c88244419ab8641d678698c60": [
+  "SCRAP",
+  "520d Touring F11 - NO WHEELS. all four corners are featureless flat grey discs with no spokes and no tyres, sunk into the arches, in every view"
  ]
 }
