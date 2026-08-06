@@ -649,9 +649,40 @@ def place_extension(width, depth, brief, clearances):
             fit["return"] = (
                 f"dropped — {clearances.get(side, 0.0)}m clear to the {side} "
                 f"cannot take a usable return. Built as a rear extension.")
+    elif kind == "over":
+        # BEDROOMS ON TOP OF WHAT IS ALREADY THERE. The classic 1930s-semi
+        # job: a single-storey garage, utility or side element down one
+        # flank, and a first floor built over it. There is no new ground
+        # floor, no new foundations to dig unless the existing ones fail the
+        # check, and no ground taken from the plot — which is why it is the
+        # answer on a tight site where a side extension has already been
+        # refused for want of 1.8m.
+        #
+        # It is modelled as a block starting at level 1, so the quantities
+        # count one floor and not two. Getting that wrong prices a ground
+        # floor the client already owns.
+        side = brief.get("side")
+        options = {s: clearances.get(s, 0.0) for s in ("east", "west")}
+        if side not in options:
+            side = max(options, key=options.get)
+        room_w = min(float(brief.get("width_m") or 3.2), width * 0.5)
+        d = min(float(brief.get("length_m") or depth * 0.8), depth)
+        # INSIDE the footprint, not beside it. Placed on the flank the first
+        # version put it OUTSIDE the outline, where there is by definition
+        # nothing underneath — the render showed a first floor hanging in
+        # mid-air with daylight beneath it. "On top" means on top of
+        # something, so the block sits over the existing house's own flank.
+        x = (width - room_w) if side == "east" else 0.0
+        fit["side"] = side
+        fit["over_existing"] = True
+        fit["built_m"] = {"width": round(room_w, 2), "depth": round(d, 2)}
+        fit["base_level"] = 1
+        rooms.append(model3d.Room("extension over", x, depth - d, room_w, d,
+                                  ext_h, kind="extension",
+                                  storeys=ext_storeys, base_level=1))
     else:
         raise ProposeError(
-            f"unknown extension type {kind!r} — rear, side or wrap")
+            f"unknown extension type {kind!r} — rear, side, wrap or over")
     return rooms, fit
 
 

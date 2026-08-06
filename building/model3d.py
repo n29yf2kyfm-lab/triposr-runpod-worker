@@ -56,7 +56,7 @@ class Room:
     """One space, positioned by its bottom-left corner in metres."""
 
     def __init__(self, name, x, y, width, depth, height=None, kind="room",
-                 storeys=None):
+                 storeys=None, base_level=0):
         if width <= 0 or depth <= 0:
             raise ModelError(f"{name}: a room needs a positive width and depth")
         area = width * depth
@@ -77,6 +77,12 @@ class Room:
         # back with a phantom first floor sitting on it, and a 350mm band of
         # daylight where its 2.4m walls stopped under a 2.75m storey.
         self.storeys = None if storeys is None else int(storeys)
+        # WHICH STOREY THIS BLOCK STARTS ON. 0 is the ground floor. A first-
+        # floor extension over an existing single-storey side element — very
+        # common on a 1930s semi with a garage or utility down the side — is
+        # base_level 1, and without this it can only be modelled as a
+        # two-storey block, which prices a ground floor that is already built.
+        self.base_level = int(base_level)
 
     @property
     def area_m2(self):
@@ -94,6 +100,7 @@ class Room:
     def as_dict(self):
         return {"name": self.name, "kind": self.kind,
                 "storeys": self.storeys,
+                "base_level": self.base_level,
                 "x": round(self.x, 3), "y": round(self.y, 3),
                 "width_m": round(self.width, 3), "depth_m": round(self.depth, 3),
                 "height_m": round(self.height, 3),
@@ -163,6 +170,9 @@ class Wall:
         self.outward = 1
         # None = present on every storey. Set from the room that raised it.
         self.storeys = None
+        # First storey this wall exists on. Non-zero for a block built over
+        # something that is already there.
+        self.base_level = 0
         # How many storeys have a room on BOTH sides. Above this an
         # "internal" wall faces the weather and is built as such.
         self.shared_storeys = None
@@ -204,6 +214,7 @@ class Wall:
                 "external": self.external,
                 "outward": self.outward,
                 "storeys": self.storeys,
+                "base_level": self.base_level,
                 "shared_storeys": self.shared_storeys,
                 "net_area_m2": round(self.area_m2, 2),
                 "openings": self.openings}
@@ -216,8 +227,13 @@ def _wall_on_level(wall, level):
     Repeating it up the building is what put a first floor on every rear
     extension this module has ever modelled.
     """
-    n = wall.get("storeys") if isinstance(wall, dict) else wall.storeys
-    return n is None or level < n
+    if isinstance(wall, dict):
+        n, base = wall.get("storeys"), wall.get("base_level") or 0
+    else:
+        n, base = wall.storeys, getattr(wall, "base_level", 0)
+    if level < base:
+        return False
+    return n is None or level < base + n
 
 
 def walls_from_rooms(rooms, internal=DEFAULT_WALL_THICKNESS_M,
@@ -239,6 +255,7 @@ def walls_from_rooms(rooms, internal=DEFAULT_WALL_THICKNESS_M,
                 continue
             wall = Wall(a, b, internal, room.height, external=True)
             wall.storeys = room.storeys
+            wall.base_level = room.base_level
             seen[key] = wall
             walls.append(wall)
 
@@ -688,9 +705,9 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
     # single-storey rear extensions in this country.
     caps = []
     for r in rooms:
-        if r.storeys is None or r.storeys >= storeys:
+        if r.storeys is None or r.base_level + r.storeys >= storeys:
             continue
-        cap_z = per_storey * (r.storeys - 1) + r.height
+        cap_z = per_storey * (r.base_level + r.storeys - 1) + r.height
         caps.append({"x": [round(r.x, 3), round(r.x + r.width, 3)],
                      "y": [round(r.y, 3), round(r.y + r.depth, 3)],
                      "z_m": round(cap_z, 3), "kind": "flat"})
@@ -701,7 +718,10 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
     # front door is on the ground floor, and multiplying it up put a phantom
     # door (and its missing wall area) on every floor of the take-off.
     def _levels(w):
-        return storeys if w.storeys is None else min(w.storeys, storeys)
+        base = getattr(w, "base_level", 0)
+        if w.storeys is None:
+            return max(0, storeys - base)
+        return max(0, min(base + w.storeys, storeys) - base)
 
     def _count(kind):
         return sum(_levels(w) if o["level"] is None else 1
