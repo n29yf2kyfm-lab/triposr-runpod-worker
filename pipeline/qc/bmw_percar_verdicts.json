@@ -278,5 +278,21 @@
  "718330da085e4bbe805aa2d72a6b81a6": [
   "SCRAP",
   "1997 M3 E36 LSM - the same widebody drift build already scrapped in this wave under BMW-E36-LSM-IASI: mirror-chrome and carbon panels, box arch flares, oversized rear wing, roll cage. re-uploaded under a different title by the same author"
+ ],
+ "87c972d41e9e4717b2d2db206bf315ae": [
+  "KEEP",
+  "3 Series G20 330i 371k f cov 0.239 - the current-generation 3 Series saloon. the library ships bmw-3-series-2021-w12-v1 with no poster and a 2014 car; this is a clean G20. kidney grille with real slat depth, headlights carrying internal LED structure, multi-spoke alloys with red calipers consistent across all four views, defined shut lines, correct L-shaped tail lamps, clean gloss. NOTE two 3 Series saloons are already live, so this only publishes if it beats them"
+ ],
+ "97901a0eca4344c4a12f2a134d79775b": [
+  "SCRAP",
+  "i4 G26 - NO WHEELS, all four arches empty with white brake assemblies exposed and a single detached wheel sitting under the sill. bmw-i4-v1 already covers the i4"
+ ],
+ "be22631374fd4cf086be3a6271cb6838": [
+  "KEEP",
+  "2002ti 350k f cov 0.329 - proportions read as an 02-series instantly, the library has nothing older than the E23. round headlights sit behind clear covers with visible internal reflectors, twin kidney grille with real chrome frame and slat depth, period steel wheels with chrome caps consistent across all four views, defined bonnet/door/boot shut lines, crisp chrome bumpers and window trim, clean gloss. a BMW 2002 plate is baked on and would be replaced with GB"
+ ],
+ "4209f1f8143f4e1694d621b5b75e6c6e": [
+  "SCRAP",
+  "BMW_2002ti, 348,934 f against the 349,762 f above at IDENTICAL cov 0.329 - the same file re-uploaded by a different author, 828 faces apart. G11 missed it because 2002ti resolves to no nameplate at all: not a series number, not an X/Z/i code, not a chassis code, and the engine-code pattern needs three digits after an optional m"
  ]
 }
