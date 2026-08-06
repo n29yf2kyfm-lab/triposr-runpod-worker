@@ -622,5 +622,29 @@
  "996ef8c41d324846b5b8cfd3ff8c7031": [
   "SCRAP",
   "X5 E53 134k f cov 0.169 - REDUNDANT. The E53 gap was filled earlier in this wave by 1dfdb422f05d44b287e332bec4311c50 at 210k f, half again the geometry, with crisper headlight internals. This copy also has two thin antenna spikes modelled on the roof."
+ ],
+ "7d8adf8e0be441b8be072b32d7987421": [
+  "SCRAP",
+  "Vision Gran Turismo 2014 128k f cov 0.354 - CONCEPT, and a video-game one at that. Never a production car: full ground-effect underbody with vertical strakes, exposed roll cage through the glasshouse, fixed rear wing, no lights, no plates, no door handles. A checkerboard display plinth is also baked into the scene under the car in every view."
+ ],
+ "08030fc6db9b4167b1cddcb04a5d70c1": [
+  "SCRAP",
+  "M4 F82 2015 126k f cov 0.197 - REDUNDANT. Eighth M4 judged in this wave. bmw-m4-competition-2021-bm1-v1 holds the slot at 683k f, with bmw-m4-v1 and bmw-m4-w12-v1 also live. Clean model but a fifth of the incumbent geometry and no added coverage."
+ ],
+ "ec36b6bc05404122ae073f9e84906825": [
+  "SCRAP",
+  "5 Series Touring E61 120k f cov 0.262 - SCENE FURNITURE baked into the asset. A large paint-swatch billboard listing Alpine White, Amethyst Gray Metallic, Black Sapphire Metallic and so on stands beside the car in every view, and a second ghost car body sits behind it in the front three-quarter. The car itself has wheels, unusually for this author, but the asset is a showroom scene rather than a vehicle."
+ ],
+ "f8208571402d446e9e0aff9a7ceacfff": [
+  "SCRAP",
+  "M5 E39 1995 119k f cov 0.132 - REDUNDANT and the third E39 M5 in this wave. 531a5a93da5d493d9918eb36f011c20d holds the slot at 287k f. This one also carries the same faceted grey artefacts inside the rear screen and side glass as 0ea7dcdc64aa4490ab54dd1f8cf28770 from the same uploader, and sits lowered with thin paint at 0.132."
+ ],
+ "ac3c7013434e403e8faff87948caf422": [
+  "SCRAP",
+  "M3 E30 117k f cov 0.302 - REDUNDANT. Genuinely nice period model - correct box arches, BBS cross-spoke wheels, quad round headlamps with defined reflectors, crisp shut lines - but bmw-m3-e30-undated-v1 already holds the slot and this is not a demonstrable upgrade on it."
+ ],
+ "817b404a8fae494bba36423dc8298b0e": [
+  "SCRAP",
+  "M3 E30 117k f - REDUNDANT and an exact cross-author re-upload of ac3c7013434e403e8faff87948caf422. Face count matches to the digit (117,261 both), cov 0.302 and mats 1 identical, and the four rendered views are indistinguishable down to the light streaks on the glass. One is titled [FREE] BMW M3 E30, the other BMW E30 Free."
  ]
 }
