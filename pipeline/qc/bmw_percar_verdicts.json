@@ -574,5 +574,29 @@
  "feefda95d65448e894560822d44df227": [
   "SCRAP",
   "M3 GTR E46 173k f cov 0.161 - MOTORSPORT with baked livery, and wheels missing. Castrol and M Power sponsor decals are painted into the body texture on the roof, doors, screen banner and wing endplates, which no recolour removes. All four arches are empty with bare hub carriers and one loose wheel on the floor. Second M3 GTR scrapped in this wave after 51b155adad3c4dd18ff76bfcfe1a6e3b."
+ ],
+ "cbf4f691cabc4dee9e3740e16b7ab8ee": [
+  "SCRAP",
+  "M3 Competition xDrive Touring G81 171k f cov 0.305 - REDUNDANT. Genuinely premium model (mesh kidney, laser headlight internals, carbon roof, crisp shut lines, consistent alloys), but it is the same nameplate and generation as bmw-m3-2023-w12-v1, so a DVLA decode reading M3 matches both. Unlike the convertibles kept in this wave, the estate is not a missing body style either - bmw-3-series-touring-bm1-v1 and bmw-3-series-v1 both already cover the 3 Series Touring. Worth revisiting only if the resolver ever gains a body-style field."
+ ],
+ "566974ea0aa24a4aa3d899c49e50a152": [
+  "SCRAP",
+  "Untitled saloon 169k f cov 0.282 - modelling quality fails the bar and the vehicle is not identifiable. The body is a smoothed blob: no shut lines anywhere, door handles reduced to flat slots, no panel gaps. Headlights render as smeared multi-coloured artefacts with scattered green, red and orange dots; tail lights are thin red strips. Does not read as any specific BMW."
+ ],
+ "fe4d2a9dba094894b383a2693a2e172c": [
+  "SCRAP",
+  "6 Series E63 168k f - WHEELS MISSING plus stray objects. Bare brake discs in all four arches with a loose gold wheel sitting under the car, and two green blobs are baked into the scene on top of the bonnet. Thirty-ninth Merc_TV asset judged in this wave, still zero keeps."
+ ],
+ "343119ddf2a448b986fa2280491b4d6d": [
+  "SCRAP",
+  "8 Series Concept 164k f cov 0.306 - CONCEPT CAR, not a production model. This is the 2017 Concept 8 Series show car, with 8 Series show-stand lettering modelled into both bumpers in place of plates. The uploader titles it Attempt 1 and the geometry shows it: faceted low-poly creasing across the rear quarter and front wing. No UK registration resolves to a concept."
+ ],
+ "294d9e2579324839a6314a9659e8309b": [
+  "SCRAP",
+  "M4 GTS F82 152k f cov 0.119 - REDUNDANT and a track special. Sixth M4 judged in this wave; bmw-m4-competition-2021-bm1-v1 holds the slot at 683k f with bmw-m4-v1 and bmw-m4-w12-v1 also live. This is the GTS with fixed swan-neck wing, roll cage and orange accents, and its paint coverage is thin at 0.119."
+ ],
+ "6ba5d67b2a244a23abfbeb2c5ff14e2e": [
+  "SCRAP",
+  "3 Series E30 151k f cov 0.328 - modelling quality fails the bar. Headlights are flat round discs with no reflector or internal structure; there are no door or bonnet shut lines at all; the body surfaces are smoothed with the panel creases lost; the black bumper trim reads as a plain band. Library already covers the shape with bmw-m3-e30-undated-v1."
  ]
 }
