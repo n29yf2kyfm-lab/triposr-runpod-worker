@@ -170,5 +170,21 @@
  "5b4525b4e0a94ad6aa1280290c217e02": [
   "SCRAP",
   "M4 CSL - the CSL red racing stripes are baked across the bonnet, roof and side skirts, and with mats=2 at cov 0.129 they are not the paint material, so they survive all eight colour swaps. also a 1,000-unit limited edition rather than the car a UK registration decodes to"
+ ],
+ "cb0e6185358b421a8c2b2407c3b1cc41": [
+  "SCRAP",
+  "X7 G07 - the front left wheel is MISSING in the leading three-quarter, replaced by an empty arch with the car resting on nothing, and the front right renders as a black void in the same view. panel surfaces also read lumpy along the doors. bmw-x7-v1 already covers the X7"
+ ],
+ "0f017b95016c40b9838d2e6924252137": [
+  "SCRAP",
+  "525i E34 - the GLB is a SCENE: a large BMW roundel and the words 525i are baked in as geometry standing beside the car, appearing in all four views and mirrored in two. same defect class as the Audi A6 Avant paint swatch board"
+ ],
+ "df034130855d42009e9bbd170db1ba6d": [
+  "SCRAP",
+  "M4 Competition Rigged - the entire front end is MISSING in the leading three-quarter and side: no bonnet, no front wing, no bumper, the front wheel sitting on a bare stub axle with the chassis open to air. the two rear views look complete, which is exactly why a single hero angle would have passed this"
+ ],
+ "c8520ce964b44f098f98c9dfee7a208a": [
+  "SCRAP",
+  "M3 E30 with a full custom treatment baked in - GOLD window surrounds, gold side stripe, gold multi-spoke wheels and blue-tinted quad headlights, plus a blue rear panel. with mats=1 at cov 0.262 none of that gold or blue is the paint material, so it survives all eight colour swaps. bmw-m3-e30-undated-v1 already covers the E30 M3"
  ]
 }
