@@ -394,5 +394,25 @@
  "66afa45b63cf4248977c87c0a32841ba": [
   "SCRAP",
   "V12 LMR 261k f - MOTORSPORT and a cross-author re-upload of 41efee8f1dfd45678b375ab6da914217 (261,413 f vs 261,664 f, identical cov 0.245 and mats 2). Rendered side by side the four views are indistinguishable. Same reason: open-cockpit Le Mans prototype, not a road car."
+ ],
+ "275b2afd66604918affef8529074fdde": [
+  "SCRAP",
+  "M1 Procar 261k f - MOTORSPORT. Titled M1 Turbo but the render is the Group 4/Procar race car: full-width rear wing on struts, boxed wide-arch bodywork, front splitter, blanked race nose with round light pods instead of pop-up headlamps, Dunlop racing slicks on gold BBS centre-lock wheels. Not a road car. Redundant too - the road M1 is already kept in this wave as bmw-m1-bm1-v1."
+ ],
+ "a1d94649b23440269c97c210444dd7cb": [
+  "SCRAP",
+  "M1 Procar 257k f - MOTORSPORT and a cross-author re-upload of 275b2afd66604918affef8529074fdde (256,731 f vs 261,293 f, same cov 0.18, same mats 1). Same wing, same arches, same Dunlop slicks; only the wheel finish differs (chrome vs gold). Same vecarz account that re-uploaded the V12 LMR earlier in this batch."
+ ],
+ "5478e978bd634337adc8e3dc413fbfa3": [
+  "SCRAP",
+  "M5 F90 260k f cov 0.114 mats 2 - REDUNDANT. Clean pre-LCI F90, but bmw-m5-f90-undated-v1 already ships and I compared its portimao-blue hero side by side: the incumbent has sharper headlight internals, real honeycomb mesh in the bumper intakes, a carbon front splitter and defined shut lines. This is not an upgrade, and its paint coverage is thin at 0.114."
+ ],
+ "0c5d6628c18f488d94d8fea6b6af21bb": [
+  "SCRAP",
+  "M5 F90 LCI 259k f cov 0.114 mats 2 - REDUNDANT. Untitled (just Bmw); render identifies it as the F90 LCI facelift. Good model, but the F90 slot is filled by bmw-m5-f90-undated-v1 which reads sharper at the front, and the G90 kept earlier in this wave covers the newer generation. A third F90-family M5 adds no coverage."
+ ],
+ "41cf538e153d40c1b64f894a325edef6": [
+  "SCRAP",
+  "5 Series E60 255k f cov 0.163 - TUNER/STANCE build, not a stock car. Slammed to the deck with extreme negative camber on all four corners (front wheels visibly tucked and tilted inside the arches), aftermarket white deep-dish wheels with blue calipers, and a non-UK show plate TX 1337 TM baked into both bumpers. Library already has bmw-5-series-e60-v1 for this generation."
  ]
 }
