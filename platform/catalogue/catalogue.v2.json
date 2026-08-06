@@ -160506,7 +160506,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m3-e92-bm1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m3-e92-bm1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m3-e92-bm1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m3-e92-bm1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m3-e92-bm1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m3-e92-bm1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m3-e92-bm1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m3-e92-bm1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m3-e92-bm1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m3-e92-bm1-v1.glb",
   "fallbackGlbUrl": null,
@@ -160647,7 +160656,88 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -160703,7 +160793,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-2021-bm1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-2021-bm1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-2021-bm1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-2021-bm1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-2021-bm1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-2021-bm1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-2021-bm1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-2021-bm1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m440i-2021-bm1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m440i-2021-bm1-v1.glb",
   "fallbackGlbUrl": null,
@@ -160844,7 +160943,88 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -160902,7 +161082,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-3-series-touring-bm1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-3-series-touring-bm1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-3-series-touring-bm1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-3-series-touring-bm1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-3-series-touring-bm1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-3-series-touring-bm1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-3-series-touring-bm1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-3-series-touring-bm1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-3-series-touring-bm1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-3-series-touring-bm1-v1.glb",
   "fallbackGlbUrl": null,
@@ -161043,7 +161232,88 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -161100,7 +161370,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m1-bm1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m1-bm1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m1-bm1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m1-bm1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m1-bm1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m1-bm1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m1-bm1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m1-bm1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m1-bm1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m1-bm1-v1.glb",
   "fallbackGlbUrl": null,
@@ -161241,7 +161520,88 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -161297,7 +161657,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-i8-roadster-2019-bm1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-i8-roadster-2019-bm1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-i8-roadster-2019-bm1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-i8-roadster-2019-bm1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-i8-roadster-2019-bm1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-i8-roadster-2019-bm1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-i8-roadster-2019-bm1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-i8-roadster-2019-bm1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-i8-roadster-2019-bm1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-i8-roadster-2019-bm1-v1.glb",
   "fallbackGlbUrl": null,
@@ -161438,7 +161807,88 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -161495,7 +161945,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-728i-e23-1982-bm1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-728i-e23-1982-bm1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-728i-e23-1982-bm1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-728i-e23-1982-bm1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-728i-e23-1982-bm1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-728i-e23-1982-bm1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-728i-e23-1982-bm1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-728i-e23-1982-bm1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-728i-e23-1982-bm1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-728i-e23-1982-bm1-v1.glb",
   "fallbackGlbUrl": null,
@@ -161636,7 +162095,88 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -161692,7 +162232,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m4-competition-2021-bm1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m4-competition-2021-bm1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m4-competition-2021-bm1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m4-competition-2021-bm1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m4-competition-2021-bm1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m4-competition-2021-bm1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m4-competition-2021-bm1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m4-competition-2021-bm1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m4-competition-2021-bm1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m4-competition-2021-bm1-v1.glb",
   "fallbackGlbUrl": null,
@@ -161833,7 +162382,88 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -161891,7 +162521,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-850csi-e31-1996-bm1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-850csi-e31-1996-bm1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-850csi-e31-1996-bm1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-850csi-e31-1996-bm1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-850csi-e31-1996-bm1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-850csi-e31-1996-bm1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-850csi-e31-1996-bm1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-850csi-e31-1996-bm1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-850csi-e31-1996-bm1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-850csi-e31-1996-bm1-v1.glb",
   "fallbackGlbUrl": null,
@@ -162032,7 +162671,88 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -162094,7 +162814,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-z8-2000-bm1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-z8-2000-bm1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-z8-2000-bm1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-z8-2000-bm1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-z8-2000-bm1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-z8-2000-bm1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-z8-2000-bm1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-z8-2000-bm1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-z8-2000-bm1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-z8-2000-bm1-v1.glb",
   "fallbackGlbUrl": null,
@@ -162235,7 +162964,88 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -162291,7 +163101,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x6-m-2022-bm1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x6-m-2022-bm1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x6-m-2022-bm1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x6-m-2022-bm1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x6-m-2022-bm1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x6-m-2022-bm1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x6-m-2022-bm1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x6-m-2022-bm1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x6-m-2022-bm1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x6-m-2022-bm1-v1.glb",
   "fallbackGlbUrl": null,
@@ -162432,7 +163251,88 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -162489,7 +163389,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-ix3-2021-bm1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-ix3-2021-bm1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-ix3-2021-bm1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-ix3-2021-bm1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-ix3-2021-bm1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-ix3-2021-bm1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-ix3-2021-bm1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-ix3-2021-bm1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-ix3-2021-bm1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-ix3-2021-bm1-v1.glb",
   "fallbackGlbUrl": null,
@@ -162630,7 +163539,88 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -162686,7 +163676,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x7-m60i-bm1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x7-m60i-bm1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x7-m60i-bm1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x7-m60i-bm1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x7-m60i-bm1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x7-m60i-bm1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x7-m60i-bm1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-x7-m60i-bm1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x7-m60i-bm1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x7-m60i-bm1-v1.glb",
   "fallbackGlbUrl": null,
@@ -162827,7 +163826,88 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -162885,7 +163965,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-gran-coupe-2022-bm1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-gran-coupe-2022-bm1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-gran-coupe-2022-bm1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-gran-coupe-2022-bm1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-gran-coupe-2022-bm1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-gran-coupe-2022-bm1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-gran-coupe-2022-bm1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/bmw/bmw-m440i-gran-coupe-2022-bm1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m440i-gran-coupe-2022-bm1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m440i-gran-coupe-2022-bm1-v1.glb",
   "fallbackGlbUrl": null,
@@ -163026,6 +164115,87 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Dravit Grey Metallic",
+     "colourFamily": "Dark Gunmetal",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Mineral Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Black Sapphire Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbon Black Metallic",
+     "colourFamily": "Blue Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Alpine White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Mineral White Metallic",
+     "colourFamily": "Pearl White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portimao Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Phytonic Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Toronto Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Isle of Man Green Metallic",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  }
 ]
