@@ -457,7 +457,7 @@
  ],
  "d4d6bd0bfae445128dd01e095dd081d3": [
   "SCRAP",
-  "M2 CS F87 222k f cov 0.179 - REDUNDANT plus a baked-in foreign plate. The M2 slot is held by bmw-m2-v1 (2019 M2 Competition) and d382aeb1d3e2413c9269ae6795e28c6a was already scrapped for the same reason. This one additionally carries a Korean registration plate (389 8111) modelled into both front and rear bumpers, which no recolour removes."
+  "M2 CS F87 222k f cov 0.179 - REDUNDANT. The M2 slot is held by bmw-m2-v1 (2019 M2 Competition) and d382aeb1d3e2413c9269ae6795e28c6a was already scrapped for the same reason. AMENDED: my first note also cited its baked-in Korean plate as unremovable. That was wrong - I checked add_plates.py afterwards and it bakes a GB quad against the vertex-scanned bumper face at plate height, which covers a plate sitting in the standard position. The plate is not a reason to scrap; the redundancy is, and it stands on its own."
  ],
  "e307c3f1df9d40afafbb36f6f69c28d1": [
   "SCRAP",
@@ -473,10 +473,34 @@
  ],
  "68c905e5d2d14e5da8b92793a968b2c2": [
   "SCRAP",
-  "X6 2020 213k f cov 0.196 - REDUNDANT plus author watermark. The library already ships bmw-x6-2020-v1 and bmw-x6-m-2022-bm1-v1. This model has the uploader name ItsDiyor modelled into the front number plate, which would appear on every colour variant."
+  "X6 2020 213k f cov 0.196 - REDUNDANT. The library already ships bmw-x6-2020-v1 and bmw-x6-m-2022-bm1-v1, and this is not an upgrade on either. AMENDED: my first note also cited the ItsDiyor watermark on the front plate as appearing on every colour variant. That was wrong - the watermark sits on the plate itself, in the standard position that add_plates.py covers with a GB quad. Redundancy is the sole ground, and it holds."
  ],
  "8f4f07c22dcb4d188e95dc2c6555a60a": [
   "SCRAP",
   "M5 F90 212k f - WHEELS MISSING and bonnet detached. All four arches are empty with only a coil spring and a stub hub visible; the bonnet floats as a separate slab above the roofline in every view; a single loose wheel sits under the car. Same Merc_TV failure mode as the E39, E36 and E92 in this wave."
+ ],
+ "1dfdb422f05d44b287e332bec4311c50": [
+  "KEEP",
+  "X5 E53 210k f cov 0.161 - the library has bmw-x5-2019-w12-v1 and bmw-x5-2024-v1 but no E53, so the first-generation X5 is a clear gap. Proportions read as an E53 instantly; front 3/4 strong; roof rails, pillars and wheelbase consistent across all four views; angel-eye rings and projector housings formed inside the headlights; kidney slats defined; door handles, shut lines and side steps all crisp; multi-spoke alloys identical in every view; clean gloss. It carries a German plate IN TT 220 in the standard bumper position, which add_plates.py covers with a GB quad - verified in the code, not assumed. Paint reads slightly flat and the fog lights are soft; neither is a fail."
+ ],
+ "72a7165bfb8c455e9dd8206e40e3347a": [
+  "KEEP",
+  "8 Series Convertible G14 207k f cov 0.202 - CABRIOLET, a body style the library lacks; bmw-8-series-v1 and bmw-m8-v1 are both closed cars. Titled M8 2020 but the boot badge reads M850i, so recorded as the 8 Series Convertible rather than an M8. Proportions read instantly; front 3/4 strong; roof line, pillars and wheelbase consistent across all four views with the soft-top stowed; laser headlights carry blue internal LED elements; kidney grille slats defined; multi-spoke alloys with blue calipers identical in every view; shut lines crisp; clean premium gloss. Same body-style reasoning as the M440i Convertible kept earlier in this wave. ItsDiyor watermark sits on the plate, in the standard position that add_plates.py covers."
+ ],
+ "d756f1f074644529b5662e6dbe51146b": [
+  "SCRAP",
+  "M8 Competition 210k f cov 0.156 - REDUNDANT. Clean coupe, but bmw-m8-v1 is already approved and bmw-8-series-v1 covers the base car. No added coverage and no visible advantage over the incumbent."
+ ],
+ "e36c10b0969945b99208089f0923dca5": [
+  "SCRAP",
+  "M5 E39 4.9 208k f - WHEELS MISSING. All four arches are empty with suspension components hanging exposed and a loose wheel on the floor. Also wears a large aftermarket GT rear wing on struts rather than the stock boot lid. The E39 slot is already filled by 531a5a93da5d493d9918eb36f011c20d, kept earlier in this wave."
+ ],
+ "4fb80177b54549d4adea93c389a3e649": [
+  "SCRAP",
+  "NOT A CAR. 206k f of a single alloy wheel and tyre - all four views are close-ups of the same rim, with tyre sidewall lettering and a BMW centre cap. No vehicle body exists in the asset. The audit gates measure body material and coverage, which a wheel happens to satisfy, so G6 passed it through."
+ ],
+ "b9f75e44aed54202bac735f73fa005dc": [
+  "SCRAP",
+  "NOT A REAL MODEL. Titled BMW E36 E46 E92 G87 CSL M2 M3 Sports Car Concept - a keyword-stuffed fan-made widebody concept, not any production BMW: invented slab front with a solid black kidney panel, custom widebody arches, six-pipe rear, and UNDER PRESSURE lettering printed on all four tyre sidewalls. No UK registration can resolve to it."
  ]
 }
