@@ -77,8 +77,29 @@ def log(*a):
 
 
 def sb_get(path):
-    return urllib.request.urlopen(
-        urllib.request.Request(f"{SB}/{path}", headers=HDR), timeout=900).read()
+    """Download with retries, and prove the body arrived whole.
+
+    sb_put has always retried; this did not, so a single truncated read killed
+    an entire batch -- the first BMW bake died on IncompleteRead at 41,528,000
+    of 43,331,756 bytes on car 1 of 13. urllib raises IncompleteRead only when
+    Content-Length is present and short; when it is absent a truncated body
+    returns silently, so the length is checked here too rather than trusted.
+    """
+    last = None
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(
+                    urllib.request.Request(f"{SB}/{path}", headers=HDR), timeout=900) as r:
+                want = r.headers.get("Content-Length")
+                blob = r.read()
+            if want is not None and len(blob) != int(want):
+                raise IOError(f"short read: {len(blob)} of {want} bytes")
+            return blob
+        except Exception as e:
+            last = e
+            log(f"  retry {attempt + 1}/4 on {path.rsplit('/', 1)[-1]}: {type(e).__name__}")
+            time.sleep(5 * (attempt + 1))
+    raise last
 
 
 def sb_put(path, blob, ctype="model/gltf-binary"):
