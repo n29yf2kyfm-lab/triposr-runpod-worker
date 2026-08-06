@@ -172,19 +172,32 @@ if HAVE_PIL:
               img.size == (240, 240), str(img.size))
         cols = img.getcolors(240 * 240) or []
         check("6f it is not a blank page", len(cols) > 8, str(len(cols)))
-        # The building has to actually be IN frame, not off the edge.
-        bg = preview.BACKGROUND
-        drawn = sum(n for n, c in cols
-                    if max(abs(a - b) for a, b in zip(c, bg)) > 10)
-        frac = drawn / float(240 * 240)
+        # The building has to actually be IN frame, not off the edge. The
+        # backdrop is a sky gradient over grass now, so "anything not the
+        # flat background colour" is the whole picture — the building is what
+        # is neither sky (blue-dominant) nor ground (green-dominant).
+        def is_sky(c):
+            return c[2] > c[0] + 8 and c[2] > c[1] + 4
+
+        def is_ground(c):
+            return c[1] > c[0] + 8 and c[1] > c[2] + 8
+
+        building = sum(n for n, c in cols
+                       if not is_sky(c) and not is_ground(c))
+        frac = building / float(240 * 240)
         check("6g the building fills a sensible part of the frame",
               0.15 < frac < 0.85, f"{frac:.2f}")
+        check("6h there is sky above it",
+              any(is_sky(img.getpixel((x, 4))) for x in range(0, 240, 8)))
+        check("6i and ground below it",
+              any(is_ground(img.getpixel((x, 236)))
+                  for x in range(0, 240, 8)))
 
         # Three named views, and losing one must not lose the others.
         outs = preview.views(both, td, "t")
-        check("6h a proposal ships more than one view", len(outs) == 3,
+        check("6j a proposal ships more than one view", len(outs) == 3,
               str(len(outs)))
-        check("6i the views are distinct files",
+        check("6k the views are distinct files",
               len({os.path.basename(o[0]) for o in outs}) == 3)
 
     try:
@@ -192,9 +205,9 @@ if HAVE_PIL:
                         "storey_height_m": 2.4,
                         "extent_m": {"x": [0, 1], "y": [0, 1]}},
                        os.path.join(tempfile.gettempdir(), "empty.png"))
-        check("6j an empty model is refused, not drawn blank", False)
+        check("6l an empty model is refused, not drawn blank", False)
     except ValueError:
-        check("6j an empty model is refused, not drawn blank", True)
+        check("6l an empty model is refused, not drawn blank", True)
 else:
     print("note: PIL absent, skipping the drawing tests")
 

@@ -908,6 +908,7 @@ def run(spec, prog, output_dir):
     # Ship pictures alongside the files. A GLB proves nothing to the person
     # holding the phone, and every geometry fault this mode has had was
     # obvious in a render and invisible in the quantities.
+    shots = []
     try:
         import preview
         shots = preview.views(model, output_dir, scan)
@@ -916,6 +917,19 @@ def run(spec, prog, output_dir):
     except Exception as e:
         print(f"previews skipped: {type(e).__name__}: {e}", file=sys.stderr)
         model["previews"] = []
+
+    # The photoreal pass, driven BY the measured render so the geometry
+    # cannot be renegotiated. Off with photoreal=false; it costs a few pence
+    # a job and some callers only want the model.
+    if shots and (spec.get("extension") or {}).get("photoreal") is not False:
+        import hero
+        prog.stage("photoreal")
+        hero_arts, note = hero.make(
+            model, shots[0][0], output_dir, scan,
+            time_of_day=(spec.get("extension") or {}).get("light", "day"))
+        artifacts += hero_arts
+        model["photoreal"] = note
+        prog.note(note)
 
     return model, artifacts
 

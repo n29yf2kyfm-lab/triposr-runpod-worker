@@ -1,0 +1,238 @@
+"""The photoreal shot, made FROM the measured model rather than instead of it.
+
+Two things a builder needs from one job: a model that is right, and a picture
+the client will react to. They pull in opposite directions. Geometry has to
+come from measurement; realism is exactly the thing measurement cannot give.
+
+So the pipeline splits the job in two and never lets the second half touch
+the first:
+
+    measured model -> preview.render()  -> exact geometry, flat shading
+                   -> gemini restyle    -> brick, glass, sky, shadows
+                   -> structural guard  -> did it move the building?
+
+The restyle is given the render as its input image and told, in as many ways
+as the prompt will carry, that every edge is fixed. This is the same idea as
+driving a diffusion model from a depth or line image: the composition is
+handed over, not invented.
+
+WHY THE GUARD IS NOT OPTIONAL. This project has watched an image model slab a
+whole terrace when asked to extend one house, twice, on the live endpoint,
+with a red constraint outline drawn on the input. Nothing in the prompt
+prevents that; the model is not doing geometry, it is doing plausibility. So
+the output is measured against the input it was supposed to preserve, and a
+picture that has quietly rebuilt the house is thrown away in favour of the
+render that is correct. A pretty lie is worse than a plain truth here — the
+whole product rests on the drawing being right.
+"""
+import base64
+import math
+import os
+import sys
+
+
+GEMINI_MODEL = "gemini-3.1-flash-image-preview"
+GEMINI_API = ("https://generativelanguage.googleapis.com/v1beta/models/"
+              f"{GEMINI_MODEL}:generateContent")
+
+# Coarse grid the structural guard compares over. 24x24 is fine enough to
+# catch a wall that has moved a metre and coarse enough not to fire on the
+# brick texture and window reflections the restyle is SUPPOSED to add.
+GUARD_GRID = 24
+
+# Below this correlation between the render's structure and the photoreal
+# one's, the image is not the same building. Chosen from measured pairs: a
+# faithful restyle scores well above it, and the failure mode this exists to
+# catch — a redrawn or duplicated building — falls far below.
+GUARD_MIN_CORRELATION = 0.55
+
+
+class HeroError(RuntimeError):
+    """The photoreal pass could not be made, or could not be trusted."""
+
+
+def _requests():
+    import requests
+    return requests
+
+
+def gemini_key():
+    return os.environ.get("GOOGLE_AI_API_KEY", "")
+
+
+def _prompt(model, time_of_day="day"):
+    """The instruction, written around what must NOT change."""
+    site = model.get("site") or {}
+    fit = model.get("extension_fit") or {}
+    built = fit.get("built_m") or {}
+    storeys = model.get("storeys", 2)
+    light = {
+        "day": ("bright overcast British daylight, soft shadows, "
+                "clean midday sky with light cloud"),
+        "dusk": ("golden hour just after sunset, warm interior lights glowing "
+                 "through the windows, deep blue sky"),
+        "morning": "clear early morning light, long soft shadows, pale sky",
+    }.get(time_of_day, "bright overcast British daylight")
+
+    return (
+        "RETEXTURE THIS EXACT IMAGE. Do not re-render it, do not re-compose "
+        "it, do not reinterpret it. Treat the picture as a photograph whose "
+        "surfaces are to be repainted in place, pixel for pixel.\n\n"
+        "It is a measured architectural massing render of a real British "
+        "house with a proposed extension. The shapes in it are survey data.\n\n"
+        "ABSOLUTE CONSTRAINT — THE GEOMETRY IS FIXED AND MEASURED:\n"
+        "- Keep the silhouette identical. Every roofline, eaves line, ridge, "
+        "corner and wall edge stays on exactly the same pixels.\n"
+        "- There is ONE roof over the tall block. Do not add a second ridge, "
+        "a cross-gable, a hip that is not already drawn, or any valley.\n"
+        "- The low flat-roofed block spans exactly the width already drawn. "
+        "Do not shorten, narrow or reshape it.\n"
+        "- Do NOT add buildings, storeys, dormers, porches, chimneys, "
+        "garages, bay windows or roof lights.\n"
+        "- Do NOT move the camera, change the framing, or alter any "
+        "proportion.\n"
+        "- Windows and doors stay in the openings already drawn. Do not add "
+        "openings to a blank wall or remove one that is there.\n\n"
+        "WHAT TO CHANGE — SURFACES AND LIGHT ONLY:\n"
+        f"- The {storeys}-storey block is red-brown facing brick with "
+        "realistic mortar courses and a pitched concrete-tile roof.\n"
+        f"- The lower flat-roofed block is the proposed extension, "
+        f"{built.get('width', '')}m by {built.get('depth', '')}m — same "
+        "brick, dark grey single-ply membrane roof, slim aluminium-framed "
+        "glazing.\n"
+        "- Windows become real glass with reflections and visible frames.\n"
+        "- Add UK domestic context on the ground only: lawn, a paved patio, "
+        "a fence line at the plot edge.\n"
+        f"- Lighting: {light}.\n\n"
+        "Photographic quality, architectural photography, sharp focus, "
+        "correct perspective. No text, no labels, no watermarks, no people."
+    )
+
+
+def _grid_structure(path, grid=GUARD_GRID):
+    """A coarse map of where this image has edges.
+
+    Luminance gradient magnitude, averaged into cells. Materials and light
+    change the BRIGHTNESS of a surface everywhere; moving a wall changes
+    WHERE the edges are. Comparing edge energy rather than colour is what
+    lets the guard allow a restyle and refuse a rebuild.
+    """
+    from PIL import Image
+    img = Image.open(path).convert("L").resize(
+        (grid * 8, grid * 8), Image.LANCZOS)
+    px = img.load()
+    w, h = img.size
+    cells = []
+    for cy in range(grid):
+        for cx in range(grid):
+            acc = 0.0
+            for y in range(cy * 8, (cy + 1) * 8):
+                for x in range(cx * 8, (cx + 1) * 8):
+                    if x + 1 >= w or y + 1 >= h:
+                        continue
+                    gx = px[x + 1, y] - px[x, y]
+                    gy = px[x, y + 1] - px[x, y]
+                    acc += math.hypot(gx, gy)
+            cells.append(acc)
+    return cells
+
+
+def structural_match(before_path, after_path):
+    """How much of the render's structure survived the restyle, 0 to 1.
+
+    Pearson correlation of the two edge maps. Returns None if it cannot be
+    computed, which is treated as "cannot verify" and not as a pass.
+    """
+    try:
+        a = _grid_structure(before_path)
+        b = _grid_structure(after_path)
+    except Exception as e:
+        print(f"structural guard unavailable: {e}", file=sys.stderr)
+        return None
+    if len(a) != len(b) or not a:
+        return None
+    ma, mb = sum(a) / len(a), sum(b) / len(b)
+    da = [v - ma for v in a]
+    db = [v - mb for v in b]
+    num = sum(x * y for x, y in zip(da, db))
+    den = math.sqrt(sum(x * x for x in da) * sum(y * y for y in db))
+    if den <= 0:
+        return None
+    return max(-1.0, min(1.0, num / den))
+
+
+def restyle(render_path, model, work_dir, key, time_of_day="day",
+            out_name="hero.png"):
+    """One geometry-locked restyle. Returns (path, correlation).
+
+    Raises HeroError if the model gives nothing back. A picture that comes
+    back CHANGED is not an error here — it is returned with its score so the
+    caller can decide, because the caller is the one that knows whether it
+    has a correct render to fall back on.
+    """
+    with open(render_path, "rb") as f:
+        b64 = base64.b64encode(f.read()).decode()
+    body = {"contents": [{"parts": [
+        {"inline_data": {"mime_type": "image/png", "data": b64}},
+        {"text": _prompt(model, time_of_day)}]}],
+        "generationConfig": {"responseModalities": ["IMAGE"]}}
+
+    r = _requests().post(GEMINI_API, params={"key": key}, json=body,
+                         timeout=180)
+    if r.status_code == 429:
+        raise HeroError(
+            "Gemini is rate-limited. The measured model and its renders are "
+            "delivered; resend for the photoreal pass.")
+    if r.status_code != 200:
+        raise HeroError(f"Gemini answered {r.status_code}: {r.text[:200]}")
+
+    parts = (((r.json().get("candidates") or [{}])[0]
+              .get("content") or {}).get("parts") or [])
+    for p in parts:
+        data = (p.get("inlineData") or p.get("inline_data") or {}).get("data")
+        if data:
+            out = os.path.join(work_dir, out_name)
+            with open(out, "wb") as f:
+                f.write(base64.b64decode(data))
+            return out, structural_match(render_path, out)
+    raise HeroError("Gemini returned no image for the photoreal pass.")
+
+
+def make(model, render_path, work_dir, scan, time_of_day="day"):
+    """Produce a trusted photoreal shot, or explain why there isn't one.
+
+    Returns (artifacts, note). Never raises — a proposal that has its model,
+    its files and its measured renders is a delivered proposal, and the
+    photoreal pass is the part that is allowed to fail.
+    """
+    key = gemini_key()
+    if not key:
+        return [], ("no photoreal pass: GOOGLE_AI_API_KEY is not configured "
+                    "on this worker")
+    try:
+        out, score = restyle(render_path, model, work_dir, key, time_of_day,
+                             out_name=f"{scan}.hero.png")
+    except HeroError as e:
+        return [], f"no photoreal pass: {e}"
+    except Exception as e:
+        return [], f"no photoreal pass: {type(e).__name__}: {e}"
+
+    if score is None:
+        return ([(out, f"renders/{scan}.hero.png", None)],
+                "photoreal pass delivered UNVERIFIED — the structural guard "
+                "could not run, so check it against the measured render")
+    if score < GUARD_MIN_CORRELATION:
+        # Kept as evidence, but named so nobody mistakes it for the proposal.
+        rejected = os.path.join(work_dir, f"{scan}.hero-rejected.png")
+        try:
+            os.replace(out, rejected)
+        except OSError:
+            rejected = out
+        return ([(rejected, f"renders/{scan}.hero-rejected.png", None)],
+                f"photoreal pass REJECTED: it scored {score:.2f} against the "
+                f"measured render (needs {GUARD_MIN_CORRELATION}), which "
+                f"means it redrew the building rather than resurfacing it. "
+                f"The measured renders are the proposal.")
+    return ([(out, f"renders/{scan}.hero.png", None)],
+            f"photoreal pass verified against the measured render "
+            f"(structure {score:.2f})")

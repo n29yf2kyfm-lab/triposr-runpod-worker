@@ -288,7 +288,8 @@ import progress  # noqa: E402
 check("9g progress has a stage plan", len(progress.STAGE_PLANS["propose"]) > 0)
 check("9h every stage run() emits is in the plan",
       set(["locating", "footprint", "orientation", "clearances", "roof",
-           "designing", "exporting"]) == set(progress.STAGE_PLANS["propose"]))
+           "designing", "exporting", "photoreal"])
+      == set(progress.STAGE_PLANS["propose"]))
 
 
 print()
