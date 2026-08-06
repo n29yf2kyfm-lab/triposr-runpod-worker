@@ -160452,5 +160452,2580 @@
    "method": "render",
    "at": "2026-08-05"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-m3-e92-bm1-v1",
+  "make": "bmw",
+  "model": "m3 e92",
+  "modelFamily": "bmw m3 e92",
+  "modelAliases": [
+   "m3 e92"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "b0e11e993b834a65a6a673033cea91a3",
+  "sourceRetrievedAt": "2026-08-06",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Car_Paint",
+   "Car_paint"
+  ],
+  "glassMaterialNames": [
+   "Glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m3-e92-bm1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m3-e92-bm1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 43331756,
+  "mobileFileSizeBytes": 43331756,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "e3fe4067a2e917085d4e53b4f9423f310eaf36ba8421ed6606e48a8d855a51b5",
+  "pipelineVersion": "publish-batch-bm1-2026-08-06",
+  "publishedAt": "2026-08-06",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "bm1 gated publish 2026-08-06: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-06, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-bm1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-m440i-2021-bm1-v1",
+  "make": "bmw",
+  "model": "m440i",
+  "modelFamily": "bmw m440i",
+  "modelAliases": [
+   "m440i"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": "convertible",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "75147446ebaa49a6b10d7d51139c23a6",
+  "sourceRetrievedAt": "2026-08-06",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "glass",
+   "glass_rear_lights"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m440i-2021-bm1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m440i-2021-bm1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 37900660,
+  "mobileFileSizeBytes": 37900660,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "1eea7325f6e7f64e5e1044f9b8eb577890aa19ee86add76036b810c29c0c507e",
+  "pipelineVersion": "publish-batch-bm1-2026-08-06",
+  "publishedAt": "2026-08-06",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "bm1 gated publish 2026-08-06: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-06, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-bm1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-3-series-touring-bm1-v1",
+  "make": "bmw",
+  "model": "3 series touring",
+  "modelFamily": "bmw 3 series touring",
+  "modelAliases": [
+   "3 series touring"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "estate",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "93fce305fc644254a20f01fda89abe97",
+  "sourceRetrievedAt": "2026-08-06",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "f31_body"
+  ],
+  "glassMaterialNames": [
+   "f31_d_glass",
+   "f31_glass",
+   "f31_r_glass",
+   "f31_mirror",
+   "f31_w_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-3-series-touring-bm1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-3-series-touring-bm1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 31596060,
+  "mobileFileSizeBytes": 31596060,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "6223043d7a0e9bc457945f3e2fa9e0e1b1f23b2a8af6a9bc9214c0acfd967133",
+  "pipelineVersion": "publish-batch-bm1-2026-08-06",
+  "publishedAt": "2026-08-06",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "bm1 gated publish 2026-08-06: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-06, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-bm1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-m1-bm1-v1",
+  "make": "bmw",
+  "model": "m1",
+  "modelFamily": "bmw m1",
+  "modelAliases": [
+   "m1"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "a65d9f1c5fb64e289c8a0dfebd79ebc7",
+  "sourceRetrievedAt": "2026-08-06",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Lack"
+  ],
+  "glassMaterialNames": [
+   "Glas",
+   "Ruecklicht_Rot",
+   "Blinker",
+   "Rueckfahr"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m1-bm1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m1-bm1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 29956952,
+  "mobileFileSizeBytes": 29956952,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "045d9845873fd09014c54c2376f131375d18b77ae51252e1745ad03fd3a91212",
+  "pipelineVersion": "publish-batch-bm1-2026-08-06",
+  "publishedAt": "2026-08-06",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "bm1 gated publish 2026-08-06: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-06, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-bm1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-i8-roadster-2019-bm1-v1",
+  "make": "bmw",
+  "model": "i8 roadster",
+  "modelFamily": "bmw i8 roadster",
+  "modelAliases": [
+   "i8 roadster"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2019,
+  "yearEnd": null,
+  "bodyStyle": "convertible",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "ad59e622808642ad9bc399b12364e405",
+  "sourceRetrievedAt": "2026-08-06",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "r_glass",
+   "glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-i8-roadster-2019-bm1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-i8-roadster-2019-bm1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 24803660,
+  "mobileFileSizeBytes": 24803660,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "3f777035df72ea095fe57fc7935d99a44603af57088333363381f9421c800f99",
+  "pipelineVersion": "publish-batch-bm1-2026-08-06",
+  "publishedAt": "2026-08-06",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "bm1 gated publish 2026-08-06: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-06, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-bm1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-728i-e23-1982-bm1-v1",
+  "make": "bmw",
+  "model": "728i e23",
+  "modelFamily": "bmw 728i e23",
+  "modelAliases": [
+   "728i e23"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1982,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "7e7626fd8dd34e4b8f0a5b21eb0a1fb0",
+  "sourceRetrievedAt": "2026-08-06",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint.051"
+  ],
+  "glassMaterialNames": [
+   "windowglass.042",
+   "clearglass.051",
+   "redglass.052",
+   "orangeglass.039"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-728i-e23-1982-bm1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-728i-e23-1982-bm1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 23176408,
+  "mobileFileSizeBytes": 23176408,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "03626c38107a97e898961a8d1aca5e527a0ab147bd60843cd6d7a6fa0137dd29",
+  "pipelineVersion": "publish-batch-bm1-2026-08-06",
+  "publishedAt": "2026-08-06",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "bm1 gated publish 2026-08-06: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-06, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-bm1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-m4-competition-2021-bm1-v1",
+  "make": "bmw",
+  "model": "m4 competition",
+  "modelFamily": "bmw m4 competition",
+  "modelAliases": [
+   "m4 competition"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "f787107eedda4434ac3880fbd1cbb079",
+  "sourceRetrievedAt": "2026-08-06",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "CSR2_CarPaint_001"
+  ],
+  "glassMaterialNames": [
+   "Window_001",
+   "WindowDark_001",
+   "52__382__glass_rear__001"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m4-competition-2021-bm1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m4-competition-2021-bm1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 34309084,
+  "mobileFileSizeBytes": 34309084,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "07ed8f556b947bb98785aa498ec9162c2fcc34d7512a1236bfca744f29cacc79",
+  "pipelineVersion": "publish-batch-bm1-2026-08-06",
+  "publishedAt": "2026-08-06",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "bm1 gated publish 2026-08-06: licence recorded as 'CC Attribution-ShareAlike' (author ''), owner keep verdict 2026-08-06, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-bm1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-850csi-e31-1996-bm1-v1",
+  "make": "bmw",
+  "model": "850csi e31",
+  "modelFamily": "bmw 850csi e31",
+  "modelAliases": [
+   "850csi e31"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1996,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "f4a831ecb5c1492c8fef8030d913aaa8",
+  "sourceRetrievedAt": "2026-08-06",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint.006"
+  ],
+  "glassMaterialNames": [
+   "windowglass.003",
+   "darkglass.003",
+   "redglass.006",
+   "clearglass.006",
+   "orangeglass.005"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-850csi-e31-1996-bm1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-850csi-e31-1996-bm1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 28196392,
+  "mobileFileSizeBytes": 28196392,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "fe90e896e18f036ae2683d4242d1a554442f36429c19e2da81050b7204158092",
+  "pipelineVersion": "publish-batch-bm1-2026-08-06",
+  "publishedAt": "2026-08-06",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "bm1 gated publish 2026-08-06: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-06, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-bm1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-z8-2000-bm1-v1",
+  "make": "bmw",
+  "model": "z8",
+  "modelFamily": "bmw z8",
+  "modelAliases": [
+   "z8"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2000,
+  "yearEnd": null,
+  "bodyStyle": "convertible",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "beb2400a3bc54cd2b446a6819efeb47b",
+  "sourceRetrievedAt": "2026-08-06",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint.083"
+  ],
+  "glassMaterialNames": [
+   "windowglass.068",
+   "clearglass.083",
+   "darkglass.030",
+   "Material__1.040",
+   "orangeglass.061",
+   "redglass.083",
+   "Material__2.040",
+   "wire_090200225",
+   "Material__3.040"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-z8-2000-bm1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-z8-2000-bm1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 23477760,
+  "mobileFileSizeBytes": 23477760,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "cc07b145381a8d5e7ad176b690e8a493f166fd97280b2caa9b0e4c7e0e7e03e5",
+  "pipelineVersion": "publish-batch-bm1-2026-08-06",
+  "publishedAt": "2026-08-06",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "bm1 gated publish 2026-08-06: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-06, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-bm1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-x6-m-2022-bm1-v1",
+  "make": "bmw",
+  "model": "x6 m",
+  "modelFamily": "bmw x6 m",
+  "modelAliases": [
+   "x6 m"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "7e5665c023c24938bc06c2872ea30cc1",
+  "sourceRetrievedAt": "2026-08-06",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "CAR_Paint"
+  ],
+  "glassMaterialNames": [
+   "Windows",
+   "Glass",
+   "Material.002"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x6-m-2022-bm1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x6-m-2022-bm1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 20404672,
+  "mobileFileSizeBytes": 20404672,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "c3b63b528824b9aefdbc8aa6b78a000e958fba06a149a26854d1a7825ef93dc1",
+  "pipelineVersion": "publish-batch-bm1-2026-08-06",
+  "publishedAt": "2026-08-06",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "bm1 gated publish 2026-08-06: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-06, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-bm1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-ix3-2021-bm1-v1",
+  "make": "bmw",
+  "model": "ix3",
+  "modelFamily": "bmw ix3",
+  "modelAliases": [
+   "ix3"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "18a952b3599f4f81ade570eb0ceccdf4",
+  "sourceRetrievedAt": "2026-08-06",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "M_2021_BMW_iX3_Mineral_White_Metallic",
+   "M_2021_BMW_iX3_UnderCarrier"
+  ],
+  "glassMaterialNames": [
+   "M_2021_BMW_iX3_Windows",
+   "M_2021_BMW_iX3_BrakeLightsGlass",
+   "M_2021_BMW_iX3_HeadLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-ix3-2021-bm1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-ix3-2021-bm1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 47796272,
+  "mobileFileSizeBytes": 47796272,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "81e32a26567eb2c91f7c167ebe533b90cca0f2d840ceec3f276f73171bc2a095",
+  "pipelineVersion": "publish-batch-bm1-2026-08-06",
+  "publishedAt": "2026-08-06",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "bm1 gated publish 2026-08-06: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-06, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-bm1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-x7-m60i-bm1-v1",
+  "make": "bmw",
+  "model": "x7 m60i",
+  "modelFamily": "bmw x7 m60i",
+  "modelAliases": [
+   "x7 m60i"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "0c36e0fa738a427e937e52d614b66d21",
+  "sourceRetrievedAt": "2026-08-06",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "inmx7m60i_body"
+  ],
+  "glassMaterialNames": [
+   "inmx7m60i_glass",
+   "inmx7m60i_navscreen",
+   "inmx7m60i_dashscreen"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x7-m60i-bm1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x7-m60i-bm1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 14716308,
+  "mobileFileSizeBytes": 14716308,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d17f7954966b8b987dcee2e06c90bcda2d43b7fc1fb36e482b8fc80be738c100",
+  "pipelineVersion": "publish-batch-bm1-2026-08-06",
+  "publishedAt": "2026-08-06",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "bm1 gated publish 2026-08-06: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-06, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-bm1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "bmw-m440i-gran-coupe-2022-bm1-v1",
+  "make": "bmw",
+  "model": "m440i gran coupe",
+  "modelFamily": "bmw m440i gran coupe",
+  "modelAliases": [
+   "m440i gran coupe"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "a41efb9c01e64d9d81a7896d2bbbb167",
+  "sourceRetrievedAt": "2026-08-06",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint",
+   "chassis"
+  ],
+  "glassMaterialNames": [
+   "glass3",
+   "glass_surr",
+   "d_glass",
+   "glass_light"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m440i-gran-coupe-2022-bm1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m440i-gran-coupe-2022-bm1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 20546840,
+  "mobileFileSizeBytes": 20546840,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "073cc67587580e73294710345e8ff0fa26e8d4be862987401d8b1ce9d3d31444",
+  "pipelineVersion": "publish-batch-bm1-2026-08-06",
+  "publishedAt": "2026-08-06",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "bm1 gated publish 2026-08-06: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-06, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-bm1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
