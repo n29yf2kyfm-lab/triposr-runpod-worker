@@ -55,7 +55,8 @@ class ModelError(ValueError):
 class Room:
     """One space, positioned by its bottom-left corner in metres."""
 
-    def __init__(self, name, x, y, width, depth, height=None, kind="room"):
+    def __init__(self, name, x, y, width, depth, height=None, kind="room",
+                 storeys=None):
         if width <= 0 or depth <= 0:
             raise ModelError(f"{name}: a room needs a positive width and depth")
         area = width * depth
@@ -69,6 +70,13 @@ class Room:
         self.width, self.depth = float(width), float(depth)
         self.height = float(height or DEFAULT_CEILING_HEIGHT_M)
         self.kind = kind
+        # HOW MANY STOREYS THIS BLOCK IS, when the building is not uniform.
+        # None means "as many as the building has". A single-storey rear
+        # extension on a two-storey house is the commonest plan there is, and
+        # without this the floor plate simply repeats: the extension came
+        # back with a phantom first floor sitting on it, and a 350mm band of
+        # daylight where its 2.4m walls stopped under a 2.75m storey.
+        self.storeys = None if storeys is None else int(storeys)
 
     @property
     def area_m2(self):
@@ -85,6 +93,7 @@ class Room:
 
     def as_dict(self):
         return {"name": self.name, "kind": self.kind,
+                "storeys": self.storeys,
                 "x": round(self.x, 3), "y": round(self.y, 3),
                 "width_m": round(self.width, 3), "depth_m": round(self.depth, 3),
                 "height_m": round(self.height, 3),
@@ -144,6 +153,19 @@ class Wall:
         self.height = float(height)
         self.external = bool(external)
         self.openings = []
+        # WHICH SIDE IS THE STREET. The wall's left normal (-uy, ux) points
+        # INWARD for a room wound counter-clockwise, which Room.corners() is.
+        # Every exporter that shaded one face brick and the other plaster
+        # assumed +n was outside, so every GLB this module has produced put
+        # the brickwork on the inside and the plaster on the street. It is
+        # invisible in the numbers and obvious the moment the model is drawn.
+        # walls_from_rooms probes for the real answer and sets this.
+        self.outward = 1
+        # None = present on every storey. Set from the room that raised it.
+        self.storeys = None
+        # How many storeys have a room on BOTH sides. Above this an
+        # "internal" wall faces the weather and is built as such.
+        self.shared_storeys = None
 
     @property
     def length_m(self):
@@ -180,8 +202,22 @@ class Wall:
                 "thickness_m": round(self.thickness, 3),
                 "height_m": round(self.height, 3),
                 "external": self.external,
+                "outward": self.outward,
+                "storeys": self.storeys,
+                "shared_storeys": self.shared_storeys,
                 "net_area_m2": round(self.area_m2, 2),
                 "openings": self.openings}
+
+
+def _wall_on_level(wall, level):
+    """Is this wall built on this storey?
+
+    A wall raised by a single-storey block exists on the ground floor only.
+    Repeating it up the building is what put a first floor on every rear
+    extension this module has ever modelled.
+    """
+    n = wall.get("storeys") if isinstance(wall, dict) else wall.storeys
+    return n is None or level < n
 
 
 def walls_from_rooms(rooms, internal=DEFAULT_WALL_THICKNESS_M,
@@ -202,6 +238,7 @@ def walls_from_rooms(rooms, internal=DEFAULT_WALL_THICKNESS_M,
             if key in seen:
                 continue
             wall = Wall(a, b, internal, room.height, external=True)
+            wall.storeys = room.storeys
             seen[key] = wall
             walls.append(wall)
 
@@ -225,14 +262,43 @@ def walls_from_rooms(rooms, internal=DEFAULT_WALL_THICKNESS_M,
         mx, my = (ax + bx) / 2.0, (ay + by) / 2.0
         nx, ny = -(by - ay) / length, (bx - ax) / length
         step = max(internal, external) + 0.05
-        both = 0
+        both, inside_signs, sides = 0, [], []
         for sign in (1, -1):
             px, py = mx + nx * step * sign, my + ny * step * sign
-            if any(r.x - 1e-6 <= px <= r.x + r.width + 1e-6
-                   and r.y - 1e-6 <= py <= r.y + r.depth + 1e-6
-                   for r in rooms):
+            hits = [r for r in rooms
+                    if r.x - 1e-6 <= px <= r.x + r.width + 1e-6
+                    and r.y - 1e-6 <= py <= r.y + r.depth + 1e-6]
+            if hits:
                 both += 1
+                inside_signs.append(sign)
+                sides.append(hits)
         wall.external = both < 2
+        # Exactly one side landed in a room, so the other side is the street.
+        if len(inside_signs) == 1:
+            wall.outward = -inside_signs[0]
+            wall.outward_hint = -inside_signs[0]
+        # A WALL CAN BE INTERNAL LOW DOWN AND EXTERNAL HIGHER UP.
+        #
+        # Where a single-storey extension abuts a two-storey house, the wall
+        # between them has a room on both sides at ground floor and open sky
+        # on one side above the extension's roof. Held as one boolean it came
+        # out plastered for its whole height, which put bare plasterwork on
+        # the outside of the house above every rear extension this models.
+        # Shared only as far up as the SHALLOWER of the two blocks goes.
+        if both == 2:
+            depth_levels = []
+            for hits in sides:
+                lv = [(r.storeys if r.storeys is not None else 10**6)
+                      for r in hits]
+                depth_levels.append(max(lv))
+            wall.shared_storeys = min(depth_levels)
+            # ...and above that level, "outside" is over the SHALLOWER block,
+            # so that is the way the brick face has to point. Left unset the
+            # outward default put the brickwork indoors and showed the
+            # plaster to the garden.
+            if depth_levels[0] != depth_levels[1]:
+                shallow = 0 if depth_levels[0] < depth_levels[1] else 1
+                wall.outward = inside_signs[shallow]
 
     # A WALL CAN BE "EXTERNAL" AND STILL FACE INDOORS. Real plans are not
     # flush: two rooms drawn 100mm apart leave a void strip between them, and
@@ -614,18 +680,36 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
             # the caller states it and the drawing wins over the heuristic.
             max_span=_given("max_span_m", MAX_ROOF_SPAN_M))
 
+    # A BLOCK THAT STOPS SHORT OF THE MAIN ROOF NEEDS ITS OWN TOP.
+    # The main roof spans the whole plan at eaves level, so a single-storey
+    # rear extension on a two-storey house is left as an open box: walls up
+    # to 2.4m and the sky above them. First render of one showed straight
+    # down into it. Flat is right for the overwhelming majority of
+    # single-storey rear extensions in this country.
+    caps = []
+    for r in rooms:
+        if r.storeys is None or r.storeys >= storeys:
+            continue
+        cap_z = per_storey * (r.storeys - 1) + r.height
+        caps.append({"x": [round(r.x, 3), round(r.x + r.width, 3)],
+                     "y": [round(r.y, 3), round(r.y + r.depth, 3)],
+                     "z_m": round(cap_z, 3), "kind": "flat"})
+
     top = roof_model["ridge_z_m"] if roof_model else eaves_z
 
     # Openings pinned to one level count ONCE, not once per storey — the
     # front door is on the ground floor, and multiplying it up put a phantom
     # door (and its missing wall area) on every floor of the take-off.
+    def _levels(w):
+        return storeys if w.storeys is None else min(w.storeys, storeys)
+
     def _count(kind):
-        return sum(storeys if o["level"] is None else 1
+        return sum(_levels(w) if o["level"] is None else 1
                    for w in walls for o in w.openings if o["kind"] == kind)
 
-    gross_wall = sum(w.length_m * w.height for w in walls) * storeys
+    gross_wall = sum(w.length_m * w.height * _levels(w) for w in walls)
     cut = sum((o["width"] * o["height"])
-              * (storeys if o["level"] is None else 1)
+              * (_levels(w) if o["level"] is None else 1)
               for w in walls for o in w.openings)
 
     result = {
@@ -634,6 +718,7 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
         "storeys": storeys,
         "storey_height_m": round(per_storey, 3),
         "eaves_z_m": round(eaves_z, 3),
+        "caps": caps,
         "roof": roof_model,
         "roof_quantities": roof_quantities(roof_model) if roof_model else None,
         "extent_m": {"x": [round(x0, 3), round(x1, 3)],
@@ -751,6 +836,8 @@ def write_obj(model, path):
         z = level * per
         box(x0, y0, z - DEFAULT_SLAB_M, x1, y1, z, f"slab_L{level}")
         for i, w in enumerate(model["walls"]):
+            if not _wall_on_level(w, level):
+                continue
             (ax, ay), (bx, by) = w["start"], w["end"]
             t = w["thickness_m"] / 2.0
             if abs(bx - ax) >= abs(by - ay):        # runs along x
@@ -765,6 +852,10 @@ def write_obj(model, path):
                         _split_for_openings(lo, hi, w, level)):
                     box(ax - t, s, z + zlo, ax + t, e, z + zhi,
                         f"L{level}_wall_{i}_{j}")
+
+    for n, cap in enumerate(model.get("caps") or []):
+        cx, cy, cz = cap["x"], cap["y"], cap["z_m"]
+        box(cx[0], cy[0], cz - DEFAULT_SLAB_M, cx[1], cy[1], cz, f"cap_{n}")
 
     roof = model.get("roof")
     if roof:
@@ -1147,6 +1238,8 @@ def _glb_mesh(model):
         z = level * per
         emit("slab", [(x0, y0, z), (x1, y0, z), (x1, y1, z), (x0, y1, z)])
         for w in model["walls"]:
+            if not _wall_on_level(w, level):
+                continue
             (ax, ay), (bx, by) = w["start"], w["end"]
             L = math.hypot(bx - ax, by - ay)
             if L <= 0:
@@ -1154,10 +1247,16 @@ def _glb_mesh(model):
             ux, uy = (bx - ax) / L, (by - ay) / L
             nx, ny = -uy * w["thickness_m"] / 2.0, ux * w["thickness_m"] / 2.0
             h = w["height_m"]
-            mat = "brick" if w["external"] else "plaster"
+            # Internal only where a room actually sits on the other side at
+            # THIS level; above a single-storey neighbour it is brickwork.
+            shared = w.get("shared_storeys")
+            faces_out = w["external"] or (shared is not None
+                                          and level >= shared)
+            mat = "brick" if faces_out else "plaster"
             ops = sorted(_openings_at(w, level), key=lambda o: o["along"])
 
-            for sgn, face_mat in ((1, mat), (-1, "plaster")):
+            out_sgn = w.get("outward", 1)
+            for sgn, face_mat in ((out_sgn, mat), (-out_sgn, "plaster")):
                 px, py = ax + nx * sgn, ay + ny * sgn
 
                 def P(s, zz):
@@ -1199,6 +1298,11 @@ def _glb_mesh(model):
             # wall head
             emit(face_mat, [(ax + nx, ay + ny, z + h), (bx + nx, by + ny, z + h),
                             (bx - nx, by - ny, z + h), (ax - nx, ay - ny, z + h)])
+
+    for cap in model.get("caps") or []:
+        cx, cy, cz = cap["x"], cap["y"], cap["z_m"]
+        emit("tile", [(cx[0], cy[0], cz), (cx[1], cy[0], cz),
+                      (cx[1], cy[1], cz), (cx[0], cy[1], cz)])
 
     roof = model.get("roof")
     if roof:

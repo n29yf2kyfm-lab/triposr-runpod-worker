@@ -559,8 +559,17 @@ def place_extension(width, depth, brief, clearances):
             f"an extension {ext_depth}m deep is outside what this designs "
             f"(1 to {MAX_EXTENSION_M}m)")
     ext_h = float(brief.get("ceiling_height_m") or ASSUMED_CEILING_HEIGHT_M)
+    # An extension is single-storey unless the brief asks for two. The house
+    # around it may be two; the extension does not inherit that.
+    ext_storeys = int(brief.get("storeys") or 1)
+    if ext_storeys < 1 or ext_storeys > 3:
+        raise ProposeError(
+            f"{ext_storeys} storeys is not an extension this designs (1 to 3)")
+    if ext_storeys > 1:
+        ext_h = float(brief.get("ceiling_height_m") or ASSUMED_STOREY_HEIGHT_M)
 
-    rooms, fit = [], {"type": kind, "requested": dict(brief)}
+    rooms, fit = [], {"type": kind, "requested": dict(brief),
+                      "storeys": ext_storeys}
     if kind == "rear":
         w = min(float(brief.get("width_m") or width), width)
         allowed = clearances.get("north", MAX_EXTENSION_M)
@@ -576,7 +585,8 @@ def place_extension(width, depth, brief, clearances):
                               f"{allowed}m measured clear to the rear")
         fit["built_m"] = {"width": round(w, 2), "depth": d}
         rooms.append(model3d.Room("extension", (width - w) / 2.0, depth,
-                                  w, d, ext_h, kind="extension"))
+                                  w, d, ext_h, kind="extension",
+                                  storeys=ext_storeys))
 
     elif kind == "side":
         options = {s: clearances.get(s, 0.0) for s in ("east", "west")}
@@ -609,7 +619,8 @@ def place_extension(width, depth, brief, clearances):
         fit["side"] = side
         fit["built_m"] = {"width": room_w, "depth": round(d, 2)}
         rooms.append(model3d.Room("extension", x, depth - d, room_w, d,
-                                  ext_h, kind="extension"))
+                                  ext_h, kind="extension",
+                                  storeys=ext_storeys))
 
     elif kind == "wrap":
         w = min(float(brief.get("width_m") or width), width)
@@ -619,7 +630,8 @@ def place_extension(width, depth, brief, clearances):
                 "the rear is blocked, so there is no wrap to design here.")
         fit["built_m"] = {"width": round(w, 2), "depth": round(rear_d, 2)}
         rooms.append(model3d.Room("extension", (width - w) / 2.0, depth,
-                                  w, rear_d, ext_h, kind="extension"))
+                                  w, rear_d, ext_h, kind="extension",
+                                  storeys=ext_storeys))
         side = max(("east", "west"), key=lambda s: clearances.get(s, 0.0))
         buildable = round(
             max(clearances.get(side, 0.0) - SIDE_WORKING_CLEARANCE_M, 0.0), 2)
@@ -632,7 +644,7 @@ def place_extension(width, depth, brief, clearances):
                              "depth": round(ret_d + rear_d, 2)}
             rooms.append(model3d.Room("extension return", x, depth - ret_d,
                                       room_w, ret_d + rear_d, ext_h,
-                                      kind="extension"))
+                                      kind="extension", storeys=ext_storeys))
         else:
             fit["return"] = (
                 f"dropped — {clearances.get(side, 0.0)}m clear to the {side} "
@@ -770,14 +782,14 @@ def run(spec, prog, output_dir):
     if len(pieces) > 1 and covered >= plan_area * 0.75:
         house_rooms = [
             model3d.Room("existing house" if i == 0 else f"existing block {i}",
-                         px, py, pw, pd, ASSUMED_CEILING_HEIGHT_M,
+                         px, py, pw, pd, ASSUMED_STOREY_HEIGHT_M,
                          kind="existing")
             for i, (px, py, pw, pd) in enumerate(pieces)]
         plan_source = (f"{len(pieces)} blocks from the outline, "
                        f"{covered:.0f}m2 of {plan_area:.0f}m2")
     else:
         house_rooms = [model3d.Room("existing house", 0.0, 0.0, width, depth,
-                                    ASSUMED_CEILING_HEIGHT_M, kind="existing")]
+                                    ASSUMED_STOREY_HEIGHT_M, kind="existing")]
         plan_source = "bounding rectangle of the outline"
     prog.note(f"existing plan: {plan_source}")
 
@@ -892,6 +904,19 @@ def run(spec, prog, output_dir):
     prog.stage("exporting")
     scan = spec.get("scan_id") or "proposal"
     artifacts = model3d._export_artifacts(model, output_dir, scan)
+
+    # Ship pictures alongside the files. A GLB proves nothing to the person
+    # holding the phone, and every geometry fault this mode has had was
+    # obvious in a render and invisible in the quantities.
+    try:
+        import preview
+        shots = preview.views(model, output_dir, scan)
+        artifacts += shots
+        model["previews"] = [os.path.basename(p) for p, _, _ in shots]
+    except Exception as e:
+        print(f"previews skipped: {type(e).__name__}: {e}", file=sys.stderr)
+        model["previews"] = []
+
     return model, artifacts
 
 
