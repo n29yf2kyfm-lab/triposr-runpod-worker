@@ -746,5 +746,37 @@
  "a4b1edf1ec614f06b5d4db7208fe9650": [
   "SCRAP",
   "X7 xDrive40i G07 2019 89k f cov 0.378 - REDUNDANT. bmw-x7-v1 and bmw-x7-m60i-bm1-v1 both cover the nameplate, the latter kept earlier in this wave at 438k f. Third X7 scrapped on this ground."
+ ],
+ "5142078aebec406688e19401985050ec": [
+  "SCRAP",
+  "X3 M40i G01 2020 86k f cov 0.220 - REDUNDANT. bmw-x3-2018-w12-v1 and bmw-x3-v1 both hold the nameplate and b5c660d8e39340538a06561eaca69b5f was scrapped for the same reason in the previous batch. Clean model, no added coverage."
+ ],
+ "ad6779e1ca534601947735b16094fc4e": [
+  "SCRAP",
+  "5 Series 525i E60 85k f cov 0.135 - TEXTURE CORRUPTION. The body is broken into mismatched grey and white patches across the roof, doors, wings and boot in every view, with hatched artefact bands down both sills. It also sits slammed on the deck. bmw-5-series-e60-v1 covers this generation properly."
+ ],
+ "0806c39847ae42e5996917f50527dda0": [
+  "SCRAP",
+  "7 Series F01 85k f cov 0.266 - REDUNDANT. Cleanest F01 seen in this wave, notably better than the two tonielpro520 760Lis, but bmw-7-series-v1 already holds the nameplate and the headlights are still soft with little internal projector structure. Not a clear enough upgrade to displace the incumbent."
+ ],
+ "bc3e714e021b44f4844ddf847288e99a": [
+  "SCRAP",
+  "X4 G02 2020 84k f cov 0.224 - REDUNDANT. bmw-x4-v1 is approved and bmw-x4-v2 is already quarantined as a surplus copy. Clean model but nothing added."
+ ],
+ "eebaeb1652bc40999e6567b7f09ab4c8": [
+  "SCRAP",
+  "M3 GTR E46 84k f cov 0.222 - MOTORSPORT. Fourth M3 GTR scrapped in this wave. Full race build: swan-neck rear wing, wide-arch bodywork with front and rear canards, bonnet louvres, side-exit exhausts, roll cage through the glass, centre-lock wheels. bmw-m3-e46-v1 covers the road car."
+ ],
+ "a3f384b067464c1aacad4b251bfe32b1": [
+  "SCRAP",
+  "Z4 Coupe E86 82k f cov 0.324 - LOW POLY and redundant. Visible polygon faceting across the roof, rear quarter, bonnet and both wings - the curves read as flat planes rather than surfaces. Headlights and tail lights are flat dark shapes with no internal structure. bmw-z4-2008-v1 already covers the Z4 Coupe."
+ ],
+ "191b5bab78914267a6be3f4a33b6da30": [
+  "SCRAP",
+  "750Li E65 2006 81k f cov 0.209 - REDUNDANT and soft, third 7 Series from this uploader scrapped in two batches. Angel-eye rings are present but the surrounding headlight is a soft blob, shut lines barely register, and the flanks ripple. bmw-7-series-v1 holds the nameplate."
+ ],
+ "d8ba2e558d9542c0ba162f812430532a": [
+  "SCRAP",
+  "M3 GTS E92 79k f cov 0.128 - WHEELS MISSING. Three of the four arches are empty with only a brake disc visible and a single loose wheel sits under the car in the side view. Also a track special with fixed rear wing and cage, and bmw-m3-e92-bm1-v1 already holds the E92 slot at 1.18M f. Thin paint at 0.128."
  ]
 }
