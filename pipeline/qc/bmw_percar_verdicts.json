@@ -434,5 +434,25 @@
  "0e37386965b94060a2caa93662a55734": [
   "SCRAP",
   "5 Series E39 1997-2001 235k f - WHEELS MISSING. All four wheels are absent; only bare hub stubs remain inside empty arches, and a single detached wheel lies flat on the studio floor beside the car in every view. The body itself is decent but an unwheeled shell cannot ship."
+ ],
+ "09f63aa90c5941ee86137366704e6193": [
+  "SCRAP",
+  "3 Series Compact E36 232k f - WHEELS MISSING and front end torn open. Empty arches with no hubs at all; the rear34 view shows the entire front clip peeled away with the bonnet, wing and inner structure hanging as loose flaps. Not a complete car."
+ ],
+ "54c4a4af747c403cbd380b113fd80b73": [
+  "SCRAP",
+  "4 Series G22/M4 229k f cov 0.237 - WHEELS MISSING. Bare hub carriers with yellow calipers sit exposed in all four empty arches; no rims, no tyres. The bodywork itself is untextured flat white with a yellow placeholder plate. Cannot ship a car with no wheels."
+ ],
+ "3f8495ff63dc4b52a1fc709b915703e1": [
+  "SCRAP",
+  "i8 ACS8 228k f cov 0.146 - TUNER. AC Schnitzer body kit: full-width rear wing on risers, deep front splitter, aftermarket 5-spoke wheels, and red AC Schnitzer decals baked into the sill texture. Baked-in decals survive a body recolour and would read as a defect in every colour variant. The i8 coupe is a real gap next to bmw-i8-roadster-2019-bm1-v1, but this is not a stock i8 - re-source rather than ship the tuned one."
+ ],
+ "25ef69aaacf2414db9253ed688793fbf": [
+  "SCRAP",
+  "M4 CSL G82 225k f cov 0.171 - REDUNDANT. Clean model, but this is the third G82 M4 in the wave and the slot is held by bmw-m4-competition-2021-bm1-v1 at 683k f, with bmw-m4-v1 and bmw-m4-w12-v1 also in the library. Same call as a05107b16891426c98d0ab4b271acf03 (M4 CS): no added coverage, not an upgrade on the incumbent."
+ ],
+ "bcba6a04b6aa43c6852296bad717aaf9": [
+  "SCRAP",
+  "3 Series Coupe E36 225k f - WHEELS MISSING. Bare brake discs in all four arches with a single detached wheel lying on the studio floor, the same failure as 0e37386965b94060a2caa93662a55734. Also wears a large aftermarket rear wing. Not a complete car."
  ]
 }
