@@ -830,6 +830,15 @@ def run(spec, prog, output_dir):
         "front_source": front_source,
         "clearances_m": clearances,
         "neighbours_found": len(others),
+        # The frame itself, so anything downstream can put a local plan
+        # coordinate back on the map — the capture plan needs real GPS for
+        # every shot, not a diagram.
+        "frame": {
+            "angle_rad": round(angle, 9),
+            "origin_en": [round(origin_en[0], 3), round(origin_en[1], 3)],
+            "anchor_en": [round(location["easting"], 3),
+                          round(location["northing"], 3)],
+        },
     }
     model["extension_fit"] = fit
     model["site"]["existing_plan_source"] = plan_source
@@ -930,6 +939,20 @@ def run(spec, prog, output_dir):
         artifacts += hero_arts
         model["photoreal"] = note
         prog.note(note)
+
+    # What the homeowner has to film for the scan half of the pipeline. It
+    # is built here because it depends on the measurements this mode just
+    # took — the standoff comes from the ridge height, and which elevations
+    # are reachable at all comes from the probed clearances.
+    try:
+        import capture
+        model["capture_plan"] = capture.plan(model, lat, lon)
+        prog.note(f"capture plan: {model['capture_plan']['total_frames']} "
+                  f"frames at {model['capture_plan']['standoff_m']}m standoff"
+                  + (f", {len(model['capture_plan']['blocked'])} elevation(s) "
+                     f"unreachable" if model["capture_plan"]["blocked"] else ""))
+    except Exception as e:
+        print(f"capture plan skipped: {type(e).__name__}: {e}", file=sys.stderr)
 
     return model, artifacts
 
