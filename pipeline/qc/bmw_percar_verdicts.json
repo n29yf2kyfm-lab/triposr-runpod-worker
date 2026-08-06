@@ -502,5 +502,29 @@
  "b9f75e44aed54202bac735f73fa005dc": [
   "SCRAP",
   "NOT A REAL MODEL. Titled BMW E36 E46 E92 G87 CSL M2 M3 Sports Car Concept - a keyword-stuffed fan-made widebody concept, not any production BMW: invented slab front with a solid black kidney panel, custom widebody arches, six-pipe rear, and UNDER PRESSURE lettering printed on all four tyre sidewalls. No UK registration can resolve to it."
+ ],
+ "e82d5ab2319d4e768613876758df0927": [
+  "SCRAP",
+  "NOT A REAL MODEL. Titled BMW E56 M3 Sports Car Fanmade concept and it is the same BaseOptimal fanmade widebody as b9f75e44aed54202bac735f73fa005dc (202,367 f vs 202,503 f, same cov band), re-dressed with gold kidney surrounds, gold window trim and gold-lipped wheels. E56 is not a BMW chassis code. No UK registration resolves to it."
+ ],
+ "771d8dfab8554cf182fe8dd0a7ed40b5": [
+  "SCRAP",
+  "M2 Competition F87 201k f cov 0.213 - REDUNDANT. Titled 2-Series 2020 but the render is plainly the M2 Competition: quad exhausts, flared arches, M mirrors. Both slots are already filled - bmw-2-series-2021-v1 and bmw-m2-v1 - and this is the third M2 F87 scrapped in this wave for the same reason."
+ ],
+ "3524d3cfb92443f596be10e5fde78677": [
+  "SCRAP",
+  "X7 2020 199k f cov 0.183 - REDUNDANT. The library ships bmw-x7-v1 and bmw-x7-m60i-bm1-v1, the latter kept earlier in this wave at 438k f for the LCI facelift front. This adds no coverage and has less than half the geometry."
+ ],
+ "6e09cfa4b1554f64b757ecc7665f544a": [
+  "SCRAP",
+  "8 Series Coupe G15 197k f cov 0.193 - REDUNDANT and mis-titled. Filed as M8_Competition but the boot badge reads M850i, so it is the base 8 Series coupe, a slot bmw-8-series-v1 already holds alongside bmw-m8-v1. Also carries ES-STAR uploader branding on both plates."
+ ],
+ "bca2cec53d0341b3b2593030ed78b8c1": [
+  "SCRAP",
+  "8 Series Coupe G15 197k f cov 0.193 - REDUNDANT, and a cross-author re-upload of 6e09cfa4b1554f64b757ecc7665f544a (197,170 f vs 197,254 f, identical cov and mats). The four views are indistinguishable apart from this copy having blank plates where the other has ES-STAR branding. Same M850i boot badge, same filled slot."
+ ],
+ "97d49fcb57504dfba116ec915d5608c7": [
+  "SCRAP",
+  "M4 G82 197k f cov 0.198 - REDUNDANT. Fourth G82 M4 in this wave after the CS and the CSL, all measured against bmw-m4-competition-2021-bm1-v1 at 683k f which holds the slot, with bmw-m4-v1 and bmw-m4-w12-v1 also live. Clean model, no added coverage."
  ]
 }
