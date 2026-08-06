@@ -354,5 +354,25 @@
  "22b606ed94cd421da0da73d88d03ba86": [
   "SCRAP",
   "e30 - the shell is smooth but the front and rear lamps are flat untextured panels with no lens structure at all, and bmw-m3-e30-undated-v1 already covers the E30 body"
+ ],
+ "531a5a93da5d493d9918eb36f011c20d": [
+  "KEEP",
+  "5 Series E39 (M5 trim) 287k f cov 0.170 - the library has bmw-5-series-e60-v1 and a generic bmw-5-series-v1 but NO E39, a real generation gap. Proportions read as an E39 instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four views; quad round projector headlights are period-correct and have visible internal structure; door and bonnet shut lines defined; quad exhausts and M5 boot badge present; multi-spoke black alloys with red calipers identical in every view; clean white gloss with premium reflections. Only softness is the lower bumper intakes reading as dark voids - minor, not a fail."
+ ],
+ "3f1f1468017045bd88368a9c5c6ac8ee": [
+  "KEEP",
+  "M5 G90 2024 280k f cov 0.193 - G90 is a generation the library lacks; bmw-m5-f90-undated-v1 is the previous F90. Illuminated kidney grille with vertical bars, split headlight signature with internal LED elements, carbon roof, defined shut lines, multi-spoke alloys with gold calipers consistent across all four views, clean gloss. An earlier G90 M5 in this wave was scrapped for being rotated onto its roof with placeholder colours - this one is clean."
+ ],
+ "f3a3a8d8f08143bd994945624fa7acd7": [
+  "SCRAP",
+  "7 Series E65 279k f - EXPLODED asset. Bonnet, front bumper, kidney grille, rear bumper and side skirts are detached and floating above the body in all four views; wheels are off the hubs. Not a render fault, the parts are separated in the GLB itself. Unusable as a single-body recolourable car."
+ ],
+ "d382aeb1d3e2413c9269ae6795e28c6a": [
+  "SCRAP",
+  "M2 F87 278k f cov 0.185 - REDUNDANT. Clean model in its own right, but the library already ships bmw-m2-v1 (2019 M2 Competition, approved) and has quarantined m2-v2 and m2-v3. Compared the incumbent hero side by side: its headlight internals and kidney grille read sharper than this one, so this adds no coverage and is not an upgrade. Truth over volume."
+ ],
+ "b94e907d247e4ade964f613d17293b31": [
+  "SCRAP",
+  "3 Series F30 276k f cov 0.101 - a large grey studio backdrop PLANE is baked into the GLB, visible as a slab behind and beside the car in all four views. Body texturing is blotchy: doors render dark grey against light grey wings, with triangulated artefact patches on the front wing and rear quarter. Thin paint coverage too. Not fixable by recolour."
  ]
 }
