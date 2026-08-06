@@ -577,7 +577,7 @@
  ],
  "cbf4f691cabc4dee9e3740e16b7ab8ee": [
   "SCRAP",
-  "M3 Competition xDrive Touring G81 171k f cov 0.305 - REDUNDANT. Genuinely premium model (mesh kidney, laser headlight internals, carbon roof, crisp shut lines, consistent alloys), but it is the same nameplate and generation as bmw-m3-2023-w12-v1, so a DVLA decode reading M3 matches both. Unlike the convertibles kept in this wave, the estate is not a missing body style either - bmw-3-series-touring-bm1-v1 and bmw-3-series-v1 both already cover the 3 Series Touring. Worth revisiting only if the resolver ever gains a body-style field."
+  "M3 Competition xDrive Touring G81 171k f cov 0.305 - REDUNDANT. Premium model (mesh kidney, laser headlight internals, carbon roof, crisp shut lines, consistent alloys), but bmw-m3-2023-w12-v1 already holds model m3 with bodyStyle estate - I checked the live catalogue - so this duplicates both the nameplate and the body style. AMENDED: my first note added that this was worth revisiting only if the resolver ever gained a body-style field. That was wrong. The resolver already has one: vehicle-resolver.ts:71 hard-rejects on a bodyStyle conflict and line 84 scores +15 on a match, fed by data/body-style-aliases.json. Body style is a real discriminator here, which is why the convertibles and the Gran Coupe in this wave are genuine keeps. The scrap still stands, on the estate slot already being filled."
  ],
  "566974ea0aa24a4aa3d899c49e50a152": [
   "SCRAP",
@@ -718,5 +718,33 @@
  "3d507e8432494480b31bdc0dcdcf51d5": [
   "SCRAP",
   "430i xDrive Coupe G22 2021 92k f cov 0.402 - REDUNDANT. bmw-4-series-v1 covers the nameplate, and the G22 platform is already represented several times over through the M4 entries. Clean model with a well-formed mesh kidney grille, but no added coverage."
+ ],
+ "86ee7c1a83334576933ab431542269d5": [
+  "KEEP",
+  "3.0 CSL E9 1973 86k f cov 0.210 - the library has no E9 and no 3.0 CSL at all, and it is one of the most significant BMWs ever built. Proportions read as an E9 instantly; front 3/4 strong; roof line, pillarless glasshouse and wheelbase consistent across all four views; quad round headlamps with defined internal reflectors; chrome kidney slats, bumpers and window trim all crisp; BBS-style alloys identical in every view; bonnet, door and boot shut lines defined; clean premium gloss. Sourced as the RHD car, which suits a UK product."
+ ],
+ "6d51b027dba044a4aa6c93d11228f03f": [
+  "KEEP",
+  "M850i Gran Coupe G16 2020 88k f cov 0.348 mats 2 - fills a resolver-visible slot, verified in code not assumed. data/body-style-aliases.json maps gran coupe to saloon, and vehicle-resolver.ts:71 HARD-REJECTS an asset whose bodyStyle conflicts with the decode. The library 8 Series entries are bmw-8-series-v1 (coupe) and the G14 convertible kept earlier in this wave - no saloon-bodied 8 Series exists, so a four-door decode currently resolves to nothing. Quality holds: proportions read instantly, front 3/4 strong, frameless four-door glasshouse and wheelbase consistent across all four views, laser headlights with internal elements, kidney slats defined, shut lines crisp, multi-spoke alloys with blue calipers identical in every view."
+ ],
+ "dfe78b060e0e4f39a14f3326ca9e0fab": [
+  "SCRAP",
+  "3.0 CSL E9 86k f - REDUNDANT, an exact cross-author re-upload of 86ee7c1a83334576933ab431542269d5. Face count matches to the digit (86,494 both), cov 0.210 and mats 1 identical, four views indistinguishable. Kept the other copy because it is titled and modelled RHD, which suits a UK product."
+ ],
+ "ac2b1a1da19d46fd95b31fd25ea0e683": [
+  "SCRAP",
+  "760Li High Security F02 91k f cov 0.263 - modelling quality fails the bar, same failure as the 730Li scrapped earlier (4c7f5741be7e4df9abaea5be12ef64ca, same uploader). Headlights are soft white blobs with no internal projector or LED elements; door and bonnet shut lines barely register; front wing and door panels ripple under the studio light. It is also an armoured High Security build rather than a standard car. bmw-7-series-v1 covers the nameplate."
+ ],
+ "db3dedf1cae040e1b3a97dd115803bdc": [
+  "SCRAP",
+  "760Li F02 87k f cov 0.267 - same asset family as ac2b1a1da19d46fd95b31fd25ea0e683 minus the armour, same uploader, and the same defects: blob headlights with no internal structure, weak shut lines, rippled flanks. bmw-7-series-v1 already covers the 7 Series."
+ ],
+ "1e23d7c74d134f47918ac21e6ddde6bc": [
+  "SCRAP",
+  "335d Touring E91 89k f cov 0.249 - REDUNDANT and soft. The library carries three 3 Series estates already (bmw-3-series-2014-w12-v1, bmw-3-series-touring-bm1-v1, bmw-3-series-v1), all tagged bodyStyle estate, so the slot is thoroughly filled. Headlights are also soft blobs with no internal detail and the shut lines are weak."
+ ],
+ "a4b1edf1ec614f06b5d4db7208fe9650": [
+  "SCRAP",
+  "X7 xDrive40i G07 2019 89k f cov 0.378 - REDUNDANT. bmw-x7-v1 and bmw-x7-m60i-bm1-v1 both cover the nameplate, the latter kept earlier in this wave at 438k f. Third X7 scrapped on this ground."
  ]
 }
