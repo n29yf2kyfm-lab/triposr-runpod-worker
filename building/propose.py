@@ -657,6 +657,14 @@ def place_extension(width, depth, brief, clearances):
 
 # --- assembly --------------------------------------------------------------
 
+def ext_span_x(rooms):
+    """How far the extension blocks push the plan out along x."""
+    if not rooms:
+        return 0.0
+    return max(r.x + r.width for r in rooms) - min(min(r.x for r in rooms),
+                                                   0.0)
+
+
 def run(spec, prog, output_dir):
     """Address in, a measured 3D proposal out."""
     prog.stage("locating")
@@ -812,6 +820,29 @@ def run(spec, prog, output_dir):
             delta = abs((roof_info["ridge_bearing_deg"] - front_bearing + 90)
                         % 180 - 90)
             ridge_local = "x" if delta < 45 else "y"
+
+        # A RIDGE THAT FORCES PARALLEL RANGES IS ALMOST CERTAINLY THE WRONG
+        # AXIS. roof_over splits any span wider than one roof can carry into
+        # parallel ranges with valley gutters between them. That is a real
+        # form and a rare one, and deriving it from a four-segment azimuth
+        # estimate is over-claiming — on a 16.4m-wide house with a side
+        # extension it produced TWO square hipped ranges, which hip down to
+        # two pyramids sat next to each other. A valley gutter is also a
+        # maintenance liability nobody should be proposed by accident.
+        #
+        # So: if the chosen axis needs more than one range and the other axis
+        # spans in one, take the single span. A UK house ridges parallel to
+        # its frontage, over the front-to-back depth, and that is the answer
+        # this recovers.
+        full_w = width + (ext_span_x(ext_rooms) if ext_rooms else 0.0)
+        span_if_x = depth
+        span_if_y = max(full_w, width)
+        cap = model3d.MAX_ROOF_SPAN_M
+        if ridge_local == "y" and span_if_y > cap and span_if_x <= cap:
+            ridge_local = "x"
+            prog.note(f"ridge axis corrected to run along the frontage — "
+                      f"across the {span_if_y:.1f}m width it would have "
+                      f"needed parallel ranges with a valley")
         roof_spec = {"pitch_deg": roof_info["pitch_deg"], "kind": "hipped",
                      "ridge_along": ridge_local}
 
