@@ -598,5 +598,29 @@
  "6ba5d67b2a244a23abfbeb2c5ff14e2e": [
   "SCRAP",
   "3 Series E30 151k f cov 0.328 - modelling quality fails the bar. Headlights are flat round discs with no reflector or internal structure; there are no door or bonnet shut lines at all; the body surfaces are smoothed with the panel creases lost; the black bumper trim reads as a plain band. Library already covers the shape with bmw-m3-e30-undated-v1."
+ ],
+ "973c814a268c4fdf9f98fbf65286402e": [
+  "SCRAP",
+  "NOT A CAR. 146k f of a single alloy wheel, tyre and drilled brake disc - all four views are close-ups of the same rim. Second wheel-only asset to pass G6 in this wave after 4fb80177b54549d4adea93c389a3e649; the gates measure body material and coverage, which a wheel satisfies."
+ ],
+ "aba59272b3cf481c97b686699d6be07c": [
+  "SCRAP",
+  "M4 GTS F82 142k f cov 0.122 - REDUNDANT twice over. Seventh M4 in this wave and the second M4 GTS after 294d9e2579324839a6314a9659e8309b (which had more geometry at 152k f). The slot is held by bmw-m4-competition-2021-bm1-v1. Track special with fixed swan-neck wing and orange forged wheels, thin paint at 0.122."
+ ],
+ "2094e6d7e66449338d3f5715958deceb": [
+  "SCRAP",
+  "1 Series M135i F21 141k f cov 0.127 - WHEELS MISSING. Bare brake discs with blue calipers in all four empty arches and one loose wheel on the floor. The bonnet also carries a large dark grey texture blotch across its nearside half. Library already has bmw-1-series-v1."
+ ],
+ "e1a28ffa5017494dbb24db6e1ad4355b": [
+  "SCRAP",
+  "3 Series Coupe E36 141k f - WHEELS MISSING and doors detached. All four arches are empty with no hubs at all; both doors hang open as loose panels showing bare grey inner card, and the interior is an empty shell. Not a complete car."
+ ],
+ "b048a2c6a67d416eb31d4c620e5b4426": [
+  "SCRAP",
+  "3 Series Touring E91 138k f cov 0.170 - WHEELS MISSING. Bare hub faces in all four arches with a loose wheel under the car and further stray fragments scattered on the studio floor. The exhaust tips also float detached behind the rear bumper. Library already has bmw-3-series-touring-bm1-v1."
+ ],
+ "996ef8c41d324846b5b8cfd3ff8c7031": [
+  "SCRAP",
+  "X5 E53 134k f cov 0.169 - REDUNDANT. The E53 gap was filled earlier in this wave by 1dfdb422f05d44b287e332bec4311c50 at 210k f, half again the geometry, with crisper headlight internals. This copy also has two thin antenna spikes modelled on the roof."
  ]
 }
