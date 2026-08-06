@@ -186,5 +186,25 @@
  "c8520ce964b44f098f98c9dfee7a208a": [
   "SCRAP",
   "M3 E30 with a full custom treatment baked in - GOLD window surrounds, gold side stripe, gold multi-spoke wheels and blue-tinted quad headlights, plus a blue rear panel. with mats=1 at cov 0.262 none of that gold or blue is the paint material, so it survives all eight colour swaps. bmw-m3-e30-undated-v1 already covers the E30 M3"
+ ],
+ "18a952b3599f4f81ade570eb0ceccdf4": [
+  "KEEP",
+  "iX3 2021 473k f cov 0.308 - the library has bmw-ix-v1 and NO iX3, which was one of the named gaps going into this wave. correct closed EV kidney grille with the blue-accented surround, headlight internals present, aero multi-spoke alloys consistent across all four views, defined shut lines, iX3 tailgate badge, clean gloss"
+ ],
+ "7e5665c023c24938bc06c2872ea30cc1": [
+  "KEEP",
+  "X6M Competition 2022 493k f cov 0.252 - the library has bmw-x6-2020-v1 and no X6M. mesh-depth kidney grille with black surround, headlights with internal LED structure, black multi-spoke alloys consistent across all four views, defined shut lines, sharp diffuser and quad exhausts. this is the intact X6M; the earlier one was scrapped for a detached door. ES-STAR creator plates would be replaced with GB"
+ ],
+ "0c1dee70352640ea9ad7096540695342": [
+  "SCRAP",
+  "3 Series F30 - the body is BLACK AND WHITE IN PATCHES: bonnet, front wing, rear quarter and boot render solid black while doors and roof are white, and the pattern moves between views. with mats=1 at cov 0.243 the black is not the paint material, so it survives every colour swap. the shell surface is also faceted and crumpled throughout"
+ ],
+ "24d26064f59f4427be1493cdef586e83": [
+  "SCRAP",
+  "3 Series E21 - EXPLODED and FLOATING. the shell hovers well clear of the ground with all four wheels detached and hanging below it, an intercooler and pipework floating loose underneath, bare suspension struts visible in the empty arches, and stray green marker geometry in the scene"
+ ],
+ "ddf8718f28634f33b8c84d01a70dcd23": [
+  "SCRAP",
+  "E36 Compact Beater - the bonnet is MISSING with the engine, intercooler and front crash structure fully exposed in the front three-quarter, the front bumper is absent, and the glass carries a jagged white shard texture across the rear screen and rear quarter windows. the title says beater and the asset is modelled as one"
  ]
 }
