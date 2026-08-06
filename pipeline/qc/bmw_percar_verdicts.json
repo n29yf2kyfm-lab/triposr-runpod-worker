@@ -550,5 +550,29 @@
  "e3ef6159c83447ca88ad61d3cc071d7b": [
   "SCRAP",
   "7 Series E32 186k f - WHEELS MISSING. Bare hub stubs in all four arches with a single detached wheel on the studio floor. Thirty-eighth Merc_TV asset judged in this wave and still zero keeps; the pattern is consistent and this one is no exception."
+ ],
+ "677f49401d6f4621b23e53a2c49fa51a": [
+  "SCRAP",
+  "M1 182k f cov 0.433 - MOTORSPORT/custom time-attack build, not a road car. Enormous multi-element rear wing on struts, front dive planes and canards, a full ground-effect splitter with vertical strakes, exposed chassis rails and suspension arms along both sills, and centre-lock race wheels. The road M1 is already covered by bmw-m1-bm1-v1."
+ ],
+ "18476c3a7697462f884d8dc8f124d7a0": [
+  "SCRAP",
+  "M4 F82 2015 181k f cov 0.195 - texture corruption. Large dark grey faceted patches sit across the front wing, the door, the bonnet and the rear quarter in all four views, breaking the body into mismatched panels. Also the fifth M4 in this wave; the slot is held by bmw-m4-competition-2021-bm1-v1."
+ ],
+ "c4380eede3194803b3cfbf56aa71f51b": [
+  "SCRAP",
+  "M3 E92 2008 177k f cov 0.168 - REDUNDANT. Genuinely clean model, but bmw-m3-e92-bm1-v1 was kept earlier in this wave at 1.18M f, nearly seven times the geometry, and holds the slot. No added coverage."
+ ],
+ "72a33f305dea40f7b72da6fb1487376c": [
+  "SCRAP",
+  "2002 Turbo 1973 177k f cov 0.172 - REDUNDANT. Clean period-correct 02: steel wheels, chrome bumpers, quad round headlamps with defined reflectors, crisp shut lines. But the 02-series slot is held by the 2002ti kept earlier in this wave at 350k f, twice the geometry, and a UK reg decoding to 2002 cannot distinguish Turbo from ti."
+ ],
+ "ab28f3ff2f4049d19b836a412c8c1a9d": [
+  "SCRAP",
+  "2002 Turbo 177k f - REDUNDANT and an exact cross-author re-upload of 72a33f305dea40f7b72da6fb1487376c. Face count matches to the digit (177,021 both), as do cov 0.172 and mats 1, and the four rendered views are indistinguishable. Filed by a different account under a different year (1972 vs 1973)."
+ ],
+ "feefda95d65448e894560822d44df227": [
+  "SCRAP",
+  "M3 GTR E46 173k f cov 0.161 - MOTORSPORT with baked livery, and wheels missing. Castrol and M Power sponsor decals are painted into the body texture on the roof, doors, screen banner and wing endplates, which no recolour removes. All four arches are empty with bare hub carriers and one loose wheel on the floor. Second M3 GTR scrapped in this wave after 51b155adad3c4dd18ff76bfcfe1a6e3b."
  ]
 }
