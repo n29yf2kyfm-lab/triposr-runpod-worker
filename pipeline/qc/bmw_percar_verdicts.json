@@ -526,5 +526,29 @@
  "97d49fcb57504dfba116ec915d5608c7": [
   "SCRAP",
   "M4 G82 197k f cov 0.198 - REDUNDANT. Fourth G82 M4 in this wave after the CS and the CSL, all measured against bmw-m4-competition-2021-bm1-v1 at 683k f which holds the slot, with bmw-m4-v1 and bmw-m4-w12-v1 also live. Clean model, no added coverage."
+ ],
+ "e46a9b7a35ad4dafb4add3efd16ed840": [
+  "KEEP",
+  "M6 Convertible E64 182k f cov 0.168 - CABRIOLET and a different generation. Checked the incumbent: bmw-m6-v1 is sourceTitle BMW M6 [Gran Coupe], the four-door F06, so the E64 drop-top overlaps neither its body style nor its era. Proportions read as an E64 instantly; front 3/4 strong; belt line, screen rake and wheelbase consistent across all four views with the roof stowed and the tonneau closed; angel-eye rings and projectors formed inside the headlights; kidney slats defined; quad exhausts and rear diffuser crisp; door and boot shut lines defined; clean premium gloss. Same body-style reasoning as the M440i and 8 Series convertibles kept earlier in this wave."
+ ],
+ "0ea7dcdc64aa4490ab54dd1f8cf28770": [
+  "SCRAP",
+  "M5 E39 196k f cov 0.144 - REDUNDANT plus glass artefacts. 531a5a93da5d493d9918eb36f011c20d already holds the E39 slot from earlier in this wave at 287k f with better coverage. This copy also shows triangulated faceted grey patches inside the rear screen and side glass in three of the four views, and sits lowered on a stance-style stretch."
+ ],
+ "4c7f5741be7e4df9abaea5be12ef64ca": [
+  "SCRAP",
+  "730Li F02 195k f cov 0.267 - modelling quality fails the bar. Headlights are amorphous white blobs with only a faint corona ring and no internal projector or LED elements; the kidney grille slats are soft; door and bonnet shut lines are barely present; the front wing and door panels carry visible waviness that reads as ripples under the studio light. Library already has bmw-7-series-v1."
+ ],
+ "08b867223842444baaf88bd442991c5f": [
+  "SCRAP",
+  "X5 E70 190k f cov 0.130 - modelling quality fails the bar. Heavy panel undulation across both doors and the rear quarter, a soft crease down the front wing, headlights reduced to vague blobs with no internal structure, and shut lines that barely register. Thin paint at 0.130. The E53 gap was filled cleanly by 1dfdb422f05d44b287e332bec4311c50 earlier in this batch; this is not the standard to fill E70 with."
+ ],
+ "7ce498e8b9d74fd5afd362b95aa980ce": [
+  "SCRAP",
+  "M6 Coupe F13 189k f cov 0.374 mats 2 - TWO-TONE recolour risk plus redundancy. The roof and all window surrounds render white against an orange body, i.e. they sit on the second material and would stay white through every colour variant - the same defect that got the 2006 Range Rover scrapped. bmw-m6-v1 (M6 Gran Coupe) also already covers the nameplate."
+ ],
+ "e3ef6159c83447ca88ad61d3cc071d7b": [
+  "SCRAP",
+  "7 Series E32 186k f - WHEELS MISSING. Bare hub stubs in all four arches with a single detached wheel on the studio floor. Thirty-eighth Merc_TV asset judged in this wave and still zero keeps; the pattern is consistent and this one is no exception."
  ]
 }
