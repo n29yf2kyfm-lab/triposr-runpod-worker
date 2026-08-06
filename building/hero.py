@@ -198,7 +198,55 @@ def restyle(render_path, model, work_dir, key, time_of_day="day",
     raise HeroError("Gemini returned no image for the photoreal pass.")
 
 
-def make(model, render_path, work_dir, scan, time_of_day="day"):
+def layer_onto_mesh(rendered, mask_path, restyled, out_path,
+                    sky=(150, 178, 210), sky_bottom=(226, 234, 240)):
+    """Force an AI restyle back through the mesh's own silhouette.
+
+    THE FIX FOR THE FAILURE THAT KILLED THE FIRST PHOTOREAL PASS. Asking a
+    model not to move the geometry does not work — four attempts came back
+    with a redrawn roof and a shrunken extension, and no prompt changed that.
+    But the render was made on transparent film, so its alpha channel IS the
+    measured silhouette, exact to the pixel. Compositing the restyle THROUGH
+    that mask means the building can only occupy the pixels the model says it
+    occupies. Anything the AI invented outside the outline — an extra wing, a
+    second roof, a neighbouring house — is discarded by construction rather
+    than by persuasion.
+
+    What this fixes and what it does not: the silhouette, the footprint, the
+    roof pitch as seen and the overall massing become uncorrectable by the
+    model. Detail INSIDE the outline is still the AI's, so a ridge line it
+    moves within the envelope survives. That is the honest boundary, and it
+    is why the structural score is still reported afterwards.
+    """
+    from PIL import Image
+
+    base = Image.open(rendered).convert("RGB")
+    mask = Image.open(mask_path).convert("L").resize(base.size, Image.LANCZOS)
+    ai = Image.open(restyled).convert("RGB")
+    if ai.size != base.size:
+        # Models return their own aspect. Cover-fit and centre-crop rather
+        # than squash, or every vertical on the building is stretched.
+        sx, sy = base.size[0] / ai.size[0], base.size[1] / ai.size[1]
+        s = max(sx, sy)
+        ai = ai.resize((max(1, int(ai.size[0] * s)),
+                        max(1, int(ai.size[1] * s))), Image.LANCZOS)
+        left = (ai.size[0] - base.size[0]) // 2
+        top = (ai.size[1] - base.size[1]) // 2
+        ai = ai.crop((left, top, left + base.size[0], top + base.size[1]))
+
+    # THE BACKGROUND STAYS OURS. Compositing the AI over a bare gradient
+    # would leave the building hanging in the sky, and letting the AI keep
+    # the ground hands back the freedom the mask just took away — the run
+    # that invented a whole flat-roofed wing put it on the ground plane. So
+    # the measured render supplies sky, ground and cast shadow, and the AI
+    # supplies surfaces inside the silhouette and nowhere else.
+    out = Image.composite(ai, base, mask)
+    out.save(out_path)
+    return out_path
+
+
+def make(model, render_path, work_dir, scan, time_of_day="day",
+         mask_path=None):
     """Produce a trusted photoreal shot, or explain why there isn't one.
 
     Returns (artifacts, note). Never raises — a proposal that has its model,
@@ -216,6 +264,29 @@ def make(model, render_path, work_dir, scan, time_of_day="day"):
         return [], f"no photoreal pass: {e}"
     except Exception as e:
         return [], f"no photoreal pass: {type(e).__name__}: {e}"
+
+    # WITH A MASK, THE GUARD STOPS BEING THE LAST LINE OF DEFENCE. Forcing
+    # the restyle through the measured silhouette makes the outline correct
+    # by construction, so a low structural score no longer means the picture
+    # is unusable — it means the AI moved detail INSIDE the envelope, which
+    # the composite then bounded. The score is still reported, because
+    # detail inside the outline is genuinely the model's invention.
+    if mask_path and os.path.exists(mask_path):
+        try:
+            layered = os.path.join(work_dir, f"{scan}.hero.png")
+            layer_onto_mesh(render_path, mask_path, out, layered)
+            if layered != out and os.path.exists(out):
+                os.remove(out)
+            return ([(layered, f"renders/{scan}.hero.png", None)],
+                    f"photoreal materials composited through the measured "
+                    f"silhouette — the outline, footprint and massing are the "
+                    f"model's; surfaces inside it are generated "
+                    f"(free-run structure score {score:.2f})"
+                    if score is not None else
+                    "photoreal materials composited through the measured "
+                    "silhouette")
+        except Exception as e:
+            print(f"masking failed, falling back: {e}", file=sys.stderr)
 
     if score is None:
         return ([(out, f"renders/{scan}.hero.png", None)],

@@ -99,7 +99,7 @@ _MATERIALS = {
 
 
 def _script(glb, out, yaw, pitch, samples, width, height, sun_deg,
-            sun_energy, sky_strength, exposure):
+            sun_energy, sky_strength, exposure, mask_out):
     """The Blender-side program. Runs inside the child process only."""
     return textwrap.dedent(f"""
         import bpy, math, sys
@@ -217,6 +217,20 @@ def _script(glb, out, yaw, pitch, samples, width, height, sun_deg,
         sc.view_settings.look = 'AgX - Medium High Contrast'
         sc.view_settings.exposure = {exposure}
         bpy.ops.render.render(write_still=True)
+
+        # THE MASK MUST BE THE BUILDING, NOT THE SCENE. Rendering on
+        # transparent film puts the GROUND PLANE in the alpha too, which
+        # measured out at 80.7% of the frame and 100% of the lower half — so
+        # compositing through it clipped only the sky and left an image model
+        # free to invent a whole extra wing below the horizon, which it did.
+        # Hiding the ground and re-rendering at one sample gives the
+        # silhouette of the building alone, which is the thing worth locking.
+        if {mask_out!r}:
+            g.hide_render = True
+            sc.cycles.samples = 1
+            sc.cycles.use_denoising = False
+            sc.render.filepath = {mask_out!r}
+            bpy.ops.render.render(write_still=True)
         print('RENDER_OK')
     """)
 
@@ -224,7 +238,8 @@ def _script(glb, out, yaw, pitch, samples, width, height, sun_deg,
 def render(glb_path, out_path, yaw_deg=35.0, pitch_deg=18.0,
            samples=DEFAULT_SAMPLES, width=1200, height=900, sun_deg=210.0,
            sun_energy=SUN_ENERGY, sky_strength=SKY_STRENGTH,
-           exposure=EXPOSURE, python=None, timeout=RENDER_TIMEOUT_S):
+           exposure=EXPOSURE, python=None, timeout=RENDER_TIMEOUT_S,
+           keep_mask=None):
     """Render a GLB with Cycles. Returns the output path.
 
     `python` is the interpreter that has bpy — deliberately separate, both
@@ -240,9 +255,10 @@ def render(glb_path, out_path, yaw_deg=35.0, pitch_deg=18.0,
             f"cannot render with Blender: {why}. The measured model, its "
             f"exports and the built-in preview do not depend on this.")
 
+    raw_mask = (out_path + ".rawmask.png") if keep_mask else ""
     script = _script(glb_path, out_path, yaw_deg, pitch_deg, samples,
                      width, height, sun_deg, sun_energy, sky_strength,
-                     exposure)
+                     exposure, raw_mask)
     try:
         r = subprocess.run([exe, "-c", script], capture_output=True,
                            text=True, timeout=timeout)
@@ -254,8 +270,27 @@ def render(glb_path, out_path, yaw_deg=35.0, pitch_deg=18.0,
         tail = (r.stderr or r.stdout or "").strip().splitlines()[-6:]
         raise BlendError("Blender did not produce an image: "
                          + " | ".join(tail)[:400])
+    if keep_mask:
+        # The building-only pass's alpha IS the measured silhouette, exact to
+        # the pixel — what lets an AI restyle be forced back onto the
+        # geometry rather than trusted to respect it.
+        src_for_mask = raw_mask if os.path.exists(raw_mask) else out_path
+        _save_mask(src_for_mask, keep_mask)
+        if os.path.exists(raw_mask):
+            os.remove(raw_mask)
     _drop_in_sky(out_path)
     return out_path
+
+
+def _save_mask(rendered, mask_path):
+    """Write the render's alpha as a black-and-white mask."""
+    try:
+        from PIL import Image
+    except ImportError:
+        return None
+    img = Image.open(rendered).convert("RGBA")
+    img.getchannel("A").save(mask_path)
+    return mask_path
 
 
 def views(glb_path, directory, scan, angles=((35, 18), (215, 20), (0, 6)),
@@ -266,7 +301,10 @@ def views(glb_path, directory, scan, angles=((35, 18), (215, 20), (0, 6)),
     never takes down the ones that worked, or the job that made them.
     """
     out = []
-    for (yaw, pitch), name in zip(angles, ("corner", "rear-corner", "front")):
+    names = ("corner", "rear-corner", "front")
+    if len(angles) == 2:
+        names = ("rear-corner", "front")
+    for (yaw, pitch), name in zip(angles, names):
         p = os.path.join(directory, f"{scan}.{name}.cycles.png")
         try:
             render(glb_path, p, yaw_deg=yaw, pitch_deg=pitch, **kw)

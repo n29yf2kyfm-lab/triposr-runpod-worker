@@ -958,15 +958,59 @@ def run(spec, prog, output_dir):
         print(f"previews skipped: {type(e).__name__}: {e}", file=sys.stderr)
         model["previews"] = []
 
+    # Cycles, if a Blender is reachable. The flat-shaded preview above is
+    # always produced and is what the job guarantees; these are the same
+    # geometry lit properly, and a worker without Blender simply does not
+    # get them. `render_python` points at the interpreter holding the bpy
+    # wheel, which is deliberately not this one — it pins numpy<2.
+    glb = next((p for p, _, _ in artifacts if p.endswith(".glb")), None)
+    if glb and (spec.get("extension") or {}).get("cycles") is not False:
+        try:
+            import blend
+            ok, why = blend.available(spec.get("render_python"))
+            if ok:
+                prog.stage("rendering")
+                # The hero angle keeps its silhouette mask — that mask is
+                # what lets the photoreal pass be bounded by the geometry
+                # instead of asked nicely to respect it.
+                hero_mask = os.path.join(output_dir, f"{scan}.mask.png")
+                blend.render(glb, os.path.join(
+                    output_dir, f"{scan}.corner.cycles.png"),
+                    yaw_deg=35, pitch_deg=16,
+                    python=spec.get("render_python"), keep_mask=hero_mask)
+                shots_hq = [(os.path.join(
+                    output_dir, f"{scan}.corner.cycles.png"),
+                    f"renders/{scan}.corner.cycles.png", None)]
+                shots_hq += blend.views(
+                    glb, output_dir, scan, angles=((215, 20), (0, 6)),
+                    python=spec.get("render_python"))
+                artifacts += shots_hq
+                model["cycles_renders"] = [os.path.basename(p)
+                                           for p, _, _ in shots_hq]
+                model["_hero_src"] = shots_hq[0][0]
+                model["_hero_mask"] = hero_mask
+                prog.note(f"{len(shots_hq)} Cycles renders")
+            else:
+                model["cycles_renders"] = []
+                print(f"cycles skipped: {why}", file=sys.stderr)
+        except Exception as e:
+            model["cycles_renders"] = []
+            print(f"cycles skipped: {type(e).__name__}: {e}", file=sys.stderr)
+
     # The photoreal pass, driven BY the measured render so the geometry
     # cannot be renegotiated. Off with photoreal=false; it costs a few pence
     # a job and some callers only want the model.
     if shots and (spec.get("extension") or {}).get("photoreal") is not False:
         import hero
         prog.stage("photoreal")
+        # Prefer the Cycles hero and its silhouette mask when they exist;
+        # fall back to the flat preview, which has no mask and therefore
+        # falls back to the guard-and-reject behaviour.
+        src = model.get("_hero_src") or shots[0][0]
         hero_arts, note = hero.make(
-            model, shots[0][0], output_dir, scan,
-            time_of_day=(spec.get("extension") or {}).get("light", "day"))
+            model, src, output_dir, scan,
+            time_of_day=(spec.get("extension") or {}).get("light", "day"),
+            mask_path=model.get("_hero_mask"))
         artifacts += hero_arts
         model["photoreal"] = note
         prog.note(note)
@@ -985,6 +1029,8 @@ def run(spec, prog, output_dir):
     except Exception as e:
         print(f"capture plan skipped: {type(e).__name__}: {e}", file=sys.stderr)
 
+    for k in ("_hero_src", "_hero_mask"):
+        model.pop(k, None)
     return model, artifacts
 
 

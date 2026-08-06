@@ -68,7 +68,7 @@ STAGE_PLANS = {
     "render":      ["aerial", "rendering", "delivering"],
     "propose":     ["locating", "footprint", "orientation",
                     "clearances", "roof", "designing", "exporting",
-                    "photoreal"],
+                    "rendering", "photoreal"],
 }
 
 
