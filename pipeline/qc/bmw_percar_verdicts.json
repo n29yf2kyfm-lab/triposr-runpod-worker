@@ -778,5 +778,53 @@
  "d8ba2e558d9542c0ba162f812430532a": [
   "SCRAP",
   "M3 GTS E92 79k f cov 0.128 - WHEELS MISSING. Three of the four arches are empty with only a brake disc visible and a single loose wheel sits under the car in the side view. Also a track special with fixed rear wing and cage, and bmw-m3-e92-bm1-v1 already holds the E92 slot at 1.18M f. Thin paint at 0.128."
+ ],
+ "2f758a606f004d7e8932e2845c7e9056": [
+  "KEEP",
+  "M4 Convertible F83 2018 66k f cov 0.422 mats 2 - fills a resolver-visible gap, verified against the live catalogue. All three M4 entries (bmw-m4-competition-2021-bm1-v1, bmw-m4-v1, bmw-m4-w12-v1) are tagged bodyStyle coupe, so a decode reading model m4 plus convertible is hard-rejected by vehicle-resolver.ts:71 and currently resolves to nothing. Quality holds: proportions read as an M4 instantly, front 3/4 strong, belt line and wheelbase consistent across all four views with the roof stowed and tonneau closed, headlights carry internal LED elements, kidney slats defined, quad exhausts with red diffuser accents, shut lines crisp, multi-spoke alloys identical in every view. Best coverage figure of any keep in this wave at 0.422."
+ ],
+ "682c03f59738461298ff7ffb78d13d35": [
+  "SCRAP",
+  "TWO CARS IN ONE ASSET 69k f cov 0.112 - the GLB contains a white M3 E92 and a pink/purple itasha show car parked side by side, both present in all four views. A single-body recolour cannot address two vehicles, and the itasha carries a full anime character wrap plus a number-9 door roundel painted into the texture. Unusable as a catalogue entry."
+ ],
+ "8d5669d6e7304debac69957c412c3bcc": [
+  "SCRAP",
+  "3.0 CSL Hommage Concept 2015 64k f cov 0.210 - CONCEPT CAR, never produced. A show stand piece with no door handles, no plates, exposed carbon aero blades and vestigial mirrors. The real E9 3.0 CSL was kept earlier in this batch as 86ee7c1a83334576933ab431542269d5; this is the modern tribute study, not a registrable vehicle."
+ ],
+ "0856112a197b470382f223f5b69b31e1": [
+  "SCRAP",
+  "M1 E26 68k f cov 0.199 - WHEELS MISSING. All four arches hold bare hub carriers with brake discs and no rims or tyres, and the car sits on a stand visible under the sills. The body is also untextured flat white with no shut lines. bmw-m1-bm1-v1 was kept earlier in this wave at 914k f."
+ ],
+ "74916396475b414f8dbcb580621a5010": [
+  "SCRAP",
+  "M3 E46 71k f cov 0.282 - REDUNDANT and speckled. bmw-m3-e46-v1 already holds the slot. The red paint also carries a mottled speckle across the bonnet, roof and boot that reads as texture noise rather than a finish, and it would carry through every colour variant."
+ ],
+ "5107e598e6244992809298e4c1ca5f4f": [
+  "SCRAP",
+  "M2 Competition F87 2019 70k f cov 0.444 - REDUNDANT, and specifically against its own twin: bmw-m2-v1 has sourceTitle 2019 BMW M2 Competition, the same car and year. Fourth M2 scrapped in this wave."
+ ],
+ "4005d32807db4224a81cec159896504c": [
+  "SCRAP",
+  "M4 GTS F82 2016 70k f cov 0.394 - REDUNDANT. Third M4 GTS and tenth M4 overall in this wave. bmw-m4-competition-2021-bm1-v1 holds the slot at 683k f."
+ ],
+ "180ad25824fd4311a9d5532c4027d88e": [
+  "SCRAP",
+  "M4 GTS F82 2016 69k f cov 0.150 - REDUNDANT, and a near-twin of 4005d32807db4224a81cec159896504c judged in the same batch (69,497 f vs 69,838 f, same orange forged wheels, same swan-neck wing). Fourth M4 GTS in the wave; thin paint at 0.150."
+ ],
+ "6cca4368b6ef480582a798e5d16fea73": [
+  "SCRAP",
+  "M850i Cabrio 69k f cov 0.172 - WHEELS MISSING. All four arches are completely empty, no hubs, no discs, no rims. A driver figure is also modelled into the cabin and visible in every view. The 8 Series convertible slot is already filled by 72a7165bfb8c455e9dd8206e40e3347a, kept earlier in this wave with wheels."
+ ],
+ "a5eb74a0ad3f4ed594e854a862a0e029": [
+  "SCRAP",
+  "X4 G02 2019 76k f cov 0.214 - REDUNDANT. Second X4 scrapped in two batches after bc3e714e021b44f4844ddf847288e99a. bmw-x4-v1 is approved and bmw-x4-v2 is already quarantined as surplus."
+ ],
+ "06bebabc3a0c4ffc8d4ccb9d73b01c54": [
+  "SCRAP",
+  "740Li E65 2006 74k f cov 0.213 - REDUNDANT and soft, the fourth 7 Series from this uploader scrapped in this wave. Same defects as the 750Li and both 760Lis: angel-eye rings present but the headlight body is a soft blob, shut lines barely register, flanks ripple. bmw-7-series-v1 holds the nameplate."
+ ],
+ "1c3bb97068074310990c10068d9e13d3": [
+  "SCRAP",
+  "3.0 CSL Hommage Concept 2015 64k f cov 0.210 - CONCEPT CAR and a cross-author re-upload of 8d5669d6e7304debac69957c412c3bcc (64,011 f vs 64,015 f, identical cov 0.210 and mats 2, four views indistinguishable). Never produced: show-stand piece with no door handles, no plates, exposed carbon aero blades and vestigial mirrors. The real E9 3.0 CSL is kept as 86ee7c1a83334576933ab431542269d5."
  ]
 }
