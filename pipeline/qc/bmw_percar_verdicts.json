@@ -694,5 +694,29 @@
  "0171e70eb4df4b47878c3cd81e698a3e": [
   "SCRAP",
   "X2 2020 99k f cov 0.196 - REDUNDANT. bmw-x2-v1 is already approved in the library and this is not an upgrade on it."
+ ],
+ "5606a222423444da92d0ef6da15f1dd2": [
+  "SCRAP",
+  "X5 E53 98k f cov 0.103 - DISASSEMBLED and worse than the copy already scrapped as 3795dd23ae294404ad01e7488def4990. No wheels on three corners, doors and roof panels floating apart from the shell, front clip separated, and a large grey box primitive baked into the scene behind the car in all four views. Fortieth Merc_TV asset judged in this wave, still zero keeps."
+ ],
+ "b5c660d8e39340538a06561eaca69b5f": [
+  "SCRAP",
+  "X3 G01 LCI 2022 97k f cov 0.239 - REDUNDANT. bmw-x3-2018-w12-v1 and bmw-x3-v1 both already cover the nameplate. Clean model but no added coverage."
+ ],
+ "19be670d781c40929e135f6c34e4151f": [
+  "SCRAP",
+  "M Hybrid V8 95k f cov 0.344 - MOTORSPORT. LMDh prototype: closed cockpit with roof fin, full-width rear wing, ground-effect floor with vertical strakes, no doors or road lighting, slick tyres. Renders near-black throughout. No UK registration resolves to a Le Mans prototype."
+ ],
+ "b8636837b8a4469d8a39d5e862319ce3": [
+  "SCRAP",
+  "M Hybrid V8 livery01 95k f - MOTORSPORT and an exact same-author re-upload of 19be670d781c40929e135f6c34e4151f. Face count matches to the digit (95,079 both), cov 0.344 and mats 1 identical; only the livery texture differs. Same LMDh prototype, same reason."
+ ],
+ "cea85cf2fa9d4af682c2446cced5ccae": [
+  "SCRAP",
+  "X2 F39 2019 93k f cov 0.360 - REDUNDANT. bmw-x2-v1 holds the slot and 0171e70eb4df4b47878c3cd81e698a3e was scrapped for the same reason earlier in this batch. Second X2 in two batches, nothing added."
+ ],
+ "3d507e8432494480b31bdc0dcdcf51d5": [
+  "SCRAP",
+  "430i xDrive Coupe G22 2021 92k f cov 0.402 - REDUNDANT. bmw-4-series-v1 covers the nameplate, and the G22 platform is already represented several times over through the M4 entries. Clean model with a well-formed mesh kidney grille, but no added coverage."
  ]
 }
