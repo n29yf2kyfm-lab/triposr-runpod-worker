@@ -670,5 +670,29 @@
  "69dbf0293c6f4959a90d5bd0d68e097f": [
   "SCRAP",
   "M340i G20 2020 104k f cov 0.196 - REDUNDANT. The G20 3 Series is already over-served: bmw-3-series-2021-w12-v1 and bmw-320i-2023-v1 are live, and two G20 saloons were kept in batch one of this wave. M340i is a trim of the same car, not a distinct nameplate."
+ ],
+ "f0ac8fa9bf1e4d79a03a4a3ea6d24afa": [
+  "KEEP",
+  "1M Coupe E82 101k f cov 0.256 mats 2 - the library has bmw-1-series-v1 but no 1M, and the 1M is a distinct nameplate rather than a trim: its own wide-arch bodywork, unique front bumper and quad exhausts. Proportions read as a 1M instantly; front 3/4 strong; roof line, arches and wheelbase consistent across all four views; twin circular projectors with corona rings formed inside the headlights; kidney slats defined; bonnet and door shut lines crisp; multi-spoke black alloys with red calipers identical in every view. Lowest face count of any keep in this wave, and the source ships it in near-black which makes fine surface detail harder to read than on the white assets - flagging that so the recolour stamp gets a careful look before it ships."
+ ],
+ "5a9007d569a846548dbf352877550c4e": [
+  "SCRAP",
+  "M4 G82 104k f cov 0.194 - REDUNDANT. Ninth M4 judged in this wave. bmw-m4-competition-2021-bm1-v1 holds the slot at 683k f - more than six times this geometry - with bmw-m4-v1 and bmw-m4-w12-v1 also live."
+ ],
+ "e7d8be35e2f34b7f84e0543fff7fda27": [
+  "SCRAP",
+  "M3 G80 103k f cov 0.286 - REDUNDANT. bmw-m3-2023-w12-v1 covers this exact car, and the G81 Touring was scrapped earlier in this batch on the same ground. Clean model, no added coverage."
+ ],
+ "6bf5cf85a1ae43d3b32d1809e8f40941": [
+  "SCRAP",
+  "Z4 E89 2013 103k f cov 0.169 - modelling quality fails the bar. The front bumper and wing carry pronounced waviness that reads as dents under the studio light; headlights are soft blobs with no internal projector detail; door and bonnet shut lines barely register; a stray dark object is baked into the scene under the nose. The E89 would have been a genuine gap between bmw-z4-2008-v1 and bmw-z4-m40i-2019-v1, so worth re-sourcing - but not at this quality."
+ ],
+ "99292a662a4e43b7a4d047b503a20aca": [
+  "SCRAP",
+  "M3 GTR E46 100k f cov 0.387 - MOTORSPORT and a game rip. Titled NFSMW (Need for Speed Most Wanted). Full race build: roll cage visible through the glass, swan-neck rear wing, wide-arch bodywork, bonnet vents, side-exit exhausts, carbon bonnet panel. Third M3 GTR scrapped in this wave. bmw-m3-e46-v1 covers the road car."
+ ],
+ "0171e70eb4df4b47878c3cd81e698a3e": [
+  "SCRAP",
+  "X2 2020 99k f cov 0.196 - REDUNDANT. bmw-x2-v1 is already approved in the library and this is not an upgrade on it."
  ]
 }
