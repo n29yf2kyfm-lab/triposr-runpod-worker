@@ -454,5 +454,29 @@
  "bcba6a04b6aa43c6852296bad717aaf9": [
   "SCRAP",
   "3 Series Coupe E36 225k f - WHEELS MISSING. Bare brake discs in all four arches with a single detached wheel lying on the studio floor, the same failure as 0e37386965b94060a2caa93662a55734. Also wears a large aftermarket rear wing. Not a complete car."
+ ],
+ "d4d6bd0bfae445128dd01e095dd081d3": [
+  "SCRAP",
+  "M2 CS F87 222k f cov 0.179 - REDUNDANT plus a baked-in foreign plate. The M2 slot is held by bmw-m2-v1 (2019 M2 Competition) and d382aeb1d3e2413c9269ae6795e28c6a was already scrapped for the same reason. This one additionally carries a Korean registration plate (389 8111) modelled into both front and rear bumpers, which no recolour removes."
+ ],
+ "e307c3f1df9d40afafbb36f6f69c28d1": [
+  "SCRAP",
+  "XM 215k f cov 0.153 - REDUNDANT. bmw-xm-v1 is already approved in the library. Also a glass fault: the windscreen renders as a flat opaque teal-green panel in the head-on view rather than tinted glass, and a white artefact sits inside it. Not an upgrade on the incumbent."
+ ],
+ "9925581144e74641b6d35c7af2406afa": [
+  "SCRAP",
+  "M3 E92 215k f - WHEELS MISSING. Bare brake discs on stub hubs in all four arches, one loose wheel on the floor. The bonnet also carries a mottled camouflage-like texture blotch visible in the front three-quarter view. Library already has bmw-m3-e92-bm1-v1, kept earlier in this wave at 1.18M f."
+ ],
+ "51b155adad3c4dd18ff76bfcfe1a6e3b": [
+  "SCRAP",
+  "M3 GTR E46 214k f cov 0.116 - texture corruption plus redundancy. Triangulated grey artefact patches sit on the bonnet and across the roof/windscreen in the front three-quarter view. Thin paint at 0.116. It is also the GTR homologation special with race wing, bonnet vents and wide arches rather than a stock M3, and bmw-m3-e46-v1 already covers the generation."
+ ],
+ "68c905e5d2d14e5da8b92793a968b2c2": [
+  "SCRAP",
+  "X6 2020 213k f cov 0.196 - REDUNDANT plus author watermark. The library already ships bmw-x6-2020-v1 and bmw-x6-m-2022-bm1-v1. This model has the uploader name ItsDiyor modelled into the front number plate, which would appear on every colour variant."
+ ],
+ "8f4f07c22dcb4d188e95dc2c6555a60a": [
+  "SCRAP",
+  "M5 F90 212k f - WHEELS MISSING and bonnet detached. All four arches are empty with only a coil spring and a stub hub visible; the bonnet floats as a separate slab above the roofline in every view; a single loose wheel sits under the car. Same Merc_TV failure mode as the E39, E36 and E92 in this wave."
  ]
 }
