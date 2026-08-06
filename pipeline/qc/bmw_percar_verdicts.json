@@ -374,5 +374,25 @@
  "b94e907d247e4ade964f613d17293b31": [
   "SCRAP",
   "3 Series F30 276k f cov 0.101 - a large grey studio backdrop PLANE is baked into the GLB, visible as a slab behind and beside the car in all four views. Body texturing is blotchy: doors render dark grey against light grey wings, with triangulated artefact patches on the front wing and rear quarter. Thin paint coverage too. Not fixable by recolour."
+ ],
+ "8dde42e86c884153a9c1aee3397546bb": [
+  "KEEP",
+  "M5 E60 270k f cov 0.373 mats 2 - the library has bmw-5-series-e60-v1 but no E60 M5, and its only M5 entries are the F90 and the G90 kept earlier in this wave, so the V10 generation is missing. Proportions read as an E60 M5 instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four views; angel-eye rings and projector housings clearly formed inside the headlights; chrome kidney slats defined; side gill vents present; door and bonnet shut lines defined; quad exhausts and M5 boot badge; dark multi-spoke alloys with red calipers identical in every view. Front lower bumper intakes read slightly flat - minor, not a fail."
+ ],
+ "a05107b16891426c98d0ab4b271acf03": [
+  "SCRAP",
+  "M4 CS G82 2021 276k f cov 0.157 - REDUNDANT. Genuinely clean model (honeycomb kidney visible, laser headlight internals, carbon roof, yellow ceramic calipers consistent across views), but the G82 M4 slot is already filled by bmw-m4-competition-2021-bm1-v1, kept earlier in this wave at 683k f - 2.5x the geometry of this one. The library also carries bmw-m4-v1 and bmw-m4-w12-v1. A fourth M4 adds no coverage and this is not an upgrade on the incumbent."
+ ],
+ "ed6c50309b1940cf933ca78737fddada": [
+  "SCRAP",
+  "1 Series E87 116 264k f cov 0.199 - modelling quality fails the bar. Bonnet, front wings and doors ripple visibly under the studio light; door handles are blobs with no defined shape; headlights are flat ovals with no internal projector or LED structure; front and rear bumpers are mushy with no defined shut lines. A stray small object is also baked into the scene, visible on the floor in all four views. Library already has bmw-1-series-v1."
+ ],
+ "41efee8f1dfd45678b375ab6da914217": [
+  "SCRAP",
+  "V12 LMR 262k f - MOTORSPORT. Open-cockpit Le Mans prototype racer, not a road car: no roof, no doors, no lights, exposed wing and diffuser, slick Michelin tyres. No UK registration can ever resolve to it. G7 did not catch it because the title carries no motorsport keyword."
+ ],
+ "66afa45b63cf4248977c87c0a32841ba": [
+  "SCRAP",
+  "V12 LMR 261k f - MOTORSPORT and a cross-author re-upload of 41efee8f1dfd45678b375ab6da914217 (261,413 f vs 261,664 f, identical cov 0.245 and mats 2). Rendered side by side the four views are indistinguishable. Same reason: open-cockpit Le Mans prototype, not a road car."
  ]
 }
