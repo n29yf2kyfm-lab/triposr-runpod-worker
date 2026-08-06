@@ -294,5 +294,25 @@
  "4209f1f8143f4e1694d621b5b75e6c6e": [
   "SCRAP",
   "BMW_2002ti, 348,934 f against the 349,762 f above at IDENTICAL cov 0.329 - the same file re-uploaded by a different author, 828 faces apart. G11 missed it because 2002ti resolves to no nameplate at all: not a series number, not an X/Z/i code, not a chassis code, and the engine-code pattern needs three digits after an optional m"
+ ],
+ "0360b93a5d504c97adcfd52296ef88c9": [
+  "KEEP",
+  "330i M Sport G20 2019 345k f cov 0.200 - kidney grille with real slat depth, headlights carrying internal LED structure, multi-spoke alloys with blue M Sport calipers consistent across all four views, defined shut lines, correct L-shaped tail lamps, clean gloss. NOTE this and the G20 330i at 371k f are BOTH G20 saloons and only one should ship; the 371k car is the more detailed of the two"
+ ],
+ "fdae563030ec43b69100822abcd07964": [
+  "SCRAP",
+  "titled BMW-Awesome car, 344,894 f at cov 0.200 - byte-for-byte the same figures as the 2019 330i M Sport above, different author. sixth cross-author duplicate pair in this wave. G11 missed it because the title carries no model token at all"
+ ],
+ "213a5272ea004a009d3f1a78f38bdefc": [
+  "SCRAP",
+  "X5M Facelift 2023 - NO WHEELS at three corners with white brake assemblies hanging in empty arches, the car balanced on a single rear wheel. bodywork and grille are strong, which makes this another one lost purely to a broken export"
+ ],
+ "921f8741ff5b448fa7ee37b070c52684": [
+  "SCRAP",
+  "M5 E39 - NO WHEELS at all four corners, empty arches with a bare damper propping the shell up, and the bonnet carries a mottled speckled texture across it in the front three-quarter"
+ ],
+ "1bae31a6f52e4cb986b7cfb2d2be0651": [
+  "SCRAP",
+  "5 Series E34 - fourth E34 in this wave from the same uploader with the same defect: all four arches empty, no wheels fitted. the E34 bodies are consistently clean and consistently unusable"
  ]
 }
