@@ -3,3 +3,9 @@ pipeline/node_modules/
 __pycache__/
 *.pyc
 .firecrawl/
+
+# publish_batch appends every network action here as it runs. It is a run
+# log, not source: it changes on every batch, conflicts on every merge, and
+# says nothing a commit message does not. The catalogue and the manifests are
+# the durable record.
+pipeline/publish/publish_jobs.jsonl
