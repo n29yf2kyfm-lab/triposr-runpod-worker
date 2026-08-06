@@ -280,8 +280,8 @@
   "1997 M3 E36 LSM - the same widebody drift build already scrapped in this wave under BMW-E36-LSM-IASI: mirror-chrome and carbon panels, box arch flares, oversized rear wing, roll cage. re-uploaded under a different title by the same author"
  ],
  "87c972d41e9e4717b2d2db206bf315ae": [
-  "KEEP",
-  "3 Series G20 330i 371k f cov 0.239 - the current-generation 3 Series saloon. the library ships bmw-3-series-2021-w12-v1 with no poster and a 2014 car; this is a clean G20. kidney grille with real slat depth, headlights carrying internal LED structure, multi-spoke alloys with red calipers consistent across all four views, defined shut lines, correct L-shaped tail lamps, clean gloss. NOTE two 3 Series saloons are already live, so this only publishes if it beats them"
+  "SCRAP",
+  "3 Series G20 330i 371k f cov 0.239 mats 2 - DROPPED in favour of 0360b93a5d504c97adcfd52296ef88c9 to resolve the two-G20 conflict; both are the same model, generation and bodyStyle saloon, so only one can ship. CORRECTION: I previously noted this was the one to keep because it is more detailed. That was inferred from face count and I had not compared the sheets. Side by side, the 345k M Sport car has visibly cleaner flanks, while this one carries vertical banding down both rear doors that reads as a surface crease in front34, front34_L and rear34. Extra faces did not translate into visible quality. The M Sport is also the volume UK trim."
  ],
  "97901a0eca4344c4a12f2a134d79775b": [
   "SCRAP",
@@ -316,8 +316,8 @@
   "5 Series E34 - fourth E34 in this wave from the same uploader with the same defect: all four arches empty, no wheels fitted. the E34 bodies are consistently clean and consistently unusable"
  ],
  "983e461b3e5b4f078c4e71d5d293b09a": [
-  "KEEP",
-  "i3 2017 313k f cov 0.124 - proportions read as an i3 instantly with the correct black bonnet, black roof and grey lower cladding as SEPARATE materials rather than baked paint. slim kidney grille, headlights with internal structure, turbine-style aero alloys consistent across all four views, defined shut lines including the rear coach door, clean gloss. NOTE bmw-i3-v1 is already live so this only publishes if it beats it"
+  "SCRAP",
+  "i3 2017 313k f cov 0.124 mats 2 - REDUNDANT against the incumbent, resolved as my own keep note required. That note said this only publishes if it beats bmw-i3-v1; compared side by side it does not. bmw-i3-v1 is qualityGrade A, visualStatus passed, and carries yearStart 2013 / yearEnd 2022, which spans the entire i3 production run - the i3 had only one generation (I01), so there is no generation or year gap to fill, and both are bodyStyle hatchback, meaning the resolver cannot separate them. The incumbent hero render is clean and correctly formed with the black bonnet, black roof and grey cladding all reading as separate materials, the same trait I praised in this one. No added coverage."
  ],
  "1efbe2ff21414af89fb14c70655cc88b": [
   "SCRAP",
