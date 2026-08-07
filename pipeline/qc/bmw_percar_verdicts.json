@@ -1002,5 +1002,13 @@
  "a4e83020cb224f8aba9f755cd740e2fe": [
   "SCRAP",
   "M5 G99 Touring 636k f mats=4 cov=0.148 - DRAG build with the bonnet removed. The engine bay is fully exposed in the front three-quarter, with a drag-spec front end and skinny front wheels. The G99 M5 Touring would be a genuine gap - the library has no current-generation M5 estate - so WORTH RE-SOURCING as a stock car, but this one has no bonnet."
+ ],
+ "810ef7951c61493898923cae5e589a8b": [
+  "SCRAP",
+  "M5 F90 741k f mats=12 cov=0.750 - REDUNDANT. bmw-m5-f90-undated-v1 holds the F90 slot and this is the fourth F90 scrapped across the wave. Clean model, but coverage 0.750 means the body material carries most of the trim as well, and it offers nothing over the incumbent."
+ ],
+ "58575b71798444b996b376c817b10884": [
+  "SCRAP",
+  "M3 E46 741k f mats=8 cov=0.799 - UNTEXTURED and redundant. The whole car renders as flat white clay: no paint, headlights are plain recesses with no internals, the grille is a smooth blank, tail lights are dark patches, and there are no shut lines anywhere. Titled E45 which is not a BMW chassis code. bmw-m3-e46-v1 already holds the slot."
  ]
 }
