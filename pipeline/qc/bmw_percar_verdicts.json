@@ -1358,5 +1358,41 @@
  "6196a639ee4d4d579d07751058df7335": [
   "SCRAP",
   "NOT A CAR - an entire BMW DEALERSHIP BUILDING: showroom block, forecourt, light poles and a dozen miniature cars in the car park. Fifth non-car to pass the automated gates, and the largest."
+ ],
+ "9a1778479324447e881fef98c675ac58": [
+  "SCRAP",
+  "X6 M G06 493k f cov=0.789 - out-of-band; the X6 M nameplate is held by bmw-x6-m-2022-bm1-v1 (same generation) plus the F86 keep for 2016. Nothing added."
+ ],
+ "392389ddec344ea58427e327ffc9f97d": [
+  "SCRAP",
+  "M5 E60 481k f cov=0.781 - out-of-band; FIFTH copy of the E60 M5, slot held by bmw-m5-2003-bm2-v1 published this session."
+ ],
+ "da0f4f1ba91c41af81ee513727323906": [
+  "SCRAP",
+  "M2 F87 474k f cov=0.832 - titled M2 MK1 (F22) but the M2 is the F87; out-of-band coverage; M2 slots held (F87 bmw-m2-v1, G87 keep). Fifth M2 scrap."
+ ],
+ "0d602a22391d4aca81ce4e69efb3a418": [
+  "SCRAP",
+  "M2 F22 2JZ drift 470k f cov=0.886 - drift build by title (ss_2jz), second-highest coverage in the pool. Not stock, not needed."
+ ],
+ "7467017641b24a1782f23424116159a2": [
+  "SCRAP",
+  "M4 Competition G82 456k f cov=0.666 - titled G80 M4 but G80 is the M3 saloon; render is the G82 coupe. Twenty-fifth M4 scrap; out-of-band."
+ ],
+ "9871477854b64e82bd43438eb9b940fd": [
+  "SCRAP",
+  "M Hybrid V8 432k f cov=0.626 - MOTORSPORT, fourth copy of the LMDh prototype in the wave."
+ ],
+ "beac4b9b7cb9407d865fa4ad3c4ee60b": [
+  "SCRAP",
+  "M Hybrid V8 vecarz 432k f cov=0.626 - fifth copy, cross-author re-upload of P087 (432,126 vs 432,150 faces). Same prototype."
+ ],
+ "d35d04aac7f242d997af5d8d2d7fbeca": [
+  "SCRAP",
+  "X3 M40i G01 LCI 2024 429k f cov=0.548 - clean stock car but REDUNDANT: bmw-x3-2018-w12-v1 and bmw-x3-v1 hold the nameplate and two other G01s were already scrapped on the same ground. Slightly out-of-band besides."
+ ],
+ "c62c1e0baa16451d8ce396109a655b54": [
+  "SCRAP",
+  "NOT A CAR - a spherical BMW ROBOT concept toy with one detached wheel leaning against it. Sixth non-car through the gates."
  ]
 }
