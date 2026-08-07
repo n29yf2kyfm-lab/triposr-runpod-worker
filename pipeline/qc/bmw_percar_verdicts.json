@@ -1538,5 +1538,41 @@
  "b277d6b6109845ffb3cc5de325e71948": [
   "SCRAP",
   "iX 2024 261k f cov=0.787 - bmw-ix-v1 holds the nameplate; out-of-band."
+ ],
+ "ab2574c2d1414062bedc6a5457443757": [
+  "SCRAP",
+  "M3 Sport Evolution E30 1990 260k f cov=0.539 - fifth E30 M3 copy; slot held."
+ ],
+ "4d77421bd4464d548ec5e929103c41b3": [
+  "SCRAP",
+  "M3 Sport Evolution E30 256k f cov=0.460 - sixth E30 M3 copy; slot held."
+ ],
+ "58f2bda009624c4dae25f00c8630860b": [
+  "SCRAP",
+  "M3 Touring G81 2023 256k f cov=0.577 - SIXTH G81 Touring copy; estate slot held by bmw-m3-2023-w12-v1."
+ ],
+ "85c9f215906e408da12a66848bd55416": [
+  "SCRAP",
+  "M8 Competition Pride Convertible 2020 255k f cov=0.564 - the 8 Series convertible slot is held by bmw-8-series-2020-bm2-v1 published this session, and the Pride livery is baked into the body texture."
+ ],
+ "852da968f9af4650818a1f6a1e6e1ee4": [
+  "SCRAP",
+  "M5 E34 1995 253k f mats=4 cov=0.009 - premium-looking black E34 M5 (correct proportions, chrome-lip alloys, crisp trim) but the body material covers 0.9 PERCENT of the shell: the paint lives in baked textures, so a recolour lands on nothing and all eight colour variants would render identical black. The colour feature is the product; it cannot ship. E34 RE-SOURCE FLAG STANDS - this proves clean E34 geometry exists."
+ ],
+ "209a1a5f3f3f4716963627df4dc7f656": [
+  "SCRAP",
+  "M3 Touring Forest 252k f cov=0.882 - seventh G81 Touring copy with a forest-camo wrap baked in. Slot held."
+ ],
+ "bdea1df6c22e4efd9b01a52034789fd7": [
+  "SCRAP",
+  "M4 G82 Adro kit 240k f cov=0.627 - twenty-eighth M4 scrap, vecarz re-upload with tuner kit."
+ ],
+ "3ef64497e63e4c569419fde9aa238b76": [
+  "SCRAP",
+  "M4 Competition 2021 239k f cov=0.603 - twenty-ninth M4 scrap; slot held by the 683k incumbent."
+ ],
+ "39f68b5bef64479a9cff309b7502a77f": [
+  "SCRAP",
+  "i7 G70 238k f cov=0.485 - WHEELS MISSING on three corners with detached pink caliper components floating in the empty arches; the one wheel present renders neon pink. The i7/G70 modern 7 Series stays on the re-source list; this is not the copy."
  ]
 }
