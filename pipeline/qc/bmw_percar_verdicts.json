@@ -1646,5 +1646,41 @@
  "4cdbc766525d48b299d2d664c04b2118": [
   "SCRAP",
   "M5 E34 200k f cov=0.544 - BROKEN TEXTURES: the body renders as a purple and white patchwork with mirror-chrome fragments across every panel. Third broken E34; the E34 RE-SOURCE FLAG STANDS."
+ ],
+ "ac996465672a41ca84169db30bacddab": [
+  "SCRAP",
+  "Z8 exmods spec2 200k f cov=0.705 - modified Z8; bmw-z8-2000-bm1-v1 holds the slot. Out-of-band."
+ ],
+ "2ddbe69e3c1042db95a8a7f40c83c14f": [
+  "SCRAP",
+  "M3 E92 199k f cov=0.858 - E92 slot held by the 1.18M keep. Out-of-band."
+ ],
+ "3e7ccba65e1d46e493522679606b9052": [
+  "SCRAP",
+  "M3 Competition Touring G81 195k f mats=20 cov=0.737 - EIGHTH G81 Touring copy, twenty body materials. Slot held."
+ ],
+ "449b10bb93f142aeb2dd2de568347fec": [
+  "SCRAP",
+  "Varis M4 GTS SEMA build 178k f cov=0.590 - TUNER show build (Varis kit); thirtieth M4-family scrap."
+ ],
+ "05d770f16ccc4beeb166c16377a81f2a": [
+  "SCRAP",
+  "M3 E92 177k f cov=0.762 - E92 slot held. Out-of-band."
+ ],
+ "937670cdc36944c891df10eef7b92424": [
+  "SCRAP",
+  "BMW Sauber F1 2008 173k f cov=0.861 - FORMULA ONE car. Motorsport."
+ ],
+ "a5f24ddc5de741708c91185568544c35": [
+  "SCRAP",
+  "BMW Sauber F1 2006 172k f cov=0.738 - second F1 car. Motorsport."
+ ],
+ "a3ec7f3afe104bb188aa6a362e1aeb7a": [
+  "SCRAP",
+  "E30 1980 169k f cov=0.796 - seventh E30 copy; slot held. Out-of-band."
+ ],
+ "a3a297798c784c289b4c4a6b7a32e8e2": [
+  "SCRAP",
+  "3 Series Cabriolet E46 2004 162k f cov=0.889 - complete car but QUALITY FAILS the bar: headlights are blank soft shells with no internals, black rectangular decal strips are baked onto the doors and rear bumper, shut lines barely register, and the body is soft throughout. ADDED TO THE RE-SOURCE LIST: the library has NO 3 Series convertible of any generation - a real bodyStyle gap worth a clean copy."
  ]
 }
