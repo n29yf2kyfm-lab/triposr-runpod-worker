@@ -258,4 +258,5 @@ def run(spec, prog, output_dir):
         "This is a PHOTOGRAPHIC model from a phone scan. It shows the real "
         "building; it does not measure it. Dimensions come from the "
         "parametric model, never from here.")
-    return result, artifacts
+    # Artifacts first: the handler contract is run() -> (artifacts, extra).
+    return artifacts, result

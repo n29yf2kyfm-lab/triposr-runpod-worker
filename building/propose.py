@@ -1204,7 +1204,13 @@ def run(spec, prog, output_dir):
 
     for k in ("_hero_src", "_hero_mask"):
         model.pop(k, None)
-    return model, artifacts
+    # ARTIFACTS FIRST — the handler contract is run() -> (artifacts, extra),
+    # the order roof.py set and delivery expects. Reversed, the result dict
+    # walks into deliver_many (which iterates its keys as "paths") and the
+    # artifact tuples walk into result.update(), which throws on 3-tuples.
+    # That exact failure reached the live endpoint on the first deployed
+    # propose job, because every local run called this function directly.
+    return artifacts, model
 
 
 def _keys():

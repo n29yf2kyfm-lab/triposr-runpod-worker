@@ -90,7 +90,7 @@ with tempfile.TemporaryDirectory() as td:
     src = os.path.join(td, "phone.ply")
     S.write_ply(house_splat(zup=True), src)
     spec = {"scan_path": src, "scan_id": "t1"}
-    result, arts = SC.run(spec, Prog(), td)
+    arts, result = SC.run(spec, Prog(), td)
 
     names = [os.path.basename(p) for p, _, _ in arts]
     check("3a the normalised splat is delivered", "t1.splat.ply" in names,
@@ -165,6 +165,22 @@ import progress  # noqa: E402
 check("4f progress has the stage plan",
       progress.STAGE_PLANS["scan"] == ["fetching", "verifying", "orienting",
                                        "delivering"])
+
+# THE WHOLE WORKER PATH, not just the module. The handler contract is
+# run() -> (artifacts, extra); this mode shipped returning (result,
+# artifacts), every direct-call test above stayed green, and the first job
+# on the live endpoint died in result.update() with the artifact tuples.
+# Only a job pushed through handler.handler can catch contract drift.
+with tempfile.TemporaryDirectory() as td:
+    src = os.path.join(td, "phone.ply")
+    S.write_ply(house_splat(zup=True), src)
+    out = handler.handler({"id": "t-handler", "input": {
+        "mode": "scan", "scan_path": src, "scan_id": "th"}})
+    check("4g a scan job survives the whole handler path",
+          out.get("status") == "success" and "gaussians" in out,
+          str(out)[:200])
+    check("4h the handler result carries the artifact map",
+          isinstance(out.get("artifacts"), dict), str(out.get("artifacts")))
 
 
 print()
