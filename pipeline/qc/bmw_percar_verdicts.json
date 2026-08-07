@@ -1226,5 +1226,29 @@
  "1be2a6b44ac749079596e118ab872a29": [
   "SCRAP",
   "7 Series E65 98k f mats=3 cov=0.127 - WHEELS MISSING on three corners (one alloy remains at front-right) and unpainted grey composite body. The E65 7 Series was also already scrapped twice in this wave (exploded copy, then redundancy); bmw-7-series-v1 holds the nameplate."
+ ],
+ "867fe7c171e2427b82fbb03a760a45f5": [
+  "SCRAP",
+  "M3 GT2 Nurburgring 2009 96k f cov=0.327 - MOTORSPORT. Full GT2 aero: swan-neck wing on billboard struts, wide-arch race body, side-exit exhausts, Dunlop race rubber with painted sidewalls, bonnet pins. Fifth M3 race variant of the wave. bmw-m3-e92-bm1-v1 covers the road E92."
+ ],
+ "12c31c4e2a0e4c3ea5d29f2994a85b16": [
+  "KEEP",
+  "Isetta 300 Convertible 1956 91k f mats=6 cov=0.217 - the library has NO microcar and no 1950s BMW beyond the 507 re-source flag, and Isettas were built and registered in Britain, so a DVLA classic decode can genuinely land here. This is a SINGLE car, unlike the five-vehicle diorama scrapped earlier. Quality is premium: proportions read as an Isetta instantly; the front-opening door shut line, chrome bumperettes, mirror pods and luggage rack are all crisp; cream soft-top cleanly separated from the silver body; white steel wheels with BMW caps consistent in every view; cov 0.217 inside the clean band so paint lands correctly. Smallest real car in the library by far - a distinctive catalogue piece."
+ ],
+ "a618218d77b64072818ac293a37ea4d2": [
+  "SCRAP",
+  "M6 GT Series 85k f - BROKEN SHEET: all four views render as empty fog with no car visible at all. Either the asset is off-scale or the geometry failed to import. Cannot be judged, and a car that cannot even render for audit cannot ship. M6 nameplate is covered regardless."
+ ],
+ "7f060f9d44b74c34a5184399a6cfc6d7": [
+  "SCRAP",
+  "M3 GTR E46 Street ACschnitzer 79k f cov=0.360 - TUNER (AC Schnitzer) with GTR bodykit: boot wing, vented GTR bonnet, wide arches, BMW M3 GTR show plates baked front and rear. Sixth M3 GTR/race variant of the wave. bmw-m3-e46-v1 covers the road car."
+ ],
+ "573b153a7b324314b8b609e0277feb6b": [
+  "SCRAP",
+  "M3 GTR E46 79k f cov=0.372 - same GTR shell as P052 from the same family (78,982 vs 78,999 faces), minus the Schnitzer dress-up. GTR bonnet vents, boot wing, show plates. Not a stock road car; slot covered."
+ ],
+ "52caa0c6c9b848b19dd1ae5ab3374bba": [
+  "SCRAP",
+  "X5 E70 UK 76k f cov=0.192 - BONNET DETACHED, floating as a white slab above the scuttle in every view; wheels missing on three corners; the shell is a green/white material patchwork with green doors against white bumpers. FLAGGING for the re-source list: E70 is the only X5 generation still missing after the E53 and G05/F95 keeps, and a UK-spec copy would complete the X5 line."
  ]
 }
