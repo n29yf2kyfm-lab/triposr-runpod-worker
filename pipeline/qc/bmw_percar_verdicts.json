@@ -1130,5 +1130,29 @@
  "455c3c3376e0441b9f96f83285828c11": [
   "SCRAP",
   "X5 M F85 270k f mats=11 cov=0.305 - OVERSPILL, visible on the neutral sheet: the TYRES render pale grey-white rather than black, so the rubber sits on the body material and a recolour would paint the tyres. The side glass also carries triangulated faceted artefacts in all four views. The X5 M slot is now held by the F95 kept earlier in this batch."
+ ],
+ "9f2924c84bb3424295a0e909461f12ca": [
+  "SCRAP",
+  "E39 Beater 1998 261k f mats=7 cov=0.387 - BROKEN ASSET on a diorama base. The car sits on a yellow display plinth that is part of the GLB; a huge detached flat plane hovers over the roof in all four views; three of four wheels are missing with suspension exposed; the body is chrome-mirror untextured. Titled Beater and modelled as one."
+ ],
+ "02b103c91e0947cb940a769851e69dd6": [
+  "SCRAP",
+  "M5 E60 259k f mats=4 cov=0.316 - REDUNDANT, third copy of the E60 M5. The slot is filled by bmw-m5-2003-bm2-v1, published this session at 270k f. Clean model - correct quad exhausts, M mirrors, phone aerial - but a duplicate nameplate and generation, offering nothing the live car lacks."
+ ],
+ "d7f729cf094744c1bc8fbe1fffc8ebb6": [
+  "SCRAP",
+  "M3 E92 drift car 251k f mats=6 cov=0.340 - MOTORSPORT with heavy BAKED LIVERY. Full Formula Drift wrap: enjuku racing across both doors, Hankook on the rear quarters, Speedhunters on the wing, plus dozens of sponsor decals painted into the body texture. Widebody arches, exposed rear cage, yellow-tinted lamps. Titled e96 which is not a BMW chassis code; the shell is an E92. bmw-m3-e92-bm1-v1 holds the slot."
+ ],
+ "7094714a717b46a9a628e43f524327d6": [
+  "SCRAP",
+  "3 Series GT F34 248k f mats=3 cov=0.435 - the 320i GT fastback. Clean enough surface but soft detail: headlights are dark voids with no internals, the grille slats read as flat texture, and the title itself declares NO INTERIOR - the glasshouse shows an empty shell. The 3 Series GT body style is also gone from UK price lists since 2020 and the library covers 3 Series saloon and estate; not worth a slot at this quality."
+ ],
+ "e03e321a0e0d468e86162c2d9cb1ef3e": [
+  "SCRAP",
+  "i3 234k f mats=4 cov=0.188 - REDUNDANT. bmw-i3-v1 is live (grade A) and an i3 from the G6 pool was already scrapped against it this session. This copy is good - correct two-tone black bonnet, blue accents, German plate M-GI 3345 in standard position - but the i3 had one generation and the slot is filled."
+ ],
+ "b3fc00b3dcff4c3abdff51fbedd4d599": [
+  "SCRAP",
+  "M3 E92 209k f mats=7 cov=0.153 - STANCE build and redundant. Slammed with heavy negative camber, wheels tucked far inside the arches on bright ORANGE rims that sit on their own material (they would stay orange through every recolour). bmw-m3-e92-bm1-v1 holds the slot at 1.18M f."
  ]
 }
