@@ -1610,5 +1610,41 @@
  "d4f6d4958e874b5f9c316fbde45acaba": [
   "SCRAP",
   "m3_2 215k f cov=0.884 - out-of-band M3 copy; every M3 slot is held. Thirtieth M-car family scrap."
+ ],
+ "e43741a793da4e3f8e9747e31a1a8ff6": [
+  "SCRAP",
+  "M2 Competition 2019 215k f cov=0.521 - tenth M2 scrap; both M2 slots held."
+ ],
+ "e5454f274c4f44fa84e274c2583d7f5c": [
+  "KEEP",
+  "i7 2023 G70 210k f mats=7 cov=0.749 - the ONLY complete modern 7 Series/i7 in the entire wave: both other copies had missing wheels. Fills two gaps at once - the library has no G70-generation 7 Series and no electric flagship saloon. All four wheels present with chrome aero rims and blue-ring accents; split DRLs and illuminated-style grille surround correct; shut lines crisp; glass, sills and trim all render as separate materials with NO visible body-colour spill anywhere on the four views. CAVEAT RECORDED HONESTLY: coverage 0.749 is far above the 0.45 clean ceiling, so as with the G99 Touring this keep is CONDITIONAL on the recolour-audit stamp - if the render-verified stamp shows spill, quarantine rather than ship. The sheet evidence (which caught every real spill case in this wave as white wheels or trim) shows none here. Year 2023 per source title."
+ ],
+ "36f72864de5d402cab15a2192112573b": [
+  "SCRAP",
+  "i7 209k f cov=0.705 - second i7 copy; the slot goes to the complete P146. Out-of-band."
+ ],
+ "ace048670f564a318bd684fed0dffded": [
+  "SCRAP",
+  "i8 3d model view 207k f mats=13 cov=0.706 - i8 slot held; out-of-band."
+ ],
+ "d1173b306f044e83bf985b803a5a2cc4": [
+  "SCRAP",
+  "1M Coupe E82 206k f cov=0.875 - the 1M slot is held by bmw-1m-bm2-v1 published this session. Out-of-band."
+ ],
+ "e26033552a294fc39fe731f15681562b": [
+  "SCRAP",
+  "E38 1998 204k f cov=0.671 - WHEELS MISSING (empty front arch with bare disc, mismatched rear wheel) and the glasshouse renders as faceted artefact patches. Second broken E38; the E38 RE-SOURCE FLAG STANDS."
+ ],
+ "ad28ea48399e496dae4a40ad299e72ce": [
+  "SCRAP",
+  "M8 203k f cov=0.604 - seventh M8 scrap; slot held."
+ ],
+ "06c82112c0684db5bbb2c21ab28fc3fc": [
+  "SCRAP",
+  "3 Series Coupe E46 202k f mats=11 cov=0.774 - bmw-m3-e46-v1 covers the E46 shape; out-of-band with 11 body materials."
+ ],
+ "4cdbc766525d48b299d2d664c04b2118": [
+  "SCRAP",
+  "M5 E34 200k f cov=0.544 - BROKEN TEXTURES: the body renders as a purple and white patchwork with mirror-chrome fragments across every panel. Third broken E34; the E34 RE-SOURCE FLAG STANDS."
  ]
 }
