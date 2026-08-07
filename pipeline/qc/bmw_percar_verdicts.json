@@ -1010,5 +1010,29 @@
  "58575b71798444b996b376c817b10884": [
   "SCRAP",
   "M3 E46 741k f mats=8 cov=0.799 - UNTEXTURED and redundant. The whole car renders as flat white clay: no paint, headlights are plain recesses with no internals, the grille is a smooth blank, tail lights are dark patches, and there are no shut lines anywhere. Titled E45 which is not a BMW chassis code. bmw-m3-e46-v1 already holds the slot."
+ ],
+ "774e5fd51fdd4b0e96639adf8a8e4e35": [
+  "SCRAP",
+  "M2 G87 Performance Parts 614k f mats=5 cov=0.846 - UNTEXTURED and a bodykit build. Renders as flat white clay throughout: headlights are plain recesses with no internals, the kidney grille is a smooth blank slab, no shut lines anywhere, tail lights are dark patches. Carries the M Performance aero kit - boot wing, front canards, deep splitter. The G87 slot is filled by 867798-face H010 kept earlier in this pool, which is stock and fully textured."
+ ],
+ "130aca1d89cb4762a89a182a6f84d4e3": [
+  "SCRAP",
+  "8 Series G15 611k f mats=4 cov=0.162 - WHEELS MISSING plus widebody. All four arches are empty with blue brake calipers and bare hubs exposed, and a loose wheel sits under the car in the side view. Bolt-on wide arches with visible hardware, full-width GT wing, deep splitter. bmw-8-series-v1 covers the coupe and the G14 convertible was kept earlier in this wave."
+ ],
+ "585c5cf5189d4f8ca8405e5d2d20603d": [
+  "SCRAP",
+  "1 Series F40 607k f mats=8 cov=0.873 - highest coverage in the pool so far. bmw-1-series-v1 already holds the nameplate and the 128ti (F01 in this pool) was scrapped on the same ground. At 0.873 the body material carries nearly the whole shell including trim."
+ ],
+ "8db7d0707a6b4ffc85f81c5e7feb0633": [
+  "SCRAP",
+  "4 Series F32 605k f mats=12 cov=0.703 - REDUNDANT. bmw-4-series-v1 holds the nameplate and the G22 430i was scrapped earlier in the wave for the same reason. Twelve body materials at 0.703 coverage."
+ ],
+ "dcd02d7ff8a14b8eb7312a8daafff02c": [
+  "SCRAP",
+  "2002 tii 601k f mats=9 cov=0.607 - REDUNDANT. Third 02-series in this pool after the 2002 Turbo and the 1502, and the slot is held by the 2002ti kept earlier in the wave. Clean period model with chrome bumpers and correct 5-spoke alloys, but the same shell as the incumbent. French plate 2002 BMW 75 in the standard position."
+ ],
+ "a1ddd0f09bce44dbae1b1c9e0e18dda5": [
+  "SCRAP",
+  "M4 G82 Competition 2024 585k f mats=3 cov=0.136 - REDUNDANT, thirteenth M4 of the wave. Genuinely clean - carbon roof, correct grille, consistent black alloys with yellow calipers, and coverage 0.136 sits inside the clean band - but bmw-m4-competition-2021-bm1-v1 holds the slot at 683k f and this adds no coverage."
  ]
 }
