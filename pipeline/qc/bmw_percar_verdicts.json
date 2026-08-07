@@ -1082,5 +1082,29 @@
  "cbbc3a1f6bff41abb095f2b90a7bda29": [
   "SCRAP",
   "M2 G87 383k f mats=3 cov=0.157 - REDUNDANT against my own keep. H010 was kept earlier in this pool for the G87 slot at 868k f, more than twice this geometry, and both are stock cars in the clean band. Only one G87 can ship."
+ ],
+ "ffb294ae749d48739b1cbe61a6426863": [
+  "SCRAP",
+  "5 Series Touring E34 1995 381k f mats=4 cov=0.251 - WHEELS MISSING and front end disassembled. Bare hubs in all four arches, and the front bumper, both headlight units and a trim strip lie detached on the studio floor beside the car in every view. FLAGGING AS A GAP TO RE-SOURCE: the library has no E34 at all and no 1990s 5 Series estate, so a clean copy would be worth having."
+ ],
+ "125412579b244790b27b2a7839527c6e": [
+  "SCRAP",
+  "M2 G87 377k f mats=3 cov=0.188 - REDUNDANT, third G87 M2 in this pool. H010 was kept for the slot at 868k f. This one is clean and in the clean band too, but only one G87 ships and the keep has more than twice the geometry."
+ ],
+ "d2a089f5fb864f45aface2ece80cb0af": [
+  "SCRAP",
+  "M5 E39 Touring 376k f mats=4 cov=0.172 - NOT A PRODUCTION CAR. The title itself says (Concept): BMW built a single E39 M5 Touring prototype and never sold one, so no UK registration can decode to it. Well made, and the E39 saloon slot is already held by 531a5a93da5d493d9918eb36f011c20d kept earlier in this wave. Recording it as a fantasy build rather than a real vehicle, per the accuracy rule."
+ ],
+ "25d5b4f6d13e4217afa09bbf89f8d993": [
+  "SCRAP",
+  "M8 F92 Competition 351k f mats=3 cov=0.163 - REDUNDANT. bmw-m8-v1 holds the nameplate and this is the fourth M8 scrapped across the wave. Clean model in the clean band, but no slot to fill."
+ ],
+ "b6f626919ebf4a39a3123aa80ab8b02a": [
+  "SCRAP",
+  "M3 CS Touring 329k f mats=3 cov=0.282 - TWO-TONE MATERIAL FAULT, visible on the neutral sheet: the driver's door renders solid PURPLE against a white body in three of the four views, so it sits on a different material and would stay purple through every colour variant. Same defect class as the Eisenmann M6. The M3 estate slot is also already held by bmw-m3-2023-w12-v1, which is tagged bodyStyle estate."
+ ],
+ "9b211d525797457e988c903f67d0b753": [
+  "KEEP",
+  "X5 M Competition F95 2020 319k f mats=3 cov=0.330 - fills a nameplate slot the library lacks. There is no X5 M: bmw-x5-2019-w12-v1 and bmw-x5-2024-v1 are base X5s and the E53 kept earlier is the original. The library already treats the M variant as its own entry elsewhere - bmw-x6-m-2022-bm1-v1 sits alongside bmw-x6-2020-v1 - so this is consistent precedent, not padding. Quality holds: proportions read as an F95 X5 M instantly; front 3/4 strong; roof rails, glasshouse and wheelbase consistent across all four views; headlights carry internal LED structure; kidney grille mesh defined; M-specific bumpers, side gills and quad exhausts crisp; multi-spoke alloys with gold calipers identical in every view; shut lines defined; clean gloss. Coverage 0.330 sits inside the clean band so paint lands correctly - flagged on material count alone."
  ]
 }
