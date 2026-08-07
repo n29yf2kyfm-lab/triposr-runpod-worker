@@ -914,5 +914,29 @@
  "762b90efd3dc413cb61c3e3c8097b8ac": [
   "SCRAP",
   "BMW E36 M3 67,390 f cov 0.074 - SCRAPPED ON MEASUREMENT, not on a four-view eyeball. The body material covers only 7.4% of the shell, so a DVLA recolour would land on under a tenth of the car and the paint feature - the whole point of the entry - cannot work. That is a functional disqualification independent of how the model looks, so I did not spend a review pass on it. Say the word if you want these eyeballed anyway."
+ ],
+ "3fdc4ab04e384ec5bdc26eed6700517f": [
+  "SCRAP",
+  "M8 Competition 1.19M f mats=5 cov=0.601 - TUNER widebody, not stock: bolt-on wide arches, deep front splitter with winglets, canards, and red accent striping baked into the front and rear bumper texture that would fight every colour variant. bmw-m8-v1 already holds the nameplate. Note the recolour itself lands cleanly on this car - I test-rendered it red and glass, wheels, tyres and lights all stayed correct - so it is scrapped on the bodykit and redundancy, NOT on paint bleed."
+ ],
+ "f7736ee404e442b7aecbe010869dc9ba": [
+  "SCRAP",
+  "M4 CSL G82 988k f mats=7 cov=0.837 - REDUNDANT. Eleventh M4 across the wave; bmw-m4-competition-2021-bm1-v1 holds the slot at 683k f with bmw-m4-v1 and bmw-m4-w12-v1 also live. Clean model but no added coverage. Coverage 0.837 is the highest in the batch, so the body material also carries most of the trim."
+ ],
+ "0365cea69e924f698484d7d705df6b76": [
+  "SCRAP",
+  "XM 2023 979k f mats=3 cov=0.222 - REDUNDANT. bmw-xm-v1 is already approved and e307c3f1df9d40afafbb36f6f69c28d1 was scrapped earlier in the wave for the same reason. A magenta/purple graphic is also baked into the front number plate."
+ ],
+ "45b826069ccb4b969dc0b979a3163149": [
+  "SCRAP",
+  "M2 Competition F87 940k f mats=6 cov=0.521 - TUNER build with baked sponsor decals. Full-width GT wing on swan-neck struts, widebody arches, deep splitter and diffuser, and Bosch / KW sponsor decals painted into the sill texture which no recolour removes. bmw-m2-v1 holds the nameplate."
+ ],
+ "7e3b3c92754c4f93b6482297b81a2016": [
+  "SCRAP",
+  "M5 F90 917k f mats=12 cov=0.701 - OVERSPILL, visible on the neutral sheet: the wheel rims render the same white as the shell, so they sit on the body material and a recolour would paint the wheels. Same defect I confirmed on F04 and F19. Titled The Carbon Storm and carries a mottled grey carbon texture smeared across the bonnet. bmw-m5-f90-undated-v1 also already holds the slot."
+ ],
+ "79fb934cd6a54b74a46ac83ec5967fc2": [
+  "KEEP",
+  "i8 Coupe 913k f mats=3 cov=0.255 - the stock i8 coupe I said should be re-sourced when I scrapped the AC Schnitzer tuner (3f8495ff63dc4b52a1fc709b915703e1) earlier in this wave. The library has bmw-i8-roadster-2019-bm1-v1, a convertible, and no coupe, so this is a real bodyStyle gap the resolver can match on. Flagged only on material COUNT - its coverage 0.255 sits inside the clean 0.05-0.45 band, so paint lands correctly. Proportions read as an i8 instantly; front 3/4 strong; the floating rear buttresses, black aero fins and butterfly-door cut lines are all crisp; headlights carry internal LED structure; multi-spoke black alloys consistent across all four views; clean premium gloss. Highest-geometry keep of the wave after the E92 M3."
  ]
 }
