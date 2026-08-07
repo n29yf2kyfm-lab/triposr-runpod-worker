@@ -798,6 +798,52 @@ def run(spec, prog, output_dir):
         prog.note(f"terrace row {bay['row_width_m']}m long — taking a "
                   f"{width}m bay at {bay['x0']}m along it")
 
+    # A SEMI PAIR IS A ROW OF TWO, AND THE MAP CANNOT SEE THE JOIN.
+    # OpenStreetMap holds many pairs (and short terraces) as ONE outline of
+    # dwelling-ish size, so the row gate above never fires: at 3 Basons Lane
+    # the "building" was 12.1m x 7.9m, 95.8m2, and the whole pair was
+    # modelled as one house — with the extension drawn across the
+    # neighbour's half too. Google Solar segments the single dwelling
+    # nearest the point, so when its measured footprint is a clean fraction
+    # of the mapped outline, the outline is that many houses, and Solar's
+    # building centre says which slice is the one at the pin. The halves
+    # are assumed equal — that assumption is written into the provenance.
+    solar_payload = None
+    if bay is None and solar.available():
+        try:
+            solar_payload = solar.fetch_building_insights(lat, lon)
+            whole = ((solar_payload or {}).get("solarPotential") or {}) \
+                .get("wholeRoofStats") or {}
+            sol_m2 = whole.get("groundAreaMeters2")
+            centre = (solar_payload or {}).get("center") or {}
+            if sol_m2 and centre.get("latitude") is not None:
+                n = max(1, round(measured_area / sol_m2))
+                strip_w = width / n
+                if n >= 2 and strip_w >= 4.0:
+                    cx = to_local(roofmod.osgb.latlon_to_easting_northing(
+                        centre["latitude"], centre["longitude"]),
+                        angle, origin_en)[0]
+                    i = min(max(int(cx // strip_w), 0), n - 1)
+                    bay = {"x0": round(i * strip_w, 2),
+                           "width_m": round(strip_w, 2),
+                           "row_width_m": width,
+                           "row_area_m2": round(measured_area, 1),
+                           "split_source": (
+                               f"google solar measures this dwelling at "
+                               f"{sol_m2:.0f}m2 inside a {measured_area:.0f}"
+                               f"m2 mapped outline — a row of {n}, split "
+                               f"equally, taking the slice under its "
+                               f"building centre")}
+                    origin_en = to_world((bay["x0"], 0.0), angle, origin_en)
+                    width = bay["width_m"]
+                    prog.note(
+                        f"the mapped outline is {n} dwellings (solar "
+                        f"{sol_m2:.0f}m2 vs outline {measured_area:.0f}m2) "
+                        f"— taking the {width}m slice at {bay['x0']}m")
+        except Exception as e:
+            print(f"pair split skipped: {type(e).__name__}: {e}",
+                  file=sys.stderr)
+
     prog.stage("clearances")
     others = neighbour_outlines(lat, lon, polygon)
     clearances = {s: side_clearance(angle, origin_en, width, depth, s, others)
@@ -823,7 +869,7 @@ def run(spec, prog, output_dir):
     roof_info = None
     if solar.available():
         try:
-            payload = solar.fetch_building_insights(lat, lon)
+            payload = solar_payload or solar.fetch_building_insights(lat, lon)
             roof_info = roof_from_solar(payload, min(width, depth))
         except Exception as e:
             print(f"solar insights unavailable: {e}", file=sys.stderr)
