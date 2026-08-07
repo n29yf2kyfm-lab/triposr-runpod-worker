@@ -1058,5 +1058,29 @@
  "1f23525ab55746899e3645e3352981c2": [
   "SCRAP",
   "i4 2022 452k f mats=3 cov=0.356 - REDUNDANT. bmw-i4-v1 is already approved in the library. Clean, correctly detailed i4 with the closed grille and blue i-division accents, but it adds no coverage. Note those blue accents on the sills and bumpers sit on the body material band and would tint with each colour variant."
+ ],
+ "5871cc9f9d5947de934f17c54f23fd84": [
+  "SCRAP",
+  "1 Series E87 429k f mats=5 cov=0.075 - BROKEN ORIENTATION and disassembled. The car is lying on its side/roof across all four views, showing the bare floorpan, suspension arms and transmission tunnel; the seats float outside the shell as loose blue objects and a mirror sits detached on the floor. Unusable."
+ ],
+ "3db265024e934dd09e916ae0fa78e2a0": [
+  "SCRAP",
+  "5 Series E60 417k f mats=6 cov=0.207 - WHEELS MISSING. All four arches hold plain white hub stubs with no rims or tyres. The body is also largely untextured, rendering as pale clay with no shut lines and blank tail lights. bmw-5-series-e60-v1 already covers this generation."
+ ],
+ "a9027a26b7ee4da4b564d939b6c27559": [
+  "SCRAP",
+  "M3 G80 Competition 2021 416k f mats=3 cov=0.310 - REDUNDANT. bmw-m3-2023-w12-v1 covers the G80, and the G81 Touring was scrapped earlier in the wave on the same ground. Coverage sits in the clean band but there is no slot to fill."
+ ],
+ "26d05968e63b4fc28205cbb9abb0ea41": [
+  "SCRAP",
+  "M4 CSL 2023 413k f mats=4 cov=0.124 - REDUNDANT, fourteenth M4 of the wave and the third CSL. bmw-m4-competition-2021-bm1-v1 holds the slot at 683k f."
+ ],
+ "13d0a12ecda04317b96ce1e618300412": [
+  "SCRAP",
+  "3 Series E36 coupe 409k f mats=3 cov=0.227 - MODIFIED street/stance build, not stock: slammed to the deck, aftermarket deep-dish 5-spokes, non-standard front bumper and a boot-lip spoiler. The title itself says [Street]. Consistent with scrapping the E60 stance car earlier in the wave. FLAGGING AS A GAP TO RE-SOURCE: the library has no E36 3 Series at all - its E36 coverage is only via M3 variants - so a stock E36 would be worth having."
+ ],
+ "cbbc3a1f6bff41abb095f2b90a7bda29": [
+  "SCRAP",
+  "M2 G87 383k f mats=3 cov=0.157 - REDUNDANT against my own keep. H010 was kept earlier in this pool for the G87 slot at 868k f, more than twice this geometry, and both are stock cars in the clean band. Only one G87 can ship."
  ]
 }
