@@ -1202,5 +1202,29 @@
  "0dff25e0122a42819f874e07e64f2378": [
   "SCRAP",
   "M4 G82 126k f mats=4 cov=0.402 - nineteenth and final M4 of the pool. Clean stock G82 but bmw-m4-competition-2021-bm1-v1 holds the slot at 683k f with five times the geometry. Nothing added."
+ ],
+ "5abbc3bb38044837852393ede3f0636f": [
+  "KEEP",
+  "M235i Coupe F22 2016 120k f mats=4 cov=0.187 - fills a resolver-visible body-style slot, checked against the live catalogue: bmw-m235i-bm2-v1, published this session, is the F44 GRAN COUPE tagged bodyStyle saloon, so a coupe-bodied M235i decode hard-rejects it at vehicle-resolver.ts:71 and currently resolves to nothing. The title says F87 but the render is plainly the F22 two-door. Quality holds: proportions read as an F22 instantly; front 3/4 strong; kidney slats and headlight internals defined; shut lines crisp; black double-spoke alloys identical across all four views; clean red gloss with cov 0.187 inside the clean band, so paint lands correctly. Silver mirror caps sit on their own material and read as the factory ferric-grey caps - acceptable, noting it for the recolour stamp check."
+ ],
+ "eab7113fd07c428c94d6a4a8ec4ec02f": [
+  "SCRAP",
+  "NOT A CAR - a BMW-branded MOUNTAIN BICYCLE on a display stand, with NEEDLE and PREFRONTALCORTEX printed on the tyre sidewalls. Fourth non-car past the gates (two wheels, a badge, now a bicycle)."
+ ],
+ "e6b3dbddb29a4d9986c5e974b8b134da": [
+  "SCRAP",
+  "320i STW E36 113k f mats=4 cov=0.244 - MOTORSPORT. Super Tourenwagen race car: enormous double-deck rear wing on orange endplates, wide splitters and dive planes, Ravaglia lettering on the screen banner, Dunlop SP Sport race tyres with painted sidewall lettering, no road equipment. Not registrable."
+ ],
+ "91932854db0847c4ba75415dab5ac856": [
+  "SCRAP",
+  "320i STW 1996 105k f mats=3 cov=0.251 - MOTORSPORT, same STW family as P045: swan-neck rear wing, lowered race stance, BBS centre-locks, Dave on the rear screen, blanked rear windows. A stock E36 saloon remains on the re-source list; this is not it."
+ ],
+ "099cefc1b4de47ac8626f94c3fb7feee": [
+  "SCRAP",
+  "7 Series 730i 1998 UK 111k f mats=7 cov=0.262 - LOW-POLY untextured shell with wheel faults. The whole car is faceted flat planes - roof and bonnet read as angular slabs; headlights, grille and trim are painted-on grey patches; the wheels are plain yellow DISCS with no rim or tyre geometry on two corners. The E38 slot stays on the re-source list; this is not the copy."
+ ],
+ "1be2a6b44ac749079596e118ab872a29": [
+  "SCRAP",
+  "7 Series E65 98k f mats=3 cov=0.127 - WHEELS MISSING on three corners (one alloy remains at front-right) and unpainted grey composite body. The E65 7 Series was also already scrapped twice in this wave (exploded copy, then redundancy); bmw-7-series-v1 holds the nameplate."
  ]
 }
