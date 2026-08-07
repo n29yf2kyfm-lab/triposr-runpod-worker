@@ -1466,5 +1466,41 @@
  "44cfe57bf05f44ec907951a4b0976398": [
   "SCRAP",
   "Z4 E86 Coupe 2006 348k f cov=0.815 - titled E85 but the fixed roof makes it the E86; bmw-z4-2008-v1 holds the Z4 Coupe slot. Out-of-band."
+ ],
+ "6a1fd02fa5fa46488a131777c569354e": [
+  "SCRAP",
+  "Z4 sDrive35is E89 2014 314k f cov=0.721 - out-of-band. The E89 stays on the re-source list from the earlier scrap; this copy's body material carries the trim."
+ ],
+ "1873aed292d6465694119bd81860a0c2": [
+  "SCRAP",
+  "NOT A CAR - the S1000 RR superbike, third MOTORCYCLE of the wave."
+ ],
+ "93814bd879a64a61b58410422750ae3f": [
+  "SCRAP",
+  "M5 E39 313k f cov=0.591 - fourth E39-family copy; slot held by bmw-5-series-1995-bm2-v1 published this session. Out-of-band."
+ ],
+ "3f56912609d2419c8e121ac5ba488f20": [
+  "SCRAP",
+  "7 Series E65 2004 309k f cov=0.780 - fourth E65 copy of the wave; bmw-7-series-v1 holds the nameplate. Out-of-band."
+ ],
+ "e30aab81bc634fa19c3cc786260a8f0e": [
+  "SCRAP",
+  "3 Series E30 saloon 305k f cov=0.616 - titled 1979 but the render is the E30 four-door. Quality fails: all glass renders frosted opaque white, the side mouldings carry crude perforation artefacts, and wheels are flat discs. A stock E30 saloon slot stays worth a clean copy; this is not it."
+ ],
+ "2cb477b062ba4425aaa4742f581b5352": [
+  "SCRAP",
+  "M3 Competition Touring G81 HD 303k f cov=0.573 - FIFTH G81 Touring copy; estate slot held by bmw-m3-2023-w12-v1."
+ ],
+ "2d44fed7176e4720af9b7ee02aaaac6c": [
+  "SCRAP",
+  "Nazca C2 297k f cov=0.577 - the 1991 Italdesign CONCEPT supercar, sixth concept of the wave. No registration resolves to it."
+ ],
+ "c797c1eaf2b041ecaadb271eca2dfcf2": [
+  "SCRAP",
+  "M5 E39 296k f cov=0.736 - BROKEN: bonnet permanently open in every view, slammed to the floor, and the rear three-quarter renders as a black texture void across half the shell. GB show plate H11 E39 baked in. Fifth E39-family copy."
+ ],
+ "c0ad7e054f1149c59356be6ef1d6e765": [
+  "SCRAP",
+  "X7 M60i LCI 2023 295k f cov=0.549 - REDUNDANT: bmw-x7-m60i-bm1-v1 holds this exact trim and facelift, kept in the G6 wave at 438k f. Out-of-band."
  ]
 }
