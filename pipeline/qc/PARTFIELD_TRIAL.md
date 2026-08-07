@@ -23,6 +23,20 @@ wave.
 Renders: scratchpad `seg/x5_parts.png` (part view), `x5_rescued2.png`,
 `x5_rescued3.png` (classified + resprayed red).
 
+## VERDICT — FAILED THE AUDIT BAR (owner ruling, 2026-08-07)
+
+The owner reviewed the rescued renders and ruled the rescue a FAIL, verbatim:
+"windscreen lights grill painted so fail audit. Even the glass." That is the
+per-car rubric applied correctly: the windscreen stays body-colour at any
+num_parts, and the lights, grille and glass sit on the body material, so a
+recolour paints them all. Wheels alone being fixed does not make a shippable
+car. The apparent clean glass in the demo renders came from the trial's own
+hand-written part classifier, not from a material split the pipeline could
+trust.
+
+Segmentation rescue is therefore NOT adopted. "Don't fix, just scrap" stands.
+The sections below are the raw findings, kept for reference only.
+
 ## Conclusions
 
 1. **The fatal defect is fixed.** Wheels/tyres stop being body. The exact
