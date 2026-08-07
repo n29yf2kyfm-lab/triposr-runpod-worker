@@ -1178,5 +1178,29 @@
  "a1f2894ca5c5457fa09f13e7ad547285": [
   "SCRAP",
   "M5 G90 165k f mats=5 cov=0.350 - LOW-POLY FACETED SHELL with two-tone green patches. The roof and pillars read as flat angular planes with visible polygon edges; green material patches cover the bonnet, front bumper and rear deck against a white body; the tail lights float slightly off the body in the rear view. The G90 slot is already filled by bmw-m5-2024-bm2-v1, published this session at 280k f fully textured."
+ ],
+ "325f74ef4f44457fad28f66fcbb7b32f": [
+  "SCRAP",
+  "M3 E46 157k f mats=11 cov=0.412 - WHEELS MISSING on three corners (dark blanking discs in the arches, one white multi-spoke wheel present at front-left only) and a Russian plate E262AC63 baked onto both bumpers. bmw-m3-e46-v1 holds the slot."
+ ],
+ "b9bc0ba0a5d548e7a089b30fc894939c": [
+  "SCRAP",
+  "NOT A CAR. The asset is a flat BMW ROUNDEL BADGE - a coin-shaped logo disc lying on the floor, ~5cm tall in car scale, across all four views. Third non-car to pass the gates after the two wheels and the interior comparison; a badge has a body-like material and mid coverage, which is exactly the blind spot."
+ ],
+ "d5ef4f7ef9de458fb2e0c8acf84d0231": [
+  "SCRAP",
+  "M4 F82 154k f mats=4 cov=0.318 - eighteenth M4, STANCED: slammed with wheels tucked deep into the arches and a yellow front show plate. bmw-m4-competition-2021-bm1-v1 holds the slot."
+ ],
+ "81cfe93bd90f489893bd77134b496bd1": [
+  "SCRAP",
+  "NOT A CAR - BMW R71 motorcycle, 1938: sprung saddle, exposed boxer engine, spoked wheels, Wehrmacht-style plate WL703084 baked onto the front mudguard. Second motorcycle of the wave after the R18. Beautifully made and completely outside a car catalogue."
+ ],
+ "1c95afb9d4544d70a75b764f965c1b5f": [
+  "SCRAP",
+  "Vision Neue Klasse 148k f mats=4 cov=0.416 - CONCEPT CAR, the 2023 show car; no production vehicle and no UK registration can decode to it. Chrome-mirror untextured body. Third concept scrapped across the wave after the 8 Series Concept and the CSL Hommage."
+ ],
+ "0dff25e0122a42819f874e07e64f2378": [
+  "SCRAP",
+  "M4 G82 126k f mats=4 cov=0.402 - nineteenth and final M4 of the pool. Clean stock G82 but bmw-m4-competition-2021-bm1-v1 holds the slot at 683k f with five times the geometry. Nothing added."
  ]
 }
