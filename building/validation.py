@@ -33,6 +33,7 @@ MODES = (
     "model",         # drawing's figured dimensions -> 3D building -> OBJ/IFC
     "render",        # gps + measured zone -> proposal drawn on real aerial
     "propose",       # address -> measured house + designed extension in 3D
+    "scan",          # phone splat export (.ply) -> verified, positioned scan
 )
 
 # Roof capture sources, cheapest and easiest first.
@@ -650,6 +651,11 @@ def parse_job(job_input):
     # learned there: a path field that no mode reads is a documented lie, so
     # model mode's required-inputs check below must accept it wherever the
     # URL form is accepted.
+    # A phone scan export — Scaniverse/Polycam/Luma Gaussian splat .ply.
+    spec["scan_url"] = (str(job_input.get("scan_url") or "").strip()
+                        or None)
+    spec["scan_path"] = (str(job_input.get("scan_path") or "").strip()
+                         or None)
     spec["roomplan_path"] = (str(job_input.get("roomplan_path") or "").strip()
                              or None)
     spec["depth_url"] = (str(job_input.get("depth_url") or "").strip() or None)
@@ -948,6 +954,13 @@ def _check_required_inputs(spec):
             raise InputError(
                 "render needs render_zone — the measured rectangle the "
                 "extension must stay inside. See validation of its fields.")
+
+    if mode == "scan" and not (spec["scan_url"] or spec["scan_path"]):
+        raise InputError(
+            "scan mode needs scan_url or scan_path — the .ply your scanning "
+            "app exported (Scaniverse: Share > Export Model > PLY; Polycam "
+            "and Luma export the same). Add address or gps too and the "
+            "scan's scale is checked against the mapped footprint.")
 
     if mode == "propose" and not (spec["address"] or spec["postcode"]
                                   or spec["gps"]):

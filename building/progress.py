@@ -66,6 +66,7 @@ STAGE_PLANS = {
                     "costing", "exporting"],
     "design":      ["fetching", "massing", "compliance_check", "exporting"],
     "render":      ["aerial", "rendering", "delivering"],
+    "scan":        ["fetching", "verifying", "orienting", "delivering"],
     "propose":     ["locating", "footprint", "orientation",
                     "clearances", "roof", "designing", "exporting",
                     "rendering", "photoreal"],

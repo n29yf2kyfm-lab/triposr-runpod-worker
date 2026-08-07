@@ -104,6 +104,8 @@ PHASE_OF_MODE = {
                           "this permitted development?"),
     "model":       ("3b", "drawing's figured dimensions -> walls, storeys, "
                           "roof -> OBJ + IFC + take-off"),
+    "scan":        ("1", "phone splat export -> verified, oriented, "
+                         "scale-checked against the mapped footprint"),
     "propose":     ("6", "address -> OSM outline + Solar roof + Street View "
                          "orientation + measured clearances -> existing house "
                          "and designed extension as GLB/OBJ/IFC"),
@@ -124,6 +126,7 @@ def _pipeline_available(mode):
         "valuation": "valuation", "drawing": "drawing",
         "planning": "planning", "model": "model3d",
         "render": "sitevisual", "propose": "propose",
+        "scan": "scanin",
     }.get(mode)
     if not module:
         return False
@@ -359,6 +362,7 @@ def _dispatch(mode, spec, prog):
         "valuation": "valuation", "drawing": "drawing",
         "planning": "planning", "model": "model3d",
         "render": "sitevisual", "propose": "propose",
+        "scan": "scanin",
     }[mode]
     module = __import__(module_name)
     return module.run(spec, prog, OUTPUT_DIR)
