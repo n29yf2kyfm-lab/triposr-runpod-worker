@@ -1862,5 +1862,25 @@
  "af2c44c1a844442ab66b7512aa791b4e": [
   "SCRAP",
   "M6 E63 72k f cov=0.883 - the E63 M6 was already judged (redundant vs bmw-m6-v1 coupe tag); this copy is far out-of-band besides."
+ ],
+ "8a63995491ae4da1bccf65a6a22a129e": [
+  "SCRAP",
+  "XM 71k f cov=0.777 - fifth XM scrap; bmw-xm-v1 holds the slot."
+ ],
+ "65b52972629e4dda93a939259a8ebd64": [
+  "SCRAP",
+  "Car model 69k f cov=0.664 - unidentifiable generic BMW; no nameplate to index."
+ ],
+ "f5f00aecf89845709d02be03a8007752": [
+  "SCRAP",
+  "M3 Coupe E46 68k f cov=0.739 - E46 M3 slot held; tenth E46-family scrap."
+ ],
+ "7266acc392424876922b59fae5f38e2c": [
+  "SCRAP",
+  "M3 GT2 E92 66k f cov=0.808 - tenth M3 race copy of the wave."
+ ],
+ "29fda3f5f21044bd8805f2891a98d875": [
+  "SCRAP",
+  "M430i Coupe 2021 64k f mats=11 cov=0.850 - a made-up badge (no M430i exists); the G22 4 Series is covered by bmw-4-series-v1."
  ]
 }
