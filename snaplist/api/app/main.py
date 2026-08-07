@@ -10,7 +10,7 @@ from __future__ import annotations
 import uuid
 from pathlib import Path
 
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
@@ -71,6 +71,8 @@ async def identify(file: UploadFile = File(...)) -> Identification:
 @app.get("/api/image/{image_id}")
 def get_image(image_id: str) -> FileResponse:
     path = UPLOAD_DIR / Path(image_id).name  # prevent traversal
+    if not path.is_file():
+        raise HTTPException(status_code=404, detail="image not found")
     return FileResponse(path)
 
 
@@ -91,5 +93,10 @@ async def make_video(req: VideoRequest) -> PromoVideo:
 
 @app.post("/api/publish", response_model=PublishResult)
 async def publish(req: PublishRequest) -> PublishResult:
+    # eBay fetches images over the internet, so it needs a public URL — a
+    # localhost path is useless to it. PUBLIC_BASE_URL (a tunnel in dev, the
+    # real host in prod) is what makes the stored upload reachable.
     image_url = ""
+    if req.image_id and settings.public_base_url:
+        image_url = f"{settings.public_base_url}/api/image/{req.image_id}"
     return await ebay.publish(req.listing, req.pricing, image_url)

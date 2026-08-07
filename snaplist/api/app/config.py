@@ -38,6 +38,13 @@ class Settings:
     ebay_client_secret: str = _get("EBAY_CLIENT_SECRET")
     # A user OAuth token authorises listing on *their* eBay account.
     ebay_user_token: str = _get("EBAY_USER_TOKEN")
+    # Seller's inventory location key (created once via the Location API).
+    ebay_location_key: str = _get("EBAY_LOCATION_KEY", "snaplist-default")
+
+    # Public base URL this API is reachable at, e.g. https://abc123.ngrok-free.app
+    # eBay fetches listing images over the internet, so localhost paths are
+    # useless to it — without this, publishing has no usable image URL.
+    public_base_url: str = _get("PUBLIC_BASE_URL").rstrip("/")
 
     cors_origins: list[str] = [
         o.strip()
