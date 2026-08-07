@@ -1286,5 +1286,41 @@
  "3f6f75266eb84c0b8385bada90be3770": [
   "SCRAP",
   "X6M F86 62k f - third copy of the same asset (61,519 faces, identical stats). Same ground as P062."
+ ],
+ "73c513945e854b14b2d0b2299e2f3ba7": [
+  "SCRAP",
+  "M5 CS 582k f cov=0.791 - out-of-band: at 0.791 the body material carries most of the car and a recolour paints trim with it. F90 slot held by bmw-m5-f90-undated-v1; seventh F90-family M5 of the wave."
+ ],
+ "8239b162a87d45a493f9217db99c71b6": [
+  "SCRAP",
+  "M5 CS 582k f cov=0.864 - same-author duplicate of P064 (identical 581,595 faces), higher-coverage export of the same car. Same grounds."
+ ],
+ "6abc6665e16745f283b0f3096a6bd971": [
+  "SCRAP",
+  "M4 F82 573k f cov=0.755 - out-of-band coverage, and the twenty-first M4-family scrap. bmw-m4-competition-2021-bm1-v1 holds the slot."
+ ],
+ "cc663d66c6af4acfb224ec50d65904a7": [
+  "SCRAP",
+  "2002 Baur Cabriolet 564k f mats=11 cov=0.691 - single, clean, genuinely charming classic with the correct Baur targa hoop and 2002 BMW 75 plates, but coverage 0.691 means the recolour would swallow the chrome bumpers, hoop and trim - it cannot pass the audit bar as-is, and the rule is scrap, not fix. ADDED TO THE RE-SOURCE LIST: a clean-split Baur cabriolet would be a distinctive body-style entry alongside the 2002ti."
+ ],
+ "fdf7c77dd9d54686ad431b14394a4837": [
+  "SCRAP",
+  "i8 559k f cov=0.845 - out-of-band, and the i8 coupe slot is now held by the 913k-face keep from this pool. Nothing added."
+ ],
+ "16136c2c47b54b39ae7fffb3a1415f30": [
+  "SCRAP",
+  "i8 Vision 559k f cov=0.739 - the Vision EfficientDynamics CONCEPT, not the production i8; fourth concept of the wave. Out-of-band besides."
+ ],
+ "6d551611382c44bd98aad7369a73128b": [
+  "SCRAP",
+  "7 Series G11/G12 2022 548k f mats=16 cov=0.649 - WHEELS MISSING on three corners with arch liners and brake hardware exposed, and rows of aero strakes bolted below the rear bumper. Sixteen body materials. The modern 7 Series gap stays on the re-source list (G70 flagged earlier); this copy is broken."
+ ],
+ "4f23f654344945e2b291a957e5d2025a": [
+  "SCRAP",
+  "M4 534k f cov=0.581 - out-of-band; twenty-second and final M4-family scrap of the wave. Slot held."
+ ],
+ "3994b07cbbb046acad81ecc70cfd6982": [
+  "SCRAP",
+  "X5 M 521k f cov=0.767 - out-of-band, and the X5 M slot is held by the F95 keep from this pool. Nothing added."
  ]
 }
