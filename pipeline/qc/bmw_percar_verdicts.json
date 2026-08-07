@@ -1322,5 +1322,41 @@
  "3994b07cbbb046acad81ecc70cfd6982": [
   "SCRAP",
   "X5 M 521k f cov=0.767 - out-of-band, and the X5 M slot is held by the F95 keep from this pool. Nothing added."
+ ],
+ "d4ffe0df9066481fa028eb1e1348c4b0": [
+  "SCRAP",
+  "F22 EUROFIGHTER 516k f cov=0.465 - drift-missile build by title and kit; out-of-band coverage. The clean F22 slot is held by the M235i Coupe keep."
+ ],
+ "d90e6bded27a49e5aed006a3df8d2d4f": [
+  "SCRAP",
+  "M1 ts 516k f cov=0.522 - modified M1 (ts = tuner spec), out-of-band. Road M1 slot held by bmw-m1-bm1-v1 at 914k f."
+ ],
+ "03a9ead5003f4d22af9308ba70acfd7b": [
+  "SCRAP",
+  "i8 509k f cov=0.833 - out-of-band; i8 coupe slot held by the 913k keep. Nothing added."
+ ],
+ "237c4db0df1c43abadbe3cfad707cb7e": [
+  "SCRAP",
+  "7 Series G11/G12 507k f cov=0.599 - titled 760 I7 but the render is the previous-generation G11/G12, SLAMMED on aftermarket deep-dish wheels with stretched tyres. Not stock, out-of-band, and the modern-7 gap remains on the re-source list."
+ ],
+ "11193be4ccac4479b836dea2f5ff3136": [
+  "SCRAP",
+  "M4 F82 507k f cov=0.753 - out-of-band; M4 family fully covered. Twenty-third M4 scrap."
+ ],
+ "ea7768164f404089bfbddb8b3228b9ea": [
+  "SCRAP",
+  "850i E31 504k f cov=0.699 - STANCED: white-wall stretched tyres, heavy camber, splitter with tow hook, boot wing. bmw-850csi-e31-1996-bm1-v1 holds the E31 slot with a stock car."
+ ],
+ "3949c97a62dc414c857622ca53241368": [
+  "SCRAP",
+  "M4 G82 remastered v2 503k f cov=0.881 - highest coverage in the pool; out-of-band; M4 covered. Twenty-fourth M4 scrap."
+ ],
+ "70b3b57b3d764d3da3aeeaa9763ac55d": [
+  "SCRAP",
+  "Limousine 502k f cov=0.850 - generic stretch-limousine build, no identifiable production model; out-of-band besides."
+ ],
+ "6196a639ee4d4d579d07751058df7335": [
+  "SCRAP",
+  "NOT A CAR - an entire BMW DEALERSHIP BUILDING: showroom block, forecourt, light poles and a dozen miniature cars in the car park. Fifth non-car to pass the automated gates, and the largest."
  ]
 }
