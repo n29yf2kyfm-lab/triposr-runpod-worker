@@ -986,5 +986,21 @@
  "bc35d532c60e4f5bace73a8932fa8fb6": [
   "SCRAP",
   "M3 E46 757k f mats=5 cov=0.753 - REDUNDANT. bmw-m3-e46-v1 already holds the slot. Nicely done with UK plates LA51 ABC and correct E46 detailing, but coverage 0.753 is far past the clean ceiling so the body material also carries most of the trim."
+ ],
+ "4ba85df44dae4f0687b3b9d69a3153a3": [
+  "SCRAP",
+  "3 Series E30 680k f mats=7 cov=0.299 - DRIFT/RACE build, wheels missing. All four arches are empty with exposed suspension arms and hubs; a roof-mounted wing and a full-width rear louvre structure are bolted on; the body texture is a patchy two-tone grey and white across every panel. Not a stock E30."
+ ],
+ "331accd2568648f6a52f31314dc3ac07": [
+  "SCRAP",
+  "M6 E63 668k f mats=9 cov=0.320 - REDUNDANT by the resolver's tagging. Genuinely good model - correct E63 proportions, angel-eye headlight internals, M6 side gills, quad exhausts, consistent alloys with yellow calipers, clean gloss, and coverage 0.320 sits inside the clean band. But bmw-m6-v1 is tagged bodyStyle=coupe, so an M6 coupe lookup already matches it, and the E64 convertible kept earlier covers the drop-top. NOTE FOR LATER: bmw-m6-v1's sourceTitle reads 'BMW M6 [Gran Coupe]' while its bodyStyle says 'coupe' - one of those is wrong, and if the incumbent is really the four-door then this E63 is a genuine coupe gap and should be revisited."
+ ],
+ "90aac9a464bb4ff8888061b87a8b376b": [
+  "SCRAP",
+  "Z4 G29 638k f mats=7 cov=0.821 - WIDEBODY DRIFT build with wheels missing. Empty arches showing bare hubs and brake components, bolt-on wide arches with exposed hardware, full-width rear wing, front dive planes and a deep splitter. bmw-z4-m40i-2019-v1 already covers the G29."
+ ],
+ "a4e83020cb224f8aba9f755cd740e2fe": [
+  "SCRAP",
+  "M5 G99 Touring 636k f mats=4 cov=0.148 - DRAG build with the bonnet removed. The engine bay is fully exposed in the front three-quarter, with a drag-spec front end and skinny front wheels. The G99 M5 Touring would be a genuine gap - the library has no current-generation M5 estate - so WORTH RE-SOURCING as a stock car, but this one has no bonnet."
  ]
 }
