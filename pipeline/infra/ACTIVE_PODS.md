@@ -39,6 +39,8 @@ pool becomes a rescue queue and library-wide paint quality improves. NOTE this
 cuts against the standing "don't fix, just scrap" rule -- it is a policy question
 for the owner, which is why this is a measured trial and not a batch run.
 
+| `qddqm60rb8e0gd` | 3daigc-partfield-trial2 | RTX A5000 24GB @ CA-MTL-1 | **0.27** | 2026-08-07 ~21:45 UTC | PartField trial, attempt 2 — host assigned at creation (unlike attempt 1). Stop as soon as the segmentation test is judged. `DELETE /v1/pods/qddqm60rb8e0gd` | test judged |
+
 ## Endpoint config changes (2026-08-07)
 
 - `nd0fagqlr5z2ur` (trellis2-v2): **workersMin 1 -> 0** (owner-approved). The
