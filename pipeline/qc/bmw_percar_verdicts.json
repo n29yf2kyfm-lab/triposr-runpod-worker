@@ -1106,5 +1106,29 @@
  "9b211d525797457e988c903f67d0b753": [
   "KEEP",
   "X5 M Competition F95 2020 319k f mats=3 cov=0.330 - fills a nameplate slot the library lacks. There is no X5 M: bmw-x5-2019-w12-v1 and bmw-x5-2024-v1 are base X5s and the E53 kept earlier is the original. The library already treats the M variant as its own entry elsewhere - bmw-x6-m-2022-bm1-v1 sits alongside bmw-x6-2020-v1 - so this is consistent precedent, not padding. Quality holds: proportions read as an F95 X5 M instantly; front 3/4 strong; roof rails, glasshouse and wheelbase consistent across all four views; headlights carry internal LED structure; kidney grille mesh defined; M-specific bumpers, side gills and quad exhausts crisp; multi-spoke alloys with gold calipers identical in every view; shut lines defined; clean gloss. Coverage 0.330 sits inside the clean band so paint lands correctly - flagged on material count alone."
+ ],
+ "09066ac9591d41c38e0d8b10fe173afd": [
+  "SCRAP",
+  "M3 CS Touring 316k f mats=3 cov=0.281 - TWO-TONE MATERIAL FAULT, the same defect as P017 on a different copy: the driver's door renders solid BLUE against a white body in three views, so it sits on its own material and would stay blue through every colour variant. The M3 estate slot is held by bmw-m3-2023-w12-v1 regardless."
+ ],
+ "43b6158879c1490aafacd8b480147eb9": [
+  "SCRAP",
+  "M4 CSL 312k f mats=4 cov=0.389 - REDUNDANT, fifteenth M4 of the wave and the fourth CSL. bmw-m4-competition-2021-bm1-v1 holds the slot at 683k f."
+ ],
+ "8f74fb3420e24213aaeea33dc99450a3": [
+  "SCRAP",
+  "M5 CS F90 306k f mats=10 cov=0.265 - TWO-TONE ROOF. The roof and the door mirrors render WHITE against a turquoise body across all four views, i.e. they sit on a separate material and would stay white through every colour variant - the defect that got the 2006 Range Rover scrapped. bmw-m5-f90-undated-v1 also already covers the F90."
+ ],
+ "f4e5d063bbd9473c89b5fc5f17283982": [
+  "SCRAP",
+  "M5 E60 2009 270k f mats=5 cov=0.430 - DUPLICATE of a car already shipped. Face count matches to the digit (270,475 f) the E60 M5 kept earlier in this wave as 8dde42e86c884153a9c1aee3397546bb and published as bmw-m5-2003-bm2-v1. Same asset re-uploaded under a different account; the slot is filled by the copy already live."
+ ],
+ "61c1ab924f67463695a537c3e91765e7": [
+  "SCRAP",
+  "750iL E38 1998 270k f mats=5 cov=0.425 - TAIL LIGHT MATERIAL FAULT plus untextured. Both tail light clusters render bright TEAL/GREEN in every view, which is a wrong-material assignment rather than a finish. The car is otherwise flat clay - headlights are blank white recesses with no internals, the kidney grille is a smooth slab, and it sits on plain steel wheels with no covers. FLAGGING AS A GAP TO RE-SOURCE: the library has no E38, and it is the definitive 1990s 7 Series."
+ ],
+ "455c3c3376e0441b9f96f83285828c11": [
+  "SCRAP",
+  "X5 M F85 270k f mats=11 cov=0.305 - OVERSPILL, visible on the neutral sheet: the TYRES render pale grey-white rather than black, so the rubber sits on the body material and a recolour would paint the tyres. The side glass also carries triangulated faceted artefacts in all four views. The X5 M slot is now held by the F95 kept earlier in this batch."
  ]
 }
