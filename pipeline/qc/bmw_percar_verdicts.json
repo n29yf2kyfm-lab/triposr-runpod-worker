@@ -1034,5 +1034,29 @@
  "a1ddd0f09bce44dbae1b1c9e0e18dda5": [
   "SCRAP",
   "M4 G82 Competition 2024 585k f mats=3 cov=0.136 - REDUNDANT, thirteenth M4 of the wave. Genuinely clean - carbon roof, correct grille, consistent black alloys with yellow calipers, and coverage 0.136 sits inside the clean band - but bmw-m4-competition-2021-bm1-v1 holds the slot at 683k f and this adds no coverage."
+ ],
+ "76c342128e7d48b9a9e55dfddb71ba5d": [
+  "SCRAP",
+  "M4 Touring race build 565k f mats=3 cov=0.140 - MOTORSPORT. Nurburgring 24h car: full roll cage visible through the glass, swan-neck rear wing, bolt-on wide arches with exposed hardware, deep splitter and rear diffuser, bonnet pins, and ADVAN / YOKOHAMA lettering printed on all four tyre sidewalls. Not a road car."
+ ],
+ "6828c91db6a34d1ca6bc204f064e28c1": [
+  "SCRAP",
+  "M3 Touring 24H Shell Helix 565k f mats=3 cov=0.140 - MOTORSPORT and the same shell as P001 (565,045 f vs 565,049 f, identical cov 0.140 and mats 3), re-dressed with a Shell Helix livery. Same cage, wing, arches and slick tyres. Neither is a road car."
+ ],
+ "a68f1ee34cfd481db41b591aff3a701a": [
+  "SCRAP",
+  "NOT A CAR. The asset is a comparison display of three INTERIOR TUBS - cabin cutaways of an M3 Competition G80, a 7-series M short and an M4 G82 - standing side by side on a floor with floating text labels modelled into the scene. No complete vehicle exists anywhere in it."
+ ],
+ "32c73ea915734654abae29120ab6077d": [
+  "SCRAP",
+  "XM 2023 490k f mats=3 cov=0.222 - REDUNDANT, third XM of the wave. bmw-xm-v1 is approved and both e307c3f1df9d40afafbb36f6f69c28d1 and H003 were scrapped on the same ground. Clean model, nothing added."
+ ],
+ "6af80572653340778f93908a8bc5ec6f": [
+  "SCRAP",
+  "M Hybrid V8 486k f mats=4 cov=0.279 - MOTORSPORT. Third copy of the LMDh prototype in this wave after 19be670d781c40929e135f6c34e4151f and its livery variant. Closed-cockpit Le Mans prototype with roof fin, full-width wing and ground-effect floor. No UK registration resolves to it."
+ ],
+ "1f23525ab55746899e3645e3352981c2": [
+  "SCRAP",
+  "i4 2022 452k f mats=3 cov=0.356 - REDUNDANT. bmw-i4-v1 is already approved in the library. Clean, correctly detailed i4 with the closed grille and blue i-division accents, but it adds no coverage. Note those blue accents on the sills and bumpers sit on the body material band and would tint with each colour variant."
  ]
 }
