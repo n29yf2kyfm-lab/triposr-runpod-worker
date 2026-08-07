@@ -62,6 +62,35 @@ step goes live — the header shows a green dot for each live integration.
 > feasibility brief. eBay Sandbox lets you test real publishing with no fees and
 > nothing going live.
 
+### Before your first real publish
+
+eBay enforces several things only at publish time, and it does **not** fall back
+to account defaults. To publish you must:
+
+1. **Opt into Business Policies** in eBay Seller Hub, and have one payment, one
+   return and one shipping policy. All three IDs are required on every offer —
+   the app looks up your first of each kind unless you set `EBAY_*_POLICY_ID`.
+2. **Know your category.** eBay's category-suggestion API is not supported in
+   Sandbox (it returns boilerplate), so Sandbox runs use
+   `EBAY_FALLBACK_CATEGORY_ID`. Production resolves the category from the title.
+
+The app creates the required **inventory location** for you, and uploads the
+photo to eBay's own image hosting so you don't need to host images publicly.
+If any prerequisite is missing, publish fails with a message naming it rather
+than sending a request eBay will reject.
+
+### Tests
+
+```bash
+cd api && .venv/bin/python -m pytest tests/ -q
+```
+
+The publish path is a multi-call sequence whose requirements eBay only enforces
+at the last step, so the tests stand up a fake eBay and assert on the **actual
+requests sent** — that policies, location, `GTC` duration, a real condition
+enum, an image and a category are all present. That's verifiable without
+credentials; a live Sandbox run is not.
+
 ---
 
 ## How it's built

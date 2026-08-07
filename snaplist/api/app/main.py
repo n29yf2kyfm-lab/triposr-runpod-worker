@@ -7,6 +7,7 @@ Runs fully on mock data with no keys; goes live as you add them.
 """
 from __future__ import annotations
 
+import mimetypes
 import uuid
 from pathlib import Path
 
@@ -93,10 +94,27 @@ async def make_video(req: VideoRequest) -> PromoVideo:
 
 @app.post("/api/publish", response_model=PublishResult)
 async def publish(req: PublishRequest) -> PublishResult:
-    # eBay fetches images over the internet, so it needs a public URL — a
-    # localhost path is useless to it. PUBLIC_BASE_URL (a tunnel in dev, the
-    # real host in prod) is what makes the stored upload reachable.
-    image_url = ""
-    if req.image_id and settings.public_base_url:
-        image_url = f"{settings.public_base_url}/api/image/{req.image_id}"
-    return await ebay.publish(req.listing, req.pricing, image_url)
+    """
+    Publish to eBay. The stored photo is sent as bytes so it can be uploaded to
+    eBay's own image hosting; a public self-hosted URL is only a fallback, since
+    eBay has to fetch such images over the internet and cannot see localhost.
+    """
+    image_bytes: bytes | None = None
+    media_type = "image/jpeg"
+    fallback_url = ""
+
+    if req.image_id:
+        path = UPLOAD_DIR / Path(req.image_id).name
+        if path.is_file():
+            image_bytes = path.read_bytes()
+            media_type = mimetypes.guess_type(path.name)[0] or "image/jpeg"
+        if settings.public_base_url:
+            fallback_url = f"{settings.public_base_url}/api/image/{req.image_id}"
+
+    return await ebay.publish(
+        req.listing,
+        req.pricing,
+        fallback_image_url=fallback_url,
+        image_bytes=image_bytes,
+        image_media_type=media_type,
+    )
