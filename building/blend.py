@@ -336,3 +336,38 @@ def _drop_in_sky(path):
     back = grad.resize((w, h)).convert("RGBA")
     Image.alpha_composite(back, img).convert("RGB").save(path)
     return path
+
+
+def orbit(glb_path, out_path, frames=36, width=960, height=720,
+          samples=32, pitch_deg=17.0, fps=10, python=None):
+    """A full orbit as a video, at deliverable quality.
+
+    The first orbit shipped to a user was 43 frames at 800x600 assembled to
+    1.79 seconds — an audit called it a toy, and it was. The floor here is
+    the floor of watchability: at least 24 frames, at least 3 seconds,
+    motion-interpolated to 24fps so it plays as a move rather than a
+    slideshow. Frames render into a directory next to the output so a crash
+    leaves the evidence, and assembly needs ffmpeg — its absence is a named
+    failure, not a silent one.
+    """
+    import shutil
+    frames = max(24, int(frames))
+    if shutil.which("ffmpeg") is None:
+        raise BlendError(
+            "ffmpeg is not installed, so the orbit frames cannot be "
+            "assembled into a video. The stills render without it.")
+    frame_dir = out_path + ".frames"
+    os.makedirs(frame_dir, exist_ok=True)
+    for i in range(frames):
+        render(glb_path, os.path.join(frame_dir, f"f{i:03d}.png"),
+               yaw_deg=i * (360.0 / frames), pitch_deg=pitch_deg,
+               samples=samples, width=width, height=height, python=python)
+    r = subprocess.run(
+        ["ffmpeg", "-y", "-framerate", str(fps),
+         "-i", os.path.join(frame_dir, "f%03d.png"),
+         "-vf", "minterpolate=fps=24:mi_mode=blend,format=yuv420p",
+         "-c:v", "libx264", "-crf", "20", out_path],
+        capture_output=True, text=True, timeout=600)
+    if r.returncode != 0 or not os.path.exists(out_path):
+        raise BlendError("ffmpeg failed: " + (r.stderr or "")[-300:])
+    return out_path

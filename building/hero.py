@@ -307,3 +307,75 @@ def make(model, render_path, work_dir, scan, time_of_day="day",
     return ([(out, f"renders/{scan}.hero.png", None)],
             f"photoreal pass verified against the measured render "
             f"(structure {score:.2f})")
+
+
+def montage_prompt(fit):
+    """The montage instruction, built from the MEASURED brief.
+
+    The best-received image this project ever produced was a hand-typed
+    Gemini edit of the real photo — made outside the product, with the
+    extension sized by the model's eye rather than by the survey. This keeps
+    the part that worked (the real photo constrains the real house) and
+    fixes the part that did not: the size and side come from the fit the
+    clearance probe approved, stated in metres, not left to imagination.
+    """
+    built = fit.get("built_m") or {}
+    kind = fit.get("type", "rear")
+    storeys = int(fit.get("storeys") or 1)
+    side = fit.get("side")
+    where = {"rear": "at the BACK of the house",
+             "side": f"on the {side or 'open'} side of the house",
+             "over": "on top of the existing single-storey side element",
+             "wrap": "wrapping the rear corner of the house"}.get(kind, kind)
+    return (
+        "This is a real photograph of a British house.\n\n"
+        f"TASK: add a proposed {storeys}-storey {kind} extension {where}, "
+        "as an architect's photomontage.\n\n"
+        "SIZE — from the survey, not from imagination: "
+        f"{built.get('width', '?')} metres wide by "
+        f"{built.get('depth', '?')} metres deep, "
+        f"{storeys} storey(s) tall, subordinate to the existing house.\n\n"
+        "WHAT MUST NOT CHANGE — this is a real property:\n"
+        "- The existing house stays EXACTLY as photographed: every window, "
+        "door, bay, chimney, roof line and brick.\n"
+        "- The camera, perspective, road, drive, boundaries, sky and light "
+        "stay as they are.\n"
+        "- Neighbouring buildings stay untouched.\n\n"
+        "THE EXTENSION: matching brick and mortar coursing, matching roof "
+        "material, window frames matching the existing, gutters and "
+        "downpipes, correct perspective, shadow consistent with the sun in "
+        "the photograph.\n\n"
+        "Photorealistic. No text, no labels, no people."
+    )
+
+
+def montage_on_photo(photo_path, fit, key, out_path):
+    """Before/after on the real photo. Returns (out_path, note).
+
+    The photo is Street View Static imagery and carries Google's attribution
+    in-frame; Google's terms require it stays visible, so nothing here crops
+    or removes it and the note says so. The 'before' is the photo itself —
+    it is already on disk and is delivered alongside.
+    """
+    with open(photo_path, "rb") as f:
+        b64 = base64.b64encode(f.read()).decode()
+    body = {"contents": [{"parts": [
+        {"inline_data": {"mime_type": "image/jpeg", "data": b64}},
+        {"text": montage_prompt(fit)}]}],
+        "generationConfig": {"responseModalities": ["IMAGE"]}}
+    r = _requests().post(GEMINI_API, params={"key": key}, json=body,
+                         timeout=180)
+    if r.status_code != 200:
+        raise HeroError(f"montage: Gemini answered {r.status_code}")
+    parts = (((r.json().get("candidates") or [{}])[0]
+              .get("content") or {}).get("parts") or [])
+    for p in parts:
+        d = (p.get("inlineData") or p.get("inline_data") or {}).get("data")
+        if d:
+            with open(out_path, "wb") as f:
+                f.write(base64.b64decode(d))
+            return out_path, (
+                "photomontage on Street View imagery — imagery (c) Google, "
+                "attribution retained as its terms require; the extension's "
+                "stated size is from the survey, its rendering is generated")
+    raise HeroError("montage: Gemini returned no image")

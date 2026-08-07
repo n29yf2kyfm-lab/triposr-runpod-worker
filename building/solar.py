@@ -281,3 +281,76 @@ def compare(lidar_quantities, solar_result):
             f"only; measure the range you are actually working on.")
     out["notes"] = notes
     return out
+
+
+def measure_heights(lat, lon, radius_m=30):
+    """Real eaves and ridge heights, from Solar's own elevation model.
+
+    An audit found the flagship mode assuming 2.75m storeys while this module
+    was already authenticated to the endpoint that measures the answer: the
+    dataLayers DSM is a ~10cm surface model, and its building mask says
+    which pixels are roof. Ridge = the highest masked pixel; ground = the
+    median of the UNmasked pixels around the building, which is the garden
+    and the road. Both are ortho heights, so their difference is the
+    building's own height above its ground — no geoid gymnastics required.
+
+    Returns {ground_od_m, ridge_od_m, ridge_agl_m, source} or None, and
+    never raises: a worker without tifffile, or a site without DSM
+    coverage, falls back to the assumption it would have used anyway — the
+    caller's provenance says which happened.
+    """
+    key = api_key()
+    if not key:
+        return None
+    try:
+        import io
+        import numpy as np
+        import tifffile
+        import requests
+        r = requests.get("https://solar.googleapis.com/v1/dataLayers:get",
+                         params={"location.latitude": lat,
+                                 "location.longitude": lon,
+                                 "radiusMeters": radius_m,
+                                 # DSM_LAYER alone omits maskUrl (verified
+                                 # live); FULL_LAYERS carries both, and only
+                                 # the two files needed are ever downloaded.
+                                 "view": "FULL_LAYERS",
+                                 "requiredQuality": "MEDIUM", "key": key},
+                         timeout=60)
+        if r.status_code != 200:
+            return None
+        body = r.json()
+        out = {}
+        for name, url_key in (("dsm", "dsmUrl"), ("mask", "maskUrl")):
+            url = body.get(url_key)
+            if not url:
+                return None
+            g = requests.get(url, params={"key": key}, timeout=120)
+            g.raise_for_status()
+            # PIL mangles float GeoTIFF tiles; tifffile does not. Learned
+            # live on this exact layer earlier in the project.
+            out[name] = tifffile.imread(io.BytesIO(g.content))
+        dsm, mask = out["dsm"].astype("float64"), out["mask"]
+        if mask.shape != dsm.shape:
+            return None
+        valid = np.abs(dsm) < 1e4          # nodata in this layer is ~3.4e38
+        roof = (mask > 0) & valid
+        ground = (mask == 0) & valid
+        if roof.sum() < 25 or ground.sum() < 100:
+            return None
+        ground_od = float(np.median(dsm[ground]))
+        # 99.5th percentile, not max: a single hot pixel on an aerial or a
+        # chimney pot must not set the ridge for the whole model.
+        ridge_od = float(np.percentile(dsm[roof], 99.5))
+        agl = ridge_od - ground_od
+        if not 2.0 <= agl <= 20.0:
+            return None
+        return {"ground_od_m": round(ground_od, 2),
+                "ridge_od_m": round(ridge_od, 2),
+                "ridge_agl_m": round(agl, 2),
+                "source": "Google Solar dataLayers DSM + building mask"}
+    except Exception as e:
+        import sys as _sys
+        print(f"solar height measurement unavailable: "
+              f"{type(e).__name__}: {e}", file=_sys.stderr)
+        return None

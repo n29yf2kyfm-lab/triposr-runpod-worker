@@ -975,7 +975,25 @@ def _split_for_openings(lo, hi, wall, level=0):
 
 
 def write_ifc(model, path, project_name="Modelled Building"):
-    """IFC4, via the same lazy import discipline as structure.py."""
+    """IFC4 with the WHOLE building in it, not a husk of it.
+
+    An independent audit executed the previous version and found what it
+    actually wrote: seven walls and four spaces on ONE storey at z=0 — no
+    slabs, no roof, no doors, no windows, no openings, no upper floors —
+    while the GLB from the same model carried all of them. That IFC could
+    not support this product's own pricing story ("IfcOpeningElement",
+    "IfcSlab", IFC-native takeoff), and "exports real CAD" was an
+    overstatement. This version writes what the model holds:
+
+      IfcBuildingStorey  one per storey, at its real elevation
+      IfcWall            per storey it exists on, placed at that storey's z
+      IfcOpeningElement  every door and window, voiding its wall
+      IfcDoor/IfcWindow  filling those openings
+      IfcSlab FLOOR      the floor plate of every storey
+      IfcSlab ROOF       the flat cap over any lower block
+      IfcRoof            the pitched roof, as the same surfaces the GLB has
+      IfcSpace           each room, aggregated into its base storey
+    """
     try:
         import ifcopenshell
         import ifcopenshell.api.root
@@ -985,6 +1003,7 @@ def write_ifc(model, path, project_name="Modelled Building"):
         import ifcopenshell.api.aggregate
         import ifcopenshell.api.spatial
         import ifcopenshell.api.geometry
+        import ifcopenshell.api.feature
     except ImportError:
         raise ModelError(
             "ifcopenshell is not installed, so IFC cannot be written. The "
@@ -1004,32 +1023,26 @@ def write_ifc(model, path, project_name="Modelled Building"):
     site = run("root.create_entity", f, ifc_class="IfcSite", name="Site")
     building = run("root.create_entity", f, ifc_class="IfcBuilding",
                    name=project_name)
-    storey = run("root.create_entity", f, ifc_class="IfcBuildingStorey",
-                 name="First Floor")
     run("aggregate.assign_object", f, products=[site], relating_object=project)
     run("aggregate.assign_object", f, products=[building], relating_object=site)
-    run("aggregate.assign_object", f, products=[storey],
-        relating_object=building)
 
-    for i, w in enumerate(model["walls"]):
-        (ax, ay), (bx, by) = w["start"], w["end"]
-        length = w["length_m"]
-        if length <= 0:
-            continue
-        ux, uy = (bx - ax) / length, (by - ay) / length
-        el = run("root.create_entity", f, ifc_class="IfcWall",
-                 name=f"Wall {i} {length:.2f}m")
-        run("spatial.assign_container", f, products=[el],
-            relating_structure=storey)
+    storeys_n = model.get("storeys", 1)
+    per = model.get("storey_height_m", DEFAULT_CEILING_HEIGHT_M)
+    x0, x1 = model["extent_m"]["x"]
+    y0, y1 = model["extent_m"]["y"]
+
+    def box_at(el, wx, wy, wz, ux, uy, ldim, tdim, ddim):
+        """A swept solid ldim x tdim extruded up ddim, at a world placement
+        whose local x runs along (ux, uy)."""
         run("geometry.edit_object_placement", f, product=el, matrix=(
-            (ux, -uy, 0.0, ax), (uy, ux, 0.0, ay),
-            (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0)))
+            (ux, -uy, 0.0, wx), (uy, ux, 0.0, wy),
+            (0.0, 0.0, 1.0, wz), (0.0, 0.0, 0.0, 1.0)))
         profile = f.create_entity(
             "IfcRectangleProfileDef", ProfileType="AREA",
-            XDim=float(length), YDim=float(w["thickness_m"]),
+            XDim=float(ldim), YDim=float(tdim),
             Position=f.create_entity("IfcAxis2Placement2D",
                 Location=f.create_entity("IfcCartesianPoint",
-                                         Coordinates=(length / 2.0, 0.0))))
+                                         Coordinates=(ldim / 2.0, 0.0))))
         solid = f.create_entity(
             "IfcExtrudedAreaSolid", SweptArea=profile,
             Position=f.create_entity("IfcAxis2Placement3D",
@@ -1037,7 +1050,7 @@ def write_ifc(model, path, project_name="Modelled Building"):
                                          Coordinates=(0.0, 0.0, 0.0))),
             ExtrudedDirection=f.create_entity("IfcDirection",
                                               DirectionRatios=(0.0, 0.0, 1.0)),
-            Depth=float(w["height_m"]))
+            Depth=float(ddim))
         shape = f.create_entity(
             "IfcShapeRepresentation", ContextOfItems=body,
             RepresentationIdentifier="Body", RepresentationType="SweptSolid",
@@ -1045,13 +1058,120 @@ def write_ifc(model, path, project_name="Modelled Building"):
         run("geometry.assign_representation", f, product=el,
             representation=shape)
 
+    storeys = []
+    names = {0: "Ground Floor", 1: "First Floor", 2: "Second Floor"}
+    for level in range(storeys_n):
+        st = run("root.create_entity", f, ifc_class="IfcBuildingStorey",
+                 name=names.get(level, f"Storey {level}"))
+        st.Elevation = round(level * per, 3)
+        run("aggregate.assign_object", f, products=[st],
+            relating_object=building)
+        storeys.append(st)
+
+    for level, st in enumerate(storeys):
+        z = level * per
+
+        # The floor plate. Extruded downward-thick so its top is the FFL.
+        slab = run("root.create_entity", f, ifc_class="IfcSlab",
+                   name=f"Floor slab L{level}", predefined_type="FLOOR")
+        run("spatial.assign_container", f, products=[slab],
+            relating_structure=st)
+        box_at(slab, x0, y0, z - DEFAULT_SLAB_M, 1.0, 0.0,
+               x1 - x0, (y1 - y0), DEFAULT_SLAB_M)
+
+        for i, w in enumerate(model["walls"]):
+            if not _wall_on_level(w, level):
+                continue
+            (ax, ay), (bx, by) = w["start"], w["end"]
+            length = w["length_m"]
+            if length <= 0:
+                continue
+            ux, uy = (bx - ax) / length, (by - ay) / length
+            el = run("root.create_entity", f, ifc_class="IfcWall",
+                     name=f"Wall {i} L{level} {length:.2f}m")
+            run("spatial.assign_container", f, products=[el],
+                relating_structure=st)
+            box_at(el, ax, ay, z, ux, uy,
+                   length, w["thickness_m"], w["height_m"])
+
+            # Openings: voided out of the wall, then filled with the door
+            # or window. Pinned openings appear on their own level only.
+            for o in w.get("openings", []):
+                if o.get("level") is not None and o["level"] != level:
+                    continue
+                sill = 0.0 if o["kind"] == "door" else o.get("sill", 0.0)
+                op = run("root.create_entity", f,
+                         ifc_class="IfcOpeningElement",
+                         name=f"Opening {o['kind']} in wall {i} L{level}")
+                box_at(op, ax + ux * o["along"], ay + uy * o["along"],
+                       z + sill, ux, uy,
+                       o["width"], w["thickness_m"] * 1.2, o["height"])
+                run("feature.add_feature", f, feature=op, element=el)
+                fill_class = "IfcDoor" if o["kind"] == "door" else "IfcWindow"
+                fill = run("root.create_entity", f, ifc_class=fill_class,
+                           name=f"{o['kind']} in wall {i} L{level}")
+                run("spatial.assign_container", f, products=[fill],
+                    relating_structure=st)
+                box_at(fill, ax + ux * o["along"], ay + uy * o["along"],
+                       z + sill, ux, uy,
+                       o["width"], min(w["thickness_m"], 0.06), o["height"])
+                run("feature.add_filling", f, opening=op, element=fill)
+
+    # Flat caps over the shallower blocks, on the storey below their top.
+    for n, cap in enumerate(model.get("caps") or []):
+        cx, cy, cz = cap["x"], cap["y"], cap["z_m"]
+        level = min(max(int(cz / per) - (1 if cz % per < 0.01 else 0), 0),
+                    storeys_n - 1)
+        slab = run("root.create_entity", f, ifc_class="IfcSlab",
+                   name=f"Flat roof {n}", predefined_type="ROOF")
+        run("spatial.assign_container", f, products=[slab],
+            relating_structure=storeys[level])
+        box_at(slab, cx[0], cy[0], cz, 1.0, 0.0,
+               cx[1] - cx[0], cy[1] - cy[0], DEFAULT_SLAB_M)
+
+    # The pitched roof: the SAME surfaces the GLB carries, as a face-based
+    # surface model under an IfcRoof — honest geometry rather than a shape
+    # approximated a second time and free to drift from the mesh.
+    roof = model.get("roof")
+    if roof:
+        groups = _glb_mesh(model)
+        tris = groups.get("tile")
+        if tris:
+            pos, _, idx = tris
+            faces = []
+            for i in range(0, len(idx), 3):
+                loop = f.create_entity("IfcPolyLoop", Polygon=[
+                    f.create_entity("IfcCartesianPoint", Coordinates=(
+                        float(pos[3 * idx[i + k]]),
+                        float(-pos[3 * idx[i + k] + 2]),
+                        float(pos[3 * idx[i + k] + 1])))
+                    for k in range(3)])
+                faces.append(f.create_entity("IfcFace", Bounds=[
+                    f.create_entity("IfcFaceOuterBound", Bound=loop,
+                                    Orientation=True)]))
+            surf = f.create_entity("IfcFaceBasedSurfaceModel",
+                                   FbsmFaces=[f.create_entity(
+                                       "IfcConnectedFaceSet", CfsFaces=faces)])
+            el = run("root.create_entity", f, ifc_class="IfcRoof",
+                     name=f"Roof {roof.get('kind', '')} "
+                          f"{roof.get('pitch_deg', '')} deg")
+            run("spatial.assign_container", f, products=[el],
+                relating_structure=storeys[-1])
+            shape = f.create_entity(
+                "IfcShapeRepresentation", ContextOfItems=body,
+                RepresentationIdentifier="Body",
+                RepresentationType="SurfaceModel", Items=[surf])
+            run("geometry.assign_representation", f, product=el,
+                representation=shape)
+
     for room in model["rooms"]:
         space = run("root.create_entity", f, ifc_class="IfcSpace",
                     name=room["name"])
         # IfcSpace is a spatial STRUCTURE element: it is AGGREGATED into the
         # storey, not contained in it. assign_container raises here.
+        base = min(int(room.get("base_level") or 0), storeys_n - 1)
         run("aggregate.assign_object", f, products=[space],
-            relating_object=storey)
+            relating_object=storeys[base])
 
     f.write(path)
     return path
@@ -1441,3 +1561,114 @@ def write_glb(model, path):
         f.write(struct.pack("<II", len(buf), 0x004E4942))
         f.write(bytes(buf))
     return path
+
+
+def _levels_of(w, storeys):
+    """How many storeys a wall dict is actually built on."""
+    base = w.get("base_level") or 0
+    n = w.get("storeys")
+    if n is None:
+        return max(0, storeys - base)
+    return max(0, min(base + n, storeys) - base)
+
+
+def retotal(model):
+    """Recompute the opening-dependent totals from the wall dicts.
+
+    Exists because facade openings can now be REPLACED after build() — and a
+    model whose walls changed while its take-off didn't is precisely the
+    kind of quiet lie the audit went looking for.
+    """
+    storeys = model.get("storeys", 1)
+    walls = model["walls"]
+
+    def count(kind):
+        return sum((_levels_of(w, storeys) if o.get("level") is None else 1)
+                   for w in walls for o in w.get("openings", [])
+                   if o["kind"] == kind)
+
+    gross = sum(w["length_m"] * w["height_m"] * _levels_of(w, storeys)
+                for w in walls)
+    cut = sum(o["width"] * o["height"]
+              * (_levels_of(w, storeys) if o.get("level") is None else 1)
+              for w in walls for o in w.get("openings", []))
+    for w in walls:
+        wg = w["length_m"] * w["height_m"]
+        wc = sum(o["width"] * o["height"] for o in w.get("openings", []))
+        w["net_area_m2"] = round(max(0.0, wg - wc), 2)
+    t = model["totals"]
+    t["doors"] = count("door")
+    t["windows"] = count("window")
+    t["wall_area_net_m2"] = round(max(0.0, gross - cut), 2)
+    return t
+
+
+def apply_facade_openings(model, openings, facade_y=0.0):
+    """Replace the rule-placed front openings with ones read from a photo.
+
+    The rule spread one window per wall and could never know better. A photo
+    of the elevation does know better, so its openings win on the facade —
+    and ONLY on the facade: side and rear walls keep the rule until someone
+    photographs them too.
+
+    Refuses quietly rather than wrongly: an opening that lands outside every
+    front wall, or overlaps one already placed, is skipped and counted. And
+    a house keeps its front door — if the reading has no door (hidden behind
+    a porch or a hedge, commonly), the rule-placed door survives the purge.
+    """
+    eps = 1e-6
+    storeys = model.get("storeys", 1)
+    fronts = [w for w in model["walls"] if w["external"]
+              and abs(w["start"][1] - facade_y) < eps
+              and abs(w["end"][1] - facade_y) < eps]
+    if not fronts:
+        return {"applied": 0, "skipped": len(openings),
+                "why": "no external wall on the facade line"}
+
+    saved_door = None
+    for w in fronts:
+        for o in w.get("openings", []):
+            if o["kind"] == "door" and saved_door is None:
+                saved_door = (w, dict(o))
+        w["openings"] = []
+
+    has_door = any(o["kind"] == "door" for o in openings)
+    todo = list(openings)
+    if not has_door and saved_door is not None:
+        todo.append(dict(saved_door[1]))
+
+    applied, skipped = 0, 0
+    placed_spans = {id(w): [] for w in fronts}
+    for o in sorted(todo, key=lambda o: o["along"]):
+        hit = None
+        for w in fronts:
+            ax, bx = w["start"][0], w["end"][0]
+            lo, hi = min(ax, bx), max(ax, bx)
+            if o["along"] >= lo - eps and o["along"] + o["width"] <= hi + eps:
+                hit = (w, ax, bx, lo, hi)
+                break
+        if hit is None:
+            skipped += 1
+            continue
+        w, ax, bx, lo, hi = hit
+        # Opening 'along' is measured along the wall FROM ITS START — flip
+        # when the wall runs right-to-left, or every opening mirrors.
+        local = (o["along"] - ax) if ax <= bx \
+            else (ax - o["along"] - o["width"])
+        local = max(0.05, min(local, w["length_m"] - o["width"] - 0.05))
+        span = (local, local + o["width"], o.get("level"))
+        if any(s0 < span[1] and span[0] < s1
+               and (lv is None or span[2] is None or lv == span[2])
+               for s0, s1, lv in placed_spans[id(w)]):
+            skipped += 1
+            continue
+        placed_spans[id(w)].append(span)
+        w["openings"].append({"kind": o["kind"], "along": round(local, 3),
+                              "width": o["width"], "height": o["height"],
+                              "sill": o.get("sill", 0.0),
+                              "level": o.get("level")})
+        applied += 1
+
+    retotal(model)
+    return {"applied": applied, "skipped": skipped,
+            "door_preserved": (not has_door and saved_door is not None)}

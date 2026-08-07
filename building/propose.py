@@ -29,10 +29,13 @@ height when there is no LIDAR to difference — it is labelled `assumed` and
 counted in `confidence`, because the whole product rests on never presenting
 a guess as a survey.
 
-WHAT IS STILL NOT MEASURED. Window and door positions on the existing house.
-The outline gives the walls, Solar gives the roof, but nothing open gives
-where the openings are, so they are placed by rule and marked as such. A
-site photo or a RoomPlan scan replaces them with the real thing.
+WHAT THE PHOTO ADDS, AND WHAT IT STILL CANNOT. Street View pixels are now
+read for the FRONT elevation — windows, door, bays, finish, chimney — so the
+front stops being placed by rule. The reading is a measurement of a
+photograph, approximate to a couple of hundred millimetres, and the sides
+and rear stay rule-placed until someone photographs them; the provenance
+table says exactly which walls are which. A RoomPlan scan or a site capture
+still beats all of it.
 """
 import json
 import math
@@ -483,6 +486,27 @@ def roof_from_solar(payload, span_m):
         return None
     rise = (span_m / 2.0) * math.tan(math.radians(pitch))
 
+    # GABLE OR HIP IS IN THE DATA, AND IT WAS BEING IGNORED. Every proposal
+    # hard-coded "hipped" while the segment list already said otherwise: a
+    # gabled roof shows TWO pitched planes facing opposite ways, a hipped
+    # roof shows four (or three with one hip end). The audit put a delivered
+    # hipped box next to the owner's photograph of a gabled house with the
+    # evidence for the gable sitting parsed and unread in this very payload.
+    aspects = [p["aspect_deg"] for p in pitched
+               if p["aspect_deg"] is not None]
+    form = "hipped"
+    if len(pitched) <= 2:
+        form = "gabled"
+        if len(aspects) == 2:
+            spread = abs((aspects[0] - aspects[1] + 180) % 360 - 180)
+            if spread < 120:
+                # Two planes facing the SAME way is not a gable pair — it is
+                # a complex roof seen partially. Do not over-claim.
+                form = "hipped"
+    form_source = (f"{len(pitched)} pitched plane(s) at "
+                   + ", ".join(f"{a:.0f}" for a in aspects)
+                   + " deg (Google Solar)")
+
     # The ridge runs across the slope, so the aspect of the largest pitched
     # plane fixes it. Small low segments are outriggers and porches.
     largest = max(pitched, key=lambda p: p["sloped_area_m2"])
@@ -494,6 +518,8 @@ def roof_from_solar(payload, span_m):
 
     return {
         "pitch_deg": round(pitch, 1),
+        "form": form,
+        "form_source": form_source,
         "pitch_spread_deg": parsed.get("pitch_spread_deg"),
         "complex": parsed.get("complex"),
         "rise_m": round(rise, 2),
@@ -802,9 +828,71 @@ def run(spec, prog, output_dir):
         except Exception as e:
             print(f"solar insights unavailable: {e}", file=sys.stderr)
     if roof_info:
-        prog.note(f"roof {roof_info['pitch_deg']} degrees measured over "
+        prog.note(f"roof {roof_info['pitch_deg']} degrees, "
+                  f"{roof_info.get('form','?')}, over "
                   f"{roof_info['segments']} segments")
     storeys, storeys_source = storey_count(roof_info)
+
+    # MEASURE the building's height rather than assuming it. The DSM gives
+    # ridge-above-ground directly; the pitch gives the roof's own rise; what
+    # is left below the eaves is the walls, and dividing by the storey count
+    # gives a MEASURED floor-to-floor. The 2.75m figure survives only as the
+    # fallback, and the provenance says which one you got.
+    heights = solar.measure_heights(lat, lon) if solar.available() else None
+    storey_h = ASSUMED_STOREY_HEIGHT_M
+    height_source = f"assumed {ASSUMED_STOREY_HEIGHT_M}m floor to floor"
+    if heights and roof_info:
+        span = min(width, depth)
+        rise = (span / 2.0) * math.tan(
+            math.radians(roof_info["pitch_deg"]))
+        eaves_agl = heights["ridge_agl_m"] - rise
+        candidate = eaves_agl / max(storeys, 1)
+        # A measured storey outside plausible construction means the mask
+        # caught a neighbour or the pitch disagrees with the DSM — keep the
+        # assumption and say so rather than building a 1.4m-storey house.
+        if 2.2 <= candidate <= 3.6:
+            storey_h = round(candidate, 3)
+            height_source = (
+                f"measured: ridge {heights['ridge_agl_m']}m above ground "
+                f"({heights['source']}), less a {rise:.2f}m roof rise at "
+                f"{roof_info['pitch_deg']} degrees, over {storeys} storeys")
+            prog.note(f"heights measured: ridge {heights['ridge_agl_m']}m, "
+                      f"storey {storey_h}m")
+        else:
+            height_source = (
+                f"assumed {ASSUMED_STOREY_HEIGHT_M}m — DSM gave an "
+                f"implausible {candidate:.2f}m storey, so the measurement "
+                f"was refused")
+
+    # READ THE FACADE OFF THE PHOTO. The camera position was already being
+    # used; the pixels were not, and they show every window, the door, the
+    # bay and the chimney. Positions are approximate and say so — but they
+    # are the real house's, which the rule could never be.
+    facade = None
+    facade_photo = None
+    if camera and (spec.get("extension") or {}).get("facade") is not False:
+        gem = os.environ.get("GOOGLE_AI_API_KEY", "")
+        if gem and keys.get("maps"):
+            try:
+                import imagery
+                heading = bearing_of(angle - math.pi / 2)
+                facade_photo = os.path.join(output_dir,
+                                            f"{spec.get('scan_id') or 'x'}"
+                                            f".facade.jpg")
+                got = imagery.fetch_photo(camera[0], camera[1],
+                                          (heading + 180.0) % 360.0,
+                                          keys["maps"], facade_photo)
+                if got:
+                    facade = imagery.read_facade(got, gem)
+                    if facade:
+                        prog.note(
+                            f"facade read from imagery: "
+                            f"{len(facade['openings'])} openings, "
+                            f"finish {facade.get('finish')}, chimney "
+                            f"{'yes' if facade.get('chimney') else 'no'}")
+            except Exception as e:
+                print(f"facade read skipped: {type(e).__name__}: {e}",
+                      file=sys.stderr)
 
     prog.stage("designing")
     brief = spec.get("extension") or {}
@@ -821,19 +909,31 @@ def run(spec, prog, output_dir):
     if len(pieces) > 1 and covered >= plan_area * 0.75:
         house_rooms = [
             model3d.Room("existing house" if i == 0 else f"existing block {i}",
-                         px, py, pw, pd, ASSUMED_STOREY_HEIGHT_M,
+                         px, py, pw, pd, storey_h,
                          kind="existing")
             for i, (px, py, pw, pd) in enumerate(pieces)]
         plan_source = (f"{len(pieces)} blocks from the outline, "
                        f"{covered:.0f}m2 of {plan_area:.0f}m2")
     else:
         house_rooms = [model3d.Room("existing house", 0.0, 0.0, width, depth,
-                                    ASSUMED_STOREY_HEIGHT_M, kind="existing")]
+                                    storey_h, kind="existing")]
         plan_source = "bounding rectangle of the outline"
     prog.note(f"existing plan: {plan_source}")
 
+    # Bays read off the photo become real projecting geometry.
+    bay_rooms = []
+    if facade:
+        import imagery
+        _, photo_bays = imagery.to_wall_openings(facade, width)
+        for i, b in enumerate(photo_bays[:2]):
+            bw = max(1.8, min(b["width"], 4.5))
+            bx = max(0.0, min(b["x"], width - bw))
+            bay_rooms.append(model3d.Room(
+                f"bay {i}", bx, -0.9, bw, 0.9, 2.35, kind="existing",
+                storeys=1))
+
     ext_rooms, fit = place_extension(width, depth, brief, clearances)
-    rooms = house_rooms + ext_rooms
+    rooms = house_rooms + bay_rooms + ext_rooms
     if fit.get("reduced"):
         prog.note(fit["reduced"])
     built = fit.get("built_m") or {}
@@ -874,12 +974,29 @@ def run(spec, prog, output_dir):
             prog.note(f"ridge axis corrected to run along the frontage — "
                       f"across the {span_if_y:.1f}m width it would have "
                       f"needed parallel ranges with a valley")
-        roof_spec = {"pitch_deg": roof_info["pitch_deg"], "kind": "hipped",
+        roof_spec = {"pitch_deg": roof_info["pitch_deg"],
+                     "kind": roof_info.get("form") or "hipped",
                      "ridge_along": ridge_local}
 
     model = model3d.build(rooms, storeys=storeys,
-                          storey_height=ASSUMED_STOREY_HEIGHT_M,
+                          storey_height=storey_h,
                           roof=roof_spec)
+
+    facade_note = "placed by rule — not surveyed"
+    if facade:
+        import imagery
+        photo_ops, _ = imagery.to_wall_openings(facade, width)
+        res = model3d.apply_facade_openings(model, photo_ops, facade_y=0.0)
+        if res.get("applied"):
+            facade_note = (
+                f"front: {res['applied']} openings read from Street View "
+                f"imagery (positions approximate, verify on site)"
+                + (", rule door kept" if res.get("door_preserved") else "")
+                + "; sides and rear remain placed by rule")
+            model["facade"] = {"finish": facade.get("finish"),
+                              "chimney": facade.get("chimney"),
+                              "read": res}
+            prog.note(facade_note)
 
     model["site"] = {
         "address": spec.get("address"),
@@ -956,8 +1073,10 @@ def run(spec, prog, output_dir):
                        if roof_info else "not available — flat top modelled"),
         "orientation": front_source,
         "storeys": storeys_source,
-        "storey_height": f"assumed {ASSUMED_STOREY_HEIGHT_M}m floor to floor",
-        "openings": "placed by rule — not surveyed",
+        "roof_form": (roof_info.get("form_source")
+                      if roof_info else "not measured"),
+        "storey_height": height_source,
+        "openings": facade_note,
         "plan": plan_source,
     }
     if bay:
@@ -1059,6 +1178,29 @@ def run(spec, prog, output_dir):
                      f"unreachable" if model["capture_plan"]["blocked"] else ""))
     except Exception as e:
         print(f"capture plan skipped: {type(e).__name__}: {e}", file=sys.stderr)
+
+    # The before/after a client actually reacts to: the extension montaged
+    # onto the real photo, sized from the survey. This was the best-received
+    # output the project ever produced and it was being made BY HAND outside
+    # the product — now it ships with the job, and the note carries Google's
+    # attribution requirement with it.
+    if facade_photo and os.path.exists(facade_photo)             and (spec.get("extension") or {}).get("montage") is not False:
+        gem = os.environ.get("GOOGLE_AI_API_KEY", "")
+        if gem:
+            try:
+                import hero as hero_mod
+                after = os.path.join(output_dir, f"{scan}.after.png")
+                _, mnote = hero_mod.montage_on_photo(
+                    facade_photo, model.get("extension_fit") or {}, gem,
+                    after)
+                artifacts.append((facade_photo,
+                                  f"renders/{scan}.before.jpg", None))
+                artifacts.append((after, f"renders/{scan}.after.png", None))
+                model["montage"] = mnote
+                prog.note("before/after montage delivered")
+            except Exception as e:
+                print(f"montage skipped: {type(e).__name__}: {e}",
+                      file=sys.stderr)
 
     for k in ("_hero_src", "_hero_mask"):
         model.pop(k, None)

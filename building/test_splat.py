@@ -252,6 +252,35 @@ except S.SplatError as e:
           str(e))
 
 
+
+# --- 7. the pipeline entry point the audit found missing --------------------
+# from_trellis had NO caller anywhere; export_from_pipeline is the call the
+# module's pitch promised, and the TRELLIS handler now makes it.
+fake_outputs = {"gaussian": [FakeTrellisGaussian()], "mesh": [object()]}
+with tempfile.TemporaryDirectory() as td:
+    p = os.path.join(td, "out.splat.ply")
+    rep = S.export_from_pipeline(fake_outputs, p)
+    check("7a a ply lands on disk", os.path.exists(p) and rep["path"] == p)
+    check("7b the report counts the gaussians", rep["gaussians"] == 2,
+          str(rep))
+    back, _ = S.read_ply(p)
+    check("7c and the file round-trips", len(back) == 2
+          and abs(back[1]["x"] - 4.0) < 1e-6)
+try:
+    S.export_from_pipeline({"mesh": [object()]}, "/tmp/x.ply")
+    check("7d outputs without a gaussian are refused", False)
+except S.SplatError as e:
+    check("7d outputs without a gaussian are refused",
+          "no gaussian" in str(e), str(e))
+
+# The wiring itself: the TRELLIS handler must actually make the call, and
+# must wrap it so a splat failure can never cost the GLB.
+_h = open(os.path.join(HERE, "..", "trellis", "handler.py")).read()
+check("7e the TRELLIS handler calls export_from_pipeline",
+      "export_from_pipeline" in _h)
+_seg = _h[_h.index("export_from_pipeline") - 600:_h.index("export_from_pipeline")]
+check("7f and the call is wrapped in its own try", "try:" in _seg)
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

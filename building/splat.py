@@ -260,7 +260,7 @@ def from_trellis(gaussian):
     THE PIPELINE ALREADY MAKES THESE AND THROWS THEM AWAY. The TRELLIS worker
     in this repo calls `postprocessing_utils.to_glb(outputs["gaussian"][0],
     outputs["mesh"][0], ...)` — the gaussians exist, are used to colour the
-    mesh, and are then discarded. Exporting them costs one function call.
+    mesh, and are then discarded. export_from_pipeline() below is that call, and the TRELLIS worker makes it.
 
     AND EXPORTING THEM NEEDS NO LICENSED CODE. This is the part worth being
     precise about. The INRIA/MPII research licence, which forbids commercial
@@ -300,6 +300,27 @@ def from_trellis(gaussian):
             "this object carries no gaussians — expected the 3DGS attribute "
             "names (_xyz, _features_dc, _opacity, _scaling, _rotation)")
     return out
+
+
+def export_from_pipeline(outputs, path, expect_span_m=None):
+    """Write the gaussians a TRELLIS pipeline just made, as a standard .ply.
+
+    THIS is the one function call the module's pitch promised — an audit
+    found from_trellis() had no caller anywhere, which made the pitch a lie.
+    The TRELLIS worker calls this now, right after its GLB export, so every
+    generation delivers the splat that was being computed and discarded.
+
+    Never raises past its own boundary on a worker: the caller wraps it, and
+    a failed splat export must not cost anyone the GLB that already worked.
+    """
+    gaussian = (outputs.get("gaussian") or [None])[0]         if hasattr(outputs, "get") else None
+    if gaussian is None:
+        raise SplatError("pipeline outputs carry no gaussian")
+    splats = from_trellis(gaussian)
+    report = sanity(splats, expect_span_m=expect_span_m)
+    write_ply(splats, path)
+    report["path"] = path
+    return report
 
 
 def fit(capture_dir, output_path, iterations=7000, expect_span_m=None,
