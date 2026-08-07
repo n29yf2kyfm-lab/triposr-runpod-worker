@@ -962,5 +962,29 @@
  "dae2714a23ca4c8092a7814ff106fb41": [
   "SCRAP",
   "M6 Gran Coupe 860k f mats=7 cov=0.624 - TUNER (Eisenmann) plus a TWO-TONE recolour fault. The lower half of the body renders pale blue against a white upper across all four views, i.e. the two sit on different materials and the lower half would stay blue through every colour variant - the same defect that got the 2006 Range Rover scrapped. Signature lettering is also painted across the rear screen. bmw-m6-v1 already holds the nameplate."
+ ],
+ "8cf8a4fd976145d9b4bf4598dca45f83": [
+  "SCRAP",
+  "1502 832k f mats=9 cov=0.624 - REDUNDANT body. Clean period 02-series with chrome bumpers, steel wheels and hubcaps, but it is the same shell as the 2002ti kept earlier in this wave and the library does not need two 02s. A UK 1502 lookup is vanishingly rare. French plate 1712 JM 83 sits in the standard position. Coverage 0.624 is also past the clean ceiling."
+ ],
+ "7ed02d51c8154b49ae83705c039c6fd8": [
+  "SCRAP",
+  "M440i xDrive Gran Coupe G26 2022 824k f mats=4 cov=0.464 - REDUNDANT. bmw-m440i-gran-coupe-2022-bm1-v1 is already live, published from batch one of this wave, and is the same car and year. Clean model with a well-formed mesh kidney, but nothing added."
+ ],
+ "d8da3f08082041189e9bb4def22acfc8": [
+  "SCRAP",
+  "NOT A CAR - this is the BMW R18, a MOTORCYCLE. All four views show a cruiser bike: boxer twin, spoked wheels, handlebars, saddle, no bodywork. 23 body materials is the tell. No car lookup can ever resolve to it."
+ ],
+ "087efd9833714af2a68561bde9181985": [
+  "SCRAP",
+  "3 Series F30 796k f mats=5 cov=0.516 - WHEELS DETACHED. All four arches are empty with bare hubs, and the wheels sit as loose objects below and outside the car in every view - the front34 shows the body floating above a wheel resting on the floor. Not a complete car."
+ ],
+ "8b1d7338d2614ef1a8ae509421a2cb65": [
+  "SCRAP",
+  "3 Series F30 UK-Spec 777k f mats=6 cov=0.158 - WHEELS DETACHED, same failure as H016. Empty arches with the wheels sitting outside the body in all four views. Genuinely frustrating: a UK-spec F30 saloon would have been a real gap, since the library covers F30 only as an estate (bmw-3-series-2014-w12-v1) and its saloons are G20. WORTH RE-SOURCING."
+ ],
+ "bc35d532c60e4f5bace73a8932fa8fb6": [
+  "SCRAP",
+  "M3 E46 757k f mats=5 cov=0.753 - REDUNDANT. bmw-m3-e46-v1 already holds the slot. Nicely done with UK plates LA51 ABC and correct E46 detailing, but coverage 0.753 is far past the clean ceiling so the body material also carries most of the trim."
  ]
 }
