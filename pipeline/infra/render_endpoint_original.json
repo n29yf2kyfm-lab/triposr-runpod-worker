@@ -1,0 +1,9 @@
+{
+  "endpointId": "ng8oiz4p2l0xa0",
+  "name": "render-v2",
+  "recorded": "2026-08-07",
+  "reason": "Pinned to a single GPU type; when RTX 4090 capacity is exhausted no worker can allocate and every mat_audit/render job sits in queue until it times out. Widened to allow fallback GPUs. Restore this exact value to revert.",
+  "original_gpuTypeIds": ["NVIDIA GeForce RTX 4090"],
+  "original_workersMin": 0,
+  "original_workersMax": 6
+}
