@@ -1250,5 +1250,41 @@
  "52caa0c6c9b848b19dd1ae5ab3374bba": [
   "SCRAP",
   "X5 E70 UK 76k f cov=0.192 - BONNET DETACHED, floating as a white slab above the scuttle in every view; wheels missing on three corners; the shell is a green/white material patchwork with green doors against white bumpers. FLAGGING for the re-source list: E70 is the only X5 generation still missing after the E53 and G05/F95 keeps, and a UK-spec copy would complete the X5 line."
+ ],
+ "e453bdae0ee1423ea79f1322db1c7459": [
+  "SCRAP",
+  "E30 pair 73k f cov=0.332 - TWO CARS IN ONE ASSET: a white E30 and a brown E30 parked side by side in every view, with 2020/2025 floor decals baked into the scene. A recolour cannot address two vehicles. bmw-m3-e30-undated-v1 covers the shape."
+ ],
+ "7a76c50fb2964af4ab23858090bfabe3": [
+  "SCRAP",
+  "M3 E46 M2-Motoring build 72k f cov=0.380 - TUNER time-attack: enormous carbon GT wing on billboard struts, canard-studded widebody, vented carbon bonnet, splitter. Seventh modified E46 M3 of the wave; bmw-m3-e46-v1 covers the road car."
+ ],
+ "afbb5b4d6d5146e0a24726f99a8b42d2": [
+  "SCRAP",
+  "Pandem E46 M3 Duckbill 70k f cov=0.432 - TUNER: Pandem overfender widebody with exposed rivets, duckbill boot spoiler, front splitter. bmw-m3-e46-v1 covers the road car."
+ ],
+ "d8f91a3589b54389b8010a8e77c9e1af": [
+  "SCRAP",
+  "M4 MD4 Duke Dynamics 68k f cov=0.410 - TUNER: Duke Dynamics MD4 custom body conversion, twentieth M4-family scrap. bmw-m4-competition-2021-bm1-v1 holds the slot."
+ ],
+ "785e6ad50fae4df5a4abb6a39fcc6fcc": [
+  "SCRAP",
+  "M5 F90 2018 67k f cov=0.399 - REDUNDANT. Clean stock pre-LCI F90, but bmw-m5-f90-undated-v1 holds the slot and this is the fifth F90 judged. Nothing added."
+ ],
+ "cde5e07d821449e7b34e5d6184f2b96d": [
+  "SCRAP",
+  "M5 F90 2017 63k f cov=0.386 - REDUNDANT, sixth and final F90 of the wave, same ground as P059. Clean but nothing added."
+ ],
+ "9cba50132a864bd79bfab48bd631574d": [
+  "KEEP",
+  "X6 M F86 2016 62k f mats=4 cov=0.398 - GENERATION SLOT, verified against the live catalogue: bmw-x6-m-2022-bm1-v1 carries yearStart 2022, so a 2015-2019 F86 X6 M decode hard-rejects it on year and currently resolves to nothing; bmw-x6-2020-v1 is the base car at 2020. Quality holds: proportions read as an F86 instantly; front 3/4 strong; kidney slats and headlight internals defined; M gills, quad exhausts and diffuser crisp; black double-spoke alloys with blue calipers consistent across all four views; cov 0.398 inside the clean band. Lowest-geometry keep of the wave at 62k f - the surface carries it; flagging that for the recolour stamp check. Year 2016 per source title."
+ ],
+ "a5db477efd2046b3924533fcdb260d57": [
+  "SCRAP",
+  "X6M F86 62k f - cross-author RE-UPLOAD of P061 (61,519 vs 61,521 faces, identical cov 0.398 and mats 4, indistinguishable views). The slot goes to the copy titled with its year."
+ ],
+ "3f6f75266eb84c0b8385bada90be3770": [
+  "SCRAP",
+  "X6M F86 62k f - third copy of the same asset (61,519 faces, identical stats). Same ground as P062."
  ]
 }
