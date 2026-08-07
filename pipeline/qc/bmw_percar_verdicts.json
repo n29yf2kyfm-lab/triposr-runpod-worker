@@ -1430,5 +1430,41 @@
  "8b9767e0d4e94b82b87a0aaab2e3f1ec": [
   "SCRAP",
   "Vision EfficientDynamics 392k f mats=14 cov=0.888 - CONCEPT (the 2009 i8 precursor show car), fifth concept of the wave and the highest coverage judged. Untitled beyond BMW."
+ ],
+ "2a9a46b0d2a34dd4947be27ce6c98d3d": [
+  "KEEP",
+  "M5 G99 Touring 2025 391k f mats=4 cov=0.525 - THE RE-SOURCE LIST ITEM, found stock and clean: the current-generation M5 estate flagged as a genuine gap when the drag-built copy was scrapped. No M5 estate of any generation exists in the library, and bodyStyle estate on model m5 resolves to nothing today. Proportions read as a G99 instantly; split headlights with internal elements; illuminated-style kidney; flush handles; M badging, quad exhausts and diffuser crisp; black double-spoke alloys consistent across all four views. CAVEAT RECORDED HONESTLY: coverage 0.525 sits above the 0.45 clean-split ceiling, so this keep is CONDITIONAL on the recolour-audit stamp - the diffuser, wheels and glass are visibly separate materials, but if the render-verified stamp shows body colour spilling onto trim, quarantine it rather than ship. Year 2025 per source title."
+ ],
+ "7c2f50314164408a86c958077a644143": [
+  "SCRAP",
+  "M5 G90 389k f cov=0.538 - REDUNDANT; bmw-m5-2024-bm2-v1 holds the G90 slot, published this session. Third G90 scrap."
+ ],
+ "c884666736f049c296044992107e12a7": [
+  "SCRAP",
+  "i8 383k f mats=21 cov=0.889 - out-of-band with 21 body materials; i8 coupe slot held by the 913k keep."
+ ],
+ "9dc9e5c88bec4faa94552fdd0b76ed21": [
+  "SCRAP",
+  "M5 G90 378k f cov=0.836 - fourth G90 copy, out-of-band. Slot held."
+ ],
+ "e387957d1a624ba684e821d02f5364fc": [
+  "SCRAP",
+  "320i saloon 378k f cov=0.766 - titled G30 320i which mixes the 5 Series chassis code with a 3 Series badge; render is a current 3 Series saloon. bmw-3-series-2021-w12-v1 and bmw-320i-2023-v1 hold the slot; out-of-band besides."
+ ],
+ "e2a4d608b2034e639c7eb6a2ef8dbfa1": [
+  "SCRAP",
+  "M3 Competition Touring G81 362k f cov=0.572 - fourth G81/CS Touring copy of the wave; the estate slot is held by bmw-m3-2023-w12-v1. Out-of-band."
+ ],
+ "19189c85e6534beba67b2ab559b7836d": [
+  "SCRAP",
+  "M3 Evolution II 1988 360k f cov=0.872 - the E30 homologation special, but at 0.872 coverage the body material carries nearly everything including the deep front valance and sill kit. bmw-m3-e30-undated-v1 holds the E30 M3 slot with a paintable copy. LEXYC3D watermark plates baked front and rear."
+ ],
+ "381d36aaa42e4a3a88502971f385334f": [
+  "SCRAP",
+  "M1 1979 355k f cov=0.658 - REDUNDANT; road M1 slot held by bmw-m1-bm1-v1 at 914k f. Out-of-band."
+ ],
+ "44cfe57bf05f44ec907951a4b0976398": [
+  "SCRAP",
+  "Z4 E86 Coupe 2006 348k f cov=0.815 - titled E85 but the fixed roof makes it the E86; bmw-z4-2008-v1 holds the Z4 Coupe slot. Out-of-band."
  ]
 }
