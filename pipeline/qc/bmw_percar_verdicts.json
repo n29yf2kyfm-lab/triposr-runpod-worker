@@ -938,5 +938,29 @@
  "79fb934cd6a54b74a46ac83ec5967fc2": [
   "KEEP",
   "i8 Coupe 913k f mats=3 cov=0.255 - the stock i8 coupe I said should be re-sourced when I scrapped the AC Schnitzer tuner (3f8495ff63dc4b52a1fc709b915703e1) earlier in this wave. The library has bmw-i8-roadster-2019-bm1-v1, a convertible, and no coupe, so this is a real bodyStyle gap the resolver can match on. Flagged only on material COUNT - its coverage 0.255 sits inside the clean 0.05-0.45 band, so paint lands correctly. Proportions read as an i8 instantly; front 3/4 strong; the floating rear buttresses, black aero fins and butterfly-door cut lines are all crisp; headlights carry internal LED structure; multi-spoke black alloys consistent across all four views; clean premium gloss. Highest-geometry keep of the wave after the E92 M3."
+ ],
+ "6fccb332e7ee48fd95647d8f60000bd8": [
+  "SCRAP",
+  "2002 Turbo 910k f mats=12 cov=0.564 - BAKED LIVERY plus redundancy. The M-stripe side flash, turbo lettering on the front spoiler and a www.configcars.com watermark across the rear valance are all painted into the body texture and would survive every colour variant. The 02-series slot is held by the 2002ti kept earlier in this wave."
+ ],
+ "b8550af3f009454daba4add75f4e5ef4": [
+  "SCRAP",
+  "507 894k f mats=3 cov=0.524 - SCENE FURNITURE baked in: the car sits on a circular display plinth that is part of the GLB, visible under it in three of the four views, and an ART EXPOSIUM board is modelled onto the rear plate. Genuinely handsome model otherwise. FLAGGING AS A REAL GAP TO RE-SOURCE: the library has no 507 and nothing else from the 1950s, so a clean copy would be worth having - same call I made on the AC Schnitzer i8, which paid off when the stock i8 coupe turned up in this pool."
+ ],
+ "e7ec00b1dbe54901a5fc07801667897b": [
+  "SCRAP",
+  "M4 G82 Competition 868k f mats=12 cov=0.654 - REDUNDANT, twelfth M4 of the wave. bmw-m4-competition-2021-bm1-v1 holds the slot. The side glass also carries triangulated faceted artefacts visible in all four views."
+ ],
+ "8a3a63aac6fc4ce3a1bceab3191337ef": [
+  "KEEP",
+  "M2 G87 868k f mats=3 cov=0.159 - GENERATION GAP. The library ships bmw-m2-v1, the 2019 F87, and has nothing from the G87 that replaced it, so a current M2 lookup resolves to the previous car. Titled RR Edition but the render is essentially stock: only a modest boot-lip spoiler, no widebody, no aero, no sponsor decals. Proportions read as a G87 instantly; front 3/4 strong; the squared-off kidney grille, split headlight signature with internal LED elements, carbon roof panel and quad exhausts all crisp; black multi-spoke alloys with red calipers consistent across all four views; shut lines defined. Coverage 0.159 sits inside the clean band so paint lands correctly - flagged on material count alone. German plate M-PP 1282 sits in the standard position that add_plates.py covers."
+ ],
+ "37376995fead4e64bdf79ae991e356c6": [
+  "SCRAP",
+  "7 Series widebody 863k f mats=7 cov=0.404 - BAKED SPONSOR LIVERY. Full Red Bull wrap painted into the body texture on both flanks, the bonnet and the roof, plus SPEEDHUNTERS lettering across the screen banner. Also a widebody drift build: enormous swan-neck wing, bolt-on arches with exposed hardware, roof vent louvres, deep splitter. Nothing here survives a recolour."
+ ],
+ "dae2714a23ca4c8092a7814ff106fb41": [
+  "SCRAP",
+  "M6 Gran Coupe 860k f mats=7 cov=0.624 - TUNER (Eisenmann) plus a TWO-TONE recolour fault. The lower half of the body renders pale blue against a white upper across all four views, i.e. the two sit on different materials and the lower half would stay blue through every colour variant - the same defect that got the 2006 Range Rover scrapped. Signature lettering is also painted across the rear screen. bmw-m6-v1 already holds the nameplate."
  ]
 }
