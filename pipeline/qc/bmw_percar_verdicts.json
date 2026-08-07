@@ -1154,5 +1154,29 @@
  "b3fc00b3dcff4c3abdff51fbedd4d599": [
   "SCRAP",
   "M3 E92 209k f mats=7 cov=0.153 - STANCE build and redundant. Slammed with heavy negative camber, wheels tucked far inside the arches on bright ORANGE rims that sit on their own material (they would stay orange through every recolour). bmw-m3-e92-bm1-v1 holds the slot at 1.18M f."
+ ],
+ "dc7cb373178a4572a506f8d4886a5d3c": [
+  "SCRAP",
+  "7 Series G70 2022 200k f mats=3 cov=0.193 - WHEELS MISSING. Three of four arches are empty with dark blanking plates where the hubs should be, and the single remaining wheel sits detached below the sill line in two views. FLAGGING AS A GAP TO RE-SOURCE: the library's only 7 Series is the ageing bmw-7-series-v1, and the current G70 generation would be a genuine slot if a complete copy turns up."
+ ],
+ "2b5ff0e9a4224a28aaee666f71d5425a": [
+  "SCRAP",
+  "M4 F82 Razor 180k f mats=10 cov=0.354 - sixteenth M4 of the wave. A game-mod (Razor) restyle rather than a stock F82. bmw-m4-competition-2021-bm1-v1 holds the slot."
+ ],
+ "2a2646957d0b43fa89750ef6de40e01d": [
+  "SCRAP",
+  "M5 E34 173k f mats=6 cov=0.299 - the uploader's own title says it: very bad mod from good modder. Restyled bumpers and arches that no longer match a stock E34, on top of the E34 gap already flagged for re-sourcing from a clean copy. Not shippable."
+ ],
+ "ec91e167beb347b7a962fed023c2fd2d": [
+  "SCRAP",
+  "1 Series F20 167k f mats=5 cov=0.271 - MULTI-COLOUR MATERIAL PATCHWORK. The shell renders as salmon-pink panels against white bumpers and sills, with purple mirror caps, blue wheels, green badge roundels and blue exhaust tips - at least five materials carrying colour that would each fight the recolour. Front wheels are also missing with grey blanking discs in the arches. bmw-1-series-v1 holds the nameplate."
+ ],
+ "ab5cb316fba1425ab5ed38661ecb0c27": [
+  "SCRAP",
+  "M4 CS 2025 166k f mats=7 cov=0.329 - seventeenth M4. Green bonnet stripes and green fender accents are baked into the body texture and would survive every colour variant. bmw-m4-competition-2021-bm1-v1 holds the slot."
+ ],
+ "a1f2894ca5c5457fa09f13e7ad547285": [
+  "SCRAP",
+  "M5 G90 165k f mats=5 cov=0.350 - LOW-POLY FACETED SHELL with two-tone green patches. The roof and pillars read as flat angular planes with visible polygon edges; green material patches cover the bonnet, front bumper and rear deck against a white body; the tail lights float slightly off the body in the rear view. The G90 slot is already filled by bmw-m5-2024-bm2-v1, published this session at 280k f fully textured."
  ]
 }
