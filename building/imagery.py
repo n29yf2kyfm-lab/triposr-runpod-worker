@@ -155,7 +155,19 @@ def to_wall_openings(reading, facade_width):
         along = o["x0"] * facade_width
         w = (o["x1"] - o["x0"]) * facade_width
         if o["kind"] == "bay":
-            bays.append({"x": round(along, 2), "width": round(w, 2)})
+            # A bay reported on both floors is ONE two-storey bay, not two
+            # stacked bays — the 1930s semi's signature front. Merge on
+            # overlap and keep how many storeys the photo showed.
+            for b in bays:
+                if along < b["x"] + b["width"] and b["x"] < along + w:
+                    b["x"] = round(min(b["x"], along), 2)
+                    b["width"] = round(max(b["x"] + b["width"],
+                                           along + w) - b["x"], 2)
+                    b["storeys"] = max(b["storeys"], o["floor"] + 1)
+                    break
+            else:
+                bays.append({"x": round(along, 2), "width": round(w, 2),
+                             "storeys": o["floor"] + 1})
             continue
         if o["kind"] == "door":
             openings.append({"kind": "door", "along": round(along, 2),

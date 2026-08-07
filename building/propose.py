@@ -974,9 +974,13 @@ def run(spec, prog, output_dir):
         for i, b in enumerate(photo_bays[:2]):
             bw = max(1.8, min(b["width"], 4.5))
             bx = max(0.0, min(b["x"], width - bw))
+            # A bay the photo shows on both floors is built through both:
+            # full storey height per level, its cap up at the eaves.
+            n = max(1, min(int(b.get("storeys") or 1), 2))
             bay_rooms.append(model3d.Room(
-                f"bay {i}", bx, -0.9, bw, 0.9, 2.35, kind="existing",
-                storeys=1))
+                f"bay {i}", bx, -0.9, bw, 0.9,
+                storey_h if n > 1 else 2.35, kind="existing",
+                storeys=n))
 
     ext_rooms, fit = place_extension(width, depth, brief, clearances)
     rooms = house_rooms + bay_rooms + ext_rooms
