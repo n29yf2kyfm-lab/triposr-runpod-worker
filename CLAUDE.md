@@ -25,9 +25,26 @@ confirm **every** variable is present, not just that the file exists.
 
 Verify the credentials, don't assume them:
 
-- **RunPod:** `GET https://rest.runpod.io/v1/endpoints` → 200. Note that
-  `api.runpod.io/graphql` returns 403 for `myself{...}` queries with these keys,
-  so use the REST API, not GraphQL, to read or PATCH endpoint config.
+- **RunPod:** `GET https://rest.runpod.io/v1/endpoints` → 200. Use REST to read
+  or PATCH endpoint config. **CORRECTION (2026-08-07): GraphQL `myself{...}` is
+  NOT 403 — it works and returns the balance.** This note previously said it was
+  403 and to avoid GraphQL; acting on that cost ~40 minutes misdiagnosing a flat
+  balance as GPU-capacity starvation. **Check the balance FIRST whenever workers
+  will not allocate:**
+
+  ```
+  curl -X POST -H "Authorization: Bearer $RUNPOD_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"query":"query { myself { clientBalance currentSpendPerHr } }"}' \
+    https://api.runpod.io/graphql
+  ```
+
+  **Billing exhaustion looks exactly like capacity starvation:** submits return
+  200, jobs sit in `inQueue`, and `workers` stays all-zero forever. The tell that
+  it is billing and not GPU supply is an endpoint with `workersMin=1` holding
+  ZERO workers (trellis2-v2 did), and a negative `clientBalance`. An endpoint
+  that still shows a worker was allocated before the balance went under and is
+  draining the remainder — it does not prove the account is funded.
 - **Supabase:** `SB_KEY` is a `sb_secret_…` key, not a JWT, and storage
   **requires the `apikey:` header as well as `Authorization: Bearer`**. With
   `Authorization` alone it returns `403 Invalid Compact JWS`, which looks exactly
