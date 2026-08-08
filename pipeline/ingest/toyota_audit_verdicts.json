@@ -330,6 +330,18 @@
    "name": "2007 Toyota Camry",
    "verdict": "PASS",
    "note": "XV40 Camry -- a different generation from #43 (XV20), so it adds coverage. Multi-spoke wheels consistent in all four views, grille slats crisp, headlight internals present, shut lines defined"
+  },
+  "58": {
+   "uid": "b8eec127f2ce497fb819da51ba72dee2",
+   "name": "2022 Toyota Land Cruiser",
+   "verdict": "PASS",
+   "note": "LC300 Land Cruiser; wheels consistent in all four views, grille slat depth crisp, headlight internals sharp, shut lines defined. Same generation as #40, which is marginally the better of the two. MRC 1920 plate wants blanking"
+  },
+  "60": {
+   "uid": "0b20ef50634b4961812805da3e50c867",
+   "name": "Toyota Avensis MK10 (E140,E150) 2006-2013",
+   "verdict": "FAIL",
+   "note": "two faults -- body panels detached and floating free of the car with wheels reduced to stubs, AND it is mislabelled: the boot badge reads COROLLA and E140/E150 are Corolla codes, but the title says Avensis. The nameplate filter trusted the title, so a title-derived plate can simply be wrong"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
