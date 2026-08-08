@@ -13,7 +13,30 @@ is lost.
 | 5 | SEAT | swept + rendered 2026-08-08 — 415 swept, filtered to 42, **40 sheets** in `audit/seat`, 24 clean / 16 suspect. **Awaiting the owner's eye review.** |
 | 6 | MINI | swept + rendered 2026-08-08 — 432 swept, filtered to 50, **48 sheets** in `audit/mini`, 9 clean / 39 suspect. **Awaiting the owner's eye review.** |
 | 7 | Kia | swept + rendered 2026-08-08 — 287 swept, 81 candidates, **70 sheets** in `audit/kia`, 18 clean / 52 suspect. **Awaiting the owner's eye review.** |
-| 8 | — | next marque not yet set |
+| 8 | Toyota | IN PROGRESS 2026-08-08 — 672 swept, filtered to 373 UK nameplates, capped to 168, rendering to `audit/toyota` |
+| 9 | — | next marque not yet set |
+
+## Toyota: a big marque needs a cap, not just a filter (2026-08-08)
+
+Toyota is not a homonym, so the nameplate filter had little to remove on that
+score — but the sweep still returned **672** candidates and rendering them all
+would have been roughly 2,700 GPU views against an $8.70 balance.
+
+Two cuts, in order:
+
+1. **UK nameplates only.** 277 rows carried no UK-market Toyota name at all:
+   Century, Crown, Tundra, Tacoma, 4Runner, Sienna, Venza, Alphard, Harrier,
+   Kijang Innova, Mega Cruiser, Dyna. None can be reached by a UK registration.
+   672 -> 373.
+2. **Cap 12 per nameplate, highest face count first.** The pool was
+   grotesquely lopsided — 91 Supras, 46 Land Cruisers, 39 Corollas, 38 Hiluxes,
+   36 Hiaces — all nameplates already live, while the actual gaps (Aygo 2,
+   Verso 2, MR2 4, Celica 7, Starlet 1, Carina 1, Corona 1, iQ 1, Mirai 1)
+   were single figures. The cap keeps every gap whole and trims only the
+   well-covered. 373 -> 168.
+
+Everything in the pool is already inside the serving face band, so "highest
+face count first" selects for detail rather than for a browser problem.
 
 ## MINI: generic nameplates, and a marque no nameplate can recover (2026-08-08)
 
