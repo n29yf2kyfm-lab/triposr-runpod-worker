@@ -171070,5 +171070,929 @@
    "method": "render",
    "at": "2026-08-08"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-xj-1994-ib1-v1",
+  "make": "jaguar",
+  "model": "xj",
+  "modelFamily": "jaguar xj",
+  "modelAliases": [
+   "xj"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1994,
+  "yearEnd": 1997,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "edf47a66f69bbe3a",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "unverified",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint"
+  ],
+  "glassMaterialNames": [
+   "Glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj-1994-ib1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj-1994-ib1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 19493476,
+  "mobileFileSizeBytes": 19493476,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "943b19668406725ba3306d99624a4c613df2697c9b072bd0352bde14aa62f0d1",
+  "pipelineVersion": "publish-batch-ib1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ib1 gated publish 2026-08-08: licence recorded as 'unverified' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ib1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-xj-2003-ib1-v1",
+  "make": "jaguar",
+  "model": "xj",
+  "modelFamily": "jaguar xj",
+  "modelAliases": [
+   "xj"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2003,
+  "yearEnd": 2009,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "d790a5ad024d6aef",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "unverified",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint"
+  ],
+  "glassMaterialNames": [
+   "Window",
+   "WindowDark",
+   "Lens"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj-2003-ib1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj-2003-ib1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 8362652,
+  "mobileFileSizeBytes": 8362652,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "99b77f8725632a0d893c77b57c8a658a5137c9e4dd98579977a3b2365b13d968",
+  "pipelineVersion": "publish-batch-ib1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ib1 gated publish 2026-08-08: licence recorded as 'unverified' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ib1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-xkr-2009-ib1-v1",
+  "make": "jaguar",
+  "model": "xkr",
+  "modelFamily": "jaguar xkr",
+  "modelAliases": [
+   "xkr"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2009,
+  "yearEnd": 2014,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "cf1428175cbdd041",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "unverified",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "CarPaint",
+   "chassis"
+  ],
+  "glassMaterialNames": [
+   "glass",
+   "glass_surr",
+   "light_glass",
+   "red_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xkr-2009-ib1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xkr-2009-ib1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 5360380,
+  "mobileFileSizeBytes": 5360380,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "553f1cdc69e45f639631a4db730171c5d3c7d67f31a749b086c919940473f34b",
+  "pipelineVersion": "publish-batch-ib1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ib1 gated publish 2026-08-08: licence recorded as 'unverified' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ib1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-xj220-1992-ib1-v1",
+  "make": "jaguar",
+  "model": "xj220",
+  "modelFamily": "jaguar xj220",
+  "modelAliases": [
+   "xj220"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1992,
+  "yearEnd": 1994,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "48ee8889ff5c4a5c",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "unverified",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Color_2",
+   "XJ220MI_1256010001_002",
+   "XJ220MI_Engine1",
+   "XJ220MI_Engine_Tinfoil_A1",
+   "XJ220MI_Exhaust1",
+   "XJ220MI_Rim1",
+   "phong1"
+  ],
+  "glassMaterialNames": [
+   "XJ220MI_Glass1",
+   "XJ220MI_Glass_Light1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj220-1992-ib1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj220-1992-ib1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 20500868,
+  "mobileFileSizeBytes": 20500868,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "5f96796a8e0154cb0e90a576d36f1d1d38e70cb98ed745541cb5f3a71dfb731c",
+  "pipelineVersion": "publish-batch-ib1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ib1 gated publish 2026-08-08: licence recorded as 'unverified' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ib1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "audi-quattro-1980-ib1-v1",
+  "make": "audi",
+  "model": "quattro",
+  "modelFamily": "audi quattro",
+  "modelAliases": [
+   "quattro"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1980,
+  "yearEnd": 1991,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "80d991619044705c",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "unverified",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Vehicle_Exterior_mm_cab",
+   "Vehicle_Exterior_mm_chassis",
+   "Vehicle_Exterior_mm_ext",
+   "Vehicle_Exterior_mm_misc"
+  ],
+  "glassMaterialNames": [
+   "Vehicle_Exterior_mm_windows"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-quattro-1980-ib1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-quattro-1980-ib1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3180404,
+  "mobileFileSizeBytes": 3180404,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "30be274ad0fbc677da7d7b82bd6bb316492c5fd1d21682af35d08d36c12badac",
+  "pipelineVersion": "publish-batch-ib1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ib1 gated publish 2026-08-08: licence recorded as 'unverified' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ib1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Nardo Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Nardo Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Daytona Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Daytona Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Mythos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mythos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Glacier White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Navarra Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Navarra Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Ascari Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ascari Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Progressive Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Progressive Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volkswagen-golf-gti-1976-ib1-v1",
+  "make": "volkswagen",
+  "model": "golf gti",
+  "modelFamily": "volkswagen golf gti",
+  "modelAliases": [
+   "golf gti"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1976,
+  "yearEnd": 1983,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "cfb5a58f16255a05",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "unverified",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "vM_CarPaint_Max1",
+   "vM_Chassis_Max1"
+  ],
+  "glassMaterialNames": [
+   "vM_Glass_WindowFront_Low1",
+   "vM_LightGlassNormal_OuterOrange_Low1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-gti-1976-ib1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-gti-1976-ib1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3838096,
+  "mobileFileSizeBytes": 3838096,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "56c66d47066b65c71f338580aae2e8db3e34cf1410cfcf6b36103218b63b7f3a",
+  "pipelineVersion": "publish-batch-ib1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "ib1 gated publish 2026-08-08: licence recorded as 'unverified' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-ib1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Uranium Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Uranium Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Dolphin Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dolphin Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Moonstone Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Moonstone Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Deep Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Deep Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Candy White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Candy White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Reflex Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Reflex Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Atlantic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Atlantic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lapiz Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lapiz Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Kings Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Kings Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Tornado Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Tornado Red",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]

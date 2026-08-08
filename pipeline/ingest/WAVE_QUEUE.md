@@ -9,7 +9,8 @@ is lost.
 | 1 | Range Rover | done — 4 sourced, 1 scrapped on owner review, 3 live |
 | 2 | Audi | done — 1,055 swept, 129 judged, 20 live |
 | 3 | BMW | review done — 902 swept, 206 eye-reviewed, 26 keeps (13 live, 13 pending publish) |
-| 4 | **Skoda** | **next** (owner instruction 2026-08-06) |
+| 4 | Skoda | IN PROGRESS 2026-08-08 — 58 candidates swept, sheets rendering to `audit/skoda` |
+| 5 | **SEAT** | **next** (owner instruction 2026-08-08) |
 
 ## Carried over into the Skoda wave
 
