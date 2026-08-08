@@ -66,6 +66,12 @@ NOT_UK = {
 DEFECT = {
     "kia#18":   "no wheels at all — every arch is an empty void in all four views",
     "kia#14":   "grey untextured patches across front wing, rear quarter and sills in every view",
+    # Owner call 2026-08-08, and correcting my own note: I had recorded this one
+    # as "headlights with internal elements", which is simply not what the sheet
+    # shows.
+    "kia#8":    "lights are not there — the headlight units are body-white blanks with "
+                "only a faint outline crease, no lens and no internals, and the tail "
+                "lamp housings are body-coloured recesses with no red lens at all",
     "mini#24":  "wheel arch extensions render as a mottled grey camouflage patch",
     "seat#4":   "modified — aftermarket orange wheels a recolour cannot touch; headlights have no internals",
     "kia#6":    "wheels are near-featureless discs with no spoke definition",
@@ -88,7 +94,7 @@ DEFECT = {
 # clean list while the library already served a Clubman, two Countrymen, a
 # Convertible, a Cooper S Convertible and a Hatch covering the same years. A
 # table you maintain by eye is a table that goes stale the moment a wave lands.
-def collisions(plan, live):
+def collisions(plan, live, own_uid=None):
     """Live entries the planned entry would compete with.
 
     Competing means: same make, a shared model token, overlapping year ranges,
@@ -103,6 +109,11 @@ def collisions(plan, live):
     """
     out = []
     for x in live:
+        # A published entry is in the catalogue by its own source uid. Without
+        # this the audit reports every car it just shipped as colliding with
+        # itself, and the clean list empties out the moment you publish it.
+        if own_uid and x.get("sourceReferenceId") == own_uid:
+            continue
         if x.get("make") != plan["make"]:
             continue
         if not (_toks(x.get("model")) & _toks(plan["model"])):
@@ -198,7 +209,7 @@ def load():
     return keeps
 
 
-def audit(keeps, coll=None):
+def audit(keeps, coll=None, shipped_uids=frozenset()):
     """Each car gets a verdict and the reasons behind it."""
     coll = coll or {}
     dup_drop = {}
@@ -228,6 +239,9 @@ def audit(keeps, coll=None):
         for a, mdl, ys, ye, bs in coll.get(t, []):
             flags.append(("collides", f"{a} ({mdl} {ys or '?'}-{ye or ''} [{bs}])"))
             if verdict == "SHIP": verdict = "REVIEW"
+        if k["uid"] in shipped_uids:
+            verdict = "PUBLISHED"
+            flags.append(("live", "already published and serving"))
         state, why = recolour(k)
         if state != "ok":
             flags.append(("recolour " + state, why))
@@ -245,8 +259,9 @@ def main():
         plan.update(json.load(open(PLAN_FILE)))
     live = [x for x in json.loads(urllib.request.urlopen(CAT, timeout=60).read())
             if x.get("publicationStatus") != "quarantined"]
-    coll = {t: collisions(p, live) for t, p in plan.items()
+    coll = {t: collisions(p, live, keeps[t]["uid"]) for t, p in plan.items()
             if t in keeps and p.get("model")}
+    shipped = {x.get("sourceReferenceId") for x in live}
 
     # Entries in this batch also compete with EACH OTHER. Checking only against
     # the live catalogue misses that: two B8 Superbs and two 5F Leons were both
@@ -269,14 +284,14 @@ def main():
                                            q.get("year_end"), qb or "-"))
             coll.setdefault(u, []).append((t, "same batch", p.get("year_start"),
                                            p.get("year_end"), pb or "-"))
-    res = audit(keeps, coll)
-    order = {"DROP": 0, "REVIEW": 1, "SHIP": 2}
+    res = audit(keeps, coll, shipped)
+    order = {"DROP": 0, "REVIEW": 1, "SHIP": 2, "PUBLISHED": 3}
     tally = {}
     for t, r in sorted(res.items(), key=lambda kv: (order[kv[1]["verdict"]], kv[0])):
         tally[r["verdict"]] = tally.get(r["verdict"], 0) + 1
     print(f"{len(keeps)} keeps audited — "
           + ", ".join(f"{v} {k}" for k, v in sorted(tally.items(), key=lambda kv: order[kv[0]])))
-    for want in ("DROP", "REVIEW", "SHIP"):
+    for want in ("DROP", "REVIEW", "SHIP", "PUBLISHED"):
         rows = [(t, r) for t, r in res.items() if r["verdict"] == want]
         print(f"\n{'='*74}\n{want} — {len(rows)}\n{'='*74}")
         for t, r in sorted(rows):
