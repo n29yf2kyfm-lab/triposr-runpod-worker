@@ -13,7 +13,7 @@ is lost.
 | 5 | SEAT | swept + rendered 2026-08-08 — 415 swept, filtered to 42, **40 sheets** in `audit/seat`, 24 clean / 16 suspect. **Awaiting the owner's eye review.** |
 | 6 | MINI | swept + rendered 2026-08-08 — 432 swept, filtered to 50, **48 sheets** in `audit/mini`, 9 clean / 39 suspect. **Awaiting the owner's eye review.** |
 | 7 | Kia | swept + rendered 2026-08-08 — 287 swept, 81 candidates, **70 sheets** in `audit/kia`, 18 clean / 52 suspect. **Awaiting the owner's eye review.** |
-| 8 | Toyota | IN PROGRESS 2026-08-08 — 672 swept, filtered to 373 UK nameplates, capped to 168, rendering to `audit/toyota` |
+| 8 | Toyota | swept + rendered 2026-08-08 — 672 swept, 373 UK nameplates, capped to 168, **158 sheets** in `audit/toyota`, 67 clean / 91 suspect. **Awaiting the owner's eye review.** |
 | 9 | — | next marque not yet set |
 
 ## Toyota: a big marque needs a cap, not just a filter (2026-08-08)
@@ -37,6 +37,15 @@ Two cuts, in order:
 
 Everything in the pool is already inside the serving face band, so "highest
 face count first" selects for detail rather than for a browser problem.
+
+**Outcome:** 158 of 168 rendered; the 10 that did not are all oversized past
+`gpu_wave`'s 48 MB ceiling. Split 67 clean / 91 suspect.
+
+**The review page had to be split in two.** 158 sheets at a legible quality is
+~25 MB of base64 and the artifact ceiling is 16 MB. Dropping the JPEG quality
+far enough to fit one page destroys exactly what the review is looking for --
+grille depth, headlight internals, shut lines. Two pages at full width beat one
+page nobody can judge from. Any wave over ~110 sheets needs the same treatment.
 
 ## MINI: generic nameplates, and a marque no nameplate can recover (2026-08-08)
 
