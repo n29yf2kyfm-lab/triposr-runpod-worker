@@ -282,6 +282,18 @@
    "name": "Toyota Corolla",
    "verdict": "PASS",
    "note": "E140 Corolla saloon at 1.09M faces; multi-spoke wheels consistent in all four views, grille slats crisp, headlight internals present, shut lines defined. Same generation and body as #32 (444k faces) -- this is the higher-resolution of the two"
+  },
+  "50": {
+   "uid": "d893bada37ae4ef0a81e176c87923263",
+   "name": "Toyota Celica (Mk1) (TA22) 1600 GT Coupe 1973",
+   "verdict": "FAIL",
+   "note": "UPSIDE DOWN in all four views -- the second one in this set after #34. Two in 61 makes the unwired geom_audit orientation gate a systematic leak, not a one-off"
+  },
+  "51": {
+   "uid": "751c7d18c05946d18ba7953dc046dec6",
+   "name": "2020 Toyota Proace Verso City",
+   "verdict": "PASS",
+   "note": "Proace City Verso; multi-spoke wheels consistent in all four views, headlight internals present, shut lines defined, clean reflections. UK-market model. Plate reads MRC 1920 and wants blanking via remove_plates.py"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
