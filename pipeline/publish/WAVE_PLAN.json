@@ -1,0 +1,202 @@
+{
+ "skoda#2": {
+  "make": "skoda",
+  "model": "superb",
+  "year_start": 2020,
+  "year_end": null,
+  "body_style": "",
+  "trim": "TSI 380"
+ },
+ "skoda#4": {
+  "make": "skoda",
+  "model": "octavia",
+  "year_start": 2009,
+  "year_end": null,
+  "body_style": "estate",
+  "trim": "Combi"
+ },
+ "skoda#7": {
+  "make": "skoda",
+  "model": "octavia",
+  "year_start": 2014,
+  "year_end": null,
+  "body_style": "",
+  "trim": "RS"
+ },
+ "skoda#11": {
+  "make": "skoda",
+  "model": "octavia",
+  "year_start": 2005,
+  "year_end": null,
+  "body_style": "",
+  "trim": ""
+ },
+ "skoda#15": {
+  "make": "skoda",
+  "model": "superb",
+  "year_start": 2017,
+  "year_end": null,
+  "body_style": "",
+  "trim": ""
+ },
+ "seat#2": {
+  "make": "seat",
+  "model": "ibiza",
+  "year_start": 2002,
+  "year_end": 2008,
+  "body_style": "hatchback",
+  "trim": "Cupra"
+ },
+ "seat#6": {
+  "make": "seat",
+  "model": "leon",
+  "year_start": 2013,
+  "year_end": 2016,
+  "body_style": "hatchback",
+  "trim": "SC"
+ },
+ "seat#7": {
+  "make": "seat",
+  "model": "leon",
+  "year_start": 2012,
+  "year_end": 2016,
+  "body_style": "hatchback",
+  "trim": ""
+ },
+ "seat#9": {
+  "make": "seat",
+  "model": "leon",
+  "year_start": 2019,
+  "year_end": null,
+  "body_style": "estate",
+  "trim": "ST"
+ },
+ "seat#13": {
+  "make": "seat",
+  "model": "exeo",
+  "year_start": 2009,
+  "year_end": 2011,
+  "body_style": "saloon",
+  "trim": ""
+ },
+ "seat#14": {
+  "make": "seat",
+  "model": "exeo",
+  "year_start": 2009,
+  "year_end": 2011,
+  "body_style": "estate",
+  "trim": "ST"
+ },
+ "seat#16": {
+  "make": "seat",
+  "model": "toledo",
+  "year_start": 1999,
+  "year_end": 2004,
+  "body_style": "saloon",
+  "trim": ""
+ },
+ "seat#18": {
+  "make": "seat",
+  "model": "toledo",
+  "year_start": 2004,
+  "year_end": 2009,
+  "body_style": "",
+  "trim": ""
+ },
+ "seat#19": {
+  "make": "seat",
+  "model": "alhambra",
+  "year_start": 2010,
+  "year_end": 2015,
+  "body_style": "mpv",
+  "trim": ""
+ },
+ "seat#20": {
+  "make": "seat",
+  "model": "leon",
+  "year_start": 2018,
+  "year_end": null,
+  "body_style": "hatchback",
+  "trim": "Cupra R"
+ },
+ "seat#21": {
+  "make": "seat",
+  "model": "alhambra",
+  "year_start": 2015,
+  "year_end": 2022,
+  "body_style": "mpv",
+  "trim": ""
+ },
+ "mini#5": {
+  "make": "mini",
+  "model": "cooper",
+  "year_start": 2011,
+  "year_end": null,
+  "body_style": "hatchback",
+  "trim": "John Cooper Works"
+ },
+ "mini#6": {
+  "make": "mini",
+  "model": "clubman",
+  "year_start": 2011,
+  "year_end": null,
+  "body_style": "estate",
+  "trim": "John Cooper Works"
+ },
+ "mini#8": {
+  "make": "mini",
+  "model": "countryman",
+  "year_start": 2017,
+  "year_end": null,
+  "body_style": "suv",
+  "trim": "John Cooper Works"
+ },
+ "mini#13": {
+  "make": "mini",
+  "model": "paceman",
+  "year_start": 2014,
+  "year_end": null,
+  "body_style": "coupe",
+  "trim": "Cooper ALL4"
+ },
+ "mini#15": {
+  "make": "mini",
+  "model": "cooper",
+  "year_start": 2020,
+  "year_end": null,
+  "body_style": "hatchback",
+  "trim": "John Cooper Works"
+ },
+ "mini#16": {
+  "make": "mini",
+  "model": "cooper",
+  "year_start": null,
+  "year_end": null,
+  "body_style": "convertible",
+  "trim": "John Cooper Works"
+ },
+ "mini#17": {
+  "make": "mini",
+  "model": "cooper",
+  "year_start": 2022,
+  "year_end": null,
+  "body_style": "hatchback",
+  "trim": "S"
+ },
+ "kia#8": {
+  "make": "kia",
+  "model": "picanto",
+  "year_start": 2020,
+  "year_end": null,
+  "body_style": "hatchback",
+  "trim": ""
+ },
+ "kia#24": {
+  "make": "kia",
+  "model": "picanto",
+  "year_start": 2024,
+  "year_end": null,
+  "body_style": "hatchback",
+  "trim": "GT-Line"
+ }
+}

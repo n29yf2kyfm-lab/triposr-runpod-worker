@@ -172440,5 +172440,960 @@
    "method": "render",
    "at": "2026-08-08"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "seat-exeo-2009-st1-v1",
+  "make": "seat",
+  "model": "exeo",
+  "modelFamily": "seat exeo",
+  "modelAliases": [
+   "exeo"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2009,
+  "yearEnd": 2011,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "0dc3767a30a04e4289db3a25765916bc",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-exeo-2009-st1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-exeo-2009-st1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 17666308,
+  "mobileFileSizeBytes": 17666308,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f06da1151e1ff85158f699b63369888716e65260ce8de7837db2813b873d33a4",
+  "pipelineVersion": "publish-batch-st1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "st1 gated publish 2026-08-08: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-st1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Tech Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Tech Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nevada White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nevada White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacial White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacial White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Desire Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desire Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "seat-exeo-2009-st1-v2",
+  "make": "seat",
+  "model": "exeo",
+  "modelFamily": "seat exeo",
+  "modelAliases": [
+   "exeo"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2009,
+  "yearEnd": 2011,
+  "bodyStyle": "estate",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "ST"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "a510cd5c400c4b8bb8acaa885e3ae1de",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-exeo-2009-st1-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-exeo-2009-st1-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 15473556,
+  "mobileFileSizeBytes": 15473556,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "dc2080fff4d7b12efe8a1bd3daa9b0f495e63d161b5c525787ca803b73467844",
+  "pipelineVersion": "publish-batch-st1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "st1 gated publish 2026-08-08: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-st1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Tech Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Tech Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nevada White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nevada White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacial White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacial White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Desire Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desire Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "seat-toledo-1999-st1-v1",
+  "make": "seat",
+  "model": "toledo",
+  "modelFamily": "seat toledo",
+  "modelAliases": [
+   "toledo"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1999,
+  "yearEnd": 2004,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "6105cb509559467f9d4068447c44b650",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "darkglass",
+   "redglass",
+   "clearglass",
+   "matteglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-toledo-1999-st1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-toledo-1999-st1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 13417904,
+  "mobileFileSizeBytes": 13417904,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "1077b8719c6f4575413dc7a08399d28ef062d142720b209d07eaf0ac63af9be2",
+  "pipelineVersion": "publish-batch-st1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "st1 gated publish 2026-08-08: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-st1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Tech Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Tech Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nevada White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nevada White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacial White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacial White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Desire Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desire Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "seat-toledo-2004-st1-v1",
+  "make": "seat",
+  "model": "toledo",
+  "modelFamily": "seat toledo",
+  "modelAliases": [
+   "toledo"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2004,
+  "yearEnd": 2009,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "fcb5b025fd684177a174cc2cc75743c9",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "glass",
+   "r_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-toledo-2004-st1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-toledo-2004-st1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 7352268,
+  "mobileFileSizeBytes": 7352268,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "4c36d74aa9df4105ce89dc9021eb00099660b0bc090b7a5848df162f15c39d69",
+  "pipelineVersion": "publish-batch-st1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "st1 gated publish 2026-08-08: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-st1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Tech Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Tech Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nevada White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nevada White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacial White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacial White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Desire Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desire Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "seat-alhambra-2010-st1-v1",
+  "make": "seat",
+  "model": "alhambra",
+  "modelFamily": "seat alhambra",
+  "modelAliases": [
+   "alhambra"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2010,
+  "yearEnd": 2015,
+  "bodyStyle": "mpv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "274ee5765ebf4823be5482b305a42c40",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "glass",
+   "r_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-alhambra-2010-st1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-alhambra-2010-st1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 22889724,
+  "mobileFileSizeBytes": 22889724,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "8447d9468f5d25d86bc9b26000f26e14e75a77f23a18d324e959c191df119d6d",
+  "pipelineVersion": "publish-batch-st1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "st1 gated publish 2026-08-08: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-st1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Tech Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Tech Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nevada White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nevada White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacial White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacial White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Desire Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desire Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "seat-alhambra-2015-st1-v1",
+  "make": "seat",
+  "model": "alhambra",
+  "modelFamily": "seat alhambra",
+  "modelAliases": [
+   "alhambra"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2015,
+  "yearEnd": 2022,
+  "bodyStyle": "mpv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "781e4af2de7943c38c2ad3cbe7faa2ae",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "r_glass",
+   "glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-alhambra-2015-st1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-alhambra-2015-st1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 33683368,
+  "mobileFileSizeBytes": 33683368,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "cb6468f03295adfc22e59452d77b8886aef540e16d145c2e3c254b1aeb0d69c6",
+  "pipelineVersion": "publish-batch-st1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "st1 gated publish 2026-08-08: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-st1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Tech Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Tech Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nevada White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nevada White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacial White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacial White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Desire Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desire Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mini-paceman-2014-mn1-v1",
+  "make": "mini",
+  "model": "paceman",
+  "modelFamily": "mini paceman",
+  "modelAliases": [
+   "paceman"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2014,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Cooper ALL4"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "aa4ed8cfca544bd891d03171bd577dfc",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body",
+   "body_black",
+   "body_white"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "glass",
+   "r_glass",
+   "o_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-paceman-2014-mn1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-paceman-2014-mn1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 27051544,
+  "mobileFileSizeBytes": 27051544,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "8d7944925bdb4a5d1490b25778ddd5071fab7cbbe8dcc24c08c15a9e51545bdb",
+  "pipelineVersion": "publish-batch-mn1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "mn1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-mn1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Rooftop Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Rooftop Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Melting Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Melting Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nanuq White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nanuq White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Rebel Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Rebel Green",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Chili Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Chili Red",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]

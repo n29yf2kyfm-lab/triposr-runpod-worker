@@ -73,40 +73,108 @@ DEFECT = {
     "skoda#18": "headlights are blank pale voids, rear cluster is a flat magenta blob",
     "skoda#19": "headlights and tail lights featureless, no shut lines, 93k faces",
     "skoda#25": "headlight and tail-light units are blank body panels; faceted surfacing",
+    # Mis-keyed as skoda#22 in the first run of this audit, which is a scrapped
+    # Octavia scene. The finding is the SEAT Alhambra 7M and it reached the clean
+    # list because of it. Keys here are marque-scoped for exactly this reason.
+    "seat#22":  "tail clusters are flat red rectangles with no internal structure; "
+                "rear plate recess is a bare grey slab",
     "skoda#37": "slammed to the floor with the wheels tucked into the arches",
     "skoda#38": "same slammed mesh as #37",
 }
 
-# Live entry this car would compete with: same make + model + overlapping years
-# + same body style is a straight collision in the resolver.
-COLLIDES = {
-    "skoda#17": "skoda-karoq-2020-v1 (Karoq, 2020, suv)",
-    "skoda#43": "skoda-karoq-2020-v1 (Karoq, 2020, suv)",
-    "skoda#25": "skoda-enyaq-v1 (Enyaq, 2021-2026, suv)",
-    "skoda#37": "skoda-kamiq-v1 (2019-2026) and skoda-kamiq-2020-w12-v1",
-    "skoda#38": "skoda-kamiq-v1 (2019-2026) and skoda-kamiq-2020-w12-v1",
-    "skoda#34": "skoda-kodiaq-2022-v1 and skoda-kodiaq-2020-w12-v1",
-    "skoda#26": "skoda-kamiq-v1 (2019-2026, suv)",
-    "skoda#27": "skoda-kamiq-v1 (2019-2026, suv)",
-    "seat#12":  "seat-ateca-2020-v1 (Ateca, 2020, suv)",
-    "seat#15":  "seat-ibiza-mk2-v1 (Ibiza, 1993-2002, hatchback)",
-    "kia#20":   "kia-sportage-2023-v1 (Sportage, 2023-2026, suv)",
-    "kia#21":   "kia-sportage-2023-v1 (Sportage, 2023-2026, suv)",
-    "kia#26":   "kia-sportage-2023-v1 (Sportage, 2023-2026, suv)",
-    "kia#7":    "kia-sportage-2012-v1 (2016-2026) and kia-sportage-2011-w6-v1",
-    "kia#16":   "kia-rio-v1 (Rio, 2021-2026, hatchback)",
-    "kia#15":   "kia-rio-v1 (Rio, 2021-2026, hatchback)",
-    "kia#3":    "kia-stonic-v1 (Stonic, 2017-2026, suv)",
-    "kia#23":   "kia-stonic-v1 (Stonic, 2017-2026, suv)",
-    "kia#6":    "kia-stinger-v1 (Stinger, 2017-2023, saloon)",
-    "kia#19":   "kia-sorento-v1 (Sorento, 2020-2026, suv)",
-    "kia#29":   "kia-carnival-2022-w6-v1 (Carnival, 2022)",
-    "kia#49":   "kia-soul-2020-v1 (Soul, 2020, suv) — different generation, check the year range",
-    "skoda#13": "the other B8 Superbs in this same wave (#3, #15)",
-    "skoda#3":  "the other B8 Superbs in this same wave (#13, #15)",
-    "mini#3":   "mini#9, the other 1960s classic Mini in this wave",
-    "mini#9":   "mini#3, the other 1960s classic Mini in this wave",
+# Collisions are COMPUTED against the live catalogue, not listed by hand. The
+# hand-written table this replaced was built marque by marque from the live
+# listing and silently omitted MINI entirely, so seven MINI keeps reached the
+# clean list while the library already served a Clubman, two Countrymen, a
+# Convertible, a Cooper S Convertible and a Hatch covering the same years. A
+# table you maintain by eye is a table that goes stale the moment a wave lands.
+def collisions(plan, live):
+    """Live entries the planned entry would compete with.
+
+    Competing means: same make, a shared model token, overlapping year ranges,
+    and a body style that either matches or is blank on one side. A blank counts
+    because the resolver only hard-rejects on a body-style *conflict* — blank
+    versus set is not a conflict, so both entries stay in the running and score
+    against each other.
+
+    Open-ended ranges are treated as open. Most live entries carry a yearStart
+    and no yearEnd, so they extend to the present and overlap almost anything
+    later; that is real, not an artefact.
+    """
+    out = []
+    for x in live:
+        if x.get("make") != plan["make"]:
+            continue
+        if not (_toks(x.get("model")) & _toks(plan["model"])):
+            continue
+        if not _overlap(plan.get("year_start"), plan.get("year_end"),
+                        x.get("yearStart"), x.get("yearEnd")):
+            continue
+        xb = (x.get("bodyStyle") or "").lower()
+        pb = (plan.get("body_style") or "").lower()
+        if xb and pb and xb != pb:
+            continue                      # genuine conflict: resolver rejects, no contest
+        out.append((x["assetId"], x.get("model"), x.get("yearStart"),
+                    x.get("yearEnd"), xb or "-"))
+    return out
+
+
+def _toks(s):
+    import re as _re
+    return set(_re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).split())
+
+
+def _overlap(a1, a2, b1, b2):
+    """True when two year ranges genuinely compete.
+
+    A single shared year is NOT a collision. Consecutive generations meet at the
+    changeover year by definition -- a Toledo 1999-2004 and a Toledo 2004-2009
+    touch at 2004 and are still two different cars -- and counting that as a
+    clash flagged almost every legitimate pair in the batch. Two or more shared
+    years means they really are covering the same period.
+    """
+    a1, a2 = a1 or 1900, a2 or 2100
+    b1, b2 = b1 or 1900, b2 or 2100
+    return min(a2, b2) - max(a1, b1) >= 1
+
+
+
+
+PLAN_FILE = os.path.join(REPO, "pipeline", "publish", "WAVE_PLAN.json")
+
+# Nameplates per marque, longest first so "leon st" beats "leon". Used only to
+# read a model out of the SOURCE TITLE -- never to assert anything the title does
+# not say (accuracy rule).
+NAMEPLATES = {
+ "skoda": ["octavia", "superb", "fabia", "kamiq", "karoq", "kodiaq", "enyaq",
+           "scala", "rapid", "roomster", "citigo", "yeti", "felicia", "favorit"],
+ "seat":  ["alhambra", "formentor", "tarraco", "toledo", "cordoba", "marbella",
+           "arona", "ateca", "ibiza", "altea", "exeo", "leon", "arosa", "inca",
+           "mii", "cupra"],
+ "mini":  ["countryman", "clubman", "paceman", "aceman", "cooper", "moke", "mini"],
+ "kia":   ["sportage", "sorento", "picanto", "carnival", "stinger", "stonic",
+           "venga", "carens", "optima", "cee d", "ceed", "niro", "soul", "rio",
+           "k5", "k8", "ev6", "ev9", "ev3"],
 }
+BODY = [("combi", "estate"), ("wagon", "estate"), (" sw", "estate"),
+        ("estate", "estate"), (" st ", "estate"), ("cabrio", "convertible"),
+        ("convertible", "convertible"), ("roadster", "convertible"),
+        ("coupe", "coupe"), ("sedan", "saloon"), ("saloon", "saloon"),
+        ("hatchback", "hatchback"), ("spaceback", "hatchback")]
+
+
+def plan_from_title(k):
+    """Model, years and body read off the source title and nothing else."""
+    import re as _re
+    t = " " + (k["name"] or "").lower() + " "
+    model = next((n for n in NAMEPLATES.get(k["marque"], [])
+                  if _re.search(r"\b" + _re.escape(n) + r"\b", t)), "")
+    yrs = [int(y) for y in _re.findall(r"\b(19[5-9]\d|20[0-4]\d)\b", t)]
+    ys = min(yrs) if yrs else None
+    ye = max(yrs) if len(yrs) > 1 else None
+    body = next((b for kw, b in BODY if kw in t), "")
+    return {"make": k["marque"], "model": model, "year_start": ys,
+            "year_end": ye, "body_style": body, "trim": ""}
 
 
 def recolour(k):
@@ -130,8 +198,9 @@ def load():
     return keeps
 
 
-def audit(keeps):
+def audit(keeps, coll=None):
     """Each car gets a verdict and the reasons behind it."""
+    coll = coll or {}
     dup_drop = {}
     for grp, why in DUPLICATE:
         present = [t for t in grp if t in keeps]
@@ -156,8 +225,8 @@ def audit(keeps):
         if t in DEFECT:
             flags.append(("defect", DEFECT[t]))
             verdict = "DROP" if verdict == "SHIP" else verdict
-        if t in COLLIDES:
-            flags.append(("collides", COLLIDES[t]))
+        for a, mdl, ys, ye, bs in coll.get(t, []):
+            flags.append(("collides", f"{a} ({mdl} {ys or '?'}-{ye or ''} [{bs}])"))
             if verdict == "SHIP": verdict = "REVIEW"
         state, why = recolour(k)
         if state != "ok":
@@ -169,7 +238,38 @@ def audit(keeps):
 
 def main():
     keeps = load()
-    res = audit(keeps)
+    # Derived for every keep, then overridden by the hand-curated plan where one
+    # exists -- so a car nobody has planned yet is still collision-checked.
+    plan = {t: plan_from_title(k) for t, k in keeps.items()}
+    if os.path.exists(PLAN_FILE):
+        plan.update(json.load(open(PLAN_FILE)))
+    live = [x for x in json.loads(urllib.request.urlopen(CAT, timeout=60).read())
+            if x.get("publicationStatus") != "quarantined"]
+    coll = {t: collisions(p, live) for t, p in plan.items()
+            if t in keeps and p.get("model")}
+
+    # Entries in this batch also compete with EACH OTHER. Checking only against
+    # the live catalogue misses that: two B8 Superbs and two 5F Leons were both
+    # about to ship as "clean" while colliding head-on with their own batch mate.
+    for t, p in plan.items():
+        if t not in keeps or not p.get("model"):
+            continue
+        for u, q in plan.items():
+            if u <= t or u not in keeps or not q.get("model"):
+                continue
+            if p["make"] != q["make"] or not (_toks(p["model"]) & _toks(q["model"])):
+                continue
+            if not _overlap(p.get("year_start"), p.get("year_end"),
+                            q.get("year_start"), q.get("year_end")):
+                continue
+            pb, qb = (p.get("body_style") or "").lower(), (q.get("body_style") or "").lower()
+            if pb and qb and pb != qb:
+                continue
+            coll.setdefault(t, []).append((u, "same batch", q.get("year_start"),
+                                           q.get("year_end"), qb or "-"))
+            coll.setdefault(u, []).append((t, "same batch", p.get("year_start"),
+                                           p.get("year_end"), pb or "-"))
+    res = audit(keeps, coll)
     order = {"DROP": 0, "REVIEW": 1, "SHIP": 2}
     tally = {}
     for t, r in sorted(res.items(), key=lambda kv: (order[kv[1]["verdict"]], kv[0])):
