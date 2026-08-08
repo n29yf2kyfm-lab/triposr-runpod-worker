@@ -1,0 +1,39 @@
+{
+ "_doc": "Per-car audit of the 48 kept Toyota SUSPECTS (owner scrapped 43 of 91). Suspect = the material classifier could not find one clean body paint. Verdicts here carry TWO axes, because they are independent: geometry quality, and whether the car can recolour at all. A car can be visually excellent and still be unable to serve 8 DVLA colours -- which is most of Tier B's value.",
+ "_verdicts": {
+  "PASS": "good geometry AND recolourable",
+  "PASS-SINGLE": "good geometry but cannot recolour as detected -- ships single-neutral in its source colour unless the body material is identified by hand",
+  "FAIL": "geometry below bar / broken / out of scope",
+  "DUPLICATE": "same mesh as another entry"
+ },
+ "verdicts": {
+  "1": {
+   "uid": "b0e5c550295342a4a07d80699b3404a9",
+   "name": "2007 Toyota Yaris",
+   "mats": 0,
+   "verdict": "FAIL",
+   "note": "tyres missing from all four corners with bare hubs exposed, one wheel detached and floating beneath the car. Body itself is clean but the wheels are gone"
+  },
+  "2": {
+   "uid": "91d1e1d8e6914417b613e3b743abe1fe",
+   "name": "2010 Toyota Land Cruiser",
+   "mats": 0,
+   "verdict": "PASS-SINGLE",
+   "note": "geometry is genuinely good -- J200 proportions right, black alloys consistent in all four views, grille crisp, headlight internals present, shut lines defined. BUT mats=0/cov=0.000: the classifier found no body paint, the forced silver never applied, and it renders its own white. Ships single-neutral, or recolours only if the body material is identified by hand. HUMSTER3D plate"
+  },
+  "3": {
+   "uid": "21b2d277397049879e2756b63199ded8",
+   "name": "Toyota Auris wagon",
+   "mats": 0,
+   "verdict": "PASS-SINGLE",
+   "note": "Auris Touring Sports; proportions right, multi-spoke wheels consistent, shut lines defined, headlight internals present. mats=0 so the forced silver never applied and it renders its own gloss black. FLAG: bonnet and flanks show visible panel ripple -- gloss black exaggerates this, so worth a second look before it ships. Finnish plate FMR-757"
+  },
+  "4": {
+   "uid": "adcf7d9439e64d54bc7850f541488928",
+   "name": "Toyota Avensis Estate MK2 2003-2009",
+   "mats": 0,
+   "verdict": "FAIL",
+   "note": "body renders TRANSPARENT -- the panels carry a glass/transmissive material and you can see straight through the car. That is why mats=0 found no paint: there is none to find. Unusable as-is"
+  }
+ }
+}
