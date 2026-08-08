@@ -1,0 +1,162 @@
+{
+ "ca42d185d4174d59bdf269c7af3b58f3": [
+  "SCRAP",
+  "Inca — the wheels are featureless flat grey discs with no spokes and no tyre, the body is an untextured chrome-grey with melted panel surfacing, the headlights have no internals and there are no shut lines anywhere. Nothing here is close to the bar."
+ ],
+ "b04f24acc233404c8b1a9877904a7d74": [
+  "KEEP",
+  "Ibiza MK3 Cupra (6L) — proportions read instantly as the 6L three-door. Multi-spoke alloys consistent across all four views, defined door and bonnet shut lines, rear diffuser and twin exhaust modelled, clean reflections. Fills a real gap: the library jumps from the Mk2 (1993-2002) straight to nothing. Note for publish: it sits slightly lowered, and the headlight internals are present but softer than the best in this wave."
+ ],
+ "37234bead1db4783a4c436c779abbc88": [
+  "SCRAP",
+  "Leon MK2 — not a single-car asset. The GLB is a workspace: both bumpers detached and lying on the floor beside the car, spare bucket seats scattered around it, wheels floating clear of the arches, and a stray cyan panel hanging above. One of the four the diacritic fix recovered, and it turns out to be junk regardless — the fix was still right, this car just was not worth having."
+ ],
+ "1c0e03b333b744fe839664ea25469a3c": [
+  "KEEP",
+  "OWNER 2026-08-08: not named in the owner's scrap list, so kept under the rule the owner set on the Skoda wave — named is scrapped, everything else is a keep. -> Leon MK1 — a modified car, as its own title admits. Bright orange aftermarket steel-look wheels that a recolour cannot touch, so any customer's Leon would ship wearing them. Headlights are dark voids with no internals and the front bumper and grille are simplified."
+ ],
+ "fd911c9497264f4983b1237c5ff5c5a1": [
+  "SCRAP",
+  "Arona 2017 — the model is rotated onto its nose, so the pipeline frames it standing on end in every view, and the wheels are detached and floating besides. The library already serves seat-arona-2022-v1, so it is not worth chasing the transform."
+ ],
+ "23451aa4b51643f5a16b60142ca1bab9": [
+  "KEEP",
+  "Leon SC (5F) 2013-2016 — the strongest so far. Reads instantly as the Mk3 three-door: honeycomb grille with real depth, angular headlight internals carrying the FR light signature, twin exhausts, multi-spoke alloys consistent across all four views, defined shut lines, clean reflections on a premium finish. Real gap, only the 2022 Leon is live."
+ ],
+ "c55c4e71eba548989ceeb2713b842f8b": [
+  "KEEP",
+  "Leon 5F five-door 2012-2016 — reads instantly as the Mk3. Honeycomb grille with depth, headlights with angular internal structure, multi-spoke alloys consistent across all four views, defined shut lines, clean reflections. This is the volume UK Leon of its generation, so it is the one a lookup is most likely to want."
+ ],
+ "db2739136a3040e8b888ef2568daf16f": [
+  "KEEP",
+  "OWNER 2026-08-08: not named in the owner's scrap list, so kept under the rule the owner set on the Skoda wave — named is scrapped, everything else is a keep. -> Duplicate — the same Leon 5F five-door mesh from the same uploader (1,011,104 f vs 1,011,370 f), just staged at a different angle."
+ ],
+ "beac05d369eb4ea0a27a238e4e481690": [
+  "KEEP",
+  "Leon ST 2019 (estate) — reads instantly. Honeycomb grille, headlights with the LED signature and sharp internals, multi-spoke alloys with red calipers consistent across all four views, roof rails modelled, defined shut lines, clean reflections. Distinct body style and a genuine gap: no SEAT estate is live."
+ ],
+ "5de2b3264f9d45c6a10219f930bfc5d4": [
+  "SCRAP",
+  "Ibiza Cupra 6L — same generation as the Ibiza MK3 Cupra already kept and clearly the weaker of the two: half the face count, flatter wheel spokes, softer headlight lenses, and the door mirrors sit detached inside the cabin in the side and rear three-quarter views."
+ ],
+ "9192eb32bbf9468fad06ac222f6ae61a": [
+  "SCRAP",
+  "Ibiza MK3 Cupra 2006 — broken rig. Three of the four wheels are missing entirely, leaving black voids where the arches should be, and the one remaining wheel is a pale untextured disc."
+ ],
+ "24615e5bc5204ae99279d9fddfb4579c": [
+  "KEEP",
+  "OWNER 2026-08-08: not named in the owner's scrap list, so kept under the rule the owner set on the Skoda wave — named is scrapped, everything else is a keep. -> Ateca Cupra 2019 — genuinely good: diamond-mesh grille with depth, sharp internal LED elements, dark multi-spoke alloys consistent across all four views, quad exhausts, defined shut lines. Scrapped only for redundancy, seat-ateca-2020-v1 of the same generation is already live. Worth overturning if you would rather have this mesh than the incumbent."
+ ],
+ "0dc3767a30a04e4289db3a25765916bc": [
+  "KEEP",
+  "Exeo (3R) saloon 2009-2011 — reads as an Exeo. Vertical grille slats with chrome frame, headlights with internal structure, multi-spoke alloys consistent across all four views, tail clusters with red internal segments, defined shut lines, clean reflections. Genuine gap: no Exeo of any kind is live."
+ ],
+ "a510cd5c400c4b8bb8acaa885e3ae1de": [
+  "KEEP",
+  "Exeo ST (3R) estate 2009-2011 — same family done to the same standard, with roof rails modelled and five-spoke alloys consistent across all four views. Distinct body style from the saloon, so both resolve rather than compete."
+ ],
+ "b8edb5428dc84e5fa227316cee12d306": [
+  "KEEP",
+  "OWNER 2026-08-08: not named in the owner's scrap list, so kept under the rule the owner set on the Skoda wave — named is scrapped, everything else is a keep. -> Ibiza Mk2 facelift 3-door 1999 — a clean model with consistent alloys and defined shut lines, but seat-ibiza-mk2-v1 already covers 1993-2002. Redundant rather than defective; overturn it if you would rather have this mesh than the incumbent."
+ ],
+ "6105cb509559467f9d4068447c44b650": [
+  "KEEP",
+  "Toledo Mk2 (1M) 1999-2004 — reads instantly as the Toledo saloon. Grille slats with depth, headlights with internal structure, five-spoke alloys consistent across all four views, the full-width rear cluster modelled, defined shut lines, clean reflections. Genuine gap: no Toledo is live."
+ ],
+ "cd7a7dc0125c4d1b84744808728dd202": [
+  "SCRAP",
+  "Ibiza MK2 Facelift — the front bumper is a shattered mess of broken polygons, the rear bumper is a flat black slab, the headlights are blank white voids and the tail lights are black rectangles. Body panels are visibly faceted and the car is slammed to the floor."
+ ],
+ "fcb5b025fd684177a174cc2cc75743c9": [
+  "KEEP",
+  "Toledo 5P 2004-2009 — the tall-tailed Toledo, a distinct generation and body style from the Mk2 saloon. Grille slats present, headlights carry an internal element, five-spoke alloys consistent across all four views, shut lines defined. Softer at the front end than the Mk2 and the flank undulates a little in the side view, so it is the weaker of the two Toledos, but it clears the bar."
+ ],
+ "274ee5765ebf4823be5482b305a42c40": [
+  "KEEP",
+  "Alhambra 7N 2010-2015 — reads instantly as the MPV. Grille slats with depth, headlights with internal structure, five-spoke alloys consistent across all four views, sliding-door handles and roof rails modelled, defined shut lines, clean reflections. Genuine gap: no Alhambra and no MPV body style is live."
+ ],
+ "d69b3a5823ce476f9baf60d760c9a6a7": [
+  "KEEP",
+  "Leon Cupra R 2018 (5F facelift) — the sharpest car in the wave so far. Honeycomb grille with real depth, headlights with crisp internal LED structure, multi-spoke alloys with red calipers consistent across all four views, quad exhausts, defined shut lines, deep clean reflections. Distinct year range from the 2012-2016 Leon kept above, so both resolve."
+ ],
+ "781e4af2de7943c38c2ad3cbe7faa2ae": [
+  "KEEP",
+  "Alhambra 7N 2015-2022 (facelift) — same standard as the pre-facelift and higher poly. Different front end and a different year range, so it complements rather than competes with the 2010-2015 car."
+ ],
+ "84760bbdd8394d00808821bbc3ee98a1": [
+  "KEEP",
+  "OWNER 2026-08-08: not named in the owner's scrap list, so kept under the rule the owner set on the Skoda wave — named is scrapped, everything else is a keep. -> Alhambra 7M 2000-2010 — the rear lets it down badly: the tail clusters are flat red rectangles with no internal structure at all and the rear plate recess is a bare grey slab. The front is better, but the two later Alhambras cover the nameplate properly."
+ ],
+ "9142860554c0423284930cff3231b74d": [
+  "SCRAP",
+  "Leon MK2 — broken rig. All four wheels are detached and floating clear of the arches with the brake discs exposed, and the car rests on nothing in every view."
+ ],
+ "f6ee13885f2d461d84b9a17a2f36bb47": [
+  "SCRAP",
+  "Leon MK1 — the model is lying on its side, so the pipeline frames it belly-on in the three-quarter views with the floorpan, subframes and exhaust filling the shot. No usable view of the car in any of the four angles."
+ ],
+ "52f9feaf70b44950b5120c659477d4b1": [
+  "SCRAP",
+  "OWNER 2026-08-08: named to scrap in the owner's review of the 40-sheet page. "
+ ],
+ "305895fe4ee349a1923e8fccb3e363a4": [
+  "KEEP",
+  "OWNER 2026-08-08: not named in the owner's scrap list, so kept under the rule the owner set on the Skoda wave — named is scrapped, everything else is a keep. -> Ibiza ST 2012 (estate) — clean model, reads instantly, alloys consistent across all four views, defined shut lines, clean reflections. Body share is 0.000 with no material the audit could class as body, so it ships without recolour unless that is fixed first."
+ ],
+ "b50448284f7b4011b7385bb6b2bca43e": [
+  "SCRAP",
+  "OWNER 2026-08-08: named to scrap in the owner's review of the 40-sheet page. "
+ ],
+ "6649fc9cc7ce45d28e50f1ba4b778997": [
+  "SCRAP",
+  "OWNER 2026-08-08: named to scrap in the owner's review of the 40-sheet page. "
+ ],
+ "0d1d126963814829a7ce8ccbc6533f07": [
+  "SCRAP",
+  "OWNER 2026-08-08: named to scrap in the owner's review of the 40-sheet page. "
+ ],
+ "256cddf2f9ee472ba6a16099e3483af3": [
+  "SCRAP",
+  "OWNER 2026-08-08: named to scrap in the owner's review of the 40-sheet page. "
+ ],
+ "b741074c1b3844e18faf103d5ce7e90d": [
+  "SCRAP",
+  "OWNER 2026-08-08: named to scrap in the owner's review of the 40-sheet page. "
+ ],
+ "37a903d1a5c04138af2d5aa02a3b88f2": [
+  "SCRAP",
+  "OWNER 2026-08-08: named to scrap in the owner's review of the 40-sheet page. "
+ ],
+ "5cb23e1e5a0e44e3bc3e20ad511329a0": [
+  "SCRAP",
+  "OWNER 2026-08-08: named to scrap in the owner's review of the 40-sheet page. "
+ ],
+ "4f8f0fa7c3df44418d9c918af29fc1c6": [
+  "SCRAP",
+  "OWNER 2026-08-08: named to scrap in the owner's review of the 40-sheet page. "
+ ],
+ "81af4beaa59447a2b825e966a7505247": [
+  "SCRAP",
+  "OWNER 2026-08-08: named to scrap in the owner's review of the 40-sheet page. "
+ ],
+ "fec8626c9f0847fa900edfec200d82f9": [
+  "KEEP",
+  "OWNER 2026-08-08: not named in the owner's scrap list, so kept under the rule the owner set on the Skoda wave — named is scrapped, everything else is a keep. -> Ibiza FR 2022 — sharp: honeycomb grille with depth, headlights with crisp internal elements, dark multi-spoke alloys with red calipers consistent across all four views, twin exhausts, defined shut lines. Body share 0.647 is above the 45% ceiling, so a recolour would spill onto trim."
+ ],
+ "d8183c80e1f544d3bccb5a66c379c67e": [
+  "SCRAP",
+  "OWNER 2026-08-08: named to scrap in the owner's review of the 40-sheet page. "
+ ],
+ "35de0f788aa04ce5b9ebb390781645f1": [
+  "KEEP",
+  "OWNER 2026-08-08: not named in the owner's scrap list, so kept under the rule the owner set on the Skoda wave — named is scrapped, everything else is a keep. -> Leon Cupra R 2003 (Mk1) — reads as the Mk1 Cupra R. Consistent alloys, defined shut lines, clean reflections; headlight internals are simple and the front bumper is soft. Body share 0.846 over 5 materials, so a recolour would paint well beyond the bodywork."
+ ],
+ "fe17a3210fe6412ea1f9b47b74f8d3dd": [
+  "KEEP",
+  "OWNER 2026-08-08: not named in the owner's scrap list, so kept under the rule the owner set on the Skoda wave — named is scrapped, everything else is a keep. -> Ateca 2020 — a photogrammetry scan. Cleaner than most: the body reads well and the wheels are intact. But a ragged slab of ground is baked into the mesh under the car, the capture lighting is baked into the texture so it cannot be relit, and at body share 1.000 the whole mesh is one material, so a colour swap would paint the glass, lights and wheels with it. NOTE: you scrapped the scanned Arona at #29 but not this one — likely worth the same call."
+ ],
+ "5562a2b2b46449b58c8bf8cc5bf99b9d": [
+  "SCRAP",
+  "OWNER 2026-08-08: named to scrap in the owner's review of the 40-sheet page. "
+ ]
+}
