@@ -60,6 +60,30 @@
    "name": "Toyota_gt86",
    "verdict": "FAIL",
    "note": "proportions right but below the premium bar: wheel spokes are soft low-poly blobs with no alloy definition, headlights are dark voids with no internal LED elements, grille shallow. Note this is the first-gen ZN6 GT86, a generation #7 does not cover"
+  },
+  "11": {
+   "uid": "90e9f77205014ecc8e3e08dd27dc4d52",
+   "name": "2016 Toyota Prius",
+   "verdict": "PASS",
+   "note": "reads as Gen-4 Prius instantly; 5-spoke alloys consistent across all four views; tail-light internals defined; shut lines crisp; clean reflections"
+  },
+  "15": {
+   "uid": "6412b1bba68848af88169be2c75e10a6",
+   "name": "2021 Toyota Corolla Cross",
+   "verdict": "PASS",
+   "note": "strong -- proportions right, dark multi-spoke wheels identical in all views, grille honeycomb has real depth, headlight internals sharp, premium finish"
+  },
+  "17": {
+   "uid": "34d0e2ade29f4aabacd365c33667ea54",
+   "name": "Toyota_celica_ssi",
+   "verdict": "FAIL",
+   "note": "soft 'melt' geometry -- wheels are featureless grey discs with no spokes at all, headlights are blank ovals, panel edges wavy, no shut lines. Exactly the residual miss geom_audit.py documents"
+  },
+  "18": {
+   "uid": "9f09704e33af42d29b2230e10506456a",
+   "name": "Toyota Celica (Mk3) (A60) liftback 1981",
+   "verdict": "PASS",
+   "note": "reads as A60 Celica instantly; 5-spoke wheels consistent; sharp period creases; grille slats crisp; shut lines defined. Nit: plate carries a HUM3D vendor watermark, wants blanking"
   }
  }
 }
