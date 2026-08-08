@@ -34,6 +34,28 @@
    "mats": 0,
    "verdict": "FAIL",
    "note": "body renders TRANSPARENT -- the panels carry a glass/transmissive material and you can see straight through the car. That is why mats=0 found no paint: there is none to find. Unusable as-is"
+  },
+  "5": {
+   "uid": "9a08719f57d84429adeaca991da4d561",
+   "name": "Toyota Avensis Sedan MK1 1997-2003",
+   "mats": 0,
+   "verdict": "FAIL",
+   "note": "body renders TRANSPARENT -- glass/transmissive material on the panels, same defect as #4 and #6 from the same uploader's Avensis set"
+  },
+  "6": {
+   "uid": "4485b98b8a474e869074118059ec2fa6",
+   "name": "Toyota Avensis Sedan MK2 2003-2009",
+   "mats": 0,
+   "verdict": "FAIL",
+   "note": "body renders TRANSPARENT -- same glass-material defect as #4 and #5"
+  },
+  "7": {
+   "uid": "20f0190e34da4ac4a984c7f7a757efba",
+   "name": "Toyota Avensis Sedan MK3 2009-2012",
+   "mats": 0,
+   "verdict": "PASS-SINGLE",
+   "note": "T270 Avensis, and a generation the clean set does not cover (it had T220 and T250 only). Proportions right, black multi-spoke wheels consistent in all four views, grille slats crisp, headlight internals present, shut lines defined. mats=0 so it renders its own white; recolour needs the body material identified by hand"
   }
- }
+ },
+ "_glass_set": "#4/#5/#6 are one uploader's Avensis set and all three render transparent -- the panels carry a glass material. #7 from a different source is fine. A material defect can be uploader-wide, so when one car in a titled series fails this way, check its siblings."
 }
