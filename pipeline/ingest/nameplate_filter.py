@@ -49,7 +49,7 @@ Usage:
     nameplate_filter.py --in m.json --out m.filtered.json \
         --nameplates "Ibiza,Leon,Arona,..." [--allow-uid a,b,c] [--report]
 """
-import argparse, json, re, sys
+import argparse, json, re, sys, unicodedata
 
 # Titles that carry a nameplate but are a part, a prop or an unusable scale
 # model rather than a whole car. Each of these was present in the SEAT sweep.
@@ -68,16 +68,39 @@ SCALE_WORDS = [
 
 
 def norm(s):
-    return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
+    """Lowercase, strip diacritics, reduce punctuation to spaces.
+
+    The diacritic fold is load-bearing, not cosmetic. Without it the Kia sweep's
+    "KIA Río 2018 HB" normalised to "kia r o 2018 hb" — the accented i simply
+    vanished as a non-[a-z] character — so it failed to match the nameplate "Rio"
+    and a real car would have been dropped as junk. Uploaders write Citroën,
+    Škoda, Río and Cee'd; a filter that only understands ASCII silently discards
+    exactly the rows a native speaker of the marque uploaded."""
+    s = unicodedata.normalize("NFKD", (s or "").lower())
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    return re.sub(r"[^a-z0-9]+", " ", s).strip()
 
 
 def build(nameplates):
     """Nameplate tokens as whole-word regexes, longest first so 'Leon ST'
-    is tried before 'Leon'."""
+    is tried before 'Leon'.
+
+    Build the pattern by escaping each word and joining with \\s+. The obvious
+    one-liner — `re.escape(norm(n)).replace(" ", r"\\s+")` — is silently broken:
+    `re.escape` turns the space into a backslash-space, so the replace leaves the
+    backslash behind and yields `cee\\\\s+d`, a pattern matching a literal
+    backslash. Every multi-word nameplate then matches nothing at all. That cost
+    a real car here ("Morris Mini" in the MINI sweep) and is the same failure as
+    the `\\b`-inside-a-raw-string gate recorded in CLAUDE.md: a filter nobody
+    tested against a case it must catch is a filter that does not exist."""
     pats = []
     for n in sorted({n.strip() for n in nameplates if n.strip()},
                     key=len, reverse=True):
-        pats.append((n, re.compile(r"\b" + re.escape(norm(n)).replace(" ", r"\s+") + r"\b")))
+        words = norm(n).split()
+        if not words:
+            continue
+        body = r"\s+".join(re.escape(w) for w in words)
+        pats.append((n, re.compile(r"\b" + body + r"\b")))
     return pats
 
 

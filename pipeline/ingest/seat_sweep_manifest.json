@@ -6,7 +6,7 @@
   "likes": 13,
   "licence": "CC Attribution-NonCommercial",
   "author": "BloxBloger",
-  "plate": "Leon",
+  "plate": "Leon ST",
   "anchor": 0
  },
  {
@@ -26,7 +26,7 @@
   "likes": 20,
   "licence": "CC Attribution-NonCommercial",
   "author": "BloxBloger",
-  "plate": "Cupra",
+  "plate": "Leon ST",
   "anchor": 0
  },
  {
@@ -260,6 +260,36 @@
   "anchor": 0
  },
  {
+  "uid": "9142860554c0423284930cff3231b74d",
+  "name": "SEAT Le\u00f3n MK2 2005-2012",
+  "faces": 257234,
+  "likes": 2,
+  "licence": "CC Attribution",
+  "author": "Merc_TV",
+  "plate": "Leon",
+  "anchor": 0
+ },
+ {
+  "uid": "37234bead1db4783a4c436c779abbc88",
+  "name": "Seat Le\u00f3n MK2 2005-2012",
+  "faces": 253760,
+  "likes": 2,
+  "licence": "CC Attribution",
+  "author": "Merc_TV",
+  "plate": "Leon",
+  "anchor": 0
+ },
+ {
+  "uid": "5562a2b2b46449b58c8bf8cc5bf99b9d",
+  "name": "Seat C\u00f3rdoba WRC",
+  "faces": 244587,
+  "likes": 6,
+  "licence": "CC Attribution",
+  "author": "eyesCloud3D",
+  "plate": "Cordoba",
+  "anchor": 0
+ },
+ {
   "uid": "fcb5b025fd684177a174cc2cc75743c9",
   "name": "2004 - 2009 Seat Toledo (5P)",
   "faces": 209333,
@@ -276,7 +306,7 @@
   "likes": 4,
   "licence": "CC Attribution",
   "author": "Merc_TV",
-  "plate": "Ibiza",
+  "plate": "Cupra",
   "anchor": 0
  },
  {
@@ -310,13 +340,23 @@
   "anchor": 0
  },
  {
+  "uid": "f6ee13885f2d461d84b9a17a2f36bb47",
+  "name": "SEAT Le\u00f3n MK1 1996-2006",
+  "faces": 132437,
+  "likes": 7,
+  "licence": "CC Attribution",
+  "author": "Merc_TV",
+  "plate": "Leon",
+  "anchor": 0
+ },
+ {
   "uid": "9192eb32bbf9468fad06ac222f6ae61a",
   "name": "Seat Ibiza MK3 Cupra 2006",
   "faces": 118483,
   "likes": 9,
   "licence": "CC Attribution",
   "author": "Merc_TV",
-  "plate": "Ibiza",
+  "plate": "Cupra",
   "anchor": 0
  },
  {
@@ -336,7 +376,7 @@
   "likes": 8,
   "licence": "CC Attribution",
   "author": "DR1KING100K",
-  "plate": "Ibiza",
+  "plate": "Cupra",
   "anchor": 0
  },
  {
