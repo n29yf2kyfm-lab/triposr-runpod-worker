@@ -240,6 +240,18 @@
    "name": "Toyota Camry (Mk4)(XV20) 1997",
    "verdict": "PASS",
    "note": "XV20 Camry; 6-spoke alloys consistent in all four views, panel gaps clean, headlight internals present, reflections clean. Period-simple shapes but no defects. HUMSTER3D plate wants blanking"
+  },
+  "44": {
+   "uid": "78eeb0db0dab4339b546ed504453ed3c",
+   "name": "Toyota Avensis (Mk2f)(T250) sedan",
+   "verdict": "PASS",
+   "note": "T250 Avensis; 5-spoke alloys consistent in all four views, grille slats crisp, headlight internals present, shut lines defined, clean reflections. HUMSTER3D plate wants blanking"
+  },
+  "45": {
+   "uid": "ad05a156f817451ca214d388e53052fb",
+   "name": "Toyota Avensis (Mk1)(T220) sedan",
+   "verdict": "PASS",
+   "note": "T220 Avensis -- a different generation from #44, so it adds coverage rather than repeating it. Wheels consistent, panels intact, shut lines defined. This is the clean T220; #5 was the broken one with exploded panels. HUMSTER3D plate wants blanking"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
