@@ -1,0 +1,59 @@
+{
+ "_doc": "Per-car visual audit of the Toyota clean set against the owner's rubric (CLAUDE.md 'Per-car audit rubric'). PASS = ships. Written incrementally: the container is ephemeral and an audit is expensive to redo.",
+ "verdicts": {
+  "1": {
+   "uid": "0ea0291e2df14fa5afc309578b3c5a1e",
+   "name": "2026 Toyota Prius",
+   "verdict": "FAIL",
+   "note": "wheels absent in 3 of 4 views -- empty arches front and rear; body panels ripple along the flank"
+  },
+  "4": {
+   "uid": "001674408710482b9873decb30274ac9",
+   "name": "Toyota RAV4 Adventure",
+   "verdict": "FAIL",
+   "note": "wheel style changes between views: black off-road alloys front34/side, silver alloys rear34; crease artefacts on rear quarter"
+  },
+  "5": {
+   "uid": "bb03e36096f8408386273fd4d5dacb71",
+   "name": "Toyota Avensis MK1 T22 1997-2003",
+   "verdict": "FAIL",
+   "note": "severe -- tyres missing, bare brake discs, one wheel detached and floating under the car, body panels exploded and misaligned"
+  },
+  "6": {
+   "uid": "204283fa663d4ccea7f3bdfd1ba6680e",
+   "name": "2023 Toyota GR Corolla",
+   "verdict": "PASS",
+   "note": "proportions read as GR Corolla instantly; strong front 3/4; wheels consistent across all four views; grille has real depth; shut lines defined; reflections clean"
+  },
+  "7": {
+   "uid": "0d83090a0d484d98b6749dbbf9b4a111",
+   "name": "2023 Toyota GR86",
+   "verdict": "PASS",
+   "note": "reads as GR86 instantly; strong front 3/4; identical black multi-spoke wheels in all four views; headlights have internal LED elements; shut lines crisp; clean reflections"
+  },
+  "9": {
+   "uid": "c7aad552ce6f4700b179615b2c9a346b",
+   "name": "Toyota Auris 2019",
+   "verdict": "PASS",
+   "note": "proportions right; grey multi-spoke wheels consistent across views; grille honeycomb has real depth; pillars and wheelbase consistent; premium finish"
+  },
+  "10": {
+   "uid": "e10068b2511b4ed7b724a8d87a362727",
+   "name": "Toyota bZ4X",
+   "verdict": "PASS",
+   "note": "reads as bZ4X instantly; black cladding correct; wheels identical in all four views; shut lines defined; clean reflections"
+  },
+  "3": {
+   "uid": "f49b50d1b0ea4e1995c57cbeb3b5e096",
+   "name": "Toyota_Supra_GT500_2005",
+   "verdict": "FAIL",
+   "note": "out of scope, not a quality fault -- Super GT / JGTC race car: full aero wing, slicks, roll cage, no road lighting. No UK reg decodes to this. Geometry itself is sound"
+  },
+  "13": {
+   "uid": "a9c8b71c5c5d494bb55d79a2e161119b",
+   "name": "1998 Toyota Land Cruiser",
+   "verdict": "PASS",
+   "note": "reads as J80 Land Cruiser instantly; 6-spoke alloys consistent in all four views; grille lettering crisp; shut lines defined; premium finish. Nit: number plate carries custom text, wants blanking before it ships"
+  }
+ }
+}

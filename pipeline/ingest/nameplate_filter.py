@@ -161,9 +161,17 @@ def main():
         if verdict != "keep":
             dropped.setdefault(verdict, []).append(r.get("name", ""))
             continue
-        # The same car is often uploaded twice. uid already deduped upstream;
-        # identical title AND identical face count is the same mesh re-hosted.
-        sig = (norm(r.get("name")), r.get("faces"))
+        # The same car is often uploaded twice. uid already deduped upstream.
+        #
+        # Keyed on title AND face count until 2026-08-08, which missed six pairs
+        # in 67 audited Toyotas -- "Toyota GT86 3D Model (Free)" and "Toyota gt86
+        # lowprice" are the same 1,152,416-face mesh under two titles, and a
+        # re-upload almost always gets retitled. Face count alone is the real
+        # identity: an exact match at six or seven digits is the same mesh, not a
+        # coincidence. Guarded at 50k so genuinely simple meshes, where collisions
+        # are plausible, still fall back to needing the title too.
+        f = r.get("faces") or 0
+        sig = f if f >= 50_000 else (norm(r.get("name")), f)
         if sig in seen:
             dropped.setdefault("duplicate-mesh", []).append(r.get("name", ""))
             continue
