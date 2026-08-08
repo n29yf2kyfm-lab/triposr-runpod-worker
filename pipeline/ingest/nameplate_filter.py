@@ -27,9 +27,27 @@ needs it (SEAT, Born, Smart, Lotus, Jaguar in a wildlife sense). Run it on any
 sweep where the bare-marque query returns wildly more than the nameplate
 queries — that ratio is the tell.
 
+Two rules learned on the MINI sweep, 2026-08-08
+-----------------------------------------------
+**Pass only marque-SPECIFIC nameplates.** MINI's own range includes One, Coupé,
+Convertible, Roadster, Hatch and Traveller — words so generic that feeding them
+in as nameplates would admit any other marque's convertible. The MINI sweep did
+pull in cross-marque rows ("Dodge Mini Ram Van 1984", "Geely Mini Panda",
+"Wuling Hongguang Mini EV"), so this is not hypothetical. Pass Cooper, Clubman,
+Countryman, Paceman, JCW, Moke and the like; leave the generic ones out and
+accept losing a bare-titled car rather than admitting hundreds of wrong ones.
+
+**Some marques cannot be recovered by nameplate alone.** A classic Mini is often
+titled just "Mini", and 383 of the 432 MINI candidates matched `\\bmini\\b` while
+being mini skirts, mini golf, DJI Mavic Minis and Poppy Playtime characters. A
+handful of genuine ambiguous titles ("Classic Red Mini", "Mini Coupe") are worth
+rendering anyway — rendering one sheet is seconds of GPU and the eye settles it
+instantly, where a title guess cannot. That is what `--allow-uid` is for: force
+specific rows through so the reviewer decides, instead of the filter deciding.
+
 Usage:
     nameplate_filter.py --in m.json --out m.filtered.json \
-        --nameplates "Ibiza,Leon,Arona,..." [--report]
+        --nameplates "Ibiza,Leon,Arona,..." [--allow-uid a,b,c] [--report]
 """
 import argparse, json, re, sys
 
@@ -82,17 +100,23 @@ def main():
     ap.add_argument("--in", dest="src", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--nameplates", required=True,
-                    help="comma-separated; the same list given to marque_sweep")
+                    help="marque-SPECIFIC nameplates only — see the module docstring")
+    ap.add_argument("--allow-uid", default="",
+                    help="comma-separated uids to force through regardless of title; "
+                         "for ambiguous rows a render settles faster than a guess")
     ap.add_argument("--report", action="store_true",
                     help="print every row and why it was dropped")
     a = ap.parse_args()
 
     rows = json.load(open(a.src))
     pats = build(a.nameplates.split(","))
+    allow = {u.strip() for u in a.allow_uid.split(",") if u.strip()}
 
-    kept, dropped, seen = [], {}, set()
+    kept, dropped, seen, forced = [], {}, set(), 0
     for r in rows:
         verdict, plate = classify(r.get("name", ""), pats)
+        if r.get("uid") in allow and verdict != "keep":
+            verdict, plate, forced = "keep", "(forced)", forced + 1
         if verdict != "keep":
             dropped.setdefault(verdict, []).append(r.get("name", ""))
             continue
@@ -114,6 +138,12 @@ def main():
         if a.report:
             for n in dropped[k]:
                 print(f"      {n[:78]}")
+    if forced:
+        print(f"  forced through   {forced}  (--allow-uid; rendered for the eye to settle)")
+    missing = allow - {r.get("uid") for r in kept}
+    if missing:
+        print(f"  WARNING: {len(missing)} --allow-uid not present in the input: "
+              f"{sorted(missing)[:4]}", file=sys.stderr)
     print(f"out {len(kept)}  -> {a.out}")
     if rows and len(kept) / len(rows) < 0.2:
         print("\nNOTE: under 20% survived. That is the homonym signature -- the bare\n"
