@@ -186,6 +186,24 @@
    "name": "Toyota Corolla Sedan Regular 2020",
    "verdict": "PASS",
    "note": "E210 Corolla saloon; dark multi-spoke wheels consistent in all four views, headlight LED internals sharp, grille mesh has depth, shut lines crisp, premium finish"
+  },
+  "35": {
+   "uid": "f02c802c32994b2784fa182a9ed71f84",
+   "name": "Toyota GT86",
+   "verdict": "FAIL",
+   "note": "below the premium bar -- 70k faces shows: curves facet visibly, panel edges and mirrors are simplified, headlight internals soft. Redundant anyway, #23 covers the same ZN6 generation at 1.15M faces"
+  },
+  "36": {
+   "uid": "ff144d062f244a3ebfae71bc2a41564b",
+   "name": "Toyota Highlander 2020",
+   "verdict": "PASS",
+   "note": "XU70 Highlander; 5-spoke alloys consistent in all four views, headlight LED internals sharp, grille mesh has depth, shut lines defined. ItsDiyor plate watermark wants blanking"
+  },
+  "38": {
+   "uid": "082c0ed5b88b44f2b0f556f04f8f904c",
+   "name": "Toyota RAV4 MK5 2019",
+   "verdict": "FAIL",
+   "note": "severe -- several duplicate tailgate/body panels left floating detached beside the car, wheels missing in three views, one wheel hanging below the floor. Uploader left every variant in the scene"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
