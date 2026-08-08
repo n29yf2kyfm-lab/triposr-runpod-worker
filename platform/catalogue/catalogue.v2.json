@@ -174468,6 +174468,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4568,
+   "variantsHash": "259b66c2ec855623678130f804149fd662509c31",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -174708,6 +174715,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4268,
+   "variantsHash": "afe05d6741e40b3340107a24276eaab58643ee4d",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -174948,6 +174962,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2604,
+   "variantsHash": "71d24b378450c0c080cff995cad3626902e12be2",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -175187,6 +175208,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4077,
+   "variantsHash": "86b3943be80dabace524fcd9c78332d5573d3c91",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -175427,6 +175455,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.372,
+   "variantsHash": "f3f0a421c71ff42ea42210ab93ac954fbc434ee9",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -175668,6 +175703,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2544,
+   "variantsHash": "10b6ad4a1ebdcd2d856ea2b083f448d488bf2cc7",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -175909,6 +175951,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.0038,
+   "variantsHash": "2192101bb5725052229f3b9119146a2be0544025",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -176151,6 +176200,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4003,
+   "variantsHash": "02a2c8330aeaf6a27c1570522a3b2d05d457b646",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -176392,6 +176448,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.288,
+   "variantsHash": "e588b17a9ae19570a1f9ae76913e237fa126019f",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -176634,6 +176697,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2615,
+   "variantsHash": "252116daac72dc7f0c3a8f5f9660ffa30fb0b101",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -176873,6 +176943,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3947,
+   "variantsHash": "3c9776f5c166d4013c49cf17833d6714c549b35e",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -177112,6 +177189,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3793,
+   "variantsHash": "54863a79a38180731c9c9847f14de448935da683",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -177352,6 +177436,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4396,
+   "variantsHash": "b1125fb443375ebd79ab1309e686173468a21b5e",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -177588,6 +177679,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.369,
+   "variantsHash": "2ee19dd4b061cb164f0bb7db8b5c7350f7ec40fb",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -177824,6 +177922,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3469,
+   "variantsHash": "5c888bc1471577ab908291527d74e1495d0529ce",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -178067,6 +178172,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2017,
+   "variantsHash": "e98ccf5e8ddb63596e67dd24325bc2ccb3537c5d",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -178309,6 +178421,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2409,
+   "variantsHash": "2deffb28c0ef4121b55d3e5c926968dca7567c40",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -178545,6 +178664,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3981,
+   "variantsHash": "e9a3c71c68cc02de02c9334d2d793e20a9fd9b5d",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -178786,6 +178912,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2807,
+   "variantsHash": "4f0e90e75bcf10133cf45eedd4c69c73bec54dd0",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -179027,6 +179160,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3205,
+   "variantsHash": "4194330afb1d3d81b76e311c0aecc709c094ac81",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -179268,6 +179408,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3151,
+   "variantsHash": "50527135d0f6e9c74831e531e826388120f5d4aa",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -179509,6 +179656,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.319,
+   "variantsHash": "a4dc07876b7ae522d5232043b404d71343d568c9",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -179750,6 +179904,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4286,
+   "variantsHash": "084f826289cd22948125ed37423c7d25377fe0e4",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -179990,6 +180151,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3748,
+   "variantsHash": "cb90d2faa351175dfb8edd283df6f3c106008f3e",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -180231,6 +180399,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2959,
+   "variantsHash": "e5cbe8722fa07aec741ce173d80dd68f06f6148d",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
