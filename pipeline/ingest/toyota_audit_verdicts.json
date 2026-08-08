@@ -84,6 +84,31 @@
    "name": "Toyota Celica (Mk3) (A60) liftback 1981",
    "verdict": "PASS",
    "note": "reads as A60 Celica instantly; 5-spoke wheels consistent; sharp period creases; grille slats crisp; shut lines defined. Nit: plate carries a HUM3D vendor watermark, wants blanking"
+  },
+  "2": {
+   "uid": "a193a40e720e4a0bbe5d1c897f402ac8",
+   "name": "Toyota Prius (2020) but unreasonably modded",
+   "verdict": "FAIL",
+   "note": "joke scene, not a car -- Prius body jacked up on scaffolding with an orange rig, low-poly boulders and stray Mitsubishi parts strewn around. Title says 'unreasonably modded'"
+  },
+  "16": {
+   "uid": "f08f43a71bed4fbc8562fdde6214f1c4",
+   "name": "Toyota iQ EV",
+   "verdict": "PASS",
+   "note": "reads as iQ instantly; aero-disc alloys consistent across all views; shut lines defined; headlight internals present; clean reflections"
+  },
+  "20": {
+   "uid": "980a52a5031a4b07a0f206b82ebb1275",
+   "name": "Toyota GR Supra (A90)",
+   "verdict": "PASS",
+   "note": "excellent -- reads as A90 Supra instantly; black multi-spoke wheels with red calipers identical in all four views; headlight triple-LED internals sharp; intake mesh has depth; shut lines crisp"
+  },
+  "21": {
+   "uid": "30528ef37af844919074498f979b9515",
+   "name": "Toyota Supra MK5 A90",
+   "verdict": "DUPLICATE",
+   "note": "visually identical to #20 in all four views -- same mesh re-exported, 1,820 faces apart (0.21%), under exact-match dedup. Keeping #20"
   }
- }
+ },
+ "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached"
 }
