@@ -252,6 +252,24 @@
    "name": "Toyota Avensis (Mk1)(T220) sedan",
    "verdict": "PASS",
    "note": "T220 Avensis -- a different generation from #44, so it adds coverage rather than repeating it. Wheels consistent, panels intact, shut lines defined. This is the clean T220; #5 was the broken one with exploded panels. HUMSTER3D plate wants blanking"
+  },
+  "47": {
+   "uid": "5ef3d18b151448ab831a9f6c03d89b86",
+   "name": "Toyota GR Yaris Rocket Bunny Pandem",
+   "verdict": "FAIL",
+   "note": "out of scope, not a quality fault -- Rocket Bunny / Pandem widebody kit with a huge wing. Well made, but a UK reg decodes to a stock GR Yaris, not a kit car. 'Rocket Bunny' and 'Pandem' are known kit brands a title gate could catch"
+  },
+  "49": {
+   "uid": "d6f1ad4b22214abfaea1e59f98409f57",
+   "name": "toyota supra mk4",
+   "verdict": "PASS",
+   "note": "A80 Supra; proportions right, black multi-spoke wheels consistent in all four views, shut lines defined, clean reflections. Headlight internals are soft -- but the best of the three A80s here"
+  },
+  "64": {
+   "uid": "7bb418cfb0b0415d9088bbe0e1599335",
+   "name": "Toyota Supra Mk4",
+   "verdict": "FAIL",
+   "note": "below the bar -- headlights entirely absent (smooth body where the lights should be), grille is a plain rectangle, no shut lines, body soft and melted. #49 covers A80 far better"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
