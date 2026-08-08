@@ -2126,7 +2126,9 @@
   "make": "bmw",
   "model": "M3 E30",
   "modelFamily": "M3 E30",
-  "modelAliases": [],
+  "modelAliases": [
+   "m3"
+  ],
   "generation": "e30",
   "generationAliases": [],
   "generationConfirmed": false,
@@ -2826,13 +2828,15 @@
   "make": "fiat",
   "model": "500 Classic",
   "modelFamily": "500 Classic",
-  "modelAliases": [],
+  "modelAliases": [
+   "500"
+  ],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
   "yearStart": 1957,
   "yearEnd": 1975,
-  "bodyStyle": "citycar",
+  "bodyStyle": null,
   "compatibleFuelTypes": [
    "hybrid",
    "petrol"
@@ -3288,7 +3292,7 @@
   "generationConfirmed": false,
   "yearStart": 2020,
   "yearEnd": 2026,
-  "bodyStyle": "liftback",
+  "bodyStyle": null,
   "compatibleFuelTypes": [
    "diesel",
    "hybrid",
@@ -4201,7 +4205,9 @@
   "make": "porsche",
   "model": "718-cayman",
   "modelFamily": "cayman",
-  "modelAliases": [],
+  "modelAliases": [
+   "718-cayman"
+  ],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -4655,7 +4661,9 @@
   "make": "porsche",
   "model": "918-spyder",
   "modelFamily": "918",
-  "modelAliases": [],
+  "modelAliases": [
+   "918-spyder"
+  ],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -5334,7 +5342,8 @@
   "model": "Countryman JCW",
   "modelFamily": "Countryman JCW",
   "modelAliases": [
-   "Countryman John Cooper Works"
+   "Countryman John Cooper Works",
+   "countryman"
   ],
   "generation": null,
   "generationAliases": [],
@@ -5558,7 +5567,9 @@
   "make": "audi",
   "model": "rsq3",
   "modelFamily": "q3",
-  "modelAliases": [],
+  "modelAliases": [
+   "rsq3"
+  ],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -6012,7 +6023,7 @@
   "generationConfirmed": false,
   "yearStart": 1975,
   "yearEnd": 1985,
-  "bodyStyle": "targa",
+  "bodyStyle": null,
   "compatibleFuelTypes": [
    "petrol"
   ],
@@ -7291,7 +7302,9 @@
   "make": "audi",
   "model": "A1 Quattro",
   "modelFamily": "A1 Quattro",
-  "modelAliases": [],
+  "modelAliases": [
+   "a1"
+  ],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -7965,7 +7978,9 @@
   "make": "mercedes-benz",
   "model": "C-Class W202",
   "modelFamily": "C-Class W202",
-  "modelAliases": [],
+  "modelAliases": [
+   "c-class"
+  ],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -8197,7 +8212,9 @@
   "make": "volkswagen",
   "model": "Polo GTI",
   "modelFamily": "Polo GTI",
-  "modelAliases": [],
+  "modelAliases": [
+   "polo"
+  ],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -8806,7 +8823,8 @@
   "model": "Octavia Estate",
   "modelFamily": "Octavia Estate",
   "modelAliases": [
-   "Octavia Combi"
+   "Octavia Combi",
+   "octavia"
   ],
   "generation": null,
   "generationAliases": [],
@@ -10825,7 +10843,8 @@
   "model": "Kona (2019)",
   "modelFamily": "Kona (2019)",
   "modelAliases": [
-   "Kona EV 2019"
+   "Kona EV 2019",
+   "kona"
   ],
   "generation": null,
   "generationAliases": [],
@@ -11273,7 +11292,8 @@
   "modelFamily": "4-series",
   "modelAliases": [
    "m4 competition",
-   "m4 g82"
+   "m4 g82",
+   "m4"
   ],
   "generation": null,
   "generationAliases": [],
@@ -11506,7 +11526,8 @@
   "model": "3 Series Touring",
   "modelFamily": "3 Series Touring",
   "modelAliases": [
-   "3 Series Estate"
+   "3 Series Estate",
+   "3-series"
   ],
   "generation": null,
   "generationAliases": [],
@@ -12124,7 +12145,8 @@
   "model": "Z4 Coupe (2008)",
   "modelFamily": "Z4 Coupe (2008)",
   "modelAliases": [
-   "Z4 M Coupe"
+   "Z4 M Coupe",
+   "z4"
   ],
   "generation": null,
   "generationAliases": [],
@@ -14524,7 +14546,7 @@
   "generationConfirmed": false,
   "yearStart": 2020,
   "yearEnd": 2022,
-  "bodyStyle": "liftback",
+  "bodyStyle": null,
   "compatibleFuelTypes": [
    "diesel",
    "petrol"
@@ -16738,7 +16760,9 @@
   "make": "bmw",
   "model": "M3 E46",
   "modelFamily": "M3 E46",
-  "modelAliases": [],
+  "modelAliases": [
+   "m3"
+  ],
   "generation": "E46",
   "generationAliases": [],
   "generationConfirmed": false,
@@ -21889,7 +21913,7 @@
   "generationConfirmed": false,
   "yearStart": 2022,
   "yearEnd": 2026,
-  "bodyStyle": "fastback",
+  "bodyStyle": null,
   "compatibleFuelTypes": [
    "electric"
   ],
@@ -23249,7 +23273,9 @@
   "make": "bmw",
   "model": "5 Series E60",
   "modelFamily": "5 Series E60",
-  "modelAliases": [],
+  "modelAliases": [
+   "5-series"
+  ],
   "generation": "E60",
   "generationAliases": [],
   "generationConfirmed": false,
@@ -52698,7 +52724,8 @@
   "modelFamily": "yaris cross",
   "modelAliases": [
    "yariscross",
-   "yaris cross"
+   "yaris cross",
+   "yaris"
   ],
   "generation": null,
   "generationAliases": [],
@@ -54158,7 +54185,8 @@
   "model": "F-Type Convertible",
   "modelFamily": "F-Type Convertible",
   "modelAliases": [
-   "F-Type Cabriolet"
+   "F-Type Cabriolet",
+   "f-type"
   ],
   "generation": null,
   "generationAliases": [],
@@ -58058,7 +58086,8 @@
   "model": "RS4 (2013)",
   "modelFamily": "RS4 (2013)",
   "modelAliases": [
-   "RS4 Avant 2013"
+   "RS4 Avant 2013",
+   "rs4"
   ],
   "generation": null,
   "generationAliases": [],
@@ -61218,7 +61247,8 @@
   "model": "Cayenne (2009)",
   "modelFamily": "Cayenne (2009)",
   "modelAliases": [
-   "Cayenne Turbo S 2009"
+   "Cayenne Turbo S 2009",
+   "cayenne"
   ],
   "generation": null,
   "generationAliases": [],
@@ -61467,7 +61497,8 @@
   "model": "Cayenne Coupe",
   "modelFamily": "Cayenne Coupe",
   "modelAliases": [
-   "Cayenne Turbo Coupe"
+   "Cayenne Turbo Coupe",
+   "cayenne"
   ],
   "generation": null,
   "generationAliases": [],
@@ -64645,7 +64676,9 @@
   "make": "jeep",
   "model": "Grand Cherokee MK2",
   "modelFamily": "Grand Cherokee MK2",
-  "modelAliases": [],
+  "modelAliases": [
+   "grand-cherokee"
+  ],
   "generation": null,
   "generationAliases": [],
   "generationConfirmed": false,
@@ -69263,7 +69296,7 @@
   "generationConfirmed": false,
   "yearStart": 2020,
   "yearEnd": 2026,
-  "bodyStyle": "fastback",
+  "bodyStyle": null,
   "compatibleFuelTypes": [
    "electric"
   ],
@@ -71491,7 +71524,8 @@
   "model": "Sportage (2012)",
   "modelFamily": "Sportage (2012)",
   "modelAliases": [
-   "Sportage SL"
+   "Sportage SL",
+   "sportage"
   ],
   "generation": null,
   "generationAliases": [],
@@ -90571,7 +90605,8 @@
   "model": "Audi A1",
   "modelFamily": "audi a1",
   "modelAliases": [
-   "Audi A1"
+   "Audi A1",
+   "a1"
   ],
   "generation": null,
   "generationAliases": [],
@@ -91020,7 +91055,8 @@
   "model": "Audi Q3",
   "modelFamily": "audi q3",
   "modelAliases": [
-   "Audi Q3"
+   "Audi Q3",
+   "q3"
   ],
   "generation": null,
   "generationAliases": [],
@@ -91469,7 +91505,8 @@
   "model": "Citroen C3",
   "modelFamily": "citroen c3",
   "modelAliases": [
-   "Citroen C3"
+   "Citroen C3",
+   "c3"
   ],
   "generation": null,
   "generationAliases": [],
@@ -92353,7 +92390,8 @@
   "model": "Dacia Logan",
   "modelFamily": "dacia logan",
   "modelAliases": [
-   "Dacia Logan"
+   "Dacia Logan",
+   "logan"
   ],
   "generation": null,
   "generationAliases": [],
@@ -92728,7 +92766,8 @@
   "model": "Ford EcoSport",
   "modelFamily": "ford ecosport",
   "modelAliases": [
-   "Ford EcoSport"
+   "Ford EcoSport",
+   "ecosport"
   ],
   "generation": null,
   "generationAliases": [],
@@ -92969,7 +93008,9 @@
   "model": "Ford Ka Sedan",
   "modelFamily": "ford ka sedan",
   "modelAliases": [
-   "Ford Ka Sedan"
+   "Ford Ka Sedan",
+   "ka-sedan",
+   "ka"
   ],
   "generation": null,
   "generationAliases": [],
@@ -93640,7 +93681,8 @@
   "model": "Honda Accord",
   "modelFamily": "honda accord",
   "modelAliases": [
-   "Honda Accord"
+   "Honda Accord",
+   "accord"
   ],
   "generation": null,
   "generationAliases": [],
@@ -93860,7 +93902,8 @@
   "model": "Honda Civic",
   "modelFamily": "honda civic",
   "modelAliases": [
-   "Honda Civic"
+   "Honda Civic",
+   "civic"
   ],
   "generation": null,
   "generationAliases": [],
@@ -94077,7 +94120,8 @@
   "model": "Honda Civic",
   "modelFamily": "honda civic",
   "modelAliases": [
-   "Honda Civic"
+   "Honda Civic",
+   "civic"
   ],
   "generation": null,
   "generationAliases": [],
@@ -94515,7 +94559,8 @@
   "model": "Hyundai Casper",
   "modelFamily": "hyundai casper",
   "modelAliases": [
-   "Hyundai Casper"
+   "Hyundai Casper",
+   "casper"
   ],
   "generation": null,
   "generationAliases": [],
@@ -95850,7 +95895,8 @@
   "model": "Defender 110",
   "modelFamily": "defender",
   "modelAliases": [
-   "Defender"
+   "Defender",
+   "defender-110"
   ],
   "generation": "L663",
   "generationAliases": [],
@@ -96077,7 +96123,8 @@
   "model": "Range Rover Sport",
   "modelFamily": "range rover sport",
   "modelAliases": [
-   "Range Rover Sport"
+   "Range Rover Sport",
+   "range-rover"
   ],
   "generation": null,
   "generationAliases": [],
@@ -96301,7 +96348,8 @@
   "model": "LM",
   "modelFamily": "lm hybrid",
   "modelAliases": [
-   "LM Hybrid"
+   "LM Hybrid",
+   "lm"
   ],
   "generation": "2nd gen (350h)",
   "generationAliases": [],
@@ -96465,7 +96513,8 @@
   "model": "Mazda MX-5",
   "modelFamily": "mazda mx 5",
   "modelAliases": [
-   "Mazda MX-5"
+   "Mazda MX-5",
+   "mx-5"
   ],
   "generation": null,
   "generationAliases": [],
@@ -96691,7 +96740,8 @@
   "model": "Mercedes Vito",
   "modelFamily": "mercedes vito",
   "modelAliases": [
-   "Mercedes Vito"
+   "Mercedes Vito",
+   "vito"
   ],
   "generation": "W447",
   "generationAliases": [],
@@ -96852,7 +96902,8 @@
   "model": "Mercedes Vito",
   "modelFamily": "mercedes vito",
   "modelAliases": [
-   "Mercedes Vito"
+   "Mercedes Vito",
+   "vito"
   ],
   "generation": null,
   "generationAliases": [],
@@ -97229,7 +97280,9 @@
   "model": "Cooper S Convertible",
   "modelFamily": "mini cooper s",
   "modelAliases": [
-   "Mini Cooper S"
+   "Mini Cooper S",
+   "cooper-s-convertible",
+   "cooper-s"
   ],
   "generation": "R57",
   "generationAliases": [],
@@ -97672,7 +97725,8 @@
   "model": "Mitsubishi ASX",
   "modelFamily": "mitsubishi asx",
   "modelAliases": [
-   "Mitsubishi ASX"
+   "Mitsubishi ASX",
+   "asx"
   ],
   "generation": "1st gen",
   "generationAliases": [],
@@ -97888,7 +97942,8 @@
   "model": "Mitsubishi ASX",
   "modelFamily": "mitsubishi asx",
   "modelAliases": [
-   "Mitsubishi ASX"
+   "Mitsubishi ASX",
+   "asx"
   ],
   "generation": null,
   "generationAliases": [],
@@ -98547,7 +98602,8 @@
   "model": "Nissan Juke",
   "modelFamily": "nissan juke",
   "modelAliases": [
-   "Nissan Juke"
+   "Nissan Juke",
+   "juke"
   ],
   "generation": null,
   "generationAliases": [],
@@ -98989,7 +99045,8 @@
   "model": "Nissan Navara",
   "modelFamily": "nissan navara",
   "modelAliases": [
-   "Nissan Navara"
+   "Nissan Navara",
+   "navara"
   ],
   "generation": "D23",
   "generationAliases": [],
@@ -99215,7 +99272,8 @@
   "model": "Nissan Navara",
   "modelFamily": "nissan navara",
   "modelAliases": [
-   "Nissan Navara"
+   "Nissan Navara",
+   "navara"
   ],
   "generation": null,
   "generationAliases": [],
@@ -101254,7 +101312,8 @@
   "model": "Peugeot 2008",
   "modelFamily": "peugeot 2008",
   "modelAliases": [
-   "Peugeot 2008"
+   "Peugeot 2008",
+   "2008"
   ],
   "generation": null,
   "generationAliases": [],
@@ -101483,7 +101542,8 @@
   "model": "Peugeot 308",
   "modelFamily": "peugeot 308",
   "modelAliases": [
-   "Peugeot 308"
+   "Peugeot 308",
+   "308"
   ],
   "generation": null,
   "generationAliases": [],
@@ -101708,7 +101768,8 @@
   "model": "Peugeot Boxer",
   "modelFamily": "peugeot boxer",
   "modelAliases": [
-   "Peugeot Boxer"
+   "Peugeot Boxer",
+   "boxer"
   ],
   "generation": null,
   "generationAliases": [],
@@ -102581,7 +102642,8 @@
   "model": "Renault Koleos",
   "modelFamily": "renault koleos",
   "modelAliases": [
-   "Renault Koleos"
+   "Renault Koleos",
+   "koleos"
   ],
   "generation": null,
   "generationAliases": [],
@@ -103230,7 +103292,9 @@
   "model": "Seat Tarraco FR",
   "modelFamily": "seat tarraco fr",
   "modelAliases": [
-   "Seat Tarraco FR"
+   "Seat Tarraco FR",
+   "tarraco-fr",
+   "tarraco"
   ],
   "generation": null,
   "generationAliases": [],
@@ -103441,7 +103505,8 @@
   "model": "Skoda Fabia",
   "modelFamily": "skoda fabia",
   "modelAliases": [
-   "Skoda Fabia"
+   "Skoda Fabia",
+   "fabia"
   ],
   "generation": null,
   "generationAliases": [],
@@ -103674,7 +103739,9 @@
   "model": "Fabia Estate",
   "modelFamily": "skoda fabia",
   "modelAliases": [
-   "Skoda Fabia"
+   "Skoda Fabia",
+   "fabia-estate",
+   "fabia"
   ],
   "generation": "Mk3 Combi",
   "generationAliases": [],
@@ -103910,7 +103977,8 @@
   "model": "Skoda Octavia",
   "modelFamily": "skoda octavia",
   "modelAliases": [
-   "Skoda Octavia"
+   "Skoda Octavia",
+   "octavia"
   ],
   "generation": null,
   "generationAliases": [],
@@ -104145,7 +104213,9 @@
   "model": "Skoda Octavia Combi",
   "modelFamily": "skoda octavia combi",
   "modelAliases": [
-   "Skoda Octavia Combi"
+   "Skoda Octavia Combi",
+   "octavia-combi",
+   "octavia"
   ],
   "generation": null,
   "generationAliases": [],
@@ -104812,7 +104882,8 @@
   "model": "Skoda Superb",
   "modelFamily": "skoda superb",
   "modelAliases": [
-   "Skoda Superb"
+   "Skoda Superb",
+   "superb"
   ],
   "generation": null,
   "generationAliases": [],
@@ -105264,7 +105335,8 @@
   "model": "Suzuki Alto",
   "modelFamily": "suzuki alto",
   "modelAliases": [
-   "Suzuki Alto"
+   "Suzuki Alto",
+   "alto"
   ],
   "generation": null,
   "generationAliases": [],
@@ -105424,7 +105496,8 @@
   "model": "Suzuki Ignis",
   "modelFamily": "suzuki ignis",
   "modelAliases": [
-   "Suzuki Ignis"
+   "Suzuki Ignis",
+   "ignis"
   ],
   "generation": null,
   "generationAliases": [],
@@ -106511,7 +106584,8 @@
   "model": "Toyota RAV4",
   "modelFamily": "toyota rav4",
   "modelAliases": [
-   "Toyota RAV4"
+   "Toyota RAV4",
+   "rav4"
   ],
   "generation": null,
   "generationAliases": [],
@@ -107201,7 +107275,9 @@
   "model": "Golf Cabriolet Mk1",
   "modelFamily": "vw golf",
   "modelAliases": [
-   "VW Golf"
+   "VW Golf",
+   "golf-cabriolet-mk1",
+   "golf"
   ],
   "generation": "Mk1",
   "generationAliases": [],
@@ -107459,7 +107535,8 @@
   "model": "Volvo V40",
   "modelFamily": "volvo v40",
   "modelAliases": [
-   "Volvo V40"
+   "Volvo V40",
+   "v40"
   ],
   "generation": null,
   "generationAliases": [],
@@ -107686,7 +107763,8 @@
   "model": "Volvo V90",
   "modelFamily": "volvo v90",
   "modelAliases": [
-   "Volvo V90"
+   "Volvo V90",
+   "v90"
   ],
   "generation": null,
   "generationAliases": [],
@@ -117788,7 +117866,8 @@
   "model": "Eclipse Cross PHEV",
   "modelFamily": "mitsubishi eclipse cross phev",
   "modelAliases": [
-   "Eclipse Cross PHEV"
+   "Eclipse Cross PHEV",
+   "eclipse"
   ],
   "generation": null,
   "generationAliases": [],
@@ -128963,7 +129042,8 @@
   "model": "Niro Hybrid",
   "modelFamily": "kia niro hybrid",
   "modelAliases": [
-   "Niro Hybrid"
+   "Niro Hybrid",
+   "niro"
   ],
   "generation": null,
   "generationAliases": [],
@@ -133921,7 +134001,8 @@
   "model": "E Class Estate",
   "modelFamily": "mercedes-benz e class estate",
   "modelAliases": [
-   "E Class Estate"
+   "E Class Estate",
+   "e-class"
   ],
   "generation": null,
   "generationAliases": [],
@@ -135296,7 +135377,7 @@
   "generationConfirmed": false,
   "yearStart": 2017,
   "yearEnd": null,
-  "bodyStyle": "Combi",
+  "bodyStyle": "estate",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
@@ -150942,7 +151023,8 @@
   "model": "golf gti",
   "modelFamily": "volkswagen golf gti",
   "modelAliases": [
-   "golf gti"
+   "golf gti",
+   "golf"
   ],
   "generation": null,
   "generationAliases": [],
@@ -151464,7 +151546,8 @@
   "model": "golf gti",
   "modelFamily": "volkswagen golf gti",
   "modelAliases": [
-   "golf gti"
+   "golf gti",
+   "golf"
   ],
   "generation": null,
   "generationAliases": [],
@@ -152244,7 +152327,8 @@
   "model": "golf gti",
   "modelFamily": "volkswagen golf gti",
   "modelAliases": [
-   "golf gti"
+   "golf gti",
+   "golf"
   ],
   "generation": null,
   "generationAliases": [],
@@ -153545,7 +153629,8 @@
   "model": "polo gti",
   "modelFamily": "volkswagen polo gti",
   "modelAliases": [
-   "polo gti"
+   "polo gti",
+   "polo"
   ],
   "generation": null,
   "generationAliases": [],
@@ -153807,7 +153892,8 @@
   "model": "polo gti",
   "modelFamily": "volkswagen polo gti",
   "modelAliases": [
-   "polo gti"
+   "polo gti",
+   "polo"
   ],
   "generation": null,
   "generationAliases": [],
@@ -154326,7 +154412,8 @@
   "model": "t-cross",
   "modelFamily": "volkswagen taigun",
   "modelAliases": [
-   "taigun"
+   "taigun",
+   "t-cross"
   ],
   "generation": null,
   "generationAliases": [],
@@ -155342,7 +155429,8 @@
   "model": "range rover sport",
   "modelFamily": "land-rover range rover sport",
   "modelAliases": [
-   "range rover sport"
+   "range rover sport",
+   "range-rover"
   ],
   "generation": null,
   "generationAliases": [],
@@ -155583,7 +155671,8 @@
   "model": "range rover sport",
   "modelFamily": "land-rover range rover sport",
   "modelAliases": [
-   "range rover sport"
+   "range rover sport",
+   "range-rover"
   ],
   "generation": null,
   "generationAliases": [],
@@ -155822,7 +155911,8 @@
   "model": "range rover sport",
   "modelFamily": "land-rover range rover sport",
   "modelAliases": [
-   "range rover sport"
+   "range rover sport",
+   "range-rover"
   ],
   "generation": null,
   "generationAliases": [],
@@ -156069,7 +156159,7 @@
   "generationConfirmed": false,
   "yearStart": null,
   "yearEnd": null,
-  "bodyStyle": "sportback",
+  "bodyStyle": "hatchback",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
@@ -156504,7 +156594,8 @@
   "model": "a6 c7",
   "modelFamily": "audi a6 c7",
   "modelAliases": [
-   "a6 c7"
+   "a6 c7",
+   "a6"
   ],
   "generation": null,
   "generationAliases": [],
@@ -156723,7 +156814,8 @@
   "model": "a6 c8",
   "modelFamily": "audi a6 c8",
   "modelAliases": [
-   "a6 c8"
+   "a6 c8",
+   "a6"
   ],
   "generation": null,
   "generationAliases": [],
@@ -156939,7 +157031,8 @@
   "model": "q3 sportback",
   "modelFamily": "audi q3 sportback",
   "modelAliases": [
-   "q3 sportback"
+   "q3 sportback",
+   "q3"
   ],
   "generation": null,
   "generationAliases": [],
@@ -157382,7 +157475,8 @@
   "model": "tt rs",
   "modelFamily": "audi tt rs",
   "modelAliases": [
-   "tt rs"
+   "tt rs",
+   "tt"
   ],
   "generation": null,
   "generationAliases": [],
@@ -157831,7 +157925,7 @@
   "generationConfirmed": false,
   "yearStart": 2017,
   "yearEnd": null,
-  "bodyStyle": "sportback",
+  "bodyStyle": "hatchback",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
@@ -158711,7 +158805,7 @@
   "generationConfirmed": false,
   "yearStart": 2022,
   "yearEnd": null,
-  "bodyStyle": "sportback",
+  "bodyStyle": "hatchback",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
@@ -158929,7 +159023,7 @@
   "generationConfirmed": false,
   "yearStart": 2021,
   "yearEnd": null,
-  "bodyStyle": "sportback",
+  "bodyStyle": "hatchback",
   "compatibleFuelTypes": [],
   "compatibleTrimFamilies": [],
   "exactDerivative": null,
@@ -160023,7 +160117,8 @@
   "model": "sq5 sportback",
   "modelFamily": "audi sq5 sportback",
   "modelAliases": [
-   "sq5 sportback"
+   "sq5 sportback",
+   "sq5"
   ],
   "generation": null,
   "generationAliases": [],
@@ -160460,7 +160555,8 @@
   "model": "m3 e92",
   "modelFamily": "bmw m3 e92",
   "modelAliases": [
-   "m3 e92"
+   "m3 e92",
+   "m3"
   ],
   "generation": null,
   "generationAliases": [],
@@ -161047,7 +161143,8 @@
   "model": "3 series touring",
   "modelFamily": "bmw 3 series touring",
   "modelAliases": [
-   "3 series touring"
+   "3 series touring",
+   "3-series"
   ],
   "generation": null,
   "generationAliases": [],
@@ -161638,7 +161735,8 @@
   "model": "i8 roadster",
   "modelFamily": "bmw i8 roadster",
   "modelAliases": [
-   "i8 roadster"
+   "i8 roadster",
+   "i8"
   ],
   "generation": null,
   "generationAliases": [],
@@ -161932,7 +162030,8 @@
   "model": "728i e23",
   "modelFamily": "bmw 728i e23",
   "modelAliases": [
-   "728i e23"
+   "728i e23",
+   "728i"
   ],
   "generation": null,
   "generationAliases": [],
@@ -162227,7 +162326,8 @@
   "model": "m4 competition",
   "modelFamily": "bmw m4 competition",
   "modelAliases": [
-   "m4 competition"
+   "m4 competition",
+   "m4"
   ],
   "generation": null,
   "generationAliases": [],
@@ -162521,7 +162621,8 @@
   "model": "850csi e31",
   "modelFamily": "bmw 850csi e31",
   "modelAliases": [
-   "850csi e31"
+   "850csi e31",
+   "850csi"
   ],
   "generation": null,
   "generationAliases": [],
@@ -163706,7 +163807,8 @@
   "model": "x7 m60i",
   "modelFamily": "bmw x7 m60i",
   "modelAliases": [
-   "x7 m60i"
+   "x7 m60i",
+   "x7"
   ],
   "generation": null,
   "generationAliases": [],
@@ -164000,7 +164102,8 @@
   "model": "m440i gran coupe",
   "modelFamily": "bmw m440i gran coupe",
   "modelAliases": [
-   "m440i gran coupe"
+   "m440i gran coupe",
+   "m440i-gran"
   ],
   "generation": null,
   "generationAliases": [],
@@ -172188,7 +172291,8 @@
   "model": "golf gti",
   "modelFamily": "volkswagen golf gti",
   "modelAliases": [
-   "golf gti"
+   "golf gti",
+   "golf"
   ],
   "generation": null,
   "generationAliases": [],
