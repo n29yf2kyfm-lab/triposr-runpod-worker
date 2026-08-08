@@ -172507,7 +172507,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-exeo-2009-st1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-exeo-2009-st1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-exeo-2009-st1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 17666308,
@@ -172625,6 +172625,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2911,
+   "variantsHash": "1b054e61de2bf8a38eb4dfa926782e168210d463",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -172695,7 +172702,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-exeo-2009-st1-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-exeo-2009-st1-v2.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-exeo-2009-st1-v2/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 15473556,
@@ -172813,6 +172820,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.318,
+   "variantsHash": "c94b30e16e85582b1e96e18c76943204de48b607",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -172885,7 +172899,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-toledo-1999-st1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-toledo-1999-st1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-toledo-1999-st1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 13417904,
@@ -173003,6 +173017,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.247,
+   "variantsHash": "98986d60d8f5ac6ffe5b166d5b01aef9332d6bdc",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -173072,7 +173093,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-toledo-2004-st1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-toledo-2004-st1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-toledo-2004-st1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 7352268,
@@ -173190,6 +173211,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.281,
+   "variantsHash": "e2132d9215b2868d0a812172c85fe61ecb679e73",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -173259,7 +173287,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-alhambra-2010-st1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-alhambra-2010-st1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-alhambra-2010-st1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 22889724,
@@ -173377,6 +173405,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3045,
+   "variantsHash": "bd97d0d5d629f11eb741d78f2903bea2063f31ee",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -173446,7 +173481,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-alhambra-2015-st1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/seat/seat-alhambra-2015-st1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/seat/seat-alhambra-2015-st1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 33683368,
@@ -173564,6 +173599,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2556,
+   "variantsHash": "8b094df0b0da576c70afec30dc0404c212e83676",
+   "method": "render",
+   "at": "2026-08-08"
   }
  },
  {
@@ -173638,7 +173680,7 @@
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-paceman-2014-mn1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mini/mini-paceman-2014-mn1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mini/mini-paceman-2014-mn1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 27051544,
@@ -173784,6 +173826,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2326,
+   "variantsHash": "04176a524cee549e069f3bea6346ba7405de973e",
+   "method": "render",
+   "at": "2026-08-08"
   }
  }
 ]
