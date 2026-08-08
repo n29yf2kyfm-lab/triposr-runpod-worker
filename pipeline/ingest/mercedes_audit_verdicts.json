@@ -56,6 +56,20 @@
    "mats": 1,
    "verdict": "DUPLICATE",
    "note": "same GL350 mesh as 6df2a99b, 59 faces apart (0.06%) -- identical car, wheels and finish, only the render azimuths differ. The 0.5%-plus-nameplate rule was correct on this pair"
+  },
+  "092ee873e85843c8826fc649c44e9a19": {
+   "name": "Mercedes- Benz GLA35 AMG",
+   "cov": 0.113,
+   "mats": 2,
+   "verdict": "PASS",
+   "note": "GLA35 AMG; black multi-spoke wheels with red calipers consistent in all four views, Panamericana grille crisp, headlight internals sharp, shut lines defined, premium reflections. Renders white at cov=0.113 -- same uncertain band as the GL350, the stamp decides"
+  },
+  "6ccc813d26ac4dcabdba83c896f4436c": {
+   "name": "Mercedes-Benz B-Klasse MK2 (W246) 2011-2018",
+   "cov": 0.119,
+   "mats": 2,
+   "verdict": "FAIL",
+   "note": "tyres missing -- bare brake discs and suspension exposed, wheels render as flat white plates protruding from the arches. Panel ripple along both flanks. Roof box (taxi sign or sensor) also present"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage."
