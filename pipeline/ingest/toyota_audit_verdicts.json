@@ -294,6 +294,18 @@
    "name": "2020 Toyota Proace Verso City",
    "verdict": "PASS",
    "note": "Proace City Verso; multi-spoke wheels consistent in all four views, headlight internals present, shut lines defined, clean reflections. UK-market model. Plate reads MRC 1920 and wants blanking via remove_plates.py"
+  },
+  "52": {
+   "uid": "c4abf4e84ac34b29a482d0c64cd99f1c",
+   "name": "Toyota Highlander (Mk1)(XU20) 2003",
+   "verdict": "PASS",
+   "note": "XU20 Highlander; 5-spoke alloys consistent in all four views, grille slats crisp, headlight internals present, shut lines defined. HUMSTER3D plate wants blanking. SCOPE: same UK-market question as #27 -- and this is now the third Highlander generation in the set"
+  },
+  "63": {
+   "uid": "2e358973d2bf4a2789f802469e8c59b4",
+   "name": "Toyota MR2 1984-2077",
+   "verdict": "FAIL",
+   "note": "out of scope -- heavily modified AW11: widebody flares, huge wing, BBS wheels, side-exit exhaust, and the pop-up headlights shaved to a flat panel. Not the stock MR2 a reg decodes to. Title '1984-2077' is a joke"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
