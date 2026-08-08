@@ -34,3 +34,20 @@ written off. `coverage` only exists on the RENDER response when recolour is on
 
 Re-run the audit with `pipeline/ingest/inbox/inbox_audit.py <folder>` — resumable against
 the bucket.
+
+## Second Drive link — 16 files, all structurally corrupt (2026-08-08)
+
+The owner sent a second Drive folder described as "bad glbs" and asked whether
+they could be fixed. They cannot. All 16 share the identical failure:
+
+- header magic `glTF` is intact, but the JSON chunk length declared at offset 12
+  runs past the end of a chunk that is truncated at ~168 bytes;
+- what follows the truncation is binary garbage, not a valid `BIN` chunk;
+- the surviving JSON fragment declares only `POSITION` and `indices` — no
+  `NORMAL`, no `TEXCOORD_0`, no `materials`, no `images`.
+
+So even the recoverable part carries raw triangles and nothing else: no normals
+to shade with, no UVs to texture with, and no material split to recolour on.
+There is no repair that produces a shippable asset — the paint, glass and light
+separation the pipeline needs was never in the file. Verdict: scrap all 16, and
+ask the sender to re-export rather than re-send.
