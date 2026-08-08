@@ -83,6 +83,27 @@
    "mats": 3,
    "verdict": "FAIL",
    "note": "wheels render as flat black voids in all four views -- the spoke detail is gone and the arches read as hollow holes. Body geometry is sound, so this is a wheel-material fault, but it looks wrong as it stands"
+  },
+  "16": {
+   "uid": "4919d14eba9640599e838230e8e5ed74",
+   "name": "Toyota GR86 (ZN8)",
+   "mats": 4,
+   "verdict": "PASS",
+   "note": "GR86 ZN8; black alloys consistent in all four views, grille mesh deep, headlight internals sharp, shut lines defined. REDUNDANT with the live #7 (same ZN8 generation)"
+  },
+  "19": {
+   "uid": "bae4423cff184f8ebf3a46a1ffaf064a",
+   "name": "2023 Toyota bZ4X",
+   "mats": 3,
+   "verdict": "PASS",
+   "note": "2023 bZ4X; silver multi-spoke wheels consistent, black cladding correct, headlight internals sharp, shut lines defined. REDUNDANT with the live #10"
+  },
+  "22": {
+   "uid": "cc503d26ea694dce85e7d0f1491b0e30",
+   "name": "Toyota Corolla Cross",
+   "mats": 2,
+   "verdict": "PASS",
+   "note": "REPLACEMENT CANDIDATE for the live Corolla Cross that failed its recolour. Different mesh (419,710f vs 597,245f) and cov=0.490 against the failed car's split. Geometry is good: two-tone multi-spoke wheels consistent in all four views, grille mesh deep, headlight internals sharp, cladding correct. mats=2 so it still needs the stamp, but it is the obvious thing to try before hand-fixing the live one"
   }
  },
  "_glass_set": "#4/#5/#6 are one uploader's Avensis set and all three render transparent -- the panels carry a glass material. #7 from a different source is fine. A material defect can be uploader-wide, so when one car in a titled series fails this way, check its siblings."
