@@ -306,6 +306,18 @@
    "name": "Toyota MR2 1984-2077",
    "verdict": "FAIL",
    "note": "out of scope -- heavily modified AW11: widebody flares, huge wing, BBS wheels, side-exit exhaust, and the pop-up headlights shaved to a flat panel. Not the stock MR2 a reg decodes to. Title '1984-2077' is a joke"
+  },
+  "55": {
+   "uid": "df56087572a44b0496e39006859ae3b9",
+   "name": "2005 Toyota Hilux Double Cab",
+   "verdict": "PASS",
+   "note": "Mk6 Hilux double cab; 6-spoke alloys consistent in all four views, grille slats crisp, headlight internals present, shut lines defined. Strong UK-relevant model. HUMSTER3D plate wants blanking"
+  },
+  "57": {
+   "uid": "411da54827634c5abd462ab4e9e0eb34",
+   "name": "2021 Toyota RAV4 Prime Hybrid E-Four",
+   "verdict": "PASS",
+   "note": "excellent -- RAV4 Mk5 reads instantly, black multi-spoke wheels identical in all four views, headlight LED internals sharp, grille mesh deep, premium reflections. Rescues RAV4 coverage after #4 and #38 both failed"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
