@@ -55,6 +55,34 @@
    "mats": 0,
    "verdict": "PASS-SINGLE",
    "note": "T270 Avensis, and a generation the clean set does not cover (it had T220 and T250 only). Proportions right, black multi-spoke wheels consistent in all four views, grille slats crisp, headlight internals present, shut lines defined. mats=0 so it renders its own white; recolour needs the body material identified by hand"
+  },
+  "13": {
+   "uid": "11c51a8d3d5541339ab9549479bfa4d3",
+   "name": "2025 Toyota Camry",
+   "mats": 3,
+   "verdict": "PASS",
+   "note": "2025 Camry XV80; multi-spoke wheels consistent in all four views, grille mesh has depth, headlight LED internals sharp, shut lines defined. mats=3 so the stamp decides whether it ships 8 colours or falls back"
+  },
+  "14": {
+   "uid": "15be15530b0f46f6928fe5cde9fd4ed3",
+   "name": "2021 Toyota RAV4 Prime PHEV",
+   "mats": 4,
+   "verdict": "PASS",
+   "note": "RAV4 Prime PHEV; black alloys consistent, grille mesh deep, headlight internals sharp, shut lines defined. REDUNDANT with the already-published #57 (same model and year, different mesh) -- only worth taking if it beats what is live"
+  },
+  "17": {
+   "uid": "8578dc0493ff4f72a444625510631f87",
+   "name": "1976 Toyota Celica GT",
+   "mats": 8,
+   "verdict": "FAIL",
+   "note": "the split-material failure made visible -- mats=8 and the respray caught only some panels, so it renders hard-edged HALF RED, HALF SILVER across a single wing. Geometry is fine (chrome wheels consistent, round headlights, period-correct shut lines) but no colour ships from this until the 8 body materials are consolidated. French plate DM-200-CP"
+  },
+  "18": {
+   "uid": "62355d6e59954b18b2670719bf09f9bf",
+   "name": "Toyota Hilux SRX 2019",
+   "mats": 3,
+   "verdict": "FAIL",
+   "note": "wheels render as flat black voids in all four views -- the spoke detail is gone and the arches read as hollow holes. Body geometry is sound, so this is a wheel-material fault, but it looks wrong as it stands"
   }
  },
  "_glass_set": "#4/#5/#6 are one uploader's Avensis set and all three render transparent -- the panels carry a glass material. #7 from a different source is fine. A material defect can be uploader-wide, so when one car in a titled series fails this way, check its siblings."
