@@ -108,6 +108,24 @@
    "name": "Toyota Supra MK5 A90",
    "verdict": "DUPLICATE",
    "note": "visually identical to #20 in all four views -- same mesh re-exported, 1,820 faces apart (0.21%), under exact-match dedup. Keeping #20"
+  },
+  "25": {
+   "uid": "950cd22ab63d4723b468f25da0fd5ec0",
+   "name": "Toyota Mirai",
+   "verdict": "PASS",
+   "note": "reads as 2nd-gen Mirai instantly; turbine alloys consistent in all four views; headlight LED signature sharp; grille mesh has depth; shut lines defined"
+  },
+  "26": {
+   "uid": "617a8613b719440cbb0d040c552c70df",
+   "name": "toyota corolla 2021 consept",
+   "verdict": "FAIL",
+   "note": "out of scope -- a fantasy concept supercar wearing a Toyota badge, nothing like a Corolla, and soft/melted geometry besides. Title misspells 'consept', so a 'concept' title gate would not catch it"
+  },
+  "27": {
+   "uid": "11413272fe244553986c1c1b1efab564",
+   "name": "Toyota Highlander 2011",
+   "verdict": "PASS",
+   "note": "quality passes -- XU40 proportions right, 5-spoke alloys consistent, grille slats crisp, shut lines defined, HUMSTER3D plate watermark wants blanking. SCOPE QUESTION: worth confirming the 2011 Highlander was a UK-market car before indexing; if it was not, no UK reg will ever decode to it"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached"
