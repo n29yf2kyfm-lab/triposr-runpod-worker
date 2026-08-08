@@ -54,6 +54,12 @@
    "name": "1998 Toyota Land Cruiser",
    "verdict": "PASS",
    "note": "reads as J80 Land Cruiser instantly; 6-spoke alloys consistent in all four views; grille lettering crisp; shut lines defined; premium finish. Nit: number plate carries custom text, wants blanking before it ships"
+  },
+  "8": {
+   "uid": "759732796dd8478c973c8856f50c838c",
+   "name": "Toyota_gt86",
+   "verdict": "FAIL",
+   "note": "proportions right but below the premium bar: wheel spokes are soft low-poly blobs with no alloy definition, headlights are dark voids with no internal LED elements, grille shallow. Note this is the first-gen ZN6 GT86, a generation #7 does not cover"
   }
  }
 }
