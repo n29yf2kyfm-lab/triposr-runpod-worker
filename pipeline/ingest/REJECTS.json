@@ -1,0 +1,306 @@
+{
+ "_doc": "Durable record of candidates the owner scrapped on visual review. Sweeps re-run and would otherwise re-surface these every time; nameplate_filter.py --rejects drops them. Keyed by Sketchfab uid. Never delete a row -- that is what makes a re-sweep cheap.",
+ "rejects": {
+  "6c070bc55ed0402d9ab92f6fe666a02f": {
+   "marque": "Toyota",
+   "name": "Toyota Land Cruiser 100 And Lexus LX 470",
+   "sheet": "toyota_suspect #9",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "717752a19f954e3284081f1d114260d3": {
+   "marque": "Toyota",
+   "name": "Toyota Verso",
+   "sheet": "toyota_suspect #10",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "5f8828645587439fa827cfab98a7c04f": {
+   "marque": "Toyota",
+   "name": "Toyota Aygo MK1 2005-2014",
+   "sheet": "toyota_suspect #11",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "b5e7d045c48745718d980b5af2be4de0": {
+   "marque": "Toyota",
+   "name": "Toyota Celica Turbo IMSA GTO",
+   "sheet": "toyota_suspect #12",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "cce68a50ad874a0bb77e0e84fc39b966": {
+   "marque": "Toyota",
+   "name": "2018 Toyota Vios/Yaris G",
+   "sheet": "toyota_suspect #20",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "fb5d15e1743648fd93c16c90df312c03": {
+   "marque": "Toyota",
+   "name": "2006 Toyota RAV4",
+   "sheet": "toyota_suspect #21",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "edcad91d2f1b40fcba3fb0b6b1a32b4a": {
+   "marque": "Toyota",
+   "name": "Toyota RAV4 MK2 2000-2005",
+   "sheet": "toyota_suspect #25",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "09bfce9141874544adf34f1792bf7202": {
+   "marque": "Toyota",
+   "name": "Toyota Hilux 2022 (Left Hand drive)",
+   "sheet": "toyota_suspect #31",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "27a0ebe78db04c5390f67edfdf81655e": {
+   "marque": "Toyota",
+   "name": "Toyota Land Cruiser 200",
+   "sheet": "toyota_suspect #33",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "2a8ad60ae4db46129182fcabf63395bc": {
+   "marque": "Toyota",
+   "name": "Toyota Avensis MK2 (T25) 2003-2009",
+   "sheet": "toyota_suspect #39",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "c7841b9472274e24b90f0737b87381f1": {
+   "marque": "Toyota",
+   "name": "Toyota Land Cruiser 250",
+   "sheet": "toyota_suspect #42",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "f615c2f8a8f3478da1e253d8c3d144af": {
+   "marque": "Toyota",
+   "name": "2007 toyota camry",
+   "sheet": "toyota_suspect #44",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "40bff84b6e274c25a0b4232fc82abaae": {
+   "marque": "Toyota",
+   "name": "Toyota MR2 1984",
+   "sheet": "toyota_suspect #48",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "31d5343e8469462b8319d15f7ccdd326": {
+   "marque": "Toyota",
+   "name": "NASCAR Toyota Camry",
+   "sheet": "toyota_suspect #49",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "f641f2eab21146428f182fee06e200f6": {
+   "marque": "Toyota",
+   "name": "Drift tuned Toyota Supra",
+   "sheet": "toyota_suspect #51",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "6e0324b8fd9a4b669ea4105db4c7c8d8": {
+   "marque": "Toyota",
+   "name": "Toyota GR Corolla",
+   "sheet": "toyota_suspect #52",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "20e72067d9cd46cab944d9db08cb1384": {
+   "marque": "Toyota",
+   "name": "prius toyota",
+   "sheet": "toyota_suspect #53",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "e15e73d45ce84447b262885faf304e71": {
+   "marque": "Toyota",
+   "name": "Toyota Starlet 1200 SR 1979",
+   "sheet": "toyota_suspect #54",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "7b814545bf7148aba70b7af03b0f2817": {
+   "marque": "Toyota",
+   "name": "Toyota Supra Mk4",
+   "sheet": "toyota_suspect #56",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "1db603655d924829956c325cf4546bde": {
+   "marque": "Toyota",
+   "name": "1977 Toyota Celica LB Turbo 3D Printable Model",
+   "sheet": "toyota_suspect #57",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "8f5f1e64dc004868a49cf05b0d3441cc": {
+   "marque": "Toyota",
+   "name": "2015 Toyota Highlander",
+   "sheet": "toyota_suspect #58",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "7032d3bc6071485f9ed4485f3c0626eb": {
+   "marque": "Toyota",
+   "name": "2015 Toyota Prius C Front End",
+   "sheet": "toyota_suspect #59",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "fc30b71e31aa409cbca8bf6885533af5": {
+   "marque": "Toyota",
+   "name": "2020 Toyota RAV4 Prime PHEV",
+   "sheet": "toyota_suspect #60",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "64b59fd607594eea8f737c9dc33a6067": {
+   "marque": "Toyota",
+   "name": "2023 Toyota GRMN Yaris",
+   "sheet": "toyota_suspect #61",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "5d2b87c956a74a1cb9cd53f434e5f1ce": {
+   "marque": "Toyota",
+   "name": "2023 Toyota RAV4 GR-S",
+   "sheet": "toyota_suspect #62",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "85e4ad823b3c43fd95a07edf91edb874": {
+   "marque": "Toyota",
+   "name": "Toyota AW11 MK1 MR2 coolant fill neck",
+   "sheet": "toyota_suspect #66",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "89184e6d84984d3c95a168c245613a58": {
+   "marque": "Toyota",
+   "name": "Toyota Camry 2018",
+   "sheet": "toyota_suspect #68",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "bfe908d3fc2b48ecad9741f8be09d42e": {
+   "marque": "Toyota",
+   "name": "Toyota Camry XV30 sedan 2001",
+   "sheet": "toyota_suspect #69",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "c3a18269bdaf4eeba8062bb24c4ac3dc": {
+   "marque": "Toyota",
+   "name": "Toyota Corolla Cross",
+   "sheet": "toyota_suspect #70",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "720ca16287834d8f9aefd65c3a899319": {
+   "marque": "Toyota",
+   "name": "Toyota GT86 HGK Body Kit",
+   "sheet": "toyota_suspect #71",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "48490bc286fc464391308d92a60e6d0b": {
+   "marque": "Toyota",
+   "name": "Toyota Hiace 2000",
+   "sheet": "toyota_suspect #72",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "1a5403d61a624540a46695e9f614756e": {
+   "marque": "Toyota",
+   "name": "Toyota Hiace Microbus Port Said Al-5000 Line",
+   "sheet": "toyota_suspect #76",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "6cc1532fc75b4296abf2d35dd3033c00": {
+   "marque": "Toyota",
+   "name": "Toyota Hiace Microbus Port Said Al-5000 line",
+   "sheet": "toyota_suspect #77",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "cc2634056eae48bab3427f633b755c65": {
+   "marque": "Toyota",
+   "name": "Toyota Hiace Racing Van Pepsi 2018",
+   "sheet": "toyota_suspect #79",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "188f8a4122e54f4b9f8fd93f61ed09b1": {
+   "marque": "Toyota",
+   "name": "Toyota Hiace Super GL 1993",
+   "sheet": "toyota_suspect #80",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "64657537639b48628ba590235e8f9f54": {
+   "marque": "Toyota",
+   "name": "Toyota Hiace Super GL 2018",
+   "sheet": "toyota_suspect #81",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "e684e7f11ba344d885d6ae9c3089c0e8": {
+   "marque": "Toyota",
+   "name": "Toyota Hiace Wagon Grand Cabin 1993",
+   "sheet": "toyota_suspect #82",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "82191fc31fd744e8b791b5b5198e9d36": {
+   "marque": "Toyota",
+   "name": "Toyota Hiace Wagon Grand Cabin 1999",
+   "sheet": "toyota_suspect #83",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "c44c57e7ca654eeca26c189fe2c0e766": {
+   "marque": "Toyota",
+   "name": "Toyota Highlander Driver Door Speaker",
+   "sheet": "toyota_suspect #84",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "765165e4b5de48a2af5adeaaa4f93495": {
+   "marque": "Toyota",
+   "name": "Toyota Prius 20 Torpedo",
+   "sheet": "toyota_suspect #88",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "2333a5de8fe1468594bb5a47042524df": {
+   "marque": "Toyota",
+   "name": "Toyota Prius G",
+   "sheet": "toyota_suspect #89",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "8ee9772c94774221a21e2f00fff22568": {
+   "marque": "Toyota",
+   "name": "toyota_auris_cc_vent_bottom_v1",
+   "sheet": "toyota_suspect #90",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  },
+  "ee83c97139d54a2297e7a115375d878e": {
+   "marque": "Toyota",
+   "name": "toyota_auris_cc_vent_top_v1",
+   "sheet": "toyota_suspect #91",
+   "scrapped": "2026-08-08",
+   "by": "owner visual review"
+  }
+ }
+}

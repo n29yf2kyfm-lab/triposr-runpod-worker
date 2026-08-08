@@ -130,6 +130,11 @@ def main():
     ap.add_argument("--allow-uid", default="",
                     help="comma-separated uids to force through regardless of title; "
                          "for ambiguous rows a render settles faster than a guess")
+    ap.add_argument("--rejects", default="pipeline/ingest/REJECTS.json",
+                    help="ledger of uids the owner already scrapped on review; they are "
+                         "dropped silently. A sweep re-run re-finds every rejected car, "
+                         "so without this the same junk is re-rendered and re-reviewed "
+                         "every wave. Pass an empty string to disable.")
     ap.add_argument("--report", action="store_true",
                     help="print every row and why it was dropped")
     a = ap.parse_args()
@@ -138,8 +143,18 @@ def main():
     pats = build(a.nameplates.split(","))
     allow = {u.strip() for u in a.allow_uid.split(",") if u.strip()}
 
+    rejected = set()
+    if a.rejects:
+        try:
+            rejected = set(json.load(open(a.rejects))["rejects"])
+        except FileNotFoundError:
+            pass
+
     kept, dropped, seen, forced = [], {}, set(), 0
     for r in rows:
+        if r.get("uid") in rejected:
+            dropped.setdefault("already-scrapped", []).append(r.get("name", ""))
+            continue
         verdict, plate = classify(r.get("name", ""), pats)
         if r.get("uid") in allow and verdict != "keep":
             verdict, plate, forced = "keep", "(forced)", forced + 1
