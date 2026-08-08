@@ -35,7 +35,28 @@
    "mats": 1,
    "verdict": "FAIL",
    "note": "wheels sunk inside the body -- the arches show only small dark cylinders and the van sits on the floor with no visible tyres. Recolour also did not land, renders white. cov=0.099"
+  },
+  "6bd804f3f61a4a5e9dcddddab42cf0f9": {
+   "name": "Mercedes- Benz AMG GLC 63s 4MATIC+",
+   "cov": 0.109,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "AMG GLC 63s; 5-spoke wheels consistent in all four views, Panamericana grille crisp, headlight internals present, shut lines defined, clean reflections. cov=0.109 sits just above the failure band and silver appears to have landed -- the stamp decides"
+  },
+  "6df2a99b1dbc4b5b8baaf7accf18390f": {
+   "name": "2012 Mercedes Benz Gl350",
+   "cov": 0.114,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "GL350; multi-spoke wheels consistent, grille crisp, headlight internals present, shut lines defined. BUT renders pure white at cov=0.114, so the respray likely did not land -- the low-coverage band is a gradient, not a cliff at 0.10"
+  },
+  "f74b3803425248799902579e10027864": {
+   "name": "Mercedes Benz GL 350 2012",
+   "cov": 0.114,
+   "mats": 1,
+   "verdict": "DUPLICATE",
+   "note": "same GL350 mesh as 6df2a99b, 59 faces apart (0.06%) -- identical car, wheels and finish, only the render azimuths differ. The 0.5%-plus-nameplate rule was correct on this pair"
   }
  },
- "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage."
+ "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage."
 }
