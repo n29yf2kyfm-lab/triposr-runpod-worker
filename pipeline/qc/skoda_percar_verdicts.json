@@ -1,0 +1,218 @@
+{
+ "ce30515b105e45b8b4068f4c2b4138a3": [
+  "SCRAP",
+  "Favorit 1993 — the GLB is a whole diorama, not a car: trees, foliage cards, bushes and a ground disc are part of the mesh and would ship with it. The car underneath is low-detail too — flat grille with no slat depth, headlights with no internal elements, undefined shut lines."
+ ],
+ "b41979349dc14884906ac8e6c7b51bd9": [
+  "KEEP",
+  "Superb TSI 380 (2019 facelift) — reads as a Superb instantly. Vertical chrome grille slats have real depth, headlights carry sharp internal elements, rear clusters have the Skoda C-signature, multi-spoke alloys consistent across all four views, defined door and bonnet shut lines, clean reflections, premium metallic finish. Fills a real gap: only a 2009 Superb is live."
+ ],
+ "50f2317cc6724b8cbc19729e570201bf": [
+  "SCRAP",
+  "AMENDED from KEEP after seeing the other two B8 Superbs. Same generation as the 2017 Superb now kept, and the weaker of the two: its glass is so clear the beige interior reads straight through, which would look like open windows on a showroom turntable. Keeping one B8 Superb, not two."
+ ],
+ "45b92af9f9e342d9b07ad436a4e722b1": [
+  "KEEP",
+  "Octavia Combi 2009 (Mk2 facelift) — reads instantly as the Mk2 estate. Vertical grille slats with chrome surround, headlights with internal elements, roof rails modelled, five-spoke alloys consistent across all four views, shut lines defined, clean reflections on premium white. Real gap: only the 2020 Octavia Estate is live."
+ ],
+ "9b9f212d14b34d44bebf9fbb22afa54a": [
+  "SCRAP",
+  "Duplicate — pixel-identical to the 2009 Octavia Combi kept above (484,346 f vs 486,656 f, different uploader). Same mesh re-hosted; keeping both would put two identical cars in the library."
+ ],
+ "8941407f34f8414097d4713ebae1aa42": [
+  "SCRAP",
+  "Skoda Vision Gran Turismo — a fantasy concept built for a video game, never a road car. No UK registration can ever decode to it, so it cannot be reached by a lookup no matter how good the mesh is."
+ ],
+ "c4697b4e0bd54c61b3b72fcde84a0b36": [
+  "KEEP",
+  "Octavia RS 2014 (Mk3 liftback) — reads instantly as the Mk3 RS. Vertical grille slats with depth, angular RS headlight signature, RS multi-spoke alloys with red calipers consistent across all four views, defined shut lines, red pinstripe on the rear valance, clean reflections. Genuine gap: no Octavia RS and no Mk3 Octavia live. Headlight internals are a shade flatter than the Superb's but still read."
+ ],
+ "858a5aab4ab54e22936e210039b9f622": [
+  "SCRAP",
+  "Duplicate — pixel-identical to the 2014 Octavia RS kept above (1,017,801 f vs 1,017,813 f). Same mesh re-hosted by a second uploader."
+ ],
+ "3341f3bbeaa24054a4354a9add4484b2": [
+  "SCRAP",
+  "Rapid Spaceback 2020 — broken rig. Every wheel is detached from its hub and floating: one sits under the sill in the side view, the arches are empty with bare suspension exposed, and the car rests on nothing in all four views. Not a texture or material problem, the transforms are wrong."
+ ],
+ "fe062f0fd05e43a6a32a88a1aa39ef14": [
+  "SCRAP",
+  "Fabia R5 — a competition rally car: wide arches, roll cage, rally wing, gravel wheels, stripped interior. A UK reg for a Fabia decodes to the road car, so serving this would show the customer a rally car instead of theirs. Panels are also soft and wavy along the flank and bonnet."
+ ],
+ "0a38fe446b324b1196cdf484df13b937": [
+  "SCRAP",
+  "Octavia 2005 (Mk2 liftback) — below the bar on your fail criteria: grille slats shallow, headlight internals flat with no sharp elements, front and rear bumpers soft, door shut lines read as faint creases rather than defined lines, and the flank undulates visibly in the side view. It would fill a liftback body-style gap, but the 2009 Combi kept above is the same generation done properly and this is not close to it."
+ ],
+ "c31169ccfd354b6c9b6f09964c113ae3": [
+  "SCRAP",
+  "Duplicate of the 2005 Octavia above (353,866 f vs 354,504 f), and scrapped on the same quality grounds regardless."
+ ],
+ "2d6363dd7ea7408f82efd160534455a7": [
+  "SCRAP",
+  "Superb B8 — third of the same generation in this wave and the weakest of the three: headlight internals simplified, grille slat depth shallower. Redundant against the 2017 Superb kept, which is the same generation done better."
+ ],
+ "3575951730894da0ab4999a1be549b93": [
+  "SCRAP",
+  "Octavia MK3 Facelift — broken rig, same failure as the other Merc_TV uploads. Every wheel is detached and floating, arches empty with suspension exposed, and a large yellow slab object is baked into the mesh and would ship with the car."
+ ],
+ "2da5059c3068448b9541eafb930a45a0": [
+  "KEEP",
+  "Superb 2017 (B8) — the best of the three B8 Superbs. Vertical chrome grille slats with real depth, headlights with sharp internal elements, multi-spoke alloys consistent across all four views, defined shut lines, properly tinted glass, deep clean reflections on premium paint. Russian plates are in standard positions so the GB quad covers them."
+ ],
+ "24c7a32733414d1eb855571202e747e1": [
+  "SCRAP",
+  "Roomster 2006-2015 — broken rig. Wheels detached and replaced by floating white discs, arches empty with suspension exposed, one wheel sitting under the sill, and the side glass renders as opaque white panels."
+ ],
+ "7e359874ebe744158eddc37c9da8f487": [
+  "SCRAP",
+  "Karoq 2019 — a good model, but the library already serves skoda-karoq-2020-v1 of the same generation. A second Karoq adds no coverage and the two would compete in the resolver."
+ ],
+ "84fd1669a82f4be197bb87938ba02efd": [
+  "SCRAP",
+  "Roomster 2006-2011 — the wheels are attached on this one but the lights are unfinished: headlights are blank pale voids with no internal structure at all, and the rear cluster is a flat magenta blob. Front bumper soft, flank surface undulates in the three-quarter views. Roomster stays on the re-source list as a genuine UK gap."
+ ],
+ "af57731baf6647f2a58364c1b3dbccba": [
+  "SCRAP",
+  "Octavia Mk1 (1U) — 93k faces and it shows. Headlights are flat white voids with no internals, the rear cluster is a featureless pink panel, grille slats barely exist, and there are no bonnet or door shut lines at all. Reads as a soap bar rather than a car."
+ ],
+ "0badfb448123432aa186175ccbf89849": [
+  "SCRAP",
+  "Octavia Combi 1U 1998 — broken rig, the recurring Merc_TV failure. Wheels detached and floating, hubs and brake discs exposed in empty arches, car resting on nothing in all four views."
+ ],
+ "3b8439df9f614be7b61d23d56d700d95": [
+  "SCRAP",
+  "AMENDED from KEEP. Reviewing the 2020 Rapid saloon alongside it made the problem clear: both are SAIC China-market cars from the same uploader, both carrying the SAIC Skoda dealer decal, and both wear the newer Skoda face. The UK Rapid Spaceback ran to 2019 with the earlier front end, so serving this to a UK Rapid Spaceback lookup would show the customer a different face from their car. The mesh quality was never the issue and my first verdict ignored the market question."
+ ],
+ "852ea89f86e647998b11b7eb9cac6f8a": [
+  "SCRAP",
+  "Octavia RS — not a single-car asset. The GLB is a workspace containing two cars (a saloon and a half-exploded estate) plus columns of floating spare wheels, all scattered far from origin. Nothing here can be staged as one vehicle."
+ ],
+ "da4e2d26356b4794b08537c89bed5a45": [
+  "SCRAP",
+  "Superb MK1 — broken rig, wheels detached and floating with empty arches. Also a modified car: oversized rear wing and a GRAVITY banner decal baked across the windscreen."
+ ],
+ "b99a9b38c594462cbe16c1f4782fcc28": [
+  "SCRAP",
+  "Octavia MK2 Combi — total geometry failure. The mesh is collapsed into overlapping grey slabs with no recognisable car in any view."
+ ],
+ "426bc40471414849a0473168dcb7d32a": [
+  "SCRAP",
+  "Enyaq iV 2022 — the lights are simply absent: blank white body panels where the headlight and tail-light units should sit, no lens, no internals. Body surfacing is faceted, with flat polygon edges visible across the bonnet and rear quarter. Redundant anyway, skoda-enyaq-v1 is already live."
+ ],
+ "c45d77b41a814ab98a361a6f3fa855fb": [
+  "SCRAP",
+  "Kamiq GT — the coupe-SUV built for China by SAIC Skoda, carrying its SAIC dealer decal on the rear quarter. It was never sold in the UK, and the UK Kamiq is already live. Well modelled, wrong car for this library."
+ ],
+ "46a518ad7492447cb19cc1dcdfa51323": [
+  "SCRAP",
+  "Kamiq GT again, decimated to half the faces of the copy above, and the reduction cost it the light internals: headlights are now blank white with only outline creases. Same China-only model regardless."
+ ],
+ "e0f85b7f87494bb7bd78fdb468af344b": [
+  "SCRAP",
+  "Octavia 2003 — exploded mesh. Body panels detached and floating clear of the shell, three wheels missing with only one yellow wheel present, interior visible through the gaps."
+ ],
+ "40dc7c8a08e1479ba3bbd93d06744ede": [
+  "SCRAP",
+  "Rapid 2020 saloon — a SAIC China-market car, its dealer decal baked into the rear quarter. The UK Rapid saloon is already live as skoda-rapid-v1 for 2012-2019, so this adds nothing a UK reg could reach."
+ ],
+ "978d8108a2aa4ab7aefc36d57a03dabb": [
+  "SCRAP",
+  "LIAZ 706 MTS — a 1960s Czech tipper lorry, not a car. Nothing a UK car registration can decode to."
+ ],
+ "91510259220a4daa9a4176c599829c77": [
+  "SCRAP",
+  "Titled 'Skoda Kodiak' but the mesh is a suspension bridge. Mislabelled asset — the only car-sized object in it is a black speck on the deck."
+ ],
+ "bdf27493e8eb45b29a0160d2c1fb3ecb": [
+  "SCRAP",
+  "The 2020 SAIC China Rapid Spaceback again, this copy with Chinese marketing text baked onto the front plate as well as the SAIC decal on the rear quarter. Same market mismatch as the others."
+ ],
+ "17a249b6c7ad48a49d8f3dd0c4ab1a9b": [
+  "SCRAP",
+  "Skoda 1203 — a 1960s Czechoslovak van in ambulance trim, never sold in the UK. The uploader also titles it 'Draft' and it shows: rear doors detached, roof panel floating clear of the shell, no grille."
+ ],
+ "e3c4154a228d4be19ce156b2fa900afe": [
+  "SCRAP",
+  "Kodiaq 2020 — another SAIC China car with the dealer decal on the rear quarter, and the library already serves two Kodiaqs (2020 and 2022) of this generation."
+ ],
+ "04c8459aca804e35806b3dcc69c296db": [
+  "SCRAP",
+  "Octavia MK1 — broken rig, the recurring Merc_TV failure. Wheels detached and floating, arches empty with coil springs exposed."
+ ],
+ "91832c52b6214966a5c8385b4514d720": [
+  "SCRAP",
+  "Skoda 9Tr — a 1960s trolleybus, complete with roof poles and pantograph. Not a car."
+ ],
+ "76fb682e75ce49d39b2c1750a956f925": [
+  "SCRAP",
+  "Kamiq — modified stance: slammed to the floor with the wheels tucked into the arches and the front splitter clipping the ground, so it does not read as the car a UK reg would decode to. Redundant in any case, two Kamiqs of this generation are already live."
+ ],
+ "1fc3d3f0312741b2861a7673fd42bfe6": [
+  "SCRAP",
+  "The same Kamiq mesh as above re-hosted — identical 364,722 faces, 8 materials, 0.717 body share, just a lilac base colour. Same slammed stance, same redundancy."
+ ],
+ "e7393eeca2e74cf283edb395d4f4b677": [
+  "SCRAP",
+  "Karoq 2018 — untextured. Headlights, tail lights and grille inserts are all body-coloured white shapes with creased outlines and no lens or internals anywhere. Redundant too, the 2020 Karoq is live."
+ ],
+ "d95973858f2f4d778bfdf3cc1574ee92": [
+  "SCRAP",
+  "Octavia in Ukrainian police livery — ПОЛІЦІЯ markings and the blue/yellow stripe are baked into the mesh, headlights are missing entirely, and the whole car is flat-shaded low-poly with no reflections."
+ ],
+ "14ba0655029a48219b41030fd259104e": [
+  "SCRAP",
+  "Enyaq — heavily faceted, with flat polygon edges visible across the bonnet, doors, roof and rear quarter. Untextured throughout: the lights are body-coloured shapes. Redundant with the live skoda-enyaq-v1."
+ ],
+ "53934e769ce04aeab3b6fdbf2662d1b6": [
+  "SCRAP",
+  "The same Enyaq mesh re-hosted by the same uploader — identical 353,424 faces, 5 materials, 0.806 body share, and pixel-identical renders. Same faceting and same redundancy."
+ ],
+ "4806b6917fe3465882c50fc28f9b990d": [
+  "SCRAP",
+  "Karoq — a genuinely decent model: grille slats with chrome, headlights and tail lights with real internals, alloys consistent across all four views, defined shut lines. Scrapped only because skoda-karoq-2020-v1 of the same generation is already live and a second one adds no coverage."
+ ],
+ "faf858b3ae324e398c15db62bfe015d5": [
+  "SCRAP",
+  "Fabia RS WRC — full works rally car. Skoda Motorsport livery, WRC, Michelin and Castrol sponsor decals baked into the texture, wide arches, roll cage, competition wing. Not a road Fabia."
+ ],
+ "75257f256dd9474c941f31aa29092301": [
+  "SCRAP",
+  "Fabia Combi MK1 — broken rig. Wheels replaced by flat white discs, arches empty, car resting on nothing. Untextured white throughout with no light internals."
+ ],
+ "ff6fe600538e4e249bf9e1a4a8da7262": [
+  "SCRAP",
+  "Fabia Sedan MK1 — broken rig and body-kitted: wheels missing entirely with hollow arches, plus an aftermarket wing, flared arches and a front splitter. Untextured white, no light internals."
+ ],
+ "1e40a5b9063847cf876ea4eb62c08e19": [
+  "SCRAP",
+  "Superb MK1 — wheels are attached on this one but the car is untextured: headlights are blank white voids with no lens or internals, the tail lights are pale outlines, and there are no bonnet shut lines. 97k faces is too coarse for the premium bar."
+ ],
+ "6d100a9f85934a39a80bffa5b5c48430": [
+  "SCRAP",
+  "Octavia MK1 Combi — broken rig again, wheels detached and floating with empty arches, and body-kitted with a rear spoiler, side skirts and a painted bonnet stripe."
+ ],
+ "00c87ba82e06437d9947f8c407c5b8d9": [
+  "SCRAP",
+  "Skoda PA-II 'Zelva' — a 1920s armoured car with a turret, machine guns and wartime markings on the plate. A military vehicle, not a car."
+ ],
+ "185172d620914f6c8043b11822b98df0": [
+  "SCRAP",
+  "'Czech Old SKODA Car' — a bare body-in-white shell. No wheels, no glass, no lights, no interior, no engine; just the pressed panels lying on their side."
+ ],
+ "4f7701a83a904a978bfb4a73fa498ef8": [
+  "SCRAP",
+  "Photogrammetry scan and it shows every scan defect at once: a slab of tarmac baked into the mesh, torn holes through the glass and roof, melted blobby surfacing along the sills, and the capture lighting baked into the texture so it cannot be relit. Exactly the scan mush the bar exists to reject."
+ ],
+ "ae362fd3d83448e6b0906b5f280d85b9": [
+  "SCRAP",
+  "Titled 'skoda' but it is not one — no Skoda grille, no badge, and the proportions read as a Japanese saloon with a bolted-on aftermarket wing. Softly modelled with melted panel surfaces throughout."
+ ],
+ "ba7b66f848f94e7185634399eeb41460": [
+  "SCRAP",
+  "Octavia Wagon 2019 — photogrammetry scan. Ground plane baked in as a ragged mat under the car, front wing and arch melted into a smear in the rear three-quarter view, wheels smeared into the arches, and the capture lighting baked into the texture."
+ ],
+ "9c20a71dce1346aab6ff1c00428a5f7a": [
+  "SCRAP",
+  "Octavia Sedan 2019 — the same photogrammetry capture as the wagon above and the same defects: baked ground mat, collapsed rear bumper corner, smeared sills, non-relightable baked texture. At 60k faces it is also the thinnest mesh in the wave."
+ ]
+}
