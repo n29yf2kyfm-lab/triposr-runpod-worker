@@ -1,0 +1,1091 @@
+[
+ {
+  "uid": "80d991619044705c",
+  "marque": "audi",
+  "name": "1982_audi_quattro_b2",
+  "file": "glbs/audi/1982_audi_quattro_b2.glb",
+  "mb": 3.2,
+  "mats": 4,
+  "cov": 0.792,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/80d991619044705c.jpg",
+  "n_materials": 10,
+  "chosen_body": [
+   "Vehicle_Exterior_mm_cab",
+   "Vehicle_Exterior_mm_chassis",
+   "Vehicle_Exterior_mm_ext",
+   "Vehicle_Exterior_mm_misc"
+  ],
+  "body_detail": [
+   [
+    "Vehicle_Exterior_mm_cab",
+    27.5
+   ],
+   [
+    "Vehicle_Exterior_mm_ext",
+    21.3
+   ],
+   [
+    "Vehicle_Exterior_mm_misc",
+    15.8
+   ],
+   [
+    "Vehicle_Exterior_mm_chassis",
+    14.6
+   ]
+  ],
+  "glass": [
+   "Vehicle_Exterior_mm_windows"
+  ],
+  "lights": [
+   "Vehicle_Exterior_mm_lights"
+  ]
+ },
+ {
+  "uid": "70f8badceb4acb81",
+  "marque": "audi",
+  "name": "1984_audi_sport_quattro",
+  "file": "glbs/audi/1984_audi_sport_quattro.glb",
+  "mb": 5.0,
+  "mats": 0,
+  "cov": 0.0,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/70f8badceb4acb81.jpg",
+  "n_materials": 12,
+  "chosen_body": [],
+  "body_detail": [],
+  "glass": [
+   "AudiMAT_Glass1",
+   "glass_R"
+  ],
+  "lights": [
+   "AudiMAT_Lights1"
+  ]
+ },
+ {
+  "uid": "ea481baab325a361",
+  "marque": "audi",
+  "name": "2008_audi_s5",
+  "file": "glbs/audi/2008_audi_s5.glb",
+  "mb": 9.3,
+  "mats": 2,
+  "cov": 0.185,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/ea481baab325a361.jpg",
+  "n_materials": 27,
+  "chosen_body": [
+   "CarPaint",
+   "Chassis_Black"
+  ],
+  "body_detail": [
+   [
+    "CarPaint",
+    16
+   ],
+   [
+    "Chassis_Black",
+    2.5
+   ]
+  ],
+  "glass": [
+   "glass",
+   "Glass_Surr"
+  ],
+  "lights": [
+   "Light_NoA",
+   "Light_A"
+  ]
+ },
+ {
+  "uid": "05abfd6da2aab1b5",
+  "marque": "audi",
+  "name": "2019_audi_r8_v10_decennium",
+  "file": "glbs/audi/2019_audi_r8_v10_decennium.glb",
+  "mb": 12.1,
+  "mats": 6,
+  "cov": 0.46,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/05abfd6da2aab1b5.jpg",
+  "n_materials": 26,
+  "chosen_body": [
+   "bodyBase_Geo_lodASG1",
+   "bodyCarbon1_Geo_lodASG1",
+   "bodyColoured_Geo_lodASG1",
+   "bodyPaint_Geo_lodASG1",
+   "bodySpecularTint_Geo_lodASG1",
+   "bodyTextured2_Geo_lodASG1",
+   "bodyTextured_Geo_lodASG1"
+  ],
+  "body_detail": [
+   [
+    "bodyPaint_Geo_lodASG1",
+    16.9
+   ],
+   [
+    "bodyColoured_Geo_lodASG1",
+    12.7
+   ],
+   [
+    "bodyBase_Geo_lodASG1",
+    11
+   ],
+   [
+    "bodyCarbon1_Geo_lodASG1",
+    3.5
+   ],
+   [
+    "bodyTextured_Geo_lodASG1",
+    1.2
+   ],
+   [
+    "bodySpecularTint_Geo_lodASG1",
+    0.7
+   ]
+  ],
+  "glass": [
+   "bodyWindowInside_Geo_lodASG1",
+   "red_glass"
+  ],
+  "lights": [
+   "bodyLight_Geo_lodASG1"
+  ]
+ },
+ {
+  "uid": "86cb306658f9b7f6",
+  "marque": "audi",
+  "name": "audi_a8_custom_2018",
+  "file": "glbs/audi/audi_a8_custom_2018.glb",
+  "mb": 27.0,
+  "mats": 13,
+  "cov": 0.879,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/86cb306658f9b7f6.jpg",
+  "n_materials": 31,
+  "chosen_body": [
+   "a8texture10",
+   "a8texture12__env_4_spec",
+   "a8texture12__prim_env_4_spec",
+   "a8texture12__sec_env_4_spec",
+   "a8texture3",
+   "a8texture5",
+   "a8texture7",
+   "black1__env_4_spec",
+   "black1__env_7_spec",
+   "black1__spec",
+   "bron__env_22_spec",
+   "bron__env_26_spec",
+   "roof"
+  ],
+  "body_detail": [
+   [
+    "black1__spec",
+    21.3
+   ],
+   [
+    "a8texture7",
+    11.1
+   ],
+   [
+    "a8texture12__prim_env_4_spec",
+    9.5
+   ],
+   [
+    "a8texture12__sec_env_4_spec",
+    8.4
+   ],
+   [
+    "black1__env_7_spec",
+    7.7
+   ],
+   [
+    "a8texture3",
+    7
+   ],
+   [
+    "black1__env_4_spec",
+    6.6
+   ],
+   [
+    "a8texture10",
+    6.2
+   ]
+  ],
+  "glass": [
+   "chrome2__env_6_trans"
+  ],
+  "lights": []
+ },
+ {
+  "uid": "14f919e371336003",
+  "marque": "bmw",
+  "name": "free_bmw_m3_e30",
+  "file": "glbs/bmw/free_bmw_m3_e30.glb",
+  "mb": 14.0,
+  "mats": 1,
+  "cov": 0.302,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/14f919e371336003.jpg",
+  "n_materials": 15,
+  "chosen_body": [
+   "BMW_E30_M3_PAINT"
+  ],
+  "body_detail": [
+   [
+    "BMW_E30_M3_PAINT",
+    30.2
+   ]
+  ],
+  "glass": [
+   "BMW_E30_M3_WINDOWS",
+   "BMW_E30_M3_LENS",
+   "Logo_Plane"
+  ],
+  "lights": [
+   "BMW_E30_M3_TAILLIGHT_REFLECTOR",
+   "BMW_E30_M3_LENS",
+   "BMW_E30_M3_HEADLIGHT_REFLECTOR"
+  ]
+ },
+ {
+  "uid": "48ee8889ff5c4a5c",
+  "marque": "jaguar",
+  "name": "1992_jaguar_xj220",
+  "file": "glbs/jaguar/1992_jaguar_xj220.glb",
+  "mb": 20.5,
+  "mats": 7,
+  "cov": 0.703,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/48ee8889ff5c4a5c.jpg",
+  "n_materials": 26,
+  "chosen_body": [
+   "Color_2",
+   "XJ220MI_1256010001_002",
+   "XJ220MI_Engine1",
+   "XJ220MI_Engine_Tinfoil_A1",
+   "XJ220MI_Exhaust1",
+   "XJ220MI_Rim1",
+   "phong1"
+  ],
+  "body_detail": [
+   [
+    "XJ220MI_Engine1",
+    20.8
+   ],
+   [
+    "XJ220MI_Exhaust1",
+    20.2
+   ],
+   [
+    "XJ220MI_1256010001_002",
+    20.1
+   ],
+   [
+    "XJ220MI_Rim1",
+    4.5
+   ],
+   [
+    "Color_2",
+    2.1
+   ],
+   [
+    "phong1",
+    1.4
+   ],
+   [
+    "XJ220MI_Engine_Tinfoil_A1",
+    1.1
+   ]
+  ],
+  "glass": [
+   "XJ220MI_Glass1",
+   "XJ220MI_Glass_Light1"
+  ],
+  "lights": [
+   "XJ220MI_Light1",
+   "XJ220MI_Glass_Light1"
+  ]
+ },
+ {
+  "uid": "edf47a66f69bbe3a",
+  "marque": "jaguar",
+  "name": "1995_jaguar_xj12_lwb_x305",
+  "file": "glbs/jaguar/1995_jaguar_xj12_lwb_x305.glb",
+  "mb": 19.5,
+  "mats": 1,
+  "cov": 0.304,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/edf47a66f69bbe3a.jpg",
+  "n_materials": 9,
+  "chosen_body": [
+   "Paint"
+  ],
+  "body_detail": [
+   [
+    "Paint",
+    30.4
+   ]
+  ],
+  "glass": [
+   "Glass"
+  ],
+  "lights": [
+   "Lights"
+  ]
+ },
+ {
+  "uid": "d790a5ad024d6aef",
+  "marque": "jaguar",
+  "name": "2005_jaguar_xj6_tdvi_x350",
+  "file": "glbs/jaguar/2005_jaguar_xj6_tdvi_x350.glb",
+  "mb": 8.4,
+  "mats": 1,
+  "cov": 0.38,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/d790a5ad024d6aef.jpg",
+  "n_materials": 18,
+  "chosen_body": [
+   "Paint"
+  ],
+  "body_detail": [
+   [
+    "Paint",
+    38
+   ]
+  ],
+  "glass": [
+   "Window",
+   "WindowDark",
+   "Lens"
+  ],
+  "lights": [
+   "Lights",
+   "LightInt",
+   "Lens"
+  ]
+ },
+ {
+  "uid": "cf1428175cbdd041",
+  "marque": "jaguar",
+  "name": "2009_jaguar_xkr_5.0_supercharged_speed_pack",
+  "file": "glbs/jaguar/2009_jaguar_xkr_5.0_supercharged_speed_pack.glb",
+  "mb": 5.4,
+  "mats": 2,
+  "cov": 0.331,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/cf1428175cbdd041.jpg",
+  "n_materials": 22,
+  "chosen_body": [
+   "CarPaint",
+   "chassis"
+  ],
+  "body_detail": [
+   [
+    "chassis",
+    16.6
+   ],
+   [
+    "CarPaint",
+    16.5
+   ]
+  ],
+  "glass": [
+   "glass",
+   "glass_surr",
+   "light_glass",
+   "red_glass"
+  ],
+  "lights": [
+   "light",
+   "light_glass",
+   "material"
+  ]
+ },
+ {
+  "uid": "ac0cad2d67faee71",
+  "marque": "jaguar",
+  "name": "2013_jaguar_c-x75",
+  "file": "glbs/jaguar/2013_jaguar_c-x75.glb",
+  "mb": 2.2,
+  "mats": 5,
+  "cov": 0.812,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/ac0cad2d67faee71.jpg",
+  "n_materials": 10,
+  "chosen_body": [
+   "Vehicle_Exterior_mm_cab",
+   "Vehicle_Exterior_mm_chassis",
+   "Vehicle_Exterior_mm_ext",
+   "Vehicle_Exterior_mm_misc",
+   "Vehicle_Exterior_mm_rotor"
+  ],
+  "body_detail": [
+   [
+    "Vehicle_Exterior_mm_misc",
+    36.4
+   ],
+   [
+    "Vehicle_Exterior_mm_cab",
+    18.1
+   ],
+   [
+    "Vehicle_Exterior_mm_ext",
+    16.3
+   ],
+   [
+    "Vehicle_Exterior_mm_chassis",
+    9.5
+   ],
+   [
+    "Vehicle_Exterior_mm_rotor",
+    0.9
+   ]
+  ],
+  "glass": [
+   "Vehicle_Exterior_mm_windows"
+  ],
+  "lights": [
+   "Vehicle_Exterior_mm_lights"
+  ]
+ },
+ {
+  "uid": "9d13102a920739be",
+  "marque": "jaguar",
+  "name": "2015_jaguar_f-type",
+  "file": "glbs/jaguar/2015_jaguar_f-type.glb",
+  "mb": 11.3,
+  "mats": 1,
+  "cov": 1.0,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/9d13102a920739be.jpg",
+  "n_materials": 1,
+  "chosen_body": [
+   "Material_0"
+  ],
+  "body_detail": [
+   [
+    "Material_0",
+    100
+   ]
+  ],
+  "glass": [],
+  "lights": []
+ },
+ {
+  "uid": "bce73fd8946397f4",
+  "marque": "jaguar",
+  "name": "2016_jaguar_f-type_project_7",
+  "file": "glbs/jaguar/2016_jaguar_f-type_project_7.glb",
+  "mb": 21.6,
+  "mats": 1,
+  "cov": 0.201,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/bce73fd8946397f4.jpg",
+  "n_materials": 25,
+  "chosen_body": [
+   "CarPaint"
+  ],
+  "body_detail": [
+   [
+    "CarPaint",
+    20.1
+   ]
+  ],
+  "glass": [
+   "jagwindos",
+   "Light_glas",
+   "Red_glass"
+  ],
+  "lights": [
+   "Light",
+   "Light_glas",
+   "Int_A",
+   "Dash"
+  ]
+ },
+ {
+  "uid": "2643339223aa0120",
+  "marque": "jaguar",
+  "name": "2016_jaguar_f-type_svr_coupe",
+  "file": "glbs/jaguar/2016_jaguar_f-type_svr_coupe.glb",
+  "mb": 3.9,
+  "mats": 1,
+  "cov": 0.194,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/2643339223aa0120.jpg",
+  "n_materials": 20,
+  "chosen_body": [
+   "chassis"
+  ],
+  "body_detail": [
+   [
+    "chassis",
+    19.4
+   ]
+  ],
+  "glass": [
+   "glass",
+   "glass_surr"
+  ],
+  "lights": [
+   "lights"
+  ]
+ },
+ {
+  "uid": "444accfcdcad312d",
+  "marque": "jaguar",
+  "name": "2021_jaguar_f-type_r_convertible",
+  "file": "glbs/jaguar/2021_jaguar_f-type_r_convertible.glb",
+  "mb": 14.4,
+  "mats": 4,
+  "cov": 0.56,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/444accfcdcad312d.jpg",
+  "n_materials": 25,
+  "chosen_body": [
+   "jJaguar_FTYPERConvertibleRewardRecycled_2021Base_Material1",
+   "jJaguar_FTYPERConvertibleRewardRecycled_2021Coloured_Material1",
+   "jJaguar_FTYPERConvertibleRewardRecycled_2021EngineA_Material1",
+   "jJaguar_FTYPERConvertibleRewardRecycled_2021Paint_Material1"
+  ],
+  "body_detail": [
+   [
+    "jJaguar_FTYPERConvertibleRewardRecycled_2021Paint_Material1",
+    22.3
+   ],
+   [
+    "jJaguar_FTYPERConvertibleRewardRecycled_2021Base_Material1",
+    13.2
+   ],
+   [
+    "jJaguar_FTYPERConvertibleRewardRecycled_2021EngineA_Material1",
+    10.8
+   ],
+   [
+    "jJaguar_FTYPERConvertibleRewardRecycled_2021Coloured_Material1",
+    9.7
+   ]
+  ],
+  "glass": [
+   "jJaguar_FTYPERConvertibleRewardRecycled_2021Window_Material1",
+   "jred_glass"
+  ],
+  "lights": [
+   "jJaguar_FTYPERConvertibleRewardRecycled_2021LightA_Material1"
+  ]
+ },
+ {
+  "uid": "1d6b6778a95a34bd",
+  "marque": "jaguar",
+  "name": "jaguar_xe_2015",
+  "file": "glbs/jaguar/jaguar_xe_2015.glb",
+  "mb": 5.1,
+  "mats": 1,
+  "cov": 1.0,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/1d6b6778a95a34bd.jpg",
+  "n_materials": 1,
+  "chosen_body": [
+   "Material_0"
+  ],
+  "body_detail": [
+   [
+    "Material_0",
+    100
+   ]
+  ],
+  "glass": [],
+  "lights": []
+ },
+ {
+  "uid": "71c4d7cd94904532",
+  "marque": "jaguar",
+  "name": "jaguardaimler_xj_x308_multipack",
+  "file": "glbs/jaguar/jaguardaimler_xj_x308_multipack.glb",
+  "mb": 11.1,
+  "mats": 7,
+  "cov": 0.571,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/71c4d7cd94904532.jpg",
+  "n_materials": 29,
+  "chosen_body": [
+   "PaintBlack",
+   "PaintBlue",
+   "PaintGreen",
+   "PaintRed",
+   "PaintSeafrost",
+   "PaintSilver",
+   "PaintedBlack"
+  ],
+  "body_detail": [
+   [
+    "PaintedBlack",
+    39.1
+   ],
+   [
+    "PaintBlue",
+    3.1
+   ],
+   [
+    "PaintSilver",
+    3
+   ],
+   [
+    "PaintGreen",
+    3
+   ],
+   [
+    "PaintSeafrost",
+    3
+   ],
+   [
+    "PaintRed",
+    3
+   ],
+   [
+    "PaintBlack",
+    3
+   ]
+  ],
+  "glass": [
+   "Window",
+   "Lens"
+  ],
+  "lights": [
+   "Lights",
+   "Lens"
+  ]
+ },
+ {
+  "uid": "32630a9a6e9e6f45",
+  "marque": "rangerover",
+  "name": "2006_supercharged",
+  "file": "glbs/rangerover/2006_supercharged.glb",
+  "mb": 12.6,
+  "mats": 1,
+  "cov": 0.105,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/32630a9a6e9e6f45.jpg",
+  "n_materials": 38,
+  "chosen_body": [
+   "PaintFl1Mtl"
+  ],
+  "body_detail": [
+   [
+    "PaintFl1Mtl",
+    10.5
+   ]
+  ],
+  "glass": [
+   "CoatFl1Mtl",
+   "Faraglass1Mtl",
+   "Glass2Mtl"
+  ],
+  "lights": [
+   "Lights0011Mtl",
+   "Lights0021Mtl"
+  ]
+ },
+ {
+  "uid": "98c3fcaefcc54cb1",
+  "marque": "rangerover",
+  "name": "2015_sport_svr",
+  "file": "glbs/rangerover/2015_sport_svr.glb",
+  "mb": 5.5,
+  "mats": 3,
+  "cov": 0.364,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/98c3fcaefcc54cb1.jpg",
+  "n_materials": 30,
+  "chosen_body": [
+   "carPaint",
+   "rM_Chassis_Max1",
+   "rM_Opaque_PaintSolidBlack_Max1"
+  ],
+  "body_detail": [
+   [
+    "rM_Chassis_Max1",
+    21.9
+   ],
+   [
+    "carPaint",
+    12.8
+   ],
+   [
+    "rM_Opaque_PaintSolidBlack_Max1",
+    1.7
+   ]
+  ],
+  "glass": [
+   "rM_Glass_WindowFront_Low1",
+   "rM_Glass_WindowSurroundFront_Low1",
+   "glass_N"
+  ],
+  "lights": [
+   "rM_LightBucket_Max1"
+  ]
+ },
+ {
+  "uid": "f2cd9c8f894cd4b9",
+  "marque": "rangerover",
+  "name": "2018_sport",
+  "file": "glbs/rangerover/2018_sport.glb",
+  "mb": 23.2,
+  "mats": 1,
+  "cov": 0.372,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/f2cd9c8f894cd4b9.jpg",
+  "n_materials": 14,
+  "chosen_body": [
+   "Car_Paint"
+  ],
+  "body_detail": [
+   [
+    "Car_Paint",
+    37.2
+   ]
+  ],
+  "glass": [
+   "Glass",
+   "Trasnsparent_Glass",
+   "Yellow_Glass"
+  ],
+  "lights": [
+   "Head_Light",
+   "Tail_Light",
+   "Reflectors"
+  ]
+ },
+ {
+  "uid": "ae50bffd45eba329",
+  "marque": "rangerover",
+  "name": "2023_sport",
+  "file": "glbs/rangerover/2023_sport.glb",
+  "mb": 16.4,
+  "mats": 3,
+  "cov": 0.626,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/ae50bffd45eba329.jpg",
+  "n_materials": 20,
+  "chosen_body": [
+   "2023_Land_Rover_Range_Rover_Sport_Black1",
+   "2023_Land_Rover_Range_Rover_Sport_Black2",
+   "2023_Land_Rover_Range_Rover_Sport_Firenze_Red"
+  ],
+  "body_detail": [
+   [
+    "2023_Land_Rover_Range_Rover_Sport_Black2",
+    42.1
+   ],
+   [
+    "2023_Land_Rover_Range_Rover_Sport_Firenze_Red",
+    16.3
+   ],
+   [
+    "2023_Land_Rover_Range_Rover_Sport_Black1",
+    4.2
+   ]
+  ],
+  "glass": [
+   "2023_Land_Rover_Range_Rover_Sport_Windows",
+   "2023_Land_Rover_Range_Rover_Sport_TailightsGlass"
+  ],
+  "lights": [
+   "2023_Land_Rover_Range_Rover_Sport_TailightsGlass",
+   "2023_Land_Rover_Range_Rover_Sport_Reflectors",
+   "2023_Land_Rover_Range_Rover_Sport_DRLs"
+  ]
+ },
+ {
+  "uid": "cfb5a58f16255a05",
+  "marque": "volkswagen",
+  "name": "1976_volkswagen_golf_gti_mk1",
+  "file": "glbs/volkswagen/1976_volkswagen_golf_gti_mk1.glb",
+  "mb": 3.8,
+  "mats": 2,
+  "cov": 0.42,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/cfb5a58f16255a05.jpg",
+  "n_materials": 25,
+  "chosen_body": [
+   "vM_CarPaint_Max1",
+   "vM_Chassis_Max1"
+  ],
+  "body_detail": [
+   [
+    "vM_CarPaint_Max1",
+    23.4
+   ],
+   [
+    "vM_Chassis_Max1",
+    18.6
+   ]
+  ],
+  "glass": [
+   "vM_Glass_WindowFront_Low1",
+   "vM_LightGlassNormal_OuterOrange_Low1"
+  ],
+  "lights": [
+   "vM_LightBucket_Max_002",
+   "vM_LightGlassNormal_OuterOrange_Low1"
+  ]
+ },
+ {
+  "uid": "6ab7704835990c8c",
+  "marque": "volkswagen",
+  "name": "2019_volkswagen_passat_2.0_tsi",
+  "file": "glbs/volkswagen/2019_volkswagen_passat_2.0_tsi.glb",
+  "mb": 17.4,
+  "mats": 3,
+  "cov": 0.494,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/6ab7704835990c8c.jpg",
+  "n_materials": 20,
+  "chosen_body": [
+   "VWMI_1018010001_008",
+   "VWMI_Engine1",
+   "VWMI_Exhaust1"
+  ],
+  "body_detail": [
+   [
+    "VWMI_1018010001_008",
+    20.3
+   ],
+   [
+    "VWMI_Exhaust1",
+    17.7
+   ],
+   [
+    "VWMI_Engine1",
+    11.4
+   ]
+  ],
+  "glass": [
+   "VWMI_Glass1",
+   "VWMI_Glass_Light1"
+  ],
+  "lights": [
+   "VWMI_Light1",
+   "VWMI_Glass_Light1",
+   "VWMI_Dashboard1"
+  ]
+ },
+ {
+  "uid": "28e9f4a206b65602",
+  "marque": "volkswagen",
+  "name": "2020_volkswagen_e-lavida_phev",
+  "file": "glbs/volkswagen/2020_volkswagen_e-lavida_phev.glb",
+  "mb": 8.3,
+  "mats": 1,
+  "cov": 0.24,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/28e9f4a206b65602.jpg",
+  "n_materials": 17,
+  "chosen_body": [
+   "carpaint"
+  ],
+  "body_detail": [
+   [
+    "carpaint",
+    24
+   ]
+  ],
+  "glass": [
+   "glass",
+   "black_glass"
+  ],
+  "lights": [
+   "badges_L"
+  ]
+ },
+ {
+  "uid": "814a39670d7cbc6e",
+  "marque": "volkswagen",
+  "name": "2020_volkswagen_viloran_380_tsi",
+  "file": "glbs/volkswagen/2020_volkswagen_viloran_380_tsi.glb",
+  "mb": 17.7,
+  "mats": 2,
+  "cov": 0.287,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/814a39670d7cbc6e.jpg",
+  "n_materials": 20,
+  "chosen_body": [
+   "carpaint",
+   "chassis"
+  ],
+  "body_detail": [
+   [
+    "carpaint",
+    19.1
+   ],
+   [
+    "chassis",
+    9.6
+   ]
+  ],
+  "glass": [
+   "glass",
+   "glass_black"
+  ],
+  "lights": [
+   "bad_L",
+   "plas_light",
+   "crohme_light",
+   "light_Map",
+   "material"
+  ]
+ },
+ {
+  "uid": "3e5b64f20f025240",
+  "marque": "volkswagen",
+  "name": "2021_volkswagen_tharu_280_tsi",
+  "file": "glbs/volkswagen/2021_volkswagen_tharu_280_tsi.glb",
+  "mb": 13.6,
+  "mats": 2,
+  "cov": 0.309,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/3e5b64f20f025240.jpg",
+  "n_materials": 19,
+  "chosen_body": [
+   "carpaint",
+   "chassis"
+  ],
+  "body_detail": [
+   [
+    "carpaint",
+    20.3
+   ],
+   [
+    "chassis",
+    10.6
+   ]
+  ],
+  "glass": [
+   "glass",
+   "black_glass"
+  ],
+  "lights": [
+   "badg_L"
+  ]
+ },
+ {
+  "uid": "31f62cf9c0087c0f",
+  "marque": "volkswagen",
+  "name": "2022_volkswagen_teramont_530_v6_4motion",
+  "file": "glbs/volkswagen/2022_volkswagen_teramont_530_v6_4motion.glb",
+  "mb": 25.9,
+  "mats": 2,
+  "cov": 0.302,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/31f62cf9c0087c0f.jpg",
+  "n_materials": 16,
+  "chosen_body": [
+   "CarPaint",
+   "chassis"
+  ],
+  "body_detail": [
+   [
+    "CarPaint",
+    19
+   ],
+   [
+    "chassis",
+    11.2
+   ]
+  ],
+  "glass": [
+   "glass"
+  ],
+  "lights": [
+   "badges_L",
+   "white_indicator"
+  ]
+ },
+ {
+  "uid": "65310364d93d67b9",
+  "marque": "volkswagen",
+  "name": "2025_volkswagen_golf_r_black_edition",
+  "file": "glbs/volkswagen/2025_volkswagen_golf_r_black_edition.glb",
+  "mb": 22.3,
+  "mats": 1,
+  "cov": 0.186,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/65310364d93d67b9.jpg",
+  "n_materials": 45,
+  "chosen_body": [
+   "CarPaint"
+  ],
+  "body_detail": [
+   [
+    "CarPaint",
+    18.6
+   ]
+  ],
+  "glass": [
+   "windows",
+   "D_glass",
+   "glass_light"
+  ],
+  "lights": [
+   "glass_light"
+  ]
+ },
+ {
+  "uid": "b354859f28c3cf6d",
+  "marque": "volkswagen",
+  "name": "2025_volkswagen_passat_pro_1.5",
+  "file": "glbs/volkswagen/2025_volkswagen_passat_pro_1.5.glb",
+  "mb": 17.2,
+  "mats": 1,
+  "cov": 0.208,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/b354859f28c3cf6d.jpg",
+  "n_materials": 25,
+  "chosen_body": [
+   "CarPaint_AO"
+  ],
+  "body_detail": [
+   [
+    "CarPaint_AO",
+    20.8
+   ]
+  ],
+  "glass": [
+   "glass",
+   "dark_glass",
+   "glass_light"
+  ],
+  "lights": [
+   "glass_light"
+  ]
+ },
+ {
+  "uid": "ae99389497db9f71",
+  "marque": "volkswagen",
+  "name": "2025_volkswagen_passat_pro_380tsi_2.0t",
+  "file": "glbs/volkswagen/2025_volkswagen_passat_pro_380tsi_2.0t.glb",
+  "mb": 18.4,
+  "mats": 1,
+  "cov": 0.186,
+  "faces": null,
+  "sheet": "car-meshes/audit/inbox/ae99389497db9f71.jpg",
+  "n_materials": 26,
+  "chosen_body": [
+   "CarPaint_AO"
+  ],
+  "body_detail": [
+   [
+    "CarPaint_AO",
+    18.6
+   ]
+  ],
+  "glass": [
+   "glass",
+   "dark_glass",
+   "glass_light"
+  ],
+  "lights": [
+   "glass_light",
+   "ext_texture_Map"
+  ]
+ }
+]
