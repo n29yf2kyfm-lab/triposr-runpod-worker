@@ -257,8 +257,12 @@ def main():
     plan = {t: plan_from_title(k) for t, k in keeps.items()}
     if os.path.exists(PLAN_FILE):
         plan.update(json.load(open(PLAN_FILE)))
+    # "approved" exactly, matching gate_catalogue. Counting !=quarantined also
+    # sweeps in "replaced" and "rejected" entries, which are dead: they would
+    # raise false collisions against cars that no longer serve, and they inflated
+    # every library figure I reported this session by two.
     live = [x for x in json.loads(urllib.request.urlopen(CAT, timeout=60).read())
-            if x.get("publicationStatus") != "quarantined"]
+            if x.get("publicationStatus") == "approved"]
     coll = {t: collisions(p, live, keeps[t]["uid"]) for t, p in plan.items()
             if t in keeps and p.get("model")}
     shipped = {x.get("sourceReferenceId") for x in live}
