@@ -14,7 +14,38 @@ is lost.
 | 6 | MINI | swept + rendered 2026-08-08 — 432 swept, filtered to 50, **48 sheets** in `audit/mini`, 9 clean / 39 suspect. **Awaiting the owner's eye review.** |
 | 7 | Kia | swept + rendered 2026-08-08 — 287 swept, 81 candidates, **70 sheets** in `audit/kia`, 18 clean / 52 suspect. **Awaiting the owner's eye review.** |
 | 8 | Toyota | swept + rendered 2026-08-08 — 672 swept, 373 UK nameplates, capped to 168, **158 sheets** in `audit/toyota`, 67 clean / 91 suspect. **Awaiting the owner's eye review.** |
-| 9 | — | next marque not yet set |
+| 9 | Mercedes-Benz | IN PROGRESS 2026-08-08 — 453 swept, 309 after filtering, capped to 211, rendering to `audit/mercedes` |
+| 10 | — | next marque not yet set |
+
+## Mercedes: a marque that names half its range by engine size (2026-08-08)
+
+453 swept. The nameplate filter kept only 167 on the first pass and the drop
+bucket was full of real cars — because Mercedes labels much of its range
+`<class letter><displacement>`: C43, A45, E63, S500, G500, SL600, SL63. Those
+titles contain no nameplate word at all.
+
+Chasing them one at a time is whack-a-mole. **Generate the convention instead:**
+23 class prefixes x 24 displacements = 552 tokens, fed in alongside the 50 real
+nameplates. Every token is whole-word matched, so a combination that never
+existed simply matches nothing and costs nothing. 167 -> 309 kept.
+
+**Short tokens are not automatically unsafe.** SL, CL, ML and GL were left out
+of the first list as too short. Measured against the real pool they match 14, 3,
+4 and 2 rows and every one is a genuine Mercedes — excluding them was discarding
+23 cars from nameplates with nothing live. `AMG` is the one that genuinely must
+stay out: 92 rows, because it is a trim on everything. **Test the token against
+the pool; do not assume from its length.**
+
+A caution about how that was tested: the first check used an ad-hoc regex rather
+than `nameplate_filter`'s own `norm()`, which folds "S-Class" and "S Class"
+together. The filter was right and the test was wrong. Import the filter and
+call `classify()` — never re-implement its matching to check it.
+
+**Cap by CLASS, not by matched token.** With generated designations the `plate`
+field holds "C43", so capping on it would treat C43, C63 and C-Class as three
+separate nameplates and defeat the cap. Mapping the designation back to its
+class first gives the real distribution: E-Class had 44 in the pool, C-Class 32,
+SL 21, S-Class 20, while the gaps were single figures. 309 -> 211.
 
 ## Toyota: a big marque needs a cap, not just a filter (2026-08-08)
 
