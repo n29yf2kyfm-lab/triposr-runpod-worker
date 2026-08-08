@@ -175745,7 +175745,7 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
+  "publicationStatus": "replaced",
   "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
@@ -175782,9 +175782,12 @@
   "contentHash": "973345645e707fff9f23749ee552ff5872197fe30c09c0a32b6058677bd86e87",
   "pipelineVersion": "publish-batch-tw1-2026-08-08",
   "publishedAt": "2026-08-08",
-  "replacedAssetId": null,
-  "needsHumanReview": true,
-  "notes": "Colour-swap withheld 2026-08-08: recolour_audit FAIL dist=0.004 -- red and blue render identically. The glTF respray edited a material that is not the visible body paint (the car has 2 body materials), so it raised no KeyError but produced 8 identical colours. Ships single-neutral until the correct paint material is identified. Baked variants left in car-meshes/library/toyota/ unreferenced; re-bake will overwrite them.",
+  "replacedAssetId": "toyota-corolla-cross-tw2-v1",
+  "needsHumanReview": false,
+  "notes": [
+   "Colour-swap withheld 2026-08-08: recolour_audit FAIL dist=0.004 -- red and blue render identically. The glTF respray edited a material that is not the visible body paint (the car has 2 body materials), so it raised no KeyError but produced 8 identical colours. Ships single-neutral until the correct paint material is identified. Baked variants left in car-meshes/library/toyota/ unreferenced; re-bake will overwrite them.",
+   "2026-08-08 REPLACED by toyota-corolla-cross-tw2-v1 (different source mesh, cov=0.490). This mesh has 2 body materials and the respray edited the one that is not visible: recolour_audit FAIL dist=0.004, red and blue rendering identically. Retired from serving."
+  ],
   "customization": {
    "configuratorReady": false,
    "componentPipelineVersion": "publish-batch-tw1",
@@ -181807,6 +181810,933 @@
    "status": "pass",
    "dist": 0.2954,
    "variantsHash": "9489e5a615f650aaeefb233a184ebdf81d6ea450",
+   "method": "render",
+   "at": "2026-08-08"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-avensis-2009-tw2-v1",
+  "make": "toyota",
+  "model": "avensis",
+  "modelFamily": "toyota avensis",
+  "modelAliases": [
+   "avensis"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2009,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "20f0190e34da4ac4a984c7f7a757efba",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "no-body-material",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [
+   "carpaint",
+   "interior",
+   "black",
+   "tire",
+   "greenglass",
+   "material",
+   "chrome",
+   "clearglass",
+   "brakedisk",
+   "redglass",
+   "wire_255255255",
+   "mirror",
+   "wire_000000000",
+   "orangeglass",
+   "wire_225180000",
+   "wire_035035172"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-avensis-2009-tw2-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-avensis-2009-tw2-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 31786264,
+  "mobileFileSizeBytes": 31786264,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "af75ac35207e4ef119e43b1b6b7e8727b7d68b22f99f0d7ebedbc3776dbf9a30",
+  "pipelineVersion": "publish-batch-tw2-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw2 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw2",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-corolla-cross-tw2-v1",
+  "make": "toyota",
+  "model": "corolla-cross",
+  "modelFamily": "toyota corolla-cross",
+  "modelAliases": [
+   "corolla-cross"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "cc503d26ea694dce85e7d0f1491b0e30",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "2020_Toyota_Corolla_Cross_Platinum_White_Pearl_Mica",
+   "2020_Toyota_Corolla_Cross_UnderCarrier"
+  ],
+  "glassMaterialNames": [
+   "2020_Toyota_Corolla_Cross_Windows",
+   "2020_Toyota_Corolla_Cross_WindowsTrims",
+   "2020_Toyota_Corolla_Cross_BrakeLightsGlass",
+   "2020_Toyota_Corolla_Cross_HeadLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-corolla-cross-tw2-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-corolla-cross-tw2-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-corolla-cross-tw2-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-corolla-cross-tw2-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-corolla-cross-tw2-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-corolla-cross-tw2-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-corolla-cross-tw2-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-corolla-cross-tw2-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-corolla-cross-tw2-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-corolla-cross-tw2-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 10996456,
+  "mobileFileSizeBytes": 10996456,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "57729c83d60c7c1620469ec4a127471b3f76b2192a994eb9370dede8696fda05",
+  "pipelineVersion": "publish-batch-tw2-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw2 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw2",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Decuma Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Manhattan Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Silver Blade Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Attitude Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Eclipse Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Juniper Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cyan Splash",
+     "colourFamily": "Turquoise Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Scarlet Flare",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3421,
+   "variantsHash": "eaeef0354f9b29b222df4bc6d3418a00b436d368",
+   "method": "render",
+   "at": "2026-08-08"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-yaris-cross-2020-tw2-v1",
+  "make": "toyota",
+  "model": "yaris-cross",
+  "modelFamily": "toyota yaris-cross",
+  "modelAliases": [
+   "yaris-cross"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "1b6dd834e8184851887ddeab1e83bc28",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "M_2020_Toyota_Yaris_Cross_Beige",
+   "M_2020_Toyota_Yaris_Cross_Black1",
+   "M_2020_Toyota_Yaris_Cross_BlackRoof",
+   "M_2020_Toyota_Yaris_Cross_UnderCarrier"
+  ],
+  "glassMaterialNames": [
+   "M_2020_Toyota_Yaris_Cross_Windows",
+   "M_2020_Toyota_Yaris_Cross_WindowsTrims",
+   "M_2020_Toyota_Yaris_Cross_BrakeLightsGlass",
+   "M_2020_Toyota_Yaris_Cross_HeadLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-yaris-cross-2020-tw2-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-yaris-cross-2020-tw2-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-yaris-cross-2020-tw2-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-yaris-cross-2020-tw2-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-yaris-cross-2020-tw2-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-yaris-cross-2020-tw2-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-yaris-cross-2020-tw2-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-yaris-cross-2020-tw2-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-yaris-cross-2020-tw2-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-yaris-cross-2020-tw2-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 43021916,
+  "mobileFileSizeBytes": 43021916,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d53600f3b3187c3b660e3e32d1899ace693d636dc3da0a6fd40a167b4d6cd38c",
+  "pipelineVersion": "publish-batch-tw2-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw2 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw2",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Decuma Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Manhattan Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Silver Blade Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Attitude Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Eclipse Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Juniper Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cyan Splash",
+     "colourFamily": "Turquoise Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Scarlet Flare",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2399,
+   "variantsHash": "5a5ea265ca3648c592566e3c00f21851f55dee56",
+   "method": "render",
+   "at": "2026-08-08"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-gr-yaris-2021-tw2-v1",
+  "make": "toyota",
+  "model": "gr-yaris",
+  "modelFamily": "toyota gr-yaris",
+  "modelAliases": [
+   "gr-yaris"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "98e6611ad034451982b6a9908c63fc47",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "YarisToyota_GRYarisRewardRecycled_2021Base_Material1",
+   "YarisToyota_GRYarisRewardRecycled_2021Carbon1_Material1",
+   "YarisToyota_GRYarisRewardRecycled_2021Coloured_Material1",
+   "YarisToyota_GRYarisRewardRecycled_2021EngineA_Material1",
+   "YarisToyota_GRYarisRewardRecycled_2021Paint_Material1"
+  ],
+  "glassMaterialNames": [
+   "YarisToyota_GRYarisRewardRecycled_2021Window_Material1",
+   "YarisToyota_GRYarisRewardRecycled_2021LightEmissiveA_Material1",
+   "glass_light"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-gr-yaris-2021-tw2-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-gr-yaris-2021-tw2-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-gr-yaris-2021-tw2-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-gr-yaris-2021-tw2-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-gr-yaris-2021-tw2-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-gr-yaris-2021-tw2-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-gr-yaris-2021-tw2-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-gr-yaris-2021-tw2-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-gr-yaris-2021-tw2-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-gr-yaris-2021-tw2-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 20342652,
+  "mobileFileSizeBytes": 20342652,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "0a6c26d060f14d12335bb71630d9400a782463cfcd6ecb50ec97c75848142fdb",
+  "pipelineVersion": "publish-batch-tw2-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw2 gated publish 2026-08-08: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw2",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Decuma Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Manhattan Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Silver Blade Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Attitude Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Eclipse Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Juniper Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cyan Splash",
+     "colourFamily": "Turquoise Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Scarlet Flare",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4033,
+   "variantsHash": "f4522e5193357cd88a38f6309301632f29e58fe9",
    "method": "render",
    "at": "2026-08-08"
   }
