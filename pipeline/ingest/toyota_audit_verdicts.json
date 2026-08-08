@@ -150,6 +150,24 @@
    "name": "Toyota Land Cruiser J100",
    "verdict": "FAIL",
    "note": "UPSIDE DOWN in all four views -- wheels in the air, roof on the floor. Exactly the case geom_audit.py was calibrated to auto-reject, and it reached the clean bucket because that gate is not wired into gpu_wave.py at all"
+  },
+  "19": {
+   "uid": "42470a7ce258421a89c2361225bb89eb",
+   "name": "Toyota Prius 2019",
+   "verdict": "PASS",
+   "note": "XW50 facelift Prius; proportions right, grey multi-spoke wheels consistent across views, shut lines defined, headlight internals present. Same generation as #11 -- catalogue wants one"
+  },
+  "22": {
+   "uid": "af4fec1626f047339857d98b4f0f7273",
+   "name": "Toyota Celica ST205 GT4",
+   "verdict": "PASS",
+   "note": "reads as ST205 Celica GT-Four instantly; 5-spoke alloys consistent in all four views; projector headlight internals present; grille mesh has depth; correct GT-Four wing; shut lines defined"
+  },
+  "23": {
+   "uid": "ec05296ddf2f4c22a570512245d1fba0",
+   "name": "Toyota GT86 3D Model (Free)",
+   "verdict": "PASS",
+   "note": "the good first-gen ZN6 GT86 -- polished multi-spoke alloys consistent across views, sharp projector internals, grille mesh deep, shut lines crisp. Covers the generation #8 failed on"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
