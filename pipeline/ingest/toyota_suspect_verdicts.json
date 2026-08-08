@@ -104,7 +104,15 @@
    "mats": 2,
    "verdict": "PASS",
    "note": "REPLACEMENT CANDIDATE for the live Corolla Cross that failed its recolour. Different mesh (419,710f vs 597,245f) and cov=0.490 against the failed car's split. Geometry is good: two-tone multi-spoke wheels consistent in all four views, grille mesh deep, headlight internals sharp, cladding correct. mats=2 so it still needs the stamp, but it is the obvious thing to try before hand-fixing the live one"
+  },
+  "26": {
+   "uid": "1b6dd834e8184851887ddeab1e83bc28",
+   "name": "2020 Toyota Yaris Cross",
+   "mats": 4,
+   "verdict": "PASS",
+   "note": "NEW NAMEPLATE -- Yaris Cross is not in the live catalogue at all. Dark multi-spoke wheels consistent in all four views, cladding correct, grille mesh deep, headlight internals present, shut lines defined. cov=0.511. UK-market car and a genuine gap fill"
   }
  },
- "_glass_set": "#4/#5/#6 are one uploader's Avensis set and all three render transparent -- the panels carry a glass material. #7 from a different source is fine. A material defect can be uploader-wide, so when one car in a titled series fails this way, check its siblings."
+ "_glass_set": "#4/#5/#6 are one uploader's Avensis set and all three render transparent -- the panels carry a glass material. #7 from a different source is fine. A material defect can be uploader-wide, so when one car in a titled series fails this way, check its siblings.",
+ "_priority": "Of the 32 remaining, only 11 fill a nameplate gap; 21 duplicate something already live. Auditing the gaps first: Yaris Cross, GR Yaris, Corona Premio, Carina, MR2 Spyder, Verso, Aygo, Hiace x4. The 21 duplicates are only worth taking if they beat the published car."
 }
