@@ -153,9 +153,38 @@
    "mats": 1,
    "verdict": "FAIL",
    "note": "photogrammetry scan with THE GROUND PLANE BAKED INTO THE MESH -- the car sits on a slab of scanned cobblestone that is part of the geometry and would render as a floating slab in the viewer. Lighting and shadows baked into the texture, soft panels, no shut lines, blobby headlights"
+  },
+  "50": {
+   "uid": "3a2f68415ae14f2e8ced79585db853c1",
+   "name": "Toyota Corona Premio",
+   "mats": 10,
+   "verdict": "FAIL",
+   "note": "photogrammetry scan -- ragged black fringe of torn geometry around the base where the scan met the ground, blotchy glass, soft panels, baked lighting"
+  },
+  "55": {
+   "uid": "741ac969fe494159ab5af29497c2a370",
+   "name": "Toyota Carina",
+   "mats": 13,
+   "verdict": "FAIL",
+   "note": "photogrammetry scan, same operation as #50 (Russian dealer plates). Torn ground fringe, blotchy glass, and dealer advertising baked into the plate texture"
+  },
+  "63": {
+   "uid": "9cc8dbbd68514a0fa8c2d14595cade99",
+   "name": "259: 2005 Toyota MR2 Spyder",
+   "mats": 4,
+   "verdict": "FAIL",
+   "note": "photogrammetry scan of a weathered car -- baked dirt and lighting in the texture, torn underside, soft wheels, no shut lines"
+  },
+  "64": {
+   "uid": "933039cdc0a5499693c6159616490fce",
+   "name": "3D Scanned Toyota Verso (2009, EU) [Free]",
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "photogrammetry scan, and the title says so. Windows are HOLES -- no glass, black voids into a missing interior -- plus a spike artefact on the roof and the ground shadow baked into the texture"
   }
  },
  "_glass_set": "#4/#5/#6 are one uploader's Avensis set and all three render transparent -- the panels carry a glass material. #7 from a different source is fine. A material defect can be uploader-wide, so when one car in a titled series fails this way, check its siblings.",
  "_priority": "Of the 32 remaining, only 11 fill a nameplate gap; 21 duplicate something already live. Auditing the gaps first: Yaris Cross, GR Yaris, Corona Premio, Carina, MR2 Spyder, Verso, Aygo, Hiace x4. The 21 duplicates are only worth taking if they beat the published car.",
- "_dedup_blindspot": "The four Hiaces all sit within 252 faces of exactly 1,000,000 because each was DECIMATED TO A 1M TARGET -- they are four different vans (different plates, trims, two-tones), not one mesh. Face-count dedup silently converges on decimated-to-target meshes and stops discriminating there. Verified all four by eye rather than grouping them; all four are scans and all four fail."
+ "_dedup_blindspot": "The four Hiaces all sit within 252 faces of exactly 1,000,000 because each was DECIMATED TO A 1M TARGET -- they are four different vans (different plates, trims, two-tones), not one mesh. Face-count dedup silently converges on decimated-to-target meshes and stops discriminating there. Verified all four by eye rather than grouping them; all four are scans and all four fail.",
+ "_gap_conclusion": "All 11 nameplate GAPS are now audited and only 2 survive: Yaris Cross (#26) and GR Yaris (#34). The other 9 -- Corona Premio, Carina, MR2 Spyder, Verso, Aygo and four Hiaces -- are ALL photogrammetry scans. The nameplates missing from the catalogue are missing because the only sources anyone has uploaded for them are scans, and scans do not meet the premium bar. Sourcing more Sketchfab will not fix this; these nameplates need a different kind of source."
 }
