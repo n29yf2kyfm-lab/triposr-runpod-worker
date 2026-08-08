@@ -9,8 +9,32 @@ is lost.
 | 1 | Range Rover | done — 4 sourced, 1 scrapped on owner review, 3 live |
 | 2 | Audi | done — 1,055 swept, 129 judged, 20 live |
 | 3 | BMW | review done — 902 swept, 206 eye-reviewed, 26 keeps (13 live, 13 pending publish) |
-| 4 | Skoda | IN PROGRESS 2026-08-08 — 58 candidates swept, sheets rendering to `audit/skoda` |
-| 5 | **SEAT** | **next** (owner instruction 2026-08-08) |
+| 4 | Skoda | swept + rendered 2026-08-08 — 58 candidates, 54 sheets in `audit/skoda`, 20 clean / 34 suspect. **Awaiting the owner's eye review.** |
+| 5 | SEAT | IN PROGRESS 2026-08-08 — 415 swept, filtered to 38 real cars, sheets rendering to `audit/seat` |
+| 6 | — | next marque not yet set |
+
+## SEAT: a marque whose name is an English word (2026-08-08)
+
+`marque_sweep.py` fires a bare-marque query alongside the per-nameplate ones.
+For SEAT that query returned **1,425** results against 22 for `SEAT Ibiza`, and
+the `class_gates` title filter rejected only **20** of them — it rejects a title
+by what it looks like (`scan`, `train`, `bus`), and "Leather Car Seat" looks like
+nothing in particular. 415 rows reached the manifest and **372 were not SEATs**:
+airline rows, ejection seats, sofas, a seated Bodhisattva, other marques'
+interior seats.
+
+Rendering that manifest would have been ~1,660 GPU views for a real yield of 38.
+
+**The fix, and when to reach for it:** `pipeline/ingest/nameplate_filter.py`
+inverts the test — require a nameplate in the title rather than enumerating
+every wrong thing — and additionally drops component titles (`headlight`,
+`enginebay`), scale/print artefacts, and same-title-same-facecount re-uploads.
+415 → 38. The gate is proven against 11 must-keep and 14 must-drop titles.
+
+**The tell that a marque needs it:** compare the bare-marque result count against
+the nameplate queries. A ratio anywhere near SEAT's 1425:22 means the bare query
+is dominating with homonyms. Candidates still to come: Smart, Lotus, Born,
+possibly Jaguar. Run the filter on any of them before spending GPU.
 
 ## Carried over into the Skoda wave
 
