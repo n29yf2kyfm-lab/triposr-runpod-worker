@@ -126,6 +126,18 @@
    "name": "Toyota Highlander 2011",
    "verdict": "PASS",
    "note": "quality passes -- XU40 proportions right, 5-spoke alloys consistent, grille slats crisp, shut lines defined, HUMSTER3D plate watermark wants blanking. SCOPE QUESTION: worth confirming the 2011 Highlander was a UK-market car before indexing; if it was not, no UK reg will ever decode to it"
+  },
+  "28": {
+   "uid": "1f66a3fdb7da421cafb089467b5a6140",
+   "name": "2022_Toyota_C-HR_3D_model",
+   "verdict": "PASS",
+   "note": "reads as C-HR instantly; two-tone multi-spoke wheels consistent in all four views; headlight LED internals sharp; grille mesh has depth; shut lines defined; plate is clean"
+  },
+  "30": {
+   "uid": "bc9bf0f48e174e918a5187dd1de019f8",
+   "name": "Toyota C-HR 2020",
+   "verdict": "DUPLICATE",
+   "note": "same mesh as #28, 232 faces apart (0.12%), identical in all four views except an 'ItsDiyor' plate watermark. Keeping #28, which has the clean plate"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached"
