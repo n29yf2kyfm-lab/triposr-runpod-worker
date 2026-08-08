@@ -171123,11 +171123,20 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-1994-ib1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-1994-ib1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-1994-ib1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-1994-ib1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-1994-ib1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-1994-ib1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-1994-ib1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-1994-ib1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj-1994-ib1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj-1994-ib1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/jaguar/jaguar-xj-1994-ib1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 19493476,
@@ -171216,7 +171225,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.5026,
+   "variantsHash": "27013223560203da7873417e994430ff4e73cedc",
+   "method": "render",
+   "at": "2026-08-08"
+  }
  },
  {
   "schemaVersion": 2,
@@ -171272,11 +171344,20 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2003-ib1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2003-ib1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2003-ib1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2003-ib1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2003-ib1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2003-ib1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2003-ib1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2003-ib1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj-2003-ib1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj-2003-ib1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/jaguar/jaguar-xj-2003-ib1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 8362652,
@@ -171365,7 +171446,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3499,
+   "variantsHash": "d864491ff48e9b47b492d5edd0e455dc00364ebb",
+   "method": "render",
+   "at": "2026-08-08"
+  }
  },
  {
   "schemaVersion": 2,
@@ -171423,11 +171567,20 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2009-ib1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2009-ib1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2009-ib1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2009-ib1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2009-ib1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2009-ib1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2009-ib1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2009-ib1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xkr-2009-ib1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xkr-2009-ib1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/jaguar/jaguar-xkr-2009-ib1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 5360380,
@@ -171516,7 +171669,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4002,
+   "variantsHash": "62e15a24dafc3c9b51a5a409366fde083b6cbe3a",
+   "method": "render",
+   "at": "2026-08-08"
+  }
  },
  {
   "schemaVersion": 2,
@@ -171577,11 +171793,20 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-ib1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-ib1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-ib1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-ib1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-ib1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-ib1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-ib1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-ib1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj220-1992-ib1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj220-1992-ib1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/jaguar/jaguar-xj220-1992-ib1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 20500868,
@@ -171670,7 +171895,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4383,
+   "variantsHash": "edc916343a4d77f056573beac720fb9511c47b34",
+   "method": "render",
+   "at": "2026-08-08"
+  }
  },
  {
   "schemaVersion": 2,
@@ -171727,11 +172015,20 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/audi/audi-quattro-1980-ib1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/audi/audi-quattro-1980-ib1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/audi/audi-quattro-1980-ib1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/audi/audi-quattro-1980-ib1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/audi/audi-quattro-1980-ib1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/audi/audi-quattro-1980-ib1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/audi/audi-quattro-1980-ib1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/audi/audi-quattro-1980-ib1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-quattro-1980-ib1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-quattro-1980-ib1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/audi/audi-quattro-1980-ib1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 3180404,
@@ -171820,7 +172117,69 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Nardo Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Daytona Grey Pearl",
+     "colourFamily": "Dark Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Manhattan Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Mythos Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Navarra Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Ascari Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Progressive Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3875,
+   "variantsHash": "9cbbf963e0fc6d337d75a235f8d0fdda8aab9030",
+   "method": "render",
+   "at": "2026-08-08"
+  }
  },
  {
   "schemaVersion": 2,
@@ -171876,11 +172235,20 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-golf-gti-1976-ib1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-golf-gti-1976-ib1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-golf-gti-1976-ib1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-golf-gti-1976-ib1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-golf-gti-1976-ib1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-golf-gti-1976-ib1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-golf-gti-1976-ib1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/volkswagen/volkswagen-golf-gti-1976-ib1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-gti-1976-ib1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-gti-1976-ib1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/volkswagen/volkswagen-golf-gti-1976-ib1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 3838096,
@@ -171993,6 +172361,84 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Uranium Grey",
+     "colourFamily": "Dark Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Dolphin Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Moonstone Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Reflex Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Deep Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Candy White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Atlantic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Lapiz Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Kings Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Tornado Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3637,
+   "variantsHash": "deeeee5d660ea2a30358c034b6cff24ddd83ef44",
+   "method": "render",
+   "at": "2026-08-08"
+  }
  }
 ]
