@@ -111,8 +111,37 @@
    "mats": 4,
    "verdict": "PASS",
    "note": "NEW NAMEPLATE -- Yaris Cross is not in the live catalogue at all. Dark multi-spoke wheels consistent in all four views, cladding correct, grille mesh deep, headlight internals present, shut lines defined. cov=0.511. UK-market car and a genuine gap fill"
+  },
+  "73": {
+   "uid": "1b0a576eed9b4522a231572f85bc9157",
+   "name": "Toyota Hiace 2000 /Foyota Hiace 2000",
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "photogrammetry scan -- wavy panel edges, lumpy surfaces, blobby headlights, no shut lines anywhere, cov=1.000 from a single baked texture. 'No scan mush' is the standing bar"
+  },
+  "74": {
+   "uid": "5b1d7d6f87a543278e7bcb97e3c27c10",
+   "name": "Toyota Hiace Grand Cabin 2000",
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "photogrammetry scan, high-roof Grand Cabin. Same soft geometry, plus the badge decal reads 'TOTOVA' not Toyota -- shipping that would be visibly wrong"
+  },
+  "75": {
+   "uid": "547864db1e774daa9aee874cadc37ae6",
+   "name": "Toyota Hiace Microbus Port Said Al-5000 Line",
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "photogrammetry scan, two-tone white/blue. Same mush, with torn geometry visible in the window openings"
+  },
+  "78": {
+   "uid": "59dcb878d0a540f59bafd7d48eb8bea0",
+   "name": "Toyota Hiace Microbus Port Said Al-5000 Line",
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "photogrammetry scan, fourth distinct van (plate GS1425). Same soft melted panels and absent shut lines"
   }
  },
  "_glass_set": "#4/#5/#6 are one uploader's Avensis set and all three render transparent -- the panels carry a glass material. #7 from a different source is fine. A material defect can be uploader-wide, so when one car in a titled series fails this way, check its siblings.",
- "_priority": "Of the 32 remaining, only 11 fill a nameplate gap; 21 duplicate something already live. Auditing the gaps first: Yaris Cross, GR Yaris, Corona Premio, Carina, MR2 Spyder, Verso, Aygo, Hiace x4. The 21 duplicates are only worth taking if they beat the published car."
+ "_priority": "Of the 32 remaining, only 11 fill a nameplate gap; 21 duplicate something already live. Auditing the gaps first: Yaris Cross, GR Yaris, Corona Premio, Carina, MR2 Spyder, Verso, Aygo, Hiace x4. The 21 duplicates are only worth taking if they beat the published car.",
+ "_dedup_blindspot": "The four Hiaces all sit within 252 faces of exactly 1,000,000 because each was DECIMATED TO A 1M TARGET -- they are four different vans (different plates, trims, two-tones), not one mesh. Face-count dedup silently converges on decimated-to-target meshes and stops discriminating there. Verified all four by eye rather than grouping them; all four are scans and all four fail."
 }
