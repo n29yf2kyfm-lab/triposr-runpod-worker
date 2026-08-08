@@ -113,7 +113,7 @@ CSS = """
 :root{
   --ground:#e8eaee; --surface:#fff; --sunk:#f1f3f6;
   --ink:#141920; --ink-2:#3d4753; --muted:#6a7480; --line:#d2d7de;
-  --accent:#a8402f; --clean:#2b6f52; --clean-bg:#dcece4;
+  --accent:#a8402f; --accent-bg:#f6e3df; --clean:#2b6f52; --clean-bg:#dcece4;
   --susp:#8a6410; --susp-bg:#f5ead1; --mat:#0d0f12;
   --display:"Cond","DejaVu Sans Condensed","Liberation Sans Narrow",system-ui,sans-serif;
   --body:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -122,13 +122,13 @@ CSS = """
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --ground:#0f1216; --surface:#171b21; --sunk:#12161b;
   --ink:#e5e9ee; --ink-2:#b7c0ca; --muted:#87919d; --line:#282f38;
-  --accent:#e0705c; --clean:#5cbb92; --clean-bg:#16302566;
+  --accent:#e0705c; --accent-bg:#3a201c; --clean:#5cbb92; --clean-bg:#16302566;
   --susp:#d8a93f; --susp-bg:#33280f;
 }}
 :root[data-theme="dark"]{
   --ground:#0f1216; --surface:#171b21; --sunk:#12161b;
   --ink:#e5e9ee; --ink-2:#b7c0ca; --muted:#87919d; --line:#282f38;
-  --accent:#e0705c; --clean:#5cbb92; --clean-bg:#16302566;
+  --accent:#e0705c; --accent-bg:#3a201c; --clean:#5cbb92; --clean-bg:#16302566;
   --susp:#d8a93f; --susp-bg:#33280f;
 }
 *{box-sizing:border-box}
@@ -147,8 +147,9 @@ a{color:var(--accent)}
 .bar__counts{display:flex;gap:8px;margin-right:auto}
 .tally{font-family:var(--display);font-size:12px;text-transform:uppercase;
   letter-spacing:.09em;padding:3px 9px;border:1px solid currentColor}
-.tally--clean{color:var(--clean);background:var(--clean-bg)}
+.tally--clean,.tally--keep{color:var(--clean);background:var(--clean-bg)}
 .tally--susp{color:var(--susp);background:var(--susp-bg)}
+.tally--scrap{color:var(--accent);background:var(--accent-bg)}
 .tally--all{color:var(--muted)}
 .idx{background:var(--sunk);border-bottom:1px solid var(--line)}
 .idx__in{padding:14px 0 16px;display:flex;flex-direction:column;gap:9px}
@@ -160,6 +161,8 @@ a{color:var(--accent)}
   border:1px solid;font-variant-numeric:tabular-nums;padding:0 5px}
 .chip--clean{color:var(--clean);border-color:var(--clean);background:var(--clean-bg)}
 .chip--suspect{color:var(--susp);border-color:var(--susp);background:var(--susp-bg)}
+.chip--keep{color:var(--clean);border-color:var(--clean);background:var(--clean-bg)}
+.chip--scrap{color:var(--accent);border-color:var(--accent);background:var(--accent-bg)}
 .chip:hover{filter:brightness(1.12)}
 .intro{padding:26px 0 6px;display:flex;flex-direction:column;gap:12px;max-width:74ch}
 .intro p{color:var(--ink-2)}
@@ -172,6 +175,17 @@ a{color:var(--accent)}
 .sect__hd p{font-size:14px;color:var(--muted)}
 .car{background:var(--surface);border:1px solid var(--line);margin-bottom:22px;
   scroll-margin-top:96px}
+.car--keep{box-shadow:inset 5px 0 0 var(--clean)}
+.car--scrap{box-shadow:inset 5px 0 0 var(--accent)}
+.verdict{padding:13px 16px 14px;border-bottom:1px solid var(--line);
+  display:flex;flex-direction:column;gap:5px}
+.verdict--keep{background:var(--clean-bg)}
+.verdict--scrap{background:var(--accent-bg)}
+.verdict__lab{font-family:var(--display);font-weight:700;font-size:10px;
+  text-transform:uppercase;letter-spacing:.13em}
+.verdict--keep .verdict__lab{color:var(--clean)}
+.verdict--scrap .verdict__lab{color:var(--accent)}
+.verdict p{font-size:15px;line-height:1.55;color:var(--ink);max-width:88ch}
 .car__hd{display:flex;align-items:flex-start;gap:16px;padding:13px 16px}
 .car__n{font-family:var(--display);font-weight:700;font-size:30px;line-height:1;
   color:var(--accent);min-width:44px}
@@ -182,6 +196,8 @@ a{color:var(--accent)}
   letter-spacing:.1em;padding:3px 9px;border:1px solid currentColor;white-space:nowrap}
 .pill--clean{color:var(--clean);background:var(--clean-bg)}
 .pill--suspect{color:var(--susp);background:var(--susp-bg)}
+.pill--keep{color:var(--clean);background:var(--clean-bg)}
+.pill--scrap{color:var(--accent);background:var(--accent-bg)}
 .well{background:var(--mat);border-block:1px solid var(--line)}
 .well img{width:100%;height:auto;display:block}
 .car__ft{padding:12px 16px 14px;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 26px}
@@ -222,9 +238,20 @@ def main():
     ap.add_argument("--quality", type=int, default=74)
     ap.add_argument("--swept", type=int, default=0, help="candidates swept, for the intro")
     ap.add_argument("--note", default="", help="extra sentence for the intro")
+    ap.add_argument("--verdicts", default="",
+                    help="a *_percar_verdicts.json — switches the page into audit mode: "
+                         "every sheet carries its KEEP/SCRAP verdict and the reasoning, "
+                         "ordered keeps first, so the owner can check the judgement "
+                         "rather than re-do it")
     a = ap.parse_args()
 
     rows = json.load(open(a.triage))
+    verdicts = json.load(open(a.verdicts)) if a.verdicts else {}
+    if verdicts:
+        missing = [r["uid"] for r in rows if r["uid"] not in verdicts]
+        if missing:
+            print(f"WARNING: {len(missing)} rows have no verdict yet; they will show as "
+                  f"unjudged", file=sys.stderr)
     cache = a.cache or os.path.join(os.path.dirname(a.out), "sheets")
     os.makedirs(cache, exist_ok=True)
 
@@ -234,9 +261,25 @@ def main():
         bad = [r["uid"] for r, g in zip(rows, got) if g == "fail"]
         sys.exit(f"could not fetch {len(bad)} sheets: {bad[:3]}")
 
-    clean = sorted([r for r in rows if r["klass"] == "clean"], key=lambda r: r["cov"])
-    susp = sorted([r for r in rows if r["klass"] == "suspect"], key=lambda r: r["cov"])
-    ordered = clean + susp
+    def vk(r):
+        """Verdict key for this row: KEEP / SCRAP / '' when not yet judged."""
+        v = verdicts.get(r["uid"])
+        return v[0] if isinstance(v, list) and v else ""
+
+    if verdicts:
+        # Audit mode. Order by the verdict, not the material split — the owner is
+        # checking a judgement, and the keeps are the part that ships.
+        first = [r for r in rows if vk(r) == "KEEP"]
+        second = [r for r in rows if vk(r) == "SCRAP"]
+        third = [r for r in rows if not vk(r)]
+        first.sort(key=lambda r: r["cov"])
+        second.sort(key=lambda r: r["cov"])
+        ordered = first + second + third
+    else:
+        first = sorted([r for r in rows if r["klass"] == "clean"], key=lambda r: r["cov"])
+        second = sorted([r for r in rows if r["klass"] == "suspect"], key=lambda r: r["cov"])
+        third = []
+        ordered = first + second
     for n, r in enumerate(ordered, 1):
         r["n"] = n
 
@@ -250,23 +293,35 @@ def main():
         meta.append(f'<div><dt>Body share</dt><dd class="num">{r["cov"]:.3f}</dd></div>')
         by = " · ".join(x for x in (r.get("author"), r.get("licence"),
                                     f"row {r['i']} of the sweep" if r.get("i") else "") if x)
-        return f'''<article class="car" id="c{r['n']}">
+        v = vk(r)
+        badge = (f'<span class="pill pill--{v.lower()}">{v}</span>' if v else
+                 f'<span class="pill pill--{r["klass"]}">{r["klass"]}</span>')
+        reason = ""
+        if v:
+            reason = (f'<div class="verdict verdict--{v.lower()}">'
+                      f'<span class="verdict__lab">Why {v.lower()}</span>'
+                      f'<p>{esc(verdicts[r["uid"]][1])}</p></div>')
+        return f'''<article class="car car--{v.lower() or r['klass']}" id="c{r['n']}">
   <header class="car__hd">
     <span class="car__n num">{r['n']}</span>
     <div class="car__id"><h2>{esc(r['name'])}</h2><p class="by">{esc(by)}</p></div>
-    <span class="pill pill--{r['klass']}">{r['klass']}</span>
+    {badge}
   </header>
   <div class="well"><img src="{src}" alt="Four-view studio sheet — {esc(r['name'])}"
        width="{w}" height="{h}" loading="lazy" decoding="async"></div>
+  {reason}
   <footer class="car__ft"><dl>{''.join(meta)}</dl>
     <p class="why">{esc(why(r))}</p><code>{esc(r['uid'])}</code></footer>
 </article>'''
 
-    chips = "".join(f'<a class="chip chip--{r["klass"]}" href="#c{r["n"]}" '
+    def chipcls(r):
+        return (vk(r).lower() or r["klass"]) if verdicts else r["klass"]
+
+    chips = "".join(f'<a class="chip chip--{chipcls(r)}" href="#c{r["n"]}" '
                     f'title="{esc(r["name"])}">{r["n"]}</a>' for r in ordered)
     index_txt = "\n".join(
-        f"#{r['n']:<3} {r['uid']}  {r['klass']:<7} mats={r['mats']} cov={r['cov']:.3f}  {r['name']}"
-        for r in ordered)
+        f"#{r['n']:<3} {r['uid']}  {(vk(r) or r['klass']):<7} mats={r['mats']} "
+        f"cov={r['cov']:.3f}  {r['name']}" for r in ordered)
 
     css = CSS.replace("__FR__", base64.b64encode(
         open(os.path.join(FONT_DIR, "DejaVuSansCondensed.woff2"), "rb").read()).decode()
@@ -277,32 +332,63 @@ def main():
              f"{len(rows)} rendered.</strong> ") if a.swept else \
             f"<strong>{len(rows)} {esc(a.marque)} sheets.</strong> "
 
-    doc = f'''<title>{esc(a.marque)} sourcing wave — {len(rows)} sheets for review</title>
+    if verdicts:
+        title = f"{a.marque} audit — {len(first)} kept, {len(second)} scrapped"
+        tallies = (f'<span class="tally tally--all">{len(rows)} judged</span>'
+                   f'<span class="tally tally--keep">{len(first)} keep</span>'
+                   f'<span class="tally tally--scrap">{len(second)} scrap</span>')
+        links = '<a href="#a">Keeps</a><a href="#b">Scraps</a><a href="#index">Index</a>'
+        idxlab = "Jump to a car — green was kept, red was scrapped"
+        intro = (f"{swept}Every one was judged individually against your rubric, and the "
+                 "verdict and the reasoning sit under each sheet. This page is here so you "
+                 "can <strong>check the judgement</strong>, not re-do it.")
+        intro2 = ("Call out any number you disagree with and I will reverse it. A scrap is "
+                  "not destructive — nothing was deleted, the assets are all still staged in "
+                  "the bucket, so overturning one costs a re-publish and nothing else."
+                  + ((" " + esc(a.note)) if a.note else ""))
+        h1 = f"{esc(a.marque)} audit"
+        s1 = ("Kept", len(first), "shipping candidates · ordered by body share", first)
+        s2 = ("Scrapped", len(second), "with the reason on each · ordered by body share", second)
+    else:
+        title = f"{a.marque} sourcing wave — {len(rows)} sheets for review"
+        tallies = (f'<span class="tally tally--all">{len(rows)} sheets</span>'
+                   f'<span class="tally tally--clean">{len(first)} clean split</span>'
+                   f'<span class="tally tally--susp">{len(second)} suspect</span>')
+        links = '<a href="#a">Clean</a><a href="#b">Suspect</a><a href="#index">Index</a>'
+        idxlab = "Jump to a car — green passed the material split, amber did not"
+        intro = (f"{swept}Every one below is a four-view sheet at the rubric angles — front "
+                 "three-quarter, front three-quarter from the left, side, rear three-quarter. "
+                 "Nothing here has been judged. The green/amber split is the "
+                 "<em>material audit</em> only, a mechanical test of whether a colour swap "
+                 "would land on the bodywork; it says nothing about whether the car is any "
+                 "good.")
+        intro2 = ("Call out the numbers to scrap and they are quarantined reversibly — entry "
+                  "and assets kept, both Supabase paths re-served. An amber car you like is "
+                  "not lost: it ships without recolour, or gets its body material fixed "
+                  "first." + ((" " + esc(a.note)) if a.note else ""))
+        h1 = f"{esc(a.marque)} wave"
+        s1 = ("Clean split", len(first), "1–2 body materials, 5–45% of the mesh · "
+              "ordered by body share", first)
+        s2 = ("Suspect split", len(second), "outside the paintable band · ordered by body "
+              "share, near-misses first", second)
+
+    unjudged = (f'''<section class="sect" id="c"><div class="sect__hd"><h2>Not yet judged</h2>
+      <p>{len(third)} cars</p></div>{"".join(card(r) for r in third)}</section>'''
+                if third else "")
+
+    doc = f'''<title>{esc(title)}</title>
 <style>{css}</style>
 <div class="bar"><div class="wrap bar__in">
-  <h1>{esc(a.marque)} wave</h1>
-  <div class="bar__counts">
-    <span class="tally tally--all">{len(rows)} sheets</span>
-    <span class="tally tally--clean">{len(clean)} clean split</span>
-    <span class="tally tally--susp">{len(susp)} suspect</span>
-  </div>
-  <a href="#clean">Clean</a><a href="#suspect">Suspect</a><a href="#index">Index</a>
+  <h1>{h1}</h1>
+  <div class="bar__counts">{tallies}</div>
+  {links}
 </div></div>
 <div class="idx"><div class="wrap idx__in">
-  <span class="idx__lab">Jump to a car — green passed the material split, amber did not</span>
+  <span class="idx__lab">{esc(idxlab)}</span>
   <div class="chips">{chips}</div>
 </div></div>
 <main class="wrap">
-  <div class="intro">
-    <p>{swept}Every one below is a four-view sheet at the rubric angles — front
-      three-quarter, front three-quarter from the left, side, rear three-quarter.
-      Nothing here has been judged. The green/amber split is the <em>material audit</em>
-      only, a mechanical test of whether a colour swap would land on the bodywork; it
-      says nothing about whether the car is any good.</p>
-    <p>Call out the numbers to scrap and they are quarantined reversibly — entry and
-      assets kept, both Supabase paths re-served. An amber car you like is not lost: it
-      ships without recolour, or gets its body material fixed first.{(" " + esc(a.note)) if a.note else ""}</p>
-  </div>
+  <div class="intro"><p>{intro}</p><p>{intro2}</p></div>
   <div class="rubric">
     <div class="rubric--pass"><h3>Your pass bar</h3>
       <ul><li>proportions read as the right car instantly</li>
@@ -316,16 +402,15 @@ def main():
         <li>rear bumper and diffuser soft versus the real car</li>
         <li>door and bonnet shut lines not defined</li></ul></div>
   </div>
-  <section class="sect" id="clean">
-    <div class="sect__hd"><h2>Clean split</h2>
-      <p>{len(clean)} cars · 1–2 body materials, 5–45% of the mesh · ordered by body share</p></div>
-    {"".join(card(r) for r in clean)}
+  <section class="sect" id="a">
+    <div class="sect__hd"><h2>{s1[0]}</h2><p>{s1[1]} cars · {s1[2]}</p></div>
+    {"".join(card(r) for r in s1[3])}
   </section>
-  <section class="sect" id="suspect">
-    <div class="sect__hd"><h2>Suspect split</h2>
-      <p>{len(susp)} cars · outside the paintable band · ordered by body share, near-misses first</p></div>
-    {"".join(card(r) for r in susp)}
+  <section class="sect" id="b">
+    <div class="sect__hd"><h2>{s2[0]}</h2><p>{s2[1]} cars · {s2[2]}</p></div>
+    {"".join(card(r) for r in s2[3])}
   </section>
+  {unjudged}
   <details id="index"><summary>Index — #N to uid</summary><pre>{esc(index_txt)}</pre></details>
 </main>
 <footer class="wrap"><p>Sheets stored at
@@ -335,7 +420,8 @@ def main():
 '''
     open(a.out, "w").write(doc)
     mb = os.path.getsize(a.out) / 1e6
-    print(f"{len(rows)} sheets ({len(clean)} clean / {len(susp)} suspect) -> {a.out}  {mb:.2f} MB")
+    print(f"{len(rows)} sheets ({len(first)} / {len(second)}"
+          f"{f' / {len(third)} unjudged' if third else ''}) -> {a.out}  {mb:.2f} MB")
     if mb > 15:
         print("WARNING: over 15 MB; the artifact ceiling is 16 MB. Lower --quality.",
               file=sys.stderr)
