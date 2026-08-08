@@ -59,6 +59,9 @@ PART_WORDS = [
     "wheel only", "rim", "alloy", "seat cover", "badge", "logo", "emblem",
     "bumper", "spoiler", "grill", "grille", "mirror", "door panel", "exhaust",
     "brake", "caliper", "gearknob", "gear knob", "key ", "keyfob",
+    # Wheel, in the languages uploaders actually use. "Roda Peugeot 208 ACTIVE"
+    # is an alloy wheel and would otherwise have been rendered as a car.
+    "roda", "rueda", "jante", "felge", "cerchio", "llanta",
 ]
 # Scale / print / sprite artefacts — geometry exists but is not a serving asset.
 SCALE_WORDS = [
