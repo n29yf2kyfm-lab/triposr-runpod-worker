@@ -174724,5 +174724,4634 @@
    ]
   },
   "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-bz4x-tw1-v1",
+  "make": "toyota",
+  "model": "bz4x",
+  "modelFamily": "toyota bz4x",
+  "modelAliases": [
+   "bz4x"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "e10068b2511b4ed7b724a8d87a362727",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "Free Standard",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "dark_glass",
+   "dark_glass.001"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-bz4x-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-bz4x-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 35908096,
+  "mobileFileSizeBytes": 35908096,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "1d42bc19cd59a8e5dd4866a41c6059de8ab2559730468cfd81ab7e585db1d354",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'Free Standard' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-prius-2016-tw1-v1",
+  "make": "toyota",
+  "model": "prius",
+  "modelFamily": "toyota prius",
+  "modelAliases": [
+   "prius"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2016,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "90e9f77205014ecc8e3e08dd27dc4d52",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura"
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros2",
+   "Carro_Vidros2_1",
+   "Carro_Vidro_Vermelho2"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-prius-2016-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-prius-2016-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 44890436,
+  "mobileFileSizeBytes": 44890436,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "7cbf9d3f487f9a247ac614973dcff356bb8de5056d0d5fc193efbce47e4e9d85",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-land-cruiser-1998-tw1-v1",
+  "make": "toyota",
+  "model": "land-cruiser",
+  "modelFamily": "toyota land-cruiser",
+  "modelAliases": [
+   "land-cruiser"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1998,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "a9c8b71c5c5d494bb55d79a2e161119b",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "orangeglass",
+   "redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-land-cruiser-1998-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-land-cruiser-1998-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 21909684,
+  "mobileFileSizeBytes": 21909684,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f127187aa14c38910341d6e91f3d43d8dcf1eed4d7701295246363d87d7cce98",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-corolla-cross-2021-tw1-v1",
+  "make": "toyota",
+  "model": "corolla-cross",
+  "modelFamily": "toyota corolla-cross",
+  "modelAliases": [
+   "corolla-cross"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "6412b1bba68848af88169be2c75e10a6",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "chassis",
+   "chassis_AO"
+  ],
+  "glassMaterialNames": [
+   "glass",
+   "Glass_Light",
+   "glass_surr"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-corolla-cross-2021-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-corolla-cross-2021-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 34217896,
+  "mobileFileSizeBytes": 34217896,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "973345645e707fff9f23749ee552ff5872197fe30c09c0a32b6058677bd86e87",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-iq-tw1-v1",
+  "make": "toyota",
+  "model": "iq",
+  "modelFamily": "toyota iq",
+  "modelAliases": [
+   "iq"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "f08f43a71bed4fbc8562fdde6214f1c4",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "darkglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-iq-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-iq-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 15663168,
+  "mobileFileSizeBytes": 15663168,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "630401d3e48e98713f891db1669242ed3fecff56af2bc008cf475cce3f728c18",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-celica-1981-tw1-v1",
+  "make": "toyota",
+  "model": "celica",
+  "modelFamily": "toyota celica",
+  "modelAliases": [
+   "celica"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1981,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "9f09704e33af42d29b2230e10506456a",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-celica-1981-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-celica-1981-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 24771440,
+  "mobileFileSizeBytes": 24771440,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "90f7cd2183fb4dec3245a738818418592b340f41083fe635ec860492b79f62d3",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-prius-2019-tw1-v1",
+  "make": "toyota",
+  "model": "prius",
+  "modelFamily": "toyota prius",
+  "modelAliases": [
+   "prius"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2019,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "42470a7ce258421a89c2361225bb89eb",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "glass",
+   "r_glass",
+   "o_glass",
+   "r_glass_b"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-prius-2019-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-prius-2019-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 42665980,
+  "mobileFileSizeBytes": 42665980,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "379dd0b382bcc050d047974e9d19636d222cdd47fabfa8f4e3b9239c03c008bc",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-supra-tw1-v1",
+  "make": "toyota",
+  "model": "supra",
+  "modelFamily": "toyota supra",
+  "modelAliases": [
+   "supra"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "980a52a5031a4b07a0f206b82ebb1275",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Supra_body_paint"
+  ],
+  "glassMaterialNames": [
+   "Window",
+   "HeadlightGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-supra-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-supra-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 29314540,
+  "mobileFileSizeBytes": 29314540,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "ec2988de71894077d19e2d3901f6aa19ce4732afbc8929e9fdf71a877ff65f89",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-celica-tw1-v1",
+  "make": "toyota",
+  "model": "celica",
+  "modelFamily": "toyota celica",
+  "modelAliases": [
+   "celica"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "af4fec1626f047339857d98b4f0f7273",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body",
+   "body_2"
+  ],
+  "glassMaterialNames": [
+   "window"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-celica-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-celica-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 8762760,
+  "mobileFileSizeBytes": 8762760,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "a1d8ddcf7fa94030171830e707f16962530ff1432787eadb25da980c12d14848",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-gt86-tw1-v1",
+  "make": "toyota",
+  "model": "gt86",
+  "modelFamily": "toyota gt86",
+  "modelAliases": [
+   "gt86"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "ec05296ddf2f4c22a570512245d1fba0",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body.001"
+  ],
+  "glassMaterialNames": [
+   "Glass.002",
+   "r_glass.001",
+   "glass.001"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-gt86-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-gt86-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 37399636,
+  "mobileFileSizeBytes": 37399636,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "808eadc1618b08f79a478560cfbe5a03f1adf066abb924c0ed06bbb185fe0fc5",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-mirai-tw1-v1",
+  "make": "toyota",
+  "model": "mirai",
+  "modelFamily": "toyota mirai",
+  "modelAliases": [
+   "mirai"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "950cd22ab63d4723b468f25da0fd5ec0",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint_Color"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-mirai-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-mirai-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 11449260,
+  "mobileFileSizeBytes": 11449260,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "0fb49461e82a5fa3a640e7d7b314cd9493999f873aa6f158c79b347a2d4fc5fe",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-c-hr-2022-tw1-v1",
+  "make": "toyota",
+  "model": "c-hr",
+  "modelFamily": "toyota c-hr",
+  "modelAliases": [
+   "c-hr"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "1f66a3fdb7da421cafb089467b5a6140",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint_Color"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-c-hr-2022-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-c-hr-2022-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 10253524,
+  "mobileFileSizeBytes": 10253524,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "13cf045fc6278caa6a5881f8e155f87bcee2f05d9c2bbc52885b5f84371331f2",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-prius-2010-tw1-v1",
+  "make": "toyota",
+  "model": "prius",
+  "modelFamily": "toyota prius",
+  "modelAliases": [
+   "prius"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2010,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "3f82031714bd40a3a3a027e5687604de",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "darkglass",
+   "clearglass",
+   "redglass",
+   "blueglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-prius-2010-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-prius-2010-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 29250724,
+  "mobileFileSizeBytes": 29250724,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "13e18226d104d41aaa1867577ad62305718451bf9d3db95de88f151686b50de0",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-corolla-2020-tw1-v1",
+  "make": "toyota",
+  "model": "corolla",
+  "modelFamily": "toyota corolla",
+  "modelAliases": [
+   "corolla"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "e595afd4ec5745a08f95cc5baeaa5ef0",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "glass",
+   "vd_glass",
+   "r_glass",
+   "o_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-corolla-2020-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-corolla-2020-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 39988876,
+  "mobileFileSizeBytes": 39988876,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "ebadc8bf02eae8ba459ca47e076df38b3bc154113320712ff5b5b23b7a1cd8a8",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-highlander-2020-tw1-v1",
+  "make": "toyota",
+  "model": "highlander",
+  "modelFamily": "toyota highlander",
+  "modelAliases": [
+   "highlander"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "ff144d062f244a3ebfae71bc2a41564b",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint_Color"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-highlander-2020-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-highlander-2020-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 16062388,
+  "mobileFileSizeBytes": 16062388,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "c8b2eb4068887241f0e37c7103cb15343f7a95a6693af9ff8f3fdfcaefe43978",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-supra-tw1-v2",
+  "make": "toyota",
+  "model": "supra",
+  "modelFamily": "toyota supra",
+  "modelAliases": [
+   "supra"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "710e8b6748f249b2b6349cb555386811",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-supra-tw1-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-supra-tw1-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 32144580,
+  "mobileFileSizeBytes": 32144580,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "2470a924350816a30b7cca89dd4305fe9058aa3721b00322d25bdc70ba7376c3",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-camry-1997-tw1-v1",
+  "make": "toyota",
+  "model": "camry",
+  "modelFamily": "toyota camry",
+  "modelAliases": [
+   "camry"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1997,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "196829bf4cbc4b8cb26c50964f35ff27",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-camry-1997-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-camry-1997-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 36967316,
+  "mobileFileSizeBytes": 36967316,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "6693796e7e564edba7504f7177d91d9dd2e439e1df177e4865fe22e84928bc9c",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-avensis-tw1-v1",
+  "make": "toyota",
+  "model": "avensis",
+  "modelFamily": "toyota avensis",
+  "modelAliases": [
+   "avensis"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "78eeb0db0dab4339b546ed504453ed3c",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-avensis-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-avensis-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 34605720,
+  "mobileFileSizeBytes": 34605720,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "b9f172e1df3f524a313f7eb4b4ba59d593b1b561772f33f752365bc8c553d540",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-avensis-tw1-v2",
+  "make": "toyota",
+  "model": "avensis",
+  "modelFamily": "toyota avensis",
+  "modelAliases": [
+   "avensis"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "ad05a156f817451ca214d388e53052fb",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-avensis-tw1-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-avensis-tw1-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 28895072,
+  "mobileFileSizeBytes": 28895072,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "af250fe51e04838942bd70e9763b5c3531fb6d8497cfa1c6ceb2a3ba117fe6fe",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-supra-tw1-v3",
+  "make": "toyota",
+  "model": "supra",
+  "modelFamily": "toyota supra",
+  "modelAliases": [
+   "supra"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "d6f1ad4b22214abfaea1e59f98409f57",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "car_paint"
+  ],
+  "glassMaterialNames": [
+   "windows",
+   "windows_side",
+   "HeadLight_Glass",
+   "Headlight_inner_Glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-supra-tw1-v3.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-supra-tw1-v3.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 39993064,
+  "mobileFileSizeBytes": 39993064,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "5adba6250fec7573b010b8af092e4d8ab53faf130737dae498998ec90217e6d2",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-proace-city-verso-2020-tw1-v1",
+  "make": "toyota",
+  "model": "proace-city-verso",
+  "modelFamily": "toyota proace-city-verso",
+  "modelAliases": [
+   "proace-city-verso"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": null,
+  "bodyStyle": "mpv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "751c7d18c05946d18ba7953dc046dec6",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "M_2020_Toyota_Proace_Verso_City_CarPaint"
+  ],
+  "glassMaterialNames": [
+   "M_2020_Toyota_Proace_Verso_City_Windows",
+   "M_2020_Toyota_Proace_Verso_City_BrakeLightsGlass",
+   "M_2020_Toyota_Proace_Verso_City_HeadLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-proace-city-verso-2020-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-proace-city-verso-2020-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 43767948,
+  "mobileFileSizeBytes": 43767948,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d6ba9b1bf33d4efdf4fe7d18ddd96be46718a58425543010e4bbe9b477d2d617",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-camry-2007-tw1-v1",
+  "make": "toyota",
+  "model": "camry",
+  "modelFamily": "toyota camry",
+  "modelAliases": [
+   "camry"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2007,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "40111978beac4ba7846d94f41805de40",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Camry07-carpaint"
+  ],
+  "glassMaterialNames": [
+   "Camry07-windows",
+   "Camry07-windows-black",
+   "Camry07-backlight",
+   "Camry07-refractiveglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-camry-2007-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-camry-2007-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 36599088,
+  "mobileFileSizeBytes": 36599088,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f8ad22a4db4d2a80bdbccd437f2ebceb048857de2e0583e54e5d7a45d58dc75c",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-hilux-2005-tw1-v1",
+  "make": "toyota",
+  "model": "hilux",
+  "modelFamily": "toyota hilux",
+  "modelAliases": [
+   "hilux"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2005,
+  "yearEnd": null,
+  "bodyStyle": "pickup",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "df56087572a44b0496e39006859ae3b9",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint",
+   "carpaint_second"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-hilux-2005-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-hilux-2005-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 38430996,
+  "mobileFileSizeBytes": 38430996,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f4fdc5f9b97f5ecb810bafa8ce81f15e38f32980b9c41db32903d11334be3337",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-rav4-2021-tw1-v1",
+  "make": "toyota",
+  "model": "rav4",
+  "modelFamily": "toyota rav4",
+  "modelAliases": [
+   "rav4"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "411da54827634c5abd462ab4e9e0eb34",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "CarPaint",
+   "chassis"
+  ],
+  "glassMaterialNames": [
+   "glass",
+   "D_Glass",
+   "light_glass",
+   "ext_red_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-rav4-2021-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-rav4-2021-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 13401120,
+  "mobileFileSizeBytes": 13401120,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "be741c135753e43819064177ade20479703c06857cccb7d166b28d5b77f6bab9",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-hilux-1988-tw1-v1",
+  "make": "toyota",
+  "model": "hilux",
+  "modelFamily": "toyota hilux",
+  "modelAliases": [
+   "hilux"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1988,
+  "yearEnd": null,
+  "bodyStyle": "pickup",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "f8a557a46ff34a68893dce0136995408",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-hilux-1988-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-hilux-1988-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 28947500,
+  "mobileFileSizeBytes": 28947500,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "c91808dd777de96d6c2e9a887b078aef1eeb25450fccf101e4915faf91c26747",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-hilux-1978-tw1-v1",
+  "make": "toyota",
+  "model": "hilux",
+  "modelFamily": "toyota hilux",
+  "modelAliases": [
+   "hilux"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1978,
+  "yearEnd": null,
+  "bodyStyle": "pickup",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "4ed6c385052b4d6fb7b2ecee08292d85",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-hilux-1978-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-hilux-1978-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 36577360,
+  "mobileFileSizeBytes": 36577360,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "1b15b96d1fa5551b6ef6c4c769cc1b23e0a49461af59bd2a57e5106c91696059",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-land-cruiser-2024-tw1-v1",
+  "make": "toyota",
+  "model": "land-cruiser",
+  "modelFamily": "toyota land-cruiser",
+  "modelAliases": [
+   "land-cruiser"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2024,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "0937e2b405964856a1aac96f54861274",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "CarPaint"
+  ],
+  "glassMaterialNames": [
+   "ClearGlass",
+   "Light_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-land-cruiser-2024-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-land-cruiser-2024-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 46559156,
+  "mobileFileSizeBytes": 46559156,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "a2f37ae317dffb2551da0d2c61118f0567dd4f5594b782b66a9871b89c199c43",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-corolla-tw1-v1",
+  "make": "toyota",
+  "model": "corolla",
+  "modelFamily": "toyota corolla",
+  "modelAliases": [
+   "corolla"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "e38b2b292a04436a936171a2f5d33af7",
+  "sourceRetrievedAt": "2026-08-08",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "greenglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-corolla-tw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-corolla-tw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 38674504,
+  "mobileFileSizeBytes": 38674504,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "598868f1956310ea3c3b559720735a6451265bfe0fab5fbe249e30de38db946b",
+  "pipelineVersion": "publish-batch-tw1-2026-08-08",
+  "publishedAt": "2026-08-08",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "tw1 gated publish 2026-08-08: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-tw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
