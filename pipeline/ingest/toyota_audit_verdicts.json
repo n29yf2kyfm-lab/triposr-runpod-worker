@@ -342,6 +342,30 @@
    "name": "Toyota Avensis MK10 (E140,E150) 2006-2013",
    "verdict": "FAIL",
    "note": "two faults -- body panels detached and floating free of the car with wheels reduced to stubs, AND it is mislabelled: the boot badge reads COROLLA and E140/E150 are Corolla codes, but the title says Avensis. The nameplate filter trusted the title, so a title-derived plate can simply be wrong"
+  },
+  "61": {
+   "uid": "f8a557a46ff34a68893dce0136995408",
+   "name": "Toyota Hilux (Mk5) Double Cab 1988",
+   "verdict": "PASS",
+   "note": "Mk5 Hilux; wheels consistent in all four views, grille slats crisp, headlight internals present, shut lines defined. NOTE: title says 'Double Cab' but this is plainly a SINGLE cab -- one row of doors, long bed. bodyStyle must come from the render, not the title. HUMSTER3D plate wants blanking"
+  },
+  "62": {
+   "uid": "98c70e5aa53446728fea4d8f448bbf33",
+   "name": "toyota camry v80",
+   "verdict": "HOLD",
+   "note": "geometry looks sound -- proportions right, silver multi-spoke wheels consistent, shut lines visible -- but the RECOLOUR DID NOT LAND: renders black under --colour silver, same failure as #41. colour_variants.py resprays by glTF-JSON edit, a different mechanism from the render worker, so this may still bake. Recoverable if recolour_audit passes; unusable if it does not"
+  },
+  "66": {
+   "uid": "4ed6c385052b4d6fb7b2ecee08292d85",
+   "name": "Toyota_ Hilux_(Mk3)_ Regular Cab_1978",
+   "verdict": "PASS",
+   "note": "Mk3 Hilux regular cab; steel wheels consistent in all four views, grille crisp, round headlights detailed, shut lines defined. Title correctly states Regular Cab. HUMSTER3D plate wants blanking"
+  },
+  "67": {
+   "uid": "1c2ce5ff548f4ab49d72183d1e0f2afe",
+   "name": "Toyota GR Yaris Rally WRC | www.vecarz.com",
+   "verdict": "FAIL",
+   "note": "out of scope -- WRC rally car: full aero, gravel arches, competition wing, no road lighting. No UK reg decodes to it. Same category as #3's GT500. Title also carries a vecarz.com watermark"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
