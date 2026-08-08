@@ -168,6 +168,24 @@
    "name": "Toyota GT86 3D Model (Free)",
    "verdict": "PASS",
    "note": "the good first-gen ZN6 GT86 -- polished multi-spoke alloys consistent across views, sharp projector internals, grille mesh deep, shut lines crisp. Covers the generation #8 failed on"
+  },
+  "29": {
+   "uid": "3f82031714bd40a3a3a027e5687604de",
+   "name": "Toyota  Prius 2010",
+   "verdict": "PASS",
+   "note": "XW30 third-gen Prius -- a generation #11/#19 do not cover. 5-spoke alloys consistent across views, headlight internals present, shut lines defined. HUMSTER3D plate watermark wants blanking"
+  },
+  "32": {
+   "uid": "d2489d2e8e834b4f995c176fe3eabe91",
+   "name": "2010 Toyota Corolla",
+   "verdict": "PASS",
+   "note": "E140 Corolla saloon; proportions right, 5-spoke alloys consistent, grille slats crisp, headlight internals present, shut lines defined"
+  },
+  "33": {
+   "uid": "e595afd4ec5745a08f95cc5baeaa5ef0",
+   "name": "Toyota Corolla Sedan Regular 2020",
+   "verdict": "PASS",
+   "note": "E210 Corolla saloon; dark multi-spoke wheels consistent in all four views, headlight LED internals sharp, grille mesh has depth, shut lines crisp, premium finish"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
