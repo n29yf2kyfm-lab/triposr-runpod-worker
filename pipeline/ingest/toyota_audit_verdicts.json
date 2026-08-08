@@ -216,8 +216,21 @@
    "name": "Toyota Supra A70 Liftback",
    "verdict": "PASS",
    "note": "reads as A70 Supra instantly; period alloys consistent in all four views; pop-up headlights closed and period-correct; body creases sharp; shut lines defined. Only A70 in the set"
+  },
+  "40": {
+   "uid": "0937e2b405964856a1aac96f54861274",
+   "name": "2024 Toyota Land Cruiser LC300 VXR 409 TT",
+   "verdict": "PASS",
+   "note": "excellent -- reads as LC300 instantly, multi-spoke alloys consistent in all four views, grille slat depth crisp, headlight internals sharp, premium reflections, shut lines defined"
+  },
+  "41": {
+   "uid": "a735fe6fe72049299c186e5db62a8d23",
+   "name": "Toyota Yaris MK3 2011-2020",
+   "verdict": "FAIL",
+   "note": "three faults -- wheels missing from all four arches with one wheel detached and floating beneath the car, suspension parts protruding, and the RECOLOUR DID NOT LAND: body renders pink despite the wave forcing --colour silver, with a stray magenta patch on the rear quarter. Header still said 'recolourable'"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
- "_gate_gap": "geom_audit.py is never called by gpu_wave.py -- it is referenced only in render/handler.py, and the handler computes the pose audit only when the submit body sets audit=True, which gpu_wave never does. gpu_wave also discards output['audit']. So the ingest path has NO orientation gate and an upside-down J100 (#34) reached the clean bucket. Wire it."
+ "_gate_gap": "geom_audit.py is never called by gpu_wave.py -- it is referenced only in render/handler.py, and the handler computes the pose audit only when the submit body sets audit=True, which gpu_wave never does. gpu_wave also discards output['audit']. So the ingest path has NO orientation gate and an upside-down J100 (#34) reached the clean bucket. Wire it.",
+ "_recolour_note": "#41 proves the sheet header's 'recolourable' (body mats + coverage) does NOT prove a respray works -- it rendered pink under --colour silver. recolour_audit.py --stamp is the only evidence that counts, and gate_catalogue is right to refuse unstamped variants."
 }
