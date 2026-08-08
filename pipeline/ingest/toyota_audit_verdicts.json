@@ -270,6 +270,18 @@
    "name": "Toyota Supra Mk4",
    "verdict": "FAIL",
    "note": "below the bar -- headlights entirely absent (smooth body where the lights should be), grille is a plain rectangle, no shut lines, body soft and melted. #49 covers A80 far better"
+  },
+  "65": {
+   "uid": "694c9f59f7494c0eae747828562a6a55",
+   "name": "Toyota Supra",
+   "verdict": "FAIL",
+   "note": "below the bar -- headlights are plain dark ovals, grille a featureless slot, no shut lines on the doors, body soft. Better than #64 but well under #49, which covers A80"
+  },
+  "48": {
+   "uid": "e38b2b292a04436a936171a2f5d33af7",
+   "name": "Toyota Corolla",
+   "verdict": "PASS",
+   "note": "E140 Corolla saloon at 1.09M faces; multi-spoke wheels consistent in all four views, grille slats crisp, headlight internals present, shut lines defined. Same generation and body as #32 (444k faces) -- this is the higher-resolution of the two"
   }
  },
  "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
