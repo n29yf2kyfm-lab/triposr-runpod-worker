@@ -10,7 +10,7 @@ is lost.
 | 2 | Audi | done — 1,055 swept, 129 judged, 20 live |
 | 3 | BMW | review done — 902 swept, 206 eye-reviewed, 26 keeps (13 live, 13 pending publish) |
 | 4 | Skoda | swept + rendered 2026-08-08 — 58 candidates, 54 sheets in `audit/skoda`, 20 clean / 34 suspect. **Awaiting the owner's eye review.** |
-| 5 | SEAT | IN PROGRESS 2026-08-08 — 415 swept, filtered to 38 real cars, sheets rendering to `audit/seat` |
+| 5 | SEAT | swept + rendered 2026-08-08 — 415 swept, filtered to 38, **36 sheets** in `audit/seat`, 21 clean / 15 suspect. **Awaiting the owner's eye review.** |
 | 6 | — | next marque not yet set |
 
 ## SEAT: a marque whose name is an English word (2026-08-08)
@@ -35,6 +35,21 @@ every wrong thing — and additionally drops component titles (`headlight`,
 the nameplate queries. A ratio anywhere near SEAT's 1425:22 means the bare query
 is dominating with homonyms. Candidates still to come: Smart, Lotus, Born,
 possibly Jaguar. Run the filter on any of them before spending GPU.
+
+**Outcome:** 36 of the 38 rendered. The two that did not are size, not sourcing —
+`Seat Mii Electric` (75 MB) and `Car Seat Leon` (53 MB) both exceed `gpu_wave`'s
+48 MB `MAX_OBJ` ceiling. The split came out **21 clean / 15 suspect**, a far
+better ratio than Skoda's 20/34, because the junk that drags a pool down was
+removed before rendering rather than after.
+
+## Review pages
+
+`pipeline/qc/wave_review_page.py` builds the numbered eye-review page for any
+wave from its triage JSON — every sheet at native width, ordered clean-first then
+suspect by body share, with an index mapping each number to its uid. It shows the
+material split but deliberately does not rank or pre-judge the cars: a car can be
+amber and excellent, or green and junk, and putting a thumb on that scale would
+corrupt the review it exists to serve.
 
 ## Carried over into the Skoda wave
 
