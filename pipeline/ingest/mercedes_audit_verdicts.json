@@ -1,0 +1,41 @@
+{
+ "_doc": "Per-car audit of the Mercedes CLEAN set (82 triaged clean, 2 exact duplicates dropped). Rubric: CLAUDE.md 'Per-car audit rubric'. Written incrementally -- the container is ephemeral and the /tmp Mercedes scratch was already lost once; only the repo copy survived.",
+ "verdicts": {
+  "dedd8f64a05d4d769d352ddcac034d25": {
+   "name": "Mercedes-Benz C-Class MK3 W204 2007-2014",
+   "cov": 0.061,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "tyres missing -- bare black hubs in the arches; stray white geometry floating above the roof in every view; and the RECOLOUR DID NOT LAND, body renders red under --colour silver. cov=0.061"
+  },
+  "63c20a79bbb84d60a466b578561f29a1": {
+   "name": "Mercedes-Benz ML (W163) 1997-2005",
+   "cov": 0.061,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "ON ITS SIDE -- the front views show the undercarriage. geom_audit lists 'on-side' among the cases it detects, and it is still not wired into gpu_wave. Recolour also did not land. cov=0.061"
+  },
+  "a73c924778de4d66ae45a7880ab8943e": {
+   "name": "Mercedes Benz SLR McLaren (Bull)",
+   "cov": 0.077,
+   "mats": 1,
+   "verdict": "PASS-SINGLE",
+   "note": "geometry reads as SLR McLaren -- chrome multi-spoke wheels with red calipers consistent across views, shut lines defined. But the RECOLOUR DID NOT LAND: renders its own black under forced silver. cov=0.077. Low-poly at 66k faces, and gloss black hides softness, so re-check if it is ever recoloured light. Ships single-neutral black"
+  },
+  "1480dab3f0c74dc0a262154ec508e7e0": {
+   "name": "Mercedes Benz G-class AMG Brabus Model",
+   "cov": 0.082,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "out of scope AND no recolour -- Brabus aftermarket widebody with Brabus badging, not the stock G-Class a reg decodes to. Renders white under forced silver. cov=0.082"
+  },
+  "55df50faff8e4918b47a00c6e013d37b": {
+   "name": "Mercedes-Benz Vito MK1 (W638) 1996-2003",
+   "cov": 0.099,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "wheels sunk inside the body -- the arches show only small dark cylinders and the van sits on the floor with no visible tyres. Recolour also did not land, renders white. cov=0.099"
+  }
+ },
+ "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage."
+}
