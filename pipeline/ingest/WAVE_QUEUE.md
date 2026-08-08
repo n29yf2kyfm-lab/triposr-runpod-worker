@@ -10,8 +10,61 @@ is lost.
 | 2 | Audi | done — 1,055 swept, 129 judged, 20 live |
 | 3 | BMW | review done — 902 swept, 206 eye-reviewed, 26 keeps (13 live, 13 pending publish) |
 | 4 | Skoda | swept + rendered 2026-08-08 — 58 candidates, 54 sheets in `audit/skoda`, 20 clean / 34 suspect. **Awaiting the owner's eye review.** |
-| 5 | SEAT | swept + rendered 2026-08-08 — 415 swept, filtered to 38, **36 sheets** in `audit/seat`, 21 clean / 15 suspect. **Awaiting the owner's eye review.** |
-| 6 | — | next marque not yet set |
+| 5 | SEAT | swept + rendered 2026-08-08 — 415 swept, filtered to 42, **40 sheets** in `audit/seat`, 24 clean / 16 suspect. **Awaiting the owner's eye review.** |
+| 6 | MINI | swept + rendered 2026-08-08 — 432 swept, filtered to 50, **48 sheets** in `audit/mini`, 9 clean / 39 suspect. **Awaiting the owner's eye review.** |
+| 7 | Kia | swept + rendered 2026-08-08 — 287 swept, 81 candidates, **70 sheets** in `audit/kia`, 18 clean / 52 suspect. **Awaiting the owner's eye review.** |
+| 8 | — | next marque not yet set |
+
+## MINI: generic nameplates, and a marque no nameplate can recover (2026-08-08)
+
+Two problems SEAT did not have.
+
+**MINI's own range is made of generic words.** One, Coupé, Convertible, Roadster,
+Hatch and Traveller are all real MINI names and all useless as filter tokens —
+feeding them in would admit any marque's convertible. The sweep did pull in a
+Dodge Mini Ram Van, a Geely Mini Panda and a Wuling Hongguang Mini EV, so the
+contamination is real. Pass only marque-specific tokens (Cooper, Clubman,
+Countryman, Paceman, JCW, Moke, Marcos) and accept losing a bare-titled car.
+
+**A classic Mini is often titled just "Mini".** 383 of the 432 candidates matched
+`\bmini\b` while being mini skirts, mini golf, DJI Mavic Minis, Mac Minis and
+about twenty Poppy Playtime "Mini Huggy" characters. No title rule recovers the
+real ones. `--allow-uid` exists for this: force the genuinely ambiguous rows
+through so a render settles them, because a sheet costs seconds and a title guess
+costs a car.
+
+**MINI splits badly**: 9 clean of 48, against SEAT's 24 of 40. Mini models tend
+to carry one material over the whole shell, so a recolour would paint the glass
+and lights with the body.
+
+## Two filter bugs that silently ate real cars (2026-08-08)
+
+Both found by testing the gate against cases it must catch, not by reading it.
+
+1. **Diacritics were deleted, not folded.** `norm()` stripped every non-ASCII
+   character, so "SEAT León MK2" became "seat le n mk2" and failed to match the
+   nameplate "Leon". Uploaders write Citroën, Škoda, Río and Cee'd — an
+   ASCII-only filter discards exactly the rows a native speaker uploads.
+2. **Multi-word nameplates never matched anything.** The pattern was built as
+   `re.escape(name).replace(" ", r"\s+")`; `re.escape` escapes the space to
+   backslash-space, so the replace leaves the backslash behind and produces a
+   pattern matching a literal backslash. "Leon ST", "John Cooper Works",
+   "Morris Mini" and "Cee'd" matched nothing.
+
+Cost: 4 real SEATs (León MK1, León MK2 ×2, Córdoba WRC) and 1 MINI (Morris Mini)
+were thrown away as junk, and the first SEAT review page shipped to the owner
+without them. This is the same failure class as the `\b`-inside-a-raw-string gate
+already recorded in CLAUDE.md — written again eight hours later. **Prove a gate
+fires against inputs it must catch AND inputs it must not, every time.**
+
+## Triage
+
+`pipeline/ingest/wave_triage.py` turns `gpu_wave` render logs into the triage
+JSON the review page consumes. The material figures exist only in the log, so
+this is the only way to recover them. Note the trap it guards: the index in
+`[27/38]` is an offset into *the manifest that run was given*, so a wave rendered
+in two passes has two index spaces and joining a top-up log to the original
+manifest mislabels every row.
 
 ## SEAT: a marque whose name is an English word (2026-08-08)
 
