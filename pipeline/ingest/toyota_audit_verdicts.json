@@ -138,7 +138,20 @@
    "name": "Toyota C-HR 2020",
    "verdict": "DUPLICATE",
    "note": "same mesh as #28, 232 faces apart (0.12%), identical in all four views except an 'ItsDiyor' plate watermark. Keeping #28, which has the clean plate"
+  },
+  "31": {
+   "uid": "2724aadbf88b4706a26cf7d1b2332d0c",
+   "name": "2022 Toyota GR86",
+   "verdict": "PASS",
+   "note": "quality is strong -- proportions right, black multi-spoke wheels consistent, headlight internals sharp, grille mesh deep, shut lines defined. Redundant with #7 (same GR86 generation, different mesh); catalogue wants one of the two"
+  },
+  "34": {
+   "uid": "7f6b5f1f4eaf47dcafd7569d4ba5b8bf",
+   "name": "Toyota Land Cruiser J100",
+   "verdict": "FAIL",
+   "note": "UPSIDE DOWN in all four views -- wheels in the air, roof on the floor. Exactly the case geom_audit.py was calibrated to auto-reject, and it reached the clean bucket because that gate is not wired into gpu_wave.py at all"
   }
  },
- "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached"
+ "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
+ "_gate_gap": "geom_audit.py is never called by gpu_wave.py -- it is referenced only in render/handler.py, and the handler computes the pose audit only when the submit body sets audit=True, which gpu_wave never does. gpu_wave also discards output['audit']. So the ingest path has NO orientation gate and an upside-down J100 (#34) reached the clean bucket. Wire it."
 }
