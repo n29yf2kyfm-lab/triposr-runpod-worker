@@ -234,6 +234,13 @@ def main():
         # Toyotas and an on-side Mercedes ML reached human sheets in one day.
         ha = next((v[2] for v in got.values() if v[2]), None) or {}
         pose, preasons = "ok", []
+        # BROKEN AS WRITTEN -- kept visible rather than deleted so it is not
+        # re-attempted the same way. _pose_audit returns glass_zf/wheel_zf/
+        # glass_af/wheel_af/h_over_l and NO "geom" key, so this branch never runs.
+        # And its h_over_l is contaminated by the studio floor (2.5x the car, built
+        # before the audit): a 1977 Accord reports 0.101 against a true 0.317.
+        # Fix properly by computing signals from the staged GLB with
+        # geom_audit.geom_signals, or by excluding studio meshes in the handler.
         if ha.get("geom"):
             try:
                 pose, preasons = geom_verdict(ha["geom"], ha, cov)

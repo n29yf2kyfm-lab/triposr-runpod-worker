@@ -57,7 +57,26 @@ Verify the credentials, don't assume them:
 A day auditing 150 cars by eye across Toyota, Mercedes and Peugeot produced these.
 Read this before trusting any triage bucket or sheet header.
 
-**`geom_audit.py` IS NOW WIRED into `gpu_wave.py`.** It was written and calibrated
+**`geom_audit.py` IS STILL NOT ACTUALLY RUNNING — I wired it wrong and said otherwise.**
+Read this before trusting any pose verdict. On 2026-08-08 I added the call, tested
+`geom_verdict` against 9 synthetic cases, got 9/9, and recorded here that the gate was live.
+It is not. `gpu_wave.py` guards on `if ha.get("geom")`, but `_pose_audit`
+(render/handler.py:436) returns only `glass_zf, wheel_zf, glass_af, wheel_af, h_over_l` —
+there is no `geom` key, so the branch never executes and every car still scores `pose="ok"`.
+I tested the FUNCTION and never tested the INTEGRATION, which is the exact failure this file
+already warns about.
+Worse, the signals are unusable even once routed: the handler builds the studio floor (2.5x
+the car) BEFORE `_pose_audit` runs and iterates every scene mesh, so a 1977 Accord reports
+`h_over_l=0.101` against a true 0.317 (a 2.5x stage predicts 0.127 — it matches). `glass_zf`
+is contaminated the same way because it normalises against the scene bbox. Switching the
+gate on as-is would fire `h_over_l < 0.22` on nearly every car.
+THE REAL FIX is one of: exclude studio geometry from `_pose_audit` and redeploy the worker
+image (remember a template repin does NOT update warm workers), or compute the signals
+locally in `gpu_wave` from the staged GLB via `geom_audit.geom_signals`, which reads the
+mesh directly and cannot be contaminated. Until one of those lands, ORIENTATION IS STILL
+UNGATED and the only defence is the eye.
+
+**What the wiring attempt DID achieve:** It was written and calibrated
 2026-07-17 and for three weeks NOTHING on the ingest path called it — the handler only
 computes the pose block when the submit body sets `audit=True`, which the wave never did,
 and the wave discarded `output["audit"]` anyway. In one day that let three upside-down
