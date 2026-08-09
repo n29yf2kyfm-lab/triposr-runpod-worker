@@ -194,6 +194,19 @@ NEARBY_DATASETS = (
     "locally-listed-building",
 )
 
+# THESE MUST ALSO BE ASKED AT THE POINT ITSELF. A designation that only ever
+# arrives through the nearby search can only ever be reported as setting —
+# and listed-building was exactly that: the point query never asked for it,
+# so on_site was always False, describe() downgraded the building's own
+# listing from CRITICAL to "its SETTING is the consideration", and
+# permitted_development()'s consent_required branch was unreachable code.
+# A Grade II house was told its extension was permitted development.
+# Altering a listed building without consent is a criminal offence, so the
+# one designation that must never be missed was the one that could not be
+# found. Anything whose own boundary can contain the site belongs here.
+POINT_ALSO = ("listed-building", "scheduled-monument",
+              "locally-listed-building")
+
 # Context rather than constraint: who the application goes to.
 CONTEXT_DATASETS = ("local-planning-authority", "parish", "ward")
 
@@ -526,7 +539,8 @@ def permitted_development(findings):
 
 def screen(lat, lon, radius_m=NEARBY_RADIUS_M, timeout=HTTP_TIMEOUT):
     """Every constraint bearing on a site, and what it means."""
-    on_site = fetch_at_point(lat, lon, timeout=timeout)
+    on_site = fetch_at_point(lat, lon, SITE_DATASETS + POINT_ALSO,
+                             timeout=timeout)
     near = fetch_nearby(lat, lon, radius_m=radius_m, timeout=timeout)
 
     findings = [describe(e, on_site=True) for e in on_site]

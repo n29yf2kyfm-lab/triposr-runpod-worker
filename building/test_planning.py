@@ -473,6 +473,58 @@ check("8h and that warning comes first, ahead of the standard caveat",
       _extra["warnings"][0][:90])
 
 
+# ---- 9. the one designation that must never be missed ---------------------
+# describe() ranked an on-site listed building CRITICAL (3a) and
+# permitted_development() had a consent_required branch waiting for it — and
+# neither could ever fire, because screen() only asked the point query for
+# SITE_DATASETS and "listed-building" lived exclusively in NEARBY_DATASETS.
+# The register was never asked "is this site itself listed?", so the answer
+# was always "no", the listing arrived through the bbox search as setting,
+# and a Grade II house was told its extension was permitted development.
+# Altering a listed building without consent is a criminal offence.
+#
+# Section 3 was green throughout: it tested describe() with on_site=True
+# handed to it. Nothing tested that the pipeline could ever produce that.
+
+check("9a the point query asks for listed buildings at the site",
+      "listed-building" in P.SITE_DATASETS + P.POINT_ALSO)
+check("9b and for scheduled monuments",
+      "scheduled-monument" in P.SITE_DATASETS + P.POINT_ALSO)
+
+_calls = []
+_real_point, _real_near = P.fetch_at_point, P.fetch_nearby
+
+
+def _fake_point(lat, lon, datasets=P.SITE_DATASETS, timeout=None):
+    # THE REGISTER ONLY ANSWERS WHAT IT IS ASKED. The first version of this
+    # stub returned the listing whatever `datasets` held, so it passed
+    # against the very bug it was written for. A fake that ignores the
+    # query cannot test the query.
+    _calls.append(tuple(datasets))
+    if "listed-building" not in datasets:
+        return []
+    return [{"dataset": "listed-building", "name": "3 BASONS LANE",
+             "listed-building-grade": "II", "entity": 77}]
+
+
+P.fetch_at_point = _fake_point
+P.fetch_nearby = lambda *a, **k: []
+try:
+    _screen = P.screen(52.49, -1.99)
+finally:
+    P.fetch_at_point, P.fetch_nearby = _real_point, _real_near
+
+check("9c a listing at the site reaches screen() as on-site",
+      any(f["dataset"] == "listed-building" and f["on_site"]
+          for f in _screen["constraints"]))
+check("9d and the answer is consent required, not permitted development",
+      _screen["permitted_development"]["status"] == "consent_required",
+      _screen["permitted_development"]["status"])
+check("9e the listing is named as blocking",
+      _screen["permitted_development"]["blocking"],
+      str(_screen["permitted_development"]["blocking"]))
+
+
 # ==========================================================================
 print()
 for f in FAILED:
