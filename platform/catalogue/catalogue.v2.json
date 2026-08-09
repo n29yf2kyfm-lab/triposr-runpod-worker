@@ -195947,7 +195947,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2022-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2022-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2022-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2022-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2022-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2022-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2022-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2022-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2022-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2022-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -196032,7 +196041,64 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2959,
+   "variantsHash": "173d0821f3c7185ea7fa248e50b3386341b5c164",
+   "method": "render",
+   "at": "2026-08-09"
+  }
  },
  {
   "schemaVersion": 2,
@@ -196090,7 +196156,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-insight-2010-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-insight-2010-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-insight-2010-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-insight-2010-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-insight-2010-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-insight-2010-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-insight-2010-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-insight-2010-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-2010-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-2010-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -196175,7 +196250,64 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2938,
+   "variantsHash": "3b892be9e83261d00d130abf97126f9e2a486aa6",
+   "method": "render",
+   "at": "2026-08-09"
+  }
  },
  {
   "schemaVersion": 2,
@@ -196232,7 +196364,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-concerto-1988-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-concerto-1988-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-concerto-1988-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-concerto-1988-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-concerto-1988-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-concerto-1988-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-concerto-1988-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-concerto-1988-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-concerto-1988-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-concerto-1988-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -196317,7 +196458,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -196374,7 +196565,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-integra-1995-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-integra-1995-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-integra-1995-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-integra-1995-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-integra-1995-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-integra-1995-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-integra-1995-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-integra-1995-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-integra-1995-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-integra-1995-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -196459,7 +196659,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -196516,7 +196766,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -196601,7 +196860,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -196659,7 +196968,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1983-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1983-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1983-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1983-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1983-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1983-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1983-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1983-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-prelude-1983-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-prelude-1983-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -196744,7 +197062,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -196801,7 +197169,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-1999-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-1999-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -196886,7 +197263,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -196944,7 +197371,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1988-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1988-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1988-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1988-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1988-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1988-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1988-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1988-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-x-1988-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-x-1988-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -197029,7 +197465,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -197086,7 +197572,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2008-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2008-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2008-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2008-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2008-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2008-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2008-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2008-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-2008-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-2008-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -197171,7 +197666,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -197228,7 +197773,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1978-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1978-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1978-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1978-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1978-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1978-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1978-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1978-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-prelude-1978-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-prelude-1978-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -197313,7 +197867,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -197370,7 +197974,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2025-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2025-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2025-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2025-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2025-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2025-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2025-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2025-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-hr-v-2025-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-hr-v-2025-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -197455,7 +198068,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -197512,7 +198175,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-beat-1991-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-beat-1991-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-beat-1991-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-beat-1991-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-beat-1991-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-beat-1991-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-beat-1991-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-beat-1991-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-beat-1991-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-beat-1991-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -197597,7 +198269,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -197655,7 +198377,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-z-2011-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-z-2011-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-z-2011-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-z-2011-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-z-2011-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-z-2011-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-z-2011-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-z-2011-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-z-2011-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-z-2011-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -197740,7 +198471,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -197796,7 +198577,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2021-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2021-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2021-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2021-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2021-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2021-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2021-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2021-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2021-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2021-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -197881,7 +198671,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -197938,7 +198778,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s660-2015-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s660-2015-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s660-2015-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s660-2015-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s660-2015-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s660-2015-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s660-2015-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s660-2015-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-s660-2015-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-s660-2015-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -198023,7 +198872,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -198080,7 +198979,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2011-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2011-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2011-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2011-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2011-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2011-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2011-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2011-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-2011-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-2011-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -198165,7 +199073,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -198223,7 +199181,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-1998-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-1998-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-1998-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-1998-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-1998-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-1998-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-1998-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-1998-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-1998-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-1998-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -198308,7 +199275,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -198365,7 +199382,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2011-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2011-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2011-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2011-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2011-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2011-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2011-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2011-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2011-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2011-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -198450,7 +199476,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -198507,7 +199583,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2009-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2009-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -198592,7 +199677,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -198649,7 +199784,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2001-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2001-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2001-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2001-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2001-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2001-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2001-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-hr-v-2001-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-hr-v-2001-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-hr-v-2001-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -198734,7 +199878,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -198791,7 +199985,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2003-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2003-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2003-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2003-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2003-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2003-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2003-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2003-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2003-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2003-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -198876,7 +200079,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -198934,7 +200187,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1997-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1997-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1997-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1997-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1997-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1997-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1997-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-prelude-1997-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-prelude-1997-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-prelude-1997-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -199019,7 +200281,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -199076,7 +200388,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-accord-2009-hw1-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2009-hw1-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2009-hw1-v2.glb",
   "fallbackGlbUrl": null,
@@ -199161,7 +200482,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -199219,7 +200590,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-crosstour-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-crosstour-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-crosstour-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-crosstour-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-crosstour-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-crosstour-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-crosstour-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-crosstour-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-crosstour-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-crosstour-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -199304,7 +200684,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -199361,7 +200791,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1994-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1994-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1994-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1994-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1994-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1994-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1994-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1994-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-1994-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-1994-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -199446,7 +200885,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -199504,7 +200993,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1987-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1987-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1987-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1987-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1987-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1987-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1987-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1987-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1987-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1987-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -199589,7 +201087,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -199646,7 +201194,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-nsx-1992-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-nsx-1992-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -199731,7 +201288,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -199790,7 +201397,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2001-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2001-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2001-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2001-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2001-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2001-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2001-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-2001-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-2001-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-2001-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -199875,7 +201491,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -199932,7 +201598,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1991-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1991-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1991-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1991-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1991-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1991-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1991-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1991-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1991-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1991-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -200017,7 +201692,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -200073,7 +201798,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -200158,7 +201892,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -200214,7 +201998,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1996-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1996-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1996-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1996-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1996-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1996-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1996-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1996-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1996-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1996-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -200299,7 +202092,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -200356,7 +202199,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1976-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1976-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1976-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1976-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1976-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1976-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1976-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1976-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1976-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1976-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -200441,7 +202293,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -200496,7 +202398,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-nsx-1992-hw1-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-nsx-1992-hw1-v2.glb",
   "fallbackGlbUrl": null,
@@ -200581,7 +202492,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -200636,7 +202597,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-city-2008-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-city-2008-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-city-2008-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-city-2008-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-city-2008-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-city-2008-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-city-2008-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-city-2008-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-city-2008-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-city-2008-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -200721,7 +202691,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -200773,7 +202793,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1995-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1995-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1995-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1995-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1995-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1995-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1995-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-x-1995-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-x-1995-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-x-1995-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -200858,7 +202887,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -200913,7 +202992,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s2000-1999-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s2000-1999-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s2000-1999-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s2000-1999-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s2000-1999-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s2000-1999-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s2000-1999-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-s2000-1999-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-s2000-1999-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-s2000-1999-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -200998,7 +203086,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -201052,7 +203190,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2023-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2023-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2023-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2023-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2023-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2023-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2023-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2023-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2023-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2023-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -201137,7 +203284,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -201191,7 +203388,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v3__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v3__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v3__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v3__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v3__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v3__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v3__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-nsx-1992-hw1-v3__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-nsx-1992-hw1-v3.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-nsx-1992-hw1-v3.glb",
   "fallbackGlbUrl": null,
@@ -201276,7 +203482,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -201332,7 +203588,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1999-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1999-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1999-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1999-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1999-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1999-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1999-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1999-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1999-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1999-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -201417,7 +203682,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -201471,7 +203786,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-hw1-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-hw1-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-hw1-v2.glb",
   "fallbackGlbUrl": null,
@@ -201556,7 +203880,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -201613,7 +203987,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2016-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2016-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -201698,7 +204081,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -201755,7 +204188,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2020-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2020-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -201840,7 +204282,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -201894,7 +204386,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2025-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2025-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2025-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2025-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2025-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2025-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2025-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-2025-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2025-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2025-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -201979,7 +204480,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -202034,7 +204585,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1993-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1993-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -202119,7 +204679,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -202177,7 +204787,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-v-2001-hw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-v-2001-hw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-v-2001-hw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-v-2001-hw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-v-2001-hw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-v-2001-hw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-v-2001-hw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-cr-v-2001-hw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-v-2001-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-v-2001-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -202262,7 +204881,57 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -202320,7 +204989,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-odyssey-1999-hw1-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-1999-hw1-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-1999-hw1-v2.glb",
   "fallbackGlbUrl": null,
@@ -202405,6 +205083,56 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Sonic Grey Pearl",
+     "colourFamily": "Cement Grey",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Crystal Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Championship White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Racing Blue Pearl",
+     "colourFamily": "Racing Blue",
+     "finish": "Pearl"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Premium Crystal Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  }
  }
 ]
