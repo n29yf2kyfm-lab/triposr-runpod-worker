@@ -473,5 +473,35 @@
    "faceted low-poly surfacing throughout"
   ],
   "name": "2018-land-rover-discovery-hse"
+ },
+ {
+  "uid": "8bc2399d07a54b438a39b429b20a9187",
+  "verdict": "fail",
+  "reasons": [
+   "detail too soft for the bar: no bonnet shut line at all, headlights are featureless dark blobs with no internal elements, the grille is a shallow slot and the front bumper is barely modelled",
+   "tyres are correctly black rubber and the dark alloys have full spoke and lug detail; glass reads as glass - the cull is sharpness, not materials"
+  ],
+  "name": "Range Rover"
+ },
+ {
+  "uid": "6dd6dcc8074c4f3b81982d58d317b0a4",
+  "verdict": "fail",
+  "reasons": [
+   "a rock diorama in a wooden display tray is baked into the mesh and the car is posed tilted, climbing it - the base renders in all four views",
+   "tyres render body-white/light grey rather than black rubber",
+   "bull bar fitted - modification, out of scope"
+  ],
+  "name": "Landrover Defender"
+ },
+ {
+  "uid": "d0820434bec045a2b141a4e1f71d192e",
+  "verdict": "fail",
+  "reasons": [
+   "door mirrors render as bright blue/cyan glass spheres on both A-pillars (confirmed at 2.2x)",
+   "proportions do not read as an L494 Range Rover Sport - stubby rear overhang, tall greenhouse, toy-like stance",
+   "rear quarter glazing renders as an opaque white panel while the rest of the glass is transparent",
+   "tyres are correctly black and the silver alloys are fine"
+  ],
+  "name": "Range Rover Sport (2018)"
  }
 ]
