@@ -156,6 +156,31 @@ wheels). What settled it was applying the change and LOOKING at the re-render.
 **Both live waves were then re-checked against the corrected test: 46/46 Mercedes and
 34/34 Toyota clean.** The two the owner caught were the only ones.
 
+## nameplate_filter: hyphenated nameplates silently dropped cars (fixed 2026-08-09)
+
+`norm()` reduces punctuation to a SPACE, so "CR-V" becomes `cr v` while an uploader who
+typed "CRV" becomes `crv` — the pattern joined its tokens with `\s+` and the two could
+never match. The car was dropped as `no-nameplate` with no warning.
+
+Measured on the Honda sweep: **12 genuine cars lost**, including a 1,047,310-face 1988
+CR-X. NOT Honda-specific — verified the same day that it also broke Toyota **C-HR vs CHR**
+and Peugeot **e-208 vs e208**, and it would hit GT-R, X-Trail, CX-5, ID.3 and every other
+hyphenated nameplate.
+
+FIX: join nameplate tokens with `\s*` instead of `\s+`, so one pattern matches both
+spellings. Tested both directions — catches CRV/CR-V, CHR/C-HR, e208/e-208,
+LandCruiser/Land Cruiser; still rejects "Crvette" and unrelated marques.
+
+**COST TO EARLIER WAVES IS UNMEASURED, NOT ZERO.** I tried to quantify it against the
+saved Toyota/Mercedes/Peugeot manifests and got "0 recovered" — but those files are
+POST-filter, so any car the bug dropped was never written to them. The loss is invisible
+there by construction. To actually measure it, re-run `marque_sweep` and diff, or keep the
+raw pre-filter sweep output in future (worth doing: no wave currently retains it).
+
+Also added to `PART_WORDS`: bare "wheel", "airbox", "pump", "waterpump", "manifold",
+"radiator" — a Civic Wheel terrain scan, a Pilot Upper Airbox and a CRV Waterpump all
+reached GPU render on the Honda wave.
+
 ## Face-count dedup: two blind spots, both live (2026-08-08)
 
 Dedup keys on face count above 50k (title+faces missed six duplicate pairs in 67 Toyotas —

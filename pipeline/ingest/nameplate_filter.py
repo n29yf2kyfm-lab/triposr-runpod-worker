@@ -62,6 +62,9 @@ PART_WORDS = [
     # Wheel, in the languages uploaders actually use. "Roda Peugeot 208 ACTIVE"
     # is an alloy wheel and would otherwise have been rendered as a car.
     "roda", "rueda", "jante", "felge", "cerchio", "llanta",
+    # Bare component words that reached render on the Honda wave 2026-08-09:
+    # a "Civic Wheel" terrain scan, a "Pilot Upper Airbox", a "CRV Waterpump".
+    "wheel", "airbox", "pump", "waterpump", "manifold", "radiator",
 ]
 # Scale / print / sprite artefacts — geometry exists but is not a serving asset.
 SCALE_WORDS = [
@@ -96,13 +99,24 @@ def build(nameplates):
     a real car here ("Morris Mini" in the MINI sweep) and is the same failure as
     the `\\b`-inside-a-raw-string gate recorded in CLAUDE.md: a filter nobody
     tested against a case it must catch is a filter that does not exist."""
+    HYPHEN_NOTE = """
+    Hyphenated nameplates match BOTH spellings. norm() reduces punctuation to a
+    space, so "CR-V" becomes `cr v` while an uploader who wrote "CRV" becomes
+    `crv` -- the two can never match, and the car is silently dropped as
+    no-nameplate. Measured on the Honda sweep 2026-08-09: this lost 12 genuine
+    cars (6 CR-X, 4 CRV, 2 HRV), one of them a 1,047,310-face 1988 CR-X. It is
+    not Honda-specific -- verified the same day that it also breaks Toyota C-HR
+    vs CHR and Peugeot e-208 vs e208. So each multi-token nameplate gets an
+    OPTIONAL separator between its parts: \s* rather than \s+.
+    """
     pats = []
     for n in sorted({n.strip() for n in nameplates if n.strip()},
                     key=len, reverse=True):
         words = norm(n).split()
         if not words:
             continue
-        body = r"\s+".join(re.escape(w) for w in words)
+        # \s* (not \s+) so "cr v" also matches "crv" -- see HYPHEN_NOTE.
+        body = r"\s*".join(re.escape(w) for w in words)
         pats.append((n, re.compile(r"\b" + body + r"\b")))
     return pats
 
