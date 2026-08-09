@@ -245,6 +245,34 @@
    "mats": 2,
    "verdict": "FAIL",
    "note": "fully exploded -- bumpers, doors and body panels all detached and floating around the car, wheels unattached. Same failure as both CLS models"
+  },
+  "5674a3983cb3493c899dab9d919f80ce": {
+   "name": "2016 Mercedes-Benz GLA 200",
+   "cov": 0.177,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "panel crumpling down the flanks and doors with the rear hatch creased -- same signature as the GLA220 from a different mesh"
+  },
+  "36924d74d0494380a3e507d5745d5c14": {
+   "name": "Mercedes- Benz M-class 2011",
+   "cov": 0.178,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "UPSIDE DOWN in all four views. Fifth orientation failure today, second in Mercedes -- exactly what the geom_audit gate wired this afternoon auto-rejects"
+  },
+  "3b5069f7adbd41239671fc4a1a4f77bd": {
+   "name": "Mercedes-Benz ML63 2009",
+   "cov": 0.182,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "tyres missing -- bare white brake discs sit in the arches with no rubber, wheels render as flat plates. Eleventh wheel/tyre failure in this marque"
+  },
+  "4eb0a08f2c0c4c64b1a3299d5e3954ee": {
+   "name": "Mercedes-Benz SLR McLaren",
+   "cov": 0.179,
+   "mats": 2,
+   "verdict": "PASS",
+   "note": "SLR McLaren; turbine wheels consistent in all four views, side vents crisp, headlight internals sharp, shut lines defined, premium reflections. REDUNDANT -- third stock SLR here, and 6dd3f12d at 744k faces is the better one"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
