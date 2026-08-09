@@ -468,6 +468,14 @@ Invariant across input prep, view count and generation resolution. At 1536 the e
 also invented a new artefact (a scribble across the bonnet). Cost roughly doubles: 23.7MB
 and ~9 min execution per car vs 9.9MB at 1024.
 
+**Seed selection and the Blender correction stage were then also measured (same car):**
+seeds 1-3 at identical settings each produce DIFFERENT defects (seed 1 uniquely gets real
+headlamp internals and door shut lines, but grows two aerial spikes and a smeared
+tailgate; seed 3 warps the whole rear). Seed choice relocates defects, it does not remove
+them. process_candidate.py (symmetrise/corrective smooth/weighted normals, no component
+library, no panel refs) is visually a NO-OP on the melt. Every documented lever is now
+tried: input prep, view count, resolution, seed, correction. The melt survived all five.
+
 **Conclusion: photos -> GLB is a GAP-FILLER tier, not a premium tier**, exactly as
 pipeline/trellis/README.md predicted. Shut lines and crisp panels need the Blender
 correction stage (symmetrise, weighted normals, component wheels/lights, manual shut-line
