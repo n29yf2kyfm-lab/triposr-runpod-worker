@@ -14,7 +14,15 @@ import json
 import httpx
 
 from ..config import get_settings
-from ..schemas import Identification, ItemSpecific, Listing, Pricing
+from ..schemas import (
+    Identification,
+    ItemSpecific,
+    Listing,
+    Pricing,
+    coerce_item_specifics,
+    coerce_text,
+    coerce_text_list,
+)
 
 _PROMPT = """You write high-converting eBay listings. Given the item JSON, return STRICT JSON:
 {
@@ -118,15 +126,13 @@ async def generate(item: Identification, pricing: Pricing) -> Listing:
     if not data.get("title"):
         return _mock(item, pricing)
     return Listing(
-        title=data.get("title", _title(item))[:80],
-        subtitle=data.get("subtitle", ""),
-        description_html=data.get("description_html", ""),
-        bullet_points=data.get("bullet_points", []),
-        item_specifics=[
-            ItemSpecific(**s) for s in data.get("item_specifics", []) if s.get("name")
-        ],
-        keywords=data.get("keywords", []),
-        category_id=str(data.get("category_id", "")),
+        title=coerce_text(data.get("title"), _title(item))[:80],
+        subtitle=coerce_text(data.get("subtitle")),
+        description_html=coerce_text(data.get("description_html")),
+        bullet_points=coerce_text_list(data.get("bullet_points")),
+        item_specifics=coerce_item_specifics(data.get("item_specifics")),
+        keywords=coerce_text_list(data.get("keywords")),
+        category_id=coerce_text(data.get("category_id")),
         source="anthropic",
     )
 

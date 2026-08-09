@@ -167,6 +167,14 @@ def patched_client(monkeypatch: pytest.MonkeyPatch):
         ("Used - Good", "USED_GOOD"),
         ("For parts", "FOR_PARTS_OR_NOT_WORKING"),
         ("Used – Good", "USED_GOOD"),  # en dash
+        # Punctuation variants must not fall through to a substring match on
+        # "new" — that would list a used item as brand new.
+        ("Used – Like New", "USED_EXCELLENT"),
+        ("Used/Like New", "USED_EXCELLENT"),
+        ("Used – Very Good", "USED_VERY_GOOD"),
+        ("used – fair", "USED_ACCEPTABLE"),
+        ("New (other)", "NEW_OTHER"),
+        ("Brand New", "NEW"),
         ("total gibberish", "USED_GOOD"),  # safe default
         ("", "USED_GOOD"),
     ],
@@ -234,6 +242,11 @@ async def test_publish_sends_everything_ebay_requires(
     assert inv["condition"] == "USED_GOOD"
     # Aspects must be name -> LIST of values, not bare strings.
     assert inv["product"]["aspects"]["Brand"] == ["Sony"]
+
+    # The photo must go up as multipart with a boundary — a client-level JSON
+    # Content-Type would silence httpx's multipart header and eBay would reject it.
+    upload = next(r for r in fake.requests if "create_image_from_file" in r.url.path)
+    assert upload.headers["content-type"].startswith("multipart/form-data; boundary=")
 
 
 @pytest.mark.anyio

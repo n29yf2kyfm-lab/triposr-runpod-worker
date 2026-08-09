@@ -9,6 +9,57 @@ class ItemSpecific(BaseModel):
     value: str
 
 
+def coerce_text(value: object, default: str = "") -> str:
+    """
+    Model output -> a string field, falling back to `default`.
+
+    `data.get("brand", "")` is not enough: a JSON `null` returns None, which a
+    required `str` field rejects with a 500. Numbers are accepted and stringified.
+    """
+    if isinstance(value, str):
+        return value.strip() or default
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        return str(value)
+    return default
+
+
+def coerce_text_list(raw: object) -> list[str]:
+    """Model output -> a list of non-empty strings (a bare string becomes one item)."""
+    if isinstance(raw, str):
+        return [raw.strip()] if raw.strip() else []
+    if not isinstance(raw, list):
+        return []
+    return [t for t in (coerce_text(v) for v in raw) if t]
+
+
+def coerce_item_specifics(raw: object) -> list[ItemSpecific]:
+    """
+    Build ItemSpecifics from loosely-typed model output.
+
+    An LLM asked for `[{"name": ..., "value": ...}]` will sometimes answer with a
+    number (`"value": 64`), a list of values, a bool, or a missing value —
+    constructing ItemSpecific directly from those raises ValidationError and
+    turns the whole request into a 500, so everything is coerced to text here and
+    anything unusable is skipped.
+    """
+    out: list[ItemSpecific] = []
+    if not isinstance(raw, list):
+        return out
+    for row in raw:
+        if not isinstance(row, dict):
+            continue
+        name = str(row.get("name") or "").strip()
+        value = row.get("value")
+        if isinstance(value, (list, tuple)):
+            value = ", ".join(str(v) for v in value if v not in (None, ""))
+        elif isinstance(value, bool):
+            value = "Yes" if value else "No"
+        value = "" if value is None else str(value).strip()
+        if name and value:
+            out.append(ItemSpecific(name=name, value=value))
+    return out
+
+
 class Identification(BaseModel):
     title_guess: str = Field(..., description="Short human name for the item")
     brand: str = ""

@@ -55,17 +55,33 @@ CONDITION_MAP: dict[str, str] = {
 }
 
 
+def _normalise_condition(text: str) -> str:
+    """Lowercase, drop punctuation (en dashes, slashes, brackets), squeeze spaces."""
+    return " ".join(re.sub(r"[^a-z ]+", " ", text.lower()).split())
+
+
+# The same map with punctuation stripped, so "Used – Like New" (en dash) and
+# "Used/Like New" reach the same entry as "Used - Like New".
+_NORMALISED_CONDITION_MAP: dict[str, str] = {
+    _normalise_condition(phrase): enum for phrase, enum in CONDITION_MAP.items()
+}
+# Longest phrase first: scanning in map order matches "new" inside
+# "used like new" and would mislabel a used item as NEW.
+_CONDITION_PHRASES: list[tuple[str, str]] = sorted(
+    _NORMALISED_CONDITION_MAP.items(), key=lambda kv: -len(kv[0])
+)
+
+
 def map_condition(human: str) -> str:
     """Human condition string -> eBay ConditionEnum, defaulting to USED_GOOD."""
     key = " ".join((human or "").lower().split())
     if key in CONDITION_MAP:
         return CONDITION_MAP[key]
     # Tolerate variants like "Used – Good" (en dash) or "used/good".
-    norm = re.sub(r"[^a-z ]+", " ", key)
-    norm = " ".join(norm.split())
-    if norm in CONDITION_MAP:
-        return CONDITION_MAP[norm]
-    for phrase, enum in CONDITION_MAP.items():
+    norm = _normalise_condition(key)
+    if norm in _NORMALISED_CONDITION_MAP:
+        return _NORMALISED_CONDITION_MAP[norm]
+    for phrase, enum in _CONDITION_PHRASES:
         if phrase in norm:
             return enum
     return "USED_GOOD"
@@ -362,6 +378,10 @@ async def upload_image(
 
     createImageFromFile returns 201 with an EMPTY body; the image id arrives in
     the Location header, which then has to be fetched to get the real URL.
+
+    The shared client must NOT carry a default Content-Type: httpx only fills in
+    the multipart Content-Type (with its boundary) when the header is unset, so
+    a client-level `application/json` would leave this body unparseable to eBay.
     """
     res = await client.post(
         f"{s.ebay_media_base}/commerce/media/v1_beta/image/create_image_from_file",
@@ -429,7 +449,11 @@ async def publish(
     sku = _sku(listing)
     headers = {
         "Authorization": f"Bearer {s.ebay_user_token}",
-        "Content-Type": "application/json",
+        # No default Content-Type here on purpose: httpx sets application/json
+        # for every `json=` call by itself, and a client-level value would
+        # override the multipart Content-Type of the image upload, dropping its
+        # boundary and making the body unreadable to eBay.
+        #
         # createOrReplaceInventoryItem requires this; omitting it yields opaque 400s.
         "Content-Language": "en-US",
     }
@@ -469,8 +493,13 @@ async def publish(
                 "product": {
                     "title": listing.title,
                     "description": listing.description_html,
+                    # Blank/whitespace-only values are dropped rather than sent:
+                    # eBay rejects an empty aspect value, and the required-aspect
+                    # check above already treats them as absent.
                     "aspects": {
-                        sp.name: [sp.value] for sp in listing.item_specifics if sp.value
+                        sp.name.strip(): [sp.value.strip()]
+                        for sp in listing.item_specifics
+                        if sp.name.strip() and sp.value.strip()
                     },
                     "imageUrls": [image_url],
                 },
@@ -507,9 +536,16 @@ async def publish(
             if offer.status_code >= 400:
                 raise _fail("Offer create", offer)
             offer_id = offer.json().get("offerId", "")
+            if not offer_id:
+                raise PublishError(
+                    "Cannot publish: eBay accepted the offer but returned no "
+                    f"offerId ({offer.status_code}): {offer.text[:200]}"
+                )
 
             pub = await client.post(
-                f"{s.ebay_base}/sell/inventory/v1/offer/{offer_id}/publish"
+                f"{s.ebay_base}/sell/inventory/v1/offer/{offer_id}/publish",
+                # publishOffer takes no body, but eBay still wants the header.
+                headers={"Content-Type": "application/json"},
             )
             if pub.status_code >= 400:
                 raise PublishError(
@@ -528,6 +564,14 @@ async def publish(
                 status="error",
                 environment=s.ebay_env,
                 message=f"Network error talking to eBay: {e}",
+            )
+        except ValueError as e:
+            # A gateway or maintenance page can arrive with a 2xx status, so
+            # .json() may fail on a response we already treated as success.
+            return PublishResult(
+                status="error",
+                environment=s.ebay_env,
+                message=f"Unreadable response from eBay: {e}",
             )
 
     host = "www.ebay.com" if s.ebay_env == "production" else "www.sandbox.ebay.com"

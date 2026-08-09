@@ -16,7 +16,12 @@ import json
 import httpx
 
 from ..config import get_settings
-from ..schemas import Identification, ItemSpecific
+from ..schemas import (
+    Identification,
+    ItemSpecific,
+    coerce_item_specifics,
+    coerce_text,
+)
 
 _PROMPT = """You are a product cataloguing assistant for online resellers.
 Look at this photo of a single item for sale and return STRICT JSON with keys:
@@ -94,18 +99,23 @@ async def identify(image_bytes: bytes, media_type: str, filename: str = "") -> I
         )
 
     data = _extract_json(text)
-    attrs = [ItemSpecific(**a) for a in data.get("attributes", []) if a.get("name")]
+    attrs = coerce_item_specifics(data.get("attributes"))
+    try:
+        confidence = float(data.get("confidence", 0.5))
+    except (TypeError, ValueError):
+        confidence = 0.5
     return Identification(
-        title_guess=data.get("title_guess", "Unknown item"),
-        brand=data.get("brand", ""),
-        model=data.get("model", ""),
-        category=data.get("category", ""),
-        condition=data.get("condition", "Used - Good"),
-        color=data.get("color", ""),
-        material=data.get("material", ""),
+        title_guess=coerce_text(data.get("title_guess"), "Unknown item"),
+        brand=coerce_text(data.get("brand")),
+        model=coerce_text(data.get("model")),
+        category=coerce_text(data.get("category")),
+        condition=coerce_text(data.get("condition"), "Used - Good"),
+        color=coerce_text(data.get("color")),
+        material=coerce_text(data.get("material")),
         attributes=attrs,
-        confidence=float(data.get("confidence", 0.5)),
-        notes=data.get("notes", ""),
+        # The field is bounded 0..1; a model that answers 95 must not 500 the call.
+        confidence=min(max(confidence, 0.0), 1.0),
+        notes=coerce_text(data.get("notes")),
         source="anthropic",
     )
 

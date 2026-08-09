@@ -43,6 +43,17 @@ app.add_middleware(
 UPLOAD_DIR = Path(__file__).resolve().parent.parent / "data" / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
+# The stored extension comes from the client's filename, and /api/image serves
+# those files back — over the public internet once PUBLIC_BASE_URL is set, since
+# eBay has to fetch them. Anything outside this list is stored as .jpg so an
+# upload can never be served back as HTML/SVG from this origin.
+IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".heic", ".heif", ".bmp"}
+
+
+def _image_media_type(name: str) -> str:
+    guess = mimetypes.guess_type(name)[0] or ""
+    return guess if guess.startswith("image/") else "application/octet-stream"
+
 
 @app.get("/api/health")
 def health() -> dict:
@@ -62,7 +73,10 @@ def health() -> dict:
 @app.post("/api/identify", response_model=Identification)
 async def identify(file: UploadFile = File(...)) -> Identification:
     data = await file.read()
-    image_id = f"{uuid.uuid4().hex}{Path(file.filename or '').suffix or '.jpg'}"
+    suffix = Path(file.filename or "").suffix.lower()
+    if suffix not in IMAGE_SUFFIXES:
+        suffix = ".jpg"
+    image_id = f"{uuid.uuid4().hex}{suffix}"
     (UPLOAD_DIR / image_id).write_bytes(data)
     result = await vision.identify(data, file.content_type or "image/jpeg", file.filename or "")
     result.image_id = image_id
@@ -74,7 +88,9 @@ def get_image(image_id: str) -> FileResponse:
     path = UPLOAD_DIR / Path(image_id).name  # prevent traversal
     if not path.is_file():
         raise HTTPException(status_code=404, detail="image not found")
-    return FileResponse(path)
+    # Pin the type: FileResponse would otherwise guess from the extension, which
+    # is client-supplied, and serve user bytes as e.g. text/html on this origin.
+    return FileResponse(path, media_type=_image_media_type(path.name))
 
 
 @app.post("/api/price", response_model=Pricing)
@@ -108,8 +124,11 @@ async def publish(req: PublishRequest) -> PublishResult:
         if path.is_file():
             image_bytes = path.read_bytes()
             media_type = mimetypes.guess_type(path.name)[0] or "image/jpeg"
-        if settings.public_base_url:
-            fallback_url = f"{settings.public_base_url}/api/image/{req.image_id}"
+            # Only offer the URL for a photo we actually hold: handing eBay a
+            # link that 404s turns a clear "no image" refusal into an opaque
+            # eBay-side publish failure.
+            if settings.public_base_url:
+                fallback_url = f"{settings.public_base_url}/api/image/{path.name}"
 
     return await ebay.publish(
         req.listing,
