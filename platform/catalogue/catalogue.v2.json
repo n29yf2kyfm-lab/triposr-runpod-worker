@@ -195222,6 +195222,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2878,
+   "variantsHash": "925b6c4e37ad932729be79c7103896de7a662507",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -195434,6 +195441,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3148,
+   "variantsHash": "6cef9deb46b4280a3135ea40f49ef28f92695920",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -195647,6 +195661,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2878,
+   "variantsHash": "a5626c26ebc90a774084d81ad1aa4cf456d91dd8",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -195703,7 +195724,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-405-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-405-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-405-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-405-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-405-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-405-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-405-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-405-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-405-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-405-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -195796,6 +195826,69 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.312,
+   "variantsHash": "254ab5ec6332b6613b47b28892197f2cb8088ab7",
+   "method": "render",
+   "at": "2026-08-09"
+  }
  }
 ]
