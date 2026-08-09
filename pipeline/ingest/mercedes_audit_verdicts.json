@@ -315,6 +315,27 @@
    "mats": 1,
    "verdict": "PASS",
    "note": "CLS C257 2022; excellent -- multi-spoke wheels consistent in all four views, diamond grille crisp, headlight internals sharp, shut lines defined, premium reflections. The CLS that works: the other two in this set were both exploded"
+  },
+  "bf41546913a54520a2e38c4b99915d36": {
+   "name": "Mercedes- Benz SL-class (W113) 1963",
+   "cov": 0.189,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "SL W113 'Pagoda'; excellent classic -- hubcap wheels consistent in all four views, chrome trim crisp, vertical headlights sharp, pagoda hardtop correct, shut lines defined. A real gap for the catalogue. HUMSTER3D plate wants blanking"
+  },
+  "c91f15e9518f4dd2b7574002778cfc28": {
+   "name": "Mercedes-Benz C-Class MK3 (W204) 2007-2014",
+   "cov": 0.192,
+   "mats": 2,
+   "verdict": "FAIL",
+   "note": "tyres missing with bare white brake discs in the arches, one wheel detached and floating below the car, body hovering clear of the floor, wipers detached as spikes above the roof"
+  },
+  "88a61d91431b4414a7e32a936396191c": {
+   "name": "2013 Mercedes-Benz SLS AMG GT",
+   "cov": 0.194,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "SLS AMG GT; excellent -- multi-spoke wheels with orange calipers consistent in all four views, side vents crisp, headlight internals sharp, shut lines defined, premium reflections. Same C197 generation as bf1464ad, so one of the two will do"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
