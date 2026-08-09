@@ -457,6 +457,22 @@ def _assert_public_host(url):
     return host
 
 
+def _truthy(v, default=False):
+    """Parse a job-input boolean the way a caller expects.
+
+    bool("false") is True, so the previous bool(ji.get(...)) meant a client
+    sending {"studio": "false"} silently got studio ON. Flagged in review
+    2026-08-09 and confirmed: the render worker's studio/bright/plates_both
+    flags were all affected."""
+    if v is None:
+        return bool(default)
+    if isinstance(v, bool):
+        return v
+    if isinstance(v, (int, float)):
+        return bool(v)
+    return str(v).strip().lower() not in ("", "0", "false", "no", "off", "null", "none")
+
+
 def _clamp(v, lo, hi, name):
     try:
         n = float(v)
@@ -1424,13 +1440,13 @@ def handler(job):
             samples=int(_clamp(ji.get("samples", 160), 1, 512, "samples")),
             resx=int(_clamp(ji.get("width", 1600), 64, 2560, "width")),
             resy=int(_clamp(ji.get("height", 900), 64, 2560, "height")),
-            bright=bool(ji.get("bright", False)),
-            studio=bool(ji.get("studio", True)),
+            bright=_truthy(ji.get("bright"), False),
+            studio=_truthy(ji.get("studio"), True),
             finish=ji.get("finish"),
             recolour_mode=str(ji.get("recolour", "auto")).lower(),
             plate_end=str(ji.get("plate_end", "auto")).lower(),
-            plates_both=bool(ji.get("plates_both", False)),
-            audit=bool(ji.get("audit") or ji.get("debug_materials")),
+            plates_both=_truthy(ji.get("plates_both"), False),
+            audit=_truthy(ji.get("audit")) or _truthy(ji.get("debug_materials")),
             glass_tint=ji.get("glass_tint"),
             fill_strength=ji.get("fill_strength"),
         )
