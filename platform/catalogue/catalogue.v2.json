@@ -196508,6 +196508,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2906,
+   "variantsHash": "fe92b5ec884abe360b7a8b5efbf6f6ea23fe87b4",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -196709,6 +196716,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2778,
+   "variantsHash": "2f14b8ab06f31428063084e5c3daec0c8e1c0b15",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -196910,6 +196924,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3129,
+   "variantsHash": "cb00c760c026bccf535b19d151c9ceafc915f606",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -197112,6 +197133,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2944,
+   "variantsHash": "5d4e02ae94f5caed15edc15b46d39ec42cc35d1d",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -197313,6 +197341,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3375,
+   "variantsHash": "258448a2043395a3a2cef0e14a9fd7ea13a39c05",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -197515,6 +197550,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2479,
+   "variantsHash": "1369227bf431747e209b6979fafeab5328fd1c9f",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -197716,6 +197758,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3289,
+   "variantsHash": "ff466e3665936fa55c80b90d4aafc6502e139459",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -197917,6 +197966,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3079,
+   "variantsHash": "e0e313b0cc37c7f655ab22c894fbccd7ba687fbb",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -198118,6 +198174,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2991,
+   "variantsHash": "be46d60853fd3892109f0f9e9ef3bafffb440c3e",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -198319,6 +198382,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2968,
+   "variantsHash": "1572d77672671f4a862f497ba0669cfdc5754427",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -198521,6 +198591,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2918,
+   "variantsHash": "b5743c2a7dbe8a5247df51d9f376db6b95def7b5",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -198721,6 +198798,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4132,
+   "variantsHash": "4bdf2287bff4eefa48625e1e5de9bbd3d04084be",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -198922,6 +199006,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3067,
+   "variantsHash": "2fdafad5bfe3c345ae27e26c9c46094bdf9a6187",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -199123,6 +199214,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3286,
+   "variantsHash": "88a83bfcfce5ef816e602f7d38a49b67372c12c6",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -199325,6 +199423,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2773,
+   "variantsHash": "87115d914d643ec238ce59b12c970c63bbe2c8ea",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -199526,6 +199631,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3113,
+   "variantsHash": "3283aa171415cfd0045619f504ba7c4aaa397e76",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
