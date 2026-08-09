@@ -714,6 +714,17 @@ def place_extension(width, depth, brief, clearances,
         # addition" means, and what the ground floor beneath it can carry.
         if over_blocks:
             bx, by, bw, bd = max(over_blocks, key=lambda r: r[2] * r[3])
+            # CLIPPED TO THE HOUSE'S OWN DEPTH. The measured addition at
+            # 3 Basons Lane is one 12m strip — the front porch band and the
+            # side return read as a single rectangle — and building a
+            # bedroom floor over all 12m puts a first storey 4m past the
+            # back of the house, which is not the job and would never pass
+            # as permitted development. The new floor takes the part of the
+            # addition that lies alongside the house; the rest stays single
+            # storey.
+            y_lo, y_hi = max(by, 0.0), min(by + bd, depth)
+            if y_hi - y_lo >= 2.0:
+                by, bd = y_lo, y_hi - y_lo
             x, y_over, room_w, d = bx, by, bw, bd
             fit["over_measured_block"] = {
                 "x": round(bx, 2), "y": round(by, 2),

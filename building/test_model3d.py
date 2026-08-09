@@ -1110,6 +1110,29 @@ check("16g parse_job keeps ridge_along and max_span_m",
       and _s16["plan"]["roof"]["max_span_m"] == 10.0)
 
 
+
+# A STOREY BUILT OVER ANOTHER BLOCK SHARES ALL FOUR OF ITS EDGES with the
+# block below, and walls_from_rooms built each shared edge once and dropped
+# the second claim — so every wall of the new floor was discarded and it
+# rendered as a roof over open air, no front wall, daylight straight
+# through. The wall now spans the union of both rooms' levels.
+_over_rooms = [M.Room("house", 0, 0, 6, 8, 3.0, kind="existing"),
+               M.Room("addition", 6, 0, 5, 8, 2.6, kind="existing",
+                      storeys=1),
+               M.Room("over", 6, 0, 5, 8, 3.0, kind="extension",
+                      storeys=1, base_level=1)]
+_ow = M.walls_from_rooms(_over_rooms)
+_l1 = [w for w in _ow if M._wall_on_level(w, 1)]
+_front1 = [w for w in _l1
+           if abs(w.start[1]) < 1e-6 and abs(w.end[1]) < 1e-6
+           and max(w.start[0], w.end[0]) > 6]
+check("30a a storey over another block has walls at its own level",
+      len(_l1) >= 4, f"{len(_l1)} walls at level 1")
+check("30b including the front wall — the one the void showed through",
+      len(_front1) == 1, f"{len(_front1)} front walls")
+check("30c and the shared edge is still ONE wall, not two",
+      len(_ow) == 7, f"{len(_ow)} walls")
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

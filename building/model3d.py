@@ -252,6 +252,23 @@ def walls_from_rooms(rooms, internal=DEFAULT_WALL_THICKNESS_M,
             key = tuple(sorted([(round(a[0], 3), round(a[1], 3)),
                                 (round(b[0], 3), round(b[1], 3))]))
             if key in seen:
+                # A REPEATED EDGE IS ONE WALL, BUT IT IS AS TALL AS BOTH
+                # ROOMS THAT CLAIM IT. Dropping the second claim outright
+                # was right while every room stood on the ground; a storey
+                # built OVER another block shares all four of its edges with
+                # the block below, so every one of its walls was discarded
+                # and the new floor came out as a roof over open air — no
+                # front wall, daylight straight through it. The wall now
+                # spans the union of the two rooms' levels.
+                prior = seen[key]
+                if room.storeys is not None and prior.storeys is not None:
+                    lo = min(prior.base_level, room.base_level)
+                    hi = max(prior.base_level + prior.storeys,
+                             room.base_level + room.storeys)
+                    prior.base_level, prior.storeys = lo, hi - lo
+                elif room.storeys is None:
+                    prior.storeys = None      # a room on every storey wins
+                prior.height = max(prior.height, room.height)
                 continue
             wall = Wall(a, b, internal, room.height, external=True)
             wall.storeys = room.storeys
