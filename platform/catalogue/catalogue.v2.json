@@ -192106,6 +192106,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2537,
+   "variantsHash": "266ffbfec8ee24b550845e93a6f49c1a1a2b31bf",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -192322,6 +192329,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3378,
+   "variantsHash": "429d82eac50d20b3fef1e71e79211b50335c5496",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -192537,6 +192551,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3421,
+   "variantsHash": "13261b2daf6cb2f1a1ff8661605525d7303ce8f0",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -192750,6 +192771,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3447,
+   "variantsHash": "5b64a4dc7ce073ab8306e90715fb916fd903bbc0",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -192968,6 +192996,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3053,
+   "variantsHash": "3f12dd5e0d3804f07a113d6dadd3005e8b1b5549",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -193187,6 +193222,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3673,
+   "variantsHash": "be6208d91207d3f71f8141c04d957382f0aa090d",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -193400,6 +193442,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.256,
+   "variantsHash": "21c1bf828714bd347439ee54077570e04815ad4b",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -193626,6 +193675,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.31,
+   "variantsHash": "f1a563f82871db39a0bbca4eaf96f393e9eb5a12",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -193842,6 +193898,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.1941,
+   "variantsHash": "76d155f5a9d284f0814e100a62155732622f0e2c",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -194058,6 +194121,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2275,
+   "variantsHash": "e15c102b33f86077951a3ed46d9458c83bca4005",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -194273,6 +194343,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.302,
+   "variantsHash": "98210d5dad70ee806d3a91ebf74e20676c295175",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -194487,6 +194564,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3271,
+   "variantsHash": "61ef6c87ce683b38227d8386f3f838c11ef15707",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -194699,6 +194783,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4237,
+   "variantsHash": "51acd9308ee22f47af776d9d62650567dab06d61",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -194911,6 +195002,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4811,
+   "variantsHash": "44ed18f709de583f1b14828a117aba4423f26ebb",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
