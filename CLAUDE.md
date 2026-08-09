@@ -52,6 +52,106 @@ Verify the credentials, don't assume them:
 - **Sketchfab:** `GET /v3/me` with `Authorization: Token <t>` → the username. This
   is the only proof a hex-32 string is a real token.
 
+## Ingest gates: what is wired, and what each one cannot see (2026-08-08)
+
+A day auditing 150 cars by eye across Toyota, Mercedes and Peugeot produced these.
+Read this before trusting any triage bucket or sheet header.
+
+**`geom_audit.py` IS NOW WIRED into `gpu_wave.py`.** It was written and calibrated
+2026-07-17 and for three weeks NOTHING on the ingest path called it — the handler only
+computes the pose block when the submit body sets `audit=True`, which the wave never did,
+and the wave discarded `output["audit"]` anyway. In one day that let three upside-down
+Toyotas, an on-side Mercedes ML, an on-side A-Class, an upside-down M-Class and a CL
+standing vertically on end reach human sheets. The wave now sets `audit=True` on ONE view
+per car (pose does not change with azimuth) and stamps a red POSE REJECT on the header.
+Tested against cases it must catch AND must not: 9/9, including good saloon, good SUV,
+pickup and van correctly NOT rejected.
+
+**"clean" is a RECOLOUR test, not a quality verdict.** It means one body-paint material
+with measured coverage. It cannot see missing tyres, detached panels, crumpled bodywork,
+scans, or a car that is upside down. Toyota's clean bucket was 61% shippable; Mercedes'
+60%. Never present a triage bucket as a quality signal.
+
+**Body-paint coverage predicts recolour failure at BOTH tails — the gate is two-sided.**
+- `cov < 0.12`: the classifier matched trim or a badge, not body paint. Measured 6/6 on
+  Mercedes — every one rendered its OWN colour under a forced one. The boundary is a
+  gradient, not a cliff (a GL350 at 0.114 failed too), so the gate warns and never rejects.
+- `cov > 0.90`: ONE material covers the whole model, glass and tyres included. It
+  recolours "successfully" and repaints the entire car. `toyota-auris-v1` was RETIRED for
+  exactly this on 2026-07-21; four Peugeots in the 2026-08-08 wave sit at cov=1.000.
+
+**"recolourable" in a sheet header is NOT proof a respray works.** Coverage proves a body
+material EXISTS, not that a swap MOVES it. Toyota #41 rendered pink and #62 black under
+`--colour silver`, both with healthy coverage. `recolour_audit.py --stamp` is the only
+evidence, and `gate_catalogue` is right to refuse unstamped colour-swap entries.
+
+**A respray that raises no error can still be wrong.** `colour_variants.py` edits glTF
+JSON and raises `KeyError` when material names do not match — but that only catches
+MISSING names, not WRONG ones. `toyota-corolla-cross-2021-tw1-v1` had 2 body materials,
+the respray edited the invisible one, and it shipped eight files that were different on
+disk and identical on screen (recolour_audit dist=0.004). Replaced by a different source
+mesh that stamps at 0.342.
+
+## Face-count dedup: two blind spots, both live (2026-08-08)
+
+Dedup keys on face count above 50k (title+faces missed six duplicate pairs in 67 Toyotas —
+a re-upload is almost always retitled). Two things it cannot do:
+
+1. **Near-proximity is a CANDIDATE finder, never an identity.** Scored 2 real / 2 false
+   across 4 flagged Mercedes pairs — 50% precision. The false positives were a Binz
+   coachbuilt stretch vs a W123 coupe, and a C124 coupe vs a W124 sedan. Either would have
+   silently dropped a real car. FLAG for the eye; never auto-group.
+2. **Decimated-to-target meshes converge and the signal dies.** Four Toyota Hiaces all sat
+   within 252 faces of exactly 1,000,000 and were four DIFFERENT vans. A Peugeot 405 and
+   306 both sit within 50 faces of exactly 500,000. Detect round-number clusters and
+   exclude them from exact-match grouping.
+
+## Title-derived metadata is unreliable — read the render (2026-08-08)
+
+- A car badged COROLLA was titled "Avensis" (Toyota #60).
+- A single-cab Hilux was titled "Double Cab" (Toyota #61); `bodyStyle` must come from the
+  render.
+- `PART_WORDS` is Latin-script only. "Roda Peugeot 208" is an alloy WHEEL (Portuguese);
+  added roda/rueda/jante/felge/cerchio/llanta. A Cyrillic dashboard part
+  ("Заглушка информационного дисплея Peugeot 408") still passes every gate.
+- Numeric model names collide with years: "Peugeot 307 2008" labels as a 2008 because
+  nameplates are matched longest-first. Peugeot's own manifest carries `plate=2008` on
+  both 307s.
+
+## Scrapped candidates are remembered (2026-08-08)
+
+`pipeline/ingest/REJECTS.json` records every uid the owner scrapped on review;
+`nameplate_filter.py --rejects` drops them by default. Sweeps are re-runnable and would
+otherwise re-find, re-render and re-present the same junk every wave (Toyota re-runs
+168 -> 125). Never delete a row from that ledger.
+
+## Retiring a catalogue entry trips the staleness guard (2026-08-08)
+
+`publish_batch` preflight compares LOCAL approved assetIds against LIVE ones and refuses
+when local is missing any — which is exactly what a deliberate retirement looks like.
+`PUBLISH_ALLOW_STALE=1` is the documented override ("for a deliberate rollback only").
+Before using it, PROVE the checkout is not actually stale: check that no live entry is
+absent from local entirely, and that each "lost" one is present locally with
+`publicationStatus="replaced"` and a `replacedAssetId`.
+
+## Sourcing signal: where the good models actually are (2026-08-08)
+
+- **Older Mercedes are modelled far more carefully than modern ones.** Twelve classics
+  (Ponton W120, 300 SL, SL Pagoda, R107, W123 coupe, C124, W124, S124, A124, W126, W140,
+  W220) all passed clean, while the modern AMG/SUV entries supplied most of the wheel
+  failures and every exploded parts-kit.
+- **A missing nameplate is usually missing because only scans exist.** All 11 Toyota
+  nameplate gaps were audited: 9 were photogrammetry scans (soft panels, baked lighting,
+  windows as holes, one with the ground plane baked into the mesh, one badged "TOTOVA").
+  More Sketchfab sweeping will not fix those — they need a different class of source.
+- **Defects track the SOURCE car, not the upload.** Two ML63s, two W204s and two GLAs each
+  failed identically from different meshes. When one model of a generation fails on wheels
+  or crumpling, its siblings from other uploaders are not worth chasing.
+- **Mercedes attracts tuner and coachbuilt uploads heavily** — 6 out-of-scope in 80
+  (two Brabus, a Binz stretch, a widebody SLR, a widebody SL600, a CLK DTM). Distinguish
+  those from OEM performance variants: an AMG GT Black Series IS a road car a reg decodes
+  to; black wheels and a lowered stance alone are spec variation, not a kit.
+
 ## Repinning a RunPod template does NOT update running workers (learned 2026-08-01)
 
 PATCHing `imageName` on template `hrtuk90f9p` changes what NEW workers pull.

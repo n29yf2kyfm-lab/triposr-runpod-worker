@@ -240,16 +240,27 @@ def main():
             except Exception as e:                       # never let the gate abort a car
                 log(f"[{i}] geom_audit {type(e).__name__}: {str(e)[:50]}")
 
-        # C-gate: body-paint coverage. Measured 2026-08-08 across the Mercedes clean
-        # set -- every car under ~0.10 rendered its OWN colour under a forced one,
-        # because the classifier had matched trim or a badge rather than body paint.
-        # The boundary is a gradient, not a cliff, so this WARNS and never rejects:
-        # recolour_audit --stamp stays the only proof a respray works.
-        low_cov = 0.0 < cov < 0.12
+        # C-gate: body-paint coverage, TWO-SIDED. Both tails are unsafe to recolour.
+        #
+        # LOW (<0.12): measured across the Mercedes clean set 2026-08-08 -- every car
+        # under ~0.10 rendered its OWN colour under a forced one, because the classifier
+        # had matched trim or a badge rather than body paint. The boundary is a gradient,
+        # not a cliff, hence the 0.12 cutoff rather than 0.10.
+        #
+        # HIGH (>0.90): one material covering the WHOLE model -- glass, tyres and trim
+        # as well as the body. It recolours "successfully" by every metric and repaints
+        # the entire car, glass included. This is not hypothetical: toyota-auris-v1 was
+        # RETIRED for it on 2026-07-21 ("covers body+glass+trim, recolour would overspill
+        # onto glass"), and four Peugeots in the current wave sit at cov=1.000.
+        #
+        # Both WARN and never reject: recolour_audit --stamp stays the only proof.
+        low_cov = 0.0 < cov < 0.12 or cov > 0.90
         flags = ""
         if pose == "reject": flags += "  |  POSE REJECT: " + ",".join(preasons)[:60]
         elif preasons:       flags += "  |  pose: " + ",".join(preasons)[:50]
-        if low_cov:          flags += "  |  LOW COVERAGE, respray may not take"
+        if low_cov:
+            flags += ("  |  FULL COVERAGE, respray would repaint glass too" if cov > 0.90
+                      else "  |  LOW COVERAGE, respray may not take")
         hdr = ("%s  |  %s f  |  body mats=%d cov=%.3f  |  %s%s%s" % (
                    p["name"][:52], f"{p.get('faces',0):,}", nm, cov,
                    "recolourable" if adv else "MATERIAL SPLIT SUSPECT",
@@ -268,7 +279,7 @@ def main():
         built += 1
         log(f"[{i}/{len(rows)}] SHEET mats={nm} cov={cov:.3f} "
             f"{'POSE-REJECT' if pose == 'reject' else 'OK' if adv else 'split'}"
-            f"{' LOWCOV' if low_cov else ''}  {p['name'][:40]}")
+            f"{(' FULLCOV' if cov > 0.90 else ' LOWCOV') if low_cov else ''}  {p['name'][:40]}")
     log("GPU_WAVE_DONE", built, "new sheets")
 
 
