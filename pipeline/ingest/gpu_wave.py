@@ -56,6 +56,8 @@ MAX_OBJ = 48_000_000
 # row is written off as RATE-DROP.
 RATE_RETRIES = int(os.environ.get("WAVE_RATE_RETRIES", "3"))
 RATE_BACKOFF = int(os.environ.get("WAVE_RATE_BACKOFF", "60"))
+# Consecutive rows lost to throttling before the wave aborts (resumable).
+RATE_ABORT = int(os.environ.get("WAVE_RATE_ABORT", "5"))
 
 
 def log(*a):
@@ -137,9 +139,13 @@ def render_view(glb_url, az, colour, samples, w, h, audit=False):
 
 
 def fetch_glb(uid, staged, tok):
-    """Bucket first, Sketchfab second. Returns the public URL the endpoint uses."""
+    """Bucket first, Sketchfab second. Returns the GLB bytes, or None when the
+    uid is already staged in the bucket (nothing to download or upload).
+    (Used to also return a URL; it was never read, and the bucket-hit branch's
+    version contained a literal unexpanded "{stage}" placeholder, so any future
+    caller trusting it would have fetched a 404. Removed.)"""
     if f"{uid}.glb" in staged:
-        return f"{SB}/storage/v1/object/public/{BUCKET}/{{stage}}/{uid}.glb", None
+        return None
     rq = urllib.request.Request(f"{API}/models/{uid}/download",
         headers={"Authorization": f"Token {next(tok)}", "User-Agent": "Mozilla/5.0"})
     url = (json.load(urllib.request.urlopen(rq, timeout=120)).get("glb") or {}).get("url")
@@ -150,7 +156,7 @@ def fetch_glb(uid, staged, tok):
         raise RuntimeError("bad or truncated glb")
     if len(blob) > MAX_OBJ:
         raise RuntimeError("too big %.0fMB" % (len(blob) / 1e6))
-    return None, blob
+    return blob
 
 
 def pose_gate(uid, blob, glb_url, workdir):
@@ -238,43 +244,98 @@ def main():
     log(f"manifest {len(rows)} | already sheeted {len([r for r in rows if r['uid']+'.jpg' in done])}")
 
     built = 0
+    rate_streak = 0            # consecutive RATE-DROPs -> circuit breaker
     for i, p in enumerate(rows, 1):
         uid = p["uid"]
         if f"{uid}.jpg" in done:
             continue
-        # Sketchfab rate-limits /models/<uid>/download. A 429 is TRANSIENT, so
-        # retry the SAME row with backoff instead of dropping it -- the old code
-        # slept 90s and then `continue`d, which paced the loop while silently
-        # discarding the car. Three concurrent waves sharing the token pool made
-        # every row 429 and the wave ate its manifest producing nothing.
-        # next(tok) rotates the token on each attempt.
-        blob = None
-        glb_url = None
+        # -- Phase 1: Sketchfab download. Throttling (429/403), network drops
+        # and truncated bodies are all TRANSIENT here and retried with backoff
+        # -- the old code dropped the car (429: after one blind 90s sleep;
+        # network errors and truncation: instantly), which is how three
+        # concurrent waves sharing the token pool ate their manifests producing
+        # nothing. Retry-After is honoured when Sketchfab sends it (same
+        # pattern as pipeline/geometry/fetch_dims.py). "no glb format offered"
+        # and "too big" are PERMANENT: they spend no retry budget.
+        # next(tok) inside fetch_glb rotates the token on every attempt.
+        blob = None            # stays None on a bucket hit -- nothing to upload
+        fetched = False
         for attempt in range(RATE_RETRIES + 1):
             try:
-                url, blob = fetch_glb(uid, staged, tok)
-                if blob is not None:
-                    sb_put(f"{BUCKET}/{a.stage}/{uid}.glb", blob, "model/gltf-binary")
-                    log(f"[{i}/{len(rows)}] staged {len(blob)/1e6:.1f}MB  {p['name'][:44]}")
-                glb_url = f"{SB}/storage/v1/object/public/{BUCKET}/{a.stage}/{uid}.glb"
+                blob = fetch_glb(uid, staged, tok)
+                fetched = True
+                rate_streak = 0
                 break
             except urllib.error.HTTPError as e:
                 if e.code in (429, 403) and attempt < RATE_RETRIES:
-                    wait = RATE_BACKOFF * (2 ** attempt)
+                    ra = int((e.headers.get("Retry-After", 0) if e.headers else 0) or 0)
+                    wait = max(RATE_BACKOFF * (2 ** attempt), ra)
                     log(f"[{i}/{len(rows)}] http-{e.code} retry {attempt+1}/{RATE_RETRIES} "
                         f"in {wait}s  {p['name'][:36]}")
                     time.sleep(wait)
                     continue
                 # RATE-DROP is deliberately distinct from other failures so a
                 # wave's lost-to-throttling count is greppable afterwards.
+                # (RATE-DROP-403 vs -429 stays distinguishable in the log: a
+                # sustained 403 wall is revoked tokens or a non-downloadable
+                # model, not congestion.)
                 tag = "RATE-DROP" if e.code in (429, 403) else "http"
                 log(f"[{i}/{len(rows)}] {tag}-{e.code} giving up  {p['name'][:40]}")
+                if tag == "RATE-DROP":
+                    rate_streak += 1
+                break
+            except OSError as e:
+                # URLError / socket timeout / connection reset mid-blob: the
+                # same silent-drop class the 429 fix was for. Short retry.
+                if attempt < RATE_RETRIES:
+                    log(f"[{i}/{len(rows)}] net {type(e).__name__} retry "
+                        f"{attempt+1}/{RATE_RETRIES}  {p['name'][:36]}")
+                    time.sleep(10)
+                    continue
+                log(f"[{i}/{len(rows)}] NET-DROP {type(e).__name__}: {str(e)[:50]}")
+                break
+            except RuntimeError as e:
+                if "truncated" in str(e) and attempt < RATE_RETRIES:
+                    log(f"[{i}/{len(rows)}] truncated glb, refetch "
+                        f"{attempt+1}/{RATE_RETRIES}  {p['name'][:36]}")
+                    time.sleep(10)
+                    continue
+                log(f"[{i}/{len(rows)}] fetch {str(e)[:60]}")
                 break
             except Exception as e:
                 log(f"[{i}/{len(rows)}] fetch {type(e).__name__}: {str(e)[:60]}")
                 break
-        if glb_url is None:
+        if not fetched:
+            # Circuit breaker: when EVERY row is rate-dropping the token pool
+            # is saturated and per-row patience just burns hours producing
+            # nothing (~7 min sleep/row). The wave is resumable by design
+            # (done/staged are re-checked against the bucket), so abort and
+            # let a later rerun pick these rows up.
+            if rate_streak >= RATE_ABORT:
+                log(f"CIRCUIT-BREAK {rate_streak} consecutive RATE-DROPs -- "
+                    f"token pool saturated; aborting resumable wave at row {i}")
+                break
             continue
+
+        # -- Phase 2: stage to Supabase. A failure here is NOT Sketchfab
+        # throttling: the blob is already in memory, so retry the upload alone
+        # -- never re-download (that burns the rate-limited quota) and never
+        # label it RATE-DROP (that corrupts the throttling stats).
+        try:
+            if blob is not None:
+                for up in range(2):
+                    try:
+                        sb_put(f"{BUCKET}/{a.stage}/{uid}.glb", blob, "model/gltf-binary")
+                        break
+                    except Exception:
+                        if up == 1:
+                            raise
+                        time.sleep(10)
+                log(f"[{i}/{len(rows)}] staged {len(blob)/1e6:.1f}MB  {p['name'][:44]}")
+        except Exception as e:
+            log(f"[{i}/{len(rows)}] SB-DROP upload {type(e).__name__}: {str(e)[:50]}")
+            continue
+        glb_url = f"{SB}/storage/v1/object/public/{BUCKET}/{a.stage}/{uid}.glb"
 
         # LOCAL pose gate: reject mis-oriented source meshes BEFORE spending
         # four GPU renders on them. See pose_gate docstring for what it can
