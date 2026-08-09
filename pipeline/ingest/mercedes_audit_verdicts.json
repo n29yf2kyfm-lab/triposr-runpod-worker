@@ -70,6 +70,27 @@
    "mats": 2,
    "verdict": "FAIL",
    "note": "tyres missing -- bare brake discs and suspension exposed, wheels render as flat white plates protruding from the arches. Panel ripple along both flanks. Roof box (taxi sign or sensor) also present"
+  },
+  "4b028a5eb02b43f184e7b2471ea5c0b9": {
+   "name": "2004-2010 Mercedes- Benz CLS",
+   "cov": 0.125,
+   "mats": 2,
+   "verdict": "FAIL",
+   "note": "fully exploded -- front and rear bumpers detached and floating, wheels are loose white discs, the body levitates on a stack of unattached parts. Not a car, a disassembly"
+  },
+  "124436c2086d45708608676159a25664": {
+   "name": "Mercedes Benz CLS (C219) 2004-2010",
+   "cov": 0.127,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "same failure as the other CLS -- bumpers detached and lying beside the car, body floating clear of the floor, wheels unattached"
+  },
+  "97baced3bcf14d9b8c3eedf6233bd4e9": {
+   "name": "Mercedes Benz C43 AMG",
+   "cov": 0.135,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "otherwise excellent -- black multi-spoke wheels with red calipers consistent, Panamericana grille crisp, headlight internals sharp, premium reflections -- but a marbled crumple artefact sits on the left rear quarter and rear bumper, in the SAME body location across views, so it is surface-bound (texture or normals) and not a reflection. Worth re-sourcing this model"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage."
