@@ -434,6 +434,27 @@
    "mats": 1,
    "verdict": "PASS",
    "note": "C-Class W203 estate; wheels consistent in all four views, grille crisp, headlight internals sharp, shut lines defined, panels clean. This is the kept half of the exact-duplicate pair dropped at 743,556 faces. HUMSTER3D plate wants blanking"
+  },
+  "517779b60d6d4b778e43403e2765832a": {
+   "name": "2021 Mercedes-Benz S500",
+   "cov": 0.221,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "S500 W223; multi-spoke wheels consistent in all four views, grille crisp, headlight internals sharp, shut lines defined, premium reflections"
+  },
+  "03b3e3cc99e6462697a5cbcbb47d17e3": {
+   "name": "Mercedes- Benz S-class (W126) 1979",
+   "cov": 0.221,
+   "mats": 2,
+   "verdict": "PASS",
+   "note": "S-Class W126; wheels consistent in all four views, grille crisp, headlight internals sharp, shut lines defined, panels clean. Eleventh classic. HUMSTER3D plate wants blanking"
+  },
+  "61583f5c172f4e25a963e52e1e67c11a": {
+   "name": "Mercedes Benz V Class",
+   "cov": 0.222,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "wheels are featureless black discs in ALL FOUR views with no spoke geometry anywhere. This is the distinction from the SLS and GLS, which I passed because other angles showed full spoke detail and proved the geometry existed -- here no view does. Body is otherwise clean"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
