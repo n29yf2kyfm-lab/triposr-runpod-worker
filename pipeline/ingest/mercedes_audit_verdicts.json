@@ -91,6 +91,27 @@
    "mats": 1,
    "verdict": "FAIL",
    "note": "otherwise excellent -- black multi-spoke wheels with red calipers consistent, Panamericana grille crisp, headlight internals sharp, premium reflections -- but a marbled crumple artefact sits on the left rear quarter and rear bumper, in the SAME body location across views, so it is surface-bound (texture or normals) and not a reflection. Worth re-sourcing this model"
+  },
+  "a53e0e45b4b64dc6a65f4eeb016f01f2": {
+   "name": "Mercedes-Benz G63 AMG BRABUS G700 ( The Rocket )",
+   "cov": 0.13,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "out of scope -- second Brabus in this set. G700 'The Rocket': widebody, B-badged grille, roof spoiler. Well made, but a reg decodes to a stock G-Class"
+  },
+  "b721c580738d413c98aeca1f0059a481": {
+   "name": "Mercedes Benz CLE-450",
+   "cov": 0.137,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "CLE-450, and a recent nameplate worth having. Multi-spoke wheels with gold calipers consistent in all four views, star-pattern grille crisp, headlight internals sharp, shut lines defined, premium reflections"
+  },
+  "f4a3f2d422af461d8a462674509841f1": {
+   "name": "2013 Mercedes-Benz SLS AMG Electric Drive (C197)",
+   "cov": 0.14,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "the whole body is covered in shattered triangular facets -- flipped normals or broken smoothing across every panel, worst on the roof, flanks and bonnet. 72k faces. Its near-twin (72,836f) is presumably the same mesh and will fail identically"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage."
