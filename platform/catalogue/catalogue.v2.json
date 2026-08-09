@@ -200582,5 +200582,1829 @@
    ]
   },
   "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-city-2008-hw1-v1",
+  "make": "honda",
+  "model": "city",
+  "modelFamily": "honda city",
+  "modelAliases": [
+   "city"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2008,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "65e2974c74254021b027b223190418e8",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura",
+   "chassis_vlo.1"
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-city-2008-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-city-2008-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 14925416,
+  "mobileFileSizeBytes": 14925416,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "80a52e4b5d89c41c38eabd83ddf60d9fc4a956c2c7bd422b2674d3d86db379da",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-cr-x-1995-hw1-v1",
+  "make": "honda",
+  "model": "cr-x",
+  "modelFamily": "honda cr-x",
+  "modelAliases": [
+   "cr-x"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1995,
+  "yearEnd": null,
+  "bodyStyle": "convertible",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "f00136dfd77348b1a053d98fadd43602",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-x-1995-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-x-1995-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 14358732,
+  "mobileFileSizeBytes": 14358732,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "64e8c37cec435362dec967731d150e68e5b83fc3b4c7b8ae6ad58366887ef58c",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-s2000-1999-hw1-v1",
+  "make": "honda",
+  "model": "s2000",
+  "modelFamily": "honda s2000",
+  "modelAliases": [
+   "s2000"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1999,
+  "yearEnd": null,
+  "bodyStyle": "convertible",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "737fd0a261fd4f32b431c838dcc57c0f",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "PaintBase"
+  ],
+  "glassMaterialNames": [
+   "WindshieldFrame",
+   "GlassTemp"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-s2000-1999-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-s2000-1999-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 14043972,
+  "mobileFileSizeBytes": 14043972,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d4fb87a8a090c45dadb3e722a020ab2ca450ab408f38498c0e4260325206cd72",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-civic-2023-hw1-v1",
+  "make": "honda",
+  "model": "civic",
+  "modelFamily": "honda civic",
+  "modelAliases": [
+   "civic"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "0669147fb3ba4cca95ea942add743b2b",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint"
+  ],
+  "glassMaterialNames": [
+   "Window"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2023-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2023-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 11529892,
+  "mobileFileSizeBytes": 11529892,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "9d96b2b392804464207387fcbe46c6e2d7c1056e3e92a9f933e7d619a48ef7f1",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-nsx-1992-hw1-v3",
+  "make": "honda",
+  "model": "nsx",
+  "modelFamily": "honda nsx",
+  "modelAliases": [
+   "nsx"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1992,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "abeaa957199c473ea3d293f7e669bf34",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint"
+  ],
+  "glassMaterialNames": [
+   "Window_0"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-nsx-1992-hw1-v3.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-nsx-1992-hw1-v3.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 10947716,
+  "mobileFileSizeBytes": 10947716,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "5df0e04f32a4171095c90524de04d9561314b6295de2e96e15c5aa4c2af4549f",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-civic-1999-hw1-v1",
+  "make": "honda",
+  "model": "civic",
+  "modelFamily": "honda civic",
+  "modelAliases": [
+   "civic"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1999,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "ce29e75eb129406f874e0423ab8869c3",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "CarPaint"
+  ],
+  "glassMaterialNames": [
+   "Window",
+   "glass_surr",
+   "glass_light"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1999-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1999-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 11142648,
+  "mobileFileSizeBytes": 11142648,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "152ad650d3562b74c3df76fb3c731a13462fa78cb5602d22173b4ba4f7258451",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-civic-hw1-v2",
+  "make": "honda",
+  "model": "civic",
+  "modelFamily": "honda civic",
+  "modelAliases": [
+   "civic"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "4f8ff01b643d4795a6a515478a6fd9d6",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint1"
+  ],
+  "glassMaterialNames": [
+   "glass1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-hw1-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-hw1-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 8398772,
+  "mobileFileSizeBytes": 8398772,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d1a3223368c1972140c87ba541a576a8ddb85ca540fbced2cb7e5fb0106e54a2",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-jazz-2016-hw1-v1",
+  "make": "honda",
+  "model": "jazz",
+  "modelFamily": "honda jazz",
+  "modelAliases": [
+   "jazz"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2016,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "1acb615324254e53a04860e786ade136",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint1"
+  ],
+  "glassMaterialNames": [
+   "FIT_Glass",
+   "Fit_Glass_surr",
+   "plt4",
+   "plt2"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2016-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2016-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4957876,
+  "mobileFileSizeBytes": 4957876,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "b95fc34665dcdb233da53d5bc376ec6a6e36b04871e0ac5e3e9a9a19f1fc5185",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-jazz-2020-hw1-v1",
+  "make": "honda",
+  "model": "jazz",
+  "modelFamily": "honda jazz",
+  "modelAliases": [
+   "jazz"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "974385e940e84fd6bf47ca04c2e69313",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint1"
+  ],
+  "glassMaterialNames": [
+   "Glas_2",
+   "D_glass",
+   "Glass_1",
+   "red_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2020-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2020-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 9544528,
+  "mobileFileSizeBytes": 9544528,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "346cf659eba51d6482c36359db8babcdf3e0a9f93ed80497c3ffcf33b7a0e6e8",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-civic-2025-hw1-v1",
+  "make": "honda",
+  "model": "civic",
+  "modelFamily": "honda civic",
+  "modelAliases": [
+   "civic"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2025,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "0dc6454d74a241e5a08fac82ce2826b2",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "paint"
+  ],
+  "glassMaterialNames": [
+   "window"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2025-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2025-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6666204,
+  "mobileFileSizeBytes": 6666204,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f3139bd52bc95588702ee0caf96cd0c2bf262cb7f84fde1c00100dba517a6c41",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-civic-1993-hw1-v1",
+  "make": "honda",
+  "model": "civic",
+  "modelFamily": "honda civic",
+  "modelAliases": [
+   "civic"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1993,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "18e956bcf53b4f1191a9fb6b5b70efe2",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Metal",
+   "Underside"
+  ],
+  "glassMaterialNames": [
+   "GlassLights"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1993-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1993-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 8779968,
+  "mobileFileSizeBytes": 8779968,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "73778badcb8ba728674ca84ff643cc4cab771d47435cd91135f0c4a802e3e987",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-cr-v-2001-hw1-v1",
+  "make": "honda",
+  "model": "cr-v",
+  "modelFamily": "honda cr-v",
+  "modelAliases": [
+   "cr-v"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2001,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "3565e8277a484f14b45c6888ca61a2b2",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Body",
+   "Body_plastique"
+  ],
+  "glassMaterialNames": [
+   "Vitre",
+   "Phare_vitre",
+   "Feux_rouge",
+   "Feux_orange"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-v-2001-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-v-2001-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 2224956,
+  "mobileFileSizeBytes": 2224956,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "40db6a428ddc67385408a0e8f03392998d0b1452ab63007d11c5cdd10978208d",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-odyssey-1999-hw1-v2",
+  "make": "honda",
+  "model": "odyssey",
+  "modelFamily": "honda odyssey",
+  "modelAliases": [
+   "odyssey"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1999,
+  "yearEnd": null,
+  "bodyStyle": "mpv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "d5d98cef2a4240b6be91e03a1afcb0e1",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "darkglass",
+   "windowglass",
+   "redglass",
+   "clearglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-1999-hw1-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-1999-hw1-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 27908820,
+  "mobileFileSizeBytes": 27908820,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "5dcd892d26ed9107965ff58d2cf9fca7ba598738c5e6b1c797d2288ac4f243bf",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
