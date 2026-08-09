@@ -189,6 +189,20 @@
    "mats": 2,
    "verdict": "FAIL",
    "note": "out of scope -- Binz Xtend coachbuilt long-wheelbase conversion (ambulance/hearse body), not a standard E-Class estate. Build quality is good: wheels consistent, grille crisp, shut lines defined. HUMSTER3D plate. A reg decodes to a standard E-Class, not this"
+  },
+  "6a0ef719f8d74378969b6f6095bd8981": {
+   "name": "Mercedes- Benz GLC-class (X205) F Cell",
+   "cov": 0.157,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "GLC X205; 5-spoke wheels consistent in all four views, star grille crisp, headlight internals sharp, shut lines defined, panels clean, premium reflections. F-Cell is a powertrain variant -- the body is a standard GLC, so it matches on make+model. HUMSTER3D plate wants blanking"
+  },
+  "2c21b97ff3dc4fc3b1ef9e4bb0164318": {
+   "name": "Mercedes-Benz AMG GT-R (2017)",
+   "cov": 0.166,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "panel crumpling across the flanks, doors and rear quarters, plus a mangled front splitter. Wheels and grille are fine but 114k faces is not carrying the surfacing on a car this sculptural"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
