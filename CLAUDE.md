@@ -72,10 +72,19 @@ with measured coverage. It cannot see missing tyres, detached panels, crumpled b
 scans, or a car that is upside down. Toyota's clean bucket was 61% shippable; Mercedes'
 60%. Never present a triage bucket as a quality signal.
 
-**Body-paint coverage predicts recolour failure at BOTH tails — the gate is two-sided.**
-- `cov < 0.12`: the classifier matched trim or a badge, not body paint. Measured 6/6 on
-  Mercedes — every one rendered its OWN colour under a forced one. The boundary is a
-  gradient, not a cliff (a GL350 at 0.114 failed too), so the gate warns and never rejects.
+**Body-paint coverage warns about the SHEET, not about the shippable variants — the
+gate is two-sided and advisory only.**
+- `cov < 0.12`: the render worker's classifier matched trim or a badge, not body paint.
+  Measured 6/6 on Mercedes — every one rendered its OWN colour under a forced `--colour`.
+  The boundary is a gradient, not a cliff (a GL350 at 0.114 did it too).
+- **CORRECTED 2026-08-08 — do not over-read this.** I predicted those same low-coverage
+  cars would fail `recolour_audit`. They did NOT: all 46 Mercedes stamped PASS, with the
+  GL350 at dist=0.362 and the GLA35 at 0.433, both well above the median 0.340. The two
+  mechanisms are DIFFERENT: the render worker picks a body material heuristically at render
+  time, while `colour_variants.py` edits named materials in the glTF JSON. A car whose
+  sheet colour is untrustworthy can still bake eight good variants. So low coverage means
+  "distrust the colour in this sheet", NOT "this car cannot ship colours" — only
+  `recolour_audit --stamp` decides that.
 - `cov > 0.90`: ONE material covers the whole model, glass and tyres included. It
   recolours "successfully" and repaints the entire car. `toyota-auris-v1` was RETIRED for
   exactly this on 2026-07-21; four Peugeots in the 2026-08-08 wave sit at cov=1.000.
