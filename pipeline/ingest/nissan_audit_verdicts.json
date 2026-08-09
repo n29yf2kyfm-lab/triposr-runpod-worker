@@ -1,0 +1,1550 @@
+[
+ {
+  "uid": "02b8a436f3564ca2998f672457ddd577",
+  "name": "Nissan Laurel",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts-kit: full bodykit catalogue floating around the car",
+   "no tyres mounted, wheels are bare hubs/discs",
+   "clay shell - glazing does not read as glass",
+   "cov=1.000 FULLCOV, one material covers whole model"
+  ]
+ },
+ {
+  "uid": "02cc1159694849ca8a9d95fd9ecbbb10",
+  "name": "Lara Croft Nissan -GTR",
+  "verdict": "pass",
+  "reasons": [
+   "R35 GT-R proportions read instantly",
+   "glass reads as real tinted glass, interior visible",
+   "multi-spoke rims fully detailed in all four views",
+   "headlight internals and grille mesh sharp",
+   "bonnet/door shut lines defined",
+   "custom Croft-1 plate + red rim pinstripe is livery only, not geometry"
+  ]
+ },
+ {
+  "uid": "036ed4855af742cdbe6aaf2ab17dab95",
+  "name": "Nissan Terrano MK1 1986-1995",
+  "verdict": "fail",
+  "reasons": [
+   "body detached and floating above the chassis",
+   "wheels not mounted in arches, suspension hanging below",
+   "a loose tyre sitting on the ground under the car",
+   "flat matte paint, no premium finish"
+  ]
+ },
+ {
+  "uid": "03907515f2e24316b6fefa3ebdd4dd0a",
+  "name": "Nissan Skyline R34 GTR 2002 | www.vecarz.com",
+  "verdict": "pass",
+  "reasons": [
+   "R34 GT-R proportions instantly correct",
+   "glass reads as glass, tinted with clean reflections",
+   "5-spoke rims consistent and fully detailed across all four views",
+   "headlight internals and grille sharp on the front view",
+   "door and bonnet shut lines defined",
+   "premium gloss paint finish"
+  ]
+ },
+ {
+  "uid": "0583d6b5f2cf43b6ba2fa0f1181faffe",
+  "name": "Nissan Maxima A33 1999-2004",
+  "verdict": "fail",
+  "reasons": [
+   "body floating above the wheels",
+   "no tyres mounted - bare brake discs/hubs in the arches",
+   "single loose tyre lying on the ground beneath the car",
+   "interior renders as chaotic white/black garbage through the glass"
+  ]
+ },
+ {
+  "uid": "0590ebddfef6437196e3d1000b330a2b",
+  "name": "Nissan Skyline (C210) 2000GT coupe 1977",
+  "verdict": "pass",
+  "reasons": [
+   "C210 Skyline coupe proportions read instantly",
+   "glazing reads as real glass, interior visible",
+   "steel wheels with hubcaps consistent across all four views",
+   "quad headlights with internal detail, crisp grille and chrome bumpers",
+   "door and bonnet shut lines defined",
+   "clean reflections, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "05ef3a879ab94dc9a576feda069d2388",
+  "name": "Nissan Sentra B17 MK7 2016-2020",
+  "verdict": "fail",
+  "reasons": [
+   "wheels detached from the car - a hubcap lies flat on the ground",
+   "wheel arches render as empty black voids",
+   "body floating above the ground plane",
+   "source scene base plate baked into the mesh"
+  ]
+ },
+ {
+  "uid": "06775c9afe5a42e5827e96db5d0e07f4",
+  "name": "Nissan Micra",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: soft melted panels, baked lighting in texture",
+   "scanned metal ground plate baked into the mesh",
+   "glazing is scan mush, not glass",
+   "cov=1.000 FULLCOV"
+  ]
+ },
+ {
+  "uid": "07c78f92fd4c4eedbd742466e63a65b5",
+  "name": "Nissan Silvia 200SX S15",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts-kit - vertical stacks of bodykit panels, not an assembled car",
+   "cov=1.000 FULLCOV, single material over the whole model",
+   "car itself is a bare shell inside the stack"
+  ]
+ },
+ {
+  "uid": "0818738527f24ae89203403ee1d31bf0",
+  "name": "Nissan GTR50 Italdesign",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as the Italdesign GT-R50 instantly",
+   "glass reads as glass, interior visible through side windows",
+   "tyres plainly black rubber, red calipers behind open spokes",
+   "rim faces present and detailed on BOTH sides",
+   "shut lines and lamp internals defined"
+  ]
+ },
+ {
+  "uid": "081d2c7ecb2b44aea95da3b90321209d",
+  "name": "Nissan Fairlady Z370",
+  "verdict": "fail",
+  "reasons": [
+   "glazing fails: side glass is a black void on one side and opaque body-white on the other",
+   "tyres render body-white on the front34_L side while black on the side view - inconsistent and body-coloured",
+   "cov=0.958 FULLCOV, respray would repaint glass too",
+   "panel surfacing soft, no shut lines"
+  ]
+ },
+ {
+  "uid": "08d237ffee3d4898b000ae0878a15a5a",
+  "name": "Nissan fairlady",
+  "verdict": "fail",
+  "reasons": [
+   "source scene tarmac with yellow road markings baked into the mesh",
+   "no headlight internals - blank recesses",
+   "grille is a flat slotted panel, no depth",
+   "no door or bonnet shut lines",
+   "panel surfaces wavy/lumpy, reflections ripple",
+   "glazing reads body-white in the rear34 view"
+  ]
+ },
+ {
+  "uid": "0961f8eadc27474995b1e0aac11f9d0b",
+  "name": "Nissan 350Z Rocket Bunny",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Rocket Bunny widebody kit with bolt-on arches and ducktail",
+   "roof rack added, not an OEM road-car spec"
+  ]
+ },
+ {
+  "uid": "09d502e0e00a43b795034eee3e9e21d3",
+  "name": "2019 Nissan GT-R (R35) Kream Developments Carbon",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Kream Developments aftermarket widebody kit, bolt-on arches, oversized wing, deep-dish gold wheels",
+   "not an OEM road-car spec a reg would decode to"
+  ]
+ },
+ {
+  "uid": "0a9ce46e9ab34816bb06976af48b9d41",
+  "name": "Nissan 370z",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - windows render opaque body-white, no glass (owner ruling: outright fail)",
+   "cov=1.000 FULLCOV, one material over glass and tyres too",
+   "visible low-poly faceting on the front bumper and arches",
+   "no shut lines, no headlight internals"
+  ]
+ },
+ {
+  "uid": "0c82659677374e0895026c2772d3beba",
+  "name": "Nissan 240sx [FREE]",
+  "verdict": "fail",
+  "reasons": [
+   "wheels mismatched side-to-side - pink rims one side, silver the other, inconsistent across views",
+   "heavy swirl/graffiti livery baked into the body texture, not clean paint",
+   "widebody drift build, headlights are blank dark slots with no internals"
+  ]
+ },
+ {
+  "uid": "0d9286ebb8cc426e993e1d398b874a34",
+  "name": "Nissan Fairlady Z S30(240Z) 1978",
+  "verdict": "pass",
+  "reasons": [
+   "S30 proportions read instantly, front 3/4 strong",
+   "glass reads as glass, interior visible through side and rear screen",
+   "tyres plainly black rubber; mesh rim faces present and detailed on BOTH sides",
+   "paint finish clean, reflections even",
+   "mild ZG-style over-fenders and JDM fender mirrors read as period spec, not a bolt-on kit"
+  ]
+ },
+ {
+  "uid": "0e24a69df7384890b59132005ec6c331",
+  "name": "Nissan Skyline GT500 | www.vecarz.com",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: GT500/Super GT race car - roll cage, race aero, splitter, slicks with Potenza branding",
+   "no road-car lighting or trim"
+  ]
+ },
+ {
+  "uid": "0fe7cb6fb9e047cd99284c5b4a7f7d5e",
+  "name": "Nissan 200sx",
+  "verdict": "fail",
+  "reasons": [
+   "low-poly faceted surfacing - polygon edges visible along roof and rear quarter in all four views",
+   "no door or bonnet shut lines",
+   "front end is a flat featureless slab, no grille or lamp internals",
+   "rear bumper and tail panel soft versus the real S13"
+  ]
+ },
+ {
+  "uid": "1061f7970dc84b6dad0a363540fbc102",
+  "name": "2015 Nissan GT-R Nismo GT3 (R35)",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: GT3 race car - full race aero, GT3 livery, Advan slicks, stripped race cabin"
+  ]
+ },
+ {
+  "uid": "10da2e1ab0124872bc756b4391aa2321",
+  "name": "2003 Nissan 350Z Veilside Z33 Ver.III Body Kit",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Veilside Ver.III aftermarket body kit, title says so outright",
+   "Fast & Furious replica plates"
+  ]
+ },
+ {
+  "uid": "1209a357518a4f04b5497366913e49aa",
+  "name": "2018 Nissan GT-R Spec-T R35",
+  "verdict": "pass",
+  "reasons": [
+   "R35 GT-R proportions instantly correct",
+   "glazing reads as tinted glass, red interior visible through it",
+   "gold multi-spoke rims with red calipers, spokes traceable in all four views",
+   "headlight internals and grille mesh sharp",
+   "shut lines defined, premium gloss finish",
+   "aftermarket gold wheels are spec variation only"
+  ]
+ },
+ {
+  "uid": "12ba36fc5f6643a1ba8617763a2d9d93",
+  "name": "1999 Nissan Skyline R34 GT-R Top Secret BNR34",
+  "verdict": "pass",
+  "reasons": [
+   "R34 GT-R proportions instantly correct",
+   "glass reads as glass with clean reflections",
+   "gold 6-spoke rims consistent and fully detailed across all four views",
+   "headlight internals and grille mesh present",
+   "shut lines defined; carbon bonnet/boot is tuner spec, geometry is stock R34"
+  ]
+ },
+ {
+  "uid": "144b72c190b54463a29e0fe0075824fa",
+  "name": "Nissan Frontier/Navara",
+  "verdict": "fail",
+  "reasons": [
+   "TYRES RENDER BODY-WHITE - sidewalls are the same white as the paint in all four views, confirmed at 2x on the side-view wheel crop",
+   "no respray leaves black tyres; reads as an unfinished clay studio model",
+   "aftermarket bull bar fitted"
+  ]
+ },
+ {
+  "uid": "14bd11bc8c0f4b3bb737dcaac18e4f52",
+  "name": "2002 Nissan Stagea",
+  "verdict": "pass",
+  "reasons": [
+   "M35 Stagea wagon proportions read instantly",
+   "glazing reads as real tinted glass",
+   "5-spoke alloys with traceable spokes in all four views",
+   "headlight projector internals and chrome grille slats sharp",
+   "roof/pillars/wheelbase consistent across views, clean reflections"
+  ]
+ },
+ {
+  "uid": "15c1111d9c5149d4ab81cbbe2e04c7e7",
+  "name": "Rocket Bunny S14 Boss Aero - Nissan 240SX Silvia",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Rocket Bunny Boss Aero widebody kit - riveted over-fenders, front splitter, deep-dish gold BBS"
+  ]
+ },
+ {
+  "uid": "16a10e686dcd4fe3942f904a1879c0e3",
+  "name": "2020 Nissan 370Z Sport Touring",
+  "verdict": "pass",
+  "reasons": [
+   "370Z proportions instantly correct",
+   "glass reads as glass, interior visible",
+   "dark 5-spoke rims with red calipers, spokes traceable in every view",
+   "headlight internals sharp, grille has depth",
+   "bonnet and door shut lines defined, premium gloss paint"
+  ]
+ },
+ {
+  "uid": "174e038c95ff433eb69d712103b36d5a",
+  "name": "Nissan Primera GT",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: BTCC-style touring-car build - roll cage visible through the glass, racing bucket seat, large rear wing, deep front splitter, sponsor decals"
+  ]
+ },
+ {
+  "uid": "176b86171d2e42c4b300eb22eebf843f",
+  "name": "Nissan Skyline R34",
+  "verdict": "pass",
+  "reasons": [
+   "R34 GT-R proportions read instantly, front 3/4 strong",
+   "glass reads as tinted glass, interior visible",
+   "tyres plainly black rubber; 5-spoke rim faces present with bronze calipers on BOTH sides",
+   "panel surfacing clean, sill and bumper edges defined",
+   "headlight internals are only moderately detailed - acceptable, not outstanding"
+  ]
+ },
+ {
+  "uid": "1833d44481ae4c6280ed146506427dc5",
+  "name": "2007 Nissan Sentra",
+  "verdict": "pass",
+  "reasons": [
+   "tyres verified at 3x zoom: plainly black rubber against white body, white hubcaps correct",
+   "glass reads as tinted glass with interior visible",
+   "rim/hubcap faces present and identical on BOTH sides",
+   "Nissan grille and badge sharp, headlight internals present",
+   "door shut lines and sill defined"
+  ]
+ },
+ {
+  "uid": "18af87c9490e4acb80a46b70ca8d86ed",
+  "name": "2015 Nissan Versa Sedan 1.6",
+  "verdict": "fail",
+  "reasons": [
+   "head and tail lamps render as black voids with no internal detail",
+   "rear quarter panel shows a crumple/fold above the wheel in both front34 views",
+   "mats=0 cov=0.000 - no body-paint material found at all, respray would not take"
+  ]
+ },
+ {
+  "uid": "19d86d24eb0e407bb0920ad6f348b636",
+  "name": "2013 Nissan Altima",
+  "verdict": "fail",
+  "reasons": [
+   "headlamp geometry broken: dark angular shards protrude past the bonnet edge on both lamps, seen at 3x",
+   "front quarter glass renders opaque body-white while the door glass is transparent - inconsistent glazing",
+   "stray white panel slabs in the greenhouse between the door windows",
+   "glass itself is genuine (dash and seats visible) - the failure is geometry, not glazing alone"
+  ]
+ },
+ {
+  "uid": "1a42d6f4ca6d4bdeb72158bb678487ea",
+  "name": "1999 - Nissan Skyline GT-R BNR34 NISMO GT500",
+  "verdict": "fail",
+  "reasons": [
+   "GT500 race car, not a road vehicle a UK reg decodes to",
+   "no headlights - front is a blanked panel",
+   "glazing reads opaque white in the side and rear34 views",
+   "racing slicks and race widebody, no door handles"
+  ]
+ },
+ {
+  "uid": "1af257b2eb6a4ff69eef752440ba56e7",
+  "name": "Nissan-skyline-gtr-r34-kit-card-model_files",
+  "verdict": "fail",
+  "reasons": [
+   "not a car - a scale plastic model-kit sprue tray with the shell and loose parts",
+   "no wheels mounted, empty arches",
+   "clay white, no glass, cov=1.000 FULLCOV"
+  ]
+ },
+ {
+  "uid": "1bb90ee7a05c45aaaaaf8cb78a845547",
+  "name": "Nissan Skyline GT-R V Spec (R33)",
+  "verdict": "fail",
+  "reasons": [
+   "front/rear bumpers and side skirts render grey against white body paint in all four views - separate unpainted material",
+   "cov=0.630 with 11 materials, a respray would leave the bumpers mismatched",
+   "otherwise clean R33 geometry - worth re-sourcing rather than scrapping the nameplate"
+  ]
+ },
+ {
+  "uid": "1c122875ee9446259015884b7d47c378",
+  "name": "Nissan Skyline",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: cov=1.000 FULLCOV, windscreen and side glass render opaque body-white",
+   "tyres also render body-white - no black rubber anywhere",
+   "panel surfacing lumpy and melted, no shut lines",
+   "aftermarket body kit and rear wing fitted"
+  ]
+ },
+ {
+  "uid": "1cd12df9e6824aba943ca7932c15d6a2",
+  "name": "2011 Nissan NV200 SV",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render body-white in every view (zoom-verified) - tyre material missing",
+   "rim face itself is present and correct (steel wheel, vents, hub cap)",
+   "body, glass and shut lines are otherwise clean - re-source rather than scrap the nameplate"
+  ]
+ },
+ {
+  "uid": "1d402ae4173b4c30acbb88c6945fa3fc",
+  "name": "2020 RWB KRC Nissan Skyline GT-R R34 Body Kit",
+  "verdict": "fail",
+  "reasons": [
+   "RWB/KRC aftermarket widebody kit - coachbuilt, not an OEM variant a UK reg decodes to",
+   "over-fenders and lowered stance are kit geometry, not spec variation"
+  ]
+ },
+ {
+  "uid": "1da1256d25a1491fb03edc94e83c1709",
+  "name": "Nissan GTR",
+  "verdict": "fail",
+  "reasons": [
+   "proportions do not read as an R35 GT-R - greenhouse too small, generic coupe silhouette",
+   "melted soft panel surfaces, no door or bonnet shut lines",
+   "headlights are vague dark shapes with no internals",
+   "renders peach/salmon under a forced silver colour - body material did not take the recolour",
+   "bonnet renders white against a peach body in front34_L"
+  ]
+ },
+ {
+  "uid": "1dc8e2f6caca48408adc3859d7c21681",
+  "name": "Nissan Patrol MK5 Y61 2012-2023",
+  "verdict": "fail",
+  "reasons": [
+   "body floating well above the wheels, wheels detached",
+   "front bumper detached and lying separately on the ground",
+   "front wing/arch panels missing, holes in the cab",
+   "exploded/unassembled source model"
+  ]
+ },
+ {
+  "uid": "20a14338df064c06a3606bab6894adbc",
+  "name": "2024 Nissan GT-R Nismo",
+  "verdict": "pass",
+  "reasons": [
+   "R35 GT-R Nismo proportions instantly correct; Nismo is an OEM variant, in scope",
+   "glazing reads as real tinted glass, interior visible",
+   "zoom-verified: rim faces present in all four views - spokes, centre cap and Dunlop sidewall lettering traceable",
+   "black rubber tyres, correct",
+   "headlight internals, grille mesh, quad exhausts and diffuser all sharp",
+   "shut lines defined, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "22f7f2bb22d44b7a93d7e3678ec8f990",
+  "name": "2018 Nissan GT-R Winds Of Freedom Edition (R35)",
+  "verdict": "fail",
+  "reasons": [
+   "extreme aftermarket widebody kit with canards and a race wing - custom show car, not an OEM variant",
+   "Union Jack livery wrap baked into the body texture, not clean paint"
+  ]
+ },
+ {
+  "uid": "2749e883ce5443d680c0fe104a6f37c4",
+  "name": "Nissan GT-R R35 GT V2",
+  "verdict": "fail",
+  "reasons": [
+   "Liberty Walk style widebody kit - coachbuilt, out of scope",
+   "heavy dragon/itasha livery baked into the body texture",
+   "a respray cannot remove the wrap graphics"
+  ]
+ },
+ {
+  "uid": "277bf01b065d451aab04ff3866ddae3d",
+  "name": "Nissan Skyline GT-R R33 1993-1999",
+  "verdict": "fail",
+  "reasons": [
+   "body floating above the ground, wheels detached",
+   "one wheel lying loose on the floor under the car",
+   "wheel arches render as empty black voids with a floating brake disc",
+   "bare unassembled shell"
+  ]
+ },
+ {
+  "uid": "27f4c107d8c643c48f3fe6f829444886",
+  "name": "2020 Nissan Juke",
+  "verdict": "pass",
+  "reasons": [
+   "2020 Juke proportions read instantly",
+   "glazing reads as real tinted glass, interior visible; black contrast roof",
+   "zoom-verified: rim faces present in all four views with traceable multi-spoke detail and centre caps",
+   "black rubber tyres; V-motion grille mesh and headlight internals sharp",
+   "door and bonnet shut lines defined, clean reflections"
+  ]
+ },
+ {
+  "uid": "2870539e0a8a4758a00b0d089ed0131c",
+  "name": "Nissan silvia s13",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - greenhouse renders opaque body-white, no glass (owner ruling: outright fail)",
+   "wheels are featureless black voids, no rim face in any view",
+   "race widebody with unpainted grey skirts and splitter"
+  ]
+ },
+ {
+  "uid": "28989036293e4cb68bf200aaaa612774",
+  "name": "Nissan Titan",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell - all glazing renders opaque body-white in every view (owner ruling: outright fail)",
+   "single material over the whole truck (mats=1 cov=0.700)",
+   "rim faces read as dark blobs with no spoke detail"
+  ]
+ },
+ {
+  "uid": "29845c09a5354c79b68f18ca4df4285b",
+  "name": "Nissan_180sx",
+  "verdict": "fail",
+  "reasons": [
+   "pink/white drift livery wrap baked into the body texture, not clean paint",
+   "wheels mismatched - bronze on one side, white/silver on the other, inconsistent across views",
+   "aftermarket widebody and large GT wing, not an OEM variant"
+  ]
+ },
+ {
+  "uid": "2a3cdfee96a24bcab5e7df975ecdffe9",
+  "name": "Nissan_ Cube_2010",
+  "verdict": "pass",
+  "reasons": [
+   "Cube proportions read instantly, asymmetric rear window correct",
+   "zoom-verified: glazing is real tinted glass, seats and interior visible through it",
+   "hubcaps with vent detail and Nissan centre logo, black rubber tyres, consistent across views",
+   "door, bonnet and tailgate shut lines defined",
+   "clean reflections, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "2c3f0d73b2854ad99527bf700aaff54a",
+  "name": "Nissan Patrol Safari",
+  "verdict": "pass",
+  "reasons": [
+   "Patrol/Safari hardtop proportions read instantly",
+   "zoom-verified: door glass is real glass - steering wheel, seat and mirror visible through it; the blank rear side panel is correct for the panel-van hardtop, not a clay window",
+   "steel rims with lug detail and black knobbly off-road tyres, consistent across all four views",
+   "door, bonnet and wing shut lines defined",
+   "clean gloss paint and reflections"
+  ]
+ },
+ {
+  "uid": "2c78ee42dcc148329526eebcd1cd0081",
+  "name": "Nissan_sentra_b17",
+  "verdict": "fail",
+  "reasons": [
+   "glazing renders opaque body-white in every view - clay shell (owner ruling: outright fail)",
+   "cov=0.857, near-full single-material coverage",
+   "no interior visible, no shut-line definition"
+  ]
+ },
+ {
+  "uid": "2d14032d981f4ddba99317d0ecbf0741",
+  "name": "Nissan Skyline (S54) 2000GT 1964",
+  "verdict": "pass",
+  "reasons": [
+   "S54 Skyline saloon proportions read instantly",
+   "glazing reads as real glass with chrome frames and visible interior",
+   "steel wheels with hubcap rib detail traceable in all four views",
+   "quad headlights with internal detail, chrome grille and bumpers sharp",
+   "door and bonnet shut lines defined, clean gloss paint"
+  ]
+ },
+ {
+  "uid": "2d9efbcc8b4a418ebb369e1aaf7115f9",
+  "name": "1999_nissan_skyline_r34_gt-r_c-west_n_-_type_ii",
+  "verdict": "pass",
+  "reasons": [
+   "R34 GT-R proportions instantly correct; C-West aero bumpers only, standard fenders - tuner spec, not a widebody kit",
+   "glazing reads as real glass",
+   "silver 5-spoke rims with gold calipers, spokes traceable in all four views",
+   "headlight internals and grille sharp, shut lines defined",
+   "clean reflections and premium gloss finish"
+  ]
+ },
+ {
+  "uid": "30663a0fbc9e4e32b6f7adacca2b603c",
+  "name": "Nissan X-Trail MK3 T32 2013-2021",
+  "verdict": "fail",
+  "reasons": [
+   "no wheels mounted - bare brake discs and hubs floating in empty arches",
+   "body panels render translucent/ghosted, roof and pillars see-through",
+   "greenhouse renders as a grey translucent mess in the side view"
+  ]
+ },
+ {
+  "uid": "30e45aa381ca4fac8dc91f52e781124d",
+  "name": "Nissan Silvia",
+  "verdict": "pass",
+  "reasons": [
+   "S15 Silvia proportions read instantly",
+   "glazing reads as real tinted glass",
+   "zoom-verified: chrome multi-spoke rim faces present in all four views with red calipers and black rubber tyres",
+   "headlight and tail-lamp internals present, door and bonnet shut lines defined",
+   "clean gloss paint; aero bumpers and wing are tuner spec, fenders are standard"
+  ]
+ },
+ {
+  "uid": "318472f2afb24f82abbce567371c942e",
+  "name": "2016 Nissan Rogue Sport",
+  "verdict": "fail",
+  "reasons": [
+   "zoom-verified: wheel covers AND tyres render body-white in all four views - rim and tyre materials missing",
+   "body, glass and panel work are otherwise clean - re-source rather than scrap the nameplate",
+   "badged QASHQAI though titled Rogue Sport (title metadata unreliable, read the render)"
+  ]
+ },
+ {
+  "uid": "32b861ba75154ae2bf5eff023cff7eba",
+  "name": "Nissan Skyline GTR R34 1999",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - greenhouse renders opaque body-white, no glass (owner ruling: outright fail)",
+   "no headlight internals, blank recesses",
+   "no door or bonnet shut lines",
+   "cov=0.799 near-full single-material coverage"
+  ]
+ },
+ {
+  "uid": "3371ba7a60d64ed395e06d1586264da7",
+  "name": "1999_nissan_skyline_gtr_r34_brian o conner",
+  "verdict": "fail",
+  "reasons": [
+   "movie-replica livery (blue graphics) baked into the body texture - a respray cannot remove it",
+   "aftermarket aero and wing; sheet colour is the wrap, not paint"
+  ]
+ },
+ {
+  "uid": "377369b51ded49fda2cb02fd66186d23",
+  "name": "Nissan Leaf",
+  "verdict": "pass",
+  "reasons": [
+   "Leaf ZE0 proportions read instantly",
+   "glazing reads as real glass with interior visible",
+   "zoom-verified: the dark patches on the bonnet are the wrap-over headlamps, not mesh holes - internal lamp elements are traceable",
+   "black alloy rim faces and rubber tyres present in all four views",
+   "door and bonnet shut lines defined, clean gloss paint",
+   "weakest point: headlamps read dark; mats=0 cov=0.000 so distrust the sheet colour"
+  ]
+ },
+ {
+  "uid": "37e12c752cea4958b25dae17e2b530e5",
+  "name": "\u2774 FREE \u2775 Nissan Skyline GT-R",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - windows render opaque body-white, no glass (owner ruling: outright fail)",
+   "cov=1.000 FULLCOV, one material over the whole car",
+   "no shut lines, headlights are blank recesses"
+  ]
+ },
+ {
+  "uid": "38247650e5b94f2ea28e2638dce5572a",
+  "name": "1999 Nissan Skyline GTR R34 C-West  2F2F",
+  "verdict": "fail",
+  "reasons": [
+   "movie-replica blue livery baked into the body texture - a respray cannot remove it",
+   "near-duplicate of uid 3371ba7a60d64ed395e06d1586264da7 (same source model)"
+  ]
+ },
+ {
+  "uid": "38f68a59a0314a829f6b663bffc185f9",
+  "name": "Nissan Pathfinder III 2005-2008",
+  "verdict": "fail",
+  "reasons": [
+   "body floating above the ground, wheels not mounted",
+   "a single loose wheel lying under the car",
+   "wheel arches render as empty voids",
+   "unassembled source model"
+  ]
+ },
+ {
+  "uid": "399655351f5e4cd9bc713d76cf9216a4",
+  "name": "1993 Nissan Terrano 5-Door",
+  "verdict": "pass",
+  "reasons": [
+   "Terrano WD21 5-door proportions read instantly",
+   "glazing reads as real tinted glass with interior visible",
+   "grey alloy rim faces with traceable spokes and black rubber tyres in all four views",
+   "rectangular headlights with internal detail, slatted grille sharp",
+   "door and bonnet shut lines defined, clean gloss paint"
+  ]
+ },
+ {
+  "uid": "399f755d85d74c5d9d7b7c3c9e0d1b2f",
+  "name": "Nissan Altima MK3 2002-2006",
+  "verdict": "fail",
+  "reasons": [
+   "body floating above the wheels, wheels not mounted - bare discs in the arches",
+   "a loose tyre lying on the ground under the car",
+   "unassembled source model"
+  ]
+ },
+ {
+  "uid": "3b14d46c75214d12a590daf128dd1070",
+  "name": "Nissan President (H150) 1965",
+  "verdict": "pass",
+  "reasons": [
+   "President H150 saloon proportions read instantly",
+   "glazing reads as real glass with chrome frames and visible interior",
+   "steel wheels with hubcap detail traceable in all four views, black tyres",
+   "quad headlights with internal detail, chrome grille and bumpers sharp",
+   "door and bonnet shut lines defined, clean gloss paint and reflections"
+  ]
+ },
+ {
+  "uid": "3b9783a52c754dbba6f7e08bb27c89a3",
+  "name": "Nissan GTR Nismo",
+  "verdict": "fail",
+  "reasons": [
+   "wheels are featureless black voids in front34 and side - no rim face at all on that side",
+   "clay shell - windows render opaque body-white, no glass",
+   "proportions do not read as an R35 GT-R, generic supercar silhouette",
+   "cov=0.928 FULLCOV, no shut lines, headlights are dark slots"
+  ]
+ },
+ {
+  "uid": "3cb3e02c28dc41dda0c229461ae13a21",
+  "name": "1995_nissan_skyline_gt-r_r34_lbsilhouette",
+  "verdict": "fail",
+  "reasons": [
+   "Liberty Walk Silhouette widebody kit with bolt-on over-fenders and race splitter - coachbuilt, out of scope",
+   "not an OEM variant a UK reg decodes to"
+  ]
+ },
+ {
+  "uid": "3cded728aba34660a06ad692afaaefed",
+  "name": "Nissan almera classic",
+  "verdict": "fail",
+  "reasons": [
+   "scan mush - lumpy melted panel surfaces, soft undefined edges",
+   "glazing merges into the body, no glass (owner ruling: outright fail)",
+   "cov=1.000 FULLCOV, no shut lines, wheels are vague blobs"
+  ]
+ },
+ {
+  "uid": "3e06bee11ed44855b476ffad4ab01a5d",
+  "name": "Nissan President (PHG50) 1998",
+  "verdict": "pass",
+  "reasons": [
+   "President PHG50 saloon proportions read instantly",
+   "glazing reads as real glass with visible interior",
+   "hubcap/alloy detail traceable in all four views, black tyres",
+   "chrome grille, bumpers and headlight internals sharp",
+   "door and bonnet shut lines defined, clean gloss paint"
+  ]
+ },
+ {
+  "uid": "3ee5b1ba3e1a4a128455a5fe144659bb",
+  "name": "Nissan 350Z Nismo S Tune Z33 2008",
+  "verdict": "fail",
+  "reasons": [
+   "exploded/unassembled - panels detached and floating, no wheels mounted, empty arches",
+   "sheet renders a doubled image, the model appears duplicated in the scene",
+   "extreme race widebody kit, out of scope even if assembled"
+  ]
+ },
+ {
+  "uid": "4038994869f048948f0fe2cf06cc6698",
+  "name": "Nissan Juke MK1 2010-2019",
+  "verdict": "fail",
+  "reasons": [
+   "no wheels or tyres at all - all four arches render as empty black voids in every view",
+   "car body sits on the floor with nothing in the arches"
+  ]
+ },
+ {
+  "uid": "414019b3a89a45fe914b977e48925f39",
+  "name": "2020 Nissan Ariya",
+  "verdict": "pass",
+  "reasons": [
+   "Ariya proportions read instantly",
+   "glazing reads as real tinted glass including the panoramic roof",
+   "dark alloy rim faces with traceable spokes and black rubber tyres in all four views",
+   "slim LED headlamp internals and patterned grille shield sharp",
+   "door and bonnet shut lines defined, clean reflections and premium gloss finish"
+  ]
+ },
+ {
+  "uid": "424e21ec6667481eb86a7faf59061843",
+  "name": "Nissan Leaf 2018",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - windows render opaque body-white/grey, no glass (owner ruling: outright fail)",
+   "cov=1.000 FULLCOV, one material over the whole car",
+   "no shut lines, front end is a smooth blank with no headlight internals"
+  ]
+ },
+ {
+  "uid": "4455420f64fc4b899a934cd3413e7395",
+  "name": "Nissan Silvia S15 Custom",
+  "verdict": "fail",
+  "reasons": [
+   "aftermarket widebody kit with bolt-on over-fenders and race splitter - out of scope",
+   "unpainted grey aero elements against white body"
+  ]
+ },
+ {
+  "uid": "44dff6ff3e204407b195bce11693bb5a",
+  "name": "Nissan GT-R (R35) 2013",
+  "verdict": "fail",
+  "reasons": [
+   "zoom-verified: headlights are featureless dark voids with no internal elements",
+   "tail lamps render as blank pale discs, no lens detail",
+   "lower front bumper and side sills render grey/unpainted against the white body",
+   "door and bonnet shut lines barely defined",
+   "rim faces themselves are fine - the defect is lamps and unpainted trim; better R35 sources exist in this wave"
+  ]
+ },
+ {
+  "uid": "44e16c3ad2c14349b1596f3b1c6e4b37",
+  "name": "Nissan Navara 2017",
+  "verdict": "fail",
+  "reasons": [
+   "tyre geometry is corrupt - tyres burst into radiating black spikes on all four wheels",
+   "a '@STUDIO MAS' watermark plane is baked into the scene",
+   "greenhouse renders translucent/ghosted"
+  ]
+ },
+ {
+  "uid": "484b546f73774673b78fb6376e4956bf",
+  "name": "Nissan silvia S15",
+  "verdict": "fail",
+  "reasons": [
+   "zoom-verified: rear panel is completely blank - no tail-lamp lenses at all",
+   "headlights are pale blank recesses with no internals",
+   "no bonnet shut line and only a faint door line - unfinished clay shell",
+   "glazing renders white/opaque in two of the four views",
+   "rims themselves are fine (BBS mesh, red calipers)"
+  ]
+ },
+ {
+  "uid": "48fa53c7743745949b9cb518b7b67579",
+  "name": "2022 Nissan Rogue",
+  "verdict": "pass",
+  "reasons": [
+   "2022 Rogue/X-Trail proportions read instantly",
+   "glazing reads as real tinted glass with chrome window trim",
+   "dark alloy rim faces with traceable spokes and black rubber tyres in all four views",
+   "split headlamp internals and grille mesh sharp",
+   "door and bonnet shut lines defined, clean reflections and premium gloss finish"
+  ]
+ },
+ {
+  "uid": "4910a286f94d4c5d9307a7c6b058824d",
+  "name": "NISSAN GTR NISMO",
+  "verdict": "fail",
+  "reasons": [
+   "Liberty Walk style widebody kit with bolt-on over-fenders and race wing - coachbuilt, out of scope",
+   "clay body - no shut lines, blank rear panel"
+  ]
+ },
+ {
+  "uid": "4a6cadb2f5dd48ff97a9febed3b27f17",
+  "name": "Nissan Primera (Mk1)(P10) 1990",
+  "verdict": "pass",
+  "reasons": [
+   "Primera P10 proportions read instantly",
+   "glazing reads as real glass with visible interior",
+   "zoom-verified: grey alloy rim faces with traceable spokes in all four views; tyres read mid-grey on the dark-background views so the pale look in the side tile is key-light blow-out, not a missing tyre material",
+   "headlight units have internal structure, grille and body-side mouldings crisp",
+   "door and bonnet shut lines defined, clean gloss paint"
+  ]
+ },
+ {
+  "uid": "4c9e68dbe45647578f65f52c09668a46",
+  "name": "2019 Nissan Sentra Nismo",
+  "verdict": "fail",
+  "reasons": [
+   "glazing renders with a marbled/crumpled reflection artefact - reflections are not clean and the interior reads as noise through every window",
+   "rims, tail lamps, grille and Nismo trim are otherwise sharp - the defect is the glass material",
+   "re-source rather than scrap the nameplate"
+  ]
+ },
+ {
+  "uid": "4e261bd2d93a438ebdabf8cc6b41cf58",
+  "name": "Nissan Sentra B17",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render body-white against dark rims in every view - tyre material missing",
+   "glazing renders opaque body-white in the front34 and side views",
+   "cov=0.857 near-full single-material coverage"
+  ]
+ },
+ {
+  "uid": "4ef6c9e18aae4278badedeeb7a710d95",
+  "name": "Nissan Patrol (Y60) 5door 1987",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "car is rendered lying ON ITS SIDE in all four views - underside and chassis visible",
+   "source GLB passed the local pose gate, so this is the open render-side inversion bug, not a bad mesh",
+   "body and chassis detail look intact - re-render before judging"
+  ]
+ },
+ {
+  "uid": "4f5daf0bd58b4cb589f19ccf1a5785d2",
+  "name": "result nissan gtr",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "rendered inverted - front34 and front34_L show the underside/floorpan, rear34 is a top-down view",
+   "source GLB passed the local pose gate, so this is the open render-side inversion bug",
+   "caution: cov=1.000 FULLCOV and a single grey material with no visible glass, so it may still fail on re-render"
+  ]
+ },
+ {
+  "uid": "51c912a8310c4e00a82ad7673d84228a",
+  "name": "Nissan GTR R35",
+  "verdict": "pass",
+  "reasons": [
+   "R35 GT-R proportions instantly correct",
+   "glazing reads as real tinted glass",
+   "zoom-verified: black multi-spoke rim faces present in all four views with red calipers and black rubber tyres",
+   "headlamp internals, grille mesh with GT-R badge and quad exhausts all sharp",
+   "bonnet and door shut lines defined, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "536ac636cdd64a7eaf5b99ad5c1d3357",
+  "name": "Nissan GTR",
+  "verdict": "pass",
+  "reasons": [
+   "Hakosuka KPGC10 Skyline GT-R proportions read instantly",
+   "glazing reads as real blue-tinted glass with visible interior",
+   "bronze 4-spoke rim faces with traceable spokes in all four views",
+   "quad round headlights with internal detail, grille and GT-R badge sharp",
+   "door and bonnet shut lines defined",
+   "note: bonnet renders matte black against white body - a respray will leave it black"
+  ]
+ },
+ {
+  "uid": "5370d8f6b81a41a89eabfa1b91fc7160",
+  "name": "2023 Nissan Altima / Teana",
+  "verdict": "pass",
+  "reasons": [
+   "2023 Altima/Teana proportions read instantly",
+   "glazing reads as real tinted glass, black contrast roof",
+   "dark multi-spoke rim faces with traceable spokes and black rubber tyres in all four views",
+   "slim LED headlamp internals and grille mesh sharp",
+   "door and bonnet shut lines defined, premium gloss finish",
+   "cov=0.116 LOW - it rendered its own red under a forced silver, so distrust the sheet colour only"
+  ]
+ },
+ {
+  "uid": "53d0997c491d4c49a760b50db86f798c",
+  "name": "Nissan Navara NZ",
+  "verdict": "fail",
+  "reasons": [
+   "cov=0.953 FULLCOV - one material over the whole truck including glass",
+   "glazing does not read as glass, the cabin is open white with no glass surface",
+   "also mis-posed: the truck renders pitched steeply nose-up and floating in three of four views"
+  ]
+ },
+ {
+  "uid": "5445e2af8883453395266e38a42e4bd7",
+  "name": "2002_nissan_skyline_gtr_r34_fast_and_furious",
+  "verdict": "pass",
+  "reasons": [
+   "R34 GT-R proportions instantly correct, plain white paint with no baked livery",
+   "glazing reads as real tinted glass",
+   "black multi-spoke rim faces with red calipers, spokes traceable in all four views",
+   "headlamp internals and grille mesh sharp",
+   "door and bonnet shut lines defined, clean reflections"
+  ]
+ },
+ {
+  "uid": "58076679e9d2444fa8ec600e6d645899",
+  "name": "Nissan Titan 4x4 Pickup Truck",
+  "verdict": "fail",
+  "reasons": [
+   "cab glazing renders opaque body-white in both 3/4 views",
+   "low-tier shell - no door or bonnet shut lines, headlights are blank recesses, grille is a flat slab",
+   "side steps render translucent/ghosted"
+  ]
+ },
+ {
+  "uid": "5879a053d0a54e7e8103076d5b206955",
+  "name": "Nissan GTR",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - windows render opaque body-white, no glass (owner ruling: outright fail)",
+   "cov=0.870 near-full single-material coverage",
+   "no shut lines, headlights and tail lamps are blank recesses"
+  ]
+ },
+ {
+  "uid": "595210d2da19421ebc4abc37320f2886",
+  "name": "NISSAN SILVIA S15 INDIA SPEC 200SX",
+  "verdict": "fail",
+  "reasons": [
+   "aftermarket widebody kit with bolt-on over-fenders and drift stance - out of scope",
+   "decal graphics baked onto the rear bumper"
+  ]
+ },
+ {
+  "uid": "5985fb947b3d4f1cb5520f73c4e9a002",
+  "name": "Nissan GT-R35 Model",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - windows render opaque body-white, no glass (owner ruling: outright fail)",
+   "cov=1.000 FULLCOV",
+   "visible low-poly faceting, no shut lines, blank lamps"
+  ]
+ },
+ {
+  "uid": "5c0d949cc757408f9a6834fdde6a49be",
+  "name": "Nissan_180SX",
+  "verdict": "fail",
+  "reasons": [
+   "wheels are featureless dark cylinders - no rim face, spokes or tyre detail in any view",
+   "clay model, cov=1.000 FULLCOV, no glass",
+   "no shut lines, blank lamps"
+  ]
+ },
+ {
+  "uid": "5e33cc36cd6c4674b6e5105d20a2ce9e",
+  "name": "2017 Nissan Aimgain GT R35 GT-R Type 2",
+  "verdict": "fail",
+  "reasons": [
+   "Aimgain aftermarket widebody kit with over-fenders and race wing - coachbuilt, out of scope",
+   "clay-ish body with no shut lines and blank lamp recesses"
+  ]
+ },
+ {
+  "uid": "5eed440cfd094c5a8fdc9929eb43ab02",
+  "name": "Nissan GTR R34 Skyline | GT-R Skyline",
+  "verdict": "pass",
+  "reasons": [
+   "R34 GT-R proportions instantly correct",
+   "zoom-verified: headlamps have multi-element internals behind a clear lens; grille and bumper vents are proper mesh",
+   "glazing reads as real glass with wipers and interior visible",
+   "dark 5-spoke rim faces with traceable spokes and black rubber tyres in all four views",
+   "bonnet, door and wing shut lines all defined, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "5f4955d7cdf94974b73426a5cc775af6",
+  "name": "Nissan_skyline_gtr_r35",
+  "verdict": "fail",
+  "reasons": [
+   "aftermarket widebody kit with bolt-on over-fenders and large GT wing - coachbuilt, out of scope"
+  ]
+ },
+ {
+  "uid": "60de3762fb4143c6b3cdde0adc514f8d",
+  "name": "Nissan Laurel C35 MK8 1997-2002",
+  "verdict": "fail",
+  "reasons": [
+   "no wheels mounted - arches contain only floating brake discs and calipers",
+   "body sits on nothing, no rims or tyres in any view"
+  ]
+ },
+ {
+  "uid": "60fb7a3506354e8a9ef60c029e6a1b35",
+  "name": "Nissan Stagea (M35) 2001",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "rendered UPSIDE-DOWN on its roof in all four views",
+   "source GLB passed the local pose gate, so this is the open render-side inversion bug",
+   "body, glass and wheels all look intact - re-render before judging"
+  ]
+ },
+ {
+  "uid": "6101fb5f68f3495eb3717455cfd10a05",
+  "name": "2006 Nissan Elgrand Highway STAR",
+  "verdict": "pass",
+  "reasons": [
+   "Elgrand E51 Highway Star proportions read instantly",
+   "glazing reads as real tinted glass with seats visible through it",
+   "dark alloy rim faces with traceable spokes and black rubber tyres in all four views",
+   "headlamp internals and chrome grille sharp",
+   "door and sliding-door shut lines defined, clean gloss finish",
+   "cov=0.864 is high - check a respray does not spill onto trim"
+  ]
+ },
+ {
+  "uid": "6249d07fdfe8439aa13470adb129bea4",
+  "name": "Nissan President (PGF50) 2003",
+  "verdict": "pass",
+  "reasons": [
+   "President PGF50 saloon proportions read instantly",
+   "glazing reads as real tinted glass with visible interior",
+   "fine multi-spoke alloy rim faces traceable in all four views, black tyres",
+   "headlamp internals and chrome grille sharp",
+   "door and bonnet shut lines defined, clean gloss paint and reflections"
+  ]
+ },
+ {
+  "uid": "68396ce3cc39465d88a789b156b17571",
+  "name": "Nissan_gt-r_r35_gt",
+  "verdict": "fail",
+  "reasons": [
+   "aftermarket widebody kit with bolt-on over-fenders, race splitter and GT wing - coachbuilt, out of scope"
+  ]
+ },
+ {
+  "uid": "6876b2e7d4044f5a9e516c358b7abd6d",
+  "name": "Nissan Skyline GTR R35",
+  "verdict": "fail",
+  "reasons": [
+   "glazing renders opaque body-white in the front34 and side views",
+   "soft melted panel surfaces, no door or bonnet shut lines",
+   "rim faces are flat low-detail star shapes",
+   "grille is a plain dark rectangle, headlights are blank recesses"
+  ]
+ },
+ {
+  "uid": "6a0e311f8c404fbaad783ed587014c1d",
+  "name": "2005 Nismo Nissan Skyline R34 GTR Z Tune",
+  "verdict": "pass",
+  "reasons": [
+   "R34 GT-R Z-Tune proportions instantly correct; Nismo-built limited edition, a real registered car - in scope",
+   "glazing reads as real tinted glass",
+   "black multi-spoke rim faces with traceable spokes and black rubber tyres in all four views",
+   "headlamp internals and grille mesh sharp",
+   "bonnet and door shut lines defined, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "6a14efc71871435b80d289b3e78261b7",
+  "name": "NISSAN SILVIA S14",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan - the car sits on a scanned concrete plinth baked into the mesh",
+   "baked lighting and shadows in the texture, soft melted panels",
+   "cov=1.000 FULLCOV, no separable body paint"
+  ]
+ },
+ {
+  "uid": "6b073b34877944d3b09037ed46fbe8e0",
+  "name": "2021 Nissan GT-R R35 Top Secret M17",
+  "verdict": "pass",
+  "reasons": [
+   "R35 GT-R proportions instantly correct; Top Secret aero kit only, arches are standard - tuner spec, not a widebody",
+   "glazing reads as real tinted glass",
+   "white multi-spoke rim faces with orange calipers, spokes traceable in all four views",
+   "headlamp internals and grille mesh sharp",
+   "bonnet and door shut lines defined, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "6b853f8169cd4466beb6756196f5fe55",
+  "name": "Nissan Primera (P11) 1996-2002",
+  "verdict": "fail",
+  "reasons": [
+   "not a usable car - an exploded scatter of dark panels with foliage and scaffold geometry",
+   "camera ends up inside the mesh; scale and assembly are both wrong",
+   "cov=0.078"
+  ]
+ },
+ {
+  "uid": "6df98cc48f5a4c3192950e5a91e74b96",
+  "name": "Nissan Skyline GTR r33",
+  "verdict": "pass",
+  "reasons": [
+   "R33 GT-R proportions instantly correct",
+   "glazing reads as real tinted glass",
+   "silver 5-spoke rim faces with traceable spokes and black rubber tyres in all four views",
+   "headlamp internals and grille sharp, round tail lamps with red lenses",
+   "bonnet and door shut lines defined, clean gloss paint"
+  ]
+ },
+ {
+  "uid": "6e165390c52b4e32a054180a67e0b2e6",
+  "name": "1982 Nissan Micra",
+  "verdict": "pass",
+  "reasons": [
+   "Micra K10 proportions read instantly",
+   "glazing reads as real tinted glass with visible interior",
+   "steel wheels with hubcap vent detail traceable in all four views, black tyres",
+   "rectangular headlights with internal detail and slatted grille",
+   "grey plastic bumpers are correct OEM trim for the K10, not an unpainted-material fault",
+   "door, bonnet and tailgate shut lines defined"
+  ]
+ },
+ {
+  "uid": "6f55ef625ec1438e91aed8f200404b11",
+  "name": "Nissan 370Z 2009-2020",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "rendered UPSIDE-DOWN on its roof in all four views - underside and floorpan visible",
+   "source GLB passed the local pose gate, so this is the open render-side inversion bug",
+   "caution: only one wheel is clearly visible in the inverted views - check wheel completeness on re-render"
+  ]
+ },
+ {
+  "uid": "761a1b92416b4d33959b9d2efab43556",
+  "name": "Nissan Armada 2010",
+  "verdict": "fail",
+  "reasons": [
+   "cov=1.000 FULLCOV - one material over the whole car including glass and tyres",
+   "glazing renders as pale grey panels, does not read as glass (owner ruling: outright fail)",
+   "uniform clay-like surface with no paint/trim separation"
+  ]
+ },
+ {
+  "uid": "77456704dc1b4d299a23fecdf341003c",
+  "name": "Nissan Aimgain GT R35 Type2",
+  "verdict": "fail",
+  "reasons": [
+   "Aimgain aftermarket widebody kit with over-fenders and race wing - out of scope",
+   "duplicate of uid 5e33cc36cd6c4674b6e5105d20a2ce9e"
+  ]
+ },
+ {
+  "uid": "782e9fc3520242c08d1795af83265ae6",
+  "name": "Nissan Pathfinder1",
+  "verdict": "pass",
+  "reasons": [
+   "2022 Pathfinder R53 proportions read instantly",
+   "glazing reads as real tinted glass, black contrast roof",
+   "dark alloy rim faces with traceable spokes and black rubber tyres in all four views",
+   "split LED headlamp internals and grille mesh sharp",
+   "door and bonnet shut lines defined, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "78e58df2927548a7a7016b1b56b08c84",
+  "name": "Nissan GTR r35",
+  "verdict": "fail",
+  "reasons": [
+   "aftermarket widebody with bolt-on over-fender flares and quarter vents - out of scope",
+   "not an OEM variant a UK reg decodes to"
+  ]
+ },
+ {
+  "uid": "7b142ea3376e4811a326256c59bbc7a2",
+  "name": "Nissan Skyline GTR r35",
+  "verdict": "fail",
+  "reasons": [
+   "aftermarket widebody kit with over-fenders and large GT wing - out of scope",
+   "near-duplicate of uid 5f4955d7cdf94974b73426a5cc775af6"
+  ]
+ },
+ {
+  "uid": "7d9f94f415c841c19c3d36e1ed469087",
+  "name": "Nissan_cefiroa31_dae",
+  "verdict": "pass",
+  "reasons": [
+   "Cefiro A31 saloon proportions read instantly",
+   "glazing reads as real tinted glass with visible interior",
+   "white 5-spoke rim faces with red calipers, spokes traceable in all four views",
+   "tail lamps have proper amber/red lenses, headlamps have internals",
+   "door and bonnet shut lines defined, clean gloss paint"
+  ]
+ },
+ {
+  "uid": "804f08a912d545589209717f22570738",
+  "name": "Nissan 400z forward auto | gocha",
+  "verdict": "fail",
+  "reasons": [
+   "aftermarket widebody kit with over-fenders and large GT wing - out of scope",
+   "clay body, cov=0.818, no shut lines and blank lamp recesses"
+  ]
+ },
+ {
+  "uid": "8202b01458094b10b23821b1cff33e26",
+  "name": "2013 Nissan GT-R Black Edition (R35)",
+  "verdict": "fail",
+  "reasons": [
+   "tail lamps render as blank pale discs with no lens detail",
+   "lower front bumper renders grey/unpainted against the white body",
+   "near-duplicate of uid 44dff6ff3e204407b195bce11693bb5a (905,550 vs 905,616 faces) and shares its defects"
+  ]
+ },
+ {
+  "uid": "825a4086e6454c54a0e956e04fd9d121",
+  "name": "1999_nissan_skyline_r34_gt-r_top_secret_bnr34",
+  "verdict": "pass",
+  "reasons": [
+   "R34 GT-R Top Secret proportions instantly correct",
+   "glazing reads as real tinted glass",
+   "gold 6-spoke rim faces with traceable spokes and black rubber tyres in all four views",
+   "headlamp internals and grille mesh present, shut lines defined",
+   "near-duplicate of uid 12ba36fc5f6643a1ba8617763a2d9d93 - keep only one"
+  ]
+ },
+ {
+  "uid": "82f94bf120b54d04831f0b7470fae543",
+  "name": "2011 Nissan NV200 Passenger SV",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render body-white in every view - tyre material missing (same defect as the other NV200, uid 1cd12df9)",
+   "rim faces themselves are present and correct",
+   "body, glass and shut lines otherwise clean - re-source rather than scrap the nameplate"
+  ]
+ },
+ {
+  "uid": "86543455d6514290bb9255c99bec6ede",
+  "name": "Nissan R35 GTR",
+  "verdict": "fail",
+  "reasons": [
+   "Liberty Walk style widebody kit with over-fenders and race wing - out of scope",
+   "clay body, cov=1.000 FULLCOV, no glass, no shut lines"
+  ]
+ },
+ {
+  "uid": "881b0345d0d84d5d8df6af6601978d30",
+  "name": "2024 Nissan Sylphy E-POWER Hybrid",
+  "verdict": "pass",
+  "reasons": [
+   "2024 Sylphy proportions read instantly",
+   "glazing reads as real tinted glass",
+   "dark alloy rim faces with traceable spokes and black rubber tyres in all four views",
+   "slim LED headlamp internals and grille mesh sharp",
+   "door and bonnet shut lines defined, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "88be494c18134b1ca820f776d5144164",
+  "name": "nissan_300zx",
+  "verdict": "pass",
+  "reasons": [
+   "300ZX Z32 proportions read instantly",
+   "glazing reads as real glass including the T-top panels",
+   "white 5-spoke rim faces with traceable spokes and black rubber tyres in all four views",
+   "headlamp lens detail and full-width tail lamps sharp",
+   "door and bonnet shut lines defined, clean gloss paint",
+   "cov=0.872 is high - check a respray does not spill onto trim"
+  ]
+ },
+ {
+  "uid": "8e22aab8689e45f5b587cbb393986905",
+  "name": "Nissan 200sx S13",
+  "verdict": "fail",
+  "reasons": [
+   "modelled with both doors, bonnet and hatch OPEN in every view - unusable as a catalogue pose",
+   "source scene platform baked into the mesh under the car"
+  ]
+ },
+ {
+  "uid": "8f1a791cc7f2446083867b1831da9461",
+  "name": "exmods_nissan_gtr35_lb_silhouette",
+  "verdict": "fail",
+  "reasons": [
+   "Liberty Walk (LBWK) widebody kit with bolt-on over-fenders - out of scope",
+   "LBWK and sponsor decals baked into the body texture"
+  ]
+ },
+ {
+  "uid": "90e650d0b6b645588a7086982b9c8805",
+  "name": "2023 Pandem Nissan Skyline Rocket Bunny R33",
+  "verdict": "fail",
+  "reasons": [
+   "Pandem/Rocket Bunny widebody kit with bolt-on over-fenders - out of scope",
+   "Pandem, Cusco, Takata and other sponsor decals baked into the body texture"
+  ]
+ },
+ {
+  "uid": "911fb81fe0e9417ba486cbfeb4376f58",
+  "name": "2024 Nissan Altima",
+  "verdict": "pass",
+  "reasons": [
+   "2024 Altima proportions read instantly",
+   "glazing reads as real tinted glass",
+   "black alloy rim faces with traceable spokes and black rubber tyres in all four views",
+   "LED headlamp internals and chrome grille mesh sharp",
+   "door and bonnet shut lines defined, premium gloss finish",
+   "cov=0.870 is high - check a respray does not spill onto trim"
+  ]
+ },
+ {
+  "uid": "91495ac3558f48739191f7fd7cbf5be8",
+  "name": "1987 Nissan Patrol 5-Door",
+  "verdict": "pass",
+  "reasons": [
+   "Patrol Y60 5-door proportions read instantly",
+   "glazing reads as real tinted glass with visible interior",
+   "rim faces with traceable detail and black rubber tyres in all four views, spare wheel on the tailgate",
+   "rectangular headlamp internals and chrome grille sharp",
+   "door and bonnet shut lines defined, clean gloss paint"
+  ]
+ },
+ {
+  "uid": "92a0f988e83a45248f3dadd97c0c1b36",
+  "name": "2024 Nissan Pathfinder",
+  "verdict": "pass",
+  "reasons": [
+   "2024 Pathfinder proportions read instantly",
+   "glazing reads as real tinted glass, black contrast roof",
+   "dark alloy rim faces with fine traceable spokes and black rubber tyres in all four views",
+   "slim LED headlamp internals and grille sharp",
+   "door and bonnet shut lines defined, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "933e882819a845bd825efab79e6c4360",
+  "name": "Nissan+ Cefiro+A31.dae",
+  "verdict": "pass",
+  "reasons": [
+   "Cefiro A31 saloon proportions read instantly",
+   "zoom-verified: black 5-spoke rim faces with red calipers and traceable spokes in all four views, black rubber tyres",
+   "glazing reads as real tinted glass; tail lamps have proper amber/red lenses",
+   "door and boot shut lines defined, clean gloss paint",
+   "same nameplate as uid 7d9f94f415c841c19c3d36e1ed469087 but a different mesh - keep one"
+  ]
+ },
+ {
+  "uid": "93800a28250f4e9e848cc00d0e9cd7fb",
+  "name": "Nissan Titan 4x4",
+  "verdict": "fail",
+  "reasons": [
+   "whole body renders as a dark chrome mirror - broken material assignment, mats=0 cov=0.000",
+   "glazing renders as opaque white panels, does not read as glass",
+   "no usable body-paint material, a respray cannot take"
+  ]
+ },
+ {
+  "uid": "942244be457745678c54a7ff5330ba8d",
+  "name": "2021 Nissan Kicks",
+  "verdict": "pass",
+  "reasons": [
+   "2021 Kicks proportions read instantly",
+   "glazing reads as real tinted glass",
+   "rim faces present with a clearly traceable multi-spoke pattern in all four views (light silver alloys, not voids), black rubber tyres",
+   "headlamp internals and grille mesh sharp",
+   "door and bonnet shut lines defined, clean gloss finish"
+  ]
+ },
+ {
+  "uid": "96beb139eafc4ff39954328fd996264c",
+  "name": "Nissan Silvia S15 Custom",
+  "verdict": "fail",
+  "reasons": [
+   "extreme aftermarket widebody race kit - over-fenders, splitter, canards and large GT wing",
+   "not an OEM variant a UK reg decodes to"
+  ]
+ },
+ {
+  "uid": "980fe3efb4094736b339f76a9b14e86f",
+  "name": "Nissan Pathfinder 2014",
+  "verdict": "fail",
+  "reasons": [
+   "cov=1.000 FULLCOV - one material over the whole car including glass and tyres, a respray would repaint the glass",
+   "glazing renders as pale grey panels rather than real glass",
+   "uniform clay-like surface with no paint/trim separation"
+  ]
+ },
+ {
+  "uid": "9865f7eb64e74935a9974867a9618f0b",
+  "name": "Nissan GTR X 2050 Concept V1.2",
+  "verdict": "fail",
+  "reasons": [
+   "GT-R X 2050 concept - not a road car a UK reg decodes to",
+   "crumpled/melted body surfaces, no glazing, turbine-disc wheels"
+  ]
+ },
+ {
+  "uid": "9997421248f34c2bb5859e905650ced0",
+  "name": "2016 Nissan Rogue",
+  "verdict": "fail",
+  "reasons": [
+   "no wheels mounted - all four arches render as empty black voids",
+   "clay shell, glazing renders body-white",
+   "cov=0.984 FULLCOV"
+  ]
+ },
+ {
+  "uid": "9c78e89e2422401b9851e5595a59083b",
+  "name": "1994 Nissan 240SX all bodykit",
+  "verdict": "fail",
+  "reasons": [
+   "aftermarket widebody kit with over-fenders and large GT wing - out of scope",
+   "whole body renders as a grey chrome/metallic material, mats=0 cov=0.000",
+   "panel surfaces look crumpled"
+  ]
+ },
+ {
+  "uid": "9cfbe4727b7f4af0a11772687c4a1f59",
+  "name": "Nissan GT-R R35 Nismo | www.vecarz.com",
+  "verdict": "pass",
+  "reasons": [
+   "R35 GT-R Nismo proportions instantly correct; Nismo is an OEM variant, in scope",
+   "glazing reads as real tinted glass",
+   "black multi-spoke rim faces with red calipers and traceable spokes in all four views",
+   "headlamp internals and grille mesh sharp, red Nismo accents are OEM trim",
+   "door and bonnet shut lines defined, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "9cfc54a8d2bc46f593519b6d3aab9469",
+  "name": "Nissan GTR R35",
+  "verdict": "fail",
+  "reasons": [
+   "tail lamps render as blank grey discs with no lens detail",
+   "headlights are dark slots with no internals",
+   "rear bumper renders grey/unpainted against the white body",
+   "glazing reads white/opaque in the side view; mats=0 cov=0.000"
+  ]
+ },
+ {
+  "uid": "9d78bef993b9437bb0af8e3590bead48",
+  "name": "Nissan Aimgain GT-R R35 2, 2017 (Pink)",
+  "verdict": "fail",
+  "reasons": [
+   "Aimgain widebody kit with over-fenders and race wing - out of scope",
+   "pink itasha livery baked into the body texture, a respray cannot remove it"
+  ]
+ },
+ {
+  "uid": "9f9f7fdf49d1431ca7a69a4128d5884c",
+  "name": "Nissan patrol",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan - melted distorted panels with baked-in graffiti, rust and lighting",
+   "cov=1.000 FULLCOV, no glass, wheels are vague blobs"
+  ]
+ },
+ {
+  "uid": "a2cfc77883ff4748827dc862f6bba5a7",
+  "name": "Nissan 370Z",
+  "verdict": "fail",
+  "reasons": [
+   "zoom-verified: headlamps are empty glassy lenses with no internal elements",
+   "front grille is a plain black slab with no mesh or depth",
+   "no bonnet shut line and no door shut line on the front wing - panels blend into each other",
+   "rims are fine; a better 370Z exists in this wave (uid 16a10e686dcd4fe3942f904a1879c0e3)"
+  ]
+ },
+ {
+  "uid": "a38a4214b217430aa47685f840feddf3",
+  "name": "Amper Kettutat Nissan 350Z Rocket Bunny Z33",
+  "verdict": "fail",
+  "reasons": [
+   "Rocket Bunny widebody kit with bolt-on over-fenders and race wing - out of scope",
+   "Rocket Bunny, Toyo Tires and GReddy sponsor livery baked into the body texture"
+  ]
+ },
+ {
+  "uid": "a544d0fa26e241fa8e0b27dcb627afd1",
+  "name": "1990 Nissan Silvia K's Diamond Selection (S13)",
+  "verdict": "pass",
+  "reasons": [
+   "Silvia S13 K's proportions read instantly",
+   "glazing reads as real tinted glass with visible interior",
+   "grey mesh-alloy rim faces with traceable detail and black rubber tyres in all four views",
+   "slim headlamp internals sharp, tail lamps have red lenses",
+   "door and bonnet shut lines defined, clean gloss paint"
+  ]
+ },
+ {
+  "uid": "a595417b12c545d4be039bb1c509a5d9",
+  "name": "NISSAN SILVIA S14",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan mounted on a scanned concrete plinth baked into the mesh",
+   "baked lighting in the texture, cov=1.000 FULLCOV",
+   "same defect class as the other scanned S14, uid 6a14efc71871435b80d289b3e78261b7"
+  ]
+ }
+]
