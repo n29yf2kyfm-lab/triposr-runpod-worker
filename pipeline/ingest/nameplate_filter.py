@@ -65,6 +65,11 @@ PART_WORDS = [
     # Bare component words that reached render on the Honda wave 2026-08-09:
     # a "Civic Wheel" terrain scan, a "Pilot Upper Airbox", a "CRV Waterpump".
     "wheel", "airbox", "pump", "waterpump", "manifold", "radiator",
+    # Land Rover sweep 2026-08-09: "Range Rover Velar Tyre" (367,725 faces) and
+    # "Land Rover Series 3 Wiper Cover" (952,096) both carried a valid nameplate
+    # and would have been downloaded and rendered as cars. \b anchoring means
+    # "tire" does NOT match inside "entire".
+    "tyre", "tire", "wiper",
 ]
 # Scale / print / sprite artefacts — geometry exists but is not a serving asset.
 SCALE_WORDS = [
