@@ -1040,6 +1040,15 @@
   ]
  },
  {
+  "uid": "5051cb12188647269140d4484ce530dd",
+  "name": "2019 Nissan Silvia S15 BN Sports BLS Body Kit",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: BN Sports BLS aftermarket body kit, title says so outright",
+   "over-fenders, front splitter, gold deep-dish wheels"
+  ]
+ },
+ {
   "uid": "51b6f9e6f6194645be446e5e14dfddc4",
   "name": "2015 Nissan Murano Hybrid",
   "verdict": "pass",
@@ -1090,6 +1099,29 @@
   ]
  },
  {
+  "uid": "537d4f39795a4ed1a5055ee9e16bd1a2",
+  "name": "Nissan Skyline GTR R34",
+  "verdict": "fail",
+  "reasons": [
+   "rear screen renders opaque body-white with stray black shard geometry at the C-pillar, seen at 3x - side glass is genuine but the backlight is not",
+   "stray floating scoop geometry on the rear deck",
+   "aftermarket double-deck rear wing and carbon bonnet, not an OEM spec",
+   "mats=0 cov=0.000 - the worker found no body-paint material at all"
+  ]
+ },
+ {
+  "uid": "539b2257cb504e53969a8c38c1a686cc",
+  "name": "Nissan Cefiro A31",
+  "verdict": "pass",
+  "reasons": [
+   "A31 Cefiro proportions read instantly, roof/pillars/wheelbase consistent across all four views",
+   "glass reads as dark tinted glass with interior visible",
+   "tyres plainly black rubber; 5-spoke rim faces present with red calipers on BOTH sides",
+   "panel surfacing clean, door shut lines and side mouldings defined",
+   "black aftermarket wheels and mild drop are spec variation, not a body kit"
+  ]
+ },
+ {
   "uid": "53d0997c491d4c49a760b50db86f798c",
   "name": "Nissan Navara NZ",
   "verdict": "fail",
@@ -1109,6 +1141,16 @@
    "black multi-spoke rim faces with red calipers, spokes traceable in all four views",
    "headlamp internals and grille mesh sharp",
    "door and bonnet shut lines defined, clean reflections"
+  ]
+ },
+ {
+  "uid": "564daca587814f2380655e8ecafce2a9",
+  "name": "Nissan Datsun DRB",
+  "verdict": "fail",
+  "reasons": [
+   "unfinished/broken: doors render as dark semi-transparent shells with placeholder arrow decals",
+   "near-side wheels absent, arches are empty with black blobs beneath",
+   "mixed placeholder materials across the body, no interior"
   ]
  },
  {
@@ -1151,6 +1193,16 @@
   ]
  },
  {
+  "uid": "5bde97c2e5d649f4b0ff0e68a2167b25",
+  "name": "2016 Nissan Altima",
+  "verdict": "fail",
+  "reasons": [
+   "wheels and tyres absent: all four arches contain black faceted voids with a bare disc floating inside",
+   "glazing renders opaque body-white on the side windows",
+   "black shard clusters where the A-pillar and rear quarter geometry has collapsed"
+  ]
+ },
+ {
   "uid": "5c0d949cc757408f9a6834fdde6a49be",
   "name": "Nissan_180SX",
   "verdict": "fail",
@@ -1158,6 +1210,18 @@
    "wheels are featureless dark cylinders - no rim face, spokes or tyre detail in any view",
    "clay model, cov=1.000 FULLCOV, no glass",
    "no shut lines, blank lamps"
+  ]
+ },
+ {
+  "uid": "5d0613a865884231b538eecd1d262abe",
+  "name": "2023 Nissan GT-R R35 Nismo",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Nismo trim - in scope as a road car per the brief",
+   "proportions read instantly, front 3/4 strong",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; black RAYS-style rim faces present on BOTH sides, red rim pinstripe is Nismo spec",
+   "carbon bonnet vents, grille and headlight internals sharp; shut lines defined"
   ]
  },
  {
@@ -1187,6 +1251,17 @@
   "verdict": "fail",
   "reasons": [
    "aftermarket widebody kit with bolt-on over-fenders and large GT wing - coachbuilt, out of scope"
+  ]
+ },
+ {
+  "uid": "5f4e079afb6f45e083f1c94d3a74a01f",
+  "name": "Ismail Mitchell - Nissan 240Z Customised",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: cov=1.000 FULLCOV, windows render opaque body-colour, no glass anywhere",
+   "tyres also render body-colour - no black rubber",
+   "out-of-scope: title says Customised - full body kit and oversized rear wing",
+   "body is not a 240Z, it reads as an S13-generation coupe - title metadata is wrong"
   ]
  },
  {
@@ -1231,6 +1306,18 @@
    "fine multi-spoke alloy rim faces traceable in all four views, black tyres",
    "headlamp internals and chrome grille sharp",
    "door and bonnet shut lines defined, clean gloss paint and reflections"
+  ]
+ },
+ {
+  "uid": "66e0b2f4b1e043d6b9574d48879ede50",
+  "name": "Nissan Gtr50",
+  "verdict": "pass",
+  "reasons": [
+   "Italdesign GT-R50 proportions read instantly",
+   "glazing verified at 3x: genuine dark glass with reflection and interior structure visible, not an opaque panel or a void",
+   "tyres plainly black rubber; rim faces present and detailed on BOTH sides",
+   "rear engine-bay grille shows real mechanical detail; panel surfacing clean",
+   "DUPLICATE CANDIDATE with 0818738527f24ae89203403ee1d31bf0 (also a GT-R50) - same car from a different uploader, flagged not grouped"
   ]
  },
  {
@@ -1322,6 +1409,16 @@
   ]
  },
  {
+  "uid": "6f041e17ccd74578b93ac59f024a8ab7",
+  "name": "Nissan_Homy_1982",
+  "verdict": "fail",
+  "reasons": [
+   "TYRES RENDER BODY-WHITE - verified at 3x: sidewall AND tread are body-colour, the ground contact patch is white; only the recessed rim centre is black",
+   "this is NOT a whitewall - a whitewall keeps a black tread, this tyre has none",
+   "glazing is fine (real tinted glass, interior visible) - the failure is tyre material only"
+  ]
+ },
+ {
   "uid": "6f55ef625ec1438e91aed8f200404b11",
   "name": "Nissan 370Z 2009-2020",
   "verdict": "fail-rerender",
@@ -1329,6 +1426,18 @@
    "rendered UPSIDE-DOWN on its roof in all four views - underside and floorpan visible",
    "source GLB passed the local pose gate, so this is the open render-side inversion bug",
    "caution: only one wheel is clearly visible in the inverted views - check wheel completeness on re-render"
+  ]
+ },
+ {
+  "uid": "74d274c8ad8e49c1b882dca3a199383d",
+  "name": "2020_nissan_sentra_sylphy_remix",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Sylphy/Sentra proportions read instantly, consistent across all four views",
+   "glass reads as tinted glass, tan interior visible through the rear side windows",
+   "tyres plainly black rubber; multi-spoke rim faces present on BOTH sides",
+   "V-motion grille and headlight internals sharp, boot and door shut lines defined",
+   "DUPLICATE CANDIDATE with 74de3cda4e0c4d3eb493ea1ebc7c72e4 (2020 Nissan Sentra Sylphy) - flagged not grouped"
   ]
  },
  {
