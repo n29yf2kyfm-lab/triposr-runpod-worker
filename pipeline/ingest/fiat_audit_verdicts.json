@@ -1,0 +1,796 @@
+[
+ {
+  "uid": "63cb8fc83c5749adb9831a036b0d86b0",
+  "name": "1964 Fiat 850",
+  "verdict": "fail",
+  "reasons": [
+   "body shell only - no wheels, empty arches",
+   "glazing opaque body-white (cov=0.921 FULLCOV)",
+   "torn jagged panel edges at the rear quarter"
+  ]
+ },
+ {
+  "uid": "e567d025b6b74708aef1f13605414a4c",
+  "name": "2000 Fiat Seicento Photoscan",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan (stated in source title) - baked ground slab, holes through the body and glazing, mush",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "5405e055f9b64b2b9c5438bbbec8e430",
+  "name": "2005-2007 FIAT DOBLO MK1 (UK-I4GAS)",
+  "verdict": "fail",
+  "reasons": [
+   "wheels differ between sides - black 7-spoke alloys one side, white hubcaps of a different pattern the other",
+   "tailgate badge renders as a plain blue dot"
+  ]
+ },
+ {
+  "uid": "1bd80dcf57424ba6ad68fc13d3a0ae77",
+  "name": "2014 Fiat Doblo Multijet PSA Design",
+  "verdict": "fail",
+  "reasons": [
+   "no wheels at all - four empty black arches in every view"
+  ]
+ },
+ {
+  "uid": "5ac7d1be7d2341809cec0d798a33dc05",
+  "name": "2017 Fiat Ducato Panel Van",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - windscreen and all glazing opaque body-white",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "873cd8e9504b48b7b8e1be30327cd4f7",
+  "name": "3D Scanned Fiat Ducato Benimar Camper [Free]",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan (stated in source title) - torn base, baked lighting, mush",
+   "also a motorhome",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "9e81c5a44f86401d92aa1de183d28f8b",
+  "name": "CE3_fiat_bravo_2_full_model.",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - opaque body-white glazing, no glass",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "5dd06520bb334609abbea2f38ecbb49e",
+  "name": "Day 334: Fiat 500",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan - torn edges, holes through roof and glazing, floating debris, baked lighting",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "0744867fd44b427a8bccf04559f5b151",
+  "name": "Dodge Journey/Fiat Freemont MK1 2008-2020",
+  "verdict": "fail",
+  "reasons": [
+   "wheels not fitted - bare hub/brake assemblies in empty arches, one loose wheel lying on the floor"
+  ]
+ },
+ {
+  "uid": "8c9f3a5c9d6a45388cc3f2047ad35963",
+  "name": "Fiat  Linea 2006",
+  "verdict": "fail",
+  "reasons": [
+   "no wheels or tyres - car sits on bare brake discs/hubs in all four views, arches empty"
+  ]
+ },
+ {
+  "uid": "5f849fcabe804880a004a71dfb55e982",
+  "name": "FIAT 1100 Grand Coupe",
+  "verdict": "fail",
+  "reasons": [
+   "wrong vehicle - modern fan concept from the same author as the \"FIAT 850 Coupe\" concept, not a Fiat 1100"
+  ]
+ },
+ {
+  "uid": "88bf1292cafc440c8dc1750ce87704b3",
+  "name": "Fiat 124 1966-1985",
+  "verdict": "fail",
+  "reasons": [
+   "no wheels or tyres fitted - car sits on bare hubs/brake discs, arches empty",
+   "also a police/rally accessory build (roof rack, beacon, spot lamps)"
+  ]
+ },
+ {
+  "uid": "b2a2a30df0db45ab8e0bbb1583ee5b65",
+  "name": "fiat 133 [1972] Decayed",
+  "verdict": "fail",
+  "reasons": [
+   "glazing renders as opaque body-grey panels (no glass)",
+   "deliberately \"decayed\" art asset - rust decals on windows, corroded wheels"
+  ]
+ },
+ {
+  "uid": "327b347dae5848b2bfb365655614e23f",
+  "name": "FIAT 400 Barchetta",
+  "verdict": "fail",
+  "reasons": [
+   "not a real Fiat model - fan concept (\"400 Barchetta\"/\"Gattino\")",
+   "plain steel discs for wheels and a baked black grid ground plane in the asset"
+  ]
+ },
+ {
+  "uid": "4606659ff31142e3b8080f995514452f",
+  "name": "Fiat 500",
+  "verdict": "fail",
+  "reasons": [
+   "third-party advertising decal (\"DIGITAL DESIGN MANALI\") baked into door texture",
+   "weathered dirty paint, not premium"
+  ]
+ },
+ {
+  "uid": "b253a9014bc9421b8051df2a63a0bd6a",
+  "name": "Fiat 500",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan with baked road slab, holes through the glazing, red blob artefact",
+   "also the car is a 600, not a 500",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "c512f00040a74ce9b90a6d47f99c6522",
+  "name": "Fiat 500",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a rusty car with a baked ground slab and mushed panels",
+   "also a 600, not a 500",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "e1844792ba984d40a7af37c90223bb17",
+  "name": "Fiat 500",
+  "verdict": "fail",
+  "reasons": [
+   "side and rear glazing render opaque body-white with no transparency or interior"
+  ]
+ },
+ {
+  "uid": "76ee059d7e8b459093c7c0e148fe437c",
+  "name": "Fiat 500 2012",
+  "verdict": "fail",
+  "reasons": [
+   "body shell only - no wheels in any view, empty arches",
+   "glazing opaque body-white (clay), cov=1.000"
+  ]
+ },
+ {
+  "uid": "636667749f974c66a08f8c6893ce17bb",
+  "name": "Fiat 500 classic",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan - baked ground disc, torn body edges, holes through the glazing, mush",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "a826111a55bf4fce8f70e53cf4600ad1",
+  "name": "fiat 500 e",
+  "verdict": "fail",
+  "reasons": [
+   "clay model with no wheels - empty arches, opaque body-white glazing, triangular texture-tear artefacts on the doors",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "d8673b37da274dfd872e7cce85de5bf4",
+  "name": "Fiat 500 giardiniera",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - opaque body-white glazing, cov=1.000",
+   "surfaces are lumpy/sculpted rather than hard-surface"
+  ]
+ },
+ {
+  "uid": "5d5031022b1248c7ab87399ae1b4c21f",
+  "name": "Fiat 500 GT 2017-2023",
+  "verdict": "fail",
+  "reasons": [
+   "wheels broken - front arches are empty black voids, rear wheels featureless discs, stray suspension assembly hanging below front",
+   "mirror is a purple blob"
+  ]
+ },
+ {
+  "uid": "a93438044faa4f898cf685cc879abdb1",
+  "name": "Fiat 500 Pop",
+  "verdict": "fail",
+  "reasons": [
+   "wet road ground plane with lane markings baked into the asset",
+   "body surfaces soft and lumpy, headlights are blobs"
+  ]
+ },
+ {
+  "uid": "9ce2fbc2cc364ede843e52212d39842c",
+  "name": "FIAT 850 Berlina",
+  "verdict": "fail",
+  "reasons": [
+   "wrong vehicle - modern fan concept from the same author as the other \"850\"/\"1100\" concepts, not a real Fiat 850 Berlina"
+  ]
+ },
+ {
+  "uid": "f9940f75f04f4946a7edb297c6e10b1c",
+  "name": "FIAT 850 Berlina",
+  "verdict": "fail",
+  "reasons": [
+   "wrong vehicle - modern fan concept from the same author series as the other \"850\"/\"1100\" concepts"
+  ]
+ },
+ {
+  "uid": "0da7a3ce905940cab4995c921f16a922",
+  "name": "FIAT 850 Coupe",
+  "verdict": "fail",
+  "reasons": [
+   "wrong vehicle - a modern fan concept re-design, proportions do not read as a Fiat 850 Coupe"
+  ]
+ },
+ {
+  "uid": "971e30d00fc046ebbaa0f33dea33c498",
+  "name": "FIAT 850 Multipla",
+  "verdict": "fail",
+  "reasons": [
+   "wrong vehicle - modern fan concept from the same author as the 850 Coupe / 1100 Grand Coupe concepts, not a Fiat 850 Multipla"
+  ]
+ },
+ {
+  "uid": "cd044d744e0646598ab0e9d13f1cc683",
+  "name": "FIAT 850 Rallye Giannini",
+  "verdict": "fail",
+  "reasons": [
+   "wrong vehicle - modern fan concept from the same author series as the other \"850\"/\"1100\" concepts"
+  ]
+ },
+ {
+  "uid": "4fb5ffae29e04abe946e0f365555fe3a",
+  "name": "Fiat Abarth 595",
+  "verdict": "fail",
+  "reasons": [
+   "faceted low-poly shading patches over body",
+   "door/wing render as a different flat material to the rest of the body"
+  ]
+ },
+ {
+  "uid": "330d0a8beff54513b3bc246880123677",
+  "name": "Fiat Cinquecento",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render body-white (same material as paint)",
+   "front wing/arch panel torn and detached"
+  ]
+ },
+ {
+  "uid": "d30fdb5bec3f43b282d91c62f9fdb458",
+  "name": "Fiat Cinquecento",
+  "verdict": "fail",
+  "reasons": [
+   "whole car renders as dark translucent glass including the wheels (body mats=0, cov=0.000) - no paint material at all"
+  ]
+ },
+ {
+  "uid": "11103d960278407b9e612907d26fc63c",
+  "name": "Fiat Doblo MK1 2000-2021",
+  "verdict": "fail",
+  "reasons": [
+   "wheels detached from body, wheel arches are empty black voids"
+  ]
+ },
+ {
+  "uid": "22ee6fd730f84bbbbab2cb715d5aea0b",
+  "name": "Fiat Doblo MK2 MK2 2010-2022",
+  "verdict": "fail",
+  "reasons": [
+   "two stacked/offset body variants in one file, wheels missing from arches, framing broken"
+  ]
+ },
+ {
+  "uid": "df9923f4459a490f964c04c0276ed27f",
+  "name": "Fiat Doblò Maxi Taxi",
+  "verdict": "fail",
+  "reasons": [
+   "clay with melted, soap-carved surfaces - opaque body-white glazing, panel detail smeared",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "ba7f8b6a69524683a5fc1f8711bc3413",
+  "name": "Fiat Marea Weekend 1996-2007",
+  "verdict": "fail",
+  "reasons": [
+   "no wheels - empty black arches with bare white suspension stubs",
+   "windscreen renders as a crazed/shattered mesh"
+  ]
+ },
+ {
+  "uid": "6ca201059699408f88d5ad907a2cb9ea",
+  "name": "Fiat Multipla",
+  "verdict": "fail",
+  "reasons": [
+   "police livery build - POLICJA decals and roof light bar baked in, game-mod number plate (\"GTA-RESCU\")",
+   "not a stock car"
+  ]
+ },
+ {
+  "uid": "9c2d6b0f68a74a048668ec48be3f14ca",
+  "name": "Fiat Panda Armato",
+  "verdict": "fail",
+  "reasons": [
+   "tracked military conversion - tank tracks in place of wheels, not a road car",
+   "framing broken (camera fills with track assembly)"
+  ]
+ },
+ {
+  "uid": "38887c2e43294e34a2e032af23a64a80",
+  "name": "Fiat Panda Car",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan - crumpled wavy panels, baked lighting in texture"
+  ]
+ },
+ {
+  "uid": "ba4c6c170dc742ab93e67552a9ec4431",
+  "name": "fiat panda damage HW XYZ",
+  "verdict": "fail",
+  "reasons": [
+   "multi-object crash-damage scene - two Pandas on plinths plus a street lamp post, not a single car"
+  ]
+ },
+ {
+  "uid": "a5d33c632d664174922adaebb8d7940c",
+  "name": "FIAT panda en cours",
+  "verdict": "fail",
+  "reasons": [
+   "no glazing at all - every window is an open aperture, you see straight through the greenhouse",
+   "source title says \"en cours\" (work in progress)"
+  ]
+ },
+ {
+  "uid": "7bd922acb92747bba5aec447ca260cd9",
+  "name": "Fiat Punto Evo",
+  "verdict": "fail",
+  "reasons": [
+   "glazing renders as flat opaque near-white panels, no transparency and no interior visible",
+   "splotchy smudge artefacts on paint"
+  ]
+ },
+ {
+  "uid": "8edc99404e6640708f82906d95a39c42",
+  "name": "Fiat Punto Evo Abarth",
+  "verdict": "fail",
+  "reasons": [
+   "whole car renders as one dark translucent glass-like material (body mats=0, cov=0.000) - no paint, glazing indistinguishable from bodywork"
+  ]
+ },
+ {
+  "uid": "6688fe7c513f4991be1251f0a83aaa89",
+  "name": "Fiat Punto Grande/Evo 2009-2018",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit - body panels, wheels, seats and lamps scattered as separate disassembled objects, not an assembled car"
+  ]
+ },
+ {
+  "uid": "b80a89f47a774b14bf422a1e4b0fbf00",
+  "name": "fiat punto in progress",
+  "verdict": "fail",
+  "reasons": [
+   "work-in-progress asset (per source title) - windscreen glass missing (empty frame), interior seats and headlights are untextured white blobs",
+   "cov=0.965 FULLCOV"
+  ]
+ },
+ {
+  "uid": "238295910b1444088acda1a5b25f5aae",
+  "name": "Fiat Punto OBJ",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan - baked ground plane, baked lighting, mush",
+   "cov=1.000 full coverage"
+  ]
+ },
+ {
+  "uid": "3316c7088ac34c1c8645f0958f759749",
+  "name": "Fiat Qubo",
+  "verdict": "fail",
+  "reasons": [
+   "remeshed blob - melted lumpy panels, no glass (opaque body-white windows), cov=1.000"
+  ]
+ },
+ {
+  "uid": "4df3e95d810e426abe8c66dc4500531f",
+  "name": "Fiat Stilo 2001-2010",
+  "verdict": "fail",
+  "reasons": [
+   "wheels broken - white featureless hub discs in the arches and a loose spoked wheel lying under the car"
+  ]
+ },
+ {
+  "uid": "14498133ecab471e8aaa9f1697ffe9c2",
+  "name": "Fiat Stilo 3-Door 2001-2010",
+  "verdict": "fail",
+  "reasons": [
+   "scene contains 2-3 overlapping duplicate copies of the car",
+   "also heavily modified (wing, Abarth kit, slammed)"
+  ]
+ },
+ {
+  "uid": "5cee82e79f86410e812191ab7e94405f",
+  "name": "Fiat Stilo 3-Door 2005",
+  "verdict": "fail",
+  "reasons": [
+   "tail-light clusters are open black voids into the body cavity",
+   "stray grey blocks stuck on roof and hanging below sill"
+  ]
+ },
+ {
+  "uid": "7aa69e45d0ff457ebb296d9357a6c227",
+  "name": "Fiat Stilo vintage italian car from the 90s",
+  "verdict": "fail",
+  "reasons": [
+   "one material over the whole car including glazing (cov=1.000) - windows read as pale translucent body panels",
+   "melted panel surfaces, headlights are ghost outlines"
+  ]
+ },
+ {
+  "uid": "6fe2143b1da94f0ca053e934b54ede51",
+  "name": "Fiat Tipo 1993-1995",
+  "verdict": "fail",
+  "reasons": [
+   "wheels are featureless white cylinders on one side, dark alloys on the other",
+   "large stray flat planes pass through the roof and sills",
+   "glazing renders as pale translucent panels"
+  ]
+ },
+ {
+  "uid": "f5e38b26c0af4ef2ab2f4c4b2e5aad5c",
+  "name": "fiat uno - Turbo ie 1995",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - all glazing opaque body-white, no glass",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "cf685e42e7b54f348f6d5c145f1175dc",
+  "name": "Fiat Uno 2001",
+  "verdict": "fail",
+  "reasons": [
+   "glazing renders opaque body-white with no transparency or interior - fails the glass ruling despite otherwise clean geometry and wheels"
+  ]
+ },
+ {
+  "uid": "94219efc91414384a969cffe8047a432",
+  "name": "Fiat uno car",
+  "verdict": "fail",
+  "reasons": [
+   "broken scene - huge stray flat planes and an exploded ladder/rack assembly dwarf the car, nothing frames as a vehicle"
+  ]
+ },
+ {
+  "uid": "36a3b33ef596443c9a780f3844f62fa1",
+  "name": "Fiat Uno Com Escada",
+  "verdict": "fail",
+  "reasons": [
+   "per-side wheel void - near-side wheels render as featureless black discs with no rim face, off-side wheels have full hubcaps"
+  ]
+ },
+ {
+  "uid": "2bb04f2e93aa46a38964628292f68e1d",
+  "name": "Fiat Uno Stl",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - opaque body-white glazing",
+   "cov=1.000",
+   "roof-rack/ladder accessory"
+  ]
+ },
+ {
+  "uid": "7801c20eba9b49eba06fb630d6fde766",
+  "name": "Fiat+ Uno_stls",
+  "verdict": "fail",
+  "reasons": [
+   "clay model (opaque body-white glazing, cov=1.000) AND rendered tilted/on its nose - rear34 shows the floorpan"
+  ]
+ },
+ {
+  "uid": "b5c2f8518125498d95488c6ded44d24a",
+  "name": "Fiat+palio+sw_stls",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - opaque body-white glazing, no glass",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "0cb0dfaedbc64efb8e4ec3a7add05c9c",
+  "name": "Fiat+punto+tdi",
+  "verdict": "fail",
+  "reasons": [
+   "front end unfinished - lower grille is a blank white panel with a black polygonal hole, fog lamps are white blobs, headlamp has no internal lens detail"
+  ]
+ },
+ {
+  "uid": "304377d861324563990457ecde49a95a",
+  "name": "Fiat_147",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - opaque body-white glazing",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "26bc5de50ca5412abb14f6c21d6a840c",
+  "name": "Fiat_uno_2001",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - glazing renders opaque body-white, no glass material",
+   "cov=1.000"
+  ]
+ },
+ {
+  "uid": "d9f4807850a34eb08ae635412dc5b3ea",
+  "name": "Hot Wheels fiat uno, high poly model",
+  "verdict": "fail",
+  "reasons": [
+   "rally livery build - sponsor decals (JEB'S, Mobil, CEAT, race number 8) and a TALBOT bonnet decal baked into the texture",
+   "cov=0.927 FULLCOV"
+  ]
+ },
+ {
+  "uid": "0bdbc342a0e24b28966c6a0b8a45fd08",
+  "name": "Fiat 600 Multipla Marinella 1957",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "rendered on its side - render-side inversion"
+  ]
+ },
+ {
+  "uid": "89b62919b8ff43cb90d276268891f46e",
+  "name": "Fiat Campagnola Station Wagon 1987",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "rendered on its side - two tiles show the chassis underside, one shows the roof"
+  ]
+ },
+ {
+  "uid": "d8fe5ed2f02a44018337167f9bbc1ca8",
+  "name": "2010 Fiat 500",
+  "verdict": "pass",
+  "reasons": [
+   "likely duplicate pair with 304eeeb32239473096581a34ea56a883 (Fiat 500 2010, 242 faces apart) - flag, do not auto-group"
+  ]
+ },
+ {
+  "uid": "4fd44f34848b40dc9fd15f465bf85355",
+  "name": "Fiat 124 Mk1 1966",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "9e2b5be51bea44db835bb1691253623b",
+  "name": "Fiat 124 Mk1 1972",
+  "verdict": "pass",
+  "reasons": [
+   "visually near-identical to 4fd44f34848b40dc9fd15f465bf85355 (Fiat 124 Mk1 1966) - possible duplicate pair, flag only"
+  ]
+ },
+ {
+  "uid": "8f51c52ca76c42f198da45a3e7cab8c0",
+  "name": "Fiat 125 Special 1970",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "657a8633964543a7a0517245c317572c",
+  "name": "Fiat 126",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "4c1e032b0de24f5b97455d7c7c3ddfc4",
+  "name": "Fiat 132",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "122e6e8a46a14e7c84a577a14cd05992",
+  "name": "Fiat 133",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "5d32df1aa9c24aa8950d7df93ea97e55",
+  "name": "Fiat 147 Spazio-TR",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "8fa72021840a46d181b1af3d459d2c94",
+  "name": "Fiat 2300 S coupe 1961",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "884014960e634060bbb47a505141b91f",
+  "name": "Fiat 500 (Mk1) Topolino",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "213cd126fcd744809fb7996eb88366f5",
+  "name": "Fiat 500 - 1970 Model",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "304eeeb32239473096581a34ea56a883",
+  "name": "Fiat 500 2010",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "cd1c1ee74bf345078484edb21d8aab89",
+  "name": "fiat 500 me the person",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "c388a49e5a7d4637930122bccf90570c",
+  "name": "Fiat 600 D 1960",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "1ef20016553841a293dc99ddad3c3241",
+  "name": "Fiat 600 T 1967",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "8d4b6f6483b64e05892c83e350a5409f",
+  "name": "FIAT 850",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "8ea03b3cbb9f439ea82a68ddbeb5f6ae",
+  "name": "Fiat 850 Spider",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "6d662a1d7afc40f7b027db84632ac8a1",
+  "name": "Fiat Abarth 695",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "3c55607e52bd47678ccc02a05134fc3d",
+  "name": "Fiat Barchetta 1995",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "340f01c616834cbda7f45c761cfb5e05",
+  "name": "Fiat Linea",
+  "verdict": "pass",
+  "reasons": [
+   "cov=0.913 FULLCOV - respray would repaint glass, needs recolour_audit before any colour swap"
+  ]
+ },
+ {
+  "uid": "3503e4b22af7448392c646c70fecce56",
+  "name": "Fiat Linea",
+  "verdict": "pass",
+  "reasons": [
+   "alloys share the body material and render body-white - a respray would repaint the wheels (cov=0.871)",
+   "lower-poly sibling of 340f01c616834cbda7f45c761cfb5e05"
+  ]
+ },
+ {
+  "uid": "0756a0766fdc4ff0b3bc5b3f5285fbed",
+  "name": "Fiat Panda",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "5f4f1ce29e884dd19c4eea5fb13606ae",
+  "name": "FIAT Panda 4x4",
+  "verdict": "pass",
+  "reasons": [
+   "light baked grime on the lower cladding and bumper",
+   "body panels and glazing are clean"
+  ]
+ },
+ {
+  "uid": "b31af925b47848dc89f281c4c80a744f",
+  "name": "Fiat Punto Abarth 2009",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "4e0ea80963ca476da24d420b0b944683",
+  "name": "Fiat Punto GLB",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "b13d897bf022434bb2cf78be9f9b2d17",
+  "name": "Fiat Regata Weekend 1984",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "8a10d49f817c4e758037fc36475945e8",
+  "name": "Fiat Siata 850 Spring 1968",
+  "verdict": "pass",
+  "reasons": [
+   "coachbuilt Siata body on Fiat 850 - quality is good but a UK reg will not decode to this, owner to decide scope"
+  ]
+ },
+ {
+  "uid": "60cad0f797264ee0a54d2d2f843a9946",
+  "name": "Fiat Tempra (159) 1990",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "d08a2c634d814a3194265a7a733b76e7",
+  "name": "Fiat Tipo / Egea",
+  "verdict": "pass",
+  "reasons": []
+ },
+ {
+  "uid": "c143b9a3fa794613968ceb7f3d413b8d",
+  "name": "Fiat Toro",
+  "verdict": "pass",
+  "reasons": [
+   "likely duplicate pair with 824ea9935afc44d0bbf23b911b4dc6f9 (Fiat_toro, 2 faces apart) - flag, do not auto-group"
+  ]
+ },
+ {
+  "uid": "8cd1e4c9a309496a94b5306ce1a0b0f9",
+  "name": "Fiat-X19",
+  "verdict": "pass",
+  "reasons": [
+   "aftermarket chequered side-stripe decals baked into the body texture"
+  ]
+ },
+ {
+  "uid": "6c643d284d144dcb8db46ab11285ec0b",
+  "name": "Fiat_147",
+  "verdict": "pass",
+  "reasons": [
+   "likely duplicate pair with 304377d861324563990457ecde49a95a (Fiat_147, 149 faces apart) - flag, do not auto-group"
+  ]
+ },
+ {
+  "uid": "b52eea677b32415e893e39c2fcb76163",
+  "name": "fiat_ducato_1989",
+  "verdict": "pass",
+  "reasons": [
+   "coachbuilt motorhome conversion on a Ducato chassis, not a car - owner to decide scope",
+   "panel detail is plain but clean"
+  ]
+ },
+ {
+  "uid": "824ea9935afc44d0bbf23b911b4dc6f9",
+  "name": "Fiat_toro",
+  "verdict": "pass",
+  "reasons": [
+   "likely duplicate pair with c143b9a3fa794613968ceb7f3d413b8d (Fiat Toro, 2 faces apart) - flag, do not auto-group"
+  ]
+ }
+]
