@@ -21,7 +21,7 @@ Usage:
     gpu_wave.py --manifest m.json [--stage staging/vwfull] [--sheets audit/vwfull]
                 [--limit N] [--parallel 6]
 """
-import argparse, base64, io, itertools, json, os, struct, sys, time
+import argparse, base64, datetime, io, itertools, json, os, struct, sys, time
 import urllib.error, urllib.parse, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
@@ -58,6 +58,9 @@ RATE_RETRIES = int(os.environ.get("WAVE_RATE_RETRIES", "3"))
 RATE_BACKOFF = int(os.environ.get("WAVE_RATE_BACKOFF", "60"))
 # Consecutive rows lost to throttling before the wave aborts (resumable).
 RATE_ABORT = int(os.environ.get("WAVE_RATE_ABORT", "5"))
+# Token-pool size, set in main(). Attempts below this only ROTATE (no sleep):
+# with per-account throttling, a fresh token succeeds immediately.
+NTOK = 1
 
 
 def log(*a):
@@ -136,6 +139,41 @@ def render_view(glb_url, az, colour, samples, w, h, audit=False):
             raise RuntimeError(str(d.get("error"))[:120])
         time.sleep(4)
     raise TimeoutError("render timed out")
+
+
+HARD_REJECTS = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            "HARD_REJECTS.json")
+
+
+def load_hard_rejects():
+    """uids that can NEVER succeed: over MAX_OBJ, or no GLB format offered.
+
+    Without this the wave re-downloads them on every rerun and throws them away
+    -- 30 rows on the live Nissan/Fiat/Citroen waves, 48-94MB each. Sketchfab
+    download quota is the scarce resource (it is what stalled the waves), so
+    spending it re-proving a known-permanent failure is the worst possible use
+    of it. Distinct from REJECTS.json, which is the OWNER'S review ledger.
+    Fails open: an unreadable cache just means nothing is skipped."""
+    try:
+        return {r["uid"]: r for r in json.load(open(HARD_REJECTS))}
+    except Exception:
+        return {}
+
+
+def add_hard_reject(uid, name, reason):
+    """Append-only. Re-read before write so concurrent waves don't clobber."""
+    try:
+        cur = load_hard_rejects()
+        if uid in cur:
+            return
+        cur[uid] = {"uid": uid, "name": (name or "")[:80], "reason": reason,
+                    "at": datetime.date.today().isoformat()}
+        tmp = HARD_REJECTS + ".tmp"
+        json.dump(sorted(cur.values(), key=lambda r: r["uid"]),
+                  open(tmp, "w"), indent=1, ensure_ascii=False)
+        os.replace(tmp, HARD_REJECTS)
+    except Exception as e:
+        log(f"hard-reject cache write failed ({type(e).__name__}) -- continuing")
 
 
 def fetch_glb(uid, staged, tok):
@@ -240,8 +278,14 @@ def main():
         rows = rows[:a.limit]
     done = {n.split("/")[-1] for n in sb_list(a.sheets + "/")}
     staged = {n.split("/")[-1] for n in sb_list(a.stage + "/")}
-    tok = itertools.cycle(os.environ.get("SKETCHFAB_TOKENS", "").split(","))
-    log(f"manifest {len(rows)} | already sheeted {len([r for r in rows if r['uid']+'.jpg' in done])}")
+    global NTOK
+    _toks = [t for t in os.environ.get("SKETCHFAB_TOKENS", "").split(",") if t.strip()]
+    NTOK = max(1, len(_toks))
+    tok = itertools.cycle(_toks)
+    hard = load_hard_rejects()
+    log(f"manifest {len(rows)} | already sheeted "
+        f"{len([r for r in rows if r['uid']+'.jpg' in done])} | "
+        f"hard-rejected {len([r for r in rows if r['uid'] in hard])}")
 
     built = 0
     rate_streak = 0            # consecutive RATE-DROPs -> circuit breaker
@@ -249,6 +293,8 @@ def main():
         uid = p["uid"]
         if f"{uid}.jpg" in done:
             continue
+        if uid in hard:
+            continue        # known-permanent: never spend download quota again
         # -- Phase 1: Sketchfab download. Throttling (429/403), network drops
         # and truncated bodies are all TRANSIENT here and retried with backoff
         # -- the old code dropped the car (429: after one blind 90s sleep;
@@ -269,9 +315,16 @@ def main():
             except urllib.error.HTTPError as e:
                 if e.code in (429, 403) and attempt < RATE_RETRIES:
                     ra = int((e.headers.get("Retry-After", 0) if e.headers else 0) or 0)
-                    wait = max(RATE_BACKOFF * (2 ** attempt), ra)
-                    log(f"[{i}/{len(rows)}] http-{e.code} retry {attempt+1}/{RATE_RETRIES} "
-                        f"in {wait}s  {p['name'][:36]}")
+                    # Each attempt rotates to the NEXT token, so while untried
+                    # tokens remain the fix is rotation, not waiting -- sleeping
+                    # here just burns wall-clock on an account that may be fine.
+                    # Only back off once a full cycle has been tried and every
+                    # account is genuinely throttled. (Retry-After still wins.)
+                    if attempt + 1 < NTOK and not ra:
+                        continue
+                    wait = max(RATE_BACKOFF * (2 ** max(0, attempt - NTOK + 1)), ra)
+                    log(f"[{i}/{len(rows)}] http-{e.code} all {NTOK} tokens throttled, "
+                        f"retry {attempt+1}/{RATE_RETRIES} in {wait}s  {p['name'][:30]}")
                     time.sleep(wait)
                     continue
                 # RATE-DROP is deliberately distinct from other failures so a
@@ -300,7 +353,15 @@ def main():
                         f"{attempt+1}/{RATE_RETRIES}  {p['name'][:36]}")
                     time.sleep(10)
                     continue
-                log(f"[{i}/{len(rows)}] fetch {str(e)[:60]}")
+                msg = str(e)
+                # "too big" and "no glb format offered" can never change on a
+                # rerun -- cache them so the download is never repeated.
+                if "too big" in msg or "no glb format" in msg:
+                    add_hard_reject(uid, p.get("name"), msg[:60])
+                    hard[uid] = True
+                    log(f"[{i}/{len(rows)}] HARD-REJECT {msg[:50]}  {p['name'][:34]}")
+                else:
+                    log(f"[{i}/{len(rows)}] fetch {msg[:60]}")
                 break
             except Exception as e:
                 log(f"[{i}/{len(rows)}] fetch {type(e).__name__}: {str(e)[:60]}")
