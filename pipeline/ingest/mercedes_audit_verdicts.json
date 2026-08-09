@@ -133,6 +133,20 @@
    "mats": 1,
    "verdict": "PASS",
    "note": "STOCK G63 AMG W464 -- the G-Class the two Brabus models could not be. Black multi-spoke wheels with red calipers consistent in all four views, Panamericana grille crisp, headlight internals sharp, shut lines defined, spare-wheel cover correct, premium reflections"
+  },
+  "baf6e4dff35a43febcc6d75c87caa013": {
+   "name": "Mercedes- Benz CLS 63S AMG",
+   "cov": 0.144,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "CLS 63S AMG C218; dark multi-spoke wheels consistent in all four views, grille crisp, headlight internals sharp, shut lines defined, panels clean. FLAG: the rear diffuser reads as a dark slab sitting proud of the bumper line -- plausible as the AMG black diffuser but worth a look before it ships"
+  },
+  "03d647d99f9348328391cd7b1394c7e2": {
+   "name": "2013 Mercedes-Benz ML250 Bluetec Executive",
+   "cov": 0.148,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "ML250 Bluetec W166; 5-spoke dark alloys consistent in all four views, grille crisp, headlight internals present, shut lines defined. Low-poly at 67k so surfaces are simple rather than soft, and a small spiky artefact sits at the rear roof rail"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage."
