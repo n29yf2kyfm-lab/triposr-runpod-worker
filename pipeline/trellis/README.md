@@ -1,3 +1,11 @@
+> **STATUS 2026-08-09: SHELVED.** Measured end to end on a 2011 Yaris from Toyota press
+> photos. The machine works and produces a recognisable, complete GLB, but melted panel
+> surfaces and absent shut lines survived every lever: RGBA cutout prep, view count,
+> 1536_cascade resolution, four seeds, and the Blender correction pass. Nothing from it
+> ships. See CLAUDE.md "Alam 3D / TRELLIS.2: measured ceiling" for the ablation table
+> and the deploy fix (max_num_tokens plumbing) that made full resolution runnable.
+> Reopen only for a camera-aware backend or a real component library.
+
 # TRELLIS.2 → Blender car pipeline
 
 Base-mesh generation with **TRELLIS.2-4B** (image-to-3D), then **Blender** as the

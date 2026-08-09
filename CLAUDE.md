@@ -476,6 +476,14 @@ them. process_candidate.py (symmetrise/corrective smooth/weighted normals, no co
 library, no panel refs) is visually a NO-OP on the melt. Every documented lever is now
 tried: input prep, view count, resolution, seed, correction. The melt survived all five.
 
+**SHELVED by owner decision 2026-08-09.** Nothing from this experiment ships. The seed-1
+mesh was the only candidate to produce headlamp internals and a door shut line, and it was
+still rejected: it would not survive the audit applied to sourced cars, and publishing it
+would undercut the standard the 100+ catalogue cars were held to. Do NOT reopen this by
+turning knobs -- all five documented levers are measured below. Reopen only for a materially
+different backend (camera-aware / labelled multi-view) or a real Blender component library,
+and re-measure against these sheets rather than against hope.
+
 **Conclusion: photos -> GLB is a GAP-FILLER tier, not a premium tier**, exactly as
 pipeline/trellis/README.md predicted. Shut lines and crisp panels need the Blender
 correction stage (symmetrise, weighted normals, component wheels/lights, manual shut-line
