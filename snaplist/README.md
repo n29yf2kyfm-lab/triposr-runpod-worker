@@ -91,8 +91,8 @@ cd api && .venv/bin/python -m pytest tests/ -q
 The publish path is a multi-call sequence whose requirements eBay only enforces
 at the last step, so the tests stand up a fake eBay and assert on the **actual
 requests sent** — that policies, location, `GTC` duration, a real condition
-enum, an image and a category are all present. That's verifiable without
-credentials; a live Sandbox run is not.
+enum, an image, a category and the category's required item specifics are all
+present. That's verifiable without credentials; a live Sandbox run is not.
 
 ---
 

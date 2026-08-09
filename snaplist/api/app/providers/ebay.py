@@ -118,6 +118,28 @@ async def _app_token(client: httpx.AsyncClient, s: Settings) -> str:
 
 
 # --- category -------------------------------------------------------------
+_tree_id_cache: dict[str, str] = {}
+
+
+async def _category_tree_id(client: httpx.AsyncClient, s: Settings) -> str:
+    """The marketplace's category tree id (EBAY_US is tree "0"). Works in Sandbox."""
+    cache_key = f"{s.ebay_env}:{s.ebay_marketplace_id}"
+    if cache_key in _tree_id_cache:
+        return _tree_id_cache[cache_key]
+
+    token = await _app_token(client, s)
+    res = await client.get(
+        f"{s.ebay_base}/commerce/taxonomy/v1/get_default_category_tree_id",
+        params={"marketplace_id": s.ebay_marketplace_id},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    if res.status_code >= 400:
+        raise _fail("Category tree lookup", res)
+    tree_id = str(res.json().get("categoryTreeId", ""))
+    _tree_id_cache[cache_key] = tree_id
+    return tree_id
+
+
 async def resolve_category(client: httpx.AsyncClient, s: Settings, title: str) -> str:
     """
     Resolve a leaf category from the listing title.
@@ -130,22 +152,12 @@ async def resolve_category(client: httpx.AsyncClient, s: Settings, title: str) -
         return s.ebay_fallback_category_id
 
     try:
-        token = await _app_token(client, s)
-        head = {"Authorization": f"Bearer {token}"}
-        tree = await client.get(
-            f"{s.ebay_base}/commerce/taxonomy/v1/get_default_category_tree_id",
-            params={"marketplace_id": s.ebay_marketplace_id},
-            headers=head,
-        )
-        if tree.status_code >= 400:
-            return s.ebay_fallback_category_id
-        tree_id = tree.json().get("categoryTreeId", "")
-
+        tree_id = await _category_tree_id(client, s)
         sug = await client.get(
             f"{s.ebay_base}/commerce/taxonomy/v1/category_tree/{tree_id}"
             "/get_category_suggestions",
             params={"q": title},
-            headers=head,
+            headers={"Authorization": f"Bearer {await _app_token(client, s)}"},
         )
         # A 204 (no content) is a documented possibility, not an error.
         if sug.status_code == 204 or sug.status_code >= 400:
@@ -158,6 +170,110 @@ async def resolve_category(client: httpx.AsyncClient, s: Settings, title: str) -
         )
     except (httpx.HTTPError, PublishError, ValueError):
         return s.ebay_fallback_category_id
+
+
+# --- required item specifics (aspects) ------------------------------------
+# Taxonomy is capped at 5,000 calls/day for the whole application, so aspect
+# metadata is cached. eBay's guidance is to invalidate on `categoryTreeVersion`
+# (available from getCategoryTree) rather than on a timer; for a single process
+# this in-memory cache keyed by category is enough.
+_aspect_cache: dict[str, list[dict]] = {}
+
+
+async def fetch_category_aspects(
+    client: httpx.AsyncClient, s: Settings, category_id: str
+) -> list[dict] | None:
+    """
+    Aspect metadata for a leaf category, or None if it could not be fetched.
+
+    None means "could not check" — the caller must not treat that as "nothing is
+    required", because Sandbox support for this call is not documented and an
+    unverifiable dependency should never block an otherwise valid publish.
+    """
+    cache_key = f"{s.ebay_env}:{s.ebay_marketplace_id}:{category_id}"
+    if cache_key in _aspect_cache:
+        return _aspect_cache[cache_key]
+
+    try:
+        tree_id = await _category_tree_id(client, s)
+        res = await client.get(
+            f"{s.ebay_base}/commerce/taxonomy/v1/category_tree/{tree_id}"
+            "/get_item_aspects_for_category",
+            params={"category_id": category_id},
+            headers={"Authorization": f"Bearer {await _app_token(client, s)}"},
+        )
+        if res.status_code >= 400:
+            return None
+        aspects = res.json().get("aspects") or []
+        _aspect_cache[cache_key] = aspects
+        return aspects
+    except (httpx.HTTPError, PublishError, ValueError):
+        return None
+
+
+def required_aspect_names(aspects: list[dict]) -> list[str]:
+    """
+    The aspects eBay will block a publish for.
+
+    Only `aspectConstraint.aspectRequired` counts. `aspectUsage` is NOT a
+    requiredness signal — eBay returns RECOMMENDED for required aspects too, so
+    branching on it would both over- and under-report.
+    """
+    names = []
+    for aspect in aspects:
+        constraint = aspect.get("aspectConstraint") or {}
+        if constraint.get("aspectRequired") is True:
+            name = aspect.get("localizedAspectName") or ""
+            if name:
+                names.append(name)
+    return names
+
+
+def _allowed_values(aspect: dict, limit: int = 4) -> list[str]:
+    """A few valid values, for aspects eBay only accepts from a fixed list."""
+    if (aspect.get("aspectConstraint") or {}).get("aspectMode") != "SELECTION_ONLY":
+        return []
+    values = [
+        v.get("localizedValue", "")
+        for v in (aspect.get("aspectValues") or [])
+        if v.get("localizedValue")
+    ]
+    return values[:limit]
+
+
+def check_required_aspects(aspects: list[dict], listing: Listing) -> str:
+    """
+    Return an empty string if the listing satisfies the category's required
+    aspects, otherwise a message naming what is missing.
+
+    Validating here rather than letting eBay reject the publish is deliberate:
+    eBay's failure for this is error 25002, which is overloaded across missing
+    location, missing photos and policy problems, so its message is a poor guide
+    to what actually went wrong.
+    """
+    have = {
+        sp.name.strip().lower() for sp in listing.item_specifics if sp.value.strip()
+    }
+    missing = [
+        aspect
+        for aspect in aspects
+        if (aspect.get("aspectConstraint") or {}).get("aspectRequired") is True
+        and (aspect.get("localizedAspectName") or "").strip().lower() not in have
+    ]
+    if not missing:
+        return ""
+
+    parts = []
+    for aspect in missing:
+        name = aspect.get("localizedAspectName", "")
+        options = _allowed_values(aspect)
+        parts.append(f"{name} (e.g. {', '.join(options)})" if options else name)
+
+    return (
+        "Cannot publish: eBay requires these item specifics for this category — "
+        + "; ".join(parts)
+        + ". Add them to the listing and try again."
+    )
 
 
 # --- inventory location ---------------------------------------------------
@@ -329,6 +445,15 @@ async def publish(
                     "category ID. Sandbox does not support category suggestions, "
                     "so set EBAY_FALLBACK_CATEGORY_ID to test there."
                 )
+
+            # Validate item specifics before sending anything. eBay only
+            # enforces category-required aspects at publish time, and reports
+            # the failure through an overloaded generic error.
+            aspects_meta = await fetch_category_aspects(client, s, category_id)
+            if aspects_meta is not None:
+                problem = check_required_aspects(aspects_meta, listing)
+                if problem:
+                    raise PublishError(problem)
 
             image_url = await _image_url(
                 client, s, image_bytes, image_media_type, fallback_image_url

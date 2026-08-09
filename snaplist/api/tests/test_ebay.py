@@ -57,11 +57,21 @@ def live_settings(monkeypatch: pytest.MonkeyPatch) -> config.Settings:
 class FakeEbay:
     """Records requests and answers with realistic eBay responses."""
 
-    def __init__(self, *, has_location=True, policies=True, media_ok=True):
+    def __init__(
+        self,
+        *,
+        has_location=True,
+        policies=True,
+        media_ok=True,
+        aspects=None,
+        aspects_ok=True,
+    ):
         self.requests: list[httpx.Request] = []
         self.has_location = has_location
         self.policies = policies
         self.media_ok = media_ok
+        self.aspects = aspects if aspects is not None else []
+        self.aspects_ok = aspects_ok
 
     def handler(self, request: httpx.Request) -> httpx.Response:
         self.requests.append(request)
@@ -69,6 +79,14 @@ class FakeEbay:
 
         if path.endswith("/identity/v1/oauth2/token"):
             return httpx.Response(200, json={"access_token": "apptok", "expires_in": 7200})
+
+        if path.endswith("/get_default_category_tree_id"):
+            return httpx.Response(200, json={"categoryTreeId": "0"})
+
+        if path.endswith("/get_item_aspects_for_category"):
+            if not self.aspects_ok:
+                return httpx.Response(500, text="aspects unavailable")
+            return httpx.Response(200, json={"aspects": self.aspects})
 
         if "/sell/inventory/v1/location/" in path:
             if request.method == "GET":
@@ -298,9 +316,123 @@ async def test_no_category_in_sandbox_without_fallback_is_refused(
 
 
 @pytest.mark.anyio
-async def test_sandbox_skips_taxonomy_because_it_returns_boilerplate(
+async def test_sandbox_skips_category_suggestions_which_return_boilerplate(
     live_settings, patched_client
 ) -> None:
     fake = patched_client(FakeEbay())
     await ebay.publish(_listing(), _pricing(), image_bytes=b"x")
-    assert not any("taxonomy" in p for p in fake.paths())
+    assert not any("get_category_suggestions" in p for p in fake.paths())
+
+
+# --- required item specifics (aspects) ------------------------------------
+
+
+def _aspect(name: str, *, required: bool, usage="RECOMMENDED", values=None, mode=None):
+    constraint: dict = {"aspectRequired": required, "aspectUsage": usage}
+    if mode:
+        constraint["aspectMode"] = mode
+    return {
+        "localizedAspectName": name,
+        "aspectConstraint": constraint,
+        "aspectValues": [{"localizedValue": v} for v in (values or [])],
+    }
+
+
+def test_required_aspects_ignores_aspect_usage() -> None:
+    """
+    eBay returns aspectUsage=RECOMMENDED for *required* aspects too, so
+    requiredness must come only from aspectConstraint.aspectRequired.
+    """
+    aspects = [
+        _aspect("Brand", required=True, usage="RECOMMENDED"),
+        _aspect("Colour", required=False, usage="RECOMMENDED"),
+        _aspect("Pattern", required=False, usage="OPTIONAL"),
+    ]
+    assert ebay.required_aspect_names(aspects) == ["Brand"]
+
+
+def test_check_required_aspects_passes_when_all_present() -> None:
+    aspects = [_aspect("Brand", required=True), _aspect("Type", required=True)]
+    listing = Listing(
+        title="t",
+        description_html="d",
+        item_specifics=[
+            ItemSpecific(name="Brand", value="Sony"),
+            # Match should be case-insensitive.
+            ItemSpecific(name="type", value="Over-Ear"),
+        ],
+    )
+    assert ebay.check_required_aspects(aspects, listing) == ""
+
+
+def test_check_required_aspects_names_what_is_missing() -> None:
+    aspects = [
+        _aspect("Brand", required=True),
+        _aspect("Type", required=True, mode="SELECTION_ONLY", values=["Over-Ear", "In-Ear"]),
+        _aspect("Colour", required=False),
+    ]
+    listing = Listing(
+        title="t",
+        description_html="d",
+        item_specifics=[ItemSpecific(name="Brand", value="Sony")],
+    )
+    msg = ebay.check_required_aspects(aspects, listing)
+    assert "Type" in msg
+    # Fixed-list aspects should suggest valid values.
+    assert "Over-Ear" in msg
+    # Satisfied and optional aspects must not be reported.
+    assert "Brand" not in msg
+    assert "Colour" not in msg
+
+
+def test_blank_specific_value_does_not_satisfy_a_required_aspect() -> None:
+    aspects = [_aspect("Brand", required=True)]
+    listing = Listing(
+        title="t",
+        description_html="d",
+        item_specifics=[ItemSpecific(name="Brand", value="   ")],
+    )
+    assert "Brand" in ebay.check_required_aspects(aspects, listing)
+
+
+@pytest.mark.anyio
+async def test_publish_refused_when_a_required_aspect_is_missing(
+    live_settings, patched_client
+) -> None:
+    fake = patched_client(
+        FakeEbay(aspects=[_aspect("Brand", required=True), _aspect("Type", required=True)])
+    )
+    result = await ebay.publish(_listing(), _pricing(), image_bytes=b"x")
+    assert result.status == "error"
+    assert "Type" in result.message
+    # Refused before touching the listing endpoints.
+    assert not any("inventory_item" in p for p in fake.paths())
+
+
+@pytest.mark.anyio
+async def test_unavailable_aspect_metadata_does_not_block_publish(
+    live_settings, patched_client
+) -> None:
+    """
+    Sandbox support for the aspects call is undocumented. A failure there means
+    "could not check", which must not be read as "nothing is required".
+    """
+    fake = patched_client(FakeEbay(aspects_ok=False))
+    result = await ebay.publish(_listing(), _pricing(), image_bytes=b"x")
+    assert result.status == "published", result.message
+
+
+@pytest.mark.anyio
+async def test_aspect_metadata_is_cached_across_publishes(
+    live_settings, patched_client
+) -> None:
+    """Taxonomy is capped at 5,000 calls/day for the whole app, so cache."""
+    ebay._aspect_cache.clear()
+    ebay._tree_id_cache.clear()
+    fake = patched_client(FakeEbay(aspects=[_aspect("Brand", required=True)]))
+
+    for _ in range(3):
+        await ebay.publish(_listing(), _pricing(), image_bytes=b"x")
+
+    calls = [p for p in fake.paths() if "get_item_aspects_for_category" in p]
+    assert len(calls) == 1, f"expected 1 aspects call, got {len(calls)}"
