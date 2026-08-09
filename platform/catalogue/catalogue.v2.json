@@ -197314,5 +197314,857 @@
    ]
   },
   "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-hr-v-2025-hw1-v1",
+  "make": "honda",
+  "model": "hr-v",
+  "modelFamily": "honda hr-v",
+  "modelAliases": [
+   "hr-v"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2025,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "d2c35fc6af904aa8a3a138ca21275b2a",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "2022_Honda_HR-V_eHEV_Platinum_White_Pearl",
+   "2022_Honda_HR-V_eHEV_UnderCarrier"
+  ],
+  "glassMaterialNames": [
+   "2022_Honda_HR-V_eHEV_Windows",
+   "2022_Honda_HR-V_eHEV_WindowsTrims1",
+   "2022_Honda_HR-V_eHEV_BrakeLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-hr-v-2025-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-hr-v-2025-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 45102536,
+  "mobileFileSizeBytes": 45102536,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "57b225fec72cef40d7219975b6b59b7c9c2889957e8ca1563ca2e572b54330ec",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-beat-1991-hw1-v1",
+  "make": "honda",
+  "model": "beat",
+  "modelFamily": "honda beat",
+  "modelAliases": [
+   "beat"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1991,
+  "yearEnd": null,
+  "bodyStyle": "convertible",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "1c1d92ac8ae24ee5ba0e89a10c4fa595",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-beat-1991-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-beat-1991-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 35006076,
+  "mobileFileSizeBytes": 35006076,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "49ddc3f7a28633e775e1467c9bf2c111950cabb39c969fdafea381acb1185027",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-cr-z-2011-hw1-v1",
+  "make": "honda",
+  "model": "cr-z",
+  "modelFamily": "honda cr-z",
+  "modelAliases": [
+   "cr-z"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2011,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "d5af69ef34834f43a65b4aac78ca8929",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "greenglass",
+   "clearglass",
+   "darkglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-z-2011-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-z-2011-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 31529424,
+  "mobileFileSizeBytes": 31529424,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "5cd132c2e0c1424a7fb27bc7b3eecccd8dc778559c788d94a6c271ab5a753c26",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-accord-2021-hw1-v1",
+  "make": "honda",
+  "model": "accord",
+  "modelFamily": "honda accord",
+  "modelAliases": [
+   "accord"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "f973338c77ce4618b941612241d53f6a",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "paint"
+  ],
+  "glassMaterialNames": [
+   "glass",
+   "int_glass",
+   "red_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2021-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2021-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 40059996,
+  "mobileFileSizeBytes": 40059996,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "02430eff58350ce11965cc9a5656ef4c84b78c123c5a6980b4991de01c684e43",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-s660-2015-hw1-v1",
+  "make": "honda",
+  "model": "s660",
+  "modelFamily": "honda s660",
+  "modelAliases": [
+   "s660"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2015,
+  "yearEnd": null,
+  "bodyStyle": "convertible",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "4e3e9bd888fb4ec69f71cc487f33f4ba",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-s660-2015-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-s660-2015-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 29177936,
+  "mobileFileSizeBytes": 29177936,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "588500187c4867aa646cb632a682cf6d33a34af78a6020e75efee77d59780447",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "honda-odyssey-2011-hw1-v1",
+  "make": "honda",
+  "model": "odyssey",
+  "modelFamily": "honda odyssey",
+  "modelAliases": [
+   "odyssey"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2011,
+  "yearEnd": null,
+  "bodyStyle": "mpv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "db80634b538c40569bc77ebf829bac19",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-2011-hw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-2011-hw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 26471996,
+  "mobileFileSizeBytes": 26471996,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "31735f3d5fe5115b77e3321614f61fcc647b61dc51ffe664ccc982e790725b49",
+  "pipelineVersion": "publish-batch-hw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Sonic Grey Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Sonic Grey Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Meteoroid Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Meteoroid Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Crystal Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Premium Crystal Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Premium Crystal Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Racing Blue Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Racing Blue Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Championship White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Championship White",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
