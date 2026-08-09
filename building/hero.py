@@ -162,20 +162,36 @@ def structural_match(before_path, after_path):
 
 
 def restyle(render_path, model, work_dir, key, time_of_day="day",
-            out_name="hero.png"):
+            out_name="hero.png", reference_photo=None):
     """One geometry-locked restyle. Returns (path, correlation).
 
     Raises HeroError if the model gives nothing back. A picture that comes
     back CHANGED is not an error here — it is returned with its score so the
     caller can decide, because the caller is the one that knows whether it
     has a correct render to fall back on.
+
+    reference_photo: an actual photo of THIS building. With it, the restyle
+    is told to copy the real materials — the brick it actually has, the bay
+    cladding it actually has — instead of inventing plausible ones.
     """
     with open(render_path, "rb") as f:
         b64 = base64.b64encode(f.read()).decode()
-    body = {"contents": [{"parts": [
-        {"inline_data": {"mime_type": "image/png", "data": b64}},
-        {"text": _prompt(model, time_of_day)}]}],
-        "generationConfig": {"responseModalities": ["IMAGE"]}}
+    parts = [{"inline_data": {"mime_type": "image/png", "data": b64}}]
+    prompt = _prompt(model, time_of_day)
+    if reference_photo and os.path.exists(reference_photo):
+        with open(reference_photo, "rb") as f:
+            rb64 = base64.b64encode(f.read()).decode()
+        parts.append({"inline_data": {"mime_type": "image/jpeg",
+                                      "data": rb64}})
+        prompt += (
+            " The second image is a real photograph of this exact building:"
+            " match its actual materials — brick colour and weathering,"
+            " window frames, bay finish, roof tone — rather than inventing"
+            " generic ones. The first image's geometry stays exactly as it"
+            " is.")
+    parts.append({"text": prompt})
+    body = {"contents": [{"parts": parts}],
+            "generationConfig": {"responseModalities": ["IMAGE"]}}
 
     r = _requests().post(GEMINI_API, params={"key": key}, json=body,
                          timeout=180)
