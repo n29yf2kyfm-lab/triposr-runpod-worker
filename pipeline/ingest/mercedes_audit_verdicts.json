@@ -175,7 +175,22 @@
    "mats": 1,
    "verdict": "PASS",
    "note": "CLK 55 AMG C209; AMG 5-spoke wheels consistent in all four views, twin-oval headlight internals crisp, star grille sharp, shut lines defined, panels clean, premium reflections"
+  },
+  "148cb0c6b73d49c88306151683185181": {
+   "name": "2023 Mercedes-Benz EQS 450+",
+   "cov": 0.158,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "crumpled front end -- the bonnet leading edge and headlight surround are torn and mangled, clearly visible in the one view that shows the front. Wheels, flanks and shut lines are otherwise clean"
+  },
+  "ed603ac915a1494f969ed0025ba9d7d0": {
+   "name": "Mercedes- Benz E-class S212 Binz Xtend",
+   "cov": 0.158,
+   "mats": 2,
+   "verdict": "FAIL",
+   "note": "out of scope -- Binz Xtend coachbuilt long-wheelbase conversion (ambulance/hearse body), not a standard E-Class estate. Build quality is good: wheels consistent, grille crisp, shut lines defined. HUMSTER3D plate. A reg decodes to a standard E-Class, not this"
   }
  },
- "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage."
+ "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
+ "_neardup_falsepositive": "CONFIRMED as predicted: the 0.5%-plus-nameplate near-dup rule paired the S212 Binz Xtend (887,678f) with a W123 coupe (883,994f). They are completely different vehicles -- a coachbuilt stretch and a 1970s coupe -- so face proximity alone is not identity. The rule flags CANDIDATES for the eye; it must never auto-group. Two of four flagged pairs were real duplicates (GL350, SLS Electric), this one is a false positive, and the C124/W124 pair remains to check."
 }
