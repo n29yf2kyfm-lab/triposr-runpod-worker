@@ -190567,5 +190567,303 @@
    "method": "render",
    "at": "2026-08-09"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-508-2021-pw1-v1",
+  "make": "peugeot",
+  "model": "508",
+  "modelFamily": "peugeot 508",
+  "modelAliases": [
+   "508"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "1770104e89f84a8f9ce4a0fd9ae131ac",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "2021_Peugeot_508_PSE_CarPaint"
+  ],
+  "glassMaterialNames": [
+   "2021_Peugeot_508_PSE_Windows",
+   "2021_Peugeot_508_PSE_WindowsTrim",
+   "2021_Peugeot_508_PSE_HeadLightsGlass",
+   "2021_Peugeot_508_PSE_BrakeLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-508-2021-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-508-2021-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 35434584,
+  "mobileFileSizeBytes": 35434584,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "478f9e62e8f781fb758062da02366c0cb2f65fee682aec3002ca68c325798805",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-307-pw1-v1",
+  "make": "peugeot",
+  "model": "307",
+  "modelFamily": "peugeot 307",
+  "modelAliases": [
+   "307"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "3bf90277b3594803b4206efe764038ad",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura"
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidros_Vermelhos"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-307-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-307-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 33563956,
+  "mobileFileSizeBytes": 33563956,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "4e0b7f8d0a0acded632db5d7afa47b70c7a907a5f5bee1ba61c430f2de67d43c",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
