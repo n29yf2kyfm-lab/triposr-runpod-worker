@@ -480,12 +480,12 @@
   "note": "Pixel-identical to 4df76c19 apart from the header text (238,189 vs 238,188 faces). Same EK9, same wheels, same framing. Kept 4df76c19 for the cleaner title."
  },
  "4df76c1974cd4173a7a941bfec7714ab": {
-  "verdict": "PASS",
+  "verdict": "FAIL",
   "model_slug": "civic",
   "year": null,
   "body_style": "hatchback",
   "gap": false,
-  "note": "EK9 Civic Type R - factory performance variant, in scope. Transparent glazing, black six-spokes consistent across views, headlamp internals present, TYPE R side decal and shut lines crisp. Stamp decides colours."
+  "note": "DEMOTED from PASS on owner challenge 2026-08-09, confirmed at zoom: the audit claimed 'headlamp internals present' but the headlights are smoked black voids with NO internal elements -- a direct rubric fail. Smoked tail panels, TE37-style aftermarket wheels, lip kit and side decals make this a modified build, not the factory EK9. Its 1-face-apart duplicate 1f0d3d47 falls with it."
  },
  "0669147fb3ba4cca95ea942add743b2b": {
   "verdict": "PASS",
@@ -536,12 +536,12 @@
   "note": "Out of scope: an otherwise stock 3rd-gen Civic Si fitted with a large aftermarket GT wing on stanchions and a mesh front splitter. Aftermarket aero, not a factory car."
  },
  "f397c4664a104feaae1d348e368e3f3d": {
-  "verdict": "PASS",
+  "verdict": "FAIL",
   "model_slug": "civic",
   "year": 2006,
   "body_style": "coupe",
   "gap": false,
-  "note": "8th-gen US Civic coupe. Glazing transparent, wheel covers consistent on all four corners, headlamp internals present, shut lines visible. Surfacing is slightly softer than the top tier - mid-ranked. Stamp decides colours."
+  "note": "DEMOTED from PASS on owner challenge 2026-08-09, confirmed at zoom: panel crumpling fixed to the door and rear quarter across views, a baked text strip with red symbols across the top of the REAR GLASS, and baked US plates. The audit note undersold dents as 'softer surfacing'."
  },
  "becb3a29bce245198a6fa5f2be6576a7": {
   "verdict": "FAIL",
