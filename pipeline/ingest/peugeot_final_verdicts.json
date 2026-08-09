@@ -1,0 +1,682 @@
+{
+ "04948327a1f04e67b92b926a4594955e": {
+  "verdict": "FAIL",
+  "model_slug": "408",
+  "year": null,
+  "body_style": null,
+  "gap": false,
+  "note": "Upheld: not a car - 408 interior display blank/trim part."
+ },
+ "10c1b6a67d1c4b69b729b5f65600a290": {
+  "verdict": "FAIL",
+  "model_slug": "206",
+  "year": null,
+  "body_style": null,
+  "gap": false,
+  "note": "Upheld: photogrammetry scan (melted panels, ragged window holes, baked lighting)."
+ },
+ "145bf835e79d482280c942b76edf1503": {
+  "verdict": "FAIL",
+  "model_slug": "boxer",
+  "year": null,
+  "body_style": "van",
+  "gap": false,
+  "note": "Re-opened under corrected wheel test: genuine ABSENCE, not darkness - front arches are empty cavities, rear arch empty in side view. FAIL stands."
+ },
+ "14890eb908f8499bab83f20bbbbf024d": {
+  "verdict": "FAIL",
+  "model_slug": "307",
+  "year": null,
+  "body_style": null,
+  "gap": false,
+  "note": "Upheld: not a car - 307 sun-visor clips (part)."
+ },
+ "13f1ac1713874190913eaf31878220b9": {
+  "verdict": "FAIL",
+  "model_slug": "405",
+  "year": 1990,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "DEMOTED from PASS-SINGLE by owner ruling 2026-08-09 (glazing must read as glass): 1990 405 clay — windows render opaque body-colour in all views; no glass anywhere"
+ },
+ "1770104e89f84a8f9ce4a0fd9ae131ac": {
+  "verdict": "PASS",
+  "model_slug": "508",
+  "year": 2021,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "Verified: 508 PSE reads instantly, PSE green accents, black alloys show spokes in all four views. mats=1 cov=0.278 - stamp decides colours."
+ },
+ "1d278036c89d489bb47ccd33b0effa21": {
+  "verdict": "FAIL",
+  "model_slug": "206",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "DEMOTED from PASS by owner ruling 2026-08-09 (glazing must read as glass): 206 GLB — windows opaque/milky body-colour in all four views AND tyres render white; reads as a paint-shell, not a finished car"
+ },
+ "29dbad44a23f40e2bafa78335bb96c42": {
+  "verdict": "FAIL",
+  "model_slug": "406",
+  "year": null,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "Re-opened under corrected wheel test: rim faces genuinely ABSENT - empty arches with black stub axles, detached mirror/headlight floating. FAIL stands."
+ },
+ "2a41b3b90a2f464192787d7a5567c04b": {
+  "verdict": "DUPLICATE",
+  "model_slug": "206",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Upheld: pixel-identical to 1d278036 (mean diff 0.10/255). Keep 1d278036."
+ },
+ "2ac96482c96f4416a8523e8768c01bcc": {
+  "verdict": "FAIL",
+  "model_slug": "308",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Upheld: exploded - detached red/white shells, empty arches."
+ },
+ "2bf330a3c92c4b89959fe1fbb1b197d9": {
+  "verdict": "FAIL",
+  "model_slug": "504",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "Re-opened: confirmed beater texture - red primer doors both sides, baked dirt, speckled blobby glass. Not premium. FAIL stands."
+ },
+ "38b22adb86194c6ea78e0d436347f530": {
+  "verdict": "FAIL",
+  "model_slug": "206",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Re-opened under corrected wheel test: genuine absence - three corners are bare disc plates, one loose wheel under the car. FAIL stands."
+ },
+ "3bf90277b3594803b4206efe764038ad": {
+  "verdict": "PASS",
+  "model_slug": "307",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Verified: 307 5-door facelift, chrome lion grille, dark alloys show spokes in all views. mats=1 cov=0.223 - stamp decides colours. Title year '2008' ambiguous (nameplate collision) - left null. Kept twin; ee4cb0be is the same car re-uploaded."
+ },
+ "3d849c22f2914013a183484a57fa71ba": {
+  "verdict": "FAIL",
+  "model_slug": "207",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Upheld: jagged open holes in rear quarter and door glass."
+ },
+ "3e5e14fdb1f94f25a5b572caf518f55d": {
+  "verdict": "PASS",
+  "model_slug": "3008",
+  "year": null,
+  "body_style": "suv",
+  "gap": false,
+  "note": "OVERTURNED PASS-SINGLE -> PASS by corrected rule: mats=1, cov=0.116, geometry excellent (sharp checkerboard grille, claw lights, detailed alloys). Coverage does not decide colour capability - stamp decides colours."
+ },
+ "3f21205aaeca44f2871e027e331b68d7": {
+  "verdict": "FAIL",
+  "model_slug": "207",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Re-opened: confirmed lumpy wavy surfacing, knobbly crude tyres, faceted arches. FAIL stands."
+ },
+ "4adec16209e149a99a135f5de6cfbb21": {
+  "verdict": "FAIL",
+  "model_slug": "3008",
+  "year": null,
+  "body_style": "suv",
+  "gap": false,
+  "note": "Re-opened: confirmed - mats=0, whole car renders as dark glass with transparent crystalline front clip/bumpers. FAIL stands."
+ },
+ "4b55488b331041c299955a937334113b": {
+  "verdict": "PASS",
+  "model_slug": "406",
+  "year": 1998,
+  "body_style": "saloon",
+  "gap": true,
+  "note": "Verified: tidy 406 saloon, 8-hole alloys read in all views. mats=1 cov=0.256 - stamp decides colours. Kept twin; a45880cd is the same mesh (faces 0.006% apart, visually identical)."
+ },
+ "513b76a9909049f49327c0b83bc5b56b": {
+  "verdict": "PASS",
+  "model_slug": "206",
+  "year": 2000,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Verified: instantly-right 206, ten-spoke wheels read everywhere. mats=1 cov=0.206 - stamp decides colours."
+ },
+ "52deb999ad964d2496c9fd25ee84c2d4": {
+  "verdict": "PASS",
+  "model_slug": "206",
+  "year": 2003,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Verified: 206 GTI (OEM performance - ships), dark multi-spokes read in all four views. mats=1 cov=0.283 - stamp decides colours."
+ },
+ "5b4320516ec040a3b1757a764d03dfef": {
+  "verdict": "FAIL",
+  "model_slug": "404",
+  "year": null,
+  "body_style": "estate",
+  "gap": false,
+  "note": "Upheld: bare bodyshell - no wheels, glass, lights; front clip missing."
+ },
+ "5ea1dc5ca942481fa8c4b29928dcd62b": {
+  "verdict": "FAIL",
+  "model_slug": "206",
+  "year": 2003,
+  "body_style": "convertible",
+  "gap": false,
+  "note": "Re-opened under corrected wheel test: this is genuine broken geometry, not lighting - flat black plates spear to the ground beside thin-tyred rims at every corner in all views. FAIL stands."
+ },
+ "5f20d145122342f3850d608dbed3aee7": {
+  "verdict": "FAIL",
+  "model_slug": "407",
+  "year": null,
+  "body_style": "estate",
+  "gap": false,
+  "note": "Re-opened: confirmed baked grime on bonnet/wing, black unpainted tailgate patch, mismatched panels. FAIL stands."
+ },
+ "cc25e4d5a33a402e81ab764be6a0f61e": {
+  "verdict": "PASS",
+  "model_slug": "504",
+  "year": 1968,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "NEW: clean classic 504, chrome bumpers, hubcap steels read in all views. mats=4 cov=0.184."
+ },
+ "b0dbc2e209d545f9a2becdf9a7ab43ef": {
+  "verdict": "PASS",
+  "model_slug": "205",
+  "year": 1997,
+  "body_style": "hatchback",
+  "gap": true,
+  "note": "NEW: honest 205 3-door, steel wheels with hub detail everywhere. mats=1 cov=0.288 - stamp decides colours. Kept twin of near-dup pair with e1f8335a (same mesh, no GTI trim visible on either)."
+ },
+ "e1f8335a73a9442eb06ff8624718ac76": {
+  "verdict": "DUPLICATE",
+  "model_slug": "205",
+  "year": 1997,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: near-dup CONFIRMED by eye - same mesh/sheet as b0dbc2e2 (faces 0.04% apart). Title claims GTI but no GTI trim visible. Keep b0dbc2e2."
+ },
+ "deaac3bd68604aee8f8365d784f8ab34": {
+  "verdict": "PASS",
+  "model_slug": "407",
+  "year": 2005,
+  "body_style": "saloon",
+  "gap": true,
+  "note": "NEW: clean 407 saloon, spoked alloys read in all views. mats=2 cov=0.288. Kept twin of near-dup pair with f88cfe1c."
+ },
+ "f88cfe1c126e46b39622c065cbb8b5e1": {
+  "verdict": "DUPLICATE",
+  "model_slug": "407",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "NEW: near-dup CONFIRMED by eye - same 407 mesh as deaac3bd with added red pinstripe decal and towbar. Keep the cleaner deaac3bd."
+ },
+ "ace2f94c457348d79680f2d055f99f28": {
+  "verdict": "FAIL",
+  "model_slug": "307",
+  "year": 2007,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: 307 STC rally car - huge wing, camo livery, race aero. Out of scope (race/rally)."
+ },
+ "a83ba17044e44a879cfceb3278d02779": {
+  "verdict": "FAIL",
+  "model_slug": "207",
+  "year": 2010,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: corrected wheel test applied with zoom - wheels are blank smooth discs with a centre nub, no spokes/lugs/tyre in ANY view (genuine, not lighting). mats=0 as well."
+ },
+ "6291b66452614464889a71c8337b8c85": {
+  "verdict": "PASS",
+  "model_slug": "2008",
+  "year": 2018,
+  "body_style": "suv",
+  "gap": false,
+  "note": "NEW: clean 2008 MK1 facelift, detailed alloys, roof rails. mats=1 cov=0.145 - stamp decides colours."
+ },
+ "0edcda285432434a8d127b44ad6da808": {
+  "verdict": "PASS",
+  "model_slug": "2008",
+  "year": 2020,
+  "body_style": "suv",
+  "gap": false,
+  "note": "NEW: 2008 MK2, good overall; slight low-poly faceting around grille edge. mats=5 cov=0.777. NOT a duplicate of caa406e3 (that file is a different vehicle entirely)."
+ },
+ "caa406e37dc24b7c9bae9f886fd907b9": {
+  "verdict": "FAIL",
+  "model_slug": "discovery",
+  "year": 2020,
+  "body_style": "suv",
+  "gap": false,
+  "note": "NEW: WRONG VEHICLE - byte-identical title to 0edcda28 but the model is a Land Rover Discovery 5, not a Peugeot 2008. Near-dup rule false positive confirmed."
+ },
+ "9b7bce42deb54e80a20ee1a16ec93e8a": {
+  "verdict": "FAIL",
+  "model_slug": "2008",
+  "year": 2016,
+  "body_style": "suv",
+  "gap": false,
+  "note": "NEW: photogrammetry scan - ragged window holes, torn ground fringe, baked plate/lighting. cov=1.0 mats=1."
+ },
+ "a759429b04544680beb8e93806cb82a5": {
+  "verdict": "FAIL",
+  "model_slug": "107",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: exploded - front wings detached and floating, front clip missing, wheels sunk. Badged Citroen C1 on rear."
+ },
+ "eba1f61448a6413f9f4248eee7ffbc9e": {
+  "verdict": "FAIL",
+  "model_slug": "partner",
+  "year": null,
+  "body_style": "van",
+  "gap": false,
+  "note": "NEW: not a car exterior - Partner van racking/workshop interior conversion (drawers, vice, extinguisher)."
+ },
+ "9c6182e158ee45fda09e5bb138858042": {
+  "verdict": "FAIL",
+  "model_slug": "107",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: rear wheels missing (empty arches), front clip half-unpainted white, exposed struts."
+ },
+ "e7fefd93776e4b0e903debb88306961d": {
+  "verdict": "FAIL",
+  "model_slug": "2008",
+  "year": null,
+  "body_style": "suv",
+  "gap": false,
+  "note": "NEW: wheels detached/sunk below arches in every view (skeletal wheel under body, grey nub in arch)."
+ },
+ "c8a597a1889c4ab6905423be5337e391": {
+  "verdict": "FAIL",
+  "model_slug": "205",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "DEMOTED from PASS-SINGLE by owner ruling 2026-08-09 (glazing must read as glass): 205 GTI clay — windows opaque body-colour in all views; no glass anywhere"
+ },
+ "b52c8e5e8070463ab1485039246f527c": {
+  "verdict": "FAIL",
+  "model_slug": "205",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: modified build - bright red aftermarket swirl rims, Sparco buckets, cream headlamp covers baked in. Not stock, cosmetics unfixable by recolour."
+ },
+ "ff2b04cf7da94cbdbd277fe23b7204b8": {
+  "verdict": "PASS",
+  "model_slug": "205",
+  "year": null,
+  "body_style": "convertible",
+  "gap": false,
+  "note": "NEW: 205 CJ cabriolet (Pininfarina), clean geometry and wheels; one rear-quarter panel renders off-tone grey vs white body (multi-mat split) - body-mat respray should normalise it. Gap list names '205 hatch'; this is the cabriolet, so gap=false."
+ },
+ "dc25a117378545e7a804c8594aa86938": {
+  "verdict": "FAIL",
+  "model_slug": "206",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: tuner build - giant GT wing, mesh bumper, black rims, red calipers, tint. Out of scope (modified)."
+ },
+ "804d74ae36b44eca805d5e6402ca4d14": {
+  "verdict": "FAIL",
+  "model_slug": "206",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: photogrammetry scan - dirty texture, ragged window holes, torn ground fringe, floating debris. cov=1.0."
+ },
+ "eb33af1177814fadbb2b79944e54a99c": {
+  "verdict": "FAIL",
+  "model_slug": "206",
+  "year": 2001,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: not a single car - two-car scene (206 WRC widebody shell + road 206), no wheels, exposed discs. Near-dup link to the clean 206 cluster REFUTED by eye - completely different content."
+ },
+ "9924732115f046c086f56ab237ad6f99": {
+  "verdict": "FAIL",
+  "model_slug": "206",
+  "year": null,
+  "body_style": null,
+  "gap": false,
+  "note": "NEW: not a car - 206 cup holder (part)."
+ },
+ "b2ef11bf94b848618b5b7f38e202316b": {
+  "verdict": "PASS",
+  "model_slug": "206",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: clean 206 GTI 3-door, white alloys read in all views. mats=1 cov=0.298 - stamp decides colours. Healthy twin of exact-dup group (1a23dbbe has mats=0)."
+ },
+ "1a23dbbed6d14a1aafff70b18303c8d1": {
+  "verdict": "DUPLICATE",
+  "model_slug": "206",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: exact duplicate of b2ef11bf (triage-confirmed same mesh, sheet near-identical) with mats=0 - unhealthy twin. Keep b2ef11bf."
+ },
+ "dc7ba9251ff440cd816000beb8cf233e": {
+  "verdict": "FAIL",
+  "model_slug": "206",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "NEW: front door detached/open upward, front wheels missing with wheel lying under body, water-drop bake on door skin."
+ },
+ "81bec8dfaf914b57a3ca5775458f9a47": {
+  "verdict": "FAIL",
+  "model_slug": "207",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: exploded - mixed red/white panels, missing wheels, roof piece and door floating in frame."
+ },
+ "fa2cfaaab79b4d18a0fc89ba25a02f07": {
+  "verdict": "PASS",
+  "model_slug": "207",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": true,
+  "note": "NEW: clean 207 3-door, deep grille, headlight internals present, multi-spoke alloys consistent. mats=15 cov=0.725 - well-separated materials."
+ },
+ "9b59ff092c1c4f1f918ac7c16fe679a7": {
+  "verdict": "PASS",
+  "model_slug": "207",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": true,
+  "note": "NEW: sharp glossy 207 3-door (523k faces), dark multi-spokes read in all views. mats=1 cov=0.164 - stamp decides colours."
+ },
+ "a27c6e3fd8574b77a3b89e9f578af16f": {
+  "verdict": "FAIL",
+  "model_slug": "207",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: corrected wheel test with zoom - wheels are hollow featureless white cups in ALL views (no spokes/hub/tyre). Genuine absence, not lighting. (This is one of the cov~0.113 cars - colour capability was fine; geometry is not.)"
+ },
+ "df3799a9736849e39840206ada14fea6": {
+  "verdict": "FAIL",
+  "model_slug": "306",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: exploded three-cluster scene (dark shell, floating interior bucket, floating white shell), no usable single car."
+ },
+ "a9518b22896c4330bba1fbb251b00937": {
+  "verdict": "FAIL",
+  "model_slug": "306",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: full rally livery + race wheels/widebody. Out of scope (race/rally)."
+ },
+ "ee4cb0be744c449fa20e2a5b554e542a": {
+  "verdict": "DUPLICATE",
+  "model_slug": "307",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: near-dup CONFIRMED by eye - same 307 as 3bf90277 ('Uploaded Version', faces 0.06% apart), visually identical sheet. Keep 3bf90277."
+ },
+ "60a94fbbb4ca4451a97a354e544a0550": {
+  "verdict": "FAIL",
+  "model_slug": "307",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: widebody kit + oversize multi-spoke rims + faceted glass. Out of scope (modified)."
+ },
+ "ce299e549e594d029577d0b757f3aa87": {
+  "verdict": "FAIL",
+  "model_slug": "308",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: exploded - bumpers off, blue wheel and grille assembly floating, empty arches."
+ },
+ "fe211e55acf54aa4a70c522ce720e17a": {
+  "verdict": "PASS",
+  "model_slug": "308",
+  "year": 2020,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: excellent 308 GTi (OEM performance - ships), sharp grille and shut lines, alloys read everywhere. mats=2 cov=0.165."
+ },
+ "bcbd76ac8d8949bc8e4b9f411d2f8745": {
+  "verdict": "PASS",
+  "model_slug": "rcz",
+  "year": null,
+  "body_style": "coupe",
+  "gap": true,
+  "note": "NEW: clean RCZ, double-bubble roof, dark alloys read in all views. mats=1 cov=0.273 - stamp decides colours. Healthy twin of exact-dup group (3f1376cf has mats=0). Title says '308 RCZ'; visually confirmed RCZ."
+ },
+ "3f1376cfec0340208806d94ae49e19bb": {
+  "verdict": "DUPLICATE",
+  "model_slug": "rcz",
+  "year": null,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "NEW: exact duplicate of bcbd76ac (triage-confirmed same mesh) with mats=0 - unhealthy twin. Keep bcbd76ac."
+ },
+ "68ae14e9883b4405852b404844384cdf": {
+  "verdict": "PASS",
+  "model_slug": "308",
+  "year": 2026,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: sharp P5 308; blue accent wheels/splitter are baked dress-up trim (will stay blue under recolours) - acceptable but note it. mats=2 cov=0.080."
+ },
+ "e538cff86fef432287ec93c7c6f91931": {
+  "verdict": "PASS",
+  "model_slug": "308",
+  "year": null,
+  "body_style": "estate",
+  "gap": false,
+  "note": "NEW: sharp current 308 SW estate, fang DRLs correct, black alloys read. mats=1 cov=0.163 - stamp decides colours."
+ },
+ "cf15d0c9a7ac485ba4a33a996e6c5589": {
+  "verdict": "PASS",
+  "model_slug": "404",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "NEW: clean classic 404 saloon, chrome grille/bumpers, hubcap wheels in all views. mats=1 cov=0.411 - stamp decides colours."
+ },
+ "602dbd0634754339b47de7b1d18bf143": {
+  "verdict": "PASS",
+  "model_slug": "405",
+  "year": null,
+  "body_style": "saloon",
+  "gap": true,
+  "note": "NEW: clean 405 (Mi16-style spoiler), alloys read in all views. mats=2 cov=0.318. Better 405 than the clay 13f1ac17."
+ },
+ "a45880cd207343aea45cd160efefeb81": {
+  "verdict": "DUPLICATE",
+  "model_slug": "406",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "NEW: near-dup CONFIRMED by eye - same mesh as 4b55488b (faces 0.006% apart, identical sheet). Keep 4b55488b."
+ },
+ "7219a3243efb48508df73df1ee1aa26a": {
+  "verdict": "FAIL",
+  "model_slug": "406",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "NEW: 'Taxi' movie-style kit (wing, taxi sign, widebody) AND missing wheels. Out of scope + broken."
+ },
+ "aedb8d1ebb7c488f90176eb4caad3747": {
+  "verdict": "FAIL",
+  "model_slug": "406",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "NEW: 'Taxi' film 406 - rear wing, skirts, roof lights. Out of scope (coachbuilt/kit)."
+ },
+ "7cb921f0266d4a729e44ff69f7c0c730": {
+  "verdict": "PASS",
+  "model_slug": "406",
+  "year": null,
+  "body_style": "saloon",
+  "gap": true,
+  "note": "NEW: clean textured 406 V6, alloys read in all views; minor: blue exhaust tips baked. mats=2 cov=0.181."
+ },
+ "d4c356aef4e840548e30ada71511a80a": {
+  "verdict": "FAIL",
+  "model_slug": "407",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "NEW: texture patchwork - random black/silver triangulated patches across bonnet/doors/boot (broken UV bake)."
+ },
+ "8177d7d35d6343d198b7df30abefee29": {
+  "verdict": "FAIL",
+  "model_slug": "407",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "NEW: front wheels missing (struts exposed), detached glass assembly floating at top of every view."
+ },
+ "6eeda81df5ea41babeeb10486ed9ae44": {
+  "verdict": "FAIL",
+  "model_slug": "408",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "NEW: model embedded in a giant yellow terrain wedge, arches empty, oversized wing. Unusable."
+ },
+ "7224a5836c874e609936977f7ff54f82": {
+  "verdict": "FAIL",
+  "model_slug": "5008",
+  "year": null,
+  "body_style": "suv",
+  "gap": false,
+  "note": "NEW: mats=0 - entire car renders as glossy black glass (body, windows, trim indistinguishable). Geometry maybe fine but appearance unusable; no named material to fix by respray."
+ },
+ "afa4fcce8b1245b587ef42a70ae6b973": {
+  "verdict": "FAIL",
+  "model_slug": "508",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "NEW: ALL FOUR wheels absent - every arch empty in every view (genuine absence)."
+ },
+ "a08eb79d9a814f17a1d6437e32e4f933": {
+  "verdict": "FAIL",
+  "model_slug": "508",
+  "year": 2024,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "NEW: broken scale/anchor - camera buried at sill height, sheet shows only giant wheels and slab body. Unusable sheet. cov=1.0 mats=1."
+ },
+ "bb8a01a450d1408cb10f8c7c7146c33e": {
+  "verdict": "FAIL",
+  "model_slug": "607",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "NEW: exploded - door cards and crumpled parts floating above car, arches empty."
+ },
+ "cb53a34acb2546fcb3cae6850272b7e3": {
+  "verdict": "FAIL",
+  "model_slug": "partner",
+  "year": null,
+  "body_style": "van",
+  "gap": false,
+  "note": "NEW: mats=0 - whole van renders as translucent black glass (front clip transparent). Unusable."
+ },
+ "9f0f56e6b0834b41a1f93929654a3982": {
+  "verdict": "FAIL",
+  "model_slug": "rcz",
+  "year": null,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "NEW: all wheels absent - empty blurred arches in every view; body itself is clean, so a wheel-donor fix is conceivable but as-sourced it fails."
+ },
+ "e740c23c3af641248827fd4c771ebbea": {
+  "verdict": "FAIL",
+  "model_slug": "306",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: wrong up-axis - renders tipped onto its side and clipped out of frame in all four views (matches triage note). Decimation-cluster partner of 13f1ac17 is a different car - not a dup."
+ },
+ "74a204b97aa446d783f51e84a07fb900": {
+  "verdict": "FAIL",
+  "model_slug": "206",
+  "year": 2001,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: two-car WRC scene (same content as eb33af11 - that near-dup pair CONFIRMED), missing wheels, ghost livery decals. All near-dup links from this uid to the clean 206 cluster REFUTED by eye."
+ },
+ "5f29df168c0d4831b9479092b509c375": {
+  "verdict": "FAIL",
+  "model_slug": "206",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: scan/AI-bake look - white smears baked on roof and sills, melted lamps, warped panels. cov=1.0."
+ },
+ "ad75c776d8144bc98527d19b6fd0d58f": {
+  "verdict": "PASS",
+  "model_slug": "406",
+  "year": null,
+  "body_style": "saloon",
+  "gap": true,
+  "note": "NEW: tidy 406 saloon, 7-spoke alloys read in all views. mats=1 cov=0.124 - stamp decides colours. Third distinct 406 (not in any dup pair; faces 20% off the 4b55488b pair)."
+ },
+ "ce98b88db02e4e85953e32e37ffdc5f7": {
+  "verdict": "FAIL",
+  "model_slug": "107",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: stance build - cambered deep-dish wheels, giant black arch blobs on one side. Out of scope (modified)."
+ },
+ "ef5d59b78b96496fab2731b138820ea2": {
+  "verdict": "PASS",
+  "model_slug": "207",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": true,
+  "note": "NEW: 207 with RC-style bonnet scoop, white multi-spokes read in all views, clean geometry. mats=1 cov=0.104 - stamp decides colours. Note: white wheels + splitter lean sporty but no kit/widebody."
+ },
+ "67397a7d2165432cae3660abb6ef02f6": {
+  "verdict": "FAIL",
+  "model_slug": "205",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: 205 T16 Pikes Peak race car - giant wing, splitter planes, mud flaps. Out of scope (race)."
+ },
+ "1da6e84e50c244a98602d06c9bc729a3": {
+  "verdict": "DUPLICATE",
+  "model_slug": "206",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "NEW: exact duplicate of 1d278036 (triage-confirmed same mesh; only wheel finish differs in bake). Keep 1d278036."
+ }
+}

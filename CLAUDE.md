@@ -352,6 +352,15 @@ these exact criteria, in this order, when auditing individually.
 - rear bumper and diffuser soft versus the real car
 - door and bonnet shut lines not defined
 
+**Owner ruling 2026-08-09 — glazing must read as GLASS.** A car whose windows render
+opaque body-colour (clay models, baked shells, missing glass materials) FAILS the audit
+outright, regardless of how clean the geometry is — it reads as a prototype in the viewer,
+not a car. This includes "good clay" candidates: they are not single-neutral keepers, they
+are fails until re-sourced with real materials. Caught on the Peugeot wave: a 405 clay, a
+205 GTI clay, and a 206 whose windows AND tyres rendered body-white (that one sat at
+cov=0.243 — comfortably inside the "healthy" coverage band — so coverage numbers cannot
+detect this; only the eye or a glass-material check can).
+
 **Critical distinction, established the same day:** a sourced Sketchfab/Objaverse
 GLB is NOT model output. Defects in a sourced asset cannot be fixed by training —
 the only options are keep, cull, or replace with a better source. Never present a
