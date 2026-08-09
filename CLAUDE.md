@@ -101,6 +101,37 @@ the respray edited the invisible one, and it shipped eight files that were diffe
 disk and identical on screen (recolour_audit dist=0.004). Replaced by a different source
 mesh that stamps at 0.342.
 
+## Per-side wheel voids, and the false positive that looks identical (2026-08-08)
+
+Two Mercedes were passed and nearly shipped with wheels that render as featureless black
+voids on ONE side of the car while the other side shows full spokes. The owner caught them.
+Cause: the left wheels are a mirrored duplicate with inverted geometry.
+
+**The tile pairing on this render rig:** `front34` + `side` show one side of the car;
+`front34_L` + `rear34` show the other. So the defect presents as a 2-vs-2 split.
+
+**BUT THE 2-VS-2 SPLIT IS NOT THE TEST — it produces constant false positives.** The rig's
+key light is one-sided, so a MAJORITY of cars show a 2-vs-2 BRIGHTNESS split by side
+(measured across the live Toyota wave: Land Cruiser, both Camrys, both Avensis, all three
+Hiluxes, Celica A60, Supra A70 all do it). At thumbnail scale those read as candidates and
+are all fine.
+
+**The actual test is whether the RIM FACE IS ABSENT, not whether it is dark:**
+- spoke arms, lug nuts, centre cap still traceable in the dark views -> lighting, fine
+- rim face gone entirely, or a brake caliper floating in an empty black disc -> DEFECT
+- all four tiles featureless -> DEFECT
+Zoom in. This is invisible at thumbnail scale, which is exactly how it got through.
+
+**Three wrong diagnoses were tried before the right one**, recorded so nobody repeats them:
+"it is lighting" (too glib — lighting darkens a surface, it does not delete it);
+"flipped normals, set doubleSided" (wrong — all 36 materials were already doubleSided);
+"near-black metal mirror" (rim_dark IS baseColor 0.018 with glTF's default
+metallicFactor=1.0, but lifting it to 0.18/0.55/0.42 and re-rendering fixed only the RIGHT
+wheels). What settled it was applying the change and LOOKING at the re-render.
+
+**Both live waves were then re-checked against the corrected test: 46/46 Mercedes and
+34/34 Toyota clean.** The two the owner caught were the only ones.
+
 ## Face-count dedup: two blind spots, both live (2026-08-08)
 
 Dedup keys on face count above 50k (title+faces missed six duplicate pairs in 67 Toyotas —
