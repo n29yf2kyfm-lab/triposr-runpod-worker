@@ -203,6 +203,20 @@
    "mats": 1,
    "verdict": "FAIL",
    "note": "panel crumpling across the flanks, doors and rear quarters, plus a mangled front splitter. Wheels and grille are fine but 114k faces is not carrying the surfacing on a car this sculptural"
+  },
+  "106d5ab342744e1a9d9cc473f9d14a5c": {
+   "name": "Mercedes Benz GLS /HU",
+   "cov": 0.16,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "GLS; panels clean, star grille crisp, headlight internals sharp, shut lines defined. FLAG: wheels read as black voids in front34 and side while front34_L and rear34 show full chrome multi-spoke with red calipers -- the detailed views prove the geometry exists, so this is lighting, same as the SLS"
+  },
+  "5ccf8a9bb28e4f3fa509b27b2953e427": {
+   "name": "Mercedes Benz X Class",
+   "cov": 0.174,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "X-Class double cab; multi-spoke wheels consistent in all four views, star grille crisp, headlight internals sharp, shut lines defined, roll bar and bed correct. Also a useful check on the new gate: a pickup is exactly the body type geom_audit's low-top band would flag, which is why that band warns instead of rejecting"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
