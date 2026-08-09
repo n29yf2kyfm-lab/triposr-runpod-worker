@@ -146,6 +146,71 @@ def _script(glb, out, yaw, pitch, samples, width, height, sun_deg,
                 if t and 'Transmission Weight' in bsdf.inputs:
                     bsdf.inputs['Transmission Weight'].default_value = t
                     m.blend_method = 'BLEND'
+                # REAL COURSING, NOT FLAT PAINT. A brick wall rendered as one
+                # flat albedo reads as a toy at eye level; the brick pattern
+                # is procedural, in world metres (UK brick 215x65 + 10 mortar,
+                # roof tiles in 300mm courses), box-projected per face normal
+                # so both wall directions course correctly.
+                if key in ('brick', 'tile'):
+                    nt2 = m.node_tree
+                    geo = nt2.nodes.new('ShaderNodeNewGeometry')
+                    sep_p = nt2.nodes.new('ShaderNodeSeparateXYZ')
+                    nt2.links.new(geo.outputs['Position'], sep_p.inputs[0])
+                    sep_n = nt2.nodes.new('ShaderNodeSeparateXYZ')
+                    nt2.links.new(geo.outputs['Normal'], sep_n.inputs[0])
+                    vx = nt2.nodes.new('ShaderNodeCombineXYZ')
+                    nt2.links.new(sep_p.outputs['X'], vx.inputs[0])
+                    nt2.links.new(sep_p.outputs['Z'], vx.inputs[1])
+                    vy = nt2.nodes.new('ShaderNodeCombineXYZ')
+                    nt2.links.new(sep_p.outputs['Y'], vy.inputs[0])
+                    nt2.links.new(sep_p.outputs['Z'], vy.inputs[1])
+                    if key == 'brick':
+                        bw, rh, mo = 0.225, 0.075, 0.010
+                        c1 = (0.30, 0.085, 0.055, 1.0)
+                        c2 = (0.22, 0.065, 0.045, 1.0)
+                        cm = (0.45, 0.42, 0.38, 1.0)
+                    else:
+                        bw, rh, mo = 0.50, 0.30, 0.006
+                        c1 = (0.045, 0.045, 0.050, 1.0)
+                        c2 = (0.030, 0.030, 0.034, 1.0)
+                        cm = (0.015, 0.015, 0.017, 1.0)
+                    bricks = []
+                    for v in (vx, vy):
+                        tb = nt2.nodes.new('ShaderNodeTexBrick')
+                        tb.offset = 0.5
+                        tb.inputs['Scale'].default_value = 1.0
+                        tb.inputs['Color1'].default_value = c1
+                        tb.inputs['Color2'].default_value = c2
+                        tb.inputs['Mortar'].default_value = cm
+                        tb.inputs['Mortar Size'].default_value = mo
+                        tb.inputs['Mortar Smooth'].default_value = 0.6
+                        tb.inputs['Brick Width'].default_value = bw
+                        tb.inputs['Row Height'].default_value = rh
+                        nt2.links.new(v.outputs[0], tb.inputs['Vector'])
+                        bricks.append(tb)
+                    ax = nt2.nodes.new('ShaderNodeMath'); ax.operation = 'ABSOLUTE'
+                    nt2.links.new(sep_n.outputs['X'], ax.inputs[0])
+                    ay = nt2.nodes.new('ShaderNodeMath'); ay.operation = 'ABSOLUTE'
+                    nt2.links.new(sep_n.outputs['Y'], ay.inputs[0])
+                    pick = nt2.nodes.new('ShaderNodeMath')
+                    pick.operation = 'GREATER_THAN'
+                    nt2.links.new(ax.outputs[0], pick.inputs[0])
+                    nt2.links.new(ay.outputs[0], pick.inputs[1])
+                    mixc = nt2.nodes.new('ShaderNodeMix')
+                    mixc.data_type = 'RGBA'
+                    nt2.links.new(pick.outputs[0], mixc.inputs['Factor'])
+                    nt2.links.new(bricks[0].outputs['Color'], mixc.inputs[6])
+                    nt2.links.new(bricks[1].outputs['Color'], mixc.inputs[7])
+                    nt2.links.new(mixc.outputs[2], bsdf.inputs['Base Color'])
+                    mixf = nt2.nodes.new('ShaderNodeMix')
+                    nt2.links.new(pick.outputs[0], mixf.inputs['Factor'])
+                    nt2.links.new(bricks[0].outputs['Fac'], mixf.inputs[2])
+                    nt2.links.new(bricks[1].outputs['Fac'], mixf.inputs[3])
+                    bump = nt2.nodes.new('ShaderNodeBump')
+                    bump.inputs['Strength'].default_value = 0.25
+                    bump.invert = True
+                    nt2.links.new(mixf.outputs[0], bump.inputs['Height'])
+                    nt2.links.new(bump.outputs[0], bsdf.inputs['Normal'])
 
         # Ground, so the building casts onto something and is not floating.
         bpy.ops.mesh.primitive_plane_add(size=span * 12,
@@ -153,9 +218,30 @@ def _script(glb, out, yaw, pitch, samples, width, height, sun_deg,
         g = bpy.context.active_object
         gm = bpy.data.materials.new('ground')
         gm.use_nodes = True
-        gb = gm.node_tree.nodes['Principled BSDF']
-        gb.inputs['Base Color'].default_value = (0.075, 0.105, 0.045, 1.0)
+        gnt = gm.node_tree
+        gb = gnt.nodes['Principled BSDF']
         gb.inputs['Roughness'].default_value = 1.0
+        # Grass is not one green: two noise scales, patchy colour, so the
+        # ground stops reading as a billiard table.
+        n1 = gnt.nodes.new('ShaderNodeTexNoise')
+        n1.inputs['Scale'].default_value = 0.35
+        n1.inputs['Detail'].default_value = 6.0
+        n2 = gnt.nodes.new('ShaderNodeTexNoise')
+        n2.inputs['Scale'].default_value = 14.0
+        n2.inputs['Detail'].default_value = 8.0
+        gmix = gnt.nodes.new('ShaderNodeMix')
+        gmix.data_type = 'RGBA'
+        gmix.inputs[6].default_value = (0.055, 0.085, 0.032, 1.0)
+        gmix.inputs[7].default_value = (0.095, 0.125, 0.048, 1.0)
+        gnt.links.new(n1.outputs['Fac'], gmix.inputs['Factor'])
+        gmix2 = gnt.nodes.new('ShaderNodeMix')
+        gmix2.data_type = 'RGBA'
+        gmix2.inputs[7].default_value = (0.040, 0.062, 0.024, 1.0)
+        # Fac, not Color: the noise's Color output is RGB static and turned
+        # the lawn into an oil slick on its first render.
+        gnt.links.new(n2.outputs['Fac'], gmix2.inputs['Factor'])
+        gnt.links.new(gmix.outputs[2], gmix2.inputs[6])
+        gnt.links.new(gmix2.outputs[2], gb.inputs['Base Color'])
         g.data.materials.append(gm)
 
         # Sky. A real sky texture is what puts light into the shadows and
