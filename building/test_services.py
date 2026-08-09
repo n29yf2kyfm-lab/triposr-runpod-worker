@@ -334,9 +334,19 @@ def _wall(x0, y0, x1, y1, height=2.4, base_z=0.0):
 
 
 def _at(wall, u, v, standoff):
+    """A point u along the wall, v up it, standoff out from its face.
+
+    THIS HELPER CARRIED THE SAME SIGN ERROR AS plane_basis, so the two
+    agreed with each other and both disagreed with the building: for a wall
+    traced (0,0)->(4,0) it placed "2m along" at x = -2. Section 9g passed
+    throughout while every real run projected through plane_basis came back
+    at negative u and in_safe_zone refused it as "outside the wall — no zone
+    judgement is possible". A fixture that shares the code's mistake tests
+    nothing. u now runs WITH the wall: +u is (b, -a) for a normal (a, b).
+    """
     (x0, y0, z0) = wall["origin"]
     a, b, _c, _d = wall["plane"]
-    return (x0 - b * u + a * standoff, y0 + a * u + b * standoff, z0 + v)
+    return (x0 + b * u + a * standoff, y0 - a * u + b * standoff, z0 + v)
 
 
 def _pipe(wall, u0, v0, length, diameter, vertical=False, clear=0.020,

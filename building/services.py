@@ -146,9 +146,16 @@ def plane_basis(plane):
     up = (0.0, 0.0, 1.0)
     if abs(c) > 0.9:                       # a floor or ceiling, not a wall
         up = (0.0, 1.0, 0.0)
-    u = _cross(up, normal)
-    u = _normalise(u)
-    v = _normalise(_cross(normal, u))
+    # u RUNS WITH THE WALL, NOT AGAINST IT. cross(up, normal) returns the
+    # negation of the wall's own direction for the normal structure emits
+    # (nx, ny = -uy, ux), so a cable 2m along a wall measured u = -2.0m and
+    # in_safe_zone's bounds gate refused it as "outside the wall — no zone
+    # judgement is possible". Every run on every structure-traced wall, so
+    # the X-ray could not judge a single BS 7671 zone: a shallow cable in a
+    # prohibited zone came back unjudged rather than dangerous. Verified by
+    # execution against a wall traced (0,0)->(5,0), not by reading.
+    u = _normalise(_cross(normal, up))
+    v = _normalise(_cross(u, normal))
     return u, v
 
 
