@@ -1,0 +1,656 @@
+[
+ {
+  "uid": "0b66ffe0dfdc47f4836ebb08793d2563",
+  "name": "Citroen Tubis",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Tubik/Tubis concept van, not a road car a reg decodes to",
+   "clay: glazing renders opaque body colour (cov=1.000, FULLCOV)"
+  ]
+ },
+ {
+  "uid": "0f18d5dc34324abc9c1386cc30e961d7",
+  "name": "Citroën DS 19",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as DS instantly; strong front 3/4",
+   "glazing reads as real glass, interior visible",
+   "wheels/hubcaps traceable in all four views (2v2 brightness split is the rig key light)",
+   "chrome trim and shut lines defined; clean reflections"
+  ]
+ },
+ {
+  "uid": "155c2f86778440dca845cacacaf1b517",
+  "name": "2010 Citroën DS3",
+  "verdict": "fail",
+  "reasons": [
+   "heavy low-poly faceting across doors and rear quarter",
+   "windows are open apertures - no glass material"
+  ]
+ },
+ {
+  "uid": "1f14204f9e364ff19f0785c23e786443",
+  "name": "2022 Citroen CX5",
+  "verdict": "pass",
+  "reasons": [
+   "renders as a C5 X (title unreliable); proportions instantly right",
+   "glazing reads as glass; sharp split headlights with internal elements",
+   "wheel spoke detail full on BOTH sides (zoomed)",
+   "shut lines defined, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "2397871f409b48098818a588817d6936",
+  "name": "Citroën 2CV (Scaniverse)",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: soft panels, baked lighting",
+   "ground plane baked into the mesh"
+  ]
+ },
+ {
+  "uid": "29a82bc6818e49faa400f2959dcd03af",
+  "name": "citroen c5x",
+  "verdict": "fail",
+  "reasons": [
+   "wheels detached/missing; wheel arches are empty black voids",
+   "a loose wheel floats separately beside the car"
+  ]
+ },
+ {
+  "uid": "2c5fa3c3e69d4b0d9712096aff3bbbef",
+  "name": "Citroën Type H Food Truck",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: food-truck conversion with commercial signage and serving hatch"
+  ]
+ },
+ {
+  "uid": "2fbf653e4e6c438b95a290928137cf9d",
+  "name": "Citroen PICASSO  3D model",
+  "verdict": "fail",
+  "reasons": [
+   "headlights render as smeared brown blobs, no internal detail",
+   "front and rear bumpers soft/undefined, no grille structure",
+   "wheels carry a mis-assigned yellow material"
+  ]
+ },
+ {
+  "uid": "334053c217c749c2ab12f664050c9435",
+  "name": "Citroen C1",
+  "verdict": "fail",
+  "reasons": [
+   "no grille aperture modelled; front bumper is a featureless blob",
+   "headlights are dark smears with no internal elements",
+   "door and bonnet shut lines absent"
+  ]
+ },
+ {
+  "uid": "35bf247a88ce49c2a2be1af65279e374",
+  "name": "Laytonmobile (Professor Layton Car)(Citroen 2CV)",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: fictional vehicle from a video game"
+  ]
+ },
+ {
+  "uid": "3b92fc9856d54d00bb79affc2d823066",
+  "name": "Citroën 19??",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a derelict vehicle, vegetation and ground baked in",
+   "large holes in the mesh; out-of-scope wreck"
+  ]
+ },
+ {
+  "uid": "3fe3d59ae9b3442d8378e7eb1d126aa4",
+  "name": "Citroen Saxo",
+  "verdict": "fail",
+  "reasons": [
+   "aftermarket body kit: arch flares, side skirts, non-OEM front bumper",
+   "headlights and tail lights are flat lenses with no internal detail"
+  ]
+ },
+ {
+  "uid": "433fb2de00d244d4851b1993a024867b",
+  "name": "Citroën Survolt 2009",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Survolt concept car",
+   "rim faces absent - brake discs floating in empty arches"
+  ]
+ },
+ {
+  "uid": "43fcf89cace54e7592e4940f452583f3",
+  "name": "Citroen C3 Pluriel 2002-2012",
+  "verdict": "fail",
+  "reasons": [
+   "front and rear bumpers soft and undefined; no grille structure",
+   "headlights are dark voids with no internal elements",
+   "door and bonnet shut lines not defined"
+  ]
+ },
+ {
+  "uid": "444130856bc14aac821444739f4f8997",
+  "name": "Citroen Mehari",
+  "verdict": "fail",
+  "reasons": [
+   "body renders as chrome/mirror metal, not paint (cov=1.000 FULLCOV)",
+   "roof and panels visibly faceted",
+   "headlights are teal/yellow blobs"
+  ]
+ },
+ {
+  "uid": "459ebdd3cdfd49b1bdce130118d5ec08",
+  "name": "Citroen C5 X 2022",
+  "verdict": "fail",
+  "reasons": [
+   "clay model: windows render opaque body colour, glazing does not read as glass (cov=1.000)"
+  ]
+ },
+ {
+  "uid": "481b9715750a4800a635092d5b404b15",
+  "name": "2008 Citroën C3",
+  "verdict": "fail",
+  "reasons": [
+   "clay/baked shell: glazing renders body-colour, not glass (cov=0.989 FULLCOV)",
+   "headlights are blank white surfaces; black void where the rear lamp should be"
+  ]
+ },
+ {
+  "uid": "49b544e337da4b9a9829b40c4b70c877",
+  "name": "Citroen C-Crosser 2007-2012",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as a C-Crosser instantly; strong front 3/4",
+   "glazing reads as glass; mesh lower grille defined",
+   "wheel spoke detail full on BOTH sides (zoomed)",
+   "door shut lines defined; premium gloss finish"
+  ]
+ },
+ {
+  "uid": "4b5c440854be4053af333c2d47be0124",
+  "name": "Citroen Saxo Race 1996-2004",
+  "verdict": "fail",
+  "reasons": [
+   "exploded/disassembled model: bonnet and front wings detached and floating",
+   "wheels missing; empty wheel arches"
+  ]
+ },
+ {
+  "uid": "4fe5aafcbb414b78957f541af6f1cf60",
+  "name": "Citroën GS Camargue 1972",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Bertone GS Camargue show car",
+   "clay: glazing renders opaque body colour (cov=1.000)",
+   "wheels are featureless discs with no spokes"
+  ]
+ },
+ {
+  "uid": "527abd72526d48479bc707e1f0ab9a33",
+  "name": "Citroen_2CV_stls",
+  "verdict": "fail",
+  "reasons": [
+   "3D-print STL: full clay, windows are body-colour openings (cov=1.000)",
+   "wheels are simplified print discs"
+  ]
+ },
+ {
+  "uid": "56e34a00334c4b53b37b434993b4dae1",
+  "name": "Citroen C3",
+  "verdict": "fail",
+  "reasons": [
+   "renders as a DS3, not a C3",
+   "no body-paint material found (cov=0.000) - body reads as a black mirror",
+   "widebody tuner kit with deep-dish wheels",
+   "stray white material patches on the B-pillars and front bumper"
+  ]
+ },
+ {
+  "uid": "654b41ef8b8a4a84ac0806ea05732c8f",
+  "name": "2001 Citroen C4 VTS PSA Design",
+  "verdict": "fail",
+  "reasons": [
+   "wheels and tyres missing - bare white hubs sit in oversized empty arches"
+  ]
+ },
+ {
+  "uid": "6721ccde918d4c309a417bad0428f73e",
+  "name": "Citroen 1974 Van",
+  "verdict": "fail",
+  "reasons": [
+   "glazing does not read as glass: side windows are flat opaque grey panels (zoomed)",
+   "headlamps are plain chrome spheres with no lens detail"
+  ]
+ },
+ {
+  "uid": "6da92f7b78414f5a89bccabdb7830a93",
+  "name": "Citroen 2cv",
+  "verdict": "pass",
+  "reasons": [
+   "glazing reads as real glass - tan interior visible, flip-out window modelled as a transparent panel (zoomed)",
+   "chrome grille slats and headlamp bowls defined; door shut lines clean",
+   "wheels: black steels with chrome hubcaps, detail traceable in all four views",
+   "note: a pale-blue material line runs along the door frame edge - minor cosmetic oddity"
+  ]
+ },
+ {
+  "uid": "6fc5c3604806452489f7e6932d395818",
+  "name": "Citroen DS3",
+  "verdict": "fail",
+  "reasons": [
+   "no body-paint material (cov=0.000); body reads as black glass, not paint",
+   "wavy/crumpled surfacing on the doors and front end"
+  ]
+ },
+ {
+  "uid": "7300ceaac4584406978a79e328cc43c3",
+  "name": "Citroen DS5",
+  "verdict": "fail",
+  "reasons": [
+   "clay model: windows render opaque body colour (cov=0.936 FULLCOV)"
+  ]
+ },
+ {
+  "uid": "7b90082e516d42338e6b56c3711affd7",
+  "name": "Citroen DS 21",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: ground plane and vegetation baked in, holes in the roof"
+  ]
+ },
+ {
+  "uid": "7f4e662e380c42758583790090061d32",
+  "name": "Citroen Xantia 1993-2001",
+  "verdict": "fail",
+  "reasons": [
+   "rippled/blotchy panel surfacing on the doors and rear quarter (zoomed)",
+   "paint finish reads flat and dull, not premium"
+  ]
+ },
+ {
+  "uid": "8031ce882ca4429590dd1e14e6e8af2d",
+  "name": "Citroen GT 3D model",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: GT by Citroën concept",
+   "glazing renders as an opaque smudged grey surface"
+  ]
+ },
+ {
+  "uid": "8617dbd283e24ea1a3e5af6dbd8977e5",
+  "name": "Citroen Czero",
+  "verdict": "fail",
+  "reasons": [
+   "headlights are featureless black gloss blobs with no internal elements (zoomed)",
+   "front bumper and grille undefined",
+   "no body-paint material found (cov=0.000)",
+   "borderline: geometry and glazing are otherwise clean"
+  ]
+ },
+ {
+  "uid": "8ad0ba9f62ca426f9ce09aee418bcf0d",
+  "name": "Citroen Bertone Zabrus 1986",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Bertone Zabrus concept",
+   "clay: glazing renders opaque body colour (cov=1.000)",
+   "wheels are featureless discs"
+  ]
+ },
+ {
+  "uid": "8b3f59f12bfb45bea5a68685d0740210",
+  "name": "Day 155: Citroen Dyane - 1scanaday",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: melted panels, windows as holes, ground plane baked in"
+  ]
+ },
+ {
+  "uid": "8cc7990f48ea4dd58122d748ebc601c3",
+  "name": "2025 Citroën ë-C3",
+  "verdict": "fail",
+  "reasons": [
+   "clay/baked shell: windows render body-colour opaque, glazing does not read as glass"
+  ]
+ },
+ {
+  "uid": "8cd008cfcccc40f7b67f0a53cebfe59b",
+  "name": "Citroen Gt",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: GT by Citroën concept",
+   "clay (cov=1.000), no glass",
+   "wheels entirely absent - car sits on a slab"
+  ]
+ },
+ {
+  "uid": "8cedee00521e4015b49610711d67ae53",
+  "name": "Citroen C4 MK1 Sedan 2006-2013",
+  "verdict": "fail",
+  "reasons": [
+   "broken geometry: large stray planes intersect the body",
+   "wheels missing/replaced by orange and pink discs",
+   "random green/silver material patches"
+  ]
+ },
+ {
+  "uid": "8de95061be87450dbe88e80bee34c974",
+  "name": "Citroën 2CV-capap",
+  "verdict": "fail",
+  "reasons": [
+   "body renders as chrome/mirror with mixed grey panels, not premium paint",
+   "material assignment inconsistent between wings, bonnet and doors"
+  ]
+ },
+ {
+  "uid": "8eeea349f1ca49fc9e79a9cc35e3ee88",
+  "name": "Citroën Berlingo Full Electric",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as a Berlingo van instantly; strong front 3/4",
+   "glazing reads as glass; chevron bar and lower grille slats defined",
+   "steel wheels with trim detail traceable in all four views",
+   "note: rear lamp lenses render very dark and the number-plate recess carries a blurred texture smear"
+  ]
+ },
+ {
+  "uid": "90099f356e714c88b8eb70a5f16974c3",
+  "name": "2025 Citroën C3 Proto4E",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: rally prototype spec - white rally wheels, red tow hooks, roof vent",
+   "mesh quality is otherwise good; would need a road-spec source"
+  ]
+ },
+ {
+  "uid": "901ab2ab058d40d6bfa7a37742915976",
+  "name": "Citroen DS3 - 2011",
+  "verdict": "fail",
+  "reasons": [
+   "rim faces absent in all four views - brake calipers floating in empty discs",
+   "a loose wheel sits under the car"
+  ]
+ },
+ {
+  "uid": "9360906ed24a4a4e90afd99f89beb2da",
+  "name": "Citroën 2CV Safari 2026-MS",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: garage diorama scene with building and figures, not a vehicle model"
+  ]
+ },
+ {
+  "uid": "95dab6f3a664402e8cd86617f973d862",
+  "name": "Citroen 2CV Charleston 1986",
+  "verdict": "fail",
+  "reasons": [
+   "glazing does not read as glass: windows are flat opaque grey plates with no transparency (zoomed)"
+  ]
+ },
+ {
+  "uid": "9c883035fe434d5f8734773278254700",
+  "name": "Peugeot/Citroen MK1 2003",
+  "verdict": "fail",
+  "reasons": [
+   "wheels missing - bare hubs and suspension in empty arches",
+   "broken purple/lilac material patches across the body"
+  ]
+ },
+ {
+  "uid": "9ebaa2199c4e45bd94d41a7b7e81827f",
+  "name": "Citroen C4 Cactus 2014-2020",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "rendered upside down in all views; source GLB passed the pre-render pose gate",
+   "matches the known render-side inversion bug - re-render, do not scrap"
+  ]
+ },
+ {
+  "uid": "a2f355b2536e4f7e8ab0bdd5c4c7d820",
+  "name": "Citroen DS3 WRC 2015 | www.vecarz.com",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: WRC competition car with widebody kit and baked livery"
+  ]
+ },
+ {
+  "uid": "c541deef16dc4900bc9909098c5f9b93",
+  "name": "Citroen-2CV",
+  "verdict": "fail",
+  "reasons": [
+   "front side window glass missing on one side - renders as a black void (zoomed); the opposite side has glass",
+   "otherwise a clean 2CV; worth re-sourcing"
+  ]
+ },
+ {
+  "uid": "c6576be338114eb9a8caf225186c2505",
+  "name": "Citroen C2",
+  "verdict": "fail",
+  "reasons": [
+   "no body-paint material (cov=0.000); body reads as a black mirror, not paint",
+   "tuner-modified: deep-dish black alloys, lowered",
+   "stray silver/chrome patches on the front bumper"
+  ]
+ },
+ {
+  "uid": "cce51808583d4c968caf5ee337010c86",
+  "name": "2025 Citroen BASALT",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as a Basalt coupe-SUV instantly; strong front 3/4",
+   "glazing genuinely transparent - interior and reflections visible through it (zoomed)",
+   "wheel spoke detail full in all four views",
+   "split headlight units with internal elements; shut lines defined",
+   "note: FULLCOV cov=0.939 - run recolour_audit --stamp before shipping any colour variant"
+  ]
+ },
+ {
+  "uid": "ec90bbb67585481a81c2de7d67b0af7d",
+  "name": "Citroën H Van",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: pavement, road markings and a parking meter baked into the mesh",
+   "melted panels and holes"
+  ]
+ },
+ {
+  "uid": "edd3efd463b24035aa231de33ed59aaa",
+  "name": "2005 Citroen Xsara WRC Sébastien Loeb",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: WRC competition car with baked sponsor livery"
+  ]
+ },
+ {
+  "uid": "ef0ff980b2ff4333abd0bf2db45ad67f",
+  "name": "Citroen DS4",
+  "verdict": "fail",
+  "reasons": [
+   "no body-paint material (cov=0.000); body reads as a black mirror",
+   "chrome/white material patches on the B-pillars and mirrors"
+  ]
+ },
+ {
+  "uid": "050e8fc3a2334d8e9a8303e2523da2a4",
+  "name": "Citroen Axel 1981-1990",
+  "verdict": "fail",
+  "reasons": [
+   "broken geometry: a large faceted yellow slab engulfs the car",
+   "wheels missing; body is low-poly"
+  ]
+ },
+ {
+  "uid": "1d14eaf9cfcb4bed8fcb3b3ce32f9091",
+  "name": "Citroen C4 3D model",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as a C4 hatchback instantly; strong front 3/4",
+   "glazing reads as glass, interior clearly visible",
+   "wheel spoke detail full on both sides; tyres correctly dark (zoomed)",
+   "door and bonnet shut lines defined, door handles modelled",
+   "note: a thin gold trim strip runs along the rear bumper top edge and the rear lamps render dark"
+  ]
+ },
+ {
+  "uid": "283ad634a382447ea1ad1bf1103e4814",
+  "name": "Citroën C2 2003-2009",
+  "verdict": "fail",
+  "reasons": [
+   "wheels missing - bare white discs where the rims should be",
+   "shattered/cracked windscreen texture",
+   "red-and-white livery wrap baked into the body"
+  ]
+ },
+ {
+  "uid": "2be1ccc895604acbb25476fd12ddfdff",
+  "name": "Citroën C4L 2012",
+  "verdict": "fail",
+  "reasons": [
+   "stray yellow terrain slab engulfs the car",
+   "wheels mostly missing; shattered windscreen texture"
+  ]
+ },
+ {
+  "uid": "34314ba1fdcb41dc9777ac11fcc925a7",
+  "name": "Citroen Mehari",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: ground plane baked in, holes and mush across the body (cov=1.000)"
+  ]
+ },
+ {
+  "uid": "479bc011e98c4dc283571b051ba3eeea",
+  "name": "Citroen AC4 1929 farm car",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: ground baked in, floating stray blobs above the vehicle",
+   "holes and mush across the body"
+  ]
+ },
+ {
+  "uid": "6c84b2f6133041208e47c011b8883f0a",
+  "name": "Citroën DS4 2011-2015",
+  "verdict": "fail",
+  "reasons": [
+   "wheels absent - suspension struts visible in empty arches, one loose wheel under the car"
+  ]
+ },
+ {
+  "uid": "7366f4d7616e469695f9c22c8083cb9c",
+  "name": "3D Scanned Citroën Xsara Picasso (1999) [Free]",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: windows are holes, roof spike artefact, ground baked in"
+  ]
+ },
+ {
+  "uid": "97d128fb4b2a4558a02d65af542486dc",
+  "name": "Citroen C4 WRC Red Bull 2007",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: WRC competition car - roll cage, rally wing, rally wheels",
+   "likely duplicate of d58bfd3a47e941cc9080d354223efe22 (110,517 vs 110,483 faces, visually identical) - FLAGGED, not auto-grouped"
+  ]
+ },
+ {
+  "uid": "bc19223673764bdf816911c8c983e124",
+  "name": "Citroen C6",
+  "verdict": "fail",
+  "reasons": [
+   "mis-assigned body materials: arbitrary black/white split across wings, doors and roof",
+   "headlights render as black voids",
+   "wheel colour inconsistent between views (white in three tiles, black in rear34)"
+  ]
+ },
+ {
+  "uid": "bef89f2bff814f829832c4e97899f9ca",
+  "name": "Citroen C2",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render light grey/untextured, reading as an unfinished model (zoomed)",
+   "stray white cloth geometry visible inside the cabin through the rear glass"
+  ]
+ },
+ {
+  "uid": "c28a8a33dc224c7bb297e2a658a62d5f",
+  "name": "3D Scanned Citroën C5 Aircross (2017) [Free]",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: ground plane baked in, glazing is baked photo texture not glass (cov=1.000)"
+  ]
+ },
+ {
+  "uid": "d2f9200f720044f1abed8f88affe908b",
+  "name": "Citroen C4 5-Door MK1 2004-2010",
+  "verdict": "fail",
+  "reasons": [
+   "wheels absent - suspension in empty arches, one loose wheel under the car",
+   "stray grey plane fragments and mis-assigned silver panels"
+  ]
+ },
+ {
+  "uid": "d55aefff494d43a6813dd26a53e854c3",
+  "name": "CITROEN DIANA",
+  "verdict": "pass",
+  "reasons": [
+   "reads as a Dyane instantly; strong front 3/4",
+   "glazing reads as real glass, interior visible",
+   "chrome grille with chevron and slats defined; period-correct lamp bowls with lens detail",
+   "steel wheels with chrome hubcaps traceable in all four views; tread modelled"
+  ]
+ },
+ {
+  "uid": "d58bfd3a47e941cc9080d354223efe22",
+  "name": "Citroen_c4wrc2007",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: WRC competition car",
+   "likely duplicate of 97d128fb4b2a4558a02d65af542486dc - FLAGGED, not auto-grouped"
+  ]
+ },
+ {
+  "uid": "e7f5b4744f894b67bbba513bc6c057cc",
+  "name": "Citroen DS3 2010-2016",
+  "verdict": "fail",
+  "reasons": [
+   "wheels absent - empty arches with struts, a loose wheel under the car",
+   "shattered windscreen crack texture"
+  ]
+ },
+ {
+  "uid": "f000b92ebc7b444bb169365cc0e1eb15",
+  "name": "Day 262: Citroen Ami",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: cobblestone ground and a charging bollard baked into the mesh",
+   "melted panels, baked-photo glazing"
+  ]
+ },
+ {
+  "uid": "ff2e0bbab8e34bcf92a8f37e53d2df5e",
+  "name": "Citroen C1 2005-2014",
+  "verdict": "fail",
+  "reasons": [
+   "wheels absent - suspension struts in empty arches, a loose wheel under the car"
+  ]
+ },
+ {
+  "uid": "tsUhcbfiXRKN6XODFXz8jMHOWI9",
+  "name": "Citroën 2 CV",
+  "verdict": "fail",
+  "reasons": [
+   "front wing panel detached and misaligned - visible gap to the body with a dangling trailing edge (zoomed)",
+   "FULLCOV cov=0.937: a respray would repaint the glass too"
+  ]
+ },
+ {
+  "uid": "4d54fba91e51453eb4372a987d75a327",
+  "name": "Citroen+2cv+klaar+bambu_stls (1)",
+  "verdict": "fail",
+  "reasons": [
+   "3D-print STL: full clay (cov=1.000), window apertures are body-colour recesses with no glass"
+  ]
+ }
+]
