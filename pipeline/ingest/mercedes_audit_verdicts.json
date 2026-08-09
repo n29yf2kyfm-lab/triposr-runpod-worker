@@ -273,6 +273,27 @@
    "mats": 2,
    "verdict": "PASS",
    "note": "SLR McLaren; turbine wheels consistent in all four views, side vents crisp, headlight internals sharp, shut lines defined, premium reflections. REDUNDANT -- third stock SLR here, and 6dd3f12d at 744k faces is the better one"
+  },
+  "fa5a62f49dff495fae5223762ca80553": {
+   "name": "Mercedes-Benz CLK GTR",
+   "cov": 0.184,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "CLK GTR; excellent -- turbine wheels consistent in all four views, panels clean, shut lines defined, headlight internals sharp, premium reflections. NOTE: a 25-off homologation special, so a UK reg will essentially never decode to it. Road-legal Strassenversion, so not wrong, just very low practical value"
+  },
+  "fe00234b5af84539ade55c31ca6639e3": {
+   "name": "Mercedes- Benz AMG GT 4- Door Coupe (X290)",
+   "cov": 0.186,
+   "mats": 2,
+   "verdict": "FAIL",
+   "note": "exploded -- the body floats above a stack of detached bumpers, grilles, sills and wings. Fourth exploded car in this marque"
+  },
+  "5840d1dc329d430bb85aafee143cc655": {
+   "name": "Mercedes-Benz CL (C216) 2006-2014",
+   "cov": 0.186,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "standing VERTICALLY ON END, nose-down, and disassembled with panels scattered. Severe enough that the new geom_audit gate catches it on bounding-box ratio alone -- sixth orientation failure today"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
