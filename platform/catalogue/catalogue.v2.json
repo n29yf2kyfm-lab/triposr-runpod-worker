@@ -190623,7 +190623,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-508-2021-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-508-2021-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-508-2021-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-508-2021-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-508-2021-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-508-2021-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-508-2021-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-508-2021-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-508-2021-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-508-2021-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -190716,7 +190725,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -190771,7 +190836,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-307-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-307-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-307-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-307-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-307-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-307-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-307-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-307-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-307-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-307-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -190864,7 +190938,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -190919,7 +191049,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-3008-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-3008-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-3008-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-3008-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-3008-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-3008-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-3008-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-3008-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-3008-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-3008-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -191012,7 +191151,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -191067,7 +191262,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-1998-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-1998-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-1998-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-1998-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-1998-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-1998-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-1998-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-1998-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-406-1998-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-406-1998-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -191160,7 +191364,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -191217,7 +191477,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2000-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2000-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2000-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2000-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2000-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2000-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2000-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2000-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-2000-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-2000-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -191310,7 +191579,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -191364,7 +191689,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2003-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2003-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2003-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2003-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2003-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2003-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2003-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-2003-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-2003-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-2003-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -191457,7 +191791,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -191516,7 +191906,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-504-1968-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-504-1968-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-504-1968-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-504-1968-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-504-1968-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-504-1968-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-504-1968-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-504-1968-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-504-1968-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-504-1968-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -191609,7 +192008,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -191667,7 +192122,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-1997-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-1997-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-1997-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-1997-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-1997-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-1997-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-1997-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-1997-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-1997-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-1997-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -191760,7 +192224,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -191817,7 +192337,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-407-2005-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-407-2005-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-407-2005-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-407-2005-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-407-2005-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-407-2005-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-407-2005-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-407-2005-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-407-2005-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-407-2005-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -191910,7 +192439,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -191965,7 +192550,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2018-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2018-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2018-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2018-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2018-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2018-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2018-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2018-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2018-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2018-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -192058,7 +192652,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -192118,7 +192768,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2020-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2020-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2020-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2020-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2020-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2020-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2020-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-2008-2020-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2020-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2020-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -192211,7 +192870,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -192272,7 +192987,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-205-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -192365,7 +193089,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -192420,7 +193200,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-206-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -192513,7 +193302,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -192581,7 +193426,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-207-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-207-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -192674,7 +193528,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -192732,7 +193642,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-207-pw1-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-207-pw1-v2.glb",
   "fallbackGlbUrl": null,
@@ -192825,7 +193744,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -192883,7 +193858,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2020-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2020-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2020-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2020-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2020-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2020-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2020-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2020-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2020-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2020-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -192976,7 +193960,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -193033,7 +194073,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-rcz-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-rcz-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-rcz-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-rcz-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-rcz-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-rcz-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-rcz-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-rcz-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-rcz-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-rcz-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -193126,7 +194175,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -193182,7 +194287,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2026-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2026-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2026-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2026-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2026-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2026-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2026-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-2026-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2026-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2026-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -193275,7 +194389,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -193329,7 +194499,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-308-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -193422,7 +194601,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -193476,7 +194711,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-404-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-404-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-404-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-404-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-404-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-404-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-404-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-404-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-404-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-404-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -193569,7 +194813,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -193624,7 +194924,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-406-pw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-406-pw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -193717,7 +195026,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -193771,7 +195136,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-406-pw1-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-406-pw1-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-406-pw1-v2.glb",
   "fallbackGlbUrl": null,
@@ -193864,7 +195238,63 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -193919,7 +195349,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v3__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v3__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v3__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v3__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v3__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v3__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v3__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/peugeot/peugeot-207-pw1-v3__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-207-pw1-v3.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-207-pw1-v3.glb",
   "fallbackGlbUrl": null,
@@ -193933,6 +195372,211 @@
   "textureMemoryBytes": null,
   "maxTextureResolution": null,
   "contentHash": "e416971c5fbd6d6bdad00e9d4747de506408507e3df19f48e274e5bacd8062a9",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Cumulus Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Selenium Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Nera Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Bianca White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Okenite White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Vertigo Blue Metallic",
+     "colourFamily": "Bright Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Elixir Red",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Olivine Green",
+     "colourFamily": "Olive Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-405-pw1-v1",
+  "make": "peugeot",
+  "model": "405",
+  "modelFamily": "peugeot 405",
+  "modelAliases": [
+   "405"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "602dbd0634754339b47de7b1d18bf143",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body",
+   "body_black"
+  ],
+  "glassMaterialNames": [
+   "window",
+   "window_int"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-405-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-405-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 24579892,
+  "mobileFileSizeBytes": 24579892,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "435eeb3d887d01d62be82eaba5d81fa6f5abf0abeeb3187bad42cdae120e28b4",
   "pipelineVersion": "publish-batch-pw1-2026-08-09",
   "publishedAt": "2026-08-09",
   "replacedAssetId": null,
