@@ -354,3 +354,78 @@ def measure_heights(lat, lon, radius_m=30):
         print(f"solar height measurement unavailable: "
               f"{type(e).__name__}: {e}", file=_sys.stderr)
         return None
+
+
+def surface_grid(lat, lon, radius_m=25):
+    """The DSM height field with its georeferencing, for footprint work.
+
+    measure_heights() boils the same two files down to one ridge number;
+    this keeps the grids, because the mask + heights together draw the
+    building's TRUE present-day footprint — including the flat-roofed
+    additions that OpenStreetMap has never heard of. At 3 Basons Lane the
+    mapped outline is the original 1930s pair; the mask shows the single-
+    storey front and side additions the owner actually built, as a clean
+    2-4m height band.
+
+    Returns {agl, ground_od_m, utm_epsg, transform} or None; agl is a
+    float array (metres above ground, NaN where unmasked/invalid) and
+    transform maps pixel (row, col) -> (easting, northing) in utm_epsg:
+    E = ox + sx*col, N = oy + sy*row.
+    """
+    key = api_key()
+    if not key:
+        return None
+    try:
+        import io
+        import numpy as np
+        import tifffile
+        import requests
+        r = requests.get("https://solar.googleapis.com/v1/dataLayers:get",
+                         params={"location.latitude": lat,
+                                 "location.longitude": lon,
+                                 "radiusMeters": radius_m,
+                                 "view": "FULL_LAYERS",
+                                 "requiredQuality": "MEDIUM", "key": key},
+                         timeout=60)
+        if r.status_code != 200:
+            return None
+        body = r.json()
+        grids, transform, epsg = {}, None, None
+        for name, url_key in (("dsm", "dsmUrl"), ("mask", "maskUrl")):
+            url = body.get(url_key)
+            if not url:
+                return None
+            g = requests.get(url, params={"key": key}, timeout=120)
+            g.raise_for_status()
+            tf = tifffile.TiffFile(io.BytesIO(g.content))
+            page = tf.pages[0]
+            grids[name] = page.asarray()
+            tags = {t.name: t.value for t in page.tags}
+            tr = tags.get("ModelTransformationTag")
+            gk = tags.get("GeoKeyDirectoryTag")
+            if tr and transform is None:
+                # (sx, 0, 0, ox, 0, sy, 0, oy, ...)
+                transform = (tr[0], tr[3], tr[5], tr[7])
+            if gk and epsg is None:
+                # GeoKey quads: (id, location, count, value); 3072 = CRS
+                for i in range(0, len(gk) - 3, 4):
+                    if gk[i] == 3072:
+                        epsg = int(gk[i + 3])
+        dsm = grids["dsm"].astype("float64")
+        mask = grids["mask"]
+        if mask.shape != dsm.shape or transform is None or not epsg:
+            return None
+        valid = np.abs(dsm) < 1e4
+        ground = (mask == 0) & valid
+        if ground.sum() < 100 or ((mask > 0) & valid).sum() < 25:
+            return None
+        ground_od = float(np.median(dsm[ground]))
+        agl = np.where((mask > 0) & valid, dsm - ground_od, np.nan)
+        return {"agl": agl, "ground_od_m": round(ground_od, 2),
+                "utm_epsg": epsg, "transform": transform,
+                "source": "Google Solar dataLayers DSM + building mask"}
+    except Exception as e:
+        import sys as _sys
+        print(f"solar surface grid unavailable: "
+              f"{type(e).__name__}: {e}", file=_sys.stderr)
+        return None

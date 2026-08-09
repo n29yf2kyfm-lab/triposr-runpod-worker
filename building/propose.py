@@ -717,6 +717,162 @@ def place_extension(width, depth, brief, clearances,
     return rooms, fit
 
 
+
+# --- the house as it stands today ------------------------------------------
+
+# Height bands for reading the mask+DSM into storeys. Between SINGLE_MIN and
+# TALL_MIN a masked pixel is a single-storey structure (an addition, a
+# garage); at TALL_MIN and above it belongs to the two-storey core or its
+# roof. Below SINGLE_MIN it is a wall, a bin store or noise, and ignored.
+BAND_SINGLE_MIN_M = 2.0
+BAND_TALL_MIN_M = 4.2
+EXIST_CELL_M = 0.25
+EXIST_MAX_RECTS = 5
+EXIST_MIN_SIDE_M = 1.5
+
+
+def _utm_from_ll(lat, lon, epsg):
+    """Lat/lon -> the UTM zone Solar's GeoTIFFs are delivered in."""
+    zone = epsg - 32600
+    a, f = 6378137.0, 1 / 298.257223563
+    e2 = f * (2 - f); ep2 = e2 / (1 - e2)
+    k0 = 0.9996
+    lon0 = math.radians(zone * 6 - 183)
+    lat, lon = math.radians(lat), math.radians(lon)
+    N = a / math.sqrt(1 - e2 * math.sin(lat) ** 2)
+    T = math.tan(lat) ** 2
+    C = ep2 * math.cos(lat) ** 2
+    A = math.cos(lat) * (lon - lon0)
+    M = a * ((1 - e2/4 - 3*e2**2/64 - 5*e2**3/256) * lat
+             - (3*e2/8 + 3*e2**2/32 + 45*e2**3/1024) * math.sin(2*lat)
+             + (15*e2**2/256 + 45*e2**3/1024) * math.sin(4*lat)
+             - (35*e2**3/3072) * math.sin(6*lat))
+    E = k0*N*(A + (1-T+C)*A**3/6 + (5-18*T+T**2+72*C-58*ep2)*A**5/120) \
+        + 500000.0
+    Nn = k0*(M + N*math.tan(lat)*(A**2/2 + (5-T+9*C+4*C**2)*A**4/24
+             + (61-58*T+T**2+600*C-330*ep2)*A**6/720))
+    return E, Nn
+
+
+def _grid_rects(cells, nx, ny, x0, y0, cell):
+    """Greedy rectangle cover of a boolean lattice, in local metres."""
+    grid = [[cells[cy][cx] for cx in range(nx)] for cy in range(ny)]
+    rects = []
+    for _ in range(EXIST_MAX_RECTS):
+        area, ax, ay, bx, by = _largest_rectangle(grid, nx, ny)
+        w, d = (bx - ax) * cell, (by - ay) * cell
+        if area * cell * cell < EXIST_MIN_SIDE_M ** 2:
+            break
+        for cy in range(ay, by):
+            for cx in range(ax, bx):
+                grid[cy][cx] = False
+        if min(w, d) < EXIST_MIN_SIDE_M:
+            continue
+        rects.append((round(x0 + ax * cell, 2), round(y0 + ay * cell, 2),
+                      round(w, 2), round(d, 2)))
+    return rects
+
+
+def existing_from_solar(grid, pin_ll, angle, origin_en, width, depth,
+                        storey_h):
+    """The existing house read off Solar's mask + DSM, as measured blocks.
+
+    OpenStreetMap draws the ORIGINAL outline; owners build. At 3 Basons
+    Lane the mapped pair is 95.8m2 of 1930s footprint while the mask shows
+    the front porch band and the side addition the owner actually built —
+    and an extension designed against the mapped outline lands on top of
+    them. This samples the height field over the slice and its outward
+    flank, keeps what is connected to the core, and returns
+    (two_storey_rects, single_rects, single_h, coverage_note) in the local
+    frame — or None when the data cannot say (no grid, core unmasked).
+
+    The party-wall side is clipped at x=0: whatever stands across it is the
+    neighbour's, however similar its height reads.
+    """
+    if not grid:
+        return None
+    import numpy as np
+    agl = grid["agl"]
+    sx, ox, sy, oy = grid["transform"]
+    epsg = grid["utm_epsg"]
+    lat0, lon0 = pin_ll
+    e0, n0 = roofmod.osgb.latlon_to_easting_northing(lat0, lon0)
+    coslat = math.cos(math.radians(lat0))
+
+    xs0, xs1 = -0.05, width + 7.0        # party wall .. outward flank
+    ys0, ys1 = -2.5, depth + 8.0
+    cell = EXIST_CELL_M
+    nx = int((xs1 - xs0) / cell)
+    ny = int((ys1 - ys0) / cell)
+    H, W = agl.shape
+    height = [[float("nan")] * nx for _ in range(ny)]
+    for cy in range(ny):
+        for cx in range(nx):
+            e, n = to_world((xs0 + (cx + 0.5) * cell,
+                             ys0 + (cy + 0.5) * cell), angle, origin_en)
+            lat = lat0 + (n - n0) / 111320.0
+            lon = lon0 + (e - e0) / (111320.0 * coslat)
+            E, N = _utm_from_ll(lat, lon, epsg)
+            col = int((E - ox) / sx)
+            row = int((N - oy) / sy)
+            if 0 <= row < H and 0 <= col < W:
+                height[cy][cx] = float(agl[row, col])
+
+    def band(lo, hi):
+        return [[(not math.isnan(height[cy][cx]))
+                 and lo <= height[cy][cx] < hi
+                 for cx in range(nx)] for cy in range(ny)]
+    tall = band(BAND_TALL_MIN_M, 99.0)
+    single = band(BAND_SINGLE_MIN_M, BAND_TALL_MIN_M)
+    built = [[tall[cy][cx] or single[cy][cx] for cx in range(nx)]
+             for cy in range(ny)]
+
+    # Keep only what is CONNECTED to the mapped core: the neighbour behind
+    # the garden reads as built too, and without this it becomes a wing.
+    keep = [[False] * nx for _ in range(ny)]
+    stack = []
+    for cy in range(ny):
+        for cx in range(nx):
+            lx = xs0 + (cx + 0.5) * cell
+            ly = ys0 + (cy + 0.5) * cell
+            if built[cy][cx] and 0 <= lx <= width and 0 <= ly <= depth:
+                keep[cy][cx] = True
+                stack.append((cy, cx))
+    if not any(any(row) for row in keep):
+        return None
+    while stack:
+        cy, cx = stack.pop()
+        for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            ny_, nx_ = cy + dy, cx + dx
+            if 0 <= ny_ < ny and 0 <= nx_ < nx and built[ny_][nx_] \
+                    and not keep[ny_][nx_]:
+                keep[ny_][nx_] = True
+                stack.append((ny_, nx_))
+
+    tall_k = [[tall[cy][cx] and keep[cy][cx] for cx in range(nx)]
+              for cy in range(ny)]
+    single_k = [[single[cy][cx] and keep[cy][cx] for cx in range(nx)]
+                for cy in range(ny)]
+    tall_rects = _grid_rects(tall_k, nx, ny, xs0, ys0, cell)
+    single_rects = _grid_rects(single_k, nx, ny, xs0, ys0, cell)
+    if not tall_rects:
+        return None
+    singles_h = [height[cy][cx] for cy in range(ny) for cx in range(nx)
+                 if single_k[cy][cx]]
+    singles_h.sort()
+    single_h = None
+    if singles_h:
+        # Median roof level of the additions, less a nominal 300mm of deck
+        # and upstand, is the storey below it — clamped to buildable.
+        single_h = max(2.2, min(3.2, singles_h[len(singles_h)//2] - 0.3))
+    core = sum(r[2] * r[3] for r in tall_rects)
+    addn = sum(r[2] * r[3] for r in single_rects)
+    note = (f"existing house measured from the height field: two-storey "
+            f"core {core:.0f}m2, single-storey additions {addn:.0f}m2 "
+            f"({grid['source']})")
+    return tall_rects, single_rects, single_h, note
+
+
 # --- assembly --------------------------------------------------------------
 
 def ext_span_x(rooms):
@@ -980,6 +1136,34 @@ def run(spec, prog, output_dir):
         house_rooms = [model3d.Room("existing house", 0.0, 0.0, width, depth,
                                     storey_h, kind="existing")]
         plan_source = "bounding rectangle of the outline"
+
+    # THE HOUSE AS IT STANDS TODAY, when the height field can see it. The
+    # mapped outline is the house as first built; the mask + DSM show what
+    # is actually there now — including the flat-roofed additions an
+    # extension must build BEHIND, not through.
+    exist_rear_y = depth
+    if solar.available():
+        try:
+            sgrid = solar.surface_grid(lat, lon)
+            found = existing_from_solar(sgrid, (lat, lon), angle, origin_en,
+                                        width, depth, storey_h)
+            if found:
+                tall_rects, single_rects, single_h, note = found
+                house_rooms = [
+                    model3d.Room("existing house" if i == 0
+                                 else f"existing block {i}",
+                                 px, py, pw, pd, storey_h, kind="existing")
+                    for i, (px, py, pw, pd) in enumerate(tall_rects)]
+                for i, (px, py, pw, pd) in enumerate(single_rects):
+                    house_rooms.append(model3d.Room(
+                        f"existing addition {i}", px, py, pw, pd,
+                        single_h or 2.6, kind="existing", storeys=1))
+                exist_rear_y = max(r.y + r.depth for r in house_rooms)
+                plan_source = note
+                prog.note(note)
+        except Exception as e:
+            print(f"existing-from-solar skipped: {type(e).__name__}: {e}",
+                  file=sys.stderr)
     prog.note(f"existing plan: {plan_source}")
 
     # Bays read off the photo become real projecting geometry.
@@ -1000,6 +1184,20 @@ def run(spec, prog, output_dir):
 
     ext_rooms, fit = place_extension(width, depth, brief, clearances,
                                      storey_h=storey_h)
+    # A rear extension starts where the house actually ENDS. The placement
+    # works in the mapped outline's frame (rear at y=depth); when the
+    # height field found additions standing beyond that line, the new work
+    # shifts back to clear them instead of being drawn through them.
+    if exist_rear_y > depth + 0.05:
+        shift = exist_rear_y - depth
+        for r in ext_rooms:
+            if r.y >= depth - 0.05:
+                r.y = round(r.y + shift, 3)
+        fit["behind_existing"] = (
+            f"the height field shows existing structures to "
+            f"{exist_rear_y:.1f}m — the extension starts behind them, "
+            f"{shift:.1f}m further back than the mapped outline suggested")
+        prog.note(fit["behind_existing"])
     rooms = house_rooms + bay_rooms + ext_rooms
     if fit.get("reduced"):
         prog.note(fit["reduced"])
