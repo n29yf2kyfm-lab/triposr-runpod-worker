@@ -1,0 +1,175 @@
+[
+ {
+  "uid": "be915d2d180849bf9ef70295df4194c3",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "rendered on its side (90 deg roll) in all four views - known render-side inversion",
+   "car itself reads clean: black tyres, glass reads as glass"
+  ],
+  "name": "Land- Rover Defender 90 Station Wagon 2011"
+ },
+ {
+  "uid": "640826210d2a4be9ae6e638fec1e84fa",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as RR Sport L461 instantly",
+   "glass transparent with interior visible",
+   "black rubber tyres, gloss-black rims with spokes and lug detail traceable both sides",
+   "door and bonnet shut lines defined, grille and lamp internals sharp"
+  ],
+  "name": "Land Rover Range Rover Sport - 2023"
+ },
+ {
+  "uid": "588e377a8d8847da9407046d30401ece",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell - windows render opaque body-white, no glass material",
+   "front34 and side tiles are blank (model outside camera frame)",
+   "roof box / roof-tray fitted - modification kit, out of scope",
+   "concept-ish bodywork, not an OEM road car"
+  ],
+  "name": "LAND ROVER (DEFENDER)2026/2"
+ },
+ {
+  "uid": "74dfbfd36dd3419cb935ce832e67957d",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit - panels, doors and bumpers float detached above the body in all four views",
+   "wheels missing/detached"
+  ],
+  "name": "Land Rover Range Rover (L460)"
+ },
+ {
+  "uid": "e13b61cf780b4751ac429facacb7250b",
+  "verdict": "pass",
+  "reasons": [
+   "Range Rover Classic 2-door, proportions read instantly",
+   "glass reads as glass in all four views",
+   "black rubber tyres, wheel faces present and consistent across views",
+   "grille slats and lamp lenses defined, paint reads premium"
+  ],
+  "name": "Range Rover Classic"
+ },
+ {
+  "uid": "ffba8330b24d42daac8905fa0102eb97",
+  "verdict": "pass",
+  "reasons": [
+   "Range Rover L322, proportions correct",
+   "glass reads as glass, interior visible",
+   "black rubber tyres, silver multi-spoke rims present on both sides",
+   "grille mesh and headlight internals sharp, shut lines defined"
+  ],
+  "name": "Range Rover"
+ },
+ {
+  "uid": "6044f01cc608469fb316140233a732dc",
+  "verdict": "fail",
+  "reasons": [
+   "TYRES RENDER BODY-WHITE - wheel is a white disc with a small black hub, no black rubber anywhere (confirmed at 2.2x on the side view)",
+   "torn black artefact smeared across the front door/fender",
+   "wheel arches empty above the white discs"
+  ],
+  "name": "LAND ROVER Range Rover Sport SUV, 5d.'22"
+ },
+ {
+  "uid": "028854cc34a44042afd6bad19a6c0db9",
+  "verdict": "fail",
+  "reasons": [
+   "glazing fails: tailgate window renders as solid opaque body-white panel, side windows are open holes with no glass",
+   "car floats clear of the studio floor in the front34 tiles",
+   "tyres are correctly black rubber and the white steel rims are authentic - not the reason for the cull"
+  ],
+  "name": "RANGE ROVER"
+ },
+ {
+  "uid": "5773ec04488b46148816b5f7a9f3f44f",
+  "verdict": "fail",
+  "reasons": [
+   "overland build: full safari roof rack, bull bar and side steps - modification kit, out of scope",
+   "a large draped car-cover prop is baked into the scene and occludes the whole side view and most of front34"
+  ],
+  "name": "Land Rover Defender 110"
+ },
+ {
+  "uid": "e3ca1bdf1731403ca0861b559301d411",
+  "verdict": "fail",
+  "reasons": [
+   "heavily simplified/melted surfacing - Discovery 5 proportions read wrong (squashed, over-rounded)",
+   "no door or bonnet shut lines except one crude cut",
+   "headlights are flat blobs with no internal elements, grille absent",
+   "tyres are correctly black; the cull is surface quality, not tyres"
+  ],
+  "name": "Land rover V 2018"
+ },
+ {
+  "uid": "b477326cf8b041c9b1a89b1c4f4e7bdf",
+  "verdict": "fail",
+  "reasons": [
+   "scene props baked into the GLB: a row of large floating chrome spheres and a charging cable render in every view",
+   "model yaw is off-axis so the four rubric views land on the wrong faces (no true side view)",
+   "car body itself is decent - glass reads as glass, tyres black"
+  ],
+  "name": "Range Rover Sport Hybrid PHEV 2023"
+ },
+ {
+  "uid": "8ffc162787e641b2b8f5dea813d8a321",
+  "verdict": "fail",
+  "reasons": [
+   "wheels and tyres missing entirely - bare hubs, discs and suspension arms exposed on all four corners",
+   "snorkel and bull bar fitted - off-road modification kit, out of scope",
+   "loose exhaust/side-step parts lying detached on the floor"
+  ],
+  "name": "Land Rover Range Rover MK3 (L322) 2001-2012"
+ },
+ {
+  "uid": "d8fadbb3cec34801ba5e4f4b2e8ff56d",
+  "verdict": "fail",
+  "reasons": [
+   "TYRES RENDER BODY-WHITE - both wheels show a white sidewall ring around the rim, no black rubber (confirmed at 2.2x)",
+   "matte clay-like paint with no premium finish",
+   "lowered stance on oversized wheels reads as a tuner spec"
+  ],
+  "name": "Land Rover Range Rover Sport (Solar Crown)"
+ },
+ {
+  "uid": "bc82786447b14f4fb8f4af0851d1b276",
+  "verdict": "fail",
+  "reasons": [
+   "glazing fails on the rear half: rear side windows render as opaque grey panels carrying a blank white placeholder decal",
+   "front glass, black rubber tyres and dark spoked rims are all fine - the cull is the opaque rear glazing"
+  ],
+  "name": "Land Rover Defender 90"
+ },
+ {
+  "uid": "cd9ab408e4fa4257b0c2dad41d343695",
+  "verdict": "fail",
+  "reasons": [
+   "crumpled foil-like geometry artefacts over the roof, roof rails and rear glass in every view",
+   "interior reads as crumpled scan mush through the glass",
+   "unpainted grey bumpers, sills and mirror caps against white body - material split reads unfinished",
+   "orange accents baked into the wheel spokes"
+  ],
+  "name": "2019 Land Rover Discovery"
+ },
+ {
+  "uid": "4bbd98d0bbc94d5589a0801b8250c2c5",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a die-cast toy sitting on a sheet of crumpled foil - the foil ground plane is baked into the mesh",
+   "single material covers body, glass and tyres alike (cov=1.000); no glass anywhere",
+   "surface is total scan mush, no shut lines, no lamp internals"
+  ],
+  "name": "Land Rover Defender"
+ },
+ {
+  "uid": "48d256ab61c748d2ae1757ad39897353",
+  "verdict": "pass",
+  "reasons": [
+   "2022 Discovery L462, proportions read instantly",
+   "glass reads as glass with clean reflections",
+   "black rubber tyres; white-painted alloy rims with full spoke and caliper detail on both sides",
+   "door, bonnet and tailgate shut lines defined; grille mesh and headlight internals sharp"
+  ],
+  "name": "2022 Land Rover Discovery P360 Facelift"
+ }
+]
