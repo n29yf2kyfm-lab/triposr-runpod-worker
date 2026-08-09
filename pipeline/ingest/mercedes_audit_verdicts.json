@@ -357,6 +357,27 @@
    "mats": 1,
    "verdict": "PASS",
    "note": "C-Class S202 estate; alloys consistent in all four views, grille crisp, headlight internals sharp, shut lines defined, panels clean. HUMSTER3D plate wants blanking"
+  },
+  "9bd7aeb24fa14ab089c941cf67d675ad": {
+   "name": "Mercedes Benz 300 SL",
+   "cov": 0.2,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "300 SL Roadster; excellent -- chrome crisp throughout, wheels consistent in all four views, red interior clean, shut lines defined, premium finish. The most iconic classic in this wave"
+  },
+  "5b85f87f175b434288708b83b62c42de": {
+   "name": "Mercedes- Benz E-class (S124)wagon",
+   "cov": 0.206,
+   "mats": 2,
+   "verdict": "PASS",
+   "note": "E-Class S124 wagon; alloys consistent in all four views, grille crisp, headlight internals sharp, shut lines defined, panels clean. Sixth classic. HUMSTER3D plate wants blanking"
+  },
+  "97be219788544a2c953ccc04e37b97e8": {
+   "name": "Mercedes- Benz E-class sedan 2010",
+   "cov": 0.198,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "E-Class W212 sedan; multi-spoke wheels consistent in all four views, grille crisp, headlight internals sharp, shut lines defined, panels clean. A different generation from the W213 already live, so it adds coverage. HUMSTER3D plate wants blanking"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
