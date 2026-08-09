@@ -217,6 +217,34 @@
    "mats": 1,
    "verdict": "PASS",
    "note": "X-Class double cab; multi-spoke wheels consistent in all four views, star grille crisp, headlight internals sharp, shut lines defined, roll bar and bed correct. Also a useful check on the new gate: a pickup is exactly the body type geom_audit's low-top band would flag, which is why that band warns instead of rejecting"
+  },
+  "86dcc66d18d84561a42d9de681a6011f": {
+   "name": "Mercedes-Benz GLA220 CDi",
+   "cov": 0.16,
+   "mats": 2,
+   "verdict": "FAIL",
+   "note": "panel crumpling down both flanks and across the rear hatch, with heavy creasing that does not follow the body form. 85k faces"
+  },
+  "0118a759ff24443b8c15a6ea855a5423": {
+   "name": "Mercedes- Benz SLR Mclaren",
+   "cov": 0.173,
+   "mats": 2,
+   "verdict": "FAIL",
+   "note": "out of scope -- tuner widebody SLR: roof scoop, huge rear wing, aggressive splitter and diffuser. Well made, but a reg decodes to a stock SLR. Fourth out-of-scope Mercedes"
+  },
+  "c18392f7273f4d6f85255ae3ff2b389a": {
+   "name": "Mercedes- Benz GLK",
+   "cov": 0.174,
+   "mats": 2,
+   "verdict": "PASS",
+   "note": "GLK; multi-spoke wheels consistent in all four views, star grille crisp, headlight internals sharp, shut lines defined, panels clean"
+  },
+  "e18414e0bed048feb766b3b390784937": {
+   "name": "Mercedes- Benz SLK55 AMG R172",
+   "cov": 0.176,
+   "mats": 2,
+   "verdict": "FAIL",
+   "note": "fully exploded -- bumpers, doors and body panels all detached and floating around the car, wheels unattached. Same failure as both CLS models"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
