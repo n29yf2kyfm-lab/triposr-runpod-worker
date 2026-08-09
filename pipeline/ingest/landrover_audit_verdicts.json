@@ -315,5 +315,106 @@
    "scan mush on every surface"
   ],
   "name": "Land Rover Defender"
+ },
+ {
+  "uid": "277cf51a9f95473c85580612651990fd",
+  "verdict": "fail",
+  "reasons": [
+   "body renders as polished chrome/mirror rather than paint - cov=0.105 LOW COVERAGE is the same story from the classifier's side",
+   "reflections are not clean: at 2.2x the mirror finish exposes wavy, dented panel surfaces along the rear door and above the rear arch, and a visible material seam mid-door where the finish changes",
+   "tyres are correctly black and the white alloys are fine - the cull is the body material and surface quality"
+  ],
+  "name": "2006 Land Rover Range Rover Supercharged"
+ },
+ {
+  "uid": "5fe144a7780d44d99400c5d5c595a404",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a motor-show stand (the same 'No Time To Die' display as uid 01847d45) - roll-up banners, stanchion poles, floor and torn background geometry baked into the mesh",
+   "two vehicles and a display board share the mesh; the side view is almost entirely scan debris",
+   "single material, cov=1.000, no separable glass"
+  ],
+  "name": "Land Rover Sport SVR"
+ },
+ {
+  "uid": "b75f47873c5b4ab8bc839525a32b3fda",
+  "verdict": "fail",
+  "reasons": [
+   "glazing fails on the rear half: rear door and rear quarter windows render as solid opaque white panels (confirmed at 2.2x); only the front door glass is transparent",
+   "tyres are correctly black rubber and the dark alloys have full spoke detail",
+   "title says SV Coupe but the render is a four-door - metadata only, not the cull reason"
+  ],
+  "name": "Land Rover Range Rover SV Coupe"
+ },
+ {
+  "uid": "ce271d02044242c7bc7c3018a4c6bf54",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: one material over the whole car (cov=1.000), no glass anywhere, wheels are plain untextured cylinders with no tyre or rim face",
+   "also rendered on its side in front34/front34_L and stood on its nose in the side view - but a re-render would still leave a clay model, so this is a scrap not a rerender"
+  ],
+  "name": "Land Rover Range Rover SV LWB Serenity 2022 3D"
+ },
+ {
+  "uid": "826d838aebdd40b9bfaab100d7cf276f",
+  "verdict": "fail",
+  "reasons": [
+   "not a complete vehicle - the mesh is a bare Defender 110 bodyshell/interior conversion (doors and floor pan only), no wheels, no closed exterior",
+   "placeholder checker/dazzle textures across the door frames and floor",
+   "camera frames a giant close-up because the model has no car-sized bounding volume"
+  ],
+  "name": "Defender 110 CARROSSERIE-INTERIEUR-modif-porte a"
+ },
+ {
+  "uid": "43fe3d9855ef409892d976bd8850d819",
+  "verdict": "pass",
+  "reasons": [
+   "Range Rover L322 Supercharged, proportions read instantly, strong front three-quarter",
+   "black rubber tyres, white-painted alloys with full spoke, lug and centre-cap detail on both sides",
+   "glass reads as glass with clean tinted reflections",
+   "grille mesh, side vent, headlight internals and shut lines all sharp; paint reads premium"
+  ],
+  "name": "2008 Land Rover Range Rover Supercharged"
+ },
+ {
+  "uid": "c763c9117e344e709f6c0352113ffd5e",
+  "verdict": "fail",
+  "reasons": [
+   "bull bar fitted - modification kit, out of scope for this marque",
+   "heavy baked-in weathering: rust on the bull bar, mud flaps and wheels, and a mud-splatter texture painted across the white bodywork - a respray would produce a dirty car",
+   "chunky mud-terrain tyres are fine on a Defender; the cull is the weathering and the bar"
+  ],
+  "name": "1996 Land Rover Defender 110"
+ },
+ {
+  "uid": "9b5f6c0f630e4436a39f736f0d7dcbc9",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell - windscreen and side windows render as opaque body-colour panels, no glass material anywhere",
+   "lifted stance on oversized mud-terrain tyres with cream steel rims - off-road build",
+   "no lamp internals, grille is a flat plate"
+  ],
+  "name": "Land Rover Serie 3"
+ },
+ {
+  "uid": "dbc671780fd84291a829c3f8aeebd326",
+  "verdict": "pass",
+  "reasons": [
+   "2016 Evoque Coupe, proportions read instantly",
+   "black rubber tyres, white alloys with full spoke and caliper detail on both sides",
+   "glass reads as glass, tinted, interior visible",
+   "grille mesh, headlight internals, door and bonnet shut lines all defined"
+  ],
+  "name": "2016 Land Rover Range Rover Evoque Coupe"
+ },
+ {
+  "uid": "dd8455bdfa3247feb906145fa2abca03",
+  "verdict": "fail",
+  "reasons": [
+   "TYRES RENDER TRANSPARENT - at 2.2x the brake disc, caliper and the studio floor are all visible straight through the tyre; no black rubber on any corner",
+   "wheels consequently read as floating white discs",
+   "body and glass are otherwise fine"
+  ],
+  "name": "2010 Land Rover Range Rover Supercharged"
  }
 ]
