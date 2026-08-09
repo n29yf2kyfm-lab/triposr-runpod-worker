@@ -95,11 +95,20 @@ def valid_glb(b):
     return len(b) > 20 and b[:4] == b"glTF" and struct.unpack("<I", b[8:12])[0] == len(b)
 
 
-def render_view(glb_url, az, colour, samples, w, h):
-    """Submit one view and wait. Returns (png_bytes, recolour_dict)."""
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from geom_audit import verdict as geom_verdict            # noqa: E402
+
+
+def render_view(glb_url, az, colour, samples, w, h, audit=False):
+    """Submit one view and wait. Returns (png_bytes, recolour_dict, audit_dict).
+
+    `audit` asks the handler for its pose block (glass_zf/glass_af). It is set on
+    ONE view per car, not all four: the handler runs an extra geometry pass for it,
+    and the pose of a car does not change with camera azimuth.
+    """
     body = {"input": {"glb_url": glb_url, "colour": colour, "studio": True,
                       "az": az, "elev": 0.18, "samples": samples,
-                      "resx": w, "resy": h}}
+                      "resx": w, "resy": h, "audit": bool(audit)}}
     rq = urllib.request.Request(f"https://api.runpod.ai/v2/{EP}/run",
         data=json.dumps(body).encode(),
         headers={"Authorization": f"Bearer {rpk()}", "Content-Type": "application/json"})
@@ -115,7 +124,7 @@ def render_view(glb_url, az, colour, samples, w, h):
         st = d.get("status")
         if st == "COMPLETED":
             o = d.get("output") or {}
-            return base64.b64decode(o["png_b64"]), o.get("recolour")
+            return base64.b64decode(o["png_b64"]), o.get("recolour"), o.get("audit")
         if st in ("FAILED", "CANCELLED"):
             raise RuntimeError(str(d.get("error"))[:120])
         time.sleep(4)
@@ -206,7 +215,7 @@ def main():
         try:
             with ThreadPoolExecutor(max_workers=a.parallel) as ex:
                 futs = {lab: ex.submit(render_view, glb_url, az, a.colour,
-                                       a.samples, 1000, 562)
+                                       a.samples, 1000, 562, lab == VIEWS[0][0])
                         for lab, az in VIEWS}
                 got = {lab: f.result() for lab, f in futs.items()}
         except Exception as e:
@@ -218,11 +227,35 @@ def main():
         cov = rc.get("coverage") or 0.0
         adv = 1 <= nm <= 2 and 0.05 <= cov <= 0.45
         cw = p.get("class_warn")
-        hdr = ("%s  |  %s f  |  body mats=%d cov=%.3f  |  %s%s" % (
+
+        # G-gate: the handler's pose block, judged by geom_audit. Wiring this was
+        # overdue -- geom_audit.py has existed and been calibrated since 2026-07-17
+        # and nothing on the ingest path ever called it, so THREE upside-down
+        # Toyotas and an on-side Mercedes ML reached human sheets in one day.
+        ha = next((v[2] for v in got.values() if v[2]), None) or {}
+        pose, preasons = "ok", []
+        if ha.get("geom"):
+            try:
+                pose, preasons = geom_verdict(ha["geom"], ha, cov)
+            except Exception as e:                       # never let the gate abort a car
+                log(f"[{i}] geom_audit {type(e).__name__}: {str(e)[:50]}")
+
+        # C-gate: body-paint coverage. Measured 2026-08-08 across the Mercedes clean
+        # set -- every car under ~0.10 rendered its OWN colour under a forced one,
+        # because the classifier had matched trim or a badge rather than body paint.
+        # The boundary is a gradient, not a cliff, so this WARNS and never rejects:
+        # recolour_audit --stamp stays the only proof a respray works.
+        low_cov = 0.0 < cov < 0.12
+        flags = ""
+        if pose == "reject": flags += "  |  POSE REJECT: " + ",".join(preasons)[:60]
+        elif preasons:       flags += "  |  pose: " + ",".join(preasons)[:50]
+        if low_cov:          flags += "  |  LOW COVERAGE, respray may not take"
+        hdr = ("%s  |  %s f  |  body mats=%d cov=%.3f  |  %s%s%s" % (
                    p["name"][:52], f"{p.get('faces',0):,}", nm, cov,
                    "recolourable" if adv else "MATERIAL SPLIT SUSPECT",
-                   ("  |  TAGGED '%s'" % cw) if cw else ""),
-               (150, 255, 170) if adv else (255, 170, 170))
+                   ("  |  TAGGED '%s'" % cw) if cw else "", flags),
+               (255, 120, 120) if pose == "reject"
+               else (150, 255, 170) if (adv and not low_cov) else (255, 170, 170))
         pngs = [(got[lab][0], lab) for lab, _ in VIEWS]
         sp = f"{a.work}/{uid}.jpg"
         try:
@@ -233,8 +266,9 @@ def main():
             try: os.remove(f)
             except OSError: pass
         built += 1
-        log(f"[{i}/{len(rows)}] SHEET mats={nm} cov={cov:.3f} {'OK' if adv else 'split'}"
-            f"  {p['name'][:40]}")
+        log(f"[{i}/{len(rows)}] SHEET mats={nm} cov={cov:.3f} "
+            f"{'POSE-REJECT' if pose == 'reject' else 'OK' if adv else 'split'}"
+            f"{' LOWCOV' if low_cov else ''}  {p['name'][:40]}")
     log("GPU_WAVE_DONE", built, "new sheets")
 
 
