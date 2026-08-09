@@ -190781,6 +190781,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3179,
+   "variantsHash": "fe96f3202751041be8833a8d341e410dce6e8d0e",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -190994,6 +191001,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.286,
+   "variantsHash": "29829e1cbd6ee0d5adeab2ec23dfd069effe2533",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -191207,6 +191221,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2789,
+   "variantsHash": "c5f949c081149cf2afb231b980e99c15e78ba3f6",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -191420,6 +191441,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.5689,
+   "variantsHash": "f9d40822cfcc08a0aed63a92e78be2e358b01acd",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -191635,6 +191663,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3421,
+   "variantsHash": "2dc95210fa93fd5ac590caf77c1a48e84be1fbe4",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -191847,6 +191882,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2371,
+   "variantsHash": "d5a080e9c8926193c85b2177b24237e25c02ff80",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
