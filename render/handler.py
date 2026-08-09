@@ -49,6 +49,9 @@ import tempfile
 
 import runpod
 import requests
+import ipaddress
+import socket
+import urllib.parse
 
 HDRI = os.environ.get("HDRI_PATH", "/app/assets/hdri.hdr")
 FONT = os.environ.get(
@@ -410,26 +413,119 @@ def _make_plate(reg, rear=False):
     return path
 
 
-def _fetch_glb(job_input):
-    """Materialise the GLB to a temp file from b64 / url / (base+path)."""
-    path = os.path.join(tempfile.gettempdir(), "model.glb")
+# ---------------------------------------------------------------- input safety
+# Added 2026-08-09 after an external review. The previous _fetch_glb would GET
+# ANY url, forward a caller-supplied Authorization header, follow redirects to
+# anywhere, and buffer the whole body with no size cap -- server-side request
+# forgery plus trivial memory exhaustion. It also wrote fixed temp filenames,
+# so two jobs in one container would clobber each other.
+
+# Hosts this worker may fetch a GLB from. Override with RENDER_GLB_ALLOWLIST
+# (comma-separated). Defaults to the project's own Supabase storage.
+_DEFAULT_ALLOWLIST = "tfkvthprsntexrcuqpyd.supabase.co"
+MAX_GLB_BYTES = int(os.environ.get("RENDER_MAX_GLB_BYTES", 256 * 1024 * 1024))
+MAX_PNG_B64_BYTES = int(os.environ.get("RENDER_MAX_PNG_B64", 9 * 1024 * 1024))
+
+
+def _allowed_hosts():
+    raw = os.environ.get("RENDER_GLB_ALLOWLIST", _DEFAULT_ALLOWLIST)
+    return {h.strip().lower() for h in raw.split(",") if h.strip()}
+
+
+def _assert_public_host(url):
+    """https + allowlisted host + every resolved A/AAAA record is public.
+
+    Resolving and checking EVERY address matters: a permitted hostname whose DNS
+    points at 169.254.169.254 or 10.x would otherwise reach cloud metadata or
+    internal services."""
+    u = urllib.parse.urlparse(url)
+    if u.scheme != "https":
+        raise ValueError(f"glb_url must be https, got {u.scheme!r}")
+    host = (u.hostname or "").lower()
+    allow = _allowed_hosts()
+    if host not in allow:
+        raise ValueError(f"host {host!r} is not in the GLB allowlist")
+    try:
+        infos = socket.getaddrinfo(host, u.port or 443, proto=socket.IPPROTO_TCP)
+    except socket.gaierror as e:
+        raise ValueError(f"cannot resolve {host!r}: {e}")
+    for info in infos:
+        ip = ipaddress.ip_address(info[4][0])
+        if (ip.is_private or ip.is_loopback or ip.is_link_local
+                or ip.is_reserved or ip.is_multicast):
+            raise ValueError(f"host {host!r} resolves to non-public {ip}")
+    return host
+
+
+def _clamp(v, lo, hi, name):
+    try:
+        n = float(v)
+    except (TypeError, ValueError):
+        raise ValueError(f"{name} must be numeric, got {v!r}")
+    if n != n or n in (float("inf"), float("-inf")):
+        raise ValueError(f"{name} must be finite, got {v!r}")
+    return max(lo, min(hi, n))
+
+
+def _fetch_glb(job_input, workdir=None):
+    """Materialise the GLB to a temp file from b64 / url / (base+path).
+
+    Streams with a hard byte cap, allowlists the host, refuses redirects that
+    leave the allowlist, and validates the glTF magic before handing the file on.
+    """
+    workdir = workdir or tempfile.gettempdir()
+    path = os.path.join(workdir, "model.glb")
+
     if job_input.get("glb_b64"):
+        blob = base64.b64decode(job_input["glb_b64"])
+        if len(blob) > MAX_GLB_BYTES:
+            raise ValueError(f"glb_b64 is {len(blob)}B, over the "
+                             f"{MAX_GLB_BYTES}B limit")
+        if blob[:4] != b"glTF":
+            raise ValueError("glb_b64 is not a binary glTF (bad magic)")
         with open(path, "wb") as f:
-            f.write(base64.b64decode(job_input["glb_b64"]))
+            f.write(blob)
         return path
+
     url = job_input.get("glb_url")
     if not url and job_input.get("glb_path"):
         base = job_input.get("glb_base", "").rstrip("/")
         url = f"{base}/{job_input['glb_path'].lstrip('/')}"
     if not url:
         raise ValueError("provide glb_b64, glb_url, or glb_path(+glb_base)")
+
+    _assert_public_host(url)
     headers = {}
     if job_input.get("glb_auth"):
+        # Only ever sent to an allowlisted host -- _assert_public_host has run.
         headers["Authorization"] = job_input["glb_auth"]
-    r = requests.get(url, headers=headers, timeout=90)
+
+    # allow_redirects=False: a 30x to an unvetted host would bypass the checks.
+    r = requests.get(url, headers=headers, timeout=90, stream=True,
+                     allow_redirects=False)
+    if r.is_redirect or r.is_permanent_redirect:
+        nxt = r.headers.get("Location", "")
+        _assert_public_host(urllib.parse.urljoin(url, nxt))
+        r = requests.get(urllib.parse.urljoin(url, nxt), headers=headers,
+                         timeout=90, stream=True, allow_redirects=False)
     r.raise_for_status()
+
+    declared = int(r.headers.get("Content-Length") or 0)
+    if declared and declared > MAX_GLB_BYTES:
+        raise ValueError(f"GLB declares {declared}B, over the {MAX_GLB_BYTES}B limit")
+
+    got = 0
     with open(path, "wb") as f:
-        f.write(r.content)
+        for chunk in r.iter_content(1 << 20):
+            got += len(chunk)
+            if got > MAX_GLB_BYTES:
+                raise ValueError(f"GLB exceeded the {MAX_GLB_BYTES}B limit mid-stream")
+            f.write(chunk)
+    if declared and got != declared:
+        raise ValueError(f"GLB truncated: {got}B of {declared}B")
+    with open(path, "rb") as f:
+        if f.read(4) != b"glTF":
+            raise ValueError("downloaded file is not a binary glTF (bad magic)")
     return path
 
 
@@ -1285,7 +1381,7 @@ def handler(job):
         # detector picks, so we can measure recolour coverage across the library.
         try:
             bpy = _load_bpy()
-            glb = _fetch_glb(ji)
+            glb = _fetch_glb(ji, tempfile.mkdtemp(prefix="matadt_"))
             bpy.ops.wm.read_factory_settings(use_empty=True)
             bpy.ops.import_scene.gltf(filepath=glb)
             meta = _classify_materials(bpy)
@@ -1301,23 +1397,33 @@ def handler(job):
                     "body_pct": round(sum(100 * meta[n]["area"] / tot for n in chosen), 1),
                     "materials": table}
         except Exception as e:
-            import traceback
-            return {"error": str(e), "traceback": traceback.format_exc()}
+            resp = {"error": str(e)[:400], "error_type": type(e).__name__}
+            if os.environ.get("RENDER_DEBUG_TRACEBACK"):
+                import traceback
+                resp["traceback"] = traceback.format_exc()
+            return resp
+    # Per-job scratch dir: the fixed names model.glb / render.png / plate.png
+    # would collide the moment two jobs share a container. RunPod concurrency is
+    # opt-in and this worker runs one at a time, but the isolation is cheap and
+    # removes the landmine before someone enables it.
+    workdir = tempfile.mkdtemp(prefix=f"job_{str(job.get('id','x'))[:24]}_")
     try:
         bpy = _load_bpy()
-        glb = _fetch_glb(ji)
-        out = os.path.join(tempfile.gettempdir(), "render.png")
+        glb = _fetch_glb(ji, workdir)
+        out = os.path.join(workdir, "render.png")
         t0 = time.time()
         device, recolour_info, plate_end_used, pose_info = _render(
             bpy, glb, out,
             colour=ji.get("colour") or ji.get("color"),
             plate_reg=ji.get("plate"),
-            az_deg=float(ji.get("az", 40)),
-            elev=float(ji.get("elev", 0.15)),
-            zfrac=float(ji.get("zfrac", 0.32)),
-            samples=int(ji.get("samples", 160)),
-            resx=int(ji.get("width", 1600)),
-            resy=int(ji.get("height", 900)),
+            az_deg=_clamp(ji.get("az", 40), -3600, 3600, "az"),
+            elev=_clamp(ji.get("elev", 0.15), -1.0, 1.0, "elev"),
+            zfrac=_clamp(ji.get("zfrac", 0.32), 0.01, 1.0, "zfrac"),
+            # Bounded so a job cannot burn GPU-hours and then fail delivery on
+            # RunPod's 10MB /run payload limit.
+            samples=int(_clamp(ji.get("samples", 160), 1, 512, "samples")),
+            resx=int(_clamp(ji.get("width", 1600), 64, 2560, "width")),
+            resy=int(_clamp(ji.get("height", 900), 64, 2560, "height")),
             bright=bool(ji.get("bright", False)),
             studio=bool(ji.get("studio", True)),
             finish=ji.get("finish"),
@@ -1331,6 +1437,14 @@ def handler(job):
         dt = round(time.time() - t0, 1)
         with open(out, "rb") as f:
             png_b64 = base64.b64encode(f.read()).decode("utf-8")
+        # Fail loudly and cheaply rather than returning a payload RunPod will
+        # reject at the transport layer (10MB /run, 20MB /runsync).
+        if len(png_b64) > MAX_PNG_B64_BYTES:
+            return {"error": "rendered PNG exceeds the response payload limit",
+                    "error_type": "PayloadTooLarge",
+                    "png_b64_bytes": len(png_b64),
+                    "limit": MAX_PNG_B64_BYTES,
+                    "hint": "lower width/height, or fetch via object storage"}
         resp = {"status": "success", "png_b64": png_b64,
                 "device": device, "seconds": dt,
                 "recolour": recolour_info, "plate_end_used": plate_end_used}
@@ -1338,8 +1452,16 @@ def handler(job):
             resp["audit"] = pose_info
         return resp
     except Exception as e:
-        import traceback
-        return {"error": str(e), "traceback": traceback.format_exc()}
+        # Raw tracebacks leak absolute paths and internals to any caller. Keep
+        # them behind RENDER_DEBUG_TRACEBACK for our own debugging only.
+        resp = {"error": str(e)[:400], "error_type": type(e).__name__}
+        if os.environ.get("RENDER_DEBUG_TRACEBACK"):
+            import traceback
+            resp["traceback"] = traceback.format_exc()
+        return resp
+    finally:
+        import shutil
+        shutil.rmtree(workdir, ignore_errors=True)
 
 
 runpod.serverless.start({"handler": handler})
