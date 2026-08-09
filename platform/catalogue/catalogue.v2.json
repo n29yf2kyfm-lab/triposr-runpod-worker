@@ -190865,5 +190865,2563 @@
    ]
   },
   "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-3008-pw1-v1",
+  "make": "peugeot",
+  "model": "3008",
+  "modelFamily": "peugeot 3008",
+  "modelAliases": [
+   "3008"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "3e5e14fdb1f94f25a5b572caf518f55d",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "CarPaint_Flip1"
+  ],
+  "glassMaterialNames": [
+   "Material.007",
+   "Material.012"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-3008-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-3008-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 5709880,
+  "mobileFileSizeBytes": 5709880,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "8fb8c42fc04e12b106056cd826b332f260ea8b307fd33e6db8ab776588a47934",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-406-1998-pw1-v1",
+  "make": "peugeot",
+  "model": "406",
+  "modelFamily": "peugeot 406",
+  "modelAliases": [
+   "406"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1998,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "4b55488b331041c299955a937334113b",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Body1Mtl"
+  ],
+  "glassMaterialNames": [
+   "Glass1Mtl",
+   "PlateFrame1Mtl"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-406-1998-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-406-1998-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 10302088,
+  "mobileFileSizeBytes": 10302088,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "81c6aabd45a0f0e2aa28ffc6e397b74a7966f296ab739189fe4de5e2b6d28f25",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-206-2000-pw1-v1",
+  "make": "peugeot",
+  "model": "206",
+  "modelFamily": "peugeot 206",
+  "modelAliases": [
+   "206"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2000,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "513b76a9909049f49327c0b83bc5b56b",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura"
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidros_Vermelhos",
+   "Carro_Vidro_Laranja",
+   "Carro_Vidro_R"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-2000-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-2000-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 12065536,
+  "mobileFileSizeBytes": 12065536,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "1441fefb7b5dfda02c378ba7201d0a1492a6329f6722ff6fd48b8663c43b4c51",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-206-2003-pw1-v1",
+  "make": "peugeot",
+  "model": "206",
+  "modelFamily": "peugeot 206",
+  "modelAliases": [
+   "206"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2003,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "52deb999ad964d2496c9fd25ee84c2d4",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "BODY"
+  ],
+  "glassMaterialNames": [
+   "GLASS"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-2003-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-2003-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 8810364,
+  "mobileFileSizeBytes": 8810364,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "0874b512b1e0d84d4c759b1cba9cf9e2baf1d32a76d92a4691149611292eb738",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-504-1968-pw1-v1",
+  "make": "peugeot",
+  "model": "504",
+  "modelFamily": "peugeot 504",
+  "modelAliases": [
+   "504"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1968,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "cc25e4d5a33a402e81ab764be6a0f61e",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Car_Paint.001",
+   "Car_Paint_Skirt.001",
+   "Door_Body_Part.001",
+   "Int_Car_Paint.001"
+  ],
+  "glassMaterialNames": [
+   "DAMAGE_GLASS.001",
+   "Int_Glass.001",
+   "Ext_Glass.001"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-504-1968-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-504-1968-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6707568,
+  "mobileFileSizeBytes": 6707568,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d734f1b528fa6098483ceaa1185dcaeced64784d251ac7acc970e9cb6cedb96f",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-205-1997-pw1-v1",
+  "make": "peugeot",
+  "model": "205",
+  "modelFamily": "peugeot 205",
+  "modelAliases": [
+   "205"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1997,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "b0dbc2e209d545f9a2becdf9a7ab43ef",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura"
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidro_Laranja",
+   "Carro_Vidro_Laranja_1",
+   "Carro_Vidro_R",
+   "Carro_Vidros_Vermelhos"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-1997-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-1997-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 23927708,
+  "mobileFileSizeBytes": 23927708,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "8df517e0e97e78e4c038c1e0b012ab215e98e2305dc20a636623c719d549e1cf",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-407-2005-pw1-v1",
+  "make": "peugeot",
+  "model": "407",
+  "modelFamily": "peugeot 407",
+  "modelAliases": [
+   "407"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2005,
+  "yearEnd": null,
+  "bodyStyle": "saloon",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "deaac3bd68604aee8f8365d784f8ab34",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "p407_body",
+   "p407_paint"
+  ],
+  "glassMaterialNames": [
+   "p407_glass_vitres",
+   "p407_glass_vitres01",
+   "p407_glass_degivrage"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-407-2005-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-407-2005-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 16701868,
+  "mobileFileSizeBytes": 16701868,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "aeab65ef19e7d59f8b2874ea4ae8f561fef63908d49a981141514acee9220208",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-2008-2018-pw1-v1",
+  "make": "peugeot",
+  "model": "2008",
+  "modelFamily": "peugeot 2008",
+  "modelAliases": [
+   "2008"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2018,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "6291b66452614464889a71c8337b8c85",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura"
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidros_Vermelhos"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2018-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2018-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 42652996,
+  "mobileFileSizeBytes": 42652996,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "53a56b9fcbd54d7a18c6ee95662524388a23069e458727dbf6dec1fadd744d0e",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-2008-2020-pw1-v1",
+  "make": "peugeot",
+  "model": "2008",
+  "modelFamily": "peugeot 2008",
+  "modelAliases": [
+   "2008"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": null,
+  "bodyStyle": "suv",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "0edcda285432434a8d127b44ad6da808",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "2020_Peugeot_e-2008_black",
+   "2020_Peugeot_e-2008_dinghyblack",
+   "2020_Peugeot_e-2008_dinghyblack_4",
+   "Bianca_White",
+   "Color_M08"
+  ],
+  "glassMaterialNames": [
+   "2020_Peugeot_e-2008_vitres_exterieur",
+   "2020_Peugeot_e-2008_glass_black",
+   "2020_Peugeot_e-2008_glass_clear"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2020-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2020-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 28683440,
+  "mobileFileSizeBytes": 28683440,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d505beabe78084c2e9fa0d58a7c26bbe00159a7c095d12549de7b3ec1ee7f118",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-205-pw1-v1",
+  "make": "peugeot",
+  "model": "205",
+  "modelFamily": "peugeot 205",
+  "modelAliases": [
+   "205"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "convertible",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "ff2b04cf7da94cbdbd277fe23b7204b8",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Mat.4",
+   "Mat_3",
+   "Mat_4",
+   "Mat_5",
+   "base",
+   "base_0",
+   "noir_0",
+   "noir_1"
+  ],
+  "glassMaterialNames": [
+   "Mat_2"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 23336548,
+  "mobileFileSizeBytes": 23336548,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "6bf98f8b2b326201b8d0a69e521722ce7ea6de6073d973dc3ab8d4f90435ec8b",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-206-pw1-v1",
+  "make": "peugeot",
+  "model": "206",
+  "modelFamily": "peugeot 206",
+  "modelAliases": [
+   "206"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "b2ef11bf94b848618b5b7f38e202316b",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Body1Mtl"
+  ],
+  "glassMaterialNames": [
+   "Glass1Mtl",
+   "Redglass1Mtl"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3672088,
+  "mobileFileSizeBytes": 3672088,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "bc64e9b92e58d849dbb8fc0eaaf95f3234c7a116a45b6257dc933a9f52a3b672",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-207-pw1-v1",
+  "make": "peugeot",
+  "model": "207",
+  "modelFamily": "peugeot 207",
+  "modelAliases": [
+   "207"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "fa2cfaaab79b4d18a0fc89ba25a02f07",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Standardmater13",
+   "Standardmater2",
+   "Standardmater20",
+   "Standardmater31",
+   "Standardmater34",
+   "Standardmater35",
+   "Standardmater39",
+   "Standardmater41",
+   "Standardmater43",
+   "Standardmater45",
+   "Standardmater51",
+   "Standardmater6",
+   "Standardmater7",
+   "Standardmater8",
+   "Standardmaterial"
+  ],
+  "glassMaterialNames": [
+   "Standardmater26"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-207-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-207-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 5394216,
+  "mobileFileSizeBytes": 5394216,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "be7e2d8ea4b48fe368bb1d56cc0ace9e93d7988aa322712085e14ae5bba78570",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-207-pw1-v2",
+  "make": "peugeot",
+  "model": "207",
+  "modelFamily": "peugeot 207",
+  "modelAliases": [
+   "207"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "9b59ff092c1c4f1f918ac7c16fe679a7",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "darkglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-207-pw1-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-207-pw1-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 17056768,
+  "mobileFileSizeBytes": 17056768,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f90cc6a36014bdde56aed6ec1dad9cda815c720aa0ecc9ff645c7bc5ffac234d",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-308-2020-pw1-v1",
+  "make": "peugeot",
+  "model": "308",
+  "modelFamily": "peugeot 308",
+  "modelAliases": [
+   "308"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "fe211e55acf54aa4a70c522ce720e17a",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint",
+   "carpaint_second"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "darkglass",
+   "clearglass",
+   "redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2020-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2020-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 31381436,
+  "mobileFileSizeBytes": 31381436,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "c469367d6318a70d423cc13b7725e023ea969dccefbf63db1da15ae042623989",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-rcz-pw1-v1",
+  "make": "peugeot",
+  "model": "rcz",
+  "modelFamily": "peugeot rcz",
+  "modelAliases": [
+   "rcz"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "coupe",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "bcbd76ac8d8949bc8e4b9f411d2f8745",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint.001"
+  ],
+  "glassMaterialNames": [
+   "greenglass.001",
+   "clearglass.001",
+   "redglass.001",
+   "darkglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-rcz-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-rcz-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 5918472,
+  "mobileFileSizeBytes": 5918472,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "3cec262510a446b2e876ff9d9692bea49b31e93c441c5a317120ed0402230d8c",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-308-2026-pw1-v1",
+  "make": "peugeot",
+  "model": "308",
+  "modelFamily": "peugeot 308",
+  "modelAliases": [
+   "308"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2026,
+  "yearEnd": null,
+  "bodyStyle": "hatchback",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "68ae14e9883b4405852b404844384cdf",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "Free Standard",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "vehicle_paint1",
+   "vehicle_paint1_001-material"
+  ],
+  "glassMaterialNames": [
+   "ext_glass",
+   "int_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2026-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2026-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 42339652,
+  "mobileFileSizeBytes": 42339652,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "ca5c692cb0b262ca883d15d214da8600f22ad85f4ec43ad2bf6540d283165894",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'Free Standard' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "peugeot-308-pw1-v1",
+  "make": "peugeot",
+  "model": "308",
+  "modelFamily": "peugeot 308",
+  "modelAliases": [
+   "308"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": "estate",
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "e538cff86fef432287ec93c7c6f91931",
+  "sourceRetrievedAt": "2026-08-09",
+  "sourceEvidenceUrl": null,
+  "licence": "Free Standard",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windows"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-pw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-pw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 23260588,
+  "mobileFileSizeBytes": 23260588,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "2bd188ea7fb4b1a0d0ff8d270bee0b0017e896b8afd65c6f2cdf66bdd04970a4",
+  "pipelineVersion": "publish-batch-pw1-2026-08-09",
+  "publishedAt": "2026-08-09",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw1 gated publish 2026-08-09: licence recorded as 'Free Standard' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
