@@ -567,7 +567,8 @@ MIN_USEFUL_SIDE_M = 1.8
 
 
 def place_extension(width, depth, brief, clearances,
-                    storey_h=ASSUMED_STOREY_HEIGHT_M):
+                    storey_h=ASSUMED_STOREY_HEIGHT_M,
+                    over_blocks=None):
     """Where the extension goes, in the local plan frame.
 
     Returns (rooms, fit) — model3d.Room objects and a record of what the
@@ -704,11 +705,24 @@ def place_extension(width, depth, brief, clearances,
         # mid-air with daylight beneath it. "On top" means on top of
         # something, so the block sits over the existing house's own flank.
         x = (width - room_w) if side == "east" else 0.0
+        y_over = depth - d
+        # ON TOP OF THE THING THAT IS ACTUALLY THERE. Guessing a flank
+        # inside the mapped outline was the best available answer while the
+        # existing house was a bounding box. Now the height field measures
+        # the single-storey additions themselves, the new storey takes the
+        # largest one's own footprint — which is what "build over the side
+        # addition" means, and what the ground floor beneath it can carry.
+        if over_blocks:
+            bx, by, bw, bd = max(over_blocks, key=lambda r: r[2] * r[3])
+            x, y_over, room_w, d = bx, by, bw, bd
+            fit["over_measured_block"] = {
+                "x": round(bx, 2), "y": round(by, 2),
+                "width": round(bw, 2), "depth": round(bd, 2)}
         fit["side"] = side
         fit["over_existing"] = True
         fit["built_m"] = {"width": round(room_w, 2), "depth": round(d, 2)}
         fit["base_level"] = 1
-        rooms.append(model3d.Room("extension over", x, depth - d, room_w, d,
+        rooms.append(model3d.Room("extension over", x, y_over, room_w, d,
                                   ext_h, kind="extension",
                                   storeys=ext_storeys, base_level=1))
     else:
@@ -1142,6 +1156,7 @@ def run(spec, prog, output_dir):
     # is actually there now — including the flat-roofed additions an
     # extension must build BEHIND, not through.
     exist_rear_y = depth
+    addition_rects = []
     if solar.available():
         try:
             sgrid = solar.surface_grid(lat, lon)
@@ -1158,6 +1173,7 @@ def run(spec, prog, output_dir):
                     house_rooms.append(model3d.Room(
                         f"existing addition {i}", px, py, pw, pd,
                         single_h or 2.6, kind="existing", storeys=1))
+                addition_rects = list(single_rects)
                 exist_rear_y = max(r.y + r.depth for r in house_rooms)
                 plan_source = note
                 prog.note(note)
@@ -1202,7 +1218,8 @@ def run(spec, prog, output_dir):
         clearances["north"] = round(max(0.0, budget - shift), 2)
 
     ext_rooms, fit = place_extension(width, depth, brief, clearances,
-                                     storey_h=storey_h)
+                                     storey_h=storey_h,
+                                     over_blocks=addition_rects)
     if shift:
         for r in ext_rooms:
             if r.y >= depth - 0.05:
