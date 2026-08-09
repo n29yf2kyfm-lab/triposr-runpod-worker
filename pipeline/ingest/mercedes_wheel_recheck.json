@@ -1,0 +1,186 @@
+{
+ "a73c924778de4d66ae45a7880ab8943e": {
+  "wheels": "OK",
+  "note": "SLR McLaren (Bull), gloss black car: chrome multi-spoke rims with red calipers fully resolved in all four -- front34 (rear/near side), front34_L (opposite side), side, rear34. No black disc on either side."
+ },
+ "6bd804f3f61a4a5e9dcddddab42cf0f9": {
+  "wheels": "OK",
+  "note": "GLC63s: grey 5-spoke rims with spoke pattern and hub visible in all four views; zoomed front34 + side wheel band to confirm. Both sides detailed."
+ },
+ "6df2a99b1dbc4b5b8baaf7accf18390f": {
+  "wheels": "OK",
+  "note": "GL350: silver multi-spoke rims fully visible in front34, front34_L, side and rear34. Both sides identical."
+ },
+ "092ee873e85843c8826fc649c44e9a19": {
+  "wheels": "OK",
+  "note": "GLA35: black turbine rims with red calipers, spokes traceable in front34, front34_L and rear34; the 'side' tile is a head-on front elevation so no profile wheel, but both sides are covered by the three 3/4 views and both show spokes. Zoom-confirmed."
+ },
+ "b721c580738d413c98aeca1f0059a481": {
+  "wheels": "OK",
+  "note": "CLE-450: fine multi-spoke rims resolved in all four views, both sides."
+ },
+ "65a80e8e84c149c18023030733b41a66": {
+  "wheels": "OK",
+  "note": "EQV: grey 5-spoke rims visible in all four views, both sides."
+ },
+ "3b25ec59233a4a82a6732b0a1419e553": {
+  "wheels": "OK",
+  "note": "G63 AMG: black multi-spoke with red calipers. front34 looked dark at thumbnail size so the wheel band was zoomed -- full spoke geometry present on both wheels; side, front34_L and rear34 also detailed. Dark rim colour, not a void."
+ },
+ "baf6e4dff35a43febcc6d75c87caa013": {
+  "wheels": "OK",
+  "note": "CLS 63S: dark 5-spoke rims with spokes visible in all four views, both sides."
+ },
+ "03d647d99f9348328391cd7b1394c7e2": {
+  "wheels": "OK",
+  "note": "ML250: dark 5-spoke rims show spokes in front34, front34_L and rear34; the 'side' tile is a head-on front elevation. Both sides covered and both detailed."
+ },
+ "6dd3f12d311d4d1f8a55ce0e1596a442": {
+  "wheels": "OK",
+  "note": "SLR McLaren 2004: turbine rims with full blade detail in all four views, both sides."
+ },
+ "96c1c8f27333453db1cde651bc089708": {
+  "wheels": "OK",
+  "note": "CLK 55 AMG: AMG monoblock rims fully resolved in all four views, both sides."
+ },
+ "6a0ef719f8d74378969b6f6095bd8981": {
+  "wheels": "OK",
+  "note": "GLC F Cell: silver 5-spoke rims visible in all four views, both sides."
+ },
+ "5ccf8a9bb28e4f3fa509b27b2953e427": {
+  "wheels": "OK",
+  "note": "X Class: silver multi-spoke rims visible in all four views, both sides."
+ },
+ "c18392f7273f4d6f85255ae3ff2b389a": {
+  "wheels": "OK",
+  "note": "GLK: grey multi-spoke rims visible in all four views, both sides."
+ },
+ "4eb0a08f2c0c4c64b1a3299d5e3954ee": {
+  "wheels": "OK",
+  "note": "SLR McLaren (312k f): turbine rims fully resolved in all four views, both sides."
+ },
+ "fa5a62f49dff495fae5223762ca80553": {
+  "wheels": "OK",
+  "note": "CLK GTR: fine mesh/spoke rims resolved in all four views, both sides."
+ },
+ "b2810cbb2bde48439bb52d7643cc9485": {
+  "wheels": "OK",
+  "note": "W123 coupe: steel wheels with hubcaps and star centre visible in all four views, both sides."
+ },
+ "740b3430e5714dd4a288265b4115ba0d": {
+  "wheels": "OK",
+  "note": "CLS 2022: fine multi-spoke rims resolved in all four views, both sides."
+ },
+ "bf41546913a54520a2e38c4b99915d36": {
+  "wheels": "OK",
+  "note": "W113 SL: hubcapped steels with star centre visible in all four views, both sides."
+ },
+ "88a61d91431b4414a7e32a936396191c": {
+  "wheels": "OK",
+  "note": "SLS AMG GT (339k f) -- same model family as the known-bad SLS, so zoomed: front34 and side both show full multi-spoke rims with orange calipers seated inside a real rim face; front34_L and rear34 likewise. Both sides detailed."
+ },
+ "dae8d703b11948799c9f877e8f2858cc": {
+  "wheels": "OK",
+  "note": "A124 convertible: 8-hole alloys visible in all four views, both sides."
+ },
+ "06b7a34016a44d3e8e953e5fc68d58ec": {
+  "wheels": "OK",
+  "note": "C-class S202 estate: alloys with spoke pattern visible in all four views, both sides."
+ },
+ "9bd7aeb24fa14ab089c941cf67d675ad": {
+  "wheels": "OK",
+  "note": "300 SL: hubcapped steels with star centre visible in all four views, both sides."
+ },
+ "5b85f87f175b434288708b83b62c42de": {
+  "wheels": "OK",
+  "note": "E-class S124 wagon: 8-hole alloys visible in all four views, both sides."
+ },
+ "97be219788544a2c953ccc04e37b97e8": {
+  "wheels": "OK",
+  "note": "E-class sedan 2010: 5-spoke alloys visible in all four views, both sides."
+ },
+ "81b317899e9641d9ac08f0be4fd09fac": {
+  "wheels": "OK",
+  "note": "E-class W124: 8-hole alloys visible in all four views, both sides."
+ },
+ "c56dc8fcfc624cf89ba13760f3ad72ae": {
+  "wheels": "OK",
+  "note": "SL R107 coupe: hubcapped wheels visible in all four views, both sides."
+ },
+ "b5d41f9474c94127a7bf99ebef5da574": {
+  "wheels": "OK",
+  "note": "SLS AMG (153k f): zoomed front34 and side wheel bands -- grey 5-spoke rims with full spoke geometry on both; front34_L and rear34 match. Both sides detailed."
+ },
+ "dff3640ff0ff464984e2d7f320794e25": {
+  "wheels": "OK",
+  "note": "E-class C124 coupe: 8-hole alloys visible in all four views, both sides."
+ },
+ "e98b934960b14077ae7c2e86cbf49064": {
+  "wheels": "OK",
+  "note": "GL 2011: 5-spoke alloys visible in all four views, both sides."
+ },
+ "609d61e7237f48508fce6405e98c485b": {
+  "wheels": "OK",
+  "note": "S-class 1999: 8-hole alloys visible in all four views, both sides."
+ },
+ "2311177fc828453fb792743b8fe48705": {
+  "wheels": "OK",
+  "note": "R-Class W251: 5-spoke alloys visible in all four views, both sides."
+ },
+ "8bf0e8ed024e483b9b9326794d1b2aa6": {
+  "wheels": "OK",
+  "note": "C-class W203 estate: alloys with spoke pattern visible in all four views, both sides."
+ },
+ "517779b60d6d4b778e43403e2765832a": {
+  "wheels": "OK",
+  "note": "S500 2021: fine multi-spoke rims resolved in all four views, both sides."
+ },
+ "03b3e3cc99e6462697a5cbcbb47d17e3": {
+  "wheels": "OK",
+  "note": "S-class W126: hubcapped wheels visible in all four views, both sides."
+ },
+ "efdab8fb67944da6a4449a9da5350134": {
+  "wheels": "OK",
+  "note": "SLS AMG Roadster (96k f) -- SLS family, so zoomed: front34 and side both show grey multi-spoke rims with red calipers inside a real rim face; front34_L and rear34 match. Both sides detailed."
+ },
+ "4ed156b0405e4e529d193ab1ccc11da9": {
+  "wheels": "OK",
+  "note": "CLS 63 AMG Tuned: gloss black rims on a white car, so zoomed -- front34 and side both show full spoke geometry and lit rim lips; front34_L and rear34 match. Dark rims, not voids."
+ },
+ "1d2494ea90434de984b9dc677461af5a": {
+  "wheels": "OK",
+  "note": "S-class 2003: 5-spoke alloys visible in all four views, both sides."
+ },
+ "ff9ba755fc884fb88b5e73c3df1296e1": {
+  "wheels": "OK",
+  "note": "C-class W203 sedan: alloys with spoke pattern visible in all four views, both sides."
+ },
+ "cbad3d3420584ff3b5cd472b869f92d6": {
+  "wheels": "OK",
+  "note": "Ponton 180 W120: hubcapped steels with star centre visible in all four views, both sides."
+ },
+ "57e93f32bd8a4603bbd3f5fb873728b9": {
+  "wheels": "OK",
+  "note": "AMG-GT 2015: silver multi-spoke rims with red calipers resolved in all four views, both sides."
+ },
+ "7306bfef604b4157a6a2bd10669bd534": {
+  "wheels": "OK",
+  "note": "SL R121 hardtop: hubcapped steels visible in all four views, both sides."
+ },
+ "d9dc4af4a6e645b19ebd7d423870e0f7": {
+  "wheels": "OK",
+  "note": "SLS AMG Roadster (158k f) -- SLS family, so zoomed: front34 and side both show grey multi-spoke rims with red calipers inside a real rim face; front34_L and rear34 match. Both sides detailed."
+ },
+ "a1c89ee2c731474dacc20701555915c5": {
+  "wheels": "OK",
+  "note": "AMG GT Black Series: gloss black rims, zoomed front34 -- both the near (rear) and far (front) wheels show full spoke geometry; side, front34_L and rear34 also detailed. Both sides."
+ },
+ "3b11611c6d06415b82b96495f5f249ce": {
+  "wheels": "OK",
+  "note": "CLS w219: chrome/silver deep-dish spoke rims with red calipers resolved in all four views, both sides."
+ },
+ "2020f04e67ba4bc7abbd284db40f9d6b": {
+  "wheels": "OK",
+  "note": "SLS AMG Coupe 2012 -- SLS family, so zoomed: front34 and side both show black multi-spoke rims with red calipers inside a real rim face; front34_L and rear34 match. Both sides detailed."
+ }
+}
