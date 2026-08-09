@@ -96,7 +96,7 @@ def valid_glb(b):
 
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from geom_audit import verdict as geom_verdict            # noqa: E402
+from geom_audit import geom_signals, verdict as geom_verdict   # noqa: E402
 
 
 def render_view(glb_url, az, colour, samples, w, h, audit=False):
@@ -146,6 +146,47 @@ def fetch_glb(uid, staged, tok):
     if len(blob) > MAX_OBJ:
         raise RuntimeError("too big %.0fMB" % (len(blob) / 1e6))
     return None, blob
+
+
+def pose_gate(uid, blob, glb_url, workdir):
+    """LOCAL pose gate, run BEFORE any GPU render is submitted.
+
+    Computes geom_audit's signals from the GLB itself (trimesh, world-space
+    verts), so it cannot be contaminated by the render worker's studio floor --
+    the flaw that made the handler-side audit unusable (a 1977 Accord reported
+    h_over_l=0.101 against a true 0.317, floor is 2.5x the car).
+
+    Validated 2026-08-09 against staged ground truth: rejects the wheels-up
+    J100 (tob=1.47) and the on-side ML W163 (h/l=0.05); passes the GR86, a
+    saloon and a Hilux pickup (low-top warn only). KNOWN LIMIT: it reads the
+    SOURCE mesh, so it cannot catch render-side inversion -- the upside-down
+    Camry XV30 sheet came from a geometrically upright GLB (h/l=0.305,
+    tob=0.775): the worker flipped it at render time, consistent with the ~8%
+    inversion rate measured on the Honda wave. That is a separate worker bug,
+    still open. Fails open: any error returns ok so the wave never dies here.
+    """
+    path = os.path.join(workdir, f"{uid}.pose.glb")
+    try:
+        os.makedirs(workdir, exist_ok=True)
+        if blob is not None:
+            open(path, "wb").write(blob)
+        else:
+            rq = urllib.request.urlopen(glb_url, timeout=600)
+            with open(path, "wb") as f:
+                while True:
+                    c = rq.read(1 << 20)
+                    if not c:
+                        break
+                    f.write(c)
+        g = geom_signals(path)
+        return geom_verdict(g, None, None)
+    except Exception as e:
+        return "ok", [f"pose-gate-skipped:{type(e).__name__}"]
+    finally:
+        try:
+            os.remove(path)
+        except OSError:
+            pass
 
 
 def sheet(pngs, header, out_path):
@@ -201,7 +242,6 @@ def main():
             if blob is not None:
                 sb_put(f"{BUCKET}/{a.stage}/{uid}.glb", blob, "model/gltf-binary")
                 log(f"[{i}/{len(rows)}] staged {len(blob)/1e6:.1f}MB  {p['name'][:44]}")
-                del blob
             glb_url = f"{SB}/storage/v1/object/public/{BUCKET}/{a.stage}/{uid}.glb"
         except urllib.error.HTTPError as e:
             log(f"[{i}] http-{e.code} {p['name'][:40]}")
@@ -212,10 +252,19 @@ def main():
             log(f"[{i}] fetch {type(e).__name__}: {str(e)[:60]}")
             continue
 
+        # LOCAL pose gate: reject mis-oriented source meshes BEFORE spending
+        # four GPU renders on them. See pose_gate docstring for what it can
+        # and cannot catch.
+        pose, preasons = pose_gate(uid, blob, glb_url, a.work)
+        del blob
+        if pose == "reject":
+            log(f"[{i}/{len(rows)}] POSE-REJECT {','.join(preasons)[:70]}  {p['name'][:40]}")
+            continue
+
         try:
             with ThreadPoolExecutor(max_workers=a.parallel) as ex:
                 futs = {lab: ex.submit(render_view, glb_url, az, a.colour,
-                                       a.samples, 1000, 562, lab == VIEWS[0][0])
+                                       a.samples, 1000, 562, False)
                         for lab, az in VIEWS}
                 got = {lab: f.result() for lab, f in futs.items()}
         except Exception as e:
@@ -228,24 +277,11 @@ def main():
         adv = 1 <= nm <= 2 and 0.05 <= cov <= 0.45
         cw = p.get("class_warn")
 
-        # G-gate: the handler's pose block, judged by geom_audit. Wiring this was
-        # overdue -- geom_audit.py has existed and been calibrated since 2026-07-17
-        # and nothing on the ingest path ever called it, so THREE upside-down
-        # Toyotas and an on-side Mercedes ML reached human sheets in one day.
-        ha = next((v[2] for v in got.values() if v[2]), None) or {}
-        pose, preasons = "ok", []
-        # BROKEN AS WRITTEN -- kept visible rather than deleted so it is not
-        # re-attempted the same way. _pose_audit returns glass_zf/wheel_zf/
-        # glass_af/wheel_af/h_over_l and NO "geom" key, so this branch never runs.
-        # And its h_over_l is contaminated by the studio floor (2.5x the car, built
-        # before the audit): a 1977 Accord reports 0.101 against a true 0.317.
-        # Fix properly by computing signals from the staged GLB with
-        # geom_audit.geom_signals, or by excluding studio meshes in the handler.
-        if ha.get("geom"):
-            try:
-                pose, preasons = geom_verdict(ha["geom"], ha, cov)
-            except Exception as e:                       # never let the gate abort a car
-                log(f"[{i}] geom_audit {type(e).__name__}: {str(e)[:50]}")
+        # Pose verdict (pose, preasons) came from the LOCAL pre-render gate
+        # above. The handler-side audit that briefly stood here never ran (no
+        # "geom" key in its payload) and its signals are contaminated by the
+        # studio floor; the render-side inversion bug it also cannot see is
+        # tracked separately. audit=True is no longer requested from the worker.
 
         # C-gate: body-paint coverage, TWO-SIDED. Both tails are unsafe to recolour.
         #

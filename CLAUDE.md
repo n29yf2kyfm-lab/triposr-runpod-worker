@@ -70,11 +70,16 @@ the car) BEFORE `_pose_audit` runs and iterates every scene mesh, so a 1977 Acco
 `h_over_l=0.101` against a true 0.317 (a 2.5x stage predicts 0.127 — it matches). `glass_zf`
 is contaminated the same way because it normalises against the scene bbox. Switching the
 gate on as-is would fire `h_over_l < 0.22` on nearly every car.
-THE REAL FIX is one of: exclude studio geometry from `_pose_audit` and redeploy the worker
-image (remember a template repin does NOT update warm workers), or compute the signals
-locally in `gpu_wave` from the staged GLB via `geom_audit.geom_signals`, which reads the
-mesh directly and cannot be contaminated. Until one of those lands, ORIENTATION IS STILL
-UNGATED and the only defence is the eye.
+FIXED 2026-08-09 by the local route: `gpu_wave.pose_gate()` computes the signals from the
+GLB itself via `geom_audit.geom_signals` BEFORE any render is submitted — uncontaminatable,
+fails open, and a reject costs zero GPU. Validated against staged ground truth (rejects the
+wheels-up J100 tob=1.47 and on-side ML h/l=0.05; passes GR86, saloon, Hilux pickup) AND
+integration-tested through the real wave loop, which logged POSE-REJECT pre-render. The
+handler-side audit is no longer requested.
+REMAINING HOLE, distinct bug: RENDER-SIDE INVERSION. The upside-down Camry XV30 sheet came
+from a geometrically upright GLB (h/l=0.305, tob=0.775) — the worker flips some cars at
+render time (~8% measured on the Honda wave, mechanism unresolved). No source-side gate can
+catch that; it needs the worker fixed or a post-render check.
 
 **What the wiring attempt DID achieve:** It was written and calibrated
 2026-07-17 and for three weeks NOTHING on the ingest path called it — the handler only
