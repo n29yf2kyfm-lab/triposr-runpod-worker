@@ -438,6 +438,42 @@ underperforms — do NOT stop at the first plausible explanation. Run this:
 Only produce the full template when there is a real problem to investigate —
 don't fabricate an RCA when nothing is broken.
 
+## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
+
+Tested end to end on a 2011 Yaris XP90 from two Toyota press photos. The machine WORKS —
+it produces a recognisable, complete, closed mesh — but it does NOT reach the premium bar,
+and the reason is now measured rather than assumed.
+
+**Deploy fix (commit 95794c7):** `max_num_tokens` is now read from job input and passed to
+both the multi-view and single-image paths; `gc.collect()`+`empty_cache()` runs before
+postprocess. Before this, `1536_cascade` ALWAYS OOMed a 24GB worker (single-image died in
+`remesh_narrow_band_dc`, multi-image in `cumesh.simplify` AFTER generation succeeded) and
+the handler comment falsely claimed it auto-degraded. **32768 is the working 24GB budget**
+(succeeded first try; 49152 is the upstream default and does not fit).
+Original image for revert: `alamk123/ai-mechanic@sha256:718ca21c…eb1ab3`.
+Template `i1mk2n9dap` (trellis2-worker-4b) — NOT `hrtuk90f9p`, which is the render worker.
+
+**Ablations, all at matched settings:**
+- raw photos vs RGBA cutouts -> cutouts REMOVE the roof spikes and the black holes in glass
+  (those were background-removal artefacts). Real, worth always doing.
+- single view vs two views -> two views is clearly better; the single-image rear end is a
+  hallucinated smear. The concatenation plugin is unorthodox (upstream uses stochastic or
+  multidiffusion) but it demonstrably HELPS. Do not "fix" it without re-ablating.
+- 1024/tex1024/200k vs 1536_cascade/tex2048/500k -> wheels and grille slats genuinely
+  improve; **panel surfacing does not**. Note this is NOT a clean ablation: three knobs
+  moved together, so attribution to cascade resolution specifically is low confidence.
+
+**What never improves under any condition: melted panel surfaces and absent shut lines.**
+Invariant across input prep, view count and generation resolution. At 1536 the extra budget
+also invented a new artefact (a scribble across the bonnet). Cost roughly doubles: 23.7MB
+and ~9 min execution per car vs 9.9MB at 1024.
+
+**Conclusion: photos -> GLB is a GAP-FILLER tier, not a premium tier**, exactly as
+pipeline/trellis/README.md predicted. Shut lines and crisp panels need the Blender
+correction stage (symmetrise, weighted normals, component wheels/lights, manual shut-line
+cuts) on top of the best base mesh, or a licensed model. Do not re-litigate this by turning
+knobs; the knobs have been turned and measured.
+
 ## Product context (for fast re-grounding)
 
 - **Goal:** UK reg → premium, near-instant, interactive 3D car.
