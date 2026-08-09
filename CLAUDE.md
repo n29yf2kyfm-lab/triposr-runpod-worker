@@ -386,6 +386,32 @@ are fails until re-sourced with real materials. Caught on the Peugeot wave: a 40
 cov=0.243 — comfortably inside the "healthy" coverage band — so coverage numbers cannot
 detect this; only the eye or a glass-material check can).
 
+**Owner ruling 2026-08-09 — TYRES MUST READ AS BLACK RUBBER. This is a SEPARATE check
+from glazing and it is the one the audit kept missing.** A car whose tyres render in body
+colour FAILS: the paint material covers the rubber, so the car reads as an unfinished clay
+studio model and no respray leaves black tyres.
+
+The owner caught this on the Citroen BASALT sheet, and it was systematic — a re-check of
+all 32 published Fiats at high zoom found **12 more**, which had to be quarantined after
+going live. Read why it slipped through, because the mechanism will repeat:
+- BASALT PASSED both documented checks. Its glass is genuinely transparent (interior
+  visible at 3x zoom) and its rim faces are all present. The rubric named glazing and
+  rim-voids; nothing told the auditor to look at tyre COLOUR, so nobody did.
+- **Coverage is not merely blind to it, it is anti-correlated.** The 12 quarantined cars
+  sit at cov 0.20-0.26 (inside the "healthy" band) while `Fiat_147` at cov=**1.000** has
+  correctly black tyres. Never screen for this with cov or mats.
+- **Do not try to automate it with pixel darkness.** That was tried and DISCARDED as
+  invalid: the wheel crop contains the black backdrop and the floor reflection, so a
+  "darkest pixel" probe returns 0 suspects for every car — it measures the background.
+  A metric that confidently says "all clear" is worse than no metric.
+- **A genuine WHITEWALL is not this defect.** Fiat Abarth 695 has a white sidewall ring
+  with black tread — authentic period detail, correctly kept. The failure is the WHOLE
+  tyre, tread included, in body colour.
+
+Method that works: crop the side view's wheel region, upscale ~2x, and look. Compare
+against a known-good car in the same batch — a correct one shows plainly black rubber
+against the white body.
+
 **Critical distinction, established the same day:** a sourced Sketchfab/Objaverse
 GLB is NOT model output. Defects in a sourced asset cannot be fixed by training —
 the only options are keep, cull, or replace with a better source. Never present a
