@@ -566,7 +566,8 @@ def storey_count(roof_info, ceiling_h=ASSUMED_CEILING_HEIGHT_M):
 MIN_USEFUL_SIDE_M = 1.8
 
 
-def place_extension(width, depth, brief, clearances):
+def place_extension(width, depth, brief, clearances,
+                    storey_h=ASSUMED_STOREY_HEIGHT_M):
     """Where the extension goes, in the local plan frame.
 
     Returns (rooms, fit) — model3d.Room objects and a record of what the
@@ -592,7 +593,11 @@ def place_extension(width, depth, brief, clearances):
         raise ProposeError(
             f"{ext_storeys} storeys is not an extension this designs (1 to 3)")
     if ext_storeys > 1:
-        ext_h = float(brief.get("ceiling_height_m") or ASSUMED_STOREY_HEIGHT_M)
+        # THE HOUSE'S OWN storey height, not the assumed one. The house is
+        # built at the measured floor-to-floor (3.016m at Basons); an
+        # extension defaulted to the assumed 2.75m sat 0.27m short on every
+        # level, and the mismatch rendered as an open seam between storeys.
+        ext_h = float(brief.get("ceiling_height_m") or storey_h)
 
     rooms, fit = [], {"type": kind, "requested": dict(brief),
                       "storeys": ext_storeys}
@@ -982,7 +987,8 @@ def run(spec, prog, output_dir):
                 storey_h if n > 1 else 2.35, kind="existing",
                 storeys=n))
 
-    ext_rooms, fit = place_extension(width, depth, brief, clearances)
+    ext_rooms, fit = place_extension(width, depth, brief, clearances,
+                                     storey_h=storey_h)
     rooms = house_rooms + bay_rooms + ext_rooms
     if fit.get("reduced"):
         prog.note(fit["reduced"])

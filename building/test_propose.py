@@ -194,6 +194,22 @@ check("7i rear reduction reported", "reduced" in fit_r)
 check("7j rear extension sits behind the house",
       abs(rooms_r[0].y - 8.0) < 1e-6, str(rooms_r[0].y))
 
+# A multi-storey extension is built at the HOUSE'S storey height, not the
+# assumed one. Defaulted to 2.75m against a house measured at 3.016m, every
+# extension level sat 0.27m short and the mismatch rendered as an open seam
+# between storeys — invisible from the drone angle, obvious at eye level.
+rooms_h, _ = P.place_extension(10.0, 8.0,
+                               {"type": "rear", "storeys": 2, "depth_m": 4.0},
+                               {"east": 12, "west": 12, "north": 12,
+                                "south": 12}, storey_h=3.016)
+check("7k a 2-storey extension inherits the measured storey height",
+      abs(rooms_h[0].height - 3.016) < 1e-6, str(rooms_h[0].height))
+rooms_1, _ = P.place_extension(10.0, 8.0, {"type": "rear", "depth_m": 4.0},
+                               {"east": 12, "west": 12, "north": 12,
+                                "south": 12}, storey_h=3.016)
+check("7l a single-storey extension keeps its own ceiling",
+      rooms_1[0].height != 3.016, str(rooms_1[0].height))
+
 # Sizes outside what this designs are refused rather than clamped silently.
 for bad in (0.4, 25.0):
     try:
