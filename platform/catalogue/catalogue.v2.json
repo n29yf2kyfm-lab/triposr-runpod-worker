@@ -186548,6 +186548,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2861,
+   "variantsHash": "cdd64fdeca5b02f48a58070ac9f26751066a5c1f",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -186709,6 +186716,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2675,
+   "variantsHash": "fbe8600c324e326d89febe199c5529c43d214186",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -186870,6 +186884,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3113,
+   "variantsHash": "25baca6eda6c130d2eda86c3e7ff8f16dc6ddb8a",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -187031,6 +187052,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3404,
+   "variantsHash": "3e83112048b1c660575d2498c33a8f0d49423862",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -187192,6 +187220,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3532,
+   "variantsHash": "3abf38b1cd5af585dff1c025882d94d3c2896bba",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -187352,6 +187387,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3212,
+   "variantsHash": "0ae929675c3ca8048745dabc489466bdf755a01a",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -187513,6 +187555,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3024,
+   "variantsHash": "4746c126fbb181935dae146153665428d56be0c7",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -187673,6 +187722,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4333,
+   "variantsHash": "532c453fc3672c8dd6c30643ffff7d6b5d26d812",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -187835,6 +187891,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2712,
+   "variantsHash": "1c88dec0c35247b42289f3c2cec26ee0080ef29b",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -187996,6 +188059,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2955,
+   "variantsHash": "68d6f5887e59b29c0be08e99e8e0efb783215b81",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -188156,6 +188226,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4099,
+   "variantsHash": "13d74bbdc4ad09dc3b0e5a814c7581600e97d103",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -188317,6 +188394,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.341,
+   "variantsHash": "4d4bdb059e8906fd84b3c7db6175154ef0190632",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -188477,6 +188561,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3121,
+   "variantsHash": "904a7e012214b6181018b605cc689fcc18c928ad",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -188636,6 +188727,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3217,
+   "variantsHash": "f82f610f4e8536180e996aa6243012b0ac7a5118",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -188797,6 +188895,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4265,
+   "variantsHash": "ce0c4d66e1f76461663f03a39bb301c1fd45922a",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -188957,6 +189062,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3241,
+   "variantsHash": "d36115d69f3e6bc2aa84aad6aab1a5ffce5af10c",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
