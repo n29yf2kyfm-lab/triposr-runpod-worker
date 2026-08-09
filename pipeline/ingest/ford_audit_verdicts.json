@@ -12,5 +12,68 @@
   "reasons": [
    "tyres render body-colour white, whole tyre including tread"
   ]
+ },
+ {
+  "uid": "391f0e08a9af4a388a669433c55a7dd9",
+  "name": "2025 Ford Transit Courier Trend 1.5",
+  "verdict": "pass",
+  "reasons": [
+   "tyres black rubber with white trims (verified 2x crop)",
+   "glass transparent",
+   "rims present"
+  ]
+ },
+ {
+  "uid": "c01027fc5bbd4e5ea7f0ef17a5e06147",
+  "name": "Ford Escort RS Cosworth COSSIE | www.vecarz.com",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: Hoonigan Gymkhana livery drift/competition build, roll cage, race diffuser, wide arches"
+  ]
+ },
+ {
+  "uid": "27e25fcead154e62a1dd8e92ccedb691",
+  "name": "2016 Ford Focus RS",
+  "verdict": "pass",
+  "reasons": [
+   "black OEM alloys, rim faces present, tyres black rubber (2x crop)",
+   "glass transparent",
+   "grille and lamp internals sharp"
+  ]
+ },
+ {
+  "uid": "7cbdc8e3d407481db48c2a81a13f22c9",
+  "name": "Old Ford Transit [RAW]",
+  "verdict": "fail",
+  "reasons": [
+   "raw photogrammetry scan: melted panels, no shut lines, single material cov=1.000, windows opaque body-colour (no glass), wheels are scan mush"
+  ]
+ },
+ {
+  "uid": "3668485a777246169427587743404f1f",
+  "name": "2020 Ford Mustang Mach-E 1400 Concept",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: Mach-E 1400 race concept -- roll cage, giant rear wing, widebody aero, not a road car"
+  ]
+ },
+ {
+  "uid": "c25ad61daa814cabaa03bd69db4d7adc",
+  "name": "Ford consul capri",
+  "verdict": "pass",
+  "reasons": [
+   "1961-64 Consul Capri",
+   "glass transparent, tyres black rubber (2x crop), chrome and shut lines defined",
+   "hubcaps a little plain"
+  ]
+ },
+ {
+  "uid": "ed2e9355b8a64e6a8700973df1a5b8f0",
+  "name": "Ford Focus Sedan",
+  "verdict": "fail",
+  "reasons": [
+   "glazing opaque body-colour white, no interior visible (2x crop)",
+   "grille and headlamp internals soft"
+  ]
  }
 ]
