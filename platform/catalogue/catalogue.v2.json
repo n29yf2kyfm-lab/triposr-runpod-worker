@@ -199839,6 +199839,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3406,
+   "variantsHash": "7f3dc7ffe86134c7e8e46cfef1ff9afaf5bc7e5f",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -200040,6 +200047,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3435,
+   "variantsHash": "c372d1a73b166b23ffc47707a5eedb0abe7ae956",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -200241,6 +200255,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3017,
+   "variantsHash": "3269aee3c792bd1ef4efab99fbdf9bf7aaf2bd3c",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -200443,6 +200464,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2869,
+   "variantsHash": "71f0aa946b22d2af231184c431491f3275620a40",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -200644,6 +200672,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2798,
+   "variantsHash": "987f4679e23771ca6f8d8201893f4882e15fd05c",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -200846,6 +200881,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3111,
+   "variantsHash": "46d22e20ff65c62f173dbc3aa7f8a380d6c02f92",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -201047,6 +201089,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3258,
+   "variantsHash": "ecca4ae7d46aef904036755de9e42d68cfac71af",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -201249,6 +201298,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3137,
+   "variantsHash": "58b45eb0d12b1cdffb32c32711ce8510ddd5d73e",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -201450,6 +201506,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2605,
+   "variantsHash": "5ad6f9b11a038d3e7519ea003c8131cbef4cc88b",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -201653,6 +201716,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3894,
+   "variantsHash": "20341d902ae7045b0b3fa579930a2e184492e58f",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -201854,6 +201924,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3244,
+   "variantsHash": "4418399831dc101305c4e9b48c8d36547964612d",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -202054,6 +202131,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3726,
+   "variantsHash": "18339ec981b16c0082154fe7f4e06f0e62c8d791",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -202254,6 +202338,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2965,
+   "variantsHash": "b4e62b2089302e2073903b974bcf420f94a4474a",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -202455,6 +202546,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3393,
+   "variantsHash": "f10217806cb8dfbb83cd9fb4e8282f36b509d2d1",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -202654,6 +202752,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3997,
+   "variantsHash": "a81ac0b958167b12893b761c4937daf5b423b4dd",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -202853,6 +202958,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3872,
+   "variantsHash": "fb7fe486bc0b34960c8779291c2d3c4c346c1c98",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -203049,6 +203161,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.432,
+   "variantsHash": "e1b15b8f134cf440d4fd9e7235882e0ec86f5e93",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -203248,6 +203367,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4061,
+   "variantsHash": "fd791c2ae139d03d1945eca90a13a8c401a1f2b8",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -203446,6 +203572,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4255,
+   "variantsHash": "308f1b9288b44ed911df2fcb5517424aa1f11040",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -203644,6 +203777,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4209,
+   "variantsHash": "05e47367a5a49b07901a7674484faffd40d5c73b",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -203844,6 +203984,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4309,
+   "variantsHash": "c0a9b7bb7de27352542f4651bf35bdadbfb7d208",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -204042,6 +204189,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3844,
+   "variantsHash": "0cfdd4092a77e3b6efc61b5feb71f9c12ff2eee0",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -204099,16 +204253,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2016-hw1-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2016-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2016-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -204243,7 +204388,16 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.0641,
+   "variantsHash": "aab5428b3cb338e8466b837d4d27f8e55484ece1",
+   "method": "render",
+   "at": "2026-08-09"
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0641 — body colour did not move; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -204300,16 +204454,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-jazz-2020-hw1-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2020-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2020-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -204444,7 +204589,16 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.0381,
+   "variantsHash": "73eb750f86e0edfdeca898d93d9ee9735365a4d1",
+   "method": "render",
+   "at": "2026-08-09"
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0381 — body colour did not move; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -204642,6 +204796,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4096,
+   "variantsHash": "e440003b2a97347549c5fde3407fba2035ed745a",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -204697,16 +204858,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/honda/honda-civic-1993-hw1-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1993-hw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1993-hw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -204841,7 +204993,16 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.0308,
+   "variantsHash": "a94ff0edb0aab33db9cd7a80ad9dade483ebd4e0",
+   "method": "render",
+   "at": "2026-08-09"
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0308 — body colour did not move; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -205043,6 +205204,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2908,
+   "variantsHash": "e90d44af2b7872a3cadfbcc166c75ed496bdf1dd",
+   "method": "render",
+   "at": "2026-08-09"
   }
  },
  {
@@ -205245,6 +205413,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3179,
+   "variantsHash": "99e21364a4f1660c30ef0bdef03796c462a16f82",
+   "method": "render",
+   "at": "2026-08-09"
   }
  }
 ]
