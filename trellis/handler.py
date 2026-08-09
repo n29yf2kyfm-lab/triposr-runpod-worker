@@ -2,6 +2,7 @@ import runpod
 import torch
 import requests
 import base64
+import gc
 import os
 import numpy as np
 from io import BytesIO
@@ -191,10 +192,14 @@ def handler(job):
     decimation_target = int(job_input.get("decimation_target", 500000))
     texture_size = int(job_input.get("texture_size", 2048))
     # Quality knobs surfaced from Trellis2ImageTo3DPipeline.run() (Alam 3D
-    # upgrade): 1536 cascade auto-degrades resolution under VRAM pressure via
-    # max_num_tokens, so it is safe to request on 24GB workers.
+    # upgrade). max_num_tokens caps the cascade's high-res token budget and IS
+    # the VRAM lever: the upstream default of 49152 OOMs a 24GB worker (proven
+    # 2026-08-09 — single-image died in remesh_narrow_band_dc, multi-image in
+    # cumesh simplify). It is now read from the job input and passed through;
+    # 32768 is the 24GB-safe starting point, step down 24576/16384 if needed.
     pipeline_type = job_input.get("pipeline_type", "1536_cascade")
     num_samples = int(job_input.get("num_samples", 1))
+    max_num_tokens = int(job_input.get("max_num_tokens", 49152))
 
     if not image_url and not image_b64 and not images_b64:
         # TRELLIS.2-4B is image-to-3D. A prompt with no image is a client error.
@@ -224,13 +229,15 @@ def handler(job):
             meshes = run_multi_image(
                 pipeline, imgs, seed=seed,
                 preprocess_image=not all(_has_cutout_alpha(i) for i in imgs),
-                pipeline_type=pipeline_type, num_samples=num_samples)
+                pipeline_type=pipeline_type, num_samples=num_samples,
+                max_num_tokens=max_num_tokens)
             mesh = max(meshes, key=lambda m: len(m.faces)) if len(meshes) > 1 else meshes[0]
         else:
             try:
                 meshes = pipeline.run(
                     img, seed=seed, preprocess_image=not skip_preprocess,
                     pipeline_type=pipeline_type, num_samples=num_samples,
+                    max_num_tokens=max_num_tokens,
                 )
                 # best-of-N: keep the sample with the most faces (densest recon)
                 mesh = max(meshes, key=lambda m: len(m.faces)) if len(meshes) > 1 else meshes[0]
@@ -240,6 +247,12 @@ def handler(job):
 
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         persisted_path = os.path.join(OUTPUT_DIR, f"{job_id}.glb")
+
+        # Free generation-stage VRAM before postprocess: the multi-view OOM of
+        # 2026-08-09 happened in cumesh simplify AFTER generation succeeded,
+        # with the sampler's allocations still resident.
+        gc.collect()
+        torch.cuda.empty_cache()
 
         # O-Voxel -> GLB with PBR (Base Color / Roughness / Metallic / Opacity).
         # remesh=True closes surface holes (the black-gap artifacts of v1) and

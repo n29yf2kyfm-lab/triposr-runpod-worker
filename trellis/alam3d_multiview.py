@@ -55,6 +55,7 @@ def run_multi_image(pipeline, images, seed=42,
             pipeline.models['shape_slat_flow_model_512'],
             pipeline.models['shape_slat_flow_model_1024'],
             512, hi, coords, shape_slat_sampler_params, max_num_tokens)
+        torch.cuda.empty_cache()  # cheap hygiene between cascade stages (24GB)
         tex_slat = pipeline.sample_tex_slat(
             cond_1024, pipeline.models['tex_slat_flow_model_1024'], shape_slat,
             tex_slat_sampler_params)
