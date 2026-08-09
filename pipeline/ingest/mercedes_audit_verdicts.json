@@ -399,8 +399,23 @@
    "mats": 1,
    "verdict": "PASS",
    "note": "SLS AMG; multi-spoke wheels consistent, grille crisp, headlight internals sharp, shut lines defined. REDUNDANT -- third SLS in this set, and 88a61d91 at 340k faces is the best of them"
+  },
+  "dff3640ff0ff464984e2d7f320794e25": {
+   "name": "Mercedes- Benz E-class (C124) coupe",
+   "cov": 0.216,
+   "mats": 2,
+   "verdict": "PASS",
+   "note": "C124 coupe; wheels consistent in all four views, grille crisp, shut lines defined, panels clean. Ninth classic. CONFIRMS the fourth near-dup flag as a FALSE POSITIVE -- a two-door coupe against the W124 four-door sedan, 760 faces apart. HUMSTER3D plate wants blanking"
+  },
+  "e98b934960b14077ae7c2e86cbf49064": {
+   "name": "2011 Mercedes- Benz GL",
+   "cov": 0.215,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "GL X164 at 946k faces; 5-spoke wheels consistent in all four views, grille crisp, headlight internals sharp, shut lines defined. SUPERSEDES the 102k GL350 passed earlier -- same generation, nine times the geometry"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
- "_neardup_falsepositive": "CONFIRMED as predicted: the 0.5%-plus-nameplate near-dup rule paired the S212 Binz Xtend (887,678f) with a W123 coupe (883,994f). They are completely different vehicles -- a coachbuilt stretch and a 1970s coupe -- so face proximity alone is not identity. The rule flags CANDIDATES for the eye; it must never auto-group. Two of four flagged pairs were real duplicates (GL350, SLS Electric), this one is a false positive, and the C124/W124 pair remains to check."
+ "_neardup_falsepositive": "CONFIRMED as predicted: the 0.5%-plus-nameplate near-dup rule paired the S212 Binz Xtend (887,678f) with a W123 coupe (883,994f). They are completely different vehicles -- a coachbuilt stretch and a 1970s coupe -- so face proximity alone is not identity. The rule flags CANDIDATES for the eye; it must never auto-group. Two of four flagged pairs were real duplicates (GL350, SLS Electric), this one is a false positive, and the C124/W124 pair remains to check.",
+ "_neardup_scorecard": "Final scorecard on the 0.5%-plus-nameplate near-dup rule across 4 flagged Mercedes pairs: 2 REAL (GL350 59 faces apart, SLS Electric 4 apart) and 2 FALSE POSITIVES (Binz stretch vs W123 coupe; C124 coupe vs W124 sedan). 50% precision. It is a good candidate-finder and must never auto-group -- both false positives would have silently dropped a real car."
 }
