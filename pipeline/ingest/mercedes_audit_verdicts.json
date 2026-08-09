@@ -294,6 +294,27 @@
    "mats": 1,
    "verdict": "FAIL",
    "note": "standing VERTICALLY ON END, nose-down, and disassembled with panels scattered. Severe enough that the new geom_audit gate catches it on bounding-box ratio alone -- sixth orientation failure today"
+  },
+  "842e5669e54b49debebfa7b7b5ae2c15": {
+   "name": "Mercedes-Benz A-Class (W169) 2004-2012",
+   "cov": 0.183,
+   "mats": 2,
+   "verdict": "FAIL",
+   "note": "ON ITS SIDE -- the floor pan faces the camera as a grey slab. Fourth orientation failure in this marque, seventh today"
+  },
+  "b2810cbb2bde48439bb52d7643cc9485": {
+   "name": "Mercedes- Benz E-class W123 coupe",
+   "cov": 0.191,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "W123 coupe, a proper classic and a gap the catalogue does not cover. Hubcap wheels consistent in all four views, chrome trim crisp, grille sharp, shut lines defined, panels clean. HUMSTER3D plate wants blanking. This is also the car the near-dup rule wrongly paired with the Binz stretch"
+  },
+  "740b3430e5714dd4a288265b4115ba0d": {
+   "name": "Mercedes- Benz CLS 2022",
+   "cov": 0.19,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "CLS C257 2022; excellent -- multi-spoke wheels consistent in all four views, diamond grille crisp, headlight internals sharp, shut lines defined, premium reflections. The CLS that works: the other two in this set were both exploded"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
