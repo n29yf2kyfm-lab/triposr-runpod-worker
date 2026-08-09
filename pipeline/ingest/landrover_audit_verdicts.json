@@ -416,5 +416,62 @@
    "body and glass are otherwise fine"
   ],
   "name": "2010 Land Rover Range Rover Supercharged"
+ },
+ {
+  "uid": "022713ef15cc4863927fc6c5180e9e59",
+  "verdict": "fail",
+  "reasons": [
+   "heavily faceted low-poly bodywork - flat polygon facets visible across every panel, bonnet and roof",
+   "glazing largely absent: side windows are open holes onto the interior, the tailgate glass is a flat black panel",
+   "single material, cov=1.000 - a respray would repaint what glass there is"
+  ],
+  "name": "Land Rover Discovery 4"
+ },
+ {
+  "uid": "f0f4d66d82c84a8cbb9e8ff893bebc02",
+  "verdict": "fail",
+  "reasons": [
+   "RIM FACE ABSENT on the near-side wheels - both read as featureless black voids with no spokes, lug nuts or centre cap, while the off-side wheels show full grey spokes (this is not the rig's one-sided key light: the face is gone, not dark)",
+   "faceted low-poly surfacing with visible triangles across the doors, roof and bonnet"
+  ],
+  "name": "Range Rover mejorado"
+ },
+ {
+  "uid": "8896fdfcb98542d290c04f198766e61c",
+  "verdict": "fail",
+  "reasons": [
+   "snorkel fitted - raised A-pillar air intake with ram head, confirmed at 3x on the side view; explicitly out of scope",
+   "also carries an external roll/A-frame over the windscreen, chrome side runners and a whip antenna",
+   "the model itself is high quality (glass reads as glass, black all-terrain tyres, sharp grille slats and lamp internals, defined shut lines) - worth re-sourcing an unmodified example"
+  ],
+  "name": "1997 Land Rover Defender 90"
+ },
+ {
+  "uid": "827125158307468ca82967fb39764825",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: one material (cov=1.000), no glass, no wheels or tyres modelled at all",
+   "also rendered on its side in front34/front34_L and nose-up in the side view, but a re-render cannot fix a wheel-less clay body"
+  ],
+  "name": "Atuali 1 Land Rover Range Rover Sport SV 2024"
+ },
+ {
+  "uid": "07121d29537c4c70bccd4d02db6a6466",
+  "verdict": "fail",
+  "reasons": [
+   "glazing fails outright - every window renders as an opaque body-colour panel, no glass material anywhere",
+   "tyres render body-white: the tread pattern is modelled but the rubber is the same white as the bodywork",
+   "bull bar fitted - modification, out of scope"
+  ],
+  "name": "Land Rover Defender"
+ },
+ {
+  "uid": "4727dc5709d045409c6a4fdb1c847ed6",
+  "verdict": "fail",
+  "reasons": [
+   "WRONG VEHICLE - this is a Lincoln MKS-type saloon (Lincoln grille bar and badge clearly modelled), not a Land Rover Discovery; the title is simply wrong",
+   "faceted low-poly surfacing throughout"
+  ],
+  "name": "2018-land-rover-discovery-hse"
  }
 ]
