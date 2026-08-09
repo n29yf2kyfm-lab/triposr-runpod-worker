@@ -490,9 +490,80 @@
    "mats": 1,
    "verdict": "PASS",
    "note": "Ponton 180 W120; excellent 1950s classic -- whitewall wheels consistent in all four views, chrome crisp, grille sharp, shut lines defined, panels clean. Twelfth classic and the oldest car in either wave. HUMSTER3D plate wants blanking"
+  },
+  "57e93f32bd8a4603bbd3f5fb873728b9": {
+   "name": "Mercedes-Benz AMG-GT 2015 (FBX)",
+   "cov": 0.232,
+   "mats": 2,
+   "verdict": "PASS",
+   "note": "Reads instantly as an AMG GT: long bonnet, cab-rear stance and roofline consistent across all four views. Grille lamellae and the internal LED strips in the headlights are sharp in rear34, the multi-spoke silver wheels with red calipers match in every view, and the paint reflections are clean with defined bonnet and door shut lines.  [audited by subagent; 2 of its passes spot-checked and confirmed]"
+  },
+  "8e0b6498a8a4475e8d4913ddc19f5942": {
+   "name": "Mercedes Benz SL600 R129 Widebody kit",
+   "cov": 0.242,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "Out of scope: this is an aftermarket widebody conversion, not a stock R129 - massively flared arches, a full-width raised rear wing, a bolt-on front splitter and an Indonesian 'B 600 SL' plate. Build quality is fine but no UK registration decodes to this.  [audited by subagent; 2 of its passes spot-checked and confirmed]"
+  },
+  "7306bfef604b4157a6a2bd10669bd534": {
+   "name": "Mercedes- Benz SL-class (R121) hardtop 1955",
+   "cov": 0.265,
+   "mats": 2,
+   "verdict": "PASS",
+   "note": "Clean 190SL-shaped classic: the hardtop roof, greenhouse and wheelbase stay consistent front34 to rear34, the chrome bumpers and twin round headlamps are crisp, and the steel wheels with three-pointed-star hubcaps read the same in all four views. Paint is glossy with no crumpling or facet breakup.  [audited by subagent; 2 of its passes spot-checked and confirmed]"
+  },
+  "f7ec1d8e64ac4f5a82028d531a7e9438": {
+   "name": "Kaze's Mercedes-Benz CLK DTM AMG",
+   "cov": 0.271,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "Out of scope: DTM race homologation build with a huge multi-element swan-neck rear wing, race widebody arches, canards and a carbon bonnet. On top of that the 66k-face mesh shows visibly faceted, soft surfacing along the flanks and roof in the front34 and side views.  [audited by subagent; 2 of its passes spot-checked and confirmed]"
+  },
+  "d9dc4af4a6e645b19ebd7d423870e0f7": {
+   "name": "2012 Mercedes Benz SLS AMG Roadster",
+   "cov": 0.285,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "Proportions read as an SLS Roadster immediately and the soft-top, shoulder line and wheelbase agree across all four views; the rear34 shows a properly meshed honeycomb grille and headlights with internal LED strip detail, and the seven-spoke grey wheels with red calipers are identical in every view. Minor: a small faceted pinch where the front bumper meets the wing in the side view, and the rear diffuser is a touch soft.  [audited by subagent; 2 of its passes spot-checked and confirmed]"
+  },
+  "a1c89ee2c731474dacc20701555915c5": {
+   "name": "Mercedes-Benz AMG GT Black Series",
+   "cov": 0.286,
+   "mats": 2,
+   "verdict": "PASS",
+   "note": "Factory AMG GT Black Series (OEM variant, not a tuner kit) and it is the sharpest sheet in the set: the vertical-slat Panamericana grille, the internal headlight elements, the carbon bonnet vents and the rear diffuser fins are all crisply modelled. Black wheels show full spoke detail in every view and the roof/pillar line is consistent all round.  [audited by subagent; 2 of its passes spot-checked and confirmed]"
+  },
+  "3b11611c6d06415b82b96495f5f249ce": {
+   "name": "Mercedes-Benz CLS [w219]",
+   "cov": 0.294,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "Unmistakably a W219 CLS - the frameless-window coupe roofline and rear haunch are consistent in all four views, door and bonnet shut lines are clearly defined in the side view, and the six-spoke silver wheels with red calipers match front to rear. Lowered stance with deep-dish wheels is spec variation, not a body kit; tail-light internals and the rear diffuser are adequately detailed.  [audited by subagent; 2 of its passes spot-checked and confirmed]"
+  },
+  "c07665219b684eb794ea84d492bb9361": {
+   "name": "Mercedes Benz ML MK2 W164 2005-2011",
+   "cov": 0.348,
+   "mats": 2,
+   "verdict": "FAIL",
+   "note": "Broken geometry: in the side view the body floats clear of the ground while the wheels hang detached below the arches as featureless black cylinders, with an extra stray disc dangling under the sill. The same detached-wheel defect appears in all four views, so it is mesh breakage, not lighting.  [audited by subagent; 2 of its passes spot-checked and confirmed]"
+  },
+  "cfad96d57543486f8d666510ee8c95f1": {
+   "name": "2014 Mercedes-Benz CLA-Class",
+   "cov": 0.38,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "No wheels or tyres at all - every one of the four views shows empty grey wheel arches with nothing in them, and the car sits on nothing. The body itself is decent (sharp diamond grille, good headlights) but a wheelless mesh cannot ship.  [audited by subagent; 2 of its passes spot-checked and confirmed]"
+  },
+  "2020f04e67ba4bc7abbd284db40f9d6b": {
+   "name": "Mercedes-Benz-SLS-AMG-Coupe-2012",
+   "cov": 0.448,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "SLS AMG Coupe reads correctly and is a distinct mesh from the roadster in this list - fixed coupe roof, different multi-spoke black wheels, and a far denser 985k-face body. Front34 shows a sharp meshed grille and detailed headlight internals, the fender vents and shut lines are defined, and the roofline and wheelbase agree across all four views.  [audited by subagent; 2 of its passes spot-checked and confirmed]"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
  "_neardup_falsepositive": "CONFIRMED as predicted: the 0.5%-plus-nameplate near-dup rule paired the S212 Binz Xtend (887,678f) with a W123 coupe (883,994f). They are completely different vehicles -- a coachbuilt stretch and a 1970s coupe -- so face proximity alone is not identity. The rule flags CANDIDATES for the eye; it must never auto-group. Two of four flagged pairs were real duplicates (GL350, SLS Electric), this one is a false positive, and the C124/W124 pair remains to check.",
- "_neardup_scorecard": "Final scorecard on the 0.5%-plus-nameplate near-dup rule across 4 flagged Mercedes pairs: 2 REAL (GL350 59 faces apart, SLS Electric 4 apart) and 2 FALSE POSITIVES (Binz stretch vs W123 coupe; C124 coupe vs W124 sedan). 50% precision. It is a good candidate-finder and must never auto-group -- both false positives would have silently dropped a real car."
+ "_neardup_scorecard": "Final scorecard on the 0.5%-plus-nameplate near-dup rule across 4 flagged Mercedes pairs: 2 REAL (GL350 59 faces apart, SLS Electric 4 apart) and 2 FALSE POSITIVES (Binz stretch vs W123 coupe; C124 coupe vs W124 sedan). 50% precision. It is a good candidate-finder and must never auto-group -- both false positives would have silently dropped a real car.",
+ "_subagent": "The final 10 were audited by a subagent given the rubric plus this wave's failure taxonomy. I spot-checked two of its six passes -- AMG GT Black Series (its most debatable call) and AMG-GT 2015 -- and both were right. The Black Series call was the good one: swan-neck wing, Panamericana grille and widened arches are OEM for that model, so it is a road-legal production car a reg decodes to, NOT an aftermarket kit like the four tuner conversions failed elsewhere."
 }
