@@ -161,6 +161,20 @@
    "mats": 1,
    "verdict": "PASS",
    "note": "excellent SLR McLaren at 744k faces -- turbine wheels consistent in all four views, side vents crisp, headlight internals sharp, shut lines defined, premium reflections. SUPERSEDES the 66k 'Bull' SLR (a73c9247), which is soft and cannot recolour"
+  },
+  "05e62ce036554a7eb5cd97b3d2fe0158": {
+   "name": "Mercedes-Benz A-Class W168",
+   "cov": 0.157,
+   "mats": 1,
+   "verdict": "FAIL",
+   "note": "panel crumpling -- the tailgate and rear quarter carry irregular creasing that does not follow the body form, and the front bumper is crumpled in the rear34 view. Wheels and shut lines are otherwise fine, but the dents read as damaged geometry rather than reflection"
+  },
+  "96c1c8f27333453db1cde651bc089708": {
+   "name": "2003 Mercedes-Benz CLK 55 AMG",
+   "cov": 0.158,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "CLK 55 AMG C209; AMG 5-spoke wheels consistent in all four views, twin-oval headlight internals crisp, star grille sharp, shut lines defined, panels clean, premium reflections"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage."
