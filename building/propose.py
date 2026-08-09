@@ -926,12 +926,23 @@ def run(spec, prog, output_dir):
         if gem and keys.get("maps"):
             try:
                 import imagery
-                heading = bearing_of(angle - math.pi / 2)
+                # AIM AT THE BUILDING, NOT ALONG ITS FRONT. Aiming down the
+                # front normal assumes the camera stands square-on; Street
+                # View's nearest pano is routinely off to one side, and the
+                # normal-aimed shot then frames the NEIGHBOUR — at 3 Basons
+                # Lane it framed no. 5 while no. 3 sat at the photo's edge,
+                # and every read downstream described the wrong house. The
+                # bearing from the camera to the building's own centre hits
+                # the right house from wherever the camera stands.
+                bce, bcn = to_world((width / 2.0, depth / 2.0), angle,
+                                    origin_en)
+                ce, cn = camera_en
+                heading = (math.degrees(math.atan2(bce - ce, bcn - cn))
+                           + 360.0) % 360.0
                 facade_photo = os.path.join(output_dir,
                                             f"{spec.get('scan_id') or 'x'}"
                                             f".facade.jpg")
-                got = imagery.fetch_photo(camera[0], camera[1],
-                                          (heading + 180.0) % 360.0,
+                got = imagery.fetch_photo(camera[0], camera[1], heading,
                                           keys["maps"], facade_photo)
                 if got:
                     facade = imagery.read_facade(got, gem)
