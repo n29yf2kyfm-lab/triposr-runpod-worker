@@ -455,6 +455,27 @@
    "mats": 1,
    "verdict": "FAIL",
    "note": "wheels are featureless black discs in ALL FOUR views with no spoke geometry anywhere. This is the distinction from the SLS and GLS, which I passed because other angles showed full spoke detail and proved the geometry existed -- here no view does. Body is otherwise clean"
+  },
+  "efdab8fb67944da6a4449a9da5350134": {
+   "name": "2012 Mercedes Benz SLS AMG Roadster",
+   "cov": 0.215,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "SLS AMG Roadster; multi-spoke wheels with red calipers consistent in all four views, soft-top correct, grille crisp, headlight internals sharp, shut lines defined. A different body style from the SLS coupes, so not strictly redundant. Low-poly at 97k but reads well"
+  },
+  "4ed156b0405e4e529d193ab1ccc11da9": {
+   "name": "2013 Mercedes-Benz CLS 63 AMG Tuned (W218)",
+   "cov": 0.225,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "CLS 63 AMG W218; black multi-spoke wheels consistent in all four views, grille crisp, headlight internals sharp, shut lines defined, panels clean. Title says 'Tuned' but the body reads STOCK -- only wheels and stance differ, which is spec variation, not a widebody kit"
+  },
+  "1d2494ea90434de984b9dc677461af5a": {
+   "name": "Mercedes- Benz S-class 2003",
+   "cov": 0.23,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "S-Class W220; 5-spoke wheels consistent in all four views, grille crisp, headlight internals sharp, shut lines defined, panels clean. Fourth S-Class generation here after W126, W140 and W223. HUMSTER3D plate wants blanking"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
