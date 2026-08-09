@@ -1441,6 +1441,18 @@
   ]
  },
  {
+  "uid": "74de3cda4e0c4d3eb493ea1ebc7c72e4",
+  "name": "2020 Nissan Sentra Sylphy",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Sylphy/Sentra, same quality read as its twin: proportions instant, four views consistent",
+   "glass reads as tinted glass with tan interior visible",
+   "tyres plainly black rubber; rim faces present on BOTH sides",
+   "grille, headlight internals and shut lines defined",
+   "DUPLICATE CANDIDATE with 74d274c8ad8e49c1b882dca3a199383d - 132,776 vs 132,773 faces, three apart, and visually identical. Flagged for the eye, NOT auto-grouped"
+  ]
+ },
+ {
   "uid": "761a1b92416b4d33959b9d2efab43556",
   "name": "Nissan Armada 2010",
   "verdict": "fail",
@@ -1448,6 +1460,16 @@
    "cov=1.000 FULLCOV - one material over the whole car including glass and tyres",
    "glazing renders as pale grey panels, does not read as glass (owner ruling: outright fail)",
    "uniform clay-like surface with no paint/trim separation"
+  ]
+ },
+ {
+  "uid": "766d3b36953c4a79a7f2453d1031d9e3",
+  "name": "Nissan Laurel c33",
+  "verdict": "fail",
+  "reasons": [
+   "wheels inconsistent: rear axle carries a silver many-spoke turbine rim, front axle a black multi-spoke - two different wheel designs on one car, confirmed at 3x on both sides",
+   "stray detached black flap ahead of the front arch",
+   "tyres are correctly black and glazing is genuine - the failure is the wheel mismatch"
   ]
  },
  {
@@ -1481,12 +1503,48 @@
   ]
  },
  {
+  "uid": "7ad572e49309459db47bbf9fb7637ef3",
+  "name": "Nissan_skyline_gtt_r34",
+  "verdict": "fail",
+  "reasons": [
+   "same defects as its twin: rear screen renders opaque body-white with black shard geometry at the C-pillar",
+   "aftermarket double-deck rear wing and carbon bonnet, not an OEM spec",
+   "mats=0 cov=0.000 - no body-paint material found",
+   "DUPLICATE CANDIDATE with 537d4f39795a4ed1a5055ee9e16bd1a2 - 167,270 vs 167,280 faces, ten apart, visually identical. Flagged, NOT auto-grouped"
+  ]
+ },
+ {
   "uid": "7b142ea3376e4811a326256c59bbc7a2",
   "name": "Nissan Skyline GTR r35",
   "verdict": "fail",
   "reasons": [
    "aftermarket widebody kit with over-fenders and large GT wing - out of scope",
    "near-duplicate of uid 5f4955d7cdf94974b73426a5cc775af6"
+  ]
+ },
+ {
+  "uid": "7cb5041decfc41e68e02666f9058ea78",
+  "name": "2018 Nissan 370Z Nismo",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Nismo trim - in scope as a road car",
+   "370Z proportions read instantly, front 3/4 strong",
+   "glass reads as glass - red interior seats clearly visible through the side glass",
+   "tyres plainly black rubber; black rim faces present and detailed on BOTH sides",
+   "Nismo bumper, grille and headlight internals sharp; shut lines defined"
+  ]
+ },
+ {
+  "uid": "7cd3306866984e44979cb9b12e340c12",
+  "name": "2017 Nissan GT-R Nismo (R35) N-Attack Package",
+  "verdict": "pass",
+  "reasons": [
+   "N-Attack is a factory Nismo package, not an aftermarket kit - in scope",
+   "proportions read instantly, four views consistent",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; rim faces present on BOTH sides with yellow calipers",
+   "carbon aero, grille and lamp internals sharp, shut lines defined",
+   "NOTE: large carbon rear wing is factory Nismo N-Attack spec, flagged in case the owner wants only base trims"
   ]
  },
  {
@@ -1533,6 +1591,17 @@
   ]
  },
  {
+  "uid": "82f0869f92094f7188414f8d1d47f97c",
+  "name": "1+Auto-NISSAN+QASHQAI",
+  "verdict": "fail",
+  "reasons": [
+   "glazing renders opaque body-white with visible polygon facets - no glass material",
+   "tyres render body-white as well, no black rubber on any wheel",
+   "panel surfacing faceted and lumpy across doors and roof",
+   "cov=0.924 FULLCOV"
+  ]
+ },
+ {
   "uid": "82f94bf120b54d04831f0b7470fae543",
   "name": "2011 Nissan NV200 Passenger SV",
   "verdict": "fail",
@@ -1574,6 +1643,16 @@
    "headlamp lens detail and full-width tail lamps sharp",
    "door and bonnet shut lines defined, clean gloss paint",
    "cov=0.872 is high - check a respray does not spill onto trim"
+  ]
+ },
+ {
+  "uid": "8b7bfd878bbf402fa12a2c9f2d9ddcc3",
+  "name": "2009 Nissan Sentra SE-R (HQ)",
+  "verdict": "fail",
+  "reasons": [
+   "glazing fails outright: verified at 3x, every window renders the same opaque silver as the paint, no transparency and no interior visible - a baked clay shell",
+   "cov=0.904 FULLCOV, respray would repaint the glass",
+   "geometry and shut lines are actually clean - it fails on glazing alone, per the owner ruling"
   ]
  },
  {
@@ -1629,6 +1708,15 @@
   ]
  },
  {
+  "uid": "916b1d6d7d114bcab1e8a21424eab6ee",
+  "name": "2003 Nissan 350Z Rocket Bunny Z33 Wide Body Kit",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Rocket Bunny Z33 widebody kit, title says so outright",
+   "riveted over-fenders, ducktail, Accuair air-ride and sponsor livery"
+  ]
+ },
+ {
   "uid": "92a0f988e83a45248f3dadd97c0c1b36",
   "name": "2024 Nissan Pathfinder",
   "verdict": "pass",
@@ -1638,6 +1726,18 @@
    "dark alloy rim faces with fine traceable spokes and black rubber tyres in all four views",
    "slim LED headlamp internals and grille sharp",
    "door and bonnet shut lines defined, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "92a9cabd5ae94cf1a745748652501307",
+  "name": "2021 Nissan Sentra Sylphy ePower",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Sylphy ePower proportions read instantly, four views consistent",
+   "glass reads as tinted glass with tan interior visible",
+   "tyres plainly black rubber; multi-spoke rim faces present on BOTH sides",
+   "V-motion grille and headlight internals sharp, shut lines defined",
+   "distinct from the two 2020 Sylphys - this is the ePower facelift, 158,975 faces, not a duplicate"
   ]
  },
  {
@@ -1672,6 +1772,18 @@
    "rim faces present with a clearly traceable multi-spoke pattern in all four views (light silver alloys, not voids), black rubber tyres",
    "headlamp internals and grille mesh sharp",
    "door and bonnet shut lines defined, clean gloss finish"
+  ]
+ },
+ {
+  "uid": "950be83e99ad4c0b86051e39aff22291",
+  "name": "Nissan Skyline GT-R V Spec II Nur (R34)",
+  "verdict": "pass",
+  "reasons": [
+   "OEM R34 V-Spec II Nur - in scope; proportions read instantly, front 3/4 strong",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; bronze rim faces present and detailed on BOTH sides with calipers behind",
+   "GT-R grille, headlight internals and shut lines all sharp",
+   "WARNING: the sheet renders two-tone (white wings/bumpers, grey doors and rear quarter) - this model carries 2+ body-paint materials, so the sheet colour is untrustworthy and recolour_audit --stamp MUST pass before it ships"
   ]
  },
  {
@@ -1710,6 +1822,16 @@
    "no wheels mounted - all four arches render as empty black voids",
    "clay shell, glazing renders body-white",
    "cov=0.984 FULLCOV"
+  ]
+ },
+ {
+  "uid": "9999006e2007435ca2ef2925ed20ee6a",
+  "name": "Nissan Silvia S14",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: baked lighting in the texture, soft melted panels",
+   "ragged torn scan boundary along the bottom of the car in every view",
+   "glazing is scan texture, not glass; cov=0.967 FULLCOV"
   ]
  },
  {
@@ -1764,6 +1886,25 @@
   ]
  },
  {
+  "uid": "9ffe0e5d31bf4f38b39d3e813f944299",
+  "name": "Nissan Silvia S15 Georgiy Chivchyan ( Gocha )",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: professional drift race car - full sponsor livery, race wing, stripped caged cabin",
+   "also a photogrammetry scan with ragged torn boundaries along the sills and nose",
+   "cov=0.967 FULLCOV"
+  ]
+ },
+ {
+  "uid": "a0a846f246634c7db3675c7570e83c94",
+  "name": "2015 LB WORKS Nissan GT-R R35 Ver.1 Wing",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Liberty Walk LB-Works widebody kit, title says so outright",
+   "riveted over-fenders, Ver.1 GT wing, air-ride, Forgiato wheels"
+  ]
+ },
+ {
   "uid": "a2cfc77883ff4748827dc862f6bba5a7",
   "name": "Nissan 370Z",
   "verdict": "fail",
@@ -1803,6 +1944,79 @@
    "photogrammetry scan mounted on a scanned concrete plinth baked into the mesh",
    "baked lighting in the texture, cov=1.000 FULLCOV",
    "same defect class as the other scanned S14, uid 6a14efc71871435b80d289b3e78261b7"
+  ]
+ },
+ {
+  "uid": "a6a791b165ac419e8a899c97820593e4",
+  "name": "2017 Nissan GTR Replica",
+  "verdict": "fail",
+  "reasons": [
+   "mesh is broken: body riddled with holes and torn shell fragments across the doors, roof and arches",
+   "wheels mangled - rims are partial rings, no tyres",
+   "3D 'NISSAN GTR' text blocks lie on the floor beside the car as part of the scene",
+   "cov=1.000 FULLCOV"
+  ]
+ },
+ {
+  "uid": "a79151120b524854a958ce46a3b064a8",
+  "name": "Custom 2017 Nissan GTR",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: title says Custom - widebody with riveted over-fenders, large GT wing, front splitter, slammed on deep-dish wheels"
+  ]
+ },
+ {
+  "uid": "a90de78e5d0e41c8975b284773254a0e",
+  "name": "Nissan GT-R (R35) Facelift",
+  "verdict": "pass",
+  "reasons": [
+   "OEM R35 facelift, proportions read instantly, front 3/4 strong",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; rim faces present and detailed on BOTH sides",
+   "V-motion grille and headlight internals sharp, shut lines defined",
+   "DUPLICATE CANDIDATE with 341010423e1e455db4da893c052d1cc6 (2017 GT-R R35) - 183,082 vs 183,458 faces and visually the same model. Flagged, NOT auto-grouped"
+  ]
+ },
+ {
+  "uid": "aa05ff16a3064aa2961bd56260284f24",
+  "name": "Nissan-gtr",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "render-side inversion: the car is rendered lying on its side - one tile is a straight top-down view of the roof, the wheels sit along the frame edges",
+   "the pose gate passed the GLB, so this is the known render-time flip, not a bad source",
+   "re-render before judging; the visible shape also suggests a race-wing GT-R that may fail out-of-scope on a second look"
+  ]
+ },
+ {
+  "uid": "ac8e5d56f05d4b7aa75ba3a3b6d68920",
+  "name": "Nissan Skyline GTR R33 NISMO | www.vecarz.com",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: extreme widebody race-style conversion - bolt-on flared arches with visible seams far beyond any OEM R33, deep race splitter and large GT wing",
+   "same vecarz.com source that supplied two confirmed race cars in this wave"
+  ]
+ },
+ {
+  "uid": "ac9c647d6997408692a63bd1889ee5ca",
+  "name": "Nissan Sylphy 2011",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: soft melted panels, baked lighting and reflections in the texture",
+   "glazing is scan texture rendering the same silver as the body, not glass",
+   "cov=1.000 FULLCOV",
+   "499,999 faces - a decimated-to-target mesh, exclude from exact-match dedup"
+  ]
+ },
+ {
+  "uid": "add95683b3b1427082763924ad6dfed3",
+  "name": "Nissan GTR Nismo (Project Cars 3)",
+  "verdict": "pass",
+  "reasons": [
+   "OEM GT-R Nismo trim - in scope; proportions read instantly, four views consistent",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; black rim faces present on BOTH sides with orange calipers",
+   "grille and headlight internals sharp, shut lines defined",
+   "game-derived asset with a 'PCARS 3' novelty plate - cosmetic only, geometry is OEM"
   ]
  }
 ]
