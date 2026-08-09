@@ -51,6 +51,11 @@ API = "https://api.sketchfab.com/v3"
 EP = os.environ.get("RENDER_ENDPOINT", "ng8oiz4p2l0xa0")
 VIEWS = [("front34", 215), ("front34_L", 145), ("side", 270), ("rear34", 35)]
 MAX_OBJ = 48_000_000
+# Sketchfab download throttling. RATE_RETRIES attempts after the first failure,
+# waiting RATE_BACKOFF * 2**n seconds (60/120/240 = ~7 min of patience) before a
+# row is written off as RATE-DROP.
+RATE_RETRIES = int(os.environ.get("WAVE_RATE_RETRIES", "3"))
+RATE_BACKOFF = int(os.environ.get("WAVE_RATE_BACKOFF", "60"))
 
 
 def log(*a):
@@ -237,19 +242,38 @@ def main():
         uid = p["uid"]
         if f"{uid}.jpg" in done:
             continue
-        try:
-            url, blob = fetch_glb(uid, staged, tok)
-            if blob is not None:
-                sb_put(f"{BUCKET}/{a.stage}/{uid}.glb", blob, "model/gltf-binary")
-                log(f"[{i}/{len(rows)}] staged {len(blob)/1e6:.1f}MB  {p['name'][:44]}")
-            glb_url = f"{SB}/storage/v1/object/public/{BUCKET}/{a.stage}/{uid}.glb"
-        except urllib.error.HTTPError as e:
-            log(f"[{i}] http-{e.code} {p['name'][:40]}")
-            if e.code in (429, 403):
-                time.sleep(90)
-            continue
-        except Exception as e:
-            log(f"[{i}] fetch {type(e).__name__}: {str(e)[:60]}")
+        # Sketchfab rate-limits /models/<uid>/download. A 429 is TRANSIENT, so
+        # retry the SAME row with backoff instead of dropping it -- the old code
+        # slept 90s and then `continue`d, which paced the loop while silently
+        # discarding the car. Three concurrent waves sharing the token pool made
+        # every row 429 and the wave ate its manifest producing nothing.
+        # next(tok) rotates the token on each attempt.
+        blob = None
+        glb_url = None
+        for attempt in range(RATE_RETRIES + 1):
+            try:
+                url, blob = fetch_glb(uid, staged, tok)
+                if blob is not None:
+                    sb_put(f"{BUCKET}/{a.stage}/{uid}.glb", blob, "model/gltf-binary")
+                    log(f"[{i}/{len(rows)}] staged {len(blob)/1e6:.1f}MB  {p['name'][:44]}")
+                glb_url = f"{SB}/storage/v1/object/public/{BUCKET}/{a.stage}/{uid}.glb"
+                break
+            except urllib.error.HTTPError as e:
+                if e.code in (429, 403) and attempt < RATE_RETRIES:
+                    wait = RATE_BACKOFF * (2 ** attempt)
+                    log(f"[{i}/{len(rows)}] http-{e.code} retry {attempt+1}/{RATE_RETRIES} "
+                        f"in {wait}s  {p['name'][:36]}")
+                    time.sleep(wait)
+                    continue
+                # RATE-DROP is deliberately distinct from other failures so a
+                # wave's lost-to-throttling count is greppable afterwards.
+                tag = "RATE-DROP" if e.code in (429, 403) else "http"
+                log(f"[{i}/{len(rows)}] {tag}-{e.code} giving up  {p['name'][:40]}")
+                break
+            except Exception as e:
+                log(f"[{i}/{len(rows)}] fetch {type(e).__name__}: {str(e)[:60]}")
+                break
+        if glb_url is None:
             continue
 
         # LOCAL pose gate: reject mis-oriented source meshes BEFORE spending
