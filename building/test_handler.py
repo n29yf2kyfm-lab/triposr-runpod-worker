@@ -584,8 +584,13 @@ check("20d supply no longer reads local paths",
 # chase a 302 to 169.254.169.254 is the whole attack, reinstated by a default
 # argument. Assert the property that actually matters instead — no module
 # fetches a caller-supplied URL through a bare requests.get.
+# register and scanin are in this list because they belong to it, not
+# because they were caught: register kept check_fetchable_url + a bare
+# requests.get while it was parked, then became a live dispatchable mode
+# with the hole intact, and this list — hand-maintained — did not name it.
+# Any module that fetches a caller-supplied URL goes here the day it does.
 _CALLER_URL_MODULES = ("supply", "structure", "services", "drawing",
-                       "reconstruct")
+                       "reconstruct", "register", "scanin")
 for _mod in _CALLER_URL_MODULES:
     _src = open(os.path.join(HERE, f"{_mod}.py")).read()
     check(f"20e {_mod} fetches caller URLs through fetch_checked",

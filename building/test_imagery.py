@@ -128,6 +128,24 @@ check("3g the exported mesh sees the new openings",
       "glass" in groups and len(groups["glass"][0]) > 0)
 
 
+
+# A two-storey bay whose UPPER read starts further left than the lower one:
+# the merge must keep the full span of both. The first version computed the
+# merged right edge from b["x"] after b["x"] had already been moved left, so
+# the bay came out short by exactly that difference.
+_two_floor_left = {"storeys": 2, "finish": "brick", "chimney": False,
+                   "openings": [
+                       {"floor": 0, "kind": "bay", "x0": 0.10, "x1": 0.30},
+                       {"floor": 1, "kind": "bay", "x0": 0.05, "x1": 0.28}]}
+_ops, _bays = I.to_wall_openings(_two_floor_left, 8.0)
+check("9a overlapping bays merge to one", len(_bays) == 1, str(_bays))
+check("9b the merged bay keeps the leftmost edge",
+      abs(_bays[0]["x"] - 0.4) < 0.01, str(_bays[0]["x"]))
+check("9c and the rightmost edge — not the one it just overwrote",
+      abs((_bays[0]["x"] + _bays[0]["width"]) - 2.4) < 0.01,
+      str(_bays[0]["x"] + _bays[0]["width"]))
+check("9d and it is two storeys tall", _bays[0]["storeys"] == 2)
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

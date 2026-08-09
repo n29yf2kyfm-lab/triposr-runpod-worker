@@ -74,6 +74,13 @@ CAPTURE_MODES = frozenset({
     "services",      # same, and this one is the X-ray
     "register",      # aligns two clouds; a scale error misaligns both
     "condition",     # imagery and thermal
+    # A phone splat is a camera capture whose scale is exactly what this
+    # warning is about — scanin has a whole function to catch a splat that
+    # came back at 0.3x — and with no address to check it against, its own
+    # report can only say "scale checked against nothing". It was missing
+    # from this set, so the one job class that most needs the warning was
+    # the one that never got it.
+    "scan",
 })
 
 # Which phase implements each mode. Returned verbatim to callers hitting an

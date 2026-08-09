@@ -493,13 +493,21 @@ def run(spec, prog, output_dir):
         if os.path.exists(path):
             return structure.read_ply(path)
         import validation
-        validation.check_fetchable_url(path, label)
-        import requests
+        # fetch_checked, NOT check_fetchable_url + requests.get. The check
+        # guards the first hop only, and requests follows redirects by
+        # default: a public host that passes the check can answer
+        # 302 Location: http://169.254.169.254/... and the worker fetches
+        # the cloud metadata service. Every other module that takes a
+        # caller-supplied URL was moved onto fetch_checked; register kept
+        # the old pattern while it was parked, and carried it into being a
+        # live dispatchable mode.
         local = os.path.join(paths.ensure(output_dir), f"{label}.ply")
-        response = requests.get(path, timeout=600)
+        response = validation.fetch_checked(path, field=f"{label} cloud URL",
+                                            timeout=600, stream=True)
         response.raise_for_status()
         with open(local, "wb") as f:
-            f.write(response.content)
+            for chunk in response.iter_content(1 << 20):
+                f.write(chunk)
         return structure.read_ply(local)
 
     source = load(source_path, "open")

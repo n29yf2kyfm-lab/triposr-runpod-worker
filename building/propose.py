@@ -1182,21 +1182,37 @@ def run(spec, prog, output_dir):
                 storey_h if n > 1 else 2.35, kind="existing",
                 storeys=n))
 
+    # A rear extension starts where the house actually ENDS. The placement
+    # works in the mapped outline's frame (rear at y=depth); when the height
+    # field found additions standing beyond that line, the new work shifts
+    # back to clear them instead of being drawn through them.
+    #
+    # THE SHIFT IS SPENT OUT OF THE CLEARANCE FIRST. side_clearance measured
+    # the clear ground from the MAPPED rear, and the existing additions
+    # occupy the first `shift` metres of it. Shifting after sizing pushed
+    # the extension that far past the ground the probe found clear — 4m of
+    # extension into 4m of clearance became 4m starting 3.3m back, i.e. 3.3m
+    # into the neighbour. Deducting first makes the fit report say the depth
+    # was cut, which is the answer a builder can act on.
+    shift = max(0.0, exist_rear_y - depth) if exist_rear_y > depth + 0.05 \
+        else 0.0
+    if shift:
+        budget = clearances.get("north", MAX_EXTENSION_M)
+        clearances = dict(clearances)
+        clearances["north"] = round(max(0.0, budget - shift), 2)
+
     ext_rooms, fit = place_extension(width, depth, brief, clearances,
                                      storey_h=storey_h)
-    # A rear extension starts where the house actually ENDS. The placement
-    # works in the mapped outline's frame (rear at y=depth); when the
-    # height field found additions standing beyond that line, the new work
-    # shifts back to clear them instead of being drawn through them.
-    if exist_rear_y > depth + 0.05:
-        shift = exist_rear_y - depth
+    if shift:
         for r in ext_rooms:
             if r.y >= depth - 0.05:
                 r.y = round(r.y + shift, 3)
         fit["behind_existing"] = (
             f"the height field shows existing structures to "
             f"{exist_rear_y:.1f}m — the extension starts behind them, "
-            f"{shift:.1f}m further back than the mapped outline suggested")
+            f"{shift:.1f}m further back than the mapped outline suggested, "
+            f"and that {shift:.1f}m comes out of the measured rear "
+            f"clearance")
         prog.note(fit["behind_existing"])
     rooms = house_rooms + bay_rooms + ext_rooms
     if fit.get("reduced"):

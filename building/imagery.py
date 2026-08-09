@@ -160,9 +160,15 @@ def to_wall_openings(reading, facade_width):
             # overlap and keep how many storeys the photo showed.
             for b in bays:
                 if along < b["x"] + b["width"] and b["x"] < along + w:
-                    b["x"] = round(min(b["x"], along), 2)
-                    b["width"] = round(max(b["x"] + b["width"],
-                                           along + w) - b["x"], 2)
+                    # Both edges are read BEFORE either is written. Taking
+                    # the right edge from b["x"] after b["x"] had already
+                    # moved left lost the difference off the merged bay, so
+                    # a bay whose upper storey reads further left came out
+                    # narrower than the photo showed.
+                    left = min(b["x"], along)
+                    right = max(b["x"] + b["width"], along + w)
+                    b["x"] = round(left, 2)
+                    b["width"] = round(right - left, 2)
                     b["storeys"] = max(b["storeys"], o["floor"] + 1)
                     break
             else:
