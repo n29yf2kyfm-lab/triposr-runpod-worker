@@ -445,12 +445,50 @@
   ]
  },
  {
+  "uid": "20ecb04af23d479ea1661e389de69f3c",
+  "name": "Nissan Stagea MK1 (WC34) 1996-2001",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit: glass panes, doors, bumpers and body kit floating detached around the car in every view",
+   "cov=0.991 FULLCOV",
+   "pose gate errored out (pose-gate-skipped:ValueError) - unusable as a car model"
+  ]
+ },
+ {
   "uid": "22f7f2bb22d44b7a93d7e3678ec8f990",
   "name": "2018 Nissan GT-R Winds Of Freedom Edition (R35)",
   "verdict": "fail",
   "reasons": [
    "extreme aftermarket widebody kit with canards and a race wing - custom show car, not an OEM variant",
    "Union Jack livery wrap baked into the body texture, not clean paint"
+  ]
+ },
+ {
+  "uid": "2385da065394422094db1b8783298bc0",
+  "name": "2012 Nissan GT-R BenSopra Fast and Furious 6",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: BenSopra widebody kit and Fast & Furious 6 movie-car replica",
+   "riveted over-fenders, oversized swan-neck wing, F&F plates"
+  ]
+ },
+ {
+  "uid": "238e3182839241219b358521dd0a60d0",
+  "name": "Nissan Skyline 350GT V35 2004",
+  "verdict": "fail",
+  "reasons": [
+   "incomplete: wheels are absent, all four arches are empty white voids",
+   "a single detached wheel floats under the centre of the car",
+   "body is a clay-ish shell with no tyres anywhere"
+  ]
+ },
+ {
+  "uid": "265ff0f651a34d398539e9bd72e0d5a9",
+  "name": "2001 Nissan Silvia S15 Spec-S \"Mona Lisa\"",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Fast & Furious 'Mona Lisa' replica livery, F&F plates",
+   "aftermarket body kit, oversized GT wing, Rays wheels - a movie car, not an OEM road spec"
   ]
  },
  {
@@ -507,6 +545,15 @@
   ]
  },
  {
+  "uid": "28bc6101ed004bf8b2d1e7b78dfa3e99",
+  "name": "2003 Nissan Frontier Tuned",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: title says 'Tuned' - slammed show truck with custom bed, LED underglow and shaved trim",
+   "incomplete: no wheels or tyres at all, arches are empty black voids"
+  ]
+ },
+ {
   "uid": "29845c09a5354c79b68f18ca4df4285b",
   "name": "Nissan_180sx",
   "verdict": "fail",
@@ -526,6 +573,15 @@
    "hubcaps with vent detail and Nissan centre logo, black rubber tyres, consistent across views",
    "door, bonnet and tailgate shut lines defined",
    "clean reflections, premium gloss finish"
+  ]
+ },
+ {
+  "uid": "2c3481e502c24d818d23a5eb2be8dac9",
+  "name": "Nissan Silvia S15 Custom",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: title says Custom - time-attack widebody with huge swan-neck wing, canards, front splitter and diffuser",
+   "not an OEM road-car spec"
   ]
  },
  {
@@ -572,6 +628,14 @@
    "silver 5-spoke rims with gold calipers, spokes traceable in all four views",
    "headlight internals and grille sharp, shut lines defined",
    "clean reflections and premium gloss finish"
+  ]
+ },
+ {
+  "uid": "2e8630e7c085464cb332cec0f5faaef0",
+  "name": "Nissan 240z Rocket Bunny",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Rocket Bunny widebody kit - riveted over-fenders, ducktail, chin spoiler, stretched tyres on deep dish"
   ]
  },
  {
@@ -627,6 +691,18 @@
   ]
  },
  {
+  "uid": "341010423e1e455db4da893c052d1cc6",
+  "name": "2017 Nissan GT-R (R35)",
+  "verdict": "pass",
+  "reasons": [
+   "OEM R35 proportions read instantly, front 3/4 strong",
+   "glass reads as glass, interior clearly visible through side windows",
+   "tyres plainly black rubber; 10-spoke rim faces present and detailed on BOTH sides",
+   "V-motion grille edges crisp, headlight internals sharp",
+   "bonnet and door shut lines defined, reflections clean"
+  ]
+ },
+ {
   "uid": "377369b51ded49fda2cb02fd66186d23",
   "name": "Nissan Leaf",
   "verdict": "pass",
@@ -667,6 +743,18 @@
    "a single loose wheel lying under the car",
    "wheel arches render as empty voids",
    "unassembled source model"
+  ]
+ },
+ {
+  "uid": "3984349b2dbc4cb287e998164700fa60",
+  "name": "2017 Nissan Tiida",
+  "verdict": "pass",
+  "reasons": [
+   "OEM hatchback proportions read instantly, consistent roof/pillar/wheelbase across all four views",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; multi-spoke rim faces present on BOTH sides",
+   "V-motion grille and headlight internals sharp",
+   "door shut lines and sill defined"
   ]
  },
  {
@@ -746,6 +834,14 @@
   ]
  },
  {
+  "uid": "3edc9dc09c3b4bde990b77c72d49f2d7",
+  "name": "Nissan GT-R GT500 | www.vecarz.com",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Super GT GT500 race car in Calsonic livery - race aero, splitter, roof aerial, slicks, no road-car lighting"
+  ]
+ },
+ {
   "uid": "3ee5b1ba3e1a4a128455a5fe144659bb",
   "name": "Nissan 350Z Nismo S Tune Z33 2008",
   "verdict": "fail",
@@ -787,6 +883,16 @@
   ]
  },
  {
+  "uid": "4432c26f254b4258bf164121061a0ea3",
+  "name": "NISSAN GT-R",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a scale model sitting on a white plinth, plinth baked into the mesh",
+   "baked lighting and scan mush across every panel, cov=1.000 FULLCOV",
+   "glazing is scan texture, not glass"
+  ]
+ },
+ {
   "uid": "4455420f64fc4b899a934cd3413e7395",
   "name": "Nissan Silvia S15 Custom",
   "verdict": "fail",
@@ -815,6 +921,16 @@
    "tyre geometry is corrupt - tyres burst into radiating black spikes on all four wheels",
    "a '@STUDIO MAS' watermark plane is baked into the scene",
    "greenhouse renders translucent/ghosted"
+  ]
+ },
+ {
+  "uid": "450b809a4ee2483eb704af8afdc0f7d6",
+  "name": "Nissan Primera Estate P11 1996-2002",
+  "verdict": "fail",
+  "reasons": [
+   "unfinished clay shell: window openings are holes straight through to a white void, no glass material",
+   "wheels present on the far side only - near-side arches are empty, one black blob under the nose",
+   "cov=0.903 FULLCOV, no shut lines, panels untextured"
   ]
  },
  {
@@ -863,6 +979,17 @@
   ]
  },
  {
+  "uid": "4b5ab5951e664519b92bc3671d428a8d",
+  "name": "Nissan Skyline R34 GT-R",
+  "verdict": "fail",
+  "reasons": [
+   "panel surfacing soft and blobby - roofline and rear quarter melted, no door or bonnet shut lines anywhere",
+   "headlights are dark slots with no internal elements",
+   "rear bumper and diffuser are plain slabs versus the real R34",
+   "tyres and rims are fine (black rubber, faces present both sides) but the body misses the premium bar"
+  ]
+ },
+ {
   "uid": "4c9e68dbe45647578f65f52c09668a46",
   "name": "2019 Nissan Sentra Nismo",
   "verdict": "fail",
@@ -900,6 +1027,28 @@
    "rendered inverted - front34 and front34_L show the underside/floorpan, rear34 is a top-down view",
    "source GLB passed the local pose gate, so this is the open render-side inversion bug",
    "caution: cov=1.000 FULLCOV and a single grey material with no visible glass, so it may still fail on re-render"
+  ]
+ },
+ {
+  "uid": "501f73e17b874b09bb301269ffa2bb91",
+  "name": "Nissan Laurel C35",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: baked lighting and grime in the texture, soft melted panels",
+   "underside is an unresolved scanned blob",
+   "glazing is scan texture, not glass; cov=0.975 FULLCOV"
+  ]
+ },
+ {
+  "uid": "51b6f9e6f6194645be446e5e14dfddc4",
+  "name": "2015 Nissan Murano Hybrid",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Murano proportions read instantly, consistent across all four views",
+   "glass reads as tinted glass, interior visible",
+   "tyres verified at 3x zoom: plainly black rubber - the light sidewall in the contact view was a floor reflection",
+   "alloy rim faces present and fully detailed on BOTH sides",
+   "V-motion grille and boomerang headlight internals sharp, shut lines defined"
   ]
  },
  {
