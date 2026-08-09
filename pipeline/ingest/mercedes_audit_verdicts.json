@@ -476,6 +476,20 @@
    "mats": 1,
    "verdict": "PASS",
    "note": "S-Class W220; 5-spoke wheels consistent in all four views, grille crisp, headlight internals sharp, shut lines defined, panels clean. Fourth S-Class generation here after W126, W140 and W223. HUMSTER3D plate wants blanking"
+  },
+  "ff9ba755fc884fb88b5e73c3df1296e1": {
+   "name": "Mercedes- Benz C-class W203 sedan",
+   "cov": 0.224,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "C-Class W203 sedan; wheels consistent in all four views, grille crisp, headlight internals sharp, shut lines defined, panels clean. HUMSTER3D plate wants blanking"
+  },
+  "cbad3d3420584ff3b5cd472b869f92d6": {
+   "name": "Mercedes- Benz Ponton 180 W120",
+   "cov": 0.245,
+   "mats": 1,
+   "verdict": "PASS",
+   "note": "Ponton 180 W120; excellent 1950s classic -- whitewall wheels consistent in all four views, chrome crisp, grille sharp, shut lines defined, panels clean. Twelfth classic and the oldest car in either wave. HUMSTER3D plate wants blanking"
   }
  },
  "_coverage_finding": "TESTED AND CONFIRMED: all 5 entries in the Mercedes clean set with body-material coverage under 0.10 failed to recolour -- every one rendered its own colour under --colour silver (red, white, black, white, white). Coverage under ~10% means the classifier latched onto trim or a badge, not the body paint. 'clean' only requires mats>=1, so these passed triage. Low cov is a PREDICTOR of recolour failure (the GL350 at cov=0.114 also renders white, so the band is a gradient, not a cliff at 0.10) and should gate the colour bake, not just the eye. 5/5 in this set; consistent with Toyota #41 (pink) and #62 (black), which were also split/low-coverage.",
