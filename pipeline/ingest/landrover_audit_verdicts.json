@@ -171,5 +171,149 @@
    "door, bonnet and tailgate shut lines defined; grille mesh and headlight internals sharp"
   ],
   "name": "2022 Land Rover Discovery P360 Facelift"
+ },
+ {
+  "uid": "7d8bd24688b54c31a05d7b1a1f850145",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render mid-grey, the same tone as the rim - no black rubber; at 2.2x the wheel reads as one grey disc (compare uid b68c443c, the same car with correctly black tyres)",
+   "otherwise clean: glass reads as glass, shut lines defined",
+   "LIKELY DUPLICATE of b68c443c (448,581 vs 448,577 faces - 4 apart) and of the higher-poly 640826210d2a4be9ae6e638fec1e84fa; flagged, not grouped"
+  ],
+  "name": "2023 Land Rover Range Rover Sport"
+ },
+ {
+  "uid": "b68c443c8dae42359fb26a9282a3d572",
+  "verdict": "pass",
+  "reasons": [
+   "2023 Range Rover Sport, proportions read instantly",
+   "black rubber tyres with visible sidewall and tread; gloss-black rims, spokes traceable on both sides",
+   "glass reads as glass, interior visible",
+   "grille mesh, lamp graphics and shut lines all sharp",
+   "LIKELY DUPLICATE of 7d8bd246 (4 faces apart) and 640826210d2a4be9ae6e638fec1e84fa; flagged, not grouped"
+  ],
+  "name": "2023 Land Rover Range Rover Sport"
+ },
+ {
+  "uid": "34709c5c2535422da05270662f6d0708",
+  "verdict": "fail",
+  "reasons": [
+   "clay model - one white material over the whole car, windows render opaque body-white with no glass (cov=0.904, FULL COVERAGE)",
+   "no lamp internals, grille is a flat white mesh plate",
+   "widebody/lowered tuner stance"
+  ],
+  "name": "Land Rover Range Rover Sport 2009"
+ },
+ {
+  "uid": "df39d84cc8d04887801052e6900cb269",
+  "verdict": "pass",
+  "reasons": [
+   "Defender 110 L663, proportions read instantly, strong front three-quarter",
+   "glass reads as glass with clean tinted reflections",
+   "black rubber tyres, grey alloys with full spoke detail on both sides",
+   "grille, lamp internals and shut lines sharp; paint reads premium",
+   "CAVEAT for downstream: cov=0.964 FULL COVERAGE - a respray would repaint the glass too, so colour variants need a recolour_audit stamp before shipping"
+  ],
+  "name": "Land Rover  Defender 110"
+ },
+ {
+  "uid": "419f62ef87994a1cbd9b5145d8d68ebf",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a child's ride-on toy Evoque, not a car model",
+   "a slab of pavement and kerb is baked into the mesh as a ground plane",
+   "single material (cov=1.000), no glass, scan mush throughout"
+  ],
+  "name": "car Range Rover small Red"
+ },
+ {
+  "uid": "fa4d79a5875e4733a71101e28a30e2e3",
+  "verdict": "pass",
+  "reasons": [
+   "2022 Range Rover L460, proportions read instantly",
+   "black rubber tyres, dark grey multi-spoke rims with full face detail on BOTH sides (checked left and right at 2.4x)",
+   "glass reads as glass; door, bonnet and tailgate shut lines defined",
+   "the vertical grey element on the front door is the L460's OEM fender vent - present symmetrically on both sides, not an artefact (checked before culling)",
+   "note cov=0.116 LOW COVERAGE: distrust the colour in this sheet, not the model"
+  ],
+  "name": "2022 Land Rover Range Rover"
+ },
+ {
+  "uid": "cb66a790b6e14312a2c44d0afdb8d5ce",
+  "verdict": "fail",
+  "reasons": [
+   "overland/expedition build: full safari roof rack, exo roll cage, bull bar and rear ladder - modification kit, out of scope",
+   "wheels missing on three corners - bare hubs and suspension exposed, one loose wheel lying on the floor",
+   "clay white with cov=0.935 FULL COVERAGE"
+  ],
+  "name": "Land Rover Defender MK1 1983-2016"
+ },
+ {
+  "uid": "55f93b71956a43329ade06c986970a40",
+  "verdict": "pass",
+  "reasons": [
+   "2018 Discovery HSE, proportions read instantly",
+   "black rubber tyres, dark grey alloys with full spoke detail",
+   "glass reads as glass; shut lines, grille mesh and headlight internals all defined",
+   "renders in the source purple - correct behaviour, not a defect"
+  ],
+  "name": "2018 Land Rover Discovery HSE"
+ },
+ {
+  "uid": "6757216e76294b45b9190f6ef2635e8e",
+  "verdict": "fail",
+  "reasons": [
+   "rally/race prop: giant rear wing, roof-mounted cage and window grille, mudflaps, tow hooks - out of scope for this marque",
+   "front and rear wheels render as featureless black voids in front34 and side (rim face absent, not a lighting split)"
+  ],
+  "name": "Evoque racecar"
+ },
+ {
+  "uid": "9bb18f6fc0b84fb3accaab898533c4b2",
+  "verdict": "fail",
+  "reasons": [
+   "renders as a featureless near-black silhouette in all four views - no surface detail, no glass, no rim faces visible anywhere",
+   "unusable for audit or for the showroom viewer"
+  ],
+  "name": "Defender"
+ },
+ {
+  "uid": "fe4dc48adb9448eca4ce0b343f45d00b",
+  "verdict": "fail",
+  "reasons": [
+   "police conversion with roof light bar and spot lamp - emergency-services build, not an OEM road car",
+   "all four wheels render as translucent ghost discs - the rim face is absent and the floor shows through the wheel",
+   "two-tone half-grey/half-white livery split baked into the body"
+  ],
+  "name": "Land Rover P38A Police (High Poly)"
+ },
+ {
+  "uid": "b99bac937d40452390f1a6ef22a1ef5e",
+  "verdict": "fail",
+  "reasons": [
+   "TYRES RENDER BODY-WHITE - at 2.2x the tyre is the same white as the rim and the bodywork, no black rubber on any corner",
+   "body reads as glossy clay; glass is present but the car cannot ship with white tyres"
+  ],
+  "name": "Range Rover Svr"
+ },
+ {
+  "uid": "0c611e81b9ab48919afb9edb931fa897",
+  "verdict": "fail",
+  "reasons": [
+   "partially disassembled Defender: both doors removed, bonnet standing open and vertical, rear body sides open, bare interior and chassis exposed",
+   "not a closed car - cannot be posed on a turntable",
+   "tyres and wheels themselves are fine"
+  ],
+  "name": "Land Rover Defender"
+ },
+ {
+  "uid": "01847d45d6874364ac2676ee8c1764c3",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a Defender on a motor-show stand - roll-up banners, stanchion poles, floor tiles, a life-size cardboard cutout and torn background geometry are all baked into the mesh",
+   "single material, cov=1.000, no separable glass",
+   "scan mush on every surface"
+  ],
+  "name": "Land Rover Defender"
  }
 ]
