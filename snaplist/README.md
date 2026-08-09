@@ -64,6 +64,9 @@ step goes live — the header shows a green dot for each live integration.
 
 ### Before your first real publish
 
+**Full walkthrough: [`EBAY_SETUP.md`](./EBAY_SETUP.md)** — developer keyset,
+Sandbox seller, user token, business policies, in order.
+
 eBay enforces several things only at publish time, and it does **not** fall back
 to account defaults. To publish you must:
 
