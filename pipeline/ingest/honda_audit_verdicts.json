@@ -1,0 +1,666 @@
+{
+ "35cbd73adbe8411b80bdeeaa4f3cd151": {
+  "verdict": "PASS",
+  "model_slug": "civic",
+  "year": 2022,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "11th-gen Civic saloon, reads instantly. Glass is real (seats and headrests visible through all four windows), multi-spoke rims show full spoke/lug detail on both sides, headlight internals and honeycomb lower grille sharp, shut lines crisp. Stamp decides colours."
+ },
+ "0044cb3e465b4a7f8885f808207dc5b1": {
+  "verdict": "FAIL-RERENDER",
+  "model_slug": "accord",
+  "year": 1977,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "Renders upside down in all four views - floorpan and exhaust uppermost, wheels in the air. Underlying mesh looks clean and undamaged, so I suspect the known render-worker inversion bug rather than a bad source mesh. MEASURED after the audit: the source GLB is geometrically upright (h/l 0.32-0.35, tob 0.68-0.83, pose verdict ok) -- this inversion is the render-side bug, confirmed, not a mesh fault. Re-render when the worker is fixed; the car itself is likely good."
+ },
+ "01bd4f2a73f949d8840afb711429b3c1": {
+  "verdict": "PASS",
+  "model_slug": "insight",
+  "year": 2010,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "2nd-gen Insight liftback. Glass transparent with visible cabin, five-spoke rims consistent front34/front34_L/side/rear34, headlamp internals modelled, bonnet and door shut lines defined. Stamp decides colours."
+ },
+ "0aebfa48b6f140f694a3cbd62bbd5336": {
+  "verdict": "PASS",
+  "model_slug": "concerto",
+  "year": 1988,
+  "body_style": "saloon",
+  "gap": true,
+  "note": "Best-in-wave 80s saloon. Instantly a Concerto; glass clear with modelled seats, hubcap slots resolved on all four wheels, rear light bar and CONCERTO script crisp, door/bonnet lines defined. Stamp decides colours."
+ },
+ "cad9679ec5d6403984b1421ccd3f3d25": {
+  "verdict": "PASS",
+  "model_slug": "integra",
+  "year": 1995,
+  "body_style": "coupe",
+  "gap": true,
+  "note": "DC2 Type-R: OEM performance variant, in scope. Black five-spokes with red centre caps identical across all four views, headlight internals sharp, TYPE R decals and shut lines clean, glazing transparent. Stamp decides colours."
+ },
+ "39bf36a5b88b4767973ce417cfdcf301": {
+  "verdict": "PASS",
+  "model_slug": "accord",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "8th-gen Euro Accord (CU) Type S. Clean glass, consistent multi-spoke rims, sharp headlamp internals and defined shut lines. Note: visually near-identical to 6eccbee1 and 1bddd17d - three CU Accord saloons in this set, ship one."
+ },
+ "727b2ea44a124977a323815dafb8bb89": {
+  "verdict": "FAIL",
+  "model_slug": "ridgeline",
+  "year": 2016,
+  "body_style": "pickup",
+  "gap": true,
+  "note": "Out of scope: a Baja desert-race truck - full external roll cage, no glazing, bed-mounted spare stack, race suspension. Beautifully built but not a road car."
+ },
+ "76c8c4d7d49949e8ba9d6b6d3a94c473": {
+  "verdict": "DUPLICATE",
+  "model_slug": "ridgeline",
+  "year": 2016,
+  "body_style": "pickup",
+  "gap": true,
+  "note": "Same mesh as 727b2ea4 (1,065,371 vs 1,065,379 faces, 0.001% apart) rendered 180 degrees in yaw - identical cage, spares, wheels. Also out of scope as a race truck."
+ },
+ "faa07ab210314dd2a52e678e1b4f5a9a": {
+  "verdict": "PASS",
+  "model_slug": "prelude",
+  "year": 1983,
+  "body_style": "coupe",
+  "gap": true,
+  "note": "Mk2 Prelude, unmistakable wedge. Glass transparent with modelled dash, period alloys consistent across views, rear PRELUDE panel and side shut lines defined. Stamp decides colours."
+ },
+ "f749ed1e876d415b82efa5293836d92a": {
+  "verdict": "PASS",
+  "model_slug": "odyssey",
+  "year": 1999,
+  "body_style": "mpv",
+  "gap": true,
+  "note": "JDM RA6 Odyssey. Cabin visible through all glazing, six-spoke alloys consistent, headlamp internals and grille bars modelled, sliding-door and tailgate shut lines defined. Strongest of the Odyssey group. Stamp decides colours."
+ },
+ "a856d729d9ec47fc8cb3b740199ed6bf": {
+  "verdict": "PASS",
+  "model_slug": "cr-x",
+  "year": 1988,
+  "body_style": "coupe",
+  "gap": true,
+  "note": "EF-generation CRX, proportions read instantly. Glass clear with seats visible, steel wheels with hubcap detail identical on both sides, CRX tail panel and door lines crisp. Stamp decides colours."
+ },
+ "db666ce23d7b42fdbcd93a73217ba363": {
+  "verdict": "PASS",
+  "model_slug": "odyssey",
+  "year": 2008,
+  "body_style": "mpv",
+  "gap": true,
+  "note": "US-market Odyssey minivan, clean throughout: transparent glazing, five-spoke alloys consistent, sharp headlamp internals, roof rails and shut lines defined. Stamp decides colours."
+ },
+ "69183c2bf725484285552138c01ce93b": {
+  "verdict": "PASS",
+  "model_slug": "prelude",
+  "year": 1978,
+  "body_style": "coupe",
+  "gap": true,
+  "note": "Mk1 Prelude with JDM fender mirrors. Glazing transparent, period alloys consistent, rectangular lamps and rear panel modelled, shut lines defined. Stamp decides colours."
+ },
+ "b9be5abe354748f2ad6aebe470a939e4": {
+  "verdict": "FAIL",
+  "model_slug": "cr-x",
+  "year": 1980,
+  "body_style": "coupe",
+  "gap": true,
+  "note": "Out of scope: heavy aftermarket widebody CRX - flared arches, deep-dish rims, oversized rear wing, custom bumpers. Mesh axis is also 90 degrees out so the labelled side view shows the nose."
+ },
+ "d2c35fc6af904aa8a3a138ca21275b2a": {
+  "verdict": "PASS",
+  "model_slug": "hr-v",
+  "year": 2025,
+  "body_style": "suv",
+  "gap": false,
+  "note": "Current RV-generation HR-V/e:HEV and the best modern car in the wave. Glass fully transparent with modelled cabin, black multi-spokes consistent, LED headlamp internals and grille slats sharp, shut lines crisp. Stamp decides colours."
+ },
+ "1c1d92ac8ae24ee5ba0e89a10c4fa595": {
+  "verdict": "PASS",
+  "model_slug": "beat",
+  "year": 1991,
+  "body_style": "convertible",
+  "gap": true,
+  "note": "PP1 Beat, roof down, cockpit fully modelled (wheel, seats, dash). Multi-hole alloys with Honda caps consistent on both sides, headlamp internals present, panel gaps defined. Stamp decides colours."
+ },
+ "66e802c0bf7c4bda8fc3bc177fcc5ccb": {
+  "verdict": "DUPLICATE",
+  "model_slug": "beat",
+  "year": 1991,
+  "body_style": "convertible",
+  "gap": true,
+  "note": "Same mesh as 1c1d92ac (989,413 vs 989,474 faces, 0.006% apart) at 180 degrees yaw - identical wheels, interior and badging. Kept 1c1d92ac."
+ },
+ "a6d68831dcf54a9fba317764c6719845": {
+  "verdict": "FAIL-RERENDER",
+  "model_slug": "civic",
+  "year": 1983,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "Renders upside down in all four views. Geometry otherwise looks intact, so I suspect the known render-worker inversion bug on an upright source mesh. MEASURED after the audit: the source GLB is geometrically upright (h/l 0.32-0.35, tob 0.68-0.83, pose verdict ok) -- this inversion is the render-side bug, confirmed, not a mesh fault. Re-render when the worker is fixed; the car itself is likely good."
+ },
+ "5d3b1aa1922a4305b94a2b61f3cea004": {
+  "verdict": "FAIL-RERENDER",
+  "model_slug": "civic",
+  "year": 2001,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "Renders upside down in all four views; underbody and exhaust uppermost. Mesh looks clean - suspected render-worker inversion bug. MEASURED after the audit: the source GLB is geometrically upright (h/l 0.32-0.35, tob 0.68-0.83, pose verdict ok) -- this inversion is the render-side bug, confirmed, not a mesh fault. Re-render when the worker is fixed; the car itself is likely good."
+ },
+ "d5af69ef34834f43a65b4aac78ca8929": {
+  "verdict": "PASS",
+  "model_slug": "cr-z",
+  "year": 2011,
+  "body_style": "hatchback",
+  "gap": true,
+  "note": "CR-Z reads instantly. Transparent glazing including the split rear window, five twin-spoke rims consistent, headlamp internals sharp, bonnet and door lines defined. Stamp decides colours."
+ },
+ "f973338c77ce4618b941612241d53f6a": {
+  "verdict": "PASS",
+  "model_slug": "accord",
+  "year": 2021,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "10th-gen Accord, premium finish. Clear glazing, black multi-spokes consistent, LED headlamp bars and grille sharp, shut lines crisp. Stamp decides colours."
+ },
+ "4e3e9bd888fb4ec69f71cc487f33f4ba": {
+  "verdict": "PASS",
+  "model_slug": "s660",
+  "year": 2015,
+  "body_style": "convertible",
+  "gap": true,
+  "note": "S660 targa with roof panel fitted. Glazing transparent, five-spoke rims consistent, headlamp internals and rear vents modelled, shut lines defined. Stamp decides colours."
+ },
+ "d10be78451fb4308b728507d50fb6056": {
+  "verdict": "FAIL",
+  "model_slug": "nsx",
+  "year": null,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "Out of scope: hill-climb race concept - full-width swan-neck wing, splitter and dive planes, widebody arches, slick tyres. Not a road car."
+ },
+ "db80634b538c40569bc77ebf829bac19": {
+  "verdict": "PASS",
+  "model_slug": "odyssey",
+  "year": 2011,
+  "body_style": "mpv",
+  "gap": true,
+  "note": "US RL5 Odyssey with the lightning-bolt beltline. Glazing transparent, five-spoke alloys consistent, headlamp internals modelled, sliding-door lines defined. Stamp decides colours."
+ },
+ "d4f83dedc8f54c27b5c9103a662d1062": {
+  "verdict": "PASS",
+  "model_slug": "accord",
+  "year": 1998,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "CG-generation Accord coupe. Glass clear with cabin visible, six-spoke alloys consistent, headlamp internals present, shut lines defined. Stamp decides colours."
+ },
+ "6eccbee181b143b28764a82b15f0a62d": {
+  "verdict": "PASS",
+  "model_slug": "accord",
+  "year": 2011,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "CU Accord saloon, facelift front. Clean glazing, consistent rims, sharp headlamps, defined shut lines. Visually near-identical to 39bf36a5 and 1bddd17d - genuinely different meshes but the same generation; ship one of the three."
+ },
+ "3f5ef3ff34c04f839c05709c6fa5ce1c": {
+  "verdict": "PASS",
+  "model_slug": "accord",
+  "year": 2009,
+  "body_style": "estate",
+  "gap": false,
+  "note": "Accord Tourer - the only estate body in the clean set and clearly distinct from the saloons. Transparent glazing, consistent rims, sharp headlamps, roof rails and tailgate lines defined. Stamp decides colours."
+ },
+ "b3c0f77626644e99b54304aebbafc60b": {
+  "verdict": "PASS",
+  "model_slug": "hr-v",
+  "year": 2001,
+  "body_style": "suv",
+  "gap": false,
+  "note": "First-generation GH HR-V five-door. Glass transparent with cabin visible, alloys consistent across views, headlamp internals modelled, shut lines defined. Stamp decides colours."
+ },
+ "d5d98cef2a4240b6be91e03a1afcb0e1": {
+  "verdict": "PASS",
+  "model_slug": "odyssey",
+  "year": 1999,
+  "body_style": "mpv",
+  "gap": true,
+  "note": "US RL1 Odyssey, sharpest of the three RL1-era vans here: modelled headlamp internals, consistent six-spoke alloys, transparent glazing, crisp sliding-door and tailgate lines. Stamp decides colours."
+ },
+ "d0391b0403d34793927beebdbbc2a4a1": {
+  "verdict": "DUPLICATE",
+  "model_slug": "odyssey",
+  "year": 1999,
+  "body_style": "mpv",
+  "gap": true,
+  "note": "Same mesh as d5d98cef (893,332 vs 893,334 faces, 2 faces apart) at 180 degrees yaw - identical wheels, glazing and badging. Kept d5d98cef."
+ },
+ "9b6c48141ea849c08a82c7e12ec80c69": {
+  "verdict": "FAIL-RERENDER",
+  "model_slug": "civic",
+  "year": 1979,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Renders upside down in all four views. Mesh looks undamaged - suspected render-worker inversion bug. MEASURED after the audit: the source GLB is geometrically upright (h/l 0.32-0.35, tob 0.68-0.83, pose verdict ok) -- this inversion is the render-side bug, confirmed, not a mesh fault. Re-render when the worker is fixed; the car itself is likely good."
+ },
+ "baa08e5aea7a4f638d98db2050c21112": {
+  "verdict": "PASS",
+  "model_slug": "accord",
+  "year": 2003,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "7th-gen CL Accord. Transparent glazing, five-spoke alloys consistent, headlamp internals present, bonnet and door lines defined. Stamp decides colours."
+ },
+ "92e568f639384c3b9c3ced96512f6f1d": {
+  "verdict": "PASS",
+  "model_slug": "prelude",
+  "year": 1997,
+  "body_style": "coupe",
+  "gap": true,
+  "note": "BB5 Prelude, proportions instantly right. Glass clear with cabin visible, five-spoke alloys consistent, headlamp internals and VTEC bootlid script modelled, shut lines defined. Stamp decides colours."
+ },
+ "1bddd17deee44ef8b8a401e8a25a6b5d": {
+  "verdict": "PASS",
+  "model_slug": "accord",
+  "year": 2009,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "Pre-facelift CU Accord saloon. Clean glazing, consistent rims, defined shut lines. Third near-identical CU Accord in this set alongside 39bf36a5 and 6eccbee1 - ship one."
+ },
+ "8d0d4ce034ef435db9167b18161ef57f": {
+  "verdict": "PASS",
+  "model_slug": "crosstour",
+  "year": null,
+  "body_style": "suv",
+  "gap": true,
+  "note": "Accord Crosstour liftback crossover, unique nameplate in the wave. Transparent glazing, five-spoke alloys consistent, headlamp internals sharp, shut lines defined. Stamp decides colours."
+ },
+ "585280a06d3a473980682be5e4dff82d": {
+  "verdict": "FAIL",
+  "model_slug": "accord",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "Wheels detached: three corners show bare brake discs and floating calipers in empty arches and one loose wheel lies on the floor under the car in the side view. Body also hovers above the ground plane. True wheel-void failure, not a lighting artefact."
+ },
+ "06191f5bef694146bd0472af4af8b7b9": {
+  "verdict": "FAIL",
+  "model_slug": "nsx",
+  "year": 2017,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "Out of scope: NSX-GT GT500 race car - swan-neck rear wing, full aero splitter and diffuser, slicks, stripped race cabin."
+ },
+ "7ea59d42e17a4d1f9a98b840740a3aa6": {
+  "verdict": "PASS",
+  "model_slug": "odyssey",
+  "year": 1994,
+  "body_style": "mpv",
+  "gap": true,
+  "note": "RA1 first-generation Odyssey with conventional hinged doors. Glazing transparent, alloys consistent, headlamp internals modelled, shut lines defined. Stamp decides colours."
+ },
+ "5328bd7313e346789568266d67081ba3": {
+  "verdict": "PASS",
+  "model_slug": "civic",
+  "year": 1987,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "EF-generation Civic three-door. Glass clear with cabin visible, five-spoke alloys consistent, headlamp internals and CIVIC tail panel crisp, shut lines defined. Stamp decides colours."
+ },
+ "8788e6274878465a9e03a063844eba7c": {
+  "verdict": "PASS",
+  "model_slug": "nsx",
+  "year": 1992,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "NA1 NSX Type-R with pop-up lamps raised - the raised-lamp pose is a genuine point of difference from the other NSXs here. Transparent glazing, seven-spoke rims consistent, shut lines defined, paint premium. Stamp decides colours."
+ },
+ "24abc0e850f64705906c910e91a6ac4a": {
+  "verdict": "PASS",
+  "model_slug": "odyssey",
+  "year": 2001,
+  "body_style": "mpv",
+  "gap": true,
+  "note": "RL1-era US Odyssey. Geometry sound, glazing transparent, five-spoke alloys consistent. Headlamp internals are noticeably flatter and the grille simpler than d5d98cef, which is the same generation and better - rank this one below it."
+ },
+ "a4827c4d86224ab586218654559f4627": {
+  "verdict": "FAIL",
+  "model_slug": "odyssey",
+  "year": null,
+  "body_style": "mpv",
+  "gap": true,
+  "note": "Exploded asset: front and rear bumper assemblies detached and lying on the floor beneath the car, all four wheels missing leaving bare hubs and calipers, body floating."
+ },
+ "1bb32fd8460e47af82518e43f172f916": {
+  "verdict": "PASS",
+  "model_slug": "civic",
+  "year": 1991,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "EG-generation Civic three-door. Transparent glazing, multi-spoke rims consistent, headlamp internals present, shut lines defined. Stamp decides colours."
+ },
+ "770a5c9b025449f59769d8cd27d915bb": {
+  "verdict": "PASS",
+  "model_slug": "civic",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "FK8 Civic Type R - factory performance variant, in scope. Glazing transparent, black multi-spokes with red calipers consistent, headlamp internals sharp, front honeycomb grille resolved, shut lines crisp. Mesh axis is rotated so the tile labels do not match the views."
+ },
+ "1860f7cc43544306a4148ba5953cfac4": {
+  "verdict": "PASS",
+  "model_slug": "civic",
+  "year": 1996,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "EJ-generation Civic coupe. Glass clear, six-spoke alloys consistent, headlamp internals modelled, shut lines defined. Stamp decides colours."
+ },
+ "ade1ab7ab2df4618a802431f3237f250": {
+  "verdict": "PASS",
+  "model_slug": "civic",
+  "year": 1976,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Original CVCC Civic with fender mirrors. Transparent glazing with modelled cabin, steel wheels with red centre caps consistent, HONDA tail script and shut lines crisp. Stamp decides colours."
+ },
+ "382f78083aef442591d52c78af726b35": {
+  "verdict": "FAIL",
+  "model_slug": "civic",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Out of scope: EK9 built as a Spoon Sports tuner car - Spoon front bumper, Spoon wheels, blue calipers. A tuner build, not a factory road car."
+ },
+ "fb53b8bc2a74417a8a38967930da12d3": {
+  "verdict": "FAIL",
+  "model_slug": "accord",
+  "year": 2007,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "Fails the rubric on detail: headlamps are flat dark blanks with no internal elements, rear bumper and boot are soft, door and bonnet shut lines barely register, wheels are plain covers. The body also hovers above the ground plane. Clearly a tier below the four other Accords here."
+ },
+ "f6f11514f971460e9f8df318df7b85b0": {
+  "verdict": "FAIL",
+  "model_slug": "civic",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Not a car - a single wheel and tyre fills all four views. A part, not a vehicle. It passed the automated clean gate, which is worth noting."
+ },
+ "a9514cacb3194a97a8a583caf1453ef5": {
+  "verdict": "FAIL",
+  "model_slug": "civic",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Out of scope: title says modified, and the car carries a non-standard rear wing plus baked-in red livery stripes on the flanks and bonnet that a respray would not remove."
+ },
+ "a21edb35a7714774a10b74642e815ca2": {
+  "verdict": "PASS",
+  "model_slug": "nsx",
+  "year": 1992,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "NA1 NSX-R, pop-ups down, white five-spokes with red Honda caps. Glazing transparent with red cabin visible, wheels consistent across views, shut lines defined, paint premium. Same car as abeaa957 at higher poly - ship one."
+ },
+ "492b1e8a73984c5d88e10efd8acfd816": {
+  "verdict": "DUPLICATE",
+  "model_slug": "nsx",
+  "year": 1992,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "Same mesh and same camera framing as a21edb35 (349,458 vs 349,468 faces, 10 apart); the only difference I can see is black rims instead of white. Kept a21edb35."
+ },
+ "65e2974c74254021b027b223190418e8": {
+  "verdict": "PASS",
+  "model_slug": "city",
+  "year": 2008,
+  "body_style": "saloon",
+  "gap": true,
+  "note": "GM2 City saloon. Transparent glazing with cabin visible, white wheel covers consistent on all four corners, headlamp internals modelled, shut lines defined. Stamp decides colours."
+ },
+ "e05913bc469346ec8b2ed6ec404f7c80": {
+  "verdict": "FAIL",
+  "model_slug": "cr-v",
+  "year": 2007,
+  "body_style": "suv",
+  "gap": false,
+  "note": "Two faults: wheels are absent (empty arches, one loose wheel on the floor under the car) and the vehicle wears a dealer Aero Sport styling kit plus roof box, which is an accessory build rather than a stock car."
+ },
+ "600b5900ab034fc19db376e6b6443366": {
+  "verdict": "FAIL",
+  "model_slug": "civic",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "Lying on its side, and all four wheels are detached and scattered on the floor as separate discs. This is not the clean 180-degree flip of the inversion bug - it is a 90-degree roll plus exploded parts."
+ },
+ "23d10a7f1a8c489e8fe1fc04ab091ed1": {
+  "verdict": "FAIL",
+  "model_slug": "cr-x",
+  "year": null,
+  "body_style": "convertible",
+  "gap": true,
+  "note": "Stripped shell: no wheels at all (bare discs and calipers hanging in empty arches), window apertures are open holes with no glass, and the panels are visibly faceted and crumpled."
+ },
+ "6360f93abad043878879e5a0f1bd6f4a": {
+  "verdict": "FAIL",
+  "model_slug": "city",
+  "year": 2008,
+  "body_style": "saloon",
+  "gap": true,
+  "note": "No wheels anywhere - all four arches are empty. Body panels also render in mismatched grey and white blocks, and the title says tuned."
+ },
+ "f00136dfd77348b1a053d98fadd43602": {
+  "verdict": "PASS",
+  "model_slug": "cr-x",
+  "year": 1995,
+  "body_style": "convertible",
+  "gap": true,
+  "note": "Del Sol SiR, roof fitted. Glazing transparent (roll hoop and parcel shelf visible through the rear glass), white five-spokes consistent with centre caps on all four, front bumper and shut lines defined. Stamp decides colours."
+ },
+ "737fd0a261fd4f32b431c838dcc57c0f": {
+  "verdict": "PASS",
+  "model_slug": "s2000",
+  "year": 1999,
+  "body_style": "convertible",
+  "gap": false,
+  "note": "AP1 S2000, hood up, red cabin modelled and visible through the glass. Chrome five-spokes consistent, headlamp internals sharp, shut lines crisp, paint premium. Stamp decides colours."
+ },
+ "1f0d3d471bee42908e336b11da6b5e61": {
+  "verdict": "DUPLICATE",
+  "model_slug": "civic",
+  "year": 1998,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Pixel-identical to 4df76c19 apart from the header text (238,189 vs 238,188 faces). Same EK9, same wheels, same framing. Kept 4df76c19 for the cleaner title."
+ },
+ "4df76c1974cd4173a7a941bfec7714ab": {
+  "verdict": "PASS",
+  "model_slug": "civic",
+  "year": null,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "EK9 Civic Type R - factory performance variant, in scope. Transparent glazing, black six-spokes consistent across views, headlamp internals present, TYPE R side decal and shut lines crisp. Stamp decides colours."
+ },
+ "0669147fb3ba4cca95ea942add743b2b": {
+  "verdict": "PASS",
+  "model_slug": "civic",
+  "year": 2023,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "FL5 Civic Type R, excellent throughout: clear glazing, black multi-spokes with red calipers consistent, sharp LED headlamp internals, mesh grille resolved, shut lines crisp. Stamp decides colours."
+ },
+ "abeaa957199c473ea3d293f7e669bf34": {
+  "verdict": "PASS",
+  "model_slug": "nsx",
+  "year": 1992,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "NA1 NSX-R, pop-ups down. Glazing transparent with red cabin visible, white five-spokes consistent, rear light bar and shut lines crisp. Visually the same car as a21edb35 (a different, higher-poly mesh) - ship one of the two."
+ },
+ "dca96b4f975b443c803d963fd3a9add7": {
+  "verdict": "DUPLICATE",
+  "model_slug": "nsx",
+  "year": 1992,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "Same mesh, same framing, same wheels and interior as abeaa957 (234,456 vs 234,947 faces, 0.209% apart); I could find no visual difference. Kept abeaa957."
+ },
+ "0a2c327d1da3417aa1d91906cfbd9ba7": {
+  "verdict": "FAIL",
+  "model_slug": "civic",
+  "year": 2006,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Lying on its side - front34 and front34_L look straight at the underbody and the car balances on its flank. A 90-degree roll, not the 180-degree inversion bug."
+ },
+ "bd54e1b7f19c41ed9c649e546ef032f3": {
+  "verdict": "FAIL",
+  "model_slug": "civic",
+  "year": null,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "Out of scope: the title names the Wings West Avenger aftermarket body kit, and the car wears its bumpers, skirts, twin rear wings and aftermarket rims."
+ },
+ "ccbbeb08cf494ef5a9c798b17b133033": {
+  "verdict": "FAIL",
+  "model_slug": "civic",
+  "year": 1986,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "Out of scope: an otherwise stock 3rd-gen Civic Si fitted with a large aftermarket GT wing on stanchions and a mesh front splitter. Aftermarket aero, not a factory car."
+ },
+ "f397c4664a104feaae1d348e368e3f3d": {
+  "verdict": "PASS",
+  "model_slug": "civic",
+  "year": 2006,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "8th-gen US Civic coupe. Glazing transparent, wheel covers consistent on all four corners, headlamp internals present, shut lines visible. Surfacing is slightly softer than the top tier - mid-ranked. Stamp decides colours."
+ },
+ "becb3a29bce245198a6fa5f2be6576a7": {
+  "verdict": "FAIL",
+  "model_slug": "civic",
+  "year": null,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "Wheels missing on three corners with bare hubs and springs exposed, one loose wheel on the floor, headlamp apertures are empty holes, and the body floats above the ground plane."
+ },
+ "ce29e75eb129406f874e0423ab8869c3": {
+  "verdict": "PASS",
+  "model_slug": "civic",
+  "year": 1999,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "EM1 Civic Si coupe. Transparent glazing, six-spoke white alloys consistent, headlamp internals modelled, shut lines defined. Stamp decides colours."
+ },
+ "4f8ff01b643d4795a6a515478a6fd9d6": {
+  "verdict": "PASS",
+  "model_slug": "civic",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "FD2 Civic Mugen RR - a factory limited-run road car sold through Honda, so in scope per the Mugen rule. Glazing transparent with red cabin visible, dark multi-spokes consistent, headlamp internals and grille detail sharp, shut lines crisp."
+ },
+ "522aadf343784a8491263717b2eb3b28": {
+  "verdict": "FAIL",
+  "model_slug": "civic",
+  "year": null,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "Out of scope: full aftermarket widebody - flared arches, side skirts, custom bumpers and a large GT wing. Tail lamps also render as body-coloured blanks."
+ },
+ "faab251f15c44d73ba81d2ba1ec9faa9": {
+  "verdict": "FAIL",
+  "model_slug": "accord",
+  "year": null,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "Broken geometry: a large flat black quad covers the entire flank in front34 and side, the offside wheels are missing leaving black voids, the boot and roof show coarse triangulation, and it carries an aftermarket rear wing."
+ },
+ "8d5769e1b39a4cc3a17b1dcc56e2a982": {
+  "verdict": "FAIL",
+  "model_slug": "civic",
+  "year": 2000,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "No wheels at all - every arch is empty with only suspension stubs showing, and the shell rests on nothing."
+ },
+ "7cfbf41c94fc4f8a988ab441af702722": {
+  "verdict": "FAIL",
+  "model_slug": "civic",
+  "year": 2017,
+  "body_style": "coupe",
+  "gap": false,
+  "note": "Out of scope: title says custom and the car is a full widebody build - bolt-on arches, deep-dish rims, slammed stance, GT wing, splitter and canards."
+ },
+ "1acb615324254e53a04860e786ade136": {
+  "verdict": "PASS",
+  "model_slug": "jazz",
+  "year": 2016,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "GK3 Fit - the JDM name for the Jazz. Transparent glazing, dark wheel covers consistent, headlamp internals present, shut lines defined. Stamp decides colours."
+ },
+ "974385e940e84fd6bf47ca04c2e69313": {
+  "verdict": "PASS",
+  "model_slug": "jazz",
+  "year": 2020,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "GR-generation Fit/Jazz. Glazing transparent, wheel covers consistent, headlamp internals sharp, shut lines defined. Note the source material renders bright green rather than neutral, so verify the first respray. Stamp decides colours."
+ },
+ "0dc6454d74a241e5a08fac82ce2826b2": {
+  "verdict": "PASS",
+  "model_slug": "civic",
+  "year": 2025,
+  "body_style": "saloon",
+  "gap": false,
+  "note": "11th-gen Civic RS e:HEV saloon, top-tier modern asset. Clear glazing, black multi-spokes consistent, sharp LED headlamp internals, grille and shut lines crisp. Stamp decides colours."
+ },
+ "707599838a074af69ec5137db597a037": {
+  "verdict": "FAIL",
+  "model_slug": "pilot",
+  "year": null,
+  "body_style": "suv",
+  "gap": true,
+  "note": "Not a car - a single steel wheel and tyre fills all four views. A part. Its face count (95,877) sits 0.2% from the 2025 Civic e:HEV, a good illustration of why rule (b) cannot be trusted alone."
+ },
+ "18e956bcf53b4f1191a9fb6b5b70efe2": {
+  "verdict": "PASS",
+  "model_slug": "civic",
+  "year": 1993,
+  "body_style": "hatchback",
+  "gap": false,
+  "note": "EG Civic three-door. Glazing transparent with cabin visible, steel wheels consistent on all four corners, headlamp lens divisions and amber indicators modelled, shut lines defined. Mid-tier surfacing but no defect. Stamp decides colours."
+ },
+ "5c9d6d8d4aeb49e1bce91b10092b45ba": {
+  "verdict": "FAIL",
+  "model_slug": "hr-v",
+  "year": null,
+  "body_style": "suv",
+  "gap": false,
+  "note": "Same RV-generation HR-V/Vezel as d2c35fc6 but at 86k faces: headlamps are pale blank lenses with no internal elements and the grille is a flat slat panel. Fails the sharpness bar, and d2c35fc6 is the same car done far better. Borderline call - flagged."
+ },
+ "0fe37a6d26f34767860d3063fab993c2": {
+  "verdict": "FAIL",
+  "model_slug": "mobilio",
+  "year": 2023,
+  "body_style": "mpv",
+  "gap": true,
+  "note": "Out of scope: title says Widebody and the car has bolt-on flared arches, deep-dish black rims, lowered stance and aero skirts."
+ },
+ "3565e8277a484f14b45c6888ca61a2b2": {
+  "verdict": "PASS",
+  "model_slug": "cr-v",
+  "year": 2001,
+  "body_style": "suv",
+  "gap": false,
+  "note": "RD1 first-generation CR-V with tailgate-mounted spare. Glazing transparent with cabin visible, five-spoke alloys consistent, headlamp internals and amber indicators modelled, shut lines defined. Mid-tier surfacing at 65k faces. Stamp decides colours."
+ }
+}
