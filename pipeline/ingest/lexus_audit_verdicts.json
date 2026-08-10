@@ -225,5 +225,123 @@
    "lighting and shadows baked into the texture; glass is scan texture, not glazing",
    "single material over the whole car (cov=1.000); panels soft"
   ]
+ },
+ {
+  "uid": "5a1cb47a136d45a3a760f33711eb3bef",
+  "name": "2015 Lexus GS",
+  "verdict": "fail",
+  "reasons": [
+   "panel surfaces wavy and dented at 2.4x - rear quarter, boot lid and front wing all ripple",
+   "door and bonnet shut lines largely absent; rear bumper soft",
+   "79,171 faces is the bottom of the serving band and it shows"
+  ]
+ },
+ {
+  "uid": "3f6118da005a457a9ce6d737e5d1e37d",
+  "name": "Lexus LC-500",
+  "verdict": "fail",
+  "reasons": [
+   "widebody/stance conversion: bolt-on fender flares, Advan bronze wheels, extreme lowering, front lip splitter",
+   "not the OEM LC 500 a registration decodes to"
+  ]
+ },
+ {
+  "uid": "e4c359662a5d4e77b97489bdcf7a2014",
+  "name": "Lexus LC-500",
+  "verdict": "fail",
+  "reasons": [
+   "same widebody/stance conversion as 3f6118da (283,740 vs 283,978 faces - duplicate mesh)",
+   "not an OEM road car"
+  ]
+ },
+ {
+  "uid": "06f7ccfdf2aa4ef7afce64da59cacb16",
+  "name": "2017 Lexus LC 500",
+  "verdict": "pass",
+  "reasons": [
+   "stock OEM LC 500; proportions and front 3/4 excellent, honeycomb spindle grille genuinely sharp, triple-LED headlamp internals resolved",
+   "TYRE CALL OVERTURNED by evidence: the silver wave sheet showed pale front34 tyres, but a NATIVE-materials render (no recolour) of the staged GLB shows the car in its own red paint with plainly BLACK tyres on every corner",
+   "the pale tyre was the render worker repainting it - its heuristic pick grabbed 10 materials including generic phong6/7/9, and a forced --colour red turned the tyres red, which the model's own materials do not",
+   "glazing transparent, interior visible; all four rim faces full"
+  ]
+ },
+ {
+  "uid": "04f82c90d3b44ed8ada6af57f90c669d",
+  "name": "2017 Lexus LC 500 Model",
+  "verdict": "pass",
+  "reasons": [
+   "renders identically to 06f7ccfd - duplicate mesh (280,971 vs 280,973 faces); quality is the same stock OEM LC 500",
+   "only one of the pair should ship"
+  ]
+ },
+ {
+  "uid": "1e2a4a0d99844ce7b56956fc0ea0d8a7",
+  "name": "Lexus LX J100 2003",
+  "verdict": "pass",
+  "reasons": [
+   "reads as an LX470 J100 facelift instantly; all four wheels with full multi-spoke rim faces",
+   "tread face plainly black with a resolved tread pattern in front34; the paler rear34 side still shows tread grooves, so it is the rig's one-sided key, not a white tyre",
+   "glazing transparent with interior visible; grille slats and headlamp internals sharp; tail lamps detailed",
+   "NOTE LX470 is a US/Middle East model - a UK registration is very unlikely to decode to one"
+  ]
+ },
+ {
+  "uid": "2c8aadc8d0ea4ec180f758cd1361254b",
+  "name": "2023 Lexus GX 550 h Overtrail",
+  "verdict": "pass",
+  "reasons": [
+   "clean OEM GX 550h Overtrail; four wheels with chunky all-terrain tyres in plainly black rubber",
+   "glazing transparent with interior visible; grille, headlamps and tail lamps sharp; shut lines defined",
+   "NOTE GX is not sold in the UK - a UK registration will not decode to one"
+  ]
+ },
+ {
+  "uid": "8e77a0a3a93741c5953d7e02aec614f4",
+  "name": "2023_ Lexus_GX_550_h_ Overtrail_remix",
+  "verdict": "pass",
+  "reasons": [
+   "renders identically to 2c8aadc8 - duplicate mesh (517,104 vs 518,389 faces); keep the higher-face copy",
+   "NOTE GX is not sold in the UK"
+  ]
+ },
+ {
+  "uid": "605997db34c445898e4e92c8f4524378",
+  "name": "Lexus LX 570",
+  "verdict": "pass",
+  "reasons": [
+   "reads as an LX570 J200 facelift instantly; four wheels with full multi-spoke rim faces",
+   "tread face plainly black with a resolved block pattern in rear34 at 2.6x; the grey band in front34/side is the sidewall under the one-sided key",
+   "glazing transparent; spindle grille slats, headlamp internals and tail lamps all sharp",
+   "NOTE LX570 is a US/Middle East model - unlikely on a UK registration"
+  ]
+ },
+ {
+  "uid": "c9d725a16ea6424fa74403b5138808b2",
+  "name": "2012 Lexus LFA Nurburgring Package",
+  "verdict": "fail",
+  "reasons": [
+   "LFA track special with the fixed rear wing - out of scope for this wave",
+   "quality itself is fine (black BBS wheels, black tyres, transparent glazing)"
+  ]
+ },
+ {
+  "uid": "05900382647c42d19ab925f23eabca62",
+  "name": "2010 Lexus LFA",
+  "verdict": "pass",
+  "reasons": [
+   "stock OEM LFA; tyres plainly black on the tread face at 2.6x, black rim faces fully resolved with brake disc and yellow caliper visible",
+   "glazing transparent; headlamp internals, mesh grilles and carbon diffuser all resolved",
+   "cov=0.894 is close to the full-coverage warning band, so distrust the sheet colour - but glass and tyres are plainly separate materials",
+   "NOTE halo car - a UK registration will essentially never decode to an LFA"
+  ]
+ },
+ {
+  "uid": "ff487de5fab54916b152eaef4c9dd36b",
+  "name": "2012 Lexus LFA - Patrol",
+  "verdict": "fail",
+  "reasons": [
+   "fictional police-livery conversion: light bar, push bar, rear wing, POLICE graphics baked into the body",
+   "not an OEM road car and it cannot be resprayed"
+  ]
  }
 ]
