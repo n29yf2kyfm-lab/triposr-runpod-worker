@@ -1,23 +1,29 @@
 #!/usr/bin/env python3
-"""Duplicate detection over the FINAL Nissan pass list.
+"""Duplicate detection over a marque's FINAL pass list.
+
+Usage: dupe_check.py [marque]   (default "nissan")
 
 A looser face-only check produced false pairs (a Navara and a GT-R 57 faces
 apart), so a pair is flagged ONLY when:
-  (a) normalised title token overlap >= 0.75 (ignoring "nissan") AND face
-      counts within 1%, or
+  (a) normalised title token overlap >= 0.75 (ignoring the marque name) AND
+      face counts within 1%, or
   (b) face counts within 50 AND title token overlap >= 0.4.
 Round-number decimation clusters (within 250 of a 100k multiple) are excluded
 from rule (b): four Toyota Hiaces all landed within 252 faces of 1,000,000 and
-were four different vans.
+were four different vans. BYD Seagull (2025) sits at exactly 300,000 for the
+same reason.
 The lower face count is dropped; the more detailed mesh is kept.
 """
-import json, re, itertools
+import json, os, re, sys, itertools
 
-V = "/home/user/triposr-runpod-worker/pipeline/ingest/nissan_audit_verdicts.json"
-M = "/tmp/nissan/manifest.filtered.json"
-OUT = "/home/user/triposr-runpod-worker/pipeline/ingest/NISSAN_DUPES.json"
+MARQUE = (sys.argv[1] if len(sys.argv) > 1 else "nissan").lower()
+BASE = "/home/user/triposr-runpod-worker/pipeline/ingest"
 
-STOP = {"nissan", "the", "a", "of", "and", "com", "www", "3d", "model", "free"}
+V = f"{BASE}/{MARQUE}_audit_verdicts.json"
+M = f"/tmp/{MARQUE}/manifest.filtered.json"
+OUT = f"{BASE}/{MARQUE.upper()}_DUPES.json"
+
+STOP = {MARQUE, "the", "a", "of", "and", "com", "www", "3d", "model", "free"}
 
 
 def toks(s):
@@ -41,7 +47,8 @@ def roundish(f):
     return m > 0 and abs(f - m) <= 250
 
 
-PRIOR_DROPS = {r["drop_uid"] for r in json.load(open(OUT))}
+PRIOR_DROPS = ({r["drop_uid"] for r in json.load(open(OUT))}
+                if os.path.exists(OUT) else set())
 rows = {r["uid"]: r for r in json.load(open(M))}
 passes = [x for x in json.load(open(V)) if x["verdict"] == "pass"]
 for p in passes:
@@ -84,7 +91,7 @@ for keep, drop, ov, d, pct, rule in sorted(pairs, key=lambda t: -t[0]["faces"]):
         "keep_name": keep["name"],
         "keep_faces": keep["faces"],
         "reason": (f"duplicate mesh (rule {rule}): title token overlap "
-                   f"{ov:.2f} ignoring 'nissan', face counts {drop['faces']:,} "
+                   f"{ov:.2f} ignoring '{MARQUE}', face counts {drop['faces']:,} "
                    f"vs {keep['faces']:,} ({d:,} apart, {pct*100:.2f}%); "
                    f"keeping the higher face count"),
     })

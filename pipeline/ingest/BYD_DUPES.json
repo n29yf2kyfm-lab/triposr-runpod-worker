@@ -1,0 +1,20 @@
+[
+ {
+  "drop_uid": "8f944846e426419581df6d0fe9bfb927",
+  "name": "2024 BYD Yangwang U9",
+  "faces": 98416,
+  "keep_uid": "9f9d82e405ca4382a1c9ff442f5862c2",
+  "keep_name": "2024 BYD Yangwang U9",
+  "keep_faces": 98502,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'byd', face counts 98,416 vs 98,502 (86 apart, 0.09%); keeping the higher face count"
+ },
+ {
+  "drop_uid": "e41c7d031c454d1c834a6f597c139521",
+  "name": "2023 byd yangwang U8",
+  "faces": 109921,
+  "keep_uid": "a4990ac098274cb0ae1bc4ddcb977950",
+  "keep_name": "2023 BYD Yangwang U8",
+  "keep_faces": 110470,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'byd', face counts 109,921 vs 110,470 (549 apart, 0.50%); keeping the higher face count"
+ }
+]
