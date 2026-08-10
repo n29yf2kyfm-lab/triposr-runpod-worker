@@ -1,0 +1,259 @@
+[
+  {
+    "uid": "174c37496b7c4047aa553ed065a6f55e",
+    "name": "Hyundai Ioniq 9",
+    "verdict": "fail",
+    "reasons": [
+      "flat single-material clay shell (cov=1.000, FULLCOV) - every surface one grey",
+      "tyres render body-grey, no black rubber anywhere",
+      "glazing not separated - windows read as the same grey shell",
+      "panel surfaces soft, headlight/tail-lamp internals absent"
+    ]
+  },
+  {
+    "uid": "1afad9d95b094c98a3e55db2fb331ac9",
+    "name": "Hyundai I40",
+    "verdict": "fail",
+    "reasons": [
+      "exploded parts kit - body panels, bonnet and doors detached and floating",
+      "no wheels or tyres on the model at all; wheel arches empty",
+      "not a complete car"
+    ]
+  },
+  {
+    "uid": "307840c131284fa8a50bf4624ed865d7",
+    "name": "Hyundai Palisade 2026",
+    "verdict": "fail",
+    "reasons": [
+      "flat single-material clay shell (cov=1.000, FULLCOV)",
+      "tyres render body-white/grey, not black rubber",
+      "glazing not separated - windows opaque body colour"
+    ]
+  },
+  {
+    "uid": "389645a0af854200acff9458c86eef4f",
+    "name": "Hyundai I30 N",
+    "verdict": "fail",
+    "reasons": [
+      "exploded parts kit - panels spread out along the length of the car",
+      "no wheels, no glass, no assembled body",
+      "cov=1.000 flat clay on top of that"
+    ]
+  },
+  {
+    "uid": "392c09589156423eabcf8cd011b2c755",
+    "name": "Hyundai Grand i10 NIOS (with light textures)",
+    "verdict": "pass",
+    "reasons": [
+      "tyres plainly black rubber at 3x on the tread face in front34 and rear34",
+      "glazing transparent and tinted, interior visible",
+      "rim faces present on all four corners, spokes consistent between views",
+      "grille honeycomb defined, headlights carry internal elements, shut lines defined",
+      "NOTE: India-market Grand i10 NIOS nameplate, not the UK i10"
+    ]
+  },
+  {
+    "uid": "42c117d0bb694c1b84143f0ac1524686",
+    "name": "Hyundai I10",
+    "verdict": "fail",
+    "reasons": [
+      "bodywork torn and crumpled - black tears and holes across doors, front wing and rear quarter in all four views",
+      "non-manifold shards on the sills and bumpers",
+      "same source car as the Grand i10 NIOS but a broken mesh"
+    ]
+  },
+  {
+    "uid": "4f392ee7ae11436ea1008ad777863d02",
+    "name": "Hyundai H1",
+    "verdict": "fail",
+    "reasons": [
+      "body mats=0, cov=0.000 - no body-paint material at all",
+      "the whole van renders as a transparent glassy black shell; body and glazing indistinguishable",
+      "not recolourable, does not read as a car"
+    ]
+  },
+  {
+    "uid": "5315902ecbc04ab3b891865d98d6d396",
+    "name": "Hyundai+I30+2010_stls",
+    "verdict": "fail",
+    "reasons": [
+      "pure white clay STL shell - no glass, no tyres, wheels the same white as the body",
+      "cov=1.000 FULLCOV",
+      "also renders tilted on end, but the clay shell fails it regardless of pose"
+    ]
+  },
+  {
+    "uid": "56831ecda02e4792840e54c8be3d5306",
+    "name": "Hyundai iLoad H1",
+    "verdict": "fail",
+    "reasons": [
+      "headlight units are empty black voids on both sides - no lens, no reflector, no internals (confirmed at 3x)",
+      "otherwise clean: tyres black rubber, glazing transparent, rim faces present, grille honeycomb sharp",
+      "fails the rubric's headlight criterion outright rather than merely being soft"
+    ]
+  },
+  {
+    "uid": "60fc6777280a46a19c7fa664ed7458bb",
+    "name": "Hyundai Nexo 2020",
+    "verdict": "fail",
+    "reasons": [
+      "flat single-material clay shell (cov=1.000, FULLCOV)",
+      "tyres render body-grey, glazing not separated",
+      "panel surfacing soft"
+    ]
+  },
+  {
+    "uid": "66de520de93249f385f09841ab4ae158",
+    "name": "Hyundai Ioniq 2018",
+    "verdict": "fail",
+    "reasons": [
+      "photogrammetry scan - the ground plane is baked into the mesh as an elliptical disc under the car",
+      "lighting and shadows baked into the texture across the body",
+      "no material separation: glazing and tyres are texture, not materials; tyres read pale grey"
+    ]
+  },
+  {
+    "uid": "6c267be59fb94253bff935616eddcc99",
+    "name": "2020 Hyundai i20 N- Line",
+    "verdict": "fail",
+    "reasons": [
+      "tyres render the same silver-grey as the body and the rim - whole tyre incl. tread, confirmed at 3x on the tread face",
+      "front grille geometry broken into scattered blocks",
+      "glazing missing - door apertures show straight through to the interior",
+      "cov=0.925 FULLCOV"
+    ]
+  },
+  {
+    "uid": "72b04d8695464c159564bf11d152a38a",
+    "name": "Hyundai ix35 Tucson 2011",
+    "verdict": "fail-rerender",
+    "reasons": [
+      "rendered UPSIDE DOWN in all four views - known render-side inversion bug",
+      "source mesh otherwise looks complete (black tyres, rim faces present, glazing separated)",
+      "re-render before judging; do not scrap"
+    ]
+  },
+  {
+    "uid": "8270bf067a5247f687b2d38b3b1eae39",
+    "name": "2013 Hyundai Accent",
+    "verdict": "pass",
+    "reasons": [
+      "tyres plainly black rubber on the tread face in front34/rear34 at 3x",
+      "glazing transparent and tinted",
+      "rim faces present, 5-spoke alloys sharp and consistent across views",
+      "headlights carry projector and internal detail, grille slats defined, shut lines defined",
+      "NOTE: 2013 Accent (RB) is a non-UK nameplate for that generation"
+    ]
+  },
+  {
+    "uid": "82876de1b064450cb8f033a2d3e90758",
+    "name": "Hyundai ix55- Veracruz 2011",
+    "verdict": "pass",
+    "reasons": [
+      "tyres plainly black rubber on the tread face in front34_L and rear34 at 3x; the pale read in the side tile is sidewall under the one-sided key, not a defect",
+      "glazing transparent, interior visible",
+      "rim faces present on all four corners with consistent spokes",
+      "panels clean, shut lines defined, reflections clean",
+      "headlight internals are dark but structured; softer than premium, not empty"
+    ]
+  },
+  {
+    "uid": "89031ca28a3a4af18a1f0f9c2ad9934e",
+    "name": "Hyundai Veloster",
+    "verdict": "fail",
+    "reasons": [
+      "missing-texture checkerboard patch across the bonnet in rear34",
+      "grey rectangular material-patch artefacts on the doors in side and rear34",
+      "rear wing renders as faceted low-poly triangles with gaps",
+      "heavy aftermarket widebody/aero build rather than an OEM road car"
+    ]
+  },
+  {
+    "uid": "a82f0f2d937e4cf694c2de7cdbfba093",
+    "name": "Hyundai Getz 2006",
+    "verdict": "pass",
+    "reasons": [
+      "tyres plainly black rubber, rim faces present with detailed spokes",
+      "glazing transparent and tinted, interior visible through the side glass",
+      "grille is a fine mesh, bumper and body mouldings defined, bonnet shut line present",
+      "headlight is a dark unit with visible internal facets - soft by premium standards but not empty",
+      "the white shape in the rear screen is a studio reflection in transparent glass, not torn geometry"
+    ]
+  },
+  {
+    "uid": "b00b5faebc314e54aef423e46230e963",
+    "name": "Hyundai Accent (TaGAZ) 2004",
+    "verdict": "fail",
+    "reasons": [
+      "TYRES ARE ON THE BODY-PAINT MATERIAL - proven by a forced RED re-render of the staged GLB: the whole tyre incl. tread turns red with the body",
+      "recolour payload lists 4 materials (Kuzov, Plastik, Total, material_0); cov=0.881",
+      "grille and part of the tail-lamp lens also take the body colour",
+      "blocky pixelated artefacts on the rear side glass"
+    ]
+  },
+  {
+    "uid": "cac46d2f40f644f593044bd57e43c376",
+    "name": "HYUNDAI I20 2026",
+    "verdict": "fail",
+    "reasons": [
+      "flat unshaded toy-grade materials - matte pale green with no specular or reflection anywhere",
+      "glazing opaque flat black, not glass",
+      "headlights and rims are flat filled shapes with no internal detail",
+      "no shut lines; door lines are painted-on strips"
+    ]
+  },
+  {
+    "uid": "cc3cc1e967724a6eadca1ab6032ddfad",
+    "name": "2015 Hyundai Santa Fe",
+    "verdict": "fail",
+    "reasons": [
+      "wheels absent entirely on one side - front34 and side show empty black arches front and rear, front34_L and rear34 show wheels present",
+      "large stray flat white polygon planes intersecting the body and floating behind the car",
+      "cov=0.082 LOW COVERAGE"
+    ]
+  },
+  {
+    "uid": "cec6b04b06724f1088129c1054ccb1ec",
+    "name": "hyundai accent 2013",
+    "verdict": "pass",
+    "reasons": [
+      "tyres plainly black rubber on the tread face at 3x",
+      "glazing transparent and tinted",
+      "hubcap faces present and consistent; tail lamp is a smoked lens with visible internal segments, not a void",
+      "panels clean, shut lines defined, headlights carry projector and LED-strip detail",
+      "NOTE: near-identical face count to 8270bf06 (951,346 vs 951,340) - duplicate candidate, see HYUNDAI_DUPES.json"
+    ]
+  },
+  {
+    "uid": "da9653173c984ad3b8b60b01f1abf13b",
+    "name": "2014 Hyundai Elantra SE",
+    "verdict": "fail",
+    "reasons": [
+      "near-uniform clay shell, cov=0.888 across 5 body materials",
+      "tyres render body-white, rims body-white",
+      "headlight and tail-lamp lenses render body-white with no internals",
+      "grille body-coloured"
+    ]
+  },
+  {
+    "uid": "e71dd7d6b29245ca9d17ea1fd44edea7",
+    "name": "Hyundai i20 2010",
+    "verdict": "pass",
+    "reasons": [
+      "forced RED re-render of the staged GLB leaves the tyres BLACK and the rims dark grey - recolour touches only `carpaint`",
+      "glazing transparent and tinted, interior visible",
+      "rim faces present with consistent spokes, headlights dark with internal elements",
+      "panels clean under the red control; the pale blob at the tail lamp in the silver sheet is body reflected in a dark smoked lens",
+      "UK-market i20 (PB) three-door"
+    ]
+  },
+  {
+    "uid": "f2f67bc93e374f5cb2ff92fee99eb53c",
+    "name": "Hyundai I30 N TCR Hatchback 2020",
+    "verdict": "fail",
+    "reasons": [
+      "TCR touring-car race version - out of scope per the marque brief",
+      "racing aero, roll cage, slick tyres with no sidewall detail; not a car a UK registration decodes to"
+    ]
+  }
+]
