@@ -2728,6 +2728,15 @@
   ]
  },
  {
+  "uid": "d5b79038a7144558830aaaee53c98392",
+  "name": "2019 Nissan GT-R R35 Varis Kamikaze R SuperSonic",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Varis Kamikaze R aftermarket widebody kit, title says so outright",
+   "riveted over-fenders, oversized swan-neck wing, canards, full splitter and diffuser"
+  ]
+ },
+ {
   "uid": "d7a699a69c634bdcaef419b81087d461",
   "name": "2019 Nissan Altima",
   "verdict": "pass",
@@ -2749,6 +2758,104 @@
    "tyres plainly black rubber; white 5-spoke rim faces present and detailed on BOTH sides",
    "grille, headlight internals and factory boot wing all correct; door shut lines defined",
    "284,963 faces, panel surfacing clean and reflections even; US plate is cosmetic only"
+  ]
+ },
+ {
+  "uid": "d8b24fd4586041ddad77d93b2ff7f6f5",
+  "name": "Nissan Patrol VTC SUPER SAFARI 2019",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Patrol Y61 Super Safari, proportions read instantly, four views consistent",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; dark off-road rim faces present and detailed on BOTH sides",
+   "grille badge, headlight internals and door shut lines defined at 666,906 faces",
+   "NOTE: roof rack with jerrycans and a roof box are bolt-on accessories, not a body kit - but they change the silhouette, flag for the owner",
+   "third Patrol Y61 in this wave (with d31ef92c and d36a29d5) - all three have distinct face counts, same base car from different uploaders"
+  ]
+ },
+ {
+  "uid": "da60980ca528483ba8f3d370a6b2497d",
+  "name": "Nissan Leaf WHITE",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: soft melted panels, ragged roof edge, baked environment reflections frozen into the glass texture",
+   "glazing is scan texture, not glass; cov=1.000 FULLCOV",
+   "499,458 faces - a decimated-to-target mesh, exclude from exact-match dedup"
+  ]
+ },
+ {
+  "uid": "da67b588394c4058b82eb0179e6d0adf",
+  "name": "Nissan Pathfinder MK3 2004-2014",
+  "verdict": "fail",
+  "reasons": [
+   "unfinished: doors and rear quarter render as dark grey semi-transparent placeholder panels against a white body",
+   "near-side wheels absent - arches empty with black flaps hanging where the wheels should be",
+   "18 materials with no coherent body paint; not a shippable car"
+  ]
+ },
+ {
+  "uid": "dc3abe58b0814d3dbe540fefeb8fcd70",
+  "name": "Nissan Silvia S14 1996-2000",
+  "verdict": "fail",
+  "reasons": [
+   "wheels absent: bare brake discs exposed in empty arches, a single black wheel floats under the centre of the car",
+   "glazing renders opaque body-white, cov=0.901 FULLCOV",
+   "camouflage-like patchwork texture across the panels - unfinished materials",
+   "also out-of-scope: widebody over-fenders and non-OEM bumpers"
+  ]
+ },
+ {
+  "uid": "df382b4b271a4081b45b5f1f860513e2",
+  "name": "2017 Nissan GTR Nismo R35 N Attack Package",
+  "verdict": "pass",
+  "reasons": [
+   "factory Nismo N-Attack package - in scope as an OEM road car",
+   "proportions read instantly, front 3/4 strong, four views consistent",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; black rim faces present and detailed on BOTH sides with yellow calipers",
+   "Nismo carbon aero, grille and headlight internals sharp, shut lines defined",
+   "DUPLICATE CANDIDATE with 7cd3306866984e44979cb9b12e340c12 (same N-Attack car) - 189,842 vs 190,898 faces, 1,056 apart. Flagged, NOT auto-grouped"
+  ]
+ },
+ {
+  "uid": "df3f99c83f6e43bd83fb3079ec138626",
+  "name": "2015 Rocket Bunny S15 Nissan Silvia",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Rocket Bunny widebody kit, title says so outright",
+   "riveted over-fenders, ducktail, front splitter, exposed intercooler"
+  ]
+ },
+ {
+  "uid": "e17d52395df04820a84b860ca4f43003",
+  "name": "1995 Leon's Nissan Skyline GT-R R33 F&F",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Fast & Furious movie-car replica - Leon's R33 in the film's cream paint with the tribal side graphics",
+   "GReddy/Sparco/Volk sponsor decals and 'FAST & FURIOUS' rear badge"
+  ]
+ },
+ {
+  "uid": "e2161e4bda374891804b4e8df34205b6",
+  "name": "Nissan skyline gtr r33",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: widebody conversion - flared over-fenders, extended front bumper with splitter, non-OEM rear wing",
+   "glazing renders near-opaque body-white with no interior visible",
+   "visible detached panel seam at the driver's door and a stray flap at the front arch"
+  ]
+ },
+ {
+  "uid": "e23839c8f3874c5a8346e04aa7eb7621",
+  "name": "2015 Nissan Juke-R 2.0 Concept",
+  "verdict": "pass",
+  "reasons": [
+   "Juke-R 2.0 is a factory Nissan-built special, not an aftermarket kit - the wide arches ARE the OEM spec",
+   "proportions read instantly, four views consistent",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; dark rim faces present and detailed on BOTH sides with orange calipers",
+   "grille, split-tier headlight internals and shut lines all sharp at 223,119 faces",
+   "NOTE: ultra-low-volume special (about 23 built) - a UK reg is very unlikely to decode to it, flag for catalogue relevance"
   ]
  }
 ]
