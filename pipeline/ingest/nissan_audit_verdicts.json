@@ -432,6 +432,24 @@
   ]
  },
  {
+  "uid": "203e44ec00eb4e3ea562a8dc27f05128",
+  "name": "2014 Overtake Carbon Racing Nissan GT-R [R35]",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Overtake Carbon Racing tuner build - widebody arches, carbon splitter and diffuser, teal show wheels"
+  ]
+ },
+ {
+  "uid": "205398abcfa2435fadbe3c6afd49c43c",
+  "name": "Nissan Skyline",
+  "verdict": "fail",
+  "reasons": [
+   "PER-SIDE WHEEL VOID: on the side/front34 pair both wheels are featureless black discs - no spokes, no lug nuts, no centre cap, verified at 3x",
+   "the front34_L/rear34 pair shows fully detailed 5-spoke rims with blue centre caps, so this is absent rim geometry on one side, not one-sided lighting",
+   "this is the mirrored-duplicate-with-inverted-geometry failure recorded in project memory"
+  ]
+ },
+ {
   "uid": "20a14338df064c06a3606bab6894adbc",
   "name": "2024 Nissan GT-R Nismo",
   "verdict": "pass",
@@ -452,6 +470,14 @@
    "exploded parts kit: glass panes, doors, bumpers and body kit floating detached around the car in every view",
    "cov=0.991 FULLCOV",
    "pose gate errored out (pose-gate-skipped:ValueError) - unusable as a car model"
+  ]
+ },
+ {
+  "uid": "2207c2ef47834f6bb5927d9fb4031918",
+  "name": "Nissan 300ZX GT500 | www.vecarz.com",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: GT500 race car - full race aero with rear wing on uprights, caged cabin, Yokohama slicks, no road-car lighting"
   ]
  },
  {
@@ -483,12 +509,33 @@
   ]
  },
  {
+  "uid": "2443ad8459e144edb02b063510b1a6be",
+  "name": "Nissan Patrol Y60",
+  "verdict": "fail",
+  "reasons": [
+   "TYRES RENDER BODY-WHITE - verified at 3x on all four wheels and the tailgate spare: sidewall, shoulder and tread blocks are all the same white as the paint",
+   "this is NOT a whitewall - there is no black tread anywhere",
+   "glazing is genuine tinted glass with interior visible, so this fails on tyre material alone",
+   "separately: mats=3 material split leaves grey patches on the rear quarter, so the sheet colour is untrustworthy"
+  ]
+ },
+ {
   "uid": "265ff0f651a34d398539e9bd72e0d5a9",
   "name": "2001 Nissan Silvia S15 Spec-S \"Mona Lisa\"",
   "verdict": "fail",
   "reasons": [
    "out-of-scope: Fast & Furious 'Mona Lisa' replica livery, F&F plates",
    "aftermarket body kit, oversized GT wing, Rays wheels - a movie car, not an OEM road spec"
+  ]
+ },
+ {
+  "uid": "27160fcef85548a580353a9178a6b6f1",
+  "name": "Nissan Leaf MK1 ZE0 2010-2017",
+  "verdict": "fail",
+  "reasons": [
+   "wheels absent: all four arches are empty, a single stray gold/white wheel floats under the centre of the car",
+   "detached dark shapes hang off the front bumper and headlamp area",
+   "body shell only - not a complete car"
   ]
  },
  {
