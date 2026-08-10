@@ -1,0 +1,50 @@
+[
+ {
+  "drop_uid": "74de3cda4e0c4d3eb493ea1ebc7c72e4",
+  "name": "2020 Nissan Sentra Sylphy",
+  "faces": 132776,
+  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+ },
+ {
+  "drop_uid": "825a4086e6454c54a0e956e04fd9d121",
+  "name": "1999_nissan_skyline_r34_gt-r_top_secret_bnr34",
+  "faces": 531622,
+  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+ },
+ {
+  "drop_uid": "a90de78e5d0e41c8975b284773254a0e",
+  "name": "Nissan GT-R (R35) Facelift",
+  "faces": 183082,
+  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+ },
+ {
+  "drop_uid": "b9b5c6a2cae24f9fb998bf773bf777af",
+  "name": "Nissan_gtr_r34_skyline__gt-r_skyline",
+  "faces": 412494,
+  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+ },
+ {
+  "drop_uid": "d40f2da7ee334d3296b00d5cf645e542",
+  "name": "2005_nismo_nissan_skyline_r34_gtr_z_tune",
+  "faces": 507056,
+  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+ },
+ {
+  "drop_uid": "df382b4b271a4081b45b5f1f860513e2",
+  "name": "2017 Nissan GTR Nismo R35 N Attack Package",
+  "faces": 189842,
+  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+ },
+ {
+  "drop_uid": "f4d7ad8b4d944a8cb472886e60b12e78",
+  "name": "1999 Nissan Skyline R34 GT-R C-West N - Type II",
+  "faces": 235179,
+  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+ },
+ {
+  "drop_uid": "f863fe03fb4b48a58291935c2f0de7b9",
+  "name": "2002 Nissan Skyline GTR R34 Fast and Furious",
+  "faces": 233067,
+  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+ }
+]
