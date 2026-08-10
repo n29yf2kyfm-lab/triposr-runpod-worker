@@ -3810,5 +3810,118 @@
       "headlamp internals and the chrome grille are actually fine",
       "NOTE: title says 2020 but the render is an earlier Altima - title metadata unreliable, judged from the render"
     ]
+  },
+  {
+    "uid": "974aee4c61f84c078fb7f713652728d9",
+    "name": "2014 Rocket Bunny Nissan GTR (R35) V1 Aero",
+    "verdict": "fail",
+    "reasons": [
+      "Rocket Bunny V1 Aero widebody kit - riveted bolt-on over-fenders, strutted GT wing, race splitter, skirts and diffuser",
+      "coachbuilt kit build, not an OEM variant a UK reg decodes to",
+      "mesh itself is clean: glazing reads as glass, tyres black, dark rim faces present on both sides"
+    ]
+  },
+  {
+    "uid": "a0d7e7f2b80a47d8bfcb3c321f71823c",
+    "name": "Nissan_180sx",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: the tyres render a mottled rust-BROWN, not black rubber, on all four corners",
+      "same speckled/splattered texture artefacts on the rear quarter and doors as its twin",
+      "pop-up headlamps render RAISED as crude open blobs with no lamp internals",
+      "DUPLICATE of 421f81d9 (Nissan 180sx) - 98,524 f vs 98,556 f, 32 faces apart, identical title after normalisation and identical body kit; both fail"
+    ]
+  },
+  {
+    "uid": "b0631f75173a4f48b331d770c86c1031",
+    "name": "Nissan Ariya",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: the rear quarter panel is CRUMPLED - hard faceted creases and dents behind the rear door and over the rear arch, repeated on the rear bumper corner, and visible in three of the four views",
+      "glazing reads as real glass with the interior visible, tyres plainly black rubber, dark alloy rim faces present, taillight bar has internals - everything except the panel damage is good",
+      "cov=0.239 over 4 body materials"
+    ]
+  },
+  {
+    "uid": "b5d46cbac4e64064be29705bee52488a",
+    "name": "2014 Varis KAMIKAZE-R Circuit Ver Nissan GT-R",
+    "verdict": "fail",
+    "reasons": [
+      "Varis KAMIKAZE-R Circuit Version aftermarket aero widebody kit - vented over-fenders, canards, swan-neck GT wing, race splitter and side dams",
+      "out of scope kit build, not an OEM variant",
+      "exposed carbon bonnet and red accent trim are part of the kit"
+    ]
+  },
+  {
+    "uid": "b66ac30ac64a4f1aa034fce37745abe3",
+    "name": "2015 Nissan 370Z Nismo (Z34)",
+    "verdict": "pass",
+    "reasons": [
+      "Z34 370Z Nismo proportions read instantly, front 3/4 strong, four views consistent",
+      "factory Nismo - OEM performance variant, in scope",
+      "zoom-verified: windscreen and side glass transparent with the interior visible",
+      "zoom-verified: headlamp LED and projector internals sharp; black mesh grille with NISMO badge; red splitter lip modelled",
+      "zoom-verified: black rim faces with spokes traceable and red calipers behind on BOTH sides; tyres plainly black rubber",
+      "bonnet and door shut lines defined, premium gloss white finish"
+    ]
+  },
+  {
+    "uid": "ba6b3c27101843f194bc20c17d2a6c12",
+    "name": "[Unused] 2001 Nissan Skyline 25GT [ENR34]",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: the whole greenhouse renders OPAQUE body-white - windscreen, door glass and mirror are all solid paint, no interior visible anywhere. Clay shell",
+      "cov=0.915 FULL COVERAGE - a respray would repaint the glass too",
+      "tyres are mid-grey with MICHELIN lettering on white steel wheels; rim faces present",
+      "proportions are a correct ENR34 saloon - worth re-sourcing"
+    ]
+  },
+  {
+    "uid": "bc62990ab4af45398746a8404eb178a1",
+    "name": "1972 Nissan Fairlady 240ZG (S30)",
+    "verdict": "pass",
+    "reasons": [
+      "240ZG proportions read instantly, front 3/4 strong, four views consistent",
+      "the G-nose and flared arches are FACTORY 240ZG homologation items, not a kit - same line as the S30 with period ZG flares already passed",
+      "zoom-verified: glazing is real glass with the interior and chrome window trim visible",
+      "zoom-verified: tyres plainly black rubber; grey 5-spoke rim faces with red centre caps present on BOTH sides",
+      "headlamps sit behind clear G-nose covers with the lamp visible; chrome bumper, JDM fender mirror and Fairlady 240Z badging modelled",
+      "premium gloss brown finish, clean reflections",
+      "CAVEAT: the arch flares and front valance render a contrasting champagne/tan against the brown body (cov=0.211, body mats=1) - reads as deliberate two-tone trim, but a respray would leave them unchanged"
+    ]
+  },
+  {
+    "uid": "c7630b11520a45439261cace826a93f0",
+    "name": "Nissan 350Z Nismo (Z33)",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: the door glass, quarter window and B-pillar render OPAQUE body-white - only the windscreen and rear screen are glass, so from the side the car reads as a white clay",
+      "cov=0.523 over 5 body materials, MATERIAL SPLIT SUSPECT",
+      "tyres plainly black rubber and white 5-spoke rim faces present - the defect is glazing",
+      "Nismo V1 aero is factory and would have been in scope"
+    ]
+  },
+  {
+    "uid": "c9ae9b17f7d34430917b0c781e513bb9",
+    "name": "2018 Nissan 370Z Coupe Heritage Edition",
+    "verdict": "pass",
+    "reasons": [
+      "Z34 370Z Heritage Edition proportions read instantly, front 3/4 strong, four views consistent",
+      "factory Heritage Edition graphics package - OEM special edition, in scope",
+      "zoom-verified: windscreen and side glass transparent with the interior visible",
+      "zoom-verified: headlamp projector and internal chrome elements sharp; grille has real mesh slats",
+      "zoom-verified: black rim faces with spokes and Nissan centre caps traceable on BOTH sides; tyres plainly black rubber",
+      "bonnet and door shut lines defined, premium gloss white finish"
+    ]
+  },
+  {
+    "uid": "ccacfebd01744d318deb776f48133c24",
+    "name": "Nissan 370z",
+    "verdict": "fail",
+    "reasons": [
+      "NO WHEELS on any corner - all four arches are empty and you can see straight through into the black wheel liners in every view",
+      "body shell only, sitting flat on the floor with no suspension",
+      "glazing and taillights are fine; unusable as staged"
+    ]
   }
 ]
