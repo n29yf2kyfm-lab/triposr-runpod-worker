@@ -411,6 +411,42 @@ are fails until re-sourced with real materials. Caught on the Peugeot wave: a 40
 cov=0.243 — comfortably inside the "healthy" coverage band — so coverage numbers cannot
 detect this; only the eye or a glass-material check can).
 
+**EVIDENCE RULE, learned the expensive way 2026-08-10: the wave audit sheet is NOT a
+valid witness for a MATERIAL defect. Judge from the SHIPPED asset.**
+39 live cars were quarantined tonight on sheet evidence (12 Fiat by me, 27 by an agent)
+and ALL 39 were restored after re-checking the shipped asset. Nothing was actually wrong
+with them.
+
+Why the sheet lies: the render worker picks a body material HEURISTICALLY at render time
+(this file already warns of that for colour) and on these cars it repainted the tyre. The
+signature is an INVERTED PAIRING -- the sheet shows a white tyre on a dark hub while the
+shipped glb has a dark tyre on a white hub. Seen identically on peugeot-205-pw1-v1 and on
+all 12 Fiats.
+
+Why the shipped glb is decisive for wave entries: fw1-era entries have posterUrl and
+turntableUrl NULL, and platform/resolver/index.ts:207 hands desktopGlbUrl straight to the
+viewer. No render worker sits between the asset and the customer, so for those entries the
+glTF material IS what a user sees. Poster-backed waves are different -- there the poster is
+the shipped artefact and is the thing to judge.
+
+The hierarchy of evidence, best first:
+  1. the published poster, where one exists (what customers actually see)
+  2. a LOCAL Blender render of the shipped glb, plus the baseColor of the material bound to
+     the tyre RING GEOMETRY (not merely a material *named* "tire")
+  3. a coloured-body control: on a blue/red/tan car a body-painted tyre wears the body hue,
+     so a NEUTRAL dark grey tyre proves innocence with no brightness argument at all
+  4. a magenta cross-check: rewrite the tyre material and re-render; if the tyre changes,
+     that material really is on the tyre
+  5. the wave audit sheet -- CANDIDATE FINDER ONLY, never a verdict
+
+Two rig traps that produced false failures during this exercise:
+- Blender 4's default AgX view transform plus inherited light energies CLIPPED a tyre to
+  pure white. The magenta control came back pastel pink, which is what exposed it. Use
+  Standard, scale the lights, and verify numerically (a 0.22 world background must land
+  near sRGB 130, 0% clipped) before trusting any render.
+- A Y-up assumption rendered a Y-down glb upside down. Measure camera orientation from the
+  wheels.
+
 **Owner ruling 2026-08-09 — TYRES MUST READ AS BLACK RUBBER. This is a SEPARATE check
 from glazing and it is the one the audit kept missing.** A car whose tyres render in body
 colour FAILS: the paint material covers the rubber, so the car reads as an unfinished clay
