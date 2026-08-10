@@ -896,5 +896,86 @@
    "rim faces present (dark 5-spoke) in all four views",
    "headlamp internals present, grille slats crisp, shut lines defined"
   ]
+ },
+ {
+  "uid": "f472abb10e07442b80f46ade49a24d64",
+  "name": "2017 Porsche Panamera Turbo",
+  "verdict": "pass",
+  "reasons": [
+   "Panamera 971 - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear against white rims in both 3/4 tiles",
+   "glazing transparent, cabin visible",
+   "rim faces present (white multi-spoke, yellow calipers) in all four views",
+   "headlamp internals present, shut lines defined, paint premium"
+  ]
+ },
+ {
+  "uid": "5a8213f987f4446d98f60c9ef4c7a21d",
+  "name": "2010 Porsche Panamera Police",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: police conversion - roof lightbar and front push bar fitted; not the road car a UK registration decodes to"
+  ]
+ },
+ {
+  "uid": "5fe43aaf8a2d4277859d79884aa4ad3e",
+  "name": "2019 Porsche Panamera Turbo",
+  "verdict": "pass",
+  "reasons": [
+   "Panamera 971 - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present (black multi-spoke) in all four views",
+   "headlamp internals present, grille slats crisp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "570249cd14c342ea947b05fee05245d9",
+  "name": "1991 Porsche 944 Turbo",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as 944 Turbo instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear against white BBS rims in both 3/4 tiles",
+   "glazing transparent, cabin visible",
+   "rim faces present (BBS mesh) in all four views",
+   "pop-up headlamps are RAISED and carry a clear lens with internal reflector detail",
+   "panel work clean, shut lines defined; a genuine UK classic"
+  ]
+ },
+ {
+  "uid": "0aca89de30b94126bc7020109b2f3ef0",
+  "name": "Porsche 911turbo 996- 2000",
+  "verdict": "pass",
+  "reasons": [
+   "996 Turbo - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear against silver rims in both 3/4 tiles",
+   "glazing transparent, cabin and seats visible",
+   "rim faces present (hollow-spoke, red calipers) in all four views",
+   "headlamps carry a visible internal shape; rear wing, side intakes and shut lines all defined"
+  ]
+ },
+ {
+  "uid": "b88a3f72f26b4b7dab502145fe3ebe74",
+  "name": "Porsche Cayenne MK1 2002-2010",
+  "verdict": "fail",
+  "reasons": [
+   "three of the four wheels absent - empty arches in front34, front34_L and side",
+   "glazing opaque body-white in front34 and side; no cabin visible",
+   "reads as an unfinished clay body"
+  ]
+ },
+ {
+  "uid": "5dcc96f1f7fb4ff5a577b5c9f106275d",
+  "name": "PORSCHE 930 TURBO '75",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as 930 Turbo instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear against white Fuchs rims in both 3/4 tiles",
+   "glazing transparent - cabin, seats and roll bar visible through the side glass at 2x",
+   "rim faces present (Fuchs) in all four views",
+   "headlamps looked blank at full-sheet scale but at 2x carry a dark lens over a visible reflector bowl",
+   "whale-tail wing and door shut lines crisp; front lower valance is the softest area",
+   "lowest face count of the passes (61,218) - detail is modest but honest"
+  ]
  }
 ]
