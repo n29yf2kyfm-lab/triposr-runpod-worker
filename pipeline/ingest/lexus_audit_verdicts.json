@@ -65,7 +65,9 @@
   "verdict": "fail-rerender",
   "reasons": [
    "renders lying on its side / rotated 90 degrees in all four views - the known render-side inversion bug",
-   "the local pose gate passed it, so the GLB is upright; needs a re-render before it can be judged"
+   "the local pose gate passed it, so the GLB is upright; needs a re-render before it can be judged",
+   "RE-TESTED: a fresh native-materials render reproduced the on-side orientation exactly. Deterministic, not stochastic.",
+   "Because it reproduces, this needs the root transform fixed (or the worker's up-axis handling fixed) before it can be judged - it is not a re-run away. Kept as fail-rerender rather than scrapped: the geometry itself looked sound."
   ]
  },
  {
@@ -74,7 +76,9 @@
   "verdict": "fail-rerender",
   "reasons": [
    "renders completely upside down in all four views - known render-side inversion bug",
-   "pose gate passed the GLB, so this is not a source-side orientation problem"
+   "pose gate passed the GLB, so this is not a source-side orientation problem",
+   "RE-TESTED: a fresh native-materials render reproduced the inversion exactly (ES 250 and LEXUS badges mirrored). Deterministic, not stochastic.",
+   "Because it reproduces, this needs the root transform fixed (or the worker's up-axis handling fixed) before it can be judged - it is not a re-run away. Kept as fail-rerender rather than scrapped: the geometry itself looked sound."
   ]
  },
  {
@@ -163,7 +167,9 @@
   "verdict": "fail-rerender",
   "reasons": [
    "renders completely upside down in all four views - known render-side inversion bug; the local pose gate passed the GLB",
-   "tyres read plainly black and the body looks clean, so this is likely a good car once re-rendered"
+   "tyres read plainly black and the body looks clean, so this is likely a good car once re-rendered",
+   "RE-TESTED: a fresh native-materials render of the staged GLB reproduced the inversion exactly (LS 430 and LEXUS badges mirrored, wheels uppermost). The flip is DETERMINISTIC for this asset, not a stochastic render-side glitch, so simply re-running the wave will not recover it.",
+   "Because it reproduces, this needs the root transform fixed (or the worker's up-axis handling fixed) before it can be judged - it is not a re-run away. Kept as fail-rerender rather than scrapped: the geometry itself looked sound."
   ]
  },
  {
