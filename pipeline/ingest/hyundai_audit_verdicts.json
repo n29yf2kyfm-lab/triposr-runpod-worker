@@ -516,5 +516,81 @@
       "cov=1.000 FULLCOV single material; tyres render body-white",
       "no material separation of any kind"
     ]
+  },
+  {
+    "uid": "a0e29f2f38974d6ebdcd8b331c458f5a",
+    "name": "2022 Hyundai Elantra N",
+    "verdict": "fail",
+    "reasons": [
+      "wheels absent entirely on one side - front34 and side show empty white arches front and rear; front34_L and rear34 show wheels present",
+      "low-detail mesh (207k faces) with soft surfacing",
+      "NOTE: Elantra is not a UK-market nameplate"
+    ]
+  },
+  {
+    "uid": "c1f8bb74d4ef4ec9aa56a6ad159476c3",
+    "name": "Hyundai I20",
+    "verdict": "fail",
+    "reasons": [
+      "TWO i20 WRC rally cars in a single scene with bonnets and doors open",
+      "workshop floor baked into the mesh",
+      "out of scope (WRC) and not a single-vehicle asset"
+    ]
+  },
+  {
+    "uid": "19ea8faf080140429e83fc6968fcfae1",
+    "name": "2021 Hyundai Elantra",
+    "verdict": "fail",
+    "reasons": [
+      "faceted low-poly panel surfacing - flat triangular facets visible in the reflections across the bonnet, front wings, doors and rear quarters at 3x",
+      "windscreen and side glass break into faceted patches rather than reading as smooth glass",
+      "no bonnet or door shut lines; grille geometry breaks into scattered blocks",
+      "tyres and rims are fine, so this is a surfacing reject not a material one",
+      "NOTE: Elantra is not a UK-market nameplate"
+    ]
+  },
+  {
+    "uid": "39ea9b3dd5e042d3aaef25918f8f6b0c",
+    "name": "2007 Hyundai Santa Fe",
+    "verdict": "fail",
+    "reasons": [
+      "tyres render bright PURPLE on all four corners - not black rubber under any reading",
+      "wheels render body-white; glazing is faceted texture mush with no transparency",
+      "panels soft with no shut lines"
+    ]
+  },
+  {
+    "uid": "036a13aefc3f48c5ba996aa2361b429e",
+    "name": "2011 Hyundai i30 FD",
+    "verdict": "fail",
+    "reasons": [
+      "tyres render the same body-grey as the panels and the rim - whole tyre incl. tread, no black rubber anywhere",
+      "glazing faceted and mushy rather than transparent",
+      "headlight units body-coloured with only faint internals; panel surfacing soft",
+      "lowered aftermarket stance"
+    ]
+  },
+  {
+    "uid": "1445740eb62d4b31b512ab9fe228e505",
+    "name": "Hyundai Santa Fe Shengda",
+    "verdict": "fail",
+    "reasons": [
+      "corrupted material assignment - the rear doors and quarters render as dark grey/black blocks, giving a two-tone patchwork down the flanks in every view",
+      "glazing opaque body-white with dark patches, no transparency",
+      "stage geometry baked into the mesh: a white floor slab and dark spheres sit under the car"
+    ]
+  },
+  {
+    "uid": "95175f735af343b490b8709767a0271e",
+    "name": "2012 Hyundai Genesis Coupe",
+    "verdict": "fail",
+    "reasons": [
+      "stray magenta/purple material on the front badge, headlight internals, exhaust tips and mirror cap - a missing-material artefact, visible in all four views",
+      "headlight lenses render body-white with no internal elements",
+      "no door or bonnet shut lines; rear bumper soft",
+      "cov=0.885 across 6 materials",
+      "tyres are correctly black and glazing is transparent - this fails on materials and surfacing, not tyres",
+      "NOTE: Genesis Coupe is not a UK-market nameplate"
+    ]
   }
 ]
