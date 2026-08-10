@@ -254,5 +254,156 @@
   "reasons": [
    "out of scope: widebody tuner build - bolt-on flared arches, canards, huge front splitter, GT wing, slammed on deep-dish wheels"
   ]
+ },
+ {
+  "uid": "191f10fd51c64e06ba68ffba0bb65ed6",
+  "name": "Porsche 992 GT3R- Roxy",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: 992 GT3 R race car - Michelin slicks, full race aero, roll cage, no road headlamps"
+  ]
+ },
+ {
+  "uid": "b5a64fc6e75f4618bd43cf81aecce3f1",
+  "name": "Porsche Macan GTS 2022",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Macan 95B facelift instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present with red calipers in all four views",
+   "headlamp internals present (bezel plus LED strip), grille slats crisp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "5bae7080e6e14151a8f74b14573fd8cb",
+  "name": "2020 Porsche Cayenne GTS Coupe",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Cayenne Coupe instantly; front 3/4 strong",
+   "tyres READ WHITE AT FULL-SHEET SCALE BUT ARE DARK GREY/BLACK AT 2x - the tread face is plainly darker than the white rim in both 3/4 tiles; classic thumbnail trap",
+   "glazing transparent, cabin visible",
+   "rim faces present (10-spoke) in all four views",
+   "headlamp internals present, grille slats crisp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "862b651f6dc644b9a4da47990880ae28",
+  "name": "2023 Porsche Taycan Turbo S",
+  "verdict": "fail",
+  "reasons": [
+   "tyres are flat mid-grey, barely separable from the rim, tread face included - checked at 2x in BOTH front34 and rear34, so not the profile-view whitewall false positive",
+   "MARGINAL, and this verdict rests on sheet evidence: a forced --colour red re-render of the staged GLB would settle it definitively (body-painted tyres go red, defect tyres stay pale)",
+   "everything else is clean - glazing transparent, rim faces present, headlamp internals present"
+  ]
+ },
+ {
+  "uid": "69a1c529af8a49ef8c6c3fa1c79b54c1",
+  "name": "Porsche_ Turbo_911S",
+  "verdict": "pass",
+  "reasons": [
+   "992 Turbo S - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present (black multi-spoke, yellow calipers) in all four views",
+   "headlamp internals present, intakes and shut lines crisp, paint premium",
+   "recovered by the nameplate fix - the glued token '911S' was previously dropped as no-nameplate"
+  ]
+ },
+ {
+  "uid": "556355371bb746f8b056193d2b2edea0",
+  "name": "Porsche Turbo S Modi",
+  "verdict": "fail",
+  "reasons": [
+   "wheels are featureless flat white discs in all four views - no rim face, no spokes, no tyre",
+   "glazing opaque body-white",
+   "out of scope: widebody tuner kit ('Modi' = modified)"
+  ]
+ },
+ {
+  "uid": "99a0484413834ea782a3d40a5b244334",
+  "name": "KorbenDallas Porsche Cayenne 958 2010",
+  "verdict": "fail",
+  "reasons": [
+   "baked 'KORBEN TEAM' livery graphics across the rear window and tailgate in every view - in the texture, cannot be removed",
+   "rear glass is opaque where the decal sits"
+  ]
+ },
+ {
+  "uid": "2bf4326ee21943e1915327ba0cf897b5",
+  "name": "Porsche TURBO S 17D",
+  "verdict": "fail",
+  "reasons": [
+   "per-side wheel void: front34 and side show featureless black discs with only a floating centre crest, while front34_L and rear34 show full multi-spoke rim faces - the documented mirrored-wheel defect, not the rig's one-sided key light",
+   "glazing opaque, body surfacing soft and blobby, headlamps blank"
+  ]
+ },
+ {
+  "uid": "67a3239621ec4d4091578d0b372e1aca",
+  "name": "PORSCHE 914/6GT",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as 914 instantly; panel work clean and shut lines defined",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present (Fuchs-style) in all four views",
+   "pop-up headlamps are retracted so no lens is exposed - authentic; the bumper driving lamps and orange indicator lenses do carry internal detail",
+   "IN SCOPE but note: 914/6 GT is a homologation/competition spec, a rare UK registration"
+  ]
+ },
+ {
+  "uid": "98767072b9f94f8eb6c4512b7be891c4",
+  "name": "Porsche 991 GT2 RS CS EVO",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: GT2 RS Clubsport EVO is a track-only race car - Pirelli slicks, full race aero, roll cage, tow strap, no road headlamps"
+  ]
+ },
+ {
+  "uid": "cd97c516c0eb411789e7bb2bcd28622b",
+  "name": "Porsche Taycan Cross Turismo",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Taycan Cross Turismo instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present with yellow calipers in all four views",
+   "headlamp internals present, shut lines defined, paint premium",
+   "note: the GLB is rotated so the 'side' tile shows the front - a sheet-labelling artefact, the car is upright and complete"
+  ]
+ },
+ {
+  "uid": "fb282e1ac22041f892630a3f28f387f5",
+  "name": "2022 Porsche Macan GTS",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Macan 95B facelift instantly; front 3/4 strong",
+   "tyres black rubber with legible sidewall lettering, tread face clear in both 3/4 tiles",
+   "glazing transparent, cabin visible",
+   "rim faces present (black multi-spoke, red calipers) in all four views",
+   "headlamp internals present, grille slats crisp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "875072396ef541e3b106152e6dea6978",
+  "name": "2020 Porsche Taycan",
+  "verdict": "fail",
+  "reasons": [
+   "one side's doors and side glass render as a single solid black panel (front34, side) while the other side is opaque body-white (front34_L, rear34) - broken material assignment, not lighting",
+   "no transparency anywhere: glazing fails outright",
+   "tyres body-white"
+  ]
+ },
+ {
+  "uid": "e738eae819c34d19a31dd066c45e0f3d",
+  "name": "Porsche GT3 RS",
+  "verdict": "pass",
+  "reasons": [
+   "992 GT3 RS ROAD car (in scope, road registered) - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin and cage visible",
+   "rim faces present (centre-lock multi-spoke, red calipers) in all four views",
+   "headlamp internals present, aero ducts and shut lines crisp, carbon bonnet reads correctly, paint premium"
+  ]
  }
 ]
