@@ -755,5 +755,86 @@
    "rim faces present in all four views",
    "headlamp internals present, exhausts/louvres/shut lines defined, paint premium"
   ]
+ },
+ {
+  "uid": "cd13e94e183a4766b4902fcd51cedcee",
+  "name": "2015 Porsche 918 Spyder Weissach Package 25",
+  "verdict": "fail",
+  "reasons": [
+   "baked race-number '25' roundels on both doors and the bonnet - a livery in the texture that survives any respray",
+   "geometry and materials otherwise good; unliveried copies of the same 918 passed in this wave"
+  ]
+ },
+ {
+  "uid": "77c8f7f739364935ad9dc431168e80e0",
+  "name": "2009 Porsche Cayenne S",
+  "verdict": "fail",
+  "reasons": [
+   "grossly corrupt geometry: a huge faceted low-poly yellow proxy mesh engulfs the entire lower body in all four views",
+   "no wheels visible - buried inside the proxy",
+   "unusable, not a render artefact"
+  ]
+ },
+ {
+  "uid": "4dd813b161a74d12bc991f6090e7a072",
+  "name": "Porsche 918 Spider",
+  "verdict": "fail",
+  "reasons": [
+   "headlamps are shallow pale recesses without the 918's four-point LED internals",
+   "front intakes and engine-cover louvres shallow and soft versus the real car",
+   "tyres, glazing and rim faces are fine - this is a low-detail sibling; 259k-face copies of the same car passed in this wave"
+  ]
+ },
+ {
+  "uid": "0530aa8fa4b74427a71c961a5bdd7087",
+  "name": "Porsche 959",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as 959 instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present (5-spoke, yellow calipers) in all four views",
+   "rear light bar has amber/red segment detail; panel work clean, shut lines defined",
+   "headlamp internals soft (pale ovals) - the same weakness all three 959s in this wave share",
+   "THIRD 959 in the wave (1,039,070 / 313,917 / 154,600 faces, three different meshes) - too far apart for dupe_check to group, so model-level duplication needs a human pick"
+  ]
+ },
+ {
+  "uid": "d199f12bb1124733b27e16aa5589a43b",
+  "name": "2020 Porsche 718 Spyder",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as 718 Spyder instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present (black multi-spoke, red calipers) in all four views",
+   "headlamp internals present, side intakes and rear diffuser crisp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "ddce606aeef74ae485cbfebc4e34add2",
+  "name": "Porsche Macan",
+  "verdict": "pass",
+  "reasons": [
+   "Macan Turbo 95B facelift - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, a distinct dark ring around the polished rims in both 3/4 tiles",
+   "glazing transparent, cabin visible",
+   "rim faces present (polished multi-spoke) in all four views",
+   "headlamp internals present, shut lines defined, deep gloss paint",
+   "CAVEAT: rendered its OWN black under a forced --colour silver, so the sheet colour is untrustworthy - recolour_audit --stamp is required before shipping colour variants (this is a colour caveat, not a quality fail; CLAUDE.md 2026-08-08)"
+  ]
+ },
+ {
+  "uid": "1bb367ebaee14829a24e9b5444c15087",
+  "name": "2020 Porsche 718 Spyder",
+  "verdict": "pass",
+  "reasons": [
+   "718 Spyder, roof down - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin and roll hoops visible",
+   "rim faces present (silver multi-spoke, red calipers) in all four views",
+   "headlamp internals present, shut lines defined",
+   "same source family as the 151,307-face roof-up 718 Spyder - a model-level duplicate the face-count rule will not group"
+  ]
  }
 ]
