@@ -2029,6 +2029,16 @@
   ]
  },
  {
+  "uid": "9f8b9ef1f0364b5c9e30f209ab7e44eb",
+  "name": "1999 Nissan Frontier",
+  "verdict": "fail",
+  "reasons": [
+   "TYRES RENDER BODY-COLOUR - verified at 3x: sidewall and tread are the same light grey as the paint on all four wheels, only marginally duller than the rim",
+   "direct A/B against uid c33cf3349fa54e3d8a3f004d443887a0 in the same batch, whose tyres are plainly black - this one has no black rubber anywhere",
+   "glazing is genuine tinted glass with interior visible, so it fails on tyre material alone"
+  ]
+ },
+ {
   "uid": "9f9f7fdf49d1431ca7a69a4128d5884c",
   "name": "Nissan patrol",
   "verdict": "fail",
@@ -2054,6 +2064,16 @@
   "reasons": [
    "out-of-scope: Liberty Walk LB-Works widebody kit, title says so outright",
    "riveted over-fenders, Ver.1 GT wing, air-ride, Forgiato wheels"
+  ]
+ },
+ {
+  "uid": "a28ada7ec8f241cbb9b2d8d5a3255a07",
+  "name": "nissan skyline gtr r34 nismo z tune",
+  "verdict": "fail",
+  "reasons": [
+   "front wheels absent: the front arches are large empty white cavities in every view",
+   "bright blue untextured placeholder material on the side skirts and lower valance",
+   "cov=0.834 with 13 materials - unfinished asset, not a shippable car"
   ]
  },
  {
@@ -2426,6 +2446,19 @@
   ]
  },
  {
+  "uid": "c33cf3349fa54e3d8a3f004d443887a0",
+  "name": "1997-2004 Nissan Navara(Nissan Frontier) D22",
+  "verdict": "pass",
+  "reasons": [
+   "OEM D22 Navara double cab, proportions read instantly, four views consistent",
+   "glass reads as tinted glass with interior visible",
+   "tyres verified at 3x: plainly BLACK rubber against the light body - correct",
+   "steel-look rim faces present and identical on BOTH sides",
+   "grille badge and headlight internals sharp, door and bed shut lines defined",
+   "chrome side steps are a factory accessory"
+  ]
+ },
+ {
   "uid": "c34d0e2b783d44f28c49f86c9f341ac3",
   "name": "Nissan Primera (P11) 1995-2002",
   "verdict": "fail",
@@ -2485,6 +2518,25 @@
    "body shell only: no wheels or tyres, the arches are empty mirror-like voids in all four views",
    "glazing renders opaque body-white, cov=1.000 FULLCOV",
    "it is a wheelbase reference shell, not a finished car"
+  ]
+ },
+ {
+  "uid": "c881a7e4285c42c2b359abf525fa7c95",
+  "name": "Nissan 350z Rocket Bunny",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Rocket Bunny widebody kit with riveted over-fenders and ducktail",
+   "PER-SIDE WHEEL VOID as well: on the side/front34 pair both wheels are featureless black discs with no rim face, while the opposite pair shows full spokes and red calipers"
+  ]
+ },
+ {
+  "uid": "c97763d3753a4969b26cc4683af0531b",
+  "name": "Nissan skyline",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a scale model: pink-brown baked texture, soft melted panels, scan dents and noise across every surface",
+   "glazing is scan texture, not glass; cov=1.000 FULLCOV",
+   "499,876 faces - a decimated-to-target mesh, exclude from exact-match dedup"
   ]
  }
 ]
