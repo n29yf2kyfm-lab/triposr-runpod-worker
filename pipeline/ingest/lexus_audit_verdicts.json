@@ -451,5 +451,96 @@
    "rejected by the local pose gate BEFORE any GPU spend: flipped/on-side (tob=0.248) AND floorpan/wreck (h/l=0.099)",
    "two independent signals agreeing on a non-upright, non-car-shaped mesh; also a 'lowerd' stance build, out of scope"
   ]
+ },
+ {
+  "uid": "520a1ee5f9a149e59ce2a4cd875d8473",
+  "name": "Lexus IS350 MK2 2005-2013",
+  "verdict": "fail",
+  "reasons": [
+   "three of four wheels missing - suspension parts floating in empty arches",
+   "cov=0.929 FULLCOVERAGE: one material over the whole car, and the glazing renders opaque body-white in front34_L",
+   "body is actually an IS-F (quad exhausts, F bumper), not the IS350 the title claims"
+  ]
+ },
+ {
+  "uid": "02c2d4441b374c749269fa030d2c9ede",
+  "name": "Lexus GS300",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: glazing renders opaque body-white with no interior and no transparency",
+   "grille is a flat plate, headlamps flat orange patches, no shut lines, panels heavily simplified",
+   "cov=0.919 FULLCOVERAGE - a respray would repaint the glass too"
+  ]
+ },
+ {
+  "uid": "1dd2df7c68e74ca3a3ea83fb6c4bd1a2",
+  "name": "2025 Lexus LX700h",
+  "verdict": "pass",
+  "reasons": [
+   "clean OEM LX700h; four wheels with black multi-spoke rim faces and plainly black tyres",
+   "glazing transparent with interior visible (tinted rear); vertical-slat grille, headlamp internals and shut lines all sharp",
+   "NOTE LX is not sold in the UK"
+  ]
+ },
+ {
+  "uid": "5be6fa97fa894633baf405e8f9b47bbd",
+  "name": "Lexus LX570 2016",
+  "verdict": "fail",
+  "reasons": [
+   "panel surfaces soft and blobby - front bumper, wheel arches and rear bumper are melted-looking",
+   "grille mesh coarse, headlamp internals absent, and a green artefact sits on the wing mirror",
+   "a sharper LX570 from a different source already passed in this wave (605997db)"
+  ]
+ },
+ {
+  "uid": "953ce32e55b34403820da8399f38624f",
+  "name": "GT7 + CSR3 - Lexus LC500",
+  "verdict": "fail",
+  "reasons": [
+   "no wheels at all - every arch is an empty grey void in all four views",
+   "game rip whose wheels are separate assets that were not included"
+  ]
+ },
+ {
+  "uid": "ec3a23f5653d44a68b4b2d5d6c3a582b",
+  "name": "2021 Lexus ES350 F Sport",
+  "verdict": "pass",
+  "reasons": [
+   "reads as an ES (XZ10) F Sport instantly; front 3/4 strong",
+   "tyres plainly black with tread at 2.6x; dark multi-spoke rim faces fully resolved on every corner",
+   "honeycomb spindle grille genuinely sharp, headlamp internals resolved, glazing transparent with interior visible",
+   "door and bonnet shut lines defined",
+   "NOTE the ES nameplate IS UK-market (sold as ES 300h); the 350 badge is a US petrol trim"
+  ]
+ },
+ {
+  "uid": "600fd97b99cf4e60beeb24cc51c96107",
+  "name": "Lexus GS MK4 2012-2020",
+  "verdict": "fail",
+  "reasons": [
+   "rejected by the local pose gate before any GPU spend (wide-top/cage tob=1.336), and I VERIFIED the call with a direct render of the staged GLB rather than trusting it",
+   "the render shows an exploded parts kit: front bumper detached and floating clear of the body, panels separated, wheels are hollow rings with no tyre",
+   "the gate was right - the detached bumper is what widened the top of the bounding box"
+  ]
+ },
+ {
+  "uid": "6c290815cf6f40bf8913cd8e27c05d3e",
+  "name": "Lexus GX550",
+  "verdict": "fail",
+  "reasons": [
+   "rejected by the local pose gate (wide-top/cage tob=1.327); verified with a direct render of the staged GLB",
+   "the car is INVERTED at source - it renders roof-down with the GX 550 badge mirrored, so this is a source-side orientation fault, not the render-side inversion bug",
+   "panels are also visibly faceted/low-poly"
+  ]
+ },
+ {
+  "uid": "8e31ccae701843649ae260b0a637b968",
+  "name": "Lexus IS 300 F Sport 2018",
+  "verdict": "fail",
+  "reasons": [
+   "rejected by the local pose gate (floorpan/wreck h/l=0.206); verified with a direct render of the staged GLB",
+   "it is a photogrammetry scan with a large grass-and-tarmac ground plane baked into the mesh, which is exactly what flattened the height/length ratio",
+   "baked lighting, torn mesh edges, no separated glazing"
+  ]
  }
 ]
