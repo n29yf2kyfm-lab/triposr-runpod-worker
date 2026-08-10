@@ -1,0 +1,168 @@
+{
+ "reviewedAt": "2026-08-10",
+ "subject": "the 12 fw1 Fiats quarantined 2026-08-09 for 'tyres render body-white'",
+ "why": [
+  "The 12 were quarantined on their wave audit sheet in car-meshes/audit/fiat/<uid>.jpg.",
+  "Commit 082ef0f then proved the wave sheet is NOT a valid witness for tyre colour:",
+  "on peugeot-205-pw1-v1 the sheet shows a white tyre on a dark wheel while the SHIPPED",
+  "glb has the tyre material at baseColor 0.02 on a white steel wheel -- the render",
+  "worker picks a body material heuristically at render time and was repainting the",
+  "tyre. 27 sheet-based tyre-fails were retracted on that evidence; these 12 rest on",
+  "the same discredited evidence and are re-tested here from the shipped asset only."
+ ],
+ "method": [
+  "No poster exists for any fw1 entry (posterUrl and turntableUrl are null for all 12),",
+  "and platform/resolver/index.ts serves desktopGlbUrl straight to the viewer -- so the",
+  "SHIPPED GLB's own materials are literally what a customer sees. No render worker sits",
+  "between the asset and the user, which is what makes the glTF material decisive here",
+  "rather than merely suggestive.",
+  "1. glTF: resolved which material the TYRE RING GEOMETRY actually uses, not merely",
+  "   which materials exist -- clustered the wheel objects and read the Principled base",
+  "   colour of the parts at the outer radius (a material NAMED 'tire' proves nothing;",
+  "   toyota-corolla-cross shipped eight variants that edited an invisible material).",
+  "2. Local Blender render of the shipped glb (CPU Cycles, no GPU, no RunPod job): a",
+  "   front-3/4 full car, a profile, and a close-up framed on the near wheel using the",
+  "   tyre geometry's own centroid. Tread judged in 3/4, never the sidewall in profile.",
+  "3. Four APPROVED fw1 Fiats rendered in the identical rig as same-scale controls",
+  "   (126 and 600-1967 carry the byte-identical `tire` material), because CLAUDE.md",
+  "   records that a mid-grey tyre under a one-sided key reads as white without one.",
+  "4. Magenta cross-check on fiat-124-1966: the `tire` material was rewritten to magenta",
+  "   in the shipped glb and re-rendered; the whole tyre turned magenta, proving the",
+  "   rubber material really is bound to the tyre geometry."
+ ],
+ "rigCorrection": [
+  "The FIRST version of this audit's rig rendered fiat-124-1966's tyre pure WHITE and",
+  "would have re-confirmed the quarantine. It was wrong: the magenta control came back",
+  "PASTEL PINK, proving the rig was clipping. Cause was Blender 4's default AgX view",
+  "transform plus inherited light energies. Fixed to Standard transform + LIGHTSCALE=0.10",
+  "and verified numerically -- the 0.22 world background lands on sRGB 129 (predicted 130)",
+  "and 0% of pixels clip. Every verdict below is from the corrected rig."
+ ],
+ "outcome": {"restore": 12, "keepQuarantined": 0},
+ "originalCallWasWrong": "all 12 -- the sheets do show white tyres, but on the discredited render path",
+ "verdicts": [
+  {
+   "assetId": "fiat-500-2010-fw1-v1",
+   "uid": "d8fe5ed2f02a44018337167f9bbc1ca8",
+   "verdict": "restore",
+   "tyreMaterialOnGeometry": "tire baseColor 0.106 dielectric roughness 0.9",
+   "bodyColourInShippedGlb": "carpaint 0.775,0.729,0.729 (near-white)",
+   "evidence": "Shipped-glb wheel close-up: plainly BLACK tyre with tread blocks against a silver multi-spoke alloy and a white body. Body-white paint is nowhere on the rubber.",
+   "sheetShowed": "white tyre on a dark hub -- the inverted pairing that identifies the render-worker artefact"
+  },
+  {
+   "assetId": "fiat-124-1966-fw1-v1",
+   "uid": "4fd44f34848b40dc9fd15f465bf85355",
+   "verdict": "restore",
+   "tyreMaterialOnGeometry": "tire baseColor 0.106 dielectric roughness 0.9",
+   "bodyColourInShippedGlb": "carpaint 0.545 grey",
+   "evidence": "Dark grey tyre with a visible tread band, white hubcap. This is the car the MAGENTA CROSS-CHECK was run on: rewriting `tire` to magenta turned the entire tyre magenta and left the hubcap white, so the dark rubber material is provably on the tyre geometry.",
+   "sheetShowed": "white tyre on a dark hub"
+  },
+  {
+   "assetId": "fiat-124-1972-fw1-v1",
+   "uid": "9e2b5be51bea44db835bb1691253623b",
+   "verdict": "restore",
+   "tyreMaterialOnGeometry": "tire baseColor 0.106 dielectric roughness 0.9",
+   "bodyColourInShippedGlb": "carpaint 0.035,0.11,0.208 (dark blue)",
+   "evidence": "Body renders BLUE and the tyre renders neutral dark grey/black. A body-coloured tyre would be blue; it is not. Decisive on its own.",
+   "sheetShowed": "white tyre on a dark hub"
+  },
+  {
+   "assetId": "fiat-125-1970-fw1-v1",
+   "uid": "8f51c52ca76c42f198da45a3e7cab8c0",
+   "verdict": "restore",
+   "tyreMaterialOnGeometry": "tire baseColor 0.106 dielectric roughness 0.9",
+   "bodyColourInShippedGlb": "carpaint 0.471,0.51,0.518 (pale grey)",
+   "evidence": "One of the two least emphatic passes -- the sidewall face catches the key light and reads mid-grey at first glance. A material-ID map of the wheel view settles it: BOTH the tread and the sidewall sample as `tire`, not `carpaint`, so this is one dark rubber tyre and not a painted one. Side by side at 560px the tyre is plainly DARKER than the approved control fiat-126, which carries the identical material.",
+   "sheetShowed": "white tyre on a dark hub"
+  },
+  {
+   "assetId": "fiat-132-fw1-v1",
+   "uid": "4c1e032b0de24f5b97455d7c7c3ddfc4",
+   "verdict": "restore",
+   "tyreMaterialOnGeometry": "tire baseColor 0.106 dielectric roughness 0.9",
+   "bodyColourInShippedGlb": "carpaint 0.502,0.329,0.165 (tan)",
+   "evidence": "Body renders TAN and the tyre is unmistakable black rubber with a sculpted tread against a silver alloy. Nothing body-coloured on the wheel.",
+   "sheetShowed": "white tyre on a dark hub"
+  },
+  {
+   "assetId": "fiat-133-fw1-v1",
+   "uid": "122e6e8a46a14e7c84a577a14cd05992",
+   "verdict": "restore",
+   "tyreMaterialOnGeometry": "tire baseColor 0.106 dielectric roughness 0.9",
+   "bodyColourInShippedGlb": "carpaint 0.427,0.518,0.239 (pale green)",
+   "evidence": "Body renders PALE GREEN with a plainly BLACK tyre and a white hubcap. Its wave sheet is the clearest example of the artefact in this set: front34 and side show a white tyre on a dark hub while front34_L and rear34 show the reverse.",
+   "sheetShowed": "white tyre on a dark hub in 2 of 4 tiles, dark in the other 2"
+  },
+  {
+   "assetId": "fiat-2300-1961-fw1-v1",
+   "uid": "8fa72021840a46d181b1af3d459d2c94",
+   "verdict": "restore",
+   "tyreMaterialOnGeometry": "tire baseColor 0.106 dielectric roughness 0.9",
+   "bodyColourInShippedGlb": "carpaint 0.604,0,0 (red)",
+   "evidence": "The palest tyre of the twelve and the one to keep an eye on. It still passes on two independent grounds: the body renders RED while the tyre renders NEUTRAL grey (a painted tyre would be red), and the tread band is distinctly dark with the sidewall clearly greyer than the white hubcap beside it. Same `tire` 0.106 material as the approved 600-1967 control.",
+   "sheetShowed": "white tyre on a dark hub"
+  },
+  {
+   "assetId": "fiat-600-1960-fw1-v1",
+   "uid": "c388a49e5a7d4637930122bccf90570c",
+   "verdict": "restore",
+   "tyreMaterialOnGeometry": "tire baseColor 0.106 dielectric roughness 0.9",
+   "bodyColourInShippedGlb": "carpaint 0.553,0.012,0.012 (red)",
+   "evidence": "Red body, dark grey/black tyre, white hubcap -- side by side with its approved sibling fiat-600-1967 (same generation, same material) the two wheels are indistinguishable in kind.",
+   "sheetShowed": "white tyre on a dark hub"
+  },
+  {
+   "assetId": "fiat-barchetta-1995-fw1-v1",
+   "uid": "3c55607e52bd47678ccc02a05134fc3d",
+   "verdict": "restore",
+   "tyreMaterialOnGeometry": "tire baseColor 0.106 dielectric roughness 0.9",
+   "bodyColourInShippedGlb": "carpaint 0.098,0.153,0.341 (blue)",
+   "evidence": "Body renders BLUE, tyre renders dark grey/black against a silver multi-spoke alloy. Not body colour.",
+   "sheetShowed": "white tyre on a dark hub"
+  },
+  {
+   "assetId": "fiat-punto-fw1-v1",
+   "uid": "4e0ea80963ca476da24d420b0b944683",
+   "verdict": "restore",
+   "tyreMaterialOnGeometry": "punto-tire baseColor 0.137 dielectric",
+   "bodyColourInShippedGlb": "punto-body 0.294,0.31,0.333 (grey-blue)",
+   "evidence": "The only car in the set with a different material library, and it holds up the same way: the tyre geometry carries its own dark rubber material and renders dark grey against a silver multi-spoke alloy.",
+   "sheetShowed": "white tyre on a dark hub"
+  },
+  {
+   "assetId": "fiat-850-spring-1968-fw1-v1",
+   "uid": "8a10d49f817c4e758037fc36475945e8",
+   "verdict": "restore",
+   "tyreMaterialOnGeometry": "tire baseColor 0.106 dielectric roughness 0.9",
+   "bodyColourInShippedGlb": "carpaint 0.784,0.616,0.028 (yellow)",
+   "evidence": "Body renders YELLOW; the boot-lid spare the close-up framed shows a BLACK tyre over a chrome wire wheel, and the road wheels in the 3/4 view match. Not body colour.",
+   "sheetShowed": "white tyre on a dark wire wheel"
+  },
+  {
+   "assetId": "fiat-tempra-1990-fw1-v1",
+   "uid": "60cad0f797264ee0a54d2d2f843a9946",
+   "verdict": "restore",
+   "tyreMaterialOnGeometry": "tire baseColor 0.106 dielectric roughness 0.9",
+   "bodyColourInShippedGlb": "carpaint 0.086 (near-black)",
+   "evidence": "Black tyre with a white hubcap on a dark grey body. Note the quarantine reason as written ('tyres render body-white') was never coherent for this car: its shipped body paint is near-black, so there is no white body colour for the tyre to be wearing.",
+   "sheetShowed": "white tyre on a dark hub"
+  }
+ ],
+ "controls": [
+  {"assetId": "fiat-126-fw1-v1", "status": "approved", "tyreMaterial": "tire 0.106 -- identical to the quarantined set"},
+  {"assetId": "fiat-600-1967-fw1-v1", "status": "approved", "tyreMaterial": "tire 0.106 -- identical to the quarantined set"},
+  {"assetId": "fiat-147-fw1-v1", "status": "approved", "tyreMaterial": "mat_ruedas, texture-driven"},
+  {"assetId": "fiat-850-fw1-v1", "status": "approved", "tyreMaterial": "TIRE_MAT 0.004"}
+ ],
+ "notes": [
+  "Two approved controls carry the byte-identical `tire` 0.106 material as all eleven",
+  "non-Punto quarantined cars, and render the same. There was never a material-level",
+  "difference between the cars that were kept and the cars that were pulled.",
+  "None of the twelve is a whitewall: the tyre is a single material, so the",
+  "whitewall exemption in CLAUDE.md is not what is doing the work here.",
+  "No RunPod job was submitted and no endpoint scaling was touched; render-v2 was left",
+  "at workersMax=0 as the owner set it."
+ ]
+}
