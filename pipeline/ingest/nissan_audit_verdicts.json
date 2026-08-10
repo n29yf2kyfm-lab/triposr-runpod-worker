@@ -3225,5 +3225,60 @@
       "headlamp reflector internals behind a clear lens, fine grille and lower-bumper mesh, door shut lines and side moulding crisp",
       "note: the sheet renders in the model's own light blue, not studio white"
     ]
+  },
+  {
+    "uid": "fd07f3373c9d49128e6c508339e2a726",
+    "name": "Nissan 370Z Nismo 2009",
+    "verdict": "fail",
+    "reasons": [
+      "headlamps are featureless flat black cutouts - zoom-verified at 3x, no lens, reflector or LED elements at all",
+      "grille is a plain black rectangle with no mesh; lower bumper intakes are flat black panels",
+      "no bonnet shut line - bonnet, wings and bumper read as one continuous clay surface",
+      "not a wheel or tyre fault: RAYS-style rim faces and black rubber tyres are correct in all four views"
+    ]
+  },
+  {
+    "uid": "fdfd36234f7b43278397e7cf8d0b4749",
+    "name": "Nissan GTR35 LB-Silhouette | www.vecarz.com",
+    "verdict": "fail",
+    "reasons": [
+      "out-of-scope: Liberty Walk (LBWK) Silhouette widebody kit, title says so outright",
+      "riveted over-fenders, twin swan-neck GT wings, full-width splitter and diffuser",
+      "LBWK, LB PERFORMANCE and TOYO TIRES decals baked into the body and tyre textures"
+    ]
+  },
+  {
+    "uid": "feb34e903db74fc684705ed6fefcd231",
+    "name": "2022 Nissan Frontier",
+    "verdict": "pass",
+    "reasons": [
+      "OEM Frontier PRO-4X crew cab, proportions read instantly, four views consistent",
+      "glazing reads as real glass with the cabin visible through it",
+      "zoom-verified: dark PRO-4X alloy rim faces with lug detail present in all four views, tyres plainly black rubber",
+      "zoom-verified: deep honeycomb grille mesh, multi-element headlamp internals behind a clear lens, bonnet and door shut lines defined",
+      "note: the number plate carries a stray baked portrait texture - plate only, no body livery"
+    ]
+  },
+  {
+    "uid": "ffb1c17103534016b2834e62c9a8790c",
+    "name": "2023 Nissan Skyline GT-R (R34.5)",
+    "verdict": "fail",
+    "reasons": [
+      "out-of-scope: 'R34.5' is a fan-made R34/R35 concept mashup, not a Nissan model a UK reg decodes to",
+      "widebody race aero on top of it - over-fenders, GT wing on uprights, front splitter and canards",
+      "clay-ish surfacing, cov=0.781, lamp recesses shallow"
+    ]
+  },
+  {
+    "uid": "ffbd3deb64e343449ffdacd695105113",
+    "name": "1995 Nissan Skyline GTR R33 Nismo S-Tune BCNR33",
+    "verdict": "pass",
+    "reasons": [
+      "R33 GT-R proportions read instantly, front 3/4 strong; Nismo S-Tune is a factory Nismo spec with standard arches - in scope",
+      "glazing reads as real tinted glass with the interior visible",
+      "zoom-verified: white Nismo 5-spoke rim faces with centre caps and lug detail in all four views, tyres plainly black rubber with DUNLOP sidewall lettering",
+      "headlamp internals behind a clear lens, recessed grille mesh with the R badge, bonnet and door shut lines defined",
+      "caveat: the red Nismo pinstripe, rear-quarter checker decals and nismo plate are baked into the texture - livery only, not geometry, but a respray will not remove them"
+    ]
   }
 ]
