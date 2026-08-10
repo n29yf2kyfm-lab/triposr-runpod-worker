@@ -3674,5 +3674,141 @@
       "grille is a plain dark slot; front bumper renders greyer than the body (body mats=4, cov=0.633, MATERIAL SPLIT SUSPECT)",
       "glazing reads as glass and the silver rim faces and black tyres are fine - the defect is the front end"
     ]
+  },
+  {
+    "uid": "6835b16977154068a5adb5445cd74ce6",
+    "name": "Nissan Skyline R34 GTR",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified at 3x: headlamps are solid black voids with no projector, reflector or lens elements at all",
+      "grille is an EMPTY black rectangle - no mesh, no slats, no badge; bumper vents are plain black cut-outs",
+      "fails the rubric on grille and headlamp detail",
+      "everything else is good - glazing reads as real tinted glass, tyres plainly black rubber, gunmetal rim faces with gold calipers present on both sides, gloss white paint. Worth re-sourcing the same car"
+    ]
+  },
+  {
+    "uid": "71a34f4263ae43f59d4cd6b701899d20",
+    "name": "2017 Nissan GT-R Nismo",
+    "verdict": "pass",
+    "reasons": [
+      "R35 GT-R Nismo proportions read instantly, front 3/4 strong, four views consistent",
+      "factory Nismo is an OEM performance variant - in scope",
+      "zoom-verified: windscreen and side glass transparent with the interior visible",
+      "zoom-verified: headlamp LED strip and projector internals sharp; honeycomb grille mesh with GT-R and NISMO badges; carbon splitter and bonnet vents modelled",
+      "zoom-verified: black rim faces with spokes traceable and gold calipers behind on BOTH sides; tyres plainly black rubber",
+      "Nismo rear wing, red accent trim, quad exhausts and diffuser all defined; premium gloss finish"
+    ]
+  },
+  {
+    "uid": "7536c5ec58b84e63ada6e4953f5c9f35",
+    "name": "2018 Nissan Leaf Nismo RC Concept",
+    "verdict": "fail",
+    "reasons": [
+      "the Leaf Nismo RC is a single-seat electric RACE PROTOTYPE, not a road car a UK reg decodes to",
+      "race aero throughout - swan-neck rear wing, splitter, diffuser, no road equipment",
+      "covered in NISSAN INTELLIGENT MOBILITY show livery"
+    ]
+  },
+  {
+    "uid": "7799f3bd043b492c9e4cf5903629c02a",
+    "name": "2009 C-West GT Nissan Silvia S15 200SX",
+    "verdict": "fail",
+    "reasons": [
+      "C-West GT aftermarket aero kit - replacement bumpers, side skirts and a strutted race GT wing; a kit build, not an OEM S15",
+      "out of scope on the same line as the Vertex, Rocket Bunny and BenSopra entries",
+      "mesh itself is clean: glazing reads as glass, tyres black, black rim faces with orange calipers present"
+    ]
+  },
+  {
+    "uid": "79ea18a8add24af0bd3a026a4d2b9b6b",
+    "name": "2011 BenSopra Full Aero Kit for Nissan GT-R R35",
+    "verdict": "fail",
+    "reasons": [
+      "the title says it: a BenSopra full aero WIDEBODY KIT - bolt-on over-fenders, swan-neck GT wing, race splitter and diffuser",
+      "coachbuilt kit build, not an OEM variant a UK reg decodes to",
+      "mesh is clean otherwise"
+    ]
+  },
+  {
+    "uid": "7fb15e710a6a4e21ac5290d0037f2854",
+    "name": "Nissan 400z",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: windscreen and side glass render OPAQUE body-white - no interior visible, the mirror is a white shape on a white pane. Clay shell",
+      "zoom-verified: the tyre SIDEWALLS render body-white with white NISSAN lettering; only a thin outer tread ring is dark",
+      "cov=0.957 FULL COVERAGE - a respray would repaint the glass too",
+      "front wing surfacing is faceted; grille is a plain white grid"
+    ]
+  },
+  {
+    "uid": "81b21ffb76854051923c5c6425c79d2d",
+    "name": "Nissan skyline r32 gt-r (improved)",
+    "verdict": "pass",
+    "reasons": [
+      "R32 GT-R proportions read instantly, front 3/4 strong, four views consistent",
+      "zoom-verified: windscreen transparent with the interior and mirror visible; side glass tinted glass",
+      "zoom-verified: headlamp reflector internals present behind a lens; grille has real horizontal slats; bumper vent apertures modelled",
+      "zoom-verified: tyres plainly black rubber, dark 5-spoke rim faces with spokes and hub traceable on BOTH sides",
+      "bonnet and wing shut lines defined, premium gloss white finish"
+    ]
+  },
+  {
+    "uid": "862506e8238846dba822c8fe72a3ec16",
+    "name": "Nissan Skyline GT-R (BNR32)",
+    "verdict": "fail",
+    "reasons": [
+      "material split visible in all four views: the bonnet, sills, arch lips and lower valance render a darker charcoal grey against the silver body, with hard boundaries at the shut lines",
+      "cov=0.186 across 6 body materials - the worker painted under a fifth of the car, so a respray would leave those panels mismatched",
+      "brown/rust-coloured smear on the front wing beside the headlamp; panel surfacing soft with barely-there door shut lines",
+      "glazing reads as real glass and the black tyres and mesh BBS rim faces are fine",
+      "NOTE: this is a SHEET-based material call (candidate-finder evidence). The mesh is clean enough that a glTF material check before scrapping would be cheap"
+    ]
+  },
+  {
+    "uid": "896f3b17fe884815bbd8b86dd9b8c085",
+    "name": "2017 Nissan GT-R Nismo",
+    "verdict": "pass",
+    "reasons": [
+      "R35 GT-R Nismo proportions read instantly, front 3/4 strong, four views consistent",
+      "factory Nismo - OEM performance variant, in scope",
+      "glazing reads as real tinted glass with the interior visible",
+      "black rim faces with spokes traceable on both sides, tyres plainly black rubber",
+      "headlamp internals and honeycomb grille mesh sharp; carbon splitter, Nismo wing, red accent trim and quad exhausts all defined",
+      "bonnet and door shut lines defined, premium gloss finish",
+      "NOTE: same car and near-identical presentation to 71a34f42 (84,831 f vs 78,780 f, 7% apart) - looks like the same base mesh at a different decimation, but outside the 1% dedup band"
+    ]
+  },
+  {
+    "uid": "8db110c685bb4a7a9ef996aa40c6d639",
+    "name": "Nissan Patrol Y60 1989-1998",
+    "verdict": "fail",
+    "reasons": [
+      "exploded/incomplete model - a large flat white slab (a detached panel) floats clear of the body and dominates two of the four tiles",
+      "doors and side panels missing or detached, leaving open holes into the cabin; a spare wheel is embedded in the floating slab",
+      "front wheels missing on one side with the suspension hanging in an empty arch",
+      "cov=0.761 across 11 materials; unusable as staged"
+    ]
+  },
+  {
+    "uid": "9107448c53f3452888f2ccf96acc3d3f",
+    "name": "Nissan Skyline R33 GT-R",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: the HEADLAMPS render as flat body-WHITE blanks - no lens, no glass, no internals, just painted panels where the lamps should be",
+      "grille mesh and amber fog lamps are fine, and the windscreen is transparent with the interior visible, so it is the lamp material specifically that is missing",
+      "cov=0.742 over 6 body materials",
+      "bright green wheels are a spec/livery choice and would NOT on their own have failed it; tyres are plainly black and the rim faces are present"
+    ]
+  },
+  {
+    "uid": "94881b4e3c2b49b9a22cb23f9b60fa30",
+    "name": "Nissan-altima 2020",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified in BOTH 3/4 views: the tyres render pale grey - the same flat value as the wheel face, with no black rubber on the tread. Not a whitewall; the whole tyre including the tread is pale in front34 and rear34 alike",
+      "body has an over-glossy inflated plastic look with soft bulged panels",
+      "headlamp internals and the chrome grille are actually fine",
+      "NOTE: title says 2020 but the render is an earlier Altima - title metadata unreliable, judged from the render"
+    ]
   }
 ]
