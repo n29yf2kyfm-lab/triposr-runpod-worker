@@ -255,5 +255,266 @@
       "TCR touring-car race version - out of scope per the marque brief",
       "racing aero, roll cage, slick tyres with no sidewall detail; not a car a UK registration decodes to"
     ]
+  },
+  {
+    "uid": "064ab4fa32104628890b4b130c4db143",
+    "name": "hyundai i10 (aura)",
+    "verdict": "fail",
+    "reasons": [
+      "body panels pinched and creased - a pronounced fold runs from the headlight down the front wing, and the rear quarter/boot lid carries the same wrinkle, in all four views",
+      "surface folds are geometry, not reflections (they hold shape across azimuths)",
+      "otherwise: tyres black rubber, glazing transparent, rim faces present",
+      "NOTE: India-market Hyundai AURA saloon (badged AURA on the boot), not the UK i10"
+    ]
+  },
+  {
+    "uid": "0841ac63900940fab35629b4bae75c18",
+    "name": "2020 Hyundai i10",
+    "verdict": "fail",
+    "reasons": [
+      "headlight and tail-lamp lenses render as featureless flat white/pale shapes with no lens and no internals",
+      "PROVEN not to be a render-time paint bleed: a forced RED re-render leaves them WHITE while the body goes red (recolour touches only M_2020_Hyundai_i20_Alpha_Blue) - the blank lenses are the model's own material",
+      "everything else is clean: tyres black rubber, rim faces sharp with brake discs, glazing transparent, 3D grille mesh, shut lines defined",
+      "this is a re-source case, not junk - a UK-common i10 worth finding a better mesh for"
+    ]
+  },
+  {
+    "uid": "0cd483437f464f00b0d892d4cf31e479",
+    "name": "Hyundai Starex 2018",
+    "verdict": "fail",
+    "reasons": [
+      "no wheels or tyres at all - the arches are empty with small grey stub blocks where the wheels should be",
+      "glazing opaque body-white, no transparency in any view",
+      "cov=0.903 FULLCOV uniform clay shell"
+    ]
+  },
+  {
+    "uid": "331101b358104178b9e96bd749818b32",
+    "name": "2022 Hyundai Staria Premium",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber on the tread face in front34/rear34 at 3x",
+      "glazing transparent throughout - interior, seats and wiper visible through the large glasshouse",
+      "rim faces present with consistent spokes on all four corners",
+      "grille a crisp honeycomb, DRL light bar and lower lamp blocks defined, shut lines and door handles clean",
+      "UK-market Staria"
+    ]
+  },
+  {
+    "uid": "48b4df148c3a4ec2875ab082c197b42f",
+    "name": "2025 Hyundai Tucson Plug-In Hybrid",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with sidewall lettering; rim faces present with sharp two-tone spokes and a visible caliper",
+      "glazing transparent and tinted, interior visible",
+      "grille parametric blocks crisp, headlight internals present, shut lines defined, reflections clean",
+      "UK-market Tucson PHEV"
+    ]
+  },
+  {
+    "uid": "67645b6f549441a786e2b4050dc0268b",
+    "name": "Hyundai Creta",
+    "verdict": "pass",
+    "reasons": [
+      "tyres plainly black rubber on the shaded side; the pale read on the key-lit side is the rig's one-sided light, checked against both 3/4 tiles",
+      "rim faces present with full spoke detail on all four corners",
+      "glazing transparent - headrests and interior visible through the side glass, rear screen a dark transparent lens",
+      "tail lamp a smoked unit with internals, panels clean, shut lines and chrome handles defined",
+      "NOTE: Creta is not a UK-market nameplate"
+    ]
+  },
+  {
+    "uid": "711b67ea05f9441a863dce4badaca660",
+    "name": "2009 Hyundai Azera",
+    "verdict": "fail",
+    "reasons": [
+      "panel surfacing soft and melted - almost no shut lines anywhere, low detail at 311k faces",
+      "headlight and tail-lamp units render body-white with no lens or internals",
+      "tyres render white on the key-lit side in front34 and side",
+      "cov=0.711 across 17 materials",
+      "NOTE: Azera is not a UK-market nameplate"
+    ]
+  },
+  {
+    "uid": "9f633163211e418f93aedaf6da97435d",
+    "name": "2025 Hyundai Tucson L Turbo Hybrid",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; rim faces present with crisp two-tone machined spokes",
+      "glazing transparent and tinted, interior visible",
+      "grille parametric detail crisp, headlight internals present, shut lines defined, rear bumper and diffuser defined",
+      "NOTE: Tucson L is the China-market long-wheelbase Tucson (Beijing Hyundai), not the UK Tucson"
+    ]
+  },
+  {
+    "uid": "b483a4442fd94a31bfd771df38acf9c7",
+    "name": "2015 Hyundai Sonata",
+    "verdict": "pass",
+    "reasons": [
+      "forced RED re-render: tyres stay BLACK, recolour touches only `sonata2015_paint`",
+      "glazing transparent, headlights carry a projector and dark housing, tail lamps segmented, grille chrome slats defined, panels clean",
+      "RESERVATION, stated rather than failed: the wheel covers render flat WHITE and stay white under the red control, so they are a genuine light material, not a paint bleed. No Sonata ships with white wheels - it reads slightly unfinished and is a fair candidate for the owner to cull on sight",
+      "NOTE: Sonata is not a UK-market nameplate"
+    ]
+  },
+  {
+    "uid": "bddb0ecb7bd04ffbb0a46a977e5e64a2",
+    "name": "Hyundai Ioniq 6 N",
+    "verdict": "fail",
+    "reasons": [
+      "glazing opaque body-white - windscreen, side glass and rear screen are flat pale panels with no transparency and no interior visible in any of the four views",
+      "rim faces ABSENT on one side: the wheels in front34 and side are featureless black discs with no spokes, lug nuts or centre cap, while front34_L and rear34 show spoke detail (the per-side wheel-void signature, not a brightness split)",
+      "cov=0.805 across 7 materials"
+    ]
+  },
+  {
+    "uid": "c0a4792a5e784b10ae7c095d13980ed2",
+    "name": "Hyundai Elantra N 2021",
+    "verdict": "fail",
+    "reasons": [
+      "body surfaces crumpled and warped throughout - folds and wrinkles across the boot lid, rear quarters, front wings, roof and doors",
+      "headlight units are body-white blobs with no lens; the rear has no tail-lamp lenses at all",
+      "NOTE: Elantra is not a UK-market nameplate"
+    ]
+  },
+  {
+    "uid": "d85ea2322d814899ad5905210f2c0e5a",
+    "name": "2022 Hyundai Veloster N",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with sidewall lettering; rim faces present with sharp machined-face spokes and red calipers",
+      "glazing transparent and tinted, interior visible",
+      "grille a 3D diamond mesh, headlight LED strip defined, shut lines defined, reflections clean and paint reads premium",
+      "OEM factory N, not an aftermarket build",
+      "NOTE: the Veloster N was not sold in the UK"
+    ]
+  },
+  {
+    "uid": "de1b7e6f62ba4888a735dd4a0ee20668",
+    "name": "Hyundai Kona N-Line",
+    "verdict": "fail",
+    "reasons": [
+      "glazing opaque body-white - no transparency, interior not visible in any view",
+      "rims and headlight lenses also render body-white with no internals",
+      "cov=0.864 across 10 materials; only the tyres and lower cladding are separated"
+    ]
+  },
+  {
+    "uid": "20896e8928d943dabcaaf67dbb53c9da",
+    "name": "2019 Hyundai Kona",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; rim faces present with crisp aero-alloy spokes",
+      "glazing transparent and tinted, interior visible",
+      "closed EV grille carries a textured pattern, headlight internals present, shut lines defined, panels clean",
+      "UK-market Kona Electric (carries the China-market ENCINO boot badge but is the same car)"
+    ]
+  },
+  {
+    "uid": "264b618c43594d72967e53d9c61a3452",
+    "name": "Hyundai i20 Wrc | www.vecarz.com",
+    "verdict": "fail",
+    "reasons": [
+      "WRC rally car - out of scope per the marque brief",
+      "wheels also absent entirely on one side (front34 and side show empty black arches)"
+    ]
+  },
+  {
+    "uid": "3cc28d4cf5574383b7dc030638ee6199",
+    "name": "2023 Hyundai Creta",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; rim faces present with dark spoke detail on all four corners",
+      "glazing transparent and tinted, interior visible",
+      "parametric grille crisp, headlight internals present, shut lines defined, black roof and red accent separated as their own materials",
+      "NOTE: Creta is not a UK-market nameplate"
+    ]
+  },
+  {
+    "uid": "40b8e714ae9e4c6a8396c3d316d6c473",
+    "name": "Hyundai Genesis Photocatch Reconstruction",
+    "verdict": "fail",
+    "reasons": [
+      "photogrammetry reconstruction that has collapsed - melted body, large holes through the doors and roof, floating shards",
+      "ground plane baked into the mesh as flat white slabs",
+      "cov=1.000 FULLCOV single material"
+    ]
+  },
+  {
+    "uid": "4ba1b1b0eb844e318cc708ada1f2f51f",
+    "name": "2024 Hyundai Elantra N",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; rim faces present with sharp black alloy spokes",
+      "glazing transparent and tinted, interior visible",
+      "headlight internals present, grille mesh defined, shut lines defined, reflections clean",
+      "OEM factory N",
+      "NOTE: Elantra is not a UK-market nameplate"
+    ]
+  },
+  {
+    "uid": "673a4a83715d411ba713c0c270cdf93f",
+    "name": "2021-2023 Hyundai Elantra N",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; rim faces present with detailed spokes",
+      "glazing transparent and tinted, interior visible",
+      "headlight internals present, grille defined, shut lines defined, panels clean",
+      "pre-facelift CN7 - a different car from the 2024 facelift entry, not a duplicate",
+      "NOTE: Elantra is not a UK-market nameplate"
+    ]
+  },
+  {
+    "uid": "8d16325eb7974a948627b3cd77f30f52",
+    "name": "2024 Hyundai Ioniq 5 N",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; rim faces present with sharp machined-face alloys",
+      "glazing transparent and tinted, interior visible",
+      "pixel-LED headlight elements defined, front bumper and diffuser detailed, shut lines defined, reflections clean",
+      "UK-market Ioniq 5 N"
+    ]
+  },
+  {
+    "uid": "ec1dc61f11d241869c75b63e3bb2704d",
+    "name": "Hyundai Elantra MK5 2010-2018",
+    "verdict": "fail",
+    "reasons": [
+      "no tyres and no rims - the corners are bare white brake discs/hubs, with one loose black tyre lying under the car",
+      "stage/environment geometry baked into the mesh (flat white slabs and a black bar under the car)",
+      "large aftermarket rear wing"
+    ]
+  },
+  {
+    "uid": "f32f647c4e88421c901a84c80fddda2e",
+    "name": "unpacked-hyundai_elantra_n_2024",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; rim faces present with detailed spokes",
+      "glazing transparent and tinted, interior visible",
+      "headlight internals present, grille defined, shut lines defined, panels clean",
+      "minor: the wing-mirror caps render a pale blue - a spec/material oddity, not a defect",
+      "NOTE: near-identical to 4ba1b1b0 (256,800 vs 258,192 faces) - duplicate candidate, see HYUNDAI_DUPES.json"
+    ]
+  },
+  {
+    "uid": "22b2e87e2e714f6e8fbc92a0268252b3",
+    "name": "unpacked-hyundai_elantra",
+    "verdict": "fail",
+    "reasons": [
+      "heavily modified track build - large aftermarket GT rear wing on struts, race wheels with exposed bolts, ADVAN semi-slick tyres, front splitter and tow hook",
+      "out of OEM scope; a UK registration does not decode to this",
+      "geometry itself is clean, so this is a scope reject rather than a quality reject"
+    ]
+  },
+  {
+    "uid": "42be810c454449caa76549ffe3327c70",
+    "name": "Hyundai_i10_0729094933_texture",
+    "verdict": "fail",
+    "reasons": [
+      "photogrammetry scan - soft melted panels, baked lighting, window apertures filled with baked texture mush rather than glass",
+      "cov=1.000 FULLCOV single material; tyres render body-white",
+      "no material separation of any kind"
+    ]
   }
 ]
