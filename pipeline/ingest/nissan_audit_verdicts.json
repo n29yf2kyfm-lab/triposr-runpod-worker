@@ -2583,6 +2583,15 @@
   ]
  },
  {
+  "uid": "cc7f880fab824a42a16af861b6a0861c",
+  "name": "Nissan Skyline GTR R34 Kit Card",
+  "verdict": "fail",
+  "reasons": [
+   "not a car: a plastic model-kit sprue - the body shell sits on a moulding frame with loose wheel barrels and small parts still attached",
+   "no wheels fitted, arches empty; cov=1.000 FULLCOV"
+  ]
+ },
+ {
   "uid": "cd99ac77ad964a7a8979e7c125d4ac08",
   "name": "Nissan Laurel C35",
   "verdict": "fail",
@@ -2590,6 +2599,49 @@
    "photogrammetry scan of a car standing in snow, with the snowy ground plane baked into the mesh",
    "holes torn through the windscreen and roof, baked lighting throughout",
    "glazing is scan texture, not glass; cov=1.000 FULLCOV"
+  ]
+ },
+ {
+  "uid": "cf851ecb218248d9a8ed77d24696903a",
+  "name": "2010 Tamon Design RC370Z Nissan Fairlady Z",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Tamon Design RC370Z aftermarket body conversion, title says so outright",
+   "widened arches, custom front and rear bumpers, deep side skirts",
+   "build quality is otherwise good (real glass, black tyres, rims present both sides) - it fails on scope, not quality"
+  ]
+ },
+ {
+  "uid": "d06033258f1d4fb49c28f43e87d9f035",
+  "name": "nissan_gtr_nismo",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: despite the nismo filename this is an aftermarket widebody build, not the factory Nismo trim",
+   "riveted over-fenders, oversized swan-neck GT wing, canards and a full front splitter"
+  ]
+ },
+ {
+  "uid": "d116c5c0ca144c2f872f7ef469732d13",
+  "name": "Nissan Terrano (WD21) 5door 1993",
+  "verdict": "fail",
+  "reasons": [
+   "TYRES ARE NOT BLACK RUBBER - at 3x the tyre stays only marginally darker than the paint in BOTH the lit and the shadowed views, reading light grey on the key-lit side",
+   "this is the contrast test, not a brightness split: on the known-good D22 in the same batch the tyre is dramatically darker than the body under the same key light",
+   "glazing is genuine tinted glass with interior visible, so it fails on tyre material alone",
+   "confidence moderate-high - the verdict rests on tyre-to-body contrast measured against a same-batch control"
+  ]
+ },
+ {
+  "uid": "d25e801bbd5547c08fc21c64d27a8b32",
+  "name": "Nissan Ariya 2021",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Ariya proportions read instantly, four views consistent",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; dark aero rim faces present and detailed on BOTH sides",
+   "shield grille, thin LED headlight internals and light bar all sharp at 798,741 faces",
+   "door and tailgate shut lines defined",
+   "NOTE cov=0.113 LOW COVERAGE - distrust the colour in this sheet; recolour_audit --stamp must decide before it ships"
   ]
  }
 ]
