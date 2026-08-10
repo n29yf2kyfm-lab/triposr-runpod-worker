@@ -24,6 +24,12 @@
   "at": "2026-08-09"
  },
  {
+  "uid": "1635e9b0f7254e1d8688f4316498bfad",
+  "name": "2020 Hyundai Grand i10 NIOS",
+  "reason": "too big 52MB",
+  "at": "2026-08-10"
+ },
+ {
   "uid": "1ee08b36dc3c438584034c6799f6e3a7",
   "name": "Honda Accord 2.0T Sport 2020",
   "reason": "too big 54MB",
@@ -118,6 +124,18 @@
   "name": "Autochenille Citroën",
   "reason": "too big 58MB",
   "at": "2026-08-09"
+ },
+ {
+  "uid": "58185c81be4f44d8a9263729ffe13c6a",
+  "name": "2021 Honda CR-V",
+  "reason": "too big 50MB",
+  "at": "2026-08-10"
+ },
+ {
+  "uid": "5ae73f32c4fb4e1cb291944a1ea007ed",
+  "name": "2023 Hyundai Ioiq 6",
+  "reason": "too big 54MB",
+  "at": "2026-08-10"
  },
  {
   "uid": "5b8f6c12b9f44540a65258d866288ad0",
@@ -222,6 +240,12 @@
   "at": "2026-08-09"
  },
  {
+  "uid": "aa616c471fba41ccbaa913c415853657",
+  "name": "2022 Hyundai Staria",
+  "reason": "too big 50MB",
+  "at": "2026-08-10"
+ },
+ {
   "uid": "b94e0080d8ca4e4f93418d3480f354c8",
   "name": "Nissan Skyline 2000 gtr",
   "reason": "too big 51MB",
@@ -238,6 +262,18 @@
   "name": "Citroen Xsara Picasso 1998-2012",
   "reason": "too big 53MB",
   "at": "2026-08-09"
+ },
+ {
+  "uid": "cc9f74fac990405a85c0683aa5e43cc1",
+  "name": "2023 Honda Civic Type R",
+  "reason": "too big 54MB",
+  "at": "2026-08-10"
+ },
+ {
+  "uid": "cd5741852515425aa3c058b7e081dd2c",
+  "name": "2022 Hyundai Elantra N",
+  "reason": "too big 52MB",
+  "at": "2026-08-10"
  },
  {
   "uid": "cf55df17d2154cbbb157c2e1b062ac23",
