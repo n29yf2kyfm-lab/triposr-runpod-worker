@@ -1,0 +1,29 @@
+[
+ {
+  "drop_uid": "04f82c90d3b44ed8ada6af57f90c669d",
+  "name": "2017 Lexus LC 500 Model",
+  "faces": 280971,
+  "keep_uid": "06f7ccfdf2aa4ef7afce64da59cacb16",
+  "keep_name": "2017 Lexus LC 500",
+  "keep_faces": 280973,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'lexus', face counts 280,971 vs 280,973 (2 apart, 0.00%); keeping the higher face count"
+ },
+ {
+  "drop_uid": "8e77a0a3a93741c5953d7e02aec614f4",
+  "name": "2023_ Lexus_GX_550_h_ Overtrail_remix",
+  "faces": 517104,
+  "keep_uid": "2c8aadc8d0ea4ec180f758cd1361254b",
+  "keep_name": "2023 Lexus GX 550 h Overtrail",
+  "keep_faces": 518389,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'lexus', face counts 517,104 vs 518,389 (1,285 apart, 0.25%); keeping the higher face count"
+ },
+ {
+  "drop_uid": "3beb91b637f14b55895507c6d43f56ac",
+  "name": "2005 Lexus IS (XE10)",
+  "faces": 94723,
+  "keep_uid": "281a547f226543d680e4f27ae0304278",
+  "keep_name": "Lexus IS300/200",
+  "keep_faces": 94753,
+  "reason": "MANUAL addition - dupe_check could not see this one. Face counts are 30 apart (94,723 vs 94,753) but the title token overlap is 0.00 ('IS300/200' vs '2005 Lexus IS (XE10)' share no tokens), so neither rule A nor rule B fires. Confirmed by eye across all four views: identical body, glasshouse and interior, only the rim design differs (chrome multi-spoke vs silver 5-spoke). Keeping the higher face count. CLAUDE.md is right that face proximity is a candidate finder only - this pair was settled by looking, not by the number."
+ }
+]
