@@ -1,0 +1,275 @@
+[
+  {
+    "uid": "c6aa9cb089bd4692a00b2d0ac6b0c038",
+    "name": "Chazor Byd",
+    "verdict": "fail",
+    "reasons": [
+      "glazing opaque body-white in all four views - reads as a clay prototype, not a car",
+      "tyres render body-white including the tread face in front34 and rear34 (not a whitewall - the whole tyre is white)",
+      "single material at cov=1.000 covers body, glass and rubber alike",
+      "no headlamp or tail-lamp internals"
+    ]
+  },
+  {
+    "uid": "101a56e650684590a46436089e8bba85",
+    "name": "BYD_Tang_EV",
+    "verdict": "pass",
+    "reasons": [
+      "tyres plainly black rubber with tread visible in front34 and rear34; rims present with full spoke detail",
+      "glazing genuinely transparent - pillars and interior visible through the side glass at 2.4x",
+      "headlamp has sharp internal LED elements, tailgate light bar with lettering, grille slats crisp",
+      "door and bonnet shut lines defined; proportions read as a Tang instantly",
+      "NOTE: a charging cable is modelled plugged into the charge port and hanging to the floor; small mirror-glass element sits slightly detached from the mirror housing"
+    ]
+  },
+  {
+    "uid": "6cf3e9a4c5b0421ba98777973395f2c2",
+    "name": "Byd Song Plus",
+    "verdict": "pass",
+    "reasons": [
+      "tyres dark rubber with visible tread; the white element is the RIM (white-painted alloy), not the tyre - checked at 2.4x on both 3/4 tiles",
+      "glazing transparent, interior visible; tail lights red with sharp internal segments",
+      "grille honeycomb crisp, headlamp internals present, shut lines defined",
+      "NOTE: slight step at the front door trailing edge where the panel meets the B-pillar"
+    ]
+  },
+  {
+    "uid": "808e4593cddf4f429ecf7be68633c8e4",
+    "name": "BYD_Song_Plus_EV",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber, tread face clearly dark in both 3/4 views; dark alloys with full spoke detail",
+      "glazing transparent, headlamp LED internals sharp, lower grille slats modelled",
+      "shut lines defined, panel surfaces clean",
+      "NOTE: charging cable modelled plugged in and hanging to the floor"
+    ]
+  },
+  {
+    "uid": "dbc8a20d557042c5be32dd60bf470ae1",
+    "name": "2022 BYD Song Plus EV",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with tread; two-tone machined alloys, rim faces present on all four corners",
+      "glazing transparent, sharp LED headlamp internals, chrome trim clean",
+      "shut lines defined, premium paint finish - one of the strongest in the wave"
+    ]
+  },
+  {
+    "uid": "814686bc7adf42419775daf908851236",
+    "name": "BYD Song Plus EV ULTRA 2026",
+    "verdict": "fail",
+    "reasons": [
+      "non-OEM red accent trim baked onto A/B/C pillars, roof rails, mirror caps, side skirts, light surrounds and wheels - misrepresents a stock Song Plus",
+      "near-identical duplicate re-upload of dbc8a20d (548,482 f vs 548,642 f, 160 faces apart), which is the clean version of the same mesh",
+      "render quality itself is fine (black tyres, transparent glass) - the failure is fidelity to the real car, not geometry"
+    ]
+  },
+  {
+    "uid": "4e7e1a4f4fcc4fc6b8c5fb4cd71db082",
+    "name": "BYD_Yuan_Plus_EV",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with tread; grey alloys with full spoke detail on all corners",
+      "glazing transparent, headlamp internals present, front bumper detail modelled",
+      "shut lines defined",
+      "NOTE: mild panel softness/waviness on the front wing and bonnet reflections; charging cable modelled"
+    ]
+  },
+  {
+    "uid": "2e04b67017ed49e982a1f0737eb7f0ae",
+    "name": "2024 BYD Atto 2",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with sidewall lettering visible at 2.4x; silver alloys, rim faces present",
+      "glazing transparent, interior visible; sharp LED headlamp internals",
+      "shut lines defined, tow-eye and bumper details modelled, panels clean"
+    ]
+  },
+  {
+    "uid": "46546075cf4a40d4b75f010685168b9f",
+    "name": "2023 BYD Song Plus",
+    "verdict": "fail",
+    "reasons": [
+      "glazing opaque body-white - side glass is the same white as the body with only a faint sheen, no interior visible at 3x",
+      "headlamps entirely absent: the front is a blank body surface where the lens should be",
+      "single material at cov=1.000 (respray would repaint the glass)",
+      "tyres are acceptably dark - the failure is glazing and missing lamps"
+    ]
+  },
+  {
+    "uid": "c3bdefa332384e95a9fd249d0abb25c3",
+    "name": "2025 BYD Seal 5 DM-i (Chazor King Destroyer 05)",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with tread; black alloys with full spoke detail",
+      "glazing transparent, sharp headlamp internals, crisp grille slats",
+      "shut lines defined, proportions read as a Seal 5 saloon instantly"
+    ]
+  },
+  {
+    "uid": "262fad42369a4a9c8c3371b7dfbc922f",
+    "name": "2023 BYD Han DM-p",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; black multi-spoke alloys with red brake calipers, rim faces present all round",
+      "glazing transparent, chrome honeycomb grille sharp, headlamp internals defined",
+      "shut lines defined, premium finish"
+    ]
+  },
+  {
+    "uid": "7ffd92188fcd43429545e5e0b12c416c",
+    "name": "2024 BYD Seagull",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with tread in both 3/4 tiles; white-painted wheels are base-spec styling, rim faces intact",
+      "glazing transparent - seats and pillars visible at 4x; tail lamp with red internal segments",
+      "C-pillar vent perforation modelled, shut lines defined, panels crisp",
+      "NOTE: C-pillar trim renders body-white where the real car has a black insert - material separation quirk, not a defect"
+    ]
+  },
+  {
+    "uid": "73672cccb6774ebcb63105e17b3eb2af",
+    "name": "BYD_Seal_EV",
+    "verdict": "fail",
+    "reasons": [
+      "clay shell: glazing opaque body-white in every view, no interior visible",
+      "no headlamp or tail-lamp lenses - only faint surface creases where the lights should be",
+      "no door or bonnet shut lines",
+      "tyres are black, so the tyre test passes - the failure is glazing and absent lamp detail"
+    ]
+  },
+  {
+    "uid": "73371c411f0a4d0cbaa9a2e61d605c6e",
+    "name": "BYD_Dolphin_EV",
+    "verdict": "fail",
+    "reasons": [
+      "glazing opaque body-white; side windows show no transparency at 2.4x",
+      "crumpled/creased flank surfaces - hard dark folds running through the doors and rear quarter",
+      "headlamps are body-white bulges with only a faint dark strip, no internals",
+      "tyres are black, so the tyre test passes - the failure is glazing and panel damage"
+    ]
+  },
+  {
+    "uid": "f388872a6cf744c4a75607b003fd7fcb",
+    "name": "2024 BYD M6",
+    "verdict": "pass",
+    "reasons": [
+      "coloured-body control: on a DARK BLUE car the tyres render neutral black, so paint is demonstrably not on the rubber",
+      "machined-face alloys with full spoke detail, glazing transparent",
+      "sharp LED headlamp internals, chrome window trim, shut lines defined",
+      "MPV body style - a passenger car, in scope"
+    ]
+  },
+  {
+    "uid": "26f256d635b94104adf9dcd6b414d097",
+    "name": "2021 BYD Dolphin EV",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with sidewall lettering; two-tone black/silver alloys, rim faces present",
+      "glazing transparent, interior visible; LED headlamp internals and detailed grille mesh",
+      "shut lines defined, panels clean"
+    ]
+  },
+  {
+    "uid": "99454dd3bb5d425aaeff0af0c674c27a",
+    "name": "BYD Dolphin EV ULTRA 2026",
+    "verdict": "fail",
+    "reasons": [
+      "non-OEM red accent wrap baked onto pillars, arches, skirts, bonnet strip and wheels - misrepresents a stock Dolphin",
+      "duplicate re-upload of 26f256d6 (434,095 f vs 434,098 f - 3 faces apart) by the same uploader pattern as the Song Plus ULTRA",
+      "geometry itself is sound; the failure is fidelity to the real car"
+    ]
+  },
+  {
+    "uid": "8d30880667524cf3abb9e3e66c5299b5",
+    "name": "2024 BYD Dolphin Premium Long Range",
+    "verdict": "fail",
+    "reasons": [
+      "glazing opaque flat grey - no transparency and no interior visible at 3x on the side tile",
+      "headlamps absent; the front is a blank body surface",
+      "single material at cov=1.000 covers glass as well as body"
+    ]
+  },
+  {
+    "uid": "d30d1c01456f4d04a8fdac63782a4078",
+    "name": "BYD_Han_EV",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; dark multi-spoke alloys, rim faces present on all corners",
+      "glazing transparent, headlamp internal segments sharp, grille slats modelled",
+      "shut lines defined, panel surfaces clean",
+      "NOTE: charging cable modelled plugged in"
+    ]
+  },
+  {
+    "uid": "32534b0677de43e39c2dc7d520f9056c",
+    "name": "BYD_HAN",
+    "verdict": "fail",
+    "reasons": [
+      "glazing opaque body-white - the whole greenhouse reads as painted bodywork",
+      "soft/melted flank surfaces with a visible dent-like wave behind the rear door",
+      "headlamps only faintly creased, no internals",
+      "cov=0.913 near-full coverage; a respray would repaint the glass"
+    ]
+  },
+  {
+    "uid": "96ec5c34852f4c3090a755d4445f5e98",
+    "name": "2024 BYD Seal Performance AWD",
+    "verdict": "fail",
+    "reasons": [
+      "glazing opaque light grey - only a vague interior shape, no transparency at 3x",
+      "tyres render the same flat mid-grey as the rims: no black rubber anywhere on the wheel",
+      "headlamps absent, front is a smooth body surface",
+      "single material at cov=1.000"
+    ]
+  },
+  {
+    "uid": "b7281a9dd3e34ad386925830b0c2fab1",
+    "name": "Exilaus Byd dolphin surf",
+    "verdict": "fail",
+    "reasons": [
+      "photogrammetry scan of a partial car: torn geometry, missing roof and rear, baked lighting and the ground plane baked into the mesh",
+      "not a usable vehicle model in any view"
+    ]
+  },
+  {
+    "uid": "f7ee6b12224543c38f17f9122b4f1eaf",
+    "name": "Byd Han",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; dark mesh-spoke alloys, rim faces present",
+      "glazing transparent, headlamp internals present, shut lines defined",
+      "NOTE: minor surface crease on the rear quarter panel and a slightly wavy door line at 2.4x"
+    ]
+  },
+  {
+    "uid": "a215ce29514d4730891f12baf24f36fe",
+    "name": "BYD Seagull (2025)",
+    "verdict": "fail",
+    "reasons": [
+      "tyre reads the same flat mid-grey as the hubcap - the whole wheel is one grey mass with no black rubber (NOT the body-paint mechanism: the body is cream, the tyre is grey)",
+      "lumpy decimated panel surfaces - wavy flanks, uneven bonnet edge, irregular panel gaps (300,000 f exactly, a decimation target)",
+      "soft rear bumper and diffuser; glazing itself is genuinely transparent"
+    ]
+  },
+  {
+    "uid": "5cb99da87d6e4df4909d7d9e684dc456",
+    "name": "2025 BYD Seal 6 DM-i Touring",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with tread; dark alloys, rim faces present all round",
+      "glazing transparent, sharp headlamp internals, defined shut lines",
+      "clean estate proportions, panels crisp"
+    ]
+  },
+  {
+    "uid": "692058cf280d49408c2fb0a10157343e",
+    "name": "2024 BYD Atto 3 Superior Extended Range",
+    "verdict": "fail",
+    "reasons": [
+      "glazing opaque grey-white - no transparency, no interior at 3x",
+      "tyres render the same grey as the rims, no black rubber",
+      "headlamps absent; single material at cov=1.000"
+    ]
+  }
+]
