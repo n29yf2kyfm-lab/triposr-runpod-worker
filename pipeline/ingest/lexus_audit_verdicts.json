@@ -105,5 +105,125 @@
    "three of four wheels missing - arches empty in every view",
    "body and spindle grille are actually crisp and glazing is transparent, but the car is not complete"
   ]
+ },
+ {
+  "uid": "78d488a405ac499eb7ee96d67dc6f6b2",
+  "name": "Lexus ES (Mk3) 1997",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render a uniform light-mid grey, clearly lighter than the rim, on the tread face in both 3/4 tiles",
+   "settled with a forced --colour red re-render: on a red body the tyres stayed grey (worker recolour list is carpaint/carpaint_second only), so this is a genuinely grey tyre material, not paint overspill and not the one-sided key light",
+   "same-batch control from the same uploader (GS S130, LS Mk2) renders plainly black in the same rig",
+   "body, glazing and headlamp internals are otherwise good"
+  ]
+ },
+ {
+  "uid": "a9f5713e8a4349458085b96d9fea4000",
+  "name": "2004 Lexus GS 430",
+  "verdict": "fail",
+  "reasons": [
+   "per-corner white tyres: front34 shows two WHITE tyres including the tread face, rear34 shows two plainly black ones on the same car",
+   "settled with a forced --colour red re-render: on a red body the front34 tyres stayed WHITE while the rear34 tyres stayed black - the documented per-corner wheel-mesh defect, not a whitewall and not paint overspill",
+   "body, glazing, grille and headlamp internals are otherwise strong"
+  ]
+ },
+ {
+  "uid": "ab0ced1a02da4cada957f48a4fdda173",
+  "name": "Lexus LS Mk2 1997",
+  "verdict": "pass",
+  "reasons": [
+   "reads as an LS400 UCF20 facelift instantly; roof, pillars and wheelbase consistent across all four views",
+   "four wheels, tread face plainly black in front34 (rear34 darker grey under the rig's one-sided key, still rubber)",
+   "glazing transparent with interior visible; grille slats and headlamp internals sharp; shut lines defined"
+  ]
+ },
+ {
+  "uid": "9c36e76ee1ba4dfc89aa6da84b730310",
+  "name": "Lexus ES (Mk2) 1992",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render uniform light grey, lighter than the rim, on the tread face in both 3/4 tiles - the same signature as the ES Mk3 from the same uploader, which a red re-render proved is a genuinely grey tyre material",
+   "call rests on the sheet plus the sibling's red re-render, not on a red re-render of this uid itself",
+   "also a duplicate mesh with 1992 Lexus ES 300 (859,828 vs 859,824 faces)"
+  ]
+ },
+ {
+  "uid": "a3dfa45bd50a44c68b6ab205af7bc327",
+  "name": "1992 Lexus ES 300",
+  "verdict": "fail",
+  "reasons": [
+   "per-corner tyre defect: front34 tyres render white, rear34 tyres render dark on the same car",
+   "duplicate of Lexus ES (Mk2) 1992 (859,824 vs 859,828 faces) - the worker picked different body materials on the two sheets, which is why they look different",
+   "call rests on sheet evidence plus the ES Mk3 red re-render on the same uploader's tyre material"
+  ]
+ },
+ {
+  "uid": "52819f40ae6344b98c1113299d92a863",
+  "name": "Lexus LS XF30 2003",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "renders completely upside down in all four views - known render-side inversion bug; the local pose gate passed the GLB",
+   "tyres read plainly black and the body looks clean, so this is likely a good car once re-rendered"
+  ]
+ },
+ {
+  "uid": "b25af87f9f28472084d148b1b1d08905",
+  "name": "Lexus GS",
+  "verdict": "fail",
+  "reasons": [
+   "lowered stance build on oversized aftermarket chrome wheels with almost no tyre sidewall - the rubber does not read as rubber at 2.6x",
+   "aftermarket side skirts; not the OEM GS a registration decodes to",
+   "body, glazing and headlamp internals are otherwise clean (mats=0 cov=0.000, so the sheet colour is the model's own)"
+  ]
+ },
+ {
+  "uid": "2cb8265d1ce84bc4a3145ce641c1435f",
+  "name": "Lexus RC F (USC10)",
+  "verdict": "pass",
+  "reasons": [
+   "OEM RC F road car, in scope; proportions and front 3/4 are strong",
+   "rendered BLUE, which is the ideal control: a body-painted tyre would wear the body hue and these are neutral dark, so the tyres are innocent with no brightness argument",
+   "spindle grille mesh sharp, headlamp LED internals present, red calipers resolved, all four rim faces full",
+   "glazing transparent with interior visible"
+  ]
+ },
+ {
+  "uid": "6db67d7578f34a728f683fd54f485b15",
+  "name": "Lexus LBX",
+  "verdict": "fail",
+  "reasons": [
+   "glazing renders opaque body-white - no glass anywhere on the car",
+   "panels visibly faceted/unsmoothed across roof, bonnet and rear quarters",
+   "cov=0.815 - one material over most of the car"
+  ]
+ },
+ {
+  "uid": "a89d18432d5047549c4e8b9a66cb2d7d",
+  "name": "Lexus GS 350 2011",
+  "verdict": "pass",
+  "reasons": [
+   "reads as a GS350 S190 facelift instantly; front 3/4 strong, glasshouse consistent across views",
+   "tyres plainly black rubber with tread visible at 2.6x on all visible corners; polished 5-spoke rim faces full in every tile",
+   "glazing transparent, interior visible; headlamp projector and LED strip resolved; grille mesh sharp; door and bonnet shut lines defined"
+  ]
+ },
+ {
+  "uid": "ceea9a6275b44d138fb32c2d019b68b6",
+  "name": "Lexus LS Tokyo 2025",
+  "verdict": "fail",
+  "reasons": [
+   "six-wheeled show concept, not a road car - no registration decodes to it",
+   "uniform white clay (cov=1.000), no glazing and no tyres at all"
+  ]
+ },
+ {
+  "uid": "5eaed54fd300415a9ea88505a15cc750",
+  "name": "1997 Lexus ES 300 Photoscan",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: the tarmac ground plane is baked into the mesh and visible under the car in every view",
+   "lighting and shadows baked into the texture; glass is scan texture, not glazing",
+   "single material over the whole car (cov=1.000); panels soft"
+  ]
  }
 ]
