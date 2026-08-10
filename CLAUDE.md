@@ -447,6 +447,27 @@ Two rig traps that produced false failures during this exercise:
 - A Y-up assumption rendered a Y-down glb upside down. Measure camera orientation from the
   wheels.
 
+**The one tyre defect that IS real, and how to detect it without a render: the FLAT
+SHELL (found 2026-08-10 across Honda/Peugeot/Nissan).** Some shipped GLBs have every
+material set to ONE identical `baseColorFactor` — `tire`, `windowglass`, `clearglass`,
+`chrome`, `black` and `carpaint` all the same value (seen at 1.0, 0.8 and 0.588). The
+material NAMES survive; only the colours are gone. Nothing in the file is dark enough to
+be rubber or transparent enough to be glass, so the car renders as a uniform clay: tyres
+in body colour, windows opaque. 14 live cars carried it.
+
+Detect it from the glTF JSON, not from pixels — this is immune to every rig trap above:
+`len({tuple(baseColorFactor) for untextured materials}) == 1` and `minL >= 0.4` and no
+`alphaMode != OPAQUE`. Check the textures are only number plates before calling it; a car
+with real textures (peugeot-406-pw1-v1 has 22) can still be flat, but one where a texture
+feeds the tyre or glass is not.
+
+**The colour variants do NOT rescue it.** `colour_variants.py` rewrites only the body
+material, so `<asset>__grey.glb` is a coloured body on the same flat white shell —
+verified on four of them. And a good POSTER does not clear it either: the render worker
+substitutes glass and spares tyres by name, so peugeot-2008-v1 has a perfect published
+poster and a flat clay GLB. Where posterUrl/turntableUrl are null the resolver hands
+`desktopGlbUrl` straight to the viewer, so the flat shell is exactly what the customer sees.
+
 **Owner ruling 2026-08-09 — TYRES MUST READ AS BLACK RUBBER. This is a SEPARATE check
 from glazing and it is the one the audit kept missing.** A car whose tyres render in body
 colour FAILS: the paint material covers the rubber, so the car reads as an unfinished clay
