@@ -1,0 +1,43 @@
+[
+ {
+  "drop_uid": "8270bf067a5247f687b2d38b3b1eae39",
+  "name": "2013 Hyundai Accent",
+  "faces": 951340,
+  "keep_uid": "cec6b04b06724f1088129c1054ccb1ec",
+  "keep_name": "hyundai accent 2013",
+  "keep_faces": 951346,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'hyundai', face counts 951,340 vs 951,346 (6 apart, 0.00%); keeping the higher face count"
+ },
+ {
+  "drop_uid": "f32f647c4e88421c901a84c80fddda2e",
+  "name": "unpacked-hyundai_elantra_n_2024",
+  "faces": 256800,
+  "keep_uid": "4ba1b1b0eb844e318cc708ada1f2f51f",
+  "keep_name": "2024 Hyundai Elantra N",
+  "keep_faces": 258192,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'hyundai', face counts 256,800 vs 258,192 (1,392 apart, 0.54%); keeping the higher face count"
+ },
+ {
+  "drop_uid": null,
+  "flag_pair": [
+   "20896e8928d943dabcaaf67dbb53c9da",
+   "51da19ac92424e96a6e989caf6c1fb43"
+  ],
+  "source": "manual-visual",
+  "action": "flag-only, no drop",
+  "name": "2019 Hyundai Kona (248,120 f) vs 2021 Hyundai Encino EV (124,437 f)",
+  "reason": "SAME CAR, invisible to dupe_check: both are the Kona Electric / Encino EV (identical body, closed EV grille, ENCINO boot badge) but the face counts differ 2x (248,120 vs 124,437) so the 1% rule cannot fire, and the titles share only 'ev' so the token rule cannot fire either. Wheels differ (aero 5-spoke vs 5-twin-spoke), so these are two uploads of the same nameplate rather than a byte-copy. FLAGGED FOR THE EYE per CLAUDE.md - never auto-group. If only one Kona Electric should ship, keep 20896e89 (twice the mesh density)."
+ },
+ {
+  "drop_uid": null,
+  "flag_pair": [
+   "67645b6f549441a786e2b4050dc0268b",
+   "3cc28d4cf5574383b7dc030638ee6199",
+   "fa88bbdbe0df406b8eab167b9591d2f2"
+  ],
+  "source": "manual-visual",
+  "action": "flag-only, no drop",
+  "name": "Creta family: Hyundai Creta (309,471 f), 2023 Hyundai Creta (267,492 f), 2020 ix25 / 2022 Creta (90,369 f)",
+  "reason": "Three Creta-family entries all passed. Checked at full resolution and they are NOT duplicates: distinct front ends (pre-facelift SU2 split-lamp, 2023 facelift with a different grille and tail lamps, and the China-market ix25). Recorded so the pattern is visible, not as a drop."
+ }
+]
