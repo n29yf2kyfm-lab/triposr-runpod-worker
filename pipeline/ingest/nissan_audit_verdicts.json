@@ -686,6 +686,17 @@
   ]
  },
  {
+  "uid": "305360bcc80f495fb81de49801335ce8",
+  "name": "Nissan GT-R R35",
+  "verdict": "fail",
+  "reasons": [
+   "low-poly clay: heavy polygon faceting across bonnet, roof and rear quarters in every view",
+   "glazing renders opaque body-white with black triangular voids where the side windows should be",
+   "tyres render body-white - no black rubber",
+   "cov=0.984 FULLCOV"
+  ]
+ },
+ {
   "uid": "30663a0fbc9e4e32b6f7adacca2b603c",
   "name": "Nissan X-Trail MK3 T32 2013-2021",
   "verdict": "fail",
@@ -747,6 +758,17 @@
    "tyres plainly black rubber; 10-spoke rim faces present and detailed on BOTH sides",
    "V-motion grille edges crisp, headlight internals sharp",
    "bonnet and door shut lines defined, reflections clean"
+  ]
+ },
+ {
+  "uid": "34c43c1abab741dd9c32601d4a32726e",
+  "name": "2011 Nissan March Tuned",
+  "verdict": "fail",
+  "reasons": [
+   "incomplete: no wheels or tyres, all four arches are empty black voids",
+   "front end stripped to a bare intercooler/radiator assembly, bonnet detached",
+   "tailgate detached and floating behind the car",
+   "also out-of-scope: title says Tuned"
   ]
  },
  {
@@ -978,6 +1000,18 @@
    "unfinished clay shell: window openings are holes straight through to a white void, no glass material",
    "wheels present on the far side only - near-side arches are empty, one black blob under the nose",
    "cov=0.903 FULLCOV, no shut lines, panels untextured"
+  ]
+ },
+ {
+  "uid": "46e3bffbaf404441b9fff6e4b416c88e",
+  "name": "2017 Nissan GT-R (R35)",
+  "verdict": "pass",
+  "reasons": [
+   "OEM R35 proportions read instantly, front 3/4 strong",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; multi-spoke rim faces present and detailed on BOTH sides",
+   "grille, headlight internals and door shut lines defined",
+   "slammed stance and magenta calipers are setup/spec choices, not bodywork changes"
   ]
  },
  {
@@ -1221,6 +1255,18 @@
   ]
  },
  {
+  "uid": "593973027771487fb2f1f41d2933c688",
+  "name": "2018 Nissan Sylphy EV Zero Emission",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Sylphy EV proportions read instantly, four views consistent",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; dark aero rim faces present on BOTH sides",
+   "V-motion grille with EV blue accent and headlight internals sharp",
+   "boot, door and bonnet shut lines defined"
+  ]
+ },
+ {
   "uid": "595210d2da19421ebc4abc37320f2886",
   "name": "NISSAN SILVIA S15 INDIA SPEC 200SX",
   "verdict": "fail",
@@ -1309,6 +1355,15 @@
    "tyres also render body-colour - no black rubber",
    "out-of-scope: title says Customised - full body kit and oversized rear wing",
    "body is not a 240Z, it reads as an S13-generation coupe - title metadata is wrong"
+  ]
+ },
+ {
+  "uid": "60da8cf575ce478c90005c2088095f70",
+  "name": "2015 Rocket Bunny's Nissan Silvia S14 V2 Boss",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Rocket Bunny V2 Boss Aero widebody kit, title says so outright",
+   "riveted over-fenders, front splitter with rods, rear diffuser"
   ]
  },
  {
@@ -1431,6 +1486,16 @@
   ]
  },
  {
+  "uid": "6cd65aa2a2a944e1986ef8feceaf9d16",
+  "name": "1997 Nissan Sentra",
+  "verdict": "fail",
+  "reasons": [
+   "rim faces are flat magenta discs with no spoke geometry at all - just a coloured plate with a printed ring of white triangles, confirmed at 3x on both sides",
+   "headlamps carry purple texture splotches - corrupted material",
+   "tyres are correctly black with Goodyear lettering, so the failure is the wheel material and geometry"
+  ]
+ },
+ {
   "uid": "6df98cc48f5a4c3192950e5a91e74b96",
   "name": "Nissan Skyline GTR r33",
   "verdict": "pass",
@@ -1473,6 +1538,18 @@
    "rendered UPSIDE-DOWN on its roof in all four views - underside and floorpan visible",
    "source GLB passed the local pose gate, so this is the open render-side inversion bug",
    "caution: only one wheel is clearly visible in the inverted views - check wheel completeness on re-render"
+  ]
+ },
+ {
+  "uid": "70f175a0594747e4bb17452e890484aa",
+  "name": "2024 Nissan Titan XD SV 4WD Crew Cab",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Titan XD crew cab, proportions read instantly, four views consistent",
+   "glass reads as tinted glass with tan interior visible",
+   "tyres plainly black rubber; silver multi-spoke rim faces present on BOTH sides",
+   "grille badge and headlight internals sharp, door and bed shut lines defined",
+   "black tonneau cover and side steps are factory accessories, not a modification kit"
   ]
  },
  {
@@ -1520,6 +1597,14 @@
   ]
  },
  {
+  "uid": "76c47541645348969a1a85ae53e92e5c",
+  "name": "2018 Garage Mak Nissan S15 Silvia - Reggie Mah",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Garage Mak tuner build - widebody over-fenders, oversized swan-neck GT wing, carbon bonnet, deep front splitter"
+  ]
+ },
+ {
   "uid": "77456704dc1b4d299a23fecdf341003c",
   "name": "Nissan Aimgain GT R35 Type2",
   "verdict": "fail",
@@ -1547,6 +1632,16 @@
   "reasons": [
    "aftermarket widebody with bolt-on over-fender flares and quarter vents - out of scope",
    "not an OEM variant a UK reg decodes to"
+  ]
+ },
+ {
+  "uid": "79bc2c61f881499f822db1f797776087",
+  "name": "Nissan_GT R35 RC_Test 01",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of an RC car sitting on a wooden board, with the board baked into the mesh",
+   "ragged torn scan boundaries around the whole model, large missing chunks at the rear",
+   "cov=1.000 FULLCOV, baked lighting throughout"
   ]
  },
  {
@@ -1656,6 +1751,16 @@
    "tyres render body-white in every view - tyre material missing (same defect as the other NV200, uid 1cd12df9)",
    "rim faces themselves are present and correct",
    "body, glass and shut lines otherwise clean - re-source rather than scrap the nameplate"
+  ]
+ },
+ {
+  "uid": "85b14668ac424f96bb3d26215b73da9c",
+  "name": "2020 Nissan Sentra/Sylphy",
+  "verdict": "fail",
+  "reasons": [
+   "stray planar geometry: large white slabs cut straight through the roof, doors and boot in every view",
+   "wheels largely absent - arches are empty voids with black shards, only partial rims survive",
+   "body is unusable as a car model"
   ]
  },
  {
