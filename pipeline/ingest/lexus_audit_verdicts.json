@@ -384,5 +384,72 @@
    "mats=0 cov=0.000 means the worker applied NO recolour, so the sheet already is the model's native material state - no re-render needed",
    "body, grille, headlamps and glazing are otherwise good, which makes this the most painful loss in the wave: CT 200h is the highest-volume Lexus on UK roads"
   ]
+ },
+ {
+  "uid": "6d0660bb631b40f9b74c1dfc4e829393",
+  "name": "Lexus LS430 MK3 2000-2006",
+  "verdict": "fail",
+  "reasons": [
+   "three of four wheels missing - suspension struts and brake discs floating in empty arches in every view",
+   "same single-wheel source defect seen on five other cars in this wave"
+  ]
+ },
+ {
+  "uid": "c3b213e8c2184313bf5539cd24feeaff",
+  "name": "Lexus SC430",
+  "verdict": "fail",
+  "reasons": [
+   "wheel geometry broken: the tyres render as scrambled/shredded black fragments in all four views",
+   "rim faces smeared into flat featureless discs",
+   "body itself is clean but the car cannot ship with these wheels"
+  ]
+ },
+ {
+  "uid": "40a8a1c9f57f48059db8c6e3c0c3e65b",
+  "name": "Lexus RX450h",
+  "verdict": "pass",
+  "reasons": [
+   "reads as an RX450h AL10 instantly; UK-market model",
+   "tyres plainly black on the tread face in both 3/4 tiles at 2.6x; rim faces fully resolved with spokes and centre caps",
+   "glazing verified at 4.5x - genuinely transparent with the interior door card visible through it, not a milky shell",
+   "spindle-era grille slats, headlamp internals and fog lamps sharp; door shut lines defined"
+  ]
+ },
+ {
+  "uid": "5fd55243ce26447fa5a1fb8c15efbd1a",
+  "name": "Lexus LX570 2015",
+  "verdict": "pass",
+  "reasons": [
+   "reads as an LX570 J200 instantly; four wheels with plainly black all-terrain tyres on black steel-look rims",
+   "glazing transparent/tinted with interior visible in rear34; grille slats, headlamp internals and tail lamps sharp",
+   "NOTE LX570 is a US/Middle East model - unlikely on a UK registration"
+  ]
+ },
+ {
+  "uid": "3ae7b5e2ed3b48f4a4b9d5644de5e5fa",
+  "name": "Lexus LFA 2009-2018",
+  "verdict": "fail",
+  "reasons": [
+   "three of four wheels missing - bare brake discs sitting in empty arches",
+   "63,783 faces is the bottom of the band"
+  ]
+ },
+ {
+  "uid": "e13f56c0d10e4e6c95f798113387cf09",
+  "name": "2012 Lexus LFA Nurburgring",
+  "verdict": "fail",
+  "reasons": [
+   "LFA track special with the fixed rear wing and carbon aero - out of scope for this wave",
+   "quality itself is fine (four wheels, black tyres, red calipers, transparent glazing)"
+  ]
+ },
+ {
+  "uid": "fca7ffc299c44b699de926d24482d3c8",
+  "name": "lexus gs 300 lowerd",
+  "verdict": "fail",
+  "reasons": [
+   "rejected by the local pose gate BEFORE any GPU spend: flipped/on-side (tob=0.248) AND floorpan/wreck (h/l=0.099)",
+   "two independent signals agreeing on a non-upright, non-car-shaped mesh; also a 'lowerd' stance build, out of scope"
+  ]
  }
 ]
