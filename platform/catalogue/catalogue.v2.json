@@ -232030,5 +232030,2403 @@
    ]
   },
   "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-tucson-plug-in-hybrid-2025-hyw1-v1",
+  "make": "hyundai",
+  "model": "tucson-plug-in-hybrid",
+  "modelFamily": "hyundai tucson-plug-in-hybrid",
+  "modelAliases": [
+   "tucson-plug-in-hybrid"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2025,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "48b4df148c3a4ec2875ab082c197b42f",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "stitch",
+   "tucsonMI_1402060001_008",
+   "tucsonMI_Engine1",
+   "tucsonMI_Engine_Plastic_A1",
+   "tucsonMI_Exhaust1",
+   "tucsonMI_Suspension1"
+  ],
+  "glassMaterialNames": [
+   "tucsonMI_Glass1",
+   "tucsonMI_Glass_012"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tucson-plug-in-hybrid-2025-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tucson-plug-in-hybrid-2025-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 21715908,
+  "mobileFileSizeBytes": 21715908,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "a111963790794f921cf3c5c99a979d65699c781c2ed2260fa8163df753da863b",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-veloster-n-2022-hyw1-v1",
+  "make": "hyundai",
+  "model": "veloster-n",
+  "modelFamily": "hyundai veloster-n",
+  "modelAliases": [
+   "veloster-n"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "d85ea2322d814899ad5905210f2c0e5a",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "CarPaint"
+  ],
+  "glassMaterialNames": [
+   "Windowd",
+   "Glass_light"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-veloster-n-2022-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-veloster-n-2022-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 22246444,
+  "mobileFileSizeBytes": 22246444,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d26be76b343da8b9fbf2e7fd6f8cf82a33cc7a330def6385bc426a855beb7c61",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-staria-premium-2022-hyw1-v1",
+  "make": "hyundai",
+  "model": "staria-premium",
+  "modelFamily": "hyundai staria-premium",
+  "modelAliases": [
+   "staria-premium"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "331101b358104178b9e96bd749818b32",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "M_2022_Hyundai_Staria_Premium_CarPaint"
+  ],
+  "glassMaterialNames": [
+   "M_2022_Hyundai_Staria_Premium_Windows",
+   "M_2022_Hyundai_Staria_Premium_WindowsTrims",
+   "M_2022_Hyundai_Staria_Premium_BrakeLightsGlass",
+   "M_2022_Hyundai_Staria_Premium_WindowsTrim",
+   "M_2022_Hyundai_Staria_Premium_DRLs"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-staria-premium-2022-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-staria-premium-2022-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 38097236,
+  "mobileFileSizeBytes": 38097236,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "ddd0de44e0349bf4b632b3350f62cad352efa84eae91cf62a70c888fe568e5d3",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-creta-hyw1-v1",
+  "make": "hyundai",
+  "model": "creta",
+  "modelFamily": "hyundai creta",
+  "modelAliases": [
+   "creta"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "67645b6f549441a786e2b4050dc0268b",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint.004"
+  ],
+  "glassMaterialNames": [
+   "Windows",
+   "glass",
+   "Redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-creta-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-creta-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 11144464,
+  "mobileFileSizeBytes": 11144464,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "b51f6d2af626b625d093b260f8d9a4af488138273e176b3f17b8126a3d7b513c",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-tucson-l-turbo-hybrid-2025-hyw1-v1",
+  "make": "hyundai",
+  "model": "tucson-l-turbo-hybrid",
+  "modelFamily": "hyundai tucson-l-turbo-hybrid",
+  "modelAliases": [
+   "tucson-l-turbo-hybrid"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2025,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "9f633163211e418f93aedaf6da97435d",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "AO_B1_Carpaint",
+   "AO_B2_CarPaint",
+   "AO_B3_Carpaint",
+   "AO_B3_Chassis",
+   "AO_D1_Carpaint",
+   "AO_D2_Carpaint",
+   "AO_D2_Chassis"
+  ],
+  "glassMaterialNames": [
+   "Windows",
+   "Glass_D"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tucson-l-turbo-hybrid-2025-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tucson-l-turbo-hybrid-2025-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 20418164,
+  "mobileFileSizeBytes": 20418164,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "3f9b57ff3f48b57ce808bcf83f90f9775994a4a71fea05ae29e3e7144cd20785",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-ioniq-5-n-2024-hyw1-v1",
+  "make": "hyundai",
+  "model": "ioniq-5-n",
+  "modelFamily": "hyundai ioniq-5-n",
+  "modelAliases": [
+   "ioniq-5-n"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2024,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "8d16325eb7974a948627b3cd77f30f52",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "hHyundai_Ioniq5NRewardRecycled_2023Base_Material1",
+   "hHyundai_Ioniq5NRewardRecycled_2023Coloured_Material1",
+   "hHyundai_Ioniq5NRewardRecycled_2023EngineA_Material1",
+   "hHyundai_Ioniq5NRewardRecycled_2023Paint_Material1",
+   "red_paint"
+  ],
+  "glassMaterialNames": [
+   "hHyundai_Ioniq5NRewardRecycled_2023Window_Material1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-n-2024-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-n-2024-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 18013340,
+  "mobileFileSizeBytes": 18013340,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "c87aef88cf9cf7df52604d5e2f731de13ead920b86c528be019bcac91d64f51c",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-creta-2023-hyw1-v1",
+  "make": "hyundai",
+  "model": "creta",
+  "modelFamily": "hyundai creta",
+  "modelAliases": [
+   "creta"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "3cc28d4cf5574383b7dc030638ee6199",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "Windows",
+   "glass_surr",
+   "Redglass",
+   "GrilleChrome"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-creta-2023-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-creta-2023-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 12351504,
+  "mobileFileSizeBytes": 12351504,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "c3249a09babbfaa6c2d53e91a7731fdeb3ba6e24d8f045140fda0a64e0cc588c",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-elantra-n-2024-hyw1-v1",
+  "make": "hyundai",
+  "model": "elantra-n",
+  "modelFamily": "hyundai elantra-n",
+  "modelAliases": [
+   "elantra-n"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2024,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "4ba1b1b0eb844e318cc708ada1f2f51f",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "HHyundai_ElantraNRewardRecycled_2022Base_Material1",
+   "HHyundai_ElantraNRewardRecycled_2022Coloured_Material1",
+   "HHyundai_ElantraNRewardRecycled_2022EngineA_Material1",
+   "HHyundai_ElantraNRewardRecycled_2022Paint_Material1"
+  ],
+  "glassMaterialNames": [
+   "HHyundai_ElantraNRewardRecycled_2022Window_Material1",
+   "red_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-n-2024-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-n-2024-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 15422064,
+  "mobileFileSizeBytes": 15422064,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "be9261fa84aa11640d56a832977d5255c48ff2b2207db589fecb2dae50d97403",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-elantra-n-2021-hyw1-v1",
+  "make": "hyundai",
+  "model": "elantra-n",
+  "modelFamily": "hyundai elantra-n",
+  "modelAliases": [
+   "elantra-n"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "673a4a83715d411ba713c0c270cdf93f",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "hHyundai_ElantraNRewardRecycled_2022Base_Material1",
+   "hHyundai_ElantraNRewardRecycled_2022Coloured_Material1",
+   "hHyundai_ElantraNRewardRecycled_2022EngineA_Material1",
+   "hHyundai_ElantraNRewardRecycled_2022Paint_Material1"
+  ],
+  "glassMaterialNames": [
+   "hHyundai_ElantraNRewardRecycled_2022Window_Material1",
+   "red_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-n-2021-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-elantra-n-2021-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 19270336,
+  "mobileFileSizeBytes": 19270336,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "c95c65551710eec4b3eb2d0a21a0b9ee514b328290335423299800bbda0e4178",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-kona-2019-hyw1-v1",
+  "make": "hyundai",
+  "model": "kona",
+  "modelFamily": "hyundai kona",
+  "modelAliases": [
+   "kona"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2019,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "20896e8928d943dabcaaf67dbb53c9da",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "2019_Hyundai_Encino_Kona_EV_CeramicBlue",
+   "2019_Hyundai_Encino_Kona_EV_Doors"
+  ],
+  "glassMaterialNames": [
+   "2019_Hyundai_Encino_Kona_EV_Windows",
+   "2019_Hyundai_Encino_Kona_EV_Tailights_Glass",
+   "2019_Hyundai_Encino_Kona_EV_HeadLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2019-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-kona-2019-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 14449596,
+  "mobileFileSizeBytes": 14449596,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "4654d9ded7b654f7a79e958aaecfeb36bf8654eccd80e354bd340ad758b06639",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-encino-ev-2021-hyw1-v1",
+  "make": "hyundai",
+  "model": "encino-ev",
+  "modelFamily": "hyundai encino-ev",
+  "modelAliases": [
+   "encino-ev"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "51da19ac92424e96a6e989caf6c1fb43",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "glass",
+   "black_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-encino-ev-2021-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-encino-ev-2021-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 8217980,
+  "mobileFileSizeBytes": 8217980,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "21fe0e332f06e986fade45b0b537862d763e08d86feb111c7239e5941ee1ab0f",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-ix25-creta-2020-hyw1-v1",
+  "make": "hyundai",
+  "model": "ix25---creta",
+  "modelFamily": "hyundai ix25---creta",
+  "modelAliases": [
+   "ix25---creta"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "fa88bbdbe0df406b8eab167b9591d2f2",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix25-creta-2020-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ix25-creta-2020-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6556912,
+  "mobileFileSizeBytes": 6556912,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "20a286b955aca12df512c6cc4dc95fc1c368b07beb878b3ebc252355dca4c271",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-veloster-turbo-2013-hyw1-v1",
+  "make": "hyundai",
+  "model": "veloster-turbo",
+  "modelFamily": "hyundai veloster-turbo",
+  "modelAliases": [
+   "veloster-turbo"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2013,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "274079ecb1b84307897656c09ee3376a",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura"
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidros_1",
+   "Carro_Vidros_Vermelhos"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-veloster-turbo-2013-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-veloster-turbo-2013-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 8213784,
+  "mobileFileSizeBytes": 8213784,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "61043421470b477a64623519a4f19a2dce3e6bed8706087586124645c160ec12",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-tiburon-2003-hyw1-v1",
+  "make": "hyundai",
+  "model": "tiburon",
+  "modelFamily": "hyundai tiburon",
+  "modelAliases": [
+   "tiburon"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2003,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "b9622ed6ec3c4bc9abb196693764548c",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Chassis0061Mtl",
+   "Chassis0071Mtl"
+  ],
+  "glassMaterialNames": [
+   "Doorrfok1Mtl"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tiburon-2003-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tiburon-2003-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 10619168,
+  "mobileFileSizeBytes": 10619168,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "6b394f2e6d4f9983beb20c3ad634d3be6f28eddea3ef5315a920f1ef31c488f8",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-sonata-hybrid-2017-hyw1-v1",
+  "make": "hyundai",
+  "model": "sonata-hybrid",
+  "modelFamily": "hyundai sonata-hybrid",
+  "modelAliases": [
+   "sonata-hybrid"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2017,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "c435ef02b27140e2a5f800c622bb4c04",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint",
+   "Paint.008"
+  ],
+  "glassMaterialNames": [
+   "material_0"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-sonata-hybrid-2017-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-sonata-hybrid-2017-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3571520,
+  "mobileFileSizeBytes": 3571520,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "feb97367ee2e063e8fd4018b6f7679fbc8f87e1514bca3a96a81da25fddd1df8",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "hyundai-excel-1990-hyw1-v1",
+  "make": "hyundai",
+  "model": "excel",
+  "modelFamily": "hyundai excel",
+  "modelAliases": [
+   "excel"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1990,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "eaa8b99f11c54df58d00cd3873895e02",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint"
+  ],
+  "glassMaterialNames": [
+   "glass2",
+   "glass1",
+   "material_0",
+   "WindshieldWipers1Mtl"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-excel-1990-hyw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-excel-1990-hyw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 3915208,
+  "mobileFileSizeBytes": 3915208,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f60262bbb05dc00474be90db44b591cdfa87cb9828e97444f02aaf8a6111429f",
+  "pipelineVersion": "publish-batch-hyw1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "hyw1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-hyw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cyber Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyber Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Amazon Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Amazon Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Phantom Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Phantom Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Atlas White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Atlas White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Serenity White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Serenity White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Performance Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Performance Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Intense Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Intense Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Ultimate Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Ultimate Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]

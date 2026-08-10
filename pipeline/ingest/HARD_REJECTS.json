@@ -18,6 +18,12 @@
   "at": "2026-08-10"
  },
  {
+  "uid": "098b5ef4fa324173be107396cd4d2266",
+  "name": "2023 Lexus RX500h F Sport",
+  "reason": "too big 64MB",
+  "at": "2026-08-10"
+ },
+ {
   "uid": "0b7376fb3be548509f4a5383f61436b5",
   "name": "Presentation R4CV+ CitroenMini-2026",
   "reason": "too big 68MB",
@@ -58,6 +64,12 @@
   "name": "Nissan 370Z BADASS VRZ",
   "reason": "too big 61MB",
   "at": "2026-08-09"
+ },
+ {
+  "uid": "29aaeaf4cf9e43e799fc7f79809db2d7",
+  "name": "2023 Lexus RZ450e",
+  "reason": "too big 66MB",
+  "at": "2026-08-10"
  },
  {
   "uid": "2dc1236f58024a91ba79875ca0050312",
@@ -141,6 +153,12 @@
   "uid": "58185c81be4f44d8a9263729ffe13c6a",
   "name": "2021 Honda CR-V",
   "reason": "too big 50MB",
+  "at": "2026-08-10"
+ },
+ {
+  "uid": "587b7804527c4723845bc536710cc9fa",
+  "name": "Porsche 718",
+  "reason": "too big 79MB",
   "at": "2026-08-10"
  },
  {
