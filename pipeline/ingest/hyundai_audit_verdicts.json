@@ -592,5 +592,70 @@
       "tyres are correctly black and glazing is transparent - this fails on materials and surfacing, not tyres",
       "NOTE: Genesis Coupe is not a UK-market nameplate"
     ]
+  },
+  {
+    "uid": "51da19ac92424e96a6e989caf6c1fb43",
+    "name": "2021 Hyundai Encino EV",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; rim faces present with sharp aero-alloy spokes",
+      "glazing transparent and tinted, interior visible",
+      "headlight is a proper dark unit with internal elements below the DRL strip; closed EV grille textured; shut lines defined; cladding consistently dark",
+      "Encino EV is the China-market name for the Kona Electric - the UK Kona Electric is the same car",
+      "NOTE: near-identical to e8e4dfca (124,437 vs 124,060 faces, same wheels and badging) - duplicate pair, but that sibling FAILS on blank headlights, so this is the one to keep"
+    ]
+  },
+  {
+    "uid": "e8e4dfca80d14088964ad39f11875dcf",
+    "name": "2019 Hyundai Kona EV",
+    "verdict": "fail",
+    "reasons": [
+      "headlight and fog-lamp units render as body-white blanks with no lens and no internals - only the DRL strip is modelled",
+      "proven against a same-scale control in the same batch: its near-identical sibling 51da19ac (377 faces apart, same wheels and badging) shows a proper dark headlight unit in the identical crop",
+      "tyres, rims, glazing and cladding are all fine - this fails on the lamps alone",
+      "NOTE: duplicate of 51da19ac; that one passes and should be the keeper"
+    ]
+  },
+  {
+    "uid": "846d555185f14ce4aeab7a22d0ef81e2",
+    "name": "Hyundai Kona Electric MK1 2018-2023",
+    "verdict": "fail",
+    "reasons": [
+      "no wheels or tyres - the corners carry small white disc stubs only",
+      "glazing opaque grey clay, no transparency",
+      "cov=0.905 FULLCOV; panel surfaces creased"
+    ]
+  },
+  {
+    "uid": "253b4ffad4374a5dba4ea903290a3792",
+    "name": "Hyundai Palisade",
+    "verdict": "fail",
+    "reasons": [
+      "photogrammetry scan - lighting and surroundings baked into the texture, ragged sill and underbody edges, ground fragments baked into the mesh",
+      "no material separation at all (cov=1.000, single material) - glazing and tyres are texture",
+      "US-plate scan of a real car in a car park"
+    ]
+  },
+  {
+    "uid": "bc6efe437ef14c89ac5c486863ad9a5b",
+    "name": "2006 Hyundai Sonata",
+    "verdict": "fail",
+    "reasons": [
+      "near-uniform clay shell - cov=0.936 across 11 materials, FULLCOV",
+      "tyres render body-white; headlight lenses body-white with only faint internals",
+      "low detail at 83k faces, panels soft, no shut lines",
+      "NOTE: Sonata is not a UK-market nameplate"
+    ]
+  },
+  {
+    "uid": "fa88bbdbe0df406b8eab167b9591d2f2",
+    "name": "2020 Hyundai ix25 - 2022 Hyundai Creta",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; rim faces present with black spoke detail",
+      "glazing transparent and tinted - rear wiper and interior visible through the rear screen (the white shape there is a studio reflection, checked at 3.7x, not torn geometry)",
+      "tail lamps are red lenses with internal segments, grille and headlights defined, shut lines and chrome handles clean",
+      "NOTE: ix25 is the China-market Creta - not a UK nameplate"
+    ]
   }
 ]
