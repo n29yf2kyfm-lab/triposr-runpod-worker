@@ -1,0 +1,109 @@
+[
+ {
+  "uid": "e9777dc7665f4a4c9aeb255e78cdeda4",
+  "name": "Lexus IS300/Toyota Altezza 2003",
+  "verdict": "fail",
+  "reasons": [
+   "three of four wheels missing - arches empty with floating arch liners; staged GLB carries a single wheel node, so this is a source defect not a rig artefact",
+   "body panels detached and floating (front wing, arch liners) in all four views",
+   "glazing renders opaque body-white - windows do not read as glass"
+  ]
+ },
+ {
+  "uid": "faf4d531105b4a6d961214646344cb0f",
+  "name": "Lexus IS250 MK2 2005-2013",
+  "verdict": "fail",
+  "reasons": [
+   "three of four wheels missing - GLB contains one tyre node (fmis_tires) and one wheel node, verified in the staged glTF",
+   "the single remaining tyre renders white on a gold rim",
+   "rendered pink under --colour silver - the worker's body-material pick is wrong on this mesh"
+  ]
+ },
+ {
+  "uid": "3beb91b637f14b55895507c6d43f56ac",
+  "name": "2005 Lexus IS (XE10)",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as an XE10 IS200/IS300 instantly; front 3/4 is strong",
+   "four separate wheel nodes (FL/FR/RL/RR) in the GLB; chrome rims with full spoke and lug detail in all four views",
+   "tyres plainly black rubber on the tread face in both front34 and rear34 at 2.6x",
+   "glazing transparent, interior visible; headlamp and tail-lamp internals present; grille mesh resolved"
+  ]
+ },
+ {
+  "uid": "281a547f226543d680e4f27ae0304278",
+  "name": "Lexus IS300/200",
+  "verdict": "pass",
+  "reasons": [
+   "same quality as the XE10 sibling - four wheels, black tread, transparent glazing, headlamp internals",
+   "NOTE near-identical mesh to 3beb91b6 (94,753 vs 94,723 faces, same body, different rim); only one of the pair should ship"
+  ]
+ },
+ {
+  "uid": "3c232be56b1b44e2aa6000a0f626680c",
+  "name": "Lexus RX 350 MK2 2003-2008",
+  "verdict": "fail",
+  "reasons": [
+   "three of four wheels missing - staged GLB has one tyre node (rx330_tire_14) and one rim node",
+   "headlights are smeared blobs with no internal detail; panel surfaces wavy",
+   "grille edges soft"
+  ]
+ },
+ {
+  "uid": "5adac240037e4daabfe4145fc034d727",
+  "name": "2010 Lexus RX",
+  "verdict": "fail",
+  "reasons": [
+   "no body-paint material at all (body mats=0, cov=0.000)",
+   "every body panel renders as transparent glass - the car is see-through in all four views",
+   "cannot be resprayed; glazing/body separation is inverted"
+  ]
+ },
+ {
+  "uid": "6b9a1994b2dd445c8248270c81eead6b",
+  "name": "Lexus RX 350 + rigged (+ rigged driver (human) )",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "renders lying on its side / rotated 90 degrees in all four views - the known render-side inversion bug",
+   "the local pose gate passed it, so the GLB is upright; needs a re-render before it can be judged"
+  ]
+ },
+ {
+  "uid": "86b0d6ff078f4dd9b8131b50da4556b8",
+  "name": "Lexus ES (Mk1) 1989",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "renders completely upside down in all four views - known render-side inversion bug",
+   "pose gate passed the GLB, so this is not a source-side orientation problem"
+  ]
+ },
+ {
+  "uid": "e4274b9fa36d4589b8221fe499121f4e",
+  "name": "2012 Lexus RX 350",
+  "verdict": "fail",
+  "reasons": [
+   "a detached fifth wheel sits on the studio floor beside the car in front34_L, side and rear34 - it ships inside the GLB and would appear in the viewer",
+   "car itself is otherwise sound (four wheels, black tyres, transparent glazing)"
+  ]
+ },
+ {
+  "uid": "ed1031b9710c41449a3fb05c7a764075",
+  "name": "Lexus GS S130 1997",
+  "verdict": "pass",
+  "reasons": [
+   "reads as a GS300 S140 instantly; proportions and glasshouse consistent across all four views",
+   "tyres plainly black rubber with tread visible at 2.6x in both 3/4 tiles; rims dark grey with full hub detail",
+   "glazing transparent, interior visible; headlamp projector internals present; grille slats sharp",
+   "door and bonnet shut lines defined"
+  ]
+ },
+ {
+  "uid": "0339795758a341b1ba495be03e1271c3",
+  "name": "2022 Lexus UX",
+  "verdict": "fail",
+  "reasons": [
+   "three of four wheels missing - arches empty in every view",
+   "body and spindle grille are actually crisp and glazing is transparent, but the car is not complete"
+  ]
+ }
+]
