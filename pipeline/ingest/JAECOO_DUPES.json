@@ -1,0 +1,11 @@
+[
+ {
+  "drop_uid": "d9ff826c2bf14d81a4fa3c9b6b707376",
+  "name": "2023 Chery Omoda 5 290T",
+  "faces": 394838,
+  "keep_uid": "898ba0d4de914565b7340ee1d1a77ffe",
+  "keep_name": "2023 Omoda 5",
+  "keep_faces": 394933,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'jaecoo', face counts 394,838 vs 394,933 (95 apart, 0.02%); keeping the higher face count"
+ }
+]

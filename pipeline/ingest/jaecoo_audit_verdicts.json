@@ -123,7 +123,7 @@
   "verdict": "fail",
   "reasons": [
    "white clay shell - glazing renders opaque body-colour in all four views",
-   "wheels reduced to featureless black domes in front34, front34_L and side; rim face absent entirely",
+   "wheels reduced to featureless black domes in front34, front34_L and side; rim face absent entirely, arches empty",
    "headlamps are smears without internal detail",
    "cov=0.827 did not flag it - coverage is blind to this"
   ]
@@ -145,7 +145,7 @@
   "verdict": "fail",
   "reasons": [
    "tyres render WHITE on one side of the car (front34_L and rear34) and black on the other (front34 and side)",
-   "per-corner asymmetry from the same mesh - the documented white-tyre defect, not a whitewall; the white tread face is visible at 5x in rear34",
+   "per-corner asymmetry from the same mesh - the documented white-tyre defect, not a whitewall; white tread face confirmed at 5x in rear34",
    "otherwise clean: glazing transparent, rim faces present"
   ]
  },
@@ -193,6 +193,122 @@
    "tyres black rubber with tread visible at 5x in front34 and rear34",
    "rim faces present - black turbine alloys with spokes and lug detail traceable",
    "shut lines defined, grille slats and headlamp internals sharp"
+  ]
+ },
+ {
+  "uid": "59c88fa8a3894d74a1f57d47686f9db3",
+  "name": "2024 Chery Tiggo 9 Pro",
+  "verdict": "fail",
+  "reasons": [
+   "white clay shell (cov=0.945) - tyres render body-white including the tread face, identical to the rims",
+   "tail-lamp bar renders magenta, a broken material",
+   "a respray would repaint the tyres and trim"
+  ]
+ },
+ {
+  "uid": "a008dc4938ce4fc393240864309cca91",
+  "name": "2023 Chery Tiggo 7 Plus 290T",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as the right car instantly; front 3/4 strong",
+   "glazing transparent - red interior visible through the windscreen and side glass",
+   "tyres black rubber with a modelled tread pattern at 5x",
+   "rim faces present - dark grey 5-spoke alloys with lug bolts and centre cap traceable in all four views",
+   "grille slats deep, headlamp internals sharp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "20f044e40d5247fc8322e9b429650580",
+  "name": "jaecoo j8",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render as a smooth light-grey band identical in value to the alloy - no black rubber and no tread, reads as metal not rubber",
+   "confirmed at 5x on the front34 tread face",
+   "whole car reads as a monochrome metal-clay study"
+  ]
+ },
+ {
+  "uid": "e6b69aa7329347f4bcd431d13b7dc915",
+  "name": "2023 Chery Arrizo 8 290T",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as the right saloon instantly; front 3/4 strong",
+   "glazing transparent with dark panoramic roof; interior visible",
+   "tyres black rubber at 5x; rim faces present - gloss black multi-spoke with lug detail",
+   "grille mesh deep, headlamp internals sharp, door and bonnet shut lines defined"
+  ]
+ },
+ {
+  "uid": "b8d34fba89ca45918e851eaab3b5b679",
+  "name": "2023 Chery Tiggo 8 Pro",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render white/light grey, identical in value to the rims - no black rubber on any tread face",
+   "cov=1.000 single material covers the whole car; a respray would repaint glass and tyres",
+   "body renders lavender while the tyres stay white, so this is not simple body-paint bleed - the wheel materials are gone"
+  ]
+ },
+ {
+  "uid": "02e3ca1e9a8f4c7aad40617bd0693615",
+  "name": "2025 Chery Jaecoo J7",
+  "verdict": "pass",
+  "reasons": [
+   "UK-market model (Jaecoo 7); proportions read as the right car instantly, front 3/4 strong",
+   "glazing transparent - seats and dashboard visible through side glass and windscreen",
+   "tyres black rubber at 5x; rim faces present - dark grey multi-spoke alloys with red calipers, spokes traceable in all four views",
+   "JAECOO grille slats deep, headlamp internals sharp, door shut lines defined"
+  ]
+ },
+ {
+  "uid": "93f32e8306b440f49d26544b9c20a45e",
+  "name": "2022 Chery Tiggo 8 Pro e+",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as the right car instantly; front 3/4 strong",
+   "glazing transparent - interior visible in side and rear34",
+   "tyres black rubber at 5x; rim faces present - dark multi-spoke alloys fully traceable",
+   "grille honeycomb deep, headlamp internals sharp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "a717286d832d4e44b792da4d87cf1d3b",
+  "name": "2024 Chery Tiggo 2 Pro",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as the right car instantly; front 3/4 strong",
+   "glazing transparent - interior visible",
+   "tyres black rubber with a clear tread pattern at 5x",
+   "rim faces present - gloss black 5-spoke alloys with red calipers, spokes traceable in all four views",
+   "grille mesh deep, headlamp internals sharp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "7738b7d7f2e045e1bb50747d8dccd4ae",
+  "name": "Jaecoo J7",
+  "verdict": "fail",
+  "reasons": [
+   "white clay shell - glazing renders opaque body-colour in every view",
+   "rim face absent entirely in front34, front34_L and side: wheels reduced to featureless black domes with the arches empty",
+   "same uploader and same defect as the Chery E5 EV entry in this wave"
+  ]
+ },
+ {
+  "uid": "de2a5773a2b4439980ead64dd732f275",
+  "name": "2023 Chery Arrizo 8",
+  "verdict": "fail",
+  "reasons": [
+   "the body material covers the grille, the lower intakes and the alloys (cov=0.892) - the car renders as a monochrome white shell with no dark grille",
+   "a respray would repaint the grille and wheels",
+   "tyres and glazing are fine, but it is a weaker duplicate of the 2023 Chery Arrizo 8 290T entry, which has a correct dark grille and black alloys"
+  ]
+ },
+ {
+  "uid": "4a51e690819a4111a2055205a1009167",
+  "name": "Chery Tiggo 8 Pro",
+  "verdict": "pose-reject",
+  "reasons": [
+   "rejected by gpu_wave.pose_gate BEFORE any render: floorpan/wreck, h_over_l=0.15",
+   "no sheet produced; zero GPU spent"
   ]
  }
 ]
