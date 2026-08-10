@@ -3424,5 +3424,144 @@
       "front end detail well below the premium bar; race-style air dam, rear spoiler and 8-spoke race wheels",
       "glazing and tyres are fine - tyres plainly black rubber, white rim faces with red calipers present"
     ]
+  },
+  {
+    "uid": "23e9e431526048f8869b5ff9937b129d",
+    "name": "2007 Nissan Altima 2.5 SE",
+    "verdict": "pass",
+    "reasons": [
+      "L32 Altima saloon proportions read instantly, four views consistent",
+      "glazing reads as real glass - cabin and seats visible through the side windows and windscreen",
+      "zoom-verified: tyres plainly black rubber with tread; white 5-spoke wheel covers with Nissan centre cap, faces present in all four views",
+      "headlamps carry amber and clear internal elements; chrome grille bars modelled",
+      "door, boot and bonnet shut lines defined, clean gloss finish",
+      "CAVEAT: cov=0.097 LOW COVERAGE - distrust the sheet colour; colour swap unproven until recolour_audit --stamp",
+      "DUPLICATE CANDIDATE with 24785fec (2007 Nissan Altima, 74,798 f - 18 faces apart)"
+    ]
+  },
+  {
+    "uid": "24785fec41554a57a19dbba0712bbf16",
+    "name": "2007 Nissan Altima",
+    "verdict": "pass",
+    "reasons": [
+      "L32 Altima saloon proportions read instantly, four views consistent",
+      "zoom-verified: windscreen transparent with dash and steering wheel visible; side glass reads as glass",
+      "zoom-verified: tyres plainly black rubber, white wheel covers with Nissan centre cap present in all four views",
+      "zoom-verified: headlamp with amber and clear internal elements, chrome grille bars, lower bumper slats",
+      "door and bonnet shut lines defined",
+      "CAVEAT: cov=0.097 LOW COVERAGE - sheet colour untrustworthy, respray unproven",
+      "DUPLICATE CANDIDATE with 23e9e431 (2007 Nissan Altima 2.5 SE, 74,816 f)"
+    ]
+  },
+  {
+    "uid": "2c70179b6eae41aab5914f60b192c1ac",
+    "name": "Nissan_skyline_r34_gt-r",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: the whole greenhouse renders OPAQUE body-white - windscreen, door glass and rear screen are solid paint, no glazing at all",
+      "cov=0.824 across 6 body materials - a clay shell",
+      "tyres and silver rim faces are fine; taillights are the only real materials left",
+      "proportions are correct R34 GT-R - worth re-sourcing rather than the nameplate being written off"
+    ]
+  },
+  {
+    "uid": "2cfa28332493411c827ab36d00631a46",
+    "name": "2017 Nissan GT-R Premium",
+    "verdict": "pass",
+    "reasons": [
+      "R35 facelift GT-R proportions read instantly, front 3/4 strong, four views consistent",
+      "zoom-verified: windscreen and side glass transparent with the interior visible",
+      "zoom-verified: headlamp LED strip and projector internals sharp; V-motion grille mesh and GT-R badge crisp",
+      "zoom-verified: machined multi-spoke rim faces present in all four views, tyres plainly black rubber",
+      "quad round taillamps with internals, rear diffuser and quad exhausts modelled",
+      "bonnet vents, bonnet and door shut lines defined, premium gloss finish"
+    ]
+  },
+  {
+    "uid": "308cef927d904bcdb0931f7b21e21cb2",
+    "name": "2023 Nissan 400Z",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: body surfacing is faceted - flat polygon planes across the bonnet, front wing and doors with hard crease lines, not smooth panels",
+      "headlamps are soft white blobs with no internal elements; grille is a plain black block",
+      "no bonnet or door shut lines; rear screen renders as a pale opaque panel",
+      "tyres and rim faces are fine - the defect is surfacing and detail"
+    ]
+  },
+  {
+    "uid": "3193cbd9b1a14b9baf4be3fbf3939016",
+    "name": "Nissan Skyline GTR R32",
+    "verdict": "fail",
+    "reasons": [
+      "not a car - a plastic scale model-kit SPRUE TRAY: the shell sits on a moulding frame with loose parts and wheel cylinders still attached",
+      "no wheels mounted, arches empty",
+      "all white with no glazing; cov=1.000 FULLCOV, one material covers the whole model",
+      "same class of asset as the already-rejected R34 kit-card model"
+    ]
+  },
+  {
+    "uid": "326f06394f77422f9c1543a2bb846b83",
+    "name": "Nissan Silvia Spec R-Aero GF S15 1999-2002",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: the tyres render solid body-WHITE - the wheels are white cylinders with only a small dark hub, no black rubber anywhere in any view",
+      "front bumper is a plain white slab with flat black rectangles for intakes; headlamps are dark slots with no internals",
+      "large multi-element race GT wing - track aero build",
+      "cov=0.597 over 8 body materials; reads as an unfinished clay"
+    ]
+  },
+  {
+    "uid": "3365f72448084fcb80b16915e77fabe7",
+    "name": "2009 Nissan Versa SV",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: side glass renders as a milky near-white panel with a mottled baked reflection - no interior visible through any window, so glazing does not read as glass",
+      "cov=0.945 FULL COVERAGE - one material covers the model, a respray would repaint the glass too (the documented retirement condition)",
+      "headlamps are soft grey blobs with no internal elements",
+      "tyres are correctly black rubber and rim faces are present - the defect is glazing and coverage"
+    ]
+  },
+  {
+    "uid": "36a14a2f306d4155995fdb76c532bbb0",
+    "name": "2016 Pandem - Nissan GTR (R35) V2 with Duck Tail",
+    "verdict": "fail",
+    "reasons": [
+      "Pandem/Rocket Bunny widebody kit - riveted bolt-on over-fenders, ducktail spoiler, ground-effect skirts and a race diffuser",
+      "coachbuilt kit build, not an OEM variant a UK reg decodes to - same line as the already-rejected RWB R34",
+      "mesh itself is clean: glazing reads as glass, tyres black, dark rim faces present in all four views"
+    ]
+  },
+  {
+    "uid": "385220e90764403daaa1823296d40b54",
+    "name": "1999 Nissan Skyline GT-R V-Spec II (R34)",
+    "verdict": "pass",
+    "reasons": [
+      "R34 GT-R V-Spec II proportions read instantly, front 3/4 strong, four views consistent",
+      "zoom-verified: windscreen transparent with dash and seats visible, side glass tinted glass",
+      "zoom-verified: headlamp projector and reflector internals sharp, grille mesh with GT-R badge, carbon splitter defined",
+      "zoom-verified: bronze multi-spoke rim faces with red calipers present in all four views, tyres plainly black rubber",
+      "bonnet vent, bonnet and door shut lines defined, premium gloss white finish",
+      "DUPLICATE CANDIDATE with 02bf64f1 (2002 R34 V-Spec II, 86,043 f vs 86,583 f - same base mesh, same bronze wheels)"
+    ]
+  },
+  {
+    "uid": "3929336debbf45a8a2e4096f1fdf5baa",
+    "name": "2016 Nissan Note",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: NO WHEELS - both arches are empty black voids in every view and the body sits flat on the floor",
+      "body panels carry swirling wavy surface artefacts across the doors and rear quarter",
+      "glazing and lamps are otherwise fine; the mesh is unusable without wheels"
+    ]
+  },
+  {
+    "uid": "39aa8a75fd8a48719e3bb500325673fd",
+    "name": "Nissan Sentra B16 2006-2009",
+    "verdict": "fail",
+    "reasons": [
+      "a giant stray white slab/box mesh fills the scene and clips through the car in all four views - the sheet is mostly that object, not the Sentra",
+      "wheels are bare white hubs with the suspension springs exposed - no tyres mounted",
+      "car body is only partially visible; unusable as staged"
+    ]
   }
 ]
