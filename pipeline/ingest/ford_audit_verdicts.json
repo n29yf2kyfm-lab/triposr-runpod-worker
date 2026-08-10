@@ -75,5 +75,22 @@
    "glazing opaque body-colour white, no interior visible (2x crop)",
    "grille and headlamp internals soft"
   ]
+ },
+ {
+  "uid": "3f06f5bc72274089b06e4bc838ea4223",
+  "name": "Ford Ecosport",
+  "verdict": "fail",
+  "reasons": [
+   "rear bumper crumpled/malformed, tailgate geometry poking through, taillights crude, low-poly faceted panels, no shut lines"
+  ]
+ },
+ {
+  "uid": "7c94a52bf2f14060bd054f51f7b06d19",
+  "name": "Ford Ranger Offroad",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: lifted custom off-road build (roll bar, bull bar, oversized mud tyres)",
+   "panels soft, no shut lines"
+  ]
  }
 ]
