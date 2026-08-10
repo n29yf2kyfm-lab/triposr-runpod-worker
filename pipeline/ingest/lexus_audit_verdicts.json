@@ -542,5 +542,128 @@
    "it is a photogrammetry scan with a large grass-and-tarmac ground plane baked into the mesh, which is exactly what flattened the height/length ratio",
    "baked lighting, torn mesh edges, no separated glazing"
   ]
+ },
+ {
+  "uid": "80712e63a4234d8c8915c7d6c1ffdfa5",
+  "name": "Lexus CT200h 2010-2022",
+  "verdict": "fail",
+  "reasons": [
+   "full exploded parts kit - every door, bumper, bonnet, glass panel and light is detached and floating around the shell",
+   "three of four wheels also missing"
+  ]
+ },
+ {
+  "uid": "54fd179cb30a414f81eceeb854343bf3",
+  "name": "Lexus GS350 F Sport L10 2013",
+  "verdict": "fail",
+  "reasons": [
+   "per-side wheel void, verified at 4x: the front34 wheel is a featureless BLACK DISC with only a ghost caliper floating in it, while the rear34 wheel shows a full multi-spoke rim with lug nuts and centre cap",
+   "this is the mirrored-wheel/inverted-geometry defect, not the rig's one-sided key",
+   "tyres also render body-silver, and the body carries a mottled patchy texture"
+  ]
+ },
+ {
+  "uid": "0828e94759cb4ff084f8f6781a4f10de",
+  "name": "2002 Lexus LX470",
+  "verdict": "fail",
+  "reasons": [
+   "all four wheels detached and lying on the studio floor beside the car; the car sits on bare hubs",
+   "cov=0.989 FULLCOVERAGE - a respray would repaint the glass too"
+  ]
+ },
+ {
+  "uid": "5b679991354746ff93d988159ba78e5f",
+  "name": "2005 Lexus RX350",
+  "verdict": "fail",
+  "reasons": [
+   "no wheels at all - every arch is empty",
+   "white clay shell: glazing renders opaque body-white with no interior anywhere, cov=0.905 FULLCOVERAGE"
+  ]
+ },
+ {
+  "uid": "60d2d041a7e841769e816a09efc9a9d2",
+  "name": "Lexus",
+  "verdict": "fail",
+  "reasons": [
+   "this is the Minority Report Lexus 2054 film concept, not a road car - no registration decodes to it",
+   "forced through the nameplate filter with --allow-uid because the title was just 'Lexus'; rendering settled it in seconds, which is what that flag is for"
+  ]
+ },
+ {
+  "uid": "af36cb77215446829116e9084c042fe5",
+  "name": "Lexus SC300 MK1 1991-2000",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit - alternative bumpers and spoilers floating on the floor beside the car",
+   "no wheels at all; bare red calipers sit in empty arches"
+  ]
+ },
+ {
+  "uid": "2070ca6185464d8f9dd44a59e674392b",
+  "name": "Lexus SC300 1993",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: glazing renders opaque body-white with no interior visible",
+   "no shut lines, headlamps are flat white patches, grille unresolved",
+   "aftermarket deep-dish BBS-style wheels and a lowered stance"
+  ]
+ },
+ {
+  "uid": "30ab37ea88ef4d4eac4574a068c8c4ea",
+  "name": "Black Spider Lexus",
+  "verdict": "fail",
+  "reasons": [
+   "not a Lexus - a generic fictional sedan carrying a non-Lexus badge",
+   "body materials chaotically split: whole panels render pure black and pure white at random across all four views",
+   "forced through with --allow-uid because the title was ambiguous; the render settled it"
+  ]
+ },
+ {
+  "uid": "844687fb9c84476ea1a2f5ea8c909ed2",
+  "name": "Lexus",
+  "verdict": "pass",
+  "reasons": [
+   "this is a Lexus IS 300h XE30 facelift (IS 300 bootlid badge, HYBRID wing badge) - the most UK-relevant car in the wave, and it was only found because the ambiguous bare-'Lexus' title was forced through with --allow-uid",
+   "TYRE CALL SETTLED with a NATIVE-materials render plus a matched-scale three-way control image: its tyre is plainly black, indistinguishable from the known-good GS350 and nothing like the known-bad grey ES Mk3 in the same picture",
+   "the pale tyre in the silver wave sheet was the worker's paint pick (recolour list is 'carpaint' only)",
+   "all four polished multi-spoke rim faces full; honeycomb spindle grille sharp; headlamp internals resolved; glazing transparent with tinted interior visible; shut lines defined"
+  ]
+ },
+ {
+  "uid": "7b7ad2fd3bb74273b2e4f7befe821d18",
+  "name": "Photoscanned Lexus RX330",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: tarmac ground plane baked into the mesh and visible under the car in every view",
+   "lighting and shadows baked into the texture, panels soft and torn, glass is scan texture not glazing",
+   "cov=1.000 - one material over the whole car"
+  ]
+ },
+ {
+  "uid": "a8c17cf7515d493a9cac60c70763bcfc",
+  "name": "Lexus LFA",
+  "verdict": "fail",
+  "reasons": [
+   "HARD-REJECT before render: 70MB GLB, over the 48MB serving ceiling",
+   "not a quality judgement - it was never rendered"
+  ]
+ },
+ {
+  "uid": "29aaeaf4cf9e43e799fc7f79809db2d7",
+  "name": "2023 Lexus RZ450e",
+  "verdict": "fail",
+  "reasons": [
+   "HARD-REJECT before render: 66MB GLB, over the 48MB serving ceiling",
+   "not a quality judgement - it was never rendered. Worth re-sourcing: RZ is a UK-market model and this wave produced no RZ at all"
+  ]
+ },
+ {
+  "uid": "098b5ef4fa324173be107396cd4d2266",
+  "name": "2023 Lexus RX500h F Sport",
+  "verdict": "fail",
+  "reasons": [
+   "HARD-REJECT before render: 64MB GLB, over the 48MB serving ceiling",
+   "not a quality judgement - it was never rendered. Worth re-sourcing: the current RX is UK-market"
+  ]
  }
 ]
