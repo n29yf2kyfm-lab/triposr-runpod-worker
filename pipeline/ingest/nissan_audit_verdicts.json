@@ -3563,5 +3563,116 @@
       "wheels are bare white hubs with the suspension springs exposed - no tyres mounted",
       "car body is only partially visible; unusable as staged"
     ]
+  },
+  {
+    "uid": "3dd3ec06afc146449425da8e939c94e1",
+    "name": "1993 Nissan Skyline GT-R (R32)",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified in front34 AND rear34: the tyres render solid body-WHITE, tread face included, on all four corners - no black rubber anywhere. Not a whitewall (the whole tyre is white, both 3/4 views agree)",
+      "cov=0.929 FULL COVERAGE - one material covers the model, a respray would repaint the glass too",
+      "headlamps are dark lenses with only faint internals; grille is a plain slatted panel",
+      "glazing itself reads as glass and the rim faces are present"
+    ]
+  },
+  {
+    "uid": "3e958b78f6b84a12918f6569edded4a8",
+    "name": "1993 Nissan 240SX (RPS13)",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: the FRONT wheel renders as a completely featureless BLACK DISC - no rim face, no spokes, no hub - and protrudes beyond the front wing; the rear wheel on the other side shows a full chrome multi-spoke face. Textbook per-side wheel void, not a lighting split",
+      "stray flat RED and GREEN rectangular patches sit on the bonnet in every view - misapplied materials",
+      "glazing reads as glass and the rear rim faces are fine"
+    ]
+  },
+  {
+    "uid": "421f81d9ecd340708a87374b502765cd",
+    "name": "Nissan 180sx",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: speckled/splattered white-grey artefacts scatter across the door and rear quarter panels - broken texture, not a paint finish",
+      "pop-up headlamps render RAISED as crude open blobs with no lamp internals behind them",
+      "aero kit with front lip, side skirts and rear wing; teal-lipped turbine wheels",
+      "glazing reads as real dark glass and the tyres are plainly black rubber"
+    ]
+  },
+  {
+    "uid": "4519f330f0fe42b9ad0eb1cb08c74df3",
+    "name": "Photoscanned Nissan Xterra",
+    "verdict": "fail",
+    "reasons": [
+      "photogrammetry scan (the title says so) - baked lighting and shadows in the texture, soft mushy panels",
+      "the GROUND PLANE is baked into the mesh: a slab of tarmac renders under the car in all four views",
+      "cov=1.000 FULLCOV, single material - no separable body paint, so no recolour is possible",
+      "needs a different class of source, not a re-render"
+    ]
+  },
+  {
+    "uid": "4d048ecf5ceb4ba29d3a05a77505ee52",
+    "name": "1995 Nissan Skyline GT-R Skyline R33 LM",
+    "verdict": "fail",
+    "reasons": [
+      "R33 GT-R LM race/homologation car - full widebody arches, race rear wing, blanked rear side windows; not a road car a UK reg decodes to",
+      "zoom-verified: headlamps are dark faceted shards behind a cover with no coherent lens or reflector",
+      "front splitter and lower bumper render white/silver against the grey body - separate unpainted material (body mats=3, cov=0.398)",
+      "glazing is dark and barely transparent; tyres and blue-lipped rim faces are fine"
+    ]
+  },
+  {
+    "uid": "51eae60217934736887dcf016cde8903",
+    "name": "2013 Rocket Bunny V2 - Nissan S13 240SX / 180SX",
+    "verdict": "fail",
+    "reasons": [
+      "Rocket Bunny V2 widebody kit - riveted bolt-on over-fenders, ducktail wing, splitter with canards and a race diffuser",
+      "coachbuilt kit build, not an OEM variant a UK reg decodes to",
+      "mesh is otherwise clean: glazing reads as glass, tyres black, dark rim faces present"
+    ]
+  },
+  {
+    "uid": "53710f85571049f8ba4e9f397cf2bb7e",
+    "name": "1998 Nissan Silvia K's Aero (S14)",
+    "verdict": "pass",
+    "reasons": [
+      "S14 Kouki Silvia proportions read instantly, front 3/4 strong, four views consistent",
+      "zoom-verified: windscreen fully transparent - dashboard, wipers, mirror and seats visible; side glass tinted glass",
+      "zoom-verified: headlamp projector and reflector internals sharp behind a clear lens; grille mesh present",
+      "zoom-verified: tyres plainly black rubber in both 3/4 views; white 5-spoke rim faces with lug detail present on BOTH sides",
+      "bonnet and door shut lines defined, premium gloss white finish",
+      "K's Aero is a factory Nissan trim package on standard arches - in scope",
+      "NOTE: cov=0.865 over 7 body materials - high but below the 0.90 full-coverage line"
+    ]
+  },
+  {
+    "uid": "603bce543c6944acbc617c8c78c7f824",
+    "name": "2023 Nissan Rogue",
+    "verdict": "fail",
+    "reasons": [
+      "photogrammetry scan - the entire ROOF and greenhouse are missing, the cabin is torn open with ragged edges in all four views",
+      "ground plane baked into the mesh; baked lighting and shadows in the texture",
+      "cov=1.000 FULLCOV, single material"
+    ]
+  },
+  {
+    "uid": "60666625029a461b93d202fe9512a389",
+    "name": "2013 Nissan GT-R Black Edition Coupe",
+    "verdict": "pass",
+    "reasons": [
+      "R35 GT-R proportions read instantly, front 3/4 strong, four views consistent",
+      "zoom-verified: windscreen and side glass transparent with the interior visible",
+      "zoom-verified: headlamp LED strip and projector internals sharp; honeycomb grille mesh with GT-R badge; bonnet vents modelled",
+      "zoom-verified: BLACK RAYS-style rim faces with spokes traceable and red calipers behind, on BOTH sides - the dark rims are lighting-dark, not void; tyres plainly black rubber",
+      "quad round taillamps with internals, rear diffuser and quad exhausts",
+      "bonnet and door shut lines defined, premium gloss finish"
+    ]
+  },
+  {
+    "uid": "68009c7a23e848c5b8f6545793084935",
+    "name": "1997 Nissan Skyline GT-R V-Spec (R33)",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: headlamp geometry is broken - dark angular shards inside the lamp aperture, one jutting forward past the bonnet line, with no coherent lens or reflector",
+      "grille is a plain dark slot; front bumper renders greyer than the body (body mats=4, cov=0.633, MATERIAL SPLIT SUSPECT)",
+      "glazing reads as glass and the silver rim faces and black tyres are fine - the defect is the front end"
+    ]
   }
 ]
