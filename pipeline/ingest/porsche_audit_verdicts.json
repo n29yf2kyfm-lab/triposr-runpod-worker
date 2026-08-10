@@ -836,5 +836,65 @@
    "headlamp internals present, shut lines defined",
    "same source family as the 151,307-face roof-up 718 Spyder - a model-level duplicate the face-count rule will not group"
   ]
+ },
+ {
+  "uid": "e3223ce627e54f8eb4ae7520b0e6c49a",
+  "name": "Porsche Panamera Turbo (PNMI)",
+  "verdict": "pass",
+  "reasons": [
+   "Panamera 970 - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present (silver multi-spoke) in all four views",
+   "headlamp internals present, shut lines defined, paint premium"
+  ]
+ },
+ {
+  "uid": "1ed3cf0eb1cf4842b1132bc0394d1c8a",
+  "name": "Porsche 912",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a derelict car with the GROUND PLANE baked into the mesh (visible as a grey slab under the car in all four views)",
+   "no glass - the windows are scan mush and holes",
+   "baked race number '76' and rust patina in the texture",
+   "scan mush throughout: soft panels, baked lighting"
+  ]
+ },
+ {
+  "uid": "4774f59cbb1146be81cffd795f61a9f6",
+  "name": "2020 Porsche Cayenne Turbo Coupe",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Cayenne Coupe instantly; front 3/4 strong",
+   "tyres READ GREY AT FULL-SHEET SCALE BUT ARE BLACK RUBBER AT 2x against dark grey rims in both 3/4 tiles",
+   "glazing transparent, cabin visible",
+   "rim faces present in all four views",
+   "headlamp internals present, grille slats crisp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "bf9186606d40493fb72274ff40f4269d",
+  "name": "2010 Porsche Panamera Turbo",
+  "verdict": "pass",
+  "reasons": [
+   "Panamera 970 - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 tiles",
+   "glazing transparent, cabin visible",
+   "rim faces present (dark 5-spoke) in all four views",
+   "headlamp internals present, shut lines defined",
+   "note: the GLB is rotated so the front34 tile shows the front - sheet labelling only"
+  ]
+ },
+ {
+  "uid": "14e73d3348d44fabb01ced4aa60c7db6",
+  "name": "2020 Porsche Macan",
+  "verdict": "pass",
+  "reasons": [
+   "Macan 95B facelift - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present (dark 5-spoke) in all four views",
+   "headlamp internals present, grille slats crisp, shut lines defined"
+  ]
  }
 ]
