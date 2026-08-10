@@ -111,9 +111,9 @@
   "name": "Lexus ES (Mk3) 1997",
   "verdict": "fail",
   "reasons": [
-   "tyres render a uniform light-mid grey, clearly lighter than the rim, on the tread face in both 3/4 tiles",
-   "settled with a forced --colour red re-render: on a red body the tyres stayed grey (worker recolour list is carpaint/carpaint_second only), so this is a genuinely grey tyre material, not paint overspill and not the one-sided key light",
-   "same-batch control from the same uploader (GS S130, LS Mk2) renders plainly black in the same rig",
+   "tyres render a uniform light-mid grey, lighter than the rim, on the tread face in both 3/4 tiles",
+   "settled twice: a forced --colour red left the tyres grey on a red body, and a NATIVE-materials render (no recolour) shows the same grey - so it is the model's own tyre material",
+   "same-uploader controls (GS S130, LS Mk2) render plainly black in the same rig",
    "body, glazing and headlamp internals are otherwise good"
   ]
  },
@@ -122,8 +122,9 @@
   "name": "2004 Lexus GS 430",
   "verdict": "fail",
   "reasons": [
-   "per-corner white tyres: front34 shows two WHITE tyres including the tread face, rear34 shows two plainly black ones on the same car",
-   "settled with a forced --colour red re-render: on a red body the front34 tyres stayed WHITE while the rear34 tyres stayed black - the documented per-corner wheel-mesh defect, not a whitewall and not paint overspill",
+   "per-corner white tyres: front34 shows two tyres whose whole face is white, rear34 shows two plainly black ones on the same car",
+   "reproduced in THREE renders - the silver wave sheet, a forced --colour red (tyres stayed white while the body went red, so paint never touched them), and a NATIVE-materials render with no recolour at all",
+   "this is the documented per-corner wheel-mesh defect, not a whitewall and not a render artefact",
    "body, glazing, grille and headlamp internals are otherwise strong"
   ]
  },
@@ -142,9 +143,9 @@
   "name": "Lexus ES (Mk2) 1992",
   "verdict": "fail",
   "reasons": [
-   "tyres render uniform light grey, lighter than the rim, on the tread face in both 3/4 tiles - the same signature as the ES Mk3 from the same uploader, which a red re-render proved is a genuinely grey tyre material",
-   "call rests on the sheet plus the sibling's red re-render, not on a red re-render of this uid itself",
-   "also a duplicate mesh with 1992 Lexus ES 300 (859,828 vs 859,824 faces)"
+   "tyres render a uniform mid-grey with no black rubber anywhere - confirmed with a NATIVE-materials render (no recolour) of the staged GLB, so this is the model's own tyre material, not the worker repainting",
+   "the whole ES XV10 family from this uploader (Mk1/Mk2/ES300) shares the grey tyre; the same uploader's GS S130 and LS Mk2 render plainly black, so it is per-model not per-uploader",
+   "duplicate mesh with 1992 Lexus ES 300 (859,828 vs 859,824 faces)"
   ]
  },
  {
@@ -152,9 +153,8 @@
   "name": "1992 Lexus ES 300",
   "verdict": "fail",
   "reasons": [
-   "per-corner tyre defect: front34 tyres render white, rear34 tyres render dark on the same car",
-   "duplicate of Lexus ES (Mk2) 1992 (859,824 vs 859,828 faces) - the worker picked different body materials on the two sheets, which is why they look different",
-   "call rests on sheet evidence plus the ES Mk3 red re-render on the same uploader's tyre material"
+   "tyres render a uniform mid-grey with no black rubber - confirmed with a NATIVE-materials render of the staged GLB",
+   "duplicate of Lexus ES (Mk2) 1992 (859,824 vs 859,828 faces)"
   ]
  },
  {
@@ -342,6 +342,47 @@
   "reasons": [
    "fictional police-livery conversion: light bar, push bar, rear wing, POLICE graphics baked into the body",
    "not an OEM road car and it cannot be resprayed"
+  ]
+ },
+ {
+  "uid": "e244015ca952458da17f72356a9e6825",
+  "name": "2024 Lexus GX",
+  "verdict": "pass",
+  "reasons": [
+   "TYRE CALL OVERTURNED: the silver wave sheet rendered the whole car including tyres and rims body-white (cov=0.886), but a NATIVE-materials render shows a champagne body with plainly BLACK all-terrain tyres and chrome rims",
+   "the white tyres were the render worker's over-broad body-material pick, exactly the mechanism CLAUDE.md warns about",
+   "glazing transparent with interior visible; grille, headlamps and shut lines sharp",
+   "NOTE GX is not sold in the UK"
+  ]
+ },
+ {
+  "uid": "5a44f422b6bb463c87ce35c8dc8664f2",
+  "name": "2020 Lexus LC",
+  "verdict": "pass",
+  "reasons": [
+   "TYRE CALL OVERTURNED: pale tyres in the silver sheet, but a NATIVE-materials render shows a red car with plainly BLACK tyres and silver rim faces",
+   "stock OEM LC; honeycomb spindle grille sharp, headlamp internals resolved, tan interior visible through genuinely transparent glazing"
+  ]
+ },
+ {
+  "uid": "83d062d1cd144e6a944c7415ef864889",
+  "name": "2011 Lexus LFA",
+  "verdict": "pass",
+  "reasons": [
+   "TYRE CALL OVERTURNED: white tyres on all four corners in the silver sheet, but a NATIVE-materials render shows plainly BLACK tyres with sidewall lettering on grey rims",
+   "stock OEM LFA; mesh grilles, headlamp internals and carbon diffuser all resolved; glazing transparent",
+   "NOTE halo car - a UK registration will essentially never decode to an LFA"
+  ]
+ },
+ {
+  "uid": "f9cc40cc937d42f8bc6ef10c94f6fc73",
+  "name": "Lexus CT200h",
+  "verdict": "fail",
+  "reasons": [
+   "at 6x the rim face and the tyre are one glossy black mass - no traceable spoke arms, lug nuts or centre cap, and no distinguishable tread face",
+   "deep-dish aftermarket-style wheels with almost no tyre sidewall, lowered, with aftermarket side skirts",
+   "mats=0 cov=0.000 means the worker applied NO recolour, so the sheet already is the model's native material state - no re-render needed",
+   "body, grille, headlamps and glazing are otherwise good, which makes this the most painful loss in the wave: CT 200h is the highest-volume Lexus on UK roads"
   ]
  }
 ]
