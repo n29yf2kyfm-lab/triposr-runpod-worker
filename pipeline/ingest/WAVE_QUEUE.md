@@ -15,7 +15,8 @@ is lost.
 | 7 | Kia | swept + rendered 2026-08-08 — 287 swept, 81 candidates, **70 sheets** in `audit/kia`, 18 clean / 52 suspect. **Awaiting the owner's eye review.** |
 | 8 | Toyota | swept + rendered 2026-08-08 — 672 swept, 373 UK nameplates, capped to 168, **158 sheets** in `audit/toyota`, 67 clean / 91 suspect. **Awaiting the owner's eye review.** |
 | 9 | Mercedes-Benz | IN PROGRESS 2026-08-08 — 453 swept, 309 after filtering, capped to 211, rendering to `audit/mercedes` |
-| 10 | — | next marque not yet set |
+| 10 | Renault | PART-DONE 2026-08-10 — 598 swept, 194 candidates, 107 rows after filtering. gpu_wave CIRCUIT-BROKE at row 21/107 on 6 consecutive Sketchfab 429s (shared token pool with the concurrent Nissan/Land Rover/Ford waves). **11 sheets** in `audit/renault`, all 11 eye-audited: 4 pass / 7 fail. Manifest is committed at `pipeline/ingest/renault_sweep_manifest.json` and the wave is resumable — rerun the same gpu_wave command when Sketchfab quota recovers; it re-checks the bucket and skips the 11 done. |
+| 11 | — | next marque not yet set |
 
 ## Mercedes: a marque that names half its range by engine size (2026-08-08)
 
@@ -188,3 +189,32 @@ corrupt the review it exists to serve.
   at 0 on 2026-08-06 with the other endpoints healthy, so it was a stale
   leftover rather than the low-balance guard. A 409 on the first submit after
   restore is normal settling; retry.
+
+## Renault: bare-number nameplates collide with everything (2026-08-10)
+
+Renault names a third of its historic range with bare numbers (4, 5, 8, 11, 12,
+16, 18, 19, 21, 25), which is the numeric-collision trap CLAUDE.md already
+records for "Peugeot 307 2008". Measured on this sweep, the damage is real but
+not where it was expected:
+
+- Years are SAFE. `\b` anchoring means `\b5\b` does not match inside "1984", and
+  `\b4\b` does not match inside "4x4". No year was ever mislabelled as a plate.
+- **Model designations are NOT safe.** The bare token `17` matched **seven WW1
+  Renault FT-17 tanks**; `18` matched the `R.S.18` F1 car; `25` matched the 2005
+  `R25` F1 chassis. All nine reached the manifest with a valid-looking plate and
+  would have been downloaded and rendered. They are removed by an explicit
+  out-of-scope pass, not by the nameplate filter.
+- Renault is exceptionally dense in F1/racing uploads (R23, R24, R26, R28, R29,
+  R202, RE40, RS19, A442) and in trucks/tanks/tractors (Magnum, Premium, Saviem,
+  FT-17, AMC 35). Most are caught by `no-nameplate`; only the numeric ones slip.
+
+**Two genuine cars were lost to token spelling and recovered by hand:**
+- `4L` — the Renault 4 is almost always titled "Renault 4L", and `\b4\b` cannot
+  match `4l`. **Six** rows were being dropped as no-nameplate. Add "4L".
+- `Megan-E Tech` — a misspelt Mégane E-Tech normalises to `megan e`, which
+  `\bmegane\b` cannot match. Add "Megan".
+- `Renault Master2017` — digits glued straight onto the nameplate defeat `\b`
+  entirely. No token fixes this class; it needs `--allow-uid`.
+
+The `\s*` hyphen fix from the Honda wave works here as expected (A110/A-110,
+R5/R-5 both match).
