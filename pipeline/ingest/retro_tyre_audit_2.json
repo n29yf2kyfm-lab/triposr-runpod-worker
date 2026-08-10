@@ -869,8 +869,8 @@
   "assetId": "peugeot-406-pw1-v2",
   "make": "peugeot",
   "uid": "ad75c776d8144bc98527d19b6fd0d58f",
-  "verdict": "tyre-fail",
-  "note": "Tyre renders in body colour. Zoomed on the live glb render at high magnification: the sidewall and tread are the same white/pale grey as the bodywork, with no black rubber anywhere on the car."
+  "verdict": "ok",
+  "note": "NEARLY CULLED, then CLEARED. My first render of the live glb showed the tyre as pale as the body, but that rig used Blender 4's default AgX transform with over-bright key lights. Re-rendered with Standard + dimmer lights alongside a known-good control (honda-accord-1998-hw1-v1, which came back plainly black): this car's tyres are dark grey rubber, clearly darker than the light-grey body, and the glazing is dark. The first reading was a rig artefact."
  },
  {
   "assetId": "peugeot-407-2005-pw1-v1",

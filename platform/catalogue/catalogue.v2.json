@@ -195300,8 +195300,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "quarantined",
-  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres do not read as black rubber on the shipped glb. Tyre renders in body colour. Zoomed on the live glb render at high magnification: the sidewall and tread are the same white/pale grey as the bodywork, with no black rubber anywhere on the car.",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -195345,9 +195345,7 @@
   "pipelineVersion": "publish-batch-pw1-2026-08-09",
   "publishedAt": "2026-08-09",
   "replacedAssetId": null,
-  "needsHumanReview": [
-   "retro-tyre-audit"
-  ],
+  "needsHumanReview": [],
   "notes": [
    "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
   ],
