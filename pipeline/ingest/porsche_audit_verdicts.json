@@ -668,5 +668,92 @@
    "three of the four wheels are absent - bare hubs only; a detached wheel lies flat on the floor under the car in the side view",
    "incomplete assembly, identical at all four azimuths"
   ]
+ },
+ {
+  "uid": "259b0294bc254b1f85defaf5ea5bc34c",
+  "name": "Porsche Taycan",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Taycan instantly; front 3/4 strong",
+   "tyres READ WHITE AT FULL-SHEET SCALE BUT ARE BLACK RUBBER AT 2x in both 3/4 tiles",
+   "glazing transparent, cabin visible",
+   "rim faces present (5-spoke) in all four views",
+   "headlamp internals present, shut lines defined; front bumper detail slightly soft but acceptable"
+  ]
+ },
+ {
+  "uid": "05d7951204e84686ba12625c66d7a8b7",
+  "name": "Porsche Taycan Turbo S (Project Cars 3)",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: game rip - title names Project Cars 3 and the number plate texture reads 'P CARS 3'"
+  ]
+ },
+ {
+  "uid": "979eca0308774e659bad73b0e0a93b6e",
+  "name": "2015 Porsche 918 Spyder Weissach Package 3",
+  "verdict": "fail",
+  "reasons": [
+   "baked race-number '3' roundels on both doors and the bonnet - a livery in the texture that survives any respray",
+   "geometry and materials otherwise good; three unliveried copies of the same 918 passed in this wave"
+  ]
+ },
+ {
+  "uid": "09c6832d4e4447c8b3992d7c51adbd8c",
+  "name": "2009 Porsche Cayenne Turbo S",
+  "verdict": "pass",
+  "reasons": [
+   "Cayenne 957 Turbo S - proportions read instantly; front 3/4 strong",
+   "tyres READ WHITE AT FULL-SHEET SCALE BUT ARE BLACK RUBBER AT 2x against white rims in both 3/4 tiles",
+   "glazing transparent, cabin visible",
+   "rim faces present in all four views",
+   "headlamp internals present, grille slats crisp, shut lines defined",
+   "note: the GLB is rotated so the 'side' tile shows the rear - sheet labelling only, the car is upright and complete"
+  ]
+ },
+ {
+  "uid": "21274069c8274fdfb28992f697134632",
+  "name": "Porsche Cayenne MK1 2002-2010",
+  "verdict": "fail",
+  "reasons": [
+   "glazing opaque body-white in all four views - no cabin visible anywhere (owner ruling 2026-08-09, outright fail)",
+   "headlamps are blank white blanks, grille is undetailed white mesh",
+   "reads as an unfinished clay body on wheels; tyres and rim faces themselves are fine"
+  ]
+ },
+ {
+  "uid": "90d32f48d4964bc9b5a9df88fcc3aa3d",
+  "name": "Porsche Carrara GT",
+  "verdict": "pass",
+  "reasons": [
+   "Carrera GT road car (title misspells it 'Carrara') - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin and roll hoops visible through the screen",
+   "rim faces present (5-spoke) in all four views",
+   "headlamp internals present, shut lines defined, paint premium",
+   "recovered by the nameplate fix: the typo 'Carrara GT' would otherwise have been dropped as no-nameplate"
+  ]
+ },
+ {
+  "uid": "7765513274d2486d882f755794fefc89",
+  "name": "1988 Porsche 959 Bruce Canepa Upgrade",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: Canepa 959SC restomod - a rebuilder conversion of the same class as Singer/Gemballa, not the factory car",
+   "headlamps are flat white discs with no internal detail",
+   "tyres, glazing and rim faces are fine"
+  ]
+ },
+ {
+  "uid": "ca1040479c9843558c50b8f0ae75f640",
+  "name": "2015 Mark Webber Porsche 918 Spyder",
+  "verdict": "pass",
+  "reasons": [
+   "918 Spyder Weissach, roof off - 'Mark Webber' names a previous owner, not a modification; proportions read instantly",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present in all four views",
+   "headlamp internals present, exhausts/louvres/shut lines defined, paint premium"
+  ]
  }
 ]
