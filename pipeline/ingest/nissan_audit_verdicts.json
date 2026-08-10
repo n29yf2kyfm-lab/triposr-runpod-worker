@@ -2231,5 +2231,108 @@
    "wheels absent apart from one stray teal disc",
    "no glass, no panels, no lighting geometry"
   ]
+ },
+ {
+  "uid": "bd4773760fb144d8aa0176dc7388df05",
+  "name": "Nissan_ Rogue",
+  "verdict": "fail",
+  "reasons": [
+   "panel surfacing crumpled: doors, front wing and rear quarter carry wavy dents and irregular creased seams, clear at 3x",
+   "door and bonnet shut lines are ragged rather than defined",
+   "headlamps are dark blobs with no internal elements",
+   "glazing is genuine glass (interior visible through the rear screen) - the failure is bodywork, not glass"
+  ]
+ },
+ {
+  "uid": "bec91e12dc924c19988dad5a73b9e050",
+  "name": "1995 Nissan Skyline GT-R R34 LB Silhouette",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Liberty Walk Silhouette widebody kit, title says so outright",
+   "riveted over-fenders, GT wing on uprights, full-width front splitter and rear diffuser"
+  ]
+ },
+ {
+  "uid": "c0b36c1dc2b345418c3c190c5be7a359",
+  "name": "NISSAN 370Z (NISMO)",
+  "verdict": "pass",
+  "reasons": [
+   "OEM 370Z Nismo trim - in scope; proportions read instantly, front 3/4 strong",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; multi-spoke rim faces present on BOTH sides with red calipers",
+   "409,677 faces - grille, headlight internals and shut lines all sharp",
+   "novelty 'TEKICK' plate is cosmetic only"
+  ]
+ },
+ {
+  "uid": "c13c252fe1204eb7be06afc703c3e678",
+  "name": "Nissan GTR Liberty Walk 2019",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Liberty Walk widebody kit, title says so outright",
+   "riveted over-fenders, ducktail wing, air-ride stance, deep-dish wheels"
+  ]
+ },
+ {
+  "uid": "c34d0e2b783d44f28c49f86c9f341ac3",
+  "name": "Nissan Primera (P11) 1995-2002",
+  "verdict": "fail",
+  "reasons": [
+   "mesh destroyed: the body is a dark melted blob with slab-like fragments, no recognisable Primera shape in any view",
+   "wheels absent apart from one stray teal disc",
+   "mats=0 cov=0.000 - no body-paint material found at all"
+  ]
+ },
+ {
+  "uid": "c557cfd85b424776ac681240ccbc0a30",
+  "name": "Nissan GTR + pop up headlights",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: cov=1.000 FULLCOV, the greenhouse is solid body-white with no glass at all",
+   "tyres also render body-white - no black rubber on any wheel",
+   "out-of-scope anyway: widebody arches, oversized rear wing and a non-OEM pop-up headlight conversion"
+  ]
+ },
+ {
+  "uid": "c63aba9bcfec4c768729fa4cb64ddf47",
+  "name": "Nissan Maxima Drift Car",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a die-cast toy sitting on a cardboard box, with the box baked into the mesh",
+   "ragged torn scan boundaries all round, cov=1.000 FULLCOV",
+   "also out-of-scope: a liveried drift car (Motul #68)"
+  ]
+ },
+ {
+  "uid": "c738d08ab693497f853a94facfa25fd8",
+  "name": "1976 Nissan (Datsun) Skyline",
+  "verdict": "pass",
+  "reasons": [
+   "Kenmeri Skyline proportions read instantly, front 3/4 strong",
+   "glazing verified at 3x: genuine dark tinted glass, not an opaque panel - my first read from the contact view was wrong",
+   "tyres plainly black rubber; rim faces present on BOTH sides",
+   "door shut line, handle and quarter-light frame all defined at 3x; panel surfacing is smooth and glossy, not faceted",
+   "chrome-bezelled tail lamps with red lens internals, SKYLINE badge crisp"
+  ]
+ },
+ {
+  "uid": "c74d1e8ccc3747d19032abdaf656cbc4",
+  "name": "Nissan-skyline-gtr-r34-hot-wheels",
+  "verdict": "fail",
+  "reasons": [
+   "two separate car bodies plus loose bumpers and wings floating in the same scene - a parts/variant kit, not one car",
+   "clay: cov=1.000 FULLCOV, glazing opaque body-white",
+   "no wheels or tyres, arches are empty"
+  ]
+ },
+ {
+  "uid": "c76e1a41c3d64579944222cb3af129f1",
+  "name": "Open Z V16 Nissan Silvia S15 2005  Wheelbase",
+  "verdict": "fail",
+  "reasons": [
+   "body shell only: no wheels or tyres, the arches are empty mirror-like voids in all four views",
+   "glazing renders opaque body-white, cov=1.000 FULLCOV",
+   "it is a wheelbase reference shell, not a finished car"
+  ]
  }
 ]
