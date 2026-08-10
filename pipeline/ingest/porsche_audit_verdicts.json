@@ -559,5 +559,114 @@
    "clay shell: cov=0.969, windows opaque body-white, tyres body-white",
    "byte-for-byte the same model as jw_porsche_991.2_gt2_rs_ca (268,047 vs 268,207 faces) - a regional re-upload"
   ]
+ },
+ {
+  "uid": "fccbe0a4f6884deda7cde7f94f06b618",
+  "name": "2024 Porsche 718 Spyder RS",
+  "verdict": "fail",
+  "reasons": [
+   "baked pink/red contrast stripe over the bonnet plus pink mirror caps and roll hoops - a non-body-colour graphic that survives a respray, so every colour variant would ship wearing it",
+   "geometry, tyres, glazing and rims are all fine - this is purely the baked stripe",
+   "a clean, unstriped and higher-detail copy of the same car passed (2c4a64ebf4ba4da29b119f6e3ac7b1fa, 269,513 f)"
+  ]
+ },
+ {
+  "uid": "9fb9a088d0704a06ba69a8a6de100f10",
+  "name": "Porsche 918 Spyder 2015 | www.vecarz.com",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as 918 Spyder instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present with acid-green calipers in all four views",
+   "headlamps DO carry internal four-point LED detail (unlike the other 918 in this wave, which had none)",
+   "engine cover louvres, top exhausts and shut lines all defined; paint premium"
+  ]
+ },
+ {
+  "uid": "039b4078a1a440f8afaebcaafccf8bce",
+  "name": "2015_Porsche_918_Spyder",
+  "verdict": "pass",
+  "reasons": [
+   "same mesh as 'Porsche 918 Spyder 2015 | www.vecarz.com' (259,369 vs 259,671 faces) - a re-upload; identical quality",
+   "tyres black rubber, glazing transparent, rim faces present, headlamp internals present",
+   "duplicate: dupe_check keeps the higher face count"
+  ]
+ },
+ {
+  "uid": "b8d069b411804e43bccccd2e9e6fc1e7",
+  "name": "Porsche 918 Spyder 2015",
+  "verdict": "pass",
+  "reasons": [
+   "third copy of the same 918 mesh (259,250 f); identical quality",
+   "tyres black rubber, glazing transparent, rim faces present, headlamp internals present",
+   "duplicate: dupe_check keeps the higher face count"
+  ]
+ },
+ {
+  "uid": "74ebbd6423154e879e43dd2e1df7cdd1",
+  "name": "Porsche_911992_gt3_rs",
+  "verdict": "pass",
+  "reasons": [
+   "992 GT3 RS road car - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 tiles",
+   "glazing transparent, cabin visible",
+   "rim faces present with yellow calipers in all four views",
+   "headlamps looked blank at full-sheet scale but at 2x carry a dark lens with visible internal blade elements - corrected on zoom",
+   "NACA duct, side blade, swan-neck wing and shut lines all defined"
+  ]
+ },
+ {
+  "uid": "74fbea5a4dfc4197839fdd2bf654369a",
+  "name": "2022 Porsche Cayenne Turbo GT",
+  "verdict": "fail",
+  "reasons": [
+   "baked gold 'PORSCHE' side decal running the length of both flanks - a non-body-colour graphic that survives a respray, so every colour variant ships wearing it",
+   "geometry, tyres, glazing, rims and headlamp internals are all fine - purely the baked decal",
+   "clean Cayennes of the same generation passed in this wave"
+  ]
+ },
+ {
+  "uid": "f0270f8ae1db4d7b909417e07492043a",
+  "name": "2022 Porsche Macan",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Macan 95B facelift instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present in all four views",
+   "headlamp internals present, grille slats crisp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "85b8461d931f45be8fd1bc1481ad00fe",
+  "name": "gbe_porsche_991_turbo_s",
+  "verdict": "fail",
+  "reasons": [
+   "glazing opaque body-white in all four views - no cabin visible anywhere (owner ruling 2026-08-09, outright fail)",
+   "headlamps are blank white blobs with no internal detail",
+   "tyres and rim faces are fine"
+  ]
+ },
+ {
+  "uid": "f2269fdf74f64257a3a9b0872eb9b2d8",
+  "name": "2021 Porsche Panamera Turbo S Sport Turismo",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Panamera Sport Turismo instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present with yellow calipers in all four views",
+   "headlamp internals present, grille slats crisp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "a82d57c486e147b4a2f6d7ece24ca60c",
+  "name": "Porsche Cayenne MK1 2002-2010",
+  "verdict": "fail",
+  "reasons": [
+   "three of the four wheels are absent - bare hubs only; a detached wheel lies flat on the floor under the car in the side view",
+   "incomplete assembly, identical at all four azimuths"
+  ]
  }
 ]
