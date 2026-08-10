@@ -1,50 +1,92 @@
 [
  {
+  "drop_uid": "02bf64f140e84c2480f9df427b9c975b",
+  "name": "2002_ Nissan_ Skyline_GT-R_R34_V- Spec_II",
+  "faces": 86043,
+  "keep_uid": "385220e90764403daaa1823296d40b54",
+  "keep_name": "1999 Nissan Skyline GT-R V-Spec II (R34)",
+  "keep_faces": 86583,
+  "reason": "duplicate mesh (rule A): title token overlap 0.88 ignoring 'nissan', face counts 86,043 vs 86,583 (540 apart, 0.62%); keeping the higher face count"
+ },
+ {
+  "drop_uid": "24785fec41554a57a19dbba0712bbf16",
+  "name": "2007 Nissan Altima",
+  "faces": 74798,
+  "keep_uid": "23e9e431526048f8869b5ff9937b129d",
+  "keep_name": "2007 Nissan Altima 2.5 SE",
+  "keep_faces": 74816,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'nissan', face counts 74,798 vs 74,816 (18 apart, 0.02%); keeping the higher face count"
+ },
+ {
   "drop_uid": "74de3cda4e0c4d3eb493ea1ebc7c72e4",
   "name": "2020 Nissan Sentra Sylphy",
   "faces": 132776,
-  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+  "keep_uid": "74d274c8ad8e49c1b882dca3a199383d",
+  "keep_name": "2020_nissan_sentra_sylphy_remix",
+  "keep_faces": 132773,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'nissan', face counts 132,776 vs 132,773 (3 apart, 0.00%); keeping the higher face count"
  },
  {
   "drop_uid": "825a4086e6454c54a0e956e04fd9d121",
   "name": "1999_nissan_skyline_r34_gt-r_top_secret_bnr34",
   "faces": 531622,
-  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+  "keep_uid": "12ba36fc5f6643a1ba8617763a2d9d93",
+  "keep_name": "1999 Nissan Skyline R34 GT-R Top Secret BNR34",
+  "keep_faces": 532358,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'nissan', face counts 531,622 vs 532,358 (736 apart, 0.14%); keeping the higher face count"
  },
  {
   "drop_uid": "a90de78e5d0e41c8975b284773254a0e",
   "name": "Nissan GT-R (R35) Facelift",
   "faces": 183082,
-  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+  "keep_uid": "341010423e1e455db4da893c052d1cc6",
+  "keep_name": "2017 Nissan GT-R (R35)",
+  "keep_faces": 183458,
+  "reason": "duplicate mesh (rule A): title token overlap 0.75 ignoring 'nissan', face counts 183,082 vs 183,458 (376 apart, 0.20%); keeping the higher face count"
  },
  {
   "drop_uid": "b9b5c6a2cae24f9fb998bf773bf777af",
   "name": "Nissan_gtr_r34_skyline__gt-r_skyline",
   "faces": 412494,
-  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+  "keep_uid": "5eed440cfd094c5a8fdc9929eb43ab02",
+  "keep_name": "Nissan GTR R34 Skyline | GT-R Skyline",
+  "keep_faces": 412770,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'nissan', face counts 412,494 vs 412,770 (276 apart, 0.07%); keeping the higher face count"
  },
  {
   "drop_uid": "d40f2da7ee334d3296b00d5cf645e542",
   "name": "2005_nismo_nissan_skyline_r34_gtr_z_tune",
   "faces": 507056,
-  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+  "keep_uid": "6a0e311f8c404fbaad783ed587014c1d",
+  "keep_name": "2005 Nismo Nissan Skyline R34 GTR Z Tune",
+  "keep_faces": 508685,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'nissan', face counts 507,056 vs 508,685 (1,629 apart, 0.32%); keeping the higher face count"
  },
  {
   "drop_uid": "df382b4b271a4081b45b5f1f860513e2",
   "name": "2017 Nissan GTR Nismo R35 N Attack Package",
   "faces": 189842,
-  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+  "keep_uid": "7cd3306866984e44979cb9b12e340c12",
+  "keep_name": "2017 Nissan GT-R Nismo (R35) N-Attack Package",
+  "keep_faces": 190898,
+  "reason": "duplicate mesh (rule A): title token overlap 0.86 ignoring 'nissan', face counts 189,842 vs 190,898 (1,056 apart, 0.55%); keeping the higher face count"
  },
  {
   "drop_uid": "f4d7ad8b4d944a8cb472886e60b12e78",
   "name": "1999 Nissan Skyline R34 GT-R C-West N - Type II",
   "faces": 235179,
-  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+  "keep_uid": "2d9efbcc8b4a418ebb369e1aaf7115f9",
+  "keep_name": "1999_nissan_skyline_r34_gt-r_c-west_n_-_type_ii",
+  "keep_faces": 234271,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'nissan', face counts 235,179 vs 234,271 (908 apart, 0.39%); keeping the higher face count"
  },
  {
   "drop_uid": "f863fe03fb4b48a58291935c2f0de7b9",
   "name": "2002 Nissan Skyline GTR R34 Fast and Furious",
   "faces": 233067,
-  "reason": "duplicate mesh: title matches a sibling pass and face count within 0.55%"
+  "keep_uid": "5445e2af8883453395266e38a42e4bd7",
+  "keep_name": "2002_nissan_skyline_gtr_r34_fast_and_furious",
+  "keep_faces": 233047,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'nissan', face counts 233,067 vs 233,047 (20 apart, 0.01%); keeping the higher face count"
  }
 ]
