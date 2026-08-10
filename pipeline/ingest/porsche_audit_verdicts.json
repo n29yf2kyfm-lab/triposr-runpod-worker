@@ -1,0 +1,145 @@
+[
+ {
+  "uid": "5af3468b064345b987e295aa7aeaeca7",
+  "name": "Lifted Black 2008 Porsche Cayenne S",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: lifted off-road conversion - roof rack, steel wheels, knobbly all-terrain tyres, raised ride height",
+   "panel surfacing rippled: bonnet and door reflections wobble, shut lines undefined",
+   "glazing reads as opaque reflective panel rather than glass"
+  ]
+ },
+ {
+  "uid": "e85725e652ff464bb4b71e760387daf2",
+  "name": "Porsche 959",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as 959 instantly; front 3/4 strong",
+   "tyres read as black rubber - tread face confirmed at 2x in front34 and rear34",
+   "glazing transparent, interior visible through side glass",
+   "rim faces present with 5-spoke detail in all four views",
+   "headlamp internals soft (blank covers) - marginal but below the fail bar for a 959's flush lamp covers"
+  ]
+ },
+ {
+  "uid": "bdc888633910404db4fa58e694c5ee39",
+  "name": "Porsche Cayenne (Mk3)(958)S Hybrid 2010",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Cayenne 958 instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present all four views, no voids",
+   "headlamps carry internal bezel/element detail; grille slats and shut lines defined"
+  ]
+ },
+ {
+  "uid": "5868449370ee4a498642737dbaa397ca",
+  "name": "Porsche Panamera S",
+  "verdict": "fail",
+  "reasons": [
+   "whole body renders as transparent glass - no body-paint material anywhere (mats=0 cov=0.000 corroborates the sheet)",
+   "car reads as a glass sculpture, not a car"
+  ]
+ },
+ {
+  "uid": "8b96f6a0aca3444aada943f349ae36f0",
+  "name": "2010 Porsche Panamera Turbo",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Panamera 970 instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 tiles",
+   "glazing transparent, cabin and seats visible",
+   "rim faces present with red calipers in all views",
+   "headlamp internals present, shut lines defined"
+  ]
+ },
+ {
+  "uid": "6c8fe385b7d047a0a3290521a5c84bf9",
+  "name": "Porsche Panamera 4S",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: every material one white value - windows opaque body-colour, tyres body-white, cov=1.000",
+   "glazing fails owner ruling 2026-08-09 outright",
+   "tyres fail the black-rubber ruling: whole tyre incl. tread in body colour"
+  ]
+ },
+ {
+  "uid": "b7743e211e62474180321b3085e646aa",
+  "name": "Porsche Taycan GTS 2022",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: cov=1.000 single material, windows opaque body-colour, tyres body-white",
+   "glazing and tyre rulings both fail"
+  ]
+ },
+ {
+  "uid": "63f621b49ebb4dae9ae3d1bb0d0d7b2b",
+  "name": "Porsche GT2RS",
+  "verdict": "fail",
+  "reasons": [
+   "dark void at the front wheel arch in front34, front34_L and rear34 - fender/arch geometry missing",
+   "headlamps are blank pale blobs with no internal element detail",
+   "mongrel bodykit: GT2RS aero grafted on a 991 Turbo shell, panel creases inconsistent between views",
+   "tyres and rims themselves are fine (verified at 2x)"
+  ]
+ },
+ {
+  "uid": "52b99c5d079b42ac88c493a7311b0edf",
+  "name": "Porsche 928 Tribute",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: fictional 'tribute' concept redesign, not a production 928",
+   "clay shell: cov=1.000 single material, windows opaque body-colour, tyres body-white"
+  ]
+ },
+ {
+  "uid": "9b2ebe52991945fbbfc649977ff4bf71",
+  "name": "1995 Porsche 993 Clubsport",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as 993 instantly; front 3/4 strong",
+   "tyres plainly black rubber - tread face confirmed at 2x in front34",
+   "glazing transparent, roll cage and seats visible through side glass",
+   "rim faces present (5-spoke) in all four views",
+   "headlamp internals soft (pale lens with only a faint inner crescent) - the weakest point, but panel work and shut lines are clean"
+  ]
+ },
+ {
+  "uid": "f6ff3cf25dcd404bb1e72a91fefe4ea1",
+  "name": "Porsche Panamera",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit: glass panels and the dash/interior assembly float above the body in all four views",
+   "no tyres at all - bare hubs and brake discs only"
+  ]
+ },
+ {
+  "uid": "c38bd2f6c4ec4641a92f479856e25b9c",
+  "name": "porsche_991_992_turbo_s",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: game rip - number plate texture reads 'ASSETTO CORSA'",
+   "tyres render white/body-colour on all four corners, tread face included (sheet evidence; the game-rip ground is independent and decisive)"
+  ]
+ },
+ {
+  "uid": "18af78433a4b4e9cadc0b7bf826c9250",
+  "name": "Porsche 356 Coupe 1948",
+  "verdict": "fail",
+  "reasons": [
+   "tyres are flat mid-grey, the same value as the steel rim, tread face included - checked at 2x in BOTH front34 and rear34, so this is not the profile-view whitewall false positive",
+   "not a period whitewall: a whitewall is a white sidewall ring with a black tread; here the tread itself is grey",
+   "everything else is strong - proportions, glazing, panel work; a re-source of the 356 is worth it"
+  ]
+ },
+ {
+  "uid": "b7ce21c6fc90450aa478d45a2bffabe9",
+  "name": "Porsche 997 Body",
+  "verdict": "fail",
+  "reasons": [
+   "body shell only: no wheels, no tyres, no glass, no interior",
+   "unpainted primer/masking colours baked into the shell"
+  ]
+ }
+]
