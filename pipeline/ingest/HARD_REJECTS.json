@@ -12,6 +12,12 @@
   "at": "2026-08-09"
  },
  {
+  "uid": "04b1bede9039489eb7a8695e33e9e35a",
+  "name": "Hyundai Pony1 Taxi",
+  "reason": "too big 86MB",
+  "at": "2026-08-10"
+ },
+ {
   "uid": "0b7376fb3be548509f4a5383f61436b5",
   "name": "Presentation R4CV+ CitroenMini-2026",
   "reason": "too big 68MB",
@@ -166,6 +172,18 @@
   "name": "Nissan Leaf Nismo ZE0",
   "reason": "too big 65MB",
   "at": "2026-08-09"
+ },
+ {
+  "uid": "d499b10731194ae0b122a76e099eb2b5",
+  "name": "Hyundai Staria",
+  "reason": "too big 82MB",
+  "at": "2026-08-10"
+ },
+ {
+  "uid": "e16c8ca01be54f39b1667fad85efb1c7",
+  "name": "Hyundai i40 Sedan/Combi 2011-2019",
+  "reason": "too big 52MB",
+  "at": "2026-08-10"
  },
  {
   "uid": "e1faaf38287b45f79a5af94a790ad343",
