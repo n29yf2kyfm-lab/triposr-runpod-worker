@@ -405,5 +405,159 @@
    "rim faces present (centre-lock multi-spoke, red calipers) in all four views",
    "headlamp internals present, aero ducts and shut lines crisp, carbon bonnet reads correctly, paint premium"
   ]
+ },
+ {
+  "uid": "55812eca4ef644869a18c0ecb2ebd217",
+  "name": "Porsche GT2RS MR",
+  "verdict": "fail",
+  "reasons": [
+   "glazing opaque body-grey in all four views - no glass material",
+   "tyres body-grey, tread face included",
+   "jagged serrated geometry artefact along the roofline in rear34 - broken mesh",
+   "out of scope: Manthey Racing (MR) track kit"
+  ]
+ },
+ {
+  "uid": "04da6cda1fc94ba89df200ddcef34a1e",
+  "name": "Porsche Cayenne 2023-2025",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit: glass panels, arch liners and body panels float detached above the car in all four views",
+   "wheels mostly absent - bare hubs and discs"
+  ]
+ },
+ {
+  "uid": "aeb0c687b1f842339519d0382c86a8e1",
+  "name": "Porsche Cayenne 2007-2010",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit: glass panels float above the body in all four views, bull bar detached",
+   "no tyres - bare hubs only"
+  ]
+ },
+ {
+  "uid": "ea84239905374e388081c2272192a254",
+  "name": "Porsche TURBO S T",
+  "verdict": "fail",
+  "reasons": [
+   "per-side wheel void: front34 and side wheels are featureless black discs, front34_L and rear34 show full white multi-spoke rim faces - the documented mirrored-wheel defect",
+   "glazing opaque, headlamps blank, panel surfacing soft",
+   "same source car and same defect as 'Porsche TURBO S 17D' - defects track the source car, not the upload"
+  ]
+ },
+ {
+  "uid": "a73a71d4c7464c18886ed5f3d86ac288",
+  "name": "Porsche Panamera MK2 (971) 2016-2023",
+  "verdict": "fail",
+  "reasons": [
+   "three of the four wheels are absent - bare hubs and brake discs; the car rests on one wheel in every view",
+   "incomplete assembly, present identically at all four azimuths"
+  ]
+ },
+ {
+  "uid": "adb268fb15c84d15b252777dc5da357c",
+  "name": "Porsche TURBO S 17",
+  "verdict": "fail",
+  "reasons": [
+   "per-side wheel void: front34 and side wheels are featureless black discs, front34_L and rear34 show full white multi-spoke rim faces",
+   "glazing opaque, headlamps blank, surfacing soft",
+   "third upload of the same Cayenne 955 Turbo S source, same defect"
+  ]
+ },
+ {
+  "uid": "efa5a8bf098e42fc9bd357b034c7f689",
+  "name": "Porsche TURBO S",
+  "verdict": "fail",
+  "reasons": [
+   "per-side wheel void: front34 and side wheels are featureless black discs, front34_L and rear34 show full rim faces",
+   "glazing opaque, headlamps blank",
+   "fourth upload of the same Cayenne 955 Turbo S source, same defect"
+  ]
+ },
+ {
+  "uid": "678ed0b096bd4b99839888eef6075666",
+  "name": "1987 Porsche 959",
+  "verdict": "pass",
+  "reasons": [
+   "COLOURED-BODY CONTROL (evidence hierarchy #3): the worker found no body-paint material (mats=0) so the car rendered its OWN red - on a red car a body-painted tyre would be red, and the tyres are plainly dark grey/black. Tyres pass with no brightness argument needed",
+   "proportions read as 959 instantly; front 3/4 strong",
+   "glazing transparent, cabin visible",
+   "rim faces present (5-spoke) in all four views",
+   "panel work clean, shut lines defined, paint premium",
+   "headlamp internals soft (pale lens behind a smooth cover) - the weakest point"
+  ]
+ },
+ {
+  "uid": "5433998282ad48e896de5fe409999833",
+  "name": "Porsche Gt2 Rs S",
+  "verdict": "fail",
+  "reasons": [
+   "rear wheels absent - empty arches with a floating brake disc in all four views",
+   "clay shell: cov=0.905, opaque windows, body-white tyres on the fitted fronts"
+  ]
+ },
+ {
+  "uid": "a4045a52962f4301b34a839b9c4ed9b9",
+  "name": "Porsche Panamera",
+  "verdict": "pass",
+  "reasons": [
+   "Panamera 970.2 - proportions read instantly; front 3/4 strong",
+   "tyres READ PALE AT FULL-SHEET SCALE BUT ARE BLACK RUBBER AT 2x in both 3/4 tiles against white rims",
+   "glazing transparent, cabin visible",
+   "rim faces present in all four views",
+   "headlamp internals present, grille slats crisp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "4e1abafe7cf5413587a421377624ba08",
+  "name": "2025 Porsche Taycan Turbo GT Weissach Package",
+  "verdict": "pass",
+  "reasons": [
+   "factory Weissach Package road car (in scope) - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present with gold calipers in all four views",
+   "headlamp internals present, shut lines defined, paint premium"
+  ]
+ },
+ {
+  "uid": "fed65064ba70464898b83c45af8d3bef",
+  "name": "Vintage Red Porsche 356 Model",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a die-cast TOY - chipped paint and baked lighting in the texture, soft scan mush throughout",
+   "no glass: the windows are scan texture, opaque and painted-looking",
+   "panel surfaces melted, no shut lines"
+  ]
+ },
+ {
+  "uid": "2c4a64ebf4ba4da29b119f6e3ac7b1fa",
+  "name": "2024 Porsche 718 Spyder RS",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as 718 Spyder RS instantly; front 3/4 strong",
+   "tyres black rubber, tread face darker than the rim in both 3/4 tiles",
+   "glazing transparent, cabin visible through the screen",
+   "rim faces present in all four views",
+   "headlamp internals present, intakes/side blades/shut lines crisp, paint premium"
+  ]
+ },
+ {
+  "uid": "05873bc642e0477390823475458dbe92",
+  "name": "jw_porsche_991.2_gt2_rs_ca",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: cov=0.968, windows opaque body-white, tyres body-white",
+   "glazing and tyre rulings both fail"
+  ]
+ },
+ {
+  "uid": "f8ea83a688b045349ed9dde39a9168cf",
+  "name": "jw_porsche_991.2_gt2_rs_us",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: cov=0.969, windows opaque body-white, tyres body-white",
+   "byte-for-byte the same model as jw_porsche_991.2_gt2_rs_ca (268,047 vs 268,207 faces) - a regional re-upload"
+  ]
  }
 ]
