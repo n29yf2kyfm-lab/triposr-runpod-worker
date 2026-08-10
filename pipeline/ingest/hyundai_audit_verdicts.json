@@ -657,5 +657,102 @@
       "tail lamps are red lenses with internal segments, grille and headlights defined, shut lines and chrome handles clean",
       "NOTE: ix25 is the China-market Creta - not a UK nameplate"
     ]
+  },
+  {
+    "uid": "b9622ed6ec3c4bc9abb196693764548c",
+    "name": "2003 Hyundai Tiburon",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with modelled sidewalls; rim faces present with sharp chrome spokes and a Hyundai centre cap",
+      "glazing genuinely transparent - seat back, B-pillar and door top visible through the side glass at 2.5x",
+      "panels glossy with clean reflections, door shut line and handle modelled, headlight is an amber/clear lens with internals",
+      "RESERVATION: cov=0.092 LOW COVERAGE and a forced RED re-render left the car BLACK - the render worker's classifier landed on Chassis0061Mtl/Chassis0071Mtl, not the body paint. Per CLAUDE.md that means distrust the SHEET colour, not that the car cannot ship variants; colour_variants + recolour_audit --stamp is the deciding test before any respray ships",
+      "UK-market: sold in the UK as the Hyundai Coupe (a UK reg decodes to Coupe, not Tiburon)"
+    ]
+  },
+  {
+    "uid": "bf674c749d8548dbade14c113316f1e9",
+    "name": "Hyundai Tucson MK2 2009-2015/Hyundai ix35 MK1",
+    "verdict": "fail",
+    "reasons": [
+      "no wheels or tyres at all - all four arches empty",
+      "magenta/pink missing-material artefacts on the roof rails, mirrors, badges, headlights, fog lamps and trim in every view",
+      "body is a cov=0.773 clay shell"
+    ]
+  },
+  {
+    "uid": "c435ef02b27140e2a5f800c622bb4c04",
+    "name": "2017 Hyundai Sonata  Hybrid",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with modelled sidewalls at 2.8x; rim faces present with spokes and lug nuts",
+      "glazing transparent and tinted, interior visible",
+      "panels clean, shut lines defined, headlights carry internals, grille defined",
+      "NOTE: Sonata Hybrid is not a UK-market nameplate"
+    ]
+  },
+  {
+    "uid": "274079ecb1b84307897656c09ee3376a",
+    "name": "2013 Hyundai Veloster Turbo",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; rim faces present with detailed spokes on all four corners",
+      "glazing transparent - interior and rear wiper visible through the rear screen and side glass at 3x",
+      "tail lamp a red LED lens with internal segments, grille mesh defined, headlights carry internals",
+      "panels clean with defined shut lines; the 'spikes' on the roof are the shark-fin aerial and roof mouldings, checked at 3x, not artefacts",
+      "UK-market Veloster Turbo"
+    ]
+  },
+  {
+    "uid": "9645a8aa8e5a4c2b8d861f1387aa114e",
+    "name": "2009 Hyundai ix35",
+    "verdict": "fail",
+    "reasons": [
+      "door panels missing - the front and rear door apertures render as large black voids in front34_L and rear34",
+      "tyres and rims render body-white",
+      "faceted low-poly panel surfacing throughout",
+      "cov=0.998 FULLCOV"
+    ]
+  },
+  {
+    "uid": "e41af49010384cbc82cf8c1c9ba9d895",
+    "name": "2016 Hyundai Tucson USDM",
+    "verdict": "fail",
+    "reasons": [
+      "no wheels or tyres at all - all four arches are empty black holes in every view",
+      "body itself is clean, but the car is unusable without wheels"
+    ]
+  },
+  {
+    "uid": "40b2b41c17c44ac3b79bf69b71781765",
+    "name": "Hyundai Kona MY2020 - Trunk - Bagagliaio",
+    "verdict": "fail",
+    "reasons": [
+      "not a vehicle - a photogrammetry scan of a Kona BOOT INTERIOR (trunk liner, parcel shelf, tailgate aperture)",
+      "ragged scan edges, baked lighting, cov=1.000",
+      "INGEST GAP: 'Trunk' and the Italian 'Bagagliaio' are not in nameplate_filter PART_WORDS, so a part scan reached GPU render"
+    ]
+  },
+  {
+    "uid": "eaa8b99f11c54df58d00cd3873895e02",
+    "name": "1990 Hyundai Excel",
+    "verdict": "pass",
+    "reasons": [
+      "tyres plainly black rubber; period steel wheels with covers, faces present and detailed",
+      "headlights ARE a real lens - transparent with the reflector visible inside at 2.6x, plus a separate orange indicator lens (at 1x they read as white blanks; the zoom overturned that)",
+      "glazing transparent and tinted; grille a fine slat mesh; bonnet and door shut lines and body-side moulding present",
+      "NOTE cosmetic: the boot badge textures and hubcap logo are generic/wrong (one reads MAXIMA), and the number plate is a New York plate. Cosmetic only, not a geometry or material defect",
+      "UK-market: the Excel was sold in the UK (Pony/Excel)"
+    ]
+  },
+  {
+    "uid": "d07c8d3c2a7a4d7b91f6c1196241061d",
+    "name": "Photoscanned Hyundai Sonata",
+    "verdict": "fail",
+    "reasons": [
+      "photogrammetry scan - the tarmac ground plane is baked into the mesh as a rectangular slab under the car",
+      "roof torn open with a large dark gash",
+      "cov=1.000, no material separation; lighting baked into the texture"
+    ]
   }
 ]
