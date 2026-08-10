@@ -1,0 +1,758 @@
+[
+ {
+  "model": "300ZX",
+  "year": "",
+  "faces": 519999,
+  "uid": "88be494c",
+  "title": "nissan_300zx"
+ },
+ {
+  "model": "300ZX",
+  "year": "",
+  "faces": 78445,
+  "uid": "034c5cff",
+  "title": "Nissan 300ZX Twin Turbo 2Seater (Z32)"
+ },
+ {
+  "model": "300ZX",
+  "year": 1984,
+  "faces": 971354,
+  "uid": "f4a191f2",
+  "title": "Nissan 300ZX (Mk1) (Z31) Turbo 1984"
+ },
+ {
+  "model": "370Z",
+  "year": "",
+  "faces": 409677,
+  "uid": "c0b36c1d",
+  "title": "NISSAN 370Z (NISMO)"
+ },
+ {
+  "model": "370Z",
+  "year": 2013,
+  "faces": 80085,
+  "uid": "11db2d5c",
+  "title": "2013 Nissan 370Z"
+ },
+ {
+  "model": "370Z",
+  "year": 2015,
+  "faces": 65527,
+  "uid": "b66ac30a",
+  "title": "2015 Nissan 370Z Nismo (Z34)"
+ },
+ {
+  "model": "370Z",
+  "year": 2018,
+  "faces": 121084,
+  "uid": "7cb5041d",
+  "title": "2018 Nissan 370Z Nismo"
+ },
+ {
+  "model": "370Z",
+  "year": 2018,
+  "faces": 74012,
+  "uid": "c9ae9b17",
+  "title": "2018 Nissan 370Z Coupe Heritage Edition"
+ },
+ {
+  "model": "370Z",
+  "year": 2020,
+  "faces": 305531,
+  "uid": "16a10e68",
+  "title": "2020 Nissan 370Z Sport Touring"
+ },
+ {
+  "model": "Altima",
+  "year": 2005,
+  "faces": 308816,
+  "uid": "ae3d38c9",
+  "title": "2005 Nissan Altima"
+ },
+ {
+  "model": "Altima",
+  "year": 2007,
+  "faces": 74816,
+  "uid": "23e9e431",
+  "title": "2007 Nissan Altima 2.5 SE"
+ },
+ {
+  "model": "Altima",
+  "year": 2019,
+  "faces": 143647,
+  "uid": "d7a699a6",
+  "title": "2019 Nissan Altima"
+ },
+ {
+  "model": "Altima",
+  "year": 2023,
+  "faces": 501116,
+  "uid": "5370d8f6",
+  "title": "2023 Nissan Altima / Teana"
+ },
+ {
+  "model": "Altima",
+  "year": 2024,
+  "faces": 283958,
+  "uid": "911fb81f",
+  "title": "2024 Nissan Altima"
+ },
+ {
+  "model": "Ariya",
+  "year": 2020,
+  "faces": 416755,
+  "uid": "414019b3",
+  "title": "2020 Nissan Ariya"
+ },
+ {
+  "model": "Ariya",
+  "year": 2021,
+  "faces": 798741,
+  "uid": "d25e801b",
+  "title": "Nissan Ariya 2021"
+ },
+ {
+  "model": "Cefiro",
+  "year": "",
+  "faces": 203723,
+  "uid": "539b2257",
+  "title": "Nissan Cefiro A31"
+ },
+ {
+  "model": "Cefiro",
+  "year": "",
+  "faces": 300493,
+  "uid": "7d9f94f4",
+  "title": "Nissan_cefiroa31_dae"
+ },
+ {
+  "model": "Cefiro",
+  "year": "",
+  "faces": 407430,
+  "uid": "933e8828",
+  "title": "Nissan+ Cefiro+A31.dae"
+ },
+ {
+  "model": "Cube",
+  "year": "",
+  "faces": 1073740,
+  "uid": "2a3cdfee",
+  "title": "Nissan_ Cube_2010"
+ },
+ {
+  "model": "Cube",
+  "year": 2010,
+  "faces": 1057325,
+  "uid": "f486fb35",
+  "title": "2010 Nissan Cube"
+ },
+ {
+  "model": "Datsun",
+  "year": "",
+  "faces": 378556,
+  "uid": "c9c54612",
+  "title": "Nissan. Datsun 1200 Pick-up truck Red"
+ },
+ {
+  "model": "Elgrand",
+  "year": 2006,
+  "faces": 281382,
+  "uid": "6101fb5f",
+  "title": "2006 Nissan Elgrand Highway STAR"
+ },
+ {
+  "model": "Fairlady Z",
+  "year": 1972,
+  "faces": 66160,
+  "uid": "bc62990a",
+  "title": "1972 Nissan Fairlady 240ZG (S30)"
+ },
+ {
+  "model": "Fairlady Z",
+  "year": 1978,
+  "faces": 197310,
+  "uid": "0d9286eb",
+  "title": "Nissan Fairlady Z S30(240Z) 1978"
+ },
+ {
+  "model": "Frontier",
+  "year": 2022,
+  "faces": 913668,
+  "uid": "feb34e90",
+  "title": "2022 Nissan Frontier"
+ },
+ {
+  "model": "GT-R",
+  "year": "",
+  "faces": 413162,
+  "uid": "02cc1159",
+  "title": "Lara Croft Nissan -GTR"
+ },
+ {
+  "model": "GT-R",
+  "year": "",
+  "faces": 234271,
+  "uid": "2d9efbcc",
+  "title": "1999_nissan_skyline_r34_gt-r_c-west_n_-_type"
+ },
+ {
+  "model": "GT-R",
+  "year": "",
+  "faces": 566557,
+  "uid": "51c912a8",
+  "title": "Nissan GTR R35"
+ },
+ {
+  "model": "GT-R",
+  "year": "",
+  "faces": 238580,
+  "uid": "536ac636",
+  "title": "Nissan GTR"
+ },
+ {
+  "model": "GT-R",
+  "year": "",
+  "faces": 233047,
+  "uid": "5445e2af",
+  "title": "2002_nissan_skyline_gtr_r34_fast_and_furious"
+ },
+ {
+  "model": "GT-R",
+  "year": "",
+  "faces": 412770,
+  "uid": "5eed440c",
+  "title": "Nissan GTR R34 Skyline | GT-R Skyline"
+ },
+ {
+  "model": "GT-R",
+  "year": "",
+  "faces": 286336,
+  "uid": "6df98cc4",
+  "title": "Nissan Skyline GTR r33"
+ },
+ {
+  "model": "GT-R",
+  "year": "",
+  "faces": 161208,
+  "uid": "950be83e",
+  "title": "Nissan Skyline GT-R V Spec II Nur (R34)"
+ },
+ {
+  "model": "GT-R",
+  "year": "",
+  "faces": 1163956,
+  "uid": "9cfbe472",
+  "title": "Nissan GT-R R35 Nismo | www.vecarz.com"
+ },
+ {
+  "model": "GT-R",
+  "year": "",
+  "faces": 783988,
+  "uid": "b2f9f4aa",
+  "title": "Nissan_skyline_r35_gtr_nismo._free"
+ },
+ {
+  "model": "GT-R",
+  "year": "",
+  "faces": 98452,
+  "uid": "81b21ffb",
+  "title": "Nissan skyline r32 gt-r (improved)"
+ },
+ {
+  "model": "GT-R",
+  "year": 1989,
+  "faces": 345058,
+  "uid": "ba48a652",
+  "title": "1989 Nissan Skyline GT-R (R32)"
+ },
+ {
+  "model": "GT-R",
+  "year": 1989,
+  "faces": 936087,
+  "uid": "e301c512",
+  "title": "Nissan Skyline (R32) GT-R 1989"
+ },
+ {
+  "model": "GT-R",
+  "year": 1995,
+  "faces": 235788,
+  "uid": "ffbd3deb",
+  "title": "1995 Nissan Skyline GTR R33 Nismo S-Tune BCN"
+ },
+ {
+  "model": "GT-R",
+  "year": 1997,
+  "faces": 284963,
+  "uid": "d80ea5ec",
+  "title": "1997 Nissan Skyline GT-R (R33)"
+ },
+ {
+  "model": "GT-R",
+  "year": 1999,
+  "faces": 532358,
+  "uid": "12ba36fc",
+  "title": "1999 Nissan Skyline R34 GT-R Top Secret BNR3"
+ },
+ {
+  "model": "GT-R",
+  "year": 1999,
+  "faces": 86583,
+  "uid": "385220e9",
+  "title": "1999 Nissan Skyline GT-R V-Spec II (R34)"
+ },
+ {
+  "model": "GT-R",
+  "year": 2002,
+  "faces": 227038,
+  "uid": "03907515",
+  "title": "Nissan Skyline R34 GTR 2002 | www.vecarz.com"
+ },
+ {
+  "model": "GT-R",
+  "year": 2002,
+  "faces": 227785,
+  "uid": "bb7b6785",
+  "title": "2002 Nissan Skyline R34 GT-R"
+ },
+ {
+  "model": "GT-R",
+  "year": 2005,
+  "faces": 508685,
+  "uid": "6a0e311f",
+  "title": "2005 Nismo Nissan Skyline R34 GTR Z Tune"
+ },
+ {
+  "model": "GT-R",
+  "year": 2013,
+  "faces": 76383,
+  "uid": "60666625",
+  "title": "2013 Nissan GT-R Black Edition Coupe"
+ },
+ {
+  "model": "GT-R",
+  "year": 2017,
+  "faces": 183458,
+  "uid": "34101042",
+  "title": "2017 Nissan GT-R (R35)"
+ },
+ {
+  "model": "GT-R",
+  "year": 2017,
+  "faces": 119187,
+  "uid": "46e3bffb",
+  "title": "2017 Nissan GT-R (R35)"
+ },
+ {
+  "model": "GT-R",
+  "year": 2017,
+  "faces": 70126,
+  "uid": "2cfa2833",
+  "title": "2017 Nissan GT-R Premium"
+ },
+ {
+  "model": "GT-R",
+  "year": 2018,
+  "faces": 312427,
+  "uid": "1209a357",
+  "title": "2018 Nissan GT-R Spec-T R35"
+ },
+ {
+  "model": "GT-R",
+  "year": 2021,
+  "faces": 250828,
+  "uid": "6b073b34",
+  "title": "2021 Nissan GT-R R35 Top Secret M17"
+ },
+ {
+  "model": "GT-R",
+  "year": 2023,
+  "faces": 186377,
+  "uid": "5d0613a8",
+  "title": "2023 Nissan GT-R R35 Nismo"
+ },
+ {
+  "model": "GT-R Nismo",
+  "year": "",
+  "faces": 170703,
+  "uid": "add95683",
+  "title": "Nissan GTR Nismo (Project Cars 3)"
+ },
+ {
+  "model": "GT-R Nismo",
+  "year": 2017,
+  "faces": 190898,
+  "uid": "7cd33068",
+  "title": "2017 Nissan GT-R Nismo (R35) N-Attack Packag"
+ },
+ {
+  "model": "GT-R Nismo",
+  "year": 2017,
+  "faces": 84831,
+  "uid": "71a34f42",
+  "title": "2017 Nissan GT-R Nismo"
+ },
+ {
+  "model": "GT-R Nismo",
+  "year": 2017,
+  "faces": 78780,
+  "uid": "896f3b17",
+  "title": "2017 Nissan GT-R Nismo"
+ },
+ {
+  "model": "GT-R Nismo",
+  "year": 2024,
+  "faces": 261003,
+  "uid": "20a14338",
+  "title": "2024 Nissan GT-R Nismo"
+ },
+ {
+  "model": "GT-R50",
+  "year": "",
+  "faces": 199743,
+  "uid": "08187385",
+  "title": "Nissan GTR50 Italdesign"
+ },
+ {
+  "model": "GT-R50",
+  "year": "",
+  "faces": 209267,
+  "uid": "66e0b2f4",
+  "title": "Nissan Gtr50"
+ },
+ {
+  "model": "GT-R50",
+  "year": 2021,
+  "faces": 200201,
+  "uid": "ba309062",
+  "title": "2021 Nissan GT-R50 by Italdesign"
+ },
+ {
+  "model": "Juke",
+  "year": "",
+  "faces": 229603,
+  "uid": "b28ed982",
+  "title": "Nissan Juke"
+ },
+ {
+  "model": "Juke",
+  "year": 2015,
+  "faces": 223119,
+  "uid": "e23839c8",
+  "title": "2015 Nissan Juke-R 2.0 Concept"
+ },
+ {
+  "model": "Juke",
+  "year": 2020,
+  "faces": 466050,
+  "uid": "27f4c107",
+  "title": "2020 Nissan Juke"
+ },
+ {
+  "model": "Kicks",
+  "year": 2019,
+  "faces": 149533,
+  "uid": "b19442c3",
+  "title": "2019 Nissan Kicks Sport"
+ },
+ {
+  "model": "Kicks",
+  "year": 2021,
+  "faces": 228929,
+  "uid": "942244be",
+  "title": "2021 Nissan Kicks"
+ },
+ {
+  "model": "Leaf",
+  "year": "",
+  "faces": 693518,
+  "uid": "377369b5",
+  "title": "Nissan Leaf"
+ },
+ {
+  "model": "Micra",
+  "year": "",
+  "faces": 243849,
+  "uid": "fce66369",
+  "title": "Nissan Micra by Modding Guruji"
+ },
+ {
+  "model": "Micra",
+  "year": 1982,
+  "faces": 897822,
+  "uid": "6e165390",
+  "title": "1982 Nissan Micra"
+ },
+ {
+  "model": "Murano",
+  "year": 2015,
+  "faces": 171490,
+  "uid": "51b6f9e6",
+  "title": "2015 Nissan Murano Hybrid"
+ },
+ {
+  "model": "Navara",
+  "year": 1997,
+  "faces": 119130,
+  "uid": "c33cf334",
+  "title": "1997-2004 Nissan Navara(Nissan Frontier) D22"
+ },
+ {
+  "model": "Pathfinder",
+  "year": "",
+  "faces": 455354,
+  "uid": "782e9fc3",
+  "title": "Nissan Pathfinder1"
+ },
+ {
+  "model": "Pathfinder",
+  "year": 2022,
+  "faces": 455358,
+  "uid": "e78c0a34",
+  "title": "2022 Nissan Pathfinder"
+ },
+ {
+  "model": "Pathfinder",
+  "year": 2024,
+  "faces": 529045,
+  "uid": "92a0f988",
+  "title": "2024 Nissan Pathfinder"
+ },
+ {
+  "model": "Patrol",
+  "year": "",
+  "faces": 290813,
+  "uid": "2c3f0d73",
+  "title": "Nissan Patrol Safari"
+ },
+ {
+  "model": "Patrol",
+  "year": 1987,
+  "faces": 1187547,
+  "uid": "91495ac3",
+  "title": "1987 Nissan Patrol 5-Door"
+ },
+ {
+  "model": "Patrol",
+  "year": 2019,
+  "faces": 547077,
+  "uid": "d36a29d5",
+  "title": "Nissan Patrol VTC 2019"
+ },
+ {
+  "model": "Patrol",
+  "year": 2019,
+  "faces": 666906,
+  "uid": "d8b24fd4",
+  "title": "Nissan Patrol VTC SUPER SAFARI 2019"
+ },
+ {
+  "model": "Patrol Safari",
+  "year": "",
+  "faces": 577004,
+  "uid": "d31ef92c",
+  "title": "( FREE ) Nissan Super Safari"
+ },
+ {
+  "model": "President",
+  "year": 1965,
+  "faces": 1137731,
+  "uid": "3b14d46c",
+  "title": "Nissan President (H150) 1965"
+ },
+ {
+  "model": "President",
+  "year": 1998,
+  "faces": 1072923,
+  "uid": "3e06bee1",
+  "title": "Nissan President (PHG50) 1998"
+ },
+ {
+  "model": "President",
+  "year": 2003,
+  "faces": 1176668,
+  "uid": "6249d07f",
+  "title": "Nissan President (PGF50) 2003"
+ },
+ {
+  "model": "Primera",
+  "year": 1990,
+  "faces": 930168,
+  "uid": "4a6cadb2",
+  "title": "Nissan Primera (Mk1)(P10) 1990"
+ },
+ {
+  "model": "Rogue",
+  "year": 2022,
+  "faces": 446464,
+  "uid": "48fa53c7",
+  "title": "2022 Nissan Rogue"
+ },
+ {
+  "model": "Sentra",
+  "year": "",
+  "faces": 132773,
+  "uid": "74d274c8",
+  "title": "2020_nissan_sentra_sylphy_remix"
+ },
+ {
+  "model": "Sentra",
+  "year": 2007,
+  "faces": 141973,
+  "uid": "1833d444",
+  "title": "2007 Nissan Sentra"
+ },
+ {
+  "model": "Sentra",
+  "year": 2017,
+  "faces": 251092,
+  "uid": "cb0d1783",
+  "title": "2017 Nissan Sentra"
+ },
+ {
+  "model": "Sentra",
+  "year": 2018,
+  "faces": 147772,
+  "uid": "e8d8321d",
+  "title": "2018 Nissan Sentra Sylphy SL"
+ },
+ {
+  "model": "Sentra",
+  "year": 2021,
+  "faces": 158975,
+  "uid": "92a9cabd",
+  "title": "2021 Nissan Sentra Sylphy ePower"
+ },
+ {
+  "model": "Sentra",
+  "year": 2021,
+  "faces": 158456,
+  "uid": "b530ffdc",
+  "title": "Nissan SENTRA 2021 223"
+ },
+ {
+  "model": "Silvia",
+  "year": "",
+  "faces": 271830,
+  "uid": "30e45aa3",
+  "title": "Nissan Silvia"
+ },
+ {
+  "model": "Silvia",
+  "year": "",
+  "faces": 81567,
+  "uid": "1316475b",
+  "title": "Nissan Silvia K's DIA Selection (S13)"
+ },
+ {
+  "model": "Silvia",
+  "year": "",
+  "faces": 80821,
+  "uid": "20a8388a",
+  "title": "Nissan Silvia (S15)"
+ },
+ {
+  "model": "Silvia",
+  "year": 1990,
+  "faces": 280744,
+  "uid": "a544d0fa",
+  "title": "1990 Nissan Silvia K's Diamond Selection (S1"
+ },
+ {
+  "model": "Silvia",
+  "year": 1998,
+  "faces": 99834,
+  "uid": "53710f85",
+  "title": "1998 Nissan Silvia K's Aero (S14)"
+ },
+ {
+  "model": "Silvia",
+  "year": 1999,
+  "faces": 164014,
+  "uid": "b520fe10",
+  "title": "1999 Nissan Silvia S15 Spec-S Aero"
+ },
+ {
+  "model": "Skyline",
+  "year": "",
+  "faces": 123730,
+  "uid": "176b8617",
+  "title": "Nissan Skyline R34"
+ },
+ {
+  "model": "Skyline",
+  "year": "",
+  "faces": 323138,
+  "uid": "aeed89c9",
+  "title": "Nissan Skyline"
+ },
+ {
+  "model": "Skyline",
+  "year": "",
+  "faces": 86596,
+  "uid": "1e4013d3",
+  "title": "Nissan Skyline Wagon"
+ },
+ {
+  "model": "Skyline",
+  "year": 1964,
+  "faces": 760434,
+  "uid": "2d14032d",
+  "title": "Nissan Skyline (S54) 2000GT 1964"
+ },
+ {
+  "model": "Skyline",
+  "year": 1976,
+  "faces": 639378,
+  "uid": "c738d08a",
+  "title": "1976 Nissan (Datsun) Skyline"
+ },
+ {
+  "model": "Skyline",
+  "year": 1977,
+  "faces": 831010,
+  "uid": "0590ebdd",
+  "title": "Nissan Skyline (C210) 2000GT coupe 1977"
+ },
+ {
+  "model": "Stagea",
+  "year": 2002,
+  "faces": 826505,
+  "uid": "14bd11bc",
+  "title": "2002 Nissan Stagea"
+ },
+ {
+  "model": "Sylphy",
+  "year": 2018,
+  "faces": 119024,
+  "uid": "59397302",
+  "title": "2018 Nissan Sylphy EV Zero Emission"
+ },
+ {
+  "model": "Sylphy",
+  "year": 2024,
+  "faces": 272985,
+  "uid": "881b0345",
+  "title": "2024 Nissan Sylphy E-POWER Hybrid"
+ },
+ {
+  "model": "Terrano",
+  "year": 1993,
+  "faces": 843517,
+  "uid": "39965535",
+  "title": "1993 Nissan Terrano 5-Door"
+ },
+ {
+  "model": "Tiida",
+  "year": 2017,
+  "faces": 147653,
+  "uid": "3984349b",
+  "title": "2017 Nissan Tiida"
+ },
+ {
+  "model": "Titan",
+  "year": 2024,
+  "faces": 116402,
+  "uid": "70f175a0",
+  "title": "2024 Nissan Titan XD SV 4WD Crew Cab"
+ }
+]
