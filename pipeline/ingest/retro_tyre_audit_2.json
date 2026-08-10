@@ -1,492 +1,212 @@
 [
  {
-  "assetId": "honda-accord-1998-hw1-v1",
+  "assetId": "honda-accord-2021-v1",
   "make": "honda",
-  "uid": "d4f83dedc8f54c27b5c9103a662d1062",
+  "uid": "e742636e46814de5af1568542e7c9bdb",
   "verdict": "ok",
-  "note": "Side view zoomed 4x: tyres plainly black rubber against white body, silver rim faces present both sides, glazing dark and transparent."
+  "note": "Shipped-asset poster: black tyres, black alloys, transparent glazing."
  },
  {
-  "assetId": "honda-accord-2003-hw1-v1",
+  "assetId": "honda-civic-v1",
   "make": "honda",
-  "uid": "baa08e5aea7a4f638d98db2050c21112",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x on both wheels: whole tyre, tread included, renders pale body-white/grey - LIGHTER than the grey rim. No black rubber anywhere. Reads as an unfinished clay model."
- },
- {
-  "assetId": "honda-accord-2009-hw1-v1",
-  "make": "honda",
-  "uid": "3f5ef3ff34c04f839c05709c6fa5ce1c",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x on both wheels: tyres render pale body-white, lighter than the grey rim face. Same defect as the 2003 Accord from the same source family."
- },
- {
-  "assetId": "honda-accord-2009-hw1-v2",
-  "make": "honda",
-  "uid": "1bddd17deee44ef8b8a401e8a25a6b5d",
+  "uid": "fe669d5461cd400a83c1393a9e1eef59",
   "verdict": "ok",
-  "note": "Tyres dark grey-black, clearly darker than both body and rim; glazing transparent."
+  "note": "Shipped-asset poster: black tyres, dark alloys with red calipers, transparent glazing."
  },
  {
-  "assetId": "honda-accord-2011-hw1-v1",
+  "assetId": "honda-cr-v-v1",
   "make": "honda",
-  "uid": "6eccbee181b143b28764a82b15f0a62d",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: tyre is body-white, lighter than the rim; tread grooves visible but the whole carcass is paint-coloured."
- },
- {
-  "assetId": "honda-accord-2021-hw1-v1",
-  "make": "honda",
-  "uid": "f973338c77ce4618b941612241d53f6a",
+  "uid": "4d0751311d76473b81377f5bd2da273b",
   "verdict": "ok",
-  "note": "Black tyres, black alloys, transparent glazing - correct."
+  "note": "Shipped-asset poster: black tyres, black alloys."
  },
  {
-  "assetId": "honda-accord-hw1-v1",
+  "assetId": "honda-hr-v-v1",
   "make": "honda",
-  "uid": "39bf36a5b88b4767973ce417cfdcf301",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre renders body-white against the grey rim. Same defect family as the other hw1 Accords."
- },
- {
-  "assetId": "honda-beat-1991-hw1-v1",
-  "make": "honda",
-  "uid": "1c1d92ac8ae24ee5ba0e89a10c4fa595",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: steel-wheel Beat with the entire tyre in body-white; not a whitewall (a whitewall keeps a black tread band, this has none)."
- },
- {
-  "assetId": "honda-city-2008-hw1-v1",
-  "make": "honda",
-  "uid": "65e2974c74254021b027b223190418e8",
+  "uid": "bf835b5a5e6f4b79a134db5156992cf0",
   "verdict": "ok",
-  "note": "Dark rubber tyres against white alloys and white body; glazing transparent."
+  "note": "Shipped-asset poster: black tyres, two-tone alloys, transparent glazing."
  },
  {
-  "assetId": "honda-civic-1976-hw1-v1",
+  "assetId": "honda-jazz-2018-v1",
   "make": "honda",
-  "uid": "ade1ab7ab2df4618a802431f3237f250",
+  "uid": "2b1f535f185e4a6abf6b0a3222487704",
   "verdict": "ok",
-  "note": "Black tyres on grey steel wheels with red centre caps; glazing transparent."
+  "note": "Shipped-asset poster: black tyres, white/black alloys, transparent glazing."
  },
  {
-  "assetId": "honda-civic-1987-hw1-v1",
+  "assetId": "honda-nsx-v1",
   "make": "honda",
-  "uid": "5328bd7313e346789568266d67081ba3",
+  "uid": null,
   "verdict": "ok",
-  "note": "Black tyres, grey alloys, transparent glazing."
+  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing."
  },
  {
-  "assetId": "honda-civic-1991-hw1-v1",
+  "assetId": "honda-s2000-v1",
   "make": "honda",
-  "uid": "1bb32fd8460e47af82518e43f172f916",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: the whole tyre renders body-white, brighter than the grey alloy. Not a whitewall - there is no black tread band at all."
- },
- {
-  "assetId": "honda-civic-1993-hw1-v1",
-  "make": "honda",
-  "uid": "18e956bcf53b4f1191a9fb6b5b70efe2",
+  "uid": null,
   "verdict": "ok",
-  "note": "Textured teal car; tyres plainly black on silver steel wheels."
+  "note": "Shipped-asset poster: black tyres, dark alloys, red interior visible through the glass."
  },
  {
-  "assetId": "honda-civic-1996-hw1-v1",
+  "assetId": "honda-zr-v-2023-v1",
   "make": "honda",
-  "uid": "1860f7cc43544306a4148ba5953cfac4",
+  "uid": "33eb3630e2ef4693b908322683784734",
   "verdict": "ok",
-  "note": "Black tyres, grey alloys."
+  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing."
  },
  {
-  "assetId": "honda-civic-1999-hw1-v1",
-  "make": "honda",
-  "uid": "ce29e75eb129406f874e0423ab8869c3",
+  "assetId": "nissan-350z-2006-v1",
+  "make": "nissan",
+  "uid": null,
   "verdict": "ok",
-  "note": "Black tyres, white alloys; glazing transparent."
+  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing."
  },
  {
-  "assetId": "honda-civic-2022-hw1-v1",
-  "make": "honda",
-  "uid": "35cbd73adbe8411b80bdeeaa4f3cd151",
+  "assetId": "nissan-ariya-v1",
+  "make": "nissan",
+  "uid": null,
   "verdict": "ok",
-  "note": "NEARLY CULLED. Side-tile sidewall reads mid-grey under the key light; at 4x against the 2023 Civic in the same batch the tyre is charcoal rubber, clearly darker than both the white body and the rim face. Cleared."
+  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing."
  },
  {
-  "assetId": "honda-civic-2023-hw1-v1",
-  "make": "honda",
-  "uid": "0669147fb3ba4cca95ea942add743b2b",
+  "assetId": "nissan-gt-r-v1",
+  "make": "nissan",
+  "uid": "c8cd27c3c8cf4e2d86da031f1e98f8c8",
   "verdict": "ok",
-  "note": "Black tyres, black alloys, red calipers."
+  "note": "Shipped-asset poster: black tyres, black alloys with blue lug nuts."
  },
  {
-  "assetId": "honda-civic-2025-hw1-v1",
-  "make": "honda",
-  "uid": "0dc6454d74a241e5a08fac82ce2826b2",
+  "assetId": "nissan-juke-2020-v1",
+  "make": "nissan",
+  "uid": null,
   "verdict": "ok",
-  "note": "Black tyres, black alloys."
+  "note": "Shipped-asset poster: black tyres, black alloys."
  },
  {
-  "assetId": "honda-civic-hw1-v1",
-  "make": "honda",
-  "uid": "770a5c9b025449f59769d8cd27d915bb",
+  "assetId": "nissan-leaf-2023-v1",
+  "make": "nissan",
+  "uid": "dc43dc90417f4a34911445d48bf89da5",
   "verdict": "ok",
-  "note": "Type-R FK8. The side tile rendered a front elevation, so judged on front34/front34_L/rear34: tyres plainly black, alloys detailed, glazing dark and transparent."
+  "note": "Shipped-asset poster: black tyres, black alloys."
  },
  {
-  "assetId": "honda-civic-hw1-v2",
-  "make": "honda",
-  "uid": "4f8ff01b643d4795a6a515478a6fd9d6",
+  "assetId": "nissan-micra-k10-v1",
+  "make": "nissan",
+  "uid": "a646c835325a4a0faf27fced42d10e2b",
   "verdict": "ok",
-  "note": "NEARLY CULLED. Mugen RR: the side tile is blown out by the one-sided key light and the sidewall reads mid-grey, but front34, front34_L and rear34 all show plainly black rubber. Cleared on the other three views."
+  "note": "NEARLY CULLED. Poster read as a pale tyre at thumbnail scale; at 3.5x the tyre is mid-dark rubber with a moulded tread pattern, clearly darker than both the white wheel cover and the blue body. Cleared."
  },
  {
-  "assetId": "honda-concerto-1988-hw1-v1",
-  "make": "honda",
-  "uid": "0aebfa48b6f140f694a3cbd62bbd5336",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: entire tyre renders body-white around a grey hubcap; tread grooves are white too. Clay-model read."
- },
- {
-  "assetId": "honda-cr-v-2001-hw1-v1",
-  "make": "honda",
-  "uid": "3565e8277a484f14b45c6888ca61a2b2",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre body-white on all four corners plus the tailgate spare; no black tread band."
- },
- {
-  "assetId": "honda-cr-x-1988-hw1-v1",
-  "make": "honda",
-  "uid": "a856d729d9ec47fc8cb3b740199ed6bf",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: entire tyre renders body-white around a grey steel wheel."
- },
- {
-  "assetId": "honda-cr-x-1995-hw1-v1",
-  "make": "honda",
-  "uid": "f00136dfd77348b1a053d98fadd43602",
+  "assetId": "nissan-navara-2021-v1",
+  "make": "nissan",
+  "uid": "2a877fdf866b4dbb8b0aa4dd9ef2319d",
   "verdict": "ok",
-  "note": "Black tyres against white five-spoke alloys - correct."
+  "note": "Shipped-asset poster: black tyres, dark alloys."
  },
  {
-  "assetId": "honda-cr-z-2011-hw1-v1",
-  "make": "honda",
-  "uid": "d5af69ef34834f43a65b4aac78ca8929",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre body-white, brighter than the grey alloy."
- },
- {
-  "assetId": "honda-crosstour-hw1-v1",
-  "make": "honda",
-  "uid": "8d0d4ce034ef435db9167b18161ef57f",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: tyre pale body-white with white tread grooves, lighter than the rim face."
- },
- {
-  "assetId": "honda-hr-v-2001-hw1-v1",
-  "make": "honda",
-  "uid": "b3c0f77626644e99b54304aebbafc60b",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre body-white around a grey wheel."
- },
- {
-  "assetId": "honda-hr-v-2025-hw1-v1",
-  "make": "honda",
-  "uid": "d2c35fc6af904aa8a3a138ca21275b2a",
+  "assetId": "nissan-note-v1",
+  "make": "nissan",
+  "uid": null,
   "verdict": "ok",
-  "note": "Black tyres, black alloys, transparent glazing."
+  "note": "NEARLY CULLED. Silver alloys make the wheel read pale; at 3.5x the tyre is plainly black. Cleared."
  },
  {
-  "assetId": "honda-insight-2010-hw1-v1",
-  "make": "honda",
-  "uid": "01bd4f2a73f949d8840afb711429b3c1",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre body-white, brighter than the dark-grey alloy."
- },
- {
-  "assetId": "honda-integra-1995-hw1-v1",
-  "make": "honda",
-  "uid": "cad9679ec5d6403984b1421ccd3f3d25",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre body-white around a dark alloy with red centre cap."
- },
- {
-  "assetId": "honda-jazz-2016-hw1-v1",
-  "make": "honda",
-  "uid": "1acb615324254e53a04860e786ade136",
+  "assetId": "nissan-nv200-v1",
+  "make": "nissan",
+  "uid": null,
   "verdict": "ok",
-  "note": "Dark rubber tyres, grey wheel covers; glazing transparent."
+  "note": "Shipped-asset poster: black tyres on dark steel wheels."
  },
  {
-  "assetId": "honda-jazz-2020-hw1-v1",
-  "make": "honda",
-  "uid": "974385e940e84fd6bf47ca04c2e69313",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: body renders lime green while the tyre renders flat WHITE, tread included. Not body-coloured here but still no black rubber anywhere - the tyre carries its own white material, so it stays white in every colour variant."
- },
- {
-  "assetId": "honda-nsx-1992-hw1-v1",
-  "make": "honda",
-  "uid": "8788e6274878465a9e03a063844eba7c",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre pale body-white against a grey alloy."
- },
- {
-  "assetId": "honda-nsx-1992-hw1-v2",
-  "make": "honda",
-  "uid": "a21edb35a7714774a10b74642e815ca2",
+  "assetId": "nissan-pulsar-v1",
+  "make": "nissan",
+  "uid": null,
   "verdict": "ok",
-  "note": "Black tyres with RACING sidewall lettering on white alloys - correct."
+  "note": "Shipped-asset poster: black car, black tyres, dark alloys, transparent glazing."
  },
  {
-  "assetId": "honda-nsx-1992-hw1-v3",
-  "make": "honda",
-  "uid": "abeaa957199c473ea3d293f7e669bf34",
+  "assetId": "nissan-qashqai-2018-v1",
+  "make": "nissan",
+  "uid": "ef3c5a9808b44b44ac600ad4431b8680",
   "verdict": "ok",
-  "note": "Black tyres on white alloys."
+  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing."
  },
  {
-  "assetId": "honda-odyssey-1994-hw1-v1",
-  "make": "honda",
-  "uid": "7ea59d42e17a4d1f9a98b840740a3aa6",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre body-white around a grey wheel cover."
- },
- {
-  "assetId": "honda-odyssey-1999-hw1-v1",
-  "make": "honda",
-  "uid": "f749ed1e876d415b82efa5293836d92a",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: tyre is pale grey, LIGHTER than the mid-grey wheel cover; no black rubber."
- },
- {
-  "assetId": "honda-odyssey-1999-hw1-v2",
-  "make": "honda",
-  "uid": "d5d98cef2a4240b6be91e03a1afcb0e1",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre body-white."
- },
- {
-  "assetId": "honda-odyssey-2001-hw1-v1",
-  "make": "honda",
-  "uid": "24abc0e850f64705906c910e91a6ac4a",
+  "assetId": "nissan-x-trail-2023-v1",
+  "make": "nissan",
+  "uid": "f9f2cbdacac74ee7acfe1c731195ccaa",
   "verdict": "ok",
-  "note": "Dark rubber tyre clearly darker than both the white body and the grey alloy."
+  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing."
  },
  {
-  "assetId": "honda-odyssey-2008-hw1-v1",
-  "make": "honda",
-  "uid": "db666ce23d7b42fdbcd93a73217ba363",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre body-white, lighter than the grey alloy."
- },
- {
-  "assetId": "honda-odyssey-2011-hw1-v1",
-  "make": "honda",
-  "uid": "db80634b538c40569bc77ebf829bac19",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre body-white against a dark alloy - the contrast is inverted from a real car."
- },
- {
-  "assetId": "honda-prelude-1978-hw1-v1",
-  "make": "honda",
-  "uid": "69183c2bf725484285552138c01ce93b",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre body-white around a grey steel wheel."
- },
- {
-  "assetId": "honda-prelude-1983-hw1-v1",
-  "make": "honda",
-  "uid": "faa07ab210314dd2a52e678e1b4f5a9a",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre body-white around a grey wheel cover."
- },
- {
-  "assetId": "honda-prelude-1997-hw1-v1",
-  "make": "honda",
-  "uid": "92e568f639384c3b9c3ced96512f6f1d",
-  "verdict": "ok",
-  "note": "Black tyres on grey alloys; glazing transparent."
- },
- {
-  "assetId": "honda-s2000-1999-hw1-v1",
-  "make": "honda",
-  "uid": "737fd0a261fd4f32b431c838dcc57c0f",
-  "verdict": "ok",
-  "note": "Black tyres, silver alloys, red interior visible through the glass."
- },
- {
-  "assetId": "honda-s660-2015-hw1-v1",
-  "make": "honda",
-  "uid": "4e3e9bd888fb4ec69f71cc487f33f4ba",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: whole tyre body-white, same tone as the alloy and the bodywork."
- },
- {
-  "assetId": "peugeot-2008-2018-pw1-v1",
+  "assetId": "peugeot-2008-v1",
   "make": "peugeot",
-  "uid": "6291b66452614464889a71c8337b8c85",
+  "uid": "024e431193264f9cbd566b7a9a38e378",
   "verdict": "ok",
-  "note": "Black tyres on silver alloys; glazing transparent."
+  "note": "Shipped-asset poster: black tyres, black alloys."
  },
  {
-  "assetId": "peugeot-2008-2020-pw1-v1",
+  "assetId": "peugeot-205-v1",
   "make": "peugeot",
-  "uid": "0edcda285432434a8d127b44ad6da808",
+  "uid": null,
   "verdict": "ok",
-  "note": "Black tyres on two-tone alloys; glazing transparent."
+  "note": "Shipped-asset poster: black tyres on light steel wheels - correct for a 205 CJ."
  },
  {
-  "assetId": "peugeot-205-1997-pw1-v1",
+  "assetId": "peugeot-206-v1",
   "make": "peugeot",
-  "uid": "b0dbc2e209d545f9a2becdf9a7ab43ef",
+  "uid": null,
   "verdict": "ok",
-  "note": "Black tyres on grey steel wheels."
+  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing (this is NOT the body-white-window 206 recorded in CLAUDE.md)."
  },
  {
-  "assetId": "peugeot-205-pw1-v1",
+  "assetId": "peugeot-208-2020-v1",
   "make": "peugeot",
-  "uid": "ff2b04cf7da94cbdbd277fe23b7204b8",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: 205 CJ cabriolet with the whole tyre in body-white around a dark steel wheel; tread grooves are white too."
- },
- {
-  "assetId": "peugeot-206-2000-pw1-v1",
-  "make": "peugeot",
-  "uid": "513b76a9909049f49327c0b83bc5b56b",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: tyre is the same pale grey-white as the alloy and the bodywork; no black rubber."
- },
- {
-  "assetId": "peugeot-206-2003-pw1-v1",
-  "make": "peugeot",
-  "uid": "52deb999ad964d2496c9fd25ee84c2d4",
+  "uid": null,
   "verdict": "ok",
-  "note": "Black tyres on dark alloys."
+  "note": "Shipped-asset poster: black tyres, dark alloys."
  },
  {
-  "assetId": "peugeot-206-pw1-v1",
+  "assetId": "peugeot-208-v2",
   "make": "peugeot",
-  "uid": "b2ef11bf94b848618b5b7f38e202316b",
+  "uid": null,
   "verdict": "ok",
-  "note": "NEARLY CULLED - white wheel covers make the wheel read pale at thumbnail scale. At 4x the tyre is dark near-black rubber, clearly separate from the white cover. Cleared."
+  "note": "Shipped-asset poster: black tyres, grey alloys, transparent glazing."
  },
  {
-  "assetId": "peugeot-207-pw1-v1",
+  "assetId": "peugeot-3008-v1",
   "make": "peugeot",
-  "uid": "fa2cfaaab79b4d18a0fc89ba25a02f07",
+  "uid": null,
   "verdict": "ok",
-  "note": "NEARLY CULLED for the same white-wheel-cover reason; at 4x the tyre is dark rubber. Cleared."
+  "note": "Shipped-asset poster: black tyres, black alloys."
  },
  {
-  "assetId": "peugeot-207-pw1-v2",
+  "assetId": "peugeot-307-2008-v1",
   "make": "peugeot",
-  "uid": "9b59ff092c1c4f1f918ac7c16fe679a7",
+  "uid": "eb357098ec05483986262ad8eb8ab0cc",
   "verdict": "ok",
-  "note": "Black tyres on grey alloys."
+  "note": "Shipped-asset poster: black tyres on white wheel covers."
  },
  {
-  "assetId": "peugeot-207-pw1-v3",
+  "assetId": "peugeot-308-2022-v1",
   "make": "peugeot",
-  "uid": "ef5d59b78b96496fab2731b138820ea2",
+  "uid": "0d9c9c265bec42678bfc269c1a8cebc3",
   "verdict": "ok",
-  "note": "Black low-profile tyres on white multi-spoke alloys."
+  "note": "Shipped-asset poster: black tyres, black alloys."
  },
  {
-  "assetId": "peugeot-3008-pw1-v1",
+  "assetId": "peugeot-508-v1",
   "make": "peugeot",
-  "uid": "3e5e14fdb1f94f25a5b572caf518f55d",
+  "uid": "8192f18de3d2431197c9e707666212c7",
   "verdict": "ok",
-  "note": "Black tyres on silver alloys; glazing transparent with the cabin visible."
+  "note": "Shipped-asset poster: black tyres, black alloys."
  },
  {
-  "assetId": "peugeot-307-pw1-v1",
+  "assetId": "peugeot-boxer-v1",
   "make": "peugeot",
-  "uid": "3bf90277b3594803b4206efe764038ad",
+  "uid": null,
   "verdict": "ok",
-  "note": "Black tyres on dark wheel covers."
- },
- {
-  "assetId": "peugeot-308-2020-pw1-v1",
-  "make": "peugeot",
-  "uid": "fe211e55acf54aa4a70c522ce720e17a",
-  "verdict": "ok",
-  "note": "Black tyres on grey alloys."
- },
- {
-  "assetId": "peugeot-308-2026-pw1-v1",
-  "make": "peugeot",
-  "uid": "68ae14e9883b4405852b404844384cdf",
-  "verdict": "ok",
-  "note": "Black tyres on blue/black alloys."
- },
- {
-  "assetId": "peugeot-308-pw1-v1",
-  "make": "peugeot",
-  "uid": "e538cff86fef432287ec93c7c6f91931",
-  "verdict": "ok",
-  "note": "Black tyres on black alloys."
- },
- {
-  "assetId": "peugeot-404-pw1-v1",
-  "make": "peugeot",
-  "uid": "cf15d0c9a7ac485ba4a33a996e6c5589",
-  "verdict": "ok",
-  "note": "NEARLY CULLED - at thumbnail scale the bright steel wheel and chrome hubcap read as a white tyre. At 4x the tyre is plainly BLACK and the white is the wheel. Cleared."
- },
- {
-  "assetId": "peugeot-405-pw1-v1",
-  "make": "peugeot",
-  "uid": "602dbd0634754339b47de7b1d18bf143",
-  "verdict": "ok",
-  "note": "Dark rubber tyres on grey alloys."
- },
- {
-  "assetId": "peugeot-406-1998-pw1-v1",
-  "make": "peugeot",
-  "uid": "4b55488b331041c299955a937334113b",
-  "verdict": "ok",
-  "note": "Side tile rendered a front elevation; judged on front34/front34_L/rear34 at 3x - tyres are plainly black rubber around white wheel covers."
- },
- {
-  "assetId": "peugeot-406-pw1-v1",
-  "make": "peugeot",
-  "uid": "7cb921f0266d4a729e44ff69f7c0c730",
-  "verdict": "ok",
-  "note": "Black tyres on silver alloys."
- },
- {
-  "assetId": "peugeot-406-pw1-v2",
-  "make": "peugeot",
-  "uid": "ad75c776d8144bc98527d19b6fd0d58f",
-  "verdict": "tyre-fail",
-  "note": "Zoomed 4x: tyre and wheel cover are both body-white; the tyre is a pale ring with no black rubber at all."
- },
- {
-  "assetId": "peugeot-407-2005-pw1-v1",
-  "make": "peugeot",
-  "uid": "deaac3bd68604aee8f8365d784f8ab34",
-  "verdict": "ok",
-  "note": "Side tile is a rear elevation; front34_L and rear34 at 3x show plainly black tyres on silver alloys."
- },
- {
-  "assetId": "peugeot-504-1968-pw1-v1",
-  "make": "peugeot",
-  "uid": "cc25e4d5a33a402e81ab764be6a0f61e",
-  "verdict": "ok",
-  "note": "Dark rubber tyres on grey steel wheels - correct for a 1968 saloon."
- },
- {
-  "assetId": "peugeot-508-2021-pw1-v1",
-  "make": "peugeot",
-  "uid": "1770104e89f84a8f9ce4a0fd9ae131ac",
-  "verdict": "ok",
-  "note": "Black tyres on black alloys."
- },
- {
-  "assetId": "peugeot-rcz-pw1-v1",
-  "make": "peugeot",
-  "uid": "bcbd76ac8d8949bc8e4b9f411d2f8745",
-  "verdict": "ok",
-  "note": "NEARLY CULLED. The side tile is blown out by the one-sided key light and the sidewall reads pale grey; front34, front34_L and rear34 all show plainly black tyres. Cleared on the other three views."
+  "note": "Shipped-asset poster: black tyres on silver steel wheels."
  }
 ]
