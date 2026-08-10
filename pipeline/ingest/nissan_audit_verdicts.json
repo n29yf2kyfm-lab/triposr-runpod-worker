@@ -2643,5 +2643,112 @@
    "door and tailgate shut lines defined",
    "NOTE cov=0.113 LOW COVERAGE - distrust the colour in this sheet; recolour_audit --stamp must decide before it ships"
   ]
+ },
+ {
+  "uid": "d2e77a954c934ac497ed0459bf3ac32a",
+  "name": "Sport Car 3 (Game) - Nissan Maxima",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: extreme show/drift build - bosozoku-style multi-tier rear wing, supercharger protruding through the bonnet, widebody arches, full ground-effects kit"
+  ]
+ },
+ {
+  "uid": "d31d50c7306a49c19412e11e48ceb0b7",
+  "name": "( FREE ) Tuning Nissan GT-R SDC",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: title says Tuning - widebody arches, oversized GT wing with cyan aero blades, cyan-lit underbody and wheel accents"
+  ]
+ },
+ {
+  "uid": "d31ef92c95ad49d495ee51c429eafcee",
+  "name": "( FREE ) Nissan Super Safari",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Patrol Super Safari (Y61) proportions read instantly, four views consistent",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; 6-spoke rim faces present and detailed on BOTH sides",
+   "grille badge, headlight internals and door shut lines defined at 577,004 faces",
+   "NOTE: a faded red beltline stripe decal runs along both flanks - reads as a market trim graphic, worth an owner glance",
+   "DUPLICATE CANDIDATE with d36a29d57bba4eb1a09077030e7dafa3 (Patrol VTC 2019) - same base model, 577,004 vs 547,077 faces. Flagged, NOT auto-grouped"
+  ]
+ },
+ {
+  "uid": "d36a29d57bba4eb1a09077030e7dafa3",
+  "name": "Nissan Patrol VTC 2019",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Patrol Y61 4800 VTC, proportions read instantly, four views consistent",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; dark 6-spoke rim faces present on BOTH sides",
+   "grille badge, headlight internals and shut lines defined at 547,077 faces",
+   "DUPLICATE CANDIDATE with d31ef92c95ad49d495ee51c429eafcee (Super Safari) - same base model and same beltline decal. Flagged, NOT auto-grouped"
+  ]
+ },
+ {
+  "uid": "d40f2da7ee334d3296b00d5cf645e542",
+  "name": "2005_nismo_nissan_skyline_r34_gtr_z_tune",
+  "verdict": "pass",
+  "reasons": [
+   "Nismo R34 GT-R Z-Tune - a factory Nismo-built road car, in scope",
+   "proportions read instantly, front 3/4 strong; the wide arches and bonnet vent are Z-Tune factory spec, not a kit",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; black rim faces present and detailed on BOTH sides",
+   "grille, headlight internals and door/bonnet shut lines all sharp at 507,056 faces"
+  ]
+ },
+ {
+  "uid": "d415151791ed4b4291d29bc6c0543503",
+  "name": "nissan skyline r33 gtr",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: cov=1.000 FULLCOV, glazing renders opaque body-white with no windows at all",
+   "tyres also render body-white - no black rubber on any wheel",
+   "aftermarket body kit: extended front bumper, side skirts and non-OEM rear wing"
+  ]
+ },
+ {
+  "uid": "d525a298bb5d45afbbe567792ba6f0d9",
+  "name": "2 Tone Nissan GT-R R35",
+  "verdict": "fail",
+  "reasons": [
+   "low-poly faceted clay: heavy polygon edges across the roof, doors and arches",
+   "glazing renders opaque body-white, tyres render body-white, cov=1.000 FULLCOV",
+   "also out-of-scope: extreme widebody race kit with oversized wing, exposed intercooler and canards"
+  ]
+ },
+ {
+  "uid": "d59c474d37894f75bd74a7487215cce7",
+  "name": "Nissan Micra K13 2010-2018",
+  "verdict": "fail",
+  "reasons": [
+   "wheels absent: all four arches are empty with bare white suspension arms hanging in them",
+   "a single grey wheel floats under the centre of the car",
+   "body shell only - not a complete car"
+  ]
+ },
+ {
+  "uid": "d7a699a69c634bdcaef419b81087d461",
+  "name": "2019 Nissan Altima",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Altima proportions read instantly, roof/pillars/wheelbase consistent across all four views",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; multi-spoke rim faces present and detailed on BOTH sides",
+   "V-motion grille with ALTIMA badge and boomerang headlight internals sharp",
+   "door and boot shut lines defined, reflections clean"
+  ]
+ },
+ {
+  "uid": "d80ea5ec62ed433483fc62f55d14e410",
+  "name": "1997 Nissan Skyline GT-R (R33)",
+  "verdict": "pass",
+  "reasons": [
+   "OEM R33 GT-R proportions read instantly, front 3/4 strong",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; white 5-spoke rim faces present and detailed on BOTH sides",
+   "grille, headlight internals and factory boot wing all correct; door shut lines defined",
+   "284,963 faces, panel surfacing clean and reflections even; US plate is cosmetic only"
+  ]
  }
 ]
