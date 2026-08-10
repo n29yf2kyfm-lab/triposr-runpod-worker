@@ -2117,6 +2117,15 @@
   ]
  },
  {
+  "uid": "b47db7a84f374cd98188234a81ec9ba4",
+  "name": "Nissan_gtr_lb_performance",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Liberty Walk Performance widebody kit - riveted over-fenders, oversized GT wing, air-ride stance",
+   "cov=0.937 FULLCOV, glazing largely opaque"
+  ]
+ },
+ {
   "uid": "b520fe10c0374d168ab349dc6528e5af",
   "name": "1999 Nissan Silvia S15 Spec-S Aero",
   "verdict": "pass",
@@ -2126,6 +2135,101 @@
    "glass reads as glass with interior visible",
    "tyres plainly black rubber; 6-spoke OEM rim faces present on BOTH sides",
    "headlight internals and grille sharp, door and bonnet shut lines defined"
+  ]
+ },
+ {
+  "uid": "b530ffdcf2144d1e824c12a43e90893f",
+  "name": "Nissan SENTRA 2021 223",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Sentra/Sylphy, proportions read instantly, four views consistent",
+   "glass reads as tinted glass with tan interior visible",
+   "tyres plainly black rubber; rim faces present on BOTH sides",
+   "grille, headlight internals and shut lines defined",
+   "DUPLICATE CANDIDATE with 92a9cabd5ae94cf1a745748652501307 (2021 Sylphy ePower) - 158,456 vs 158,975 faces and visually identical. Flagged, NOT auto-grouped"
+  ]
+ },
+ {
+  "uid": "b71e8c411a7142e89d6013e10733e5eb",
+  "name": "2023 Nissan Fairlady Z RZ34 (400Z) LB NATION",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Liberty Walk LB-Nation widebody kit, title says so outright",
+   "riveted over-fenders and front splitter over an RZ34 Z"
+  ]
+ },
+ {
+  "uid": "b92f5c3cc7e849ff88ea14f4f83b05fd",
+  "name": "2006_sunline_racing_nissan_skyline_gt-r_r34",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Sunline Racing tuner build - widebody kit, oversized GT wing, race-style front bumper and canards"
+  ]
+ },
+ {
+  "uid": "b9b5c6a2cae24f9fb998bf773bf777af",
+  "name": "Nissan_gtr_r34_skyline__gt-r_skyline",
+  "verdict": "pass",
+  "reasons": [
+   "OEM R34 GT-R proportions read instantly - the wing on uprights is the factory GT-R item, not an aftermarket addition",
+   "glass reads as dark glass with interior visible",
+   "tyres verified at 3x: plainly black rubber; 5-spoke rim faces present on BOTH sides with yellow calipers",
+   "panel surfacing clean at 412,494 faces, door shut lines and sill step defined",
+   "the shape ahead of the rear wheel is the factory side-skirt step, not detached geometry"
+  ]
+ },
+ {
+  "uid": "ba309062dc6046eda99dd291c1d5e8e5",
+  "name": "2021 Nissan GT-R50 by Italdesign",
+  "verdict": "pass",
+  "reasons": [
+   "Italdesign GT-R50 proportions read instantly, front 3/4 strong",
+   "glass reads as glass with interior seats visible",
+   "tyres plainly black rubber; rim faces present and detailed on BOTH sides with red calipers",
+   "panel surfacing clean, shut lines and lamp internals defined",
+   "DUPLICATE CANDIDATE with 0818738527f24ae89203403ee1d31bf0 - 200,201 vs 199,743 faces, 458 apart, both GT-R50s. Different livery so possibly distinct uploads. Flagged, NOT auto-grouped"
+  ]
+ },
+ {
+  "uid": "ba48a6529b8e47eeb43a6e19c227abfd",
+  "name": "1989 Nissan Skyline GT-R (R32)",
+  "verdict": "pass",
+  "reasons": [
+   "OEM R32 GT-R proportions read instantly, roof/pillars/wheelbase consistent across all four views",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; dark 5-spoke rim faces present on BOTH sides",
+   "grille, headlight internals and factory boot wing all correct; door shut lines defined",
+   "345,058 faces, panel surfacing clean and reflections even"
+  ]
+ },
+ {
+  "uid": "bac9caca628247f6b2bd6267c4430702",
+  "name": "2022 Nissan KRC Japan R35 GT-R",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: KRC Japan tuner widebody - flared over-fenders, large front splitter with canards, extended side skirts and ducktail"
+  ]
+ },
+ {
+  "uid": "bb7b67852aee412eacc9c97270886a50",
+  "name": "2002 Nissan Skyline R34 GT-R",
+  "verdict": "pass",
+  "reasons": [
+   "OEM R34 GT-R proportions read instantly, front 3/4 strong",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; silver 5-spoke rim faces present on BOTH sides with gold calipers",
+   "grille, headlight internals and factory wing on uprights all correct",
+   "door and bonnet shut lines defined, paint finish premium"
+  ]
+ },
+ {
+  "uid": "bcefb9288f824519aea4d6ad48d756ce",
+  "name": "Nissan Murano (Z51) 2008-2014",
+  "verdict": "fail",
+  "reasons": [
+   "mesh destroyed: the body is an unrecognisable smear of melted blobs and floating slabs, no car shape survives",
+   "wheels absent apart from one stray teal disc",
+   "no glass, no panels, no lighting geometry"
   ]
  }
 ]
