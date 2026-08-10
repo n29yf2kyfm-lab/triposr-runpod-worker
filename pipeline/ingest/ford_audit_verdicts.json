@@ -3,7 +3,12 @@
   "uid": "e99a77c50aa74318ac755571a9f67119",
   "name": "Ford GT40 1964 | www.vecarz.com",
   "verdict": "pass",
-  "reasons": []
+  "reasons": [
+   "tyres black rubber with Goodyear sidewall lettering",
+   "glass transparent, interior visible",
+   "rim faces present all four views",
+   "panels crisp, lamp internals present"
+  ]
  },
  {
   "uid": "57225a3eeb7b4adbada7c9ab7f711724",
