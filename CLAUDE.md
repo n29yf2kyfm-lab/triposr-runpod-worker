@@ -289,6 +289,20 @@ Accounts, in the order the owner supplied them:
 1. `Alamkhan1`
 2. `FreshRaccoon5597`
 3. `C4LLUMM0H` — the owner calls this one "sketch feb", added 2026-07-31
+4. `NZM1` — supplied 2026-08-09 when the first two hit their download quota
+
+**CORRECTION 2026-08-09: the file held only TWO tokens, not three.**
+`FreshRaccoon5597`'s token was lost in a rollback and is NOT recoverable from this
+machine — proven, not assumed: 3,409 unique hex-32 strings across 1,528 files, minus
+the known model-uid universe, every survivor validated against `/v3/me`. Only
+Alamkhan1 and C4LLUMM0H came back. It has to be regenerated from the account.
+
+**Throttling is PER-ACCOUNT, not per-IP.** This was measured the hard way: with both
+original accounts returning 429 on `/models/<uid>/download` while `/v3/me` returned
+200 for both, I told the owner it looked IP-wide and that another token would not
+help. That was WRONG — the owner supplied NZM1 and it downloaded 4/4 immediately.
+More accounts DO buy more download quota. The quota window behaves like hours, not
+minutes: the two exhausted accounts were still 429 more than two hours later.
 
 **Never write a token value into this repo or any tracked file** — push
 protection blocks it and the owner's standing rule forbids it. Values belong in
