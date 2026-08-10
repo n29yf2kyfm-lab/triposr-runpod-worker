@@ -171,6 +171,17 @@ FIX: join nameplate tokens with `\s*` instead of `\s+`, so one pattern matches b
 spellings. Tested both directions — catches CRV/CR-V, CHR/C-HR, e208/e-208,
 LandCruiser/Land Cruiser; still rejects "Crvette" and unrelated marques.
 
+**RESIDUAL GAP, measured 2026-08-10: write nameplates WITH their separator.**
+`\s*` bridges tokens, so it only helps a nameplate that is already multi-token.
+A nameplate written as one GLUED token cannot match a separated title:
+  nameplate `E6`   -> matches "BYD E6", MISSES "BYD E-6"
+  nameplate `E 6`  -> matches BOTH (and still rejects Handbrake/Sealant/Attorney)
+An agent reported this as affecting "GT-R, CX-5, ID.3, e-208" and that is WRONG
+-- those contain a hyphen, `norm()` turns it into a space, and they are already
+multi-token, so they match both spellings today (verified). The rule is simply:
+**never write a nameplate as a glued alphanumeric token.** Write `E 6` or `E-6`,
+`F 3` or `F-3`. Both forms work; only `E6` fails.
+
 **COST TO EARLIER WAVES IS UNMEASURED, NOT ZERO.** I tried to quantify it against the
 saved Toyota/Mercedes/Peugeot manifests and got "0 recovered" — but those files are
 POST-filter, so any car the bug dropped was never written to them. The loss is invisible
