@@ -2018,5 +2018,114 @@
    "grille and headlight internals sharp, shut lines defined",
    "game-derived asset with a 'PCARS 3' novelty plate - cosmetic only, geometry is OEM"
   ]
+ },
+ {
+  "uid": "ae3d38c9e1c249f8adb4dec0b37aa095",
+  "name": "2005 Nissan Altima",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Altima proportions read instantly, roof/pillars/wheelbase consistent across all four views",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; 5-spoke rim faces present on BOTH sides",
+   "grille badge and headlight reflector internals present",
+   "door shut lines and sill defined, reflections clean"
+  ]
+ },
+ {
+  "uid": "ae7f123d083b43899fd8f203cc91284e",
+  "name": "Nissan 240Sx Silvia",
+  "verdict": "fail",
+  "reasons": [
+   "glazing renders opaque body-white - no transparency and no interior in any view",
+   "cov=1.000 FULLCOV, one material covers the whole model including the glass",
+   "aftermarket body kit: side skirts, front bumper and rear valance are not OEM 180SX/240SX"
+  ]
+ },
+ {
+  "uid": "aeed89c97d8e4c95b115875064aaa1fd",
+  "name": "Nissan Skyline",
+  "verdict": "pass",
+  "reasons": [
+   "R34 GT-R in Bayside Blue, proportions read instantly, front 3/4 strong",
+   "glass reads as glass with seats visible through the side window",
+   "tyres plainly black rubber; 6-spoke rim faces present and detailed on BOTH sides with yellow calipers",
+   "grille, headlight internals and bonnet/door shut lines all defined",
+   "paint finish premium, reflections clean; gold wheels are spec variation not a kit"
+  ]
+ },
+ {
+  "uid": "b01769a7e6b94c1ba07e2a0ff2745ae6",
+  "name": "lb-silhuette nissan gtr r35",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Liberty Walk Silhouette widebody kit, title says so outright",
+   "also a clay shell - cov=1.000 FULLCOV, glazing opaque body-white and tyres body-white with no black rubber"
+  ]
+ },
+ {
+  "uid": "b19442c3095d48e3b2deb8a1f6830fbe",
+  "name": "2019 Nissan Kicks Sport",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Kicks proportions read instantly, four views consistent",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; two-tone rim faces present on BOTH sides",
+   "V-motion grille and headlight internals sharp, shut lines defined",
+   "contrast black roof is the factory two-tone Kicks spec, not a wrap"
+  ]
+ },
+ {
+  "uid": "b2624e21d880493790195fdc6fd7dc4c",
+  "name": "Nissan NV200",
+  "verdict": "fail",
+  "reasons": [
+   "not a vehicle model: a photogrammetry scan of a car park containing several vehicles and a building, rendered as a flat ragged sheet",
+   "no isolated NV200 geometry, no glass, no wheels of its own",
+   "cov=1.000 FULLCOV"
+  ]
+ },
+ {
+  "uid": "b28ed98292d2420d97fb94e2d45b0ffc",
+  "name": "Nissan Juke",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Juke proportions read instantly - the split-lamp front end is unmistakable",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; dark multi-spoke rim faces present on BOTH sides",
+   "grille and both lamp tiers have internal detail, shut lines defined",
+   "reflections clean, paint finish premium"
+  ]
+ },
+ {
+  "uid": "b2f9f4aa2c7b4cd9a71471641a2dcace",
+  "name": "Nissan_skyline_r35_gtr_nismo._free",
+  "verdict": "pass",
+  "reasons": [
+   "OEM GT-R Nismo trim - in scope; proportions read instantly, front 3/4 strong",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; black rim faces present and detailed on BOTH sides with yellow calipers",
+   "Nismo carbon aero, grille and headlight internals sharp, shut lines defined",
+   "783,988 faces - same car as the other two Nismos in this wave but a clearly different mesh, not a duplicate"
+  ]
+ },
+ {
+  "uid": "b37cea6e8a864a2aa602934ddb0e6ff0",
+  "name": "Nissan 180sx [FREE]",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: drift build - full pink graphics livery, oversized GT wing, riveted over-fenders, sponsor decals (HKS, Koguchi, Stance)"
+  ]
+ },
+ {
+  "uid": "b520fe10c0374d168ab349dc6528e5af",
+  "name": "1999 Nissan Silvia S15 Spec-S Aero",
+  "verdict": "pass",
+  "reasons": [
+   "OEM S15 Spec-S Aero - the Aero package was a factory variant, in scope",
+   "proportions read instantly, roof/pillars/wheelbase consistent across all four views",
+   "glass reads as glass with interior visible",
+   "tyres plainly black rubber; 6-spoke OEM rim faces present on BOTH sides",
+   "headlight internals and grille sharp, door and bonnet shut lines defined"
+  ]
  }
 ]
