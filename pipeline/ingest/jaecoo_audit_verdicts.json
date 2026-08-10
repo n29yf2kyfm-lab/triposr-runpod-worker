@@ -1,0 +1,198 @@
+[
+ {
+  "uid": "0e1c8897ee634e3e9cee220a9e1bf54c",
+  "name": "Chery A3",
+  "verdict": "fail",
+  "reasons": [
+   "wheels detached from the car - a wheel lies flat on the studio floor in front34_L and rear34",
+   "wheel arches empty with bare suspension struts exposed in the side view",
+   "roof-mounted emergency lightbar, not standard road-car spec"
+  ]
+ },
+ {
+  "uid": "9361c10bacc94a94a5bdcdcc084018a8",
+  "name": "Chery A3 Sedan",
+  "verdict": "fail",
+  "reasons": [
+   "all four wheels absent from the arches; a single rim lies on the studio floor",
+   "bare suspension struts and hubs exposed in every view"
+  ]
+ },
+ {
+  "uid": "e7611694c7a644ce8e642317f30710db",
+  "name": "Chery Tiggo 7 Pro Black",
+  "verdict": "fail",
+  "reasons": [
+   "single-material clay shell (mats=1 cov=1.000): body, glass, tyres and rims all one grey",
+   "glazing opaque body-colour - fails the glazing ruling outright",
+   "tyres read as the same grey as the rims and body, not black rubber",
+   "headlamps have no internal detail; panel surfaces melted/lumpy"
+  ]
+ },
+ {
+  "uid": "56d2057fc0a442db9a972fb61ed7ca70",
+  "name": "Chery Tiggo 5X",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as the right car instantly; front 3/4 strong",
+   "glazing transparent - interior, headrests and dashboard visible at zoom",
+   "tyres plainly black rubber on the tread face in front34 and rear34",
+   "rim faces present with consistent spokes in all four views",
+   "door and bonnet shut lines defined; grille mesh and headlamp internals present"
+  ]
+ },
+ {
+  "uid": "ac90068694a9474fadc5d9f2e157a0da",
+  "name": "Chery Eastar Crosse",
+  "verdict": "fail",
+  "reasons": [
+   "single-material clay shell (mats=1 cov=1.000)",
+   "glazing opaque body-colour in every view",
+   "tyres render in body colour - white, no black rubber anywhere",
+   "headlamps featureless blobs; panel surfacing soft"
+  ]
+ },
+ {
+  "uid": "0e48c1402e524cbc87f83e0895f2916c",
+  "name": "Chery H5",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope - passenger minibus / commercial van, not a road car a UK reg decodes to",
+   "single-material clay shell (mats=1 cov=1.000); tyres render in body colour white"
+  ]
+ },
+ {
+  "uid": "493e253769df42df8602fed5f29c88eb",
+  "name": "Chery Q Qme",
+  "verdict": "fail",
+  "reasons": [
+   "melted panel surfacing throughout; body reads as a soft blob, proportions distorted",
+   "headlamps and grille are featureless smears, no internal lamp detail",
+   "no defined door or bonnet shut lines",
+   "cov=1.000 single material - a respray would repaint the glass too"
+  ]
+ },
+ {
+  "uid": "48147d40821f4f54a1f55eadd3080703",
+  "name": "Chery QQ 2013",
+  "verdict": "fail",
+  "reasons": [
+   "melted/soft panel surfacing, body wrinkled and dented across every view",
+   "head and tail lamps are featureless blobs protruding from the shell",
+   "no defined shut lines",
+   "cov=1.000 single material - a respray would repaint the glass too"
+  ]
+ },
+ {
+  "uid": "db2607ff38e04637af6c4e55240c2655",
+  "name": "Chery A1",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry-grade baked texture - dirt and blotching baked into the rear panel and tailgate",
+   "tyres render light grey, the same value as the rim, not black rubber",
+   "soft panels, no defined shut lines, headlamps without internal detail",
+   "cov=1.000 single material"
+  ]
+ },
+ {
+  "uid": "183ade229e7b4f8f8fb18bc76dcfcf38",
+  "name": "Chery QQ 2010",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell - tyres render in body colour white with no black rubber on the tread face",
+   "melted panel surfacing, no defined shut lines",
+   "headlamps featureless",
+   "cov=1.000 single material"
+  ]
+ },
+ {
+  "uid": "43804e0f962c4021b988e6ebcd45e7a0",
+  "name": "2023 Chery Tiggo 8 Pro Champion Edition 390T AWD",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as the right car instantly; front 3/4 strong, grille mesh deep",
+   "glazing transparent - interior and steering wheel visible at zoom",
+   "tyres black rubber with visible tread on the tread face in front34 and rear34",
+   "rim faces present, black multi-spoke alloys traceable in all four views",
+   "door and bonnet shut lines crisp; headlamp internals present"
+  ]
+ },
+ {
+  "uid": "853a3d11349446959c624caeb23ec0a4",
+  "name": "Chery E5 EV",
+  "verdict": "fail",
+  "reasons": [
+   "white clay shell - glazing renders opaque body-colour in all four views",
+   "wheels reduced to featureless black domes in front34, front34_L and side; rim face absent entirely",
+   "headlamps are smears without internal detail",
+   "cov=0.827 did not flag it - coverage is blind to this"
+  ]
+ },
+ {
+  "uid": "ae59f69a54514dc0b2f087b0a1ab14b1",
+  "name": "2023_Chery_Tiggo_9",
+  "verdict": "fail",
+  "reasons": [
+   "single-material clay shell (mats=1 cov=1.000); glazing opaque body-colour",
+   "tyres render body-white, the same value as the rim - no black rubber",
+   "driver's door modelled OPEN in the side and rear34 views",
+   "speckled noise baked across the body surface"
+  ]
+ },
+ {
+  "uid": "8d7c3a2c7af44196b5b1a360cda7f577",
+  "name": "Chery Tiggo 9",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render WHITE on one side of the car (front34_L and rear34) and black on the other (front34 and side)",
+   "per-corner asymmetry from the same mesh - the documented white-tyre defect, not a whitewall; the white tread face is visible at 5x in rear34",
+   "otherwise clean: glazing transparent, rim faces present"
+  ]
+ },
+ {
+  "uid": "898ba0d4de914565b7340ee1d1a77ffe",
+  "name": "2023 Omoda 5",
+  "verdict": "pass",
+  "reasons": [
+   "UK-market model; proportions read as the right car instantly",
+   "glazing genuinely transparent - wipers, dashboard and interior visible at zoom; panoramic roof reads as dark glass",
+   "tyres black rubber with tread on the tread face in front34 and rear34",
+   "rim faces present, full silver 5-spoke alloys with brake calipers visible",
+   "door shut lines defined, handles and mirrors modelled, grille honeycomb has real depth"
+  ]
+ },
+ {
+  "uid": "d9ff826c2bf14d81a4fa3c9b6b707376",
+  "name": "2023 Chery Omoda 5 290T",
+  "verdict": "pass",
+  "reasons": [
+   "UK-market model; front 3/4 strong, proportions correct",
+   "glazing transparent with dark panoramic roof; interior visible",
+   "tyres black rubber with sidewall lettering and tread visible at 5x",
+   "rim faces present - gloss black alloys with orange accents, spokes and calipers traceable in all four views",
+   "grille honeycomb deep, headlamp internals sharp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "7eb848db7681400aa90caf9e524375fc",
+  "name": "Chery J11",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render in body colour - the whole tyre including the tread face is body-white, identical in value to the rim and the paint",
+   "confirmed at 5x on the front34 tread face; cov=0.881",
+   "glazing is fine, but the tyre ruling fails it outright"
+  ]
+ },
+ {
+  "uid": "51970ac7a4f346b998941c77bea0103f",
+  "name": "2023 Chery Tiggo 9 AWD",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as the right car instantly; front 3/4 strong",
+   "glazing transparent - interior and steering wheel visible",
+   "tyres black rubber with tread visible at 5x in front34 and rear34",
+   "rim faces present - black turbine alloys with spokes and lug detail traceable",
+   "shut lines defined, grille slats and headlamp internals sharp"
+  ]
+ }
+]
