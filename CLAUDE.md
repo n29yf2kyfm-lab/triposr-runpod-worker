@@ -437,6 +437,33 @@ Method that works: crop the side view's wheel region, upscale ~2x, and look. Com
 against a known-good car in the same batch — a correct one shows plainly black rubber
 against the white body.
 
+**CORRECTION 2026-08-10 — "the paint material covers the rubber" is NOT the only
+mechanism, and on the Mercedes wave it is not the mechanism at all.** The retroactive
+Toyota+Mercedes audit found seven mw1 Mercedes whose tyres render white. Controlled
+re-renders of the same staged GLBs in RED, at az 270 and az 215, show the tyres staying
+WHITE on a red car, and the worker's `recolour.materials` payload lists only
+carpaint/paint0 — the paint never touched the tyre. The failure is per-CORNER: the same
+car renders one white tyre and one black one from a byte-identical dark tyre material
+(`tire`, baseColor 0.106, dielectric, roughness 0.9) and identical wheel geometry to a
+sibling that renders black on all four. Points at the wheel meshes (normals), not paint.
+Only `mercedes-benz-g-class-2018-v1` was the literal ruling — its live poster renders the
+tyres in body BLUE.
+
+Three traps this cost time on, all worth avoiding next time:
+- **The RED re-render is the decisive test, and it is cheap.** Render the staged source
+  GLB with `--colour red`: body-colour tyres go red, defect tyres stay white, good tyres
+  stay black. It cost four renders to overturn a wrong verdict I had already written down.
+- **The per-corner asymmetry is what separates a defect from a WHITEWALL** — and this
+  matters, because a MAJORITY of pale-tyre suspects turn out to be whitewalls. Eleven cars
+  (W123 coupe, Ponton, 190SL, Pagoda, R107, Avensis, Camry XV40, Celica A60, both Hiluxes,
+  Land Cruiser 90) read as white tyres in the PURE PROFILE view and every one shows a
+  plainly black tread in the 3/4 view. Judge the tread face in front34/rear34, never the
+  sidewall in the side tile.
+- **Material data is not a verdict either.** Passing and failing cars in this wave carry
+  identical tyre materials and identical wheel prims, so a glTF probe cannot separate them
+  — and a mid-grey tyre under the rig's one-sided key reads as pure white at thumbnail
+  scale. It takes 5x AND a same-scale known-good control in the same image.
+
 **Critical distinction, established the same day:** a sourced Sketchfab/Objaverse
 GLB is NOT model output. Defects in a sourced asset cannot be fixed by training —
 the only options are keep, cull, or replace with a better source. Never present a
