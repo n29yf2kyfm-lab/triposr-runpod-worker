@@ -2298,6 +2298,15 @@
   ]
  },
  {
+  "uid": "b4ff35e673ed47ce952097af29de75ed",
+  "name": "2014 Rocket Bunny Nissan Silvia S15 - SEMA Build",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Rocket Bunny SEMA widebody build, title says so outright",
+   "riveted over-fenders, front splitter with rods, deep-dish BBS wheels"
+  ]
+ },
+ {
   "uid": "b520fe10c0374d168ab349dc6528e5af",
   "name": "1999 Nissan Silvia S15 Spec-S Aero",
   "verdict": "pass",
@@ -2537,6 +2546,50 @@
    "photogrammetry scan of a scale model: pink-brown baked texture, soft melted panels, scan dents and noise across every surface",
    "glazing is scan texture, not glass; cov=1.000 FULLCOV",
    "499,876 faces - a decimated-to-target mesh, exclude from exact-match dedup"
+  ]
+ },
+ {
+  "uid": "c9c54612a5c54ee3a08c49bad5ec6310",
+  "name": "Nissan. Datsun 1200 Pick-up truck Red",
+  "verdict": "pass",
+  "reasons": [
+   "Datsun 1200 / Sunny Truck proportions read instantly, four views consistent",
+   "glass reads as tinted glass with interior visible",
+   "TYRES ARE A GENUINE WHITEWALL - white sidewall ring with a plainly BLACK tread band, verified at 2x. Period-correct detail, explicitly NOT the body-colour tyre defect and must not be culled for it",
+   "chrome rim faces present on BOTH sides",
+   "chrome bumpers, grille badge, headlight bezels and door shut lines all defined",
+   "pose gate flagged low-top(tob=0.522) and correctly passed it - it is a pickup"
+  ]
+ },
+ {
+  "uid": "cb0d1783b52941c28d193a3e71f8402a",
+  "name": "2017 Nissan Sentra",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Sentra proportions read instantly, roof/pillars/wheelbase consistent across all four views",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; hubcap faces present and identical on BOTH sides",
+   "V-motion grille badge and headlight internals sharp",
+   "door and boot shut lines defined, reflections clean"
+  ]
+ },
+ {
+  "uid": "cb58159c4e3f430aa34cd2757b577110",
+  "name": "Nissan 350z tuned",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: title says tuned - widebody over-fenders, oversized swan-neck GT wing, carbon bonnet",
+   "front bumper cover removed leaving a bare intercooler exposed - not a road-legal OEM spec"
+  ]
+ },
+ {
+  "uid": "cd99ac77ad964a7a8979e7c125d4ac08",
+  "name": "Nissan Laurel C35",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a car standing in snow, with the snowy ground plane baked into the mesh",
+   "holes torn through the windscreen and roof, baked lighting throughout",
+   "glazing is scan texture, not glass; cov=1.000 FULLCOV"
   ]
  }
 ]
