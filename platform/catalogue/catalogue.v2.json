@@ -33702,8 +33702,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL, and the clearest case in the set: the LIVE shipped poster renders the tyres in body colour (blue), tread pattern and all, with only the rim left black. This one is literally the defect in the owner's ruling - the paint material covers the rubber.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -33749,7 +33749,8 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 887829, \"facesAfter\": 150748, \"ratio\": 0.169}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "plates removed 2026-07-30: the baked plate carried an invented registration 'AL24 3D' and two designs were live at once; placement also failed on yawed and tall models. Stripped at the glTF JSON level, geometry untouched. Re-bake once placement is solved."
+   "plates removed 2026-07-30: the baked plate carried an invented registration 'AL24 3D' and two designs were live at once; placement also failed on yawed and tall models. Stripped at the glTF JSON level, geometry untouched. Re-bake once placement is solved.",
+   "2026-08-10 retroactive tyre audit: quarantined, tyres do not render as black rubber. See pipeline/ingest/retro_tyre_audit.json."
   ],
   "customization": {
    "configuratorReady": false,
@@ -182774,8 +182775,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL. Front tyre AND rim both render white; no black rubber anywhere on that corner. Confirmed on a RED re-render at az 215 and az 270. The GLB's wheel prims carry material_14 baseColor [1,1,1] metallic 0.77 - a white glossy metal, not rubber.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -182824,7 +182825,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "2026-08-10 retroactive tyre audit: quarantined, tyres do not render as black rubber. See pipeline/ingest/retro_tyre_audit.json."
   ],
   "customization": {
    "configuratorReady": false,
@@ -184845,8 +184847,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL. Tyre is a solid white ring around a dark multi-spoke rim, tread face included. Confirmed on a RED re-render at az 215 and az 270 - front tyre white, rear tyre black.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -184894,7 +184896,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "2026-08-10 retroactive tyre audit: quarantined, tyres do not render as black rubber. See pipeline/ingest/retro_tyre_audit.json."
   ],
   "customization": {
    "configuratorReady": false,
@@ -185426,8 +185429,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL. Both tyres render white, sidewall and tread, in all four sheet views and on RED re-renders at az 215 and az 270. Rim is grey - darker than the tyre.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -185475,7 +185478,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "2026-08-10 retroactive tyre audit: quarantined, tyres do not render as black rubber. See pipeline/ingest/retro_tyre_audit.json."
   ],
   "customization": {
    "configuratorReady": false,
@@ -185759,8 +185763,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL. W202/S202 estate. Side tile at 5x: the whole tyre - sidewall and tread sawtooth - renders white, lighter than its own grey hubcap. Confirmed by two controlled re-renders of the same staged GLB in RED (az 270 and az 215): the front tyre stays white while the rear tyre on the same car renders black. A car cannot have one white and one black tyre by design, so this is a defect, not a whitewall.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -185810,7 +185814,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "2026-08-10 retroactive tyre audit: quarantined, tyres do not render as black rubber. See pipeline/ingest/retro_tyre_audit.json."
   ],
   "customization": {
    "configuratorReady": false,
@@ -186758,8 +186763,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL. C124 coupe. Both tyres render white including the tread sipes; grey alloy is darker than the tyre. Confirmed on RED re-renders at az 215 and az 270 while sibling e-class-mw1-v1 on the identical rig, colour, wheel and tyre material renders plainly black.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -186809,7 +186814,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "2026-08-10 retroactive tyre audit: quarantined, tyres do not render as black rubber. See pipeline/ingest/retro_tyre_audit.json."
   ],
   "customization": {
    "configuratorReady": false,
@@ -186926,8 +186932,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL. W124 saloon. Front tyre white incl. tread, rear tyre black, on the same car - proven on RED re-renders at az 270 and az 215. Sibling e-class-mw1-v1 (same modeller, same 'tire' material at baseColor 0.106) renders black on both corners.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -186977,7 +186983,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "2026-08-10 retroactive tyre audit: quarantined, tyres do not render as black rubber. See pipeline/ingest/retro_tyre_audit.json."
   ],
   "customization": {
    "configuratorReady": false,
@@ -187094,8 +187101,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL. S124 estate. Same defect and same evidence as e-class-mw1-v3: front tyre white incl. tread on RED re-renders at both azimuths.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -187145,7 +187152,8 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+   "mw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-08, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "2026-08-10 retroactive tyre audit: quarantined, tyres do not render as black rubber. See pipeline/ingest/retro_tyre_audit.json."
   ],
   "customization": {
    "configuratorReady": false,

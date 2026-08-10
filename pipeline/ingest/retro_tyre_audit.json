@@ -1,0 +1,919 @@
+[
+ {
+  "assetId": "mercedes-benz-300-sl-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "9bd7aeb24fa14ab089c941cf67d675ad",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-a-class-2000-v1",
+  "make": "mercedes-benz",
+  "uid": "c714a68eeb764048abe5487af83670ce",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-a-class-2018-w12-v1",
+  "make": "mercedes-benz",
+  "uid": "9482f251f9c34a6e91d7777db5934cfc",
+  "verdict": "no-sheet",
+  "note": "No contact sheet in car-meshes/audit/ and no posterUrl on the entry - there is no render of this car anywhere in Supabase, so the tyres CANNOT be verified by eye. Supporting-only, not a pass: the shipped GLB carries a separate dark tyre/rubber material that the colour-variant respray does not touch."
+ },
+ {
+  "assetId": "mercedes-benz-amg-gt-2015-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "57e93f32bd8a4603bbd3f5fb873728b9",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Pale tyre at thumbnail scale; at 5x it is mid-grey rubber with visible tread, and a RED re-render shows plainly black tyres."
+ },
+ {
+  "assetId": "mercedes-benz-amg-gt-2015-v1",
+  "make": "mercedes-benz",
+  "uid": "4d9e0a8cf9a844149bf6630da83eb97b",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-amg-gt-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "a1c89ee2c731474dacc20701555915c5",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-c-class-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "06b7a34016a44d3e8e953e5fc68d58ec",
+  "verdict": "tyre-fail",
+  "note": "TYRE-FAIL. W202/S202 estate. Side tile at 5x: the whole tyre - sidewall and tread sawtooth - renders white, lighter than its own grey hubcap. Confirmed by two controlled re-renders of the same staged GLB in RED (az 270 and az 215): the front tyre stays white while the rear tyre on the same car renders black. A car cannot have one white and one black tyre by design, so this is a defect, not a whitewall."
+ },
+ {
+  "assetId": "mercedes-benz-c-class-mw1-v2",
+  "make": "mercedes-benz",
+  "uid": "8bf0e8ed024e483b9b9326794d1b2aa6",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-c-class-mw1-v3",
+  "make": "mercedes-benz",
+  "uid": "ff9ba755fc884fb88b5e73c3df1296e1",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-c-class-v1",
+  "make": "mercedes-benz",
+  "uid": "19d59344b7554e6ab614a6cc02e7ad0a",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-c-class-w12-v1",
+  "make": "mercedes-benz",
+  "uid": "b108b6f2e9654481af1c02801a98228e",
+  "verdict": "no-sheet",
+  "note": "No contact sheet and no posterUrl - cannot be verified by eye. This one additionally has NO tyre/rubber-named material in its GLB, so not even the supporting material check applies."
+ },
+ {
+  "assetId": "mercedes-benz-c-class-w202-v1",
+  "make": "mercedes-benz",
+  "uid": "c0630f02413745ff80a83ceecdd3a79e",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-cla-v1",
+  "make": "mercedes-benz",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-cla-v2",
+  "make": "mercedes-benz",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-cle-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "b721c580738d413c98aeca1f0059a481",
+  "verdict": "tyre-fail",
+  "note": "TYRE-FAIL. Tyre is a solid white ring around a dark multi-spoke rim, tread face included. Confirmed on a RED re-render at az 215 and az 270 - front tyre white, rear tyre black."
+ },
+ {
+  "assetId": "mercedes-benz-clk-2003-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "96c1c8f27333453db1cde651bc089708",
+  "verdict": "tyre-fail",
+  "note": "TYRE-FAIL. Front tyre AND rim both render white; no black rubber anywhere on that corner. Confirmed on a RED re-render at az 215 and az 270. The GLB's wheel prims carry material_14 baseColor [1,1,1] metallic 0.77 - a white glossy metal, not rubber."
+ },
+ {
+  "assetId": "mercedes-benz-clk-gtr-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "fa5a62f49dff495fae5223762ca80553",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Pale at thumbnail; RED re-render shows black tyres."
+ },
+ {
+  "assetId": "mercedes-benz-cls-2013-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "4ed156b0405e4e529d193ab1ccc11da9",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-cls-2022-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "740b3430e5714dd4a288265b4115ba0d",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-cls-2022-v1",
+  "make": "mercedes-benz",
+  "uid": "a1fec16bcc9d4d3c89ac0da2bb048a8b",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-cls-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "baf6e4dff35a43febcc6d75c87caa013",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-cls-mw1-v2",
+  "make": "mercedes-benz",
+  "uid": "3b11611c6d06415b82b96495f5f249ce",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Chrome rims read bright at thumbnail scale; at 3x the tyre is plainly black."
+ },
+ {
+  "assetId": "mercedes-benz-e-class-2010-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "97be219788544a2c953ccc04e37b97e8",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-e-class-2018-w12-v1",
+  "make": "mercedes-benz",
+  "uid": "da7dc289aeee4c8590762a1218b1bc6d",
+  "verdict": "no-sheet",
+  "note": "No contact sheet in car-meshes/audit/ and no posterUrl on the entry - there is no render of this car anywhere in Supabase, so the tyres CANNOT be verified by eye. Supporting-only, not a pass: the shipped GLB carries a separate dark tyre/rubber material that the colour-variant respray does not touch."
+ },
+ {
+  "assetId": "mercedes-benz-e-class-2022-w12-v1",
+  "make": "mercedes-benz",
+  "uid": "136ecd58732b4f88b0bcd3cb74a71e54",
+  "verdict": "no-sheet",
+  "note": "No contact sheet in car-meshes/audit/ and no posterUrl on the entry - there is no render of this car anywhere in Supabase, so the tyres CANNOT be verified by eye. Supporting-only, not a pass: the shipped GLB carries a separate dark tyre/rubber material that the colour-variant respray does not touch."
+ },
+ {
+  "assetId": "mercedes-benz-e-class-estate-2021-w7-v1",
+  "make": "mercedes-benz",
+  "uid": "e4e2dd5d07ee43f9a85891142329274a",
+  "verdict": "no-sheet",
+  "note": "No contact sheet in car-meshes/audit/ and no posterUrl on the entry - there is no render of this car anywhere in Supabase, so the tyres CANNOT be verified by eye. Supporting-only, not a pass: the shipped GLB carries a separate dark tyre/rubber material that the colour-variant respray does not touch."
+ },
+ {
+  "assetId": "mercedes-benz-e-class-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "dae8d703b11948799c9f877e8f2858cc",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-e-class-mw1-v2",
+  "make": "mercedes-benz",
+  "uid": "dff3640ff0ff464984e2d7f320794e25",
+  "verdict": "tyre-fail",
+  "note": "TYRE-FAIL. C124 coupe. Both tyres render white including the tread sipes; grey alloy is darker than the tyre. Confirmed on RED re-renders at az 215 and az 270 while sibling e-class-mw1-v1 on the identical rig, colour, wheel and tyre material renders plainly black."
+ },
+ {
+  "assetId": "mercedes-benz-e-class-mw1-v3",
+  "make": "mercedes-benz",
+  "uid": "81b317899e9641d9ac08f0be4fd09fac",
+  "verdict": "tyre-fail",
+  "note": "TYRE-FAIL. W124 saloon. Front tyre white incl. tread, rear tyre black, on the same car - proven on RED re-renders at az 270 and az 215. Sibling e-class-mw1-v1 (same modeller, same 'tire' material at baseColor 0.106) renders black on both corners."
+ },
+ {
+  "assetId": "mercedes-benz-e-class-mw1-v4",
+  "make": "mercedes-benz",
+  "uid": "5b85f87f175b434288708b83b62c42de",
+  "verdict": "tyre-fail",
+  "note": "TYRE-FAIL. S124 estate. Same defect and same evidence as e-class-mw1-v3: front tyre white incl. tread on RED re-renders at both azimuths."
+ },
+ {
+  "assetId": "mercedes-benz-e-class-mw1-v5",
+  "make": "mercedes-benz",
+  "uid": "b2810cbb2bde48439bb52d7643cc9485",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. W123 coupe reads as a white tyre in the pure profile view, but the 3/4 views (sheet and a RED re-render at az 215) show a crisp white sidewall ring with a BLACK TREAD - a genuine whitewall, kept per the ruling."
+ },
+ {
+  "assetId": "mercedes-benz-e-class-w12-v1",
+  "make": "mercedes-benz",
+  "uid": "119c5e10733142b197aa53b86f6aeb04",
+  "verdict": "no-sheet",
+  "note": "No contact sheet in car-meshes/audit/ and no posterUrl on the entry - there is no render of this car anywhere in Supabase, so the tyres CANNOT be verified by eye. Supporting-only, not a pass: the shipped GLB carries a separate dark tyre/rubber material that the colour-variant respray does not touch."
+ },
+ {
+  "assetId": "mercedes-benz-e-class-w213-undated-v1",
+  "make": "mercedes-benz",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-eqe-w8-v1",
+  "make": "mercedes-benz",
+  "uid": "1f1dfa0adfc943039d3870a5b958f069",
+  "verdict": "no-sheet",
+  "note": "No contact sheet and no posterUrl - cannot be verified by eye. This one additionally has NO tyre/rubber-named material in its GLB, so not even the supporting material check applies."
+ },
+ {
+  "assetId": "mercedes-benz-eqv-2020-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "65a80e8e84c149c18023030733b41a66",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-g-class-2018-v1",
+  "make": "mercedes-benz",
+  "uid": "d3ae2fdd64d143ecb0b6e92b5be682e6",
+  "verdict": "tyre-fail",
+  "note": "TYRE-FAIL, and the clearest case in the set: the LIVE shipped poster renders the tyres in body colour (blue), tread pattern and all, with only the rim left black. This one is literally the defect in the owner's ruling - the paint material covers the rubber."
+ },
+ {
+  "assetId": "mercedes-benz-g-class-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "3b25ec59233a4a82a6732b0a1419e553",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-gl-class-2011-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "e98b934960b14077ae7c2e86cbf49064",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Mid-grey at thumbnail; RED re-render shows black tyres."
+ },
+ {
+  "assetId": "mercedes-benz-gl-class-2012-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "6df2a99b1dbc4b5b8baaf7accf18390f",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-gla-2020-v1",
+  "make": "mercedes-benz",
+  "uid": "ab7b5df3ba634f38a14effde3d542466",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-gla-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "092ee873e85843c8826fc649c44e9a19",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-glc-2020-v1",
+  "make": "mercedes-benz",
+  "uid": "950d36030fe1468aa9033d5edfc9550c",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-glc-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "6bd804f3f61a4a5e9dcddddab42cf0f9",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-glc-mw1-v2",
+  "make": "mercedes-benz",
+  "uid": "6a0ef719f8d74378969b6f6095bd8981",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Mid-grey at thumbnail; RED re-render shows black tyres."
+ },
+ {
+  "assetId": "mercedes-benz-gle-v1",
+  "make": "mercedes-benz",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-glk-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "c18392f7273f4d6f85255ae3ff2b389a",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Mid-grey at thumbnail; RED re-render shows black tyres."
+ },
+ {
+  "assetId": "mercedes-benz-gls-2022-v1",
+  "make": "mercedes-benz",
+  "uid": "d6d814e099914c5c84a3a8635fad4bb2",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-m-class-2013-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "03d647d99f9348328391cd7b1394c7e2",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-mercedes-vito-2010-w5-v1",
+  "make": "mercedes-benz",
+  "uid": "fbbeae0a1a40455896557f6642b31eb5",
+  "verdict": "no-sheet",
+  "note": "No contact sheet in car-meshes/audit/ and no posterUrl on the entry - there is no render of this car anywhere in Supabase, so the tyres CANNOT be verified by eye. Supporting-only, not a pass: the shipped GLB carries a separate dark tyre/rubber material that the colour-variant respray does not touch."
+ },
+ {
+  "assetId": "mercedes-benz-mercedes-vito-w5-v1",
+  "make": "mercedes-benz",
+  "uid": "fe704a2aa87a4921990d4973a6eef36d",
+  "verdict": "no-sheet",
+  "note": "No contact sheet in car-meshes/audit/ and no posterUrl on the entry - there is no render of this car anywhere in Supabase, so the tyres CANNOT be verified by eye. Supporting-only, not a pass: the shipped GLB carries a separate dark tyre/rubber material that the colour-variant respray does not touch."
+ },
+ {
+  "assetId": "mercedes-benz-ponton-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "cbad3d3420584ff3b5cd472b869f92d6",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Same as the W123: white sidewall with a plainly black tread in the 3/4 view on a RED re-render. Authentic period whitewall on a 1950s Ponton."
+ },
+ {
+  "assetId": "mercedes-benz-r-class-2005-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "2311177fc828453fb792743b8fe48705",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-s-class-1979-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "03b3e3cc99e6462697a5cbcbb47d17e3",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. RED re-render shows black tyres."
+ },
+ {
+  "assetId": "mercedes-benz-s-class-1999-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "609d61e7237f48508fce6405e98c485b",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Mid-grey at thumbnail; RED re-render shows black tyres."
+ },
+ {
+  "assetId": "mercedes-benz-s-class-2003-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "1d2494ea90434de984b9dc677461af5a",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-s-class-2021-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "517779b60d6d4b778e43403e2765832a",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-s-class-2021-w7-v1",
+  "make": "mercedes-benz",
+  "uid": "fc13480d139b41cc95650bad9a8d6eb1",
+  "verdict": "no-sheet",
+  "note": "No contact sheet in car-meshes/audit/ and no posterUrl on the entry - there is no render of this car anywhere in Supabase, so the tyres CANNOT be verified by eye. Supporting-only, not a pass: the shipped GLB carries a separate dark tyre/rubber material that the colour-variant respray does not touch."
+ },
+ {
+  "assetId": "mercedes-benz-s-class-v1",
+  "make": "mercedes-benz",
+  "uid": "f42d9d13b0404b5b9a2302a4c590a94d",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-s600-1999-w7-v1",
+  "make": "mercedes-benz",
+  "uid": "2b61dbcce5634791a51c1986c2848853",
+  "verdict": "no-sheet",
+  "note": "No contact sheet in car-meshes/audit/ and no posterUrl on the entry - there is no render of this car anywhere in Supabase, so the tyres CANNOT be verified by eye. Supporting-only, not a pass: the shipped GLB carries a separate dark tyre/rubber material that the colour-variant respray does not touch."
+ },
+ {
+  "assetId": "mercedes-benz-sl-63-amg-2022-v1",
+  "make": "mercedes-benz",
+  "uid": "45b5d5fb971140ffaeba4302629975d5",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-sl-class-1955-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "7306bfef604b4157a6a2bd10669bd534",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. White sidewall + black tread in the 3/4 view (RED re-render) - genuine whitewall."
+ },
+ {
+  "assetId": "mercedes-benz-sl-class-1963-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "bf41546913a54520a2e38c4b99915d36",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Pagoda: white sidewall + black tread confirmed on a RED re-render - genuine whitewall."
+ },
+ {
+  "assetId": "mercedes-benz-sl-class-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "c56dc8fcfc624cf89ba13760f3ad72ae",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. R107: white sidewall + black tread confirmed on a RED re-render - genuine whitewall."
+ },
+ {
+  "assetId": "mercedes-benz-slr-mclaren-2004-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "6dd3f12d311d4d1f8a55ce0e1596a442",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-slr-mclaren-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "a73c924778de4d66ae45a7880ab8943e",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-slr-mclaren-mw1-v2",
+  "make": "mercedes-benz",
+  "uid": "4eb0a08f2c0c4c64b1a3299d5e3954ee",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-sls-amg-2012-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "efdab8fb67944da6a4449a9da5350134",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-sls-amg-2012-mw1-v2",
+  "make": "mercedes-benz",
+  "uid": "d9dc4af4a6e645b19ebd7d423870e0f7",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-sls-amg-2012-mw1-v3",
+  "make": "mercedes-benz",
+  "uid": "2020f04e67ba4bc7abbd284db40f9d6b",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-sls-amg-2013-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "88a61d91431b4414a7e32a936396191c",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-sls-amg-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "b5d41f9474c94127a7bf99ebef5da574",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "mercedes-benz-sprinter-v1",
+  "make": "mercedes-benz",
+  "uid": "5788a290ddb5483fbbd5831aeef829a1",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-sprinter-w7-v1",
+  "make": "mercedes-benz",
+  "uid": "40fff8615e0842ada6a80acde145d970",
+  "verdict": "no-sheet",
+  "note": "No contact sheet in car-meshes/audit/ and no posterUrl on the entry - there is no render of this car anywhere in Supabase, so the tyres CANNOT be verified by eye. Supporting-only, not a pass: the shipped GLB carries a separate dark tyre/rubber material that the colour-variant respray does not touch."
+ },
+ {
+  "assetId": "mercedes-benz-v-class-v1",
+  "make": "mercedes-benz",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-vito-v1",
+  "make": "mercedes-benz",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "mercedes-benz-x-class-mw1-v1",
+  "make": "mercedes-benz",
+  "uid": "5ccf8a9bb28e4f3fa509b27b2953e427",
+  "verdict": "tyre-fail",
+  "note": "TYRE-FAIL. Both tyres render white, sidewall and tread, in all four sheet views and on RED re-renders at az 215 and az 270. Rim is grey - darker than the tyre."
+ },
+ {
+  "assetId": "toyota-auris-2019-tw1-v1",
+  "make": "toyota",
+  "uid": "c7aad552ce6f4700b179615b2c9a346b",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-auris-2019-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-avensis-2009-tw2-v1",
+  "make": "toyota",
+  "uid": "20f0190e34da4ac4a984c7f7a757efba",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-avensis-tw1-v1",
+  "make": "toyota",
+  "uid": "78eeb0db0dab4339b546ed504453ed3c",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Reads as a pale tyre in the profile view; the 3/4 view (sheet and RED re-render at az 215) shows a black tread. White sidewall sheen only."
+ },
+ {
+  "assetId": "toyota-avensis-tw1-v2",
+  "make": "toyota",
+  "uid": "ad05a156f817451ca214d388e53052fb",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-bz4x-tw1-v1",
+  "make": "toyota",
+  "uid": "e10068b2511b4ed7b724a8d87a362727",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-bz4x-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-c-hr-2022-tw1-v1",
+  "make": "toyota",
+  "uid": "1f66a3fdb7da421cafb089467b5a6140",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-c-hr-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-camry-1997-tw1-v1",
+  "make": "toyota",
+  "uid": "196829bf4cbc4b8cb26c50964f35ff27",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-camry-2007-tw1-v1",
+  "make": "toyota",
+  "uid": "40111978beac4ba7846d94f41805de40",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Pale in profile, black tread in the 3/4 RED re-render."
+ },
+ {
+  "assetId": "toyota-camry-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-celica-1981-tw1-v1",
+  "make": "toyota",
+  "uid": "9f09704e33af42d29b2230e10506456a",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Pale in profile, black tread in the 3/4 RED re-render."
+ },
+ {
+  "assetId": "toyota-celica-tw1-v1",
+  "make": "toyota",
+  "uid": "af4fec1626f047339857d98b4f0f7273",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-corolla-2020-tw1-v1",
+  "make": "toyota",
+  "uid": "e595afd4ec5745a08f95cc5baeaa5ef0",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-corolla-cross-tw2-v1",
+  "make": "toyota",
+  "uid": "cc503d26ea694dce85e7d0f1491b0e30",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-corolla-tw1-v1",
+  "make": "toyota",
+  "uid": "e38b2b292a04436a936171a2f5d33af7",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-corolla-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-corolla-w7-v1",
+  "make": "toyota",
+  "uid": "4703efa36e4b4aa9a342db3153ce3edd",
+  "verdict": "no-sheet",
+  "note": "No contact sheet in car-meshes/audit/ and no posterUrl on the entry - there is no render of this car anywhere in Supabase, so the tyres CANNOT be verified by eye. Supporting-only, not a pass: the shipped GLB carries a separate dark tyre/rubber material that the colour-variant respray does not touch."
+ },
+ {
+  "assetId": "toyota-gr-corolla-2023-tw1-v1",
+  "make": "toyota",
+  "uid": "204283fa663d4ccea7f3bdfd1ba6680e",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-gr-supra-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-gr-yaris-2021-tw2-v1",
+  "make": "toyota",
+  "uid": "98e6611ad034451982b6a9908c63fc47",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-gr86-2023-tw1-v1",
+  "make": "toyota",
+  "uid": "0d83090a0d484d98b6749dbbf9b4a111",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-gr86-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-gt86-tw1-v1",
+  "make": "toyota",
+  "uid": "ec05296ddf2f4c22a570512245d1fba0",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-gt86-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-highlander-2020-tw1-v1",
+  "make": "toyota",
+  "uid": "ff144d062f244a3ebfae71bc2a41564b",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-highlander-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-hilux-1978-tw1-v1",
+  "make": "toyota",
+  "uid": "4ed6c385052b4d6fb7b2ecee08292d85",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Pale in profile; the 3/4 RED re-render shows a black tread with a white sidewall - whitewall pattern, plausible on a 1978 pickup."
+ },
+ {
+  "assetId": "toyota-hilux-1988-tw1-v1",
+  "make": "toyota",
+  "uid": "f8a557a46ff34a68893dce0136995408",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Pale in profile, black tread in the 3/4 RED re-render."
+ },
+ {
+  "assetId": "toyota-hilux-2005-tw1-v1",
+  "make": "toyota",
+  "uid": "df56087572a44b0496e39006859ae3b9",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-hilux-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-iq-tw1-v1",
+  "make": "toyota",
+  "uid": "f08f43a71bed4fbc8562fdde6214f1c4",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-land-cruiser-1998-tw1-v1",
+  "make": "toyota",
+  "uid": "a9c8b71c5c5d494bb55d79a2e161119b",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Pale in profile, black tread in the 3/4 RED re-render."
+ },
+ {
+  "assetId": "toyota-land-cruiser-2024-tw1-v1",
+  "make": "toyota",
+  "uid": "0937e2b405964856a1aac96f54861274",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-land-cruiser-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-mirai-tw1-v1",
+  "make": "toyota",
+  "uid": "950cd22ab63d4723b468f25da0fd5ec0",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Mid-grey against a bright silver rim at thumbnail; RED re-render shows black tyres."
+ },
+ {
+  "assetId": "toyota-prius-2010-tw1-v1",
+  "make": "toyota",
+  "uid": "3f82031714bd40a3a3a027e5687604de",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-prius-2016-tw1-v1",
+  "make": "toyota",
+  "uid": "90e9f77205014ecc8e3e08dd27dc4d52",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-prius-2019-tw1-v1",
+  "make": "toyota",
+  "uid": "42470a7ce258421a89c2361225bb89eb",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-prius-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-proace-city-verso-2020-tw1-v1",
+  "make": "toyota",
+  "uid": "751c7d18c05946d18ba7953dc046dec6",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-proace-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-rav4-2000-w5-v1",
+  "make": "toyota",
+  "uid": "373deb15ad9c4e208d1be26aa5c8e9ca",
+  "verdict": "no-sheet",
+  "note": "No contact sheet in car-meshes/audit/ and no posterUrl on the entry - there is no render of this car anywhere in Supabase, so the tyres CANNOT be verified by eye. Supporting-only, not a pass: the shipped GLB carries a separate dark tyre/rubber material that the colour-variant respray does not touch."
+ },
+ {
+  "assetId": "toyota-rav4-2010-v1",
+  "make": "toyota",
+  "uid": "450e36f0992c4ae09bd6c8d509a51a77",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-rav4-2021-tw1-v1",
+  "make": "toyota",
+  "uid": "411da54827634c5abd462ab4e9e0eb34",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-supra-tw1-v1",
+  "make": "toyota",
+  "uid": "980a52a5031a4b07a0f206b82ebb1275",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-supra-tw1-v2",
+  "make": "toyota",
+  "uid": "710e8b6748f249b2b6349cb555386811",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-supra-tw1-v3",
+  "make": "toyota",
+  "uid": "d6f1ad4b22214abfaea1e59f98409f57",
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the four-view contact sheet (side tile cropped and viewed at 5x)."
+ },
+ {
+  "assetId": "toyota-vellfire-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-yaris-2001-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-yaris-cross-2020-tw2-v1",
+  "make": "toyota",
+  "uid": "1b6dd834e8184851887ddeab1e83bc28",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, CLEARED. Mid-grey at thumbnail; RED re-render shows black tyres."
+ },
+ {
+  "assetId": "toyota-yaris-cross-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-yaris-v1",
+  "make": "toyota",
+  "uid": null,
+  "verdict": "ok",
+  "note": "Tyres read as black rubber in the LIVE shipped poster (car-renders hero), viewed at full size."
+ },
+ {
+  "assetId": "toyota-yaris-w7-v1",
+  "make": "toyota",
+  "uid": "e7cc6122d47a42f0b39771bd38da9f9e",
+  "verdict": "no-sheet",
+  "note": "No contact sheet in car-meshes/audit/ and no posterUrl on the entry - there is no render of this car anywhere in Supabase, so the tyres CANNOT be verified by eye. Supporting-only, not a pass: the shipped GLB carries a separate dark tyre/rubber material that the colour-variant respray does not touch."
+ }
+]
