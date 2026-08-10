@@ -11,6 +11,15 @@
     ]
   },
   {
+    "uid": "41dbe9246783499a82b709231342fde7",
+    "name": "BYD ROXAS",
+    "verdict": "fail",
+    "reasons": [
+      "NOT A QUALITY VERDICT: hard-rejected by the pipeline at 52MB, over the 48MB render cap, so no sheet exists and the car was never seen",
+      "would need decimating below the cap before it can be judged; recorded as fail only so the row is not silently dropped"
+    ]
+  },
+  {
     "uid": "101a56e650684590a46436089e8bba85",
     "name": "BYD_Tang_EV",
     "verdict": "pass",
@@ -233,6 +242,15 @@
     ]
   },
   {
+    "uid": "7395e1d063c14bbb8c246220373a0de7",
+    "name": "Torino BYD",
+    "verdict": "fail",
+    "reasons": [
+      "rejected by the pre-render pose gate: floorpan/wreck signature, h/l=0.214 - the GLB is not an upright complete car",
+      "no sheet was rendered, so this is a source-geometry verdict, not a render verdict"
+    ]
+  },
+  {
     "uid": "f7ee6b12224543c38f17f9122b4f1eaf",
     "name": "Byd Han",
     "verdict": "pass",
@@ -270,6 +288,189 @@
       "glazing opaque grey-white - no transparency, no interior at 3x",
       "tyres render the same grey as the rims, no black rubber",
       "headlamps absent; single material at cov=1.000"
+    ]
+  },
+  {
+    "uid": "33660cc157df4e2485ae37e8235041b7",
+    "name": "2023 BYD Seagull",
+    "verdict": "fail",
+    "reasons": [
+      "glazing opaque body-white with a wavy reflection - no interior visible at 3x on the side tile",
+      "tyre reads the same flat mid-grey as the rim: no black rubber on the tread face in either 3/4 tile",
+      "headlamps absent - the front is a blank body surface with only a crease where the lens belongs",
+      "single material at cov=1.000 covers body and glass alike"
+    ]
+  },
+  {
+    "uid": "4205f1f2a6094d9aba954d15f787b366",
+    "name": "Byd",
+    "verdict": "fail",
+    "reasons": [
+      "rejected by the pre-render pose gate: floorpan/wreck signature, h/l=0.201",
+      "no sheet was rendered, so this is a source-geometry verdict, not a render verdict"
+    ]
+  },
+  {
+    "uid": "e3a2ef09dcc547ccafe1687328ec05f0",
+    "name": "2024 BYD Seal U DM-i",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with tread; dark alloys, rim faces present on all four corners",
+      "glazing transparent, sharp LED headlamp internals, chrome grille slats crisp",
+      "shut lines defined, panel surfaces clean"
+    ]
+  },
+  {
+    "uid": "dda5d96fa79e42c290a279168126f247",
+    "name": "2024 BYD Seal U",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with tread; dark alloys, rim faces present",
+      "glazing transparent, headlamp internals sharp, shut lines defined",
+      "NOTE: same generation as e3a2ef09 (Seal U DM-i) from the same source family - the EV front (blank panel) vs the DM-i chrome-slat grille is the visible difference"
+    ]
+  },
+  {
+    "uid": "4eb4a93ae47b47f4b213dd89a0ad89f0",
+    "name": "2024 BYD Sealion 7",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with tread; machined-face alloys with red calipers, rim faces present all round",
+      "glazing transparent, sharp headlamp internals, defined shut lines",
+      "clean coupe-SUV proportions, premium finish - UK-sold model"
+    ]
+  },
+  {
+    "uid": "0af7ffe7b3b64d7fb9e31d4f1bac10c1",
+    "name": "2024 BYD Tang",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with tread; machined alloys, rim faces present",
+      "glazing transparent, headlamp internals sharp, shut lines defined",
+      "panels clean, proportions read as a Tang instantly"
+    ]
+  },
+  {
+    "uid": "98b9fdf30fc742f39b8600f2cd3f4b49",
+    "name": "2022 BYD Han EV (facelift)",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber; black multi-spoke alloys, rim faces present",
+      "glazing transparent, headlamp internal segments defined, shut lines crisp",
+      "clean saloon proportions"
+    ]
+  },
+  {
+    "uid": "f7ef899186d445d48e4781ddfc84fddc",
+    "name": "2024 BYD Atto 3",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with tread; machined alloys, rim faces present on all corners",
+      "glazing transparent, sharp headlamp internals, shut lines defined",
+      "UK-sold model, panels clean"
+    ]
+  },
+  {
+    "uid": "4df389a245fd4598ba6bfbc455b56d63",
+    "name": "BYD Seal (Rigged)",
+    "verdict": "fail",
+    "reasons": [
+      "tyres render body-WHITE including the modelled tread face, on all four corners, in BOTH front34 and rear34 - not a whitewall (a whitewall keeps a black tread; here the tread is white too)",
+      "glazing and rims are fine; the tyre is the sole defect",
+      "EVIDENCE NOTE: this is sheet evidence. Per CLAUDE.md the sheet is a candidate finder for material defects - a --colour red re-render of the staged GLB would separate a body-painted tyre (goes red) from a per-corner render defect (stays white). Either way it fails the owner's black-rubber ruling as rendered."
+    ]
+  },
+  {
+    "uid": "e8f3cf54c0e545b1b290d7a55ca77fca",
+    "name": "2024 BYD Dolphin",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with tread; two-tone black/blue alloys (blue accents are genuine Dolphin trim), rim faces present",
+      "glazing transparent, sharp LED headlamp internals, black roof separately materialled",
+      "shut lines defined - UK-sold model, one of the strongest in the wave"
+    ]
+  },
+  {
+    "uid": "a4990ac098274cb0ae1bc4ddcb977950",
+    "name": "2023 BYD Yangwang U8",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with sidewall lettering; black alloys, rim faces present",
+      "glazing transparent - tan interior visible; chrome mesh grille modelled, panels clean",
+      "NOTE: Yangwang is BYD's luxury sub-brand and the U8 is not sold in the UK, so no UK reg will decode to it - quality passes, catalogue value is the owner's call",
+      "NOTE: near-identical twin of e41c7d03 (110,470 f vs 109,921 f); only the caliper colour differs"
+    ]
+  },
+  {
+    "uid": "e41c7d031c454d1c834a6f597c139521",
+    "name": "2023 byd yangwang U8",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with sidewall lettering; black alloys with blue calipers, rim faces present",
+      "glazing transparent, chrome mesh grille modelled, panels clean",
+      "NOTE: Yangwang sub-brand, not UK-sold",
+      "NOTE: near-identical twin of a4990ac0 - same mesh, caliper colour is the only visible difference"
+    ]
+  },
+  {
+    "uid": "c14e3511bb9143acb3fe2aaf8e1b4346",
+    "name": "2024 BYD Yangwang U9",
+    "verdict": "fail",
+    "reasons": [
+      "tyres render body-white/light grey with no black rubber anywhere on the wheel (rim is mid-grey, tyre is lighter still) in both 3/4 tiles",
+      "no door or bonnet shut lines - the body is a single unbroken clay surface",
+      "badge and lamp detail limited to basic lens shapes; markedly worse than the two other U9 uploads in this wave"
+    ]
+  },
+  {
+    "uid": "5beac99c87fd496daac93229be7f2305",
+    "name": "2024 BYD Seal 06 GT",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with tread; dark alloys with red calipers, rim faces present",
+      "glazing transparent, headlamp internals defined, honeycomb lower grille modelled",
+      "shut lines defined, panels clean"
+    ]
+  },
+  {
+    "uid": "9f9d82e405ca4382a1c9ff442f5862c2",
+    "name": "2024 BYD Yangwang U9",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with P-ZERO sidewall lettering; machined alloys with blue calipers, rim faces present",
+      "glazing transparent, sharp headlamp internals, carbon aero elements separately materialled",
+      "panel surfaces excellent",
+      "NOTE: Yangwang sub-brand, not UK-sold. Duplicate pair with 8f944846 (98,502 f vs 98,416 f - the two sheets are visually indistinguishable)"
+    ]
+  },
+  {
+    "uid": "8f944846e426419581df6d0fe9bfb927",
+    "name": "2024 BYD Yangwang U9",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with P-ZERO lettering; machined alloys, rim faces present",
+      "glazing transparent, headlamp internals sharp, panels excellent",
+      "NOTE: Yangwang sub-brand, not UK-sold. Duplicate of 9f9d82e4 - the two renders are indistinguishable at 2.4x"
+    ]
+  },
+  {
+    "uid": "7b1210f6e73342b0976504fc855b3a17",
+    "name": "byd seal gt",
+    "verdict": "fail",
+    "reasons": [
+      "rejected by the pre-render pose gate: wide-top/cage signature, tob=1.231 - the mesh is wider at the top than at the wheels",
+      "no sheet was rendered, so this is a source-geometry verdict, not a render verdict"
+    ]
+  },
+  {
+    "uid": "958f67c66e3c4f79bb6b3de1bec88928",
+    "name": "2024 BYD Yangwang U7",
+    "verdict": "pass",
+    "reasons": [
+      "tyres black rubber with tread; machined alloys, rim faces present",
+      "glazing transparent, headlamp internals defined, shut lines present",
+      "panels clean",
+      "NOTE: Yangwang sub-brand, not UK-sold"
     ]
   }
 ]
