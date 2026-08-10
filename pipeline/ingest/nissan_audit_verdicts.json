@@ -3923,5 +3923,100 @@
       "body shell only, sitting flat on the floor with no suspension",
       "glazing and taillights are fine; unusable as staged"
     ]
+  },
+  {
+    "uid": "cd7bfb3588af4e32b38dd7a1fd1f0798",
+    "name": "2007 Nissan Navara Tuned",
+    "verdict": "fail",
+    "reasons": [
+      "NO WHEELS on any corner - all four arches are empty and the body sits flat on the studio floor in every view",
+      "cab glazing renders opaque body-white in the side and front34 views",
+      "cov=0.618 over 7 body materials; the sheet also carries a low-top pose warning, which is the empty arches dropping the bounding box",
+      "body shell only - unusable as staged"
+    ]
+  },
+  {
+    "uid": "cd9bf7c2f6a44acd8253779987973e63",
+    "name": "NISSAN GTR 35",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: the glazing renders as a flat saturated CYAN pane with untextured white seats showing through - reads as coloured plastic, not automotive glass",
+      "a jagged dark geometry fragment sits at the A-pillar base beside the door mirror",
+      "rear bumper centre renders grey against the white body - separate material (cov=0.408)",
+      "tyres plainly black rubber and dark rim faces with orange calipers are fine"
+    ]
+  },
+  {
+    "uid": "d3016a1b0d394360b9d48108bae57b47",
+    "name": "Nissan Laurel VIII C35 1997-2002",
+    "verdict": "fail",
+    "reasons": [
+      "no tyres mounted on any corner - bare hubs, brake discs and suspension arms hang in empty arches in all four views",
+      "a loose wheel/tyre lies on the ground under the car in the side view",
+      "cov=0.802 over 5 body materials; glazing is dark but the car is structurally incomplete"
+    ]
+  },
+  {
+    "uid": "d90ca86d3d084acb91d4815aa6956ffa",
+    "name": "Top Secret Nissan Silvia D1GP - 5022743 (1)",
+    "verdict": "fail",
+    "reasons": [
+      "Top Secret D1GP DRIFT competition car - full race aero and a strutted GT wing; out of scope",
+      "also an untextured clay shell: no glazing at all (the greenhouse is solid white), no lamps, no badges",
+      "cov=1.000 FULL COVERAGE, single body material - a respray would repaint the whole model"
+    ]
+  },
+  {
+    "uid": "dd3d6df166bb46f3ab3cfb895a34a0b4",
+    "name": "Nissan Terrano|Pathfinder WD21",
+    "verdict": "fail",
+    "reasons": [
+      "not a single car - the asset is a MULTI-VEHICLE PACK: six-plus vehicles staged together (a camper conversion, a tow truck, a winged rally/buggy and several Terranos) in one scene",
+      "647,204 f spread across the whole collection; cov=0.069 because no single body dominates",
+      "the pose gate errored out on it (pose-gate-skipped:ValueError) for the same reason",
+      "unusable as a catalogue asset without splitting the scene"
+    ]
+  },
+  {
+    "uid": "e2b7988d402a4af6af9cf51144daa798",
+    "name": "Nissan GT-R LM Nismo | www.vecarz.com",
+    "verdict": "fail",
+    "reasons": [
+      "Nissan GT-R LM Nismo LMP1 - a Le Mans prototype RACE CAR in full #22 Motul/WEC livery, not a road car a UK reg decodes to",
+      "closed cockpit, no road equipment, race slicks and full aero",
+      "the mesh itself renders cleanly - it fails purely on scope"
+    ]
+  },
+  {
+    "uid": "ecabd8dec591401495b5ec511e0f82e0",
+    "name": "1997 Nissan Skyline GT-R V-Spec (R33)",
+    "verdict": "fail",
+    "reasons": [
+      "same broken front end as its twin: headlamp geometry is dark angular shards inside the lamp aperture, one jutting past the bonnet line, with no coherent lens or reflector",
+      "grille is a plain dark slot; front bumper renders greyer than the body (body mats=4, cov=0.633)",
+      "DUPLICATE of 68009c7a (1997 Nissan Skyline GT-R V-Spec (R33)) - 75,589 f vs 75,189 f, 0.5% apart, identical title and identical render; both fail",
+      "glazing, black tyres and silver rim faces are fine"
+    ]
+  },
+  {
+    "uid": "f416d5dfd92c4611bd897814d298252a",
+    "name": "Nissan Fairlady Z Tier 2",
+    "verdict": "fail",
+    "reasons": [
+      "stylised game-art tuner build (a 'Tier 2' upgrade car) - fantasy widebody, towering multi-element rear wing, exposed side-exit pipes and glowing teal wheels; not an OEM road car",
+      "glazing renders opaque white/pale in every view",
+      "cov=0.026 LOW COVERAGE - the neon green is the source colour, not the forced one"
+    ]
+  },
+  {
+    "uid": "ff8fb2251dfa4bb9979e7022c5a6666c",
+    "name": "Nissan Skyline R34 GT-R",
+    "verdict": "fail",
+    "reasons": [
+      "clay shell - the whole greenhouse renders OPAQUE body-white in all four views, no glazing at all",
+      "cov=0.824 across 6 body materials",
+      "DUPLICATE of 2c70179b (Nissan_skyline_r34_gt-r) - 62,484 f vs 62,468 f, 16 faces apart, same title after normalisation, same defect; both fail",
+      "tyres and silver rim faces are fine; taillights are the only surviving real materials"
+    ]
   }
 ]
