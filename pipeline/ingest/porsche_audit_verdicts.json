@@ -141,5 +141,118 @@
    "body shell only: no wheels, no tyres, no glass, no interior",
    "unpainted primer/masking colours baked into the shell"
   ]
+ },
+ {
+  "uid": "b533d0af0a7e411bba3c861fabd608ca",
+  "name": "Porsche Cayenne",
+  "verdict": "fail",
+  "reasons": [
+   "three of the four wheels are absent - bare hubs and brake discs only; the car stands on one wheel in every view",
+   "incomplete asset, not a render artefact (the same three are missing from all four azimuths)"
+  ]
+ },
+ {
+  "uid": "269d8a5da4254109922a1af0dd2eb6b6",
+  "name": "Porsche Panamera Turbo Liftback 2023",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Panamera (972) instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing transparent, cabin visible",
+   "rim faces present with red calipers in all four views",
+   "headlamp internals present, grille and shut lines defined"
+  ]
+ },
+ {
+  "uid": "149025bad98e4db1b54aee25aa1191b9",
+  "name": "Porsche Panamera GTS 2019",
+  "verdict": "fail",
+  "reasons": [
+   "body shading is blotchy and stair-stepped across roof, bonnet and doors in ALL four views - broken normals/smoothing; paint reads as crumpled foil",
+   "reflections dirty, paint finish nowhere near premium",
+   "dark gash in the front wing beside the headlamp in front34"
+  ]
+ },
+ {
+  "uid": "a052ffe9832c4197b861c1a947618e46",
+  "name": "Porsche 918 Spyder",
+  "verdict": "fail",
+  "reasons": [
+   "headlamps entirely unmodelled - the front wings are smooth body surface with only a faint crease where the four-point LED units belong (confirmed at 2x on the rear34 tile)",
+   "tyres and rim faces are genuinely fine (dark tread confirmed at 2x), so this is a modelling gap, not a material defect"
+  ]
+ },
+ {
+  "uid": "c17ff4da1bf446da96878fb50f9ff897",
+  "name": "Porsche Macan GTS 2020",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: cov=0.997 single material, windows opaque body-colour, tyres body-white",
+   "glazing and tyre rulings both fail"
+  ]
+ },
+ {
+  "uid": "208e7504602b445b9eb52160c0d8b932",
+  "name": "Free Forged line wheels porsche 992 gt3 rs",
+  "verdict": "fail",
+  "reasons": [
+   "not a car: a single alloy wheel rim",
+   "filter gap - PART_WORDS matches 'wheel' but the title says 'wheels', so \\b did not catch it"
+  ]
+ },
+ {
+  "uid": "387139cae7fa461eb16f5d15306264bb",
+  "name": "Porsche Macan_stls",
+  "verdict": "fail",
+  "reasons": [
+   "STL clay export: cov=1.000 single material, no glass, no tyres, solid white throughout",
+   "source GLB is rotated onto its nose - the pre-render pose gate measured h/l=0.622 from the GLB itself, so this is a source pose problem, not the render-side inversion bug"
+  ]
+ },
+ {
+  "uid": "a389bf4c5e644eed9c0e9f2de5f06269",
+  "name": "Porsche Gt3rs + Mclaren 720s",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: fictional kitbash of a McLaren 720S body with a Porsche nose - not a production Porsche",
+   "clay shell, cov=1.000, no glass, no tyres"
+  ]
+ },
+ {
+  "uid": "c43d3ef6b00c433a8a4d9d2cf7559ed4",
+  "name": "porsche_992_gt3r",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: 992 GT3 R race car - Blancpain/GTWC door panels, Pirelli slicks, race aero, roll cage, no road headlamps",
+   "no UK registration decodes to this"
+  ]
+ },
+ {
+  "uid": "28bcbd1b505c4edfbe217a10f4d6ea22",
+  "name": "Porsche Cayenne E-Hybrid Coupe 2024",
+  "verdict": "fail",
+  "reasons": [
+   "glazing opaque body-white in all four views - no glass material (owner ruling 2026-08-09, outright fail)",
+   "body panels show faceted low-poly shading patches on doors and roof",
+   "headlamps are blank white blanks",
+   "tyres and rims are fine"
+  ]
+ },
+ {
+  "uid": "bf3bcbc17f274bc792b0aca30ce1a0d7",
+  "name": "Porsche 996",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: 935-style slant-nose widebody conversion - no headlamps, round bumper driving lamps, huge race wing and flared arches",
+   "wheels absent on one side: both arches are empty black voids in front34_L and the front arch is a void in rear34 (this is a genuine absence, not the one-sided key light)"
+  ]
+ },
+ {
+  "uid": "63b69723d4ae46ad93fa3104fcdc038d",
+  "name": "Porsche Taycan 2021",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: widebody tuner build - bolt-on flared arches, canards, huge front splitter, GT wing, slammed on deep-dish wheels"
+  ]
  }
 ]
