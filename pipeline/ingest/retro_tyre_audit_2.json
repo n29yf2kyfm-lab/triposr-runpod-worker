@@ -1,212 +1,961 @@
 [
  {
+  "assetId": "honda-accord-1998-hw1-v1",
+  "make": "honda",
+  "uid": "d4f83dedc8f54c27b5c9103a662d1062",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-accord-2003-hw1-v1",
+  "make": "honda",
+  "uid": "baa08e5aea7a4f638d98db2050c21112",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-accord-2009-hw1-v1",
+  "make": "honda",
+  "uid": "3f5ef3ff34c04f839c05709c6fa5ce1c",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-accord-2009-hw1-v2",
+  "make": "honda",
+  "uid": "1bddd17deee44ef8b8a401e8a25a6b5d",
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [1, 1, 1] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (16 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
+ },
+ {
+  "assetId": "honda-accord-2011-hw1-v1",
+  "make": "honda",
+  "uid": "6eccbee181b143b28764a82b15f0a62d",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-accord-2017-w5-v1",
+  "make": "honda",
+  "uid": "68892cd369e84a218e5e5dcf82365ee3",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-accord-2021-hw1-v1",
+  "make": "honda",
+  "uid": "f973338c77ce4618b941612241d53f6a",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
   "assetId": "honda-accord-2021-v1",
   "make": "honda",
   "uid": "e742636e46814de5af1568542e7c9bdb",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, black alloys, transparent glazing."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "honda-accord-hw1-v1",
+  "make": "honda",
+  "uid": "39bf36a5b88b4767973ce417cfdcf301",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-beat-1991-hw1-v1",
+  "make": "honda",
+  "uid": "1c1d92ac8ae24ee5ba0e89a10c4fa595",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-city-2008-hw1-v1",
+  "make": "honda",
+  "uid": "65e2974c74254021b027b223190418e8",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-1976-hw1-v1",
+  "make": "honda",
+  "uid": "ade1ab7ab2df4618a802431f3237f250",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-1987-hw1-v1",
+  "make": "honda",
+  "uid": "5328bd7313e346789568266d67081ba3",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-1991-hw1-v1",
+  "make": "honda",
+  "uid": "1bb32fd8460e47af82518e43f172f916",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-1993-hw1-v1",
+  "make": "honda",
+  "uid": "18e956bcf53b4f1191a9fb6b5b70efe2",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-1996-hw1-v1",
+  "make": "honda",
+  "uid": "1860f7cc43544306a4148ba5953cfac4",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-1999-hw1-v1",
+  "make": "honda",
+  "uid": "ce29e75eb129406f874e0423ab8869c3",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-2007-w5-v1",
+  "make": "honda",
+  "uid": "1325afb508f14c4bbb40e9f849b0d4a2",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-2015-w12-v1",
+  "make": "honda",
+  "uid": "423afaa1c6664859832d4a5458d90b52",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-2016-w5-v1",
+  "make": "honda",
+  "uid": "ff844e296f214e709c0d0691d031c68b",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-2022-hw1-v1",
+  "make": "honda",
+  "uid": "35cbd73adbe8411b80bdeeaa4f3cd151",
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (18 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
+ },
+ {
+  "assetId": "honda-civic-2023-hw1-v1",
+  "make": "honda",
+  "uid": "0669147fb3ba4cca95ea942add743b2b",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-2023-w12-v1",
+  "make": "honda",
+  "uid": "8c9484184a2b4254aafd67418b8c18db",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-2025-hw1-v1",
+  "make": "honda",
+  "uid": "0dc6454d74a241e5a08fac82ce2826b2",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-hw1-v1",
+  "make": "honda",
+  "uid": "770a5c9b025449f59769d8cd27d915bb",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-civic-hw1-v2",
+  "make": "honda",
+  "uid": "4f8ff01b643d4795a6a515478a6fd9d6",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "honda-civic-v1",
   "make": "honda",
   "uid": "fe669d5461cd400a83c1393a9e1eef59",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, dark alloys with red calipers, transparent glazing."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "honda-concerto-1988-hw1-v1",
+  "make": "honda",
+  "uid": "0aebfa48b6f140f694a3cbd62bbd5336",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-cr-v-2001-hw1-v1",
+  "make": "honda",
+  "uid": "3565e8277a484f14b45c6888ca61a2b2",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "honda-cr-v-v1",
   "make": "honda",
   "uid": "4d0751311d76473b81377f5bd2da273b",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, black alloys."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "honda-cr-x-1988-hw1-v1",
+  "make": "honda",
+  "uid": "a856d729d9ec47fc8cb3b740199ed6bf",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-cr-x-1995-hw1-v1",
+  "make": "honda",
+  "uid": "f00136dfd77348b1a053d98fadd43602",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-cr-z-2011-hw1-v1",
+  "make": "honda",
+  "uid": "d5af69ef34834f43a65b4aac78ca8929",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-crosstour-hw1-v1",
+  "make": "honda",
+  "uid": "8d0d4ce034ef435db9167b18161ef57f",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-hr-v-2001-hw1-v1",
+  "make": "honda",
+  "uid": "b3c0f77626644e99b54304aebbafc60b",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-hr-v-2025-hw1-v1",
+  "make": "honda",
+  "uid": "d2c35fc6af904aa8a3a138ca21275b2a",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "honda-hr-v-v1",
   "make": "honda",
   "uid": "bf835b5a5e6f4b79a134db5156992cf0",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, two-tone alloys, transparent glazing."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "honda-insight-2010-hw1-v1",
+  "make": "honda",
+  "uid": "01bd4f2a73f949d8840afb711429b3c1",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-insight-v1",
+  "make": "honda",
+  "uid": null,
+  "verdict": "ok",
+  "note": "FLAG (not culled): raw glb is correct (dark tyres, real glass), but the PUBLISHED POSTER renders the whole front half of the bodywork semi-transparent - a render-worker glass-material misassignment, worth re-rendering."
+ },
+ {
+  "assetId": "honda-integra-1995-hw1-v1",
+  "make": "honda",
+  "uid": "cad9679ec5d6403984b1421ccd3f3d25",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-jazz-2016-hw1-v1",
+  "make": "honda",
+  "uid": "1acb615324254e53a04860e786ade136",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-jazz-2016-w9-v1",
+  "make": "honda",
+  "uid": "17cc85164ad143e5bb0f3cd0a88079d2",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "honda-jazz-2018-v1",
   "make": "honda",
   "uid": "2b1f535f185e4a6abf6b0a3222487704",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, white/black alloys, transparent glazing."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "honda-jazz-2020-hw1-v1",
+  "make": "honda",
+  "uid": "974385e940e84fd6bf47ca04c2e69313",
+  "verdict": "ok",
+  "note": "NEARLY CULLED, cleared: the tyre reads pale grey under studio light, but the body is lime green and the tyre is plainly not body-coloured; wheel cover is white, tyre a distinctly different tone."
+ },
+ {
+  "assetId": "honda-jazz-2020-w9-v1",
+  "make": "honda",
+  "uid": "6af77df7e9fa40a3804ef2811d6a65e9",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-nsx-1992-hw1-v1",
+  "make": "honda",
+  "uid": "8788e6274878465a9e03a063844eba7c",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-nsx-1992-hw1-v2",
+  "make": "honda",
+  "uid": "a21edb35a7714774a10b74642e815ca2",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-nsx-1992-hw1-v3",
+  "make": "honda",
+  "uid": "abeaa957199c473ea3d293f7e669bf34",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "honda-nsx-v1",
   "make": "honda",
   "uid": null,
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "honda-odyssey-1994-hw1-v1",
+  "make": "honda",
+  "uid": "7ea59d42e17a4d1f9a98b840740a3aa6",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-odyssey-1999-hw1-v1",
+  "make": "honda",
+  "uid": "f749ed1e876d415b82efa5293836d92a",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-odyssey-1999-hw1-v2",
+  "make": "honda",
+  "uid": "d5d98cef2a4240b6be91e03a1afcb0e1",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-odyssey-2001-hw1-v1",
+  "make": "honda",
+  "uid": "24abc0e850f64705906c910e91a6ac4a",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-odyssey-2008-hw1-v1",
+  "make": "honda",
+  "uid": "db666ce23d7b42fdbcd93a73217ba363",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-odyssey-2011-hw1-v1",
+  "make": "honda",
+  "uid": "db80634b538c40569bc77ebf829bac19",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-prelude-1978-hw1-v1",
+  "make": "honda",
+  "uid": "69183c2bf725484285552138c01ce93b",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-prelude-1983-hw1-v1",
+  "make": "honda",
+  "uid": "faa07ab210314dd2a52e678e1b4f5a9a",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-prelude-1997-hw1-v1",
+  "make": "honda",
+  "uid": "92e568f639384c3b9c3ced96512f6f1d",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "honda-s2000-1999-hw1-v1",
+  "make": "honda",
+  "uid": "737fd0a261fd4f32b431c838dcc57c0f",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "honda-s2000-v1",
   "make": "honda",
   "uid": null,
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, dark alloys, red interior visible through the glass."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "honda-s660-2015-hw1-v1",
+  "make": "honda",
+  "uid": "4e3e9bd888fb4ec69f71cc487f33f4ba",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "honda-zr-v-2023-v1",
   "make": "honda",
   "uid": "33eb3630e2ef4693b908322683784734",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
  },
  {
   "assetId": "nissan-350z-2006-v1",
   "make": "nissan",
   "uid": null,
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
  },
  {
   "assetId": "nissan-ariya-v1",
   "make": "nissan",
   "uid": null,
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "nissan-elgrand-v1",
+  "make": "nissan",
+  "uid": null,
+  "verdict": "ok",
+  "note": "FLAG (not culled): tyres are dark rubber and the glazing is real glass, but the body texture is broken - it renders as a magenta/grey camouflage splatter in both the published poster and the raw glb."
  },
  {
   "assetId": "nissan-gt-r-v1",
   "make": "nissan",
   "uid": "c8cd27c3c8cf4e2d86da031f1e98f8c8",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, black alloys with blue lug nuts."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "nissan-juke-2011-w5-v1",
+  "make": "nissan",
+  "uid": "a63292418bdb4e819ed56e201c53b920",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "nissan-juke-2020-v1",
   "make": "nissan",
   "uid": null,
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.56, 0.57, 0.6] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (24 materials, 2 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
+ },
+ {
+  "assetId": "nissan-juke-2020-w5-v1",
+  "make": "nissan",
+  "uid": "c920be4123354359b7c914d8e6669d22",
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (20 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
+ },
+ {
+  "assetId": "nissan-juke-2022-w5-v1",
+  "make": "nissan",
+  "uid": "106e353be6f947a89a13c2b9f6e792a9",
+  "verdict": "tyre-fail",
+  "note": "No tyres or wheels at all - both arches are empty black cavities in the live glb, and the glazing renders as black voids. Worse than the defect being screened for: there is no rubber to be black."
+ },
+ {
+  "assetId": "nissan-juke-w6-v1",
+  "make": "nissan",
+  "uid": "62cb9919523947caa4cdef27da902d04",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, black alloys."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "nissan-leaf-2023-v1",
   "make": "nissan",
   "uid": "dc43dc90417f4a34911445d48bf89da5",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, black alloys."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "nissan-micra-2004-w12-v1",
+  "make": "nissan",
+  "uid": "117a4b23752a4659bf6db90522c4b262",
+  "verdict": "ok",
+  "note": "FLAG (not culled): tyres are not body-coloured, but the entire lower half of the car renders solid black, so the wheels cannot be read as separate parts."
  },
  {
   "assetId": "nissan-micra-k10-v1",
   "make": "nissan",
   "uid": "a646c835325a4a0faf27fced42d10e2b",
   "verdict": "ok",
-  "note": "NEARLY CULLED. Poster read as a pale tyre at thumbnail scale; at 3.5x the tyre is mid-dark rubber with a moulded tread pattern, clearly darker than both the white wheel cover and the blue body. Cleared."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "nissan-micra-w6-v1",
+  "make": "nissan",
+  "uid": "4920e8c5856848afb577d8a022fe5980",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "nissan-micra-w6-v2",
+  "make": "nissan",
+  "uid": "1f276cfbcddd4fa09a962c9926ba8292",
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [1, 1, 1] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (18 materials, 2 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
  },
  {
   "assetId": "nissan-navara-2021-v1",
   "make": "nissan",
   "uid": "2a877fdf866b4dbb8b0aa4dd9ef2319d",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, dark alloys."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "nissan-navara-2022-w5-v1",
+  "make": "nissan",
+  "uid": "50af2d41e8124857bbe68d168855e4a6",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "nissan-navara-w5-v1",
+  "make": "nissan",
+  "uid": "b573901c677843b5b6f99ed0db672fae",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "nissan-note-v1",
   "make": "nissan",
   "uid": null,
   "verdict": "ok",
-  "note": "NEARLY CULLED. Silver alloys make the wheel read pale; at 3.5x the tyre is plainly black. Cleared."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "nissan-nv200-2010-w5-v1",
+  "make": "nissan",
+  "uid": "d984c799f3c44f19a04ba30afb7b28e0",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "nissan-nv200-v1",
   "make": "nissan",
   "uid": null,
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres on dark steel wheels."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
  },
  {
   "assetId": "nissan-pulsar-v1",
   "make": "nissan",
   "uid": null,
   "verdict": "ok",
-  "note": "Shipped-asset poster: black car, black tyres, dark alloys, transparent glazing."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "nissan-qashqai-2010-w5-v1",
+  "make": "nissan",
+  "uid": "d26880a3c5464b87b7a5a67323775947",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "nissan-qashqai-2018-v1",
   "make": "nissan",
   "uid": "ef3c5a9808b44b44ac600ad4431b8680",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "nissan-qashqai-2022-w6-v1",
+  "make": "nissan",
+  "uid": "3c7f36f8e67d43b7b26e901880806503",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "nissan-x-trail-2023-v1",
   "make": "nissan",
   "uid": "f9f2cbdacac74ee7acfe1c731195ccaa",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "peugeot-2008-2018-pw1-v1",
+  "make": "peugeot",
+  "uid": "6291b66452614464889a71c8337b8c85",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-2008-2020-pw1-v1",
+  "make": "peugeot",
+  "uid": "0edcda285432434a8d127b44ad6da808",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-2008-2020-w5-v1",
+  "make": "peugeot",
+  "uid": "93efd164d3374295a8ac04c36e329429",
+  "verdict": "ok",
+  "note": "FLAG (not culled): both wheels render as featureless solid-black discs with no rim face, spokes or lug detail - the CLAUDE.md rim-void test, not a tyre fault. Tyres themselves are not body-coloured."
  },
  {
   "assetId": "peugeot-2008-v1",
   "make": "peugeot",
   "uid": "024e431193264f9cbd566b7a9a38e378",
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (47 materials, 2 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
+ },
+ {
+  "assetId": "peugeot-205-1997-pw1-v1",
+  "make": "peugeot",
+  "uid": "b0dbc2e209d545f9a2becdf9a7ab43ef",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, black alloys."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-205-pw1-v1",
+  "make": "peugeot",
+  "uid": "ff2b04cf7da94cbdbd277fe23b7204b8",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "peugeot-205-v1",
   "make": "peugeot",
   "uid": null,
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres on light steel wheels - correct for a 205 CJ."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "peugeot-206-2000-pw1-v1",
+  "make": "peugeot",
+  "uid": "513b76a9909049f49327c0b83bc5b56b",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-206-2002-w12-v1",
+  "make": "peugeot",
+  "uid": "01499004a07b46b586637149e9c16b29",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-206-2003-pw1-v1",
+  "make": "peugeot",
+  "uid": "52deb999ad964d2496c9fd25ee84c2d4",
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.8, 0.8, 0.8] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (42 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
+ },
+ {
+  "assetId": "peugeot-206-pw1-v1",
+  "make": "peugeot",
+  "uid": "b2ef11bf94b848618b5b7f38e202316b",
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [1, 1, 1] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (11 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
  },
  {
   "assetId": "peugeot-206-v1",
   "make": "peugeot",
   "uid": null,
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, dark alloys, transparent glazing (this is NOT the body-white-window 206 recorded in CLAUDE.md)."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "peugeot-207-pw1-v1",
+  "make": "peugeot",
+  "uid": "fa2cfaaab79b4d18a0fc89ba25a02f07",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-207-pw1-v2",
+  "make": "peugeot",
+  "uid": "9b59ff092c1c4f1f918ac7c16fe679a7",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-207-pw1-v3",
+  "make": "peugeot",
+  "uid": "ef5d59b78b96496fab2731b138820ea2",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "peugeot-208-2020-v1",
   "make": "peugeot",
   "uid": null,
-  "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, dark alloys."
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (19 materials, 2 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
+ },
+ {
+  "assetId": "peugeot-208-2020-w5-v1",
+  "make": "peugeot",
+  "uid": "a4f8becd0740468ca0c12cf403e4a42e",
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (21 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
  },
  {
   "assetId": "peugeot-208-v2",
   "make": "peugeot",
   "uid": null,
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, grey alloys, transparent glazing."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "peugeot-3008-pw1-v1",
+  "make": "peugeot",
+  "uid": "3e5e14fdb1f94f25a5b572caf518f55d",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "peugeot-3008-v1",
   "make": "peugeot",
   "uid": null,
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, black alloys."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "peugeot-3008-w12-v1",
+  "make": "peugeot",
+  "uid": "4f7c7318a29d4e16a6047c2d58bba28d",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "peugeot-307-2008-v1",
   "make": "peugeot",
   "uid": "eb357098ec05483986262ad8eb8ab0cc",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres on white wheel covers."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "peugeot-307-pw1-v1",
+  "make": "peugeot",
+  "uid": "3bf90277b3594803b4206efe764038ad",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-307-w12-v1",
+  "make": "peugeot",
+  "uid": "43e93bfe5fdb4727830499d3a8a485a1",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-308-2012-w5-v1",
+  "make": "peugeot",
+  "uid": "ca2f79eba4c2483990edc3789f777da0",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-308-2012-w7-v1",
+  "make": "peugeot",
+  "uid": "0d29517f84ef41168a00304bcb8c2db5",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-308-2012-w7-v2",
+  "make": "peugeot",
+  "uid": "c4bf7012033e47a6b06337d28ea6ce79",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-308-2020-pw1-v1",
+  "make": "peugeot",
+  "uid": "fe211e55acf54aa4a70c522ce720e17a",
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (21 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
  },
  {
   "assetId": "peugeot-308-2022-v1",
   "make": "peugeot",
   "uid": "0d9c9c265bec42678bfc269c1a8cebc3",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, black alloys."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "peugeot-308-2026-pw1-v1",
+  "make": "peugeot",
+  "uid": "68ae14e9883b4405852b404844384cdf",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-308-pw1-v1",
+  "make": "peugeot",
+  "uid": "e538cff86fef432287ec93c7c6f91931",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-404-pw1-v1",
+  "make": "peugeot",
+  "uid": "cf15d0c9a7ac485ba4a33a996e6c5589",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-405-pw1-v1",
+  "make": "peugeot",
+  "uid": "602dbd0634754339b47de7b1d18bf143",
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.8, 0.8, 0.8] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (51 materials, 3 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
+ },
+ {
+  "assetId": "peugeot-406-1998-pw1-v1",
+  "make": "peugeot",
+  "uid": "4b55488b331041c299955a937334113b",
+  "verdict": "tyre-fail",
+  "note": "Tyre renders in body colour. Zoomed on the live glb render at high magnification: the sidewall and tread are the same white/pale grey as the bodywork, with no black rubber anywhere on the car."
+ },
+ {
+  "assetId": "peugeot-406-pw1-v1",
+  "make": "peugeot",
+  "uid": "7cb921f0266d4a729e44ff69f7c0c730",
+  "verdict": "tyre-fail",
+  "note": "Tyre renders in body colour. Zoomed on the live glb render at high magnification: the sidewall and tread are the same white/pale grey as the bodywork, with no black rubber anywhere on the car."
+ },
+ {
+  "assetId": "peugeot-406-pw1-v2",
+  "make": "peugeot",
+  "uid": "ad75c776d8144bc98527d19b6fd0d58f",
+  "verdict": "tyre-fail",
+  "note": "Tyre renders in body colour. Zoomed on the live glb render at high magnification: the sidewall and tread are the same white/pale grey as the bodywork, with no black rubber anywhere on the car."
+ },
+ {
+  "assetId": "peugeot-407-2005-pw1-v1",
+  "make": "peugeot",
+  "uid": "deaac3bd68604aee8f8365d784f8ab34",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-407-w9-v1",
+  "make": "peugeot",
+  "uid": "a558be03c05a4c6c95e950438f9ec401",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-504-1968-pw1-v1",
+  "make": "peugeot",
+  "uid": "cc25e4d5a33a402e81ab764be6a0f61e",
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.8, 0.8, 0.8] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (55 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
+ },
+ {
+  "assetId": "peugeot-508-2021-pw1-v1",
+  "make": "peugeot",
+  "uid": "1770104e89f84a8f9ce4a0fd9ae131ac",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  },
  {
   "assetId": "peugeot-508-v1",
   "make": "peugeot",
   "uid": "8192f18de3d2431197c9e707666212c7",
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres, black alloys."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "peugeot-508-w12-v1",
+  "make": "peugeot",
+  "uid": "70c837db3ae84a718522ab51dca26d2a",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-boxer-2020-w5-v1",
+  "make": "peugeot",
+  "uid": "f56111e09ee748e0b8a20bdc3ebc9142",
+  "verdict": "tyre-fail",
+  "note": "FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (19 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body colour and windows opaque. The colour variants only rewrite the body material, so the tyres and glazing stay flat in every colour.",
+  "alsoGlazeFail": true
  },
  {
   "assetId": "peugeot-boxer-v1",
   "make": "peugeot",
   "uid": null,
   "verdict": "ok",
-  "note": "Shipped-asset poster: black tyres on silver steel wheels."
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on the published poster of the shipped asset plus a Blender render of the live glb."
+ },
+ {
+  "assetId": "peugeot-e-2008-w12-v1",
+  "make": "peugeot",
+  "uid": "1094ee784f7d4b63a9c43efefdbacca5",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-expert-v1",
+  "make": "peugeot",
+  "uid": null,
+  "verdict": "ok",
+  "note": "FLAG (not culled): raw glb has pale-green glass and black tyres, but the published poster shows the windows as open voids with untextured grey pillars - poster is misleading, and the model is low-detail."
+ },
+ {
+  "assetId": "peugeot-partner-2024-w5-v1",
+  "make": "peugeot",
+  "uid": "02551ea9c21a4e1986435c1252fe977e",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
+ },
+ {
+  "assetId": "peugeot-rcz-pw1-v1",
+  "make": "peugeot",
+  "uid": "bcbd76ac8d8949bc8e4b9f411d2f8745",
+  "verdict": "ok",
+  "note": "Tyres read as dark rubber on the shipped asset, clearly separate from the body colour; glazing reads as glass. Judged on a Blender render of the live glb (the wave audit sheet was discarded as evidence - see below)."
  }
 ]

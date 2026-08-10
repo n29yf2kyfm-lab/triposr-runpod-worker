@@ -35548,8 +35548,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (47 materials, 2 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -35589,7 +35589,9 @@
   "pipelineVersion": "ingest-pipeline-v1",
   "publishedAt": "2026-07-18T15:35:03Z",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "Source title: 'Peugeot 2008 GT 2020'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3682303, \"facesAfter\": 168881, \"ratio\": 0.041}",
@@ -71714,8 +71716,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (19 materials, 2 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -71755,7 +71757,9 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model a4f8becd0740468ca0c12cf403e4a42e (Peugeot e-208 2020), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
@@ -72175,8 +72179,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.56, 0.57, 0.6] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (24 materials, 2 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -72216,7 +72220,9 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 27f4c107d8c643c48f3fe6f829444886 (2020 Nissan Juke), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
@@ -98324,8 +98330,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (20 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -98367,7 +98373,9 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
    "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)",
@@ -98550,8 +98558,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres do not read as black rubber on the shipped glb. No tyres or wheels at all - both arches are empty black cavities in the live glb, and the glazing renders as black voids. Worse than the defect being screened for: there is no rubber to be black.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -98595,7 +98603,9 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'feyley'd', hardened audit pass; year/trim from source title only",
    "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)",
@@ -100590,8 +100600,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (21 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -100633,7 +100643,9 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
    "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)",
@@ -101716,8 +101728,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (19 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -101759,7 +101771,9 @@
   "pipelineVersion": "ingest-hardened-2026-07-20",
   "publishedAt": null,
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "wave5 ingest 2026-07-29: licence live-verified CC-BY, author 'Nieve5677', hardened audit pass; year/trim from source title only",
    "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)",
@@ -118686,8 +118700,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [1, 1, 1] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (18 materials, 2 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body col",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -118734,7 +118748,9 @@
   "pipelineVersion": "publish-batch-w6-2026-07-29",
   "publishedAt": "2026-07-29",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
@@ -191271,8 +191287,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres do not read as black rubber on the shipped glb. Tyre renders in body colour. Zoomed on the live glb render at high magnification: the sidewall and tread are the same white/pale grey as the bodywork, with no black rubber anywhere on the car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -191317,7 +191333,9 @@
   "pipelineVersion": "publish-batch-pw1-2026-08-09",
   "publishedAt": "2026-08-09",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
   ],
@@ -191713,8 +191731,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.8, 0.8, 0.8] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (42 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in bo",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -191758,7 +191776,9 @@
   "pipelineVersion": "publish-batch-pw1-2026-08-09",
   "publishedAt": "2026-08-09",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
   ],
@@ -191932,8 +191952,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.8, 0.8, 0.8] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (55 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in bo",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -191982,7 +192002,9 @@
   "pipelineVersion": "publish-batch-pw1-2026-08-09",
   "publishedAt": "2026-08-09",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
   ],
@@ -193272,8 +193294,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [1, 1, 1] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (11 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body col",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -193318,7 +193340,9 @@
   "pipelineVersion": "publish-batch-pw1-2026-08-09",
   "publishedAt": "2026-08-09",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
   ],
@@ -193948,8 +193972,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (21 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -193997,7 +194021,9 @@
   "pipelineVersion": "publish-batch-pw1-2026-08-09",
   "publishedAt": "2026-08-09",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
   ],
@@ -195052,8 +195078,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres do not read as black rubber on the shipped glb. Tyre renders in body colour. Zoomed on the live glb render at high magnification: the sidewall and tread are the same white/pale grey as the bodywork, with no black rubber anywhere on the car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -195098,7 +195124,9 @@
   "pipelineVersion": "publish-batch-pw1-2026-08-09",
   "publishedAt": "2026-08-09",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
   ],
@@ -195272,8 +195300,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres do not read as black rubber on the shipped glb. Tyre renders in body colour. Zoomed on the live glb render at high magnification: the sidewall and tread are the same white/pale grey as the bodywork, with no black rubber anywhere on the car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -195317,7 +195345,9 @@
   "pipelineVersion": "publish-batch-pw1-2026-08-09",
   "publishedAt": "2026-08-09",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
   ],
@@ -195711,8 +195741,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.8, 0.8, 0.8] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (51 materials, 3 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in bo",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -195758,7 +195788,9 @@
   "pipelineVersion": "publish-batch-pw1-2026-08-09",
   "publishedAt": "2026-08-09",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "pw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
   ],
@@ -195932,8 +195964,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (18 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -195981,7 +196013,9 @@
   "pipelineVersion": "publish-batch-hw1-2026-08-09",
   "publishedAt": "2026-08-09",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
   ],
@@ -200514,8 +200548,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [1, 1, 1] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (16 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body col",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -200562,7 +200596,9 @@
   "pipelineVersion": "publish-batch-hw1-2026-08-09",
   "publishedAt": "2026-08-09",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "retro-tyre-audit"
+  ],
   "notes": [
    "hw1 gated publish 2026-08-09: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-09, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
   ],
