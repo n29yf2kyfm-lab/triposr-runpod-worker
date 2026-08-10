@@ -3280,5 +3280,149 @@
       "headlamp internals behind a clear lens, recessed grille mesh with the R badge, bonnet and door shut lines defined",
       "caveat: the red Nismo pinstripe, rear-quarter checker decals and nismo plate are baked into the texture - livery only, not geometry, but a respray will not remove them"
     ]
+  },
+  {
+    "uid": "00bab5b963804004a482e5254c339061",
+    "name": "Nissan Skyline GT-R 34",
+    "verdict": "fail",
+    "reasons": [
+      "body panels render as a blotchy red/maroon patchwork over bare grey - broken or missing texture, not a paint finish",
+      "bumpers and front splitter render flat grey against the body - separate unpainted material (body mats=5, cov=0.372, MATERIAL SPLIT SUSPECT)",
+      "headlamps are flat blue-grey lenses with no internals; grille is a plain slab",
+      "no door or bonnet shut lines defined",
+      "tyres and rim faces are fine - the defect is materials/surfacing"
+    ]
+  },
+  {
+    "uid": "02528b275a2d4bcaabe6937cf7c902b1",
+    "name": "2008 Nissan R35 GTR",
+    "verdict": "fail",
+    "reasons": [
+      "front wing is crumpled - sharp faceted dents behind the headlamp and over the front wheel, seen at 3x",
+      "headlamps are solid black voids with no internal elements at all",
+      "grille is a flat mesh rectangle, front bumper a soft slab, no bonnet shut line",
+      "tyres verified plainly black rubber and rim faces present - not a tyre defect",
+      "glazing reads as real dark glass"
+    ]
+  },
+  {
+    "uid": "02bf64f140e84c2480f9df427b9c975b",
+    "name": "2002_ Nissan_ Skyline_GT-R_R34_V- Spec_II",
+    "verdict": "pass",
+    "reasons": [
+      "R34 GT-R V-Spec II proportions read instantly, front 3/4 strong, four views consistent",
+      "zoom-verified: windscreen transparent with dash and seats visible; side glass tinted glass",
+      "zoom-verified: headlamp projector/reflector internals sharp, grille mesh and GT-R badge crisp",
+      "zoom-verified: bronze multi-spoke rim faces with red calipers present in all four views, tyres plainly black rubber",
+      "carbon front splitter and bonnet vent; bonnet and door shut lines defined, premium gloss white finish",
+      "bronze aftermarket wheels are spec variation, standard arches - in scope"
+    ]
+  },
+  {
+    "uid": "034c5cffb20a41b18581664cc9064b4b",
+    "name": "Nissan 300ZX Twin Turbo 2Seater (Z32)",
+    "verdict": "pass",
+    "reasons": [
+      "Z32 300ZX proportions read instantly, four views consistent",
+      "glazing reads as real glass - rear hatch transparent with the interior and parcel shelf visible",
+      "zoom-verified: headlamp is a multi-element lens with internal reflectors and a chrome surround",
+      "zoom-verified: grey 5-spoke rim faces with red calipers present in all four views, tyres plainly black rubber with sidewall lettering",
+      "bonnet vent, bonnet and door shut lines defined, clean gloss finish"
+    ]
+  },
+  {
+    "uid": "11db2d5c2cd34c8b84e560b8090574e8",
+    "name": "2013 Nissan 370Z",
+    "verdict": "pass",
+    "reasons": [
+      "Z34 370Z proportions read instantly, front 3/4 strong, four views consistent",
+      "zoom-verified: side and quarter glass transparent with the interior visible",
+      "zoom-verified: silver multi-spoke rim faces present in all four views, tyres plainly black rubber",
+      "boomerang headlamps and taillamps carry internal chrome elements; grille mesh present",
+      "door and bonnet shut lines defined, premium gloss finish",
+      "CAVEAT: cov=0.006 LOW COVERAGE - the worker matched a trim material, so the sheet colour is the source red, not the forced colour. Advisory about the sheet only; a colour swap is UNPROVEN until recolour_audit --stamp"
+    ]
+  },
+  {
+    "uid": "1316475b0ebb4add8b91409986647a1c",
+    "name": "Nissan Silvia K's DIA Selection (S13)",
+    "verdict": "pass",
+    "reasons": [
+      "S13 Silvia coupe proportions read instantly, front 3/4 strong, four views consistent",
+      "zoom-verified: glazing is real tinted glass with seats and interior visible through it",
+      "zoom-verified: tyres plainly black rubber with tread; dark grey 8-spoke rim faces with spokes and centre traceable in all four views",
+      "headlamp lens internals and amber indicators present, SILVIA badge and grille crisp",
+      "bonnet and door shut lines defined, clean gloss white finish",
+      "grey lower-body band is the period two-tone side moulding, not an unpainted material (body mats=3, cov=0.391)"
+    ]
+  },
+  {
+    "uid": "133d89220c024cb995fa7f69b9457d7a",
+    "name": "Nissan GT-R Proto",
+    "verdict": "fail",
+    "reasons": [
+      "heavily faceted low-poly shell - hard flat facets across every panel, roof and bonnet",
+      "a display PEDESTAL/column is baked into the mesh under the car and renders in all four views",
+      "no glazing - the greenhouse is opaque faceted grey",
+      "headlamps and mirrors are cubic blobs with no internals; wheels are crude flat discs"
+    ]
+  },
+  {
+    "uid": "18c081f765854d249bb8dc580a1e9f7c",
+    "name": "Nissan 350z",
+    "verdict": "fail",
+    "reasons": [
+      "zoom-verified: windscreen and door glass render OPAQUE body-white - glazing does not read as glass",
+      "full aftermarket aero build - wide front bumper, side skirts, large strutted GT wing, red decal stripes",
+      "body reads as an unpainted white clay shell despite cov=0.472 across 10 body materials",
+      "tyres and rim faces are actually fine - the defect is glazing and the kit"
+    ]
+  },
+  {
+    "uid": "1e4013d3f11c42938c2aef58cac0c217",
+    "name": "Nissan Skyline Wagon",
+    "verdict": "pass",
+    "reasons": [
+      "R34-fronted Skyline/Stagea estate - proportions read instantly, four views consistent, standard arches so in scope",
+      "zoom-verified: glazing fully transparent, dash, steering wheel and rear cabin visible",
+      "zoom-verified: R34 headlamp projector internals and grille badge sharp, front splitter defined",
+      "zoom-verified: tyres plainly black rubber, dark mesh rim faces with spokes traceable on BOTH sides - no void",
+      "bonnet and door shut lines defined",
+      "NOTE: paint reads slightly matte rather than premium gloss; cov=0.582 over 5 body materials"
+    ]
+  },
+  {
+    "uid": "1edf4f37e6284bdaa6df0f9572389875",
+    "name": "2010 Vertex Edge Nissan S15 Silvia",
+    "verdict": "fail",
+    "reasons": [
+      "Vertex Edge full aftermarket aero kit - replacement bumpers, side skirts with vents, flared rear fenders and ducktail; a kit build, not an OEM S15 a UK reg decodes to",
+      "underlying mesh is clean: glazing reads as real glass, tyres plainly black rubber, dark 6-spoke rim faces present in all four views",
+      "fails on scope, not on quality"
+    ]
+  },
+  {
+    "uid": "20a8388a009e4a7aae61a9bb50ad8945",
+    "name": "Nissan Silvia (S15)",
+    "verdict": "pass",
+    "reasons": [
+      "S15 Silvia proportions read instantly, front 3/4 strong, four views consistent",
+      "zoom-verified: glazing fully transparent, dash and mirror visible through the windscreen",
+      "zoom-verified: headlamp projector with chrome reflector internals sharp; front bumper mesh and intercooler modelled",
+      "zoom-verified: tyres plainly black rubber, silver 5-spoke rim faces present in all four views",
+      "bonnet and door shut lines defined, gloss white finish",
+      "aero front bumper and GT wing on STANDARD arches - tuner spec, in scope (same line as the F&F R34)"
+    ]
+  },
+  {
+    "uid": "20f2d93f90004fd79fb7a0406f641f4b",
+    "name": "Nissan 240Z",
+    "verdict": "fail",
+    "reasons": [
+      "headlamps are featureless amber covers with no lamp internals behind them, seen at 3x",
+      "front air dam grilles are flat black rectangles with no mesh or honeycomb; chrome bumper is a plain bar",
+      "front end detail well below the premium bar; race-style air dam, rear spoiler and 8-spoke race wheels",
+      "glazing and tyres are fine - tyres plainly black rubber, white rim faces with red calipers present"
+    ]
   }
 ]
