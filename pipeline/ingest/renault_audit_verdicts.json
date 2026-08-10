@@ -1,0 +1,127 @@
+[
+ {
+  "uid": "cb8d3b94720b494db193081dea4ee544",
+  "name": "1983 Renault R11 Turbo",
+  "verdict": "fail",
+  "reasons": [
+   "NO SHEET - rejected pre-render by gpu_wave's local pose gate, so this verdict is from the source GLB geometry, not from an eye review of a render",
+   "geom_audit: flipped/on-side (tob=0.02) and floorpan/wreck (h/l=0.018) - the source mesh is not an upright whole car"
+  ]
+ },
+ {
+  "uid": "2d166ebc096d4cc5bdeef76fb2eb1798",
+  "name": "Renault Captur",
+  "verdict": "fail",
+  "reasons": [
+   "TYRE COLOUR: at 4x the tyre is the same flat mid-grey as the alloy - one untextured grey material over rim and tyre, does not read as black rubber",
+   "otherwise good: Captur Mk1 proportions correct, glazing reads as glass, rim spokes present all four views"
+  ]
+ },
+ {
+  "uid": "23f5a7e769014a19b4fb69b84ca4222a",
+  "name": "RENAULT Estafette MICHELIN",
+  "verdict": "fail",
+  "reasons": [
+   "baked third-party Michelin livery in the texture - cannot be resprayed or shipped as a neutral catalogue car",
+   "sliding side door modelled open; Michelin-man figurine on the roof",
+   "geometry itself clean: black rubber tyres, real glass, rim faces present"
+  ]
+ },
+ {
+  "uid": "a59c90a2432c43e189d1581692e63fc9",
+  "name": "Renault Megane CC",
+  "verdict": "fail",
+  "reasons": [
+   "no body-paint material (mats=0, cov=0.000) - same translucent smoked-glass shell defect as the Symbol and Scenic from this source class",
+   "panels see-through; no premium paint finish possible"
+  ]
+ },
+ {
+  "uid": "756e4803bb494e6282c351489d8a1210",
+  "name": "Renault Scenic",
+  "verdict": "fail",
+  "reasons": [
+   "no body-paint material (mats=0, cov=0.000) - whole car renders as smoked translucent glass, panels see-through",
+   "cannot be resprayed; reads as a prototype shell, not a car"
+  ]
+ },
+ {
+  "uid": "58874f27bb294bffacb12cade97efe80",
+  "name": "Renault Symbol",
+  "verdict": "fail",
+  "reasons": [
+   "no body-paint material (mats=0, cov=0.000) - whole car renders as smoked translucent glass/chrome",
+   "panels read see-through; no premium paint finish possible",
+   "tyres do not read as black rubber - wheels are glassy blobs"
+  ]
+ },
+ {
+  "uid": "4a9c4ead7f774f1496ce72a7343d48e1",
+  "name": "Renault Wind",
+  "verdict": "fail",
+  "reasons": [
+   "no body-paint material (mats=0, cov=0.000); body renders flat matte clay-white",
+   "panel surfaces soft and melted, roof/door shut lines undefined",
+   "headlights are featureless black voids with no internal elements",
+   "wheels render as glossy black blobs, spokes barely traceable in the 3/4 views",
+   "front bumper and grille detail smeared"
+  ]
+ },
+ {
+  "uid": "67b8d2229a474282959af3358e2e44e7",
+  "name": "Renault-clio",
+  "verdict": "fail",
+  "reasons": [
+   "CRUMPLED BODYWORK: rear quarter panel has deep collision-like folds and the tail-light housing is torn/creased (confirmed at 3x on rear34)",
+   "body renders as mirror chrome rather than paint",
+   "CORRECTION to first impression: tyres ARE black rubber and the chrome alloys are fine - the defect is geometry, not materials"
+  ]
+ },
+ {
+  "uid": "c3f7a7aae0d64f4facb0464c6fbea279",
+  "name": "Renault 8 GORDINI",
+  "verdict": "pass",
+  "reasons": [
+   "reads instantly as a Renault 8 Gordini; proportions, roof, pillars and wheelbase consistent across all four views",
+   "glazing reads as real glass - seats and interior visible through the screen and side windows",
+   "tyres plainly black rubber; dark 5-spoke rim faces present and consistent in all four views",
+   "bonnet, door and boot shut lines defined; chrome bumpers crisp; quad driving lamps have internal reflector detail",
+   "CAVEAT: white Gordini stripes, rally roundels and a RENAULTSPORT sun-strip are baked into the texture, and mats=9 cov=0.625 - a respray cannot produce a neutral single colour; recolour_audit --stamp must settle it before any colour-swap listing"
+  ]
+ },
+ {
+  "uid": "15593fcc375a424aa1c41d4e54a2666c",
+  "name": "Renault Arkana 2020",
+  "verdict": "pass",
+  "reasons": [
+   "Arkana coupe-SUV proportions read instantly; front 3/4 strong",
+   "glazing reads as real glass; interior faintly visible through the screen",
+   "rim faces and spokes traceable in all four views",
+   "tyre reads as dark matte rubber, tonally separate from the alloy - not deep black but not body colour",
+   "door and bonnet shut lines defined; C-signature headlamps have internal elements"
+  ]
+ },
+ {
+  "uid": "df6bf8886b7a456ea2bf54dd80b03fd0",
+  "name": "Renault estafette Pickup",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as a Renault Estafette pickup instantly; strong front 3/4",
+   "glazing reads as real glass, cab interior visible",
+   "tyres plainly black rubber; rim faces and hub caps present in all four views",
+   "door and panel shut lines defined; period grille and lamps adequate"
+  ]
+ },
+ {
+  "uid": "a702fe6e169c4475a0e548b06bc8fbcf",
+  "name": "Renault Megane Scenic 1998",
+  "verdict": "pass",
+  "reasons": [
+   "reads as a Mk1 Megane Scenic instantly; roof, pillars and wheelbase consistent across all four views",
+   "glazing genuinely transparent - seats and interior visible",
+   "tyres verified at 4x: near-black rubber with sidewall sheen, hubcap face present",
+   "NOTE panel surfaces are soft and slightly wavy on the doors; headlamp internals flat",
+   "header pose warn low-top(tob=0.422) is a false positive on an MPV, not a defect"
+  ]
+ }
+]
