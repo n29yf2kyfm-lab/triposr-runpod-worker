@@ -2836,6 +2836,15 @@
   ]
  },
  {
+  "uid": "e19711795c5d4fa3a6446a8846425724",
+  "name": "2003 Nissan 350Z Top Secret Z33 Super G-Force",
+  "verdict": "fail",
+  "reasons": [
+   "out-of-scope: Fast & Furious Tokyo Drift movie-car replica - Top Secret gold paint with the film's tribal graphics and a FAST & FURIOUS plate",
+   "Top Secret aftermarket body kit and oversized GT wing"
+  ]
+ },
+ {
   "uid": "e2161e4bda374891804b4e8df34205b6",
   "name": "Nissan skyline gtr r33",
   "verdict": "fail",
@@ -2856,6 +2865,51 @@
    "tyres plainly black rubber; dark rim faces present and detailed on BOTH sides with orange calipers",
    "grille, split-tier headlight internals and shut lines all sharp at 223,119 faces",
    "NOTE: ultra-low-volume special (about 23 built) - a UK reg is very unlikely to decode to it, flag for catalogue relevance"
+  ]
+ },
+ {
+  "uid": "e301c512db9f43058b28d1dccfa4283e",
+  "name": "Nissan Skyline (R32) GT-R 1989",
+  "verdict": "pass",
+  "reasons": [
+   "OEM R32 GT-R proportions read instantly, front 3/4 strong",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; grey 5-spoke rim faces present and detailed on BOTH sides",
+   "grille, headlight internals and factory boot wing all correct; door and bonnet shut lines defined",
+   "936,087 faces, panel surfacing clean and reflections even - the strongest R32 in this wave",
+   "distinct mesh from ba48a6529b8e47eeb43a6e19c227abfd (345,058 f), not a duplicate"
+  ]
+ },
+ {
+  "uid": "e55e398eabe24332be170791043bcb83",
+  "name": "Nissan Stagea/Skyline WC34 MK1 1996-2001",
+  "verdict": "fail",
+  "reasons": [
+   "wheels absent: bare hubs and suspension arms exposed in empty arches, one lone wheel floats under the centre of the car",
+   "door and rear quarter panels partly cut away, exposing the shell",
+   "not a complete car"
+  ]
+ },
+ {
+  "uid": "e652b84c898a4d49a9cf25bad9e92929",
+  "name": "Nissan Leaf 2012 Trunk",
+  "verdict": "fail",
+  "reasons": [
+   "not a car: a photogrammetry scan of the boot/tailgate aperture and rear seat backs only - no exterior, no wheels, no glazing",
+   "ragged torn scan boundaries throughout, cov=1.000 FULLCOV",
+   "the title word 'Trunk' should have been caught by PART_WORDS in nameplate_filter - a filter gap worth closing"
+  ]
+ },
+ {
+  "uid": "e78c0a34db26456ca55a0b8007973c99",
+  "name": "2022 Nissan Pathfinder",
+  "verdict": "pass",
+  "reasons": [
+   "OEM Pathfinder proportions read instantly, four views consistent",
+   "glass reads as tinted glass with interior visible",
+   "tyres plainly black rubber; dark multi-spoke rim faces present and detailed on BOTH sides",
+   "grille badge and headlight internals sharp at 455,358 faces",
+   "door and tailgate shut lines defined, reflections clean"
   ]
  }
 ]

@@ -209826,5 +209826,2836 @@
    ]
   },
   "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-gt40-1964-fow1-v1",
+  "make": "ford",
+  "model": "gt40",
+  "modelFamily": "ford gt40",
+  "modelAliases": [
+   "gt40"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1964,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "e99a77c50aa74318ac755571a9f67119",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Merged_materials"
+  ],
+  "glassMaterialNames": [
+   "ID07_aluminum_polishedsatin_rearviewmirror_a.002_21",
+   "ID07_aluminum_polishedsatin_rearviewmirror_a.002_30",
+   "ID07_aluminum_polishedsatin_rearviewmirror_a.002_45",
+   "ID07_aluminum_polishedsatin_rearviewmirror_a.002_42",
+   "ID07_aluminum_polishedsatin_rearviewmirror_a.002_62"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-gt40-1964-fow1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-gt40-1964-fow1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 14239604,
+  "mobileFileSizeBytes": 14239604,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "3861861a4ac47a646786659419a8cc47f11eb81b26c835a9f28e5b9d335cf2d3",
+  "pipelineVersion": "publish-batch-fow1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "fow1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-fow1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carbonised Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbonised Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Agate Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Agate Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Frozen White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Frozen White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moondust Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moondust Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Chrome Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Chrome Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Desert Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desert Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fantastic Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fantastic Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mean Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mean Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Grabber Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Grabber Blue",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-transit-courier-2025-fow1-v1",
+  "make": "ford",
+  "model": "transit courier",
+  "modelFamily": "ford transit courier",
+  "modelAliases": [
+   "transit courier"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2025,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "391f0e08a9af4a388a669433c55a7dd9",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "CarPaint"
+  ],
+  "glassMaterialNames": [
+   "Glass",
+   "Light_Glass",
+   "glass_surr",
+   "black"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-courier-2025-fow1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-courier-2025-fow1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 13831160,
+  "mobileFileSizeBytes": 13831160,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "2e8a84a4e773011f238cbc0709ffe9f071f64bfe99ce10311292edc6923154ad",
+  "pipelineVersion": "publish-batch-fow1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "fow1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-fow1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carbonised Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbonised Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Agate Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Agate Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Frozen White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Frozen White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moondust Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moondust Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Chrome Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Chrome Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Desert Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desert Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fantastic Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fantastic Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mean Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mean Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Grabber Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Grabber Blue",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-focus-2016-fow1-v1",
+  "make": "ford",
+  "model": "focus",
+  "modelFamily": "ford focus",
+  "modelAliases": [
+   "focus"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2016,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "27e25fcead154e62a1dd8e92ccedb691",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "MAT_Ford_FocusRS_2016_CarPaint2"
+  ],
+  "glassMaterialNames": [
+   "MAT_Glass",
+   "standardSurface1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-focus-2016-fow1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-focus-2016-fow1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 7339696,
+  "mobileFileSizeBytes": 7339696,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "8365294240cf791908e2a99a4565d91dcf8b0cca8b22d78eaba506a026b67e0e",
+  "pipelineVersion": "publish-batch-fow1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "fow1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-fow1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carbonised Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbonised Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Agate Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Agate Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Frozen White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Frozen White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moondust Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moondust Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Chrome Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Chrome Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Desert Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desert Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fantastic Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fantastic Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mean Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mean Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Grabber Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Grabber Blue",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-consul-capri-fow1-v1",
+  "make": "ford",
+  "model": "consul capri",
+  "modelFamily": "ford consul capri",
+  "modelAliases": [
+   "consul capri"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "c25ad61daa814cabaa03bd69db4d7adc",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "orangeglass",
+   "redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-consul-capri-fow1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-consul-capri-fow1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 27778048,
+  "mobileFileSizeBytes": 27778048,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "00786e7eff77bc428875bb5d771b535ead0a38172f2d0bdd1d4c43afce137c87",
+  "pipelineVersion": "publish-batch-fow1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "fow1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-fow1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carbonised Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbonised Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Agate Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Agate Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Frozen White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Frozen White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moondust Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moondust Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Chrome Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Chrome Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Desert Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desert Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fantastic Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fantastic Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mean Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mean Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Grabber Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Grabber Blue",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "renault-8-gordini-rew1-v1",
+  "make": "renault",
+  "model": "8 gordini",
+  "modelFamily": "renault 8 gordini",
+  "modelAliases": [
+   "8 gordini"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "c3f7a7aae0d64f4facb0464c6fbea279",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "02_BLEU_BASE",
+   "Mat_6",
+   "NOIR",
+   "baie_ar",
+   "bandeau_portes",
+   "bandes_capot",
+   "bandes_toit",
+   "face_av",
+   "joint"
+  ],
+  "glassMaterialNames": [
+   "vitres"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-8-gordini-rew1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-8-gordini-rew1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 29734360,
+  "mobileFileSizeBytes": 29734360,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "c5456624ef392e97188871e44fbbe139f8d32c7fc867b7f05f06d6b4bc898ec0",
+  "pipelineVersion": "publish-batch-rew1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "rew1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-rew1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Shadow Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Shadow Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacier White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Diamond White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Diamond White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Iron Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Iron Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Flame Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Flame Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Valencia Orange",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Valencia Orange",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "renault-arkana-2020-rew1-v1",
+  "make": "renault",
+  "model": "arkana",
+  "modelFamily": "renault arkana",
+  "modelAliases": [
+   "arkana"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "15593fcc375a424aa1c41d4e54a2666c",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "d_glass_0",
+   "r_glass",
+   "o_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-arkana-2020-rew1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-arkana-2020-rew1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 33283132,
+  "mobileFileSizeBytes": 33283132,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f3a3be0f17551d8571be2d6ad07950402ecc40aaa2197358e109018c36980e4f",
+  "pipelineVersion": "publish-batch-rew1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "rew1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-rew1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Shadow Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Shadow Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacier White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Diamond White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Diamond White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Iron Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Iron Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Flame Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Flame Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Valencia Orange",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Valencia Orange",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "renault-estafette-rew1-v1",
+  "make": "renault",
+  "model": "estafette",
+  "modelFamily": "renault estafette",
+  "modelAliases": [
+   "estafette"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "df6bf8886b7a456ea2bf54dd80b03fd0",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Mat.2",
+   "Mat.2_0",
+   "Mat.2_2",
+   "bump_benne",
+   "gris_tableau",
+   "lisse",
+   "material",
+   "material_10",
+   "noir",
+   "noir_tableau",
+   "sieges_av"
+  ],
+  "glassMaterialNames": [
+   "vitres"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-estafette-rew1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-estafette-rew1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 37762280,
+  "mobileFileSizeBytes": 37762280,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "adb352a5b6e556c33493d61ed2c70cb86c5563169eeb4f2c06ef84941577074b",
+  "pipelineVersion": "publish-batch-rew1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "rew1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-rew1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Shadow Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Shadow Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacier White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Diamond White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Diamond White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Iron Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Iron Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Flame Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Flame Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Valencia Orange",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Valencia Orange",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-sport-2023-law1-v1",
+  "make": "land-rover",
+  "model": "range rover sport",
+  "modelFamily": "land rover range rover sport",
+  "modelAliases": [
+   "range rover sport"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "640826210d2a4be9ae6e638fec1e84fa",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "2023_Land_Rover_Range_Rover_Sport_Black1",
+   "2023_Land_Rover_Range_Rover_Sport_Black2",
+   "2023_Land_Rover_Range_Rover_Sport_Firenze_Red"
+  ],
+  "glassMaterialNames": [
+   "2023_Land_Rover_Range_Rover_Sport_Windows",
+   "2023_Land_Rover_Range_Rover_Sport_TailightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2023-law1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2023-law1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 35778744,
+  "mobileFileSizeBytes": 35778744,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "4b44b0e08df64ab91f4d106a130174fcc86747e67b36587583fdd02d93176edc",
+  "pipelineVersion": "publish-batch-law1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "law1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-law1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-law1-v1",
+  "make": "land-rover",
+  "model": "range rover",
+  "modelFamily": "land rover range rover",
+  "modelAliases": [
+   "range rover"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "e13b61cf780b4751ac429facacb7250b",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Body_Color"
+  ],
+  "glassMaterialNames": [
+   "Glass",
+   "Window_Borders",
+   "Headlights_Glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-law1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-law1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 24773836,
+  "mobileFileSizeBytes": 24773836,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "86fc82b37905edc9b8cbd534fcecfb0f584499a7775787619605a32b87c8d730",
+  "pipelineVersion": "publish-batch-law1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "law1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-law1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-law1-v2",
+  "make": "land-rover",
+  "model": "range rover",
+  "modelFamily": "land rover range rover",
+  "modelAliases": [
+   "range rover"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "ffba8330b24d42daac8905fa0102eb97",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "HDM_05_010_carpaint"
+  ],
+  "glassMaterialNames": [
+   "HDM_05_010_windows",
+   "HDM_05_010_headlight_glass",
+   "HDM_05_010_taillight_glass",
+   "HDM_05_010_glass_orange"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-law1-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-law1-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 26710868,
+  "mobileFileSizeBytes": 26710868,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "aee9a5446e9b1b3bb841943e8426915c2b6609a0c14513f68ae0ec33f0bc6baf",
+  "pipelineVersion": "publish-batch-law1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "law1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-law1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-discovery-2022-law1-v1",
+  "make": "land-rover",
+  "model": "discovery",
+  "modelFamily": "land rover discovery",
+  "modelAliases": [
+   "discovery"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "48d256ab61c748d2ae1757ad39897353",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "M_2022_Land_Rover_Discovery_P360_Facelift_Black1",
+   "M_2022_Land_Rover_Discovery_P360_Facelift_Silicon_Silver",
+   "M_2022_Land_Rover_Discovery_P360_Facelift_UnderCarrier"
+  ],
+  "glassMaterialNames": [
+   "M_2022_Land_Rover_Discovery_P360_Facelift_Windows",
+   "M_2022_Land_Rover_Discovery_P360_Facelift_WindowsTrims",
+   "M_2022_Land_Rover_Discovery_P360_Facelift_BrakeLightsGlass",
+   "M_2022_Land_Rover_Discovery_P360_Facelift_HeadLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-2022-law1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-2022-law1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 47396108,
+  "mobileFileSizeBytes": 47396108,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d17b6cadd1c2118aa9733188801490c61da45819effc29d49c141bab69d9e21c",
+  "pipelineVersion": "publish-batch-law1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "law1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-law1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-sport-2023-law1-v2",
+  "make": "land-rover",
+  "model": "range rover sport",
+  "modelFamily": "land rover range rover sport",
+  "modelAliases": [
+   "range rover sport"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "b68c443c8dae42359fb26a9282a3d572",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "2023_Land_Rover_Range_Rover_Sport_Black1",
+   "2023_Land_Rover_Range_Rover_Sport_Black2",
+   "2023_Land_Rover_Range_Rover_Sport_Firenze_Red"
+  ],
+  "glassMaterialNames": [
+   "2023_Land_Rover_Range_Rover_Sport_Windows",
+   "2023_Land_Rover_Range_Rover_Sport_TailightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2023-law1-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2023-law1-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 16370368,
+  "mobileFileSizeBytes": 16370368,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "46e1c22d8a16190e60c2bb0c983790429c03c845a9c9f2bd16e968dd279007fb",
+  "pipelineVersion": "publish-batch-law1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "law1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-law1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-defender-law1-v1",
+  "make": "land-rover",
+  "model": "defender",
+  "modelFamily": "land rover defender",
+  "modelAliases": [
+   "defender"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "df39d84cc8d04887801052e6900cb269",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "material_0",
+   "material_13",
+   "material_14",
+   "material_15",
+   "material_17",
+   "material_3",
+   "material_4",
+   "material_5",
+   "material_8"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-law1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-law1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 24549216,
+  "mobileFileSizeBytes": 24549216,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "c5cfa74e6e84da609c632baf7b55f0c0e99ae3285be7664e6fd79bb1d8e81573",
+  "pipelineVersion": "publish-batch-law1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "law1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-law1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-2022-law1-v1",
+  "make": "land-rover",
+  "model": "range rover",
+  "modelFamily": "land rover range rover",
+  "modelAliases": [
+   "range rover"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "fa4d79a5875e4733a71101e28a30e2e3",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura"
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidros_1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-2022-law1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-2022-law1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 33556492,
+  "mobileFileSizeBytes": 33556492,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "51fa514039550028b5b1a6e6b088f3259be83802154a64a0d82f451b7874fcb5",
+  "pipelineVersion": "publish-batch-law1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "law1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-law1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-discovery-2018-law1-v1",
+  "make": "land-rover",
+  "model": "discovery",
+  "modelFamily": "land rover discovery",
+  "modelAliases": [
+   "discovery"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2018,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "55f93b71956a43329ade06c986970a40",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "2018_Land_Rover_Discovery_HSE_Black",
+   "2018_Land_Rover_Discovery_HSE_Silicon_Silver_Premium_Metallic"
+  ],
+  "glassMaterialNames": [
+   "2018_Land_Rover_Discovery_HSE_Windows",
+   "2018_Land_Rover_Discovery_HSE_Glass",
+   "2018_Land_Rover_Discovery_HSE_limo_lights_glass",
+   "2018_Land_Rover_Discovery_HSE_darkrglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-2018-law1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-2018-law1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 10035520,
+  "mobileFileSizeBytes": 10035520,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "9b9d5d15c753cbd92514eb24b1471a50714e15ac7a2a4fff14b41c0e6c88e7a5",
+  "pipelineVersion": "publish-batch-law1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "law1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-law1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-2008-law1-v1",
+  "make": "land-rover",
+  "model": "range rover",
+  "modelFamily": "land rover range rover",
+  "modelAliases": [
+   "range rover"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2008,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "43fe3d9855ef409892d976bd8850d819",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "CarPaint"
+  ],
+  "glassMaterialNames": [
+   "indows",
+   "D_glass",
+   "light_G",
+   "Glass_Surr",
+   "Glass_light"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-2008-law1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-2008-law1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 11043556,
+  "mobileFileSizeBytes": 11043556,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d544a95fec662462a0517aabc3c4a86b97df2c2e57f200ba267fce0aa0731e59",
+  "pipelineVersion": "publish-batch-law1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "law1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-law1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "land-rover-range-rover-evoque-2016-law1-v1",
+  "make": "land-rover",
+  "model": "range rover evoque",
+  "modelFamily": "land rover range rover evoque",
+  "modelAliases": [
+   "range rover evoque"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2016,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "dbc671780fd84291a829c3f8aeebd326",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "roverLandrover_RangeRoverEvoqueCoupeCrewRecycled_2016Base_Mater",
+   "roverLandrover_RangeRoverEvoqueCoupeCrewRecycled_2016Coloure_45",
+   "roverLandrover_RangeRoverEvoqueCoupeCrewRecycled_2016EngineA_c9",
+   "roverLandrover_RangeRoverEvoqueCoupeCrewRecycled_2016Interio_37",
+   "roverLandrover_RangeRoverEvoqueCoupeCrewRecycled_2016Interio_fc",
+   "roverLandrover_RangeRoverEvoqueCoupeCrewRecycled_2016Paint_Mate"
+  ],
+  "glassMaterialNames": [
+   "roverLandrover_RangeRoverEvoqueCoupeCrewRecycled_2016Window_Mat",
+   "roverlight_glass",
+   "roverred_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-2016-law1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-2016-law1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 10443532,
+  "mobileFileSizeBytes": 10443532,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "b2b8c3729cab095ea0ff4cb560d097bb263086468eb2a1ffe31302efb6bb72d4",
+  "pipelineVersion": "publish-batch-law1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "law1 gated publish 2026-08-10: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-law1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "renault-scenic-1998-rew1-v1",
+  "make": "renault",
+  "model": "scenic",
+  "modelFamily": "renault scenic",
+  "modelAliases": [
+   "scenic"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1998,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "a702fe6e169c4475a0e548b06bc8fbcf",
+  "sourceRetrievedAt": "2026-08-10",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura_1"
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidros_Vermelhos",
+   "Carro_Vidros_1",
+   "Carro_Vidro_Laranja2"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-scenic-1998-rew1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-scenic-1998-rew1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 35776380,
+  "mobileFileSizeBytes": 35776380,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "007b749c4c40d647459faca6d2a5f847da22e174a2a6e1615e195ab7cbbac225",
+  "pipelineVersion": "publish-batch-rew1-2026-08-10",
+  "publishedAt": "2026-08-10",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "rew1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-rew1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Shadow Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Shadow Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacier White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Diamond White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Diamond White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Iron Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Iron Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Flame Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Flame Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Valencia Orange",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Valencia Orange",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
