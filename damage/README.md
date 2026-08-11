@@ -76,11 +76,24 @@ aligns them to the loaded GLB.
 
 ## The vision backend
 
-`DAMAGE_BACKEND=qwen` (default) runs a local **Qwen2.5-VL** (Apache-2.0, the
-VLM this repo standardises on) — model load is lazy and cached, paid only when
-a photo job arrives. Swap the checkpoint with `DAMAGE_VLM_MODEL`. The backend
-is injected (`analyze.analyze(..., vision_fn=)`), so tests and the
-findings-only path load no model at all.
+The backend is injected (`analyze.analyze(..., vision_fn=)`) and selected by
+`DAMAGE_BACKEND`, so swapping the model is one env var and tests/the
+findings-only path load nothing.
+
+**`DAMAGE_BACKEND=anthropic` — recommended.** A frontier **Claude** vision model
+via the Anthropic API (`DAMAGE_VLM_MODEL`, default `claude-opus-5`). Needs
+`ANTHROPIC_API_KEY`; **no GPU**. This is the accurate path. On a live test the
+small local model scored a car with a *shattered windshield* **99/100 ("minor
+bumper scratch")** — it pattern-matched "car inspection" instead of reading the
+image; a frontier model reads the same photo correctly (`windshield` /
+`shattered_glass` / severe) and doesn't invent damage on clean panels. Choosing
+this backend also makes the worker an API proxy that scales to zero cheaply —
+it removes the GPU cold-start entirely (the whole reason for a warm worker).
+
+**`DAMAGE_BACKEND=qwen` (default) — cheap fallback.** A local **Qwen2.5-VL**
+(Apache-2.0), lazy-loaded on first photo job. Self-hosted, but **unreliable at
+the actual assessment** (see above) — use it as a cost/latency fallback, not as
+the product's judgement. Swap the checkpoint with `DAMAGE_VLM_MODEL`.
 
 ## Tests
 

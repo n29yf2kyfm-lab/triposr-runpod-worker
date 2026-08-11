@@ -56,8 +56,10 @@ RUN pip install \
       "transformers>=4.49" accelerate safetensors huggingface_hub \
       qwen-vl-utils pillow numpy
 
-# Serverless glue.
-RUN pip install runpod requests
+# Serverless glue + the recommended vision backend. `anthropic` is a pure-Python
+# API client (no GPU, tiny) — DAMAGE_BACKEND=anthropic reads damage correctly
+# where the local model misses it; see analyze.py get_backend().
+RUN pip install runpod requests anthropic
 
 # ---------------------------------------------------------------------------
 # Model cache on the mounted network volume.

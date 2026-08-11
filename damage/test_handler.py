@@ -419,6 +419,71 @@ check("14e _load_images still raises on a bad response",
       "raise_for_status" in _src)
 
 
+# ---- 15. anthropic (frontier) vision backend --------------------------------
+# The recommended backend. Stub the SDK so no key or network is needed; prove
+# selection, message shape, and that the deterministic pipeline consumes its
+# output exactly like the local model's.
+import base64 as _b64  # noqa: E402
+
+_captured = {}
+
+
+class _FakeBlock:
+    type = "text"
+    def __init__(self, text): self.text = text
+
+
+class _FakeMsg:
+    stop_reason = "end_turn"
+    def __init__(self, text): self.content = [_FakeBlock(text)]
+
+
+class _FakeMessages:
+    def create(self, **kw):
+        _captured.update(kw)
+        # echo a minimal valid inspection so analyze() parses it
+        return _FakeMsg('{"findings": [{"panel":"windshield",'
+                        '"damage_type":"shattered glass","severity":8,'
+                        '"evidence":["spiderweb cracking"]}],'
+                        '"images": [], "summary": "one crack"}')
+
+
+class _FakeAnthropic:
+    def __init__(self, *a, **k): self.messages = _FakeMessages()
+
+
+_fake_anthropic = types.ModuleType("anthropic")
+_fake_anthropic.Anthropic = _FakeAnthropic
+sys.modules["anthropic"] = _fake_anthropic
+
+check("15a anthropic backend selected by env",
+      callable(AN._anthropic_backend()))
+
+# image blocks: URL passes through as url; local file becomes base64
+url_block = AN._anthropic_image_blocks(["https://example.com/a.jpg"])[0]
+check("15b url image -> url source", url_block["source"]["type"] == "url")
+# a real local file (this test file) -> base64 source
+local_block = AN._anthropic_image_blocks([__file__])[0]
+check("15c local image -> base64 source",
+      local_block["source"]["type"] == "base64" and local_block["source"]["data"])
+
+# end to end through analyze() with the stubbed SDK
+import os as _os  # noqa: E402
+_os.environ["DAMAGE_BACKEND"] = "anthropic"
+fn = AN.get_backend()
+findings_a, images_a, meta_a = AN.analyze(
+    ["https://example.com/car.jpg"], {"make": "BMW"}, vision_fn=fn)
+check("15d anthropic path yields a finding", len(findings_a) == 1)
+check("15e finding normalised (shattered_glass)",
+      findings_a[0]["damage_type"] == "shattered_glass")
+check("15f system prompt passed to the model",
+      "damage appraiser" in _captured.get("system", ""))
+check("15g image block sent to the model",
+      any(b.get("type") == "image" for b in _captured.get("messages", [{}])[0]
+          .get("content", [])))
+_os.environ.pop("DAMAGE_BACKEND", None)
+
+
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 for f in FAILED:

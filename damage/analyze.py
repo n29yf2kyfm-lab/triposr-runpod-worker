@@ -251,18 +251,88 @@ def analyze(image_urls, vehicle=None, vision_fn=None, market=None):
 def get_backend():
     """Resolve the vision backend from the environment.
 
-    DAMAGE_BACKEND=qwen (default) -> a local Qwen2.5-VL via transformers.
-    Kept as a lazy factory so importing this module never pulls torch, and so
-    a swap to a different served model is one env var, not a code change.
+    DAMAGE_BACKEND=anthropic (RECOMMENDED) -> a frontier Claude vision model via
+      the Anthropic API. Needs ANTHROPIC_API_KEY; no GPU. This is the accurate
+      path: on a live test the small local model scored a car with a shattered
+      windshield 99/100 ("minor bumper scratch") — it pattern-matched "car
+      inspection" instead of reading the image. A frontier model reads the same
+      photo correctly (windshield / shattered_glass / severe) and does not
+      hallucinate damage on clean panels. Model via DAMAGE_VLM_MODEL
+      (default claude-opus-5).
+    DAMAGE_BACKEND=qwen (default) -> a local Qwen2.5-VL via transformers. Fast
+      and self-hosted, but UNRELIABLE at the actual assessment (see above) —
+      treat it as a cheap fallback, not the product's judgement.
+
+    Kept as a lazy factory so importing this module never pulls torch or the
+    Anthropic SDK, and so swapping the served model is one env var, not a code
+    change. The findings-only job path bypasses this entirely.
     """
     import os
     backend = os.environ.get("DAMAGE_BACKEND", "qwen").lower()
+    if backend in ("anthropic", "claude"):
+        return _anthropic_backend()
     if backend in ("qwen", "qwen2.5-vl", "qwenvl"):
         return _qwen_backend()
     raise RuntimeError(
-        f"unknown DAMAGE_BACKEND={backend!r}. Set DAMAGE_BACKEND=qwen, or "
-        f"pass image analysis pre-computed as `findings` in the job input to "
-        f"skip the vision stage entirely.")
+        f"unknown DAMAGE_BACKEND={backend!r}. Set DAMAGE_BACKEND=anthropic "
+        f"(recommended; needs ANTHROPIC_API_KEY) or =qwen, or pass image "
+        f"analysis pre-computed as `findings` in the job input to skip the "
+        f"vision stage entirely.")
+
+
+def _anthropic_backend():
+    """Vision_fn backed by a frontier Claude vision model (Anthropic API).
+
+    No GPU, no model download — this is why choosing it also removes the whole
+    cold-start / warm-worker problem the local path carries: the worker becomes
+    an API proxy that can scale to zero cheaply. Requires ANTHROPIC_API_KEY in
+    the endpoint env. The client is built once and cached on first call."""
+    state = {}
+
+    def vision_fn(prompt, image_urls):
+        import os
+        from anthropic import Anthropic
+        model = os.environ.get("DAMAGE_VLM_MODEL", "claude-opus-5")
+        if "client" not in state:
+            state["client"] = Anthropic()   # reads ANTHROPIC_API_KEY from env
+        content = list(_anthropic_image_blocks(image_urls))
+        content.append({"type": "text",
+                        "text": "Analyse the vehicle in these photos and "
+                                "return ONLY the JSON described above."})
+        msg = state["client"].messages.create(
+            model=model,
+            max_tokens=8192,
+            system=prompt,
+            messages=[{"role": "user", "content": content}],
+        )
+        if getattr(msg, "stop_reason", None) == "refusal":
+            raise RuntimeError("vision model declined this request "
+                               "(stop_reason=refusal)")
+        return "".join(b.text for b in msg.content
+                       if getattr(b, "type", None) == "text")
+
+    return vision_fn
+
+
+def _anthropic_image_blocks(image_urls):
+    """Image content blocks for the Messages API: URLs pass through as url
+    sources; local files (base64 job inputs) are inlined as base64."""
+    import base64
+    import mimetypes
+    blocks = []
+    for u in image_urls:
+        s = str(u)
+        if s.startswith(("http://", "https://")):
+            blocks.append({"type": "image",
+                           "source": {"type": "url", "url": s}})
+        else:
+            media_type = mimetypes.guess_type(s)[0] or "image/jpeg"
+            with open(s, "rb") as f:
+                data = base64.standard_b64encode(f.read()).decode("ascii")
+            blocks.append({"type": "image",
+                           "source": {"type": "base64",
+                                      "media_type": media_type, "data": data}})
+    return blocks
 
 
 def _qwen_backend():
