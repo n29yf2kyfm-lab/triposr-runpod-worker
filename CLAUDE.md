@@ -125,6 +125,71 @@ the respray edited the invisible one, and it shipped eight files that were diffe
 disk and identical on screen (recolour_audit dist=0.004). Replaced by a different source
 mesh that stamps at 0.342.
 
+## RENDER-SIDE INVERSION: the mechanism, found at last (2026-08-11, Mazda wave)
+
+This file has carried "the worker flips some cars at render time (~8% measured on the
+Honda wave, mechanism unresolved)" since 2026-08-09. It is resolved, for at least this
+class, and it is a rounding tie.
+
+`render/handler.py:981-1008`. The glTF importer converts Y-up to Blender Z-up, so a
+correctly authored car can arrive with its LENGTH on Z. The auto-upright fires
+(`uext[2] > 1.25 * max(uext[0], uext[1])`), rotates 90 deg about X to lay the length
+down, then asks whether the car "landed on its side" with:
+
+    if min(range(3), key=lambda i: ext2[i]) != 2:      # roll 90 deg about Y
+
+Mazda 2 (DY) 2003, uid 55e34299, after that first rotation measures
+**X 201.748, Y 411.622, Z 202.624**. X and Z differ by **0.4%**. argmin picks X, the
+test concludes the car is on its side, and it rolls a correct car ONTO its side. The
+sheet shows the roof from above in two tiles and the floor pan from below in the other
+two. geom_audit passes the source mesh, correctly - the GLB is fine.
+
+**DETERMINISTIC**: the extents are a property of the file, so the same wrong axis is
+chosen on every render. Re-rendering cannot fix it -> `fail-rerender`, never a scrap.
+Any car whose width and height are near-equal after the first rotation is a coin flip.
+
+NOT fixed during the wave on purpose: the worker image is shared with concurrent waves
+and repinning mid-flight silently invalidates their in-progress sheets (see the
+warm-worker note below). The fix is to require a MARGIN before rolling - roll only when
+`ext2[2] > 1.1 * min(ext2)` - and to prefer the axis that puts the wheels on the ground.
+
+## Bare-digit nameplates: qualify them with the marque (2026-08-11, Mazda)
+
+Mazda 2 / 3 / 6 are single digits. Both of the obvious approaches are measurably wrong,
+in OPPOSITE directions, and the fix is the same one word either way.
+
+**A bare digit in `nameplate_filter` is wrong both ways.** Measured on the real
+235-row sweep:
+- FALSE POSITIVES from digits that are not the nameplate: "1973 Mazda 1000 2-Door Sedan"
+  and "Mazda Protege5 - Remake Test 2" both matched the Mazda 2 - off "2-Door" and off
+  "Test 2". "Mazda MX-6" matched the 6; "Mazda MX-3" and "Mazda RX-3" matched the 3.
+- FALSE NEGATIVES on the GLUED spelling, which is Mazda's own badging: `\b3\b` cannot
+  match "Mazda3" because there is no word boundary between "mazda" and "3". Genuine
+  "Mazda3" and "Mazda2 014" rows were dropped as no-nameplate.
+
+**Write the nameplate as `Mazda 2`, `Mazda 3`, `Mazda 6`.** `build()` joins tokens with
+`\s*`, so one pattern matches "Mazda 3", "Mazda-3" and "Mazda3", and the marque prefix
+makes a stray digit impossible. It also cannot reach 323/626: the trailing `\b` fails
+between "3" and "2". Verified in both directions on the live sweep.
+Then add the OTHER real cars explicitly - MX-3, MX-6, RX-3, Protege, Mazdaspeed - rather
+than relying on a bare digit to sweep them up.
+
+**`uk_priority` needed the same treatment, via a new `_PHRASE` list checked before
+`_OVERRIDE`.** The three `("mazda","6"/"3"/"2")` entries that used to sit in `_OVERRIDE`
+tested marque and nameplate INDEPENDENTLY, which measurably mis-tiered:
+  "Mazda 2 1.3"       -> T2 as a Mazda 3, off the ENGINE SIZE. Ordering 6/3/2 does not
+                         help; the collision is with the displacement, not between digits.
+  "Mazda 3 1.6"       -> T3 as a Mazda 6, same way.
+  "Mazda6 Wagon 2018" -> T4, because `_tok_hit("mazda6","6")` is false, so every glued
+                         spelling fell behind the MX-5s this file exists to hold back.
+  "Mazda Xedos 6"     -> T3 as a Mazda 6. Different car.
+Requiring the digit to be ADJACENT to the marque (`\bmazda\s*6\b`) fixes all four at
+once and needs no ordering trick. 48/48 on Mazda cases it must catch and must not,
+11/11 no regression on other marques.
+
+**Rule of thumb: a nameplate that is a bare digit, or an ordinary word, is only
+trustworthy adjacent to its marque.** Independent marque+plate tests are not enough.
+
 ## Per-side wheel voids, and the false positive that looks identical (2026-08-08)
 
 Two Mercedes were passed and nearly shipped with wheels that render as featureless black
@@ -602,6 +667,80 @@ GLB is NOT model output. Defects in a sourced asset cannot be fixed by training 
 the only options are keep, cull, or replace with a better source. Never present a
 sourced asset as something the model produced, and never treat a critique of a
 sourced asset as a training target.
+
+## Glazing and tyres: what the glTF probe can and cannot settle (2026-08-11, Mazda)
+
+The probe is now the primary witness for both material rulings, and it earned that on
+this wave. Three extensions and three limits, all measured.
+
+**Extensions made 2026-08-11 (re-validated against PORSCHE_GLASS.json, 105/107 -> 106/107):**
+- **Specular-glossiness materials keep colour in the EXTENSION.** `2019-porsche-911-gt3-rs`
+  is entirely `KHR_materials_pbrSpecularGlossiness`, so `pbrMetallicRoughness` is absent
+  and `baseColorFactor` fell back to the [1,1,1,1] DEFAULT - a ground-truth CLEAR car
+  scored "opaque", which under the owner ruling is an outright FAIL. The probe was culling
+  a good car off a value the file never states. Read `diffuseFactor` too. specGloss is
+  legacy but common in older and JDM-market uploads, which is what a Mazda sweep is full of.
+- **Interior trim can be WINDOWY.** `Airconditioningbuttonwindscreenventilationicons1Mtl`
+  is a dashboard icon sheet containing "windscreen", so it was promoted to sole decider of
+  that car's glazing. Same class as the lamp-lens bug, one level in. `TRIMMY` now excludes
+  icon/button/instrument/dash/aircondition and mirror/rearview - the last of which also
+  stops the Jaguar wave's `glassSideMirror` outvoting real glazing. Deliberately NOT
+  excluding "interior": `interior_glass` is real glazing.
+- **`glass_texture_alpha.py` (new) measures the alpha CHANNEL.** The probe reads FACTORS,
+  so `alphaMode=BLEND` + `baseColorFactor` alpha 1.0 + transparency in the texture is all
+  it can band "faded". Two Mazda FLEET cars sat in that band and are both properly
+  transparent: Mazda 6/Atenza Sport `windows_glass` 128x128 LA at opacity 0.25, and
+  Mazda CX-5 2020 `Index_0_2` 1024x1024 RGBA at opacity 0.36. A factor-only reading put
+  both at risk.
+
+**Whether the SHEET is admissible depends entirely on the material NAME.** The worker
+overrides `transmission=1.0` onto any glass-matching name, so for `windows_glass` the
+sheet's clear glazing is manufactured and worthless as evidence - but a car whose glazing
+is called `Index_0_2` or `Meshesmadziocha...` gets no override, and there the sheet is an
+honest witness. Check the name before deciding whether you are allowed to look.
+
+**Three things the glazing probe still cannot settle on its own:**
+1. A misspelt name. Mazdaspeed 3 (BK) spells its glazing `Windiow`; the only glass-NAMED
+   material was `glass_surr`, the window SURROUND, correctly opaque. The probe degraded to
+   "ambiguous" and routed it to the eye rather than failing a good car - which is the right
+   behaviour, and why "ambiguous" must never be treated as a fail.
+2. Alpha just under 1.0. A Mazda CX-5 KE ships `Glass` at BLEND alpha **0.986** - 98.6%
+   opaque, a near-black solid panel - and the sheet shows perfect clear glass because the
+   material is literally named "Glass". Banded "faded" and culled. The Porsche calibration
+   is the yardstick: 0.78-0.94 still resolves interior, 0.986 does not.
+3. A car that is transparent EVERYWHERE. `glass_probe` says "clear" for a Mazda 5 and a
+   Mazda 8 MPV whose every material is BLEND at alpha 0.25 including `carpaint` and `tire`
+   - true, and beside the point. The separate body/rubber-opacity check catches it. This
+   GLOBAL-ALPHA SHELL was found on the Volvo wave the same day and is **not marque-specific**:
+   both Mazda cases carry the identical 0.25 signature and the same carpaint/tire/chrome
+   naming. The sheet header gives it away independently as `body mats=0, cov=0.000`.
+
+**THE WHITE-TYRE RENDER ARTEFACT IS NOW PROVEN, not argued.** CLAUDE.md already said the
+sheet is a candidate finder only. Here is the clean experiment: #28, #29 and #30 of this
+wave carry a **byte-identical** tyre texture (512x512, mean sRGB 53.3) plus an `EXT_Rubber`
+material at ~0.015, and on the same rig in the same run **#29 renders it BLACK while #28
+and #30 render it WHITE**. Same data, opposite outcome. The rig is the variable; the
+shipped assets are sound.
+Separately, #11 and #12 carry byte-identical `tire` at baseColor **0.106** - the same value
+recorded on the Mercedes wave - and again one renders black and one white.
+
+**And the 1x read was wrong THREE times in this wave.** On the Mazda 3 Mk1, the CX-5 2020
+and the Mazda 6 GG the thumbnail showed a white wheel and 5x showed a plainly dark tyre
+band around a light rim. Zoom before writing anything down. A same-batch known-good control
+in the same image is worth more than any brightness argument.
+
+**Cheapest decisive order for a tyre verdict:** (1) the tyre material's baseColorFactor in
+the shipped glTF; (2) if it is textured, EXTRACT the texture and take its mean - the Jaguar
+XF precedent, and it is what settled #28/#30 here; (3) 5x crop of the tread face in
+front34/rear34 against a same-batch control; (4) a red control render. Never the 1x sheet.
+
+## Read the material NAMES, not just their numbers (2026-08-11)
+
+A Mazda 5 in this wave has clean geometry, correctly black tyres (`tire.001` at 0.01) and
+genuinely transparent glazing - and it is a CARTOON CHARACTER. Its material list holds
+`mouth.001`, `Iris.003`, `eye_cornea` and `eyePupil` alongside `body.car`. The grille is a
+pair of pink lips and the windscreen carries eyes. It would pass every numeric screen in
+the pipeline. Worth adding eye/mouth/iris/pupil/lips to a future name gate.
 
 ## Quality-gate standard — visual review before anything ships (owner standard 2026-07-23)
 
