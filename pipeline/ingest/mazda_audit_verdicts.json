@@ -572,5 +572,114 @@
    "windows are holes with scan mush behind them rather than glazing; the roof carries the CAPTURE RIG itself - four black scanner heads modelled into the mesh",
    "cov=1.000, mats=1, glazing opaque"
   ]
+ },
+ {
+  "uid": "c551bd5dbfa84d2eb5bc8ddd60536d2f",
+  "name": "Mazda 6 Sport",
+  "verdict": "fail",
+  "reasons": [
+   "FAILS THE DETAIL BAR, judged at 5x against the owner rubric's explicit fail criteria. The front grille is a blank slot with no mesh or honeycomb at all; the lower bumper intakes are empty white recesses with no mesh; the fog-lamp apertures are absent; the number plate is a plain grey rectangle",
+   "at 65,339 faces this is the lowest-poly model in the wave, an order of magnitude below the 916,826-face Mazda 6 at #38, and the softness is exactly where the face budget went",
+   "materials themselves are fine - glazing clear, tyres black, rim faces present with red calipers behind - so this is a fidelity cull, not a materials one",
+   "no loss to coverage: the Mazda 6 GG is already covered by #38 (916,826 faces) and #46, and the GH by #44",
+   "cov=0.804 with 5 body materials would also have needed a recolour_audit stamp"
+  ]
+ },
+ {
+  "uid": "8bc7cc696acb48f2a22be1a0a8cd1d1a",
+  "name": "Image To Stl_mazda_bounty_fbx",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: a slammed/stanced show truck. The Mazda Bounty (B-series) double cab sits on the floor with deep-dish wheels tucked hard under flared widebody arches, stretched tyres, a lowered front valance and roof-mounted spotlights. No UK registration decodes to this",
+   "glazing opaque in the shipped glb (82 materials, none transparent)",
+   "cov=0.798 with 10 body materials",
+   "the title is an auto-conversion service artefact ('Image To Stl'), which is a reliable tell for a re-upload rather than an original",
+   "NEAR-DUPLICATE of #52 (1,111,253 vs 1,098,295 faces, 1.2% apart) - the same truck uploaded twice as fbx and glb"
+  ]
+ },
+ {
+  "uid": "d98b794f964c49db9ea05166e67f00cc",
+  "name": "Image To Stl.com_mazda_bounty_glb",
+  "verdict": "fail",
+  "reasons": [
+   "the same slammed Bounty pickup as #51, out of scope for the same reason: stanced stance build with widebody arches, deep-dish wheels tucked under, and roof spotlights",
+   "cov=0.925 is ABOVE the 0.90 retire threshold with mats=1 - one material covers the whole truck including glass and tyres, the failure toyota-auris-v1 was retired for",
+   "NEAR-DUPLICATE of #51 at 1.2% face difference; both fail on scope so neither needs a keep decision"
+  ]
+ },
+ {
+  "uid": "6282a3b12ba34fec9eccbfc53a59e096",
+  "name": "Mazda MX-6 1992",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as MX-6 GE coupe instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior and far-side openings resolve through the side glass",
+   "tyres BLACK in the shipped glb and black on the tread face in the 3/4 tiles",
+   "rim faces present with five spokes and centre caps on all four corners; no void",
+   "shut lines defined; headlamp internals, boot spoiler, twin exhaust tips and a UK-format plate present",
+   "cov=0.196 healthy, 16 materials, 981,312 faces",
+   "IN SCOPE but low volume: the MX-6 was UK-market, so a registration can decode to one, but it is a T4/T5 coupe rather than fleet. Keep, but rank it behind the 3/6/CX cars"
+  ]
+ },
+ {
+  "uid": "9641b679cdb5490693efe69cdf8221b4",
+  "name": "Pick up mazda B2200",
+  "verdict": "fail",
+  "reasons": [
+   "DOES NOT READ AS THE RIGHT CAR - the rubric's first test. The cab is too tall and boxy, the bonnet is a flat slab, and the proportions do not resolve as a B2200/B-series",
+   "no detail anywhere: the grille is a blank recess with no mesh, the headlamps are flat yellow rectangles with no internals, the mirrors are flat slabs, there are almost no shut lines, and the bed is a plain box",
+   "968,442 faces spent on smoothing rather than features, which is why the poly count does not rescue it",
+   "the red lower-body band and the red roof fins are painted-on livery, not trim",
+   "glazing opaque in the shipped glb (89 materials, none transparent)",
+   "cov=0.553 with 21 body materials"
+  ]
+ },
+ {
+  "uid": "b9009afa2c9f411c8ab10423c7f33a1b",
+  "name": "Mazda 323 1977-1980 (shakotan build)",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: a JDM shakotan/stance build - slammed to the floor with heavy negative camber, deep-dish PINK aftermarket wheels, a front chin spoiler and JDM plates. No UK registration decodes to this",
+   "glazing opaque in the shipped glb (43 materials, none transparent)",
+   "cov=0.857 with 12 body materials, just under the retire line",
+   "the underlying FA 323 geometry is well built - this is a scope cull, and #56 covers the same car in stock form"
+  ]
+ },
+ {
+  "uid": "9e2b1d5818e14ae597d0f9f378907f2c",
+  "name": "Mazda 323 1978 (FA)",
+  "verdict": "pass",
+  "reasons": [
+   "stock, period-correct Mazda 323 FA five-door. Proportions read instantly; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; the interior and far-side openings resolve through the side glass",
+   "tyres black on the tread face in the 3/4 tiles; steel wheels with correct period hubcaps, faces present on all four corners",
+   "shut lines defined; quad headlamps with internals, chrome bumpers and overriders, grille slats and side rubbing strips all present",
+   "cov=0.214 healthy, 16 materials",
+   "IN SCOPE but a classic: the 323 was UK-market so a registration can decode to one, but it is T4 volume, not fleet",
+   "DUPLICATE PAIR with #57 (897,764 vs 897,728, only 36 faces apart). Keep this one"
+  ]
+ },
+ {
+  "uid": "149a56afb132498292ec1709e1800a21",
+  "name": "1978 Mazda 323",
+  "verdict": "pass",
+  "reasons": [
+   "identical mesh to #56 - same FA 323 five-door, same steel wheels and hubcaps, same cov=0.214 and mats=1",
+   "DUPLICATE of #56 at 36 faces apart on 897k, with the same title stem. Beyond coincidence, but flagged for the eye rather than auto-grouped, per CLAUDE.md",
+   "#56 has the higher face count and is the one to keep"
+  ]
+ },
+ {
+  "uid": "88a6ab0447664c5da1f696539c1c56f7",
+  "name": "Mazda MX-3",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as MX-3 EC coupe instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior resolves through the side glass",
+   "tyres black on the tread face; rim faces present with multi-spoke detail and centre caps on all four corners",
+   "shut lines defined; headlamp internals, front foglamp apertures, boot spoiler and twin exhaust tips present",
+   "cov=0.223 healthy, 17 materials, 842,160 faces",
+   "IN SCOPE but low volume: the MX-3 was UK-market, T4/T5 rather than fleet"
+  ]
  }
 ]
