@@ -1,0 +1,156 @@
+[
+ {
+  "drop_uid": "039b4078a1a440f8afaebcaafccf8bce",
+  "name": "2015_Porsche_918_Spyder",
+  "faces": 259369,
+  "keep_uid": "9fb9a088d0704a06ba69a8a6de100f10",
+  "keep_name": "Porsche 918 Spyder 2015 | www.vecarz.com",
+  "keep_faces": 259671,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'porsche', face counts 259,369 vs 259,671 (302 apart, 0.12%); keeping the higher face count",
+  "eye_check": "confirmed",
+  "eye_note": "same 918 Spyder mesh as the keeper - identical body, identical wheels, identical camera framing across all four tiles"
+ },
+ {
+  "drop_uid": "0aca89de30b94126bc7020109b2f3ef0",
+  "name": "Porsche 911turbo 996- 2000",
+  "faces": 84318,
+  "keep_uid": "28dbd43350bf462c806d5ba3d608e1cc",
+  "keep_name": "Porsche 911 Turbo (996) 2000 by Alex.Ka.",
+  "keep_faces": 84330,
+  "reason": "duplicate mesh (rule B): title token overlap 0.67 ignoring 'porsche', face counts 84,318 vs 84,330 (12 apart, 0.01%); keeping the higher face count",
+  "eye_check": "confirmed",
+  "eye_note": "same white 996 Turbo with silver hollow-spoke rims as 28dbd433, 12 faces apart"
+ },
+ {
+  "drop_uid": "1ab438e7fc444fedb6f1ee255f21902a",
+  "name": "2019 Porsche 911 (991.2) GT3 RS Weissach Package",
+  "faces": 174829,
+  "keep_uid": "e0eb0fe3f02843989d2de3eadfed92c5",
+  "keep_name": "2019 Porsche 911 Speedster (991.2)",
+  "keep_faces": 176115,
+  "reason": "duplicate mesh (rule A): title token overlap 0.80 ignoring 'porsche', face counts 174,829 vs 176,115 (1,286 apart, 0.73%); keeping the higher face count",
+  "eye_check": "rejected",
+  "eye_note": "DIFFERENT CARS: a 991.2 GT3 RS Weissach coupe with a fixed wing versus a 991.2 Speedster roadster with twin tonneau humps. Face counts 1,286 apart is coincidence, not identity"
+ },
+ {
+  "drop_uid": "2d336e24e107447298741204325e60ac",
+  "name": "2015_-_ Porsche_911_ Carrera_S__ Mid- Poly",
+  "faces": 242410,
+  "keep_uid": "7fd67e408409449c98e3c7be35b40aa7",
+  "keep_name": "2015 porsche 911 carrera s rigged  mid-poly",
+  "keep_faces": 242744,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'porsche', face counts 242,410 vs 242,744 (334 apart, 0.14%); keeping the higher face count",
+  "eye_check": "confirmed",
+  "eye_note": "one of three uploads of the same 2015 Carrera S mid-poly mesh"
+ },
+ {
+  "drop_uid": "4167ba8ff6dd49fc8300c48a8fe097a0",
+  "name": "2022_ Porsche_911_GT3_ Touring_992_remix2",
+  "faces": 237280,
+  "keep_uid": "78d5c47ab2554c2592b7e499179a0792",
+  "keep_name": "Porsche 911 GT3",
+  "keep_faces": 239145,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'porsche', face counts 237,280 vs 239,145 (1,865 apart, 0.78%); keeping the higher face count",
+  "eye_check": "rejected",
+  "eye_note": "DIFFERENT CARS: a 992 GT3 Touring on gold rims versus 78d5c47a which is a 991.1 GT3 RS with arch louvres and a fixed wing - different generation and different body"
+ },
+ {
+  "drop_uid": "4cef7c1e22ab40fd937507eae9a62cd8",
+  "name": "2015 - Porsche 911 Carrera S | Mid-Poly",
+  "faces": 242442,
+  "keep_uid": "7fd67e408409449c98e3c7be35b40aa7",
+  "keep_name": "2015 porsche 911 carrera s rigged  mid-poly",
+  "keep_faces": 242744,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'porsche', face counts 242,442 vs 242,744 (302 apart, 0.12%); keeping the higher face count",
+  "eye_check": "confirmed",
+  "eye_note": "one of three uploads of the same 2015 Carrera S mid-poly mesh"
+ },
+ {
+  "drop_uid": "597734ea90bc472fb52d937feed3af14",
+  "name": "Porsche 911",
+  "faces": 116367,
+  "keep_uid": "ff85d240ebf24eebbb6719c7b15634d8",
+  "keep_name": "Porsche 911 Gucci",
+  "keep_faces": 117144,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'porsche', face counts 116,367 vs 117,144 (777 apart, 0.66%); keeping the higher face count",
+  "eye_check": "rejected",
+  "eye_note": "DIFFERENT CARS: a 992 Targa 4S versus a 991.2 GT3 RS. Only the marque token is shared; the overlap score is inflated because one title is bare 'Porsche 911'"
+ },
+ {
+  "drop_uid": "73a595bff7d5498fa1891c4a78787d26",
+  "name": "Porsche 911 Gt3 Rs",
+  "faces": 368800,
+  "keep_uid": "e738eae819c34d19a31dd066c45e0f3d",
+  "keep_name": "Porsche GT3 RS",
+  "keep_faces": 368817,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'porsche', face counts 368,800 vs 368,817 (17 apart, 0.00%); keeping the higher face count",
+  "eye_check": "confirmed",
+  "eye_note": "same white 992 GT3 RS as e738eae8, 17 faces apart, identical body and wheels"
+ },
+ {
+  "drop_uid": "a76364a3d50c4d78912a28250cb57be5",
+  "name": "2022 Porsche 911 GT3 Touring (992)",
+  "faces": 238024,
+  "keep_uid": "78d5c47ab2554c2592b7e499179a0792",
+  "keep_name": "Porsche 911 GT3",
+  "keep_faces": 239145,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'porsche', face counts 238,024 vs 239,145 (1,121 apart, 0.47%); keeping the higher face count",
+  "eye_check": "rejected",
+  "eye_note": "DIFFERENT CARS: a 992 GT3 Touring versus a 991.1 GT3 RS - different generation and different body"
+ },
+ {
+  "drop_uid": "b868c5883b9c4ff889bc7f439e01cd7e",
+  "name": "1992 Porsche 911 964 Turbo S 3.6",
+  "faces": 93629,
+  "keep_uid": "27240ad1a825434f99e980d7c904c3d0",
+  "keep_name": "1992 Porsche 911 (964) Turbo S 3.6",
+  "keep_faces": 93656,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'porsche', face counts 93,629 vs 93,656 (27 apart, 0.03%); keeping the higher face count",
+  "eye_check": "confirmed",
+  "eye_note": "same teal 964 Turbo S on white Cup rims as 27240ad1, 27 faces apart"
+ },
+ {
+  "drop_uid": "b8d069b411804e43bccccd2e9e6fc1e7",
+  "name": "Porsche 918 Spyder 2015",
+  "faces": 259250,
+  "keep_uid": "9fb9a088d0704a06ba69a8a6de100f10",
+  "keep_name": "Porsche 918 Spyder 2015 | www.vecarz.com",
+  "keep_faces": 259671,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'porsche', face counts 259,250 vs 259,671 (421 apart, 0.16%); keeping the higher face count",
+  "eye_check": "confirmed",
+  "eye_note": "third upload of the same 918 Spyder mesh as 9fb9a088"
+ },
+ {
+  "drop_uid": "ba01afbaf32846e598db315be3507db3",
+  "name": "2022 Porsche 911 GT3 (992)",
+  "faces": 235721,
+  "keep_uid": "a76364a3d50c4d78912a28250cb57be5",
+  "keep_name": "2022 Porsche 911 GT3 Touring (992)",
+  "keep_faces": 238024,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'porsche', face counts 235,721 vs 238,024 (2,303 apart, 0.97%); keeping the higher face count",
+  "eye_check": "rejected",
+  "eye_note": "DIFFERENT VARIANTS: 992 GT3 with the swan-neck wing and blue-lipped black rims versus 992 GT3 Touring with a ducktail and gold rims. Probably one base mesh in two trims, but they are two cars a customer would tell apart, so neither is dropped"
+ },
+ {
+  "drop_uid": "e0eb0fe3f02843989d2de3eadfed92c5",
+  "name": "2019 Porsche 911 Speedster (991.2)",
+  "faces": 176115,
+  "keep_uid": "626f4a5d85d14480939eb8bb3c217c30",
+  "keep_name": "2019 Porsche 911 Speedster Heritage Edition",
+  "keep_faces": 176117,
+  "reason": "duplicate mesh (rule B): title token overlap 0.60 ignoring 'porsche', face counts 176,115 vs 176,117 (2 apart, 0.00%); keeping the higher face count",
+  "eye_check": "confirmed",
+  "eye_note": "same 991.2 Speedster as 626f4a5d, 2 faces apart"
+ },
+ {
+  "drop_uid": "e63de086c70d43c3ba4fb0393b864756",
+  "name": "2010 Porsche Boxster Spyder",
+  "faces": 1115148,
+  "keep_uid": "122a977cf6be4d639a9e239c6d859c44",
+  "keep_name": "Porsche Boxster Spyder 2010",
+  "keep_faces": 1117008,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'porsche', face counts 1,115,148 vs 1,117,008 (1,860 apart, 0.17%); keeping the higher face count",
+  "eye_check": "confirmed",
+  "eye_note": "same 987 Boxster Spyder as 122a977c, both carrying the HUMSTER3D plate watermark"
+ }
+]
