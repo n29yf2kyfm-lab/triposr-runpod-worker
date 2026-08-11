@@ -1361,5 +1361,100 @@
    "grey rim faces present in all four views, red calipers behind",
    "993 lamp bowls, engine-lid slats and door shut line defined"
   ]
+ },
+ {
+  "uid": "357999b7e87642e38062623127a61bb2",
+  "name": "2020 Porsche 718 Cayman GT4",
+  "verdict": "pass",
+  "reasons": [
+   "982 Cayman GT4 proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, roll bar visible through the side glass",
+   "black rim faces present in all four views",
+   "front intakes, lamp internals, diffuser and shut lines defined",
+   "road-legal GT4, in scope"
+  ]
+ },
+ {
+  "uid": "37406df07eba477e898806606ccfeb5e",
+  "name": "Porsche Cayman S",
+  "verdict": "pass",
+  "reasons": [
+   "987 Cayman S proportions read instantly; front 3/4 strong",
+   "TYRES CLEARED BY LOCAL GLB RENDER: the wave sheet shows a white tyre on a grey rim, but the shipped GLB is natively RED and renders plainly BLACK tyres - the coloured-body control, so the sheet's white tyre is a render-worker artefact and not body paint on the rubber",
+   "glazing transparent, interior visible in both the sheet and the local render",
+   "rim faces present in all four views, red calipers behind",
+   "lamp internals and front intakes defined"
+  ]
+ },
+ {
+  "uid": "3d84bed1c5794403a80580eebc2a4c72",
+  "name": "2018 Porsche 911 GT2 RS Weissach Package",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 GT2 RS proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands against gold rims",
+   "glazing transparent, cage visible through the side glass",
+   "gold rim faces present in all four views, yellow PCCB calipers",
+   "carbon bonnet and roof, NACA ducts, lamp internals and shut lines all defined",
+   "road-legal GT2 RS, in scope"
+  ]
+ },
+ {
+  "uid": "3dd07b783ad54c108f086c988c801516",
+  "name": "Porsche 924 Carrera GTR",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: the 924 Carrera GTR is the Group 4 works racer, not the road 924 Carrera GT - full roll cage visible through the glass, riveted box arches, centre-lock race wheels on slicks, no road lighting or trim",
+   "takes no road registration"
+  ]
+ },
+ {
+  "uid": "3f1a399631a84f55b1d1cd04310e361f",
+  "name": "1989 Porsche 911 (964) Carrera 4",
+  "verdict": "pass",
+  "reasons": [
+   "964 Carrera 4 proportions read instantly; front 3/4 strong; paint finish premium",
+   "tyres black rubber, tread face clear in both 3/4 bands against white Cup rims",
+   "glazing transparent, cabin visible through the side glass",
+   "white rim faces present in all four views",
+   "round lamp internals, engine-lid slats and door/bonnet shut lines defined"
+  ]
+ },
+ {
+  "uid": "41419345868e406eaec8a271e33de3c1",
+  "name": "Porsche 911 GT2 RS With Angle Eyes",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 GT2 RS proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cage visible through the side glass",
+   "red rim faces present in all four views",
+   "carbon bonnet, NACA ducts, intake slats and shut lines defined",
+   "in scope: road-legal GT2 RS; the red wheels and aftermarket angel-eye rings are cosmetic spec, not a body kit"
+  ]
+ },
+ {
+  "uid": "4167ba8ff6dd49fc8300c48a8fe097a0",
+  "name": "2022_ Porsche_911_GT3_ Touring_992_remix2",
+  "verdict": "pass",
+  "reasons": [
+   "992 GT3 Touring proportions read instantly - no rear wing, correct ducktail; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands against gold rims",
+   "glazing transparent, interior visible",
+   "gold rim faces present in all four views",
+   "lamp internals, front splitter and shut lines defined"
+  ]
+ },
+ {
+  "uid": "421825bb75e448209a84cc4fdae30f28",
+  "name": "2023 Porsche 911 GT3 RS",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL: one white material over the whole car, only the side markers carry any other colour",
+   "glazing opaque body-white, no interior visible at any zoom",
+   "tyres render body-white, indistinguishable from the rim and the bodywork",
+   "no lamp internals; grille and intake openings are flat white recesses"
+  ]
  }
 ]
