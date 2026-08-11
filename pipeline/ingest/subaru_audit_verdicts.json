@@ -31,5 +31,45 @@
    "mats=0 cov=0.000, no body-paint material",
    "evidence: glTF material table, not sheet alone"
   ]
+ },
+ {
+  "uid": "462192e741974d6c8fae4dcf74bd7e20",
+  "name": "Subaru Impreza MK3 GH 2007-2013",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit: body panels, doors, bonnet and a second complete shell all float in one scene; not a single assembled vehicle",
+   "rally-spec build regardless (roll cage, roof light pods, bull bar, mud flaps) - out of scope, would not take a road registration",
+   "pose gate flagged tall(h/l=0.85) because the stacked kit inflates the bbox"
+  ]
+ },
+ {
+  "uid": "6d1badf2a3124ebabcfe08077474739e",
+  "name": "Subaru Outback MK5 2014-2019",
+  "verdict": "fail",
+  "reasons": [
+   "three of four wheels absent: front and rear arches hold only a floating brake disc, and a single loose wheel sits under the sill between the axles",
+   "glazing renders opaque clay-white in all four tiles; no interior structure resolvable - fails the glazing ruling",
+   "white clay shell throughout, no real materials (cov=0.147 on one body mat)"
+  ]
+ },
+ {
+  "uid": "2e9e36f019cc4f64bb97a3d2737bc1fa",
+  "name": "Subaru Impreza MK2 GD 2000-2007",
+  "verdict": "fail",
+  "reasons": [
+   "detached/floating panels: both doors stand vertically off the body, front wings and bumper float clear of the shell in all four tiles",
+   "uniform white clay shell - tyres and glazing both render body-white, no interior resolvable (fails both the tyre and glazing rulings)",
+   "WRC-spec widebody anyway: full arch extensions, roof scoop and a competition rear wing - out of scope"
+  ]
+ },
+ {
+  "uid": "e6eb1dcfb55341cb89e9ff28bb8de776",
+  "name": "subaru impreza customized",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: widebody stance build - fender flares, extended side skirts, large GT rear wing, front splitter, heavy negative-camber drop, non-OEM wheels; not a spec a UK registration decodes to",
+   "materials are actually sound on the zoom: tread face reads grey rubber against the white body in front34/rear34, and seat backs plus B-pillar resolve through the rear side glass, so this is NOT a tyre or glazing failure",
+   "decal/logo baked into the boot lid and grille"
+  ]
  }
 ]
