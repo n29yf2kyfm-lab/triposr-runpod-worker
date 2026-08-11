@@ -1,0 +1,135 @@
+[
+ {
+  "uid": "f02a53a87b744d09a6cedceb568c4580",
+  "name": "jaguar f-pace",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "no glass-named material and zero transparent materials; single-material flat clay shell (1 material, 0 textures)"
+ },
+ {
+  "uid": "e50dfa6e6ac74bc9b9165678e5f69276",
+  "name": "Jaguar XF",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "glass-named materials 'glass-effect','screen-effect','jagxf_glass-effect','window1_4-effect' are all alphaMode=OPAQUE alpha=1.0; zero transparent materials in 59"
+ },
+ {
+  "uid": "a7a865ac27f6458bb42525e4aebb2a56",
+  "name": "Jaguar XF MK1 (X250) 2007-2015",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "'Gar_skl' (sklo = glass) alphaMode=BLEND baseColorFactor alpha=0.5 with a baseColorTexture, plus 'Gar_sbs' alpha=0.0 BLEND. The probe's name regex misses the Czech abbreviation, so this was resolved by dumping all 14 materials."
+ },
+ {
+  "uid": "77d9c7c9d2ad449da88d62848341af9f",
+  "name": "Jaguar XF-RS",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "zero transparent materials in 60; FLAT-SHELL signature (one baseColorFactor across every untextured material)"
+ },
+ {
+  "uid": "f3865ee652474fcc969196e4bfc3493d",
+  "name": "Jaguar F- Pace",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "3 materials, zero transparent, no glass-named material — the model has no glazing geometry at all, the window apertures are open holes"
+ },
+ {
+  "uid": "72c1381b55264a9ebeea050aa3c7c6d5",
+  "name": "Jaguar XF-RS",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "all 58 materials at baseColorFactor [0.8,0.8,0.8], zero transparent — textbook flat shell at 0.8"
+ },
+ {
+  "uid": "1ff81305c2ce45f5ba434d650196431c",
+  "name": "Silver Jaguar XF",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "single material, 3 textures, zero transparent materials; window darkness is painted into the texture"
+ },
+ {
+  "uid": "3ea106994ec9442eb4b72906026fa215",
+  "name": "Jaguar I-pace Concept",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "'Vitre' alphaMode=BLEND, baseColorFactor alpha below 1.0; interior resolvable through the side and rear34 glass in the sheet as a cross-check"
+ },
+ {
+  "uid": "e01e9694ab914135814be921681d6fc9",
+  "name": "Jaguar XF",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "single material, 1 texture, zero transparent materials; scan with no glazing geometry"
+ },
+ {
+  "uid": "9242afa6a7ae4800833e18b1249fa3f9",
+  "name": "2018 Jaguar XE SV Project 8",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "'jJaguar_XESVProject8RewardRecycled_2018Windows...Glass' alphaMode=BLEND with alpha below 1.0; cabin structure resolvable through the side glass as a cross-check"
+ },
+ {
+  "uid": "ce7dfd765748429f8f64b7683b49d581",
+  "name": "2015 jaguar xj",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "'windowglass' alphaMode=BLEND baseColor alpha=0.3"
+ },
+ {
+  "uid": "4b8ca4f05be24825a49fb8ac6c3af730",
+  "name": "1995 Jaguar XJ12 LWB (X305)",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "'Glass' alphaMode=OPAQUE alpha=1 (textured); the only transparent material in 9 is 'Lights' (BLEND + transmission)"
+ },
+ {
+  "uid": "030d2d750085459aa169e6a187d4c37a",
+  "name": "2005 Jaguar XJ6 TDVi (X350)",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "'Window' baseColor [0.042,0.042,0.042] alphaMode=OPAQUE metallic=0.47 and 'WindowDark' [0,0,0] OPAQUE; only 'Lens' (BLEND alpha 0.25 + transmission) is transparent. Renders as a black mirror, no interior."
+ },
+ {
+  "uid": "0ad7a343bd184a1aa016095380709830",
+  "name": "Jaguar XFR-S Sportbrake",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing is 'Plane.021__0' — BLEND, baseColor alpha=0.25, KHR_materials_transmission. The only glass-NAMED material is 'glassSideMirror' (a mirror, opaque), which is why a name-led probe first reported this opaque; the tan 'Seats' material visible through the side glass confirms the transparency."
+ },
+ {
+  "uid": "d3b9a8c5e6bc4ba3818bead275c53ecf",
+  "name": "jaguar high poly",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "'glass' alphaMode=BLEND baseColor alpha=0.0; interior resolvable through the windscreen in the rear34 tile as a cross-check"
+ },
+ {
+  "uid": "e2e3a81de9c248329e4d774f170244ed",
+  "name": "Result Jaguar",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "single material, 0 textures, zero transparent materials; flat clay shell"
+ },
+ {
+  "uid": "38a30b5f9e6648c99f8d68f4ea0611b6",
+  "name": "jaguar car colour type",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "'glass_clear' alphaMode=BLEND alpha=0.25 + KHR_materials_transmission"
+ },
+ {
+  "uid": "b2e428dddc764fd0aaf7aec3093cab12",
+  "name": "Jaguar F-Type Convertible",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "three BLEND glazing materials at baseColor alpha 0.506, 0.58 and 0.51; interior resolvable in the sheet as a cross-check"
+ },
+ {
+  "uid": "548f9180774c4bc6852adbfd409f0796",
+  "name": "Jaguar F-type",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "'Wind_Shield' alphaMode=BLEND alpha=0.25 + KHR_materials_transmission, plus 'aiStandardSurface35' and 'aiStandardSurface30' the same"
+ }
+]

@@ -1,0 +1,219 @@
+[
+ {
+  "uid": "f02a53a87b744d09a6cedceb568c4580",
+  "name": "jaguar f-pace",
+  "verdict": "fail",
+  "reasons": [
+   "flat clay shell: 1 material, 0 textures, one baseColorFactor across the whole file (glTF probe)",
+   "tyres render in body white, tread included, all four corners",
+   "glazing opaque body-colour",
+   "panel surfaces melted; rear bumper and tailgate crumpled",
+   "cov=1.000 — a respray would repaint glass and tyres too"
+  ]
+ },
+ {
+  "uid": "e50dfa6e6ac74bc9b9165678e5f69276",
+  "name": "Jaguar XF",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit: body floats clear of the ground, all four wheels detached and missing from the arches, a loose wheel and a loose tyre lying on the floor in every tile",
+   "suspension and brake internals exposed where the wheels should be",
+   "glazing opaque in the shipped glb (glTF probe: 'window1_4-effect' alphaMode=OPAQUE, zero transparent materials) — the sheet's dark glass is the render worker's name-match override"
+  ]
+ },
+ {
+  "uid": "a7a865ac27f6458bb42525e4aebb2a56",
+  "name": "Jaguar XF MK1 (X250) 2007-2015",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as XF X250 instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "rim faces present with traceable spokes and lug detail in all four tiles",
+   "glazing genuinely transparent in the shipped glb ('Gar_skl' = sklo/glass, alphaMode=BLEND, alpha=0.5, textured)",
+   "door and bonnet shut lines defined; grille mesh and lamp internals present; number-plate texture present",
+   "PALE TYRE IN THE SHEET IS A CANDIDATE ONLY, NOT A VERDICT: cov=0.957 means the worker's body-material pick covered nearly the whole car. Held pending a red-control re-render of the shipped glb."
+  ]
+ },
+ {
+  "uid": "77d9c7c9d2ad449da88d62848341af9f",
+  "name": "Jaguar XF-RS",
+  "verdict": "fail",
+  "reasons": [
+   "FLAT SHELL (glTF probe): 60 materials, every untextured one on the same baseColorFactor, zero transparent materials in the file",
+   "glazing opaque — windows render as a mottled smear with no interior structure",
+   "protruding frame/armature geometry hanging off the front and rear bumpers in all four tiles",
+   "panel surfaces lumpy across bonnet and roof"
+  ]
+ },
+ {
+  "uid": "f3865ee652474fcc969196e4bfc3493d",
+  "name": "Jaguar F- Pace",
+  "verdict": "fail",
+  "reasons": [
+   "all four wheels and tyres entirely absent — empty arches with brake discs and suspension exposed",
+   "body floats clear of the ground",
+   "no glazing at all: window apertures are open holes (glTF: 3 materials, zero transparent, no glass-named material)",
+   "loose panel fragments floating above the car in every tile"
+  ]
+ },
+ {
+  "uid": "72c1381b55264a9ebeea050aa3c7c6d5",
+  "name": "Jaguar XF-RS",
+  "verdict": "fail",
+  "reasons": [
+   "FLAT SHELL, decisive on glTF not on the sheet: all 58 materials carry baseColorFactor [0.8,0.8,0.8] — names survive (chrome_brushed, EXT_GRILL, MIRROR, EXT_LED) but every colour is gone",
+   "nothing in the file is dark enough to be rubber or transparent enough to be glass; zero transparent materials",
+   "windows render as a mottled smear, no interior resolvable",
+   "geometry itself is good (strong front 3/4, clean panels, full rim faces) — this is a materials failure, worth re-sourcing the same car"
+  ]
+ },
+ {
+  "uid": "1ff81305c2ce45f5ba434d650196431c",
+  "name": "Silver Jaguar XF",
+  "verdict": "fail",
+  "reasons": [
+   "glazing OPAQUE: the whole car is ONE material with 3 textures and zero transparent materials in the file — the dark windows are painted into the texture atlas, no interior is resolvable and none can be",
+   "cov=1.000 — a respray would repaint glass and wheels along with the body",
+   "geometry and wheels are otherwise good (spokes and red calipers present in all four tiles)"
+  ]
+ },
+ {
+  "uid": "3ea106994ec9442eb4b72906026fa215",
+  "name": "Jaguar I-pace Concept",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as I-Pace instantly; front 3/4 strong; consistent roof, pillars and wheelbase across all four tiles",
+   "tyres plainly black rubber with moulded JAGUAR sidewall lettering; black tread face clear in front34 and rear34",
+   "rim faces and full spoke detail present in all four tiles",
+   "glazing transparent in the shipped glb ('Vitre', alphaMode=BLEND) and interior seats/dash resolvable through the side and rear34 glass",
+   "grille mesh, lamp internals and door shut lines all defined; cov=0.216, recolourable"
+  ]
+ },
+ {
+  "uid": "e01e9694ab914135814be921681d6fc9",
+  "name": "Jaguar XF",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: the cobblestone ground plane is baked into the mesh and visible under the car in every tile",
+   "street environment and passers-by baked into the paint as reflections",
+   "panels soft and torn, rear end shredded",
+   "glazing is holes; single material, 1 texture, zero transparent materials in the file"
+  ]
+ },
+ {
+  "uid": "9242afa6a7ae4800833e18b1249fa3f9",
+  "name": "2018 Jaguar XE SV Project 8",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as XE SV Project 8 instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "tyres plainly black rubber — black tread face against the white body in front34, rear34 and side",
+   "rim faces present with full spoke detail and yellow calipers in all four tiles",
+   "glazing transparent in the shipped glb (BLEND, 22 materials, 29 textures) and cabin structure resolvable through the side glass",
+   "grille honeycomb crisp, headlamp internals sharp, door and bonnet shut lines defined, reflections clean",
+   "road car: SV Project 8 is a 300-unit road-registered XE, in scope"
+  ]
+ },
+ {
+  "uid": "ce7dfd765748429f8f64b7683b49d581",
+  "name": "2015 jaguar xj",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as XJ X351 instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "tyres plainly black rubber, black tread face in front34, rear34 and side",
+   "rim faces present with full multi-spoke detail in all four tiles",
+   "glazing transparent in the shipped glb ('windowglass', alphaMode=BLEND, alpha=0.3); pillars and cabin resolvable through the side glass",
+   "grille mesh, lamp internals and door/bonnet shut lines all defined; reflections clean, paint premium; cov=0.234, recolourable"
+  ]
+ },
+ {
+  "uid": "4b8ca4f05be24825a49fb8ac6c3af730",
+  "name": "1995 Jaguar XJ12 LWB (X305)",
+  "verdict": "fail",
+  "reasons": [
+   "glazing OPAQUE in the shipped glb: material 'Glass' is alphaMode=OPAQUE alpha=1 (textured); the only transparent material in the file is 'Lights'. No interior can ever be resolved.",
+   "tyres read white in the sheet; not pursued because the glazing failure is already terminal",
+   "geometry is otherwise good (X305 proportions read instantly, wire-lattice rims complete, UK plate texture) — a re-source candidate, not a bad mesh"
+  ]
+ },
+ {
+  "uid": "030d2d750085459aa169e6a187d4c37a",
+  "name": "2005 Jaguar XJ6 TDVi (X350)",
+  "verdict": "fail",
+  "reasons": [
+   "glazing OPAQUE in the shipped glb: 'Window' baseColor [0.042,0.042,0.042] alphaMode=OPAQUE metallic=0.47 and 'WindowDark' [0,0,0] OPAQUE; only 'Lens' is transparent. It renders as a black mirror, not glass — no interior resolvable in the viewer.",
+   "otherwise a strong X350: proportions read instantly, black rubber tyres ('Rubber' baseColor 0,0,0), full rim faces, sharp quad headlamps, clean shut lines — re-source candidate on materials alone"
+  ]
+ },
+ {
+  "uid": "0ad7a343bd184a1aa016095380709830",
+  "name": "Jaguar XFR-S Sportbrake",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as XFR-S Sportbrake instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "tyres black rubber in the shipped glb ('Tyre' and 'Side_wall' both baseColorFactor [0,0,0], untextured)",
+   "rim faces present with full multi-spoke detail and red calipers; the dark front wheel in front34_L is the far-side tyre seen edge-on at a shallow angle, not a missing rim face — the other three tiles show the rim in full",
+   "glazing genuinely transparent ('Plane.021__0', alphaMode=BLEND alpha=0.25 + KHR_materials_transmission) and the tan 'Seats' material is resolvable through the side glass and tailgate",
+   "grille honeycomb crisp, lamp internals present, shut lines defined; cov=0.223, recolourable"
+  ]
+ },
+ {
+  "uid": "d3b9a8c5e6bc4ba3818bead275c53ecf",
+  "name": "jaguar high poly",
+  "verdict": "pass",
+  "reasons": [
+   "E-Type Series 3 roadster: proportions read instantly, front 3/4 strong, consistent across all four tiles",
+   "tyres plainly black rubber, black tread against the white body in every tile",
+   "wire wheels with individually modelled spokes, complete on all four corners",
+   "glazing transparent in the shipped glb ('glass', alphaMode=BLEND, alpha=0.0); interior and dash resolvable through the windscreen in rear34",
+   "S3 wide-mouth grille slats crisp, headlamp bowls present, bonnet shut line defined; reflections clean, paint premium",
+   "NOTE the source title is only 'jaguar high poly' — it states no model, year, trim or generation, so those fields stay null in the clean list"
+  ]
+ },
+ {
+  "uid": "e2e3a81de9c248329e4d774f170244ed",
+  "name": "Result Jaguar",
+  "verdict": "fail",
+  "reasons": [
+   "rendered on its back: front34 and front34_L show the underbody with the wheels pointing up, rear34 looks straight down on the roof. The local pose gate passed the source geometry, so this is the render-side inversion.",
+   "TERMINAL INDEPENDENT OF POSE, which is why this is scrapped rather than marked fail-rerender: 1 material, 0 textures, FLAT-SHELL signature, zero transparent materials — glazing opaque and tyres in body colour whatever attitude it is rendered at",
+   "cov=1.000 — a respray would repaint glass and tyres too"
+  ]
+ },
+ {
+  "uid": "38a30b5f9e6648c99f8d68f4ea0611b6",
+  "name": "jaguar car colour type",
+  "verdict": "pass",
+  "reasons": [
+   "facelift F-Type R coupe: proportions read instantly, front 3/4 strong, consistent roof, pillars and wheelbase across all four tiles",
+   "tyres plainly black rubber — black tread face against the white body in front34, rear34 and side",
+   "rim faces present with full spoke detail and red calipers in all four tiles",
+   "glazing transparent in the shipped glb ('glass_clear', alphaMode=BLEND, alpha=0.25 + KHR_materials_transmission); steering wheel and seats resolvable through the glass in rear34",
+   "grille honeycomb crisp, headlamp internals sharp, door and bonnet shut lines defined; cov=0.163, recolourable",
+   "NOTE the source title is only 'jaguar car colour type' — it states no model, year, trim or generation, so those fields stay null in the clean list"
+  ]
+ },
+ {
+  "uid": "b2e428dddc764fd0aaf7aec3093cab12",
+  "name": "Jaguar F-Type Convertible",
+  "verdict": "pass",
+  "reasons": [
+   "facelift F-Type convertible: proportions read instantly, front 3/4 strong, consistent across all four tiles; soft-top texture present",
+   "PALE TYRE IN THE SHEET IS A RENDER ARTEFACT, NOT THE ASSET: the shipped glb's '..._Tires' material is baseColorFactor [0,0,0], untextured, and its geometry sits at the very bottom of the model. The worker's heuristic body pick repainted it — the documented 'sheet lies' mechanism.",
+   "rim faces present with full spoke detail and red calipers in all four tiles",
+   "glazing transparent (three BLEND materials at alpha 0.506/0.58/0.51)",
+   "grille, lamp internals and shut lines defined; cov=0.407",
+   "minor: carries an invisible Sketchfab edge-overlay mesh ('edge_color000255', BLEND alpha 0.0, 436k verts) — dead weight, not a visible defect"
+  ]
+ },
+ {
+  "uid": "548f9180774c4bc6852adbfd409f0796",
+  "name": "Jaguar F-type",
+  "verdict": "pass",
+  "reasons": [
+   "F-Type coupe: proportions read instantly, front 3/4 strong, consistent across all four tiles",
+   "tyres black rubber in the shipped glb ('Tyre' baseColorFactor [0.029,0.025,0.025], untextured) and the black tread reads plainly in side, rear34 and front34",
+   "rim faces present with full spoke detail and yellow calipers; the black disc at the front of front34 is the far-side tyre seen edge-on, and the same wheel shows its full rim in side and rear34",
+   "glazing transparent ('Wind_Shield' alphaMode=BLEND alpha=0.25 + KHR_materials_transmission, plus two more transmission materials)",
+   "door and bonnet shut lines defined, lamp internals present; grille mesh a little shallow but within the bar; cov=0.512"
+  ]
+ }
+]
