@@ -204,6 +204,68 @@ _OVERRIDE = [
     ("chrysler", "sebring", 3), ("chrysler", "stratus", 3),
     ("chrysler", "grand voyager", 3), ("chrysler", "voyager", 3),
     ("chrysler", "300", 3),
+    # Volvo, added 2026-08-11 for the Volvo wave. Measured before the change:
+    # 55 of the 70 filtered rows landed T4, including EVERY S60, V60, V70, S80,
+    # S90, V90, S40 and V50 -- so a Wrecked V40 and three C30s rendered ahead of
+    # the entire Volvo saloon and estate range on sweep order alone.
+    #
+    # Two rows scored WORSE than T4, both off the SAME digit-suffix bug the
+    # Chrysler block above documents for "C300": "Volvo C30" came out T1 because
+    # Citroen's "c3" swallows "c30", and "Volvo C40 Recharge" came out T2 off
+    # Citroen's "c4". Those tiers were roughly right by luck, not by rule, and a
+    # rule that fires for the wrong marque cannot be relied on.
+    #
+    # ORDER MATTERS, first hit wins:
+    #  - the race cars (BTCC/WTCC) come FIRST so a "Volvo 850 BTCC" cannot claim
+    #    the 850 tier; they are competition cars, not fleet.
+    #  - "xc70" before "v70", because "Volvo V70 XC" and "Volvo XC70" are the
+    #    same estate and both must land in the same place.
+    #  - EVERY rule is listed in BOTH the glued and separated spelling. _tok_hit
+    #    cannot bridge a space in the RULE into a glued TITLE -- only the title
+    #    side is forgiving -- and the real uploads are overwhelmingly glued
+    #    ("Volvo XC60", "volvo v70"), while a few are separated ("Volvo S-40").
+    ("volvo", "btcc", 5), ("volvo", "wtcc", 5),
+    # Halo, competition and classic. Genuinely well-modelled and genuinely loved,
+    # but a UK registration in 2026 almost never decodes to one, which is the
+    # only axis this file ranks on.
+    ("volvo", "p1800", 5), ("volvo", "p 1800", 5), ("volvo", "1800", 5),
+    ("volvo", "amazon", 5), ("volvo", "duett", 5),
+    ("volvo", "pv444", 5), ("volvo", "pv 444", 5),
+    ("volvo", "pv544", 5), ("volvo", "pv 544", 5),
+    ("volvo", "pv36", 5), ("volvo", "pv 36", 5),
+    ("volvo", "pv4", 5), ("volvo", "pv 4", 5),
+    ("volvo", "polestar", 5),
+    ("volvo", "240", 5), ("volvo", "242", 5), ("volvo", "244", 5),
+    ("volvo", "245", 5), ("volvo", "264", 5),
+    ("volvo", "740", 5), ("volvo", "745", 5), ("volvo", "760", 5),
+    ("volvo", "850", 5), ("volvo", "940", 5), ("volvo", "960", 5),
+    ("volvo", "142", 5), ("volvo", "144", 5), ("volvo", "145", 5),
+    ("volvo", "164", 5), ("volvo", "66", 5), ("volvo", "480", 5),
+    # The cars a UK registration actually decodes to, in UK parc order. The XC40
+    # and XC60 are Volvo UK's volume sellers; the V40 and S60/V60 are the fleet
+    # saloons and estates behind them. XC90 is a large seven-seat SUV and V70 the
+    # older estate -- common on UK roads, but an order of magnitude behind.
+    ("volvo", "xc40", 2), ("volvo", "xc 40", 2),
+    ("volvo", "xc60", 2), ("volvo", "xc 60", 2),
+    ("volvo", "v40", 2), ("volvo", "v 40", 2),
+    ("volvo", "s60", 2), ("volvo", "s 60", 2),
+    ("volvo", "v60", 2), ("volvo", "v 60", 2),
+    ("volvo", "c30", 2), ("volvo", "c 30", 2),
+    ("volvo", "c40", 2), ("volvo", "c 40", 2),
+    ("volvo", "ex30", 2), ("volvo", "ex 30", 2),
+    ("volvo", "xc70", 3), ("volvo", "xc 70", 3),
+    ("volvo", "xc90", 3), ("volvo", "xc 90", 3),
+    ("volvo", "v70", 3), ("volvo", "v 70", 3),
+    ("volvo", "v50", 3), ("volvo", "v 50", 3),
+    ("volvo", "s40", 3), ("volvo", "s 40", 3),
+    ("volvo", "s80", 3), ("volvo", "s 80", 3),
+    ("volvo", "v90", 3), ("volvo", "v 90", 3),
+    ("volvo", "s90", 3), ("volvo", "s 90", 3),
+    ("volvo", "ex90", 3), ("volvo", "ex 90", 3),
+    # Still road cars, but low UK volume: the C70 is a two-door coupe/convertible
+    # and the S70 a short-lived saloon.
+    ("volvo", "c70", 4), ("volvo", "c 70", 4),
+    ("volvo", "s70", 4), ("volvo", "s 70", 4),
     # Nameplates that are ordinary English/Italian words or bare digits, so they
     # can only be trusted alongside their marque. "Adam", "Viva", "Soul",
     # "Scala" and "Tipo" all occur in unrelated Sketchfab titles, and a bare "2"

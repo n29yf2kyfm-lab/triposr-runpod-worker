@@ -60,19 +60,50 @@ def probe(uid, stage="staging/jeep"):
     for m in mats:
         nm = m.get("name") or ""
         pbr = m.get("pbrMetallicRoughness") or {}
-        bcf = pbr.get("baseColorFactor") or [1, 1, 1, 1]
-        alpha = bcf[3] if len(bcf) > 3 else 1.0
         mode = m.get("alphaMode", "OPAQUE")
         ext = m.get("extensions") or {}
+        # SPECULAR-GLOSSINESS materials keep their colour in the EXTENSION, not
+        # in pbrMetallicRoughness. Found 2026-08-11 re-validating this probe
+        # against PORSCHE_GLASS.json: 2019-porsche-911-gt3-rs is ground-truth
+        # CLEAR and scored "opaque" because every one of its materials is
+        # KHR_materials_pbrSpecularGlossiness, so pbrMetallicRoughness is absent
+        # and baseColorFactor fell back to the [1,1,1,1] default -- the probe
+        # read an opacity the file never stated. That is the worst possible
+        # failure direction here: under the owner's ruling "opaque" is an
+        # outright FAIL, so this was about to cull a good car on a default
+        # value. specGloss is legacy but common in older and JDM-market uploads,
+        # which is exactly what a Mazda sweep is full of.
+        sg = ext.get("KHR_materials_pbrSpecularGlossiness") or {}
+        bcf = pbr.get("baseColorFactor") or sg.get("diffuseFactor") or [1, 1, 1, 1]
+        alpha = bcf[3] if len(bcf) > 3 else 1.0
         tr = (ext.get("KHR_materials_transmission") or {}).get("transmissionFactor", 0)
-        is_trans = (mode in ("BLEND", "MASK") and alpha < 1.0) or alpha < 1.0 or tr > 0
+        # TEXTURE-DRIVEN ALPHA, added 2026-08-11 after validating this probe
+        # against PORSCHE_GLASS.json (107 cars, ground truth confirmed by
+        # magenta-backlight renders). It scored 103/107, and THREE of the four
+        # misses were the same mechanism: glazing authored as alphaMode=BLEND
+        # with baseColorFactor alpha=1.0, the transparency living in the
+        # baseColorTexture's alpha channel rather than the factor. The 1987
+        # Porsche 959 ('Glass', BLEND, alpha=1.0, 20 textures) and
+        # 2019-porsche-911-gt3-rs (BLEND, alpha=1.0, 109 textures) are both
+        # genuinely transparent and this probe called them OPAQUE -- which
+        # under the owner's ruling is an outright FAIL, i.e. the probe was
+        # about to cull good cars. BLEND/MASK is a deliberate authoring choice;
+        # a material set to it WITH a texture is asserting per-texel alpha.
+        # Recorded separately so these can be eyeballed rather than trusted
+        # blind: the factor cannot tell us HOW transparent the texture is.
+        textured = bool(pbr.get("baseColorTexture") or sg.get("diffuseTexture"))
+        tex_alpha = mode in ("BLEND", "MASK") and textured
+        is_trans = (mode in ("BLEND", "MASK") and alpha < 1.0) or alpha < 1.0 or tr > 0 \
+            or tex_alpha
         if is_trans:
             trans.append({"name": nm, "alpha": round(alpha, 3), "mode": mode,
-                          "transmission": round(tr, 3)})
+                          "transmission": round(tr, 3),
+                          "via": "texture-alpha" if (tex_alpha and alpha >= 1.0
+                                                     and tr <= 0) else "factor"})
         if GLASSY.search(nm):
             glazing.append({"name": nm, "alpha": round(alpha, 3), "mode": mode,
                             "transmission": round(tr, 3), "transparent": bool(is_trans)})
-        if not pbr.get("baseColorTexture"):
+        if not textured:
             untex += 1
             flat_vals.add(tuple(round(x, 4) for x in bcf[:3]))
 
@@ -103,13 +134,39 @@ def probe(uid, stage="staging/jeep"):
                        r"turn|indicat|fog|reverse|brake|stop|feux|clignot", re.I)
     WINDOWY = re.compile(r"window|windscreen|windshield|vitre|scheibe|fenster|"
                          r"glazing|pare.?brise|lunette|luneta|ventana|finestrino", re.I)
+    # INTERIOR TRIM IS NOT GLAZING EITHER, and it beats the LAMPY guard because
+    # it can contain a genuine window word. Measured 2026-08-11 on
+    # 2019-porsche-911-gt3-rs: its only WINDOWY material is
+    # "Airconditioningbuttonwindscreenventilationicons1Mtl" -- the dashboard
+    # icon sheet for the windscreen demister button. Being WINDOWY it was
+    # promoted to sole decider of the whole car's glazing verdict, and it is
+    # opaque, so a ground-truth-CLEAR car scored "opaque" (an outright FAIL).
+    # Same class of error as the lamp lenses, one level further in.
+    # Deliberately NARROW. "interior" is NOT here: a material named
+    # "interior_glass" is real glazing seen from inside, and excluding it would
+    # repeat the very mistake this guard fixes one level down.
+    TRIMMY = re.compile(r"icon|button|instrument|gauge|cluster|dial|dash|"
+                        r"aircondition|ventilation|speedo|"
+                        # mirror: the Jaguar wave's "glassSideMirror" is a
+                        # MIRROR and must not be allowed to outvote real glazing.
+                        r"mirror|rearview|rear.?view|wing.?mirror", re.I)
 
+    glazing = [x for x in glazing if not TRIMMY.search(x["name"])] or glazing
     windows = [x for x in glazing if WINDOWY.search(x["name"])]
     if not windows:
         windows = [x for x in glazing if not LAMPY.search(x["name"])]
     if windows:
         # Window-specific materials exist: they alone decide the verdict.
         glazing = windows
+    else:
+        # EVERY glazing-named material is a lamp lens, so the file names no
+        # glazing at all and the lamps must not be allowed to vote. Porsche
+        # 911 Turbo (996) 28dbd433 has exactly one glassy name --
+        # 'headlightglass', opaque -- alongside a transparent 'windoFS' that
+        # matches no glass pattern; the lamp dragged it to "ambiguous" when the
+        # ground truth is clear. Clearing the list falls through to the
+        # transparent-material branch below, which reads windoFS correctly.
+        glazing = []
 
     trans_glazing = [x for x in glazing if x["transparent"]]
     if trans_glazing:
@@ -129,7 +186,16 @@ def probe(uid, stage="staging/jeep"):
     else:
         verdict = "opaque"
 
-    return {"uid": uid, "verdict": verdict, "n_materials": len(mats),
+    # An "opaque" verdict reached with NO glazing-named material in the file is
+    # INFERRED, not proven: the glTF simply never says which material is the
+    # windows. Porsche 5fd62615 (9 materials, 27 textures, nothing named glassy,
+    # nothing transparent) is genuinely clear under a magenta backlight, so this
+    # class cannot be failed on the probe alone -- it needs the eye or a
+    # backlight render. Surfaced as a field so the reviewer can see which
+    # opaques are evidence and which are absence of evidence.
+    certainty = "proven" if glazing else "inferred"
+    return {"uid": uid, "verdict": verdict, "certainty": certainty,
+            "n_materials": len(mats),
             "n_transparent": len(trans), "glazing_named": glazing[:6],
             "transparent": trans[:6], "flat_shell": flat,
             "n_textures": len(g.get("images") or [])}
