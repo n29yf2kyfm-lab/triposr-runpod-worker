@@ -1831,5 +1831,53 @@
    "OUT OF SCOPE: GT2 RS Clubsport in the Salzburg competition livery - number 23 roundels, PORSCHE sill lettering, Michelin racing slicks, race splitter and swan-neck wing",
    "track-only; takes no road registration"
   ]
+ },
+ {
+  "uid": "93bcd9a97f3b4fdb903b2dd8c138177e",
+  "name": "2013 Porsche 911 GT3 (991)",
+  "verdict": "pass",
+  "reasons": [
+   "991.1 GT3 proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible through the side glass",
+   "dark rim faces present in all four views, red calipers behind",
+   "lamp internals, front intakes and shut lines defined",
+   "road-legal GT3, in scope"
+  ]
+ },
+ {
+  "uid": "961a463221c0465daa697a49641de691",
+  "name": "Porsche Cayman 987",
+  "verdict": "pass",
+  "reasons": [
+   "987 Cayman S proportions read instantly; front 3/4 strong",
+   "TYRES CLEARED BY LOCAL GLB RENDER: the wave sheet shows a white tyre on a white rim, but the shipped GLB is natively silver and renders plainly BLACK tyres with red calipers - render-worker artefact, not body paint on the rubber",
+   "glazing transparent in both the sheet and the local render - green-tinted glass with the interior visible",
+   "rim faces present in all four views",
+   "lamp internals, side intakes and shut lines defined"
+  ]
+ },
+ {
+  "uid": "97785983d3a949cf87e9ee6bf49f4032",
+  "name": "Porsche 911 Carrera S (991)",
+  "verdict": "pass",
+  "reasons": [
+   "991 Carrera S proportions read instantly; front 3/4 strong",
+   "TYRES CLEARED BY LOCAL GLB RENDER, the strongest control available: the shipped GLB is natively YELLOW and the tyres render plainly BLACK, so no body paint touches the rubber; the wave sheet's white tyre is a render-worker artefact",
+   "glazing transparent, interior visible",
+   "silver rim faces present in all four views, red calipers behind",
+   "engine-lid slats, lamp internals and shut lines defined"
+  ]
+ },
+ {
+  "uid": "978e631aad2b44c48561523dfa0c7b1c",
+  "name": "Porsche 911 50",
+  "verdict": "pass",
+  "reasons": [
+   "991 Carrera proportions read instantly, Fuchs-style rims correct for a 911 50th; front 3/4 strong",
+   "TYRES AND GLAZING CLEARED BY LOCAL GLB RENDER: the shipped GLB renders black tyres and transparent tinted glass with a visible interior; the sheet's uniform pale grey made both read as clay and that was wrong",
+   "rim faces present in all four views",
+   "FLAG for later: the local render shows the body split across two materials - a black carpaint over bonnet/roof/doors and a separate light material on the bumpers and sills. That is the two-body-material pattern that shipped toyota-corolla-cross-2021-tw1-v1 with an invisible respray, so this car must not ship colour variants until recolour_audit --stamp passes it"
+  ]
  }
 ]
