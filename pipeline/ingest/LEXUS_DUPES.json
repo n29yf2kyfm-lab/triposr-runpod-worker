@@ -24,6 +24,6 @@
   "keep_uid": "281a547f226543d680e4f27ae0304278",
   "keep_name": "Lexus IS300/200",
   "keep_faces": 94753,
-  "reason": "MANUAL addition - dupe_check could not see this one. Face counts are 30 apart (94,723 vs 94,753) but the title token overlap is 0.00 ('IS300/200' vs '2005 Lexus IS (XE10)' share no tokens), so neither rule A nor rule B fires. Confirmed by eye across all four views: identical body, glasshouse and interior, only the rim design differs (chrome multi-spoke vs silver 5-spoke). Keeping the higher face count. CLAUDE.md is right that face proximity is a candidate finder only - this pair was settled by looking, not by the number."
+  "reason": "duplicate mesh, EYE-CONFIRMED wave 2 (dupe_check cannot flag it: the two titles share no tokens once 'lexus' is ignored, so rule (b)'s 0.4 overlap test fails despite the counts being 30 apart). Both sheets are byte-for-byte the same render apart from the rim finish - identical cov=0.405, mats=3, MATERIAL SPLIT SUSPECT and pose tob=0.521; 3beb91b6 has chrome rims, 281a547f silver. Keeping the higher face count (and 90 likes vs 33). This is why the wave-1 pass list is 19 but LEXUS_CLEAN is correctly 18."
  }
 ]

@@ -671,5 +671,38 @@
    "HARD-REJECT before render: 64MB GLB, over the 48MB serving ceiling",
    "not a quality judgement - it was never rendered. Worth re-sourcing: the current RX is UK-market"
   ]
+ },
+ {
+  "uid": "24f8824b60d6437e8e2a787b2627df43",
+  "name": "2023 Lexus RZ450e",
+  "verdict": "fail",
+  "reasons": [
+   "HARD-REJECT before render: 66MB GLB, over the 48MB serving ceiling - never rendered, not a quality judgement",
+   "this is the SECOND RZ450e upload (identical 621,051 faces to 29aaeaf4, which wave 1 hard-rejected at 66MB). Both uploads are the same export at the same size, so the cap is not an artefact of one bad upload",
+   "SOURCING FACT: Sketchfab offers exactly two downloadable RZ450e models and both are 66MB. No RZ of any kind is obtainable under the 48MB ceiling - RZ remains the one genuinely uncovered UK Lexus"
+  ]
+ },
+ {
+  "uid": "610652d234a3470e891c7b1ce8030a80",
+  "name": "Lexus GS S160 2004",
+  "verdict": "fail",
+  "reasons": [
+   "per-corner white tyres: two corners show a white tread face in front34 while rear34 shows plainly black tread on the same car, judged at 3x on the tread face not the sidewall",
+   "NOT body paint - the glTF binds the tyre rings to a dedicated 'tire' material at baseColor 0.106, the exact signature CLAUDE.md records for the per-corner wheel-mesh defect, and a forced --colour red left the tyres dark while the body went red",
+   "same 1,140,094-face mesh as wave 1's a9f5713e (2004 Lexus GS 430), which failed for this identical defect reproduced across three renders - a retitled re-upload does not fix it",
+   "additionally renders upside down in all four views (render-side inversion, deterministic for this export)"
+  ]
+ },
+ {
+  "uid": "2f0523d193a8425885509a0083c3b9ed",
+  "name": "Lexus Gs300",
+  "verdict": "fail",
+  "reasons": [
+   "tyres take the body colour: the tyre ring geometry (dia 3.277) is bound to Meshpart1Mtl, the SAME material that covers ~30 body panels, so every colour variant repaints the rubber",
+   "confirmed by the decisive red control - a forced --colour red rendered the whole tyre red, tread included; the worker's recolour payload is ['Meshpart1Mtl','Meshpart26Mtl','Meshpart2Mtl'] and Meshpart1Mtl is on the tyres",
+   "no semantic material names anywhere in the file (every material is 'MeshpartNMtl'), so colour_variants.py has no body-paint material to target",
+   "NOT the same failure as its wave 1 twin: 02c2d444 (identical 403,787 faces) is a clay shell with opaque glazing, whereas this export has genuinely clear glass (seats, headrests, steering wheel and door card resolvable at 3x), a sharp chrome grille and real headlamp internals",
+   "native-materials render is actually good - black car, black tyres, chrome 7-spoke rims. Only the recolour path is broken, so this is a candidate if a single-colour entry is ever wanted"
+  ]
  }
 ]
