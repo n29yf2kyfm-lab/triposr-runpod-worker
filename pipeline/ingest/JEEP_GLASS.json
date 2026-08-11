@@ -1,0 +1,51 @@
+[
+ {
+  "uid": "73bd5b50f8e54bde9dad4e6d04b3225b",
+  "name": "Jeep Grand Cherokee MK2 | www.vecarz.com",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "clearglass alpha 0.413 BLEND, windowglass alpha 0.443 BLEND; 8/17 materials transparent"
+ },
+ {
+  "uid": "dc2253f047bc4a61aaf0e517a67ede0b",
+  "name": "Jeep Grand Cherokee WK2",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "zero transparent materials; 1 material / 1 texture (scan atlas)"
+ },
+ {
+  "uid": "8e35262e1a1c4ce092c48fecc785b957",
+  "name": "Jeep Cherokee XJ 5door 2000",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "clearglass alpha 0.2 BLEND, windowglass alpha 0.3 BLEND; 4/16 transparent"
+ },
+ {
+  "uid": "6bafa70ee29243ab8205cb54b109a9fe",
+  "name": "Jeep Compass Limited 2022",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "zero transparent materials of 9; flat-shell signature (all untextured mats share one baseColorFactor)"
+ },
+ {
+  "uid": "02f097f52a41447a8018c880a1660825",
+  "name": "Jeep renegade",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "single material, zero transparent, zero textures"
+ },
+ {
+  "uid": "34c676e725614e7797b4938be6a82b1e",
+  "name": "Jeep Compass 3D Model",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "glass-NAMED materials present but all alpha 1.0 OPAQUE; 0/17 transparent. Sheet shows clear glass purely from the handler override."
+ },
+ {
+  "uid": "949a34f3ab174c899b2596bd53403b6f",
+  "name": "Jeep Grand Cherokee Trackhawk",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "0/47 transparent, zero glass-named materials, 90 textures; glazing absent or fully opaque"
+ }
+]

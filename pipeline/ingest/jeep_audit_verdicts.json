@@ -1,0 +1,87 @@
+[
+ {
+  "uid": "73bd5b50f8e54bde9dad4e6d04b3225b",
+  "name": "Jeep Grand Cherokee MK2 | www.vecarz.com",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as Grand Cherokee WJ",
+   "black chunky tyres, tread visible in both 3/4 views",
+   "all four rim faces present, five-spoke alloys consistent",
+   "seven-slot grille crisp, headlamp internals present",
+   "door/bonnet/tailgate shut lines defined",
+   "in scope: standard Laredo 4x4, no lift/snorkel/light bar"
+  ]
+ },
+ {
+  "uid": "dc2253f047bc4a61aaf0e517a67ede0b",
+  "name": "Jeep Grand Cherokee WK2",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan - not caught by title prune",
+   "ground plane baked into the mesh",
+   "floating scan debris fragments above roof in all four views",
+   "glazing is scan mush, no glass material at all",
+   "baked lighting and dirt over the body",
+   "cov=1.000 single material - respray would repaint glass too"
+  ]
+ },
+ {
+  "uid": "8e35262e1a1c4ce092c48fecc785b957",
+  "name": "Jeep Cherokee XJ 5door 2000",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as Cherokee XJ",
+   "black tyres, tread face clearly dark in front34 and rear34",
+   "all four rim faces present and consistent",
+   "seven-slot grille crisp, panel creases sharp",
+   "door shut lines defined",
+   "in scope: standard XJ 5-door, no lift/snorkel/light bar"
+  ]
+ },
+ {
+  "uid": "6bafa70ee29243ab8205cb54b109a9fe",
+  "name": "Jeep Compass Limited 2022",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL - glazing renders opaque body-white, no glass material",
+   "tyres render body-white including the tread face, only rims are dark",
+   "gltf probe: 0 of 9 materials transparent, 0 textures, flat-shell signature true",
+   "owner ruling: opaque glazing and body-colour tyres are each an outright fail"
+  ]
+ },
+ {
+  "uid": "02f097f52a41447a8018c880a1660825",
+  "name": "Jeep renegade",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL - single material, whole car one white surface",
+   "glazing fully opaque body-white in all four views",
+   "tyres render body-white including tread face",
+   "gltf probe: 1 material, 0 transparent, 0 textures",
+   "owner ruling: opaque glazing and body-colour tyres each fail outright"
+  ]
+ },
+ {
+  "uid": "34c676e725614e7797b4938be6a82b1e",
+  "name": "Jeep Compass 3D Model",
+  "verdict": "fail",
+  "reasons": [
+   "GLAZING OPAQUE in the shipped glTF - sheet is not a witness",
+   "gltf: 00_-_CLEAR_GLASS.001 and 00_-_WINDOW.001 both alpha 1.0 alphaMode OPAQUE, 0 of 17 materials transparent",
+   "render worker name-matched glass/window and forced transmission=1.0, manufacturing the clear glass seen in the sheet",
+   "geometry otherwise good: black tyres, rim faces present, sharp seven-slot grille, LED lamp internals, defined shut lines",
+   "owner ruling 2026-08-09: opaque glazing fails outright"
+  ]
+ },
+ {
+  "uid": "949a34f3ab174c899b2596bd53403b6f",
+  "name": "Jeep Grand Cherokee Trackhawk",
+  "verdict": "fail",
+  "reasons": [
+   "gltf: 0 of 47 materials transparent and NO glass-named material - glazing is absent or opaque in the shipped asset",
+   "custom wrap livery, not OEM spec: gold/brass mirror caps and blue rocker graphics",
+   "respray did not take - rendered GREEN under forced --colour silver, mats=11 cov=0.897",
+   "geometry itself is good: black tyres with tread, rim faces present, sharp grille, LED lamp internals"
+  ]
+ }
+]
