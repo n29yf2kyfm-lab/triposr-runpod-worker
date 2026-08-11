@@ -662,5 +662,16 @@
    "out of OEM scope: custom build with bolt-on widebody arch flares, a large rear aerofoil, front air dam, bonnet vents and a roof rack carrying surfboards",
    "no interior, no shut lines"
   ]
+ },
+ {
+  "uid": "dbd871a37f80439f982ca523c1de4eef",
+  "name": "Subaru Impreza 22B_v2",
+  "verdict": "fail",
+  "reasons": [
+   "glazing OPAQUE, proven from the glTF not the sheet: the material Dunkles_Glas is baseColor 0,0,0 with alphaMode OPAQUE, and the material Glass is black at alpha 0.995 - effectively solid. No interior structure resolves through the side or quarter windows in any tile at 5x",
+   "headlamps and tail lamps are opaque black too (Headlights and Backlights are both baseColor 0,0,0 OPAQUE), so both lamp clusters read as empty dark voids",
+   "the magenta grille badge is model-side here, not a render artefact - the material is literally named Front_badge_Pink, rgba 0.698/0.052/0.800 OPAQUE",
+   "tyres are fine (material Rubber is pure black) and the 22B widebody is a factory road spec, so scope and tyres are not the problem - the glazing and lamps are"
+  ]
  }
 ]
