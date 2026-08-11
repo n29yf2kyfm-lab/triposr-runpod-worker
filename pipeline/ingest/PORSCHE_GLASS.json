@@ -1,0 +1,751 @@
+[
+ {
+  "uid": "03af3f482d9144bd993e580441ff3225",
+  "name": "2021 Porsche 911 Targa 4S Highmodel",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'GLASS_7': alphaMode=BLEND, baseColor alpha=0.4. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "03e383400bb74626bcdedbbe198a5849",
+  "name": "2014 Porsche Cayman S (981)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Cglass_mat1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "04f556e0a2aa425185dcee7f7f1e2ff1",
+  "name": "2018 Porsche 911",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'glass': alphaMode=BLEND, baseColor alpha=0.45. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "0530aa8fa4b74427a71c961a5bdd7087",
+  "name": "Porsche 959",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'window': alphaMode=BLEND, baseColor alpha=1.0, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "06f8003040f440afb8c60b5db2ec9d77",
+  "name": "Porsche 911 Carrera rigged and carbon fiber",
+  "verdict": "opaque",
+  "evidence": "render",
+  "note": "shipped glb: materials 'Window_Glass' and 'Window_Glass_not_transparent' are both alphaMode OPAQUE; magenta-backlight Blender render of the staged glb shows the greenhouse as a solid dark panel with zero light transmitted. The audit sheet looked fine only because render/handler.py forces Transmission=1.0 on any material whose NAME matches (glass|window|...)."
+ },
+ {
+  "uid": "081cf9a708bb4b8b8f14d55b56ffdfe9",
+  "name": "Porsche 911 Turbo S",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'windows': alphaMode=BLEND, baseColor alpha=0.255. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "09c6832d4e4447c8b3992d7c51adbd8c",
+  "name": "2009 Porsche Cayenne Turbo S",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "glazing material 'Bootok0011Mtl': alphaMode=BLEND, baseColor alpha=0.302. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles. Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ },
+ {
+  "uid": "0e118f0e927645a1876a4f213cddb0f0",
+  "name": "2021 Porsche 911 Targa 4S Heritage Design (992)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Porsche_911Targa4SRewardRecycled_2021Window_Material': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "0fadf286b5804c03ac2e35d5db6c8a91",
+  "name": "2014 Porsche 911 Turbo (991)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'windows': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "122a977cf6be4d639a9e239c6d859c44",
+  "name": "Porsche Boxster Spyder 2010",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'clearglass': alphaMode=BLEND, baseColor alpha=0.2. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "14e73d3348d44fabb01ced4aa60c7db6",
+  "name": "2020 Porsche Macan",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'M_2020_Porsche_Macan_Windows': alphaMode=BLEND, baseColor alpha=0.581. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "1503f8d08f154ec7ab52f95a99c55134",
+  "name": "2025 Porsche 911 GT3 (992-2)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Porsche_911GT39922_2025Window_Material1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "1ab438e7fc444fedb6f1ee255f21902a",
+  "name": "2019 Porsche 911 (991.2) GT3 RS Weissach Package",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'WPPorsche_911GT3RSRewardRecycled_2018Window_Material1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "1bb367ebaee14829a24e9b5444c15087",
+  "name": "2020 Porsche 718 Spyder",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'glass': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "249b3088ba9449038d89670c9cd8d789",
+  "name": "2014 Porsche 911 GT3 (991)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'windows': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "259b0294bc254b1f85defaf5ea5bc34c",
+  "name": "Porsche Taycan",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material '2020_Porsche_Taycan_Turbo_S_lob_steklo__spec_trans': alphaMode=BLEND, baseColor alpha=0.4. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "269d8a5da4254109922a1af0dd2eb6b6",
+  "name": "Porsche Panamera Turbo Liftback 2023",
+  "verdict": "opaque",
+  "evidence": "render",
+  "note": "shipped glb: only glazing material 'glass' is alphaMode OPAQUE and no material anywhere in the file carries alpha<1 or KHR_materials_transmission; backlight render shows a solid black greenhouse."
+ },
+ {
+  "uid": "27240ad1a825434f99e980d7c904c3d0",
+  "name": "1992 Porsche 911 (964) Turbo S 3.6",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'tMAT_Glass1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "2826fd94a234422d94c88f2f5ef9fdfd",
+  "name": "2017 Porsche 911 Turbo S Exclusive Series 991.2",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'porscheM_Glass_WindowFront_Low1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "28dbd43350bf462c806d5ba3d608e1cc",
+  "name": "Porsche 911 Turbo (996) 2000 by Alex.Ka.",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "glazing material 'windoFS': alphaMode=BLEND, baseColor alpha=0.5. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles. Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ },
+ {
+  "uid": "2b3843db0f784ab0a8702f6361d16d2a",
+  "name": "1995 Porsche 911 GT2 (993)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'PPorsche_911GT2_1993Window_Material1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "2c4a64ebf4ba4da29b119f6e3ac7b1fa",
+  "name": "2024 Porsche 718 Spyder RS",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Porsche_718SpyderRSRewardRecycled_2024Window_Material': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "2c929bad2b6c41a2a35867e5d8a4f5f3",
+  "name": "Porsche 911 992 Targa S",
+  "verdict": "opaque",
+  "evidence": "render",
+  "note": "shipped glb has ZERO transparent materials; 'Glass_Clear322' / 'Glass_Clear3' / 'Glass_black' are all alphaMode OPAQUE. Backlight render shows the greenhouse rendering as body-coloured clay. Sheet is invalid evidence here - the worker overrode the name-matched glass."
+ },
+ {
+  "uid": "318cfb7279a94e8f96095ec0236f02ad",
+  "name": "Porsche 911 992 Carrera S",
+  "verdict": "opaque",
+  "evidence": "render",
+  "note": "shipped glb has ZERO transparent materials; 'Glass_Clear' is alphaMode OPAQUE. Backlight render shows a body-coloured greenhouse."
+ },
+ {
+  "uid": "32b33f05cb4f457a87428757f90298ce",
+  "name": "Porsche 911 Carrera 1994",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'd_glass22': alphaMode=BLEND, baseColor alpha=0.5. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "357999b7e87642e38062623127a61bb2",
+  "name": "2020 Porsche 718 Cayman GT4",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Porsche_718CaymanGT4_2020Window_Material': alphaMode=BLEND, baseColor alpha=0.6, KHR_materials_transmission=0.4. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "37406df07eba477e898806606ccfeb5e",
+  "name": "Porsche Cayman S",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Vitre': alphaMode=BLEND, baseColor alpha=0.34. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "3d84bed1c5794403a80580eebc2a4c72",
+  "name": "2018 Porsche 911 GT2 RS Weissach Package",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'glass': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "3f1a399631a84f55b1d1cd04310e361f",
+  "name": "1989 Porsche 911 (964) Carrera 4",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Windows': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "41419345868e406eaec8a271e33de3c1",
+  "name": "Porsche 911 GT2 RS With Angle Eyes",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'GlassMtl': alphaMode=BLEND, baseColor alpha=0.072. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "4167ba8ff6dd49fc8300c48a8fe097a0",
+  "name": "2022_ Porsche_911_GT3_ Touring_992_remix2",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Porsche_911GT3TouringRewardRecycled_2022Window_Material': alphaMode=BLEND, baseColor alpha=0.25. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "45982328a4bc458199da0c9f95b4f28d",
+  "name": "2016 Porsche 911 Turbo S (991.2)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'PorschePorsche_911TurboSRewardRecycled_2016Window_Material1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "4774f59cbb1146be81cffd795f61a9f6",
+  "name": "2020 Porsche Cayenne Turbo Coupe",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'pMAT_Glass1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "4b52cfc4ce32438aa732880fae81c047",
+  "name": "2017 Porsche 718 Boxster S",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'glass': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "4b7c65bfd3bd4eacb14183cfbcb07565",
+  "name": "Porsche 911 GT3 - Satin Black",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Porsche_911GT3_2022Window_Material': alphaMode=BLEND, baseColor alpha=0.3. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "4b989f15962e457cbf9f2990528bce52",
+  "name": "Porsche 911 Carrera 4S",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "'window' sits at alpha 0.944 but 'glass' at 0.614 carries the main glazing; backlight render shows magenta through the door glass."
+ },
+ {
+  "uid": "4e1abafe7cf5413587a421377624ba08",
+  "name": "2025 Porsche Taycan Turbo GT Weissach Package",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'porschePorsche_TaycanTurboGTReward_2025Window_Material1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "570249cd14c342ea947b05fee05245d9",
+  "name": "1991 Porsche 944 Turbo",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "glazing material 'Meshpart47Mtl': alphaMode=BLEND, baseColor alpha=0.302. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles. Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ },
+ {
+  "uid": "58ac9d802d054c4eae0fd09988ad4f33",
+  "name": "2023 Porsche 911 GT3 RS",
+  "verdict": "opaque",
+  "evidence": "render",
+  "note": "single-material clay shell: materials=1 ('Scene_-_Root'), textures=0, no alphaMode, no transmission anywhere. Glazing is the same opaque material as the bodywork. Backlight render confirms zero transmission. The sheet's pale flat greenhouse was the true material (no name match, so the worker did not override it) and was misread as 'transparent, cage visible'."
+ },
+ {
+  "uid": "597734ea90bc472fb52d937feed3af14",
+  "name": "Porsche 911",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'GLASS_7': alphaMode=BLEND, baseColor alpha=0.4. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "5ab56c0a7666450cabb59d5e44539a12",
+  "name": "2019 Porsche 718 Boxster T",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material is named 'dummy_material_13' (alpha 0.25, transmission 1.0) so it does not match the render worker's glass regex - meaning the audit sheet showed the model's OWN glass, and it read clear. Local render failed to frame this model (bbox ~4 cm); glTF + unoverridden sheet are the evidence."
+ },
+ {
+  "uid": "5bae7080e6e14151a8f74b14573fd8cb",
+  "name": "2020 Porsche Cayenne GTS Coupe",
+  "verdict": "opaque",
+  "evidence": "render",
+  "note": "shipped glb has ZERO transparent materials; 'M_2020_Porsche_Cayenne_GTS_Coupe_Windows' is alphaMode OPAQUE. Backlight render shows a body-coloured greenhouse."
+ },
+ {
+  "uid": "5dcc96f1f7fb4ff5a577b5c9f106275d",
+  "name": "PORSCHE 930 TURBO '75",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "nearly failed on the sheet (pale interior made the greenhouse look washed out); front34 tile shows white seats and a headrest, and the backlight render passes light through both sides."
+ },
+ {
+  "uid": "5fd62615f72a4012a5ebc15cd4c64461",
+  "name": "Porsche 911 GT3 RS (semester 2)",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "no transparent material found Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ },
+ {
+  "uid": "5fe43aaf8a2d4277859d79884aa4ad3e",
+  "name": "2019 Porsche Panamera Turbo",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Window_Glass': alphaMode=BLEND, baseColor alpha=0.5. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "626f4a5d85d14480939eb8bb3c217c30",
+  "name": "2019 Porsche 911 Speedster Heritage Edition",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'P1Kit1_Window_Geo_lodASG1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "678ed0b096bd4b99839888eef6075666",
+  "name": "1987 Porsche 959",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "glazing material 'Glass': alphaMode=BLEND, baseColor alpha=1. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles. Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ },
+ {
+  "uid": "67a3239621ec4d4091578d0b372e1aca",
+  "name": "PORSCHE 914/6GT",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Glas': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "69a1c529af8a49ef8c6c3fa1c79b54c1",
+  "name": "Porsche_ Turbo_911S",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'windows': alphaMode=BLEND, baseColor alpha=0.255. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "6d135fddeb87429898034474fc0f5c0c",
+  "name": "Porsche 911 GT3RS",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'd_glass': alphaMode=BLEND, baseColor alpha=0.016. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "706606b037ff458ea229042ea52cd1bd",
+  "name": "2015 Porsche Boxster GTS (718)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'MAT_Glass.067': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "70713d059dc14beeb8f1b2a703bb920d",
+  "name": "2023 Porsche 911 4.0 GT3",
+  "verdict": "opaque",
+  "evidence": "render",
+  "note": "two-material clay shell ('material_1' untextured + 'material_0' with one texture); no alphaMode, no transmission anywhere. Backlight render confirms zero transmission through the glazing."
+ },
+ {
+  "uid": "74ebbd6423154e879e43dd2e1df7cdd1",
+  "name": "Porsche_911992_gt3_rs",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "nearly failed on the sheet (side tile door glass is a blown-out white reflection); the front34 tile shows a dark cabin through the same glass, and the glb window material is alpha 0.25 with transmission 1.0."
+ },
+ {
+  "uid": "78d5c47ab2554c2592b7e499179a0792",
+  "name": "Porsche 911 GT3",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "'EXT_Glass_Windows.001' at alpha 0.779 is on the heavy side; backlight render shows magenta and interior through the rear quarter and door glass."
+ },
+ {
+  "uid": "7b0f4b60716f4b23a0714cf9303a0802",
+  "name": "Porsche 911 3D Model GOLDEN",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "nearly failed on the sheet: the greenhouse reads as a marbled grey wash because the 'Glass' material carries a dark scratched grunge baseColorTexture at alpha 0.693, and 'Glass.001' sits at alpha 0.907. CLEARED on the shipped asset - a magenta-backlight render shows the rear-view mirror, hanging air freshener, wipers and dash through the windscreen and magenta plus a headrest through the side glass. Dirty-looking, but genuinely see-through."
+ },
+ {
+  "uid": "7c503ca4615148d88c98466b45a84c0a",
+  "name": "2019 Porsche 911 Targa 4S (991.2)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'glass': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "7e25beb0e2c841f0bf51f94fde651fd4",
+  "name": "Porsche 911 GT3 RS (997.2) '11",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Glassfinta0021Mtl': alphaMode=BLEND, baseColor alpha=0.2. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "7fd67e408409449c98e3c7be35b40aa7",
+  "name": "2015 porsche 911 carrera s rigged  mid-poly",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Window_Glass_not_transparent': alphaMode=BLEND, baseColor alpha=0.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "8b96f6a0aca3444aada943f349ae36f0",
+  "name": "2010 Porsche Panamera Turbo",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'windowglass': alphaMode=BLEND, baseColor alpha=0.522. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "90d32f48d4964bc9b5a9df88fcc3aa3d",
+  "name": "Porsche Carrara GT",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "glazing material 'Meshpart10Mtl': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles. Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ },
+ {
+  "uid": "92050f39daba42fb8b2d004b09d06065",
+  "name": "2019-porsche-911-gt3-rs",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "no transparent material found Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ },
+ {
+  "uid": "93bcd9a97f3b4fdb903b2dd8c138177e",
+  "name": "2013 Porsche 911 GT3 (991)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Meshesglassdark0011Mtl': alphaMode=BLEND, baseColor alpha=0.528. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "961a463221c0465daa697a49641de691",
+  "name": "Porsche Cayman 987",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "nearly failed on the sheet (side tile greenhouse is a white studio-reflection swirl); front34 tile and a backlight render both resolve seats, steering wheel and dash."
+ },
+ {
+  "uid": "97785983d3a949cf87e9ee6bf49f4032",
+  "name": "Porsche 911 Carrera S (991)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Window1Mtl': alphaMode=BLEND, baseColor alpha=0.2. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "978e631aad2b44c48561523dfa0c7b1c",
+  "name": "Porsche 911 50",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Translucent_Glass_Gray': alphaMode=BLEND, baseColor alpha=0.122. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "97ea84db846e4945961dffb8b2d7af18",
+  "name": "2019 Porsche 911 (991.2) GT3 RS",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material is named '991_2phong12SG1' / '991_2phong18SG1' (alpha 0.25, transmission 1.0), outside the worker's glass regex, so the sheet showed the model's own glass and it read clear. Local render failed to frame this model; glTF + unoverridden sheet are the evidence."
+ },
+ {
+  "uid": "99c74d8fa7df42d984903868f6e593f6",
+  "name": "Porsche 911 GT3 RS (992) '23",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "glazing material 'Hub1Mtl': alphaMode=BLEND, baseColor alpha=0.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles. Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ },
+ {
+  "uid": "9b2ebe52991945fbbfc649977ff4bf71",
+  "name": "1995 Porsche 993 Clubsport",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'darkglass': alphaMode=BLEND, baseColor alpha=0.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "9d48aa751ab24becbf7110e93c8a7a1f",
+  "name": "2004 Porsche Carrera GT",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "cleared on the glb: 'C1_Vidrios_Tr' is alpha 0.25 with KHR_materials_transmission 1.0. The local backlight render came back as an unlit black silhouette (rig lighting failure, not a glass verdict) so the glTF is the witness."
+ },
+ {
+  "uid": "9fb9a088d0704a06ba69a8a6de100f10",
+  "name": "Porsche 918 Spyder 2015 | www.vecarz.com",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Window_Glass': alphaMode=BLEND, baseColor alpha=0.48. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "a4045a52962f4301b34a839b9c4ed9b9",
+  "name": "Porsche Panamera",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'sunburst_glass.001': alphaMode=BLEND, baseColor alpha=0.25. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "a76364a3d50c4d78912a28250cb57be5",
+  "name": "2022 Porsche 911 GT3 Touring (992)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Porsche_911GT3TouringRewardRecycled_2022Window_Material': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "ab60b9e064e645ab96aeabe7772e4d49",
+  "name": "1964 Porsche 911",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'glass_window': alphaMode=BLEND, baseColor alpha=0.2. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "b1d87619f6174f10be47423fcd4de444",
+  "name": "2022 Porsche 718 Cayman GT4 RS",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Porsche_718CaymanGT4RS_2022Window_Material': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "b3f19d82cc494a9ead7b4bbec96f3e13",
+  "name": "2019 Porsche 911 Carrera 4 GTS",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'M_Glass_WindowLeft_Low': alphaMode=BLEND, baseColor alpha=0.5. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "b45ae79c8ec840a98fae0581af4be396",
+  "name": "2017 Porsche 911 (991) GT3 RS",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Porsche_911GT3RSCrewRecycled_2016Window_Material1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "b5a64fc6e75f4618bd43cf81aecce3f1",
+  "name": "Porsche Macan GTS 2022",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "glazing material '00_-_Porsche_Macan_GTS_-_Vidros': alphaMode=BLEND, baseColor alpha=0.15. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles. Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ },
+ {
+  "uid": "b668f8a336b54954b04fa0dade507300",
+  "name": "2025 Porsche 911 Targa 4 GTS (992.2)",
+  "verdict": "opaque",
+  "evidence": "render",
+  "note": "shipped glb has ZERO transparent materials; 'GlassMtl' and 'GlassRed' are alphaMode OPAQUE. Backlight render of the roof-open car shows the wraparound rear screen as a solid panel. Sibling b8488f94 (the other 2025 Targa 4 GTS) does carry a proper 0.25-alpha / transmission-1.0 window material."
+ },
+ {
+  "uid": "b6756fc06654405a839bf14e931e4c83",
+  "name": "2021 Porsche 911 Turbo S (992)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'glass': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "b8488f9425d84381a4efe5521db7f111",
+  "name": "2025 Porsche 911 Targa 4 GTS",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'gtsPorsche_911Targa4GTSRewardRecycled_2025Window_Material1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "ba01afbaf32846e598db315be3507db3",
+  "name": "2022 Porsche 911 GT3 (992)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Porsche_911GT3_2022Window_Material': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "bdc888633910404db4fa58e694c5ee39",
+  "name": "Porsche Cayenne (Mk3)(958)S Hybrid 2010",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'clearglass': alphaMode=BLEND, baseColor alpha=0.2. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "be2ffcfb789a40c5b8ebaa23c880caf6",
+  "name": "Porsche Cayman S 2011",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'clearglass': alphaMode=BLEND, baseColor alpha=0.2. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "bf9186606d40493fb72274ff40f4269d",
+  "name": "2010 Porsche Panamera Turbo",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "glazing material 'Glass_Parts': alphaMode=BLEND, baseColor alpha=0.438. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles. Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ },
+ {
+  "uid": "c599b3aa82eb46f7ba3bb2d22bd9dfc6",
+  "name": "2017 Porsche 718 Cayman (982)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'glass': alphaMode=BLEND, baseColor alpha=1, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "ca1040479c9843558c50b8f0ae75f640",
+  "name": "2015 Mark Webber Porsche 918 Spyder",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'pPorsche_918SpyderRewardRecycled_2015Window_Material1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "cc2f5a514de942f98dbe81014988b2ca",
+  "name": "2008 Porsche 911 GT3",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "glazing material 'Back1Mtl': alphaMode=BLEND, baseColor alpha=0.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles. Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ },
+ {
+  "uid": "cd97c516c0eb411789e7bb2bcd28622b",
+  "name": "Porsche Taycan Cross Turismo",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Windowgeoloda1Mtl': alphaMode=BLEND, baseColor alpha=0.251. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "ce837502def244c4aea720502c953f7c",
+  "name": "2019 Porsche 911 Carrera 4S Cabriolet (992)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Porsche_911Carrera4SCabrioletRewardRecycled_2020Window_Material': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "d199f12bb1124733b27e16aa5589a43b",
+  "name": "2020 Porsche 718 Spyder",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Mesheswindowinsidegeoloda0011Mtl': alphaMode=BLEND, baseColor alpha=0.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "ddce606aeef74ae485cbfebc4e34add2",
+  "name": "Porsche Macan",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'FGLASS5': alphaMode=BLEND, baseColor alpha=0.206. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "e3223ce627e54f8eb4ae7520b0e6c49a",
+  "name": "Porsche Panamera Turbo (PNMI)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Glass2Mtl': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "e3465539677d4aeea9b4c017ddffaf7d",
+  "name": "1977 Porsche 911 Turbo 3.3 (930 G-Series)",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "glazing material 'Meshpart12Mtl': alphaMode=BLEND, baseColor alpha=0.502. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles. Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ },
+ {
+  "uid": "e738eae819c34d19a31dd066c45e0f3d",
+  "name": "Porsche GT3 RS",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'TwiXeR_992_glass.004': alphaMode=BLEND, baseColor alpha=0.187. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "e85725e652ff464bb4b71e760387daf2",
+  "name": "Porsche 959",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Glass_Simple': alphaMode=BLEND, baseColor alpha=0.109. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "ed07dfc50f8146aea10143232657c061",
+  "name": "2018 Porsche 718 Cayman GTS",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'pM_Glass_WindowFront_Low1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "ee69c474a1cc4085944cde4cb7ae87db",
+  "name": "Porsche 911 C4S 2020 Aerokit",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'glass': alphaMode=BLEND, baseColor alpha=0.347. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "ef7934a1eb8d408785df77d554905b32",
+  "name": "Porsche 911",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "nearly failed on the sheet: 'windows' is a heavy near-black tint (baseColor 0.098, alpha 0.8) and the car has almost no interior geometry, so the sheet greenhouse reads as a flat dark panel. CLEARED on a backlight render - light passes through both near and far glass and the far-side window opening is plainly discernible."
+ },
+ {
+  "uid": "f0270f8ae1db4d7b909417e07492043a",
+  "name": "2022 Porsche Macan",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Glass2Mtl': alphaMode=BLEND, baseColor alpha=0.035. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "f17a982d5d8a4d97baef4b00b51a4e9a",
+  "name": "2023 Porsche 911 GT3 RS 2.7 Carrera Tribute 992",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Porsche_911GT3RS992Tribute_2023Window_Material': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "f2269fdf74f64257a3a9b0872eb9b2d8",
+  "name": "2021 Porsche Panamera Turbo S Sport Turismo",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Porsche_PanameraSportTurismoRewardRecycled_2021Window_Material': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "f39f7c539a3440428c22a3da2f52af43",
+  "name": "2024 Porsche 911 S/T",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'PorschePorsche_911STRewardRecycled_2024Window_Material1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "f472abb10e07442b80f46ade49a24d64",
+  "name": "2017 Porsche Panamera Turbo",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "glazing material 'FINAL_MODEL_17phong19SG1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles. Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ },
+ {
+  "uid": "fb282e1ac22041f892630a3f28f387f5",
+  "name": "2022 Porsche Macan GTS",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'MACANMI_Glass_In_WindowGlass1': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "fe160a2d7f8c49f193ad5227851e6372",
+  "name": "Porsche 911 Flatnose",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'Glass': alphaMode=BLEND, baseColor alpha=1, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "fe573c66c5c64a1c82cfbd0162ccc7d5",
+  "name": "Porsche 911 Turbo S | TAKEOVER",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "glazing material 'DAMAGE_GLASS': alphaMode=BLEND, baseColor alpha=0.096. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles."
+ },
+ {
+  "uid": "ff85d240ebf24eebbb6719c7b15634d8",
+  "name": "Porsche 911 Gucci",
+  "verdict": "clear",
+  "evidence": "render",
+  "note": "glazing material '991_2phong18SG1.001': alphaMode=BLEND, baseColor alpha=0.25, KHR_materials_transmission=1.0. Interior/far-side glass resolvable in the audit sheet at 3x on at least two tiles. Confirmed on the shipped glb with a magenta-backlight Blender render: light passes through the glazing."
+ }
+]
