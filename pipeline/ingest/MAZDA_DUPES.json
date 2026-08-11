@@ -1,0 +1,38 @@
+[
+ {
+  "drop_uid": "149a56afb132498292ec1709e1800a21",
+  "name": "1978 Mazda 323",
+  "faces": 897728,
+  "keep_uid": "9e2b1d5818e14ae597d0f9f378907f2c",
+  "keep_name": "Mazda 323 1978 (FA)",
+  "keep_faces": 897764,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'mazda', face counts 897,728 vs 897,764 (36 apart, 0.00%); keeping the higher face count"
+ },
+ {
+  "drop_uid": "44f83bd458df4025b8daa7f6eeb36b1f",
+  "name": "2009 Mazda MX-5 Miata (NC)",
+  "faces": 1089965,
+  "keep_uid": "96056443d55c4afaa90099e9e1d45d9b",
+  "keep_name": "2009 Mazda Miata MX-5 Roadster (NC)",
+  "keep_faces": 1090806,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'mazda', face counts 1,089,965 vs 1,090,806 (841 apart, 0.08%); keeping the higher face count"
+ },
+ {
+  "drop_uid": "e7df911e3bb1452f9bf6ee4b3c80ca54",
+  "name": "2011_mazda_2__demio Test By Ddiaz Design",
+  "faces": 183661,
+  "keep_uid": "1f3ef39f1c95445197ac5076a2d696c2",
+  "keep_name": "2011 Mazda 2 / Demio",
+  "keep_faces": 183822,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'mazda', face counts 183,661 vs 183,822 (161 apart, 0.09%); keeping the higher face count"
+ },
+ {
+  "drop_uid": "ea25010fdf134a55a0d87ef8e89bb924",
+  "name": "2002 Mazda 6",
+  "faces": 916518,
+  "keep_uid": "7a469399cfae4e438ea5c86e56d938f2",
+  "keep_name": "Mazda 6 Mk1 sedan 2002",
+  "keep_faces": 916826,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'mazda', face counts 916,518 vs 916,826 (308 apart, 0.03%); keeping the higher face count"
+ }
+]

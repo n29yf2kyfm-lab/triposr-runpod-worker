@@ -681,5 +681,191 @@
    "cov=0.223 healthy, 17 materials, 842,160 faces",
    "IN SCOPE but low volume: the MX-3 was UK-market, T4/T5 rather than fleet"
   ]
+ },
+ {
+  "uid": "06be4801411f449b928bc2d1379ead98",
+  "name": "1992 Mazda Xedos 6",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Xedos 6 (CA) saloon instantly; front 3/4 strong; the frameless-door glasshouse and wheelbase are consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior resolves through the side glass",
+   "tyres black on the tread face in the 3/4 tiles; rim faces present with multi-spoke detail and centre caps on all four corners",
+   "shut lines defined; headlamp internals, front grille badge, boot lid detail and exhaust tip present",
+   "cov=0.212 healthy, 17 materials, 832,450 faces",
+   "IN SCOPE: the Xedos 6 was UK-market 1992-1999, so a registration can decode to one; T4 volume"
+  ]
+ },
+ {
+  "uid": "97746ee52009476fbc0a3554b5375153",
+  "name": "Mazda 626 (GF) sedan 1997",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Mazda 626 GF saloon instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior resolves through the side glass",
+   "tyres black on the tread face in the 3/4 tiles; rim faces present with multi-spoke detail and centre caps on all four corners",
+   "shut lines defined; headlamp internals, grille slats, side rubbing strips and boot detail present",
+   "cov=0.230 healthy, 16 materials, 717,138 faces",
+   "IN SCOPE: the 626 was a UK fleet car in period, so a registration decodes to one; T4 volume today"
+  ]
+ },
+ {
+  "uid": "36c0903564724c358ba025e4a5cb6a93",
+  "name": "Mazda Cx8",
+  "verdict": "fail",
+  "reasons": [
+   "WHEELS MISSING on three of four corners - only the near-side front wheel exists (visible in rear34); the other three arches are empty white voids in every tile",
+   "FLAT SHELL confirmed by the glTF probe (flat_shell=True): the untextured materials all share one baseColorFactor with minL >= 0.4, so the car is a uniform white clay with no tyre, glass or trim colour left",
+   "glazing opaque in the shipped glb",
+   "cov=0.941 is ABOVE the 0.90 retire threshold - one material covers glass and tyres as well as the body",
+   "out of scope anyway: the CX-8 is a JDM/Australia-market three-row SUV never sold in the UK, so no UK registration decodes to one"
+  ]
+ },
+ {
+  "uid": "df14cdae745243d9ac1dda29adff25fb",
+  "name": "2020 Mazda CX-8",
+  "verdict": "pass",
+  "reasons": [
+   "quality passes cleanly: proportions read as CX-8 instantly, front 3/4 strong, roof/pillars/wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior resolves through the side glass",
+   "tyres black and rim faces present with multi-spoke detail on all four corners",
+   "shut lines defined; the Mazda mesh grille resolves, LED lamp internals sharp, black arch cladding and roof rails correct",
+   "cov=0.307 healthy, 20 materials, 603,805 faces",
+   "NOT UK-MARKET: the CX-8 is a JDM/Australia/Asia three-row SUV that was never sold in the UK, so a UK registration cannot decode to one. Passed on quality and flagged - it earns a place in the studio gallery, not in the reg-lookup path"
+  ]
+ },
+ {
+  "uid": "8716066856f0479981d72ebbbccd54a0",
+  "name": "1998 Mazda 323F (BA)",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as 323F BA five-door instantly, including the distinctive fastback roofline; consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior resolves through the side glass",
+   "tyres black on the tread face; rim faces present with multi-spoke detail and centre caps on all four corners",
+   "shut lines defined; headlamp internals, grille, boot spoiler and side rubbing strips present",
+   "cov=0.215 healthy, 16 materials, 598,966 faces",
+   "IN SCOPE: the 323F was UK-market",
+   "THIS ROW WAS RECOVERED BY THE NAMEPLATE FIX. A bare '323' pattern cannot match '323F' (no word boundary between '3' and 'F'), so it was being dropped as no-nameplate; adding '323F' explicitly brought it back. A real gain, unlike the Mazda2 recovery at #7"
+  ]
+ },
+ {
+  "uid": "2ed2e0b4aae845abb09f878395cf7c66",
+  "name": "Mazda 323 (BJ) sedan",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as 323 BJ saloon instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior resolves through the side glass",
+   "tyres black on the tread face; rim faces present with five-spoke detail and centre caps on all four corners",
+   "shut lines defined; headlamp internals, grille badge, side rubbing strips and boot detail present",
+   "cov=0.187 healthy, 16 materials, 536,790 faces",
+   "IN SCOPE: the 323 BJ was UK-market (also badged Protege elsewhere)"
+  ]
+ },
+ {
+  "uid": "0b1995a46ee446a8b92b0e77ee55a4e6",
+  "name": "2017 Mazda BT-50 Tuned",
+  "verdict": "pass",
+  "reasons": [
+   "IN SCOPE, and the 'Tuned' in the title overstates it. The body is stock facelift BT-50 double cab - factory grille, bumpers, bed and cab. The only deviation is a set of aftermarket dark five-spoke wheels, which CLAUDE.md is explicit about: black wheels and stance alone are spec variation, not a kit",
+   "glazing CLEAR and proven in the shipped glb; interior resolves through the side glass",
+   "tyres black on the tread face in the 3/4 tiles; rim faces present on all four corners",
+   "shut lines defined on doors, bonnet and tailgate; headlamp internals and grille slats present",
+   "the BT-50 was UK-market through this generation, so a registration decodes to one",
+   "CAVEAT: cov=0.699 with 9 body materials is high. No colour variant without recolour_audit --stamp",
+   "mid-detail at 284,476 faces - the grille slats and lamp internals are adequate rather than premium"
+  ]
+ },
+ {
+  "uid": "d13337221e2348c796270385e18cff6c",
+  "name": "Mazda 323F BG",
+  "verdict": "fail",
+  "reasons": [
+   "DISPLAY BASE BAKED INTO THE MESH: the car stands on a circular cobblestone plinth that is part of the model and appears in all four tiles. Where posterUrl is null the resolver hands the glb straight to the viewer, so the customer would get the plinth too",
+   "glazing banded 'faded' by the probe (transparent but alpha above 0.94), which on the Porsche calibration does not resolve interior",
+   "the 323F BG itself is a good period model - pop-up headlamps, correct BG Astina fastback, black side mouldings - so this is a re-source candidate if a plinth-free copy exists",
+   "cov=0.384 with 4 body materials"
+  ]
+ },
+ {
+  "uid": "3443d26fd8dc430683c0d5ee5552d616",
+  "name": "Mazda 323 - unfinished - free - for training",
+  "verdict": "fail",
+  "reasons": [
+   "UNFINISHED BLOCKOUT, and the title says so. No door handles, no mirrors, no badges, no shut lines anywhere; the headlamps are plain slots and the front bumper is an untrimmed slab",
+   "plain unpainted steel wheels with no hubcaps, and the arches are raw openings",
+   "cov=0.491 with 3 body materials; glazing is technically transparent but there is no car here to ship"
+  ]
+ },
+ {
+  "uid": "ec5e52b82c3d40b196a3d3aab575f2b2",
+  "name": "Mazda 626 sedan gf 1997",
+  "verdict": "fail",
+  "reasons": [
+   "WHEELS DETACHED: all four arches are empty with the suspension arms and hub carriers hanging exposed, and a loose wheel lies flat under the car in the side tile",
+   "glazing opaque in the shipped glb (proven, 65 materials, none transparent)",
+   "a bull bar / nudge bar is fitted to the front, which is an accessory rather than the stock car",
+   "cov=0.581 with 15 body materials",
+   "no loss: #60 already covers the 626 GF at 717,138 faces and passes cleanly"
+  ]
+ },
+ {
+  "uid": "0799ae56905c48be95d8a5b453241e6c",
+  "name": "Mazda 626 (78k)",
+  "verdict": "fail",
+  "reasons": [
+   "MOTTLED TEXTURE ARTEFACT across the body: a speckled grey noise pattern sits over the doors, rear quarters and bonnet in all four tiles. Not a reflection - it moves with the panel, not with the camera",
+   "low fidelity at 78,341 faces: the front bumper and grille read soft and the lamp internals are shallow",
+   "glazing is clear and the tyres are black, so the materials are sound; this is a fidelity and texture cull",
+   "no loss: #60 covers the same 626 GF at 717,138 faces and passes cleanly",
+   "cov=0.344 with 12 body materials"
+  ]
+ },
+ {
+  "uid": "bb77951b837943ea9e5a805f9df236c3",
+  "name": "Mazda MX-5 (NA) 1989",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as MX-5 NA instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior resolves through the side glass",
+   "tyres black on the tread face; rim faces present with the correct NA seven-slot alloys and centre caps on all four corners",
+   "shut lines defined; period-correct soft top up, twin exhaust tips, door handles and badges present",
+   "cov=0.186 healthy, 16 materials, 1,145,853 faces - the highest-detail MX-5 in the wave",
+   "NOTE: the pop-up headlamps are modelled RAISED. Legitimate for an NA and characteristic, but it reads as an odd default for a catalogue hero; worth flagging to the owner rather than deciding here",
+   "T5: beloved, but a UK registration rarely decodes to one. Keep, ranked behind the fleet cars"
+  ]
+ },
+ {
+  "uid": "96056443d55c4afaa90099e9e1d45d9b",
+  "name": "2009 Mazda Miata MX-5 Roadster (NC)",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as MX-5 NC instantly; front 3/4 strong; consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior resolves through the side glass",
+   "tyres black on the tread face; rim faces present with multi-spoke detail and centre caps on all four corners",
+   "shut lines defined; lamp internals, bonnet vents, twin exhausts and aerial present",
+   "cov=0.188 healthy, 16 materials, 1,090,806 faces",
+   "DUPLICATE PAIR with #74 (1,090,806 vs 1,089,965, 841 faces apart = 0.08%). Keep this one",
+   "T5"
+  ]
+ },
+ {
+  "uid": "44f83bd458df4025b8daa7f6eeb36b1f",
+  "name": "2009 Mazda MX-5 Miata (NC)",
+  "verdict": "pass",
+  "reasons": [
+   "identical mesh to #73 tile for tile - same NC MX-5, same roof-up configuration, same wheels, same cov=0.188 and mats=1",
+   "DUPLICATE of #73 at 841 faces apart (0.08%); #73 has the higher count and is the one to keep",
+   "T5"
+  ]
+ },
+ {
+  "uid": "7878ea442a2a4f2fbdb6d9eed5a4149e",
+  "name": "2015 Mazda MX-5 Spyder",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: this is the MX-5 SPYDER CONCEPT, a SEMA 2015 show car, not a production road car. No windscreen at all, twin speedster humps behind the seats, no roof mechanism, and yellow-lettered Kumho Ecsta show tyres",
+   "no UK registration can decode to a one-off concept",
+   "the mesh itself is clean - glazing clear and proven, tyres black, rim faces present - so this is purely a scope cull",
+   "cov=0.223, 16 materials, 1,036,728 faces"
+  ]
  }
 ]

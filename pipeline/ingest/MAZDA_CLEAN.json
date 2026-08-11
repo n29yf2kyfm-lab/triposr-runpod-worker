@@ -1,0 +1,262 @@
+[
+ {
+  "model": "323",
+  "trim": "BJ sedan",
+  "generation": null,
+  "year": null,
+  "faces": 536790,
+  "uid": "2ed2e0b4aae845abb09f878395cf7c66",
+  "title": "Mazda 323 (BJ) sedan",
+  "uk_market": true
+ },
+ {
+  "model": "323",
+  "trim": "FA",
+  "generation": null,
+  "year": 1978,
+  "faces": 897764,
+  "uid": "9e2b1d5818e14ae597d0f9f378907f2c",
+  "title": "Mazda 323 1978",
+  "uk_market": true
+ },
+ {
+  "model": "323F",
+  "trim": "BA",
+  "generation": null,
+  "year": 1998,
+  "faces": 598966,
+  "uid": "8716066856f0479981d72ebbbccd54a0",
+  "title": "1998 Mazda 323F (BA)",
+  "uk_market": true
+ },
+ {
+  "model": "626",
+  "trim": "GF sedan",
+  "generation": null,
+  "year": 1997,
+  "faces": 717138,
+  "uid": "97746ee52009476fbc0a3554b5375153",
+  "title": "Mazda 626 (GF) sedan 1997",
+  "uk_market": true
+ },
+ {
+  "model": "BT-50",
+  "trim": "",
+  "generation": null,
+  "year": 2017,
+  "faces": 284476,
+  "uid": "0b1995a46ee446a8b92b0e77ee55a4e6",
+  "title": "2017 Mazda BT-50 Tuned",
+  "uk_market": true
+ },
+ {
+  "model": "CX-5",
+  "trim": "",
+  "generation": null,
+  "year": 2020,
+  "faces": 178366,
+  "uid": "ea176c6ebe814be3b06641bf038f8642",
+  "title": "Mazda CX-5 2020",
+  "uk_market": true
+ },
+ {
+  "model": "CX-8",
+  "trim": "",
+  "generation": null,
+  "year": 2020,
+  "faces": 603805,
+  "uid": "df14cdae745243d9ac1dda29adff25fb",
+  "title": "2020 Mazda CX-8",
+  "uk_market": false
+ },
+ {
+  "model": "MPV",
+  "trim": "LW",
+  "generation": null,
+  "year": 2002,
+  "faces": 1159210,
+  "uid": "d1418e5b19b748b480e9fd19696a69ae",
+  "title": "2002 Mazda MPV (LW)",
+  "uk_market": true
+ },
+ {
+  "model": "MX-3",
+  "trim": "",
+  "generation": null,
+  "year": null,
+  "faces": 842160,
+  "uid": "88a6ab0447664c5da1f696539c1c56f7",
+  "title": "Mazda MX-3",
+  "uk_market": true
+ },
+ {
+  "model": "MX-5",
+  "trim": "NA",
+  "generation": null,
+  "year": 1989,
+  "faces": 1145853,
+  "uid": "bb77951b837943ea9e5a805f9df236c3",
+  "title": "Mazda MX-5 (NA) 1989",
+  "uk_market": true
+ },
+ {
+  "model": "MX-5",
+  "trim": "Miata Roadster NC",
+  "generation": null,
+  "year": 2009,
+  "faces": 1090806,
+  "uid": "96056443d55c4afaa90099e9e1d45d9b",
+  "title": "2009 Mazda Miata MX-5 Roadster",
+  "uk_market": true
+ },
+ {
+  "model": "MX-6",
+  "trim": "",
+  "generation": null,
+  "year": 1992,
+  "faces": 981312,
+  "uid": "6282a3b12ba34fec9eccbfc53a59e096",
+  "title": "Mazda MX-6 1992",
+  "uk_market": true
+ },
+ {
+  "model": "Mazda 2",
+  "trim": "",
+  "generation": null,
+  "year": 2011,
+  "faces": 183822,
+  "uid": "1f3ef39f1c95445197ac5076a2d696c2",
+  "title": "2011 Mazda 2 / Demio",
+  "uk_market": true
+ },
+ {
+  "model": "Mazda 3",
+  "trim": "",
+  "generation": null,
+  "year": null,
+  "faces": 276839,
+  "uid": "9f560166fa2c4a9a8c9aa6ac86b0e33e",
+  "title": "Mazda 3",
+  "uk_market": true
+ },
+ {
+  "model": "Mazda 3",
+  "trim": "BK Hatchback",
+  "generation": null,
+  "year": 2003,
+  "faces": 1015465,
+  "uid": "7d3ac0221bfa479eb920bd2c83417986",
+  "title": "2003 Mazda 3 BK Hatchback",
+  "uk_market": true
+ },
+ {
+  "model": "Mazda 3",
+  "trim": "Mk1 sedan",
+  "generation": null,
+  "year": 2003,
+  "faces": 883433,
+  "uid": "a9feec19d8fb4ad7bff896cba234278a",
+  "title": "Mazda 3 (Mk1) sedan 2003",
+  "uk_market": true
+ },
+ {
+  "model": "Mazda 3",
+  "trim": "BK sedan S",
+  "generation": null,
+  "year": 2005,
+  "faces": 992613,
+  "uid": "c161912a9a3e4b66a2fa1d937cdcf48b",
+  "title": "Mazda 3 (BK) sedan S 2005",
+  "uk_market": true
+ },
+ {
+  "model": "Mazda 3",
+  "trim": "Mazdaspeed 3",
+  "generation": null,
+  "year": 2007,
+  "faces": 181399,
+  "uid": "cb27c2a4b28e4f24a857be10dd0f8bab",
+  "title": "2007 Mazda Mazdaspeed 3",
+  "uk_market": true
+ },
+ {
+  "model": "Mazda 3",
+  "trim": "Mazdaspeed 3",
+  "generation": null,
+  "year": 2010,
+  "faces": 188156,
+  "uid": "0a954cfa1e64452ba06c151b9cc50242",
+  "title": "2010 Mazda Mazdaspeed 3",
+  "uk_market": true
+ },
+ {
+  "model": "Mazda 3",
+  "trim": "Sedan",
+  "generation": null,
+  "year": 2011,
+  "faces": 640724,
+  "uid": "a8d5301ccbf548b3bc3080d0193f254f",
+  "title": "2011 Mazda 3 Sedan",
+  "uk_market": true
+ },
+ {
+  "model": "Mazda 3",
+  "trim": "Hatchback",
+  "generation": null,
+  "year": 2020,
+  "faces": 473260,
+  "uid": "0a12dda232354cf6bcf5854451842502",
+  "title": "2020 Mazda 3 Hatchback",
+  "uk_market": true
+ },
+ {
+  "model": "Mazda 3",
+  "trim": "Hatchback",
+  "generation": null,
+  "year": 2020,
+  "faces": 305008,
+  "uid": "a72de3f3c1604409a7e6fc6be9854c9d",
+  "title": "2020 Mazda 3 Hatchback",
+  "uk_market": true
+ },
+ {
+  "model": "Mazda 6",
+  "trim": "Atenza Sport",
+  "generation": null,
+  "year": null,
+  "faces": 365117,
+  "uid": "9f860e2b0ba04c6999fef0e106c88540",
+  "title": "Mazda Atenza Sport",
+  "uk_market": true
+ },
+ {
+  "model": "Mazda 6",
+  "trim": "Atenza",
+  "generation": null,
+  "year": null,
+  "faces": 300712,
+  "uid": "19d27d433fe64057babd661934218ffd",
+  "title": "Mazda Atenza",
+  "uk_market": true
+ },
+ {
+  "model": "Mazda 6",
+  "trim": "Mk1 sedan",
+  "generation": null,
+  "year": 2002,
+  "faces": 916826,
+  "uid": "7a469399cfae4e438ea5c86e56d938f2",
+  "title": "Mazda 6 Mk1 sedan 2002",
+  "uk_market": true
+ },
+ {
+  "model": "Xedos 6",
+  "trim": "",
+  "generation": null,
+  "year": 1992,
+  "faces": 832450,
+  "uid": "06be4801411f449b928bc2d1379ead98",
+  "title": "1992 Mazda Xedos 6",
+  "uk_market": true
+ }
+]

@@ -1,0 +1,1501 @@
+[
+ {
+  "uid": "cb27c2a4b28e4f24a857be10dd0f8bab",
+  "name": "2007 Mazda Mazdaspeed 3",
+  "verdict": "ambiguous",
+  "certainty": "proven",
+  "n_materials": 22,
+  "n_transparent": 5,
+  "n_textures": 13,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "glass_surr",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "95925b2517044e838498d51969241c76",
+  "name": "2011 Mazda 3 1.5 Skyactiv-d Tuned",
+  "verdict": "ambiguous",
+  "certainty": "proven",
+  "n_materials": 36,
+  "n_transparent": 1,
+  "n_textures": 2,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "Glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "584cec3c63e24a37aa6baf69653cb945",
+  "name": "Mazda 3 MK3 2013-2018",
+  "verdict": "ambiguous",
+  "certainty": "proven",
+  "n_materials": 37,
+  "n_transparent": 1,
+  "n_textures": 1,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "sunburst_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "149a56afb132498292ec1709e1800a21",
+  "name": "1978 Mazda 323",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "06be4801411f449b928bc2d1379ead98",
+  "name": "1992 Mazda Xedos 6",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "8716066856f0479981d72ebbbccd54a0",
+  "name": "1998 Mazda 323F (BA)",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "ea25010fdf134a55a0d87ef8e89bb924",
+  "name": "2002 Mazda 6",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 5,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0.7,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "d1418e5b19b748b480e9fd19696a69ae",
+  "name": "2002 Mazda MPV (LW)",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 5,
+  "n_textures": 1,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "7d3ac0221bfa479eb920bd2c83417986",
+  "name": "2003 Mazda 3 BK Hatchback",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "96056443d55c4afaa90099e9e1d45d9b",
+  "name": "2009 Mazda Miata MX-5 Roadster",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "44f83bd458df4025b8daa7f6eeb36b1f",
+  "name": "2009 Mazda MX-5 Miata (NC)",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 7,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "darkglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.51,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "0a954cfa1e64452ba06c151b9cc50242",
+  "name": "2010 Mazda Mazdaspeed 3",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 23,
+  "n_transparent": 5,
+  "n_textures": 13,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "glass_surr",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "Glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "1f3ef39f1c95445197ac5076a2d696c2",
+  "name": "2011 Mazda 2 / Demio",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 23,
+  "n_transparent": 4,
+  "n_textures": 9,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "Glass_surr",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "Glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "a8d5301ccbf548b3bc3080d0193f254f",
+  "name": "2011 Mazda 3 Sedan",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 0.9,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "e7df911e3bb1452f9bf6ee4b3c80ca54",
+  "name": "2011_mazda_2__demio Test By Ddiaz Design",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 23,
+  "n_transparent": 3,
+  "n_textures": 8,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "Glass_surr",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "Glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "137e835475d5460bba22dc5ee0f58360",
+  "name": "2015 Autoexe Mazda 2 / Demio Aero Kit DE-03",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 25,
+  "n_transparent": 6,
+  "n_textures": 10,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "Glass_surr",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "Glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "7878ea442a2a4f2fbdb6d9eed5a4149e",
+  "name": "2015 Mazda MX-5 Spyder",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 3,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "0b1995a46ee446a8b92b0e77ee55a4e6",
+  "name": "2017 Mazda BT-50 Tuned",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 34,
+  "n_transparent": 1,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "B4W_glassclear.021",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "0a12dda232354cf6bcf5854451842502",
+  "name": "2020 Mazda 3 Hatchback",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 26,
+  "n_transparent": 3,
+  "n_textures": 3,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "2020_Mazda_3_Hatchback_WindowsTrims",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "2020_Mazda_3_Hatchback_Windows",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "a72de3f3c1604409a7e6fc6be9854c9d",
+  "name": "2020 Mazda 3 Hatchback",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 5,
+  "n_textures": 29,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "Mazda_3MI_Show_Glass_Out_026",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true
+   },
+   {
+    "name": "Mazda_3MI_Show_Glass_Out_074",
+    "alpha": 0.45,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "Mazda_3MI_Show_Glass_Out_068",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "df14cdae745243d9ac1dda29adff25fb",
+  "name": "2020 Mazda CX-8",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 20,
+  "n_transparent": 3,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "2020_Mazda_CX-8_Windows",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "ca64f24508574ccabfed66d9669eb27a",
+  "name": "Garage Vary Mazda Mazdaspeed 3 Bodykit",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 27,
+  "n_transparent": 8,
+  "n_textures": 17,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "glass_surr",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "Glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "d98b794f964c49db9ea05166e67f00cc",
+  "name": "Image To Stl.com_mazda_bounty_glb",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 3,
+  "n_transparent": 2,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "55e3429946834f2f908d97f296e599bf",
+  "name": "Mazda 2 (DY) 2003",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "fail-rerender"
+ },
+ {
+  "uid": "9f560166fa2c4a9a8c9aa6ac86b0e33e",
+  "name": "Mazda 3",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 59,
+  "n_transparent": 1,
+  "n_textures": 8,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "sunburst_glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "c161912a9a3e4b66a2fa1d937cdcf48b",
+  "name": "Mazda 3 (BK) sedan S 2005",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 5,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "a9feec19d8fb4ad7bff896cba234278a",
+  "name": "Mazda 3 (Mk1) sedan 2003",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "3443d26fd8dc430683c0d5ee5552d616",
+  "name": "Mazda 323  - unfinished - free - for training",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 9,
+  "n_transparent": 3,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "glass_transparent",
+    "alpha": 0.73,
+    "mode": "BLEND",
+    "transmission": 0.27,
+    "transparent": true
+   },
+   {
+    "name": "glass",
+    "alpha": 0.845,
+    "mode": "BLEND",
+    "transmission": 0.155,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "2ed2e0b4aae845abb09f878395cf7c66",
+  "name": "Mazda 323 (BJ) sedan",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "9e2b1d5818e14ae597d0f9f378907f2c",
+  "name": "Mazda 323 1978",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "d86a6c73fcac426c88ccd4d2ac40c346",
+  "name": "Mazda 5",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 16,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [
+   {
+    "name": "carpaint.263",
+    "alpha": 0.25,
+    "mode": "BLEND"
+   },
+   {
+    "name": "tire.262",
+    "alpha": 0.25,
+    "mode": "BLEND"
+   }
+  ],
+  "glazing_named": [
+   {
+    "name": "greenglass.080",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true
+   },
+   {
+    "name": "clearglass.263",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0.2,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "2f2ccf2871894c5e8fec22926b031595",
+  "name": "Mazda 5",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 12,
+  "n_transparent": 3,
+  "n_textures": 1,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "glass_front.001",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "glass_front",
+    "alpha": 0.395,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "glass_back.001",
+    "alpha": 0.035,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "6e844ae575e242939425197a3eae3ae5",
+  "name": "mazda 6",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 6,
+  "n_transparent": 3,
+  "n_textures": 21,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 0.395,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "7a469399cfae4e438ea5c86e56d938f2",
+  "name": "Mazda 6 Mk1 sedan 2002",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 5,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "c551bd5dbfa84d2eb5bc8ddd60536d2f",
+  "name": "Mazda 6 Sport",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 18,
+  "n_transparent": 2,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "0799ae56905c48be95d8a5b453241e6c",
+  "name": "Mazda 626",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 66,
+  "n_transparent": 6,
+  "n_textures": 3,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "97746ee52009476fbc0a3554b5375153",
+  "name": "Mazda 626 (GF) sedan 1997",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "64d24d39d00b4e07894a48faf35d7c1a",
+  "name": "Mazda 8 MPV",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 12,
+  "n_transparent": 12,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [
+   {
+    "name": "carpaint.004",
+    "alpha": 0.25,
+    "mode": "BLEND"
+   },
+   {
+    "name": "tire.004",
+    "alpha": 0.25,
+    "mode": "BLEND"
+   }
+  ],
+  "glazing_named": [
+   {
+    "name": "clearglass.004",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0.2,
+    "transparent": true
+   },
+   {
+    "name": "greenglass.001",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "19d27d433fe64057babd661934218ffd",
+  "name": "Mazda Atenza",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 24,
+  "n_transparent": 14,
+  "n_textures": 20,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "88a6ab0447664c5da1f696539c1c56f7",
+  "name": "Mazda MX-3",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "bb77951b837943ea9e5a805f9df236c3",
+  "name": "Mazda MX-5 (NA) 1989",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "6282a3b12ba34fec9eccbfc53a59e096",
+  "name": "Mazda MX-6 1992",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "15016e5938ac45d68cc0e3b9048806db",
+  "name": "Mazda3",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 33,
+  "n_transparent": 3,
+  "n_textures": 24,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "Glass",
+    "alpha": 0.242,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "Glass.001",
+    "alpha": 1.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "d13337221e2348c796270385e18cff6c",
+  "name": "Mazda 323F BG",
+  "verdict": "faded",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 4,
+  "n_textures": 30,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "Window_color_tint",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "9f860e2b0ba04c6999fef0e106c88540",
+  "name": "Mazda Atenza Sport",
+  "verdict": "faded",
+  "certainty": "proven",
+  "n_materials": 45,
+  "n_transparent": 10,
+  "n_textures": 31,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windows_glass",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "0ca0354c7b2a41bbb84c835ff046e8e5",
+  "name": "Mazda CX-5",
+  "verdict": "faded",
+  "certainty": "proven",
+  "n_materials": 8,
+  "n_transparent": 3,
+  "n_textures": 3,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "Glass",
+    "alpha": 0.986,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "ea176c6ebe814be3b06641bf038f8642",
+  "name": "Mazda CX-5 2020",
+  "verdict": "faded",
+  "certainty": "inferred",
+  "n_materials": 5,
+  "n_transparent": 2,
+  "n_textures": 8,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "dc8b1627a94f4b188df8fe3ec5b2afdb",
+  "name": "3D Scanned Mazda 5 (2010) [Free]",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 1,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "c7515ee1390e406194b756c4b28a8a5b",
+  "name": "Ford Focus, Mazda 3- Police",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 62,
+  "n_transparent": 0,
+  "n_textures": 1,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "glass_1_61f4508a-8be4-4ce9-97bb-c5c4e7e36c94",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "glass_2_b844913f-38b6-4c25-a658-4203bbb163bc",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "8bc7cc696acb48f2a22be1a0a8cd1d1a",
+  "name": "Image To Stl_mazda_bounty_fbx",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 82,
+  "n_transparent": 0,
+  "n_textures": 44,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "fd4327ce3259459980571a8f3b4c90c9",
+  "name": "Mazda 2 2016",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 3,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "dde7d9046b8a4727a4738a54bfbbadb1",
+  "name": "Mazda 2 2016 Hatch",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 3,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "de4a4d7518864732b0d4e4809a78ac0b",
+  "name": "Mazda 2/Demio MK3 2007-2014",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 23,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "am5eunew1_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "4608221d68164ca4ae2b9f6c238f26df",
+  "name": "Mazda 3",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 3,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "9e5ffebb50424db994b98635a19e7b0b",
+  "name": "Mazda 3",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 2,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "0690b22eae634b42b6263ecac783366f",
+  "name": "Mazda 3 Hatchback",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": true,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "clearglass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "greenglass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "4a169a5dec9f4407a47aa9b74f6bf5e4",
+  "name": "Mazda 3 Hatchback vector",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 33,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "fcb3ab3670b7418fae6168ccbb63f2d8",
+  "name": "Mazda 3 Sedan MK3 2013-2018",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 37,
+  "n_transparent": 0,
+  "n_textures": 7,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "mazda3bp_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "d91435fddbf64b449a15d6f0316f0bb3",
+  "name": "Mazda 3 | Sitting in the Snow",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 1,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "b9009afa2c9f411c8ab10423c7f33a1b",
+  "name": "Mazda 323 1977-1980",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 43,
+  "n_transparent": 0,
+  "n_textures": 38,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "ec5e52b82c3d40b196a3d3aab575f2b2",
+  "name": "Mazda 626 sedan gf 1997",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 65,
+  "n_transparent": 0,
+  "n_textures": 1,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windscreen25",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "28ee28e23b8d4255a234a6da92993899",
+  "name": "Mazda Atenza",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "7e7fd687a0cb4a1ca5088c8b719aaf58",
+  "name": "Mazda Cx-3 2016",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 3,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "86a4da0206a04508b692efa55c8c50b9",
+  "name": "Mazda CX-5",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 1,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "0941c4e2a80d4c4fa0fe37bdbd2f8225",
+  "name": "Mazda CX-7 2006-2012",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 49,
+  "n_transparent": 0,
+  "n_textures": 1,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "sunburst_windshield_dmg",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "ed4f058d05924649b2f92700b17cf7a0",
+  "name": "MAZDA CX5",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "36c0903564724c358ba025e4a5cb6a93",
+  "name": "Mazda Cx8",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 14,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": true,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "64186fc48c604ffc98a056f7f7a1814c",
+  "name": "Mazda mazdaspeed 3",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 62,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "window",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "b352e42081f142038bea193b87a76cfa",
+  "name": "Mazda Premacy MK3 2010-2016",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 30,
+  "n_transparent": 0,
+  "n_textures": 1,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "mazda5_spadie_tinted_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "mazda5_spadie_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "e88b9a72d8ab40f7979cbc6a9eae0465",
+  "name": "Mazda2 014",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 40,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "EXT_Glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "9641b679cdb5490693efe69cdf8221b4",
+  "name": "Pick up mazda B2200",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 89,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "6cab0de9e7474aba97e7043297e12de2",
+  "name": "Very Filthy Mazda 3",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 1,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [],
+  "audit_verdict": "fail"
+ }
+]
