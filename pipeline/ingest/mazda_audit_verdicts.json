@@ -867,5 +867,56 @@
    "the mesh itself is clean - glazing clear and proven, tyres black, rim faces present - so this is purely a scope cull",
    "cov=0.223, 16 materials, 1,036,728 faces"
   ]
+ },
+ {
+  "uid": "a8fda6c208b147b6a6344b64a3292d8c",
+  "name": "1985 Mazda RX-7 MK2 (FC) Coupe",
+  "verdict": "pass",
+  "reasons": [
+   "STOCK RX-7 FC - notable in a block where almost everything is a tuner build. Proportions read as the FC instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior resolves through the side and rear glass",
+   "tyres black on the tread face; rim faces present with the correct period alloy pattern and centre caps on all four corners",
+   "pop-up headlamps modelled DOWN, which is the right catalogue default",
+   "shut lines defined; bonnet vent, side mouldings, rear light bar, twin exhaust tips and RX-7 badging all present",
+   "cov=0.181 healthy, 16 materials, 786,219 faces",
+   "T5: a UK-market road car, so a registration can decode to one, but low volume"
+  ]
+ },
+ {
+  "uid": "61b1c68115834296949022ea096e2373",
+  "name": "Mazda MX-5 MK1 1989-1998 (drift build)",
+  "verdict": "fail",
+  "reasons": [
+   "NO WHEELS: every arch shows a bare brake disc and hub carrier, no rim and no tyre, in all four tiles",
+   "OUT OF SCOPE: a drift build - bolt-on riveted overfender arches standing proud of the bodywork, a roll bar, and a green-and-black 'teeth' graphic sprayed across the front bumper",
+   "cov=0.037 is below the 0.12 low-coverage line, so the sheet colour is untrustworthy as well",
+   "glazing is clear and the geometry underneath is sound, but neither matters with no wheels and a bolt-on kit"
+  ]
+ },
+ {
+  "uid": "25fc4c8bd4494fe0b9e456644b269c6f",
+  "name": "1998 Mazda MX 5 (Nb)",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as MX-5 NB instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior resolves through the side and rear glass",
+   "tyres black on the tread face; rim faces present with five-spoke detail and centre caps on all four corners",
+   "shut lines defined; fixed NB headlamp units with internals, soft top up, boot and door handles present",
+   "cov=0.194 healthy, 17 materials, 764,947 faces",
+   "T5"
+  ]
+ },
+ {
+  "uid": "40c658dbfc754dcb926a9b19d89c1e12",
+  "name": "Mazda RX-8 2011",
+  "verdict": "pass",
+  "reasons": [
+   "STOCK RX-8 facelift - again notable in a block dominated by tuner builds. Proportions read instantly; front 3/4 strong; the rear-hinged half-door glasshouse and wheelbase are consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior resolves through the side glass",
+   "tyres black on the tread face; rim faces present with multi-spoke detail and centre caps on all four corners",
+   "shut lines defined including the suicide-door split; headlamp internals, front wing vents, boot spoiler and twin exhaust present",
+   "cov=0.176 healthy, 17 materials, 668,931 faces",
+   "T5: a UK-market road car, so a registration can decode to one"
+  ]
  }
 ]

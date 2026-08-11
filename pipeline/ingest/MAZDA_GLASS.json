@@ -84,6 +84,27 @@
   "audit_verdict": "pass"
  },
  {
+  "uid": "a8fda6c208b147b6a6344b64a3292d8c",
+  "name": "1985 Mazda RX-7 MK2 (FC) Coupe",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
   "uid": "06be4801411f449b928bc2d1379ead98",
   "name": "1992 Mazda Xedos 6",
   "verdict": "clear",
@@ -120,6 +141,27 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "25fc4c8bd4494fe0b9e456644b269c6f",
+  "name": "1998 Mazda MX 5 (Nb)",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
     "transparent": true
    }
   ],
@@ -956,12 +998,68 @@
   "audit_verdict": "pass"
  },
  {
+  "uid": "61b1c68115834296949022ea096e2373",
+  "name": "Mazda MX-5 MK1 1989-1998",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 87,
+  "n_transparent": 8,
+  "n_textures": 20,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "RLA_miata_glass_int",
+    "alpha": 0.041,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "RLA_miata_glass",
+    "alpha": 0.004,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "audit_verdict": "fail"
+ },
+ {
   "uid": "6282a3b12ba34fec9eccbfc53a59e096",
   "name": "Mazda MX-6 1992",
   "verdict": "clear",
   "certainty": "proven",
   "n_materials": 16,
   "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "40c658dbfc754dcb926a9b19d89c1e12",
+  "name": "Mazda RX-8 2011",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 5,
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],

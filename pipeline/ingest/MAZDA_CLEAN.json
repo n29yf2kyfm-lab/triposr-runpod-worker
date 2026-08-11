@@ -101,6 +101,16 @@
  },
  {
   "model": "MX-5",
+  "trim": "NB",
+  "generation": null,
+  "year": 1998,
+  "faces": 764947,
+  "uid": "25fc4c8bd4494fe0b9e456644b269c6f",
+  "title": "1998 Mazda MX 5 (Nb)",
+  "uk_market": true
+ },
+ {
+  "model": "MX-5",
   "trim": "Miata Roadster NC",
   "generation": null,
   "year": 2009,
@@ -247,6 +257,26 @@
   "faces": 916826,
   "uid": "7a469399cfae4e438ea5c86e56d938f2",
   "title": "Mazda 6 Mk1 sedan 2002",
+  "uk_market": true
+ },
+ {
+  "model": "RX-7",
+  "trim": "MK2 FC Coupe",
+  "generation": null,
+  "year": 1985,
+  "faces": 786219,
+  "uid": "a8fda6c208b147b6a6344b64a3292d8c",
+  "title": "1985 Mazda RX-7 MK2 (FC) Coupe",
+  "uk_market": true
+ },
+ {
+  "model": "RX-8",
+  "trim": "",
+  "generation": null,
+  "year": 2011,
+  "faces": 668931,
+  "uid": "40c658dbfc754dcb926a9b19d89c1e12",
+  "title": "Mazda RX-8 2011",
   "uk_market": true
  },
  {

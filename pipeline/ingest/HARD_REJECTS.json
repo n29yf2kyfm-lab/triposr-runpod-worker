@@ -396,6 +396,12 @@
   "at": "2026-08-11"
  },
  {
+  "uid": "a7e24facef9045ada3d8d2c0178ace16",
+  "name": "Mazda RX-7 (FD) Veilside Body Kit (Fortune)",
+  "reason": "too big 51MB",
+  "at": "2026-08-11"
+ },
+ {
   "uid": "a8c17cf7515d493a9cac60c70763bcfc",
   "name": "Lexus LFA",
   "reason": "too big 70MB",
@@ -435,6 +441,12 @@
   "uid": "bfc7ad29dc4d4e4c86eec13d490e73e1",
   "name": "unpacked-subaru_brz",
   "reason": "too big 93MB",
+  "at": "2026-08-11"
+ },
+ {
+  "uid": "c168a2001c8e4bceaaf8ff960641035e",
+  "name": "Mazda RX-8",
+  "reason": "too big 52MB",
   "at": "2026-08-11"
  },
  {
