@@ -1,0 +1,2277 @@
+[
+ {
+  "assetId": "nissan-silvia-1999-nw1-v1",
+  "make": "nissan",
+  "model": "silvia",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-sentra-2021-nw1-v2",
+  "make": "nissan",
+  "model": "sentra",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-gt-r50-2021-nw1-v1",
+  "make": "nissan",
+  "model": "gt-r50",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "nissan-gt-r-1989-nw1-v1",
+  "make": "nissan",
+  "model": "gt-r",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "nissan-gt-r-2002-nw1-v2",
+  "make": "nissan",
+  "model": "gt-r",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-370z-nw1-v1",
+  "make": "nissan",
+  "model": "370z",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-datsun-nw1-v1",
+  "make": "nissan",
+  "model": "datsun",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-patrol-safari-nw1-v1",
+  "make": "nissan",
+  "model": "patrol-safari",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-altima-2019-nw1-v1",
+  "make": "nissan",
+  "model": "altima",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-gt-r-1997-nw1-v1",
+  "make": "nissan",
+  "model": "gt-r",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-juke-2015-nw1-v1",
+  "make": "nissan",
+  "model": "juke",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve. Note: blotched bonnet at thumbnail was gloss reflection; widebody Juke-R, sharp grille and defined shut lines at 1.3x."
+ },
+ {
+  "assetId": "nissan-gt-r-1989-nw1-v2",
+  "make": "nissan",
+  "model": "gt-r",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-sentra-2018-nw1-v1",
+  "make": "nissan",
+  "model": "sentra",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-cube-2010-nw1-v1",
+  "make": "nissan",
+  "model": "cube",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "nissan-300zx-1984-nw1-v1",
+  "make": "nissan",
+  "model": "300zx",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "nissan-micra-nw1-v1",
+  "make": "nissan",
+  "model": "micra",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "nissan-frontier-2022-nw1-v1",
+  "make": "nissan",
+  "model": "frontier",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-gt-r-1995-nw1-v1",
+  "make": "nissan",
+  "model": "gt-r",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-300zx-nw1-v2",
+  "make": "nissan",
+  "model": "300zx",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "nissan-370z-2013-nw1-v1",
+  "make": "nissan",
+  "model": "370z",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-silvia-nw1-v2",
+  "make": "nissan",
+  "model": "silvia",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "nissan-skyline-nw1-v3",
+  "make": "nissan",
+  "model": "skyline",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "nissan-silvia-nw1-v3",
+  "make": "nissan",
+  "model": "silvia",
+  "verdict": "needs-rerender",
+  "reasons": [
+   "poster framing / ground placement"
+  ],
+  "evidence": "Reviewed at 1.3x, at native, and side by side with nissan-silvia-nw1-v2 at matched scale, plus a 3.5x crop of the front end. The MESH is crisp (sharp 5-spoke rim with lug detail, defined bumper/wing break, side repeater, mirror, sill). The POSTER is the fault: the car is pushed to the top-left, its front overhangs the far edge of the studio floor with no contact point and no reflection under the front wheel, and roughly half the frame is empty floor. Judged not-scrappable - re-render and re-look."
+ },
+ {
+  "assetId": "nissan-altima-2007-nw1-v1",
+  "make": "nissan",
+  "model": "altima",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "nissan-gt-r-2017-nw1-v3",
+  "make": "nissan",
+  "model": "gt-r",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-gt-r-1999-nw1-v2",
+  "make": "nissan",
+  "model": "gt-r",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-silvia-1998-nw1-v1",
+  "make": "nissan",
+  "model": "silvia",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-gt-r-2013-nw1-v1",
+  "make": "nissan",
+  "model": "gt-r",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-gt-r-nismo-2017-nw1-v2",
+  "make": "nissan",
+  "model": "gt-r-nismo",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-gt-r-nismo-2017-nw1-v3",
+  "make": "nissan",
+  "model": "gt-r-nismo",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-370z-2015-nw1-v1",
+  "make": "nissan",
+  "model": "370z",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-fairlady-z-1972-nw1-v1",
+  "make": "nissan",
+  "model": "fairlady-z",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "nissan-370z-2018-nw1-v2",
+  "make": "nissan",
+  "model": "370z",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-song-plus-2022-bw1-v1",
+  "make": "byd",
+  "model": "song-plus",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-atto-2-2024-bw1-v1",
+  "make": "byd",
+  "model": "atto-2",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-seal-5-2025-bw1-v1",
+  "make": "byd",
+  "model": "seal-5",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-han-2023-bw1-v1",
+  "make": "byd",
+  "model": "han",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-seagull-2024-bw1-v1",
+  "make": "byd",
+  "model": "seagull",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-m6-2024-bw1-v1",
+  "make": "byd",
+  "model": "m6",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-dolphin-2021-bw1-v1",
+  "make": "byd",
+  "model": "dolphin",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-seal-6-2025-bw1-v1",
+  "make": "byd",
+  "model": "seal-6",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-seal-u-2024-bw1-v1",
+  "make": "byd",
+  "model": "seal-u",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-seal-u-2024-bw1-v2",
+  "make": "byd",
+  "model": "seal-u",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-sealion-7-2024-bw1-v1",
+  "make": "byd",
+  "model": "sealion-7",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-tang-2024-bw1-v1",
+  "make": "byd",
+  "model": "tang",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-han-2022-bw1-v1",
+  "make": "byd",
+  "model": "han",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-atto-3-2024-bw1-v1",
+  "make": "byd",
+  "model": "atto-3",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-dolphin-2024-bw1-v1",
+  "make": "byd",
+  "model": "dolphin",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "byd-yangwang-u8-2023-bw1-v1",
+  "make": "byd",
+  "model": "yangwang-u8",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-seal-06-2024-bw1-v1",
+  "make": "byd",
+  "model": "seal-06",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-yangwang-u9-2024-bw1-v1",
+  "make": "byd",
+  "model": "yangwang-u9",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "byd-yangwang-u7-2024-bw1-v1",
+  "make": "byd",
+  "model": "yangwang-u7",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "hyundai-grand-i10-nios-hyw1-v1",
+  "make": "hyundai",
+  "model": "grand-i10-nios",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "hyundai-ix55-veracruz-2011-hyw1-v1",
+  "make": "hyundai",
+  "model": "ix55-veracruz",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "hyundai-accent-2013-hyw1-v1",
+  "make": "hyundai",
+  "model": "accent",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "hyundai-getz-2006-hyw1-v1",
+  "make": "hyundai",
+  "model": "getz",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "hyundai-i20-2010-hyw1-v1",
+  "make": "hyundai",
+  "model": "i20",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve. Note: apparent rear 'holes' at thumbnail were the tail-lamp cluster and rear screen; crisp at 1.3x."
+ },
+ {
+  "assetId": "hyundai-tucson-plug-in-hybrid-2025-hyw1-v1",
+  "make": "hyundai",
+  "model": "tucson-plug-in-hybrid",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "hyundai-veloster-n-2022-hyw1-v1",
+  "make": "hyundai",
+  "model": "veloster-n",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "hyundai-tucson-l-turbo-hybrid-2025-hyw1-v1",
+  "make": "hyundai",
+  "model": "tucson-l-turbo-hybrid",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "hyundai-ioniq-5-n-2024-hyw1-v1",
+  "make": "hyundai",
+  "model": "ioniq-5-n",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "hyundai-creta-2023-hyw1-v1",
+  "make": "hyundai",
+  "model": "creta",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "hyundai-elantra-n-2024-hyw1-v1",
+  "make": "hyundai",
+  "model": "elantra-n",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "hyundai-elantra-n-2021-hyw1-v1",
+  "make": "hyundai",
+  "model": "elantra-n",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "hyundai-kona-2019-hyw1-v1",
+  "make": "hyundai",
+  "model": "kona",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "hyundai-encino-ev-2021-hyw1-v1",
+  "make": "hyundai",
+  "model": "encino-ev",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "hyundai-ix25-creta-2020-hyw1-v1",
+  "make": "hyundai",
+  "model": "ix25---creta",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "hyundai-veloster-turbo-2013-hyw1-v1",
+  "make": "hyundai",
+  "model": "veloster-turbo",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "hyundai-tiburon-2003-hyw1-v1",
+  "make": "hyundai",
+  "model": "tiburon",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "hyundai-sonata-hybrid-2017-hyw1-v1",
+  "make": "hyundai",
+  "model": "sonata-hybrid",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-brz-sbw1-v1",
+  "make": "subaru",
+  "model": "brz",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-ascent-2019-sbw1-v1",
+  "make": "subaru",
+  "model": "ascent",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-brz-2024-sbw1-v1",
+  "make": "subaru",
+  "model": "brz",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-impreza-wrx-2022-sbw1-v1",
+  "make": "subaru",
+  "model": "impreza-wrx",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-brz-2023-sbw1-v1",
+  "make": "subaru",
+  "model": "brz",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-impreza-wrx-sti-2018-sbw1-v1",
+  "make": "subaru",
+  "model": "impreza-wrx-sti",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-brz-2020-sbw1-v1",
+  "make": "subaru",
+  "model": "brz",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-legacy-2010-sbw1-v1",
+  "make": "subaru",
+  "model": "legacy",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "subaru-wrx-wagon-sbw1-v1",
+  "make": "subaru",
+  "model": "wrx-wagon",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-brz-2013-sbw1-v1",
+  "make": "subaru",
+  "model": "brz",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-impreza-wrx-sti-sbw1-v1",
+  "make": "subaru",
+  "model": "impreza-wrx-sti",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-forester-2009-sbw1-v1",
+  "make": "subaru",
+  "model": "forester",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-impreza-wrx-sti-2006-sbw1-v1",
+  "make": "subaru",
+  "model": "impreza-wrx-sti",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-impreza-22b-sti-1998-sbw1-v1",
+  "make": "subaru",
+  "model": "impreza-22b-sti",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "subaru-legacy-wagon-sbw1-v1",
+  "make": "subaru",
+  "model": "legacy-wagon",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2021-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-cayman-2014-pw2-v1",
+  "make": "porsche",
+  "model": "cayman",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2018-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-959-pw2-v1",
+  "make": "porsche",
+  "model": "959",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-cayenne-2009-pw2-v1",
+  "make": "porsche",
+  "model": "cayenne",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2021-pw2-v2",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2014-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-boxster-2010-pw2-v1",
+  "make": "porsche",
+  "model": "boxster",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-macan-2020-pw2-v1",
+  "make": "porsche",
+  "model": "macan",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2025-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2019-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-718-2020-pw2-v1",
+  "make": "porsche",
+  "model": "718",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2014-pw2-v2",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-taycan-pw2-v1",
+  "make": "porsche",
+  "model": "taycan",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-1992-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2017-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-1995-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-718-2024-pw2-v1",
+  "make": "porsche",
+  "model": "718",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-1994-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "porsche-718-cayman-2020-pw2-v1",
+  "make": "porsche",
+  "model": "718-cayman",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-cayman-pw2-v1",
+  "make": "porsche",
+  "model": "cayman",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "porsche-911-2018-pw2-v2",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-1989-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v2",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2022-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2016-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-cayenne-2020-pw2-v1",
+  "make": "porsche",
+  "model": "cayenne",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-718-boxster-2017-pw2-v1",
+  "make": "porsche",
+  "model": "718-boxster",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v3",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v4",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-taycan-2025-pw2-v1",
+  "make": "porsche",
+  "model": "taycan",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-944-1991-pw2-v1",
+  "make": "porsche",
+  "model": "944",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v5",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-718-boxster-2019-pw2-v1",
+  "make": "porsche",
+  "model": "718-boxster",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-930-pw2-v1",
+  "make": "porsche",
+  "model": "930",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v6",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-panamera-2019-pw2-v1",
+  "make": "porsche",
+  "model": "panamera",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2019-pw2-v2",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-959-1987-pw2-v1",
+  "make": "porsche",
+  "model": "959",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-914-6-pw2-v1",
+  "make": "porsche",
+  "model": "914-6",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v7",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v8",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-boxster-2015-pw2-v1",
+  "make": "porsche",
+  "model": "boxster",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v9",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v10",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v11",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2019-pw2-v3",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v12",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2015-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-panamera-2010-pw2-v1",
+  "make": "porsche",
+  "model": "panamera",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-carrera-gt-pw2-v1",
+  "make": "porsche",
+  "model": "carrera-gt",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2019-pw2-v4",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2013-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-cayman-pw2-v2",
+  "make": "porsche",
+  "model": "cayman",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v13",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v14",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve. Note: 'camo blotches' are an applied camouflage wrap texture, not torn paint; geometry crisp at 1.3x."
+ },
+ {
+  "assetId": "porsche-911-2019-pw2-v5",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v15",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "porsche-993-1995-pw2-v1",
+  "make": "porsche",
+  "model": "993",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve. Note: read as a soft rear at 1.3x; a 4x rear crop overturned it - tail-lamp lens segments, engine-lid and bumper shut lines, defined wing uprights."
+ },
+ {
+  "assetId": "porsche-carrera-gt-2004-pw2-v1",
+  "make": "porsche",
+  "model": "carrera-gt",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-918-2015-pw2-v1",
+  "make": "porsche",
+  "model": "918",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-panamera-pw2-v1",
+  "make": "porsche",
+  "model": "panamera",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2022-pw2-v2",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-1964-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "needs-rerender",
+  "reasons": [
+   "render artefact on engine lid (probable z-fighting)"
+  ],
+  "evidence": "Reviewed at 0.64x in sheet, then a 4x crop of the rear, then native. The lower engine lid / rear panel breaks into hard-edged white shards with black slivers between them, in a roughly rectangular patch; the rest of the car is clean and crisp (chrome trim, tail lamps, door and bonnet shut lines, steel wheels with hubcaps). Ruled OUT as a texture: the glTF holds only 3 images and I extracted all of them - a Porsche crest (material 'logo') and black leather / wood interior maps, none of which match. With coincident white body ('body_color_911') and dark inner panels ('internal' 0.027 / 'black_part' 0.137) the signature is z-fighting, i.e. render-side and camera-dependent. Not damage and not soft body, so not a scrap - re-render at a different azimuth and re-look."
+ },
+ {
+  "assetId": "porsche-718-cayman-2022-pw2-v1",
+  "make": "porsche",
+  "model": "718-cayman",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2019-pw2-v6",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2017-pw2-v2",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-macan-2022-pw2-v1",
+  "make": "porsche",
+  "model": "macan",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2021-pw2-v3",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2025-pw2-v2",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2022-pw2-v3",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-cayenne-2010-pw2-v1",
+  "make": "porsche",
+  "model": "cayenne",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-cayman-2011-pw2-v1",
+  "make": "porsche",
+  "model": "cayman",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-panamera-2010-pw2-v2",
+  "make": "porsche",
+  "model": "panamera",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-718-cayman-2017-pw2-v1",
+  "make": "porsche",
+  "model": "718-cayman",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-918-2015-pw2-v2",
+  "make": "porsche",
+  "model": "918",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2008-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-taycan-pw2-v2",
+  "make": "porsche",
+  "model": "taycan",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2019-pw2-v7",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-718-2020-pw2-v2",
+  "make": "porsche",
+  "model": "718",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-macan-pw2-v1",
+  "make": "porsche",
+  "model": "macan",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-panamera-pw2-v2",
+  "make": "porsche",
+  "model": "panamera",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-1977-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "porsche-unknown-pw2-v1",
+  "make": "porsche",
+  "model": "unknown",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "porsche-959-pw2-v2",
+  "make": "porsche",
+  "model": "959",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-718-cayman-2018-pw2-v1",
+  "make": "porsche",
+  "model": "718-cayman",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2020-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v16",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-macan-2022-pw2-v2",
+  "make": "porsche",
+  "model": "macan",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2023-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-panamera-2021-pw2-v1",
+  "make": "porsche",
+  "model": "panamera",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2024-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-panamera-2017-pw2-v1",
+  "make": "porsche",
+  "model": "panamera",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-macan-2022-pw2-v3",
+  "make": "porsche",
+  "model": "macan",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-pw2-v17",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve. Note: retracted pop-up headlamps on a factory Flachbau slantnose; crisp at 1.3x."
+ },
+ {
+  "assetId": "porsche-911-pw2-v18",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "porsche-911-pw2-v19",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "lexus-unknown-lxw1-v1",
+  "make": "lexus",
+  "model": "unknown",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "lexus-es350-f-sport-2021-lxw1-v1",
+  "make": "lexus",
+  "model": "es350-f-sport",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "lexus-gs-350-2011-lxw1-v1",
+  "make": "lexus",
+  "model": "gs-350",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "lexus-gs-s130-1997-lxw1-v1",
+  "make": "lexus",
+  "model": "gs-s130",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "lexus-gx-2024-lxw1-v1",
+  "make": "lexus",
+  "model": "gx",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "lexus-gx-550-h-overtrail-2023-lxw1-v1",
+  "make": "lexus",
+  "model": "gx-550-h-overtrail",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "lexus-is300-200-lxw1-v1",
+  "make": "lexus",
+  "model": "is300-200",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "lexus-lc-2020-lxw1-v1",
+  "make": "lexus",
+  "model": "lc",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "lexus-lc-500-2017-lxw1-v1",
+  "make": "lexus",
+  "model": "lc-500",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "lexus-lfa-2010-lxw1-v1",
+  "make": "lexus",
+  "model": "lfa",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "lexus-lfa-2011-lxw1-v1",
+  "make": "lexus",
+  "model": "lfa",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "lexus-ls-mk2-1997-lxw1-v1",
+  "make": "lexus",
+  "model": "ls-mk2",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "lexus-lx-j100-2003-lxw1-v1",
+  "make": "lexus",
+  "model": "lx-j100",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve. Note: apparent rear voids at thumbnail were tail-lamp clusters; LX470/V8 badges and shut lines crisp at 1.3x."
+ },
+ {
+  "assetId": "lexus-lx700h-2025-lxw1-v1",
+  "make": "lexus",
+  "model": "lx700h",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "lexus-rc-f-usc10-lxw1-v1",
+  "make": "lexus",
+  "model": "rc-f-(usc10)",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "lexus-rx450h-lxw1-v1",
+  "make": "lexus",
+  "model": "rx450h",
+  "verdict": "scrap",
+  "reasons": [
+   "soft body"
+  ],
+  "evidence": "Reviewed at 1.3x full-poster then a 4x crop of the flank. Hard-edged TRIANGULAR polygon facets cover the bonnet, front wing, both doors and the rear quarter - straight polygonal edges that do not track the key light, so not gloss. Front valance/bumper is an undefined blob, door shut lines are barely present, wing mirror is a smooth lump. Confirmed at 4x; not a reflection artefact."
+ },
+ {
+  "assetId": "jaecoo-tiggo-5x-jcw1-v1",
+  "make": "jaecoo",
+  "model": "tiggo-5x",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaecoo-tiggo-8-pro-champion-edition-390t-awd-2023-jcw1-v1",
+  "make": "jaecoo",
+  "model": "tiggo-8-pro-champion-edition-390t-awd",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaecoo-omoda-5-2023-jcw1-v1",
+  "make": "jaecoo",
+  "model": "omoda-5",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "jaecoo-tiggo-9-awd-2023-jcw1-v1",
+  "make": "jaecoo",
+  "model": "tiggo-9-awd",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaecoo-tiggo-7-plus-290t-2023-jcw1-v1",
+  "make": "jaecoo",
+  "model": "tiggo-7-plus-290t",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaecoo-arrizo-8-290t-2023-jcw1-v1",
+  "make": "jaecoo",
+  "model": "arrizo-8-290t",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaecoo-jaecoo-j7-2025-jcw1-v1",
+  "make": "jaecoo",
+  "model": "jaecoo-j7",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaecoo-tiggo-8-pro-e-2022-jcw1-v1",
+  "make": "jaecoo",
+  "model": "tiggo-8-pro-e+",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaecoo-tiggo-2-pro-2024-jcw1-v1",
+  "make": "jaecoo",
+  "model": "tiggo-2-pro",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "porsche-911-2000-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-e-type-1963-jgw1-v1",
+  "make": "jaguar",
+  "model": "E-Type",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-e-type-1971-jgw1-v1",
+  "make": "jaguar",
+  "model": "E-Type",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-f-type-jgw1-v1",
+  "make": "jaguar",
+  "model": "F-Type",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-f-type-jgw1-v2",
+  "make": "jaguar",
+  "model": "F-Type",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-f-type-jgw1-v3",
+  "make": "jaguar",
+  "model": "F-Type",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-f-type-2016-jgw1-v1",
+  "make": "jaguar",
+  "model": "F-Type",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-f-type-2017-jgw1-v1",
+  "make": "jaguar",
+  "model": "F-Type",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-f-type-2018-jgw1-v1",
+  "make": "jaguar",
+  "model": "F-Type",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-f-type-2019-jgw1-v1",
+  "make": "jaguar",
+  "model": "F-Type",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-f-type-2021-jgw1-v1",
+  "make": "jaguar",
+  "model": "F-Type",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-i-pace-jgw1-v1",
+  "make": "jaguar",
+  "model": "I-Pace",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-mk2-1962-jgw1-v1",
+  "make": "jaguar",
+  "model": "MK2",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-xe-2018-jgw1-v1",
+  "make": "jaguar",
+  "model": "XE",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-xf-jgw1-v1",
+  "make": "jaguar",
+  "model": "XF",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "jaguar-xfr-s-jgw1-v1",
+  "make": "jaguar",
+  "model": "XFR-S",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-xj-2015-jgw1-v1",
+  "make": "jaguar",
+  "model": "XJ",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-xj220-1992-jgw1-v1",
+  "make": "jaguar",
+  "model": "XJ220",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve. Note: read as melted at thumbnail; at 1.3x the blobs are gloss reflection on a very curved body - grille slats, shut lines and Speedline rims all defined."
+ },
+ {
+  "assetId": "jaguar-xkr-2010-jgw1-v1",
+  "make": "jaguar",
+  "model": "XKR",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jaguar-xkr-s-2014-jgw1-v1",
+  "make": "jaguar",
+  "model": "XKR-S",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jeep-grand-cherokee-jpw1-v1",
+  "make": "jeep",
+  "model": "Grand Cherokee",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "jeep-cherokee-2000-jpw1-v1",
+  "make": "jeep",
+  "model": "Cherokee",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "jeep-grand-cherokee-jpw1-v2",
+  "make": "jeep",
+  "model": "Grand Cherokee",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jeep-grand-cherokee-2018-jpw1-v1",
+  "make": "jeep",
+  "model": "Grand Cherokee",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jeep-cherokee-2019-jpw1-v1",
+  "make": "jeep",
+  "model": "Cherokee",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jeep-wrangler-jpw1-v1",
+  "make": "jeep",
+  "model": "Wrangler",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve. Note: lighter floor/backdrop than the rest of the batch but has a floor and reflection and is fully sharp, so judgeable."
+ },
+ {
+  "assetId": "jeep-wrangler-2023-jpw1-v1",
+  "make": "jeep",
+  "model": "Wrangler",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jeep-wrangler-jpw1-v2",
+  "make": "jeep",
+  "model": "Wrangler",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve. Note: doors and roof removed - a deliberate Wrangler configuration with a fully finished interior, not missing panels."
+ },
+ {
+  "assetId": "jeep-wrangler-2007-jpw1-v1",
+  "make": "jeep",
+  "model": "Wrangler",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve. Note: soft top removed - deliberate configuration; doors present, body crisp."
+ },
+ {
+  "assetId": "jeep-gladiator-1962-jpw1-v1",
+  "make": "jeep",
+  "model": "Gladiator",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jeep-wagoneer-1978-jpw1-v1",
+  "make": "jeep",
+  "model": "Wagoneer",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jeep-gladiator-2020-jpw1-v1",
+  "make": "jeep",
+  "model": "Gladiator",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "jeep-grand-commander-2021-jpw1-v1",
+  "make": "jeep",
+  "model": "Grand Commander",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "chrysler-pt-cruiser-2005-crw1-v1",
+  "make": "chrysler",
+  "model": "PT Cruiser",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "chrysler-300c-crw1-v1",
+  "make": "chrysler",
+  "model": "300C",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "chrysler-pacifica-2021-crw1-v1",
+  "make": "chrysler",
+  "model": "Pacifica",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "chrysler-pacifica-2008-crw1-v1",
+  "make": "chrysler",
+  "model": "Pacifica",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve. Note: read as a rippled/melted tailgate at 1.3x; a 4x crop overturned it - crisp tailgate shut line, plate recess, bumper break, lamp lens divisions. The ripples were studio reflections."
+ },
+ {
+  "assetId": "volvo-v60-vow1-v1",
+  "make": "volvo",
+  "model": "V60",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "volvo-v40-2018-vow1-v1",
+  "make": "volvo",
+  "model": "V40",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "volvo-c30-vow1-v1",
+  "make": "volvo",
+  "model": "C30",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "volvo-v50-vow1-v1",
+  "make": "volvo",
+  "model": "V50",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "volvo-c70-2000-vow1-v1",
+  "make": "volvo",
+  "model": "C70",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "volvo-pv4-vow1-v1",
+  "make": "volvo",
+  "model": "PV4",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "volvo-740-vow1-v1",
+  "make": "volvo",
+  "model": "740",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "volvo-240-vow1-v1",
+  "make": "volvo",
+  "model": "240",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve. Note: front wheels read as detached at 1.3x; at native they are simply steered to full lock, a pose choice. Body crisp."
+ },
+ {
+  "assetId": "mazda-323-mzw1-v1",
+  "make": "mazda",
+  "model": "323",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "mazda-323-1978-mzw1-v1",
+  "make": "mazda",
+  "model": "323",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-323f-1998-mzw1-v1",
+  "make": "mazda",
+  "model": "323F",
+  "verdict": "scrap",
+  "reasons": [
+   "soft body"
+  ],
+  "evidence": "Reviewed at 0.64x in sheet, then 1.3x, then a 770px front-end crop side by side with mazda-mazda-2-2011-mzw1-v1 as a same-batch control. Control shows headlamp lens, internal reflector, bezel line, mesh grille, fog-lamp bezel and a bonnet shut line. The 323F shows headlamps as FLAT BLACK RECTANGLES with zero internal structure, no bonnet/wing/bumper shut lines anywhere, and a lower grille reduced to shallow ridges - the whole nose is one melted mass."
+ },
+ {
+  "assetId": "mazda-626-1997-mzw1-v1",
+  "make": "mazda",
+  "model": "626",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "mazda-bt-50-2017-mzw1-v1",
+  "make": "mazda",
+  "model": "BT-50",
+  "verdict": "scrap",
+  "reasons": [
+   "damage",
+   "soft body"
+  ],
+  "evidence": "Reviewed at 0.64x in sheet, then 1.3x, then full native. Wheels are detached and misplaced: six wheel/tyre objects visible, at least two hanging outside the bodywork (one behind and below the rear bumper with a chrome hub, one bare tyre between the axles outside the body silhouette); far-side wheels protrude past the body outline; tyre bottoms sit at four different heights. Separately soft: tailgate has NO shut line, tail lamps are featureless dark voids with no lens structure, bed sides and rear panel have no panel gaps."
+ },
+ {
+  "assetId": "mazda-cx-5-2020-mzw1-v1",
+  "make": "mazda",
+  "model": "CX-5",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-cx-8-2020-mzw1-v1",
+  "make": "mazda",
+  "model": "CX-8",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mpv-2002-mzw1-v1",
+  "make": "mazda",
+  "model": "MPV",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mx-3-mzw1-v1",
+  "make": "mazda",
+  "model": "MX-3",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "mazda-mx-5-1989-mzw1-v1",
+  "make": "mazda",
+  "model": "MX-5",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mx-5-1998-mzw1-v1",
+  "make": "mazda",
+  "model": "MX-5",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mx-5-2009-mzw1-v1",
+  "make": "mazda",
+  "model": "MX-5",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mx-6-1992-mzw1-v1",
+  "make": "mazda",
+  "model": "MX-6",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mazda-2-2011-mzw1-v1",
+  "make": "mazda",
+  "model": "Mazda 2",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mazda-3-mzw1-v1",
+  "make": "mazda",
+  "model": "Mazda 3",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mazda-3-2003-mzw1-v1",
+  "make": "mazda",
+  "model": "Mazda 3",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mazda-3-2003-mzw1-v2",
+  "make": "mazda",
+  "model": "Mazda 3",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mazda-3-2005-mzw1-v1",
+  "make": "mazda",
+  "model": "Mazda 3",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mazda-3-2007-mzw1-v1",
+  "make": "mazda",
+  "model": "Mazda 3",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mazda-3-2010-mzw1-v1",
+  "make": "mazda",
+  "model": "Mazda 3",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mazda-3-2011-mzw1-v1",
+  "make": "mazda",
+  "model": "Mazda 3",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ },
+ {
+  "assetId": "mazda-mazda-3-2020-mzw1-v1",
+  "make": "mazda",
+  "model": "Mazda 3",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mazda-3-2020-mzw1-v2",
+  "make": "mazda",
+  "model": "Mazda 3",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mazda-6-mzw1-v1",
+  "make": "mazda",
+  "model": "Mazda 6",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mazda-6-mzw1-v2",
+  "make": "mazda",
+  "model": "Mazda 6",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-mazda-6-2002-mzw1-v1",
+  "make": "mazda",
+  "model": "Mazda 6",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-rx-7-1985-mzw1-v1",
+  "make": "mazda",
+  "model": "RX-7",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve. Note: pop-up headlamps retracted (documented false-alarm class); wheels complete, white door patch was a gloss reflection."
+ },
+ {
+  "assetId": "mazda-rx-7-1999-mzw1-v1",
+  "make": "mazda",
+  "model": "RX-7",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-rx-8-2011-mzw1-v1",
+  "make": "mazda",
+  "model": "RX-8",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed twice - 0.36x triage sheet, then 0.64x native in a 2x3 sheet (car cropped to its bounding box). No damage: bodywork whole, wheels present and located, no detached panels or scene geometry. Not soft: shut lines, lamp internals and grille structure resolve at that scale; not flagged for closer zoom."
+ },
+ {
+  "assetId": "mazda-xedos-6-1992-mzw1-v1",
+  "make": "mazda",
+  "model": "Xedos 6",
+  "verdict": "pass",
+  "reasons": [],
+  "evidence": "Poster reviewed at 1.3x native single-car zoom (flagged as a candidate at triage). No damage: bodywork whole, no detached/missing panels, wheels present and located, no scan fragment or baked-in scene. Not soft: panel shut lines, lamp internals and grille structure all resolve."
+ }
+]
