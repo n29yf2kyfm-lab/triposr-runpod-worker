@@ -384,6 +384,12 @@
   "at": "2026-08-09"
  },
  {
+  "uid": "bfc7ad29dc4d4e4c86eec13d490e73e1",
+  "name": "unpacked-subaru_brz",
+  "reason": "too big 93MB",
+  "at": "2026-08-11"
+ },
+ {
   "uid": "c16b34af04624841ae611007eb5d5163",
   "name": "Citroen Xsara Picasso 1998-2012",
   "reason": "too big 53MB",
@@ -418,6 +424,12 @@
   "name": "Nissan Leaf Nismo ZE0",
   "reason": "too big 65MB",
   "at": "2026-08-09"
+ },
+ {
+  "uid": "d1e34ce17aab4893ba2cf028bf02f080",
+  "name": "Subaru Horizon 2011",
+  "reason": "too big 53MB",
+  "at": "2026-08-11"
  },
  {
   "uid": "d1fd357faf314607afc39a67d5b4f4f1",
@@ -466,6 +478,12 @@
   "name": "Porsche_992_gt3",
   "reason": "too big 53MB",
   "at": "2026-08-10"
+ },
+ {
+  "uid": "ec2613f0107644caa53a8f74aa9c0fce",
+  "name": "Subaru Brz | www.vecarz.com",
+  "reason": "too big 104MB",
+  "at": "2026-08-11"
  },
  {
   "uid": "f0702fae150f4cfd98065def645edbde",
