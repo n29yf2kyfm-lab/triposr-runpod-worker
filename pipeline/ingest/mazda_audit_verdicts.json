@@ -237,5 +237,128 @@
    "glazing opaque in the shipped glb (proven, 62 materials, none transparent)",
    "second material renders in its own turquoise over arches, skirts, wing and screen surround"
   ]
+ },
+ {
+  "uid": "15016e5938ac45d68cc0e3b9048806db",
+  "name": "Mazda3",
+  "verdict": "fail",
+  "reasons": [
+   "THE RENDER IS UNJUDGEABLE: the body comes back as a near-pure-black mass in all four tiles with no readable shut lines, no lamp internals, no grille and no panel highlights. The owner rubric requires proportions, shut lines and reflections to be assessed and none of them can be",
+   "tyres render PURE WHITE with chrome rims against that black body - the strongest tyre-colour contrast in the wave so far",
+   "the shipped glb cannot clear it either: 33 materials and 24 textures, and NOT ONE material is named for a tyre, rim or wheel, so there is no dark rubber factor to point to as CLAUDE.md's exoneration. Unlike #12 I have no evidence for innocence here",
+   "cov=0.746 - the paint classifier claimed three quarters of the car",
+   "fails the 'if in doubt, it does not ship' bar"
+  ]
+ },
+ {
+  "uid": "a72de3f3c1604409a7e6fc6be9854c9d",
+  "name": "2020 Mazda 3 Hatchback",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Mazda 3 BP hatch instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb: Glass_Out_026 alphaMode=BLEND alpha=0.25 and Glass_Out_074 BLEND 0.45; the red lens at 0.25 is a lamp and correctly excluded",
+   "tyres black: 'Mazda_3MI_Tyre_01_007' carries a baseColorTexture so its colour is in the map, and the sheet shows plainly black rubber on the tread face in all four tiles",
+   "rim faces present with multi-spoke detail and centre caps on all four corners; no void",
+   "shut lines defined; the Mazda mesh grille resolves as mesh; LED lamp internals and twin exhaust tips present",
+   "cov=0.583 is high but under the 0.90 retire threshold; 19 materials, 29 textures, not a flat shell",
+   "SAME CAR as #18 (2020 Mazda 3 BP hatch) from a different uploader - 305,008 vs 473,260 faces so not a mesh duplicate, but only one of the two should ship. #18 is the better model (crisper grille, brake calipers modelled)"
+  ]
+ },
+ {
+  "uid": "584cec3c63e24a37aa6baf69653cb945",
+  "name": "Mazda 3 MK3 2013-2018",
+  "verdict": "fail",
+  "reasons": [
+   "NO WHEELS: all four arches are empty in every tile, with the suspension struts, hubs and brake discs left exposed and the car resting on bare discs",
+   "body panels are otherwise clean and the front 3/4 reads correctly as a Mazda 3 BM - but a car with no wheels cannot ship",
+   "glazing 'ambiguous' from the probe (37 materials, glazing-named materials all opaque but other materials transparent) - moot given the wheels"
+  ]
+ },
+ {
+  "uid": "9e5ffebb50424db994b98635a19e7b0b",
+  "name": "Mazda 3",
+  "verdict": "fail",
+  "reasons": [
+   "GLAZING OPAQUE in the shipped glb: one material, zero transparent materials. The side and rear glass render as flat pale panels with faint banding and no interior visible anywhere",
+   "TYRES NOT BLACK: the tyre reads the same pale grey as the rim in all four tiles, with no tonal separation between rubber and alloy",
+   "cov=1.000 mats=1 - the car renders its own salmon rather than the forced silver, and a respray would repaint glass, tyres and trim",
+   "proportions read correctly as a Mazda 3 BP hatch; this is a materials failure, a re-source candidate"
+  ]
+ },
+ {
+  "uid": "fcb3ab3670b7418fae6168ccbb63f2d8",
+  "name": "Mazda 3 Sedan MK3 2013-2018",
+  "verdict": "fail",
+  "reasons": [
+   "SCENE GEOMETRY BAKED INTO THE MESH: large grey ground slabs and a yellow ramp/road-marking wedge are part of the model and pass straight through the bodywork in every tile",
+   "wheels detached: all four sit outboard of their arches on bare hub stubs, and one wheel lies flat on the floor beneath the car in the side tile",
+   "glazing opaque in the shipped glb (proven, 37 materials, no transparent glazing)",
+   "title metadata is wrong as well: it says MK3 2013-2018 and the car is plainly a BP-generation (2019 on) Mazda 3 saloon - read the render, not the title",
+   "cov=0.139 is inside the low band, so the sheet's colour is not to be trusted either"
+  ]
+ },
+ {
+  "uid": "9f560166fa2c4a9a8c9aa6ac86b0e33e",
+  "name": "Mazda 3 (BK hatch, light blue)",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Mazda 3 BK five-door instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven: 'sunburst_glass' alphaMode=BLEND alpha=0.25 in the shipped glb, and the interior is resolvable through the side glass at 1x",
+   "TYRES ARE BLACK IN THE SHIPPED ASSET: 'tire' baseColorFactor 0.013, opaque, untextured. The sheet renders the whole wheel - tyre AND rim - bright white, which is the render-side artefact, not the file",
+   "shut lines defined; tail lamp internals, front grille and exhaust tip present",
+   "CAVEAT for publishing: cov=0.766 with 9 body materials. The paint classifier has claimed roughly three quarters of the car including the wheels, which is why they render white. Do NOT generate a poster or a colour variant for this car without recolour_audit --stamp - a render-time respray would repaint the wheels",
+   "third car in this wave to render white tyres off a provably dark tyre material (with #12 and, unprovable, #21)"
+  ]
+ },
+ {
+  "uid": "4a169a5dec9f4407a47aa9b74f6bf5e4",
+  "name": "Mazda 3 Hatchback vector",
+  "verdict": "fail",
+  "reasons": [
+   "DOES NOT READ AS THE RIGHT CAR: the nose, lamp shapes and grille are generic; nothing in the front 3/4 identifies a Mazda 3. Fails the rubric's first and most important test",
+   "soft, smoothed, detail-free modelling: no shut lines anywhere, headlights are vague depressions rather than units, the grille is a flat slot with no mesh",
+   "GLAZING OPAQUE in the shipped glb (33 materials, zero transparent) - the windscreen and side glass render as solid body white",
+   "tyres are pale grey, no black rubber; the rims are plain discs",
+   "cov=0.782 with 6 body materials",
+   "dark blobs float beneath the car in the front34 and front34_L tiles"
+  ]
+ },
+ {
+  "uid": "0a954cfa1e64452ba06c151b9cc50242",
+  "name": "2010 Mazda Mazdaspeed 3",
+  "verdict": "pass",
+  "reasons": [
+   "OEM PERFORMANCE VARIANT, in scope: this is the factory BL Mazdaspeed 3 - sold in the UK as the Mazda 3 MPS - with its production bonnet scoop, factory front bumper and stock 10-spoke alloys. A UK registration decodes to this. Not a tuner build",
+   "proportions read as Mazda 3 BL instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb",
+   "TYRES ARE DARK IN THE SHIPPED ASSET, proven by extracting the texture rather than by argument: 'Mazda_3MI_Tyre_01_007' carries a 512x512 baseColorTexture with mean sRGB (53.3,53.3,53.3), and the file also holds 'EXT_Rubber' at baseColorFactor 0.0149. The sheet's white tyres are the render-side artefact",
+   "the proof is airtight because #29 in this same wave carries the BYTE-IDENTICAL tyre texture (same 512x512, same mean 53.3) and renders it BLACK on the same rig in the same run. Same data, opposite outcome - the rig is the variable",
+   "rim faces present with ten spokes and centre caps on all four corners; shut lines defined; lamp internals and twin exhausts present",
+   "cov=0.169 healthy, 23 materials, 13 textures"
+  ]
+ },
+ {
+  "uid": "ca64f24508574ccabfed66d9669eb27a",
+  "name": "Garage Vary Mazda Mazdaspeed 3 Bodykit",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: aftermarket Garage Vary body kit with aftermarket red multi-spoke wheels. No UK registration decodes to this specification",
+   "the mesh itself is good - glazing clear and proven, tyres correctly BLACK in both the shipped glb and the render, rim faces present, panels clean. Culled on scope, not on quality",
+   "near-duplicate of #28 (183,226 vs 188,156 faces, same base model and the identical tyre texture); #28 is the OEM version and is the one to keep",
+   "this car is the control that proves #28 and #30 are fine: identical tyre texture, rendered black here and white there"
+  ]
+ },
+ {
+  "uid": "cb27c2a4b28e4f24a857be10dd0f8bab",
+  "name": "2007 Mazda Mazdaspeed 3",
+  "verdict": "pass",
+  "reasons": [
+   "OEM PERFORMANCE VARIANT, in scope: the factory BK Mazdaspeed 3 / Mazda 3 MPS, with its production scoop, bumper and stock alloys",
+   "proportions read as Mazda 3 BK instantly; roof, pillars and wheelbase consistent across all four tiles",
+   "GLAZING IS CLEAR, and the probe's 'ambiguous' verdict is a naming artefact worth recording: the only glass-NAMED material is 'glass_surr' (the window SURROUND, correctly opaque), while the actual glazing is spelt 'Windiow' - a typo - at alphaMode=BLEND alpha=0.25 transmission=1.0. A name-based probe cannot see a misspelt name; it correctly degraded to 'ambiguous' and routed the car to the eye rather than failing it",
+   "tyres dark in the shipped asset: same 512x512 tyre texture at mean sRGB 53.3 as #28/#29 plus 'EXT_rubber' at 0.011. White tyres in the sheet are the rig",
+   "rim faces present with ten spokes and centre caps; shut lines defined; projector headlamp internals and twin exhausts present",
+   "cov=0.149 healthy, 22 materials, 13 textures"
+  ]
  }
 ]
