@@ -631,5 +631,36 @@
    "sixth car in the Nieve5677 cluster with this identical defect",
    "genuine UK-relevant car (a Leone 1600 4WD estate) lost to a source-side material fault, not to scope - worth re-sourcing from another uploader"
   ]
+ },
+ {
+  "uid": "3c57ecab9b8645ec9981bea2496224e1",
+  "name": "Subaru SVT",
+  "verdict": "fail",
+  "reasons": [
+   "whole-car transmission shell (mats=0 cov=0.000): the entire Alcyone/XT coupe body renders as see-through glass in all four tiles, wings and bumpers included",
+   "seventh car in the Nieve5677 cluster with this identical defect",
+   "no body-paint material exists"
+  ]
+ },
+ {
+  "uid": "34b6e2ff833747b0b7f3407b1e2200a3",
+  "name": "Subaru XT",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render as translucent smoked-glass discs rather than rubber - you can see the floor reflection through them at 5x; the same Nieve5677 transmission-shell fault, just on a pale body so the paint reads white instead of clear",
+   "wheels detached from the arches: the rear wheel hangs below and outboard of the body in front34 and front34_L, and the car floats clear of the floor",
+   "no door, bonnet or boot shut lines; headlamps are a plain chrome strip",
+   "mats=0 cov=0.000, no body-paint material"
+  ]
+ },
+ {
+  "uid": "2e98a6a621b2401b8723c0caa765e948",
+  "name": "Subaru family huckster / Subaru GL 83",
+  "verdict": "fail",
+  "reasons": [
+   "uniform white clay: mats=1 cov=1.000 FULL COVERAGE, one material over the whole model - window apertures render as solid white body panels and the tyres are body-white too, failing both the glazing and tyre rulings",
+   "out of OEM scope: custom build with bolt-on widebody arch flares, a large rear aerofoil, front air dam, bonnet vents and a roof rack carrying surfboards",
+   "no interior, no shut lines"
+  ]
  }
 ]
