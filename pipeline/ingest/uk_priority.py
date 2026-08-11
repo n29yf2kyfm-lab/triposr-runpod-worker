@@ -139,6 +139,71 @@ _OVERRIDE = [
     ("jeep", "commander", 5), ("jeep", "willys", 5), ("jeep", "cj", 5),
     ("jeep", "renegade", 2), ("jeep", "compass", 2),
     ("jeep", "cherokee", 3), ("jeep", "wrangler", 4),
+    # Chrysler, added 2026-08-11 for the Chrysler wave. Without these EVERY
+    # Chrysler lands T4 (measured: 38 of the 40 swept rows), so a 1957 New
+    # Yorker renders ahead of the 300C and Voyager fleet cars on sweep order
+    # alone -- the same failure the Jaguar block above exists for. The other two
+    # rows scored WORSE than T4: "CHRYSLER C300 IMPROVED" (a 1955 C-300 letter
+    # car) came out T1 because _tok_hit lets Citroen's "c3" swallow "c300", and
+    # "Day 308: Vintage Chrysler car" came out T2 off Peugeot's 308.
+    #
+    # UK relevance is the ONLY axis. A UK reg realistically decodes to a 300C,
+    # Voyager/Grand Voyager, PT Cruiser, Ypsilon, Delta, Neon, Sebring or
+    # Crossfire. It can NEVER decode to a Pacifica, Aspen, Town & Country,
+    # Concorde, LHS, Cirrus, Imperial, New Yorker, Newport, Saratoga, Airflow,
+    # Prowler, LeBaron, 200, Turbine or a 300 letter car -- none were UK-market,
+    # so those are T5 however good the mesh is. The Ypsilon and Delta are
+    # rebadged Lancias sold here 2011-2015 and are genuine UK Chryslers.
+    #
+    # ORDER MATTERS, first hit wins:
+    #  - "300c" is listed BEFORE the letter cars and before bare "300", and the
+    #    letter cars before bare "300", because _tok_hit lets a numeric
+    #    nameplate take ONE trailing letter: a bare "300" rule would otherwise
+    #    claim "Chrysler 300F" for the UK saloon tier. "300c" cannot capture
+    #    "300f"/"c300" in return, so putting it first is safe.
+    #  - "grand voyager" before "voyager", "town and country" before "country",
+    #    "grand caravan" before "caravan".
+    #  - "c 300"/"c300" are the 1955 letter car, NOT the 300C.
+    ("chrysler", "300c", 3), ("chrysler", "300 c", 3),
+    ("chrysler", "c 300", 5), ("chrysler", "c300", 5),
+    ("chrysler", "300 letter", 5),
+    ("chrysler", "300b", 5), ("chrysler", "300 b", 5),
+    ("chrysler", "300d", 5), ("chrysler", "300 d", 5),
+    ("chrysler", "300e", 5), ("chrysler", "300 e", 5),
+    ("chrysler", "300f", 5), ("chrysler", "300 f", 5),
+    ("chrysler", "300g", 5), ("chrysler", "300 g", 5),
+    ("chrysler", "300h", 5), ("chrysler", "300 h", 5),
+    ("chrysler", "300j", 5), ("chrysler", "300 j", 5),
+    ("chrysler", "300k", 5), ("chrysler", "300 k", 5),
+    ("chrysler", "300l", 5), ("chrysler", "300 l", 5),
+    ("chrysler", "300m", 4),
+    # US-market-only nameplates: a UK registration can never decode to one.
+    ("chrysler", "pacifica", 5), ("chrysler", "aspen", 5),
+    ("chrysler", "town and country", 5), ("chrysler", "town country", 5),
+    ("chrysler", "concorde", 5), ("chrysler", "lhs", 5),
+    ("chrysler", "cirrus", 5), ("chrysler", "imperial", 5),
+    ("chrysler", "new yorker", 5), ("chrysler", "newport", 5),
+    ("chrysler", "saratoga", 5), ("chrysler", "airflow", 5),
+    ("chrysler", "prowler", 5), ("chrysler", "lebaron", 5),
+    ("chrysler", "le baron", 5), ("chrysler", "turbine", 5),
+    ("chrysler", "200", 5), ("chrysler", "windsor", 5),
+    ("chrysler", "royal", 5), ("chrysler", "valiant", 5),
+    ("chrysler", "me four twelve", 5), ("chrysler", "me 412", 5),
+    # "me412" is glued in two of the three real uploads, and _tok_hit cannot
+    # bridge a space in the RULE into a glued TITLE (CLAUDE.md's separator rule:
+    # only the title side is forgiving). Both spellings are listed.
+    ("chrysler", "me412", 5), ("chrysler", "me4 12", 5),
+    ("chrysler", "firepower", 5),
+    ("chrysler", "crossfire", 5),   # UK-sold, but a two-seat halo coupe
+    ("chrysler", "viper", 5),       # a Dodge; frequently mislabelled Chrysler
+    ("chrysler", "grand caravan", 5), ("chrysler", "caravan", 5),
+    # The cars a UK reg actually decodes to.
+    ("chrysler", "ypsilon", 1),
+    ("chrysler", "delta", 2), ("chrysler", "neon", 2),
+    ("chrysler", "pt cruiser", 2), ("chrysler", "ptcruiser", 2),
+    ("chrysler", "sebring", 3), ("chrysler", "stratus", 3),
+    ("chrysler", "grand voyager", 3), ("chrysler", "voyager", 3),
+    ("chrysler", "300", 3),
     # Nameplates that are ordinary English/Italian words or bare digits, so they
     # can only be trusted alongside their marque. "Adam", "Viva", "Soul",
     # "Scala" and "Tipo" all occur in unrelated Sketchfab titles, and a bare "2"
@@ -153,10 +218,72 @@ _OVERRIDE = [
     ("vauxhall", "agila", 1), ("opel", "agila", 1),
     ("kia", "soul", 2), ("skoda", "scala", 2), ("fiat", "tipo", 2),
     ("audi", "a1", 1), ("audi", "a2", 1),
-    # Order matters: 6 and 3 are tested before 2, because "Mazda 6 2.2"
-    # normalises to "mazda 6 2 2" and would otherwise match the Mazda 2.
-    ("mazda", "6", 3), ("mazda", "3", 2), ("mazda", "2", 1),
+    # Mazda's bare digits are handled by _PHRASE below, NOT here. The three
+    # entries that used to sit at this spot -- ("mazda","6",3), ("mazda","3",2),
+    # ("mazda","2",1) -- were measured wrong on the real 2026-08-11 sweep and
+    # are removed; see the _PHRASE docstring for what they did.
 ]
+
+# Bare-digit nameplates, matched ONLY where they are ADJACENT to their marque.
+#
+# _OVERRIDE tests marque and nameplate independently, which is not good enough
+# for a marque whose whole range is single digits. Measured against the real
+# Mazda sweep, 2026-08-11:
+#   "Mazda 2 1.3"        -> normalises to "mazda 2 1 3"; the bare "3" rule fires
+#                           on the ENGINE SIZE, so a Mazda 2 is tiered T2 as a
+#                           Mazda 3. Ordering 6/3/2 does not help: the collision
+#                           is with the displacement, not between the digits.
+#   "Mazda 3 1.6"        -> same, tiered T3 as a Mazda 6.
+#   "Mazda6 Wagon 2018"  -> T4. _tok_hit("mazda6", "6") is false (no token
+#                           starts with "6"), so every GLUED spelling -- and
+#                           Mazda's own badging is glued -- fell straight
+#                           through to the "everything else" tier, behind the
+#                           MX-5s this file exists to hold back.
+#   "Mazda Xedos 6"      -> T3 as a Mazda 6. Different car.
+# Requiring adjacency fixes all four at once and needs no ordering trick:
+# "mazda\s*6" cannot reach the 6 in "1.6", and \s* spans the glued spelling
+# exactly as nameplate_filter's does. It also cannot reach 626/323: the
+# trailing \b fails between "6" and "2".
+#
+# Checked BEFORE _OVERRIDE and before the tier lists. Each entry is
+# (marque-token, plate-regex against the normalised title, tier); the marque
+# must still be present, so these rules can never fire on another make.
+_PHRASE = [
+    # Halo first -- an MX-5 or RX-7 must not claim a fleet tier off a stray digit.
+    ("mazda", r"\bmx\s*5\b", 5), ("mazda", r"\bmiata\b", 5),
+    ("mazda", r"\beunos\b", 5),
+    ("mazda", r"\brx\s*7\b", 5), ("mazda", r"\brx\s*8\b", 5),
+    ("mazda", r"\brx\s*3\b", 5), ("mazda", r"\brx\s*500\b", 5),
+    ("mazda", r"\brx\s*vision\b", 5), ("mazda", r"\brx\s*9\b", 5),
+    ("mazda", r"\bcosmo\b", 5), ("mazda", r"\bfurai\b", 5),
+    ("mazda", r"\b787\s*b?\b", 5), ("mazda", r"\bsavanna\b", 5),
+    ("mazda", r"\bluce\b", 5), ("mazda", r"\blantis\b", 5),
+    # OEM performance variants of fleet cars are ROAD cars a reg decodes to, so
+    # they keep their family's tier rather than being swept into T5 with the
+    # halo cars (CLAUDE.md: "an AMG GT Black Series IS a road car").
+    ("mazda", r"\bmazda\s*speed\s*3\b", 2), ("mazda", r"\bmazdaspeed\s*3\b", 2),
+    ("mazda", r"\bmazda\s*speed\s*6\b", 3), ("mazda", r"\bmazdaspeed\s*6\b", 3),
+    # Longer nameplates that CONTAIN a shorter one, before the short ones.
+    ("mazda", r"\bcx\s*30\b", 2), ("mazda", r"\bcx\s*3\b", 2),
+    ("mazda", r"\bcx\s*5\b", 2), ("mazda", r"\bcx\s*50\b", 4),
+    ("mazda", r"\bcx\s*60\b", 3), ("mazda", r"\bcx\s*7\b", 3),
+    ("mazda", r"\bcx\s*8\b", 4), ("mazda", r"\bcx\s*9\b", 4),
+    ("mazda", r"\bmx\s*30\b", 3), ("mazda", r"\bmx\s*3\b", 4),
+    ("mazda", r"\bmx\s*6\b", 4),
+    ("mazda", r"\bxedos\b", 4), ("mazda", r"\bbt\s*50\b", 4),
+    ("mazda", r"\bb\s*2\d00\b", 4), ("mazda", r"\bbounty\b", 4),
+    ("mazda", r"\btribute\b", 4), ("mazda", r"\bpremacy\b", 3),
+    ("mazda", r"\bbongo\b", 3), ("mazda", r"\bmpv\b", 3),
+    ("mazda", r"\b323\b", 4), ("mazda", r"\b626\b", 4),
+    ("mazda", r"\b121\b", 4), ("mazda", r"\b929\b", 4),
+    ("mazda", r"\bfamilia\b", 4), ("mazda", r"\bprotege\b", 4),
+    # The fleet. Adjacent to the marque, so an engine size cannot fire them.
+    ("mazda", r"\bmazda\s*2\b", 1), ("mazda", r"\bdemio\b", 1),
+    ("mazda", r"\bmazda\s*3\b", 2), ("mazda", r"\baxela\b", 2),
+    ("mazda", r"\bmazda\s*6\b", 3), ("mazda", r"\batenza\b", 3),
+    ("mazda", r"\bmazda\s*5\b", 3),
+]
+_PHRASE = [(m, re.compile(p), t) for m, p, t in _PHRASE]
 
 # Nameplates that are ALSO plausible model years. "2008" is a Peugeot supermini
 # SUV and it is also the year a third of Sketchfab's uploads were built in, so a
@@ -203,6 +330,9 @@ def _tok_hit(n: str, word: str) -> bool:
 
 def tier(name: str) -> int:
     n = _norm(name)
+    for marque, rx, t in _PHRASE:
+        if _tok_hit(n, marque) and rx.search(n):
+            return t
     for marque, plate, t in _OVERRIDE:
         if _tok_hit(n, marque) and _tok_hit(n, plate):
             return t
