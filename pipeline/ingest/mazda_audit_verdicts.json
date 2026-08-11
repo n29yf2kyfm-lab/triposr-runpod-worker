@@ -918,5 +918,30 @@
    "cov=0.176 healthy, 17 materials, 668,931 faces",
    "T5: a UK-market road car, so a registration can decode to one"
   ]
+ },
+ {
+  "uid": "1b946832c9cf4041886536f5d89f6cb4",
+  "name": "Mazda MX-5 Tuned",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: a custom ND MX-5 - large chassis-mounted GT wing, front-mounted intercooler behind an open bumper, aero skirts, and blue/white aftermarket wheels with red calipers",
+   "LOW DETAIL as well: the body is a smoothed shell with no shut lines anywhere, no door handles and no lamp internals - the front and rear lamps are flat coloured patches",
+   "glazing opaque in the shipped glb (24 materials, none transparent)",
+   "cov=0.711 with 5 body materials"
+  ]
+ },
+ {
+  "uid": "6ea4245c67c1438189fe37ca91516d78",
+  "name": "1999 Mazda RX-7 FD",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as RX-7 FD3S instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR in the shipped glb (transparent materials present; certainty 'inferred' only because no material carries a glass-like NAME - which also means the worker's override never fired, so the sheet is an honest witness here and shows the interior through the side glass)",
+   "tyres black on the tread face; rim faces present with the correct five-spoke FD alloys and centre caps on all four corners",
+   "pop-up headlamps modelled DOWN; factory rear wing, front lip and side sills - stock FD shape, not a kit",
+   "shut lines defined; tail lamp internals and twin exhaust present",
+   "CAVEAT: cov=0.785 with 4 body materials is high. No colour variant without recolour_audit --stamp",
+   "T5: a UK-market road car, so a registration can decode to one"
+  ]
  }
 ]

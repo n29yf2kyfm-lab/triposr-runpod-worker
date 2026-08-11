@@ -9,15 +9,6 @@
   "n_textures": 13,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "glass_surr",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -30,15 +21,6 @@
   "n_textures": 2,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "Glass",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -51,15 +33,6 @@
   "n_textures": 1,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "sunburst_glass",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -72,15 +45,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.25,
-    "mode": "BLEND",
-    "transmission": 1.0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -93,15 +57,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -114,15 +69,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -135,15 +81,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.25,
-    "mode": "BLEND",
-    "transmission": 1.0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -156,15 +93,18 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
+  "audit_verdict": "pass"
+ },
+ {
+  "uid": "6ea4245c67c1438189fe37ca91516d78",
+  "name": "1999 Mazda RX-7 FD",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 15,
+  "n_transparent": 3,
+  "n_textures": 0,
+  "flat_shell": false,
+  "body_transparent": [],
   "audit_verdict": "pass"
  },
  {
@@ -177,15 +117,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0.7,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -198,15 +129,6 @@
   "n_textures": 1,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -219,15 +141,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -240,22 +153,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "clearglass",
-    "alpha": 0.2,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   },
-   {
-    "name": "darkglass",
-    "alpha": 0.5,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -268,22 +165,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "darkglass",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   },
-   {
-    "name": "clearglass",
-    "alpha": 0.51,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -296,22 +177,6 @@
   "n_textures": 13,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "glass_surr",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   },
-   {
-    "name": "Glass",
-    "alpha": 0.25,
-    "mode": "BLEND",
-    "transmission": 1.0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -324,22 +189,6 @@
   "n_textures": 9,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "Glass_surr",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   },
-   {
-    "name": "Glass",
-    "alpha": 0.25,
-    "mode": "BLEND",
-    "transmission": 1.0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -352,15 +201,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.25,
-    "mode": "BLEND",
-    "transmission": 0.9,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -373,22 +213,6 @@
   "n_textures": 8,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "Glass_surr",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   },
-   {
-    "name": "Glass",
-    "alpha": 0.25,
-    "mode": "BLEND",
-    "transmission": 1.0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -401,22 +225,6 @@
   "n_textures": 10,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "Glass_surr",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   },
-   {
-    "name": "Glass",
-    "alpha": 0.25,
-    "mode": "BLEND",
-    "transmission": 1.0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -429,15 +237,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "clearglass",
-    "alpha": 0.2,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -450,15 +249,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "B4W_glassclear.021",
-    "alpha": 0.4,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -471,22 +261,6 @@
   "n_textures": 3,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "2020_Mazda_3_Hatchback_WindowsTrims",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   },
-   {
-    "name": "2020_Mazda_3_Hatchback_Windows",
-    "alpha": 0.25,
-    "mode": "BLEND",
-    "transmission": 1.0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -499,29 +273,6 @@
   "n_textures": 29,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "Mazda_3MI_Show_Glass_Out_026",
-    "alpha": 0.25,
-    "mode": "BLEND",
-    "transmission": 1.0,
-    "transparent": true
-   },
-   {
-    "name": "Mazda_3MI_Show_Glass_Out_074",
-    "alpha": 0.45,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   },
-   {
-    "name": "Mazda_3MI_Show_Glass_Out_068",
-    "alpha": 0.25,
-    "mode": "BLEND",
-    "transmission": 1.0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -534,15 +285,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "2020_Mazda_CX-8_Windows",
-    "alpha": 0.25,
-    "mode": "BLEND",
-    "transmission": 1.0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -555,22 +297,6 @@
   "n_textures": 17,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "glass_surr",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   },
-   {
-    "name": "Glass",
-    "alpha": 0.25,
-    "mode": "BLEND",
-    "transmission": 1.0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -583,7 +309,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -596,15 +321,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "fail-rerender"
  },
  {
@@ -617,15 +333,6 @@
   "n_textures": 8,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "sunburst_glass",
-    "alpha": 0.25,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -638,15 +345,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -659,15 +357,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -680,22 +369,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "glass_transparent",
-    "alpha": 0.73,
-    "mode": "BLEND",
-    "transmission": 0.27,
-    "transparent": true
-   },
-   {
-    "name": "glass",
-    "alpha": 0.845,
-    "mode": "BLEND",
-    "transmission": 0.155,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -708,15 +381,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -729,15 +393,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -761,22 +416,6 @@
     "mode": "BLEND"
    }
   ],
-  "glazing_named": [
-   {
-    "name": "greenglass.080",
-    "alpha": 0.7,
-    "mode": "BLEND",
-    "transmission": 0.3,
-    "transparent": true
-   },
-   {
-    "name": "clearglass.263",
-    "alpha": 0.8,
-    "mode": "BLEND",
-    "transmission": 0.2,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -789,29 +428,6 @@
   "n_textures": 1,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "glass_front.001",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   },
-   {
-    "name": "glass_front",
-    "alpha": 0.395,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   },
-   {
-    "name": "glass_back.001",
-    "alpha": 0.035,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -824,15 +440,6 @@
   "n_textures": 21,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "glass",
-    "alpha": 0.395,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -845,15 +452,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -866,7 +464,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -879,7 +476,6 @@
   "n_textures": 3,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -892,15 +488,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -924,22 +511,6 @@
     "mode": "BLEND"
    }
   ],
-  "glazing_named": [
-   {
-    "name": "clearglass.004",
-    "alpha": 0.8,
-    "mode": "BLEND",
-    "transmission": 0.2,
-    "transparent": true
-   },
-   {
-    "name": "greenglass.001",
-    "alpha": 0.7,
-    "mode": "BLEND",
-    "transmission": 0.3,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -952,7 +523,6 @@
   "n_textures": 20,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "pass"
  },
  {
@@ -965,15 +535,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -986,15 +547,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -1007,29 +559,6 @@
   "n_textures": 20,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "RLA_miata_glass_int",
-    "alpha": 0.041,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   },
-   {
-    "name": "RLA_miata_glass",
-    "alpha": 0.004,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   },
-   {
-    "name": "glass_invisible",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -1042,15 +571,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -1063,15 +583,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windowglass",
-    "alpha": 0.3,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -1084,22 +595,6 @@
   "n_textures": 24,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "Glass",
-    "alpha": 0.242,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   },
-   {
-    "name": "Glass.001",
-    "alpha": 1.0,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -1112,15 +607,6 @@
   "n_textures": 30,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "Window_color_tint",
-    "alpha": 1,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -1133,15 +619,6 @@
   "n_textures": 31,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windows_glass",
-    "alpha": 1,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "pass"
  },
  {
@@ -1154,15 +631,6 @@
   "n_textures": 3,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "Glass",
-    "alpha": 0.986,
-    "mode": "BLEND",
-    "transmission": 0,
-    "transparent": true
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -1175,7 +643,6 @@
   "n_textures": 8,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "pass"
  },
  {
@@ -1188,7 +655,6 @@
   "n_textures": 1,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1201,22 +667,6 @@
   "n_textures": 1,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "glass_1_61f4508a-8be4-4ce9-97bb-c5c4e7e36c94",
-    "alpha": 1,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   },
-   {
-    "name": "glass_2_b844913f-38b6-4c25-a658-4203bbb163bc",
-    "alpha": 1,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -1229,7 +679,6 @@
   "n_textures": 44,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1242,7 +691,6 @@
   "n_textures": 3,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1255,7 +703,6 @@
   "n_textures": 3,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1268,15 +715,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "am5eunew1_glass",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -1289,7 +727,6 @@
   "n_textures": 3,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1302,7 +739,6 @@
   "n_textures": 2,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1315,22 +751,6 @@
   "n_textures": 0,
   "flat_shell": true,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "clearglass",
-    "alpha": 1,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   },
-   {
-    "name": "greenglass",
-    "alpha": 1,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -1343,7 +763,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1356,15 +775,6 @@
   "n_textures": 7,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "mazda3bp_glass",
-    "alpha": 1,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -1377,7 +787,6 @@
   "n_textures": 1,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1390,7 +799,6 @@
   "n_textures": 38,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1403,15 +811,6 @@
   "n_textures": 1,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "windscreen25",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -1424,7 +823,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1437,7 +835,6 @@
   "n_textures": 3,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1450,7 +847,6 @@
   "n_textures": 1,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1463,15 +859,6 @@
   "n_textures": 1,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "sunburst_windshield_dmg",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -1484,7 +871,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1497,7 +883,6 @@
   "n_textures": 0,
   "flat_shell": true,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1510,15 +895,18 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "window",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   }
-  ],
+  "audit_verdict": "fail"
+ },
+ {
+  "uid": "1b946832c9cf4041886536f5d89f6cb4",
+  "name": "Mazda MX-5 Tuned",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 24,
+  "n_transparent": 0,
+  "n_textures": 2,
+  "flat_shell": false,
+  "body_transparent": [],
   "audit_verdict": "fail"
  },
  {
@@ -1531,22 +919,6 @@
   "n_textures": 1,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "mazda5_spadie_tinted_glass",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   },
-   {
-    "name": "mazda5_spadie_glass",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -1559,15 +931,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [
-   {
-    "name": "EXT_Glass",
-    "alpha": 1.0,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false
-   }
-  ],
   "audit_verdict": "fail"
  },
  {
@@ -1580,7 +943,6 @@
   "n_textures": 0,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  },
  {
@@ -1593,7 +955,6 @@
   "n_textures": 1,
   "flat_shell": false,
   "body_transparent": [],
-  "glazing_named": [],
   "audit_verdict": "fail"
  }
 ]

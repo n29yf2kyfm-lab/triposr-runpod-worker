@@ -270,6 +270,16 @@
   "uk_market": true
  },
  {
+  "model": "RX-7",
+  "trim": "FD",
+  "generation": null,
+  "year": 1999,
+  "faces": 650294,
+  "uid": "6ea4245c67c1438189fe37ca91516d78",
+  "title": "1999 Mazda RX-7 FD",
+  "uk_market": true
+ },
+ {
   "model": "RX-8",
   "trim": "",
   "generation": null,
