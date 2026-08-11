@@ -373,5 +373,59 @@
    "tarmac ground plane baked into the mesh as a slab",
    "mats=1 tex=1 cov=1.000 FULL COVERAGE, no separable glazing or tyres"
   ]
+ },
+ {
+  "uid": "c599dd95d4a84e80bcb5ce9672d85fb7",
+  "name": "Photoscanned Subaru Crosstrek XV",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: black holes torn through the roof and both rear side windows in every tile",
+   "gravel ground plane baked into the mesh as a slab under the car",
+   "mats=1 tex=1 cov=1.000 FULL COVERAGE - one textured material carries body, glass and tyres"
+  ]
+ },
+ {
+  "uid": "e346b4918d4246e9b6a69f2e26e08dec",
+  "name": "2022 Subaru WRX T S EyeSight",
+  "verdict": "fail",
+  "reasons": [
+   "glazing FADED and opaque: the windows are a flat pale grey-white wash in both the front34 and side tiles at 5x - no seats, headrests or B-pillar resolvable through them",
+   "DECISIVE glTF evidence: the file contains exactly ONE material (Scene_-_Root, baseColorFactor 1,1,1, alphaMode OPAQUE, no textures). Every primitive carries COLOR_0 vertex colours, so all the apparent colour is baked into the mesh. There is no transparency anywhere in the file and no glass material can exist",
+   "one material over the whole car also means no respray: colour_variants edits named materials, so a swap would repaint glass and tyres with the body",
+   "tyres themselves read black on the light-blue body, but that is vertex colour, not a tyre material"
+  ]
+ },
+ {
+  "uid": "fa2c8e1d265443e982b90f964c2b3e02",
+  "name": "Subaru WRX Wagon (GG)",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec Impreza WRX wagon (GG bugeye) - proportions read instantly, consistent across all four tiles",
+   "tyres black: the Tire material is TEXTURED (baseColorFactor is a white multiplier over a black rubber texture) and the tread band reads plainly black against the white body and silver rims at 5x in front34 and rear34",
+   "glazing genuinely clear: Glass and Glass_Normal are BLEND with textures, INT_Glass alpha 0.444, and seats, headrests and the interior door card resolve through the side glass in two tiles",
+   "modelled interior (INT_ materials, gauges), headlamp with internal reflector, defined grille and shut lines; rim faces present in all four tiles"
+  ]
+ },
+ {
+  "uid": "ee2b94827a904360acb61987e1765983",
+  "name": "Subaru WRX (VB)",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec WRX VB - clean complete body, proportions and wheelbase consistent across all four tiles",
+   "tyres read as black rubber, tonally separated from the dark-grey alloys on the tread face in front34 and rear34 at 5x; note the glTF has no material NAMED tyre, so this call rests on the render plus that tonal separation rather than a named material",
+   "glazing clear: seats, headrests and the interior door card resolve through the rear side glass and driver window in two tiles",
+   "NOTED WEAKNESS: at 63,077 faces this is the lightest of the passes; the grille frame is crisp but the mesh insert is flat with no honeycomb depth"
+  ]
+ },
+ {
+  "uid": "13f2d9098b3b4514bb803a59e9895da6",
+  "name": "Subaru Imperza WRX Sti",
+  "verdict": "fail",
+  "reasons": [
+   "whole-car transmission shell: 13 of 17 materials are alphaMode BLEND with KHR_materials_transmission - the entire car renders as see-through glass, bodywork included",
+   "front wings, bumper and bonnet are transparent in the side and rear34 tiles",
+   "mats=0 cov=0.000, no body-paint material exists",
+   "fourth car in the Nieve5677 cluster with this identical defect"
+  ]
  }
 ]
