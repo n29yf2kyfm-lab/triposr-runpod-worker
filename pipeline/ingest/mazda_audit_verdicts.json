@@ -1,0 +1,190 @@
+[
+ {
+  "uid": "55e3429946834f2f908d97f296e599bf",
+  "name": "Mazda 2 (DY) 2003",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "renders LYING ON ITS SIDE: two tiles show the roof from above, two show the floor pan from below",
+   "source mesh is sound (geom_audit passes, 1,146,362 faces, HUM3D); the fault is render/handler.py:1007 -- after the first upright rotation ext2 X=201.748 vs Z=202.624, a 0.4% gap, so argmin picks X, the 'landed on its side' test fires and rolls a correct car onto its side",
+   "DETERMINISTIC per asset (extents are a property of the file) -- re-rendering will not fix it; not a scrap"
+  ]
+ },
+ {
+  "uid": "dde7d9046b8a4727a4738a54bfbbadb1",
+  "name": "Mazda 2 2016 Hatch",
+  "verdict": "fail",
+  "reasons": [
+   "CORRECTION of my own first reading. I initially recorded this pass-pending-gltf on the sheet alone; the glTF probe and a 5x zoom both overturn it",
+   "GLAZING OPAQUE: the shipped glb holds ONE material and zero transparent materials (no alphaMode BLEND/MASK, no baseColorFactor alpha < 1.0, no KHR_materials_transmission). At 5x the side tile shows the side glass rendered in solid body white with no interior, no darkness and no far-side opening",
+   "the sheet did not lie here for the usual reason - with no glass-named material the worker's transmission override never fired, so the truth showed through and I still misread it at 1x. Zoom, do not skim",
+   "owner ruling 2026-08-09: opaque glazing FAILS outright however clean the geometry",
+   "cov=1.000 with mats=1 - a respray would repaint glass and tyres too",
+   "geometry and wheels are genuinely good; this is a materials failure, so it is a re-source candidate, not a modelling one"
+  ]
+ },
+ {
+  "uid": "fd4327ce3259459980571a8f3b4c90c9",
+  "name": "Mazda 2 2016 (sedan)",
+  "verdict": "fail",
+  "reasons": [
+   "panel surfaces melted and rippled: the door skins are visibly wavy in the side tile with a crease running the length of both doors, and the rear quarter is buckled",
+   "red/orange texture smear across the roof and bonnet in the rear34 tile -- a baked artefact, not a reflection",
+   "door and bonnet shut lines undefined; the front bumper and grille read soft",
+   "cov=1.000 full coverage as well"
+  ]
+ },
+ {
+  "uid": "137e835475d5460bba22dc5ee0f58360",
+  "name": "2015 Autoexe Mazda 2 / Demio Aero Kit DE-03",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: aftermarket Autoexe aero kit -- front bumper, side skirts, roof spoiler, lowered stance and aftermarket 6-spoke wheels. Not an OEM performance variant, so no UK registration decodes to this specification",
+   "the mesh itself is clean (panels crisp, rim faces present, tyres black, glazing reads transparent) -- culled on scope, not on quality",
+   "sheet's pose warning low-top(tob=0.482) is a false positive: the roof spoiler inflates the top band"
+  ]
+ },
+ {
+  "uid": "1f3ef39f1c95445197ac5076a2d696c2",
+  "name": "2011 Mazda 2 / Demio",
+  "verdict": "pass-pending-gltf",
+  "reasons": [
+   "proportions read as Mazda 2 DE facelift instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "rim faces present with traceable multi-spoke detail and centre caps on all four corners",
+   "tyres read as black rubber on the TREAD FACE in front34 and rear34 (the side tile's pale sidewall is the documented whitewall-lookalike, not the defect)",
+   "door and bonnet shut lines defined; grille, lamp internals and Mazda badge present",
+   "cov=0.144 healthy; mats=1",
+   "DUPLICATE CANDIDATE with #6 (183,822 vs 183,661 faces, 161 apart) -- visually identical sheet"
+  ]
+ },
+ {
+  "uid": "e7df911e3bb1452f9bf6ee4b3c80ca54",
+  "name": "2011_mazda_2__demio Test By Ddiaz Design",
+  "verdict": "pass-pending-gltf",
+  "reasons": [
+   "visually IDENTICAL to #5 tile for tile -- same mesh re-uploaded under a test title",
+   "same quality read as #5: clean panels, defined shut lines, rim faces present, black tread in the 3/4 tiles",
+   "DUPLICATE of #5 at 161 faces apart (0.09%); the higher face count (#5, 183,822) should be kept"
+  ]
+ },
+ {
+  "uid": "e88b9a72d8ab40f7979cbc6a9eae0465",
+  "name": "Mazda2 014",
+  "verdict": "fail",
+  "reasons": [
+   "TITLE IS WRONG - this is not a Mazda 2. It is an MX-5 ND-based two-seat roadster: no roof, two seats, long bonnet, roadster proportions. Read from the render, per CLAUDE.md",
+   "OUT OF SCOPE: heavily customised widebody - vented bonnet, side strakes, wide arches, large rear wing, splitter, purple chrome aftermarket wheels, purple interior. No UK registration decodes to this",
+   "this row is one of the two RECOVERED by the marque-qualified nameplate fix, and it is junk - reported honestly rather than counted as a win"
+  ]
+ },
+ {
+  "uid": "de4a4d7518864732b0d4e4809a78ac0b",
+  "name": "Mazda 2/Demio MK3 2007-2014",
+  "verdict": "fail",
+  "reasons": [
+   "EXPLODED PARTS KIT: the body floats clear of the ground in all four tiles, every wheel is detached and displaced below and outboard of its arch, and the arches are empty",
+   "a loose wheel sits on the floor under the car in the side and rear34 tiles",
+   "front bumper/valance detached and hanging below the nose"
+  ]
+ },
+ {
+  "uid": "7d3ac0221bfa479eb920bd2c83417986",
+  "name": "2003 Mazda 3 BK Hatchback",
+  "verdict": "pass-pending-gltf",
+  "reasons": [
+   "proportions read as Mazda 3 BK five-door instantly; roof, pillars and wheelbase consistent across all four tiles",
+   "rim faces present and traceable at 5x - five spokes, lug nuts, centre cap and the brake disc visible behind; no void on any corner",
+   "tyres are plainly BLACK rubber with a defined sidewall at 5x on the tread face",
+   "door, bonnet and tailgate shut lines defined; tail lamp internals, grille mesh and exhaust tip present",
+   "cov=0.193 healthy, mats=1",
+   "NOTE the rig's 'side' tile lands on the rear of this car (its forward axis sits 90 degrees from the rig's assumption) - four distinct angles are still covered, so this is not a defect",
+   "sheet pose warning low-top(tob=0.534) is a false positive - roof aerial inflates the top band"
+  ]
+ },
+ {
+  "uid": "ed4f058d05924649b2f92700b17cf7a0",
+  "name": "MAZDA CX5",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL: every surface is the same uniform grey - body, glazing, tyres, grille and rims all one tone. No black rubber anywhere and the windows are opaque body-colour",
+   "glazing shows through as opaque precisely BECAUSE its material name does not match the handler's glass regex, so no transmission override fired - the documented clay-shell tell",
+   "owner ruling: glazing must read as glass AND tyres must read as black rubber; this fails both",
+   "cov=1.000 with mats=1 - one material over the whole model",
+   "polygonal faceting/banding visible across the roof and bonnet"
+  ]
+ },
+ {
+  "uid": "c161912a9a3e4b66a2fa1d937cdcf48b",
+  "name": "Mazda 3 (BK) sedan S 2005",
+  "verdict": "pass-pending-gltf",
+  "reasons": [
+   "proportions read as Mazda 3 BK saloon instantly; roof, pillars and wheelbase consistent across all four tiles",
+   "rim faces present at 5x - five spokes, centre cap, no void on any corner",
+   "tyres plainly BLACK with a defined sidewall on the tread face at 5x",
+   "shut lines defined; grille mesh, fog-lamp bezels, tail lamp internals and a UK-format number plate present",
+   "cov=0.206 healthy, mats=1",
+   "minor: a shading crease on the front wing above the wheel arch"
+  ]
+ },
+ {
+  "uid": "a9feec19d8fb4ad7bff896cba234278a",
+  "name": "Mazda 3 (Mk1) sedan 2003",
+  "verdict": "pass",
+  "reasons": [
+   "I NEARLY FAILED THIS CAR WRONGLY AND AM RECORDING IT. At 5x the sheet shows a plainly WHITE tyre, tread shoulder included, on a white body - the documented tyre-defect signature",
+   "the shipped glb overturns it: 'tire' is baseColorFactor 0.106 grey, OPAQUE, untextured - BYTE-IDENTICAL to #11 Mazda 3 BK sedan S, which renders black tyres on the same rig in the same wave. Identical material, opposite render. That is exactly the render-side artefact CLAUDE.md records at 0.106 on the Mercedes wave, and exactly the trap that got 39 live cars wrongly quarantined",
+   "judged from the SHIPPED asset per the evidence hierarchy: posterUrl is null for wave entries, so the resolver hands desktopGlbUrl to the viewer and the glTF material is what the customer sees. Dark rubber ships",
+   "glazing CLEAR and proven: windowglass alphaMode=BLEND alpha=0.30, clearglass BLEND 0.20, plus dark/orange/red lamp glass separately",
+   "proportions read as Mazda 3 BK saloon; rim faces present with five spokes and centre caps on all four corners; shut lines defined; grille mesh and lamp internals present",
+   "cov=0.199 healthy, 17 materials"
+  ]
+ },
+ {
+  "uid": "a8d5301ccbf548b3bc3080d0193f254f",
+  "name": "2011 Mazda 3 Sedan",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as Mazda 3 BL saloon instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "tyres BLACK in the shipped glb ('tire' 0.019, opaque, untextured) AND black at 5x on the tread face - both witnesses agree",
+   "glazing CLEAR and proven: windowglass BLEND alpha=0.25, clearglass BLEND 0.20",
+   "rim faces present at 5x with ten spokes, lug detail and centre cap; no void on any corner",
+   "shut lines defined; grille mesh, lamp internals, twin exhaust tips and a UK-format plate present",
+   "cov=0.209 healthy, 17 materials, not a flat shell"
+  ]
+ },
+ {
+  "uid": "0690b22eae634b42b6263ecac783366f",
+  "name": "Mazda 3 Hatchback",
+  "verdict": "fail",
+  "reasons": [
+   "FLAT SHELL, textbook: all 17 materials carry baseColorFactor [1,1,1,1] OPAQUE with zero textures. The names survive intact (tire, carpaint, clearglass, greenglass, chrome, brakedisk) and only the colours are gone - the exact signature CLAUDE.md records",
+   "THE SHEET IS COMPLETELY MISLEADING HERE and would have passed it: the glazing renders dark because the worker force-overrides any glass-named material, and the wheels render dark because the worker darkens low-lying wheel geometry. Neither is in the file",
+   "shipped tyre material is pure white (1.0) and glazing is fully opaque - both owner rulings failed in the asset the customer would actually be handed",
+   "colour variants cannot rescue it: colour_variants.py rewrites only the body material, leaving a coloured body on the same white shell",
+   "the material NAME SET is identical to #11/#12/#13, which are good - so this is a mis-exported copy of the same vendor's model, not a different car. Re-source rather than scrap the nameplate"
+  ]
+ },
+ {
+  "uid": "6cab0de9e7474aba97e7043297e12de2",
+  "name": "Very Filthy Mazda 3",
+  "verdict": "fail",
+  "reasons": [
+   "PHOTOGRAMMETRY SCAN, not a built model: soft melted panels, baked-in dirt and road salt over the whole body, and baked lighting",
+   "the ground plane is baked into the mesh - a ragged slab of tarmac sits under the car in every tile",
+   "large torn scan fragments float free beside the car in all four tiles (walls/kerbs the capture picked up)",
+   "windows are holes in the mesh, not glazing; roof and bonnet are punched through",
+   "cov=1.000, mats=1, glazing opaque - nothing here is recolourable",
+   "CLAUDE.md: scans need a different class of source; more Sketchfab sweeping will not fix this one"
+  ]
+ },
+ {
+  "uid": "7e7fd687a0cb4a1ca5088c8b719aaf58",
+  "name": "Mazda Cx-3 2016",
+  "verdict": "fail",
+  "reasons": [
+   "GLAZING OPAQUE in the shipped glb: one material, zero transparent materials (no BLEND/MASK, no alpha < 1.0, no KHR_materials_transmission). Owner ruling 2026-08-09 fails this outright",
+   "the sheet renders the car in its OWN maroon, not the forced silver - the cov=1.000 / mats=1 full-coverage signature, so the colour in this sheet is not to be trusted either",
+   "geometry artefacts: two spikes protrude from the front of the roof in the side and front34_L tiles",
+   "a respray would repaint glass, cladding and tyres with the body"
+  ]
+ }
+]
