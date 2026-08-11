@@ -360,5 +360,116 @@
    "rim faces present with ten spokes and centre caps; shut lines defined; projector headlamp internals and twin exhausts present",
    "cov=0.149 healthy, 22 materials, 13 textures"
   ]
+ },
+ {
+  "uid": "ea176c6ebe814be3b06641bf038f8642",
+  "name": "Mazda CX-5 2020",
+  "verdict": "pass",
+  "reasons": [
+   "CORE UK FLEET CAR and the best CX-5 in the wave. Proportions read as CX-5 KF instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "SECOND TIME I MISREAD A TYRE AT 1x AND THE ZOOM CORRECTED ME: at thumbnail scale the wheel reads white; at 5x the tyre is plainly a distinct DARK GREY band around a white 10-spoke rim, with lug nuts and a Mazda centre badge visible. This is the trap CLAUDE.md warns about",
+   "glTF agrees: the main atlas 'Index_0_1' is 1024x1024 at mean sRGB 88.5 with 57% of pixels below 70 (dark-dominant, i.e. tyre and trim), while 'metal_white' is a separate bright 173-mean atlas for the rim",
+   "glazing genuinely transparent AND the sheet is a valid witness for once: the glazing material is named 'Index_0_2', which does NOT match the handler's glass regex, so no transmission override fired and what the sheet shows is the file's own glazing - interior and far-side openings resolve through the side glass",
+   "the probe's 'faded' label is a known limit, not a defect: alpha lives in the texture (BLEND with baseColorTexture, factor 1.0), so the factor test cannot measure the degree",
+   "black arch cladding and sill trim correct; mesh grille resolves; LED lamp internals sharp; shut lines defined",
+   "cov=0.191 healthy"
+  ]
+ },
+ {
+  "uid": "d91435fddbf64b449a15d6f0316f0bb3",
+  "name": "Mazda 3 | Sitting in the Snow",
+  "verdict": "fail",
+  "reasons": [
+   "PHOTOGRAMMETRY SCAN: snow and road grime baked into the paint, baked lighting, soft melted panels",
+   "the ground plane is baked into the mesh as a ragged slab of snow-covered tarmac in every tile",
+   "the rear bumper is torn and hanging off as scan debris; roof bars are half-captured",
+   "cov=1.000, mats=1, glazing opaque - nothing recolourable"
+  ]
+ },
+ {
+  "uid": "0ca0354c7b2a41bbb84c835ff046e8e5",
+  "name": "Mazda CX-5 (KE)",
+  "verdict": "fail",
+  "reasons": [
+   "GLAZING EFFECTIVELY OPAQUE, and this is the wave's one genuinely marginal call so I am stating the reasoning. 'Glass' is alphaMode=BLEND with baseColorFactor rgb 0.069 and alpha 0.986 - i.e. 98.6% opaque, a near-black solid panel in any viewer",
+   "the sheet shows clean see-through glazing and is NOT a valid witness: the material is literally named 'Glass', so the worker's transmission=1.0 override fires and manufactures the transparency. This is precisely the Porsche failure mode CLAUDE.md documents",
+   "CLAUDE.md's own calibration is the yardstick: glazing as heavy as alpha 0.78-0.94 still resolves interior and far-side openings under backlight. 0.986 sits well outside that, which is why the probe bands it 'faded' rather than clear",
+   "cov=0.755 with 3 body materials - a respray would repaint three quarters of the car",
+   "front bumper and lower valance read soft against the real KE CX-5",
+   "tyres are fine (dark 'Plastic' 0.057 against a white 'Wheels' rim), so this is a glazing cull, not a tyre one. Worth re-sourcing: the CX-5 is a core UK fleet car and #31 already covers the KF"
+  ]
+ },
+ {
+  "uid": "95925b2517044e838498d51969241c76",
+  "name": "2011 Mazda 3 1.5 Skyactiv-d Tuned",
+  "verdict": "fail",
+  "reasons": [
+   "TITLE IS WRONG: this is a Mazda 2 (DE), not a Mazda 3 - three-quarter proportions, tail-lamp shape and length all read as the 2",
+   "NO WHEELS: every arch is an empty black void in all four tiles",
+   "UNFINISHED MATERIAL ASSIGNMENT: the body is a patchwork of white and two greys with the split running mid-door and across the bonnet and tailgate - not a livery, an unassigned-material artefact",
+   "OUT OF SCOPE anyway: aftermarket front bumper with an exposed intercooler, large roof-height rear spoiler, hanging exhaust",
+   "glazing opaque in the shipped glb ('Glass' rgb 0,0,0 alphaMode=OPAQUE alpha=1.0); the probe said 'ambiguous' because one unrelated material is transparent"
+  ]
+ },
+ {
+  "uid": "c7515ee1390e406194b756c4b28a8a5b",
+  "name": "Ford Focus, Mazda 3- Police",
+  "verdict": "fail",
+  "reasons": [
+   "TWO VEHICLES IN ONE ASSET: a Ford Focus estate AND a Mazda 3 saloon, both present in every tile. The catalogue serves one car per entry, so this cannot ship at all",
+   "POLICE LIVERY: both carry roof light bars and the Mazda wears a black-and-white police scheme. Not a car a UK registration decodes to",
+   "wheels are featureless black discs on the Focus - rim faces entirely absent, the documented void defect",
+   "glazing opaque in the shipped glb (proven, 62 materials); cov=0.092 is below the 0.12 low-coverage line so the sheet's colour is untrustworthy too"
+  ]
+ },
+ {
+  "uid": "d1418e5b19b748b480e9fd19696a69ae",
+  "name": "2002 Mazda MPV (LW)",
+  "verdict": "pass",
+  "reasons": [
+   "UK-market Mazda MPV (LW). Proportions read as the LW MPV instantly; roof, pillars, sliding-door track and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior seats and far-side openings resolve through the side glass",
+   "tyres BLACK in the shipped glb and black on the tread face in the 3/4 tiles",
+   "rim faces present with five spokes and centre caps on all four corners",
+   "shut lines defined; grille, lamp internals, roof rails, door handles and side mouldings all present",
+   "cov=0.175 healthy, 18 materials, 1,159,210 faces - the highest-detail MPV in the wave"
+  ]
+ },
+ {
+  "uid": "64d24d39d00b4e07894a48faf35d7c1a",
+  "name": "Mazda 8 MPV",
+  "verdict": "fail",
+  "reasons": [
+   "TRANSPARENT GLASS SHELL: the entire BODY is transmissive, not just the glazing. In the side tile the seats, the cabin floor and the far-side wheel are all visible straight through the closed doors and the rear quarter panel",
+   "the sheet header states it outright - body mats=0, cov=0.000: the worker found no body-paint material at all because nothing in the file behaves like opaque paint",
+   "this is the failure geom_audit's docstring predicts and cannot catch: proportions are normal so no geometry signal fires, and only the coverage number gives it away",
+   "out of scope as well: the Mazda 8 is the JDM-market MPV, never sold in the UK, so no UK registration decodes to one"
+  ]
+ },
+ {
+  "uid": "7a469399cfae4e438ea5c86e56d938f2",
+  "name": "Mazda 6 Mk1 sedan 2002",
+  "verdict": "pass",
+  "reasons": [
+   "CORE UK FLEET CAR. Proportions read as Mazda 6 GG saloon instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb; interior resolves through the side glass",
+   "tyres BLACK in the shipped glb and black on the tread face in the 3/4 tiles",
+   "rim faces present with five spokes, lug detail and centre caps on all four corners",
+   "shut lines defined; grille mesh, projector lamp internals, twin exhaust and side mouldings present",
+   "cov=0.211 healthy, 18 materials",
+   "DUPLICATE PAIR with #39 (916,826 vs 916,518 faces, 308 apart = 0.03%) - same mesh, retitled. Keep this one, the higher count",
+   "sheet pose warning low-top(tob=0.519) is a false positive - the roof aerial inflates the top band"
+  ]
+ },
+ {
+  "uid": "ea25010fdf134a55a0d87ef8e89bb924",
+  "name": "2002 Mazda 6",
+  "verdict": "pass",
+  "reasons": [
+   "identical mesh to #38 tile for tile - Mazda 6 GG saloon, same wheels, same trim, same plate texture",
+   "same quality read as #38: glazing clear and proven, tyres black in the shipped glb, rim faces present, shut lines defined",
+   "DUPLICATE of #38 at 308 faces apart (0.03%); #38 has the higher face count and is the one to keep",
+   "dupe_check will catch this pair on rule A (title token overlap 1.00 ignoring 'mazda', face delta 0.03%)"
+  ]
  }
 ]
