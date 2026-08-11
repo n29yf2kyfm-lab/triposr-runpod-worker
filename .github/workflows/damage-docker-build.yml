@@ -1,0 +1,79 @@
+name: Build and Push Damage Scanner Docker Image
+
+# ISOLATION (PLAN.md §2.3): this workflow triggers ONLY on damage/**. The
+# vehicle worker's workflow triggers only on trellis2/**, the building worker's
+# only on building/**. None can rebuild another's production image, which keeps
+# the live vehicle endpoint safe while this product is developed.
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'damage/**'
+      - '.github/workflows/damage-docker-build.yml'
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    # Fast, GPU-free contract tests. They gate the build, so a broken pipeline
+    # never reaches a deployable tag.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Run damage worker tests
+        run: python damage/test_handler.py
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: true
+          docker-images: false
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Production tags only from main: a workflow_dispatch on a feature branch
+      # must not overwrite a deployed tag.
+      - name: Compute tags
+        id: tags
+        run: |
+          TAGS="alamk123/damage-scan:${{ github.sha }}"
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            TAGS="$TAGS
+          alamk123/damage-scan:v1
+          alamk123/damage-scan:latest"
+          fi
+          {
+            echo "tags<<EOF"
+            echo "$TAGS"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Build and Push
+        uses: docker/build-push-action@v5
+        with:
+          context: damage
+          push: true
+          tags: ${{ steps.tags.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
