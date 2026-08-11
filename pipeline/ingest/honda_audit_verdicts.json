@@ -3,9 +3,9 @@
   "uid": "35cbd73adbe8411b80bdeeaa4f3cd151",
   "name": "Honda Civic Sedan Touring US 2022",
   "faces": 1199076,
-  "verdict": "PASS",
-  "original_verdict": "PASS",
-  "reason": "11th-gen Civic saloon, reads instantly. Glass is real (seats and headrests visible through all four windows), multi-spoke rims show full spoke/lug detail on both sides, headlight internals and honeycomb lower grille sharp, shut lines crisp. Stamp decides colours.",
+  "verdict": "FAIL",
+  "original_verdict": "PASS (2026-08-09)",
+  "reason": "DOWNGRADED 2026-08-11 on the glazing ruling, which did not exist when this car was passed. Opaque glazing proven from the glTF: windowglass, clearglass, darkglass all alphaMode OPAQUE at alpha 1.0, and ZERO transparent materials in the whole file (18 materials). It also carries the flat-shell signature. The clear glass in its sheet is manufactured by the render worker's transmission override. Original note: 11th-gen Civic saloon, reads instantly. Glass is real (seats and headrests visible through all four windows), multi-spoke rims show full spoke/lug detail on both sides, headlight internals and honeycomb lower grille sharp, shut lines crisp. Stamp decides colours.",
   "model_slug": "civic",
   "year": 2022,
   "body_style": "saloon",
@@ -13,7 +13,14 @@
   "glass_certainty": "proven",
   "flat_shell": true,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=1.0 OPAQUE",
+   "clearglass alpha=1.0 OPAQUE",
+   "darkglass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 18
  },
  "0044cb3e465b4a7f8885f808207dc5b1": {
   "uid": "0044cb3e465b4a7f8885f808207dc5b1",
@@ -29,7 +36,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 18
  },
  "01bd4f2a73f949d8840afb711429b3c1": {
   "uid": "01bd4f2a73f949d8840afb711429b3c1",
@@ -45,7 +58,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 18
  },
  "0aebfa48b6f140f694a3cbd62bbd5336": {
   "uid": "0aebfa48b6f140f694a3cbd62bbd5336",
@@ -61,7 +81,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 16
  },
  "cad9679ec5d6403984b1421ccd3f3d25": {
   "uid": "cad9679ec5d6403984b1421ccd3f3d25",
@@ -77,7 +103,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 17
  },
  "39bf36a5b88b4767973ce417cfdcf301": {
   "uid": "39bf36a5b88b4767973ce417cfdcf301",
@@ -93,7 +125,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "clearglass alpha=0.2 BLEND",
+   "greenglass alpha=0.3 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 17
  },
  "727b2ea44a124977a323815dafb8bb89": {
   "uid": "727b2ea44a124977a323815dafb8bb89",
@@ -109,7 +147,12 @@
   "glass_certainty": "proven",
   "flat_shell": true,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "clearglass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 16
  },
  "76c8c4d7d49949e8ba9d6b6d3a94c473": {
   "uid": "76c8c4d7d49949e8ba9d6b6d3a94c473",
@@ -125,7 +168,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": true,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "clearglass alpha=0.425 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 16
  },
  "faa07ab210314dd2a52e678e1b4f5a9a": {
   "uid": "faa07ab210314dd2a52e678e1b4f5a9a",
@@ -141,7 +189,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 17
  },
  "f749ed1e876d415b82efa5293836d92a": {
   "uid": "f749ed1e876d415b82efa5293836d92a",
@@ -157,7 +212,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 16
  },
  "a856d729d9ec47fc8cb3b740199ed6bf": {
   "uid": "a856d729d9ec47fc8cb3b740199ed6bf",
@@ -173,7 +234,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 17
  },
  "db666ce23d7b42fdbcd93a73217ba363": {
   "uid": "db666ce23d7b42fdbcd93a73217ba363",
@@ -189,7 +257,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 16
  },
  "69183c2bf725484285552138c01ce93b": {
   "uid": "69183c2bf725484285552138c01ce93b",
@@ -205,7 +279,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 18
  },
  "b9be5abe354748f2ad6aebe470a939e4": {
   "uid": "b9be5abe354748f2ad6aebe470a939e4",
@@ -221,7 +301,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "glass alpha=0.2 BLEND",
+   "d_glass alpha=0.8 BLEND"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 19
  },
  "d2c35fc6af904aa8a3a138ca21275b2a": {
   "uid": "d2c35fc6af904aa8a3a138ca21275b2a",
@@ -237,7 +323,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "2022_Honda_HR-V_eHEV_Windows alpha=0.663 BLEND",
+   "2022_Honda_HR-V_eHEV_WindowsTrims1 alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 32
  },
  "1c1d92ac8ae24ee5ba0e89a10c4fa595": {
   "uid": "1c1d92ac8ae24ee5ba0e89a10c4fa595",
@@ -253,7 +345,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 17
  },
  "66e802c0bf7c4bda8fc3bc177fcc5ccb": {
   "uid": "66e802c0bf7c4bda8fc3bc177fcc5ccb",
@@ -269,7 +367,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.407 BLEND"
+  ],
+  "n_transparent_materials": 8,
+  "n_materials": 17
  },
  "a6d68831dcf54a9fba317764c6719845": {
   "uid": "a6d68831dcf54a9fba317764c6719845",
@@ -285,7 +389,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 17
  },
  "5d3b1aa1922a4305b94a2b61f3cea004": {
   "uid": "5d3b1aa1922a4305b94a2b61f3cea004",
@@ -301,7 +411,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 17
  },
  "d5af69ef34834f43a65b4aac78ca8929": {
   "uid": "d5af69ef34834f43a65b4aac78ca8929",
@@ -317,7 +434,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND",
+   "greenglass alpha=0.3 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 18
  },
  "f973338c77ce4618b941612241d53f6a": {
   "uid": "f973338c77ce4618b941612241d53f6a",
@@ -333,7 +457,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "int_glass alpha=1.0 OPAQUE",
+   "glass alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 34
  },
  "4e3e9bd888fb4ec69f71cc487f33f4ba": {
   "uid": "4e3e9bd888fb4ec69f71cc487f33f4ba",
@@ -349,7 +479,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 17
  },
  "d10be78451fb4308b728507d50fb6056": {
   "uid": "d10be78451fb4308b728507d50fb6056",
@@ -365,7 +501,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "window alpha=0.6 BLEND",
+   "glass alpha=0.6 BLEND"
+  ],
+  "n_transparent_materials": 11,
+  "n_materials": 36
  },
  "db80634b538c40569bc77ebf829bac19": {
   "uid": "db80634b538c40569bc77ebf829bac19",
@@ -381,7 +523,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 17
  },
  "d4f83dedc8f54c27b5c9103a662d1062": {
   "uid": "d4f83dedc8f54c27b5c9103a662d1062",
@@ -397,7 +545,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 18
  },
  "6eccbee181b143b28764a82b15f0a62d": {
   "uid": "6eccbee181b143b28764a82b15f0a62d",
@@ -413,7 +568,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "clearglass alpha=0.2 BLEND",
+   "greenglass alpha=0.3 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 16
  },
  "3f5ef3ff34c04f839c05709c6fa5ce1c": {
   "uid": "3f5ef3ff34c04f839c05709c6fa5ce1c",
@@ -429,7 +590,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "clearglass alpha=0.2 BLEND",
+   "greenglass alpha=0.3 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 17
  },
  "b3c0f77626644e99b54304aebbafc60b": {
   "uid": "b3c0f77626644e99b54304aebbafc60b",
@@ -445,7 +612,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 17
  },
  "d5d98cef2a4240b6be91e03a1afcb0e1": {
   "uid": "d5d98cef2a4240b6be91e03a1afcb0e1",
@@ -461,7 +634,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 18
  },
  "d0391b0403d34793927beebdbbc2a4a1": {
   "uid": "d0391b0403d34793927beebdbbc2a4a1",
@@ -477,7 +657,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.25 BLEND",
+   "darkglass alpha=0.25 BLEND",
+   "clearglass alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 18
  },
  "9b6c48141ea849c08a82c7e12ec80c69": {
   "uid": "9b6c48141ea849c08a82c7e12ec80c69",
@@ -493,7 +680,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 17
  },
  "baa08e5aea7a4f638d98db2050c21112": {
   "uid": "baa08e5aea7a4f638d98db2050c21112",
@@ -509,7 +702,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 16
  },
  "92e568f639384c3b9c3ced96512f6f1d": {
   "uid": "92e568f639384c3b9c3ced96512f6f1d",
@@ -525,15 +724,22 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 18
  },
  "1bddd17deee44ef8b8a401e8a25a6b5d": {
   "uid": "1bddd17deee44ef8b8a401e8a25a6b5d",
   "name": "Honda_ Accord_sedan_2009",
   "faces": 822100,
-  "verdict": "PASS",
-  "original_verdict": "PASS",
-  "reason": "Pre-facelift CU Accord saloon. Clean glazing, consistent rims, defined shut lines. Third near-identical CU Accord in this set alongside 39bf36a5 and 6eccbee1 - ship one.",
+  "verdict": "FAIL",
+  "original_verdict": "PASS (2026-08-09)",
+  "reason": "DOWNGRADED 2026-08-11 on the glazing ruling, which did not exist when this car was passed. Opaque glazing proven from the glTF: clearglass, greenglass all alphaMode OPAQUE at alpha 1.0, and ZERO transparent materials in the whole file (16 materials). It also carries the flat-shell signature. The clear glass in its sheet is manufactured by the render worker's transmission override. Original note: Pre-facelift CU Accord saloon. Clean glazing, consistent rims, defined shut lines. Third near-identical CU Accord in this set alongside 39bf36a5 and 6eccbee1 - ship one.",
   "model_slug": "accord",
   "year": 2009,
   "body_style": "saloon",
@@ -541,7 +747,13 @@
   "glass_certainty": "proven",
   "flat_shell": true,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "clearglass alpha=1 OPAQUE",
+   "greenglass alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 16
  },
  "8d0d4ce034ef435db9167b18161ef57f": {
   "uid": "8d0d4ce034ef435db9167b18161ef57f",
@@ -557,7 +769,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "greenglass.015 alpha=0.1 BLEND",
+   "darkglass.035 alpha=0.5 BLEND",
+   "clearglass.197 alpha=0.1 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 13
  },
  "585280a06d3a473980682be5e4dff82d": {
   "uid": "585280a06d3a473980682be5e4dff82d",
@@ -573,7 +792,15 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "cv3_glass alpha=1.0 OPAQUE",
+   "cv3_screen alpha=1.0 OPAQUE",
+   "cv3_glass_int alpha=1.0 OPAQUE",
+   "glass_invisible alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 82
  },
  "06191f5bef694146bd0472af4af8b7b9": {
   "uid": "06191f5bef694146bd0472af4af8b7b9",
@@ -589,7 +816,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "glass alpha=0.602 BLEND",
+   "clearglass alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 1,
+  "n_materials": 20
  },
  "7ea59d42e17a4d1f9a98b840740a3aa6": {
   "uid": "7ea59d42e17a4d1f9a98b840740a3aa6",
@@ -605,7 +838,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 16
  },
  "5328bd7313e346789568266d67081ba3": {
   "uid": "5328bd7313e346789568266d67081ba3",
@@ -621,7 +860,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 17
  },
  "8788e6274878465a9e03a063844eba7c": {
   "uid": "8788e6274878465a9e03a063844eba7c",
@@ -637,7 +883,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 17
  },
  "24abc0e850f64705906c910e91a6ac4a": {
   "uid": "24abc0e850f64705906c910e91a6ac4a",
@@ -653,7 +905,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.285 BLEND",
+   "darkglass alpha=0.285 BLEND",
+   "clearglass alpha=0.053 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 13
  },
  "a4827c4d86224ab586218654559f4627": {
   "uid": "a4827c4d86224ab586218654559f4627",
@@ -669,7 +928,15 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "odysseykene_glass_1 alpha=1.0 OPAQUE",
+   "odysseykene_glass_tint alpha=1.0 OPAQUE",
+   "odysseykene_gps_screen alpha=1.0 OPAQUE",
+   "odysseykene_glass_11 alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 94
  },
  "1bb32fd8460e47af82518e43f172f916": {
   "uid": "1bb32fd8460e47af82518e43f172f916",
@@ -685,7 +952,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 16
  },
  "770a5c9b025449f59769d8cd27d915bb": {
   "uid": "770a5c9b025449f59769d8cd27d915bb",
@@ -693,7 +966,7 @@
   "faces": 594992,
   "verdict": "PASS",
   "original_verdict": "PASS",
-  "reason": "FK8 Civic Type R - factory performance variant, in scope. Glazing transparent, black multi-spokes with red calipers consistent, headlamp internals sharp, front honeycomb grille resolved, shut lines crisp. Mesh axis is rotated so the tile labels do not match the views.",
+  "reason": "[GLAZING UNRESOLVED - probe says ambiguous/proven; ambiguous and inferred-opaque must NOT be failed on the probe alone, so this keeps its PASS pending a magenta-backlight render of the shipped GLB.] FK8 Civic Type R - factory performance variant, in scope. Glazing transparent, black multi-spokes with red calipers consistent, headlamp internals sharp, front honeycomb grille resolved, shut lines crisp. Mesh axis is rotated so the tile labels do not match the views.",
   "model_slug": "civic",
   "year": null,
   "body_style": "hatchback",
@@ -701,7 +974,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "glass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 1,
+  "n_materials": 15,
+  "needs_glazing_confirmation": true
  },
  "1860f7cc43544306a4148ba5953cfac4": {
   "uid": "1860f7cc43544306a4148ba5953cfac4",
@@ -717,7 +996,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 15
  },
  "ade1ab7ab2df4618a802431f3237f250": {
   "uid": "ade1ab7ab2df4618a802431f3237f250",
@@ -733,7 +1018,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 17
  },
  "382f78083aef442591d52c78af726b35": {
   "uid": "382f78083aef442591d52c78af726b35",
@@ -749,7 +1040,15 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "windows alpha=0.486 BLEND",
+   "stickers_windows alpha=1 MASK",
+   "blitz_glass alpha=1 OPAQUE",
+   "int_glass alpha=0.0 BLEND"
+  ],
+  "n_transparent_materials": 7,
+  "n_materials": 66
  },
  "fb53b8bc2a74417a8a38967930da12d3": {
   "uid": "fb53b8bc2a74417a8a38967930da12d3",
@@ -765,7 +1064,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "glass alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 18
  },
  "f6f11514f971460e9f8df318df7b85b0": {
   "uid": "f6f11514f971460e9f8df318df7b85b0",
@@ -781,7 +1085,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 4
  },
  "a9514cacb3194a97a8a583caf1453ef5": {
   "uid": "a9514cacb3194a97a8a583caf1453ef5",
@@ -797,7 +1104,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "FK8.Windshield alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 31
  },
  "a21edb35a7714774a10b74642e815ca2": {
   "uid": "a21edb35a7714774a10b74642e815ca2",
@@ -813,7 +1125,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "untitledMI_Glass1 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 21
  },
  "492b1e8a73984c5d88e10efd8acfd816": {
   "uid": "492b1e8a73984c5d88e10efd8acfd816",
@@ -829,15 +1146,20 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "untitledMI_Glass1 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 21
  },
  "65e2974c74254021b027b223190418e8": {
   "uid": "65e2974c74254021b027b223190418e8",
   "name": "2008 Honda City V AT",
   "faces": 334233,
-  "verdict": "PASS",
-  "original_verdict": "PASS",
-  "reason": "GM2 City saloon. Transparent glazing with cabin visible, white wheel covers consistent on all four corners, headlamp internals modelled, shut lines defined. Stamp decides colours.",
+  "verdict": "FAIL",
+  "original_verdict": "PASS (2026-08-09)",
+  "reason": "DOWNGRADED 2026-08-11 on the glazing ruling, which did not exist when this car was passed. Opaque glazing proven from the glTF: Carro_Vidros all alphaMode OPAQUE at alpha 1.0, and ZERO transparent materials in the whole file (41 materials). The clear glass in its sheet is manufactured by the render worker's transmission override. Original note: GM2 City saloon. Transparent glazing with cabin visible, white wheel covers consistent on all four corners, headlamp internals modelled, shut lines defined. Stamp decides colours.",
   "model_slug": "city",
   "year": 2008,
   "body_style": "saloon",
@@ -845,7 +1167,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Carro_Vidros alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 41
  },
  "e05913bc469346ec8b2ed6ec404f7c80": {
   "uid": "e05913bc469346ec8b2ed6ec404f7c80",
@@ -861,7 +1188,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 26
  },
  "600b5900ab034fc19db376e6b6443366": {
   "uid": "600b5900ab034fc19db376e6b6443366",
@@ -877,7 +1207,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "glass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 26
  },
  "23d10a7f1a8c489e8fe1fc04ab091ed1": {
   "uid": "23d10a7f1a8c489e8fe1fc04ab091ed1",
@@ -893,7 +1228,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "DelSol_glass_int_MAT-fx alpha=1.0 OPAQUE",
+   "DelSol_glass_MAT-fx alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 19
  },
  "6360f93abad043878879e5a0f1bd6f4a": {
   "uid": "6360f93abad043878879e5a0f1bd6f4a",
@@ -909,7 +1250,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "glass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 44
  },
  "f00136dfd77348b1a053d98fadd43602": {
   "uid": "f00136dfd77348b1a053d98fadd43602",
@@ -925,7 +1271,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "steklo1 alpha=0.919 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 14
  },
  "737fd0a261fd4f32b431c838dcc57c0f": {
   "uid": "737fd0a261fd4f32b431c838dcc57c0f",
@@ -941,7 +1292,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "WindshieldFrame alpha=1 MASK",
+   "GlassTemp alpha=0.261 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 29
  },
  "1f0d3d471bee42908e336b11da6b5e61": {
   "uid": "1f0d3d471bee42908e336b11da6b5e61",
@@ -957,7 +1314,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Glass_MAT alpha=0.679 BLEND",
+   "Glass_02_MAT alpha=0.911 BLEND"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 7
  },
  "4df76c1974cd4173a7a941bfec7714ab": {
   "uid": "4df76c1974cd4173a7a941bfec7714ab",
@@ -973,7 +1336,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Glass_MAT alpha=0.407 BLEND",
+   "Glass_02_MAT alpha=0.3 BLEND"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 7
  },
  "0669147fb3ba4cca95ea942add743b2b": {
   "uid": "0669147fb3ba4cca95ea942add743b2b",
@@ -989,7 +1358,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Window alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 23
  },
  "abeaa957199c473ea3d293f7e669bf34": {
   "uid": "abeaa957199c473ea3d293f7e669bf34",
@@ -1005,7 +1379,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Window_0 alpha=0.25 BLEND",
+   "Window_1 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 24
  },
  "dca96b4f975b443c803d963fd3a9add7": {
   "uid": "dca96b4f975b443c803d963fd3a9add7",
@@ -1021,7 +1401,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Window_0 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 23
  },
  "0a2c327d1da3417aa1d91906cfbd9ba7": {
   "uid": "0a2c327d1da3417aa1d91906cfbd9ba7",
@@ -1037,7 +1422,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "d_glass alpha=0.4 BLEND",
+   "glass alpha=0.05 BLEND"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 17
  },
  "bd54e1b7f19c41ed9c649e546ef032f3": {
   "uid": "bd54e1b7f19c41ed9c649e546ef032f3",
@@ -1053,7 +1444,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Window alpha=0.25 BLEND",
+   "glass_surr alpha=1.0 OPAQUE",
+   "Glass_I alpha=0.254 BLEND"
+  ],
+  "n_transparent_materials": 7,
+  "n_materials": 24
  },
  "ccbbeb08cf494ef5a9c798b17b133033": {
   "uid": "ccbbeb08cf494ef5a9c798b17b133033",
@@ -1069,7 +1467,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "window alpha=0.971 BLEND",
+   "glass alpha=0.4 BLEND",
+   "black_glass_breakable alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 9,
+  "n_materials": 34
  },
  "f397c4664a104feaae1d348e368e3f3d": {
   "uid": "f397c4664a104feaae1d348e368e3f3d",
@@ -1085,7 +1490,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "transparent alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 11
  },
  "becb3a29bce245198a6fa5f2be6576a7": {
   "uid": "becb3a29bce245198a6fa5f2be6576a7",
@@ -1101,7 +1511,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "glass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 21
  },
  "ce29e75eb129406f874e0423ab8869c3": {
   "uid": "ce29e75eb129406f874e0423ab8869c3",
@@ -1117,7 +1532,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Window alpha=0.25 BLEND",
+   "glass_surr alpha=1.0 OPAQUE",
+   "Glass_I alpha=0.389 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 21
  },
  "4f8ff01b643d4795a6a515478a6fd9d6": {
   "uid": "4f8ff01b643d4795a6a515478a6fd9d6",
@@ -1133,7 +1555,15 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Translucent_Glass_Gray alpha=0.41 BLEND",
+   "glass1 alpha=0.7 BLEND",
+   "glass_black1 alpha=1.0 OPAQUE",
+   "glass_stripes1 alpha=0.51 BLEND"
+  ],
+  "n_transparent_materials": 8,
+  "n_materials": 60
  },
  "522aadf343784a8491263717b2eb3b28": {
   "uid": "522aadf343784a8491263717b2eb3b28",
@@ -1149,7 +1579,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "vehicle_vehglass_001-material alpha=1.0 OPAQUE",
+   "int_glass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 43
  },
  "faab251f15c44d73ba81d2ba1ec9faa9": {
   "uid": "faab251f15c44d73ba81d2ba1ec9faa9",
@@ -1165,7 +1601,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Glassback__env_1 alpha=0.4 BLEND",
+   "Glassfront__env1 alpha=0.4 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 53
  },
  "8d5769e1b39a4cc3a17b1dcc56e2a982": {
   "uid": "8d5769e1b39a4cc3a17b1dcc56e2a982",
@@ -1181,7 +1623,13 @@
   "glass_certainty": "proven",
   "flat_shell": true,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Rearwindowpart1Mtl alpha=1 OPAQUE",
+   "Windows1Mtl alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 64
  },
  "7cfbf41c94fc4f8a988ab441af702722": {
   "uid": "7cfbf41c94fc4f8a988ab441af702722",
@@ -1197,7 +1645,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "mat_windows alpha=0.456 BLEND",
+   "mat_glass alpha=0.065 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 58
  },
  "1acb615324254e53a04860e786ade136": {
   "uid": "1acb615324254e53a04860e786ade136",
@@ -1213,15 +1667,22 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Fit_Glass_surr alpha=1.0 OPAQUE",
+   "FIT_Glass alpha=0.25 BLEND",
+   "Translucent_Glass_Gray alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 41
  },
  "974385e940e84fd6bf47ca04c2e69313": {
   "uid": "974385e940e84fd6bf47ca04c2e69313",
   "name": "2020 Honda Fit Hybrid",
   "faces": 110475,
-  "verdict": "PASS",
-  "original_verdict": "PASS",
-  "reason": "GR-generation Fit/Jazz. Glazing transparent, wheel covers consistent, headlamp internals sharp, shut lines defined. Note the source material renders bright green rather than neutral, so verify the first respray. Stamp decides colours.",
+  "verdict": "FAIL",
+  "original_verdict": "PASS (2026-08-09)",
+  "reason": "DOWNGRADED 2026-08-11 on the glazing ruling, which did not exist when this car was passed. Opaque glazing proven from the glTF: Glass_1, Glas_2, D_glass, glass_D_M all alphaMode OPAQUE at alpha 1.0, and ZERO transparent materials in the whole file (35 materials). The clear glass in its sheet is manufactured by the render worker's transmission override. Original note: GR-generation Fit/Jazz. Glazing transparent, wheel covers consistent, headlamp internals sharp, shut lines defined. Note the source material renders bright green rather than neutral, so verify the first respray. Stamp decides colours.",
   "model_slug": "jazz",
   "year": 2020,
   "body_style": "hatchback",
@@ -1229,7 +1690,15 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Glass_1 alpha=1.0 OPAQUE",
+   "Glas_2 alpha=1.0 OPAQUE",
+   "D_glass alpha=1.0 OPAQUE",
+   "glass_D_M alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 35
  },
  "0dc6454d74a241e5a08fac82ce2826b2": {
   "uid": "0dc6454d74a241e5a08fac82ce2826b2",
@@ -1237,7 +1706,7 @@
   "faces": 96069,
   "verdict": "PASS",
   "original_verdict": "PASS",
-  "reason": "11th-gen Civic RS e:HEV saloon, top-tier modern asset. Clear glazing, black multi-spokes consistent, sharp LED headlamp internals, grille and shut lines crisp. Stamp decides colours.",
+  "reason": "[GLAZING UNRESOLVED - probe says ambiguous/proven; ambiguous and inferred-opaque must NOT be failed on the probe alone, so this keeps its PASS pending a magenta-backlight render of the shipped GLB.] 11th-gen Civic RS e:HEV saloon, top-tier modern asset. Clear glazing, black multi-spokes consistent, sharp LED headlamp internals, grille and shut lines crisp. Stamp decides colours.",
   "model_slug": "civic",
   "year": 2025,
   "body_style": "saloon",
@@ -1245,7 +1714,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "window alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 1,
+  "n_materials": 21,
+  "needs_glazing_confirmation": true
  },
  "707599838a074af69ec5137db597a037": {
   "uid": "707599838a074af69ec5137db597a037",
@@ -1261,7 +1736,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 4
  },
  "18e956bcf53b4f1191a9fb6b5b70efe2": {
   "uid": "18e956bcf53b4f1191a9fb6b5b70efe2",
@@ -1269,7 +1747,7 @@
   "faces": 94436,
   "verdict": "PASS",
   "original_verdict": "PASS",
-  "reason": "EG Civic three-door. Glazing transparent with cabin visible, steel wheels consistent on all four corners, headlamp lens divisions and amber indicators modelled, shut lines defined. Mid-tier surfacing but no defect. Stamp decides colours.",
+  "reason": "[GLAZING UNRESOLVED - probe says opaque/inferred; ambiguous and inferred-opaque must NOT be failed on the probe alone, so this keeps its PASS pending a magenta-backlight render of the shipped GLB.] EG Civic three-door. Glazing transparent with cabin visible, steel wheels consistent on all four corners, headlamp lens divisions and amber indicators modelled, shut lines defined. Mid-tier surfacing but no defect. Stamp decides colours.",
   "model_slug": "civic",
   "year": 1993,
   "body_style": "hatchback",
@@ -1277,7 +1755,11 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 5,
+  "needs_glazing_confirmation": true
  },
  "5c9d6d8d4aeb49e1bce91b10092b45ba": {
   "uid": "5c9d6d8d4aeb49e1bce91b10092b45ba",
@@ -1293,7 +1775,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "window_1 alpha=1.0 OPAQUE",
+   "window alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 33
  },
  "0fe37a6d26f34767860d3063fab993c2": {
   "uid": "0fe37a6d26f34767860d3063fab993c2",
@@ -1309,7 +1797,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Windows1Mtl alpha=1 OPAQUE",
+   "Windows2Mtl alpha=1 OPAQUE",
+   "Glass1Mtl alpha=0.102 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 26
  },
  "3565e8277a484f14b45c6888ca61a2b2": {
   "uid": "3565e8277a484f14b45c6888ca61a2b2",
@@ -1325,7 +1820,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)"
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "glazing_materials": [
+   "Vitre alpha=0.31 BLEND",
+   "Vitre_noir alpha=1.0 OPAQUE",
+   "Phare_vitre alpha=0.36 BLEND"
+  ],
+  "n_transparent_materials": 9,
+  "n_materials": 26
  },
  "14f577e88a2646988c0a106e9cb7475d": {
   "uid": "14f577e88a2646988c0a106e9cb7475d",
@@ -1337,7 +1839,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "DelSol_glass_int_MAT alpha=1.0 OPAQUE",
+   "DelSol_glass_MAT alpha=1.0 OPAQUE",
+   "glass_invisible alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 1,
+  "n_materials": 34
  },
  "dcb06694cf9b4afeb02412a5f939f6a8": {
   "uid": "dcb06694cf9b4afeb02412a5f939f6a8",
@@ -1349,7 +1858,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 1,
+  "n_materials": 2
  },
  "240e909a9180493ebdc1def6cbdde88f": {
   "uid": "240e909a9180493ebdc1def6cbdde88f",
@@ -1361,7 +1873,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 1,
+  "n_materials": 1
  },
  "54c665c8055f45c9a1868dc63e56ce8f": {
   "uid": "54c665c8055f45c9a1868dc63e56ce8f",
@@ -1373,7 +1888,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Glass2Mtl alpha=1.0 OPAQUE",
+   "Meshesautocarledglass1Mtl alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 31
  },
  "6da0242475be43649237efa16ea1061f": {
   "uid": "6da0242475be43649237efa16ea1061f",
@@ -1385,7 +1906,15 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Window_B-C alpha=0.5 BLEND",
+   "Window_A-B alpha=0.5 BLEND",
+   "Windshield alpha=0.5 BLEND",
+   "Rear_Windshield alpha=0.5 BLEND"
+  ],
+  "n_transparent_materials": 16,
+  "n_materials": 84
  },
  "c4c2acfb6fe9444c85364ddd8c8454b0": {
   "uid": "c4c2acfb6fe9444c85364ddd8c8454b0",
@@ -1397,7 +1926,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "CivicHonda_CivicEJ1F1_1993Window_Material1 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 7,
+  "n_materials": 22
  },
  "07444f75a4de4e50a5d66439c0045681": {
   "uid": "07444f75a4de4e50a5d66439c0045681",
@@ -1409,7 +1943,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 1,
+  "n_materials": 15
  },
  "510f17c0c6334e64a044144680eecd44": {
   "uid": "510f17c0c6334e64a044144680eecd44",
@@ -1421,7 +1958,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Honda_Civic15VTECCrewRecycled_1994Window_Material alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 18
  },
  "83e599e8a1ef42a5bd205fa4891878e9": {
   "uid": "83e599e8a1ef42a5bd205fa4891878e9",
@@ -1433,7 +1975,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 33,
+  "n_materials": 35
  },
  "1daea6b886c34945bbb54c74dd6ef362": {
   "uid": "1daea6b886c34945bbb54c74dd6ef362",
@@ -1445,7 +1990,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "hHonda_S2000F2_2001Window_Material1 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 16
  },
  "74b6738f201e4568a734ca042052446b": {
   "uid": "74b6738f201e4568a734ca042052446b",
@@ -1457,7 +2007,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "hondaM_Glass_WindowFront_Low1 alpha=0.25 BLEND",
+   "hondaM_Glass_WindowSurroundFront_Low1 alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 9,
+  "n_materials": 29
  },
  "ee97c386eb34457d9101267179ffbc44": {
   "uid": "ee97c386eb34457d9101267179ffbc44",
@@ -1469,7 +2025,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "hHonda_S2000TNR2_2001Window_Material1 alpha=0.25 BLEND",
+   "DARK_GLASS alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 6,
+  "n_materials": 25
  },
  "091a68d0e2104fe0b8c8f43f9cf49177": {
   "uid": "091a68d0e2104fe0b8c8f43f9cf49177",
@@ -1481,7 +2043,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "hHonda_S2000TNR1_2001Window_Material1 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 26
  },
  "21d6858f7f424deaaf22c9a72737ed99": {
   "uid": "21d6858f7f424deaaf22c9a72737ed99",
@@ -1493,7 +2060,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "hHonda_S2000TNR5_2001Window_Material1 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 6,
+  "n_materials": 25
  },
  "922c636df4b34c539e6b8cefabc38cbb": {
   "uid": "922c636df4b34c539e6b8cefabc38cbb",
@@ -1505,7 +2077,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 1,
+  "n_materials": 10
  },
  "ace699cb884d457a939a890eeb5d725a": {
   "uid": "ace699cb884d457a939a890eeb5d725a",
@@ -1517,7 +2092,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 9,
+  "n_materials": 26
  },
  "e30ef65ebbcc4526bc727edcce93c9b3": {
   "uid": "e30ef65ebbcc4526bc727edcce93c9b3",
@@ -1529,7 +2107,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Windows alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 15,
+  "n_materials": 32
  },
  "81e93a17257e436984c3c864448996cd": {
   "uid": "81e93a17257e436984c3c864448996cd",
@@ -1541,7 +2124,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "glass alpha=0.123 BLEND",
+   "clearglass alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 1,
+  "n_materials": 20
  },
  "b1c95f6b26c64795a4badc1065871947": {
   "uid": "b1c95f6b26c64795a4badc1065871947",
@@ -1553,7 +2142,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Windows alpha=0.0 BLEND",
+   "EXT_WINDOW alpha=0.5 BLEND",
+   "GLASS alpha=0.3 BLEND"
+  ],
+  "n_transparent_materials": 9,
+  "n_materials": 47
  },
  "f2b768d4df884fd48e6ec863c9a51f9c": {
   "uid": "f2b768d4df884fd48e6ec863c9a51f9c",
@@ -1565,7 +2161,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Honda_CivicTypeRVaris_2017Window_Material alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 23
  },
  "6e8ac95d5b114ee2bd67b8ec98b2c1be": {
   "uid": "6e8ac95d5b114ee2bd67b8ec98b2c1be",
@@ -1577,7 +2178,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "LB_1Honda_LBNSXRewardRecycled_2017Window_Material1 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 12,
+  "n_materials": 23
  },
  "af667ff977224cedaa4961571babe6fd": {
   "uid": "af667ff977224cedaa4961571babe6fd",
@@ -1589,7 +2195,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "hHonda_S2000TNR3_2001Window_Material1 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 7,
+  "n_materials": 22
  },
  "aad70ad7eae3467e99c71ef0c7150138": {
   "uid": "aad70ad7eae3467e99c71ef0c7150138",
@@ -1601,7 +2212,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 6,
+  "n_materials": 26
  },
  "49a04d3d1a8b4f419e3f305ac694c345": {
   "uid": "49a04d3d1a8b4f419e3f305ac694c345",
@@ -1613,7 +2227,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "NSXLBHonda_NSXLBWorksReward_1992WindowA_Material1 alpha=1.0 BLEND"
+  ],
+  "n_transparent_materials": 10,
+  "n_materials": 27
  },
  "bc203abddc364630916fc916f57f3c69": {
   "uid": "bc203abddc364630916fc916f57f3c69",
@@ -1625,7 +2244,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "hHonda_S2000TNR4_2001Window_Material1 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 6,
+  "n_materials": 25
  },
  "a7f516576078496caee738edf39acd14": {
   "uid": "a7f516576078496caee738edf39acd14",
@@ -1637,7 +2261,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "int_glass alpha=1.0 OPAQUE",
+   "glass alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 34
  },
  "23c6cd35c1bb462ca28db1e61415b2de": {
   "uid": "23c6cd35c1bb462ca28db1e61415b2de",
@@ -1649,7 +2279,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "IntegraMI_Glass1 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 7,
+  "n_materials": 27
  },
  "adbfaeddc4714fbda2049c300ca42bcd": {
   "uid": "adbfaeddc4714fbda2049c300ca42bcd",
@@ -1661,7 +2296,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 16,
+  "n_materials": 64
  },
  "bbcc1cbb7f774b8ab9e94639a058e188": {
   "uid": "bbcc1cbb7f774b8ab9e94639a058e188",
@@ -1673,7 +2311,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 1,
+  "n_materials": 16
  },
  "58e7efac08a54a2b9a163bf194cb2a5c": {
   "uid": "58e7efac08a54a2b9a163bf194cb2a5c",
@@ -1685,7 +2326,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "windscreen.3 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 34
  },
  "c36abddc783445fbb00f72356c576fca": {
   "uid": "c36abddc783445fbb00f72356c576fca",
@@ -1697,7 +2343,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Windshieldid1330011Mtl alpha=0.712 BLEND"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 20
  },
  "19fa477435e547a3a97e1fcf9db08cdf": {
   "uid": "19fa477435e547a3a97e1fcf9db08cdf",
@@ -1709,7 +2360,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 1,
+  "n_materials": 16
  },
  "1e3be91c28104f6489b42248884327fe": {
   "uid": "1e3be91c28104f6489b42248884327fe",
@@ -1721,7 +2375,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Translucent_Glass_Gray alpha=0.502 BLEND",
+   "LCD_SCreen1 alpha=1.0 OPAQUE",
+   "Smoked_Glass alpha=0.851 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 55
  },
  "e995edf588ac4e1a80abe060556bc290": {
   "uid": "e995edf588ac4e1a80abe060556bc290",
@@ -1733,7 +2394,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "etk800_glass alpha=0.352 BLEND",
+   "glasss_001 alpha=1.0 OPAQUE",
+   "glasss alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 20
  },
  "f2288e2b992a4afd906371729401258f": {
   "uid": "f2288e2b992a4afd906371729401258f",
@@ -1745,7 +2413,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "windscreen.3 alpha=0.1 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 34
  },
  "5e5be8eef32e4da7aafb23e1fcbabb4a": {
   "uid": "5e5be8eef32e4da7aafb23e1fcbabb4a",
@@ -1757,7 +2430,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 1,
+  "n_materials": 10
  },
  "780c395d9cb2465998f923d67b392f7e": {
   "uid": "780c395d9cb2465998f923d67b392f7e",
@@ -1769,7 +2445,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 1,
+  "n_materials": 8
  },
  "d172550512a542719e45cbb3ad10c254": {
   "uid": "d172550512a542719e45cbb3ad10c254",
@@ -1781,7 +2460,15 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Glass alpha=1.0 OPAQUE",
+   "Glass_0 alpha=1.0 OPAQUE",
+   "etk800_screen alpha=1.0 OPAQUE",
+   "glass alpha=0.3 BLEND"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 39
  },
  "3ab991e2ff594036aac203e1dd96cc1c": {
   "uid": "3ab991e2ff594036aac203e1dd96cc1c",
@@ -1793,7 +2480,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 5,
+  "n_materials": 67
  },
  "428b1f3671af4e5bae092fe0ce9dd439": {
   "uid": "428b1f3671af4e5bae092fe0ce9dd439",
@@ -1805,7 +2495,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "00_-_Honda_Civic_-_Vidro_Laranja alpha=0.2 BLEND",
+   "00_-_Honda_Civic_-_Vidros alpha=0.1 BLEND",
+   "00_-_Honda_Civic_-_Vidros_Vermelhos alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 15
  },
  "d5706370dfb14f489a346ad2d999f75e": {
   "uid": "d5706370dfb14f489a346ad2d999f75e",
@@ -1817,7 +2514,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 6,
+  "n_materials": 19
  },
  "c79e8d2fb2ba4796b5bbb07730413cdf": {
   "uid": "c79e8d2fb2ba4796b5bbb07730413cdf",
@@ -1829,7 +2529,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Honda_CivicTypeRVaris_2017Window_Material alpha=0.474 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 23
  },
  "2519659e30544a4fb425d81c525bf7aa": {
   "uid": "2519659e30544a4fb425d81c525bf7aa",
@@ -1841,7 +2546,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "pessima_glass alpha=0.15 BLEND"
+  ],
+  "n_transparent_materials": 1,
+  "n_materials": 26
  },
  "d4bfde1082584c3ab83170b3bda5fbe7": {
   "uid": "d4bfde1082584c3ab83170b3bda5fbe7",
@@ -1853,7 +2563,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 3,
+  "n_materials": 43
  },
  "de8f6daeb2c6408189b1f784469c6c36": {
   "uid": "de8f6daeb2c6408189b1f784469c6c36",
@@ -1865,7 +2578,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Vitres alpha=0.692 BLEND",
+   "Glass_clean alpha=0.25 BLEND",
+   "Glass alpha=1.0 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 34
  },
  "2860258b33234265aff7e8f98085d27d": {
   "uid": "2860258b33234265aff7e8f98085d27d",
@@ -1877,7 +2597,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "window alpha=0.126 BLEND",
+   "glass.015 alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 41
  },
  "4abcb6055b8a48aba379c97d268d33b6": {
   "uid": "4abcb6055b8a48aba379c97d268d33b6",
@@ -1889,7 +2615,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "6a8799c153ce474a94d8388ed1ee0290": {
   "uid": "6a8799c153ce474a94d8388ed1ee0290",
@@ -1901,7 +2630,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "4af89645fb7045d18da377e966e6de11": {
   "uid": "4af89645fb7045d18da377e966e6de11",
@@ -1913,7 +2645,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "glass alpha=1.0 OPAQUE",
+   "rglas alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 52
  },
  "ee33696a9a8343ac8da48075c023a840": {
   "uid": "ee33696a9a8343ac8da48075c023a840",
@@ -1923,9 +2661,15 @@
   "reason": "Opaque glazing (glTF probe: verdict opaque, certainty proven) and a FLAT-SHELL signature - every untextured material shares one baseColorFactor, so tyres, glass and body are the same value. The sheet shows dark glass only because the render worker forces transmission onto a glass-named material; the shipped file has none.",
   "glass_probe": "opaque",
   "glass_certainty": "proven",
-  "flat_shell": true,
+  "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "meowcivic_windowglass alpha=1 OPAQUE",
+   "meowcivic_glass alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 47
  },
  "9dbd5b0109a946ad83a067dd25d833fe": {
   "uid": "9dbd5b0109a946ad83a067dd25d833fe",
@@ -1935,9 +2679,17 @@
   "reason": "Opaque glazing (probe: opaque, proven) plus the flat-shell signature. Also out of UK scope - the RL1 Odyssey is a North-American minivan; the UK equivalent was badged Shuttle and is a different vehicle.",
   "glass_probe": "opaque",
   "glass_certainty": "proven",
-  "flat_shell": true,
+  "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "odyssey02_spadie_windows alpha=1 OPAQUE",
+   "odyssey02_spadie_glass_tinted alpha=1 OPAQUE",
+   "glass_invisible.004 alpha=1 OPAQUE",
+   "odyssey02_spadie_glass alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 35
  },
  "107c79f09d9e4def88db373baf8538ad": {
   "uid": "107c79f09d9e4def88db373baf8538ad",
@@ -1949,7 +2701,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "282daa30bda44dd0b81e245778eda309": {
   "uid": "282daa30bda44dd0b81e245778eda309",
@@ -1961,7 +2716,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "045b9221007747ae87e459710f5287ff": {
   "uid": "045b9221007747ae87e459710f5287ff",
@@ -1973,7 +2731,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 5
  },
  "7f67c5f4e8f648ae903067a70997bfdf": {
   "uid": "7f67c5f4e8f648ae903067a70997bfdf",
@@ -1985,7 +2746,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "acty12_glass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 16
  },
  "4f0bc69d6fbe4b638991bf943745fd32": {
   "uid": "4f0bc69d6fbe4b638991bf943745fd32",
@@ -1997,7 +2763,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 15
  },
  "a974c3e226fd40a29507eb59105b56cc": {
   "uid": "a974c3e226fd40a29507eb59105b56cc",
@@ -2009,7 +2778,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "5c3cceebabf84b89b5d526d4cc4c33dc": {
   "uid": "5c3cceebabf84b89b5d526d4cc4c33dc",
@@ -2021,7 +2793,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "plt2017_glass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 25
  },
  "54c227442c4b42dfbaa25e474ad9d736": {
   "uid": "54c227442c4b42dfbaa25e474ad9d736",
@@ -2033,7 +2810,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "d1200600b7a343a5883875bea15c0fee": {
   "uid": "d1200600b7a343a5883875bea15c0fee",
@@ -2045,7 +2825,13 @@
   "glass_certainty": "proven",
   "flat_shell": true,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "M_2022_Honda_Civic_Hatchback_CLEAR_GLASS_SG alpha=1 OPAQUE",
+   "M_2022_Honda_Civic_Hatchback_Dark_GlassSG alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 39
  },
  "36836cb2048841aba1bd14cc5952fb26": {
   "uid": "36836cb2048841aba1bd14cc5952fb26",
@@ -2057,7 +2843,12 @@
   "glass_certainty": "proven",
   "flat_shell": true,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "glass alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 21
  },
  "74e6be24a94949868ea19df8c8b2e5b0": {
   "uid": "74e6be24a94949868ea19df8c8b2e5b0",
@@ -2069,7 +2860,13 @@
   "glass_certainty": "proven",
   "flat_shell": true,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "window alpha=1 OPAQUE",
+   "window.001 alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 61
  },
  "89820f6164ec491da844f286b612d8d4": {
   "uid": "89820f6164ec491da844f286b612d8d4",
@@ -2081,7 +2878,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 2
  },
  "91c6673859444597bf006a0ef8570005": {
   "uid": "91c6673859444597bf006a0ef8570005",
@@ -2093,7 +2893,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "GlassClear alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 27
  },
  "7e76dbd4a03f43a9be77bdb357988222": {
   "uid": "7e76dbd4a03f43a9be77bdb357988222",
@@ -2105,7 +2910,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "bc4c8aba368c4dbeb596336e30de7413": {
   "uid": "bc4c8aba368c4dbeb596336e30de7413",
@@ -2117,7 +2925,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "ebbe60dc70d847359ff2102d807c34f4": {
   "uid": "ebbe60dc70d847359ff2102d807c34f4",
@@ -2129,7 +2940,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 3
  },
  "e511fa250abd4feebaeedad5707ff1f7": {
   "uid": "e511fa250abd4feebaeedad5707ff1f7",
@@ -2141,7 +2955,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "71420d0028a74eaaab1d20b69c8d384b": {
   "uid": "71420d0028a74eaaab1d20b69c8d384b",
@@ -2153,7 +2970,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 35
  },
  "426650a51329462b90630d0c6b7f4864": {
   "uid": "426650a51329462b90630d0c6b7f4864",
@@ -2165,7 +2985,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "704a1a2de33447ecba43fdc10659418a": {
   "uid": "704a1a2de33447ecba43fdc10659418a",
@@ -2177,7 +3000,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "1aa5ba6949ef4f17b3fe2db741316140": {
   "uid": "1aa5ba6949ef4f17b3fe2db741316140",
@@ -2189,7 +3015,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "4ce59679c6f7404ba14bc5961d1bf5a8": {
   "uid": "4ce59679c6f7404ba14bc5961d1bf5a8",
@@ -2201,7 +3030,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 13
  },
  "ed84f71d475b420b898d8fa2fad736e2": {
   "uid": "ed84f71d475b420b898d8fa2fad736e2",
@@ -2213,7 +3045,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "9eecd62e2a074aa1b811c425dd6c1ed8": {
   "uid": "9eecd62e2a074aa1b811c425dd6c1ed8",
@@ -2225,7 +3060,12 @@
   "glass_certainty": "proven",
   "flat_shell": true,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Glass.001 alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 22
  },
  "4ea67e5044674ad3901d043d09654896": {
   "uid": "4ea67e5044674ad3901d043d09654896",
@@ -2237,7 +3077,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 24
  },
  "df6cc80e266841b3a836a1f2a07c7883": {
   "uid": "df6cc80e266841b3a836a1f2a07c7883",
@@ -2249,7 +3092,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 3
  },
  "e853fb5a30784ecfbd6698a8afb3547d": {
   "uid": "e853fb5a30784ecfbd6698a8afb3547d",
@@ -2261,7 +3107,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Glass alpha=1 OPAQUE",
+   "Glass.sensing alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 31
  },
  "557740c36367423cb39c2d2b8f052319": {
   "uid": "557740c36367423cb39c2d2b8f052319",
@@ -2273,7 +3125,15 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "glass.004 alpha=1 OPAQUE",
+   "glass alpha=1 OPAQUE",
+   "glass.002 alpha=1 OPAQUE",
+   "glass.003 alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 30
  },
  "1515f1cf481c4aa88e692c73d5d212be": {
   "uid": "1515f1cf481c4aa88e692c73d5d212be",
@@ -2285,7 +3145,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "b6c38a087e37457c80688f140fdb5459": {
   "uid": "b6c38a087e37457c80688f140fdb5459",
@@ -2297,7 +3160,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 6
  },
  "8058caeca1494aeb8d5e206c84190f23": {
   "uid": "8058caeca1494aeb8d5e206c84190f23",
@@ -2309,7 +3175,10 @@
   "glass_certainty": "inferred",
   "flat_shell": true,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 5
  },
  "2caba35f6b3c41feacee3820b2441765": {
   "uid": "2caba35f6b3c41feacee3820b2441765",
@@ -2321,7 +3190,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "49c2999808ac4a3890f61019cb02b877": {
   "uid": "49c2999808ac4a3890f61019cb02b877",
@@ -2333,7 +3205,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "501155a70c214347adb4a3aa63f74e3e": {
   "uid": "501155a70c214347adb4a3aa63f74e3e",
@@ -2345,7 +3220,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "0d8ad62aec054eff86fb563a4ab63478": {
   "uid": "0d8ad62aec054eff86fb563a4ab63478",
@@ -2357,7 +3235,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "9c03068fa014492cac9177d42dd02380": {
   "uid": "9c03068fa014492cac9177d42dd02380",
@@ -2369,7 +3250,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "7136cc0589624bf29ccd216ad42eda0e": {
   "uid": "7136cc0589624bf29ccd216ad42eda0e",
@@ -2381,7 +3265,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "11b3c5fce1dc44be9b431f9fd473affe": {
   "uid": "11b3c5fce1dc44be9b431f9fd473affe",
@@ -2393,7 +3280,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 28
  },
  "8ffe1103505a459a881bcb1349ec122c": {
   "uid": "8ffe1103505a459a881bcb1349ec122c",
@@ -2405,7 +3295,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "e80f9e16a1b6437d82370858f71b7feb": {
   "uid": "e80f9e16a1b6437d82370858f71b7feb",
@@ -2417,7 +3310,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "5d87d306854a42908e31fde846bfdb5e": {
   "uid": "5d87d306854a42908e31fde846bfdb5e",
@@ -2429,7 +3325,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 27
  },
  "332305fc0b894bd2b5c0b514d30f128f": {
   "uid": "332305fc0b894bd2b5c0b514d30f128f",
@@ -2441,7 +3340,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 84
  },
  "04d6fe05284841489c5b32baada06b38": {
   "uid": "04d6fe05284841489c5b32baada06b38",
@@ -2453,7 +3355,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "2863668d84784fca987f2b493f5e6c1b": {
   "uid": "2863668d84784fca987f2b493f5e6c1b",
@@ -2465,7 +3370,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "da3ed72a753f45df908a1e67492fc091": {
   "uid": "da3ed72a753f45df908a1e67492fc091",
@@ -2477,7 +3385,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 3
  },
  "77ed946c2b724b0da24e0bec40113857": {
   "uid": "77ed946c2b724b0da24e0bec40113857",
@@ -2489,7 +3400,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 37
  },
  "f8986369b779446589da41084d11cab1": {
   "uid": "f8986369b779446589da41084d11cab1",
@@ -2501,7 +3415,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 10
  },
  "d666b0598dce422a8362e020ff8583e1": {
   "uid": "d666b0598dce422a8362e020ff8583e1",
@@ -2513,7 +3430,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "f6599d32bea04e59bcdbe100b830147e": {
   "uid": "f6599d32bea04e59bcdbe100b830147e",
@@ -2525,7 +3445,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "82ce6e2bfceb4c78943d7eadbd2184ab": {
   "uid": "82ce6e2bfceb4c78943d7eadbd2184ab",
@@ -2537,7 +3460,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "6c38f928f13645fe9fe6683a75ef9a85": {
   "uid": "6c38f928f13645fe9fe6683a75ef9a85",
@@ -2549,7 +3475,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 1
  },
  "d7cc203582f04a3ba79773e9d40015ee": {
   "uid": "d7cc203582f04a3ba79773e9d40015ee",
@@ -2561,7 +3490,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "blackglass__spec alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 63
  },
  "9c7b1af7599843bb975245566c891831": {
   "uid": "9c7b1af7599843bb975245566c891831",
@@ -2573,7 +3507,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Prelude_glass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 68
  },
  "5d32c451e9774c4a8d8dc382263ac803": {
   "uid": "5d32c451e9774c4a8d8dc382263ac803",
@@ -2585,7 +3524,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Int_Steklo alpha=1.0 OPAQUE",
+   "glass_invisible alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 91
  },
  "d4ed8b68556c41c6a4578ed327a5e167": {
   "uid": "d4ed8b68556c41c6a4578ed327a5e167",
@@ -2597,7 +3542,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "HondaNSX_glass alpha=1 OPAQUE",
+   "glass_invisible alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 39
  },
  "b0c754a1aff24e31bcf8a8df7c92d721": {
   "uid": "b0c754a1aff24e31bcf8a8df7c92d721",
@@ -2609,7 +3560,15 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "civ_glass2 alpha=1 OPAQUE",
+   "civ_glass3 alpha=1 OPAQUE",
+   "glass_invisible alpha=1.0 OPAQUE",
+   "civ_clearglass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 67
  },
  "0d18a009ab0d4a80af74150e1194ff8a": {
   "uid": "0d18a009ab0d4a80af74150e1194ff8a",
@@ -2621,7 +3580,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "pessima_glass alpha=1 OPAQUE",
+   "covet_glass alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 38
  },
  "c7544b42ffe54768bc6d07e065dc2bc2": {
   "uid": "c7544b42ffe54768bc6d07e065dc2bc2",
@@ -2633,7 +3598,13 @@
   "glass_certainty": "proven",
   "flat_shell": true,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "civiccc1_windows alpha=1 OPAQUE",
+   "civicccglass alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 59
  },
  "beadd53f4d1543ca83ce8ac385df0f77": {
   "uid": "beadd53f4d1543ca83ce8ac385df0f77",
@@ -2645,7 +3616,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "pessima_glass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 11
  },
  "08e400feccab4a4aad8663f4d9ecc489": {
   "uid": "08e400feccab4a4aad8663f4d9ecc489",
@@ -2657,7 +3633,15 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "windscreen_ok.1 alpha=1 OPAQUE",
+   "windscreen_ok.0 alpha=1 OPAQUE",
+   "windscreen_ok.2 alpha=1 OPAQUE",
+   "glass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 32
  },
  "795c9d1e12d9410c83caf0301271febc": {
   "uid": "795c9d1e12d9410c83caf0301271febc",
@@ -2669,7 +3653,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 32
  },
  "30ed7f6e118b4be9903af095a8817e74": {
   "uid": "30ed7f6e118b4be9903af095a8817e74",
@@ -2681,7 +3668,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 0,
+  "n_materials": 42
  },
  "ac710a69fb8d4ddf93c08766e77e7246": {
   "uid": "ac710a69fb8d4ddf93c08766e77e7246",
@@ -2689,11 +3679,14 @@
   "faces": 163046,
   "verdict": "FAIL",
   "reason": "No glazing surface: all 25 materials are OPAQUE at alpha 1.0 (Polish naming - karoseria, opona, chrom) and the only transparent ones are lamp lenses (lamp__car 0.19, swiatla_tyl_szkl 0.5). At 5x the window apertures are open, showing the seats and steering wheel directly with no glass surface between.",
-  "glass_probe": "clear",
+  "glass_probe": "ambiguous",
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 4,
+  "n_materials": 25
  },
  "466f02314ad04d03a5fd84e07eee1753": {
   "uid": "466f02314ad04d03a5fd84e07eee1753",
@@ -2705,7 +3698,15 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "glass_normal alpha=1.0 OPAQUE",
+   "glass_pianoblack alpha=1.0 OPAQUE",
+   "f_glass_sticker alpha=1 OPAQUE",
+   "glass_privacy alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 34
  },
  "1fc6677a4e0b41aa8e5fd1a783536357": {
   "uid": "1fc6677a4e0b41aa8e5fd1a783536357",
@@ -2717,7 +3718,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "glass alpha=1.0 OPAQUE",
+   "Glass_-_Glass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 51
  },
  "a8204f405b5b44f6a6e2fcc927ae03b9": {
   "uid": "a8204f405b5b44f6a6e2fcc927ae03b9",
@@ -2729,7 +3736,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "screen alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 7
  },
  "e5a90b4439884b61b8bb16225e199164": {
   "uid": "e5a90b4439884b61b8bb16225e199164",
@@ -2741,7 +3753,13 @@
   "glass_certainty": "proven",
   "flat_shell": true,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "glasser alpha=1 OPAQUE",
+   "glass alpha=1 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 19
  },
  "b7b2f419a63c4a24957c015feb6fd5fb": {
   "uid": "b7b2f419a63c4a24957c015feb6fd5fb",
@@ -2753,7 +3771,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "FK8.Windshield alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 0,
+  "n_materials": 31
  },
  "573d5c2480324a879ee15221ee426160": {
   "uid": "573d5c2480324a879ee15221ee426160",
@@ -2765,7 +3788,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 15,
+  "n_materials": 27
  },
  "7655ee9ebb5e4db791001b5a69e6e491": {
   "uid": "7655ee9ebb5e4db791001b5a69e6e491",
@@ -2777,7 +3803,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 5,
+  "n_materials": 17
  },
  "952af0eb7a3849a382358e6f94cdf535": {
   "uid": "952af0eb7a3849a382358e6f94cdf535",
@@ -2789,7 +3818,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 4,
+  "n_materials": 16
  },
  "d2b88f3b0b2848f0bee35995eaffa99a": {
   "uid": "d2b88f3b0b2848f0bee35995eaffa99a",
@@ -2801,7 +3833,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "integraVehicle_Exterior_mm_windows1 alpha=0.25 BLEND",
+   "glass_surr alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 23
  },
  "0241b902a54440d78808aa1fe0db636c": {
   "uid": "0241b902a54440d78808aa1fe0db636c",
@@ -2813,7 +3851,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 3,
+  "n_materials": 16
  },
  "db88d2cc21654a4eb73ec9f0c2a7e113": {
   "uid": "db88d2cc21654a4eb73ec9f0c2a7e113",
@@ -2825,7 +3866,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 8,
+  "n_materials": 25
  },
  "636a876d48514ae2980872cab4e4fea4": {
   "uid": "636a876d48514ae2980872cab4e4fea4",
@@ -2837,7 +3881,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "glass_ex alpha=1 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 12
  },
  "f4db212b0ee24337bb6f3170fac1efd9": {
   "uid": "f4db212b0ee24337bb6f3170fac1efd9",
@@ -2849,7 +3898,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "hHonda_S2000TNR0_2001Window_Material1 alpha=0.25 BLEND",
+   "glass_surr alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 6,
+  "n_materials": 23
  },
  "c06f564420a242f4a863aac68a7c1be3": {
   "uid": "c06f564420a242f4a863aac68a7c1be3",
@@ -2861,7 +3916,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "CoPwindow1 alpha=0.25 BLEND",
+   "Lod0black_glass1 alpha=1.0 OPAQUE",
+   "Lod0glass1 alpha=0.45 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 23
  },
  "e9411dfa29f745d6a69021d8ce19d2e7": {
   "uid": "e9411dfa29f745d6a69021d8ce19d2e7",
@@ -2873,7 +3935,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "NSXWindow_Material1 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 22
  },
  "c312252877204a44999bf084d1e19118": {
   "uid": "c312252877204a44999bf084d1e19118",
@@ -2885,7 +3952,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Honda_CivicTypeRElite_2017Window_Material alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 20
  },
  "78ec2b54b63744d48d037b6e41c5004a": {
   "uid": "78ec2b54b63744d48d037b6e41c5004a",
@@ -2897,7 +3969,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "NSXWindow_Material1 alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 20
  },
  "2d190ebe466143cd8417b1b76e685458": {
   "uid": "2d190ebe466143cd8417b1b76e685458",
@@ -2909,7 +3986,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Honda_CivicTypeRRewardRecycled_2023Window_Material alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 27
  },
  "55a283b166f24747898b8ade1f6982e0": {
   "uid": "55a283b166f24747898b8ade1f6982e0",
@@ -2921,7 +4003,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Window_Surround alpha=1.0 OPAQUE",
+   "Honda_CivicTypeRRewardRecycled_2023Window_Material alpha=0.5 BLEND",
+   "Screen alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 11,
+  "n_materials": 30
  },
  "2699779eb8e34344835b77ecc60ec05e": {
   "uid": "2699779eb8e34344835b77ecc60ec05e",
@@ -2933,7 +4022,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Honda_CivicTypeRRewardRecycled_2023Window_Material alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 27
  },
  "af33495c63524621aa39415441881784": {
   "uid": "af33495c63524621aa39415441881784",
@@ -2945,7 +4039,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Windshieldid1330011Mtl alpha=0.712 BLEND"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 18
  },
  "b9bf9858ec8e44fdae11c415dd59ae35": {
   "uid": "b9bf9858ec8e44fdae11c415dd59ae35",
@@ -2957,7 +4056,15 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "civ_glass2 alpha=0.187 BLEND",
+   "civ_glass3 alpha=1.0 OPAQUE",
+   "civ_clearglass alpha=1 OPAQUE",
+   "civ_glass alpha=0.496 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 61
  },
  "5b12a8457db644fa9d0d1daa34e145b9": {
   "uid": "5b12a8457db644fa9d0d1daa34e145b9",
@@ -2969,7 +4076,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 16
  },
  "f57a01c50c314ad893b8255047f24c20": {
   "uid": "f57a01c50c314ad893b8255047f24c20",
@@ -2981,7 +4094,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "civiccc1_windows alpha=0.934 BLEND",
+   "civicccglass alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 8,
+  "n_materials": 65
  },
  "32fd41652974477382eec6d9eae87c06": {
   "uid": "32fd41652974477382eec6d9eae87c06",
@@ -2993,7 +4112,15 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "windows alpha=0.25 BLEND",
+   "stickers_windows alpha=1 MASK",
+   "blitz_glass alpha=1 OPAQUE",
+   "int_glass alpha=0.25 BLEND"
+  ],
+  "n_transparent_materials": 17,
+  "n_materials": 66
  },
  "5e30d9a74d024b248dc5141bc87acfec": {
   "uid": "5e30d9a74d024b248dc5141bc87acfec",
@@ -3005,7 +4132,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "2022_Honda_Civic_Hatchback_CLEAR_GLASS_SG alpha=0.4 BLEND",
+   "2022_Honda_Civic_Hatchback_Dark_GlassSG alpha=0.58 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 36
  },
  "d2351585a3c34030a1041f4483b11203": {
   "uid": "d2351585a3c34030a1041f4483b11203",
@@ -3017,7 +4150,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "civ_glass2 alpha=0.187 BLEND",
+   "civ_glass3 alpha=1.0 OPAQUE",
+   "civ_glass alpha=0.496 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 60
  },
  "eff1039487e349dfbae8ef3e1f050f65": {
   "uid": "eff1039487e349dfbae8ef3e1f050f65",
@@ -3029,7 +4169,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "civ_glass2 alpha=0.187 BLEND",
+   "civ_glass3 alpha=1.0 OPAQUE",
+   "civ_glass alpha=0.496 BLEND"
+  ],
+  "n_transparent_materials": 3,
+  "n_materials": 60
  },
  "2f54931a83744e048cacc3886d6cf5da": {
   "uid": "2f54931a83744e048cacc3886d6cf5da",
@@ -3041,7 +4188,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Windshieldid1330011Mtl alpha=0.553 BLEND"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 18
  },
  "407a8981be2d45a388d7280d9b931663": {
   "uid": "407a8981be2d45a388d7280d9b931663",
@@ -3053,7 +4205,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Honda_CivicTypeRRewardRecycled_2023WindowInside_Material alpha=0.5 BLEND",
+   "Honda_CivicTypeRRewardRecycled_2023Window_Material alpha=0.5 BLEND"
+  ],
+  "n_transparent_materials": 11,
+  "n_materials": 29
  },
  "6bc1e361969849eb99b45c933fb85e2f": {
   "uid": "6bc1e361969849eb99b45c933fb85e2f",
@@ -3065,7 +4223,14 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "CivicTypeR_glass alpha=0.25 BLEND",
+   "CivicTypeR_glass.001 alpha=1.0 OPAQUE",
+   "CivicTypeR_screen alpha=1.0 OPAQUE"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 96
  },
  "78ec3ad32e0e44b9ac8d1440b5feab12": {
   "uid": "78ec3ad32e0e44b9ac8d1440b5feab12",
@@ -3077,7 +4242,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 4,
+  "n_materials": 53
  },
  "b867c2b90edc46528db9f8ccc348d19a": {
   "uid": "b867c2b90edc46528db9f8ccc348d19a",
@@ -3089,7 +4257,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 7,
+  "n_materials": 18
  },
  "d287a3da58b3476a8b398fc4334916b8": {
   "uid": "d287a3da58b3476a8b398fc4334916b8",
@@ -3101,7 +4272,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "glass.002 alpha=0.25 BLEND",
+   "glass.001 alpha=0.1 BLEND"
+  ],
+  "n_transparent_materials": 2,
+  "n_materials": 37
  },
  "1cc15628a00a4739a6b6c01128927c8d": {
   "uid": "1cc15628a00a4739a6b6c01128927c8d",
@@ -3113,7 +4290,10 @@
   "glass_certainty": "inferred",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [],
+  "n_transparent_materials": 3,
+  "n_materials": 20
  },
  "1c70ad48fd48487e8ffa3aa199dc8b1b": {
   "uid": "1c70ad48fd48487e8ffa3aa199dc8b1b",
@@ -3125,7 +4305,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "NSXLBHonda_NSXLBWorksReward_1992WindowA_Material1 alpha=1.0 BLEND"
+  ],
+  "n_transparent_materials": 8,
+  "n_materials": 27
  },
  "cd14d8ae6720480c8b67c5059a1e2700": {
   "uid": "cd14d8ae6720480c8b67c5059a1e2700",
@@ -3137,7 +4322,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "NSX_Glass alpha=0.876 BLEND"
+  ],
+  "n_transparent_materials": 1,
+  "n_materials": 8
  },
  "f92c00db810c45938653cbaacd239a36": {
   "uid": "f92c00db810c45938653cbaacd239a36",
@@ -3149,7 +4339,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Translucent_Glass_Gray alpha=0.161 BLEND",
+   "Translucent_Glass_Blue alpha=0.502 BLEND"
+  ],
+  "n_transparent_materials": 19,
+  "n_materials": 38
  },
  "f489944f34754ee0b37b53edcc7bfb5a": {
   "uid": "f489944f34754ee0b37b53edcc7bfb5a",
@@ -3161,7 +4357,13 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "LOD_A_INT_GLASS_FRONT_mm_windowsMat alpha=1.0 OPAQUE",
+   "Glass alpha=0.48 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 21
  },
  "2881ec9c483c439db1c5cb92b890d91d": {
   "uid": "2881ec9c483c439db1c5cb92b890d91d",
@@ -3173,7 +4375,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Honda_CivicTypeRRewardRecycled_2023Window_Material alpha=0.5 BLEND"
+  ],
+  "n_transparent_materials": 8,
+  "n_materials": 28
  },
  "a2639a3eedef45398ddafc75479f401a": {
   "uid": "a2639a3eedef45398ddafc75479f401a",
@@ -3185,7 +4392,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "untitledMI_Glass1 alpha=0.529 BLEND"
+  ],
+  "n_transparent_materials": 5,
+  "n_materials": 21
  },
  "f9b7ed4d1d4d4996b612007c4e8ec568": {
   "uid": "f9b7ed4d1d4d4996b612007c4e8ec568",
@@ -3197,6 +4409,12 @@
   "glass_certainty": "proven",
   "flat_shell": false,
   "alpha_shell": false,
-  "audited": "2026-08-11 (glTF probe + eye)"
+  "audited": "2026-08-11 (glTF probe + eye)",
+  "glazing_materials": [
+   "Translucent_Glass_Gray alpha=0.29 BLEND",
+   "glasstransparen1 alpha=0.522 BLEND"
+  ],
+  "n_transparent_materials": 4,
+  "n_materials": 29
  }
 }
