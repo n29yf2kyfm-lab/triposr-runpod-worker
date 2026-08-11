@@ -734,6 +734,98 @@ the shipped glTF; (2) if it is textured, EXTRACT the texture and take its mean -
 XF precedent, and it is what settled #28/#30 here; (3) 5x crop of the tread face in
 front34/rear34 against a same-batch control; (4) a red control render. Never the 1x sheet.
 
+## A glTF TYRE probe cannot work. Measured, 0/8. Do not build it again (2026-08-11)
+
+Written for the Mercedes retro-audit to run this file's own "cheapest decisive order for a
+tyre verdict" steps 1 and 2 automatically. `pipeline/ingest/tyre_probe.py` reads the tyre
+material's `baseColorFactor` and, when textured, extracts the texture from the BIN chunk by
+HTTP Range and takes its mean. Then it was validated against `retro_tyre_audit.json` -- 131
+live cars whose tyre verdicts were settled by RED control re-renders, live posters and 5x
+crops, the strongest ground truth this project has:
+
+    ground truth "tyre-fail"  (8 cars) -> 0 caught      RECALL 0/8
+    ground truth "ok"       (108 cars) -> 13 flagged    FALSE ALARMS
+
+**Zero recall. Not low -- zero.** Five of the eight real failures carry a genuinely DARK
+tyre material (`tire` 0.106, `rubber` 0.012, `tire` 0.008) which the probe reads correctly
+as black; the other three name no tyre material at all. This is the same finding as
+"passing and failing cars carry identical tyre materials", reproduced from the other side.
+There is no regex and no threshold that fixes it -- the defect is a per-CORNER render
+artefact in the wheel meshes and the rig, and the material table does not contain it.
+
+The file is kept as an EVIDENCE RECORDER with this result in its docstring so the next agent
+does not rebuild it. A "black" reading rules out the body-paint-over-rubber and flat-shell
+mechanisms for that car; it does NOT clear the car of the per-corner defect. Say which.
+
+Two bugs found while validating, both of which MANUFACTURED failures out of missing
+measurements, and both worth knowing for any texture reader:
+- textures behind `KHR_texture_basisu` / `EXT_texture_webp` keep the image index in
+  `texture["extensions"][ext]["source"]` and may omit `texture["source"]` entirely, so a
+  plain `t["source"]` raises `KeyError`. Two Toyotas were unreadable and therefore "pale".
+- an unreadable or absent texture must score UNKNOWN, never "opaque". The factor on a
+  textured material is a MULTIPLIER and is `[1,1,1]` on nearly all of them, so treating a
+  failed read as opaque white invents a tyre failure.
+The ranged BIN read was verified byte-exact against a full download (mean sRGB 23.4 both
+ways) -- it does not pull whole meshes, so it is cheap enough to use for evidence.
+
+## Cross-reference every wave PASS against QUARANTINED sourceReferenceId (2026-08-11)
+
+Defects track the SOURCE car, not the upload -- this file already says so, and the Mercedes
+wave showed what it costs to not act on it. **8 of the wave's 70 clean passes were the exact
+source uid of a car already quarantined live**: the CLK 55 AMG, an SLS AMG, the GLS, the
+X-Class, the C-class S202 estate and three of the W124 family. Six had been pulled for white
+tyres and two for the per-side wheel-void fault. Every one of them passed the wave audit
+cleanly, because the wave audit re-derives quality from the sheet and the glTF and neither
+of those carries the defect that got the car pulled.
+
+**Make this a standing step before any CLEAN list is handed over:**
+
+```python
+byuid = {}                       # sourceReferenceId -> catalogue entries
+for e in catalogue:
+    if e.get("sourceReferenceId"): byuid.setdefault(e["sourceReferenceId"], []).append(e)
+# then for each pass: any entry with publicationStatus == "quarantined" is a hard hold
+```
+
+`REJECTS.json` only records what the owner scrapped at REVIEW; it does not record what was
+quarantined after going live. The catalogue is the other half of that ledger and nothing was
+checking it. Also worth reporting from the same join: how many passes are already live under
+an existing assetId (30 of 70 on Mercedes), because "70 keeps" and "32 genuinely new meshes"
+are very different numbers to hand someone.
+
+## glass_probe: texture-alpha is not evidence of OPACITY either (2026-08-11, Mercedes)
+
+Re-validated against `PORSCHE_GLASS.json` before the Mercedes retro-audit, as this file
+requires. It scored 103/107 and **three of the four misses were in the dangerous direction**
+-- ground-truth-CLEAR cars banded "faded", which is a cull.
+
+The last one standing was the mirror image of the bug the texture-alpha extension was
+written to fix. `Porsche 911 GT3 RS (semester 2)` (5fd62615) names no glazing at all and its
+only transparent materials are `UV6_TX`/`UV4_TX`, BLEND with 27 textures and factor alpha
+1.0. The final fall-through treated "no glazing name AND no factor-transparent material" as
+OPAQUE, so texture-alpha transparency was counted as evidence of opacity. It is ground-truth
+CLEAR. Now returns **"ambiguous"** -- which must be routed to the eye and never failed, and
+which `glass_texture_alpha.py` resolves. 106/107, sole miss in the safe direction.
+
+**Two naming traps this wave added, both of which would have culled good cars:**
+- **A misspelt nameplate is not a missing one.** A GL350 (live AND in the wave) spells its
+  glazing **`Widnwos`**, alpha 0.947 BLEND, genuinely transparent; its only glass-NAMED
+  material is `GlassParts1Mtl`, the window SURROUND, correctly opaque. Same class as the
+  Mazdaspeed 3's `Windiow`. The probe degrades to "ambiguous", which is the right behaviour.
+- **`backlight` means the REAR WINDSCREEN as often as it means a tail lamp.** `LAMPY`
+  matches "light" and so eats `backlight_glass`. On `mercedes-benz-a-class-2018-w12-v1` the
+  only plain window material is opaque and the only transparent ones are `backlight_glass`
+  at 0.25 -- so whether that car has real glazing turns entirely on which sense is meant.
+  Genuinely undecidable from the file; it needs a backlight render. Do not fail it.
+
+**Scale of what this gate catches on a pre-ruling marque:** 77 of 196 Mercedes wave
+candidates have opaque glazing, 57 proven, and **64 of the 66 hard material fails carry a
+glazing name that matches the worker's override list** -- so their sheets render perfect
+clear glass and always did. Eight cars the 2026-08-08 Mercedes audit PASSED are hard
+material fails on this evidence. Always record, per car, whether ANY material name matches
+the handler's regex: it decides whether the sheet is admissible for glazing at all. On
+Mercedes only 36 of 196 sheets were.
+
 ## Read the material NAMES, not just their numbers (2026-08-11)
 
 A Mazda 5 in this wave has clean geometry, correctly black tyres (`tire.001` at 0.01) and
