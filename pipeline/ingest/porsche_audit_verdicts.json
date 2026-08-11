@@ -2066,5 +2066,99 @@
    "front headlamps read as plain white ovals with no lens detail",
    "tyres ARE black rubber and glazing IS transparent with the cage visible - the failure is modelling detail, not materials"
   ]
+ },
+ {
+  "uid": "b8488f9425d84381a4efe5521db7f111",
+  "name": "2025 Porsche 911 Targa 4 GTS",
+  "verdict": "pass",
+  "reasons": [
+   "992.2 Targa 4 GTS proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible; Targa hoop correct",
+   "black rim faces present in all four views",
+   "lamp internals, intake slats, T-Hybrid script and shut lines defined",
+   "near-identical to b668f8a3 - leave the grouping to dupe_check"
+  ]
+ },
+ {
+  "uid": "b868c5883b9c4ff889bc7f439e01cd7e",
+  "name": "1992 Porsche 911 964 Turbo S 3.6",
+  "verdict": "pass",
+  "reasons": [
+   "964 Turbo S proportions read instantly; front 3/4 strong; teal paint finish premium",
+   "tyres are NEUTRAL BLACK RUBBER against a teal body and white Cup rims - the coloured-body control, so no body paint on the rubber",
+   "glazing transparent, cabin visible",
+   "white rim faces present in all four views, red calipers behind",
+   "round lamp internals, engine-lid slats and shut lines defined",
+   "same source car as 27240ad1 (93,629 vs 93,656 faces) - leave the grouping to dupe_check"
+  ]
+ },
+ {
+  "uid": "ba01afbaf32846e598db315be3507db3",
+  "name": "2022 Porsche 911 GT3 (992)",
+  "verdict": "pass",
+  "reasons": [
+   "992 GT3 proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible through the side glass",
+   "rim faces present in all four views; the blue outer-lip finish is cosmetic wheel spec, not a missing material",
+   "lamp internals, splitter, swan-neck wing and shut lines defined",
+   "road-legal GT3, in scope"
+  ]
+ },
+ {
+  "uid": "be2ffcfb789a40c5b8ebaa23c880caf6",
+  "name": "Porsche Cayman S 2011",
+  "verdict": "pass",
+  "reasons": [
+   "987.2 Cayman S proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible through the side glass",
+   "dark rim faces present in all four views",
+   "lamp internals, side intakes and shut lines defined",
+   "number plate carries a HUMSTER3D vendor watermark texture"
+  ]
+ },
+ {
+  "uid": "bf0c4a7481d5404ba92765ac20f0e915",
+  "name": "Porsche 911 Carrera 4 GTS Beauty of Germany",
+  "verdict": "fail",
+  "reasons": [
+   "LOW-POLY AND UNSMOOTHED: the roof, wings and both bumpers render as hard-edged polygon facets with jagged specular breaks across every panel",
+   "wheels are featureless dark discs - no rim face, no spokes, no hub, in any of the four views",
+   "no lamp internals, no grille depth, no shut lines",
+   "glazing indistinguishable from the body under the near-black material"
+  ]
+ },
+ {
+  "uid": "c17bf53d95a14da1a1c7b24470b4ced2",
+  "name": "porsche_cayman_2017",
+  "verdict": "fail",
+  "reasons": [
+   "BAKED SCENE WELDED INTO THE MESH, proven from the glTF: three large slabs of 7.42x5.98x0.24, 7.16x5.77x0.17 and 7.05x5.68x0.06 metres sit around a 5.06m car (Object_10) - a stacked display podium that renders with the car in every view",
+   "byte-identical geometry to 1479234973, which carries the same podium plus the striped floor and hazard kerb",
+   "tyres are black and rim faces present; the failure is the baked environment"
+  ]
+ },
+ {
+  "uid": "c3a5a86e0ba94446b2e5037bfcc767ee",
+  "name": "Porsche 911 GT2",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: a 930-based competition build in full elf sponsor livery - elf lettering on doors and rear quarters, red/orange stripe wrap, biplane rear wing",
+   "model quality is also below the bar: wheels are plain white discs with no rim face, tyres read pale grey not black, panels and bumpers are toy-simple with no shut lines"
+  ]
+ },
+ {
+  "uid": "c599b3aa82eb46f7ba3bb2d22bd9dfc6",
+  "name": "2017 Porsche 718 Cayman (982)",
+  "verdict": "pass",
+  "reasons": [
+   "982 Cayman proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands against white rims",
+   "glazing transparent, cabin visible through the side glass",
+   "white rim faces present in all four views, red calipers behind",
+   "lamp internals, side intakes and shut lines defined"
+  ]
  }
 ]
