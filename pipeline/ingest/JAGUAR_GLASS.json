@@ -131,5 +131,75 @@
   "verdict": "clear",
   "evidence": "gltf",
   "note": "'Wind_Shield' alphaMode=BLEND alpha=0.25 + KHR_materials_transmission, plus 'aiStandardSurface35' and 'aiStandardSurface30' the same"
+ },
+ {
+  "uid": "8728eaa6caab4231b07d6666b0adb845",
+  "name": "2017 Jaguar F-Type R Convertible",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "BLEND glazing material with baseColor alpha below 1.0 among 32 materials / 22 textures"
+ },
+ {
+  "uid": "b338091497c64d31bef9bd7de49ade81",
+  "name": "Jaguar F-Type",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "'glass_clear'-family material, alphaMode=BLEND alpha=0.25 + KHR_materials_transmission (same mesh as 38a30b5f)"
+ },
+ {
+  "uid": "986b7c38738d41a9acce05be220b744d",
+  "name": "Jaguar F-type READ DESCRIPTION!!",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "transparent glazing present, but the car is out of scope as a stance build so it does not reach the clean list"
+ },
+ {
+  "uid": "e4db712ef86348e186a7a98dafaae22c",
+  "name": "Jaguar F type R coupe",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "17 materials, 0 textures, zero transparent; FLAT-SHELL signature"
+ },
+ {
+  "uid": "a837c982a5d343359709e740ea985e5a",
+  "name": "Jaguar F-type",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 0 textures, zero transparent; single-material clay shell"
+ },
+ {
+  "uid": "96a02fdf15e448768c6115bb6711a8b7",
+  "name": "2010 Jaguar XK Coupe",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 1 texture, zero transparent — a photogrammetry scan of a house, no glazing geometry exists"
+ },
+ {
+  "uid": "333a053cfef3424fb0194e4f3a4472d9",
+  "name": "2016 Jaguar F-Type Project 7",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "BLEND glazing material with baseColor alpha below 1.0 among 25 materials / 28 textures"
+ },
+ {
+  "uid": "7dd7bc17b4564f6eb03542ad6cab6dda",
+  "name": "1992 Jaguar XJ220",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "BLEND glazing material with baseColor alpha below 1.0 among 26 materials / 24 textures"
+ },
+ {
+  "uid": "a085c957253c450fb6ebbda8cef5cf9c",
+  "name": "Jaguar F-Type Shooting Break",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 0 textures, zero transparent; single-material clay shell"
+ },
+ {
+  "uid": "d4eaa0a2adce444990f94346119c06bd",
+  "name": "2015 Jaguar F-Type",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 1 texture, zero transparent; scan with the glass painted into the texture"
  }
 ]

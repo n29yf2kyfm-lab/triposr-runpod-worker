@@ -215,5 +215,117 @@
    "glazing transparent ('Wind_Shield' alphaMode=BLEND alpha=0.25 + KHR_materials_transmission, plus two more transmission materials)",
    "door and bonnet shut lines defined, lamp internals present; grille mesh a little shallow but within the bar; cov=0.512"
   ]
+ },
+ {
+  "uid": "8728eaa6caab4231b07d6666b0adb845",
+  "name": "2017 Jaguar F-Type R Convertible",
+  "verdict": "fail",
+  "reasons": [
+   "RIM FACE ABSENT on the front wheel of one side: in the side and front34 tiles it is a completely featureless black cylinder — no spoke arms, no lug nuts, no centre cap, no caliper — while the REAR wheel in the same tile shows full multi-spoke detail, which rules out the rig's one-sided key light",
+   "front34_L and rear34 (the other side) show both rims complete, the 2-vs-2 pattern of a mirrored wheel with inverted geometry",
+   "otherwise a good facelift F-Type R convertible: clear glazing, black tyres, clean panels, cov=0.370 — re-source candidate"
+  ]
+ },
+ {
+  "uid": "b338091497c64d31bef9bd7de49ade81",
+  "name": "Jaguar F-Type",
+  "verdict": "pass",
+  "reasons": [
+   "facelift F-Type R coupe: proportions read instantly, front 3/4 strong, consistent across all four tiles",
+   "tyres plainly black rubber, black tread face against the white body in every tile",
+   "rim faces present with full spoke detail and red calipers in all four tiles",
+   "glazing transparent in the shipped glb (BLEND, alpha below 1.0); interior resolvable through the glass in rear34",
+   "grille honeycomb crisp, headlamp internals sharp, shut lines defined; cov=0.163, recolourable",
+   "DUPLICATE of 38a30b5f9e6648c99f8d68f4ea0611b6 ('jaguar car colour type', 461,241 f vs this 461,246 f) — same mesh, two uploads. This is the copy to keep: 5 faces more AND a title that actually names the model."
+  ]
+ },
+ {
+  "uid": "986b7c38738d41a9acce05be220b744d",
+  "name": "Jaguar F-type READ DESCRIPTION!!",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE — stance build: slammed to the deck with no arch gap, deep-dish concave aftermarket 5-spokes, and a stretched tyre reduced to a thin band around the rim. Not an OEM road-spec F-Type.",
+   "renders pink under a forced silver colour (cov=0.895), so the sheet colour is untrustworthy as well"
+  ]
+ },
+ {
+  "uid": "e4db712ef86348e186a7a98dafaae22c",
+  "name": "Jaguar F type R coupe",
+  "verdict": "fail",
+  "reasons": [
+   "does not read as the car it claims: long bonnet, upright glasshouse, wrong grille and lamp shapes — the proportions are not an F-Type from any angle",
+   "panel surfaces melted, no door or bonnet shut lines anywhere",
+   "floating chrome sphere artefact beside the A-pillar in rear34",
+   "FLAT SHELL in the glTF: 17 materials, 0 textures, zero transparent — glazing opaque"
+  ]
+ },
+ {
+  "uid": "a837c982a5d343359709e740ea985e5a",
+  "name": "Jaguar F-type",
+  "verdict": "fail",
+  "reasons": [
+   "single-material flat clay shell: 1 material, 0 textures, zero transparent materials in the file",
+   "tyres render in body white, tread included, all four corners",
+   "glazing opaque body-white — the roof and window apertures are the same surface as the paint",
+   "cov=1.000, so a respray would repaint glass and tyres too",
+   "roof panel faceted"
+  ]
+ },
+ {
+  "uid": "96a02fdf15e448768c6115bb6711a8b7",
+  "name": "2010 Jaguar XK Coupe",
+  "verdict": "fail",
+  "reasons": [
+   "NOT A CAR MODEL: a photogrammetry scan of a house and its driveway. The Jaguar XK is one of several vehicles parked in the capture and occupies a small fraction of the mesh; the bulk of the geometry is brickwork, windows and a garden wall.",
+   "should be added to REJECTS.json so a re-sweep does not re-download and re-render it"
+  ]
+ },
+ {
+  "uid": "333a053cfef3424fb0194e4f3a4472d9",
+  "name": "2016 Jaguar F-Type Project 7",
+  "verdict": "pass",
+  "reasons": [
+   "F-Type Project 7: proportions read instantly including the speedster deck and rear fairing; front 3/4 strong; consistent across all four tiles",
+   "tyres plainly black rubber, black tread face in every tile",
+   "rim faces present with full spoke detail and yellow calipers in all four tiles",
+   "glazing transparent in the shipped glb (25 materials, 28 textures, BLEND glazing)",
+   "grille mesh crisp, headlamp internals sharp, shut lines defined; cov=0.201, recolourable",
+   "road car: Project 7 is a 250-unit road-registered F-Type, in scope"
+  ]
+ },
+ {
+  "uid": "7dd7bc17b4564f6eb03542ad6cab6dda",
+  "name": "1992 Jaguar XJ220",
+  "verdict": "pass",
+  "reasons": [
+   "XJ220: proportions read instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "tyres plainly black rubber with moulded XJ220 sidewall lettering; black tread in every tile",
+   "rim faces present with dished faces and centre caps on all four corners",
+   "glazing transparent in the shipped glb (26 materials, 24 textures, BLEND glazing)",
+   "door and bonnet shut lines defined, engine-bay louvres modelled, reflections clean, paint premium; cov=0.703",
+   "road car: the XJ220 is road-registered, in scope despite being a halo"
+  ]
+ },
+ {
+  "uid": "a085c957253c450fb6ebbda8cef5cf9c",
+  "name": "Jaguar F-Type Shooting Break",
+  "verdict": "fail",
+  "reasons": [
+   "single-material flat clay shell: 1 material, 0 textures, zero transparent materials in the file",
+   "tyres, rims and glazing all render in body white; cov=1.000",
+   "no grille aperture mesh, no lamp internals, no door or bonnet shut lines anywhere",
+   "also not a production car — Jaguar never built an F-Type Shooting Brake, so no UK registration decodes to it"
+  ]
+ },
+ {
+  "uid": "d4eaa0a2adce444990f94346119c06bd",
+  "name": "2015 Jaguar F-Type",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: the cobbled ground plane is baked into the mesh and visible under the car in every tile, with torn boundaries around it",
+   "paint carries baked lighting and capture mottling; panels soft",
+   "glazing opaque — 1 material, 1 texture, zero transparent materials; the windscreen is painted into the texture",
+   "cov=1.000"
+  ]
  }
 ]
