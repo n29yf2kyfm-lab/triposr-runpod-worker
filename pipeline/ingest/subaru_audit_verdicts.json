@@ -134,5 +134,15 @@
    "glazing genuinely clear: seats, headrests, B-pillar and door cards all resolve through the side glass in both the front34 and side tiles",
    "projector headlamp internals, defined grille mesh, crisp door and boot shut lines, red calipers; rim faces present in all four tiles"
   ]
+ },
+ {
+  "uid": "c76f2409dc6246c59fcaa54c1cb91f99",
+  "name": "Subaru Legacy MK4 Wagon 2003-2009",
+  "verdict": "fail",
+  "reasons": [
+   "wheels not mounted: three arches hold only a floating brake disc and a single loose wheel sits under the sill between the axles - same assembly-kit defect as the Merc_TV Outback MK5",
+   "front bumper and nose render as unfinished dark grey untextured geometry against the white body",
+   "glazing shows faceted grey triangulation artefacts through the rear side and tailgate windows rather than clear glass"
+  ]
  }
 ]
