@@ -1456,5 +1456,98 @@
    "tyres render body-white, indistinguishable from the rim and the bodywork",
    "no lamp internals; grille and intake openings are flat white recesses"
   ]
+ },
+ {
+  "uid": "45982328a4bc458199da0c9f95b4f28d",
+  "name": "2016 Porsche 911 Turbo S (991.2)",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 Turbo S proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, interior visible",
+   "black rim faces present in all four views, red calipers behind",
+   "lamp internals, intake slats and shut lines defined"
+  ]
+ },
+ {
+  "uid": "4b52cfc4ce32438aa732880fae81c047",
+  "name": "2017 Porsche 718 Boxster S",
+  "verdict": "pass",
+  "reasons": [
+   "982 Boxster S proportions read instantly, roof up; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands against white rims",
+   "glazing transparent, cabin visible through the side glass",
+   "white rim faces present in all four views, red calipers behind",
+   "front intakes, lamp internals and shut lines defined"
+  ]
+ },
+ {
+  "uid": "4b7c65bfd3bd4eacb14183cfbcb07565",
+  "name": "Porsche 911 GT3 - Satin Black",
+  "verdict": "pass",
+  "reasons": [
+   "992 GT3 proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cage and seats visible through the side glass",
+   "black rim faces present in all four views",
+   "lamp internals, splitter, swan-neck wing and shut lines defined",
+   "road-legal GT3, in scope"
+  ]
+ },
+ {
+  "uid": "4b989f15962e457cbf9f2990528bce52",
+  "name": "Porsche 911 Carrera 4S",
+  "verdict": "pass",
+  "reasons": [
+   "991 Carrera 4S proportions read instantly; front 3/4 strong; grey paint finish premium and reflections clean at full res",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent - mirror and cabin visible through the side glass at full res, checked because the dark body made the greenhouse read opaque at tile scale",
+   "dark rim faces present in all four views, yellow calipers behind",
+   "headlamp projector internals, bonnet and door shut lines defined"
+  ]
+ },
+ {
+  "uid": "4cef7c1e22ab40fd937507eae9a62cd8",
+  "name": "2015 - Porsche 911 Carrera S | Mid-Poly",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 Carrera S proportions read instantly; front 3/4 strong; silver finish clean",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, interior visible in the side view",
+   "black rim faces present in all four views",
+   "lamp internals, intake slats and shut lines defined",
+   "same source mesh family as 2d336e24 and 7fd67e40 - leave the grouping to dupe_check"
+  ]
+ },
+ {
+  "uid": "4d69c02602874258a6133a3557215d3f",
+  "name": "Porsche 911 Carrera 4S",
+  "verdict": "fail",
+  "reasons": [
+   "GLAZING FAILS: at full res the side glass, rear window and windscreen are all opaque body-white with no interior whatsoever - a clay body with real wheels bolted on",
+   "no lamp internals: the headlamp is a plain white bulge",
+   "no shut lines beyond a faint door outline, no door handle recess, no grille depth",
+   "tyres ARE genuine black rubber on silver rims with red calipers - the failure is the body, not the wheels"
+  ]
+ },
+ {
+  "uid": "4f3ce0e365d64af38b23a26dfb7f8d57",
+  "name": "porsche cayman gt4",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: this is the Cayman GT4 Clubsport race car, confirmed at full res - welded roll cage through the side glass, polycarbonate side window with a sliding vent hatch, riveted door with a black service hatch, competition number panel, race splitter and swan-neck wing, centre-lock wheels on treadless Pirelli slicks",
+   "track-only; takes no road registration"
+  ]
+ },
+ {
+  "uid": "51cca123a7f045999d8d70cde093b3a6",
+  "name": "Classic porsche 911 80s",
+  "verdict": "fail",
+  "reasons": [
+   "LOW-POLY BLOCK-OUT, not a finished model: the body is visibly faceted, the roof and wings are flat planes meeting at hard edges",
+   "no glazing - the window apertures are open holes with no glass",
+   "headlamps are plain domes, no grille, no bumpers of any depth, no shut lines",
+   "wheels are simple discs; tyres read grey, not black rubber"
+  ]
  }
 ]
