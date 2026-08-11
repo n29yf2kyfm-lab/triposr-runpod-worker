@@ -679,8 +679,8 @@
   "qualityGrade": "B",
   "technicalStatus": "pending",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials windowglass(a=1,OPAQUE), clearglass(a=1,OPAQUE), darkglass(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on th",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -864,7 +864,8 @@
    "variantsHash": "28f3aed8250cf2af3ea9996c0f4276eeb39eadd2",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -3047,8 +3048,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials windowglass(a=1,OPAQUE), clearglass(a=1,OPAQUE), darkglass(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on th",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -3228,7 +3229,8 @@
    "variantsHash": "68c1329530c78357f43d619350f6731719a7404b",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -3274,8 +3276,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (wrong-vehicle): shipped GLB is a 2023 LEXUS RX500h F SPORT. 68 of 71 materials are 'M_2023_Lexus_RX500h_F_Sport_*'; fingerprint (71,153928,240) identical to live lexus-rx-v1, same first material name. Poster (16 Jul) predates the GLB (30 Jul 22:22).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -3462,7 +3464,8 @@
    "variantsHash": "c5204b6092124ba95ad76677903f5c62280097e9",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -3507,8 +3510,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials glass_window(a=1,OPAQUE), glass_clear(a=1,OPAQUE), glass_white(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing o",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -3695,7 +3698,8 @@
    "variantsHash": "2cc197e697d0ca39e3aa0d6f21b07d1ea7be1de2",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -4644,8 +4648,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (wrong-vehicle): shipped GLB is a 2023 VOLKSWAGEN POLO GTI. 22 of 25 materials are 'M_2023_Volkswagen_Polo_GTI_*', and (materials,triangles,meshes)=(25,151285,114) is IDENTICAL to live entry volkswagen-polo-2023-v1, which carries the same first material name. Poster (16 Jul) predates the GLB (30 Jul 22:22) and is stale.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -4832,7 +4836,8 @@
    "variantsHash": "fd102342fcb7a86f1d95a0b1280a5772786c8ad0",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -5557,8 +5562,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials glass.dark(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on this car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -5737,7 +5742,8 @@
    "variantsHash": "9baafaedc3b9066f48e259f41b380a1b43334fe9",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -9730,8 +9736,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (soft-body): 5x: hard-edged faceted dark-blue polygon patches across the bonnet, wing and front bumper (low-poly shading break, not a reflection); headlamps are featureless white blobs; front bumper is a stack of overlapping shells. Glazing is genuinely transparent (vidros 0.707) -- the fail is surfacing.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -9894,7 +9900,8 @@
    "variantsHash": "49d4bd61bbdb941a8ac7b154fbc3f07532596f2e",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -12822,8 +12829,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials INT_GLASS(a=1,OPAQUE), DLR_NM_GLASS(a=1,OPAQUE), LOGO_GLASS(a=1,OPAQUE), TOP_GLASS_NM(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INA",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -13002,7 +13009,8 @@
    "variantsHash": "0d3c4c45e0c501af2550bc558f7d830c576cf5af",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -13040,8 +13048,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials DLR_NM_GLASS(a=1,OPAQUE), EXT_GLASS(a=1,OPAQUE), INT_GLASS(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on th",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -13228,7 +13236,8 @@
    "variantsHash": "64a49a0a56585ea137ee7d0b93bdee21458d8247",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -15591,8 +15600,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (wrong-vehicle): shipped GLB is a BMW 320i. Materials include 'bmw_logo'; fingerprint (34,169983,113) identical to live bmw-320i-2023-v1, same first material name 'exterior_black_gloss.003'.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -15780,7 +15789,8 @@
    "variantsHash": "525c2f28fca3cc3b98da626f6f6acf60724c6b1b",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -19300,8 +19310,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (wrong-vehicle): shipped GLB is a 2023 HONDA ZR-V. ALL 33 materials are 'M_2023_Honda_ZR_V__JP__*' (incl. 'Honda_Hybrid_Badge' and two Japanese_License_Plate materials); fingerprint (33,150969,150) identical to live honda-zr-v-2023-v1, same first material name. Poster (17 Jul) predates the GLB (30 Jul 22:24).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -19489,7 +19499,8 @@
    "variantsHash": "022a512bd461816872573ae8d7fb21b40f132cbe",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -22100,8 +22111,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials logan3_glass(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on this car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -22290,7 +22301,8 @@
    "method": "render",
    "at": "2026-07-23"
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -23011,8 +23023,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials ext_window(a=1,OPAQUE), int_window(a=1,OPAQUE), ext_glass(a=1,OPAQUE), ext_glass_tl(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADM",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -23191,7 +23203,8 @@
    "variantsHash": "c9880e52620836767c7d616453994c90afba278e",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -24137,8 +24150,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials Translucent_Glass_Gray(a=1,OPAQUE), glass0__trans_1(a=1,OPAQUE), Translucent_Glass_Green_Dark(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poste",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -24318,7 +24331,8 @@
    "variantsHash": "cc292c2b6113fad6ece5101dad6e1bc67be7a9b7",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -25966,8 +25980,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe returned AMBIGUOUS, not opaque - but only because lamp lenses are the file's sole factor-transparent materials. The window pane material '2022_Hyundai_IONIQ_5_Windows' is alphaMode=OPAQUE, alpha 1.0, untextured, no transmission; every transparent material in the file is a head/tail/brake lamp lens. This is the documented Jeep Gladiator 5165e4ab pattern (glass_probe.py LAMPY note). JUDG",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -26154,7 +26168,8 @@
    "variantsHash": "9977b733edeb48e0989511fe860960ec9b35de79",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -27115,8 +27130,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe returned AMBIGUOUS, not opaque - but only because lamp lenses are the file's sole factor-transparent materials. The window pane material 'bBMW_M8RewardRecycled_2020Window_Material1' is alphaMode=OPAQUE, alpha 1.0, untextured, no transmission; every transparent material in the file is a head/tail/brake lamp lens. This is the documented Jeep Gladiator 5165e4ab pattern (glass_probe.py LAM",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -27303,7 +27318,8 @@
    "variantsHash": "f673964537d3443e8b4cbfb57fa341c60eb458dd",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -28028,8 +28044,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials ext_window(a=1,OPAQUE), int_window(a=1,OPAQUE), ext_glass(a=1,OPAQUE), ext_glass_tl(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADM",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -28216,7 +28232,8 @@
    "variantsHash": "a862fade0966efa71525169105e661daf2b9665a",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -29405,8 +29422,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials Translucent_Glass_Gray(a=1,OPAQUE), glass0__trans_1(a=1,OPAQUE), Translucent_Glass_Green_Dark(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poste",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -29583,7 +29600,8 @@
    "variantsHash": "c7c19329509442ce4c84b32f4d4adbaa807a7211",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -29630,8 +29648,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe returned AMBIGUOUS, not opaque - but only because lamp lenses are the file's sole factor-transparent materials. The window pane material 'Glass + Black_glass' is alphaMode=OPAQUE, alpha 1.0, untextured, no transmission; every transparent material in the file is a head/tail/brake lamp lens. This is the documented Jeep Gladiator 5165e4ab pattern (glass_probe.py LAMPY note). JUDGEMENT CAL",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -29810,7 +29828,8 @@
    "variantsHash": "4f117cc7d4402187618ef674c6d3b31dade196de",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -31608,8 +31627,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('2022_Hyundai_IONIQ_5_Windows' is alphaMode=OPAQUE; the only transparent materials are the head/brake lamp lenses, which the probe's opaque branch lets soften the verdict to ambiguous). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -31799,7 +31818,8 @@
    "variantsHash": "7c610375f6ea518c655c5352ed46e5e7b6e261c9",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -31845,8 +31865,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -32034,7 +32054,8 @@
    "variantsHash": "fbebd2286aec75c999dfca0efa483cab034c8d05",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -32784,8 +32805,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('M_2022_Volvo_C40_Recharge_Windows' OPAQUE, only lamp lenses transparent (NB the material names are a Volvo C40 template)). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -32972,7 +32993,8 @@
    "variantsHash": "9034181cf26dd64b5cf9005aa5bc04f1c36ccefd",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -33012,8 +33034,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): GLOBAL-ALPHA SHELL. 'vray_CarPaint' is alphaMode=BLEND at alpha 0.25 WITH KHR_materials_transmission=1.0, and 'vray_Material_568' the same -- the CLAUDE.md Volvo XC60 signature. Backlight render confirms the checker reads through the roof and bonnet: the body itself is ~75% see-through. Five other alpha_shell flags in this slice were checked the same way and were all false positives.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -33200,7 +33222,8 @@
    "variantsHash": "6292255ccbb96cff0439c9a7493ee5136fb9b04e",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -35931,8 +35954,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass' alpha 1 OPAQUE, 'd_glass' alpha 1 OPAQUE, 'vd_glass' alpha 1 OPAQUE; 0 transparent materials of 36. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -36122,7 +36145,8 @@
    "variantsHash": "934aa5b84956890287ab72b078cd31f0aea35da8",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -37942,8 +37966,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (wrong-vehicle): shipped GLB is a 2021 FORD MONDEO HYBRID. 23 of 26 materials are 'M_2021_Ford_Mondeo_Hybrid_*'; fingerprint (26,150361,103) identical to live ford-mondeo-2021-v1, same first material name. Poster (18 Jul) predates the GLB (30 Jul 22:31).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -38130,7 +38154,8 @@
    "variantsHash": "ea1e41ff9e6710a69adcc9cd0c16c9ed7c08ec9d",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -40994,8 +41019,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF: 'M_2022_Volvo_C40_Recharge_Windows' OPAQUE alpha 1.0; only transparent materials are Head/TailightsGlass (0.487/0.506).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -41182,7 +41207,8 @@
    "variantsHash": "1eafafb6b1a75e7c0052f7c7e778175e65c3e469",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -41693,8 +41719,8 @@
   "qualityGrade": "premium",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'M_2020_Volvo_V90_Windows' alpha 1 OPAQUE, 'M_2020_Volvo_V90_WindowsTrims' alpha 1 OPAQUE; 0 transparent materials of 22. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -41884,7 +41910,8 @@
    "method": "render",
    "at": "2026-07-23"
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -41929,8 +41956,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'd_glass' alpha 1 OPAQUE, 'r_glass' alpha 1 OPAQUE, 'glass' alpha 1 OPAQUE; 0 transparent materials of 20. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -42120,7 +42147,8 @@
    "variantsHash": "6b295e4fc7e021790eef9d138840252c4f114ad7",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -42647,8 +42675,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -42759,7 +42787,8 @@
    "variantsHash": "78fa1cab589bad5d95c758beafdcb7a447b88aac",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -42953,8 +42982,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe faded: sole glazing material 'Glass' is alphaMode=BLEND at baseColor alpha 0.986 (98.6% opaque) and near-black rgb 0.069 -- a solid dark panel, not glass. CLAUDE.md records this exact car/value as a cull. Backlight render confirms: flat dark windows, no read-through.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -43064,7 +43093,8 @@
    "variantsHash": "8b216dedf58dcff82333941a32193b8df517319a",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -43533,8 +43563,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous (no glazing-named material; only transparent material is a texture-alpha PaletteMaterial). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "paintMaterialNames": [],
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-ariya-v1__grey.glb",
@@ -43637,7 +43667,8 @@
    "N-Design",
    "Tekna",
    "Visia"
-  ]
+  ],
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -43799,8 +43830,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass_bump.001' alpha 1 OPAQUE; 1 transparent materials of 12. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "paintMaterialNames": [],
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-s-cross-v1__grey.glb",
@@ -43904,7 +43935,8 @@
    "SZ3",
    "SZ5",
    "Ultra"
-  ]
+  ],
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -44326,8 +44358,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "paintMaterialNames": [],
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-eclipse-cross-v1__grey.glb",
@@ -44423,7 +44455,8 @@
    "variantsHash": "9630a1c982c8f7da3000621d10bcd05728b3a99a",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -44959,7 +44992,7 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "quarantined",
   "paintMaterialNames": [],
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-combo-v1__grey.glb",
@@ -45067,7 +45100,9 @@
    "SE",
    "SRi",
    "Ultimate"
-  ]
+  ],
+  "quarantinedAt": "2026-08-11",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows, damage): glTF: euvan_glass / euvan_glass_int OPAQUE alpha 1.0, 0 transparent materials (name matches handler regex, so the poster's clear glass is manufactured). 5x also shows the rear quarter and lower valance as separate grey shells stepped off the white body, and polygon faceting across the roof."
  },
  {
   "schemaVersion": 2,
@@ -45093,7 +45128,7 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "quarantined",
   "paintMaterialNames": [],
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c4-cactus-v1__grey.glb",
@@ -45199,7 +45234,9 @@
    "Flair",
    "Shine",
    "Touch"
-  ]
+  ],
+  "quarantinedAt": "2026-08-11",
+  "quarantineReason": "2026-08-11 owner audit (damage, grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials glass(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on this car. || 5x poster: both wheel arches are empty bla"
  },
  {
   "schemaVersion": 2,
@@ -45493,7 +45530,7 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "quarantined",
   "paintMaterialNames": [],
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-v1__grey.glb",
@@ -45595,7 +45632,9 @@
    "diesel",
    "hybrid",
    "petrol"
-  ]
+  ],
+  "quarantinedAt": "2026-08-11",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
  },
  {
   "schemaVersion": 2,
@@ -45746,7 +45785,7 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
+  "publicationStatus": "quarantined",
   "paintMaterialNames": [],
   "colourVariants": {
    "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-v1__grey.glb",
@@ -45851,7 +45890,9 @@
    "Play",
    "RS Line",
    "S Edition"
-  ]
+  ],
+  "quarantinedAt": "2026-08-11",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF: probe ambiguous, but NO material name matches the render handler's regex so the poster IS admissible for glazing -- and at 5x the rear screen and both side windows are solid opaque white with no interior visible. Only BLEND material is 'PaletteMaterial002', a 32x4 atlas strip at opacity 0.955 (12% see-through)."
  },
  {
   "schemaVersion": 2,
@@ -46804,8 +46845,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (damage): 5x poster: the entire front end is a featureless white box - bonnet nose, grille, headlamps and bumper geometry absent, replaced by a rectangular slab; front wings are flat white planes with jagged paint boundaries. Broken/missing panels.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -46925,7 +46966,8 @@
    "variantsHash": "64bd46ebc121fc3eadd08ea7da04cec0083a5fdb",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -48625,8 +48667,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -48814,7 +48856,8 @@
    "variantsHash": "8c5f2b4e822bc27341ecd42b94e43ae02252df97",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -49113,8 +49156,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (damage): 5x poster: a third, detached wheel protrudes outside the bodywork behind the rear bumper (duplicated/unparented wheel mesh); the roof panel is absent/transparent so the cabin is visible through the top of the car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -49291,7 +49334,8 @@
    "variantsHash": "82c1a9052224e24b1f73c65fe23cc6333503638f",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -50220,8 +50264,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (soft-body): 5x: smeared white/grey blotches and dark artefacts across both doors and the front wing, door 'shut lines' are soft grey smears not lines, ragged sill. Baked-texture / photogrammetry signature. Number plate renders as garbled '3 47'.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -50398,7 +50442,8 @@
    "variantsHash": "f61c2fb68a016a6314dbc7f6b6959b0ef1b27c33",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -50656,8 +50701,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials gt_windows(a=1,BLEND) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on this car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -50834,7 +50879,8 @@
    "variantsHash": "302be42e18dc7d00c6d5a236fe8374fe14041fc0",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -51337,8 +51383,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'Window' alpha 1 BLEND, 'Solid_Glass' alpha 1 BLEND; 0 transparent materials of 21. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -51547,7 +51593,8 @@
    "variantsHash": "57755c259b363993ddb79bcac39c6bf5c1f5f7e5",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -51590,8 +51637,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials window(a=1,OPAQUE), glass(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on this car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -51768,7 +51815,8 @@
    "variantsHash": "0d22e2760f91d8eb89bfb5e6f616e91b2e50628c",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -52698,8 +52746,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'M_2020_Toyota_Yaris_Cross_Windows' alpha 1 OPAQUE, 'M_2020_Toyota_Yaris_Cross_WindowsTrims' alpha 1 OPAQUE; 0 transparent materials of 27. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -52900,7 +52948,8 @@
    "variantsHash": "690ff4c16faf47f94bdd0ec23eb3f865636247f7",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -59428,8 +59477,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows, damage): glass_probe opaque/proven ('glass_full','vdie_glass' OPAQUE); backlight render shows flat blue opaque window panels. SEPARATELY the poster at 2x shows the rear wheel arch as an open black void with the rear wheel detached outside the bodywork and the rear quarter panel missing.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -59614,7 +59663,8 @@
    "variantsHash": "00a165112ee5e0344ac4ff5af91467300c1c5502",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -63094,8 +63144,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass' alpha 1 OPAQUE, 'r_glass' alpha 1 OPAQUE, 'd_glass' alpha 1 OPAQUE; 0 transparent materials of 19. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -63304,7 +63354,8 @@
    "variantsHash": "a3bb787f7cf2bc86d64999790e6ec5c56a6bc82a",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -65197,8 +65248,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (damage): 5x poster: NO WHEELS on any corner - all four arches empty, van resting on its rocker panels; rear side aperture torn open with a stray green strip; number plate detached and floating clear of the body.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -65375,7 +65426,8 @@
    "variantsHash": "fa688975b9ba63b41fc23167a3e2676eef64a3b0",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -65412,8 +65464,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (soft-body): 5x: entire front is a smooth blob -- no grille, headlamp is a vague dark smear with no internals, bumper has no definition, no shut lines anywhere, mirror is a lump. Textbook melted surfacing.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -65592,7 +65644,8 @@
    "variantsHash": "ee1c5a6d125f2fb17bec8956d7c594a7630f9b81",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -67708,8 +67761,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (soft-body): Poster at 2x: headlamps are featureless white blobs with no lens or internal element, the grille is a plain recess with no mesh, the wing mirror is a smooth blob, and there is not one door or bonnet shut line anywhere on the car. Materials are generic auto_1..auto_18. Reads as unfinished clay.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -67896,7 +67949,8 @@
    "variantsHash": "8af37e234a2ce0b8a9afc15333d66483ce94533b",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -68574,8 +68628,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials vidros_int_windshield(a=1,OPAQUE), Vidros_farois(a=1,OPAQUE), plastico_vidros(a=1,OPAQUE), vidros(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the p",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -68754,7 +68808,8 @@
    "variantsHash": "e94115ec388e65b4cff0ee83cdd60333f0cbc1ee",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -70345,8 +70400,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (soft-body): 5x: hard-edged grey rectangular blocks sitting on the red bonnet, headlamps are pale blue/white noise blobs with no lens structure, front bumper is a lumpy grey mass with a ragged lower edge, A-pillar carries a grey band. No shut lines.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -70531,7 +70586,8 @@
    "variantsHash": "bcc3e9007be173ddbe937bf1ac77651b17d7f408",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -71502,8 +71558,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -71689,7 +71745,8 @@
    "variantsHash": "e06caab2838f68240d1ab55f383dd9b8d70a82de",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -72889,8 +72946,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials M_2021_Audi_A1_S_Line_Windows(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on this car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -73075,7 +73132,8 @@
    "variantsHash": "7059c47b03818d5357ef77ddf878dee2b51c940e",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -74229,8 +74287,8 @@
   "qualityGrade": "premium",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (soft-body): 'mazdaM_CarPaint_Max_018' and 'mazdaM_CarPaintNormal_Max1' are metallicFactor 0.72-0.74 at roughnessFactor 0.096 -- near-mirror. Poster at 2x shows a chrome shell with no readable panel surfaces or shut lines. Sibling models from the same 'Max1' family (honda-s2000, land-rover-defender-w6) carry metallic 0.03 carpaint and render correctly, so this is this file's defect, not the family's.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -74415,7 +74473,8 @@
    "variantsHash": "43daf679f8f74481671272ab8383127c29a58811",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -75656,8 +75715,8 @@
   "qualityGrade": "good",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'd_glass' alpha 1 OPAQUE, 'glass' alpha 1 OPAQUE, 'r_glass' alpha 1 OPAQUE; 0 transparent materials of 19. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -75861,7 +75920,8 @@
    "variantsHash": "c1f3da16f4624bcdebfecb0d030a3a9a6ba870ce",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -76409,8 +76469,8 @@
   "qualityGrade": "good",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'r_glass' alpha 1 OPAQUE, 'matte_glass' alpha 1 OPAQUE, 'glass' alpha 1 OPAQUE; 0 transparent materials of 18. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -76603,7 +76663,8 @@
    "variantsHash": "f6a11a02ec896c5a9d3d75979c19289cc1c81bb9",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -81615,8 +81676,8 @@
   "qualityGrade": "good",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (damage): 5x: BOTH near-side wheels are missing -- a bare brake disc floats in the front arch and a hub stub in the rear; white shards of torn body around the front arch; panels soft. Glazing itself is fine (v70_glass.001 alpha 0.45).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -81803,7 +81864,8 @@
    "variantsHash": "4aab10ef8230a9d3e85293d02f6f33835df2f8c1",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -83836,8 +83898,8 @@
   "qualityGrade": "good",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (soft-body): 5x: photogrammetry scan -- baked lighting painted into the body as a blue/white gradient, mud baked onto the tyres, smeared headlamp photo, soft wheel arches, no shut lines.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -84017,7 +84079,8 @@
    "variantsHash": "16d31beca98ee479c7630835c020c597c8e49449",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -84524,8 +84587,8 @@
   "qualityGrade": "good",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (damage): 5x poster: wheels missing/sunk below the floor plane - both visible arches show only faceted grey liner shells, one partial wheel visible sunk beneath the sill.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -84727,7 +84790,8 @@
    "variantsHash": "8f7e1b0e67b99d4dc9d70d8b9b8f64a1ab6d6f5b",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -84766,8 +84830,8 @@
   "qualityGrade": "premium",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (damage, grey windows): glass_probe verdict=opaque, certainty=inferred (72 materials, ZERO transparent anywhere in the file, nothing glazing-named). Because NO material name matches render/handler.py's override regex, no transmission is forced and the poster IS an honest witness - and at 5x the windscreen and side glass render as flat opaque dark-grey panels with no interior visible, agreeing with the glTF. Separately: r",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -84890,7 +84954,8 @@
    "variantsHash": "b47cdb8a180450d02156511c1b42164de85130a1",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -84935,8 +85000,8 @@
   "qualityGrade": "good",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials Glass(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on this car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -85140,7 +85205,8 @@
    "variantsHash": "4c4837f81e063b4ace5fc3f33ee4dde116e8a259",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -85184,8 +85250,8 @@
   "qualityGrade": "good",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials windows_ext(a=1,OPAQUE), windows_int(a=1,OPAQUE), gls_window(a=1,OPAQUE), INT_Glass(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADM",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -85363,7 +85429,8 @@
    "variantsHash": "ab011006cb166a8a53bd5daa6de01827a61497f2",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -85870,8 +85937,8 @@
   "qualityGrade": "good",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'd_glass' alpha 1 OPAQUE, 'r_glass' alpha 1 OPAQUE, 'o_glass' alpha 1 OPAQUE; 0 transparent materials of 19. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -86049,7 +86116,8 @@
    "variantsHash": "6888c13ebfe3bdb50715ad4acab2c64a47c386b0",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -86500,8 +86568,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass' alpha 1 OPAQUE; 0 transparent materials of 11. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -86688,7 +86756,8 @@
    "variantsHash": "73c0ce43465d78964e90b52c48b7b77966c5bfb2",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -88186,8 +88255,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (soft-body): The body material is literally named 'body' and is metallicFactor 0.841 / roughnessFactor 0.0 -- a mirror, not paint. Poster at 2x: the whole flank is one chrome blob, no shut lines, no panel definition. colour_variants rewrites baseColorFactor only, so every one of the eight variants is also a chrome mirror.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -88309,7 +88378,8 @@
    "variantsHash": "0eb83c77f82c1dc9e6ecfc4355471d597bfcd06b",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -91476,8 +91546,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials clear_glass.001(a=1,OPAQUE), int_glass.001(a=1,OPAQUE), glasss.001(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazi",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -91658,7 +91728,8 @@
    "variantsHash": "b9e840053ee8bd69236c656a2732074409f79dc7",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -92361,8 +92432,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials glass(a=1,OPAQUE), r_glass(a=1,OPAQUE), r_glass_bump(a=1,OPAQUE), o_glass(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE fo",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -92486,7 +92557,8 @@
    "variantsHash": "22a8608423ca28fe482057e8c79c4d4b7b2d8770",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -101065,8 +101137,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glasswindow_windshieldSG' alpha 1 OPAQUE; 0 transparent materials of 19. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -101256,7 +101328,8 @@
    "variantsHash": "f59dcf85bda356b3465140738c075746aaae0e2f",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -106342,8 +106415,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'd_glass' alpha 1 OPAQUE, 'glass' alpha 1 OPAQUE, 'vd_glass' alpha 1 OPAQUE; 0 transparent materials of 38. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -106532,7 +106605,8 @@
    "variantsHash": "6344d59039bf3acefbe7a20d4e26a31e223f20e3",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -107521,8 +107595,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass' alpha 1 OPAQUE, 'r_glass' alpha 1 OPAQUE; 0 transparent materials of 13. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -107711,7 +107785,8 @@
    "variantsHash": "3668be73f20c83e67e6e4578b958a44e9ff194a8",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -110397,8 +110472,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials glass(a=1,OPAQUE), in_glass(a=1,OPAQUE), emiss_glas(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on this car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -110466,7 +110541,8 @@
    "variantsHash": "468c71cd87dce9c8258aa7c997a4bf994c3bb7a7",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -112218,8 +112294,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials window1(a=1,OPAQUE), glass1(a=1,OPAQUE), glass2(a=1,OPAQUE), black_glass1(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE fo",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -112433,7 +112509,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -116720,8 +116797,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -116914,7 +116991,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -118950,8 +119028,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('M_2022_Nissan_Qashqai_Windows' OPAQUE, only lamp lenses transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -119136,7 +119214,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -120917,8 +120996,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'ext_glass' alpha 1 OPAQUE, 'ext_glass_0' alpha 1 OPAQUE, 'ext_glass_1' alpha 1 OPAQUE; 0 transparent materials of 102. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -121061,7 +121140,8 @@
    "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.023), so the eight variants ship as near-identical files. Demoted rather than served."
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.023), so the eight variants ship as near-identical files"
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.023), so the eight variants ship as near-identical files",
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -121964,8 +122044,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -122152,7 +122232,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -123608,8 +123689,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'Window' alpha 1 OPAQUE, 'WindowRim' alpha 1 OPAQUE; 0 transparent materials of 20. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -123835,7 +123916,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -124122,8 +124204,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -124322,7 +124404,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -126559,8 +126642,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'Glass_-_Heavy_Color' alpha 1 OPAQUE; 0 transparent materials of 18. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -126734,7 +126817,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -127834,8 +127918,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'polo17_glass_int' alpha 1 OPAQUE, 'polo17_glass' alpha 1 OPAQUE; 0 transparent materials of 45. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -128066,7 +128150,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -129756,8 +129841,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass_body' alpha 1 OPAQUE; 0 transparent materials of 21. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -129944,7 +130029,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -130586,8 +130672,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -130652,7 +130738,8 @@
    "variantsHash": "270464f5840fe6f5bd777b28adccadf50a9bed3a",
    "method": "render",
    "at": "2026-07-30"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -130687,8 +130774,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'Glass' alpha 1 OPAQUE; 0 transparent materials of 15. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -130878,7 +130965,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -130913,8 +131001,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'Glass_clean' alpha 1 OPAQUE, 'Glass_clean.001' alpha 1 OPAQUE; 0 transparent materials of 24. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -131127,7 +131215,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -132335,8 +132424,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass' alpha 1 OPAQUE; 0 transparent materials of 20. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -132503,7 +132592,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -134100,8 +134190,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -134234,7 +134324,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -135211,8 +135302,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF: whole van is 4 materials (rim / material / Roof / Bottom), all untextured flat grey 0.8, ZERO glazing-named, ZERO transparent, ZERO textures. Clay shell with no glass at all. Scrapped on the full material table, not on the probe's inferred verdict. | POSTER CONFIRMS: no handler-regex material name, so the poster is admissible -- at 5x every window pane is flat opaque grey with no interior. S",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -135434,7 +135525,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -135469,8 +135561,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'vitres' alpha 1 OPAQUE, 'Vitrage_rouge' alpha 1 OPAQUE; 0 transparent materials of 10. No handler-regex name. | POSTER CONFIRMS: its glazing is named 'vitres'/'Vitrage_rouge' which does NOT match the render handler's override regex, so the poster is admissible for glazing -- and at 5x the windscreen an",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -135665,7 +135757,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -137089,8 +137182,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe faded: sole glazing 'CAR_Window' BLEND at alpha 0.993 (99.3% opaque), rgb 0,0,0. Backlight render shows no read-through.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -137219,7 +137312,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -138775,8 +138869,8 @@
   "qualityGrade": "B",
   "technicalStatus": "fused-shell",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe opaque/inferred (2 materials, 1 texture, nothing transparent anywhere in the file). Backlight render confirms flat dark opaque windows. Inferred-opaque was NOT taken on the probe alone.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -138819,7 +138913,8 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -146907,8 +147002,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -147090,7 +147185,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -148134,8 +148230,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'Vitre' alpha 1 OPAQUE; 0 transparent materials of 32. No handler-regex name.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -148324,7 +148420,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -150430,8 +150527,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'windowglass' alpha 1.0 OPAQUE, 'clearglass' alpha 1.0 OPAQUE; 0 transparent materials of 17. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -150656,7 +150753,8 @@
    "variantsHash": "c6ca3d7f18acf5e20d746cc6acfb9017d6a44762",
    "method": "render",
    "at": "2026-08-02"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -153559,8 +153657,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (damage, grey-windows): 5x rear 3/4: a black gaping void through the near-side rear quarter/tailgate with loose geometry inside. Plus glTF: 'windowglass'/'clearglass' both alpha 1.0 OPAQUE, 0 transparent materials in the file.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -153785,7 +153883,8 @@
    "variantsHash": "07582e32e577922bed05252158a899e8ef2b5ab5",
    "method": "render",
    "at": "2026-08-02"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -159869,8 +159968,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe returned AMBIGUOUS, not opaque - but only because lamp lenses are the file's sole factor-transparent materials. The window pane material 'Window' is alphaMode=OPAQUE, alpha 1.0, untextured, no transmission; every transparent material in the file is a head/tail/brake lamp lens. This is the documented Jeep Gladiator 5165e4ab pattern (glass_probe.py LAMPY note). JUDGEMENT CALL - flagged s",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -160055,7 +160154,8 @@
    "variantsHash": "3a77586096f620bd676a0d4a6b076237b027375f",
    "method": "render",
    "at": "2026-08-05"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -160312,8 +160412,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials GlassBlack.001(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on this car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -160496,7 +160596,8 @@
    "variantsHash": "bdf563602792fcd26af285144ec43f2e0d512b12",
    "method": "render",
    "at": "2026-08-05"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -160750,8 +160851,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe verdict=faded, certainty=proven: sole glazing material 'Glass' is alphaMode=BLEND at baseColor alpha 0.98, i.e. 98% opaque, untextured. CLAUDE.md's Porsche calibration: 0.78-0.94 still resolves interior under backlight; the Mazda CX-5 KE at 0.986 was culled. 0.98 sits in the cull band. Poster inadmissible (material literally named 'Glass').",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -161008,7 +161109,8 @@
    "variantsHash": "a2d3b30d2d6df93eca7ce632610c7f60671baab5",
    "method": "render",
    "at": "2026-08-06"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -164888,8 +164990,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials CP_Glass(a=1.0,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on this car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -165145,7 +165247,8 @@
    "variantsHash": "01a98142d66f3c231d2b6300fc4a65b824f1dfae",
    "method": "render",
    "at": "2026-08-07"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -171378,8 +171481,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('Glass' OPAQUE, only 'Lights' transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -171562,7 +171665,8 @@
    "variantsHash": "27013223560203da7873417e994430ff4e73cedc",
    "method": "render",
    "at": "2026-08-08"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -171597,8 +171701,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('Window'/'WindowDark' OPAQUE, only 'Lens' and a decal transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -171783,7 +171887,8 @@
    "variantsHash": "d864491ff48e9b47b492d5edd0e455dc00364ebb",
    "method": "render",
    "at": "2026-08-08"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -176979,8 +177084,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'window' alpha 1.0 OPAQUE, 'glass' alpha 1.0 OPAQUE, 'black_glass' alpha 1.0 OPAQUE; 0 transparent materials of 50. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -177190,7 +177295,8 @@
    "variantsHash": "54863a79a38180731c9c9847f14de448935da683",
    "method": "render",
    "at": "2026-08-08"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -179693,8 +179799,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'windows_side' alpha 1.0 OPAQUE, 'windows' alpha 1.0 OPAQUE; 0 transparent materials of 36. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -179906,7 +180012,8 @@
    "variantsHash": "084f826289cd22948125ed37423c7d25377fe0e4",
    "method": "render",
    "at": "2026-08-08"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -182102,8 +182209,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF: '2020_Toyota_Corolla_Cross_Windows' OPAQUE alpha 1.0; only transparent materials are Brake/HeadLightsGlass (0.49/0.55).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -182316,7 +182423,8 @@
    "variantsHash": "eaeef0354f9b29b222df4bc6d3418a00b436d368",
    "method": "render",
    "at": "2026-08-08"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -183768,8 +183876,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('Glass'/'Glass_trim' OPAQUE, only 'light_glass' transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -183899,7 +184007,8 @@
    "variantsHash": "392876347a286514f7ebdb46e687b4199f54eba0",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -185177,8 +185286,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -185309,7 +185418,8 @@
    "variantsHash": "5b2837cb7fcd8612a63ad08f15ce0cd4a2526c73",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -186515,8 +186625,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -186642,7 +186752,8 @@
    "variantsHash": "cdd64fdeca5b02f48a58070ac9f26751066a5c1f",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -189529,8 +189640,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -189661,7 +189772,8 @@
    "variantsHash": "3e4023666e825bf22e7cef6af8c369dc3079aff2",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -190692,8 +190804,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF: '2021_Peugeot_508_PSE_Windows' OPAQUE alpha 1.0; only transparent materials are HeadLightsGlass/BrakeLightsGlass (0.358). Jeep Gladiator precedent.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -190879,7 +190991,8 @@
    "variantsHash": "fe96f3202751041be8833a8d341e410dce6e8d0e",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -192468,8 +192581,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'p407_glass_vitres' alpha 1.0 OPAQUE, 'p407_glass_vitres01' alpha 1.0 OPAQUE, 'p407_glass' alpha 1.0 OPAQUE; 0 transparent materials of 44. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -192655,7 +192768,8 @@
    "variantsHash": "13261b2daf6cb2f1a1ff8661605525d7303ce8f0",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -195367,8 +195481,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass__env_49_trans' alpha 1.0 OPAQUE, 'glass_2a__env_5_trans' alpha 1.0 OPAQUE, 'glass__env_5_trans' alpha 1.0 OPAQUE; 0 transparent materials of 73. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -195551,7 +195665,8 @@
    "variantsHash": "6cef9deb46b4280a3135ea40f49ef28f92695920",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -202075,8 +202190,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('glass' OPAQUE, only 'Material.002' transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -202247,7 +202362,8 @@
    "variantsHash": "18339ec981b16c0082154fe7f4e06f0e62c8d791",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -202903,8 +203019,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -203074,7 +203190,8 @@
    "variantsHash": "fb7fe486bc0b34960c8779291c2d3c4c346c1c98",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -204541,8 +204658,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -204707,7 +204824,8 @@
    "at": "2026-08-09"
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0381 — body colour did not move; ships single-neutral"
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0381 — body colour did not move; ships single-neutral",
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -204742,8 +204860,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('window' OPAQUE, only 'trans' transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -204912,7 +205030,8 @@
    "variantsHash": "e440003b2a97347549c5fde3407fba2035ed745a",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -204947,8 +205066,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe opaque/inferred (5 materials, nothing transparent). Backlight render at 3x: side and hatch glass are flat dark grey with no checker and no interior. Opaque.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -205111,7 +205230,8 @@
    "at": "2026-08-09"
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0308 — body colour did not move; ships single-neutral"
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0308 — body colour did not move; ships single-neutral",
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -206987,8 +207107,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials mat_glass(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_materials_transmission. A glass-named material exists so render/handler.py forces transmission=1.0 and the studio poster manufactures clear glass; the poster is INADMISSIBLE for glazing on this car.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -207154,7 +207274,8 @@
    "variantsHash": "228423e772afefda0ec1b1659108e9682ab2d0b0",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -214438,8 +214559,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous (no glazing-named material; only transparent materials are MASK texture-alpha 'material_11'/'material_22'). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. Renders as a solid black silhouette with no material data at all.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -214636,7 +214757,8 @@
    "variantsHash": "39d9e8d34d99b9fa6c141eebabb43326f001a2f6",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -217773,8 +217895,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('windows'/'windowFrame' OPAQUE, only 'headlights1' transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -217958,7 +218080,8 @@
    "variantsHash": "06e4028da3a1625283a1013f3ef494aeff552987",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -217993,8 +218116,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -218172,7 +218295,8 @@
    "variantsHash": "85d3de120d382d4b0b49e41b0d33f9719cffde8f",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -218862,8 +218986,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -219042,7 +219166,8 @@
    "variantsHash": "9c48399848c63073147c191360a9ceccf7b7a286",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -224013,8 +224138,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -224193,7 +224318,8 @@
    "variantsHash": "1c4bb8da1939795c5d574618c7f831787a5bc85d",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -229024,8 +229150,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -229203,7 +229329,8 @@
    "variantsHash": "e463f1c92eb6fab1ffb90ef36c564f4248fe2a8c",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -231413,8 +231540,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -231597,7 +231724,8 @@
    "variantsHash": "b2f3e8a8fe0e726181b6dab1731e2bf664c8269c",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -231632,8 +231760,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('Window___Tire__1'/'Glass_Basic_Black__2' OPAQUE, only headlamp lenses transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -231814,7 +231942,8 @@
    "variantsHash": "69555f595490b22b36c5ee8c2ecda06de748718e",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -232064,8 +232193,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -232244,7 +232373,8 @@
    "variantsHash": "1f9627e4a5d31329dc071ce2cc7be4a9bd65a2b0",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -232723,8 +232853,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -232912,7 +233042,8 @@
    "variantsHash": "e709d2e3f08337d74d6b37ca5a8f9a4c7b1f5a9c",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -233389,8 +233520,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -233579,7 +233710,8 @@
    "variantsHash": "f1b7ee6404d8afbe0fbf777fb297110235f97d7e",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -239088,8 +239220,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials BYD_Song_Plus_Car_Glass_FrontWindowShield_shader.001(a=1.0,OPAQUE), BYD_Song_Plus_Car_Glass_RearWindowGlass_shader.001(a=1.0,OPAQUE), BYD_Song_Plus_Car_Glass_BackDoorGlass_shader.001(a=1.0,OPAQUE), BYD_Song_Plus_Car_Glass_FrontDoorGlass_shader.001(a=1.0,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -239170,7 +239302,8 @@
    "variantsHash": "fac4a703d8216496b99d866808974a8d74c75adf",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -241746,8 +241879,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('M_2020_Nissan_Ariya_Windows' OPAQUE, only lamp lenses transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -241930,7 +242063,8 @@
    "variantsHash": "fccb0be3c1258b443eee3f3b257779f812e8f198",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -243071,8 +243205,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -243255,7 +243389,8 @@
    "variantsHash": "becc1e2509d236bf7b4d22e68385f09192d65bb5",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -243733,8 +243868,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('..._Windows' OPAQUE, only lamp lenses/DRLs transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -243920,7 +244055,8 @@
    "variantsHash": "82f4345ea71819e6edb83a935b1da721fb9b1408",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -243955,8 +244091,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -244140,7 +244276,8 @@
    "variantsHash": "dcf0ef86600ca58a36e76aabcc55626d99c9d022",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -246596,8 +246733,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('glass1'/'glass2' OPAQUE, only an alpha-0.0 decal transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -246782,7 +246919,8 @@
    "variantsHash": "1278eaaea29d8446aeca7cdac481f1ccb31a0ede",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -247666,8 +247804,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass' alpha 1.0 OPAQUE, 'glass2' alpha 1 OPAQUE, 'glass_ridges' alpha 1 OPAQUE; 10 transparent materials of 37. Name matches the render handler's override regex, so the poster's clear glass is manufactured and inadmissible.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -247839,7 +247977,8 @@
    "variantsHash": "126d74f4405805072774e18d468011b730113585",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -278221,8 +278360,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('window' OPAQUE, only 'lamp_glass' transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -278408,7 +278547,8 @@
    "variantsHash": "89af68d45477e3373de97bc12542f4a89b3de9cf",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -278667,8 +278807,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission).",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -278852,7 +278992,8 @@
    "variantsHash": "2aa74cec91aa4726767e2f2e4e1eadada0368fd6",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
