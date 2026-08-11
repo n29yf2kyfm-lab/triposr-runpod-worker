@@ -715,5 +715,25 @@
    "mats=1 tex=1 cov=1.000 FULL COVERAGE, no separable glazing or tyres",
    "the car itself is a scrapyard example, not a presentable road car"
   ]
+ },
+ {
+  "uid": "c691b326ba724ec0b9a656511ce35992",
+  "name": "Subaru Vivio Bistro",
+  "verdict": "fail",
+  "reasons": [
+   "glazing OPAQUE, proven from the glTF: the file contains exactly ONE material, textured and alphaMode OPAQUE. No glass material exists, so the windows are opaque textured body surfaces - confirmed visually, no interior resolves in any of the four tiles",
+   "one material over the whole car (cov=1.000 FULL COVERAGE) also means a respray would repaint glass and tyres with the body",
+   "uniform grey clay reading throughout"
+  ]
+ },
+ {
+  "uid": "c6016ddd18184fb4803c58ad77a51964",
+  "name": "2005 Subaru Impreza S204 STi (inaccurate)",
+  "verdict": "fail",
+  "reasons": [
+   "the uploader titles it (inaccurate) - the source declares its own geometry unreliable, which is disqualifying for a product that matches a reg to the customers actual car; failed on the same ground as its sibling 5eec9521",
+   "materials are otherwise sound: black tyres against silver BBS-style rims, transparent glazing with interior resolvable, defined shut lines and headlamp internals - this is a better mesh than the sibling",
+   "low cost to lose: the S204 was a 600-unit JDM limited edition, so effectively no UK registration decodes to one"
+  ]
  }
 ]
