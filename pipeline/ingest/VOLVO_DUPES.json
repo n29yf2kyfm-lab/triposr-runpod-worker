@@ -1,0 +1,101 @@
+[
+ {
+  "drop_uid": "0ff8d585ee2f47318e298316d3426cd7",
+  "name": "2020 | K.S. Hero Edition Volvo Polestar 1",
+  "faces": 204093,
+  "keep_uid": "0bfd8e7dd8a546abb0bd3cd6c9c4bfdd",
+  "keep_name": "Volvo Polestar K.S 2020 | www.vecarz.com",
+  "keep_faces": 204093,
+  "reason": "duplicate mesh: EXACT face-count identity at 204,093 -- a six-digit exact match is the documented identity signal, and the titles corroborate. Both are the K.S Edition Polestar 1 widebody build re-uploaded under different titles. Dropped by nameplate_filter's face-count dedup before any GPU was spent.",
+  "eye_check": "confirmed-by-count-only",
+  "eye_note": "NOT eye-checked: the dropped side was removed pre-render, so no sheet exists for it. Confidence rests on the exact six-digit face count plus the title, which CLAUDE.md records as reliable ('an exact match at six or seven digits is the same mesh, not a coincidence'). Both keepers were rendered and audited; both FAIL on other grounds, so this pair has no effect on the clean list."
+ },
+ {
+  "drop_uid": "b86a8ca935f14eb6807e95832b766b96",
+  "name": "Volvo S60 R",
+  "faces": 214434,
+  "keep_uid": "79fc4c851bb64c18a5adc92e9330b626",
+  "keep_name": "2003 Volvo S60 R",
+  "keep_faces": 214434,
+  "reason": "duplicate mesh: EXACT face-count identity at 214,434 -- a six-digit exact match is the documented identity signal, and the titles corroborate. Same first-generation S60 R re-uploaded under a shortened title. Dropped by nameplate_filter's face-count dedup before any GPU was spent.",
+  "eye_check": "confirmed-by-count-only",
+  "eye_note": "NOT eye-checked: the dropped side was removed pre-render, so no sheet exists for it. Confidence rests on the exact six-digit face count plus the title, which CLAUDE.md records as reliable ('an exact match at six or seven digits is the same mesh, not a coincidence'). Both keepers were rendered and audited; both FAIL on other grounds, so this pair has no effect on the clean list."
+ },
+ {
+  "drop_uid": "521b7bc29c5e41e69729aa72170e05cd",
+  "name": "Volvo S80 2011",
+  "faces": 920274,
+  "keep_uid": "e263261c059e40c9a53237b73a8fb890",
+  "keep_name": "Volvo S80",
+  "keep_faces": 920274,
+  "reason": "duplicate mesh: EXACT face-count identity at 920,274 -- a six-digit exact match is the documented identity signal, and the titles corroborate. Same second-generation S80 re-uploaded with a year appended to the title. Dropped by nameplate_filter's face-count dedup before any GPU was spent.",
+  "eye_check": "confirmed-by-count-only",
+  "eye_note": "NOT eye-checked: the dropped side was removed pre-render, so no sheet exists for it. Confidence rests on the exact six-digit face count plus the title, which CLAUDE.md records as reliable ('an exact match at six or seven digits is the same mesh, not a coincidence'). Both keepers were rendered and audited; both FAIL on other grounds, so this pair has no effect on the clean list."
+ },
+ {
+  "drop_uid": "9c3898efe02440baadf78af64adfb54e",
+  "name": "2012 Volvo S80 2.4 Refreshed",
+  "faces": 772210,
+  "keep_uid": "35624fd1b27d4445b75dab48730bc714",
+  "keep_name": "2012 Volvo S80 PSA Design",
+  "keep_faces": 772556,
+  "reason": "near-proximity candidate: 772,210 vs 772,556 faces, 346 apart (0.04%). dupe_check did NOT flag this pair because it only runs over the PASS list and both cars failed.",
+  "eye_check": "real",
+  "eye_note": "CONFIRMED the same base mesh by looking at both sheets: identical S80 body, identical crinkled-foil panel shading, both at cov=0.117 with the same low-coverage warning. Both FAIL independently (one on mismatched kitbashed panels, one on opaque glazing), so this has no effect on the clean list."
+ },
+ {
+  "drop_uid": null,
+  "name": "2004 Volvo S60",
+  "faces": 197318,
+  "keep_uid": null,
+  "keep_name": "Volvo 740",
+  "keep_faces": 197296,
+  "reason": "near-proximity CANDIDATE ONLY: 22 faces apart. Recorded so it is not re-flagged; NOT a duplicate.",
+  "eye_check": "false-positive",
+  "eye_note": "22 faces apart and NOT remotely the same car -- a 2004 S40-bodied saloon (mislabelled S60) against a 1980s 740. Both were rendered and audited; the sheets share nothing. This is the single clearest demonstration in this wave that face proximity is a candidate finder and never an identity."
+ },
+ {
+  "drop_uid": null,
+  "name": "Volvo C40 Recharge",
+  "faces": 354704,
+  "keep_uid": null,
+  "keep_name": "294: Volvo S70",
+  "keep_faces": 354539,
+  "reason": "near-proximity CANDIDATE ONLY: 165 faces apart. Recorded so it is not re-flagged; NOT a duplicate.",
+  "eye_check": "false-positive",
+  "eye_note": "165 apart. A 2022 electric crossover against a photogrammetry scan of a 1998 saloon."
+ },
+ {
+  "drop_uid": null,
+  "name": "Volvo V90 2016-2024",
+  "faces": 237478,
+  "keep_uid": null,
+  "keep_name": "2000 Volvo C70 Coupe",
+  "keep_faces": 237053,
+  "reason": "near-proximity CANDIDATE ONLY: 425 faces apart. Recorded so it is not re-flagged; NOT a duplicate.",
+  "eye_check": "false-positive",
+  "eye_note": "425 apart. A modern estate against a P80 coupe -- and the C70 Coupe is one of the eight PASSES, so auto-grouping this pair would have silently dropped a good car."
+ },
+ {
+  "drop_uid": null,
+  "name": "2003 Volvo S60 R",
+  "faces": 214434,
+  "keep_uid": null,
+  "keep_name": "Volvo Polestar One K.S edition",
+  "keep_faces": 213164,
+  "reason": "near-proximity CANDIDATE ONLY: 1,270 faces apart. Recorded so it is not re-flagged; NOT a duplicate.",
+  "eye_check": "false-positive",
+  "eye_note": "1,270 apart. A saloon against a widebody time-attack coupe."
+ },
+ {
+  "drop_uid": null,
+  "name": "Good old Volvo",
+  "faces": 132978,
+  "keep_uid": null,
+  "keep_name": "Volvo V50",
+  "keep_faces": 132087,
+  "reason": "near-proximity CANDIDATE ONLY: 891 faces apart. Recorded so it is not re-flagged; NOT a duplicate.",
+  "eye_check": "false-positive",
+  "eye_note": "891 apart. A photogrammetry scan of a handmade CARDBOARD model against a real V50 estate -- and the V50 is one of the eight PASSES."
+ }
+]

@@ -1,0 +1,673 @@
+[
+ {
+  "uid": "0613957272674e3aaf460e3ea35d15be",
+  "name": "Volvo XC60",
+  "verdict": "fail",
+  "reasons": [
+   "global-alpha shell: all 18 materials alphaMode=BLEND, carpaint alpha 0.25 and tire alpha 0.25 (glTF probe) - the whole car renders 75% see-through, studio floor visible through the doors",
+   "body mats=0 cov=0.000: no body-paint material, cannot recolour"
+  ]
+ },
+ {
+  "uid": "c997bf903d02408dbd6b81ecd13fb22c",
+  "name": "Volvo C30",
+  "verdict": "fail",
+  "reasons": [
+   "global-alpha shell: carpaint.028 and tire.028 both alphaMode=BLEND alpha 0.25 (glTF probe); body reads as black chrome, not paint",
+   "body mats=0 cov=0.000: no body-paint material, cannot recolour"
+  ]
+ },
+ {
+  "uid": "345df71c1d584992b809c15d64e1a790",
+  "name": "Volvo S60/V60 2010-2018",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "rendered upside down in all four tiles, but the SOURCE mesh is geometrically upright (geom_audit h/l=0.282, tob=0.749) - render-side inversion, deterministic per asset, not a source defect",
+   "glazing clear and no flat/alpha shell (62 materials), so the mesh itself is not disqualified"
+  ]
+ },
+ {
+  "uid": "c35ef02fd38b48adadc17f117a4a518c",
+  "name": "2023 Volvo XC60 Recharge",
+  "verdict": "fail",
+  "reasons": [
+   "glazing opaque: 1 material, 0 textures, zero transparent materials in the file (glTF probe); confirmed by eye at 2x - the windscreen is a solid pale panel with no interior, no A-pillar and no dash visible",
+   "cov=1.000 full coverage: one material covers body, glass and tyres, so a respray would repaint the glass too",
+   "geometry and proportions are genuinely good (correct iron-mark grille, Thor's-hammer lamps) - fails on materials only, worth re-sourcing"
+  ]
+ },
+ {
+  "uid": "edc14fbdab4b49cc9bd6ce3b2fceec43",
+  "name": "Volvo XC60 2026",
+  "verdict": "fail",
+  "reasons": [
+   "flat clay shell (glTF probe flat_shell=true): 13 materials, 0 textures, one baseColorFactor across the file",
+   "glazing opaque - windows render body-white",
+   "rims render body-white; only the tyres are dark"
+  ]
+ },
+ {
+  "uid": "669c69114ee24bc0b03ebd23bf6e75c1",
+  "name": "Volvo C40 Recharge",
+  "verdict": "fail",
+  "reasons": [
+   "flat clay shell (glTF probe flat_shell=true, 24 materials, 0 textures) and glazing opaque with certainty=proven - both orientation-independent",
+   "also rendered upside down, though the source mesh is upright (geom_audit h/l=0.356, tob=1.166); the material defects are decisive on their own"
+  ]
+ },
+ {
+  "uid": "70f20b44269343e685e8958f35732930",
+  "name": "Volvo S60 MK3 2018-2024",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit: all four wheels detached, bare brake discs in the arches, a loose wheel lying under the car, and the interior/floorpan assembly floating above the body in every tile",
+   "glazing opaque (glTF probe, certainty=proven, 46 materials, 0 textures)"
+  ]
+ },
+ {
+  "uid": "5b61ebab12924a8db27b6bb0fe18ac9f",
+  "name": "volvo V60 (Seperated)",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit: doors, bonnet, roof panel and both bumpers detached and floating clear of the body in all four tiles - the uploader's own title says 'Seperated'",
+   "glazing itself is clear (12 textures, 99 materials) but the assembly is unusable as a serving asset"
+  ]
+ },
+ {
+  "uid": "47a5c168f6c344d59003254eca848c7b",
+  "name": "Volvo V60",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as a V60 estate instantly; correct iron-mark grille, correct tail lamps wrapping the D-pillar",
+   "glazing genuinely transparent - seats and headrests resolvable through the side glass (glTF probe: clear, proven, 60 materials, 12 textures)",
+   "tyres read as dark rubber at 2x with a visible tread face, plainly distinct from the silver rim - the white look at thumbnail scale was the documented false alarm",
+   "rim faces present and spoke detail traceable in all four tiles",
+   "door and bonnet shut lines defined; front three-quarter is strong"
+  ]
+ },
+ {
+  "uid": "299852c2ebde4209a4007dbf2e2165e3",
+  "name": "2018 Volvo V40",
+  "verdict": "pass",
+  "reasons": [
+   "reads as a V40 instantly - correct hatch profile, iron-mark grille, tail lamps wrapping into the tailgate",
+   "glazing transparent: seats, headrests and steering wheel resolvable through the side glass (glTF probe: clear, proven, 20 materials, 6 textures)",
+   "tyres dark rubber against dark-grey alloys, tread face visible in front34 and rear34",
+   "rim faces present in all four tiles",
+   "body mats=1 cov=0.203 - healthy coverage, header green 'recolourable'",
+   "year 2018 per source title"
+  ]
+ },
+ {
+  "uid": "79fc4c851bb64c18a5adc92e9330b626",
+  "name": "2003 Volvo S60 R",
+  "verdict": "fail",
+  "reasons": [
+   "rim faces absent: all four wheels render as smooth featureless white discs with no spokes, no lug nuts and no centre cap, in all four tiles - confirmed at 2x, this is missing geometry and not the one-sided key light",
+   "glazing opaque (glTF probe, certainty=proven, 33 materials, 24 textures)",
+   "body and panel work are otherwise clean; the defect is the wheels"
+  ]
+ },
+ {
+  "uid": "5fb13d2daeb5480e8be44e475e2acf59",
+  "name": "Volvo C30 R-Design",
+  "verdict": "pass",
+  "reasons": [
+   "reads as a C30 instantly - correct short 3-door body and the distinctive frameless glass tailgate",
+   "glazing transparent: the glass tailgate resolves the boot interior behind it and the side glass shows the seats (glTF probe: clear, proven, 34 materials, 28 textures)",
+   "tyres read plainly BLACK at 2x on the tread face in both front34 and rear34, against pale grey alloy spokes",
+   "rim faces present, multi-spoke geometry and lug detail traceable in all four tiles",
+   "headlamps carry sharp internal projector elements; door and bonnet shut lines defined",
+   "body mats=1 cov=0.151 - healthy, header green 'recolourable'"
+  ]
+ },
+ {
+  "uid": "ed8f5aebb96d43c499ac3e748a829c35",
+  "name": "2004 Volvo S60",
+  "verdict": "fail",
+  "reasons": [
+   "wheels detached and missing from the arches: all four arches are empty with bare stub hubs, and loose wheels lie on the floor under the car in the side and rear34 tiles",
+   "cov=0.978 full coverage - one material covers body, glass and tyres, so a respray would repaint the glass",
+   "glazing opaque (glTF probe: 9 materials, 5 textures, zero transparent)",
+   "NOTE the title is wrong: this is the 2004 S40 body, not an S60 - another case of title-derived metadata being unreliable"
+  ]
+ },
+ {
+  "uid": "b613351dacbc4e68bcb4002af62370f9",
+  "name": "Volvo V60",
+  "verdict": "fail",
+  "reasons": [
+   "NO WHEELS AT ALL - all four arches are empty in every tile, the car sits on nothing",
+   "flat clay shell (glTF probe flat_shell=true, 13 materials, 0 textures)",
+   "glazing opaque - windows render body-white",
+   "cov=0.985 full coverage: a respray would repaint glass and arches too"
+  ]
+ },
+ {
+  "uid": "19bf3cd5770d4aa995eb9ea55a7263f6",
+  "name": "Volvo V40 2000",
+  "verdict": "fail",
+  "reasons": [
+   "wheels missing from at least two corners: both arches are empty in front34 and in the side tile, and only one wheel each appears in front34_L and rear34",
+   "a stray flat ground plane is baked into the mesh, visible as a white slab under the car in the side and rear34 tiles",
+   "glazing opaque (glTF probe, certainty=proven, 39 materials, 0 textures) - the dark glass in the sheet is the render worker's name-match override",
+   "cov=0.112 LOW COVERAGE, so the green in this sheet is not the model's own body colour and is not evidence either way"
+  ]
+ },
+ {
+  "uid": "3676ed90600d44db9f3f58dcd3d18112",
+  "name": "2011 Volvo S60",
+  "verdict": "fail",
+  "reasons": [
+   "glazing OPAQUE: the material literally named 'glass' is alphaMode=OPAQUE, alpha=1.0, baseColorFactor [0.54,0.858,0.42] with no texture (glTF probe, certainty=proven). The clear glass in the sheet is manufactured by the render worker's name-match override - the documented Porsche failure",
+   "tyres render bright purple on all four corners in all four tiles; the body is white, so this is not body paint bleeding onto the rubber",
+   "game-asset rip rather than a clean model: materials are skin0 / nodamage / tirea0 / env_cubemap_model / undercarriage, with placeholder baseColorFactors (a material named 'Black' is [0.537,0.6,0.974], i.e. blue)"
+  ]
+ },
+ {
+  "uid": "c533a85574414c00b93d49fb9cda1f20",
+  "name": "Wrecked Volvo V40 1999",
+  "verdict": "fail",
+  "reasons": [
+   "crash-damaged bodywork as the title states: front bumper hanging off, bonnet crushed, headlamp assembly exposed and the front wing torn",
+   "cov=0.907 FULL COVERAGE - one material over body, glass and tyres",
+   "rims render body-white with only faint spoke relief"
+  ]
+ },
+ {
+  "uid": "e263261c059e40c9a53237b73a8fb890",
+  "name": "Volvo S80",
+  "verdict": "fail",
+  "reasons": [
+   "global-alpha shell, the third car of this source pack in the wave: carpaint and tire both alphaMode=BLEND at alpha 0.25 (glTF probe alpha_shell=true) - the whole car renders as translucent dark glass",
+   "body mats=0 cov=0.000: no body-paint material, cannot recolour"
+  ]
+ },
+ {
+  "uid": "35624fd1b27d4445b75dab48730bc714",
+  "name": "2012 Volvo S80 PSA Design",
+  "verdict": "fail",
+  "reasons": [
+   "mismatched body panels in the SHIPPED glTF, not a render artefact: a near-white door and mirror (Color_002 0.776, Color_A01 0.729) sit against a black wing and bonnet (Color_M09 0.0, Black_1 0.0) while 'carpaint' is mid-grey 0.608 - the car reads as part-resprayed, not premium paint",
+   "kitbash: the 39 materials are two different packs merged - carpaint/clearglass/windowglass/chrome alongside SketchUp-style Color_A01/edge_color172155133255/Leather_Stitching/Brun_Metallic",
+   "glazing itself is fine (clearglass and windowglass both BLEND alpha 0.6)"
+  ]
+ },
+ {
+  "uid": "5133d3c0909748599aee086aa7ee122d",
+  "name": "Volvo S40",
+  "verdict": "fail",
+  "reasons": [
+   "global-alpha shell, the fourth car of this source pack in the wave (glTF probe alpha_shell=true) - the whole body renders as translucent dark glass",
+   "body mats=0 cov=0.000: no body-paint material, cannot recolour"
+  ]
+ },
+ {
+  "uid": "9c3898efe02440baadf78af64adfb54e",
+  "name": "2012 Volvo S80 2.4 Refreshed",
+  "verdict": "fail",
+  "reasons": [
+   "glazing opaque (glTF probe, certainty=proven, 34 materials, 0 textures) - the dark glass in the sheet is the render worker's name-match override",
+   "body panels read as crinkled foil rather than paint: the shading breaks up across the bonnet, roof and doors in every tile",
+   "near-duplicate of '2012 Volvo S80 PSA Design' (772,210 vs 772,556 faces, 346 apart, 0.04%) - same base mesh, and both fail independently"
+  ]
+ },
+ {
+  "uid": "035ed4cc989b492e9881b8ceeca4960b",
+  "name": "Volvo XC90 MK2 2014",
+  "verdict": "fail",
+  "reasons": [
+   "crash / airbag-deployment simulation asset, not a showroom car: deployed airbags burst out through both doors and the roof as large white lobes in every tile, and the doors are flung open",
+   "wheels detached: bare hubs at all four corners with a loose wheel lying under the car in the side tile",
+   "glazing opaque (glTF probe, certainty=proven, 60 materials, 5 textures)",
+   "cov=0.865 - one material over most of the car"
+  ]
+ },
+ {
+  "uid": "5c178cf6696a4a02a0f550db7934d127",
+  "name": "Volvo S90",
+  "verdict": "fail",
+  "reasons": [
+   "the body is encased in a crude faceted block shell: the front and rear ends are featureless angular slabs with no grille, no lamps and no bumper detail, and the roof and boot are flat planes",
+   "a real S90 is visible underneath - doors, mirrors, sills and wheels all read correctly - but it is buried inside the shroud in all four tiles",
+   "glazing named materials are clear, so this is a geometry failure rather than a material one"
+  ]
+ },
+ {
+  "uid": "d3d3761ba303447abeddc18cc7506deb",
+  "name": "Volvo V70 MK3 2nd Facelift 2013-2016",
+  "verdict": "fail",
+  "reasons": [
+   "wheels absent at all four corners: bare brake discs and exposed coil springs sit in every arch, with no rims or tyres fitted, in all four tiles",
+   "front structure partly disassembled - the bonnet area shows exposed inner panels in rear34",
+   "glazing itself is clear (28 materials); the failure is missing geometry"
+  ]
+ },
+ {
+  "uid": "672e6eab0f6446388e97ae205096d172",
+  "name": "Volvo XC90 front quarter",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a PARTIAL car: only the front quarter exists, the rear two-thirds of the vehicle is simply absent",
+   "the tarmac ground plane is baked into the mesh as a ragged textured slab, and loose scan debris floats above the car - the documented scan failure class",
+   "cov=1.000 full coverage, 1 material, and glazing opaque"
+  ]
+ },
+ {
+  "uid": "45a11cc81a2843a1b87b0c5c2abb86a7",
+  "name": "Volvo V90",
+  "verdict": "fail",
+  "reasons": [
+   "FLAT SHELL, decisive from the glTF: all 18 materials carry baseColorFactor [1,1,1,1] with zero textures, so the shipped file holds no colour at all - the tyre material 'Rubber_Rough' is pure white and the glazing 'glass111113411' and 'Back_light_Glass' are white and alphaMode=OPAQUE",
+   "the SHEET would have passed this car: it shows dark wheels and tinted glass, both manufactured by the render worker (rim handling and the glass name-match override). Judged from the shipped asset per the evidence rule, the customer would be handed a uniform white clay",
+   "geometry and proportions are genuinely good - correct V90 estate, Thor's-hammer lamps, iron-mark grille - so this is worth re-sourcing from a different upload"
+  ]
+ },
+ {
+  "uid": "34632915878c410fa1f5cbc8c820e4ba",
+  "name": "Volvo V50",
+  "verdict": "pass",
+  "reasons": [
+   "reads as a V50 estate instantly - correct roofline, iron-mark grille, correct tail lamps up the D-pillar",
+   "glazing transparent: seats and the boot interior are resolvable through the side and tailgate glass (glTF probe: clear, proven, 16 materials, 7 textures)",
+   "tyres plainly BLACK rubber at 2x with visible tread, against silver 8-spoke alloys with lug detail and centre caps",
+   "rim faces present in all four tiles",
+   "door and bonnet shut lines defined; headlamps carry internal detail",
+   "body mats=1 cov=0.196 - healthy, header green 'recolourable'",
+   "minor: slight faceting on the front bumper around the fog-lamp surround, not enough to fail it"
+  ]
+ },
+ {
+  "uid": "8135a6c9c9344079bfaefc9d747e2ceb",
+  "name": "Volvo XC90",
+  "verdict": "fail",
+  "reasons": [
+   "flat clay shell (glTF probe flat_shell=true, 21 materials, 0 textures)",
+   "glazing opaque - the windscreen and side glass render solid body-white with no interior",
+   "rims render body-white; only the tyres are dark",
+   "faceted low-poly surfacing visible across the bonnet and roof",
+   "cov=0.859 - one material over most of the car"
+  ]
+ },
+ {
+  "uid": "b014111007fb47709114f8d34f2b12b5",
+  "name": "Volvo S-40",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a crash-damaged scrapyard car: the front end is destroyed, the bonnet and bootlid stand open, and '433' is spray-painted on the driver's door",
+   "faceted scan mush across every panel with lighting baked into the surface - the documented scan failure class",
+   "cov=1.000 full coverage, 1 material, glazing opaque"
+  ]
+ },
+ {
+  "uid": "6a1aed1ffa8741e292d5b9043fdaaf9c",
+  "name": "volvo v70",
+  "verdict": "fail",
+  "reasons": [
+   "glazing OPAQUE, proven from the glTF: the material named 'glass' is alphaMode=OPAQUE, baseColorFactor [0.322,0.42,0.42,1.0], no texture, and the file contains ZERO transparent materials. The clear glass and visible interior in the sheet are entirely the render worker's name-match override - the documented Porsche failure",
+   "everything else about this model is right, which is what makes it worth recording: 'reifen' (tyre) is baseColor 0.012 proper black rubber, rim faces are present with spoke detail, and the P2 V70 proportions are correct. It fails on glazing alone and is worth re-sourcing"
+  ]
+ },
+ {
+  "uid": "7520f0e2faa44b21aad13e553413c566",
+  "name": "Photoscanned Volvo XC90",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: the tarmac ground plane is baked into the mesh as a grey slab under the car in every tile",
+   "panels are soft and lighting is baked into the texture; the wheel-to-ground interface is smeared and the sills melt into the floor",
+   "cov=1.000 full coverage, 1 material, glazing opaque"
+  ]
+ },
+ {
+  "uid": "609bc9df59874bce8c359070dc03f19d",
+  "name": "Volvo C70 Facelift",
+  "verdict": "fail",
+  "reasons": [
+   "global-alpha shell, the fifth car of this source pack in the wave (glTF probe alpha_shell=true): carpaint and tire both alphaMode=BLEND at alpha 0.25, so the whole car renders as translucent dark glass",
+   "body mats=0 cov=0.000: no body-paint material, cannot recolour"
+  ]
+ },
+ {
+  "uid": "57c5749b74f34d75a98926f3d0130f5a",
+  "name": "Volvo XC30 Petrol and Electric Recharge",
+  "verdict": "fail",
+  "reasons": [
+   "the file contains TWO separate vehicles standing side by side in every tile - an XC40 and a C40 (the second is badged C40 on its tailgate) - so it is a scene, not a single serving asset",
+   "the title claims 'XC30', which is not a Volvo model at all; per the accuracy rule no model name can be asserted for this row",
+   "glazing opaque (glTF probe, certainty=proven, 22 materials, 0 textures)"
+  ]
+ },
+ {
+  "uid": "8eb64f5f49ff4032ae0e18db8c03df49",
+  "name": "VolvoP1800",
+  "verdict": "fail",
+  "reasons": [
+   "flat clay shell (glTF probe flat_shell=true, 12 materials, 0 textures, one baseColorFactor across the file)",
+   "glazing opaque, certainty=proven - the glasshouse renders as a solid pale surface with no cabin behind it",
+   "geometry is genuinely good: the cow-horn bumpers, egg-crate grille and side crease read as a P1800 instantly, and the steel wheels carry bolt detail. Worth re-sourcing from a textured upload",
+   "NOTE this row only reached the wave because it was forced through with --allow-uid: 'VolvoP1800' glues the marque to the nameplate, so no nameplate pattern can match it (norm() has no boundary between 'volvo' and 'p1800'). Rendering it was the right call even though it failed - the probe settled it, and a title guess could not have"
+  ]
+ },
+ {
+  "uid": "d150b9f02129431791a4c1cd537d53e9",
+  "name": "VOLVO",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of an entire STREET SCENE, not a car: a brick wall carrying Cyrillic shop signage, a large tree, pavement and painted road markings, with a vinyl-wrapped XC90 on a Russian plate parked inside it",
+   "cov=1.000 full coverage, glazing opaque",
+   "this row was forced through with --allow-uid because its title is the bare word 'VOLVO'. Rendering it was cheap and the eye settled it instantly, which is what --allow-uid is for"
+  ]
+ },
+ {
+  "uid": "a96c5d1c85424b7da73938ba5d328e79",
+  "name": "Volvo c70",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: the tarmac ground plane is baked into the mesh as a grey slab in every tile",
+   "ragged holes torn through the roof and glasshouse, torn panel edges along the sills and doors, scan noise across every surface",
+   "cov=1.000 full coverage, 1 material, glazing opaque"
+  ]
+ },
+ {
+  "uid": "26d2199bd0e54ae69dc2e0852a3f4dc9",
+  "name": "294: Volvo S70",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: the window openings are ragged HOLES rather than glazing - you see straight into the cabin through torn edges in every tile",
+   "panels blotchy with white scan artefacts, sills and wheel arches soft and melted, and the car floats clear of the floor",
+   "cov=1.000 full coverage, 1 material"
+  ]
+ },
+ {
+  "uid": "29942c1225d54f928d68d631a0320c71",
+  "name": "VOLVO Car Low",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a snow-covered, road-dirty S80 standing in a car park: the snowy ground plane is baked into the mesh as a ragged white slab in every tile",
+   "snow, road grime and the day's lighting are all baked into the texture, so the car can never be presented in studio colour",
+   "cov=1.000 full coverage, glazing opaque",
+   "forced through with --allow-uid ('VOLVO Car Low' carries no nameplate); the render settled it immediately"
+  ]
+ },
+ {
+  "uid": "1fb715de748843628f24bd3914f633d6",
+  "name": "2000 Volvo C70 Coupe",
+  "verdict": "pass",
+  "reasons": [
+   "reads as a P80 C70 coupe instantly - correct roofline, iron-mark grille, correct tail lamps",
+   "glazing genuinely transparent and this sheet is a VALID witness for it: the glazing materials are named 'winddo'/'Materia88'/'Materia89', none of which match the render worker's override regex, so no clear glass was manufactured. At 2x the far-side window opening, B-pillar and parcel shelf all resolve through the glass (transparent materials at alpha 0.785 and 0.834)",
+   "tyres black rubber with visible tread against black multi-spoke alloys; blue Volvo centre caps and red brake calipers visible behind the spokes",
+   "rim faces present with full spoke detail in all four tiles",
+   "boot, door and bumper shut lines defined; paint reads premium",
+   "body mats=1 cov=0.213 - healthy, header green 'recolourable'",
+   "year 2000 per source title"
+  ]
+ },
+ {
+  "uid": "883a128cc6174f9ea8fa2dc65d4b258b",
+  "name": "Volvo 480",
+  "verdict": "fail",
+  "reasons": [
+   "global-alpha shell, the sixth car of this source pack in the wave: carpaint.035 alpha 0.25 and tire.035 alpha 0.25, with every one of the 17 materials alphaMode=BLEND (glTF probe alpha_shell=true)",
+   "body mats=0 cov=0.000: no body-paint material, cannot recolour",
+   "the sheet does NOT look translucent here, which is exactly why the glTF probe matters - a white body on a white floor hides it, but where posterUrl is null the resolver hands this 75%-transparent shell straight to the viewer",
+   "also visible: the front wing and bumper are stretched forward in front34"
+  ]
+ },
+ {
+  "uid": "49bfb60c924a474fb84090851dcc1967",
+  "name": "Volvo C70 MK1 1997-2005",
+  "verdict": "fail",
+  "reasons": [
+   "flat clay shell (glTF probe flat_shell=true, 30 materials, 0 textures)",
+   "glazing opaque - the windows render in body white with no cabin behind them",
+   "rims AND tyres render in body colour; nothing on the car reads as rubber",
+   "cov=0.959 full coverage - a respray would repaint glass and tyres"
+  ]
+ },
+ {
+  "uid": "55da0a35f4f04544b94d78d9b1e29bf6",
+  "name": "Good old Volvo",
+  "verdict": "fail",
+  "reasons": [
+   "NOT A CAR: a photogrammetry scan of a handmade cardboard model of a Volvo estate, sitting on a cardboard base sheet that is baked into the mesh",
+   "door handles and the number plate ('COB 312') are drawn on by hand; the roof and panels are folded card",
+   "cov=0.989 full coverage",
+   "forced through with --allow-uid ('Good old Volvo' carries no nameplate); one render settled it"
+  ]
+ },
+ {
+  "uid": "c153347d5f66486e93376286e2c9440b",
+  "name": "Volvo 240",
+  "verdict": "fail",
+  "reasons": [
+   "NO WHEELS: all four arches are empty in every tile and the car stands on small stub supports",
+   "not a stock 240 either - it wears Norwegian POLITI door graphics, a roof light-bar frame, a five-lamp rally pod on the front bumper and rear-window louvres",
+   "glazing itself is clear (49 materials); the failure is missing wheels plus an out-of-scope livery"
+  ]
+ },
+ {
+  "uid": "dabf98d0a3e04566ae76bb5edd33303e",
+  "name": "Volvo 144",
+  "verdict": "fail",
+  "reasons": [
+   "global-alpha shell, the seventh car of this source pack in the wave (glTF probe alpha_shell=true): carpaint and tire both alphaMode=BLEND at alpha 0.25",
+   "body mats=0 cov=0.000: no body-paint material, cannot recolour",
+   "the bumpers and wheels read as translucent chrome in the sheet, which is the same defect showing through"
+  ]
+ },
+ {
+  "uid": "85a3c263ef1b4775825eeff4c3e192d4",
+  "name": "Volvo P1800",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: the ground plane is baked in as a ragged white slab and scan drips hang below it in every tile",
+   "panels soft and melted, the roof and glasshouse smeared, and the Swedish number plate 'EFA 282' baked into the texture",
+   "cov=1.000 full coverage, glazing opaque"
+  ]
+ },
+ {
+  "uid": "ff4e2265d4cf43c68160bff846526a2e",
+  "name": "Volvo 66",
+  "verdict": "fail",
+  "reasons": [
+   "global-alpha shell, the eighth car of this source pack in the wave (glTF probe alpha_shell=true) - the whole car renders as translucent dark glass with the studio floor visible through the body",
+   "body mats=0 cov=0.000: no body-paint material, cannot recolour"
+  ]
+ },
+ {
+  "uid": "cfe08291b94f4b998c46b86bb7e85096",
+  "name": "Volvo 480 slammed on Work Equip 03 wheels",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE - an aftermarket stance build, as the uploader's own title states: ride height on the floor with the sills nearly touching, visible negative camber, wheels tucked hard into the arches, aftermarket gold Work Equip split-rims, a custom front lip and a roof spoiler",
+   "this is past the CLAUDE.md line that 'black wheels and a lowered stance alone are spec variation' - the car no longer presents as a road-going 480 a registration would decode to",
+   "mesh quality is otherwise good: glazing clear (proven, 20 materials), tyres black, rim faces present, cov=0.326 healthy. Worth noting so a future sweep does not re-chase it as a quality problem"
+  ]
+ },
+ {
+  "uid": "f6b447a77d1f43c78894c1363fa7570a",
+  "name": "volvo 740 turbo glt Custom",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit on a clay shell: loose bumpers, arch flares and body panels lie scattered on the floor beneath the car in every tile, and the car itself floats clear of the ground",
+   "glazing opaque - the windows render in body white",
+   "rims render body-white; cov=0.961 full coverage, so a respray would repaint glass and wheels too"
+  ]
+ },
+ {
+  "uid": "a9d7a73cc1454b30a8e400385d440aa6",
+  "name": "Volvo 850 BTCC 1994",
+  "verdict": "fail",
+  "reasons": [
+   "FLAT SHELL, decisive from the glTF: ALL 57 materials carry baseColorFactor (1,1,1) and the file holds zero textures, so the shipped asset has no colour information whatsoever",
+   "glazing opaque, certainty=proven: the material named 'window' is alphaMode=OPAQUE at alpha 1.0",
+   "the SHEET would have passed this car - its header is green 'recolourable' at a healthy cov=0.151, and it shows tinted glass and dark wheels. All of that is manufactured by the render worker; the customer would be handed a white clay 850",
+   "second car in this wave where the probe overturned a sheet that read as a pass (the other is the V90)"
+  ]
+ },
+ {
+  "uid": "2c3f734019684e709b6e5bfd40d363ea",
+  "name": "Volvo PV4 Jakob",
+  "verdict": "pass",
+  "reasons": [
+   "reads as the 1927 Volvo correctly - upright cabin, fabric roof, running boards, spoked wheels, chrome radiator shell with the iron-mark badge",
+   "glazing genuinely transparent: material 'glass' is alphaMode=BLEND at alpha 0.16, and the cabin and steering wheel resolve through it",
+   "cleanly authored material set with no flat or alpha shell: BODY is opaque dark navy [0.011,0.022,0.083], RUBBER_SEAL dark, leather, roof_darker, chassis, brushed_metal - every material carries a distinct, sensible colour",
+   "tyres read black; wheels are gold-painted spokes with chrome hubs, rim faces and every spoke present in all four tiles",
+   "I initially suspected a translucent body from the side tile - the glTF disproved it: the see-through impression was studio reflection on the forced silver over a glossy surface",
+   "model recorded as 'PV4' per the source title; no generation or year asserted beyond it"
+  ]
+ },
+ {
+  "uid": "4e42e8e491c94e08b616dab969244892",
+  "name": "Volvo_polestar_one_wide_body",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE - an aftermarket widebody time-attack kit, as the title says: a multi-element rear wing mounted on a tube scaffold, bolt-on arch extensions, front canards and a splitter. No registration decodes to this",
+   "tyres render bright RED on all four corners, tread included - not black rubber",
+   "glazing named materials are transparent, so the failure is scope and tyre colour rather than glass"
+  ]
+ },
+ {
+  "uid": "b59764e454d54f73a6b745408f56cd3f",
+  "name": "Volvo Polestar One K.S edition",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE - the same aftermarket widebody time-attack kit as Volvo_polestar_one_wide_body: multi-element rear wing on a tube scaffold, bolt-on arch extensions, canards and splitter",
+   "near-identical mesh to that row (213,164 vs 216,942 faces, 1.7% apart) - the K.S Edition Polestar 1 uploads in this sweep are one build family under several titles",
+   "tyres do read black here, unlike the red-wheeled sibling, but the kit puts it out of scope regardless"
+  ]
+ },
+ {
+  "uid": "e8df9f21c5824aa4b51b66915e99ee31",
+  "name": "2020 | Volvo Polestar 1 K.S Edition - Zebra Wrap",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE - the third row of the same K.S widebody time-attack build in this sweep: multi-element rear wing on a tube scaffold, bolt-on arch extensions, canards and a front splitter",
+   "tyres render WHITE on all four corners with the sidewall lettering showing, tread included - not black rubber",
+   "near-duplicate of Volvo_polestar_one_wide_body and Volvo Polestar One K.S edition (210,021 / 213,164 / 216,942 faces)"
+  ]
+ },
+ {
+  "uid": "0bfd8e7dd8a546abb0bd3cd6c9c4bfdd",
+  "name": "Volvo Polestar K.S 2020 | www.vecarz.com",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE - the fourth and last row of the same K.S widebody time-attack build in this sweep: multi-element rear wing on a tube scaffold, arch extensions, canards, front splitter",
+   "this is the keeper of the exact-face-count dupe pair the filter caught (204,093 faces, against '2020 | K.S. Hero Edition Volvo Polestar 1' at the same count)",
+   "tyres do read black here; the kit is what puts it out of scope"
+  ]
+ },
+ {
+  "uid": "2d44c05d36424ceb96e6da7451df782d",
+  "name": "Volvo 740",
+  "verdict": "pass",
+  "reasons": [
+   "reads as a 740 saloon instantly - correct boxy three-box profile, correct DLO and pillar spacing across all four views",
+   "glazing genuinely transparent: seats, steering wheel and dashboard all resolve through the side glass and windscreen (glTF probe: clear, proven, 74 materials)",
+   "tyres black rubber on dark steel wheels with chrome centre caps; rim faces present in all four tiles",
+   "grille is crisply modelled at 2x - proper egg-crate mesh with the iron mark and diagonal bar",
+   "bonnet and door shut lines defined",
+   "KNOWN WEAKNESS, recorded rather than hidden: the headlamps are near-flat dark panels with only a faint lens edge and no reflector or bulb behind them. This is the rubric's 'headlights lacking sharp internal elements' - it is a needs-work item, not a defect, and the car is otherwise strong",
+   "cov=0.821 is high but inside the advisory band (the warn threshold is 0.90); recolour_audit --stamp remains the only proof a respray takes"
+  ]
+ },
+ {
+  "uid": "d9f04691f9a94d9daa3d35fdf65ca8b4",
+  "name": "Volvo 850 T5 R Estate 1995",
+  "verdict": "fail",
+  "reasons": [
+   "wheels detached at all four corners: bare hubs with exposed coil springs sit in every arch and a loose wheel lies under the car in the side tile",
+   "not a showroom car - it carries a roof rack with a cylindrical LiDAR/sensor pod, i.e. a research or survey vehicle",
+   "glazing opaque (glTF probe, certainty=proven, 32 materials, 0 textures)"
+  ]
+ },
+ {
+  "uid": "cae085c08c874057974ebd21175ea638",
+  "name": "Volvo 940",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a PARTIAL car: only the front clip exists - bonnet propped open over an exposed engine bay, with no cabin and no rear half of the vehicle at all",
+   "the Latvian number plate 'JC-5753' is baked into the texture, along with dirt and the day's lighting",
+   "cov=0.995 full coverage, glazing opaque"
+  ]
+ },
+ {
+  "uid": "b6e2cea4e7144bafaf76be0bca76d0bd",
+  "name": "volvo_145_custom",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE - a chopped hot-rod custom, not a stock 145: roof chopped, door handles shaved, side louvres cut into the wings, custom bumpers and a flame livery",
+   "glazing opaque: the windows render as flat grey panels with no cabin behind them",
+   "tyres render pale body-colour rather than black rubber",
+   "cov=1.000 with a single material - a respray would repaint glass and tyres too"
+  ]
+ },
+ {
+  "uid": "d90d42c494104fcdb174c4f28a523562",
+  "name": "Volvo 240",
+  "verdict": "pass",
+  "reasons": [
+   "reads as a 240 saloon instantly - correct three-box proportions, correct DLO, consistent roof and pillars across all four views",
+   "glazing genuinely transparent: seats, headrests, dashboard, steering wheel and the far-side windows all resolve through the glass (glTF probe: clear, proven, 11 materials, 7 textures)",
+   "tyres black rubber with a visible tread pattern, on grey multi-slot alloys; rim faces present in all four tiles",
+   "headlamps carry a real lens and internal reflector segments at 2x - notably better than the other 740/240-era models in this wave",
+   "grille is crisp: correct vertical slats with the iron mark and diagonal bar; bonnet, door and wing shut lines defined",
+   "MINOR, recorded not hidden: a small dark stub hangs below the front bumper in the side and rear34 tiles - a plate bracket or tow eye, not enough to fail it",
+   "the number plate texture reads 'W4LLON'; remove_plates.py is the existing step for that at publish time",
+   "cov=0.787 - inside the advisory band"
+  ]
+ },
+ {
+  "uid": "3e884160dc25424aa7e8d6e438295b96",
+  "name": "2011 Volvo C30 WTCC",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE - a WTCC touring-car racer, not a road car: full competition livery with race number 30 and Yokohama/KW/Denso decals, a roll cage visible through the glass, rear wing, front splitter and bolt-on arch extensions",
+   "no UK registration decodes to a race car; the C30 road model is covered by the C30 R-Design pass in this same wave",
+   "mesh quality itself is good (33 textures, glazing transparent) - it is scope, not quality, that fails it"
+  ]
+ },
+ {
+  "uid": "96d930745443455488ad9b5efaf4e163",
+  "name": "Volvo 740 HD",
+  "verdict": "fail",
+  "reasons": [
+   "flat clay shell: 5 materials, 0 textures, glazing opaque",
+   "the side and rear windows render in body white with no cabin behind them; only the rear screen shows as a flat mint-green panel, which is a solid coloured material rather than glass",
+   "cov=0.991 full coverage - one material over body, glass and wheels",
+   "a stray raised panel sits on the boot lid in the side and rear34 tiles"
+  ]
+ },
+ {
+  "uid": "1b93d5446dbf43f093c7d49d678ff170",
+  "name": "Volvo 850 1991-1996",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit: the bonnet and the roof panel float in the air above the body in every tile, the engine bay stands open, and the wheels are detached with bare hubs and exposed coil springs in the arches",
+   "a large flat white platform slab is baked into the mesh under the car",
+   "glazing opaque (glTF probe, certainty=proven, 36 materials, 0 textures)"
+  ]
+ },
+ {
+  "uid": "774a87886269421ba8e52f0419c3bd4e",
+  "name": "Volvo PV36 Carioca 1936",
+  "verdict": "fail",
+  "reasons": [
+   "a cobblestone ground disc is BAKED INTO THE MESH as a circular textured base plate under the car, visible in all four tiles - where posterUrl is null the resolver hands the glb straight to the viewer, so the customer would get a car standing on a floating stone disc",
+   "everything else is good and worth recording: glazing transparent with the cabin resolvable, chrome radiator grille with the iron mark crisp, door shut lines defined, cov=0.287 healthy",
+   "the whitewall tyres are AUTHENTIC period detail with black tread visible in the side and rear34 tiles - explicitly not the body-colour tyre defect",
+   "fixable by deleting the base mesh; recorded as a fail rather than a pass because the shipped asset is what ships"
+  ]
+ },
+ {
+  "uid": "66697669831b47cea7874fc8c4544e74",
+  "name": "Volvo 240 styled sedan car downloadable",
+  "verdict": "fail",
+  "reasons": [
+   "the file contains TWO complete cars standing side by side in every tile - two 240 saloons, one on steel wheels with hubcaps and one on alloys - so it is a scene, not a single serving asset",
+   "the number plate 'ROBIN MIK' is baked into both cars"
+  ]
+ }
+]
