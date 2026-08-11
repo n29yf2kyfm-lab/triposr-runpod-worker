@@ -50,13 +50,72 @@ def paint(m, lin, metallic=0.6, roughness=0.35):
     elif "extensions" in m:
         del m["extensions"]
 
+_BLENDER_ID_MAX = 63          # bpy.types.ID.name is capped at 63 characters
+
+def resolve_names(want, have):
+    """Map recorded paint material names onto the names actually in the glTF.
+
+    paintMaterialNames is measured by the render worker's mat_audit, which runs
+    in BLENDER, so the names it records are Blender IDs — and Blender mangles
+    them on import in two ways that make a literal lookup fail against the glTF:
+
+      * it appends `.001`, `.002`… to disambiguate, inventing names that were
+        never in the file. Measured: `C1_Paint.001` recorded against a glTF that
+        holds one `C1_Paint`; `pan_paint.002` against a glTF holding only
+        `pan_paint.001`; `CarPaint.001` against a glTF holding `CarPaint`.
+      * it truncates at 63 characters. Measured:
+        `Porsche_PanameraSportTurismoRewardRecycled_2021Coloured_Materia`
+        recorded for a real `…Coloured_Material` — one letter short, exactly 63.
+
+    Four cars (three Porsches and a Jaecoo) lost their eight colours to this,
+    all reported as "materials not present", which reads like a bad audit rather
+    than a name-space mismatch.
+
+    Resolution is deliberately narrow so it cannot widen the paint onto trim:
+    an exact hit is taken as-is and stops there; only when a name has NO exact
+    match is it allowed to fall back to its `.NNN` base, then to its siblings,
+    then — only at exactly 63 characters — to a prefix. Returns the set of real
+    glTF names to paint.
+    """
+    have = list(have)
+    hs = set(have)
+    out = set()
+    unresolved = []
+    for w in want:
+        if w in hs:                                   # exact — never widen
+            out.add(w)
+            continue
+        base = w.rsplit(".", 1)[0] if w.rsplit(".", 1)[-1].isdigit() else w
+        if base != w and base in hs:                  # C1_Paint.001 -> C1_Paint
+            out.add(base)
+            continue
+        sib = [h for h in have
+               if h.startswith(base + ".") and h[len(base) + 1:].isdigit()]
+        if sib:                                       # pan_paint.002 -> .001
+            out.update(sib)
+            continue
+        if len(w) == _BLENDER_ID_MAX:                 # truncated at Blender's cap
+            pre = [h for h in have if h.startswith(w)]
+            if pre:
+                out.update(pre)
+                continue
+        unresolved.append(w)
+    return out, sorted(unresolved)
+
 def respray(src, dst, body_names, hexcol, neutralise_rest=None):
     """Paint body_names hexcol. If neutralise_rest is a hex string, every other
     material is flattened to it — used by the coverage probe so the painted
     surfaces are unmistakable."""
     j, rest = read_gltf(src)
-    want = set(body_names)
     lin = srgb_to_linear(hexcol)
+    have = [(m.get("name") or "") for m in j.get("materials", [])]
+    want, unresolved = resolve_names(set(body_names), have)
+    if not want:
+        # Nothing at all matched: the audit named materials this file does not
+        # contain in any form. Still a hard failure — painting nothing would
+        # ship eight identical files.
+        raise KeyError(f"materials not present in {os.path.basename(src)}: "
+                       f"{sorted(set(body_names))}")
     hit = []
     for m in j.get("materials", []):
         nm = m.get("name") or ""
