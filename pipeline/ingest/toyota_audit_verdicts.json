@@ -3747,5 +3747,34 @@
    "prior_verdict": "REJECTED",
    "sheet": "car-meshes/audit/toyota/fc30b71e31aa409cbca8bf6885533af5.jpg"
   }
- ]
+ ],
+ "_render_side_inversion_mechanism": {
+  "summary": "A SECOND, distinct render-side inversion mechanism, found on this audit and NOT the argmin tie CLAUDE.md records for the Mazda 2. The Mazda mechanism does not fire on either Toyota case: I replicated the handler's decision from the glTF vertices and after the first upright rotation argmin(ext2)==2 for both, so the 'landed on its side' roll never happens.",
+  "mechanism": "render/handler.py:1016-1024. After the 90-degree X rotation the car's up-axis can land on -Z, i.e. upside down, and the ONLY guard is the 180-degree ambiguity test: flip when the top third is wider than 1.15x the bottom third. That test collects vertices with `if len(pts) > 40000: break`, so it stops after the FIRST mesh object that pushes the buffer past 40k -- a handful of objects out of dozens -- and decides the flip on an arbitrary ~9% sample of the car.",
+  "measured": {
+   "42ce9945 (Camry XV30 2004)": {
+    "objects": 58,
+    "objects_sampled": 6,
+    "verts_sampled": "45,447 of 489,371 (9.3%)",
+    "ratio_all_verts": 1.258,
+    "flip_fires_all_verts": true,
+    "ratio_40k_break": 1.14,
+    "flip_fires_40k_break": false,
+    "result": "the flip is SKIPPED and a correct car renders upside down"
+   },
+   "d893bada (Celica TA22 1973)": {
+    "objects": 62,
+    "objects_sampled": 6,
+    "verts_sampled": "47,800 of 492,993 (9.7%)",
+    "ratio_all_verts": 1.08,
+    "flip_fires_all_verts": false,
+    "ratio_40k_break": 1.432,
+    "flip_fires_40k_break": true,
+    "result": "the flip FIRES on an upright car and turns it upside down"
+   }
+  },
+  "why_it_matters": "It errs in BOTH directions from the same line, which is why it looked random and was recorded as '~8% measured on the Honda wave, mechanism unresolved'. It is not random: the object order and the extents are properties of the file, so it is deterministic per asset and re-rendering cannot fix it. Hence fail-rerender, never a scrap.",
+  "confidence": "HIGH on the mechanism class, MEDIUM on the exact per-car reproduction: Blender is not available here, so the object ORDER is trimesh's traversal of the glTF node graph rather than Blender's importer order. The load-bearing point does not depend on that -- a ~9% sample decides the flip, and on both cars the sample disagrees with the full mesh.",
+  "suggested_fix": "Drop the early break, or sample uniformly across ALL objects instead of taking the first few whole. Same class of fix as the MARGIN that CLAUDE.md proposes for the argmin tie; both live in the same block and both should be done together, on a build that is not shared with an in-flight wave."
+ }
 }
