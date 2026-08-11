@@ -2160,5 +2160,94 @@
    "white rim faces present in all four views, red calipers behind",
    "lamp internals, side intakes and shut lines defined"
   ]
+ },
+ {
+  "uid": "cae366648d134fa3a3ee810ba1f6c2fc",
+  "name": "Porsche 911 (964)",
+  "verdict": "fail",
+  "reasons": [
+   "the whole car renders as a MIRROR CHROME wrap - confirmed in the glTF, the body material is literally named Carro_Cromado ('chromed car') and every material carries metallicFactor 1",
+   "there is no diffuse body-paint material, so the colour pipeline has nothing to recolour and the car can never render as a normal painted 964",
+   "glazing reads as mirror rather than glass - no interior visible in any view",
+   "tyres ARE black rubber on white Cup rims; the failure is the body finish"
+  ]
+ },
+ {
+  "uid": "cc2f5a514de942f98dbe81014988b2ca",
+  "name": "2008 Porsche 911 GT3",
+  "verdict": "pass",
+  "reasons": [
+   "997.1 GT3 proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands against silver rims",
+   "glazing transparent, roll bar visible through the side glass",
+   "silver rim faces present in all four views, orange calipers behind",
+   "front intakes and shut lines defined",
+   "marginal: headlamp internals are shallow at tile scale, clearer in the 3/4 zoom - below par but above the fail bar",
+   "road-legal GT3, in scope"
+  ]
+ },
+ {
+  "uid": "ce68548db1374a94b3cdd284857541a7",
+  "name": "free-porsche-911-carrera-4s",
+  "verdict": "fail",
+  "reasons": [
+   "BAKED SCENE WELDED INTO THE MESH, proven from the glTF: a 136.59 x 32.60 x 22.59 unit box (Cube.001) plus 51.88 and 27.50 unit planes - a whole studio room around the car",
+   "the dark rectangular floor slab with hard edges renders under the car in all four views and is not the render rig's floor",
+   "tyres are black and glazing transparent; the failure is the baked environment",
+   "identical geometry to ceda9810"
+  ]
+ },
+ {
+  "uid": "ce837502def244c4aea720502c953f7c",
+  "name": "2019 Porsche 911 Carrera 4S Cabriolet (992)",
+  "verdict": "pass",
+  "reasons": [
+   "992 Carrera 4S Cabriolet proportions read instantly, roof up; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, interior visible through the side glass",
+   "black rim faces present in all four views, red calipers behind",
+   "lamp internals, intake slats and shut lines defined; the red hood is a factory soft-top colour"
+  ]
+ },
+ {
+  "uid": "ceda9810395e4cceb696fa2f8ab64af4",
+  "name": "Free-porsche-911-carrera-4s",
+  "verdict": "fail",
+  "reasons": [
+   "BAKED SCENE WELDED INTO THE MESH: identical geometry to ce68548d - a 136.59 x 32.60 x 22.59 unit room box plus 51.88 and 27.50 unit planes around the car",
+   "the dark floor slab renders under the car in all four views",
+   "tyres are black and glazing transparent; the failure is the baked environment",
+   "duplicate upload of ce68548d"
+  ]
+ },
+ {
+  "uid": "d079b1eef64b46de8b2699e079a616ab",
+  "name": "2019 Porsche 911 GT2 RS Clubsport 23 Salzburg",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: GT2 RS Clubsport in the Salzburg competition livery - number 23 roundels, PORSCHE sill lettering, Michelin racing slicks, race splitter and swan-neck wing",
+   "duplicate upload of 93407a93",
+   "track-only; takes no road registration"
+  ]
+ },
+ {
+  "uid": "d4019ba7447e49c289974d7585209250",
+  "name": "FORGED WHEELS PORSCHE 911 GT3 992",
+  "verdict": "fail",
+  "reasons": [
+   "NOT A VEHICLE: the model is a single forged WHEEL - all four sheet tiles frame one rim, there is no car, no tyre and no body",
+   "the title says WHEELS; PART_WORDS already carries bare 'wheel' so this should have been dropped pre-render - worth checking why the plural slipped through"
+  ]
+ },
+ {
+  "uid": "dd10a7e346a645af8ba80be48b604854",
+  "name": "Porsche 911 992",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL: one white material over the whole car",
+   "tyres render body-white against white rims in both 3/4 tread bands - no black rubber",
+   "glazing opaque body-white, no interior visible",
+   "headlamps are blank white recesses, the grille is white slats with no depth, no shut lines"
+  ]
  }
 ]
