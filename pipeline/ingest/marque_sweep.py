@@ -74,6 +74,18 @@ def main():
                     help="comma-separated; each becomes '<marque> <nameplate>'")
     ap.add_argument("--out", required=True)
     ap.add_argument("--max-pages", type=int, default=60)
+    # CLAUDE.md 2026-08-09: "COST TO EARLIER WAVES IS UNMEASURED, NOT ZERO ...
+    # those files are POST-filter, so any car the bug dropped was never written
+    # to them. The loss is invisible there by construction ... worth doing: no
+    # wave currently retains it." These two dumps make it measurable. Both are
+    # opt-in so a concurrent wave's invocation is unchanged.
+    ap.add_argument("--raw-out", default="",
+                    help="dump EVERY in-band result before the on-marque and "
+                         "title-gate cuts, so downstream filter losses can be "
+                         "measured rather than guessed")
+    ap.add_argument("--rejects-out", default="",
+                    help="dump every title-gate rejection with the token that "
+                         "fired it (the log only prints the first 10)")
     a = ap.parse_args()
 
     tok = toks()
@@ -104,19 +116,31 @@ def main():
         else:
             band.append(r)
 
-    picks, dupes, rejects = [], 0, []
+    picks, dupes, rejects, offmarque = [], 0, [], 0
+    raw = []
     want = norm(a.marque)
     for r in sorted(band, key=lambda x: -(x.get("faceCount") or 0)):
+        if a.raw_out:
+            raw.append({"uid": r["uid"], "name": r.get("name", ""),
+                        "faces": r.get("faceCount") or 0,
+                        "likes": r.get("likeCount") or 0,
+                        "licence": ((r.get("license") or {}).get("label") or ""),
+                        "author": ((r.get("user") or {}).get("displayName")
+                                   or (r.get("user") or {}).get("username") or ""),
+                        "catalogued": r["uid"] in known})
         if r["uid"] in known:
             dupes += 1
             continue
         nm = norm(r.get("name", ""))
         if want not in nm:                       # keep the sweep on-marque
+            offmarque += 1
             continue
         if gates:
             hit = gates[0].search(nm) or gates[1].search(nm)
             if hit:
-                rejects.append((r.get("name", "")[:46], hit.group(0)))
+                rejects.append({"uid": r["uid"], "name": r.get("name", ""),
+                                "faces": r.get("faceCount") or 0,
+                                "gate_token": hit.group(0)})
                 continue
         picks.append({"uid": r["uid"], "name": r.get("name", ""),
                       "faces": r.get("faceCount") or 0,
@@ -131,12 +155,19 @@ def main():
     log(f"  above {FACE_HI:,} faces : {heavy}")
     log(f"  inside the band     : {len(band)}")
     log(f"  already catalogued  : {dupes}")
+    log(f"  off-marque title    : {offmarque}")
     log(f"  title gates rejected: {len(rejects)}")
-    for n, why in rejects[:10]:
-        log(f"      [{why}] {n}")
+    for r in rejects[:10]:
+        log(f"      [{r['gate_token']}] {r['name'][:46]}")
     log(f"CANDIDATES          : {len(picks)}")
     json.dump(picks, open(a.out, "w"), indent=1)
     log(f"wrote {a.out}")
+    if a.raw_out:
+        json.dump(raw, open(a.raw_out, "w"), indent=1)
+        log(f"wrote {a.raw_out}  ({len(raw)} in-band rows, pre-filter)")
+    if a.rejects_out:
+        json.dump(rejects, open(a.rejects_out, "w"), indent=1)
+        log(f"wrote {a.rejects_out}  ({len(rejects)} title-gate rejections)")
 
 
 if __name__ == "__main__":

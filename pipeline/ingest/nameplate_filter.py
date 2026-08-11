@@ -70,6 +70,50 @@ PART_WORDS = [
     # and would have been downloaded and rendered as cars. \b anchoring means
     # "tire" does NOT match inside "entire".
     "tyre", "tire", "wiper",
+    # Mazda sweep 2026-08-11. Four component models carried a valid nameplate,
+    # sat inside the face band, and would have been downloaded and rendered as
+    # cars: "1994 Mazda Rx7 Front Passenger Suspension" (859,129 faces),
+    # "1999 Mazda Miata Drivetrain 1.8L" (313,003), "Rotor motor Wankel 13B
+    # Mazda RX8" (139,318) and "Mazda-RX-7- Widebody (body only)" (96,682).
+    # "engine" was already listed but catches none of them -- a rotary is a
+    # "motor"/"wankel"/"rotor", never an "engine", in the titles uploaders use.
+    # \b anchoring keeps these narrow: "motor" does NOT match inside
+    # "Versus Motorsport", which is a whole car in this same sweep.
+    "suspension", "drivetrain", "gearbox", "chassis", "subframe", "axle",
+    "differential", "motor", "wankel", "rotor", "body only", "hubcap",
+]
+# Commercial vehicles and construction plant — a whole VEHICLE, correctly named,
+# correctly on-marque, that no car registration can ever decode to.
+#
+# Added 2026-08-11 for the Volvo wave. Volvo Trucks, Volvo Buses and Volvo
+# Construction Equipment are separate businesses with a large Sketchfab
+# presence, and the 110-row Volvo sweep contained 23 of them (21%) -- FH16 and
+# FM tractor units, B9TL/B10M/B5TL double-deckers, a Marcopolo coach, an EC480
+# excavator, an L220H wheel loader, an A40G articulated hauler.
+#
+# The existing gates do NOT catch these. `wave_render.class_gates` (WRONG_CLASS)
+# has bus/coach/minibus/lorry/hgv/excavator/tractor, but NOT a bare "truck" --
+# only "dump truck", "fire truck", "semi truck", "monster truck" -- so "Volvo
+# Truck", "volvo vnl 2025" and "Volvo FH 460" all walked through it. Verified,
+# not assumed: those three titles are in the post-gate manifest.
+#
+# Only unambiguous CLASS words go here, in the languages uploaders write in.
+# Manufacturer model codes are marque-specific and must NOT be hardcoded --
+# "FL" and "FE" are Volvo truck families but two-letter noise anywhere else --
+# so they are passed per-wave via --drop-tokens instead.
+COMMERCIAL_WORDS = [
+    "truck", "trucks", "lorry", "lorries", "hgv", "tractor unit", "prime mover",
+    "cabover", "sleeper cab", "semi trailer", "semitrailer", "artic",
+    "bus", "buses", "autobus", "omnibus", "minibus", "coach", "double decker",
+    "doubledecker", "decker",
+    "excavator", "backhoe", "bulldozer", "dozer", "grader", "wheel loader",
+    "loader", "hauler", "dumper", "compactor", "telehandler", "skid steer",
+    "forklift", "crawler", "digger", "paver",
+    # Uploaders title these in their own language far more often than cars:
+    # "2009 Volvo FM Hormigonera" (Spanish, concrete mixer) is in this sweep.
+    "camion", "camiao", "caminhao", "lastwagen", "lkw", "onibus", "autocar",
+    "hormigonera", "betoniera", "gruszka", "gravsko",
+    "concrete mixer", "cement mixer", "refuse", "garbage", "street sweeper",
 ]
 # Scale / print / sprite artefacts — geometry exists but is not a serving asset.
 SCALE_WORDS = [
@@ -126,8 +170,18 @@ def build(nameplates):
     return pats
 
 
-def classify(title, pats):
+def classify(title, pats, drop_tokens=()):
     t = norm(title)
+    # COMMERCIAL FIRST, and deliberately BEFORE the nameplate test, for two
+    # reasons. (1) It makes the drop count honest: a truck that carries no car
+    # nameplate would otherwise be filed under "no-nameplate", hiding how much
+    # of the sweep was commercial. (2) More importantly, truck and bus model
+    # designations COLLIDE with Volvo's numeric car nameplates -- a "Volvo VNL
+    # 760" tractor unit matches the 760 saloon, and a "Volvo FL 240" matches the
+    # 240. Testing commercial first is what stops that pairing from shipping.
+    for w in list(COMMERCIAL_WORDS) + list(drop_tokens):
+        if re.search(r"\b" + re.escape(norm(w)).replace(r"\ ", r"\s*") + r"\b", t):
+            return "commercial-vehicle", None
     hit = next((n for n, p in pats if p.search(t)), None)
     if not hit:
         return "no-nameplate", None
@@ -146,6 +200,15 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--nameplates", required=True,
                     help="marque-SPECIFIC nameplates only — see the module docstring")
+    ap.add_argument("--drop-tokens", default="",
+                    help="comma-separated MARQUE-SPECIFIC tokens to drop as "
+                         "commercial vehicles, e.g. Volvo's truck/bus/plant model "
+                         "families 'FH,FM,FMX,VNL,B9TL,EC480'. Kept out of the "
+                         "shared COMMERCIAL_WORDS list on purpose: two-letter "
+                         "model codes are meaningful for one marque and noise for "
+                         "every other. Matched as whole tokens, before the "
+                         "nameplate test, so a 'Volvo VNL 760' cannot claim the "
+                         "760 saloon nameplate.")
     ap.add_argument("--allow-uid", default="",
                     help="comma-separated uids to force through regardless of title; "
                          "for ambiguous rows a render settles faster than a guess")
@@ -161,6 +224,7 @@ def main():
     rows = json.load(open(a.src))
     pats = build(a.nameplates.split(","))
     allow = {u.strip() for u in a.allow_uid.split(",") if u.strip()}
+    drop_tokens = [t.strip() for t in a.drop_tokens.split(",") if t.strip()]
 
     rejected = set()
     if a.rejects:
@@ -174,7 +238,7 @@ def main():
         if r.get("uid") in rejected:
             dropped.setdefault("already-scrapped", []).append(r.get("name", ""))
             continue
-        verdict, plate = classify(r.get("name", ""), pats)
+        verdict, plate = classify(r.get("name", ""), pats, drop_tokens)
         if r.get("uid") in allow and verdict != "keep":
             verdict, plate, forced = "keep", "(forced)", forced + 1
         if verdict != "keep":
