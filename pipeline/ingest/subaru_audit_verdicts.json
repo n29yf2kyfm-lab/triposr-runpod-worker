@@ -562,5 +562,35 @@
    "headlamp internals fully resolved (LED accent and projector), grille bars with real depth, crisp door shut lines, correct red tail lamps, rim faces present in all four tiles",
    "SCOPE NOTE: the Ascent is a North-America-only three-row SUV and was never sold in the UK, so no UK registration decodes to one - a quality pass but not a UK-fleet car"
   ]
+ },
+ {
+  "uid": "20fe55308fe64dc1bdc5793d37e56f95",
+  "name": "Subaru Tribeca",
+  "verdict": "fail",
+  "reasons": [
+   "whole-car transmission shell (mats=0 cov=0.000): bodywork, bumpers and wings all render see-through glass, tyres included",
+   "fifth car in the Nieve5677 cluster carrying this identical defect",
+   "no body-paint material exists, so no respray is possible"
+  ]
+ },
+ {
+  "uid": "e6b3b6bf837e44f79786e6452fcbfcb5",
+  "name": "Subaru",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: BRZ with a full Rocket Bunny/Pandem-style widebody kit - riveted bolt-on over-fenders, swan-neck GT wing, front splitter with canards, deep side skirts and an extreme stance",
+   "carbon bonnet with a baked competition number 6666",
+   "this was one of my bare-title Subaru recoveries; the title carried no kit word so no title-stage prune could catch it"
+  ]
+ },
+ {
+  "uid": "853566474cf74941bd416cd9f0257af3",
+  "name": "2007 Subaru B9 Tribeca",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: baked lighting and dirt in the texture, torn sills and underbody, loose scan fragments (a plank of ground) floating beside the car in three tiles",
+   "roof and glasshouse partly dissolved; windows are baked opaque texture with no transparency",
+   "mats=1 cov=1.000 FULL COVERAGE - one material carries body, glass and tyres"
+  ]
  }
 ]
