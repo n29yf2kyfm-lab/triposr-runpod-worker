@@ -296,6 +296,17 @@ def _qwen_backend():
     return vision_fn
 
 
+# Browser-like headers, carried over from trellis2/handler.py's fetch_image().
+# A bare python-requests User-Agent is rejected outright by a lot of image
+# hosts: a live job died with "403 Forbidden" fetching a Wikimedia photo, which
+# is exactly the failure the vehicle worker had already solved. Users paste
+# URLs from wherever their photos live, so this is the common case, not an edge.
+FETCH_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (compatible; DamageScan-Worker/1.0)",
+    "Accept": "image/webp,image/apng,image/*,*/*;q=0.8",
+}
+
+
 def _load_images(image_urls):
     from io import BytesIO
     import requests
@@ -303,7 +314,7 @@ def _load_images(image_urls):
     imgs = []
     for u in image_urls:
         if str(u).startswith(("http://", "https://")):
-            r = requests.get(u, timeout=30)
+            r = requests.get(u, headers=FETCH_HEADERS, timeout=30)
             r.raise_for_status()
             imgs.append(Image.open(BytesIO(r.content)).convert("RGB"))
         else:

@@ -402,6 +402,23 @@ check("13a missing baseline findings -> needs_baseline, not silent over-charge",
       resp4.get("status") == "needs_baseline")
 
 
+# ---- 14. image fetch sends browser-like headers ---------------------------
+# Regression: a live job died with "403 Forbidden" fetching a Wikimedia photo
+# because _load_images sent a bare python-requests User-Agent. Many image hosts
+# reject that outright, and users paste URLs from wherever their photos live.
+check("14a fetch headers defined", isinstance(AN.FETCH_HEADERS, dict))
+check("14b sends a non-default User-Agent",
+      "Mozilla" in AN.FETCH_HEADERS.get("User-Agent", ""))
+check("14c accepts image content types",
+      "image/" in AN.FETCH_HEADERS.get("Accept", ""))
+import inspect as _inspect  # noqa: E402
+_src = _inspect.getsource(AN._load_images)
+check("14d _load_images actually passes the headers",
+      "headers=FETCH_HEADERS" in _src)
+check("14e _load_images still raises on a bad response",
+      "raise_for_status" in _src)
+
+
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 for f in FAILED:
