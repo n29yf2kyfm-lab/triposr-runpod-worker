@@ -1,0 +1,69 @@
+[
+ {
+  "assetId": "land-rover-range-rover-velar-v1",
+  "make": "land-rover",
+  "model": "range-rover-velar",
+  "body_transparent": [
+   {
+    "name": "vray_CarPaint",
+    "alpha": 0.25
+   }
+  ]
+ },
+ {
+  "assetId": "lexus-ct-v1",
+  "make": "Lexus",
+  "model": "CT",
+  "body_transparent": [
+   {
+    "name": "carpaint.261",
+    "alpha": 0.25
+   }
+  ]
+ },
+ {
+  "assetId": "toyota-avensis-2009-tw2-v1",
+  "make": "toyota",
+  "model": "avensis",
+  "body_transparent": [
+   {
+    "name": "carpaint",
+    "alpha": 0.25
+   },
+   {
+    "name": "tire",
+    "alpha": 0.25
+   }
+  ]
+ },
+ {
+  "assetId": "fiat-panda-fw1-v1",
+  "make": "fiat",
+  "model": "panda",
+  "body_transparent": [
+   {
+    "name": "tire.016",
+    "alpha": 0.25
+   },
+   {
+    "name": "carpaint.016",
+    "alpha": 0.25
+   }
+  ]
+ },
+ {
+  "assetId": "nissan-leaf-nw1-v1",
+  "make": "nissan",
+  "model": "leaf",
+  "body_transparent": [
+   {
+    "name": "carpaint.260",
+    "alpha": 0.25
+   },
+   {
+    "name": "tire.259",
+    "alpha": 0.25
+   }
+  ]
+ }
+]
