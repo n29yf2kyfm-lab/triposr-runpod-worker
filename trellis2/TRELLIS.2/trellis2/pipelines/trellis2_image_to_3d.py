@@ -602,3 +602,106 @@ class Trellis2ImageTo3DPipeline(Pipeline):
             return out_mesh, (shape_slat, tex_slat, res)
         else:
             return out_mesh
+
+    # ------------------------------------------------------------------
+    # Multi-view additions (WORKER_CHANGES.md). run() above is UNTOUCHED so
+    # the single-image production path is byte-for-byte unchanged.
+    #
+    # The image feature extractor already accepts a list of PIL images and
+    # returns (V, N, D) — one bag of DINO patch tokens per view. Passing that
+    # straight through would be read as a BATCH of V and yield V separate
+    # models. For multi-VIEW conditioning we instead concatenate the tokens
+    # along the sequence axis into (1, V*N, D), so a single sample attends to
+    # every view at once. This is the standard TRELLIS multi-image approach;
+    # attention is length-flexible and permutation-tolerant, so no retraining
+    # is required — but the quality of this specific checkpoint on stitched
+    # multi-view tokens must be confirmed on a GPU (see WORKER_CHANGES.md).
+    # ------------------------------------------------------------------
+    def get_cond_multi(self, images: list, resolution: int,
+                       include_neg_cond: bool = True) -> dict:
+        """Conditioning from several views: per-view tokens concatenated to
+        (1, V*N, D). Mirrors get_cond() otherwise (neg_cond stays zeros)."""
+        self.image_cond_model.image_size = resolution
+        if self.low_vram:
+            self.image_cond_model.to(self.device)
+        per_view = [self.image_cond_model([im]) for im in images]  # each (1,N,D)
+        cond = torch.cat(per_view, dim=1)                          # (1, V*N, D)
+        if self.low_vram:
+            self.image_cond_model.cpu()
+        if not include_neg_cond:
+            return {'cond': cond}
+        return {'cond': cond, 'neg_cond': torch.zeros_like(cond)}
+
+    def run_multi_image(
+        self,
+        images: List[Image.Image],
+        num_samples: int = 1,
+        seed: int = 42,
+        sparse_structure_sampler_params: dict = {},
+        shape_slat_sampler_params: dict = {},
+        tex_slat_sampler_params: dict = {},
+        preprocess_image: bool = True,
+        return_latent: bool = False,
+        pipeline_type: Optional[str] = None,
+        max_num_tokens: int = 49152,
+    ) -> List[MeshWithVoxel]:
+        """Run the pipeline conditioned on MULTIPLE views of one object.
+
+        Identical to run() except the conditioning is built from every image
+        via get_cond_multi(). A single image in the list reproduces run()'s
+        conditioning exactly (V*N == N), so this is a safe superset.
+        """
+        pipeline_type = pipeline_type or self.default_pipeline_type
+        if pipeline_type not in ('512', '1024', '1024_cascade', '1536_cascade'):
+            raise ValueError(f"Invalid pipeline type: {pipeline_type}")
+        if not images:
+            raise ValueError("run_multi_image needs at least one image")
+
+        if preprocess_image:
+            images = [self.preprocess_image(im) for im in images]
+        torch.manual_seed(seed)
+        cond_512 = self.get_cond_multi(images, 512)
+        cond_1024 = self.get_cond_multi(images, 1024) if pipeline_type != '512' else None
+        ss_res = {'512': 32, '1024': 64, '1024_cascade': 32, '1536_cascade': 32}[pipeline_type]
+        coords = self.sample_sparse_structure(
+            cond_512, ss_res, num_samples, sparse_structure_sampler_params)
+
+        if pipeline_type == '512':
+            shape_slat = self.sample_shape_slat(
+                cond_512, self.models['shape_slat_flow_model_512'],
+                coords, shape_slat_sampler_params)
+            tex_slat = self.sample_tex_slat(
+                cond_512, self.models['tex_slat_flow_model_512'],
+                shape_slat, tex_slat_sampler_params)
+            res = 512
+        elif pipeline_type == '1024':
+            shape_slat = self.sample_shape_slat(
+                cond_1024, self.models['shape_slat_flow_model_1024'],
+                coords, shape_slat_sampler_params)
+            tex_slat = self.sample_tex_slat(
+                cond_1024, self.models['tex_slat_flow_model_1024'],
+                shape_slat, tex_slat_sampler_params)
+            res = 1024
+        elif pipeline_type == '1024_cascade':
+            shape_slat, res = self.sample_shape_slat_cascade(
+                cond_512, cond_1024,
+                self.models['shape_slat_flow_model_512'],
+                self.models['shape_slat_flow_model_1024'],
+                512, 1024, coords, shape_slat_sampler_params, max_num_tokens)
+            tex_slat = self.sample_tex_slat(
+                cond_1024, self.models['tex_slat_flow_model_1024'],
+                shape_slat, tex_slat_sampler_params)
+        elif pipeline_type == '1536_cascade':
+            shape_slat, res = self.sample_shape_slat_cascade(
+                cond_512, cond_1024,
+                self.models['shape_slat_flow_model_512'],
+                self.models['shape_slat_flow_model_1024'],
+                512, 1536, coords, shape_slat_sampler_params, max_num_tokens)
+            tex_slat = self.sample_tex_slat(
+                cond_1024, self.models['tex_slat_flow_model_1024'],
+                shape_slat, tex_slat_sampler_params)
+        torch.cuda.empty_cache()
+        out_mesh = self.decode_latent(shape_slat, tex_slat, res)
+        if return_latent:
+            return out_mesh, (shape_slat, tex_slat, res)
+        return out_mesh

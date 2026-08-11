@@ -48,6 +48,12 @@ class FakePipeline:
     def run(self, img, num_samples=1, seed=42, **kw):
         captured["run_img_size"] = img.size
         captured["run_seed"] = seed
+        captured["run_kind"] = "single"
+        return [FakeMesh()]
+    def run_multi_image(self, images, num_samples=1, seed=42, **kw):
+        captured["run_kind"] = "multi"
+        captured["run_num_views"] = len(images)
+        captured["run_seed"] = seed
         return [FakeMesh()]
 
 tp = types.ModuleType("trellis2.pipelines")
@@ -668,6 +674,48 @@ try:
     check("chain: positions still parseable", len(_pos20(jf, bf)) > 6000)
 except ImportError:
     print("  SKIP (numpy unavailable in this env)")
+
+# ---- Test 15: multi-view routing (image_urls / image_b64s) ----
+print("Test 15: multi-view image-to-3D routing")
+
+
+def _png_b64(colour):
+    b = io.BytesIO(); Image.new("RGB", (32, 32), colour).save(b, "PNG")
+    return base64.b64encode(b.getvalue()).decode()
+
+
+import base64  # noqa: E402  (local to this test block)
+
+# two views via image_b64s -> run_multi_image with 2 views
+captured.clear()
+r = H.handler({"id": "t15", "input": {
+    "image_b64s": [_png_b64((10, 20, 30)), _png_b64((40, 50, 60))],
+    "wheel_swap": False, "panel_detail": False, "polish": False}})
+check("multi: routed to run_multi_image", captured.get("run_kind") == "multi")
+check("multi: all views passed", captured.get("run_num_views") == 2)
+check("multi: mode reported as images", r.get("mode") == "images")
+
+# a single entry in image_urls folds to the ordinary single-image path
+captured.clear()
+buf_s = io.BytesIO(); Image.new("RGB", (24, 24), (9, 9, 9)).save(buf_s, "PNG")
+fake_s = types.SimpleNamespace(content=buf_s.getvalue(),
+                               raise_for_status=lambda: None)
+with mock.patch.object(H.requests, "get", return_value=fake_s):
+    r = H.handler({"id": "t15b", "input": {
+        "image_urls": ["https://x.test/only.png"]}})
+check("single-entry list folds to single path", captured.get("run_kind") == "single")
+
+# too many views is rejected before any heavy work
+r = H.handler({"id": "t15c", "input": {
+    "image_b64s": [_png_b64((0, 0, 0))] * 9}})
+check("multi: >8 views rejected", "too many views" in r.get("error", ""))
+
+# existing single-image path is untouched (still routes to run())
+captured.clear()
+buf_o = io.BytesIO(); Image.new("RGB", (24, 24), (7, 7, 7)).save(buf_o, "PNG")
+r = H.handler({"id": "t15d", "input": {
+    "image_b64": base64.b64encode(buf_o.getvalue()).decode()}})
+check("single image_b64 still routes to run()", captured.get("run_kind") == "single")
 
 print()
 print("RESULT:", f"{len(fails)} failures" if fails else "ALL TESTS PASSED")
