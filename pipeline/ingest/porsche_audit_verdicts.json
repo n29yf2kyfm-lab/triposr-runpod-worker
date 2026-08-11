@@ -1741,5 +1741,95 @@
    "white rim faces present in all four views",
    "round lamp internals, red rear reflector band, aerial and door shut line defined"
   ]
+ },
+ {
+  "uid": "7c503ca4615148d88c98466b45a84c0a",
+  "name": "2019 Porsche 911 Targa 4S (991.2)",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 Targa 4S proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible",
+   "black rim faces present in all four views, yellow PCCB calipers",
+   "lamp internals, intake slats and shut lines defined"
+  ]
+ },
+ {
+  "uid": "7e25beb0e2c841f0bf51f94fde651fd4",
+  "name": "Porsche 911 GT3 RS (997.2) '11",
+  "verdict": "pass",
+  "reasons": [
+   "997.2 GT3 RS proportions read instantly; front 3/4 strong; paint finish premium",
+   "tyres black rubber, tread face clear in both 3/4 bands against white rims",
+   "glazing transparent, cabin visible through the side glass at full res",
+   "white rim faces present in all four views, red calipers behind",
+   "front grille mesh is real geometry; door shut line and handle defined",
+   "IN SCOPE unlike the Magnus Walker 277: these are contrasting GT3 RS script and sill graphics in the factory RS idiom, not competition numbers or sponsor decals"
+  ]
+ },
+ {
+  "uid": "7fd67e408409449c98e3c7be35b40aa7",
+  "name": "2015 porsche 911 carrera s rigged  mid-poly",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 Carrera S proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, interior visible in the side view",
+   "dark rim faces present in all four views, blue calipers behind",
+   "lamp internals, intake slats and shut lines defined",
+   "same source mesh family as 2d336e24 and 4cef7c1e - leave the grouping to dupe_check"
+  ]
+ },
+ {
+  "uid": "88cb2513ae354061967c131b97d341c0",
+  "name": "Porsche 911 GT3 RS 992 Manthey Kit 2025 3D model",
+  "verdict": "fail",
+  "reasons": [
+   "PROPORTIONS WRONG: it does not read as a 992 GT3 RS - the greenhouse is too short and set too far back, the rear deck is stubby and the nose is generic; it reads as an invented sports coupe wearing 911 cues",
+   "tyres render mid-grey, not black rubber, in both 3/4 tread bands",
+   "glazing dark and flat with no interior",
+   "wheels are plain 5-spoke discs with no brake detail; no lamp internals, no shut lines, panel surfacing soft"
+  ]
+ },
+ {
+  "uid": "8R1jR2If8xlQJRmpzTq1dT12CPk",
+  "name": "Porsche 911 3.0 Liter CIS Intake",
+  "verdict": "fail",
+  "reasons": [
+   "NOT A VEHICLE: this is a CIS intake manifold - a moulded plenum with six runners sitting on a flat base plate; no body, no wheels, no glazing",
+   "a part slipped through the PART_WORDS filter because 'intake' is not in the list - worth adding alongside airbox/manifold"
+  ]
+ },
+ {
+  "uid": "8b9c0f74d8f144158b4c3ada55d1196e",
+  "name": "Porsche 911 Turbo (996)",
+  "verdict": "fail",
+  "reasons": [
+   "BAKED SCENE WELDED INTO THE MESH, proven from the glTF: a 14.03m x 13.97m x 0.00m floor plane (Object_22) plus a 12.83m x 12.75m x 2.90m room box (Object_4) around a 4.6m car - byte-for-byte the same scene geometry as 25bd98da",
+   "that tiled orange floor and backdrop render with the car in every view and would render in the viewer",
+   "tyres are black rubber and rim faces present; the failure is the baked environment, and the clean-studio sibling 28dbd433 is the copy to keep"
+  ]
+ },
+ {
+  "uid": "92050f39daba42fb8b2d004b09d06065",
+  "name": "2019-porsche-911-gt3-rs",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 GT3 RS proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands against white rims",
+   "glazing transparent, cage visible through the side glass",
+   "white rim faces present in all four views, yellow PCCB calipers",
+   "front grille mesh is real geometry; lamp internals, NACA ducts and shut lines defined",
+   "road-legal GT3 RS, in scope; the GT3 RS side script is factory graphics"
+  ]
+ },
+ {
+  "uid": "93407a931ecf4940b6ddd1bfbbf763c1",
+  "name": "2019_porsche_911_gt2_rs_clubsport_23_salzburg",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: GT2 RS Clubsport in the Salzburg competition livery - number 23 roundels, PORSCHE sill lettering, Michelin racing slicks, race splitter and swan-neck wing",
+   "track-only; takes no road registration"
+  ]
  }
 ]
