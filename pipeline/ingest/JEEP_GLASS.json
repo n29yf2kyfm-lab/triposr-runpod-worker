@@ -138,5 +138,40 @@
   "verdict": "opaque",
   "evidence": "gltf",
   "note": "1 material, 0 transparent; glazing is absent geometry (open voids), not tinted glass"
+ },
+ {
+  "uid": "531f120594d946be8cd9d87b5095f856",
+  "name": "Jeep Wrangler 3D Model",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "aiStandardSurface6 alpha 0.455 with transmission 0.545, plus 4 more transparent; 5/20 transparent"
+ },
+ {
+  "uid": "205f0cdcdb2e4d0aaa8c975d5e1c7d54",
+  "name": "Jeep Wrangler Unlimited Altitude 2014",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "windowglass/orangeglass/redglass/whiteglass all alpha 1.0 OPAQUE; 0/15 transparent; 0 textures"
+ },
+ {
+  "uid": "fc43a790b9ae4164b9dd6294ede8f326",
+  "name": "Hybrid Jeep Rubicon",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "windows alpha 0.9 BLEND - glazing genuinely transparent, but the vehicle is out of scope on geometry"
+ },
+ {
+  "uid": "d0b331fff2cb46a5b75e1a82246c3ed9",
+  "name": "Grey Jeep Wrangler 4x4 Rear View",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 0 transparent, 0 textures"
+ },
+ {
+  "uid": "dc023a0dd83b4a7a8dc902f860794ae1",
+  "name": "Jeep_wrangler_for_car_game",
+  "verdict": "faded",
+  "evidence": "gltf",
+  "note": "MIXED: Translucent_Glass_Gray alpha 0.412/0.329 BLEND are transparent, but Vetro_Anteriore (front windscreen) is alpha 1.0 OPAQUE. Recorded faded because glazing is only partly present."
  }
 ]

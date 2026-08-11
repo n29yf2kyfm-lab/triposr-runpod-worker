@@ -237,5 +237,63 @@
    "gltf: 1 material, 0 transparent, cov=1.000",
    "kept deliberately as the only Liberty representative; confirms the scan-prune reasoning"
   ]
+ },
+ {
+  "uid": "531f120594d946be8cd9d87b5095f856",
+  "name": "Jeep Wrangler 3D Model",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as Wrangler JK 2-door",
+   "tyres plainly BLACK with raised white Goodyear lettering - authentic period detail, tread face black in front34/rear34",
+   "all four rim faces present, black wheels consistent across views",
+   "seven-slot grille crisp, round lamp internals present, door hinges modelled",
+   "shut lines defined",
+   "in scope: factory-look Wrangler, chunky A/T tyres are factory Rubicon-style, no lift kit, no snorkel, no light bar, no roof tent",
+   "note: cov=0.090 LOW COVERAGE so the sheet colour is not to be trusted (advisory only)"
+  ]
+ },
+ {
+  "uid": "205f0cdcdb2e4d0aaa8c975d5e1c7d54",
+  "name": "Jeep Wrangler Unlimited Altitude 2014",
+  "verdict": "fail",
+  "reasons": [
+   "GLAZING OPAQUE in the shipped glTF - windowglass alpha 1.0 alphaMode OPAQUE, 0 of 15 materials transparent",
+   "the sheet shows tinted see-through glass purely because the handler name-matched windowglass and forced transmission=1.0",
+   "geometry is otherwise excellent: black tyres, all rim faces present, crisp seven-slot grille, modelled door hinges, defined shut lines",
+   "owner ruling 2026-08-09: opaque glazing fails outright regardless of geometry quality"
+  ]
+ },
+ {
+  "uid": "fc43a790b9ae4164b9dd6294ede8f326",
+  "name": "Hybrid Jeep Rubicon",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE custom build - TANK TRACKS in place of rear wheels (half-track conversion)",
+   "exposed supercharger and velocity stacks through the bonnet",
+   "chopped/shortened body, rear roll cage with spare wheel rack",
+   "no UK registration decodes to this",
+   "my title prune read Hybrid as a powertrain hybrid (Wrangler 4xe); it actually meant track/wheel hybrid - the eye caught it, the title could not"
+  ]
+ },
+ {
+  "uid": "d0b331fff2cb46a5b75e1a82246c3ed9",
+  "name": "Grey Jeep Wrangler 4x4 Rear View",
+  "verdict": "fail",
+  "reasons": [
+   "WRONG VEHICLE - this is not a Jeep Wrangler; the grille is a rectangular mesh panel, not a seven-slot Jeep grille. Reads as a Chinese boxy SUV (BJ40 / Tank 300 class)",
+   "CLAY SHELL - single material, glazing opaque body-white, tyres body-white including tread",
+   "gltf: 1 material, 0 transparent, 0 textures, cov=1.000",
+   "title-derived identity was wrong, exactly the CLAUDE.md warning about reading the render not the title"
+  ]
+ },
+ {
+  "uid": "dc023a0dd83b4a7a8dc902f860794ae1",
+  "name": "Jeep_wrangler_for_car_game",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE lifted overland/rock-crawler build - suspension lift, beadlock wheels with mud-terrain tyres, tubular front bumper with winch, rock sliders, roof rack with four light pods, oversized rear spare",
+   "windscreen material Vetro_Anteriore is alpha 1.0 OPAQUE (side glazing Translucent_Glass_Gray is transparent, so the defect is the windscreen specifically)",
+   "missed by the title prune - title was Jeep_wrangler_for_car_game with no build hint"
+  ]
  }
 ]
