@@ -1,374 +1,3751 @@
 {
- "_doc": "Per-car visual audit of the Toyota clean set against the owner's rubric (CLAUDE.md 'Per-car audit rubric'). PASS = ships. Written incrementally: the container is ephemeral and an audit is expensive to redo.",
- "verdicts": {
-  "1": {
-   "uid": "0ea0291e2df14fa5afc309578b3c5a1e",
-   "name": "2026 Toyota Prius",
-   "verdict": "FAIL",
-   "note": "wheels absent in 3 of 4 views -- empty arches front and rear; body panels ripple along the flank"
+ "_doc": "Per-uid audit of the 158 Toyota audit sheets in car-meshes/audit/toyota/, judged against the owner's rubric in CLAUDE.md and the 2026-08-09 glazing and tyre rulings, which post-date the original Toyota wave. 115 of the 158 sheets have a staged GLB and were audited in full; the other 43 are exactly the 43 uids already in REJECTS.json, whose GLBs were pruned. Glazing is decided ONLY from the glTF via pipeline/ingest/glass_probe.py -- the sheet cannot witness it, because render/handler.py forces transmission=1.0 onto any glass-NAMED material. Where the file names NO glazing material the probe returns certainty=inferred, no override can fire, and the sheet IS admissible; those were judged by eye. 'ambiguous' is never treated as a fail.",
+ "_verdicts": {
+  "pass": "ships",
+  "fail": "scrap or re-source",
+  "fail-rerender": "the ASSET is sound; the render worker inverted it. Deterministic per file -- re-rendering on the same build will not fix it. Never a scrap."
+ },
+ "_counts": {
+  "fail": 101,
+  "pass": 55,
+  "fail-rerender": 2
+ },
+ "rows": [
+  {
+   "n": 1,
+   "uid": "8578dc0493ff4f72a444625510631f87",
+   "name": "1976 Toyota Celica GT",
+   "verdict": "fail",
+   "reason": "two-tone material split: bonnet/wings render in separate red and white paint blocks across all four tiles; 8 body materials, not one",
+   "faces": 296329,
+   "cov": 0.362,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 58,
+    "n_transparent": 33,
+    "n_textures": 80
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/8578dc0493ff4f72a444625510631f87.jpg"
   },
-  "4": {
-   "uid": "001674408710482b9873decb30274ac9",
-   "name": "Toyota RAV4 Adventure",
-   "verdict": "FAIL",
-   "note": "wheel style changes between views: black off-road alloys front34/side, silver alloys rear34; crease artefacts on rear quarter"
-  },
-  "5": {
-   "uid": "bb03e36096f8408386273fd4d5dacb71",
-   "name": "Toyota Avensis MK1 T22 1997-2003",
-   "verdict": "FAIL",
-   "note": "severe -- tyres missing, bare brake discs, one wheel detached and floating under the car, body panels exploded and misaligned"
-  },
-  "6": {
-   "uid": "204283fa663d4ccea7f3bdfd1ba6680e",
-   "name": "2023 Toyota GR Corolla",
-   "verdict": "PASS",
-   "note": "proportions read as GR Corolla instantly; strong front 3/4; wheels consistent across all four views; grille has real depth; shut lines defined; reflections clean"
-  },
-  "7": {
-   "uid": "0d83090a0d484d98b6749dbbf9b4a111",
-   "name": "2023 Toyota GR86",
-   "verdict": "PASS",
-   "note": "reads as GR86 instantly; strong front 3/4; identical black multi-spoke wheels in all four views; headlights have internal LED elements; shut lines crisp; clean reflections"
-  },
-  "9": {
-   "uid": "c7aad552ce6f4700b179615b2c9a346b",
-   "name": "Toyota Auris 2019",
-   "verdict": "PASS",
-   "note": "proportions right; grey multi-spoke wheels consistent across views; grille honeycomb has real depth; pillars and wheelbase consistent; premium finish"
-  },
-  "10": {
-   "uid": "e10068b2511b4ed7b724a8d87a362727",
-   "name": "Toyota bZ4X",
-   "verdict": "PASS",
-   "note": "reads as bZ4X instantly; black cladding correct; wheels identical in all four views; shut lines defined; clean reflections"
-  },
-  "3": {
-   "uid": "f49b50d1b0ea4e1995c57cbeb3b5e096",
-   "name": "Toyota_Supra_GT500_2005",
-   "verdict": "FAIL",
-   "note": "out of scope, not a quality fault -- Super GT / JGTC race car: full aero wing, slicks, roll cage, no road lighting. No UK reg decodes to this. Geometry itself is sound"
-  },
-  "13": {
-   "uid": "a9c8b71c5c5d494bb55d79a2e161119b",
-   "name": "1998 Toyota Land Cruiser",
-   "verdict": "PASS",
-   "note": "reads as J80 Land Cruiser instantly; 6-spoke alloys consistent in all four views; grille lettering crisp; shut lines defined; premium finish. Nit: number plate carries custom text, wants blanking before it ships"
-  },
-  "8": {
-   "uid": "759732796dd8478c973c8856f50c838c",
-   "name": "Toyota_gt86",
-   "verdict": "FAIL",
-   "note": "proportions right but below the premium bar: wheel spokes are soft low-poly blobs with no alloy definition, headlights are dark voids with no internal LED elements, grille shallow. Note this is the first-gen ZN6 GT86, a generation #7 does not cover"
-  },
-  "11": {
-   "uid": "90e9f77205014ecc8e3e08dd27dc4d52",
-   "name": "2016 Toyota Prius",
-   "verdict": "PASS",
-   "note": "reads as Gen-4 Prius instantly; 5-spoke alloys consistent across all four views; tail-light internals defined; shut lines crisp; clean reflections"
-  },
-  "15": {
-   "uid": "6412b1bba68848af88169be2c75e10a6",
-   "name": "2021 Toyota Corolla Cross",
-   "verdict": "PASS",
-   "note": "strong -- proportions right, dark multi-spoke wheels identical in all views, grille honeycomb has real depth, headlight internals sharp, premium finish"
-  },
-  "17": {
-   "uid": "34d0e2ade29f4aabacd365c33667ea54",
-   "name": "Toyota_celica_ssi",
-   "verdict": "FAIL",
-   "note": "soft 'melt' geometry -- wheels are featureless grey discs with no spokes at all, headlights are blank ovals, panel edges wavy, no shut lines. Exactly the residual miss geom_audit.py documents"
-  },
-  "18": {
-   "uid": "9f09704e33af42d29b2230e10506456a",
-   "name": "Toyota Celica (Mk3) (A60) liftback 1981",
-   "verdict": "PASS",
-   "note": "reads as A60 Celica instantly; 5-spoke wheels consistent; sharp period creases; grille slats crisp; shut lines defined. Nit: plate carries a HUM3D vendor watermark, wants blanking"
-  },
-  "2": {
-   "uid": "a193a40e720e4a0bbe5d1c897f402ac8",
-   "name": "Toyota Prius (2020) but unreasonably modded",
-   "verdict": "FAIL",
-   "note": "joke scene, not a car -- Prius body jacked up on scaffolding with an orange rig, low-poly boulders and stray Mitsubishi parts strewn around. Title says 'unreasonably modded'"
-  },
-  "16": {
-   "uid": "f08f43a71bed4fbc8562fdde6214f1c4",
-   "name": "Toyota iQ EV",
-   "verdict": "PASS",
-   "note": "reads as iQ instantly; aero-disc alloys consistent across all views; shut lines defined; headlight internals present; clean reflections"
-  },
-  "20": {
-   "uid": "980a52a5031a4b07a0f206b82ebb1275",
-   "name": "Toyota GR Supra (A90)",
-   "verdict": "PASS",
-   "note": "excellent -- reads as A90 Supra instantly; black multi-spoke wheels with red calipers identical in all four views; headlight triple-LED internals sharp; intake mesh has depth; shut lines crisp"
-  },
-  "21": {
-   "uid": "30528ef37af844919074498f979b9515",
-   "name": "Toyota Supra MK5 A90",
-   "verdict": "DUPLICATE",
-   "note": "visually identical to #20 in all four views -- same mesh re-exported, 1,820 faces apart (0.21%), under exact-match dedup. Keeping #20"
-  },
-  "25": {
-   "uid": "950cd22ab63d4723b468f25da0fd5ec0",
-   "name": "Toyota Mirai",
-   "verdict": "PASS",
-   "note": "reads as 2nd-gen Mirai instantly; turbine alloys consistent in all four views; headlight LED signature sharp; grille mesh has depth; shut lines defined"
-  },
-  "26": {
-   "uid": "617a8613b719440cbb0d040c552c70df",
-   "name": "toyota corolla 2021 consept",
-   "verdict": "FAIL",
-   "note": "out of scope -- a fantasy concept supercar wearing a Toyota badge, nothing like a Corolla, and soft/melted geometry besides. Title misspells 'consept', so a 'concept' title gate would not catch it"
-  },
-  "27": {
-   "uid": "11413272fe244553986c1c1b1efab564",
-   "name": "Toyota Highlander 2011",
-   "verdict": "PASS",
-   "note": "quality passes -- XU40 proportions right, 5-spoke alloys consistent, grille slats crisp, shut lines defined, HUMSTER3D plate watermark wants blanking. SCOPE QUESTION: worth confirming the 2011 Highlander was a UK-market car before indexing; if it was not, no UK reg will ever decode to it"
-  },
-  "28": {
-   "uid": "1f66a3fdb7da421cafb089467b5a6140",
-   "name": "2022_Toyota_C-HR_3D_model",
-   "verdict": "PASS",
-   "note": "reads as C-HR instantly; two-tone multi-spoke wheels consistent in all four views; headlight LED internals sharp; grille mesh has depth; shut lines defined; plate is clean"
-  },
-  "30": {
-   "uid": "bc9bf0f48e174e918a5187dd1de019f8",
-   "name": "Toyota C-HR 2020",
-   "verdict": "DUPLICATE",
-   "note": "same mesh as #28, 232 faces apart (0.12%), identical in all four views except an 'ItsDiyor' plate watermark. Keeping #28, which has the clean plate"
-  },
-  "31": {
-   "uid": "2724aadbf88b4706a26cf7d1b2332d0c",
-   "name": "2022 Toyota GR86",
-   "verdict": "PASS",
-   "note": "quality is strong -- proportions right, black multi-spoke wheels consistent, headlight internals sharp, grille mesh deep, shut lines defined. Redundant with #7 (same GR86 generation, different mesh); catalogue wants one of the two"
-  },
-  "34": {
-   "uid": "7f6b5f1f4eaf47dcafd7569d4ba5b8bf",
-   "name": "Toyota Land Cruiser J100",
-   "verdict": "FAIL",
-   "note": "UPSIDE DOWN in all four views -- wheels in the air, roof on the floor. Exactly the case geom_audit.py was calibrated to auto-reject, and it reached the clean bucket because that gate is not wired into gpu_wave.py at all"
-  },
-  "19": {
-   "uid": "42470a7ce258421a89c2361225bb89eb",
-   "name": "Toyota Prius 2019",
-   "verdict": "PASS",
-   "note": "XW50 facelift Prius; proportions right, grey multi-spoke wheels consistent across views, shut lines defined, headlight internals present. Same generation as #11 -- catalogue wants one"
-  },
-  "22": {
-   "uid": "af4fec1626f047339857d98b4f0f7273",
-   "name": "Toyota Celica ST205 GT4",
-   "verdict": "PASS",
-   "note": "reads as ST205 Celica GT-Four instantly; 5-spoke alloys consistent in all four views; projector headlight internals present; grille mesh has depth; correct GT-Four wing; shut lines defined"
-  },
-  "23": {
-   "uid": "ec05296ddf2f4c22a570512245d1fba0",
-   "name": "Toyota GT86 3D Model (Free)",
-   "verdict": "PASS",
-   "note": "the good first-gen ZN6 GT86 -- polished multi-spoke alloys consistent across views, sharp projector internals, grille mesh deep, shut lines crisp. Covers the generation #8 failed on"
-  },
-  "29": {
-   "uid": "3f82031714bd40a3a3a027e5687604de",
-   "name": "Toyota  Prius 2010",
-   "verdict": "PASS",
-   "note": "XW30 third-gen Prius -- a generation #11/#19 do not cover. 5-spoke alloys consistent across views, headlight internals present, shut lines defined. HUMSTER3D plate watermark wants blanking"
-  },
-  "32": {
-   "uid": "d2489d2e8e834b4f995c176fe3eabe91",
-   "name": "2010 Toyota Corolla",
-   "verdict": "PASS",
-   "note": "E140 Corolla saloon; proportions right, 5-spoke alloys consistent, grille slats crisp, headlight internals present, shut lines defined"
-  },
-  "33": {
-   "uid": "e595afd4ec5745a08f95cc5baeaa5ef0",
-   "name": "Toyota Corolla Sedan Regular 2020",
-   "verdict": "PASS",
-   "note": "E210 Corolla saloon; dark multi-spoke wheels consistent in all four views, headlight LED internals sharp, grille mesh has depth, shut lines crisp, premium finish"
-  },
-  "35": {
-   "uid": "f02c802c32994b2784fa182a9ed71f84",
-   "name": "Toyota GT86",
-   "verdict": "FAIL",
-   "note": "below the premium bar -- 70k faces shows: curves facet visibly, panel edges and mirrors are simplified, headlight internals soft. Redundant anyway, #23 covers the same ZN6 generation at 1.15M faces"
-  },
-  "36": {
-   "uid": "ff144d062f244a3ebfae71bc2a41564b",
-   "name": "Toyota Highlander 2020",
-   "verdict": "PASS",
-   "note": "XU70 Highlander; 5-spoke alloys consistent in all four views, headlight LED internals sharp, grille mesh has depth, shut lines defined. ItsDiyor plate watermark wants blanking"
-  },
-  "38": {
-   "uid": "082c0ed5b88b44f2b0f556f04f8f904c",
-   "name": "Toyota RAV4 MK5 2019",
-   "verdict": "FAIL",
-   "note": "severe -- several duplicate tailgate/body panels left floating detached beside the car, wheels missing in three views, one wheel hanging below the floor. Uploader left every variant in the scene"
-  },
-  "37": {
-   "uid": "ad0d925cb51040798d96f166db8c7f80",
-   "name": "Toyota Prius 2020",
-   "verdict": "PASS",
-   "note": "quality passes -- black alloys consistent across views, headlight internals sharp, shut lines defined, ItsDiyor plate watermark wants blanking. REDUNDANT: third XW50 Prius after #11 and #19, all one generation"
-  },
-  "39": {
-   "uid": "710e8b6748f249b2b6349cb555386811",
-   "name": "Toyota Supra A70 Liftback",
-   "verdict": "PASS",
-   "note": "reads as A70 Supra instantly; period alloys consistent in all four views; pop-up headlights closed and period-correct; body creases sharp; shut lines defined. Only A70 in the set"
-  },
-  "40": {
-   "uid": "0937e2b405964856a1aac96f54861274",
-   "name": "2024 Toyota Land Cruiser LC300 VXR 409 TT",
-   "verdict": "PASS",
-   "note": "excellent -- reads as LC300 instantly, multi-spoke alloys consistent in all four views, grille slat depth crisp, headlight internals sharp, premium reflections, shut lines defined"
-  },
-  "41": {
-   "uid": "a735fe6fe72049299c186e5db62a8d23",
-   "name": "Toyota Yaris MK3 2011-2020",
-   "verdict": "FAIL",
-   "note": "three faults -- wheels missing from all four arches with one wheel detached and floating beneath the car, suspension parts protruding, and the RECOLOUR DID NOT LAND: body renders pink despite the wave forcing --colour silver, with a stray magenta patch on the rear quarter. Header still said 'recolourable'"
-  },
-  "42": {
+  {
+   "n": 2,
    "uid": "93e29bd176b14566a5b00e87600de0b5",
    "name": "1994 Toyota Camry",
-   "verdict": "DUPLICATE",
-   "note": "same XV20 mesh as #43, 104 faces apart (0.01%), same wheels and same HUMSTER3D plate. Dropping this one: its title says 1994 on an XV20 body, so #43's title is the one that matches"
+   "verdict": "pass",
+   "reason": "clean 4-door; proportions read as XV10 Camry; glazing clear (windowglass/clearglass transparent)",
+   "faces": 998603,
+   "cov": 0.197,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 17,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.106,
+      0.106,
+      0.106,
+      1.0
+     ],
+     "lum": 0.106,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "DUPLICATE",
+   "sheet": "car-meshes/audit/toyota/93e29bd176b14566a5b00e87600de0b5.jpg"
   },
-  "43": {
-   "uid": "196829bf4cbc4b8cb26c50964f35ff27",
-   "name": "Toyota Camry (Mk4)(XV20) 1997",
-   "verdict": "PASS",
-   "note": "XV20 Camry; 6-spoke alloys consistent in all four views, panel gaps clean, headlight internals present, reflections clean. Period-simple shapes but no defects. HUMSTER3D plate wants blanking"
+  {
+   "n": 3,
+   "uid": "a9c8b71c5c5d494bb55d79a2e161119b",
+   "name": "1998 Toyota Land Cruiser",
+   "verdict": "pass",
+   "reason": "clean J80 Land Cruiser; glazing clear; wheels/rims complete in all four tiles",
+   "faces": 837272,
+   "cov": 0.156,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 16,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.106,
+      0.106,
+      0.106,
+      1.0
+     ],
+     "lum": 0.106,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/a9c8b71c5c5d494bb55d79a2e161119b.jpg"
   },
-  "44": {
-   "uid": "78eeb0db0dab4339b546ed504453ed3c",
-   "name": "Toyota Avensis (Mk2f)(T250) sedan",
-   "verdict": "PASS",
-   "note": "T250 Avensis; 5-spoke alloys consistent in all four views, grille slats crisp, headlight internals present, shut lines defined, clean reflections. HUMSTER3D plate wants blanking"
+  {
+   "n": 4,
+   "uid": "443fd49eb0844557a06854cae0b61267",
+   "name": "2001 Toyota Yaris",
+   "verdict": "pass",
+   "reason": "clean P1 Yaris; the roof line I first read as a spike at thumbnail scale is the period roof AERIAL -- corrected at 5x; glazing transparent, interior visible",
+   "faces": 101192,
+   "cov": 0.85,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 57,
+    "n_transparent": 6,
+    "n_textures": 29
+   },
+   "tyre_materials": [
+    {
+     "name": "fh_tire",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 0.0,
+     "lum": 1.0,
+     "factor_stated": false
+    },
+    {
+     "name": "fh_tire.001",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 0.0,
+     "lum": 1.0,
+     "factor_stated": false
+    },
+    {
+     "name": "fh_tire.002",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 0.0,
+     "lum": 1.0,
+     "factor_stated": false
+    },
+    {
+     "name": "fh_tire.003",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 0.0,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/443fd49eb0844557a06854cae0b61267.jpg"
   },
-  "45": {
-   "uid": "ad05a156f817451ca214d388e53052fb",
-   "name": "Toyota Avensis (Mk1)(T220) sedan",
-   "verdict": "PASS",
-   "note": "T220 Avensis -- a different generation from #44, so it adds coverage rather than repeating it. Wheels consistent, panels intact, shut lines defined. This is the clean T220; #5 was the broken one with exploded panels. HUMSTER3D plate wants blanking"
-  },
-  "47": {
-   "uid": "5ef3d18b151448ab831a9f6c03d89b86",
-   "name": "Toyota GR Yaris Rocket Bunny Pandem",
-   "verdict": "FAIL",
-   "note": "out of scope, not a quality fault -- Rocket Bunny / Pandem widebody kit with a huge wing. Well made, but a UK reg decodes to a stock GR Yaris, not a kit car. 'Rocket Bunny' and 'Pandem' are known kit brands a title gate could catch"
-  },
-  "49": {
-   "uid": "d6f1ad4b22214abfaea1e59f98409f57",
-   "name": "toyota supra mk4",
-   "verdict": "PASS",
-   "note": "A80 Supra; proportions right, black multi-spoke wheels consistent in all four views, shut lines defined, clean reflections. Headlight internals are soft -- but the best of the three A80s here"
-  },
-  "64": {
-   "uid": "7bb418cfb0b0415d9088bbe0e1599335",
-   "name": "Toyota Supra Mk4",
-   "verdict": "FAIL",
-   "note": "below the bar -- headlights entirely absent (smooth body where the lights should be), grille is a plain rectangle, no shut lines, body soft and melted. #49 covers A80 far better"
-  },
-  "65": {
-   "uid": "694c9f59f7494c0eae747828562a6a55",
-   "name": "Toyota Supra",
-   "verdict": "FAIL",
-   "note": "below the bar -- headlights are plain dark ovals, grille a featureless slot, no shut lines on the doors, body soft. Better than #64 but well under #49, which covers A80"
-  },
-  "48": {
-   "uid": "e38b2b292a04436a936171a2f5d33af7",
-   "name": "Toyota Corolla",
-   "verdict": "PASS",
-   "note": "E140 Corolla saloon at 1.09M faces; multi-spoke wheels consistent in all four views, grille slats crisp, headlight internals present, shut lines defined. Same generation and body as #32 (444k faces) -- this is the higher-resolution of the two"
-  },
-  "50": {
-   "uid": "d893bada37ae4ef0a81e176c87923263",
-   "name": "Toyota Celica (Mk1) (TA22) 1600 GT Coupe 1973",
-   "verdict": "FAIL",
-   "note": "UPSIDE DOWN in all four views -- the second one in this set after #34. Two in 61 makes the unwired geom_audit orientation gate a systematic leak, not a one-off"
-  },
-  "51": {
-   "uid": "751c7d18c05946d18ba7953dc046dec6",
-   "name": "2020 Toyota Proace Verso City",
-   "verdict": "PASS",
-   "note": "Proace City Verso; multi-spoke wheels consistent in all four views, headlight internals present, shut lines defined, clean reflections. UK-market model. Plate reads MRC 1920 and wants blanking via remove_plates.py"
-  },
-  "52": {
-   "uid": "c4abf4e84ac34b29a482d0c64cd99f1c",
-   "name": "Toyota Highlander (Mk1)(XU20) 2003",
-   "verdict": "PASS",
-   "note": "XU20 Highlander; 5-spoke alloys consistent in all four views, grille slats crisp, headlight internals present, shut lines defined. HUMSTER3D plate wants blanking. SCOPE: same UK-market question as #27 -- and this is now the third Highlander generation in the set"
-  },
-  "63": {
-   "uid": "2e358973d2bf4a2789f802469e8c59b4",
-   "name": "Toyota MR2 1984-2077",
-   "verdict": "FAIL",
-   "note": "out of scope -- heavily modified AW11: widebody flares, huge wing, BBS wheels, side-exit exhaust, and the pop-up headlights shaved to a flat panel. Not the stock MR2 a reg decodes to. Title '1984-2077' is a joke"
-  },
-  "55": {
+  {
+   "n": 5,
    "uid": "df56087572a44b0496e39006859ae3b9",
    "name": "2005 Toyota Hilux Double Cab",
-   "verdict": "PASS",
-   "note": "Mk6 Hilux double cab; 6-spoke alloys consistent in all four views, grille slats crisp, headlight internals present, shut lines defined. Strong UK-relevant model. HUMSTER3D plate wants blanking"
+   "verdict": "pass",
+   "reason": "clean Mk6 Hilux double cab; glazing clear",
+   "faces": 1195696,
+   "cov": 0.272,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 18,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.01850022012837969,
+      0.01850022012837969,
+      0.01850022012837969,
+      1.0
+     ],
+     "lum": 0.0185,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/df56087572a44b0496e39006859ae3b9.jpg"
   },
-  "57": {
-   "uid": "411da54827634c5abd462ab4e9e0eb34",
-   "name": "2021 Toyota RAV4 Prime Hybrid E-Four",
-   "verdict": "PASS",
-   "note": "excellent -- RAV4 Mk5 reads instantly, black multi-spoke wheels identical in all four views, headlight LED internals sharp, grille mesh deep, premium reflections. Rescues RAV4 coverage after #4 and #38 both failed"
-  },
-  "53": {
-   "uid": "42ce994521404882946cc8add801c413",
-   "name": "Toyota Camry XV30 2004",
-   "verdict": "FAIL",
-   "note": "UPSIDE DOWN in all four views -- the THIRD in this set after #34 and #50. Three in 61 is roughly 5% of the clean bucket lost to an orientation gate that exists, is calibrated, and is never called"
-  },
-  "54": {
+  {
+   "n": 6,
    "uid": "40111978beac4ba7846d94f41805de40",
    "name": "2007 Toyota Camry",
-   "verdict": "PASS",
-   "note": "XV40 Camry -- a different generation from #43 (XV20), so it adds coverage. Multi-spoke wheels consistent in all four views, grille slats crisp, headlight internals present, shut lines defined"
+   "verdict": "fail",
+   "reason": "crumpled bodywork: deep crease down the roof, warped boot lid and a dent in the front wing, plainly visible at 1.5x in front34_L; overturns the earlier PASS",
+   "faces": 1125044,
+   "cov": 0.23,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 41,
+    "n_transparent": 7,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "Camry07-tire",
+     "baseColorFactor": [
+      0.2,
+      0.2,
+      0.2,
+      1.0
+     ],
+     "lum": 0.2,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/40111978beac4ba7846d94f41805de40.jpg"
   },
-  "58": {
+  {
+   "n": 7,
+   "uid": "b0e5c550295342a4a07d80699b3404a9",
+   "name": "2007 Toyota Yaris",
+   "verdict": "fail",
+   "reason": "wheels render as glowing cyan/turquoise discs in all four tiles; glazing OPAQUE (proven)",
+   "faces": 156777,
+   "cov": 0.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 31,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/b0e5c550295342a4a07d80699b3404a9.jpg"
+  },
+  {
+   "n": 8,
+   "uid": "d2489d2e8e834b4f995c176fe3eabe91",
+   "name": "2010 Toyota Corolla",
+   "verdict": "pass",
+   "reason": "clean E140 Corolla; glazing clear",
+   "faces": 444534,
+   "cov": 0.176,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 14,
+    "n_transparent": 2,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/d2489d2e8e834b4f995c176fe3eabe91.jpg"
+  },
+  {
+   "n": 9,
+   "uid": "91d1e1d8e6914417b613e3b743abe1fe",
+   "name": "2010 Toyota Land Cruiser",
+   "verdict": "fail",
+   "reason": "GLOBAL-ALPHA SHELL: every material alphaMode=BLEND at alpha 0.25 including carpaint (0.91) and tire (0.106) -- the body and tyres are 75% see-through in the shipped GLB",
+   "faces": 831824,
+   "cov": 0.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": true,
+    "n_materials": 16,
+    "n_transparent": 16,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire.229",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      0.25
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS-SINGLE",
+   "sheet": "car-meshes/audit/toyota/91d1e1d8e6914417b613e3b743abe1fe.jpg"
+  },
+  {
+   "n": 10,
+   "uid": "e595b4a9f4c847dfb9d2966e200b3a6a",
+   "name": "2014 Toyota GT86 ZN6",
+   "verdict": "pass",
+   "reason": "clean ZN6 GT86; glazing clear; sharp panel work",
+   "faces": 90974,
+   "cov": 0.507,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 26,
+    "n_transparent": 5,
+    "n_textures": 19
+   },
+   "tyre_materials": [
+    {
+     "name": "TIRE",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 30.4,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/e595b4a9f4c847dfb9d2966e200b3a6a.jpg"
+  },
+  {
+   "n": 11,
+   "uid": "90e9f77205014ecc8e3e08dd27dc4d52",
+   "name": "2016 Toyota Prius",
+   "verdict": "pass",
+   "reason": "clean XW50 Prius; glazing clear",
+   "faces": 438814,
+   "cov": 0.153,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 22,
+    "n_transparent": 3,
+    "n_textures": 7
+   },
+   "tyre_materials": [
+    {
+     "name": "Carro_Pneu",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 32.1,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/90e9f77205014ecc8e3e08dd27dc4d52.jpg"
+  },
+  {
+   "n": 12,
+   "uid": "751c7d18c05946d18ba7953dc046dec6",
+   "name": "2020 Toyota Proace Verso City",
+   "verdict": "pass",
+   "reason": "clean Proace Verso; glazing clear",
+   "faces": 420414,
+   "cov": 0.221,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 27,
+    "n_transparent": 3,
+    "n_textures": 3
+   },
+   "tyre_materials": [
+    {
+     "name": "M_2020_Toyota_Proace_Verso_City_Tires",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 32.1,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/751c7d18c05946d18ba7953dc046dec6.jpg"
+  },
+  {
+   "n": 13,
+   "uid": "1b6dd834e8184851887ddeab1e83bc28",
+   "name": "2020 Toyota Yaris Cross",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven: '..._Windows' alphaMode=OPAQUE, zero transparent materials in file). FLAT SHELL corroborates: all 31 materials carry NO baseColorFactor and the file has no textures, so tyre/glass/paint all default to white",
+   "faces": 412476,
+   "cov": 0.511,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 31,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "M_2020_Toyota_Yaris_Cross_Tires",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/1b6dd834e8184851887ddeab1e83bc28.jpg"
+  },
+  {
+   "n": 14,
+   "uid": "6412b1bba68848af88169be2c75e10a6",
+   "name": "2021 Toyota Corolla Cross",
+   "verdict": "pass",
+   "reason": "clean Corolla Cross; glazing clear; sharp",
+   "faces": 597245,
+   "cov": 0.159,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 36,
+    "n_transparent": 5,
+    "n_textures": 12
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.0314744365057738,
+      0.0314744365057738,
+      0.0314744365057738,
+      1.0
+     ],
+     "lum": 0.0315,
+     "factor_stated": true
+    },
+    {
+     "name": "rubber",
+     "baseColorFactor": [
+      0.06350851958348702,
+      0.06350851958348702,
+      0.06350851958348702,
+      1.0
+     ],
+     "lum": 0.0635,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/6412b1bba68848af88169be2c75e10a6.jpg"
+  },
+  {
+   "n": 15,
+   "uid": "98e6611ad034451982b6a9908c63fc47",
+   "name": "2021 Toyota GR Yaris",
+   "verdict": "pass",
+   "reason": "clean GR Yaris; glazing clear",
+   "faces": 431232,
+   "cov": 0.543,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 27,
+    "n_transparent": 10,
+    "n_textures": 34
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/98e6611ad034451982b6a9908c63fc47.jpg"
+  },
+  {
+   "n": 16,
+   "uid": "411da54827634c5abd462ab4e9e0eb34",
+   "name": "2021 Toyota RAV4 Prime Hybrid E-Four",
+   "verdict": "pass",
+   "reason": "clean RAV4 Prime; glazing clear",
+   "faces": 274568,
+   "cov": 0.275,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 31,
+    "n_transparent": 7,
+    "n_textures": 11
+   },
+   "tyre_materials": [
+    {
+     "name": "tyre",
+     "baseColorFactor": [
+      0.030152376792982615,
+      0.030152376792982615,
+      0.030152376792982615,
+      1.0
+     ],
+     "lum": 0.0302,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/411da54827634c5abd462ab4e9e0eb34.jpg"
+  },
+  {
+   "n": 17,
+   "uid": "15be15530b0f46f6928fe5cde9fd4ed3",
+   "name": "2021 Toyota RAV4 Prime PHEV",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven). FLAT SHELL: 33 materials, none carries a baseColorFactor, no textures",
+   "faces": 447371,
+   "cov": 0.292,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 33,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "M_2021_Toyota_RAV4_Prime_PHEV_Tires",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/15be15530b0f46f6928fe5cde9fd4ed3.jpg"
+  },
+  {
+   "n": 18,
+   "uid": "366c46f72db64da2ac09777458506092",
+   "name": "2021+Toyota+RAV4+Adventure",
+   "verdict": "pass",
+   "reason": "clean RAV4 XA50 Adventure; glazing clear; distinct from the 496k-face RAV4 Adventure at #94 which fails",
+   "faces": 958508,
+   "cov": 0.324,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 34,
+    "n_transparent": 4,
+    "n_textures": 6
+   },
+   "tyre_materials": [
+    {
+     "name": "2021_Toyota_RAV4_Adventure_Tires",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 9.0,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/366c46f72db64da2ac09777458506092.jpg"
+  },
+  {
+   "n": 19,
+   "uid": "2724aadbf88b4706a26cf7d1b2332d0c",
+   "name": "2022 Toyota GR86",
+   "verdict": "pass",
+   "reason": "clean GR86; glazing clear; sharp",
+   "faces": 319456,
+   "cov": 0.175,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 17,
+    "n_transparent": 6,
+    "n_textures": 25
+   },
+   "tyre_materials": [
+    {
+     "name": "tyre",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 16.2,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/2724aadbf88b4706a26cf7d1b2332d0c.jpg"
+  },
+  {
+   "n": 20,
+   "uid": "82bd37c5065040098fb0b86e07fcb959",
+   "name": "2022 Toyota Hilux",
+   "verdict": "pass",
+   "reason": "clean Hilux; renders PINK in three tiles -- that is the render worker's body-material heuristic, not the asset (the sheet is not a colour witness); glazing clear",
+   "faces": 982566,
+   "cov": 0.516,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 61,
+    "n_transparent": 5,
+    "n_textures": 20
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/82bd37c5065040098fb0b86e07fcb959.jpg"
+  },
+  {
+   "n": 21,
    "uid": "b8eec127f2ce497fb819da51ba72dee2",
    "name": "2022 Toyota Land Cruiser",
-   "verdict": "PASS",
-   "note": "LC300 Land Cruiser; wheels consistent in all four views, grille slat depth crisp, headlight internals sharp, shut lines defined. Same generation as #40, which is marginally the better of the two. MRC 1920 plate wants blanking"
+   "verdict": "pass",
+   "reason": "clean LC300; glazing clear",
+   "faces": 974194,
+   "cov": 0.291,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 16,
+    "n_transparent": 6,
+    "n_textures": 1
+   },
+   "tyre_materials": [
+    {
+     "name": "022_Toyota_Land_Cruiser_VX_R_tire",
+     "baseColorFactor": [
+      0.0117647,
+      0.0117647,
+      0.0117647,
+      1.0
+     ],
+     "lum": 0.0118,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/b8eec127f2ce497fb819da51ba72dee2.jpg"
   },
-  "60": {
+  {
+   "n": 22,
+   "uid": "ffffac9e0c884124ba1adcf12ece2ad0",
+   "name": "2022+ Toyota+ Land+ Cruiser+VX.R",
+   "verdict": "pass",
+   "reason": "clean LC300 VX.R; glazing clear -- but EXACT face-count twin of #21 (974,194), see duplicates",
+   "faces": 974194,
+   "cov": 0.291,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 16,
+    "n_transparent": 6,
+    "n_textures": 1
+   },
+   "tyre_materials": [
+    {
+     "name": "2022_Toyota_Land_Cruiser_VX.R_tire",
+     "baseColorFactor": [
+      0.0117647,
+      0.0117647,
+      0.0117647,
+      1.0
+     ],
+     "lum": 0.0118,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/ffffac9e0c884124ba1adcf12ece2ad0.jpg"
+  },
+  {
+   "n": 23,
+   "uid": "1f66a3fdb7da421cafb089467b5a6140",
+   "name": "2022_Toyota_C-HR_3D_model",
+   "verdict": "pass",
+   "reason": "clean C-HR; glazing ambiguous/inferred (no glass-named material -> no handler override -> the SHEET is an honest witness here, and it shows transparent glazing with interior visible)",
+   "faces": 200841,
+   "cov": 0.174,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "ambiguous",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 4,
+    "n_transparent": 1,
+    "n_textures": 6
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/1f66a3fdb7da421cafb089467b5a6140.jpg"
+  },
+  {
+   "n": 24,
+   "uid": "86cc5ddbc9b447b79913ae42971dad1b",
+   "name": "2022_toyota_hilux",
+   "verdict": "pass",
+   "reason": "clean Hilux; glazing clear",
+   "faces": 982533,
+   "cov": 0.516,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 61,
+    "n_transparent": 5,
+    "n_textures": 19
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/86cc5ddbc9b447b79913ae42971dad1b.jpg"
+  },
+  {
+   "n": 25,
+   "uid": "204283fa663d4ccea7f3bdfd1ba6680e",
+   "name": "2023 Toyota GR Corolla",
+   "verdict": "pass",
+   "reason": "clean GR Corolla; glazing clear",
+   "faces": 482476,
+   "cov": 0.143,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 25,
+    "n_transparent": 4,
+    "n_textures": 3
+   },
+   "tyre_materials": [
+    {
+     "name": "tyre",
+     "baseColorFactor": [
+      0.01,
+      0.01,
+      0.01,
+      1.0
+     ],
+     "lum": 0.01,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/204283fa663d4ccea7f3bdfd1ba6680e.jpg"
+  },
+  {
+   "n": 26,
+   "uid": "0d83090a0d484d98b6749dbbf9b4a111",
+   "name": "2023 Toyota GR86",
+   "verdict": "pass",
+   "reason": "clean GR86; glazing clear; tyre is textured with a BLACK baseColorFactor multiplying it -- reads black",
+   "faces": 244180,
+   "cov": 0.148,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": true,
+    "n_materials": 20,
+    "n_transparent": 4,
+    "n_textures": 20
+   },
+   "tyre_materials": [
+    {
+     "name": "Shared_Tire_Race02_N",
+     "baseColorFactor": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "texture_mean_srgb": 168.8,
+     "lum": 0.0,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/0d83090a0d484d98b6749dbbf9b4a111.jpg"
+  },
+  {
+   "n": 27,
+   "uid": "3d59fcae4cc441c6bc623ebf82ae5035",
+   "name": "2023 Toyota GR86 RZ XENO GT-Spec Aero Kit",
+   "verdict": "fail",
+   "reason": "out of scope: XENO GT-Spec widebody aero kit, not a road car a UK reg decodes to",
+   "faces": 477321,
+   "cov": 0.518,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 36,
+    "n_transparent": 15,
+    "n_textures": 50
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/3d59fcae4cc441c6bc623ebf82ae5035.jpg"
+  },
+  {
+   "n": 28,
+   "uid": "ed155ad0cb7d447085a519eaff9aa2df",
+   "name": "2023 Toyota RAV4 Hybrid",
+   "verdict": "pass",
+   "reason": "clean RAV4 Hybrid; glazing clear",
+   "faces": 399174,
+   "cov": 0.688,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 21,
+    "n_transparent": 7,
+    "n_textures": 32
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/ed155ad0cb7d447085a519eaff9aa2df.jpg"
+  },
+  {
+   "n": 29,
+   "uid": "bae4423cff184f8ebf3a46a1ffaf064a",
+   "name": "2023 Toyota bZ4X",
+   "verdict": "pass",
+   "reason": "clean bZ4X; glazing clear",
+   "faces": 512102,
+   "cov": 0.383,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 37,
+    "n_transparent": 4,
+    "n_textures": 7
+   },
+   "tyre_materials": [
+    {
+     "name": "tyre",
+     "baseColorFactor": [
+      0.018704943955272956,
+      0.018704943955272956,
+      0.018704943955272956,
+      1.0
+     ],
+     "lum": 0.0187,
+     "factor_stated": true
+    },
+    {
+     "name": "rubber",
+     "baseColorFactor": [
+      0.027606939338488443,
+      0.027606939338488443,
+      0.027606939338488443,
+      1.0
+     ],
+     "lum": 0.0276,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/bae4423cff184f8ebf3a46a1ffaf064a.jpg"
+  },
+  {
+   "n": 30,
+   "uid": "eb1db00de9614518961be6ea754e0071",
+   "name": "2023 XENO GT-SPEC TOYOTA GR86 (ZN8)",
+   "verdict": "fail",
+   "reason": "out of scope: XENO GT-SPEC widebody aero kit",
+   "faces": 483884,
+   "cov": 0.491,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 36,
+    "n_transparent": 15,
+    "n_textures": 51
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/eb1db00de9614518961be6ea754e0071.jpg"
+  },
+  {
+   "n": 31,
+   "uid": "e60d6a3c73bf42369c045099ef0adf07",
+   "name": "2023 XENO GTspec Wide Body Toyota GR86 (ZN8)",
+   "verdict": "fail",
+   "reason": "out of scope: XENO GTspec Wide Body kit",
+   "faces": 478347,
+   "cov": 0.516,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 37,
+    "n_transparent": 15,
+    "n_textures": 50
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/e60d6a3c73bf42369c045099ef0adf07.jpg"
+  },
+  {
+   "n": 32,
+   "uid": "0937e2b405964856a1aac96f54861274",
+   "name": "2024 Toyota Land Cruiser LC300 VXR 409 TT",
+   "verdict": "pass",
+   "reason": "clean LC300 VXR; glazing clear",
+   "faces": 1101162,
+   "cov": 0.194,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 30,
+    "n_transparent": 5,
+    "n_textures": 13
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/0937e2b405964856a1aac96f54861274.jpg"
+  },
+  {
+   "n": 33,
+   "uid": "11c51a8d3d5541339ab9549479bfa4d3",
+   "name": "2025 Toyota Camry",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven: vehicle_generic_glasswindows2_001 and back_glass both alphaMode=OPAQUE, zero transparent materials); geometry is otherwise clean -- overturns the earlier PASS",
+   "faces": 362344,
+   "cov": 0.242,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 23,
+    "n_transparent": 0,
+    "n_textures": 8
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/11c51a8d3d5541339ab9549479bfa4d3.jpg"
+  },
+  {
+   "n": 34,
+   "uid": "0ea0291e2df14fa5afc309578b3c5a1e",
+   "name": "2026 Toyota Prius",
+   "verdict": "fail",
+   "reason": "wheels absent from three of four tiles (empty arches); glazing OPAQUE; FLAT SHELL",
+   "faces": 1043450,
+   "cov": 0.09,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 26,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "EXT_Tyre",
+     "baseColorFactor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+     ],
+     "lum": 0.8,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/0ea0291e2df14fa5afc309578b3c5a1e.jpg"
+  },
+  {
+   "n": 35,
+   "uid": "9cc8dbbd68514a0fa8c2d14595cade99",
+   "name": "259: 2005 Toyota MR2 Spyder",
+   "verdict": "fail",
+   "reason": "photogrammetry scan: mottled green baked texture, melted panels, single material",
+   "faces": 64629,
+   "cov": 1.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 4,
+    "n_transparent": 0,
+    "n_textures": 4
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/9cc8dbbd68514a0fa8c2d14595cade99.jpg"
+  },
+  {
+   "n": 36,
+   "uid": "933039cdc0a5499693c6159616490fce",
+   "name": "3D Scanned Toyota Verso (2009, EU) [Free]",
+   "verdict": "fail",
+   "reason": "photogrammetry scan: baked lighting, soft panels, single material",
+   "faces": 69359,
+   "cov": 1.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/933039cdc0a5499693c6159616490fce.jpg"
+  },
+  {
+   "n": 37,
+   "uid": "799f7db618c9477fa017cd7e995aadeb",
+   "name": "Blue Toyota Camry 2007",
+   "verdict": "pass",
+   "reason": "clean XV40 Camry; glazing ambiguous/proven -- flagged, see live-recheck note on the Camry07 pack",
+   "faces": 1124437,
+   "cov": 0.606,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "ambiguous",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 40,
+    "n_transparent": 2,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "Camry07-tire",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/799f7db618c9477fa017cd7e995aadeb.jpg"
+  },
+  {
+   "n": 38,
+   "uid": "746d55cffe2b49d0b130700d6878db91",
+   "name": "Photoscanned Toyota Highlander",
+   "verdict": "fail",
+   "reason": "photogrammetry scan with the ground plane baked into the mesh (grey slab under the car in two tiles)",
+   "faces": 78983,
+   "cov": 1.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/746d55cffe2b49d0b130700d6878db91.jpg"
+  },
+  {
+   "n": 39,
+   "uid": "3f82031714bd40a3a3a027e5687604de",
+   "name": "Toyota  Prius 2010",
+   "verdict": "pass",
+   "reason": "clean XW30 Prius; glazing clear",
+   "faces": 963264,
+   "cov": 0.174,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 20,
+    "n_transparent": 6,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.106,
+      0.106,
+      0.106,
+      1.0
+     ],
+     "lum": 0.106,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/3f82031714bd40a3a3a027e5687604de.jpg"
+  },
+  {
+   "n": 40,
+   "uid": "c7aad552ce6f4700b179615b2c9a346b",
+   "name": "Toyota Auris 2019",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven). FLAT SHELL: every material at baseColorFactor 0.588 including glass and tire_mat4 -- the documented clay signature; overturns the earlier PASS",
+   "faces": 896437,
+   "cov": 0.149,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 21,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [
+    {
+     "name": "tire_mat4",
+     "baseColorFactor": [
+      0.588,
+      0.588,
+      0.588,
+      1.0
+     ],
+     "lum": 0.588,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/c7aad552ce6f4700b179615b2c9a346b.jpg"
+  },
+  {
+   "n": 41,
+   "uid": "21b2d277397049879e2756b63199ded8",
+   "name": "Toyota Auris wagon",
+   "verdict": "fail",
+   "reason": "single material for the whole car (m=1). Glazing is NOT glass-named, so no handler override fires and the sheet is an honest witness: the windows render as the same gloss black as the paint, no interior anywhere. Fails the glazing ruling",
+   "faces": 878442,
+   "cov": 0.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 3
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS-SINGLE",
+   "sheet": "car-meshes/audit/toyota/21b2d277397049879e2756b63199ded8.jpg"
+  },
+  {
+   "n": 42,
+   "uid": "ad05a156f817451ca214d388e53052fb",
+   "name": "Toyota Avensis (Mk1)(T220) sedan",
+   "verdict": "pass",
+   "reason": "clean T220 Avensis saloon; glazing clear",
+   "faces": 884404,
+   "cov": 0.214,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 16,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      1.0
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/ad05a156f817451ca214d388e53052fb.jpg"
+  },
+  {
+   "n": 43,
+   "uid": "78eeb0db0dab4339b546ed504453ed3c",
+   "name": "Toyota Avensis (Mk2f)(T250) sedan",
+   "verdict": "pass",
+   "reason": "clean T250 Avensis saloon; glazing clear",
+   "faces": 1130815,
+   "cov": 0.199,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 18,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      1.0
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/78eeb0db0dab4339b546ed504453ed3c.jpg"
+  },
+  {
+   "n": 44,
+   "uid": "adcf7d9439e64d54bc7850f541488928",
+   "name": "Toyota Avensis Estate MK2 2003-2009",
+   "verdict": "fail",
+   "reason": "GLOBAL-ALPHA SHELL (carpaint/tire at alpha 0.25); also renders with the front bumper detached",
+   "faces": 1191553,
+   "cov": 0.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": true,
+    "n_materials": 19,
+    "n_transparent": 19,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      0.25
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/adcf7d9439e64d54bc7850f541488928.jpg"
+  },
+  {
+   "n": 45,
+   "uid": "788ecc7cf8744a9486c8b02293534cf6",
+   "name": "Toyota Avensis MK1 Sedan 1997-2003",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven: windowglass and clearglass both alphaMode=OPAQUE, zero transparent materials in file)",
+   "faces": 884404,
+   "cov": 0.214,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 16,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      1.0
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/788ecc7cf8744a9486c8b02293534cf6.jpg"
+  },
+  {
+   "n": 46,
+   "uid": "bb03e36096f8408386273fd4d5dacb71",
+   "name": "Toyota Avensis MK1 T22 1997-2003",
+   "verdict": "fail",
+   "reason": "exploded parts kit: doors absent, panels floating, a wheel lying flat on the floor",
+   "faces": 345381,
+   "cov": 0.137,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 30,
+    "n_transparent": 6,
+    "n_textures": 6
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/bb03e36096f8408386273fd4d5dacb71.jpg"
+  },
+  {
+   "n": 47,
    "uid": "0b20ef50634b4961812805da3e50c867",
    "name": "Toyota Avensis MK10 (E140,E150) 2006-2013",
-   "verdict": "FAIL",
-   "note": "two faults -- body panels detached and floating free of the car with wheels reduced to stubs, AND it is mislabelled: the boot badge reads COROLLA and E140/E150 are Corolla codes, but the title says Avensis. The nameplate filter trusted the title, so a title-derived plate can simply be wrong"
+   "verdict": "fail",
+   "reason": "exploded parts kit (bumpers and shells separated). Also mislabelled: E140/E150 is a COROLLA, the title says Avensis -- read the render, not the title",
+   "faces": 319862,
+   "cov": 0.314,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 30,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/0b20ef50634b4961812805da3e50c867.jpg"
   },
-  "61": {
-   "uid": "f8a557a46ff34a68893dce0136995408",
-   "name": "Toyota Hilux (Mk5) Double Cab 1988",
-   "verdict": "PASS",
-   "note": "Mk5 Hilux; wheels consistent in all four views, grille slats crisp, headlight internals present, shut lines defined. NOTE: title says 'Double Cab' but this is plainly a SINGLE cab -- one row of doors, long bed. bodyStyle must come from the render, not the title. HUMSTER3D plate wants blanking"
+  {
+   "n": 48,
+   "uid": "9a08719f57d84429adeaca991da4d561",
+   "name": "Toyota Avensis Sedan MK1 1997-2003",
+   "verdict": "fail",
+   "reason": "GLOBAL-ALPHA SHELL (carpaint/tire alpha 0.25); front panels detached",
+   "faces": 884404,
+   "cov": 0.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": true,
+    "n_materials": 16,
+    "n_transparent": 16,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      0.25
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/9a08719f57d84429adeaca991da4d561.jpg"
   },
-  "62": {
-   "uid": "98c70e5aa53446728fea4d8f448bbf33",
-   "name": "toyota camry v80",
-   "verdict": "HOLD",
-   "note": "geometry looks sound -- proportions right, silver multi-spoke wheels consistent, shut lines visible -- but the RECOLOUR DID NOT LAND: renders black under --colour silver, same failure as #41. colour_variants.py resprays by glTF-JSON edit, a different mechanism from the render worker, so this may still bake. Recoverable if recolour_audit passes; unusable if it does not"
+  {
+   "n": 49,
+   "uid": "4485b98b8a474e869074118059ec2fa6",
+   "name": "Toyota Avensis Sedan MK2 2003-2009",
+   "verdict": "fail",
+   "reason": "GLOBAL-ALPHA SHELL (carpaint/tire alpha 0.25); front bumper detached",
+   "faces": 1130789,
+   "cov": 0.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": true,
+    "n_materials": 18,
+    "n_transparent": 18,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      0.25
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/4485b98b8a474e869074118059ec2fa6.jpg"
   },
-  "66": {
-   "uid": "4ed6c385052b4d6fb7b2ecee08292d85",
-   "name": "Toyota_ Hilux_(Mk3)_ Regular Cab_1978",
-   "verdict": "PASS",
-   "note": "Mk3 Hilux regular cab; steel wheels consistent in all four views, grille crisp, round headlights detailed, shut lines defined. Title correctly states Regular Cab. HUMSTER3D plate wants blanking"
+  {
+   "n": 50,
+   "uid": "20f0190e34da4ac4a984c7f7a757efba",
+   "name": "Toyota Avensis Sedan MK3 2009-2012",
+   "verdict": "fail",
+   "reason": "GLOBAL-ALPHA SHELL: carpaint 0.25, tire 0.25, black 0.25 -- body and tyres see-through. Geometry is clean, which is why it passed before; overturns the earlier PASS-SINGLE",
+   "faces": 993548,
+   "cov": 0.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": true,
+    "n_materials": 16,
+    "n_transparent": 16,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.106,
+      0.106,
+      0.106,
+      0.25
+     ],
+     "lum": 0.106,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS-SINGLE",
+   "sheet": "car-meshes/audit/toyota/20f0190e34da4ac4a984c7f7a757efba.jpg"
   },
-  "67": {
+  {
+   "n": 51,
+   "uid": "994a1902b96e455ea3ab4e90de95507f",
+   "name": "Toyota Avensis Wagon",
+   "verdict": "fail",
+   "reason": "GLOBAL-ALPHA SHELL (carpaint/tire alpha 0.25); detached front panels",
+   "faces": 1191553,
+   "cov": 0.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": true,
+    "n_materials": 19,
+    "n_transparent": 19,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire.001",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      0.25
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/994a1902b96e455ea3ab4e90de95507f.jpg"
+  },
+  {
+   "n": 52,
+   "uid": "aaf87da9481f46ccba404f3156c70d9b",
+   "name": "Toyota Aygo 2009 5-doors",
+   "verdict": "fail",
+   "reason": "photogrammetry scan with a cobblestone ground plane baked into the mesh",
+   "faces": 100001,
+   "cov": 1.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/aaf87da9481f46ccba404f3156c70d9b.jpg"
+  },
+  {
+   "n": 53,
+   "uid": "bc9bf0f48e174e918a5187dd1de019f8",
+   "name": "Toyota C-HR 2020",
+   "verdict": "pass",
+   "reason": "clean C-HR; glazing ambiguous/inferred, sheet admissible (no glass-named material) and shows transparent glazing",
+   "faces": 201073,
+   "cov": 0.174,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "ambiguous",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 5,
+    "n_transparent": 1,
+    "n_textures": 11
+   },
+   "tyre_materials": [],
+   "prior_verdict": "DUPLICATE",
+   "sheet": "car-meshes/audit/toyota/bc9bf0f48e174e918a5187dd1de019f8.jpg"
+  },
+  {
+   "n": 54,
+   "uid": "196829bf4cbc4b8cb26c50964f35ff27",
+   "name": "Toyota Camry (Mk4)(XV20) 1997",
+   "verdict": "pass",
+   "reason": "clean XV20 Camry; glazing clear",
+   "faces": 998707,
+   "cov": 0.197,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 17,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.106,
+      0.106,
+      0.106,
+      1.0
+     ],
+     "lum": 0.106,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/196829bf4cbc4b8cb26c50964f35ff27.jpg"
+  },
+  {
+   "n": 55,
+   "uid": "42ce994521404882946cc8add801c413",
+   "name": "Toyota Camry XV30 2004",
+   "verdict": "fail-rerender",
+   "reason": "RENDER-SIDE INVERSION: renders upside down in all four tiles, but geom_audit on the source GLB gives h/l=0.305 tob=0.775 -- geometrically UPRIGHT. Deterministic per asset, so re-rendering the same worker build will not fix it; not a scrap",
+   "faces": 766954,
+   "cov": 0.226,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 16,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.106,
+      0.106,
+      0.106,
+      1.0
+     ],
+     "lum": 0.106,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/42ce994521404882946cc8add801c413.jpg"
+  },
+  {
+   "n": 56,
+   "uid": "741ac969fe494159ab5af29497c2a370",
+   "name": "Toyota Carina",
+   "verdict": "fail",
+   "reason": "photogrammetry scan: baked ground dirt, soft panels, ragged window openings",
+   "faces": 149940,
+   "cov": 0.98,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 20,
+    "n_transparent": 0,
+    "n_textures": 20
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/741ac969fe494159ab5af29497c2a370.jpg"
+  },
+  {
+   "n": 57,
+   "uid": "d893bada37ae4ef0a81e176c87923263",
+   "name": "Toyota Celica (Mk1) (TA22) 1600 GT Coupe 1973",
+   "verdict": "fail-rerender",
+   "reason": "RENDER-SIDE INVERSION: renders upside down, source GLB is upright (h/l=0.312, tob=0.907). Same class as #55; not a scrap",
+   "faces": 796735,
+   "cov": 0.219,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 18,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      1.0
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/d893bada37ae4ef0a81e176c87923263.jpg"
+  },
+  {
+   "n": 58,
+   "uid": "9f09704e33af42d29b2230e10506456a",
+   "name": "Toyota Celica (Mk3) (A60) liftback 1981",
+   "verdict": "pass",
+   "reason": "clean A60 Celica liftback; glazing clear",
+   "faces": 813796,
+   "cov": 0.167,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 16,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      1.0
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/9f09704e33af42d29b2230e10506456a.jpg"
+  },
+  {
+   "n": 59,
+   "uid": "af4fec1626f047339857d98b4f0f7273",
+   "name": "Toyota Celica ST205 GT4",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven: window/glass/black_glass all alphaMode=OPAQUE, zero transparent materials in a 50-material file); overturns the earlier PASS",
+   "faces": 186451,
+   "cov": 0.17,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 50,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "supra_tyre",
+     "baseColorFactor": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "lum": 0.0,
+     "factor_stated": true
+    },
+    {
+     "name": "rubber_trim",
+     "baseColorFactor": [
+      0.27,
+      0.27,
+      0.27,
+      1.0
+     ],
+     "lum": 0.27,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/af4fec1626f047339857d98b4f0f7273.jpg"
+  },
+  {
+   "n": 60,
+   "uid": "e38b2b292a04436a936171a2f5d33af7",
+   "name": "Toyota Corolla",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven). FLAT SHELL: 18 materials, none carries a baseColorFactor, no textures; overturns the earlier PASS",
+   "faces": 1091594,
+   "cov": 0.217,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 18,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/e38b2b292a04436a936171a2f5d33af7.jpg"
+  },
+  {
+   "n": 61,
+   "uid": "cc503d26ea694dce85e7d0f1491b0e30",
+   "name": "Toyota Corolla Cross",
+   "verdict": "pass",
+   "reason": "clean Corolla Cross; glazing ambiguous/proven but transparent glazing visible in the sheet. FLAG: '..._Tires' baseColorFactor 0.8 (pale grey) -- tyre colour needs a render confirmation",
+   "faces": 419710,
+   "cov": 0.49,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "ambiguous",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 26,
+    "n_transparent": 2,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "2020_Toyota_Corolla_Cross_Tires",
+     "baseColorFactor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+     ],
+     "lum": 0.8,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/cc503d26ea694dce85e7d0f1491b0e30.jpg"
+  },
+  {
+   "n": 62,
+   "uid": "e595afd4ec5745a08f95cc5baeaa5ef0",
+   "name": "Toyota Corolla Sedan Regular 2020",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven). FLAT SHELL: every material at 0.588 including glass, r_glass, d_glass and tire_mat3; overturns the earlier PASS",
+   "faces": 1139486,
+   "cov": 0.186,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 20,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire_mat3",
+     "baseColorFactor": [
+      0.588,
+      0.588,
+      0.588,
+      1.0
+     ],
+     "lum": 0.588,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/e595afd4ec5745a08f95cc5baeaa5ef0.jpg"
+  },
+  {
+   "n": 63,
+   "uid": "3a2f68415ae14f2e8ced79585db853c1",
+   "name": "Toyota Corona Premio",
+   "verdict": "fail",
+   "reason": "photogrammetry scan: windows are ragged holes, baked lighting, melted panels",
+   "faces": 149348,
+   "cov": 0.91,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 32,
+    "n_transparent": 0,
+    "n_textures": 32
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/3a2f68415ae14f2e8ced79585db853c1.jpg"
+  },
+  {
+   "n": 64,
+   "uid": "e14fc132d13a4d09a01181341c70e690",
+   "name": "Toyota GR Corolla MORIZO Edition",
+   "verdict": "pass",
+   "reason": "clean GR Corolla MORIZO; glazing clear; textured tyre",
+   "faces": 1062940,
+   "cov": 0.551,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 28,
+    "n_transparent": 5,
+    "n_textures": 7
+   },
+   "tyre_materials": [
+    {
+     "name": "Carro_Pneu",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 32.1,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/e14fc132d13a4d09a01181341c70e690.jpg"
+  },
+  {
+   "n": 65,
+   "uid": "980a52a5031a4b07a0f206b82ebb1275",
+   "name": "Toyota GR Supra (A90)",
+   "verdict": "pass",
+   "reason": "clean A90 GR Supra; glazing clear",
+   "faces": 855272,
+   "cov": 0.169,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 26,
+    "n_transparent": 2,
+    "n_textures": 4
+   },
+   "tyre_materials": [
+    {
+     "name": "MKV.Tire",
+     "baseColorFactor": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "lum": 0.0,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/980a52a5031a4b07a0f206b82ebb1275.jpg"
+  },
+  {
+   "n": 66,
    "uid": "1c2ce5ff548f4ab49d72183d1e0f2afe",
    "name": "Toyota GR Yaris Rally WRC | www.vecarz.com",
-   "verdict": "FAIL",
-   "note": "out of scope -- WRC rally car: full aero, gravel arches, competition wing, no road lighting. No UK reg decodes to it. Same category as #3's GT500. Title also carries a vecarz.com watermark"
+   "verdict": "fail",
+   "reason": "out of scope: WRC rally car -- roll cage, no side glazing, competition aero",
+   "faces": 231372,
+   "cov": 0.427,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 11,
+    "n_transparent": 1,
+    "n_textures": 9
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/1c2ce5ff548f4ab49d72183d1e0f2afe.jpg"
+  },
+  {
+   "n": 67,
+   "uid": "5ef3d18b151448ab831a9f6c03d89b86",
+   "name": "Toyota GR Yaris Rocket Bunny Pandem",
+   "verdict": "fail",
+   "reason": "out of scope: Rocket Bunny Pandem widebody kit",
+   "faces": 869348,
+   "cov": 0.216,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 42,
+    "n_transparent": 1,
+    "n_textures": 14
+   },
+   "tyre_materials": [
+    {
+     "name": "rubber",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 0.0,
+     "lum": 1.0,
+     "factor_stated": false
+    },
+    {
+     "name": "rubber_black",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 21.0,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/5ef3d18b151448ab831a9f6c03d89b86.jpg"
+  },
+  {
+   "n": 68,
+   "uid": "829af71aa2d64896ab93e696e4015f64",
+   "name": "Toyota GR86",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven: '..._Windows' alphaMode=OPAQUE). Tyre material named 'BlackRubber' is set to 0.8 light grey",
+   "faces": 312031,
+   "cov": 0.637,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 41,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "2022_Toyota_GR_86_Tires",
+     "baseColorFactor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+     ],
+     "lum": 0.8,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/829af71aa2d64896ab93e696e4015f64.jpg"
+  },
+  {
+   "n": 69,
+   "uid": "4919d14eba9640599e838230e8e5ed74",
+   "name": "Toyota GR86 (ZN8)",
+   "verdict": "pass",
+   "reason": "clean ZN8 GR86; glazing clear/inferred",
+   "faces": 284062,
+   "cov": 0.35,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 29,
+    "n_transparent": 9,
+    "n_textures": 25
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/4919d14eba9640599e838230e8e5ed74.jpg"
+  },
+  {
+   "n": 70,
+   "uid": "f02c802c32994b2784fa182a9ed71f84",
+   "name": "Toyota GT86",
+   "verdict": "fail",
+   "reason": "70k faces: panel surfaces wavy and soft, creases along the flank in front34_L; below the premium bar",
+   "faces": 70016,
+   "cov": 0.192,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 35,
+    "n_transparent": 8,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/f02c802c32994b2784fa182a9ed71f84.jpg"
+  },
+  {
+   "n": 71,
+   "uid": "ec05296ddf2f4c22a570512245d1fba0",
+   "name": "Toyota GT86 3D Model (Free)",
+   "verdict": "pass",
+   "reason": "clean GT86; glazing clear; sharp",
+   "faces": 1152416,
+   "cov": 0.171,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 12,
+    "n_transparent": 3,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/ec05296ddf2f4c22a570512245d1fba0.jpg"
+  },
+  {
+   "n": 72,
+   "uid": "1b0a576eed9b4522a231572f85bc9157",
+   "name": "Toyota Hiace 2000 /Foyota Hiace 2000",
+   "verdict": "fail",
+   "reason": "single material for the whole van (cov=1.000, m=1) -- the exact condition toyota-auris-v1 was retired for",
+   "faces": 1000264,
+   "cov": 1.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/1b0a576eed9b4522a231572f85bc9157.jpg"
+  },
+  {
+   "n": 73,
+   "uid": "5b1d7d6f87a543278e7bcb97e3c27c10",
+   "name": "Toyota Hiace Grand Cabin 2000",
+   "verdict": "fail",
+   "reason": "single material (m=1, cov=1.000); baked livery decals",
+   "faces": 1000068,
+   "cov": 1.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/5b1d7d6f87a543278e7bcb97e3c27c10.jpg"
+  },
+  {
+   "n": 74,
+   "uid": "547864db1e774daa9aee874cadc37ae6",
+   "name": "Toyota Hiace Microbus Port Said Al-5000 Line",
+   "verdict": "fail",
+   "reason": "single material (m=1, cov=1.000); baked two-tone livery, scan-grade panels",
+   "faces": 1000282,
+   "cov": 1.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/547864db1e774daa9aee874cadc37ae6.jpg"
+  },
+  {
+   "n": 75,
+   "uid": "59dcb878d0a540f59bafd7d48eb8bea0",
+   "name": "Toyota Hiace Microbus Port Said Al-5000 Line",
+   "verdict": "fail",
+   "reason": "single material (m=1, cov=1.000); baked livery",
+   "faces": 1000030,
+   "cov": 1.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/59dcb878d0a540f59bafd7d48eb8bea0.jpg"
+  },
+  {
+   "n": 76,
+   "uid": "c4abf4e84ac34b29a482d0c64cd99f1c",
+   "name": "Toyota Highlander (Mk1)(XU20) 2003",
+   "verdict": "pass",
+   "reason": "clean XU20 Highlander; glazing clear",
+   "faces": 831698,
+   "cov": 0.223,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 17,
+    "n_transparent": 5,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.106,
+      0.106,
+      0.106,
+      1.0
+     ],
+     "lum": 0.106,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/c4abf4e84ac34b29a482d0c64cd99f1c.jpg"
+  },
+  {
+   "n": 77,
+   "uid": "11413272fe244553986c1c1b1efab564",
+   "name": "Toyota Highlander 2011",
+   "verdict": "pass",
+   "reason": "clean Highlander XU40; glazing clear",
+   "faces": 646633,
+   "cov": 0.173,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 17,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.106,
+      0.106,
+      0.106,
+      1.0
+     ],
+     "lum": 0.106,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/11413272fe244553986c1c1b1efab564.jpg"
+  },
+  {
+   "n": 78,
+   "uid": "ff144d062f244a3ebfae71bc2a41564b",
+   "name": "Toyota Highlander 2020",
+   "verdict": "pass",
+   "reason": "clean Highlander XU70; glazing ambiguous/inferred, sheet admissible and shows transparent glazing",
+   "faces": 200513,
+   "cov": 0.192,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "ambiguous",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 5,
+    "n_transparent": 2,
+    "n_textures": 8
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/ff144d062f244a3ebfae71bc2a41564b.jpg"
+  },
+  {
+   "n": 79,
+   "uid": "8bc403ae901b4ae8a9e9c479eb0d26bd",
+   "name": "Toyota Hilux",
+   "verdict": "pass",
+   "reason": "clean Hilux; glazing clear -- EXACT face-count twin of #24 (982,533), see duplicates",
+   "faces": 982533,
+   "cov": 0.516,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 61,
+    "n_transparent": 5,
+    "n_textures": 20
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/8bc403ae901b4ae8a9e9c479eb0d26bd.jpg"
+  },
+  {
+   "n": 80,
+   "uid": "f8a557a46ff34a68893dce0136995408",
+   "name": "Toyota Hilux (Mk5) Double Cab 1988",
+   "verdict": "pass",
+   "reason": "clean Mk5 Hilux. TITLE IS WRONG: the render shows a SINGLE (regular) cab, the title says Double Cab -- bodyStyle must come from the render",
+   "faces": 827028,
+   "cov": 0.326,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 17,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      1.0
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/f8a557a46ff34a68893dce0136995408.jpg"
+  },
+  {
+   "n": 81,
+   "uid": "160692a5e0514d14aa2bd6498873345e",
+   "name": "Toyota Hilux (Mk6) Double Cab 2001",
+   "verdict": "pass",
+   "reason": "clean Mk6 Hilux double cab; glazing clear -- EXACT face-count twin of #5 (1,195,696), see duplicates",
+   "faces": 1195696,
+   "cov": 0.272,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 18,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      1.0
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/160692a5e0514d14aa2bd6498873345e.jpg"
+  },
+  {
+   "n": 82,
+   "uid": "c7cfbd0600ad41e2b8f96d3be8fa5933",
+   "name": "Toyota Hilux Pickup 2008",
+   "verdict": "fail",
+   "reason": "single material (m=1, cov=1.000) with baked tan swoosh decals; scan-grade",
+   "faces": 1000048,
+   "cov": 1.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/c7cfbd0600ad41e2b8f96d3be8fa5933.jpg"
+  },
+  {
+   "n": 83,
+   "uid": "62355d6e59954b18b2670719bf09f9bf",
+   "name": "Toyota Hilux SRX 2019",
+   "verdict": "fail",
+   "reason": "RIM VOID: near-side wheels render as featureless black discs with a spiked sunburst ring and no rim face at all, while the far-side front wheel in front34_L shows a full 6-spoke alloy. Not a lighting split -- the rim face is absent",
+   "faces": 849538,
+   "cov": 0.378,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 38,
+    "n_transparent": 14,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "PNEU_1",
+     "baseColorFactor": [
+      0.14902,
+      0.14902,
+      0.14902,
+      1.0
+     ],
+     "lum": 0.149,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/62355d6e59954b18b2670719bf09f9bf.jpg"
+  },
+  {
+   "n": 84,
+   "uid": "4a8f1b910a1b49e2a850fd9123f5ae8d",
+   "name": "Toyota Land Cruiser (Mk6) (J80)",
+   "verdict": "pass",
+   "reason": "clean J80 Land Cruiser; glazing clear -- near-twin of #3 (837,288 vs 837,272), see duplicates",
+   "faces": 837288,
+   "cov": 0.156,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 16,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.106,
+      0.106,
+      0.106,
+      1.0
+     ],
+     "lum": 0.106,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/4a8f1b910a1b49e2a850fd9123f5ae8d.jpg"
+  },
+  {
+   "n": 85,
+   "uid": "7f6b5f1f4eaf47dcafd7569d4ba5b8bf",
+   "name": "Toyota Land Cruiser J100",
+   "verdict": "fail",
+   "reason": "WHEELS-UP in the SOURCE mesh: geom_audit rejects it, top_over_bot=1.474 (wide-top). Genuine geometry fault, not a render artefact -- distinct from #55/#57",
+   "faces": 1145242,
+   "cov": 0.189,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 19,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "Toyota_Land_Cruiser_Mk7f_J100_VX_2005_tire",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      1.0
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/7f6b5f1f4eaf47dcafd7569d4ba5b8bf.jpg"
+  },
+  {
+   "n": 86,
+   "uid": "e9abe3f8479a4f17b62b56aaed6b5a8a",
+   "name": "Toyota Land Cruiser Shas",
+   "verdict": "fail",
+   "reason": "out of scope: flatbed troop-carrier conversion; single material (m=1, cov=1.000)",
+   "faces": 1000022,
+   "cov": 1.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/e9abe3f8479a4f17b62b56aaed6b5a8a.jpg"
+  },
+  {
+   "n": 87,
+   "uid": "2e358973d2bf4a2789f802469e8c59b4",
+   "name": "Toyota MR2 1984-2077",
+   "verdict": "fail",
+   "reason": "out of scope: heavily modded widebody with competition wing",
+   "faces": 225112,
+   "cov": 0.37,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 24,
+    "n_transparent": 3,
+    "n_textures": 27
+   },
+   "tyre_materials": [
+    {
+     "name": "Tyre",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 61.0,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/2e358973d2bf4a2789f802469e8c59b4.jpg"
+  },
+  {
+   "n": 88,
+   "uid": "950cd22ab63d4723b468f25da0fd5ec0",
+   "name": "Toyota Mirai",
+   "verdict": "pass",
+   "reason": "clean Mirai; glazing ambiguous/inferred, sheet admissible and shows interior through the rear side glass",
+   "faces": 194788,
+   "cov": 0.172,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "ambiguous",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 4,
+    "n_transparent": 1,
+    "n_textures": 6
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/950cd22ab63d4723b468f25da0fd5ec0.jpg"
+  },
+  {
+   "n": 89,
+   "uid": "2009331e9eae41a2bf9e52454b746c64",
+   "name": "Toyota Prius",
+   "verdict": "fail",
+   "reason": "photogrammetry scan on a baked circular ground disc; single material",
+   "faces": 938122,
+   "cov": 1.0,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/2009331e9eae41a2bf9e52454b746c64.jpg"
+  },
+  {
+   "n": 90,
+   "uid": "e619762dfa6e4f6092384422df3d6aa7",
+   "name": "Toyota Prius",
+   "verdict": "pass",
+   "reason": "clean XW50 Prius; glazing clear. FLAG: 'Carro_Pneu' baseColorFactor 0.8 (pale grey tyre) -- needs a render confirmation",
+   "faces": 438793,
+   "cov": 0.153,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 22,
+    "n_transparent": 3,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "Carro_Pneu",
+     "baseColorFactor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+     ],
+     "lum": 0.8,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/e619762dfa6e4f6092384422df3d6aa7.jpg"
+  },
+  {
+   "n": 91,
+   "uid": "a193a40e720e4a0bbe5d1c897f402ac8",
+   "name": "Toyota Prius (2020) but unreasonably modded",
+   "verdict": "fail",
+   "reason": "exploded parts scene: separate chassis, orange rig geometry and stray spheres in frame",
+   "faces": 130568,
+   "cov": 0.118,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 47,
+    "n_transparent": 5,
+    "n_textures": 26
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/a193a40e720e4a0bbe5d1c897f402ac8.jpg"
+  },
+  {
+   "n": 92,
+   "uid": "42470a7ce258421a89c2361225bb89eb",
+   "name": "Toyota Prius 2019",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven). FLAT SHELL: every material at 0.588 including glass and tire_mat2; overturns the earlier PASS",
+   "faces": 1193367,
+   "cov": 0.167,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 19,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire_mat2",
+     "baseColorFactor": [
+      0.588,
+      0.588,
+      0.588,
+      1.0
+     ],
+     "lum": 0.588,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/42470a7ce258421a89c2361225bb89eb.jpg"
+  },
+  {
+   "n": 93,
+   "uid": "ad0d925cb51040798d96f166db8c7f80",
+   "name": "Toyota Prius 2020",
+   "verdict": "pass",
+   "reason": "clean XW50 Prius; glazing ambiguous/inferred, sheet admissible and shows transparent glazing and a plainly black tyre",
+   "faces": 179604,
+   "cov": 0.192,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "ambiguous",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 5,
+    "n_transparent": 2,
+    "n_textures": 8
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/ad0d925cb51040798d96f166db8c7f80.jpg"
+  },
+  {
+   "n": 94,
+   "uid": "001674408710482b9873decb30274ac9",
+   "name": "Toyota RAV4 Adventure",
+   "verdict": "fail",
+   "reason": "wheel style changes between views: black off-road alloys in front34/side, silver multi-spoke in rear34, and the ride height differs; body creases along the flank",
+   "faces": 496097,
+   "cov": 0.123,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 44,
+    "n_transparent": 1,
+    "n_textures": 12
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/001674408710482b9873decb30274ac9.jpg"
+  },
+  {
+   "n": 95,
+   "uid": "082c0ed5b88b44f2b0f556f04f8f904c",
+   "name": "Toyota RAV4 MK5 2019",
+   "verdict": "fail",
+   "reason": "exploded parts kit: every door detached and floating beside the car. Glazing also OPAQUE (proven)",
+   "faces": 416719,
+   "cov": 0.192,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 31,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/082c0ed5b88b44f2b0f556f04f8f904c.jpg"
+  },
+  {
+   "n": 96,
+   "uid": "27774da78ecb434c8ffbc03b32aabfda",
+   "name": "Toyota Rav4 Prime",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven). FLAT SHELL: 17 materials, none with a baseColorFactor, no textures. Body surface also reads as blotchy polygon patches",
+   "faces": 500603,
+   "cov": 0.823,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 17,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "Rubber_Rough",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    },
+    {
+     "name": "Rubber_Rough222",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/27774da78ecb434c8ffbc03b32aabfda.jpg"
+  },
+  {
+   "n": 97,
+   "uid": "694c9f59f7494c0eae747828562a6a55",
+   "name": "Toyota Supra",
+   "verdict": "fail",
+   "reason": "panel surfacing below bar: soft melted flanks, headlamps are empty pods",
+   "faces": 748392,
+   "cov": 0.384,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 17,
+    "n_transparent": 1,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tyre",
+     "baseColorFactor": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "lum": 0.0,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/694c9f59f7494c0eae747828562a6a55.jpg"
+  },
+  {
+   "n": 98,
+   "uid": "710e8b6748f249b2b6349cb555386811",
+   "name": "Toyota Supra A70 Liftback",
+   "verdict": "pass",
+   "reason": "clean A70 Supra liftback; glazing clear",
+   "faces": 989363,
+   "cov": 0.192,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 19,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.106,
+      0.106,
+      0.106,
+      1.0
+     ],
+     "lum": 0.106,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/710e8b6748f249b2b6349cb555386811.jpg"
+  },
+  {
+   "n": 99,
+   "uid": "30528ef37af844919074498f979b9515",
+   "name": "Toyota Supra MK5 A90",
+   "verdict": "pass",
+   "reason": "clean A90 Supra; glazing clear",
+   "faces": 857092,
+   "cov": 0.169,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 26,
+    "n_transparent": 2,
+    "n_textures": 5
+   },
+   "tyre_materials": [
+    {
+     "name": "MKV.Tire",
+     "baseColorFactor": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "lum": 0.0,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "DUPLICATE",
+   "sheet": "car-meshes/audit/toyota/30528ef37af844919074498f979b9515.jpg"
+  },
+  {
+   "n": 100,
+   "uid": "7bb418cfb0b0415d9088bbe0e1599335",
+   "name": "Toyota Supra Mk4",
+   "verdict": "fail",
+   "reason": "out of scope widebody + competition wing; glazing OPAQUE (proven); tyre 0.8 grey",
+   "faces": 663473,
+   "cov": 0.37,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 25,
+    "n_transparent": 0,
+    "n_textures": 3
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+     ],
+     "lum": 0.8,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/7bb418cfb0b0415d9088bbe0e1599335.jpg"
+  },
+  {
+   "n": 101,
+   "uid": "a735fe6fe72049299c186e5db62a8d23",
+   "name": "Toyota Yaris MK3 2011-2020",
+   "verdict": "fail",
+   "reason": "wheels are plain grey cylinders with no rim face and no tyre; holes in the bodywork; glazing OPAQUE (proven)",
+   "faces": 78436,
+   "cov": 0.195,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 21,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire_01a",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/a735fe6fe72049299c186e5db62a8d23.jpg"
+  },
+  {
+   "n": 102,
+   "uid": "3b6b06e191004169ab25f7c600a30c0d",
+   "name": "Toyota Yaris Sedan 2007",
+   "verdict": "pass",
+   "reason": "clean Belta/Yaris saloon; glazing clear, interior visible",
+   "faces": 331794,
+   "cov": 0.709,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 31,
+    "n_transparent": 2,
+    "n_textures": 14
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/3b6b06e191004169ab25f7c600a30c0d.jpg"
+  },
+  {
+   "n": 103,
+   "uid": "e10068b2511b4ed7b724a8d87a362727",
+   "name": "Toyota bZ4X",
+   "verdict": "pass",
+   "reason": "clean bZ4X; glazing clear. FLAG: tyre texture mean 143.6 sRGB against an unstated (default white) factor -- pale, needs a render confirmation",
+   "faces": 432266,
+   "cov": 0.152,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 20,
+    "n_transparent": 2,
+    "n_textures": 10
+   },
+   "tyre_materials": [
+    {
+     "name": "tire_2",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 143.6,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/e10068b2511b4ed7b724a8d87a362727.jpg"
+  },
+  {
+   "n": 104,
+   "uid": "9aa28face2f643dd85a6fe337b6e7cf7",
+   "name": "Toyota gt86 lowprice",
+   "verdict": "pass",
+   "reason": "clean GT86; glazing clear -- EXACT face-count twin of #71 (1,152,416), see duplicates",
+   "faces": 1152416,
+   "cov": 0.171,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 12,
+    "n_transparent": 2,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/9aa28face2f643dd85a6fe337b6e7cf7.jpg"
+  },
+  {
+   "n": 105,
+   "uid": "f08f43a71bed4fbc8562fdde6214f1c4",
+   "name": "Toyota iQ EV",
+   "verdict": "pass",
+   "reason": "clean iQ; glazing clear",
+   "faces": 604159,
+   "cov": 0.163,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 16,
+    "n_transparent": 5,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "lum": 0.0,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/f08f43a71bed4fbc8562fdde6214f1c4.jpg"
+  },
+  {
+   "n": 106,
+   "uid": "4ed6c385052b4d6fb7b2ecee08292d85",
+   "name": "Toyota_ Hilux_(Mk3)_ Regular Cab_1978",
+   "verdict": "pass",
+   "reason": "clean Mk3 Hilux regular cab; glazing clear",
+   "faces": 1140236,
+   "cov": 0.392,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 16,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      1.0
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/4ed6c385052b4d6fb7b2ecee08292d85.jpg"
+  },
+  {
+   "n": 107,
+   "uid": "f49b50d1b0ea4e1995c57cbeb3b5e096",
+   "name": "Toyota_Supra_GT500_2005",
+   "verdict": "fail",
+   "reason": "out of scope: GT500 competition car",
+   "faces": 809854,
+   "cov": 0.118,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "ambiguous",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 21,
+    "n_transparent": 1,
+    "n_textures": 17
+   },
+   "tyre_materials": [
+    {
+     "name": "NSXGT500_tyre_thread",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 14.0,
+     "lum": 1.0,
+     "factor_stated": false
+    },
+    {
+     "name": "NSXGT500_tyre",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 11.9,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/f49b50d1b0ea4e1995c57cbeb3b5e096.jpg"
+  },
+  {
+   "n": 108,
+   "uid": "34d0e2ade29f4aabacd365c33667ea54",
+   "name": "Toyota_celica_ssi",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven). FLAT SHELL: 61 materials, none with a baseColorFactor. Also an aftermarket wing/kit",
+   "faces": 205389,
+   "cov": 0.166,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 61,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "EXT_Tire",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    },
+    {
+     "name": "rubber",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    },
+    {
+     "name": "rubber_trim",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/34d0e2ade29f4aabacd365c33667ea54.jpg"
+  },
+  {
+   "n": 109,
+   "uid": "759732796dd8478c973c8856f50c838c",
+   "name": "Toyota_gt86",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven). FLAT SHELL: 58 materials, none with a baseColorFactor; panels wavy",
+   "faces": 202323,
+   "cov": 0.148,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 58,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "Tyre",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/759732796dd8478c973c8856f50c838c.jpg"
+  },
+  {
+   "n": 110,
+   "uid": "98c70e5aa53446728fea4d8f448bbf33",
+   "name": "toyota camry v80",
+   "verdict": "pass",
+   "reason": "clean XV80 Camry; glazing clear (GLASS.001/EGLASS1.001 transparent); tyre material 'tire' at 0.053 -- properly black rubber. Renders black because the source paint is black, which is a colour not a defect. Resolves the earlier HOLD",
+   "faces": 704936,
+   "cov": 0.333,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 18,
+    "n_transparent": 2,
+    "n_textures": 2
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.0533648,
+      0.0533648,
+      0.0533648,
+      1.0
+     ],
+     "lum": 0.0534,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "HOLD",
+   "sheet": "car-meshes/audit/toyota/98c70e5aa53446728fea4d8f448bbf33.jpg"
+  },
+  {
+   "n": 111,
+   "uid": "617a8613b719440cbb0d040c552c70df",
+   "name": "toyota corolla 2021 consept",
+   "verdict": "fail",
+   "reason": "out of scope: a fantasy concept/prototype racer, not a road car",
+   "faces": 628792,
+   "cov": 0.173,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 19,
+    "n_transparent": 1,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/toyota/617a8613b719440cbb0d040c552c70df.jpg"
+  },
+  {
+   "n": 112,
+   "uid": "c30ff710608a42e38236c381eccb941d",
+   "name": "toyota supra",
+   "verdict": "fail",
+   "reason": "panel surfacing below bar: waves and dents down the rear quarter and roof; aftermarket rear wing",
+   "faces": 652806,
+   "cov": 0.586,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 13,
+    "n_transparent": 2,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/c30ff710608a42e38236c381eccb941d.jpg"
+  },
+  {
+   "n": 113,
+   "uid": "d6f1ad4b22214abfaea1e59f98409f57",
+   "name": "toyota supra mk4",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven: windows and windows_side both alphaMode=OPAQUE, zero transparent materials); overturns the earlier PASS",
+   "faces": 1037326,
+   "cov": 0.218,
+   "klass": "clean",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 36,
+    "n_transparent": 0,
+    "n_textures": 3
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/toyota/d6f1ad4b22214abfaea1e59f98409f57.jpg"
+  },
+  {
+   "n": 114,
+   "uid": "d87af59849814c5cb35a0c233f2c2f19",
+   "name": "toyota-corolla-e170-2017",
+   "verdict": "pass",
+   "reason": "clean E170 Corolla saloon; glazing clear",
+   "faces": 755890,
+   "cov": 0.689,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 28,
+    "n_transparent": 3,
+    "n_textures": 3
+   },
+   "tyre_materials": [],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/d87af59849814c5cb35a0c233f2c2f19.jpg"
+  },
+  {
+   "n": 115,
+   "uid": "32fbfc7624074f1ca8cdb59f4b3b5ee3",
+   "name": "\u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0430\u044f \u043c\u043e\u0434\u0435\u043b\u044c 2007 toyota-camry",
+   "verdict": "pass",
+   "reason": "clean XV40 Camry; glazing ambiguous/proven; near face-count twin of #6 and #37, see duplicates",
+   "faces": 1125051,
+   "cov": 0.606,
+   "klass": "suspect",
+   "glass_probe": {
+    "verdict": "ambiguous",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 40,
+    "n_transparent": 2,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "Camry07-tire",
+     "baseColorFactor": [
+      0.0027398010904408385,
+      0.0027398010904408385,
+      0.0027398010904408385,
+      1.0
+     ],
+     "lum": 0.0027,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": null,
+   "sheet": "car-meshes/audit/toyota/32fbfc7624074f1ca8cdb59f4b3b5ee3.jpg"
+  },
+  {
+   "n": null,
+   "uid": "09bfce9141874544adf34f1792bf7202",
+   "name": "Toyota Hilux 2022 (Left Hand drive)",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/09bfce9141874544adf34f1792bf7202.jpg"
+  },
+  {
+   "n": null,
+   "uid": "188f8a4122e54f4b9f8fd93f61ed09b1",
+   "name": "Toyota Hiace Super GL 1993",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/188f8a4122e54f4b9f8fd93f61ed09b1.jpg"
+  },
+  {
+   "n": null,
+   "uid": "1a5403d61a624540a46695e9f614756e",
+   "name": "Toyota Hiace Microbus Port Said Al-5000 Line",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/1a5403d61a624540a46695e9f614756e.jpg"
+  },
+  {
+   "n": null,
+   "uid": "1db603655d924829956c325cf4546bde",
+   "name": "1977 Toyota Celica LB Turbo 3D Printable Model",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/1db603655d924829956c325cf4546bde.jpg"
+  },
+  {
+   "n": null,
+   "uid": "20e72067d9cd46cab944d9db08cb1384",
+   "name": "prius toyota",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/20e72067d9cd46cab944d9db08cb1384.jpg"
+  },
+  {
+   "n": null,
+   "uid": "2333a5de8fe1468594bb5a47042524df",
+   "name": "Toyota Prius G",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/2333a5de8fe1468594bb5a47042524df.jpg"
+  },
+  {
+   "n": null,
+   "uid": "27a0ebe78db04c5390f67edfdf81655e",
+   "name": "Toyota Land Cruiser 200",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/27a0ebe78db04c5390f67edfdf81655e.jpg"
+  },
+  {
+   "n": null,
+   "uid": "2a8ad60ae4db46129182fcabf63395bc",
+   "name": "Toyota Avensis MK2 (T25) 2003-2009",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/2a8ad60ae4db46129182fcabf63395bc.jpg"
+  },
+  {
+   "n": null,
+   "uid": "31d5343e8469462b8319d15f7ccdd326",
+   "name": "NASCAR Toyota Camry",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/31d5343e8469462b8319d15f7ccdd326.jpg"
+  },
+  {
+   "n": null,
+   "uid": "40bff84b6e274c25a0b4232fc82abaae",
+   "name": "Toyota MR2 1984",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/40bff84b6e274c25a0b4232fc82abaae.jpg"
+  },
+  {
+   "n": null,
+   "uid": "48490bc286fc464391308d92a60e6d0b",
+   "name": "Toyota Hiace 2000",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/48490bc286fc464391308d92a60e6d0b.jpg"
+  },
+  {
+   "n": null,
+   "uid": "5d2b87c956a74a1cb9cd53f434e5f1ce",
+   "name": "2023 Toyota RAV4 GR-S",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/5d2b87c956a74a1cb9cd53f434e5f1ce.jpg"
+  },
+  {
+   "n": null,
+   "uid": "5f8828645587439fa827cfab98a7c04f",
+   "name": "Toyota Aygo MK1 2005-2014",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/5f8828645587439fa827cfab98a7c04f.jpg"
+  },
+  {
+   "n": null,
+   "uid": "64657537639b48628ba590235e8f9f54",
+   "name": "Toyota Hiace Super GL 2018",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/64657537639b48628ba590235e8f9f54.jpg"
+  },
+  {
+   "n": null,
+   "uid": "64b59fd607594eea8f737c9dc33a6067",
+   "name": "2023 Toyota GRMN Yaris",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/64b59fd607594eea8f737c9dc33a6067.jpg"
+  },
+  {
+   "n": null,
+   "uid": "6c070bc55ed0402d9ab92f6fe666a02f",
+   "name": "Toyota Land Cruiser 100 And Lexus LX 470",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/6c070bc55ed0402d9ab92f6fe666a02f.jpg"
+  },
+  {
+   "n": null,
+   "uid": "6cc1532fc75b4296abf2d35dd3033c00",
+   "name": "Toyota Hiace Microbus Port Said Al-5000 line",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/6cc1532fc75b4296abf2d35dd3033c00.jpg"
+  },
+  {
+   "n": null,
+   "uid": "6e0324b8fd9a4b669ea4105db4c7c8d8",
+   "name": "Toyota GR Corolla",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/6e0324b8fd9a4b669ea4105db4c7c8d8.jpg"
+  },
+  {
+   "n": null,
+   "uid": "7032d3bc6071485f9ed4485f3c0626eb",
+   "name": "2015 Toyota Prius C Front End",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/7032d3bc6071485f9ed4485f3c0626eb.jpg"
+  },
+  {
+   "n": null,
+   "uid": "717752a19f954e3284081f1d114260d3",
+   "name": "Toyota Verso",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/717752a19f954e3284081f1d114260d3.jpg"
+  },
+  {
+   "n": null,
+   "uid": "720ca16287834d8f9aefd65c3a899319",
+   "name": "Toyota GT86 HGK Body Kit",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/720ca16287834d8f9aefd65c3a899319.jpg"
+  },
+  {
+   "n": null,
+   "uid": "765165e4b5de48a2af5adeaaa4f93495",
+   "name": "Toyota Prius 20 Torpedo",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/765165e4b5de48a2af5adeaaa4f93495.jpg"
+  },
+  {
+   "n": null,
+   "uid": "7b814545bf7148aba70b7af03b0f2817",
+   "name": "Toyota Supra Mk4",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/7b814545bf7148aba70b7af03b0f2817.jpg"
+  },
+  {
+   "n": null,
+   "uid": "82191fc31fd744e8b791b5b5198e9d36",
+   "name": "Toyota Hiace Wagon Grand Cabin 1999",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/82191fc31fd744e8b791b5b5198e9d36.jpg"
+  },
+  {
+   "n": null,
+   "uid": "85e4ad823b3c43fd95a07edf91edb874",
+   "name": "Toyota AW11 MK1 MR2 coolant fill neck",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/85e4ad823b3c43fd95a07edf91edb874.jpg"
+  },
+  {
+   "n": null,
+   "uid": "89184e6d84984d3c95a168c245613a58",
+   "name": "Toyota Camry 2018",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/89184e6d84984d3c95a168c245613a58.jpg"
+  },
+  {
+   "n": null,
+   "uid": "8ee9772c94774221a21e2f00fff22568",
+   "name": "toyota_auris_cc_vent_bottom_v1",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/8ee9772c94774221a21e2f00fff22568.jpg"
+  },
+  {
+   "n": null,
+   "uid": "8f5f1e64dc004868a49cf05b0d3441cc",
+   "name": "2015 Toyota Highlander",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/8f5f1e64dc004868a49cf05b0d3441cc.jpg"
+  },
+  {
+   "n": null,
+   "uid": "b5e7d045c48745718d980b5af2be4de0",
+   "name": "Toyota Celica Turbo IMSA GTO",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/b5e7d045c48745718d980b5af2be4de0.jpg"
+  },
+  {
+   "n": null,
+   "uid": "bfe908d3fc2b48ecad9741f8be09d42e",
+   "name": "Toyota Camry XV30 sedan 2001",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/bfe908d3fc2b48ecad9741f8be09d42e.jpg"
+  },
+  {
+   "n": null,
+   "uid": "c3a18269bdaf4eeba8062bb24c4ac3dc",
+   "name": "Toyota Corolla Cross",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/c3a18269bdaf4eeba8062bb24c4ac3dc.jpg"
+  },
+  {
+   "n": null,
+   "uid": "c44c57e7ca654eeca26c189fe2c0e766",
+   "name": "Toyota Highlander Driver Door Speaker",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/c44c57e7ca654eeca26c189fe2c0e766.jpg"
+  },
+  {
+   "n": null,
+   "uid": "c7841b9472274e24b90f0737b87381f1",
+   "name": "Toyota Land Cruiser 250",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/c7841b9472274e24b90f0737b87381f1.jpg"
+  },
+  {
+   "n": null,
+   "uid": "cc2634056eae48bab3427f633b755c65",
+   "name": "Toyota Hiace Racing Van Pepsi 2018",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/cc2634056eae48bab3427f633b755c65.jpg"
+  },
+  {
+   "n": null,
+   "uid": "cce68a50ad874a0bb77e0e84fc39b966",
+   "name": "2018 Toyota Vios/Yaris G",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/cce68a50ad874a0bb77e0e84fc39b966.jpg"
+  },
+  {
+   "n": null,
+   "uid": "e15e73d45ce84447b262885faf304e71",
+   "name": "Toyota Starlet 1200 SR 1979",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/e15e73d45ce84447b262885faf304e71.jpg"
+  },
+  {
+   "n": null,
+   "uid": "e684e7f11ba344d885d6ae9c3089c0e8",
+   "name": "Toyota Hiace Wagon Grand Cabin 1993",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/e684e7f11ba344d885d6ae9c3089c0e8.jpg"
+  },
+  {
+   "n": null,
+   "uid": "edcad91d2f1b40fcba3fb0b6b1a32b4a",
+   "name": "Toyota RAV4 MK2 2000-2005",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/edcad91d2f1b40fcba3fb0b6b1a32b4a.jpg"
+  },
+  {
+   "n": null,
+   "uid": "ee83c97139d54a2297e7a115375d878e",
+   "name": "toyota_auris_cc_vent_top_v1",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/ee83c97139d54a2297e7a115375d878e.jpg"
+  },
+  {
+   "n": null,
+   "uid": "f615c2f8a8f3478da1e253d8c3d144af",
+   "name": "2007 toyota camry",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/f615c2f8a8f3478da1e253d8c3d144af.jpg"
+  },
+  {
+   "n": null,
+   "uid": "f641f2eab21146428f182fee06e200f6",
+   "name": "Drift tuned Toyota Supra",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/f641f2eab21146428f182fee06e200f6.jpg"
+  },
+  {
+   "n": null,
+   "uid": "fb5d15e1743648fd93c16c90df312c03",
+   "name": "2006 Toyota RAV4",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/fb5d15e1743648fd93c16c90df312c03.jpg"
+  },
+  {
+   "n": null,
+   "uid": "fc30b71e31aa409cbca8bf6885533af5",
+   "name": "2020 Toyota RAV4 Prime PHEV",
+   "verdict": "fail",
+   "reason": "Already scrapped by the owner (pipeline/ingest/REJECTS.json). Staged GLB has been pruned, so no glTF probe is possible; not re-litigated.",
+   "prior_verdict": "REJECTED",
+   "sheet": "car-meshes/audit/toyota/fc30b71e31aa409cbca8bf6885533af5.jpg"
   }
- },
- "_to_verify": "#30 vs #28 (C-HR, 0.12% apart) and #43 vs #42 (Camry, 0.01% apart) are probable duplicate pairs -- confirm visually when reached",
- "_gate_gap": "geom_audit.py is never called by gpu_wave.py -- it is referenced only in render/handler.py, and the handler computes the pose audit only when the submit body sets audit=True, which gpu_wave never does. gpu_wave also discards output['audit']. So the ingest path has NO orientation gate and an upside-down J100 (#34) reached the clean bucket. Wire it.",
- "_recolour_note": "#41 proves the sheet header's 'recolourable' (body mats + coverage) does NOT prove a respray works -- it rendered pink under --colour silver. recolour_audit.py --stamp is the only evidence that counts, and gate_catalogue is right to refuse unstamped variants."
+ ]
 }

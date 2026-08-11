@@ -1,0 +1,2029 @@
+{
+ "_doc": "Re-check of every LIVE publicationStatus=approved toyota entry in platform/catalogue/catalogue.v2.json against the 2026-08-09 glazing ruling and the flat-shell / global-alpha-shell signatures. Both marques shipped BEFORE those rulings and before glass_probe existed. Probed with pipeline/ingest/glass_probe.py probe(url=...) against the SHIPPED desktopGlbUrl -- the shipped asset, not the wave sheet, per the CLAUDE.md evidence rule that cost 39 wrongful quarantines. NOTHING HERE HAS BEEN QUARANTINED: these are candidates with evidence, for the owner to confirm by render.",
+ "_probe_validation": "glass_probe scored 106/107 against pipeline/ingest/PORSCHE_GLASS.json ground truth at the time of this run; the single miss is certainty=inferred, which is routed to the eye and never failed.",
+ "_counts": {
+  "approved": 54,
+  "flagged": 10,
+  "opaque_glazing": 10,
+  "flat_shell": 5,
+  "alpha_shell_candidates": 0
+ },
+ "rows": [
+  {
+   "assetId": "toyota-rav4-2010-v1",
+   "sourceTitle": "2010 Rav4 Limited Edition",
+   "sourceReferenceId": "450e36f0992c4ae09bd6c8d509a51a77",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 29,
+   "n_transparent": 3,
+   "n_textures": 12,
+   "glazing_named": [
+    {
+     "name": "glass.004",
+     "alpha": 0.1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "r_glass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "Glass_fine",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-rav4-2010-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-c-hr-v1",
+   "sourceTitle": "Toyota C-HR 2020",
+   "sourceReferenceId": null,
+   "glass_verdict": "ambiguous",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 7,
+   "n_transparent": 1,
+   "n_textures": 12,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-c-hr-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-prius-v1",
+   "sourceTitle": "Toyota Prius 2020",
+   "sourceReferenceId": null,
+   "glass_verdict": "ambiguous",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 7,
+   "n_transparent": 2,
+   "n_textures": 9,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-prius-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-hilux-v1",
+   "sourceTitle": "2022 Toyota Hilux",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 53,
+   "n_transparent": 5,
+   "n_textures": 17,
+   "glazing_named": [
+    {
+     "name": "glass.002",
+     "alpha": 0.053,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "glass.001",
+     "alpha": 0.053,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "glass",
+     "alpha": 0.053,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-hilux-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-yaris-cross-v1",
+   "sourceTitle": "2020 Toyota Yaris Cross",
+   "sourceReferenceId": null,
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 27,
+   "n_transparent": 0,
+   "n_textures": 2,
+   "glazing_named": [
+    {
+     "name": "M_2020_Toyota_Yaris_Cross_Windows",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "M_2020_Toyota_Yaris_Cross_WindowsTrims",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-yaris-cross-v1.glb",
+   "flags": [
+    "OPAQUE-GLAZING"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "toyota-gt86-v1",
+   "sourceTitle": "Toyota GT86",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 13,
+   "n_transparent": 2,
+   "n_textures": 2,
+   "glazing_named": [
+    {
+     "name": "Glass.002",
+     "alpha": 0.955,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "r_glass.001",
+     "alpha": 0.7,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-gt86-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-land-cruiser-v1",
+   "sourceTitle": "Toyota Land Cruiser 300",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 17,
+   "n_transparent": 8,
+   "n_textures": 15,
+   "glazing_named": [
+    {
+     "name": "TMI_Glass_011",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-land-cruiser-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-camry-v1",
+   "sourceTitle": "Toyota Camry 2020",
+   "sourceReferenceId": null,
+   "glass_verdict": "ambiguous",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 7,
+   "n_transparent": 2,
+   "n_textures": 9,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-camry-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-corolla-v1",
+   "sourceTitle": "Toyota GR Corolla",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 24,
+   "n_transparent": 3,
+   "n_textures": 6,
+   "glazing_named": [
+    {
+     "name": "Carro_Vidros2",
+     "alpha": 0.098,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidro_Laranja2",
+     "alpha": 0.133,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidro_Vermelho1",
+     "alpha": 0.384,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-corolla-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-yaris-v1",
+   "sourceTitle": "Toyota GR Yaris",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 27,
+   "n_transparent": 10,
+   "n_textures": 34,
+   "glazing_named": [
+    {
+     "name": "YarisToyota_GRYarisRewardRecycled_2021Window_Material1",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-yaris-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-bz4x-v1",
+   "sourceTitle": "2023 Toyota bZ4X",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 36,
+   "n_transparent": 4,
+   "n_textures": 9,
+   "glazing_named": [
+    {
+     "name": "glass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "glass_surr",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass_met",
+     "alpha": 0.699,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "black_glass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "glass_norm",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-bz4x-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-proace-v1",
+   "sourceTitle": "2020 Toyota Proace Verso City",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 21,
+   "n_transparent": 3,
+   "n_textures": 3,
+   "glazing_named": [
+    {
+     "name": "M_2020_Toyota_Proace_Verso_City_Windows",
+     "alpha": 0.487,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "M_2020_Toyota_Proace_Verso_City_WindowsTrims",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-proace-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-yaris-2001-v1",
+   "sourceTitle": "2001 Toyota Yaris",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 38,
+   "n_transparent": 5,
+   "n_textures": 24,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-yaris-2001-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-auris-2019-v1",
+   "sourceTitle": "Toyota Auris 2019",
+   "sourceReferenceId": null,
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 19,
+   "n_transparent": 0,
+   "n_textures": 2,
+   "glazing_named": [
+    {
+     "name": "d_glass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "r_glass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1.glb",
+   "flags": [
+    "OPAQUE-GLAZING"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "toyota-gr86-v1",
+   "sourceTitle": "2022 Toyota GR86",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 20,
+   "n_transparent": 6,
+   "n_textures": 27,
+   "glazing_named": [
+    {
+     "name": "glass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "glass_Ligt",
+     "alpha": 1,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-gr86-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-highlander-v1",
+   "sourceTitle": "Toyota Highlander 2020",
+   "sourceReferenceId": null,
+   "glass_verdict": "ambiguous",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 7,
+   "n_transparent": 2,
+   "n_textures": 9,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-highlander-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-gr-supra-v1",
+   "sourceTitle": "Toyota GR Supra",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 25,
+   "n_transparent": 12,
+   "n_textures": 27,
+   "glazing_named": [
+    {
+     "name": "Window",
+     "alpha": 0.574,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "GlassClear",
+     "alpha": 0.172,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-gr-supra-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-vellfire-v1",
+   "sourceTitle": "Toyota Vellfire Aero 2015",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 17,
+   "n_transparent": 3,
+   "n_textures": 2,
+   "glazing_named": [
+    {
+     "name": "darkglass",
+     "alpha": 0.5,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-vellfire-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-rav4-2000-w5-v1",
+   "sourceTitle": "Toyota RAV4 5door 2000",
+   "sourceReferenceId": "373deb15ad9c4e208d1be26aa5c8e9ca",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 18,
+   "n_transparent": 4,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-rav4-2000-w5-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-corolla-w7-v1",
+   "sourceTitle": "Toyota Corolla",
+   "sourceReferenceId": "4703efa36e4b4aa9a342db3153ce3edd",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 18,
+   "n_transparent": 2,
+   "n_textures": 2,
+   "glazing_named": [
+    {
+     "name": "r_glass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass",
+     "alpha": 0.681,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "d_glass",
+     "alpha": 0.584,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-corolla-w7-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-yaris-w7-v1",
+   "sourceTitle": "Toyota Yaris",
+   "sourceReferenceId": "e7cc6122d47a42f0b39771bd38da9f9e",
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 24,
+   "n_transparent": 0,
+   "n_textures": 2,
+   "glazing_named": [
+    {
+     "name": "Glass_clean",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "Glass_clean.001",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-yaris-w7-v1.glb",
+   "flags": [
+    "OPAQUE-GLAZING"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "toyota-gr-corolla-2023-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "204283fa663d4ccea7f3bdfd1ba6680e",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 25,
+   "n_transparent": 4,
+   "n_textures": 3,
+   "glazing_named": [
+    {
+     "name": "window_black",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1.0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "glass_2",
+     "alpha": 0.888,
+     "mode": "BLEND",
+     "transmission": 0.112,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-gr-corolla-2023-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-gr86-2023-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "0d83090a0d484d98b6749dbbf9b4a111",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 20,
+   "n_transparent": 4,
+   "n_textures": 20,
+   "glazing_named": [
+    {
+     "name": "Glass_Parts",
+     "alpha": 0.315,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Tinted_glass",
+     "alpha": 0.529,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [
+    {
+     "name": "black_uniform",
+     "alpha": 0.0,
+     "mode": "BLEND"
+    }
+   ],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-gr86-2023-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found -- FALSE POSITIVE, checked by hand and cleared. The only transparent non-glazing material is 'black_uniform' at alpha 0.0, a single hidden helper. GR86_Paint is OPAQUE red, Shared_Tire_Race02_N is OPAQUE black with a texture, and the glazing (Glass_Parts 0.315, Tinted_glass 0.529) is properly transparent. This is NOT a global-alpha shell."
+  },
+  {
+   "assetId": "toyota-auris-2019-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "c7aad552ce6f4700b179615b2c9a346b",
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": true,
+   "alpha_shell": false,
+   "n_materials": 21,
+   "n_transparent": 0,
+   "n_textures": 1,
+   "glazing_named": [
+    {
+     "name": "d_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "r_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-tw1-v1.glb",
+   "flags": [
+    "OPAQUE-GLAZING",
+    "FLAT-SHELL"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "toyota-bz4x-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "e10068b2511b4ed7b724a8d87a362727",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 20,
+   "n_transparent": 2,
+   "n_textures": 10,
+   "glazing_named": [
+    {
+     "name": "dark_glass",
+     "alpha": 0.5,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "dark_glass.001",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-bz4x-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-prius-2016-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "90e9f77205014ecc8e3e08dd27dc4d52",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 22,
+   "n_transparent": 3,
+   "n_textures": 7,
+   "glazing_named": [
+    {
+     "name": "Carro_Vidro_Vermelho2",
+     "alpha": 0.382,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidros2",
+     "alpha": 0.1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidros2_1",
+     "alpha": 0.752,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-prius-2016-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-land-cruiser-1998-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "a9c8b71c5c5d494bb55d79a2e161119b",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 16,
+   "n_transparent": 4,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-land-cruiser-1998-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-iq-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "f08f43a71bed4fbc8562fdde6214f1c4",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 16,
+   "n_transparent": 5,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.03,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.03,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "darkglass",
+     "alpha": 0.03,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-iq-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-celica-1981-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "9f09704e33af42d29b2230e10506456a",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 16,
+   "n_transparent": 4,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-celica-1981-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-prius-2019-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "42470a7ce258421a89c2361225bb89eb",
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": true,
+   "alpha_shell": false,
+   "n_materials": 19,
+   "n_transparent": 0,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "o_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "r_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "d_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "r_glass_b",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-prius-2019-tw1-v1.glb",
+   "flags": [
+    "OPAQUE-GLAZING",
+    "FLAT-SHELL"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "toyota-supra-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "980a52a5031a4b07a0f206b82ebb1275",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 26,
+   "n_transparent": 2,
+   "n_textures": 4,
+   "glazing_named": [
+    {
+     "name": "Window",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Screen",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-supra-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-celica-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "af4fec1626f047339857d98b4f0f7273",
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 50,
+   "n_transparent": 0,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "window",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "black_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-celica-tw1-v1.glb",
+   "flags": [
+    "OPAQUE-GLAZING"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "toyota-gt86-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "ec05296ddf2f4c22a570512245d1fba0",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 12,
+   "n_transparent": 3,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "Glass.002",
+     "alpha": 0.955,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "glass.001",
+     "alpha": 0.6,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "r_glass.001",
+     "alpha": 0.7,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-gt86-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-mirai-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "950cd22ab63d4723b468f25da0fd5ec0",
+   "glass_verdict": "ambiguous",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 4,
+   "n_transparent": 1,
+   "n_textures": 6,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-mirai-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-c-hr-2022-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "1f66a3fdb7da421cafb089467b5a6140",
+   "glass_verdict": "ambiguous",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 4,
+   "n_transparent": 1,
+   "n_textures": 6,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-c-hr-2022-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-prius-2010-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "3f82031714bd40a3a3a027e5687604de",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 20,
+   "n_transparent": 6,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "blueglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "darkglass",
+     "alpha": 0.5,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-prius-2010-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-corolla-2020-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "e595afd4ec5745a08f95cc5baeaa5ef0",
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": true,
+   "alpha_shell": false,
+   "n_materials": 20,
+   "n_transparent": 0,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "r_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "d_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "o_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "vd_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-corolla-2020-tw1-v1.glb",
+   "flags": [
+    "OPAQUE-GLAZING",
+    "FLAT-SHELL"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "toyota-highlander-2020-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "ff144d062f244a3ebfae71bc2a41564b",
+   "glass_verdict": "ambiguous",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 5,
+   "n_transparent": 2,
+   "n_textures": 8,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-highlander-2020-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-supra-tw1-v2",
+   "sourceTitle": "",
+   "sourceReferenceId": "710e8b6748f249b2b6349cb555386811",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 19,
+   "n_transparent": 4,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-supra-tw1-v2.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-camry-1997-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "196829bf4cbc4b8cb26c50964f35ff27",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 17,
+   "n_transparent": 4,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-camry-1997-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-avensis-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "78eeb0db0dab4339b546ed504453ed3c",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 18,
+   "n_transparent": 4,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-avensis-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-avensis-tw1-v2",
+   "sourceTitle": "",
+   "sourceReferenceId": "ad05a156f817451ca214d388e53052fb",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 16,
+   "n_transparent": 4,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-avensis-tw1-v2.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-supra-tw1-v3",
+   "sourceTitle": "",
+   "sourceReferenceId": "d6f1ad4b22214abfaea1e59f98409f57",
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 36,
+   "n_transparent": 0,
+   "n_textures": 3,
+   "glazing_named": [
+    {
+     "name": "windows_side",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "windows",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-supra-tw1-v3.glb",
+   "flags": [
+    "OPAQUE-GLAZING"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "toyota-proace-city-verso-2020-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "751c7d18c05946d18ba7953dc046dec6",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 27,
+   "n_transparent": 3,
+   "n_textures": 3,
+   "glazing_named": [
+    {
+     "name": "M_2020_Toyota_Proace_Verso_City_Windows",
+     "alpha": 0.487,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "M_2020_Toyota_Proace_Verso_City_WindowsTrims",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-proace-city-verso-2020-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-camry-2007-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "40111978beac4ba7846d94f41805de40",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 41,
+   "n_transparent": 7,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "Camry07-windows-black",
+     "alpha": 0.8,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Camry07-windows",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "Camry07-bumpedglass",
+     "alpha": 0.1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Camry07-refractiveglass",
+     "alpha": 0.1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Camry07-blueglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-camry-2007-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-hilux-2005-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "df56087572a44b0496e39006859ae3b9",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 18,
+   "n_transparent": 4,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0.7,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0.7,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-hilux-2005-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-rav4-2021-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "411da54827634c5abd462ab4e9e0eb34",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 31,
+   "n_transparent": 7,
+   "n_textures": 11,
+   "glazing_named": [
+    {
+     "name": "glass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1.0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "D_Glass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1.0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-rav4-2021-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-hilux-1988-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "f8a557a46ff34a68893dce0136995408",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 17,
+   "n_transparent": 4,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-hilux-1988-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-hilux-1978-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "4ed6c385052b4d6fb7b2ecee08292d85",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 16,
+   "n_transparent": 4,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-hilux-1978-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-land-cruiser-2024-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "0937e2b405964856a1aac96f54861274",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 30,
+   "n_transparent": 5,
+   "n_textures": 13,
+   "glazing_named": [
+    {
+     "name": "ClearGlass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1.0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Screens",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-land-cruiser-2024-tw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-corolla-tw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "e38b2b292a04436a936171a2f5d33af7",
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": true,
+   "alpha_shell": false,
+   "n_materials": 18,
+   "n_transparent": 0,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "clearglass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "greenglass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-corolla-tw1-v1.glb",
+   "flags": [
+    "OPAQUE-GLAZING",
+    "FLAT-SHELL"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "toyota-corolla-cross-tw2-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "cc503d26ea694dce85e7d0f1491b0e30",
+   "glass_verdict": "ambiguous",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 26,
+   "n_transparent": 2,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "2020_Toyota_Corolla_Cross_Windows",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "2020_Toyota_Corolla_Cross_WindowsTrims",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-corolla-cross-tw2-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "toyota-yaris-cross-2020-tw2-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "1b6dd834e8184851887ddeab1e83bc28",
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": true,
+   "alpha_shell": false,
+   "n_materials": 31,
+   "n_transparent": 0,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "M_2020_Toyota_Yaris_Cross_Windows",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "M_2020_Toyota_Yaris_Cross_WindowsTrims",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-yaris-cross-2020-tw2-v1.glb",
+   "flags": [
+    "OPAQUE-GLAZING",
+    "FLAT-SHELL"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "toyota-gr-yaris-2021-tw2-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "98e6611ad034451982b6a9908c63fc47",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 27,
+   "n_transparent": 10,
+   "n_textures": 34,
+   "glazing_named": [
+    {
+     "name": "YarisToyota_GRYarisRewardRecycled_2021Window_Material1",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1.0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-gr-yaris-2021-tw2-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  }
+ ],
+ "_alpha_shell_note": "ZERO genuine global-alpha shells among live Toyota or Peugeot. Five were raised on the first pass and ALL FIVE were false positives: glass_probe's BODYISH pattern matches the word 'black', and PRIVACY GLASS is routinely named black_glass / glass_black / Camry07-windows-black / e-2008_glass_black -- materials that are SUPPOSED to be transparent. glass_probe was fixed in this session to exclude GLASSY names from the body/rubber test (re-validated 106/107 on PORSCHE_GLASS.json, no regression). The genuine signature is 'carpaint' AND 'tire' both at alpha 0.25, which no live entry carries."
+}

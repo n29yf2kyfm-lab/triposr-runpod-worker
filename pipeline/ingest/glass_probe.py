@@ -287,12 +287,23 @@ def probe(uid, stage="staging/jeep", url=None):
         # transparent materials are Grid/Logo/Stich/Interior_Detail decals. It
         # is ground-truth OPAQUE and the decals were dragging it to ambiguous.
         verdict = "opaque" if not factor_trans else "ambiguous"
-    elif factor_trans:
+    elif [x for x in factor_trans if not LAMPY.search(x["name"])]:
         # no glazing-named material, but something in the file is genuinely
         # transparent by factor. Most likely the glazing under a non-matching
         # name (the clay-shell case shows through in the sheet because no
         # override fires).
-        lo = min(eff_alpha(x) for x in factor_trans)
+        #
+        # LAMP LENSES ARE EXCLUDED HERE TOO. The guard above only stops lamps
+        # deciding when a glazing NAME exists; this branch had no guard at all,
+        # so a file that names no glazing and carries transparent lamps scored
+        # "clear" off the lamps alone. Measured 2026-08-11 on the Honda wave:
+        # "Honda CR-V MK2 Pre-Facelift" (25 materials, none glazing-named) is a
+        # white clay whose windows render in body colour, and its only
+        # transparent materials are lamp__car/lamp__car1/lamp__car2 at 0.19 and
+        # swiatla_tyl_szkl (Polish for rear light glass) at 0.5. The probe
+        # called it "clear" and would have passed an opaque-glazed car.
+        lit = [x for x in factor_trans if not LAMPY.search(x["name"])]
+        lo = min(eff_alpha(x) for x in lit)
         verdict = "faded" if lo > 0.94 else "clear"
     elif trans:
         # Nothing glazing-named, nothing factor-transparent, but the file DOES

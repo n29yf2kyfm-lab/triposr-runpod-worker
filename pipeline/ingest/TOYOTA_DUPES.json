@@ -1,0 +1,423 @@
+{
+ "_doc": "Face-count proximity pairs among the 115 audited Toyota candidates. CLAUDE.md: near-proximity is a CANDIDATE FINDER, never an identity -- it scored 2 real / 2 false across 4 flagged Mercedes pairs. Nothing here is auto-grouped or auto-dropped. Round-number clusters are excluded outright because decimated-to-target meshes converge: four Toyota Hiaces all sat within 252 faces of exactly 1,000,000 and were four DIFFERENT vans.",
+ "pairs": [
+  {
+   "a": {
+    "n": 23,
+    "uid": "1f66a3fdb7da421cafb089467b5a6140",
+    "name": "2022_Toyota_C-HR_3D_model",
+    "faces": 200841,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 53,
+    "uid": "bc9bf0f48e174e918a5187dd1de019f8",
+    "name": "Toyota C-HR 2020",
+    "faces": 201073,
+    "verdict": "P"
+   },
+   "face_delta": 232,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 90,
+    "uid": "e619762dfa6e4f6092384422df3d6aa7",
+    "name": "Toyota Prius",
+    "faces": 438793,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 11,
+    "uid": "90e9f77205014ecc8e3e08dd27dc4d52",
+    "name": "2016 Toyota Prius",
+    "faces": 438814,
+    "verdict": "P"
+   },
+   "face_delta": 21,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 76,
+    "uid": "c4abf4e84ac34b29a482d0c64cd99f1c",
+    "name": "Toyota Highlander (Mk1)(XU20) 2003",
+    "faces": 831698,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 9,
+    "uid": "91d1e1d8e6914417b613e3b743abe1fe",
+    "name": "2010 Toyota Land Cruiser",
+    "faces": 831824,
+    "verdict": "F"
+   },
+   "face_delta": 126,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 3,
+    "uid": "a9c8b71c5c5d494bb55d79a2e161119b",
+    "name": "1998 Toyota Land Cruiser",
+    "faces": 837272,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 84,
+    "uid": "4a8f1b910a1b49e2a850fd9123f5ae8d",
+    "name": "Toyota Land Cruiser (Mk6) (J80)",
+    "faces": 837288,
+    "verdict": "P"
+   },
+   "face_delta": 16,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 42,
+    "uid": "ad05a156f817451ca214d388e53052fb",
+    "name": "Toyota Avensis (Mk1)(T220) sedan",
+    "faces": 884404,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 45,
+    "uid": "788ecc7cf8744a9486c8b02293534cf6",
+    "name": "Toyota Avensis MK1 Sedan 1997-2003",
+    "faces": 884404,
+    "verdict": "F"
+   },
+   "face_delta": 0,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 45,
+    "uid": "788ecc7cf8744a9486c8b02293534cf6",
+    "name": "Toyota Avensis MK1 Sedan 1997-2003",
+    "faces": 884404,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 48,
+    "uid": "9a08719f57d84429adeaca991da4d561",
+    "name": "Toyota Avensis Sedan MK1 1997-2003",
+    "faces": 884404,
+    "verdict": "F"
+   },
+   "face_delta": 0,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 21,
+    "uid": "b8eec127f2ce497fb819da51ba72dee2",
+    "name": "2022 Toyota Land Cruiser",
+    "faces": 974194,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 22,
+    "uid": "ffffac9e0c884124ba1adcf12ece2ad0",
+    "name": "2022+ Toyota+ Land+ Cruiser+VX.R",
+    "faces": 974194,
+    "verdict": "P"
+   },
+   "face_delta": 0,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 24,
+    "uid": "86cc5ddbc9b447b79913ae42971dad1b",
+    "name": "2022_toyota_hilux",
+    "faces": 982533,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 79,
+    "uid": "8bc403ae901b4ae8a9e9c479eb0d26bd",
+    "name": "Toyota Hilux",
+    "faces": 982533,
+    "verdict": "P"
+   },
+   "face_delta": 0,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 79,
+    "uid": "8bc403ae901b4ae8a9e9c479eb0d26bd",
+    "name": "Toyota Hilux",
+    "faces": 982533,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 20,
+    "uid": "82bd37c5065040098fb0b86e07fcb959",
+    "name": "2022 Toyota Hilux",
+    "faces": 982566,
+    "verdict": "P"
+   },
+   "face_delta": 33,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 2,
+    "uid": "93e29bd176b14566a5b00e87600de0b5",
+    "name": "1994 Toyota Camry",
+    "faces": 998603,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 54,
+    "uid": "196829bf4cbc4b8cb26c50964f35ff27",
+    "name": "Toyota Camry (Mk4)(XV20) 1997",
+    "faces": 998707,
+    "verdict": "P"
+   },
+   "face_delta": 104,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 86,
+    "uid": "e9abe3f8479a4f17b62b56aaed6b5a8a",
+    "name": "Toyota Land Cruiser Shas",
+    "faces": 1000022,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 75,
+    "uid": "59dcb878d0a540f59bafd7d48eb8bea0",
+    "name": "Toyota Hiace Microbus Port Said Al-5000 Line",
+    "faces": 1000030,
+    "verdict": "F"
+   },
+   "face_delta": 8,
+   "round_number_cluster": 1000000,
+   "status": "EXCLUDED - decimated-to-target round-number cluster, face count carries no identity here"
+  },
+  {
+   "a": {
+    "n": 75,
+    "uid": "59dcb878d0a540f59bafd7d48eb8bea0",
+    "name": "Toyota Hiace Microbus Port Said Al-5000 Line",
+    "faces": 1000030,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 82,
+    "uid": "c7cfbd0600ad41e2b8f96d3be8fa5933",
+    "name": "Toyota Hilux Pickup 2008",
+    "faces": 1000048,
+    "verdict": "F"
+   },
+   "face_delta": 18,
+   "round_number_cluster": 1000000,
+   "status": "EXCLUDED - decimated-to-target round-number cluster, face count carries no identity here"
+  },
+  {
+   "a": {
+    "n": 82,
+    "uid": "c7cfbd0600ad41e2b8f96d3be8fa5933",
+    "name": "Toyota Hilux Pickup 2008",
+    "faces": 1000048,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 73,
+    "uid": "5b1d7d6f87a543278e7bcb97e3c27c10",
+    "name": "Toyota Hiace Grand Cabin 2000",
+    "faces": 1000068,
+    "verdict": "F"
+   },
+   "face_delta": 20,
+   "round_number_cluster": 1000000,
+   "status": "EXCLUDED - decimated-to-target round-number cluster, face count carries no identity here"
+  },
+  {
+   "a": {
+    "n": 73,
+    "uid": "5b1d7d6f87a543278e7bcb97e3c27c10",
+    "name": "Toyota Hiace Grand Cabin 2000",
+    "faces": 1000068,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 72,
+    "uid": "1b0a576eed9b4522a231572f85bc9157",
+    "name": "Toyota Hiace 2000 /Foyota Hiace 2000",
+    "faces": 1000264,
+    "verdict": "F"
+   },
+   "face_delta": 196,
+   "round_number_cluster": 1000000,
+   "status": "EXCLUDED - decimated-to-target round-number cluster, face count carries no identity here"
+  },
+  {
+   "a": {
+    "n": 72,
+    "uid": "1b0a576eed9b4522a231572f85bc9157",
+    "name": "Toyota Hiace 2000 /Foyota Hiace 2000",
+    "faces": 1000264,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 74,
+    "uid": "547864db1e774daa9aee874cadc37ae6",
+    "name": "Toyota Hiace Microbus Port Said Al-5000 Line",
+    "faces": 1000282,
+    "verdict": "F"
+   },
+   "face_delta": 18,
+   "round_number_cluster": 1000000,
+   "status": "EXCLUDED - decimated-to-target round-number cluster, face count carries no identity here"
+  },
+  {
+   "a": {
+    "n": 37,
+    "uid": "799f7db618c9477fa017cd7e995aadeb",
+    "name": "Blue Toyota Camry 2007",
+    "faces": 1124437,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 6,
+    "uid": "40111978beac4ba7846d94f41805de40",
+    "name": "2007 Toyota Camry",
+    "faces": 1125044,
+    "verdict": "F"
+   },
+   "face_delta": 607,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 6,
+    "uid": "40111978beac4ba7846d94f41805de40",
+    "name": "2007 Toyota Camry",
+    "faces": 1125044,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 115,
+    "uid": "32fbfc7624074f1ca8cdb59f4b3b5ee3",
+    "name": "\u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0430\u044f \u043c\u043e\u0434\u0435\u043b\u044c 2007 toyota-camry",
+    "faces": 1125051,
+    "verdict": "P"
+   },
+   "face_delta": 7,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 49,
+    "uid": "4485b98b8a474e869074118059ec2fa6",
+    "name": "Toyota Avensis Sedan MK2 2003-2009",
+    "faces": 1130789,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 43,
+    "uid": "78eeb0db0dab4339b546ed504453ed3c",
+    "name": "Toyota Avensis (Mk2f)(T250) sedan",
+    "faces": 1130815,
+    "verdict": "P"
+   },
+   "face_delta": 26,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 62,
+    "uid": "e595afd4ec5745a08f95cc5baeaa5ef0",
+    "name": "Toyota Corolla Sedan Regular 2020",
+    "faces": 1139486,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 106,
+    "uid": "4ed6c385052b4d6fb7b2ecee08292d85",
+    "name": "Toyota_ Hilux_(Mk3)_ Regular Cab_1978",
+    "faces": 1140236,
+    "verdict": "P"
+   },
+   "face_delta": 750,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 71,
+    "uid": "ec05296ddf2f4c22a570512245d1fba0",
+    "name": "Toyota GT86 3D Model (Free)",
+    "faces": 1152416,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 104,
+    "uid": "9aa28face2f643dd85a6fe337b6e7cf7",
+    "name": "Toyota gt86 lowprice",
+    "faces": 1152416,
+    "verdict": "P"
+   },
+   "face_delta": 0,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 44,
+    "uid": "adcf7d9439e64d54bc7850f541488928",
+    "name": "Toyota Avensis Estate MK2 2003-2009",
+    "faces": 1191553,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 51,
+    "uid": "994a1902b96e455ea3ab4e90de95507f",
+    "name": "Toyota Avensis Wagon",
+    "faces": 1191553,
+    "verdict": "F"
+   },
+   "face_delta": 0,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 5,
+    "uid": "df56087572a44b0496e39006859ae3b9",
+    "name": "2005 Toyota Hilux Double Cab",
+    "faces": 1195696,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 81,
+    "uid": "160692a5e0514d14aa2bd6498873345e",
+    "name": "Toyota Hilux (Mk6) Double Cab 2001",
+    "faces": 1195696,
+    "verdict": "P"
+   },
+   "face_delta": 0,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  }
+ ]
+}
