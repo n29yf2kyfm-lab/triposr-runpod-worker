@@ -115,6 +115,44 @@ COMMERCIAL_WORDS = [
     "hormigonera", "betoniera", "gruszka", "gravsko",
     "concrete mixer", "cement mixer", "refuse", "garbage", "street sweeper",
 ]
+# ARCHITECTURE. A marque whose name is also a famous BUILDING.
+#
+# Added 2026-08-11 for the Chrysler wave. The Chrysler Building is one of the
+# most-modelled structures on Sketchfab and the bare-marque query is dominated
+# by it: of the 166 unique downloadable results the Chrysler sweep returned,
+# 13 (7.8%) were Art Deco architecture — ten Chrysler Buildings plus the
+# MetLife Building and two 40 Wall Street towers that the search engine served
+# alongside them.
+#
+# Nothing upstream stops these. `wave_render.class_gates` has no architecture
+# term at all (BAD's nearest miss is "diorama|scene"); it rejected exactly 2 of
+# the 13, both only because someone had typed "Minecraft" in the title. The
+# face band caught 6 more as thin. THREE reached the candidate manifest —
+# "Chrysler Building" at 246,187 and 75,149 faces and "Extractor elevator
+# Chrysler building" at 198,160 — sitting comfortably inside the serving band
+# and looking, to every gate before this one, exactly like a car.
+#
+# The nameplate requirement below does drop all three today, because no
+# building title happens to carry a Chrysler nameplate. That is luck, not a
+# gate: "Chrysler Building 300" or "Chrysler Building — Imperial spire detail"
+# would walk straight through it. Testing architecture FIRST also makes the
+# drop count honest instead of hiding a tenth of the sweep under "no-nameplate".
+#
+# Deliberately narrow — only words no car title contains. "tower" is safe
+# (verified against 3,078 rows of 14 saved marque manifests: 0 hits), but
+# "empire", "crown", "royal" and "palace" are all real car nameplates and are
+# NOT here.
+# "manhattan" and "rooftop" were in the first draft of this list and the
+# regression run over those 3,078 rows threw them straight back out: Audi paints
+# a car "Manhattan Grey" and a "Ford Bronco Raptor With Rooftop Tent" is a whole
+# car. Both are gone. That is the two-directional test doing its job — a gate
+# tested only against what it must catch is a gate that eats real cars.
+BUILDING_WORDS = [
+    "building", "skyscraper", "tower", "spire", "steeple",
+    "architecture", "architectural", "facade", "skyline", "cityscape",
+    "art deco", "artdeco", "elevator", "lobby", "staircase",
+    "new york city", "nyc", "wall street", "downtown",
+]
 # Scale / print / sprite artefacts — geometry exists but is not a serving asset.
 SCALE_WORDS = [
     "for 3d-printing", "for 3d printing", "3d-printing", "3d printing",
@@ -182,6 +220,10 @@ def classify(title, pats, drop_tokens=()):
     for w in list(COMMERCIAL_WORDS) + list(drop_tokens):
         if re.search(r"\b" + re.escape(norm(w)).replace(r"\ ", r"\s*") + r"\b", t):
             return "commercial-vehicle", None
+    # ARCHITECTURE, also before the nameplate test — see BUILDING_WORDS.
+    for w in BUILDING_WORDS:
+        if re.search(r"\b" + re.escape(norm(w)).replace(r"\ ", r"\s*") + r"\b", t):
+            return "architecture", None
     hit = next((n for n, p in pats if p.search(t)), None)
     if not hit:
         return "no-nameplate", None
