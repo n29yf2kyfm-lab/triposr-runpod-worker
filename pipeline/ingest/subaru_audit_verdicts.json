@@ -303,5 +303,75 @@
    "very soft low-detail bodywork: grille is a flat panel, headlamps barely formed with no internal elements, no door or bonnet shut lines",
    "car sits pitched and floating clear of the floor in front34, front34_L and rear34; only the side tile reads level"
   ]
+ },
+ {
+  "uid": "64bd3068fda84d99bac2762df5b234d5",
+  "name": "Subaru Impreza UK- Police",
+  "verdict": "fail",
+  "reasons": [
+   "a solid featureless BLACK void covers the roof, doors and rear quarter on one side in the front34 and side tiles, while front34_L and rear34 show white body - a missing material or inverted normals on that side, not the key-light split",
+   "tyres render body-white: rim and tyre are one continuous white mass in the side and rear34 tiles, and the glTF has NO tyre-named and NO glass-named material among its 38",
+   "torn/detached patch on the rear door visible in front34_L and rear34"
+  ]
+ },
+ {
+  "uid": "06b5afc7402e40b2b32203d053c32cb3",
+  "name": "3D Scanned Subaru Forester (2024) [Free]",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a 2025 Forester in a showroom: the dealership interior is baked into the window texture, so the glazing is opaque painted glass with no transparency",
+   "mats=1 tex=1 cov=1.000 - one textured material carries body, glass and tyres; no respray and no separable glazing possible",
+   "torn aperture through the driver window and A-pillar; ground shadow baked in as a dark patch under the car"
+  ]
+ },
+ {
+  "uid": "5997e878518a41a785d0ad461c0e6b81",
+  "name": "Photoscanned Subaru Outback",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: asphalt ground plane baked into the mesh and rendering as a slab under the car in every tile",
+   "black holes torn through the roof and the rear side window; environment reflections baked into the glazing texture",
+   "mats=1 tex=1 cov=1.000 FULL COVERAGE"
+  ]
+ },
+ {
+  "uid": "defb5c2171b4434ab0eff33ec8f47f78",
+  "name": "2016 Subaru Legacy Photoscan",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: large black holes torn through the roof panel and both rear side windows in all four tiles",
+   "ground plane baked into the mesh as a slab",
+   "mats=1 tex=1 cov=1.000 FULL COVERAGE, no separable glazing"
+  ]
+ },
+ {
+  "uid": "87d8a802ea154b168062565dd467a035",
+  "name": "Subaru - Outback - Exterior - 2022",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: the entire roof and glasshouse are dissolved into torn smeared shells; the car reads as melted from the waistline up",
+   "underbody hangs in ragged fringes below the sills; wheels partly dissolved",
+   "mats=3 tex=4 cov=1.000 FULL COVERAGE, no separable glazing"
+  ]
+ },
+ {
+  "uid": "b84a93d289d04c4692761b73bb584f2e",
+  "name": "Subaru - Outback - 2022",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: roof rails and roof panel torn into black shells, windows are ragged holes with baked reflections",
+   "body surfaces pitted and rippled; loose scan fragments float beside the car in front34 and front34_L",
+   "mats=1 tex=1 cov=1.000 FULL COVERAGE"
+  ]
+ },
+ {
+  "uid": "37eddc596fa14edd8569962468f21dac",
+  "name": "Photoscanned Subaru Legacy Outback",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: the roof and glasshouse are perforated with large black holes across every tile",
+   "tarmac ground plane baked into the mesh as a slab",
+   "mats=1 tex=1 cov=1.000 FULL COVERAGE, no separable glazing or tyres"
+  ]
  }
 ]
