@@ -1,0 +1,112 @@
+[
+ {
+  "drop_uid": "deac34a345cd47299e0741d335abf549",
+  "name": "2008 Chrysler 300C SRT-8",
+  "faces": 178255,
+  "keep_uid": "3ae081b90cce4d199d4e886a1b15d3a5",
+  "keep_name": "exmods_chrysler_300c_srt8",
+  "keep_faces": 178557,
+  "reason": "face counts 302 apart (0.17%); same 300C SRT8 base mesh",
+  "eye_check": "confirmed",
+  "eye_note": "same car, same wheels, same body kit tile for tile. The dropped copy additionally carries per-side rim voids, so this pair is both a real duplicate AND a defect/clean pair — the clean copy is the keeper on both counts."
+ },
+ {
+  "drop_uid": "3ffe77aa4fab45709f77730412fa2563",
+  "name": "Chrysler_300_srt_hellcat",
+  "faces": 115070,
+  "keep_uid": "82b9b3f14c1e48febfd567be2c2c26c7",
+  "keep_name": "Chrysler 300 SRT Hellcat",
+  "keep_faces": 115240,
+  "reason": "face counts 170 apart (0.15%), title token overlap 1.00",
+  "eye_check": "confirmed",
+  "eye_note": "sheets are visually identical in all four tiles. Both fail on body-colour tyres, so nothing was gained or lost by the pairing."
+ },
+ {
+  "drop_uid": "1abb7a77652c4522b04a36cbe91f3269",
+  "name": "2008 Chrysler Pacifica Model",
+  "faces": 119027,
+  "keep_uid": "99ec73d456f245c9ae28b3384127f750",
+  "keep_name": "Chrysler Pacifica 2008",
+  "keep_faces": 119029,
+  "reason": "face counts 2 apart (0.002%), title token overlap 1.00",
+  "eye_check": "confirmed",
+  "eye_note": "the two sheets are indistinguishable tile for tile. Keeping the higher face count; this is the one duplicate pair in the wave where a real car was at stake."
+ },
+ {
+  "drop_uid": "17f531a43bea4188b6e697fddfd0bce6",
+  "name": "2003 Chrysler 300M",
+  "faces": 107348,
+  "keep_uid": "f56160ba2d1447919690b3f67d16ba57",
+  "keep_name": "2003 Chrysler 300M FINAL",
+  "keep_faces": 107356,
+  "reason": "face counts 8 apart (0.007%), title token overlap 1.00",
+  "eye_check": "confirmed",
+  "eye_note": "same melted mesh. The 'duplicate' renders PINK under a forced silver while the keeper renders grey, which is a material difference on an identical geometry — both fail regardless."
+ },
+ {
+  "drop_uid": null,
+  "name": "Chrysler 200s",
+  "faces": 960704,
+  "keep_uid": "2beac70ed3694254b1b294f088aed5ae",
+  "keep_name": "2014 Chrysler 200S",
+  "keep_faces": 960704,
+  "reason": "EXACT face-count match at 960,704 — dropped automatically by nameplate_filter before render",
+  "eye_check": "confirmed",
+  "eye_note": "exact match above the 50k guard is the same mesh by construction; never rendered, so it cost nothing."
+ },
+ {
+  "drop_uid": null,
+  "name": "2021 Chrysler Pacifica Limited AWD [FREE]",
+  "faces": 971732,
+  "keep_uid": "890cbc5470e344aaaff29dc2d6d8fdeb",
+  "keep_name": "2021 Chrysler Pacifica Limitited S AWD",
+  "keep_faces": 971730,
+  "reason": "face counts 2 apart (0.0002%)",
+  "eye_check": "unresolved",
+  "eye_note": "the flagged copy HARD-REJECTED at 50MB before it could be rendered, so no sheet exists to compare. Almost certainly the same mesh, but that is inference, not evidence."
+ },
+ {
+  "drop_uid": null,
+  "name": "2025_chrysler_imperial_s_ev",
+  "faces": 960171,
+  "keep_uid": "2beac70ed3694254b1b294f088aed5ae",
+  "keep_name": "2014 Chrysler 200S",
+  "keep_faces": 960704,
+  "reason": "face counts 533 apart (0.055%) — flagged by proximity alone, zero title token overlap",
+  "eye_check": "false-positive",
+  "eye_note": "completely different vehicles: a real 2014 200S saloon versus an invented '2025 Imperial S EV'. Textbook case for the CLAUDE.md rule that near-proximity is a candidate finder, never an identity."
+ },
+ {
+  "drop_uid": null,
+  "name": "Chrysler Imperial VII",
+  "faces": 1113385,
+  "keep_uid": "a52d4f01b5b14524878760af939218ae",
+  "keep_name": "Chrysler Lebaron",
+  "keep_faces": 1124591,
+  "reason": "face counts 11,206 apart (1.0%)",
+  "eye_check": "false-positive",
+  "eye_note": "a 1970 Imperial LeBaron two-door and a 1990 Imperial saloon — different cars. They DO share an uploader and an identical glass-shell defect, which is a family signal, not an identity."
+ },
+ {
+  "drop_uid": null,
+  "name": "2009 Chrysler Aspen",
+  "faces": 118105,
+  "keep_uid": "99ec73d456f245c9ae28b3384127f750",
+  "keep_name": "Chrysler Pacifica 2008",
+  "keep_faces": 119029,
+  "reason": "face counts 924 apart (0.78%), zero title token overlap",
+  "eye_check": "false-positive",
+  "eye_note": "a body-on-frame Aspen SUV and a Pacifica crossover. Different vehicles."
+ },
+ {
+  "drop_uid": null,
+  "name": "dodge_grand_caravan_mk4_2004",
+  "faces": 651780,
+  "keep_uid": "cfcde7efb94e4deab4ed6cfa983b3f75",
+  "keep_name": "Dodge Grand Caravan (Mk4) 2004",
+  "keep_faces": 651906,
+  "reason": "face counts 126 apart (0.02%) — rebadge shortlist",
+  "eye_check": "unresolved",
+  "eye_note": "excluded from the rebadge sub-wave rather than rendered, to save GPU; only the higher face count was rendered."
+ }
+]

@@ -1,0 +1,24 @@
+[
+ {
+  "uid": "cfcde7efb94e4deab4ed6cfa983b3f75",
+  "title": "Dodge Grand Caravan (Mk4) 2004",
+  "faces": 651906,
+  "would_be": "Chrysler Grand Voyager (Mk4)",
+  "source_badge": "Dodge",
+  "quality": "pass",
+  "glass": "clear (4 transparent of 16)",
+  "tyre_material": "'tire' baseColor 0.106 dielectric roughness 0.897",
+  "why_held": "the Dodge crosshair grille and Dodge badges are modelled; the UK Chrysler Grand Voyager Mk4 wears a different grille and the Chrysler wing badge, so publishing it against a Voyager lookup would show the wrong front end"
+ },
+ {
+  "uid": "67dc2c9de41c41c7b3612ddcc131908f",
+  "title": "2005 Dodge Neon",
+  "faces": 633658,
+  "would_be": "Chrysler Neon",
+  "source_badge": "Dodge",
+  "quality": "pass",
+  "glass": "clear (4 transparent of 16)",
+  "tyre_material": "'tire' baseColor 0.106 dielectric roughness 0.897",
+  "why_held": "same: Dodge crosshair grille and Dodge badging are modelled, and the UK car was badged Chrysler"
+ }
+]

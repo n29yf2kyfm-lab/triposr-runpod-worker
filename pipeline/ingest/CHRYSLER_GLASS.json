@@ -1,0 +1,920 @@
+[
+ {
+  "uid": "e8f2ad3dceb24e65b6b3b5b4259305eb",
+  "name": "2005 Chrysler PT Cruiser",
+  "verdict": "clear",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 20,
+  "n_transparent": 3,
+  "n_textures": 6,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "Carro_Vidro_Laranja",
+    "alpha": 0.131,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "Carro_Vidros",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "Carro_Vidros_1",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "3ae081b90cce4d199d4e886a1b15d3a5",
+  "name": "exmods_chrysler_300c_srt8",
+  "verdict": "clear",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 64,
+  "n_transparent": 10,
+  "n_textures": 37,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "window",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "1_window",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "1_window_0",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": "probe says 'faded'; OVERRIDDEN to clear. The window/glass materials are alphaMode=BLEND with baseColorFactor alpha=1.0, so eff_alpha reads 1.0, but the transparency lives in the baseColorTexture: decoding it gives a uniform alpha of 87/255 = 0.341. For any row marked via='texture-alpha', the clear/faded split from the FACTOR is meaningless."
+ },
+ {
+  "uid": "890cbc5470e344aaaff29dc2d6d8fdeb",
+  "name": "2021 Chrysler Pacifica Limitited S AWD",
+  "verdict": "clear",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 24,
+  "n_transparent": 3,
+  "n_textures": 3,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "022_Chrysler_Pacifica_Windows",
+    "alpha": 0.573,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "99ec73d456f245c9ae28b3384127f750",
+  "name": "Chrysler Pacifica 2008",
+  "verdict": "clear",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 18,
+  "n_transparent": 2,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "Windshield1Mtl",
+    "alpha": 0.836,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "a004134578c8411f8be74db7b394f1ab",
+  "name": "Chrysler 300c",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "evidence": "gltf",
+  "n_materials": 21,
+  "n_transparent": 2,
+  "n_textures": 7,
+  "flat_shell": false,
+  "glazing_named": [],
+  "note": ""
+ },
+ {
+  "uid": "026010fa0e7b4dc2b45654c0c1899f9d",
+  "name": "Chrysler 300C-Australian Police",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "evidence": "gltf",
+  "n_materials": 30,
+  "n_transparent": 3,
+  "n_textures": 8,
+  "flat_shell": false,
+  "glazing_named": [],
+  "note": ""
+ },
+ {
+  "uid": "ec7a87e55d72449a8dab00d2f789ab3b",
+  "name": "Day 308: Vintage Chrysler car",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "evidence": "gltf",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 1,
+  "flat_shell": false,
+  "glazing_named": [],
+  "note": ""
+ },
+ {
+  "uid": "480a55a0ab054ffd8acb385ca336c5e5",
+  "name": "chrysler 300c FREE custom model PRE-RIGGED",
+  "verdict": "faded",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 20,
+  "n_transparent": 4,
+  "n_textures": 12,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "Glass1Mtl",
+    "alpha": 0.98,
+    "mode": "BLEND",
+    "transmission": 0.02,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "5b4f529c79734e43a78f8236e1006ace",
+  "name": "Chrysler 300c Touring",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "evidence": "gltf",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 1,
+  "flat_shell": false,
+  "glazing_named": [],
+  "note": ""
+ },
+ {
+  "uid": "bc2b532cb1cd43a2b602e1a11dac1e7b",
+  "name": "Chrysler 300C MK1 2004-2010",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 70,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "sunburst_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "vehicle_vehglass.005",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "vehicle_vehglass.006",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "629e16c1e9c94166b1960e7161d7fc5a",
+  "name": "2016 Chrysler 300 SRT",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "evidence": "gltf",
+  "n_materials": 20,
+  "n_transparent": 3,
+  "n_textures": 3,
+  "flat_shell": false,
+  "glazing_named": [],
+  "note": ""
+ },
+ {
+  "uid": "73dd6619c8d3463c9cb77b0e78008770",
+  "name": "Chrysler 300C MK2 2011-2023",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "evidence": "gltf",
+  "n_materials": 29,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [],
+  "note": ""
+ },
+ {
+  "uid": "deac34a345cd47299e0741d335abf549",
+  "name": "2008 Chrysler 300C SRT-8",
+  "verdict": "clear",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 48,
+  "n_transparent": 7,
+  "n_textures": 9,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "window.002",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true
+   },
+   {
+    "name": "window.001",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "d2f5190ddd5c4bb8a0d974cf9640e166",
+  "name": "1970 Chrysler 300 Hurst",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 22,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "glass.001",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "glass.002",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "1abb7a77652c4522b04a36cbe91f3269",
+  "name": "2008 Chrysler Pacifica Model",
+  "verdict": "clear",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 18,
+  "n_transparent": 2,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "Windshield1Mtl",
+    "alpha": 0.836,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "39ce068ead664cb1bd01051f55aaee97",
+  "name": "2009 Chrysler Aspen",
+  "verdict": "clear",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 47,
+  "n_transparent": 9,
+  "n_textures": 2,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "Translucent_Glass_Gray",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "Translucent_Glass_Gray1",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "82b9b3f14c1e48febfd567be2c2c26c7",
+  "name": "Chrysler 300 SRT Hellcat",
+  "verdict": "faded",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 23,
+  "n_transparent": 3,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "Windshield1Mtl",
+    "alpha": 0.989,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "3ffe77aa4fab45709f77730412fa2563",
+  "name": "Chrysler_300_srt_hellcat",
+  "verdict": "faded",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 23,
+  "n_transparent": 3,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "Windshield1Mtl",
+    "alpha": 0.989,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "f56160ba2d1447919690b3f67d16ba57",
+  "name": "2003 Chrysler 300M FINAL",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "evidence": "gltf",
+  "n_materials": 8,
+  "n_transparent": 0,
+  "n_textures": 7,
+  "flat_shell": false,
+  "glazing_named": [],
+  "note": ""
+ },
+ {
+  "uid": "17f531a43bea4188b6e697fddfd0bce6",
+  "name": "2003 Chrysler 300M",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "evidence": "gltf",
+  "n_materials": 12,
+  "n_transparent": 1,
+  "n_textures": 11,
+  "flat_shell": false,
+  "glazing_named": [],
+  "note": ""
+ },
+ {
+  "uid": "34dc6085b786485db2c8940d4deac7bd",
+  "name": "Chrysler 300",
+  "verdict": "clear",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 20,
+  "n_transparent": 3,
+  "n_textures": 4,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "00c-glass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "00c-glass_black",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "00c-fl-glass",
+    "alpha": 0.11,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "e332ef094f94445ba7c01e9f5502b988",
+  "name": "Chrysler Saratoga",
+  "verdict": "glass-shell",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 16,
+  "n_transparent": 16,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "windowglass.107",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true
+   }
+  ],
+  "note": "ALL 16 materials transmission=1.0 alpha=0.25 including carpaint.130 — the probe's 'clear' here means glass shell, not good glazing. Read n_transparent==n_materials as the shell signature."
+ },
+ {
+  "uid": "5235df1486544bf08497883056ad557e",
+  "name": "Chrysler Turbine Concept",
+  "verdict": "glass-shell",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 17,
+  "n_transparent": 17,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "windowglass.108",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "a52d4f01b5b14524878760af939218ae",
+  "name": "Chrysler Lebaron",
+  "verdict": "glass-shell",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 16,
+  "n_transparent": 16,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "windowglass.100",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "8f86b49c7b9a4583bf6358bee059df98",
+  "name": "Chrysler Imperial VII",
+  "verdict": "glass-shell",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 20,
+  "n_transparent": 20,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "windowglass.098",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "1f8e5f2d79134a9e9a5daa20b0874b4f",
+  "name": "Chrysler Imperial Crown",
+  "verdict": "glass-shell",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 15,
+  "n_transparent": 15,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "windowglass.099",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "2beac70ed3694254b1b294f088aed5ae",
+  "name": "2014 Chrysler 200S",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 19,
+  "n_transparent": 0,
+  "n_textures": 3,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "glass-tinted_windows",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "note": "only glazing material 'glass-tinted_windows' is alphaMode=OPAQUE alpha=1.0; zero transparent in 19. The sheet shows clear glass because the worker forces transmission onto anything matching /glass/."
+ },
+ {
+  "uid": "e3d7199acb9b44c1ac2cfe21723be0a6",
+  "name": "2025_chrysler_imperial_s_ev",
+  "verdict": "clear",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 41,
+  "n_transparent": 2,
+  "n_textures": 9,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "Screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "Glass",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "7eca9ce0e2ea405dbdb774ba0cde57b9",
+  "name": "2006 Chrysler Pacifica",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "evidence": "gltf",
+  "n_materials": 30,
+  "n_transparent": 0,
+  "n_textures": 5,
+  "flat_shell": false,
+  "glazing_named": [],
+  "note": ""
+ },
+ {
+  "uid": "cfcbc27da26549bdaaa91b4aa6a61433",
+  "name": "2017 Chrysler Pacifica Limited",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "evidence": "gltf",
+  "n_materials": 8,
+  "n_transparent": 1,
+  "n_textures": 8,
+  "flat_shell": false,
+  "glazing_named": [],
+  "note": ""
+ },
+ {
+  "uid": "bd1143b6e5f34f419c636c05fdaa6664",
+  "name": "CHRYSLER C300 IMPROVED",
+  "verdict": "clear",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 19,
+  "n_transparent": 2,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "00c-glass_black",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "00c-glass",
+    "alpha": 0.633,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "00c-fl-glass",
+    "alpha": 0.572,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "8f2f466f668b4958831cd5f2d6da299a",
+  "name": "Chrysler 300C Limo MK1 2004-2010",
+  "verdict": "clear",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 54,
+  "n_transparent": 7,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "window",
+    "alpha": 0.126,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "windows.1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "windows.2",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "eb10ec0715e14734b2440eec6b811274",
+  "name": "Dodge Caravan",
+  "verdict": "glass-shell",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 17,
+  "n_transparent": 17,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "windowglass.166",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "c6b0aec0c4c642098074465febea9cbc",
+  "name": "1990 Dodge Caravan",
+  "verdict": "glass-shell",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 17,
+  "n_transparent": 17,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "windowglass.167",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "f03b702b00164ee5935dfcdc208771fd",
+  "name": "2007 Dodge Grand Caravan SXT",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 11,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "WindshieldWipers1Mtl",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   },
+   {
+    "name": "Windshield1Mtl",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "note": "Windshield1Mtl alphaMode=OPAQUE baseColor 0.003; 0 transparent of 11. Sheet showed clear glass — manufactured by the worker."
+ },
+ {
+  "uid": "3ee97dc465a54de7911a7228c0662b77",
+  "name": "Lancia_ Delta_2008",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "evidence": "gltf",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 3,
+  "flat_shell": false,
+  "glazing_named": [],
+  "note": ""
+ },
+ {
+  "uid": "cfcde7efb94e4deab4ed6cfa983b3f75",
+  "name": "Dodge Grand Caravan (Mk4) 2004",
+  "verdict": "clear",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "67dc2c9de41c41c7b3612ddcc131908f",
+  "name": "2005 Dodge Neon",
+  "verdict": "clear",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "00d7098f0a624a08b8e6c9a62c49c360",
+  "name": "Lancia Delta",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "evidence": "gltf",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "n_textures": 2,
+  "flat_shell": false,
+  "glazing_named": [],
+  "note": ""
+ },
+ {
+  "uid": "2c53fd5981934a17b19c883c34f5dad1",
+  "name": "2004 Dodge Grand Caravan",
+  "verdict": "faded",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 19,
+  "n_transparent": 4,
+  "n_textures": 23,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "windows_inside",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   },
+   {
+    "name": "windows",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "54ee704324cc40429b60976d8cea80a2",
+  "name": "Lancia Delta",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "evidence": "gltf",
+  "n_materials": 19,
+  "n_transparent": 0,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [
+   {
+    "name": "glass.002",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false
+   }
+  ],
+  "note": ""
+ },
+ {
+  "uid": "529620651df548939aff2618763ddfea",
+  "name": "Dodge Neon 2004",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "evidence": "gltf",
+  "n_materials": 34,
+  "n_transparent": 1,
+  "n_textures": 0,
+  "flat_shell": false,
+  "glazing_named": [],
+  "note": ""
+ }
+]

@@ -1,0 +1,46 @@
+[
+ {
+  "model": "PT Cruiser",
+  "trim": "GT",
+  "generation": null,
+  "year": 2005,
+  "uid": "e8f2ad3dceb24e65b6b3b5b4259305eb",
+  "title": "2005 Chrysler PT Cruiser",
+  "uk_decodable": true,
+  "note": "year per source title; trim GT and '2.4L TURBO' are badged on the model and legible in the render",
+  "faces": 191971
+ },
+ {
+  "model": "300C",
+  "trim": "SRT8",
+  "generation": null,
+  "year": null,
+  "uid": "3ae081b90cce4d199d4e886a1b15d3a5",
+  "title": "exmods_chrysler_300c_srt8",
+  "uk_decodable": true,
+  "note": "model and trim per source title; no year stated by the source so none recorded",
+  "faces": 178557
+ },
+ {
+  "model": "Pacifica",
+  "trim": "Limited S AWD",
+  "generation": null,
+  "year": 2021,
+  "uid": "890cbc5470e344aaaff29dc2d6d8fdeb",
+  "title": "2021 Chrysler Pacifica Limitited S AWD",
+  "uk_decodable": false,
+  "note": "US-market only; source title's 'Limitited' typo normalised to 'Limited'",
+  "faces": 971730
+ },
+ {
+  "model": "Pacifica",
+  "trim": null,
+  "generation": null,
+  "year": 2008,
+  "uid": "99ec73d456f245c9ae28b3384127f750",
+  "title": "Chrysler Pacifica 2008",
+  "uk_decodable": false,
+  "note": "US-market only (CS-generation crossover)",
+  "faces": 119029
+ }
+]
