@@ -2249,5 +2249,103 @@
    "glazing opaque body-white, no interior visible",
    "headlamps are blank white recesses, the grille is white slats with no depth, no shut lines"
   ]
+ },
+ {
+  "uid": "de1ffd344c41481892511f7fd332c136",
+  "name": "Porsche 911 (930) Turbo 1975",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL: one white material over the whole car",
+   "tyres render body-white on white wheels in both 3/4 tread bands - no black rubber anywhere",
+   "glazing opaque body-white, no interior visible in any view",
+   "only the red tail-light panel and the PORSCHE script carry any other colour; no lamp internals, no shut lines"
+  ]
+ },
+ {
+  "uid": "e0eb0fe3f02843989d2de3eadfed92c5",
+  "name": "2019 Porsche 911 Speedster (991.2)",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 Speedster proportions read instantly - twin tonneau humps and low screen correct; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible",
+   "black rim faces with red pinstripe present in all four views, yellow PCCB calipers",
+   "lamp internals, front intakes and shut lines defined",
+   "face count within 2 of 626f4a5d - same source car, leave the grouping to dupe_check"
+  ]
+ },
+ {
+  "uid": "e3465539677d4aeea9b4c017ddffaf7d",
+  "name": "1977 Porsche 911 Turbo 3.3 (930 G-Series)",
+  "verdict": "pass",
+  "reasons": [
+   "930 Turbo 3.3 proportions read instantly - whale tail, flared arches and G-series bumpers correct; front 3/4 strong; paint finish premium",
+   "tyres black rubber, tread face clear in both 3/4 bands; the pale ring is the polished Fuchs lip, not a body-painted sidewall",
+   "glazing transparent, interior visible through the side glass",
+   "black Fuchs rim faces present in all four views",
+   "round lamp internals, amber indicators, tail-light internals, chrome trim and door shut line all defined"
+  ]
+ },
+ {
+  "uid": "e63de086c70d43c3ba4fb0393b864756",
+  "name": "2010 Porsche Boxster Spyder",
+  "verdict": "pass",
+  "reasons": [
+   "987 Boxster Spyder proportions read instantly, twin tonneau humps correct; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible",
+   "dark rim faces present in all four views",
+   "front intakes, lamp internals and shut lines defined",
+   "number plate carries a HUMSTER3D vendor watermark; face count within 2k of 122a977c - same source car, leave the grouping to dupe_check"
+  ]
+ },
+ {
+  "uid": "eaee6b83b5b04f1593f7ce791c8816c3",
+  "name": "Porsche 911",
+  "verdict": "fail",
+  "reasons": [
+   "PANEL SURFACING MELTED: at full res the rear quarter, engine lid and roof carry wavy blotches and a scribble-like distortion across the reflections - the classic soft-scan look, and the owner's pass list requires clean reflections",
+   "tail lights are flat orange rectangles with no internal elements; the rear bumper and arch trim are soft blobs",
+   "glazing incomplete - the rear quarter window reads as an open aperture rather than glass",
+   "tyres ARE black rubber and rim faces present; the failure is surfacing"
+  ]
+ },
+ {
+  "uid": "ed07dfc50f8146aea10143232657c061",
+  "name": "2018 Porsche 718 Cayman GTS",
+  "verdict": "pass",
+  "reasons": [
+   "982 Cayman GTS proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, interior visible through the side glass",
+   "black rim faces present in all four views, yellow calipers behind",
+   "lamp internals, side intakes, GTS badging and shut lines defined"
+  ]
+ },
+ {
+  "uid": "ee69c474a1cc4085944cde4cb7ae87db",
+  "name": "Porsche 911 C4S 2020 Aerokit",
+  "verdict": "pass",
+  "reasons": [
+   "992 Carrera 4S with the factory Aerokit wing - proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands against white rims",
+   "glazing transparent, interior visible at full res",
+   "white rim faces present in all four views, red calipers behind",
+   "992 rear light bar with PORSCHE lettering, engine-lid slats, diffuser and shut lines all defined",
+   "minor: the far-side mirror glass renders blue-tinted, which is plausible mirror glass rather than a fault",
+   "Aerokit is a factory option, so this is a road car in scope"
+  ]
+ },
+ {
+  "uid": "ef7934a1eb8d408785df77d554905b32",
+  "name": "Porsche 911",
+  "verdict": "pass",
+  "reasons": [
+   "992 Carrera proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, interior visible through the side glass",
+   "black rim faces present in all four views",
+   "lamp internals, front intake slats, rear light bar and shut lines defined"
+  ]
  }
 ]
