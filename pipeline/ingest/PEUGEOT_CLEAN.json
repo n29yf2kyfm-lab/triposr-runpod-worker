@@ -172,19 +172,6 @@
   "model": "406",
   "trim": null,
   "generation": null,
-  "year": 1998,
-  "faces": 67656,
-  "uid": "4b55488b331041c299955a937334113b",
-  "title": "1998 Peugeot 406",
-  "sheet_index": 4,
-  "glass": "clear",
-  "notes": "clean 406 saloon; glazing clear, interior visible at 2x; black tyres on real spoked alloys. Only 67,656 faces but it reads sharply -- corrects my own thumbnail read, which called it soft",
-  "nameplate_caveat": null
- },
- {
-  "model": "406",
-  "trim": null,
-  "generation": null,
   "year": null,
   "faces": 67660,
   "uid": "a45880cd207343aea45cd160efefeb81",
@@ -192,19 +179,6 @@
   "sheet_index": 54,
   "glass": "clear",
   "notes": "clean 406 saloon; glazing clear. Face-count twin of #4 (67,660 vs 67,656) -- see duplicates",
-  "nameplate_caveat": null
- },
- {
-  "model": "406",
-  "trim": "V6 (per source title)",
-  "generation": null,
-  "year": null,
-  "faces": 275713,
-  "uid": "7cb921f0266d4a729e44ff69f7c0c730",
-  "title": "Peugeot 406 V6",
-  "sheet_index": 58,
-  "glass": "clear",
-  "notes": "clean 406 V6 saloon; glazing clear (proven). FLAG: a tyre-named material sits at baseColorFactor 0.8 (pale grey) -- needs a render confirmation before shipping",
   "nameplate_caveat": null
  },
  {

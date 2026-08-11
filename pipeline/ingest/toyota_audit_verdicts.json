@@ -1486,7 +1486,11 @@
     }
    ],
    "prior_verdict": "PASS-SINGLE",
-   "sheet": "car-meshes/audit/toyota/20f0190e34da4ac4a984c7f7a757efba.jpg"
+   "sheet": "car-meshes/audit/toyota/20f0190e34da4ac4a984c7f7a757efba.jpg",
+   "quarantined_live_twin": {
+    "assetId": "toyota-avensis-2009-tw2-v1",
+    "quarantineReason": "2026-08-11 global-alpha shell: body paint AND tyre materials are alphaMode=BLEND at alpha 0.25, so the car itself is ~75% transparent (16/16 materials alphaMode=BLEND). Confirmed by magenta-backlight render of the SHIPPED glb \u2014 the background reads through the panels and the far-side wheels are visible through the bodywork; a Prius control on the same rig renders solid. The resolver returns desktopGlbUrl to the viewer regardless of posterUrl, so this is what a customer sees. Entry and assets kept; reversible if the source is re-exported without global blending."
+   }
   },
   {
    "n": 51,
@@ -3776,5 +3780,7 @@
   "why_it_matters": "It errs in BOTH directions from the same line, which is why it looked random and was recorded as '~8% measured on the Honda wave, mechanism unresolved'. It is not random: the object order and the extents are properties of the file, so it is deterministic per asset and re-rendering cannot fix it. Hence fail-rerender, never a scrap.",
   "confidence": "HIGH on the mechanism class, MEDIUM on the exact per-car reproduction: Blender is not available here, so the object ORDER is trimesh's traversal of the glTF node graph rather than Blender's importer order. The load-bearing point does not depend on that -- a ~9% sample decides the flip, and on both cars the sample disagrees with the full mesh.",
   "suggested_fix": "Drop the early break, or sample uniformly across ALL objects instead of taking the first few whole. Same class of fix as the MARGIN that CLAUDE.md proposes for the argmin tie; both live in the same block and both should be done together, on a build that is not shared with an in-flight wave."
- }
+ },
+ "_tyre_probe_caveat": "ADVISORY ONLY, demoted after the Mercedes retro-audit measured a glTF tyre probe at 0/8 recall and 13 false alarms on 108 against retro_tyre_audit.json ground truth (CLAUDE.md 2026-08-11). Five of the eight real failures carried a genuinely DARK tyre material, so the file cannot decide this. No verdict in this audit rests on a tyre-material reading alone; every tyre flag below is a candidate for a red control render, nothing more.",
+ "_quarantine_crossref": "Every PASS is joined to catalogue.v2.json entries with publicationStatus=quarantined by sourceReferenceId. REJECTS.json records review-time scraps only, NOT post-publication quarantines, so a car pulled after going live would otherwise be re-passed by a fresh audit that re-derives quality from the sheet and the glTF -- neither of which carries the defect that got it pulled."
 }

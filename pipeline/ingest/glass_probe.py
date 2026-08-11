@@ -235,6 +235,17 @@ def probe(uid, stage="staging/jeep", url=None):
     # repeat the very mistake this guard fixes one level down.
     TRIMMY = re.compile(r"icon|button|instrument|gauge|cluster|dial|dash|"
                         r"aircondition|ventilation|speedo|"
+                        # An INFOTAINMENT SCREEN is not glazing. Measured
+                        # 2026-08-11 on the live catalogue: honda-civic-v1's
+                        # ONLY glazing-named material is
+                        # "M_2023_Honda_Civic_Type_R_Touchscreen" -- GLASSY
+                        # matches it on "screen", from windscreen -- so a
+                        # centre-console display was promoted to sole decider of
+                        # the whole car's glazing and, being opaque, scored the
+                        # car "opaque", which is an outright FAIL. Exactly the
+                        # Porsche dashboard-icon bug in a different guise.
+                        r"touch|infotainment|navigation|multimedia|monitor|"
+                        r"display|headunit|head.?unit|"
                         # mirror: the Jaguar wave's "glassSideMirror" is a
                         # MIRROR and must not be allowed to outvote real glazing.
                         r"mirror|rearview|rear.?view|wing.?mirror", re.I)

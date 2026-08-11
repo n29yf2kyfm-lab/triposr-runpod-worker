@@ -6,8 +6,8 @@
   "fail-rerender": "asset sound, worker inverted it"
  },
  "_counts": {
-  "fail": 67,
-  "pass": 18
+  "fail": 69,
+  "pass": 16
  },
  "rows": [
   {
@@ -64,7 +64,11 @@
     }
    ],
    "prior_verdict": "PASS",
-   "sheet": "car-meshes/audit/peugeot/cc25e4d5a33a402e81ab764be6a0f61e.jpg"
+   "sheet": "car-meshes/audit/peugeot/cc25e4d5a33a402e81ab764be6a0f61e.jpg",
+   "quarantined_live_twin": {
+    "assetId": "peugeot-504-1968-pw1-v1",
+    "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.8, 0.8, 0.8] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (55 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in bo"
+   }
   },
   {
    "n": 2,
@@ -130,8 +134,8 @@
    "n": 4,
    "uid": "4b55488b331041c299955a937334113b",
    "name": "1998 Peugeot 406",
-   "verdict": "pass",
-   "reason": "clean 406 saloon; glazing clear, interior visible at 2x; black tyres on real spoked alloys. Only 67,656 faces but it reads sharply -- corrects my own thumbnail read, which called it soft",
+   "verdict": "fail",
+   "reason": "DEMOTED from pass. This exact source uid is already live as peugeot-406-1998-pw1-v1 with publicationStatus=quarantined: \"Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres do not read as black rubber on the shipped glb. Tyre renders in body colour. Zoomed on the live glb render \". The sheet and the glTF do not carry that defect, which is precisely why a fresh audit re-passes it -- do not re-ship a car the owner has already pulled. Original audit finding: clean 406 saloon; glazing clear, interior visible at 2x; black tyres on real spoked alloys. Only 67,656 faces but it reads sharply -- corrects my own thumbnail read, which called it soft",
    "faces": 67656,
    "licence": "CC Attribution",
    "plate": "406",
@@ -146,7 +150,11 @@
    },
    "tyre_materials": [],
    "prior_verdict": "PASS",
-   "sheet": "car-meshes/audit/peugeot/4b55488b331041c299955a937334113b.jpg"
+   "sheet": "car-meshes/audit/peugeot/4b55488b331041c299955a937334113b.jpg",
+   "quarantined_live_twin": {
+    "assetId": "peugeot-406-1998-pw1-v1",
+    "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres do not read as black rubber on the shipped glb. Tyre renders in body colour. Zoomed on the live glb render at high magnification: the sidewall and tread are the same white/pale grey as the bodywork, with no black rubber anywhere on the car."
+   }
   },
   {
    "n": 5,
@@ -214,7 +222,11 @@
     }
    ],
    "prior_verdict": "PASS",
-   "sheet": "car-meshes/audit/peugeot/52deb999ad964d2496c9fd25ee84c2d4.jpg"
+   "sheet": "car-meshes/audit/peugeot/52deb999ad964d2496c9fd25ee84c2d4.jpg",
+   "quarantined_live_twin": {
+    "assetId": "peugeot-206-2003-pw1-v1",
+    "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.8, 0.8, 0.8] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (42 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in bo"
+   }
   },
   {
    "n": 7,
@@ -827,7 +839,11 @@
    },
    "tyre_materials": [],
    "prior_verdict": "PASS",
-   "sheet": "car-meshes/audit/peugeot/b2ef11bf94b848618b5b7f38e202316b.jpg"
+   "sheet": "car-meshes/audit/peugeot/b2ef11bf94b848618b5b7f38e202316b.jpg",
+   "quarantined_live_twin": {
+    "assetId": "peugeot-206-pw1-v1",
+    "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [1, 1, 1] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (11 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in body col"
+   }
   },
   {
    "n": 31,
@@ -1264,7 +1280,11 @@
     }
    ],
    "prior_verdict": "PASS",
-   "sheet": "car-meshes/audit/peugeot/fe211e55acf54aa4a70c522ce720e17a.jpg"
+   "sheet": "car-meshes/audit/peugeot/fe211e55acf54aa4a70c522ce720e17a.jpg",
+   "quarantined_live_twin": {
+    "assetId": "peugeot-308-2020-pw1-v1",
+    "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.588, 0.588, 0.588] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (21 materials, 0 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres"
+   }
   },
   {
    "n": 47,
@@ -1531,7 +1551,11 @@
     }
    ],
    "prior_verdict": "PASS",
-   "sheet": "car-meshes/audit/peugeot/602dbd0634754339b47de7b1d18bf143.jpg"
+   "sheet": "car-meshes/audit/peugeot/602dbd0634754339b47de7b1d18bf143.jpg",
+   "quarantined_live_twin": {
+    "assetId": "peugeot-405-pw1-v1",
+    "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres AND glazing both render in body colour on the shipped glb. FLAT SHELL. Every material in the shipped glb carries the same baseColorFactor [0.8, 0.8, 0.8] - 'tire', the glass materials, 'chrome' and the paint are all one light tone, and no material anywhere in the file is dark enough to be rubber or transparent enough to be glass (51 materials, 3 textures and those are number plates only). Confirmed by rendering the live glb: the car reads as a uniform clay model, tyres in bo"
+   }
   },
   {
    "n": 54,
@@ -1625,8 +1649,8 @@
    "n": 58,
    "uid": "7cb921f0266d4a729e44ff69f7c0c730",
    "name": "Peugeot 406 V6",
-   "verdict": "pass",
-   "reason": "clean 406 V6 saloon; glazing clear (proven). FLAG: a tyre-named material sits at baseColorFactor 0.8 (pale grey) -- needs a render confirmation before shipping",
+   "verdict": "fail",
+   "reason": "DEMOTED from pass. This exact source uid is already live as peugeot-406-pw1-v1 with publicationStatus=quarantined: \"Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres do not read as black rubber on the shipped glb. Tyre renders in body colour. Zoomed on the live glb render \". The sheet and the glTF do not carry that defect, which is precisely why a fresh audit re-passes it -- do not re-ship a car the owner has already pulled. Original audit finding: clean 406 V6 saloon; glazing clear (proven). FLAG: a tyre-named material sits at baseColorFactor 0.8 (pale grey) -- needs a render confirmation before shipping",
    "faces": 275713,
    "licence": "CC Attribution",
    "plate": "406",
@@ -1653,7 +1677,11 @@
     }
    ],
    "prior_verdict": "PASS",
-   "sheet": "car-meshes/audit/peugeot/7cb921f0266d4a729e44ff69f7c0c730.jpg"
+   "sheet": "car-meshes/audit/peugeot/7cb921f0266d4a729e44ff69f7c0c730.jpg",
+   "quarantined_live_twin": {
+    "assetId": "peugeot-406-pw1-v1",
+    "quarantineReason": "Retroactive tyre audit 2026-08-10 (pipeline/ingest/retro_tyre_audit_2.json): tyres do not read as black rubber on the shipped glb. Tyre renders in body colour. Zoomed on the live glb render at high magnification: the sidewall and tread are the same white/pale grey as the bodywork, with no black rubber anywhere on the car."
+   }
   },
   {
    "n": 59,
@@ -2369,5 +2397,7 @@
    "prior_verdict": "FAIL",
    "sheet": "car-meshes/audit/peugeot/04948327a1f04e67b92b926a4594955e.jpg"
   }
- ]
+ ],
+ "_tyre_probe_caveat": "ADVISORY ONLY, demoted after the Mercedes retro-audit measured a glTF tyre probe at 0/8 recall and 13 false alarms on 108 against retro_tyre_audit.json ground truth (CLAUDE.md 2026-08-11). Five of the eight real failures carried a genuinely DARK tyre material, so the file cannot decide this. No verdict in this audit rests on a tyre-material reading alone; every tyre flag below is a candidate for a red control render, nothing more.",
+ "_quarantine_crossref": "Every PASS is joined to catalogue.v2.json entries with publicationStatus=quarantined by sourceReferenceId. REJECTS.json records review-time scraps only, NOT post-publication quarantines, so a car pulled after going live would otherwise be re-passed by a fresh audit that re-derives quality from the sheet and the glTF -- neither of which carries the defect that got it pulled."
 }
