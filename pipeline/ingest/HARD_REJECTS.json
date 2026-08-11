@@ -36,6 +36,12 @@
   "at": "2026-08-10"
  },
  {
+  "uid": "13fa6aedfe9e4a688a8e86a8d2d98a96",
+  "name": "Chrysler 1932 CL Imperial",
+  "reason": "too big 58MB",
+  "at": "2026-08-11"
+ },
+ {
   "uid": "1635e9b0f7254e1d8688f4316498bfad",
   "name": "2020 Hyundai Grand i10 NIOS",
   "reason": "too big 52MB",
@@ -172,6 +178,12 @@
   "name": "Porsche 918 Spyder",
   "reason": "too big 66MB",
   "at": "2026-08-10"
+ },
+ {
+  "uid": "4dc5b59e55c94f44a5e4a4e45292125d",
+  "name": "2021 Chrysler Pacifica Limited AWD [FREE]",
+  "reason": "too big 50MB",
+  "at": "2026-08-11"
  },
  {
   "uid": "4e196689d05e4029b9c7f5ef25755b8d",
@@ -532,5 +544,11 @@
   "name": "nissan gtr r34",
   "reason": "too big 50MB",
   "at": "2026-08-09"
+ },
+ {
+  "uid": "fd7eaec26ab24ca2b4153a60d7a51df1",
+  "name": "2021 Mazda MX-30",
+  "reason": "too big 49MB",
+  "at": "2026-08-11"
  }
 ]

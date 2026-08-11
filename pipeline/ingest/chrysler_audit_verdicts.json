@@ -1,0 +1,570 @@
+[
+ {
+  "uid": "e8f2ad3dceb24e65b6b3b5b4259305eb",
+  "name": "2005 Chrysler PT Cruiser",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as a PT Cruiser; front three-quarter strong",
+   "glazing CLEAR from the glTF: Carro_Vidros alphaMode=BLEND alpha=0.40 (3 transparent of 20 materials)",
+   "tyres read as black rubber, tread face black in front34 and rear34",
+   "rim faces present with spokes, lug detail and centre caps in all four tiles",
+   "shut lines defined on doors, bonnet and tailgate; grille slats and headlamp internals sharp",
+   "mats=1 cov=0.167 — single body-paint material inside the healthy coverage band"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "3ae081b90cce4d199d4e886a1b15d3a5",
+  "name": "exmods_chrysler_300c_srt8",
+  "verdict": "pass",
+  "reasons": [
+   "300C SRT8 (LX); proportions, roof line and wheelbase consistent across all four views",
+   "glazing CLEAR — probe says 'faded' but that is an artefact of eff_alpha reading the FACTOR (1.0); the window/glass materials are alphaMode=BLEND with a baseColorTexture, and decoding that texture's alpha channel gives a uniform 87/255 = 0.341",
+   "tyres black with visible tread; rim face, ten spokes, lug nuts, centre cap and red caliper all present on every corner (used as the control that condemned deac34a3)",
+   "mats=1 cov=0.165, 37 textures, 64 materials — properly authored asset"
+  ],
+  "glass": "faded",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "890cbc5470e344aaaff29dc2d6d8fdeb",
+  "name": "2021 Chrysler Pacifica Limitited S AWD",
+  "verdict": "pass",
+  "reasons": [
+   "2021 Pacifica; sharpest asset in the wave — grille mesh, LED headlamp internals, PACIFICA/PINNACLE/LIMITED badges, roof rails all resolved",
+   "glazing CLEAR from the glTF: 022_Chrysler_Pacifica_Windows alphaMode=BLEND alpha=0.573",
+   "tyres black, rim faces present on all four corners",
+   "mats=1 cov=0.179 recolourable",
+   "US-MARKET ONLY — the Pacifica was never sold in the UK, so no UK registration decodes to it"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "99ec73d456f245c9ae28b3384127f750",
+  "name": "Chrysler Pacifica 2008",
+  "verdict": "pass",
+  "reasons": [
+   "2004-08 Pacifica (CS crossover); chrome grille slats, projector headlamp internals, amber indicators, defined shut lines",
+   "glazing CLEAR from the glTF: Windshield1Mtl alphaMode=BLEND alpha=0.836 — heavy but inside the Porsche-calibrated band that still resolves the interior",
+   "tyres black with tread, full rim faces on all four corners",
+   "mats=1 cov=0.181 recolourable",
+   "minor: rear quarter and tailgate surfacing slightly soft",
+   "US-MARKET ONLY — the CS Pacifica was never sold in the UK"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "a004134578c8411f8be74db7b394f1ab",
+  "name": "Chrysler 300c",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "car renders SUNK INTO THE STUDIO FLOOR, buried past the wheel hubs in all four tiles",
+   "mechanism identified, not guessed: the GLB carries FOUR stray vertices (two at z=-189, two at z=+186) while 377,393 of 377,397 sit inside z in [-3.7, 1.5]. The raw bounding box is ~100x the car and the render worker's ground placement is bounding-box based, so it sinks the car",
+   "the same four vertices false-rejected this car at the pre-render pose gate (tob sentinel 9.99); fixed in geom_audit and re-rendered, which is how the render-side half of the bug surfaced",
+   "renders RED under a forced silver (mats=0 cov=0.000 — no body-paint material found)",
+   "DO NOT SCRAP: stripping the four stray vertices should fix both halves"
+  ],
+  "glass": "clear",
+  "glass_certainty": "inferred",
+  "flat_shell": false
+ },
+ {
+  "uid": "026010fa0e7b4dc2b45654c0c1899f9d",
+  "name": "Chrysler 300C-Australian Police",
+  "verdict": "fail",
+  "reasons": [
+   "police livery baked into the textures (pink/blue Australian police wrap, light bar, aerials) — out of scope for the catalogue",
+   "also sunk into the studio floor by the same four stray vertices as a0041345",
+   "mats=0 cov=0.000 — no body-paint material"
+  ],
+  "glass": "clear",
+  "glass_certainty": "inferred",
+  "flat_shell": false
+ },
+ {
+  "uid": "ec7a87e55d72449a8dab00d2f789ab3b",
+  "name": "Day 308: Vintage Chrysler car",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: soft panels, baked lighting, the ground plane baked into the mesh, torn sills",
+   "cov=1.000 — one material covers the whole model, a respray would repaint glass and tyres too",
+   "glTF: 1 material, 0 transparent — glazing opaque",
+   "forced through nameplate_filter with --allow-uid because the title carried no nameplate; the render settled it in four frames, which is exactly what that flag is for"
+  ],
+  "glass": "opaque",
+  "glass_certainty": "inferred",
+  "flat_shell": false
+ },
+ {
+  "uid": "480a55a0ab054ffd8acb385ca336c5e5",
+  "name": "chrysler 300c FREE custom model PRE-RIGGED",
+  "verdict": "fail",
+  "reasons": [
+   "aftermarket body kit, not a spec variant: carbon-fibre bonnet and boot lid, widebody arches, front splitter, rear diffuser, lowered on aftermarket multi-spoke wheels",
+   "out of scope on the same rule that excluded the Brabus and Binz Mercedes; geometry itself is clean"
+  ],
+  "glass": "faded",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "5b4f529c79734e43a78f8236e1006ace",
+  "name": "Chrysler 300c Touring",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: trees and sky baked into the paint, ragged sill and wheel-arch geometry, holes along the underside",
+   "cov=1.000, glTF holds ONE material and zero transparent — glazing opaque",
+   "a genuine shame: the 300C Touring estate is a real UK car and this is the only source in the band"
+  ],
+  "glass": "opaque",
+  "glass_certainty": "inferred",
+  "flat_shell": false
+ },
+ {
+  "uid": "bc2b532cb1cd43a2b602e1a11dac1e7b",
+  "name": "Chrysler 300C MK1 2004-2010",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit lying ON ITS SIDE: doors, bonnet, wings and mirrors scattered as separate floating panels, no wheels fitted",
+   "glTF: 0 transparent of 70 materials — glazing opaque",
+   "the pose gate WARNED (tall h/l=0.663, tob=1.158) but did not reject; a disassembled kit is not a pose the current signals catch"
+  ],
+  "glass": "opaque",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "629e16c1e9c94166b1960e7161d7fc5a",
+  "name": "2016 Chrysler 300 SRT",
+  "verdict": "fail",
+  "reasons": [
+   "tyres and rims render in body white, whole tyre including the tread, all four corners in all four tiles",
+   "cov=0.854 with 5 body materials — near the retire-grade full-coverage band",
+   "glazing verdict INFERRED only: no glass-named material in the file, three unnamed BLEND materials at alpha 0.1-0.163"
+  ],
+  "glass": "clear",
+  "glass_certainty": "inferred",
+  "flat_shell": false
+ },
+ {
+  "uid": "73dd6619c8d3463c9cb77b0e78008770",
+  "name": "Chrysler 300C MK2 2011-2023",
+  "verdict": "fail",
+  "reasons": [
+   "glazing OPAQUE, proven from the glTF: zero transparent materials in 29, zero textures",
+   "tyres and rims in body white; headlamps and tail lamps are flat black voids with no internals",
+   "reads as an unfinished clay shell, cov=0.724 across 8 body materials"
+  ],
+  "glass": "opaque",
+  "glass_certainty": "inferred",
+  "flat_shell": false
+ },
+ {
+  "uid": "deac34a345cd47299e0741d335abf549",
+  "name": "2008 Chrysler 300C SRT-8",
+  "verdict": "fail",
+  "reasons": [
+   "PER-SIDE RIM VOIDS: front34 and side show featureless black discs with no rim face, no spokes, no lug nuts and no centre cap; front34_L and rear34 show full spokes",
+   "confirmed against the documented test, not the 2-vs-2 brightness split: gamma-boosting the crop leaves scattered noise where the rim face should be, while the same crop of its sibling exmods_chrysler_300c_srt8 (same car, same rig, 302 faces apart) shows a full ten-spoke face, lug nuts, centre cap and red caliper",
+   "duplicate mesh of 3ae081b9, which is the clean copy"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "d2f5190ddd5c4bb8a0d974cf9640e166",
+  "name": "1970 Chrysler 300 Hurst",
+  "verdict": "fail",
+  "reasons": [
+   "panel surfaces soft with no shut lines anywhere except a faint bonnet seam; grille is a flat black bar; tail panel renders as untextured rainbow strips",
+   "body floats clear of the ground in front34 and front34_L",
+   "glazing OPAQUE, proven: 0 transparent of 22 materials",
+   "cov=0.813 across 5 body materials"
+  ],
+  "glass": "opaque",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "1abb7a77652c4522b04a36cbe91f3269",
+  "name": "2008 Chrysler Pacifica Model",
+  "verdict": "fail",
+  "reasons": [
+   "duplicate mesh of 99ec73d4 (119,027 vs 119,029 faces); the two sheets are visually indistinguishable tile for tile",
+   "keeping the higher face count"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "39ce068ead664cb1bd01051f55aaee97",
+  "name": "2009 Chrysler Aspen",
+  "verdict": "fail",
+  "reasons": [
+   "broken material assignment: doors and bonnet render as black glassy panels against a white body, differently on each side",
+   "tyres white on one side, black on the other; panels crumpled around the arches",
+   "cov=0.807 across 9 body materials"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "82b9b3f14c1e48febfd567be2c2c26c7",
+  "name": "Chrysler 300 SRT Hellcat",
+  "verdict": "fail",
+  "reasons": [
+   "tyres and rims render in body white, tread included, all four corners",
+   "slammed tuner build on aftermarket five-spokes with green calipers; a '300 SRT Hellcat' is not a production Chrysler at all"
+  ],
+  "glass": "faded",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "3ffe77aa4fab45709f77730412fa2563",
+  "name": "Chrysler_300_srt_hellcat",
+  "verdict": "fail",
+  "reasons": [
+   "duplicate mesh of 82b9b3f1 (115,070 vs 115,240 faces), visually indistinguishable",
+   "same failure: body-colour tyres, fictional tuner spec"
+  ],
+  "glass": "faded",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "f56160ba2d1447919690b3f67d16ba57",
+  "name": "2003 Chrysler 300M FINAL",
+  "verdict": "fail",
+  "reasons": [
+   "melted panel surfaces: bootlid, flanks, roof and bonnet all rippled, no shut lines, grille and headlamps shapeless",
+   "glazing OPAQUE (inferred: 0 transparent of 8 materials); tyres in body grey",
+   "cov=0.900 across 7 body materials — a respray would repaint glass too"
+  ],
+  "glass": "opaque",
+  "glass_certainty": "inferred",
+  "flat_shell": false
+ },
+ {
+  "uid": "17f531a43bea4188b6e697fddfd0bce6",
+  "name": "2003 Chrysler 300M",
+  "verdict": "fail",
+  "reasons": [
+   "duplicate mesh of f56160ba (107,348 vs 107,356 faces), same melted surfacing",
+   "additionally renders PINK under a forced --colour silver, the documented 'renders its own colour' failure",
+   "cov=0.853 across 10 body materials"
+  ],
+  "glass": "clear",
+  "glass_certainty": "inferred",
+  "flat_shell": false
+ },
+ {
+  "uid": "34dc6085b786485db2c8940d4deac7bd",
+  "name": "Chrysler 300",
+  "verdict": "fail",
+  "reasons": [
+   "panel surfaces lumpy and wavy at 66,516 faces — visible dents in the rear quarter, ripples along the roof and flanks, wobbly sill line",
+   "glazing and tyres are fine (clear proven, black tread), but the paint finish is nowhere near premium and a better 300C exists in this same wave"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "e332ef094f94445ba7c01e9f5502b988",
+  "name": "Chrysler Saratoga",
+  "verdict": "fail",
+  "reasons": [
+   "GLASS SHELL: all 16 materials carry transmission=1.0 alpha=0.25, including carpaint.130 — there is no opaque body in the file",
+   "mats=0 cov=0.000 corroborates: the render worker's body classifier found nothing to paint",
+   "I had provisionally PASSED this one from the sheet, where it reads as a solid white 1960 Saratoga with chrome and black tyres, and the glTF overturned it. The sheet is not a witness for a material defect"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "5235df1486544bf08497883056ad557e",
+  "name": "Chrysler Turbine Concept",
+  "verdict": "fail",
+  "reasons": [
+   "GLASS SHELL: 17 of 17 materials transmissive; the car renders as clear/chrome glass",
+   "mats=0 cov=0.000"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "a52d4f01b5b14524878760af939218ae",
+  "name": "Chrysler Lebaron",
+  "verdict": "fail",
+  "reasons": [
+   "GLASS SHELL: 16 of 16 materials transmissive",
+   "mats=0 cov=0.000"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "8f86b49c7b9a4583bf6358bee059df98",
+  "name": "Chrysler Imperial VII",
+  "verdict": "fail",
+  "reasons": [
+   "GLASS SHELL: 20 of 20 materials transmissive",
+   "mats=0 cov=0.000"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "1f8e5f2d79134a9e9a5daa20b0874b4f",
+  "name": "Chrysler Imperial Crown",
+  "verdict": "fail",
+  "reasons": [
+   "GLASS SHELL: 15 of 15 materials transmissive; wheels render as transparent glass discs",
+   "body also floats clear of the ground",
+   "mats=0 cov=0.000"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "2beac70ed3694254b1b294f088aed5ae",
+  "name": "2014 Chrysler 200S",
+  "verdict": "fail",
+  "reasons": [
+   "GLAZING OPAQUE, proven from the glTF: the file's only glazing material is 'glass-tinted_windows', alphaMode=OPAQUE, baseColorFactor alpha=1.0, and there are ZERO transparent materials in 19",
+   "the sheet shows perfect clear glass because the name matches render/handler.py's glass regex and the worker forces transmission=1.0 — this is exactly the Porsche failure",
+   "everything else about the car is excellent (sharp LED headlamp internals, clean shut lines, black tread, full rim faces), which is why it needed the probe rather than the eye",
+   "owner ruling 2026-08-09: opaque glazing FAILS outright, however clean the geometry"
+  ],
+  "glass": "opaque",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "e3d7199acb9b44c1ac2cfe21723be0a6",
+  "name": "2025_chrysler_imperial_s_ev",
+  "verdict": "fail",
+  "reasons": [
+   "not a real vehicle: there is no 2025 Chrysler Imperial S EV. Invented design with a blank grille panel and no badges anywhere",
+   "front and rear lamp units are featureless slabs; panel surfacing soft",
+   "same AI-generated family as the four '2027 Chrysler Aspen/Imperial/Concorde' rows the face band excluded"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "7eca9ce0e2ea405dbdb774ba0cde57b9",
+  "name": "2006 Chrysler Pacifica",
+  "verdict": "fail",
+  "reasons": [
+   "geometry destroyed: giant flat white shards where the wheels should be, no glazing, no discernible vehicle",
+   "cov=0.911 across 12 body materials"
+  ],
+  "glass": "opaque",
+  "glass_certainty": "inferred",
+  "flat_shell": false
+ },
+ {
+  "uid": "cfcbc27da26549bdaaa91b4aa6a61433",
+  "name": "2017 Chrysler Pacifica Limited",
+  "verdict": "fail",
+  "reasons": [
+   "panel surfaces crumpled and dented across the rear quarter, front wing and doors",
+   "interior geometry renders as garbled white shards through the glazing",
+   "cov=0.863 across 4 body materials"
+  ],
+  "glass": "clear",
+  "glass_certainty": "inferred",
+  "flat_shell": false
+ },
+ {
+  "uid": "bd1143b6e5f34f419c636c05fdaa6664",
+  "name": "CHRYSLER C300 IMPROVED",
+  "verdict": "fail",
+  "reasons": [
+   "panels lumpy and wavy at 63,480 faces; matte-black bonnet and boot lid are an aftermarket two-tone wrap, not an OEM finish",
+   "title says 'C300' but the render is plainly a 300C MK1 (LX), not a 1955 C-300 letter car — a title-vs-render mismatch of the kind CLAUDE.md warns about"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "8f2f466f668b4958831cd5f2d6da299a",
+  "name": "Chrysler 300C Limo MK1 2004-2010",
+  "verdict": "fail",
+  "reasons": [
+   "POSE-REJECT before render: h/l=0.191 tripped the floorpan/wreck floor",
+   "checked rather than assumed: a stretch limousine genuinely has a low height-over-length ratio, so this reject is a limitation of the gate, not proof of a broken mesh",
+   "not re-rendered because it is out of scope anyway: a coachbuilt stretch is not a car a UK registration decodes to (same rule as the Binz Mercedes)"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "4dc5b59e55c94f44a5e4a4e45292125d",
+  "name": "2021 Chrysler Pacifica Limited AWD [FREE]",
+  "verdict": "fail",
+  "reasons": [
+   "HARD-REJECT before render: too big 50MB, over the 48MB MAX_OBJ ceiling",
+   "recorded in HARD_REJECTS.json so no future wave spends Sketchfab download quota on it again"
+  ],
+  "glass": "unknown",
+  "glass_certainty": null,
+  "flat_shell": null
+ },
+ {
+  "uid": "13fa6aedfe9e4a688a8e86a8d2d98a96",
+  "name": "Chrysler 1932 CL Imperial",
+  "verdict": "fail",
+  "reasons": [
+   "HARD-REJECT before render: too big 58MB, over the 48MB MAX_OBJ ceiling",
+   "recorded in HARD_REJECTS.json so no future wave spends Sketchfab download quota on it again"
+  ],
+  "glass": "unknown",
+  "glass_certainty": null,
+  "flat_shell": null
+ },
+ {
+  "uid": "eb10ec0715e14734b2440eec6b811274",
+  "name": "Dodge Caravan",
+  "verdict": "fail",
+  "reasons": [
+   "GLASS SHELL: 17 of 17 materials transmissive, mats=0 cov=0.000",
+   "same author family as the Chrysler Lebaron / Imperial VII / Saratoga / Turbine Concept glass shells"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "c6b0aec0c4c642098074465febea9cbc",
+  "name": "1990 Dodge Caravan",
+  "verdict": "fail",
+  "reasons": [
+   "GLASS SHELL: 17 of 17 materials transmissive, mats=0 cov=0.000"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "f03b702b00164ee5935dfcdc208771fd",
+  "name": "2007 Dodge Grand Caravan SXT",
+  "verdict": "fail",
+  "reasons": [
+   "GLAZING OPAQUE, proven: 0 transparent of 11 materials; Windshield1Mtl is alphaMode=OPAQUE at baseColor 0.003",
+   "the sheet manufactured clear glass because 'Windshield' matches the worker's regex",
+   "only 11 materials for a 664,992-face model and no tyre material at all"
+  ],
+  "glass": "opaque",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "3ee97dc465a54de7911a7228c0662b77",
+  "name": "Lancia_ Delta_2008",
+  "verdict": "fail",
+  "reasons": [
+   "this IS the Type 844 Delta, i.e. the car sold in the UK 2011-2015 as the Chrysler Delta — the most UK-relevant find in the whole wave, and it fails",
+   "car floats clear of the ground in every tile; wheels and tyres render entirely white",
+   "white streak artefacts baked across the paint and glazing; a grey number-plate block floats off the front bumper",
+   "glTF: 1 material, 0 transparent — glazing opaque. mats=0 cov=0.000"
+  ],
+  "glass": "opaque",
+  "glass_certainty": "inferred",
+  "flat_shell": false
+ },
+ {
+  "uid": "cfcde7efb94e4deab4ed6cfa983b3f75",
+  "name": "Dodge Grand Caravan (Mk4) 2004",
+  "verdict": "hold-rebadge",
+  "reasons": [
+   "QUALITY PASSES: glazing clear (4 transparent of 16), tyre material 'tire' baseColor 0.106 dielectric roughness 0.897 — the exact known-good dark tyre CLAUDE.md names; full rim faces; defined shut lines; headlamp internals",
+   "NOT MERGED INTO CHRYSLER_CLEAN: the source is titled and badged DODGE. The Dodge crosshair grille and Dodge badges are modelled, and the UK Chrysler Grand Voyager Mk4 wears a different grille and the Chrysler wing badge, so a customer looking up a Voyager would be shown the wrong front end",
+   "owner decision required: same vehicle, different face"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "67dc2c9de41c41c7b3612ddcc131908f",
+  "name": "2005 Dodge Neon",
+  "verdict": "hold-rebadge",
+  "reasons": [
+   "QUALITY PASSES: glazing clear (4 of 16), tyre material 'tire' baseColor 0.106, full rim faces with centre caps, chrome grille slats, headlamp internals, NEON badging",
+   "NOT MERGED INTO CHRYSLER_CLEAN: source is titled and badged DODGE; the UK car was a Chrysler Neon",
+   "owner decision required"
+  ],
+  "glass": "clear",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "00d7098f0a624a08b8e6c9a62c49c360",
+  "name": "Lancia Delta",
+  "verdict": "fail",
+  "reasons": [
+   "glazing OPAQUE (inferred: 1 material, 0 transparent)",
+   "generation not verifiable from the title; the Delta only counts as a Chrysler in its 2008-2014 Type 844 form"
+  ],
+  "glass": "opaque",
+  "glass_certainty": "inferred",
+  "flat_shell": false
+ },
+ {
+  "uid": "2c53fd5981934a17b19c883c34f5dad1",
+  "name": "2004 Dodge Grand Caravan",
+  "verdict": "fail",
+  "reasons": [
+   "car floats clear of the ground in all four tiles; shredded geometry behind the rear wheel arch",
+   "Dodge-badged in any case"
+  ],
+  "glass": "faded",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "54ee704324cc40429b60976d8cea80a2",
+  "name": "Lancia Delta",
+  "verdict": "fail",
+  "reasons": [
+   "glazing OPAQUE, proven: 0 transparent of 19 materials",
+   "generation not verifiable from the title"
+  ],
+  "glass": "opaque",
+  "glass_certainty": "proven",
+  "flat_shell": false
+ },
+ {
+  "uid": "529620651df548939aff2618763ddfea",
+  "name": "Dodge Neon 2004",
+  "verdict": "fail",
+  "reasons": [
+   "SRT-4: bonnet scoop, deep front bumper and rear wing; never a UK-market car",
+   "panel surfaces soft at 68,105 faces, headlamps are shapeless dark blobs with no internals, no badges"
+  ],
+  "glass": "clear",
+  "glass_certainty": "inferred",
+  "flat_shell": false
+ }
+]

@@ -518,5 +518,59 @@
    "shut lines defined; projector lamp internals, mesh grille, boot spoiler, twin exhausts and Atenza badging all present",
    "cov=0.158 healthy, 45 materials, 31 textures - the best-textured saloon in the wave"
   ]
+ },
+ {
+  "uid": "0941c4e2a80d4c4fa0fe37bdbd2f8225",
+  "name": "Mazda CX-7 2006-2012",
+  "verdict": "fail",
+  "reasons": [
+   "EXPLODED PARTS KIT: all four wheels are detached and displaced outboard on bare white disc stubs, the arches are empty, and a loose wheel lies under the car in the side and front34 tiles",
+   "OUT OF SCOPE LIVERY: a green-and-black geometric camouflage vinyl wrap is baked into the body, not a paint colour. No respray can remove it",
+   "body mats=0, cov=0.000 - the worker found nothing that behaves like body paint, consistent with the wrap texture replacing it"
+  ]
+ },
+ {
+  "uid": "19d27d433fe64057babd661934218ffd",
+  "name": "Mazda Atenza (Mazda 6 GG)",
+  "verdict": "pass",
+  "reasons": [
+   "Mazda 6 GG saloon with the MPS-style front bumper. Proportions read correctly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "THIRD TIME THE 1x READ WAS WRONG AND THE ZOOM CORRECTED IT: at thumbnail scale the whole wheel looks white. At 5x the tyre is a distinct dark band around a white multi-spoke rim, with the tread face plainly dark",
+   "glazing clear: several materials are alphaMode=BLEND at alpha 0.1-0.5, and crucially NONE of them carries a glass-like name (they are all 'Meshesmadziocha...'), so the worker's override never fired and the sheet's dark see-through glazing is the file's own",
+   "at 5x the front honeycomb grille resolves as actual mesh, headlamp internals are sharp, the amber indicator lens is separate, and the front bumper is crisp",
+   "cov=0.613 with 5 body materials - high. Do not ship a colour variant without recolour_audit --stamp",
+   "24 materials, 20 textures, not a flat shell"
+  ]
+ },
+ {
+  "uid": "6e844ae575e242939425197a3eae3ae5",
+  "name": "mazda 6 (drift/time-attack build)",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: a stripped competition build, not a road car. Multi-element chassis-mounted rear wing, wide arches, front splitter and canards, exposed side-exit exhaust manifolds, front-mounted intercooler, roll cage, gutted interior with a single bucket seat, purple brake calipers",
+   "doors are removed on one side and hanging open on the other, so the cabin is open to the air in every tile",
+   "no UK registration decodes to this specification"
+  ]
+ },
+ {
+  "uid": "2f2ccf2871894c5e8fec22926b031595",
+  "name": "Mazda 5 (character model)",
+  "verdict": "fail",
+  "reasons": [
+   "NOT A CAR - IT IS A CARTOON CHARACTER. The grille is a pair of pink LIPS and the windscreen carries eyes. The glTF says so outright: the material list holds 'mouth.001', 'Iris.003', 'eye_cornea' and 'eyePupil' alongside body.car and tire.001",
+   "this is the Pixar-Cars style anthropomorphisation; the underlying Mazda 5 CW geometry is clean and the tyres are correctly black (tire.001 at 0.01) and the glazing transparent, which is exactly why it would have passed a numbers-only screen",
+   "caught by reading the material NAMES, not the pixels - worth adding eye/mouth/iris/pupil to a future name gate"
+  ]
+ },
+ {
+  "uid": "dc8b1627a94f4b188df8fe3ec5b2afdb",
+  "name": "3D Scanned Mazda 5 (2010) [Free]",
+  "verdict": "fail",
+  "reasons": [
+   "PHOTOGRAMMETRY SCAN, and it says so in its own title: soft melted panels, baked lighting, baked dirt",
+   "the ground plane is baked into the mesh as a grey slab under the car in every tile",
+   "windows are holes with scan mush behind them rather than glazing; the roof carries the CAPTURE RIG itself - four black scanner heads modelled into the mesh",
+   "cov=1.000, mats=1, glazing opaque"
+  ]
  }
 ]
