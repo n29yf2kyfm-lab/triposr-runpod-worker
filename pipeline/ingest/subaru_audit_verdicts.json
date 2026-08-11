@@ -592,5 +592,44 @@
    "roof and glasshouse partly dissolved; windows are baked opaque texture with no transparency",
    "mats=1 cov=1.000 FULL COVERAGE - one material carries body, glass and tyres"
   ]
+ },
+ {
+  "uid": "c8ce56a9cb0343b9b578d43b985d8a9f",
+  "name": "Subaru Baja Crosstrek",
+  "verdict": "fail",
+  "reasons": [
+   "not a road car: this is a tube-frame Baja desert race buggy - exposed space frame, long-travel coil-over shocks, mesh window nets, no doors, no glazing, off-road knobbly tyres on beadlock rims",
+   "carries only a Subaru star graphic on the flank; no UK registration decodes to this",
+   "title Subaru Baja Crosstrek carried two legitimate nameplates so no title gate could catch it"
+  ]
+ },
+ {
+  "uid": "d3fcc2042f3c49b0af857df37c0b49e7",
+  "name": "Subaru",
+  "verdict": "fail",
+  "reasons": [
+   "not a vehicle: an abstract organic sculpture/creature bust with no wheels, glazing or body panels",
+   "one of my bare-title Subaru recoveries via --allow-uid; the eye settled it, which is what the recovery was for",
+   "mats=1 cov=1.000, a single white material"
+  ]
+ },
+ {
+  "uid": "4ab1f777957c420c941504697ef0ba27",
+  "name": "Subaru",
+  "verdict": "fail",
+  "reasons": [
+   "not a vehicle: a humanoid anime character model in a T-pose (the VTuber named Subaru)",
+   "one of my bare-title Subaru recoveries via --allow-uid"
+  ]
+ },
+ {
+  "uid": "315f187416e3431c95fbd400a903a6eb",
+  "name": "Subaru 1600 Estate",
+  "verdict": "fail",
+  "reasons": [
+   "whole-car transmission shell (mats=0 cov=0.000): the front wing, bonnet and wheel arches render see-through in the side and rear34 tiles",
+   "sixth car in the Nieve5677 cluster with this identical defect",
+   "genuine UK-relevant car (a Leone 1600 4WD estate) lost to a source-side material fault, not to scope - worth re-sourcing from another uploader"
+  ]
  }
 ]
