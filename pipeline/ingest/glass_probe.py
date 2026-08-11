@@ -247,11 +247,29 @@ def probe(uid, stage="staging/jeep", url=None):
         # override fires).
         lo = min(eff_alpha(x) for x in factor_trans)
         verdict = "faded" if lo > 0.94 else "clear"
+    elif trans:
+        # Nothing glazing-named, nothing factor-transparent, but the file DOES
+        # carry texture-alpha transparency under names the pattern misses.
+        # Measured 2026-08-11 on the Mercedes retro-audit, re-validating against
+        # PORSCHE_GLASS.json: 'Porsche 911 GT3 RS (semester 2)' (5fd62615) names
+        # no glazing at all and its only transparent materials are UV6_TX and
+        # UV4_TX, BLEND with 27 textures and factor alpha 1.0. It is ground-truth
+        # CLEAR -- a magenta-backlight render passes light through the glazing --
+        # and the plain "opaque" fall-through below scored it OPAQUE, which is an
+        # outright FAIL under the owner's ruling. That is the same failure the
+        # specGloss and texture-alpha fixes above were both written for: banding
+        # an opacity the file never states.
+        #
+        # It cannot be called "clear" either -- the magnitude of a texture's
+        # alpha is unmeasurable from the JSON chunk, and the material is not
+        # named as glazing, so we do not even know it IS the glazing. Absence of
+        # evidence is "ambiguous", which CLAUDE.md requires be routed to the eye
+        # and NEVER treated as a fail. glass_texture_alpha.py resolves it.
+        verdict = "ambiguous"
     else:
-        # Nothing glazing-named and nothing factor-transparent. If decals carry
-        # texture alpha that is not evidence either way, so this lands on
-        # "opaque" with certainty=inferred, which the caller must route to the
-        # eye rather than fail -- see the certainty note below.
+        # Nothing glazing-named and nothing transparent anywhere in the file.
+        # Still only "opaque" with certainty=inferred, which the caller must
+        # route to the eye rather than fail -- see the certainty note below.
         verdict = "opaque"
 
     # An "opaque" verdict reached with NO glazing-named material in the file is
