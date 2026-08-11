@@ -252,6 +252,53 @@ absent from local entirely, and that each "lost" one is present locally with
   those from OEM performance variants: an AMG GT Black Series IS a road car a reg decodes
   to; black wheels and a lowered stance alone are spec variation, not a kit.
 
+## `paintMaterialNames` is BLENDER's name space, not the glTF's (2026-08-11)
+
+`mat_audit` runs on the render worker, i.e. inside Blender, so the names it records
+are Blender IDs. `respray_gltf.py` edits the glTF JSON and matches literally, and the
+two name spaces disagree in two measured ways:
+
+- **Blender invents `.001`/`.002` siblings.** `C1_Paint.001` was recorded against a glTF
+  holding a single `C1_Paint`; `pan_paint.002` against a file holding only
+  `pan_paint.001`; `CarPaint.001` against a file holding `CarPaint`.
+- **Blender truncates at 63 characters** (`bpy.types.ID.name`'s cap).
+  `…_2021Coloured_Materia` was recorded for a real `…_2021Coloured_Material`.
+
+The symptom is `respray failed: "materials not present in <file>: [...]"`, which reads
+like a bad audit and is actually a name-space mismatch. FIXED by
+`respray_gltf.resolve_names`, which is deliberately narrow so it cannot widen paint onto
+trim: an exact hit stops there, and only an unmatched name falls back to its `.NNN` base,
+then `.NNN` siblings, then a prefix **only** at exactly 63 chars. It still raises when
+NOTHING resolves — painting nothing would ship eight identical files.
+
+**Do not "fix" this by relaxing the raise instead.** The raise is the only thing standing
+between a no-op respray and eight identical GLBs; what makes the resolver safe is that
+`recolour_audit --stamp` still renders and measures the result downstream.
+
+## `pgrep -f` matches the harness wrapper — a wait loop can never exit (2026-08-11)
+
+Every Bash tool call runs inside a wrapper shell **whose command line contains the
+command text**, so `pgrep -f 'bash /tmp/foo.sh'` matches any tool call that merely
+mentions that string — including the very wait loop doing the matching:
+
+```
+until ! pgrep -f 'bash /tmp/big_chain.sh'; do sleep 20; done   # never exits
+```
+
+Measured: the bake chain exited at 10:27 and both waiters (the chained
+`after_bake.sh` and a `run_in_background` `until` loop) were still spinning 17 minutes
+later against two wrapper shells. Nothing was wrong with the work; the guard was
+matching itself. This is the same failure class as `supervisor.sh`'s `running()`.
+
+Guard against it: match a pattern the wrapper cannot contain (`pgrep -f
+'^python3 -u pipeline/…'`), or better, derive terminal state from an artefact — the
+log's last line, a DONE file, an exit-code marker echoed by the script itself
+(`echo "STAMP_STAGE_EXIT=$?"`), and wait on THAT. `supervisor.sh:reconcile` already
+does this for the same reason.
+
+Related trap already paid for: `pkill` on a broad pattern has killed this session's own
+shell (exit 144) more than once. Kill by PID.
+
 ## Repinning a RunPod template does NOT update running workers (learned 2026-08-01)
 
 PATCHing `imageName` on template `hrtuk90f9p` changes what NEW workers pull.
