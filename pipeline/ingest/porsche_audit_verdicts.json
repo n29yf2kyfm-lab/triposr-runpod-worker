@@ -154,13 +154,14 @@
  {
   "uid": "269d8a5da4254109922a1af0dd2eb6b6",
   "name": "Porsche Panamera Turbo Liftback 2023",
-  "verdict": "pass",
+  "verdict": "fail",
   "reasons": [
    "proportions read as Panamera (972) instantly; front 3/4 strong",
    "tyres black rubber, tread face clear in front34 and rear34",
    "glazing transparent, cabin visible",
    "rim faces present with red calipers in all four views",
-   "headlamp internals present, grille and shut lines defined"
+   "headlamp internals present, grille and shut lines defined",
+   "GLAZING OPAQUE — verified from the shipped glTF and a magenta-backlight render. The wave sheet showed clear glass because render/handler.py forces transmission=1.0 on any material NAMED glass/window; the sheet is structurally blind to this defect."
   ]
  },
  {
@@ -278,13 +279,14 @@
  {
   "uid": "5bae7080e6e14151a8f74b14573fd8cb",
   "name": "2020 Porsche Cayenne GTS Coupe",
-  "verdict": "pass",
+  "verdict": "fail",
   "reasons": [
    "proportions read as Cayenne Coupe instantly; front 3/4 strong",
    "tyres READ WHITE AT FULL-SHEET SCALE BUT ARE DARK GREY/BLACK AT 2x - the tread face is plainly darker than the white rim in both 3/4 tiles; classic thumbnail trap",
    "glazing transparent, cabin visible",
    "rim faces present (10-spoke) in all four views",
-   "headlamp internals present, grille slats crisp, shut lines defined"
+   "headlamp internals present, grille slats crisp, shut lines defined",
+   "GLAZING OPAQUE — verified from the shipped glTF and a magenta-backlight render. The wave sheet showed clear glass because render/handler.py forces transmission=1.0 on any material NAMED glass/window; the sheet is structurally blind to this defect."
   ]
  },
  {
@@ -1015,13 +1017,14 @@
  {
   "uid": "06f8003040f440afb8c60b5db2ec9d77",
   "name": "Porsche 911 Carrera rigged and carbon fiber",
-  "verdict": "pass",
+  "verdict": "fail",
   "reasons": [
    "991.2 Carrera S proportions correct; front 3/4 strong",
    "tyres black rubber, tread face clear in front34 and rear34",
    "glazing reads as glass, not body colour",
    "dark multi-spoke rim faces present in all views",
-   "front intake and lamp internals defined; panel reflections clean"
+   "front intake and lamp internals defined; panel reflections clean",
+   "GLAZING OPAQUE — verified from the shipped glTF and a magenta-backlight render. The wave sheet showed clear glass because render/handler.py forces transmission=1.0 on any material NAMED glass/window; the sheet is structurally blind to this defect."
   ]
  },
  {
@@ -1107,7 +1110,7 @@
  },
  {
   "uid": "15d895b104374790b715be320277772e",
-  "name": "Magnus Walker\u2019s 1971 Porsche 911 \u201c277\u201d",
+  "name": "Magnus Walker’s 1971 Porsche 911 “277”",
   "verdict": "fail",
   "reasons": [
    "OUT OF SCOPE: one-off celebrity outlaw build with baked competition livery - 277 roundels, sponsor decals, blue lower panels; not a stock nameplate a reg decodes to",
@@ -1294,13 +1297,14 @@
  {
   "uid": "2c929bad2b6c41a2a35867e5d8a4f5f3",
   "name": "Porsche 911 992 Targa S",
-  "verdict": "pass",
+  "verdict": "fail",
   "reasons": [
    "992 Targa proportions read instantly; front 3/4 strong",
    "tyres black rubber, tread face clear in both 3/4 bands",
    "glazing transparent, cabin visible",
    "black mesh rim faces present in all four views",
-   "front intake slats, lamp internals and shut lines defined"
+   "front intake slats, lamp internals and shut lines defined",
+   "GLAZING OPAQUE — verified from the shipped glTF and a magenta-backlight render. The wave sheet showed clear glass because render/handler.py forces transmission=1.0 on any material NAMED glass/window; the sheet is structurally blind to this defect."
   ]
  },
  {
@@ -1341,13 +1345,14 @@
  {
   "uid": "318cfb7279a94e8f96095ec0236f02ad",
   "name": "Porsche 911 992 Carrera S",
-  "verdict": "pass",
+  "verdict": "fail",
   "reasons": [
    "992 Carrera S proportions read instantly; front 3/4 strong",
    "tyres black rubber, tread face and sidewall clear in both 3/4 bands",
    "glazing transparent",
    "black rim faces present in all four views",
-   "headlamp internals sharp, front intake slats and shut lines defined"
+   "headlamp internals sharp, front intake slats and shut lines defined",
+   "GLAZING OPAQUE — verified from the shipped glTF and a magenta-backlight render. The wave sheet showed clear glass because render/handler.py forces transmission=1.0 on any material NAMED glass/window; the sheet is structurally blind to this defect."
   ]
  },
  {
@@ -1553,14 +1558,15 @@
  {
   "uid": "58ac9d802d054c4eae0fd09988ad4f33",
   "name": "2023 Porsche 911 GT3 RS",
-  "verdict": "pass",
+  "verdict": "fail",
   "reasons": [
    "992 GT3 RS proportions read instantly - correct swan-neck wing, wheel-arch louvres and centre radiator; front 3/4 strong",
    "tyres black rubber, tread face clear in both 3/4 bands",
    "glazing transparent, cage visible through the side glass",
    "dark rim faces present in all four views, yellow PCCB calipers",
    "lamp internals, aero blades and shut lines defined",
-   "road-legal GT3 RS, in scope"
+   "road-legal GT3 RS, in scope",
+   "GLAZING OPAQUE — verified from the shipped glTF and a magenta-backlight render. The wave sheet showed clear glass because render/handler.py forces transmission=1.0 on any material NAMED glass/window; the sheet is structurally blind to this defect."
   ]
  },
  {
@@ -1693,7 +1699,7 @@
  {
   "uid": "70713d059dc14beeb8f1b2a703bb920d",
   "name": "2023 Porsche 911 4.0 GT3",
-  "verdict": "pass",
+  "verdict": "fail",
   "reasons": [
    "992 GT3 proportions read instantly; front 3/4 strong",
    "tyres black rubber, tread face clear in both 3/4 bands",
@@ -1701,7 +1707,8 @@
    "silver rim faces present in all four views",
    "front bumper honeycomb mesh is real geometry, door shut line and handle defined",
    "marginal: headlamp internals are shallow - below par but above the fail bar",
-   "number plate carries an iVAN'S MOTOR vendor text texture"
+   "number plate carries an iVAN'S MOTOR vendor text texture",
+   "GLAZING OPAQUE — verified from the shipped glTF and a magenta-backlight render. The wave sheet showed clear glass because render/handler.py forces transmission=1.0 on any material NAMED glass/window; the sheet is structurally blind to this defect."
   ]
  },
  {
@@ -2023,14 +2030,15 @@
  {
   "uid": "b668f8a336b54954b04fa0dade507300",
   "name": "2025 Porsche 911 Targa 4 GTS (992.2)",
-  "verdict": "pass",
+  "verdict": "fail",
   "reasons": [
    "992.2 Targa 4 GTS proportions read instantly; front 3/4 strong",
    "tyres black rubber on dark rims in the side and rear34 tiles - the tread band crop mostly caught floor on this framing, so the call is from the tiles",
    "glazing transparent, cabin and Targa hoop read correctly",
    "dark rim faces present in all four views",
    "lamp internals, intake slats and shut lines defined",
-   "near-identical face count and title to b8488f94 - leave the grouping to dupe_check"
+   "near-identical face count and title to b8488f94 - leave the grouping to dupe_check",
+   "GLAZING OPAQUE — verified from the shipped glTF and a magenta-backlight render. The wave sheet showed clear glass because render/handler.py forces transmission=1.0 on any material NAMED glass/window; the sheet is structurally blind to this defect."
   ]
  },
  {

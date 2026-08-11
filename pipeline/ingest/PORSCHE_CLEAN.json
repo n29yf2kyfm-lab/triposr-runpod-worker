@@ -34,14 +34,6 @@
  },
  {
   "model": "911",
-  "trim": "Carrera",
-  "year": "",
-  "faces": 242822,
-  "uid": "06f8003040f440afb8c60b5db2ec9d77",
-  "title": "Porsche 911 Carrera rigged and carbon fiber"
- },
- {
-  "model": "911",
   "trim": "Turbo S",
   "year": "",
   "faces": 538775,
@@ -134,14 +126,6 @@
   "title": "Porsche Taycan"
  },
  {
-  "model": "Panamera",
-  "trim": "Turbo",
-  "year": "2023",
-  "faces": 601749,
-  "uid": "269d8a5da4254109922a1af0dd2eb6b6",
-  "title": "Porsche Panamera Turbo Liftback 2023"
- },
- {
   "model": "911",
   "trim": "Turbo S 3.6",
   "year": "1992",
@@ -184,24 +168,6 @@
   "faces": 269513,
   "uid": "2c4a64ebf4ba4da29b119f6e3ac7b1fa",
   "title": "2024 Porsche 718 Spyder RS"
- },
- {
-  "model": "911",
-  "trim": "Targa S",
-  "year": "",
-  "faces": 576437,
-  "uid": "2c929bad2b6c41a2a35867e5d8a4f5f3",
-  "title": "Porsche 911 992 Targa S",
-  "generation": "992"
- },
- {
-  "model": "911",
-  "trim": "Carrera S",
-  "year": "",
-  "faces": 531686,
-  "uid": "318cfb7279a94e8f96095ec0236f02ad",
-  "title": "Porsche 911 992 Carrera S",
-  "generation": "992"
  },
  {
   "model": "911",
@@ -320,14 +286,6 @@
  },
  {
   "model": "911",
-  "trim": "GT3 RS",
-  "year": "2023",
-  "faces": 539224,
-  "uid": "58ac9d802d054c4eae0fd09988ad4f33",
-  "title": "2023 Porsche 911 GT3 RS"
- },
- {
-  "model": "911",
   "trim": null,
   "year": "",
   "faces": 116367,
@@ -341,14 +299,6 @@
   "faces": 452693,
   "uid": "5ab56c0a7666450cabb59d5e44539a12",
   "title": "2019 Porsche 718 Boxster T"
- },
- {
-  "model": "Cayenne",
-  "trim": "GTS Coupe",
-  "year": "2020",
-  "faces": 454597,
-  "uid": "5bae7080e6e14151a8f74b14573fd8cb",
-  "title": "2020 Porsche Cayenne GTS Coupe"
  },
  {
   "model": "930",
@@ -422,14 +372,6 @@
   "uid": "706606b037ff458ea229042ea52cd1bd",
   "title": "2015 Porsche Boxster GTS (718)",
   "generation": "718"
- },
- {
-  "model": "911",
-  "trim": "GT3",
-  "year": "2023",
-  "faces": 564904,
-  "uid": "70713d059dc14beeb8f1b2a703bb920d",
-  "title": "2023 Porsche 911 4.0 GT3"
  },
  {
   "model": "911",
@@ -640,15 +582,6 @@
   "faces": 461047,
   "uid": "b5a64fc6e75f4618bd43cf81aecce3f1",
   "title": "Porsche Macan GTS 2022"
- },
- {
-  "model": "911",
-  "trim": "Targa 4 GTS",
-  "year": "2025",
-  "faces": 297783,
-  "uid": "b668f8a336b54954b04fa0dade507300",
-  "title": "2025 Porsche 911 Targa 4 GTS (992.2)",
-  "generation": "992.2"
  },
  {
   "model": "911",

@@ -402,6 +402,35 @@ these exact criteria, in this order, when auditing individually.
 - rear bumper and diffuser soft versus the real car
 - door and bonnet shut lines not defined
 
+**THE AUDIT SHEET IS STRUCTURALLY BLIND TO GLAZING DEFECTS (found 2026-08-11).**
+Do not judge glass from a wave sheet. `render/handler.py` matches material NAMES against
+`(glass|window|windscreen|windshield|screen|vidro|glas|scheibe|fenster)` and forces
+`transmission=1.0, alpha=1.0, IOR=1.45` plus the studio tint onto every match — the comment
+at handler.py:130 states it outright: "the worker OVERRIDES whatever glass material the GLB
+ships with, so the GLB has no say". A car whose glazing is fully OPAQUE therefore renders
+PERFECT CLEAR GLASS in its sheet, provided the material happens to be named glass-like.
+
+This is stronger than the evidence rule above. For tyres the sheet is a weak witness; for
+glass it is no witness at all. It also explains why clay shells DO show opaque windows —
+their glazing carries a non-matching name (carpaint, Meshpart1Mtl, dummy_material_13), so
+no override fires and the truth shows through. The defect is invisible exactly when the
+model is otherwise well-built.
+
+Measured on Porsche: 8 of 107 cars that had been passed with an explicit "glazing
+transparent" reason are actually opaque. Six had name-matched glass materials, so the
+worker manufactured the clear glass those reasons described; two were clay shells misread.
+
+The test that works, in order of cost:
+  1. glTF probe (free, decisive): pull the JSON by HTTP Range and check the glazing
+     material for `alphaMode` BLEND/MASK, a baseColorFactor alpha below 1.0, or
+     `KHR_materials_transmission`. Zero transparent materials in the file = opaque.
+  2. Magenta-backlight render of the SHIPPED GLB: an emissive plane behind the car;
+     transparent glazing glows magenta, opaque glazing stays body-coloured.
+Judge "clear vs faded" only from these. Under backlight, genuinely heavy glazing
+(alpha 0.78-0.94) still resolves interior and far-side openings — on Porsche the shipped
+files were bimodal, either properly transparent or not transparent at all, so "faded"
+came out zero.
+
 **Owner ruling 2026-08-09 — glazing must read as GLASS.** A car whose windows render
 opaque body-colour (clay models, baked shells, missing glass materials) FAILS the audit
 outright, regardless of how clean the geometry is — it reads as a prototype in the viewer,
