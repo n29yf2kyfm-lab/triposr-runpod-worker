@@ -1,20 +1,24 @@
 [
  {
-  "model": "911 Targa 4S",
+  "model": "911",
+  "trim": "Targa 4S",
   "year": "2021",
   "faces": 170980,
   "uid": "03af3f482d9144bd993e580441ff3225",
   "title": "2021 Porsche 911 Targa 4S Highmodel"
  },
  {
-  "model": "Cayman S (981)",
+  "model": "Cayman",
+  "trim": "S",
   "year": "2014",
   "faces": 79638,
   "uid": "03e383400bb74626bcdedbbe198a5849",
-  "title": "2014 Porsche Cayman S (981)"
+  "title": "2014 Porsche Cayman S (981)",
+  "generation": "981"
  },
  {
   "model": "911",
+  "trim": null,
   "year": "2018",
   "faces": 71149,
   "uid": "04f556e0a2aa425185dcee7f7f1e2ff1",
@@ -22,48 +26,57 @@
  },
  {
   "model": "959",
+  "trim": null,
   "year": "",
   "faces": 154600,
   "uid": "0530aa8fa4b74427a71c961a5bdd7087",
   "title": "Porsche 959"
  },
  {
-  "model": "911 Carrera",
+  "model": "911",
+  "trim": "Carrera",
   "year": "",
   "faces": 242822,
   "uid": "06f8003040f440afb8c60b5db2ec9d77",
   "title": "Porsche 911 Carrera rigged and carbon fiber"
  },
  {
-  "model": "911 Turbo S",
+  "model": "911",
+  "trim": "Turbo S",
   "year": "",
   "faces": 538775,
   "uid": "081cf9a708bb4b8b8f14d55b56ffdfe9",
   "title": "Porsche 911 Turbo S"
  },
  {
-  "model": "Cayenne Turbo S",
+  "model": "Cayenne",
+  "trim": "Turbo S",
   "year": "2009",
   "faces": 176909,
   "uid": "09c6832d4e4447c8b3992d7c51adbd8c",
   "title": "2009 Porsche Cayenne Turbo S"
  },
  {
-  "model": "911 Targa 4S Heritage Design (992)",
+  "model": "911",
+  "trim": "Targa 4S Heritage Design",
   "year": "2021",
   "faces": 220196,
   "uid": "0e118f0e927645a1876a4f213cddb0f0",
-  "title": "2021 Porsche 911 Targa 4S Heritage Design (992)"
+  "title": "2021 Porsche 911 Targa 4S Heritage Design (992)",
+  "generation": "992"
  },
  {
-  "model": "911 Turbo (991)",
+  "model": "911",
+  "trim": "Turbo",
   "year": "2014",
   "faces": 85607,
   "uid": "0fadf286b5804c03ac2e35d5db6c8a91",
-  "title": "2014 Porsche 911 Turbo (991)"
+  "title": "2014 Porsche 911 Turbo (991)",
+  "generation": "991"
  },
  {
-  "model": "Boxster Spyder",
+  "model": "Boxster",
+  "trim": "Spyder",
   "year": "2010",
   "faces": 1117008,
   "uid": "122a977cf6be4d639a9e239c6d859c44",
@@ -71,202 +84,243 @@
  },
  {
   "model": "Macan",
+  "trim": null,
   "year": "2020",
   "faces": 101937,
   "uid": "14e73d3348d44fabb01ced4aa60c7db6",
   "title": "2020 Porsche Macan"
  },
  {
-  "model": "911 GT3 (992-2)",
+  "model": "911",
+  "trim": "GT3",
   "year": "2025",
   "faces": 308387,
   "uid": "1503f8d08f154ec7ab52f95a99c55134",
-  "title": "2025 Porsche 911 GT3 (992-2)"
+  "title": "2025 Porsche 911 GT3 (992-2)",
+  "generation": "992-2"
  },
  {
-  "model": "911 (991.2) GT3 RS Weissach Package",
+  "model": "911",
+  "trim": "GT3 RS Weissach Package",
   "year": "2019",
   "faces": 174829,
   "uid": "1ab438e7fc444fedb6f1ee255f21902a",
-  "title": "2019 Porsche 911 (991.2) GT3 RS Weissach Package"
+  "title": "2019 Porsche 911 (991.2) GT3 RS Weissach Package",
+  "generation": "991.2"
  },
  {
-  "model": "718 Spyder",
+  "model": "718",
+  "trim": "Spyder",
   "year": "2020",
   "faces": 131869,
   "uid": "1bb367ebaee14829a24e9b5444c15087",
   "title": "2020 Porsche 718 Spyder"
  },
  {
-  "model": "911 GT3 (991)",
+  "model": "911",
+  "trim": "GT3",
   "year": "2014",
   "faces": 77262,
   "uid": "249b3088ba9449038d89670c9cd8d789",
-  "title": "2014 Porsche 911 GT3 (991)"
+  "title": "2014 Porsche 911 GT3 (991)",
+  "generation": "991"
  },
  {
   "model": "Taycan",
+  "trim": null,
   "year": "",
   "faces": 188782,
   "uid": "259b0294bc254b1f85defaf5ea5bc34c",
   "title": "Porsche Taycan"
  },
  {
-  "model": "Panamera Turbo Liftback",
+  "model": "Panamera",
+  "trim": "Turbo",
   "year": "2023",
   "faces": 601749,
   "uid": "269d8a5da4254109922a1af0dd2eb6b6",
   "title": "Porsche Panamera Turbo Liftback 2023"
  },
  {
-  "model": "911 (964) Turbo S 3.6",
+  "model": "911",
+  "trim": "Turbo S 3.6",
   "year": "1992",
   "faces": 93656,
   "uid": "27240ad1a825434f99e980d7c904c3d0",
-  "title": "1992 Porsche 911 (964) Turbo S 3.6"
+  "title": "1992 Porsche 911 (964) Turbo S 3.6",
+  "generation": "964"
  },
  {
-  "model": "911 Turbo S Exclusive Series 991.2",
+  "model": "911",
+  "trim": "Turbo S Exclusive Series",
   "year": "2017",
   "faces": 71459,
   "uid": "2826fd94a234422d94c88f2f5ef9fdfd",
-  "title": "2017 Porsche 911 Turbo S Exclusive Series 991.2"
+  "title": "2017 Porsche 911 Turbo S Exclusive Series 991.2",
+  "generation": "991.2"
  },
  {
-  "model": "911 Turbo (996)",
+  "model": "911",
+  "trim": "Turbo",
   "year": "2000",
   "faces": 84330,
   "uid": "28dbd43350bf462c806d5ba3d608e1cc",
-  "title": "Porsche 911 Turbo (996) 2000 by Alex.Ka."
+  "title": "Porsche 911 Turbo (996) 2000 by Alex.Ka.",
+  "generation": "996"
  },
  {
-  "model": "911 GT2 (993)",
+  "model": "911",
+  "trim": "GT2",
   "year": "1995",
   "faces": 217966,
   "uid": "2b3843db0f784ab0a8702f6361d16d2a",
-  "title": "1995 Porsche 911 GT2 (993)"
+  "title": "1995 Porsche 911 GT2 (993)",
+  "generation": "993"
  },
  {
-  "model": "718 Spyder RS",
+  "model": "718",
+  "trim": "Spyder RS",
   "year": "2024",
   "faces": 269513,
   "uid": "2c4a64ebf4ba4da29b119f6e3ac7b1fa",
   "title": "2024 Porsche 718 Spyder RS"
  },
  {
-  "model": "911 992 Targa S",
+  "model": "911",
+  "trim": "Targa S",
   "year": "",
   "faces": 576437,
   "uid": "2c929bad2b6c41a2a35867e5d8a4f5f3",
-  "title": "Porsche 911 992 Targa S"
+  "title": "Porsche 911 992 Targa S",
+  "generation": "992"
  },
  {
-  "model": "911 992 Carrera S",
+  "model": "911",
+  "trim": "Carrera S",
   "year": "",
   "faces": 531686,
   "uid": "318cfb7279a94e8f96095ec0236f02ad",
-  "title": "Porsche 911 992 Carrera S"
+  "title": "Porsche 911 992 Carrera S",
+  "generation": "992"
  },
  {
-  "model": "911 Carrera",
+  "model": "911",
+  "trim": "Carrera",
   "year": "1994",
   "faces": 490583,
   "uid": "32b33f05cb4f457a87428757f90298ce",
   "title": "Porsche 911 Carrera 1994"
  },
  {
-  "model": "718 Cayman GT4",
+  "model": "718 Cayman",
+  "trim": "GT4",
   "year": "2020",
   "faces": 199186,
   "uid": "357999b7e87642e38062623127a61bb2",
   "title": "2020 Porsche 718 Cayman GT4"
  },
  {
-  "model": "Cayman S",
+  "model": "Cayman",
+  "trim": "S",
   "year": "",
   "faces": 609254,
   "uid": "37406df07eba477e898806606ccfeb5e",
   "title": "Porsche Cayman S"
  },
  {
-  "model": "911 GT2 RS Weissach Package",
+  "model": "911",
+  "trim": "GT2 RS Weissach Package",
   "year": "2018",
   "faces": 225114,
   "uid": "3d84bed1c5794403a80580eebc2a4c72",
   "title": "2018 Porsche 911 GT2 RS Weissach Package"
  },
  {
-  "model": "911 (964) Carrera 4",
+  "model": "911",
+  "trim": "Carrera 4",
   "year": "1989",
   "faces": 299580,
   "uid": "3f1a399631a84f55b1d1cd04310e361f",
-  "title": "1989 Porsche 911 (964) Carrera 4"
+  "title": "1989 Porsche 911 (964) Carrera 4",
+  "generation": "964"
  },
  {
-  "model": "911 GT2 RS",
+  "model": "911",
+  "trim": "GT2 RS",
   "year": "",
   "faces": 244470,
   "uid": "41419345868e406eaec8a271e33de3c1",
   "title": "Porsche 911 GT2 RS With Angle Eyes"
  },
  {
-  "model": "911 GT3 Touring 992",
+  "model": "911",
+  "trim": "GT3 Touring",
   "year": "2022",
   "faces": 237280,
   "uid": "4167ba8ff6dd49fc8300c48a8fe097a0",
-  "title": "2022_ Porsche_911_GT3_ Touring_992_remix2"
+  "title": "2022_ Porsche_911_GT3_ Touring_992_remix2",
+  "generation": "992"
  },
  {
-  "model": "911 Turbo S (991.2)",
+  "model": "911",
+  "trim": "Turbo S",
   "year": "2016",
   "faces": 170278,
   "uid": "45982328a4bc458199da0c9f95b4f28d",
-  "title": "2016 Porsche 911 Turbo S (991.2)"
+  "title": "2016 Porsche 911 Turbo S (991.2)",
+  "generation": "991.2"
  },
  {
-  "model": "Cayenne Turbo Coupe",
+  "model": "Cayenne",
+  "trim": "Turbo Coupe",
   "year": "2020",
   "faces": 118523,
   "uid": "4774f59cbb1146be81cffd795f61a9f6",
   "title": "2020 Porsche Cayenne Turbo Coupe"
  },
  {
-  "model": "718 Boxster S",
+  "model": "718 Boxster",
+  "trim": "S",
   "year": "2017",
   "faces": 169085,
   "uid": "4b52cfc4ce32438aa732880fae81c047",
   "title": "2017 Porsche 718 Boxster S"
  },
  {
-  "model": "911 GT3",
+  "model": "911",
+  "trim": "GT3",
   "year": "",
   "faces": 234596,
   "uid": "4b7c65bfd3bd4eacb14183cfbcb07565",
   "title": "Porsche 911 GT3 - Satin Black"
  },
  {
-  "model": "911 Carrera 4S",
+  "model": "911",
+  "trim": "Carrera 4S",
   "year": "",
   "faces": 652660,
   "uid": "4b989f15962e457cbf9f2990528bce52",
   "title": "Porsche 911 Carrera 4S"
  },
  {
-  "model": "Taycan Turbo GT Weissach Package",
+  "model": "Taycan",
+  "trim": "Turbo GT Weissach Package",
   "year": "2025",
   "faces": 281228,
   "uid": "4e1abafe7cf5413587a421377624ba08",
   "title": "2025 Porsche Taycan Turbo GT Weissach Package"
  },
  {
-  "model": "944 Turbo",
+  "model": "944",
+  "trim": "Turbo",
   "year": "1991",
   "faces": 91043,
   "uid": "570249cd14c342ea947b05fee05245d9",
   "title": "1991 Porsche 944 Turbo"
  },
  {
-  "model": "911 GT3 RS",
+  "model": "911",
+  "trim": "GT3 RS",
   "year": "2023",
   "faces": 539224,
   "uid": "58ac9d802d054c4eae0fd09988ad4f33",
@@ -274,48 +328,55 @@
  },
  {
   "model": "911",
+  "trim": null,
   "year": "",
   "faces": 116367,
   "uid": "597734ea90bc472fb52d937feed3af14",
   "title": "Porsche 911"
  },
  {
-  "model": "718 Boxster T",
+  "model": "718 Boxster",
+  "trim": "T",
   "year": "2019",
   "faces": 452693,
   "uid": "5ab56c0a7666450cabb59d5e44539a12",
   "title": "2019 Porsche 718 Boxster T"
  },
  {
-  "model": "Cayenne GTS Coupe",
+  "model": "Cayenne",
+  "trim": "GTS Coupe",
   "year": "2020",
   "faces": 454597,
   "uid": "5bae7080e6e14151a8f74b14573fd8cb",
   "title": "2020 Porsche Cayenne GTS Coupe"
  },
  {
-  "model": "930 TURBO '75",
+  "model": "930",
+  "trim": "Turbo",
   "year": "",
   "faces": 61218,
   "uid": "5dcc96f1f7fb4ff5a577b5c9f106275d",
   "title": "PORSCHE 930 TURBO '75"
  },
  {
-  "model": "911 GT3 RS",
+  "model": "911",
+  "trim": "GT3 RS",
   "year": "",
   "faces": 290736,
   "uid": "5fd62615f72a4012a5ebc15cd4c64461",
   "title": "Porsche 911 GT3 RS (semester 2)"
  },
  {
-  "model": "Panamera Turbo",
+  "model": "Panamera",
+  "trim": "Turbo",
   "year": "2019",
   "faces": 91418,
   "uid": "5fe43aaf8a2d4277859d79884aa4ad3e",
   "title": "2019 Porsche Panamera Turbo"
  },
  {
-  "model": "911 Speedster Heritage Edition",
+  "model": "911",
+  "trim": "Speedster Heritage Edition",
   "year": "2019",
   "faces": 176117,
   "uid": "626f4a5d85d14480939eb8bb3c217c30",
@@ -323,55 +384,65 @@
  },
  {
   "model": "959",
+  "trim": null,
   "year": "1987",
   "faces": 313917,
   "uid": "678ed0b096bd4b99839888eef6075666",
   "title": "1987 Porsche 959"
  },
  {
-  "model": "914/6GT",
+  "model": "914/6",
+  "trim": "GT",
   "year": "",
   "faces": 388844,
   "uid": "67a3239621ec4d4091578d0b372e1aca",
   "title": "PORSCHE 914/6GT"
  },
  {
-  "model": "Turbo 911S",
+  "model": "911",
+  "trim": "Turbo",
   "year": "",
   "faces": 434519,
   "uid": "69a1c529af8a49ef8c6c3fa1c79b54c1",
   "title": "Porsche_ Turbo_911S"
  },
  {
-  "model": "911 GT3RS",
+  "model": "911",
+  "trim": "GT3 RS",
   "year": "",
   "faces": 662705,
   "uid": "6d135fddeb87429898034474fc0f5c0c",
   "title": "Porsche 911 GT3RS"
  },
  {
-  "model": "Boxster GTS (718)",
+  "model": "Boxster",
+  "trim": "GTS",
   "year": "2015",
   "faces": 91504,
   "uid": "706606b037ff458ea229042ea52cd1bd",
-  "title": "2015 Porsche Boxster GTS (718)"
+  "title": "2015 Porsche Boxster GTS (718)",
+  "generation": "718"
  },
  {
-  "model": "911 4.0 GT3",
+  "model": "911",
+  "trim": "GT3",
   "year": "2023",
   "faces": 564904,
   "uid": "70713d059dc14beeb8f1b2a703bb920d",
   "title": "2023 Porsche 911 4.0 GT3"
  },
  {
-  "model": "911 992 gt3 rs",
+  "model": "911",
+  "trim": "GT3 RS",
   "year": "",
   "faces": 253700,
   "uid": "74ebbd6423154e879e43dd2e1df7cdd1",
-  "title": "Porsche_911992_gt3_rs"
+  "title": "Porsche_911992_gt3_rs",
+  "generation": "992"
  },
  {
-  "model": "911 GT3",
+  "model": "911",
+  "trim": "GT3",
   "year": "",
   "faces": 239145,
   "uid": "78d5c47ab2554c2592b7e499179a0792",
@@ -379,97 +450,118 @@
  },
  {
   "model": "911",
+  "trim": null,
   "year": "",
   "faces": 241391,
   "uid": "7b0f4b60716f4b23a0714cf9303a0802",
   "title": "Porsche 911 3D Model GOLDEN"
  },
  {
-  "model": "911 Targa 4S (991.2)",
+  "model": "911",
+  "trim": "Targa 4S",
   "year": "2019",
   "faces": 74791,
   "uid": "7c503ca4615148d88c98466b45a84c0a",
-  "title": "2019 Porsche 911 Targa 4S (991.2)"
+  "title": "2019 Porsche 911 Targa 4S (991.2)",
+  "generation": "991.2"
  },
  {
-  "model": "911 GT3 RS (997.2) '11",
+  "model": "911",
+  "trim": "GT3 RS",
   "year": "",
   "faces": 359910,
   "uid": "7e25beb0e2c841f0bf51f94fde651fd4",
-  "title": "Porsche 911 GT3 RS (997.2) '11"
+  "title": "Porsche 911 GT3 RS (997.2) '11",
+  "generation": "997.2"
  },
  {
-  "model": "911 carrera s",
+  "model": "911",
+  "trim": "Carrera S",
   "year": "2015",
   "faces": 242744,
   "uid": "7fd67e408409449c98e3c7be35b40aa7",
   "title": "2015 porsche 911 carrera s rigged  mid-poly"
  },
  {
-  "model": "Panamera Turbo",
+  "model": "Panamera",
+  "trim": "Turbo",
   "year": "2010",
   "faces": 953290,
   "uid": "8b96f6a0aca3444aada943f349ae36f0",
   "title": "2010 Porsche Panamera Turbo"
  },
  {
-  "model": "Carrara GT",
+  "model": "Carrera GT",
+  "trim": null,
   "year": "",
   "faces": 172533,
   "uid": "90d32f48d4964bc9b5a9df88fcc3aa3d",
   "title": "Porsche Carrara GT"
  },
  {
-  "model": "911 GT3 RS",
+  "model": "911",
+  "trim": "GT3 RS",
   "year": "2019",
   "faces": 322882,
   "uid": "92050f39daba42fb8b2d004b09d06065",
   "title": "2019-porsche-911-gt3-rs"
  },
  {
-  "model": "911 GT3 (991)",
+  "model": "911",
+  "trim": "GT3",
   "year": "2013",
   "faces": 79739,
   "uid": "93bcd9a97f3b4fdb903b2dd8c138177e",
-  "title": "2013 Porsche 911 GT3 (991)"
+  "title": "2013 Porsche 911 GT3 (991)",
+  "generation": "991"
  },
  {
-  "model": "Cayman 987",
+  "model": "Cayman",
+  "trim": null,
   "year": "",
   "faces": 609239,
   "uid": "961a463221c0465daa697a49641de691",
-  "title": "Porsche Cayman 987"
+  "title": "Porsche Cayman 987",
+  "generation": "987"
  },
  {
-  "model": "911 Carrera S (991)",
+  "model": "911",
+  "trim": "Carrera S",
   "year": "",
   "faces": 78992,
   "uid": "97785983d3a949cf87e9ee6bf49f4032",
-  "title": "Porsche 911 Carrera S (991)"
+  "title": "Porsche 911 Carrera S (991)",
+  "generation": "991"
  },
  {
-  "model": "911 50",
+  "model": "911",
+  "trim": null,
   "year": "",
   "faces": 145069,
   "uid": "978e631aad2b44c48561523dfa0c7b1c",
   "title": "Porsche 911 50"
  },
  {
-  "model": "911 (991.2) GT3 RS",
+  "model": "911",
+  "trim": "GT3 RS",
   "year": "2019",
   "faces": 109406,
   "uid": "97ea84db846e4945961dffb8b2d7af18",
-  "title": "2019 Porsche 911 (991.2) GT3 RS"
+  "title": "2019 Porsche 911 (991.2) GT3 RS",
+  "generation": "991.2"
  },
  {
-  "model": "911 GT3 RS (992) '23",
+  "model": "911",
+  "trim": "GT3 RS",
   "year": "",
   "faces": 284231,
   "uid": "99c74d8fa7df42d984903868f6e593f6",
-  "title": "Porsche 911 GT3 RS (992) '23"
+  "title": "Porsche 911 GT3 RS (992) '23",
+  "generation": "992"
  },
  {
-  "model": "993 Clubsport",
+  "model": "993",
+  "trim": "Clubsport",
   "year": "1995",
   "faces": 788973,
   "uid": "9b2ebe52991945fbbfc649977ff4bf71",
@@ -477,13 +569,15 @@
  },
  {
   "model": "Carrera GT",
+  "trim": null,
   "year": "2004",
   "faces": 225217,
   "uid": "9d48aa751ab24becbf7110e93c8a7a1f",
   "title": "2004 Porsche Carrera GT"
  },
  {
-  "model": "918 Spyder",
+  "model": "918",
+  "trim": "Spyder",
   "year": "2015",
   "faces": 259671,
   "uid": "9fb9a088d0704a06ba69a8a6de100f10",
@@ -491,139 +585,167 @@
  },
  {
   "model": "Panamera",
+  "trim": null,
   "year": "",
   "faces": 293370,
   "uid": "a4045a52962f4301b34a839b9c4ed9b9",
   "title": "Porsche Panamera"
  },
  {
-  "model": "911 GT3 Touring (992)",
+  "model": "911",
+  "trim": "GT3 Touring",
   "year": "2022",
   "faces": 238024,
   "uid": "a76364a3d50c4d78912a28250cb57be5",
-  "title": "2022 Porsche 911 GT3 Touring (992)"
+  "title": "2022 Porsche 911 GT3 Touring (992)",
+  "generation": "992"
  },
  {
   "model": "911",
+  "trim": null,
   "year": "1964",
   "faces": 216892,
   "uid": "ab60b9e064e645ab96aeabe7772e4d49",
   "title": "1964 Porsche 911"
  },
  {
-  "model": "718 Cayman GT4 RS",
+  "model": "718 Cayman",
+  "trim": "GT4 RS",
   "year": "2022",
   "faces": 256256,
   "uid": "b1d87619f6174f10be47423fcd4de444",
   "title": "2022 Porsche 718 Cayman GT4 RS"
  },
  {
-  "model": "911 Carrera 4 GTS",
+  "model": "911",
+  "trim": "Carrera 4 GTS",
   "year": "2019",
   "faces": 79879,
   "uid": "b3f19d82cc494a9ead7b4bbec96f3e13",
   "title": "2019 Porsche 911 Carrera 4 GTS"
  },
  {
-  "model": "911 (991) GT3 RS",
+  "model": "911",
+  "trim": "GT3 RS",
   "year": "2017",
   "faces": 138151,
   "uid": "b45ae79c8ec840a98fae0581af4be396",
-  "title": "2017 Porsche 911 (991) GT3 RS"
+  "title": "2017 Porsche 911 (991) GT3 RS",
+  "generation": "991"
  },
  {
-  "model": "Macan GTS",
+  "model": "Macan",
+  "trim": "GTS",
   "year": "2022",
   "faces": 461047,
   "uid": "b5a64fc6e75f4618bd43cf81aecce3f1",
   "title": "Porsche Macan GTS 2022"
  },
  {
-  "model": "911 Targa 4 GTS (992.2)",
+  "model": "911",
+  "trim": "Targa 4 GTS",
   "year": "2025",
   "faces": 297783,
   "uid": "b668f8a336b54954b04fa0dade507300",
-  "title": "2025 Porsche 911 Targa 4 GTS (992.2)"
+  "title": "2025 Porsche 911 Targa 4 GTS (992.2)",
+  "generation": "992.2"
  },
  {
-  "model": "911 Turbo S (992)",
+  "model": "911",
+  "trim": "Turbo S",
   "year": "2021",
   "faces": 449204,
   "uid": "b6756fc06654405a839bf14e931e4c83",
-  "title": "2021 Porsche 911 Turbo S (992)"
+  "title": "2021 Porsche 911 Turbo S (992)",
+  "generation": "992"
  },
  {
-  "model": "911 Targa 4 GTS",
+  "model": "911",
+  "trim": "Targa 4 GTS",
   "year": "2025",
   "faces": 291405,
   "uid": "b8488f9425d84381a4efe5521db7f111",
   "title": "2025 Porsche 911 Targa 4 GTS"
  },
  {
-  "model": "911 GT3 (992)",
+  "model": "911",
+  "trim": "GT3",
   "year": "2022",
   "faces": 235721,
   "uid": "ba01afbaf32846e598db315be3507db3",
-  "title": "2022 Porsche 911 GT3 (992)"
+  "title": "2022 Porsche 911 GT3 (992)",
+  "generation": "992"
  },
  {
-  "model": "Cayenne (Mk3)(958)S Hybrid",
+  "model": "Cayenne",
+  "trim": "S Hybrid",
   "year": "2010",
   "faces": 1022544,
   "uid": "bdc888633910404db4fa58e694c5ee39",
-  "title": "Porsche Cayenne (Mk3)(958)S Hybrid 2010"
+  "title": "Porsche Cayenne (Mk3)(958)S Hybrid 2010",
+  "generation": "958"
  },
  {
-  "model": "Cayman S",
+  "model": "Cayman",
+  "trim": "S",
   "year": "2011",
   "faces": 1173338,
   "uid": "be2ffcfb789a40c5b8ebaa23c880caf6",
   "title": "Porsche Cayman S 2011"
  },
  {
-  "model": "Panamera Turbo",
+  "model": "Panamera",
+  "trim": "Turbo",
   "year": "2010",
   "faces": 112482,
   "uid": "bf9186606d40493fb72274ff40f4269d",
   "title": "2010 Porsche Panamera Turbo"
  },
  {
-  "model": "718 Cayman (982)",
+  "model": "718 Cayman",
+  "trim": null,
   "year": "2017",
   "faces": 72108,
   "uid": "c599b3aa82eb46f7ba3bb2d22bd9dfc6",
-  "title": "2017 Porsche 718 Cayman (982)"
+  "title": "2017 Porsche 718 Cayman (982)",
+  "generation": "982"
  },
  {
-  "model": "918 Spyder",
+  "model": "918",
+  "trim": "Spyder",
   "year": "2015",
   "faces": 168769,
   "uid": "ca1040479c9843558c50b8f0ae75f640",
   "title": "2015 Mark Webber Porsche 918 Spyder"
  },
  {
-  "model": "911 GT3",
+  "model": "911",
+  "trim": "GT3",
   "year": "2008",
   "faces": 157788,
   "uid": "cc2f5a514de942f98dbe81014988b2ca",
   "title": "2008 Porsche 911 GT3"
  },
  {
-  "model": "Taycan Cross Turismo",
+  "model": "Taycan",
+  "trim": "Cross Turismo",
   "year": "",
   "faces": 376817,
   "uid": "cd97c516c0eb411789e7bb2bcd28622b",
   "title": "Porsche Taycan Cross Turismo"
  },
  {
-  "model": "911 Carrera 4S Cabriolet (992)",
+  "model": "911",
+  "trim": "Carrera 4S Cabriolet",
   "year": "2019",
   "faces": 220097,
   "uid": "ce837502def244c4aea720502c953f7c",
-  "title": "2019 Porsche 911 Carrera 4S Cabriolet (992)"
+  "title": "2019 Porsche 911 Carrera 4S Cabriolet (992)",
+  "generation": "992"
  },
  {
-  "model": "718 Spyder",
+  "model": "718",
+  "trim": "Spyder",
   "year": "2020",
   "faces": 151307,
   "uid": "d199f12bb1124733b27e16aa5589a43b",
@@ -631,27 +753,32 @@
  },
  {
   "model": "Macan",
+  "trim": null,
   "year": "",
   "faces": 148252,
   "uid": "ddce606aeef74ae485cbfebc4e34add2",
   "title": "Porsche Macan"
  },
  {
-  "model": "Panamera Turbo (PNMI)",
+  "model": "Panamera",
+  "trim": "Turbo",
   "year": "",
   "faces": 126052,
   "uid": "e3223ce627e54f8eb4ae7520b0e6c49a",
   "title": "Porsche Panamera Turbo (PNMI)"
  },
  {
-  "model": "911 Turbo 3.3 (930 G-Series)",
+  "model": "911",
+  "trim": "Turbo 3.3",
   "year": "1977",
   "faces": 148183,
   "uid": "e3465539677d4aeea9b4c017ddffaf7d",
-  "title": "1977 Porsche 911 Turbo 3.3 (930 G-Series)"
+  "title": "1977 Porsche 911 Turbo 3.3 (930 G-Series)",
+  "generation": "930 G-Series"
  },
  {
-  "model": "GT3 RS",
+  "model": null,
+  "trim": "GT3 RS",
   "year": "",
   "faces": 368817,
   "uid": "e738eae819c34d19a31dd066c45e0f3d",
@@ -659,20 +786,23 @@
  },
  {
   "model": "959",
+  "trim": null,
   "year": "",
   "faces": 1039070,
   "uid": "e85725e652ff464bb4b71e760387daf2",
   "title": "Porsche 959"
  },
  {
-  "model": "718 Cayman GTS",
+  "model": "718 Cayman",
+  "trim": "GTS",
   "year": "2018",
   "faces": 70387,
   "uid": "ed07dfc50f8146aea10143232657c061",
   "title": "2018 Porsche 718 Cayman GTS"
  },
  {
-  "model": "911 C4S Aerokit",
+  "model": "911",
+  "trim": "C4S",
   "year": "2020",
   "faces": 323220,
   "uid": "ee69c474a1cc4085944cde4cb7ae87db",
@@ -680,6 +810,7 @@
  },
  {
   "model": "911",
+  "trim": null,
   "year": "",
   "faces": 73580,
   "uid": "ef7934a1eb8d408785df77d554905b32",
@@ -687,55 +818,64 @@
  },
  {
   "model": "Macan",
+  "trim": null,
   "year": "2022",
   "faces": 247072,
   "uid": "f0270f8ae1db4d7b909417e07492043a",
   "title": "2022 Porsche Macan"
  },
  {
-  "model": "911 GT3 RS 2.7 Carrera Tribute 992",
+  "model": "911",
+  "trim": "GT3 RS",
   "year": "2023",
   "faces": 253890,
   "uid": "f17a982d5d8a4d97baef4b00b51a4e9a",
-  "title": "2023 Porsche 911 GT3 RS 2.7 Carrera Tribute 992"
+  "title": "2023 Porsche 911 GT3 RS 2.7 Carrera Tribute 992",
+  "generation": "992"
  },
  {
-  "model": "Panamera Turbo S Sport Turismo",
+  "model": "Panamera",
+  "trim": "Turbo S Sport Turismo",
   "year": "2021",
   "faces": 241824,
   "uid": "f2269fdf74f64257a3a9b0872eb9b2d8",
   "title": "2021 Porsche Panamera Turbo S Sport Turismo"
  },
  {
-  "model": "911 S/T",
+  "model": "911",
+  "trim": "S/T",
   "year": "2024",
   "faces": 257587,
   "uid": "f39f7c539a3440428c22a3da2f52af43",
   "title": "2024 Porsche 911 S/T"
  },
  {
-  "model": "Panamera Turbo",
+  "model": "Panamera",
+  "trim": "Turbo",
   "year": "2017",
   "faces": 99508,
   "uid": "f472abb10e07442b80f46ade49a24d64",
   "title": "2017 Porsche Panamera Turbo"
  },
  {
-  "model": "Macan GTS",
+  "model": "Macan",
+  "trim": "GTS",
   "year": "2022",
   "faces": 373640,
   "uid": "fb282e1ac22041f892630a3f28f387f5",
   "title": "2022 Porsche Macan GTS"
  },
  {
-  "model": "911 Flatnose",
+  "model": "911",
+  "trim": "Flatnose",
   "year": "",
   "faces": 172432,
   "uid": "fe160a2d7f8c49f193ad5227851e6372",
   "title": "Porsche 911 Flatnose"
  },
  {
-  "model": "911 Turbo S",
+  "model": "911",
+  "trim": "Turbo S",
   "year": "",
   "faces": 263269,
   "uid": "fe573c66c5c64a1c82cfbd0162ccc7d5",
@@ -743,6 +883,7 @@
  },
  {
   "model": "911",
+  "trim": null,
   "year": "",
   "faces": 117144,
   "uid": "ff85d240ebf24eebbb6719c7b15634d8",
