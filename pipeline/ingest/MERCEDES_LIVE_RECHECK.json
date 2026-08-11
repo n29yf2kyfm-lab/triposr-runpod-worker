@@ -1,0 +1,2328 @@
+{
+ "_doc": "Retro re-check of every APPROVED mercedes-benz entry in catalogue.v2.json (68 of them), 2026-08-11, against the shipped desktopGlbUrl. Mercedes went live before the glazing ruling (2026-08-09) and before glass_probe existed, so nothing had ever tested its live cars for opaque glazing or for the shell classes. Probed by CALLING pipeline/ingest/glass_probe.probe() with url=, not by reimplementing its rules -- a retro check that reimplements them drifts from the wave check and then the two disagree about the same car. NOTHING HERE HAS BEEN QUARANTINED. These are candidates with evidence, for the owner to confirm by render.",
+ "_why_the_poster_field_matters": "51 of the 68 approved Mercedes have posterUrl NULL. For those, platform/resolver/index.ts:207 hands desktopGlbUrl straight to the viewer, so the glTF material IS what the customer sees and the flag is a live customer-facing defect, not a rendering curiosity. TEN of the twelve flagged cars are poster-NULL. The one poster-backed flag (mercedes-benz-glc-2020-v1) is weaker: there the poster is the shipped artefact and must be judged on its own.",
+ "_the_probe_was_validated_before_use": "glass_probe was re-run against PORSCHE_GLASS.json (107 magenta-backlight ground truths) before any Mercedes was touched. It scored 103/107 with THREE of the four misses in the DANGEROUS direction -- ground-truth-CLEAR cars banded 'faded', which is a cull. One further bug was found and fixed (texture-alpha transparency with no glazing name was being read as evidence of OPACITY); it now scores 106/107 with the single remaining miss in the safe direction. Every flag below is therefore from a probe measured against ground truth, not an assumed one.",
+ "_what_i_can_and_cannot_say_about_the_white_tyre_cars": "THE BRIEF'S PREMISE IS OUT OF DATE, and this is the correction that matters most. It says seven live mw1 Mercedes render white tyres and that only mercedes-benz-g-class-2018-v1 was ever ruled on. In fact ALL EIGHT are ALREADY publicationStatus=quarantined in catalogue.v2.json, each with an explicit tyre quarantineReason -- c-class-mw1-v1, cle-mw1-v1, clk-2003-mw1-v1, e-class-mw1-v2/v3/v4, g-class-2018-v1 and x-class-mw1-v1. There is no unresolved live white-tyre population to find; they are not in the 68 approved entries at all. WHAT I CANNOT SAY: I cannot confirm or overturn any of those eight from material data, and I did not try. tyre_probe was built for exactly that and validated against retro_tyre_audit.json's 131 ground truths: RECALL 0 OF 8. Five of the eight carry a genuinely DARK tyre material (tire 0.106, rubber 0.012, tire 0.008) and three name no tyre material at all. The defect is per-corner and lives in the wheel meshes and the rig, so the glTF cannot see it. Only a RED control render, or 5x on the tread face in front34/rear34 against a same-batch control, can settle it -- and the wave sheet alone never can.",
+ "_the_source_meshes_are_back_in_the_wave": "EIGHT of the wave's 70 clean passes are the EXACT source uid of a car that is already quarantined live: #1 CLK 55 AMG, #7 SLS AMG, #55 GLS, #65 X-Class, #70 C-class S202 estate, and #74/#75/#76 of the W124 family. Six were quarantined for white tyres and two for the per-side wheel-void fault. CLAUDE.md's rule is that defects track the SOURCE car, not the upload, so re-publishing any of them from this wave would re-ship a car the owner has already pulled. They are flagged in MERCEDES_CLEAN.json as source_already_quarantined and must not go out without the RED control render that the original quarantine was based on.",
+ "_five_flags_needed_a_second_measurement_and_three_of_them_cleared": "gl-class-2012-mw1-v1 is FINE: its only glass-named material is the window SURROUND, and the actual glazing is spelt 'Widnwos' at alpha 0.947. c-class-v1 and gla-2020-v1 are FINE: their glazing is texture-driven, and glass_texture_alpha measures the channel directly at opacity 0.19 and 0.334, 100% of texels see-through. Had the probe been trusted blind as a gate, three good live cars would have been culled. a-class-2018-w12-v1 is left as needs-eye on purpose: its transparent materials are named 'backlight_glass', and BACKLIGHT MEANS THE REAR WINDSCREEN as often as it means a tail lamp.",
+ "counts": {
+  "ok": 55,
+  "flag-glazing-opaque": 11,
+  "flag-faded-glazing": 1,
+  "needs-eye": 1
+ },
+ "approved_checked": 68,
+ "entries": [
+  {
+   "assetId": "mercedes-benz-e-class-w213-undated-v1",
+   "model": "e-class",
+   "sourceTitle": "Mercedes-AMG E 63 S (W213)",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "mat_glass",
+     "alpha": 1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "texture-alpha"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mercedes-benz/e-class_uc.glb",
+   "sourceReferenceId": null
+  },
+  {
+   "assetId": "mercedes-benz-s-class-v1",
+   "model": "s-class",
+   "sourceTitle": "Mercedes-Benz S65 W222",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "Carro_Vidros_Vermelhos_1",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidro_Laranja",
+     "alpha": 0.131,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidros",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidros_1",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/s-class.glb",
+   "sourceReferenceId": "f42d9d13b0404b5b9a2302a4c590a94d"
+  },
+  {
+   "assetId": "mercedes-benz-sprinter-v1",
+   "model": "sprinter",
+   "sourceTitle": "2019 Mercedes-Benz Sprinter",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "Windows",
+     "alpha": 0.5,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "M_2019_Mercedes_Benz_Sprinter_glass",
+     "alpha": 0.5,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/sprinter.glb",
+   "sourceReferenceId": "5788a290ddb5483fbbd5831aeef829a1"
+  },
+  {
+   "assetId": "mercedes-benz-c-class-v1",
+   "model": "c-class",
+   "sourceTitle": "Mercedes-Benz C-Class 2020",
+   "verdict": "ok",
+   "reason": "RESOLVED by glass_texture_alpha, which is the documented tool for texture-driven alpha. Glazing 'Index_0_3', 1024x1024 RGBA, alpha mean 48.3/255 = opacity 0.19, 100% of texels see-through. Properly transparent. Same 'Index_0_N' pattern CLAUDE.md confirmed on the Mazda CX-5.",
+   "customer_sees": "the POSTER",
+   "glass": "ambiguous/inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": true,
+   "glazing_named": [],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/c-class.glb",
+   "sourceReferenceId": "19d59344b7554e6ab614a6cc02e7ad0a"
+  },
+  {
+   "assetId": "mercedes-benz-a-class-2000-v1",
+   "model": "a-class",
+   "sourceTitle": "2000 Mercedes-Benz A-Class A140",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "Carro_Vidros_Vermelhos_1",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidro_Laranja",
+     "alpha": 0.131,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidros",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidros_1",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-a-class-2000-v1.glb",
+   "sourceReferenceId": "c714a68eeb764048abe5487af83670ce"
+  },
+  {
+   "assetId": "mercedes-benz-c-class-w202-v1",
+   "model": "C-Class W202",
+   "sourceTitle": "Mercedes-Benz C-Class (W202) sedan",
+   "verdict": "ok",
+   "reason": "glazing clear/inferred; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": true,
+   "glazing_named": [],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-c-class-w202-v1.glb",
+   "sourceReferenceId": "c0630f02413745ff80a83ceecdd3a79e"
+  },
+  {
+   "assetId": "mercedes-benz-sl-63-amg-2022-v1",
+   "model": "sl",
+   "sourceTitle": "2022 Mercedes-Benz SL 63 AMG",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "SL63MI_Glass1",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "SL63MI_Glass_Heater_Strip_A1",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-sl-63-amg-2022-v1.glb",
+   "sourceReferenceId": "45b5d5fb971140ffaeba4302629975d5"
+  },
+  {
+   "assetId": "mercedes-benz-amg-gt-2015-v1",
+   "model": "amg gt",
+   "sourceTitle": "Mercedes-Benz AMG-GT 2015",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "Window_Border",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "Glass_ext",
+     "alpha": 0.7,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Glass_-_Clear_-_Bumps.002",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "Glass_-_Clear_-_Ridged_-_UV",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-amg-gt-2015-v1.glb",
+   "sourceReferenceId": "4d9e0a8cf9a844149bf6630da83eb97b"
+  },
+  {
+   "assetId": "mercedes-benz-cls-2022-v1",
+   "model": "cls",
+   "sourceTitle": "Mercedes-Benz CLS53 AMG 2022",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "glasss",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Glass_black",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-cls-2022-v1.glb",
+   "sourceReferenceId": "a1fec16bcc9d4d3c89ac0da2bb048a8b"
+  },
+  {
+   "assetId": "mercedes-benz-gla-2020-v1",
+   "model": "gla",
+   "sourceTitle": "Mercedes-Benz GLA-Class 2020",
+   "verdict": "ok",
+   "reason": "RESOLVED by glass_texture_alpha. Glazing 'Index_0_2', 1024x1024 RGBA, alpha mean 85.1/255 = opacity 0.334, 100% see-through. Properly transparent.",
+   "customer_sees": "the POSTER",
+   "glass": "ambiguous/inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": true,
+   "glazing_named": [],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-2020-v1.glb",
+   "sourceReferenceId": "ab7b5df3ba634f38a14effde3d542466"
+  },
+  {
+   "assetId": "mercedes-benz-glc-2020-v1",
+   "model": "glc",
+   "sourceTitle": "2020 Mercedes-Benz GLC300",
+   "verdict": "flag-glazing-opaque",
+   "reason": "GLAZING OPAQUE (proven): M_2020_Mercedes_Benz_GLC300_Windows alpha 1 OPAQUE, M_2020_Mercedes_Benz_GLC300_WindowsTrims1 alpha 1 OPAQUE; 0 of 30 materials transparent. Owner ruling 2026-08-09: opaque glazing fails outright. | FLAT SHELL: every untextured material shares one light baseColorFactor, so nothing is dark enough to be rubber or transparent enough to be glass -- the car is a uniform clay.",
+   "customer_sees": "the POSTER",
+   "glass": "opaque/proven",
+   "flat_shell": true,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "M_2020_Mercedes_Benz_GLC300_Windows",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "M_2020_Mercedes_Benz_GLC300_WindowsTrims1",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "pale",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-2020-v1.glb",
+   "sourceReferenceId": "950d36030fe1468aa9033d5edfc9550c"
+  },
+  {
+   "assetId": "mercedes-benz-gls-2022-v1",
+   "model": "gls",
+   "sourceTitle": "2022 Mercedes-Benz AMG GLS 63",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "M_2022_Mercedes_AMG_GLS63_Windows",
+     "alpha": 0.597,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "M_2022_Mercedes_AMG_GLS63_WindowsTrims1",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gls-2022-v1.glb",
+   "sourceReferenceId": "d6d814e099914c5c84a3a8635fad4bb2"
+  },
+  {
+   "assetId": "mercedes-benz-gle-v1",
+   "model": "gle",
+   "sourceTitle": "2016 Mercedes GLE63 AMG Coupe",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windows",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "d_glass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "glass_surr",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gle-v1.glb",
+   "sourceReferenceId": null
+  },
+  {
+   "assetId": "mercedes-benz-v-class-v1",
+   "model": "v-class",
+   "sourceTitle": "Mercedes V-Class",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.406,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-v-class-v1.glb",
+   "sourceReferenceId": null
+  },
+  {
+   "assetId": "mercedes-benz-cla-v1",
+   "model": "CLA Shooting Brake",
+   "sourceTitle": "2016 Mercedes CLA45 Shooting Brake",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "CLAMercedesBenz_CLA45AMGShootingBrakeBoss_2015Window_Material1",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "d_glass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-cla-v1.glb",
+   "sourceReferenceId": null
+  },
+  {
+   "assetId": "mercedes-benz-cla-v2",
+   "model": "cla",
+   "sourceTitle": "2026 Mercedes CLA Sedan EV",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "EVMercedesAMG_CLAEVRewardRecycled_2025Window_Material1",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "D_glass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-cla-v2.glb",
+   "sourceReferenceId": null
+  },
+  {
+   "assetId": "mercedes-benz-vito-v1",
+   "model": "vito",
+   "sourceTitle": "Mercedes Vito Van 2010 Facelift Short Version",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the POSTER",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "glass",
+     "alpha": 0.474,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-vito-v1.glb",
+   "sourceReferenceId": null
+  },
+  {
+   "assetId": "mercedes-benz-mercedes-vito-w5-v1",
+   "model": "Mercedes Vito",
+   "sourceTitle": "Mercedes Vito Utility Car",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "Glass_inside_black",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass",
+     "alpha": 1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "texture-alpha"
+    },
+    {
+     "name": "glass.22",
+     "alpha": 1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "texture-alpha"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-mercedes-vito-w5-v1.glb",
+   "sourceReferenceId": "fe704a2aa87a4921990d4973a6eef36d"
+  },
+  {
+   "assetId": "mercedes-benz-mercedes-vito-2010-w5-v1",
+   "model": "Mercedes Vito",
+   "sourceTitle": "Mercedes Vito Van 2010 Facelift Short Version",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "glass",
+     "alpha": 0.474,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-mercedes-vito-2010-w5-v1.glb",
+   "sourceReferenceId": "fbbeae0a1a40455896557f6642b31eb5"
+  },
+  {
+   "assetId": "mercedes-benz-s600-1999-w7-v1",
+   "model": "S600",
+   "sourceTitle": "1999 Mercedes benz S600",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-s600-1999-w7-v1.glb",
+   "sourceReferenceId": "2b61dbcce5634791a51c1986c2848853"
+  },
+  {
+   "assetId": "mercedes-benz-s-class-2021-w7-v1",
+   "model": "S-Class",
+   "sourceTitle": "Mercedes-Benz S-Class 2021",
+   "verdict": "flag-glazing-opaque",
+   "reason": "GLAZING OPAQUE (proven): glass alpha 1 OPAQUE, glass_bump alpha 1 OPAQUE, r_glass alpha 1 OPAQUE; 0 of 27 materials transparent. Owner ruling 2026-08-09: opaque glazing fails outright. | FLAT SHELL: every untextured material shares one light baseColorFactor, so nothing is dark enough to be rubber or transparent enough to be glass -- the car is a uniform clay.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "opaque/proven",
+   "flat_shell": true,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "glass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass_bump",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "r_glass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "d_glass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "pale",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-s-class-2021-w7-v1.glb",
+   "sourceReferenceId": "fc13480d139b41cc95650bad9a8d6eb1"
+  },
+  {
+   "assetId": "mercedes-benz-sprinter-w7-v1",
+   "model": "Sprinter",
+   "sourceTitle": "Mercedes- Benz Sprinter Passenger Van L3H2",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-sprinter-w7-v1.glb",
+   "sourceReferenceId": "40fff8615e0842ada6a80acde145d970"
+  },
+  {
+   "assetId": "mercedes-benz-e-class-estate-2021-w7-v1",
+   "model": "E Class Estate",
+   "sourceTitle": "Mercedes Benz E Class Estate 2021",
+   "verdict": "flag-glazing-opaque",
+   "reason": "GLAZING OPAQUE (proven): d_glass alpha 1 OPAQUE, glass alpha 1 OPAQUE, r_glass alpha 1 OPAQUE; 0 of 27 materials transparent. Owner ruling 2026-08-09: opaque glazing fails outright.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "opaque/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "d_glass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "r_glass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "vd_glass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "pale",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-e-class-estate-2021-w7-v1.glb",
+   "sourceReferenceId": "e4e2dd5d07ee43f9a85891142329274a"
+  },
+  {
+   "assetId": "mercedes-benz-eqe-w8-v1",
+   "model": "EQE",
+   "sourceTitle": "Mercedes Benz EQE AMG",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "glasss",
+     "alpha": 0.142,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "glasss_dark",
+     "alpha": 0.671,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqe-w8-v1.glb",
+   "sourceReferenceId": "1f1dfa0adfc943039d3870a5b958f069"
+  },
+  {
+   "assetId": "mercedes-benz-e-class-2018-w12-v1",
+   "model": "E-Class",
+   "sourceTitle": "2018 Mercedes Benz E63 AMG S Wagon",
+   "verdict": "flag-faded-glazing",
+   "reason": "GLAZING NEARLY OPAQUE: 'CAR_Window' BLEND at alpha 0.993. The Porsche calibration is the yardstick -- 0.78-0.94 still resolves the interior under backlight; this does not. Same band as the Mazda CX-5 KE at 0.986 that was culled.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "faded/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "CAR_Window",
+     "alpha": 0.993,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-e-class-2018-w12-v1.glb",
+   "sourceReferenceId": "da7dc289aeee4c8590762a1218b1bc6d"
+  },
+  {
+   "assetId": "mercedes-benz-e-class-w12-v1",
+   "model": "E-Class",
+   "sourceTitle": "Mercedes E Class W212",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "mat_glass",
+     "alpha": 1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "texture-alpha"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-e-class-w12-v1.glb",
+   "sourceReferenceId": "119c5e10733142b197aa53b86f6aeb04"
+  },
+  {
+   "assetId": "mercedes-benz-a-class-2018-w12-v1",
+   "model": "A-Class",
+   "sourceTitle": "Mercedes-Benz A45 AMG 2018",
+   "verdict": "needs-eye",
+   "reason": "GENUINELY UNDECIDABLE FROM THE FILE, and the reason matters. The one plainly-window material 'glass2' is alpha 1.0 OPAQUE, and the transparent materials are 'backlight_glass' and 'backlight_glass2' at alpha 0.25. The LAMPY guard treats 'backlight' as a lamp -- but in automotive usage BACKLIGHT ALSO MEANS THE REAR WINDSCREEN. If these are the rear screen the car has real glazing; if they are tail lamps it does not. Do NOT fail this on the probe: it needs a magenta-backlight render or the eye.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "ambiguous/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "glass2",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-a-class-2018-w12-v1.glb",
+   "sourceReferenceId": "9482f251f9c34a6e91d7777db5934cfc"
+  },
+  {
+   "assetId": "mercedes-benz-e-class-2022-w12-v1",
+   "model": "E-Class",
+   "sourceTitle": "2022 Mercedes-Benz E-Class AMG Line",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "M_2022_Mercedes_Benz_E_Class_AMG_Line_Windows",
+     "alpha": 0.519,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "M_2022_Mercedes_Benz_E_Class_AMG_Line_WindowsTrims",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-e-class-2022-w12-v1.glb",
+   "sourceReferenceId": "136ecd58732b4f88b0bcd3cb74a71e54"
+  },
+  {
+   "assetId": "mercedes-benz-c-class-w12-v1",
+   "model": "C-Class",
+   "sourceTitle": "Mercedes-Benz C-Class Estate  Free",
+   "verdict": "ok",
+   "reason": "glazing opaque/inferred; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "opaque/inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": true,
+   "glazing_named": [],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-c-class-w12-v1.glb",
+   "sourceReferenceId": "b108b6f2e9654481af1c02801a98228e"
+  },
+  {
+   "assetId": "mercedes-benz-slr-mclaren-2004-mw1-v1",
+   "model": "slr-mclaren",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "Window",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1.0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "glass_surr",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass",
+     "alpha": 0.474,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-slr-mclaren-2004-mw1-v1.glb",
+   "sourceReferenceId": "6dd3f12d311d4d1f8a55ce0e1596a442"
+  },
+  {
+   "assetId": "mercedes-benz-gl-class-2011-mw1-v1",
+   "model": "gl-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "greenglass.016",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass.198",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gl-class-2011-mw1-v1.glb",
+   "sourceReferenceId": "e98b934960b14077ae7c2e86cbf49064"
+  },
+  {
+   "assetId": "mercedes-benz-gl-class-2012-mw1-v1",
+   "model": "gl-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "NOT a defect. The only glass-NAMED material is 'GlassParts1Mtl' (the window SURROUND) and it is correctly opaque; the real glazing is spelt 'Widnwos' -- a typo for Windows -- at alpha 0.947 BLEND, genuinely transparent. Same misspelling class as CLAUDE.md's Mazdaspeed 3 'Windiow'. The probe degraded to 'ambiguous' rather than failing a good car, which is correct.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "ambiguous/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "GlassParts1Mtl",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gl-class-2012-mw1-v1.glb",
+   "sourceReferenceId": "6df2a99b1dbc4b5b8baaf7accf18390f"
+  },
+  {
+   "assetId": "mercedes-benz-sls-amg-2012-mw1-v1",
+   "model": "sls-amg",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "Glass",
+     "alpha": 0.364,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Glass_trim",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "Nav_screen",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-sls-amg-2012-mw1-v1.glb",
+   "sourceReferenceId": "efdab8fb67944da6a4449a9da5350134"
+  },
+  {
+   "assetId": "mercedes-benz-sls-amg-2012-mw1-v2",
+   "model": "sls-amg",
+   "sourceTitle": "",
+   "verdict": "flag-glazing-opaque",
+   "reason": "'Glass' AND 'Glass_trim' are both alpha 1.0 OPAQUE. The file's ONLY transparent material is 'light_glass' at 0.34 -- a lamp lens, not a window. The probe says 'ambiguous' only because that lamp is transparent; the windows are opaque.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "ambiguous/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "Glass_trim",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "Glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-sls-amg-2012-mw1-v2.glb",
+   "sourceReferenceId": "d9dc4af4a6e645b19ebd7d423870e0f7"
+  },
+  {
+   "assetId": "mercedes-benz-cls-2013-mw1-v1",
+   "model": "cls",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "GLASS",
+     "alpha": 0.474,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-cls-2013-mw1-v1.glb",
+   "sourceReferenceId": "4ed156b0405e4e529d193ab1ccc11da9"
+  },
+  {
+   "assetId": "mercedes-benz-m-class-2013-mw1-v1",
+   "model": "m-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "glass_window",
+     "alpha": 0.35,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-m-class-2013-mw1-v1.glb",
+   "sourceReferenceId": "03d647d99f9348328391cd7b1394c7e2"
+  },
+  {
+   "assetId": "mercedes-benz-sls-amg-2013-mw1-v1",
+   "model": "sls-amg",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "SLSglass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1.0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-sls-amg-2013-mw1-v1.glb",
+   "sourceReferenceId": "88a61d91431b4414a7e32a936396191c"
+  },
+  {
+   "assetId": "mercedes-benz-eqv-2020-mw1-v1",
+   "model": "eqv",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "M_2020_Mercedes_Benz_EQV_Windows",
+     "alpha": 0.5,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "M_2020_Mercedes_Benz_EQV_WindowsTrims1",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "unknown",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-eqv-2020-mw1-v1.glb",
+   "sourceReferenceId": "65a80e8e84c149c18023030733b41a66"
+  },
+  {
+   "assetId": "mercedes-benz-s-class-2021-mw1-v1",
+   "model": "s-class",
+   "sourceTitle": "",
+   "verdict": "flag-glazing-opaque",
+   "reason": "GLAZING OPAQUE (proven): Windows alpha 1 OPAQUE; 0 of 38 materials transparent. Owner ruling 2026-08-09: opaque glazing fails outright. | FLAT SHELL: every untextured material shares one light baseColorFactor, so nothing is dark enough to be rubber or transparent enough to be glass -- the car is a uniform clay.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "opaque/proven",
+   "flat_shell": true,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "Windows",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "pale",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-s-class-2021-mw1-v1.glb",
+   "sourceReferenceId": "517779b60d6d4b778e43403e2765832a"
+  },
+  {
+   "assetId": "mercedes-benz-300-sl-mw1-v1",
+   "model": "300-sl",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "GLASS_2.001",
+     "alpha": 0.342,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "GLASS",
+     "alpha": 0.429,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "GUMA_OKNO",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "GLASS_3",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-300-sl-mw1-v1.glb",
+   "sourceReferenceId": "9bd7aeb24fa14ab089c941cf67d675ad"
+  },
+  {
+   "assetId": "mercedes-benz-r-class-2005-mw1-v1",
+   "model": "r-class",
+   "sourceTitle": "",
+   "verdict": "flag-glazing-opaque",
+   "reason": "GLAZING OPAQUE (proven): R-dark_glass alpha 1.0 OPAQUE, R-fl-glass alpha 1.0 OPAQUE, R-glass alpha 1.0 OPAQUE; 0 of 30 materials transparent. Owner ruling 2026-08-09: opaque glazing fails outright.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "opaque/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "R-dark_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "R-fl-glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "R-glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-r-class-2005-mw1-v1.glb",
+   "sourceReferenceId": "2311177fc828453fb792743b8fe48705"
+  },
+  {
+   "assetId": "mercedes-benz-slr-mclaren-mw1-v1",
+   "model": "slr-mclaren",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "GL_basic_Glass_material",
+     "alpha": 0.632,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "GL_basic_glass",
+     "alpha": 0.562,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-slr-mclaren-mw1-v1.glb",
+   "sourceReferenceId": "a73c924778de4d66ae45a7880ab8943e"
+  },
+  {
+   "assetId": "mercedes-benz-glc-mw1-v1",
+   "model": "glc",
+   "sourceTitle": "",
+   "verdict": "flag-glazing-opaque",
+   "reason": "GLAZING OPAQUE (proven): DAMAGE_GLASS alpha 1.0 OPAQUE, glass alpha 1.0 OPAQUE, Ext_Glass_Roof alpha 1.0 OPAQUE; 0 of 71 materials transparent. Owner ruling 2026-08-09: opaque glazing fails outright. | FLAT SHELL: every untextured material shares one light baseColorFactor, so nothing is dark enough to be rubber or transparent enough to be glass -- the car is a uniform clay.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "opaque/proven",
+   "flat_shell": true,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "DAMAGE_GLASS",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "Ext_Glass_Roof",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "hlglass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "pale",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-mw1-v1.glb",
+   "sourceReferenceId": "6bd804f3f61a4a5e9dcddddab42cf0f9"
+  },
+  {
+   "assetId": "mercedes-benz-c-class-mw1-v2",
+   "model": "c-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-c-class-mw1-v2.glb",
+   "sourceReferenceId": "8bf0e8ed024e483b9b9326794d1b2aa6"
+  },
+  {
+   "assetId": "mercedes-benz-c-class-mw1-v3",
+   "model": "c-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-c-class-mw1-v3.glb",
+   "sourceReferenceId": "ff9ba755fc884fb88b5e73c3df1296e1"
+  },
+  {
+   "assetId": "mercedes-benz-cls-2022-mw1-v1",
+   "model": "cls",
+   "sourceTitle": "",
+   "verdict": "flag-glazing-opaque",
+   "reason": "GLAZING OPAQUE (proven): d_glass alpha 1.0 OPAQUE, glass alpha 1.0 OPAQUE, r_glass alpha 1.0 OPAQUE; 0 of 18 materials transparent. Owner ruling 2026-08-09: opaque glazing fails outright. | FLAT SHELL: every untextured material shares one light baseColorFactor, so nothing is dark enough to be rubber or transparent enough to be glass -- the car is a uniform clay.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "opaque/proven",
+   "flat_shell": true,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "d_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "r_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "vd_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "pale",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-cls-2022-mw1-v1.glb",
+   "sourceReferenceId": "740b3430e5714dd4a288265b4115ba0d"
+  },
+  {
+   "assetId": "mercedes-benz-cls-mw1-v1",
+   "model": "cls",
+   "sourceTitle": "",
+   "verdict": "flag-glazing-opaque",
+   "reason": "GLAZING OPAQUE (proven): glassssss alpha 1.0 OPAQUE, priborka_glass alpha 1.0 OPAQUE, CLS_Glass alpha 1.0 OPAQUE; 0 of 84 materials transparent. Owner ruling 2026-08-09: opaque glazing fails outright.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "opaque/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "glassssss",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "priborka_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "CLS_Glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-cls-mw1-v1.glb",
+   "sourceReferenceId": "baf6e4dff35a43febcc6d75c87caa013"
+  },
+  {
+   "assetId": "mercedes-benz-e-class-mw1-v1",
+   "model": "e-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-e-class-mw1-v1.glb",
+   "sourceReferenceId": "dae8d703b11948799c9f877e8f2858cc"
+  },
+  {
+   "assetId": "mercedes-benz-e-class-mw1-v5",
+   "model": "e-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-e-class-mw1-v5.glb",
+   "sourceReferenceId": "b2810cbb2bde48439bb52d7643cc9485"
+  },
+  {
+   "assetId": "mercedes-benz-e-class-2010-mw1-v1",
+   "model": "e-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "darkglass",
+     "alpha": 0.5,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-e-class-2010-mw1-v1.glb",
+   "sourceReferenceId": "97be219788544a2c953ccc04e37b97e8"
+  },
+  {
+   "assetId": "mercedes-benz-gla-mw1-v1",
+   "model": "gla",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "Mercedes-AMG_GLA_35_glass11",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "Mercedes-AMG_GLA_35_glass_w",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-gla-mw1-v1.glb",
+   "sourceReferenceId": "092ee873e85843c8826fc649c44e9a19"
+  },
+  {
+   "assetId": "mercedes-benz-glc-mw1-v2",
+   "model": "glc",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "darkglass",
+     "alpha": 0.5,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "matteglass",
+     "alpha": 0.5,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glc-mw1-v2.glb",
+   "sourceReferenceId": "6a0ef719f8d74378969b6f6095bd8981"
+  },
+  {
+   "assetId": "mercedes-benz-glk-mw1-v1",
+   "model": "glk",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "MBe10_greenglass",
+     "alpha": 0.478,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "MBe10_darkglass",
+     "alpha": 0.843,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "MBe10_clearglass",
+     "alpha": 0.031,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-glk-mw1-v1.glb",
+   "sourceReferenceId": "c18392f7273f4d6f85255ae3ff2b389a"
+  },
+  {
+   "assetId": "mercedes-benz-ponton-mw1-v1",
+   "model": "ponton",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-ponton-mw1-v1.glb",
+   "sourceReferenceId": "cbad3d3420584ff3b5cd472b869f92d6"
+  },
+  {
+   "assetId": "mercedes-benz-s-class-1979-mw1-v1",
+   "model": "s-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-s-class-1979-mw1-v1.glb",
+   "sourceReferenceId": "03b3e3cc99e6462697a5cbcbb47d17e3"
+  },
+  {
+   "assetId": "mercedes-benz-s-class-1999-mw1-v1",
+   "model": "s-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-s-class-1999-mw1-v1.glb",
+   "sourceReferenceId": "609d61e7237f48508fce6405e98c485b"
+  },
+  {
+   "assetId": "mercedes-benz-s-class-2003-mw1-v1",
+   "model": "s-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-s-class-2003-mw1-v1.glb",
+   "sourceReferenceId": "1d2494ea90434de984b9dc677461af5a"
+  },
+  {
+   "assetId": "mercedes-benz-sl-class-1955-mw1-v1",
+   "model": "sl-class",
+   "sourceTitle": "",
+   "verdict": "flag-glazing-opaque",
+   "reason": "GLAZING OPAQUE (proven): windowglass alpha 1 OPAQUE, clearglass alpha 1 OPAQUE; 0 of 17 materials transparent. Owner ruling 2026-08-09: opaque glazing fails outright. | FLAT SHELL: every untextured material shares one light baseColorFactor, so nothing is dark enough to be rubber or transparent enough to be glass -- the car is a uniform clay.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "opaque/proven",
+   "flat_shell": true,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "clearglass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "pale",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-sl-class-1955-mw1-v1.glb",
+   "sourceReferenceId": "7306bfef604b4157a6a2bd10669bd534"
+  },
+  {
+   "assetId": "mercedes-benz-sl-class-1963-mw1-v1",
+   "model": "sl-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-sl-class-1963-mw1-v1.glb",
+   "sourceReferenceId": "bf41546913a54520a2e38c4b99915d36"
+  },
+  {
+   "assetId": "mercedes-benz-sl-class-mw1-v1",
+   "model": "sl-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-sl-class-mw1-v1.glb",
+   "sourceReferenceId": "c56dc8fcfc624cf89ba13760f3ad72ae"
+  },
+  {
+   "assetId": "mercedes-benz-amg-gt-mw1-v1",
+   "model": "amg-gt",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "Window",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1.0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Glass",
+     "alpha": 0.328,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-amg-gt-mw1-v1.glb",
+   "sourceReferenceId": "a1c89ee2c731474dacc20701555915c5"
+  },
+  {
+   "assetId": "mercedes-benz-amg-gt-2015-mw1-v1",
+   "model": "amg-gt",
+   "sourceTitle": "",
+   "verdict": "flag-glazing-opaque",
+   "reason": "GLAZING OPAQUE (proven): Window_Border alpha 1.0 OPAQUE, Glass_ext alpha 1.0 OPAQUE, Glass_-_Clear_-_Bumps_002 alpha 1 OPAQUE; 0 of 34 materials transparent. Owner ruling 2026-08-09: opaque glazing fails outright.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "opaque/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "Window_Border",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "Glass_ext",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "Glass_-_Clear_-_Bumps_002",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "Glass_-_Clear_-_Ridged_-",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-amg-gt-2015-mw1-v1.glb",
+   "sourceReferenceId": "57e93f32bd8a4603bbd3f5fb873728b9"
+  },
+  {
+   "assetId": "mercedes-benz-clk-gtr-mw1-v1",
+   "model": "clk-gtr",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "window",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "glass",
+     "alpha": 0.1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "black_glass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-clk-gtr-mw1-v1.glb",
+   "sourceReferenceId": "fa5a62f49dff495fae5223762ca80553"
+  },
+  {
+   "assetId": "mercedes-benz-cls-mw1-v2",
+   "model": "cls",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "CLS500w219_black_glass3_int",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "etk800_glass",
+     "alpha": 0.84,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-cls-mw1-v2.glb",
+   "sourceReferenceId": "3b11611c6d06415b82b96495f5f249ce"
+  },
+  {
+   "assetId": "mercedes-benz-g-class-mw1-v1",
+   "model": "g-class",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "window_plastic",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "IntWindows",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "G-class_glass",
+     "alpha": 0.48,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "G-class_glass.004",
+     "alpha": 0.236,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-g-class-mw1-v1.glb",
+   "sourceReferenceId": "3b25ec59233a4a82a6732b0a1419e553"
+  },
+  {
+   "assetId": "mercedes-benz-slr-mclaren-mw1-v2",
+   "model": "slr-mclaren",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "SLR_window",
+     "alpha": 0.302,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "SLR_glass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "SLR_black_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-slr-mclaren-mw1-v2.glb",
+   "sourceReferenceId": "4eb0a08f2c0c4c64b1a3299d5e3954ee"
+  },
+  {
+   "assetId": "mercedes-benz-sls-amg-mw1-v1",
+   "model": "sls-amg",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/inferred; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": true,
+   "glazing_named": [],
+   "tyre_material_note": "no-tyre",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-sls-amg-mw1-v1.glb",
+   "sourceReferenceId": "b5d41f9474c94127a7bf99ebef5da574"
+  },
+  {
+   "assetId": "mercedes-benz-sls-amg-2012-mw1-v3",
+   "model": "sls-amg",
+   "sourceTitle": "",
+   "verdict": "ok",
+   "reason": "glazing clear/proven; no shell signature.",
+   "customer_sees": "the glTF itself \u2014 posterUrl is NULL so resolver/index.ts:207 hands desktopGlbUrl straight to the viewer",
+   "glass": "clear/proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "sheet_admissible_for_glazing": false,
+   "glazing_named": [
+    {
+     "name": "Glass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 1.0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "tyre_material_note": "black",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-sls-amg-2012-mw1-v3.glb",
+   "sourceReferenceId": "2020f04e67ba4bc7abbd284db40f9d6b"
+  }
+ ]
+}

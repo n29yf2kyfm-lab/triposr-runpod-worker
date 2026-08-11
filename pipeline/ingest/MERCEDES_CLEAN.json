@@ -1,5 +1,5 @@
 {
- "_doc": "Mercedes wave PASSES, 2026-08-11 -- 70 distinct meshes out of 196 audited sheets. Exact face-count duplicates and the one nameplate-conflict pair are EXCLUDED; see MERCEDES_DUPES.json. ACCURACY RULE: year/generation/trim are transcribed from the SOURCE TITLE only and are null where the title does not state them -- nothing here is inferred from the render. NOT CLEARED FOR TYRES: no car here has had its tyres decided, because the glTF cannot see the per-corner white-tyre artefact (tyre_probe scored 0/8 recall against ground truth) and the sheet is a candidate finder only. A RED control render is still owed before any of these ship.",
+ "_doc": "Mercedes wave PASSES, 2026-08-11 -- 70 distinct meshes out of 196 audited sheets. Exact face-count duplicates and the one nameplate-conflict pair are EXCLUDED; see MERCEDES_DUPES.json. ACCURACY RULE: year/generation/trim are transcribed from the SOURCE TITLE only and are null where the title does not state them -- nothing here is inferred from the render. NOT CLEARED FOR TYRES: no car here has had its tyres decided, because the glTF cannot see the per-corner white-tyre artefact (tyre_probe scored 0/8 recall against ground truth) and the sheet is a candidate finder only. A RED control render is still owed before any of these ship. CROSS-REFERENCED AGAINST THE LIVE CATALOGUE: 8 of these sit on a source mesh that is ALREADY QUARANTINED (six for white tyres, two for per-side wheel voids) and are marked source_already_quarantined -- they must not be re-published without the RED control render the original quarantine rests on. A further 30 are already live and approved under an existing assetId. That leaves 32 genuinely new distinct meshes from this wave.",
  "count": 70,
  "cars": [
   {
@@ -16,7 +16,13 @@
    "cov": 0.158,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "CLK 55 AMG C209. Proportions right, shut lines defined, five-spoke rims consistent across all four tiles."
+   "reason": "DO NOT PUBLISH WITHOUT A RED CONTROL RENDER -- this exact source mesh is already live-quarantined as mercedes-benz-clk-2003-mw1-v1. Defects track the SOURCE car, not the upload. || CLK 55 AMG C209. Proportions right, shut lines defined, five-spoke rims consistent across all four tiles.",
+   "source_already_quarantined": [
+    {
+     "assetId": "mercedes-benz-clk-2003-mw1-v1",
+     "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL. Front tyre AND rim both render white; no black rubber anywhere on that corner. Confirmed on a RED re-render at az 215 and az 270. The GLB's wheel prims carry material_14 baseColor [1,1,1] metallic 0.77 - a white glossy metal, not rubber."
+    }
+   ]
   },
   {
    "uid": "6dd3f12d311d4d1f8a55ce0e1596a442",
@@ -32,7 +38,10 @@
    "cov": 0.156,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "SLR McLaren. Strong front 3/4, clean side strakes, wheels consistent. EXACT face-count twin of #122."
+   "reason": "SLR McLaren. Strong front 3/4, clean side strakes, wheels consistent. EXACT face-count twin of #122.",
+   "already_live_as": [
+    "mercedes-benz-slr-mclaren-2004-mw1-v1"
+   ]
   },
   {
    "uid": "b166760940be429398f32d8855d36644",
@@ -80,7 +89,13 @@
    "cov": 0.157,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "SLS AMG 221,736f. Five-spoke rims present in all four tiles."
+   "reason": "DO NOT PUBLISH WITHOUT A RED CONTROL RENDER -- this exact source mesh is already live-quarantined as mercedes-benz-sls-amg-2010-mw1-v1. Defects track the SOURCE car, not the upload. || SLS AMG 221,736f. Five-spoke rims present in all four tiles.",
+   "source_already_quarantined": [
+    {
+     "assetId": "mercedes-benz-sls-amg-2010-mw1-v1",
+     "quarantineReason": "Scrapped on review 2026-08-08: left-side wheels render as black voids while the right side shows full spokes. Diagnosed by patching rim_dark (baseColor 0.018 -> 0.18, metallic 1.0 default -> 0.55) and re-rendering: the RIGHT wheels turned bright silver, the LEFT did not, so it is per-side geometry (mirrored duplicate, inverted) and not a material fault. Five other SLS entries in this wave have clean wheels in all four views."
+    }
+   ]
   },
   {
    "uid": "e98b934960b14077ae7c2e86cbf49064",
@@ -96,7 +111,10 @@
    "cov": 0.215,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "GL 945,899f. Clean, glazing dark, wheels present."
+   "reason": "GL 945,899f. Clean, glazing dark, wheels present.",
+   "already_live_as": [
+    "mercedes-benz-gl-class-2011-mw1-v1"
+   ]
   },
   {
    "uid": "6df2a99b1dbc4b5b8baaf7accf18390f",
@@ -112,7 +130,10 @@
    "cov": 0.114,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "GL350. Glazing is spelled 'Widnwos' (misspelt) at alpha 0.947 -- genuinely transparent; interior visible. Near-twin of #54, 59 faces apart."
+   "reason": "GL350. Glazing is spelled 'Widnwos' (misspelt) at alpha 0.947 -- genuinely transparent; interior visible. Near-twin of #54, 59 faces apart.",
+   "already_live_as": [
+    "mercedes-benz-gl-class-2012-mw1-v1"
+   ]
   },
   {
    "uid": "efdab8fb67944da6a4449a9da5350134",
@@ -128,7 +149,10 @@
    "cov": 0.215,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "SLS AMG Roadster 96,826f. Dark rims, red calipers, roof up."
+   "reason": "SLS AMG Roadster 96,826f. Dark rims, red calipers, roof up.",
+   "already_live_as": [
+    "mercedes-benz-sls-amg-2012-mw1-v1"
+   ]
   },
   {
    "uid": "03d647d99f9348328391cd7b1394c7e2",
@@ -144,7 +168,10 @@
    "cov": 0.148,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "ML250 Bluetec 67,585f. Low-poly but proportions right and glazing transparent. The tile labelled 'side' is a head-on front elevation."
+   "reason": "ML250 Bluetec 67,585f. Low-poly but proportions right and glazing transparent. The tile labelled 'side' is a head-on front elevation.",
+   "already_live_as": [
+    "mercedes-benz-m-class-2013-mw1-v1"
+   ]
   },
   {
    "uid": "88a61d91431b4414a7e32a936396191c",
@@ -160,7 +187,10 @@
    "cov": 0.194,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "SLS AMG GT 339,997f. Sharp; orange calipers; strongest of the SLS group."
+   "reason": "SLS AMG GT 339,997f. Sharp; orange calipers; strongest of the SLS group.",
+   "already_live_as": [
+    "mercedes-benz-sls-amg-2013-mw1-v1"
+   ]
   },
   {
    "uid": "4ef54070101a4ceda359bcb21bdc557d",
@@ -304,7 +334,10 @@
    "cov": 0.141,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "EQV 431,283f. Clean van, deep-tinted glazing with interior visible."
+   "reason": "EQV 431,283f. Clean van, deep-tinted glazing with interior visible.",
+   "already_live_as": [
+    "mercedes-benz-eqv-2020-mw1-v1"
+   ]
   },
   {
    "uid": "64db1862be754722bbf4f23695bf06a5",
@@ -432,7 +465,10 @@
    "cov": 0.2,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "300 SL Roadster 640,458f. Wire wheels with tyres, red interior, classic proportions read correctly."
+   "reason": "300 SL Roadster 640,458f. Wire wheels with tyres, red interior, classic proportions read correctly.",
+   "already_live_as": [
+    "mercedes-benz-300-sl-mw1-v1"
+   ]
   },
   {
    "uid": "661dcab94455463784651a3ebc63cfb9",
@@ -512,7 +548,13 @@
    "cov": 0.16,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "GLS /HU 520,042f. Clean, glazing transparent, wheels present."
+   "reason": "DO NOT PUBLISH WITHOUT A RED CONTROL RENDER -- this exact source mesh is already live-quarantined as mercedes-benz-gls-mw1-v1. Defects track the SOURCE car, not the upload. || GLS /HU 520,042f. Clean, glazing transparent, wheels present.",
+   "source_already_quarantined": [
+    {
+     "assetId": "mercedes-benz-gls-mw1-v1",
+     "quarantineReason": "Held on review 2026-08-08: same per-side wheel-void fault as the SLS (left wheels black, right wheels full chrome spokes). NOT scrapped -- this is the only GLS in the wave, so dropping it loses the nameplate. Re-source, or repair the left wheel geometry, then re-audit."
+    }
+   ]
   },
   {
    "uid": "a73c924778de4d66ae45a7880ab8943e",
@@ -528,7 +570,10 @@
    "cov": 0.077,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "SLR McLaren (Bull) 66,591f, gloss black. Low-poly but reads correctly; prior audit recorded the recolour does not land, so single-neutral only."
+   "reason": "SLR McLaren (Bull) 66,591f, gloss black. Low-poly but reads correctly; prior audit recorded the recolour does not land, so single-neutral only.",
+   "already_live_as": [
+    "mercedes-benz-slr-mclaren-mw1-v1"
+   ]
   },
   {
    "uid": "378c7f3227a24ebe9859b4f9b936b2ef",
@@ -592,7 +637,13 @@
    "cov": 0.174,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "X Class 708,568f. Clean pickup, glazing transparent, tyre band visible."
+   "reason": "DO NOT PUBLISH WITHOUT A RED CONTROL RENDER -- this exact source mesh is already live-quarantined as mercedes-benz-x-class-mw1-v1. Defects track the SOURCE car, not the upload. || X Class 708,568f. Clean pickup, glazing transparent, tyre band visible.",
+   "source_already_quarantined": [
+    {
+     "assetId": "mercedes-benz-x-class-mw1-v1",
+     "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL. Both tyres render white, sidewall and tread, in all four sheet views and on RED re-renders at az 215 and az 270. Rim is grey - darker than the tyre."
+    }
+   ]
   },
   {
    "uid": "06b7a34016a44d3e8e953e5fc68d58ec",
@@ -608,7 +659,13 @@
    "cov": 0.197,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "C-class S202 estate 991,175f. Classic W202 wagon, clean, glazing transparent."
+   "reason": "DO NOT PUBLISH WITHOUT A RED CONTROL RENDER -- this exact source mesh is already live-quarantined as mercedes-benz-c-class-mw1-v1. Defects track the SOURCE car, not the upload. || C-class S202 estate 991,175f. Classic W202 wagon, clean, glazing transparent.",
+   "source_already_quarantined": [
+    {
+     "assetId": "mercedes-benz-c-class-mw1-v1",
+     "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL. W202/S202 estate. Side tile at 5x: the whole tyre - sidewall and tread sawtooth - renders white, lighter than its own grey hubcap. Confirmed by two controlled re-renders of the same staged GLB in RED (az 270 and az 215): the front tyre stays white while the rear tyre on the same car renders black. A car cannot have one white and one black tyre by design, so this is a defect, not a whitewall."
+    }
+   ]
   },
   {
    "uid": "8bf0e8ed024e483b9b9326794d1b2aa6",
@@ -624,7 +681,10 @@
    "cov": 0.218,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "C-class W203 estate 743,556f. Clean. EXACT face-count twin of #175."
+   "reason": "C-class W203 estate 743,556f. Clean. EXACT face-count twin of #175.",
+   "already_live_as": [
+    "mercedes-benz-c-class-mw1-v2"
+   ]
   },
   {
    "uid": "ff9ba755fc884fb88b5e73c3df1296e1",
@@ -640,7 +700,10 @@
    "cov": 0.224,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "C-class W203 sedan 644,776f. Clean."
+   "reason": "C-class W203 sedan 644,776f. Clean.",
+   "already_live_as": [
+    "mercedes-benz-c-class-mw1-v3"
+   ]
   },
   {
    "uid": "dae8d703b11948799c9f877e8f2858cc",
@@ -656,7 +719,10 @@
    "cov": 0.194,
    "body_mats": 2,
    "sheet_admissible_for_glazing": false,
-   "reason": "E-class A124 convertible 1,178,613f. Classic W124 family, clean, glazing transparent."
+   "reason": "E-class A124 convertible 1,178,613f. Classic W124 family, clean, glazing transparent.",
+   "already_live_as": [
+    "mercedes-benz-e-class-mw1-v1"
+   ]
   },
   {
    "uid": "dff3640ff0ff464984e2d7f320794e25",
@@ -672,7 +738,13 @@
    "cov": 0.216,
    "body_mats": 2,
    "sheet_admissible_for_glazing": false,
-   "reason": "E-class C124 coupe 1,185,361f. Same family and quality as #73."
+   "reason": "DO NOT PUBLISH WITHOUT A RED CONTROL RENDER -- this exact source mesh is already live-quarantined as mercedes-benz-e-class-mw1-v2. Defects track the SOURCE car, not the upload. || E-class C124 coupe 1,185,361f. Same family and quality as #73.",
+   "source_already_quarantined": [
+    {
+     "assetId": "mercedes-benz-e-class-mw1-v2",
+     "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL. C124 coupe. Both tyres render white including the tread sipes; grey alloy is darker than the tyre. Confirmed on RED re-renders at az 215 and az 270 while sibling e-class-mw1-v1 on the identical rig, colour, wheel and tyre material renders plainly black."
+    }
+   ]
   },
   {
    "uid": "81b317899e9641d9ac08f0be4fd09fac",
@@ -688,7 +760,13 @@
    "cov": 0.211,
    "body_mats": 2,
    "sheet_admissible_for_glazing": false,
-   "reason": "E-class W124 saloon 1,186,121f. Same family."
+   "reason": "DO NOT PUBLISH WITHOUT A RED CONTROL RENDER -- this exact source mesh is already live-quarantined as mercedes-benz-e-class-mw1-v3. Defects track the SOURCE car, not the upload. || E-class W124 saloon 1,186,121f. Same family.",
+   "source_already_quarantined": [
+    {
+     "assetId": "mercedes-benz-e-class-mw1-v3",
+     "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL. W124 saloon. Front tyre white incl. tread, rear tyre black, on the same car - proven on RED re-renders at az 270 and az 215. Sibling e-class-mw1-v1 (same modeller, same 'tire' material at baseColor 0.106) renders black on both corners."
+    }
+   ]
   },
   {
    "uid": "5b85f87f175b434288708b83b62c42de",
@@ -704,7 +782,13 @@
    "cov": 0.206,
    "body_mats": 2,
    "sheet_admissible_for_glazing": false,
-   "reason": "E-class S124 wagon 1,158,331f. Same family."
+   "reason": "DO NOT PUBLISH WITHOUT A RED CONTROL RENDER -- this exact source mesh is already live-quarantined as mercedes-benz-e-class-mw1-v4. Defects track the SOURCE car, not the upload. || E-class S124 wagon 1,158,331f. Same family.",
+   "source_already_quarantined": [
+    {
+     "assetId": "mercedes-benz-e-class-mw1-v4",
+     "quarantineReason": "tyres do not read as black rubber -- they render WHITE/body-pale (sidewall and tread), so the car reads as an unfinished clay/studio model. Found by the retroactive tyre audit of the live Toyota + Mercedes catalogue (2026-08-10), which the tyre ruling post-dated. TYRE-FAIL. S124 estate. Same defect and same evidence as e-class-mw1-v3: front tyre white incl. tread on RED re-renders at both azimuths."
+    }
+   ]
   },
   {
    "uid": "97be219788544a2c953ccc04e37b97e8",
@@ -720,7 +804,10 @@
    "cov": 0.198,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "E-class W212 sedan 1,010,812f. Clean."
+   "reason": "E-class W212 sedan 1,010,812f. Clean.",
+   "already_live_as": [
+    "mercedes-benz-e-class-2010-mw1-v1"
+   ]
   },
   {
    "uid": "b2810cbb2bde48439bb52d7643cc9485",
@@ -736,7 +823,10 @@
    "cov": 0.191,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "W123 coupe 883,994f (titled E-class, which is wrong -- W123 predates the E-class name). Whitewall tyres are correct period detail per CLAUDE.md."
+   "reason": "W123 coupe 883,994f (titled E-class, which is wrong -- W123 predates the E-class name). Whitewall tyres are correct period detail per CLAUDE.md.",
+   "already_live_as": [
+    "mercedes-benz-e-class-mw1-v5"
+   ]
   },
   {
    "uid": "092ee873e85843c8826fc649c44e9a19",
@@ -752,7 +842,10 @@
    "cov": 0.113,
    "body_mats": 2,
    "sheet_admissible_for_glazing": false,
-   "reason": "GLA35 AMG 443,654f. Clean, red calipers. The tile labelled 'side' is a front elevation (documented caveat for this car)."
+   "reason": "GLA35 AMG 443,654f. Clean, red calipers. The tile labelled 'side' is a front elevation (documented caveat for this car).",
+   "already_live_as": [
+    "mercedes-benz-gla-mw1-v1"
+   ]
   },
   {
    "uid": "6a0ef719f8d74378969b6f6095bd8981",
@@ -768,7 +861,10 @@
    "cov": 0.157,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "GLC X205 F-Cell 1,109,422f. Clean."
+   "reason": "GLC X205 F-Cell 1,109,422f. Clean.",
+   "already_live_as": [
+    "mercedes-benz-glc-mw1-v2"
+   ]
   },
   {
    "uid": "fa61dba175cf467c8df8a4b400648076",
@@ -800,7 +896,10 @@
    "cov": 0.174,
    "body_mats": 2,
    "sheet_admissible_for_glazing": false,
-   "reason": "GLK 936,381f. Clean."
+   "reason": "GLK 936,381f. Clean.",
+   "already_live_as": [
+    "mercedes-benz-glk-mw1-v1"
+   ]
   },
   {
    "uid": "cbad3d3420584ff3b5cd472b869f92d6",
@@ -816,7 +915,10 @@
    "cov": 0.245,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "Ponton 180 W120 1,148,662f. Classic, whitewalls correct, clean."
+   "reason": "Ponton 180 W120 1,148,662f. Classic, whitewalls correct, clean.",
+   "already_live_as": [
+    "mercedes-benz-ponton-mw1-v1"
+   ]
   },
   {
    "uid": "03b3e3cc99e6462697a5cbcbb47d17e3",
@@ -832,7 +934,10 @@
    "cov": 0.221,
    "body_mats": 2,
    "sheet_admissible_for_glazing": false,
-   "reason": "S-class W126 1979 1,042,111f. Clean classic."
+   "reason": "S-class W126 1979 1,042,111f. Clean classic.",
+   "already_live_as": [
+    "mercedes-benz-s-class-1979-mw1-v1"
+   ]
   },
   {
    "uid": "609d61e7237f48508fce6405e98c485b",
@@ -848,7 +953,10 @@
    "cov": 0.216,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "S-class W140 1999 673,694f. Clean."
+   "reason": "S-class W140 1999 673,694f. Clean.",
+   "already_live_as": [
+    "mercedes-benz-s-class-1999-mw1-v1"
+   ]
   },
   {
    "uid": "1d2494ea90434de984b9dc677461af5a",
@@ -864,7 +972,10 @@
    "cov": 0.23,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "S-class W220 2003 885,848f. Clean. Near-twin of #116, TWO faces apart."
+   "reason": "S-class W220 2003 885,848f. Clean. Near-twin of #116, TWO faces apart.",
+   "already_live_as": [
+    "mercedes-benz-s-class-2003-mw1-v1"
+   ]
   },
   {
    "uid": "bf41546913a54520a2e38c4b99915d36",
@@ -880,7 +991,10 @@
    "cov": 0.189,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "SL W113 Pagoda 1963 982,130f. Classic, whitewalls correct."
+   "reason": "SL W113 Pagoda 1963 982,130f. Classic, whitewalls correct.",
+   "already_live_as": [
+    "mercedes-benz-sl-class-1963-mw1-v1"
+   ]
   },
   {
    "uid": "c56dc8fcfc624cf89ba13760f3ad72ae",
@@ -896,7 +1010,10 @@
    "cov": 0.213,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "SL R107 coupe 862,524f. Classic, whitewalls correct."
+   "reason": "SL R107 coupe 862,524f. Classic, whitewalls correct.",
+   "already_live_as": [
+    "mercedes-benz-sl-class-mw1-v1"
+   ]
   },
   {
    "uid": "a1c89ee2c731474dacc20701555915c5",
@@ -912,7 +1029,10 @@
    "cov": 0.286,
    "body_mats": 2,
    "sheet_admissible_for_glazing": false,
-   "reason": "AMG GT Black Series 158,161f. Sharp. CLAUDE.md ruling: swan-neck wing and Panamericana grille are OEM, this IS a road car."
+   "reason": "AMG GT Black Series 158,161f. Sharp. CLAUDE.md ruling: swan-neck wing and Panamericana grille are OEM, this IS a road car.",
+   "already_live_as": [
+    "mercedes-benz-amg-gt-mw1-v1"
+   ]
   },
   {
    "uid": "2c21b97ff3dc4fc3b1ef9e4bb0164318",
@@ -976,7 +1096,10 @@
    "cov": 0.184,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "CLK GTR 216,827f. Clean. The Strassenversion was road-legal but only 25 were built -- effectively unreachable by a UK reg."
+   "reason": "CLK GTR 216,827f. Clean. The Strassenversion was road-legal but only 25 were built -- effectively unreachable by a UK reg.",
+   "already_live_as": [
+    "mercedes-benz-clk-gtr-mw1-v1"
+   ]
   },
   {
    "uid": "3b11611c6d06415b82b96495f5f249ce",
@@ -992,7 +1115,10 @@
    "cov": 0.294,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "CLS W219 356,897f. Clean."
+   "reason": "CLS W219 356,897f. Clean.",
+   "already_live_as": [
+    "mercedes-benz-cls-mw1-v2"
+   ]
   },
   {
    "uid": "3b25ec59233a4a82a6732b0a1419e553",
@@ -1008,7 +1134,10 @@
    "cov": 0.142,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "G63 AMG W464 445,970f. Clean, red calipers, glazing transparent."
+   "reason": "G63 AMG W464 445,970f. Clean, red calipers, glazing transparent.",
+   "already_live_as": [
+    "mercedes-benz-g-class-mw1-v1"
+   ]
   },
   {
    "uid": "407afb21559440b38e06052d5bcd79c0",
@@ -1040,7 +1169,10 @@
    "cov": 0.179,
    "body_mats": 2,
    "sheet_admissible_for_glazing": false,
-   "reason": "SLR McLaren 312,546f. Clean, glazing transparent."
+   "reason": "SLR McLaren 312,546f. Clean, glazing transparent.",
+   "already_live_as": [
+    "mercedes-benz-slr-mclaren-mw1-v2"
+   ]
   },
   {
    "uid": "54f199ed83004907a03d99cde23035ec",
@@ -1088,7 +1220,10 @@
    "cov": 0.208,
    "body_mats": 1,
    "sheet_admissible_for_glazing": true,
-   "reason": "SLS AMG 153,313f. Clean; the wheel re-check already spot-verified this one's five-spoke rims in all four tiles."
+   "reason": "SLS AMG 153,313f. Clean; the wheel re-check already spot-verified this one's five-spoke rims in all four tiles.",
+   "already_live_as": [
+    "mercedes-benz-sls-amg-mw1-v1"
+   ]
   },
   {
    "uid": "202fcbd73742459bb7a43c815d15c0f2",
@@ -1120,7 +1255,13 @@
    "cov": 0.448,
    "body_mats": 1,
    "sheet_admissible_for_glazing": false,
-   "reason": "SLS AMG Coupe 2012 984,874f. Clean, red calipers."
+   "reason": "SLS AMG Coupe 2012 984,874f. Clean, red calipers.",
+   "already_live_as": [
+    "mercedes-benz-sls-amg-2012-mw1-v3"
+   ]
   }
- ]
+ ],
+ "already_quarantined_source": 8,
+ "already_live": 30,
+ "genuinely_new": 32
 }
