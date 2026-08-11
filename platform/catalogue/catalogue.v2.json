@@ -243823,6 +243823,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.254,
+   "variantsHash": "a5e6c04e97ff6c1a249d4b40696d9c30507ddc28",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -244026,6 +244033,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.336,
+   "variantsHash": "a93e81ee2fdc234ed191954b192716aa69b6c06e",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -244231,6 +244245,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.402,
+   "variantsHash": "ce8a03b20e1ceb8836a99fcff16dfcbb9d9156ea",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -244439,6 +244460,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.402,
+   "variantsHash": "075da41744e8894496b4b7407b2c37da60639c01",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -244640,6 +244668,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.394,
+   "variantsHash": "126d74f4405805072774e18d468011b730113585",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -244843,6 +244878,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.383,
+   "variantsHash": "74dcd41d14ef86606669aeaa9055f42826a741a1",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -245042,6 +245084,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.425,
+   "variantsHash": "aff6d200893a05c2d2b25f5108aa159047592090",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -245248,6 +245297,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.478,
+   "variantsHash": "f9453625bbff50b5aed6b94993706b8afc71f846",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -245450,6 +245506,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.358,
+   "variantsHash": "e1660ea6acf20407c58638e33fd2cc1fd26b0ec8",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -245652,6 +245715,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.367,
+   "variantsHash": "9494902359648f910ef917d634824976f9efa99a",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -245853,6 +245923,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.369,
+   "variantsHash": "c28e6005af3a0ca02806246e11446e65c1463bd9",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -246059,6 +246136,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.351,
+   "variantsHash": "0bb7ff554cfa14097b1b4b84e660ffe1a9694fc8",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -246259,6 +246343,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.404,
+   "variantsHash": "aaf2c826e3165c3d3eb88ba4734226a9c57cb268",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -246454,16 +246545,6 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-impreza-22b-sti-1998-sbw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-impreza-22b-sti-1998-sbw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-impreza-22b-sti-1998-sbw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-impreza-22b-sti-1998-sbw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-impreza-22b-sti-1998-sbw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-impreza-22b-sti-1998-sbw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-impreza-22b-sti-1998-sbw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-impreza-22b-sti-1998-sbw1-v1__yellow.glb"
-  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/subaru-impreza-22b-sti-1998-sbw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/subaru-impreza-22b-sti-1998-sbw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -246549,57 +246630,16 @@
    ]
   },
   "platesBaked": false,
-  "colourVariantPaints": {
-   "grey": [
-    {
-     "oemPaintName": "Magnetite Grey Metallic",
-     "colourFamily": "Gunmetal Grey",
-     "finish": "Metallic"
-    }
-   ],
-   "silver": [
-    {
-     "oemPaintName": "Ice Silver Metallic",
-     "colourFamily": "Silver",
-     "finish": "Metallic"
-    }
-   ],
-   "black": [
-    {
-     "oemPaintName": "Crystal Black Silica",
-     "colourFamily": "Black",
-     "finish": "Pearl"
-    }
-   ],
-   "white": [
-    {
-     "oemPaintName": "Crystal White Pearl",
-     "colourFamily": "Pearl White",
-     "finish": "Pearl"
-    }
-   ],
-   "blue": [
-    {
-     "oemPaintName": "WR Blue Pearl",
-     "colourFamily": "Racing Blue",
-     "finish": "Pearl"
-    },
-    {
-     "oemPaintName": "Sapphire Blue Pearl",
-     "colourFamily": "Dark Blue",
-     "finish": "Pearl"
-    }
-   ],
-   "red": [
-    {
-     "oemPaintName": "Crimson Red Pearl",
-     "colourFamily": "Dark Red",
-     "finish": "Pearl"
-    }
-   ],
-   "green": [],
-   "yellow": []
-  }
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.002,
+   "variantsHash": "30f5643865c3365f5c355c4bbe62906a6b5c938e",
+   "method": "render",
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.002), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.002), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -246654,16 +246694,6 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-legacy-wagon-sbw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-legacy-wagon-sbw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-legacy-wagon-sbw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-legacy-wagon-sbw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-legacy-wagon-sbw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-legacy-wagon-sbw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-legacy-wagon-sbw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/subaru/subaru-legacy-wagon-sbw1-v1__yellow.glb"
-  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/subaru-legacy-wagon-sbw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/subaru-legacy-wagon-sbw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -246749,57 +246779,16 @@
    ]
   },
   "platesBaked": false,
-  "colourVariantPaints": {
-   "grey": [
-    {
-     "oemPaintName": "Magnetite Grey Metallic",
-     "colourFamily": "Gunmetal Grey",
-     "finish": "Metallic"
-    }
-   ],
-   "silver": [
-    {
-     "oemPaintName": "Ice Silver Metallic",
-     "colourFamily": "Silver",
-     "finish": "Metallic"
-    }
-   ],
-   "black": [
-    {
-     "oemPaintName": "Crystal Black Silica",
-     "colourFamily": "Black",
-     "finish": "Pearl"
-    }
-   ],
-   "white": [
-    {
-     "oemPaintName": "Crystal White Pearl",
-     "colourFamily": "Pearl White",
-     "finish": "Pearl"
-    }
-   ],
-   "blue": [
-    {
-     "oemPaintName": "WR Blue Pearl",
-     "colourFamily": "Racing Blue",
-     "finish": "Pearl"
-    },
-    {
-     "oemPaintName": "Sapphire Blue Pearl",
-     "colourFamily": "Dark Blue",
-     "finish": "Pearl"
-    }
-   ],
-   "red": [
-    {
-     "oemPaintName": "Crimson Red Pearl",
-     "colourFamily": "Dark Red",
-     "finish": "Pearl"
-    }
-   ],
-   "green": [],
-   "yellow": []
-  }
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.061,
+   "variantsHash": "14e13195fc2f13ecb6b62f21e27bc04b8c593dda",
+   "method": "render",
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.061), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.061), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -247053,6 +247042,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.396,
+   "variantsHash": "a9f0bb996cae3e3daa44911ee7b4bdddeed930d1",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -247313,6 +247309,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.446,
+   "variantsHash": "9a2d1caaea834634fe4515ebe90896a8c1676eee",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -247565,6 +247568,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.387,
+   "variantsHash": "c584a556b3f7562d49e7b7952ed6a8c4c87a5802",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -247817,6 +247827,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.422,
+   "variantsHash": "88c08e0d07c23673fe87557190683beba51c3b4a",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -248072,6 +248089,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.638,
+   "variantsHash": "dfc15676060569d49c1dfc2b5ad6f14072f505d3",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -248336,6 +248360,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.418,
+   "variantsHash": "f213844e7990315b0e69faa8a1ea52bd6caf76f0",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -248597,6 +248628,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.44,
+   "variantsHash": "cba696d68d6e60e9fb73c45dcb850f1903508d7f",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -248855,6 +248893,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.436,
+   "variantsHash": "2f4299a4c9a26ff474c818e11357d4ebfc0b2e64",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -249113,6 +249158,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.339,
+   "variantsHash": "a2f73545008952bd5b1b35f619933d6d4b031334",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -249370,6 +249422,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.411,
+   "variantsHash": "d688c1fc1f6cd6e0708edf4b54397ed031d98a32",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -249629,6 +249688,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.482,
+   "variantsHash": "970389b27326c31a3a591b66137caef1d668aa2e",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -249889,6 +249955,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.363,
+   "variantsHash": "7c38323171005f239ed2af29e56b870e4e03aa55",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -250146,6 +250219,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.431,
+   "variantsHash": "f13353027d6e6c282d321289b77a0727bab7479e",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -250404,6 +250484,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.427,
+   "variantsHash": "d6bede5fd7f35df8d94d97a2f109d62b9d13fd1f",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -250662,6 +250749,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.297,
+   "variantsHash": "f0e94b3cd5a4a56fec9d0c6b1fdf4f9ab11324f8",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -251095,6 +251189,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.316,
+   "variantsHash": "f74ea30b15444f746ff254562ae77ec8055190e4",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -251354,6 +251455,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.464,
+   "variantsHash": "d5194afdf3a7d0f79fc5ac2a3c72ff71bf01baa1",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -251612,6 +251720,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.459,
+   "variantsHash": "aa259cb603b935ba8c2b193c7fb45c9301770388",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -251872,6 +251987,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.364,
+   "variantsHash": "aa9533a49e17690bcde91d0a297fd4ffe8c28d9c",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -252130,6 +252252,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.396,
+   "variantsHash": "983a85078c7ca7079e615829d355fba8e0d3c483",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -252385,6 +252514,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.393,
+   "variantsHash": "559d22362855fee8255e094c220660308adbe3db",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -252442,16 +252578,6 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__yellow.glb"
-  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2018-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2018-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -252569,78 +252695,16 @@
    ]
   },
   "platesBaked": false,
-  "colourVariantPaints": {
-   "grey": [
-    {
-     "oemPaintName": "Crayon",
-     "colourFamily": "Cement Grey",
-     "finish": "Solid"
-    },
-    {
-     "oemPaintName": "Arctic Grey",
-     "colourFamily": "Light Grey",
-     "finish": "Solid"
-    },
-    {
-     "oemPaintName": "Volcano Grey Metallic",
-     "colourFamily": "Dark Grey",
-     "finish": "Metallic"
-    }
-   ],
-   "silver": [
-    {
-     "oemPaintName": "GT Silver Metallic",
-     "colourFamily": "Silver",
-     "finish": "Metallic"
-    }
-   ],
-   "black": [
-    {
-     "oemPaintName": "Jet Black Metallic",
-     "colourFamily": "Black",
-     "finish": "Metallic"
-    }
-   ],
-   "white": [
-    {
-     "oemPaintName": "Carrara White Metallic",
-     "colourFamily": "White",
-     "finish": "Metallic"
-    }
-   ],
-   "blue": [
-    {
-     "oemPaintName": "Gentian Blue Metallic",
-     "colourFamily": "Dark Blue",
-     "finish": "Metallic"
-    },
-    {
-     "oemPaintName": "Shark Blue",
-     "colourFamily": "Bright Blue",
-     "finish": "Solid"
-    }
-   ],
-   "red": [
-    {
-     "oemPaintName": "Guards Red",
-     "colourFamily": "Red",
-     "finish": "Solid"
-    },
-    {
-     "oemPaintName": "Carmine Red",
-     "colourFamily": "Dark Red",
-     "finish": "Solid"
-    }
-   ],
-   "green": [
-    {
-     "oemPaintName": "Python Green",
-     "colourFamily": "Bright Green",
-     "finish": "Solid"
-    }
-   ],
-   "yellow": []
-  }
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.007,
+   "variantsHash": "6b97ab8612208d7b9d561857bd592fb875627648",
+   "method": "render",
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.007), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.007), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -252896,6 +252960,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4,
+   "variantsHash": "bbc8e9d774386167341eae45acc728bff97b125a",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -253150,6 +253221,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.378,
+   "variantsHash": "0be601591d2e3e5f8aea7caff6284b6079a6bcb9",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -253408,6 +253486,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.433,
+   "variantsHash": "443501a8378e87f924dbb0fb2acff716d7d6ece3",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -253666,6 +253751,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.391,
+   "variantsHash": "19cf6684ca771d34d3ad87300a54a73253281738",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -253922,6 +254014,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.453,
+   "variantsHash": "b6d3a85307e0655e196992cf4b1b5dfce46001e1",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -254178,6 +254277,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.438,
+   "variantsHash": "be81ae0aefe9bc1a5cdfb4fe1541b92f371955cc",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -254436,6 +254542,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.394,
+   "variantsHash": "ef37c8080fb214e1b6c297757b28f2f52be8df66",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -254693,6 +254806,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.206,
+   "variantsHash": "7cb4df0281cfb718e56e26314f678bd1be2575fa",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -254951,6 +255071,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4,
+   "variantsHash": "68d949bf3d81480990cf359c62aa96c7a26996a5",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -255210,6 +255337,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.411,
+   "variantsHash": "949436f9ff5b6b86a24ff921d3b86541e835419b",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -255464,6 +255598,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.38,
+   "variantsHash": "62862b99386a09f9c0f36f2eb54e1702792dc9c2",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -255719,6 +255860,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.465,
+   "variantsHash": "c99e009147c18cf539e662b79ade7d64d29be73a",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -255981,6 +256129,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.404,
+   "variantsHash": "afa50ceee3ab3bc48e4f5e1f57f3a477aa5ef6b4",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -256241,6 +256396,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.618,
+   "variantsHash": "e94b2b03c5eae8302400eabd72d8be67e9cf71f0",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -256501,6 +256663,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.38,
+   "variantsHash": "b579ae00383d0563195f61c13dcc084255ab7e63",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -256756,6 +256925,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.296,
+   "variantsHash": "5e3f8b82e584a06bf8c502ca9649e87c623916d9",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -257179,6 +257355,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.355,
+   "variantsHash": "234b0cab0daacf82df3d56cb2d01908a96d066de",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -257434,6 +257617,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.384,
+   "variantsHash": "0bae40647f4d45164097165cd0392cf0734fbbed",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -257696,6 +257886,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.448,
+   "variantsHash": "796adfb402c03ecd03d63bacd861f29a4f03a29d",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -257950,6 +258147,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.44,
+   "variantsHash": "054c7bafa28a15c52a54341eab8972a9edae4f04",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -258208,6 +258412,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.447,
+   "variantsHash": "65998cf74adb41441c615051657d6fa142b9f9c9",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -258465,6 +258676,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.404,
+   "variantsHash": "0ef575c7724abf7a9dfbafd924744971339da6a1",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -258720,6 +258938,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.476,
+   "variantsHash": "d987691327ba9656a0e4ad9073f8b8796a796e23",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -258974,6 +259199,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.461,
+   "variantsHash": "2d36a7a14639838adb8514d09acb51db64bfb6b2",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -259242,6 +259474,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.388,
+   "variantsHash": "eefbd2fda72c1afc33c4eab03cc31bd2fe08b2a4",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -259497,6 +259736,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.378,
+   "variantsHash": "ee22db2bd78878c004387038b2f93fb34e9583b5",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -259754,6 +260000,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.375,
+   "variantsHash": "468c9477d11d71266420715f5dc40b13d8a629ee",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -260015,6 +260268,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.402,
+   "variantsHash": "dc6ca3af1ec00a20f4f3fecb8929768ec6f200ad",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -260283,6 +260543,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.391,
+   "variantsHash": "00b27e581702a07036f3de992760a0892f7d8e31",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -260548,6 +260815,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.42,
+   "variantsHash": "804808fc42b9edb408b96c39f5b72f8721b2f02d",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -260811,6 +261085,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.362,
+   "variantsHash": "747eb617d2ac41f50b31260cbc99e559b74f6ea3",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -261072,6 +261353,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.533,
+   "variantsHash": "5b05b2838761a94d7bf68bfa95f23ffe50b54466",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -261332,6 +261620,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.303,
+   "variantsHash": "a775aad0cc03f8e60d8e07f0bd1b41f56ca7fe70",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -261597,6 +261892,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.381,
+   "variantsHash": "744855a37e6dc7696b2eca6bf7f02878831ee79c",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -261858,6 +262160,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.233,
+   "variantsHash": "8170da48a2133ed868aa2878413a1751308b4331",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -262116,6 +262425,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.412,
+   "variantsHash": "62e1dd19b6aee5c9062bc504cc189b6802ffd150",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -262543,6 +262859,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.415,
+   "variantsHash": "11b4aaac31afc4fc9bf32bdd8a8df6797e397eb4",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -262974,6 +263297,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.432,
+   "variantsHash": "5ec540daf209ac3629a3c80181dc4c7e883599a1",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -263230,6 +263560,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.342,
+   "variantsHash": "ca2afb3f3542e02a81f74e59127c0d0fd18d8e7f",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -263487,6 +263824,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.436,
+   "variantsHash": "ea5e30177b0ff7f38dc2df7cc77804441b2ce063",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -263744,6 +264088,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.426,
+   "variantsHash": "86642db7b50091f6e0f41b5634955fe62d302299",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -264004,6 +264355,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.342,
+   "variantsHash": "c23348c0578496a22a33b35b6fa743f4d96c264e",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -264262,6 +264620,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.413,
+   "variantsHash": "9f782707b98614c7c6bf4326e82a299dca9ec9a2",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -264320,16 +264685,6 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__yellow.glb"
-  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2021-pw2-v3.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2021-pw2-v3.glb",
   "fallbackGlbUrl": null,
@@ -264447,78 +264802,16 @@
    ]
   },
   "platesBaked": false,
-  "colourVariantPaints": {
-   "grey": [
-    {
-     "oemPaintName": "Crayon",
-     "colourFamily": "Cement Grey",
-     "finish": "Solid"
-    },
-    {
-     "oemPaintName": "Arctic Grey",
-     "colourFamily": "Light Grey",
-     "finish": "Solid"
-    },
-    {
-     "oemPaintName": "Volcano Grey Metallic",
-     "colourFamily": "Dark Grey",
-     "finish": "Metallic"
-    }
-   ],
-   "silver": [
-    {
-     "oemPaintName": "GT Silver Metallic",
-     "colourFamily": "Silver",
-     "finish": "Metallic"
-    }
-   ],
-   "black": [
-    {
-     "oemPaintName": "Jet Black Metallic",
-     "colourFamily": "Black",
-     "finish": "Metallic"
-    }
-   ],
-   "white": [
-    {
-     "oemPaintName": "Carrara White Metallic",
-     "colourFamily": "White",
-     "finish": "Metallic"
-    }
-   ],
-   "blue": [
-    {
-     "oemPaintName": "Gentian Blue Metallic",
-     "colourFamily": "Dark Blue",
-     "finish": "Metallic"
-    },
-    {
-     "oemPaintName": "Shark Blue",
-     "colourFamily": "Bright Blue",
-     "finish": "Solid"
-    }
-   ],
-   "red": [
-    {
-     "oemPaintName": "Guards Red",
-     "colourFamily": "Red",
-     "finish": "Solid"
-    },
-    {
-     "oemPaintName": "Carmine Red",
-     "colourFamily": "Dark Red",
-     "finish": "Solid"
-    }
-   ],
-   "green": [
-    {
-     "oemPaintName": "Python Green",
-     "colourFamily": "Bright Green",
-     "finish": "Solid"
-    }
-   ],
-   "yellow": []
-  }
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.0,
+   "variantsHash": "c121d3fae8709b13a5b79df8d89dffb1759b462e",
+   "method": "render",
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.000), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.000), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -265129,6 +265422,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.269,
+   "variantsHash": "937b71b84c4cf571c3409257539ba50735389c72",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -265387,6 +265687,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.346,
+   "variantsHash": "8132c3dbf361d5c1256ce8e089d3dc2efd4fc72f",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -265643,6 +265950,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.374,
+   "variantsHash": "22c53886ae6c818edf70d1f111b99a080c6fe45f",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -265895,6 +266209,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.41,
+   "variantsHash": "0d0c7cd5ff44a5fa027975849134cae1d9592b8d",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -266155,6 +266476,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.392,
+   "variantsHash": "1778318b038d35a8321b4096d30b9fb1a1b3e62c",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -266415,6 +266743,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.535,
+   "variantsHash": "a1deab3905345e67fe88588257bf9357b1d31d13",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -266670,6 +267005,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.39,
+   "variantsHash": "02aa55bf513621db30d0d092a2e84a02220344f9",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -267105,6 +267447,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.385,
+   "variantsHash": "e1a133a27fe55314eb9c64f1222560f05fe27d0d",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -267160,16 +267509,6 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-pw2-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-pw2-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-pw2-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-pw2-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-pw2-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-pw2-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-pw2-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-pw2-v1__yellow.glb"
-  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-macan-pw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-macan-pw2-v1.glb",
   "fallbackGlbUrl": null,
@@ -267287,78 +267626,16 @@
    ]
   },
   "platesBaked": false,
-  "colourVariantPaints": {
-   "grey": [
-    {
-     "oemPaintName": "Crayon",
-     "colourFamily": "Cement Grey",
-     "finish": "Solid"
-    },
-    {
-     "oemPaintName": "Arctic Grey",
-     "colourFamily": "Light Grey",
-     "finish": "Solid"
-    },
-    {
-     "oemPaintName": "Volcano Grey Metallic",
-     "colourFamily": "Dark Grey",
-     "finish": "Metallic"
-    }
-   ],
-   "silver": [
-    {
-     "oemPaintName": "GT Silver Metallic",
-     "colourFamily": "Silver",
-     "finish": "Metallic"
-    }
-   ],
-   "black": [
-    {
-     "oemPaintName": "Jet Black Metallic",
-     "colourFamily": "Black",
-     "finish": "Metallic"
-    }
-   ],
-   "white": [
-    {
-     "oemPaintName": "Carrara White Metallic",
-     "colourFamily": "White",
-     "finish": "Metallic"
-    }
-   ],
-   "blue": [
-    {
-     "oemPaintName": "Gentian Blue Metallic",
-     "colourFamily": "Dark Blue",
-     "finish": "Metallic"
-    },
-    {
-     "oemPaintName": "Shark Blue",
-     "colourFamily": "Bright Blue",
-     "finish": "Solid"
-    }
-   ],
-   "red": [
-    {
-     "oemPaintName": "Guards Red",
-     "colourFamily": "Red",
-     "finish": "Solid"
-    },
-    {
-     "oemPaintName": "Carmine Red",
-     "colourFamily": "Dark Red",
-     "finish": "Solid"
-    }
-   ],
-   "green": [
-    {
-     "oemPaintName": "Python Green",
-     "colourFamily": "Bright Green",
-     "finish": "Solid"
-    }
-   ],
-   "yellow": []
-  }
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.064,
+   "variantsHash": "3074b99df53e7f3dc485d80a736e39d694da1a53",
+   "method": "render",
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.064), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.064), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -267615,6 +267892,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.334,
+   "variantsHash": "d69eb07ea8d98fd17f482f07e1baca6a10375f56",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -267870,6 +268154,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.408,
+   "variantsHash": "5c50c10a4432915a8b8b07b1d8a04905ff5c40ad",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -268127,6 +268418,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.418,
+   "variantsHash": "1ac19f938395080ab1b92c8666188742e992d638",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -268384,6 +268682,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.42,
+   "variantsHash": "696ba0101700bffaa7aaad8d0fc217bb4b0b4f02",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -268643,6 +268948,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.459,
+   "variantsHash": "0c2cdf5681726975dc6771a3470383ad3032733f",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -268897,6 +269209,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.415,
+   "variantsHash": "e67b2fb9a688d4953545fb757453e0186c24a38c",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -269153,6 +269472,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.382,
+   "variantsHash": "44ed6782b9a45c39f932a4d0b4dc64bbed47ac8e",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -269419,6 +269745,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.445,
+   "variantsHash": "98b0f19f1331210ef8838d067aa4b1574c76d1d6",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -269677,6 +270010,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.446,
+   "variantsHash": "e20f1d0fd65615e6c1707b619ab96328c878ad51",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -270111,6 +270451,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.335,
+   "variantsHash": "241f32cac00124289864fd61e51791426b4ad28b",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -270376,6 +270723,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.424,
+   "variantsHash": "5909b24358f8455675684bea43aade07d78e9310",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -270635,6 +270989,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.45,
+   "variantsHash": "fe93edb38a04a1adb0548434b2cd7a0c7376d991",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -270889,6 +271250,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.481,
+   "variantsHash": "7f461903be4784a936c85a8ff96b6e26360a63a6",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -271145,6 +271513,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.438,
+   "variantsHash": "adf3f1f7eb1e7ac87c5d2e2d8d180b94ea3fe1c1",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -271408,6 +271783,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.445,
+   "variantsHash": "cd0375158d012f6d7e65f94c878b9e78afeab6ef",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -271623,6 +272005,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.377,
+   "variantsHash": "d74519eb866c3e97d681114dc38a24ff952dcfb2",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -271840,6 +272229,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.306,
+   "variantsHash": "0982f01b359cdad7fd9cd789c10e0fec98903138",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -272055,6 +272451,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.353,
+   "variantsHash": "127feef06080b9ae5d6c96544f019bae0b32c463",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -272271,6 +272674,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.334,
+   "variantsHash": "568a1338dff7b52bb41a18fbe0f15bdb042f20ba",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -272488,6 +272898,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.448,
+   "variantsHash": "f9aff7d7fb5b260e94b90ba206f35e3ce56d564d",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -272706,6 +273123,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.439,
+   "variantsHash": "495faefa79b1ba03787ef4869edac8b813576392",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -272922,6 +273346,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.434,
+   "variantsHash": "4c570fba9dc7fabf51476f75a27fe1a426045451",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -273141,6 +273572,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.357,
+   "variantsHash": "689ac08b4aeb87df1f058b34d9843a97435f425a",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -273365,6 +273803,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.434,
+   "variantsHash": "58b954681d4acef433178d8950c8617ddeae5a76",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -273593,6 +274038,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.393,
+   "variantsHash": "0b8dccec3e1568defacee3af3dbc5d3fe9bce2cb",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -273812,6 +274264,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.461,
+   "variantsHash": "2af91811af64204124538af34f12947f378a5243",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -274028,6 +274487,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.334,
+   "variantsHash": "51144f9b27c428eca5436c64bebed3a568489226",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -274243,6 +274709,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.293,
+   "variantsHash": "89af68d45477e3373de97bc12542f4a89b3de9cf",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -274460,6 +274933,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.347,
+   "variantsHash": "62513da5af220c545c8890575270a33b1141e3d9",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -274673,6 +275153,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.371,
+   "variantsHash": "2aa74cec91aa4726767e2f2e4e1eadada0368fd6",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -274890,6 +275377,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.385,
+   "variantsHash": "22999944f71df2938e9fb3cc44e8a41295b67e83",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -274949,16 +275443,6 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lexus/lexus-rc-f-usc10-lxw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lexus/lexus-rc-f-usc10-lxw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lexus/lexus-rc-f-usc10-lxw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lexus/lexus-rc-f-usc10-lxw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lexus/lexus-rc-f-usc10-lxw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lexus/lexus-rc-f-usc10-lxw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lexus/lexus-rc-f-usc10-lxw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/lexus/lexus-rc-f-usc10-lxw1-v1__yellow.glb"
-  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-f-usc10-lxw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-rc-f-usc10-lxw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -275052,63 +275536,16 @@
    ]
   },
   "platesBaked": false,
-  "colourVariantPaints": {
-   "grey": [
-    {
-     "oemPaintName": "Sonic Titanium",
-     "colourFamily": "Gunmetal Grey",
-     "finish": "Metallic"
-    },
-    {
-     "oemPaintName": "Mercury Grey",
-     "colourFamily": "Dark Grey",
-     "finish": "Metallic"
-    }
-   ],
-   "silver": [
-    {
-     "oemPaintName": "Sonic Silver",
-     "colourFamily": "Silver",
-     "finish": "Metallic"
-    }
-   ],
-   "black": [
-    {
-     "oemPaintName": "Graphite Black",
-     "colourFamily": "Black",
-     "finish": "Metallic"
-    }
-   ],
-   "white": [
-    {
-     "oemPaintName": "Sonic White",
-     "colourFamily": "Pearl White",
-     "finish": "Pearl"
-    }
-   ],
-   "blue": [
-    {
-     "oemPaintName": "Celestial Blue",
-     "colourFamily": "Blue",
-     "finish": "Metallic"
-    }
-   ],
-   "red": [
-    {
-     "oemPaintName": "Mesa Red",
-     "colourFamily": "Dark Red",
-     "finish": "Metallic"
-    }
-   ],
-   "green": [
-    {
-     "oemPaintName": "Terrane Khaki",
-     "colourFamily": "Khaki Green",
-     "finish": "Metallic"
-    }
-   ],
-   "yellow": []
-  }
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.046,
+   "variantsHash": "b8515ad6697a129da45d78d0582a3be19a5da6f0",
+   "method": "render",
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.046), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.046), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -275327,6 +275764,13 @@
     }
    ],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.333,
+   "variantsHash": "a692cb5125ba2adcbcdc3997e777b4cdacf3bb96",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -275429,6 +275873,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.34,
+   "variantsHash": "506ebd6a6183e967b53d62a900a67c831ef12bcc",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -275537,6 +275988,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.392,
+   "variantsHash": "bfd75ab693f75d466e6e215eda563592da9ec9dd",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -275646,6 +276104,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.443,
+   "variantsHash": "8edb6b1ca9a740b83f89d729b062aff106acb5d8",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -275754,6 +276219,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.391,
+   "variantsHash": "198543071e7d94727ba16838b895ce246e242502",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -275813,16 +276285,6 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-7-plus-290t-2023-jcw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-7-plus-290t-2023-jcw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-7-plus-290t-2023-jcw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-7-plus-290t-2023-jcw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-7-plus-290t-2023-jcw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-7-plus-290t-2023-jcw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-7-plus-290t-2023-jcw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-7-plus-290t-2023-jcw1-v1__yellow.glb"
-  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaecoo/jaecoo-tiggo-7-plus-290t-2023-jcw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaecoo/jaecoo-tiggo-7-plus-290t-2023-jcw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -275851,16 +276313,16 @@
    "colourOptions": []
   },
   "platesBaked": false,
-  "colourVariantPaints": {
-   "grey": [],
-   "silver": [],
-   "black": [],
-   "white": [],
-   "blue": [],
-   "red": [],
-   "green": [],
-   "yellow": []
-  }
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.005,
+   "variantsHash": "e68ed6565e7cc4afb989b0cd3d22bec1752068db",
+   "method": "render",
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.005), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.005), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -275966,6 +276428,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.384,
+   "variantsHash": "cf7982e96f27eb2924832a7bbefcdd16546a91c4",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -276069,6 +276538,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.413,
+   "variantsHash": "6b140ef165d9a71f3830b4a3bf3350e59e76548b",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -276263,6 +276739,189 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.414,
+   "variantsHash": "9bea62f9def0e30fa0d3dc7e65c7aed52aca05e9",
+   "method": "render",
+   "at": "2026-08-11"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "porsche-911-2000-pw2-v1",
+  "make": "porsche",
+  "model": "911",
+  "modelFamily": "porsche 911",
+  "modelAliases": [
+   "911"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2000,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Turbo"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "28dbd43350bf462c806d5ba3d608e1cc",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Porsche_911_Turbo__996__2000_by_Alex_Ka",
+   "black_aluminium",
+   "black_matte",
+   "black_plastic",
+   "windoFS",
+   "windoR"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2000-pw2-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2000-pw2-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6207000,
+  "mobileFileSizeBytes": 6207000,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "4220d2513fbeaebd33930224997324b07ab11c772d4b89292e15449bbec65ad5",
+  "pipelineVersion": "publish-batch-pw2-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "pw2 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-pw2",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Crayon",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Crayon",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Arctic Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Volcano Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Volcano Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Jet Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Carrara White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carrara White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "GT Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "GT Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Gentian Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Gentian Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Shark Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Shark Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Guards Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Guards Red",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Carmine Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Carmine Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Python Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Python Green",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
