@@ -1426,12 +1426,14 @@
   "trim": "WRX STI",
   "recolourAudit": {
    "status": "fail",
-   "dist": 0.0001,
+   "dist": 0.0,
    "variantsHash": "b7749563cf0ddb0b8cb5b1345bef3897f6285e56",
    "method": "render",
-   "at": "2026-08-08",
-   "demotedToSingleNeutral": "2026-08-08: the material named CarPaint exists but the swap moved the render by 0.000 — the visible body is textured, so editing that material changes nothing on screen. Demoted rather than served."
-  }
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.000), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.000), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -96426,12 +96428,14 @@
   "oemPaintFinish": "Metallic",
   "recolourAudit": {
    "status": "fail",
-   "dist": 0.0592,
+   "dist": 0.059,
    "variantsHash": "a493fee33dc93ebb93e7fb0dad41d13475239a08",
    "method": "render",
-   "at": "2026-08-08",
-   "demotedToSingleNeutral": "2026-08-08: variants baked but the render showed the body colour barely moved, so they shipped as eight near-identical files. Demoted rather than served; the failed distance is kept below as the reason."
-  }
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.059), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.059), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -118441,12 +118445,14 @@
   "platesBaked": false,
   "recolourAudit": {
    "status": "fail",
-   "dist": 0.0751,
+   "dist": 0.075,
    "variantsHash": "3b6713d7b791f03d3deaf80a7e8239ff6e2a4532",
    "method": "render",
-   "at": "2026-08-08",
-   "demotedToSingleNeutral": "2026-08-08: variants baked but the render showed the body colour barely moved, so they shipped as eight near-identical files. Demoted rather than served; the failed distance is kept below as the reason."
-  }
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.075), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.075), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -121025,12 +121031,14 @@
   "trim": "RS",
   "recolourAudit": {
    "status": "fail",
-   "dist": 0.0235,
+   "dist": 0.023,
    "variantsHash": "b6a3aae349eb0d5df041fc93bea36e578471dfd6",
    "method": "render",
-   "at": "2026-08-08",
-   "demotedToSingleNeutral": "2026-08-08: variants baked but the render showed the body colour barely moved, so they shipped as eight near-identical files. Demoted rather than served; the failed distance is kept below as the reason."
-  }
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.023), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.023), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -136138,12 +136146,14 @@
   "platesBaked": false,
   "recolourAudit": {
    "status": "fail",
-   "dist": 0.0641,
+   "dist": 0.064,
    "variantsHash": "8f5526bb57bc2747533ee38b0dda35128b14f34d",
    "method": "render",
-   "at": "2026-08-08",
-   "demotedToSingleNeutral": "2026-08-08: variants baked but the render showed the body colour barely moved, so they shipped as eight near-identical files. Demoted rather than served; the failed distance is kept below as the reason."
-  }
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.064), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.064), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -136289,12 +136299,14 @@
   "platesBaked": false,
   "recolourAudit": {
    "status": "fail",
-   "dist": 0.0603,
+   "dist": 0.06,
    "variantsHash": "642a240fbc0fddc1eb8f7e5f8f6729cd1d5b347a",
    "method": "render",
-   "at": "2026-08-08",
-   "demotedToSingleNeutral": "2026-08-08: variants baked but the render showed the body colour barely moved, so they shipped as eight near-identical files. Demoted rather than served; the failed distance is kept below as the reason."
-  }
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.060), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.060), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -205519,7 +205531,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-2010-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-2010-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-2010-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-2010-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-2010-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-2010-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-2010-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-2010-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500-2010-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500-2010-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -205604,7 +205625,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.284,
+   "variantsHash": "af133d1d11b6f99403da16bb6dd8505152ecda1a",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -205660,7 +205734,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1966-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1966-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1966-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1966-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1966-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1966-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1966-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1966-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-1966-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-1966-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -205745,7 +205828,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.376,
+   "variantsHash": "f111edc160fac87c4a7c9053f289edf2a27e078a",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -205801,7 +205937,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1972-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1972-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1972-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1972-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1972-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1972-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1972-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-124-1972-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-1972-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-1972-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -205886,7 +206031,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.378,
+   "variantsHash": "880efec2375e2699adaba07c300151125e781753",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -205942,7 +206140,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-125-1970-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-125-1970-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-125-1970-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-125-1970-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-125-1970-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-125-1970-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-125-1970-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-125-1970-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-125-1970-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-125-1970-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -206027,7 +206234,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.368,
+   "variantsHash": "af20655218f8053b2cb5c3408e8e1fabb16be5db",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -206084,7 +206344,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-126-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-126-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-126-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-126-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-126-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-126-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-126-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-126-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-126-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-126-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -206169,7 +206438,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.364,
+   "variantsHash": "2cdf30f351761df10dbd16bf6eb5a2a4b996e4e6",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -206225,7 +206547,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-132-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-132-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-132-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-132-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-132-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-132-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-132-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-132-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-132-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-132-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -206310,7 +206641,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.346,
+   "variantsHash": "60c7cc74f94f071981600f84ec669508af18d9aa",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -206366,7 +206750,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-133-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-133-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-133-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-133-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-133-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-133-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-133-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-133-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-133-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-133-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -206451,7 +206844,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.354,
+   "variantsHash": "12df2c995daee7b8d1641e77efaacdf2572415e9",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -206506,7 +206952,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-147-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-147-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -206591,7 +207046,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.274,
+   "variantsHash": "228423e772afefda0ec1b1659108e9682ab2d0b0",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -206647,7 +207155,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-2300-1961-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-2300-1961-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-2300-1961-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-2300-1961-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-2300-1961-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-2300-1961-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-2300-1961-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-2300-1961-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-2300-1961-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-2300-1961-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -206732,7 +207249,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.337,
+   "variantsHash": "e7752a775bcf8a3f5a9eff1c587260ff18f7d0ca",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -206790,7 +207360,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -206875,7 +207454,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.369,
+   "variantsHash": "b296f5189185aa22fc2bb2bcfcb61c3d2684465d",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -206933,7 +207565,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-1970-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-1970-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-1970-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-1970-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-1970-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-1970-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-1970-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-1970-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500-1970-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500-1970-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -207018,7 +207659,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.426,
+   "variantsHash": "2c74d1640d37496ecd4904848dd708d2741537a3",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -207074,7 +207768,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-500-fw1-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500-fw1-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-500-fw1-v2.glb",
   "fallbackGlbUrl": null,
@@ -207159,7 +207862,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.372,
+   "variantsHash": "2477c94b403c5847e742fc0c585a9628d83984b9",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -207215,7 +207971,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1960-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1960-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1960-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1960-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1960-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1960-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1960-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1960-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-600-1960-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-600-1960-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -207300,7 +208065,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.389,
+   "variantsHash": "62b7283ccaad882d00ea609f1cf2c04c97e1ff10",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -207357,7 +208175,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1967-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1967-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1967-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1967-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1967-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1967-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1967-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-600-1967-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-600-1967-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-600-1967-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -207442,7 +208269,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.451,
+   "variantsHash": "53bd62a74a22e8dc46213ac8ee07496c62116d84",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -207497,7 +208377,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-850-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-850-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -207582,7 +208471,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.336,
+   "variantsHash": "3f4ff5c92ae8960274d0fc62f701fa762ae666fc",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -207638,7 +208580,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spider-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spider-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spider-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spider-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spider-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spider-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spider-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spider-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-850-spider-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-850-spider-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -207723,7 +208674,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.313,
+   "variantsHash": "610b558c77461130049ed824b6b1d1b9065df4e3",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -207779,7 +208783,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-barchetta-1995-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-barchetta-1995-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-barchetta-1995-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-barchetta-1995-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-barchetta-1995-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-barchetta-1995-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-barchetta-1995-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-barchetta-1995-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-barchetta-1995-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-barchetta-1995-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -207864,7 +208877,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.34,
+   "variantsHash": "384ea1e521cadd99f3fcf260728a2a7f17792ca0",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -207927,7 +208993,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-linea-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-linea-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -208012,7 +209087,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.369,
+   "variantsHash": "a3556ae21a495cd705abfb7b0acd29bfb0c415c8",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -208074,7 +209202,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-linea-fw1-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-linea-fw1-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-linea-fw1-v2.glb",
   "fallbackGlbUrl": null,
@@ -208159,7 +209296,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.385,
+   "variantsHash": "7a6b2bbf11bb3b4abe1fde93f9f4a6658f5bd2cf",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -208364,7 +209554,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-panda-fw1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-panda-fw1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-panda-fw1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-panda-fw1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-panda-fw1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-panda-fw1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-panda-fw1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-panda-fw1-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-panda-fw1-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-panda-fw1-v2.glb",
   "fallbackGlbUrl": null,
@@ -208449,7 +209648,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.469,
+   "variantsHash": "c6b2aeee41298218d9a659595ea405cc9725e24d",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -208504,7 +209756,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-2009-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-2009-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-2009-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-2009-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-2009-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-2009-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-2009-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-2009-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-punto-2009-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-punto-2009-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -208589,7 +209850,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.446,
+   "variantsHash": "d1b0c11d6d57e891e9921930996467ef94d40f03",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -208644,7 +209958,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-punto-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-punto-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-punto-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -208729,7 +210052,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.29,
+   "variantsHash": "cfc9645514e51a66c395f5cfe6210b9df6458291",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -208786,7 +210162,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-regata-1984-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-regata-1984-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-regata-1984-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-regata-1984-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-regata-1984-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-regata-1984-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-regata-1984-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-regata-1984-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-regata-1984-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-regata-1984-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -208871,7 +210256,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.359,
+   "variantsHash": "da0b178f3defc03136034b4dcb10b7c0d0ac2f27",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -208927,7 +210365,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spring-1968-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spring-1968-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spring-1968-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spring-1968-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spring-1968-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spring-1968-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spring-1968-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-850-spring-1968-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-850-spring-1968-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-850-spring-1968-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -209012,7 +210459,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.33,
+   "variantsHash": "412ac8e823b8216a9eb6509b74e707e2de0c4a02",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -209068,7 +210568,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tempra-1990-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tempra-1990-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tempra-1990-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tempra-1990-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tempra-1990-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tempra-1990-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tempra-1990-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tempra-1990-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-tempra-1990-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-tempra-1990-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -209153,7 +210662,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.316,
+   "variantsHash": "5e93643e3a3189db68cc628ea6d262ec0bd790b6",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -209207,7 +210769,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tipo-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tipo-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tipo-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tipo-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tipo-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tipo-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tipo-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-tipo-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-tipo-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-tipo-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -209292,7 +210863,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.336,
+   "variantsHash": "8b02014b940a0d81865d455653fa51eec84d6359",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -209350,7 +210974,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-toro-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-toro-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-toro-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-toro-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-toro-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-toro-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-toro-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-toro-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-toro-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-toro-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -209435,7 +211068,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.417,
+   "variantsHash": "bcfedf271071a0b4e2661a0e8620cb4b2aa4859d",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -209489,7 +211175,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-x1-9-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-x1-9-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-x1-9-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-x1-9-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-x1-9-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-x1-9-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-x1-9-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-x1-9-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-x1-9-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-x1-9-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -209574,7 +211269,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.352,
+   "variantsHash": "a183a36d9f9b5b3fbb256f0b7fdd0df33be93240",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -209628,7 +211376,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-147-fw1-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-147-fw1-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-147-fw1-v2.glb",
   "fallbackGlbUrl": null,
@@ -209713,7 +211470,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.416,
+   "variantsHash": "f5cbf82fbd247f470a2249885b039bfd77291c62",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -209770,7 +211580,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-ducato-fw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-ducato-fw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-ducato-fw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-ducato-fw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-ducato-fw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-ducato-fw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-ducato-fw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/fiat/fiat-ducato-fw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-fw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-ducato-fw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -209855,7 +211674,60 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Moda Grey Metallic",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Cinema Black",
+     "colourFamily": "Black",
+     "finish": "Solid"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Gelato White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Italia Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Passione Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Ocean Green",
+     "colourFamily": "Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.427,
+   "variantsHash": "d444a7efd9e2039504d511254da23b7a361baf66",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -209913,7 +211785,6 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-gt40-1964-fow1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-gt40-1964-fow1-v1.glb",
   "fallbackGlbUrl": null,
@@ -210022,7 +211893,17 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.0,
+   "variantsHash": "04a9849811e2cab955c0f50fc44a2f1d4d22adcf",
+   "method": "render",
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.000), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.000), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -210079,7 +211960,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-transit-courier-2025-fow1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-transit-courier-2025-fow1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-transit-courier-2025-fow1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-transit-courier-2025-fow1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-transit-courier-2025-fow1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-transit-courier-2025-fow1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-transit-courier-2025-fow1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-transit-courier-2025-fow1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-courier-2025-fow1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-transit-courier-2025-fow1-v1.glb",
   "fallbackGlbUrl": null,
@@ -210188,7 +212078,81 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetic Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbonised Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Moondust Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Agate Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Frozen White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Chrome Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Desert Island Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Grabber Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fantastic Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mean Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.426,
+   "variantsHash": "3d515557bfc7198d886eec8283640a9157ff0c8b",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -210243,7 +212207,6 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-focus-2016-fow1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-focus-2016-fow1-v1.glb",
   "fallbackGlbUrl": null,
@@ -210352,7 +212315,17 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.008,
+   "variantsHash": "91618929fe574aca668e4ff6a12d2f5fbbf28589",
+   "method": "render",
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.008), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.008), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -210409,7 +212382,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-consul-capri-fow1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-consul-capri-fow1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-consul-capri-fow1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-consul-capri-fow1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-consul-capri-fow1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-consul-capri-fow1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-consul-capri-fow1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-consul-capri-fow1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-consul-capri-fow1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-consul-capri-fow1-v1.glb",
   "fallbackGlbUrl": null,
@@ -210518,7 +212500,81 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetic Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbonised Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Moondust Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Agate Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Frozen White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Chrome Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Desert Island Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Grabber Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fantastic Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mean Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.336,
+   "variantsHash": "82cd1a22c0a274a7f7fa4dfb17c094bbc8cd4ad5",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -210580,7 +212636,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-8-gordini-rew1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-8-gordini-rew1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-8-gordini-rew1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-8-gordini-rew1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-8-gordini-rew1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-8-gordini-rew1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-8-gordini-rew1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-8-gordini-rew1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-8-gordini-rew1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-8-gordini-rew1-v1.glb",
   "fallbackGlbUrl": null,
@@ -210665,7 +212730,59 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.346,
+   "variantsHash": "9db54a7b31851869ad756060daf149bd3e9b22d6",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -210722,7 +212839,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-arkana-2020-rew1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-arkana-2020-rew1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-arkana-2020-rew1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-arkana-2020-rew1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-arkana-2020-rew1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-arkana-2020-rew1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-arkana-2020-rew1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-arkana-2020-rew1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-arkana-2020-rew1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-arkana-2020-rew1-v1.glb",
   "fallbackGlbUrl": null,
@@ -210807,7 +212933,59 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.227,
+   "variantsHash": "1a88db6cbefb2343c476a7502aa93bedaf27c1c7",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -210871,7 +213049,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-estafette-rew1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-estafette-rew1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-estafette-rew1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-estafette-rew1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-estafette-rew1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-estafette-rew1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-estafette-rew1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-estafette-rew1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-estafette-rew1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-estafette-rew1-v1.glb",
   "fallbackGlbUrl": null,
@@ -210956,7 +213143,59 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.373,
+   "variantsHash": "a00bffccd53982e1447b12887a8629d9934a3225",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -211013,7 +213252,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2023-law1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2023-law1-v1.glb",
   "fallbackGlbUrl": null,
@@ -211114,7 +213362,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.309,
+   "variantsHash": "9552dacf82cbdbdb43047ac5c9b96f0284385c75",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -211170,7 +213481,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-law1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-law1-v1.glb",
   "fallbackGlbUrl": null,
@@ -211271,7 +213591,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.364,
+   "variantsHash": "1192cf3e080672ceb099bcf8233d21e3990bc3b6",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -211328,7 +213711,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-law1-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-law1-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-law1-v2.glb",
   "fallbackGlbUrl": null,
@@ -211429,7 +213821,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.32,
+   "variantsHash": "6f29f2a3e5f6d85709ddd8fe2e507fb16c4d884b",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -211488,7 +213943,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2022-law1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2022-law1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2022-law1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2022-law1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2022-law1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2022-law1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2022-law1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2022-law1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-2022-law1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-2022-law1-v1.glb",
   "fallbackGlbUrl": null,
@@ -211589,7 +214053,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.373,
+   "variantsHash": "6a7cd354fa0cde7b3f0c7fc8aeec053d4e538323",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -211646,7 +214173,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-sport-2023-law1-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2023-law1-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-sport-2023-law1-v2.glb",
   "fallbackGlbUrl": null,
@@ -211747,7 +214283,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.381,
+   "variantsHash": "c3c8cc1a7d62f701ac2cf8b9f6bcbc1f48e6ec77",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -211807,7 +214406,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-defender-law1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-defender-law1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-defender-law1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-defender-law1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-defender-law1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-defender-law1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-defender-law1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-defender-law1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-law1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-defender-law1-v1.glb",
   "fallbackGlbUrl": null,
@@ -211908,7 +214516,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.354,
+   "variantsHash": "39d9e8d34d99b9fa6c141eebabb43326f001a2f6",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -211963,7 +214634,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2022-law1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2022-law1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2022-law1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2022-law1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2022-law1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2022-law1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2022-law1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2022-law1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-2022-law1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-2022-law1-v1.glb",
   "fallbackGlbUrl": null,
@@ -212064,7 +214744,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.278,
+   "variantsHash": "15aa73119d10e841b15501481e1f3e5fbfa3cd77",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -212122,7 +214865,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2018-law1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2018-law1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2018-law1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2018-law1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2018-law1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2018-law1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2018-law1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-discovery-2018-law1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-2018-law1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-2018-law1-v1.glb",
   "fallbackGlbUrl": null,
@@ -212223,7 +214975,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.28,
+   "variantsHash": "d571e1ac56f820f620be0926b7ccca5a7e13cdac",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -212281,7 +215096,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2008-law1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2008-law1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2008-law1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2008-law1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2008-law1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2008-law1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2008-law1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-2008-law1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-2008-law1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-2008-law1-v1.glb",
   "fallbackGlbUrl": null,
@@ -212382,7 +215206,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.353,
+   "variantsHash": "ebf27daa5c4b30aa6ac3102bae0313544824f605",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -212443,7 +215330,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-evoque-2016-law1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-evoque-2016-law1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-evoque-2016-law1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-evoque-2016-law1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-evoque-2016-law1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-evoque-2016-law1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-evoque-2016-law1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/land-rover/land-rover-range-rover-evoque-2016-law1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-2016-law1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-evoque-2016-law1-v1.glb",
   "fallbackGlbUrl": null,
@@ -212544,7 +215440,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Hakuba Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [],
+   "green": [
+    {
+     "oemPaintName": "Belgravia Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.438,
+   "variantsHash": "f3db20bbb499c7e6e3212813eed448128fa097ae",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -212601,7 +215560,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-scenic-1998-rew1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-scenic-1998-rew1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-scenic-1998-rew1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-scenic-1998-rew1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-scenic-1998-rew1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-scenic-1998-rew1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-scenic-1998-rew1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/renault/renault-scenic-1998-rew1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-scenic-1998-rew1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-scenic-1998-rew1-v1.glb",
   "fallbackGlbUrl": null,
@@ -212686,7 +215654,59 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Shadow Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Diamond Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Glacier White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Diamond White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Iron Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Flame Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.271,
+   "variantsHash": "37315e61f945b30137c0b05578625de29d59fa56",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -221610,7 +224630,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v7__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v7__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v7__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v7__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v7__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v7__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v7__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v7__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-gt-r-nw1-v7.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-gt-r-nw1-v7.glb",
   "fallbackGlbUrl": null,
@@ -221703,7 +224732,65 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Gun Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Ceramic Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Blade Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Pearl Black",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Storm White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Magnetic Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fuji Sunset Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.426,
+   "variantsHash": "08b605d6116ffbef2966edab96da48ffbdcc5df0",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -231799,7 +234886,6 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-nw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-micra-nw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -231892,7 +234978,17 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.045,
+   "variantsHash": "45d0b16dfc8e7bcff639827642b12fcdaae6a0e2",
+   "method": "render",
+   "at": "2026-08-11",
+   "demotedToSingleNeutral": "2026-08-11: the render showed the body colour barely moved (dist=0.045), so the eight variants ship as near-identical files. Demoted rather than served."
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "the render showed the body colour barely moved (dist=0.045), so the eight variants ship as near-identical files"
  },
  {
   "schemaVersion": 2,
@@ -262488,7 +265584,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-carrera-gt-2004-pw2-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-carrera-gt-2004-pw2-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-carrera-gt-2004-pw2-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-carrera-gt-2004-pw2-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-carrera-gt-2004-pw2-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-carrera-gt-2004-pw2-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-carrera-gt-2004-pw2-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-carrera-gt-2004-pw2-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-carrera-gt-2004-pw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-carrera-gt-2004-pw2-v1.glb",
   "fallbackGlbUrl": null,
@@ -262605,7 +265710,86 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.435,
+   "variantsHash": "6a925d4076c4a3ab82acf095d75a31e1291816bf",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -262922,7 +266106,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-panamera-pw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-panamera-pw2-v1.glb",
   "fallbackGlbUrl": null,
@@ -263039,7 +266232,86 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.38,
+   "variantsHash": "599b2d35c4d921432d64bd4f3b0f0493787d1744",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -264872,7 +268144,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2025-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2025-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2025-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2025-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2025-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2025-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2025-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2025-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2025-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2025-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -264989,7 +268270,86 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.479,
+   "variantsHash": "47685eca6df3b6055035ee14ad1bf1ac2d8c7e61",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -265049,7 +268409,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v3__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v3__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v3__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v3__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v3__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v3__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v3__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v3__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2022-pw2-v3.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2022-pw2-v3.glb",
   "fallbackGlbUrl": null,
@@ -265166,7 +268535,86 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.457,
+   "variantsHash": "a61d458855ba04652aa1cb6f9b691f00203a58ee",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -267072,7 +270520,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v7__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v7__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v7__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v7__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v7__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v7__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v7__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v7__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2019-pw2-v7.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2019-pw2-v7.glb",
   "fallbackGlbUrl": null,
@@ -267189,7 +270646,86 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.372,
+   "variantsHash": "7fe09cb252e1bf732bf1d73ba3505566a649e4d4",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -270076,7 +273612,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2021-pw2-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2021-pw2-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2021-pw2-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2021-pw2-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2021-pw2-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2021-pw2-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2021-pw2-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2021-pw2-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-panamera-2021-pw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-panamera-2021-pw2-v1.glb",
   "fallbackGlbUrl": null,
@@ -270193,7 +273738,86 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.434,
+   "variantsHash": "615d1c30f2481101759ed2d618424be2c708bf7b",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -276605,7 +280229,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-8-pro-e-2022-jcw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-8-pro-e-2022-jcw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-8-pro-e-2022-jcw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-8-pro-e-2022-jcw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-8-pro-e-2022-jcw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-8-pro-e-2022-jcw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-8-pro-e-2022-jcw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaecoo/jaecoo-tiggo-8-pro-e-2022-jcw1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaecoo/jaecoo-tiggo-8-pro-e-2022-jcw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaecoo/jaecoo-tiggo-8-pro-e-2022-jcw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -276633,7 +280266,24 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.393,
+   "variantsHash": "5bbe40deceb448220a6d72e5ff7cf910b0fa001d",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  },
  {
   "schemaVersion": 2,
@@ -276805,7 +280455,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2000-pw2-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2000-pw2-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2000-pw2-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2000-pw2-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2000-pw2-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2000-pw2-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2000-pw2-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2000-pw2-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2000-pw2-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2000-pw2-v1.glb",
   "fallbackGlbUrl": null,
@@ -276922,6 +280581,85 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.432,
+   "variantsHash": "787e6ba9dd6922279dd27bbcf93f7bab164203b1",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  }
 ]
