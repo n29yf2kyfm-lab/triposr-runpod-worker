@@ -1148,5 +1148,124 @@
    "tyres render body-white - wheels are solid clay, no rubber",
    "no lamp internals, no grille, no shut lines"
   ]
+ },
+ {
+  "uid": "03e383400bb74626bcdedbbe198a5849",
+  "name": "2014 Porsche Cayman S (981)",
+  "verdict": "pass",
+  "reasons": [
+   "981 Cayman S proportions read instantly; front 3/4 strong",
+   "TYRES CLEARED BY LOCAL GLB RENDER, not by the sheet: the wave sheet shows a white tyre on a grey rim, the shipped GLB rendered locally in Blender (Standard view transform) shows a plainly BLACK tyre on a silver rim - the inverted pairing CLAUDE.md describes, i.e. a render-worker artefact",
+   "glazing transparent, interior visible in the side tile; Cglass_mat1 is alphaMode BLEND at 0.25",
+   "rim faces present in all four views",
+   "front intakes, lamp internals and shut lines defined"
+  ]
+ },
+ {
+  "uid": "21167ac4da0e40fbbb887249f1e8ad98",
+  "name": "2013 Porsche 911 GT3",
+  "verdict": "fail",
+  "reasons": [
+   "WHEELS MISSING: the front arch is empty in the side and rear34 views and the rear arch is empty in front34 - the body floats over a bare void, not a dark rim face",
+   "the wheels that do render are featureless black discs with no rim face at all",
+   "CLAY SHELL besides: glazing opaque body-white with no interior, no lamp internals, grille is a flat dark rectangle",
+   "no shut lines"
+  ]
+ },
+ {
+  "uid": "249b3088ba9449038d89670c9cd8d789",
+  "name": "2014 Porsche 911 GT3 (991)",
+  "verdict": "pass",
+  "reasons": [
+   "991.1 GT3 proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cage and seats visible through the side glass",
+   "grey rim faces present all four views, red calipers behind them",
+   "front intake mesh, lamp internals and shut lines defined",
+   "road-legal GT3, in scope"
+  ]
+ },
+ {
+  "uid": "2557d3a51a3f498c8fdfd40bdd9b0482",
+  "name": "Porsche Carrera Gt4 Galaxi",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: GTA V vehicle rip - the material table carries script_rt_dials_banshee, vehicle_generic_smallspecmap, Black_Plate and Light_Emissive_Texture, all GTA asset naming",
+   "bodywork damaged: a deep crease/gouge runs the length of the door and rear quarter, visible in the side and front34_L views at 2.2x",
+   "tyres render the same light grey as the rim and the body, with no black rubber anywhere (sheet evidence; not re-rendered because the scope and geometry failures are decisive on their own)"
+  ]
+ },
+ {
+  "uid": "25656a7a831442059de7a466f4a17692",
+  "name": "Porsche 911 turbo 930 Johnny Silverhand's",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL: one grey material over the entire car",
+   "glazing opaque grey - no glass, no interior visible in any view",
+   "tyres render the same grey as the rims and the body, no black rubber",
+   "no lamp internals, no grille depth; panel surfacing soft and melted",
+   "game-derived (Cyberpunk) one-off in any case"
+  ]
+ },
+ {
+  "uid": "25bd98dafc4a4ccebc80fa0264908d80",
+  "name": "Porsche_911_ Turbo_996_remix",
+  "verdict": "fail",
+  "reasons": [
+   "BAKED SCENE WELDED INTO THE MESH, proven from the glTF and not from pixels: the file contains a 14.03m x 13.97m x 0.00m floor plane (Object_22) and a 12.83m x 12.75m x 2.90m room box (Object_4) around a 4.6m car - that tiled orange floor and backdrop render with the car in every view and would render in the viewer too",
+   "headlamps are soft blobs with no internal elements",
+   "tyres are black and rim faces are present - the failure is the baked environment",
+   "duplicate source: same underlying mesh as 28dbd433 'Porsche 911 Turbo (996) 2000 by Alex.Ka.'"
+  ]
+ },
+ {
+  "uid": "27240ad1a825434f99e980d7c904c3d0",
+  "name": "1992 Porsche 911 (964) Turbo S 3.6",
+  "verdict": "pass",
+  "reasons": [
+   "964 Turbo S proportions read instantly; front 3/4 strong; premium paint finish",
+   "tyres are NEUTRAL BLACK RUBBER against a teal body and white Cup rims - the coloured-body control CLAUDE.md calls the strongest no-render proof",
+   "glazing transparent, interior and wipers visible",
+   "white rim faces fully present in all four views, red calipers behind",
+   "round lamp internals, engine-lid slats and door/bonnet shut lines all defined"
+  ]
+ },
+ {
+  "uid": "2826fd94a234422d94c88f2f5ef9fdfd",
+  "name": "2017 Porsche 911 Turbo S Exclusive Series 991.2",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 Turbo S Exclusive proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands, against gold rims",
+   "glazing transparent, interior visible",
+   "gold rim faces present in all four views",
+   "front intake slats, lamp internals and shut lines defined",
+   "road car, in scope"
+  ]
+ },
+ {
+  "uid": "28dbd43350bf462c806d5ba3d608e1cc",
+  "name": "Porsche 911 Turbo (996) 2000 by Alex.Ka.",
+  "verdict": "pass",
+  "reasons": [
+   "996 Turbo proportions read instantly; front 3/4 strong; paint finish premium",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, steering wheel and seats visible",
+   "silver hollow-spoke rim faces present all four views, red calipers behind",
+   "996 lamp internals, front intake slats and shut lines defined",
+   "number plate carries a 'turbo' text texture - cosmetic only"
+  ]
+ },
+ {
+  "uid": "2910bf16b3724296b19e7e4a7384cb4e",
+  "name": "Porsche 911 Classic",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "RENDERS FLOATING: the car sits clear of the studio floor by roughly a third of a wheel diameter in all four views; the dark shapes below are its own reflection, not detached parts",
+   "the glTF bbox is 754 x 490 x 407 units - both non-length axes far too large for a 911 (real ratio 1:0.39:0.32), which points at stray geometry dragging the ground fit",
+   "materials themselves are sound: tyres black rubber, glazing transparent with interior visible, rim faces present",
+   "model is otherwise simplified - no shut lines beyond the door, no badges, plain lamp lenses",
+   "marked fail-rerender not scrap, but note the wave inversion/placement bug is deterministic per asset so a re-run may reproduce it"
+  ]
  }
 ]
