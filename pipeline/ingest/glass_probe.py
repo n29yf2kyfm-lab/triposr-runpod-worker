@@ -35,6 +35,14 @@ GLASSY = re.compile(
     re.I)
 
 
+# Materials that MUST be opaque on a finished car: body paint and rubber. Kept
+# narrow and anchored so it cannot swallow glazing or lamp lenses -- "paint"
+# never appears in a window material's name, and \b stops "tire" matching inside
+# "entire". See the GLOBAL-ALPHA SHELL note in probe().
+BODYISH = re.compile(r"carpaint|car_paint|\bpaint\b|bodypaint|body_paint|"
+                     r"karosserie|\black\b|\btire\b|\btyre\b|\brubber\b", re.I)
+
+
 def head(url, n):
     rq = urllib.request.Request(url, headers={"Range": f"bytes=0-{n-1}"})
     return urllib.request.urlopen(rq, timeout=180).read()
@@ -56,7 +64,7 @@ def probe(uid, stage="staging/jeep"):
     url = f"{SB}/storage/v1/object/public/{BUCKET}/{stage}/{uid}.glb"
     g = gltf_json(url)
     mats = g.get("materials") or []
-    trans, glazing, flat_vals, untex = [], [], set(), 0
+    trans, glazing, flat_vals, untex, body_trans = [], [], set(), 0, []
     for m in mats:
         nm = m.get("name") or ""
         pbr = m.get("pbrMetallicRoughness") or {}
@@ -103,6 +111,25 @@ def probe(uid, stage="staging/jeep"):
         if GLASSY.search(nm):
             glazing.append({"name": nm, "alpha": round(alpha, 3), "mode": mode,
                             "transmission": round(tr, 3), "transparent": bool(is_trans)})
+        # GLOBAL-ALPHA SHELL -- found on the Volvo wave 2026-08-11, and NOT the
+        # same thing as the flat shell above. "Volvo XC60" (1,134,258 faces)
+        # carries 18 materials of which EVERY ONE is alphaMode=BLEND: carpaint
+        # alpha 0.25, tire 0.25, chrome 0.25, rim 0.25, brakedisk 0.25. The
+        # baseColorFactors are individually CORRECT (carpaint 0.796 light, tire
+        # 0.106 dark rubber), so the flat-shell test cannot see it -- it requires
+        # one shared colour AND no non-OPAQUE alphaMode, and this file fails both
+        # halves. Only the alpha is broken, uniformly.
+        #
+        # It matters because the car renders 75% see-through: the audit sheet
+        # shows a ghost with the floor visible through the doors, and the shipped
+        # GLB is what the viewer hands the customer where posterUrl is null.
+        #
+        # It matters MORE because the glazing verdict below would call this car
+        # "clear" and pass it: windowglass IS transparent (alpha 0.7), which is
+        # true and entirely beside the point. Body paint and rubber must be
+        # opaque, so they are tested separately here.
+        if BODYISH.search(nm) and is_trans:
+            body_trans.append({"name": nm, "alpha": round(alpha, 3), "mode": mode})
         if not textured:
             untex += 1
             flat_vals.add(tuple(round(x, 4) for x in bcf[:3]))
@@ -198,6 +225,7 @@ def probe(uid, stage="staging/jeep"):
             "n_materials": len(mats),
             "n_transparent": len(trans), "glazing_named": glazing[:6],
             "transparent": trans[:6], "flat_shell": flat,
+            "alpha_shell": bool(body_trans), "body_transparent": body_trans[:6],
             "n_textures": len(g.get("images") or [])}
 
 
