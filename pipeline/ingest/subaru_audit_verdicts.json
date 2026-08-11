@@ -885,5 +885,27 @@
    "renders exactly as that predicts: a uniform white clay with opaque white windows, body-white tyres and blank lamp housings; no interior resolvable anywhere",
    "cov=1.000 FULL COVERAGE, so no respray is possible"
   ]
+ },
+ {
+  "uid": "e76d3da1c2924f8699077ea73244aeb8",
+  "name": "SUBARU BRZ IMPROVED",
+  "verdict": "fail",
+  "reasons": [
+   "glazing renders body-white and opaque in three of the four tiles - the side and rear quarter windows are solid white panels with no interior resolvable; only the windscreen in the side tile shows any cabin",
+   "headlamps are featureless white blobs with only a faint outline, no lens or internal elements",
+   "cov=0.897, one material covering nearly the whole car, so a respray would carry onto the glazing"
+  ]
+ },
+ {
+  "uid": "9619c092b4dd496a978dee79194da288",
+  "name": "2013 Subaru BRZ",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec 2013 BRZ (ZC6) - clean complete body, proportions read instantly and hold across all four tiles",
+   "tyres plainly black rubber, clearly darker than the grey alloys, judged on the tread face in front34 and rear34 at 5x",
+   "glazing clear: seats, door card and cabin resolve through the side and quarter glass in two tiles",
+   "projector headlamp internals, mesh grille with a defined frame, red tail lamps with internal structure, defined door and boot shut lines, rim faces present in all four tiles",
+   "NOTE: 63,612 faces, the lightest of the BRZ passes; same generation and title as ab42313b (173,071 faces) - see the dupe check"
+  ]
  }
 ]
