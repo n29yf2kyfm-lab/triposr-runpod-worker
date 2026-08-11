@@ -471,5 +471,52 @@
    "DUPLICATE of #38 at 308 faces apart (0.03%); #38 has the higher face count and is the one to keep",
    "dupe_check will catch this pair on rule A (title token overlap 1.00 ignoring 'mazda', face delta 0.03%)"
   ]
+ },
+ {
+  "uid": "d86a6c73fcac426c88ccd4d2ac40c346",
+  "name": "Mazda 5",
+  "verdict": "fail",
+  "reasons": [
+   "GLOBAL-ALPHA SHELL: every one of the 16 materials is alphaMode=BLEND, and carpaint.263 and tire.262 are both alpha 0.25. The whole car is 75% see-through - in the side tile the seats, cabin floor and far-side wheel read straight through the closed doors",
+   "the sheet header states it independently: body mats=0, cov=0.000 - the worker found nothing that behaves like opaque paint",
+   "THE GLAZING PROBE ALONE WOULD HAVE PASSED THIS as 'clear', which is true and beside the point: greenglass at 0.7 IS transparent. It is the separate body/rubber-opacity check that catches it. Cross-wave confirmation - this defect was found on the Volvo wave the same day and is NOT marque-specific; both Mazda cases carry the identical 0.25 signature and the same carpaint/tire/chrome/black material naming",
+   "real loss: the Mazda 5 is a UK-market MPV and this was the only good-geometry candidate for it"
+  ]
+ },
+ {
+  "uid": "b352e42081f142038bea193b87a76cfa",
+  "name": "Mazda Premacy MK3 2010-2016",
+  "verdict": "fail",
+  "reasons": [
+   "EXPLODED PARTS KIT: the body floats clear of the ground and all four wheels are detached and displaced below and outboard of their arches, which are left as bare white disc stubs",
+   "a loose wheel lies flat on the floor beneath the car in the side tile",
+   "glazing opaque in the shipped glb (proven, 30 materials)",
+   "cov=0.738 with 7 body materials - a respray would repaint three quarters of the car",
+   "same car as the Mazda 5 (Premacy is the JDM name), so this and #40 were the two shots at that nameplate and both failed"
+  ]
+ },
+ {
+  "uid": "28ee28e23b8d4255a234a6da92993899",
+  "name": "Mazda Atenza (race shell)",
+  "verdict": "fail",
+  "reasons": [
+   "NOT A ROAD CAR: this is a Super GT / touring-car body buck - open cockpit with a roll cage, no doors, no interior, a huge chassis-mounted rear wing and a full-width diffuser. No UK registration decodes to a race shell",
+   "NO WHEELS: all four arches are empty in every tile",
+   "NO GLAZING AT ALL: there is no windscreen or side glass, just open apertures. Probe agrees - one material, zero transparent",
+   "scene geometry baked in: a white ground slab sits under the car in all four tiles",
+   "cov=1.000 mats=1 - a single-material clay shell"
+  ]
+ },
+ {
+  "uid": "9f860e2b0ba04c6999fef0e106c88540",
+  "name": "Mazda Atenza Sport (Mazda 6 GH)",
+  "verdict": "pass",
+  "reasons": [
+   "This is the JDM name for the Mazda 6 GH, a core UK fleet car. Proportions read as the GH saloon instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
+   "GLAZING PROVEN CLEAR BY DIRECT MEASUREMENT, not by the sheet. The probe could only band it 'faded' because 'windows_glass' is alphaMode=BLEND with baseColorFactor alpha 1.0 and the transparency in the texture. The sheet is NOT admissible here either: 'windows_glass' matches the handler's glass regex, so the worker manufactures the clear glass it shows. Extracting the texture settles it - 128x128 LA, alpha channel mean 64.5/255 (opacity 0.25), 100% of texels below 230",
+   "tyres black on the tread face in the 3/4 tiles; rim faces present with five twin-spokes and centre caps on all four corners",
+   "shut lines defined; projector lamp internals, mesh grille, boot spoiler, twin exhausts and Atenza badging all present",
+   "cov=0.158 healthy, 45 materials, 31 textures - the best-textured saloon in the wave"
+  ]
  }
 ]
