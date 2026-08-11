@@ -4,125 +4,161 @@
   "year": "",
   "faces": 216863,
   "uid": "844687fb9c84476ea1a2f5ea8c909ed2",
-  "title": "Lexus"
+  "title": "Lexus",
+  "trim": null,
+  "generation": null
  },
  {
   "model": "ES350 F Sport",
   "year": "2021",
   "faces": 490894,
   "uid": "ec3a23f5653d44a68b4b2d5d6c3a582b",
-  "title": "2021 Lexus ES350 F Sport"
+  "title": "2021 Lexus ES350 F Sport",
+  "trim": "F Sport",
+  "generation": null
  },
  {
   "model": "GS 350",
   "year": "2011",
   "faces": 298616,
   "uid": "a89d18432d5047549c4e8b9a66cb2d7d",
-  "title": "Lexus GS 350 2011"
+  "title": "Lexus GS 350 2011",
+  "trim": null,
+  "generation": null
  },
  {
   "model": "GS S130",
   "year": "1997",
   "faces": 1042618,
   "uid": "ed1031b9710c41449a3fb05c7a764075",
-  "title": "Lexus GS S130 1997"
+  "title": "Lexus GS S130 1997",
+  "trim": null,
+  "generation": null
  },
  {
   "model": "GX",
   "year": "2024",
   "faces": 434799,
   "uid": "e244015ca952458da17f72356a9e6825",
-  "title": "2024 Lexus GX"
+  "title": "2024 Lexus GX",
+  "trim": null,
+  "generation": null
  },
  {
   "model": "GX 550 h Overtrail",
   "year": "2023",
   "faces": 518389,
   "uid": "2c8aadc8d0ea4ec180f758cd1361254b",
-  "title": "2023 Lexus GX 550 h Overtrail"
+  "title": "2023 Lexus GX 550 h Overtrail",
+  "trim": "Overtrail",
+  "generation": null
  },
  {
   "model": "IS300/200",
   "year": "",
   "faces": 94753,
   "uid": "281a547f226543d680e4f27ae0304278",
-  "title": "Lexus IS300/200"
+  "title": "Lexus IS300/200",
+  "trim": null,
+  "generation": null
  },
  {
   "model": "LC",
   "year": "2020",
   "faces": 216880,
   "uid": "5a44f422b6bb463c87ce35c8dc8664f2",
-  "title": "2020 Lexus LC"
+  "title": "2020 Lexus LC",
+  "trim": null,
+  "generation": null
  },
  {
   "model": "LC 500",
   "year": "2017",
   "faces": 280973,
   "uid": "06f7ccfdf2aa4ef7afce64da59cacb16",
-  "title": "2017 Lexus LC 500"
+  "title": "2017 Lexus LC 500",
+  "trim": null,
+  "generation": null
  },
  {
   "model": "LFA",
   "year": "2010",
   "faces": 89006,
   "uid": "05900382647c42d19ab925f23eabca62",
-  "title": "2010 Lexus LFA"
+  "title": "2010 Lexus LFA",
+  "trim": null,
+  "generation": null
  },
  {
   "model": "LFA",
   "year": "2011",
   "faces": 217533,
   "uid": "83d062d1cd144e6a944c7415ef864889",
-  "title": "2011 Lexus LFA"
+  "title": "2011 Lexus LFA",
+  "trim": null,
+  "generation": null
  },
  {
   "model": "LS Mk2",
   "year": "1997",
   "faces": 979288,
   "uid": "ab0ced1a02da4cada957f48a4fdda173",
-  "title": "Lexus LS Mk2 1997"
+  "title": "Lexus LS Mk2 1997",
+  "trim": null,
+  "generation": null
  },
  {
   "model": "LX 570",
   "year": "",
   "faces": 341416,
   "uid": "605997db34c445898e4e92c8f4524378",
-  "title": "Lexus LX 570"
+  "title": "Lexus LX 570",
+  "trim": null,
+  "generation": null
  },
  {
   "model": "LX J100",
   "year": "2003",
   "faces": 1155672,
   "uid": "1e2a4a0d99844ce7b56956fc0ea0d8a7",
-  "title": "Lexus LX J100 2003"
+  "title": "Lexus LX J100 2003",
+  "trim": null,
+  "generation": "J100"
  },
  {
   "model": "LX570",
   "year": "2015",
   "faces": 599100,
   "uid": "5fd55243ce26447fa5a1fb8c15efbd1a",
-  "title": "Lexus LX570 2015"
+  "title": "Lexus LX570 2015",
+  "trim": null,
+  "generation": null
  },
  {
   "model": "LX700h",
   "year": "2025",
   "faces": 391191,
   "uid": "1dd2df7c68e74ca3a3ea83fb6c4bd1a2",
-  "title": "2025 Lexus LX700h"
+  "title": "2025 Lexus LX700h",
+  "trim": null,
+  "generation": null
  },
  {
   "model": "RC F (USC10)",
   "year": "",
   "faces": 283048,
   "uid": "2cb8265d1ce84bc4a3145ce641c1435f",
-  "title": "Lexus RC F (USC10)"
+  "title": "Lexus RC F (USC10)",
+  "trim": "F",
+  "generation": "USC10"
  },
  {
   "model": "RX450h",
   "year": "",
   "faces": 603610,
   "uid": "40a8a1c9f57f48059db8c6e3c0c3e65b",
-  "title": "Lexus RX450h"
+  "title": "Lexus RX450h",
+  "trim": null,
+  "generation": null
  }
 ]
