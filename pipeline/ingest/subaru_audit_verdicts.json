@@ -427,5 +427,73 @@
    "mats=0 cov=0.000, no body-paint material exists",
    "fourth car in the Nieve5677 cluster with this identical defect"
   ]
+ },
+ {
+  "uid": "36954e8d23f645eab86168e29c498c8b",
+  "name": "Subaru Impreza WRX STI GDB 2004",
+  "verdict": "fail",
+  "reasons": [
+   "exploded parts kit on a moulding tray: flat white planes sit above and below the car, panels float free of the shell and only one wheel is fitted",
+   "out of scope: rally spec - four-lamp light pod, competition rear wing, roof vents, arch extensions",
+   "uniform white clay, cov=0.912 full coverage so glass and tyres share the body material"
+  ]
+ },
+ {
+  "uid": "8ec5a3959d194d5da08db81ce26ac81d",
+  "name": "Subaru WRX STI VA 2015",
+  "verdict": "fail",
+  "reasons": [
+   "wheels not mounted: all four arches are empty with the suspension struts and hubs exposed, and a single loose wheel sits under the sill",
+   "body split between white and unpainted dark-grey sections - an unfinished assembly, not a car",
+   "mats=0 cov=0.000, no body-paint material; widebody fender flares fitted"
+  ]
+ },
+ {
+  "uid": "2fa30ce7756c41b7bbc896aed00a3f0d",
+  "name": "2015 Subaru WRX STI",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec WRX STI VA (2015) - factory wing, bonnet scoop, correct proportions, consistent across all four tiles",
+   "tyres plainly black rubber against the dark alloys with red STI calipers, judged on the tread face in front34 and rear34",
+   "glazing clear: interior door card, steering wheel, seats and rear parcel shelf all resolve through the glass in two tiles",
+   "modelled interior and 42 textures (gauges, seatbelts, carpet, defrost lines)",
+   "CAVEAT, unresolved: the tail lamps render pale lilac rather than red in three tiles. The lamp materials (pass_tail, driver_tail) are TEXTURED with a white multiplier so their colour comes from the texture, but the file also carries an untextured magenta-pink material named refract. Cannot separate model defect from render artefact without a local render - confirm before publishing"
+  ]
+ },
+ {
+  "uid": "8473f0659a59490888c78a275cfc1631",
+  "name": "2018 Subaru Impreza WRX STi",
+  "verdict": "pass",
+  "reasons": [
+   "best sheet of the wave: OEM road-spec 2018 WRX STI (VA facelift), proportions read instantly and hold across all four tiles",
+   "tyres plainly black rubber, clearly darker than the dark-grey alloys, with red STI calipers - judged on the tread face in front34 and rear34 at 5x",
+   "glazing clear: seats, headrests, door cards and the B-pillar all resolve through the side glass in two tiles",
+   "headlamp internals fully resolved (projector plus LED accent), honeycomb grille with real depth, crisp door/boot/bonnet shut lines, correct dark-red tail lamps",
+   "rim faces present and consistent in all four tiles"
+  ]
+ },
+ {
+  "uid": "96a423cba0ff4a7f82aee9d885abb9af",
+  "name": "2018 Subaru WRX STI",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec 2018 WRX STI (VA facelift) - same quality tier as 8473f065; proportions consistent across all four tiles",
+   "tyres plainly black rubber against gloss-black alloys with coloured calipers, judged on the tread face in front34 and rear34",
+   "glazing clear: seats, headrests and door cards resolve through the side glass in two tiles",
+   "headlamp internals, honeycomb grille depth and crisp shut lines all present; rim faces present in all four tiles",
+   "NOTE: 226,379 faces against 227,058 for 8473f065 - almost certainly the same source model re-uploaded; see the dupe check"
+  ]
+ },
+ {
+  "uid": "457f01e7e8d14b088e3f092c1be9e75c",
+  "name": "Subaru Impreza WRX STi Version VI (GC8)",
+  "verdict": "pass",
+  "reasons": [
+   "road-registerable Impreza WRX STi Version VI (GC8) two-door; 86 materials and 92 textures with a fully modelled interior",
+   "tyres plainly black rubber against the gold rims with red calipers, judged on the tread face in front34 and rear34",
+   "glazing very clear: the roll cage, seats and full interior resolve through the glass in every tile",
+   "the magenta oval on the grille badge is most likely a RENDER artefact, not a model defect: Frontbadge1Mtl is textured with a white multiplier, while the file carries a magenta placeholder material (Hub1Mtl, rgba 1.0/0.133/0.612) at alpha 0.000 that a correct viewer would not draw. Confirm before publishing",
+   "NOTED WEAKNESSES: headlamp internals soft, door shut lines faint, and WRX side decals plus a roll cage, Greddy intake and Kakimoto exhaust are baked in - a tuned road car, not a stock spec"
+  ]
  }
 ]
