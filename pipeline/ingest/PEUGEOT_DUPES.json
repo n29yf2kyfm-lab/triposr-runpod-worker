@@ -1,0 +1,214 @@
+{
+ "_doc": "Face-count proximity pairs among the 85 Peugeot candidates. Candidate finder only -- CLAUDE.md measured 50% precision on this signal (a Binz stretch vs a W123 coupe). Nothing is auto-grouped. Round-number clusters are excluded because decimated-to-target meshes converge: a Peugeot 405 and a 306 both sit within 50 faces of exactly 500,000 and are different cars. NOTE the two EXPORT pairs found here: #48/#70 (RCZ, 115,395 faces) and #29/#74/#84 (206, 171,86x) are the SAME mesh exported twice, once soundly and once as a broken shell -- so a duplicate pair is not always a straight choice between equals.",
+ "pairs": [
+  {
+   "a": {
+    "n": 4,
+    "uid": "4b55488b331041c299955a937334113b",
+    "name": "1998 Peugeot 406",
+    "faces": 67656,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 54,
+    "uid": "a45880cd207343aea45cd160efefeb81",
+    "name": "Peugeot 406",
+    "faces": 67660,
+    "verdict": "P"
+   },
+   "face_delta": 4,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 30,
+    "uid": "b2ef11bf94b848618b5b7f38e202316b",
+    "name": "Peugeot 206 GTI",
+    "faces": 87713,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 31,
+    "uid": "1a23dbbed6d14a1aafff70b18303c8d1",
+    "name": "Peugeot 206 GTI New Version PSA Design",
+    "faces": 87713,
+    "verdict": "F"
+   },
+   "face_delta": 0,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 5,
+    "uid": "513b76a9909049f49327c0b83bc5b56b",
+    "name": "2000 Peugeot 206",
+    "faces": 115266,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 48,
+    "uid": "bcbd76ac8d8949bc8e4b9f411d2f8745",
+    "name": "Peugeot 308 RCZ",
+    "faces": 115395,
+    "verdict": "P"
+   },
+   "face_delta": 129,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 48,
+    "uid": "bcbd76ac8d8949bc8e4b9f411d2f8745",
+    "name": "Peugeot 308 RCZ",
+    "faces": 115395,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 70,
+    "uid": "3f1376cfec0340208806d94ae49e19bb",
+    "name": "Peugeot RCZ",
+    "faces": 115395,
+    "verdict": "F"
+   },
+   "face_delta": 0,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 29,
+    "uid": "1d278036c89d489bb47ccd33b0effa21",
+    "name": "Peugeot 206 GLB",
+    "faces": 171861,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 84,
+    "uid": "1da6e84e50c244a98602d06c9bc729a3",
+    "name": "peugeot_206 HDI",
+    "faces": 171861,
+    "verdict": "P"
+   },
+   "face_delta": 0,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 84,
+    "uid": "1da6e84e50c244a98602d06c9bc729a3",
+    "name": "peugeot_206 HDI",
+    "faces": 171861,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 74,
+    "uid": "2a41b3b90a2f464192787d7a5567c04b",
+    "name": "Peugeot-206",
+    "faces": 171872,
+    "verdict": "F"
+   },
+   "face_delta": 11,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 74,
+    "uid": "2a41b3b90a2f464192787d7a5567c04b",
+    "name": "Peugeot-206",
+    "faces": 171872,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 26,
+    "uid": "eb33af1177814fadbb2b79944e54a99c",
+    "name": "Peugeot 206 2001",
+    "faces": 171885,
+    "verdict": "F"
+   },
+   "face_delta": 13,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 61,
+    "uid": "8177d7d35d6343d198b7df30abefee29",
+    "name": "Peugeot 407 Sedan 2004-2011",
+    "faces": 244021,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 3,
+    "uid": "e1f8335a73a9442eb06ff8624718ac76",
+    "name": "1997 Peugeot 205 GTI",
+    "faces": 244213,
+    "verdict": "P"
+   },
+   "face_delta": 192,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 3,
+    "uid": "e1f8335a73a9442eb06ff8624718ac76",
+    "name": "1997 Peugeot 205 GTI",
+    "faces": 244213,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 2,
+    "uid": "b0dbc2e209d545f9a2becdf9a7ab43ef",
+    "name": "1997 Peugeot 205",
+    "faces": 244310,
+    "verdict": "P"
+   },
+   "face_delta": 97,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  },
+  {
+   "a": {
+    "n": 73,
+    "uid": "13f1ac1713874190913eaf31878220b9",
+    "name": "Peugeot+405+(1990+French+Car)+-+3D+Model",
+    "faces": 499966,
+    "verdict": "F"
+   },
+   "b": {
+    "n": 72,
+    "uid": "e740c23c3af641248827fd4c771ebbea",
+    "name": "Peugeot+306+XR_stls",
+    "faces": 500012,
+    "verdict": "F"
+   },
+   "face_delta": 46,
+   "round_number_cluster": 500000,
+   "status": "EXCLUDED - decimated-to-target round-number cluster"
+  },
+  {
+   "a": {
+    "n": 82,
+    "uid": "3bf90277b3594803b4206efe764038ad",
+    "name": "peugeot 307 2008",
+    "faces": 799152,
+    "verdict": "P"
+   },
+   "b": {
+    "n": 43,
+    "uid": "ee4cb0be744c449fa20e2a5b554e542a",
+    "name": "Peugeot 307 2008 Uploaded Version",
+    "faces": 799666,
+    "verdict": "F"
+   },
+   "face_delta": 514,
+   "round_number_cluster": null,
+   "status": "CANDIDATE - flag for the eye, never auto-group"
+  }
+ ]
+}

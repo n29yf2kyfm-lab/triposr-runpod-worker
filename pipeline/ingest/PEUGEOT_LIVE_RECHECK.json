@@ -1,0 +1,1316 @@
+{
+ "_doc": "Re-check of every LIVE publicationStatus=approved peugeot entry in platform/catalogue/catalogue.v2.json against the 2026-08-09 glazing ruling and the flat-shell / global-alpha-shell signatures. Both marques shipped BEFORE those rulings and before glass_probe existed. Probed with pipeline/ingest/glass_probe.py probe(url=...) against the SHIPPED desktopGlbUrl -- the shipped asset, not the wave sheet, per the CLAUDE.md evidence rule that cost 39 wrongful quarantines. NOTHING HERE HAS BEEN QUARANTINED: these are candidates with evidence, for the owner to confirm by render.",
+ "_probe_validation": "glass_probe scored 106/107 against pipeline/ingest/PORSCHE_GLASS.json ground truth at the time of this run; the single miss is certainty=inferred, which is routed to the eye and never failed.",
+ "_counts": {
+  "approved": 36,
+  "flagged": 4,
+  "opaque_glazing": 4,
+  "flat_shell": 0,
+  "alpha_shell_candidates": 0
+ },
+ "rows": [
+  {
+   "assetId": "peugeot-307-2008-v1",
+   "sourceTitle": "2008 Peugeot 307",
+   "sourceReferenceId": "eb357098ec05483986262ad8eb8ab0cc",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 22,
+   "n_transparent": 3,
+   "n_textures": 7,
+   "glazing_named": [
+    {
+     "name": "Carro_Vidro_Laranja",
+     "alpha": 0.131,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidros",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidros_Vermelhos",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-307-2008-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-308-2022-v1",
+   "sourceTitle": "2022 | Peugeot 308",
+   "sourceReferenceId": "0d9c9c265bec42678bfc269c1a8cebc3",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 34,
+   "n_transparent": 4,
+   "n_textures": 4,
+   "glazing_named": [
+    {
+     "name": "interior_glass_clear",
+     "alpha": 0,
+     "mode": "MASK",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "exterior_glass_clear",
+     "alpha": 0.498,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "exterior_glass_tinted",
+     "alpha": 0.894,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2022-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-508-v1",
+   "sourceTitle": "Peugeot 508",
+   "sourceReferenceId": "8192f18de3d2431197c9e707666212c7",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 58,
+   "n_transparent": 4,
+   "n_textures": 8,
+   "glazing_named": [
+    {
+     "name": "2021_Peugeot_508_PSE_Windows",
+     "alpha": 0.533,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "2021_Peugeot_508_PSE_WindowsTrim",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-508-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-208-v2",
+   "sourceTitle": "2021 Peugeot 208",
+   "sourceReferenceId": null,
+   "glass_verdict": "ambiguous",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 7,
+   "n_transparent": 1,
+   "n_textures": 6,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-208-v2.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-3008-v1",
+   "sourceTitle": "Peugeot 3008",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 22,
+   "n_transparent": 3,
+   "n_textures": 9,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-3008-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-expert-v1",
+   "sourceTitle": "2012 Peugeot Expert",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 32,
+   "n_transparent": 2,
+   "n_textures": 10,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-boxer-v1",
+   "sourceTitle": "2020 Peugeot Boxer 435 L4H2",
+   "sourceReferenceId": null,
+   "glass_verdict": "ambiguous",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 11,
+   "n_transparent": 1,
+   "n_textures": 3,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-boxer-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-205-v1",
+   "sourceTitle": "Peugeot 205 cabriolet convertible",
+   "sourceReferenceId": null,
+   "glass_verdict": "clear",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 27,
+   "n_transparent": 1,
+   "n_textures": 8,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": true,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-partner-2024-w5-v1",
+   "sourceTitle": "Peugeot E Partner SWB 2024",
+   "sourceReferenceId": "02551ea9c21a4e1986435c1252fe977e",
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 19,
+   "n_transparent": 0,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "glasswindow_windshieldSG",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-partner-2024-w5-v1.glb",
+   "flags": [
+    "OPAQUE-GLAZING"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "peugeot-2008-2020-w5-v1",
+   "sourceTitle": "2020 Peugeot 2008",
+   "sourceReferenceId": "93efd164d3374295a8ac04c36e329429",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 44,
+   "n_transparent": 5,
+   "n_textures": 30,
+   "glazing_named": [
+    {
+     "name": "2020_Peugeot_e-2008_rouge_vitre",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "2020_Peugeot_e-2008_vitres_exterieur",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "2020_Peugeot_e-2008_glass_clear",
+     "alpha": 0.369,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "2020_Peugeot_e-2008_glass_black",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2020-w5-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-308-2012-w5-v1",
+   "sourceTitle": "Peugeot 308 2012",
+   "sourceReferenceId": "ca2f79eba4c2483990edc3789f777da0",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 15,
+   "n_transparent": 3,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "greenglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2012-w5-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-308-2012-w7-v1",
+   "sourceTitle": "Peugeot 308 SW 2012",
+   "sourceReferenceId": "0d29517f84ef41168a00304bcb8c2db5",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 17,
+   "n_transparent": 3,
+   "n_textures": 2,
+   "glazing_named": [
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "greenglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2012-w7-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-308-2012-w7-v2",
+   "sourceTitle": "Peugeot 308 CC 2012",
+   "sourceReferenceId": "c4bf7012033e47a6b06337d28ea6ce79",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 18,
+   "n_transparent": 3,
+   "n_textures": 2,
+   "glazing_named": [
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "greenglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2012-w7-v2.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-407-w9-v1",
+   "sourceTitle": "Peugeot 407",
+   "sourceReferenceId": "a558be03c05a4c6c95e950438f9ec401",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 45,
+   "n_transparent": 5,
+   "n_textures": 2,
+   "glazing_named": [
+    {
+     "name": "p407_glass_vitres01",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "p407_glass_vitres",
+     "alpha": 0.05,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "p407_glass_exterieur",
+     "alpha": 0.7,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "p407_glass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "p407_glass_degivrage",
+     "alpha": 0.0,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-407-w9-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-3008-w12-v1",
+   "sourceTitle": "Peugeot 3008",
+   "sourceReferenceId": "4f7c7318a29d4e16a6047c2d58bba28d",
+   "glass_verdict": "clear",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 25,
+   "n_transparent": 3,
+   "n_textures": 9,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-3008-w12-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-206-2002-w12-v1",
+   "sourceTitle": "2002 Peugeot 206 GTI",
+   "sourceReferenceId": "01499004a07b46b586637149e9c16b29",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 11,
+   "n_transparent": 3,
+   "n_textures": 8,
+   "glazing_named": [
+    {
+     "name": "Glass1Mtl",
+     "alpha": 0.604,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-2002-w12-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-307-w12-v1",
+   "sourceTitle": "Peugeot 307 SW",
+   "sourceReferenceId": "43e93bfe5fdb4727830499d3a8a485a1",
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 32,
+   "n_transparent": 0,
+   "n_textures": 9,
+   "glazing_named": [
+    {
+     "name": "Vitre",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-307-w12-v1.glb",
+   "flags": [
+    "OPAQUE-GLAZING"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "peugeot-508-w12-v1",
+   "sourceTitle": "Peugeot 508 GT",
+   "sourceReferenceId": "70c837db3ae84a718522ab51dca26d2a",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 21,
+   "n_transparent": 1,
+   "n_textures": 11,
+   "glazing_named": [
+    {
+     "name": "glass",
+     "alpha": 0.1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-508-w12-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-e-2008-w12-v1",
+   "sourceTitle": "Peugeot e-2008",
+   "sourceReferenceId": "1094ee784f7d4b63a9c43efefdbacca5",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 27,
+   "n_transparent": 2,
+   "n_textures": 4,
+   "glazing_named": [
+    {
+     "name": "p24_glass",
+     "alpha": 0.25,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-e-2008-w12-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-508-2021-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "1770104e89f84a8f9ce4a0fd9ae131ac",
+   "glass_verdict": "ambiguous",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 56,
+   "n_transparent": 2,
+   "n_textures": 6,
+   "glazing_named": [
+    {
+     "name": "2021_Peugeot_508_PSE_WindowsTrim",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "2021_Peugeot_508_PSE_Windows",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-508-2021-pw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-307-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "3bf90277b3594803b4206efe764038ad",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 33,
+   "n_transparent": 3,
+   "n_textures": 7,
+   "glazing_named": [
+    {
+     "name": "Carro_Vidros",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidro_Laranja",
+     "alpha": 0.129,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidros_Vermelhos",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-307-pw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-3008-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "3e5e14fdb1f94f25a5b572caf518f55d",
+   "glass_verdict": "clear",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 25,
+   "n_transparent": 2,
+   "n_textures": 7,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-3008-pw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-206-2000-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "513b76a9909049f49327c0b83bc5b56b",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 21,
+   "n_transparent": 4,
+   "n_textures": 6,
+   "glazing_named": [
+    {
+     "name": "Carro_Vidro_Laranja",
+     "alpha": 0.131,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidro_R",
+     "alpha": 0.146,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidro_Vermelho",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "Carro_Vidros",
+     "alpha": 0.21,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidros_Vermelhos",
+     "alpha": 0.17,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-206-2000-pw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-205-1997-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "b0dbc2e209d545f9a2becdf9a7ab43ef",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 17,
+   "n_transparent": 5,
+   "n_textures": 2,
+   "glazing_named": [
+    {
+     "name": "Carro_Vidro_Laranja",
+     "alpha": 0.131,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidro_Laranja_1",
+     "alpha": 0.131,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidro_R",
+     "alpha": 0.146,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidros",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidros_Vermelhos",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-1997-pw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-407-2005-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "deaac3bd68604aee8f8365d784f8ab34",
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 44,
+   "n_transparent": 0,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "p407_glass_vitres",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "p407_glass_vitres01",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "p407_glass",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "p407_glass_degivrage",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-407-2005-pw1-v1.glb",
+   "flags": [
+    "OPAQUE-GLAZING"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "peugeot-2008-2018-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "6291b66452614464889a71c8337b8c85",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 16,
+   "n_transparent": 2,
+   "n_textures": 7,
+   "glazing_named": [
+    {
+     "name": "Carro_Vidros",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "Carro_Vidros_Vermelhos",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2018-pw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-2008-2020-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "0edcda285432434a8d127b44ad6da808",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 44,
+   "n_transparent": 3,
+   "n_textures": 29,
+   "glazing_named": [
+    {
+     "name": "2020_Peugeot_e-2008_rouge_vitre",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "2020_Peugeot_e-2008_vitres_exterieur",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "2020_Peugeot_e-2008_glass_clear",
+     "alpha": 0.369,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "2020_Peugeot_e-2008_glass_black",
+     "alpha": 0.4,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-2008-2020-pw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-205-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "ff2b04cf7da94cbdbd277fe23b7204b8",
+   "glass_verdict": "clear",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 44,
+   "n_transparent": 1,
+   "n_textures": 14,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-205-pw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-207-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "fa2cfaaab79b4d18a0fc89ba25a02f07",
+   "glass_verdict": "clear",
+   "certainty": "inferred",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 53,
+   "n_transparent": 10,
+   "n_textures": 0,
+   "glazing_named": [],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-207-pw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-207-pw1-v2",
+   "sourceTitle": "",
+   "sourceReferenceId": "9b59ff092c1c4f1f918ac7c16fe679a7",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 17,
+   "n_transparent": 5,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "windowglass",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "clearglass",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "darkglass",
+     "alpha": 0.5,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-207-pw1-v2.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-rcz-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "bcbd76ac8d8949bc8e4b9f411d2f8745",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 12,
+   "n_transparent": 4,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "clearglass.001",
+     "alpha": 0.2,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "darkglass",
+     "alpha": 0.5,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "greenglass.001",
+     "alpha": 0.3,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-rcz-pw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-308-2026-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "68ae14e9883b4405852b404844384cdf",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 55,
+   "n_transparent": 8,
+   "n_textures": 9,
+   "glazing_named": [
+    {
+     "name": "ext_glass",
+     "alpha": 0.242,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "vehicle_vehglass",
+     "alpha": 0.742,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "vehicle_vehglass.001",
+     "alpha": 0.261,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    },
+    {
+     "name": "int_glass",
+     "alpha": 0.0,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-2026-pw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-308-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "e538cff86fef432287ec93c7c6f91931",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 16,
+   "n_transparent": 2,
+   "n_textures": 10,
+   "glazing_named": [
+    {
+     "name": "windows",
+     "alpha": 0.5,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-308-pw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-404-pw1-v1",
+   "sourceTitle": "",
+   "sourceReferenceId": "cf15d0c9a7ac485ba4a33a996e6c5589",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 6,
+   "n_transparent": 1,
+   "n_textures": 10,
+   "glazing_named": [
+    {
+     "name": "BlueMesh_404_Glass",
+     "alpha": 0.279,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "factor"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-404-pw1-v1.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  },
+  {
+   "assetId": "peugeot-406-pw1-v2",
+   "sourceTitle": "",
+   "sourceReferenceId": "ad75c776d8144bc98527d19b6fd0d58f",
+   "glass_verdict": "opaque",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 73,
+   "n_transparent": 0,
+   "n_textures": 0,
+   "glazing_named": [
+    {
+     "name": "glass__env_49_trans",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass_2a__env_5_trans",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass__env_5_trans",
+     "alpha": 1.0,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-406-pw1-v2.glb",
+   "flags": [
+    "OPAQUE-GLAZING"
+   ],
+   "recommendation": "QUARANTINE-CANDIDATE (confirm by render first)"
+  },
+  {
+   "assetId": "peugeot-207-pw1-v3",
+   "sourceTitle": "",
+   "sourceReferenceId": "ef5d59b78b96496fab2731b138820ea2",
+   "glass_verdict": "clear",
+   "certainty": "proven",
+   "flat_shell": false,
+   "alpha_shell": false,
+   "n_materials": 83,
+   "n_transparent": 10,
+   "n_textures": 51,
+   "glazing_named": [
+    {
+     "name": "window",
+     "alpha": 1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "texture-alpha"
+    },
+    {
+     "name": "window__INT",
+     "alpha": 1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "texture-alpha"
+    },
+    {
+     "name": "INT_glass",
+     "alpha": 1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "texture-alpha"
+    },
+    {
+     "name": "black_glass",
+     "alpha": 1,
+     "mode": "OPAQUE",
+     "transmission": 0,
+     "transparent": false,
+     "via": null
+    },
+    {
+     "name": "glass",
+     "alpha": 1,
+     "mode": "BLEND",
+     "transmission": 0,
+     "transparent": true,
+     "via": "texture-alpha"
+    }
+   ],
+   "body_transparent": [],
+   "posterUrl_present": false,
+   "turntableUrl_present": false,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-207-pw1-v3.glb",
+   "flags": [],
+   "recommendation": "no defect found"
+  }
+ ]
+}

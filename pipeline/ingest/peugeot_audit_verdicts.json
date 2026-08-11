@@ -1,0 +1,2373 @@
+{
+ "_doc": "Per-uid audit of all 85 Peugeot audit sheets in car-meshes/audit/peugeot/, judged against the owner's rubric in CLAUDE.md and the 2026-08-09 glazing and tyre rulings, which post-date the original Peugeot wave. Every sheet has a staged GLB (85/85), so every car was probed. Glazing is decided ONLY from the glTF via pipeline/ingest/glass_probe.py -- the sheet cannot witness it, because render/handler.py forces transmission=1.0 onto any glass-NAMED material (and the probe's GLASSY pattern covers the French vitre/pare-brise/lunette that this marque uses). Where the file names NO glazing material the probe returns certainty=inferred, no override can fire, and the sheet IS admissible; those were judged by eye. 'ambiguous' is never treated as a fail.",
+ "_verdicts": {
+  "pass": "ships",
+  "fail": "scrap or re-source",
+  "fail-rerender": "asset sound, worker inverted it"
+ },
+ "_counts": {
+  "fail": 67,
+  "pass": 18
+ },
+ "rows": [
+  {
+   "n": 1,
+   "uid": "cc25e4d5a33a402e81ab764be6a0f61e",
+   "name": "1968 Peugeot 504",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven: 55 materials, ZERO transparent). FLAT SHELL corroborates. The sheet shows clear glass only because the material is glass-named and the worker forces transmission=1.0 onto it",
+   "faces": 153997,
+   "licence": "CC Attribution",
+   "plate": "504",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 55,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "Int_Rubber.001",
+     "baseColorFactor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+     ],
+     "lum": 0.8,
+     "factor_stated": true
+    },
+    {
+     "name": "Ext_Rubber.001",
+     "baseColorFactor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+     ],
+     "lum": 0.8,
+     "factor_stated": true
+    },
+    {
+     "name": "Tires.001",
+     "baseColorFactor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+     ],
+     "lum": 0.8,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/cc25e4d5a33a402e81ab764be6a0f61e.jpg"
+  },
+  {
+   "n": 2,
+   "uid": "b0dbc2e209d545f9a2becdf9a7ab43ef",
+   "name": "1997 Peugeot 205",
+   "verdict": "pass",
+   "reason": "clean 205 3-door; glazing clear (proven); tyre material effective 32 sRGB -- properly black",
+   "faces": 244310,
+   "licence": "CC Attribution",
+   "plate": "205",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 17,
+    "n_transparent": 5,
+    "n_textures": 2
+   },
+   "tyre_materials": [
+    {
+     "name": "Carro_Pneu",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 32.1,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/b0dbc2e209d545f9a2becdf9a7ab43ef.jpg"
+  },
+  {
+   "n": 3,
+   "uid": "e1f8335a73a9442eb06ff8624718ac76",
+   "name": "1997 Peugeot 205 GTI",
+   "verdict": "pass",
+   "reason": "clean 205 GTI; glazing clear; tyre 32. Face-count twin of #2 (244,213 vs 244,310) -- see duplicates",
+   "faces": 244213,
+   "licence": "CC Attribution",
+   "plate": "205",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 17,
+    "n_transparent": 5,
+    "n_textures": 2
+   },
+   "tyre_materials": [
+    {
+     "name": "Carro_Pneu",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 32.1,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "DUPLICATE",
+   "sheet": "car-meshes/audit/peugeot/e1f8335a73a9442eb06ff8624718ac76.jpg"
+  },
+  {
+   "n": 4,
+   "uid": "4b55488b331041c299955a937334113b",
+   "name": "1998 Peugeot 406",
+   "verdict": "pass",
+   "reason": "clean 406 saloon; glazing clear, interior visible at 2x; black tyres on real spoked alloys. Only 67,656 faces but it reads sharply -- corrects my own thumbnail read, which called it soft",
+   "faces": 67656,
+   "licence": "CC Attribution",
+   "plate": "406",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 7,
+    "n_transparent": 3,
+    "n_textures": 16
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/4b55488b331041c299955a937334113b.jpg"
+  },
+  {
+   "n": 5,
+   "uid": "513b76a9909049f49327c0b83bc5b56b",
+   "name": "2000 Peugeot 206",
+   "verdict": "pass",
+   "reason": "clean 206 3-door; glazing clear; tyre 31",
+   "faces": 115266,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 21,
+    "n_transparent": 4,
+    "n_textures": 6
+   },
+   "tyre_materials": [
+    {
+     "name": "Carro_Pneu",
+     "baseColorFactor": [
+      0.121569,
+      0.121569,
+      0.121569,
+      1.0
+     ],
+     "lum": 0.1216,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/513b76a9909049f49327c0b83bc5b56b.jpg"
+  },
+  {
+   "n": 6,
+   "uid": "52deb999ad964d2496c9fd25ee84c2d4",
+   "name": "2003 Peugeot 206 GTI Turbo PSA Design",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven: 42 materials, zero transparent) + FLAT SHELL. Also an aftermarket PSA Design body kit",
+   "faces": 142831,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 42,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "TYRES_SHDR",
+     "baseColorFactor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+     ],
+     "lum": 0.8,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/52deb999ad964d2496c9fd25ee84c2d4.jpg"
+  },
+  {
+   "n": 7,
+   "uid": "deaac3bd68604aee8f8365d784f8ab34",
+   "name": "2005 Peugeot 407 PSA Design",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven: 44 materials, zero transparent); overturns the earlier PASS",
+   "faces": 269142,
+   "licence": "CC Attribution",
+   "plate": "407",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 44,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/deaac3bd68604aee8f8365d784f8ab34.jpg"
+  },
+  {
+   "n": 8,
+   "uid": "ace2f94c457348d79680f2d055f99f28",
+   "name": "2007 Peugeot 307 STC Rally Car PSA Design",
+   "verdict": "fail",
+   "reason": "out of scope: STC rally car, huge wing, camo, single material",
+   "faces": 136202,
+   "licence": "CC Attribution",
+   "plate": "307",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/ace2f94c457348d79680f2d055f99f28.jpg"
+  },
+  {
+   "n": 9,
+   "uid": "a83ba17044e44a879cfceb3278d02779",
+   "name": "2010 Peugeot 207 RC S1",
+   "verdict": "fail",
+   "reason": "rally shell, single material, cov=0.000 -- featureless clay",
+   "faces": 230753,
+   "licence": "CC Attribution",
+   "plate": "207",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/a83ba17044e44a879cfceb3278d02779.jpg"
+  },
+  {
+   "n": 10,
+   "uid": "6291b66452614464889a71c8337b8c85",
+   "name": "2018 Peugeot 2008",
+   "verdict": "pass",
+   "reason": "clean 2008 Mk1; glazing clear; tyre 32",
+   "faces": 400458,
+   "licence": "CC Attribution",
+   "plate": "2008",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 16,
+    "n_transparent": 2,
+    "n_textures": 7
+   },
+   "tyre_materials": [
+    {
+     "name": "Carro_Pneu",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 32.1,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/6291b66452614464889a71c8337b8c85.jpg"
+  },
+  {
+   "n": 11,
+   "uid": "0edcda285432434a8d127b44ad6da808",
+   "name": "2020-peugeot-2008",
+   "verdict": "pass",
+   "reason": "clean e-2008; glazing clear; tyre effective 4 sRGB -- black",
+   "faces": 361568,
+   "licence": "CC Attribution",
+   "plate": "2008",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 44,
+    "n_transparent": 3,
+    "n_textures": 29
+   },
+   "tyre_materials": [
+    {
+     "name": "2020_Peugeot_e-2008_wheel_tire_01_dm",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 4.0,
+     "lum": 1.0,
+     "factor_stated": false
+    },
+    {
+     "name": "2020_Peugeot_e-2008_wheel_tire_01_dm_8",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 4.0,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/0edcda285432434a8d127b44ad6da808.jpg"
+  },
+  {
+   "n": 12,
+   "uid": "caa406e37dc24b7c9bae9f886fd907b9",
+   "name": "2020-peugeot-2008",
+   "verdict": "fail",
+   "reason": "WRONG VEHICLE: titled 2020-peugeot-2008, the render is a LAND ROVER DISCOVERY (stepped roofline, Discovery grille and rear quarter). Read the render, not the title",
+   "faces": 262458,
+   "licence": "CC Attribution",
+   "plate": "2008",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 21,
+    "n_transparent": 3,
+    "n_textures": 1
+   },
+   "tyre_materials": [
+    {
+     "name": "Tyres",
+     "baseColorFactor": [
+      0.0588235,
+      0.0588235,
+      0.0588235,
+      1.0
+     ],
+     "lum": 0.0588,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/caa406e37dc24b7c9bae9f886fd907b9.jpg"
+  },
+  {
+   "n": 13,
+   "uid": "1770104e89f84a8f9ce4a0fd9ae131ac",
+   "name": "2021 Peugeot 508 PSE",
+   "verdict": "pass",
+   "reason": "clean 508 PSE fastback; glazing ambiguous/proven but the sheet at 2x shows the parcel shelf through the rear screen; black tyres on dark alloys",
+   "faces": 874658,
+   "licence": "CC Attribution",
+   "plate": "508",
+   "glass_probe": {
+    "verdict": "ambiguous",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 56,
+    "n_transparent": 2,
+    "n_textures": 6
+   },
+   "tyre_materials": [
+    {
+     "name": "2021_Peugeot_508_PSE_Tires",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 32.1,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/1770104e89f84a8f9ce4a0fd9ae131ac.jpg"
+  },
+  {
+   "n": 14,
+   "uid": "9b7bce42deb54e80a20ee1a16ec93e8a",
+   "name": "3D Scanned Peugeot 2008 (2016) [Free]",
+   "verdict": "fail",
+   "reason": "photogrammetry scan with the ground plane baked in; single material, cov=1.000",
+   "faces": 126324,
+   "licence": "CC Attribution",
+   "plate": "2008",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/9b7bce42deb54e80a20ee1a16ec93e8a.jpg"
+  },
+  {
+   "n": 15,
+   "uid": "a759429b04544680beb8e93806cb82a5",
+   "name": "Citroen C1/Peugeot 107 2005-2014",
+   "verdict": "fail",
+   "reason": "exploded parts kit: panels and doors detached and scattered",
+   "faces": 414640,
+   "licence": "CC Attribution",
+   "plate": "107",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 82,
+    "n_transparent": 0,
+    "n_textures": 17
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+     ],
+     "lum": 0.8,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/a759429b04544680beb8e93806cb82a5.jpg"
+  },
+  {
+   "n": 16,
+   "uid": "14890eb908f8499bab83f20bbbbf024d",
+   "name": "Clips pare soleil de Peugeot 307",
+   "verdict": "fail",
+   "reason": "not a car: a sun-visor clip (Clips pare soleil)",
+   "faces": 291958,
+   "licence": "CC Attribution",
+   "plate": "307",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/14890eb908f8499bab83f20bbbbf024d.jpg"
+  },
+  {
+   "n": 17,
+   "uid": "eba1f61448a6413f9f4248eee7ffbc9e",
+   "name": "HUSKY - TALLER MOVIL - PEUGEOT PARTNER",
+   "verdict": "fail",
+   "reason": "not a car: a mobile-workshop van INTERIOR (shelving, fire extinguisher, drawers)",
+   "faces": 220250,
+   "licence": "CC Attribution",
+   "plate": "Partner",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 12,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/eba1f61448a6413f9f4248eee7ffbc9e.jpg"
+  },
+  {
+   "n": 18,
+   "uid": "9c6182e158ee45fda09e5bb138858042",
+   "name": "Peugeot 107 2005-2014",
+   "verdict": "fail",
+   "reason": "exploded/partial: body shell in a red-white material split with the wheels detached and floating",
+   "faces": 111034,
+   "licence": "CC Attribution",
+   "plate": "107",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 22,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire_01a",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/9c6182e158ee45fda09e5bb138858042.jpg"
+  },
+  {
+   "n": 19,
+   "uid": "e7fefd93776e4b0e903debb88306961d",
+   "name": "Peugeot 2008 MK1 2013-2019",
+   "verdict": "fail",
+   "reason": "front panels detached and a wheel hanging below the sill; glazing also OPAQUE (proven)",
+   "faces": 439159,
+   "licence": "CC Attribution",
+   "plate": "2008",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 35,
+    "n_transparent": 0,
+    "n_textures": 8
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/e7fefd93776e4b0e903debb88306961d.jpg"
+  },
+  {
+   "n": 20,
+   "uid": "c8a597a1889c4ab6905423be5337e391",
+   "name": "Peugeot 205 GTI",
+   "verdict": "fail",
+   "reason": "CLAY: featureless single-material shell, no glazing, no lamps, plain disc wheels. The '205 GTI clay' already recorded in CLAUDE.md",
+   "faces": 187448,
+   "licence": "CC Attribution",
+   "plate": "205",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/c8a597a1889c4ab6905423be5337e391.jpg"
+  },
+  {
+   "n": 21,
+   "uid": "b52c8e5e8070463ab1485039246f527c",
+   "name": "Peugeot 205 Gti",
+   "verdict": "fail",
+   "reason": "modified/stanced spec: deep-dish aftermarket wheels, non-OEM interior; not a car a UK reg decodes to",
+   "faces": 1038645,
+   "licence": "CC Attribution",
+   "plate": "205",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 5,
+    "n_transparent": 1,
+    "n_textures": 15
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/b52c8e5e8070463ab1485039246f527c.jpg"
+  },
+  {
+   "n": 22,
+   "uid": "ff2b04cf7da94cbdbd277fe23b7204b8",
+   "name": "Peugeot 205 cabriolet convertible",
+   "verdict": "fail",
+   "reason": "WHITE TYRES: the tread face -- not just the sidewall -- reads white in the 3/4 view at 2x, across all visible wheels, with no black anywhere on the tyre. No tyre-named material exists in the glTF so this cannot be settled from the file; recorded as a fail with the evidence, and a red control render would settle it definitively",
+   "faces": 575138,
+   "licence": "CC Attribution",
+   "plate": "205",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 44,
+    "n_transparent": 1,
+    "n_textures": 14
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/ff2b04cf7da94cbdbd277fe23b7204b8.jpg"
+  },
+  {
+   "n": 23,
+   "uid": "804d74ae36b44eca805d5e6402ca4d14",
+   "name": "Peugeot 206",
+   "verdict": "fail",
+   "reason": "photogrammetry scan of a damaged car on a baked ground slab",
+   "faces": 162689,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/804d74ae36b44eca805d5e6402ca4d14.jpg"
+  },
+  {
+   "n": 24,
+   "uid": "dc25a117378545e7a804c8594aa86938",
+   "name": "Peugeot 206",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE: no glass-named material at all and ZERO transparent materials in 50, so no handler override can fire and the sheet is an honest witness -- it shows solid black windows with no interior",
+   "faces": 491915,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 50,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/dc25a117378545e7a804c8594aa86938.jpg"
+  },
+  {
+   "n": 25,
+   "uid": "5ea1dc5ca942481fa8c4b29928dcd62b",
+   "name": "Peugeot 206 1.0 16V C\u00e2mbio Manual 2003",
+   "verdict": "fail",
+   "reason": "single material (cov=1.000); windows render in body colour; soft panels",
+   "faces": 96544,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 3
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/5ea1dc5ca942481fa8c4b29928dcd62b.jpg"
+  },
+  {
+   "n": 26,
+   "uid": "eb33af1177814fadbb2b79944e54a99c",
+   "name": "Peugeot 206 2001",
+   "verdict": "fail",
+   "reason": "two separate cars plus a loose wing in one scene -- a parts/multi-object file",
+   "faces": 171885,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 46,
+    "n_transparent": 2,
+    "n_textures": 2
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/eb33af1177814fadbb2b79944e54a99c.jpg"
+  },
+  {
+   "n": 27,
+   "uid": "38b22adb86194c6ea78e0d436347f530",
+   "name": "Peugeot 206 3-Door GTI 2005-2009",
+   "verdict": "fail",
+   "reason": "wheels detached and lying beside the car; body shell floating",
+   "faces": 207004,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 46,
+    "n_transparent": 1,
+    "n_textures": 25
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/38b22adb86194c6ea78e0d436347f530.jpg"
+  },
+  {
+   "n": 28,
+   "uid": "9924732115f046c086f56ab237ad6f99",
+   "name": "Peugeot 206 Cup Holder",
+   "verdict": "fail",
+   "reason": "not a car: a cup holder",
+   "faces": 92416,
+   "licence": "CC Attribution-NonCommercial",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/9924732115f046c086f56ab237ad6f99.jpg"
+  },
+  {
+   "n": 29,
+   "uid": "1d278036c89d489bb47ccd33b0effa21",
+   "name": "Peugeot 206 GLB",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE: zero transparent materials in 32, nothing glass-named, and the sheet (admissible here) shows solid grey windows",
+   "faces": 171861,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 32,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "RUBBER",
+     "baseColorFactor": [
+      0.189541,
+      0.189541,
+      0.189541,
+      1.0
+     ],
+     "lum": 0.1895,
+     "factor_stated": true
+    },
+    {
+     "name": "RUBBER__spec",
+     "baseColorFactor": [
+      0.00128334,
+      0.00128334,
+      0.00128334,
+      1.0
+     ],
+     "lum": 0.0013,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/1d278036c89d489bb47ccd33b0effa21.jpg"
+  },
+  {
+   "n": 30,
+   "uid": "b2ef11bf94b848618b5b7f38e202316b",
+   "name": "Peugeot 206 GTI",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven) + FLAT SHELL (11 materials, no textures); overturns the earlier PASS",
+   "faces": 87713,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 11,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/b2ef11bf94b848618b5b7f38e202316b.jpg"
+  },
+  {
+   "n": 31,
+   "uid": "1a23dbbed6d14a1aafff70b18303c8d1",
+   "name": "Peugeot 206 GTI New Version PSA Design",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven) + FLAT SHELL; exact face-count twin of #30 (87,713)",
+   "faces": 87713,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 10,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "DUPLICATE",
+   "sheet": "car-meshes/audit/peugeot/1a23dbbed6d14a1aafff70b18303c8d1.jpg"
+  },
+  {
+   "n": 32,
+   "uid": "dc7ba9251ff440cd816000beb8cf233e",
+   "name": "Peugeot 206 Sedan 1998-2009",
+   "verdict": "fail",
+   "reason": "doors swung open and detached, bonnet raised, a wheel off",
+   "faces": 380496,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 23,
+    "n_transparent": 0,
+    "n_textures": 6
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/dc7ba9251ff440cd816000beb8cf233e.jpg"
+  },
+  {
+   "n": 33,
+   "uid": "3d849c22f2914013a183484a57fa71ba",
+   "name": "Peugeot 207",
+   "verdict": "fail",
+   "reason": "rear bumper/panel missing -- a white block floats where the rear end should be; low-poly",
+   "faces": 85992,
+   "licence": "CC Attribution",
+   "plate": "207",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 14,
+    "n_transparent": 2,
+    "n_textures": 2
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/3d849c22f2914013a183484a57fa71ba.jpg"
+  },
+  {
+   "n": 34,
+   "uid": "3f21205aaeca44f2871e027e331b68d7",
+   "name": "Peugeot 207",
+   "verdict": "fail",
+   "reason": "CLAY: cov=0.999, completely featureless, no glazing, no lamps, plain disc wheels",
+   "faces": 365176,
+   "licence": "CC Attribution",
+   "plate": "207",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 3,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/3f21205aaeca44f2871e027e331b68d7.jpg"
+  },
+  {
+   "n": 35,
+   "uid": "81bec8dfaf914b57a3ca5775458f9a47",
+   "name": "Peugeot 207 3-Door 2006-2012",
+   "verdict": "fail",
+   "reason": "red/white material split with detached panels floating above the car and a missing bumper",
+   "faces": 314878,
+   "licence": "CC Attribution",
+   "plate": "207",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 70,
+    "n_transparent": 2,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "rubber_trim.001",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/81bec8dfaf914b57a3ca5775458f9a47.jpg"
+  },
+  {
+   "n": 36,
+   "uid": "fa2cfaaab79b4d18a0fc89ba25a02f07",
+   "name": "Peugeot 207 3-Door 2006-2012",
+   "verdict": "pass",
+   "reason": "clean 207 3-door; glazing clear/inferred -- no glass-named material so no override fires and the sheet is admissible; it shows the seats through the side glass",
+   "faces": 146274,
+   "licence": "CC Attribution",
+   "plate": "207",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 53,
+    "n_transparent": 10,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/fa2cfaaab79b4d18a0fc89ba25a02f07.jpg"
+  },
+  {
+   "n": 37,
+   "uid": "9b59ff092c1c4f1f918ac7c16fe679a7",
+   "name": "Peugeot 207 3door",
+   "verdict": "pass",
+   "reason": "clean 207 3-door; glazing clear (proven); tyre 27 -- black",
+   "faces": 523038,
+   "licence": "CC Attribution",
+   "plate": "207",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 17,
+    "n_transparent": 5,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      1.0
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/9b59ff092c1c4f1f918ac7c16fe679a7.jpg"
+  },
+  {
+   "n": 38,
+   "uid": "a27c6e3fd8574b77a3b89e9f578af16f",
+   "name": "Peugeot 207 RC 1.6 THP",
+   "verdict": "fail",
+   "reason": "WHEELS: smooth white featureless cylinders with no rim face and no tyre, in all four tiles. Glazing also OPAQUE (proven, 76 materials, zero transparent)",
+   "faces": 233620,
+   "licence": "CC Attribution",
+   "plate": "207",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 76,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "rubber_trim",
+     "baseColorFactor": [
+      0.1,
+      0.1,
+      0.1,
+      1.0
+     ],
+     "lum": 0.1,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/a27c6e3fd8574b77a3b89e9f578af16f.jpg"
+  },
+  {
+   "n": 39,
+   "uid": "3e5e14fdb1f94f25a5b572caf518f55d",
+   "name": "Peugeot 3008",
+   "verdict": "pass",
+   "reason": "clean 3008 Mk2; glazing clear/inferred and the sheet at 2x shows through the rear screen; black tyres. 69,523 faces is low but the shape and detail read correctly",
+   "faces": 69523,
+   "licence": "CC Attribution",
+   "plate": "3008",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 25,
+    "n_transparent": 2,
+    "n_textures": 7
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/3e5e14fdb1f94f25a5b572caf518f55d.jpg"
+  },
+  {
+   "n": 40,
+   "uid": "4adec16209e149a99a135f5de6cfbb21",
+   "name": "Peugeot 3008",
+   "verdict": "fail",
+   "reason": "GLOBAL-ALPHA SHELL: carpaint, tire and black all alphaMode=BLEND at alpha 0.25 -- body and tyres are 75% see-through in the shipped GLB",
+   "faces": 843925,
+   "licence": "CC Attribution",
+   "plate": "3008",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": true,
+    "n_materials": 12,
+    "n_transparent": 12,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire.004",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      0.25
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/4adec16209e149a99a135f5de6cfbb21.jpg"
+  },
+  {
+   "n": 41,
+   "uid": "df3799a9736849e39840206ada14fea6",
+   "name": "Peugeot 306 3-Door 1993-2002",
+   "verdict": "fail",
+   "reason": "parts scene: a separate shell floating above the car plus loose springs",
+   "faces": 437296,
+   "licence": "CC Attribution",
+   "plate": "306",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 57,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/df3799a9736849e39840206ada14fea6.jpg"
+  },
+  {
+   "n": 42,
+   "uid": "a9518b22896c4330bba1fbb251b00937",
+   "name": "Peugeot 306 Rally Car Livery",
+   "verdict": "fail",
+   "reason": "out of scope: rally car with baked livery; single material, cov=1.000",
+   "faces": 603614,
+   "licence": "CC Attribution-NonCommercial",
+   "plate": "306",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 3
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/a9518b22896c4330bba1fbb251b00937.jpg"
+  },
+  {
+   "n": 43,
+   "uid": "ee4cb0be744c449fa20e2a5b554e542a",
+   "name": "Peugeot 307 2008 Uploaded Version",
+   "verdict": "fail",
+   "reason": "baked red livery stripe down both flanks -- it survives any respray, so the car cannot serve eight DVLA colours. Geometry is otherwise clean. Face-count near-twin of #82, which carries no stripe and is the copy to keep",
+   "faces": 799666,
+   "licence": "CC Attribution",
+   "plate": "2008",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 33,
+    "n_transparent": 3,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "Carro_Pneu",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "DUPLICATE",
+   "sheet": "car-meshes/audit/peugeot/ee4cb0be744c449fa20e2a5b554e542a.jpg"
+  },
+  {
+   "n": 44,
+   "uid": "60a94fbbb4ca4451a97a354e544a0550",
+   "name": "Peugeot 307 modified",
+   "verdict": "fail",
+   "reason": "modified: aftermarket body kit, oversized black wheels, lowered",
+   "faces": 169818,
+   "licence": "CC Attribution",
+   "plate": "307",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 68,
+    "n_transparent": 7,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/60a94fbbb4ca4451a97a354e544a0550.jpg"
+  },
+  {
+   "n": 45,
+   "uid": "ce299e549e594d029577d0b757f3aa87",
+   "name": "Peugeot 308 5-Door MK1 2007-2021",
+   "verdict": "fail",
+   "reason": "exploded parts kit: panels, wheels and grille scattered across the scene",
+   "faces": 248880,
+   "licence": "CC Attribution",
+   "plate": "308",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 64,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.0313725,
+      0.333333,
+      0.964706,
+      1.0
+     ],
+     "lum": 0.4431,
+     "factor_stated": true
+    },
+    {
+     "name": "rubber_trim",
+     "baseColorFactor": [
+      0.952941,
+      0.94902,
+      0.321569,
+      1.0
+     ],
+     "lum": 0.7412,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/ce299e549e594d029577d0b757f3aa87.jpg"
+  },
+  {
+   "n": 46,
+   "uid": "fe211e55acf54aa4a70c522ce720e17a",
+   "name": "Peugeot 308 GTi hatchback 2020",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven) + FLAT SHELL (21 materials, no textures); overturns the earlier PASS",
+   "faces": 1031634,
+   "licence": "CC Attribution",
+   "plate": "308",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 21,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire",
+     "baseColorFactor": [
+      0.588,
+      0.588,
+      0.588,
+      1.0
+     ],
+     "lum": 0.588,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/fe211e55acf54aa4a70c522ce720e17a.jpg"
+  },
+  {
+   "n": 47,
+   "uid": "2ac96482c96f4416a8523e8768c01bcc",
+   "name": "Peugeot 308 MK1 2007-2021",
+   "verdict": "fail",
+   "reason": "red/white material split with missing panels and a detached wheel",
+   "faces": 103081,
+   "licence": "CC Attribution",
+   "plate": "308",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 24,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire_01a",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/2ac96482c96f4416a8523e8768c01bcc.jpg"
+  },
+  {
+   "n": 48,
+   "uid": "bcbd76ac8d8949bc8e4b9f411d2f8745",
+   "name": "Peugeot 308 RCZ",
+   "verdict": "pass",
+   "reason": "clean RCZ; glazing clear (proven); tyre 27 -- black. NOTE: #70 is the same mesh (115,395 faces) exported as a global-alpha shell; THIS is the good copy",
+   "faces": 115395,
+   "licence": "CC Attribution",
+   "plate": "RCZ",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 12,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire.001",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      1.0
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/bcbd76ac8d8949bc8e4b9f411d2f8745.jpg"
+  },
+  {
+   "n": 49,
+   "uid": "68ae14e9883b4405852b404844384cdf",
+   "name": "Peugeot 308 SE GT BLUE LINE 2026",
+   "verdict": "pass",
+   "reason": "clean 308 III; glazing clear (proven); sharp. The blue wheel and bumper accents are the GT Blue Line spec, not a defect",
+   "faces": 913119,
+   "licence": "Free Standard",
+   "plate": "308",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 55,
+    "n_transparent": 8,
+    "n_textures": 9
+   },
+   "tyre_materials": [
+    {
+     "name": "vehicle_tire",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 176.8,
+     "lum": 1.0,
+     "factor_stated": false
+    },
+    {
+     "name": "vehicle_tire.001",
+     "baseColorFactor": [
+      0.0900159,
+      0.0900159,
+      0.0900159,
+      1.0
+     ],
+     "lum": 0.09,
+     "factor_stated": true
+    },
+    {
+     "name": "vehicle_tire.002",
+     "baseColorFactor": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "lum": 0.0,
+     "factor_stated": true
+    },
+    {
+     "name": "vehicle_tire.003",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 12.6,
+     "lum": 1.0,
+     "factor_stated": false
+    },
+    {
+     "name": "vehicle_tire.005",
+     "baseColorFactor": [
+      0.0012912948319473026,
+      0.4386072646828384,
+      0.9660899868511968,
+      1.0
+     ],
+     "lum": 0.4687,
+     "factor_stated": true
+    },
+    {
+     "name": "vehicle_tire.006",
+     "baseColorFactor": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "lum": 0.0,
+     "factor_stated": true
+    },
+    {
+     "name": "vehicle_tire.004",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 176.8,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/68ae14e9883b4405852b404844384cdf.jpg"
+  },
+  {
+   "n": 50,
+   "uid": "e538cff86fef432287ec93c7c6f91931",
+   "name": "Peugeot 308 SW",
+   "verdict": "pass",
+   "reason": "clean 308 SW estate; glazing clear; tyre 12 -- black",
+   "faces": 257177,
+   "licence": "Free Standard",
+   "plate": "308",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 16,
+    "n_transparent": 2,
+    "n_textures": 10
+   },
+   "tyre_materials": [
+    {
+     "name": "Tire_01_DM",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 12.0,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/e538cff86fef432287ec93c7c6f91931.jpg"
+  },
+  {
+   "n": 51,
+   "uid": "10c1b6a67d1c4b69b729b5f65600a290",
+   "name": "Peugeot 404",
+   "verdict": "fail",
+   "reason": "photogrammetry scan: mottled green baked texture, melted panels",
+   "faces": 156708,
+   "licence": "CC Attribution",
+   "plate": "404",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/10c1b6a67d1c4b69b729b5f65600a290.jpg"
+  },
+  {
+   "n": 52,
+   "uid": "cf15d0c9a7ac485ba4a33a996e6c5589",
+   "name": "Peugeot 404",
+   "verdict": "pass",
+   "reason": "clean 404 saloon; glazing clear with the interior visible through the rear screen; BLACK tyres on white steel wheels (correct period detail); boot and door shut lines present. Corrects my own thumbnail read, which called it flat",
+   "faces": 65048,
+   "licence": "CC Attribution",
+   "plate": "404",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 6,
+    "n_transparent": 1,
+    "n_textures": 10
+   },
+   "tyre_materials": [
+    {
+     "name": "BlueMesh_404_Tire",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 56.6,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/cf15d0c9a7ac485ba4a33a996e6c5589.jpg"
+  },
+  {
+   "n": 53,
+   "uid": "602dbd0634754339b47de7b1d18bf143",
+   "name": "Peugeot 405",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven) + FLAT SHELL. This is the '405 clay' already recorded in CLAUDE.md",
+   "faces": 759775,
+   "licence": "CC Attribution",
+   "plate": "405",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": true,
+    "alpha_shell": false,
+    "n_materials": 51,
+    "n_transparent": 0,
+    "n_textures": 3
+   },
+   "tyre_materials": [
+    {
+     "name": "TYRES",
+     "baseColorFactor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+     ],
+     "lum": 0.8,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/602dbd0634754339b47de7b1d18bf143.jpg"
+  },
+  {
+   "n": 54,
+   "uid": "a45880cd207343aea45cd160efefeb81",
+   "name": "Peugeot 406",
+   "verdict": "pass",
+   "reason": "clean 406 saloon; glazing clear. Face-count twin of #4 (67,660 vs 67,656) -- see duplicates",
+   "faces": 67660,
+   "licence": "CC Attribution",
+   "plate": "406",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 7,
+    "n_transparent": 3,
+    "n_textures": 19
+   },
+   "tyre_materials": [],
+   "prior_verdict": "DUPLICATE",
+   "sheet": "car-meshes/audit/peugeot/a45880cd207343aea45cd160efefeb81.jpg"
+  },
+  {
+   "n": 55,
+   "uid": "7219a3243efb48508df73df1ee1aa26a",
+   "name": "Peugeot 406 2001 Facelfit",
+   "verdict": "fail",
+   "reason": "drift/race body kit with wheels detached; competition wing",
+   "faces": 464352,
+   "licence": "CC Attribution",
+   "plate": "406",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 58,
+    "n_transparent": 0,
+    "n_textures": 5
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/7219a3243efb48508df73df1ee1aa26a.jpg"
+  },
+  {
+   "n": 56,
+   "uid": "29dbad44a23f40e2bafa78335bb96c42",
+   "name": "Peugeot 406 Coupe 1995-2004",
+   "verdict": "fail",
+   "reason": "NO WHEELS: empty arches in all four tiles; race bodyshell",
+   "faces": 525538,
+   "licence": "CC Attribution",
+   "plate": "406",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 66,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/29dbad44a23f40e2bafa78335bb96c42.jpg"
+  },
+  {
+   "n": 57,
+   "uid": "aedb8d1ebb7c488f90176eb4caad3747",
+   "name": "Peugeot 406 Taxi",
+   "verdict": "fail",
+   "reason": "widebody drift kit with roll cage and competition wing; glazing absent",
+   "faces": 118958,
+   "licence": "CC Attribution",
+   "plate": "406",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 44,
+    "n_transparent": 8,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/aedb8d1ebb7c488f90176eb4caad3747.jpg"
+  },
+  {
+   "n": 58,
+   "uid": "7cb921f0266d4a729e44ff69f7c0c730",
+   "name": "Peugeot 406 V6",
+   "verdict": "pass",
+   "reason": "clean 406 V6 saloon; glazing clear (proven). FLAG: a tyre-named material sits at baseColorFactor 0.8 (pale grey) -- needs a render confirmation before shipping",
+   "faces": 275713,
+   "licence": "CC Attribution",
+   "plate": "406",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 95,
+    "n_transparent": 5,
+    "n_textures": 12
+   },
+   "tyre_materials": [
+    {
+     "name": "EXT_Tire",
+     "baseColorFactor": [
+      0.8,
+      0.8,
+      0.8,
+      1.0
+     ],
+     "lum": 0.8,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/7cb921f0266d4a729e44ff69f7c0c730.jpg"
+  },
+  {
+   "n": 59,
+   "uid": "d4c356aef4e840548e30ada71511a80a",
+   "name": "Peugeot 407 2004-2011",
+   "verdict": "fail",
+   "reason": "panels are a patchwork of mismatched material blocks -- the bonnet, doors and rear quarter each render a different value",
+   "faces": 336992,
+   "licence": "CC Attribution",
+   "plate": "407",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 54,
+    "n_transparent": 4,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/d4c356aef4e840548e30ada71511a80a.jpg"
+  },
+  {
+   "n": 60,
+   "uid": "5f20d145122342f3850d608dbed3aee7",
+   "name": "Peugeot 407 SW 2004-2011",
+   "verdict": "fail",
+   "reason": "same patchwork material split as #59, with red panels showing through",
+   "faces": 619836,
+   "licence": "CC Attribution",
+   "plate": "407",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 53,
+    "n_transparent": 3,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/5f20d145122342f3850d608dbed3aee7.jpg"
+  },
+  {
+   "n": 61,
+   "uid": "8177d7d35d6343d198b7df30abefee29",
+   "name": "Peugeot 407 Sedan 2004-2011",
+   "verdict": "fail",
+   "reason": "panels detached and floating above the car; wheels missing",
+   "faces": 244021,
+   "licence": "CC Attribution",
+   "plate": "407",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 46,
+    "n_transparent": 0,
+    "n_textures": 2
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/8177d7d35d6343d198b7df30abefee29.jpg"
+  },
+  {
+   "n": 62,
+   "uid": "6eeda81df5ea41babeeb10486ed9ae44",
+   "name": "Peugeot 408 2010-2022",
+   "verdict": "fail",
+   "reason": "a holed bodyshell propped on a yellow block, with a competition wing",
+   "faces": 149005,
+   "licence": "CC Attribution",
+   "plate": "408",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 30,
+    "n_transparent": 0,
+    "n_textures": 3
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/6eeda81df5ea41babeeb10486ed9ae44.jpg"
+  },
+  {
+   "n": 63,
+   "uid": "7224a5836c874e609936977f7ff54f82",
+   "name": "Peugeot 5008",
+   "verdict": "fail",
+   "reason": "GLOBAL-ALPHA SHELL: carpaint, tire and black all at alpha 0.25",
+   "faces": 768084,
+   "licence": "CC Attribution",
+   "plate": "5008",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": true,
+    "n_materials": 12,
+    "n_transparent": 12,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire.005",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      0.25
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/7224a5836c874e609936977f7ff54f82.jpg"
+  },
+  {
+   "n": 64,
+   "uid": "2bf330a3c92c4b89959fe1fbb1b197d9",
+   "name": "Peugeot 504",
+   "verdict": "fail",
+   "reason": "red/white material split across the door and rear quarter; tyre material effectively white",
+   "faces": 481777,
+   "licence": "CC Attribution",
+   "plate": "504",
+   "glass_probe": {
+    "verdict": "ambiguous",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 8,
+    "n_transparent": 5,
+    "n_textures": 24
+   },
+   "tyre_materials": [
+    {
+     "name": "tire_DefaultMaterial",
+     "baseColorFactor": null,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/2bf330a3c92c4b89959fe1fbb1b197d9.jpg"
+  },
+  {
+   "n": 65,
+   "uid": "afa4fcce8b1245b587ef42a70ae6b973",
+   "name": "Peugeot 508 MK1Sedan 2010-2018",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven, 7 materials); low-poly with soft panels; cov=0.925",
+   "faces": 88939,
+   "licence": "CC Attribution",
+   "plate": "508",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 7,
+    "n_transparent": 0,
+    "n_textures": 4
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/afa4fcce8b1245b587ef42a70ae6b973.jpg"
+  },
+  {
+   "n": 66,
+   "uid": "a08eb79d9a814f17a1d6437e32e4f933",
+   "name": "Peugeot 508 Pse 2024",
+   "verdict": "fail",
+   "reason": "not a car: two loose wheels and a white box",
+   "faces": 157601,
+   "licence": "CC Attribution",
+   "plate": "508",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/a08eb79d9a814f17a1d6437e32e4f933.jpg"
+  },
+  {
+   "n": 67,
+   "uid": "bb8a01a450d1408cb10f8c7c7146c33e",
+   "name": "Peugeot 607 1999-2010",
+   "verdict": "fail",
+   "reason": "exploded: doors and panels floating above the body",
+   "faces": 479708,
+   "licence": "CC Attribution",
+   "plate": "607",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 97,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/bb8a01a450d1408cb10f8c7c7146c33e.jpg"
+  },
+  {
+   "n": 68,
+   "uid": "145bf835e79d482280c942b76edf1503",
+   "name": "Peugeot Boxer MK2 2006",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven, 16 materials, zero transparent); a hole in the near-side flank",
+   "faces": 144723,
+   "licence": "CC Attribution",
+   "plate": "Boxer",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 16,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/145bf835e79d482280c942b76edf1503.jpg"
+  },
+  {
+   "n": 69,
+   "uid": "cb53a34acb2546fcb3cae6850272b7e3",
+   "name": "Peugeot Partner Tepee",
+   "verdict": "fail",
+   "reason": "GLOBAL-ALPHA SHELL: carpaint, tire and black at alpha 0.25",
+   "faces": 882276,
+   "licence": "CC Attribution",
+   "plate": "Partner",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": true,
+    "n_materials": 13,
+    "n_transparent": 13,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire.221",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      0.25
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/cb53a34acb2546fcb3cae6850272b7e3.jpg"
+  },
+  {
+   "n": 70,
+   "uid": "3f1376cfec0340208806d94ae49e19bb",
+   "name": "Peugeot RCZ",
+   "verdict": "fail",
+   "reason": "GLOBAL-ALPHA SHELL: carpaint, tire and black at alpha 0.25. Same 115,395-face mesh as #48, which is the sound export",
+   "faces": 115395,
+   "licence": "CC Attribution",
+   "plate": "RCZ",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": true,
+    "n_materials": 12,
+    "n_transparent": 12,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "tire.002",
+     "baseColorFactor": [
+      0.1059,
+      0.1059,
+      0.1059,
+      0.25
+     ],
+     "lum": 0.1059,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "DUPLICATE",
+   "sheet": "car-meshes/audit/peugeot/3f1376cfec0340208806d94ae49e19bb.jpg"
+  },
+  {
+   "n": 71,
+   "uid": "9f0f56e6b0834b41a1f93929654a3982",
+   "name": "Peugeot RCZ 2009-2015",
+   "verdict": "fail",
+   "reason": "NO WHEELS: empty arches in all four tiles; bodyshell only, cov=0.939",
+   "faces": 78465,
+   "licence": "CC Attribution",
+   "plate": "RCZ",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 13,
+    "n_transparent": 0,
+    "n_textures": 3
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/9f0f56e6b0834b41a1f93929654a3982.jpg"
+  },
+  {
+   "n": 72,
+   "uid": "e740c23c3af641248827fd4c771ebbea",
+   "name": "Peugeot+306+XR_stls",
+   "verdict": "fail",
+   "reason": "stands on its nose, tilted vertically, in all four tiles; single material, cov=1.000 -- clay as well as posed wrong",
+   "faces": 500012,
+   "licence": "CC Attribution",
+   "plate": "306",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/e740c23c3af641248827fd4c771ebbea.jpg"
+  },
+  {
+   "n": 73,
+   "uid": "13f1ac1713874190913eaf31878220b9",
+   "name": "Peugeot+405+(1990+French+Car)+-+3D+Model",
+   "verdict": "fail",
+   "reason": "CLAY: single material, cov=1.000, no glazing, flat lamps, featureless panels",
+   "faces": 499966,
+   "licence": "CC Attribution",
+   "plate": "405",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/13f1ac1713874190913eaf31878220b9.jpg"
+  },
+  {
+   "n": 74,
+   "uid": "2a41b3b90a2f464192787d7a5567c04b",
+   "name": "Peugeot-206",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE: no glass-named material and zero transparent materials in 32; the sheet is admissible here and shows solid grey windows",
+   "faces": 171872,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 32,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [
+    {
+     "name": "RUBBER",
+     "baseColorFactor": [
+      0.189541,
+      0.189541,
+      0.189541,
+      1.0
+     ],
+     "lum": 0.1895,
+     "factor_stated": true
+    },
+    {
+     "name": "RUBBER__spec",
+     "baseColorFactor": [
+      0.00128334,
+      0.00128334,
+      0.00128334,
+      1.0
+     ],
+     "lum": 0.0013,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "DUPLICATE",
+   "sheet": "car-meshes/audit/peugeot/2a41b3b90a2f464192787d7a5567c04b.jpg"
+  },
+  {
+   "n": 75,
+   "uid": "74a204b97aa446d783f51e84a07fb900",
+   "name": "Peugeot_206_2001",
+   "verdict": "fail",
+   "reason": "two separate bodyshells in one scene, no wheels",
+   "faces": 171157,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/74a204b97aa446d783f51e84a07fb900.jpg"
+  },
+  {
+   "n": 76,
+   "uid": "5f29df168c0d4831b9479092b509c375",
+   "name": "Peugeot_206_GTI_0714202338_texture_fbx",
+   "verdict": "fail",
+   "reason": "single material, cov=1.000, with an aftermarket body kit",
+   "faces": 164896,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 1
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/5f29df168c0d4831b9479092b509c375.jpg"
+  },
+  {
+   "n": 77,
+   "uid": "5b4320516ec040a3b1757a764d03dfef",
+   "name": "Peugeot_404_ Break_1965",
+   "verdict": "fail",
+   "reason": "bodyshell only: no wheels, no glazing, no lamps; cov=1.000",
+   "faces": 286188,
+   "licence": "CC Attribution",
+   "plate": "404",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/5b4320516ec040a3b1757a764d03dfef.jpg"
+  },
+  {
+   "n": 78,
+   "uid": "ad75c776d8144bc98527d19b6fd0d58f",
+   "name": "Peugeot_406_sedan_c",
+   "verdict": "fail",
+   "reason": "glazing OPAQUE (proven: 73 materials, ZERO transparent). Geometry is clean, which is why it passed before; overturns the earlier PASS",
+   "faces": 81477,
+   "licence": "CC Attribution",
+   "plate": "406",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 73,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/ad75c776d8144bc98527d19b6fd0d58f.jpg"
+  },
+  {
+   "n": 79,
+   "uid": "f88cfe1c126e46b39622c065cbb8b5e1",
+   "name": "Peugeot_407",
+   "verdict": "fail",
+   "reason": "baked red livery stripe down both flanks -- survives any respray, so the car cannot serve eight colours",
+   "faces": 270320,
+   "licence": "CC Attribution",
+   "plate": "407",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 45,
+    "n_transparent": 5,
+    "n_textures": 2
+   },
+   "tyre_materials": [],
+   "prior_verdict": "DUPLICATE",
+   "sheet": "car-meshes/audit/peugeot/f88cfe1c126e46b39622c065cbb8b5e1.jpg"
+  },
+  {
+   "n": 80,
+   "uid": "ce98b88db02e4e85953e32e37ffdc5f7",
+   "name": "peugeot 107 Buba",
+   "verdict": "fail",
+   "reason": "doors and roof structure removed: open sides and large holes in the body",
+   "faces": 353787,
+   "licence": "CC Attribution",
+   "plate": "107",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 29,
+    "n_transparent": 5,
+    "n_textures": 8
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/ce98b88db02e4e85953e32e37ffdc5f7.jpg"
+  },
+  {
+   "n": 81,
+   "uid": "ef5d59b78b96496fab2731b138820ea2",
+   "name": "peugeot 207",
+   "verdict": "fail",
+   "reason": "aftermarket body kit: front splitter, side skirts, large rear wing, deep-dish wheels",
+   "faces": 324254,
+   "licence": "CC Attribution",
+   "plate": "207",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 83,
+    "n_transparent": 10,
+    "n_textures": 51
+   },
+   "tyre_materials": [
+    {
+     "name": "rubber_trim",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 0.0,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/ef5d59b78b96496fab2731b138820ea2.jpg"
+  },
+  {
+   "n": 82,
+   "uid": "3bf90277b3594803b4206efe764038ad",
+   "name": "peugeot 307 2008",
+   "verdict": "pass",
+   "reason": "clean 307 5-door; glazing clear (proven); tyre 32 -- black. The clean member of the 799k 307 pair",
+   "faces": 799152,
+   "licence": "CC Attribution",
+   "plate": "2008",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 33,
+    "n_transparent": 3,
+    "n_textures": 7
+   },
+   "tyre_materials": [
+    {
+     "name": "Carro_Pneu",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 32.1,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "PASS",
+   "sheet": "car-meshes/audit/peugeot/3bf90277b3594803b4206efe764038ad.jpg"
+  },
+  {
+   "n": 83,
+   "uid": "67397a7d2165432cae3660abb6ef02f6",
+   "name": "peugeot_205_pikes_peak",
+   "verdict": "fail",
+   "reason": "out of scope: Pikes Peak rally car with full competition aero",
+   "faces": 94726,
+   "licence": "CC Attribution",
+   "plate": "205",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "proven",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 35,
+    "n_transparent": 4,
+    "n_textures": 37
+   },
+   "tyre_materials": [
+    {
+     "name": "tarmac_tyre_tread.001",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 65.6,
+     "lum": 1.0,
+     "factor_stated": false
+    },
+    {
+     "name": "tarmac_tyre_wall.001",
+     "baseColorFactor": null,
+     "texture_mean_srgb": 77.5,
+     "lum": 1.0,
+     "factor_stated": false
+    }
+   ],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/67397a7d2165432cae3660abb6ef02f6.jpg"
+  },
+  {
+   "n": 84,
+   "uid": "1da6e84e50c244a98602d06c9bc729a3",
+   "name": "peugeot_206 HDI",
+   "verdict": "pass",
+   "reason": "clean 206 5-door; glazing clear/inferred with 5 transparent materials; tyre 48. NOTE: #29 and #74 are the same 171,86x mesh exported with ZERO transparent materials; THIS is the good copy",
+   "faces": 171861,
+   "licence": "CC Attribution",
+   "plate": "206",
+   "glass_probe": {
+    "verdict": "clear",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 32,
+    "n_transparent": 5,
+    "n_textures": 1
+   },
+   "tyre_materials": [
+    {
+     "name": "RUBBER",
+     "baseColorFactor": [
+      0.189541,
+      0.189541,
+      0.189541,
+      1.0
+     ],
+     "lum": 0.1895,
+     "factor_stated": true
+    },
+    {
+     "name": "RUBBER__spec",
+     "baseColorFactor": [
+      0.00128334,
+      0.00128334,
+      0.00128334,
+      1.0
+     ],
+     "lum": 0.0013,
+     "factor_stated": true
+    }
+   ],
+   "prior_verdict": "DUPLICATE",
+   "sheet": "car-meshes/audit/peugeot/1da6e84e50c244a98602d06c9bc729a3.jpg"
+  },
+  {
+   "n": 85,
+   "uid": "04948327a1f04e67b92b926a4594955e",
+   "name": "\u0417\u0430\u0433\u043b\u0443\u0448\u043a\u0430 \u0438\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u043e\u043d\u043d\u043e\u0433\u043e \u0434\u0438\u0441\u043f\u043b\u0435\u044f Peugeot 408",
+   "verdict": "fail",
+   "reason": "not a car: a dashboard display blank plug. Cyrillic title -- PART_WORDS is Latin-script only, which is exactly the gap CLAUDE.md already records",
+   "faces": 649944,
+   "licence": "CC Attribution",
+   "plate": "408",
+   "glass_probe": {
+    "verdict": "opaque",
+    "certainty": "inferred",
+    "flat_shell": false,
+    "alpha_shell": false,
+    "n_materials": 1,
+    "n_transparent": 0,
+    "n_textures": 0
+   },
+   "tyre_materials": [],
+   "prior_verdict": "FAIL",
+   "sheet": "car-meshes/audit/peugeot/04948327a1f04e67b92b926a4594955e.jpg"
+  }
+ ]
+}
