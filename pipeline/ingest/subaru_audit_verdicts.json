@@ -144,5 +144,56 @@
    "front bumper and nose render as unfinished dark grey untextured geometry against the white body",
    "glazing shows faceted grey triangulation artefacts through the rear side and tailgate windows rather than clear glass"
   ]
+ },
+ {
+  "uid": "430970904686484ca8326f05ac63a31e",
+  "name": "Subaru - Outback - Front - Exterior - 2022",
+  "verdict": "fail",
+  "reasons": [
+   "partial photogrammetry scan: the rear half of the car is missing entirely, the roof is shredded into torn shells, and interior geometry is exposed through the holes",
+   "ground plane baked into the mesh - renders as a concrete slab under the car in every tile",
+   "baked lighting; mats=1 cov=1.000 full coverage, so glazing and body share one material"
+  ]
+ },
+ {
+  "uid": "a75f2e02c05e4c4a85f7b0b098d6394a",
+  "name": "Subaru Legacy/Liberty MK1 1989-1994",
+  "verdict": "fail",
+  "reasons": [
+   "wheels not mounted: all four arches are empty and a single loose wheel floats under the sill - the Merc_TV assembly-kit defect again",
+   "glazing renders as flat dark panels with no interior structure resolvable in any tile",
+   "cov=0.066 low coverage; the body material the worker found is trim, not paint"
+  ]
+ },
+ {
+  "uid": "0afec05fc27044c783f2acd63de29d5e",
+  "name": "Subaru Outback",
+  "verdict": "fail",
+  "reasons": [
+   "missing-texture checkerboard renders across the rear quarter glass in all four tiles - the asset is shipping with an unresolved texture reference",
+   "out of scope: slammed/stanced build, body on the deck with extreme negative camber front and rear",
+   "front bumper is crumpled and deformed in rear34; headlamp apertures are empty dark voids",
+   "glazing reads as opaque silver body colour, no interior resolvable"
+  ]
+ },
+ {
+  "uid": "7292395fc1b14704acbc268504dcd161",
+  "name": "1993 Subaru Legacy Sedan Photoscan",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: the whole roof is torn away so the car reads as an open shell, and the sandy ground plane is baked into the mesh",
+   "baked lighting and shadows painted into the texture; no separable glazing (mats=1 cov=1.000 FULL COVERAGE)",
+   "soft melted panels, wheel arches smeared into the tyres"
+  ]
+ },
+ {
+  "uid": "7fb4298d5d8f4185b25bb2c43d7f3787",
+  "name": "Subaru Impreza",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: WRC rally car - Rallye Monte-Carlo competition number 156, full sponsor livery (Pirelli, Motul, PIAA, STI), mud flaps, competition wing and gold rally wheels",
+   "livery baked into the textures, cannot be resprayed",
+   "title was the bare Subaru Impreza so the title-stage prune could not catch it - caught by eye"
+  ]
  }
 ]
