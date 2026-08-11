@@ -1879,5 +1879,95 @@
    "rim faces present in all four views",
    "FLAG for later: the local render shows the body split across two materials - a black carpaint over bonnet/roof/doors and a separate light material on the bumpers and sills. That is the two-body-material pattern that shipped toyota-corolla-cross-2021-tw1-v1 with an invisible respray, so this car must not ship colour variants until recolour_audit --stamp passes it"
   ]
+ },
+ {
+  "uid": "97947fc2a58b4e8b8ffa95e827a792e6",
+  "name": "2019 Porsche 911 GT2 RS Clubsport (991.2)",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: GT2 RS Clubsport race car - GT2RSClubsport sill lettering, roll cage, race splitter and swan-neck wing, centre-lock wheels on treadless Pirelli P Zero slicks",
+   "track-only; takes no road registration"
+  ]
+ },
+ {
+  "uid": "97ea84db846e4945961dffb8b2d7af18",
+  "name": "2019 Porsche 911 (991.2) GT3 RS",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 GT3 RS proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands against white rims",
+   "glazing transparent, cage visible through the side glass",
+   "white rim faces present in all four views, yellow PCCB calipers",
+   "lamp internals, NACA ducts, arch louvres and shut lines defined",
+   "road-legal GT3 RS, in scope; the GT3 RS script is factory graphics"
+  ]
+ },
+ {
+  "uid": "99c74d8fa7df42d984903868f6e593f6",
+  "name": "Porsche 911 GT3 RS (992) '23",
+  "verdict": "pass",
+  "reasons": [
+   "992 GT3 RS proportions read instantly - aero blades, centre radiator and swan-neck wing all correct; front 3/4 strong",
+   "tyres black rubber with sidewall lettering, confirmed at full res in the side view (the tread band crop missed the wheels on this framing)",
+   "glazing transparent, interior visible through the side glass",
+   "silver rim faces present in all four views",
+   "headlamp internals, bonnet vents and shut lines defined; the red GT3 RS script is factory graphics",
+   "road-legal GT3 RS, in scope"
+  ]
+ },
+ {
+  "uid": "9d48aa751ab24becbf7110e93c8a7a1f",
+  "name": "2004 Porsche Carrera GT",
+  "verdict": "pass",
+  "reasons": [
+   "Carrera GT proportions read instantly; front 3/4 strong; paint finish premium",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible through the side glass",
+   "silver rim faces present in all four views, yellow PCCB calipers",
+   "lamp internals, side intakes and shut lines defined",
+   "road car, in scope"
+  ]
+ },
+ {
+  "uid": "a3af28ba56f740fbb3711ce2aa24dd8b",
+  "name": "Porsche-911-gt2-rs-weissach Tires",
+  "verdict": "fail",
+  "reasons": [
+   "NOT A VEHICLE: the model is a single TYRE - all four sheet tiles frame one tread band, there is no car, no wheel rim and no body",
+   "the title literally ends in 'Tires'; PART_WORDS should gain 'tire'/'tyre' so this never reaches GPU render again"
+  ]
+ },
+ {
+  "uid": "a52826b8677d4b37a640b22939456d68",
+  "name": "2004 Porsche Carrera GT- Patrol",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: police patrol conversion with baked livery - POLICE lettering on the doors and bonnet, DIAL 9-1-1 decals, unit number 612 and a roof light bar",
+   "the underlying Carrera GT renders cleanly (black tyres, transparent glazing, rim faces present) but no customer reg decodes to a liveried patrol car"
+  ]
+ },
+ {
+  "uid": "a5a8ebc5ae454fc9ab69442484986bdc",
+  "name": "Porsche_911_Turbo_1993",
+  "verdict": "fail",
+  "reasons": [
+   "INCOMPLETE MODEL: a bare bodyshell with NO WHEELS - all four arches are empty and the shell rests on two thin support strips",
+   "no glazing at all: the window apertures are open holes",
+   "no interior, no lamps, no grille; the shell renders as translucent white plastic",
+   "it is also a widebody kit shell rather than a stock 964/993 Turbo"
+  ]
+ },
+ {
+  "uid": "a76364a3d50c4d78912a28250cb57be5",
+  "name": "2022 Porsche 911 GT3 Touring (992)",
+  "verdict": "pass",
+  "reasons": [
+   "992 GT3 Touring proportions read instantly - no fixed wing, correct ducktail; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands against gold rims",
+   "glazing transparent, interior visible through the side glass",
+   "gold rim faces present in all four views",
+   "lamp internals, front splitter, diffuser and shut lines defined",
+   "very close to 4167ba8f in title and body - leave the grouping to dupe_check"
+  ]
  }
 ]
