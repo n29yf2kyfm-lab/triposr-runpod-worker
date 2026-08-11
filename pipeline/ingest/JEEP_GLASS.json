@@ -173,5 +173,47 @@
   "verdict": "faded",
   "evidence": "gltf",
   "note": "MIXED: Translucent_Glass_Gray alpha 0.412/0.329 BLEND are transparent, but Vetro_Anteriore (front windscreen) is alpha 1.0 OPAQUE. Recorded faded because glazing is only partly present."
+ },
+ {
+  "uid": "702f9876e4634566b1ac46a0b92a7baa",
+  "name": "Wrangler Jeep Rubicon",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "MI_Glass_DP.002 alpha 1.0 OPAQUE; 0/2 transparent; 0 textures"
+ },
+ {
+  "uid": "e70b7558c605496ca192838c1ba42187",
+  "name": "Jeep Wrangler Rubicon 2010",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 0 transparent, 0 textures"
+ },
+ {
+  "uid": "7247a74596224c3dadc219836430279c",
+  "name": "2023 Jeep Wrangler Rubicon 392 20th Anniversary",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "Glass alpha 0.25 BLEND with KHR_materials_transmission 1.0; 3/27 transparent"
+ },
+ {
+  "uid": "aae5b65c544d40a4b8eaf95d907e67cd",
+  "name": "Jeep Wrangler Adventure Rubicon | www.vecarz.com",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "univ-glass alpha 0.559 BLEND; 12/53 transparent. Windscreen is the only glazing present by design (doors/roof removed) - an open aperture is not a glazing defect"
+ },
+ {
+  "uid": "d92d7bda85c540cba880da9e9145a9a8",
+  "name": "Day 111: Jeep Wrangler",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 0 transparent; scan atlas"
+ },
+ {
+  "uid": "c8ccef3c01f5479bb10f85328297e083",
+  "name": "Day 48: Jeep Wrangler",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 0 transparent; scan atlas"
  }
 ]

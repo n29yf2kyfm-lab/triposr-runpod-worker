@@ -295,5 +295,77 @@
    "windscreen material Vetro_Anteriore is alpha 1.0 OPAQUE (side glazing Translucent_Glass_Gray is transparent, so the defect is the windscreen specifically)",
    "missed by the title prune - title was Jeep_wrangler_for_car_game with no build hint"
   ]
+ },
+ {
+  "uid": "702f9876e4634566b1ac46a0b92a7baa",
+  "name": "Wrangler Jeep Rubicon",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL - only 2 materials, whole car one grey surface",
+   "glazing opaque: MI_Glass_DP.002 alpha 1.0 OPAQUE, 0 of 2 transparent",
+   "tyres render in body colour including the tread face",
+   "WHEELS MISSING on some corners - empty arches with bare suspension visible in front34 and rear34",
+   "no body-paint material found at all (mats=0 cov=0.000)"
+  ]
+ },
+ {
+  "uid": "e70b7558c605496ca192838c1ba42187",
+  "name": "Jeep Wrangler Rubicon 2010",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL - single material, glazing opaque body-white, tyres body-white including tread",
+   "crude low-detail geometry: visible polygon faceting on bonnet, wings and arches",
+   "seven-slot grille is a soft extrusion with no depth; no lamp internals",
+   "proportions read stubby and cartoonish, not a Wrangler JK",
+   "gltf: 1 material, 0 transparent, 0 textures, cov=1.000"
+  ]
+ },
+ {
+  "uid": "7247a74596224c3dadc219836430279c",
+  "name": "2023 Jeep Wrangler Rubicon 392 20th Anniversary",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as Wrangler JL Rubicon 392",
+   "tyres BLACK - tread face plainly dark in front34 and rear34; the white RACING MASTER ALL-TERRAIN sidewall lettering is authentic raised-white-letter detail, not a body-colour tyre",
+   "all four rim faces present, bronze alloys consistent across views",
+   "seven-slot grille crisp, round LED lamp internals sharp, bonnet vents and hinges modelled",
+   "door and bonnet shut lines well defined",
+   "in scope: Rubicon 392 20th Anniversary is a FACTORY special edition, not a modification; chunky A/T tyres are factory fitment"
+  ]
+ },
+ {
+  "uid": "aae5b65c544d40a4b8eaf95d907e67cd",
+  "name": "Jeep Wrangler Adventure Rubicon | www.vecarz.com",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as Wrangler JL Rubicon 4-door",
+   "doors and roof REMOVED - this is a factory-supported open-air configuration for a Wrangler, not an aftermarket modification",
+   "black tyres, tread face clearly dark in front34 and rear34",
+   "all four rim faces present, black alloys with red calipers consistent",
+   "seven-slot grille crisp, round LED lamp internals present, interior/seats/roll structure modelled",
+   "CAVEAT for product fit: a doorless roofless presentation may not match what a UK Wrangler owner expects to see in the viewer"
+  ]
+ },
+ {
+  "uid": "d92d7bda85c540cba880da9e9145a9a8",
+  "name": "Day 111: Jeep Wrangler",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan - soft melted panels, baked lighting and dirt",
+   "windscreen and side glazing are TORN with holes through them; floating scan fragments under the car",
+   "glazing is scan texture, not glass: gltf 1 material, 0 transparent, cov=1.000",
+   "part of a daily-sketch scan series; no clean geometry to recover"
+  ]
+ },
+ {
+  "uid": "c8ccef3c01f5479bb10f85328297e083",
+  "name": "Day 48: Jeep Wrangler",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan - soft melted panels, baked lighting and dirt",
+   "lower body and rear valance torn away with missing chunks; blown-out white texture; floating fragments",
+   "glazing is scan texture, not glass: gltf 1 material, 0 transparent, cov=1.000",
+   "part of a daily-sketch scan series; no clean geometry to recover"
+  ]
  }
 ]
