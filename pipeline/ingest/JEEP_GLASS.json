@@ -96,5 +96,47 @@
   "verdict": "opaque",
   "evidence": "gltf",
   "note": "1 material, 0 transparent; scan atlas"
+ },
+ {
+  "uid": "347f2868f60f4fb78006b1d8d5b97805",
+  "name": "Jeep_ Grand_ Cherokee_stls",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 0 transparent, 0 textures"
+ },
+ {
+  "uid": "11335c9ff9b54e75a0f6ce80b7357406",
+  "name": "2019 Jeep Cherokee",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "cherokeephong8SG1/9SG1 alpha 0.25 BLEND with transmission 1.0; glazing under a non-matching name so the sheet was honest"
+ },
+ {
+  "uid": "9cc9a05813d84282bee8cfd91fe6e03e",
+  "name": "1999 Jeep XJ",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "0/12 transparent, 0 textures, flat-shell true"
+ },
+ {
+  "uid": "a7c17d7156084940bc980fe61be4c356",
+  "name": "1992 Jeep Cherokee XJ",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "glass-named material alpha 1.0 OPAQUE; 0/26 transparent despite 25 textures"
+ },
+ {
+  "uid": "d7718c1b1c5e442984a9a266ead9822a",
+  "name": "Jeep Trackhawk",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "0/12 transparent, 0 textures, flat-shell true"
+ },
+ {
+  "uid": "87df65bda444435cbffd529322806496",
+  "name": "3D Scanned Jeep Liberty (2005) [Free]",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 0 transparent; glazing is absent geometry (open voids), not tinted glass"
  }
 ]

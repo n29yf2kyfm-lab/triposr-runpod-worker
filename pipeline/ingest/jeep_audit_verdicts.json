@@ -167,5 +167,75 @@
    "glazing opaque: 1 material, 0 transparent, cov=1.000",
    "missed by title prune - title was bare Jeep XJ"
   ]
+ },
+ {
+  "uid": "347f2868f60f4fb78006b1d8d5b97805",
+  "name": "Jeep_ Grand_ Cherokee_stls",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY / STL PRINT SHELL - single material, whole car one white surface",
+   "glazing fully opaque body-white, no glass geometry distinguishable",
+   "tyres render body-white including tread face",
+   "gltf: 1 material, 0 transparent, 0 textures, cov=1.000"
+  ]
+ },
+ {
+  "uid": "11335c9ff9b54e75a0f6ce80b7357406",
+  "name": "2019 Jeep Cherokee",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as Cherokee KL facelift",
+   "black tyres, tread face clearly dark in front34, rear34 and side",
+   "all four rim faces present, dark alloys consistent across views",
+   "seven-slot grille defined, LED headlamp internals present",
+   "shut lines defined, paint finish clean",
+   "in scope: standard 4x4, no lift/snorkel/light bar"
+  ]
+ },
+ {
+  "uid": "9cc9a05813d84282bee8cfd91fe6e03e",
+  "name": "1999 Jeep XJ",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan mush - lumpy melted surfaces on every panel",
+   "no glazing at all: windows are the same white mush as the body",
+   "wheels are amorphous lumps, no rim face or spoke detail on any corner",
+   "gltf: 0 of 12 transparent, 0 textures, flat-shell true, cov=0.998"
+  ]
+ },
+ {
+  "uid": "a7c17d7156084940bc980fe61be4c356",
+  "name": "1992 Jeep Cherokee XJ",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE overland build - roof light bar with four spot pods, rear spare-wheel carrier, whip antenna, lifted stance",
+   "THREE OF FOUR WHEELS MISSING - bare axles and suspension arms visible; only one wheel fitted",
+   "glazing opaque: material named glass at alpha 1.0 OPAQUE, 0 of 26 transparent",
+   "missed by title prune - title gave no hint of the build"
+  ]
+ },
+ {
+  "uid": "d7718c1b1c5e442984a9a266ead9822a",
+  "name": "Jeep Trackhawk",
+  "verdict": "fail",
+  "reasons": [
+   "NO WHEELS OR TYRES AT ALL - all four arches empty in every view",
+   "clay shell: glazing opaque body-white, no glass",
+   "gltf: 0 of 12 transparent, 0 textures, flat-shell true, cov=0.982",
+   "NOTE: this was the single row I recovered by eye from the no-nameplate drops; the recovery did not pay off"
+  ]
+ },
+ {
+  "uid": "87df65bda444435cbffd529322806496",
+  "name": "3D Scanned Jeep Liberty (2005) [Free]",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan - baked lighting, baked ground plane, soft panels",
+   "GLAZING ABSENT - windows are open black voids with no glass geometry",
+   "rust baked into the sills and rear arches; weathered derelict condition",
+   "aftermarket flower decal on the spare wheel cover",
+   "gltf: 1 material, 0 transparent, cov=1.000",
+   "kept deliberately as the only Liberty representative; confirms the scan-prune reasoning"
+  ]
  }
 ]
