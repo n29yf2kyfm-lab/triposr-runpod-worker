@@ -46,24 +46,26 @@
  {
   "uid": "1f3ef39f1c95445197ac5076a2d696c2",
   "name": "2011 Mazda 2 / Demio",
-  "verdict": "pass-pending-gltf",
+  "verdict": "pass",
   "reasons": [
    "proportions read as Mazda 2 DE facelift instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
    "rim faces present with traceable multi-spoke detail and centre caps on all four corners",
    "tyres read as black rubber on the TREAD FACE in front34 and rear34 (the side tile's pale sidewall is the documented whitewall-lookalike, not the defect)",
    "door and bonnet shut lines defined; grille, lamp internals and Mazda badge present",
    "cov=0.144 healthy; mats=1",
-   "DUPLICATE CANDIDATE with #6 (183,822 vs 183,661 faces, 161 apart) -- visually identical sheet"
+   "DUPLICATE CANDIDATE with #6 (183,822 vs 183,661 faces, 161 apart) -- visually identical sheet",
+   "glTF probe CONFIRMS: glazing clear (proven), tyre material 'black' at baseColorFactor luminance 0.026, flat_shell=False, 23 materials"
   ]
  },
  {
   "uid": "e7df911e3bb1452f9bf6ee4b3c80ca54",
   "name": "2011_mazda_2__demio Test By Ddiaz Design",
-  "verdict": "pass-pending-gltf",
+  "verdict": "pass",
   "reasons": [
    "visually IDENTICAL to #5 tile for tile -- same mesh re-uploaded under a test title",
    "same quality read as #5: clean panels, defined shut lines, rim faces present, black tread in the 3/4 tiles",
-   "DUPLICATE of #5 at 161 faces apart (0.09%); the higher face count (#5, 183,822) should be kept"
+   "DUPLICATE of #5 at 161 faces apart (0.09%); the higher face count (#5, 183,822) should be kept",
+   "glTF probe CONFIRMS: glazing clear (proven), tyre material 'black' at baseColorFactor luminance 0.026, flat_shell=False, 23 materials"
   ]
  },
  {
@@ -89,7 +91,7 @@
  {
   "uid": "7d3ac0221bfa479eb920bd2c83417986",
   "name": "2003 Mazda 3 BK Hatchback",
-  "verdict": "pass-pending-gltf",
+  "verdict": "pass",
   "reasons": [
    "proportions read as Mazda 3 BK five-door instantly; roof, pillars and wheelbase consistent across all four tiles",
    "rim faces present and traceable at 5x - five spokes, lug nuts, centre cap and the brake disc visible behind; no void on any corner",
@@ -97,7 +99,8 @@
    "door, bonnet and tailgate shut lines defined; tail lamp internals, grille mesh and exhaust tip present",
    "cov=0.193 healthy, mats=1",
    "NOTE the rig's 'side' tile lands on the rear of this car (its forward axis sits 90 degrees from the rig's assumption) - four distinct angles are still covered, so this is not a defect",
-   "sheet pose warning low-top(tob=0.534) is a false positive - roof aerial inflates the top band"
+   "sheet pose warning low-top(tob=0.534) is a false positive - roof aerial inflates the top band",
+   "glTF probe CONFIRMS: glazing clear (proven), tyre material 'black' at baseColorFactor luminance 0.0, flat_shell=False, 17 materials"
   ]
  },
  {
@@ -115,14 +118,15 @@
  {
   "uid": "c161912a9a3e4b66a2fa1d937cdcf48b",
   "name": "Mazda 3 (BK) sedan S 2005",
-  "verdict": "pass-pending-gltf",
+  "verdict": "pass",
   "reasons": [
    "proportions read as Mazda 3 BK saloon instantly; roof, pillars and wheelbase consistent across all four tiles",
    "rim faces present at 5x - five spokes, centre cap, no void on any corner",
    "tyres plainly BLACK with a defined sidewall on the tread face at 5x",
    "shut lines defined; grille mesh, fog-lamp bezels, tail lamp internals and a UK-format number plate present",
    "cov=0.206 healthy, mats=1",
-   "minor: a shading crease on the front wing above the wheel arch"
+   "minor: a shading crease on the front wing above the wheel arch",
+   "glTF probe CONFIRMS: glazing clear (proven), tyre material 'black' at baseColorFactor luminance 0.106, flat_shell=False, 18 materials"
   ]
  },
  {
@@ -185,6 +189,53 @@
    "the sheet renders the car in its OWN maroon, not the forced silver - the cov=1.000 / mats=1 full-coverage signature, so the colour in this sheet is not to be trusted either",
    "geometry artefacts: two spikes protrude from the front of the roof in the side and front34_L tiles",
    "a respray would repaint glass, cladding and tyres with the body"
+  ]
+ },
+ {
+  "uid": "4608221d68164ca4ae2b9f6c238f26df",
+  "name": "Mazda 3",
+  "verdict": "fail",
+  "reasons": [
+   "GLAZING OPAQUE in the shipped glb: one material, zero transparent materials. Owner ruling fails it outright - at 1x the windows read as solid grey with no interior anywhere",
+   "cov=1.000 with mats=1 - one material over the whole car, so the sheet renders its own grey rather than the forced silver and a respray would repaint glass and tyres",
+   "a floating black rail hangs below the sill in the side tile (detached side-skirt geometry)",
+   "proportions are right for a Mazda 3 BM saloon and the panels are clean; this is a materials failure, so it is a re-source candidate"
+  ]
+ },
+ {
+  "uid": "0a12dda232354cf6bcf5854451842502",
+  "name": "2020 Mazda 3 Hatchback",
+  "verdict": "pass",
+  "reasons": [
+   "BEST OF THE WAVE SO FAR. Proportions read as Mazda 3 BP hatch instantly; front 3/4 is strong; roof, pillars and wheelbase consistent across all four tiles",
+   "glazing CLEAR and proven in the shipped glb: '..._Windows' alphaMode=BLEND alpha=0.25, plus separately-named headlight and brake-light lenses at 0.25 that are correctly NOT counted as glazing",
+   "tyres black and textured in the shipped glb ('..._Tires' carries a baseColorTexture, so the colour is in the map, not a factor) and plainly black at 5x with a defined sidewall",
+   "rim faces present at 5x: ten spokes, lug nuts, a Mazda centre badge, and the brake disc AND caliper visible behind the spokes",
+   "shut lines defined; the signature Mazda mesh grille resolves as actual mesh; LED headlamp internals sharp; twin exhaust tips present",
+   "cov=0.328, 26 materials, 3 textures, not a flat shell"
+  ]
+ },
+ {
+  "uid": "86a4da0206a04508b692efa55c8c50b9",
+  "name": "Mazda CX-5",
+  "verdict": "fail",
+  "reasons": [
+   "PHOTOGRAMMETRY SCAN of a real car, not a built model: snow and road salt baked into the paint, baked lighting, soft melted panels",
+   "the ground plane is baked into the mesh - a white slab of snow-covered tarmac sits under the car in every tile",
+   "windows are holes in the mesh; the roof and screen are punched through in the front34 and side tiles",
+   "a real Estonian registration (686 MRY) is baked into both plates",
+   "cov=1.000, mats=1, glazing opaque"
+  ]
+ },
+ {
+  "uid": "64186fc48c604ffc98a056f7f7a1814c",
+  "name": "Mazda mazdaspeed 3",
+  "verdict": "fail",
+  "reasons": [
+   "NO WHEELS AT ALL. Every arch is empty in all four tiles - no rim, no tyre, no hub. The car rests on its sills. This is not a rim void, it is missing wheel geometry",
+   "TITLE IS MISLEADING: I had pre-classified this as an OEM Mazdaspeed 3 from its title, and the render shows an aftermarket WIDEBODY build - flared arches, deep side skirts, front splitter, canards and a large chassis-mounted GT wing. Reclassified to aftermarket, out of scope",
+   "glazing opaque in the shipped glb (proven, 62 materials, none transparent)",
+   "second material renders in its own turquoise over arches, skirts, wing and screen surround"
   ]
  }
 ]
