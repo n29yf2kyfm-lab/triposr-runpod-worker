@@ -812,5 +812,78 @@
    "LED headlamp internals fully resolved, grille bars with depth, crisp shut lines, rim faces present in all four tiles",
    "NOTE: same ZD8 generation as 2e8aca04 (836,016 faces) - see the dupe check"
   ]
+ },
+ {
+  "uid": "47b80a3e11e84794a820862aaaf85e3f",
+  "name": "2023 Subaru BRZ Premium",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec 2023 BRZ Premium (ZD8) - proportions read instantly and hold across all four tiles, premium paint finish",
+   "tyres black rubber with Michelin sidewall lettering and a matte tread that separates from the gloss-black alloys at 5x in front34 and rear34",
+   "glazing clear: the interior door top, mirror mount and cabin resolve through the side glass in two tiles, though the tint is heavy",
+   "LED headlamp internals resolved, grille with depth, crisp shut lines, rim faces present in all four tiles"
+  ]
+ },
+ {
+  "uid": "e0e64e094d104e919ad54cc9dfb328ab",
+  "name": "Subaru BRZ",
+  "verdict": "fail",
+  "reasons": [
+   "the door mirrors render as plain white SPHERES on a stalk rather than mirror housings - clearly visible in the side tile and at 5x in both glass crops; a geometry defect on the hero three-quarter view",
+   "one material for the whole car: the glTF holds a single Scene_-_Root material (BLEND, 4 textures) covering body, glass, tyres and lamps, so a colour variant would repaint the glazing and rubber with the body - the same reason toyota-auris-v1 was retired",
+   "cov=0.000 mats=0: the render worker found no separable body-paint material either"
+  ]
+ },
+ {
+  "uid": "1f0e3601623345149a945f6de054a4bb",
+  "name": "2020 Subaru BRZ tS",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec 2020 BRZ tS (ZC6 facelift) with the factory STI wing and bronze alloys; proportions consistent across all four tiles",
+   "tyres plainly black rubber, clearly darker than the bronze alloys, with red calipers; judged on the tread face in front34 and rear34 at 5x",
+   "glazing clear: seat, door card and cabin resolve through the side and quarter glass in two tiles; glTF carries real transparent glass materials",
+   "the smoked tail lamps are a genuine tS look, not a void - internal LED bar structure is visible at 5x",
+   "LED headlamp internals, grille with BRZ tS badge, crisp shut lines, rim faces present in all four tiles"
+  ]
+ },
+ {
+  "uid": "ab42313b02f245aaa8dc9090cfd941f5",
+  "name": "2013 Subaru BRZ",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec 2013 BRZ (ZC6) - clean complete body, proportions read instantly, consistent across all four tiles",
+   "tyres plainly black rubber, clearly darker than the machined silver alloys, judged on the tread face in front34 and rear34 at 5x",
+   "glazing clear: seat back, door card and B-pillar all resolve through the door and quarter glass in two tiles",
+   "projector headlamp internals, black mesh grille with a defined frame, smoked tail lamps with internal structure, crisp door and boot shut lines, rim faces present in all four tiles"
+  ]
+ },
+ {
+  "uid": "321a9ece66bb4616872892c01d279542",
+  "name": "Subaru BRZ (ZC6)",
+  "verdict": "fail",
+  "reasons": [
+   "large faceted grey and dark polygonal patches break up the doors, roof, bonnet and rear quarter in all four tiles - a broken-normals or corrupt-UV artefact that reads as camouflage over the paint",
+   "glazing opaque: no interior resolves in any tile and the glTF carries no glass-named material among its 56",
+   "cov=0.117 LOW COVERAGE - the body material the worker found is not the paint"
+  ]
+ },
+ {
+  "uid": "d63ec738b71d4435898dcdef55a2f483",
+  "name": "Subaru brz",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: Rocket Bunny/Pandem-style widebody time-attack build - riveted bolt-on over-fenders, huge swan-neck GT wing, front canards and splitter, extreme camber",
+   "uniform white clay: cov=0.905 FULL COVERAGE, tyres render body-white and the windows are opaque body panels with no interior - fails both the tyre and glazing rulings"
+  ]
+ },
+ {
+  "uid": "f76be3778bd549378169edac87d40575",
+  "name": "Subaru BRZ",
+  "verdict": "fail",
+  "reasons": [
+   "DECISIVE glTF evidence: exactly ONE material (Scene_-_Root, baseColorFactor 1,1,1, OPAQUE, zero textures) - the documented FLAT SHELL. No glass, no tyre, no lamp material exists in the file",
+   "renders exactly as that predicts: a uniform white clay with opaque white windows, body-white tyres and blank lamp housings; no interior resolvable anywhere",
+   "cov=1.000 FULL COVERAGE, so no respray is possible"
+  ]
  }
 ]
