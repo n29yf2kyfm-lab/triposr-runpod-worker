@@ -735,5 +735,39 @@
    "materials are otherwise sound: black tyres against silver BBS-style rims, transparent glazing with interior resolvable, defined shut lines and headlamp internals - this is a better mesh than the sibling",
    "low cost to lose: the S204 was a 600-unit JDM limited edition, so effectively no UK registration decodes to one"
   ]
+ },
+ {
+  "uid": "20512df95cdf4114aa50b6005b5290a3",
+  "name": "Subaru Impreza 22B STI 1998 | www.vecarz.com",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec 1998 Impreza 22B STi in Sonic Blue on gold BBS-style wheels; the 22B is a factory homologation road car, in scope",
+   "tyres proven black on a COLOURED-BODY control - the car carries its own blue paint and the tread face is neutral black against gold rims in front34 and rear34; the glTF tire material is textured (white multiplier over a black rubber texture)",
+   "glazing proven transparent from the glTF: material windiws is rgba 0.004/0.307/0.364 at alpha 0.602 BLEND, and interior structure resolves through the side glass; light_glass is alpha 0.492 so the lamp lenses are real transparent glass too",
+   "21 textures, gold rim faces present in all four tiles",
+   "NOTED WEAKNESS: headlamp internals are soft (a pale milky lens with only a faint inner outline) and the tail lamps read as a washed peach - the lens materials are metallic with roughness 0, so that is a lighting response rather than a missing material"
+  ]
+ },
+ {
+  "uid": "66bd94bdd92a4b79a39cd0307870b4eb",
+  "name": "1998 Subaru IMPREZA 22B STi Version",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec 1998 Impreza 22B STi in white on gold BBS-style wheels; factory road spec, in scope",
+   "tyres plainly black rubber against the gold rims, judged on the tread face in front34 and rear34",
+   "glazing clear: the roll cage, seat and harness all resolve through the side glass in the front34 tile",
+   "the dark wheels in front34 and side are the rig key light, NOT a rim void - gold spoke arms, the rim lip and the centre are all still traceable at 5x, which is the documented test",
+   "NOTED WEAKNESSES: headlamp internals soft, bonnet shut line not defined, 73,164 faces; this is the weaker of the two 22Bs in the wave - see the dupe check, the blue 80,038-face car is the better mesh of the same vehicle"
+  ]
+ },
+ {
+  "uid": "9c25f4d000c847be9e98823a6d115f3c",
+  "name": "subaru brat",
+  "verdict": "fail",
+  "reasons": [
+   "the Subaru BRAT side decal is MIRRORED - it reads backwards on both flanks in three of the four tiles, so the texture is applied flipped",
+   "glazing opaque: the windscreen renders as a flat white panel with no interior resolvable in the side tile, and the cab rear window is a plain pale panel",
+   "soft low-detail bodywork with no door, bonnet or tailgate shut lines; 61,230 faces, at the very bottom of the serving band"
+  ]
  }
 ]
