@@ -215,5 +215,61 @@
   "verdict": "opaque",
   "evidence": "gltf",
   "note": "1 material, 0 transparent; scan atlas"
+ },
+ {
+  "uid": "320589e1478e45449c556a5991bbe3c3",
+  "name": "2013_equipped_jeep_wrangler_unlimited_rubicon",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "2/24 transparent - but irrelevant, the asset is a Porsche Carrera GT and is out of scope"
+ },
+ {
+  "uid": "119df0c2da754813bc570f9a22c30561",
+  "name": "My dad's 2022 Jeep Wrangler 4xe",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 0 transparent, 0 textures"
+ },
+ {
+  "uid": "c7c907918f234ecbb363b145523160bd",
+  "name": "My dad's 2022 Jeep Wrangler Willys",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 0 transparent, 0 textures"
+ },
+ {
+  "uid": "a50b83c3f6554230818a9a7a93587c37",
+  "name": "2007 Jeep Wrangler Rubicon",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "JMAT_Glass1 alpha 0.25 BLEND with KHR_materials_transmission 1.0"
+ },
+ {
+  "uid": "80a8657f00d44b0f8bff008b3f9b3383",
+  "name": "Jeep Wrangler Rubicon MK3 2006-2018",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "0/34 transparent, 0 textures; glass-named materials all alpha 1.0 OPAQUE"
+ },
+ {
+  "uid": "0a48ed792a984770967a6d093e670700",
+  "name": "Willys Jeep 3d model free",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 0 transparent - but the MB has no side or rear glazing by design; only a flat folding windscreen"
+ },
+ {
+  "uid": "792a45417e23488d88f3bcf7615d7f26",
+  "name": "Jeep Gladiator 1962",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "windowglass alpha 0.3 BLEND, clearglass alpha 0.2 BLEND; 4/17 transparent"
+ },
+ {
+  "uid": "6dc305bfecb04efe9f0da0ad5fabfde8",
+  "name": "Jeep Wagoneer 1978",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "clearglass alpha 0.2 BLEND, windowglass BLEND; 4/17 transparent"
  }
 ]

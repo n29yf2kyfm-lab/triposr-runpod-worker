@@ -367,5 +367,105 @@
    "glazing is scan texture, not glass: gltf 1 material, 0 transparent, cov=1.000",
    "part of a daily-sketch scan series; no clean geometry to recover"
   ]
+ },
+ {
+  "uid": "320589e1478e45449c556a5991bbe3c3",
+  "name": "2013_equipped_jeep_wrangler_unlimited_rubicon",
+  "verdict": "fail",
+  "reasons": [
+   "WRONG VEHICLE AND WRONG MARQUE - this is a PORSCHE CARRERA GT, not a Jeep",
+   "badged PORSCHE on the rear number plate with Carrera GT script on the rear panel",
+   "mid-engined open-top supercar body; nothing Jeep about it",
+   "the nameplate filter cannot catch this: the TITLE contains jeep wrangler unlimited rubicon, so every text gate passes it",
+   "only the render settles it - exactly the CLAUDE.md rule that title-derived metadata is unreliable"
+  ]
+ },
+ {
+  "uid": "119df0c2da754813bc570f9a22c30561",
+  "name": "My dad's 2022 Jeep Wrangler 4xe",
+  "verdict": "fail",
+  "reasons": [
+   "crude low-poly hobby model - blocky faceted bodywork, no surface refinement",
+   "no door or bonnet shut lines at all; panel gaps are flat colour breaks, not geometry",
+   "seven-slot grille is a crude extrusion with no depth; no headlamp internals",
+   "glazing opaque flat grey: gltf 1 material, 0 transparent, 0 textures, cov=1.000",
+   "wheels are simplistic discs with no real spoke or rim-face detail",
+   "NEAR-DUPLICATE PAIR - 42 and 43 are the same base mesh from one author (137,020 vs 133,824 faces), recoloured"
+  ]
+ },
+ {
+  "uid": "c7c907918f234ecbb363b145523160bd",
+  "name": "My dad's 2022 Jeep Wrangler Willys",
+  "verdict": "fail",
+  "reasons": [
+   "crude low-poly hobby model - blocky faceted bodywork, no surface refinement",
+   "no door or bonnet shut lines at all; panel gaps are flat colour breaks, not geometry",
+   "seven-slot grille is a crude extrusion with no depth; no headlamp internals",
+   "glazing opaque flat grey: gltf 1 material, 0 transparent, 0 textures, cov=1.000",
+   "wheels are simplistic discs with no real spoke or rim-face detail",
+   "NEAR-DUPLICATE PAIR - 42 and 43 are the same base mesh from one author (137,020 vs 133,824 faces), recoloured"
+  ]
+ },
+ {
+  "uid": "a50b83c3f6554230818a9a7a93587c37",
+  "name": "2007 Jeep Wrangler Rubicon",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as Wrangler JK Rubicon 2-door",
+   "black tyres, tread face plainly dark in front34, rear34 and side",
+   "all four rim faces present, silver five-spoke alloys consistent across views",
+   "seven-slot grille crisp, round headlamp internals present, bonnet latches modelled",
+   "door and bonnet shut lines well defined; interior seats and roll cage modelled",
+   "roof removed - a factory-supported Wrangler configuration, doors and windscreen glazing still present",
+   "in scope: factory Rubicon trim, no lift, no snorkel, no light bar, no roof rack"
+  ]
+ },
+ {
+  "uid": "80a8657f00d44b0f8bff008b3f9b3383",
+  "name": "Jeep Wrangler Rubicon MK3 2006-2018",
+  "verdict": "fail",
+  "reasons": [
+   "ALL FOUR ROAD WHEELS AND TYRES MISSING - the car sits on bare axle stubs and suspension; only the rear-mounted spare is modelled",
+   "glazing opaque in the shipped glTF: 0 of 34 materials transparent (Wrangler_headlightglass and Wrangler_taillightglass both alpha 1.0 OPAQUE)",
+   "the dark tinted windows in the sheet are the handler override on glass-named materials, not real transparency",
+   "body shell itself is reasonable but unusable without wheels"
+  ]
+ },
+ {
+  "uid": "0a48ed792a984770967a6d093e670700",
+  "name": "Willys Jeep 3d model free",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE - this is a WWII Willys MB military jeep: olive drab, folded flat windscreen, military rifle rack, jerry can brackets, no doors and no glazing",
+   "no UK registration decodes to a 1940s Willys MB",
+   "KEPT DELIBERATELY AS A CONTROL to test whether a bare Willys Jeep title really means the WWII MB. It does - this validates the 11 Willys rows pruned by title",
+   "model quality itself is decent (clean panels, black block-tread tyres, real rim faces) - it simply is not an in-scope vehicle"
+  ]
+ },
+ {
+  "uid": "792a45417e23488d88f3bcf7615d7f26",
+  "name": "Jeep Gladiator 1962",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as a 1962 Gladiator J-200 pickup",
+   "TYRES VERIFIED BLACK from the shipped glTF: material tire baseColorFactor 0.106 dark rubber. The pale ring in the sheet is a period whitewall plus a chrome hubcap, NOT a body-colour tyre - checked because the sheet alone cannot separate the two on a white car",
+   "all four rim faces present, chrome hubcaps consistent across views",
+   "quad-headlamp grille sharp, chrome trim crisp, bed and cab shut lines defined",
+   "in scope as a factory Jeep: no lift, no snorkel, no light bar, unmodified",
+   "NOT A UK-MARKET CAR: the Gladiator was never sold in the UK, and a 1962 US pickup would not decode from a UK registration"
+  ]
+ },
+ {
+  "uid": "6dc305bfecb04efe9f0da0ad5fabfde8",
+  "name": "Jeep Wagoneer 1978",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as a Wagoneer SJ with period woodgrain side trim",
+   "TYRES VERIFIED BLACK from the shipped glTF: material tire baseColorFactor 0.106; the pale ring is a period whitewall and the tread face reads dark in front34 and rear34",
+   "all four rim faces present, chrome-centred wheels consistent across views",
+   "quad-headlamp grille sharp, chrome trim and bumpers crisp, door and tailgate shut lines defined",
+   "roof rack is factory Wagoneer equipment, not an overland accessory",
+   "NOT A UK-MARKET CAR: the Wagoneer was never sold in the UK"
+  ]
  }
 ]
