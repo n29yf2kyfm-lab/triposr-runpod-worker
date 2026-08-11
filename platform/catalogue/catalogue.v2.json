@@ -280661,5 +280661,5648 @@
    "method": "render",
    "at": "2026-08-11"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-e-type-1963-jgw1-v1",
+  "make": "jaguar",
+  "model": "E-Type",
+  "modelFamily": "jaguar e-type",
+  "modelAliases": [
+   "E-Type"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1963,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "4.2"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "d526aafcb857434284b1a432993a77cf",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "COPblack1",
+   "COPmottled1",
+   "COPplastic4",
+   "Jag1body1",
+   "Metal_Ext",
+   "Misc"
+  ],
+  "glassMaterialNames": [
+   "COPwindow1",
+   "Light_Glass",
+   "Jag1glass1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1963-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1963-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1963-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1963-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1963-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1963-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1963-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1963-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-e-type-1963-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-e-type-1963-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 9408392,
+  "mobileFileSizeBytes": 9408392,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "91df911126931d934a727aa535c74363e9607b853277a4164fdf1890a5085f3a",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.433,
+   "variantsHash": "a091374acc11c4eb14f1e51deb1116e823164723",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-e-type-1971-jgw1-v1",
+  "make": "jaguar",
+  "model": "E-Type",
+  "modelFamily": "jaguar e-type",
+  "modelAliases": [
+   "E-Type"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1971,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "V12 Roadster"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "1a843d6163194c2580ba4dac1c7d54c6",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carPaint"
+  ],
+  "glassMaterialNames": [
+   "glass",
+   "Light_Map"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1971-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1971-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1971-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1971-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1971-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1971-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1971-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-e-type-1971-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-e-type-1971-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-e-type-1971-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 16865708,
+  "mobileFileSizeBytes": 16865708,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "029f0fa85a23c0b2f4008b4fe41b9821f44b3f504e04ba3a799338ce4cd5f7d5",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.412,
+   "variantsHash": "8c9e4a21760e41ee3e852f1969d57101ff41504c",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-f-type-jgw1-v1",
+  "make": "jaguar",
+  "model": "F-Type",
+  "modelFamily": "jaguar f-type",
+  "modelAliases": [
+   "F-Type"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Convertible"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "b2e428dddc764fd0aaf7aec3093cab12",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "2021_Jaguar_F-Type_Convertible_R-Dynamic_Black1",
+   "2021_Jaguar_F-Type_Convertible_R-Dynamic_Rims2",
+   "2021_Jaguar_F-Type_Convertible_R-Dynamic_Sunset_Gold_Gloss",
+   "2021_Jaguar_F-Type_Convertible_R-Dynamic_UnderCarrier"
+  ],
+  "glassMaterialNames": [
+   "2021_Jaguar_F-Type_Convertible_R-Dynamic_Windows1",
+   "2021_Jaguar_F-Type_Convertible_R-Dynamic_BrakeLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 43714264,
+  "mobileFileSizeBytes": 43714264,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "79bb56b37b30467eb6a8d17310cf6fd7cbc53810b15b49df01f41f68209d3683",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.251,
+   "variantsHash": "5f904748f9d5d43dda58a11731169a059b25c7e8",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-f-type-jgw1-v2",
+  "make": "jaguar",
+  "model": "F-Type",
+  "modelFamily": "jaguar f-type",
+  "modelAliases": [
+   "F-Type"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "548f9180774c4bc6852adbfd409f0796",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Disk",
+   "Hood1",
+   "aiStandardSurface38",
+   "aiStandardSurface39",
+   "material"
+  ],
+  "glassMaterialNames": [
+   "Wind_Shield",
+   "aiStandardSurface30",
+   "aiStandardSurface35"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v2__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-jgw1-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-jgw1-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 25061892,
+  "mobileFileSizeBytes": 25061892,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "f99da6a2df539673f37d30fcb0279a51e043bb14ba32ff3ea313408409ed5e11",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.438,
+   "variantsHash": "c87d76c7c4fc0d2ab95d368136abfef5509504d9",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-f-type-jgw1-v3",
+  "make": "jaguar",
+  "model": "F-Type",
+  "modelFamily": "jaguar f-type",
+  "modelAliases": [
+   "F-Type"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "b338091497c64d31bef9bd7de49ade81",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint_metalic_red"
+  ],
+  "glassMaterialNames": [
+   "glass_clear",
+   "glass_red",
+   "glass_red_illum_bumpC",
+   "glass_led_bumpC",
+   "glass_bumpC"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v3__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v3__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v3__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v3__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v3__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v3__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v3__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-jgw1-v3__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-jgw1-v3.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-jgw1-v3.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 17855240,
+  "mobileFileSizeBytes": 17855240,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "516efbbdc7f5c8af13f447c780cfa47e49bec1700132329b3c0778b0a3f53bba",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.307,
+   "variantsHash": "7bd942a3851ed30afa9d6a31a76e04be687cce3a",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-f-type-2016-jgw1-v1",
+  "make": "jaguar",
+  "model": "F-Type",
+  "modelFamily": "jaguar f-type",
+  "modelAliases": [
+   "F-Type"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2016,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Project 7"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "333a053cfef3424fb0194e4f3a4472d9",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "CarPaint"
+  ],
+  "glassMaterialNames": [
+   "jagwindos",
+   "Light_glas",
+   "Red_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2016-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2016-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2016-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2016-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2016-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2016-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2016-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2016-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-2016-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-2016-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 21551932,
+  "mobileFileSizeBytes": 21551932,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "00a3d5528b432a41675dfddb3937653336544eae98ae021d62cb00bdd42c4ec8",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.427,
+   "variantsHash": "c4fc46c12590404640a0b1e2c4fabf4d4638ccee",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-f-type-2017-jgw1-v1",
+  "make": "jaguar",
+  "model": "F-Type",
+  "modelFamily": "jaguar f-type",
+  "modelAliases": [
+   "F-Type"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2017,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "R Convertible"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "1958208dfe094224b261465d73ece0ee",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "jM_CarPaint_Max1",
+   "jM_Chassis_Max1"
+  ],
+  "glassMaterialNames": [
+   "jM_Glass_WindowFront_Low1",
+   "jM_Glass_WindowSurroundFront_Low1",
+   "jM_LightGlass_Red_Low1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2017-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2017-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2017-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2017-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2017-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2017-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2017-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2017-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-2017-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-2017-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 5110216,
+  "mobileFileSizeBytes": 5110216,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d33c2e1b6ce06dd89e811343e9d86f56729355d8619a256436f79428bfcd70f2",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.444,
+   "variantsHash": "791410c7f39384912e0962b4b558580eda72ddba",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-f-type-2018-jgw1-v1",
+  "make": "jaguar",
+  "model": "F-Type",
+  "modelFamily": "jaguar f-type",
+  "modelAliases": [
+   "F-Type"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2018,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "SVR Coupe"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "a3a6175a66e24145ab49fa171edc3334",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "glass",
+   "Jaguar_F_TYPE_SVR_Coup_3D_from_CSR2red_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2018-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2018-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2018-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2018-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2018-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2018-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2018-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2018-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-2018-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-2018-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 11052256,
+  "mobileFileSizeBytes": 11052256,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "3bf00a3518405a7fb80e3728db2d31ae219996b0a25cb73656311b1a0349486d",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.415,
+   "variantsHash": "9d40e31deb9ef9914d1cbaa5e75a466c8afdb164",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-f-type-2019-jgw1-v1",
+  "make": "jaguar",
+  "model": "F-Type",
+  "modelFamily": "jaguar f-type",
+  "modelAliases": [
+   "F-Type"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2019,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "R Convertible"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "ec94f812b58a470ca133173c479cf1ce",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "no-body-material",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [],
+  "glassMaterialNames": [
+   "jMAT_Glass1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-2019-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-2019-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6414528,
+  "mobileFileSizeBytes": 6414528,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "803f414d2f009e8e9e84db689cb15537b38f72f26607cecb3b4d5264aeb7b60a",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-f-type-2021-jgw1-v1",
+  "make": "jaguar",
+  "model": "F-Type",
+  "modelFamily": "jaguar f-type",
+  "modelAliases": [
+   "F-Type"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "R Convertible"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "7c2c7dde73664c32be7dc1a5a6522ec7",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "jJaguar_FTYPERConvertibleRewardRecycled_2021Base_Material1",
+   "jJaguar_FTYPERConvertibleRewardRecycled_2021Coloured_Material1",
+   "jJaguar_FTYPERConvertibleRewardRecycled_2021EngineA_Material1",
+   "jJaguar_FTYPERConvertibleRewardRecycled_2021Paint_Material1"
+  ],
+  "glassMaterialNames": [
+   "jJaguar_FTYPERConvertibleRewardRecycled_2021Window_Material1",
+   "jred_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2021-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2021-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2021-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2021-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2021-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2021-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2021-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-f-type-2021-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-2021-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-f-type-2021-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 14383208,
+  "mobileFileSizeBytes": 14383208,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "e5af94cf91f29a437773762ff29c8d3ddac80f42139e2f09aaa62a1442c375ed",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.496,
+   "variantsHash": "ddf57941dbb31476017d25603a059c1dc497838e",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-i-pace-jgw1-v1",
+  "make": "jaguar",
+  "model": "I-Pace",
+  "modelFamily": "jaguar i-pace",
+  "modelAliases": [
+   "I-Pace"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Concept"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "3ea106994ec9442eb4b72906026fa215",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Body",
+   "Body_noir"
+  ],
+  "glassMaterialNames": [
+   "Vitre"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-i-pace-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-i-pace-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-i-pace-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-i-pace-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-i-pace-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-i-pace-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-i-pace-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-i-pace-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-i-pace-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-i-pace-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 9081548,
+  "mobileFileSizeBytes": 9081548,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "4f6f6126148673a921e98c355c3bcc026c4bdb217af45022a71496a0c5e7864a",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.294,
+   "variantsHash": "35853ac2d7c044ef8a3eafb91361b618dd5c0334",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-mk2-1962-jgw1-v1",
+  "make": "jaguar",
+  "model": "MK2",
+  "modelFamily": "jaguar mk2",
+  "modelAliases": [
+   "MK2"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1962,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "5a58d1a8eb2043af8916e828fc9d7ff4",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body_color_mk2"
+  ],
+  "glassMaterialNames": [
+   "glass_lamp",
+   "glass_window"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-mk2-1962-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-mk2-1962-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-mk2-1962-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-mk2-1962-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-mk2-1962-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-mk2-1962-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-mk2-1962-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-mk2-1962-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-mk2-1962-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-mk2-1962-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 12635236,
+  "mobileFileSizeBytes": 12635236,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "26927a303f0d59cbc5da7f97a47e575931bd9600b7b547c0f3252a5057b9f38b",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.35,
+   "variantsHash": "d8bcc14e7f4b704462a33f75182ca88d928c36bb",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-xe-2018-jgw1-v1",
+  "make": "jaguar",
+  "model": "XE",
+  "modelFamily": "jaguar xe",
+  "modelAliases": [
+   "XE"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2018,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "SV Project 8"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "9242afa6a7ae4800833e18b1249fa3f9",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "color_2",
+   "jJaguar_XESVProject8RewardRecycled_2018Base_Material1",
+   "jJaguar_XESVProject8RewardRecycled_2018Carbon1M_Material1",
+   "jJaguar_XESVProject8RewardRecycled_2018Carbon1_Material1",
+   "jJaguar_XESVProject8RewardRecycled_2018Coloured_Material1",
+   "jJaguar_XESVProject8RewardRecycled_2018EngineA_Material1",
+   "jJaguar_XESVProject8RewardRecycled_2018Paint_Material1"
+  ],
+  "glassMaterialNames": [
+   "jJaguar_XESVProject8RewardRecycled_2018Window_Material1",
+   "red_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xe-2018-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xe-2018-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xe-2018-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xe-2018-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xe-2018-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xe-2018-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xe-2018-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xe-2018-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xe-2018-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xe-2018-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 12677840,
+  "mobileFileSizeBytes": 12677840,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "a0fb4a16c89d397773e161afc35e5d0a3e139ce7a80a28545630a1e038b519a2",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.48,
+   "variantsHash": "1e53c204725e004f8fc3425613a762a5b3d9c549",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-xf-jgw1-v1",
+  "make": "jaguar",
+  "model": "XF",
+  "modelFamily": "jaguar xf",
+  "modelAliases": [
+   "XF"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "a7a865ac27f6458bb42525e4aebb2a56",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Gar_alu",
+   "Gar_chr",
+   "Gar_gum",
+   "Gar_kob",
+   "Gar_lac",
+   "Gar_skl",
+   "Gar_vbl",
+   "Gar_voy",
+   "JXF2_lak",
+   "JXF2_tex"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xf-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xf-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xf-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xf-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xf-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xf-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xf-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xf-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xf-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xf-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 18967440,
+  "mobileFileSizeBytes": 18967440,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "a4934ebdfe9b8c4f6981c20e82d8b28cb77297034b0b87e24b5dfbc4ef4a351f",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.453,
+   "variantsHash": "be8c9c6b38b0c4df181b862bd212dcf21e373276",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-xfr-s-jgw1-v1",
+  "make": "jaguar",
+  "model": "XFR-S",
+  "modelFamily": "jaguar xfr-s",
+  "modelAliases": [
+   "XFR-S"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Sportbrake"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "0ad7a343bd184a1aa016095380709830",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Body"
+  ],
+  "glassMaterialNames": [
+   "Plane.021__0"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xfr-s-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xfr-s-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xfr-s-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xfr-s-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xfr-s-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xfr-s-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xfr-s-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xfr-s-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xfr-s-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xfr-s-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 19484968,
+  "mobileFileSizeBytes": 19484968,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "a43ea0860ce0a21fa35998a710486557ce4aa9f05fb590335df4cb756abafa24",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.379,
+   "variantsHash": "82673a9290897c0e5970347954af8a7caed86c3f",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-xj-2015-jgw1-v1",
+  "make": "jaguar",
+  "model": "XJ",
+  "modelFamily": "jaguar xj",
+  "modelAliases": [
+   "XJ"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2015,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "ce7dfd765748429f8f64b7683b49d581",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "darkglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2015-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2015-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2015-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2015-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2015-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2015-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2015-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj-2015-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj-2015-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj-2015-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 32878420,
+  "mobileFileSizeBytes": 32878420,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "da97b65f22962832749aeeac3869398f9e407e584c83e5f5a06aef205d594fe8",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.295,
+   "variantsHash": "3fa01cf206e6af4bdbef32cba27c00a7a0bf44c5",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-xj220-1992-jgw1-v1",
+  "make": "jaguar",
+  "model": "XJ220",
+  "modelFamily": "jaguar xj220",
+  "modelAliases": [
+   "XJ220"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1992,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "7dd7bc17b4564f6eb03542ad6cab6dda",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Color_2",
+   "XJ220MI_1256010001_002",
+   "XJ220MI_Engine1",
+   "XJ220MI_Engine_Tinfoil_A1",
+   "XJ220MI_Exhaust1",
+   "XJ220MI_Rim1",
+   "phong1"
+  ],
+  "glassMaterialNames": [
+   "XJ220MI_Glass1",
+   "XJ220MI_Glass_Light1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xj220-1992-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj220-1992-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xj220-1992-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 20500868,
+  "mobileFileSizeBytes": 20500868,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "5f96796a8e0154cb0e90a576d36f1d1d38e70cb98ed745541cb5f3a71dfb731c",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.438,
+   "variantsHash": "7eeac09b9dc3145c4d65b5a670d27c09d1aefc6c",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-xkr-2010-jgw1-v1",
+  "make": "jaguar",
+  "model": "XKR",
+  "modelFamily": "jaguar xkr",
+  "modelAliases": [
+   "XKR"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2010,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "b2f7313e8fa3453699dab7b9a17f56fb",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Color",
+   "Gloss_Black",
+   "Meshesbootok0151_diff",
+   "Meshespainttransparency006bonnetok0031Mat",
+   "blcak"
+  ],
+  "glassMaterialNames": [
+   "Windows"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2010-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2010-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2010-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2010-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2010-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2010-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2010-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-2010-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xkr-2010-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xkr-2010-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 12751552,
+  "mobileFileSizeBytes": 12751552,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "06046fc6aa6fa5b9818d8f9bc31786207ecb853f83ab67b9c9b862a8ff16c367",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.42,
+   "variantsHash": "45f5baae0da901cc3030b7cecd02c1f36ffd0f82",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jaguar-xkr-s-2014-jgw1-v1",
+  "make": "jaguar",
+  "model": "XKR-S",
+  "modelFamily": "jaguar xkr-s",
+  "modelAliases": [
+   "XKR-S"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2014,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "GT"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "d0ba246165e84672bc4fcab175a328eb",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Color",
+   "Gloss_Black",
+   "Meshesbootok0151_diff",
+   "Meshespainttransparency006bonnetok0031Mat",
+   "blcak"
+  ],
+  "glassMaterialNames": [
+   "Windows"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-s-2014-jgw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-s-2014-jgw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-s-2014-jgw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-s-2014-jgw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-s-2014-jgw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-s-2014-jgw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-s-2014-jgw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jaguar/jaguar-xkr-s-2014-jgw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xkr-s-2014-jgw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jaguar/jaguar-xkr-s-2014-jgw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 12876660,
+  "mobileFileSizeBytes": 12876660,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "01aebfec16f903650ea320863947a56bfbd81ea430e7a4c955130424c60d7316",
+  "pipelineVersion": "publish-batch-jgw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jgw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jgw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Eiger Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Santorini Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Fuji White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Ostuni Pearl White",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Portofino Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Firenze Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "British Racing Green Metallic",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.417,
+   "variantsHash": "e1b6612b10cac5bac47d164dc4ef43bdac75fcf8",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-grand-cherokee-jpw1-v1",
+  "make": "jeep",
+  "model": "Grand Cherokee",
+  "modelFamily": "jeep grand cherokee",
+  "modelAliases": [
+   "Grand Cherokee"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "73bd5b50f8e54bde9dad4e6d04b3225b",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint",
+   "carpaint_second"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "orangeglass",
+   "redglass",
+   "Material__2",
+   "Material__1",
+   "Material__3",
+   "Material__4"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-grand-cherokee-jpw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-grand-cherokee-jpw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 47934668,
+  "mobileFileSizeBytes": 47934668,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "11c643fa394005bcbd5d9e645a9b5f21c1d676e26aa642b59f088c44be597a25",
+  "pipelineVersion": "publish-batch-jpw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jpw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jpw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.344,
+   "variantsHash": "ba5abf162cb1327106696dd31b7e7ac2c1798c6e",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-cherokee-2000-jpw1-v1",
+  "make": "jeep",
+  "model": "Cherokee",
+  "modelFamily": "jeep cherokee",
+  "modelAliases": [
+   "Cherokee"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2000,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "8e35262e1a1c4ce092c48fecc785b957",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "orangeglass",
+   "redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2000-jpw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2000-jpw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2000-jpw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2000-jpw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2000-jpw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2000-jpw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2000-jpw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2000-jpw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-cherokee-2000-jpw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-cherokee-2000-jpw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 22767056,
+  "mobileFileSizeBytes": 22767056,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "483a847995bc492dd3c60eb35315a9fa0032c122319b97ce0481df0bdc6ca1d8",
+  "pipelineVersion": "publish-batch-jpw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jpw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jpw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.396,
+   "variantsHash": "e59a4c9e40b259c6725efa7432570ba9db02ce1b",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-grand-cherokee-jpw1-v2",
+  "make": "jeep",
+  "model": "Grand Cherokee",
+  "modelFamily": "jeep grand cherokee",
+  "modelAliases": [
+   "Grand Cherokee"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Trackhawk"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "f8024595e11c48119877c9c7cc554abc",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Body"
+  ],
+  "glassMaterialNames": [
+   "Vitre",
+   "Vitre_ar"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-jpw1-v2__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-grand-cherokee-jpw1-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-grand-cherokee-jpw1-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 15445208,
+  "mobileFileSizeBytes": 15445208,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "3e3ce07484a1e5db098e349b39e5561bdb45acaa162c38a42c25db46474e3963",
+  "pipelineVersion": "publish-batch-jpw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jpw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jpw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.418,
+   "variantsHash": "a2e2a7e2ab361d1c1cdcd36442a6068a5914ebb2",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-grand-cherokee-2018-jpw1-v1",
+  "make": "jeep",
+  "model": "Grand Cherokee",
+  "modelFamily": "jeep grand cherokee",
+  "modelAliases": [
+   "Grand Cherokee"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2018,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Trackhawk"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "032f67b38e7c4302b9b05b1875077186",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Jeep_GrandCherokeeTrackhawk_2018Base_Material",
+   "Jeep_GrandCherokeeTrackhawk_2018Coloured_Material.001",
+   "Jeep_GrandCherokeeTrackhawk_2018EngineA_Material",
+   "Jeep_GrandCherokeeTrackhawk_2018Paint_Material"
+  ],
+  "glassMaterialNames": [
+   "Jeep_GrandCherokeeTrackhawk_2018Window_Material",
+   "Jeep_GrandCherokeeTrackhawk_2018Window_Material.001",
+   "RED_GLASS"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-2018-jpw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-2018-jpw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-2018-jpw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-2018-jpw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-2018-jpw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-2018-jpw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-2018-jpw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-cherokee-2018-jpw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-grand-cherokee-2018-jpw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-grand-cherokee-2018-jpw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 13493612,
+  "mobileFileSizeBytes": 13493612,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "05188d6c6a8623bbe73611720b346b78cdb0f1a09d69ac6aebe48525205f54b5",
+  "pipelineVersion": "publish-batch-jpw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jpw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jpw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.473,
+   "variantsHash": "02a4762760055e76afe9a19c10f8f35cb467c3ce",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-cherokee-2019-jpw1-v1",
+  "make": "jeep",
+  "model": "Cherokee",
+  "modelFamily": "jeep cherokee",
+  "modelAliases": [
+   "Cherokee"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2019,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "11335c9ff9b54e75a0f6ce80b7357406",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "cherokeeCar-Designer18SG1",
+   "cherokeeCar-Designer70SG1",
+   "cherokeeCar-Designer82SG1",
+   "cherokeephong11SG1",
+   "cherokeephong12SG1",
+   "cherokeephong17SG1",
+   "cherokeephong18SG1",
+   "cherokeephong19SG1",
+   "cherokeephong1SG1",
+   "cherokeephong20SG1",
+   "cherokeephong5SG1",
+   "cherokeephong6SG1"
+  ],
+  "glassMaterialNames": [
+   "cherokeephong8SG1",
+   "cherokeephong9SG1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2019-jpw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2019-jpw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2019-jpw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2019-jpw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2019-jpw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2019-jpw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2019-jpw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-cherokee-2019-jpw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-cherokee-2019-jpw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-cherokee-2019-jpw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 11026136,
+  "mobileFileSizeBytes": 11026136,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "9ee68a52084b0f84905099026304a7fc80a41d3f331aed845e70202596b59b1e",
+  "pipelineVersion": "publish-batch-jpw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jpw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jpw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.411,
+   "variantsHash": "6e1090f2442ef565441c61311459393744b9f56c",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-wrangler-jpw1-v1",
+  "make": "jeep",
+  "model": "Wrangler",
+  "modelFamily": "jeep wrangler",
+  "modelAliases": [
+   "Wrangler"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "531f120594d946be8cd9d87b5095f856",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "aiCarPaint1"
+  ],
+  "glassMaterialNames": [
+   "blinn18",
+   "aiStandardSurface6",
+   "aiStandardSurface10"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-wrangler-jpw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-wrangler-jpw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 40635712,
+  "mobileFileSizeBytes": 40635712,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "666acab9e63a109fccb403d7b68986134368418944754d25d5c3d63eaa8df7cd",
+  "pipelineVersion": "publish-batch-jpw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jpw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jpw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.386,
+   "variantsHash": "cfff3cc602dfe20f279136ace3860790c582bfb9",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-wrangler-2023-jpw1-v1",
+  "make": "jeep",
+  "model": "Wrangler",
+  "modelFamily": "jeep wrangler",
+  "modelAliases": [
+   "Wrangler"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Rubicon 392 20th Anniversary"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "7247a74596224c3dadc219836430279c",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "JMI_1355060001_004",
+   "JMI_Engine1",
+   "JMI_Engine_Plastic_A1",
+   "JMI_Exhaust1",
+   "JMI_Plastic1"
+  ],
+  "glassMaterialNames": [
+   "Glass",
+   "red_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2023-jpw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2023-jpw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2023-jpw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2023-jpw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2023-jpw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2023-jpw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2023-jpw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2023-jpw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-wrangler-2023-jpw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-wrangler-2023-jpw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 24967684,
+  "mobileFileSizeBytes": 24967684,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "5a769a91eebea8fbc316cb8e605754d14013300e85ab049368ff7c1fa30b1bfd",
+  "pipelineVersion": "publish-batch-jpw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jpw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jpw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.479,
+   "variantsHash": "7fd64b6bdf947ef8dff562fd439472a1848ce7cc",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-wrangler-jpw1-v2",
+  "make": "jeep",
+  "model": "Wrangler",
+  "modelFamily": "jeep wrangler",
+  "modelAliases": [
+   "Wrangler"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Rubicon"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "aae5b65c544d40a4b8eaf95d907e67cd",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "black.037",
+   "black.038",
+   "darkgrey2",
+   "t_engine_d",
+   "vehicle_generic_smallspecmap_PRIMARY.004"
+  ],
+  "glassMaterialNames": [
+   "univ-glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-jpw1-v2__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-wrangler-jpw1-v2.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-wrangler-jpw1-v2.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 27937460,
+  "mobileFileSizeBytes": 27937460,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "c06b3e9bf0671ed44dbb9a3df64ba1042d3fba3a49c07be3044c9e23795fea3f",
+  "pipelineVersion": "publish-batch-jpw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jpw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jpw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.437,
+   "variantsHash": "2a07d6c0cc1d7c0680bbc888ed68855527472f07",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-wrangler-2007-jpw1-v1",
+  "make": "jeep",
+  "model": "Wrangler",
+  "modelFamily": "jeep wrangler",
+  "modelAliases": [
+   "Wrangler"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2007,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Rubicon"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "a50b83c3f6554230818a9a7a93587c37",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "JMAT_Carpaint_Red1",
+   "JMAT_Details_Chassis_0002_006"
+  ],
+  "glassMaterialNames": [
+   "JMAT_Glass1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2007-jpw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2007-jpw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2007-jpw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2007-jpw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2007-jpw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2007-jpw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2007-jpw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wrangler-2007-jpw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-wrangler-2007-jpw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-wrangler-2007-jpw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 4617728,
+  "mobileFileSizeBytes": 4617728,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "69637e697fe25f3561a48873c27b231e6f1d7f7199ae3eb0d2d54bce71ebf5fe",
+  "pipelineVersion": "publish-batch-jpw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jpw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jpw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.393,
+   "variantsHash": "89021b34698912a1fdd6e30e6c1b8ad6f31b522f",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-gladiator-1962-jpw1-v1",
+  "make": "jeep",
+  "model": "Gladiator",
+  "modelFamily": "jeep gladiator",
+  "modelAliases": [
+   "Gladiator"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1962,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "792a45417e23488d88f3bcf7615d7f26",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "orangeglass",
+   "redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-1962-jpw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-1962-jpw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-1962-jpw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-1962-jpw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-1962-jpw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-1962-jpw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-1962-jpw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-1962-jpw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-gladiator-1962-jpw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-gladiator-1962-jpw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 26634684,
+  "mobileFileSizeBytes": 26634684,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "20577932acc5af73b05b30b25899c19a6418b7cba7475d3eaa874f9604fce798",
+  "pipelineVersion": "publish-batch-jpw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jpw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jpw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.453,
+   "variantsHash": "8b5a791ef7df503bfaabd674e3581e5cdd6170ec",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-wagoneer-1978-jpw1-v1",
+  "make": "jeep",
+  "model": "Wagoneer",
+  "modelFamily": "jeep wagoneer",
+  "modelAliases": [
+   "Wagoneer"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1978,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "6dc305bfecb04efe9f0da0ad5fabfde8",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "redglass",
+   "clearglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wagoneer-1978-jpw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wagoneer-1978-jpw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wagoneer-1978-jpw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wagoneer-1978-jpw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wagoneer-1978-jpw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wagoneer-1978-jpw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wagoneer-1978-jpw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-wagoneer-1978-jpw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-wagoneer-1978-jpw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-wagoneer-1978-jpw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 22525464,
+  "mobileFileSizeBytes": 22525464,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "8136414c02d0f2ec6e9128e63eb1346b3c0fca49c101bdf1947020def00d7839",
+  "pipelineVersion": "publish-batch-jpw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jpw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jpw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.347,
+   "variantsHash": "1027bab39beb6db74a1ac9eb118e64321e55186a",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-gladiator-2020-jpw1-v1",
+  "make": "jeep",
+  "model": "Gladiator",
+  "modelFamily": "jeep gladiator",
+  "modelAliases": [
+   "Gladiator"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2020,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "98bc399af1e948eda5db6d75c5bb649d",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Jeep_GladiatorRewardRecycled_2019Coloured_Material",
+   "Jeep_GladiatorRewardRecycled_2019EngineA_Material",
+   "Jeep_GladiatorRewardRecycled_2019Paint_Material"
+  ],
+  "glassMaterialNames": [
+   "Jeep_GladiatorRewardRecycled_2019Window_Material",
+   "RED_GLASS"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-2020-jpw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-2020-jpw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-2020-jpw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-2020-jpw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-2020-jpw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-2020-jpw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-2020-jpw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-gladiator-2020-jpw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-gladiator-2020-jpw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-gladiator-2020-jpw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 21732040,
+  "mobileFileSizeBytes": 21732040,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "60e1d0e65565640a4ba2dbee2fd7926e13781016ddf6bcbbe302a6f0d0613f4e",
+  "pipelineVersion": "publish-batch-jpw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jpw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jpw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.436,
+   "variantsHash": "5bd9e37a66f9bf3fc19f382605d48f49d8b2227e",
+   "method": "render",
+   "at": "2026-08-11"
+  }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "jeep-grand-commander-2021-jpw1-v1",
+  "make": "jeep",
+  "model": "Grand Commander",
+  "modelFamily": "jeep grand commander",
+  "modelAliases": [
+   "Grand Commander"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "10ce4861ef62411183c185ca1998d1c2",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "JGCCarPaint_AO1"
+  ],
+  "glassMaterialNames": [
+   "JGCwindos1",
+   "JGCglass_d1"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-commander-2021-jpw1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-commander-2021-jpw1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-commander-2021-jpw1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-commander-2021-jpw1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-commander-2021-jpw1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-commander-2021-jpw1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-commander-2021-jpw1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/jeep/jeep-grand-commander-2021-jpw1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-grand-commander-2021-jpw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-grand-commander-2021-jpw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 16532096,
+  "mobileFileSizeBytes": 16532096,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "dc02d439a56cb551ec01ce89932b731342a68619e3829c25b7b1cfba1b57ca50",
+  "pipelineVersion": "publish-batch-jpw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "jpw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-jpw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.342,
+   "variantsHash": "05bf9147c1f6dcadec7bd4394e4f9a08ad99eb2a",
+   "method": "render",
+   "at": "2026-08-11"
+  }
  }
 ]
