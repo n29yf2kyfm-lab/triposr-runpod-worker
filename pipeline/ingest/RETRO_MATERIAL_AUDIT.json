@@ -255,20 +255,11 @@
  },
  {
   "uid": "honda-civic-v1",
-  "verdict": "opaque",
-  "certainty": "proven",
+  "verdict": "ambiguous",
+  "certainty": "inferred",
   "n_materials": 20,
   "n_transparent": 1,
-  "glazing_named": [
-   {
-    "name": "M_2023_Honda_Civic_Type_R_Touchscreen",
-    "alpha": 1,
-    "mode": "OPAQUE",
-    "transmission": 0,
-    "transparent": false,
-    "via": null
-   }
-  ],
+  "glazing_named": [],
   "transparent": [
    {
     "name": "PaletteMaterial001",
