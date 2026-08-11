@@ -1,7 +1,7 @@
 [
  {
   "uid": "mercedes-benz-e-class-w213-undated-v1",
-  "verdict": "faded",
+  "verdict": "clear",
   "certainty": "proven",
   "n_materials": 16,
   "n_transparent": 4,
@@ -11,7 +11,8 @@
     "alpha": 1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "texture-alpha"
    }
   ],
   "transparent": [
@@ -65,35 +66,40 @@
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidro_Laranja",
     "alpha": 0.131,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros_1",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros_Vermelhos",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -154,7 +160,16 @@
     "alpha": 0.5,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "M_2019_Mercedes_Benz_Sprinter_glass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -201,7 +216,16 @@
     "alpha": 0.407,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "BLACK_GLASS",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -231,7 +255,7 @@
  },
  {
   "uid": "honda-civic-v1",
-  "verdict": "ambiguous",
+  "verdict": "opaque",
   "certainty": "proven",
   "n_materials": 20,
   "n_transparent": 1,
@@ -241,7 +265,8 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -264,7 +289,7 @@
  },
  {
   "uid": "mercedes-benz-c-class-v1",
-  "verdict": "faded",
+  "verdict": "ambiguous",
   "certainty": "inferred",
   "n_materials": 7,
   "n_transparent": 1,
@@ -299,7 +324,48 @@
     "alpha": 0.5,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "M_2023_Lexus_RX500h_F_Sport_CLEARGLASS",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "M_2023_Lexus_RX500h_F_Sport__AUDIOSCREEN",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "M_2023_Lexus_RX500h_F_Sport_GREENGLASS_INNER",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "M_2023_Lexus_RX500h_F_Sport_CLEARGLASSREAR",
+    "alpha": 0.6,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "M_2023_Lexus_RX500h_F_Sport_V_GREENGLASS_PVGLASS_INNER",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -360,14 +426,16 @@
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros_1",
     "alpha": 0.8,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -407,35 +475,40 @@
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidro_Laranja",
     "alpha": 0.131,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros_1",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros_Vermelhos",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -535,7 +608,24 @@
     "alpha": 0.718,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.236,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "widowsglass_int",
+    "alpha": 0,
+    "mode": "MASK",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -596,21 +686,24 @@
     "alpha": 0.131,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros_Vermelhos",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -657,21 +750,24 @@
     "alpha": 0,
     "mode": "MASK",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "exterior_glass_clear",
     "alpha": 0.498,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "exterior_glass_tinted",
     "alpha": 0.894,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -725,14 +821,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "SL63MI_Glass_Heater_Strip_A1",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -783,7 +881,7 @@
  },
  {
   "uid": "mercedes-benz-amg-gt-2015-v1",
-  "verdict": "ambiguous",
+  "verdict": "clear",
   "certainty": "proven",
   "n_materials": 36,
   "n_transparent": 3,
@@ -793,7 +891,32 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass_ext",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Glass_-_Clear_-_Bumps.002",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass_-_Clear_-_Ridged_-_UV",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -879,14 +1002,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Glass_black",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -933,14 +1058,16 @@
     "alpha": 0.533,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "2021_Peugeot_508_PSE_WindowsTrim",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -994,7 +1121,8 @@
     "alpha": 0.5,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -1041,7 +1169,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 0.99,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -1074,21 +1203,24 @@
     "alpha": 0.1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "r_glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "Glass_fine",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -1191,7 +1323,7 @@
  },
  {
   "uid": "mercedes-benz-gla-2020-v1",
-  "verdict": "faded",
+  "verdict": "ambiguous",
   "certainty": "inferred",
   "n_materials": 7,
   "n_transparent": 2,
@@ -1233,14 +1365,16 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "M_2020_Mercedes_Benz_GLC300_WindowsTrims1",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -1265,14 +1399,16 @@
     "alpha": 0.597,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "M_2022_Mercedes_AMG_GLS63_WindowsTrims1",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -1319,21 +1455,24 @@
     "alpha": 0.1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "r_glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "Glass_fine",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -1370,7 +1509,7 @@
  },
  {
   "uid": "peugeot-208-v2",
-  "verdict": "faded",
+  "verdict": "ambiguous",
   "certainty": "inferred",
   "n_materials": 7,
   "n_transparent": 1,
@@ -1405,14 +1544,16 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "M_2022_Land_Rover_Discovery_P360_Facelift_WindowsTrims",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -1427,7 +1568,7 @@
  },
  {
   "uid": "land-rover-range-rover-sport-2018-v1",
-  "verdict": "faded",
+  "verdict": "ambiguous",
   "certainty": "inferred",
   "n_materials": 10,
   "n_transparent": 1,
@@ -1491,7 +1632,7 @@
  },
  {
   "uid": "toyota-c-hr-v1",
-  "verdict": "faded",
+  "verdict": "ambiguous",
   "certainty": "inferred",
   "n_materials": 7,
   "n_transparent": 1,
@@ -1516,7 +1657,7 @@
  },
  {
   "uid": "toyota-prius-v1",
-  "verdict": "faded",
+  "verdict": "ambiguous",
   "certainty": "inferred",
   "n_materials": 7,
   "n_transparent": 2,
@@ -1558,21 +1699,24 @@
     "alpha": 0.053,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "glass.001",
     "alpha": 0.053,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "glass",
     "alpha": 0.053,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -1633,14 +1777,16 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "M_2020_Toyota_Yaris_Cross_WindowsTrims",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -1665,14 +1811,16 @@
     "alpha": 0.955,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "r_glass.001",
     "alpha": 0.7,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -1712,7 +1860,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -1770,7 +1919,7 @@
  },
  {
   "uid": "toyota-camry-v1",
-  "verdict": "faded",
+  "verdict": "ambiguous",
   "certainty": "inferred",
   "n_materials": 7,
   "n_transparent": 2,
@@ -1812,21 +1961,24 @@
     "alpha": 0.098,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidro_Laranja2",
     "alpha": 0.133,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidro_Vermelho1",
     "alpha": 0.384,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -1873,7 +2025,32 @@
     "alpha": 0.702,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Glass11Mtl",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Glass21Mtl",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "GlassRl1Mtl",
+    "alpha": 0.804,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -1941,21 +2118,24 @@
     "alpha": 1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "texture-alpha"
    },
    {
     "name": "Glassfinta0021Mtl",
     "alpha": 0.316,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Glassrfinta0041Mtl",
     "alpha": 0.364,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -2023,7 +2203,24 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "d_glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass_surr",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -2091,7 +2288,8 @@
     "alpha": 0.406,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -2124,7 +2322,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -2192,21 +2391,24 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "vdie_glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "vdie_glass_int",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -2231,7 +2433,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "d_glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -2299,7 +2510,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "D_glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -2367,7 +2587,24 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -2428,7 +2665,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -2482,7 +2720,8 @@
     "alpha": 0.474,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -2515,35 +2754,40 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "glass_surr",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass_met",
     "alpha": 0.699,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "black_glass",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "glass_norm",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -2597,14 +2841,16 @@
     "alpha": 0.487,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "M_2020_Toyota_Proace_Verso_City_WindowsTrims",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -2736,14 +2982,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "hondaM_Glass_WindowSurroundFront_Low1",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -2811,21 +3059,24 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "r_glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -2850,14 +3101,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "glass_Ligt",
     "alpha": 1,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -2915,7 +3168,7 @@
  },
  {
   "uid": "toyota-highlander-v1",
-  "verdict": "faded",
+  "verdict": "ambiguous",
   "certainty": "inferred",
   "n_materials": 7,
   "n_transparent": 2,
@@ -2957,7 +3210,16 @@
     "alpha": 0.574,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "GlassClear",
+    "alpha": 0.172,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -3025,14 +3287,16 @@
     "alpha": 0.5,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "clearglass",
     "alpha": 0.2,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -3069,7 +3333,7 @@
  },
  {
   "uid": "peugeot-boxer-v1",
-  "verdict": "faded",
+  "verdict": "ambiguous",
   "certainty": "inferred",
   "n_materials": 11,
   "n_transparent": 1,
@@ -3189,28 +3453,32 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "etk800_glass",
     "alpha": 0.352,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "glasss.001",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glasss",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -3257,7 +3525,24 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -3357,7 +3642,16 @@
     "alpha": 0.559,
     "mode": "BLEND",
     "transmission": 0.441,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Glass",
+    "alpha": 0.462,
+    "mode": "BLEND",
+    "transmission": 0.538,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -3404,14 +3698,16 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "Trasnsparent_Glass",
     "alpha": 0.152,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -3494,7 +3790,7 @@
  },
  {
   "uid": "mercedes-benz-mercedes-vito-w5-v1",
-  "verdict": "faded",
+  "verdict": "clear",
   "certainty": "proven",
   "n_materials": 15,
   "n_transparent": 3,
@@ -3504,21 +3800,24 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass",
     "alpha": 1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "texture-alpha"
    },
    {
     "name": "glass.22",
     "alpha": 1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "texture-alpha"
    }
   ],
   "transparent": [
@@ -3565,7 +3864,8 @@
     "alpha": 0.474,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -3598,7 +3898,8 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -3623,14 +3924,32 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "2020_Peugeot_e-2008_vitres_exterieur",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "2020_Peugeot_e-2008_glass_clear",
+    "alpha": 0.369,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "2020_Peugeot_e-2008_glass_black",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -3691,14 +4010,16 @@
     "alpha": 0.2,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "greenglass",
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -3745,7 +4066,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -3799,7 +4129,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -3878,28 +4209,32 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020d_glas",
     "alpha": 0.409,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020glass_",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "2021_Land_Rover_Defender_110_Land_Rover_Defender_110_2020glass",
     "alpha": 0.549,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -3939,7 +4274,8 @@
     "alpha": 0.273,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -3986,7 +4322,32 @@
     "alpha": 0.702,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Glass11Mtl",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Glass21Mtl",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "GlassRl1Mtl",
+    "alpha": 0.804,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -4054,7 +4415,8 @@
     "alpha": 1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -4079,14 +4441,16 @@
     "alpha": 0.2,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "greenglass",
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -4133,7 +4497,32 @@
     "alpha": 0.5,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "M_2023_Lexus_RX450h__CLEARGLASSREAR",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "M_2023_Lexus_RX450h___AUDIOSCREEN",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "M_2023_Lexus_RX450h__CLEARGLASS",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -4187,7 +4576,24 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "darkglass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clearglass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -4212,14 +4618,32 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "window.001",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass.001",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -4244,7 +4668,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -4298,21 +4731,24 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass",
     "alpha": 0.681,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "d_glass",
     "alpha": 0.584,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -4352,7 +4788,24 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clearglass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "darkglass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -4377,35 +4830,40 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass_bump",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "r_glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "r_glass_bump",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -4430,7 +4888,24 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -4491,7 +4966,48 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "screen1a",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "screen2a",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "screen3a",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "screen4a",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -4552,7 +5068,24 @@
     "alpha": 0,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Glass_Clear_mtl__0",
+    "alpha": 0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "r_glass_bump",
+    "alpha": 0.078,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -4613,14 +5146,16 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "Glass_clean.001",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -4645,42 +5180,48 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass_bump",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "r_glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "d_glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "vd_glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "b_glass_bump",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -4705,7 +5246,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -4759,14 +5309,16 @@
     "alpha": 0.2,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "greenglass",
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -4813,35 +5365,40 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "r_glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "o_glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "d_glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -4866,7 +5423,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -4920,28 +5486,32 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "r_glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "vd_glass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -4966,14 +5536,16 @@
     "alpha": 0.142,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "glasss_dark",
     "alpha": 0.671,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -5020,21 +5592,24 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "FIT_Glass",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Translucent_Glass_Gray",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -5095,28 +5670,32 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Glas_2",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "D_glass",
     "alpha": 0.754,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "glass_D_M",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -5170,14 +5749,40 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "p407_glass_vitres",
     "alpha": 0.05,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "p407_glass_exterieur",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "p407_glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "p407_glass_degivrage",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -5238,7 +5843,8 @@
     "alpha": 0.993,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -5278,7 +5884,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -5315,7 +5922,7 @@
  },
  {
   "uid": "mercedes-benz-e-class-w12-v1",
-  "verdict": "faded",
+  "verdict": "clear",
   "certainty": "proven",
   "n_materials": 16,
   "n_transparent": 4,
@@ -5325,7 +5932,8 @@
     "alpha": 1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "texture-alpha"
    }
   ],
   "transparent": [
@@ -5379,7 +5987,8 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -5465,7 +6074,8 @@
     "alpha": 0.604,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -5551,14 +6161,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "hM_Glass_WindowSurroundFront_Low1",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -5619,14 +6231,16 @@
     "alpha": 0.519,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "M_2022_Mercedes_Benz_E_Class_AMG_Line_WindowsTrims",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -5690,7 +6304,8 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -5715,7 +6330,8 @@
     "alpha": 0.1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -5748,7 +6364,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -5788,14 +6405,24 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "rM_Glass_WindowSurroundFront_Low1",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_N",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -5863,14 +6490,16 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "Trasnsparent_Glass",
     "alpha": 0.152,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -5903,7 +6532,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -5933,7 +6563,7 @@
  },
  {
   "uid": "toyota-gr-corolla-2023-tw1-v1",
-  "verdict": "ambiguous",
+  "verdict": "clear",
   "certainty": "proven",
   "n_materials": 25,
   "n_transparent": 4,
@@ -5943,7 +6573,24 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass_2",
+    "alpha": 0.888,
+    "mode": "BLEND",
+    "transmission": 0.112,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -5997,14 +6644,16 @@
     "alpha": 0.315,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Tinted_glass",
     "alpha": 0.529,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -6038,8 +6687,14 @@
    }
   ],
   "flat_shell": false,
-  "alpha_shell": false,
-  "body_transparent": [],
+  "alpha_shell": true,
+  "body_transparent": [
+   {
+    "name": "black_uniform",
+    "alpha": 0.0,
+    "mode": "BLEND"
+   }
+  ],
   "n_textures": 20,
   "assetId": "toyota-gr86-2023-tw1-v1",
   "make": "toyota",
@@ -6058,21 +6713,24 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "r_glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -6097,14 +6755,16 @@
     "alpha": 0.5,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "dark_glass.001",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -6144,21 +6804,24 @@
     "alpha": 0.382,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros2",
     "alpha": 0.1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros2_1",
     "alpha": 0.752,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -6205,7 +6868,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -6259,7 +6931,24 @@
     "alpha": 0.03,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.03,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.03,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -6320,7 +7009,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -6374,35 +7072,40 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "r_glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "d_glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "r_glass_b",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -6427,7 +7130,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Screen",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -6467,7 +7179,24 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "black_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -6492,21 +7221,24 @@
     "alpha": 0.955,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "glass.001",
     "alpha": 0.6,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "r_glass.001",
     "alpha": 0.7,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -6543,7 +7275,7 @@
  },
  {
   "uid": "toyota-mirai-tw1-v1",
-  "verdict": "faded",
+  "verdict": "ambiguous",
   "certainty": "inferred",
   "n_materials": 4,
   "n_transparent": 1,
@@ -6568,7 +7300,7 @@
  },
  {
   "uid": "toyota-c-hr-2022-tw1-v1",
-  "verdict": "faded",
+  "verdict": "ambiguous",
   "certainty": "inferred",
   "n_materials": 4,
   "n_transparent": 1,
@@ -6603,7 +7335,32 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "blueglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -6671,35 +7428,40 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "r_glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "d_glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "o_glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "vd_glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -6714,7 +7476,7 @@
  },
  {
   "uid": "toyota-highlander-2020-tw1-v1",
-  "verdict": "faded",
+  "verdict": "ambiguous",
   "certainty": "inferred",
   "n_materials": 5,
   "n_transparent": 2,
@@ -6756,7 +7518,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -6810,7 +7581,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -6864,7 +7644,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -6918,7 +7707,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -6972,14 +7770,16 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "windows",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -7004,14 +7804,16 @@
     "alpha": 0.487,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "M_2020_Toyota_Proace_Verso_City_WindowsTrims",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -7058,14 +7860,40 @@
     "alpha": 0.8,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Camry07-windows",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Camry07-bumpedglass",
+    "alpha": 0.1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Camry07-refractiveglass",
+    "alpha": 0.1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Camry07-blueglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -7133,7 +7961,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0.7,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0.7,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -7187,14 +8024,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "D_Glass",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -7262,7 +8101,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -7316,7 +8164,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -7370,14 +8227,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Screens",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -7438,14 +8297,16 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "greenglass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -7470,14 +8331,16 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "2020_Toyota_Corolla_Cross_WindowsTrims",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -7517,14 +8380,16 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "M_2020_Toyota_Yaris_Cross_WindowsTrims",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -7549,7 +8414,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -7617,7 +8483,24 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass_surr",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 0.474,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -7685,14 +8568,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "clearglass.198",
     "alpha": 0.2,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -7746,7 +8631,8 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -7786,21 +8672,24 @@
     "alpha": 0.364,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Glass_trim",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "Nav_screen",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -7868,14 +8757,16 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "Glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -7908,7 +8799,8 @@
     "alpha": 0.474,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -7948,7 +8840,8 @@
     "alpha": 0.35,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -7995,7 +8888,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -8063,14 +8957,16 @@
     "alpha": 0.5,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "M_2020_Mercedes_Benz_EQV_WindowsTrims1",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -8117,7 +9013,8 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -8142,42 +9039,48 @@
     "alpha": 0.342,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "GLASS",
     "alpha": 0.429,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "GUMA_OKNO",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "GLASS_3",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "GLASS_2",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "GLASS1",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -8224,21 +9127,24 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "R-fl-glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "R-glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -8263,14 +9169,16 @@
     "alpha": 0.632,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "GL_basic_glass",
     "alpha": 0.562,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -8310,35 +9218,40 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "Ext_Glass_Roof",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "hlglass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "INT_GLASS",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -8363,7 +9276,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -8417,7 +9339,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -8471,28 +9402,32 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "r_glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "vd_glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -8517,25 +9452,28 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "priborka_glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "CLS_Glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
-  "flat_shell": true,
+  "flat_shell": false,
   "alpha_shell": false,
   "body_transparent": [],
   "n_textures": 19,
@@ -8556,7 +9494,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -8610,7 +9557,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -8664,7 +9620,24 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -8725,14 +9698,16 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "Mercedes-AMG_GLA_35_glass_w",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -8765,7 +9740,32 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "matteglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -8833,21 +9833,24 @@
     "alpha": 0.478,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "MBe10_darkglass",
     "alpha": 0.843,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "MBe10_clearglass",
     "alpha": 0.031,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -8908,7 +9911,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -8962,7 +9974,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -9016,7 +10037,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -9070,7 +10100,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -9117,7 +10156,16 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clearglass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -9142,7 +10190,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -9196,7 +10253,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -9250,7 +10316,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Glass",
+    "alpha": 0.328,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -9318,7 +10393,32 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass_ext",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass_-_Clear_-_Bumps_002",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass_-_Clear_-_Ridged_-",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -9343,7 +10443,24 @@
     "alpha": 0.2,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass",
+    "alpha": 0.1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "black_glass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -9411,14 +10528,16 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "etk800_glass",
     "alpha": 0.84,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -9448,7 +10567,7 @@
  },
  {
   "uid": "mercedes-benz-g-class-mw1-v1",
-  "verdict": "ambiguous",
+  "verdict": "clear",
   "certainty": "proven",
   "n_materials": 63,
   "n_transparent": 4,
@@ -9458,14 +10577,40 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "IntWindows",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "G-class_glass",
+    "alpha": 0.48,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "G-class_glass.004",
+    "alpha": 0.236,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "G-class_glass_tint",
+    "alpha": 0.48,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -9519,7 +10664,24 @@
     "alpha": 0.302,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "SLR_glass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "SLR_black_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -9647,7 +10809,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -9694,14 +10857,16 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "2021_Peugeot_508_PSE_Windows",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -9741,21 +10906,24 @@
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidro_Laranja",
     "alpha": 0.129,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros_Vermelhos",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -9834,35 +11002,40 @@
     "alpha": 0.131,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidro_R",
     "alpha": 0.146,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidro_Vermelho",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "Carro_Vidros",
     "alpha": 0.21,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros_Vermelhos",
     "alpha": 0.17,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -9916,35 +11089,40 @@
     "alpha": 0.131,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidro_Laranja_1",
     "alpha": 0.131,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidro_R",
     "alpha": 0.146,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros_Vermelhos",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10005,14 +11183,32 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "p407_glass_vitres01",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "p407_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "p407_glass_degivrage",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -10037,14 +11233,16 @@
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros_Vermelhos",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10084,14 +11282,32 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "2020_Peugeot_e-2008_vitres_exterieur",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "2020_Peugeot_e-2008_glass_clear",
+    "alpha": 0.369,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "2020_Peugeot_e-2008_glass_black",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10223,7 +11439,24 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10284,21 +11517,24 @@
     "alpha": 0.2,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "darkglass",
     "alpha": 0.5,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "greenglass.001",
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10352,28 +11588,32 @@
     "alpha": 0.242,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "vehicle_vehglass",
     "alpha": 0.742,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "vehicle_vehglass.001",
     "alpha": 0.261,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "int_glass",
     "alpha": 0.0,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10441,7 +11681,8 @@
     "alpha": 0.5,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10481,7 +11722,8 @@
     "alpha": 0.279,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10514,21 +11756,24 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass_2a__env_5_trans",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass__env_5_trans",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -10543,7 +11788,7 @@
  },
  {
   "uid": "peugeot-207-pw1-v3",
-  "verdict": "faded",
+  "verdict": "clear",
   "certainty": "proven",
   "n_materials": 83,
   "n_transparent": 10,
@@ -10553,14 +11798,40 @@
     "alpha": 1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "texture-alpha"
    },
    {
     "name": "window__INT",
     "alpha": 1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "INT_glass",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "black_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
    }
   ],
   "transparent": [
@@ -10628,7 +11899,24 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10689,7 +11977,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10743,7 +12040,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10797,14 +12103,16 @@
     "alpha": 0.2,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "greenglass",
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10858,7 +12166,24 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10919,7 +12244,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -10973,7 +12307,24 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11034,7 +12385,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11088,7 +12448,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11142,14 +12511,16 @@
     "alpha": 0.663,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "2022_Honda_HR-V_eHEV_WindowsTrims1",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -11196,7 +12567,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11250,21 +12630,24 @@
     "alpha": 0.2,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "darkglass",
     "alpha": 0.5,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "greenglass",
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11325,14 +12708,16 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11372,7 +12757,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11426,7 +12820,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11480,7 +12883,24 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11541,14 +12961,16 @@
     "alpha": 0.2,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "greenglass",
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11602,14 +13024,16 @@
     "alpha": 0.2,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "greenglass",
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11663,7 +13087,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11717,7 +13150,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11771,7 +13213,24 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11832,21 +13291,24 @@
     "alpha": 0.1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "darkglass.035",
     "alpha": 0.5,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "clearglass.197",
     "alpha": 0.1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11907,7 +13369,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -11961,7 +13432,24 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -12022,7 +13510,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -12076,7 +13573,24 @@
     "alpha": 0.285,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.285,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.053,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -12137,7 +13651,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -12191,7 +13714,8 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -12224,7 +13748,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -12271,7 +13804,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -12325,7 +13867,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -12386,7 +13929,8 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -12411,7 +13955,8 @@
     "alpha": 0.919,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -12448,7 +13993,7 @@
  },
  {
   "uid": "honda-s2000-1999-hw1-v1",
-  "verdict": "faded",
+  "verdict": "clear",
   "certainty": "proven",
   "n_materials": 29,
   "n_transparent": 4,
@@ -12458,7 +14003,16 @@
     "alpha": 1,
     "mode": "MASK",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "GlassTemp",
+    "alpha": 0.261,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -12512,7 +14066,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -12566,14 +14121,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Window_1",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -12620,7 +14177,24 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass_surr",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass_I",
+    "alpha": 0.389,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -12674,28 +14248,32 @@
     "alpha": 0.41,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "glass1",
     "alpha": 0.7,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "glass_black1",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass_stripes1",
     "alpha": 0.51,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -12763,21 +14341,24 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "FIT_Glass",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Translucent_Glass_Gray",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -12838,28 +14419,32 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "Glas_2",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "D_glass",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass_D_M",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
@@ -12884,7 +14469,8 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -12934,21 +14520,24 @@
     "alpha": 0.31,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Vitre_noir",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "Phare_vitre",
     "alpha": 0.36,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -13016,7 +14605,24 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -13077,7 +14683,8 @@
     "alpha": 0.14,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -13107,7 +14714,7 @@
  },
  {
   "uid": "land-rover-range-rover-law1-v1",
-  "verdict": "ambiguous",
+  "verdict": "clear",
   "certainty": "proven",
   "n_materials": 31,
   "n_transparent": 7,
@@ -13117,7 +14724,16 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass",
+    "alpha": 0.331,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -13185,7 +14801,8 @@
     "alpha": 0.063,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -13225,14 +14842,16 @@
     "alpha": 0.643,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "M_2022_Land_Rover_Discovery_P360_Facelift_WindowsTrims",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -13279,7 +14898,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -13309,7 +14929,7 @@
  },
  {
   "uid": "land-rover-defender-law1-v1",
-  "verdict": "faded",
+  "verdict": "ambiguous",
   "certainty": "inferred",
   "n_materials": 24,
   "n_transparent": 2,
@@ -13351,14 +14971,16 @@
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Carro_Vidros_1",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -13398,7 +15020,24 @@
     "alpha": 0.302,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "2018_Land_Rover_Discovery_HSE_Glass",
+    "alpha": 0.302,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "2018_Land_Rover_Discovery_HSE_darkrglass",
+    "alpha": 0.91,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -13459,14 +15098,16 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "D_glass",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -13527,7 +15168,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -13595,7 +15237,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
    }
   ],
   "transparent": [
@@ -13649,42 +15300,48 @@
     "alpha": 0.302,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "2021_Lexus_ES350_F_Sport_LexusES_F_Sport2019_lowglass_bumpA",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "2021_Lexus_ES350_F_Sport_LexusES_F_Sport2019_lowglass_bumpA_dark",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "2021_Lexus_ES350_F_Sport_LexusES_F_Sport2019_lowglass_darkB",
     "alpha": 0.349,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "2021_Lexus_ES350_F_Sport_LexusES_F_Sport2019_lowglass_dark",
     "alpha": 0.349,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "2021_Lexus_ES350_F_Sport_LexusES_F_Sport2019_lowglass_lens",
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -13745,14 +15402,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Glass",
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -13799,7 +15458,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -13892,7 +15560,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -13960,14 +15629,16 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "glass",
     "alpha": 0.4,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -14000,7 +15671,16 @@
     "alpha": 0.302,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Bumprearglassok1Mtl",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -14068,7 +15748,16 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "BLACK_GLASS",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -14140,7 +15829,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -14194,7 +15884,16 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -14248,7 +15947,8 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [
@@ -14288,7 +15988,24 @@
     "alpha": 0.3,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -14349,18 +16066,20 @@
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "clearglass",
     "alpha": 1,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    }
   ],
   "transparent": [],
-  "flat_shell": true,
+  "flat_shell": false,
   "alpha_shell": false,
   "body_transparent": [],
   "n_textures": 15,
@@ -14381,7 +16100,8 @@
     "alpha": 0.25,
     "mode": "BLEND",
     "transmission": 1.0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -14428,21 +16148,24 @@
     "alpha": 1,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "texture-alpha"
    },
    {
     "name": "Glassfinta0021Mtl",
     "alpha": 0.316,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    },
    {
     "name": "Glassrfinta0041Mtl",
     "alpha": 0.364,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [
@@ -14510,14 +16233,16 @@
     "alpha": 1.0,
     "mode": "OPAQUE",
     "transmission": 0,
-    "transparent": false
+    "transparent": false,
+    "via": null
    },
    {
     "name": "Translucent_Glass_Gray",
     "alpha": 0.239,
     "mode": "BLEND",
     "transmission": 0,
-    "transparent": true
+    "transparent": true,
+    "via": "factor"
    }
   ],
   "transparent": [

@@ -39,8 +39,18 @@ GLASSY = re.compile(
 # narrow and anchored so it cannot swallow glazing or lamp lenses -- "paint"
 # never appears in a window material's name, and \b stops "tire" matching inside
 # "entire". See the GLOBAL-ALPHA SHELL note in probe().
-BODYISH = re.compile(r"carpaint|car_paint|\bpaint\b|bodypaint|body_paint|"
-                     r"karosserie|\black\b|\btire\b|\btyre\b|\brubber\b", re.I)
+# NOTE ON THE BOUNDARIES. \b will NOT do here: underscore is a word character,
+# so \btyre\b does not match "EXT_Tyre" and \brubber\b does not match
+# "EXT_Rubber" -- both are real material names in the live catalogue, and the
+# miss let mercedes-benz-cls-mw1-v1 score as a flat clay shell when a backlight
+# render shows it has plainly black tyres. _SEP treats underscore, digits and
+# case changes as separators while still refusing to match inside a longer word,
+# so "entire" and "paintwork" stay excluded.
+_L = r"(?<![a-z0-9])"     # left edge: not preceded by a letter or digit
+_R = r"(?![a-z0-9])"      # right edge: not followed by a letter or digit
+BODYISH = re.compile(
+    rf"carpaint|car_paint|bodypaint|body_paint|karosserie|"
+    rf"{_L}paint{_R}|{_L}black{_R}|{_L}tire{_R}|{_L}tyre{_R}|{_L}rubber{_R}", re.I)
 
 
 def head(url, n):
@@ -135,14 +145,51 @@ def probe(uid, stage="staging/jeep", url=None):
         # "clear" and pass it: windowglass IS transparent (alpha 0.7), which is
         # true and entirely beside the point. Body paint and rubber must be
         # opaque, so they are tested separately here.
-        if BODYISH.search(nm) and is_trans:
+        # GLAZING IS NOT BODYWORK, even when it is called "black". Fixed
+        # 2026-08-11 on the Toyota/Peugeot retro-audit. BODYISH matches the word
+        # "black" (correctly -- flat shells really do name a body material
+        # "black"), but PRIVACY GLASS is named that way too, and it is SUPPOSED
+        # to be transparent. Every one of the five ALPHA-SHELL flags raised
+        # against the LIVE catalogue was this false positive and not one was a
+        # real defect:
+        #   toyota-bz4x-v1                'black_glass'                 a=0.25
+        #   toyota-camry-2007-tw1-v1      'Camry07-windows-black'       a=0.80
+        #   peugeot-2008-2020-w5-v1       '..._e-2008_glass_black'      a=0.40
+        #   peugeot-2008-2020-pw1-v1      '..._e-2008_glass_black'      a=0.40
+        # Reporting those would have been the 39-car wrongful cull again, on a
+        # name rather than on a pixel. Same class as the lamp-lens and
+        # windscreen-icon guards below: a name-based classifier promoting the
+        # wrong material to sole witness.
+        # The genuine signature is untouched -- a real global-alpha shell names
+        # 'carpaint' and 'tire' (Volvo XC60, and six Toyota Avensis/Land Cruiser
+        # in this wave, all at the documented alpha 0.25), and neither is GLASSY.
+        if BODYISH.search(nm) and is_trans and not GLASSY.search(nm):
             body_trans.append({"name": nm, "alpha": round(alpha, 3), "mode": mode})
         if not textured:
             untex += 1
             flat_vals.add(tuple(round(x, 4) for x in bcf[:3]))
 
+    # A flat shell is a car whose material COLOURS are gone, names surviving.
+    # The untextured test alone is not enough and over-reported badly: measured
+    # by backlight render, lexus-lx570-2015-lxw1-v1 (15 textures) and
+    # mercedes-benz-cls-mw1-v1 (19 textures) both render with plainly BLACK
+    # TYRES and are real cars, yet both scored flat because their handful of
+    # untextured materials happened to share white. Quarantining on that alone
+    # would have repeated the 39-car wrongful cull.
+    #
+    # CLAUDE.md already states the missing condition: "Check the textures are
+    # only number plates before calling it ... one where a texture feeds the
+    # tyre or glass is not [flat]." So a car whose RUBBER or GLAZING is textured
+    # still has that material's real appearance and cannot be a flat shell.
+    body_or_glass_textured = any(
+        (BODYISH.search(m.get("name") or "") or GLASSY.search(m.get("name") or ""))
+        and ((m.get("pbrMetallicRoughness") or {}).get("baseColorTexture")
+             or ((m.get("extensions") or {})
+                 .get("KHR_materials_pbrSpecularGlossiness") or {}).get("diffuseTexture"))
+        for m in mats)
     flat = (untex >= 3 and len(flat_vals) == 1
             and min(list(flat_vals)[0]) >= 0.4
+            and not body_or_glass_textured
             and not any(m.get("alphaMode", "OPAQUE") != "OPAQUE" for m in mats))
 
     # -- verdict -----------------------------------------------------------

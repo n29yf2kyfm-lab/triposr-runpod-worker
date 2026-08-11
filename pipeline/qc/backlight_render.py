@@ -68,7 +68,7 @@ nt.links.new(tc.outputs["Generated"], mp.inputs[0])
 nt.links.new(mp.outputs[0], ck.inputs[0])
 nt.links.new(ck.outputs["Color"], bg.inputs[0])
 # a neutral key so diffuse paint still reads as its own colour
-lt = bpy.data.lights.new("key", type='AREA'); lt.energy = 2000; lt.size = 8
+lt = bpy.data.lights.new("key", type='AREA')  # energy/size set below, once rad is known
 key_obj = bpy.data.objects.new("key", lt); sc.collection.objects.link(key_obj)
 
 # PERCENTILE bbox over real vertices. A handful of stray verts can otherwise
@@ -91,10 +91,23 @@ rad = float(max(hi - lo)) / 2 or 1.0
 
 cam = bpy.data.cameras.new("c"); co_ = bpy.data.objects.new("c", cam)
 sc.collection.objects.link(co_)
+# CLIP PLANES MUST SCALE WITH THE MODEL. Sourced GLBs are authored in wildly
+# different units: lexus-rx-2020-w7-v1 measures 1900 units end to end and
+# toyota-celica-tw1-v1 measures 0.017. Blender's defaults (clip_start 0.1,
+# clip_end 100) put the first BEYOND the far plane and the second INSIDE the
+# near plane, and both render as empty background -- which reads exactly like
+# "the car is invisible", i.e. like the defect being tested for. Six of the
+# first 37 confirmation renders failed this way.
+cam.clip_start = max(rad * 1e-4, 1e-6)
+cam.clip_end = rad * 1000.0
 ang = math.radians(35); d = rad * 3.0
 co_.location = (ctr.x + d * math.cos(ang), ctr.y - d * math.sin(ang), ctr.z + rad * 0.55)
 co_.rotation_euler = (ctr - co_.location).to_track_quat('-Z', 'Y').to_euler()
 sc.camera = co_
+lt.size = rad * 2.0
+# inverse-square: a fixed energy is blinding on a 0.017-unit car and
+# invisible on a 1900-unit one.
+lt.energy = 60.0 * (rad ** 2) * 4 * math.pi
 key_obj.location = (ctr.x + rad*2, ctr.y - rad*2, ctr.z + rad*2.5)
 key_obj.rotation_euler = (ctr - mathutils.Vector(key_obj.location)).to_track_quat('-Z','Y').to_euler()
 sc.render.filepath = out
