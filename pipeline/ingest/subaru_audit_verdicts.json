@@ -248,5 +248,60 @@
    "NOTED WEAKNESS: headlamp internals are soft - a dark lens with only a faint projector element - and the grille edges are soft; this is a 99k-face model, at the lower end of the bar",
    "rim faces present and consistent in all four tiles"
   ]
+ },
+ {
+  "uid": "925112ae29514dcf89ccf2fc7020338e",
+  "name": "Subaru Forester 2009",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec Forester SH (2009), proportions read instantly, consistent roof/pillars/wheelbase across all four tiles",
+   "tyres proven black from the glTF: material Tires is baseColor 0.003 OPAQUE, plainly darker than the grey alloys at 5x in front34 and rear34",
+   "glazing genuinely transparent: Tinted_Glass alpha 0.75 BLEND, and seats, headrests, steering wheel and dashboard all resolve through it",
+   "fully modelled interior (Leather, Carpet, LCD_Screen, Upholstery materials), multi-element headlamps, defined grille bars",
+   "rim faces present in all four tiles",
+   "note: the model is yawed relative to the rig, so the side tile frames the front - a labelling mismatch only, not a pose defect"
+  ]
+ },
+ {
+  "uid": "9a48d9b800584bf1836cc06dad2ffff9",
+  "name": "Subaru_legacy_wagon",
+  "verdict": "fail",
+  "reasons": [
+   "headlamp lenses render as flat opaque BLUE blobs with no internal detail in all four tiles; glTF confirms material Metallic_0 baseColor [0.003,0.052,0.576] metallic=1.0 OPAQUE is bound to the lamps",
+   "glazing effectively opaque: the only non-OPAQUE material in the file is alpha 0.852, and the rear quarter window and part of the tailgate glass render solid white in the side and rear34 tiles",
+   "same source car as the passing Legacy wagon c0ffde08 but a materially worse upload"
+  ]
+ },
+ {
+  "uid": "af6ca49f8e244b78a1c26781d4e82a5d",
+  "name": "Subaru legacy 2.5 GT",
+  "verdict": "fail",
+  "reasons": [
+   "large solid BLACK untextured region covers the rear door and rear quarter panel in front34 and side - a missing material assignment, not shading",
+   "rim faces absent on one side: the front34 and side tiles show featureless black discs with no spoke arms, lug nuts or centre cap traceable at 5x, while front34_L and rear34 show full spokes - the documented per-side wheel void, not the key-light split",
+   "glTF has no glass-named and no tyre-named material and only one non-OPAQUE material (alpha 0.451); names are all SketchUp edge_color exports",
+   "out of scope anyway: slammed stance"
+  ]
+ },
+ {
+  "uid": "ced2b84aeeb940389efa085508aec231",
+  "name": "Subaru Impreza Wagon 2009",
+  "verdict": "fail",
+  "reasons": [
+   "hole in the rear quarter bodywork: the tail-lamp reflector is visible from BEHIND through the panel in front34_L and at 5x in the front34 crop - a geometry defect, unambiguous and independent of materials",
+   "rear quarter window renders opaque body-silver in all four tiles while the door glass stays transparent (this part of the call rests on sheet evidence; the glTF does carry real Glass alpha 0.75 and glass2 alpha 0.80, so the worker heuristic may be repainting the quarter light)",
+   "kitbashed asset: material names include 2021_Subaru_Legacy_Touring_blue, WRX_05_INTERIOR1 and roda_Hilux (a Toyota Hilux wheel)",
+   "tyres are fine - tyre1 is baseColor 0.008 and reads black against the white rims"
+  ]
+ },
+ {
+  "uid": "24c934fdef954cb189930cf809ef7b01",
+  "name": "Subaru Forester 1997",
+  "verdict": "fail",
+  "reasons": [
+   "white speckle/spray artefacts scatter across the glazing in all four tiles - a corrupt texture or normal artefact on the window surfaces",
+   "very soft low-detail bodywork: grille is a flat panel, headlamps barely formed with no internal elements, no door or bonnet shut lines",
+   "car sits pitched and floating clear of the floor in front34, front34_L and rear34; only the side tile reads level"
+  ]
  }
 ]
