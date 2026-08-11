@@ -71,5 +71,68 @@
    "materials are actually sound on the zoom: tread face reads grey rubber against the white body in front34/rear34, and seat backs plus B-pillar resolve through the rear side glass, so this is NOT a tyre or glazing failure",
    "decal/logo baked into the boot lid and grille"
   ]
+ },
+ {
+  "uid": "065804733fa245c6b1b10ca2de44099d",
+  "name": "2022 Subaru Impreza WRX",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec 2022 WRX (VB) - proportions read instantly, strong front three-quarter, roof/pillars/wheelbase consistent across all four tiles",
+   "headlamp internals and honeycomb grille resolve sharply; door and bonnet shut lines defined; 42 textures",
+   "tyres cleared on glTF evidence, not the sheet: material EXT_Tyre is baseColor 0.110 and rim is 0.078, both genuinely dark - they read as matching mid-grey only because the rig key light lifts them together",
+   "glazing genuinely transparent: glass_clear alpha 0.50, glass_dark 0.55, and seat backs plus interior door card resolve through the side glass at 5x",
+   "rim faces present in all four tiles; the light/dark split by side is the rig key light"
+  ]
+ },
+ {
+  "uid": "fcc551ea4dd14489aa509f3acc5eff05",
+  "name": "Subaru Impreza WRX",
+  "verdict": "fail",
+  "reasons": [
+   "glazing entirely absent: every window aperture renders as solid body-white panel in all four tiles, and the glTF carries no glass-named material at all",
+   "panel surfaces melted and soft - no door, bonnet or boot shut lines anywhere",
+   "out of scope: WRC-spec bodywork (competition rear wing, arch extensions, vented bonnet, WRC front bumper with tow hooks and STI/sponsor decals)"
+  ]
+ },
+ {
+  "uid": "bf4508cd55d94da6b3dee083b9781668",
+  "name": "Subaru Impreza",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: Safari-rally raid car - roof rack with spare wheel and sand ladders, bull bar, spotlight pod, mud flaps, competition number 27",
+   "baked sponsor livery (Camel, Pioneer, Michelin, Esso, STI) painted into the textures; cannot be resprayed or sold as a road car",
+   "title carried no rally word, so the title-stage prune could not catch it - caught by eye"
+  ]
+ },
+ {
+  "uid": "d795c3f4c6144c1c8702093d4b9608da",
+  "name": "2011 Subaru Impreza Outback Camellia Red Pearl",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: the tarmac ground plane is baked into the mesh and renders as a floating slab under the car in every tile",
+   "baked-in lighting and shadow, melted panel surfaces, holes through the roof, roof-rack bicycles reduced to blobs",
+   "no real glazing - windows are baked texture on the single material (mats=1 cov=1.000 FULL COVERAGE), so a respray would repaint the whole car including glass"
+  ]
+ },
+ {
+  "uid": "b3e5e287aab5488aaac32c6e089e5357",
+  "name": "Subaru Impreza Interceptor UK",
+  "verdict": "fail",
+  "reasons": [
+   "baked UK police livery: battenburg chevrons, POLICE lettering and roof light bar are modelled/textured in, not a saleable road spec",
+   "crude game-asset geometry: no grille, no headlight internals, front end is a featureless black mass, blobby door surfaces, no shut lines",
+   "glazing renders as flat opaque panels; glTF carries no glass-named material"
+  ]
+ },
+ {
+  "uid": "ac37399c27e64c7c940dad5aca0a567c",
+  "name": "2010 Subaru Legacy 2.5GT tS",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec Legacy 2.5GT tS (BM) - a factory Subaru trim; proportions read instantly and are consistent across all four tiles",
+   "tyres read as plainly black rubber, clearly darker than the grey alloy, judged on the tread face in front34 and rear34 at 5x",
+   "glazing genuinely clear: seats, headrests, B-pillar and door cards all resolve through the side glass in both the front34 and side tiles",
+   "projector headlamp internals, defined grille mesh, crisp door and boot shut lines, red calipers; rim faces present in all four tiles"
+  ]
  }
 ]
