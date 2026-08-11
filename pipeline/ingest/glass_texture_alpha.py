@@ -92,7 +92,27 @@ def alpha_stats(uid, material_name, stage="staging/mazda"):
         bv = g["bufferViews"][img["bufferView"]]
         o = bv.get("byteOffset", 0)
         im = Image.open(io.BytesIO(binary[o:o + bv["byteLength"]]))
-        if im.mode not in ("RGBA", "LA", "PA"):
+        # PALETTE PNGs CARRY THEIR ALPHA IN tRNS, NOT IN THE MODE STRING.
+        # Found 2026-08-11 on the O-Z live audit. Pillow reports mode "P" for a
+        # paletted PNG even when a tRNS chunk gives per-palette-entry alpha, so
+        # the mode test below scored them "declared-not-delivered" -- i.e. BLEND
+        # asserted and no transparency delivered, which reads as OPAQUE and is a
+        # cull. Five live cars hit it, and every one is genuinely transparent
+        # once tRNS is honoured:
+        #   toyota-c-hr-2022-tw1-v1        'Index_0_3'  1024x1024 P  opacity 0.226
+        #   toyota-highlander-2020-tw1-v1  'Index_0_2'  1024x1024 P  opacity 0.270
+        #   toyota-mirai-tw1-v1            'Index_0_3'  1024x1024 P  opacity 0.270
+        #   volkswagen-golf-gti-2021-vw2-v1'Index_0_3'  1024x1024 P  opacity 0.173
+        #   subaru-impreza-22b-sti-...     'mat06'      64x64     P  opacity 0.188
+        # Their RGBA-encoded siblings (toyota-c-hr-v1, toyota-highlander-v1) read
+        # 0.226/0.270 -- the SAME numbers -- so this is one source re-encoded to a
+        # palette, not a different authoring choice. im.convert("RGBA") expands
+        # tRNS correctly; the only thing needed is to stop rejecting the mode.
+        # Same failure class as the KHR_texture_basisu KeyError already recorded
+        # in CLAUDE.md: a measurement that FAILED must never score as "opaque".
+        if im.mode == "P" and "transparency" in im.info:
+            pass
+        elif im.mode not in ("RGBA", "LA", "PA"):
             # BLEND was declared and no alpha shipped: nothing is transparent.
             return {"material": material_name, "verdict": "declared-not-delivered",
                     "size": im.size, "mode": im.mode}
