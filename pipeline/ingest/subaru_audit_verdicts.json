@@ -1,0 +1,35 @@
+[
+ {
+  "uid": "2fd59bac6d3648af953f3a33904d0624",
+  "name": "Subaru Outback",
+  "verdict": "fail",
+  "reasons": [
+   "whole-car transmission shell: glTF shows 12/16 materials alphaMode BLEND alpha=0.25 with KHR_materials_transmission=1.0, including carpaint, tire, chrome and interior",
+   "renders as a see-through glass car; front wings and bumper are transparent in side and rear34",
+   "no body-paint material (worker reports mats=0 cov=0.000), so no respray is possible",
+   "evidence: glTF material table, not sheet alone"
+  ]
+ },
+ {
+  "uid": "ce8b1157f58a4a4a81eb5a552e875cd2",
+  "name": "Subaru Imperza Coupe",
+  "verdict": "fail",
+  "reasons": [
+   "whole-car transmission shell: 14/18 materials BLEND alpha=0.25 transmission=1.0",
+   "body panels and front bumper render translucent; car reads as glass, not paint",
+   "mats=0 cov=0.000, no body-paint material",
+   "evidence: glTF material table, not sheet alone"
+  ]
+ },
+ {
+  "uid": "02969c3253b441c09e5925ccef0b546e",
+  "name": "Subaru Forester S Turbo",
+  "verdict": "fail",
+  "reasons": [
+   "whole-car transmission shell: 13/18 materials BLEND alpha=0.25 transmission=1.0",
+   "front bumper, wings and front tyres render fully transparent",
+   "mats=0 cov=0.000, no body-paint material",
+   "evidence: glTF material table, not sheet alone"
+  ]
+ }
+]
