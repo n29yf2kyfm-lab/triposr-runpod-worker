@@ -1969,5 +1969,102 @@
    "lamp internals, front splitter, diffuser and shut lines defined",
    "very close to 4167ba8f in title and body - leave the grouping to dupe_check"
   ]
+ },
+ {
+  "uid": "ab60b9e064e645ab96aeabe7772e4d49",
+  "name": "1964 Porsche 911",
+  "verdict": "pass",
+  "reasons": [
+   "901-era 911 proportions read instantly; front 3/4 strong; paint finish premium",
+   "tyres black rubber, tread face clear in both 3/4 bands against black steels with chrome hubcaps",
+   "glazing transparent - the red interior is plainly visible through screen and side glass",
+   "hubcap and wheel faces present in all four views",
+   "round lamp internals, chrome bumpers, amber indicators and door shut line all defined"
+  ]
+ },
+ {
+  "uid": "b1d87619f6174f10be47423fcd4de444",
+  "name": "2022 Porsche 718 Cayman GT4 RS",
+  "verdict": "pass",
+  "reasons": [
+   "982 Cayman GT4 RS proportions read instantly - NACA ducts, side scoops and swan-neck wing correct; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cage visible through the side glass",
+   "silver rim faces present in all four views",
+   "lamp internals, splitter, diffuser and shut lines defined",
+   "road-legal GT4 RS, in scope"
+  ]
+ },
+ {
+  "uid": "b3f19d82cc494a9ead7b4bbec96f3e13",
+  "name": "2019 Porsche 911 Carrera 4 GTS",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 Carrera 4 GTS proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, interior visible",
+   "black rim faces present in all four views",
+   "lamp internals, intake slats, GTS badging and shut lines defined"
+  ]
+ },
+ {
+  "uid": "b45ae79c8ec840a98fae0581af4be396",
+  "name": "2017 Porsche 911 (991) GT3 RS",
+  "verdict": "pass",
+  "reasons": [
+   "991.1 GT3 RS proportions read instantly - arch louvres and fixed wing correct; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cage visible through the side glass",
+   "dark rim faces present in all four views, red calipers behind",
+   "lamp internals, NACA ducts and shut lines defined",
+   "road-legal GT3 RS, in scope"
+  ]
+ },
+ {
+  "uid": "b668f8a336b54954b04fa0dade507300",
+  "name": "2025 Porsche 911 Targa 4 GTS (992.2)",
+  "verdict": "pass",
+  "reasons": [
+   "992.2 Targa 4 GTS proportions read instantly; front 3/4 strong",
+   "tyres black rubber on dark rims in the side and rear34 tiles - the tread band crop mostly caught floor on this framing, so the call is from the tiles",
+   "glazing transparent, cabin and Targa hoop read correctly",
+   "dark rim faces present in all four views",
+   "lamp internals, intake slats and shut lines defined",
+   "near-identical face count and title to b8488f94 - leave the grouping to dupe_check"
+  ]
+ },
+ {
+  "uid": "b6756fc06654405a839bf14e931e4c83",
+  "name": "2021 Porsche 911 Turbo S (992)",
+  "verdict": "pass",
+  "reasons": [
+   "992 Turbo S proportions read instantly; front 3/4 strong; pale blue paint finish premium",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, interior visible through the side glass",
+   "black rim faces present in all four views, yellow PCCB calipers",
+   "lamp internals, active aero, intake slats and shut lines defined"
+  ]
+ },
+ {
+  "uid": "b6d23737e0d048f295684bf62ad9e80b",
+  "name": "Porsche 911",
+  "verdict": "fail",
+  "reasons": [
+   "BAKED SCENE WELDED INTO THE MESH: a grey road slab with painted yellow dashed lane markings sits under the car and renders with it in all four views",
+   "custom livery baked in: large white H graphics on the doors and bonnet, plus a 'Carrera 911' text number plate",
+   "red wire wheels are an aftermarket fitment, not a 996 spec",
+   "tyres are black and glazing reads as glass - the failure is the baked road and the livery"
+  ]
+ },
+ {
+  "uid": "b711966542e143e2829a21e0230fa30e",
+  "name": "3d Porsche 911 Carrera 1995",
+  "verdict": "fail",
+  "reasons": [
+   "fails three of the owner's named criteria at once: tail lights are flat dark panels with no internal elements, the rear bumper and valance are soft with no defined join, and there are no engine-lid or bonnet shut lines",
+   "door mirror is mis-materialled - it renders as a solid blue blob",
+   "front headlamps read as plain white ovals with no lens detail",
+   "tyres ARE black rubber and glazing IS transparent with the cage visible - the failure is modelling detail, not materials"
+  ]
  }
 ]
