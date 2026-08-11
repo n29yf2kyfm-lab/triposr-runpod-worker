@@ -55471,8 +55471,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 global-alpha shell: body paint AND tyre materials are alphaMode=BLEND at alpha 0.25, so the car itself is ~75% transparent (13/16 materials alphaMode=BLEND). Confirmed by magenta-backlight render of the SHIPPED glb — the background reads through the panels and the far-side wheels are visible through the bodywork; a Prius control on the same rig renders solid. The resolver returns desktopGlbUrl to the viewer regardless of posterUrl, so this is what a customer sees. Entry and assets kept; reversible if the source is re-exported without global blending.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -55588,7 +55588,8 @@
   },
   "platesBaked": false,
   "colourVariantPaints": {},
-  "trim": "200h"
+  "trim": "200h",
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -181876,8 +181877,8 @@
   "qualityGrade": "B",
   "technicalStatus": "no-body-material",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 global-alpha shell: body paint AND tyre materials are alphaMode=BLEND at alpha 0.25, so the car itself is ~75% transparent (16/16 materials alphaMode=BLEND). Confirmed by magenta-backlight render of the SHIPPED glb — the background reads through the panels and the far-side wheels are visible through the bodywork; a Prius control on the same rig renders solid. The resolver returns desktopGlbUrl to the viewer regardless of posterUrl, so this is what a customer sees. Entry and assets kept; reversible if the source is re-exported without global blending.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -182017,7 +182018,8 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -209384,8 +209386,8 @@
   "qualityGrade": "B",
   "technicalStatus": "no-body-material",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 global-alpha shell: body paint AND tyre materials are alphaMode=BLEND at alpha 0.25, so the car itself is ~75% transparent (15/15 materials alphaMode=BLEND). Confirmed by magenta-backlight render of the SHIPPED glb — the background reads through the panels and the far-side wheels are visible through the bodywork; a Prius control on the same rig renders solid. The resolver returns desktopGlbUrl to the viewer regardless of posterUrl, so this is what a customer sees. Entry and assets kept; reversible if the source is re-exported without global blending.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -209500,7 +209502,8 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -219893,8 +219896,8 @@
   "qualityGrade": "B",
   "technicalStatus": "no-body-material",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 global-alpha shell: body paint AND tyre materials are alphaMode=BLEND at alpha 0.25, so the car itself is ~75% transparent (17/17 materials alphaMode=BLEND). Confirmed by magenta-backlight render of the SHIPPED glb — the background reads through the panels and the far-side wheels are visible through the bodywork; a Prius control on the same rig renders solid. The resolver returns desktopGlbUrl to the viewer regardless of posterUrl, so this is what a customer sees. Entry and assets kept; reversible if the source is re-exported without global blending.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -220019,7 +220022,8 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -286304,5 +286308,1864 @@
    "method": "render",
    "at": "2026-08-11"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "chrysler-pt-cruiser-2005-crw1-v1",
+  "make": "chrysler",
+  "model": "PT Cruiser",
+  "modelFamily": "chrysler pt cruiser",
+  "modelAliases": [
+   "PT Cruiser"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2005,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "GT"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "e8f2ad3dceb24e65b6b3b5b4259305eb",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura"
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros_1",
+   "Carro_Vidros",
+   "Carro_Vidro_Laranja"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chrysler/chrysler-pt-cruiser-2005-crw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chrysler/chrysler-pt-cruiser-2005-crw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 20554888,
+  "mobileFileSizeBytes": 20554888,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "020bc52819a43644bcb6e6d95468b58b6b1a93589515fb45e682f497e5be9e20",
+  "pipelineVersion": "publish-batch-crw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "crw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-crw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "chrysler-300c-crw1-v1",
+  "make": "chrysler",
+  "model": "300C",
+  "modelFamily": "chrysler 300c",
+  "modelAliases": [
+   "300C"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "SRT8"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "3ae081b90cce4d199d4e886a1b15d3a5",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "window",
+   "black_glass",
+   "1_window",
+   "1_window_0"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chrysler/chrysler-300c-crw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chrysler/chrysler-300c-crw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 22814404,
+  "mobileFileSizeBytes": 22814404,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d8de7db44402422eed0b9181d6eee90503d93a65354140dcbe14c9a057737192",
+  "pipelineVersion": "publish-batch-crw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "crw1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-crw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "chrysler-pacifica-2021-crw1-v1",
+  "make": "chrysler",
+  "model": "Pacifica",
+  "modelFamily": "chrysler pacifica",
+  "modelAliases": [
+   "Pacifica"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Limited S AWD"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "890cbc5470e344aaaff29dc2d6d8fdeb",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "022_Chrysler_Pacifica_Granite_Crystal_Metallic_Clearcoat"
+  ],
+  "glassMaterialNames": [
+   "022_Chrysler_Pacifica_Windows",
+   "022_Chrysler_Pacifica_BrakeLightsGlass",
+   "022_Chrysler_Pacifica_HeadLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chrysler/chrysler-pacifica-2021-crw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chrysler/chrysler-pacifica-2021-crw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 39940300,
+  "mobileFileSizeBytes": 39940300,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "2fb099299d6fa66ec826cf87da9e0e2e91b59812f07f66a178c8444bf0e53277",
+  "pipelineVersion": "publish-batch-crw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "crw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-crw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "chrysler-pacifica-2008-crw1-v1",
+  "make": "chrysler",
+  "model": "Pacifica",
+  "modelFamily": "chrysler pacifica",
+  "modelAliases": [
+   "Pacifica"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2008,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "99ec73d456f245c9ae28b3384127f750",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Paint1Mtl"
+  ],
+  "glassMaterialNames": [
+   "Windshield1Mtl",
+   "Headlightsgrillefoglights1Mtl"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chrysler/chrysler-pacifica-2008-crw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/chrysler/chrysler-pacifica-2008-crw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 10122616,
+  "mobileFileSizeBytes": 10122616,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "d1517191896440b8e5cd0849c701b6e72a4cd3ab331091fc9493b5867ce8fd03",
+  "pipelineVersion": "publish-batch-crw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "crw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-crw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": []
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volvo-v60-vow1-v1",
+  "make": "volvo",
+  "model": "V60",
+  "modelFamily": "volvo v60",
+  "modelAliases": [
+   "V60"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "47a5c168f6c344d59003254eca848c7b",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "Free Standard",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint",
+   "chassis.0",
+   "chassis.1",
+   "chassis.10",
+   "chassis.11",
+   "chassis.12",
+   "chassis.15",
+   "chassis.3",
+   "chassis.4",
+   "chassis.6",
+   "chassis.8",
+   "chassis.9"
+  ],
+  "glassMaterialNames": [
+   "glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v60-vow1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v60-vow1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 15035704,
+  "mobileFileSizeBytes": 15035704,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "0fe61f3fd67549e30656907e7b8be55fee23209b806c29f280509677b94415a5",
+  "pipelineVersion": "publish-batch-vow1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "vow1 gated publish 2026-08-11: licence recorded as 'Free Standard' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-vow1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Thunder Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thunder Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Vapour Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vapour Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Onyx Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Onyx Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Crystal White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "taupe",
+     "label": "Bright Dusk Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Bright Dusk Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Denim Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Denim Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Forest Lake Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Forest Lake Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volvo-v40-2018-vow1-v1",
+  "make": "volvo",
+  "model": "V40",
+  "modelFamily": "volvo v40",
+  "modelAliases": [
+   "V40"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2018,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "299852c2ebde4209a4007dbf2e2165e3",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Carro_Pintura_1"
+  ],
+  "glassMaterialNames": [
+   "Carro_Vidros",
+   "Carro_Vidros_Vermelhos"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v40-2018-vow1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v40-2018-vow1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 21881168,
+  "mobileFileSizeBytes": 21881168,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "ffdb2c020c4666cde02c449db4407f4eaea56d3ef9cf420bb1ea029df6a81e18",
+  "pipelineVersion": "publish-batch-vow1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "vow1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-vow1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Thunder Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thunder Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Vapour Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vapour Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Onyx Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Onyx Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Crystal White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "taupe",
+     "label": "Bright Dusk Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Bright Dusk Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Denim Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Denim Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Forest Lake Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Forest Lake Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volvo-c30-vow1-v1",
+  "make": "volvo",
+  "model": "C30",
+  "modelFamily": "volvo c30",
+  "modelAliases": [
+   "C30"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "R-Design"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "5fb13d2daeb5480e8be44e475e2acf59",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "Free Standard",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "CarPaint"
+  ],
+  "glassMaterialNames": [
+   "gls_window",
+   "gls_window_interior",
+   "windowmask",
+   "gls_clear",
+   "defrostlines"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-c30-vow1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-c30-vow1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 37307992,
+  "mobileFileSizeBytes": 37307992,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "905fc16e08c4619dd406781f18b72056ba607d4fa452c8ceb5470fa4c67e1a15",
+  "pipelineVersion": "publish-batch-vow1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "vow1 gated publish 2026-08-11: licence recorded as 'Free Standard' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-vow1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Thunder Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thunder Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Vapour Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vapour Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Onyx Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Onyx Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Crystal White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "taupe",
+     "label": "Bright Dusk Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Bright Dusk Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Denim Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Denim Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Forest Lake Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Forest Lake Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volvo-v50-vow1-v1",
+  "make": "volvo",
+  "model": "V50",
+  "modelFamily": "volvo v50",
+  "modelAliases": [
+   "V50"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "34632915878c410fa1f5cbc8c820e4ba",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "Free Standard",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "clearglass",
+   "redglass.001",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v50-vow1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v50-vow1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 9900752,
+  "mobileFileSizeBytes": 9900752,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "66bd1ca4a7ab7c8759bc0134c164c30f03cb22115d69882201dce0cb3068917e",
+  "pipelineVersion": "publish-batch-vow1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "vow1 gated publish 2026-08-11: licence recorded as 'Free Standard' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-vow1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Thunder Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thunder Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Vapour Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vapour Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Onyx Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Onyx Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Crystal White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "taupe",
+     "label": "Bright Dusk Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Bright Dusk Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Denim Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Denim Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Forest Lake Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Forest Lake Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volvo-c70-2000-vow1-v1",
+  "make": "volvo",
+  "model": "C70",
+  "modelFamily": "volvo c70",
+  "modelAliases": [
+   "C70"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2000,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "1fb715de748843628f24bd3914f633d6",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body_colo"
+  ],
+  "glassMaterialNames": [],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-c70-2000-vow1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-c70-2000-vow1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 14181844,
+  "mobileFileSizeBytes": 14181844,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "16a78c3e2b219912d8ab9ba4540607c57ccd0cd1fcb58566cbe1f598b4644501",
+  "pipelineVersion": "publish-batch-vow1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "vow1 gated publish 2026-08-11: licence recorded as 'CC Attribution-NonCommercial' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-vow1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Thunder Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thunder Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Vapour Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vapour Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Onyx Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Onyx Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Crystal White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "taupe",
+     "label": "Bright Dusk Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Bright Dusk Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Denim Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Denim Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Forest Lake Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Forest Lake Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volvo-pv4-vow1-v1",
+  "make": "volvo",
+  "model": "PV4",
+  "modelFamily": "volvo pv4",
+  "modelAliases": [
+   "PV4"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "2c3f734019684e709b6e5bfd40d363ea",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "BODY",
+   "chassis"
+  ],
+  "glassMaterialNames": [
+   "glass",
+   "Material.002"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-pv4-vow1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-pv4-vow1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 11604396,
+  "mobileFileSizeBytes": 11604396,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "268c8add063d9176164e7613c0c31622c23030b54e30fbae4109012c99e563c6",
+  "pipelineVersion": "publish-batch-vow1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "vow1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-vow1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Thunder Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thunder Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Vapour Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vapour Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Onyx Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Onyx Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Crystal White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "taupe",
+     "label": "Bright Dusk Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Bright Dusk Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Denim Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Denim Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Forest Lake Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Forest Lake Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volvo-740-vow1-v1",
+  "make": "volvo",
+  "model": "740",
+  "modelFamily": "volvo 740",
+  "modelAliases": [
+   "740"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "2d44c05d36424ceb96e6da7451df782d",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Bancos___Preto",
+   "Color_004",
+   "Color_008",
+   "Color_M00",
+   "Color_M07",
+   "Color_M08",
+   "Formica_Speckled_Grey",
+   "M_0136_Charcoal",
+   "Matte__FF7C7C7C__env_5_spec",
+   "Matte__FFFFFFFF__prim_env_5_spec",
+   "Preto_brilhante",
+   "volvo740__env_15_spec"
+  ],
+  "glassMaterialNames": [
+   "Translucent_Glass_Gray"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-740-vow1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-740-vow1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 17823324,
+  "mobileFileSizeBytes": 17823324,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "bd3a22839fd883f16abc58ce2780e1bc9988ab29730333272844648e6a5fa1af",
+  "pipelineVersion": "publish-batch-vow1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "vow1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-vow1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Thunder Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thunder Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Vapour Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vapour Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Onyx Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Onyx Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Crystal White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "taupe",
+     "label": "Bright Dusk Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Bright Dusk Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Denim Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Denim Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Forest Lake Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Forest Lake Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "volvo-240-vow1-v1",
+  "make": "volvo",
+  "model": "240",
+  "modelFamily": "volvo 240",
+  "modelAliases": [
+   "240"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "d90d42c494104fcdb174c4f28a523562",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "Free Standard",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "Base_Color",
+   "Black",
+   "pure_black"
+  ],
+  "glassMaterialNames": [
+   "glass",
+   "light",
+   "red_light",
+   "orange_light"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-240-vow1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-240-vow1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 6757276,
+  "mobileFileSizeBytes": 6757276,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "9cef772a1356fbc1a3204bd035f3a597a0de5e4d1284f7a500929be98c732c8e",
+  "pipelineVersion": "publish-batch-vow1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "vow1 gated publish 2026-08-11: licence recorded as 'Free Standard' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-vow1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Thunder Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thunder Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Vapour Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vapour Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Onyx Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Onyx Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Crystal White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Crystal White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "taupe",
+     "label": "Bright Dusk Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Bright Dusk Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Denim Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Denim Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Forest Lake Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Forest Lake Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Fjord Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fjord Blue Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mazda-323-mzw1-v1",
+  "make": "mazda",
+  "model": "323",
+  "modelFamily": "mazda 323",
+  "modelAliases": [
+   "323"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": null,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "BJ sedan"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "2ed2e0b4aae845abb09f878395cf7c66",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "redglass",
+   "orangeglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-323-mzw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-323-mzw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 18420776,
+  "mobileFileSizeBytes": 18420776,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "badff3c4b55a23b9c5e2ac03ba6dff8802bf368cc8d7dc13829ac89b347afbad",
+  "pipelineVersion": "publish-batch-mzw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "mzw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-mzw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Machine Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Machine Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Polymetal Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Polymetal Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Jet Black Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Rhodium White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Rhodium White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snowflake White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snowflake White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Soul Red Crystal",
+     "hex": null,
+     "finish": "crystal",
+     "oemPaintName": "Soul Red Crystal",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Deep Crystal Blue Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Deep Crystal Blue Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "sand",
+     "label": "Zircon Sand Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Zircon Sand Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "mazda-323-1978-mzw1-v1",
+  "make": "mazda",
+  "model": "323",
+  "modelFamily": "mazda 323",
+  "modelAliases": [
+   "323"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 1978,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "FA"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "9e2b1d5818e14ae597d0f9f378907f2c",
+  "sourceRetrievedAt": "2026-08-11",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint"
+  ],
+  "glassMaterialNames": [
+   "windowglass",
+   "clearglass",
+   "orangeglass",
+   "redglass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-323-1978-mzw1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-323-1978-mzw1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 27367420,
+  "mobileFileSizeBytes": 27367420,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "a6398ade6dd61f257f5f205d34de37058fa1691d4ba1f667b3835a09b9fccc13",
+  "pipelineVersion": "publish-batch-mzw1-2026-08-11",
+  "publishedAt": "2026-08-11",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "mzw1 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-mzw1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Machine Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Machine Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Polymetal Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Polymetal Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Jet Black Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Rhodium White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Rhodium White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snowflake White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snowflake White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Soul Red Crystal",
+     "hex": null,
+     "finish": "crystal",
+     "oemPaintName": "Soul Red Crystal",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Deep Crystal Blue Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Deep Crystal Blue Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "sand",
+     "label": "Zircon Sand Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Zircon Sand Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
