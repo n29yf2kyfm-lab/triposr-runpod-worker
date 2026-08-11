@@ -29,7 +29,15 @@ BAD = re.compile(r"(?i)\b(low ?poly|lowpoly|low-poly|game ?ready|gameready|game 
                  r"cyberpunk|apocalypse|zombie|mad ?max|steampunk|hover|flying ?car|toy|miniature|"
                  r"papercraft|origami|clay|sculpt(ing)? ?practice|study|exercise|tutorial|"
                  r"my ?first|beginner|practice|wip|placeholder|dummy|free ?(download|asset|model)|"
-                 r"rigged ?for|scan|photogrammetry|lidar|wreck|destroyed|damaged|burnt|rusty|"
+                 # wreck(ed)/crash(ed): the bare "wreck" only ever matched the noun.
+                 # The trailing \b on this group needs a boundary right after
+                 # "wreck", and "ed" is a word character, so "Wrecked Volvo V40
+                 # 1999" (68,808 faces, bonnet crushed, front bumper hanging off)
+                 # walked through the Volvo sweep and cost four GPU renders.
+                 # "damaged" was already here; its sibling "crashed" was not.
+                 # Both spellings of both words regression-tested 2026-08-11.
+                 r"rigged ?for|scan|photogrammetry|lidar|wreck(ed)?|crash(ed)?|"
+                 r"destroyed|damaged|burnt|rusty|"
                  r"abandoned|sticker|logo|badge|diorama|scene|pack|bundle|collection)\b")
 # NB the trailing \b is load-bearing. Without it this pattern matched PREFIXES:
 # "toy" inside "Toyota", "scan" inside "scanner", "pack" inside "Packard".
