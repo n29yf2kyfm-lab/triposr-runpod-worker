@@ -495,5 +495,60 @@
    "the magenta oval on the grille badge is most likely a RENDER artefact, not a model defect: Frontbadge1Mtl is textured with a white multiplier, while the file carries a magenta placeholder material (Hub1Mtl, rgba 1.0/0.133/0.612) at alpha 0.000 that a correct viewer would not draw. Confirm before publishing",
    "NOTED WEAKNESSES: headlamp internals soft, door shut lines faint, and WRX side decals plus a roll cage, Greddy intake and Kakimoto exhaust are baked in - a tuned road car, not a stock spec"
   ]
+ },
+ {
+  "uid": "5eec9521f50b40779c2252d332a5c1ec",
+  "name": "2014 Subaru Impreza WRX STi (inaccurate)",
+  "verdict": "fail",
+  "reasons": [
+   "the uploader titles it (inaccurate) - the source itself warns the geometry is wrong, which is disqualifying for a product that matches a reg to the customers own car",
+   "front-end detail is soft against the bar: the grille is a plain dark mesh panel with no depth and the headlamp is a dark blob with only a faint projector element",
+   "materials are actually acceptable - the tread face reads mid-grey and clearly darker than the silver rims in front34 and rear34, and a headrest resolves through the rear door glass, so this is NOT a tyre or glazing failure"
+  ]
+ },
+ {
+  "uid": "d5fb1b03ae724f7ba9dbbbaf0c16cdf8",
+  "name": "2006 Subaru Impreza WRX STi",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec 2006 Impreza WRX STi (GD hawkeye) in WR Blue on gold BBS-style wheels - proportions read instantly and hold across all four tiles",
+   "tyres proven black on a COLOURED-BODY control: the car carries its own blue paint (mats=0, the worker applied no recolour) and the tread face is neutral black in front34 and rear34, so no brightness argument is needed",
+   "glazing clear: seats, harness detail, door card and B-pillar all resolve through the side glass in two tiles",
+   "hawkeye headlamp internals resolved, mesh grille with Subaru star and STI badge, correct multi-element tail lamps, crisp shut lines, gold rim faces present in all four tiles",
+   "note mats=0 means the render worker found no body-paint material; per CLAUDE.md that warns about the SHEET colour, not about shippable variants - recolour_audit --stamp remains the test"
+  ]
+ },
+ {
+  "uid": "2236d2d7bcde4ae590f821d1ccabadfd",
+  "name": "Subaru Impreza WRX STI 2004 sedan",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: Subaru World Rally Team WRC car - Petter Solberg name banner, Rallye Monte-Carlo plate, competition number 1, roll cage and WRC rear wing",
+   "full sponsor livery (Pirelli, Motul, PIAA, Denso, STI) baked into the textures",
+   "the title says only 2004 sedan, so the title-stage prune could not catch it - caught by eye"
+  ]
+ },
+ {
+  "uid": "e1486bac59734e188401721aa3efd59f",
+  "name": "2006 Subaru Impreza WRX STI",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec 2006 Impreza WRX STi (GD hawkeye) in white on gold BBS-style wheels - proportions read instantly, consistent across all four tiles",
+   "tyres plainly black rubber, clearly darker than both the gold rims and the white body, judged on the tread face in front34 and rear34 at 5x",
+   "glazing clear: seats, door cards and the B-pillar resolve through the front and rear side glass in two tiles",
+   "hawkeye headlamp internals resolved, mesh grille with Subaru star, correct red tail lamps with dark inner elements, defined door shut lines, rim faces present in all four tiles",
+   "note: same generation as d5fb1b03 but a different mesh (83,291 vs 93,577 faces) and a different colour - see the dupe check"
+  ]
+ },
+ {
+  "uid": "08296bc950364621b6174a3078bb19e0",
+  "name": "Subaru Impreza WRX STi 2004 Custom",
+  "verdict": "fail",
+  "reasons": [
+   "headlamps are empty black voids with no lens or internal elements in all four tiles - straight off the owner fail list",
+   "out of OEM road spec: race-style front aero with a deep splitter, canards, an exposed front-mount intercooler in place of a grille, and extended side skirts; the title says Custom",
+   "the whole nose reads unfinished - open dark cavities where the grille and lamp housings should be",
+   "tyres and glazing are actually fine (black tread against gold rims, interior resolvable through the side glass)"
+  ]
  }
 ]
