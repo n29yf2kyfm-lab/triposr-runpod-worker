@@ -47,5 +47,54 @@
   "verdict": "opaque",
   "evidence": "gltf",
   "note": "0/47 transparent, zero glass-named materials, 90 textures; glazing absent or fully opaque"
+ },
+ {
+  "uid": "f8024595e11c48119877c9c7cc554abc",
+  "name": "Jeep Grand Cherokee Trackhawk",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "Vitre alpha 0.32 BLEND, Vitre_ar alpha 0.72 BLEND (French-named, so NOT overridden by the handler - sheet was honest here); 10/44 transparent"
+ },
+ {
+  "uid": "bbf5052a1c994a53977379b2636f1115",
+  "name": "Jeep Grand Cherokee SRT8 WK 2008",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "etk800_glass and screen_gps both alpha 1.0 OPAQUE; 0/36 transparent; flat-shell true"
+ },
+ {
+  "uid": "b84ac0651aed4d4d8907113aca5192c8",
+  "name": "Jeep_grand_cherokee_srt8_wk_2008",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "etk800_glass alpha 1.0 OPAQUE; 0/36 transparent; flat-shell true"
+ },
+ {
+  "uid": "032f67b38e7c4302b9b05b1875077186",
+  "name": "2018 Jeep Grand Cherokee Trackhawk",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "Jeep_GrandCherokeeTrackhawk_2018Window_Material alpha 0.25 BLEND with KHR_materials_transmission 1.0"
+ },
+ {
+  "uid": "fef1fa5a0d4b41f0a5c9d7f00f194185",
+  "name": "1999 Jeep Grand Cherokee (TEMPLATE)",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "vehicle_generic_glasswindows2 alpha 1.0 OPAQUE; 0/64 transparent; flat-shell true; 0 textures"
+ },
+ {
+  "uid": "538491505afa4880959437cba84d3e36",
+  "name": "Jeep Grand Cherokee",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 0 transparent; scan atlas"
+ },
+ {
+  "uid": "d232515e40084da4852ce00a1b48473e",
+  "name": "Jeep XJ",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "1 material, 0 transparent; scan atlas"
  }
 ]

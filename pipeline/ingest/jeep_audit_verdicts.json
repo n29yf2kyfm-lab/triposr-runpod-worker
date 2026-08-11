@@ -83,5 +83,89 @@
    "respray did not take - rendered GREEN under forced --colour silver, mats=11 cov=0.897",
    "geometry itself is good: black tyres with tread, rim faces present, sharp grille, LED lamp internals"
   ]
+ },
+ {
+  "uid": "f8024595e11c48119877c9c7cc554abc",
+  "name": "Jeep Grand Cherokee Trackhawk",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as Grand Cherokee WK2 Trackhawk",
+   "black tyres, tread face clearly dark in front34 and rear34",
+   "all four rim faces present, black alloys with red calipers consistent",
+   "seven-slot grille defined, LED lamp internals present",
+   "shut lines defined; respray took cleanly (mats=1 cov=0.223)",
+   "in scope: factory SRT Trackhawk trim, no lift/snorkel/light bar"
+  ]
+ },
+ {
+  "uid": "bbf5052a1c994a53977379b2636f1115",
+  "name": "Jeep Grand Cherokee SRT8 WK 2008",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE off-road build - snorkel on the A-pillar, roof rack with spare tyre, bonnet light pods",
+   "WHEELS AND TYRES ENTIRELY ABSENT - bare hubs, brake discs and suspension arms visible in all four views",
+   "detached panel floating above the car",
+   "glazing opaque: etk800_glass alpha 1.0 OPAQUE, 0 of 36 materials transparent, flat-shell signature",
+   "BeamNG game-rip material naming (etk800_*)",
+   "missed by the title prune - title gave no hint of the build"
+  ]
+ },
+ {
+  "uid": "b84ac0651aed4d4d8907113aca5192c8",
+  "name": "Jeep_grand_cherokee_srt8_wk_2008",
+  "verdict": "fail",
+  "reasons": [
+   "CONFIRMED DUPLICATE of bbf5052a (Jeep Grand Cherokee SRT8 WK 2008) - sheets are pixel-identical",
+   "same out-of-scope off-road build: snorkel, roof rack with spare, bonnet light pods",
+   "wheels and tyres entirely absent, bare hubs visible",
+   "glazing opaque: etk800_glass alpha 1.0, 0 of 36 transparent, flat shell"
+  ]
+ },
+ {
+  "uid": "032f67b38e7c4302b9b05b1875077186",
+  "name": "2018 Jeep Grand Cherokee Trackhawk",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as WK2 Grand Cherokee Trackhawk",
+   "black tyres, tread face clearly dark in front34, rear34 and side",
+   "all four rim faces present, black alloys with yellow calipers consistent",
+   "seven-slot grille crisp, lamp internals present",
+   "shut lines defined, paint finish clean",
+   "in scope: factory SRT Trackhawk trim, no lift/snorkel/light bar"
+  ]
+ },
+ {
+  "uid": "fef1fa5a0d4b41f0a5c9d7f00f194185",
+  "name": "1999 Jeep Grand Cherokee (TEMPLATE)",
+  "verdict": "fail",
+  "reasons": [
+   "WHEELS AND TYRES ENTIRELY ABSENT - only brake discs on stalks in all four views",
+   "clay shell: body one white surface, glazing opaque",
+   "gltf: vehicle_generic_glasswindows2 alpha 1.0 OPAQUE, 0 of 64 transparent, flat-shell true",
+   "vehicle_generic_* naming indicates a game rip"
+  ]
+ },
+ {
+  "uid": "538491505afa4880959437cba84d3e36",
+  "name": "Jeep Grand Cherokee",
+  "verdict": "fail",
+  "reasons": [
+   "NOT A CAR - unrecognisable torn scan geometry in all four views",
+   "no body, no wheels, no glazing; large holes and detached sheets",
+   "pose gate warned tall(h/l=0.589)",
+   "cov=1.000 single material, 0 transparent"
+  ]
+ },
+ {
+  "uid": "d232515e40084da4852ce00a1b48473e",
+  "name": "Jeep XJ",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE lifted off-road build - suspension lift, chunky mud tyres, winch bumper, roof load",
+   "photogrammetry scan: roof cargo is unrecognisable blobs, panels are scan mush",
+   "ground plane baked into the mesh in all four views",
+   "glazing opaque: 1 material, 0 transparent, cov=1.000",
+   "missed by title prune - title was bare Jeep XJ"
+  ]
  }
 ]
