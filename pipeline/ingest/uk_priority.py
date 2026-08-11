@@ -64,14 +64,66 @@ T5 = [  # halo / sports / classic — a reg almost never decodes to one
 def _norm(s: str) -> str:
     return " " + re.sub(r"[^a-z0-9]+", " ", s.lower()).strip() + " "
 
+# Marque-qualified overrides, applied BEFORE the tier lists.
+#
+# The tier lists match on nameplate alone, which breaks when one marque's
+# supermine nameplate is another marque's engine size or halo suffix. Measured
+# failures this caused:
+#   "2017 Lexus LC 500"  -> T1, because "500" is in the Fiat supermini list, so
+#                           every halo LC 500 rendered AHEAD of the IS/RX fleet
+#                           cars on the Lexus wave -- exactly backwards.
+#   "Mercedes SL 500", "BMW 530", "Audi S5" hit the same class of collision.
+# A marque-qualified rule is checked first and wins outright.
+_OVERRIDE = [
+    # (marque, nameplate-token, tier)
+    ("lexus",   "lc",   5), ("lexus", "lfa", 5), ("lexus", "rc", 5),
+    ("lexus",   "is",   2), ("lexus", "nx",  2), ("lexus", "ux", 2),
+    ("lexus",   "ct",   1), ("lexus", "rx",  3), ("lexus", "es", 3),
+    ("mercedes", "sl",  5), ("mercedes", "slk", 5), ("mercedes", "amg gt", 5),
+    ("porsche", "911",  5), ("porsche", "718", 5), ("porsche", "cayman", 5),
+    ("porsche", "boxster", 5), ("porsche", "macan", 3), ("porsche", "cayenne", 3),
+    ("porsche", "panamera", 3), ("porsche", "taycan", 3),
+    ("subaru",  "brz",  5), ("subaru", "svx", 5), ("subaru", "impreza", 2),
+    ("subaru",  "forester", 2), ("subaru", "outback", 3), ("subaru", "xv", 2),
+    ("abarth",  "500",  5),
+]
+
+def _tok_hit(n: str, word: str) -> bool:
+    """Does normalised title `n` contain nameplate `word` as a real token?
+
+    Whole-token match, PLUS the two glued forms that a bare token test misses:
+      "rx"  must match "rx450h"  (nameplate + digit-led suffix)
+      "500" must match "500l"    (nameplate + short letter suffix)
+    but "ka" must NOT match "kangoo" -- the substring bug that put a Renault
+    Kangoo in the supermini tier. So a letter suffix is only allowed when the
+    nameplate is >=3 characters, and is capped at 2 trailing letters.
+    """
+    w = _norm(word).strip()
+    if not w:
+        return False
+    if f" {w} " in n:
+        return True
+    for tok in n.split():
+        if not tok.startswith(w) or tok == w:
+            continue
+        rest = tok[len(w):]
+        if re.fullmatch(r"\d[0-9a-z]*", rest):        # rx -> rx450h
+            return True
+        if len(w) >= 3 and re.fullmatch(r"[a-z]{1,2}", rest):   # 500 -> 500l
+            return True
+    return False
+
 def tier(name: str) -> int:
     n = _norm(name)
+    for marque, plate, t in _OVERRIDE:
+        if _tok_hit(n, marque) and _tok_hit(n, plate):
+            return t
     def hit(words):
-        # Whole-token match ONLY. A bare substring test put "Renault Kangoo"
-        # in T1 because the supermini list contains "ka" -- the same class of
-        # bug as "cla" matching inside "class". Both sides are normalised so a
-        # multi-word entry ("range rover", "e-208") still matches.
-        return any(_norm(w) in n for w in words)
+        # Token-aware match (see _tok_hit). A bare substring test put "Renault
+        # Kangoo" in T1 because the supermini list contains "ka" -- the same
+        # bug class as "cla" matching inside "class" -- while a strict
+        # whole-token test missed "rx450h" and "500l".
+        return any(_tok_hit(n, w) for w in words)
     # T5 first: a "Civic Type R" is a Civic, but it is a halo car, not fleet.
     if hit(T5):
         return 5
