@@ -9498,8 +9498,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -9686,7 +9686,8 @@
    "variantsHash": "c5fba1eeb7551ca3e819695971aa3f3a4a6301a4",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -14528,8 +14529,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -14716,7 +14717,8 @@
    "variantsHash": "a6b394523c390226d26d4b4a88f83361b6abcbaa",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -21631,8 +21633,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -21820,7 +21822,8 @@
    "variantsHash": "869f63b093c65d4508975e52a10c9b7a2894ac27",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -24827,8 +24830,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -25015,7 +25018,8 @@
    "variantsHash": "46a54df5d152b4687f9a967c069732b3544a435d",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -25730,8 +25734,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -25918,7 +25922,8 @@
    "variantsHash": "6abb2334ac41de8a525467a68801319295ff7b81",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -26655,8 +26660,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -26835,7 +26840,8 @@
    "variantsHash": "6571c337a6efe4505e499ea232412a814999992d",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -27790,8 +27796,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -27976,7 +27982,8 @@
    "variantsHash": "7b4d52ff5a50e35710a829c71407a2befccc98ca",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -32072,8 +32079,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -32260,7 +32267,8 @@
    "variantsHash": "3aa152864a0f1a29d4531cefcf05052fbd1aad24",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -38165,8 +38173,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -38353,7 +38361,8 @@
    "variantsHash": "522f6e7133132d2e682d4f6b80453da910094e23",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -40283,8 +40292,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -40471,7 +40480,8 @@
    "variantsHash": "c50f4c1f379380e0903b9c6e2e4f689aa36daf2f",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -43095,8 +43105,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -43206,7 +43216,8 @@
    "variantsHash": "c6f238b928ad59e7244482dbedfb7c9d5b5c8fea",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -90566,8 +90577,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -90756,7 +90767,8 @@
    "variantsHash": "564a568108d400a70170e819a0dc2f4dedaae407",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -94518,8 +94530,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -94708,7 +94720,8 @@
    "variantsHash": "0c85be72ff5046bd6602f228dcae38e0a8d83dd3",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -100071,8 +100084,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -100196,7 +100209,8 @@
    "variantsHash": "e543480bd4d44e345934c469dabcc0c54d37afe2",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -102610,8 +102624,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -102792,7 +102806,8 @@
    "variantsHash": "d58b0f43ca37912a4bd967b5915a8e69cec640e0",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -103710,8 +103725,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -103909,7 +103924,8 @@
    "variantsHash": "c24e8001c6a49725764e5abea483891ba4a34a1d",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -107733,8 +107749,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -107923,7 +107939,8 @@
    "variantsHash": "4f288892893e4e3eb26438f44b6be79bb332a944",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -111314,8 +111331,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -111486,7 +111503,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -111521,8 +111539,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -111589,7 +111607,8 @@
    "variantsHash": "ea43d6296783835c1a6d124679d855c4234ea9e2",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -117921,8 +117940,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -118085,7 +118104,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -119255,8 +119275,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -119324,7 +119344,8 @@
    "variantsHash": "e72b4d642bcfb85ac80c00ed13adba2242d18a81",
    "method": "render",
    "at": "2026-07-29"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -121529,8 +121550,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -121733,7 +121754,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -122595,8 +122617,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -122780,7 +122802,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -123146,8 +123169,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -123323,7 +123346,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -124996,8 +125020,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -125167,7 +125191,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -125866,8 +125891,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -126038,7 +126063,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -126846,8 +126872,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -127035,7 +127061,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -127292,8 +127319,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -127463,7 +127490,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -128871,8 +128899,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -129074,7 +129102,8 @@
      "finish": "Solid"
     }
    ]
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -134959,8 +134988,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -135146,7 +135175,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -150661,8 +150691,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -150887,7 +150917,8 @@
    "variantsHash": "f473c32cc35c360aef4bcef94cb6c4e4edc35f83",
    "method": "render",
    "at": "2026-08-02"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -151183,8 +151214,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -151407,7 +151438,8 @@
    "variantsHash": "5ee597e369c1569a1d034924406048d4a3135052",
    "method": "render",
    "at": "2026-08-02"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -157412,8 +157444,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -157599,7 +157631,8 @@
    "variantsHash": "74086989592e8fd70599e344e2b274c0ae2da005",
    "method": "render",
    "at": "2026-08-05"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -158957,8 +158990,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -159140,7 +159173,8 @@
    "variantsHash": "25cc83cfae053dc3c5b89b7c9c8bd85d26ea4e9a",
    "method": "render",
    "at": "2026-08-05"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -159614,8 +159648,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -159799,7 +159833,8 @@
    "variantsHash": "898e595f1249b393a0e728f121ae4e295574dfe8",
    "method": "render",
    "at": "2026-08-05"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -161008,8 +161043,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -161267,7 +161302,8 @@
    "variantsHash": "a06900aca82a1053898389b0a3ed6fd08fae3fcb",
    "method": "render",
    "at": "2026-08-06"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -161895,8 +161931,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -162154,7 +162190,8 @@
    "variantsHash": "ac019c83c3f0346180df5cafdae63c5b563d33e7",
    "method": "render",
    "at": "2026-08-06"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -163671,8 +163708,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -163931,7 +163968,8 @@
    "variantsHash": "2221289086b6a19062a9eae7267c796974af46c6",
    "method": "render",
    "at": "2026-08-06"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -173880,8 +173918,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -174070,7 +174108,8 @@
    "variantsHash": "04176a524cee549e069f3bea6346ba7405de973e",
    "method": "render",
    "at": "2026-08-08"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -212834,8 +212873,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -213002,7 +213041,8 @@
    "variantsHash": "1a88db6cbefb2343c476a7502aa93bedaf27c1c7",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -218387,8 +218427,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -218569,7 +218609,8 @@
    "variantsHash": "fe33ca58b582e759f22ea415965c31db1a89ac9a",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -221164,8 +221205,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -221349,7 +221390,8 @@
    "variantsHash": "ff3bed8d2dcf9b8ee20eb568c518733d2f399536",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -232237,8 +232279,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -232421,7 +232463,8 @@
    "variantsHash": "1b8ce45b1d25df4fdf6d4da8943fea5d86db2ab6",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -234008,8 +234051,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -234190,7 +234233,8 @@
    "variantsHash": "2a69ca52a19999cdce298e2f4eb445f0c1b0e3d7",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -237867,8 +237911,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -238048,7 +238092,8 @@
    "variantsHash": "87d0ef3929e5a224ca7d642f084a5a4e2609b912",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -238936,8 +238981,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -239007,7 +239052,8 @@
    "variantsHash": "21bbcb97197ffc1895837ad13d806abf7ce6af67",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -239159,8 +239205,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -239233,7 +239279,8 @@
    "variantsHash": "84cbece3bdf914b314bf25d1d6354498d5880801",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -239377,8 +239424,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -239448,7 +239495,8 @@
    "variantsHash": "84e6a7097b6eee72c28be4b046745894e3394c60",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -240155,8 +240203,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -240226,7 +240274,8 @@
    "variantsHash": "4176446978fe586cc0f5656d59975944988f8772",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -240261,8 +240310,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb. Found by the full 1,204-car glTF sweep (FULL_MATERIAL_SWEEP.json); same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -240335,7 +240384,8 @@
    "variantsHash": "5fdcedc7aeef54fe537cea67023f4d439dd8210d",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
