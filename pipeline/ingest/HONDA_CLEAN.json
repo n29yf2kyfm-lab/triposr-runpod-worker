@@ -8,8 +8,14 @@
   "year": null,
   "faces": 1081200,
   "licence": "CC Attribution",
+  "uk_market": "uncertain",
+  "uk_note": "trim/market not stated in the title",
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "clearglass alpha=0.2 BLEND",
+   "greenglass alpha=0.3 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "8th-gen Euro Accord (CU) Type S. Clean glass, consistent multi-spoke rims, sharp headlamp internals and defined shut lines. Note: visually near-identical to 6eccbee1 and 1bddd17d - three CU Accord saloons in this set, ship one."
@@ -23,8 +29,15 @@
   "year": null,
   "faces": 784468,
   "licence": "CC Attribution",
+  "uk_market": "no",
+  "uk_note": "North-America-only crossover derivative",
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "greenglass.015 alpha=0.1 BLEND",
+   "darkglass.035 alpha=0.5 BLEND",
+   "clearglass.197 alpha=0.1 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "Accord Crosstour liftback crossover, unique nameplate in the wave. Transparent glazing, five-spoke alloys consistent, headlamp internals sharp, shut lines defined. Stamp decides colours."
@@ -38,8 +51,15 @@
   "year": 1998,
   "faces": 910225,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "CG-generation Accord coupe. Glass clear with cabin visible, six-spoke alloys consistent, headlamp internals present, shut lines defined. Stamp decides colours."
@@ -53,8 +73,14 @@
   "year": 2003,
   "faces": 878368,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "7th-gen CL Accord. Transparent glazing, five-spoke alloys consistent, headlamp internals present, bonnet and door lines defined. Stamp decides colours."
@@ -68,8 +94,14 @@
   "year": 2009,
   "faces": 897752,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "clearglass alpha=0.2 BLEND",
+   "greenglass alpha=0.3 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "Accord Tourer - the only estate body in the clean set and clearly distinct from the saloons. Transparent glazing, consistent rims, sharp headlamps, roof rails and tailgate lines defined. Stamp decides colours."
@@ -83,8 +115,14 @@
   "year": 2011,
   "faces": 907193,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "clearglass alpha=0.2 BLEND",
+   "greenglass alpha=0.3 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "CU Accord saloon, facelift front. Clean glazing, consistent rims, sharp headlamps, defined shut lines. Visually near-identical to 39bf36a5 and 1bddd17d - genuinely different meshes but the same generation; ship one of the three."
@@ -98,8 +136,14 @@
   "year": 2021,
   "faces": 933379,
   "licence": "CC Attribution",
+  "uk_market": "no",
+  "uk_note": "10th-gen US Accord; the Accord left the UK range after 2015",
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "int_glass alpha=1.0 OPAQUE",
+   "glass alpha=0.25 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "10th-gen Accord, premium finish. Clear glazing, black multi-spokes consistent, LED headlamp bars and grille sharp, shut lines crisp. Stamp decides colours."
@@ -113,8 +157,14 @@
   "year": 1991,
   "faces": 989474,
   "licence": "CC Attribution",
+  "uk_market": "no",
+  "uk_note": "Japan-only kei roadster (grey import only)",
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "PP1 Beat, roof down, cockpit fully modelled (wheel, seats, dash). Multi-hole alloys with Honda caps consistent on both sides, headlamp internals present, panel gaps defined. Stamp decides colours."
@@ -128,8 +178,15 @@
   "year": 2001,
   "faces": 65287,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "Vitre alpha=0.31 BLEND",
+   "Vitre_noir alpha=1.0 OPAQUE",
+   "Phare_vitre alpha=0.36 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "RD1 first-generation CR-V with tailgate-mounted spare. Glazing transparent with cabin visible, five-spoke alloys consistent, headlamp internals and amber indicators modelled, shut lines defined. Mid-tier surfacing at 65k faces. Stamp decides colours."
@@ -143,8 +200,13 @@
   "year": 2001,
   "faces": 73713,
   "licence": "Free Standard",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "glass_ex alpha=1 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "2001 CR-V MK1 (73,713 f). Verified at 5x: tyres are plainly black rubber on silver alloys, and the interior (seats and headrests) resolves through the side glass. Glazing clear and proven from the glTF. Correct RD1 proportions with the tailgate-mounted spare."
@@ -158,8 +220,13 @@
   "year": null,
   "faces": 273133,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "steklo1 alpha=0.919 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "Del Sol SiR, roof fitted. Glazing transparent (roll hoop and parcel shelf visible through the rear glass), white five-spokes consistent with centre caps on all four, front bumper and shut lines defined. Stamp decides colours."
@@ -173,11 +240,36 @@
   "year": 1988,
   "faces": 1047310,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "inferred",
+  "glazing_materials": [],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "1988 CR-X (1,047,310 f). Proportions read instantly, front 3/4 is strong. Tyres plainly black rubber with the tread face dark in front34 and rear34; steel-look rims show spokes and bolts on both sides. Glazing genuinely transparent (interior, seats and far-side pillars resolve through it). Bonnet and door shut lines defined, headlamp internals modelled. This is the 1,047,310-face CR-X the hyphenated-nameplate bug was dropping."
+ },
+ {
+  "uid": "d5af69ef34834f43a65b4aac78ca8929",
+  "title": "Honda CR-Z 2011",
+  "model": "CR-Z",
+  "trim": null,
+  "generation": null,
+  "year": 2011,
+  "faces": 970786,
+  "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
+  "glass_probe": "clear",
+  "glass_certainty": "proven",
+  "glazing_materials": [
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND",
+   "greenglass alpha=0.3 BLEND"
+  ],
+  "needs_glazing_confirmation": false,
+  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
+  "reason": "CR-Z reads instantly. Transparent glazing including the split rear window, five twin-spoke rims consistent, headlamp internals sharp, bonnet and door lines defined. Stamp decides colours."
  },
  {
   "uid": "4f8ff01b643d4795a6a515478a6fd9d6",
@@ -188,8 +280,16 @@
   "year": null,
   "faces": 185720,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "Translucent_Glass_Gray alpha=0.41 BLEND",
+   "glass1 alpha=0.7 BLEND",
+   "glass_black1 alpha=1.0 OPAQUE",
+   "glass_stripes1 alpha=0.51 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "FD2 Civic Mugen RR - a factory limited-run road car sold through Honda, so in scope per the Mugen rule. Glazing transparent with red cabin visible, dark multi-spokes consistent, headlamp internals and grille detail sharp, shut lines crisp."
@@ -203,8 +303,16 @@
   "year": null,
   "faces": 547355,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windows alpha=0.25 BLEND",
+   "stickers_windows alpha=1 MASK",
+   "blitz_glass alpha=1 OPAQUE",
+   "int_glass alpha=0.25 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "Honda Civic EK9 (547,355 f). Black tyres on black alloys, rim faces complete, transparent glazing, sharp headlamp internals and shut lines. Carries a Spoon Sports lip kit and rear spoiler - closer to a factory Type R aero package than a wide-body kit, so kept, but flag it for the owner's eye as a tuner-badged listing."
@@ -218,8 +326,15 @@
   "year": null,
   "faces": 479297,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "civ_glass2 alpha=0.187 BLEND",
+   "civ_glass3 alpha=1.0 OPAQUE",
+   "civ_glass alpha=0.496 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "Honda Civic Sedan EK (479,297 f). Tyre materials tire_0.002/tire_0.003 at baseColor 0.013 - black rubber, confirmed from the glTF - under white steel-style wheel covers, which is authentic, not a defect. Transparent glazing, sharp lamps, defined shut lines."
@@ -233,8 +348,15 @@
   "year": null,
   "faces": 479297,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "civ_glass2 alpha=0.187 BLEND",
+   "civ_glass3 alpha=1.0 OPAQUE",
+   "civ_glass alpha=0.496 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "Honda Civic Sedan - identical face count (479,297) to #63, so the same mesh re-uploaded. Same quality; keep one of the pair."
@@ -248,8 +370,14 @@
   "year": 1976,
   "faces": 565476,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "Original CVCC Civic with fender mirrors. Transparent glazing with modelled cabin, steel wheels with red centre caps consistent, HONDA tail script and shut lines crisp. Stamp decides colours."
@@ -263,8 +391,15 @@
   "year": 1987,
   "faces": 658509,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "EF-generation Civic three-door. Glass clear with cabin visible, five-spoke alloys consistent, headlamp internals and CIVIC tail panel crisp, shut lines defined. Stamp decides colours."
@@ -278,8 +413,15 @@
   "year": 1988,
   "faces": 1047314,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "EF-generation CRX, proportions read instantly. Glass clear with seats visible, steel wheels with hubcap detail identical on both sides, CRX tail panel and door lines crisp. Stamp decides colours."
@@ -293,8 +435,11 @@
   "year": 1989,
   "faces": 657449,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "inferred",
+  "glazing_materials": [],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "1989 Civic DX Hatchback (657,449 f). Correct EF3 proportions, crisp bonnet/door/tailgate shut lines, headlamp internals present, black tyres on multi-spoke alloys consistent across all four tiles, glazing transparent with the cabin visible."
@@ -308,8 +453,14 @@
   "year": 1991,
   "faces": 608520,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "EG-generation Civic three-door. Transparent glazing, multi-spoke rims consistent, headlamp internals present, shut lines defined. Stamp decides colours."
@@ -323,8 +474,14 @@
   "year": 1991,
   "faces": 608520,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "Honda Civic EG hatchback 1991 (608,520 f). Tyre material \"tire\" at baseColor 0.106 - dark rubber, confirmed from the glTF, and the tread face reads black in rear34. Dark multi-spoke alloys with complete rim faces, transparent glazing, defined shut lines."
@@ -338,8 +495,11 @@
   "year": 1992,
   "faces": 608195,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "inferred",
+  "glazing_materials": [],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "1992 Civic VX (608,195 f). EG hatch reads instantly. Black tyres on dark multi-spoke alloys, rim faces complete on both sides, transparent glazing with visible interior, sunroof and shut lines modelled, sharp headlamp and grille detail."
@@ -353,8 +513,11 @@
   "year": 1993,
   "faces": 94436,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "opaque",
   "glass_certainty": "inferred",
+  "glazing_materials": [],
   "needs_glazing_confirmation": true,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "[GLAZING UNRESOLVED - probe says opaque/inferred; ambiguous and inferred-opaque must NOT be failed on the probe alone, so this keeps its PASS pending a magenta-backlight render of the shipped GLB.] EG Civic three-door. Glazing transparent with cabin visible, steel wheels consistent on all four corners, headlamp lens divisions and amber indicators modelled, shut lines defined. Mid-tier surfacing but no defect. Stamp decides colours."
@@ -368,8 +531,14 @@
   "year": 1996,
   "faces": 582420,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "EJ-generation Civic coupe. Glass clear, six-spoke alloys consistent, headlamp internals modelled, shut lines defined. Stamp decides colours."
@@ -383,8 +552,11 @@
   "year": 1996,
   "faces": 584195,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "inferred",
+  "glazing_materials": [],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "1996 Civic HX Coupe (584,195 f). Correct EJ coupe proportions, black tyres on grey multi-spoke alloys, rim faces complete both sides, transparent glazing, defined bonnet and door shut lines."
@@ -398,8 +570,15 @@
   "year": 1999,
   "faces": 188336,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "Window alpha=0.25 BLEND",
+   "glass_surr alpha=1.0 OPAQUE",
+   "Glass_I alpha=0.389 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "EM1 Civic Si coupe. Transparent glazing, six-spoke white alloys consistent, headlamp internals modelled, shut lines defined. Stamp decides colours."
@@ -413,8 +592,14 @@
   "year": 2022,
   "faces": 65228,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "2022_Honda_Civic_Hatchback_CLEAR_GLASS_SG alpha=0.4 BLEND",
+   "2022_Honda_Civic_Hatchback_Dark_GlassSG alpha=0.58 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "Honda Civic Hatchback 2022 FE (65,228 f). Low face count but the surfacing is clean: black tyres on dark alloys, transparent glazing with visible cabin, headlamp internals present, shut lines faint but defined."
@@ -428,8 +613,13 @@
   "year": 2025,
   "faces": 96069,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "ambiguous",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "window alpha=1 OPAQUE"
+  ],
   "needs_glazing_confirmation": true,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "[GLAZING UNRESOLVED - probe says ambiguous/proven; ambiguous and inferred-opaque must NOT be failed on the probe alone, so this keeps its PASS pending a magenta-backlight render of the shipped GLB.] 11th-gen Civic RS e:HEV saloon, top-tier modern asset. Clear glazing, black multi-spokes consistent, sharp LED headlamp internals, grille and shut lines crisp. Stamp decides colours."
@@ -443,8 +633,13 @@
   "year": null,
   "faces": 594992,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "ambiguous",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "glass alpha=1.0 OPAQUE"
+  ],
   "needs_glazing_confirmation": true,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "[GLAZING UNRESOLVED - probe says ambiguous/proven; ambiguous and inferred-opaque must NOT be failed on the probe alone, so this keeps its PASS pending a magenta-backlight render of the shipped GLB.] FK8 Civic Type R - factory performance variant, in scope. Glazing transparent, black multi-spokes with red calipers consistent, headlamp internals sharp, front honeycomb grille resolved, shut lines crisp. Mesh axis is rotated so the tile labels do not match the views."
@@ -458,8 +653,13 @@
   "year": null,
   "faces": 141777,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "Windshieldid1330011Mtl alpha=0.553 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "Honda Civic Type R FL5 (141,777 f), stock. Black tyres confirmed from the glTF (baseColor 0.021), transparent glazing, sharp lamps and diffuser. One face apart from #45 - duplicate pair."
@@ -473,8 +673,15 @@
   "year": null,
   "faces": 691135,
   "licence": "Free Standard",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "CivicTypeR_glass alpha=0.25 BLEND",
+   "CivicTypeR_glass.001 alpha=1.0 OPAQUE",
+   "CivicTypeR_screen alpha=1.0 OPAQUE"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "Honda Civic Type-R FL5 (691,135 f). Tyre materials CivicTypeR_rubber at baseColor 0.029 - black rubber, confirmed from the glTF. Grey alloys with red calipers and complete rim faces, transparent glazing, sharp honeycomb grille and lamp internals, shut lines defined. The best-surfaced FL5 in this pool."
@@ -488,8 +695,13 @@
   "year": 2018,
   "faces": 216974,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "Honda_CivicTypeRElite_2017Window_Material alpha=0.25 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "2018 Civic Type R FK8 (216,974 f) in stock trim - factory wing, no aftermarket kit. Black tyres on black alloys with red calipers, transparent glazing, sharp grille honeycomb and headlamp internals, shut lines defined."
@@ -503,8 +715,13 @@
   "year": 2022,
   "faces": 237181,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "Honda_CivicTypeRRewardRecycled_2023Window_Material alpha=0.25 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "2022 Civic Type R FL5 (237,181 f), stock. Black tyres on black alloys, transparent glazing, sharp grille and lamps, shut lines defined. Exact face-count match with #44 - a duplicate pair, keep one."
@@ -518,8 +735,13 @@
   "year": 2023,
   "faces": 236670,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "Window alpha=0.25 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "FL5 Civic Type R, excellent throughout: clear glazing, black multi-spokes with red calipers consistent, sharp LED headlamp internals, mesh grille resolved, shut lines crisp. Stamp decides colours."
@@ -533,8 +755,15 @@
   "year": 2023,
   "faces": 223317,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "Window_Surround alpha=1.0 OPAQUE",
+   "Honda_CivicTypeRRewardRecycled_2023Window_Material alpha=0.5 BLEND",
+   "Screen alpha=1.0 OPAQUE"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "2023 Civic Type R FL5 (223,317 f), stock. Tyre material Tyre01id...Mtl at baseColor 0.021 - genuinely black rubber, confirmed from the glTF. Transparent glazing, sharp tail lamps and triple-exit exhaust."
@@ -548,8 +777,13 @@
   "year": 2024,
   "faces": 237181,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "Honda_CivicTypeRRewardRecycled_2023Window_Material alpha=0.25 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "2024 Civic Type R (237,181 f), stock. Same face count as #40, so a duplicate upload of the same mesh - keep whichever has the better licence."
@@ -563,8 +797,13 @@
   "year": 2025,
   "faces": 141776,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "Windshieldid1330011Mtl alpha=0.712 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "2025 Civic Type R (141,776 f), stock. Tyre materials at baseColor 0.021 - black rubber, confirmed from the glTF. Transparent glazing, sharp lamps and diffuser. cov=0.000 means the sheet colour is meaningless, NOT that it cannot ship colours - only recolour_audit --stamp decides that. One face apart from #65, so a duplicate pair."
@@ -578,8 +817,14 @@
   "year": 1988,
   "faces": 1118538,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "Best-in-wave 80s saloon. Instantly a Concerto; glass clear with modelled seats, hubcap slots resolved on all four wheels, rear light bar and CONCERTO script crisp, door/bonnet lines defined. Stamp decides colours."
@@ -593,8 +838,15 @@
   "year": 2009,
   "faces": 178595,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "CoPwindow1 alpha=0.25 BLEND",
+   "Lod0black_glass1 alpha=1.0 OPAQUE",
+   "Lod0glass1 alpha=0.45 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "2009 Fit Sport (178,595 f). UK Jazz GE. Black tyres on silver multi-spoke alloys, transparent glazing with visible cabin, sharp headlamp internals and lower grille, shut lines defined."
@@ -608,8 +860,15 @@
   "year": 2016,
   "faces": 118755,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "Fit_Glass_surr alpha=1.0 OPAQUE",
+   "FIT_Glass alpha=0.25 BLEND",
+   "Translucent_Glass_Gray alpha=1.0 OPAQUE"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "GK3 Fit - the JDM name for the Jazz. Transparent glazing, dark wheel covers consistent, headlamp internals present, shut lines defined. Stamp decides colours."
@@ -623,8 +882,14 @@
   "year": 2001,
   "faces": 897705,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "First-generation GH HR-V five-door. Glass transparent with cabin visible, alloys consistent across views, headlamp internals modelled, shut lines defined. Stamp decides colours."
@@ -638,8 +903,14 @@
   "year": 2025,
   "faces": 994296,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "2022_Honda_HR-V_eHEV_Windows alpha=0.663 BLEND",
+   "2022_Honda_HR-V_eHEV_WindowsTrims1 alpha=1.0 OPAQUE"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "Current RV-generation HR-V/e:HEV and the best modern car in the wave. Glass fully transparent with modelled cabin, black multi-spokes consistent, LED headlamp internals and grille slats sharp, shut lines crisp. Stamp decides colours."
@@ -653,8 +924,15 @@
   "year": 2010,
   "faces": 1176248,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "2nd-gen Insight liftback. Glass transparent with visible cabin, five-spoke rims consistent front34/front34_L/side/rear34, headlamp internals modelled, bonnet and door shut lines defined. Stamp decides colours."
@@ -668,8 +946,11 @@
   "year": null,
   "faces": 73192,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "inferred",
+  "glazing_materials": [],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "Honda Integra Type R DC5 (73,192 f). Checked at 5x: glazing is genuinely transparent (the far-side window resolves through the cabin), tyres black on black alloys, door shut line and handle modelled, factory Type R wing. Note the sheet's yaw is 90 degrees out - the \"side\" tile renders a rear view - which is a rig framing quirk, not a fault in the car."
@@ -683,8 +964,14 @@
   "year": 1995,
   "faces": 1102118,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "DC2 Type-R: OEM performance variant, in scope. Black five-spokes with red centre caps identical across all four views, headlight internals sharp, TYPE R decals and shut lines clean, glazing transparent. Stamp decides colours."
@@ -698,8 +985,14 @@
   "year": 1995,
   "faces": 74834,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "integraVehicle_Exterior_mm_windows1 alpha=0.25 BLEND",
+   "glass_surr alpha=1.0 OPAQUE"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "1995 Integra Type R DC2 (74,834 f). Checked at 5x after suspecting body translucency in the thumbnail - it is specular highlight, not alpha. Tail lamps have proper red/amber lenses, white 5-spoke Type R wheels with plainly black tyres, boot and door shut lines defined, glazing transparent (glTF probe: clear, proven)."
@@ -713,8 +1006,11 @@
   "year": 1998,
   "faces": 144245,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "inferred",
+  "glazing_materials": [],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "1998 Integra Type R DC2 (144,245 f). Sharper than the other DC2 in this pool: black tyres on dark alloys with red centre caps, headlamp internals modelled, Type R decals, transparent glazing, shut lines defined. Same nameplate as #12 from a different uploader - flag the pair for the eye, do not auto-group."
@@ -728,8 +1024,14 @@
   "year": null,
   "faces": 340240,
   "licence": "Free Standard",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "glass.002 alpha=0.25 BLEND",
+   "glass.001 alpha=0.1 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "Honda NSX NC1 (340,240 f). Tyre material vehicle_generic_tyrewallblack at baseColor 0.0 - black rubber, confirmed from the glTF, and it is the same-batch control that settled #77. Black alloys with red calipers, transparent glazing, sharp lamps and diffuser."
@@ -743,8 +1045,11 @@
   "year": 1990,
   "faces": 101006,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "inferred",
+  "glazing_materials": [],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "Honda NSX NA1 1990 (101,006 f). Correct first-generation proportions with pop-up headlamps down. Black tyres on dark mesh alloys, complete rim faces, transparent glazing, defined shut lines."
@@ -758,8 +1063,14 @@
   "year": 1992,
   "faces": 655938,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "NA1 NSX Type-R with pop-up lamps raised - the raised-lamp pose is a genuine point of difference from the other NSXs here. Transparent glazing, seven-spoke rims consistent, shut lines defined, paint premium. Stamp decides colours."
@@ -773,8 +1084,13 @@
   "year": 1992,
   "faces": 349468,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "untitledMI_Glass1 alpha=0.25 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "NA1 NSX-R, pop-ups down, white five-spokes with red Honda caps. Glazing transparent with red cabin visible, wheels consistent across views, shut lines defined, paint premium. Same car as abeaa957 at higher poly - ship one."
@@ -788,8 +1104,14 @@
   "year": 1992,
   "faces": 234947,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "Window_0 alpha=0.25 BLEND",
+   "Window_1 alpha=0.25 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "NA1 NSX-R, pop-ups down. Glazing transparent with red cabin visible, white five-spokes consistent, rear light bar and shut lines crisp. Visually the same car as a21edb35 (a different, higher-poly mesh) - ship one of the two."
@@ -803,8 +1125,13 @@
   "year": 2017,
   "faces": 190901,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "NSXWindow_Material1 alpha=0.25 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "2017 NSX NC1 (190,901 f). Front 3/4 is strong, panel surfacing crisp. Black tyres on dark alloys with red calipers, rim faces complete, glazing transparent, sharp lamp internals and honeycomb intakes."
@@ -818,8 +1145,13 @@
   "year": 2019,
   "faces": 194077,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "NSXWindow_Material1 alpha=0.25 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "2019 NSX NC1 (194,077 f). As #28 but with orange calipers. Black tyres, complete rim faces, transparent glazing, sharp lamps. Near-duplicate of #28 and #74 by nameplate - flag the trio for the eye."
@@ -833,8 +1165,14 @@
   "year": null,
   "faces": 1041680,
   "licence": "CC Attribution",
+  "uk_market": "no",
+  "uk_note": "US-spec minivan; never sold in the UK",
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "US-market Odyssey minivan, clean throughout: transparent glazing, five-spoke alloys consistent, sharp headlamp internals, roof rails and shut lines defined. Stamp decides colours."
@@ -848,8 +1186,14 @@
   "year": 1994,
   "faces": 688374,
   "licence": "CC Attribution",
+  "uk_market": "uncertain",
+  "uk_note": "the RA1 Odyssey was sold in Europe badged Shuttle, so it may be reachable under that name",
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "RA1 first-generation Odyssey with conventional hinged doors. Glazing transparent, alloys consistent, headlamp internals modelled, shut lines defined. Stamp decides colours."
@@ -863,8 +1207,14 @@
   "year": 1999,
   "faces": 1050334,
   "licence": "CC Attribution",
+  "uk_market": "no",
+  "uk_note": "Japan-market Odyssey; the UK never sold an Odyssey",
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "JDM RA6 Odyssey. Cabin visible through all glazing, six-spoke alloys consistent, headlamp internals and grille bars modelled, sliding-door and tailgate shut lines defined. Strongest of the Odyssey group. Stamp decides colours."
@@ -878,8 +1228,15 @@
   "year": 1999,
   "faces": 893334,
   "licence": "CC Attribution",
+  "uk_market": "no",
+  "uk_note": "US-market minivan; never sold in the UK",
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "US RL1 Odyssey, sharpest of the three RL1-era vans here: modelled headlamp internals, consistent six-spoke alloys, transparent glazing, crisp sliding-door and tailgate lines. Stamp decides colours."
@@ -893,8 +1250,15 @@
   "year": 2001,
   "faces": 646253,
   "licence": "CC Attribution",
+  "uk_market": "no",
+  "uk_note": "US-market minivan; never sold in the UK",
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.285 BLEND",
+   "darkglass alpha=0.285 BLEND",
+   "clearglass alpha=0.053 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "RL1-era US Odyssey. Geometry sound, glazing transparent, five-spoke alloys consistent. Headlamp internals are noticeably flatter and the grille simpler than d5d98cef, which is the same generation and better - rank this one below it."
@@ -908,8 +1272,14 @@
   "year": 2011,
   "faces": 918120,
   "licence": "CC Attribution",
+  "uk_market": "no",
+  "uk_note": "US-market minivan; never sold in the UK",
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "US RL5 Odyssey with the lightning-bolt beltline. Glazing transparent, five-spoke alloys consistent, headlamp internals modelled, sliding-door lines defined. Stamp decides colours."
@@ -923,8 +1293,14 @@
   "year": 1978,
   "faces": 1005280,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "Mk1 Prelude with JDM fender mirrors. Glazing transparent, period alloys consistent, rectangular lamps and rear panel modelled, shut lines defined. Stamp decides colours."
@@ -938,8 +1314,15 @@
   "year": 1983,
   "faces": 1059660,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "Mk2 Prelude, unmistakable wedge. Glass transparent with modelled dash, period alloys consistent across views, rear PRELUDE panel and side shut lines defined. Stamp decides colours."
@@ -953,8 +1336,15 @@
   "year": 1997,
   "faces": 837185,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND",
+   "darkglass alpha=0.5 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "BB5 Prelude, proportions instantly right. Glass clear with cabin visible, five-spoke alloys consistent, headlamp internals and VTEC bootlid script modelled, shut lines defined. Stamp decides colours."
@@ -968,8 +1358,14 @@
   "year": null,
   "faces": 68629,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "LOD_A_INT_GLASS_FRONT_mm_windowsMat alpha=1.0 OPAQUE",
+   "Glass alpha=0.48 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "Honda S2000 Ultimate Edition AP2 with hardtop (68,629 f). Black tyres on grey 5-spoke alloys, rim faces complete, transparent glazing with visible cabin, tail lamps with proper lenses, shut lines defined. Surfacing is softer than the other S2000 in this pool but within the bar."
@@ -983,8 +1379,14 @@
   "year": 1999,
   "faces": 253658,
   "licence": "CC Attribution",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "WindshieldFrame alpha=1 MASK",
+   "GlassTemp alpha=0.261 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "AP1 S2000, hood up, red cabin modelled and visible through the glass. Chrome five-spokes consistent, headlamp internals sharp, shut lines crisp, paint premium. Stamp decides colours."
@@ -998,38 +1400,35 @@
   "year": 2001,
   "faces": 217372,
   "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "uk_market": "yes",
+  "uk_note": null,
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "hHonda_S2000TNR0_2001Window_Material1 alpha=0.25 BLEND",
+   "glass_surr alpha=1.0 OPAQUE"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-11 (glTF probe + eye)",
   "reason": "2001 S2000 with hardtop (217,372 f). Black tyres on silver 5-spoke alloys, rim faces complete, transparent glazing, headlamp internals modelled, bonnet and door shut lines defined."
  },
  {
-  "uid": "d5af69ef34834f43a65b4aac78ca8929",
-  "title": "Honda CR-Z 2011",
-  "model": null,
-  "trim": null,
-  "generation": null,
-  "year": 2011,
-  "faces": 970786,
-  "licence": "CC Attribution",
-  "glass_probe": "clear",
-  "glass_certainty": "proven",
-  "needs_glazing_confirmation": false,
-  "audited": "2026-08-09 (pre-glazing/tyre rulings)",
-  "reason": "CR-Z reads instantly. Transparent glazing including the split rear window, five twin-spoke rims consistent, headlamp internals sharp, bonnet and door lines defined. Stamp decides colours."
- },
- {
   "uid": "4e3e9bd888fb4ec69f71cc487f33f4ba",
   "title": "Honda S660 2015",
-  "model": null,
+  "model": "S660",
   "trim": null,
   "generation": null,
   "year": 2015,
   "faces": 928348,
   "licence": "CC Attribution",
+  "uk_market": "no",
+  "uk_note": "Japan-only kei roadster (grey import only)",
   "glass_probe": "clear",
   "glass_certainty": "proven",
+  "glazing_materials": [
+   "windowglass alpha=0.3 BLEND",
+   "clearglass alpha=0.2 BLEND"
+  ],
   "needs_glazing_confirmation": false,
   "audited": "2026-08-09 (pre-glazing/tyre rulings)",
   "reason": "S660 targa with roof panel fitted. Glazing transparent, five-spoke rims consistent, headlamp internals and rear vents modelled, shut lines defined. Stamp decides colours."

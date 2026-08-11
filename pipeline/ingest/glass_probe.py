@@ -250,7 +250,18 @@ def probe(uid, stage="staging/jeep", url=None):
                         # MIRROR and must not be allowed to outvote real glazing.
                         r"mirror|rearview|rear.?view|wing.?mirror", re.I)
 
-    glazing = [x for x in glazing if not TRIMMY.search(x["name"])] or glazing
+    # NOTE THE ABSENCE OF AN `or glazing` FALLBACK. It used to read
+    #     glazing = [x for x in glazing if not TRIMMY.search(...)] or glazing
+    # which restored the trim list whenever EVERY glazing-named material was
+    # trim -- exactly the case the guard exists for. Measured 2026-08-11 on the
+    # live catalogue: honda-civic-v1's only glazing-named material is
+    # "M_2023_Honda_Civic_Type_R_Touchscreen", TRIMMY matched it, the fallback
+    # put it straight back, and the car scored "opaque" (an outright FAIL) off
+    # a centre-console display. If every glazing-named material is trim then the
+    # file names no glazing at all, so clear the list and fall through to the
+    # transparent-material branch -- the same thing the LAMPY guard below does,
+    # and the same fail-open direction.
+    glazing = [x for x in glazing if not TRIMMY.search(x["name"])]
     windows = [x for x in glazing if WINDOWY.search(x["name"])]
     non_lampy = [x for x in glazing if not LAMPY.search(x["name"])]
     windows = windows + [x for x in non_lampy if x not in windows]

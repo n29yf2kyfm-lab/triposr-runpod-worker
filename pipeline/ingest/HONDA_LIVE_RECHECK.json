@@ -1,0 +1,1539 @@
+{
+ "generated": "2026-08-11",
+ "what": "Retro re-check of every APPROVED live Honda against the glazing / flat-shell / global-alpha rules, none of which existed when Honda was published. Every row comes from pipeline/ingest/glass_probe.py probe(url=desktopGlbUrl) - the same code path the wave uses, deliberately not reimplemented, so the retro check cannot drift from the wave check.",
+ "probe_validation": "358/384 against the six committed ground-truth sets after three bugs found and fixed during this audit (PORSCHE 106/107, JEEP 41/45, JAGUAR 44/48, MAZDA 75/78, VOLVO 58/64, CHRYSLER 34/42). ZERO ground-truth-clear cars now score opaque, which is the only dangerous direction under the owner ruling.",
+ "rules": "opaque+proven = FAIL under the owner ruling. 'ambiguous' and opaque+inferred must NEVER be failed on the probe alone; they route to a magenta-backlight render of the shipped GLB. NOTHING has been quarantined here - these are candidates with evidence, for the owner to confirm by render. That sequencing exists because 39 live cars were quarantined on sheet evidence on 2026-08-10 and all 39 had to be restored.",
+ "counts": {
+  "FLAGGED - opaque glazing proven": 2,
+  "NEEDS EYE - probe cannot settle": 4,
+  "clear": 54
+ },
+ "total_approved_honda": 60,
+ "rows": [
+  {
+   "assetId": "honda-city-2008-hw1-v1",
+   "model": "city",
+   "sourceTitle": null,
+   "sourceReferenceId": "65e2974c74254021b027b223190418e8",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-city-2008-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "opaque",
+   "glass_certainty": "proven",
+   "n_materials": 41,
+   "n_transparent": 0,
+   "glazing_named": [
+    "Carro_Vidros alpha=1 OPAQUE"
+   ],
+   "transparent": [],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "FLAGGED - opaque glazing proven"
+  },
+  {
+   "assetId": "honda-jazz-2020-hw1-v1",
+   "model": "jazz",
+   "sourceTitle": null,
+   "sourceReferenceId": "974385e940e84fd6bf47ca04c2e69313",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2020-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "opaque",
+   "glass_certainty": "proven",
+   "n_materials": 35,
+   "n_transparent": 0,
+   "glazing_named": [
+    "Glass_1 alpha=1.0 OPAQUE",
+    "Glas_2 alpha=1.0 OPAQUE",
+    "D_glass alpha=1.0 OPAQUE",
+    "glass_D_M alpha=1.0 OPAQUE"
+   ],
+   "transparent": [],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "FLAGGED - opaque glazing proven"
+  },
+  {
+   "assetId": "honda-civic-1993-hw1-v1",
+   "model": "civic",
+   "sourceTitle": null,
+   "sourceReferenceId": "18e956bcf53b4f1191a9fb6b5b70efe2",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1993-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "opaque",
+   "glass_certainty": "inferred",
+   "n_materials": 5,
+   "n_transparent": 0,
+   "glazing_named": [],
+   "transparent": [],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "NEEDS EYE - probe cannot settle"
+  },
+  {
+   "assetId": "honda-civic-2025-hw1-v1",
+   "model": "civic",
+   "sourceTitle": null,
+   "sourceReferenceId": "0dc6454d74a241e5a08fac82ce2826b2",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2025-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "ambiguous",
+   "glass_certainty": "proven",
+   "n_materials": 21,
+   "n_transparent": 1,
+   "glazing_named": [
+    "window alpha=1 OPAQUE"
+   ],
+   "transparent": [
+    "trans alpha=0.5 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "NEEDS EYE - probe cannot settle"
+  },
+  {
+   "assetId": "honda-civic-hw1-v1",
+   "model": "civic",
+   "sourceTitle": null,
+   "sourceReferenceId": "770a5c9b025449f59769d8cd27d915bb",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "ambiguous",
+   "glass_certainty": "proven",
+   "n_materials": 15,
+   "n_transparent": 1,
+   "glazing_named": [
+    "glass alpha=1.0 OPAQUE"
+   ],
+   "transparent": [
+    "Material.002 alpha=0.25 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "NEEDS EYE - probe cannot settle"
+  },
+  {
+   "assetId": "honda-civic-v1",
+   "model": "civic",
+   "sourceTitle": "2023 Honda Civic Type R",
+   "sourceReferenceId": "fe669d5461cd400a83c1393a9e1eef59",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/civic.glb",
+   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/civic/racing-blue-pearl.jpg",
+   "turntableUrl": null,
+   "glass_verdict": "ambiguous",
+   "glass_certainty": "inferred",
+   "n_materials": 20,
+   "n_transparent": 1,
+   "glazing_named": [],
+   "transparent": [
+    "PaletteMaterial001 alpha=1 BLEND via=texture-alpha"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "NEEDS EYE - probe cannot settle"
+  },
+  {
+   "assetId": "honda-accord-1998-hw1-v1",
+   "model": "accord",
+   "sourceTitle": null,
+   "sourceReferenceId": "d4f83dedc8f54c27b5c9103a662d1062",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-1998-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 18,
+   "n_transparent": 5,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND",
+    "darkglass alpha=0.5 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "darkglass alpha=0.5 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-accord-2003-hw1-v1",
+   "model": "accord",
+   "sourceTitle": null,
+   "sourceReferenceId": "baa08e5aea7a4f638d98db2050c21112",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2003-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 16,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-accord-2009-hw1-v1",
+   "model": "accord",
+   "sourceTitle": null,
+   "sourceReferenceId": "3f5ef3ff34c04f839c05709c6fa5ce1c",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2009-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 17,
+   "n_transparent": 4,
+   "glazing_named": [
+    "clearglass alpha=0.2 BLEND",
+    "greenglass alpha=0.3 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "greenglass alpha=0.3 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-accord-2011-hw1-v1",
+   "model": "accord",
+   "sourceTitle": null,
+   "sourceReferenceId": "6eccbee181b143b28764a82b15f0a62d",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2011-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 16,
+   "n_transparent": 4,
+   "glazing_named": [
+    "clearglass alpha=0.2 BLEND",
+    "greenglass alpha=0.3 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "greenglass alpha=0.3 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-accord-2017-w5-v1",
+   "model": "Honda Accord",
+   "sourceTitle": "honda accord 2017",
+   "sourceReferenceId": "68892cd369e84a218e5e5dcf82365ee3",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2017-w5-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 23,
+   "n_transparent": 3,
+   "glazing_named": [
+    "bastion_glass.001 alpha=1 OPAQUE",
+    "etk800_glass alpha=0.352 BLEND",
+    "glasss.001 alpha=1 OPAQUE",
+    "glasss alpha=0.25 BLEND"
+   ],
+   "transparent": [
+    "etk800_glass alpha=0.352 BLEND via=factor",
+    "AccordFIR_red_glass_acc alpha=0.334 BLEND via=factor",
+    "glasss alpha=0.25 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-accord-2021-hw1-v1",
+   "model": "accord",
+   "sourceTitle": null,
+   "sourceReferenceId": "f973338c77ce4618b941612241d53f6a",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2021-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 34,
+   "n_transparent": 2,
+   "glazing_named": [
+    "int_glass alpha=1.0 OPAQUE",
+    "glass alpha=0.25 BLEND"
+   ],
+   "transparent": [
+    "red_glass alpha=0.25 BLEND via=factor",
+    "glass alpha=0.25 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-accord-2021-v1",
+   "model": "accord",
+   "sourceTitle": "2021 Honda Accord",
+   "sourceReferenceId": "e742636e46814de5af1568542e7c9bdb",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-2021-v1.glb",
+   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-accord-2021-v1/premium-crystal-red.jpg",
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "inferred",
+   "n_materials": 32,
+   "n_transparent": 3,
+   "glazing_named": [],
+   "transparent": [
+    "costuras alpha=1 BLEND via=texture-alpha",
+    "PaletteMaterial004 alpha=1 BLEND via=factor",
+    "indi alpha=1 BLEND via=texture-alpha"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-accord-hw1-v1",
+   "model": "accord",
+   "sourceTitle": null,
+   "sourceReferenceId": "39bf36a5b88b4767973ce417cfdcf301",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-accord-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 17,
+   "n_transparent": 4,
+   "glazing_named": [
+    "clearglass alpha=0.2 BLEND",
+    "greenglass alpha=0.3 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "greenglass alpha=0.3 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-beat-1991-hw1-v1",
+   "model": "beat",
+   "sourceTitle": null,
+   "sourceReferenceId": "1c1d92ac8ae24ee5ba0e89a10c4fa595",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-beat-1991-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 17,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-civic-1976-hw1-v1",
+   "model": "civic",
+   "sourceTitle": null,
+   "sourceReferenceId": "ade1ab7ab2df4618a802431f3237f250",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1976-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 17,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-civic-1987-hw1-v1",
+   "model": "civic",
+   "sourceTitle": null,
+   "sourceReferenceId": "5328bd7313e346789568266d67081ba3",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1987-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 17,
+   "n_transparent": 5,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND",
+    "darkglass alpha=0.5 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "darkglass alpha=0.5 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-civic-1991-hw1-v1",
+   "model": "civic",
+   "sourceTitle": null,
+   "sourceReferenceId": "1bb32fd8460e47af82518e43f172f916",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1991-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 16,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-civic-1996-hw1-v1",
+   "model": "civic",
+   "sourceTitle": null,
+   "sourceReferenceId": "1860f7cc43544306a4148ba5953cfac4",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1996-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 15,
+   "n_transparent": 3,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-civic-1999-hw1-v1",
+   "model": "civic",
+   "sourceTitle": null,
+   "sourceReferenceId": "ce29e75eb129406f874e0423ab8869c3",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-1999-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 21,
+   "n_transparent": 4,
+   "glazing_named": [
+    "Window alpha=0.25 BLEND",
+    "glass_surr alpha=1.0 OPAQUE",
+    "Glass_I alpha=0.389 BLEND"
+   ],
+   "transparent": [
+    "glass_light alpha=1 BLEND via=texture-alpha",
+    "Window alpha=0.25 BLEND via=factor",
+    "Interior_Trans alpha=1 BLEND via=texture-alpha",
+    "Glass_I alpha=0.389 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-civic-2007-w5-v1",
+   "model": "Honda Civic",
+   "sourceTitle": "Honda Civic 2007",
+   "sourceReferenceId": "1325afb508f14c4bbb40e9f849b0d4a2",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2007-w5-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 18,
+   "n_transparent": 5,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND",
+    "darkglass alpha=0.5 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "darkglass alpha=0.5 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-civic-2015-w12-v1",
+   "model": "Civic",
+   "sourceTitle": "2015 Honda Civic Type R",
+   "sourceReferenceId": "423afaa1c6664859832d4a5458d90b52",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2015-w12-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 27,
+   "n_transparent": 5,
+   "glazing_named": [
+    "hM_Glass_WindowFront_Low1 alpha=0.25 BLEND",
+    "hM_Glass_WindowSurroundFront_Low1 alpha=1.0 OPAQUE"
+   ],
+   "transparent": [
+    "hM_Glass_WindowFront_Low1 alpha=0.25 BLEND via=factor",
+    "hM_Badge_Max1 alpha=1 BLEND via=texture-alpha",
+    "hM_LightGlass_Red_Low1 alpha=0.25 BLEND via=factor",
+    "hM_RimBadge_Max1 alpha=1 BLEND via=texture-alpha"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-civic-2016-w5-v1",
+   "model": "Honda Civic",
+   "sourceTitle": "Honda Civic 2016",
+   "sourceReferenceId": "ff844e296f214e709c0d0691d031c68b",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2016-w5-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "inferred",
+   "n_materials": 19,
+   "n_transparent": 3,
+   "glazing_named": [],
+   "transparent": [
+    "kaca_lampu_depan alpha=0.171 BLEND via=factor",
+    "kaca_kuning alpha=0.561 BLEND via=factor",
+    "Lampu_belakang alpha=0.473 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-civic-2023-hw1-v1",
+   "model": "civic",
+   "sourceTitle": null,
+   "sourceReferenceId": "0669147fb3ba4cca95ea942add743b2b",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2023-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 23,
+   "n_transparent": 4,
+   "glazing_named": [
+    "Window alpha=0.25 BLEND"
+   ],
+   "transparent": [
+    "Honda_CivicTypeR_2023GrilleAlpha8_Geo_lodA alpha=1 MASK via=texture-alpha",
+    "Honda_CivicTypeR_2023GrilleAlpha1_Geo_lodA alpha=1 MASK via=texture-alpha",
+    "Window alpha=0.25 BLEND via=factor",
+    "Honda_CivicTypeR_2023Badge_Geo_lodA2 alpha=1 MASK via=texture-alpha"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-civic-2023-w12-v1",
+   "model": "Civic",
+   "sourceTitle": "2023 Honda Civic Type R",
+   "sourceReferenceId": "8c9484184a2b4254aafd67418b8c18db",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-2023-w12-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 27,
+   "n_transparent": 3,
+   "glazing_named": [
+    "Honda_CivicTypeRRewardRecycled_2023Window_Material alpha=0.25 BLEND"
+   ],
+   "transparent": [
+    "Honda_CivicTypeRRewardRecycled_2023LicensePlateDefaultA_Material alpha=0.0 BLEND via=factor",
+    "Honda_CivicTypeRRewardRecycled_2023Window_Material alpha=0.25 BLEND via=factor",
+    "RED_GLASS alpha=0.25 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-civic-hw1-v2",
+   "model": "civic",
+   "sourceTitle": null,
+   "sourceReferenceId": "4f8ff01b643d4795a6a515478a6fd9d6",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-civic-hw1-v2.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 60,
+   "n_transparent": 8,
+   "glazing_named": [
+    "Translucent_Glass_Gray alpha=0.41 BLEND",
+    "glass1 alpha=0.7 BLEND",
+    "glass_black1 alpha=1.0 OPAQUE",
+    "glass_stripes1 alpha=0.51 BLEND"
+   ],
+   "transparent": [
+    "material_4 alpha=0.96 BLEND via=factor",
+    "0099_LightSteelBlue alpha=0.96 BLEND via=factor",
+    "Translucent_Glass_Gray alpha=0.41 BLEND via=factor",
+    "glass1 alpha=0.7 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-concerto-1988-hw1-v1",
+   "model": "concerto",
+   "sourceTitle": null,
+   "sourceReferenceId": "0aebfa48b6f140f694a3cbd62bbd5336",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-concerto-1988-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 16,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-cr-v-2001-hw1-v1",
+   "model": "cr-v",
+   "sourceTitle": null,
+   "sourceReferenceId": "3565e8277a484f14b45c6888ca61a2b2",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-v-2001-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 26,
+   "n_transparent": 9,
+   "glazing_named": [
+    "Vitre alpha=0.31 BLEND",
+    "Vitre_noir alpha=1.0 OPAQUE",
+    "Phare_vitre alpha=0.36 BLEND"
+   ],
+   "transparent": [
+    "Vitre alpha=0.31 BLEND via=factor",
+    "Reflect_red alpha=0.95 BLEND via=factor",
+    "Reflect_orange alpha=0.95 BLEND via=factor",
+    "Feux_stop alpha=0.89 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-cr-v-v1",
+   "model": "cr-v",
+   "sourceTitle": "Honda CR-V",
+   "sourceReferenceId": "4d0751311d76473b81377f5bd2da273b",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-v-v1.glb",
+   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-cr-v-v1/premium-crystal-red.jpg",
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 13,
+   "n_transparent": 1,
+   "glazing_named": [
+    "glass alpha=0.25 BLEND"
+   ],
+   "transparent": [
+    "glass alpha=0.25 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-cr-x-1988-hw1-v1",
+   "model": "cr-x",
+   "sourceTitle": null,
+   "sourceReferenceId": "a856d729d9ec47fc8cb3b740199ed6bf",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-x-1988-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 17,
+   "n_transparent": 5,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND",
+    "darkglass alpha=0.5 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "darkglass alpha=0.5 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-cr-x-1995-hw1-v1",
+   "model": "cr-x",
+   "sourceTitle": null,
+   "sourceReferenceId": "f00136dfd77348b1a053d98fadd43602",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-x-1995-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 14,
+   "n_transparent": 3,
+   "glazing_named": [
+    "steklo1 alpha=0.919 BLEND"
+   ],
+   "transparent": [
+    "steklo1 alpha=0.919 BLEND via=factor",
+    "nodamage_lod0_a alpha=1 BLEND via=texture-alpha",
+    "interior_lod0_a alpha=1 BLEND via=texture-alpha"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-cr-z-2011-hw1-v1",
+   "model": "cr-z",
+   "sourceTitle": null,
+   "sourceReferenceId": "d5af69ef34834f43a65b4aac78ca8929",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-cr-z-2011-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 18,
+   "n_transparent": 5,
+   "glazing_named": [
+    "clearglass alpha=0.2 BLEND",
+    "darkglass alpha=0.5 BLEND",
+    "greenglass alpha=0.3 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "darkglass alpha=0.5 BLEND via=factor",
+    "greenglass alpha=0.3 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-crosstour-hw1-v1",
+   "model": "crosstour",
+   "sourceTitle": null,
+   "sourceReferenceId": "8d0d4ce034ef435db9167b18161ef57f",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-crosstour-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 13,
+   "n_transparent": 5,
+   "glazing_named": [
+    "greenglass.015 alpha=0.1 BLEND",
+    "darkglass.035 alpha=0.5 BLEND",
+    "clearglass.197 alpha=0.1 BLEND"
+   ],
+   "transparent": [
+    "redglass.196 alpha=0.2 BLEND via=factor",
+    "orangeglass.173 alpha=0.1 BLEND via=factor",
+    "greenglass.015 alpha=0.1 BLEND via=factor",
+    "darkglass.035 alpha=0.5 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-hr-v-2001-hw1-v1",
+   "model": "hr-v",
+   "sourceTitle": null,
+   "sourceReferenceId": "b3c0f77626644e99b54304aebbafc60b",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-hr-v-2001-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 17,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-hr-v-2025-hw1-v1",
+   "model": "hr-v",
+   "sourceTitle": null,
+   "sourceReferenceId": "d2c35fc6af904aa8a3a138ca21275b2a",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-hr-v-2025-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 32,
+   "n_transparent": 3,
+   "glazing_named": [
+    "2022_Honda_HR-V_eHEV_Windows alpha=0.663 BLEND",
+    "2022_Honda_HR-V_eHEV_WindowsTrims1 alpha=1.0 OPAQUE"
+   ],
+   "transparent": [
+    "2022_Honda_HR-V_eHEV_Windows alpha=0.663 BLEND via=factor",
+    "2022_Honda_HR-V_eHEV_HeadLightsGlass alpha=0.58 BLEND via=factor",
+    "2022_Honda_HR-V_eHEV_BrakeLightsGlass alpha=0.573 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-hr-v-v1",
+   "model": "hr-v",
+   "sourceTitle": "Honda Vezel e:HEV RS (HR-V)",
+   "sourceReferenceId": "bf835b5a5e6f4b79a134db5156992cf0",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-hr-v-v1.glb",
+   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-hr-v-v1/racing-blue-pearl.jpg",
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 29,
+   "n_transparent": 5,
+   "glazing_named": [
+    "windows_glass alpha=0.718 BLEND",
+    "clearglass alpha=0.236 BLEND",
+    "widowsglass_int alpha=0 MASK"
+   ],
+   "transparent": [
+    "redglass alpha=0.907 BLEND via=factor",
+    "clearglass alpha=0.236 BLEND via=factor",
+    "widowsglass_int alpha=0 MASK via=factor",
+    "windows_glass alpha=0.718 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-insight-2010-hw1-v1",
+   "model": "insight",
+   "sourceTitle": null,
+   "sourceReferenceId": "01bd4f2a73f949d8840afb711429b3c1",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-2010-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 18,
+   "n_transparent": 5,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND",
+    "darkglass alpha=0.5 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "darkglass alpha=0.5 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-insight-v1",
+   "model": "insight",
+   "sourceTitle": "Honda Insight 2010",
+   "sourceReferenceId": null,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-insight-v1.glb",
+   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-insight-v1/hero.jpg",
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 20,
+   "n_transparent": 5,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "darkglass alpha=0.5 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "darkglass alpha=0.5 BLEND via=factor",
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-integra-1995-hw1-v1",
+   "model": "integra",
+   "sourceTitle": null,
+   "sourceReferenceId": "cad9679ec5d6403984b1421ccd3f3d25",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-integra-1995-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 17,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-jazz-2016-hw1-v1",
+   "model": "jazz",
+   "sourceTitle": null,
+   "sourceReferenceId": "1acb615324254e53a04860e786ade136",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2016-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 41,
+   "n_transparent": 5,
+   "glazing_named": [
+    "Fit_Glass_surr alpha=1.0 OPAQUE",
+    "FIT_Glass alpha=0.25 BLEND",
+    "Translucent_Glass_Gray alpha=1.0 OPAQUE"
+   ],
+   "transparent": [
+    "Matte__81353 alpha=0.443 BLEND via=factor",
+    "plt2 alpha=0.25 BLEND via=factor",
+    "plt4 alpha=0.25 BLEND via=factor",
+    "FIT_Glass alpha=0.25 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-jazz-2016-w9-v1",
+   "model": "Jazz",
+   "sourceTitle": "2016 Honda Fit DBA-GK3",
+   "sourceReferenceId": "17cc85164ad143e5bb0f3cd0a88079d2",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2016-w9-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 41,
+   "n_transparent": 5,
+   "glazing_named": [
+    "Fit_Glass_surr alpha=1.0 OPAQUE",
+    "FIT_Glass alpha=0.25 BLEND",
+    "Translucent_Glass_Gray alpha=1.0 OPAQUE"
+   ],
+   "transparent": [
+    "Matte__81353 alpha=0.443 BLEND via=factor",
+    "plt2 alpha=0.25 BLEND via=factor",
+    "plt4 alpha=0.25 BLEND via=factor",
+    "FIT_Glass alpha=0.25 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-jazz-2018-v1",
+   "model": "jazz",
+   "sourceTitle": "2018 Honda Fit / Jazz",
+   "sourceReferenceId": "2b1f535f185e4a6abf6b0a3222487704",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2018-v1.glb",
+   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-jazz-2018-v1/premium-crystal-red.jpg",
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 29,
+   "n_transparent": 3,
+   "glazing_named": [
+    "glass.004 alpha=0.1 BLEND",
+    "r_glass alpha=1 OPAQUE",
+    "Glass_fine alpha=0.25 BLEND"
+   ],
+   "transparent": [
+    "glass.004 alpha=0.1 BLEND via=factor",
+    "signals alpha=0.8 BLEND via=factor",
+    "Glass_fine alpha=0.25 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-jazz-2020-w9-v1",
+   "model": "Jazz",
+   "sourceTitle": "2020 Honda Fit Hybrid 6AA-GR3",
+   "sourceReferenceId": "6af77df7e9fa40a3804ef2811d6a65e9",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-jazz-2020-w9-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 35,
+   "n_transparent": 4,
+   "glazing_named": [
+    "Glass_1 alpha=0.25 BLEND",
+    "Glas_2 alpha=0.25 BLEND",
+    "D_glass alpha=0.754 BLEND",
+    "glass_D_M alpha=1.0 OPAQUE"
+   ],
+   "transparent": [
+    "red_glass alpha=0.25 BLEND via=factor",
+    "Glass_1 alpha=0.25 BLEND via=factor",
+    "Glas_2 alpha=0.25 BLEND via=factor",
+    "D_glass alpha=0.754 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-nsx-1992-hw1-v1",
+   "model": "nsx",
+   "sourceTitle": null,
+   "sourceReferenceId": "8788e6274878465a9e03a063844eba7c",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-nsx-1992-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 17,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-nsx-1992-hw1-v2",
+   "model": "nsx",
+   "sourceTitle": null,
+   "sourceReferenceId": "a21edb35a7714774a10b74642e815ca2",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-nsx-1992-hw1-v2.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 21,
+   "n_transparent": 5,
+   "glazing_named": [
+    "untitledMI_Glass1 alpha=0.25 BLEND"
+   ],
+   "transparent": [
+    "untitledMI_Cabin_A1 alpha=1 BLEND via=texture-alpha",
+    "untitledMI_Glass1 alpha=0.25 BLEND via=factor",
+    "untitledMI_Grid_B1 alpha=1 BLEND via=texture-alpha",
+    "glass_light alpha=0.638 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-nsx-1992-hw1-v3",
+   "model": "nsx",
+   "sourceTitle": null,
+   "sourceReferenceId": "abeaa957199c473ea3d293f7e669bf34",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-nsx-1992-hw1-v3.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 24,
+   "n_transparent": 3,
+   "glazing_named": [
+    "Window_0 alpha=0.25 BLEND",
+    "Window_1 alpha=0.25 BLEND"
+   ],
+   "transparent": [
+    "Honda_NSX_1992Badge_Geo_lodA alpha=1 MASK via=texture-alpha",
+    "Window_0 alpha=0.25 BLEND via=factor",
+    "Window_1 alpha=0.25 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-nsx-v1",
+   "model": "nsx",
+   "sourceTitle": "2017 Honda NSX",
+   "sourceReferenceId": null,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-nsx-v1.glb",
+   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-nsx-v1/hero.jpg",
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 22,
+   "n_transparent": 4,
+   "glazing_named": [
+    "NSXWindow_Material1 alpha=0.25 BLEND"
+   ],
+   "transparent": [
+    "NSXBadge_Material1 alpha=1 BLEND via=texture-alpha",
+    "NSXWindow_Material1 alpha=0.25 BLEND via=factor",
+    "phong1 alpha=0.25 BLEND via=factor",
+    "NSXLightEmissive_Material1 alpha=0.053 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-odyssey-1994-hw1-v1",
+   "model": "odyssey",
+   "sourceTitle": null,
+   "sourceReferenceId": "7ea59d42e17a4d1f9a98b840740a3aa6",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-1994-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 16,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-odyssey-1999-hw1-v1",
+   "model": "odyssey",
+   "sourceTitle": null,
+   "sourceReferenceId": "f749ed1e876d415b82efa5293836d92a",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-1999-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 16,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-odyssey-1999-hw1-v2",
+   "model": "odyssey",
+   "sourceTitle": null,
+   "sourceReferenceId": "d5d98cef2a4240b6be91e03a1afcb0e1",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-1999-hw1-v2.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 18,
+   "n_transparent": 5,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND",
+    "darkglass alpha=0.5 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "darkglass alpha=0.5 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-odyssey-2001-hw1-v1",
+   "model": "odyssey",
+   "sourceTitle": null,
+   "sourceReferenceId": "24abc0e850f64705906c910e91a6ac4a",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-2001-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 13,
+   "n_transparent": 5,
+   "glazing_named": [
+    "windowglass alpha=0.285 BLEND",
+    "darkglass alpha=0.285 BLEND",
+    "clearglass alpha=0.053 BLEND"
+   ],
+   "transparent": [
+    "darkglass alpha=0.285 BLEND via=factor",
+    "windowglass alpha=0.285 BLEND via=factor",
+    "redglass alpha=0.053 BLEND via=factor",
+    "clearglass alpha=0.053 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-odyssey-2008-hw1-v1",
+   "model": "odyssey",
+   "sourceTitle": null,
+   "sourceReferenceId": "db666ce23d7b42fdbcd93a73217ba363",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-2008-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 16,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-odyssey-2011-hw1-v1",
+   "model": "odyssey",
+   "sourceTitle": null,
+   "sourceReferenceId": "db80634b538c40569bc77ebf829bac19",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-odyssey-2011-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 17,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-prelude-1978-hw1-v1",
+   "model": "prelude",
+   "sourceTitle": null,
+   "sourceReferenceId": "69183c2bf725484285552138c01ce93b",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-prelude-1978-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 18,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-prelude-1983-hw1-v1",
+   "model": "prelude",
+   "sourceTitle": null,
+   "sourceReferenceId": "faa07ab210314dd2a52e678e1b4f5a9a",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-prelude-1983-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 17,
+   "n_transparent": 5,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND",
+    "darkglass alpha=0.5 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "darkglass alpha=0.5 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-prelude-1997-hw1-v1",
+   "model": "prelude",
+   "sourceTitle": null,
+   "sourceReferenceId": "92e568f639384c3b9c3ced96512f6f1d",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-prelude-1997-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 18,
+   "n_transparent": 5,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND",
+    "darkglass alpha=0.5 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "darkglass alpha=0.5 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-s2000-1999-hw1-v1",
+   "model": "s2000",
+   "sourceTitle": null,
+   "sourceReferenceId": "737fd0a261fd4f32b431c838dcc57c0f",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-s2000-1999-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 29,
+   "n_transparent": 4,
+   "glazing_named": [
+    "WindshieldFrame alpha=1 MASK",
+    "GlassTemp alpha=0.261 BLEND"
+   ],
+   "transparent": [
+    "WindshieldFrame alpha=1 MASK via=texture-alpha",
+    "HeadlightBumpMap alpha=1 MASK via=texture-alpha",
+    "TaillightLens alpha=1.0 MASK via=texture-alpha",
+    "GlassTemp alpha=0.261 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-s2000-v1",
+   "model": "S2000",
+   "sourceTitle": "2009 Honda S2000 Ultimate Edition",
+   "sourceReferenceId": null,
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-s2000-v1.glb",
+   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-s2000-v1/hero.jpg",
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 26,
+   "n_transparent": 9,
+   "glazing_named": [
+    "hondaM_Glass_WindowFront_Low1 alpha=0.25 BLEND",
+    "hondaM_Glass_WindowSurroundFront_Low1 alpha=1 OPAQUE"
+   ],
+   "transparent": [
+    "hondaM_RimBadge_Max1 alpha=1 BLEND via=texture-alpha",
+    "hHonda_S2000TNR0_2001_CallipersCalliperBadgeA_Material1 alpha=1 BLEND via=texture-alpha",
+    "hondaM_Glass_WindowFront_Low1 alpha=0.25 BLEND via=factor",
+    "hondaM_Interior_Max1 alpha=1 BLEND via=texture-alpha"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-s660-2015-hw1-v1",
+   "model": "s660",
+   "sourceTitle": null,
+   "sourceReferenceId": "4e3e9bd888fb4ec69f71cc487f33f4ba",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-s660-2015-hw1-v1.glb",
+   "posterUrl": null,
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 17,
+   "n_transparent": 4,
+   "glazing_named": [
+    "windowglass alpha=0.3 BLEND",
+    "clearglass alpha=0.2 BLEND"
+   ],
+   "transparent": [
+    "clearglass alpha=0.2 BLEND via=factor",
+    "orangeglass alpha=0.3 BLEND via=factor",
+    "redglass alpha=0.3 BLEND via=factor",
+    "windowglass alpha=0.3 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  },
+  {
+   "assetId": "honda-zr-v-2023-v1",
+   "model": "zr-v",
+   "sourceTitle": "2023 Honda ZR-V",
+   "sourceReferenceId": "33eb3630e2ef4693b908322683784734",
+   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/honda/honda-zr-v-2023-v1.glb",
+   "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/honda/honda-zr-v-2023-v1/premium-crystal-red.jpg",
+   "turntableUrl": null,
+   "glass_verdict": "clear",
+   "glass_certainty": "proven",
+   "n_materials": 33,
+   "n_transparent": 3,
+   "glazing_named": [
+    "M_2023_Honda_ZR_V__JP__Windows alpha=0.5 BLEND"
+   ],
+   "transparent": [
+    "M_2023_Honda_ZR_V__JP__TailightsGlass alpha=0.5 BLEND via=factor",
+    "M_2023_Honda_ZR_V__JP__Windows alpha=0.5 BLEND via=factor",
+    "M_2023_Honda_ZR_V__JP__HeadLightsGlass alpha=0.5 BLEND via=factor"
+   ],
+   "flat_shell": false,
+   "alpha_shell": false,
+   "status": "clear"
+  }
+ ]
+}

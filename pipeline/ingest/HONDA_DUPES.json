@@ -1,0 +1,515 @@
+{
+ "method": "Face count is the key above 50k faces (CLAUDE.md: a re-upload is almost always retitled, so title+faces missed six real pairs in 67 Toyotas). Round-number clusters are excluded from exact grouping because decimated-to-target meshes converge and the signal dies. Near-proximity pairs are CANDIDATES FOR THE EYE ONLY - scored 50% precision on Mercedes - and are never auto-grouped.",
+ "exact_face_match_groups": [
+  {
+   "faces": 933379,
+   "members": [
+    {
+     "uid": "f973338c77ce4618b941612241d53f6a",
+     "name": "2021 Honda Accord Model",
+     "verdict": "PASS"
+    },
+    {
+     "uid": "a7f516576078496caee738edf39acd14",
+     "name": "2021 Honda Accord",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": 693759,
+   "members": [
+    {
+     "uid": "06191f5bef694146bd0472af4af8b7b9",
+     "name": "Honda NSX GT GT500 2017 | www.vecarz.com",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "81e93a17257e436984c3c864448996cd",
+     "name": "2017 Honda NSX-GT GT500",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": 608520,
+   "members": [
+    {
+     "uid": "1bb32fd8460e47af82518e43f172f916",
+     "name": "Honda Civic (Mk5) hatchback 1991",
+     "verdict": "PASS"
+    },
+    {
+     "uid": "5b12a8457db644fa9d0d1daa34e145b9",
+     "name": "Honda Civic (EG) hatchback 1991",
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "faces": 547355,
+   "members": [
+    {
+     "uid": "382f78083aef442591d52c78af726b35",
+     "name": "Honda Civic Ek9 Spoon Sports | www.vecarz.com",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "32fd41652974477382eec6d9eae87c06",
+     "name": "Honda Civic Ek9 Spoon Sports",
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "faces": 354157,
+   "members": [
+    {
+     "uid": "a9514cacb3194a97a8a583caf1453ef5",
+     "name": "modified-honda-civic",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "b7b2f419a63c4a24957c015feb6fd5fb",
+     "name": "modified-honda-civic",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": 349468,
+   "members": [
+    {
+     "uid": "a21edb35a7714774a10b74642e815ca2",
+     "name": "1992 Honda NSX-R",
+     "verdict": "PASS"
+    },
+    {
+     "uid": "a2639a3eedef45398ddafc75479f401a",
+     "name": "1992 Honda NSX-R",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": 244090,
+   "members": [
+    {
+     "uid": "f2b768d4df884fd48e6ec863c9a51f9c",
+     "name": "2018 Honda Civic Type R Varis [FK8] VAHO-17",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "c79e8d2fb2ba4796b5bbb07730413cdf",
+     "name": "Honda Civic TypeR FK8 Vaho 2018 | www.vecarz.com",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": 240789,
+   "members": [
+    {
+     "uid": "49a04d3d1a8b4f419e3f305ac694c345",
+     "name": "2020 Honda NSX (NA1) LB\u2605WORKS",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "1c70ad48fd48487e8ffa3aa199dc8b1b",
+     "name": "honda nsx 1990 Black",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": 237181,
+   "members": [
+    {
+     "uid": "2d190ebe466143cd8417b1b76e685458",
+     "name": "2022 Honda Civic Type R",
+     "verdict": "PASS"
+    },
+    {
+     "uid": "2699779eb8e34344835b77ecc60ec05e",
+     "name": "2024 Honda Civic Type R",
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "faces": 479297,
+   "members": [
+    {
+     "uid": "d2351585a3c34030a1041f4483b11203",
+     "name": "Honda Civic Sedan",
+     "verdict": "PASS"
+    },
+    {
+     "uid": "eff1039487e349dfbae8ef3e1f050f65",
+     "name": "Honda Civic Sedan",
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "faces": 379862,
+   "members": [
+    {
+     "uid": "407a8981be2d45a388d7280d9b931663",
+     "name": "Honda Civic Type R FL5 Custom",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "2881ec9c483c439db1c5cb92b890d91d",
+     "name": "Honda_Civic_Type_R_FL5_Custom",
+     "verdict": "FAIL"
+    }
+   ]
+  }
+ ],
+ "exact_match_in_round_number_cluster_IGNORED": [],
+ "near_proximity_candidates_for_the_eye": [
+  {
+   "faces": [
+    65228,
+    65285
+   ],
+   "pair": [
+    {
+     "uid": "5e30d9a74d024b248dc5141bc87acfec",
+     "name": "Honda Civic Hatchback 2022",
+     "verdict": "PASS"
+    },
+    {
+     "uid": "d1200600b7a343a5883875bea15c0fee",
+     "name": "2022 Honda Civic",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": [
+    65285,
+    65287
+   ],
+   "pair": [
+    {
+     "uid": "d1200600b7a343a5883875bea15c0fee",
+     "name": "2022 Honda Civic",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "3565e8277a484f14b45c6888ca61a2b2",
+     "name": "Honda CR-V 2001",
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "faces": [
+    95865,
+    95877
+   ],
+   "pair": [
+    {
+     "uid": "6da0242475be43649237efa16ea1061f",
+     "name": "1992 Honda Civic SiR II (EG)",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "707599838a074af69ec5137db597a037",
+     "name": "Honda Pilot Steel Rims",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": [
+    141776,
+    141777
+   ],
+   "pair": [
+    {
+     "uid": "af33495c63524621aa39415441881784",
+     "name": "2025 Honda Civic Type R",
+     "verdict": "PASS"
+    },
+    {
+     "uid": "2f54931a83744e048cacc3886d6cf5da",
+     "name": "Honda Civic Type R (FL5)",
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "faces": [
+    149899,
+    149934
+   ],
+   "pair": [
+    {
+     "uid": "71420d0028a74eaaab1d20b69c8d384b",
+     "name": "Honda Accord",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "5d87d306854a42908e31fde846bfdb5e",
+     "name": "Honda Freed Spike G Aero L Mugen Aero",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": [
+    149934,
+    149939
+   ],
+   "pair": [
+    {
+     "uid": "5d87d306854a42908e31fde846bfdb5e",
+     "name": "Honda Freed Spike G Aero L Mugen Aero",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "4ea67e5044674ad3901d043d09654896",
+     "name": "Honda Civic",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": [
+    149939,
+    149940
+   ],
+   "pair": [
+    {
+     "uid": "4ea67e5044674ad3901d043d09654896",
+     "name": "Honda Civic",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "11b3c5fce1dc44be9b431f9fd473affe",
+     "name": "Honda FIt",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": [
+    149940,
+    149961
+   ],
+   "pair": [
+    {
+     "uid": "11b3c5fce1dc44be9b431f9fd473affe",
+     "name": "Honda FIt",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "4ce59679c6f7404ba14bc5961d1bf5a8",
+     "name": "Honda Accord Wagon",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": [
+    223297,
+    223317
+   ],
+   "pair": [
+    {
+     "uid": "58e7efac08a54a2b9a163bf194cb2a5c",
+     "name": "AC - Honda Acty Ha3 [FREE]",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "55a283b166f24747898b8ade1f6982e0",
+     "name": "2023 Honda Civic Type R",
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "faces": [
+    237168,
+    237181
+   ],
+   "pair": [
+    {
+     "uid": "557740c36367423cb39c2d2b8f052319",
+     "name": "Honda Civic",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "2d190ebe466143cd8417b1b76e685458",
+     "name": "2022 Honda Civic Type R",
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "faces": [
+    238188,
+    238189
+   ],
+   "pair": [
+    {
+     "uid": "4df76c1974cd4173a7a941bfec7714ab",
+     "name": "Honda Civic Type R (EK9)",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "1f0d3d471bee42908e336b11da6b5e61",
+     "name": "Honda Civic TypeR 98 Gen6 | www.vecarz.com",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": [
+    349458,
+    349468
+   ],
+   "pair": [
+    {
+     "uid": "492b1e8a73984c5d88e10efd8acfd816",
+     "name": "1992 Honda NSX R",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "a21edb35a7714774a10b74642e815ca2",
+     "name": "1992 Honda NSX-R",
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "faces": [
+    354148,
+    354157
+   ],
+   "pair": [
+    {
+     "uid": "beadd53f4d1543ca83ce8ac385df0f77",
+     "name": "Honda Civic MK8 Sedan 2006-2011",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "a9514cacb3194a97a8a583caf1453ef5",
+     "name": "modified-honda-civic",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": [
+    360799,
+    360803
+   ],
+   "pair": [
+    {
+     "uid": "5e5be8eef32e4da7aafb23e1fcbabb4a",
+     "name": "Honda Amaze-Wesley Parking",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "922c636df4b34c539e6b8cefabc38cbb",
+     "name": "2013 Honda Brio Amaze",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": [
+    439548,
+    439592
+   ],
+   "pair": [
+    {
+     "uid": "da3ed72a753f45df908a1e67492fc091",
+     "name": "Honda S2000",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "240e909a9180493ebdc1def6cbdde88f",
+     "name": "Honda Fit",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "faces": [
+    893332,
+    893334
+   ],
+   "pair": [
+    {
+     "uid": "d0391b0403d34793927beebdbbc2a4a1",
+     "name": "1999 Honda Odyssey",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "d5d98cef2a4240b6be91e03a1afcb0e1",
+     "name": "Honda Odyssey (US)(Mk2)(RL1) 1999",
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "faces": [
+    897705,
+    897752
+   ],
+   "pair": [
+    {
+     "uid": "b3c0f77626644e99b54304aebbafc60b",
+     "name": "Honda HR-V 5door 2001",
+     "verdict": "PASS"
+    },
+    {
+     "uid": "3f5ef3ff34c04f839c05709c6fa5ce1c",
+     "name": "Honda Accord Tourer 2009",
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "faces": [
+    1047310,
+    1047314
+   ],
+   "pair": [
+    {
+     "uid": "573d5c2480324a879ee15221ee426160",
+     "name": "1988 Honda CR-X",
+     "verdict": "PASS"
+    },
+    {
+     "uid": "a856d729d9ec47fc8cb3b740199ed6bf",
+     "name": "Honda Civic CRX 1988",
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "faces": [
+    1065371,
+    1065379
+   ],
+   "pair": [
+    {
+     "uid": "76c8c4d7d49949e8ba9d6b6d3a94c473",
+     "name": "Honda Ridgeline Baja 2016 | www.vecarz.com",
+     "verdict": "FAIL"
+    },
+    {
+     "uid": "727b2ea44a124977a323815dafb8bb89",
+     "name": "Honda Ridgeline Baja Race Truck 2016",
+     "verdict": "FAIL"
+    }
+   ]
+  }
+ ]
+}
