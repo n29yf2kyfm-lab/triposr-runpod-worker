@@ -1,0 +1,374 @@
+{
+ "hyundai-ioniq-6-2023-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "kia-rio-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "mitsubishi-eclipse-cross-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "land-rover-discovery-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "kia-sorento-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "kia-sportage-2012-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "lexus-ls-w6-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "lexus-ls-w7-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "land-rover-range-rover-velar-2018-w7-v2": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "jeep-avenger-w7-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "mercedes-benz-e-class-estate-2021-w7-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "hyundai-santa-fe-2024-w12-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "mercedes-benz-r-class-2005-mw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "mercedes-benz-cls-mw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "mercedes-benz-amg-gt-2015-mw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "honda-city-2008-hw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "honda-jazz-2020-hw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "nissan-sentra-2007-nw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "nissan-patrol-nw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "nissan-gt-r50-nw1-v2": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "nissan-altima-2005-nw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "nissan-navara-1997-nw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "nissan-sentra-2017-nw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "nissan-patrol-2019-nw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "nissan-patrol-2019-nw1-v2": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "hyundai-sonata-2015-hyw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "hyundai-creta-hyw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "lexus-lx570-2015-lxw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaque/proven (a glazing-named material exists and is alphaMode=OPAQUE, alpha 1.0, no transmission)."
+ },
+ "lexus-ux-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows",
+   "damage"
+  ],
+  "evidence": "glass_probe opaque/proven ('glass_full','vdie_glass' OPAQUE); backlight render shows flat blue opaque window panels. SEPARATELY the poster at 2x shows the rear wheel arch as an open black void with the rear wheel detached outside the bodywork and the rear quarter panel missing."
+ },
+ "mazda-cx-5-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe faded: sole glazing material 'Glass' is alphaMode=BLEND at baseColor alpha 0.986 (98.6% opaque) and near-black rgb 0.069 -- a solid dark panel, not glass. CLAUDE.md records this exact car/value as a cull. Backlight render confirms: flat dark windows, no read-through."
+ },
+ "mercedes-benz-e-class-2018-w12-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe faded: sole glazing 'CAR_Window' BLEND at alpha 0.993 (99.3% opaque), rgb 0,0,0. Backlight render shows no read-through."
+ },
+ "jeep-renegade-2016-w12-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe opaque/inferred (2 materials, 1 texture, nothing transparent anywhere in the file). Backlight render confirms flat dark opaque windows. Inferred-opaque was NOT taken on the probe alone."
+ },
+ "honda-civic-1993-hw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe opaque/inferred (5 materials, nothing transparent). Backlight render at 3x: side and hatch glass are flat dark grey with no checker and no interior. Opaque."
+ },
+ "hyundai-ioniq-5-2022-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('2022_Hyundai_IONIQ_5_Windows' is alphaMode=OPAQUE; the only transparent materials are the head/brake lamp lenses, which the probe's opaque branch lets soften the verdict to ambiguous). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "kia-soul-2020-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('M_2022_Volvo_C40_Recharge_Windows' OPAQUE, only lamp lenses transparent (NB the material names are a Volvo C40 template)). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "nissan-qashqai-2022-w6-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('M_2022_Nissan_Qashqai_Windows' OPAQUE, only lamp lenses transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "jaguar-xj-1994-ib1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('Glass' OPAQUE, only 'Lights' transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "jaguar-xj-2003-ib1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('Window'/'WindowDark' OPAQUE, only 'Lens' and a decal transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "mercedes-benz-sls-amg-2012-mw1-v2": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('Glass'/'Glass_trim' OPAQUE, only 'light_glass' transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "nissan-skyline-nw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('windows'/'windowFrame' OPAQUE, only 'headlights1' transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "nissan-skyline-1976-nw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('Window___Tire__1'/'Glass_Basic_Black__2' OPAQUE, only headlamp lenses transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "nissan-ariya-2020-nw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('M_2020_Nissan_Ariya_Windows' OPAQUE, only lamp lenses transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "hyundai-staria-premium-2022-hyw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('..._Windows' OPAQUE, only lamp lenses/DRLs transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "hyundai-excel-1990-hyw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('glass1'/'glass2' OPAQUE, only an alpha-0.0 decal transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "lexus-lx-570-lxw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('window' OPAQUE, only 'lamp_glass' transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "honda-civic-hw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('glass' OPAQUE, only 'Material.002' transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "honda-civic-2025-hw1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous ('window' OPAQUE, only 'trans' transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "nissan-ariya-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous (no glazing-named material; only transparent material is a texture-alpha PaletteMaterial). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. "
+ },
+ "land-rover-defender-law1-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "glass_probe ambiguous (no glazing-named material; only transparent materials are MASK texture-alpha 'material_11'/'material_22'). Routed to the eye as CLAUDE.md requires; the magenta-backlight render of the shipped GLB shows flat opaque glazing with no checker read-through and no interior. Renders as a solid black silhouette with no material data at all."
+ },
+ "land-rover-range-rover-velar-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "grey-windows"
+  ],
+  "evidence": "GLOBAL-ALPHA SHELL. 'vray_CarPaint' is alphaMode=BLEND at alpha 0.25 WITH KHR_materials_transmission=1.0, and 'vray_Material_568' the same -- the CLAUDE.md Volvo XC60 signature. Backlight render confirms the checker reads through the roof and bonnet: the body itself is ~75% see-through. Five other alpha_shell flags in this slice were checked the same way and were all false positives."
+ },
+ "mercedes-eqe-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "soft-body"
+  ],
+  "evidence": "The body material is literally named 'body' and is metallicFactor 0.841 / roughnessFactor 0.0 -- a mirror, not paint. Poster at 2x: the whole flank is one chrome blob, no shut lines, no panel definition. colour_variants rewrites baseColorFactor only, so every one of the eight variants is also a chrome mirror."
+ },
+ "mazda-rx7-fd-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "soft-body"
+  ],
+  "evidence": "'mazdaM_CarPaint_Max_018' and 'mazdaM_CarPaintNormal_Max1' are metallicFactor 0.72-0.74 at roughnessFactor 0.096 -- near-mirror. Poster at 2x shows a chrome shell with no readable panel surfaces or shut lines. Sibling models from the same 'Max1' family (honda-s2000, land-rover-defender-w6) carry metallic 0.03 carpaint and render correctly, so this is this file's defect, not the family's."
+ },
+ "mini-hatch-v1": {
+  "verdict": "scrap",
+  "reasons": [
+   "soft-body"
+  ],
+  "evidence": "Poster at 2x: headlamps are featureless white blobs with no lens or internal element, the grille is a plain recess with no mesh, the wing mirror is a smooth blob, and there is not one door or bonnet shut line anywhere on the car. Materials are generic auto_1..auto_18. Reads as unfinished clay."
+ }
+}
