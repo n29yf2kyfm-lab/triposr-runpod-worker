@@ -195,5 +195,58 @@
    "livery baked into the textures, cannot be resprayed",
    "title was the bare Subaru Impreza so the title-stage prune could not catch it - caught by eye"
   ]
+ },
+ {
+  "uid": "fd162cdfd60c4d7e8382334c7b8fc33b",
+  "name": "Subaru Legacy 2016",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: sky and tree reflections baked into the glass and roof texture, torn sills, melted bumpers, wheels half-buried in the ground",
+   "mats=1 cov=1.000 FULL COVERAGE - one material carries body, glass and tyres, so no respray is possible",
+   "baked lighting throughout"
+  ]
+ },
+ {
+  "uid": "fefd9500d90e4e94b377d701dcb72b89",
+  "name": "Subaru Impreza_kitcard",
+  "verdict": "fail",
+  "reasons": [
+   "not a vehicle asset: this is a plastic scale MODEL KIT on its moulding tray - the body sits on a sprue frame with unattached wheels, tyres and small parts laid out beside it",
+   "single flat beige material across the whole scene (glTF flat-shell test returns True, 1 material, 0 textures); no glazing, no wheels mounted",
+   "SCALE_WORDS did not catch the title token kitcard"
+  ]
+ },
+ {
+  "uid": "07afb3b74d5e4c78832c6ab91e5d93a1",
+  "name": "Subaru Impreza WRX",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell: tyres render body-white with only the rim centre dark, and window apertures are opaque white with a partial grey patch - fails both the tyre and glazing rulings",
+   "glTF corroborates: 27 materials, 0 textures, and NO glass-named and NO tyre-named material exists in the file",
+   "cov=0.974 full coverage - one material covers the whole car including glass",
+   "no door, bonnet or boot shut lines; surfaces are soft and melted"
+  ]
+ },
+ {
+  "uid": "a507e77a4ffd48a685f1d673572868bf",
+  "name": "Subaru Impreza",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan: car-park tarmac with a painted bay line baked into the mesh as a slab under the car",
+   "roof shredded into torn shells; baked lighting and shadow in the texture",
+   "mats=1 cov=1.000 FULL COVERAGE, no separable glazing"
+  ]
+ },
+ {
+  "uid": "c0ffde08f5e04cca9dffb449a5eef759",
+  "name": "Subaru Legacy Wagon",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec Legacy wagon (BP), proportions read instantly, roof/pillars/wheelbase consistent across all four tiles, paint finish clean and glossy",
+   "tyres proven black on a COLOURED-BODY control: the body is blue and the tread face in front34 and rear34 is neutral black, so no brightness argument is needed",
+   "glazing genuinely transparent (glTF glass materials are non-OPAQUE) and the front seat and headrest resolve through the front door glass at 5x, though the tint is heavy and the windscreen reads near-black",
+   "NOTED WEAKNESS: headlamp internals are soft - a dark lens with only a faint projector element - and the grille edges are soft; this is a 99k-face model, at the lower end of the bar",
+   "rim faces present and consistent in all four tiles"
+  ]
  }
 ]
