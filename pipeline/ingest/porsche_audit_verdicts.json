@@ -987,5 +987,166 @@
    "clay single material (cov=1.000)",
    "out of scope even if it were complete"
   ]
+ },
+ {
+  "uid": "03af3f482d9144bd993e580441ff3225",
+  "name": "2021 Porsche 911 Targa 4S Highmodel",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read as 992 Targa 4S instantly; front 3/4 strong",
+   "tyres BLACK RUBBER - confirmed at full-res tread zoom; the RED is the rim only (at 430px tile scale this read as red tyres and was wrong)",
+   "glazing transparent, cabin and Targa hoop read as glass",
+   "rim faces present and identical across all four views",
+   "headlamp internals, front intake slats and shut lines all defined"
+  ]
+ },
+ {
+  "uid": "04f556e0a2aa425185dcee7f7f1e2ff1",
+  "name": "2018 Porsche 911",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 Carrera GTS proportions read instantly",
+   "tyres black rubber with sidewall lettering visible in both 3/4 tread bands",
+   "glazing transparent, interior visible in side view",
+   "black rim faces fully present all four views",
+   "lamp internals and centre-lock hub detail sharp; shut lines defined"
+  ]
+ },
+ {
+  "uid": "06f8003040f440afb8c60b5db2ec9d77",
+  "name": "Porsche 911 Carrera rigged and carbon fiber",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 Carrera S proportions correct; front 3/4 strong",
+   "tyres black rubber, tread face clear in front34 and rear34",
+   "glazing reads as glass, not body colour",
+   "dark multi-spoke rim faces present in all views",
+   "front intake and lamp internals defined; panel reflections clean"
+  ]
+ },
+ {
+  "uid": "081cf9a708bb4b8b8f14d55b56ffdfe9",
+  "name": "Porsche 911 Turbo S",
+  "verdict": "pass",
+  "reasons": [
+   "992 Turbo S proportions read instantly, active aero and side intakes correct",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent",
+   "black rim faces present with red calipers visible behind",
+   "lamp internals sharp, intake slats crisp, shut lines defined"
+  ]
+ },
+ {
+  "uid": "0e118f0e927645a1876a4f213cddb0f0",
+  "name": "2021 Porsche 911 Targa 4S Heritage Design (992)",
+  "verdict": "pass",
+  "reasons": [
+   "992 Targa proportions correct; Targa hoop and wraparound glass right",
+   "tyres black rubber in both 3/4 tread bands",
+   "glazing transparent, cabin and seats visible",
+   "two-tone rim faces present in all four views",
+   "grille slats, lamp internals and shut lines defined"
+  ]
+ },
+ {
+  "uid": "0f1e021b19864b96874ff6e62d3eecf9",
+  "name": "Porsche 911 GT2 RS ClubSport 25",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: GT2 RS Clubsport is a track-only race car - roll cage, race splitter, swan-neck wing, centre-lock race wheels, tow hooks and competition livery; takes no road registration",
+   "model itself renders cleanly, but no UK reg decodes to it"
+  ]
+ },
+ {
+  "uid": "0fadf286b5804c03ac2e35d5db6c8a91",
+  "name": "2014 Porsche 911 Turbo (991)",
+  "verdict": "pass",
+  "reasons": [
+   "991 Turbo proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, interior visible through screen and side glass",
+   "rim faces present all four views, yellow PCCB calipers visible",
+   "lamp internals and intake slats defined; panel reflections clean"
+  ]
+ },
+ {
+  "uid": "122a977cf6be4d639a9e239c6d859c44",
+  "name": "Porsche Boxster Spyder 2010",
+  "verdict": "pass",
+  "reasons": [
+   "987 Boxster Spyder proportions correct, twin tonneau humps right",
+   "tyres black rubber in both 3/4 tread bands",
+   "glazing transparent, red interior visible",
+   "dark rim faces present all four views",
+   "front intakes and lamp internals defined; note the number plate carries a HUMSTER3D vendor watermark texture"
+  ]
+ },
+ {
+  "uid": "1479234973cd4ab0a779af3a10642b60",
+  "name": "Porsche Cayman 2017",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL: glazing renders opaque body-white, no interior at any zoom",
+   "tyres render body-white, not black rubber - whole wheel is one clay tone",
+   "a baked diorama is welded into the mesh: striped floor plate and a rusted yellow/black hazard kerb render with the car in every view",
+   "no lamp internals, no grille depth, shut lines absent"
+  ]
+ },
+ {
+  "uid": "1503f8d08f154ec7ab52f95a99c55134",
+  "name": "2025 Porsche 911 GT3 (992-2)",
+  "verdict": "pass",
+  "reasons": [
+   "992.2 GT3 proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible",
+   "black rim faces present all four views",
+   "lamp internals, front splitter and swan-neck wing detail sharp; shut lines defined",
+   "road-legal GT3, in scope"
+  ]
+ },
+ {
+  "uid": "15d895b104374790b715be320277772e",
+  "name": "Magnus Walker\u2019s 1971 Porsche 911 \u201c277\u201d",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: one-off celebrity outlaw build with baked competition livery - 277 roundels, sponsor decals, blue lower panels; not a stock nameplate a reg decodes to",
+   "mesh and materials themselves are sound (tyres black, glazing transparent, rim faces present)"
+  ]
+ },
+ {
+  "uid": "1772994c9652458f9cced2790ebc89bb",
+  "name": "porsche 911",
+  "verdict": "fail",
+  "reasons": [
+   "panel surfacing is FACETED - the front bumper, wings and bonnet render as flat polygonal patches, plainly visible in both tread bands",
+   "shut lines absent; grille and intake edges soft",
+   "glazing reads as pale opaque panel rather than glass, no interior visible",
+   "tyres are black and rim faces present - the failure is surfacing, not materials"
+  ]
+ },
+ {
+  "uid": "1ab438e7fc444fedb6f1ee255f21902a",
+  "name": "2019 Porsche 911 (991.2) GT3 RS Weissach Package",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 GT3 RS proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent - roll bar visible through the side glass",
+   "bronze rim faces fully present all four views, yellow PCCB calipers",
+   "lamp internals, NACA ducts and wing detail sharp; shut lines defined",
+   "road-legal GT3 RS, in scope"
+  ]
+ },
+ {
+  "uid": "1fce7028d0d34ddc801905dadd1d0ce6",
+  "name": "Porsche 911 ST",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL: single white material over the whole car",
+   "glazing opaque body-white, no interior, no glass anywhere",
+   "tyres render body-white - wheels are solid clay, no rubber",
+   "no lamp internals, no grille, no shut lines"
+  ]
  }
 ]
