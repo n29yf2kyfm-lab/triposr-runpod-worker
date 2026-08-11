@@ -34174,8 +34174,8 @@
   "qualityGrade": "A",
   "technicalStatus": "passed",
   "visualStatus": "passed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -34362,7 +34362,8 @@
    "variantsHash": "fccb5f8cd3afcf05d4fb863da2114d409870965b",
    "method": "render",
    "at": "2026-07-23"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -121074,8 +121075,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -121272,7 +121273,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -124331,8 +124333,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -124528,7 +124530,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -131554,8 +131557,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -131688,7 +131691,8 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -133383,8 +133387,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -133574,7 +133578,8 @@
     }
    ],
    "yellow": []
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -174787,8 +174792,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -174999,7 +175004,8 @@
    "variantsHash": "71d24b378450c0c080cff995cad3626902e12be2",
    "method": "render",
    "at": "2026-08-08"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -176438,8 +176444,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -176652,7 +176658,8 @@
    "variantsHash": "252116daac72dc7f0c3a8f5f9660ffa30fb0b101",
    "method": "render",
    "at": "2026-08-08"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -178162,8 +178169,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -178376,7 +178383,8 @@
    "variantsHash": "2deffb28c0ef4121b55d3e5c926968dca7567c40",
    "method": "render",
    "at": "2026-08-08"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -181629,8 +181637,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -181842,7 +181850,8 @@
    "variantsHash": "9489e5a615f650aaeefb233a184ebdf81d6ea450",
    "method": "render",
    "at": "2026-08-08"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -182303,8 +182312,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -182519,7 +182528,8 @@
    "variantsHash": "5a5ea265ca3648c592566e3c00f21851f55dee56",
    "method": "render",
    "at": "2026-08-08"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -184548,8 +184558,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -184677,7 +184687,8 @@
    "variantsHash": "c291ff4b7496716bf95aa23c1ab84c588b8f2640",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -185626,8 +185637,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -185758,7 +185769,8 @@
    "variantsHash": "e0c2597a3e2a66fbd2565f4c2c7ead739590b40c",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -186296,8 +186308,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -186428,7 +186440,8 @@
    "variantsHash": "9d056d9dfccbd40dfb28679ce325efe15f0059bb",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -188807,8 +188820,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 flat/clay shell: every untextured material shares one light baseColorFactor, no transparent glazing, no distinct rubber -- the car renders as a featureless white body with no glass and no black tyres. Confirmed by magenta/cyan backlight render of the shipped glb (the checker does not pass through any window and the wheels carry no rubber). Same defect toyota-auris-v1 was retired for. Entry and assets kept; reversible if re-sourced with real materials.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -188940,7 +188953,8 @@
    "variantsHash": "ce0c4d66e1f76461663f03a39bb301c1fd45922a",
    "method": "render",
    "at": "2026-08-09"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
