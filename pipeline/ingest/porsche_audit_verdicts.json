@@ -977,5 +977,15 @@
    "whale-tail wing and door shut lines crisp; front lower valance is the softest area",
    "lowest face count of the passes (61,218) - detail is modest but honest"
   ]
+ },
+ {
+  "uid": "207e724d58264f9bbdca988f2cd024db",
+  "name": "Porsche 997 Test",
+  "verdict": "fail",
+  "reasons": [
+   "bare race body shell: full roll cage, GT3-RSR aero, no wheels or tyres anywhere, no glass",
+   "clay single material (cov=1.000)",
+   "out of scope even if it were complete"
+  ]
  }
 ]
