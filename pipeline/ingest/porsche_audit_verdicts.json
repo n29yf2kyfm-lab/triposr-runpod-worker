@@ -1549,5 +1549,98 @@
    "headlamps are plain domes, no grille, no bumpers of any depth, no shut lines",
    "wheels are simple discs; tyres read grey, not black rubber"
   ]
+ },
+ {
+  "uid": "58ac9d802d054c4eae0fd09988ad4f33",
+  "name": "2023 Porsche 911 GT3 RS",
+  "verdict": "pass",
+  "reasons": [
+   "992 GT3 RS proportions read instantly - correct swan-neck wing, wheel-arch louvres and centre radiator; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cage visible through the side glass",
+   "dark rim faces present in all four views, yellow PCCB calipers",
+   "lamp internals, aero blades and shut lines defined",
+   "road-legal GT3 RS, in scope"
+  ]
+ },
+ {
+  "uid": "597734ea90bc472fb52d937feed3af14",
+  "name": "Porsche 911",
+  "verdict": "pass",
+  "reasons": [
+   "992 Targa 4S proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible",
+   "black rim faces present in all four views, red calipers behind",
+   "lamp internals, intake slats and shut lines defined"
+  ]
+ },
+ {
+  "uid": "5ab56c0a7666450cabb59d5e44539a12",
+  "name": "2019 Porsche 718 Boxster T",
+  "verdict": "pass",
+  "reasons": [
+   "982 Boxster T proportions read instantly, roof up; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible through the side glass",
+   "black rim faces present in all four views",
+   "lamp internals, side intakes and shut lines defined; the 718 Boxster T side decal is factory graphics"
+  ]
+ },
+ {
+  "uid": "5ceffc9a7dc0482088f3ac2aef3987f0",
+  "name": "2018 Porsche 911 GT2 RS Clubsport",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: GT2 RS Clubsport race car in full competition livery - Mobil 1 and Michelin sponsor decals, number 2 roundels, red centre-lock race wheels, race splitter and swan-neck wing",
+   "track-only; takes no road registration"
+  ]
+ },
+ {
+  "uid": "5d5232ec095d457088a314e023e5337c",
+  "name": "Porsche 911",
+  "verdict": "fail",
+  "reasons": [
+   "GLAZING FAILS: at full res the side glass, rear quarter light and windscreen are all opaque body-white panels with no interior visible",
+   "headlamps are plain white domes with no lens or internal elements; door mirrors are featureless white blobs",
+   "tyres ARE black rubber on dark rims with red calipers, and the amber indicators and tail lights carry colour - but the body is a clay 930 shell",
+   "proportions read as a 930 Turbo correctly; the failure is materials and detail, not shape"
+  ]
+ },
+ {
+  "uid": "5fd62615f72a4012a5ebc15cd4c64461",
+  "name": "Porsche 911 GT3 RS (semester 2)",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 GT3 RS proportions read instantly; front 3/4 strong; paint finish clean",
+   "tyres black rubber, tread face clear in both 3/4 bands against bronze rims - and the salmon body is a coloured control, so black tyres prove no body paint on the rubber",
+   "glazing transparent, cage visible through the side glass",
+   "bronze rim faces present in all four views",
+   "carbon bonnet, NACA ducts, lamp internals and shut lines defined",
+   "road-legal GT3 RS, in scope"
+  ]
+ },
+ {
+  "uid": "626f4a5d85d14480939eb8bb3c217c30",
+  "name": "2019 Porsche 911 Speedster Heritage Edition",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 Speedster proportions read instantly - correct twin tonneau humps and low screen; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible",
+   "grey rim faces present in all four views",
+   "lamp internals, front intakes and shut lines defined; 'Speedster' script on the rear panel"
+  ]
+ },
+ {
+  "uid": "67aac5efd3e74af9ba7767ced7894eb9",
+  "name": "porsche 911 1970 car",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL: one white material over the whole car",
+   "tyres render body-white on white steel-look discs - no black rubber anywhere, in either 3/4 tread band",
+   "glazing barely reads: the windows are pale grey panels with no interior",
+   "headlamps are plain white domes, no grille, no shut lines, bumpers are featureless"
+  ]
  }
 ]
