@@ -202,17 +202,28 @@ def probe(uid, stage="staging/jeep"):
 
 
 if __name__ == "__main__":
+    # usage: glass_probe.py <rows.json> <out.json> [staging-prefix]
+    # The stage defaults to the Jeep wave this was first written for; every
+    # later wave MUST pass its own, or every probe 404s against the wrong
+    # bucket path and the whole marque comes back "unknown".
+    import concurrent.futures as cf
     rows = json.load(open(sys.argv[1]))
-    out = []
-    for r in rows:
+    stage = sys.argv[3] if len(sys.argv) > 3 else "staging/jeep"
+
+    def one(r):
         try:
-            p = probe(r["uid"])
+            p = probe(r["uid"], stage=stage)
         except Exception as e:
             p = {"uid": r["uid"], "verdict": "unknown",
                  "error": f"{type(e).__name__}: {str(e)[:60]}"}
         p["name"] = r["name"]
-        out.append(p)
-        print(f"{p['verdict']:<8} flat={str(p.get('flat_shell')):<5} "
+        return p
+
+    with cf.ThreadPoolExecutor(8) as ex:
+        out = list(ex.map(one, rows))
+    for p in out:
+        print(f"{p['verdict']:<9} {str(p.get('certainty')):<8} "
+              f"flat={str(p.get('flat_shell')):<5} "
               f"trans={p.get('n_transparent')}/{p.get('n_materials')} "
-              f"{r['name'][:52]}", flush=True)
+              f"{p['name'][:52]}", flush=True)
     json.dump(out, open(sys.argv[2], "w"), indent=1)
