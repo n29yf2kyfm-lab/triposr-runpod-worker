@@ -33,6 +33,54 @@ from a GLB path via trimesh (world-space verts, decompresses draco).
 import numpy as np
 
 
+def _trim_outlier_bbox(V, keep=(0.1, 99.9), trigger=0.5):
+    """Drop stray vertices when the bounding box is DOMINATED by a few of them.
+
+    Found on the Chrysler wave 2026-08-11, and it cost two Chrysler 300Cs -- the
+    single most UK-relevant nameplate in the marque -- before it was caught.
+    Both GLBs carry FOUR stray vertices (two at z=-189, two at z=+186) while
+    377,393 of 377,397 sit inside z in [-3.7, 1.5]. The raw bbox is therefore
+    ~100x the car, the vertical decile histogram reads
+    [2, 0, 0, 0, 319695, 57694, 0, 0, 0, 2], and band_w(0, 0.33) sees TWO
+    vertices, falls under its 20-vertex floor and returns 0.0. top_over_bot then
+    takes its "bottom band is empty" sentinel of 9.99 and verdict() reads that
+    as tob > 1.20 -- "wide-top/cage" -- and hard-rejects a perfectly upright
+    saloon before a single GPU frame is spent. h_over_l is garbage the same way:
+    the raw box gives 0.760 for a low four-door.
+
+    The percentile box is only substituted when it is smaller than HALF the raw
+    box on some axis. A car whose bbox is already honest is untouched: 7 of the
+    9 Chryslers staged at the time returned bit-identical signals, ratio 0.87 to
+    0.99.
+
+    THIS IS NOT A CHRYSLER PROBLEM -- do not read the paragraph above as one. I
+    first wrote here that "the trigger never fires" on other marques, then
+    measured it, and that was WRONG: across 20 staged GLBs sampled from
+    Jaguar/Porsche/Jeep/VW it fires on THREE (15%), so the raw-bbox signals have
+    been garbage for roughly one car in seven of every wave ever run. What the
+    sample shows about the CONSEQUENCE, which is the part that matters:
+      porsche 7437d28d  reject -> reject   (genuine wreck, h/l 0.185)
+      porsche e424cc4c  reject -> reject   (genuine, on-side at tob 0.257)
+      jeep    13c4d0fb  reject -> OK       (h/l 0.194 -> 0.414, a normal SUV
+                                            that the raw box had binned)
+    Nothing that passed was turned into a reject; the movement is all in the
+    fail-open direction. Sample size 20 + 9, which is small -- if a later wave
+    sees a car pass this gate that obviously should not have, look here first.
+    """
+    if len(V) < 1000:
+        return V
+    lo = np.percentile(V, keep[0], axis=0)
+    hi = np.percentile(V, keep[1], axis=0)
+    raw = V.max(0) - V.min(0)
+    rob = hi - lo
+    with np.errstate(divide="ignore", invalid="ignore"):
+        ratio = np.where(raw > 1e-9, rob / raw, 1.0)
+    if ratio.min() >= trigger:
+        return V                                  # bbox is honest, change nothing
+    m = np.all((V >= lo) & (V <= hi), axis=1)
+    return V[m] if m.sum() >= 1000 else V
+
+
 def geom_signals(glb_path):
     """Return {h_over_l, top_over_bot, upper_frac} from a GLB's world-space verts."""
     import trimesh
@@ -49,6 +97,7 @@ def geom_signals(glb_path):
         for T in tf.get(gname, [np.eye(4)]):
             allv.append(trimesh.transform_points(v, T))
     V = np.vstack(allv)
+    V = _trim_outlier_bbox(V)
     lo = V.min(0); hi = V.max(0); ext = hi - lo
     up = int(np.argmin(ext)); horiz = [a for a in range(3) if a != up]
     length = max(ext[horiz[0]], ext[horiz[1]]) or 1.0
@@ -92,7 +141,15 @@ def verdict(geom, handler_audit=None, coverage=None):
         R.append(f"glass-shell/no-body(coverage={coverage})")
     if gaf > 0.012 and gzf is not None and gzf < 0.40:
         R.append(f"upside-down(glass_zf={gzf})")
-    if tob > 1.20:
+    # 9.99 is band_w's "bottom third held fewer than 20 vertices" SENTINEL, not a
+    # measurement. _trim_outlier_bbox now removes the cause that produced it on
+    # the Chrysler wave, but any other degenerate mesh can still land here, and
+    # an UNMEASURABLE signal must never hard-reject: this gate's contract is to
+    # fail open (gpu_wave.pose_gate returns "ok" on any exception for the same
+    # reason). Warn so the sheet is still built and the eye decides.
+    if tob == 9.99:
+        W.append("tob-unmeasurable(empty bottom band)")
+    elif tob > 1.20:
         R.append(f"wide-top/cage(tob={tob})")
     if tob < 0.40:
         R.append(f"flipped/on-side(tob={tob})")
