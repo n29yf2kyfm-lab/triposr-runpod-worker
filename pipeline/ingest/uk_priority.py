@@ -86,6 +86,28 @@ _OVERRIDE = [
     ("subaru",  "brz",  5), ("subaru", "svx", 5), ("subaru", "impreza", 2),
     ("subaru",  "forester", 2), ("subaru", "outback", 3), ("subaru", "xv", 2),
     ("abarth",  "500",  5),
+    # Jaguar, added 2026-08-11 for the Jaguar wave. Without these EVERY Jaguar
+    # lands T4 (no nameplate is in T1/T2/T3/T5), so an E-Type or D-Type renders
+    # ahead of the XE/XF/F-Pace fleet cars purely on sweep order -- the exact
+    # failure this file exists to stop. Order matters: the first hit wins, so
+    # the halo suffixes are listed BEFORE the families they glue onto
+    # (_tok_hit lets "xj" match "xj220" and "xk" match "xk120").
+    ("jaguar", "xj220", 5), ("jaguar", "xjr", 5), ("jaguar", "xjs", 5),
+    ("jaguar", "xkr", 5), ("jaguar", "xk8", 5), ("jaguar", "xk 8", 5),
+    ("jaguar", "e type", 5), ("jaguar", "etype", 5),
+    ("jaguar", "d type", 5), ("jaguar", "dtype", 5),
+    ("jaguar", "c type", 5), ("jaguar", "ctype", 5),
+    ("jaguar", "f type", 5), ("jaguar", "ftype", 5),
+    ("jaguar", "mark 2", 5), ("jaguar", "mk2", 5), ("jaguar", "mk 2", 5),
+    ("jaguar", "mark vii", 5), ("jaguar", "240", 5), ("jaguar", "420", 5),
+    ("jaguar", "xk", 5),
+    ("jaguar", "f pace", 2), ("jaguar", "fpace", 2),
+    ("jaguar", "e pace", 2), ("jaguar", "epace", 2),
+    ("jaguar", "i pace", 2), ("jaguar", "ipace", 2),
+    ("jaguar", "xe", 2), ("jaguar", "xf", 2),
+    ("jaguar", "x type", 2), ("jaguar", "xtype", 2),
+    ("jaguar", "s type", 3), ("jaguar", "stype", 3),
+    ("jaguar", "xj", 3), ("jaguar", "sovereign", 3), ("jaguar", "daimler", 3),
 ]
 
 def _tok_hit(n: str, word: str) -> bool:

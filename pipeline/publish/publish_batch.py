@@ -51,7 +51,7 @@ REVIEWED_KEEP.csv required columns:
 optional columns (title-verbatim / owner-confirmed only, per accuracy rule):
   year_start, year_end, body_style, trim
 """
-import argparse, csv, datetime, hashlib, http.client, json, os, re, subprocess, sys, time
+import argparse, csv, datetime, hashlib, http.client, json, os, re, ssl, subprocess, sys, time
 import urllib.request, urllib.error
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -77,6 +77,17 @@ def jlog(**kw):
     JOBLOG.flush()
 
 _consec_net_fail = 0
+
+# Transport faults that are worth another attempt. urllib.error.URLError is in
+# here for a specific, measured reason: a mid-transfer TLS cut surfaces as
+# `URLError(<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING]>)`, NOT as
+# IncompleteRead, so the original truncation fix did not cover it and one
+# Porsche (28dbd433) still vanished from an otherwise clean batch. ssl.SSLError
+# is listed separately because a cut during .read() — after the headers are in —
+# is raised raw rather than wrapped in URLError.
+TRANSIENT = (http.client.IncompleteRead, http.client.RemoteDisconnected,
+             TimeoutError, ConnectionError, ssl.SSLError, urllib.error.URLError)
+
 def net(req, timeout=120, tries=4):
     """All network goes through here so the storm breaker sees everything.
 
@@ -90,32 +101,36 @@ def net(req, timeout=120, tries=4):
     routine event and must not cost a car.
     """
     global _consec_net_fail
+
+    def _count_and_raise(e):
+        global _consec_net_fail
+        _consec_net_fail += 1
+        if _consec_net_fail >= 8:
+            jlog(event="STORM_BREAKER", fails=_consec_net_fail)
+            print("STORM BREAKER: 8 consecutive network failures — environment "
+                  "down, aborting resumably (re-run when it recovers)", flush=True)
+            sys.exit(4)
+        raise e
+
     last = None
     for a in range(tries):
         try:
             r = urllib.request.urlopen(req, timeout=timeout).read()
             _consec_net_fail = 0
             return r
-        except (http.client.IncompleteRead, TimeoutError, ConnectionError) as e:
+        except TRANSIENT as e:
+            # HTTPError subclasses URLError but is a real HTTP status, not a
+            # transport fault — a 400 on a bad row must fail immediately, not
+            # be retried four times.
+            if isinstance(e, urllib.error.HTTPError):
+                _count_and_raise(e)
             last = e
             if a < tries - 1:
                 time.sleep(2 * (a + 1))
                 continue
-        except Exception:
-            _consec_net_fail += 1
-            if _consec_net_fail >= 8:
-                jlog(event="STORM_BREAKER", fails=_consec_net_fail)
-                print("STORM BREAKER: 8 consecutive network failures — environment "
-                      "down, aborting resumably (re-run when it recovers)", flush=True)
-                sys.exit(4)
-            raise
-    _consec_net_fail += 1
-    if _consec_net_fail >= 8:
-        jlog(event="STORM_BREAKER", fails=_consec_net_fail)
-        print("STORM BREAKER: 8 consecutive network failures — environment "
-              "down, aborting resumably (re-run when it recovers)", flush=True)
-        sys.exit(4)
-    raise last
+        except Exception as e:
+            _count_and_raise(e)
+    _count_and_raise(last)
 
 def sb_req(path, data=None, method=None, ctype="application/json"):
     rq = urllib.request.Request(f"{SB_BASE}/{path}", data=data,
