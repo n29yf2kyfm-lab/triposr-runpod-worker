@@ -248399,7 +248399,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2021-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2021-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -248516,7 +248525,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -250125,7 +250206,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2014-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2014-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2014-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2014-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2014-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2014-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2014-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2014-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2014-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2014-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -250242,7 +250332,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -252280,7 +252442,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2018-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2018-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2018-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -252397,7 +252568,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -252709,7 +252952,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -252826,7 +253078,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -253914,7 +254238,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v3__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v3__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v3__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v3__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v3__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v3__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v3__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v3__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v3.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v3.glb",
   "fallbackGlbUrl": null,
@@ -254031,7 +254364,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -254090,7 +254495,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v4__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v4__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v4__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v4__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v4__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v4__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v4__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v4__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v4.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v4.glb",
   "fallbackGlbUrl": null,
@@ -254207,7 +254621,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -254780,7 +255266,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v5__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v5__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v5__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v5__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v5__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v5__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v5__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v5__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v5.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v5.glb",
   "fallbackGlbUrl": null,
@@ -254897,7 +255392,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -255476,7 +256043,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v6__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v6__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v6__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v6__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v6__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v6__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v6__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v6__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v6.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v6.glb",
   "fallbackGlbUrl": null,
@@ -255593,7 +256169,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -255910,7 +256558,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2019-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2019-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -256027,7 +256684,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -256507,7 +257236,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v7__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v7__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v7__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v7__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v7__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v7__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v7__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v7__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v7.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v7.glb",
   "fallbackGlbUrl": null,
@@ -256624,7 +257362,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -256688,7 +257498,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v8__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v8__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v8__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v8__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v8__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v8__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v8__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v8__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v8.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v8.glb",
   "fallbackGlbUrl": null,
@@ -256805,7 +257624,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -257119,7 +258010,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v9__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v9__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v9__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v9__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v9__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v9__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v9__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v9__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v9.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v9.glb",
   "fallbackGlbUrl": null,
@@ -257236,7 +258136,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -257295,7 +258267,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v10__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v10__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v10__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v10__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v10__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v10__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v10__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v10__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v10.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v10.glb",
   "fallbackGlbUrl": null,
@@ -257412,7 +258393,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -257469,7 +258522,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v11__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v11__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v11__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v11__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v11__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v11__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v11__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v11__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v11.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v11.glb",
   "fallbackGlbUrl": null,
@@ -257586,7 +258648,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -257642,7 +258776,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v3__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v3__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v3__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v3__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v3__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v3__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v3__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v3__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2019-pw2-v3.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2019-pw2-v3.glb",
   "fallbackGlbUrl": null,
@@ -257759,7 +258902,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -257829,7 +259044,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v12__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v12__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v12__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v12__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v12__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v12__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v12__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v12__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v12.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v12.glb",
   "fallbackGlbUrl": null,
@@ -257946,7 +259170,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -258789,7 +260085,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v4__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v4__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v4__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v4__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v4__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v4__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v4__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v4__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2019-pw2-v4.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2019-pw2-v4.glb",
   "fallbackGlbUrl": null,
@@ -258906,7 +260211,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -259236,7 +260613,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-cayman-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-cayman-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-cayman-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-cayman-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-cayman-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-cayman-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-cayman-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-cayman-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-cayman-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-cayman-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -259353,7 +260739,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -259416,7 +260874,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v13__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v13__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v13__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v13__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v13__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v13__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v13__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v13__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v13.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v13.glb",
   "fallbackGlbUrl": null,
@@ -259533,7 +261000,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -259595,7 +261134,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v14__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v14__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v14__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v14__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v14__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v14__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v14__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v14__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v14.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v14.glb",
   "fallbackGlbUrl": null,
@@ -259712,7 +261260,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -259779,7 +261399,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v5__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v5__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v5__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v5__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v5__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v5__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v5__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v5__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2019-pw2-v5.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2019-pw2-v5.glb",
   "fallbackGlbUrl": null,
@@ -259896,7 +261525,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -259959,7 +261660,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v15__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v15__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v15__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v15__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v15__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v15__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v15__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v15__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v15.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v15.glb",
   "fallbackGlbUrl": null,
@@ -260076,7 +261786,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -260994,7 +262776,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2022-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2022-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2022-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -261111,7 +262902,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -261683,7 +263546,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v6__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v6__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v6__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v6__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v6__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v6__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v6__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2019-pw2-v6__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2019-pw2-v6.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2019-pw2-v6.glb",
   "fallbackGlbUrl": null,
@@ -261800,7 +263672,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -261862,7 +263806,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2017-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2017-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2017-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2017-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2017-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2017-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2017-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2017-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2017-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2017-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -261979,7 +263932,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -262295,7 +264320,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-2021-pw2-v3__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2021-pw2-v3.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-2021-pw2-v3.glb",
   "fallbackGlbUrl": null,
@@ -262412,7 +264446,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -263339,7 +265445,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2010-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2010-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2010-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2010-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2010-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2010-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2010-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-2010-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-panamera-2010-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-panamera-2010-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -263456,7 +265571,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -263770,7 +265957,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-918-2015-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-918-2015-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-918-2015-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-918-2015-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-918-2015-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-918-2015-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-918-2015-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-918-2015-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-918-2015-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-918-2015-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -263887,7 +266083,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -264204,7 +266472,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-taycan-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-taycan-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-taycan-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-taycan-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-taycan-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-taycan-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-taycan-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-taycan-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-taycan-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-taycan-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -264321,7 +266598,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -264558,7 +266907,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-718-2020-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-718-2020-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-718-2020-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-718-2020-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-718-2020-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-718-2020-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-718-2020-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-718-2020-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-718-2020-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-718-2020-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -264675,7 +267033,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -264987,7 +267417,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-panamera-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-panamera-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-panamera-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -265104,7 +267543,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -265675,7 +268186,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-959-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-959-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-959-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-959-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-959-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-959-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-959-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-959-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-959-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-959-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -265792,7 +268312,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -266363,7 +268955,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v16__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v16__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v16__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v16__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v16__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v16__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v16__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v16__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v16.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v16.glb",
   "fallbackGlbUrl": null,
@@ -266480,7 +269081,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -266548,7 +269221,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v2__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v2__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v2__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v2__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v2__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v2__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v2__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v2__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-macan-2022-pw2-v2.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-macan-2022-pw2-v2.glb",
   "fallbackGlbUrl": null,
@@ -266665,7 +269347,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -267683,7 +270437,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v3__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v3__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v3__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v3__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v3__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v3__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v3__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-macan-2022-pw2-v3__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-macan-2022-pw2-v3.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-macan-2022-pw2-v3.glb",
   "fallbackGlbUrl": null,
@@ -267800,7 +270563,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -267856,7 +270691,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v17__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v17__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v17__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v17__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v17__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v17__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v17__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v17__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v17.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v17.glb",
   "fallbackGlbUrl": null,
@@ -267973,7 +270817,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -268031,7 +270947,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v18__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v18__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v18__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v18__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v18__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v18__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v18__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v18__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v18.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v18.glb",
   "fallbackGlbUrl": null,
@@ -268148,7 +271073,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
@@ -268213,7 +271210,16 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v19__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v19__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v19__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v19__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v19__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v19__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v19__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/porsche/porsche-911-pw2-v19__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v19.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-911-pw2-v19.glb",
   "fallbackGlbUrl": null,
@@ -268330,7 +271336,79 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Crayon",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Arctic Grey",
+     "colourFamily": "Light Grey",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Volcano Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "GT Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Jet Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Carrara White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Gentian Blue Metallic",
+     "colourFamily": "Dark Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Shark Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Guards Red",
+     "colourFamily": "Red",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Carmine Red",
+     "colourFamily": "Dark Red",
+     "finish": "Solid"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Python Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  }
  },
  {
   "schemaVersion": 2,
