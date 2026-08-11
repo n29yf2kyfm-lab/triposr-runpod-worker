@@ -236569,7 +236569,9 @@
   "pipelineVersion": "publish-batch-nw1-2026-08-10",
   "publishedAt": "2026-08-10",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "2026-08-11 poster fault (not an asset defect): Reviewed at 1.3x, at native, and side by side with nissan-silvia-nw1-v2 at matched scale, plus a 3.5x crop of the front end. The MESH is crisp (sharp 5-spoke rim with lug detail, defined bumper/wing b"
+  ],
   "notes": [
    "nw1 gated publish 2026-08-10: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-10, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
   ],
@@ -266867,7 +266869,9 @@
   "pipelineVersion": "publish-batch-pw2-2026-08-11",
   "publishedAt": "2026-08-11",
   "replacedAssetId": null,
-  "needsHumanReview": [],
+  "needsHumanReview": [
+   "2026-08-11 poster fault (not an asset defect): Reviewed at 0.64x in sheet, then a 4x crop of the rear, then native. The lower engine lid / rear panel breaks into hard-edged white shards with black slivers between them, in a roughly rectangular pat"
+  ],
   "notes": [
    "pw2 gated publish 2026-08-11: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-11, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
   ],
@@ -279413,8 +279417,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (soft body): Reviewed at 1.3x full-poster then a 4x crop of the flank. Hard-edged TRIANGULAR polygon facets cover the bonnet, front wing, both doors and the rear quarter - straight polygonal edges that do not track the key light, so not gloss. Front valance/bumper is an undefined blob, door shut lines are barely present, wing mirror is a smooth lump. Confirmed at 4x; not a reflection artefact.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -279604,7 +279608,8 @@
    "variantsHash": "a692cb5125ba2adcbcdc3997e777b4cdacf3bb96",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -289172,8 +289177,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (soft body): Reviewed at 0.64x in sheet, then 1.3x, then a 770px front-end crop side by side with mazda-mazda-2-2011-mzw1-v1 as a same-batch control. Control shows headlamp lens, internal reflector, bezel line, mesh grille, fog-lamp bezel and a bonnet shut line. The 323F shows headlamps as FLAT BLACK RECTANGLES with zero internal structure, no bonnet/wing/bumper shut lines anywhere, and a lower grille reduced ",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -289353,7 +289358,8 @@
    "variantsHash": "4b4bd0e9e7fbf7f2c09d4df63b18dc12570631fc",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
@@ -289606,8 +289612,8 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "approved",
-  "quarantineReason": null,
+  "publicationStatus": "quarantined",
+  "quarantineReason": "2026-08-11 owner audit (damage, soft body): Reviewed at 0.64x in sheet, then 1.3x, then full native. Wheels are detached and misplaced: six wheel/tyre objects visible, at least two hanging outside the bodywork (one behind and below the rear bumper with a chrome hub, one bare tyre between the axles outside the body silhouette); far-side wheels protrude past the body outline; tyre bottoms sit at four different heights. Separately soft: tailga",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -289792,7 +289798,8 @@
    "variantsHash": "94c8c1b89a746f9441df372e1d4df38a93933ca1",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "quarantinedAt": "2026-08-11"
  },
  {
   "schemaVersion": 2,
