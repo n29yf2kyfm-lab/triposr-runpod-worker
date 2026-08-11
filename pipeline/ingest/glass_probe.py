@@ -60,8 +60,15 @@ def gltf_json(url):
     return json.loads(body.decode("utf-8", "replace"))
 
 
-def probe(uid, stage="staging/jeep"):
-    url = f"{SB}/storage/v1/object/public/{BUCKET}/{stage}/{uid}.glb"
+def probe(uid, stage="staging/jeep", url=None):
+    """Probe a staged uid, or any GLB by passing `url` directly.
+
+    The url form exists so a retro audit of the LIVE catalogue can reuse
+    these exact rules. A retro check that reimplements them drifts from
+    the wave check, and then the two disagree about the same car.
+    """
+    if url is None:
+        url = f"{SB}/storage/v1/object/public/{BUCKET}/{stage}/{uid}.glb"
     g = gltf_json(url)
     mats = g.get("materials") or []
     trans, glazing, flat_vals, untex, body_trans = [], [], set(), 0, []
@@ -103,14 +110,14 @@ def probe(uid, stage="staging/jeep"):
         tex_alpha = mode in ("BLEND", "MASK") and textured
         is_trans = (mode in ("BLEND", "MASK") and alpha < 1.0) or alpha < 1.0 or tr > 0 \
             or tex_alpha
+        via = "texture-alpha" if (tex_alpha and alpha >= 1.0 and tr <= 0) else "factor"
         if is_trans:
             trans.append({"name": nm, "alpha": round(alpha, 3), "mode": mode,
-                          "transmission": round(tr, 3),
-                          "via": "texture-alpha" if (tex_alpha and alpha >= 1.0
-                                                     and tr <= 0) else "factor"})
+                          "transmission": round(tr, 3), "via": via})
         if GLASSY.search(nm):
             glazing.append({"name": nm, "alpha": round(alpha, 3), "mode": mode,
-                            "transmission": round(tr, 3), "transparent": bool(is_trans)})
+                            "transmission": round(tr, 3), "transparent": bool(is_trans),
+                            "via": via if is_trans else None})
         # GLOBAL-ALPHA SHELL -- found on the Volvo wave 2026-08-11, and NOT the
         # same thing as the flat shell above. "Volvo XC60" (1,134,258 faces)
         # carries 18 materials of which EVERY ONE is alphaMode=BLEND: carpaint
@@ -180,10 +187,9 @@ def probe(uid, stage="staging/jeep"):
 
     glazing = [x for x in glazing if not TRIMMY.search(x["name"])] or glazing
     windows = [x for x in glazing if WINDOWY.search(x["name"])]
-    if not windows:
-        windows = [x for x in glazing if not LAMPY.search(x["name"])]
+    non_lampy = [x for x in glazing if not LAMPY.search(x["name"])]
+    windows = windows + [x for x in non_lampy if x not in windows]
     if windows:
-        # Window-specific materials exist: they alone decide the verdict.
         glazing = windows
     else:
         # EVERY glazing-named material is a lamp lens, so the file names no
@@ -195,22 +201,57 @@ def probe(uid, stage="staging/jeep"):
         # transparent-material branch below, which reads windoFS correctly.
         glazing = []
 
+    # THE FACTOR IS THE ONLY THING THAT CAN BE BANDED. Fixed 2026-08-11 on the
+    # Honda retro-audit after re-validating against PORSCHE_GLASS.json: the probe
+    # scored 103/107, and THREE of the four misses were ground-truth-CLEAR cars
+    # banded "faded" (a cull) purely because their transparency lives in a
+    # TEXTURE alpha channel. Those materials carry factor alpha = 1.0 by
+    # definition -- that is the whole reason texture alpha was added as a signal
+    # -- so eff_alpha returns 1.0, which is above the 0.94 faded threshold, and
+    # every texture-alpha car banded faded. The texture-alpha extension was
+    # meant to rescue the 1987 Porsche 959 and the GT3 RS from "opaque"; it
+    # moved them to "faded" instead, and both are culls, so it half-worked and
+    # the file recorded it as fixed. Split the two signals apart:
+    #   - factor-transparent glazing states its opacity -> band it
+    #   - texture-alpha-only glazing asserts per-texel alpha of UNKNOWN
+    #     magnitude -> it is transparent, it is NOT bandable, and the only way
+    #     to measure it is glass_texture_alpha.py against the image itself.
+    # Banding a value the file never states is the same failure the specGloss
+    # fix above was written for.
+    factor_trans = [x for x in trans if x["via"] == "factor"]
     trans_glazing = [x for x in glazing if x["transparent"]]
-    if trans_glazing:
-        lo = min(eff_alpha(x) for x in trans_glazing)
+    factor_glazing = [x for x in trans_glazing if x["via"] == "factor"]
+    if factor_glazing:
+        lo = min(eff_alpha(x) for x in factor_glazing)
         verdict = "faded" if lo > 0.94 else "clear"
-    elif glazing and not trans_glazing:
+    elif trans_glazing:
+        # glazing is transparent, but only through its texture's alpha channel.
+        verdict = "clear"
+    elif glazing:
         # glazing material EXISTS by name and is fully opaque. The render
         # worker would still force transmission=1.0 onto it and manufacture
         # clear glass in the sheet -- this is exactly the Porsche failure.
-        verdict = "opaque" if not trans else "ambiguous"
-    elif trans:
-        # no glazing-named material, but something in the file is transparent.
-        # Most likely the glazing under a non-matching name (the clay-shell
-        # case shows through in the sheet because no override fires).
-        lo = min(eff_alpha(x) for x in trans)
+        #
+        # Only a FACTOR-transparent material elsewhere in the file can soften
+        # this to "ambiguous". A decal, logo, stitch or grid sheet with an alpha
+        # channel is not evidence that the car has glass somewhere: measured on
+        # 06f8003040f4 ('Porsche 911 Carrera rigged'), whose glazing is
+        # literally named "Window_Glass_not_transparent" and whose only
+        # transparent materials are Grid/Logo/Stich/Interior_Detail decals. It
+        # is ground-truth OPAQUE and the decals were dragging it to ambiguous.
+        verdict = "opaque" if not factor_trans else "ambiguous"
+    elif factor_trans:
+        # no glazing-named material, but something in the file is genuinely
+        # transparent by factor. Most likely the glazing under a non-matching
+        # name (the clay-shell case shows through in the sheet because no
+        # override fires).
+        lo = min(eff_alpha(x) for x in factor_trans)
         verdict = "faded" if lo > 0.94 else "clear"
     else:
+        # Nothing glazing-named and nothing factor-transparent. If decals carry
+        # texture alpha that is not evidence either way, so this lands on
+        # "opaque" with certainty=inferred, which the caller must route to the
+        # eye rather than fail -- see the certainty note below.
         verdict = "opaque"
 
     # An "opaque" verdict reached with NO glazing-named material in the file is
