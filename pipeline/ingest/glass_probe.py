@@ -212,7 +212,14 @@ def probe(uid, stage="staging/jeep", url=None):
     # alone while its actual windows were opaque. Split them apart and let the
     # WINDOW-specific materials decide whenever any exist.
     LAMPY = re.compile(r"red|orange|amber|yellow|tail|head|lamp|light|blink|"
-                       r"turn|indicat|fog|reverse|brake|stop|feux|clignot", re.I)
+                       r"turn|indicat|fog|reverse|brake|stop|feux|clignot|"
+                       # swiatlo/swiatla = Polish for light. Added 2026-08-11 on
+                       # the Honda wave: "Honda CR-V MK2 Pre-Facelift" is a
+                       # Polish-authored model whose ONLY transparent materials
+                       # are lamp__car (0.19) and swiatla_tyl_szkl (rear light
+                       # glass, 0.5). "lamp" was caught, "swiatla" was not, so a
+                       # car with no glazing surface at all still scored "clear".
+                       r"swiatl|swiatla|swiatlo", re.I)
     WINDOWY = re.compile(r"window|windscreen|windshield|vitre|scheibe|fenster|"
                          r"glazing|pare.?brise|lunette|luneta|ventana|finestrino", re.I)
     # INTERIOR TRIM IS NOT GLAZING EITHER, and it beats the LAMPY guard because
