@@ -1,0 +1,147 @@
+{
+ "exact": [
+  {
+   "faces": 743808,
+   "keep_i": 2,
+   "keep_uid": "6dd3f12d311d4d1f8a55ce0e1596a442",
+   "keep_name": "2004 Mercedes-Benz SLR McLaren",
+   "drop_i": 122,
+   "drop_uid": "d2f44fb984ff4018b498790a114340a8",
+   "drop_name": "Mercedes-Benz SLR Mclaren | www.vecarz.com",
+   "confidence": "high \u2014 exact face-count collision"
+  },
+  {
+   "faces": 235572,
+   "keep_i": 3,
+   "keep_uid": "b166760940be429398f32d8855d36644",
+   "keep_name": "2007 Mercedes-Benz SLR Mclaren 722 Edition",
+   "drop_i": 5,
+   "drop_uid": "7d60e1ec4e734cfab404d39e23aa61e2",
+   "drop_name": "2009 Mercedes-Benz SLR McLaren 722 Edition",
+   "confidence": "high \u2014 exact face-count collision"
+  },
+  {
+   "faces": 361236,
+   "keep_i": 23,
+   "keep_uid": "c6ecabd605d143b1991792ec0ea385ac",
+   "keep_name": "2020 Mercedes Benz GLS 580",
+   "drop_i": 130,
+   "drop_uid": "3210075cd4484f38b39870f029df02a2",
+   "drop_name": "Uploads Files 2787791 Mercedes+ Benz+GLS+580 Fbx",
+   "confidence": "high \u2014 exact face-count collision"
+  },
+  {
+   "faces": 230325,
+   "keep_i": 27,
+   "keep_uid": "64db1862be754722bbf4f23695bf06a5",
+   "keep_name": "2020 Mercedes-Benz G-Class AMG G 63",
+   "drop_i": 28,
+   "drop_uid": "52296f1a65d54a85a2ed7cb67604e554",
+   "drop_name": "2020 Mercedes-Benz G-Class AMG G63",
+   "confidence": "high \u2014 exact face-count collision"
+  },
+  {
+   "faces": 230325,
+   "keep_i": 27,
+   "keep_uid": "64db1862be754722bbf4f23695bf06a5",
+   "keep_name": "2020 Mercedes-Benz G-Class AMG G 63",
+   "drop_i": 37,
+   "drop_uid": "55d5ebad132e4af6b63432f63b25ed11",
+   "drop_name": "HH_mercedes-benz_g-class_amg_g_63",
+   "confidence": "high \u2014 exact face-count collision"
+  },
+  {
+   "faces": 230325,
+   "keep_i": 27,
+   "keep_uid": "64db1862be754722bbf4f23695bf06a5",
+   "keep_name": "2020 Mercedes-Benz G-Class AMG G 63",
+   "drop_i": 52,
+   "drop_uid": "3f7e69ff229e4c56a5dc69ce273993b0",
+   "drop_name": "Mercedes Benz G- Class Amg G 63",
+   "confidence": "high \u2014 exact face-count collision"
+  },
+  {
+   "faces": 293331,
+   "keep_i": 29,
+   "keep_uid": "53c739ff5512413e8d6c373c65b95047",
+   "keep_name": "2021 Mercedes-Benz S-Class Maybach",
+   "drop_i": 115,
+   "drop_uid": "6125a32ee10048ca96eee0c28b9c8b6c",
+   "drop_name": "Mercedes-Benz S 580 Maybach (W223)",
+   "confidence": "high \u2014 exact face-count collision"
+  }
+ ],
+ "near_candidates": [
+  {
+   "faces_apart": 2,
+   "a_i": 88,
+   "a_name": "Mercedes- Benz S-class 2003",
+   "a_uid": "1d2494ea90434de984b9dc677461af5a",
+   "b_i": 116,
+   "b_name": "Mercedes-Benz S500 2003 (UK-Spec)",
+   "b_uid": "407afb21559440b38e06052d5bcd79c0",
+   "confidence": "HIGH \u2014 2 faces apart, effectively certain",
+   "note": "MISSED BY dupe_check's RULES and added by hand. Rule (b) needs face counts within 50 AND title token overlap >= 0.4; this pair is 2 faces apart but its titles share only '2003' ({s,class,2003} vs {s500,2003,uk,spec} = 0.33), so the title gate vetoed a near-certain identity. A 2-face gap should not need a title to corroborate it."
+  },
+  {
+   "faces_apart": 760,
+   "a_i": 75,
+   "a_name": "Mercedes- Benz E-class (Mk2)(W124)",
+   "a_uid": "81b317899e9641d9ac08f0be4fd09fac",
+   "b_i": 74,
+   "b_name": "Mercedes- Benz E-class (C124) coupe",
+   "b_uid": "dff3640ff0ff464984e2d7f320794e25",
+   "confidence": "candidate only \u2014 near-proximity scored 50% precision on Mercedes"
+  },
+  {
+   "faces_apart": 7508,
+   "a_i": 75,
+   "a_name": "Mercedes- Benz E-class (Mk2)(W124)",
+   "a_uid": "81b317899e9641d9ac08f0be4fd09fac",
+   "b_i": 73,
+   "b_name": "Mercedes- Benz E-class (A124) convertible",
+   "b_uid": "dae8d703b11948799c9f877e8f2858cc",
+   "confidence": "candidate only \u2014 near-proximity scored 50% precision on Mercedes"
+  },
+  {
+   "faces_apart": 6748,
+   "a_i": 74,
+   "a_name": "Mercedes- Benz E-class (C124) coupe",
+   "a_uid": "dff3640ff0ff464984e2d7f320794e25",
+   "b_i": 73,
+   "b_name": "Mercedes- Benz E-class (A124) convertible",
+   "b_uid": "dae8d703b11948799c9f877e8f2858cc",
+   "confidence": "candidate only \u2014 near-proximity scored 50% precision on Mercedes"
+  },
+  {
+   "faces_apart": 2316,
+   "a_i": 110,
+   "a_name": "Mercedes-Benz G63 AMG (W464)",
+   "a_uid": "3b25ec59233a4a82a6732b0a1419e553",
+   "b_i": 80,
+   "b_name": "Mercedes- Benz GLA35 AMG",
+   "b_uid": "092ee873e85843c8826fc649c44e9a19",
+   "confidence": "candidate only \u2014 near-proximity scored 50% precision on Mercedes"
+  },
+  {
+   "faces_apart": 309,
+   "a_i": 34,
+   "a_name": "2024 Mercedes-Benz EQS 580",
+   "a_uid": "b351c436890f4198b6aae86ffc9b0222",
+   "b_i": 33,
+   "b_name": "2024 Mercedes Benz EQS 580",
+   "b_uid": "613793ce40124faebbf8df350f8d627f",
+   "confidence": "candidate only \u2014 near-proximity scored 50% precision on Mercedes"
+  },
+  {
+   "faces_apart": 59,
+   "a_i": 54,
+   "a_name": "Mercedes Benz GL 350 2012",
+   "a_uid": "f74b3803425248799902579e10027864",
+   "b_i": 9,
+   "b_name": "2012 Mercedes Benz Gl350",
+   "b_uid": "6df2a99b1dbc4b5b8baaf7accf18390f",
+   "confidence": "candidate only \u2014 near-proximity scored 50% precision on Mercedes"
+  }
+ ]
+}

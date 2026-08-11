@@ -1,0 +1,5842 @@
+[
+ {
+  "uid": "dedd8f64a05d4d769d352ddcac034d25",
+  "name": "Mercedes-Benz C-Class MK3 W204 2007-2014",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 59,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glassbl",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "MBC63_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "MBC63_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "etk800_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "63c20a79bbb84d60a466b578561f29a1",
+  "name": "Mercedes-Benz ML (W163) 1997-2005",
+  "verdict": "ambiguous",
+  "certainty": "inferred",
+  "n_materials": 16,
+  "n_transparent": 1,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 18
+ },
+ {
+  "uid": "a73c924778de4d66ae45a7880ab8943e",
+  "name": "Mercedes Benz SLR McLaren (Bull)",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 30,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "GL_basic_Glass_material",
+    "alpha": 0.632,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "GL_basic_glass",
+    "alpha": 0.562,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 5
+ },
+ {
+  "uid": "1480dab3f0c74dc0a262154ec508e7e0",
+  "name": "Mercedes Benz G-class AMG Brabus Model",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 77,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "ExtWindowsGlass.001",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "ExtWindowsGlass_0.001",
+    "alpha": 0.375,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "ExtWindowsGlass_1.001",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "IntWindows.002",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "55df50faff8e4918b47a00c6e013d37b",
+  "name": "Mercedes-Benz Vito MK1 (W638) 1996-2003",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 34,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "window",
+    "alpha": 0.126,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "6bd804f3f61a4a5e9dcddddab42cf0f9",
+  "name": "Mercedes- Benz AMG GLC 63s 4MATIC+",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 71,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "DAMAGE_GLASS",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Ext_Glass_Roof",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "hlglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "INT_GLASS",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 13
+ },
+ {
+  "uid": "092ee873e85843c8826fc649c44e9a19",
+  "name": "Mercedes- Benz GLA35 AMG",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "Mercedes-AMG_GLA_35_glass11",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Mercedes-AMG_GLA_35_glass_w",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "6df2a99b1dbc4b5b8baaf7accf18390f",
+  "name": "2012 Mercedes Benz Gl350",
+  "verdict": "ambiguous",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "GlassParts1Mtl",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "f74b3803425248799902579e10027864",
+  "name": "Mercedes Benz GL 350 2012",
+  "verdict": "ambiguous",
+  "certainty": "proven",
+  "n_materials": 21,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "GlassParts1Mtl",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "6ccc813d26ac4dcabdba83c896f4436c",
+  "name": "Mercedes-Benz B-Klasse MK2 (W246) 2011-2018",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 53,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "mbclass_gps_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "mbclass_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "mbclass_glass_int",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "4b028a5eb02b43f184e7b2471ea5c0b9",
+  "name": "2004-2010 Mercedes- Benz CLS",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "w219par_glass_ton",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "w219par_glass1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "124436c2086d45708608676159a25664",
+  "name": "Mercedes Benz CLS (C219) 2004-2010",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "w219par_glass1.001",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 2
+ },
+ {
+  "uid": "a53e0e45b4b64dc6a65f4eeb016f01f2",
+  "name": "Mercedes-Benz G63 AMG BRABUS G700 ( The Rocket )",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 86,
+  "n_transparent": 5,
+  "glazing_named": [
+   {
+    "name": "ExtWindowsGlass.002",
+    "alpha": 0.054,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "IntWindows.001",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "ExtWindowsGlass_0.002",
+    "alpha": 0.375,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "ExtWindowsGlass_1.002",
+    "alpha": 0.133,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 67
+ },
+ {
+  "uid": "97baced3bcf14d9b8c3eedf6233bd4e9",
+  "name": "Mercedes Benz C43 AMG",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 68,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "w206_glass_F",
+    "alpha": 0.181,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "w206_glass_int",
+    "alpha": 0.788,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "w206_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "b721c580738d413c98aeca1f0059a481",
+  "name": "Mercedes Benz CLE-450",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 89,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "Windshield1Mtl",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Hdcledoorglassltint1Mtl",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Hdcledoorglassl1Mtl",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "f4a3f2d422af461d8a462674509841f1",
+  "name": "2013 Mercedes-Benz SLS AMG Electric Drive (C197)",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 22,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "glaas_window1",
+    "alpha": 0.425,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass_border1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "5455d7c2e4694404a2ee6ecb036ef9e3",
+  "name": "Mercedes- Benz SLS AMG Electric Drive",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 22,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glaas_window1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_border1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "65a80e8e84c149c18023030733b41a66",
+  "name": "2020 Mercedes-Benz EQV",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 27,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "M_2020_Mercedes_Benz_EQV_Windows",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "M_2020_Mercedes_Benz_EQV_WindowsTrims1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 3
+ },
+ {
+  "uid": "3b25ec59233a4a82a6732b0a1419e553",
+  "name": "Mercedes-Benz G63 AMG (W464)",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 63,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "window_plastic",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "IntWindows",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "G-class_glass",
+    "alpha": 0.48,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "G-class_glass.004",
+    "alpha": 0.236,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "G-class_glass_tint",
+    "alpha": 0.48,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "baf6e4dff35a43febcc6d75c87caa013",
+  "name": "Mercedes- Benz CLS 63S AMG",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 84,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glassssss",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "priborka_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "CLS_Glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 19
+ },
+ {
+  "uid": "03d647d99f9348328391cd7b1394c7e2",
+  "name": "2013 Mercedes-Benz ML250 Bluetec Executive",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "glass_window",
+    "alpha": 0.35,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "6dd3f12d311d4d1f8a55ce0e1596a442",
+  "name": "2004 Mercedes-Benz SLR McLaren",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 34,
+  "n_transparent": 9,
+  "glazing_named": [
+   {
+    "name": "Window",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass_surr",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 0.474,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 31
+ },
+ {
+  "uid": "d2f44fb984ff4018b498790a114340a8",
+  "name": "Mercedes-Benz SLR Mclaren | www.vecarz.com",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 34,
+  "n_transparent": 7,
+  "glazing_named": [
+   {
+    "name": "Window",
+    "alpha": 0.45,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass_surr",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 0.474,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 28
+ },
+ {
+  "uid": "bf1464ad3ffb4f4696aa339f8ab12b07",
+  "name": "2010 Mercedes-Benz SLS AMG",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 36,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "window_black",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glasses",
+    "alpha": 0.529,
+    "mode": "BLEND",
+    "transmission": 0.471,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 13
+ },
+ {
+  "uid": "6a0ef719f8d74378969b6f6095bd8981",
+  "name": "Mercedes- Benz GLC-class (X205) F Cell",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 20,
+  "n_transparent": 6,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "matteglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "05e62ce036554a7eb5cd97b3d2fe0158",
+  "name": "Mercedes-Benz A-Class W168",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 26,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "Carro_Vidros_Vermelhos",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Carro_Vidros",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Carro_Vidros1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Carro_Vidro_Laranja",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Carro_Vidros_Vermelhos1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "96c1c8f27333453db1cde651bc089708",
+  "name": "2003 Mercedes-Benz CLK 55 AMG",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 23,
+  "n_transparent": 6,
+  "glazing_named": [
+   {
+    "name": "Window",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass_surr",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 13
+ },
+ {
+  "uid": "148cb0c6b73d49c88306151683185181",
+  "name": "2023 Mercedes-Benz EQS 450+",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 26,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "Carro_Vidros",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Carro_Vidros_1",
+    "alpha": 0.6,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Carro_Vidros_Vermelhos",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 6
+ },
+ {
+  "uid": "ed603ac915a1494f969ed0025ba9d7d0",
+  "name": "Mercedes- Benz E-class S212 Binz Xtend",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 5,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "106d5ab342744e1a9d9cc473f9d14a5c",
+  "name": "Mercedes Benz GLS /HU",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 38,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "gls_glass_1_043",
+    "alpha": 0.261,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "etk800_glass_002",
+    "alpha": 0.852,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "86dcc66d18d84561a42d9de681a6011f",
+  "name": "Mercedes-Benz GLA220 CDi",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 25,
+  "n_transparent": 6,
+  "glazing_named": [
+   {
+    "name": "GlassDRL1",
+    "alpha": 0.45,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "2c21b97ff3dc4fc3b1ef9e4bb0164318",
+  "name": "Mercedes-Benz AMG GT-R (2017)",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 14,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "Glass",
+    "alpha": 0.075,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "0118a759ff24443b8c15a6ea855a5423",
+  "name": "Mercedes- Benz SLR Mclaren",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 21,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "Vehicle_Exterior_mm_windows",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Tinted1",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "SLR_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Translucent_Glass_Gray2",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Translucent_Glass_Gray1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 9
+ },
+ {
+  "uid": "5ccf8a9bb28e4f3fa509b27b2953e427",
+  "name": "Mercedes Benz X Class",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "Glass",
+    "alpha": 0.32,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "c18392f7273f4d6f85255ae3ff2b389a",
+  "name": "Mercedes- Benz GLK",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 28,
+  "n_transparent": 5,
+  "glazing_named": [
+   {
+    "name": "MBe10_greenglass",
+    "alpha": 0.478,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "MBe10_darkglass",
+    "alpha": 0.843,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "MBe10_clearglass",
+    "alpha": 0.031,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "e18414e0bed048feb766b3b390784937",
+  "name": "Mercedes- Benz SLK55 AMG R172",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 81,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "slk_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "vivace_gps_screen.003",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "5674a3983cb3493c899dab9d919f80ce",
+  "name": "2016 Mercedes-Benz GLA 200",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 25,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "Carro_Vidros",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Carro_Vidros_1",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Carro_Vidros_Vermelhos",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 3
+ },
+ {
+  "uid": "36924d74d0494380a3e507d5745d5c14",
+  "name": "Mercedes- Benz M-class 2011",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "4eb0a08f2c0c4c64b1a3299d5e3954ee",
+  "name": "Mercedes-Benz SLR McLaren",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 84,
+  "n_transparent": 6,
+  "glazing_named": [
+   {
+    "name": "SLR_window",
+    "alpha": 0.302,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "SLR_glass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "SLR_black_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 75
+ },
+ {
+  "uid": "3b5069f7adbd41239671fc4a1a4f77bd",
+  "name": "Mercedes-Benz ML63 2009",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 43,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "ml63_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "ml63_glass_int",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "ml63_screen",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 2
+ },
+ {
+  "uid": "842e5669e54b49debebfa7b7b5ae2c15",
+  "name": "Mercedes-Benz A-Class (W169) 2004-2012",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 20,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "d_glass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass",
+    "alpha": 0.1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "r_glass",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 4
+ },
+ {
+  "uid": "fa5a62f49dff495fae5223762ca80553",
+  "name": "Mercedes-Benz CLK GTR",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 56,
+  "n_transparent": 7,
+  "glazing_named": [
+   {
+    "name": "window",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass",
+    "alpha": 0.1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "black_glass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 35
+ },
+ {
+  "uid": "fe00234b5af84539ade55c31ca6639e3",
+  "name": "Mercedes- Benz AMG GT 4- Door Coupe (X290)",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 6,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "5840d1dc329d430bb85aafee143cc655",
+  "name": "Mercedes-Benz CL (C216) 2006-2014",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 54,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "cl65_steklo",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "cl65_hl_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "cl65_blackglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "bf41546913a54520a2e38c4b99915d36",
+  "name": "Mercedes- Benz SL-class (W113) 1963",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "740b3430e5714dd4a288265b4115ba0d",
+  "name": "Mercedes- Benz CLS 2022",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "d_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "r_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "vd_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "b2810cbb2bde48439bb52d7643cc9485",
+  "name": "Mercedes- Benz E-class W123 coupe",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 15,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "b5ed7460384048dcbe89c941d524aff8",
+  "name": "Mercedes-Benz ML63 2008-2011",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 65,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "ml63_glasswindows",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "ml63_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "ml63_screen",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "ml63_glass_int",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "c91f15e9518f4dd2b7574002778cfc28",
+  "name": "Mercedes-Benz C-Class MK3 (W204) 2007-2014",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 80,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "etk800_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "etk800_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "w2042_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "etk800_glass.001",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "88a61d91431b4414a7e32a936396191c",
+  "name": "2013 Mercedes-Benz SLS AMG GT",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 22,
+  "n_transparent": 8,
+  "glazing_named": [
+   {
+    "name": "SLSglass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 33
+ },
+ {
+  "uid": "dae8d703b11948799c9f877e8f2858cc",
+  "name": "Mercedes- Benz E-class (A124) convertible",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "06b7a34016a44d3e8e953e5fc68d58ec",
+  "name": "Mercedes- Benz C-class (S202) estate",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 5,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "97be219788544a2c953ccc04e37b97e8",
+  "name": "Mercedes- Benz E-class sedan 2010",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 5,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "9bd7aeb24fa14ab089c941cf67d675ad",
+  "name": "Mercedes Benz 300 SL",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 33,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "GLASS_2.001",
+    "alpha": 0.342,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "GLASS",
+    "alpha": 0.429,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "GUMA_OKNO",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "GLASS_3",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "GLASS_2",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "GLASS1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "5b85f87f175b434288708b83b62c42de",
+  "name": "Mercedes- Benz E-class (S124)wagon",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "b5d41f9474c94127a7bf99ebef5da574",
+  "name": "Mercedes-Benz SLS AMG",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 30,
+  "n_transparent": 17,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 16
+ },
+ {
+  "uid": "81b317899e9641d9ac08f0be4fd09fac",
+  "name": "Mercedes- Benz E-class (Mk2)(W124)",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "c56dc8fcfc624cf89ba13760f3ad72ae",
+  "name": "Mercedes- Benz SL-class R107 coupe",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "e98b934960b14077ae7c2e86cbf49064",
+  "name": "2011 Mercedes- Benz GL",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 12,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "greenglass.016",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass.198",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "efdab8fb67944da6a4449a9da5350134",
+  "name": "2012 Mercedes Benz SLS AMG Roadster",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 48,
+  "n_transparent": 8,
+  "glazing_named": [
+   {
+    "name": "Glass",
+    "alpha": 0.364,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Glass_trim",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Nav_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 28
+ },
+ {
+  "uid": "dff3640ff0ff464984e2d7f320794e25",
+  "name": "Mercedes- Benz E-class (C124) coupe",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "609d61e7237f48508fce6405e98c485b",
+  "name": "Mercedes- Benz S-class 1999",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "8bf0e8ed024e483b9b9326794d1b2aa6",
+  "name": "Mercedes- Benz C-class W203 estate",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 15,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "1c5456a9f43d46b28610dfa3e78417f7",
+  "name": "Mercedes-Benz C-Class S203 Estate",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 15,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clearglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "2311177fc828453fb792743b8fe48705",
+  "name": "Mercedes Benz R-Class W251 2005-2014",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 30,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "R-dark_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "R-fl-glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "R-glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 6
+ },
+ {
+  "uid": "517779b60d6d4b778e43403e2765832a",
+  "name": "2021 Mercedes-Benz S500",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 38,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "Windows",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "03b3e3cc99e6462697a5cbcbb47d17e3",
+  "name": "Mercedes- Benz S-class (W126) 1979",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "61583f5c172f4e25a963e52e1e67c11a",
+  "name": "Mercedes Benz V Class",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 7,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.406,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 4
+ },
+ {
+  "uid": "ff9ba755fc884fb88b5e73c3df1296e1",
+  "name": "Mercedes- Benz C-class W203 sedan",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 15,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "4ed156b0405e4e529d193ab1ccc11da9",
+  "name": "2013 Mercedes-Benz CLS 63 AMG Tuned (W218)",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 21,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "GLASS",
+    "alpha": 0.474,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 2
+ },
+ {
+  "uid": "1d2494ea90434de984b9dc677461af5a",
+  "name": "Mercedes- Benz S-class 2003",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 15,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "57e93f32bd8a4603bbd3f5fb873728b9",
+  "name": "Mercedes-Benz AMG-GT 2015 (FBX)",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 34,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "Window_Border",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass_ext",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass_-_Clear_-_Bumps_002",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass_-_Clear_-_Ridged_-",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 2
+ },
+ {
+  "uid": "8e0b6498a8a4475e8d4913ddc19f5942",
+  "name": "Mercedes Benz SL600 R129 Widebody kit",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 48,
+  "n_transparent": 12,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 0.309,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass_trim",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 15
+ },
+ {
+  "uid": "cbad3d3420584ff3b5cd472b869f92d6",
+  "name": "Mercedes- Benz Ponton 180 W120",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 15,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "7306bfef604b4157a6a2bd10669bd534",
+  "name": "Mercedes- Benz SL-class (R121) hardtop 1955",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clearglass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "f7ec1d8e64ac4f5a82028d531a7e9438",
+  "name": "Kaze's Mercedes-Benz CLK DTM AMG",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 39,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "ventanas",
+    "alpha": 0.477,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "cristal_faro",
+    "alpha": 0.471,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 5
+ },
+ {
+  "uid": "d9dc4af4a6e645b19ebd7d423870e0f7",
+  "name": "2012 Mercedes Benz SLS AMG Roadster",
+  "verdict": "ambiguous",
+  "certainty": "proven",
+  "n_materials": 22,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "Glass_trim",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 8
+ },
+ {
+  "uid": "a1c89ee2c731474dacc20701555915c5",
+  "name": "Mercedes-Benz AMG GT Black Series",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 9,
+  "glazing_named": [
+   {
+    "name": "Window",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Glass",
+    "alpha": 0.328,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 44
+ },
+ {
+  "uid": "3b11611c6d06415b82b96495f5f249ce",
+  "name": "Mercedes-Benz CLS [w219]",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 37,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "CLS500w219_black_glass3_int",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "etk800_glass",
+    "alpha": 0.84,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "c07665219b684eb794ea84d492bb9361",
+  "name": "Mercedes Benz ML MK2 W164 2005-2011",
+  "verdict": "ambiguous",
+  "certainty": "proven",
+  "n_materials": 26,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "cfad96d57543486f8d666510ee8c95f1",
+  "name": "2014 Mercedes-Benz CLA-Class",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 8,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "Glass11Mtl",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass20021Mtl",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass31Mtl",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "2020f04e67ba4bc7abbd284db40f9d6b",
+  "name": "Mercedes-Benz-SLS-AMG-Coupe-2012",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 15,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "Glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "0df7c77c207f49dcb372d4762169378a",
+  "name": "2014 Mercedes-Benz SLS AMG Black Series",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "SLSBMAT_Glass_130",
+    "alpha": 1.0,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 32
+ },
+ {
+  "uid": "e8b8c7a1f083407b9eb5772bc61dcac1",
+  "name": "2020 Mercedes-Benz A45 S AMG 4Matic",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "a45MAT_Glass_048",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 34
+ },
+ {
+  "uid": "2e7f6ee31f794a73b23d9a04155cce74",
+  "name": "Mercedes- Benz B Class",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 11,
+  "n_transparent": 11,
+  "glazing_named": [
+   {
+    "name": "greenglass.019",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass.201",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0.2,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": true,
+  "n_textures": 0
+ },
+ {
+  "uid": "e800080743af4287828e3af23ffdcaad",
+  "name": "Mercedes- Benz C Class Wagon W204",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 11,
+  "n_transparent": 11,
+  "glazing_named": [
+   {
+    "name": "clearglass.200",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0.2,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "greenglass.018",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass.037",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0.5,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": true,
+  "n_textures": 0
+ },
+ {
+  "uid": "59e076fdd02a417cb2fb4d11709d0f13",
+  "name": "Mercedes- Benz E Class Binz Limousine W212",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 13,
+  "n_transparent": 13,
+  "glazing_named": [
+   {
+    "name": "clearglassbumped",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0.2,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "greenglass.025",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass.207",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0.2,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": true,
+  "n_textures": 0
+ },
+ {
+  "uid": "febc635eaf8d43a1941a2eca49bb8086",
+  "name": "Mercedes- Benz E Class Convertible A207",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 16,
+  "glazing_named": [
+   {
+    "name": "greenglass.021",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass.038",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0.5,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass.203",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0.2,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": true,
+  "n_textures": 0
+ },
+ {
+  "uid": "e6bac40acd2d4d709b1e8109d9f3fac3",
+  "name": "Mercedes- Benz E Class Coupe C207",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 15,
+  "n_transparent": 15,
+  "glazing_named": [
+   {
+    "name": "clearglass.204",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0.2,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "greenglass.022",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": true,
+  "n_textures": 0
+ },
+ {
+  "uid": "003a0f420139414d917e83a28227547c",
+  "name": "Mercedes- Benz G500",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 15,
+  "n_transparent": 15,
+  "glazing_named": [
+   {
+    "name": "greenglass.071",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass.254",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0.2,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": true,
+  "n_textures": 0
+ },
+ {
+  "uid": "fe729d6dcb7f4e65a71cfbf9da2cf7e5",
+  "name": "Mercedes- Benz Vito",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 17,
+  "glazing_named": [
+   {
+    "name": "greenglass.073",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass.256",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0.2,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": true,
+  "n_textures": 0
+ },
+ {
+  "uid": "ce2d0898a50b4320822cc5bdb12d3f64",
+  "name": "Mercedes-Benz G-Wagon",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 31,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "window_cleaner_metal",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "window_gumm",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "window_glass.st",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "window_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "BMD_AbstractGlass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "0df0253ff3154fd8bea0f52501ac437f",
+  "name": "Mercedes-Benz S-Class W220",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 75,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass_invisible.002",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "mercw220_glass_jelt",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "etk800_glass.002",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "mercw220_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "etk800_glass_toner.001",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "b6e1b7ea76234f2ab9057b1f199b4b76",
+  "name": "Mercedes-Benz S-Klasse MK4 1998-2005",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 76,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "mercw220_glass_jelt",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "etk800_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "mercw220_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "etk800_glass_toner",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 5
+ },
+ {
+  "uid": "c7d3bf8fce824a0bbfc6e173ec12a0da",
+  "name": "Mercedes-Benz Vito MK3 W447 from 2014",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 25,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "viano_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass2",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "335b937fe4a049fe9887598a95f92d0e",
+  "name": "Mercedes- Benz C- Class (W204) eto pizdec",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "c63w204kene_screen_dorest",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass__env_4_spec",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "c63w204kene_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible.001",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "826120c1976947b6ad308dafb92ef41d",
+  "name": "Mercedes- Benz W222 S650 Maybach",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 71,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "bw_window1__4",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "bw_window1__2",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "bw_window1__3",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "75025fd854254fea97408aab004e5776",
+  "name": "Mercedes Benz SLS AMG",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 68,
+  "n_transparent": 31,
+  "glazing_named": [
+   {
+    "name": "HL_glass",
+    "alpha": 0.43,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "HL_glass0",
+    "alpha": 0.43,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "HL_glass1",
+    "alpha": 0.43,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "HL_glass2",
+    "alpha": 0.43,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "HL_glass3",
+    "alpha": 0.43,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass_wind",
+    "alpha": 0.43,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 9
+ },
+ {
+  "uid": "791515fc74fd4a75a3fb0d5a2fc8d1ad",
+  "name": "Mercedes Benz SLS AMG",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 68,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "HL_glass0",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_wind",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "HL_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "HL_glass3",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "HL_glass1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "HL_glass2",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "465e4a48d787429da7cf124edfa24675",
+  "name": "Mercedes-Benz CLK LM (AMS2)",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 20,
+  "n_transparent": 7,
+  "glazing_named": [
+   {
+    "name": "generic_glass2",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "generic_glass",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 37
+ },
+ {
+  "uid": "d68a20ea5fac4e0897b7fb978fdf6e31",
+  "name": "Mercedes-Benz R-Class",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 67,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "rclassnotorious_glass_fara",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "rclassnotorious_glass_hedark",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "rclassnotorious_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "rclassnotorious_zapechka_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 2
+ },
+ {
+  "uid": "d66f2dd4e87c45c3b06b2592a6f46722",
+  "name": "Mercedes-Benz SL-Class R232",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 96,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "rocketgtsken_glass_int",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "rocketgtsken_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "rocketgtsken_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "0464f8d142d046219a7843d235215828",
+  "name": "Mercedes-Benz A-Klasse (W169) 2004-2012",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 24,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "am5eunew1_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "a2e03aaa1c654dcd8352cd7e80c654f1",
+  "name": "Mercedes Benz R Class W251",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 72,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "rclassnotorious_snrf_glass_darj",
+    "alpha": 0.708,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "rclassnotorious_glass_tint",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "rclassnotorious_glass_fara",
+    "alpha": 0.481,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "rclassnotorious_glass_hedark",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "rclassnotorious_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 3
+ },
+ {
+  "uid": "54f199ed83004907a03d99cde23035ec",
+  "name": "Mercedes-Benz SLR McLaren 722 Edition",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 10,
+  "glazing_named": [
+   {
+    "name": "Meshesuntitledlodaglassrightquartermmwindows81Mtl",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Meshesuntitledlodaintglassrightmmwindows81Mtl",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Meshesuntitledlodataillightlensrightmmwindows41Mtl",
+    "alpha": 0.604,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 22
+ },
+ {
+  "uid": "872495e316d34393b45f4d6b227391c2",
+  "name": "Mercedes- Benz CLK GTR",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 92,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "clkgtr_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clkgtr_glass_int",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clkgtr_fluid_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clkgtr_glass2",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clkgtr_race_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "87e4a6d9a5084025a280d0cf01e4b404",
+  "name": "Mercedes-Benz ML MK2 (W164) 2005-2011",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "ml55_glass_fara",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "c155d348b23146f99dca662753c21c67",
+  "name": "2022 Mercedes-Benz C-Class Estate",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 37,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "M_2022_Mercedes_Benz_C_Class_Estate_pasted__Windows",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "M_2022_Mercedes_Benz_C_Class_Estate_pasted__WindowsTrims1",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "3c28f3d12dcf4515ace3dc4b3a1449da",
+  "name": "Mercedes-Benz S-Klasse MK3 W140",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 61,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "sunburst_glass.023",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "sunburst_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "sunburst_glass.028",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "5c06ff25a127425a901e93638d4da635",
+  "name": "2016 Mercedes-Benz A45 AMG 4Matic",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 27,
+  "n_transparent": 8,
+  "glazing_named": [
+   {
+    "name": "A45M_Glass_WindowFront_Low1",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "A45M_Glass_WindowSurroundFront_Low1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 29
+ },
+ {
+  "uid": "661dcab94455463784651a3ebc63cfb9",
+  "name": "Mercedes Benz AMG GT",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 30,
+  "n_transparent": 1,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "b5af1a627724412aafca863feab06095",
+  "name": "Mercedes Benz GLS 580",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 20,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "ChromeBlack_Windows",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "WindowsTint",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "c6ecabd605d143b1991792ec0ea385ac",
+  "name": "2020 Mercedes Benz GLS 580",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "ChromeBlack_Windows",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "WindowsTint",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 2
+ },
+ {
+  "uid": "1547d5b1003c4bb59fa00baa241033a8",
+  "name": "32-mercedes-benz-gls-580-2020",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "ChromeBlack_Windows",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "WindowsTint",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "2afc69805b8242478b26a5b7870f942c",
+  "name": "Mercedes Benz GLS",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "ChromeBlack_Windows",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "WindowsTint",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "1827be72ffd44b51870aecf67e6cca71",
+  "name": "Mercedes Benz GLS 520",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "ChromeBlack_Windows",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "WindowsTint",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "e229a4e696e1400bb06fedb3dbbc44a3",
+  "name": "Mercedes Benz GLS Class 580 Car",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "ChromeBlack_Windows",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "WindowsTint",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "38320d804e2e42538124bd5f0fa8c41f",
+  "name": "Mercedes Benz GLS_580",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "ChromeBlack_Windows.002",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "WindowsTint.002",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "ca8895c45272400d96388278900d388a",
+  "name": "2012 Mercedes-Benz Sprinter Tow",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 55,
+  "n_transparent": 7,
+  "glazing_named": [
+   {
+    "name": "Translucent_Glass_Blue",
+    "alpha": 0.12,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Gold",
+    "alpha": 0.6,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Blue_2",
+    "alpha": 0.29,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 12
+ },
+ {
+  "uid": "99257cb901674b98998038d7922cbb03",
+  "name": "Mercedes- Benz Cls 63s Amg",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 78,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "highbeamglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "highbeamglass_0",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "highbeamglass_1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "highbeamglass_2",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "highbeamglass_3",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 13
+ },
+ {
+  "uid": "29b3136202f64c4cb1479453e69f3ddb",
+  "name": "Mercedes-Benz SLR McLaren Stirling Moss",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 23,
+  "n_transparent": 10,
+  "glazing_named": [
+   {
+    "name": "MeshesstirlingMossGlass11Mtl",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 20
+ },
+ {
+  "uid": "c739bc08c04a416588e3d7658f67147d",
+  "name": "2022 Mercedes-Benz EQA",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 29,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "M_2022_Mercedes_Benz_EQA_Windows",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "M_2022_Mercedes_Benz_EQA_WindowsTrims",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "6559ef876e35473a8495e3456011edcd",
+  "name": "Mercedes-Benz CL III (C216) 2006-2014",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 38,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "b5f8a467e89546d6ae6f3c6a58efbb5f",
+  "name": "Mercedes Benz 300 SL Roadster",
+  "verdict": "ambiguous",
+  "certainty": "inferred",
+  "n_materials": 5,
+  "n_transparent": 1,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 5
+ },
+ {
+  "uid": "3e0062058a124c648d1d3d1127ba89a0",
+  "name": "Mercedes-Benz Sprinter MK2 (W906) 2006-2018",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 93,
+  "n_transparent": 10,
+  "glazing_named": [
+   {
+    "name": "tmfglass_004",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Blue",
+    "alpha": 0.122,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Gold",
+    "alpha": 0.6,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Blue_2",
+    "alpha": 0.29,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 15
+ },
+ {
+  "uid": "4ef54070101a4ceda359bcb21bdc557d",
+  "name": "2014 Mercedes-Benz A45 AMG Edition 1 4Matic",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 22,
+  "n_transparent": 6,
+  "glazing_named": [
+   {
+    "name": "MerMercedesBenz_A45AMGElite_2014Window_Material1",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 26
+ },
+ {
+  "uid": "30574e4547564c11b64df02a170cc8c0",
+  "name": "Mercedes-Benz CLK-GTR 1997-1999",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 75,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "material_3_mi_carwindows_transparent_82386",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "material_74_carwindows_82386",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "52c4a3cc5536425782e13bd8282f9d99",
+  "name": "2026 Mercedes-Benz CLA Sedan EV",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 26,
+  "n_transparent": 7,
+  "glazing_named": [
+   {
+    "name": "EVMercedesAMG_CLAEVRewardRecycled_2025Window_Material1",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "D_glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 35
+ },
+ {
+  "uid": "06fc55dd9c4748dcb332305600a9fe8e",
+  "name": "Mercedes-Benz EQS 450+",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 33,
+  "n_transparent": 6,
+  "glazing_named": [
+   {
+    "name": "Material-Gray_Glass",
+    "alpha": 0.558,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Material-Gray_Transparent_Plastic_1",
+    "alpha": 0.625,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Material-Gray_Transparent_Plastic_0",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Material-Clear_Glass",
+    "alpha": 0.473,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Material-Maroon_Transparent_Plastic",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Material-Gray_Transparent_Plastic",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "31ac73f5acc148ef8be99f0e0f0dda86",
+  "name": "Mercedes Benz SUV-G550",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 45,
+  "n_transparent": 12,
+  "glazing_named": [
+   {
+    "name": "windshield_ReferenceRepcolor128128128",
+    "alpha": 0.453,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "back_door_glass_ReferenceRepcolor128128128",
+    "alpha": 0.27,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "front_door_glass1_ReferenceRepcolor128128128",
+    "alpha": 0.508,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "front_door_glass_2_ReferenceRepcolor128128128",
+    "alpha": 0.483,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "rear_glass_ReferenceRepcolor128128128",
+    "alpha": 0.386,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "front_door_glass1_ReferenceRepcolor128128128_0",
+    "alpha": 0.575,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "43643cf5bc26471083d66d0d3b85de4f",
+  "name": "Mercedes-Benz EQE",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 33,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "Material-Gray_Transparent_Plastic",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Material-Maroon_Transparent_Plastic",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Material-Clear_Glass",
+    "alpha": 0.894,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Material-Gray_Transparent_Plastic_0",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Material-Gray_Transparent_Plastic_1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Material-Gray_Glass",
+    "alpha": 0.693,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "0906f147cd7d4b8d89fabe18cf478f89",
+  "name": "2017 Mercedes-Benz AMG GT R",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 23,
+  "n_transparent": 6,
+  "glazing_named": [
+   {
+    "name": "untitledMercedesAMG_GTRRewardHalloween_2017Window_Material1",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 28
+ },
+ {
+  "uid": "378c7f3227a24ebe9859b4f9b936b2ef",
+  "name": "Mercedes Benz SLR Mclaren 3D model",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 23,
+  "n_transparent": 7,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 0.937,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 3
+ },
+ {
+  "uid": "d25a15e410424977be9efff749410bb6",
+  "name": "Mercedes- Benz CLA (C117) 2013-2019",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 25,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass_-_Glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "ca613aca29694e28922f0d582b36fc30",
+  "name": "Mercedes-Benz GLB 2027 Lite",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 64,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "GLB_glass_main.001",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "bd5b83e981bc4f52afcb0b25edb808fd",
+  "name": "Mercedes-Benz ML [W163] Jurassic Park",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 53,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "Translucent_Glass_Blue",
+    "alpha": 0.9,
+    "mode": "BLEND",
+    "transmission": 0.1,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Gold",
+    "alpha": 0.6,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "b166760940be429398f32d8855d36644",
+  "name": "2007 Mercedes-Benz SLR Mclaren 722 Edition",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 22,
+  "n_transparent": 5,
+  "glazing_named": [
+   {
+    "name": "mMcLaren_SLR722EditionRewardRecycled_2006Window_Material1",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 30
+ },
+ {
+  "uid": "7d60e1ec4e734cfab404d39e23aa61e2",
+  "name": "2009 Mercedes-Benz SLR McLaren 722 Edition",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 22,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "mMcLaren_SLR722EditionRewardRecycled_2006Window_Material1",
+    "alpha": 0.443,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 29
+ },
+ {
+  "uid": "4af98d54cffa473ead25cc0c0af72f06",
+  "name": "2020 Mercedes-Benz AMG GT R PRO C190",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 15,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "M_1MAT_Glass_364",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 33
+ },
+ {
+  "uid": "1b79ffa597de49d188537b3f40aa8b50",
+  "name": "Mercedes-Benz s63 Coupe Brabus 800",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 51,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "vivace_gps_screen.001",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "s63amg21_glass",
+    "alpha": 0.169,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "s63amg21_glass_int",
+    "alpha": 0.322,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 30
+ },
+ {
+  "uid": "64db1862be754722bbf4f23695bf06a5",
+  "name": "2020 Mercedes-Benz G-Class AMG G 63",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 30,
+  "n_transparent": 6,
+  "glazing_named": [
+   {
+    "name": "MMercedesAMG_G63SUVRewardRecycled_2020Window_Material1",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 45
+ },
+ {
+  "uid": "52296f1a65d54a85a2ed7cb67604e554",
+  "name": "2020 Mercedes-Benz G-Class AMG G63",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 30,
+  "n_transparent": 6,
+  "glazing_named": [
+   {
+    "name": "MMercedesAMG_G63SUVRewardRecycled_2020Window_Material1",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 40
+ },
+ {
+  "uid": "55d5ebad132e4af6b63432f63b25ed11",
+  "name": "HH_mercedes-benz_g-class_amg_g_63",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 30,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "MMercedesAMG_G63SUVRewardRecycled_2020Window_Material1",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 43
+ },
+ {
+  "uid": "3f7e69ff229e4c56a5dc69ce273993b0",
+  "name": "Mercedes Benz G- Class Amg G 63",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 30,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "MMercedesAMG_G63SUVRewardRecycled_2020Window_Material1",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 43
+ },
+ {
+  "uid": "3aa5a58a8b65415496459481f732d847",
+  "name": "2009 Mercedes-Benz SLR Mclaren 722S Roadster",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 22,
+  "n_transparent": 6,
+  "glazing_named": [
+   {
+    "name": "mMcLaren_SLR722SRoadster_2009WindowA_Material1",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 33
+ },
+ {
+  "uid": "7c2ae50515194576aec6e5670c8a1229",
+  "name": "2022 Mercedes-Benz AMG SL63",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 29,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "2022_Mercedes-AMG_SL63_Windows",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 18
+ },
+ {
+  "uid": "4403aa0130fb4622b92c3d82f05e2af3",
+  "name": "2022 Mercedes-Benz EQS 580",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 100,
+  "n_transparent": 4,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 99
+ },
+ {
+  "uid": "baf3e11e94af42dea370f909906c22e3",
+  "name": "Mercedes-Benz-SLK-",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 15,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 4
+ },
+ {
+  "uid": "bd1a2025dbad4277885db6c1ecfd0b9e",
+  "name": "Mercedes- Benz 190 E Evolution II",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 71,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "window",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "black_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "DAMAGE_GLASS",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "interior_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 7
+ },
+ {
+  "uid": "9aba50a16f7c4fe8aafae11b82409c70",
+  "name": "mercedes-benz 190 e",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 71,
+  "n_transparent": 18,
+  "glazing_named": [
+   {
+    "name": "window",
+    "alpha": 0.913,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "black_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "DAMAGE_GLASS",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "interior_glass",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": true,
+  "n_textures": 13
+ },
+ {
+  "uid": "1d1ca86d74674f29af3f7dffe949fb00",
+  "name": "Mercedes-Benz AMG CLS53 C257 2017-2023",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 26,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "screen2",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "b351c436890f4198b6aae86ffc9b0222",
+  "name": "2024 Mercedes-Benz EQS 580",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 38,
+  "n_transparent": 26,
+  "glazing_named": [
+   {
+    "name": "Windscreenok1Mtl",
+    "alpha": 1.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 60
+ },
+ {
+  "uid": "202fcbd73742459bb7a43c815d15c0f2",
+  "name": "Mercedes-Benz SLS AMG Black Series",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 42,
+  "n_transparent": 18,
+  "glazing_named": [
+   {
+    "name": "window_frame",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 0.341,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 2
+ },
+ {
+  "uid": "ba2cc54ca9f54f28980d8a9d7f1389fa",
+  "name": "Mercedes Benz G class",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 21,
+  "n_transparent": 2,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "bdda9a96bee74db8bff2eca6514fd575",
+  "name": "Mercedes-Benz EQB",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 26,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass222",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glasss2222",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "53c739ff5512413e8d6c373c65b95047",
+  "name": "2021 Mercedes-Benz S-Class Maybach",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 27,
+  "n_transparent": 8,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 16
+ },
+ {
+  "uid": "6125a32ee10048ca96eee0c28b9c8b6c",
+  "name": "Mercedes-Benz S 580 Maybach (W223)",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 27,
+  "n_transparent": 7,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 14
+ },
+ {
+  "uid": "dcd8db123bd44e9d8b51ead8499051ca",
+  "name": "2012 Mercedes-Benz CLS",
+  "verdict": "ambiguous",
+  "certainty": "inferred",
+  "n_materials": 27,
+  "n_transparent": 8,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 20
+ },
+ {
+  "uid": "22c7bc280dcd4552bbd5e6868a94d21f",
+  "name": "Mercedes Benz Cls 63",
+  "verdict": "ambiguous",
+  "certainty": "inferred",
+  "n_materials": 27,
+  "n_transparent": 8,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 20
+ },
+ {
+  "uid": "fa61dba175cf467c8df8a4b400648076",
+  "name": "Mercedes- Benz GLC63 S AMG E Performance 2023",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 28,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "Glass.002",
+    "alpha": 0.279,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Glass.003",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass.001",
+    "alpha": 0.114,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 2
+ },
+ {
+  "uid": "407afb21559440b38e06052d5bcd79c0",
+  "name": "Mercedes-Benz S500 2003 (UK-Spec)",
+  "verdict": "ambiguous",
+  "certainty": "inferred",
+  "n_materials": 53,
+  "n_transparent": 4,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 26
+ },
+ {
+  "uid": "685f1eba2dbf435b8050bc6d9234d875",
+  "name": "Mercedes-Benz CLA 250",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "glass-dark",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "b16e341b7b6f4ac2a828c2e0e205b34d",
+  "name": "Mercedes Benz GLS 580",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "ChromeBlack_Windows",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "WindowsTint",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "0a64b4b613b040c2a6dfc7051cf5cef3",
+  "name": "Uploads_files_2787791_ Mercedes+ Benz+GLS+580",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "ChromeBlack_Windows",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "WindowsTint",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "004b5ef0bc1d4a42940e95bffd01f64e",
+  "name": "Mercedes Benz 190",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 2,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 6
+ },
+ {
+  "uid": "cae24eff8904410db2eb66b398cddcab",
+  "name": "3d Model The Mercedes-Benz X-Class",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 12,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "glass2",
+    "alpha": 0.718,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass",
+    "alpha": 0.547,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 10
+ },
+ {
+  "uid": "c069c852eb9d418684d592f8ee97331c",
+  "name": "Mercedes-Benz CLA (C118) 2019-2025",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 72,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 4
+ },
+ {
+  "uid": "920e7841033a411eaa077a07102ad2b0",
+  "name": "Mercedes-Benz CLS MK2 (C218/X218) 2010-2018",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 23,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "cls_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 3
+ },
+ {
+  "uid": "613793ce40124faebbf8df350f8d627f",
+  "name": "2024 Mercedes Benz EQS 580",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 32,
+  "n_transparent": 5,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 31
+ },
+ {
+  "uid": "814e05995f544c5a89b3cb592c31b32b",
+  "name": "Mercedes Benz 190",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 17,
+  "n_transparent": 1,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "4a6a54dfb2e14e4cb42395322abd6ac6",
+  "name": "Mercedes-Benz G-Klasse (W463) 2012-2018",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 86,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "gelik63_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "etk800_glass_gelik",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "gelik63_fars_glass_zad",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "gelik63_glass_main",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "5fb2ada60d8b488dacf16a064fbbbb16",
+  "name": "Mercedes Benz CLA",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 75,
+  "n_transparent": 11,
+  "glazing_named": [
+   {
+    "name": "Translucent_Glass_Gray",
+    "alpha": 0.878,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Gray_3",
+    "alpha": 0.851,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Blue",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Gray_4",
+    "alpha": 0.651,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Gray_1",
+    "alpha": 0.761,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Gray_2",
+    "alpha": 0.659,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 5
+ },
+ {
+  "uid": "084543a95ff3461d854036f5e3dfbc03",
+  "name": "Mercedes-Benz Maybach EQS SUV",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 20,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "5d3c387ddf7a40c6bb3b6db6c9490898",
+  "name": "Mercedes Benz Vito 1995-2000",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 14,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "r_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "o_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "d_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "152f62800be34652af0545487129ca2e",
+  "name": "Mercedes-Benz Sprinter",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 28,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "Translucent_Glass_Gray_2",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Translucent_Glass_Gray_1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Translucent_Glass_Gray",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "3b5f345f63f94c4aad94704a423906a8",
+  "name": "Mercedes-benz_sprinter 13 m3",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 28,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "Translucent_Glass_Gray_2",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Translucent_Glass_Gray_1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Translucent_Glass_Gray",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "40570e04d85642c886b0ff64ca9b44dd",
+  "name": "Mercedes-Benz G500 (2018)",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 10,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 42
+ },
+ {
+  "uid": "cc447390ad5848b295ac4ee13b859c6b",
+  "name": "Mercedes Benz AMG GT",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 46,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "0ecabce4f2604fb781f537e9e2393a46",
+  "name": "Mercedes- Benz C- Class W205 estate 2015",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 14,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "dark_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "3210075cd4484f38b39870f029df02a2",
+  "name": "Uploads Files 2787791 Mercedes+ Benz+GLS+580 Fbx",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 17,
+  "n_transparent": 2,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "6be1b585d88f45ff9be1daa7b8adcb5b",
+  "name": "Mercedes-Benz A-Klasse (W169) 2004-2012",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 48,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "CT5_glass",
+    "alpha": 0.1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 2
+ },
+ {
+  "uid": "1e80bb4c62144eba9b7a4b1202053d7f",
+  "name": "2008 Mercedes Benz GL450",
+  "verdict": "ambiguous",
+  "certainty": "inferred",
+  "n_materials": 15,
+  "n_transparent": 1,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 28
+ },
+ {
+  "uid": "70596b30b7cf4f80a9dd6851fe6c5de1",
+  "name": "Mercedes-Benz Sprinter",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 20,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "mbsp_glass-effect",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "b8cd934c053d452ebfb7ae4013722d05",
+  "name": "Mercedes-Benz viano V6",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 11,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "2d215a12b3734b888f488b6cda8e73fb",
+  "name": "Mercedes-Benz C-Class (S204) 2007-2014",
+  "verdict": "ambiguous",
+  "certainty": "inferred",
+  "n_materials": 10,
+  "n_transparent": 2,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 14
+ },
+ {
+  "uid": "f053f34d35604035ae11ee986040d08b",
+  "name": "Mercedes-Benz SL MK2 (W113) 1963-1971",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 4,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "c3a5ee21a1d74d4a875b4524f30d5ace",
+  "name": "Latest G wagon (Mercedes Benz)",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "24b75b87502544018d39bb061af15286",
+  "name": "Latest G wagon (Mercedes Benz)",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "529f6847061d4318a99a4cf495f59313",
+  "name": "Latest G wagon (Mercedes Benz),",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "68afbe5224464ad4953a846ec7e81d3e",
+  "name": "Mercedes Benz CL Class 2010",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "29d4a6ba2dba468bb111a3efbdb2079b",
+  "name": "Mercedes Benz Slr Mclaren",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ },
+ {
+  "uid": "a7dd61e271184d72863507c1df46fcd7",
+  "name": "mercedes benz x class",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 8,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "0d424d2121a5416faa58ba71bb494f28",
+  "name": "Mercedes- Benz 300 SL",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "22786806eb22451b974afacb082ff87a",
+  "name": "Mercedes- Benz A45",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "5a1eb4188e2a426d8245754817c40a85",
+  "name": "Mercedes-Benz AMG CLA 45 2014",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 0
+ },
+ {
+  "uid": "41294ba372724d4c9ac7b2d4c86b3566",
+  "name": "Mercedes-Benz AMG GT BlackSeries SafetyCar",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "n_textures": 1
+ }
+]
