@@ -219015,16 +219015,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v4__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v4__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v4__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v4__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v4__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v4__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v4__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-gt-r-nw1-v4__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-gt-r-nw1-v4.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-gt-r-nw1-v4.glb",
   "fallbackGlbUrl": null,
@@ -219175,7 +219166,9 @@
    "variantsHash": "31aecbb858de606033dc793ab6d734f5a9f1a824",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0008 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -219232,16 +219225,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2023-nw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2023-nw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2023-nw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2023-nw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2023-nw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2023-nw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2023-nw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2023-nw1-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-altima-2023-nw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-altima-2023-nw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -219392,7 +219376,9 @@
    "variantsHash": "f52e23cd0409f3e6ec239139503a0a1fea30e5f0",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0016 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -232618,16 +232604,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2013-nw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2013-nw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2013-nw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2013-nw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2013-nw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2013-nw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2013-nw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2013-nw1-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-370z-2013-nw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-370z-2013-nw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -232778,7 +232755,9 @@
    "variantsHash": "1f8991c325a88a4c679acd35e062a67df8429b41",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0066 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -233490,16 +233469,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2007-nw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2007-nw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2007-nw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2007-nw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2007-nw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2007-nw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2007-nw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-altima-2007-nw1-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-altima-2007-nw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-altima-2007-nw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -233650,7 +233620,9 @@
    "variantsHash": "8a8f0e92f667574019176684713f2c7ba33fb0cf",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0012 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -235235,16 +235207,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2015-nw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2015-nw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2015-nw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2015-nw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2015-nw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2015-nw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2015-nw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-370z-2015-nw1-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-370z-2015-nw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-370z-2015-nw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -235395,7 +235358,9 @@
    "variantsHash": "947ddc90379668d34f44cd8b7ddde3e71bb52cfa",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0014 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -235451,16 +235416,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-fairlady-z-1972-nw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-fairlady-z-1972-nw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-fairlady-z-1972-nw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-fairlady-z-1972-nw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-fairlady-z-1972-nw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-fairlady-z-1972-nw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-fairlady-z-1972-nw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/nissan/nissan-fairlady-z-1972-nw1-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-fairlady-z-1972-nw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-fairlady-z-1972-nw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -235611,7 +235567,9 @@
    "variantsHash": "86a86b27b66a03d2abd56a6173355f30fd688fd9",
    "method": "render",
    "at": "2026-08-11"
-  }
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0004 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -236369,6 +236327,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.1655,
+   "variantsHash": "84e6a7097b6eee72c28be4b046745894e3394c60",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -236478,6 +236443,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4369,
+   "variantsHash": "18ca67ececd2837537c7deee0f56359aec4892c7",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -236582,6 +236554,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3904,
+   "variantsHash": "135a9586541d4362e2f708a59bb8dea1e91e2c53",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -236688,6 +236667,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4249,
+   "variantsHash": "7391a953ae9b8b4f7d0443c0ee2c8dee65f15e44",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -236801,6 +236787,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4452,
+   "variantsHash": "fb049a9e37958bd3a4d5a59094ef2502a96b1c04",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -236858,16 +236851,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/byd/byd-m6-2024-bw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/byd/byd-m6-2024-bw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/byd/byd-m6-2024-bw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/byd/byd-m6-2024-bw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/byd/byd-m6-2024-bw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/byd/byd-m6-2024-bw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/byd/byd-m6-2024-bw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/byd/byd-m6-2024-bw1-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/byd/byd-m6-2024-bw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/byd/byd-m6-2024-bw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -236905,7 +236889,16 @@
    "red": [],
    "green": [],
    "yellow": []
-  }
+  },
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.0376,
+   "variantsHash": "86ad7ab4d862b2019e2c8f2eae6335bef02054fb",
+   "method": "render",
+   "at": "2026-08-11"
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0376 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -237006,6 +236999,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4261,
+   "variantsHash": "dbf50550968da0962f28f4c5d4ba5d5059bb5138",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -237105,6 +237105,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.1673,
+   "variantsHash": "4176446978fe586cc0f5656d59975944988f8772",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -237207,6 +237214,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2517,
+   "variantsHash": "5fdcedc7aeef54fe537cea67023f4d439dd8210d",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -237311,6 +237325,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4435,
+   "variantsHash": "fbe18c594eed46d528a11ddfbb4ae29c09de2aa3",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -237416,6 +237437,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4192,
+   "variantsHash": "d0986234e393594c522dff12651dc5756cb453d4",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -237520,6 +237548,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4038,
+   "variantsHash": "30ceac4e93d818cf6bdf73cee1f21793fb34b757",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -237624,6 +237659,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4375,
+   "variantsHash": "9f4543d8b7fad2377116398c479310efdba738c6",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -237728,6 +237770,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4076,
+   "variantsHash": "0f64f4cd2bfafb9ce89966a9711a26531062ab8c",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -237833,6 +237882,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3795,
+   "variantsHash": "83707c3e8a5a963500f77206aafa2dd9e7d151dd",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -237936,6 +237992,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4075,
+   "variantsHash": "15b47740545d42de63ca06a7117e49022fe1e796",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -238041,6 +238104,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3764,
+   "variantsHash": "f19f0a0543dfcac5db5e7fc0c32268644b4a2a8c",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -238143,6 +238213,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2682,
+   "variantsHash": "e8479c3c884e0a204992ce246e67c03cfc69c768",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -238245,6 +238322,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4371,
+   "variantsHash": "026ae3e86fbe13ca31fee59ae471d868f72c2d21",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -238346,6 +238430,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4503,
+   "variantsHash": "d7c4fa3904b12be0cafc22803715615142ff3ac2",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -238449,6 +238540,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4235,
+   "variantsHash": "32731c040900fb10be83cc8d5120999aa8f69f79",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -238661,6 +238759,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4017,
+   "variantsHash": "fccb0be3c1258b443eee3f3b257779f812e8f198",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -238874,6 +238979,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3251,
+   "variantsHash": "c816e86c4331e4c1878bfda52fbfbecfea3189fd",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -239090,6 +239202,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3242,
+   "variantsHash": "1035d7ebb5340b1e5ffbac85ce71727b9e22b648",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -239304,6 +239423,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.351,
+   "variantsHash": "70ce5e5ec9b1bde903b034959fa3efa475efb4e9",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -239517,6 +239643,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3521,
+   "variantsHash": "10735657c50c1176762f7eecdcfc73d97359ab88",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -239732,6 +239865,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3306,
+   "variantsHash": "010e3fc2751e395b8b276eccb18d607df01eeb6c",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -239944,6 +240084,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4895,
+   "variantsHash": "becc1e2509d236bf7b4d22e68385f09192d65bb5",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -240161,6 +240308,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4492,
+   "variantsHash": "bcedb6af66bf975b004f092c54dec40e2ffd0078",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -240373,6 +240527,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4335,
+   "variantsHash": "8a81ba648e9f5c495f8e45697d5e60fa4afc169d",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -240588,6 +240749,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3912,
+   "variantsHash": "82f4345ea71819e6edb83a935b1da721fb9b1408",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -240801,6 +240969,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3732,
+   "variantsHash": "dcf0ef86600ca58a36e76aabcc55626d99c9d022",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -241019,6 +241194,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3747,
+   "variantsHash": "ea6991fcc1f2b0d620f997a5f0a2c48c0f89a506",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -241234,6 +241416,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.5117,
+   "variantsHash": "eeb21872809c3d14e7aace12ebf0a91f55cbba1b",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -241448,6 +241637,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.392,
+   "variantsHash": "be9329647b03cbff66cc8eae03676dd6641e3aa6",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -241663,6 +241859,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.501,
+   "variantsHash": "4b884907f20a85aa71fbb458e16d295f5886df60",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -241878,6 +242081,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.5061,
+   "variantsHash": "ad05cf4186be834689e16d7d03cfbc5260005133",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -242092,6 +242302,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3075,
+   "variantsHash": "16153f9edde595289d9054be908fb04664a4ff10",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -242304,6 +242521,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3826,
+   "variantsHash": "d1aa34579253aa4985975ec85de7e24212f2adde",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -242515,6 +242739,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3811,
+   "variantsHash": "5dd032edce26f5b9dfcce9cb9a9e9e33f0307f3a",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -242728,6 +242959,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3615,
+   "variantsHash": "fbb170f272ddaa81a555c8e95610e8b3f7ac6957",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -242783,16 +243021,7 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {
-   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/hyundai-tiburon-2003-hyw1-v1__grey.glb",
-   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/hyundai-tiburon-2003-hyw1-v1__silver.glb",
-   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/hyundai-tiburon-2003-hyw1-v1__black.glb",
-   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/hyundai-tiburon-2003-hyw1-v1__white.glb",
-   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/hyundai-tiburon-2003-hyw1-v1__blue.glb",
-   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/hyundai-tiburon-2003-hyw1-v1__red.glb",
-   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/hyundai-tiburon-2003-hyw1-v1__green.glb",
-   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/hyundai/hyundai-tiburon-2003-hyw1-v1__yellow.glb"
-  },
+  "colourVariants": {},
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tiburon-2003-hyw1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-tiburon-2003-hyw1-v1.glb",
   "fallbackGlbUrl": null,
@@ -242940,7 +243169,16 @@
    ],
    "green": [],
    "yellow": []
-  }
+  },
+  "recolourAudit": {
+   "status": "fail",
+   "dist": 0.0094,
+   "variantsHash": "269130c10bf2e0646abe2d0f7caa8ceb66fc1029",
+   "method": "render",
+   "at": "2026-08-11"
+  },
+  "colourSwapBlocked": true,
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0094 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -243152,6 +243390,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3778,
+   "variantsHash": "addfedb34acebf348651ec5c1fe4cf4b6277c9a8",
+   "method": "render",
+   "at": "2026-08-11"
   }
  },
  {
@@ -243366,6 +243611,13 @@
    ],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4024,
+   "variantsHash": "1278eaaea29d8446aeca7cdac481f1ccb31a0ede",
+   "method": "render",
+   "at": "2026-08-11"
   }
  }
 ]
