@@ -1,0 +1,82 @@
+{
+ "tool_flagged": [
+  {
+   "drop_uid": "96a423cba0ff4a7f82aee9d885abb9af",
+   "name": "2018 Subaru WRX STI",
+   "faces": 226379,
+   "keep_uid": "8473f0659a59490888c78a275cfc1631",
+   "keep_name": "2018 Subaru Impreza WRX STi",
+   "keep_faces": 227058,
+   "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'subaru', face counts 226,379 vs 227,058 (679 apart, 0.30%); keeping the higher face count",
+   "source": "dupe_check rule A",
+   "eye_verdict": "confirmed",
+   "eye_note": "CONFIRMED. Both sheets audited individually at full resolution: two uploads of the same 2018 WRX STI VA facelift in white, 679 faces apart (0.30%). Identical bodywork, identical gloss-black alloy pattern, identical LED headlamp internals and honeycomb grille depth. Different uploaders (OUTPISTON vs Ddiaz Design), which is the usual re-upload signature. Keeping the 227,058-face copy."
+  }
+ ],
+ "eye_only_same_vehicle": [
+  {
+   "drop_uid": "e1486bac59734e188401721aa3efd59f",
+   "name": "2006 Subaru Impreza WRX STI",
+   "faces": 83291,
+   "keep_uid": "d5fb1b03ae724f7ba9dbbbaf0c16cdf8",
+   "keep_name": "2006 Subaru Impreza WRX STi",
+   "keep_faces": 93577,
+   "source": "eye only - dupe_check cannot see this",
+   "eye_verdict": "confirmed same vehicle, different mesh",
+   "eye_note": "Same car (2006 Impreza WRX STi hawkeye, gold BBS-style wheels) from the same uploader, one in WR Blue and one in white, 10,286 faces apart. dupe_check missed it because rule A needs face counts within 1% and rule B within 50. Both are good meshes; keeping the 93,577-face blue car, which also gives a coloured-body tyre control."
+  },
+  {
+   "drop_uid": "66bd94bdd92a4b79a39cd0307870b4eb",
+   "name": "1998 Subaru IMPREZA 22B STi Version",
+   "faces": 73164,
+   "keep_uid": "20512df95cdf4114aa50b6005b5290a3",
+   "keep_name": "Subaru Impreza 22B STI 1998 | www.vecarz.com",
+   "keep_faces": 80038,
+   "source": "eye only - dupe_check cannot see this",
+   "eye_verdict": "confirmed same vehicle, different mesh",
+   "eye_note": "Both are the 1998 Impreza 22B STi, different uploaders and different meshes 6,874 faces apart (8.6%), so neither dupe rule fires. Keeping the 80,038-face vecarz car: it carries 21 textures with proven transparent glass (windiws alpha 0.602) and a textured black tyre, against a softer white 73,164-face car."
+  },
+  {
+   "drop_uid": "9619c092b4dd496a978dee79194da288",
+   "name": "2013 Subaru BRZ",
+   "faces": 63612,
+   "keep_uid": "ab42313b02f245aaa8dc9090cfd941f5",
+   "keep_name": "2013 Subaru BRZ",
+   "keep_faces": 173071,
+   "source": "eye only - dupe_check cannot see this",
+   "eye_verdict": "confirmed same vehicle, different mesh",
+   "eye_note": "IDENTICAL TITLE, both 2013 BRZ (ZC6), but 109,459 faces apart so neither face rule fires - a clean example of dupe_check's blind spot being face count rather than title. Both audited and both pass; keeping the 173,071-face mesh."
+  },
+  {
+   "drop_uid": "ee2b94827a904360acb61987e1765983",
+   "name": "Subaru WRX (VB)",
+   "faces": 63077,
+   "keep_uid": "065804733fa245c6b1b10ca2de44099d",
+   "keep_name": "2022 Subaru Impreza WRX",
+   "keep_faces": 377976,
+   "source": "eye only - dupe_check cannot see this",
+   "eye_verdict": "confirmed same vehicle, different mesh",
+   "eye_note": "Same car - the VB-generation WRX - under two titles that share no token beyond the marque, so title overlap is far under either threshold. Keeping the 377,976-face car: 42 textures, proven dark tyre (EXT_Tyre 0.110) and real glass (alpha 0.50), against a 63,077-face mesh with a flat grille insert."
+  }
+ ],
+ "reviewed_not_duplicates": [
+  {
+   "uids": [
+    "2e8aca0407ae44d2802bc34761054a69",
+    "7bccb635920343d9b03823bf09cb0f43",
+    "47b80a3e11e84794a820862aaaf85e3f"
+   ],
+   "eye_verdict": "NOT duplicates - kept separate",
+   "eye_note": "Three ZD8-generation BRZs, but the source titles state three different trims: bare BRZ (ZD8), 2024 BRZ tS and 2023 BRZ Premium. The tS carries a different rear wing, bumper and brake package in the renders. Per the no-fabricated-metadata rule the titles are the authority, so these stay as three entries."
+  },
+  {
+   "uids": [
+    "ab42313b02f245aaa8dc9090cfd941f5",
+    "1f0e3601623345149a945f6de054a4bb"
+   ],
+   "eye_verdict": "NOT duplicates - kept separate",
+   "eye_note": "Both ZC6-generation BRZ, but the titles state different years and trims (2013 BRZ vs 2020 BRZ tS) and the renders differ - the tS has the factory STI wing, bronze alloys and a facelift front bumper."
+  }
+ ],
+ "summary": "dupe_check flagged 1 pair across 21 passes and it is CONFIRMED (1/1 precision on this wave). Its weakness here was recall, not precision: eyeballing all 21 passes found 4 further same-vehicle pairs it structurally cannot reach, because they are different meshes of the same car rather than re-uploads of one mesh. 21 passes -> 16 unique vehicles after 5 drops."
+}

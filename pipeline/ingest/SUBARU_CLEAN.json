@@ -1,0 +1,146 @@
+[
+ {
+  "model": "BRZ",
+  "trim": null,
+  "generation": "ZD8",
+  "year": null,
+  "faces": 836016,
+  "uid": "2e8aca0407ae44d2802bc34761054a69",
+  "title": "Subaru BRZ (ZD8)"
+ },
+ {
+  "model": "Ascent",
+  "trim": "Touring",
+  "generation": null,
+  "year": 2019,
+  "faces": 809470,
+  "uid": "256ca39ab09846b7a24027fd00d94a20",
+  "title": "2019 Subaru Ascent Touring"
+ },
+ {
+  "model": "BRZ",
+  "trim": "tS",
+  "generation": null,
+  "year": 2024,
+  "faces": 408656,
+  "uid": "7bccb635920343d9b03823bf09cb0f43",
+  "title": "2024 Subaru BRZ tS"
+ },
+ {
+  "model": "Impreza WRX",
+  "trim": null,
+  "generation": null,
+  "year": 2022,
+  "faces": 377976,
+  "uid": "065804733fa245c6b1b10ca2de44099d",
+  "title": "2022 Subaru Impreza WRX"
+ },
+ {
+  "model": "WRX STI",
+  "trim": null,
+  "generation": null,
+  "year": 2015,
+  "faces": 265154,
+  "uid": "2fa30ce7756c41b7bbc896aed00a3f0d",
+  "title": "2015 Subaru WRX STI"
+ },
+ {
+  "model": "BRZ",
+  "trim": "Premium",
+  "generation": null,
+  "year": 2023,
+  "faces": 252444,
+  "uid": "47b80a3e11e84794a820862aaaf85e3f",
+  "title": "2023 Subaru BRZ Premium"
+ },
+ {
+  "model": "Impreza WRX STi",
+  "trim": null,
+  "generation": null,
+  "year": 2018,
+  "faces": 227058,
+  "uid": "8473f0659a59490888c78a275cfc1631",
+  "title": "2018 Subaru Impreza WRX STi"
+ },
+ {
+  "model": "BRZ",
+  "trim": "tS",
+  "generation": null,
+  "year": 2020,
+  "faces": 222647,
+  "uid": "1f0e3601623345149a945f6de054a4bb",
+  "title": "2020 Subaru BRZ tS"
+ },
+ {
+  "model": "Legacy",
+  "trim": "2.5GT tS",
+  "generation": null,
+  "year": 2010,
+  "faces": 210233,
+  "uid": "ac37399c27e64c7c940dad5aca0a567c",
+  "title": "2010 Subaru Legacy 2.5GT tS"
+ },
+ {
+  "model": "WRX Wagon",
+  "trim": null,
+  "generation": "GG",
+  "year": null,
+  "faces": 180779,
+  "uid": "fa2c8e1d265443e982b90f964c2b3e02",
+  "title": "Subaru WRX Wagon (GG)"
+ },
+ {
+  "model": "BRZ",
+  "trim": null,
+  "generation": null,
+  "year": 2013,
+  "faces": 173071,
+  "uid": "ab42313b02f245aaa8dc9090cfd941f5",
+  "title": "2013 Subaru BRZ"
+ },
+ {
+  "model": "Impreza WRX STi",
+  "trim": "Version VI",
+  "generation": "GC8",
+  "year": null,
+  "faces": 155652,
+  "uid": "457f01e7e8d14b088e3f092c1be9e75c",
+  "title": "Subaru Impreza WRX STi Version VI (GC8)"
+ },
+ {
+  "model": "Legacy Wagon",
+  "trim": null,
+  "generation": null,
+  "year": null,
+  "faces": 99269,
+  "uid": "c0ffde08f5e04cca9dffb449a5eef759",
+  "title": "Subaru Legacy Wagon"
+ },
+ {
+  "model": "Forester",
+  "trim": null,
+  "generation": null,
+  "year": 2009,
+  "faces": 96420,
+  "uid": "925112ae29514dcf89ccf2fc7020338e",
+  "title": "Subaru Forester 2009"
+ },
+ {
+  "model": "Impreza WRX STi",
+  "trim": null,
+  "generation": null,
+  "year": 2006,
+  "faces": 93577,
+  "uid": "d5fb1b03ae724f7ba9dbbbaf0c16cdf8",
+  "title": "2006 Subaru Impreza WRX STi"
+ },
+ {
+  "model": "Impreza 22B STI",
+  "trim": null,
+  "generation": null,
+  "year": 1998,
+  "faces": 80038,
+  "uid": "20512df95cdf4114aa50b6005b5290a3",
+  "title": "Subaru Impreza 22B STI 1998 | www.vecarz.com"
+ }
+]
