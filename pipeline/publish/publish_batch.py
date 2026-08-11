@@ -51,7 +51,7 @@ REVIEWED_KEEP.csv required columns:
 optional columns (title-verbatim / owner-confirmed only, per accuracy rule):
   year_start, year_end, body_style, trim
 """
-import argparse, csv, datetime, hashlib, json, os, re, subprocess, sys, time
+import argparse, csv, datetime, hashlib, http.client, json, os, re, subprocess, sys, time
 import urllib.request, urllib.error
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -77,21 +77,45 @@ def jlog(**kw):
     JOBLOG.flush()
 
 _consec_net_fail = 0
-def net(req, timeout=120):
-    """All network goes through here so the storm breaker sees everything."""
+def net(req, timeout=120, tries=4):
+    """All network goes through here so the storm breaker sees everything.
+
+    Retries TRUNCATED reads. A partial body raises http.client.IncompleteRead,
+    which used to propagate straight to the per-item crash handler: the item was
+    logged CRASH, skipped, and — because a crash is not a REFUSED — the batch
+    summary still printed "refused=0". That is how four cars vanished from
+    apparently clean batches (a 1999 Odyssey, a Peugeot 405, a 2020 Ariya, a
+    Subaru Legacy Wagon), each caught only by reconciling the keep list against
+    the catalogue afterwards. GLBs here run to 48MB, so a mid-transfer cut is a
+    routine event and must not cost a car.
+    """
     global _consec_net_fail
-    try:
-        r = urllib.request.urlopen(req, timeout=timeout).read()
-        _consec_net_fail = 0
-        return r
-    except Exception:
-        _consec_net_fail += 1
-        if _consec_net_fail >= 8:
-            jlog(event="STORM_BREAKER", fails=_consec_net_fail)
-            print("STORM BREAKER: 8 consecutive network failures — environment "
-                  "down, aborting resumably (re-run when it recovers)", flush=True)
-            sys.exit(4)
-        raise
+    last = None
+    for a in range(tries):
+        try:
+            r = urllib.request.urlopen(req, timeout=timeout).read()
+            _consec_net_fail = 0
+            return r
+        except (http.client.IncompleteRead, TimeoutError, ConnectionError) as e:
+            last = e
+            if a < tries - 1:
+                time.sleep(2 * (a + 1))
+                continue
+        except Exception:
+            _consec_net_fail += 1
+            if _consec_net_fail >= 8:
+                jlog(event="STORM_BREAKER", fails=_consec_net_fail)
+                print("STORM BREAKER: 8 consecutive network failures — environment "
+                      "down, aborting resumably (re-run when it recovers)", flush=True)
+                sys.exit(4)
+            raise
+    _consec_net_fail += 1
+    if _consec_net_fail >= 8:
+        jlog(event="STORM_BREAKER", fails=_consec_net_fail)
+        print("STORM BREAKER: 8 consecutive network failures — environment "
+              "down, aborting resumably (re-run when it recovers)", flush=True)
+        sys.exit(4)
+    raise last
 
 def sb_req(path, data=None, method=None, ctype="application/json"):
     rq = urllib.request.Request(f"{SB_BASE}/{path}", data=data,
@@ -332,6 +356,10 @@ for i, row in enumerate(rows):
         crashes += 1
         jlog(event="item_crash", uid=row.get("uid"), err=f"{type(e).__name__}: {str(e)[:120]}")
         print(f"CRASH {row.get('uid', '?')[:8]}: {type(e).__name__}: {str(e)[:100]}", flush=True)
+        # A crash IS a car that did not publish. It used to be omitted from
+        # both tallies, so the summary read "refused=0" on a batch that had
+        # silently dropped a car -- four times before this was noticed.
+        refused.append((row["uid"], f"CRASH {type(e).__name__}: {str(e)[:60]}"))
         if crashes >= 3:
             print("CRASH BREAKER: 3 item crashes — aborting batch (catalogue not served)", flush=True)
             sys.exit(5)
