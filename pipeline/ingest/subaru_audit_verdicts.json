@@ -769,5 +769,48 @@
    "glazing opaque: the windscreen renders as a flat white panel with no interior resolvable in the side tile, and the cab rear window is a plain pale panel",
    "soft low-detail bodywork with no door, bonnet or tailgate shut lines; 61,230 faces, at the very bottom of the serving band"
   ]
+ },
+ {
+  "uid": "2e8aca0407ae44d2802bc34761054a69",
+  "name": "Subaru BRZ (ZD8)",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec BRZ ZD8, 836,016 faces - the highest-detail mesh in the wave; proportions read instantly and hold across all four tiles, paint finish premium",
+   "tyres plainly black rubber with a distinct tread band, clearly darker than the silver alloys, with red calipers; judged in front34 and rear34 at 5x",
+   "glazing clear: interior door top, seat back and B-pillar resolve through the side glass in two tiles",
+   "LED headlamp internals fully resolved, mesh grille with a lower splitter, crisp door/bonnet/boot shut lines, rim faces present in all four tiles"
+  ]
+ },
+ {
+  "uid": "d079f59271df4702bcfdd449ec8241c1",
+  "name": "Subaru BRZ 2022",
+  "verdict": "fail",
+  "reasons": [
+   "out of scope: slammed stance build - extreme negative camber front and rear, body on the deck, bolt-on widebody fender flares and deep-lipped split-rim wheels",
+   "kitbashed: the glTF wheel materials are literally named 2020_Porsche_911_Carrera_4S_Wheels_20_21 - Porsche wheels grafted onto a Subaru",
+   "body renders as a mirror chrome with no real paint material (cov=0.042 LOW COVERAGE)"
+  ]
+ },
+ {
+  "uid": "829ed5c8149e42819b26d71d69bf6e41",
+  "name": "2023 Subaru BRZ",
+  "verdict": "fail",
+  "reasons": [
+   "DECISIVE glTF evidence: the file contains exactly ONE material (Scene_-_Root, baseColorFactor 1,1,1, alphaMode OPAQUE, zero textures) with all colour baked into vertex attributes. No glass material exists and there is no transparency anywhere in the file - the same single-material vertex-colour shell as the WRX tS EyeSight e346b491",
+   "consistent with the render: the headlamps are flat body-blue panels with no lens or internals, and the windows are a pale wash with no interior resolvable",
+   "cov=1.000 FULL COVERAGE - a respray would repaint glass and lamps with the body"
+  ]
+ },
+ {
+  "uid": "7bccb635920343d9b03823bf09cb0f43",
+  "name": "2024 Subaru BRZ tS",
+  "verdict": "pass",
+  "reasons": [
+   "OEM road-spec 2024 BRZ tS - proportions read instantly, consistent across all four tiles, premium paint finish",
+   "tyres black rubber with visible sidewall lettering and a matte tread band that separates clearly from the gloss-black alloys at 5x in front34 and rear34",
+   "glazing clear: seat, door card and B-pillar resolve through the side glass in two tiles",
+   "LED headlamp internals fully resolved, grille bars with depth, crisp shut lines, rim faces present in all four tiles",
+   "NOTE: same ZD8 generation as 2e8aca04 (836,016 faces) - see the dupe check"
+  ]
  }
 ]
