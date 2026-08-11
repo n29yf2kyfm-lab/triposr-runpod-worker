@@ -1642,5 +1642,104 @@
    "glazing barely reads: the windows are pale grey panels with no interior",
    "headlamps are plain white domes, no grille, no shut lines, bumpers are featureless"
   ]
+ },
+ {
+  "uid": "696e81caf8a847efbe3e2f6acf349ff3",
+  "name": "Porsche Cayman GT4 | www.vecarz.com",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: Cayman GT4 Clubsport race car - roll cage through the glass, riveted door service hatch, race splitter and swan-neck wing, centre-lock wheels on treadless Pirelli slicks",
+   "same source mesh as 4f3ce0e3 (332,302 vs 332,357 faces) - both track-only, neither takes a road registration"
+  ]
+ },
+ {
+  "uid": "6b62974a935148bd977ce84a50dbf9ca",
+  "name": "Porsche 911 GT2 RS",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL: the whole body is one white material",
+   "glazing opaque body-white, no interior visible in any view",
+   "tyres render white against the gold rims in both 3/4 tread bands - no black rubber",
+   "headlamps are blank white recesses; grille and intake openings have no depth; no shut lines",
+   "the gold rims are the only part of the model that carries a real material"
+  ]
+ },
+ {
+  "uid": "6d135fddeb87429898034474fc0f5c0c",
+  "name": "Porsche 911 GT3RS",
+  "verdict": "pass",
+  "reasons": [
+   "991.1 GT3 RS proportions read instantly; front 3/4 strong; paint finish premium",
+   "tyres black rubber, tread face clear in both 3/4 bands against silver rims",
+   "glazing transparent - the red interior and cage are plainly visible through the side glass",
+   "silver rim faces present in all four views, red calipers behind",
+   "lamp internals, front intake mesh, NACA ducts and shut lines defined",
+   "road-legal GT3 RS, in scope"
+  ]
+ },
+ {
+  "uid": "706606b037ff458ea229042ea52cd1bd",
+  "name": "2015 Porsche Boxster GTS (718)",
+  "verdict": "pass",
+  "reasons": [
+   "981 Boxster GTS proportions read instantly, roof up; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible through the side glass",
+   "black rim faces present in all four views, red calipers behind",
+   "lamp internals, side intakes, GTS badging and shut lines defined",
+   "title says 718 but the body is the 981 generation - metadata should come from the render, not the title"
+  ]
+ },
+ {
+  "uid": "70713d059dc14beeb8f1b2a703bb920d",
+  "name": "2023 Porsche 911 4.0 GT3",
+  "verdict": "pass",
+  "reasons": [
+   "992 GT3 proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent - checked at full res because the pale body made it ambiguous at tile scale; the far-side window frame and cabin are visible through the near glass",
+   "silver rim faces present in all four views",
+   "front bumper honeycomb mesh is real geometry, door shut line and handle defined",
+   "marginal: headlamp internals are shallow - below par but above the fail bar",
+   "number plate carries an iVAN'S MOTOR vendor text texture"
+  ]
+ },
+ {
+  "uid": "73a595bff7d5498fa1891c4a78787d26",
+  "name": "Porsche 911 Gt3 Rs",
+  "verdict": "pass",
+  "reasons": [
+   "992 GT3 RS proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cage visible through the side glass",
+   "black rim faces present in all four views, red calipers behind",
+   "carbon bonnet, aero blades, lamp internals and shut lines defined",
+   "road-legal GT3 RS, in scope"
+  ]
+ },
+ {
+  "uid": "78d5c47ab2554c2592b7e499179a0792",
+  "name": "Porsche 911 GT3",
+  "verdict": "pass",
+  "reasons": [
+   "991.1 GT3 RS proportions read instantly - wheel-arch louvres and fixed wing correct; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent at full res - the red interior is plainly visible through the side glass",
+   "grey rim faces present in all four views",
+   "door shut line, arch louvres and rear intake fins defined",
+   "road-legal GT3 RS, in scope; title says GT3 but the render is the RS - take bodyStyle from the render"
+  ]
+ },
+ {
+  "uid": "7b0f4b60716f4b23a0714cf9303a0802",
+  "name": "Porsche 911 3D Model GOLDEN",
+  "verdict": "pass",
+  "reasons": [
+   "930 Turbo proportions read instantly - whale tail, flared arches, correct chrome trim; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands against white Fuchs-style rims",
+   "glazing transparent, cabin visible through the side glass",
+   "white rim faces present in all four views",
+   "round lamp internals, red rear reflector band, aerial and door shut line defined"
+  ]
  }
 ]
