@@ -99,6 +99,21 @@ _OVERRIDE = [
     # Lexus LC 500 rules above exist for. "cl" is two characters, so _tok_hit
     # only ever matches it as a whole token: "class" and "clio" are safe.
     ("mercedes", "cl",  5), ("mercedes", "clk", 5),
+    # German uploads are titled by TRIM CODE far more often than by class
+    # ("Mercedes-Benz C180 W202", not "C-Class"), and the tier lists only knew
+    # the class names. Tightening _tok_hit stopped those codes being matched by
+    # accident -- "c1" was matching "c180", "a4" was matching "a45" -- which was
+    # right, but left 15 real C/A/E-Class cars at T4. These name them properly.
+    # AMG halo codes are listed FIRST so "C43 AMG" cannot claim the C-Class tier.
+    ("mercedes", "c63", 5), ("mercedes", "c43", 5), ("mercedes", "e63", 5),
+    ("mercedes", "a45", 5), ("mercedes", "a35", 5), ("mercedes", "e43", 5),
+    ("mercedes", "c180", 2), ("mercedes", "c200", 2), ("mercedes", "c220", 2),
+    ("mercedes", "c230", 2), ("mercedes", "c250", 2), ("mercedes", "c300", 2),
+    ("mercedes", "c320", 2), ("mercedes", "c350", 2),
+    ("mercedes", "a160", 2), ("mercedes", "a180", 2), ("mercedes", "a200", 2),
+    ("mercedes", "a220", 2), ("mercedes", "a250", 2),
+    ("mercedes", "e200", 3), ("mercedes", "e220", 3), ("mercedes", "e250", 3),
+    ("mercedes", "e320", 3), ("mercedes", "e350", 3), ("mercedes", "e400", 3),
     ("porsche", "911",  5), ("porsche", "718", 5), ("porsche", "cayman", 5),
     ("porsche", "boxster", 5), ("porsche", "macan", 3), ("porsche", "cayenne", 3),
     ("porsche", "panamera", 3), ("porsche", "taycan", 3),
@@ -380,7 +395,12 @@ def _tok_hit(n: str, word: str) -> bool:
         # For an all-numeric nameplate, appending digits makes a DIFFERENT car:
         # "500" matched "5008", so every Peugeot 5008 was tiered as a Fiat 500
         # supermini. Numeric nameplates match exactly or with a letter suffix.
-        if not w.isdigit() and re.fullmatch(r"\d[0-9a-z]*", rest):
+        # ...and only when the nameplate does not ALREADY end in a digit.
+        # Appending digits to a digit-ending nameplate makes a different car:
+        # "c3" matched "c300", so "Mercedes C300 AMG Line" scored T1 as a
+        # Citroen C3, and "m3" matched "m340i", scoring an ordinary 3-series as
+        # an M3. "rx"/"xj"/"cj" end in letters and are unaffected.
+        if not w[-1].isdigit() and re.fullmatch(r"\d[0-9a-z]*", rest):
             return True
         # ONE trailing letter only. Two allowed "cla" to match "class", so a
         # Mercedes C-Class scored as a CLA -- the exact substring bug this
