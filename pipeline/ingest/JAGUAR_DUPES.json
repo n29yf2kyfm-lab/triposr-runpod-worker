@@ -1,0 +1,46 @@
+[
+ {
+  "drop_uid": "d0ba246165e84672bc4fcab175a328eb",
+  "name": "2014 Jaguar XKR-S GT",
+  "faces": 108020,
+  "keep_uid": "d26ab1613af044259900fc84c2d4d80f",
+  "keep_name": "Jaguar XKR",
+  "keep_faces": 108320,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'jaguar', face counts 108,020 vs 108,320 (300 apart, 0.28%); keeping the higher face count",
+  "eye_check": "false-positive",
+  "eye_note": "SAME BASE MESH but a DIFFERENT VEHICLE. The XKR-S GT carries the fixed swan-neck rear wing, front dive planes and black rims; the keeper is a standard XKR on grey rims with no wing. Identical material count (91), texture count (61) and wheel vert counts confirm a shared base, but the two render as visibly different cars, so dropping this one would lose a distinct variant rather than a re-upload. Rule A fired only because the keeper's title is the single token 'XKR', which makes overlap 1.00 against any XKR title."
+ },
+ {
+  "drop_uid": "d26ab1613af044259900fc84c2d4d80f",
+  "name": "Jaguar XKR",
+  "faces": 108320,
+  "keep_uid": "b2f7313e8fa3453699dab7b9a17f56fb",
+  "keep_name": "2010 Jaguar XKR (X150)",
+  "keep_faces": 108322,
+  "reason": "duplicate mesh (rule A): title token overlap 1.00 ignoring 'jaguar', face counts 108,320 vs 108,322 (2 apart, 0.00%); keeping the higher face count",
+  "eye_check": "confirmed",
+  "eye_note": "Genuine re-upload: 2 faces apart (108,320 vs 108,322), same 91 materials / 61 textures, and the two sheets are indistinguishable tile for tile - same white XKR, same grey multi-spoke rims, same red calipers, same framing. Correct side dropped: the keeper's title also names the year and the X150 generation."
+ },
+ {
+  "drop_uid": "38a30b5f9e6648c99f8d68f4ea0611b6",
+  "name": "jaguar car colour type",
+  "faces": 461241,
+  "keep_uid": "b338091497c64d31bef9bd7de49ade81",
+  "keep_name": "Jaguar F-Type",
+  "keep_faces": 461246,
+  "reason": "NOT FLAGGED BY dupe_check - recall miss. Rule A needs title overlap >=0.75 and these share only the token 'type' (overlap 0.50); rule B needs >=2 shared tokens. Found by eye.",
+  "eye_check": "confirmed",
+  "eye_note": "Same mesh, 5 faces apart (461,241 vs 461,246). The two sheets are indistinguishable tile for tile: same facelift F-Type R coupe, same dark multi-spoke rims with red centre caps, same framing. Keeping b338091497 because its title at least names the model; 'jaguar car colour type' names nothing."
+ },
+ {
+  "drop_uid": null,
+  "name": "2017 Jaguar F-Type R Convertible (8728eaa6, 462,908 f)",
+  "faces": 462908,
+  "keep_uid": "1958208dfe094224b261465d73ece0ee",
+  "keep_name": "2017 Jaguar F-Type R Convertible",
+  "keep_faces": 68069,
+  "reason": "NOT FLAGGED BY dupe_check - recall miss of the Subaru kind (same vehicle, different mesh). Identical titles but 85% apart on face count, so neither rule can reach it.",
+  "eye_check": "same-vehicle-different-mesh",
+  "eye_note": "Both are the 2017 pre-facelift F-Type R convertible from different modellers, not a re-upload. No drop is needed here: 8728eaa6 already FAILS the audit on an absent front rim face, so only 1958208d reaches the clean list. Recorded so the pair is not rediscovered as a surprise."
+ }
+]

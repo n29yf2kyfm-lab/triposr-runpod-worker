@@ -29,8 +29,10 @@
    "proportions read as XF X250 instantly; front 3/4 strong; roof, pillars and wheelbase consistent across all four tiles",
    "rim faces present with traceable spokes and lug detail in all four tiles",
    "glazing genuinely transparent in the shipped glb ('Gar_skl' = sklo/glass, alphaMode=BLEND, alpha=0.5, textured)",
-   "door and bonnet shut lines defined; grille mesh and lamp internals present; number-plate texture present",
-   "PALE TYRE IN THE SHEET IS A CANDIDATE ONLY, NOT A VERDICT: cov=0.957 means the worker's body-material pick covered nearly the whole car. Held pending a red-control re-render of the shipped glb."
+   "TYRES ARE BLACK IN THE SHIPPED ASSET - resolved, not assumed. The wheel-ring geometry (4 primitives sitting on the ground plane) binds to 'Gar_p4b', which is textured; its baseColorTexture was extracted from the GLB by HTTP Range and is a 1024x1024 Pirelli P Zero tread-and-sidewall map at mean RGB 27.5. NOTE this overturns my own first reading, which took the black 'Gar_gum' (baseColor 0.05) for the tyre - Gar_gum starts 9% of body height ABOVE the ground, so it is seal/trim rubber, not the tyre.",
+   "the white tyres in the sheet are the render worker's doing: a red control render returned recolour.materials = [Gar_alu, Gar_chr, Gar_gum, Gar_kob, Gar_lac, Gar_skl, Gar_vbl, Gar_voy, JXF2_lak, JXF2_tex] - TEN of the 14 materials treated as body, including the tyre rubber and the glass. In red the whole car including glass and tyres goes red.",
+   "door and bonnet shut lines defined; grille mesh and lamp internals present; UK number-plate texture present",
+   "PUBLISHING CAVEAT: cov=0.957 puts this in the documented cov>0.90 bucket - a render-time respray repaints glass and tyres with the body (toyota-auris-v1 was retired for exactly this). colour_variants.py edits named materials and is a different mechanism, so it may still be fine, but this car must not ship a colour variant without recolour_audit --stamp."
   ]
  },
  {
@@ -326,6 +328,223 @@
    "paint carries baked lighting and capture mottling; panels soft",
    "glazing opaque — 1 material, 1 texture, zero transparent materials; the windscreen is painted into the texture",
    "cov=1.000"
+  ]
+ },
+ {
+  "uid": "1a843d6163194c2580ba4dac1c7d54c6",
+  "name": "1971 Jaguar E-Type Series 3 V12 Roadster",
+  "verdict": "pass",
+  "reasons": [
+   "E-Type Series 3 V12 roadster: proportions read instantly, front 3/4 strong, consistent across all four tiles",
+   "tyres plainly BLACK — the white CLASSIC / RACING MASTER sidewall lettering is period-correct branding on a black tyre, and the tread face reads black in front34, rear34 and side. Not a whitewall and not a body-colour tyre.",
+   "wire wheels with individually modelled spokes and knock-off spinners, complete on all four corners",
+   "glazing transparent in the shipped glb (19 materials, 24 textures); interior resolvable through the windscreen",
+   "S3 egg-crate grille slats crisp, headlamp bowls and covers present, chrome bumpers and over-riders modelled, bonnet shut line defined",
+   "reflections clean, paint premium; cov=0.158, recolourable"
+  ]
+ },
+ {
+  "uid": "7c2c7dde73664c32be7dc1a5a6522ec7",
+  "name": "2021 Jaguar F-Type R Convertible",
+  "verdict": "pass",
+  "reasons": [
+   "facelift F-Type R convertible: proportions read instantly, front 3/4 strong, consistent across all four tiles",
+   "tyres plainly black rubber, black tread face in every tile",
+   "rim faces present with full spoke detail and red centre caps in all four tiles",
+   "glazing transparent in the shipped glb (25 materials, 34 textures)",
+   "grille honeycomb crisp, headlamp internals sharp, shut lines defined; cov=0.560",
+   "MINOR: the folding soft top renders in body white rather than as black fabric. cov=0.560 with mats=4 means the worker's body pick spans over half the car, so this is most likely the same repaint artefact as the pale tyres elsewhere — worth confirming on the shipped asset before publishing, but not a documented fail criterion."
+  ]
+ },
+ {
+  "uid": "a3a6175a66e24145ab49fa171edc3334",
+  "name": "2018 Jaguar F-Type SVR Coupé",
+  "verdict": "pass",
+  "reasons": [
+   "F-Type SVR coupe: proportions read instantly, front 3/4 strong, consistent across all four tiles",
+   "tyres plainly black rubber, black tread face in every tile",
+   "rim faces present with full spoke detail and red centre caps in all four tiles",
+   "glazing transparent in the shipped glb (19 materials, 26 textures)",
+   "grille mesh crisp, headlamp internals sharp, shut lines defined; reflections clean; cov=0.198, recolourable",
+   "IN SCOPE: SVR is an OEM performance variant, not a tuner kit. NOTE it wears a blue SVR graphics pack (side stripes, grille surround, wing endplates) on a separate material — cov=0.198 — so a respray will change the body but leave the blue decals in place."
+  ]
+ },
+ {
+  "uid": "eff21ffb883640d5930fbe02e3a2b1d0",
+  "name": "2009 Jaguar XKR-S",
+  "verdict": "fail",
+  "reasons": [
+   "RIM FACES ABSENT on one whole side: in the side and front34 tiles BOTH wheels are featureless black discs — no spoke arms, no lug nuts, no centre cap, no caliper — while front34_L and rear34 show full silver multi-spoke rims with red centre caps",
+   "this is the documented mirrored-wheel-with-inverted-geometry defect, not the rig's one-sided key light: the void wheels sit directly against fully lit white bodywork in the same tile",
+   "otherwise a good XKR-S: clear glazing (42 materials, 8 textures), black tyres, clean panels, cov=0.211 — re-source candidate"
+  ]
+ },
+ {
+  "uid": "d526aafcb857434284b1a432993a77cf",
+  "name": "1963 Jaguar E-Type (XK-E) Series 1 4.2",
+  "verdict": "pass",
+  "reasons": [
+   "E-Type Series 1 4.2 fixed-head coupe: proportions read instantly, front 3/4 strong, roof, pillars and wheelbase consistent across all four tiles",
+   "tyres plainly black rubber, black tread face in every tile",
+   "wire wheels with individually modelled spokes, complete on all four corners",
+   "glazing transparent in the shipped glb (22 materials, 11 textures); interior and seats resolvable through the side glass",
+   "Series 1 detail correct and crisp: covered headlamps, oval grille with centre bar, chrome bumpers and over-riders, bonnet and door shut lines defined",
+   "reflections clean, paint premium; cov=0.577"
+  ]
+ },
+ {
+  "uid": "32aa25ea6e1b40f395b2aff33ca0a279",
+  "name": "Jaguar E_TYPE",
+  "verdict": "fail",
+  "reasons": [
+   "the door-window aperture renders as a solid body-coloured wedge in rear34 at 3x — the interior/door geometry is bound to the 'body' material, so the opening reads as unfinished bodywork rather than a cabin. The file's 'glass' material is genuinely transparent (BLEND alpha 0.1), so this is geometry binding, not glazing.",
+   "only 7 materials on 125,527 faces: grille is a plain dark oval with no slat detail, headlamps have no internals, bumpers are thin plates",
+   "below the premium bar, and the wave already contains a strictly better Series 1 (d526aafcb857434284b1a432993a77cf, 178,363 f, 22 materials, proper interior, covered headlamps) — no reason to ship this one",
+   "not floating and the wire wheels are complete on all four corners; those were checked and are fine"
+  ]
+ },
+ {
+  "uid": "b2f7313e8fa3453699dab7b9a17f56fb",
+  "name": "2010 Jaguar XKR (X150)",
+  "verdict": "pass",
+  "reasons": [
+   "XKR X150: proportions read instantly, front 3/4 strong, consistent across all four tiles",
+   "PALE TYRE IN THE SHEET IS A RENDER ARTEFACT: the wheel-ring geometry binds to material 'blcak', baseColorFactor [0,0,0], untextured, dielectric, roughness 0.5 — 32,743 verts across the four corners. The shipped tyres are pure black; cov=0.585 means the worker's body pick spanned them.",
+   "rim faces present with full spoke detail and red calipers in all four tiles",
+   "glazing transparent in the shipped glb (91 materials, 61 textures)",
+   "grille mesh, lamp internals and shut lines defined; reflections clean",
+   "DUPLICATE FAMILY: same base mesh as d26ab1613af044259900fc84c2d4d80f (108,320 f) and d0ba246165e84672bc4fcab175a328eb (108,020 f) — identical material count, texture count and wheel vert counts. This is the copy to keep: the title names the year AND the generation."
+  ]
+ },
+ {
+  "uid": "d26ab1613af044259900fc84c2d4d80f",
+  "name": "Jaguar XKR",
+  "verdict": "pass",
+  "reasons": [
+   "quality identical to b2f7313e8fa3453699dab7b9a17f56fb — the two renders are indistinguishable tile for tile",
+   "tyres black in the shipped glb ('blcak' baseColorFactor [0,0,0], untextured); rim faces complete; glazing transparent",
+   "DUPLICATE of b2f7313e8fa3453699dab7b9a17f56fb (108,320 vs 108,322 faces, both 91 materials / 61 textures). Drop this one: its title states neither year nor generation."
+  ]
+ },
+ {
+  "uid": "d0ba246165e84672bc4fcab175a328eb",
+  "name": "2014 Jaguar XKR-S GT",
+  "verdict": "pass",
+  "reasons": [
+   "XKR-S GT: proportions read instantly including the fixed rear wing and front canards; front 3/4 strong; consistent across all four tiles",
+   "tyres black in the shipped glb ('blcak' baseColorFactor [0,0,0], untextured); the white in the sheet is the worker's body pick at cov=0.586",
+   "rim faces present with full spoke detail and red calipers in all four tiles",
+   "glazing transparent (91 materials, 61 textures); grille mesh, lamp internals and shut lines defined",
+   "IN SCOPE but marginal: the XKR-S GT is road-legal, though only ~30 were built, so a UK registration realistically never decodes to one",
+   "CORRECTION to my own earlier note: dupe_check DID flag this one (rule A, against the single-token title 'Jaguar XKR', overlap 1.00, 300 faces apart). I recorded it as unreachable and that was wrong. It is annotated in JAGUAR_DUPES.json as a FALSE POSITIVE: same base mesh, but the XKR-S GT's fixed rear wing, dive planes and black rims make it a visibly different car, not a re-upload."
+  ]
+ },
+ {
+  "uid": "fb42d0a3d2d244d4bbb832a3510a61e3",
+  "name": "Jaguar E-Type",
+  "verdict": "fail",
+  "reasons": [
+   "flat matte-white slabs on visible panels: the rear side-window aperture is filled with a plain unreflective white rectangle at 3x, and a matte white band runs across the door and rear quarter against otherwise reflective silver paint — placeholder material left on body geometry",
+   "the same defect appears on both sides (front34 and front34_L), so it is the model, not the lighting",
+   "wire wheels and chrome are good, but the panel material failure is disqualifying and the wave already holds two better E-Types"
+  ]
+ },
+ {
+  "uid": "8c94b345c1424df5973b56ddf920e7b7",
+  "name": "Jaguar MK2 -1962",
+  "verdict": "fail",
+  "reasons": [
+   "glazing OPAQUE in the shipped glb: 'Glass_Basic_White_2' is baseColorFactor [0.041,0.041,0.041], alphaMode=OPAQUE, metallic=0.70 — a near-black mirror. ZERO transparent materials in all 20. No interior can ever be resolved.",
+   "the black/white two-tone in the sheet is a RENDER artefact, not the asset: cov=0.102 (LOW COVERAGE) means the worker's classifier matched only the doors and repainted just those — the shipped car is uniformly Paint_Metallic_Black_1",
+   "checked and NOT defects: the tyres are genuine black rubber ('Tire_1' baseColor 0.066) with period whitewalls, and the featureless black mass on the near side in front34_L is the rig's one-sided key light on black paint — wire spokes and shut lines are still traceable at 3x"
+  ]
+ },
+ {
+  "uid": "ec94f812b58a470ca133173c479cf1ce",
+  "name": "2019 Jaguar F-TYPE R Convertible",
+  "verdict": "pass",
+  "reasons": [
+   "facelift F-Type R convertible: proportions read instantly, front 3/4 strong, consistent across all four tiles",
+   "TYRES ARE BLACK — corrected on inspection. At thumbnail scale they read white against the silver rims and white body, which is the documented trap; at 5x in rear34 the tread and sidewall are plainly dark. Nothing was repainted either: the header reports mats=0 cov=0.000, so the worker applied NO recolour and the sheet shows the asset's own materials.",
+   "rim faces present with full spoke detail and red centre caps in all four tiles",
+   "glazing transparent in the shipped glb ('jMAT_Glass1', alphaMode=BLEND + KHR_materials_transmission)",
+   "grille honeycomb crisp, headlamp internals sharp, shut lines defined, black soft top correct",
+   "CAVEAT for publishing: cov=0.000 means the render worker's body-paint classifier found nothing, so a render-time recolour will not take on this car. colour_variants.py edits named materials and may still work ('jMAT_Jaguar_F_Type1' is the body), but that needs recolour_audit --stamp to prove."
+  ]
+ },
+ {
+  "uid": "1958208dfe094224b261465d73ece0ee",
+  "name": "2017 Jaguar F-Type R Convertible",
+  "verdict": "pass",
+  "reasons": [
+   "pre-facelift F-Type R convertible, roof down: proportions read instantly, front 3/4 strong, consistent across all four tiles",
+   "tyres plainly black rubber, black tread face in every tile",
+   "rim faces present with full spoke detail and red calipers in all four tiles",
+   "glazing transparent in the shipped glb (32 materials, 23 textures)",
+   "grille mesh, lamp internals and shut lines defined; cov=0.365, recolourable",
+   "68,069 faces is the lowest of the passing F-Types but the surfacing holds up at full sheet resolution",
+   "SAME VEHICLE, DIFFERENT MESH from 8728eaa6 (also titled 2017 F-Type R Convertible, 462,908 f) which failed on an absent rim face. dupe_check cannot pair them (85% face difference); noted by hand."
+  ]
+ },
+ {
+  "uid": "5a58d1a8eb2043af8916e828fc9d7ff4",
+  "name": "1962 Jaguar MK2",
+  "verdict": "pass",
+  "reasons": [
+   "Mk2 saloon: proportions read instantly, front 3/4 strong, roof, pillars and wheelbase consistent across all four tiles",
+   "tyres plainly black rubber, black tread in every tile; wire wheels with individually modelled spokes on all four corners",
+   "glazing transparent in the shipped glb (20 materials, 3 textures) and the tan interior is resolvable through the side glass in all four tiles",
+   "Mk2 vertical-slat grille with centre rib crisp, headlamps and fog lamps with bowls, chrome bumpers and over-riders modelled, door and bonnet shut lines defined",
+   "reflections clean, paint premium; cov=0.227, recolourable",
+   "the other Mk2 in this wave (8c94b345, 101,548 f) fails on opaque glazing, so this is the one to keep"
+  ]
+ },
+ {
+  "uid": "8c53321301234400b70975fa6abb5e5d",
+  "name": "Jaguar E-Type Lightweight GT",
+  "verdict": "fail",
+  "reasons": [
+   "panel surfaces melted: the whole body reads as one smoothed blob with no door, bonnet or boot shut lines anywhere",
+   "headlamps are plain glossy blisters with no internals; the front intake has no grille detail at all; bonnet louvres are a smear",
+   "also out of scope as modelled — Lightweight/low-drag competition spec with a riveted race hardtop, no bumpers, no number plates and a race filler cap",
+   "tyres are black and the wheels are complete; those were checked and are not the problem"
+  ]
+ },
+ {
+  "uid": "7635322299b740e19b874e0ae9bd7748",
+  "name": "1961 Jaguar E Type",
+  "verdict": "fail",
+  "reasons": [
+   "flat clay shell: 2 materials, 0 textures, zero transparent materials in the file; FLAT-SHELL signature",
+   "tyres, wire wheels and glazing all render in body white; cov=1.000, so a respray would repaint all of it",
+   "proportions distorted as well — over-wide body with a bulbous nose that does not read as an E-Type"
+  ]
+ },
+ {
+  "uid": "a5a36c72610c47548d2f6de6baaea6fe",
+  "name": "[Blue Archive] Jaguar E-Type Convertible",
+  "verdict": "fail",
+  "reasons": [
+   "NOT A CAR ASSET: a Blue Archive (anime game) diorama. Two large cel-shaded character models with halos occupy most of the geometry and most of every tile; the E-Type underneath is a low-detail prop with no grille, no lamps and no shut lines.",
+   "should be added to REJECTS.json so a re-sweep does not re-download it"
+  ]
+ },
+ {
+  "uid": "17a67af9e4d342acbfa91e6088ff2994",
+  "name": "Jaguar f pace",
+  "verdict": "fail",
+  "reasons": [
+   "rejected by the local pose gate before any GPU spend (flipped/on-side, tob=0.381), then VERIFIED with a two-view render rather than trusted: the asset is not a car at all but a torn photogrammetry fragment — a curled sheet of scanned surface with two spike artefacts standing off it",
+   "the pose gate was right; recorded here so the reject is evidence-backed rather than gate-backed"
+  ]
+ },
+ {
+  "uid": "bd247bb819a24175b16eaad804bd6422",
+  "name": "Jaguar XK",
+  "verdict": "fail",
+  "reasons": [
+   "never rendered: HARD-REJECT at 83MB against the wave's 48MB staging ceiling (MAX_OBJ), so there is no sheet and no quality judgement to make",
+   "1,046,394 faces. If this car is wanted it needs decimating or a raised ceiling before it can be assessed — the wave has already written it to HARD_REJECTS.json so a re-run will not re-download it"
   ]
  }
 ]

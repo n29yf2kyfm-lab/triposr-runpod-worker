@@ -201,5 +201,138 @@
   "verdict": "opaque",
   "evidence": "gltf",
   "note": "1 material, 1 texture, zero transparent; scan with the glass painted into the texture"
+ },
+ {
+  "uid": "1a843d6163194c2580ba4dac1c7d54c6",
+  "name": "1971 Jaguar E-Type Series 3 V12 Roadster",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "BLEND glazing material with baseColor alpha below 1.0 among 19 materials / 24 textures; interior resolvable through the windscreen in the sheet as a cross-check"
+ },
+ {
+  "uid": "7c2c7dde73664c32be7dc1a5a6522ec7",
+  "name": "2021 Jaguar F-Type R Convertible",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "BLEND glazing material with baseColor alpha below 1.0 among 25 materials / 34 textures"
+ },
+ {
+  "uid": "a3a6175a66e24145ab49fa171edc3334",
+  "name": "2018 Jaguar F-Type SVR Coupé",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "BLEND glazing material with baseColor alpha below 1.0 among 19 materials / 26 textures"
+ },
+ {
+  "uid": "eff21ffb883640d5930fbe02e3a2b1d0",
+  "name": "2009 Jaguar XKR-S",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "BLEND glazing material with baseColor alpha below 1.0 among 42 materials / 8 textures; car fails on wheels, not glass"
+ },
+ {
+  "uid": "d526aafcb857434284b1a432993a77cf",
+  "name": "1963 Jaguar E-Type (XK-E) Series 1 4.2",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "BLEND glazing material with baseColor alpha below 1.0 among 22 materials / 11 textures; interior resolvable through the side glass in the sheet as a cross-check"
+ },
+ {
+  "uid": "32aa25ea6e1b40f395b2aff33ca0a279",
+  "name": "Jaguar E_TYPE",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "'glass' alphaMode=BLEND baseColor alpha=0.1 — the glazing material itself is fine; the car fails on the door aperture being bound to the body material, which is a separate defect"
+ },
+ {
+  "uid": "b2f7313e8fa3453699dab7b9a17f56fb",
+  "name": "2010 Jaguar XKR (X150)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "BLEND glazing material with baseColor alpha below 1.0 among 91 materials / 61 textures"
+ },
+ {
+  "uid": "d26ab1613af044259900fc84c2d4d80f",
+  "name": "Jaguar XKR",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "BLEND glazing material with baseColor alpha below 1.0 among 91 materials / 61 textures (same mesh as b2f7313e)"
+ },
+ {
+  "uid": "d0ba246165e84672bc4fcab175a328eb",
+  "name": "2014 Jaguar XKR-S GT",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "BLEND glazing material with baseColor alpha below 1.0 among 91 materials / 61 textures"
+ },
+ {
+  "uid": "fb42d0a3d2d244d4bbb832a3510a61e3",
+  "name": "Jaguar E-Type",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "transparent materials present (44 materials / 36 textures) and no glass-named material to contradict them; the car fails on placeholder white panels, not on glazing"
+ },
+ {
+  "uid": "8c94b345c1424df5973b56ddf920e7b7",
+  "name": "Jaguar MK2 -1962",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "'Glass_Basic_White_2' baseColorFactor [0.041,0.041,0.041] alphaMode=OPAQUE metallic=0.70; zero transparent materials in 20"
+ },
+ {
+  "uid": "ec94f812b58a470ca133173c479cf1ce",
+  "name": "2019 Jaguar F-TYPE R Convertible",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "'jMAT_Glass1' alphaMode=BLEND with KHR_materials_transmission and a baseColorTexture"
+ },
+ {
+  "uid": "1958208dfe094224b261465d73ece0ee",
+  "name": "2017 Jaguar F-Type R Convertible",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "BLEND glazing material with baseColor alpha below 1.0 among 32 materials / 23 textures"
+ },
+ {
+  "uid": "5a58d1a8eb2043af8916e828fc9d7ff4",
+  "name": "1962 Jaguar MK2",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "BLEND glazing material with baseColor alpha below 1.0 among 20 materials / 3 textures; tan interior resolvable through the side glass in all four tiles as a cross-check"
+ },
+ {
+  "uid": "8c53321301234400b70975fa6abb5e5d",
+  "name": "Jaguar E-Type Lightweight GT",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "transparent glazing present (9 materials / 12 textures); the car fails on melted panels and scope, not on glass"
+ },
+ {
+  "uid": "7635322299b740e19b874e0ae9bd7748",
+  "name": "1961 Jaguar E Type",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "2 materials, 0 textures, zero transparent; FLAT-SHELL clay"
+ },
+ {
+  "uid": "a5a36c72610c47548d2f6de6baaea6fe",
+  "name": "[Blue Archive] Jaguar E-Type Convertible",
+  "verdict": "faded",
+  "evidence": "gltf",
+  "note": "a BLEND material sits at effectively alpha 1.0 with no transmission — cel-shaded anime prop, not real glazing. Academic: the asset is not a car."
+ },
+ {
+  "uid": "17a67af9e4d342acbfa91e6088ff2994",
+  "name": "Jaguar f pace",
+  "verdict": "opaque",
+  "evidence": "render",
+  "note": "two-view render of the staged glb shows a torn photogrammetry fragment with no cabin and no glazing geometry at all"
+ },
+ {
+  "uid": "bd247bb819a24175b16eaad804bd6422",
+  "name": "Jaguar XK",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "NOT ASSESSED — never staged (83MB hard-reject), so no glTF was available to probe. Recorded as opaque only so the clean list cannot pick it up; treat as unknown."
  }
 ]

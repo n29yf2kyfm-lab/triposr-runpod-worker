@@ -1,0 +1,182 @@
+[
+ {
+  "model": "E-Type",
+  "trim": "4.2",
+  "generation": "Series 1",
+  "year": 1963,
+  "faces": 178363,
+  "uid": "d526aafcb857434284b1a432993a77cf",
+  "title": "1963 Jaguar E-Type (XK-E) Series 1 4.2"
+ },
+ {
+  "model": "E-Type",
+  "trim": "V12 Roadster",
+  "generation": "Series 3",
+  "year": 1971,
+  "faces": 310143,
+  "uid": "1a843d6163194c2580ba4dac1c7d54c6",
+  "title": "1971 Jaguar E-Type Series 3 V12 Roadster"
+ },
+ {
+  "model": "F-Type",
+  "trim": "Convertible",
+  "generation": null,
+  "year": null,
+  "faces": 877406,
+  "uid": "b2e428dddc764fd0aaf7aec3093cab12",
+  "title": "Jaguar F-Type Convertible"
+ },
+ {
+  "model": "F-Type",
+  "trim": null,
+  "generation": null,
+  "year": null,
+  "faces": 758076,
+  "uid": "548f9180774c4bc6852adbfd409f0796",
+  "title": "Jaguar F-type"
+ },
+ {
+  "model": "F-Type",
+  "trim": null,
+  "generation": null,
+  "year": null,
+  "faces": 461246,
+  "uid": "b338091497c64d31bef9bd7de49ade81",
+  "title": "Jaguar F-Type"
+ },
+ {
+  "model": "F-Type",
+  "trim": "Project 7",
+  "generation": null,
+  "year": 2016,
+  "faces": 376711,
+  "uid": "333a053cfef3424fb0194e4f3a4472d9",
+  "title": "2016 Jaguar F-Type Project 7"
+ },
+ {
+  "model": "F-Type",
+  "trim": "R Convertible",
+  "generation": null,
+  "year": 2017,
+  "faces": 68069,
+  "uid": "1958208dfe094224b261465d73ece0ee",
+  "title": "2017 Jaguar F-Type R Convertible"
+ },
+ {
+  "model": "F-Type",
+  "trim": "SVR Coupe",
+  "generation": null,
+  "year": 2018,
+  "faces": 208271,
+  "uid": "a3a6175a66e24145ab49fa171edc3334",
+  "title": "2018 Jaguar F-Type SVR Coupé"
+ },
+ {
+  "model": "F-Type",
+  "trim": "R Convertible",
+  "generation": null,
+  "year": 2019,
+  "faces": 96051,
+  "uid": "ec94f812b58a470ca133173c479cf1ce",
+  "title": "2019 Jaguar F-TYPE R Convertible"
+ },
+ {
+  "model": "F-Type",
+  "trim": "R Convertible",
+  "generation": null,
+  "year": 2021,
+  "faces": 240738,
+  "uid": "7c2c7dde73664c32be7dc1a5a6522ec7",
+  "title": "2021 Jaguar F-Type R Convertible"
+ },
+ {
+  "model": "I-Pace",
+  "trim": "Concept",
+  "generation": null,
+  "year": null,
+  "faces": 274989,
+  "uid": "3ea106994ec9442eb4b72906026fa215",
+  "title": "Jaguar I-pace Concept"
+ },
+ {
+  "model": "MK2",
+  "trim": null,
+  "generation": null,
+  "year": 1962,
+  "faces": 101445,
+  "uid": "5a58d1a8eb2043af8916e828fc9d7ff4",
+  "title": "1962 Jaguar MK2"
+ },
+ {
+  "model": "XE",
+  "trim": "SV Project 8",
+  "generation": null,
+  "year": 2018,
+  "faces": 224267,
+  "uid": "9242afa6a7ae4800833e18b1249fa3f9",
+  "title": "2018 Jaguar XE SV Project 8"
+ },
+ {
+  "model": "XF",
+  "trim": null,
+  "generation": "X250",
+  "year": null,
+  "faces": 568692,
+  "uid": "a7a865ac27f6458bb42525e4aebb2a56",
+  "title": "Jaguar XF MK1 (X250) 2007-2015"
+ },
+ {
+  "model": "XFR-S",
+  "trim": "Sportbrake",
+  "generation": null,
+  "year": null,
+  "faces": 579864,
+  "uid": "0ad7a343bd184a1aa016095380709830",
+  "title": "Jaguar XFR-S Sportbrake"
+ },
+ {
+  "model": "XJ",
+  "trim": null,
+  "generation": null,
+  "year": 2015,
+  "faces": 1110037,
+  "uid": "ce7dfd765748429f8f64b7683b49d581",
+  "title": "2015 jaguar xj"
+ },
+ {
+  "model": "XJ220",
+  "trim": null,
+  "generation": null,
+  "year": 1992,
+  "faces": 362424,
+  "uid": "7dd7bc17b4564f6eb03542ad6cab6dda",
+  "title": "1992 Jaguar XJ220"
+ },
+ {
+  "model": "XKR",
+  "trim": null,
+  "generation": "X150",
+  "year": 2010,
+  "faces": 108322,
+  "uid": "b2f7313e8fa3453699dab7b9a17f56fb",
+  "title": "2010 Jaguar XKR (X150)"
+ },
+ {
+  "model": "XKR-S",
+  "trim": "GT",
+  "generation": null,
+  "year": 2014,
+  "faces": 108020,
+  "uid": "d0ba246165e84672bc4fcab175a328eb",
+  "title": "2014 Jaguar XKR-S GT"
+ },
+ {
+  "model": null,
+  "trim": null,
+  "generation": null,
+  "year": null,
+  "faces": 543656,
+  "uid": "d3b9a8c5e6bc4ba3818bead275c53ecf",
+  "title": "jaguar high poly"
+ }
+]
