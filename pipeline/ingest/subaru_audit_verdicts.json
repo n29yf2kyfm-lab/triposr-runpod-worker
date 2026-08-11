@@ -673,5 +673,47 @@
    "the magenta grille badge is model-side here, not a render artefact - the material is literally named Front_badge_Pink, rgba 0.698/0.052/0.800 OPAQUE",
    "tyres are fine (material Rubber is pure black) and the 22B widebody is a factory road spec, so scope and tyres are not the problem - the glazing and lamps are"
   ]
+ },
+ {
+  "uid": "313b1240a8cf4b5ebb9411bb85ec3fb7",
+  "name": "Subaru Leone",
+  "verdict": "fail",
+  "reasons": [
+   "whole-car transmission shell (mats=0 cov=0.000): the entire Leone coupe renders as see-through glass - front wings, bonnet, doors and wheels are all transparent in every tile",
+   "eighth car in the Nieve5677 cluster with this identical defect",
+   "genuine UK-relevant classic lost to a source-side material fault rather than to scope"
+  ]
+ },
+ {
+  "uid": "3459598d769046468781220f573ba335",
+  "name": "Subaru 360",
+  "verdict": "fail",
+  "reasons": [
+   "tyres render as translucent glass discs - the floor and backdrop show through the front wheel in front34, front34_L and rear34; the Nieve5677 transmission-shell fault applied to the wheel materials",
+   "wheels detached and hanging outboard of the arches in front34_L and rear34",
+   "mats=0 cov=0.000, no body-paint material",
+   "ninth car in the Nieve5677 cluster"
+  ]
+ },
+ {
+  "uid": "424ad6d1ef2148caab36422f3003440a",
+  "name": "Subaru B4",
+  "verdict": "fail",
+  "reasons": [
+   "not an isolated vehicle: this is an ENVIRONMENT photogrammetry scan of a courtyard, with the surrounding building walls, pillars, ground and foliage all baked into the same mesh as the car",
+   "the car occupies a small part of the scene and is largely occluded; two of the four tiles show only scanned masonry",
+   "mats=1 cov=1.000 FULL COVERAGE"
+  ]
+ },
+ {
+  "uid": "96baa2683f3b4d0591b92633defb4e82",
+  "name": "Day 102: Subaru DL 4WD",
+  "verdict": "fail",
+  "reasons": [
+   "photogrammetry scan of a derelict car: the entire glasshouse is torn away into black holes, the roof rails are shredded and the underbody hangs in ragged fringes",
+   "baked lighting, dirt, rust and a hand-painted desert mural along the flanks are all in the texture and cannot be resprayed",
+   "mats=1 tex=1 cov=1.000 FULL COVERAGE, no separable glazing or tyres",
+   "the car itself is a scrapyard example, not a presentable road car"
+  ]
  }
 ]
