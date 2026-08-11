@@ -1267,5 +1267,99 @@
    "model is otherwise simplified - no shut lines beyond the door, no badges, plain lamp lenses",
    "marked fail-rerender not scrap, but note the wave inversion/placement bug is deterministic per asset so a re-run may reproduce it"
   ]
+ },
+ {
+  "uid": "2ac4ee25ca4d408cbdb9f073b7b6cdfc",
+  "name": "Porsche 911 Turbo 3.6 Tooned Custom",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: a stylised cartoon/toy caricature, not a vehicle - squashed wheelbase, oversized wheel arches, no real bodywork",
+   "glazing is a painted blue blob, tyres are grey plastic, no lamps or grille",
+   "nothing a UK registration decodes to"
+  ]
+ },
+ {
+  "uid": "2b3843db0f784ab0a8702f6361d16d2a",
+  "name": "1995 Porsche 911 GT2 (993)",
+  "verdict": "pass",
+  "reasons": [
+   "993 GT2 proportions read instantly - riveted wide arches, biplane wing correct; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands against white rims",
+   "glazing transparent, cage and seats visible through the side glass",
+   "white rim faces fully present in all four views",
+   "993 GT2 is a road-legal homologation car, in scope",
+   "marginal: headlamp internals are shallow ovals with little reflector detail - below par but above the fail bar"
+  ]
+ },
+ {
+  "uid": "2c929bad2b6c41a2a35867e5d8a4f5f3",
+  "name": "Porsche 911 992 Targa S",
+  "verdict": "pass",
+  "reasons": [
+   "992 Targa proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible",
+   "black mesh rim faces present in all four views",
+   "front intake slats, lamp internals and shut lines defined"
+  ]
+ },
+ {
+  "uid": "2d336e24e107447298741204325e60ac",
+  "name": "2015_-_ Porsche_911_ Carrera_S__ Mid- Poly",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 Carrera S proportions read instantly; front 3/4 strong; silver paint finish clean",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, interior visible in the side view",
+   "black rim faces present in all four views",
+   "lamp internals, front intake slats and shut lines defined",
+   "note: face count and title sit very close to 4cef7c1e and 7fd67e40 - likely the same source mesh, leave to dupe_check"
+  ]
+ },
+ {
+  "uid": "2f39754f878b4c82ba0c0b938eeafc15",
+  "name": "Porsche 911 GT2 RS (996)",
+  "verdict": "fail",
+  "reasons": [
+   "panel surfacing RIPPLED: on the mirror-finish silver the front wing, door and rear quarter reflections wobble and blotch badly at full res - the owner's pass list requires clean reflections and these are not",
+   "shut lines soft: the wing-to-bumper and quarter-to-door joins have no defined gap",
+   "tyres are black rubber, glazing is transparent with the far-side window visible through the cabin, rim faces present - the failure is surfacing, not materials",
+   "checked the apparent two-tone panels at full res first: that is reflection of the dark backdrop, not mismatched materials"
+  ]
+ },
+ {
+  "uid": "2f3aa8e817444dfda51fe3a24a5bf0d8",
+  "name": "Porsche 911 992 2021",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL: one grey material over the whole body",
+   "glazing opaque grey - the greenhouse in the side view is solid, no interior at any zoom",
+   "tyres render pale white against the dark rim in the front34 tread band, no black rubber",
+   "headlamps are blank recessed grey shapes with no internal elements; panel surfacing soft, no shut lines"
+  ]
+ },
+ {
+  "uid": "318cfb7279a94e8f96095ec0236f02ad",
+  "name": "Porsche 911 992 Carrera S",
+  "verdict": "pass",
+  "reasons": [
+   "992 Carrera S proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face and sidewall clear in both 3/4 bands",
+   "glazing transparent",
+   "black rim faces present in all four views",
+   "headlamp internals sharp, front intake slats and shut lines defined"
+  ]
+ },
+ {
+  "uid": "32b33f05cb4f457a87428757f90298ce",
+  "name": "Porsche 911 Carrera 1994",
+  "verdict": "pass",
+  "reasons": [
+   "993 Carrera proportions read instantly; front 3/4 strong; paint finish premium",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cabin visible through the side glass",
+   "grey rim faces present in all four views, red calipers behind",
+   "993 lamp bowls, engine-lid slats and door shut line defined"
+  ]
  }
 ]
