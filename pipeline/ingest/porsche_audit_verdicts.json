@@ -2347,5 +2347,91 @@
    "black rim faces present in all four views",
    "lamp internals, front intake slats, rear light bar and shut lines defined"
   ]
+ },
+ {
+  "uid": "f17a982d5d8a4d97baef4b00b51a4e9a",
+  "name": "2023 Porsche 911 GT3 RS 2.7 Carrera Tribute 992",
+  "verdict": "pass",
+  "reasons": [
+   "992 GT3 RS proportions read instantly - aero blades, arch louvres and swan-neck wing correct; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands against green rims",
+   "glazing transparent, cage visible through the side glass",
+   "green rim faces present in all four views",
+   "lamp internals, splitter, diffuser and shut lines defined",
+   "IN SCOPE: the green GT3 RS script, sill stripe and green wheels are the factory Tribute to Carrera RS package, not an aftermarket wrap"
+  ]
+ },
+ {
+  "uid": "f39f7c539a3440428c22a3da2f52af43",
+  "name": "2024 Porsche 911 S/T",
+  "verdict": "pass",
+  "reasons": [
+   "992 911 S/T proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent, cage and interior visible through the side glass",
+   "silver rim faces present in all four views",
+   "lamp internals, front intakes, ducktail and shut lines defined",
+   "IN SCOPE: the 63 roundel and PORSCHE sill lettering are the factory Heritage Design package for the S/T, not competition numbers"
+  ]
+ },
+ {
+  "uid": "fcdfe671f29e437db7d81ae5d5ec203b",
+  "name": "Custom 2022 Porsche 911 GT3 (922)",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE: an aftermarket aero build, as the title itself says - a protruding front splitter with dive-plane canards, an oversized twin-element rear wing and extra rear-quarter fins, none of them 992 GT3 factory parts",
+   "a customer 992 GT3 lookup must not resolve to a modified car",
+   "model quality itself is good: black tyres, transparent glazing, rim faces present, panels clean - it is scope alone that fails it"
+  ]
+ },
+ {
+  "uid": "fe0fed8a1ea3452bb03bcf530de1d22b",
+  "name": "White Porsche 911 GT3 RS",
+  "verdict": "fail",
+  "reasons": [
+   "CLAY SHELL: one white material over the whole car",
+   "tyres render body-white on white rims in both 3/4 tread bands - no black rubber anywhere",
+   "glazing opaque body-white; the windscreen in the front view is a solid panel with no interior",
+   "headlamps are blank white recesses, grille openings have no depth, no shut lines"
+  ]
+ },
+ {
+  "uid": "fe160a2d7f8c49f193ad5227851e6372",
+  "name": "Porsche 911 Flatnose",
+  "verdict": "pass",
+  "reasons": [
+   "930 Flachbau/slantnose proportions read instantly; front 3/4 strong; paint finish premium",
+   "tyres black rubber, tread face clear in both 3/4 bands against black Fuchs rims with polished lips",
+   "glazing transparent at full res - the far-side window and cabin are visible through the near glass",
+   "rim faces present in all four views",
+   "rear quarter louvres, door handle, tail-light internals and door shut line all defined",
+   "IN SCOPE: the Flachbau was a factory Sonderwunsch option on the 930, not an aftermarket conversion"
+  ]
+ },
+ {
+  "uid": "fe573c66c5c64a1c82cfbd0162ccc7d5",
+  "name": "Porsche 911 Turbo S | TAKEOVER",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 Turbo S proportions read instantly; front 3/4 strong; paint finish premium",
+   "tyres black rubber, tread face clear in both 3/4 bands",
+   "glazing transparent at full res - seats and dashboard visible through the side glass",
+   "black rim faces present in all four views",
+   "lamp internals, side intakes, rear light bar and shut lines defined",
+   "TAKEOVER in the title is a Sketchfab collection name, not a livery - the car renders plain"
+  ]
+ },
+ {
+  "uid": "ff85d240ebf24eebbb6719c7b15634d8",
+  "name": "Porsche 911 Gucci",
+  "verdict": "pass",
+  "reasons": [
+   "991.2 GT3 RS proportions read instantly; front 3/4 strong",
+   "tyres black rubber, tread face clear in both 3/4 bands against white rims",
+   "glazing transparent, cage visible through the side glass",
+   "white rim faces present in all four views, yellow PCCB calipers",
+   "arch louvres, NACA ducts, lamp internals and shut lines defined",
+   "despite the title there is NO Gucci livery on the model - it renders as a plain grey GT3 RS, so it stays in scope"
+  ]
  }
 ]
