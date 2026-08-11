@@ -467,5 +467,196 @@
    "roof rack is factory Wagoneer equipment, not an overland accessory",
    "NOT A UK-MARKET CAR: the Wagoneer was never sold in the UK"
   ]
+ },
+ {
+  "uid": "98bc399af1e948eda5db6d75c5bb649d",
+  "name": "2020 Jeep Gladiator",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as a Gladiator JT Rubicon crew-cab pickup",
+   "tyres plainly BLACK - zoomed the side view: BFGoodrich All-Terrain T/A with real tread blocks",
+   "all four rim faces present with machined spoke faces, consistent across views",
+   "seven-slot grille crisp, LED lamp internals sharp, door and bonnet shut lines defined",
+   "zoomed the front bumper to rule out a winch: it is the FACTORY Rubicon steel bumper with factory red tow hooks and skid plate, no winch drum, no light bar",
+   "in scope as a factory Rubicon; NOT A UK-MARKET CAR - the Gladiator was never sold in the UK"
+  ]
+ },
+ {
+  "uid": "5165e4ab8c6f4ce9b6b4f203cbac1e04",
+  "name": "Jeep Gladiator",
+  "verdict": "fail",
+  "reasons": [
+   "GLAZING OPAQUE in the shipped glTF - Jeep_GladiatorRewardRecycled_2019Window_Material is alpha 1.0 alphaMode OPAQUE with transmission 0.0",
+   "only the lamp lenses RED_GLASS and ORANGE_GLASS are transparent; the actual windows are not",
+   "the tinted glass in the sheet is the handler override on the Window-named material",
+   "geometry otherwise good: black A/T tyres, rim faces present, crisp seven-slot grille",
+   "near-duplicate of 98bc399a (2020 Jeep Gladiator): same Jeep_GladiatorRewardRecycled_2019 material family, 297,752 vs 301,477 faces"
+  ]
+ },
+ {
+  "uid": "10ce4861ef62411183c185ca1998d1c2",
+  "name": "2021 Jeep Grand Commander (K8)",
+  "verdict": "pass",
+  "reasons": [
+   "proportions read instantly as a Jeep Grand Commander K8",
+   "black tyres, tread face plainly dark in front34, rear34 and side",
+   "all four rim faces present, multi-spoke alloys consistent across views",
+   "seven-slot grille crisp, LED lamp internals sharp, shut lines defined",
+   "paint finish clean and premium; respray took (mats=1 cov=0.134)",
+   "NOT A UK-MARKET CAR: the Grand Commander is a China-only Jeep and was never sold in the UK"
+  ]
+ },
+ {
+  "uid": "3036e734a0944821aca8d4434abf4936",
+  "name": "Jeep Gladiator 2019",
+  "verdict": "fail",
+  "reasons": [
+   "clay shell - glazing renders opaque grey-white; gltf 0 of 6 materials transparent",
+   "low detail: seven-slot grille is a shallow extrusion, no headlamp internals",
+   "no real door or bonnet shut lines, surfaces soft and waxy",
+   "not close to the premium bar"
+  ]
+ },
+ {
+  "uid": "beb3353a09ba4b4ab6bf12049d96184a",
+  "name": "CJ Old Beach Jeep",
+  "verdict": "fail",
+  "reasons": [
+   "OUT OF SCOPE bespoke conversion - CJ chassis with a flatbed/lifeguard utility rear body and a tubular grab-rail frame; no doors, no roof, two seats only",
+   "REAR WHEELS MISSING - rear arches empty in front34 and rear34",
+   "no UK registration decodes to this body conversion"
+  ]
+ },
+ {
+  "uid": "118d6a87dd79437393ebebeb65155351",
+  "name": "Jeep Gladiator 2019",
+  "verdict": "fail",
+  "reasons": [
+   "GLAZING OPAQUE in the shipped glTF - 0 of 7 materials transparent",
+   "respray did NOT take - rendered dusty pink under a forced --colour silver (mats=3 cov=0.478)",
+   "soft detail: grille slots shallow, headlamps lack internal elements, panel surfaces waxy",
+   "tyres and rim faces are fine, but the glazing and respray failures are disqualifying"
+  ]
+ },
+ {
+  "uid": "09b4643f664b4117a70acb4cec39dd80",
+  "name": "Jeep Compass Limited",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "LOCAL pose gate rejected the SOURCE mesh pre-render: floorpan/wreck(h/l=0.152)",
+   "no sheet exists, so this car has NOT been eye-audited - the verdict is about mesh orientation/completeness, not quality",
+   "needs the source mesh re-oriented (or the signal confirmed a false positive) and then a re-render before it can be judged",
+   "rejected before any GPU spend, so re-running costs only the download"
+  ]
+ },
+ {
+  "uid": "858b09526d6b4049a00fae31ee1e2859",
+  "name": "1999 Jeep Grand Cherokee",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "LOCAL pose gate rejected the SOURCE mesh pre-render: wide-top/cage(tob=1.222)",
+   "no sheet exists, so this car has NOT been eye-audited - the verdict is about mesh orientation/completeness, not quality",
+   "needs the source mesh re-oriented (or the signal confirmed a false positive) and then a re-render before it can be judged",
+   "rejected before any GPU spend, so re-running costs only the download"
+  ]
+ },
+ {
+  "uid": "13c4d0fbbfb542c0b0614459d2f12324",
+  "name": "Jeep KJ Renegade Painted",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "LOCAL pose gate rejected the SOURCE mesh pre-render: flipped/on-side(tob=0.321),floorpan/wreck(h/l=0.194)",
+   "no sheet exists, so this car has NOT been eye-audited - the verdict is about mesh orientation/completeness, not quality",
+   "needs the source mesh re-oriented (or the signal confirmed a false positive) and then a re-render before it can be judged",
+   "rejected before any GPU spend, so re-running costs only the download"
+  ]
+ },
+ {
+  "uid": "4d6ecea0d2f6474586d6facd408744fc",
+  "name": "Jeep Wrangler",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "LOCAL pose gate rejected the SOURCE mesh pre-render: flipped/on-side(tob=0.214)",
+   "no sheet exists, so this car has NOT been eye-audited - the verdict is about mesh orientation/completeness, not quality",
+   "needs the source mesh re-oriented (or the signal confirmed a false positive) and then a re-render before it can be judged",
+   "rejected before any GPU spend, so re-running costs only the download"
+  ]
+ },
+ {
+  "uid": "34e3ce0ba9f4453589a3f3dc1fe117cb",
+  "name": "Jeep_CJ-5_1954",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "LOCAL pose gate rejected the SOURCE mesh pre-render: doors-open(tob=0.543,h/l=0.54)",
+   "no sheet exists, so this car has NOT been eye-audited - the verdict is about mesh orientation/completeness, not quality",
+   "needs the source mesh re-oriented (or the signal confirmed a false positive) and then a re-render before it can be judged",
+   "rejected before any GPU spend, so re-running costs only the download"
+  ]
+ },
+ {
+  "uid": "0e34393727c246848fbe6adb517f65f2",
+  "name": "Jeep Renegade 1975",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "LOCAL pose gate rejected the SOURCE mesh pre-render: doors-open(tob=0.575,h/l=0.507)",
+   "no sheet exists, so this car has NOT been eye-audited - the verdict is about mesh orientation/completeness, not quality",
+   "needs the source mesh re-oriented (or the signal confirmed a false positive) and then a re-render before it can be judged",
+   "rejected before any GPU spend, so re-running costs only the download"
+  ]
+ },
+ {
+  "uid": "7181289a07794a6ead28ffd56bfbbc1d",
+  "name": "JEEP COMPASS 2021",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "OVERSIZE: 84MB exceeds the 48MB MAX_OBJ cap in gpu_wave, so it was never rendered",
+   "NOT a quality verdict - this car has not been seen and has not been eye-audited",
+   "recoverable by decimating the source mesh below the cap and re-rendering",
+   "cached in HARD_REJECTS.json so future waves do not re-spend download quota on it"
+  ]
+ },
+ {
+  "uid": "8e1f15e0191d4bf38026ea8a85c05d14",
+  "name": "Jeep_compass_2021",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "OVERSIZE: 84MB exceeds the 48MB MAX_OBJ cap in gpu_wave, so it was never rendered",
+   "NOT a quality verdict - this car has not been seen and has not been eye-audited",
+   "recoverable by decimating the source mesh below the cap and re-rendering",
+   "cached in HARD_REJECTS.json so future waves do not re-spend download quota on it"
+  ]
+ },
+ {
+  "uid": "49a2914dff81428998a76a3043487404",
+  "name": "2021 Jeep Wrangler",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "OVERSIZE: 92MB exceeds the 48MB MAX_OBJ cap in gpu_wave, so it was never rendered",
+   "NOT a quality verdict - this car has not been seen and has not been eye-audited",
+   "recoverable by decimating the source mesh below the cap and re-rendering",
+   "cached in HARD_REJECTS.json so future waves do not re-spend download quota on it"
+  ]
+ },
+ {
+  "uid": "a713161ef2044b308f270de3d60c0e3d",
+  "name": "Jeep wrangler 1997",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "OVERSIZE: 68MB exceeds the 48MB MAX_OBJ cap in gpu_wave, so it was never rendered",
+   "NOT a quality verdict - this car has not been seen and has not been eye-audited",
+   "recoverable by decimating the source mesh below the cap and re-rendering",
+   "cached in HARD_REJECTS.json so future waves do not re-spend download quota on it"
+  ]
+ },
+ {
+  "uid": "b1d4702c51e84f79b3e1e0edaa69b6fa",
+  "name": "jeep wrangler adventure + rubicon",
+  "verdict": "fail-rerender",
+  "reasons": [
+   "OVERSIZE: 65MB exceeds the 48MB MAX_OBJ cap in gpu_wave, so it was never rendered",
+   "NOT a quality verdict - this car has not been seen and has not been eye-audited",
+   "recoverable by decimating the source mesh below the cap and re-rendering",
+   "cached in HARD_REJECTS.json so future waves do not re-spend download quota on it"
+  ]
  }
 ]

@@ -1,0 +1,51 @@
+{
+ "auto_flagged_pairs": [],
+ "auto_drops": [],
+ "note": "dupe_check.py jeep flagged ZERO pairs across the 13 passes, so there are no automatic drops and no auto-flagged pair needed adjudicating. The pairs below were found BY EYE during the individual audit; all sit among FAILED cars, so none of them changes the pass list.",
+ "eye_found_pairs": [
+  {
+   "uid_a": "bbf5052a1c994a53977379b2636f1115",
+   "name_a": "Jeep Grand Cherokee SRT8 WK 2008",
+   "faces_a": 258305,
+   "uid_b": "b84ac0651aed4d4d8907113aca5192c8",
+   "name_b": "Jeep_grand_cherokee_srt8_wk_2008",
+   "faces_b": 257941,
+   "verdict": "CONFIRMED duplicate",
+   "evidence": "the two contact sheets are pixel-identical across all four views: same snorkel, same roof rack with spare, same bonnet light pods, same missing wheels. Identical etk800_* BeamNG material set, 0/36 transparent on both. 364 faces apart (0.14%).",
+   "impact": "none on the pass list - both are FAIL (out-of-scope off-road build, wheels absent)"
+  },
+  {
+   "uid_a": "119df0c2da754813bc570f9a22c30561",
+   "name_a": "My dad's 2022 Jeep Wrangler 4xe",
+   "faces_a": 137020,
+   "uid_b": "c7c907918f234ecbb363b145523160bd",
+   "name_b": "My dad's 2022 Jeep Wrangler Willys",
+   "faces_b": 133824,
+   "verdict": "CONFIRMED duplicate (same base mesh, recoloured)",
+   "evidence": "same author, same crude low-poly Wrangler mesh rendered in pink/grey and white/grey; identical body form, identical wheel discs, identical WILLYS bonnet lettering. 3,196 faces apart (2.3%) - outside dupe_check rule A, so it would never have been auto-flagged.",
+   "impact": "none on the pass list - both are FAIL (crude low-poly, opaque glazing)"
+  },
+  {
+   "uid_a": "98bc399af1e948eda5db6d75c5bb649d",
+   "name_a": "2020 Jeep Gladiator",
+   "faces_a": 301477,
+   "uid_b": "5165e4ab8c6f4ce9b6b4f203cbac1e04",
+   "name_b": "Jeep Gladiator",
+   "faces_b": 297752,
+   "verdict": "FALSE POSITIVE - related source, NOT the same asset",
+   "evidence": "both carry the Jeep_GladiatorRewardRecycled_2019 material prefix so they share a lineage, but they are materially different files: 25 materials/33 textures/5 transparent vs 23 materials/31 textures/3 transparent, and decisively the window material differs - alpha 0.25 BLEND transmission 1.0 on the first, alpha 1.0 OPAQUE on the second. 3,725 faces apart.",
+   "impact": "2020 Jeep Gladiator PASSES; Jeep Gladiator FAILS on opaque glazing. Treating them as one asset would have wrongly dropped the good one."
+  },
+  {
+   "uid_a": "949a34f3ab174c899b2596bd53403b6f",
+   "name_a": "Jeep Grand Cherokee Trackhawk",
+   "faces_a": 371373,
+   "uid_b": "f8024595e11c48119877c9c7cc554abc",
+   "name_b": "Jeep Grand Cherokee Trackhawk",
+   "faces_b": 363057,
+   "verdict": "FALSE POSITIVE - identical titles, different meshes",
+   "evidence": "identical titles and only 8,316 faces apart (2.2%), which reads as a duplicate on title alone. They are not: 47 materials/90 textures/0 transparent with English names vs 44 materials/17 textures/10 transparent with FRENCH names (Vitre, Feux, Jante). Different modellers entirely.",
+   "impact": "the French-named one PASSES; the other FAILS (opaque/absent glazing, custom wrap). Title-based dedup would have destroyed the pass."
+  }
+ ]
+}

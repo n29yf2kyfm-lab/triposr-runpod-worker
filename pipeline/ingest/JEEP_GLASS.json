@@ -271,5 +271,47 @@
   "verdict": "clear",
   "evidence": "gltf",
   "note": "clearglass alpha 0.2 BLEND, windowglass BLEND; 4/17 transparent"
+ },
+ {
+  "uid": "98bc399af1e948eda5db6d75c5bb649d",
+  "name": "2020 Jeep Gladiator",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "Jeep_GladiatorRewardRecycled_2019Window_Material alpha 0.25 BLEND with transmission 1.0; 5/25 transparent"
+ },
+ {
+  "uid": "5165e4ab8c6f4ce9b6b4f203cbac1e04",
+  "name": "Jeep Gladiator",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "Window_Material alpha 1.0 OPAQUE transmission 0.0; the 3 transparent materials are lamp lenses only"
+ },
+ {
+  "uid": "10ce4861ef62411183c185ca1998d1c2",
+  "name": "2021 Jeep Grand Commander (K8)",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "3/33 transparent, glazing genuinely transparent"
+ },
+ {
+  "uid": "3036e734a0944821aca8d4434abf4936",
+  "name": "Jeep Gladiator 2019",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "0/6 transparent"
+ },
+ {
+  "uid": "beb3353a09ba4b4ab6bf12049d96184a",
+  "name": "CJ Old Beach Jeep",
+  "verdict": "clear",
+  "evidence": "gltf",
+  "note": "1/5 transparent (windscreen) - but the vehicle is out of scope on body conversion and missing wheels"
+ },
+ {
+  "uid": "118d6a87dd79437393ebebeb65155351",
+  "name": "Jeep Gladiator 2019",
+  "verdict": "opaque",
+  "evidence": "gltf",
+  "note": "0/7 transparent"
  }
 ]
