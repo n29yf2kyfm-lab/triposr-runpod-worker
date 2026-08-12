@@ -834,6 +834,25 @@ genuinely transparent glazing - and it is a CARTOON CHARACTER. Its material list
 pair of pink lips and the windscreen carries eyes. It would pass every numeric screen in
 the pipeline. Worth adding eye/mouth/iris/pupil/lips to a future name gate.
 
+## OWNER RULING 2026-08-11: do NOT chase clay-shell recovery
+
+64 live cars were found to be clay shells -- correct geometry, every material
+colour flattened, no glass and no rubber. 23 of them share the IDENTICAL value
+0.588 across unrelated marques, which is the fingerprint of one pipeline step
+rather than 64 bad sources, so they looked recoverable: fix the step, re-run,
+get the cars back.
+
+The owner was offered that and declined. **They are scrapped. Do not reopen it.**
+Do not trace the flattening step, do not attempt to re-derive the materials, do
+not propose it as a next step in a future session. If those cars are ever wanted
+again the answer is to re-source them, not to repair them.
+
+(The diagnosis is kept here only so nobody re-investigates from scratch: the
+material NAMES survive intact -- body, glass, chrome, tire_mat3, interior, rims --
+while every baseColorFactor is one flat value. 23 at 0.588, 7 at 0.8, 20 with the
+factor absent entirely. bmw-x1-v1 is the clean example, and its poster shows a
+glossy blue glazed car because the render worker rebuilds one from the names.)
+
 ## OWNER RULING CONFIRMED 2026-08-11: opaque glazing is a SCRAP, even when the poster is perfect
 
 Put to the owner explicitly, with the 119 affected cars rendered and numbered, and
