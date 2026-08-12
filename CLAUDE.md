@@ -943,7 +943,8 @@ solve the blocker that matters. Measured, with renders, not inferred.
 
 So PartCrafter fixes tyres, not glass. Glazing is ~80% of all audit failures and
 the owner's hard-fail rule, so on this evidence the part-native route does NOT
-by itself make a generated car shippable.
+by itself make a generated car shippable. **[SUPERSEDED by the 16-part correction
+below: at num_parts=16 the greenhouse DOES separate. Read that before acting.]**
 
 **Do not run assign_materials on PartCrafter output as-is.** The stage joins and
 welds before splitting, which is correct for a fused TRELLIS mesh and DESTROYS
@@ -951,9 +952,25 @@ PartCrafter's separation -- the parts touch where they meet, so welding fuses
 them back into one shell and the stage then (correctly) refuses. Classify
 PartCrafter's parts DIRECTLY from the glTF mesh list; skip the weld entirely.
 
-**A num_parts=16 front-3/4 run was attempted as the fair best case and never
-completed** -- see the deployment note below. That question is still open, but the
-10-part run is strong evidence the greenhouse is treated as body by this model.
+**CORRECTED 2026-08-12, same day: num_parts=16 OVERTURNS the 10-part conclusion.**
+The re-run (front 3/4 input, 374s on A5000, RC=0) emits the GREENHOUSE AS ITS OWN
+CLOSED MESH -- part_08, 223,358 verts, 13.6% of the car, containing windscreen, side
+glass, rear screen and roof skin as one canopy, verified by isolate renders. The body
+shell (part_05, 29.8%) has real window OPENINGS with the interior visible through
+them, and the underbody/chassis is separate again (part_09, 27.4%). No 99.3%- or
+67.9%-style mega-part exists at 16. So "the greenhouse is treated as body by this
+model" was an artefact of asking for too few parts, not a property of PartCrafter.
+Two qualifications, measured:
+  * The canopy is glass+ROOF fused, not glass alone. Assigning Glass_Tint to the
+    whole part would make the roof transparent. But a normals split inside just that
+    part is clean: with Y up, 46.4% of its face area is strongly Y-facing (roof
+    panel) and the rest sloped/vertical (glazing) -- far more tractable than carving
+    glass out of a full body shell.
+  * Part indices are not semantic: which part is the canopy varies per run, so the
+    classifier must FIND it (mid-band, above body sill, encloses cabin), not assume
+    an index.
+Evidence: scratchpad pc16_colored.png / pc16_canopy.png / pc16_body.png; results
+tarball at car-meshes/partcrafter_run/results16b.tgz.
 
 **RUNPOD POD DEPLOYMENT, two traps that cost ~$0.40 and 80 minutes:**
   1. **A pod whose dockerStartCmd EXITS gets RESTARTED.** Ending the command with
