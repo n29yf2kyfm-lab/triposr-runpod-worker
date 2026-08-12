@@ -834,6 +834,31 @@ genuinely transparent glazing - and it is a CARTOON CHARACTER. Its material list
 pair of pink lips and the windscreen carries eyes. It would pass every numeric screen in
 the pipeline. Worth adding eye/mouth/iris/pupil/lips to a future name gate.
 
+## OWNER RULING CONFIRMED 2026-08-11: opaque glazing is a SCRAP, even when the poster is perfect
+
+Put to the owner explicitly, with the 119 affected cars rendered and numbered, and
+confirmed: **scrap.** Not a borderline call to be relitigated next wave.
+
+The 119 were the hard case ON PURPOSE. They are properly built cars -- real paint,
+black tyres, chrome, headlamp internals -- and their studio posters look flawless.
+They fail only because the glazing is OPAQUE in the shipped glTF. The owner was
+shown exactly that framing (restoring them would have taken the catalogue from
+1,014 back to ~1,133) and chose to keep them out.
+
+So the rule for every future wave is unambiguous:
+  * glazing verdict comes from the shipped glTF, never the poster or the sheet
+  * `verdict == "opaque"` with `certainty == "proven"` is a hard fail
+  * `"ambiguous"` is NOT a fail -- route it to the eye (this has saved good cars
+    repeatedly: a misspelt `Widnwos`, a `Windiow`, an infotainment TOUCHSCREEN
+    matching /screen/, and lamp lenses voting when no glazing is named)
+  * a beautiful poster is not a counter-argument. The render worker forges clear
+    glass onto any material whose NAME matches its regex, which is the entire
+    reason this defect survived every audit before today.
+
+Scale, for calibration on a fresh marque: 119 of 1,154 live cars (10.3%) failed on
+this alone -- roughly 80% of all audit failures. Expect a similar share anywhere
+the glTF has never been probed.
+
 ## Quality-gate standard — visual review before anything ships (owner standard 2026-07-23)
 
 Automated audits prove one narrow thing each; they are NOT a model-quality gate.
