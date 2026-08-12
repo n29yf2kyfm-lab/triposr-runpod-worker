@@ -80,20 +80,36 @@ The backend is injected (`analyze.analyze(..., vision_fn=)`) and selected by
 `DAMAGE_BACKEND`, so swapping the model is one env var and tests/the
 findings-only path load nothing.
 
-**`DAMAGE_BACKEND=anthropic` — recommended.** A frontier **Claude** vision model
-via the Anthropic API (`DAMAGE_VLM_MODEL`, default `claude-opus-5`). Needs
-`ANTHROPIC_API_KEY`; **no GPU**. This is the accurate path. On a live test the
-small local model scored a car with a *shattered windshield* **99/100 ("minor
-bumper scratch")** — it pattern-matched "car inspection" instead of reading the
-image; a frontier model reads the same photo correctly (`windshield` /
-`shattered_glass` / severe) and doesn't invent damage on clean panels. Choosing
-this backend also makes the worker an API proxy that scales to zero cheaply —
-it removes the GPU cold-start entirely (the whole reason for a warm worker).
+| `DAMAGE_BACKEND` | Model | Cost/scan | GPU | Limits |
+|---|---|---|---|---|
+| **`openrouter`** (image default) | Gemma 4 31B (free) | **$0** | none | 20/min · 50/day, or 1,000/day after a one-time $10 credit purchase |
+| `anthropic` | frontier Claude | per-scan fee | none | none |
+| `qwen` | local Qwen2.5-VL 7B | GPU-hours | **required** | — |
 
-**`DAMAGE_BACKEND=qwen` (default) — cheap fallback.** A local **Qwen2.5-VL**
-(Apache-2.0), lazy-loaded on first photo job. Self-hosted, but **unreliable at
-the actual assessment** (see above) — use it as a cost/latency fallback, not as
-the product's judgement. Swap the checkpoint with `DAMAGE_VLM_MODEL`.
+**`DAMAGE_BACKEND=openrouter` — free, and the image default.** A free hosted
+open vision model via OpenRouter (`DAMAGE_VLM_MODEL`, default
+`google/gemma-4-31b-it:free`). **$0 per scan and no GPU**, traded against a rate
+cap. At ~31B it is roughly four times the local 7B fallback — the failure below
+was a model-**size** problem, not a self-hosting one. Needs
+`OPENROUTER_API_KEY` (the free tier still authenticates). Speaks the OpenAI
+chat-completions shape over `requests`, so it adds **no new dependency**. A 429
+is an expected operating condition and is reported with the caps spelled out.
+
+**`DAMAGE_BACKEND=anthropic` — most accurate.** A frontier **Claude** vision
+model via the Anthropic API (default `claude-opus-5`). Needs
+`ANTHROPIC_API_KEY`; **no GPU**. Costs per scan, so the intended use is
+per-scan escalation — disputes, high-value claims, or when the free tier
+returns low confidence — not every scan.
+
+**`DAMAGE_BACKEND=qwen` (code default) — cheap fallback.** A local
+**Qwen2.5-VL** 7B (Apache-2.0), lazy-loaded on first photo job. Self-hosted, but
+**unreliable at the actual assessment**: on a live test it scored a car with a
+*shattered windshield* **99/100 ("minor bumper scratch")** — it pattern-matched
+"car inspection" instead of reading the image. Use it as a latency fallback,
+not as the product's judgement.
+
+Both hosted backends make the worker an API proxy that scales to zero — they
+remove the GPU cold-start entirely (the whole reason for a warm worker).
 
 ## Tests
 
@@ -112,7 +128,7 @@ Two image variants:
 
 | File | Base | Size | Backend | GPU |
 |---|---|---|---|---|
-| **`Dockerfile`** (default) | `python:3.11-slim` | ~150 MB | `anthropic` | **none** |
+| **`Dockerfile`** (default) | `python:3.11-slim` | ~150 MB | `openrouter` (free) | **none** |
 | `Dockerfile.gpu` | `nvidia/cuda:*-runtime` | ~4.7 GB | `qwen` | required |
 
 **Recommended: the no-GPU proxy (`Dockerfile`).** CI
@@ -121,7 +137,9 @@ pushes `alamk123/damage-scan:<sha>` (and `:v1`/`:latest` on `main`). Stand up a
 RunPod endpoint on that image with `workersMin=0` — it scales to zero, cold
 starts in seconds, and needs **no network volume and no object storage**
 (reports inline in the response). The one required endpoint env var is
-**`ANTHROPIC_API_KEY`**; optionally `DAMAGE_VLM_MODEL` to pick the model.
+**`OPENROUTER_API_KEY`** (or `ANTHROPIC_API_KEY` if you switch
+`DAMAGE_BACKEND`); optionally `DAMAGE_VLM_MODEL` to pick the model. With the
+free backend the only recurring cost is RunPod's per-second CPU worker time.
 
 ⚠️ On endpoint creation RunPod defaults `workersStandby` to 1 (an always-warm,
 always-billed worker) and it is **not** settable via the REST API — set it to 0

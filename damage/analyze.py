@@ -251,14 +251,19 @@ def analyze(image_urls, vehicle=None, vision_fn=None, market=None):
 def get_backend():
     """Resolve the vision backend from the environment.
 
-    DAMAGE_BACKEND=anthropic (RECOMMENDED) -> a frontier Claude vision model via
-      the Anthropic API. Needs ANTHROPIC_API_KEY; no GPU. This is the accurate
-      path: on a live test the small local model scored a car with a shattered
-      windshield 99/100 ("minor bumper scratch") — it pattern-matched "car
-      inspection" instead of reading the image. A frontier model reads the same
-      photo correctly (windshield / shattered_glass / severe) and does not
-      hallucinate damage on clean panels. Model via DAMAGE_VLM_MODEL
-      (default claude-opus-5).
+    DAMAGE_BACKEND=anthropic (MOST ACCURATE) -> a frontier Claude vision model
+      via the Anthropic API. Needs ANTHROPIC_API_KEY; no GPU. On a live test the
+      small local model scored a car with a shattered windshield 99/100 ("minor
+      bumper scratch") — it pattern-matched "car inspection" instead of reading
+      the image. A frontier model reads the same photo correctly (windshield /
+      shattered_glass / severe) and does not hallucinate damage on clean panels.
+      Costs per scan. Model via DAMAGE_VLM_MODEL (default claude-opus-5).
+    DAMAGE_BACKEND=openrouter (FREE, no GPU) -> a free hosted open vision model
+      (default Gemma 4 31B). $0 per scan and no GPU, in exchange for a rate cap
+      (20/min; 50/day, or 1,000/day after a one-time $10 credit purchase). At
+      ~31B it is far more capable than the 7B local fallback below — that
+      failure was a model-SIZE problem, not a self-hosting one. Needs
+      OPENROUTER_API_KEY.
     DAMAGE_BACKEND=qwen (default) -> a local Qwen2.5-VL via transformers. Fast
       and self-hosted, but UNRELIABLE at the actual assessment (see above) —
       treat it as a cheap fallback, not the product's judgement.
@@ -271,13 +276,16 @@ def get_backend():
     backend = os.environ.get("DAMAGE_BACKEND", "qwen").lower()
     if backend in ("anthropic", "claude"):
         return _anthropic_backend()
+    if backend in ("openrouter", "free", "gemma"):
+        return _openrouter_backend()
     if backend in ("qwen", "qwen2.5-vl", "qwenvl"):
         return _qwen_backend()
     raise RuntimeError(
         f"unknown DAMAGE_BACKEND={backend!r}. Set DAMAGE_BACKEND=anthropic "
-        f"(recommended; needs ANTHROPIC_API_KEY) or =qwen, or pass image "
-        f"analysis pre-computed as `findings` in the job input to skip the "
-        f"vision stage entirely.")
+        f"(most accurate; needs ANTHROPIC_API_KEY), =openrouter (free, no GPU; "
+        f"needs OPENROUTER_API_KEY), or =qwen, or pass image analysis "
+        f"pre-computed as `findings` in the job input to skip the vision stage "
+        f"entirely.")
 
 
 def _anthropic_backend():
@@ -332,6 +340,96 @@ def _anthropic_image_blocks(image_urls):
             blocks.append({"type": "image",
                            "source": {"type": "base64",
                                       "media_type": media_type, "data": data}})
+    return blocks
+
+
+def _openrouter_backend():
+    """Vision_fn backed by a FREE hosted open model via OpenRouter.
+
+    This is the zero-marginal-cost path: no GPU, no model download, and no
+    per-scan fee. OpenRouter serves several open vision models at $0 (default
+    here: Gemma 4 31B — see DAMAGE_VLM_MODEL). At ~31B it is roughly four times
+    the size of the local Qwen-7B that scored a shattered-windshield car 99/100,
+    which is the whole reason that fallback is not trusted: the failure there
+    was model SIZE, not self-hosting.
+
+    Cost is $0/scan, but the free tier is RATE LIMITED, and those limits are the
+    real design constraint (verified Aug 2026):
+        * 20 requests/minute, always.
+        * 50 requests/day on an account that has never bought credits.
+        * 1,000 requests/day once the account has purchased $10 of credits at
+          any point — a lifetime unlock, not a running balance.
+    A 429 is therefore an expected operating condition, not a bug, so it is
+    surfaced with that context instead of a bare HTTP error.
+
+    Speaks the OpenAI chat-completions shape and needs only `requests`, which
+    the slim CPU image already installs — adding this backend costs no new
+    dependency and no image rebuild. Set OPENROUTER_API_KEY on the endpoint.
+    """
+    def vision_fn(prompt, image_urls):
+        import os
+        import json as _json
+        import requests
+        key = os.environ.get("OPENROUTER_API_KEY")
+        if not key:
+            raise RuntimeError(
+                "DAMAGE_BACKEND=openrouter needs OPENROUTER_API_KEY in the "
+                "endpoint env (the free tier still authenticates).")
+        model = os.environ.get("DAMAGE_VLM_MODEL", "google/gemma-4-31b-it:free")
+        content = list(_openai_image_blocks(image_urls))
+        content.append({"type": "text",
+                        "text": "Analyse the vehicle in these photos and "
+                                "return ONLY the JSON described above."})
+        r = requests.post(
+            os.environ.get("OPENROUTER_BASE_URL",
+                           "https://openrouter.ai/api/v1") + "/chat/completions",
+            headers={"Authorization": f"Bearer {key}",
+                     "Content-Type": "application/json"},
+            data=_json.dumps({
+                "model": model,
+                "max_tokens": 8192,
+                "messages": [{"role": "system", "content": prompt},
+                             {"role": "user", "content": content}],
+            }),
+            timeout=180)
+        if r.status_code == 429:
+            raise RuntimeError(
+                f"{model} rate-limited (429). The free tier allows 20 req/min "
+                f"and 50 req/day, or 1,000/day once the account has ever "
+                f"purchased $10 of credits. Retry later, switch "
+                f"DAMAGE_VLM_MODEL to another free model, or fall back to a "
+                f"paid backend.")
+        r.raise_for_status()
+        body = r.json()
+        if body.get("error"):
+            raise RuntimeError(f"openrouter error: {body['error']}")
+        choices = body.get("choices") or []
+        if not choices:
+            raise RuntimeError(f"openrouter returned no choices: {body}")
+        return (choices[0].get("message") or {}).get("content") or ""
+
+    return vision_fn
+
+
+def _openai_image_blocks(image_urls):
+    """Image blocks in the OpenAI chat-completions shape.
+
+    Remote URLs pass through; local files (the base64 job-input path) are
+    inlined as data URIs, because a hosted model cannot reach this worker's
+    disk."""
+    import base64
+    import mimetypes
+    blocks = []
+    for u in image_urls:
+        s = str(u)
+        if s.startswith(("http://", "https://")):
+            url = s
+        else:
+            media_type = mimetypes.guess_type(s)[0] or "image/jpeg"
+            with open(s, "rb") as f:
+                data = base64.standard_b64encode(f.read()).decode("ascii")
+            url = f"data:{media_type};base64,{data}"
+        blocks.append({"type": "image_url", "image_url": {"url": url}})
     return blocks
 
 

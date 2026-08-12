@@ -34,12 +34,17 @@ ENV PIP_NO_CACHE_DIR=1
 RUN pip install --upgrade pip && \
     pip install runpod requests anthropic
 
-# Default the deployed image to the accurate, no-GPU backend. Override to qwen
-# only on the GPU image. ANTHROPIC_API_KEY must be set on the endpoint (never
-# baked in); DAMAGE_VLM_MODEL optionally overrides the model (default
-# claude-opus-5). Reports are kilobytes and inline in the response, so no
-# object storage or network volume is required.
-ENV DAMAGE_BACKEND=anthropic
+# Default the deployed image to the FREE, no-GPU backend: a free hosted open
+# vision model (Gemma 4 31B) via OpenRouter. $0 per scan, no GPU, no weight
+# download — at the cost of a rate cap (20/min; 50/day, or 1,000/day after a
+# one-time $10 credit purchase). Needs OPENROUTER_API_KEY on the endpoint.
+#
+# Set DAMAGE_BACKEND=anthropic (+ ANTHROPIC_API_KEY) to switch this same image
+# to the most accurate frontier path — worth doing per-scan for disputes or
+# high-value claims. DAMAGE_VLM_MODEL overrides the model on either backend.
+# Keys are never baked in. Reports are kilobytes and inline in the response, so
+# no object storage or network volume is required on any backend.
+ENV DAMAGE_BACKEND=openrouter
 # DAMAGE_OUTPUT_DIR is deliberately NOT set: paths.py resolves a writable
 # location at runtime, and this worker needs no persistent volume.
 

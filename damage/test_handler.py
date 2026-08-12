@@ -495,6 +495,100 @@ check("15g image block sent to the model",
 _os.environ.pop("DAMAGE_BACKEND", None)
 
 
+# ---- 16. openrouter (free, no-GPU) vision backend ---------------------------
+# The zero-marginal-cost path. Stub `requests` so no key and no network are
+# needed; prove selection, the OpenAI-shaped payload, data-URI inlining for
+# local files, that a 429 explains the free-tier caps instead of leaking a bare
+# HTTP error, and that the deterministic pipeline consumes its output unchanged.
+_or_captured = {}
+
+
+class _FakeResp:
+    def __init__(self, status=200, body=None):
+        self.status_code = status
+        self._body = body or {}
+
+    def json(self): return self._body
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            raise RuntimeError(f"HTTP {self.status_code}")
+
+
+def _fake_post(url, headers=None, data=None, timeout=None):
+    _or_captured["url"] = url
+    _or_captured["headers"] = headers or {}
+    _or_captured["payload"] = json.loads(data)
+    if _or_captured.get("force_429"):
+        return _FakeResp(429)
+    return _FakeResp(200, {"choices": [{"message": {"content":
+        '{"findings": [{"panel":"front bumper","damage_type":"dent",'
+        '"severity":5,"evidence":["crease left of the plate"]}],'
+        '"images": [], "summary": "one dent"}'}}]})
+
+
+_fake_requests = types.ModuleType("requests")
+_fake_requests.post = _fake_post
+_fake_requests.get = lambda *a, **k: _FakeResp(200)
+_real_requests = sys.modules.get("requests")
+sys.modules["requests"] = _fake_requests
+
+_os.environ["DAMAGE_BACKEND"] = "openrouter"
+_os.environ["OPENROUTER_API_KEY"] = "test-key"
+check("16a openrouter backend selected by env", callable(AN.get_backend()))
+
+# image blocks use the OpenAI shape; local files inline as data URIs
+ob = AN._openai_image_blocks(["https://example.com/a.jpg"])[0]
+check("16b url image -> image_url block",
+      ob["type"] == "image_url" and ob["image_url"]["url"].startswith("https://"))
+ob_local = AN._openai_image_blocks([__file__])[0]
+check("16c local image -> data URI",
+      ob_local["image_url"]["url"].startswith("data:"))
+
+# end to end through analyze() with the stubbed transport
+fn_or = AN.get_backend()
+findings_o, images_o, meta_o = AN.analyze(
+    ["https://example.com/car.jpg"], {"make": "Toyota"}, vision_fn=fn_or)
+check("16d openrouter path yields a finding", len(findings_o) == 1)
+check("16e finding normalised (front_bumper/dent)",
+      findings_o[0]["panel"] == "front_bumper"
+      and findings_o[0]["damage_type"] == "dent")
+check("16f defaults to a free model tag",
+      _or_captured["payload"]["model"].endswith(":free"))
+check("16g system prompt sent as a system message",
+      _or_captured["payload"]["messages"][0]["role"] == "system"
+      and "damage appraiser" in _or_captured["payload"]["messages"][0]["content"])
+check("16h api key sent as a bearer token",
+      _or_captured["headers"].get("Authorization") == "Bearer test-key")
+
+# a 429 must explain the free-tier caps, not leak a bare HTTP error
+_or_captured["force_429"] = True
+try:
+    AN.get_backend()("p", ["https://example.com/car.jpg"])
+    _429 = ""
+except Exception as e:
+    _429 = str(e)
+check("16i 429 explains the free-tier limits",
+      "req/day" in _429 or "requests/day" in _429 or "50 req" in _429, _429[:90])
+_or_captured.pop("force_429")
+
+# a missing key must name the variable rather than fail deep in the transport
+_os.environ.pop("OPENROUTER_API_KEY")
+try:
+    AN.get_backend()("p", ["https://example.com/car.jpg"])
+    _nokey = ""
+except Exception as e:
+    _nokey = str(e)
+check("16j missing key names OPENROUTER_API_KEY",
+      "OPENROUTER_API_KEY" in _nokey, _nokey[:90])
+
+if _real_requests is not None:
+    sys.modules["requests"] = _real_requests
+else:
+    sys.modules.pop("requests", None)
+_os.environ.pop("DAMAGE_BACKEND", None)
+
+
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 for f in FAILED:
