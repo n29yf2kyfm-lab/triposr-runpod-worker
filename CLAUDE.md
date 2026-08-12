@@ -966,6 +966,30 @@ completed** -- see the deployment note below. That question is still open, but t
      burns that single shot on whichever attempt happens to finish first. Use a
      service key on the pod (accepting the exposure) or mint a fresh URL per
      attempt; do NOT design a heartbeat around a signed URL.
+  3. **A `for i in $(seq 1 N)` watcher is a COUNTDOWN, not a monitor.** The v2
+     watcher was capped at 45 iterations of `sleep 60`. It expired at 13:07
+     having logged 45 identical `results=400 pod=RUNNING` lines, printed
+     nothing to distinguish "gave up" from "done", and nothing replaced it.
+     The pod then billed unwatched until 13:39. A bounded loop MUST print a
+     distinct TIMED_OUT marker on fall-through, and the thing that reads it
+     must treat a missing RESULTS_READY as an alarm, not as silence.
+
+**What the watcher polled was the wrong thing, and that is the deeper lesson.**
+It asked (a) does the output file exist yet and (b) is `desiredStatus` RUNNING.
+`desiredStatus` is what was ASKED FOR, so it reads RUNNING through an infinite
+restart loop; and the output file never appears in a loop that never finishes.
+Both signals are constant whether the pod is working or thrashing. **Poll
+PROGRESS, not desire:** `GET /v1/pods/<id>` -> `runtime.uptimeInSeconds` and
+`runtime.gpus[].gpuUtilPercent`. Uptime resetting while the wall clock climbs
+IS the restart loop; GPU at 0% means nothing is computing. That single call
+would have exposed this at minute 5. It was made at minute 78.
+
+**And do not quote an in-container `timeout` as a bound on a pod's lifetime.**
+At the 23-minute mark I told the owner "results land within ~6 more minutes
+regardless" because inference was wrapped in `timeout 1500`. That governs a
+PROCESS INSIDE the container and resets on every restart; it says nothing about
+how long the pod runs or bills. Asserting it without checking is exactly the
+failure the NO GUESSING rule above exists to prevent.
 
 Cost of the whole experiment including four failed bootstraps: ~$0.62. The
 fail-fast-and-upload-logs design earned that back -- each failure named its own
