@@ -632,8 +632,13 @@ f17 = DET.detections_to_findings(dets, SIZE, panel_hint="hood")
 check("17g low-confidence and unknown classes are dropped", len(f17) == 2,
       str(len(f17)))
 check("17h panel hint applied", all(f["panel"] == "hood" for f in f17))
-check("17i bbox preserved for 3D pinning",
-      f17[0]["bbox"] == [100.0, 100.0, 300.0, 300.0])
+check("17i bbox emitted NORMALISED so it survives normalize_findings",
+      f17[0]["bbox"] == [0.1, 0.1, 0.2, 0.2], str(f17[0]["bbox"]))
+# the regression that made this convention explicit: pixel corners are clamped
+# to the unit square by _bbox_or_none, silently losing every box
+_rt = AN.normalize_findings(f17)
+check("17r detector boxes survive the normaliser",
+      all(x["bbox"] for x in _rt), str([x["bbox"] for x in _rt]))
 
 # evidence must be concrete — normalize_findings DROPS evidence-less findings,
 # so a detector that cannot say what it saw must not become a charge
@@ -673,6 +678,73 @@ except Exception as e:
     _nomodel = str(e)
 check("17q missing model names DAMAGE_DETECTOR_MODEL",
       "DAMAGE_DETECTOR_MODEL" in _nomodel, _nomodel[:80])
+
+
+# ---- 18. colour-coded overlays (box / heat / light) -------------------------
+# The visual surface. The colours MUST come from the same severity table that
+# drives the grade — an amber box beside a "severe" finding destroys trust
+# faster than a missing feature — so that agreement is pinned here.
+import overlay as OV  # noqa: E402
+
+check("18a ramp starts at the cosmetic colour and ends at severe",
+      OV.ramp_colour(0.0) == OV.hex_to_rgb(TAX.SEVERITY_BANDS[0][3])
+      and OV.ramp_colour(1.0) == OV.hex_to_rgb(TAX.SEVERITY_BANDS[-1][3]))
+check("18b ramp is continuous and clamped",
+      OV.ramp_colour(-5) == OV.ramp_colour(0.0)
+      and OV.ramp_colour(99) == OV.ramp_colour(1.0))
+check("18c box colour == the report's band colour for that severity",
+      all(OV.severity_colour(s) == OV.hex_to_rgb(TAX.severity_band(s)[1])
+          for s in range(1, 11)))
+
+# findings with no usable box are COUNTED, never silently dropped: an empty
+# overlay must not be able to read as "no damage found"
+# bboxes are NORMALISED [x, y, w, h] — the product's single convention
+mixed = [
+    {"panel": "hood", "damage_type": "dent", "severity": 8,
+     "image_index": 0, "bbox": [0.1, 0.1, 0.3, 0.4]},
+    {"panel": "roof", "damage_type": "dent", "severity": 4},           # no bbox
+    {"panel": "door", "damage_type": "dent", "severity": 4,
+     "image_index": 0, "bbox": [0.2, 0.2, 0.0, 0.0]},                  # degenerate
+    {"panel": "boot", "damage_type": "dent", "severity": 4,
+     "image_index": 1, "bbox": [0.0, 0.0, 0.5, 0.5]},                  # other image
+]
+items, skipped = OV.drawable(mixed, (200, 120), image_index=0)
+check("18d2 normalised box scales to this image's pixels",
+      [round(v) for v in items[0][1]] == [20, 12, 80, 60],
+      str([round(v) for v in items[0][1]]))
+check("18d only usable boxes on this image are drawn", len(items) == 1,
+      str(len(items)))
+check("18e unusable findings are counted, not dropped", skipped == 2, str(skipped))
+
+check("18f label names panel, damage and severity",
+      OV.finding_label(mixed[0]) == "Hood / bonnet · Dent · 8",
+      OV.finding_label(mixed[0]))
+
+# rendering: exercised only if Pillow is present, so the suite stays deps-free
+try:
+    from PIL import Image as _PILImage
+    _has_pil = True
+except ImportError:
+    _has_pil = False
+
+if _has_pil:
+    import tempfile as _tf
+    _p = os.path.join(_tf.mkdtemp(), "t.jpg")
+    _PILImage.new("RGB", (200, 120), (90, 90, 90)).save(_p)
+    for _mode in ("box", "heat", "light", "both"):
+        _im, _meta = OV.render(_p, mixed, mode=_mode)
+        check(f"18g[{_mode}] renders at source size and reports coverage",
+              _im.size == (200, 120) and _meta["drawn"] == 1
+              and _meta["skipped_no_bbox"] == 2)
+    # a clean car must render unchanged rather than crash on an empty mask
+    _clean, _cmeta = OV.render(_p, [], mode="both")
+    check("18h no findings renders cleanly", _clean.size == (200, 120)
+          and _cmeta["drawn"] == 0)
+    _uri, _umeta = OV.render_data_uri(_p, mixed, mode="both")
+    check("18i data URI is inlineable jpeg",
+          _uri.startswith("data:image/jpeg;base64,") and _umeta["bytes"] > 0)
+else:
+    check("18g rendering skipped (no Pillow)", True)
 
 
 # ---- report ---------------------------------------------------------------

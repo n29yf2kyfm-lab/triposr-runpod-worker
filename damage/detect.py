@@ -108,6 +108,19 @@ def _box_area_frac(box, image_size):
     return max(0.0, min(1.0, area / (w * h)))
 
 
+def _to_norm_xywh(box, image_size):
+    """Absolute (x1, y1, x2, y2) pixels -> normalised [x, y, w, h] in 0..1."""
+    x1, y1, x2, y2 = [float(v) for v in box]
+    w, h = float(image_size[0]), float(image_size[1])
+    if w <= 0 or h <= 0:
+        return None
+    x = max(0.0, min(1.0, x1 / w))
+    y = max(0.0, min(1.0, y1 / h))
+    bw = max(0.0, min(1.0 - x, (x2 - x1) / w))
+    bh = max(0.0, min(1.0 - y, (y2 - y1) / h))
+    return [round(x, 4), round(y, 4), round(bw, 4), round(bh, 4)]
+
+
 def _box_centre_frac(box, image_size):
     x1, y1, x2, y2 = [float(v) for v in box]
     w, h = float(image_size[0]), float(image_size[1])
@@ -156,7 +169,15 @@ def detections_to_findings(detections, image_size, image_index=0,
             "severity": sev,
             "confidence": round(score, 3),
             "image_index": image_index,
-            "bbox": [round(float(v), 1) for v in box],
+            # NORMALISED [x, y, w, h] in the unit square — the one bbox
+            # convention this product uses, matching analyze._bbox_or_none.
+            # Detectors speak absolute pixel corners, so the conversion happens
+            # here at the boundary. Emitting pixels instead would be silently
+            # destroyed by normalisation (clamped to 0..1, zero width, dropped),
+            # and the finding would reach the report with no box at all while
+            # every log looked healthy. Normalised also survives the report
+            # being rendered at any resolution, which pixels do not.
+            "bbox": _to_norm_xywh(box, image_size),
             "evidence": [
                 f"detector found {label or dtype} at "
                 f"{cx * 100:.0f}%,{cy * 100:.0f}% of the frame, covering "
