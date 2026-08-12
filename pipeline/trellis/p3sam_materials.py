@@ -276,7 +276,8 @@ def run(mesh_path, ids_path, out_path, seg_mesh=None, report_path=None,
     # update_faces, so the label array stays aligned.
     keep = np.array([kinds[int(p)] != "debris" for p in ids])
     n_debris = int((~keep).sum())
-    flab = np.array([LABS.index(kinds[int(p)]) for p in ids[keep]])
+    kept_ids = ids[keep]
+    flab = np.array([LABS.index(kinds[int(p)]) for p in kept_ids])
     if n_debris:
         m.update_faces(keep)
         m.remove_unreferenced_vertices()
@@ -326,6 +327,17 @@ def run(mesh_path, ids_path, out_path, seg_mesh=None, report_path=None,
 
     share = {k: round(100 * float(np.mean(out_lab == k)), 2) for k in OUT_LABELS}
     print("face share:", share)
+    # Per-part OUTCOME: which material each P3-SAM part actually ended up
+    # wearing after the priors and refine(). This is the diagnostic that says
+    # whether a bad verdict came from classify() or from a later rule — the
+    # distinction that "test the function, not the integration" keeps costing.
+    for r in rows:
+        if r["kind"] == "debris":
+            r["final"] = {"deleted": r["faces"]}
+            continue
+        sel = kept_ids == r["part"]
+        r["final"] = {k: int(v) for k, v in
+                      Counter(out_lab[sel]).most_common()}
     rep = {"mesh": mesh_path, "out": out_path, "share": share,
            "counts": dict(kc), "load": info, "parts": rows,
            "faces": int(len(m.faces))}
@@ -348,8 +360,8 @@ def run(mesh_path, ids_path, out_path, seg_mesh=None, report_path=None,
     for lab in OUT_LABELS:
         mask = out_lab == lab
         if not mask.any():
-            print(f"  note: no {lab} faces — {MATS[ 'body' if lab=='body' else lab].name} "
-                  "will be absent from the file")
+            print(f"  note: no {lab} faces — {MATS[lab].name} will be absent "
+                  "from the file")
             continue
         sub = m.submesh([np.where(mask)[0]], append=True)
         sub.visual = trimesh.visual.TextureVisuals(material=MATS[lab])
@@ -421,17 +433,25 @@ def _canopy(sub=0.10):
 
 
 def _wheel(cx, cz, sub=0.10):
+    """Disc lying in the length/height plane. trimesh's cylinder axis is +Z,
+    which IS the width axis in this fixture, so it needs no rotation — an
+    earlier version rotated it onto the up axis and produced a pancake that
+    classify() correctly refused to call a wheel."""
     c = trimesh.creation.cylinder(radius=0.33, height=0.22, sections=24)
-    c.apply_transform(trimesh.transformations.rotation_matrix(np.pi / 2,
-                                                              [1, 0, 0]))
     c.apply_translation([cx, 0.33, cz])
     return c.subdivide_to_size(sub)
 
 
 def _fixture(sub=0.10, with_canopy=True):
-    """-> (trimesh mesh, face ids, dict kind-expectation per part id)."""
+    """-> (mesh, face ids, expected kind per part id, part names).
+
+    Frame: X = length 0..4.3, Y = up 0..1.42, Z = width 0..1.8 (glTF Y-up).
+    Dimensions are a real saloon's, and the parts sit where a real car's do —
+    lamps high on the nose (centre at 54% of body height, not down at wheel
+    level), sills clear of the ground, wheels 0.66 m across.
+    """
     parts = []                                     # (name, mesh, expect)
-    parts.append(("body", _tri_box((0.0, 4.3), (0.25, 1.05), (0.0, 1.8), sub),
+    parts.append(("body", _tri_box((0.0, 4.3), (0.40, 1.05), (0.0, 1.8), sub),
                   "body"))
     if with_canopy:
         parts.append(("canopy", _canopy(sub), "canopy"))
@@ -442,14 +462,15 @@ def _fixture(sub=0.10, with_canopy=True):
                                 ((4.18, 4.30), (1.23, 1.65)),
                                 ((0.00, 0.12), (0.15, 0.57)),
                                 ((0.00, 0.12), (1.23, 1.65))]):
-        parts.append((f"lamp{i}", _tri_box(x, (0.55, 0.77), z, sub), "lamp"))
-    # hidden seat block: fully inside the closed body box -> stays interior
+        parts.append((f"lamp{i}", _tri_box(x, (0.68, 0.90), z, sub), "lamp"))
+    # hidden seat block: fully inside the closed body box -> must STAY interior
     parts.append(("seats", _tri_box((1.4, 2.4), (0.60, 1.00), (0.4, 1.4), sub),
                   "interior"))
-    # underbody block: classifies as interior but is VISIBLE from outside, so
-    # refine()'s ray test must demote it to body
-    parts.append(("underbody", _tri_box((1.4, 2.4), (0.16, 0.30), (0.4, 1.4),
-                                        sub), "interior"))
+    # underfloor tray: classify() calls it interior (inset, mid band) but it is
+    # VISIBLE from below, so refine()'s ray test must demote it to body. The
+    # pair tests the visibility rule in BOTH directions.
+    parts.append(("tray", _tri_box((1.4, 2.4), (0.28, 0.40), (0.4, 1.4), sub),
+                  "interior"))
     # floating speck above the roofline -> debris, must be deleted
     parts.append(("speck", _tri_box((2.0, 2.06), (1.60, 1.66), (0.9, 0.96),
                                     sub), "debris"))
@@ -522,6 +543,36 @@ def selftest():
           f"{rep['share']['lamp']}%")
     check("hidden seat block kept as interior", rep["share"]["interior"] > 0.5,
           f"{rep['share']['interior']}%")
+
+    # per-part outcomes — these say whether a verdict came from classify() or
+    # from a later rule, which a face-share number cannot
+    byname = {names[r["part"]]: r for r in rep["parts"]}
+
+    def dominant(part):
+        f = byname[part]["final"]
+        return max(f, key=f.get), sum(f.values())
+
+    for w in ("wheel0", "wheel1", "wheel2", "wheel3"):
+        d, _ = dominant(w)
+        check(f"{w} ends up Wheel_Dark", d == "wheel", d)
+    for lp in ("lamp0", "lamp1", "lamp2", "lamp3"):
+        d, _ = dominant(lp)
+        check(f"{lp} ends up Lamp_Lens", d == "lamp", d)
+    d, _ = dominant("seats")
+    check("hidden seats survive the visibility test", d == "interior", d)
+    d, n = dominant("tray")
+    check("VISIBLE tray demoted from interior to body by the ray test",
+          d == "body" and byname["tray"]["final"].get("interior", 0) == 0,
+          str(byname["tray"]["final"]))
+    cf = byname["canopy"]["final"]
+    check("canopy splits into BOTH glass and roof-body",
+          cf.get("glass", 0) > 0 and cf.get("body", 0) > 0, str(cf))
+    check("canopy is mostly glass, not mostly roof",
+          cf.get("glass", 0) > cf.get("body", 0), str(cf))
+    check("body shell stays body", dominant("body")[0] == "body")
+    check("speck deleted as debris",
+          byname["speck"]["final"] == {"deleted": byname["speck"]["faces"]},
+          str(byname["speck"]["final"]))
 
     # 3. the raked windscreen must be GLASS, not roof. Its faces are the ones
     # whose normal is strongly up-facing but which sit BELOW the roofline.
