@@ -106,6 +106,17 @@ check("2g rollup flags structural concern", roll["structural_concern"] is True)
 check("2h worst finding surfaced",
       roll["worst_finding"]["damage_type"] == "shattered_glass")
 
+# a structural finding severe enough to raise the banner can NEVER co-exist with
+# an "excellent/good" headline — grade and banner must always agree.
+struct6 = [{"panel": "hood", "damage_type": "dent", "severity": 6}]
+r6 = SEV.summarize(struct6)
+check("2i structural concern forbids an excellent/good headline",
+      not (r6["structural_concern"] and r6["grade"] in ("A", "B")),
+      f'grade={r6["grade"]} concern={r6["structural_concern"]} '
+      f'score={r6["condition_score"]}')
+check("2j structural concern caps the score at 'fair' or below",
+      SEV.condition_score(struct6) <= 74, str(SEV.condition_score(struct6)))
+
 
 # ---- 3. repair estimation ------------------------------------------------
 f_dent = {"panel": "front_left_door", "damage_type": "dent", "severity": 6}
