@@ -1,95 +1,55 @@
-# Damage scanner — RunPod serverless worker.
+# Damage scanner — RunPod serverless worker, NO-GPU API-proxy build.
 #
-# ISOLATION: entirely separate from the vehicle (trellis2/) and building
-# workers. Different tag (alamk123/damage-scan:*), endpoint, volume and bucket.
-# Its CI triggers only on damage/**, so it cannot rebuild another product.
+# This is the DEFAULT and recommended deployment. It runs the vision stage as
+# DAMAGE_BACKEND=anthropic (a frontier Claude vision model over the Anthropic
+# API), so the container needs no GPU, no CUDA, no torch, and no model
+# download. Consequences, all of which this repo paid for the hard way:
 #
-# ---------------------------------------------------------------------------
-# WHY THIS IS A *runtime* BASE, NOT *devel*  (measured, not guessed)
+#   * Image is ~150 MB, not 4.7 GB / 10.6 GB. Cold start is seconds, not the
+#     41 MINUTES a live GPU cold-start measured here (delayTime=2,474,145 ms
+#     vs executionTime=157 ms). On a scale-to-zero endpoint, image size IS
+#     cold-start latency — this removes it.
+#   * No warm worker, no network volume, no HF weight cache. The endpoint can
+#     truly scale to zero and cost nothing idle (which the GPU build could not,
+#     because workersStandby defaults to 1 and is not settable via the API).
+#   * The only runtime dependency for correctness is the Anthropic API — which
+#     is also the accurate path (a local 7B model scored a shattered-windshield
+#     car 99/100 in live testing; see analyze.py get_backend()).
 #
-# The first cut of this file copied the vehicle worker's
-# nvidia/cuda:*-devel base. That produced a 10.6 GB image, and a live cold
-# start on RunPod measured delayTime = 41 MINUTES against executionTime =
-# 157 ms. On a serverless endpoint that scales to zero, image size IS
-# cold-start latency, so the base image was the single dominant cost of the
-# whole product.
+# Same pattern as the Seedance worker (PR #14): API proxy, slim CPU image,
+# cheapest RunPod workers. To run the local Qwen2.5-VL fallback instead, build
+# Dockerfile.gpu and set DAMAGE_BACKEND=qwen — that variant needs a GPU.
 #
-# devel exists to give you nvcc. This worker compiles NOTHING at runtime, and
-# the only thing that ever wanted nvcc at build time was flash-attn — which is
-# an optional accelerator the code already degrades without (transformers
-# falls back to eager attention). Trading it for ~3 GB and tens of minutes of
-# cold start is not close.
-#
-# Also dropped: build-essential, cmake, ninja, git and the *-dev headers. They
-# exist to compile native extensions; there are none here. The torch cu124
-# wheels ship their own CUDA runtime libraries, so nothing here links against
-# the system toolkit either.
-# ---------------------------------------------------------------------------
+# ISOLATION: own tag (alamk123/damage-scan:*), own CI (damage/** only). Nothing
+# here imports from trellis2/ or building/, and neither is edited.
 
-FROM nvidia/cuda:12.4.1-runtime-ubuntu22.04
+FROM python:3.11-slim
 
-ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
-# no .pyc writing and no pip cache -> smaller layers
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PIP_NO_CACHE_DIR=1
 
-# Runtime-only system packages. libgl1/libglib2.0-0 are needed by pillow/
-# opencv-style image decoding paths; nothing else is.
-RUN apt-get update && apt-get install -y --no-install-recommends \
-      python3.10 python3-pip \
-      libgl1 libglib2.0-0 \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
-    ln -sf /usr/bin/pip3 /usr/bin/pip
-
-# torch pinned to the cu124 wheels matching the base image. These wheels bundle
-# the CUDA runtime they need, which is what makes the devel toolkit redundant.
+# The whole dependency set: serverless glue + HTTP + the Anthropic client.
+# All pure-Python wheels — no compiler, no system packages, no CUDA.
 RUN pip install --upgrade pip && \
-    pip install torch==2.6.0 torchvision==0.21.0 \
-      --index-url https://download.pytorch.org/whl/cu124
+    pip install runpod requests anthropic
 
-# The VLM stack. Qwen2.5-VL needs a recent transformers; qwen-vl-utils handles
-# its image preprocessing; accelerate provides device_map="auto".
-RUN pip install \
-      "transformers>=4.49" accelerate safetensors huggingface_hub \
-      qwen-vl-utils pillow numpy
-
-# Serverless glue + the recommended vision backend. `anthropic` is a pure-Python
-# API client (no GPU, tiny) — DAMAGE_BACKEND=anthropic reads damage correctly
-# where the local model misses it; see analyze.py get_backend().
-RUN pip install runpod requests anthropic
-
-# ---------------------------------------------------------------------------
-# Model cache on the mounted network volume.
-#
-# ATTACH A NETWORK VOLUME TO THE ENDPOINT. Without one, /runpod-volume is not
-# persistent and Qwen2.5-VL's ~16 GB of weights are re-downloaded on EVERY
-# cold start — a per-start cost, not a one-off. With a volume attached the
-# weights are fetched once and every later worker starts from cache.
-# ---------------------------------------------------------------------------
-ENV HF_HOME=/runpod-volume/damage_hf_cache
-ENV TORCH_HOME=/runpod-volume/damage_torch_cache
-# DAMAGE_OUTPUT_DIR is deliberately NOT baked in: an endpoint only has
-# /runpod-volume when a volume is attached, and paths.py resolves the writable
-# location at runtime. Setting it here would override that check.
+# Default the deployed image to the accurate, no-GPU backend. Override to qwen
+# only on the GPU image. ANTHROPIC_API_KEY must be set on the endpoint (never
+# baked in); DAMAGE_VLM_MODEL optionally overrides the model (default
+# claude-opus-5). Reports are kilobytes and inline in the response, so no
+# object storage or network volume is required.
+ENV DAMAGE_BACKEND=anthropic
+# DAMAGE_OUTPUT_DIR is deliberately NOT set: paths.py resolves a writable
+# location at runtime, and this worker needs no persistent volume.
 
 WORKDIR /app
 
-# Source. Everything below rebuilds on code changes; everything above is cached.
+# Source. The vision backends import their heavy deps lazily (torch only inside
+# the qwen path, anthropic only inside the anthropic path), so this slim image
+# imports and runs cleanly without torch/transformers ever installed.
 COPY paths.py delivery.py progress.py validation.py handler.py \
      taxonomy.py severity.py repair.py quality.py analyze.py fusion.py \
-     report.py compare.py preload_models.py /app/
-
-# Optional: bake the VLM weights into the image for fully-offline operation
-# (pair with OFFLINE=1). Adds ~16 GB, which is the opposite of what this file
-# is optimised for — prefer a network volume. Build on a pod, not a CI runner.
-ARG PRELOAD_MODELS=0
-RUN --mount=type=secret,id=hf_token \
-    if [ "$PRELOAD_MODELS" = "1" ]; then \
-      HF_TOKEN=$(cat /run/secrets/hf_token 2>/dev/null || true) \
-      python /app/preload_models.py; \
-    fi
+     report.py compare.py /app/
 
 CMD ["python", "-u", "/app/handler.py"]

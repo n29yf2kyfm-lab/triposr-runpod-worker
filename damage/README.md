@@ -98,7 +98,7 @@ the product's judgement. Swap the checkpoint with `DAMAGE_VLM_MODEL`.
 ## Tests
 
 ```bash
-python damage/test_handler.py     # 98 checks, GPU-free, network-free, deps-free
+python damage/test_handler.py     # 110 checks, GPU-free, network-free, deps-free
 ```
 
 Same discipline as the other workers: the vision model is never loaded (a fake
@@ -108,8 +108,26 @@ pinned hard, because a wrong result costs a user money.
 
 ## Deploy
 
-CI (`.github/workflows/damage-docker-build.yml`) runs the tests, then builds and
+Two image variants:
+
+| File | Base | Size | Backend | GPU |
+|---|---|---|---|---|
+| **`Dockerfile`** (default) | `python:3.11-slim` | ~150 MB | `anthropic` | **none** |
+| `Dockerfile.gpu` | `nvidia/cuda:*-runtime` | ~4.7 GB | `qwen` | required |
+
+**Recommended: the no-GPU proxy (`Dockerfile`).** CI
+(`.github/workflows/damage-docker-build.yml`) runs the tests, then builds and
 pushes `alamk123/damage-scan:<sha>` (and `:v1`/`:latest` on `main`). Stand up a
-new RunPod endpoint on that image with its own volume and the `damage-scans`
-bucket configured (`SUPABASE_URL`/`KEY`/`BUCKET`). Set `DAMAGE_OUTPUT_DIR` only
-if a network volume is attached.
+RunPod endpoint on that image with `workersMin=0` — it scales to zero, cold
+starts in seconds, and needs **no network volume and no object storage**
+(reports inline in the response). The one required endpoint env var is
+**`ANTHROPIC_API_KEY`**; optionally `DAMAGE_VLM_MODEL` to pick the model.
+
+⚠️ On endpoint creation RunPod defaults `workersStandby` to 1 (an always-warm,
+always-billed worker) and it is **not** settable via the REST API — set it to 0
+in the console, or the "scale to zero" property above doesn't hold.
+
+The GPU variant (`Dockerfile.gpu`, `DAMAGE_BACKEND=qwen`) is only for running
+the local model; it needs a GPU worker and a network volume for the weight
+cache, and is documented as less accurate. Build it explicitly (it is not the
+CI default).
