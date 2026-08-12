@@ -28,6 +28,7 @@ import json
 import os
 import shutil
 import subprocess
+import time
 import zipfile
 
 from prepare_data import CLASS_MAP, IGNORE, MIN_BOXES, PLACEHOLDER
@@ -41,15 +42,34 @@ def is_off_domain(path):
     return any(k in path.lower() for k in OFF_DOMAIN)
 
 
-def fetch(path, version, api_key, dest):
-    """Download one Roboflow COCO export and unzip it."""
+def fetch(path, version, api_key, dest, tries=6, wait=20):
+    """Download one Roboflow COCO export and unzip it.
+
+    Roboflow generates an export lazily: the first request for a version that
+    has never been exported returns `{"progress": 0}` and no link, and the zip
+    only appears once generation finishes. Treating that as a hard failure lost
+    five otherwise-usable datasets on the first full run, so a missing link is
+    retried rather than raised. A genuine error (wrong format for the project
+    type, bad key) has an `error` field and is raised immediately — retrying
+    that would just burn GPU minutes.
+    """
     url = (f"https://api.roboflow.com/{path}/{version}/coco?api_key={api_key}")
-    meta = json.loads(subprocess.run(["curl", "-s", url],
-                                     capture_output=True, text=True).stdout)
-    link = (meta.get("export") or {}).get("link")
+    link = None
+    for attempt in range(tries):
+        meta = json.loads(subprocess.run(["curl", "-s", url],
+                                         capture_output=True, text=True).stdout)
+        if meta.get("error"):
+            raise RuntimeError(f"{path}/{version}: {meta['error']}")
+        link = (meta.get("export") or {}).get("link")
+        if link:
+            break
+        if attempt < tries - 1:
+            print(f"    export generating ({meta.get('progress')}), "
+                  f"retry {attempt + 1}/{tries - 1} in {wait}s")
+            time.sleep(wait)
     if not link:
-        raise RuntimeError(f"no export link for {path}/{version}: "
-                           f"{str(meta)[:160]}")
+        raise RuntimeError(f"no export link for {path}/{version} after "
+                           f"{tries} tries")
     zp = dest + ".zip"
     subprocess.run(["curl", "-sL", link, "-o", zp], check=True)
     with zipfile.ZipFile(zp) as z:

@@ -43,13 +43,38 @@ try:
 except Exception as e:
     print("log upload error:", e)
 PY
-  if [ -n "${RUNPOD_POD_ID:-}" ]; then
-    for _ in 1 2 3; do
-      curl -s -X POST "https://rest.runpod.io/v1/pods/${RUNPOD_POD_ID}/stop" \
-        -H "Authorization: Bearer ${RUNPOD_API_KEY}" && break
-      sleep 5
-    done
-  fi
+  # Pod id: the env var is NOT reliably injected — on the first full run it was
+  # empty, the guard skipped the stop call, and a crashed pod kept billing for
+  # six minutes until stopped by hand. Fall back to the hostname (RunPod sets it
+  # to the pod id), then to looking ourselves up by name. Failing to stop is the
+  # expensive failure, so it gets three chances and three strategies.
+  PID="${RUNPOD_POD_ID:-}"
+  [ -z "$PID" ] && PID="$(hostname)"
+  echo "stopping pod id=$PID"
+  for _ in 1 2 3; do
+    curl -s -X POST "https://rest.runpod.io/v1/pods/${PID}/stop" \
+      -H "Authorization: Bearer ${RUNPOD_API_KEY}" | grep -q . && break
+    sleep 5
+  done
+  # Last resort: find any pod with this name still running and stop it.
+  python - <<'PY' || true
+import os, json, urllib.request
+key = os.environ.get("RUNPOD_API_KEY", "")
+req = urllib.request.Request("https://rest.runpod.io/v1/pods",
+                             headers={"Authorization": f"Bearer {key}"})
+try:
+    pods = json.load(urllib.request.urlopen(req, timeout=20))
+    for p in pods if isinstance(pods, list) else []:
+        if p.get("name", "").startswith("damage-detector-train") \
+                and p.get("desiredStatus") == "RUNNING":
+            u = f"https://rest.runpod.io/v1/pods/{p['id']}/stop"
+            urllib.request.urlopen(urllib.request.Request(
+                u, data=b"", headers={"Authorization": f"Bearer {key}"}),
+                timeout=20)
+            print("stopped by name:", p["id"])
+except Exception as e:
+    print("name-based stop failed:", e)
+PY
 }
 trap finish EXIT
 
@@ -59,10 +84,22 @@ python -V; df -h /workspace | tail -1
 
 echo "=== deps ==="
 pip install -q --upgrade pip
-# Pinned install, one package per line so a failure names itself in the log.
+# One package per line so a failure names itself in the log.
 pip install -q huggingface_hub || exit 11
-pip install -q onnxruntime       || exit 12
-pip install -q rfdetr            || exit 13
+pip install -q onnxruntime     || exit 12
+
+# Torch MUST come first and be >= 2.5. The base image ships 2.4.1, and current
+# transformers refuses to enable its PyTorch integration below 2.5 — it prints
+# "PyTorch was not found", carries on with tokenizers only, and rfdetr then dies
+# on `cannot import name BackboneConfigMixin`. That import error names
+# transformers and hides the real cause, which is the torch version. Upgrading
+# here costs one large download and removes the whole class of confusion.
+python -c "import torch,sys; sys.exit(0 if tuple(map(int,torch.__version__.split('.')[:2]))>=(2,5) else 1)" \
+  || pip install -q --upgrade torch torchvision --index-url https://download.pytorch.org/whl/cu124 \
+  || exit 13
+python -c "import torch;print('torch', torch.__version__, 'cuda', torch.cuda.is_available())" || exit 13
+pip install -q rfdetr || exit 14
+python -c "import rfdetr; print('rfdetr import OK')" || exit 15
 
 echo "=== fetch scripts ==="
 python - <<'PY' || exit 20
