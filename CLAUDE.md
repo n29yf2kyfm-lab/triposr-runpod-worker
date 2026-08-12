@@ -1189,6 +1189,42 @@ A safety check that is itself wrong costs exactly as much as no safety check.
 Assert on ARTEFACTS too: the bootstrap now fails with `FAIL_NO_FACE_IDS` if the
 output file is absent, so a silent no-output run can never read as success.
 
+**P3-SAM CANNOT SEPARATE GLAZING, AND THIS IS BY DESIGN — settled, do not retry.**
+Two runs on our Hunyuan car (626k faces), face ids perfectly ALIGNED both times:
+  default (prompt_num 400, threshold 0.95) -> 9 parts, largest 74.5%
+  fine    (prompt_num 1000, threshold 0.85) -> 7 parts, largest 75.4%
+More prompts and a lower merge threshold produced FEWER parts, not finer ones.
+The colour-coded render is unambiguous: wheels, mirror, wipers and side skirt cut
+cleanly, and the whole body INCLUDING every window is one part.
+The reason is principled: **P3-SAM segments PHYSICAL PARTS — things that are
+separate objects. Glazing on a fused shell is a REGION of one continuous surface,
+not a part.** PartCrafter separates the greenhouse because it GENERATES it as its
+own mesh, not because it segments one. No amount of parameter tuning changes this,
+so do not spend another run on it.
+**What P3-SAM IS good for: wheels and trim.** Its wheel cuts are visibly cleaner
+than the PartCrafter transfer's ragged arch spill. Best architecture on current
+evidence: Hunyuan geometry + PartCrafter canopy for glazing + P3-SAM for
+wheels/mirrors/wipers.
+
+**OWNER VERDICT 2026-08-12, verbatim: "It fukin look shit."** Said of the finished
+hybrid car AFTER every material gate passed. This is the honest state of the
+generation route and must not be softened in a future session:
+  * SOLVED: the material layer. Glass reads as glass, tyres stay black, lamps hold
+    their colour, body resprays cleanly, glass_probe clear (proven), red control
+    holds. The structural blocker that scrapped 119 live cars is genuinely fixed.
+  * NOT SOLVED, and untouched by any of it: SURFACING. Soft mushy panels, no shut
+    lines, blobby lamp recesses, melted front end. The owner flagged this early
+    ("the lights got paint over plus look soft"); the lamps were fixed and the
+    softness was not. Fitting crisp catalogue wheels to a soft body arguably made
+    the mismatch MORE obvious.
+Every open generator tested (TRELLIS.2, PartCrafter, Hunyuan3D-2) shares this
+ceiling. Hunyuan is the best of them and is still nowhere near the premium bar.
+Untested levers remaining: Hi3DGen (sharper geometry by design) and a fine-tune on
+our own catalogue. **If Hi3DGen also comes back soft, the correct conclusion is
+that image-to-3D cannot currently produce a premium car, and the money belongs in
+sourcing or licensed heroes, not here.** Do not reopen the material work — it is
+finished and it was never the thing that made the car look bad.
+
 ## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
 
 Tested end to end on a 2011 Yaris XP90 from two Toyota press photos. The machine WORKS —
