@@ -1097,6 +1097,37 @@ wing. More smoothing does not fix this — the fix is a better segmentation sour
 note: `partcrafter_materials.py` now has a lamp class (nose/tail, offset, lamp
 band -> dark gloss Lamp_Lens), which transfers through the hybrid too.
 
+## Wheel swap + the v4 boundary verdict (2026-08-12, late)
+
+**hybrid_transfer v4 patches VERIFIED**: the positional roof rule fixed the
+windscreen (head-on now a full dark screen with cowl); glass 13.5% of faces —
+top of the real band, expected from freeing the raked screen centre. Side and
+rear boundaries improved but still ragged: that residue is the LABEL SOURCE
+(PartCrafter melt), not the cut. Do not tune further — replace the source.
+**Tencent Hunyuan3D-Part (P3-SAM + X-Part) is the replacement**: native 3D part
+segmentation from the same team as the geometry model, 3.7M-model training set,
+open weights (github.com/Tencent-Hunyuan/Hunyuan3D-Part). Segments the Hunyuan
+mesh DIRECTLY — no cross-mesh transfer at all. Backups: NVIDIA PartField
+(faster); Hi3DGen (sharper geometry, candidate to upgrade the shape stage).
+
+**pipeline/trellis/wheel_swap.py replaces melt wheels with library geometry**
+(donor: GR Supra front-left wheel from our own catalogue). Traps its docstring
+records, all paid for tonight: the wheel LABEL bbox includes arch-liner spill
+(mis-centred and 40%-oversized the first attempt — measure position from
+tyre-zone faces below ground+0.30 and depth from the BODY side surface);
+deleting original wheel faces holes the shell (recolour them Arch_Cavity
+instead); the donor's own material table is untrustworthy (Supra ships its
+whole wheel as one pale material — take geometry only, assign our own
+Tyre_Rubber/Rim_Alloy split by radius); catalogue donors are mostly
+Draco-compressed and neither Blender nor trimesh here can decode — run
+`gltf-transform copy` first (npm i -g @gltf-transform/cli).
+
+**Symmetrise was measured a NO-OP on Hunyuan output**: mirror asymmetry mean
+0.16% of car length (p95 0.28%). Skip it. Shut-line engraving deferred: the
+mesh already carries faint real door creases; synthetic lines without
+semantics risk drawing wrong ones — that fix belongs to Hi3DGen / car
+fine-tuning, not geometry surgery.
+
 ## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
 
 Tested end to end on a 2011 Yaris XP90 from two Toyota press photos. The machine WORKS —
