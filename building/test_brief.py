@@ -116,6 +116,22 @@ check("7c describe() says so rather than inventing",
       "Nothing to build" in B.describe(B.parse(""), [], True, 0.0, 40.0))
 
 
+
+# --- 8. a room named inside a PLACEMENT phrase already exists ---------------
+# "a bedroom over the garage" builds ONE bedroom; the garage is what it sits
+# on, not a garage to build and price. Caught by test 3c the moment garage
+# became a known room type.
+p8 = B.parse("a bedroom over the garage")
+check("8a the existing garage is not scheduled as new work",
+      p8["rooms"] == ["bedroom"], str(p8["rooms"]))
+check("8b but the placement is still read", p8["placement"] == "over")
+# When a garage IS the work, it is scheduled.
+p8b = B.parse("4 bed house with garage")
+check("8c a garage asked for is built", "garage" in p8b["rooms"],
+      str(p8b["rooms"]))
+check("8d and a double garage is its own bigger room",
+      "double_garage" in B.parse("house with double garage")["rooms"])
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

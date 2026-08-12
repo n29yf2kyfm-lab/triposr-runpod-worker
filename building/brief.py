@@ -41,6 +41,15 @@ ROOM_SIZES = {
     "office":        {"min": 6.0,  "target": 9.0,  "label": "Office"},
     "utility":       {"min": 3.0,  "target": 5.0,  "label": "Utility"},
     "dressing":      {"min": 4.0,  "target": 6.0,  "label": "Dressing room"},
+    # A single garage needs 3.0 x 5.0m to take a car and open a door;
+    # a double is two of those side by side. Surfaced by the parser
+    # reporting "garage" as unrecognised on "4 bed house with garage" —
+    # which is what the unrecognised list is for.
+    "garage":        {"min": 15.0, "target": 18.0, "label": "Garage"},
+    "double_garage": {"min": 30.0, "target": 34.0,
+                      "label": "Double garage"},
+    "porch":         {"min": 2.0,  "target": 3.5,  "label": "Porch"},
+    "conservatory":  {"min": 8.0,  "target": 12.0, "label": "Conservatory"},
 }
 
 # Fraction of a floor lost to landing, stairs head and walls.
@@ -66,6 +75,10 @@ ROOM_WORDS = [
     (r"\b(?:office|study)\b", "office"),
     (r"\butility\b", "utility"),
     (r"\bdressing\s*(?:room)?\b", "dressing"),
+    (r"\b(?:double|twin|2)\s+garages?\b", "double_garage"),
+    (r"\bgarages?\b", "garage"),
+    (r"\bporch\b", "porch"),
+    (r"\bconservator(?:y|ies)\b", "conservatory"),
 ]
 
 # Where the work goes. "on top" and "over" mean a storey on an existing
@@ -111,7 +124,15 @@ def parse(text):
                 "unrecognised": [], "text": ""}
     t = str(text).lower()
 
+    # A ROOM NAMED INSIDE A PLACEMENT PHRASE ALREADY EXISTS. "a bedroom over
+    # the garage" builds ONE bedroom — the garage is what it sits on, not a
+    # garage to build. Claiming the placement span first stops the existing
+    # structure being added to the schedule and priced as new work.
     rooms, spans = [], []
+    for pattern, _key in PLACEMENT_WORDS:
+        for m in re.finditer(pattern, t):
+            spans.append((m.start(), m.end()))
+
     for pattern, key in ROOM_WORDS:
         for m in re.finditer(pattern, t):
             if any(s <= m.start() < e for s, e in spans):
