@@ -103,7 +103,12 @@ python -c "import torch;print('torch', torch.__version__, 'cuda', torch.cuda.is_
 # ("RF-DETR training dependencies are missing" / no module pytorch_lightning),
 # which is why the previous smoke test passed and the run still died — 30
 # minutes and a full dataset merge later.
-pip install -q "rfdetr[train,loggers]" || exit 14
+# --ignore-installed blinker: the base image carries blinker 1.4 as a
+# distutils-installed system package, which pip refuses to uninstall ("cannot
+# accurately determine which files belong to it"), so a transitive upgrade
+# request aborts the whole install. Ignoring that one package lets pip put its
+# own copy alongside instead of failing.
+pip install -q --ignore-installed blinker "rfdetr[train,loggers]" || exit 14
 # So the smoke test now checks the TRAINING path, not just the import: the
 # gate must fail on the same thing the real run would.
 python - <<'PY' || exit 15
