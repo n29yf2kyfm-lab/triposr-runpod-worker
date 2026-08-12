@@ -98,8 +98,20 @@ python -c "import torch,sys; sys.exit(0 if tuple(map(int,torch.__version__.split
   || pip install -q --upgrade torch torchvision --index-url https://download.pytorch.org/whl/cu124 \
   || exit 13
 python -c "import torch;print('torch', torch.__version__, 'cuda', torch.cuda.is_available())" || exit 13
-pip install -q rfdetr || exit 14
-python -c "import rfdetr; print('rfdetr import OK')" || exit 15
+# The [train,loggers] extras are NOT optional here. Plain `pip install rfdetr`
+# gives a package that imports perfectly and then refuses to train
+# ("RF-DETR training dependencies are missing" / no module pytorch_lightning),
+# which is why the previous smoke test passed and the run still died — 30
+# minutes and a full dataset merge later.
+pip install -q "rfdetr[train,loggers]" || exit 14
+# So the smoke test now checks the TRAINING path, not just the import: the
+# gate must fail on the same thing the real run would.
+python - <<'PY' || exit 15
+import rfdetr, pytorch_lightning
+from rfdetr import RFDETRBase
+assert hasattr(RFDETRBase, "train"), "RFDETRBase has no train()"
+print("rfdetr train deps OK; lightning", pytorch_lightning.__version__)
+PY
 
 echo "=== fetch scripts ==="
 python - <<'PY' || exit 20
