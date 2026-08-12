@@ -103,17 +103,25 @@ check("3d the rule door survives when the photo shows none",
       res2["door_preserved"] and model2["totals"]["doors"] >= 1, str(res2))
 
 # Overlapping and out-of-wall openings are refused, not stacked.
+# The reading carries its own door, so no rule-placed door is preserved
+# into the count. Without that this test was really measuring where the
+# rule happened to park the front door, and it moved the moment the rule
+# placed more than one window per wall.
 clash = [{"kind": "window", "along": 2.0, "width": 2.0, "height": 1.2,
           "sill": 0.9, "level": 0},
          {"kind": "window", "along": 3.0, "width": 2.0, "height": 1.2,
           "sill": 0.9, "level": 0},
+         {"kind": "door", "along": 7.0, "width": 0.9, "height": 2.0,
+          "sill": 0.0, "level": 0},
          {"kind": "window", "along": 30.0, "width": 2.0, "height": 1.2,
           "sill": 0.9, "level": 0}]
 model3 = M.build([M.Room("h", 0.0, 0.0, 10.0, 6.0, 2.75)], storeys=1,
                  storey_height=2.75)
 res3 = M.apply_facade_openings(model3, clash, facade_y=0.0)
 check("3e an overlap and an out-of-wall opening are skipped",
-      res3["applied"] >= 1 and res3["skipped"] == 2, str(res3))
+      res3["applied"] == 2 and res3["skipped"] == 2, str(res3))
+check("3e2 and no rule door was smuggled in on top",
+      res3["door_preserved"] is False, str(res3))
 
 # No wall on the facade line: refuse with a reason, change nothing.
 model4 = M.build([M.Room("h", 0.0, 5.0, 10.0, 6.0, 2.75)], storeys=1,

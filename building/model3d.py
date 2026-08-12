@@ -37,6 +37,11 @@ DEFAULT_SLAB_M = 0.150
 # Approved Document M and BS 4787. A door is not a hole of arbitrary size.
 DOOR_W_M, DOOR_H_M = 0.838, 1.981       # 838mm leaf — Part M minimum clear
 WINDOW_H_M, WINDOW_SILL_M = 1.200, 0.900
+# Roughly how much frontage one window serves. Rule-placed windows are a
+# stand-in until an elevation is read off a photograph, and the stand-in has
+# to put ONE IN EVERY ROOM — an escape check is meaningless if a bedroom at
+# the end of a long wall never gets an opening at all.
+WINDOW_PITCH_M = 3.500
 
 MIN_ROOM_M2 = 0.8
 MAX_ROOM_M2 = 500.0
@@ -718,8 +723,17 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
                 # No window onto a 100mm cavity, and no door into it either.
                 continue
             if wall.external and wall.length_m >= 1.8:
-                wall.add_opening("window", wall.length_m / 2 - 0.6, 1.2,
-                                 WINDOW_H_M, WINDOW_SILL_M)
+                # ONE WINDOW PER ROOM, NOT PER WALL. A single window in the
+                # middle of a wall was fine while every room edge was its own
+                # wall — but a 10.5m frontage is ONE wall, and one window in
+                # the middle of it left the bedrooms at either end with no
+                # daylight and, worse, no escape opening. Space them at
+                # roughly a room's width instead.
+                n = max(1, int(round(wall.length_m / WINDOW_PITCH_M)))
+                bay = wall.length_m / n
+                for i in range(n):
+                    wall.add_opening("window", i * bay + (bay - 1.2) / 2.0,
+                                     1.2, WINDOW_H_M, WINDOW_SILL_M)
             elif not wall.external and wall.length_m >= DOOR_W_M + 0.4:
                 wall.add_opening("door", 0.2, DOOR_W_M, DOOR_H_M)
 
@@ -1321,6 +1335,30 @@ def write_ifc(model, path, project_name="Modelled Building"):
 
 # --- handler entry point ----------------------------------------------------
 
+def _with_buildability(model):
+    """Never hand over a plan without saying whether it can be built.
+
+    The model is geometry and the geometry always closes; whether a person
+    can get up the stairs is a separate question, and it was never being
+    asked. A four-bed went out of here complete — roof, elevations, IFC,
+    take-off — with no staircase that could reach the first floor. The
+    answer rides alongside the model from here on, and its refusals are
+    promoted into the warnings so they cannot be missed by a caller that
+    only reads those.
+    """
+    out = {"model": model, "warnings": list(model["warnings"])}
+    try:
+        import buildable
+    except ImportError:                     # pragma: no cover - optional
+        return out
+    result = buildable.check(model)
+    out["buildable"] = result
+    for f in result["findings"]:
+        if f["severity"] == "refuse":
+            out["warnings"].append("NOT BUILDABLE: " + f["message"])
+    return out
+
+
 def run_mode(spec, prog, output_dir):
     """Model mode entry point.
 
@@ -1347,7 +1385,7 @@ def run_mode(spec, prog, output_dir):
         prog.stage("exporting")
         artifacts = _export_artifacts(
             model, directory, spec.get("scan_id") or "roomplan")
-        return artifacts, {"model": model, "warnings": model["warnings"]}
+        return artifacts, _with_buildability(model)
 
     if not entries:
         raise ModelError(
@@ -1405,7 +1443,7 @@ def run_mode(spec, prog, output_dir):
     directory = paths.ensure(output_dir)
     artifacts = _export_artifacts(model, directory,
                                   spec.get("scan_id") or "model")
-    return artifacts, {"model": model, "warnings": model["warnings"]}
+    return artifacts, _with_buildability(model)
 
 
 def _export_artifacts(model, directory, scan):
