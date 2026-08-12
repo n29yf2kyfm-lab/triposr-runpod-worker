@@ -1548,6 +1548,23 @@ def _glb_mesh(model):
             emit(mat, [(ax + nx, ay + ny, hz), (bx + nx, by + ny, hz),
                        (bx - nx, by - ny, hz), (ax - nx, ay - ny, hz)])
 
+    # THE TOP STOREY HAS A CEILING, NOT RAFTERS. Below the top, the floor
+    # slab of the storey above doubles as the ceiling; on the top floor
+    # there is no slab, so every bedroom looked straight up into the dark
+    # underside of the roof. That is a plasterboard ceiling at the room's
+    # own height in any house that is not a barn conversion.
+    if storeys:
+        top_level = storeys - 1
+        for r in rooms:
+            if not _room_on_level(r, top_level):
+                continue
+            cz = top_level * per + float(r.get("height_m") or per)
+            emit("plaster",
+                 [(r["x"], r["y"], cz),
+                  (r["x"], r["y"] + r["depth_m"], cz),
+                  (r["x"] + r["width_m"], r["y"] + r["depth_m"], cz),
+                  (r["x"] + r["width_m"], r["y"], cz)])
+
     for cap in model.get("caps") or []:
         cx, cy, cz = cap["x"], cap["y"], cap["z_m"]
         emit("tile", [(cx[0], cy[0], cz), (cx[1], cy[0], cz),
@@ -1751,6 +1768,15 @@ def apply_facade_openings(model, openings, facade_y=0.0):
     for o in sorted(todo, key=lambda o: o["along"]):
         hit = None
         for w in fronts:
+            # A FACADE IS TWO STOREYS OF DIFFERENT WALLS. The ground floor
+            # and the floor above rarely divide at the same points — lounge,
+            # hall, garage below; master, en-suite, bedroom above — so the
+            # first wall that merely spans the right x is very often the
+            # wrong floor. The opening then carried level=1 onto a wall that
+            # only exists at level 0, and _openings_at dropped it: every
+            # upstairs window read off the photo vanished without a word.
+            if o.get("level") is not None and not _wall_on_level(w, o["level"]):
+                continue
             ax, bx = w["start"][0], w["end"][0]
             lo, hi = min(ax, bx), max(ax, bx)
             if o["along"] >= lo - eps and o["along"] + o["width"] <= hi + eps:

@@ -1254,6 +1254,48 @@ for _i in range(0, len(_brick), 12):
 check("32c external walls reach the slab above, leaving no daylight slot",
       _bands >= 4, f"{_bands} floor-zone bands")
 
+# THE TOP STOREY HAS A CEILING, NOT RAFTERS. Below the top floor the slab
+# above doubles as the ceiling; on the top floor there is none, so every
+# bedroom looked straight up into the dark underside of the roof.
+_ceil = _mesh["plaster"][0]
+_top = 1 * 2.70 + 2.40
+_flat = 0
+for _i in range(0, len(_ceil), 12):
+    _q = {round(_ceil[_i + 1 + 3 * _k], 3) for _k in range(4)}
+    if _q == {round(_top, 3)}:
+        _flat += 1
+check("32d the top storey is ceiled, not left open to the roof",
+      _flat >= 7, f"{_flat} ceiling panels")
+
+# --- 33. a facade is two storeys of DIFFERENT walls -----------------------
+# apply_facade_openings picked the first front wall whose x-range fitted,
+# ignoring which floor that wall was on. Ground and first rarely divide at
+# the same points — lounge/hall/garage below, master/en-suite/bedroom above
+# — so an upstairs window landed on a downstairs wall, carried level=1 onto
+# a wall that only exists at level 0, and _openings_at silently dropped it.
+_fac = M.build(_g + _f, storeys=2, storey_height=2.70)
+_r33 = M.apply_facade_openings(_fac, [
+    {"kind": "door", "along": 5.55, "width": 0.95, "height": 2.05,
+     "sill": 0.0, "level": 0},
+    {"kind": "door", "along": 7.75, "width": 2.40, "height": 2.10,
+     "sill": 0.0, "level": 0},
+    {"kind": "window", "along": 1.10, "width": 1.60, "height": 1.20,
+     "sill": 0.85, "level": 1},
+    {"kind": "window", "along": 6.95, "width": 1.50, "height": 1.20,
+     "sill": 0.85, "level": 1},
+], facade_y=0.0)
+check("33a every facade opening is placed", _r33["applied"] == 4,
+      str(_r33))
+_front_walls = [w for w in _fac["walls"] if w["external"]
+                and w["start"][1] == 0.0 and w["end"][1] == 0.0]
+_up = [o for w in _front_walls for o in w["openings"]
+       if o.get("level") == 1 and M._wall_on_level(w, 1)]
+check("33b and the upstairs ones land on a wall that exists upstairs",
+      len(_up) == 2, f"{len(_up)} of 2 survived")
+_down = [o for w in _front_walls for o in w["openings"]
+         if o.get("level") == 0 and M._wall_on_level(w, 0)]
+check("33c the ground-floor door and garage door are still downstairs",
+      len(_down) == 2, f"{len(_down)} of 2")
 
 print()
 for f in FAILED:
