@@ -262,25 +262,36 @@ for o in objs:
     bmesh.ops.delete(bm, geom=dead, context='FACES')
     bm.to_mesh(o.data); bm.free()
 
-# TODO(camera): measure the ground. The plot floor sits near z=+2 in this
-# frame, not 0; place the camera relative to the 2nd-percentile z of the
-# cropped verts, not an assumed zero, or it renders from under the mesh.
+# Ground is MEASURED, not assumed — the plot floor sits near z=+2 in this
+# frame (the tile's zero is not the datum), and a camera at an assumed zero
+# ends up under the mesh. 2nd percentile, robust to floaters, like Scan Mode.
 zs = sorted(v.co.z for o in objs for v in o.data.vertices)
 ground = zs[max(0, int(len(zs)*0.02))] if zs else 0.0
 
-w = bpy.data.worlds.new("w"); bpy.context.scene.world = w; w.use_nodes = True
-w.node_tree.nodes['Background'].inputs[1].default_value = 2.6
+# SHOOT AT THE ANGLE WHERE PHOTOGRAMMETRY HOLDS UP. Google's mesh is aircraft
+# capture: it has almost no data on VERTICAL faces, so a low, near-horizontal
+# camera renders the walls as melted curtains (learned the hard way — a
+# street-level shot of this mesh is unusable). A HIGH oblique — ~55 deg above
+# the horizon, the angle Google Earth itself uses — looks down mostly onto
+# roofs and ground, which the mesh HAS, so it reads cleanly: roofs, the yard,
+# boundaries, neighbours, all real. This is a context/massing view, not a
+# sharp ground elevation; the vertical faces still need a ground photo.
 b = math.radians(front_deg)
-stand = 15.0
-eye = Vector((math.sin(b)*stand, math.cos(b)*stand, ground + 1.65))
-aim = Vector((0.0, 0.0, ground + 4.0))
+pitch = math.radians(55.0)
+dist = 42.0
+ctr = Vector((0.0, 0.0, ground + 3.0))
+w = bpy.data.worlds.new("w"); bpy.context.scene.world = w; w.use_nodes = True
+w.node_tree.nodes['Background'].inputs[1].default_value = 3.0
+eye = ctr + Vector((math.sin(b)*dist*math.cos(pitch),
+                    math.cos(b)*dist*math.cos(pitch),
+                    dist*math.sin(pitch)))
 bpy.ops.object.camera_add(location=eye)
-cam = bpy.context.active_object; cam.data.lens = 32
-cam.rotation_euler = (aim-eye).to_track_quat('-Z','Y').to_euler()
+cam = bpy.context.active_object; cam.data.lens = 40
+cam.rotation_euler = (ctr-eye).to_track_quat('-Z','Y').to_euler()
 bpy.context.scene.camera = cam
 sc = bpy.context.scene
-sc.render.engine='CYCLES'; sc.cycles.device='CPU'; sc.cycles.samples=16
-sc.render.resolution_x=1200; sc.render.resolution_y=850
+sc.render.engine='CYCLES'; sc.cycles.device='CPU'; sc.cycles.samples=18
+sc.render.resolution_x=1100; sc.render.resolution_y=1000
 sc.view_settings.view_transform='Standard'
 sc.render.filepath = out
 bpy.ops.render.render(write_still=True)
