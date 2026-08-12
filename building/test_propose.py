@@ -308,6 +308,24 @@ check("9h every stage run() emits is in the plan",
       == set(progress.STAGE_PLANS["propose"]))
 
 
+
+# AN "OVER" EXTENSION IS A FLOOR OF THE HOUSE — it must take the measured
+# floor-to-floor, not the 2.4m single-storey-outrigger ceiling. It carries
+# storeys=1 (one new floor at level 1), so the old `storeys > 1` test missed
+# it: built at 2.4m against a 3.016m house it under-counted wall area and
+# brick by ~20%. A single-storey REAR extension still keeps the low ceiling.
+_over, _ = P.place_extension(6.0, 8.0,
+                             {"type": "over", "storeys": 1, "side": "east"},
+                             {"east": 12, "west": 12, "north": 12, "south": 12},
+                             storey_h=3.016)
+check("7m an over-extension is built at the measured storey height",
+      abs(_over[0].height - 3.016) < 1e-6, str(_over[0].height))
+_grnd, _ = P.place_extension(6.0, 8.0, {"type": "rear", "depth_m": 3.0},
+                             {"east": 12, "west": 12, "north": 12, "south": 12},
+                             storey_h=3.016)
+check("7n a single-storey rear extension keeps its own low ceiling",
+      _grnd[0].height != 3.016, str(_grnd[0].height))
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

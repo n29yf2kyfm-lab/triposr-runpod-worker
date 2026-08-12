@@ -593,11 +593,16 @@ def place_extension(width, depth, brief, clearances,
     if ext_storeys < 1 or ext_storeys > 3:
         raise ProposeError(
             f"{ext_storeys} storeys is not an extension this designs (1 to 3)")
-    if ext_storeys > 1:
-        # THE HOUSE'S OWN storey height, not the assumed one. The house is
-        # built at the measured floor-to-floor (3.016m at Basons); an
-        # extension defaulted to the assumed 2.75m sat 0.27m short on every
-        # level, and the mismatch rendered as an open seam between storeys.
+    # A FLOOR OF THE HOUSE TAKES THE HOUSE'S FLOOR-TO-FLOOR. Two cases need
+    # the measured storey height, not the low 2.4m single-storey-outrigger
+    # ceiling: a multi-storey extension (obviously), AND an "over" extension,
+    # which is ONE new floor at level 1 over an existing block — a storey of
+    # the house, carried at storeys=1, so the `> 1` test missed it. Built at
+    # 2.4m it sat 0.6m short of the measured 3.016m, which under-counted the
+    # wall area and brick by ~20% and left an open seam under the eaves.
+    # A ground-level single-storey rear/side extension keeps the lower
+    # ceiling — that one genuinely is a lower outrigger.
+    if ext_storeys > 1 or kind == "over":
         ext_h = float(brief.get("ceiling_height_m") or storey_h)
 
     rooms, fit = [], {"type": kind, "requested": dict(brief),
