@@ -1063,6 +1063,40 @@ Do NOT switch the production generator before step 1 clears; the owner shelved
 TRELLIS.2 on quality (melted panels, absent shut lines) and a part-native model has
 to beat that bar too, not just the structure bar.
 
+## Hunyuan3D-2 TESTED + the HYBRID route (2026-08-12, same day as PartCrafter)
+
+Same input photo through Hunyuan3D-2 on a RunPod A40, ~$0.10 total across three
+attempts. The two generators split the problem EXACTLY between them, measured:
+
+  * **Hunyuan3D-2 surfacing is the best of any generator tested** — clean panels,
+    formed mirrors, bumper intakes, readable wheel spokes. Still not premium (no
+    shut lines, two roof spikes, lamp recesses without internals) but clearly
+    above TRELLIS and far above PartCrafter's melt.
+  * **Hunyuan3D-2 structure is ONE fused component — 100.0% of verts** (owner-rule
+    auto-scrap on its own: opaque glazing, painted tyres). Prediction confirmed.
+  * PartCrafter is the mirror image: parts separate, surfacing melt.
+
+**The hybrid (`pipeline/trellis/hybrid_transfer.py`) takes both runs from the SAME
+image and transfers PartCrafter's part labels onto Hunyuan's mesh per-face.**
+Alignment needs no ICP — both normalize to the same pose (mean NN distance 0.020;
+try length/width flips, keep the best). k-NN weighted vote + physical priors +
+island absorption; canopy split roof/glass by the shared ROOF_NORMAL_UP. Result on
+the test car: glass 10.5% of faces (real-car band 4–12%), glass_probe **clear
+(proven)**, red control keeps glazing/tyres/lamps dark. Staged at
+car-meshes/staging/hybrid/. Deploy traps from run 1+2, both cost ~$0.02 and
+self-diagnosed via the heartbeat design: Hunyuan's requirements.txt BREAKS the
+image's torch (reinstall the cu124 pin afterwards and assert `import torch`
+works); pymeshlab's postprocess needs libOpenGL.so.0 (libopengl0) or
+FloaterRemover dies — export the RAW mesh before postprocess so the crash costs
+nothing.
+
+**v1 limit, honest:** label boundaries are only as good as PartCrafter's parts.
+The windscreen boundary is ragged and one dashboard-junk blob lands on the front
+wing. More smoothing does not fix this — the fix is a better segmentation source
+(2D segmentation of multi-view renders projected onto the mesh). Also add a lamp
+note: `partcrafter_materials.py` now has a lamp class (nose/tail, offset, lamp
+band -> dark gloss Lamp_Lens), which transfers through the hybrid too.
+
 ## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
 
 Tested end to end on a 2011 Yaris XP90 from two Toyota press photos. The machine WORKS —
