@@ -1128,6 +1128,67 @@ mesh already carries faint real door creases; synthetic lines without
 semantics risk drawing wrong ones — that fix belongs to Hi3DGen / car
 fine-tuning, not geometry surgery.
 
+## P3-SAM (Hunyuan3D-Part) deployment: eight runs of traps, all recorded (2026-08-12)
+
+Native 3D part segmentation, the intended replacement for the PartCrafter->Hunyuan
+label transfer (it segments the Hunyuan mesh DIRECTLY, so there is no cross-mesh
+alignment step and no ragged transferred boundary). Repo:
+github.com/Tencent-Hunyuan/Hunyuan3D-Part. Weights auto-download from HF
+(`tencent/Hunyuan3D-Part`, file `p3sam/p3sam.safetensors`) when ckpt_path is None.
+
+**THE DEMO SCRIPT SAVES NOTHING. This is the big one.** `P3-SAM/demo/auto_mask.py`
+computes `(aabb, face_ids, mesh)` and RETURNS them, and the block that would write
+them is COMMENTED OUT under "You can save the returned result by the following
+code". `--save_mid_res 1` only dumps intermediate debug visualisations. A run can
+exit RC=0, log every stage with timings, and leave an empty output directory.
+FIX: call the API directly (`from auto_mask import AutoMask; am.predict_aabb(...)`)
+and save `face_ids.npy` + the RETURNED MESH yourself. Saving their mesh matters:
+`clean_mesh=1` re-meshes the input, so face ids need not match the mesh you sent —
+exporting the returned mesh makes indices align by construction rather than by a
+nearest-centroid approximation.
+
+**Environment, verified working (do not re-derive):**
+  * image `runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04` — its torch is
+    already what P3-SAM is tested on. Do NOT reinstall torch.
+  * `pip install spconv-cu121 torch-scatter(-f pyg wheel index) huggingface_hub timm
+    viser fpsample trimesh numba addict einops scikit-learn omegaconf pymeshlab
+    safetensors scikit-image tqdm gradio`, then Sonata `python setup.py install`.
+  * flash-attn from the prebuilt release wheel, never source (a source build costs
+    30+ minutes); Sonata runs without it via enable_flash=False.
+  * Deps install in ~90 seconds on a warm host. Whole cycle boot->deps->infer is
+    about 3 minutes.
+
+**Two undocumented dependency facts, found by reading code not READMEs:**
+  * the script is at `P3-SAM/demo/auto_mask.py`, NOT `P3-SAM/auto_mask.py` as the
+    README's command implies — the first run died on the README's own path.
+  * `model.py` reaches sideways into the XPart half of the repo
+    (`sys.path.append(.../XPart/partgen)`), which needs `omegaconf` and friends that
+    the P3-SAM instructions never mention. Scan the whole import graph locally
+    (regex every `import` across the files it touches, try importing each) rather
+    than discovering them one pod at a time.
+  * `auto_mask.py` does `sys.path.append('..')` before `import model`. Any import
+    preflight MUST replicate that or it fails on a healthy install (mine did).
+
+**OOM: the defaults do not fit a real generated car.** A 626k-face mesh at the
+default `--prompt_bs 32 --point_num 100000` exhausted a **44GB** A40 (tried to
+allocate 3.05GiB with 44.33GiB in use). Working settings: `--prompt_bs 8
+--point_num 50000` plus `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True`.
+prompt_bs is the direct lever on the transformer's peak tensor.
+
+**TWO OF THE EIGHT FAILURES WERE MY OWN TOOLING, and both were silent:**
+  * `sed 's/ps_boot/ps2_boot/g'` also rewrote the substring inside the filename
+    `ps_bootstrap2.sh` -> `ps2_bootstrap2.sh`, a URL that 400s. The pod's start
+    command is `curl -fsSL ... && bash`, so curl failed, `&&` short-circuited, and
+    the bootstrap NEVER RAN — no heartbeat, no logs, nothing to diagnose. I
+    misdiagnosed it as slow image pulls for two runs. **Never build a URL with a
+    global sed; edit the JSON with python, and PREFLIGHT the bootstrap URL for 200
+    before renting a GPU.** That preflight is now standard.
+  * my import preflight ran `python3 -c "import model"` without the `sys.path`
+    append the real script does, so it aborted a healthy run.
+A safety check that is itself wrong costs exactly as much as no safety check.
+Assert on ARTEFACTS too: the bootstrap now fails with `FAIL_NO_FACE_IDS` if the
+output file is absent, so a silent no-output run can never read as success.
+
 ## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
 
 Tested end to end on a 2011 Yaris XP90 from two Toyota press photos. The machine WORKS —
