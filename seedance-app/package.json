@@ -1,0 +1,9 @@
+{
+  "name": "seedance-studio",
+  "version": "1.0.0",
+  "description": "Seedance-2 style video generator with pluggable providers (Seedance 2.0 API + self-hosted).",
+  "type": "module",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "express": "^4.19.2" }
+}
