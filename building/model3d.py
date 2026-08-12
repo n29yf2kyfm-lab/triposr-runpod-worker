@@ -720,9 +720,30 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
     # to 2.4m and the sky above them. First render of one showed straight
     # down into it. Flat is right for the overwhelming majority of
     # single-storey rear extensions in this country.
+    def _covered_above(r, level):
+        """Is another room built directly on top of this block?"""
+        for o in rooms:
+            if o is r:
+                continue
+            top = storeys if o.storeys is None else o.base_level + o.storeys
+            if not (o.base_level <= level < top):
+                continue
+            ox = min(r.x + r.width, o.x + o.width) - max(r.x, o.x)
+            oy = min(r.y + r.depth, o.y + o.depth) - max(r.y, o.y)
+            if ox > 0.05 and oy > 0.05:
+                return True
+        return False
+
     caps = []
     for r in rooms:
         if r.storeys is None or r.base_level + r.storeys >= storeys:
+            continue
+        # A CAP IS FOR A BLOCK WITH SKY OVER IT, NOT A CEILING. Every
+        # ground-floor room of a two-storey house is "short of the top", so
+        # capping on that test alone tiled a flat roof over the lounge with
+        # a bedroom standing on it — a roof plane inside the building, in
+        # the take-off and in the IFC. Only cap what nothing is built on.
+        if _covered_above(r, r.base_level + r.storeys):
             continue
         cap_z = per_storey * (r.base_level + r.storeys - 1) + r.height
         caps.append({"x": [round(r.x, 3), round(r.x + r.width, 3)],
@@ -744,6 +765,22 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
         return sum(_levels(w) if o["level"] is None else 1
                    for w in walls for o in w.openings if o["kind"] == kind)
 
+    # A ROOM ALSO KNOWS WHICH STOREYS IT IS ON. Multiplying the room count
+    # and the floor area by `storeys` is right only for the original case —
+    # one plate repeated all the way up. Give build() a real first-floor plan
+    # (base_level=1) and it counted every room on every storey: a 178.5 m2
+    # four-bed came back as 357.0 m2, double, on the one number a builder
+    # prices from. Where every room is the old shape (storeys=None,
+    # base_level=0) this is arithmetically identical to what it replaced.
+    def _room_levels(r):
+        if r.storeys is None:
+            return max(0, storeys - r.base_level)
+        return max(0, min(r.base_level + r.storeys, storeys) - r.base_level)
+
+    room_levels = sum(_room_levels(r) for r in rooms)
+    wall_levels = sum(_levels(w) for w in walls)
+    single_plate = all(r.storeys is None and r.base_level == 0 for r in rooms)
+
     gross_wall = sum(w.length_m * w.height * _levels(w) for w in walls)
     cut = sum((o["width"] * o["height"])
               * (_levels(w) if o["level"] is None else 1)
@@ -763,10 +800,12 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
                      "z": [0.0, round(top, 3)]},
         "totals": {
             "storeys": storeys,
-            "rooms": len(rooms) * storeys,
-            "floor_area_m2": round(sum(r.area_m2 for r in rooms) * storeys, 2),
-            "walls": len(walls) * storeys,
-            "wall_length_m": round(sum(w.length_m for w in walls) * storeys, 2),
+            "rooms": room_levels,
+            "floor_area_m2": round(
+                sum(r.area_m2 * _room_levels(r) for r in rooms), 2),
+            "walls": wall_levels,
+            "wall_length_m": round(
+                sum(w.length_m * _levels(w) for w in walls), 2),
             "wall_area_net_m2": round(max(0.0, gross_wall - cut), 2),
             "doors": _count("door"),
             "windows": _count("window"),
@@ -791,7 +830,7 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
             "return is not in this model.",
         ],
     }
-    if storeys > 1:
+    if storeys > 1 and single_plate:
         result["warnings"].append(
             f"Only one floor plate was supplied, repeated for all {storeys} "
             f"storeys at {per_storey:.2f}m floor to floor. The upper floors "
@@ -1373,13 +1412,24 @@ def _glb_mesh(model):
     def emit(mat, quad):
         pos, nrm, idx = out.setdefault(mat, ([], [], []))
         a, b, c, d = [(p[0], p[2], -p[1]) for p in quad]
-        u = [b[i] - a[i] for i in range(3)]
-        v = [c[i] - a[i] for i in range(3)]
-        n = [u[1] * v[2] - u[2] * v[1],
-             u[2] * v[0] - u[0] * v[2],
-             u[0] * v[1] - u[1] * v[0]]
-        m = math.sqrt(sum(k * k for k in n)) or 1.0
-        n = [k / m for k in n]
+        # A ROOF END IS A TRIANGLE, WRITTEN AS A QUAD WITH TWO VERTICES ON
+        # THE APEX. Taking the normal from (a,b,c) alone gives the zero
+        # vector there, and a zero normal is unlit: every hip and gable end
+        # in every GLB this ever exported came out near-black. Try the other
+        # corner before giving up.
+        n = [0.0, 0.0, 0.0]
+        m = 0.0
+        for p, q, r in ((a, b, c), (a, c, d), (b, c, d)):
+            u = [q[i] - p[i] for i in range(3)]
+            v = [r[i] - p[i] for i in range(3)]
+            k = [u[1] * v[2] - u[2] * v[1],
+                 u[2] * v[0] - u[0] * v[2],
+                 u[0] * v[1] - u[1] * v[0]]
+            m = math.sqrt(sum(t * t for t in k))
+            if m > 1e-9:
+                n = k
+                break
+        n = [k / (m or 1.0) for k in n]
         base = len(pos) // 3
         for p in (a, b, c, d):
             pos.extend(p)
@@ -1391,9 +1441,30 @@ def _glb_mesh(model):
     x0, x1 = model["extent_m"]["x"]
     y0, y1 = model["extent_m"]["y"]
 
+    rooms = model.get("rooms") or []
+
+    def _room_on_level(r, level):
+        base = r.get("base_level") or 0
+        n = r.get("storeys")
+        top = storeys if n is None else base + int(n)
+        return base <= level < top
+
     for level in range(storeys):
         z = level * per
-        emit("slab", [(x0, y0, z), (x1, y0, z), (x1, y1, z), (x0, y1, z)])
+        # THE FLOOR IS THE ROOMS, NOT THE BOUNDING BOX. Emitting one slab
+        # across extent_m gave every L-shaped plan a floor plate hanging in
+        # mid-air past the walls — over the garage, out beyond the return —
+        # which reads as a modelling error the moment anyone orbits it.
+        above = [r for r in rooms if _room_on_level(r, level + 1)]
+        floors = [r for r in rooms if _room_on_level(r, level)]
+        if floors:
+            for r in floors:
+                fx0, fy0 = r["x"], r["y"]
+                fx1, fy1 = fx0 + r["width_m"], fy0 + r["depth_m"]
+                emit("slab", [(fx0, fy0, z), (fx1, fy0, z),
+                              (fx1, fy1, z), (fx0, fy1, z)])
+        else:
+            emit("slab", [(x0, y0, z), (x1, y0, z), (x1, y1, z), (x0, y1, z)])
         for w in model["walls"]:
             if not _wall_on_level(w, level):
                 continue
@@ -1412,12 +1483,32 @@ def _glb_mesh(model):
             mat = "brick" if faces_out else "plaster"
             ops = sorted(_openings_at(w, level), key=lambda o: o["along"])
 
+            # THE FLOOR ZONE IS BUILT, NOT AIR. A wall is CEILING height
+            # (2.4m); the storey is floor to floor (2.7m). Stopping the
+            # brickwork at the ceiling left a 300mm dark slot running right
+            # round the building at first-floor level in every render — the
+            # joist zone, drawn as a hole. Carry the face up to the slab
+            # above wherever a storey actually continues over this wall.
+            band = 0.0
+            if above and per > h:
+                mx, my = (ax + bx) / 2.0, (ay + by) / 2.0
+                for r in above:
+                    if (r["x"] - 0.35 <= mx <= r["x"] + r["width_m"] + 0.35
+                            and r["y"] - 0.35 <= my
+                            <= r["y"] + r["depth_m"] + 0.35):
+                        band = per - h
+                        break
+
             out_sgn = w.get("outward", 1)
             for sgn, face_mat in ((out_sgn, mat), (-out_sgn, "plaster")):
                 px, py = ax + nx * sgn, ay + ny * sgn
 
                 def P(s, zz):
                     return (px + ux * s, py + uy * s, z + zz)
+
+                if band > 0:
+                    emit(face_mat, [P(0, h), P(L, h), P(L, h + band),
+                                    P(0, h + band)])
 
                 if not ops:
                     emit(face_mat, [P(0, 0), P(L, 0), P(L, h), P(0, h)])
@@ -1452,9 +1543,10 @@ def _glb_mesh(model):
                      [(p0[0], p0[1], z + zb), (p1[0], p1[1], z + zb),
                       (p1[0], p1[1], z + zt), (p0[0], p0[1], z + zt)])
 
-            # wall head
-            emit(face_mat, [(ax + nx, ay + ny, z + h), (bx + nx, by + ny, z + h),
-                            (bx - nx, by - ny, z + h), (ax - nx, ay - ny, z + h)])
+            # wall head — on top of the floor-zone band where there is one
+            hz = z + h + band
+            emit(mat, [(ax + nx, ay + ny, hz), (bx + nx, by + ny, hz),
+                       (bx - nx, by - ny, hz), (ax - nx, ay - ny, hz)])
 
     for cap in model.get("caps") or []:
         cx, cy, cz = cap["x"], cap["y"], cap["z_m"]

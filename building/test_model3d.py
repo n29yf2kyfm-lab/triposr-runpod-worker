@@ -1133,6 +1133,128 @@ check("30b including the front wall — the one the void showed through",
 check("30c and the shared edge is still ONE wall, not two",
       len(_ow) == 7, f"{len(_ow)} walls")
 
+
+
+# --- 31. a real two-floor plan, where each room states its own level -----
+# Every test above hands build() ONE floor plate and lets `storeys` repeat
+# it. The moment a genuine first-floor plan goes in — rooms carrying
+# base_level=1 — four separate things went wrong at once, and all four are
+# invisible on the single-plate path that the rest of this file exercises.
+_g = [M.Room("Living", 0.0, 0.0, 5.0, 4.7, kind="room", storeys=1),
+      M.Room("Hall", 5.0, 0.0, 2.3, 4.7, kind="circulation", storeys=1),
+      M.Room("Garage", 7.3, 0.0, 3.2, 5.5, kind="garage", storeys=1),
+      M.Room("Kitchen", 0.0, 4.7, 5.0, 3.8, kind="room", storeys=1),
+      M.Room("WC", 5.0, 4.7, 2.3, 1.8, kind="wet", storeys=1),
+      M.Room("Utility", 5.0, 6.5, 2.3, 2.0, kind="wet", storeys=1),
+      M.Room("Study", 7.3, 5.5, 3.2, 3.0, kind="room", storeys=1)]
+_f = [M.Room("Master", 0.0, 0.0, 4.2, 4.6, kind="room",
+             storeys=1, base_level=1),
+      M.Room("Ensuite", 4.2, 0.0, 2.2, 2.2, kind="wet",
+             storeys=1, base_level=1),
+      M.Room("Bath", 4.2, 2.2, 2.2, 2.4, kind="wet",
+             storeys=1, base_level=1),
+      M.Room("Bed 2", 6.4, 0.0, 4.1, 4.6, kind="room",
+             storeys=1, base_level=1),
+      M.Room("Bed 3", 0.0, 4.6, 3.6, 3.9, kind="room",
+             storeys=1, base_level=1),
+      M.Room("Landing", 3.6, 4.6, 2.4, 3.9, kind="circulation",
+             storeys=1, base_level=1),
+      M.Room("Bed 4", 6.0, 4.6, 4.5, 3.9, kind="room",
+             storeys=1, base_level=1)]
+_two = M.build(_g + _f, storeys=2, storey_height=2.70,
+               roof={"pitch_deg": 35.0, "kind": "gabled",
+                     "overhang": 0.35, "max_span_m": 12.0})
+_gnd = sum(r.area_m2 for r in _g)
+_fst = sum(r.area_m2 for r in _f)
+
+# THE HEADLINE NUMBER WAS DOUBLE. rooms and floor_area were multiplied by
+# `storeys` regardless of what level each room said it was on, so a plan
+# with both floors drawn counted both floors twice: 178.5 m2 came back as
+# 357.0. That is the figure a builder prices from.
+check("31a floor area counts each room on its OWN levels, not all of them",
+      abs(_two["totals"]["floor_area_m2"] - (_gnd + _fst)) < 0.05,
+      f"{_two['totals']['floor_area_m2']} vs {_gnd + _fst:.2f}")
+check("31b and the room count is not multiplied up either",
+      _two["totals"]["rooms"] == len(_g) + len(_f),
+      str(_two["totals"]["rooms"]))
+check("31c nor the wall length",
+      _two["totals"]["wall_length_m"]
+      < sum(w.length_m for w in M.walls_from_rooms(_g + _f)) * 1.6,
+      str(_two["totals"]["wall_length_m"]))
+
+# "Only one floor plate was supplied" is FALSE when two were.
+check("31d the repeated-plate warning is not raised on a real 2-floor plan",
+      not any("Only one floor plate" in w for w in _two["warnings"]),
+      str(_two["warnings"]))
+# The old shape: rooms that say nothing about levels, repeated all the way
+# up. That path must come back byte-for-byte what it always did.
+_plate = [M.Room(r.name, r.x, r.y, r.width, r.depth, r.height, kind=r.kind)
+          for r in _g]
+_one = M.build(_plate, storeys=2, storey_height=2.70)
+check("31e but it IS still raised when one plate really was repeated",
+      any("Only one floor plate" in w for w in _one["warnings"]))
+check("31f and the old single-plate arithmetic is unchanged",
+      abs(_one["totals"]["floor_area_m2"] - _gnd * 2) < 0.05,
+      f"{_one['totals']['floor_area_m2']} vs {_gnd * 2:.2f}")
+check("31g a room that says storeys=1 is counted once, not once per storey",
+      abs(M.build(_g, storeys=2, storey_height=2.70)["totals"]
+          ["floor_area_m2"] - _gnd) < 0.05)
+
+# A CAP IS A ROOF, AND A ROOF GOES WHERE THE SKY IS. Every ground-floor
+# room of a two-storey house is "short of the top", so capping on that test
+# alone tiled a flat roof over the lounge with a bedroom standing on it —
+# in the model, in the IFC and in the roof take-off.
+check("31i no flat roof is capped over a room with a bedroom on it",
+      _two["caps"] == [], str(_two["caps"]))
+_ext = M.build([M.Room("house", 0, 0, 6, 8, 2.6, kind="existing"),
+                M.Room("rear", 0, 8, 6, 3.5, 2.4, kind="extension",
+                       storeys=1)],
+               storeys=2, storey_height=2.70)
+check("31j but a single-storey block with sky over it still gets its cap",
+      len(_ext["caps"]) == 1, str(_ext["caps"]))
+
+# --- 32. the GLB is what the customer actually looks at ------------------
+_mesh = M._glb_mesh(_two)
+
+# A ROOF END IS A TRIANGLE WRITTEN AS A QUAD, two of whose corners sit on
+# the apex. Taking the normal from the first three vertices gives the zero
+# vector there, and a zero normal is unlit: every gable and every hip end
+# came out near-black in every viewer.
+_tile_n = _mesh["tile"][1]
+_zero = sum(1 for i in range(0, len(_tile_n), 3)
+            if abs(_tile_n[i]) + abs(_tile_n[i + 1]) + abs(_tile_n[i + 2])
+            < 1e-6)
+check("32a no roof face is exported with a zero normal", _zero == 0,
+      f"{_zero} unlit vertices")
+
+# THE FLOOR IS THE ROOMS, NOT THE BOUNDING BOX. One slab across extent_m
+# hung a floor plate in mid-air past the walls of any non-rectangular plan.
+_L = M.build([M.Room("front", 0, 0, 6, 5, kind="room", storeys=1),
+              M.Room("wing", 0, 5, 3, 4, kind="room", storeys=1)],
+             storeys=1)
+_slab = M._glb_mesh(_L)["slab"][0]
+_out = [(_slab[i], _slab[i + 2]) for i in range(0, len(_slab), 3)
+        if _slab[i] > 3.05 and -_slab[i + 2] > 5.05]
+check("32b no floor slab is emitted over the empty half of an L-plan",
+      not _out, f"{len(_out)} points out in the void")
+
+# THE FLOOR ZONE IS BUILT, NOT AIR. Walls are CEILING height (2.4m) and the
+# storey is floor-to-floor (2.7m); stopping the brickwork at the ceiling
+# left a 300mm slot running right round the building at first-floor level.
+# Every emit() writes exactly one quad, so the mesh reads back four
+# vertices at a time. The band that closes the slot is a quad running from
+# the 2.4m ceiling to the 2.7m slab; before the fix there was no such face
+# on any wall, only a hole.
+_brick = _mesh["brick"][0]
+_bands = 0
+for _i in range(0, len(_brick), 12):
+    _q = sorted({round(_brick[_i + 1 + 3 * _k], 3) for _k in range(4)})
+    if _q == [2.4, 2.7]:
+        _bands += 1
+check("32c external walls reach the slab above, leaving no daylight slot",
+      _bands >= 4, f"{_bands} floor-zone bands")
+
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")
