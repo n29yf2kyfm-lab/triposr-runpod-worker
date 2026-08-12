@@ -58,6 +58,11 @@ import scipy.sparse as sp
 from scipy.spatial import cKDTree
 from trimesh.visual.material import PBRMaterial
 
+try:
+    import maxflow          # PyMaxflow — crease-snapping graph cut
+except ImportError:
+    maxflow = None
+
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
 from partcrafter_materials import classify, ROOF_NORMAL_UP  # noqa: E402
 
@@ -109,6 +114,171 @@ def labeled_points(parts_glb, cap=8000, seed=0):
         pts.append(p)
         labs += [LABS.index(kind)] * len(p)
     return np.concatenate(pts), np.array(labs)
+
+
+
+def _patches(flab, adj, n, lab):
+    mask = flab == lab
+    same = mask[adj[:, 0]] & mask[adj[:, 1]]
+    g = sp.csr_matrix((np.ones(same.sum()), (adj[same, 0], adj[same, 1])), shape=(n, n))
+    _, comp = sp.csgraph.connected_components(g + g.T, directed=False)
+    comp[~mask] = -1
+    return comp, Counter(comp[mask])
+
+
+def _crease_cut(m, adj, ang, zidx, seed, p_seed, p_other, decay_d=None, tau=0.06,
+                lam=4.0):
+    """Binary graph cut over zone faces: confident data term from seeds,
+    smoothness cheap across creases, optional distance decay. Segment->label
+    mapping is resolved EMPIRICALLY against the seeds — PyMaxflow's segment
+    convention cost one inverted-run already; never assume it."""
+    zmap = {f: i for i, f in enumerate(zidx)}
+    p = np.where(seed, p_seed, p_other)
+    if decay_d is not None:
+        p = np.maximum(p * np.exp(-(decay_d / tau) ** 2), 0.02)
+    p = np.clip(p, 1e-4, 1 - 1e-4)
+    g = maxflow.Graph[float]()
+    nodes = g.add_nodes(len(zidx))
+    for i in range(len(zidx)):
+        g.add_tedge(nodes[i], -np.log(1 - p[i]), -np.log(p[i]))
+    for k, (a, b) in enumerate(adj):
+        if a in zmap and b in zmap:
+            w = lam * np.exp(-(ang[k] / 0.30) ** 2)
+            g.add_edge(nodes[zmap[a]], nodes[zmap[b]], w, w)
+    g.maxflow()
+    seg = np.array([g.get_segment(nodes[i]) for i in range(len(zidx))])
+    pos = 1 if np.mean((seg == 1) == seed) >= np.mean((seg == 0) == seed) else 0
+    return seg == pos
+
+
+def refine(m, flab, hy, pc_pts, pc_lab_names):
+    """Fix the transfer's known failure modes, each with a physical argument:
+    ragged glass boundaries (snap to creases), interior on the outside
+    (visibility ray test), lamp/wheel bleed onto bumper and arch (distance +
+    cylinder tests, one-sided lamps mirrored), body islands inside windows.
+    All measured on the 2026-08-12 test car; see CLAUDE.md."""
+    B, C, W, I, L = 0, 1, 2, 3, 4
+    fc = hy[m.faces].mean(axis=1)
+    adj = m.face_adjacency
+    ang = m.face_adjacency_angles
+    n = len(m.faces)
+    n_up = np.abs(m.face_normals[:, 1])
+
+    if maxflow is not None:
+        # GLASS: cut in the greenhouse zone, data decayed by distance to the
+        # PC canopy cloud so stray votes far from the greenhouse cannot win
+        can = pc_pts[pc_lab_names == "canopy"]
+        d_can = cKDTree(can).query(fc, workers=4)[0] if len(can) else np.full(n, 9.)
+        zone = (fc[:, 2] > 0.42) & (fc[:, 0] > 0.05) & (fc[:, 0] < 0.95) \
+               & np.isin(flab, [B, C])
+        zidx = np.where(zone)[0]
+        if len(zidx):
+            seed = flab[zidx] == C
+            p_roof = np.where(seed, 0.88, 0.10)
+            is_g = _crease_cut(m, adj, ang, zidx, seed, 0.88, 0.10,
+                               decay_d=d_can[zidx], tau=0.06)
+            # roof skin can never be glass — but "roof" is up-facing AND at
+            # the top of the car; a raked windscreen centre is up-facing too
+            # and must stay eligible (head-on render caught it painted body)
+            is_g &= ~((n_up[zidx] > 0.85) & (fc[zidx, 2] > 0.90))
+            flab[zidx] = np.where(is_g, C, B)
+
+        # LAMPS: same recipe in the nose/tail bands
+        lam = pc_pts[pc_lab_names == "lamp"]
+        if len(lam):
+            d_l = cKDTree(lam).query(fc, workers=4)[0]
+            zone = ((fc[:, 0] > 0.80) | (fc[:, 0] < 0.20)) \
+                   & (fc[:, 2] > 0.25) & (fc[:, 2] < 0.80) & np.isin(flab, [B, L])
+            zidx = np.where(zone)[0]
+            if len(zidx):
+                seed = flab[zidx] == L
+                is_l = _crease_cut(m, adj, ang, zidx, seed, 0.85, 0.08,
+                                   decay_d=d_l[zidx], tau=0.04)
+                flab[zidx] = np.where(is_l, L, B)
+
+    # INTERIOR must be invisible from outside (Hunyuan shells usually have
+    # no interior at all — every "interior" patch is exterior bleed)
+    comp, cnt = _patches(flab, adj, n, I)
+    rng = np.random.RandomState(0)
+    for cid, c in cnt.items():
+        faces = np.where(comp == cid)[0]
+        pick = faces if len(faces) <= 40 else rng.choice(faces, 40, replace=False)
+        origins = m.triangles_center[pick] + m.face_normals[pick] * 1e-3
+        if 1 - m.ray.intersects_any(origins, m.face_normals[pick]).mean() > 0.5:
+            flab[faces] = B
+
+    # WHEELS live inside one of four cylinders defined by the 4 big patches
+    comp, cnt = _patches(flab, adj, n, W)
+    big = [cid for cid, c in sorted(cnt.items(), key=lambda kv: -kv[1])[:4]]
+    keep = np.zeros(n, bool)
+    for cid in big:
+        f = np.where(comp == cid)[0]
+        c = fc[f].mean(axis=0)
+        r = np.linalg.norm(fc[f][:, [0, 2]] - c[[0, 2]], axis=1).max()
+        d = np.linalg.norm(fc[:, [0, 2]] - c[[0, 2]], axis=1)
+        keep |= (d < r * 1.02) & (np.abs(fc[:, 1] - c[1]) < 0.17)
+    flab[(flab == W) & ~keep] = B
+
+    # arch boundary: the arch lip is a strong crease — a per-cylinder cut
+    # snaps the tyre/body boundary onto it instead of leaving ragged spill
+    if maxflow is not None:
+        for cid in big:
+            f = np.where(comp == cid)[0]
+            c = fc[f].mean(axis=0)
+            r = np.linalg.norm(fc[f][:, [0, 2]] - c[[0, 2]], axis=1).max()
+            d = np.linalg.norm(fc[:, [0, 2]] - c[[0, 2]], axis=1)
+            zone = (d < r * 1.35) & (np.abs(fc[:, 1] - c[1]) < 0.20) \
+                   & np.isin(flab, [B, W])
+            zidx = np.where(zone)[0]
+            if len(zidx) < 50:
+                continue
+            seed = flab[zidx] == W
+            is_w = _crease_cut(m, adj, ang, zidx, seed, 0.85, 0.10, lam=4.0)
+            flab[zidx] = np.where(is_w, W, B)
+
+    # LAMPS: trim baggy patches to their corner, mirror one-sided lamps —
+    # a single grey lamp is the per-side defect class the audit hunts for
+    tree = cKDTree(fc)
+    comp, cnt = _patches(flab, adj, n, L)
+    for cid, c in cnt.items():
+        f = np.where(comp == cid)[0]
+        wlo, whi = fc[f, 1].min(), fc[f, 1].max()
+        if whi - wlo > 0.20:
+            corner = wlo if (0.5 - wlo) > (whi - 0.5) else whi
+            flab[f[np.abs(fc[f, 1] - corner) > 0.16]] = B
+            f = f[np.abs(fc[f, 1] - corner) <= 0.16]
+        mir = fc[f].copy()
+        mir[:, 1] = 1 - mir[:, 1]
+        d, nnf = tree.query(mir, workers=4)
+        tgt = nnf[d < 0.02]
+        if len(tgt) and (flab[tgt] == L).mean() < 0.5:
+            flab[tgt] = L
+
+    # BODY islands fully enclosed by glass are absurd — absorb whatever size
+    comp, cnt = _patches(flab, adj, n, B)
+    for cid, c in cnt.items():
+        faces = np.where(comp == cid)[0]
+        fs = set(faces)
+        border = {flab[b] if a in fs else flab[a]
+                  for a, b in adj if (a in fs) != (b in fs)}
+        if border == {C}:
+            flab[faces] = C
+    return flab
+
+
+def clamp_spikes(m, hy, thresh=1.015):
+    """Flatten antenna-spike artefacts: geometry above the real roofline
+    (measured: roof crown tops at ~1.012, spikes at 1.03-1.06) is clamped
+    down. No topology change, so face labels stay valid."""
+    above = hy[:, 2] > thresh
+    if not above.any():
+        return m
+    lo = np.percentile(m.vertices, 2, axis=0)
+    hi = np.percentile(m.vertices, 98, axis=0)
+    v = m.vertices.copy()
+    v[above, 1] = lo[1] + thresh * (hi[1] - lo[1])
+    m.vertices = v
+    return m
 
 
 def transfer(parts_glb, mesh_glb, out_glb, report=None):
@@ -190,11 +360,17 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
             if len(border) == 1:
                 flab[faces] = border.pop()
 
+    # refinement passes (graph cut, visibility, cylinders, mirroring, islands)
+    flab = refine(m, flab, hy, pc_pts, np.array(LABS)[pc_lab])
+    m = clamp_spikes(m, hy)
+
     # canopy -> roof/glass by normal (up axis is glTF Y on the raw mesh)
     n_up = np.abs(m.face_normals[:, 1])
     out_lab = np.array(["body", "glass", "wheel", "interior", "lamp"])[flab]
-    out_lab[(flab == C) & (n_up > ROOF_NORMAL_UP)] = "body"
-    out_lab[(flab == C) & (n_up <= ROOF_NORMAL_UP)] = "glass"
+    fcu = hy[m.faces].mean(axis=1)[:, 2]
+    roofish = (n_up > ROOF_NORMAL_UP) & (fcu > 0.90)
+    out_lab[(flab == C) & roofish] = "body"
+    out_lab[(flab == C) & ~roofish] = "glass"
 
     share = {k: round(100 * float(np.mean(out_lab == k)), 1)
              for k in ("body", "glass", "wheel", "interior", "lamp")}
