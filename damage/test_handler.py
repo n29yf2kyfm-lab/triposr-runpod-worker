@@ -589,6 +589,92 @@ else:
 _os.environ.pop("DAMAGE_BACKEND", None)
 
 
+# ---- 17. local CPU detector backend -----------------------------------------
+# The self-hosted path. Everything tested here is pure arithmetic on detector
+# output — no weights, no onnxruntime, no network — because that is exactly the
+# half that decides what lands on a customer's invoice.
+import detect as DET  # noqa: E402
+
+SIZE = (1000, 1000)
+
+# class mapping is generous about the spellings real datasets ship
+check("17a maps dataset spellings onto the taxonomy",
+      DET.DAMAGE_CLASS_MAP["glass shatter"] == "shattered_glass"
+      and DET.DAMAGE_CLASS_MAP["lamp_broken"] == "lamp_damage"
+      and DET.DAMAGE_CLASS_MAP["flat_tire"] == "tire_damage")
+
+# severity rises with box area, and never leaves 1..10
+small = DET.severity_from_box("dent", 0.005, 0.9)
+big = DET.severity_from_box("dent", 0.30, 0.9)
+check("17b bigger box -> higher severity", small < big, f"{small} < {big}")
+check("17c severity stays in band",
+      all(1 <= DET.severity_from_box("dent", a, 0.9) <= 10
+          for a in (0.0, 0.001, 0.05, 0.5, 1.0)))
+
+# type floors and ceilings hold: glass is never trivial, a scratch never severe
+check("17d shattered glass never scores trivial",
+      DET.severity_from_box("shattered_glass", 0.0001, 0.9) >= 7)
+check("17e a scratch never scores catastrophic",
+      DET.severity_from_box("scratch", 1.0, 0.99) <= 6)
+
+# a low-confidence detection must not drive a severe headline
+check("17f low confidence lowers severity",
+      DET.severity_from_box("dent", 0.3, 0.4)
+      < DET.severity_from_box("dent", 0.3, 0.9))
+
+dets = [
+    {"label": "dent", "box": [100, 100, 300, 300], "score": 0.91},
+    {"label": "glass shatter", "box": [400, 100, 700, 400], "score": 0.88},
+    {"label": "scratch", "box": [10, 10, 40, 40], "score": 0.10},   # below floor
+    {"label": "unicorn", "box": [0, 0, 10, 10], "score": 0.99},     # unknown class
+]
+f17 = DET.detections_to_findings(dets, SIZE, panel_hint="hood")
+check("17g low-confidence and unknown classes are dropped", len(f17) == 2,
+      str(len(f17)))
+check("17h panel hint applied", all(f["panel"] == "hood" for f in f17))
+check("17i bbox preserved for 3D pinning",
+      f17[0]["bbox"] == [100.0, 100.0, 300.0, 300.0])
+
+# evidence must be concrete — normalize_findings DROPS evidence-less findings,
+# so a detector that cannot say what it saw must not become a charge
+check("17j every detection carries concrete evidence",
+      all(f["evidence"] and "detector found" in f["evidence"][0] for f in f17))
+survived = AN.normalize_findings(f17)
+check("17k findings survive normalisation", len(survived) == 2)
+check("17l normalised onto the taxonomy",
+      {s["damage_type"] for s in survived} == {"dent", "shattered_glass"})
+
+# the JSON envelope is the drop-in trick: analyze() parses it unchanged
+env = DET.detections_to_json([(dets, SIZE, "hood")])
+parsed = AN._extract_json(env)
+check("17m emits the same envelope a VLM returns",
+      "findings" in parsed and len(parsed["findings"]) == 2)
+
+# and the whole pipeline runs off it with no branching
+fn_det = lambda prompt, refs: env  # noqa: E731
+fd, _id, _md = AN.analyze(["x.jpg"], {"make": "Toyota"}, vision_fn=fn_det)
+roll17 = SEV.summarize(fd)
+check("17n detector output scores through the real pipeline",
+      len(fd) == 2 and 0 <= roll17["condition_score"] <= 100
+      and roll17["structural_concern"] is True)
+
+# box geometry -> original-image pixels
+scaled = DET.parse_detections(
+    [[[0, 0, 320, 320]], [0.9], [0]], (1280, 640), (640, 640), labels=["dent"])
+check("17o boxes rescale to source-image pixels",
+      scaled[0]["box"] == [0.0, 0.0, 640.0, 320.0], str(scaled[0]["box"]))
+check("17p class ids resolve to labels", scaled[0]["label"] == "dent")
+
+# missing model config must name the variable, not fail deep in onnxruntime
+try:
+    DET.detector_backend()("p", ["a.jpg"])
+    _nomodel = ""
+except Exception as e:
+    _nomodel = str(e)
+check("17q missing model names DAMAGE_DETECTOR_MODEL",
+      "DAMAGE_DETECTOR_MODEL" in _nomodel, _nomodel[:80])
+
+
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 for f in FAILED:

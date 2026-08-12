@@ -29,10 +29,12 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PIP_NO_CACHE_DIR=1
 
-# The whole dependency set: serverless glue + HTTP + the Anthropic client.
-# All pure-Python wheels — no compiler, no system packages, no CUDA.
+# The whole dependency set: serverless glue + HTTP + the Anthropic client, plus
+# onnxruntime/pillow for the self-hosted CPU detector. No compiler, no system
+# packages, no CUDA — onnxruntime here is the CPU build (tens of MB), not the
+# GPU one, so the image stays small enough to cold-start in seconds.
 RUN pip install --upgrade pip && \
-    pip install runpod requests anthropic
+    pip install runpod requests anthropic onnxruntime pillow
 
 # Default the deployed image to the FREE, no-GPU backend: a free hosted open
 # vision model (Gemma 4 31B) via OpenRouter. $0 per scan, no GPU, no weight
@@ -55,6 +57,6 @@ WORKDIR /app
 # imports and runs cleanly without torch/transformers ever installed.
 COPY paths.py delivery.py progress.py validation.py handler.py \
      taxonomy.py severity.py repair.py quality.py analyze.py fusion.py \
-     report.py compare.py /app/
+     report.py compare.py detect.py /app/
 
 CMD ["python", "-u", "/app/handler.py"]

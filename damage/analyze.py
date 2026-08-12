@@ -264,6 +264,13 @@ def get_backend():
       ~31B it is far more capable than the 7B local fallback below — that
       failure was a model-SIZE problem, not a self-hosting one. Needs
       OPENROUTER_API_KEY.
+    DAMAGE_BACKEND=detector (FASTEST, self-hosted, free) -> a local ONNX
+      detection model on CPU, ~0.1-0.4 s/image against 5-20 s for any hosted
+      VLM, with no rate cap and no per-scan fee because the weights are yours.
+      A detector measures the image instead of writing prose about it, so it
+      also returns a BOX — the thing that makes a 3D pin precise. Needs
+      DAMAGE_DETECTOR_MODEL; see detect.py for the licensing trap in the
+      off-the-shelf car-damage checkpoints.
     DAMAGE_BACKEND=qwen (default) -> a local Qwen2.5-VL via transformers. Fast
       and self-hosted, but UNRELIABLE at the actual assessment (see above) —
       treat it as a cheap fallback, not the product's judgement.
@@ -278,6 +285,9 @@ def get_backend():
         return _anthropic_backend()
     if backend in ("openrouter", "free", "gemma"):
         return _openrouter_backend()
+    if backend in ("detector", "onnx", "local"):
+        from detect import detector_backend
+        return detector_backend()
     if backend in ("qwen", "qwen2.5-vl", "qwenvl"):
         return _qwen_backend()
     raise RuntimeError(
