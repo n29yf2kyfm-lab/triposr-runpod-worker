@@ -924,6 +924,54 @@ underperforms — do NOT stop at the first plausible explanation. Run this:
 Only produce the full template when there is a real problem to investigate —
 don't fabricate an RCA when nothing is broken.
 
+## PartCrafter TESTED on a real car (2026-08-12): parts yes, glazing NO
+
+Ran PartCrafter end to end on a RunPod A5000 against a clean 3/4 render of
+golf_mv_polished. It WORKS and it is genuinely part-native -- but it does not
+solve the blocker that matters. Measured, with renders, not inferred.
+
+**Result (num_parts=10, rear 3/4 input, 172s inference):**
+  * 10 SEPARATE meshes + a combined object.glb. Contrast TRELLIS.2, where one
+    part is 99.3% of the car. Largest PartCrafter part = 67.9%, with 7 more
+    substantial parts. Part-native generation is real.
+  * WHEELS SEPARATE CLEANLY -> this alone solves the tyre defect: assign dark
+    rubber to the wheel meshes and the paint can never cover them.
+  * **GLAZING DOES NOT SEPARATE.** A per-part colour render shows the entire
+    greenhouse -- windscreen, side windows AND roof -- fused into the 67.9% body
+    shell, exactly like TRELLIS. Isolating the two parts my classifier hopefully
+    labelled "glass" (4.4% each) rendered the FRONT WHEELS.
+
+So PartCrafter fixes tyres, not glass. Glazing is ~80% of all audit failures and
+the owner's hard-fail rule, so on this evidence the part-native route does NOT
+by itself make a generated car shippable.
+
+**Do not run assign_materials on PartCrafter output as-is.** The stage joins and
+welds before splitting, which is correct for a fused TRELLIS mesh and DESTROYS
+PartCrafter's separation -- the parts touch where they meet, so welding fuses
+them back into one shell and the stage then (correctly) refuses. Classify
+PartCrafter's parts DIRECTLY from the glTF mesh list; skip the weld entirely.
+
+**A num_parts=16 front-3/4 run was attempted as the fair best case and never
+completed** -- see the deployment note below. That question is still open, but the
+10-part run is strong evidence the greenhouse is treated as body by this model.
+
+**RUNPOD POD DEPLOYMENT, two traps that cost ~$0.40 and 80 minutes:**
+  1. **A pod whose dockerStartCmd EXITS gets RESTARTED.** Ending the command with
+     `sleep 120` then exiting put the pod in a restart loop: re-clone, re-install,
+     re-download ~10GB of weights, forever, never finishing. The tell is
+     `runtime.uptimeInSeconds` resetting to a small number with GPU at 0%.
+     Keep the container alive (`sleep infinity`) and terminate it explicitly.
+  2. **Supabase signed upload URLs are ONE-TIME.** First PUT 200, every later PUT
+     400 -- verified. So a bootstrap can report exactly once, and a restart loop
+     burns that single shot on whichever attempt happens to finish first. Use a
+     service key on the pod (accepting the exposure) or mint a fresh URL per
+     attempt; do NOT design a heartbeat around a signed URL.
+
+Cost of the whole experiment including four failed bootstraps: ~$0.62. The
+fail-fast-and-upload-logs design earned that back -- each failure named its own
+cause (missing `src` on PYTHONPATH, settings/requirements.txt path, sudo absent,
+pyrender importing pyglet/X11 and needing xvfb-run).
+
 ## Generator research: the material-structure blocker, and the model that fixes it (2026-08-12)
 
 Owner asked to look at other models to improve the 3D machine. The finding that
