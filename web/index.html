@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TripoSR Studio — DESIGN.md Preview</title>
+<meta name="description" content="Visual catalog of the TripoSR Studio design system defined in DESIGN.md." />
+<style>
+/* Fonts are self-hosted so the page makes NO third-party request. It previously
+   pulled Inter and JetBrains Mono from fonts.googleapis.com while the README
+   promised "self-contained and offline" -- which was untrue, left the type
+   catalog rendering in fallback faces exactly when opened offline, and sent
+   every visitor's IP and referrer to Google. Both are variable fonts (one file
+   spans the whole weight range) and both are SIL Open Font License 1.1. */
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 600;font-display:swap;
+  src:url(fonts/Inter-var-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,
+    U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 500;font-display:swap;
+  src:url(fonts/JetBrainsMono-var-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,
+    U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* ============================================================
+   TripoSR Studio — DESIGN.md visual preview (static, offline)
+   Every value below is drawn from DESIGN.md.
+   ============================================================ */
+:root{
+  --bg-viewport:#0B0C0E; --bg-surface:#16181D; --bg-surface-raised:#1E2128;
+  --bg-inset:#101216; --border-hairline:#262A31; --border-strong:#3A404A;
+  --text-primary:#F4F5F7; --text-secondary:#9BA1AC; --text-muted:#818996;
+  --accent-violet:#7C5CFF; --accent-cyan:#22D3EE; --accent-ink:#0B0C0E;
+  --success:#34D399; --warning:#FBBF24; --danger:#F87171;
+  --gradient-signature:linear-gradient(135deg,#7C5CFF 0%,#22D3EE 100%);
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px; --s10:40px;
+  --r-input:10px; --r-card:14px; --r-drop:16px;
+  --sh1:0 1px 2px rgba(0,0,0,.4); --sh2:0 4px 16px rgba(0,0,0,.5); --sh3:0 12px 40px rgba(0,0,0,.6);
+  --mono:"JetBrains Mono","SF Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg-viewport); color:var(--text-primary);
+  font-family:Inter,-apple-system,system-ui,sans-serif; font-size:15px; line-height:24px;
+  -webkit-font-smoothing:antialiased}
+.mono{font-family:var(--mono); font-size:13px}
+a{color:var(--accent-cyan); text-decoration:none}
+a:hover{text-decoration:underline}
+
+.wrap{max-width:1200px; margin:0 auto; padding:var(--s10) var(--s6) 72px}
+@media (max-width:600px){.wrap{padding:var(--s8) var(--s4) var(--s10)}}
+
+/* header */
+.brand{display:flex; align-items:center; gap:var(--s3)}
+.logo{width:32px; height:32px; border-radius:9px; background:var(--gradient-signature);
+  box-shadow:0 0 24px rgba(124,92,255,.35); flex:none}
+.brand h1{font-size:20px; line-height:28px; font-weight:600; letter-spacing:-.01em; margin:0}
+.hero-title{font-size:40px; line-height:44px; font-weight:600; letter-spacing:-.02em; margin:var(--s6) 0 0}
+.hero-title .grad{background:var(--gradient-signature); -webkit-background-clip:text;
+  background-clip:text; -webkit-text-fill-color:transparent}
+@media (max-width:600px){.hero-title{font-size:32px; line-height:36px}}
+.tagline{margin:var(--s4) 0 0; max-width:680px; color:var(--text-secondary)}
+.tagline code{font-family:var(--mono); font-size:13px; color:var(--text-primary)}
+
+/* section shell */
+section{margin-top:56px}
+.sec-head{display:flex; align-items:baseline; gap:var(--s3); margin-bottom:var(--s5);
+  padding-bottom:var(--s3); border-bottom:1px solid var(--border-hairline)}
+.sec-head h2{font-size:28px; line-height:34px; font-weight:600; letter-spacing:-.01em; margin:0}
+.sec-head .n{font-family:var(--mono); font-size:13px; color:var(--accent-violet)}
+.sec-head .desc{margin-left:auto; color:var(--text-muted); font-size:13px}
+
+.card{background:var(--bg-surface); border:1px solid var(--border-hairline);
+  border-radius:var(--r-card); box-shadow:var(--sh1); padding:var(--s6)}
+.grid{display:grid; gap:var(--s4)}
+.cols-2{grid-template-columns:1fr 1fr}
+@media (max-width:900px){.cols-2{grid-template-columns:1fr}}
+
+/* --- color swatches --- */
+.swatches{display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:var(--s3)}
+.swatch{border:1px solid var(--border-hairline); border-radius:var(--r-input); overflow:hidden;
+  background:var(--bg-surface); cursor:copy; display:block; width:100%; padding:0;
+  text-align:left; font:inherit; color:inherit}
+.swatch:focus-visible{outline:none; box-shadow:0 0 0 2px var(--bg-viewport),
+  0 0 0 4px rgba(34,211,238,.6)}
+.swatch .chip{height:64px}
+.swatch .meta{padding:var(--s3)}
+.swatch .tok{font-family:var(--mono); font-size:12px; color:var(--text-primary)}
+.swatch .hex{font-family:var(--mono); font-size:12px; color:var(--text-secondary)}
+.swatch .role{font-size:12px; line-height:16px; color:var(--text-muted); margin-top:2px}
+.gradbar{height:72px; border-radius:var(--r-card); background:var(--gradient-signature);
+  display:flex; align-items:flex-end; padding:var(--s3)}
+.gradbar .lab{font-family:var(--mono); font-size:12px; color:var(--accent-ink)}
+
+/* --- typography --- */
+.type-row{display:flex; align-items:baseline; gap:var(--s5); padding:var(--s3) 0;
+  border-bottom:1px solid var(--border-hairline)}
+.type-row:last-child{border-bottom:none}
+.type-row .spec{font-family:var(--mono); font-size:12px; color:var(--text-muted);
+  min-width:150px; flex:none}
+.t-display{font-size:40px; line-height:44px; font-weight:600; letter-spacing:-.02em}
+.t-h1{font-size:28px; line-height:34px; font-weight:600; letter-spacing:-.01em}
+.t-h2{font-size:20px; line-height:28px; font-weight:600; letter-spacing:-.01em}
+.t-body{font-size:15px; line-height:24px; font-weight:400}
+.t-strong{font-size:15px; font-weight:500}
+.t-label{font-size:13px; line-height:16px; font-weight:500; letter-spacing:.01em}
+.t-caption{font-size:12px; line-height:16px; color:var(--text-secondary)}
+
+/* --- buttons --- */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:var(--s2);
+  height:44px; padding:0 20px; border-radius:var(--r-input); font-size:13px; font-weight:500;
+  letter-spacing:.01em; font-family:inherit; cursor:pointer; border:1px solid transparent;
+  transition:filter .15s ease, background .15s ease, transform .05s ease}
+.btn:active{transform:translateY(1px)}
+/* Two shadow layers, not outline-offset: `outline-offset` is inert next to
+   `outline:none`, so the DESIGN.md-specified 2px offset never rendered. The
+   first layer paints the gap in the page background, the second is the ring. */
+.btn:focus-visible{outline:none;
+  box-shadow:0 0 0 2px var(--bg-viewport), 0 0 0 4px rgba(34,211,238,.6)}
+.btn-primary{background:var(--gradient-signature); color:var(--accent-ink)}
+.btn-primary:hover{filter:brightness(1.06)}
+.btn-secondary{background:var(--bg-surface-raised); color:var(--text-primary);
+  border-color:var(--border-hairline)}
+.btn-secondary:hover{background:var(--border-hairline)}
+.btn-ghost{background:transparent; color:var(--text-secondary); height:40px}
+.btn-ghost:hover{color:var(--text-primary)}
+.btn-danger{background:transparent; color:var(--danger); height:40px;
+  border-color:rgba(248,113,113,.4)}
+.btn-danger:hover{background:rgba(248,113,113,.1)}
+.btn:disabled{opacity:.4; cursor:not-allowed; filter:none}
+.btn-focus{box-shadow:0 0 0 2px var(--bg-surface), 0 0 0 4px rgba(34,211,238,.6)}
+.btn-rail{display:flex; flex-wrap:wrap; gap:var(--s4); align-items:center}
+.tag{font-family:var(--mono); font-size:11px; color:var(--text-muted); margin-top:var(--s2)}
+
+/* --- form controls --- */
+label.lbl{display:block; font-size:13px; line-height:16px; font-weight:500; letter-spacing:.01em;
+  color:var(--text-secondary); margin:0 0 var(--s2)}
+.field{width:100%; height:44px; padding:0 14px; background:var(--bg-inset);
+  border:1px solid var(--border-hairline); border-radius:var(--r-input);
+  color:var(--text-primary); font-family:inherit; font-size:15px; outline:none;
+  transition:border-color .15s ease, box-shadow .15s ease}
+.field.mono{font-family:var(--mono); font-size:13px}
+.field::placeholder{color:var(--text-muted)}
+.field:focus{border-color:var(--border-strong); box-shadow:0 0 0 2px rgba(34,211,238,.6)}
+.field.is-focus{border-color:var(--border-strong); box-shadow:0 0 0 2px rgba(34,211,238,.6)}
+
+/* drop zone */
+.drop{min-height:220px; border:2px dashed var(--border-hairline); border-radius:var(--r-drop);
+  background:var(--bg-surface); display:flex; flex-direction:column; align-items:center;
+  justify-content:center; text-align:center; gap:var(--s2); padding:var(--s6)}
+.drop.dragover{border-style:solid; border-color:transparent;
+  background:linear-gradient(var(--bg-surface),var(--bg-surface)) padding-box,
+             var(--gradient-signature) border-box;
+  box-shadow:0 0 0 4px rgba(124,92,255,.12)}
+.drop svg{color:var(--text-muted)}
+.drop .d1{color:var(--text-secondary)}
+.drop .d2{font-size:12px; line-height:16px; color:var(--text-muted)}
+
+/* status pills */
+.pill{display:inline-flex; align-items:center; gap:6px; height:24px; padding:0 10px;
+  border-radius:999px; font-size:12px; font-weight:500; line-height:1}
+.pill .dot{width:6px; height:6px; border-radius:50%; background:currentColor}
+.pill.idle{background:var(--bg-surface-raised); color:var(--text-secondary)}
+.pill.run{background:rgba(124,92,255,.15); color:var(--accent-violet)}
+.pill.ok{background:rgba(52,211,153,.15); color:var(--success)}
+.pill.warn{background:rgba(251,191,36,.15); color:var(--warning)}
+.pill.err{background:rgba(248,113,113,.15); color:var(--danger)}
+.pill-rail{display:flex; gap:var(--s3); flex-wrap:wrap}
+
+/* progress beam */
+.beam{height:4px; border-radius:999px; background:var(--bg-inset); overflow:hidden}
+.beam > i{display:block; height:100%; width:40%; border-radius:999px;
+  background:var(--gradient-signature); animation:sweep 1.2s ease-in-out infinite}
+@keyframes sweep{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
+
+/* elevation */
+.elev-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s4)}
+@media (max-width:700px){.elev-grid{grid-template-columns:repeat(2,1fr)}}
+.elev{border-radius:var(--r-card); padding:var(--s5); min-height:120px; display:flex;
+  flex-direction:column; justify-content:flex-end; border:1px solid var(--border-hairline)}
+.elev .lv{font-family:var(--mono); font-size:12px; color:var(--text-secondary)}
+.elev .use{font-size:12px; color:var(--text-muted)}
+.e0{background:var(--bg-viewport)}
+.e1{background:var(--bg-surface); box-shadow:var(--sh1)}
+.e2{background:var(--bg-surface-raised); box-shadow:var(--sh2)}
+.e3{background:var(--bg-surface-raised); box-shadow:var(--sh3)}
+
+/* 3D viewer placeholder */
+.viewer{position:relative; width:100%; aspect-ratio:4/3; background:var(--bg-inset);
+  border-radius:var(--r-card); box-shadow:inset 0 1px 0 rgba(255,255,255,.02); overflow:hidden;
+  display:flex; align-items:center; justify-content:center}
+.viewer::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(120% 120% at 50% 40%, transparent 40%, rgba(0,0,0,.45) 100%)}
+.wire{width:44%; aspect-ratio:1; transform:rotate(-8deg)}
+.wire path,.wire line{stroke:var(--accent-violet); stroke-width:1.2; fill:none; opacity:.9}
+/* DESIGN.md section 8: 1:1 on mobile, 4:3 on desktop. */
+@media (max-width:600px){.viewer{aspect-ratio:1/1}}
+/* .pill sets 12px and wins on source order, so the Mono spec of 13px was lost
+   on this chip; state it explicitly. */
+.viewer .meta{position:absolute; left:var(--s4); bottom:var(--s4); z-index:2; font-size:13px}
+
+/* spacing scale */
+.space-rail{display:flex; flex-direction:column; gap:var(--s3)}
+.space-row{display:flex; align-items:center; gap:var(--s4)}
+.space-row .n{font-family:var(--mono); font-size:12px; color:var(--text-secondary); width:56px; flex:none}
+.space-row .bar{height:16px; border-radius:4px; background:var(--gradient-signature)}
+
+/* do / don't */
+.rules{display:grid; grid-template-columns:1fr 1fr; gap:var(--s4)}
+@media (max-width:700px){.rules{grid-template-columns:1fr}}
+.rules ul{margin:var(--s2) 0 0; padding-left:0; list-style:none}
+.rules li{position:relative; padding:6px 0 6px 26px; color:var(--text-secondary); font-size:14px;
+  border-bottom:1px solid var(--border-hairline)}
+.rules li:last-child{border-bottom:none}
+.rules li::before{position:absolute; left:0; top:6px; font-family:var(--mono); font-weight:500}
+.do li::before{content:"✓"; color:var(--success)}
+.dont li::before{content:"✕"; color:var(--danger)}
+.rules h3{font-size:13px; font-weight:500; letter-spacing:.01em; text-transform:uppercase;
+  color:var(--text-muted); margin:0}
+
+.foot{margin-top:72px; padding-top:var(--s6); border-top:1px solid var(--border-hairline);
+  color:var(--text-muted); font-size:12px; line-height:18px}
+.foot code{font-family:var(--mono)}
+.copied{position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+  background:var(--bg-surface-raised); border:1px solid var(--border-hairline);
+  color:var(--text-primary); font-size:13px; padding:8px 14px; border-radius:10px;
+  box-shadow:var(--sh3); opacity:0; transition:opacity .15s ease; pointer-events:none}
+.copied.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <h1>TripoSR Studio</h1>
+    </div>
+    <p class="hero-title"><span class="grad">DESIGN.md</span> preview</p>
+    <p class="tagline">A visual catalog of the design system in <code>DESIGN.md</code> — tokens,
+      type, and components rendered exactly as specified. Static and offline; nothing here calls a
+      backend. Click any swatch to copy its hex.</p>
+  </header>
+
+  <!-- 1. THEME -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>Theme</h2><span class="desc">Visual theme &amp; atmosphere</span></div>
+    <div class="card">
+      <p class="t-body" style="margin:0 0 var(--s4); max-width:760px; color:var(--text-secondary)">
+        Dark render-viewport studio. The canvas is near-black graphite so imagery and 3D output are
+        the brightest thing on screen; chrome recedes. The signature move is an iridescent
+        <strong style="color:var(--text-primary)">violet→cyan gradient</strong> — the colors of a 3D
+        normal map — used <em>only</em> for the primary action and active state.</p>
+      <div class="gradbar"><span class="lab">--gradient-signature · linear-gradient(135deg, #7C5CFF → #22D3EE)</span></div>
+    </div>
+  </section>
+
+  <!-- 2. COLOR -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>Color</h2><span class="desc">Semantic tokens &amp; roles</span></div>
+    <div class="swatches" id="swatches"></div>
+  </section>
+
+  <!-- 3. TYPOGRAPHY -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Typography</h2><span class="desc">Inter UI · JetBrains Mono values · weights 400/500/600</span></div>
+    <div class="card">
+      <div class="type-row"><span class="spec">Display · 40/600</span><span class="t-display">Image in. Mesh out.</span></div>
+      <div class="type-row"><span class="spec">H1 · 28/600</span><span class="t-h1">Generate a 3D mesh</span></div>
+      <div class="type-row"><span class="spec">H2 · 20/600</span><span class="t-h2">Endpoint settings</span></div>
+      <div class="type-row"><span class="spec">Body · 15/400</span><span class="t-body">Drop a single image and the worker returns a textured GLB in seconds.</span></div>
+      <div class="type-row"><span class="spec">Body-strong · 15/500</span><span class="t-strong">One primary task per screen.</span></div>
+      <div class="type-row"><span class="spec">Label · 13/500</span><span class="t-label">RUNPOD ENDPOINT ID</span></div>
+      <div class="type-row"><span class="spec">Caption · 12/400</span><span class="t-caption">PNG · JPG · WEBP</span></div>
+      <div class="type-row"><span class="spec">Mono · 13/400</span><span class="mono">mj7aiqksmbnkw1 · 512×512px · 248 KB · #7C5CFF</span></div>
+    </div>
+  </section>
+
+  <!-- 4. COMPONENTS -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>Components</h2><span class="desc">Buttons, inputs, drop zone, pills, progress</span></div>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">BUTTONS</h3>
+        <div class="btn-rail">
+          <div><button class="btn btn-primary">Generate mesh</button><div class="tag">primary · gradient</div></div>
+          <div><button class="btn btn-secondary">Download GLB</button><div class="tag">secondary</div></div>
+          <div><button class="btn btn-ghost">Reset</button><div class="tag">ghost</div></div>
+          <div><button class="btn btn-danger">Delete</button><div class="tag">danger</div></div>
+        </div>
+        <div class="btn-rail" style="margin-top:var(--s5)">
+          <div><button class="btn btn-primary btn-focus">Focused</button><div class="tag">focus ring</div></div>
+          <div><button class="btn btn-primary" disabled>Disabled</button><div class="tag">disabled 40%</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">INPUTS</h3>
+        <label class="lbl" for="p-url">Image URL</label>
+        <input id="p-url" class="field mono" type="url" placeholder="https://example.com/car.jpg" />
+        <label class="lbl" for="p-id" style="margin-top:var(--s4)">Endpoint ID · focused</label>
+        <input id="p-id" class="field mono is-focus" value="mj7aiqksmbnkw1" spellcheck="false" />
+      </div>
+    </div>
+
+    <div class="grid cols-2" style="margin-top:var(--s4)">
+      <div class="card">
+        <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">DROP ZONE — default</h3>
+        <div class="drop">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <div class="d1">Drop image or click to browse</div>
+          <div class="d2">PNG · JPG · WEBP</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">DROP ZONE — drag-over</h3>
+        <div class="drop dragover">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <div class="d1" style="color:var(--text-primary)">Release to add image</div>
+          <div class="d2">gradient border · violet glow</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:var(--s4)">
+      <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">STATUS PILLS &amp; PROGRESS BEAM</h3>
+      <div class="pill-rail">
+        <span class="pill idle"><span class="dot"></span>No image</span>
+        <span class="pill run"><span class="dot"></span>Generating…</span>
+        <span class="pill ok"><span class="dot"></span>Mesh ready</span>
+        <span class="pill warn"><span class="dot"></span>Cold start</span>
+        <span class="pill err"><span class="dot"></span>Failed</span>
+      </div>
+      <div class="beam" style="margin-top:var(--s5)"><i></i></div>
+      <p class="tag" style="margin-top:var(--s3)">Progress is a sweeping gradient beam — never a bare spinner.</p>
+    </div>
+  </section>
+
+  <!-- 5. 3D VIEWER + LAYOUT -->
+  <section>
+    <div class="sec-head"><span class="n">05</span><h2>Viewer &amp; Layout</h2><span class="desc">Recessed viewport · two-column</span></div>
+    <div class="grid cols-2">
+      <div class="card">
+        <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">3D VIEWER</h3>
+        <div class="viewer">
+          <svg class="wire" viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M50 8 L86 28 L86 72 L50 92 L14 72 L14 28 Z"/>
+            <path d="M50 8 L50 50 M50 50 L86 28 M50 50 L14 28 M50 50 L50 92"/>
+            <line x1="14" y1="28" x2="86" y2="72"/><line x1="86" y1="28" x2="14" y2="72"/>
+          </svg>
+          <span class="mono meta pill idle">GLB · 248 KB</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="t-label" style="margin:0 0 var(--s4); color:var(--text-muted)">SPACING SCALE — 4px base</h3>
+        <div class="space-rail" id="spaceRail"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. ELEVATION -->
+  <section>
+    <div class="sec-head"><span class="n">06</span><h2>Elevation</h2><span class="desc">Surface lightness + hairline + soft shadow</span></div>
+    <div class="elev-grid">
+      <div class="elev e0"><span class="lv">Level 0</span><span class="use">App background</span></div>
+      <div class="elev e1"><span class="lv">Level 1</span><span class="use">Cards, panels</span></div>
+      <div class="elev e2"><span class="lv">Level 2</span><span class="use">Hover / raised</span></div>
+      <div class="elev e3"><span class="lv">Level 3</span><span class="use">Popovers, modals</span></div>
+    </div>
+  </section>
+
+  <!-- 7. DO / DON'T -->
+  <section>
+    <div class="sec-head"><span class="n">07</span><h2>Guardrails</h2><span class="desc">Do's &amp; Don'ts</span></div>
+    <div class="card">
+      <div class="rules">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Keep the canvas near-black so imagery stays brightest</li>
+            <li>Reserve the gradient for the single primary action</li>
+            <li>Set every technical value (IDs, px, MB, hex) in Mono</li>
+            <li>Use the 4px spacing scale and four elevation levels</li>
+            <li>Keep motion physical: ease-out, 150–250ms, no bounce</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Use pure #FFFFFF text or pure #000000 surfaces</li>
+            <li>Put more than one gradient in a view</li>
+            <li>Use weights ≥700 or decorative drop shadows</li>
+            <li>Show a bare spinner instead of the gradient beam</li>
+            <li>Stack colored glows — one accent glow per screen</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">
+    TripoSR Studio — a static preview of
+    <a href="https://github.com/n29yf2kyfm-lab/triposr-runpod-worker/blob/main/DESIGN.md">DESIGN.md</a>,
+    in the <a href="https://github.com/voltagent/awesome-design-md">awesome-design-md</a> format.
+    Part of the
+    <a href="https://github.com/n29yf2kyfm-lab/triposr-runpod-worker">TripoSR RunPod worker</a>.
+    Fonts are self-hosted and nothing here calls out — open it offline.
+  </p>
+</div>
+
+<div id="toast" class="copied">Copied</div>
+
+<script>
+(() => {
+  "use strict";
+  // Color tokens — mirror of DESIGN.md section 2
+  const COLORS = [
+    ["--bg-viewport","#0B0C0E","App background"],
+    ["--bg-surface","#16181D","Cards, panels, drop zone"],
+    ["--bg-surface-raised","#1E2128","Hover surfaces, popovers"],
+    ["--bg-inset","#101216","Inset wells, inputs, viewer"],
+    ["--border-hairline","#262A31","Default 1px borders"],
+    ["--border-strong","#3A404A","Focused/active borders"],
+    ["--text-primary","#F4F5F7","Headings, primary copy"],
+    ["--text-secondary","#9BA1AC","Labels, secondary copy"],
+    ["--text-muted","#818996","Placeholders, hints"],
+    ["--accent-violet","#7C5CFF","Signature start · primary"],
+    ["--accent-cyan","#22D3EE","Signature end · links, focus"],
+    ["--accent-ink","#0B0C0E","Text on the bright gradient"],
+    ["--success","#34D399","Success · mesh ready"],
+    ["--warning","#FBBF24","Warnings"],
+    ["--danger","#F87171","Errors"],
+  ];
+  const toast = document.getElementById("toast");
+  let toastTimer;
+  function flash(msg){
+    toast.textContent = msg; toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+  // Report what actually happened. The previous version routed both the
+  // rejection path and the no-clipboard-API path into the same "Copied"
+  // toast, so a denied permission or a non-secure origin still claimed
+  // success.
+  function legacyCopy(text){
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.cssText = "position:fixed;top:-9999px;opacity:0";
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  function copy(text){
+    const win = () => flash("Copied " + text);
+    const fail = () => flash(legacyCopy(text) ? "Copied " + text
+                                              : "Press ⌘C / Ctrl+C to copy " + text);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(win).catch(fail);
+    } else { fail(); }
+  }
+  const isLight = (hex) => {
+    const n = parseInt(hex.slice(1),16), r=(n>>16)&255, g=(n>>8)&255, b=n&255;
+    return (0.299*r + 0.587*g + 0.114*b) > 150;
+  };
+  const sw = document.getElementById("swatches");
+  COLORS.forEach(([tok,hex,role]) => {
+    // A real <button>, not a div with a click handler: the previous markup was
+    // unreachable by keyboard in a document whose own rule is "Never remove
+    // focus". This gets tab order, Enter/Space and the focus ring for free.
+    const el = document.createElement("button");
+    el.type = "button";
+    el.className = "swatch";
+    el.setAttribute("aria-label", "Copy " + tok + " " + hex);
+    el.title = "Copy " + hex;
+    const border = isLight(hex) ? "" : "box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)";
+    el.innerHTML =
+      '<div class="chip" style="background:'+hex+';'+border+'"></div>' +
+      '<div class="meta"><div class="tok">'+tok+'</div><div class="hex">'+hex+'</div>' +
+      '<div class="role">'+role+'</div></div>';
+    el.addEventListener("click", () => copy(hex));
+    sw.appendChild(el);
+  });
+
+  // spacing scale bars
+  const SPACE = [4,8,12,16,20,24,32,40,56,72];
+  const rail = document.getElementById("spaceRail");
+  SPACE.forEach(px => {
+    const row = document.createElement("div");
+    row.className = "space-row";
+    row.innerHTML = '<span class="n">'+px+'px</span><span class="bar" style="width:'+px+'px"></span>';
+    rail.appendChild(row);
+  });
+})();
+</script>
+</body>
+</html>
