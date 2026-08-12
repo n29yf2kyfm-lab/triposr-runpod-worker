@@ -58,6 +58,11 @@ SPEC = {
                      metallic=0.30, roughness=0.50, blend=False),
     "interior": dict(name="Interior_Dark", base=(0.045, 0.045, 0.050, 1.0),
                      metallic=0.0, roughness=0.90, blend=False),
+    # Smoked glossy lens: generated lamp blobs have no internal detail, so a
+    # CLEAR lens would show nothing behind it. Dark gloss reads as a modern
+    # lamp unit and — the point — never resprays with the body.
+    "lamp":     dict(name="Lamp_Lens",     base=(0.080, 0.080, 0.090, 1.0),
+                     metallic=0.0, roughness=0.08, blend=False),
 }
 
 GLASS_MIN_FRAC = 0.02   # same bar as assign_materials.py; do NOT relax
@@ -114,6 +119,15 @@ def classify(feat, car):
     if (lo[2] > 0.30 and hi[2] > 0.92 and frac > 0.03 and frac < 0.30
             and span[0] > 0.35 and span[1] > 0.45):
         return "canopy"
+
+    # LAMP: small component at the extreme nose or tail, lamp height band,
+    # offset to one side (a grille or bumper is central/full-width, a lamp is
+    # not). Light bars that span the full width stay body — conservative.
+    at_end = lo[0] > 0.80 or hi[0] < 0.20
+    offset = hi[1] < 0.55 or lo[1] > 0.45
+    if at_end and offset and frac < 0.04 and 0.25 < lo[2] and hi[2] < 0.85 \
+            and span[1] < 0.45:
+        return "lamp"
 
     # INTERIOR: enclosed in both horizontal axes, mid band, small.
     inset_l = lo[0] > 0.06 and hi[0] < 0.94
@@ -230,7 +244,7 @@ def main():
     bsdf.inputs["Roughness"].default_value = 0.35
 
     made = {}
-    counts = {"body": 0, "canopy": 0, "wheel": 0, "interior": 0, "debris": 0}
+    counts = {"body": 0, "canopy": 0, "wheel": 0, "interior": 0, "lamp": 0, "debris": 0}
     vshare = {k: 0 for k in counts}
     glass_verts = 0
     rows = []
@@ -246,7 +260,7 @@ def main():
         if kind == "body":
             o.data.materials.clear()
             o.data.materials.append(body_mat)
-        elif kind in ("wheel", "interior"):
+        elif kind in ("wheel", "interior", "lamp"):
             if kind not in made:
                 made[kind] = _mk_material(kind)
             o.data.materials.clear()
@@ -351,6 +365,14 @@ def selftest():
          0.05, [0.00, 0.05, 0.35], [0.30, 0.95, 0.60], "body"),
         ("spoiler (high but short span -> not canopy)",
          0.02, [0.88, 0.15, 0.75], [1.00, 0.85, 0.95], "body"),
+        ("headlamp (nose, offset left, lamp band)",
+         0.004, [0.86, 0.08, 0.40], [0.98, 0.35, 0.60], "lamp"),
+        ("tail lamp (tail, offset right)",
+         0.003, [0.02, 0.70, 0.45], [0.12, 0.95, 0.70], "lamp"),
+        ("grille (nose but CENTRAL -> body, not lamp)",
+         0.008, [0.90, 0.30, 0.30], [1.00, 0.70, 0.55], "body"),
+        ("front bumper (nose but full width -> body)",
+         0.03, [0.88, 0.02, 0.10], [1.00, 0.98, 0.45], "body"),
         # A pillar/rail frame spans the cabin like the canopy but tops out
         # BELOW the roof skin. Body (paint) is the safe call: body-coloured
         # pillars are normal; making them transparent is not.
