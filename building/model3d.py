@@ -244,36 +244,54 @@ def walls_from_rooms(rooms, internal=DEFAULT_WALL_THICKNESS_M,
     classic plan-to-model error: it doubles the plasterboard, doubles the
     paint and puts 100mm of nothing between the rooms.
     """
-    seen, walls = {}, []
+    # A SHARED EDGE IS ONLY SHARED IF BOTH SIDES DIVIDE IT THE SAME WAY, and
+    # on a real plan they never do. Matching whole edges caught the easy case
+    # — two rooms exactly back to back — and missed every partition that a
+    # different number of rooms lands on from each side. On a four-bed with a
+    # hall one side of a line and a garage plus a study the other, 32.0m of
+    # the 91.5m of partition was built TWICE: the whole first-floor spine and
+    # the whole garage wall, both duplicated, and with them 17 phantom
+    # doorsets on partitions that already had a door. wall_length_m came back
+    # 23.6% high.
+    #
+    # So cut every collinear run at the boundaries coming from BOTH sides and
+    # build each atomic piece once. Two rooms flush back to back still give
+    # one wall, exactly as before.
+    edges = {}
     for room in rooms:
-        pts = room.corners()
-        for i in range(4):
-            a, b = pts[i], pts[(i + 1) % 4]
-            key = tuple(sorted([(round(a[0], 3), round(a[1], 3)),
-                                (round(b[0], 3), round(b[1], 3))]))
-            if key in seen:
-                # A REPEATED EDGE IS ONE WALL, BUT IT IS AS TALL AS BOTH
-                # ROOMS THAT CLAIM IT. Dropping the second claim outright
-                # was right while every room stood on the ground; a storey
-                # built OVER another block shares all four of its edges with
-                # the block below, so every one of its walls was discarded
-                # and the new floor came out as a roof over open air — no
-                # front wall, daylight straight through it. The wall now
-                # spans the union of the two rooms' levels.
-                prior = seen[key]
-                if room.storeys is not None and prior.storeys is not None:
-                    lo = min(prior.base_level, room.base_level)
-                    hi = max(prior.base_level + prior.storeys,
-                             room.base_level + room.storeys)
-                    prior.base_level, prior.storeys = lo, hi - lo
-                elif room.storeys is None:
-                    prior.storeys = None      # a room on every storey wins
-                prior.height = max(prior.height, room.height)
+        rx0, ry0 = room.x, room.y
+        rx1, ry1 = room.x + room.width, room.y + room.depth
+        for key, lo, hi in (
+                (("x", round(rx0, 3)), ry0, ry1),
+                (("x", round(rx1, 3)), ry0, ry1),
+                (("y", round(ry0, 3)), rx0, rx1),
+                (("y", round(ry1, 3)), rx0, rx1)):
+            edges.setdefault(key, []).append((lo, hi, room))
+
+    walls = []
+    for (axis, coord), claims in sorted(edges.items()):
+        cuts = sorted({round(v, 3) for lo, hi, _ in claims for v in (lo, hi)})
+        for lo, hi in zip(cuts, cuts[1:]):
+            if hi - lo < 1e-6:
                 continue
-            wall = Wall(a, b, internal, room.height, external=True)
-            wall.storeys = room.storeys
-            wall.base_level = room.base_level
-            seen[key] = wall
+            mid = (lo + hi) / 2.0
+            here = [r for a, b, r in claims if a - 1e-6 <= mid <= b + 1e-6]
+            if not here:
+                continue
+            start = (coord, lo) if axis == "x" else (lo, coord)
+            end = (coord, hi) if axis == "x" else (hi, coord)
+            wall = Wall(start, end, internal,
+                        max(r.height for r in here), external=True)
+            # THE WALL IS AS TALL AS EVERY ROOM THAT CLAIMS IT. A storey
+            # built over another block shares all four of its edges with the
+            # block below; taking only the first claim left the new floor as
+            # a roof over open air, with daylight through the front wall.
+            wall.base_level = min(r.base_level for r in here)
+            if any(r.storeys is None for r in here):
+                wall.storeys = None           # a room on every storey wins
+            else:
+                wall.storeys = max(r.base_level + r.storeys
+                                   for r in here) - wall.base_level
             walls.append(wall)
 
     # INTERNAL OR EXTERNAL IS DECIDED BY WHAT IS ON THE OTHER SIDE, not by
@@ -368,9 +386,53 @@ def walls_from_rooms(rooms, internal=DEFAULT_WALL_THICKNESS_M,
                                     and ey0 + 1e-6 < py < ey1 - 1e-6)
                 break
 
+    # PUT THE PIECES BACK TOGETHER WHERE THEY ARE ONE WALL. Cutting every
+    # collinear run at the boundaries from both sides is what stops a
+    # partition being built twice — but it also split the FRONT of the house
+    # at the first-floor bathroom partition, because that partition's line
+    # crosses the external wall plane. The facade then had no single wall
+    # wide enough to take the front door, and the door was silently dropped.
+    # Adjacent pieces that agree on every property are one wall again; the
+    # probes above have already run, so nothing that differs gets merged.
+    walls.sort(key=lambda w: (w.start[0] == w.end[0],
+                              round(w.start[0] if w.start[0] == w.end[0]
+                                    else w.start[1], 3),
+                              min(w.start[1], w.end[1]) if w.start[0] == w.end[0]
+                              else min(w.start[0], w.end[0])))
+    merged = []
+    for wall in walls:
+        prev = merged[-1] if merged else None
+        if prev is not None and _joinable(prev, wall):
+            prev.end = wall.end
+            merged[-1] = prev
+            continue
+        merged.append(wall)
+    walls = merged
+
     for wall in walls:
         wall.thickness = external if wall.external else internal
     return walls
+
+
+def _joinable(a, b):
+    """Are two collinear neighbours the same wall, cut in two?"""
+    vertical = a.start[0] == a.end[0] and b.start[0] == b.end[0]
+    horizontal = a.start[1] == a.end[1] and b.start[1] == b.end[1]
+    if vertical:
+        if abs(a.start[0] - b.start[0]) > 1e-6 or abs(a.end[1] - b.start[1]) > 1e-6:
+            return False
+    elif horizontal:
+        if abs(a.start[1] - b.start[1]) > 1e-6 or abs(a.end[0] - b.start[0]) > 1e-6:
+            return False
+    else:
+        return False
+    return (a.external == b.external
+            and a.base_level == b.base_level
+            and a.storeys == b.storeys
+            and abs(a.height - b.height) < 1e-6
+            and getattr(a, "outward", 1) == getattr(b, "outward", 1)
+            and getattr(a, "shared_storeys", None) == getattr(b, "shared_storeys", None)
+            and getattr(a, "void_facing", False) == getattr(b, "void_facing", False))
 
 
 # --- roof -------------------------------------------------------------------
@@ -454,8 +516,16 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
     run = width if along_x else depth          # length of a ridge, gable end
     n_ranges = max(1, int(math.ceil(total_span / max_span - 1e-9)))
     span = total_span / n_ranges
-    rise = (span / 2.0) * math.tan(theta)
+    # A RAFTER BEARS ON THE WALL PLATE; THE OVERHANG PROJECTS OUT AND DOWN
+    # PAST IT. Taking the rise off the overhung span raised the ridge by
+    # overhang x tan(pitch) — 210mm here — and ridge height is the number a
+    # planning condition is written against. The rise is measured across the
+    # structural span; the eaves TIP then sits below the plate by the same
+    # geometry, which keeps every plane at the stated pitch.
+    struct_span = max(1e-6, span - 2.0 * overhang / n_ranges)
+    rise = (struct_span / 2.0) * math.tan(theta)
     ridge_z = base_z + rise
+    eaves_tip_z = base_z - overhang * math.tan(theta)
 
     # Each range: its band across the short axis, and its ridge line.
     ranges, ridges, hips, valleys = [], [], [], []
@@ -517,8 +587,18 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
         "ridge_m": round(ridge_len, 2),
         "hip_m": round(sum(hips), 2),
         "valley_m": round(sum(valleys), 2),
-        "eaves_m": round(2 * (width + depth), 2),
-        "verge_m": round(2 * total_span, 2) if kind == "gabled" else 0.0,
+        # A GABLE HAS EAVES ON TWO SIDES ONLY. The other two carry verge —
+        # no gutter, no fascia, no soffit. Reporting the whole perimeter as
+        # eaves counted the verge twice, once on each line of the quote, and
+        # over-measured guttering by 82%.
+        "eaves_m": round(2 * run if kind == "gabled"
+                         else 2 * (width + depth), 2),
+        # ...and a verge is a RAKING edge. Measuring it flat on plan
+        # under-ordered dry-verge and barge by the same 1/cos(pitch) this
+        # module lectures about three paragraphs above.
+        "verge_m": (round(2 * total_span / math.cos(theta), 2)
+                    if kind == "gabled" else 0.0),
+        "eaves_tip_z_m": round(eaves_tip_z, 3),
         "plan_area_m2": round(plan_area, 2),
         "sloped_area_m2": round(sloped_area, 2),
         "uplift_pct": round((sloped_area / plan_area - 1) * 100, 1),
@@ -705,7 +785,12 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
             x0, y0, x1, y1,
             pitch_deg=_given("pitch_deg", DEFAULT_PITCH_DEG),
             kind=_given("kind", "hipped"),
-            overhang=_given("overhang_m", DEFAULT_EAVES_OVERHANG_M),
+            # ACCEPT THE KEY PEOPLE WRITE. The spec says "overhang" and
+            # this read "overhang_m", so a stated 350mm eaves was dropped on
+            # the floor without a word and 300 used instead — a 2.5 m2 error
+            # in the tile order, from a typo the caller could never see.
+            overhang=_given("overhang_m",
+                            _given("overhang", DEFAULT_EAVES_OVERHANG_M)),
             base_z=eaves_z,
             ridge_along=_given("ridge_along", None),
             # The default cap exists to stop a whole-building footprint
@@ -963,7 +1048,8 @@ def _roof_faces(roof, verts, faces, groups):
     error as a three-storey block drawn as a bungalow — it looks fine and it
     is a different building.
     """
-    ez, rz = roof["eaves_z_m"], roof["ridge_z_m"]
+    ez = roof.get("eaves_tip_z_m", roof["eaves_z_m"])
+    rz = roof["ridge_z_m"]
     along_x = roof["along_x"]
 
     def V(x, y, z):
@@ -1572,7 +1658,8 @@ def _glb_mesh(model):
 
     roof = model.get("roof")
     if roof:
-        ez, rz = roof["eaves_z_m"], roof["ridge_z_m"]
+        ez = roof.get("eaves_tip_z_m", roof["eaves_z_m"])
+        rz = roof["ridge_z_m"]
         for band in roof.get("range_list") or []:
             bx = band["band_m"]["x"]
             by = band["band_m"]["y"]

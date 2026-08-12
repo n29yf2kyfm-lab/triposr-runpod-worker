@@ -170,8 +170,17 @@ except M.ModelError as e:
 # the plasterboard and the paint on every quantity taken off the model.
 back_to_back = [room("A", 0, 0, 4, 3), room("B", 0, 3, 4, 3)]
 ws = M.walls_from_rooms(back_to_back)
-check("3e two rooms back to back share one wall, not two", len(ws) == 7,
-      str(len(ws)))
+# Assert the MEASUREMENT, not the wall count. Counting walls was testing
+# how the edges happened to be split, and it went red the moment collinear
+# pieces were correctly merged back into one wall — while the quantity it
+# was actually guarding never moved.
+_shared = [x for x in ws
+           if abs(x.start[1] - 3.0) < 1e-9 and abs(x.end[1] - 3.0) < 1e-9]
+check("3e the shared edge is built once, not twice", len(_shared) == 1,
+      f"{len(_shared)} walls on the party line")
+check("3e2 and the total wall run is the perimeter plus that one party wall",
+      abs(sum(x.length_m for x in ws) - (2 * (4 + 6) + 4)) < 1e-6,
+      f"{sum(x.length_m for x in ws):.2f} m, want 24.00")
 
 # EXTERNAL IS DECIDED BY WHAT IS ON THE OTHER SIDE. Keying on coincident
 # edges marked every wall external on a real plan — 52 windows, no doors —
@@ -1081,8 +1090,26 @@ check("16b ridge_along overrides the longest-axis guess",
       _r16b["along_x"] is True and _r16b["ranges"] == 1)
 check("16c one clear span once max_span says the drawing shows one",
       abs(_r16b["span_m"] - 9.13) < 0.01, str(_r16b["span_m"]))
-check("16d rise follows the stated span", abs(_r16b["rise_m"] - 3.196) < 0.01,
+# A RAFTER BEARS ON THE WALL PLATE. The overhang projects out and DOWN past
+# it, so it adds nothing to the rise — this expected 3.196, which is the rise
+# across the span plus both overhangs, and that put the ridge 35mm high here
+# and 210mm high on a 350mm eaves. Ridge height is what a planning condition
+# is written against, so it is the one roof number that must not drift.
+check("16d rise is measured across the STRUCTURAL span, not the overhang",
+      abs(_r16b["rise_m"] - (8.87 / 2) * math.tan(math.radians(35))) < 0.01,
       str(_r16b["rise_m"]))
+check("16d2 and the eaves TIP sits below the plate by the same geometry",
+      abs(_r16b["eaves_tip_z_m"]
+          - (4.95 - 0.13 * math.tan(math.radians(35)))) < 0.001,
+      str(_r16b.get("eaves_tip_z_m")))
+# A GABLE HAS EAVES ON TWO SIDES AND VERGE ON THE OTHER TWO. Reporting the
+# whole perimeter as eaves counted the verge on both lines of the quote.
+check("16e eaves is the two gutter sides only, not the perimeter",
+      abs(_r16b["eaves_m"] - 2 * 5.64) < 0.02, str(_r16b["eaves_m"]))
+check("16f verge is measured up the RAKE, not flat on plan",
+      abs(_r16b["verge_m"]
+          - 2 * 9.13 / math.cos(math.radians(35))) < 0.02,
+      str(_r16b["verge_m"]))
 try:
     M.roof_over(0, 0, 5, 8, ridge_along="diagonal")
     check("16e a nonsense ridge_along is refused", False)
