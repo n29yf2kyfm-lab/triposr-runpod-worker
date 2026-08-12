@@ -49,9 +49,25 @@ this was measured, not guessed. On a real generated Golf:
 That last point is why the guard below exists. A stage that satisfies the gate
 while putting glazing on the wrong polygons is more dangerous than one that
 fails, because everything downstream then trusts it. The fix is NOT to lower the
-threshold. It is to select window faces from the BAKED TEXTURE (generated cars
-carry dark, distinctly-coloured glazing regions in their albedo) or to split them
-by hand -- neither of which is implemented here.
+threshold.
+
+Two candidate fixes were considered and one was MEASURED DEAD:
+
+  * "select window faces from the baked albedo" -- does NOT work in general, and
+    the earlier version of this note claiming it would was wrong. The test car is
+    a dark-blue Golf R: in its 2048x2048 albedo, glass, dark paint and dark trim
+    are all the same near-black blue (mean luminance 53, 58% of texels below 40).
+    Glazing is only texture-separable when the body colour happens to contrast
+    with the (always dark) glass, so it fails on exactly the dark/black cars that
+    are most common. Do not build this expecting it to generalise.
+
+  * the reliable fix is a generator that outputs glazing as SEPARATE geometry, so
+    "separate by loose parts" actually isolates it. TRELLIS.2 does not; part-based
+    models (PartCrafter and successors) do. That is a MODEL change, tracked in
+    CLAUDE.md "Generator research", not something this stage can paper over.
+
+Until then, glazing must be split by hand, and this stage's job is only to name
+and assign the parts once they ARE separable.
 
 Classification is GEOMETRIC, not semantic — there is no part labelling in the
 output to trust. Each loose part is judged on where it sits in the car's own

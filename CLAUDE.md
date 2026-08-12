@@ -924,6 +924,56 @@ underperforms — do NOT stop at the first plausible explanation. Run this:
 Only produce the full template when there is a real problem to investigate —
 don't fabricate an RCA when nothing is broken.
 
+## Generator research: the material-structure blocker, and the model that fixes it (2026-08-12)
+
+Owner asked to look at other models to improve the 3D machine. The finding that
+matters is that the blocker is NOT geometry quality -- it is mesh STRUCTURE, and no
+amount of better surfacing fixes it.
+
+**Measured on real TRELLIS.2 output (car-meshes/trellis/*.glb):** one fused mesh,
+one untitled material, OPAQUE. After welding, ONE part holds 99.3% of the vertices
+-- body, windows, wheels and interior are a single continuous shell. So:
+  * glass_probe -> "opaque" -> automatic scrap under the 2026-08-11 ruling
+  * colour_variants -> "no paintMaterialNames" -> cannot bake the 8 colours
+  * no distinct rubber -> paint covers the tyres
+`pipeline/trellis/assign_materials.py` reproduces the proven 4-material scheme from
+golf_mv_polished.glb by welding + loose-part split + geometric classify, and it
+WORKS once parts are separable -- but on a fused shell it can only find 0.5% of the
+mesh as "glass" (mirror housings, badges), so it refuses to write rather than ship
+a file that fools glass_probe. Verified: red respray of that file turned the
+WINDOWS red with the body.
+
+**Two cheap fixes are dead, measured not guessed:**
+  * geometric segmentation of a fused shell -- impossible, the windows are not
+    separate geometry.
+  * texture-based glazing selection -- fails on dark cars. The test Golf R's albedo
+    has glass, dark paint and dark trim all at the same near-black value (58% of
+    texels < 40 luminance). Only works when body colour contrasts with the glass.
+
+**The real fix is a part-native generator (research, 2026-08-12):**
+  * **PartCrafter** (arXiv 2506.05573, MIT code / CC-BY data) -- single image ->
+    up to 16 SEPARATE semantic meshes in one pass, no pre-segmentation. Glazing
+    comes out as its OWN mesh, which is exactly what makes assign_materials able to
+    isolate it. Caveats: GEOMETRY ONLY (textures added post-hoc, the paper uses
+    Hunyuan3D-2 for that); trained on only ~50k part meshes so complex objects are
+    a quality risk; the paper does not showcase cars, so vehicle quality is
+    UNVERIFIED and must be tested before committing.
+  * **Hunyuan3D 2.1 / 3.5** -- production PBR (base/metallic/roughness/alpha), 3.5
+    does up to 8K PBR and is ~2x faster than 2.1. Higher quality ceiling than
+    TRELLIS.2, but pricier and STILL likely a fused shell for glass (unverified) --
+    better surfacing does not by itself solve the structure blocker.
+
+**Recommended experiment order, cheapest first, each with a hard measurable gate:**
+  1. Run PartCrafter on ONE clean car reference; check it emits a glazing mesh >=2%
+     of verts and passes assign_materials + glass_probe "clear (proven)". This is
+     the whole ballgame -- if PartCrafter cars are mush or one blob, the route is dead.
+  2. If geometry passes but is untextured, texture the parts with Hunyuan3D-2 and
+     re-run the full gate stack (glass, tyres, 8-colour respray, red-control render).
+  3. Only then compare against the licensed-model route on quality.
+Do NOT switch the production generator before step 1 clears; the owner shelved
+TRELLIS.2 on quality (melted panels, absent shut lines) and a part-native model has
+to beat that bar too, not just the structure bar.
+
 ## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
 
 Tested end to end on a 2011 Yaris XP90 from two Toyota press photos. The machine WORKS —
