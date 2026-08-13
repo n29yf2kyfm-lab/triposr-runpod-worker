@@ -152,6 +152,40 @@ def rebuild(src, dst, paint_rgb=None, paint_name=None):
     print(f"WROTE {dst} ({len(out)/1e6:.1f}MB)")
 
 
+def rebuild_from_map(src, dst, class_map):
+    """Write PBR values from an EXPLICIT {material_name: class} map.
+
+    Used by clay_geoclass, which names materials from the geometry they are
+    bound to rather than from their strings — the only way to recover a car
+    whose exporter wrote `1129_0`. Same guarantees as rebuild(): glTF JSON
+    only, BIN chunk copied verbatim, glass gets real BLEND alpha.
+    """
+    raw = open(src, "rb").read()
+    if raw[:4] != b"glTF":
+        sys.exit("not a GLB")
+    ln = struct.unpack("<I", raw[12:16])[0]
+    g = json.loads(raw[20:20 + ln])
+    rest = raw[20 + ln:]
+    for m in g.get("materials", []):
+        cls = class_map.get(m.get("name") or "(unnamed)", "trim_matt")
+        vals = PBR.get(cls, PBR["unknown"])
+        pbr = m.setdefault("pbrMetallicRoughness", {})
+        pbr["baseColorFactor"] = vals["baseColorFactor"]
+        pbr["metallicFactor"] = vals["metallicFactor"]
+        pbr["roughnessFactor"] = vals["roughnessFactor"]
+        if cls == "glass":
+            m["alphaMode"] = "BLEND"
+            m["doubleSided"] = True
+        elif m.get("alphaMode") == "BLEND":
+            m["alphaMode"] = "OPAQUE"          # clay files sometimes ship BLEND
+    body = json.dumps(g, separators=(",", ":")).encode()
+    body += b" " * ((4 - len(body) % 4) % 4)
+    out = (b"glTF" + struct.pack("<II", 2, 12 + 8 + len(body) + len(rest))
+           + struct.pack("<I", len(body)) + b"JSON" + body + rest)
+    open(dst, "wb").write(out)
+    return dst
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--in", dest="src", required=True)
