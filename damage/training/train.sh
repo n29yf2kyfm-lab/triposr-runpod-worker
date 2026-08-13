@@ -66,11 +66,35 @@ PY
   PID="${RUNPOD_POD_ID:-}"
   [ -z "$PID" ] && PID="$(hostname)"
   echo "stopping pod id=$PID"
-  for _ in 1 2 3; do
-    curl -s -X POST "https://rest.runpod.io/v1/pods/${PID}/stop" \
-      -H "Authorization: Bearer ${RUNPOD_API_KEY}" | grep -q . && break
+
+  # THE IN-POD STOP IS THE ONLY FAILSAFE THAT RUNS UNATTENDED.
+  # An external watcher in the controlling session does not count: that process
+  # is frozen whenever the session is idle. On the v5 run the script correctly
+  # gave up after five minutes, and the pod then billed for SIX HOURS because
+  # the only thing that would have stopped it was asleep. So this block has to
+  # actually work, and it has to be checked rather than assumed.
+  #
+  # Previous version looped on `curl ... | grep -q .` — any response at all,
+  # including an error body, counted as success, so a failing stop looked fine.
+  # Now: runpodctl first (present on RunPod images, uses the pod's own
+  # credentials), then the REST API with the HTTP status actually inspected,
+  # and terminate as the last resort because a stopped-but-existing pod can
+  # still be restarted by the platform.
+  if command -v runpodctl >/dev/null 2>&1; then
+    echo "runpodctl stop:"; runpodctl stop pod "$PID" || true
+  fi
+  for attempt in 1 2 3; do
+    code=$(curl -s -o /tmp/stop.out -w "%{http_code}" -X POST \
+      "https://rest.runpod.io/v1/pods/${PID}/stop" \
+      -H "Authorization: Bearer ${RUNPOD_API_KEY}")
+    echo "stop attempt $attempt -> HTTP $code $(head -c 160 /tmp/stop.out)"
+    [ "$code" = "200" ] || [ "$code" = "204" ] && break
     sleep 5
   done
+  code=$(curl -s -o /tmp/term.out -w "%{http_code}" -X DELETE \
+    "https://rest.runpod.io/v1/pods/${PID}" \
+    -H "Authorization: Bearer ${RUNPOD_API_KEY}")
+  echo "terminate -> HTTP $code $(head -c 160 /tmp/term.out)"
   # Last resort: find any pod with this name still running and stop it.
   python - <<'PY' || true
 import os, json, urllib.request
@@ -109,9 +133,25 @@ pip install -q onnxruntime     || exit 12
 # on `cannot import name BackboneConfigMixin`. That import error names
 # transformers and hides the real cause, which is the torch version. Upgrading
 # here costs one large download and removes the whole class of confusion.
-python -c "import torch,sys; sys.exit(0 if tuple(map(int,torch.__version__.split('.')[:2]))>=(2,5) else 1)" \
-  || pip install -q --upgrade torch torchvision --index-url https://download.pytorch.org/whl/cu126 \
-  || exit 13
+# Pick the torch build from the DRIVER ON THIS MACHINE, never a fixed index.
+# The rented GPU is not a fixed target: v4 landed on driver 570.x / CUDA 12.8,
+# v5 on 550.x / CUDA 12.4. A hardcoded cu124 was too old for the first and a
+# hardcoded cu126 was too new for the second — same script, opposite failures,
+# both reported as "the NVIDIA driver on your system is too old". Reading the
+# driver first is the only version of this that survives whichever machine the
+# scheduler hands us.
+DRV=$(nvidia-smi --query-gpu=driver_version --format=csv,noheader 2>/dev/null | head -1)
+CUDA_MM=$(nvidia-smi 2>/dev/null | sed -n 's/.*CUDA Version: *\([0-9]*\)\.\([0-9]*\).*/\1\2/p' | head -1)
+echo "driver=$DRV cuda=$CUDA_MM"
+case "${CUDA_MM:-124}" in
+  12[89]|13*) IDX=cu128 ;;
+  126|127)    IDX=cu126 ;;
+  12[45])     IDX=cu124 ;;
+  12[0123])   IDX=cu121 ;;
+  *)          IDX=cu124 ;;
+esac
+echo "selected torch index: $IDX"
+pip install -q --upgrade torch torchvision --index-url "https://download.pytorch.org/whl/$IDX" || exit 13
 # The [train,loggers] extras are NOT optional here. Plain `pip install rfdetr`
 # gives a package that imports perfectly and then refuses to train
 # ("RF-DETR training dependencies are missing" / no module pytorch_lightning),
