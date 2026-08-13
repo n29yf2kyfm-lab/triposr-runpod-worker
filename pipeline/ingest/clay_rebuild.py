@@ -53,6 +53,13 @@ RULES = [
     (r"black.*shiny|shiny",                                "trim_gloss"),
     (r"black",                                             "trim_matt"),
     (r"red",                                               "accent_red"),
+    # Second pass, added from the Astra 2022's 15 unmapped names. Everything
+    # here was rendering neutral dark trim, which read wrong on the bumper
+    # insert and roof. Grouped by what the part physically is, not by guess:
+    (r"roof",                                              "paint"),        # ROOF_AO is body panel
+    (r"wiper|suspension|clutch|chassis|engine|exhaust",    "trim_matt"),    # under-car / hardware
+    (r"leds?_|led\b|charge_tex|rpm_tex|speed_tex|gauge|instrument", "interior"),  # dials, charge port UI
+    (r"reflect|texpattern|plasticglossy",                  "trim_gloss"),   # gloss black trim
 ]
 
 PBR = {
