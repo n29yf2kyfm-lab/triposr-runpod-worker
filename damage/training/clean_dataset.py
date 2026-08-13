@@ -319,20 +319,41 @@ def _classify_one(args):
     return path, classify(path, use_ocr)
 
 
-def _classify_many(paths, use_ocr, jobs):
+def _classify_many(paths, use_ocr, jobs, progress_every=500):
     """{path: (verdict, metrics)}, computed across a process pool.
 
     OCR costs ~0.36s per image against ~0.01s for the pixel stats, which turns
     a 13k-image pass from a minute into most of an hour on one core. The work is
     embarrassingly parallel and purely CPU-bound, so a pool sized to the cores
     is the whole optimisation.
+
+    USES THE "spawn" START METHOD, NOT THE DEFAULT FORK. pytesseract shells out
+    to the tesseract binary through subprocess, and a forked child inherits the
+    parent's lock state at the instant of the fork; combining the two deadlocked
+    this pass reliably — the parent parked in futex_do_wait, the four workers
+    burned one second of CPU each and then slept forever, and 34 minutes later
+    the run had produced nothing at all. spawn starts each worker as a clean
+    interpreter with no inherited locks, at the cost of re-importing this module
+    per worker, which is microseconds against a 0.36s OCR call.
+
+    Progress is printed and FLUSHED as it goes for the same reason: the silent
+    version was indistinguishable from the deadlocked one.
     """
     items = [(p, use_ocr) for p in paths]
     if jobs <= 1 or len(items) < 32:
         return dict(_classify_one(i) for i in items)
     import multiprocessing as mp
-    with mp.Pool(jobs) as pool:
-        return dict(pool.imap_unordered(_classify_one, items, chunksize=16))
+    import sys
+    ctx = mp.get_context("spawn")
+    out = {}
+    with ctx.Pool(jobs) as pool:
+        for i, (path, res) in enumerate(
+                pool.imap_unordered(_classify_one, items, chunksize=8), 1):
+            out[path] = res
+            if progress_every and i % progress_every == 0:
+                print(f"    ...{i}/{len(items)}", flush=True)
+                sys.stdout.flush()
+    return out
 
 
 def clean_split(src_dir, dst_dir, split, report_only, use_ocr=True, jobs=1,

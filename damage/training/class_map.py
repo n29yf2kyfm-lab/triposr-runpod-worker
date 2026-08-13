@@ -49,7 +49,13 @@ FINAL_CLASSES = {
     },
     "scratch_scuff": {
         "roboflow": ["Scratch"],
-        "drive": ["alloy_scratch", "alloy_scuff"],
+        # scratch_faint / scratch_light are the whole reason this project
+        # exists — a detector trained only on dramatic damage cannot see a
+        # hairline on a grey door — so they belong in the trained set even
+        # though they are the smallest folders in the corpus.
+        "drive": ["alloy_scratch", "alloy_scuff", "scratch_faint",
+                  "scratch_light", "scratch_medium", "scratch_deep",
+                  "scratch_severe"],
         "canonical": "scratch",
         "colour": "#58a6ff",
         "structural": False,
@@ -64,7 +70,15 @@ FINAL_CLASSES = {
     },
     "rust_paint": {
         "roboflow": ["Rust_Corrision", "Paint Damage"],
-        "drive": ["alloy_corrosion", "paint_bad_repair", "paint_fade"],
+        # paint_depth_* record how far through the paint stack the damage goes
+        # (thin / normal / thick / primer). That is a DEPTH axis rather than a
+        # damage type, and it is preserved in `subclass`: it is exactly the
+        # signal a severity head would need later, and exactly the wrong thing
+        # to split a five-class detector on.
+        "drive": ["alloy_corrosion", "paint_bad_repair", "paint_fade",
+                  "paint_chip", "paint_rust", "paint_depth_thin",
+                  "paint_depth_normal", "paint_depth_thick",
+                  "paint_depth_primer"],
         "canonical": "rust",
         "colour": "#bb8009",
         "structural": True,
@@ -75,6 +89,20 @@ FINAL_CLASSES = {
                   "light_water", "alloy_buckle"],
         "canonical": "lamp_damage",
         "colour": "#e3b341",
+        "structural": True,
+    },
+    "structural": {
+        # Deliberately its own class rather than folded into dent. A shoved
+        # bumper, a broken structural member and a panel gap are the findings
+        # that decide whether a car is safe to drive, and severity.py already
+        # gates its "get this inspected" banner on exactly this distinction.
+        # Merging them into dent would erase the one call the report cannot
+        # afford to get wrong.
+        "roboflow": [],
+        "drive": ["structural_broken", "structural_bumper", "panel_gap",
+                  "panel_mismatch"],
+        "canonical": "deformation",
+        "colour": "#db6d28",
         "structural": True,
     },
 }
