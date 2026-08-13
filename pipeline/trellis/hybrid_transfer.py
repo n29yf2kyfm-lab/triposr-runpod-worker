@@ -66,6 +66,13 @@ except ImportError:
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
 from partcrafter_materials import classify, ROOF_NORMAL_UP  # noqa: E402
 
+# Height above which an up-facing face counts as ROOF rather than raked
+# windscreen. 0.90 freed the windscreen centre but ALSO freed up-facing upper
+# body shoulders — glass hit 13.5% of faces against a MEASURED real-car band
+# of 2.4-8.3% (11 audited catalogue cars). Swept 2026-08-13; see CLAUDE.md.
+import os
+ROOF_HEIGHT = float(os.environ.get("ROOF_HEIGHT", "0.90"))
+
 LABS = ["body", "canopy", "wheel", "interior", "lamp"]
 MATS = {
     "body":     PBRMaterial(name="Material_0",    baseColorFactor=[0.60, 0.61, 0.63, 1.0],
@@ -151,6 +158,28 @@ def _crease_cut(m, adj, ang, zidx, seed, p_seed, p_other, decay_d=None, tau=0.06
     return seg == pos
 
 
+
+def _roofish(fc_len, fc_up, n_up):
+    """Length-aware roof test. Measured 2026-08-13 on the test car: 24.7% of
+    glass AREA was up-facing — the canopy split was glazing the roof curvature
+    (n_up 0.7-0.85: too sloped for the 0.85 roof rule, too flat to be a
+    window). In the cabin mid-band there IS no raked screen, so anything
+    up-ish there is roof skin; only in the screen zones (front/rear quarters
+    of the length) can a steep face legitimately be glass, and there the
+    normal+height rule still protects the raked windscreen centre."""
+    # 0.36-0.60, not 0.32-0.68: at 0.68 the band clipped the windscreen BASE
+    # on a one-box body (lower third rendered silver, eye-checked 2026-08-13).
+    m_lo = float(os.environ.get("MID_LO", "0.36"))
+    m_hi = float(os.environ.get("MID_HI", "0.60"))
+    mid = (fc_len > m_lo) & (fc_len < m_hi)
+    # A "shelf rule" (screen-zone up-faces below 0.80 = body) was tried here
+    # 2026-08-13 and REVERTED after the eye test: on a one-box/MPV body the
+    # raked windscreen's CENTRE sits at up 0.65-0.80 with n_up ~0.7, and the
+    # rule painted the screen body. The number passed its band; the render was
+    # wrong. The eye outranks the number — do not reintroduce it.
+    return (mid & (n_up > 0.55)) | ((n_up > ROOF_NORMAL_UP) & (fc_up > ROOF_HEIGHT))
+
+
 def refine(m, flab, hy, pc_pts, pc_lab_names):
     """Fix the transfer's known failure modes, each with a physical argument:
     ragged glass boundaries (snap to creases), interior on the outside
@@ -180,7 +209,7 @@ def refine(m, flab, hy, pc_pts, pc_lab_names):
             # roof skin can never be glass — but "roof" is up-facing AND at
             # the top of the car; a raked windscreen centre is up-facing too
             # and must stay eligible (head-on render caught it painted body)
-            is_g &= ~((n_up[zidx] > 0.85) & (fc[zidx, 2] > 0.90))
+            is_g &= ~_roofish(fc[zidx, 0], fc[zidx, 2], n_up[zidx])
             flab[zidx] = np.where(is_g, C, B)
 
         # LAMPS: same recipe in the nose/tail bands
@@ -254,10 +283,17 @@ def refine(m, flab, hy, pc_pts, pc_lab_names):
         if len(tgt) and (flab[tgt] == L).mean() < 0.5:
             flab[tgt] = L
 
-    # BODY islands fully enclosed by glass are absurd — absorb whatever size
+    # BODY islands fully enclosed by glass are absurd (a panel floating in a
+    # window) — absorb them. EXCEPT up-facing islands: a ROOF PANEL correctly
+    # relabelled body becomes exactly such an island once the canopy glass
+    # surrounds it, and absorbing it re-glazed the roof (measured 2026-08-13:
+    # up-facing glass ROSE after the roof fix until this guard). A window
+    # hole is sloped/vertical; a roof panel faces up.
     comp, cnt = _patches(flab, adj, n, B)
     for cid, c in cnt.items():
         faces = np.where(comp == cid)[0]
+        if np.mean(n_up[faces]) > 0.5:
+            continue                      # up-facing island = roof, keep body
         fs = set(faces)
         border = {flab[b] if a in fs else flab[a]
                   for a, b in adj if (a in fs) != (b in fs)}
@@ -368,9 +404,15 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
     n_up = np.abs(m.face_normals[:, 1])
     out_lab = np.array(["body", "glass", "wheel", "interior", "lamp"])[flab]
     fcu = hy[m.faces].mean(axis=1)[:, 2]
-    roofish = (n_up > ROOF_NORMAL_UP) & (fcu > 0.90)
+    fcl = hy[m.faces].mean(axis=1)[:, 0]
+    roofish = _roofish(fcl, fcu, n_up)
     out_lab[(flab == C) & roofish] = "body"
     out_lab[(flab == C) & ~roofish] = "glass"
+    import os as _os
+    if _os.environ.get("DEBUG_DUMP"):
+        np.save("/tmp/dbg_flab.npy", flab); np.save("/tmp/dbg_roofish.npy", roofish)
+        np.save("/tmp/dbg_fcl.npy", fcl);   np.save("/tmp/dbg_fcu.npy", fcu)
+        np.save("/tmp/dbg_nup.npy", n_up)
 
     share = {k: round(100 * float(np.mean(out_lab == k)), 1)
              for k in ("body", "glass", "wheel", "interior", "lamp")}
