@@ -203,9 +203,13 @@ def refine(m, flab, hy, pc_pts, pc_lab_names):
         zidx = np.where(zone)[0]
         if len(zidx):
             seed = flab[zidx] == C
-            p_roof = np.where(seed, 0.88, 0.10)
+            # lam raised 4->8 for the glass cut only (owner: "glass to clear
+            # tighter"): the Hi3DGen mesh carves a real DLO recess, so letting
+            # crease smoothness outweigh the melt-derived data term snaps the
+            # boundary onto that recess instead of following ragged seeds.
             is_g = _crease_cut(m, adj, ang, zidx, seed, 0.88, 0.10,
-                               decay_d=d_can[zidx], tau=0.06)
+                               decay_d=d_can[zidx], tau=0.06,
+                               lam=float(os.environ.get("GLASS_LAM", "8.0")))
             # roof skin can never be glass — but "roof" is up-facing AND at
             # the top of the car; a raked windscreen centre is up-facing too
             # and must stay eligible (head-on render caught it painted body)
@@ -300,6 +304,80 @@ def refine(m, flab, hy, pc_pts, pc_lab_names):
         if border == {C}:
             flab[faces] = C
     return flab
+
+
+def _erode(mask, adj, k):
+    m2 = mask.copy()
+    for _ in range(k):
+        diff = m2[adj[:, 0]] != m2[adj[:, 1]]
+        border = np.zeros_like(m2)
+        border[adj[diff, 0]] = True
+        border[adj[diff, 1]] = True
+        m2 = m2 & ~border
+    return m2
+
+
+def _dilate(mask, adj, k, limit):
+    m2 = mask.copy()
+    for _ in range(k):
+        touch = m2[adj[:, 0]] | m2[adj[:, 1]]
+        add = np.zeros_like(m2)
+        add[adj[touch, 0]] = True
+        add[adj[touch, 1]] = True
+        m2 = (m2 | add) & limit
+    return m2
+
+
+def _mask_comps(mask, adj, n):
+    same = mask[adj[:, 0]] & mask[adj[:, 1]]
+    g = sp.csr_matrix((np.ones(same.sum()), (adj[same, 0], adj[same, 1])), shape=(n, n))
+    _, comp = sp.csgraph.connected_components(g + g.T, directed=False)
+    comp[~mask] = -1
+    return comp, Counter(comp[mask])
+
+
+def tighten(out_lab, adj, n_up, k=2, min_glass=400, min_lamp=800, fill=2500):
+    """Owner request 2026-08-13: 'just need glass to clear tighter'. The
+    ragged glazing is fringe + specks inherited from PartCrafter's melt
+    labels; smoothing upstream cannot remove it without also moving real
+    boundaries. This pass is strictly one-way for glass — a morphological
+    OPENING on the face graph (erode k rings, regrow only inside the
+    original mask), so glass can only shrink or stay, never spread onto
+    bodywork:
+      * fringe/tendrils thinner than ~2k faces across are gone,
+      * glass specks on doors/wings die with the component filter,
+      * body pinholes fully inside a window are filled (closing), except
+        up-facing islands — that is the roof-panel guard from refine(),
+        same argument.
+    Lamp confetti gets only the speck filter: an opening could erase a
+    genuine thin lamp strip, a size filter cannot (a real lamp patch is
+    thousands of faces)."""
+    n = len(out_lab)
+    glass = out_lab == "glass"
+    opened = _dilate(_erode(glass, adj, k), adj, k, glass)
+    out_lab[glass & ~opened] = "body"
+    comp, cnt = _mask_comps(out_lab == "glass", adj, n)
+    for cid, c in cnt.items():
+        if c < min_glass:
+            out_lab[comp == cid] = "body"
+    comp, cnt = _mask_comps(out_lab == "body", adj, n)
+    glass_now = out_lab == "glass"
+    for cid, c in cnt.items():
+        if c > fill:
+            continue
+        faces = np.where(comp == cid)[0]
+        if np.mean(n_up[faces]) > 0.5:
+            continue                      # up-facing island = roof panel
+        fs = set(faces)
+        border = [(glass_now[b] if a in fs else glass_now[a])
+                  for a, b in adj if (a in fs) != (b in fs)]
+        if border and all(border):        # empty border = floating chunk, keep
+            out_lab[faces] = "glass"
+    comp, cnt = _mask_comps(out_lab == "lamp", adj, n)
+    for cid, c in cnt.items():
+        if c < min_lamp:
+            out_lab[comp == cid] = "body"
+    return out_lab
 
 
 def clamp_spikes(m, hy, thresh=1.015):
@@ -413,6 +491,8 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
         np.save("/tmp/dbg_flab.npy", flab); np.save("/tmp/dbg_roofish.npy", roofish)
         np.save("/tmp/dbg_fcl.npy", fcl);   np.save("/tmp/dbg_fcu.npy", fcu)
         np.save("/tmp/dbg_nup.npy", n_up)
+
+    out_lab = tighten(out_lab, adj, n_up)
 
     share = {k: round(100 * float(np.mean(out_lab == k)), 1)
              for k in ("body", "glass", "wheel", "interior", "lamp")}
