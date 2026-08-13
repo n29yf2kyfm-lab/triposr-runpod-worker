@@ -557,6 +557,25 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
     n_wid = np.abs(m.face_normals[:, axes[1]])
     out_lab = region_snap(out_lab, band & (n_wid > 0.6), adj,
                           m.face_adjacency_angles, len(m.faces))
+    # Screens sit HIGH. At the car's ends the only legitimate glazing is the
+    # windscreen / rear screen, and both live above ~0.6 of car height — glass
+    # below that at the ends is bumper/tailgate/cowl noise (the Golf rear 3/4
+    # showed tint blobs beside the number plate). Physical rule, both ends.
+    ends = (fcl > 0.82) | (fcl < 0.18)
+    out_lab[(out_lab == "glass") & ends & (fcu < 0.60)] = "body"
+    # Rear glazing is symmetric across the width midline; melt noise is not.
+    # In the tail zone, a glass face whose mirror image is body loses — this
+    # halves nothing real (the screen's core is symmetric) and kills the
+    # one-sided quarter-panel blobs.
+    tail = (out_lab == "glass") & (fcl > 0.80)
+    if tail.any():
+        tree_fc = cKDTree(fc)
+        mir = fc[tail].copy()
+        mir[:, 1] = 1 - mir[:, 1]
+        d_m, nn_m = tree_fc.query(mir, workers=4)
+        bad = (d_m < 0.02) & (out_lab[nn_m] != "glass")
+        idx = np.where(tail)[0]
+        out_lab[idx[bad]] = "body"
 
     share = {k: round(100 * float(np.mean(out_lab == k)), 1)
              for k in ("body", "glass", "wheel", "interior", "lamp")}
