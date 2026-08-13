@@ -1621,3 +1621,35 @@ CONSEQUENCES, act on these:
 
 Cheap detector, run it in the wave before spending GPU: pull the glTF JSON,
 count distinct untextured baseColorFactor triples, refuse at 1.
+
+## Council audit + RCA 2026-08-13 (evening): why every route fails — ROOT CAUSE
+
+Owner asked "why everything going wrong". The 5-why lands on STRATEGY, not
+tooling:
+
+**ROOT CAUSE (confidence ~85%): the supply strategy is inverted against the
+demand curve.** Product demand concentrates in ~50 UK-volume nameplates; free
+Sketchfab supply concentrates in the exact opposite (halo/classics — the Ford
+pool held 87 Mustangs vs 11 Fiestas, and the day's one keeper was an ST halo
+variant). The modern volume cars that DO exist free are photogrammetry scans
+or Sketchfab converter-clay. The people who model a Puma/Qashqai properly are
+pro studios who SELL: Squir at ~EUR 129/model, CGTrader lists ~2,000 Qashqai
+models, TurboSquid royalty-free. Top ~20 UK gap cars ~= EUR 1,000-2,600
+one-off — less than the generation experiments cost in GPU time alone.
+Generation failing (voxel wall), waves yielding 0-1, the Puma gap, the clay
+shells: one fact in different masks — A PREMIUM MODERN VOLUME CAR IS A PAID
+ASSET CLASS. The buy-vs-build decision was never explicitly made; put it to
+the owner as a costed decision, and stop expecting sweeps to close top-10
+gaps (they structurally cannot).
+
+**Process failure to never repeat: detectors ran AFTER presentation, twice in
+one day.** The Juke probed flat_shell=True BEFORE its sheet was shown, and it
+was still framed as a keeper candidate; the owner said Keep on a clay shell.
+The decisive test (distinct untextured baseColorFactor count == 1) is a free
+glTF read. ORDER IS THE RULE: every known detector runs BEFORE a sheet
+reaches the owner's eyes; a sheet carries its verdicts in the header or it
+does not get presented. `cov`/`mats` are proven blind to clay (Juke read
+mats=1 cov=0.121 'recolourable').
+
+Honest wave metric: keepers-per-wave, not candidates-per-sweep. Ford: 256
+candidates -> 1 keeper. Gap wave: 6 rendered -> 0 keepers.
