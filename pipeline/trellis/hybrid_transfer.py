@@ -549,7 +549,14 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
 
     band = (fcu > 0.42) & (fcl > 0.05) & (fcl < 0.95) & ~roofish
     out_lab = tighten(out_lab, adj, n_up, allowed=band)
-    out_lab = region_snap(out_lab, band, adj, m.face_adjacency_angles, len(m.faces))
+    # region_snap is SIDE GLASS ONLY: the recess crease loop exists there and
+    # nowhere else. The windscreen and rear screen flow smoothly into roof and
+    # tailgate, so their regions merge with big body panels and lose the vote
+    # — the first full-band run wiped the windscreen (glass 11.2% -> 1.3%,
+    # caught by the refusal guard). Side-facing faces only.
+    n_wid = np.abs(m.face_normals[:, axes[1]])
+    out_lab = region_snap(out_lab, band & (n_wid > 0.6), adj,
+                          m.face_adjacency_angles, len(m.faces))
 
     share = {k: round(100 * float(np.mean(out_lab == k)), 1)
              for k in ("body", "glass", "wheel", "interior", "lamp")}
