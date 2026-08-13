@@ -1585,3 +1585,39 @@ Wave mechanics lessons, both fixed in-repo the same evening:
     resumable wave picks the staged file up without re-downloading. Two such
     ledger entries were removed with justification; the ledger's 'can never
     succeed' contract now only truly applies to no-GLB-offered rows.
+
+## The 0.588 clay shell comes from SKETCHFAB, not from our pipeline (2026-08-13)
+
+CLAUDE.md has said since 2026-08-11 that 23 live clay shells "share the
+IDENTICAL value 0.588 across unrelated marques, which is the fingerprint of one
+pipeline step rather than 64 bad sources". That step is NOT ours. Measured on
+two FRESH candidates never touched by our tooling:
+
+  Nissan Juke 2023 (d1ad9558) — 20 materials, ALL 0.588: body, glass, d_glass,
+    o_glass, r_glass, tire_mat4, chrome, copper... one value, names intact.
+  Opel Astra Turbo 2022 (53ade65c) — 54 materials, 45 untextured, ALL 0.800.
+
+Both are Sketchfab CONVERSIONS of a non-glTF upload (V-Ray/3ds Max style
+material names). Checked all four formats the download API offers — source,
+gltf, usdz, glb — and the **gltf archive is flat at 0.588 too**, so it is not
+the GLB packing step: Sketchfab's converter assigns one neutral diffuse to
+every material it cannot translate, and keeps the names. That is exactly the
+"names survive, colours gone" signature.
+
+CONSEQUENCES, act on these:
+  * A rich, correctly-named material table is NOT evidence of a good car.
+    The Juke lists body/glass/tire/chrome separately and is still a clay shell.
+    Only the baseColorFactor SPREAD settles it:
+    `len({tuple(bcf[:3]) for untextured mats}) == 1` -> flat.
+  * The wave sheet header's `body mats=N cov=X` cannot see this either: the
+    Juke read `mats=1 cov=0.121 recolourable` — a healthy-looking line — and
+    the Astra `mats=2 cov=0.116 recolourable`. Both are clay.
+  * Downloading a different Sketchfab format does NOT recover the colours.
+    Do not spend another wave trying; the only route is a different upload of
+    the same car, or a licensed model.
+  * This is the SAME defect the owner scrapped 64 live cars for. Treat a fresh
+    0.588/0.800 candidate as a scrap at sourcing time, before it costs a
+    render.
+
+Cheap detector, run it in the wave before spending GPU: pull the glTF JSON,
+count distinct untextured baseColorFactor triples, refuse at 1.
