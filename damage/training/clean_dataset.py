@@ -339,11 +339,23 @@ def _classify_many(paths, use_ocr, jobs, progress_every=500):
     Progress is printed and FLUSHED as it goes for the same reason: the silent
     version was indistinguishable from the deadlocked one.
     """
+    import sys
     items = [(p, use_ocr) for p in paths]
     if jobs <= 1 or len(items) < 32:
-        return dict(_classify_one(i) for i in items)
+        # Progress here too, not only in the pool branch. The first version
+        # printed nothing on this path, so a 13k-image single-threaded run —
+        # the very fallback chosen BECAUSE the pool deadlocked — produced an
+        # empty log for minutes and was indistinguishable from a hang. Silence
+        # is the failure mode this whole function is trying to avoid.
+        out = {}
+        for i, it in enumerate(items, 1):
+            path, res = _classify_one(it)
+            out[path] = res
+            if progress_every and i % progress_every == 0:
+                print(f"    ...{i}/{len(items)}", flush=True)
+                sys.stdout.flush()
+        return out
     import multiprocessing as mp
-    import sys
     ctx = mp.get_context("spawn")
     out = {}
     with ctx.Pool(jobs) as pool:

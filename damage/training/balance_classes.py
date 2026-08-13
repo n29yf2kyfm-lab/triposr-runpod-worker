@@ -108,7 +108,14 @@ def ingest_coco(root, splits=("train", "valid", "test")):
             finals = [f for f in finals if f]
             if not finals:
                 continue
-            dominant = max(set(finals), key=finals.count)
+            # sorted(), not set(): iterating a set of strings follows Python's
+            # per-process randomised string hashing, so a tie between two
+            # classes resolved as "dent" in one run and "scratch_scuff" in the
+            # next. That silently reshuffles which class an image is filed
+            # under, and therefore the train/valid/test split, between runs of
+            # the same command. Verified by running the same tie six times and
+            # getting both answers back.
+            dominant = max(sorted(set(finals)), key=finals.count)
             boxes = [{"bbox": a["bbox"],
                       "final": CM.from_roboflow(cats.get(a["category_id"], ""))}
                      for a in anns
@@ -214,17 +221,31 @@ def augment_to_target(rows, target, out_dir, rng, quality=88):
         dst = os.path.join(out_dir, f"{it['sha'][:16]}{os.path.splitext(it['path'])[1].lower()}")
         try:
             shutil.copyfile(it["path"], dst)
-        except OSError:
+            with Image.open(dst) as im:
+                w, h = im.size
+        except Exception:
             continue
-        written.append({**it, "out": os.path.basename(dst), "aug": 0})
+        written.append({**it, "out": os.path.basename(dst), "aug": 0,
+                        "width": w, "height": h})
     real = len(written)
     if real == 0 or real >= target:
         return written, real, 0
 
+    # Sources that cannot be opened are retired permanently. The previous
+    # version incremented the variant counter and `continue`d WITHOUT
+    # incrementing `made`, so `rows[made % real]` selected the same broken file
+    # on every iteration and the loop never terminated — a single corrupt JPEG
+    # in a class hung the whole build. Confirmed by feeding it one unreadable
+    # file and watching it spin until killed.
+    usable = list(rows)
+    bad = set()
     made = 0
     k = 1
-    while real + made < target:
-        src = rows[made % real]
+    guard = 0
+    max_guard = target * 4 + 64        # cannot spin longer than the work needed
+    while real + made < target and usable and guard < max_guard:
+        guard += 1
+        src = usable[made % len(usable)]
         try:
             with Image.open(src["path"]) as im:
                 im = im.convert("RGB")
@@ -232,13 +253,72 @@ def augment_to_target(rows, target, out_dir, rng, quality=88):
                 name = f"{src['sha'][:16]}_a{k:03d}.jpg"
                 img.save(os.path.join(out_dir, name), quality=quality)
         except Exception:
-            k += 1
+            bad.add(src["sha"])
+            usable = [r for r in usable if r["sha"] not in bad]
             continue
-        written.append({**src, "out": name, "aug": k, "boxes": boxes})
+        # Every variant preserves the frame size (flip, crop-and-resize-back
+        # and photometric all end at W x H), so the source dimensions are the
+        # output dimensions and the boxes stay in the same coordinate space.
+        written.append({**src, "out": name, "aug": k, "boxes": boxes,
+                        "width": img.size[0], "height": img.size[1]})
         made += 1
-        if made % real == 0:
+        if usable and made % len(usable) == 0:
             k += 1                                     # next variant sweep
+    if bad:
+        print(f"      skipped {len(bad)} unreadable source image(s)")
+    if real + made < target:
+        print(f"      SHORT: wrote {real+made} of {target} "
+              f"({'no usable sources' if not usable else 'guard tripped'})")
     return written, real, made
+
+
+def write_coco(manifest, out_root):
+    """Emit _annotations.coco.json per split, next to the images.
+
+    Without this the balancer produced class folders and a manifest and nothing
+    a detector could read — the boxes existed only as a JSON field nobody
+    consumes. RF-DETR and every COCO loader want this file beside the images.
+
+    Category ids follow class_map.class_index(), which starts real classes at 1
+    and reserves 0 as the placeholder, matching prepare_data.py so the two
+    pipelines cannot disagree about what category 1 means.
+
+    Images live in <split>/<class>/, so file_name carries that relative path;
+    a loader pointed at <split>/ resolves it without flattening the tree.
+    """
+    idx = CM.class_index()
+    for split in ("train", "valid", "test"):
+        rows = [m for m in manifest if m.get("split") == split]
+        if not rows:
+            continue
+        images, annotations = [], []
+        img_id = ann_id = 1
+        for m in rows:
+            images.append({"id": img_id,
+                           "file_name": f"{m['class']}/{m['out']}",
+                           "width": m.get("width"), "height": m.get("height")})
+            for b in (m.get("boxes") or []):
+                cat = idx.get(b.get("final"))
+                if not cat:
+                    continue
+                x, y, w, h = b["bbox"]
+                annotations.append({"id": ann_id, "image_id": img_id,
+                                    "category_id": cat,
+                                    "bbox": [round(float(v), 2) for v in (x, y, w, h)],
+                                    "area": round(float(w) * float(h), 2),
+                                    "iscrowd": 0})
+                ann_id += 1
+            img_id += 1
+        cats = [{"id": 0, "name": "_placeholder_", "supercategory": "none"}]
+        cats += [{"id": i, "name": c, "supercategory": CM.canonical(c)}
+                 for c, i in sorted(idx.items(), key=lambda kv: kv[1])]
+        path = os.path.join(out_root, split, "_annotations.coco.json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w") as f:
+            json.dump({"images": images, "annotations": annotations,
+                       "categories": cats}, f)
+        print(f"  {split}/_annotations.coco.json: {len(images)} images, "
+              f"{len(annotations)} boxes")
 
 
 def main():
@@ -251,6 +331,11 @@ def main():
                     help="cap augmentation multiplier (0 = uncapped)")
     ap.add_argument("--seed", type=int, default=1234)
     ap.add_argument("--report-only", action="store_true")
+    ap.add_argument("--task", choices=["detect", "classify"], default="detect",
+                    help="detect needs boxes on every image; classify does not")
+    ap.add_argument("--allow-unboxed", action="store_true",
+                    help="for --task detect: keep images that have no boxes. "
+                         "Almost never right — see the guard below.")
     args = ap.parse_args()
     rng = random.Random(args.seed)
 
@@ -262,6 +347,27 @@ def main():
         print("  not trained (negatives / parked):")
         for k, v in sorted(skipped.items(), key=lambda kv: -kv[1]):
             print(f"    {k:22s} {v}")
+
+    # A DETECTOR CANNOT LEARN FROM AN IMAGE WITH NO BOXES — it learns the
+    # opposite of what the folder says. An unannotated photo of a dented door
+    # is not "a dent example" to a detector, it is a full frame of BACKGROUND,
+    # and every pixel of visible damage in it becomes a negative. The Drive
+    # corpus is 100% box-less (22,195 of 22,195), so quietly mixing it in would
+    # make ~62% of the training set actively teach the model that damage is
+    # nothing. It must be pseudo-labelled first; until then this refuses.
+    unboxed = [i for i in items if not i.get("boxes")]
+    if args.task == "detect" and unboxed and not args.allow_unboxed:
+        by_src = {}
+        for i in unboxed:
+            by_src[i["source"]] = by_src.get(i["source"], 0) + 1
+        print(f"\n  REFUSING {len(unboxed)} images with no bounding boxes "
+              f"({len(unboxed)/max(1,len(items))*100:.0f}% of the corpus): {by_src}")
+        print("  A detector trained on these learns that visible damage is "
+              "background.\n  Pseudo-label them first (see --task classify to "
+              "build a classifier instead,\n  or --allow-unboxed if you really "
+              "mean it).")
+        items = [i for i in items if i.get("boxes")]
+        print(f"  continuing with {len(items)} boxed images")
 
     items, dupes = dedupe(items)
     print(f"  deduped: dropped {dupes}, kept {len(items)}")
@@ -312,10 +418,14 @@ def main():
                                       f"{os.path.splitext(it['path'])[1].lower()}")
                 try:
                     shutil.copyfile(it["path"], dst)
-                except OSError:
+                    from PIL import Image as _I
+                    with _I.open(dst) as im:
+                        w, h = im.size
+                except Exception:
                     continue
-                manifest.append({**it, "out": os.path.basename(dst),
-                                 "aug": 0, "split": sp, "class": c})
+                manifest.append({**it, "out": os.path.basename(dst), "aug": 0,
+                                 "split": sp, "class": c,
+                                 "width": w, "height": h})
     os.makedirs(args.out, exist_ok=True)
     with open(os.path.join(args.out, "manifest.jsonl"), "w") as f:
         for m in manifest:
@@ -324,6 +434,8 @@ def main():
         json.dump({"classes": CM.class_index(),
                    "colours": {c: CM.colour(c) for c in classes},
                    "canonical": {c: CM.canonical(c) for c in classes}}, f, indent=2)
+    if args.task == "detect":
+        write_coco(manifest, args.out)
     print(f"\nwrote {len(manifest)} images -> {args.out}")
 
 
