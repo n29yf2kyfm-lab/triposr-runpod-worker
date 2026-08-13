@@ -295491,5 +295491,314 @@
    "method": "render",
    "at": "2026-08-13"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "nissan-juke-2023-cr1-v1",
+  "make": "nissan",
+  "model": "Juke",
+  "modelFamily": "nissan juke",
+  "modelAliases": [
+   "Juke"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2023,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "d1ad9558fe5743e48d3b5ff8625f497d",
+  "sourceRetrievedAt": "2026-08-13",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "body"
+  ],
+  "glassMaterialNames": [
+   "d_glass",
+   "glass",
+   "r_glass",
+   "vd_glass",
+   "lights_glass",
+   "o_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-2023-cr1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-juke-2023-cr1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 47366800,
+  "mobileFileSizeBytes": 47366800,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "4b04c4bd0d9becd5e1193d87d7bae269a9553f2e700a9188cfe207647dd8097b",
+  "pipelineVersion": "publish-batch-cr1-2026-08-13",
+  "publishedAt": "2026-08-13",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "cr1 gated publish 2026-08-13: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-13, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-cr1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Gun Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Gun Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Ceramic Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Ceramic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Storm White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Storm White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Pearl Black",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Pearl Black",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Blade Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Blade Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Magnetic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fuji Sunset Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fuji Sunset Red",
+     "glbUrl": null
+    },
+    {
+     "family": "burgundy",
+     "label": "Burgundy Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Burgundy Metallic",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "vauxhall-astra-2022-cr1-v1",
+  "make": "vauxhall",
+  "model": "Astra",
+  "modelFamily": "vauxhall astra",
+  "modelAliases": [
+   "Astra"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2022,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "53ade65c92514798bd6d90b1b457a3d1",
+  "sourceRetrievedAt": "2026-08-13",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "carpaint",
+   "carpaint.001"
+  ],
+  "glassMaterialNames": [
+   "glass_clear",
+   "win_int"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": null,
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-astra-2022-cr1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-astra-2022-cr1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 47932132,
+  "mobileFileSizeBytes": 47932132,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "4aaf84e0c726ad0df558d9d64cb6052bac8a40ba4b189d66de08ccb4b6c997fa",
+  "pipelineVersion": "publish-batch-cr1-2026-08-13",
+  "publishedAt": "2026-08-13",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "cr1 gated publish 2026-08-13: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-13, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-cr1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false
  }
 ]
