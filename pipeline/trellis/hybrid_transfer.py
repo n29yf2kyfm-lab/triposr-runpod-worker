@@ -489,7 +489,12 @@ def mirror_side_glass(out_lab, fc, band_side, adj):
                 env[k] = o
         outer = np.array([off[t] >= env[k] - 0.015 for t, k in zip(tgt, key)])
         ci = np.clip((fc[tgt][:, [0, 2]] / res).astype(int), 0, W - 1)
-        want_glass = grid[ci[:, 0], ci[:, 1]] & outer
+        in_grid = grid[ci[:, 0], ci[:, 1]]
+        want_glass = in_grid & outer
+        if os.environ.get("DEBUG_DUMP"):
+            np.savez(f"/tmp/dbg_mirror_{sname}.npz", tgt=tgt, outer=outer,
+                     in_grid=in_grid, off=off[tgt], fc=fc[tgt],
+                     was_glass=(out_lab[tgt] == "glass"), grid=grid)
         out_lab[tgt] = np.where(want_glass, "glass", "body")
     print(f"mirror_side_glass: stencil from '{win}' side "
           f"(boundary/area {scores[win]:.3f} vs "
