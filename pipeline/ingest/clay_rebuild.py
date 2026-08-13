@@ -71,6 +71,12 @@ RULES = [
     (r"wiper|suspension|clutch|chassis|engine|exhaust",    "trim_matt"),    # under-car / hardware
     (r"leds?_|led\b|charge_tex|rpm_tex|speed_tex|gauge|instrument", "interior"),  # dials, charge port UI
     (r"reflect|texpattern|plasticglossy",                  "trim_gloss"),   # gloss black trim
+    # Third pass, from the Elantra N 2024's unmapped names. Lamp FUNCTIONS
+    # are named by what they do, not by the word "lamp": daylight running
+    # lights, reverse lights, stop lights and emissive badge glows are all
+    # lit elements, and were rendering as dark trim on the lamp clusters.
+    (r"daylight|drl|emissive|emmisive|\bstop\b|\brevers",   "lamp"),
+    (r"stitch|android_auto|carplay|screen|infotain",        "interior"),
 ]
 
 PBR = {
