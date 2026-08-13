@@ -445,57 +445,55 @@ def region_snap(out_lab, band, adj, ang, n,
 def mirror_side_glass(out_lab, fc, band_side, adj):
     """A car's side glazing is left-right symmetric; generated labels are
     not (the single input photo shows one side, so one side's labels are
-    always cleaner — on the Golf the right band was continuous while the
-    left stayed ragged). Score each side's glass mask by boundary-to-area
-    ratio, keep the cleaner side, and mirror it wholesale onto the other.
-    Only glass/body inside the side band is touched."""
-    # OUTER SKIN ONLY. The shell carries interior surfaces (door lining,
-    # cabin walls) at the SAME (length, up) as the windows, side-facing and
-    # labelled body — invisible in renders but present in the band. Matching
-    # in the (length, up) plane mixed them with window faces, so every k-NN
-    # query voted ~50/50 and the transplant came out dithered (bisected
-    # 2026-08-13: the dither exists straight out of the mirror). Keep only
-    # faces near each (length, up) cell's outer width envelope.
-    off = np.abs(fc[:, 1] - 0.5)
-    kl = np.clip(np.floor(fc[:, 0] * 40).astype(int), 0, 39)
-    ku = np.clip(np.floor(fc[:, 2] * 20).astype(int), 0, 19)
-    outer = np.zeros(len(fc), bool)
-    for sname, sside in (("lo", fc[:, 1] < 0.5), ("hi", fc[:, 1] >= 0.5)):
-        zi = np.where(band_side & sside)[0]
-        env = {}
-        for i in zi:
-            k = (kl[i], ku[i])
-            env[k] = max(env.get(k, 0.0), off[i])
-        for i in zi:
-            if off[i] >= env[(kl[i], ku[i])] - 0.02:
-                outer[i] = True
-    scores, masks = {}, {}
-    for sname, sside in (("lo", fc[:, 1] < 0.5), ("hi", fc[:, 1] >= 0.5)):
-        zone = band_side & sside & outer
-        gm = zone & (out_lab == "glass")
+    always cleaner). Pick the side whose glass mask has the lower
+    boundary-to-area ratio, rasterise ITS glass into a fine 2D (length, up)
+    STENCIL, clean the stencil with 2D morphology, and stamp BOTH sides
+    from it.
+
+    Why a stencil and not label sampling: two k-NN transplant attempts both
+    came out dithered, bisected to the same cause — the shell carries
+    interior surfaces (door lining, cabin walls) side-facing at the same
+    (length, up) as the windows, so any per-face sampling mixes window with
+    hidden lining. The stencil is built from glass faces only (lining is
+    labelled body and never enters it), cleaned on a regular grid where
+    morphology has none of the mesh-adjacency traps, and the stamp forces
+    non-outer faces to body so lining can never become see-through."""
+    from scipy import ndimage as ndi
+    sides = {"lo": fc[:, 1] < 0.5, "hi": fc[:, 1] >= 0.5}
+    scores = {}
+    for sname, sside in sides.items():
+        gm = band_side & sside & (out_lab == "glass")
         if gm.sum() < 200:
             return out_lab                 # a side without glass: leave alone
         bd = (gm[adj[:, 0]] != gm[adj[:, 1]]).sum()
         scores[sname] = bd / gm.sum()
-        masks[sname] = (zone, gm)
     win = min(scores, key=scores.get)
-    lose = "hi" if win == "lo" else "lo"
-    wz, wg = masks[win]
-    lz = masks[lose][0]
-    src = np.where(wz)[0]
-    tree_w = cKDTree(fc[src][:, [0, 2]])       # match in (length, up) plane
-    tgt = np.where(lz)[0]
-    # k-NN MAJORITY, not nearest-single: the two sides are tessellated
-    # differently, and 1-NN sampling aliased the transplant into a
-    # salt-and-pepper dither (Golf left band, eye-checked — the gates all
-    # passed while the render was garbage). A 9-neighbour vote in the
-    # continuous (length, up) plane low-pass filters the boundary instead.
-    d, nn = tree_w.query(fc[tgt][:, [0, 2]], k=9, workers=4)
-    ok = d[:, 0] < 0.03
-    frac = wg[src[nn]].mean(axis=1)
-    out_lab[tgt[ok]] = np.where(frac[ok] >= 0.5, "glass", "body")
-    print(f"mirror_side_glass: kept '{win}' side "
-          f"(boundary/area {scores[win]:.3f} vs {scores[lose]:.3f})")
+    res = 0.008
+    W = int(1 / res) + 2
+    grid = np.zeros((W, W), bool)
+    wg = np.where(band_side & sides[win] & (out_lab == "glass"))[0]
+    gi = np.clip((fc[wg][:, [0, 2]] / res).astype(int), 0, W - 1)
+    grid[gi[:, 0], gi[:, 1]] = True
+    grid = ndi.binary_closing(grid, structure=np.ones((7, 7)))
+    grid = ndi.binary_opening(grid, structure=np.ones((3, 3)))
+    grid = ndi.binary_fill_holes(grid)
+    # outer-skin per fine (length, up) cell and side: lining sits inboard
+    off = np.abs(fc[:, 1] - 0.5)
+    for sname, sside in sides.items():
+        tgt = np.where(band_side & sside)[0]
+        cell = (fc[tgt][:, [0, 2]] / 0.01).astype(int)
+        key = cell[:, 0] * 1000 + cell[:, 1]
+        env = {}
+        for k, o in zip(key, off[tgt]):
+            if o > env.get(k, 0.0):
+                env[k] = o
+        outer = np.array([off[t] >= env[k] - 0.015 for t, k in zip(tgt, key)])
+        ci = np.clip((fc[tgt][:, [0, 2]] / res).astype(int), 0, W - 1)
+        want_glass = grid[ci[:, 0], ci[:, 1]] & outer
+        out_lab[tgt] = np.where(want_glass, "glass", "body")
+    print(f"mirror_side_glass: stencil from '{win}' side "
+          f"(boundary/area {scores[win]:.3f} vs "
+          f"{scores['hi' if win == 'lo' else 'lo']:.3f})")
     return out_lab
 
 
