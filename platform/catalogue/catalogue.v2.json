@@ -295241,5 +295241,255 @@
    "method": "render",
    "at": "2026-08-11"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "ford-fiesta-st-2019-fo1-v1",
+  "make": "ford",
+  "model": "Fiesta ST",
+  "modelFamily": "ford fiesta st",
+  "modelAliases": [
+   "Fiesta ST"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2019,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "890f9f3c4e2444f58658d3e3e58ed556",
+  "sourceRetrievedAt": "2026-08-13",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution-NonCommercial-ShareAlike",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "FiestaMI_1080040001_004",
+   "FiestaMI_Engine1",
+   "FiestaMI_Exhaust1"
+  ],
+  "glassMaterialNames": [
+   "FiestaMI_Glass1",
+   "FiestaMI_Glass_Light1",
+   "Fiestared_glass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-fiesta-st-2019-fo1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-fiesta-st-2019-fo1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-fiesta-st-2019-fo1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-fiesta-st-2019-fo1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-fiesta-st-2019-fo1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-fiesta-st-2019-fo1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-fiesta-st-2019-fo1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/ford/ford-fiesta-st-2019-fo1-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-st-2019-fo1-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-fiesta-st-2019-fo1-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": null,
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 17802792,
+  "mobileFileSizeBytes": 17802792,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "fe3cefbd795adbffe41fe1ff4bf4657713f15f5b0d3e845ba769b85ad8dd4f33",
+  "pipelineVersion": "publish-batch-fo1-2026-08-13",
+  "publishedAt": "2026-08-13",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "fo1 gated publish 2026-08-13: licence recorded as 'CC Attribution-NonCommercial-ShareAlike' (author ''), owner keep verdict 2026-08-13, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-fo1",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carbonised Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbonised Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Agate Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Agate Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Frozen White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Frozen White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moondust Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moondust Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Chrome Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Chrome Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Desert Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desert Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fantastic Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fantastic Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mean Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mean Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Grabber Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Grabber Blue",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Magnetic Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Carbonised Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Moondust Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Agate Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Frozen White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Chrome Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Desert Island Blue Metallic",
+     "colourFamily": "Light Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Grabber Blue",
+     "colourFamily": "Bright Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Fantastic Red Metallic",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mean Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4865,
+   "variantsHash": "546c49fd23da721e184789862c5c1714e495065b",
+   "method": "render",
+   "at": "2026-08-13"
+  }
  }
 ]
