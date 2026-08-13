@@ -399,6 +399,42 @@ def tighten(out_lab, adj, n_up, allowed=None, k=2, k_close=5,
     return out_lab
 
 
+def region_snap(out_lab, band, adj, ang, n,
+                ang_thresh=None, vote=0.60, min_region=30):
+    """Snap glass/body boundaries onto the mesh's own crease network. The
+    Hi3DGen mesh carves side glass RECESSED (measured on the Golf: median
+    inset 0.023 of car width vs body faces in the same length/height cells),
+    so every window is enclosed by a physical crease loop. Cut the adjacency
+    graph at creases inside the greenhouse band, flood the smooth regions
+    between them, and give each region wholly to its majority label. The
+    ragged minority — melt-label noise — is overridden, and the boundary
+    lands exactly on the crease. Regions with a weak majority are left
+    alone: a leaking crease network must not wipe a window."""
+    if ang_thresh is None:
+        ang_thresh = float(os.environ.get("SNAP_ANG", "0.35"))
+    vote = float(os.environ.get("SNAP_VOTE", str(vote)))
+    inb = band & np.isin(out_lab, ["body", "glass"])
+    keep = inb[adj[:, 0]] & inb[adj[:, 1]] & (ang < ang_thresh)
+    g = sp.csr_matrix((np.ones(keep.sum()), (adj[keep, 0], adj[keep, 1])), shape=(n, n))
+    _, comp = sp.csgraph.connected_components(g + g.T, directed=False)
+    comp[~inb] = -1
+    sizes = Counter(comp[inb])
+    if sizes and max(sizes.values()) > 0.7 * inb.sum():
+        print("region_snap: crease network leaks (one region holds "
+              f"{100*max(sizes.values())/inb.sum():.0f}% of the band) — skipped")
+        return out_lab
+    for cid, c in sizes.items():
+        if c < min_region:
+            continue
+        faces = np.where(comp == cid)[0]
+        gm = float(np.mean(out_lab[faces] == "glass"))
+        if gm >= vote:
+            out_lab[faces] = "glass"
+        elif gm <= 1 - vote:
+            out_lab[faces] = "body"
+    return out_lab
+
+
 def clamp_spikes(m, hy, thresh=1.015):
     """Flatten antenna-spike artefacts: geometry above the real roofline
     (measured: roof crown tops at ~1.012, spikes at 1.03-1.06) is clamped
@@ -511,8 +547,9 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
         np.save("/tmp/dbg_fcl.npy", fcl);   np.save("/tmp/dbg_fcu.npy", fcu)
         np.save("/tmp/dbg_nup.npy", n_up)
 
-    out_lab = tighten(out_lab, adj, n_up,
-                      allowed=(fcu > 0.42) & (fcl > 0.05) & (fcl < 0.95) & ~roofish)
+    band = (fcu > 0.42) & (fcl > 0.05) & (fcl < 0.95) & ~roofish
+    out_lab = tighten(out_lab, adj, n_up, allowed=band)
+    out_lab = region_snap(out_lab, band, adj, m.face_adjacency_angles, len(m.faces))
 
     share = {k: round(100 * float(np.mean(out_lab == k)), 1)
              for k in ("body", "glass", "wheel", "interior", "lamp")}
