@@ -647,6 +647,17 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
     out_lab = region_snap(out_lab, band_side, adj,
                           m.face_adjacency_angles, len(m.faces))
     out_lab = mirror_side_glass(out_lab, fc, band_side, adj)
+    if os.environ.get("STOP_AFTER_MIRROR"):     # bisection debug only
+        scene = trimesh.Scene()
+        for lab in ("body", "glass", "wheel", "interior", "lamp"):
+            mask = out_lab == lab
+            if mask.any():
+                sub = m.submesh([np.where(mask)[0]], append=True)
+                sub.visual = trimesh.visual.TextureVisuals(material=MATS[lab])
+                scene.add_geometry(sub, node_name=lab, geom_name=lab)
+        scene.export(out_glb)
+        print(f"WROTE (post-mirror debug) {out_glb}")
+        return
     # Screens sit HIGH. At the car's ends the only legitimate glazing is the
     # windscreen / rear screen, and both live above ~0.6 of car height — glass
     # below that at the ends is bumper/tailgate/cowl noise (the Golf rear 3/4
