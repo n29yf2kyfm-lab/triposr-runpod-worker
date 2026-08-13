@@ -99,6 +99,11 @@ def main():
                          "Picks above the standard cap are flagged heavy=true.")
     ap.add_argument("--face-lo", type=int, default=FACE_LO,
                     help="lower face floor for this sweep (default %(default)s)")
+    ap.add_argument("--nameplates-only", action="store_true",
+                    help="skip the bare-marque query; sweep ONLY '<marque> "
+                         "<nameplate>' pairs. Use for any targeted wave (vans, "
+                         "bikes, a specific gap) — the bare query floods the "
+                         "pool with the marque's most popular cars.")
     ap.add_argument("--class-gate", choices=("car", "off"), default="car",
                     help="'car' (default) keeps BOTH title gates: BAD (toys, "
                          "game assets, low-poly) and WRONG_CLASS (train, boat, "
@@ -123,8 +128,16 @@ def main():
         known = set()
     log(f"catalogue already holds {len(known)} sourced uids")
 
-    queries = [a.marque] + [f"{a.marque} {n.strip()}"
-                            for n in a.nameplates.split(",") if n.strip()]
+    # The bare-marque query is right for a WHOLE-MARQUE sweep and wrong for a
+    # targeted one: sweeping Ford for VANS returned 200+ Mustangs, and BMW for
+    # BIKES returned M3s, because "Ford"/"BMW" alone matches the marque's most
+    # popular cars. --nameplates-only drops it so a targeted wave stays on
+    # target (measured 2026-08-13: vans 274 swept -> 62 genuine, bikes 307 ->
+    # 78; the rest were the marque's cars).
+    queries = ([] if a.nameplates_only else [a.marque]) + \
+        [f"{a.marque} {n.strip()}" for n in a.nameplates.split(",") if n.strip()]
+    if a.nameplates_only and not queries:
+        sys.exit("--nameplates-only needs --nameplates")
     pool = {}
     for q in queries:
         got = walk(tok, q, a.max_pages)
