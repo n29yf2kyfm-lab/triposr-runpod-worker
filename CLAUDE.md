@@ -1553,3 +1553,35 @@ all of them. **Do not propose a generator again without being asked.**
     the same rig ALSO shows bright side glass, so that brightness is the flank
     reflector cards, not a car defect. One control render prevented "fixing"
     something that was never broken.
+
+## Ford 5-car wave (2026-08-13): 1 keeper, and the Puma gap is a SCAN gap
+
+First wave after the stop-generation ruling, run to prove the sourcing loop
+end-to-end. Verdicts, sheet + glTF probe together:
+  * 2019 Ford Fiesta ST (890f9f3c) — KEEPER CANDIDATE. mk8 shape, real
+    material table, glass_probe clear/proven, premium sheet.
+  * Ford Kuga (3412188f) — scrap: glass_probe opaque/proven AND
+    flat_shell=True, plus 3 of 4 wheels missing. The sheet's clear glass was
+    worker-forged; the sheet alone would have passed it.
+  * Ford Focus MK3 (ef1dd0c3) — scrap on sight: camo livery, missing wheels.
+  * Ford Puma 2025 (9ba54b07) + Ford fiesta 2018 (142bb427) — both
+    photogrammetry SCANS: mats=1 cov~1.0 atlas, baked reflections, opaque
+    glazing, no respray possible. The Puma even has a taxi sign scanned on
+    its roof. Both fail the owner rulings regardless of looks.
+
+The lesson repeats 2026-08-08's: "a missing nameplate is usually missing
+because only scans exist." The UK's best-selling car exists on Sketchfab
+ONLY as a scan — the Puma/Kuga/modern-Fiesta gap cannot be closed from this
+source at the premium bar. Those nameplates need a different source class
+(licensed/commissioned), or the bar stays unmet.
+
+Wave mechanics lessons, both fixed in-repo the same evening:
+  * marque_sweep now takes --face-hi/--face-lo; the standard 1.2M cap is a
+    BROWSER budget and was hiding the modern Puma/Fiesta/Mondeo/S-Max class
+    (24 cars recovered at cap 2.6M, flagged heavy=true).
+  * gpu_wave HARD-REJECTS anything over the 48MB Supabase staging ceiling
+    into a permanent ledger — WRONG for big-but-good sources: decimate first
+    (decimate_heavy --budget 450000: 66MB -> 18.5MB) then stage; the
+    resumable wave picks the staged file up without re-downloading. Two such
+    ledger entries were removed with justification; the ledger's 'can never
+    succeed' contract now only truly applies to no-GLB-offered rows.
