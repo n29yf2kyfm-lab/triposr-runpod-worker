@@ -1505,3 +1505,51 @@ no-op. The durable lessons:
    overruled green gates twice (the dithered build passed all five); commits
    pushed immediately and artefacts staged to Supabase throughout, so the
    day's rollback cost nothing.
+
+## OWNER RULING 2026-08-13: STOP GENERATION. Sourcing is the route. Do not reopen.
+
+Put to the owner with the finished Golf rendered through the real production rig
+and the research below on the table. Verdict, on seeing the car: "It looks shit
+... it looks so tatty." Choice made: **stop generating, go back to sourcing.**
+This supersedes every "next experiment" in the generator sections above.
+
+**WHY, measured — this is not taste, it is a grid resolution limit:**
+Every generator this project has run (TRELLIS.2, PartCrafter, Hunyuan3D-2,
+Hi3DGen) works at 512-1024^3 voxels. On a 4m car that is ~8mm per voxel. A shut
+line is 2-4mm. The detail the owner keeps asking for is SMALLER THAN THE GRID
+THE MODEL DRAWS ON, so no Blender finishing pass and no parameter sweep can
+recover it. Hi3DGen was the last documented lever and it came back sharper but
+still soft — which this file had already named as the trigger to stop.
+
+**The 1536^3 tier that WOULD cross that line is commercial-only (checked
+2026-08-13, do not re-research from scratch):**
+  * Sparc3D (the method behind Hitem3D) — arXiv 2505.14521, repo
+    github.com/lizhihao6/Sparc3D. CODE AND WEIGHTS ARE NOT RELEASED: the repo
+    clones to README.md + assets/ and nothing else, and its HuggingFace demo
+    space (ilcve21/Sparc3D) exposes ZERO api endpoints, so it cannot be driven
+    programmatically. A web search summary claiming "available on GitHub with
+    pretrained weights" is WRONG — verified by cloning.
+  * Hunyuan3D 3.0 / 3.1 Pro — 1536^3, cloud/API only, no open weights.
+  * Hitem3D — paid product, 512/1024/1536/1536-Pro tiers.
+  * Rodin Gen-2 (~$30/mo, 10B params, rated best available), Tripo (2,000 free
+    credits, $0.01/credit), Meshy ($20/mo) all offer APIs and commercial rights.
+The owner was offered all four routes including the free-credit one and declined
+all of them. **Do not propose a generator again without being asked.**
+
+**What was salvaged from the generation work, and is worth keeping:**
+  * pipeline/trellis/finish_car.py — the two defects it fixes are REAL and would
+    affect any mesh this project builds: GLBs exported by trimesh submesh carry
+    NO vertex normals at all (0 of 13 primitives measured), which renders as
+    crumpled foil under the studio rig's clearcoat; and a hollow shell behind
+    forced-transparent glazing shows the lit far side of the body (proven by
+    control renders — white body gives white windows, black body dark windows).
+  * The local production-rig harness: render/handler.py can be imported and
+    called INSIDE Blender (stub runpod+requests, patch the one
+    use_denoising line if the local build lacks OpenImageDenoiser). This renders
+    any GLB exactly as the worker would, WITHOUT renting a pod, and it is how
+    both defects above were found after months of homemade flat-lit previews
+    hid them. Use it to audit any car locally.
+  * Control discipline that paid off: the real catalogue mk8 rendered through
+    the same rig ALSO shows bright side glass, so that brightness is the flank
+    reflector cards, not a car defect. One control render prevented "fixing"
+    something that was never broken.
