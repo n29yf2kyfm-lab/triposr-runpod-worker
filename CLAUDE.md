@@ -1097,6 +1097,34 @@ wing. More smoothing does not fix this — the fix is a better segmentation sour
 note: `partcrafter_materials.py` now has a lamp class (nose/tail, offset, lamp
 band -> dark gloss Lamp_Lens), which transfers through the hybrid too.
 
+## Hi3DGen TESTED (2026-08-13): the sharpness ceiling IS higher — first mesh with real panel features
+
+Five attended pod runs, ~$0.05 total, each failure self-named in ~90s (import
+stack -> sparse attn needs xformers|flash_attn ONLY (full_attn.py:30) -> newest
+diffusers + flash-attn registers a torch custom op torch 2.4 cannot parse (pin
+diffusers==0.31.0, use xformers 0.0.27.post2) -> BiRefNet weights are a THIRD
+repo (ZhengPeng7/BiRefNet, in app.py cache_weights) -> their own requirements
+pin timm==0.6.7 while BiRefNet remote code needs timm.layers (>=0.9; use >=1.0)).
+Deploy stack that works: image torch 2.4.0+cu121 untouched, spconv-cu121,
+xformers 0.0.27.post2 (cu121 index), diffusers==0.31.0, timm>=1.0,
+ATTN_BACKEND=xformers, SPCONV_ALGO=native. Driver calls Hi3DGenPipeline directly
+(app.py is Gradio-only). Weights: Stable-X/trellis-normal-v0-1 + yoso-normal-v1-8-1
++ ZhengPeng7/BiRefNet. Mesh exports Z-UP (length on Y) — rotate -90 about X.
+POD-SIDE FUSE (self-DELETE via the RunPod-injected pod-scoped key at 45 min)
+is now the standard ceiling — it survives operator-session death, the 7h lesson.
+
+**VERDICT on the same input photo as every other generator: CLEARLY SHARPER
+than Hunyuan3D-2, and the first model to produce shut-line-class features in
+the MESH:** separate grille slats, cowl/wiper slots, a visible bonnet crease,
+crisp DLO edge with recessed side glass, formed mirrors, thin wheel spokes.
+The predicted normal map (saved as evidence, staging/hybrid/hi3dgen_normal.png)
+carries door handles, shut lines and lamp internals — the architecture works.
+STILL PRESENT: artefact fins on the roof (antenna class), zipper-stitching
+along the beltline/bonnet edges, small holes at the cowl, wavy rims. And the
+structure is the SAME fused shell as every voxel model: 9 components, largest
+99.4% — so the PartCrafter/hybrid material route remains REQUIRED on top.
+Mesh staged at car-meshes/staging/hybrid/hi3dgen_hi3dgen_yup.glb, 495k faces.
+
 ## Wheel swap + the v4 boundary verdict (2026-08-12, late)
 
 **hybrid_transfer v4 patches VERIFIED**: the positional roof rule fixed the
