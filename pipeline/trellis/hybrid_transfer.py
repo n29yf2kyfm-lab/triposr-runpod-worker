@@ -668,6 +668,13 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
         out_lab[idx[bad]] = "body"
     n_len = np.abs(m.face_normals[:, axes[0]])
     out_lab = screen_fit(out_lab, fc, n_len)
+    # FINAL polish: every pass above can reintroduce fringe (measured on the
+    # Golf: 596 glass components after mirror+screen_fit — the transplant
+    # copies the winner side's fringe, and voting noise fragments it
+    # further). tighten() ran once early to feed region_snap clean input;
+    # run it AGAIN as the last word so specks, fringe and pinholes cannot
+    # survive whatever pass created them.
+    out_lab = tighten(out_lab, adj, n_up, allowed=band)
 
     share = {k: round(100 * float(np.mean(out_lab == k)), 1)
              for k in ("body", "glass", "wheel", "interior", "lamp")}
