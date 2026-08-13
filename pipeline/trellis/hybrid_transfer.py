@@ -442,6 +442,37 @@ def region_snap(out_lab, band, adj, ang, n,
     return out_lab
 
 
+def mirror_side_glass(out_lab, fc, band_side, adj):
+    """A car's side glazing is left-right symmetric; generated labels are
+    not (the single input photo shows one side, so one side's labels are
+    always cleaner — on the Golf the right band was continuous while the
+    left stayed ragged). Score each side's glass mask by boundary-to-area
+    ratio, keep the cleaner side, and mirror it wholesale onto the other.
+    Only glass/body inside the side band is touched."""
+    scores, masks = {}, {}
+    for sname, sside in (("lo", fc[:, 1] < 0.5), ("hi", fc[:, 1] >= 0.5)):
+        zone = band_side & sside
+        gm = zone & (out_lab == "glass")
+        if gm.sum() < 200:
+            return out_lab                 # a side without glass: leave alone
+        bd = (gm[adj[:, 0]] != gm[adj[:, 1]]).sum()
+        scores[sname] = bd / gm.sum()
+        masks[sname] = (zone, gm)
+    win = min(scores, key=scores.get)
+    lose = "hi" if win == "lo" else "lo"
+    wz, wg = masks[win]
+    lz = masks[lose][0]
+    src = np.where(wz)[0]
+    tree_w = cKDTree(fc[src][:, [0, 2]])       # match in (length, up) plane
+    tgt = np.where(lz)[0]
+    d, nn = tree_w.query(fc[tgt][:, [0, 2]], workers=4)
+    ok = d < 0.03
+    out_lab[tgt[ok]] = np.where(wg[src[nn[ok]]], "glass", "body")
+    print(f"mirror_side_glass: kept '{win}' side "
+          f"(boundary/area {scores[win]:.3f} vs {scores[lose]:.3f})")
+    return out_lab
+
+
 def screen_fit(out_lab, fc, n_len, cell=0.05, thresh=0.5, min_cells=8):
     """Redraw each SCREEN as a clean convex shape. Measured on the Golf: the
     rear screen has NO recess step (median inset -0.006, i.e. zero) and its
@@ -606,8 +637,10 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
     # — the first full-band run wiped the windscreen (glass 11.2% -> 1.3%,
     # caught by the refusal guard). Side-facing faces only.
     n_wid = np.abs(m.face_normals[:, axes[1]])
-    out_lab = region_snap(out_lab, band & (n_wid > 0.6), adj,
+    band_side = band & (n_wid > 0.6)
+    out_lab = region_snap(out_lab, band_side, adj,
                           m.face_adjacency_angles, len(m.faces))
+    out_lab = mirror_side_glass(out_lab, fc, band_side, adj)
     # Screens sit HIGH. At the car's ends the only legitimate glazing is the
     # windscreen / rear screen, and both live above ~0.6 of car height — glass
     # below that at the ends is bumper/tailgate/cowl noise (the Golf rear 3/4
@@ -633,6 +666,8 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
     share = {k: round(100 * float(np.mean(out_lab == k)), 1)
              for k in ("body", "glass", "wheel", "interior", "lamp")}
     print("face share:", share)
+    print(f"glass below beltline: "
+          f"{100 * float(np.mean((out_lab == 'glass') & (fcu < 0.40))):.2f}% of faces")
     if share["glass"] < 2.0:
         sys.exit(f"REFUSING TO WRITE: glass is {share['glass']}% of faces — "
                  "the transfer did not find the glazing. Same guard, same "
