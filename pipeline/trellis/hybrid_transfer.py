@@ -730,6 +730,13 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
         out_lab[idx[bad]] = "body"
     n_len = np.abs(m.face_normals[:, axes[0]])
     out_lab = screen_fit(out_lab, fc, n_len)
+    # ROOF CURL CLEAR. The band cap only EXCLUDED curl faces from the stamp
+    # — they kept their canopy-split glass labels (measured: v10->v11 moved
+    # glass just 14.8->14.6 while the curl was 21% of glass area). The curl
+    # faces up AND sideways at once; a raked windscreen centre faces up but
+    # never sideways (n_wid ~0), and side-window tumblehome tops out near
+    # n_up 0.45. Clearing the conjunction hits only the curl.
+    out_lab[(out_lab == "glass") & (n_wid > 0.5) & (n_up > 0.55)] = "body"
     # FINAL polish: every pass above can reintroduce fringe (measured on the
     # Golf: 596 glass components after mirror+screen_fit — the transplant
     # copies the winner side's fringe, and voting noise fragments it
