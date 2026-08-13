@@ -38,6 +38,32 @@ HEAT_ALPHA = 0.55       # peak opacity of the heat wash
 LIGHT_DIM = 0.45        # how far clean areas are dimmed in light mode
 BOX_WIDTH = 4
 
+# Per-damage-type colours, for colour_by="class".
+#
+# Severity and class answer different questions — "how bad is this?" versus
+# "what kind is it?" — and one palette cannot carry both. The severity ramp is
+# a SEQUENCE (green through red, ordered, comparable); this is a CATEGORICAL
+# set where no colour outranks another. Mixing them is what makes a chart lie,
+# so they are separate tables and the legend always states which is in use.
+#
+# Hues are grouped by family, so a reader learns the scheme once: cool blues for
+# paint and surface, warm oranges and reds for structure, violets for glass,
+# and distinct outliers for the rest.
+CLASS_COLOURS = {
+    # paint / surface — cool blues
+    "scratch": "#58a6ff", "scuff": "#79c0ff", "paint_chip": "#a5d6ff",
+    "paint_fade": "#1f6feb", "paint_mismatch": "#388bfd",
+    # structural — warm
+    "dent": "#f0883e", "deformation": "#db6d28", "crack": "#f85149",
+    "misalignment": "#ffa657",
+    # glass — violet
+    "shattered_glass": "#bc8cff", "chip_glass": "#d2a8ff",
+    # distinct outliers
+    "rust": "#bb8009", "missing_part": "#ff7b72", "lamp_damage": "#e3b341",
+    "tire_damage": "#3fb950", "hail": "#39c5cf", "other": "#8b949e",
+}
+DEFAULT_CLASS_COLOUR = "#8b949e"
+
 
 def hex_to_rgb(h):
     h = h.lstrip("#")
@@ -65,6 +91,23 @@ def ramp_colour(t):
 def severity_colour(sev):
     """Discrete band colour for a finding — identical to the report's chip."""
     return hex_to_rgb(severity_band(clamp_severity(sev))[1])
+
+
+def class_colour(damage_type):
+    """Categorical colour for a damage type — for colour_by="class"."""
+    return hex_to_rgb(CLASS_COLOURS.get(damage_type, DEFAULT_CLASS_COLOUR))
+
+
+def finding_colour(f, colour_by="severity"):
+    """The one place a finding's box colour is decided.
+
+    Routing both modes through a single function is what keeps the overlay
+    honest: the box, its caption background and the legend swatch all ask here,
+    so a picture can never show a class colour under a severity legend.
+    """
+    if colour_by == "class":
+        return class_colour(f.get("damage_type", "other"))
+    return severity_colour(f.get("severity", 5))
 
 
 def finding_label(f):
@@ -108,15 +151,20 @@ def drawable(findings, image_size, image_index=0):
     return out, skipped
 
 
-def render(image_path, findings, mode="both", image_index=0, legend=True):
+def render(image_path, findings, mode="both", image_index=0, legend=True,
+           colour_by="severity"):
     """Render an annotated image. Returns (PIL.Image, meta dict).
 
-    mode: "box" | "heat" | "light" | "both" (heat + box)
+    mode:      "box" | "heat" | "light" | "both" (heat + box)
+    colour_by: "severity" (how bad) or "class" (what kind). The heat and light
+               maps always follow SEVERITY regardless — they encode intensity,
+               and intensity has no meaning on a categorical palette.
     """
     from PIL import Image
     base = Image.open(image_path).convert("RGB")
     items, skipped = drawable(findings, base.size, image_index)
-    meta = {"drawn": len(items), "skipped_no_bbox": skipped, "mode": mode}
+    meta = {"drawn": len(items), "skipped_no_bbox": skipped, "mode": mode,
+            "colour_by": colour_by}
 
     img = base
     if mode in ("heat", "both"):
@@ -124,9 +172,9 @@ def render(image_path, findings, mode="both", image_index=0, legend=True):
     if mode == "light":
         img = _apply_light(img, items)
     if mode in ("box", "both"):
-        img = _draw_boxes(img, items)
+        img = _draw_boxes(img, items, colour_by)
     if legend and items:
-        img = _draw_legend(img)
+        img = _draw_legend(img, items, colour_by)
     return img, meta
 
 
@@ -186,7 +234,7 @@ def _apply_light(img, items):
     return Image.composite(img, dim, mask)
 
 
-def _draw_boxes(img, items):
+def _draw_boxes(img, items, colour_by="severity"):
     from PIL import ImageDraw
     if not items:
         return img
@@ -194,7 +242,7 @@ def _draw_boxes(img, items):
     draw = ImageDraw.Draw(img, "RGBA")
     font = _font(max(13, int(min(img.size) * 0.028)))
     for f, (x1, y1, x2, y2) in items:
-        col = severity_colour(f.get("severity", 5))
+        col = finding_colour(f, colour_by)
         draw.rectangle([x1, y1, x2, y2], outline=col + (255,), width=BOX_WIDTH)
         label = finding_label(f)
         tw, th = _text_size(draw, label, font)
@@ -209,7 +257,53 @@ def _draw_boxes(img, items):
     return img
 
 
-def _draw_legend(img):
+def _draw_legend(img, items=(), colour_by="severity"):
+    """The key for whichever palette was actually used.
+
+    A continuous ramp under class colours would be an outright lie, so class
+    mode gets swatches instead — and only for the types present in THIS image,
+    since a key listing seventeen damage types the photo does not contain is
+    noise rather than explanation.
+    """
+    if colour_by == "class":
+        return _draw_class_legend(img, items)
+    return _draw_severity_legend(img)
+
+
+def _draw_class_legend(img, items):
+    from PIL import ImageDraw
+    present = []
+    for f, _box in items:
+        t = f.get("damage_type", "other")
+        if t not in present:
+            present.append(t)
+    if not present:
+        return img
+    img = img.copy()
+    draw = ImageDraw.Draw(img, "RGBA")
+    w, h = img.size
+    font = _font(max(11, int(min(w, h) * 0.022)))
+    sw = max(10, int(h * 0.018))                      # swatch size
+    rows = [(t, DAMAGE_TYPES.get(t, ("Other",))[0]) for t in present]
+    tw = max(_text_size(draw, lbl, font)[0] for _t, lbl in rows)
+    lh = sw + max(4, int(h * 0.008))
+    pad = max(8, int(min(w, h) * 0.012))
+    x0 = int(w * 0.03)
+    y0 = h - int(h * 0.045) - lh * len(rows)
+    draw.rectangle([x0 - pad, y0 - pad,
+                    x0 + sw + 8 + tw + pad, y0 + lh * len(rows) + pad // 2],
+                   fill=(0, 0, 0, 150))
+    for i, (t, lbl) in enumerate(rows):
+        y = y0 + i * lh
+        draw.rectangle([x0, y, x0 + sw, y + sw],
+                       fill=class_colour(t) + (255,),
+                       outline=(255, 255, 255, 150))
+        draw.text((x0 + sw + 8, y - 1), lbl, fill=(255, 255, 255, 235),
+                  font=font)
+    return img
+
+
+def _draw_severity_legend(img):
     """A severity scale strip, so the colours are self-explanatory."""
     from PIL import ImageDraw
     img = img.copy()
@@ -254,13 +348,14 @@ def _text_size(draw, text, font):
 
 
 def render_data_uri(image_path, findings, mode="both", image_index=0,
-                    max_width=1280, quality=82):
+                    max_width=1280, quality=82, colour_by="severity"):
     """Annotated image as a data: URI, for inlining in the HTML report.
 
     Downscaled first: reports are emailed and printed, and a full-resolution
     phone capture inflates the HTML by megabytes for no visible gain.
     """
-    img, meta = render(image_path, findings, mode, image_index)
+    img, meta = render(image_path, findings, mode, image_index,
+                       colour_by=colour_by)
     if img.width > max_width:
         h = int(img.height * (max_width / float(img.width)))
         from PIL import Image

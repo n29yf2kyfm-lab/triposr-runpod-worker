@@ -716,6 +716,17 @@ check("18d only usable boxes on this image are drawn", len(items) == 1,
       str(len(items)))
 check("18e unusable findings are counted, not dropped", skipped == 2, str(skipped))
 
+# class mode: categorical palette, distinct from the severity ramp
+check("18f-1 each damage type gets its own colour",
+      len({OV.class_colour(t) for t in
+           ("dent","scratch","crack","rust","shattered_glass","tire_damage")}) == 6)
+check("18f-2 finding_colour routes by mode",
+      OV.finding_colour({"damage_type":"rust","severity":9}, "class")
+      == OV.class_colour("rust")
+      and OV.finding_colour({"damage_type":"rust","severity":9}, "severity")
+      == OV.severity_colour(9))
+check("18f-3 unknown damage type falls back, never crashes",
+      OV.class_colour("no_such_type") == OV.hex_to_rgb(OV.DEFAULT_CLASS_COLOUR))
 check("18f label names panel, damage and severity",
       OV.finding_label(mixed[0]) == "Hood / bonnet · Dent · 8",
       OV.finding_label(mixed[0]))
