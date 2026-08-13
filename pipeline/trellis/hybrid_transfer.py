@@ -336,7 +336,8 @@ def _mask_comps(mask, adj, n):
     return comp, Counter(comp[mask])
 
 
-def tighten(out_lab, adj, n_up, k=2, min_glass=400, min_lamp=800, fill=2500):
+def tighten(out_lab, adj, n_up, allowed=None, k=2, k_close=5,
+            min_glass=400, min_lamp=800, fill=2500):
     """Owner request 2026-08-13: 'just need glass to clear tighter'. The
     ragged glazing is fringe + specks inherited from PartCrafter's melt
     labels; smoothing upstream cannot remove it without also moving real
@@ -356,6 +357,16 @@ def tighten(out_lab, adj, n_up, k=2, min_glass=400, min_lamp=800, fill=2500):
     glass = out_lab == "glass"
     opened = _dilate(_erode(glass, adj, k), adj, k, glass)
     out_lab[glass & ~opened] = "body"
+    # CLOSING, zone-limited: fills body patches sitting INSIDE a window and
+    # smooths concave bays in the boundary. Straight edges survive a
+    # dilate+erode round trip unchanged; only notches get filled. `allowed`
+    # is greenhouse-zone body faces that are not roofish, so the fill can
+    # never creep onto the roof, below the beltline, or over wheels/lamps.
+    if allowed is not None:
+        glass = out_lab == "glass"
+        limit = glass | (allowed & (out_lab == "body"))
+        closed = _erode(_dilate(glass, adj, k_close, limit), adj, k_close)
+        out_lab[closed & (out_lab == "body")] = "glass"
     comp, cnt = _mask_comps(out_lab == "glass", adj, n)
     for cid, c in cnt.items():
         if c < min_glass:
@@ -492,7 +503,8 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
         np.save("/tmp/dbg_fcl.npy", fcl);   np.save("/tmp/dbg_fcu.npy", fcu)
         np.save("/tmp/dbg_nup.npy", n_up)
 
-    out_lab = tighten(out_lab, adj, n_up)
+    out_lab = tighten(out_lab, adj, n_up,
+                      allowed=(fcu > 0.42) & (fcl > 0.05) & (fcl < 0.95) & ~roofish)
 
     share = {k: round(100 * float(np.mean(out_lab == k)), 1)
              for k in ("body", "glass", "wheel", "interior", "lamp")}
