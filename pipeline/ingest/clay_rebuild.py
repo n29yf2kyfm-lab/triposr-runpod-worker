@@ -38,13 +38,24 @@ import sys
 # `int` as its own token (start/underscore-delimited), which still catches
 # plasticblack_int_ao / black_int / intD but can never eat a *aint name.
 RULES = [
-    (r"lights?_glass|glass_red|lamp|headlight|taillight", "lamp"),
+    # LAMPS BEFORE GLASS, and matched without requiring an underscore: the
+    # Mondeo names its rear lamps `BrakeLightsGlass`, which the old
+    # `lights?_glass` missed and the glass rule then caught — brake lights
+    # rendered as clear window glass. Also catches DRLs and *_light_*.
+    (r"lights?_?glass|glass_red|lamp|headlight|taillight|rear_?light|\bdrls?\b|fog_?light", "lamp"),
     (r"glass|window|windscreen|windshield|\bwin(_|\b)",    "glass"),
     (r"body|carpaint|paint",                               "paint"),
     (r"tire|tyre|rubber",                                  "tyre"),
-    (r"rim|alloy|wheel",                                   "rim"),
+    # chrome BEFORE rim, and rim must not fire inside "t-rim-s": the Mondeo's
+    # `ChromeTrims` was classed rim (alloy metal) off the substring.
     (r"chrome|mirror",                                     "chrome"),
+    (r"\brim|alloy|wheel(?!.*arch)",                       "rim"),
+    # rotors/discs are bare metal; only the CALIPER is painted red, and
+    # colouring both made the wheels glow red through the spokes.
+    (r"rotor|brakedisc|brake_?disk|disc_?brake",           "rotor"),
     (r"brake|caliper",                                     "brake"),
+    (r"grille|grill\b|mesh_?front",                        "trim_matt"),
+    (r"undercarriage|undercarrier|underbody|floorpan",     "trim_matt"),
     (r"plate",                                             "plate"),
     (r"interior|seat|dash|leather|fabric|carpet|(^|_)int($|[a-z_])", "interior"),
     (r"copper",                                            "copper"),
@@ -70,6 +81,7 @@ PBR = {
     "rim":        dict(baseColorFactor=[0.42, 0.43, 0.45, 1.0], metallicFactor=0.85, roughnessFactor=0.35),
     "chrome":     dict(baseColorFactor=[0.65, 0.66, 0.68, 1.0], metallicFactor=1.0, roughnessFactor=0.08),
     "brake":      dict(baseColorFactor=[0.45, 0.03, 0.03, 1.0], metallicFactor=0.2, roughnessFactor=0.40),
+    "rotor":      dict(baseColorFactor=[0.30, 0.30, 0.32, 1.0], metallicFactor=0.75, roughnessFactor=0.55),
     "plate":      dict(baseColorFactor=[0.90, 0.90, 0.90, 1.0], metallicFactor=0.0, roughnessFactor=0.50),
     "interior":   dict(baseColorFactor=[0.045, 0.045, 0.050, 1.0], metallicFactor=0.0, roughnessFactor=0.90),
     "copper":     dict(baseColorFactor=[0.72, 0.45, 0.28, 1.0], metallicFactor=1.0, roughnessFactor=0.30),
@@ -91,7 +103,7 @@ def classify(name):
     return "unknown"
 
 
-def rebuild(src, dst, paint_rgb=None):
+def rebuild(src, dst, paint_rgb=None, paint_name=None):
     raw = open(src, "rb").read()
     if raw[:4] != b"glTF":
         sys.exit("not a GLB")
@@ -102,6 +114,13 @@ def rebuild(src, dst, paint_rgb=None):
     counts = {}
     for m in g.get("materials", []):
         cls = classify(m.get("name"))
+        # Paint is often a COLOUR NAME no regex can know (the Mondeo's
+        # body material is literally "Frozen_White", Ford's paint name,
+        # and it was rendering as dark trim). --paint-name lets the
+        # operator name it after reading the mapping table, which is
+        # exactly what that table is printed for.
+        if paint_name and paint_name.lower() in str(m.get("name", "")).lower():
+            cls = "paint"
         counts[cls] = counts.get(cls, 0) + 1
         vals = dict(PBR[cls])
         if cls == "paint" and paint_rgb:
@@ -132,6 +151,7 @@ if __name__ == "__main__":
     ap.add_argument("--in", dest="src", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--paint", help="r,g,b for the body paint")
+    ap.add_argument("--paint-name", help="substring of the material that IS the body paint (for colour-named materials like Frozen_White that no regex can infer)")
     a = ap.parse_args()
     rgb = tuple(float(x) for x in a.paint.split(",")) if a.paint else None
-    rebuild(a.src, a.out, rgb)
+    rebuild(a.src, a.out, rgb, a.paint_name)
