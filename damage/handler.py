@@ -285,6 +285,13 @@ def handler(job):
             return result
 
         delivered = _deliver_report(result, job_id, spec["want_html"])
+        # Overlays carry multi-hundred-KB data URIs. They were present in
+        # `result` for the artifacts (the JSON file and the HTML embed them);
+        # popping them here, AFTER delivery, means the response body carries
+        # them exactly once at the top level instead of twice — with several
+        # photos the duplicate copy alone could push a response past RunPod's
+        # payload limit.
+        overlays = result.pop("overlays", None)
         response = {
             "status": "success",
             "mode": spec["mode"],
@@ -296,7 +303,7 @@ def handler(job):
             "completeness": result.get("completeness"),
             "quality": result.get("quality"),
             "fusion": result.get("fusion"),
-            "overlays": result.get("overlays"),
+            "overlays": overlays,
             "summary": result.get("summary"),
             "report": result,
             "artifacts": delivered,

@@ -26,20 +26,6 @@ LOG="$WORK/train.log"
 exec > >(tee -a "$LOG") 2>&1
 TAG="${RUN_TAG:-run}"
 
-# RUN-ONCE GUARD. RunPod restarts the container every time dockerStartCmd
-# exits, so a failing script does not fail — it loops. The v4 run executed this
-# file TWENTY-TWO times, re-merging 90k images on each cycle, and burned 2.5
-# GPU-hours discovering the same error over and over. The marker lives on the
-# container disk, which survives those restarts, so a second entry exits
-# immediately instead of paying for the same work again.
-MARKER="$WORK/.attempted-$TAG"
-if [ -e "$MARKER" ]; then
-  echo "=== $TAG already attempted (marker $MARKER) — refusing to re-run ==="
-  echo "=== pod is idle and should be stopped externally ==="
-  sleep 300
-  exit 0
-fi
-date -u > "$MARKER"
 
 finish() {
   code=$?
@@ -116,6 +102,23 @@ except Exception as e:
 PY
 }
 trap finish EXIT
+
+# RUN-ONCE GUARD — registered AFTER the trap, deliberately. RunPod restarts the
+# container whenever dockerStartCmd exits, so a failing script loops (v4 ran 22
+# times). The marker on the container disk survives those restarts and makes a
+# second entry refuse to work. It sits below `trap finish EXIT` because the
+# audit found it above: on the marker path the script exited before the trap
+# existed, so the pod never attempted to stop itself — precisely the unattended
+# path where self-stop matters most. Now the marker exit flows through finish()
+# and its checked stop/terminate, retrying on every 5-minute restart cycle
+# until one lands.
+MARKER="$WORK/.attempted-$TAG"
+if [ -e "$MARKER" ]; then
+  echo "=== $TAG already attempted — refusing to re-run; stopping pod ==="
+  sleep 60
+  exit 0
+fi
+date -u > "$MARKER"
 
 echo "=== env ==="
 nvidia-smi || echo "NO GPU VISIBLE"

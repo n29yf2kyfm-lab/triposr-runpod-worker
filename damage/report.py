@@ -286,9 +286,6 @@ _HEAD = """<!doctype html><html lang="en"><head><meta charset="utf-8">
   .cost{margin-top:8px;font-weight:600}
   .guidance{list-style:none;padding:0}.guidance li{margin:4px 0}
   .shot{margin:18px 0}.shot img{width:100%;border-radius:10px;display:block;border:1px solid #30363d}.shot figcaption{margin-top:6px;font-size:13px}
-.shot{margin:18px 0}
-.shot img{width:100%;display:block;border-radius:10px;border:1px solid #30363d}
-.shot figcaption{margin-top:6px;font-size:13px}
 .disclaimer{margin-top:34px;color:#6e7681;font-size:12px;border-top:1px solid #21262d;
     padding-top:14px}
   @media print{body{background:#fff;color:#111}
