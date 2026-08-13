@@ -121,6 +121,88 @@ def stock_agency(file_name):
     return None
 
 
+# The exporter's label vocabulary. Its overlays read "minor-scratch 0.82",
+# "dent 0.41" and similar, so finding one of these words rendered INTO the
+# image is direct evidence of a burned-in annotation.
+LABEL_WORDS = ("scratch", "minor", "dent", "damage", "crack", "major")
+
+
+def _edit(a, b):
+    """Levenshtein distance. Small strings only; not worth a dependency."""
+    prev = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        cur = [i]
+        for j, cb in enumerate(b, 1):
+            cur.append(min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (ca != cb)))
+        prev = cur
+    return prev[-1]
+
+
+def label_hit(text):
+    """Fuzzy-match OCR output against the label vocabulary, or None.
+
+    Exact matching finds nothing: tesseract reads these overlays as 'serotcn',
+    'strateh', 'scrotch', 'mine -serdien'. Allowing an edit distance of up to a
+    third of the word recovers them, while the noise tokens that clean images
+    produce ('zz.', '~~,', 'bY') stay far from any real word — measured at zero
+    false positives across 24 clean trials.
+    """
+    import re
+    s = re.sub(r"[^a-z]", " ", (text or "").lower())
+    for w in (w for w in s.split() if len(w) >= 4):
+        for t in LABEL_WORDS:
+            tol = max(1, len(t) // 3)
+            for L in (len(t) - 1, len(t), len(t) + 1):
+                for i in range(0, max(1, len(w) - L + 1)):
+                    sub = w[i:i + L]
+                    if len(sub) >= 4 and _edit(sub, t) <= tol:
+                        return t
+    return None
+
+
+def ocr_label(path, upscale=4):
+    """The damage-word rendered into this image, or None.
+
+    THE KEY STEP IS COLOUR ISOLATION, NOT OCR. Running tesseract on the photo
+    returns pure noise, because every image here carries augmentation grain and
+    the label text is only ~10px tall. Masking to the overlay hue first turns it
+    into clean black-on-white glyphs that tesseract reads, and the augmentation
+    noise is discarded because it does not match the hue.
+
+    Two page-segmentation modes are tried: 11 (sparse text) catches most, 6
+    (uniform block) catches a few that 11 misses. Measured 4/6 recall at 100%
+    precision on a hand-labelled set — deliberately reported rather than
+    rounded up, because the residual third is why a separate 'suspect' verdict
+    exists instead of a single confident drop.
+    """
+    import numpy as np
+    from PIL import Image
+    try:
+        import pytesseract
+    except ImportError:
+        return None
+    try:
+        with Image.open(path) as im:
+            a = np.asarray(im.convert("RGB"), dtype="int16")
+    except Exception:
+        return None
+    r, g, b = a[..., 0], a[..., 1], a[..., 2]
+    m = (r > 150) & ((r - g) > 30) & ((r - b) > 30)
+    if m.sum() < 20:
+        return None
+    img = Image.fromarray(np.where(m, 0, 255).astype("uint8"), "L")
+    w, h = img.size
+    img = img.resize((w * upscale, h * upscale), Image.LANCZOS)
+    for cfg in ("--psm 11", "--psm 6"):
+        try:
+            got = label_hit(pytesseract.image_to_string(img, config=cfg))
+        except Exception:
+            return None
+        if got:
+            return got
+    return None
+
+
 def _thumb(path, size=160):
     from PIL import Image
     import numpy as np
@@ -167,8 +249,22 @@ def sharpness(arr):
     return float(lap.var())
 
 
-def classify(path):
+def classify(path, use_ocr=True):
     """(verdict, metrics) for one image. verdict is None when the image is fine.
+
+    Verdicts are TIERED by how much the evidence is worth, because the two
+    signals here have opposite strengths and collapsing them into one boolean
+    is what made the previous version untrustworthy:
+
+      burned_in_annotation  OCR read a damage word rendered into the image.
+                            Direct evidence. ~100% precision, ~67% recall.
+      annotation_suspect    The overlay colour forms a long straight run but no
+                            text was read. HIGH RECALL, POOR PRECISION — roughly
+                            half of these are red cars, rust and smashed glass,
+                            verified by eye. Kept as its own verdict so it can
+                            be quarantined for review instead of deleted, and
+                            so the cost of acting on it is always visible in the
+                            report rather than hidden inside one total.
 
     The filename test runs FIRST and without opening the file: it is exact,
     costs nothing, and a stock image is disqualified on licence regardless of
@@ -184,17 +280,26 @@ def classify(path):
     ov = overlay_score(arr)
     sh = sharpness(arr)
     metrics = {"overlay_run": ov, "sharpness": round(sh, 1)}
-    # Label leakage is the disqualifying one, so it is checked before blur and
-    # reported even when the image is also soft.
+
+    # OCR is ~30x more expensive than the pixel stats, so it only runs where
+    # there is enough overlay-coloured ink for a label to plausibly exist.
+    # The gate is deliberately far below OVERLAY_MIN_RUN: the point is to skip
+    # images with no candidate ink at all, not to pre-judge them.
+    if use_ocr and ov >= 5:
+        word = ocr_label(path)
+        if word:
+            metrics["label_word"] = word
+            return "burned_in_annotation", metrics
+
     if ov >= OVERLAY_MIN_RUN:
-        return "burned_in_annotation", metrics
+        return "annotation_suspect", metrics
     if sh < LAPLACIAN_DEAD:
         return "destroyed", metrics
     return None, metrics
 
 
-VERDICTS = ("kept", "burned_in_annotation", "stock_licensed", "destroyed",
-            "unreadable")
+VERDICTS = ("kept", "burned_in_annotation", "annotation_suspect",
+            "stock_licensed", "destroyed", "unreadable")
 
 
 def _report(counts, examples, label):
@@ -208,7 +313,30 @@ def _report(counts, examples, label):
         print(f"    e.g. {verdict}: {fn[:46]} {m}")
 
 
-def clean_split(src_dir, dst_dir, split, report_only):
+def _classify_one(args):
+    """Worker entry point — must be module-level to be picklable."""
+    path, use_ocr = args
+    return path, classify(path, use_ocr)
+
+
+def _classify_many(paths, use_ocr, jobs):
+    """{path: (verdict, metrics)}, computed across a process pool.
+
+    OCR costs ~0.36s per image against ~0.01s for the pixel stats, which turns
+    a 13k-image pass from a minute into most of an hour on one core. The work is
+    embarrassingly parallel and purely CPU-bound, so a pool sized to the cores
+    is the whole optimisation.
+    """
+    items = [(p, use_ocr) for p in paths]
+    if jobs <= 1 or len(items) < 32:
+        return dict(_classify_one(i) for i in items)
+    import multiprocessing as mp
+    with mp.Pool(jobs) as pool:
+        return dict(pool.imap_unordered(_classify_one, items, chunksize=16))
+
+
+def clean_split(src_dir, dst_dir, split, report_only, use_ocr=True, jobs=1,
+                keep_suspect=False, quarantine=None):
     """Filter one COCO split, carrying its annotations across."""
     ann = os.path.join(src_dir, split, "_annotations.coco.json")
     if not os.path.exists(ann):
@@ -219,17 +347,29 @@ def clean_split(src_dir, dst_dir, split, report_only):
     for a in d.get("annotations", []):
         by_img.setdefault(a["image_id"], []).append(a)
 
+    images = d.get("images", [])
+    paths = [os.path.join(src_dir, split, im["file_name"]) for im in images]
+    present = [p for p in paths if os.path.exists(p)]
+    verdicts = _classify_many(present, use_ocr, jobs)
+
     counts = dict.fromkeys(VERDICTS, 0)
-    keep_images, keep_anns, examples = [], [], {}
-    for im in d.get("images", []):
-        p = os.path.join(src_dir, split, im["file_name"])
-        if not os.path.exists(p):
+    keep_images, keep_anns, examples, quarantined = [], [], {}, []
+    for im, p in zip(images, paths):
+        if p not in verdicts:
             counts["unreadable"] += 1
             continue
-        verdict, metrics = classify(p)
+        verdict, metrics = verdicts[p]
+        # A suspect is dropped from the training set but, unless the caller
+        # opts to keep it, preserved in a quarantine directory rather than
+        # deleted — the signal is only about half right and the images it
+        # removes are otherwise perfectly good training data.
+        if verdict == "annotation_suspect" and keep_suspect:
+            verdict = None
         if verdict:
             counts[verdict] += 1
             examples.setdefault(verdict, []).append((im["file_name"], metrics))
+            if verdict == "annotation_suspect" and quarantine:
+                quarantined.append(im["file_name"])
             continue
         counts["kept"] += 1
         keep_images.append(im)
@@ -244,36 +384,59 @@ def clean_split(src_dir, dst_dir, split, report_only):
         with open(os.path.join(out, "_annotations.coco.json"), "w") as f:
             json.dump({"images": keep_images, "annotations": keep_anns,
                        "categories": d.get("categories", [])}, f)
+        if quarantine and quarantined:
+            qdir = os.path.join(quarantine, split)
+            os.makedirs(qdir, exist_ok=True)
+            for fn in quarantined:
+                shutil.copyfile(os.path.join(src_dir, split, fn),
+                                os.path.join(qdir, fn))
     _report(counts, examples, split)
     return counts
 
 
-def clean_flat(src_dir, dst_dir, report_only):
+def clean_flat(src_dir, dst_dir, report_only, use_ocr=True, jobs=1,
+               keep_suspect=False, quarantine=None):
     """Filter a plain directory tree of images (no COCO annotations).
 
-    For corpora that are not COCO — a HuggingFace segmentation set, or a fresh
-    scrape. Mirrors the source tree so any sidecar mask/annotation directory
-    stays aligned by filename.
+    For corpora that are not COCO — a HuggingFace segmentation set, a class-per-
+    folder collection, or a fresh scrape. Mirrors the source tree, so a
+    class-named parent directory survives the clean and any sidecar mask
+    directory stays aligned by filename.
+
+    SKIPS mask directories. A segmentation dataset ships masks_human/ renderings
+    that are annotation overlays BY DESIGN; walking them made an earlier audit
+    report 5,436 images at 22% contaminated when the real photo count was 1,811.
     """
     counts = dict.fromkeys(VERDICTS, 0)
     examples = {}
     exts = (".jpg", ".jpeg", ".png", ".webp", ".bmp")
-    for root, _dirs, files in os.walk(src_dir):
+    skip = {"masks_human", "masks_machine", "ann", "masks"}
+    paths = []
+    for root, dirs, files in os.walk(src_dir):
+        dirs[:] = [d for d in dirs if d not in skip]
         for fn in files:
-            if not fn.lower().endswith(exts):
-                continue
-            p = os.path.join(root, fn)
-            verdict, metrics = classify(p)
-            if verdict:
-                counts[verdict] += 1
-                examples.setdefault(verdict, []).append((fn, metrics))
-                continue
-            counts["kept"] += 1
-            if not report_only:
-                rel = os.path.relpath(p, src_dir)
-                dst = os.path.join(dst_dir, rel)
+            if fn.lower().endswith(exts):
+                paths.append(os.path.join(root, fn))
+    verdicts = _classify_many(paths, use_ocr, jobs)
+
+    for p in paths:
+        fn = os.path.basename(p)
+        verdict, metrics = verdicts.get(p, ("unreadable", {}))
+        if verdict == "annotation_suspect" and keep_suspect:
+            verdict = None
+        if verdict:
+            counts[verdict] += 1
+            examples.setdefault(verdict, []).append((fn, metrics))
+            if verdict == "annotation_suspect" and quarantine and not report_only:
+                dst = os.path.join(quarantine, os.path.relpath(p, src_dir))
                 os.makedirs(os.path.dirname(dst), exist_ok=True)
                 shutil.copyfile(p, dst)
+            continue
+        counts["kept"] += 1
+        if not report_only:
+            dst = os.path.join(dst_dir, os.path.relpath(p, src_dir))
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            shutil.copyfile(p, dst)
     _report(counts, examples, os.path.basename(src_dir.rstrip("/")) or "flat")
     return counts
 
@@ -287,16 +450,30 @@ def main():
                     help="plain image tree rather than COCO splits")
     ap.add_argument("--report-only", action="store_true",
                     help="measure and print, write nothing")
+    ap.add_argument("--no-ocr", action="store_true",
+                    help="skip OCR confirmation (fast, but then every overlay "
+                         "hit is only a suspect)")
+    ap.add_argument("--jobs", type=int, default=max(1, (os.cpu_count() or 2)),
+                    help="parallel workers; OCR is CPU-bound")
+    ap.add_argument("--keep-suspect", action="store_true",
+                    help="keep overlay-suspect images (no OCR-confirmed text). "
+                         "About half of them are red cars and rust, so keeping "
+                         "them trades some leakage for a lot more data.")
+    ap.add_argument("--quarantine", default=None,
+                    help="copy suspects here instead of only dropping them")
     args = ap.parse_args()
     out = args.out or (args.data.rstrip("/") + "_clean")
+    use_ocr = not args.no_ocr
 
     totals = {}
     if args.flat:
-        c = clean_flat(args.data, out, args.report_only)
+        c = clean_flat(args.data, out, args.report_only, use_ocr, args.jobs,
+                       args.keep_suspect, args.quarantine)
         totals.update(c)
     else:
         for split in args.splits.split(","):
-            c = clean_split(args.data, out, split, args.report_only)
+            c = clean_split(args.data, out, split, args.report_only, use_ocr,
+                            args.jobs, args.keep_suspect, args.quarantine)
             if c:
                 for k, v in c.items():
                     totals[k] = totals.get(k, 0) + v
