@@ -689,7 +689,12 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
     # — the first full-band run wiped the windscreen (glass 11.2% -> 1.3%,
     # caught by the refusal guard). Side-facing faces only.
     n_wid = np.abs(m.face_normals[:, axes[1]])
-    band_side = band & (n_wid > 0.6)
+    # n_up cap: the 2D (length, up) stencil cannot tell a window top from
+    # the roof curl above it — both land in the same cell — and measured on
+    # v10 that curl was 21% of all glass AREA (up-facing dashes along the
+    # roofline). A side window's tumblehome never faces up beyond ~0.45;
+    # the curl does. Cap excludes it from stamp and snap alike.
+    band_side = band & (n_wid > 0.6) & (n_up < 0.55)
     out_lab = region_snap(out_lab, band_side, adj,
                           m.face_adjacency_angles, len(m.faces))
     out_lab = mirror_side_glass(out_lab, fc, band_side, adj)
