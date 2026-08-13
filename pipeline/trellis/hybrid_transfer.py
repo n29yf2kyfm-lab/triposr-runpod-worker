@@ -435,6 +435,47 @@ def region_snap(out_lab, band, adj, ang, n,
     return out_lab
 
 
+def screen_fit(out_lab, fc, n_len, cell=0.05, thresh=0.5, min_cells=8):
+    """Redraw each SCREEN as a clean convex shape. Measured on the Golf: the
+    rear screen has NO recess step (median inset -0.006, i.e. zero) and its
+    zone is 50/50 salt-and-pepper labels — the mesh carries no boundary
+    signal there, so neither creases nor graph cuts can help. What is true
+    of every real screen is its SHAPE: a convex quad high on the end face.
+    Fit that: grid the end-facing zone in (width, up), keep cells where the
+    glass vote wins, take the convex hull of the winning cells, and relabel
+    the whole zone — glass inside the hull, body outside. Ragged outlines
+    and enclosed freckles vanish; the screen's silhouette is the hull."""
+    from scipy.spatial import Delaunay
+    for end_lo, end_hi in ((0.0, 0.18), (0.82, 1.0)):
+        zone = ((fc[:, 0] >= end_lo) & (fc[:, 0] <= end_hi)
+                & (fc[:, 2] > 0.50) & (n_len > 0.45)
+                & np.isin(out_lab, ["body", "glass"]))
+        zidx = np.where(zone)[0]
+        if len(zidx) < 200:
+            continue
+        wu = fc[zidx][:, [1, 2]]
+        key = np.floor(wu / cell).astype(int)
+        kid = key[:, 0] * 1000 + key[:, 1]
+        glass = out_lab[zidx] == "glass"
+        tot = Counter(kid)
+        win = Counter(kid[glass])
+        good = np.array([k for k, t in tot.items()
+                         if t >= 6 and win.get(k, 0) / t >= thresh])
+        if len(good) < min_cells:
+            out_lab[zidx[glass]] = "body"   # too little signal = no screen here
+            continue
+        centers = np.stack([(good // 1000) + 0.5, (good % 1000) + 0.5], 1) * cell
+        if len(np.unique(centers[:, 0])) < 2 or len(np.unique(centers[:, 1])) < 2:
+            continue
+        try:
+            hull = Delaunay(centers)
+        except Exception:
+            continue
+        inside = hull.find_simplex(wu) >= 0
+        out_lab[zidx] = np.where(inside, "glass", "body")
+    return out_lab
+
+
 def clamp_spikes(m, hy, thresh=1.015):
     """Flatten antenna-spike artefacts: geometry above the real roofline
     (measured: roof crown tops at ~1.012, spikes at 1.03-1.06) is clamped
@@ -576,6 +617,8 @@ def transfer(parts_glb, mesh_glb, out_glb, report=None):
         bad = (d_m < 0.02) & (out_lab[nn_m] != "glass")
         idx = np.where(tail)[0]
         out_lab[idx[bad]] = "body"
+    n_len = np.abs(m.face_normals[:, axes[0]])
+    out_lab = screen_fit(out_lab, fc, n_len)
 
     share = {k: round(100 * float(np.mean(out_lab == k)), 1)
              for k in ("body", "glass", "wheel", "interior", "lamp")}
