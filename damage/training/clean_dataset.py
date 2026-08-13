@@ -75,6 +75,14 @@ import os
 import re
 import shutil
 
+# Tesseract links OpenMP and defaults to one thread per core. That is a loss
+# even for a single process here, and actively pathological for several: three
+# concurrent instances on four cores managed 0.11 images/sec between them
+# against 3.7/sec for one process alone — 34x slower, and not memory-bound
+# (14.7GB free at the time). Pinning each instance to one thread is what makes
+# running N independent processes worthwhile. Set before pytesseract is used.
+os.environ.setdefault("OMP_THREAD_LIMIT", "1")
+
 # Annotation-overlay colour. The exported boxes and their label text are drawn
 # in a narrow salmon/red band; requiring red to lead both other channels by a
 # wide margin keeps ordinary red paintwork, tail lights and brake calipers out
@@ -319,7 +327,32 @@ def _classify_one(args):
     return path, classify(path, use_ocr)
 
 
-def _classify_many(paths, use_ocr, jobs, progress_every=500):
+def _load_cache(cache_path):
+    """{path: (verdict, metrics)} from a previous, possibly interrupted run."""
+    import glob
+    out = {}
+    if not cache_path:
+        return out
+    # Globbed, so N independent sharded processes each writing "<cache>.<i>"
+    # are merged transparently by a later unsharded run. multiprocessing.Pool
+    # deadlocks here (16 images in 240s against ~890 sequential), but separate
+    # OS processes have no shared lock state and simply work.
+    for path in sorted(glob.glob(cache_path + "*")):
+        try:
+            with open(path) as f:
+                for line in f:
+                    try:
+                        r = json.loads(line)
+                        out[r["path"]] = (r["verdict"], r.get("metrics") or {})
+                    except Exception:
+                        continue  # half-written last line after a hard kill
+        except OSError:
+            continue
+    return out
+
+
+def _classify_many(paths, use_ocr, jobs, progress_every=500, cache_path=None,
+                   shard=None):
     """{path: (verdict, metrics)}, computed across a process pool.
 
     OCR costs ~0.36s per image against ~0.01s for the pixel stats, which turns
@@ -340,36 +373,69 @@ def _classify_many(paths, use_ocr, jobs, progress_every=500):
     version was indistinguishable from the deadlocked one.
     """
     import sys
-    items = [(p, use_ocr) for p in paths]
+    # RESUME. This pass classifies 13k-36k images at ~0.13s each, which is long
+    # enough that it has now been lost three times — twice to a deadlock and
+    # once to the session restarting and taking the background process with it,
+    # each time leaving an empty log and no output. Every verdict is therefore
+    # appended to a cache as it is produced, and a re-run skips what is already
+    # there. Progress survives a kill, so the work can be done in bounded
+    # foreground chunks instead of one long background run that may not return.
+    if shard:
+        import hashlib as _h
+        i, n = (int(x) for x in str(shard).split('/'))
+        # md5 of the path, not index order, so the split is stable even
+        # if the directory listing changes between runs.
+        paths = [p for p in paths
+                 if int(_h.md5(p.encode()).hexdigest()[:8], 16) % n == i]
+        print(f'    shard {i}/{n}: {len(paths)} images', flush=True)
+    done = _load_cache(cache_path)
+    if done:
+        print(f"    resuming: {len(done)} already classified", flush=True)
+    todo = [p for p in paths if p not in done]
+    out = dict(done)
+    if not todo:
+        return {p: out[p] for p in paths if p in out}
+
+    cache_f = open(cache_path, "a") if cache_path else None
+
+    def record(path, res):
+        out[path] = res
+        if cache_f:
+            cache_f.write(json.dumps({"path": path, "verdict": res[0],
+                                      "metrics": res[1]}) + "\n")
+            cache_f.flush()
+
+    items = [(p, use_ocr) for p in todo]
     if jobs <= 1 or len(items) < 32:
         # Progress here too, not only in the pool branch. The first version
         # printed nothing on this path, so a 13k-image single-threaded run —
         # the very fallback chosen BECAUSE the pool deadlocked — produced an
         # empty log for minutes and was indistinguishable from a hang. Silence
         # is the failure mode this whole function is trying to avoid.
-        out = {}
         for i, it in enumerate(items, 1):
             path, res = _classify_one(it)
-            out[path] = res
+            record(path, res)
             if progress_every and i % progress_every == 0:
                 print(f"    ...{i}/{len(items)}", flush=True)
-                sys.stdout.flush()
-        return out
+        if cache_f:
+            cache_f.close()
+        return {p: out[p] for p in paths if p in out}
     import multiprocessing as mp
     ctx = mp.get_context("spawn")
-    out = {}
     with ctx.Pool(jobs) as pool:
         for i, (path, res) in enumerate(
                 pool.imap_unordered(_classify_one, items, chunksize=8), 1):
-            out[path] = res
+            record(path, res)
             if progress_every and i % progress_every == 0:
                 print(f"    ...{i}/{len(items)}", flush=True)
-                sys.stdout.flush()
-    return out
+    if cache_f:
+        cache_f.close()
+    return {p: out[p] for p in paths if p in out}
 
 
 def clean_split(src_dir, dst_dir, split, report_only, use_ocr=True, jobs=1,
-                keep_suspect=False, quarantine=None):
+                keep_suspect=False, quarantine=None, cache_path=None,
+                shard=None):
     """Filter one COCO split, carrying its annotations across."""
     ann = os.path.join(src_dir, split, "_annotations.coco.json")
     if not os.path.exists(ann):
@@ -383,7 +449,8 @@ def clean_split(src_dir, dst_dir, split, report_only, use_ocr=True, jobs=1,
     images = d.get("images", [])
     paths = [os.path.join(src_dir, split, im["file_name"]) for im in images]
     present = [p for p in paths if os.path.exists(p)]
-    verdicts = _classify_many(present, use_ocr, jobs)
+    verdicts = _classify_many(present, use_ocr, jobs, cache_path=cache_path,
+                              shard=shard)
 
     counts = dict.fromkeys(VERDICTS, 0)
     keep_images, keep_anns, examples, quarantined = [], [], {}, []
@@ -428,7 +495,8 @@ def clean_split(src_dir, dst_dir, split, report_only, use_ocr=True, jobs=1,
 
 
 def clean_flat(src_dir, dst_dir, report_only, use_ocr=True, jobs=1,
-               keep_suspect=False, quarantine=None):
+               keep_suspect=False, quarantine=None, cache_path=None,
+               shard=None):
     """Filter a plain directory tree of images (no COCO annotations).
 
     For corpora that are not COCO — a HuggingFace segmentation set, a class-per-
@@ -450,7 +518,8 @@ def clean_flat(src_dir, dst_dir, report_only, use_ocr=True, jobs=1,
         for fn in files:
             if fn.lower().endswith(exts):
                 paths.append(os.path.join(root, fn))
-    verdicts = _classify_many(paths, use_ocr, jobs)
+    verdicts = _classify_many(paths, use_ocr, jobs, cache_path=cache_path,
+                              shard=shard)
 
     for p in paths:
         fn = os.path.basename(p)
@@ -492,21 +561,30 @@ def main():
                     help="keep overlay-suspect images (no OCR-confirmed text). "
                          "About half of them are red cars and rust, so keeping "
                          "them trades some leakage for a lot more data.")
+    ap.add_argument("--shard", default=None,
+                    help="i/n — process only this slice of the images, "
+                         "so n independent processes can share the work")
+    ap.add_argument("--cache", default=None,
+                    help="JSONL verdict cache; re-running resumes from it")
     ap.add_argument("--quarantine", default=None,
                     help="copy suspects here instead of only dropping them")
     args = ap.parse_args()
     out = args.out or (args.data.rstrip("/") + "_clean")
     use_ocr = not args.no_ocr
+    if args.shard and args.cache:
+        args.cache = f"{args.cache}.{args.shard.split('/')[0]}"
 
     totals = {}
     if args.flat:
         c = clean_flat(args.data, out, args.report_only, use_ocr, args.jobs,
-                       args.keep_suspect, args.quarantine)
+                       args.keep_suspect, args.quarantine, args.cache,
+                       args.shard)
         totals.update(c)
     else:
         for split in args.splits.split(","):
             c = clean_split(args.data, out, split, args.report_only, use_ocr,
-                            args.jobs, args.keep_suspect, args.quarantine)
+                            args.jobs, args.keep_suspect, args.quarantine,
+                            args.cache, args.shard)
             if c:
                 for k, v in c.items():
                     totals[k] = totals.get(k, 0) + v
