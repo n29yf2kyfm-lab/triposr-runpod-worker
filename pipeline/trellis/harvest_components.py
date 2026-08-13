@@ -312,7 +312,12 @@ def find_wheel(scene: trimesh.Scene):
         seeds = []
         for i, p in pool + [(k, c[1]) for k, c in enumerate(cands)]:
             mm = wheelness(p.vertices)
-            if mm["ok"] and 0.06 * car_len <= mm["diameter"] <= 0.40 * car_len:
+            # 0.11-0.20 of car length, not 0.06-0.40: measured on real picks
+            # 2026-08-13 — genuine road wheels landed at 0.135-0.152 while a
+            # STEERING WHEEL (complete with column stalks) passed the loose
+            # band at 0.088 and shipped as the Golf mk8 "wheel". A road wheel
+            # smaller than 11% or larger than 20% of car length is not one.
+            if mm["ok"] and 0.11 * car_len <= mm["diameter"] <= 0.20 * car_len:
                 seeds.append((i, p, mm))
         seeds.sort(key=lambda s: -s[2]["diameter"])
         seeds = seeds[:60]
