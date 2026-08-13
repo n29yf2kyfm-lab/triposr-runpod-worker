@@ -1128,6 +1128,32 @@ mesh already carries faint real door creases; synthetic lines without
 semantics risk drawing wrong ones — that fix belongs to Hi3DGen / car
 fine-tuning, not geometry surgery.
 
+## Night audit 2026-08-12/13: ten failures, three root causes (self-audit, owner-ordered)
+
+The full table lives in the session log; what the next session must inherit:
+
+1. **GUARDS ARE CODE AND MUST PROVE THEMSELVES.** Every safety mechanism built
+   tonight failed AS a safety mechanism: a sed corrupted the URL it guarded, an
+   import preflight killed a healthy run, a watcher parsed a transient query
+   failure as "pod gone", and the night watch DIED AT ITS FIRST TICK because
+   **background processes in this container do not survive session idle** — a
+   pod then billed unwatched for 7h10m ($3.15, the "mystery" balance drop,
+   which the audit resolved to the penny: 7.1h x ($0.44+$0.058)). Never claim
+   protection from a watchdog that has not been observed to fire once. For
+   overnight pods the ONLY trustworthy ceiling lives outside this container
+   (pod-side timeout in the bootstrap itself: `sleep MAX && self-terminate`).
+2. **Do not report intentions as facts.** "You are protected" / "agents are
+   working" / "results in ~6 min" were designs, narrated as running realities.
+   State what has been OBSERVED, or say "unverified".
+3. **Delegation must be verified like any other output.** Six subagents were
+   spawned overnight; ZERO returned reports; two files they wrote were never
+   run by anyone. Treat "no report" as failure at the NEXT check, not hours
+   later — and never respond to silent agent failure by spawning more agents.
+   Control group: everything done by hand that evening shipped (six tools, 12
+   commits); everything delegated returned nothing.
+4. The balance endpoint is fine; MY accounting was wrong. Reconstruct spend
+   from pod lifetimes x rate, and a rented pod with `runtime: null` BILLS.
+
 ## P3-SAM (Hunyuan3D-Part) deployment: eight runs of traps, all recorded (2026-08-12)
 
 Native 3D part segmentation, the intended replacement for the PartCrafter->Hunyuan
