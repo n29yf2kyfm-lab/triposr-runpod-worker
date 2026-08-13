@@ -1653,3 +1653,33 @@ mats=1 cov=0.121 'recolourable').
 
 Honest wave metric: keepers-per-wave, not candidates-per-sweep. Ford: 256
 candidates -> 1 keeper. Gap wave: 6 rendered -> 0 keepers.
+
+## clay_rebuild: converter-clay IS recoverable when names survive (2026-08-13, owner experiment)
+
+The owner asked to try recovering a fresh converter-clay car ("the mesh is
+okay, glass faded") and it WORKS. pipeline/ingest/clay_rebuild.py classifies
+each material BY NAME and writes proper PBR values back — pure glTF JSON edit,
+BIN chunk verbatim, geometry untouched by construction. No PartCrafter, no
+segmentation: the converter wiped the colour VALUES but kept name->geometry
+bindings, which makes this the easy case the generated cars never were.
+
+Scoreboard on the three candidates tried:
+  * Nissan Juke 2023 (0.588 x20)  -> CLEAN. 13 distinct colours, glass_probe
+    clear/proven ON THE FILE, red control holds (body red; roof, cladding,
+    glazing, tyres, chrome all held). Sheet reads premium.
+  * Opel Astra 2022 (0.800 x54)   -> GOOD. carpaint respray holds, glass real,
+    tyres black. Residue: 15 'unknown' materials render dark trim (bumper
+    insert reads silver-grey); acceptable, improvable per-car.
+  * Opel Astra L 2021             -> NOT RECOVERABLE: names are numeric junk
+    (1129_N). The mapping table is the tell — no bindings, nothing to map.
+
+Rules of the tool, learned the same evening:
+  * THE MAPPING TABLE IS THE GATE. Read it before rendering: junk names =
+    scrap; 'unknown' entries render visibly dark so misclassification shows.
+  * Classifier order bugs are silent car-wreckers: `int\b` ate BOTH carpaint
+    materials ("carpa-int") and would have rendered the body cabin-black; an
+    intermediate edit double-escaped \\b in a raw string (the documented
+    WRONG_CLASS bug class, again). The 24-case selftest caught both BEFORE a
+    render. Run it after any rule change.
+  * Scope: FRESH candidates only. The 64 scrapped live cars stay scrapped
+    (owner ruling 2026-08-11) unless the owner explicitly reopens them.
