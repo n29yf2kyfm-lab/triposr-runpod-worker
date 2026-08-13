@@ -26,6 +26,21 @@ LOG="$WORK/train.log"
 exec > >(tee -a "$LOG") 2>&1
 TAG="${RUN_TAG:-run}"
 
+# RUN-ONCE GUARD. RunPod restarts the container every time dockerStartCmd
+# exits, so a failing script does not fail — it loops. The v4 run executed this
+# file TWENTY-TWO times, re-merging 90k images on each cycle, and burned 2.5
+# GPU-hours discovering the same error over and over. The marker lives on the
+# container disk, which survives those restarts, so a second entry exits
+# immediately instead of paying for the same work again.
+MARKER="$WORK/.attempted-$TAG"
+if [ -e "$MARKER" ]; then
+  echo "=== $TAG already attempted (marker $MARKER) — refusing to re-run ==="
+  echo "=== pod is idle and should be stopped externally ==="
+  sleep 300
+  exit 0
+fi
+date -u > "$MARKER"
+
 finish() {
   code=$?
   set +x
@@ -95,9 +110,8 @@ pip install -q onnxruntime     || exit 12
 # transformers and hides the real cause, which is the torch version. Upgrading
 # here costs one large download and removes the whole class of confusion.
 python -c "import torch,sys; sys.exit(0 if tuple(map(int,torch.__version__.split('.')[:2]))>=(2,5) else 1)" \
-  || pip install -q --upgrade torch torchvision --index-url https://download.pytorch.org/whl/cu124 \
+  || pip install -q --upgrade torch torchvision --index-url https://download.pytorch.org/whl/cu126 \
   || exit 13
-python -c "import torch;print('torch', torch.__version__, 'cuda', torch.cuda.is_available())" || exit 13
 # The [train,loggers] extras are NOT optional here. Plain `pip install rfdetr`
 # gives a package that imports perfectly and then refuses to train
 # ("RF-DETR training dependencies are missing" / no module pytorch_lightning),
@@ -111,11 +125,29 @@ python -c "import torch;print('torch', torch.__version__, 'cuda', torch.cuda.is_
 pip install -q --ignore-installed blinker "rfdetr[train,loggers]" || exit 14
 # So the smoke test now checks the TRAINING path, not just the import: the
 # gate must fail on the same thing the real run would.
+# CUDA is verified AFTER rfdetr, never before. v4 printed "torch 2.6.0+cu124
+# cuda True" during its dependency check and then died at the first training
+# call with "NVIDIA driver is too old (found version 12080)" — because
+# installing rfdetr pulled its own torch build on top, and the machine's driver
+# (570.x / CUDA 12.8) could not run it. Checking before the last install
+# validated a torch that no longer existed by the time training started.
+#
+# So the gate below runs last, and does real GPU work rather than reading
+# version strings: is_available() alone returned True on the build that then
+# failed to initialise.
 python - <<'PY' || exit 15
-import rfdetr, pytorch_lightning
+import torch, rfdetr, pytorch_lightning
 from rfdetr import RFDETRBase
 assert hasattr(RFDETRBase, "train"), "RFDETRBase has no train()"
-print("rfdetr train deps OK; lightning", pytorch_lightning.__version__)
+print("torch", torch.__version__, "| lightning", pytorch_lightning.__version__)
+assert torch.cuda.is_available(), "CUDA not available"
+# Force a real allocation + kernel launch + bf16 probe: exactly the calls that
+# blew up mid-run last time.
+x = torch.randn(64, 64, device="cuda")
+y = (x @ x).sum().item()
+torch.cuda.is_bf16_supported()
+torch.cuda.synchronize()
+print("CUDA OK:", torch.cuda.get_device_name(0), "| matmul", round(y, 3))
 PY
 
 echo "=== fetch scripts ==="
