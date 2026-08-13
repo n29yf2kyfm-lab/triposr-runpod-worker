@@ -32,22 +32,26 @@ import struct
 import sys
 
 # (regex, class) — FIRST match wins, so order is specificity.
+# paint comes BEFORE interior: the first Astra run classed BOTH `carpaint`
+# materials as interior because `int\b` matches the tail of "carpa-int" —
+# the body would have rendered cabin-black. The interior rule now requires
+# `int` as its own token (start/underscore-delimited), which still catches
+# plasticblack_int_ao / black_int / intD but can never eat a *aint name.
 RULES = [
     (r"lights?_glass|glass_red|lamp|headlight|taillight", "lamp"),
-    (r"glass|window|windscreen|windshield|win_int",        "glass"),
+    (r"glass|window|windscreen|windshield|\bwin(_|\b)",    "glass"),
+    (r"body|carpaint|paint",                               "paint"),
     (r"tire|tyre|rubber",                                  "tyre"),
     (r"rim|alloy|wheel",                                   "rim"),
-    (r"chrome",                                            "chrome"),
+    (r"chrome|mirror",                                     "chrome"),
     (r"brake|caliper",                                     "brake"),
     (r"plate",                                             "plate"),
-    (r"interior|seat|dash|leather|fabric|carpet|int\b|_int", "interior"),
+    (r"interior|seat|dash|leather|fabric|carpet|(^|_)int($|[a-z_])", "interior"),
     (r"copper",                                            "copper"),
     (r"silver",                                            "silver"),
     (r"black.*(matt|mat)\b|matt",                          "trim_matt"),
     (r"black.*shiny|shiny",                                "trim_gloss"),
     (r"black",                                             "trim_matt"),
-    (r"body|carpaint|paint",                               "paint"),
-    (r"mirror",                                            "chrome"),
     (r"red",                                               "accent_red"),
 ]
 
