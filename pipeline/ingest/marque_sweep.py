@@ -99,10 +99,23 @@ def main():
                          "Picks above the standard cap are flagged heavy=true.")
     ap.add_argument("--face-lo", type=int, default=FACE_LO,
                     help="lower face floor for this sweep (default %(default)s)")
+    ap.add_argument("--class-gate", choices=("car", "off"), default="car",
+                    help="'car' (default) keeps BOTH title gates: BAD (toys, "
+                         "game assets, low-poly) and WRONG_CLASS (train, boat, "
+                         "bus, tractor... AND motorcycle/scooter, which are "
+                         "wrong-class for a car catalogue). Use 'off' for a "
+                         "deliberate NON-CAR wave — a motorbike sweep loses "
+                         "every listing titled 'motorcycle' or 'scooter' "
+                         "otherwise (measured: 'Honda CB750 Motorcycle' and "
+                         "'Honda PCX 125 Scooter' both rejected). BAD is kept "
+                         "either way, so toys and game rips still die.")
     a = ap.parse_args()
 
     tok = toks()
     gates = class_gates()
+    if a.class_gate == "off" and gates:
+        gates = (gates[0], gates[0])          # BAD twice: keep it, drop WRONG_CLASS
+        log("class gate: WRONG_CLASS DISABLED (non-car wave); BAD still active")
     try:
         known = {e["sourceReferenceId"] for e in json.load(open(CAT))
                  if e.get("sourceReferenceId")}
