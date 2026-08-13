@@ -487,7 +487,17 @@ def mirror_side_glass(out_lab, fc, band_side, adj):
         for k, o in zip(key, off[tgt]):
             if o > env.get(k, 0.0):
                 env[k] = o
-        outer = np.array([off[t] >= env[k] - 0.015 for t, k in zip(tgt, key)])
+        # Tolerance 0.10, MEASURED: at window height the Golf shell has NO
+        # interior surface in the band at all — the off histogram is one
+        # continuous outer-skin cluster 0.35-0.50 (recess + tumblehome), so
+        # a 0.015 tolerance was amputating recessed window faces (~2,500 a
+        # side) in every cell that also held a pillar face, and the glazed
+        # pillar in front of a body-labelled window sheet rendered as the
+        # grey patches. 0.10 passes the entire skin cluster and still
+        # excludes genuine lining (which sits far inboard) on cars that
+        # have it.
+        tol = float(os.environ.get("MIRROR_TOL", "0.10"))
+        outer = np.array([off[t] >= env[k] - tol for t, k in zip(tgt, key)])
         ci = np.clip((fc[tgt][:, [0, 2]] / res).astype(int), 0, W - 1)
         in_grid = grid[ci[:, 0], ci[:, 1]]
         want_glass = in_grid & outer
