@@ -86,6 +86,19 @@ def main():
     ap.add_argument("--rejects-out", default="",
                     help="dump every title-gate rejection with the token that "
                          "fired it (the log only prints the first 10)")
+    ap.add_argument("--face-hi", type=int, default=FACE_HI,
+                    help="upper face cap for this sweep (default %(default)s). "
+                         "RAISE IT to reach modern volume cars: the standard "
+                         "1.2M cap is a BROWSER DELIVERY budget, not a quality "
+                         "judgement, and pipeline/optimisation/decimate_heavy.py "
+                         "already reduces an over-budget model safely. Measured "
+                         "2026-08-13: the cap alone was hiding 'Ford Puma 2025' "
+                         "(1,498,818 faces) — the UK's best selling car, of "
+                         "which the catalogue holds NONE — plus Ford Fiesta 2018 "
+                         "(1.5M), Fiesta MK6 (1.76M) and Qashqai 2010 (1.39M). "
+                         "Picks above the standard cap are flagged heavy=true.")
+    ap.add_argument("--face-lo", type=int, default=FACE_LO,
+                    help="lower face floor for this sweep (default %(default)s)")
     a = ap.parse_args()
 
     tok = toks()
@@ -109,9 +122,9 @@ def main():
     band, thin, heavy = [], 0, 0
     for r in pool.values():
         fc = r.get("faceCount") or 0
-        if fc < FACE_LO:
+        if fc < a.face_lo:
             thin += 1
-        elif fc > FACE_HI:
+        elif fc > a.face_hi:
             heavy += 1
         else:
             band.append(r)
@@ -144,6 +157,9 @@ def main():
                 continue
         picks.append({"uid": r["uid"], "name": r.get("name", ""),
                       "faces": r.get("faceCount") or 0,
+                      # over the STANDARD delivery cap -> must go through
+                      # decimate_heavy before publish, not a quality flag
+                      "heavy": (r.get("faceCount") or 0) > FACE_HI,
                       "likes": r.get("likeCount") or 0,
                       "licence": ((r.get("license") or {}).get("label") or ""),
                       "author": ((r.get("user") or {}).get("displayName")
@@ -151,8 +167,8 @@ def main():
                       "plate": a.marque, "anchor": 0})
 
     log(f"\nunique downloadable : {len(pool)}")
-    log(f"  below {FACE_LO:,} faces : {thin}")
-    log(f"  above {FACE_HI:,} faces : {heavy}")
+    log(f"  below {a.face_lo:,} faces : {thin}")
+    log(f"  above {a.face_hi:,} faces : {heavy}")
     log(f"  inside the band     : {len(band)}")
     log(f"  already catalogued  : {dupes}")
     log(f"  off-marque title    : {offmarque}")
