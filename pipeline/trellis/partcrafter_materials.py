@@ -116,7 +116,12 @@ def classify(feat, car):
     # stretch of the car in BOTH horizontal axes (debris and mirrors don't),
     # and is a substantial minority of the mesh. The beltline test is loose
     # (0.30) because the canopy's skirt dips to meet the body.
-    if (lo[2] > 0.30 and hi[2] > 0.92 and frac > 0.03 and frac < 0.30
+    # Beltline tolerance 0.22, not 0.30: the Golf run's genuine canopy part
+    # (261k verts, cabin-spanning, roofline-reaching) had its skirt at 0.25
+    # and was called body — zero glazing, refusal downstream. Safe to loosen:
+    # hybrid_transfer's beltline prior already returns any canopy face below
+    # 0.40 height to body, so a deep skirt cannot leak glass onto the doors.
+    if (lo[2] > 0.22 and hi[2] > 0.92 and frac > 0.03 and frac < 0.30
             and span[0] > 0.35 and span[1] > 0.45):
         return "canopy"
 
@@ -344,6 +349,10 @@ def selftest():
         # (name, frac, lo, hi, expect)
         ("canopy (beltline up to roofline, spans cabin)",
          0.136, [0.20, 0.05, 0.42], [0.80, 0.95, 1.00], "canopy"),
+        ("canopy with deep skirt (the Golf near-miss: lo up 0.25)",
+         0.159, [0.00, 0.04, 0.25], [0.78, 0.96, 0.95], "canopy"),
+        ("full side shell (reaches roof but starts at sill -> body)",
+         0.29, [0.00, 0.00, 0.05], [1.00, 1.00, 0.95], "body"),
         ("body shell (dominant)",
          0.298, [0.00, 0.00, 0.00], [1.00, 1.00, 0.95], "body"),
         ("underbody/chassis (low, full length)",
