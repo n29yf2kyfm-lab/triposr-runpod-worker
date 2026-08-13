@@ -207,8 +207,15 @@ def refine(m, flab, hy, pc_pts, pc_lab_names):
             # tighter"): the Hi3DGen mesh carves a real DLO recess, so letting
             # crease smoothness outweigh the melt-derived data term snaps the
             # boundary onto that recess instead of following ragged seeds.
+            # tau raised 0.06 -> 0.14: at 0.06 every greenhouse face more than
+            # ~2 face-widths from the PC canopy cloud was locked to body, and
+            # since the melt canopy's silhouette is ragged, its gaps punched
+            # body peninsulas into the real windows (measured on the Golf:
+            # the in-window patches are connected to the 349k-face main
+            # shell, not islands — no fill can fix what the cut locks).
             is_g = _crease_cut(m, adj, ang, zidx, seed, 0.88, 0.10,
-                               decay_d=d_can[zidx], tau=0.06,
+                               decay_d=d_can[zidx],
+                               tau=float(os.environ.get("GLASS_TAU", "0.14")),
                                lam=float(os.environ.get("GLASS_LAM", "8.0")))
             # roof skin can never be glass — but "roof" is up-facing AND at
             # the top of the car; a raked windscreen centre is up-facing too
@@ -365,7 +372,8 @@ def tighten(out_lab, adj, n_up, allowed=None, k=2, k_close=5,
     if allowed is not None:
         glass = out_lab == "glass"
         limit = glass | (allowed & (out_lab == "body"))
-        closed = _erode(_dilate(glass, adj, k_close, limit), adj, k_close)
+        kc = int(os.environ.get("K_CLOSE", str(k_close)))
+        closed = _erode(_dilate(glass, adj, kc, limit), adj, kc)
         out_lab[closed & (out_lab == "body")] = "glass"
     comp, cnt = _mask_comps(out_lab == "glass", adj, n)
     for cid, c in cnt.items():
