@@ -423,14 +423,21 @@ def region_snap(out_lab, band, adj, ang, n,
         print("region_snap: crease network leaks (one region holds "
               f"{100*max(sizes.values())/inb.sum():.0f}% of the band) — skipped")
         return out_lab
+    # Asymmetric thresholds: after the upstream cleanup a BODY panel region
+    # carries almost no glass, while a real window region ragged-cut to
+    # pieces can sit at only a third glass (the Golf's rear door window did).
+    # So a modest glass fraction already identifies a window, and only a
+    # near-zero fraction proves a panel.
+    vote_g = float(os.environ.get("SNAP_VOTE_G", "0.35"))
+    vote_b = float(os.environ.get("SNAP_VOTE_B", "0.10"))
     for cid, c in sizes.items():
         if c < min_region:
             continue
         faces = np.where(comp == cid)[0]
         gm = float(np.mean(out_lab[faces] == "glass"))
-        if gm >= vote:
+        if gm >= vote_g:
             out_lab[faces] = "glass"
-        elif gm <= 1 - vote:
+        elif gm <= vote_b:
             out_lab[faces] = "body"
     return out_lab
 
@@ -447,8 +454,11 @@ def screen_fit(out_lab, fc, n_len, cell=0.05, thresh=0.5, min_cells=8):
     and enclosed freckles vanish; the screen's silhouette is the hull."""
     from scipy.spatial import Delaunay
     for end_lo, end_hi in ((0.0, 0.18), (0.82, 1.0)):
+        # n_len 0.32, not 0.45: the screen's lower corners curve toward the
+        # quarter panel, fall out of a tight normal cone, and were left as
+        # body intrusions in an otherwise clean screen (Golf rear, eye check)
         zone = ((fc[:, 0] >= end_lo) & (fc[:, 0] <= end_hi)
-                & (fc[:, 2] > 0.50) & (n_len > 0.45)
+                & (fc[:, 2] > 0.50) & (n_len > 0.32)
                 & np.isin(out_lab, ["body", "glass"]))
         zidx = np.where(zone)[0]
         if len(zidx) < 200:
