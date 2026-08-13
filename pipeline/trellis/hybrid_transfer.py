@@ -474,9 +474,22 @@ def mirror_side_glass(out_lab, fc, band_side, adj):
     wg = np.where(band_side & sides[win] & (out_lab == "glass"))[0]
     gi = np.clip((fc[wg][:, [0, 2]] / res).astype(int), 0, W - 1)
     grid[gi[:, 0], gi[:, 1]] = True
-    grid = ndi.binary_closing(grid, structure=np.ones((7, 7)))
+    # closing 5x5 not 7x7: at res 0.008 a 7-cell kernel bridges 0.056 of car
+    # length — it inflated the band beyond the DLO (glass hit 15.6% of faces
+    # against the real mk8's ~8% exterior area share). 5x5 still closes
+    # pillar gaps (~0.02-0.04) for the blacked-band look.
+    grid = ndi.binary_closing(grid, structure=np.ones((5, 5)))
     grid = ndi.binary_opening(grid, structure=np.ones((3, 3)))
     grid = ndi.binary_fill_holes(grid)
+    # BELTLINE FLOOR, self-calibrated: a real DLO's bottom edge is straight,
+    # so the 8th percentile of the stencil cells' up-coordinate IS the
+    # beltline; anything below it is a local dip (mirror shadow, label
+    # noise) and gets cut. Clears the band's sagging lower edge without a
+    # per-car constant.
+    if grid.any():
+        ups = np.where(grid)[1]
+        floor = int(np.percentile(ups, 8))
+        grid[:, :floor] = False
     # outer-skin per fine (length, up) cell and side: lining sits inboard
     off = np.abs(fc[:, 1] - 0.5)
     for sname, sside in sides.items():
