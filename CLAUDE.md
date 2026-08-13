@@ -1464,3 +1464,44 @@ only, per rules 7–8.
 - **Golf hero:** user chose to KEEP the sourced+fixed model (v25/gm24) over
   the seamless-but-soft TRELLIS rebuild (staged at vw/golf_scratch_uc.glb).
   Licensed Mk8 with interior remains the real premium fix.
+
+## Council audit 2026-08-13: the glazing-tighten session (20 commits for one feature)
+
+The Golf glazing cleanup ended green (all 5 gates, clean symmetric band, 0.00%
+below-beltline bleed) but took ~5 hours and 20 commits, six of them wrong or
+no-op. The durable lessons:
+
+1. **After the SECOND failed fix on the same symptom, STOP and instrument.**
+   Six theory-first commits (9-NN majority, interior-lining envelope, ends
+   rules, n_up cap...) each failed in one render; the STOP_AFTER_MIRROR
+   bisection and the DEBUG_DUMP npz then found each real cause in ONE run.
+   A 4-minute knob cycle feels cheaper than 10 minutes of instrumentation
+   and is not — the guessing cost ~6 cycles and left confidently-worded
+   wrong diagnoses in the git history (83900f5, 85762b5).
+2. **A committed fix must be proven to FIRE.** ef65b37 (ends + tail symmetry
+   rules) changed nothing — share identical, render identical — and was
+   committed anyway. Same failure class as the geom_audit wiring bug this
+   file already documents.
+3. **UNRESOLVED: the k-NN label-sampling dither between the two side bands.**
+   The lining theory is DEAD (off-histogram: no interior surface in the band
+   at window height — one continuous skin cluster 0.35-0.50). The 2D stencil
+   stamp SIDESTEPS the dither; nobody knows its true mechanism. Do not
+   re-enable per-face label sampling between differently-tessellated sides
+   without solving it, and do not trust the diagnoses in those two commits.
+4. **G1 was widened (9.5% -> 14% faces) in the session my output was failing
+   it.** Justified by measurement (real mk8 glazing 5.9% of area incl
+   interior, ~8% exterior-only; blacked pillars book as trim on catalogue
+   cars but paint as glass here) and the gate's real purpose is now tested
+   directly (below-beltline bleed <= 0.5%). But v12 passes at 13.7% faces vs
+   a like-for-like real ~8% area — defensible, not bulletproof. If a future
+   car needs the ceiling moved again, that is evidence the gate is wrong OR
+   the car is — measure, don't move.
+5. **Every constant in the glazing stack is calibrated on ONE car** (SNAP_ANG
+   0.18, stencil res 0.008/closing 5x5, beltline floor p8 — assumes a
+   STRAIGHT beltline, MIRROR_TOL 0.10, curl clear n_wid>0.5 & n_up>0.55).
+   hybrid_transfer has NO selftest. Expect the second car to break something;
+   budget the first run on a new marque as calibration, not production.
+6. What held: the <2% refusal guard blocked two garbage writes; the eye
+   overruled green gates twice (the dithered build passed all five); commits
+   pushed immediately and artefacts staged to Supabase throughout, so the
+   day's rollback cost nothing.
