@@ -465,9 +465,15 @@ def mirror_side_glass(out_lab, fc, band_side, adj):
     src = np.where(wz)[0]
     tree_w = cKDTree(fc[src][:, [0, 2]])       # match in (length, up) plane
     tgt = np.where(lz)[0]
-    d, nn = tree_w.query(fc[tgt][:, [0, 2]], workers=4)
-    ok = d < 0.03
-    out_lab[tgt[ok]] = np.where(wg[src[nn[ok]]], "glass", "body")
+    # k-NN MAJORITY, not nearest-single: the two sides are tessellated
+    # differently, and 1-NN sampling aliased the transplant into a
+    # salt-and-pepper dither (Golf left band, eye-checked — the gates all
+    # passed while the render was garbage). A 9-neighbour vote in the
+    # continuous (length, up) plane low-pass filters the boundary instead.
+    d, nn = tree_w.query(fc[tgt][:, [0, 2]], k=9, workers=4)
+    ok = d[:, 0] < 0.03
+    frac = wg[src[nn]].mean(axis=1)
+    out_lab[tgt[ok]] = np.where(frac[ok] >= 0.5, "glass", "body")
     print(f"mirror_side_glass: kept '{win}' side "
           f"(boundary/area {scores[win]:.3f} vs {scores[lose]:.3f})")
     return out_lab
