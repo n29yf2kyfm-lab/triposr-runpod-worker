@@ -128,7 +128,12 @@ echo "=== deps ==="
 pip install -q --upgrade pip
 # One package per line so a failure names itself in the log.
 pip install -q huggingface_hub || exit 11
-pip install -q onnxruntime     || exit 12
+# onnx AND onnxruntime — different packages, and the distinction cost a seven
+# hour run: torch.onnx.export needs `onnx` to serialise the graph, while
+# `onnxruntime` only executes an already-built model. Having the runtime
+# installed made the export look supported right up to the moment it raised
+# "Module onnx is not installed!".
+pip install -q onnx onnxruntime || exit 12
 
 # Torch MUST come first and be >= 2.5. The base image ships 2.4.1, and current
 # transformers refuses to enable its PyTorch integration below 2.5 — it prints
@@ -179,10 +184,11 @@ pip install -q --ignore-installed blinker "rfdetr[train,loggers]" || exit 14
 # version strings: is_available() alone returned True on the build that then
 # failed to initialise.
 python - <<'PY' || exit 15
-import torch, rfdetr, pytorch_lightning
+import torch, onnx, rfdetr, pytorch_lightning
 from rfdetr import RFDETRBase
 assert hasattr(RFDETRBase, "train"), "RFDETRBase has no train()"
-print("torch", torch.__version__, "| lightning", pytorch_lightning.__version__)
+print("torch", torch.__version__, "| lightning", pytorch_lightning.__version__,
+      "| onnx", onnx.__version__)
 assert torch.cuda.is_available(), "CUDA not available"
 # Force a real allocation + kernel launch + bf16 probe: exactly the calls that
 # blew up mid-run last time.
@@ -215,7 +221,42 @@ du -sh prepared _sources || true
 
 echo "=== train ==="
 python train_detector.py --data prepared --out runs \
-  --epochs "${EPOCHS:-15}" --batch-size "${BATCH:-8}" || exit 40
+  --epochs "${EPOCHS:-15}" --batch-size "${BATCH:-8}"
+TRAIN_RC=$?
+echo "train_detector rc=$TRAIN_RC"
+
+# PUBLISH THE CHECKPOINT BEFORE ANYTHING ELSE CAN FAIL.
+#
+# The v6 run trained for seven hours, reached mAP50:95 0.439, wrote
+# checkpoint_best_regular.pth — and then lost all of it, because ONNX export
+# raised on a missing `onnx` package and the publish step sat AFTER the export
+# in the same failure path. The pod's disk was ephemeral, so the weights died
+# with it and the whole run had to be repeated.
+#
+# The weights are the expensive artefact; the ONNX file is a five-second
+# derivative of them. So the checkpoint ships first, unconditionally, even when
+# training itself returned non-zero — a partially trained checkpoint is worth
+# vastly more than nothing.
+echo "=== publish checkpoint (before export) ==="
+python - <<'PY' || echo "checkpoint publish failed (continuing)"
+import os, glob
+from huggingface_hub import HfApi
+api = HfApi(token=os.environ["HF_TOKEN"])
+repo, tag = os.environ["HF_REPO"], os.environ.get("RUN_TAG", "run")
+n = 0
+for p in sorted(glob.glob("runs/**/*.pth", recursive=True)):
+    mb = os.path.getsize(p) / 1e6
+    print(f"uploading {p} ({mb:.0f} MB)")
+    api.upload_file(path_or_fileobj=p,
+                    path_in_repo=f"detector/{tag}/{os.path.basename(p)}",
+                    repo_id=repo, token=os.environ["HF_TOKEN"])
+    n += 1
+for p in glob.glob("prepared/labels.txt"):
+    api.upload_file(path_or_fileobj=p, path_in_repo=f"detector/{tag}/labels.txt",
+                    repo_id=repo, token=os.environ["HF_TOKEN"])
+print("checkpoints uploaded:", n)
+PY
+[ "$TRAIN_RC" = "0" ] || exit 40
 
 echo "=== publish ==="
 python - <<'PY' || exit 50
