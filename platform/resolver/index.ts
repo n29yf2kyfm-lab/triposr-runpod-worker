@@ -114,9 +114,19 @@ const DISCLOSURES: Record<string, string> = {
   unavailable: "A reliable 3D model is not currently available for this vehicle.",
 };
 
-function scoreAsset(a: any, v: any) {
+function scoreAsset(a: any, v: any, al: Aliases) {
   const matched: string[] = [];
-  if (slug(a.make) !== v.make) return { a, score: 0, matched, rejected: "make" };
+  // The ASSET's make must go through the same alias map as the vehicle's, or
+  // an aliased marque can never match. Measured 2026-08-13: DVLA returns
+  // "VAUXHALL", which normalises to `vauxhall`, while four approved cars are
+  // filed make="opel" and were slugged to `opel` here — half of the entire
+  // Vauxhall library was unreachable for the exact lookups it exists to serve,
+  // and Vauxhall is the UK's second marque. Catalogue make strings come from
+  // source titles, so they carry whatever the uploader badged the car; the
+  // resolver is the right place to reconcile that, not the data.
+  if (normaliseMake(a.make, al) !== v.make) {
+    return { a, score: 0, matched, rejected: "make" };
+  }
   matched.push("make");
   const famOk = slug(a.modelFamily) === v.modelFamily ||
     (a.modelAliases ?? []).some((x: string) => slug(x) === v.modelFamily || slug(x) === v.model);
@@ -180,7 +190,7 @@ Deno.serve(async (req) => {
 
   const candidates = catalogue
     .filter((a: any) => a.publicationStatus === "approved" && a.qualityGrade !== "rejected")
-    .map((a: any) => scoreAsset(a, v))
+    .map((a: any) => scoreAsset(a, v, aliases))
     .filter((s: any) => !s.rejected)
     .sort((x: any, y_: any) => y_.score - x.score);
 
