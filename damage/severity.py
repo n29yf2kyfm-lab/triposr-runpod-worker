@@ -101,7 +101,29 @@ def condition_score(findings):
     elif worst >= 7:
         score = min(score, 72)
 
+    # A structural/safety finding severe enough to raise the "get this
+    # inspected" banner (same test as summarize()) must not co-exist with an
+    # "excellent/good" headline. Without this, a sev-6 structural item whose
+    # weighted worst falls just under the ceiling above prints "A · excellent"
+    # next to a structural-concern warning — a contradiction a premium report
+    # can never ship. Cap it at the top of "fair" so the two always agree.
+    if is_structural_concern(findings):
+        score = min(score, 74)
+
     return int(max(0, min(100, round(score))))
+
+
+def is_structural_concern(findings):
+    """True when any finding is a structural/safety type at severity >= 6.
+
+    The single source of truth for the "get this inspected" gate — used by both
+    the score ceiling and summarize(), so the headline grade and the banner can
+    never disagree.
+    """
+    return any(
+        DAMAGE_TYPES.get(f.get("damage_type", "other"), (None, False))[1]
+        and clamp_severity(f.get("severity", 5)) >= 6
+        for f in findings)
 
 
 def summarize(findings):
@@ -142,8 +164,5 @@ def summarize(findings):
             "severity": clamp_severity(worst.get("severity", 5)),
         } if worst else None),
         # a structural flag the app can gate a "get this inspected" banner on
-        "structural_concern": any(
-            DAMAGE_TYPES.get(f.get("damage_type", "other"), (None, False))[1]
-            and clamp_severity(f.get("severity", 5)) >= 6
-            for f in findings),
+        "structural_concern": is_structural_concern(findings),
     }

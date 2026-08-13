@@ -56,6 +56,26 @@ def assemble(findings, images=None, meta=None, repair=None, quality=None,
     return report
 
 
+def _overlay_block(im):
+    """One annotated photo, with an honest note when boxes could not be drawn.
+
+    The caption states how many findings are actually marked. Without it a
+    reader assumes every finding is visible on the image, and silently
+    unmarked damage is exactly the impression a report must not create.
+    """
+    drawn = im.get("drawn", 0)
+    missing = im.get("skipped_no_bbox", 0)
+    note = f'{drawn} marked'
+    if missing:
+        note += (f' · {missing} finding{"s" if missing != 1 else ""} not '
+                 f'located on this image (listed below)')
+    return ('<figure class="shot">'
+            f'<img src="{html.escape(im.get("data_uri", ""))}" '
+            f'alt="Annotated damage photo {im.get("index", 0) + 1}">'
+            f'<figcaption class="muted">Photo {im.get("index", 0) + 1} · '
+            f'{html.escape(note)}</figcaption></figure>')
+
+
 def _now():
     # Date.now()-free: the worker stamps time when it builds the report; tests
     # pass a fixed value so output is deterministic.
@@ -103,6 +123,12 @@ def render_html(report):
                      f'{html.escape(rep.get("disclaimer",""))}</div></div>')
 
     # findings
+    # annotated photos first: the colour-coded image is what a reader actually
+    # looks at, and it carries the same severity palette as the cards below
+    ov = report.get("overlays") or {}
+    for im in (ov.get("images") or []):
+        parts.append(_overlay_block(im))
+
     findings = report.get("findings") or []
     parts.append(f'<h2>Findings <span class="count">{len(findings)}</span></h2>')
     if not findings:
@@ -259,7 +285,8 @@ _HEAD = """<!doctype html><html lang="en"><head><meta charset="utf-8">
   .hidden li,.risks li{font-size:13px;margin:3px 0}
   .cost{margin-top:8px;font-weight:600}
   .guidance{list-style:none;padding:0}.guidance li{margin:4px 0}
-  .disclaimer{margin-top:34px;color:#6e7681;font-size:12px;border-top:1px solid #21262d;
+  .shot{margin:18px 0}.shot img{width:100%;border-radius:10px;display:block;border:1px solid #30363d}.shot figcaption{margin-top:6px;font-size:13px}
+.disclaimer{margin-top:34px;color:#6e7681;font-size:12px;border-top:1px solid #21262d;
     padding-top:14px}
   @media print{body{background:#fff;color:#111}
     .fc,.summary,.repair{background:#fafafa;border-color:#ddd}

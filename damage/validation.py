@@ -161,6 +161,9 @@ def parse_job(job_input):
         "glb_url": (str(job_input.get("glb_url") or "").strip() or None),
         "want_html": bool(job_input.get("want_html", True)),
         "want_fusion": bool(job_input.get("want_fusion", True)),
+        # Annotated images: "both" (heat wash + boxes), "box", "heat", "light",
+        # or None to skip. Only rendered for findings that carry a bbox.
+        "overlay": job_input.get("overlay", "both"),
         # compare mode: the baseline to diff against.
         "baseline_findings": _findings_or_none(
             job_input.get("baseline_findings")),

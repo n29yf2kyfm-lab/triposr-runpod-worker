@@ -98,6 +98,54 @@ def _prepare_images(spec):
     return refs
 
 
+def _render_overlays(spec, findings, image_refs, prog):
+    """Colour-coded annotated images, one per input photo.
+
+    Best-effort by design: a failed overlay must never fail an inspection that
+    already has a valid score and price, so each image is caught individually
+    and the reason is recorded instead of raised. Findings with no bbox cannot
+    be drawn, and that count is reported rather than hidden — an empty overlay
+    must not be able to read as "no damage found".
+    """
+    mode = spec.get("overlay")
+    if not mode or not image_refs or not findings:
+        return None
+    try:
+        import overlay as overlay_mod
+    except Exception as e:                       # Pillow absent in some builds
+        return {"rendered": 0, "error": f"{type(e).__name__}: {e}"}
+
+    prog.stage("rendering_overlays", images=len(image_refs), mode=mode)
+    out, errors = [], []
+    for i, ref in enumerate(image_refs):
+        try:
+            uri, m = overlay_mod.render_data_uri(
+                _overlay_source(ref), findings, mode=mode, image_index=i)
+            out.append({"index": i, "mode": mode, "data_uri": uri,
+                        "drawn": m["drawn"],
+                        "skipped_no_bbox": m["skipped_no_bbox"]})
+        except Exception as e:
+            errors.append({"index": i, "error": f"{type(e).__name__}: {e}"})
+    return {"rendered": len(out), "images": out,
+            "errors": errors} if (out or errors) else None
+
+
+def _overlay_source(ref):
+    """A local path for `ref`; remote URLs are fetched once to a temp file."""
+    s = str(ref)
+    if not s.startswith(("http://", "https://")):
+        return s
+    import tempfile
+    import requests
+    from analyze import FETCH_HEADERS
+    r = requests.get(s, headers=FETCH_HEADERS, timeout=30)
+    r.raise_for_status()
+    fd, path = tempfile.mkstemp(suffix=".jpg")
+    with os.fdopen(fd, "wb") as f:
+        f.write(r.content)
+    return path
+
+
 def _inspect(spec, prog, vision_fn=None):
     findings, images, meta = _get_findings(spec, prog, vision_fn)
 
@@ -117,11 +165,20 @@ def _inspect(spec, prog, vision_fn=None):
         prog.stage("mapping_3d")
         fusion = fusion_mod.fuse(findings, spec["glb_url"])
 
+    # Overlays need the source pixels. _prepare_images is idempotent (base64
+    # inputs rewrite to the same paths), so calling it again is cheap and keeps
+    # the findings path unchanged.
+    overlays = None
+    if spec["image_urls"] or spec["image_b64s"]:
+        overlays = _render_overlays(spec, findings, _prepare_images(spec), prog)
+
     prog.stage("reporting")
     report = report_mod.assemble(
         findings, images=images, meta=meta, repair=repair, quality=quality,
         completeness=completeness, fusion=fusion, vehicle=spec["vehicle"],
         scan_id=spec["scan_id"])
+    if overlays:
+        report["overlays"] = overlays
     return report
 
 
@@ -228,6 +285,13 @@ def handler(job):
             return result
 
         delivered = _deliver_report(result, job_id, spec["want_html"])
+        # Overlays carry multi-hundred-KB data URIs. They were present in
+        # `result` for the artifacts (the JSON file and the HTML embed them);
+        # popping them here, AFTER delivery, means the response body carries
+        # them exactly once at the top level instead of twice — with several
+        # photos the duplicate copy alone could push a response past RunPod's
+        # payload limit.
+        overlays = result.pop("overlays", None)
         response = {
             "status": "success",
             "mode": spec["mode"],
@@ -239,6 +303,7 @@ def handler(job):
             "completeness": result.get("completeness"),
             "quality": result.get("quality"),
             "fusion": result.get("fusion"),
+            "overlays": overlays,
             "summary": result.get("summary"),
             "report": result,
             "artifacts": delivered,

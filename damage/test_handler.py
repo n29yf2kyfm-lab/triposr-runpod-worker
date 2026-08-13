@@ -106,6 +106,17 @@ check("2g rollup flags structural concern", roll["structural_concern"] is True)
 check("2h worst finding surfaced",
       roll["worst_finding"]["damage_type"] == "shattered_glass")
 
+# a structural finding severe enough to raise the banner can NEVER co-exist with
+# an "excellent/good" headline — grade and banner must always agree.
+struct6 = [{"panel": "hood", "damage_type": "dent", "severity": 6}]
+r6 = SEV.summarize(struct6)
+check("2i structural concern forbids an excellent/good headline",
+      not (r6["structural_concern"] and r6["grade"] in ("A", "B")),
+      f'grade={r6["grade"]} concern={r6["structural_concern"]} '
+      f'score={r6["condition_score"]}')
+check("2j structural concern caps the score at 'fair' or below",
+      SEV.condition_score(struct6) <= 74, str(SEV.condition_score(struct6)))
+
 
 # ---- 3. repair estimation ------------------------------------------------
 f_dent = {"panel": "front_left_door", "damage_type": "dent", "severity": 6}
@@ -400,6 +411,351 @@ job4 = {"id": "job-4", "input": {
 resp4 = H.handler(job4)
 check("13a missing baseline findings -> needs_baseline, not silent over-charge",
       resp4.get("status") == "needs_baseline")
+
+
+# ---- 14. image fetch sends browser-like headers ---------------------------
+# Regression: a live job died with "403 Forbidden" fetching a Wikimedia photo
+# because _load_images sent a bare python-requests User-Agent. Many image hosts
+# reject that outright, and users paste URLs from wherever their photos live.
+check("14a fetch headers defined", isinstance(AN.FETCH_HEADERS, dict))
+check("14b sends a non-default User-Agent",
+      "Mozilla" in AN.FETCH_HEADERS.get("User-Agent", ""))
+check("14c accepts image content types",
+      "image/" in AN.FETCH_HEADERS.get("Accept", ""))
+import inspect as _inspect  # noqa: E402
+_src = _inspect.getsource(AN._load_images)
+check("14d _load_images actually passes the headers",
+      "headers=FETCH_HEADERS" in _src)
+check("14e _load_images still raises on a bad response",
+      "raise_for_status" in _src)
+
+
+# ---- 15. anthropic (frontier) vision backend --------------------------------
+# The recommended backend. Stub the SDK so no key or network is needed; prove
+# selection, message shape, and that the deterministic pipeline consumes its
+# output exactly like the local model's.
+import base64 as _b64  # noqa: E402
+
+_captured = {}
+
+
+class _FakeBlock:
+    type = "text"
+    def __init__(self, text): self.text = text
+
+
+class _FakeMsg:
+    stop_reason = "end_turn"
+    def __init__(self, text): self.content = [_FakeBlock(text)]
+
+
+class _FakeMessages:
+    def create(self, **kw):
+        _captured.update(kw)
+        # echo a minimal valid inspection so analyze() parses it
+        return _FakeMsg('{"findings": [{"panel":"windshield",'
+                        '"damage_type":"shattered glass","severity":8,'
+                        '"evidence":["spiderweb cracking"]}],'
+                        '"images": [], "summary": "one crack"}')
+
+
+class _FakeAnthropic:
+    def __init__(self, *a, **k): self.messages = _FakeMessages()
+
+
+_fake_anthropic = types.ModuleType("anthropic")
+_fake_anthropic.Anthropic = _FakeAnthropic
+sys.modules["anthropic"] = _fake_anthropic
+
+check("15a anthropic backend selected by env",
+      callable(AN._anthropic_backend()))
+
+# image blocks: URL passes through as url; local file becomes base64
+url_block = AN._anthropic_image_blocks(["https://example.com/a.jpg"])[0]
+check("15b url image -> url source", url_block["source"]["type"] == "url")
+# a real local file (this test file) -> base64 source
+local_block = AN._anthropic_image_blocks([__file__])[0]
+check("15c local image -> base64 source",
+      local_block["source"]["type"] == "base64" and local_block["source"]["data"])
+
+# end to end through analyze() with the stubbed SDK
+import os as _os  # noqa: E402
+_os.environ["DAMAGE_BACKEND"] = "anthropic"
+fn = AN.get_backend()
+findings_a, images_a, meta_a = AN.analyze(
+    ["https://example.com/car.jpg"], {"make": "BMW"}, vision_fn=fn)
+check("15d anthropic path yields a finding", len(findings_a) == 1)
+check("15e finding normalised (shattered_glass)",
+      findings_a[0]["damage_type"] == "shattered_glass")
+check("15f system prompt passed to the model",
+      "damage appraiser" in _captured.get("system", ""))
+check("15g image block sent to the model",
+      any(b.get("type") == "image" for b in _captured.get("messages", [{}])[0]
+          .get("content", [])))
+_os.environ.pop("DAMAGE_BACKEND", None)
+
+
+# ---- 16. openrouter (free, no-GPU) vision backend ---------------------------
+# The zero-marginal-cost path. Stub `requests` so no key and no network are
+# needed; prove selection, the OpenAI-shaped payload, data-URI inlining for
+# local files, that a 429 explains the free-tier caps instead of leaking a bare
+# HTTP error, and that the deterministic pipeline consumes its output unchanged.
+_or_captured = {}
+
+
+class _FakeResp:
+    def __init__(self, status=200, body=None):
+        self.status_code = status
+        self._body = body or {}
+
+    def json(self): return self._body
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            raise RuntimeError(f"HTTP {self.status_code}")
+
+
+def _fake_post(url, headers=None, data=None, timeout=None):
+    _or_captured["url"] = url
+    _or_captured["headers"] = headers or {}
+    _or_captured["payload"] = json.loads(data)
+    if _or_captured.get("force_429"):
+        return _FakeResp(429)
+    return _FakeResp(200, {"choices": [{"message": {"content":
+        '{"findings": [{"panel":"front bumper","damage_type":"dent",'
+        '"severity":5,"evidence":["crease left of the plate"]}],'
+        '"images": [], "summary": "one dent"}'}}]})
+
+
+_fake_requests = types.ModuleType("requests")
+_fake_requests.post = _fake_post
+_fake_requests.get = lambda *a, **k: _FakeResp(200)
+_real_requests = sys.modules.get("requests")
+sys.modules["requests"] = _fake_requests
+
+_os.environ["DAMAGE_BACKEND"] = "openrouter"
+_os.environ["OPENROUTER_API_KEY"] = "test-key"
+check("16a openrouter backend selected by env", callable(AN.get_backend()))
+
+# image blocks use the OpenAI shape; local files inline as data URIs
+ob = AN._openai_image_blocks(["https://example.com/a.jpg"])[0]
+check("16b url image -> image_url block",
+      ob["type"] == "image_url" and ob["image_url"]["url"].startswith("https://"))
+ob_local = AN._openai_image_blocks([__file__])[0]
+check("16c local image -> data URI",
+      ob_local["image_url"]["url"].startswith("data:"))
+
+# end to end through analyze() with the stubbed transport
+fn_or = AN.get_backend()
+findings_o, images_o, meta_o = AN.analyze(
+    ["https://example.com/car.jpg"], {"make": "Toyota"}, vision_fn=fn_or)
+check("16d openrouter path yields a finding", len(findings_o) == 1)
+check("16e finding normalised (front_bumper/dent)",
+      findings_o[0]["panel"] == "front_bumper"
+      and findings_o[0]["damage_type"] == "dent")
+check("16f defaults to a free model tag",
+      _or_captured["payload"]["model"].endswith(":free"))
+check("16g system prompt sent as a system message",
+      _or_captured["payload"]["messages"][0]["role"] == "system"
+      and "damage appraiser" in _or_captured["payload"]["messages"][0]["content"])
+check("16h api key sent as a bearer token",
+      _or_captured["headers"].get("Authorization") == "Bearer test-key")
+
+# a 429 must explain the free-tier caps, not leak a bare HTTP error
+_or_captured["force_429"] = True
+try:
+    AN.get_backend()("p", ["https://example.com/car.jpg"])
+    _429 = ""
+except Exception as e:
+    _429 = str(e)
+check("16i 429 explains the free-tier limits",
+      "req/day" in _429 or "requests/day" in _429 or "50 req" in _429, _429[:90])
+_or_captured.pop("force_429")
+
+# a missing key must name the variable rather than fail deep in the transport
+_os.environ.pop("OPENROUTER_API_KEY")
+try:
+    AN.get_backend()("p", ["https://example.com/car.jpg"])
+    _nokey = ""
+except Exception as e:
+    _nokey = str(e)
+check("16j missing key names OPENROUTER_API_KEY",
+      "OPENROUTER_API_KEY" in _nokey, _nokey[:90])
+
+if _real_requests is not None:
+    sys.modules["requests"] = _real_requests
+else:
+    sys.modules.pop("requests", None)
+_os.environ.pop("DAMAGE_BACKEND", None)
+
+
+# ---- 17. local CPU detector backend -----------------------------------------
+# The self-hosted path. Everything tested here is pure arithmetic on detector
+# output — no weights, no onnxruntime, no network — because that is exactly the
+# half that decides what lands on a customer's invoice.
+import detect as DET  # noqa: E402
+
+SIZE = (1000, 1000)
+
+# class mapping is generous about the spellings real datasets ship
+check("17a maps dataset spellings onto the taxonomy",
+      DET.DAMAGE_CLASS_MAP["glass shatter"] == "shattered_glass"
+      and DET.DAMAGE_CLASS_MAP["lamp_broken"] == "lamp_damage"
+      and DET.DAMAGE_CLASS_MAP["flat_tire"] == "tire_damage")
+
+# severity rises with box area, and never leaves 1..10
+small = DET.severity_from_box("dent", 0.005, 0.9)
+big = DET.severity_from_box("dent", 0.30, 0.9)
+check("17b bigger box -> higher severity", small < big, f"{small} < {big}")
+check("17c severity stays in band",
+      all(1 <= DET.severity_from_box("dent", a, 0.9) <= 10
+          for a in (0.0, 0.001, 0.05, 0.5, 1.0)))
+
+# type floors and ceilings hold: glass is never trivial, a scratch never severe
+check("17d shattered glass never scores trivial",
+      DET.severity_from_box("shattered_glass", 0.0001, 0.9) >= 7)
+check("17e a scratch never scores catastrophic",
+      DET.severity_from_box("scratch", 1.0, 0.99) <= 6)
+
+# a low-confidence detection must not drive a severe headline
+check("17f low confidence lowers severity",
+      DET.severity_from_box("dent", 0.3, 0.4)
+      < DET.severity_from_box("dent", 0.3, 0.9))
+
+dets = [
+    {"label": "dent", "box": [100, 100, 300, 300], "score": 0.91},
+    {"label": "glass shatter", "box": [400, 100, 700, 400], "score": 0.88},
+    {"label": "scratch", "box": [10, 10, 40, 40], "score": 0.10},   # below floor
+    {"label": "unicorn", "box": [0, 0, 10, 10], "score": 0.99},     # unknown class
+]
+f17 = DET.detections_to_findings(dets, SIZE, panel_hint="hood")
+check("17g low-confidence and unknown classes are dropped", len(f17) == 2,
+      str(len(f17)))
+check("17h panel hint applied", all(f["panel"] == "hood" for f in f17))
+check("17i bbox emitted NORMALISED so it survives normalize_findings",
+      f17[0]["bbox"] == [0.1, 0.1, 0.2, 0.2], str(f17[0]["bbox"]))
+# the regression that made this convention explicit: pixel corners are clamped
+# to the unit square by _bbox_or_none, silently losing every box
+_rt = AN.normalize_findings(f17)
+check("17r detector boxes survive the normaliser",
+      all(x["bbox"] for x in _rt), str([x["bbox"] for x in _rt]))
+
+# evidence must be concrete — normalize_findings DROPS evidence-less findings,
+# so a detector that cannot say what it saw must not become a charge
+check("17j every detection carries concrete evidence",
+      all(f["evidence"] and "detector found" in f["evidence"][0] for f in f17))
+survived = AN.normalize_findings(f17)
+check("17k findings survive normalisation", len(survived) == 2)
+check("17l normalised onto the taxonomy",
+      {s["damage_type"] for s in survived} == {"dent", "shattered_glass"})
+
+# the JSON envelope is the drop-in trick: analyze() parses it unchanged
+env = DET.detections_to_json([(dets, SIZE, "hood")])
+parsed = AN._extract_json(env)
+check("17m emits the same envelope a VLM returns",
+      "findings" in parsed and len(parsed["findings"]) == 2)
+
+# and the whole pipeline runs off it with no branching
+fn_det = lambda prompt, refs: env  # noqa: E731
+fd, _id, _md = AN.analyze(["x.jpg"], {"make": "Toyota"}, vision_fn=fn_det)
+roll17 = SEV.summarize(fd)
+check("17n detector output scores through the real pipeline",
+      len(fd) == 2 and 0 <= roll17["condition_score"] <= 100
+      and roll17["structural_concern"] is True)
+
+# box geometry -> original-image pixels
+scaled = DET.parse_detections(
+    [[[0, 0, 320, 320]], [0.9], [0]], (1280, 640), (640, 640), labels=["dent"])
+check("17o boxes rescale to source-image pixels",
+      scaled[0]["box"] == [0.0, 0.0, 640.0, 320.0], str(scaled[0]["box"]))
+check("17p class ids resolve to labels", scaled[0]["label"] == "dent")
+
+# missing model config must name the variable, not fail deep in onnxruntime
+try:
+    DET.detector_backend()("p", ["a.jpg"])
+    _nomodel = ""
+except Exception as e:
+    _nomodel = str(e)
+check("17q missing model names DAMAGE_DETECTOR_MODEL",
+      "DAMAGE_DETECTOR_MODEL" in _nomodel, _nomodel[:80])
+
+
+# ---- 18. colour-coded overlays (box / heat / light) -------------------------
+# The visual surface. The colours MUST come from the same severity table that
+# drives the grade — an amber box beside a "severe" finding destroys trust
+# faster than a missing feature — so that agreement is pinned here.
+import overlay as OV  # noqa: E402
+
+check("18a ramp starts at the cosmetic colour and ends at severe",
+      OV.ramp_colour(0.0) == OV.hex_to_rgb(TAX.SEVERITY_BANDS[0][3])
+      and OV.ramp_colour(1.0) == OV.hex_to_rgb(TAX.SEVERITY_BANDS[-1][3]))
+check("18b ramp is continuous and clamped",
+      OV.ramp_colour(-5) == OV.ramp_colour(0.0)
+      and OV.ramp_colour(99) == OV.ramp_colour(1.0))
+check("18c box colour == the report's band colour for that severity",
+      all(OV.severity_colour(s) == OV.hex_to_rgb(TAX.severity_band(s)[1])
+          for s in range(1, 11)))
+
+# findings with no usable box are COUNTED, never silently dropped: an empty
+# overlay must not be able to read as "no damage found"
+# bboxes are NORMALISED [x, y, w, h] — the product's single convention
+mixed = [
+    {"panel": "hood", "damage_type": "dent", "severity": 8,
+     "image_index": 0, "bbox": [0.1, 0.1, 0.3, 0.4]},
+    {"panel": "roof", "damage_type": "dent", "severity": 4},           # no bbox
+    {"panel": "door", "damage_type": "dent", "severity": 4,
+     "image_index": 0, "bbox": [0.2, 0.2, 0.0, 0.0]},                  # degenerate
+    {"panel": "boot", "damage_type": "dent", "severity": 4,
+     "image_index": 1, "bbox": [0.0, 0.0, 0.5, 0.5]},                  # other image
+]
+items, skipped = OV.drawable(mixed, (200, 120), image_index=0)
+check("18d2 normalised box scales to this image's pixels",
+      [round(v) for v in items[0][1]] == [20, 12, 80, 60],
+      str([round(v) for v in items[0][1]]))
+check("18d only usable boxes on this image are drawn", len(items) == 1,
+      str(len(items)))
+check("18e unusable findings are counted, not dropped", skipped == 2, str(skipped))
+
+# class mode: categorical palette, distinct from the severity ramp
+check("18f-1 each damage type gets its own colour",
+      len({OV.class_colour(t) for t in
+           ("dent","scratch","crack","rust","shattered_glass","tire_damage")}) == 6)
+check("18f-2 finding_colour routes by mode",
+      OV.finding_colour({"damage_type":"rust","severity":9}, "class")
+      == OV.class_colour("rust")
+      and OV.finding_colour({"damage_type":"rust","severity":9}, "severity")
+      == OV.severity_colour(9))
+check("18f-3 unknown damage type falls back, never crashes",
+      OV.class_colour("no_such_type") == OV.hex_to_rgb(OV.DEFAULT_CLASS_COLOUR))
+check("18f label names panel, damage and severity",
+      OV.finding_label(mixed[0]) == "Hood / bonnet · Dent · 8",
+      OV.finding_label(mixed[0]))
+
+# rendering: exercised only if Pillow is present, so the suite stays deps-free
+try:
+    from PIL import Image as _PILImage
+    _has_pil = True
+except ImportError:
+    _has_pil = False
+
+if _has_pil:
+    import tempfile as _tf
+    _p = os.path.join(_tf.mkdtemp(), "t.jpg")
+    _PILImage.new("RGB", (200, 120), (90, 90, 90)).save(_p)
+    for _mode in ("box", "heat", "light", "both"):
+        _im, _meta = OV.render(_p, mixed, mode=_mode)
+        check(f"18g[{_mode}] renders at source size and reports coverage",
+              _im.size == (200, 120) and _meta["drawn"] == 1
+              and _meta["skipped_no_bbox"] == 2)
+    # a clean car must render unchanged rather than crash on an empty mask
+    _clean, _cmeta = OV.render(_p, [], mode="both")
+    check("18h no findings renders cleanly", _clean.size == (200, 120)
+          and _cmeta["drawn"] == 0)
+    _uri, _umeta = OV.render_data_uri(_p, mixed, mode="both")
+    check("18i data URI is inlineable jpeg",
+          _uri.startswith("data:image/jpeg;base64,") and _umeta["bytes"] > 0)
+else:
+    check("18g rendering skipped (no Pillow)", True)
 
 
 # ---- report ---------------------------------------------------------------
