@@ -449,9 +449,29 @@ def mirror_side_glass(out_lab, fc, band_side, adj):
     left stayed ragged). Score each side's glass mask by boundary-to-area
     ratio, keep the cleaner side, and mirror it wholesale onto the other.
     Only glass/body inside the side band is touched."""
+    # OUTER SKIN ONLY. The shell carries interior surfaces (door lining,
+    # cabin walls) at the SAME (length, up) as the windows, side-facing and
+    # labelled body — invisible in renders but present in the band. Matching
+    # in the (length, up) plane mixed them with window faces, so every k-NN
+    # query voted ~50/50 and the transplant came out dithered (bisected
+    # 2026-08-13: the dither exists straight out of the mirror). Keep only
+    # faces near each (length, up) cell's outer width envelope.
+    off = np.abs(fc[:, 1] - 0.5)
+    kl = np.clip(np.floor(fc[:, 0] * 40).astype(int), 0, 39)
+    ku = np.clip(np.floor(fc[:, 2] * 20).astype(int), 0, 19)
+    outer = np.zeros(len(fc), bool)
+    for sname, sside in (("lo", fc[:, 1] < 0.5), ("hi", fc[:, 1] >= 0.5)):
+        zi = np.where(band_side & sside)[0]
+        env = {}
+        for i in zi:
+            k = (kl[i], ku[i])
+            env[k] = max(env.get(k, 0.0), off[i])
+        for i in zi:
+            if off[i] >= env[(kl[i], ku[i])] - 0.02:
+                outer[i] = True
     scores, masks = {}, {}
     for sname, sside in (("lo", fc[:, 1] < 0.5), ("hi", fc[:, 1] >= 0.5)):
-        zone = band_side & sside
+        zone = band_side & sside & outer
         gm = zone & (out_lab == "glass")
         if gm.sum() < 200:
             return out_lab                 # a side without glass: leave alone
