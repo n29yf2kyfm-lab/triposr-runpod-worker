@@ -164,6 +164,18 @@ def parse_job(job_input):
         # Annotated images: "both" (heat wash + boxes), "box", "heat", "light",
         # or None to skip. Only rendered for findings that carry a bbox.
         "overlay": job_input.get("overlay", "both"),
+        # Paint-depth-gauge readings, one entry per panel measured. Optional
+        # and independent of the photos: an inspector can send readings with
+        # no images at all, or images with no readings. See
+        # paint_thickness.normalize_reading for the per-entry shape. Left
+        # deliberately loose here — that module coerces and, crucially, KEEPS
+        # a no-reading entry, because "the gauge would not read" is the most
+        # diagnostic result it produces.
+        "paint_readings": (job_input.get("paint_readings")
+                           if isinstance(job_input.get("paint_readings"), list)
+                           else None),
+        "paint_system": (str(job_input.get("paint_system") or "").strip().lower()
+                         or None),
         # compare mode: the baseline to diff against.
         "baseline_findings": _findings_or_none(
             job_input.get("baseline_findings")),
@@ -198,10 +210,13 @@ def _check_required(spec):
     has_images = bool(spec["image_urls"] or spec["image_b64s"])
     has_findings = spec["findings"] is not None
 
-    if mode == "inspect" and not (has_images or has_findings):
+    has_readings = bool(spec.get("paint_readings"))
+
+    if mode == "inspect" and not (has_images or has_findings or has_readings):
         raise InputError(
-            "inspect needs image_urls / image_b64s to analyse, or a "
-            "pre-computed findings array to score, price and report.")
+            "inspect needs image_urls / image_b64s to analyse, a "
+            "pre-computed findings array to score, price and report, or "
+            "paint_readings from a paint depth gauge.")
 
     if mode == "report" and not has_findings:
         raise InputError(

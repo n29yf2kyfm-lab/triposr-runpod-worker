@@ -758,6 +758,338 @@ else:
     check("18g rendering skipped (no Pillow)", True)
 
 
+# ---- 19. paint film thickness -----------------------------------------------
+# The measured channel. This is legally the sharpest thing the product says —
+# "this panel reads like it was resprayed" is a claim about a car's HISTORY —
+# so the arithmetic, the fallbacks, the false positives and the WORDING are all
+# pinned here. Every threshold under test is cited in paint_thickness.py's
+# docstring; anything unsourced is deliberately absent rather than invented.
+import paint_thickness as PT  # noqa: E402
+
+# -- 19.1 unit conversion --------------------------------------------------
+check("19a mils<->um conversion is the real 25.4 factor",
+      PT.mils_to_um(4) == 101.6 and PT.um_to_mils(101.6) == 4.0)
+
+# -- 19.2 the lookup: tiers, fallbacks, and a confidence per tier -----------
+ex_model = PT.expected_range("BMW", "X5", 2019, "front_left_door")
+check("19b exact model row answers, with its source attached",
+      ex_model["tier"] in ("model", "model_year")
+      and ex_model["min_um"] == 120 and ex_model["max_um"] == 165
+      and "ETARI" in ex_model["source"])
+
+ex_make = PT.expected_range("BMW", "i8", 2019, "front_left_door")
+check("19c unknown model falls back to the make average",
+      ex_make["tier"] == "make" and ex_make["min_um"] == 102)
+check("19d make tier is less confident than model tier",
+      ex_make["confidence"] < ex_model["confidence"])
+
+ex_global = PT.expected_range("Hyundai", "Tucson", 2020, "hood")
+check("19e no sourced Korean figure -> global default, lowest confidence",
+      ex_global["tier"] == "global"
+      and (ex_global["min_um"], ex_global["max_um"]) == PT.GLOBAL_DEFAULT_UM
+      and ex_global["confidence"] <= 0.4)
+check("19f global tier says why it answered",
+      "no reference row" in ex_global["note"])
+
+ex_old = PT.expected_range("Toyota", "Corolla", 1998, "hood")
+check("19g pre-2007 widens the band and drops a tier",
+      ex_old["tier"] == "make_era"
+      and ex_old["max_um"] > PT.MAKE_DEFAULTS["toyota"][1])
+
+# a conflicted source row cannot ride an exact-model match to high confidence
+ex_conflict = PT.expected_range("Mercedes", "C-Class", 2018, "hood")
+check("19h conflicting sources cap the confidence of an exact match",
+      ex_conflict["confidence"] <= 0.45, str(ex_conflict["confidence"]))
+check("19i make alias normalised (mercedes -> mercedes-benz)",
+      PT.normalize_make("Mercedes") == "mercedes-benz"
+      and PT.normalize_model("C-Class") == "c class")
+
+# -- 19.3 panel class: the classic false positives --------------------------
+check("19j bumper is plastic, gets its own band, not the body band",
+      PT.expected_range("BMW", "X5", 2019, "front_bumper")["panel_class"]
+      == "plastic_bumper")
+check("19k plastic bumper band reaches the GM ADAS 330 um limit",
+      PT.expected_range("BMW", "X5", 2019, "rear_bumper")["max_um"] == 330)
+rock = PT.expected_range("BMW", "X5", 2019, "left_rocker")
+check("19l rocker gets the anti-stonechip allowance on the upper bound only",
+      rock["max_um"] == 165 + PT.ROCKER_ALLOWANCE_UM
+      and rock["min_um"] == 120)
+check("19m glass/lamps/wheels are not paintable surfaces",
+      PT.expected_range("BMW", "X5", 2019, "windshield")["panel_class"]
+      == "not_paintable")
+tri = PT.expected_range("BMW", "X5", 2019, "hood", paint_system="tri_coat")
+check("19n tri-coat widens the upper bound and labels the allowance DERIVED",
+      tri["max_um"] == 165 + 30
+      and any("derived" in a.lower() for a in tri["adjustments"]))
+
+# -- 19.4 classifying a reading --------------------------------------------
+def _verdict(panel, points, make="BMW", model="X5", year=2019, ref=None,
+             ref_panel=None, **kw):
+    r = PT.normalize_reading({"panel": panel, "points_um": points, **kw})
+    e = PT.expected_range(make, model, year, panel)
+    return r, e, PT.classify_reading(r, e, ref, ref_panel)
+
+_r, _e, v_factory = _verdict("front_left_door", [130, 138, 142, 135])
+check("19o in-band reading classifies factory",
+      v_factory["class"] == "factory")
+
+_r, _e, v_resp = _verdict("front_left_door", [305, 312, 298, 320])
+check("19p 2x-factory reading classifies refinished",
+      v_resp["class"] == "refinished" and v_resp["basis"] == "absolute")
+
+# BOTH gates must open: a small absolute excess on a thin-paint car must not
+# become an accusation
+_r, _e, v_thin = _verdict("hood", [130, 132, 128, 131],
+                          make="Volkswagen", model="Tiguan", year=2018)
+check("19q +45 um over a thin factory band is inconclusive, not an accusation",
+      v_thin["class"] == "inconclusive", v_thin["class"])
+
+_r, _e, v_fill = _verdict("left_quarter_panel", [640, 655, 620, 660])
+check("19r past the professional gauge's 500 um range -> filler_suspect",
+      v_fill["class"] == "filler_suspect")
+
+# no reading: opposite meaning on metal vs plastic — the classic false positive
+_r, _e, v_nr_metal = _verdict("front_left_door", [], no_reading=True)
+check("19s no reading on METAL is the filler signal",
+      v_nr_metal["class"] == "filler_suspect")
+_r, _e, v_nr_plastic = _verdict("front_bumper", [], no_reading=True)
+check("19t no reading on a PLASTIC bumper is the wrong-probe signal, not filler",
+      v_nr_plastic["class"] == "not_measurable"
+      and any("ultrasonic" in c for c in v_nr_plastic["caveats"]))
+
+# a bumper can never be accused of a respray on thickness alone
+_r, _e, v_bump = _verdict("front_bumper", [300, 305, 295, 310])
+check("19u a thick-but-legal bumper reading is never called a respray",
+      v_bump["class"] != "refinished", v_bump["class"])
+
+# -- 19.5 relative comparison beats absolute -------------------------------
+# The same 200 um reads differently depending on what the rest of the car does.
+_r, _e, v_rel_ok = _verdict("front_left_door", [200, 202, 198, 204],
+                            make="Nowhere", model="Nothing", ref=195.0,
+                            ref_panel="roof")
+check("19v within 15 um of the same car's roof is factory, whatever the table says",
+      v_rel_ok["class"] == "factory" and v_rel_ok["basis"] == "relative")
+_r, _e, v_rel_bad = _verdict("front_left_door", [200, 202, 198, 204],
+                             make="Nowhere", model="Nothing", ref=120.0,
+                             ref_panel="roof")
+check("19w 40+ um above the same car's reference is the red flag",
+      v_rel_bad["class"] == "refinished" and v_rel_bad["basis"] == "relative")
+check("19x the relative delta is reported, not just the verdict",
+      abs(v_rel_bad["delta_reference_um"] - 81.0) < 1.0,
+      str(v_rel_bad["delta_reference_um"]))
+_r, _e, v_rel_mid = _verdict("front_left_door", [150, 152, 148, 154],
+                             make="Nowhere", model="Nothing", ref=125.0,
+                             ref_panel="roof")
+check("19y a 25 um difference is a real difference but not a red flag",
+      v_rel_mid["class"] == "inconclusive")
+
+# -- 19.6 measurement quality and caveats ----------------------------------
+_r1, _e1, v_one = _verdict("front_left_door", [305])
+_r4, _e4, v_four = _verdict("front_left_door", [305, 312, 298, 320])
+check("19z one point is trusted less than four across the panel",
+      v_one["confidence"] < v_four["confidence"])
+check("19aa PPF is always raised as an alternative explanation",
+      any("protection film" in c for c in v_four["caveats"]))
+_r, _e, v_ppf = _verdict("front_left_door", [305, 312, 298, 320], has_film=True)
+check("19ab a known PPF panel is heavily discounted",
+      v_ppf["confidence"] < v_four["confidence"] - 0.2)
+
+# -- 19.7 reference selection ----------------------------------------------
+_rd = [PT.normalize_reading(x) for x in [
+    {"panel": "roof", "points_um": [120]},
+    {"panel": "hood", "points_um": [125]},
+    {"panel": "front_left_door", "points_um": [300]}]]
+check("19ac the roof is chosen as the same-car reference",
+      PT.pick_reference(_rd)[1] == "roof")
+_rd2 = [PT.normalize_reading({"panel": "front_bumper", "points_um": [200]})]
+check("19ad a plastic bumper is never used as the reference",
+      PT.pick_reference(_rd2)[0] is None)
+_rd3 = [PT.normalize_reading({"panel": "front_left_door", "points_um": [120]}),
+        PT.normalize_reading({"panel": "rear_left_door", "points_um": [300]})]
+check("19ae two panels cannot vote — no reference rather than a bad one",
+      PT.pick_reference(_rd3)[2] == "insufficient")
+
+# -- 19.8 findings drop into the EXISTING pipeline unchanged ---------------
+session = [
+    {"panel": "roof", "points_um": [118, 122, 120, 119]},
+    {"panel": "hood", "points_um": [125, 121, 128, 124]},
+    {"panel": "front_left_door", "points_um": [305, 312, 298, 320]},
+    {"panel": "front_bumper", "points_um": [], "no_reading": True},
+]
+pt_f, pt_notes, pt_ctx = PT.readings_to_findings(
+    session, {"make": "BMW", "model": "X5", "year": 2019})
+check("19af only the flagged panel becomes a finding", len(pt_f) == 1,
+      str([f["panel"] for f in pt_f]))
+check("19ag factory/unmeasurable panels travel as NOTES, never as findings",
+      len(pt_notes) == 3
+      and {n["class"] for n in pt_notes} == {"factory", "not_measurable"})
+pf = pt_f[0]
+check("19ah the finding uses the new taxonomy id",
+      pf["damage_type"] == "prior_refinish"
+      and pf["damage_type"] in TAX.DAMAGE_TYPES)
+check("19ai evidence is the measurement itself, and is concrete",
+      pf["evidence"] and "µm" in pf["evidence"][0] or "um" in pf["evidence"][0])
+check("19aj evidence cites the reference band and its source",
+      any("ETARI" in e for e in pf["evidence"]))
+check("19ak context names the reference panel and the method",
+      pt_ctx["reference_panel"] == "roof" and "same vehicle" in pt_ctx["method_note"])
+check("19al the built-in table is flagged as a placeholder",
+      pt_ctx["table_is_placeholder"] is True)
+
+# the shape must survive analyze.py's normaliser untouched — that is the proof
+# it is the same shape a VLM finding is
+_pt_rt = AN.normalize_findings(pt_f)
+check("19am measured findings survive normalize_findings", len(_pt_rt) == 1
+      and _pt_rt[0]["damage_type"] == "prior_refinish")
+
+# ...and through severity and repair with no branching
+check("19an a respray moves the condition score off 100",
+      SEV.condition_score(pt_f) < 100)
+_pt_est = REP.estimate_all(pt_f, "us")
+check("19ao a respray costs NOTHING to repair — it is a value finding",
+      _pt_est["total_low"] == 0 and _pt_est["total_high"] == 0)
+check("19ap and says so instead of printing a fake quote",
+      "no repair required" in _pt_est["lines"][0]["assumption_low"])
+
+# filler is different: it IS a structural concern and it DOES cost money
+fill_f, _, _ = PT.readings_to_findings(
+    [{"panel": "roof", "points_um": [118, 122, 120, 119]},
+     {"panel": "hood", "points_um": [121, 125, 119, 123]},
+     {"panel": "left_quarter_panel", "points_um": [640, 655, 620, 660]}],
+    {"make": "BMW", "model": "X5", "year": 2019})
+check("19aq filler_suspect maps to body_filler", len(fill_f) == 1
+      and fill_f[0]["damage_type"] == "body_filler")
+check("19ar body_filler is a structural candidate -> raises the inspect banner",
+      SEV.is_structural_concern(fill_f) is True)
+check("19as filler carries a hidden-damage inference with a probability",
+      fill_f[0]["hidden_damage"]
+      and 0 < fill_f[0]["hidden_damage"][0]["probability"] <= 1)
+check("19at filler IS priced (unlike a respray)",
+      REP.estimate_all(fill_f, "us")["total_high"] > 0)
+
+# several resprayed panels escalate — one is a scrape, three is an impact
+multi, _, _ = PT.readings_to_findings(
+    [{"panel": "roof", "points_um": [118, 122, 120, 119]},
+     {"panel": "front_left_door", "points_um": [300, 305, 310, 302]},
+     {"panel": "rear_left_door", "points_um": [295, 300, 305, 298]},
+     {"panel": "left_quarter_panel", "points_um": [290, 295, 300, 292]}],
+    {"make": "BMW", "model": "X5", "year": 2019})
+check("19au three refinished panels score worse than one",
+      len(multi) == 3
+      and multi[0]["severity"] > pf["severity"], str(multi[0]["severity"]))
+
+# -- 19.9 fusion with the vision channel -----------------------------------
+vis_confirm = [{"panel": "front_left_door", "damage_type": "paint_mismatch",
+                "damage_label": "Paint mismatch", "severity": 4,
+                "confidence": 0.7, "evidence": ["door reads bluer than the wing"]}]
+fz = PT.fuse_with_vision(vis_confirm, pt_f)
+check("19av agreement keeps BOTH findings and raises both confidences",
+      len(fz["findings"]) == 2
+      and fz["findings"][0]["confidence"] > 0.7
+      and fz["findings"][1]["confidence"] > pf["confidence"] - 1e-9)
+check("19aw agreement is recorded in the audit trail",
+      any(c["state"] == "confirms" for c in fz["corroboration"]))
+check("19ax each channel cites the other in its evidence",
+      any("Visual inspection" in e for e in fz["findings"][1]["evidence"])
+      and any("thickness" in e for e in fz["findings"][0]["evidence"]))
+
+# CONTRADICTION: the camera flagged paint work, the gauge read factory. The
+# measurement must NOT delete the observation — a blended repair reads normal.
+vis_contra = [{"panel": "rear_right_door", "damage_type": "paint_mismatch",
+               "damage_label": "Paint mismatch", "severity": 4,
+               "confidence": 0.8, "evidence": ["colour steps at the shut line"]}]
+fz2 = PT.fuse_with_vision(vis_contra, pt_f)
+check("19ay a contradicting measurement never deletes the visual finding",
+      len(fz2["findings"]) == 2)
+check("19az it lowers the visual finding's confidence instead",
+      fz2["findings"][0]["confidence"] < 0.8)
+check("19ba and states the contradiction in that finding's evidence",
+      any("within the expected factory range" in e
+          for e in fz2["findings"][0]["evidence"]))
+check("19bb the contradiction is in the audit trail",
+      any(c["state"] == "contradicts" for c in fz2["corroboration"]))
+
+# thickness-only: the invisible respray, which is the whole point of the feature
+fz3 = PT.fuse_with_vision([], pt_f)
+check("19bc a measured finding stands alone when the camera saw nothing",
+      len(fz3["findings"]) == 1
+      and fz3["corroboration"][0]["state"] == "unseen")
+
+# -- 19.10 the wording. This is the legally sensitive surface. -------------
+_r, _e, _v = _verdict("front_left_door", [305, 312, 298, 320])
+say_resp = PT.describe(_r, _e, _v)
+check("19bd respray wording never asserts the car's history",
+      "has been resprayed" not in say_resp.lower()
+      and "was repainted" not in say_resp.lower())
+check("19be respray wording reports the measurement first",
+      "305" in say_resp or "309" in say_resp or "µm" in say_resp or "um" in say_resp)
+check("19bf respray wording names the alternative explanations",
+      "protection film" in say_resp and "two-tone" in say_resp)
+check("19bg respray wording tells the reader what to do with it",
+      "history" in say_resp.lower())
+
+_r, _e, _v = _verdict("front_bumper", [], no_reading=True)
+say_plastic = PT.describe(_r, _e, _v)
+check("19bh a no-reading bumper explicitly denies the filler reading",
+      "does not indicate filler" in say_plastic)
+
+_r, _e, _v = _verdict("front_left_door", [130, 138, 142, 135])
+say_ok = PT.describe(_r, _e, _v)
+check("19bi a clean reading is not sold as proof of originality",
+      "not proof" in say_ok)
+
+_r, _e, _v = _verdict("left_quarter_panel", [640, 655, 620, 660])
+say_fill = PT.describe(_r, _e, _v)
+check("19bj filler wording sends the reader to an in-person check",
+      "in person" in say_fill)
+
+# -- 19.11 the finding renders as a MEASUREMENT, not as an observation -----
+rep19 = REP_HTML.assemble(pt_f, repair=REP.estimate_all(pt_f, "us"),
+                          vehicle={"make": "BMW", "model": "X5", "year": 2019},
+                          generated_at="2026-01-01T00:00:00Z")
+html19 = REP_HTML.render_html(rep19)
+check("19bk the report shows the reading and the factory band",
+      "µm" in html19 and "factory" in html19.lower())
+check("19bl the report always shows what else explains the reading",
+      "What else could explain" in html19)
+check("19bm the report cites the reference source",
+      "ETARI" in html19)
+
+# -- 19.12 loading the owner's dataset shape -------------------------------
+owner_rows = [
+    {"make": "Kia", "model": "Sportage", "year": 2021, "min_um": 88,
+     "max_um": 112, "avg_um": 100, "avg_mils": 3.94,
+     "oem_range_mils": "3.5-4.4", "source": "MASTER unified",
+     "confidence": 0.8},
+    {"make": "Genesis", "model": "G70", "year": 2020,
+     "expected_min_um": 95, "expected_max_um": 130,
+     "source": "oem_paint_thickness", "confidence": 0.7},
+    {"make": "Ghost", "model": "None", "source": "x"},      # unusable -> dropped
+]
+loaded = PT.load_table(owner_rows)
+check("19bn owner dataset rows load onto the schema", len(loaded) == 2)
+check("19bo rows without a usable band are dropped, never guessed",
+      all(r["make"] != "ghost" for r in loaded))
+kia = PT.expected_range("Kia", "Sportage", 2021, "hood", table=loaded)
+check("19bp the loaded table answers where the placeholder could not",
+      kia["tier"] == "model_year" and kia["max_um"] == 112
+      and kia["confidence"] > 0.7)
+check("19bq a year-scoped row does not answer for a different year",
+      PT.expected_range("Kia", "Sportage", 2005, "hood",
+                        table=loaded)["tier"] != "model_year")
+check("19br mils ranges parse when microns are absent",
+      PT._parse_mils_range("4.0 - 6.0 mils")[0] == 101.6)
+
+# -- 19.13 taxonomy edits did not break the existing vocabulary ------------
+check("19bs 'respray' now routes to the measured id, not paint_mismatch",
+      TAX.canonical_damage("respray") == "prior_refinish")
+check("19bt visual colour language still routes to paint_mismatch",
+      TAX.canonical_damage("colour mismatch between panels") == "paint_mismatch"
+      and TAX.canonical_damage("overspray on the trim") == "paint_mismatch")
+check("19bu 'bondo' routes to body_filler",
+      TAX.canonical_damage("bondo under the paint") == "body_filler")
+
+
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 for f in FAILED:

@@ -97,8 +97,24 @@ DAMAGE_METHOD = {
     "lamp_damage":    (0.90, 1.05, 0.80, 1.10),
     "tire_damage":    (0.40, 1.20, 0.30, 0.80),
     "hail":           (0.00, 0.30, 0.80, 2.00),   # many dents -> panel(s)
+    # Filler under the paint: best case the repair is sound and costs nothing
+    # to leave alone; worst case the panel has to be stripped and redone.
+    "body_filler":    (0.00, 1.00, 0.00, 1.20),
     "other":          (0.00, 0.50, 0.30, 1.00),
 }
+
+# Types that cost NOTHING to repair because nothing is broken. A measured
+# prior respray is the case that forced this set to exist: it is a HISTORY and
+# VALUE finding, and folding a notional "refinish it again" cost into the
+# repair total would invent a bill the owner does not have. It still scores
+# against the car in severity.py, and it still appears in the report — it just
+# does not pretend to be a quote.
+#
+# NOTE ON DIMINISHED VALUE: no defensible published percentage was found for
+# what a documented respray takes off a car's market value, and it varies with
+# marque, age, panel and market. So this module states the finding and
+# declines to put a number on the value impact rather than inventing one.
+ZERO_REPAIR_TYPES = {"prior_refinish"}
 
 # Paint materials cost per refinish hour (USD, US baseline).
 PAINT_MATERIALS_PER_HOUR = 25
@@ -135,8 +151,18 @@ def estimate_one(finding, region=DEFAULT_REGION):
         or "body_other"
     parts_base, refinish_hours = PANEL_COST.get(panel, DEFAULT_PANEL_COST)
     dtype = finding.get("damage_type", "other")
-    pfl, pfh, lfl, lfh = DAMAGE_METHOD.get(dtype, DAMAGE_METHOD["other"])
     sev = clamp_severity(finding.get("severity", 5))
+    if dtype in ZERO_REPAIR_TYPES:
+        return {
+            "panel": panel, "damage_type": dtype, "severity": sev,
+            "currency": rc["currency"], "symbol": rc["symbol"],
+            "low": 0, "high": 0,
+            "assumption_low": "no repair required — nothing is broken",
+            "assumption_high": ("no repair required; this affects the "
+                                "vehicle's history and value, not its "
+                                "condition"),
+        }
+    pfl, pfh, lfl, lfh = DAMAGE_METHOD.get(dtype, DAMAGE_METHOD["other"])
     scale = _severity_scale(sev)
 
     def side(parts_frac, labour_frac):
@@ -186,6 +212,8 @@ _METHOD_LABELS = {
     "chip_glass": ("resin repair", "glass replacement"),
     "misalignment": ("refit / adjust", "parts + structural check"),
     "hail": ("PDR across dents", "affected panel replacement"),
+    "body_filler": ("leave as is if the repair is sound",
+                    "strip filler, repair the metal, refinish"),
 }
 
 

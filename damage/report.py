@@ -221,7 +221,42 @@ def _finding_card(f, rep):
     note = (f'<div class="note muted small">{html.escape(f["repair_note"])}</div>'
             if f.get("repair_note") else "")
     return (f'<div class="fc" style="border-left-color:{colour}">'
-            f'{head}{ev}{hidden}{risks}{cost}{note}</div>')
+            f'{head}{ev}{_measurement_block(f)}{hidden}{risks}{cost}{note}</div>')
+
+
+def _measurement_block(f):
+    """A measured finding renders differently from a seen one.
+
+    A paint-thickness finding is an instrument reading, not a photograph, and
+    the claim it supports ("consistent with refinishing") is weaker and more
+    legally loaded than "there is a dent here". So it gets its own block
+    carrying the careful sentence and, mandatorily, the false positives that
+    could explain the same number — the reader must never see the reading
+    without seeing what else produces it.
+    """
+    m = f.get("measurement")
+    if not m:
+        return ""
+    bits = []
+    if f.get("statement"):
+        bits.append(f'<p class="mstate">{html.escape(f["statement"])}</p>')
+    if m.get("value_um") is not None:
+        band = ""
+        if m.get("expected_max_um") is not None:
+            band = (f' · factory {m["expected_min_um"]:.0f}–'
+                    f'{m["expected_max_um"]:.0f} µm')
+        bits.append(f'<div class="mnum">{m["value_um"]:.0f} µm '
+                    f'({m.get("value_mils")} mils){html.escape(band)}</div>')
+    if m.get("caveats"):
+        items = "".join(f"<li>{html.escape(c)}</li>" for c in m["caveats"])
+        bits.append(f'<div class="lbl">What else could explain this reading'
+                    f'</div><ul>{items}</ul>')
+    src = m.get("expected_source")
+    if src:
+        bits.append(f'<div class="muted small">Reference: '
+                    f'{html.escape(str(src))} ({html.escape(str(m.get("expected_tier","")))} '
+                    f'match)</div>')
+    return f'<div class="measured">{"".join(bits)}</div>'
 
 
 def _completeness_block(comp):
@@ -283,6 +318,14 @@ _HEAD = """<!doctype html><html lang="en"><head><meta charset="utf-8">
     letter-spacing:.05em;color:#8b949e;margin-bottom:4px}
   .hidden ul,.risks ul{margin:0;padding-left:2px;list-style:none}
   .hidden li,.risks li{font-size:13px;margin:3px 0}
+  .measured{margin-top:8px;background:#0f141a;border:1px solid #30363d;
+    border-left:3px solid #58a6ff;border-radius:8px;padding:8px 10px}
+  .measured .mstate{margin:0 0 6px;font-size:13px;color:#c9d1d9}
+  .measured .mnum{font-weight:700;font-size:15px;margin-bottom:6px}
+  .measured .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+    color:#8b949e;margin-bottom:4px}
+  .measured ul{margin:0 0 6px;padding-left:16px}
+  .measured li{font-size:12px;color:#8b949e;margin:2px 0}
   .cost{margin-top:8px;font-weight:600}
   .guidance{list-style:none;padding:0}.guidance li{margin:4px 0}
   .shot{margin:18px 0}.shot img{width:100%;border-radius:10px;display:block;border:1px solid #30363d}.shot figcaption{margin-top:6px;font-size:13px}

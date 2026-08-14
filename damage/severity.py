@@ -33,6 +33,13 @@ DAMAGE_WEIGHT = {
     "shattered_glass": 1.6, "crack": 1.5, "rust": 1.5, "deformation": 1.4,
     "missing_part": 1.4, "misalignment": 1.3, "dent": 1.1, "lamp_damage": 1.2,
     "tire_damage": 1.2,
+    # Measured findings from paint_thickness.py. A prior respray costs a car
+    # VALUE while costing nothing to repair — nothing is broken — so it earns
+    # a weight, not an exemption: a car whose panels have been refinished is
+    # worth less than one whose have not, and a condition score that ignored
+    # that would be the same lie AutoScan tells with its averaging. Filler
+    # weighs like the deformation it is covering.
+    "prior_refinish": 1.2, "body_filler": 1.4,
 }
 DEFAULT_DAMAGE_WEIGHT = 1.0
 
