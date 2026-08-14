@@ -1,0 +1,104 @@
+{
+ "wave": "m10",
+ "reviewed": "2026-08-14",
+ "sheets": "car-meshes/audit/m10",
+ "staging": "car-meshes/staging/m10",
+ "method": [
+  "glass_probe on the staged glTF (owner ruling: glazing verdict comes from the file, never the sheet or poster)",
+  "eye pass on the 4-view production sheet against the owner's per-car rubric",
+  "5x zoom against a same-batch known-good control for any wheel suspicion",
+  "body_probe to find the real body material before any colour bake"
+ ],
+ "all_glass_clear_proven": true,
+ "verdicts": [
+  {
+   "uid": "8727b8185a8a4a5f963802984577a5fe",
+   "name": "2024 Kia Picanto GT-Line",
+   "faces": 457597,
+   "verdict": "keep",
+   "reason": "sharp LED headlamp internals, defined shut lines, real spoke detail consistent across all four views, black rubber, glazing transparent with interior visible. One of the strongest sheets in the project."
+  },
+  {
+   "uid": "fa9c34bf1bed4350a80759fe4fa54490",
+   "name": "Kia Sportage GT line 2023",
+   "faces": 584865,
+   "verdict": "keep",
+   "reason": "correct NQ5 proportions, boomerang DRL signature, honeycomb grille, black tyres, glazing transparent. High-volume UK car.",
+   "note": "glass_probe reports alpha_shell=true — FALSE POSITIVE, verified: 37 of 43 materials are opaque and the 6 transparent ones are exactly window/glass_Clear/glass_tinted/red_glass/light/red_light. The flag fires on `st_black`, a trim material with alphaMode=BLEND but factor alpha 1.0, i.e. declared blend and actually opaque."
+  },
+  {
+   "uid": "c59316589a07488485fd4c4d480fb24e",
+   "name": "2025 Skoda Octavia RS",
+   "faces": 2283072,
+   "verdict": "keep",
+   "reason": "correct Mk4 facelift RS, butler's-tray grille with vertical slats, red calipers, SKODA/OCTAVIA/RS badging, real spokes, glazing transparent.",
+   "note": "2.28M faces — over the standard delivery cap, must go through decimate_heavy before publish."
+  },
+  {
+   "uid": "bc4c63bbccf8493cb4bc5cc7c27fd27a",
+   "name": "2025 MG ZS",
+   "faces": 1133063,
+   "verdict": "keep",
+   "reason": "correct ZS proportions, MG badge front and rear, real grille mesh, LED lamp internals, black alloys with genuine spoke depth, glazing transparent. Growing UK volume.",
+   "note": "1.13M faces — near the delivery cap."
+  },
+  {
+   "uid": "ee2e3b0e1a7b481cb2c08e6fc6d2ed9e",
+   "name": "2025 MG MG4",
+   "faces": 1065136,
+   "verdict": "keep",
+   "reason": "correct MG4 shape, orange brake calipers, black alloys, black tyres, glazing transparent.",
+   "note": "cov=0.758 is high but under the 0.90 one-material-covers-everything line, and the tyres and glazing are visibly unaffected."
+  },
+  {
+   "uid": "f384f5e1c48141c2a9b67d07c854a20e",
+   "name": "2025 MG MG3",
+   "faces": 894851,
+   "verdict": "keep",
+   "reason": "correct Mk3 hybrid+ shape, real 5-spoke alloys resolved in all four views, mesh grille, LED internals, glazing transparent. Used as the same-batch control for the MG5 wheel zoom."
+  },
+  {
+   "uid": "c956c2b52e6b4b5ebf5e50eb29b6afb6",
+   "name": "2026 Renault Clio",
+   "faces": 442025,
+   "verdict": "keep-repair",
+   "reason": "genuine new-generation Clio, sharp lamps, real spokes, black tyres, glazing transparent. Held only because no material is NAMED like paint.",
+   "repair": {
+    "paintMaterialNames": ["M_0132_LightGray"],
+    "found_by": "body_probe — 50.0% of the silhouette, 4x the runner-up",
+    "evidence": "red control repaints body, roof, bonnet and bumpers; wheels stay silver, tyres black, glazing clear, lamps intact. Roof confirmed numerically on the top view: [253.9,253.9,254.3] -> [163.9,21.1,23.7].",
+    "not_the_body": {
+     "Material__2125651335": "tyres, arch liners, lower valance, interior (66.1% area)",
+     "black_refl": "window surrounds, pillars, roof rails, wheel spokes, mirrors",
+     "Color_M01": "wheel rims — painting it turns the wheels pink",
+     "auto_2": "effectively zero geometry"
+    }
+   }
+  },
+  {
+   "uid": "cac46d2f40f644f593044bd57e43c376",
+   "name": "HYUNDAI I20 2026",
+   "faces": 600812,
+   "verdict": "scrap",
+   "reason": "soft undetailed surfacing throughout, headlamps are flat decals with no internal elements, wheels are crude discs with no spoke depth, and it does not read as an i20 — generic crossover shape. Fails the premium bar on the owner's rubric."
+  },
+  {
+   "uid": "4c1863a87a6e4b6f9995be3ec2898271",
+   "name": "2024 Renault Megane E-TECH",
+   "faces": 142476,
+   "verdict": "scrap",
+   "reason": "FRONT WHEEL ABSENT on one side — front34 and side both render an empty arch cavity with the inner arch surface visible. Geometry missing, not a material or lighting artefact. Also only 142k faces, low for a modern car.",
+   "confidence": "high — two independent views, and the sheet is a valid witness for missing geometry (unlike material defects)"
+  },
+  {
+   "uid": "3dad9094f76d4a5f99d5dbeb8075ce3c",
+   "name": "2025 MG MG5",
+   "faces": 802588,
+   "verdict": "scrap",
+   "reason": "per-side wheel void. At 3x zoom the front34 wheel is a featureless black disc with only the MG centre cap floating in it — rim face entirely absent — while the side view of the same car shows a resolved multi-spoke rim. Same-batch MG3 control shows fully resolved silver spokes in both views.",
+   "confidence": "high — zoomed against a same-batch control per CLAUDE.md, not called from the thumbnail",
+   "class": "mirrored wheel duplicate with inverted geometry (source defect, not a render fault) — re-rendering will not fix it"
+  }
+ ],
+ "summary": {"keep": 6, "keep_repair": 1, "scrap": 3}
+}
