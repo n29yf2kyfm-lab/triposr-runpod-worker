@@ -28,7 +28,8 @@ geometry with normal proportions — that still needs a human glance at the hero
 
 `glass_zf`/`glass_af` are supplied by the render worker's material classifier
 (handler `audit` block); `geom_signals` here computes the name-independent part
-from a GLB path via trimesh (world-space verts, decompresses draco).
+from a GLB path via trimesh (world-space verts). It does NOT decompress Draco --
+this docstring claimed it did until 2026-08-14; see the guard in `geom_signals`.
 """
 import numpy as np
 
@@ -97,6 +98,23 @@ def geom_signals(glb_path):
         for T in tf.get(gname, [np.eye(4)]):
             allv.append(trimesh.transform_points(v, T))
     V = np.vstack(allv)
+    # trimesh in this container has NO Draco handler -- it emits
+    # "`KHR_draco_mesh_compression` GLTF extension has no handler, values are
+    # placeholder zeros" to stderr and hands back an all-zero vertex array.
+    # This docstring used to claim it "decompresses draco"; that is FALSE here,
+    # measured 2026-08-14 on bmw-m3-e30 (63,234 verts, 100% zero), and the
+    # signals computed from it were h_over_l=0.23 -- one hundredth above this
+    # module's own 0.22 floorpan/wreck REJECT floor. It failed open only by the
+    # luck of the 9.99 sentinel being downgraded to a warning after the Chrysler
+    # wave. An unreadable mesh must be UNREADABLE, never a measurement: raise so
+    # gpu_wave.pose_gate reports pose-gate-skipped in the wave log and a human
+    # can see that the car was never actually judged.
+    # Low live exposure (Sketchfab sources arrive uncompressed; it is our own
+    # published outputs that carry Draco), but that is a property of today's
+    # supply, not a guarantee. Decompress with `gltf-transform copy` first.
+    if len(V) and not np.any(V):
+        raise ValueError("unreadable geometry: all vertices are zero "
+                         "(Draco-compressed? decompress with gltf-transform copy)")
     V = _trim_outlier_bbox(V)
     lo = V.min(0); hi = V.max(0); ext = hi - lo
     up = int(np.argmin(ext)); horiz = [a for a in range(3) if a != up]
