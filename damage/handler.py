@@ -63,6 +63,15 @@ def _get_findings(spec, prog, vision_fn=None):
     (canonical panels, clamped severity, evidence enforced).
     """
     import analyze
+    if spec["findings"] is None and not (spec["image_urls"]
+                                         or spec["image_b64s"]):
+        # A gauge-only job: readings, no photos. There is nothing for the
+        # vision stage to look at, and loading a VLM to analyse zero images
+        # would fail the job for no reason. Validation has already guaranteed
+        # SOMETHING is present, so an empty vision result here is correct
+        # rather than a silent hole.
+        prog.stage("analysing", source="none", count=0)
+        return [], [], {"summary": "", "vehicle_observed": {}}
     if spec["findings"] is not None:
         prog.stage("analysing", source="supplied",
                    count=len(spec["findings"]))
@@ -146,8 +155,44 @@ def _overlay_source(ref):
     return path
 
 
+def _paint_thickness(spec, findings, prog):
+    """Fold paint-depth-gauge readings in beside the vision findings.
+
+    Runs only when the caller sent `paint_readings`, and cannot fail the job:
+    an inspection that already has a valid score and price must not be lost to
+    a malformed reading. Returns (merged_findings, block) where `block` is the
+    measured section the report renders — including the panels that came back
+    CLEAN, because "we measured the roof, the hood and both doors and three of
+    them read factory" is itself a result the buyer paid for.
+    """
+    readings = spec.get("paint_readings")
+    if not readings:
+        return findings, None
+    try:
+        import paint_thickness as pt_mod
+        prog.stage("measuring", panels=len(readings))
+        pt_findings, notes, ctx = pt_mod.readings_to_findings(
+            readings, spec["vehicle"], paint_system=spec.get("paint_system"))
+        fused = pt_mod.fuse_with_vision(findings, pt_findings)
+        return fused["findings"], {
+            "panels_measured": ctx["panels_measured"],
+            "reference_panel": ctx["reference_panel"],
+            "reference_um": ctx["reference_um"],
+            "reference_basis": ctx["reference_basis"],
+            "method_note": ctx["method_note"],
+            "table_is_placeholder": ctx["table_is_placeholder"],
+            "flagged": len(pt_findings),
+            "clear": notes,
+            "corroboration": fused["corroboration"],
+        }
+    except Exception as e:
+        return findings, {"error": f"{type(e).__name__}: {e}",
+                          "panels_measured": len(readings)}
+
+
 def _inspect(spec, prog, vision_fn=None):
     findings, images, meta = _get_findings(spec, prog, vision_fn)
+    findings, paint = _paint_thickness(spec, findings, prog)
 
     prog.stage("scoring", findings=len(findings))
     roll = sev_mod.summarize(findings)
@@ -179,6 +224,8 @@ def _inspect(spec, prog, vision_fn=None):
         scan_id=spec["scan_id"])
     if overlays:
         report["overlays"] = overlays
+    if paint:
+        report["paint_thickness"] = paint
     return report
 
 
@@ -303,6 +350,7 @@ def handler(job):
             "completeness": result.get("completeness"),
             "quality": result.get("quality"),
             "fusion": result.get("fusion"),
+            "paint_thickness": result.get("paint_thickness"),
             "overlays": overlays,
             "summary": result.get("summary"),
             "report": result,

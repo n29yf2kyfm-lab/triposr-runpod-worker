@@ -137,6 +137,11 @@ def render_html(report):
     for f in findings:
         parts.append(_finding_card(f, rep))
 
+    # paint depth gauge: what was measured, including what came back clean
+    pt = report.get("paint_thickness")
+    if pt:
+        parts.append(_paint_thickness_block(pt))
+
     # capture quality + completeness
     comp = report.get("completeness")
     if comp:
@@ -259,6 +264,60 @@ def _measurement_block(f):
     return f'<div class="measured">{"".join(bits)}</div>'
 
 
+def _paint_thickness_block(pt):
+    """The paint-depth-gauge section.
+
+    Panels that measured CLEAN are printed, not just the flagged ones. A
+    report that lists only what failed leaves the reader unable to tell "we
+    checked four panels and three were fine" from "we checked one panel". On
+    a measurement channel that difference is the whole value: the negative
+    result is a result, and a buyer paid for it.
+    """
+    if pt.get("error"):
+        return ('<h2>Paint depth gauge</h2><p class="muted">Readings were '
+                'supplied but could not be interpreted: '
+                + html.escape(str(pt["error"])) + '</p>')
+    n = pt.get("panels_measured", 0)
+    flagged = pt.get("flagged", 0)
+    body = [f'<h2>Paint depth gauge <span class="count">{n} panel'
+            f'{"s" if n != 1 else ""}</span></h2>']
+    if pt.get("reference_panel"):
+        ref = PANELS.get(pt["reference_panel"], (pt["reference_panel"],))[0]
+        body.append(f'<p class="muted small">Readings compared against the '
+                    f'{html.escape(ref)} of this same vehicle '
+                    f'({pt.get("reference_um")} µm), which is the '
+                    f'comparison that cancels out make, model year, colour '
+                    f'and paint type.</p>')
+    elif n:
+        body.append('<p class="muted small">No undamaged reference panel was '
+                    'available on this vehicle, so readings were compared '
+                    'against a factory reference table only — a weaker '
+                    'test.</p>')
+    if flagged:
+        body.append(f'<p>{flagged} panel{"s" if flagged != 1 else ""} read '
+                    f'above the expected factory range — listed in the '
+                    f'findings above.</p>')
+    clear = pt.get("clear") or []
+    if clear:
+        rows = []
+        for c in clear:
+            panel = PANELS.get(c.get("panel"), (c.get("panel", "panel"),))[0]
+            val = (f'{c["value_um"]:.0f} µm' if c.get("value_um") is not None
+                   else "no reading")
+            rows.append(f'<li><b>{html.escape(panel)}</b> · {html.escape(val)}'
+                        f' · {html.escape(str(c.get("class", "")))}<br>'
+                        f'<span class="muted small">'
+                        f'{html.escape(c.get("statement", ""))}</span></li>')
+        body.append(f'<ul class="ptclear">{"".join(rows)}</ul>')
+    if pt.get("table_is_placeholder"):
+        body.append('<p class="muted small">Factory reference values come '
+                    'from a small built-in table pending the full OEM '
+                    'dataset; where no entry exists for this vehicle a '
+                    'regional average is used and the confidence is reduced '
+                    'accordingly.</p>')
+    return "".join(body)
+
+
 def _completeness_block(comp):
     pct = int(round(comp.get("overall_coverage", 0) * 100))
     body = [f'<h2>Capture coverage <span class="count">{pct}%</span></h2>']
@@ -328,6 +387,7 @@ _HEAD = """<!doctype html><html lang="en"><head><meta charset="utf-8">
   .measured li{font-size:12px;color:#8b949e;margin:2px 0}
   .cost{margin-top:8px;font-weight:600}
   .guidance{list-style:none;padding:0}.guidance li{margin:4px 0}
+  .ptclear{list-style:none;padding:0}.ptclear li{margin:8px 0}
   .shot{margin:18px 0}.shot img{width:100%;border-radius:10px;display:block;border:1px solid #30363d}.shot figcaption{margin-top:6px;font-size:13px}
 .disclaimer{margin-top:34px;color:#6e7681;font-size:12px;border-top:1px solid #21262d;
     padding-top:14px}

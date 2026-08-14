@@ -861,6 +861,16 @@ check("19t no reading on a PLASTIC bumper is the wrong-probe signal, not filler"
 _r, _e, v_bump = _verdict("front_bumper", [300, 305, 295, 310])
 check("19u a thick-but-legal bumper reading is never called a respray",
       v_bump["class"] != "refinished", v_bump["class"])
+# every plastic-skinned panel, not just the bumpers — a painted mirror cap
+# gives a magnetic gauge nothing, and that must not read as filler
+check("19u2 no plastic panel can produce a filler accusation",
+      all(PT.classify_reading(
+              PT.normalize_reading({"panel": p, "points_um": [],
+                                    "no_reading": True}),
+              PT.expected_range("BMW", "X5", 2019, p))["class"]
+          == "not_measurable"
+          for p in ("front_bumper", "rear_bumper", "grille",
+                    "left_mirror", "right_mirror")))
 
 # -- 19.5 relative comparison beats absolute -------------------------------
 # The same 200 um reads differently depending on what the rest of the car does.
@@ -1088,6 +1098,102 @@ check("19bt visual colour language still routes to paint_mismatch",
       and TAX.canonical_damage("overspray on the trim") == "paint_mismatch")
 check("19bu 'bondo' routes to body_filler",
       TAX.canonical_damage("bondo under the paint") == "body_filler")
+
+
+# ---- 20. paint thickness through the real handler ---------------------------
+# The whole point of matching analyze.py's finding shape is that NOTHING
+# downstream needs a branch. This runs gauge readings through the actual job
+# path — validate, score, price, pin in 3D, render — to prove that.
+job20 = {"id": "job-20", "input": {
+    "mode": "inspect",
+    "vehicle": {"make": "BMW", "model": "X5", "year": 2019, "market": "us"},
+    "paint_readings": [
+        {"panel": "roof", "points_um": [118, 122, 120, 119]},
+        {"panel": "hood", "points_um": [125, 121, 128, 124]},
+        {"panel": "front_left_door", "points_um": [305, 312, 298, 320]},
+        {"panel": "front_bumper", "points_um": [], "no_reading": True},
+    ],
+    "findings": [
+        {"panel": "front_left_door", "damage_type": "paint_mismatch",
+         "severity": 4, "confidence": 0.7,
+         "evidence": ["door reads a shade bluer than the front wing"]},
+    ]}}
+resp20 = H.handler(job20)
+check("20a gauge readings run through the real handler",
+      resp20.get("status") == "success", str(resp20)[:160])
+check("20b the measured finding joined the vision finding",
+      len(resp20["findings"]) == 2
+      and {f["damage_type"] for f in resp20["findings"]}
+      == {"paint_mismatch", "prior_refinish"})
+check("20c the paint block reports what was measured AND what read clean",
+      resp20["paint_thickness"]["panels_measured"] == 4
+      and resp20["paint_thickness"]["flagged"] == 1
+      and len(resp20["paint_thickness"]["clear"]) == 3)
+check("20d the reference panel is named in the output",
+      resp20["paint_thickness"]["reference_panel"] == "roof")
+check("20e corroboration between the two channels is recorded",
+      any(c["state"] == "confirms"
+          for c in resp20["paint_thickness"]["corroboration"]))
+check("20f a respray does not inflate the repair estimate",
+      resp20["repair"]["total_high"] ==
+      REP.estimate_all([f for f in resp20["findings"]
+                        if f["damage_type"] == "paint_mismatch"],
+                       "us")["total_high"])
+check("20g measured findings still get a 3D pin",
+      resp20["fusion"]["count"] == 2)
+_h20 = _b64.b64decode(
+    next(v["html_b64"] for v in resp20["artifacts"].values()
+         if "html_b64" in v)).decode()
+check("20h the rendered report has the gauge section",
+      "Paint depth gauge" in _h20)
+check("20i clean panels are printed, not only failures",
+      "Roof" in _h20 and "Hood" in _h20)
+
+# a gauge-only job — no photos at all — is a complete inspection
+job21 = {"id": "job-21", "input": {
+    "mode": "inspect",
+    "vehicle": {"make": "Toyota", "model": "Camry", "year": 2020},
+    "paint_readings": [
+        {"panel": "roof", "points_um": [105, 108, 103, 106]},
+        {"panel": "front_left_fender", "points_um": [104, 107, 102, 105]},
+        {"panel": "front_left_door", "points_um": [101, 104, 99, 103]},
+    ]}}
+resp21 = H.handler(job21)
+check("20j readings alone are a valid inspection (no photos required)",
+      resp21.get("status") == "success")
+check("20k a car that measures factory throughout still scores 100",
+      resp21["condition"]["score"] == 100
+      and resp21["paint_thickness"]["flagged"] == 0)
+
+# a malformed reading must never lose an otherwise-valid inspection
+job22 = {"id": "job-22", "input": {
+    "mode": "inspect",
+    "paint_readings": ["not a reading at all", {"panel": None}],
+    "findings": [{"panel": "hood", "damage_type": "dent", "severity": 5,
+                  "evidence": ["crease"]}]}}
+resp22 = H.handler(job22)
+check("20l a malformed reading degrades, never fails the job",
+      resp22.get("status") == "success" and len(resp22["findings"]) >= 1)
+# ...and, the sharper point: a broken payload must never become the gravest
+# claim the module can make. "The gauge would not read" is diagnostic; "the
+# field was missing" is not, and conflating them accused a car of filler on
+# the strength of a typo.
+check("20m a malformed reading is NOT read as the filler signal",
+      all(f["damage_type"] != "body_filler" for f in resp22["findings"]),
+      str([f["damage_type"] for f in resp22["findings"]]))
+_bad = PT.normalize_reading({"panel": "hood"})
+check("20n a missing value is invalid, not a no-reading",
+      _bad["valid"] is False and _bad["no_reading"] is False)
+_explicit = PT.normalize_reading({"panel": "hood", "no_reading": True})
+check("20o an EXPLICIT no-reading stays diagnostic",
+      _explicit["valid"] is True and _explicit["no_reading"] is True)
+check("20p and only the explicit one reaches filler_suspect",
+      PT.classify_reading(_explicit,
+                          PT.expected_range("BMW", "X5", 2019, "hood"))["class"]
+      == "filler_suspect"
+      and PT.classify_reading(_bad,
+                              PT.expected_range("BMW", "X5", 2019, "hood"))
+      ["class"] == "not_measurable")
 
 
 # ---- report ---------------------------------------------------------------

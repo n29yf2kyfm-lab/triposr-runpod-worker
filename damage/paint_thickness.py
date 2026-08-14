@@ -293,7 +293,15 @@ TIER_CONFIDENCE = {
 # Which panels are painted metal, which are plastic (unreadable on a standard
 # gauge), which carry a factory anti-stonechip coating, and which are not
 # painted at all.
-_PLASTIC_PANELS = {"front_bumper", "rear_bumper", "grille"}
+# Plastic-skinned panels. Mirror caps and grilles belong here alongside the
+# bumper covers: a magnetic or eddy-current probe reads NOTHING on any of
+# them, and without this a painted plastic mirror cap would return the
+# no-reading that this module treats as the filler signal on metal. The band
+# used for the whole class is the bumper's, because bumpers are the plastic
+# panel anyone actually measures and the classifier refuses to call a respray
+# on plastic regardless.
+_PLASTIC_PANELS = {"front_bumper", "rear_bumper", "grille",
+                   "left_mirror", "right_mirror"}
 _ROCKER_PANELS = {"left_rocker", "right_rocker"}
 _NOT_PAINTABLE = {
     "windshield", "rear_windshield", "left_front_glass", "right_front_glass",
@@ -664,9 +672,19 @@ def normalize_reading(raw):
         "substrate": (str(raw.get("substrate")).lower()
                       if raw.get("substrate") else None),
         "gauge": (str(raw.get("gauge")).lower() if raw.get("gauge") else None),
-        "no_reading": bool(raw.get("no_reading")) or not pts,
+        # `no_reading` is EXPLICIT ONLY. It used to be set whenever no number
+        # arrived, which quietly turned every malformed entry — a typo, a
+        # dropped field, a string where a list belonged — into the strongest
+        # accusation this module can make, because a no-reading on metal is
+        # the filler signal. "The inspector's gauge would not read" and "the
+        # payload was broken" must never be the same value.
+        "no_reading": bool(raw.get("no_reading")),
         "over_range": bool(raw.get("over_range")),
         "has_film": raw.get("has_film"),
+        # usable at all? Either a number arrived, or the caller deliberately
+        # reported that the gauge produced nothing.
+        "valid": bool(pts) or bool(raw.get("no_reading")) \
+                 or bool(raw.get("over_range")),
     }
 
 
@@ -741,6 +759,11 @@ def classify_reading(reading, expected, reference_um=None,
     conf = float(expected.get("confidence", 0.35))
 
     # --- 1. unmeasurable -------------------------------------------------
+    if not r.get("valid", True):
+        return _result("not_measurable", 0.0, "unmeasurable", None, None, None,
+                       [], ["no usable reading was supplied for this panel — "
+                            "this is a missing measurement, not a finding"])
+
     if pcls == "not_paintable":
         return _result("not_measurable", 0.0, "unmeasurable", None, None, None,
                        ["this panel is not a painted body surface"],
@@ -905,15 +928,15 @@ def describe(reading, expected, verdict):
     if cls == "not_measurable":
         if reading.get("panel_class") == "plastic_bumper":
             return (f"No coating-thickness reading could be taken on the "
-                    f"{panel}. Bumper covers are plastic, and magnetic or "
-                    f"eddy-current gauges cannot read them — this needs an "
-                    f"ultrasonic gauge. A missing reading here does not "
-                    f"indicate filler.")
+                    f"{panel}. This panel is plastic, and magnetic or "
+                    f"eddy-current gauges cannot read plastic at all — it "
+                    f"needs an ultrasonic gauge. A missing reading here does "
+                    f"not indicate filler.")
         return (f"No coating-thickness reading is available for the {panel}.")
 
     if cls == "factory":
-        band = f"{lo:.0f}-{hi:.0f} um" if hi else "the expected range"
-        return (f"Coating thickness on the {panel} measured {v:.0f} um "
+        band = f"{lo:.0f}-{hi:.0f} µm" if hi else "the expected range"
+        return (f"Coating thickness on the {panel} measured {v:.0f} µm "
                 f"({um_to_mils(v)} mils), within the {band} expected for this "
                 f"vehicle. Nothing at the points measured suggests "
                 f"refinishing. This is not proof the panel is original — a "
@@ -921,21 +944,26 @@ def describe(reading, expected, verdict):
                 f"band.")
 
     if cls == "inconclusive":
-        return (f"Coating thickness on the {panel} measured {v:.0f} um "
-                f"({um_to_mils(v)} mils), above the {lo:.0f}-{hi:.0f} um "
+        return (f"Coating thickness on the {panel} measured {v:.0f} µm "
+                f"({um_to_mils(v)} mils), above the {lo:.0f}-{hi:.0f} µm "
                 f"expected for this vehicle but not far enough above it to "
                 f"point to refinishing. Worth a second look in person; not "
                 f"reported as a finding.")
 
     if cls == "refinished":
-        head = (f"Coating thickness on the {panel} measured {v:.0f} um "
+        head = (f"Coating thickness on the {panel} measured {v:.0f} µm "
                 f"({um_to_mils(v)} mils)")
+        # Name what the reading was actually compared against. Saying "above
+        # the surrounding paint" when no same-car reference existed would
+        # describe a comparison that was never made.
         if verdict.get("delta_reference_um") is not None:
-            head += (f", {verdict['delta_reference_um']:+.0f} um against an "
+            head += (f", {verdict['delta_reference_um']:+.0f} µm against an "
                      f"undamaged reference panel on this same vehicle")
+            tail = "A reading this far above the surrounding paint"
         else:
-            head += (f", against a factory expectation of {lo:.0f}-{hi:.0f} um")
-        return (head + ". A reading this far above the surrounding paint is "
+            head += (f", against a factory expectation of {lo:.0f}-{hi:.0f} µm")
+            tail = "A reading this far above the factory range"
+        return (head + ". " + tail + " is "
                 "most often caused by the panel carrying an additional coat "
                 "of paint — that is, having been refinished at some point. "
                 "This is a measurement, not a service record: paint "
@@ -949,7 +977,7 @@ def describe(reading, expected, verdict):
             head = (f"The gauge returned no reading, or ran past its range, "
                     f"on the {panel}")
         else:
-            head = (f"Coating thickness on the {panel} measured {v:.0f} um "
+            head = (f"Coating thickness on the {panel} measured {v:.0f} µm "
                     f"({um_to_mils(v)} mils)")
         return (head + ". That is well beyond any factory paint system and "
                 "beyond what a respray alone adds; it is the pattern body "
@@ -959,7 +987,7 @@ def describe(reading, expected, verdict):
                 "normally means the panel was repaired. Have the panel looked "
                 "at in person before relying on this.")
 
-    return f"Coating thickness on the {panel}: {v} um."
+    return f"Coating thickness on the {panel}: {v} µm."
 
 
 # --- finding construction -------------------------------------------------
@@ -1003,7 +1031,7 @@ def finding_from_reading(reading, expected, verdict):
     evidence = []
     if v is not None:
         evidence.append(
-            f"Coating thickness measured {v:.0f} um ({um_to_mils(v)} mils) "
+            f"Coating thickness measured {v:.0f} µm ({um_to_mils(v)} mils) "
             f"at {reading['n_points']} point"
             f"{'s' if reading['n_points'] != 1 else ''} on this panel")
     else:
@@ -1014,7 +1042,7 @@ def finding_from_reading(reading, expected, verdict):
     if expected.get("max_um") is not None:
         evidence.append(
             f"Expected factory range {expected['min_um']:.0f}-"
-            f"{expected['max_um']:.0f} um "
+            f"{expected['max_um']:.0f} µm "
             f"({expected['tier']} match; source: {expected['source']})")
 
     hidden = []
