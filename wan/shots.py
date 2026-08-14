@@ -64,34 +64,92 @@ PRESETS = {
 }
 
 # Shots the tutorials/ assembler expects in the shared b-roll library, keyed
-# by library id. `prompt` is used with a generic workshop/car source image;
-# these are procedure-agnostic atmosphere shots generated ONCE in batch and
-# reused across every tutorial video (this reuse is what holds per-video cost
-# at pennies — see tutorials/README.md).
+# by library id. Generated ONCE in batch and reused across every tutorial
+# video (this reuse is what holds per-video cost at pennies — see
+# tutorials/README.md).
+#
+# Tutorial visuals are ANIMATED ACTION SHOTS: a consistent stylized mechanic
+# character performing each step, not photoreal atmosphere. Consistency comes
+# from three levers used together on every batch:
+#   1. CHARACTER + ANIM_STYLE below appear verbatim in every prompt;
+#   2. the same source image seeds every shot (render ONE reference frame of
+#      the character in the workshop — T2I or a simple Blender render — and
+#      pass it as the batch's source_image);
+#   3. a fixed seed per shot (re-runs reproduce instead of drifting).
+# Because these clips DEMONSTRATE procedure steps, a human must review each
+# one for mechanical correctness before it enters the live library — batch
+# into `prefix: "broll_pending"` and promote after review (see README).
+CHARACTER = (
+    "a friendly mechanic character in navy blue overalls and orange work "
+    "gloves"
+)
+ANIM_STYLE = (
+    "High-quality stylized 3D animation, animated tutorial style, clean "
+    "modern workshop, soft even lighting, smooth confident motion, "
+    "consistent character design, no text"
+)
+
+
+def _anim(action):
+    return f"{ANIM_STYLE}. {CHARACTER} {action}"
+
+
 BROLL_LIBRARY = {
-    "workshop/ramp_up": (
-        "A car rises slowly on a two-post workshop lift, mechanic's workshop "
-        "background, neutral daylight, documentary style."
+    # --- animated action shots: the mechanic performs each step ---
+    "anim/loosen_bolts": _anim(
+        "kneels beside the front wheel of a car on the ground and loosens a "
+        "wheel bolt with a wheel brace, turning it half a turn."
     ),
-    "workshop/wheel_off": (
-        "A mechanic's gloved hands lift a wheel away from the hub of a car "
-        "raised on a lift. Steady camera, workshop lighting, sharp focus."
+    "anim/jack_up": _anim(
+        "positions a trolley jack under the side of the car and raises it, "
+        "then places an axle stand under the sill."
+    ),
+    "anim/wheel_off": _anim(
+        "lifts the unbolted front wheel away from the hub of the raised "
+        "car, revealing the brake disc and caliper behind it."
+    ),
+    "anim/undo_caliper": _anim(
+        "uses a socket wrench to undo the caliper slider bolts, then lifts "
+        "the brake caliper off the disc and rests it on the suspension, "
+        "close-up on the brake assembly."
+    ),
+    "anim/press_piston": _anim(
+        "slowly winds the brake caliper piston back with a piston tool, "
+        "close-up on the caliper in his hands."
+    ),
+    "anim/fit_pads": _anim(
+        "slides new brake pads into the caliper carrier, close-up on the "
+        "brake assembly with the new pads going in."
+    ),
+    "anim/torque_wheel": _anim(
+        "tightens the wheel bolts of the refitted wheel with a torque "
+        "wrench, working around the wheel in a star pattern, the car back "
+        "on the ground."
+    ),
+    "anim/pump_pedal": _anim(
+        "sits in the driver's seat and presses the brake pedal several "
+        "times, interior view of the footwell and pedal."
+    ),
+    # --- generic workshop atmosphere (intro/outro/filler) ---
+    "workshop/ramp_up": _anim(
+        "stands beside a car rising slowly on a two-post workshop lift, "
+        "wide shot of the workshop."
     ),
     "workshop/tools_bench": (
-        "Slow pan across a workbench with a torque wrench, socket set and "
-        "gloves laid out. Shallow depth of field, workshop lighting."
+        f"{ANIM_STYLE}. Slow pan across a workbench with a torque wrench, "
+        "socket set and orange work gloves laid out."
     ),
     "workshop/caliper_closeup": (
-        "Close-up of a brake caliper and disc behind an alloy wheel, camera "
-        "slowly pushing in. Neutral workshop lighting, sharp mechanical detail."
+        f"{ANIM_STYLE}. Close-up of a brake caliper and disc behind an "
+        "alloy wheel, camera slowly pushing in, sharp mechanical detail."
     ),
     "workshop/jack_points": (
-        "The camera tilts down slowly along the sill of a parked car toward "
-        "the jacking point, close to the bodywork. Documentary style."
+        f"{ANIM_STYLE}. The camera tilts down slowly along the sill of a "
+        "parked car toward the jacking point, close to the bodywork."
     ),
     "workshop/bonnet_open": (
-        "The bonnet of a parked car is open, camera glides slowly over the "
-        "engine bay. Even workshop lighting, sharp detail."
+        f"{ANIM_STYLE}. The bonnet of a parked car is open, camera glides "
+        "slowly over the engine bay."
     ),
 }
 

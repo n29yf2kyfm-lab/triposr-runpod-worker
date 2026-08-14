@@ -282,6 +282,11 @@ def handle_broll(job_input):
     if resolution not in RESOLUTIONS:
         return {"error": f"resolution must be one of {sorted(RESOLUTIONS)}"}
     num_frames = int(job_input.get("num_frames", DEFAULT_FRAMES))
+    # Review gate: tutorial action shots demonstrate procedure steps, so
+    # batch into "broll_pending" and have a human promote each approved clip
+    # to "broll/" (copy in Supabase). Only pass prefix="broll" directly for
+    # shots where mechanical correctness doesn't apply.
+    prefix = job_input.get("prefix", "broll_pending")
     results, failures = [], 0
 
     for shot in shots:
@@ -306,7 +311,7 @@ def handle_broll(job_input):
                     image, prompt, negative,
                     resolution, num_frames, shot.get("seed"), out_path,
                 )
-                object_name = f"broll/{shot_id}.mp4"
+                object_name = f"{prefix}/{shot_id}.mp4"
                 url = upload_to_supabase(out_path, object_name)
                 results.append({
                     "id": shot_id, "video_url": url,

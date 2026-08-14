@@ -10,6 +10,22 @@ RunPod serverless GPU worker around **Wan-AI/Wan2.2-I2V-A14B-Diffusers**
    never in the tutorial request path** — that's the economic contract that
    keeps per-tutorial cost at pennies (see `../tutorials/README.md`).
 
+   Tutorial shots are **animated action clips**: a consistent stylized 3D
+   mechanic character actually performing each step (loosening bolts,
+   pulling the wheel, pressing the piston — `anim/*` keys in `shots.py`).
+   Character consistency across clips comes from three levers used
+   together: the shared `CHARACTER`/`ANIM_STYLE` text in every prompt, ONE
+   reference frame of the character passed as the batch's `source_image`
+   (generate it once with any T2I model or a simple Blender render), and
+   fixed per-shot seeds so re-runs reproduce instead of drifting.
+
+   Because action clips *demonstrate* procedure steps, batches default to
+   uploading under `broll_pending/`; a human reviews each clip for
+   mechanical correctness (right bolts, right order, nothing hallucinated)
+   and promotes approved clips to `broll/` — only then does the assembler
+   pick them up. Pass `"prefix": "broll"` to skip the gate for shots where
+   correctness doesn't apply (pure atmosphere).
+
 ## Why this model
 
 Chosen over HunyuanVideo 1.5 (license excludes EU/UK — dealbreaker for a UK

@@ -19,6 +19,13 @@ split, enforced by which code lives in which worker:
 missing renders as a text card — the video still ships, and the response's
 `timings.missing_broll` lists what to queue for the nightly `wan/` batch.
 
+The step visuals are **animated action shots**: a consistent stylized 3D
+mechanic character performing each step (the `anim/*` library keys — see
+`wan/shots.py`). Clips only reach the live `broll/` prefix after a human
+has reviewed them for mechanical correctness; unreviewed batches sit in
+`broll_pending/`. The text-card fallback is what a step looks like while
+its action clip is awaiting generation or review.
+
 **Rule 2: cache at every level.** Videos are content-addressed
 (template bytes + vehicle + voice + format + pipeline version); a repeat
 request returns the stored MP4 URL with zero compute. B-roll clips cache on

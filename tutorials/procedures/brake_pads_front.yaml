@@ -26,7 +26,7 @@ vehicle_defaults:
 steps:
   - id: prep
     title: "Prepare the car"
-    broll: workshop/tools_bench
+    broll: anim/loosen_bolts
     narration: >-
       Before you start, park {vehicle} on firm, level ground, apply the
       handbrake, and put the car in gear or park. Loosen the front wheel
@@ -36,7 +36,7 @@ steps:
       - "Crack wheel bolts before lifting"
   - id: lift
     title: "Lift and secure"
-    broll: workshop/jack_points
+    broll: anim/jack_up
     narration: >-
       Jack the car up at the manufacturer's jacking point, and always
       support it on an axle stand. Never work under a car held only by a
@@ -46,7 +46,7 @@ steps:
       - "Axle stands — always"
   - id: wheel_off
     title: "Remove the wheel"
-    broll: workshop/wheel_off
+    broll: anim/wheel_off
     narration: >-
       With the wheel off you can see the brake disc and the caliper that
       clamps the pads onto it.
@@ -54,7 +54,7 @@ steps:
       - "Wheel off — caliper visible"
   - id: caliper
     title: "Free the caliper"
-    broll: workshop/caliper_closeup
+    broll: anim/undo_caliper
     narration: >-
       Undo the caliper slider bolts, then lift the caliper off the disc and
       support it so it never hangs on the brake hose. The old pads slide
@@ -62,21 +62,29 @@ steps:
     card:
       - "Undo slider bolts"
       - "Never let the caliper hang by its hose"
-  - id: new_pads
-    title: "Fit the new pads"
-    broll: workshop/caliper_closeup
+  - id: press_piston
+    title: "Make room for new pads"
+    broll: anim/press_piston
     narration: >-
       Wind or press the caliper piston back to make room for the new,
-      thicker pads — keep an eye on the brake fluid reservoir as the level
-      rises. Apply a little brake lubricant to the pad contact points,
-      never on the friction surface, then fit the new pads and refit the
-      caliper, tightening its bolts properly.
+      thicker pads — and keep an eye on the brake fluid reservoir as the
+      level rises.
     card:
       - "Press piston back slowly"
+      - "Watch the fluid reservoir"
+  - id: new_pads
+    title: "Fit the new pads"
+    broll: anim/fit_pads
+    narration: >-
+      Apply a little brake lubricant to the pad contact points, never on
+      the friction surface, then fit the new pads and refit the caliper,
+      tightening its bolts properly.
+    card:
       - "Lubricant on contact points only"
+      - "Refit and tighten the caliper"
   - id: refit
     title: "Refit the wheel"
-    broll: workshop/wheel_off
+    broll: anim/torque_wheel
     narration: >-
       Refit the wheel, lower the car, and tighten the wheel bolts in a
       star pattern to {wheel_torque}.
@@ -85,7 +93,7 @@ steps:
       - "Torque to spec"
   - id: bed_in
     title: "Pump and bed in"
-    broll: workshop/ramp_up
+    broll: anim/pump_pedal
     narration: >-
       Before driving, pump the brake pedal until it feels firm — the first
       press after a pad change does nothing, and that catches people out.
