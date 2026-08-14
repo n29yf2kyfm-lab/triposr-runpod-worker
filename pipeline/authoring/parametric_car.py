@@ -398,7 +398,6 @@ def build(car, nu=NU, nv=NV):
         depth = car.TW * 1.15
         for ax in axles:
             for side in (1, -1):
-                zо = None
                 # take the flank z at this station as the arch mouth
                 i_near = int(np.argmin(np.abs(car.L * (us - 0.5) - ax)))
                 zo = car.halfwidth(us[i_near]) * 0.985 * side
@@ -417,7 +416,6 @@ def build(car, nu=NU, nv=NV):
                         F += [[a0, b0, b1], [a0, b1, a1]]
                     else:
                         F += [[a0, b1, b0], [a0, a1, b1]]
-                _ = zо
         return np.array(V), np.array(F, dtype=np.uint32)
 
     body_mask = ~glass & ~arch

@@ -331,7 +331,6 @@ def build_structured(car, out, root_name=None):
     g.mesh("bumper_rear_cap", crV, crF, m_paint, parent=n_bump)
 
     # glass, one mesh both sides
-    m = sel("glass") | gmask & ~arch
     parts = [emit_grid(P, gmask & ~arch, +1), emit_grid(P, gmask & ~arch, -1)]
     V = np.concatenate([v for v, f in parts])
     F = np.concatenate([parts[0][1], parts[1][1] + len(parts[0][0])])
@@ -345,7 +344,7 @@ def build_structured(car, out, root_name=None):
 
     # wheels: a group per corner; +z right, front = +x
     half = car.TR / 2
-    corners = {"wheel_FR": (axles[0] / 1, half), "wheel_FL": (axles[0], -half),
+    corners = {"wheel_FR": (axles[0], half), "wheel_FL": (axles[0], -half),
                "wheel_RR": (axles[1], half), "wheel_RL": (axles[1], -half)}
     for cn, (x, z) in corners.items():
         node = g.group(cn, n_whl)
