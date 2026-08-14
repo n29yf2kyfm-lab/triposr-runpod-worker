@@ -46,7 +46,14 @@ def main():
     ap.add_argument("--index", default=os.path.join(
         here, "drive_classifier_split.jsonl"))
     ap.add_argument("--out", default=os.path.join(here, "contact_sheet.png"))
-    ap.add_argument("--mode", choices=["broad", "thin"], default="broad")
+    ap.add_argument("--mode", choices=["broad", "thin", "folders"],
+                    default="broad")
+    ap.add_argument("--folders", default=None,
+                    help="folders mode: comma-separated folder names, sampled "
+                         "equally and shown in the order given — for checking "
+                         "whether an ORDINAL axis (dent_minor..dent_severe) is "
+                         "visually coherent, which one random tile per class "
+                         "cannot show")
     ap.add_argument("--n", type=int, default=16)
     ap.add_argument("--cols", type=int, default=4)
     ap.add_argument("--tile", type=int, default=300)
@@ -57,7 +64,14 @@ def main():
     rng = random.Random(args.seed)
 
     picks = []
-    if args.mode == "thin":
+    if args.mode == "folders":
+        names = [c.strip() for c in (args.folders or "").split(",") if c.strip()]
+        per = max(1, args.n // max(1, len(names)))
+        for c in names:
+            ps = by_folder.get(c, [])
+            for p in rng.sample(ps, min(per, len(ps))):
+                picks.append((c, p))
+    elif args.mode == "thin":
         folders = [c for c in THIN if by_folder.get(c)]
         rng.shuffle(folders)
         for c in folders[:args.n]:

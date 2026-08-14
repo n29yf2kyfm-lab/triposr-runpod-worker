@@ -3,3 +3,7 @@ __pycache__/
 .env
 *.key
 secrets/
+
+# working artefacts, not source
+damage/training/*_hashes.jsonl
+damage/training/*.cache
