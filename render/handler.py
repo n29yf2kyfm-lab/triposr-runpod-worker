@@ -1005,8 +1005,19 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
                 for i in range(3):
                     lo2[i] = min(lo2[i], wv[i]); hi2[i] = max(hi2[i], wv[i])
         ext2 = [hi2[i] - lo2[i] for i in range(3)]
-        if min(range(3), key=lambda i: ext2[i]) != 2:
-            _apply(mathutils.Matrix.Rotation(_math.radians(90), 4, 'Y'))
+        # THE INNER ROLL IS DELETED — deliberately, not lost. The old test
+        # (`argmin(ext2) != 2`, i.e. roll unless the vertical extent is the
+        # smallest) is a coin flip on any car whose width and height are close:
+        # Mazda 2 (DY) measured X 201.748 / Y 411.622 / Z 202.624 here — a 0.4%
+        # tie — and was rolled ONTO ITS SIDE deterministically, shipping sheets
+        # of its floor pan. pipeline/qc/test_worker_orientation.py shows NO
+        # extent-only rule gets Mazda + saloon + van + on-side all right; the
+        # rules split by failure direction, and this one failed dangerously
+        # (rolling CORRECT cars). Ingest owns pose now: gpu_wave.pose_gate
+        # rejects wrong poses before a frame is spent and pose_fix repairs them
+        # with evidence this worker does not have (the TYRE material's height).
+        # A genuinely on-side car reaching this point renders on its side and
+        # fails the sheet — the safe direction.
         uext = ext2  # keep the 180-flip's length-axis pick consistent
 
         # 180deg ambiguity: a car is WIDER at the bottom (body/wheels) than the
