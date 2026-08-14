@@ -14,8 +14,8 @@
 #    charge. The trap now uploads train.log ALWAYS, before stopping the pod, so
 #    a failure costs one run instead of a blind retry.
 #
-# Required env: ROBOFLOW_API_KEY HF_TOKEN HF_REPO RUNPOD_API_KEY RUNPOD_POD_ID
-# Optional: EPOCHS BATCH MAX_SOURCES RUN_TAG
+# Required env: HF_TOKEN HF_REPO CORPUS_REPO RUNPOD_API_KEY RUNPOD_POD_ID
+# Optional: EPOCHS BATCH LIMIT RUN_TAG   (LIMIT = smoke-test sample cap)
 set -x
 # Deliberately NOT `set -u`: an unset RUNPOD_POD_ID must not abort the very trap
 # that stops the pod.
@@ -203,8 +203,10 @@ echo "=== fetch scripts ==="
 python - <<'PY' || exit 20
 import os
 from huggingface_hub import hf_hub_download
-for f in ("prepare_data.py", "train_detector.py", "merge_datasets.py",
-          "manifest.json"):
+# materialise_index needs augment, which needs watermark_aug. Fetching a
+# partial set would fail at import time AFTER the pod is already billing.
+for f in ("train_detector.py", "materialise_index.py", "augment.py",
+          "watermark_aug.py"):
     try:
         p = hf_hub_download(repo_id=os.environ["HF_REPO"], filename=f,
                             token=os.environ["HF_TOKEN"], local_dir="/workspace")
@@ -213,11 +215,40 @@ for f in ("prepare_data.py", "train_detector.py", "merge_datasets.py",
         print("MISSING", f, e)
 PY
 
-echo "=== fetch + merge datasets ==="
-python merge_datasets.py --manifest manifest.json --out prepared \
-  --api-key "$ROBOFLOW_API_KEY" --work _sources \
-  ${MAX_SOURCES:+--limit $MAX_SOURCES} || exit 30
-du -sh prepared _sources || true
+# THE CORPUS IS FETCHED, NOT REBUILT.
+#
+# This step used to re-download 41 Roboflow projects and re-merge them on the
+# pod. That path silently discarded every correction made to the data: the
+# 30,404 off-domain images (steel fences, copper pipe, aircraft skin) came
+# back, the class balancing did not happen, near-duplicate grouping did not
+# happen, and the six-class corpus was fed to a ten-class mapper whose
+# labels.txt then disagreed with the weights — every prediction mislabelled
+# while the run looked healthy. It also spent the first hour of a paid GPU
+# downloading data that already existed.
+#
+# So the cleaned corpus and its index ship as a dataset repo, and the pod only
+# renders them.
+echo "=== fetch corpus + index ==="
+python - <<'PY' || exit 30
+import os
+from huggingface_hub import snapshot_download
+p = snapshot_download(repo_id=os.environ["CORPUS_REPO"], repo_type="dataset",
+                      token=os.environ["HF_TOKEN"],
+                      local_dir="/workspace/corpus",
+                      max_workers=16)
+print("corpus at", p)
+PY
+du -sh corpus || true
+
+# Renders index.jsonl into the COCO directory RF-DETR trains on, applying each
+# sample's augmentation recipe and its class-independent watermark flag. LIMIT
+# is how the smoke run stays short: same code path, fewer samples, so a failure
+# costs minutes instead of the whole budget.
+echo "=== materialise the index ==="
+python materialise_index.py --index corpus/idx --corpus corpus/merged640 \
+  --out prepared --workers "$(nproc)" ${LIMIT:+--limit $LIMIT} || exit 31
+du -sh prepared || true
+head -c 200 prepared/labels.txt; echo
 
 echo "=== train ==="
 python train_detector.py --data prepared --out runs \

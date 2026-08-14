@@ -1,0 +1,122 @@
+"""Upload the cleaned corpus and its index to a Hugging Face dataset repo.
+
+The pod fetches from here instead of rebuilding. That is the whole point of
+train.sh's changed data step: rebuilding on the pod threw away every correction
+made to this data — the off-domain removal, the class grouping, the
+near-duplicate split, the taxonomy agreement between labels.txt and the
+weights — and spent the first hour of a paid GPU doing it.
+
+WHAT GOES UP
+    merged640/_annotations.coco.json   167,157 images / 375,291 boxes
+    merged640/images/*.jpg             ~14GB
+    idx/{index,images}.jsonl           the split-and-balance plan
+    idx/{classes,plan}.json            the class vocabulary and the report
+
+Roughly 14GB at the ~8.7MB/s measured from this container: about half an hour.
+upload_large_folder chunks, retries and RESUMES, which matters because a
+transfer of that length will be interrupted at least once and restarting from
+zero each time would never finish.
+
+    python publish_corpus.py --repo user/damage-corpus --token hf_xxx
+    python publish_corpus.py --repo ... --token ... --dry-run
+"""
+import argparse
+import json
+import os
+import sys
+
+
+def preflight(corpus, index):
+    """Refuse to upload a corpus whose index does not match it.
+
+    A pod that downloads 14GB and then finds half its index pointing at absent
+    files has burned the download and the GPU time before failing. Checked here,
+    where it costs seconds.
+    """
+    problems = []
+    coco = os.path.join(corpus, "_annotations.coco.json")
+    if not os.path.exists(coco):
+        return [f"missing {coco}"]
+    with open(coco) as f:
+        d = json.load(f)
+    n_img, n_ann = len(d["images"]), len(d["annotations"])
+
+    shas = set()
+    for ln in open(os.path.join(index, "images.jsonl")):
+        shas.add(json.loads(ln)["sha"])
+
+    idir = os.path.join(corpus, "images")
+    on_disk = set(os.listdir(idir)) if os.path.isdir(idir) else set()
+    missing = sum(1 for s in shas if s[:20] + ".jpg" not in on_disk)
+    if missing:
+        problems.append(f"{missing:,} indexed images are not on disk")
+
+    with open(os.path.join(index, "classes.json")) as f:
+        classes = json.load(f)
+    names = [r["name"] for r in classes["classes"]]
+    if not names:
+        problems.append("classes.json lists no classes")
+
+    splits = {}
+    for ln in open(os.path.join(index, "index.jsonl")):
+        splits[json.loads(ln)["split"]] = splits.get(
+            json.loads(ln)["split"], 0) + 1
+    for need in ("train", "valid", "test"):
+        if not splits.get(need):
+            problems.append(f"index has no {need} samples")
+
+    print(f"corpus   {n_img:,} images, {n_ann:,} boxes, {len(on_disk):,} files")
+    print(f"index    {len(shas):,} originals, classes {names}")
+    print(f"samples  " + ", ".join(f"{k} {v:,}" for k, v in
+                                   sorted(splits.items())))
+    return problems
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--corpus", default="/home/user/rf/merged640")
+    ap.add_argument("--index", default="/home/user/rf/idx")
+    ap.add_argument("--repo", required=True, help="e.g. user/damage-corpus")
+    ap.add_argument("--token", default=os.environ.get("HF_TOKEN"))
+    ap.add_argument("--private", action="store_true", default=True)
+    ap.add_argument("--dry-run", action="store_true")
+    a = ap.parse_args()
+
+    problems = preflight(a.corpus, a.index)
+    if problems:
+        print("\nPREFLIGHT FAILED:")
+        for p in problems:
+            print("  ! " + p)
+        raise SystemExit(2)
+    print("\npreflight OK")
+
+    if a.dry_run:
+        print("(dry run — nothing uploaded)")
+        return
+    if not a.token:
+        raise SystemExit("no token: pass --token or set HF_TOKEN")
+
+    from huggingface_hub import HfApi
+    api = HfApi(token=a.token)
+    api.create_repo(a.repo, repo_type="dataset", private=a.private,
+                    exist_ok=True)
+
+    # Staged as two uploads so the small, frequently-rebuilt index can be
+    # refreshed without re-sending 14GB of pixels.
+    print(f"\nuploading index -> {a.repo}:idx/")
+    api.upload_folder(folder_path=a.index, path_in_repo="idx",
+                      repo_id=a.repo, repo_type="dataset")
+
+    print(f"uploading corpus -> {a.repo}:merged640/  (~14GB, resumable)")
+    try:
+        api.upload_large_folder(folder_path=a.corpus, repo_id=a.repo,
+                                repo_type="dataset", num_workers=8)
+    except AttributeError:                       # older huggingface_hub
+        api.upload_folder(folder_path=a.corpus, path_in_repo="merged640",
+                          repo_id=a.repo, repo_type="dataset")
+    print(f"\ndone: https://huggingface.co/datasets/{a.repo}")
+    print(f"set CORPUS_REPO={a.repo} for train.sh")
+
+
+if __name__ == "__main__":
+    sys.exit(main())
