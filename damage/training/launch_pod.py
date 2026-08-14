@@ -30,7 +30,19 @@ GQL = "https://api.runpod.io/graphql"
 # 48GB, ~$0.33/hr at the time of writing. The VRAM matters more than the clock
 # here: RF-DETR's batch size is what it constrains, and a larger batch is worth
 # more than a faster card that forces gradient accumulation.
-DEFAULT_GPU = "NVIDIA RTX A6000"
+# Availability churns constantly and a "Low"/"Medium" stock label does not
+# predict deployability: A6000, A40 and 4090 all reported stock and all
+# refused to deploy, while the Blackwell did. So this is a FALLBACK LIST tried
+# in order, not one choice. All carry >=24GB, enough for RF-DETR at batch 8.
+GPU_FALLBACKS = (
+    "NVIDIA RTX A6000",              # 48GB
+    "NVIDIA A40",                    # 48GB
+    "NVIDIA RTX PRO 4500 Blackwell",  # 32GB
+    "NVIDIA GeForce RTX 4090",       # 24GB
+    "NVIDIA GeForce RTX 3090",       # 24GB
+    "NVIDIA RTX A5000",              # 24GB
+)
+DEFAULT_GPU = GPU_FALLBACKS[0]
 
 # Torch is upgraded by train.sh from the driver anyway, so the image only needs
 # to be a sane CUDA base with python.
@@ -74,7 +86,7 @@ def balance(key):
     return gql("query{myself{clientBalance currentSpendPerHr}}", {}, key)["myself"]
 
 
-def launch(args, env):
+def launch(args, env, gpu):
     q = """
     mutation($in: PodFindAndDeployOnDemandInput) {
       podFindAndDeployOnDemand(input: $in) {
@@ -87,9 +99,7 @@ def launch(args, env):
         "gpuCount": 1,
         "volumeInGb": 0,
         "containerDiskInGb": args.disk,
-        "minVcpuCount": 8,
-        "minMemoryInGb": 32,
-        "gpuTypeId": args.gpu,
+        "gpuTypeId": gpu,
         "name": args.name,
         "imageName": args.image,
         "dockerArgs": BOOTSTRAP,
@@ -97,6 +107,33 @@ def launch(args, env):
         "env": [{"key": k, "value": v} for k, v in env.items()],
     }
     return gql(q, {"in": payload}, args.api_key)["podFindAndDeployOnDemand"]
+
+
+def launch_with_fallback(args, env):
+    """Try each GPU in turn. Returns (pod, gpu) or raises.
+
+    A capacity refusal is not an error worth stopping for — it is the normal
+    state of a spot market. Trying the next card beats making the operator
+    probe by hand, which is how a bare pod with no environment and no script
+    ended up running and billing.
+    """
+    tried = []
+    order = ([args.gpu] + [g for g in GPU_FALLBACKS if g != args.gpu]
+             if args.fallback else [args.gpu])
+    for gpu in order:
+        try:
+            pod = launch(args, env, gpu)
+            if pod and pod.get("id"):
+                return pod, gpu
+            tried.append((gpu, "empty response"))
+        except SystemExit as e:
+            msg = str(e)
+            if "resources" not in msg and "no longer any instances" not in msg:
+                raise
+            tried.append((gpu, "no capacity"))
+            print(f"  {gpu}: no capacity")
+    raise SystemExit("no GPU available; tried " +
+                     ", ".join(f"{g} ({w})" for g, w in tried))
 
 
 def main():
@@ -119,6 +156,9 @@ def main():
                     help="only used to price the run and warn")
     ap.add_argument("--name", default=None)
     ap.add_argument("--tag", default=None)
+    ap.add_argument("--no-fallback", dest="fallback", action="store_false",
+                    default=True,
+                    help="do not try other GPUs when capacity is refused")
     ap.add_argument("--smoke", action="store_true",
                     help="short proving run: 2000 samples, 1 epoch")
     ap.add_argument("--dry-run", action="store_true")
@@ -166,8 +206,9 @@ def main():
         print("\n(dry run — no pod created)")
         return 0
 
-    pod = launch(a, env)
-    print(f"\npod {pod['id']}  {pod.get('name')}  {pod.get('desiredStatus')}")
+    pod, gpu = launch_with_fallback(a, env)
+    print(f"\npod {pod['id']}  {pod.get('name')}  {pod.get('desiredStatus')}"
+          f"  on {gpu}")
     print(f"logs will land at https://huggingface.co/{a.hf_repo}"
           f"/blob/main/logs/{a.tag}.log")
     print("\nThe pod stops itself when train.sh exits, success or failure.")
