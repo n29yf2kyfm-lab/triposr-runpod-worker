@@ -187,10 +187,22 @@ enters at `main.py` / `train_demo.sh`; an overfitting config and an 8-case
 mini-trainset exist for smoke-testing; stated minimum is 10GB VRAM (default
 recipe is 8-GPU DeepSpeed, a pilot does not need that).
 
-**Phase 2a-0 — trainer smoke test (~$1–2, hours):** run `train_demo.sh` on
-their own mini-trainset on one rented GPU. Proves the training loop end to end
-before a penny goes to data. (The P3-SAM lesson: scan the import graph and
-preflight the bootstrap URL before renting.)
+**Phase 2a-0 — trainer smoke test: PASSED 2026-08-14, ~$1.05 total.**
+`SMOKE_OK` on attempt 8: the loop ran 24 capped steps on their mini-trainset on
+one H100-class GPU and wrote a real 10.28 GB checkpoint
+(`ckpt-step=00000020.ckpt`). Seven prior attempts each died inside 3 minutes by
+design (~$0.12 each) and every fix is permanent in
+`pipeline/trellis/hy21_smoke.sh`, which the pilot inherits:
+  1. `timm` undocumented; latest transformers self-disables on torch 2.4 → pinned 4.46.3, check made fatal
+  2. `pythreejs` (mesh-log callback chain) → full static import scan replaced pod-by-pod discovery
+  3. pymeshlab needs `libopengl0` — the DOCUMENTED hybrid-deploy trap, missed on first pass
+  4. matplotlib/scipy/pandas/skimage/sklearn are NOT in the runpod image — assumed wrongly
+  5. their single-GPU branch sets `strategy=None`; PL 2.x demands `'auto'` (their own comment)
+  6. `training_step(optimizer_idx)` is PL 1.x era — exactly two signatures, patched
+  7. custom logger callbacks have PL 1.x hooks → dropped from config (guarded in main.py; ModelCheckpoint unaffected)
+Also fixed mid-campaign: `set -x` traced the service key into a PUBLIC bucket
+log on attempt 1 — deleted, uploads now run with xtrace off, owner advised to
+rotate SB_KEY.
 
 **Phase 2a — preprocess OUR cars with THEIR tools:** pilot slice first — the
 ~200 best cars (~$2–8), full 1,026 (~$10–40) only after the pilot gate passes.
