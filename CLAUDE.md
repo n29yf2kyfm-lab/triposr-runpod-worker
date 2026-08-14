@@ -492,6 +492,38 @@ does this for the same reason.
 Related trap already paid for: `pkill` on a broad pattern has killed this session's own
 shell (exit 144) more than once. Kill by PID.
 
+## Worker deploys WITHOUT docker: the hot-pin pattern (2026-08-14, proven live)
+
+This container has no docker daemon, so the render worker image cannot be
+rebuilt here. The deploy that WORKS, used to ship the Mazda tie-flip fix:
+
+1. upload the patched `render/handler.py` to a VERSIONED public object:
+   `car-meshes/worker/handler_<gitsha>.py` — preflight 200 + byte-identical
+2. PATCH template `hrtuk90f9p` `dockerStartCmd` to
+   `bash -c "curl -fsSL <url> -o /tmp/handler_live.py && exec python -u /tmp/handler_live.py || exec python -u /app/handler.py"`
+   — the `||` falls back to the BAKED handler if the bucket is unreachable, so
+   a fetch failure cannot restart-loop the worker
+3. recycle per the standing rule (workersMax->0, 45s, restore; first submit
+   409s, retry)
+4. re-render the KNOWN case through the LIVE endpoint and LOOK: the Mazda 2 DY
+   (staging/mazda/55e34299...) renders upright on OPTIX post-deploy; it rendered
+   ON ITS SIDE under the old handler (side-by-side proof in session artefacts)
+
+The live template still pins image `render-4e4e1fd...` — the hot-pin OVERRIDES
+its handler at boot. A future docker rebuild should bake the current handler and
+clear dockerStartCmd. Test harness for handler changes without an endpoint:
+`scratchpad prodrender.py` pattern — stub runpod/requests, exec the REAL
+handler source in Blender, call `_render` directly (rebuilt three times after
+rollbacks; the pattern is: assert exactly ONE `use_denoising = True` line and
+flip it, since local Blender lacks OIDN).
+
+Also in that deploy: the INNER ROLL in the worker's auto-upright is DELETED
+(commit 3c9f95f). `pipeline/qc/test_worker_orientation.py` proves no
+extent-only rule survives all four real cases; rules split by failure
+direction and the old rule failed dangerously (rolled CORRECT cars — the
+Mazda tie). Pose is ingest's job: pose_gate rejects, pose_fix repairs with
+tyre-height evidence the worker does not have.
+
 ## Repinning a RunPod template does NOT update running workers (learned 2026-08-01)
 
 PATCHing `imageName` on template `hrtuk90f9p` changes what NEW workers pull.
