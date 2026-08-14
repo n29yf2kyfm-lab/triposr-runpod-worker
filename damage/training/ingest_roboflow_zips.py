@@ -64,7 +64,11 @@ CLASS_RULES = [
     (("lamp", "headlight", "head light", "tail light", "taillight", "fog light",
       "indicator", "light broken", "broken light", "lampu", "signlight",
       "signal light"), "lamp_wheel"),
+    # "rubber puncture", not a bare "puncture": this rule is tested BEFORE
+    # structural, so a bare match would drag "Body puncture" onto the wheel
+    # class. The specific forms keep both correct.
     (("tire", "tyre", "wheel", "rim", "alloy", "flat tire", "tire burst",
+      "rubber puncture", "tire puncture", "tyre puncture",
       "ban ", "lastik"), "lamp_wheel"),
     # corrosion / paint
     (("rust", "corrosion", "corroded", "oxidation", "karat"), "rust_paint"),
@@ -75,7 +79,14 @@ CLASS_RULES = [
     (("missing", "detach", "torn", "tear", "structural", "severe damage",
       "smash", "crush", "collaps", "deform", "bent", "misalign", "panel gap",
       "gap", "hilang", "kayip", "wreck", "totaled", "total loss",
-      "write off"), "structural"),
+      "write off",
+      # Shard 2's unmapped report: Dislocation/Disalocation is 8,172 boxes,
+      # the largest single gap found. A part knocked out of position is
+      # structural. The misspelling is aliased because it appears verbatim in
+      # the source project and a mapper that only knows correct spellings is
+      # a mapper that silently drops a tenth of the corpus.
+      "dislocat", "disalocat", "lost part", "body puncture",
+      "deframe"), "structural"),
     (("broken", "break", "shatter", "damaged part", "broken part",
       "sidemirror damage", "side mirror damage", "mirror damage",
       "rusak", "hasar"), "structural"),
