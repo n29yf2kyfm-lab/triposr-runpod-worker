@@ -85,21 +85,48 @@ mesh of the same car.
 - **Fail** → the open-weights route is CLOSED on current tech. No more
   open-model experiments; the record already shows they share one ceiling.
 
-### Phase 2 — the 1536³ commercial tier, one car (~$2–40, 1–2 days)
+### Phase 2 — OUR OWN MODEL: fine-tune open weights on our own catalogue
 
-The only tier whose resolution can physically hold a shut line. Candidates in
-order: **Hunyuan3D 3.5 API** (direct successor to our best open result),
-Tripo v4, Rodin Gen-2. Same reference images. Needs the owner to create the
-API account(s) — I cannot do that part.
+**Owner decision 2026-08-14: no commercial API in the loop. The machine must be
+owned weights on our own RunPod.** The API tier is dropped from the plan.
 
-**GATE:** the raw mesh passes the owner's per-car rubric for geometry
-(proportions instantly right, strong front 3/4, shut lines defined, lamp
-recesses with internal structure) BEFORE any material work.
-- **Pass** → wire the API as the shape stage. Cost per car at this tier is
-  trivial against sourcing labour. Finisher stack unchanged. Go to Phase 4.
-- **Fail** → generation cannot reach the premium bar in 2026. The machine's
-  budget belongs in sourcing + licensed top-20 heroes. Re-test in ~6 months
-  (revisit triggers below).
+What "own model" realistically means, stated once so it is never re-litigated:
+- **Training from scratch is out.** The base models trained on 500k+ objects
+  across GPU clusters for months. Not a £-thousands project.
+- **Fine-tuning an open base on OUR cars is in**, and it is the one lever the
+  record itself points at: shut-line engraving was deferred because "that fix
+  belongs to Hi3DGen / car fine-tuning". The melt is not only resolution — it
+  is also *generic-object priors*. A base that has seen a thousand clean,
+  audited cars regresses toward crisp panels, round wheels, structured lamps.
+- **The honest ceiling stays:** fine-tuning sharpens priors, it does not raise
+  the architecture's resolution floor. If the pilot fails its gate, that is
+  the answer for current architectures.
+
+**The training asset we already own (counted 2026-08-14):** 1,026 approved,
+audited, material-separated GLBs. This is exactly the (views → mesh) pair data
+these models fine-tune on, and it is clean — unlike the Stage C/D pool that
+caused the old regression. Sample-verify it anyway before training (standing
+rule).
+
+**Phase 2a — dataset build (~$30–80 GPU, reusable forever):** render 8–24
+views per car for all 1,026 (only 6 have turntable frames today). Our render
+worker does 5–7s/frame. Output: the ExpertCarCheck car dataset — durable value
+whatever base model wins, and it also serves any future model swap.
+
+**Phase 2b — fine-tune pilot (~$150–400, 1× H100 for days):** LoRA/short
+fine-tune of the winning base from Phase 1 (Hunyuan3D-2.1 published training
+code; verify Hi3DGen's at execution time) on the ~200 best cars first.
+**GATE:** same Golf reference through base vs pilot, side by side at 5× —
+panels crisper, lamp structure appears, shut lines begin to read. Any doubt =
+fail.
+
+**Phase 2c — full fine-tune (~$500–2,000):** only after 2b passes its gate,
+all 1,026 cars, the production checkpoint becomes **Alam 3D v2 — our weights,
+our RunPod, no API.**
+
+**Money, honestly:** balance today is ~$24.52. Phases 0/1/2a fit it; 2b/2c
+need a top-up. No training spend starts without the owner seeing the 2b
+number first.
 
 ### Phase 3 — the interior, in parallel (pipeline work, $0 GPU)
 
@@ -129,14 +156,23 @@ the standing gap-filler.
 ### Decision tree (one screen)
 
 ```
-Hi3DGen sharp?  ──yes──▶ shape stage = Hi3DGen ─┐
-     │no                                        ├─▶ + finisher + cabin kit ─▶ 5-car scale test ─▶ owner ships/kills
-1536³ API sharp? ─yes──▶ shape stage = API ─────┘
-     │no
+Phase 1: Hi3DGen vs Hunyuan on the Golf ─▶ pick the BASE model
+                       │
+Phase 2a: render our 1,026-car dataset (owned, reusable)
+                       │
+Phase 2b: fine-tune PILOT on ~200 best cars
+     gate: base vs pilot at 5× — crisper? shut lines appearing?
+     │pass                                │fail
+     ▼                                    ▼
+Phase 2c: full fine-tune = Alam 3D v2    Own-model route CLOSED on current
+(our weights, our RunPod, no API)        architectures. Budget → sourcing
+     │                                   (13 cars/week proven) + licensed
+     ▼                                   top-20 (~€1k–2.6k). Re-test on
++ finisher + cabin kit                   triggers below.
      ▼
-Generation CLOSED for 2026.
-Budget → sourcing machine (13 cars/week proven) + licensed top-20 (~€1k–2.6k).
-Re-test on triggers below.
+5-car scale test (Puma, Kuga, Qashqai, XP130 Yaris, Corsa)
+     ▼
+owner eyeballs all 5 — ships or kills, car by car
 ```
 
 ### Revisit triggers (do not re-test before one of these)
