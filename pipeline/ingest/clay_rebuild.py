@@ -152,6 +152,59 @@ def rebuild(src, dst, paint_rgb=None, paint_name=None):
     print(f"WROTE {dst} ({len(out)/1e6:.1f}MB)")
 
 
+def glaze_fix(src, dst):
+    """SURGICAL glazing repair: make opaque-but-GLASS-NAMED materials transparent.
+
+    The narrow case the full rebuild is too big a hammer for: a car whose
+    materials are otherwise real (colours, textures — NOT a converter clay) but
+    whose glazing ships opaque. Under the owner ruling that is a hard fail, yet
+    when the material is NAMED like glass the fix is one field. First seen on
+    the Sketchfab Mk3 Yaris (`am5eunew1_glass`, glass_probe opaque/proven).
+
+    Touches ONLY materials whose name matches the glass rule AND which are
+    currently opaque; sets the proven Glass_Tint values (alpha 0.72 BLEND,
+    doubleSided). Everything else — paint, textures, tyres — is byte-identical
+    JSON fields, and the BIN chunk is copied verbatim as always. Refuses to
+    write when NOTHING matched: a no-op "fix" reading as success is the
+    documented respray trap.
+    """
+    raw = open(src, "rb").read()
+    if raw[:4] != b"glTF":
+        sys.exit("not a GLB")
+    ln = struct.unpack("<I", raw[12:16])[0]
+    g = json.loads(raw[20:20 + ln])
+    rest = raw[20 + ln:]
+
+    fixed = []
+    for m in g.get("materials", []):
+        if classify(m.get("name")) != "glass":
+            continue
+        pbr = m.setdefault("pbrMetallicRoughness", {})
+        bcf = pbr.get("baseColorFactor") or [1, 1, 1, 1]
+        alpha = bcf[3] if len(bcf) > 3 else 1.0
+        if m.get("alphaMode") in ("BLEND", "MASK") and alpha < 0.99:
+            continue                       # already transparent — leave it
+        vals = dict(PBR["glass"])
+        pbr["baseColorFactor"] = vals["baseColorFactor"]
+        pbr["metallicFactor"] = vals["metallicFactor"]
+        pbr["roughnessFactor"] = vals["roughnessFactor"]
+        m["alphaMode"] = "BLEND"
+        m["doubleSided"] = True
+        fixed.append(m.get("name"))
+        print(f"  glaze_fix: {str(m.get('name'))[:40]} -> alpha {vals['baseColorFactor'][3]} BLEND")
+    if not fixed:
+        sys.exit("glaze_fix: NO opaque glass-named material found — nothing to fix, refusing to write")
+
+    body = json.dumps(g, separators=(",", ":")).encode()
+    body += b" " * ((4 - len(body) % 4) % 4)
+    total = 12 + 8 + len(body) + len(rest)
+    out = (b"glTF" + struct.pack("<II", 2, total)
+           + struct.pack("<I", len(body)) + b"JSON" + body + rest)
+    open(dst, "wb").write(out)
+    print(f"WROTE {dst} ({len(out)/1e6:.1f}MB), fixed: {fixed}")
+    return fixed
+
+
 def rebuild_from_map(src, dst, class_map):
     """Write PBR values from an EXPLICIT {material_name: class} map.
 
@@ -192,6 +245,14 @@ if __name__ == "__main__":
     ap.add_argument("--out", required=True)
     ap.add_argument("--paint", help="r,g,b for the body paint")
     ap.add_argument("--paint-name", help="substring of the material that IS the body paint (for colour-named materials like Frozen_White that no regex can infer)")
+    ap.add_argument("--glaze-only", action="store_true",
+                    help="surgical mode: ONLY make opaque glass-NAMED materials "
+                         "transparent (alpha 0.72 BLEND); everything else "
+                         "untouched. For real-material cars that fail solely on "
+                         "opaque glazing.")
     a = ap.parse_args()
+    if a.glaze_only:
+        glaze_fix(a.src, a.out)
+        sys.exit(0)
     rgb = tuple(float(x) for x in a.paint.split(",")) if a.paint else None
     rebuild(a.src, a.out, rgb, a.paint_name)

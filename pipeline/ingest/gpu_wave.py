@@ -197,6 +197,44 @@ def fetch_glb(uid, staged, tok):
     return blob
 
 
+def pose_repair(uid, blob, stage, workdir):
+    """Try to stand a pose-rejected car back on its wheels; None = not fixable.
+
+    Wraps pipeline/ingest/pose_fix.py: TYRE-evidence only (no --allow-proxy —
+    a wave must never roll a car on a proxy signal), verifies the WRITTEN file,
+    and re-stages it over the original so every later stage sees the fixed car.
+    Fails closed: any exception returns None and the normal reject stands.
+    """
+    try:
+        from pose_fix import plan, apply_rotation, score
+        os.makedirs(workdir, exist_ok=True)
+        src = os.path.join(workdir, f"{uid}.fix_in.glb")
+        dst = os.path.join(workdir, f"{uid}.fix_out.glb")
+        if blob is not None:
+            open(src, "wb").write(blob)
+        else:
+            return None
+        rows_, best, named = plan(src, allow_proxy=False)
+        if best is None or best[0] == "identity" or not named:
+            return None
+        apply_rotation(src, dst, best[1])
+        ver, _, _ = plan(dst, allow_proxy=False)
+        vm = ver[0][2]                      # identity row of the OUTPUT
+        if score(vm, False) is None:
+            return None                     # written file is not upright
+        data = open(dst, "rb").read()
+        sb_put(f"{BUCKET}/{stage}/{uid}.glb", data, "model/gltf-binary")
+        return f"{best[0]} tyre_y={vm['tyre_y']}"
+    except Exception:
+        return None
+    finally:
+        for f in (locals().get("src"), locals().get("dst")):
+            try:
+                if f: os.remove(f)
+            except OSError:
+                pass
+
+
 def pose_gate(uid, blob, glb_url, workdir):
     """LOCAL pose gate, run BEFORE any GPU render is submitted.
 
@@ -402,10 +440,22 @@ def main():
         # four GPU renders on them. See pose_gate docstring for what it can
         # and cannot catch.
         pose, preasons = pose_gate(uid, blob, glb_url, a.work)
-        del blob
         if pose == "reject":
-            log(f"[{i}/{len(rows)}] POSE-REJECT {','.join(preasons)[:70]}  {p['name'][:40]}")
-            continue
+            # AUTO-REPAIR (2026-08-14): a wrong pose is a rigid transform, not
+            # a bad mesh — every car this gate caught used to be scrapped, and
+            # the Tucson proved several are good cars stored 180 degrees over.
+            # pose_fix decides on TYRE-height evidence and REFUSES when it
+            # cannot stand the car on its wheels, so a genuine wreck still
+            # falls through to the reject below. On success the FIXED file
+            # replaces the staged one and the wave carries on.
+            fixed = pose_repair(uid, blob, a.stage, a.work)
+            if fixed:
+                log(f"[{i}/{len(rows)}] POSE-FIXED {fixed}  {p['name'][:40]}")
+            else:
+                log(f"[{i}/{len(rows)}] POSE-REJECT {','.join(preasons)[:70]}  {p['name'][:40]}")
+                del blob
+                continue
+        del blob
 
         try:
             with ThreadPoolExecutor(max_workers=a.parallel) as ex:
