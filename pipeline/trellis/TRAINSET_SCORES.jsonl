@@ -824,3 +824,203 @@
 {"assetId": "porsche-cayenne-2009-pw2-v1", "make": "porsche", "model": "cayenne", "bytes": 10500180, "crease": 106.8, "faces": 176901, "diag": 20.6}
 {"assetId": "porsche-959-pw2-v1", "make": "porsche", "model": "959", "bytes": 14090816, "crease": 89.3, "faces": 154568, "diag": 5.14}
 {"assetId": "porsche-911-2021-pw2-v2", "make": "porsche", "model": "911", "bytes": 14184080, "crease": 214.1, "faces": 220196, "diag": 5.22}
+{"assetId": "porsche-911-2014-pw2-v1", "make": "porsche", "model": "911", "bytes": 7470904, "crease": 91.7, "faces": 85607, "diag": 5.1}
+{"assetId": "porsche-macan-2020-pw2-v1", "make": "porsche", "model": "macan", "bytes": 11409920, "crease": 0.0, "faces": 101936, "diag": 226.07}
+{"assetId": "porsche-boxster-2010-pw2-v1", "make": "porsche", "model": "boxster", "bytes": 37050800, "crease": 131.7, "faces": 1115148, "diag": 500.73}
+{"assetId": "porsche-911-2019-pw2-v1", "make": "porsche", "model": "911", "bytes": 11100760, "crease": 201.6, "faces": 174819, "diag": 5.24}
+{"assetId": "porsche-718-2020-pw2-v1", "make": "porsche", "model": "718", "bytes": 8565744, "crease": 132.9, "faces": 131869, "diag": 504.27}
+{"assetId": "porsche-911-2025-pw2-v1", "make": "porsche", "model": "911", "bytes": 15092452, "crease": 267.7, "faces": 308387, "diag": 5.27}
+{"assetId": "porsche-911-2014-pw2-v2", "make": "porsche", "model": "911", "bytes": 8260396, "crease": 68.8, "faces": 77220, "diag": 5.12}
+{"assetId": "porsche-taycan-pw2-v1", "make": "porsche", "model": "taycan", "bytes": 6698936, "crease": 390.3, "faces": 188782, "diag": 235.54}
+{"assetId": "porsche-911-1992-pw2-v1", "make": "porsche", "model": "911", "bytes": 5338808, "crease": 82.6, "faces": 93629, "diag": 4.93}
+{"assetId": "porsche-911-2017-pw2-v1", "make": "porsche", "model": "911", "bytes": 6834964, "crease": 127.8, "faces": 71459, "diag": 5.17}
+{"assetId": "porsche-911-1995-pw2-v1", "make": "porsche", "model": "911", "bytes": 12487628, "crease": 270.9, "faces": 217966, "diag": 4.84}
+{"assetId": "porsche-718-2024-pw2-v1", "make": "porsche", "model": "718", "bytes": 20123508, "crease": 195.1, "faces": 269513, "diag": 5.11}
+{"assetId": "porsche-911-1994-pw2-v1", "make": "porsche", "model": "911", "bytes": 19779068, "crease": 0.0, "faces": 490583, "diag": 473.54}
+{"assetId": "porsche-718-cayman-2020-pw2-v1", "make": "porsche", "model": "718-cayman", "bytes": 11888160, "crease": 212.2, "faces": 199186, "diag": 5.14}
+{"assetId": "porsche-911-2018-pw2-v2", "make": "porsche", "model": "911", "bytes": 10011360, "crease": 195.3, "faces": 225114, "diag": 5.13}
+{"assetId": "porsche-cayman-pw2-v1", "make": "porsche", "model": "cayman", "bytes": 20171880, "crease": 101.1, "faces": 609243, "diag": 18.04}
+{"assetId": "porsche-911-1989-pw2-v1", "make": "porsche", "model": "911", "bytes": 17194260, "crease": 260.6, "faces": 299363, "diag": 4.97}
+{"assetId": "porsche-911-pw2-v2", "make": "porsche", "model": "911", "bytes": 25205492, "crease": 3.5, "faces": 244435, "diag": 52.28}
+{"assetId": "porsche-911-2022-pw2-v1", "make": "porsche", "model": "911", "bytes": 13286912, "crease": 199.5, "faces": 237280, "diag": 5.27}
+{"assetId": "porsche-911-2016-pw2-v1", "make": "porsche", "model": "911", "bytes": 10486440, "crease": 168.1, "faces": 170268, "diag": 5.2}
+{"assetId": "porsche-718-boxster-2017-pw2-v1", "make": "porsche", "model": "718-boxster", "bytes": 8017436, "crease": 149.8, "faces": 169085, "diag": 5.07}
+{"assetId": "porsche-cayenne-2020-pw2-v1", "make": "porsche", "model": "cayenne", "bytes": 9333512, "crease": 79.0, "faces": 118517, "diag": 5.71}
+{"assetId": "porsche-911-pw2-v3", "make": "porsche", "model": "911", "bytes": 18718828, "crease": 214.7, "faces": 234596, "diag": 4.76}
+{"assetId": "porsche-911-pw2-v4", "make": "porsche", "model": "911", "bytes": 20184724, "crease": 20.6, "faces": 652660, "diag": 167.91}
+{"assetId": "porsche-taycan-2025-pw2-v1", "make": "porsche", "model": "taycan", "bytes": 13960264, "crease": 245.1, "faces": 281228, "diag": 557.25}
+{"assetId": "porsche-944-1991-pw2-v1", "make": "porsche", "model": "944", "bytes": 7538432, "crease": 46.4, "faces": 91043, "diag": 18.88}
+{"assetId": "porsche-930-pw2-v1", "make": "porsche", "model": "930", "bytes": 4626472, "crease": 12.5, "faces": 61218, "diag": 17.97}
+{"assetId": "porsche-911-pw2-v5", "make": "porsche", "model": "911", "bytes": 7169184, "crease": 216.2, "faces": 116367, "diag": 509.63}
+{"assetId": "porsche-718-boxster-2019-pw2-v1", "make": "porsche", "model": "718-boxster", "bytes": 23557280, "crease": 238.7, "faces": 452649, "diag": 5.07}
+{"assetId": "porsche-panamera-2019-pw2-v1", "make": "porsche", "model": "panamera", "bytes": 11998852, "crease": 63.6, "faces": 91400, "diag": 94.93}
+{"assetId": "porsche-911-pw2-v6", "make": "porsche", "model": "911", "bytes": 20681584, "crease": 9.1, "faces": 290716, "diag": 396.77}
+{"assetId": "porsche-911-2019-pw2-v2", "make": "porsche", "model": "911", "bytes": 9439704, "crease": 170.6, "faces": 176112, "diag": 5.22}
+{"assetId": "porsche-959-1987-pw2-v1", "make": "porsche", "model": "959", "bytes": 21468552, "crease": 161.2, "faces": 313915, "diag": 6.33}
+{"assetId": "porsche-914-6-pw2-v1", "make": "porsche", "model": "914-6", "bytes": 14683232, "crease": 42.7, "faces": 388832, "diag": 11.08}
+{"assetId": "porsche-911-pw2-v7", "make": "porsche", "model": "911", "bytes": 43684316, "crease": 273.2, "faces": 434519, "diag": 515.88}
+{"assetId": "porsche-boxster-2015-pw2-v1", "make": "porsche", "model": "boxster", "bytes": 5663296, "crease": 1.4, "faces": 91412, "diag": 199.24}
+{"assetId": "porsche-911-pw2-v8", "make": "porsche", "model": "911", "bytes": 23444892, "crease": 365.6, "faces": 662705, "diag": 200.23}
+{"assetId": "porsche-911-pw2-v9", "make": "porsche", "model": "911", "bytes": 9762972, "crease": 220.3, "faces": 253700, "diag": 5.15}
+{"assetId": "porsche-911-pw2-v10", "make": "porsche", "model": "911", "bytes": 8594444, "crease": 184.3, "faces": 239088, "diag": 5.13}
+{"assetId": "porsche-911-2019-pw2-v3", "make": "porsche", "model": "911", "bytes": 5713192, "crease": 18.1, "faces": 74791, "diag": 7.68}
+{"assetId": "porsche-911-pw2-v11", "make": "porsche", "model": "911", "bytes": 12404552, "crease": 7.9, "faces": 241386, "diag": 369.2}
+{"assetId": "porsche-911-2015-pw2-v1", "make": "porsche", "model": "911", "bytes": 13061512, "crease": 148.1, "faces": 242744, "diag": 6.1}
+{"assetId": "porsche-911-pw2-v12", "make": "porsche", "model": "911", "bytes": 40797836, "crease": 155.9, "faces": 359899, "diag": 20.29}
+{"assetId": "porsche-panamera-2010-pw2-v1", "make": "porsche", "model": "panamera", "bytes": 31182332, "crease": 160.0, "faces": 953290, "diag": 567.86}
+{"assetId": "porsche-carrera-gt-pw2-v1", "make": "porsche", "model": "carrera-gt", "bytes": 7350820, "crease": 52.1, "faces": 172481, "diag": 20.37}
+{"assetId": "porsche-cayman-pw2-v2", "make": "porsche", "model": "cayman", "bytes": 16530812, "crease": 85.1, "faces": 609239, "diag": 18.04}
+{"assetId": "porsche-911-2013-pw2-v1", "make": "porsche", "model": "911", "bytes": 10133968, "crease": 1.7, "faces": 79739, "diag": 20.24}
+{"assetId": "porsche-911-pw2-v13", "make": "porsche", "model": "911", "bytes": 4929080, "crease": 5.1, "faces": 78990, "diag": 20.01}
+{"assetId": "porsche-911-pw2-v14", "make": "porsche", "model": "911", "bytes": 4914888, "crease": 192.2, "faces": 145069, "diag": 219.46}
+{"assetId": "porsche-911-2019-pw2-v5", "make": "porsche", "model": "911", "bytes": 9952932, "crease": 138.9, "faces": 109406, "diag": 5.19}
+{"assetId": "porsche-911-pw2-v15", "make": "porsche", "model": "911", "bytes": 15339228, "crease": 254.0, "faces": 284231, "diag": 23.09}
+{"assetId": "porsche-993-1995-pw2-v1", "make": "porsche", "model": "993", "bytes": 25920024, "crease": 102.1, "faces": 788973, "diag": 530.65}
+{"assetId": "porsche-918-2015-pw2-v1", "make": "porsche", "model": "918", "bytes": 13840864, "crease": 132.9, "faces": 259671, "diag": 6.32}
+{"assetId": "porsche-carrera-gt-2004-pw2-v1", "make": "porsche", "model": "carrera-gt", "bytes": 19047688, "crease": 241.5, "faces": 225217, "diag": 5.29}
+{"assetId": "porsche-911-2019-pw2-v4", "make": "porsche", "model": "911", "bytes": 29511320, "crease": 103.3, "faces": 321476, "diag": 21.6}
+{"assetId": "porsche-panamera-pw2-v1", "make": "porsche", "model": "panamera", "bytes": 24083800, "crease": 15.7, "faces": 293083, "diag": 163.01}
+{"assetId": "porsche-911-2022-pw2-v2", "make": "porsche", "model": "911", "bytes": 16825780, "crease": 199.7, "faces": 238024, "diag": 5.27}
+{"assetId": "porsche-911-1964-pw2-v1", "make": "porsche", "model": "911", "bytes": 20872480, "crease": 1.2, "faces": 216822, "diag": 4711.12}
+{"assetId": "porsche-911-2017-pw2-v2", "make": "porsche", "model": "911", "bytes": 9543352, "crease": 192.5, "faces": 138141, "diag": 5.24}
+{"assetId": "porsche-718-cayman-2022-pw2-v1", "make": "porsche", "model": "718-cayman", "bytes": 19082036, "crease": 203.8, "faces": 256256, "diag": 5.15}
+{"assetId": "porsche-911-2019-pw2-v6", "make": "porsche", "model": "911", "bytes": 8769812, "crease": 82.2, "faces": 79879, "diag": 515.22}
+{"assetId": "porsche-macan-2022-pw2-v1", "make": "porsche", "model": "macan", "bytes": 13856716, "crease": 179.2, "faces": 460936, "diag": 5.42}
+{"assetId": "porsche-911-2025-pw2-v2", "make": "porsche", "model": "911", "bytes": 14748232, "crease": 265.4, "faces": 291405, "diag": 5.22}
+{"assetId": "porsche-911-2021-pw2-v3", "make": "porsche", "model": "911", "bytes": 15729384, "crease": 275.8, "faces": 449204, "diag": 5.24}
+{"assetId": "porsche-911-2022-pw2-v3", "make": "porsche", "model": "911", "bytes": 16380772, "crease": 214.9, "faces": 235721, "diag": 5.27}
+{"assetId": "porsche-cayenne-2010-pw2-v1", "make": "porsche", "model": "cayenne", "bytes": 38885140, "crease": 194.9, "faces": 1022544, "diag": 561.41}
+{"assetId": "porsche-cayman-2011-pw2-v1", "make": "porsche", "model": "cayman", "bytes": 38625672, "crease": 110.4, "faces": 1171491, "diag": 499.54}
+{"assetId": "porsche-panamera-2010-pw2-v2", "make": "porsche", "model": "panamera", "bytes": 7180268, "crease": 8.9, "faces": 112480, "diag": 24.83}
+{"assetId": "porsche-718-cayman-2017-pw2-v1", "make": "porsche", "model": "718-cayman", "bytes": 5557572, "crease": 35.4, "faces": 72108, "diag": 6.48}
+{"assetId": "porsche-911-2008-pw2-v1", "make": "porsche", "model": "911", "bytes": 11192588, "crease": 117.0, "faces": 157567, "diag": 17.9}
+{"assetId": "porsche-918-2015-pw2-v2", "make": "porsche", "model": "918", "bytes": 10446888, "crease": 213.1, "faces": 168761, "diag": 5.27}
+{"assetId": "porsche-taycan-pw2-v2", "make": "porsche", "model": "taycan", "bytes": 26716572, "crease": 151.1, "faces": 376817, "diag": 21.0}
+{"assetId": "porsche-911-2019-pw2-v7", "make": "porsche", "model": "911", "bytes": 14378440, "crease": 183.6, "faces": 220097, "diag": 5.23}
+{"assetId": "porsche-718-2020-pw2-v2", "make": "porsche", "model": "718", "bytes": 8481452, "crease": 35.3, "faces": 151303, "diag": 19.96}
+{"assetId": "porsche-panamera-pw2-v2", "make": "porsche", "model": "panamera", "bytes": 9022236, "crease": 9.3, "faces": 126050, "diag": 22.01}
+{"assetId": "porsche-macan-pw2-v1", "make": "porsche", "model": "macan", "bytes": 8155572, "crease": 169.5, "faces": 148252, "diag": 5.39}
+{"assetId": "porsche-911-1977-pw2-v1", "make": "porsche", "model": "911", "bytes": 13239532, "crease": 33.6, "faces": 148171, "diag": 20.25}
+{"assetId": "porsche-unknown-pw2-v1", "make": "porsche", "model": "unknown", "bytes": 19270544, "crease": 340.2, "faces": 368800, "diag": 5.99}
+{"assetId": "porsche-718-cayman-2018-pw2-v1", "make": "porsche", "model": "718-cayman", "bytes": 5702060, "crease": 110.7, "faces": 70387, "diag": 5.04}
+{"assetId": "porsche-959-pw2-v2", "make": "porsche", "model": "959", "bytes": 42176544, "crease": 95.0, "faces": 1039070, "diag": 4797.04}
+{"assetId": "porsche-911-pw2-v16", "make": "porsche", "model": "911", "bytes": 4653632, "crease": 84.1, "faces": 73536, "diag": 10.66}
+{"assetId": "porsche-911-2020-pw2-v1", "make": "porsche", "model": "911", "bytes": 11630364, "crease": 58.7, "faces": 323216, "diag": 2.03}
+{"assetId": "porsche-macan-2022-pw2-v2", "make": "porsche", "model": "macan", "bytes": 11861816, "crease": 19.4, "faces": 247049, "diag": 21.23}
+{"assetId": "porsche-panamera-2021-pw2-v1", "make": "porsche", "model": "panamera", "bytes": 15698384, "crease": 249.4, "faces": 241824, "diag": 5.78}
+{"assetId": "porsche-911-2024-pw2-v1", "make": "porsche", "model": "911", "bytes": 13028488, "crease": 245.1, "faces": 257587, "diag": 5.27}
+{"assetId": "porsche-911-2023-pw2-v1", "make": "porsche", "model": "911", "bytes": 20721972, "crease": 215.7, "faces": 253890, "diag": 5.29}
+{"assetId": "porsche-panamera-2017-pw2-v1", "make": "porsche", "model": "panamera", "bytes": 10924680, "crease": 120.6, "faces": 99486, "diag": 5.73}
+{"assetId": "porsche-911-pw2-v18", "make": "porsche", "model": "911", "bytes": 43689232, "crease": 0.0, "faces": 263221, "diag": 5.09}
+{"assetId": "porsche-911-pw2-v17", "make": "porsche", "model": "911", "bytes": 12767460, "crease": 20.8, "faces": 172432, "diag": 8.99}
+{"assetId": "porsche-macan-2022-pw2-v3", "make": "porsche", "model": "macan", "bytes": 21253284, "crease": 309.2, "faces": 373640, "diag": 5.54}
+{"assetId": "lexus-unknown-lxw1-v1", "make": "lexus", "model": "unknown", "bytes": 12535768, "crease": 12.3, "faces": 216474, "diag": 48.29}
+{"assetId": "porsche-911-pw2-v19", "make": "porsche", "model": "911", "bytes": 12225936, "crease": 1.3, "faces": 117144, "diag": 571.91}
+{"assetId": "lexus-es350-f-sport-2021-lxw1-v1", "make": "lexus", "model": "es350-f-sport", "bytes": 25083624, "crease": 0.0, "faces": 490894, "diag": 235.32}
+{"assetId": "lexus-gs-350-2011-lxw1-v1", "make": "lexus", "model": "gs-350", "bytes": 18779720, "crease": 30.5, "faces": 298616, "diag": 8.16}
+{"assetId": "lexus-gx-2024-lxw1-v1", "make": "lexus", "model": "gx", "bytes": 18545968, "crease": 46.4, "faces": 434727, "diag": 20.3}
+{"assetId": "lexus-gs-s130-1997-lxw1-v1", "make": "lexus", "model": "gs-s130", "bytes": 34126320, "crease": 131.4, "faces": 1042562, "diag": 548.7}
+{"assetId": "lexus-is300-200-lxw1-v1", "make": "lexus", "model": "is300-200", "bytes": 5768488, "crease": 80.1, "faces": 94723, "diag": 240.75}
+{"assetId": "lexus-gx-550-h-overtrail-2023-lxw1-v1", "make": "lexus", "model": "gx-550-h-overtrail", "bytes": 22041332, "crease": 187.0, "faces": 517104, "diag": 5.73}
+{"assetId": "lexus-lfa-2010-lxw1-v1", "make": "lexus", "model": "lfa", "bytes": 8922264, "crease": 117.0, "faces": 89006, "diag": 20.15}
+{"assetId": "lexus-lc-2020-lxw1-v1", "make": "lexus", "model": "lc", "bytes": 16840436, "crease": 41.1, "faces": 216874, "diag": 21.03}
+{"assetId": "lexus-lfa-2011-lxw1-v1", "make": "lexus", "model": "lfa", "bytes": 13142076, "crease": 255.6, "faces": 217533, "diag": 5.24}
+{"assetId": "lexus-lc-500-2017-lxw1-v1", "make": "lexus", "model": "lc-500", "bytes": 16518200, "crease": 86.6, "faces": 280971, "diag": 15.89}
+{"assetId": "lexus-ls-mk2-1997-lxw1-v1", "make": "lexus", "model": "ls-mk2", "bytes": 29679856, "crease": 137.6, "faces": 979132, "diag": 555.86}
+{"assetId": "lexus-lx700h-2025-lxw1-v1", "make": "lexus", "model": "lx700h", "bytes": 17514436, "crease": 115.2, "faces": 390945, "diag": 7.73}
+{"assetId": "lexus-lx-j100-2003-lxw1-v1", "make": "lexus", "model": "lx-j100", "bytes": 34776680, "crease": 198.3, "faces": 1155670, "diag": 555.06}
+{"assetId": "lexus-rc-f-usc10-lxw1-v1", "make": "lexus", "model": "rc-f-(usc10)", "bytes": 17535372, "crease": 133.6, "faces": 283045, "diag": 12.0}
+{"assetId": "jaecoo-tiggo-5x-jcw1-v1", "make": "jaecoo", "model": "tiggo-5x", "bytes": 13942484, "crease": 182.7, "faces": 519544, "diag": 5.08}
+{"assetId": "jaecoo-tiggo-8-pro-champion-edition-390t-awd-2023-jcw1-v1", "make": "jaecoo", "model": "tiggo-8-pro-champion-edition-390t-awd", "bytes": 29676836, "crease": 23.1, "faces": 470825, "diag": 52.75}
+{"assetId": "jaecoo-omoda-5-2023-jcw1-v1", "make": "jaecoo", "model": "omoda-5", "bytes": 42105300, "crease": 2.5, "faces": 394841, "diag": 5034.87}
+{"assetId": "jaecoo-tiggo-9-awd-2023-jcw1-v1", "make": "jaecoo", "model": "tiggo-9-awd", "bytes": 17909780, "crease": 168.7, "faces": 388810, "diag": 5.54}
+{"assetId": "jaecoo-tiggo-7-plus-290t-2023-jcw1-v1", "make": "jaecoo", "model": "tiggo-7-plus-290t", "bytes": 22162708, "crease": 174.6, "faces": 375628, "diag": 5.23}
+{"assetId": "jaecoo-jaecoo-j7-2025-jcw1-v1", "make": "jaecoo", "model": "jaecoo-j7", "bytes": 13095768, "crease": 214.6, "faces": 254051, "diag": 5.22}
+{"assetId": "jaecoo-tiggo-8-pro-e-2022-jcw1-v1", "make": "jaecoo", "model": "tiggo-8-pro-e+", "bytes": 17968852, "crease": 141.6, "faces": 251883, "diag": 5.44}
+{"assetId": "jaecoo-tiggo-2-pro-2024-jcw1-v1", "make": "jaecoo", "model": "tiggo-2-pro", "bytes": 19204308, "crease": 415.9, "faces": 241836, "diag": 498.06}
+{"assetId": "porsche-911-2000-pw2-v1", "make": "porsche", "model": "911", "bytes": 6207000, "crease": 69.4, "faces": 84318, "diag": 5.29}
+{"assetId": "jaguar-e-type-1963-jgw1-v1", "make": "jaguar", "model": "E-Type", "bytes": 9408392, "crease": 145.5, "faces": 178333, "diag": 4.93}
+{"assetId": "jaguar-e-type-1971-jgw1-v1", "make": "jaguar", "model": "E-Type", "bytes": 16865708, "crease": 249.1, "faces": 310133, "diag": 5.19}
+{"assetId": "jaguar-f-type-jgw1-v1", "make": "jaguar", "model": "F-Type", "bytes": 43714264, "crease": 0.7, "faces": 877406, "diag": 228.43}
+{"assetId": "jaguar-f-type-jgw1-v2", "make": "jaguar", "model": "F-Type", "bytes": 25061892, "crease": 37.9, "faces": 758016, "diag": 68.49}
+{"assetId": "jaguar-f-type-jgw1-v3", "make": "jaguar", "model": "F-Type", "bytes": 17855240, "crease": 191.8, "faces": 461241, "diag": 7.6}
+{"assetId": "jaguar-f-type-2017-jgw1-v1", "make": "jaguar", "model": "F-Type", "bytes": 5110216, "crease": 115.7, "faces": 68069, "diag": 5.12}
+{"assetId": "jaguar-f-type-2016-jgw1-v1", "make": "jaguar", "model": "F-Type", "bytes": 21551932, "crease": 222.0, "faces": 375670, "diag": 5.24}
+{"assetId": "jaguar-f-type-2018-jgw1-v1", "make": "jaguar", "model": "F-Type", "bytes": 11052256, "crease": 181.1, "faces": 208263, "diag": 5.09}
+{"assetId": "jaguar-f-type-2019-jgw1-v1", "make": "jaguar", "model": "F-Type", "bytes": 6414528, "crease": 63.2, "faces": 96043, "diag": 5.18}
+{"assetId": "jaguar-f-type-2021-jgw1-v1", "make": "jaguar", "model": "F-Type", "bytes": 14383208, "crease": 227.3, "faces": 240738, "diag": 5.19}
+{"assetId": "jaguar-i-pace-jgw1-v1", "make": "jaguar", "model": "I-Pace", "bytes": 9081548, "crease": 154.4, "faces": 274816, "diag": 16.51}
+{"assetId": "jaguar-mk2-1962-jgw1-v1", "make": "jaguar", "model": "MK2", "bytes": 12635236, "crease": 0.7, "faces": 101442, "diag": 5098.99}
+{"assetId": "jaguar-xf-jgw1-v1", "make": "jaguar", "model": "XF", "bytes": 18967440, "crease": 164.9, "faces": 568690, "diag": 5532.85}
+{"assetId": "jaguar-xe-2018-jgw1-v1", "make": "jaguar", "model": "XE", "bytes": 12677840, "crease": 267.6, "faces": 224267, "diag": 5.45}
+{"assetId": "jaguar-xfr-s-jgw1-v1", "make": "jaguar", "model": "XFR-S", "bytes": 19484968, "crease": 10.8, "faces": 579860, "diag": 166.77}
+{"assetId": "jaguar-xj-2015-jgw1-v1", "make": "jaguar", "model": "XJ", "bytes": 32878420, "crease": 89.8, "faces": 1110037, "diag": 584.01}
+{"assetId": "jaguar-xj220-1992-jgw1-v1", "make": "jaguar", "model": "XJ220", "bytes": 20500868, "crease": 266.8, "faces": 362418, "diag": 5.62}
+{"assetId": "jaguar-xkr-2010-jgw1-v1", "make": "jaguar", "model": "XKR", "bytes": 12751552, "crease": 26.8, "faces": 108320, "diag": 21.39}
+{"assetId": "jaguar-xkr-s-2014-jgw1-v1", "make": "jaguar", "model": "XKR-S", "bytes": 12876660, "crease": 26.8, "faces": 108018, "diag": 21.39}
+{"assetId": "jeep-grand-cherokee-jpw1-v1", "make": "jeep", "model": "Grand Cherokee", "bytes": 47934668, "crease": 168.0, "faces": 1174336, "diag": 542.98}
+{"assetId": "jeep-cherokee-2000-jpw1-v1", "make": "jeep", "model": "Cherokee", "bytes": 22767056, "crease": 188.0, "faces": 823241, "diag": 483.61}
+{"assetId": "jeep-grand-cherokee-jpw1-v2", "make": "jeep", "model": "Grand Cherokee", "bytes": 15445208, "crease": 250.3, "faces": 363057, "diag": 17.41}
+{"assetId": "jeep-grand-cherokee-2018-jpw1-v1", "make": "jeep", "model": "Grand Cherokee", "bytes": 13493612, "crease": 245.2, "faces": 227516, "diag": 14.23}
+{"assetId": "jeep-cherokee-2019-jpw1-v1", "make": "jeep", "model": "Cherokee", "bytes": 11026136, "crease": 88.8, "faces": 119151, "diag": 5.38}
+{"assetId": "jeep-wrangler-jpw1-v1", "make": "jeep", "model": "Wrangler", "bytes": 40635712, "crease": 44.7, "faces": 892585, "diag": 43.18}
+{"assetId": "jeep-wrangler-2023-jpw1-v1", "make": "jeep", "model": "Wrangler", "bytes": 24967684, "crease": 375.5, "faces": 368012, "diag": 5.6}
+{"assetId": "jeep-wrangler-jpw1-v2", "make": "jeep", "model": "Wrangler", "bytes": 27937460, "crease": 234.0, "faces": 342331, "diag": 5.73}
+{"assetId": "jeep-wrangler-2007-jpw1-v1", "make": "jeep", "model": "Wrangler", "bytes": 4617728, "crease": 116.5, "faces": 85314, "diag": 5.49}
+{"assetId": "jeep-gladiator-1962-jpw1-v1", "make": "jeep", "model": "Gladiator", "bytes": 26634684, "crease": 163.4, "faces": 890671, "diag": 607.7}
+{"assetId": "jeep-wagoneer-1978-jpw1-v1", "make": "jeep", "model": "Wagoneer", "bytes": 22525464, "crease": 116.7, "faces": 733963, "diag": 515.13}
+{"assetId": "jeep-grand-commander-2021-jpw1-v1", "make": "jeep", "model": "Grand Commander", "bytes": 16532096, "crease": 153.3, "faces": 240389, "diag": 5.62}
+{"assetId": "jeep-gladiator-2020-jpw1-v1", "make": "jeep", "model": "Gladiator", "bytes": 21732040, "crease": 319.2, "faces": 301477, "diag": 6.32}
+{"assetId": "chrysler-pt-cruiser-2005-crw1-v1", "make": "chrysler", "model": "PT Cruiser", "bytes": 20554888, "crease": 0.1, "faces": 191971, "diag": 4.94}
+{"assetId": "chrysler-300c-crw1-v1", "make": "chrysler", "model": "300C", "bytes": 22814404, "crease": 85.4, "faces": 178532, "diag": 5.68}
+{"assetId": "chrysler-pacifica-2008-crw1-v1", "make": "chrysler", "model": "Pacifica", "bytes": 10122616, "crease": 1.2, "faces": 119027, "diag": 26.17}
+{"assetId": "chrysler-pacifica-2021-crw1-v1", "make": "chrysler", "model": "Pacifica", "bytes": 39940300, "crease": 0.0, "faces": 971730, "diag": 737.21}
+{"assetId": "volvo-v60-vow1-v1", "make": "volvo", "model": "V60", "bytes": 15035704, "crease": 152.6, "faces": 261406, "diag": 6.14}
+{"assetId": "volvo-v40-2018-vow1-v1", "make": "volvo", "model": "V40", "bytes": 21881168, "crease": 0.7, "faces": 224507, "diag": 5.03}
+{"assetId": "volvo-c30-vow1-v1", "make": "volvo", "model": "C30", "bytes": 37307992, "crease": 0.0, "faces": 200848, "diag": 4.94}
+{"assetId": "volvo-v50-vow1-v1", "make": "volvo", "model": "V50", "bytes": 9900752, "crease": 65.7, "faces": 132041, "diag": 5.77}
+{"assetId": "volvo-pv4-vow1-v1", "make": "volvo", "model": "PV4", "bytes": 11604396, "crease": 31.5, "faces": 249998, "diag": 283.87}
+{"assetId": "volvo-c70-2000-vow1-v1", "make": "volvo", "model": "C70", "bytes": 14181844, "crease": 0.0, "faces": 237049, "diag": 605.3}
+{"assetId": "volvo-240-vow1-v1", "make": "volvo", "model": "240", "bytes": 6757276, "crease": 116.7, "faces": 139737, "diag": 73.66}
+{"assetId": "volvo-740-vow1-v1", "make": "volvo", "model": "740", "bytes": 17823324, "crease": 9.1, "faces": 242282, "diag": 19.42}
+{"assetId": "mazda-323-mzw1-v1", "make": "mazda", "model": "323", "bytes": 18420776, "crease": 117.2, "faces": 536741, "diag": 513.8}
+{"assetId": "mazda-323-1978-mzw1-v1", "make": "mazda", "model": "323", "bytes": 27367420, "crease": 92.2, "faces": 897728, "diag": 437.07}
+{"assetId": "mazda-626-1997-mzw1-v1", "make": "mazda", "model": "626", "bytes": 22329604, "crease": 93.7, "faces": 717138, "diag": 551.53}
+{"assetId": "mazda-cx-5-2020-mzw1-v1", "make": "mazda", "model": "CX-5", "bytes": 14922332, "crease": 82.9, "faces": 178364, "diag": 5.26}
+{"assetId": "mazda-cx-8-2020-mzw1-v1", "make": "mazda", "model": "CX-8", "bytes": 17787280, "crease": 0.1, "faces": 603805, "diag": 20518.25}
+{"assetId": "mazda-mpv-2002-mzw1-v1", "make": "mazda", "model": "MPV", "bytes": 36062312, "crease": 130.6, "faces": 1159208, "diag": 551.61}
+{"assetId": "mazda-mx-3-mzw1-v1", "make": "mazda", "model": "MX-3", "bytes": 38630948, "crease": 122.2, "faces": 842086, "diag": 457.5}
+{"assetId": "mazda-mx-5-1989-mzw1-v1", "make": "mazda", "model": "MX-5", "bytes": 29673760, "crease": 130.2, "faces": 1145851, "diag": 455.53}
+{"assetId": "mazda-mx-5-1998-mzw1-v1", "make": "mazda", "model": "MX-5", "bytes": 25164796, "crease": 147.9, "faces": 764939, "diag": 452.87}
+{"assetId": "mazda-mx-5-2009-mzw1-v1", "make": "mazda", "model": "MX-5", "bytes": 35981876, "crease": 145.2, "faces": 1089965, "diag": 458.71}
+{"assetId": "mazda-mx-6-1992-mzw1-v1", "make": "mazda", "model": "MX-6", "bytes": 32077296, "crease": 104.4, "faces": 981036, "diag": 512.44}
+{"assetId": "mazda-mazda-2-2011-mzw1-v1", "make": "mazda", "model": "Mazda 2", "bytes": 8210572, "crease": 115.8, "faces": 183661, "diag": 4.89}
+{"assetId": "mazda-mazda-3-mzw1-v1", "make": "mazda", "model": "Mazda 3", "bytes": 28669044, "crease": 31.6, "faces": 276752, "diag": 92.12}
+{"assetId": "mazda-mazda-3-2003-mzw1-v1", "make": "mazda", "model": "Mazda 3", "bytes": 32680916, "crease": 103.0, "faces": 1015459, "diag": 512.78}
+{"assetId": "jaecoo-arrizo-8-290t-2023-jcw1-v1", "make": "jaecoo", "model": "arrizo-8-290t", "bytes": 21242872, "crease": 114.3, "faces": 332306, "diag": 7.44}
+{"assetId": "mazda-mazda-3-2007-mzw1-v1", "make": "mazda", "model": "Mazda 3", "bytes": 10408096, "crease": 124.1, "faces": 181339, "diag": 5.2}
+{"assetId": "mazda-mazda-3-2003-mzw1-v2", "make": "mazda", "model": "Mazda 3", "bytes": 28901668, "crease": 108.9, "faces": 883427, "diag": 501.88}
+{"assetId": "mazda-mazda-3-2005-mzw1-v1", "make": "mazda", "model": "Mazda 3", "bytes": 33978060, "crease": 89.3, "faces": 992607, "diag": 521.22}
+{"assetId": "mazda-mazda-3-2010-mzw1-v1", "make": "mazda", "model": "Mazda 3", "bytes": 11087396, "crease": 112.1, "faces": 187966, "diag": 5.22}
+{"assetId": "mazda-mazda-3-2011-mzw1-v1", "make": "mazda", "model": "Mazda 3", "bytes": 20568784, "crease": 85.4, "faces": 640724, "diag": 524.1}
+{"assetId": "mazda-mazda-3-2020-mzw1-v1", "make": "mazda", "model": "Mazda 3", "bytes": 16126660, "crease": 1.5, "faces": 473260, "diag": 1224052.16}
+{"assetId": "mazda-mazda-3-2020-mzw1-v2", "make": "mazda", "model": "Mazda 3", "bytes": 17126424, "crease": 301.1, "faces": 305008, "diag": 5.24}
+{"assetId": "mazda-mazda-6-mzw1-v1", "make": "mazda", "model": "Mazda 6", "bytes": 28898960, "crease": 24.7, "faces": 364202, "diag": 87.25}
+{"assetId": "mazda-mazda-6-mzw1-v2", "make": "mazda", "model": "Mazda 6", "bytes": 21807572, "crease": 100.3, "faces": 300706, "diag": 25.42}
+{"assetId": "mazda-mazda-6-2002-mzw1-v1", "make": "mazda", "model": "Mazda 6", "bytes": 31552072, "crease": 131.7, "faces": 916518, "diag": 540.78}
+{"assetId": "mazda-rx-7-1985-mzw1-v1", "make": "mazda", "model": "RX-7", "bytes": 25953644, "crease": 206.9, "faces": 785121, "diag": 485.19}
+{"assetId": "mazda-rx-7-1999-mzw1-v1", "make": "mazda", "model": "RX-7", "bytes": 27838104, "crease": 97.9, "faces": 650294, "diag": 483.17}
+{"assetId": "ford-fiesta-st-2019-fo1-v1", "make": "ford", "model": "Fiesta ST", "bytes": 17802792, "crease": 214.0, "faces": 308884, "diag": 6.14}
+{"assetId": "mazda-xedos-6-1992-mzw1-v1", "make": "mazda", "model": "Xedos 6", "bytes": 29590876, "crease": 141.7, "faces": 832445, "diag": 513.41}
+{"assetId": "mazda-rx-8-2011-mzw1-v1", "make": "mazda", "model": "RX-8", "bytes": 27035232, "crease": 92.0, "faces": 668424, "diag": 501.64}
+{"assetId": "nissan-juke-2023-cr1-v1", "make": "nissan", "model": "Juke", "bytes": 47366800, "crease": 74.9, "faces": 1506968, "diag": 4935.82}
+{"assetId": "vauxhall-astra-2022-cr1-v1", "make": "vauxhall", "model": "Astra", "bytes": 47932132, "crease": 120.7, "faces": 727056, "diag": 5414.94}
+{"assetId": "ford-mondeo-2021-cr3-v1", "make": "ford", "model": "Mondeo", "bytes": 39944536, "crease": 0.0, "faces": 396450, "diag": 559.13}
+{"assetId": "toyota-rav4-2021-cr4-v1", "make": "toyota", "model": "RAV4", "bytes": 45753576, "crease": 0.0, "faces": 447371, "diag": 228.23}
+{"assetId": "hyundai-tucson-2022-ht1-v1", "make": "hyundai", "model": "Tucson", "bytes": 32867724, "crease": 77.1, "faces": 495215, "diag": 5440.83}
+{"assetId": "kia-picanto-2024-m1-v1", "make": "kia", "model": "Picanto", "bytes": 45898600, "crease": 227.8, "faces": 457597, "diag": 495.04}
+{"assetId": "kia-sportage-2023-m1-v1", "make": "kia", "model": "Sportage", "bytes": 25983152, "crease": 270.7, "faces": 584865, "diag": 761.14}
+{"assetId": "skoda-octavia-2025-m1-v1", "make": "skoda", "model": "Octavia", "bytes": 19555912, "crease": 162.1, "faces": 673636, "diag": 5322.31}
+{"assetId": "mg-mg3-2025-m1-v1", "make": "mg", "model": "MG3", "bytes": 37928960, "error": "ValueError: chunk was not expected length!"}
+{"assetId": "mg-mg4-2025-m1-v1", "make": "mg", "model": "MG4", "bytes": 36103444, "crease": 30.9, "faces": 1052140, "diag": 444.33}
+{"assetId": "mg-zs-2025-m1-v1", "make": "mg", "model": "ZS", "bytes": 42676928, "crease": 47.9, "faces": 1133062, "diag": 511.29}

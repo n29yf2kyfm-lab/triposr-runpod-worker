@@ -156,9 +156,22 @@ the spread is real geometric variation between cars.
    train only on that. Cheap: the scorer is local and free.
 2. **The headroom is real but narrower than assumed** — our best cars are ~4x the
    generated Golf, not "the whole catalogue is better".
-3. If the curated set turns out to be small (say <150 cars), that is itself a
-   finding, and it should be reported before the pilot spend rather than trained
-   through.
+3. ~~If the curated set turns out to be small~~ **RESOLVED — full sweep run
+   2026-08-14, 1,019 of 1,026 scored (7 read errors):**
+
+   | threshold | cars |
+   |---|---|
+   | crease ≥ 200 (3x the generated car) | **225** |
+   | crease ≥ 150 | **365** |
+   | crease ≥ 100 | 567 |
+   | ≥ 63.3 (what Hunyuan-2.1 already generates) | 693 |
+
+   The curated set is NOT small: the pilot's 200 best cars all sit at roughly
+   ≥170, ~3x the base model's output. One in three catalogue cars would TEACH
+   SOFTNESS if included — the curation step is confirmed necessary, and the
+   training pool is confirmed sufficient. Full scores:
+   `pipeline/trellis/TRAINSET_SCORES.jsonl`. Top scorers still need the EYE
+   before training (the metric counts sharp, not good).
 
 **Limit of the metric, stated so it is not over-read:** it counts sharp geometry,
 not GOOD geometry. Hi3DGen scores 92.4 largely because it is NOISY (ragged window
